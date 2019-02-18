@@ -1,0 +1,65 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0e347895644c2418802cf655ca9c98, type: 3}
+  m_Name: Sample Mockup
+  m_EditorClassIdentifier: 
+  _nodes:
+    _items:
+    - {fileID: 114446285143757668}
+    - {fileID: 114390569148400404}
+  StartPosition: {x: 0, y: 0}
+  EntryPoints:
+    _items: []
+--- !u!114 &114390569148400404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4238dfdb59c60404a84af819381016ca, type: 3}
+  m_Name: Mockup
+  m_EditorClassIdentifier: 
+  Name: Mockup
+  Variables:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 345.6, y: 64}
+  _executionMode: 0
+  Connections:
+    _items: []
+--- !u!114 &114446285143757668
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4238dfdb59c60404a84af819381016ca, type: 3}
+  m_Name: Mockup
+  m_EditorClassIdentifier: 
+  Name: Mockup
+  Variables:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 345.6, y: -89.6}
+  _executionMode: 0
+  Connections:
+    _items: []
