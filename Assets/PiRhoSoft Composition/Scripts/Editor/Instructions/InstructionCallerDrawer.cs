@@ -17,12 +17,10 @@ namespace PiRhoSoft.CompositionEditor
 		private InstructionCaller _caller;
 		private ObjectListControl _inputs = new ObjectListControl();
 		private ObjectListControl _outputs = new ObjectListControl();
-		private Type _instructionType;
 
 		public override void Setup(InstructionCaller target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			_caller = target;
-			_instructionType = fieldInfo != null ? TypeHelper.GetAttribute<InstructionTypeAttribute>(fieldInfo)?.Type : null;
 
 			Refresh();
 
@@ -39,7 +37,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void DrawInstruction(Rect rect, GUIContent label)
 		{
-			var instruction = InstructionDrawer.Draw(rect, label, _caller.Instruction, _instructionType);
+			var instruction = InstructionDrawer.Draw(rect, label, _caller.Instruction);
 			if (_caller.Instruction != instruction)
 			{
 				_caller.Instruction = instruction;

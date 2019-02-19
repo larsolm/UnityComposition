@@ -16,9 +16,9 @@ namespace PiRhoSoft.CompositionEditor
 			return EditorGUIUtility.singleLineHeight;
 		}
 
-		public static Instruction Draw(Rect position, GUIContent label, Instruction instruction, Type instructionType)
+		public static Instruction Draw(Rect position, GUIContent label, Instruction instruction)
 		{
-			var popup = AssetHelper.GetAssetList(instructionType ?? typeof(Instruction), true, true);
+			var popup = AssetHelper.GetAssetList(typeof(Instruction), true, true);
 			var index = popup.GetIndex(instruction);
 
 			var buttonRect = instruction == null ? position : RectHelper.TakeTrailingIcon(ref position);
@@ -46,11 +46,11 @@ namespace PiRhoSoft.CompositionEditor
 			return instruction;
 		}
 
-		public static Instruction Draw(GUIContent label, Instruction instruction, Type instructionType)
+		public static Instruction Draw(GUIContent label, Instruction instruction)
 		{
 			var height = GetHeight();
 			var rect = GUILayoutUtility.GetRect(0.0f, height, GUILayout.ExpandWidth(true));
-			return Draw(rect, label, instruction, instructionType);
+			return Draw(rect, label, instruction);
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
@@ -61,9 +61,8 @@ namespace PiRhoSoft.CompositionEditor
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			var instruction = property.objectReferenceValue as Instruction;
-			var type = TypeHelper.GetAttribute<InstructionTypeAttribute>(fieldInfo)?.Type;
 
-			property.objectReferenceValue = Draw(position, label, instruction, type);
+			property.objectReferenceValue = Draw(position, label, instruction);
 		}
 	}
 }
