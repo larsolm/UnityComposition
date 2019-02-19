@@ -19,7 +19,7 @@ namespace PiRhoSoft.CompositionEditor
 		private ObjectListControl _outputs = new ObjectListControl();
 		private Type _instructionType;
 
-		public override void Setup(InstructionCaller target, SerializedProperty property, FieldInfo fieldInfo)
+		public override void Setup(InstructionCaller target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			_caller = target;
 			_instructionType = fieldInfo != null ? TypeHelper.GetAttribute<InstructionTypeAttribute>(fieldInfo)?.Type : null;

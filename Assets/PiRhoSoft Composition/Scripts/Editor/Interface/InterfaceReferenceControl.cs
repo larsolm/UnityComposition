@@ -39,7 +39,7 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		public override void Setup(InterfaceReference target, SerializedProperty property, FieldInfo fieldInfo)
+		public override void Setup(InterfaceReference target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			_lookup = target;
 		}

@@ -21,7 +21,7 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		public override void Setup(VariableReference target, SerializedProperty property, FieldInfo fieldInfo)
+		public override void Setup(VariableReference target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			_variableReference = target;
 		}

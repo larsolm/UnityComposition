@@ -61,7 +61,7 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		public override void Setup(Expression target, SerializedProperty property, FieldInfo fieldInfo)
+		public override void Setup(Expression target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			_expression = target;
 		}

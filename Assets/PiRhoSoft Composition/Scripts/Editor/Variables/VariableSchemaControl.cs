@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEditor
 		private VariableInitializerType _type;
 		private string[] _availabilities;
 
-		public override void Setup(VariableSchema target, SerializedProperty property, FieldInfo fieldInfo)
+		public override void Setup(VariableSchema target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			_owner = property.serializedObject.targetObject;
 			_schema = target;

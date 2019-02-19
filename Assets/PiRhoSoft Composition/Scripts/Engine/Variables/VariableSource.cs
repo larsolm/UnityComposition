@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -16,8 +17,16 @@ namespace PiRhoSoft.CompositionEngine
 		protected const string _referenceMissingError = "(CVSRM) failed to get value from source: the variable '{0}' could not be found";
 		protected const string _referenceInvalidError = "(CVSRI) failed to get value from source: the variable '{0}' is of type {1} and should be of type {2}";
 
+		[Tooltip("Whether the source points to a variable reference or an actual value")]
+		[EnumButtons]
 		public VariableSourceType Type = VariableSourceType.Value;
+
+		[Tooltip("The variable reference to lookup the value from")]
+		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Reference)]
 		public VariableReference Reference = new VariableReference();
+
+		[Tooltip("The specific value of the source")]
+		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Value)]
 		public T Value;
 
 		protected abstract bool TryGetValue(VariableValue variable, out T Value);

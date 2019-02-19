@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (source == null)
 			{
-				if (Reference.IsAssigned && Reference.StoreName == null)
+				if (Reference.IsAssigned && string.IsNullOrEmpty(Reference.StoreName))
 					inputs.Add(VariableDefinition.Create(Reference.RootName, VariableType.Empty));
 			}
 			else if (Reference.IsAssigned && Reference.StoreName.ToLowerInvariant() == source.ToLowerInvariant())

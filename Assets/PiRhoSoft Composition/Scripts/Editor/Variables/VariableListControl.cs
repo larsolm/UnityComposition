@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEditor
 		private VariableList _variables;
 		private VariablesProxy _proxy;
 
-		public override void Setup(VariableList target, SerializedProperty property, FieldInfo fieldInfo)
+		public override void Setup(VariableList target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			_variables = target;
 			_proxy = new VariablesProxy { List = target };
