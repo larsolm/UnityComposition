@@ -41,7 +41,7 @@ namespace PiRhoSoft.CompositionEngine
 		public string Name;
 
 		[Tooltip("The variable to use as input for operations on this node")]
-		public VariableReference Variables = new VariableReference("this");
+		public VariableReference This = new VariableReference("this");
 
 		public abstract bool IsExecutionImmediate { get; }
 		public abstract InstructionGraphExecutionMode ExecutionMode { get; }
@@ -51,12 +51,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public IEnumerator Run(InstructionGraph graph, InstructionStore variables, int executionIndex)
 		{
-			if (Variables.IsAssigned)
+			if (This.IsAssigned)
 			{
-				if (Variables.GetValue(variables).TryGetStore(out var store))
+				if (This.GetValue(variables).TryGetStore(out var store))
 					variables.ChangeThis(store);
 				else
-					Debug.LogWarningFormat(_missingVariableWarning, Variables);
+					Debug.LogWarningFormat(_missingVariableWarning, This);
 			}
 
 			yield return Run_(graph, variables, executionIndex);

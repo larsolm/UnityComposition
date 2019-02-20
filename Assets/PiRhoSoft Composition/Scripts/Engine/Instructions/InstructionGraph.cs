@@ -38,8 +38,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			foreach (var node in Nodes)
 			{
-				if (InstructionStore.IsInput(node.Variables))
-					inputs.Add(VariableDefinition.Create(node.Variables.RootName, VariableType.Store));
+				if (InstructionStore.IsInput(node.This))
+					inputs.Add(VariableDefinition.Create(node.This.RootName, VariableType.Store));
 
 				node.GetInputs(inputs);
 			}
