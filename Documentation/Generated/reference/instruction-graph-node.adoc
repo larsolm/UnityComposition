@@ -1,0 +1,43 @@
+[#reference/instruction-graph-node]
+
+## InstructionGraphNode
+
+PiRhoSoft.CompositionEngine.InstructionGraphNode : https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^]
+
+### Description
+
+### Public Fields
+
+string _Name_::
+
+<<manual/variable-reference,Variable Reference>> _This_::
+
+https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _GraphPosition_::
+
+### Public Properties
+
+bool _IsExecutionImmediate_ _(read only)_ _(abstract)_::
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> outputs) _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int executionIndex)::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] GetNodeColor() _(virtual)_::
+
+void GetConnections(<<manual/instruction-graph-node-node-data,Node Data>> data) _(virtual)_::
+
+void SetConnection(<<manual/instruction-graph-node-connection-data,Connection Data>> connection, <<manual/instruction-graph-node,Instruction Graph Node>> target) _(virtual)_::
+
+### Protected Constructors
+
+InstructionGraphNode()::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(abstract)_::

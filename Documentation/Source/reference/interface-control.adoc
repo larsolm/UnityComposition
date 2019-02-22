@@ -1,0 +1,35 @@
+[#reference/interface-control]
+
+## InterfaceControl
+
+PiRhoSoft.CompositionEngine.InterfaceControl : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+InterfaceControl()::
+
+### Public Fields
+
+<<manual/dependent-object-list,Dependent Object List>> _DependentObjects_::
+
+### Public Properties
+
+<<manual/i-variable-store,I Variable Store>> _Variables_ _(read only)_::
+
+bool _IsActive_ _(read only)_::
+
+### Public Methods
+
+void Activate()::
+
+void Deactivate()::
+
+void UpdateBindings(<<manual/i-variable-store,I Variable Store>> variables, string group) _(virtual)_::
+
+### Protected Methods
+
+void Setup() _(virtual)_::
+
+void Teardown() _(virtual)_::

@@ -1,0 +1,15 @@
+[#manual/instruction-graph-node]
+
+## Instruction Graph Node
+
+### Fields
+
+string _Name_::
+
+<<manual/variable-reference,Variable Reference>> _This_::
+
+https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Graph Position_::
+
+ifdef::backend-multipage_html5[]
+link:reference/instruction-graph-node.html[Reference]
+endif::[]

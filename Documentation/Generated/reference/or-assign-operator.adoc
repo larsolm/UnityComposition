@@ -1,0 +1,15 @@
+[#reference/or-assign-operator]
+
+## OrAssignOperator
+
+PiRhoSoft.CompositionEngine.OrAssignOperator : <<manual/assign-operator,Assign Operator>>
+
+### Description
+
+### Constructors
+
+OrAssignOperator()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

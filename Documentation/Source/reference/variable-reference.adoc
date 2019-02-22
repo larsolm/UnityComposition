@@ -1,0 +1,31 @@
+[#reference/variable-reference]
+
+## VariableReference
+
+PiRhoSoft.CompositionEngine.VariableReference
+
+### Description
+
+### Constructors
+
+VariableReference()::
+
+VariableReference(string variable)::
+
+### Public Properties
+
+bool _IsAssigned_ _(read only)_::
+
+string _StoreName_ _(read only)_::
+
+string _RootName_ _(read only)_::
+
+### Public Methods
+
+void Update(string variable)::
+
+<<manual/variable-value,Variable Value>> GetValue(<<manual/i-variable-store,I Variable Store>> variables)::
+
+<<manual/set-variable-result,Set Variable Result>> SetValue(<<manual/i-variable-store,I Variable Store>> variables, <<manual/variable-value,Variable Value>> value)::
+
+string ToString() _(virtual)_::

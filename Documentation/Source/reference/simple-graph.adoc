@@ -1,0 +1,19 @@
+[#reference/simple-graph]
+
+## SimpleGraph
+
+PiRhoSoft.CompositionEngine.SimpleGraph : <<manual/instruction-graph,Instruction Graph>>
+
+### Description
+
+### Constructors
+
+SimpleGraph()::
+
+### Public Fields
+
+<<manual/instruction-graph-node,Instruction Graph Node>> _Process_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables) _(virtual)_::

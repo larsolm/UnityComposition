@@ -1,0 +1,17 @@
+[#reference/string-variable-source]
+
+## StringVariableSource
+
+PiRhoSoft.CompositionEngine.StringVariableSource : <<manual/variable-source-1,Variable Source>><string>
+
+### Description
+
+### Constructors
+
+StringVariableSource()::
+
+StringVariableSource(string defaultValue)::
+
+### Protected Methods
+
+bool TryGetValue(<<manual/variable-value,Variable Value>> variable, string value _(out)_) _(virtual)_::

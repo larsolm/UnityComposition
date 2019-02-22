@@ -1,0 +1,15 @@
+[#manual/bar-binding]
+
+## Bar Binding
+
+### Fields
+
+<<manual/variable-reference,Variable Reference>> _Amount Variable_::
+
+<<manual/variable-reference,Variable Reference>> _Total Variable_::
+
+https://docs.unity3d.com/ScriptReference/Gradient.html[Gradient^] _Fill Colors_::
+
+ifdef::backend-multipage_html5[]
+link:reference/bar-binding.html[Reference]
+endif::[]

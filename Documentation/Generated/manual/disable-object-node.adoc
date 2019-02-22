@@ -1,0 +1,11 @@
+[#manual/disable-object-node]
+
+## Disable Object Node
+
+### Fields
+
+<<manual/variable-reference,Variable Reference>> _Target_::
+
+ifdef::backend-multipage_html5[]
+link:reference/disable-object-node.html[Reference]
+endif::[]

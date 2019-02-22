@@ -1,0 +1,11 @@
+[#manual/binding-updater]
+
+## Binding Updater
+
+### Fields
+
+string _Group_::
+
+ifdef::backend-multipage_html5[]
+link:reference/binding-updater.html[Reference]
+endif::[]

@@ -1,0 +1,29 @@
+[#reference/selection-item]
+
+## SelectionItem
+
+PiRhoSoft.CompositionEngine.SelectionItem : <<manual/i-variable-store,I Variable Store>>
+
+### Description
+
+### Constructors
+
+SelectionItem()::
+
+### Public Fields
+
+string _Label_::
+
+<<manual/variable-reference,Variable Reference>> _Item_::
+
+<<manual/selection-item-object-source,Object Source>> _Source_::
+
+https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _Template_::
+
+bool _Expand_::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
+
+<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::

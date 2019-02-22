@@ -1,0 +1,11 @@
+[#manual/wait-node]
+
+## Wait Node
+
+### Fields
+
+float _Time_::
+
+ifdef::backend-multipage_html5[]
+link:reference/wait-node.html[Reference]
+endif::[]

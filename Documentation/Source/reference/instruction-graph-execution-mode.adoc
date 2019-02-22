@@ -1,0 +1,15 @@
+[#reference/instruction-graph-execution-mode]
+
+## InstructionGraphExecutionMode
+
+PiRhoSoft.CompositionEngine.InstructionGraphExecutionMode
+
+### Description
+
+### Values
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _Normal_::
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _Sequence_::
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _Loop_::

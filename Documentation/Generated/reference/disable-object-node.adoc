@@ -1,0 +1,31 @@
+[#reference/disable-object-node]
+
+## DisableObjectNode
+
+PiRhoSoft.CompositionEngine.DisableObjectNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+
+### Description
+
+### Constructors
+
+DisableObjectNode()::
+
+### Public Fields
+
+<<manual/instruction-graph-node,Instruction Graph Node>> _Next_::
+
+<<manual/variable-reference,Variable Reference>> _Target_::
+
+### Public Properties
+
+bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::

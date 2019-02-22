@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 		Value,
 		Reference
 	}
-	
+
 	public abstract class VariableSource<T>
 	{
 		protected const string _referenceMissingError = "(CVSRM) failed to get value from source: the variable '{0}' could not be found";

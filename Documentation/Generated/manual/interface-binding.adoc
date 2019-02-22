@@ -1,0 +1,11 @@
+[#manual/interface-binding]
+
+## Interface Binding
+
+### Fields
+
+string _Binding Group_::
+
+ifdef::backend-multipage_html5[]
+link:reference/interface-binding.html[Reference]
+endif::[]

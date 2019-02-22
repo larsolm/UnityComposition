@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -6,10 +7,28 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class SelectionItem : IVariableStore
 	{
-		[Tooltip("The label used to identify the item")] public string Label;
-		[Tooltip("The variable representing the item to use for bindings")] public VariableReference Item = new VariableReference();
-		[Tooltip("If Item has children and this is set, this selection will be duplicated for each of the children")] public bool Expand = false;
-		[Tooltip("The prefab to instantiate when showing this item on a SelectionControl")] public GameObject Template;
+		public enum ObjectSource
+		{
+			Scene,
+			Asset
+		}
+
+		[Tooltip("The label used to identify the item")]
+		public string Label;
+
+		[Tooltip("The variable representing the store to use for bindings")]
+		public VariableReference Item = new VariableReference();
+
+		[Tooltip("The location to retrieve the object from")]
+		public ObjectSource Source;
+
+		[Tooltip("The prefab to instantiate when showing this item on a SelectionControl")]
+		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		public GameObject Template;
+
+		[Tooltip("If Item is an IIndexedVariableStore and this is set, this selection will be duplicated for each of the children")]
+		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		public bool Expand = false;
 
 		internal IVariableStore Variables { get; set; }
 

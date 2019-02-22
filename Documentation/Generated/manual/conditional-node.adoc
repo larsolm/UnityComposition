@@ -1,0 +1,11 @@
+[#manual/conditional-node]
+
+## Conditional Node
+
+### Fields
+
+<<manual/expression,Expression>> _Condition_::
+
+ifdef::backend-multipage_html5[]
+link:reference/conditional-node.html[Reference]
+endif::[]

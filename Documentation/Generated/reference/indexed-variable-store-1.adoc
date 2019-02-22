@@ -1,0 +1,19 @@
+[#reference/indexed-variable-store-1]
+
+## IndexedVariableStore
+
+PiRhoSoft.CompositionEngine.IndexedVariableStore<_ItemType_> : SerializedList<ItemType>, <<manual/i-variable-store,I Variable Store>>, <<manual/i-indexed-variable-store,I Indexed Variable Store>>
+
+### Description
+
+### Constructors
+
+IndexedVariableStore()::
+
+### Public Methods
+
+<<manual/i-variable-store,I Variable Store>> GetItem(int index) _(virtual)_::
+
+<<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
+
+<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::

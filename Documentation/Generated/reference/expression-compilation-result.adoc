@@ -1,0 +1,13 @@
+[#reference/expression-compilation-result]
+
+## ExpressionCompilationResult
+
+PiRhoSoft.CompositionEngine.ExpressionCompilationResult : ValueType
+
+### Description
+
+### Public Fields
+
+bool _Success_::
+
+string _Message_::

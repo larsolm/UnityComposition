@@ -1,0 +1,29 @@
+[#reference/variable-map]
+
+## VariableMap
+
+PiRhoSoft.CompositionEngine.VariableMap
+
+### Description
+
+### Constructors
+
+VariableMap(int version)::
+
+### Public Properties
+
+int _Version_ _(read only)_::
+
+int _Count_ _(read only)_::
+
+### Public Methods
+
+bool Contains(string name)::
+
+int GetIndex(string name)::
+
+bool TryGetIndex(string name, int index _(out)_)::
+
+<<manual/variable-map,Variable Map>> Add(<<manual/variable-schema,Variable Schema>> schema)::
+
+<<manual/variable-map,Variable Map>> Add(<<manual/property-map,Property Map>> map)::

@@ -1,0 +1,21 @@
+[#reference/property-map]
+
+## PropertyMap
+
+PiRhoSoft.CompositionEngine.PropertyMap
+
+### Description
+
+### Public Properties
+
+int _PropertyCount_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+string GetPropertyName(int index) _(abstract)_::
+
+<<manual/i-variable-list,I Variable List>> CreateList(Object owner) _(abstract)_::
+
+### Protected Constructors
+
+PropertyMap()::

@@ -1,0 +1,222 @@
+[#manual/log-descriptions]
+## Log Descriptions
+
+### Warnings
+
+CAPAAN:: Unable to play animation on {0}: animation must not be null
+--
+--
+
+CAPANA:: Unable to find animator {0}: the animator could not be found
+--
+--
+
+CAPANF:: Unable to play animation on {0}: animation could not be found
+--
+--
+
+CAPASANF:: Unable to find animator {0}: the animator could not be found
+--
+--
+
+CAPASSNF:: Unable to play animation state {0}: the state could not be found
+--
+--
+
+CCFINIS:: Unable to iterate objects for {0}: the given variables must be an IIndexedVariableStore
+--
+--
+
+CCIE:: The Command '{0}' could not be added because the Expression '{1}' failed to compile
+--
+--
+
+CCME:: The Command '{0}' could not be registered because the Expression has not been set
+--
+--
+
+CCNMV:: unable to find variable {0} for instruction graph node
+--
+--
+
+CEIR:: The Expression '{0}' was expected to return type {1} but instead returned type {2}
+--
+--
+
+COMCOONF:: Unable to create object {0}: the object could not be found
+--
+--
+
+COMDONF:: Unable to disable object {0}: the object could not be found
+--
+--
+
+COMDOONF:: Unable to destroy object {0}: the object could not be found
+--
+--
+
+COMEONF:: Unable to enable object {0}: the object could not be found
+--
+--
+
+IIRMCN:: Unable to find interface control: the interface {0} does not have a control named {1}
+--
+--
+
+IIRMICT:: Unable to find interface control {0}: the interface control is not a {1}
+--
+--
+
+IIRMIIT:: Unable to find interface {0}: the interface is not a {1}
+--
+--
+
+IIRMIN:: Unable to find interface {0}: the interface could not be found
+--
+--
+
+ISCIE:: Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore
+--
+--
+
+WASAPANF:: Unable to find animator {0}: the animator could not be found
+--
+--
+
+### Errors
+
+CCEE:: Failed to execute Command '{0}': {1}
+--
+--
+
+CCIGPF:: Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator
+--
+--
+
+CCMPF:: Failed to process Instruction '{0}': the Instruction yielded a value other than null or IEnumerator
+--
+--
+
+CCNMF:: failed to set target: unable to find field {0}
+--
+--
+
+CCNMI:: failed to set target: index {0} is out of range
+--
+--
+
+CCNMK:: failed to set target: unable to find key {0}
+--
+--
+
+CEEE:: Failed to execute Expression '{0}': {1}
+--
+--
+
+CEPDC:: Failed to add Command '{0}': a Command with that name has already been added
+--
+--
+
+CEPDIO:: Failed to add infix operator '{0}': an infix operator with that symbol has already been added
+--
+--
+
+CEPDPO:: Failed to add prefix operator '{0}': a prefix operator with that symbol has already been added
+--
+--
+
+CEPE:: Failed to parse Expression '{0}' at location {1}: {2}
+--
+--
+
+CEPMC:: Failed to remove Command '{0}': a Command with that name has not been added
+--
+--
+
+CETE:: Failed to parse Expression '{0} at location {1}': {2}
+--
+--
+
+CIAR:: Failed to run Instruction '{0}': the Instruction is already running
+--
+--
+
+CISIOT:: failed to store output {0}: the variable '{1}' has an incompatible type
+--
+--
+
+CISMI:: failed to read input {0}: the variable '{1}' could not be found
+--
+--
+
+CISMO:: failed to store output {0}: the variable '{1}' could not be found
+--
+--
+
+CISROO:: failed to store output {0}: the variable '{1}' is read only
+--
+--
+
+CSQIS:: failed to run sequence: node {0} has not been connected
+--
+--
+
+CVDII:: Failed to initialize variable '{0}': the definition specifies type {1} but the initializer returned type {2}
+--
+--
+
+CVMDV:: Failed to map variable '{0}': a variable with that name already exists in the map
+--
+--
+
+CVSRI:: failed to get value from source: the variable '{0}' is of type {1} and should be of type {2}
+--
+--
+
+CVSRM:: failed to get value from source: the variable '{0}' could not be found
+--
+--
+
+IBBIA:: Failed to update bar binding: the amount variable '{0}' is not an Integer or Number
+--
+--
+
+IBBIT:: Failed to update bar binding: the total variable '{0}' is not an Integer or Number
+--
+--
+
+IBBMA:: Failed to update bar binding: the amount variable '{0}' could not be found
+--
+--
+
+IBBMT:: Failed to update bar binding: the total variable '{0}' could not be found
+--
+--
+
+IBCMB:: Failed to update binding: the variable '{0}' could not be found
+--
+--
+
+IBMIB:: Failed to update binding: the variable '{0}' is not an IVariableStore
+--
+--
+
+IIBIV:: Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite
+--
+--
+
+IIBMV:: Failed to update image binding: the variable '{0}' could not be found
+--
+--
+
+IIMIA:: Failed to add Interface: an Interface named {0} has already been added
+--
+--
+
+IIMIR:: Failed to remove Interface: an Interface named {0} has not been added
+--
+--
+
+ISCMI:: Failed to create item {0}: the variable '{1}' could not be found
+--
+--

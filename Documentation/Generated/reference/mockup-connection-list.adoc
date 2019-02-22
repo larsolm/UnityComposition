@@ -1,0 +1,11 @@
+[#reference/mockup-connection-list]
+
+## MockupConnectionList
+
+PiRhoSoft.CompositionEngine.MockupConnectionList : SerializedList<<<manual/mockup-connection,Mockup Connection>>>
+
+### Description
+
+### Constructors
+
+MockupConnectionList()::

@@ -1,0 +1,13 @@
+[#manual/selection-binding]
+
+## Selection Binding
+
+### Fields
+
+<<manual/selection-control,Selection Control>> _Selection Control_::
+
+string _Binding Group_::
+
+ifdef::backend-multipage_html5[]
+link:reference/selection-binding.html[Reference]
+endif::[]

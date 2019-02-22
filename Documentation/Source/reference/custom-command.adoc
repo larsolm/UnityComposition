@@ -1,0 +1,17 @@
+[#reference/custom-command]
+
+## CustomCommand
+
+PiRhoSoft.CompositionEngine.CustomCommand
+
+### Description
+
+### Constructors
+
+CustomCommand()::
+
+### Public Fields
+
+string _Name_::
+
+<<manual/expression,Expression>> _Expression_::

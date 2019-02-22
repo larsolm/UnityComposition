@@ -1,0 +1,11 @@
+[#reference/interface-control-dictionary]
+
+## InterfaceControlDictionary
+
+PiRhoSoft.CompositionEngine.InterfaceControlDictionary : SerializedDictionary<string, string>
+
+### Description
+
+### Constructors
+
+InterfaceControlDictionary()::

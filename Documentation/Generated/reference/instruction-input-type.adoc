@@ -1,0 +1,13 @@
+[#reference/instruction-input-type]
+
+## InstructionInputType
+
+PiRhoSoft.CompositionEngine.InstructionInputType
+
+### Description
+
+### Values
+
+<<manual/instruction-input-type,Instruction Input Type>> _Reference_::
+
+<<manual/instruction-input-type,Instruction Input Type>> _Value_::

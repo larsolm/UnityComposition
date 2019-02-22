@@ -1,0 +1,15 @@
+[#reference/cos-command]
+
+## CosCommand
+
+PiRhoSoft.CompositionEngine.CosCommand : <<manual/command,Command>>
+
+### Description
+
+### Constructors
+
+CosCommand()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables, string name, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/operation,Operation>>> parameters) _(virtual)_::

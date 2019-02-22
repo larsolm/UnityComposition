@@ -1,0 +1,25 @@
+[#reference/image-binding]
+
+## ImageBinding
+
+PiRhoSoft.CompositionEngine.ImageBinding : <<manual/interface-binding,Interface Binding>>
+
+### Description
+
+### Static Fields
+
+string __invalidVariableError_::
+
+string __missingVariableError_::
+
+### Constructors
+
+ImageBinding()::
+
+### Public Fields
+
+<<manual/variable-reference,Variable Reference>> _Variable_::
+
+### Public Methods
+
+void UpdateBinding(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

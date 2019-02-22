@@ -1,0 +1,11 @@
+[#manual/binding-control]
+
+## Binding Control
+
+### Fields
+
+<<manual/variable-reference,Variable Reference>> _Binding_::
+
+ifdef::backend-multipage_html5[]
+link:reference/binding-control.html[Reference]
+endif::[]

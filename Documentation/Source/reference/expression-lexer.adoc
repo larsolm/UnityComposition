@@ -1,0 +1,11 @@
+[#reference/expression-lexer]
+
+## ExpressionLexer
+
+PiRhoSoft.CompositionEngine.ExpressionLexer
+
+### Description
+
+### Static Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/expression-token,Expression Token>>> Tokenize(string input)::

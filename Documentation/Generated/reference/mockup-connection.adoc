@@ -1,0 +1,17 @@
+[#reference/mockup-connection]
+
+## MockupConnection
+
+PiRhoSoft.CompositionEngine.MockupConnection
+
+### Description
+
+### Constructors
+
+MockupConnection()::
+
+### Public Fields
+
+string _Name_::
+
+<<manual/instruction-graph-node,Instruction Graph Node>> _Node_::

@@ -12,12 +12,12 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The expression to evaluate to determine which node to follow")]
 		public Expression Switch = new Expression();
 
-		[Tooltip("The node to follow if the result of Switch is not in Outputs")]
-		public InstructionGraphNode Default;
-
 		[Tooltip("The node to follow depending on the result of Switch")]
 		[DictionaryDisplay(EmptyText = "No outputs", ShowEditButton = true)]
 		public InstructionGraphNodeDictionary Outputs = new InstructionGraphNodeDictionary();
+
+		[Tooltip("The node to follow if the result of Switch is not in Outputs")]
+		public InstructionGraphNode Default;
 
 		public override bool IsExecutionImmediate => true;
 		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;

@@ -1,0 +1,37 @@
+[#reference/create-object-node]
+
+## CreateObjectNode
+
+PiRhoSoft.CompositionEngine.CreateObjectNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+
+### Description
+
+### Constructors
+
+CreateObjectNode()::
+
+### Public Fields
+
+<<manual/instruction-graph-node,Instruction Graph Node>> _Next_::
+
+https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _Prefab_::
+
+string _ObjectName_::
+
+https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Position_::
+
+<<manual/variable-reference,Variable Reference>> _Parent_::
+
+### Public Properties
+
+bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::

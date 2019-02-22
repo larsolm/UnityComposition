@@ -1,0 +1,15 @@
+[#reference/less-operator]
+
+## LessOperator
+
+PiRhoSoft.CompositionEngine.LessOperator : <<manual/infix-operation,Infix Operation>>
+
+### Description
+
+### Constructors
+
+LessOperator()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

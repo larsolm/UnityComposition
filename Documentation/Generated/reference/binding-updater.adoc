@@ -1,0 +1,15 @@
+[#reference/binding-updater]
+
+## BindingUpdater
+
+PiRhoSoft.CompositionEngine.BindingUpdater : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+BindingUpdater()::
+
+### Public Fields
+
+string _Group_::

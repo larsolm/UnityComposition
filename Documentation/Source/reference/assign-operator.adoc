@@ -1,0 +1,23 @@
+[#reference/assign-operator]
+
+## AssignOperator
+
+PiRhoSoft.CompositionEngine.AssignOperator : <<manual/infix-operation,Infix Operation>>
+
+### Description
+
+### Constructors
+
+AssignOperator()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs, string source) _(virtual)_::
+
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> outputs, string source) _(virtual)_::
+
+### Protected Methods
+
+<<manual/variable-value,Variable Value>> Assign(<<manual/i-variable-store,I Variable Store>> variables, <<manual/variable-value&,Variable Value>> value _(ref)_)::

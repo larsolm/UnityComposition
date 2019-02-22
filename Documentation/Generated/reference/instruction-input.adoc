@@ -1,0 +1,21 @@
+[#reference/instruction-input]
+
+## InstructionInput
+
+PiRhoSoft.CompositionEngine.InstructionInput
+
+### Description
+
+### Constructors
+
+InstructionInput()::
+
+### Public Fields
+
+<<manual/instruction-input-type,Instruction Input Type>> _Type_::
+
+<<manual/variable-definition,Variable Definition>> _Definition_::
+
+<<manual/variable-reference,Variable Reference>> _Reference_::
+
+<<manual/variable-value,Variable Value>> _Value_::

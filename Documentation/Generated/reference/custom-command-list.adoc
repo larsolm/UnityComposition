@@ -1,0 +1,11 @@
+[#reference/custom-command-list]
+
+## CustomCommandList
+
+PiRhoSoft.CompositionEngine.CustomCommandList : SerializedList<<<manual/custom-command,Custom Command>>>
+
+### Description
+
+### Constructors
+
+CustomCommandList()::

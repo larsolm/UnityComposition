@@ -1,0 +1,15 @@
+[#reference/equal-operator]
+
+## EqualOperator
+
+PiRhoSoft.CompositionEngine.EqualOperator : <<manual/infix-operation,Infix Operation>>
+
+### Description
+
+### Constructors
+
+EqualOperator()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

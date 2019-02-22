@@ -1,0 +1,15 @@
+[#reference/i-indexed-variable-store]
+
+## IIndexedVariableStore
+
+PiRhoSoft.CompositionEngine.IIndexedVariableStore : <<manual/i-variable-store,I Variable Store>>
+
+### Description
+
+### Public Properties
+
+int _Count_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+<<manual/i-variable-store,I Variable Store>> GetItem(int index) _(abstract)_::

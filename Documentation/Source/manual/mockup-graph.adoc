@@ -1,0 +1,11 @@
+[#manual/mockup-graph]
+
+## Mockup Graph
+
+### Fields
+
+<<manual/mockup-connection-list,Mockup Connection List>> _Entry Points_::
+
+ifdef::backend-multipage_html5[]
+link:reference/mockup-graph.html[Reference]
+endif::[]

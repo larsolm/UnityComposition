@@ -1,0 +1,37 @@
+[#reference/expression]
+
+## Expression
+
+PiRhoSoft.CompositionEngine.Expression
+
+### Description
+
+### Constructors
+
+Expression()::
+
+### Public Fields
+
+bool _IsExpanded_::
+
+### Public Properties
+
+bool _IsValid_ _(read only)_::
+
+bool _HasError_ _(read only)_::
+
+string _Statement_ _(read only)_::
+
+### Public Methods
+
+<<manual/expression-compilation-result,Expression Compilation Result>> SetStatement(string statement)::
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs, string source)::
+
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> outputs, string source)::
+
+<<manual/variable-value,Variable Value>> Execute(<<manual/i-variable-store,I Variable Store>> variables)::
+
+<<manual/variable-value,Variable Value>> Execute(<<manual/i-variable-store,I Variable Store>> variables, <<manual/variable-type,Variable Type>> expectedType)::
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables)::

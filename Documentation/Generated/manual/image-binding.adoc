@@ -1,0 +1,11 @@
+[#manual/image-binding]
+
+## Image Binding
+
+### Fields
+
+<<manual/variable-reference,Variable Reference>> _Variable_::
+
+ifdef::backend-multipage_html5[]
+link:reference/image-binding.html[Reference]
+endif::[]

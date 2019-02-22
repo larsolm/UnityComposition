@@ -53,20 +53,34 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void GoTo(InstructionGraphNode node)
 		{
+			GoTo(node, _rootStore.This);
+		}
+
+		public void GoTo(InstructionGraphNode node, IVariableStore thisStore)
+		{
 			_nextNode.Node = node;
-			_nextNode.Caller = _rootStore.This;
+			_nextNode.Caller = thisStore;
 			_nextNode.Iteration = 0;
 			_nextNode.Break = false;
 		}
 
 		public void BreakTo(InstructionGraphNode node)
 		{
+			Break();
+			GoTo(node);
+		}
+
+		private void Break()
+		{
 			// can't just peek - NodeFrame is a struct
 			var caller = _callstack.Pop();
-			caller.Break = true;
-			_callstack.Push(caller);
 
-			GoTo(node);
+			if (caller.Node.ExecutionMode == InstructionGraphExecutionMode.Loop)
+				caller.Break = true;
+			else
+				Break();
+
+			_callstack.Push(caller);
 		}
 
 		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root)

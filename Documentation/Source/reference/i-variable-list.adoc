@@ -1,0 +1,19 @@
+[#reference/i-variable-list]
+
+## IVariableList
+
+PiRhoSoft.CompositionEngine.IVariableList
+
+### Description
+
+### Public Properties
+
+int _VariableCount_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+string GetVariableName(int index) _(abstract)_::
+
+<<manual/variable-value,Variable Value>> GetVariableValue(int index) _(abstract)_::
+
+<<manual/set-variable-result,Set Variable Result>> SetVariableValue(int index, <<manual/variable-value,Variable Value>> value) _(abstract)_::

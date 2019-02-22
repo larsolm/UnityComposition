@@ -1,0 +1,19 @@
+[#manual/play-animation]
+
+## Play Animation
+
+### Fields
+
+<<manual/variable-source-type,Variable Source Type>> _Type_::
+
+<<manual/variable-reference,Variable Reference>> _Target_::
+
+https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] _Animation_::
+
+<<manual/variable-reference,Variable Reference>> _Animation Reference_::
+
+bool _Wait For Completion_::
+
+ifdef::backend-multipage_html5[]
+link:reference/play-animation.html[Reference]
+endif::[]

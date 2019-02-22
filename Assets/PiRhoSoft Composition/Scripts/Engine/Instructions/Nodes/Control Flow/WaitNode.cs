@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Control Flow/Wait", 5)]
+	[CreateInstructionGraphNodeMenu("Control Flow/Wait", 100)]
 	[HelpURL(Composition.DocumentationUrl + "wait")]
 	public class WaitNode : InstructionGraphNode
 	{
@@ -21,7 +21,6 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			yield return new WaitForSeconds(Time);
-
 			graph.GoTo(Next);
 		}
 	}

@@ -1,0 +1,23 @@
+[#reference/expression-token]
+
+## ExpressionToken
+
+PiRhoSoft.CompositionEngine.ExpressionToken
+
+### Description
+
+### Constructors
+
+ExpressionToken()::
+
+### Public Fields
+
+int _Location_::
+
+<<manual/expression-token-type,Expression Token Type>> _Type_::
+
+string _Text_::
+
+int _Integer_::
+
+float _Number_::

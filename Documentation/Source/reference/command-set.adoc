@@ -1,0 +1,31 @@
+[#reference/command-set]
+
+## CommandSet
+
+PiRhoSoft.CompositionEngine.CommandSet : https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^]
+
+### Description
+
+### Constructors
+
+CommandSet()::
+
+### Public Fields
+
+<<manual/custom-command-list,Custom Command List>> _CustomCommands_::
+
+### Public Methods
+
+void AddExpression(string name)::
+
+void RemoveCommand(int index)::
+
+void SetExpression(int index, <<manual/expression,Expression>> expression)::
+
+bool IsNameAvailable(string name)::
+
+### Protected Methods
+
+void RegisterCommands() _(virtual)_::
+
+void UnregisterCommands() _(virtual)_::

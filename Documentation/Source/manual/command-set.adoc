@@ -1,0 +1,11 @@
+[#manual/command-set]
+
+## Command Set
+
+### Fields
+
+<<manual/custom-command-list,Custom Command List>> _Custom Commands_::
+
+ifdef::backend-multipage_html5[]
+link:reference/command-set.html[Reference]
+endif::[]

@@ -1,0 +1,17 @@
+[#reference/indexed-variable-store]
+
+## IndexedVariableStore
+
+PiRhoSoft.CompositionEngine.IndexedVariableStore
+
+### Description
+
+### Static Fields
+
+string _ItemVariable_::
+
+### Static Methods
+
+<<manual/variable-value,Variable Value>> GetVariable(<<manual/i-indexed-variable-store,I Indexed Variable Store>> variables, string name)::
+
+<<manual/set-variable-result,Set Variable Result>> SetVariable(<<manual/i-indexed-variable-store,I Indexed Variable Store>> variables, string name, <<manual/variable-value,Variable Value>> value)::

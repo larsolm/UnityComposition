@@ -1,0 +1,15 @@
+[#reference/sin-command]
+
+## SinCommand
+
+PiRhoSoft.CompositionEngine.SinCommand : <<manual/command,Command>>
+
+### Description
+
+### Constructors
+
+SinCommand()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables, string name, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/operation,Operation>>> parameters) _(virtual)_::

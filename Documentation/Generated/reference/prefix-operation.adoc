@@ -1,0 +1,23 @@
+[#reference/prefix-operation]
+
+## PrefixOperation
+
+PiRhoSoft.CompositionEngine.PrefixOperation : <<manual/operation,Operation>>
+
+### Description
+
+### Public Fields
+
+string _Symbol_::
+
+<<manual/operation,Operation>> _Right_::
+
+### Public Methods
+
+void ToString(StringBuilder builder) _(virtual)_::
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs, string source) _(virtual)_::
+
+### Protected Constructors
+
+PrefixOperation()::

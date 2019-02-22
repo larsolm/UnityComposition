@@ -4,7 +4,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public interface IIndexedVariableStore : IVariableStore
 	{
-		int ItemCount { get; }
+		int Count { get; }
 		IVariableStore GetItem(int index);
 	}
 
@@ -14,9 +14,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static VariableValue GetVariable(IIndexedVariableStore variables, string name)
 		{
-			if (name == nameof(IIndexedVariableStore.ItemCount))
+			if (name == nameof(IIndexedVariableStore.Count))
 			{
-				return VariableValue.Create(variables.ItemCount);
+				return VariableValue.Create(variables.Count);
 			}
 			else if (name.StartsWith(ItemVariable))
 			{
@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static SetVariableResult SetVariable(IIndexedVariableStore variables, string name, VariableValue value)
 		{
-			if (name == nameof(IIndexedVariableStore.ItemCount) || name.StartsWith(ItemVariable)) return SetVariableResult.ReadOnly;
+			if (name == nameof(IIndexedVariableStore.Count) || name.StartsWith(ItemVariable)) return SetVariableResult.ReadOnly;
 			else return SetVariableResult.NotFound;
 		}
 
@@ -47,9 +47,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class IndexedVariableStore<ItemType> : SerializedList<ItemType>, IIndexedVariableStore where ItemType : class, IVariableStore
 	{
-		public int ItemCount => List.Count;
 		public IVariableStore GetItem(int index) => index >= 0 && index < List.Count ? List[index] : null;
-
 		public VariableValue GetVariable(string name) => IndexedVariableStore.GetVariable(this, name);
 		public SetVariableResult SetVariable(string name, VariableValue value) => IndexedVariableStore.SetVariable(this, name, value);
 	}

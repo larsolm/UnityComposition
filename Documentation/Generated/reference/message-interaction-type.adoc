@@ -1,0 +1,17 @@
+[#reference/message-interaction-type]
+
+## MessageInteractionType
+
+PiRhoSoft.CompositionEngine.MessageInteractionType
+
+### Description
+
+### Values
+
+<<manual/message-interaction-type,Message Interaction Type>> _WaitForInput_::
+
+<<manual/message-interaction-type,Message Interaction Type>> _WaitForFinalInput_::
+
+<<manual/message-interaction-type,Message Interaction Type>> _WaitForDisplay_::
+
+<<manual/message-interaction-type,Message Interaction Type>> _DontWait_::

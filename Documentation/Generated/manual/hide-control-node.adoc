@@ -1,0 +1,11 @@
+[#manual/hide-control-node]
+
+## Hide Control Node
+
+### Fields
+
+<<manual/interface-reference,Interface Reference>> _Control_::
+
+ifdef::backend-multipage_html5[]
+link:reference/hide-control-node.html[Reference]
+endif::[]

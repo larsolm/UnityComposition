@@ -1,0 +1,15 @@
+[#reference/variable-initializer-attribute]
+
+## VariableInitializerAttribute
+
+PiRhoSoft.CompositionEngine.VariableInitializerAttribute : Attribute
+
+### Description
+
+### Constructors
+
+VariableInitializerAttribute(<<manual/variable-initializer-type,Variable Initializer Type>> type)::
+
+### Public Fields
+
+<<manual/variable-initializer-type,Variable Initializer Type>> _Type_::

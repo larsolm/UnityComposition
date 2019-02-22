@@ -1,0 +1,13 @@
+[#reference/variable-source-type]
+
+## VariableSourceType
+
+PiRhoSoft.CompositionEngine.VariableSourceType
+
+### Description
+
+### Values
+
+<<manual/variable-source-type,Variable Source Type>> _Value_::
+
+<<manual/variable-source-type,Variable Source Type>> _Reference_::

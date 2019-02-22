@@ -1,0 +1,11 @@
+[#manual/loop-node]
+
+## Loop Node
+
+### Fields
+
+<<manual/expression,Expression>> _Condition_::
+
+ifdef::backend-multipage_html5[]
+link:reference/loop-node.html[Reference]
+endif::[]

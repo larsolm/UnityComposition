@@ -1,0 +1,15 @@
+[#reference/selection-node-item]
+
+## SelectionNodeItem
+
+PiRhoSoft.CompositionEngine.SelectionNodeItem : <<manual/selection-item,Selection Item>>
+
+### Description
+
+### Constructors
+
+SelectionNodeItem()::
+
+### Public Fields
+
+<<manual/instruction-graph-node,Instruction Graph Node>> _OnSelected_::

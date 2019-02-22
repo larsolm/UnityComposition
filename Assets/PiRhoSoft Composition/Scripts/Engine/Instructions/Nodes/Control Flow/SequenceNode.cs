@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Control Flow/Sequence", 2)]
+	[CreateInstructionGraphNodeMenu("Control Flow/Sequence", 10)]
 	[HelpURL(Composition.DocumentationUrl + "sequence-node")]
 	public class SequenceNode : InstructionGraphNode
 	{

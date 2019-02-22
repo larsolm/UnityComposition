@@ -1,0 +1,11 @@
+[#manual/enable-object-node]
+
+## Enable Object Node
+
+### Fields
+
+<<manual/variable-reference,Variable Reference>> _Target_::
+
+ifdef::backend-multipage_html5[]
+link:reference/enable-object-node.html[Reference]
+endif::[]

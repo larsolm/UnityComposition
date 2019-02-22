@@ -1,0 +1,15 @@
+[#reference/greater-operator]
+
+## GreaterOperator
+
+PiRhoSoft.CompositionEngine.GreaterOperator : <<manual/infix-operation,Infix Operation>>
+
+### Description
+
+### Constructors
+
+GreaterOperator()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

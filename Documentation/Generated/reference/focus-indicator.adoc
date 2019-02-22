@@ -1,0 +1,15 @@
+[#reference/focus-indicator]
+
+## FocusIndicator
+
+PiRhoSoft.CompositionEngine.FocusIndicator : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+FocusIndicator()::
+
+### Public Methods
+
+void SetFocused(bool focused) _(virtual)_::

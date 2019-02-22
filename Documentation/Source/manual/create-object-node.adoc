@@ -1,0 +1,17 @@
+[#manual/create-object-node]
+
+## Create Object Node
+
+### Fields
+
+https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _Prefab_::
+
+string _Object Name_::
+
+https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Position_::
+
+<<manual/variable-reference,Variable Reference>> _Parent_::
+
+ifdef::backend-multipage_html5[]
+link:reference/create-object-node.html[Reference]
+endif::[]

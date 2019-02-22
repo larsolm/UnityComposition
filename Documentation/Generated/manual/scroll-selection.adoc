@@ -1,0 +1,15 @@
+[#manual/scroll-selection]
+
+## Scroll Selection
+
+### Fields
+
+float _Scroll Speed_::
+
+int _Displayed Vertical_::
+
+int _Displayed Horizontal_::
+
+ifdef::backend-multipage_html5[]
+link:reference/scroll-selection.html[Reference]
+endif::[]

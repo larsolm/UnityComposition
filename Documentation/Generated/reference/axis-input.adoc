@@ -1,0 +1,23 @@
+[#reference/axis-input]
+
+## AxisInput
+
+PiRhoSoft.CompositionEngine.AxisInput : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], https://docs.unity3d.com/ScriptReference/IEventSystemHandler.html[IEventSystemHandler^], https://docs.unity3d.com/ScriptReference/IPointerDownHandler.html[IPointerDownHandler^], https://docs.unity3d.com/ScriptReference/IPointerUpHandler.html[IPointerUpHandler^]
+
+### Description
+
+### Constructors
+
+AxisInput()::
+
+### Public Fields
+
+string _AxisName_::
+
+float _AxisValue_::
+
+### Public Methods
+
+void OnPointerDown(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] eventData) _(virtual)_::
+
+void OnPointerUp(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] eventData) _(virtual)_::

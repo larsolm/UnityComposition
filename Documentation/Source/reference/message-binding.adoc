@@ -1,0 +1,23 @@
+[#reference/message-binding]
+
+## MessageBinding
+
+PiRhoSoft.CompositionEngine.MessageBinding : <<manual/interface-binding,Interface Binding>>
+
+### Description
+
+### Constructors
+
+MessageBinding()::
+
+### Public Fields
+
+<<manual/message,Message>> _Message_::
+
+### Public Properties
+
+TextMeshProUGUI _Text_ _(read only)_::
+
+### Public Methods
+
+void UpdateBinding(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

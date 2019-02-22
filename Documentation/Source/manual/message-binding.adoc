@@ -1,0 +1,11 @@
+[#manual/message-binding]
+
+## Message Binding
+
+### Fields
+
+<<manual/message,Message>> _Message_::
+
+ifdef::backend-multipage_html5[]
+link:reference/message-binding.html[Reference]
+endif::[]

@@ -1,0 +1,21 @@
+[#reference/variable]
+
+## Variable
+
+PiRhoSoft.CompositionEngine.Variable : ValueType
+
+### Description
+
+### Static Properties
+
+<<manual/variable,Variable>> _Empty_ _(read only)_::
+
+### Static Methods
+
+<<manual/variable,Variable>> Create(string name, <<manual/variable-value,Variable Value>> value)::
+
+### Public Properties
+
+string _Name_ _(read only)_::
+
+<<manual/variable-value,Variable Value>> _Value_ _(read only)_::

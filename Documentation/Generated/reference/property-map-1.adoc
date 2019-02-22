@@ -1,0 +1,27 @@
+[#reference/property-map-1]
+
+## PropertyMap
+
+PiRhoSoft.CompositionEngine.PropertyMap<_OwnerType_> : <<manual/property-map,Property Map>>
+
+### Description
+
+### Constructors
+
+PropertyMap()::
+
+### Public Fields
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/property-1,Property>><OwnerType>> _Properties_::
+
+### Public Properties
+
+int _PropertyCount_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+string GetPropertyName(int index) _(virtual)_::
+
+<<manual/i-variable-list,I Variable List>> CreateList(Object owner) _(virtual)_::
+
+<<manual/property-map-1,Property Map>><_OwnerType_> Add(string name, Func<OwnerType, OwnerType> getter, Func<OwnerType, OwnerType, OwnerType> setter)::

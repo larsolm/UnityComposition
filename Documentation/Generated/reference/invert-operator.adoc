@@ -1,0 +1,15 @@
+[#reference/invert-operator]
+
+## InvertOperator
+
+PiRhoSoft.CompositionEngine.InvertOperator : <<manual/prefix-operation,Prefix Operation>>
+
+### Description
+
+### Constructors
+
+InvertOperator()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

@@ -1,0 +1,29 @@
+[#reference/instruction]
+
+## Instruction
+
+PiRhoSoft.CompositionEngine.Instruction : https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^]
+
+### Description
+
+### Public Properties
+
+bool _IsRunning_ _(read only)_::
+
+bool _IsExecutionImmediate_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<manual/instruction-store,Instruction Store>> variables)::
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> outputs) _(virtual)_::
+
+### Protected Constructors
+
+Instruction()::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables) _(abstract)_::

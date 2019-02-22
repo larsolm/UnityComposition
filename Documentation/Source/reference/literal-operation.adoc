@@ -1,0 +1,17 @@
+[#reference/literal-operation]
+
+## LiteralOperation
+
+PiRhoSoft.CompositionEngine.LiteralOperation : <<manual/operation,Operation>>
+
+### Description
+
+### Constructors
+
+LiteralOperation(<<manual/variable-value,Variable Value>> value)::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+
+void ToString(StringBuilder builder) _(virtual)_::

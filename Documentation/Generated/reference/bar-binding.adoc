@@ -1,0 +1,23 @@
+[#reference/bar-binding]
+
+## BarBinding
+
+PiRhoSoft.CompositionEngine.BarBinding : <<manual/interface-binding,Interface Binding>>
+
+### Description
+
+### Constructors
+
+BarBinding()::
+
+### Public Fields
+
+<<manual/variable-reference,Variable Reference>> _AmountVariable_::
+
+<<manual/variable-reference,Variable Reference>> _TotalVariable_::
+
+https://docs.unity3d.com/ScriptReference/Gradient.html[Gradient^] _FillColors_::
+
+### Public Methods
+
+void UpdateBinding(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

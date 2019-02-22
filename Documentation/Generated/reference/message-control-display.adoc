@@ -1,0 +1,15 @@
+[#reference/message-control-display]
+
+## MessageControlDisplay
+
+PiRhoSoft.CompositionEngine.MessageControlDisplay
+
+### Description
+
+### Values
+
+<<manual/message-control-display,Message Control Display>> _None_::
+
+<<manual/message-control-display,Message Control Display>> _Continue_::
+
+<<manual/message-control-display,Message Control Display>> _Finished_::

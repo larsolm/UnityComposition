@@ -1,0 +1,13 @@
+[#manual/mockup-node]
+
+## Mockup Node
+
+### Fields
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> __execution Mode_::
+
+<<manual/mockup-connection-list,Mockup Connection List>> _Connections_::
+
+ifdef::backend-multipage_html5[]
+link:reference/mockup-node.html[Reference]
+endif::[]

@@ -1,0 +1,11 @@
+[#reference/instruction-graph-node-dictionary]
+
+## InstructionGraphNodeDictionary
+
+PiRhoSoft.CompositionEngine.InstructionGraphNodeDictionary : SerializedDictionary<string, string>
+
+### Description
+
+### Constructors
+
+InstructionGraphNodeDictionary()::

@@ -1,0 +1,11 @@
+[#manual/show-control-node]
+
+## Show Control Node
+
+### Fields
+
+<<manual/interface-reference,Interface Reference>> _Control_::
+
+ifdef::backend-multipage_html5[]
+link:reference/show-control-node.html[Reference]
+endif::[]

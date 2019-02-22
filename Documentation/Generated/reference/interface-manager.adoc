@@ -1,0 +1,55 @@
+[#reference/interface-manager]
+
+## InterfaceManager
+
+PiRhoSoft.CompositionEngine.InterfaceManager : SingletonBehaviour<<<manual/interface-manager,Interface Manager>>>
+
+### Description
+
+### Constructors
+
+InterfaceManager()::
+
+### Public Fields
+
+string _HorizontalAxis_::
+
+string _VerticalAxis_::
+
+string _AcceptButton_::
+
+string _CancelButton_::
+
+string _StartButton_::
+
+https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _AcceptKey_::
+
+https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _CancelKey_::
+
+https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _StartKey_::
+
+### Public Properties
+
+<<manual/interface,Interface>> _FocusedInterface_ _(read only)_::
+
+ButtonState _Left_ _(read only)_::
+
+ButtonState _Right_ _(read only)_::
+
+ButtonState _Up_ _(read only)_::
+
+ButtonState _Down_ _(read only)_::
+
+ButtonState _Accept_ _(read only)_::
+
+ButtonState _Cancel_ _(read only)_::
+
+ButtonState _Start_ _(read only)_::
+
+### Public Methods
+
+InterfaceType GetInterface<InterfaceType>(string name)::
+
+### Protected Methods
+
+void UpdateInput() _(virtual)_::

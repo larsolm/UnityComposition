@@ -1,0 +1,19 @@
+[#reference/text-binding]
+
+## TextBinding
+
+PiRhoSoft.CompositionEngine.TextBinding : <<manual/interface-binding,Interface Binding>>
+
+### Description
+
+### Constructors
+
+TextBinding()::
+
+### Public Fields
+
+<<manual/variable-reference,Variable Reference>> _Variable_::
+
+### Public Methods
+
+void UpdateBinding(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

@@ -1,0 +1,13 @@
+[#manual/branch-node]
+
+## Branch Node
+
+### Fields
+
+<<manual/expression,Expression>> _Switch_::
+
+<<manual/instruction-graph-node-dictionary,Instruction Graph Node Dictionary>> _Outputs_::
+
+ifdef::backend-multipage_html5[]
+link:reference/branch-node.html[Reference]
+endif::[]

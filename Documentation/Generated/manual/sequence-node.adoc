@@ -1,0 +1,11 @@
+[#manual/sequence-node]
+
+## Sequence Node
+
+### Fields
+
+<<manual/instruction-graph-node-list,Instruction Graph Node List>> _Sequence_::
+
+ifdef::backend-multipage_html5[]
+link:reference/sequence-node.html[Reference]
+endif::[]

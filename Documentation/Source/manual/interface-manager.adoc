@@ -1,0 +1,25 @@
+[#manual/interface-manager]
+
+## Interface Manager
+
+### Fields
+
+string _Horizontal Axis_::
+
+string _Vertical Axis_::
+
+string _Accept Button_::
+
+string _Cancel Button_::
+
+string _Start Button_::
+
+https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _Accept Key_::
+
+https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _Cancel Key_::
+
+https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _Start Key_::
+
+ifdef::backend-multipage_html5[]
+link:reference/interface-manager.html[Reference]
+endif::[]

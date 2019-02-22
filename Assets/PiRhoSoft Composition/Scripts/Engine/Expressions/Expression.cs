@@ -13,11 +13,11 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class Expression : ISerializationCallbackReceiver
 	{
-		public const string ExpressionTokenizeError = "(CETE) Failed to parse Expression '{0} at location {1}': {2}";
-		public const string ExpressionParseError = "(CEPE) Failed to parse Expression '{0}' at location {1}: {2}";
-		public const string ExpressionEvaluationError = "(CEEE) Failed to execute Expression '{0}': {1}";
-		public const string CommandEvaluationError = "(CCEE) Failed to execute Command '{0}': {1}";
-		public const string InvalidResultWarning = "(CEIR) The Expression '{0}' was expected to return type {1} but instead returned type {2}";
+		private const string _expressionTokenizeError = "(CETE) Failed to parse Expression '{0} at location {1}': {2}";
+		private const string _expressionParseError = "(CEPE) Failed to parse Expression '{0}' at location {1}: {2}";
+		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}': {1}";
+		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}': {1}";
+		private const string _invalidResultWarning = "(CEIR) The Expression '{0}' was expected to return type {1} but instead returned type {2}";
 
 		[SerializeField] private string _statement;
 		private List<Operation> _operations;
@@ -58,11 +58,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			catch (ExpressionEvaluationException exception)
 			{
-				Debug.LogErrorFormat(ExpressionEvaluationError, _statement, exception.Message);
+				Debug.LogErrorFormat(_expressionEvaluationError, _statement, exception.Message);
 			}
 			catch (CommandEvaluationException exception)
 			{
-				Debug.LogErrorFormat(CommandEvaluationError, exception.Command, exception.Message);
+				Debug.LogErrorFormat(_commandEvaluationError, exception.Command, exception.Message);
 			}
 
 			return VariableValue.Empty;
@@ -73,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 			var result = Execute(variables);
 
 			if (result.Type != expectedType) // Empty might mean there was an exception so logging would be duplicated, but that kind of makes sense in this case
-				Debug.LogWarningFormat(InvalidResultWarning, _statement, expectedType, result.Type);
+				Debug.LogWarningFormat(_invalidResultWarning, _statement, expectedType, result.Type);
 
 			return result;
 		}
@@ -106,12 +106,12 @@ namespace PiRhoSoft.CompositionEngine
 				catch (ExpressionTokenizeException exception)
 				{
 					result.Success = false;
-					result.Message = string.Format(ExpressionTokenizeError, _statement, exception.Location, exception.Message);
+					result.Message = string.Format(_expressionTokenizeError, _statement, exception.Location, exception.Message);
 				}
 				catch (ExpressionParseException exception)
 				{
 					result.Success = false;
-					result.Message = string.Format(ExpressionParseError, _statement, exception.Location, exception.Message);
+					result.Message = string.Format(_expressionParseError, _statement, exception.Location, exception.Message);
 				}
 			}
 

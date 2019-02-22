@@ -1,0 +1,31 @@
+[#reference/mockup-node]
+
+## MockupNode
+
+PiRhoSoft.CompositionEngine.MockupNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+
+### Description
+
+### Constructors
+
+MockupNode()::
+
+### Public Fields
+
+<<manual/mockup-connection-list,Mockup Connection List>> _Connections_::
+
+### Public Properties
+
+bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void GetConnections(<<manual/instruction-graph-node-node-data,Node Data>> data) _(virtual)_::
+
+void SetConnection(<<manual/instruction-graph-node-connection-data,Connection Data>> connection, <<manual/instruction-graph-node,Instruction Graph Node>> target) _(virtual)_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::

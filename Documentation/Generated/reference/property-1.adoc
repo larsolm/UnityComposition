@@ -1,0 +1,19 @@
+[#reference/property-1]
+
+## Property
+
+PiRhoSoft.CompositionEngine.Property<_OwnerType_>
+
+### Description
+
+### Constructors
+
+Property()::
+
+### Public Fields
+
+string _Name_::
+
+Func<OwnerType, OwnerType> _Getter_::
+
+Func<OwnerType, OwnerType, OwnerType> _Setter_::

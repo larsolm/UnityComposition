@@ -13,6 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _missingItemError = "(ISCMI) Failed to create item {0}: the variable '{1}' could not be found";
 		private const string _invalidItemError = "(ISCMI) Failed to create item {0}: the variable '{1}' is not an IVariableStore";
 		private const string _missingTemplateError = "(ISCMI) Failed to create item {0}: the object template has not been assigned";
+		private const string _missingChildError = "(ISCMI) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
 
 		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a column")]
 		public bool VerticalWrapping = false;
@@ -89,9 +90,13 @@ namespace PiRhoSoft.CompositionEngine
 		protected override void Teardown()
 		{
 			foreach (var item in _items)
-				Destroy(item.Object);
+			{
+				if (item.Generated)
+					Destroy(item.Object);
+			}
 
 			_items.Clear();
+
 			base.Teardown();
 		}
 
@@ -103,6 +108,7 @@ namespace PiRhoSoft.CompositionEngine
 			public IVariableStore Variables;
 			public IVariableStore SelectedVariables;
 			public GameObject Object;
+			public bool Generated;
 			public FocusIndicator Indicator;
 			public ItemSelector Selector;
 		}
@@ -119,33 +125,44 @@ namespace PiRhoSoft.CompositionEngine
 			foreach (var item in items)
 			{
 				var store = GetStore(variables, item);
-
 				if (store != null)
 				{
-					if (item.Template == null)
+					if (item.Source == SelectionItem.ObjectSource.Asset)
 					{
-						Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
-					}
-					else if (item.Expand)
-					{
-						if (store is IIndexedVariableStore indexed)
+						if (item.Template == null)
 						{
-							for (var i = 0; i < indexed.ItemCount; i++)
+							Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
+						}
+						else if (item.Expand)
+						{
+							if (store is IIndexedVariableStore indexed)
 							{
-								var indexedItem = indexed.GetItem(i);
-								AddItem(item, indexedItem, indexedItem, index++);
+								for (var i = 0; i < indexed.Count; i++)
+								{
+									var indexedItem = indexed.GetItem(i);
+									AddItem(item, null, indexedItem, indexedItem, index++);
+								}
+							}
+							else
+							{
+								AddItem(item, null, store, store, index++);
+								Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Item);
 							}
 						}
 						else
 						{
-							AddItem(item, store, store, index++);
-							Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Item);
+							item.Variables = store;
+							AddItem(item, null, item, store, index++);
 						}
 					}
-					else
+					else if (item.Source == SelectionItem.ObjectSource.Scene)
 					{
-						item.Variables = store;
-						AddItem(item, item, store, index++);
+						var obj = transform.Find(name);
+
+						if (obj == null)
+							Debug.LogErrorFormat(this, null, _missingChildError, item.Label, name);
+						else
+							AddItem(item, null, item, store, index++);
 					}
 				}
 			}
@@ -178,7 +195,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		private void AddItem(SelectionItem item, IVariableStore variables, IVariableStore selectedVariables, int index)
+		private void AddItem(SelectionItem item, GameObject child, IVariableStore variables, IVariableStore selectedVariables, int index)
 		{
 			if (index < _items.Count)
 			{
@@ -189,12 +206,17 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			var parent = GetItemParent();
-			var obj = Instantiate(item.Template, parent);
-			var indicator = obj.GetComponentInChildren<FocusIndicator>();
+			var obj = child == null ? Instantiate(item.Template, parent) : child; // Don't null coalesce
+			obj.transform.SetSiblingIndex(index);
+
+			var indicator = obj.GetComponentInChildren<FocusIndicator>(true);
 			var selector = obj.GetComponentInChildren<ItemSelector>();
 
 			if (selector)
+			{
+				selector.Selection = this;
 				selector.Index = _items.Count;
+			}
 
 			_items.Add(new MenuItem
 			{
@@ -202,6 +224,7 @@ namespace PiRhoSoft.CompositionEngine
 				Variables = variables,
 				SelectedVariables = selectedVariables,
 				Object = obj,
+				Generated = child == null,
 				Indicator = indicator,
 				Selector = selector
 			});
@@ -236,6 +259,13 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (item.Indicator)
 				item.Indicator.SetFocused(false);
+		}
+
+		public void MoveFocus(int index)
+		{
+			var item = index >= 0 && index < _items.Count ? _items[index] : null;
+			if (item != null)
+				FocusItem(item);
 		}
 
 		public virtual void MoveFocusUp()

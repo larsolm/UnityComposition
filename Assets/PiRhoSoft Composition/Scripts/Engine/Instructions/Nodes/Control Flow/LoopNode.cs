@@ -4,15 +4,15 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Control Flow/Loop", 4)]
+	[CreateInstructionGraphNodeMenu("Control Flow/Loop", 20)]
 	[HelpURL(Composition.DocumentationUrl + "loop-node")]
 	public class LoopNode : InstructionGraphNode
 	{
 		[Tooltip("The statement to execute to check if the loop should continue")]
-		public Expression Condition;
+		public Expression Condition = new Expression();
 
 		[Tooltip("The node to repeatedly go to while Condition evaluates to true")]
-		public InstructionGraphNode Loop;
+		public InstructionGraphNode Loop = null;
 
 		[Tooltip("The node to go to when Condition evaluates to false")]
 		public InstructionGraphNode Next = null;

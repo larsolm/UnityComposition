@@ -1,0 +1,11 @@
+[#reference/instruction-dictionary]
+
+## InstructionDictionary
+
+PiRhoSoft.CompositionEngine.InstructionDictionary : SerializedDictionary<string, string>
+
+### Description
+
+### Constructors
+
+InstructionDictionary()::

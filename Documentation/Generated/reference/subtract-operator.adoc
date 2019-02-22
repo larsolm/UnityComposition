@@ -1,0 +1,19 @@
+[#reference/subtract-operator]
+
+## SubtractOperator
+
+PiRhoSoft.CompositionEngine.SubtractOperator : <<manual/infix-operation,Infix Operation>>
+
+### Description
+
+### Static Methods
+
+<<manual/variable-value,Variable Value>> Subtract(<<manual/variable-value&,Variable Value>> left _(ref)_, <<manual/variable-value&,Variable Value>> right _(ref)_)::
+
+### Constructors
+
+SubtractOperator()::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::

@@ -1,0 +1,33 @@
+[#reference/branch-node]
+
+## BranchNode
+
+PiRhoSoft.CompositionEngine.BranchNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+
+### Description
+
+### Constructors
+
+BranchNode()::
+
+### Public Fields
+
+<<manual/expression,Expression>> _Switch_::
+
+<<manual/instruction-graph-node-dictionary,Instruction Graph Node Dictionary>> _Outputs_::
+
+<<manual/instruction-graph-node,Instruction Graph Node>> _Default_::
+
+### Public Properties
+
+bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
+
+<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::
