@@ -1,9 +1,0 @@
-[#manual/break-node]
-
-## Break Node
-
-
-
-ifdef::backend-multipage_html5[]
-link:reference/break-node.html[Reference]
-endif::[]

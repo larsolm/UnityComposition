@@ -1,9 +1,0 @@
-[#manual/simple-graph]
-
-## Simple Graph
-
-
-
-ifdef::backend-multipage_html5[]
-link:reference/simple-graph.html[Reference]
-endif::[]

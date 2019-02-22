@@ -1,9 +1,0 @@
-[#manual/iterate-node]
-
-## Iterate Node
-
-
-
-ifdef::backend-multipage_html5[]
-link:reference/iterate-node.html[Reference]
-endif::[]
