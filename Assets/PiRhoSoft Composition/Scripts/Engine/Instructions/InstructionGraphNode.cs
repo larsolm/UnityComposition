@@ -141,19 +141,19 @@ namespace PiRhoSoft.CompositionEngine
 
 			public void AddConnection(string name, InstructionGraphNode to)
 			{
-				Connections.Add(new ConnectionData(name, null, -1, Node, to));
+				Connections.Add(new ConnectionData(name, null, -1, Node, to, Connections.Count));
 				UpdateBounds();
 			}
 
 			public void AddConnection(string name, string key, InstructionGraphNode to)
 			{
-				Connections.Add(new ConnectionData(name, key, -1, Node, to));
+				Connections.Add(new ConnectionData(name, key, -1, Node, to, Connections.Count));
 				UpdateBounds();
 			}
 
 			public void AddConnection(string name, int index, InstructionGraphNode to)
 			{
-				Connections.Add(new ConnectionData(name, null, index, Node, to));
+				Connections.Add(new ConnectionData(name, null, index, Node, to, Connections.Count));
 				UpdateBounds();
 			}
 
@@ -166,21 +166,59 @@ namespace PiRhoSoft.CompositionEngine
 		public class ConnectionData
 		{
 			public string Field { get; private set; }
-			public string Key { get; private set; }
-			public int Index { get; private set; }
+			public string FieldKey { get; private set; }
+			public int FieldIndex { get; private set; }
 
 			public InstructionGraphNode From { get; private set; }
+			public int FromIndex { get; private set; }
 			public InstructionGraphNode To { get; private set; }
 			public NodeData Target { get; private set; }
 
 			public string Name { get; private set; }
 
-			public ConnectionData(string field, string key, int index, InstructionGraphNode from, InstructionGraphNode to)
+			public static bool operator ==(ConnectionData left, ConnectionData right)
+			{
+				// need to override since connections are rebuilt for the selected node causing reference comparison
+				// to return false
+
+				if (ReferenceEquals(left, null))
+					return ReferenceEquals(right, null);
+				else if (ReferenceEquals(right, null))
+					return false;
+				else
+					return left.From == right.From && left.FromIndex == right.FromIndex;
+			}
+
+			public static bool operator !=(ConnectionData left, ConnectionData right)
+			{
+				return !(left == right);
+			}
+
+			public override bool Equals(object obj)
+			{
+				if (obj is ConnectionData other)
+					return this == other;
+
+				return false;
+			}
+
+			public override int GetHashCode()
+			{
+				// not needed but Visual Studio warns without it
+
+				var hashCode = -2083501448;
+				hashCode = hashCode * -1521134295 + EqualityComparer<InstructionGraphNode>.Default.GetHashCode(From);
+				hashCode = hashCode * -1521134295 + FromIndex.GetHashCode();
+				return hashCode;
+			}
+
+			public ConnectionData(string field, string key, int index, InstructionGraphNode from, InstructionGraphNode to, int fromIndex)
 			{
 				Field = field;
-				Key = key;
-				Index = index;
+				FieldKey = key;
+				FieldIndex = index;
 				From = from;
+				FromIndex = fromIndex;
 				To = to;
 
 				if (index >= 0)
@@ -218,8 +256,8 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						var dictionary = field.GetValue(obj) as InstructionGraphNodeDictionary;
 
-						if (dictionary.ContainsKey(Key))
-							dictionary[Key] = target;
+						if (dictionary.ContainsKey(FieldKey))
+							dictionary[FieldKey] = target;
 						else
 							Debug.LogErrorFormat(_missingKeyError, Field);
 					}
@@ -227,8 +265,8 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						var list = field.GetValue(obj) as InstructionGraphNodeList;
 
-						if (Index >= 0 && Index < list.Count)
-							list[Index] = target;
+						if (FieldIndex >= 0 && FieldIndex < list.Count)
+							list[FieldIndex] = target;
 						else
 							Debug.LogErrorFormat(_missingIndexError, Field);
 					}

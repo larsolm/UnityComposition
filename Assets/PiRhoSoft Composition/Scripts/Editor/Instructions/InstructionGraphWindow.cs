@@ -285,13 +285,12 @@ namespace PiRhoSoft.CompositionEditor
 		private Rect GetOutputBounds(InstructionGraphNode.ConnectionData connection)
 		{
 			var node = GetNodeData(connection.From);
-			var index = node.Connections.IndexOf(connection);
-
 			var rect = node.Bounds;
+
 			TakeHeaderHeight(ref rect);
 			
 			rect.x = rect.xMax - InstructionGraphNode.NodeData.LineHeight;
-			rect.y += index * InstructionGraphNode.NodeData.LineHeight;
+			rect.y += connection.FromIndex * InstructionGraphNode.NodeData.LineHeight;
 			rect.width = InstructionGraphNode.NodeData.LineHeight;
 			rect.height = InstructionGraphNode.NodeData.LineHeight;
 

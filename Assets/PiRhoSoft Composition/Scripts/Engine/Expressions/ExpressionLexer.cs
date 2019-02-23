@@ -154,6 +154,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				case "true": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 1, Number = 1.0f }, whitespace); break;
 				case "false": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
+				case "null": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Null, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
 				default: AddToken(tokens, new ExpressionToken { Location = start, Type = type, Text = text }, whitespace); break;
 			}
 		}
@@ -195,9 +196,9 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var previous = tokens[tokens.Count - 1];
 
-				if (previous.Type == ExpressionTokenType.Boolean || previous.Type == ExpressionTokenType.Integer || previous.Type == ExpressionTokenType.Number || previous.Type == ExpressionTokenType.Identifier)
+				if (previous.Type == ExpressionTokenType.Boolean || previous.Type == ExpressionTokenType.Integer || previous.Type == ExpressionTokenType.Number || previous.Type == ExpressionTokenType.Null || previous.Type == ExpressionTokenType.Identifier)
 				{
-					if (token.Type == ExpressionTokenType.Boolean || token.Type == ExpressionTokenType.Integer || token.Type == ExpressionTokenType.Number || token.Type == ExpressionTokenType.Identifier)
+					if (token.Type == ExpressionTokenType.Boolean || token.Type == ExpressionTokenType.Integer || token.Type == ExpressionTokenType.Number || token.Type == ExpressionTokenType.Null || token.Type == ExpressionTokenType.Identifier)
 					{
 						previous.Text = previous.Text + whitespace + token.Text;
 						previous.Type = ExpressionTokenType.Identifier;

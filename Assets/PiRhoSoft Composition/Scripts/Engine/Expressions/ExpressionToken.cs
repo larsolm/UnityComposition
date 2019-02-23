@@ -7,6 +7,7 @@
 		Integer,
 		Number,
 		String,
+		Null,
 		Identifier,
 		Command,
 		Operator,

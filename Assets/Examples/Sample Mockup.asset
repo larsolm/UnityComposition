@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Name: Mockup
   m_EditorClassIdentifier: 
   Name: Mockup
-  Variables:
+  This:
     _variable:
     - this
     _lookups:
@@ -54,7 +54,7 @@ MonoBehaviour:
   m_Name: Mockup
   m_EditorClassIdentifier: 
   Name: Mockup
-  Variables:
+  This:
     _variable:
     - this
     _lookups:

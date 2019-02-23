@@ -48,7 +48,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				foreach (var item in Items)
 				{
-					if (item.Label == connection.Key)
+					if (item.Label == connection.FieldKey)
 					{
 						item.OnSelected = target;
 						return;
