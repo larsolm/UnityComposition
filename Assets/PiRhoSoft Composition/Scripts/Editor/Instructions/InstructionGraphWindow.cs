@@ -1183,6 +1183,7 @@ namespace PiRhoSoft.CompositionEditor
 				case MouseState.Select:
 				{
 					TransferSelection(ref _pendingNodes);
+					Repaint();
 					break;
 				}
 				case MouseState.Move:
