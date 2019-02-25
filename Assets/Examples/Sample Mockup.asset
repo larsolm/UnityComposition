@@ -16,9 +16,14 @@ MonoBehaviour:
     _items:
     - {fileID: 114446285143757668}
     - {fileID: 114390569148400404}
+    - {fileID: 114984586603906136}
   StartPosition: {x: 0, y: 0}
   EntryPoints:
-    _items: []
+    _items:
+    - Name: One
+      Node: {fileID: 0}
+    - Name: Two
+      Node: {fileID: 0}
 --- !u!114 &114390569148400404
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -37,10 +42,14 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 345.6, y: 64}
+  GraphPosition: {x: 332.80002, y: -153.6}
   _executionMode: 0
   Connections:
-    _items: []
+    _items:
+    - Name: Three
+      Node: {fileID: 0}
+    - Name: Four
+      Node: {fileID: 0}
 --- !u!114 &114446285143757668
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,7 +68,35 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 345.6, y: -89.6}
+  GraphPosition: {x: -217.6, y: -179.2}
   _executionMode: 0
   Connections:
-    _items: []
+    _items:
+    - Name: One
+      Node: {fileID: 0}
+    - Name: Two
+      Node: {fileID: 0}
+--- !u!114 &114984586603906136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4238dfdb59c60404a84af819381016ca, type: 3}
+  m_Name: Mockup
+  m_EditorClassIdentifier: 
+  Name: Mockup
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 89.6, y: -256}
+  _executionMode: 0
+  Connections:
+    _items:
+    - Name: new
+      Node: {fileID: 114390569148400404}
