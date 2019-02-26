@@ -50,6 +50,10 @@ namespace PiRhoSoft.CompositionEditor
 		private static Color _nodeColor = new Color(0.23f, 0.24f, 0.29f, 1.0f);
 		private static Color _knobColor = new Color(0.49f, 0.73f, 1.0f, 1.0f);
 
+		private static Color _breakColor = new Color(0.5f, 0.2f, 0.2f, 1.0f);
+		private static Color _activeColor = new Color(0.0f, 0.9f, 0.0f, 1.0f);
+		private static Color _callstackColor = new Color(0.3f, 0.8f, 0.3f, 1.0f);
+
 		private InstructionGraph _graph = null;
 		private StartNode _start = null;
 		private List<InstructionGraphNode.NodeData> _nodes = new List<InstructionGraphNode.NodeData>();
@@ -752,14 +756,36 @@ namespace PiRhoSoft.CompositionEditor
 					Handles.DrawSolidRectangleWithOutline(outputRect, Color.clear, _selectedColor);
 			}
 
+			var selected = _selectedNodes.Contains(node);
+
 			if (_hoveredInput == node)
 				Handles.DrawSolidRectangleWithOutline(inputRect, Color.clear, _hoveredColor);
 
-			if (_hoveredNode == node || _pendingInput == node || _pendingNodes.Contains(node))
-				Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, _hoveredColor);
+			if (Application.isPlaying && _graph.IsRunning)
+			{
+				if (_graph.IsInCallStack(node.Node) || node.Node == _start)
+				{
+					var color = _graph.IsExecuting(node.Node) ? _activeColor : _callstackColor;
+					Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, _callstackColor);
+				}
+			}
 
-			if (_selectedNodes.Contains(node))
+			if (selected)
 				Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, _selectedColor);
+
+			// only draw the hover when not the node is not selected unless it's for a pending connection
+			if (_pendingInput == node || (!selected && (_hoveredNode == node || _pendingNodes.Contains(node))))
+				Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, _hoveredColor);
+		}
+
+		private Rect Outset(Rect rect, float amount)
+		{
+			rect.x -= amount;
+			rect.y -= amount;
+			rect.width += amount * 2.0f;
+			rect.height += amount * 2.0f;
+
+			return rect;
 		}
 
 		private void DrawConnections(Rect rect)
@@ -801,20 +827,25 @@ namespace PiRhoSoft.CompositionEditor
 			var start = outputBounds.center;
 			var end = inputBounds.center;
 
+			var color = _knobColor;
+
+			if (Application.isPlaying && _graph.IsInCallStack(to.Node, from.Name))
+				color = _callstackColor;
+
 			if (outputBounds.xMax > inputBounds.xMin)
 			{
 				var difference = (end.y - start.y) / 3;
 				var magnitude = 200.0f;
 
-				Handles.DrawBezier(start, end, start + new Vector2(magnitude, difference), end - new Vector2(magnitude, difference), _knobColor, null, 3);
+				Handles.DrawBezier(start, end, start + new Vector2(magnitude, difference), end - new Vector2(magnitude, difference), color, null, 3);
 			}
 			else
 			{
-				HandleHelper.DrawBezier(start, end, _knobColor);
+				HandleHelper.DrawBezier(start, end, color);
 			}
 
-			HandleHelper.DrawCircle(start, _knobRadius, _knobColor);
-			HandleHelper.DrawCircle(end, _knobRadius, _knobColor);
+			HandleHelper.DrawCircle(start, _knobRadius, color);
+			HandleHelper.DrawCircle(end, _knobRadius, color);
 		}
 
 		#endregion
@@ -1321,6 +1352,10 @@ namespace PiRhoSoft.CompositionEditor
 
 			Repaint();
 		}
+
+		#endregion
+
+		#region Debugging
 
 		#endregion
 	}

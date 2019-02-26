@@ -227,6 +227,43 @@ namespace PiRhoSoft.CompositionEngine
 			connection.ApplyConnection(this, target);
 		}
 
+#if UNITY_EDITOR
+
+		public bool IsInCallStack(InstructionGraphNode node)
+		{
+			if (_callstack.Count > 0)
+			{
+				foreach (var frame in _callstack)
+				{
+					if (frame.Node == node)
+						return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool IsInCallStack(InstructionGraphNode node, string source)
+		{
+			if (_callstack.Count > 0)
+			{
+				foreach (var frame in _callstack)
+				{
+					if (frame.Node == node && frame.Source == source)
+						return true;
+				}
+			}
+
+			return false;
+		}
+
+		public bool IsExecuting(InstructionGraphNode node)
+		{
+			return _callstack.Count > 0 && _callstack.Peek().Node == node;
+		}
+
+#endif
+
 		#endregion
 	}
 }
