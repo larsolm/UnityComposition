@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Loop", 20)]
 	[HelpURL(Composition.DocumentationUrl + "loop-node")]
-	public class LoopNode : InstructionGraphNode
+	public class LoopNode : InstructionGraphNode, IImmediate, ILoopNode
 	{
 		[Tooltip("The statement to execute to check if the loop should continue")]
 		public Expression Condition = new Expression();
@@ -17,8 +17,10 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to when Condition evaluates to false")]
 		public InstructionGraphNode Next = null;
 
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Loop;
+		public (InstructionGraphNode Node, string Name) GetBreakNode()
+		{
+			return (Next, nameof(Next));
+		}
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
@@ -30,9 +32,9 @@ namespace PiRhoSoft.CompositionEngine
 			var condition = Condition.Execute(variables, VariableType.Boolean);
 
 			if (condition.Boolean && Loop != null)
-				graph.GoTo(Loop);
+				graph.GoTo(Loop, variables.This, nameof(Loop));
 			else
-				graph.BreakTo(Next);
+				graph.Break();
 
 			yield break;
 		}

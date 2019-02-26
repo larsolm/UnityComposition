@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Animation/Set Animation Parameter")]
 	[HelpURL(Composition.DocumentationUrl + "set-animation-parameter")]
-	public class SetAnimationParameter : InstructionGraphNode
+	public class SetAnimationParameter : InstructionGraphNode, IImmediate
 	{
 		private const string _animatorNotFoundWarning = "(WASAPANF) Unable to find animator {0}: the animator could not be found";
 
@@ -36,9 +36,6 @@ namespace PiRhoSoft.CompositionEngine
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Float)]
 		public float FloatValue;
 
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
-
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			if (InstructionStore.IsInput(Target))
@@ -52,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 			else
 				Debug.LogWarningFormat(this, _animatorNotFoundWarning, Target);
 
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 
 			yield break;
 		}

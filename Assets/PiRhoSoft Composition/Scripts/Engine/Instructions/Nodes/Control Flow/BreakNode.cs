@@ -5,17 +5,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Break", 22)]
 	[HelpURL(Composition.DocumentationUrl + "break-node")]
-	public class BreakNode : InstructionGraphNode
+	public class BreakNode : InstructionGraphNode, IImmediate
 	{
-		[Tooltip("The node to go to next")]
-		public InstructionGraphNode Next = null;
-
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
-
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			graph.BreakTo(Next);
+			graph.Break();
 			yield break;
 		}
 	}

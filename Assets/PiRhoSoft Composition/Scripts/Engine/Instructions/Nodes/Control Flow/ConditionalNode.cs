@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Conditional", 0)]
-	public class ConditionalNode : InstructionGraphNode
+	public class ConditionalNode : InstructionGraphNode, IImmediate
 	{
 		[Tooltip("The node to follow if Condition is true")]
 		public InstructionGraphNode OnTrue = null;
@@ -15,9 +15,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The expression to evaluate to determine which node to follow")]
 		public Expression Condition = new Expression();
-
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
@@ -29,9 +26,9 @@ namespace PiRhoSoft.CompositionEngine
 			var condition = Condition.Execute(variables, VariableType.Boolean).Boolean;
 
 			if (condition)
-				graph.GoTo(OnTrue);
+				graph.GoTo(OnTrue, variables.This, nameof(OnTrue));
 			else
-				graph.GoTo(OnFalse);
+				graph.GoTo(OnFalse, variables.This, nameof(OnFalse));
 
 			yield break;
 		}

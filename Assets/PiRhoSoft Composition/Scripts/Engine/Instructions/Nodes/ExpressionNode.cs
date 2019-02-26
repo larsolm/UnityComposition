@@ -6,16 +6,13 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("General/Expression")]
 	[HelpURL(Composition.DocumentationUrl + "run-expression")]
-	public class ExpressionNode : InstructionGraphNode
+	public class ExpressionNode : InstructionGraphNode, IImmediate
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The expression to execute")]
 		public Expression Expression = new Expression();
-
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
@@ -30,7 +27,7 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			Expression.Execute(variables);
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 			yield break;
 		}
 	}

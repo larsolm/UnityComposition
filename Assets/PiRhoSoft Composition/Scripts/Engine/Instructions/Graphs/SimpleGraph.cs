@@ -10,7 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run(InstructionStore variables)
 		{
-			yield return Run(variables, Process);
+			yield return Run(variables, Process, nameof(Process));
 		}
 	}
 }

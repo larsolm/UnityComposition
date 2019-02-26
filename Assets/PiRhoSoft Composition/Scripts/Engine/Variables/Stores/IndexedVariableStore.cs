@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			else if (name.StartsWith(ItemVariable))
 			{
-				var index = ParseIndex(name, ItemVariable.Length, name.Length - ItemVariable.Length);
+				var index = ParseIndex(name, ItemVariable.Length, name.Length);
 				return VariableValue.Create(variables.GetItem(index));
 			}
 
@@ -33,12 +33,12 @@ namespace PiRhoSoft.CompositionEngine
 			else return SetVariableResult.NotFound;
 		}
 
-		private static int ParseIndex(string s, int start, int end)
+		private static int ParseIndex(string s, int start, int length)
 		{
 			// this exists as a way to parse an integer without having to instantiate a substring first
 
 			var value = 0;
-			for (var i = start; i < end; i++)
+			for (var i = start; i < length; i++)
 				value = value * 10 + (s[i] - '0');
 
 			return value;

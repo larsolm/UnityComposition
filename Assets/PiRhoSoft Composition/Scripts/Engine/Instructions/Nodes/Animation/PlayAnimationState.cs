@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Animation/Play Animation State")]
 	[HelpURL(Composition.DocumentationUrl + "play-animation-state")]
-	public class PlayAnimationState : InstructionGraphNode
+	public class PlayAnimationState : InstructionGraphNode, IImmediate
 	{
 		private const string _stateNotFoundWarning = "(CAPASSNF) Unable to play animation state {0}: the state could not be found";
 		private const string _animatorNotFoundWarning = "(CAPASANF) Unable to find animator {0}: the animator could not be found";
@@ -29,9 +29,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The reference to the animation state to play")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Reference)]
 		public VariableReference StateReference = new VariableReference();
-
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
@@ -63,7 +60,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _animatorNotFoundWarning, Target);
 			}
 
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 
 			yield break;
 		}

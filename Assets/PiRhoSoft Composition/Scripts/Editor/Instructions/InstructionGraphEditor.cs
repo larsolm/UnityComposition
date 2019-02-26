@@ -102,7 +102,7 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				if (!assets.Contains(_graph.Nodes[i]))
 				{
-					Debug.LogFormat(this, "Syncing nodes for InstructionGraph {0}: removed a node that was not in the asset list", _graph.name);
+					Debug.LogWarningFormat(this, "Syncing nodes for InstructionGraph {0}: removed a node that was not in the asset list", _graph.name);
 					_graph.Nodes.RemoveAt(i--);
 					DestroyImmediate(_graph.Nodes[i], true);
 					EditorUtility.SetDirty(_graph);
@@ -114,7 +114,7 @@ namespace PiRhoSoft.CompositionEditor
 				if (asset is InstructionGraphNode node && !_graph.Nodes.Contains(node))
 				{
 					_graph.Nodes.Add(node);
-					Debug.LogFormat(this, "Syncing nodes for InstructionGraph {0}: added the node {1} that was an asset but was not contained in the list", _graph.name, node.Name);
+					Debug.LogWarningFormat(this, "Syncing nodes for InstructionGraph {0}: added the node {1} that was an asset but was not contained in the list", _graph.name, node.Name);
 					EditorUtility.SetDirty(_graph);
 				}
 			}

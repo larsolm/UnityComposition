@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run(InstructionStore variables)
 		{
 			foreach (var node in EntryPoints)
-				yield return Run(variables, node.Node);
+				yield return Run(variables, node.Node, node.Name);
 		}
 	}
 }

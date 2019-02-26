@@ -144,8 +144,6 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			public InstructionGraph Graph;
 
-			public override bool IsExecutionImmediate => true;
-			public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
 			public override Color GetNodeColor() => new Color(0.0f, 0.35f, 0.0f);
 			protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration) { yield break; }
 

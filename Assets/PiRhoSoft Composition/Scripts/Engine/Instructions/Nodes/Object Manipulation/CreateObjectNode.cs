@@ -1,13 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using PiRhoSoft.CompositionEngine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Object Manipulation/Create Object", 0)]
 	[HelpURL(Composition.DocumentationUrl + "create-object-node")]
-	public class CreateObjectNode : InstructionGraphNode
+	public class CreateObjectNode : InstructionGraphNode, IImmediate
 	{
 		private const string _objectNotFoundWarning = "(COMCOONF) Unable to create object {0}: the object could not be found";
 
@@ -25,9 +24,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The parent object to attach the object to (optional) - if set position will be in local space")]
 		public VariableReference Parent = new VariableReference();
-
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
@@ -49,7 +45,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _objectNotFoundWarning, Prefab);
 			}
 
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 
 			yield break;
 		}

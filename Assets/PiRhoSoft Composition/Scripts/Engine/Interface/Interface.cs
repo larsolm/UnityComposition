@@ -19,7 +19,17 @@ namespace PiRhoSoft.CompositionEngine
 		[DictionaryDisplay(EmptyText = "Add Interface Controls that can be shown by name")]
 		public InterfaceControlDictionary InterfaceControls = new InterfaceControlDictionary();
 
+		private Canvas _canvas;
+
 		private int _activeCount = 0;
+
+		void Awake()
+		{
+			_canvas = GetComponent<Canvas>();
+
+			if (_canvas.worldCamera)
+				_canvas.worldCamera.gameObject.SetActive(false);
+		}
 
 		void OnEnable()
 		{
@@ -34,7 +44,12 @@ namespace PiRhoSoft.CompositionEngine
 		public void Activate()
 		{
 			if (_activeCount == 0)
+			{
+				if (_canvas.worldCamera)
+					_canvas.worldCamera.gameObject.SetActive(true);
+
 				Setup();
+			}
 
 			InterfaceManager.Instance.MakeFocused(this);
 
@@ -45,8 +60,12 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_activeCount--;
 
+
 			if (_activeCount == 0)
 			{
+				if (_canvas.worldCamera)
+					_canvas.worldCamera.gameObject.SetActive(false);
+
 				InterfaceManager.Instance.RemoveFocus(this);
 				Teardown();
 			}

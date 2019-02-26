@@ -22,13 +22,12 @@ namespace PiRhoSoft.CompositionEngine
 		public List<InstructionInput> Inputs => _inputs;
 		public List<InstructionOutput> Outputs => _outputs;
 		public bool IsRunning => Instruction != null && Instruction.IsRunning;
-		public bool IsExecutionImmediate => Instruction == null || Instruction.IsExecutionImmediate;
 
-		public IEnumerator Execute(InstructionContext context, IVariableStore thisStore)
+		public IEnumerator Execute(InstructionContext context, object thisObject)
 		{
 			if (Instruction)
 			{
-				var store = new InstructionStore(context, thisStore);
+				var store = new InstructionStore(context, thisObject);
 
 				store.WriteInputs(_inputs);
 				yield return Instruction.Execute(store);

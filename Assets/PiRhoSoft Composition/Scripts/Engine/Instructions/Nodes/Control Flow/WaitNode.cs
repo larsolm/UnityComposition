@@ -15,13 +15,10 @@ namespace PiRhoSoft.CompositionEngine
 		[Minimum(0.0f)]
 		public float Time = 1.0f;
 
-		public override bool IsExecutionImmediate => false;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
-
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			yield return new WaitForSeconds(Time);
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 		}
 	}
 }

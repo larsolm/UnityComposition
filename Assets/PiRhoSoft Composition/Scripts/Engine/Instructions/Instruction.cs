@@ -37,7 +37,6 @@ namespace PiRhoSoft.CompositionEngine
 		public virtual void GetInputs(List<VariableDefinition> inputs) { }
 		public virtual void GetOutputs(List<VariableDefinition> outputs) { }
 
-		public abstract bool IsExecutionImmediate { get; }
 		protected abstract IEnumerator Run(InstructionStore variables);
 	}
 }

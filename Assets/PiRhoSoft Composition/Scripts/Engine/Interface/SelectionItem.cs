@@ -17,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 		public string Label;
 
 		[Tooltip("The variable representing the store to use for bindings")]
-		public VariableReference Item = new VariableReference();
+		public VariableReference Item = new VariableReference("this");
 
 		[Tooltip("The location to retrieve the object from")]
 		public ObjectSource Source;

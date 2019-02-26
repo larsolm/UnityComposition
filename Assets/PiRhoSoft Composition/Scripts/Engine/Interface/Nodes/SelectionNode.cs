@@ -31,9 +31,6 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Foldout, EmptyText = "Add items to create selection options")]
 		public SelectionNodeItemList Items = new SelectionNodeItemList();
 
-		public override bool IsExecutionImmediate => false;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
-
 		public override void GetConnections(NodeData data)
 		{
 			foreach (var item in Items)
@@ -92,9 +89,9 @@ namespace PiRhoSoft.CompositionEngine
 			Control.Deactivate();
 
 			if (selectedItem != null)
-				graph.GoTo(selectedItem.OnSelected);
+				graph.GoTo(selectedItem.OnSelected, selectedVariables, nameof(Items), selectedItem.Label);
 			else
-				graph.GoTo(OnCanceled);
+				graph.GoTo(OnCanceled, variables.This, nameof(OnCanceled));
 		}
 	}
 }

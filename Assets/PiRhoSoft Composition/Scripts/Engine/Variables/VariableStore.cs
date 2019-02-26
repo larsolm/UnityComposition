@@ -16,6 +16,12 @@ namespace PiRhoSoft.CompositionEngine
 		public List<Variable> Variables => _variables;
 		public Dictionary<string, int> Map => _map;
 
+		public void AddVariable(string name, VariableValue value)
+		{
+			_map.Add(name, _variables.Count);
+			_variables.Add(Variable.Create(name, value));
+		}
+
 		public virtual VariableValue GetVariable(string name)
 		{
 			return _map.TryGetValue(name, out int index) ? _variables[index].Value : VariableValue.Empty;
@@ -24,14 +30,9 @@ namespace PiRhoSoft.CompositionEngine
 		public virtual SetVariableResult SetVariable(string name, VariableValue value)
 		{
 			if (_map.TryGetValue(name, out int index))
-			{
 				_variables[index] = Variable.Create(name, value);
-			}
 			else
-			{
-				_map.Add(name, _variables.Count);
-				_variables.Add(Variable.Create(name, value));
-			}
+				AddVariable(name, value);
 
 			return SetVariableResult.Success;
 		}

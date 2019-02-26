@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("General/Instruction")]
 	[HelpURL(Composition.DocumentationUrl + "instruction-node")]
-	public class InstructionNode : InstructionGraphNode
+	public class InstructionNode : InstructionGraphNode, IIsImmediate
 	{
 		[Tooltip("The instruction to run when this node is reached")]
 		public InstructionCaller Instruction = new InstructionCaller();
@@ -16,8 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Whether to wait for the instruction to finish before moving to Next")]
 		public bool WaitForCompletion = false;
 
-		public override bool IsExecutionImmediate => !WaitForCompletion || Instruction.IsExecutionImmediate;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
+		public bool IsExecutionImmediate => !WaitForCompletion || CompositionManager.Instance.IsImmediate(Instruction);
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
@@ -26,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 			else
 				CompositionManager.Instance.RunInstruction(Instruction, variables.Context, variables.This);
 
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 		}
 	}
 }

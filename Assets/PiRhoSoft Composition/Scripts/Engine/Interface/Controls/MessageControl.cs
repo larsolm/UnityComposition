@@ -65,8 +65,18 @@ namespace PiRhoSoft.CompositionEngine
 			SetInteraction(MessageControlDisplay.None, interaction, isLast);
 		}
 
+		protected override void Setup()
+		{
+			SetInteraction(MessageControlDisplay.None, MessageInteractionType.DontWait, false);
+
+			if (DisplayText != null)
+				DisplayText.text = "";
+		}
+
 		protected override void Teardown()
 		{
+			SetInteraction(MessageControlDisplay.None, MessageInteractionType.DontWait, false);
+
 			if (DisplayText != null)
 				DisplayText.text = "";
 		}

@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Iterate", 21)]
 	[HelpURL(Composition.DocumentationUrl + "iterate-node")]
-	public class IterateNode : InstructionGraphNode
+	public class IterateNode : InstructionGraphNode, IImmediate, ILoopNode
 	{
 		private const string _invalidStoreWarning = "(CCFINIS) Unable to iterate objects for {0}: the given variables must be an IIndexedVariableStore";
 
@@ -15,8 +15,10 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to when the iteration is finished")]
 		public InstructionGraphNode Next = null;
 
-		public override bool IsExecutionImmediate => true;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Loop;
+		public (InstructionGraphNode Node, string Name) GetBreakNode()
+		{
+			return (Next, nameof(Next));
+		}
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
@@ -25,7 +27,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (Loop != null)
 				{
 					var item = store.GetItem(iteration);
-					graph.GoTo(Loop, item);
+					graph.GoTo(Loop, item, nameof(Loop));
 				}
 			}
 			else
@@ -33,8 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogFormat(this, _invalidStoreWarning, name);
 			}
 
-			graph.BreakTo(Next);
-
+			graph.Break();
 			yield break;
 		}
 	}

@@ -21,17 +21,9 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "mockup")]
 	public class MockupNode : InstructionGraphNode
 	{
-		[Tooltip("The type of node to emulate")]
-		[SerializeField]
-		[EnumButtons]
-		private InstructionGraphExecutionMode _executionMode = InstructionGraphExecutionMode.Normal;
-
 		[Tooltip("The connections from this node")]
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline)]
 		public MockupConnectionList Connections = new MockupConnectionList();
-
-		public override bool IsExecutionImmediate => false;
-		public override InstructionGraphExecutionMode ExecutionMode => _executionMode;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

@@ -22,11 +22,13 @@ namespace PiRhoSoft.CompositionEngine
 		}
 	}
 
-	public enum InstructionGraphExecutionMode
+	public interface ISequenceNode
 	{
-		Normal,
-		Sequence,
-		Loop
+	}
+
+	public interface ILoopNode
+	{
+		(InstructionGraphNode Node, string Name) GetBreakNode();
 	}
 
 	public abstract class InstructionGraphNode : ScriptableObject
@@ -43,8 +45,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The variable to use as input for operations on this node")]
 		public VariableReference This = new VariableReference("this");
 
-		public abstract bool IsExecutionImmediate { get; }
-		public abstract InstructionGraphExecutionMode ExecutionMode { get; }
 		public virtual void GetInputs(List<VariableDefinition> inputs) { }
 		public virtual void GetOutputs(List<VariableDefinition> outputs) { }
 		protected abstract IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration);
@@ -64,22 +64,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Editor Interface
 
-		protected static Color NormalNodeColor = new Color(0.31f, 0.32f, 0.37f, 1.0f);
-		protected static Color SequenceNodeColor = new Color(0.0f, 0.0f, 0.35f, 1.0f);
-		protected static Color LoopNodeColor = new Color(0.0f, 0.35f, 0.35f, 1.0f);
-
 		[HideInInspector]
 		public Vector2 GraphPosition;
 
 		public virtual Color GetNodeColor()
 		{
-			switch (ExecutionMode)
-			{
-				case InstructionGraphExecutionMode.Normal: return NormalNodeColor;
-				case InstructionGraphExecutionMode.Sequence: return SequenceNodeColor;
-				case InstructionGraphExecutionMode.Loop: return LoopNodeColor;
-				default: return NormalNodeColor;
-			}
+			return new Color(0.31f, 0.32f, 0.37f, 1.0f);
 		}
 
 		public class NodeData
@@ -222,9 +212,9 @@ namespace PiRhoSoft.CompositionEngine
 				To = to;
 
 				if (index >= 0)
-					Name = "Item " + index;
+					Name = string.Format("{0} {1}", field, index);
 				else if (!string.IsNullOrEmpty(key))
-					Name = key;
+					Name = string.Format("{0} {1}", field, key);
 				else
 					Name = field;
 			}

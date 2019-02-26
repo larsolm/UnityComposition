@@ -23,9 +23,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The message to display when this node is traversed")]
 		public Message Message = new Message();
 
-		public override bool IsExecutionImmediate => false;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
-
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			Message.GetInputs(inputs);
@@ -43,7 +40,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			Control.Deactivate();
 
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 		}
 	}
 }

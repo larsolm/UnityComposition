@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 		public class ParameterStore : IVariableStore
 		{
 			public const string ParameterName = "P";
-			public List<VariableValue> Parameters = new List<VariableValue>(10);
+			public List<VariableValue> Parameters = new List<VariableValue>(5);
 
 			public VariableValue GetVariable(string name)
 			{
@@ -30,7 +30,29 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public static ParameterStore Store = new ParameterStore();
+		public const int InitialStoreCount = 5;
+
+		public static Stack<ParameterStore> Stores = new Stack<ParameterStore>(InitialStoreCount);
+
+		static ExpressionCommand()
+		{
+			for (var i = 0; i < InitialStoreCount; i++)
+				Stores.Push(new ParameterStore());
+		}
+
+		public static ParameterStore ReserveStore()
+		{
+			if (Stores.Count == 0)
+				Stores.Push(new ParameterStore());
+
+			return Stores.Pop();
+		}
+
+		public static void ReleaseStore(ParameterStore store)
+		{
+			Stores.Push(store);
+			store.Parameters.Clear();
+		}
 
 		public Expression Expression { get; private set; }
 
@@ -38,15 +60,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
-			Store.Parameters.Clear();
+			var store = ReserveStore();
 
 			foreach (var parameter in parameters)
 			{
 				var value = parameter.Evaluate(variables);
-				Store.Parameters.Add(value);
+				store.Parameters.Add(value);
 			}
 
-			return Expression.Evaluate(Store);
+			var result = Expression.Evaluate(store);
+			ReleaseStore(store);
+			return result;
 		}
 	}
 }

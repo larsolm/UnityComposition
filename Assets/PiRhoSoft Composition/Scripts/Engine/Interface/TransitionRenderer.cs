@@ -8,19 +8,9 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("Composition/Transition Renderer")]
 	public class TransitionRenderer : MonoBehaviour
 	{
-		private const string _missingManagerWarning = "(CTRMM) failed to add TransitionRenderer: a TransitionManager has not been created";
-
 		void OnEnable()
 		{
-			if (TransitionManager.Exists)
-			{
-				TransitionManager.Instance.AddRenderer(this);
-			}
-			else
-			{
-				Debug.LogWarning(_missingManagerWarning, this);
-				enabled = false;
-			}
+			TransitionManager.Instance.AddRenderer(this);
 		}
 
 		void OnDisable()

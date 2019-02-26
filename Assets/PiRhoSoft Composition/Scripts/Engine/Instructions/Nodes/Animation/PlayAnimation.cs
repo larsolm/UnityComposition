@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Animation/Play Animation")]
 	[HelpURL(Composition.DocumentationUrl + "play-animation")]
-	public class PlayAnimation : InstructionGraphNode
+	public class PlayAnimation : InstructionGraphNode, IIsImmediate
 	{
 		private const string _animationNotFoundWarning = "(CAPANF) Unable to play animation on {0}: animation could not be found";
 		private const string _noAnimatorWarning = "(CAPANA) Unable to find animator {0}: the animator could not be found";
@@ -34,8 +34,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Whether to wait for the animation to finish")]
 		public bool WaitForCompletion = false;
 
-		public override bool IsExecutionImmediate => !WaitForCompletion;
-		public override InstructionGraphExecutionMode ExecutionMode => InstructionGraphExecutionMode.Normal;
+		public bool IsExecutionImmediate => !WaitForCompletion;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
@@ -67,7 +66,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _noAnimatorWarning, Target);
 			}
 
-			graph.GoTo(Next);
+			graph.GoTo(Next, variables.This, nameof(Next));
 		}
 
 		private IEnumerator Play(AnimationPlayer player, AnimationClip animation)

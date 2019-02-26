@@ -157,12 +157,12 @@ namespace PiRhoSoft.CompositionEngine
 					}
 					else if (item.Source == SelectionItem.ObjectSource.Scene)
 					{
-						var obj = transform.Find(name);
+						var obj = transform.Find(item.Label);
 
 						if (obj == null)
-							Debug.LogErrorFormat(this, null, _missingChildError, item.Label, name);
+							Debug.LogErrorFormat(this, _missingChildError, item.Label, name);
 						else
-							AddItem(item, null, item, store, index++);
+							AddItem(item, obj.gameObject, item, store, index++);
 					}
 				}
 			}
@@ -215,7 +215,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (selector)
 			{
 				selector.Selection = this;
-				selector.Index = _items.Count;
+				selector.Index = index;
 			}
 
 			_items.Add(new MenuItem
@@ -264,6 +264,7 @@ namespace PiRhoSoft.CompositionEngine
 		public void MoveFocus(int index)
 		{
 			var item = index >= 0 && index < _items.Count ? _items[index] : null;
+
 			if (item != null)
 				FocusItem(item);
 		}
@@ -551,7 +552,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var itemX = (item.Object.transform as RectTransform).anchoredPosition.x;
 
-				if (itemX < x)
+				if (itemX <= x)
 					break;
 
 				x = itemX;

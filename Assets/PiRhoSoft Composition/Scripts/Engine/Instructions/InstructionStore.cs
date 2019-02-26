@@ -68,7 +68,7 @@ namespace PiRhoSoft.CompositionEngine
 		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
 		public InstructionContext Context { get; private set; }
-		public IVariableStore This { get; private set; }
+		public object This { get; private set; }
 		public IVariableStore Locals { get; } = new VariableStore();
 
 		private VariableStore _inputStore = new VariableStore();
@@ -78,10 +78,10 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName.ToLowerInvariant() == InputStoreName;
 		public static bool IsOutput(VariableReference variable) => variable.IsAssigned && variable.StoreName.ToLowerInvariant() == OutputStoreName;
 
-		public InstructionStore(InstructionContext context, IVariableStore thisStore)
+		public InstructionStore(InstructionContext context, object thisObject)
 		{
 			SetContext(context);
-			ChangeThis(thisStore);
+			ChangeThis(thisObject);
 		}
 
 		public void SetContext(InstructionContext context)
@@ -97,9 +97,9 @@ namespace PiRhoSoft.CompositionEngine
 			Context = context;
 		}
 
-		public void ChangeThis(IVariableStore store)
+		public void ChangeThis(object thisObject)
 		{
-			This = store;
+			This = thisObject;
 		}
 
 		public void WriteInputs(List<InstructionInput> inputs)

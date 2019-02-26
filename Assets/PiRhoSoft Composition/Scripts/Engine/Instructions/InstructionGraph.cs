@@ -17,21 +17,32 @@ namespace PiRhoSoft.CompositionEngine
 		private Stack<NodeFrame> _callstack = new Stack<NodeFrame>();
 		private InstructionStore _rootStore;
 		private NodeFrame _nextNode;
+		private bool _shouldBreak = false;
 
 		public InstructionGraphNodeList Nodes => _nodes; // _nodes is private with a getter so it isn't found by node data reflection
 
-		public override bool IsExecutionImmediate
+		public bool IsExecutionImmediate
 		{
 			get
 			{
 				foreach (var node in Nodes)
 				{
-					if (!node.IsExecutionImmediate)
+					if (!IsImmediate(node))
 						return false;
 				}
 
 				return true;
 			}
+		}
+
+		public bool IsImmediate(InstructionGraphNode node)
+		{
+			if (node is IImmediate)
+				return true;
+			else if (node is IIsImmediate isImmediate)
+				return isImmediate.IsExecutionImmediate;
+			else
+				return false;
 		}
 
 		public override void GetInputs(List<VariableDefinition> inputs)
@@ -51,64 +62,86 @@ namespace PiRhoSoft.CompositionEngine
 				node.GetOutputs(outputs);
 		}
 
-		public void GoTo(InstructionGraphNode node)
+		public void GoTo(InstructionGraphNode node, object thisObject, string name)
 		{
-			GoTo(node, _rootStore.This);
-		}
+			switch (node)
+			{
+				case ILoopNode loop: _nextNode.Type = NodeType.Loop; break;
+				case ISequenceNode sequence: _nextNode.Type = NodeType.Sequence; break;
+				default: _nextNode.Type = NodeType.Normal; break;
+			}
 
-		public void GoTo(InstructionGraphNode node, IVariableStore thisStore)
-		{
-			_nextNode.Node = node;
-			_nextNode.Caller = thisStore;
 			_nextNode.Iteration = 0;
-			_nextNode.Break = false;
+			_nextNode.Node = node;
+			_nextNode.This = thisObject;
+			_nextNode.Source = name;
 		}
 
-		public void BreakTo(InstructionGraphNode node)
+		public void GoTo(InstructionGraphNode node, object thisObject, string name, int index)
 		{
-			Break();
-			GoTo(node);
+			var source = string.Format("{0} {1}", name, index);
+			GoTo(node, thisObject, source);
 		}
 
-		private void Break()
+		public void GoTo(InstructionGraphNode node, object thisObject, string name, string key)
 		{
-			// can't just peek - NodeFrame is a struct
-			var caller = _callstack.Pop();
-
-			if (caller.Node.ExecutionMode == InstructionGraphExecutionMode.Loop)
-				caller.Break = true;
-			else
-				Break();
-
-			_callstack.Push(caller);
+			var source = string.Format("{0} {1}", name, key);
+			GoTo(node, thisObject, source);
 		}
 
-		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root)
+		public void Break()
+		{
+			_shouldBreak = true;
+		}
+
+		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root, string source)
 		{
 			_rootStore = variables;
 
-			GoTo(root);
+			GoTo(root, _rootStore.This, source);
 
 			while (_callstack.Count > 0 || _nextNode.Node != null)
 			{
-				var node = SetupNode(_nextNode);
+				var frame = SetupFrame(_nextNode);
 				_nextNode.Node = null;
 
-				if (node.Node != null)
+				if (frame.Node != null)
 				{
-					_nextNode.Node = null;
-					_callstack.Push(node);
-					_rootStore.ChangeThis(node.Caller);
+					_callstack.Push(frame);
+					_rootStore.ChangeThis(frame.This);
 
-					if (node.Node.IsExecutionImmediate)
-						Process(node.Node, node.Node.Run(this, _rootStore, node.Iteration));
+					if (IsImmediate(frame.Node))
+						Process(frame.Node, frame.Node.Run(this, _rootStore, frame.Iteration));
 					else
-						yield return node.Node.Run(this, _rootStore, node.Iteration);
+						yield return frame.Node.Run(this, _rootStore, frame.Iteration);
+				}
+
+				if (_shouldBreak)
+				{
+					ProcessBreak();
+					_shouldBreak = false;
 				}
 			}
 		}
 
-		private NodeFrame SetupNode(NodeFrame node)
+		private void ProcessBreak()
+		{
+			while (_callstack.Count > 0)
+			{
+				var loop = _callstack.Pop();
+
+				if (loop.Type == NodeType.Loop)
+				{
+					var target = (loop.Node as ILoopNode).GetBreakNode();
+
+					_callstack.Push(new NodeFrame { Type = NodeType.Normal, Node = loop.Node, Source = loop.Source, This = loop.This, Iteration = loop.Iteration });
+					GoTo(target.Node, loop.This, target.Name);
+					break;
+				}
+			}
+		}
+
+		private NodeFrame SetupFrame(NodeFrame node)
 		{
 			if (node.Node == null)
 			{
@@ -118,8 +151,8 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var frame = _callstack.Pop();
 
-					if (frame.Node.ExecutionMode != InstructionGraphExecutionMode.Normal && !frame.Break)
-						return new NodeFrame { Node = frame.Node, Caller = frame.Caller, Iteration = frame.Iteration + 1, Break = false };
+					if (frame.Type != NodeType.Normal)
+						return new NodeFrame { Type = frame.Type, Iteration = frame.Iteration + 1, Node = frame.Node, Source = frame.Source, This = frame.This };
 				}
 			}
 			else if (IsNodeInStack(node.Node))
@@ -133,7 +166,7 @@ namespace PiRhoSoft.CompositionEngine
 					var frame = _callstack.Pop();
 
 					if (frame.Node == node.Node)
-						return new NodeFrame { Node = frame.Node, Caller = frame.Caller, Iteration = frame.Iteration + 1, Break = false };
+						return new NodeFrame { Type = frame.Type, Iteration = frame.Iteration + 1, Node = frame.Node, Source = frame.Source, This = frame.This };
 				}
 			}
 
@@ -153,12 +186,20 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		private enum NodeType
+		{
+			Normal,
+			Sequence,
+			Loop
+		}
+
 		private struct NodeFrame
 		{
-			public InstructionGraphNode Node;
-			public IVariableStore Caller;
+			public NodeType Type;
 			public int Iteration;
-			public bool Break;
+			public InstructionGraphNode Node;
+			public object This;
+			public string Source;
 		}
 
 		private bool IsNodeInStack(InstructionGraphNode node)
