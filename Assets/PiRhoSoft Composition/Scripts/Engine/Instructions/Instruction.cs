@@ -15,9 +15,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool IsRunning { get; private set; }
 
-		void OnEnable()
+		protected virtual void OnEnable()
 		{
 			IsRunning = false; // in case the editor exits play mode while the instruction is running
+		}
+
+		protected virtual void OnDisable()
+		{
+			IsRunning = false; // not really necessary but might as well
 		}
 
 		public IEnumerator Execute(InstructionStore variables)

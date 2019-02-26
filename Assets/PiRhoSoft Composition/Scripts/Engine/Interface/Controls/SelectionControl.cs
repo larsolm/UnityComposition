@@ -1,10 +1,17 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.UtilityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace PiRhoSoft.CompositionEngine
 {
+	public enum PrimaryAxis
+	{
+		Column,
+		Row
+	}
+
 	[HelpURL(Composition.DocumentationUrl + "selection-control")]
 	[AddComponentMenu("Composition/Interface/Selection Control")]
 	public class SelectionControl : InterfaceControl
@@ -21,6 +28,20 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a row")]
 		public bool HorizontalWrapping = false;
 
+		[Tooltip("Specifies the axis in which the items in the selection are ordered")]
+		public PrimaryAxis PrimaryAxis = PrimaryAxis.Column;
+
+		[Tooltip("How many columns are in this selection")]
+		[ConditionalDisplaySelf(nameof(PrimaryAxis), EnumValue = (int)PrimaryAxis.Column)]
+		[Minimum(1)]
+		public int ColumnCount = 1;
+
+		[Tooltip("How many rows are in this selection")]
+		[ConditionalDisplaySelf(nameof(PrimaryAxis), EnumValue = (int)PrimaryAxis.Row)]
+		[Minimum(1)]
+		public int RowCount = 1;
+
+
 		public SelectionItem FocusedItem => _focusedItem?.Item;
 		public IVariableStore FocusedVariables => _focusedItem?.Variables;
 
@@ -29,8 +50,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected int _columnCount;
 		protected int _rowCount;
-		protected bool _columnMajor;
-
 		protected int _columnIndex = 0;
 		protected int _rowIndex = 0;
 
@@ -237,9 +256,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected MenuItem GetItem(int column, int row)
 		{
-			var mainIndex = _columnMajor ? column : row;
-			var crossIndex = _columnMajor ? row : column;
-			var crossCount = _columnMajor ? _rowCount : _columnCount;
+			var mainIndex = PrimaryAxis == PrimaryAxis.Column ? column : row;
+			var crossIndex = PrimaryAxis == PrimaryAxis.Column ? row : column;
+			var crossCount = PrimaryAxis == PrimaryAxis.Column ? _rowCount : _columnCount;
 
 			var index = mainIndex * crossCount + crossIndex;
 			return index >= 0 && index < _items.Count ? _items[index] : null;
@@ -344,10 +363,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool SetFocusToValidLocation(int startingColumn, int startingRow)
 		{
-			if (_columnMajor)
+			if (PrimaryAxis == PrimaryAxis.Column)
 				return SetFocusToValidRow(startingColumn, startingRow);
-			else
+			else if (PrimaryAxis == PrimaryAxis.Row)
 				return SetFocusToValidColumn(startingColumn, startingRow);
+			else
+				return false;
 		}
 
 		protected void MoveFocus(int change, bool wrap, int count, int depth, ref int index, ref int column, ref int row)
@@ -473,50 +494,16 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void DetermineLayout()
 		{
-			var columns = 0;
-			var rows = 0;
-
-			Canvas.ForceUpdateCanvases();
-
-			if (GetComponent<VerticalLayoutGroup>() != null)
+			if (PrimaryAxis == PrimaryAxis.Column)
 			{
-				columns = 1;
-				_columnMajor = true;
+				_columnCount = ColumnCount;
+				_rowCount = GetCrossSize(_columnCount);
 			}
-			else if (GetComponent<HorizontalLayoutGroup>() != null)
+			else if (PrimaryAxis == PrimaryAxis.Row)
 			{
-				rows = 1;
-				_columnMajor = false;
+				_rowCount = RowCount;
+				_columnCount = GetCrossSize(_rowCount);
 			}
-			else
-			{
-				var grid = GetComponent<GridLayoutGroup>();
-				if (grid != null)
-				{
-					_columnMajor = grid.startAxis == GridLayoutGroup.Axis.Vertical;
-
-					switch (grid.constraint)
-					{
-						case GridLayoutGroup.Constraint.FixedColumnCount: columns = grid.constraintCount; break;
-						case GridLayoutGroup.Constraint.FixedRowCount: rows = grid.constraintCount; break;
-					}
-				}
-				else
-				{
-					_columnMajor = DetermineAxis();
-				}
-			}
-
-			if (rows == 0 && columns == 0)
-			{
-				if (_columnMajor)
-					rows = DetermineHeight();
-				else
-					columns = DetermineWidth();
-			}
-
-			_columnCount = columns > 0 ? columns : GetCrossSize(rows);
-			_rowCount = rows > 0 ? rows : GetCrossSize(columns);
 		}
 
 		private int GetCrossSize(int count)
@@ -524,65 +511,9 @@ namespace PiRhoSoft.CompositionEngine
 			return Mathf.CeilToInt(_items.Count / (float)count);
 		}
 
-		private int DetermineHeight()
-		{
-			var height = 0;
-			var y = float.MaxValue;
-
-			foreach (var item in _items)
-			{
-				var itemY = (item.Object.transform as RectTransform).anchoredPosition.y;
-
-				if (itemY > y)
-					break;
-
-				y = itemY;
-				height++;
-			}
-
-			return height;
-		}
-
-		private int DetermineWidth()
-		{
-			var width = 0;
-			var x = float.MinValue;
-
-			foreach (var item in _items)
-			{
-				var itemX = (item.Object.transform as RectTransform).anchoredPosition.x;
-
-				if (itemX <= x)
-					break;
-
-				x = itemX;
-				width++;
-			}
-
-			return width;
-		}
-
-		private bool DetermineAxis()
-		{
-			if (_items.Count > 1)
-			{
-				var item0 = _items[0].Object.transform as RectTransform;
-				var item1 = _items[1].Object.transform as RectTransform;
-
-				var x = Mathf.Abs(item0.anchoredPosition.x - item1.anchoredPosition.x);
-				var y = Mathf.Abs(item0.anchoredPosition.y - item1.anchoredPosition.y);
-
-				return y > x;
-			}
-			else
-			{
-				return true;
-			}
-		}
-
 		private int GetColumnCount(int row)
 		{
-			if (_columnMajor)
+			if (PrimaryAxis == PrimaryAxis.Row)
 			{
 				if (row < GetRowCount(_columnCount - 1))
 					return _columnCount;
@@ -600,7 +531,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private int GetRowCount(int column)
 		{
-			if (_columnMajor)
+			if (PrimaryAxis == PrimaryAxis.Column)
 			{
 				if (column == _columnCount - 1)
 					return _rowCount - (_rowCount * _columnCount - _items.Count);

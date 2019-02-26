@@ -33,10 +33,10 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class InstructionGraphNode : ScriptableObject
 	{
-		private const string _missingVariableWarning = "(CCNMV) unable to find variable {0} for instruction graph node";
-		private const string _missingKeyError = "(CCNMK) failed to set target: unable to find key {0}";
-		private const string _missingIndexError = "(CCNMI) failed to set target: index {0} is out of range";
-		private const string _missingFieldError = "(CCNMF) failed to set target: unable to find field {0}";
+		private const string _missingVariableWarning = "(CCNMV) unable to find variable {0} for instruction graph node {1}";
+		private const string _missingKeyError = "(CCNMK) failed to set target: unable to find key {0} for instruction graph node {1}";
+		private const string _missingIndexError = "(CCNMI) failed to set target: index {0} is out of range for instruction graph node {1}";
+		private const string _missingFieldError = "(CCNMF) failed to set target: unable to find field {0} for instruction graph node {1}";
 
 		[Tooltip("The name of the node")]
 		[AssetName]
@@ -56,7 +56,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (This.GetValue(variables).TryGetStore(out var store))
 					variables.ChangeThis(store);
 				else
-					Debug.LogWarningFormat(_missingVariableWarning, This);
+					Debug.LogWarningFormat(_missingVariableWarning, This, name);
 			}
 
 			yield return Run_(graph, variables, executionIndex);
@@ -249,7 +249,7 @@ namespace PiRhoSoft.CompositionEngine
 						if (dictionary.ContainsKey(FieldKey))
 							dictionary[FieldKey] = target;
 						else
-							Debug.LogErrorFormat(_missingKeyError, Field);
+							Debug.LogErrorFormat(_missingKeyError, Field, target.name);
 					}
 					else if (field.FieldType == typeof(InstructionGraphNodeList))
 					{
@@ -258,16 +258,16 @@ namespace PiRhoSoft.CompositionEngine
 						if (FieldIndex >= 0 && FieldIndex < list.Count)
 							list[FieldIndex] = target;
 						else
-							Debug.LogErrorFormat(_missingIndexError, Field);
+							Debug.LogErrorFormat(_missingIndexError, Field, Target.Node.name);
 					}
 					else
 					{
-						Debug.LogErrorFormat(_missingFieldError, Field);
+						Debug.LogErrorFormat(_missingFieldError, Field, Target.Node.name);
 					}
 				}
 				else
 				{
-					Debug.LogErrorFormat(_missingFieldError, Field);
+					Debug.LogErrorFormat(_missingFieldError, Field, Target.Node.name);
 				}
 			}
 		}

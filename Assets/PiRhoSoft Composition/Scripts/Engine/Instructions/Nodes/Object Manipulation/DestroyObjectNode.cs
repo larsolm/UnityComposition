@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Object Manipulation/Destroy Object", 1)]
 	[HelpURL(Composition.DocumentationUrl + "destroy-object-node")]
-	public class DestroyObjectNode : InstructionGraphNode, IImmediate
+	public class DestroyObjectNode : InstructionGraphNode
 	{
 		private const string _objectNotFoundWarning = "(COMDOONF) Unable to destroy object {0}: the object could not be found";
 

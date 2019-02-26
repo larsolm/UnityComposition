@@ -91,7 +91,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (context != null)
 			{
 				foreach (var store in context.Stores)
-					_contextStore.SetVariable(store.Key, VariableValue.Create(store.Value));
+					_contextStore.AddVariable(store.Key, VariableValue.Create(store.Value));
 			}
 
 			Context = context;
