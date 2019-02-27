@@ -23,6 +23,9 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly Base64Texture _gridTexture = new Base64Texture("iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xNzNun2MAAAKnSURBVGhD7ZnbbiJBDETzNwTCfbm/Av//S3uGKkXTETYbCS2zG5+HpNsu3F3tYWaUvH2kTCaT1Wq13W4ZgKMtSv26obETLYpTarlcRhogNZ1Od7vdbDZLZOPxeL1eX6/XMlAGvkCqDPSgRBkwipcBUwZ6KPUyA4gS0LHeZrNhAI62KEU50NiJFsUptVgsIg2QYn/4xEYie39/52Q7A/zKYUnOw5MYlgRPYihFozyJQcZxeHIPjhXN5XJ508IJ6MCTmD+XeZTyUMaxHg6HzoBbEkATh34JORBAiaEb6L7SMUjRUU4fc7RFqZfdhRwIoEQZMIqXAVMGeihVBgyp7xlAlICO9epB1qH48w2o9QnUoqGexCADT2Io9VCGSWT89PweHNZ+v+/ehRwIQMd6lLud79rRFqVu+99q7ESL4tpZpIFP2ef4Lhy/DbglATSxvgNG8ecbQJ2AFB3l9DFHW5RSZzV2okVxSj35NupAACXKgFG8DJgy0EOpMmBIfc8AogR0rFfPgQ7Fn9uB1/xh66FMGvD8HnTyeDx2BjiPBNrNufIBBuBoi1JU1OUBTrQoTikKRhpQit3T+UQ2n88p9V+8zOmSikA69LuQAwGUKANG8TJgykAPpcqAIfXDDCBKQMd6g36QoUugljpws/3haItS6oDGTrQorg5EGiDF2dMBXhYSGR5YrnuVQPovwkH4ZQ67OVwYqD2JUQc8iaEULfUkgLNni1xpnt+DJrgDuqQiuAqH/h1AnYB06HchBwIoUQaM4mXAlIEeSpUBQ+qHGWCUwPOC5w47YwCOtiiFT9DYiRbFKcWDNtIAKfaNT3aZyEajEQfRGcBHAnviMHjr0P4cbVFqf0NjJ1oUpxSbizSg1Ol0wmoiY/f+Jx8mchCBJzF/X4bgfD7/Bp0ChIMH9TUUAAAAAElFTkSuQmCC");
 		private static readonly Base64Texture _windowIcon = new Base64Texture("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wEOBR4Wp+XVagAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAATdJREFUOE+lkUtuglAYhWnnfQwITUdEQF6CPFRimBqcdKCzdl3GCZg0cS8O3IeJ2NA90HNSBsqlsYkkPx+H++VcbpDqur5pfm+SdJem6UOSJI/Xhh79i4LRaPQ0Ho8PmNNkMqnAsqGQMQf6FwVBEDzj5ck0zfcwDD/7/f4badv2x3nmOj36QkEcx5XneVs878FNQyHToy8URFFUYsdsOByuDcOYksjzVs7odRZg+AU5xJ3v+ysSuWjlnF5nAYQSZ1wOBoMCnDUUMr3OAuxSOY6zhbgHNw2FTE8oUFWVBWWv18sgrZGnJM4+P89cp0dfKMD5+AW567o7cNWwaOWcXmcBFktd1xeWZRWaps1I5GUrL+j9VXDEb/oCv8FTw658FApw3SuK8iLL8uu1oUf/ouCW6Xz5/6mlH0LCqCZdcm2YAAAAAElFTkSuQmCC");
 
+		private static readonly string _pauseIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAGVJREFUOE+l0bERwCAMQ1EvxACswWhZ2LHuKKSLKByKV+gfrojMvGZjl41dnzDnHOXZxqkxGVCPVsltnRqTAe7ANSYD3IFrTAa4A9eYDHAHrjEZ4A5cYzKgHt1/8R82dtnYERHxAqpHVWhCcdFJAAAAAElFTkSuQmCC";
+		private static readonly string _stopIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAE9JREFUOE/t0bENACAIBMBfiAFYg9FcGKEUiBFtLa7gw9MAVX1Whl1l2JUCZiYzNih2lsHZkhjdkNhZBudLoRT9I9nRkfcX3yjDrjLsAIAJNpdTpphdxWYAAAAASUVORK5CYII=";
+
 		private static GenericMenu _viewMenu;
 		private static GenericMenu _nodeMenu;
 		private static GenericMenu _contextMenu;
@@ -33,6 +36,11 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly IconButton _outputButton = new IconButton("sv_icon_dot0_sml", "Click and drag to make a connection from this output");
 		private static readonly IconButton _inputButton = new IconButton("sv_icon_dot0_sml", "Drag an output to here to make a connection");
 		private static readonly IconButton _removeButton = new IconButton("d_Toolbar Minus", "Remove this node");
+		private static readonly IconButton _playButton = new IconButton("Animation.Play", "Resume graph execution");
+		private static readonly Base64Button _pauseButton = new Base64Button(_pauseIcon, "Pause graph execution before running the next node");
+		private static readonly IconButton _stepButton = new IconButton("Animation.NextKey", "Run the next node then pause again");
+		private static readonly Base64Button _stopButton = new Base64Button(_stopIcon, "Halt execution of the current branch of the graph and continue with the next branch");
+		private static readonly IconButton _breakpointButton = new IconButton("Animation.Record", "Toggle this node as a breakpoint");
 
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
@@ -46,11 +54,11 @@ namespace PiRhoSoft.CompositionEditor
 		private static IntPreference _snapAmount = new IntPreference("PiRhoSoft.Composition.InstructionGraphWindow", 1);
 
 		private static Color _hoveredColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
-		private static Color _selectedColor = new Color(0.96f, 0.95f, 0.2f, 0.89f);
+		private static Color _selectedColor = new Color(0.96f, 0.95f, 0.2f, 0.75f);
 		private static Color _nodeColor = new Color(0.23f, 0.24f, 0.29f, 1.0f);
 		private static Color _knobColor = new Color(0.49f, 0.73f, 1.0f, 1.0f);
 
-		private static Color _breakColor = new Color(0.5f, 0.2f, 0.2f, 1.0f);
+		private static Color _breakColor = new Color(1.0f, 0.2f, 0.2f, 1.0f);
 		private static Color _activeColor = new Color(0.0f, 0.9f, 0.0f, 1.0f);
 		private static Color _callstackColor = new Color(0.3f, 0.8f, 0.3f, 1.0f);
 
@@ -148,7 +156,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			public InstructionGraph Graph;
 
-			public override Color GetNodeColor() => new Color(0.0f, 0.35f, 0.0f);
+			public override Color GetNodeColor() => new Color(0.1f, 0.1f, 0.1f);
 			protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration) { yield break; }
 
 			public override void GetConnections(NodeData data) => Graph.GetConnections(data);
@@ -677,6 +685,39 @@ namespace PiRhoSoft.CompositionEditor
 				if (GUILayout.Button("View", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
 					_viewMenu.DropDown(new Rect(padding, _toolbarHeight, 0f, 0f));
 
+				var isEnabled = Application.isPlaying && _graph.IsRunning;
+				var isPlaying = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Running;
+				var isPaused = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Paused;
+				var isStepping = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Step;
+				var isStopping = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Stopped;
+
+				using (new EditorGUI.DisabledScope(!isEnabled))
+				{
+					var shouldPlay = GUILayout.Toggle(isPlaying, _playButton.Content, EditorStyles.toolbarButton);
+					var shouldPause = GUILayout.Toggle(isPaused, _pauseButton.Content, EditorStyles.toolbarButton);
+					var shouldStep = GUILayout.Toggle(isStepping, _stepButton.Content, EditorStyles.toolbarButton);
+					var shouldStop = GUILayout.Toggle(isStopping, _stopButton.Content, EditorStyles.toolbarButton);
+
+					if (isEnabled)
+					{
+						if (shouldPlay != isPlaying) _graph.DebugPlay();
+						if (shouldPause != isPaused) _graph.DebugPause();
+						if (shouldStep != isStepping) _graph.DebugStep();
+						if (shouldStop != isStopping) _graph.DebugStop();
+					}
+				}
+
+				var canBreak = _selectedNodes.Count == 1;
+				var hasBreak = canBreak && _selectedNodes[0].Node.IsBreakpoint;
+
+				using (new EditorGUI.DisabledScope(!canBreak))
+				{
+					hasBreak = GUILayout.Toggle(hasBreak, _breakpointButton.Content, EditorStyles.toolbarButton);
+
+					if (canBreak)
+						_selectedNodes[0].Node.IsBreakpoint = hasBreak;
+				}
+
 				GUILayout.FlexibleSpace();
 
 				if (GUILayout.Button("Settings", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
@@ -765,8 +806,11 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				if (_graph.IsInCallStack(node.Node) || node.Node == _start)
 				{
-					var color = _graph.IsExecuting(node.Node) ? _activeColor : _callstackColor;
-					Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, _callstackColor);
+					var executing = _graph.IsExecuting(node.Node);
+					var paused = _graph.DebugState == InstructionGraph.PlaybackState.Paused;
+
+					var color = executing ? (paused ? _breakColor : _activeColor) : _callstackColor;
+					Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, color);
 				}
 			}
 
@@ -827,25 +871,29 @@ namespace PiRhoSoft.CompositionEditor
 			var start = outputBounds.center;
 			var end = inputBounds.center;
 
-			var color = _knobColor;
+			var lineColor = _knobColor;
+			var endColor = _knobColor;
 
 			if (Application.isPlaying && _graph.IsInCallStack(to.Node, from.Name))
-				color = _callstackColor;
+				lineColor = _callstackColor;
+
+			if (to.Node.IsBreakpoint)
+				endColor = _breakColor;
 
 			if (outputBounds.xMax > inputBounds.xMin)
 			{
 				var difference = (end.y - start.y) / 3;
 				var magnitude = 200.0f;
 
-				Handles.DrawBezier(start, end, start + new Vector2(magnitude, difference), end - new Vector2(magnitude, difference), color, null, 3);
+				Handles.DrawBezier(start, end, start + new Vector2(magnitude, difference), end - new Vector2(magnitude, difference), lineColor, null, 3);
 			}
 			else
 			{
-				HandleHelper.DrawBezier(start, end, color);
+				HandleHelper.DrawBezier(start, end, lineColor);
 			}
 
-			HandleHelper.DrawCircle(start, _knobRadius, color);
-			HandleHelper.DrawCircle(end, _knobRadius, color);
+			HandleHelper.DrawCircle(start, _knobRadius, lineColor);
+			HandleHelper.DrawCircle(end, _knobRadius, endColor);
 		}
 
 		#endregion
@@ -965,6 +1013,10 @@ namespace PiRhoSoft.CompositionEditor
 			if (_simulateDrag)
 			{
 				UpdateDrag(false);
+			}
+			else if (ViewportToWindow(Event.current.mousePosition).y < _toolbarHeight)
+			{
+				_mouseMoveState = MouseState.Hover;
 			}
 			else
 			{

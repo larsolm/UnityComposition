@@ -64,8 +64,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Editor Interface
 
-		[HideInInspector]
-		public Vector2 GraphPosition;
+		[HideInInspector] public Vector2 GraphPosition;
+		[HideInInspector] public bool IsBreakpoint = false;
 
 		public virtual Color GetNodeColor()
 		{

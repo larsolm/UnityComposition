@@ -96,11 +96,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root, string source)
 		{
-			_rootStore = variables;
+			StartRunning();
 
+			var rootThis = variables.This;
+			_rootStore = variables;
 			GoTo(root, _rootStore.This, source);
 
-			while (_callstack.Count > 0 || _nextNode.Node != null)
+			while (ShouldContinue())
 			{
 				var frame = SetupFrame(_nextNode);
 				_nextNode.Node = null;
@@ -110,10 +112,7 @@ namespace PiRhoSoft.CompositionEngine
 					_callstack.Push(frame);
 					_rootStore.ChangeThis(frame.This);
 
-					if (IsImmediate(frame.Node))
-						Process(frame.Node, frame.Node.Run(this, _rootStore, frame.Iteration));
-					else
-						yield return frame.Node.Run(this, _rootStore, frame.Iteration);
+					yield return ProcessNode(frame.Node, frame.Iteration);
 				}
 
 				if (_shouldBreak)
@@ -122,6 +121,9 @@ namespace PiRhoSoft.CompositionEngine
 					_shouldBreak = false;
 				}
 			}
+
+			_callstack.Clear();
+			variables.ChangeThis(rootThis);
 		}
 
 		private void ProcessBreak()
@@ -173,19 +175,6 @@ namespace PiRhoSoft.CompositionEngine
 			return node;
 		}
 
-		private void Process(InstructionGraphNode node, IEnumerator enumerator)
-		{
-			while (enumerator.MoveNext())
-			{
-				switch (enumerator.Current)
-				{
-					case null: break;
-					case IEnumerator child: Process(node, child); break;
-					default: Debug.LogErrorFormat(node, _processFailedError, node.Name); break;
-				}
-			}
-		}
-
 		private enum NodeType
 		{
 			Normal,
@@ -213,9 +202,91 @@ namespace PiRhoSoft.CompositionEngine
 			return false;
 		}
 
+		#region Playback Interface
+
+		private IEnumerator RunNode(InstructionGraphNode node, int iteration)
+		{
+			if (IsImmediate(node))
+				RunEnumerator(node, node.Run(this, _rootStore, iteration));
+			else
+				yield return node.Run(this, _rootStore, iteration);
+		}
+
+		private void RunEnumerator(InstructionGraphNode node, IEnumerator enumerator)
+		{
+			while (enumerator.MoveNext())
+			{
+				switch (enumerator.Current)
+				{
+					case null: break;
+					case IEnumerator child: RunEnumerator(node, child); break;
+					default: Debug.LogErrorFormat(node, _processFailedError, node.Name); break;
+				}
+			}
+		}
+
+#if UNITY_EDITOR
+
+		public void StartRunning()
+		{
+			DebugState = PlaybackState.Running;
+		}
+
+		public bool ShouldContinue()
+		{
+			return DebugState != PlaybackState.Stopped && (_callstack.Count > 0 || _nextNode.Node != null);
+		}
+
+		public IEnumerator ProcessNode(InstructionGraphNode node, int iteration)
+		{
+			if (node.IsBreakpoint && IsDebugBreakEnabled)
+				DebugState = PlaybackState.Paused;
+
+			while (DebugState == PlaybackState.Paused)
+				yield return null;
+
+			if (DebugState == PlaybackState.Stopped)
+				yield break;
+
+			yield return RunNode(node, iteration);
+
+			if (DebugState == PlaybackState.Step)
+				DebugState = PlaybackState.Paused;
+		}
+
+#else
+
+		public void StartRunning()
+		{
+		}
+
+		public bool IsRunning()
+		{
+			return _callstack.Count > 0 || _nextNode.Node != null;
+		}
+
+		public IEnumerator ProcessNode(InstructionGraphNode node, int iteration)
+		{
+			yield return RunNode(node, iteration);
+		}
+
+#endif
+
+		#endregion
+
 		#region Editor Interface
 
+		public enum PlaybackState
+		{
+			Running,
+			Paused,
+			Step,
+			Stopped
+		}
+
 		[HideInInspector] public Vector2 StartPosition;
+
+		public PlaybackState DebugState { get; private set; }
 
 		public virtual void GetConnections(InstructionGraphNode.NodeData data)
 		{
@@ -228,6 +299,38 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 #if UNITY_EDITOR
+
+		public static bool IsDebugBreakEnabled = true;
+		public static bool IsDebugLoggingEnabled = true;
+
+		public bool CanDebugPlay => IsRunning && DebugState == PlaybackState.Paused;
+		public bool CanDebugPause => IsRunning && DebugState == PlaybackState.Running;
+		public bool CanDebugStep => IsRunning && DebugState == PlaybackState.Paused;
+		public bool CanDebugStop => IsRunning && DebugState != PlaybackState.Stopped;
+
+		public void DebugPlay()
+		{
+			if (CanDebugPlay)
+				DebugState = PlaybackState.Running;
+		}
+
+		public void DebugPause()
+		{
+			if (CanDebugPause)
+				DebugState = PlaybackState.Paused;
+		}
+
+		public void DebugStep()
+		{
+			if (CanDebugStep)
+				DebugState = PlaybackState.Step;
+		}
+
+		public void DebugStop()
+		{
+			if (CanDebugStop)
+				DebugState = PlaybackState.Stopped;
+		}
 
 		public bool IsInCallStack(InstructionGraphNode node)
 		{
