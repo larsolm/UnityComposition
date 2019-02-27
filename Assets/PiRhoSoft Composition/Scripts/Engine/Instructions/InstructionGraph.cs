@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -174,7 +175,10 @@ namespace PiRhoSoft.CompositionEngine
 		private IEnumerator ProcessFrame(NodeFrame frame)
 		{
 			if (frame.Node.IsBreakpoint && IsDebugBreakEnabled)
+			{
 				DebugState = PlaybackState.Paused;
+				OnBreakpointHit?.Invoke(this, frame.Node);
+			}
 
 			if (DebugState == PlaybackState.Paused && IsDebugLoggingEnabled)
 				Debug.LogFormat(this, "Instruction Graph {0}: pausing at node '{1}'", name, frame.Node.Name);
@@ -312,6 +316,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static bool IsDebugBreakEnabled = true;
 		public static bool IsDebugLoggingEnabled = false;
+		public static Action<InstructionGraph, InstructionGraphNode> OnBreakpointHit;
 
 		public bool CanDebugPlay => IsRunning && DebugState == PlaybackState.Paused;
 		public bool CanDebugPause => IsRunning && DebugState == PlaybackState.Running;

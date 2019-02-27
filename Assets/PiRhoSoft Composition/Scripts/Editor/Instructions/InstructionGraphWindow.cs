@@ -12,13 +12,11 @@ using MenuItem = UnityEditor.MenuItem;
 
 namespace PiRhoSoft.CompositionEditor
 {
+	[InitializeOnLoad]
 	public class InstructionGraphWindow : ViewportWindow
 	{
 		// inspiration and parts of the implementation for this class have been adapted from the MIT licensed Unity
 		// Node Editor Base Extension: https://unitylist.com/p/tb/Unity-Node-Editor-Base
-
-		public static InstructionGraphWindow Instance => GetWindow<InstructionGraphWindow>("Instruction Graph", true);
-		public static InstructionGraphWindow OpenInstance { get; private set; }
 
 		private static readonly Base64Texture _gridTexture = new Base64Texture("iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xNzNun2MAAAKnSURBVGhD7ZnbbiJBDETzNwTCfbm/Av//S3uGKkXTETYbCS2zG5+HpNsu3F3tYWaUvH2kTCaT1Wq13W4ZgKMtSv26obETLYpTarlcRhogNZ1Od7vdbDZLZOPxeL1eX6/XMlAGvkCqDPSgRBkwipcBUwZ6KPUyA4gS0LHeZrNhAI62KEU50NiJFsUptVgsIg2QYn/4xEYie39/52Q7A/zKYUnOw5MYlgRPYihFozyJQcZxeHIPjhXN5XJ508IJ6MCTmD+XeZTyUMaxHg6HzoBbEkATh34JORBAiaEb6L7SMUjRUU4fc7RFqZfdhRwIoEQZMIqXAVMGeihVBgyp7xlAlICO9epB1qH48w2o9QnUoqGexCADT2Io9VCGSWT89PweHNZ+v+/ehRwIQMd6lLud79rRFqVu+99q7ESL4tpZpIFP2ef4Lhy/DbglATSxvgNG8ecbQJ2AFB3l9DFHW5RSZzV2okVxSj35NupAACXKgFG8DJgy0EOpMmBIfc8AogR0rFfPgQ7Fn9uB1/xh66FMGvD8HnTyeDx2BjiPBNrNufIBBuBoi1JU1OUBTrQoTikKRhpQit3T+UQ2n88p9V+8zOmSikA69LuQAwGUKANG8TJgykAPpcqAIfXDDCBKQMd6g36QoUugljpws/3haItS6oDGTrQorg5EGiDF2dMBXhYSGR5YrnuVQPovwkH4ZQ67OVwYqD2JUQc8iaEULfUkgLNni1xpnt+DJrgDuqQiuAqH/h1AnYB06HchBwIoUQaM4mXAlIEeSpUBQ+qHGWCUwPOC5w47YwCOtiiFT9DYiRbFKcWDNtIAKfaNT3aZyEajEQfRGcBHAnviMHjr0P4cbVFqf0NjJ1oUpxSbizSg1Ol0wmoiY/f+Jx8mchCBJzF/X4bgfD7/Bp0ChIMH9TUUAAAAAElFTkSuQmCC");
 		private static readonly Base64Texture _windowIcon = new Base64Texture("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wEOBR4Wp+XVagAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAATdJREFUOE+lkUtuglAYhWnnfQwITUdEQF6CPFRimBqcdKCzdl3GCZg0cS8O3IeJ2NA90HNSBsqlsYkkPx+H++VcbpDqur5pfm+SdJem6UOSJI/Xhh79i4LRaPQ0Ho8PmNNkMqnAsqGQMQf6FwVBEDzj5ck0zfcwDD/7/f4badv2x3nmOj36QkEcx5XneVs878FNQyHToy8URFFUYsdsOByuDcOYksjzVs7odRZg+AU5xJ3v+ysSuWjlnF5nAYQSZ1wOBoMCnDUUMr3OAuxSOY6zhbgHNw2FTE8oUFWVBWWv18sgrZGnJM4+P89cp0dfKMD5+AW567o7cNWwaOWcXmcBFktd1xeWZRWaps1I5GUrL+j9VXDEb/oCv8FTw658FApw3SuK8iLL8uu1oUf/ouCW6Xz5/6mlH0LCqCZdcm2YAAAAAElFTkSuQmCC");
@@ -31,6 +29,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static GenericMenu _contextMenu;
 		private static SettingsMenu _settingsMenu;
 
+		private static readonly GUIContent _titleLabel = new GUIContent("Instruction Graph");
 		private static readonly StaticStyle _headerStyle = new StaticStyle(CreateHeaderStyle);
 		private static readonly StaticStyle _connectionStyle = new StaticStyle(CreateConnectionStyle);
 		private static readonly IconButton _outputButton = new IconButton("sv_icon_dot0_sml", "Click and drag to make a connection from this output");
@@ -48,10 +47,13 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly IconButton _removeBreakpointButton = new IconButton("Animation.Record", "Remove the breakpoint from this node");
 		private static readonly IconButton _breakpointDisabledButton = new IconButton("Animation.Record");
 
-		private static readonly IconButton _enableBreakpointsButton = new IconButton("Animation.Record", "Enable node breakpoints");
-		private static readonly IconButton _disableBreakpointsButton = new IconButton("Animation.Record", "Disable node breakpoins");
-		private static readonly IconButton _enableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Enable logging of graph execution");
-		private static readonly IconButton _disableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Disable logging of graph execution");
+		private static readonly IconButton _enableBreakpointsButton = new IconButton("Animation.Record", "Enable node breakpoints for all graphs");
+		private static readonly IconButton _disableBreakpointsButton = new IconButton("Animation.Record", "Disable node breakpoins for all graphs");
+		private static readonly IconButton _enableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Enable logging of graph execution for all graphs");
+		private static readonly IconButton _disableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Disable logging of graph execution for all graphs");
+
+		private static readonly IconButton _lockButton = new IconButton("AssemblyLock", "Lock this window so it won't be used when other graphs are opened");
+		private static readonly IconButton _unlockButton = new IconButton("AssemblyLock", "Unlock this window so it can be used to show other graphs");
 
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
@@ -104,25 +106,83 @@ namespace PiRhoSoft.CompositionEditor
 		private List<InstructionGraphNode.ConnectionData> _selectedConnections = new List<InstructionGraphNode.ConnectionData>();
 		private InstructionGraphNode.NodeData _selectedInteraction;
 
-		#region Setup
+		#region Window Access
+
+		private bool _isLocked = false;
+
+		public static InstructionGraphWindow FindWindowForGraph(InstructionGraph graph)
+		{
+			var windows = Resources.FindObjectsOfTypeAll<InstructionGraphWindow>();
+
+			foreach (var window in windows)
+			{
+				if (window._graph == graph)
+					return window;
+			}
+
+			foreach (var window in windows)
+			{
+				if (window._graph == null)
+					return window;
+			}
+
+			foreach (var window in windows)
+			{
+				if (!window._isLocked)
+				{
+					window.SetGraph(graph);
+					return window;
+				}
+			}
+
+			return null;
+		}
+
+		public static InstructionGraphWindow ShowWindowForGraph(InstructionGraph graph)
+		{
+			var window = FindWindowForGraph(graph);
+
+			if (window == null)
+				window = ShowNewWindow();
+			else
+				window.Focus();
+
+			if (window._graph != graph)
+				window.SetGraph(graph);
+
+			return window;
+		}
 
 		[MenuItem("Window/Composition/Instruction Graph")]
-		static void Create()
+		public static InstructionGraphWindow ShowNewWindow()
 		{
-			Instance.SetGraph(null);
+			var window = CreateInstance<InstructionGraphWindow>();
+			window.titleContent = _titleLabel;
+			window.Show();
+			return window;
 		}
 
 		[OnOpenAsset]
 		static bool OpenAsset(int instanceID, int line)
 		{
 			var graph = EditorUtility.InstanceIDToObject(instanceID) as InstructionGraph;
+
 			if (graph != null)
 			{
-				Instance.SetGraph(graph);
+				ShowWindowForGraph(graph);
 				return true;
 			}
 
 			return false;
+		}
+
+		#endregion
+
+		#region Setup
+
+		static InstructionGraphWindow()
+		{
+			InstructionGraph.OnBreakpointHit += BreakpointHit;
 		}
 
 		protected override void Setup(InputManager input)
@@ -143,15 +203,14 @@ namespace PiRhoSoft.CompositionEditor
 			autoRepaintOnSceneChange = true;
 			Undo.undoRedoPerformed += UndoPerformed;
 			Selection.selectionChanged += UpdateSelection;
-			OpenInstance = this;
 
+			// this has to be here because Unity doesn't allow EditorPrefs access in a static constructor
 			InstructionGraph.IsDebugBreakEnabled = _breakpointsEnabled.Value;
 			InstructionGraph.IsDebugLoggingEnabled = _loggingEnabled.Value;
 		}
 
 		protected override void Teardown()
 		{
-			OpenInstance = null;
 			Selection.selectionChanged -= UpdateSelection;
 			Undo.undoRedoPerformed -= UndoPerformed;
 
@@ -385,7 +444,7 @@ namespace PiRhoSoft.CompositionEditor
 					if (data != null)
 						_selectedNodes.Add(data);
 				}
-				else if (selection is InstructionGraph graph)
+				else if (selection is InstructionGraph graph && graph == _graph)
 				{
 					var data = GetNodeData(_start);
 					if (data != null)
@@ -423,6 +482,16 @@ namespace PiRhoSoft.CompositionEditor
 			TeardownNodes();
 			SetupNodes();
 			Repaint();
+		}
+
+		#endregion
+
+		#region Debugging
+
+		public static void BreakpointHit(InstructionGraph graph, InstructionGraphNode node)
+		{
+			var window = ShowWindowForGraph(graph);
+			window.GoToNode(node);
 		}
 
 		#endregion
@@ -729,7 +798,7 @@ namespace PiRhoSoft.CompositionEditor
 					}
 				}
 
-				var canBreak = _selectedNodes.Count == 1;
+				var canBreak = _selectedNodes.Count == 1 && _selectedNodes[0].Node != _start;
 				var hasBreak = canBreak && _selectedNodes[0].Node.IsBreakpoint;
 
 				using (new EditorGUI.DisabledScope(!canBreak))
@@ -757,6 +826,8 @@ namespace PiRhoSoft.CompositionEditor
 					var menu = CreateSelectMenu();
 					menu.DropDown(new Rect(position.width - (2 * _toolbarButtonWidth), _toolbarHeight, 0, 0));
 				}
+
+				_isLocked = GUILayout.Toggle(_isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);
 			}
 		}
 

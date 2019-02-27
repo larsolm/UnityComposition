@@ -84,7 +84,7 @@ namespace PiRhoSoft.CompositionEditor
 		public override void OnInspectorGUI()
 		{
 			if (GUILayout.Button("Open Editor"))
-				InstructionGraphWindow.Instance.SetGraph(_graph);
+				InstructionGraphWindow.ShowWindowForGraph(_graph);
 
 			DrawDefaultInspector();
 
