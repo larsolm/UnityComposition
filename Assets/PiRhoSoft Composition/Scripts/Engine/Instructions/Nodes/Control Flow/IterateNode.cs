@@ -12,22 +12,28 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to for each object in the iteration")]
 		public InstructionGraphNode Loop = null;
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.35f, 0.1f, 0.1f);
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (variables.This is IIndexedVariableStore store)
 			{
-				if (Loop != null)
-				{
-					var item = store.GetItem(iteration);
+				var item = store.GetItem(iteration);
+
+				if (Loop != null && item != null)
 					graph.GoTo(Loop, item, nameof(Loop));
-				}
+				else
+					graph.Break();
 			}
 			else
 			{
-				Debug.LogFormat(this, _invalidStoreWarning, name);
+				Debug.LogFormat(this, _invalidStoreWarning, Name);
+				graph.Break();
 			}
 
-			graph.Break();
 			yield break;
 		}
 	}

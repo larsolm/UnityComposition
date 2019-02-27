@@ -23,6 +23,11 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The message to display when this node is traversed")]
 		public Message Message = new Message();
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.0f, 0.3f, 0.5f);
+		}
+
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			Message.GetInputs(inputs);
@@ -30,7 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var control = Control.Activate<MessageControl>();
+			var control = Control.Activate<MessageControl>(this);
 			var text = Message.GetText(variables);
 
 			if (control != null)
@@ -38,7 +43,7 @@ namespace PiRhoSoft.CompositionEngine
 			else
 				Debug.Log(text);
 
-			Control.Deactivate();
+			Control.Deactivate(this);
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}

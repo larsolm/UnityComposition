@@ -13,9 +13,14 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The control to hide")]
 		public InterfaceReference Control = new InterfaceReference();
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.0f, 0.0f, 0.25f);
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			Control.Deactivate();
+			Control.Deactivate(this);
 			graph.GoTo(Next, variables.This, nameof(Next));
 			yield break;
 		}

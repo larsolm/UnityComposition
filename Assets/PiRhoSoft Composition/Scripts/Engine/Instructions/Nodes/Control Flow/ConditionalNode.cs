@@ -16,6 +16,11 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The expression to evaluate to determine which node to follow")]
 		public Expression Condition = new Expression();
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.2f, 0.1f, 0.1f);
+		}
+
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			Condition.GetInputs(inputs, InstructionStore.InputStoreName);

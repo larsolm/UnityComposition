@@ -1448,9 +1448,5 @@ namespace PiRhoSoft.CompositionEditor
 		}
 
 		#endregion
-
-		#region Debugging
-
-		#endregion
 	}
 }

@@ -14,6 +14,11 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to repeatedly go to while Condition evaluates to true")]
 		public InstructionGraphNode Loop = null;
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.35f, 0.1f, 0.1f);
+		}
+
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			Condition.GetInputs(inputs, InstructionStore.InputStoreName);

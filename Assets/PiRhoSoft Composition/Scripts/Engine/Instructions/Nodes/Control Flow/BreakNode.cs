@@ -7,6 +7,11 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "break-node")]
 	public class BreakNode : InstructionGraphNode, IImmediate
 	{
+		public override Color GetNodeColor()
+		{
+			return new Color(0.1f, 0.05f, 0.05f);
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			graph.Break();

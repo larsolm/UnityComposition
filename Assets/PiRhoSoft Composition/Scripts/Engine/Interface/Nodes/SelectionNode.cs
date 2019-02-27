@@ -31,6 +31,11 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Foldout, EmptyText = "Add items to create selection options")]
 		public SelectionNodeItemList Items = new SelectionNodeItemList();
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.0f, 0.5f, 0.3f);
+		}
+
 		public override void GetConnections(NodeData data)
 		{
 			foreach (var item in Items)
@@ -63,7 +68,7 @@ namespace PiRhoSoft.CompositionEngine
 			SelectionNodeItem selectedItem = null;
 			IVariableStore selectedVariables = null;
 
-			var control = Control.Activate<SelectionControl>();
+			var control = Control.Activate<SelectionControl>(this);
 			if (control != null)
 			{
 				yield return control.MakeSelection(variables, Items, IsSelectionRequired);
@@ -86,7 +91,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.Log(builder);
 			}
 
-			Control.Deactivate();
+			Control.Deactivate(this);
 
 			if (selectedItem != null)
 				graph.GoTo(selectedItem.OnSelected, selectedVariables, nameof(Items), selectedItem.Label);

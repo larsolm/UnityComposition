@@ -7,19 +7,25 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "enable-game-object-node")]
 	public class EnableGameObjectNode : InstructionGraphNode, IImmediate
 	{
-		private const string _missingObjectWarning = "(CEGONMO) failed to enable object {0}: the object could not be found";
+		private const string _missingObjectWarning = "(CEGONMO) Unable to enable object for {0}: the given variables must be a GameObject";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
+
+		public override Color GetNodeColor()
+		{
+			return new Color(0.0f, 0.45f, 0.0f);
+		}
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (variables.This is GameObject target)
 				target.SetActive(true);
 			else
-				Debug.LogWarningFormat(this, _missingObjectWarning, This);
+				Debug.LogWarningFormat(this, _missingObjectWarning, Name);
 
 			graph.GoTo(Next, variables.This, nameof(Next));
+
 			yield break;
 		}
 	}

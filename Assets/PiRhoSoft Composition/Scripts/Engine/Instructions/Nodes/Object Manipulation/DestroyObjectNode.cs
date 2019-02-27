@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -8,28 +7,24 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "destroy-object-node")]
 	public class DestroyObjectNode : InstructionGraphNode
 	{
-		private const string _objectNotFoundWarning = "(COMDOONF) Unable to destroy object {0}: the object could not be found";
+		private const string _objectNotFoundWarning = "(COMDOONF) Unable to destroy object for {0}: the given variables must be a Unity Object";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
-		[Tooltip("The object to destroy")]
-		public VariableReference Target = new VariableReference();
-
-		public override void GetInputs(List<VariableDefinition> inputs)
+		public override Color GetNodeColor()
 		{
-			if (InstructionStore.IsInput(Target))
-				inputs.Add(VariableDefinition.Create<GameObject>(Target.RootName));
+			return new Color(0.0f, 0.25f, 0.0f);
 		}
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Target.GetValue(variables).TryGetObject(out GameObject target))
-				Destroy(target);
+			if (variables.This is Object obj)
+				Destroy(obj);
 			else
-				Debug.LogWarningFormat(this, _objectNotFoundWarning, Target);
+				Debug.LogWarningFormat(this, _objectNotFoundWarning, Name);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, null, nameof(Next));
 
 			yield break;
 		}

@@ -52,7 +52,11 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (This.IsAssigned)
 			{
-				if (This.GetValue(variables).TryGetStore(out var store))
+				var value = This.GetValue(variables);
+				
+				if (value.TryGetObject(out var obj))
+					variables.ChangeThis(obj);
+				else if (value.TryGetStore(out var store))
 					variables.ChangeThis(store);
 				else
 					Debug.LogWarningFormat(_missingVariableWarning, This, name);
@@ -68,7 +72,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public virtual Color GetNodeColor()
 		{
-			return new Color(0.31f, 0.32f, 0.37f, 1.0f);
+			return new Color(0.35f, 0.35f, 0.35f);
 		}
 
 		public class NodeData

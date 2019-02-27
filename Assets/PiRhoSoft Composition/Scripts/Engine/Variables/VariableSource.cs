@@ -144,11 +144,12 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
-	public class ObjectVariableSource<ObjectType> : VariableSource<ObjectType> where ObjectType : ScriptableObject
+	public class ObjectVariableSource<ObjectType> : VariableSource<ObjectType> where ObjectType : Object
 	{
 		protected override bool TryGetValue(VariableValue variable, out ObjectType value)
 		{
-			return variable.TryGetObject(out value);
+			variable.TryGetObject(out value);
+			return value != null;
 		}
 	}
 }

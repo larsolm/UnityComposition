@@ -25,6 +25,14 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline)]
 		public MockupConnectionList Connections = new MockupConnectionList();
 
+		[Tooltip("The display color of the node")]
+		public Color DisplayColor = new Color(0.35f, 0.35f, 0.35f);
+
+		public override Color GetNodeColor()
+		{
+			return DisplayColor;
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			yield break;

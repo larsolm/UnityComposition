@@ -8,7 +8,8 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "create-object-node")]
 	public class CreateObjectNode : InstructionGraphNode, IImmediate
 	{
-		private const string _objectNotFoundWarning = "(COMCOONF) Unable to create object {0}: the object could not be found";
+		private const string _objectNotFoundWarning = "(COMCOONF) Unable to create object for {0}: the object could not be found";
+		private const string _parentNotFoundWarning = "(COMCOONF) Unable to assign parent object for {0}: the specified object '{1}' could not be found";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
@@ -16,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The prefab object to spawn")]
 		public GameObject Prefab;
 
-		[Tooltip("The name of the new object, this will also be added to the local store for lookup later")]
+		[Tooltip("The name of the new object")]
 		public string ObjectName;
 
 		[Tooltip("The position to spawn the object at - in local space if parent is set")]
@@ -24,6 +25,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The parent object to attach the object to (optional) - if set position will be in local space")]
 		public VariableReference Parent = new VariableReference();
+
+		public override Color GetNodeColor()
+		{
+			return new Color(0.0f, 0.45f, 0.0f);
+		}
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
@@ -35,17 +41,21 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Prefab)
 			{
-				var spawned = Parent.GetValue(variables).TryGetObject(out GameObject parent) ? Instantiate(Prefab, parent.transform.position + (Vector3)Position, Quaternion.identity, parent.transform) : Instantiate(Prefab, Position, Quaternion.identity);
+				Transform parent = null;
+
+				if (Parent.IsAssigned && !Parent.GetValue(variables).TryGetObject(out parent))
+					Debug.LogWarningFormat(this, _parentNotFoundWarning, Name, Parent);
+
+				var spawned = parent ? Instantiate(Prefab, parent.position + (Vector3)Position, Quaternion.identity, parent.transform) : Instantiate(Prefab, Position, Quaternion.identity);
 				spawned.name = ObjectName;
 
-				variables.Locals.SetVariable(ObjectName, VariableValue.Create(spawned));
+				graph.GoTo(Next, spawned, nameof(Next));
 			}
 			else
 			{
-				Debug.LogWarningFormat(this, _objectNotFoundWarning, Prefab);
+				Debug.LogWarningFormat(this, _objectNotFoundWarning, Name);
+				graph.GoTo(Next, variables.This, nameof(Next));
 			}
-
-			graph.GoTo(Next, variables.This, nameof(Next));
 
 			yield break;
 		}

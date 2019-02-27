@@ -1,14 +1,9 @@
-﻿using PiRhoSoft.UtilityEngine;
-using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[Serializable] public class InstructionList : SerializedList<Instruction> { }
-	[Serializable] public class InstructionDictionary : SerializedDictionary<string, Instruction> { }
-
 	public abstract class Instruction : ScriptableObject
 	{
 		private const string _alreadyRunningError = "(CIAR) Failed to run Instruction '{0}': the Instruction is already running";

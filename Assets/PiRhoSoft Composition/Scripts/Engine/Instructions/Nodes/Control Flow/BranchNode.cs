@@ -19,6 +19,11 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to follow if the result of Switch is not in Outputs")]
 		public InstructionGraphNode Default;
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.2f, 0.1f, 0.1f);
+		}
+
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			Switch.GetInputs(inputs, InstructionStore.InputStoreName);

@@ -18,6 +18,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool IsExecutionImmediate => !WaitForCompletion || CompositionManager.Instance.IsImmediate(Instruction);
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.45f, 0.45f, 0.0f);
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (WaitForCompletion)

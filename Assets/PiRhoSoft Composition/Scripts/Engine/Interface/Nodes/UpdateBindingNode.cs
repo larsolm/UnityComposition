@@ -16,14 +16,20 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The binding group to update (updates all if empty)")]
 		public string Group;
 
+		public override Color GetNodeColor()
+		{
+			return new Color(0.0f, 0.0f, 0.35f);
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var control = Control.GetControl<InterfaceControl>();
+			var control = Control.GetControl<InterfaceControl>(this);
 
 			if (control)
 				control.UpdateBindings(variables, Group);
 
 			graph.GoTo(Next, variables.This, nameof(Next));
+
 			yield break;
 		}
 	}
