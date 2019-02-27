@@ -247,6 +247,7 @@ namespace PiRhoSoft.CompositionEditor
 				TeardownNodes();
 				SetupNodes();
 				GoToStart();
+				ShowAll();
 			}
 		}
 
@@ -325,7 +326,7 @@ namespace PiRhoSoft.CompositionEditor
 			SetSelection(data);
 		}
 
-		private InstructionGraphNode.NodeData AddNode(InstructionGraphNode node)
+		public InstructionGraphNode.NodeData AddNode(InstructionGraphNode node)
 		{
 			var data = new InstructionGraphNode.NodeData(node);
 			node.GetConnections(data);
@@ -464,7 +465,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (Selection.activeObject is InstructionGraphNode node)
 				RefreshNode(node);
-			else if (Selection.activeObject is InstructionGraphNode graph)
+			else if (Selection.activeObject is InstructionGraph graph)
 				RefreshNode(_start);
 		}
 

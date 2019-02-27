@@ -13,7 +13,8 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly IconButton _editButton = new IconButton(IconButton.Edit, "Edit this node");
 
 		private SerializedProperty _nodesProperty;
-		private InstructionGraph _graph;
+
+		protected InstructionGraph _graph { get; private set; }
 
 		public static void SelectNode(InstructionGraphNode node)
 		{
@@ -75,10 +76,10 @@ namespace PiRhoSoft.CompositionEditor
 		void OnEnable()
 		{
 			_graph = target as InstructionGraph;
+			_nodesProperty = serializedObject.FindProperty("_nodes");
 
 			SyncNodes();
-
-			_nodesProperty = serializedObject.FindProperty("_nodes");
+			SetupNodes(_nodesProperty);
 		}
 
 		public override void OnInspectorGUI()
@@ -87,7 +88,15 @@ namespace PiRhoSoft.CompositionEditor
 				InstructionGraphWindow.ShowWindowForGraph(_graph);
 
 			DrawDefaultInspector();
+			DrawNodes(_nodesProperty);
+		}
 
+		protected virtual void SetupNodes(SerializedProperty nodes)
+		{
+		}
+
+		protected virtual void DrawNodes(SerializedProperty nodes)
+		{
 			EditorGUILayout.PropertyField(_nodesProperty);
 		}
 
