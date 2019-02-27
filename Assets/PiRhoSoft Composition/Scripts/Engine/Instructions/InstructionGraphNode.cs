@@ -32,7 +32,8 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class InstructionGraphNode : ScriptableObject
 	{
-		private const string _missingVariableWarning = "(CCNMV) unable to find variable {0} for instruction graph node {1}";
+		private const string _missingThisWarning = "(CCNMT) unable to find variable {0} for instruction graph node {1}";
+		private const string _invalidThisWarning = "(CCNIT) variable {0} for instruction graph node {1} must be an object or store";
 		private const string _missingKeyError = "(CCNMK) failed to set target: unable to find key {0} for instruction graph node {1}";
 		private const string _missingIndexError = "(CCNMI) failed to set target: index {0} is out of range for instruction graph node {1}";
 		private const string _missingFieldError = "(CCNMF) failed to set target: unable to find field {0} for instruction graph node {1}";
@@ -53,13 +54,20 @@ namespace PiRhoSoft.CompositionEngine
 			if (This.IsAssigned)
 			{
 				var value = This.GetValue(variables);
-				
-				if (value.TryGetObject(out var obj))
-					variables.ChangeThis(obj);
-				else if (value.TryGetStore(out var store))
-					variables.ChangeThis(store);
-				else
-					Debug.LogWarningFormat(_missingVariableWarning, This, name);
+
+				if (value.Type == VariableType.Empty)
+				{
+					Debug.LogWarningFormat(_missingThisWarning, This, name);
+				}
+				else if (value.Type != VariableType.Null)
+				{
+					// null is a valid this object, but primitive types are not
+
+					if (value.RawObject == null)
+						Debug.LogWarningFormat(_invalidThisWarning, This, name);
+					else
+						variables.ChangeThis(value.RawObject);
+				}
 			}
 
 			yield return Run_(graph, variables, executionIndex);

@@ -12,6 +12,9 @@ namespace PiRhoSoft.CompositionEngine
 			if (gameObject == null)
 				gameObject = ComponentHelper.FindObject(name); // this will find inactive objects
 
+			if (gameObject == null)
+				return VariableValue.Empty;
+
 			return VariableValue.Create(gameObject);
 		}
 

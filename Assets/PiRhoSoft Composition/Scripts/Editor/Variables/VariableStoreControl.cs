@@ -33,6 +33,7 @@ namespace PiRhoSoft.CompositionEditor
 						case VariableType.Number: DrawNumber(name, ref value); break;
 						case VariableType.String: DrawString(name, ref value); break;
 						case VariableType.Object: DrawObject(name, ref value); break;
+						case VariableType.Null: break;
 					}
 
 					if (changes.changed)
@@ -58,6 +59,7 @@ namespace PiRhoSoft.CompositionEditor
 						case VariableType.Number: DrawNumber(name, ref value); break;
 						case VariableType.String: DrawString(name, ref value); break;
 						case VariableType.Object: DrawObject(name, ref value); break;
+						case VariableType.Null: break;
 					}
 
 					if (changes.changed)

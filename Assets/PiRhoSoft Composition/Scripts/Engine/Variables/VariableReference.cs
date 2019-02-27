@@ -104,7 +104,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (!string.IsNullOrEmpty(lookup) && value.Type == VariableType.Object)
 			{
 				var component = ComponentHelper.GetAsComponent(value.Object, lookup);
-				value = VariableValue.Create(component);
+				value = component != null ? VariableValue.Create(component) : VariableValue.Empty;
 			}
 
 			return value;

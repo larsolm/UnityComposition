@@ -22,6 +22,7 @@ namespace PiRhoSoft.CompositionEditor
 				case VariableType.Number: return DrawNumber(position, value, definition);
 				case VariableType.String: return DrawString(position, value, definition);
 				case VariableType.Object: return DrawObject(position, value, definition);
+				case VariableType.Null: return value;
 				default: return value;
 			}
 		}

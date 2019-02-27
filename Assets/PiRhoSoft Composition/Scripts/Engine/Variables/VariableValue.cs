@@ -13,7 +13,8 @@ namespace PiRhoSoft.CompositionEngine
 		Number,
 		String,
 		Object,
-		Store
+		Store,
+		Null
 	}
 
 	public struct VariableValue : IEquatable<VariableValue>, IEquatable<bool>, IEquatable<int>, IEquatable<float>, IEquatable<string>, IComparable<VariableValue>, IComparable<bool>, IComparable<int>, IComparable<float>, IComparable<string>
@@ -26,8 +27,9 @@ namespace PiRhoSoft.CompositionEngine
 		public string String { get; private set; }
 		private object _object;
 
+		public object RawObject => _object;
 		public Object Object => _object as Object;
-		public IVariableStore Store => TryGetStore(out IVariableStore variables) ? variables : null;
+		public IVariableStore Store => _object as IVariableStore;
 
 		public override string ToString()
 		{
@@ -38,8 +40,9 @@ namespace PiRhoSoft.CompositionEngine
 				case VariableType.Integer: return Integer.ToString();
 				case VariableType.Number: return Number.ToString();
 				case VariableType.String: return String;
-				case VariableType.Object: return Object != null ? Object.name : "(null)";
+				case VariableType.Object: return Object != null ? Object.name : "(object)";
 				case VariableType.Store: return "(store)";
+				case VariableType.Null: return "(null)";
 			}
 
 			return "(unknown)";
@@ -70,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static VariableValue Create<T>(T value)
 		{
-			var type = value != null ? GetType(value.GetType()) : VariableType.Empty;
+			var type = value != null ? GetType(value.GetType()) : VariableType.Null;
 			var variable = Create(type);
 
 			switch (value)
@@ -117,25 +120,18 @@ namespace PiRhoSoft.CompositionEngine
 		public bool TryGetObject(out Object value)
 		{
 			value = Object;
-			return Type == VariableType.Object;
+			return Type == VariableType.Object || Type == VariableType.Store;
 		}
 
 		public bool TryGetObject<T>(out T obj) where T : Object
 		{
-			obj = Type == VariableType.Object || Type == VariableType.Store ? ComponentHelper.GetAsObject<T>(Object) : null;
+			obj = _object as T;
 			return obj != null;
 		}
 
 		public bool TryGetStore(out IVariableStore variables)
 		{
-			switch (_object)
-			{
-				case IVariableStore store_: variables = store_; return true;
-				case Component component: variables = component.GetComponent<IVariableStore>(); break;
-				case GameObject gameObject: variables = gameObject.GetComponent<IVariableStore>(); break;
-				default: variables = null; break;
-			}
-
+			variables = _object as IVariableStore;
 			return variables != null;
 		}
 
@@ -177,13 +173,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			switch (other.Type)
 			{
-				case VariableType.Empty: return Type == VariableType.Empty;
+				case VariableType.Empty: return Type == VariableType.Empty || Type == VariableType.Null;
 				case VariableType.Boolean: return Equals(other.Boolean);
 				case VariableType.Integer: return Equals(other.Integer);
 				case VariableType.Number: return Equals(other.Number);
 				case VariableType.String: return Equals(other.String);
 				case VariableType.Object: return Equals(other.Object);
 				case VariableType.Store: return Equals(other.Store);
+				case VariableType.Null: return Type == VariableType.Empty || Type == VariableType.Null;
 			}
 
 			return false;
@@ -228,13 +225,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			switch (other.Type)
 			{
-				case VariableType.Empty: return Type == VariableType.Empty ? 0 : 1;
+				case VariableType.Empty: return Type == VariableType.Empty || Type == VariableType.Null ? 0 : 1;
 				case VariableType.Boolean: return CompareTo(other.Boolean);
 				case VariableType.Integer: return CompareTo(other.Integer);
 				case VariableType.Number: return CompareTo(other.Number);
 				case VariableType.String: return CompareTo(other.String);
 				case VariableType.Object: return CompareTo(other.Object);
 				case VariableType.Store: return CompareTo(other.Store);
+				case VariableType.Null: return Type == VariableType.Empty || Type == VariableType.Null ? 0 : 1;
 			}
 
 			return -1;
@@ -245,6 +243,7 @@ namespace PiRhoSoft.CompositionEngine
 			switch (Type)
 			{
 				case VariableType.Empty: return -1;
+				case VariableType.Null: return -1;
 				case VariableType.Boolean: return Boolean == value ? 0 : (value ? 1 : -1);
 				case VariableType.Integer: return Integer.CompareTo(value ? 1 : 0);
 				case VariableType.Number: return Number.CompareTo(value ? 1.0f : 0.0f);
@@ -257,6 +256,7 @@ namespace PiRhoSoft.CompositionEngine
 			switch (Type)
 			{
 				case VariableType.Empty: return -1;
+				case VariableType.Null: return -1;
 				case VariableType.Boolean: return (Boolean ? 1 : 0).CompareTo(value);
 				case VariableType.Integer: return Integer.CompareTo(value);
 				case VariableType.Number: return Number.CompareTo(value);
@@ -269,6 +269,7 @@ namespace PiRhoSoft.CompositionEngine
 			switch (Type)
 			{
 				case VariableType.Empty: return -1;
+				case VariableType.Null: return -1;
 				case VariableType.Boolean: return (Boolean ? 1.0f : 0.0f).CompareTo(value);
 				case VariableType.Integer: return ((float)Integer).CompareTo(value);
 				case VariableType.Number: return Number.CompareTo(value);
