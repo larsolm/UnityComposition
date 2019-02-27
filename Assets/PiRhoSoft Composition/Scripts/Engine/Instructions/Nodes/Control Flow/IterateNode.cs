@@ -12,14 +12,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to for each object in the iteration")]
 		public InstructionGraphNode Loop = null;
 
-		[Tooltip("The node to go to when the iteration is finished")]
-		public InstructionGraphNode Next = null;
-
-		public (InstructionGraphNode Node, string Name) GetBreakNode()
-		{
-			return (Next, nameof(Next));
-		}
-
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (variables.This is IIndexedVariableStore store)

@@ -28,7 +28,6 @@ namespace PiRhoSoft.CompositionEngine
 
 	public interface ILoopNode
 	{
-		(InstructionGraphNode Node, string Name) GetBreakNode();
 	}
 
 	public abstract class InstructionGraphNode : ScriptableObject

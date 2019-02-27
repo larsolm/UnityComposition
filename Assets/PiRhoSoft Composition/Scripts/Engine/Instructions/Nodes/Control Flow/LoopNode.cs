@@ -14,14 +14,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to repeatedly go to while Condition evaluates to true")]
 		public InstructionGraphNode Loop = null;
 
-		[Tooltip("The node to go to when Condition evaluates to false")]
-		public InstructionGraphNode Next = null;
-
-		public (InstructionGraphNode Node, string Name) GetBreakNode()
-		{
-			return (Next, nameof(Next));
-		}
-
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			Condition.GetInputs(inputs, InstructionStore.InputStoreName);

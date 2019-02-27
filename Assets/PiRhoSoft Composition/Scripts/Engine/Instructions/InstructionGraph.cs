@@ -186,7 +186,12 @@ namespace PiRhoSoft.CompositionEngine
 				yield break;
 
 			if (IsDebugLoggingEnabled)
-				Debug.LogFormat(this, "Instruction Graph {0}: following '{1}' to node '{2}'", name, frame.Source, frame.Node.Name);
+			{
+				if (frame.Iteration > 0)
+					Debug.LogFormat(this, "Instruction Graph {0}: running iteration {1} of node '{2}' ", name, frame.Iteration + 1, frame.Node.Name);
+				else
+					Debug.LogFormat(this, "Instruction Graph {0}: following '{1}' to node '{2}'", name, frame.Source, frame.Node.Name);
+			}
 
 			if (IsImmediate(frame.Node))
 				RunEnumerator(frame.Node, frame.Node.Run(this, _rootStore, frame.Iteration));
@@ -282,10 +287,8 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (loop.Type == NodeType.Loop)
 				{
-					var target = (loop.Node as ILoopNode).GetBreakNode();
-
 					_callstack.Push(new NodeFrame { Type = NodeType.Normal, Node = loop.Node, Source = loop.Source, This = loop.This, Iteration = loop.Iteration });
-					GoTo(target.Node, loop.This, target.Name);
+					GoTo(null, null, "");
 					break;
 				}
 			}
@@ -339,18 +342,23 @@ namespace PiRhoSoft.CompositionEngine
 				DebugState = PlaybackState.Stopped;
 		}
 
-		public bool IsInCallStack(InstructionGraphNode node)
+		public int IsInCallStack(InstructionGraphNode node)
 		{
 			if (_callstack.Count > 0)
 			{
 				foreach (var frame in _callstack)
 				{
 					if (frame.Node == node)
-						return true;
+					{
+						if (frame.Type != NodeType.Normal)
+							return frame.Iteration + 1;
+						else
+							return 0;
+					}
 				}
 			}
 
-			return false;
+			return -1;
 		}
 
 		public bool IsInCallStack(InstructionGraphNode node, string source)

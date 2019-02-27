@@ -769,6 +769,19 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
+		private int GetNodeIteration(InstructionGraphNode.NodeData node)
+		{
+			if (Application.isPlaying && _graph.IsRunning)
+			{
+				if (node.Node == _start)
+					return 0;
+
+				return _graph.IsInCallStack(node.Node);
+			}
+
+			return -1;
+		}
+
 		private void DrawNode(InstructionGraphNode.NodeData node)
 		{
 			var rect = node.Bounds;
@@ -791,7 +804,10 @@ namespace PiRhoSoft.CompositionEditor
 			if (node.Node != _start)
 				EditorGUI.LabelField(inputIconRect, _inputButton.Content, GUIStyle.none);
 
-			EditorGUI.LabelField(labelRect, node.Node.Name, _headerStyle.Style);
+			var iteration = GetNodeIteration(node);
+			var nodeLabel = iteration > 0 ? string.Format("{0} ({1})", node.Node.Name, iteration) : node.Node.Name;
+
+			EditorGUI.LabelField(labelRect, nodeLabel, _headerStyle.Style);
 
 			if (node.Node != _start)
 			{
@@ -831,16 +847,13 @@ namespace PiRhoSoft.CompositionEditor
 			if (_hoveredInput == node)
 				Handles.DrawSolidRectangleWithOutline(inputRect, Color.clear, _hoveredColor);
 
-			if (Application.isPlaying && _graph.IsRunning)
+			if (iteration >= 0)
 			{
-				if (_graph.IsInCallStack(node.Node) || node.Node == _start)
-				{
-					var executing = _graph.IsExecuting(node.Node);
-					var paused = _graph.DebugState == InstructionGraph.PlaybackState.Paused;
+				var executing = _graph.IsExecuting(node.Node);
+				var paused = _graph.DebugState == InstructionGraph.PlaybackState.Paused;
 
-					var color = executing ? (paused ? _breakColor : _activeColor) : _callstackColor;
-					Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, color);
-				}
+				var color = executing ? (paused ? _breakColor : _activeColor) : _callstackColor;
+				Handles.DrawSolidRectangleWithOutline(outlineRect, Color.clear, color);
 			}
 
 			if (selected)
