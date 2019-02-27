@@ -96,7 +96,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root, string source)
 		{
-			StartRunning();
+			StartRunning(root, source);
 
 			var rootThis = variables.This;
 			_rootStore = variables;
@@ -112,12 +112,12 @@ namespace PiRhoSoft.CompositionEngine
 					_callstack.Push(frame);
 					_rootStore.ChangeThis(frame.This);
 
-					yield return ProcessNode(frame.Node, frame.Iteration);
+					yield return ProcessFrame(frame);
 				}
 
 				if (_shouldBreak)
 				{
-					ProcessBreak();
+					HandleBreak();
 					_shouldBreak = false;
 				}
 			}
@@ -126,22 +126,97 @@ namespace PiRhoSoft.CompositionEngine
 			variables.ChangeThis(rootThis);
 		}
 
-		private void ProcessBreak()
+		#region Playback
+
+		private enum NodeType
 		{
-			while (_callstack.Count > 0)
-			{
-				var loop = _callstack.Pop();
-
-				if (loop.Type == NodeType.Loop)
-				{
-					var target = (loop.Node as ILoopNode).GetBreakNode();
-
-					_callstack.Push(new NodeFrame { Type = NodeType.Normal, Node = loop.Node, Source = loop.Source, This = loop.This, Iteration = loop.Iteration });
-					GoTo(target.Node, loop.This, target.Name);
-					break;
-				}
-			}
+			Normal,
+			Sequence,
+			Loop
 		}
+
+		private struct NodeFrame
+		{
+			public NodeType Type;
+			public int Iteration;
+			public InstructionGraphNode Node;
+			public object This;
+			public string Source;
+		}
+
+#if UNITY_EDITOR
+
+		private string _currentBranch;
+
+		private void StartRunning(InstructionGraphNode root, string source)
+		{
+			_currentBranch = source;
+
+			DebugState = PlaybackState.Running;
+
+			if (IsDebugLoggingEnabled)
+				Debug.LogFormat(this, "Instruction Graph {0}: running branch '{1}'", name, source);
+		}
+
+		private bool ShouldContinue()
+		{
+			if (IsDebugLoggingEnabled)
+			{
+				if (DebugState == PlaybackState.Stopped)
+					Debug.LogFormat(this, "Instruction Graph {0}: halting branch '{1}'", name, _currentBranch);
+				else if (_callstack.Count == 0 && _nextNode.Node == null)
+					Debug.LogFormat(this, "Instruction Graph {0}: finished running branch '{1}'", name, _currentBranch);
+			}
+
+			return DebugState != PlaybackState.Stopped && (_callstack.Count > 0 || _nextNode.Node != null);
+		}
+
+		private IEnumerator ProcessFrame(NodeFrame frame)
+		{
+			if (frame.Node.IsBreakpoint && IsDebugBreakEnabled)
+				DebugState = PlaybackState.Paused;
+
+			if (DebugState == PlaybackState.Paused && IsDebugLoggingEnabled)
+				Debug.LogFormat(this, "Instruction Graph {0}: pausing at node '{1}'", name, frame.Node.Name);
+
+			while (DebugState == PlaybackState.Paused)
+				yield return null;
+
+			if (DebugState == PlaybackState.Stopped)
+				yield break;
+
+			if (IsDebugLoggingEnabled)
+				Debug.LogFormat(this, "Instruction Graph {0}: following '{1}' to node '{2}'", name, frame.Source, frame.Node.Name);
+
+			if (IsImmediate(frame.Node))
+				RunEnumerator(frame.Node, frame.Node.Run(this, _rootStore, frame.Iteration));
+			else
+				yield return frame.Node.Run(this, _rootStore, frame.Iteration);
+
+			if (DebugState == PlaybackState.Step)
+				DebugState = PlaybackState.Paused;
+		}
+
+#else
+
+		private void StartRunning(InstructionGraphNode root, string source)
+		{
+		}
+
+		private bool ShouldContinue()
+		{
+			return _callstack.Count > 0 || _nextNode.Node != null;
+		}
+
+		private IEnumerator ProcessFrame(NodeFrame frame)
+		{
+			if (IsImmediate(frame.Node))
+				RunEnumerator(frame.Node, frame.Node.Run(this, _rootStore, frame.Iteration));
+			else
+				yield return frame.Node.Run(this, _rootStore, frame.Iteration);
+		}
+
+#endif
 
 		private NodeFrame SetupFrame(NodeFrame node)
 		{
@@ -175,22 +250,6 @@ namespace PiRhoSoft.CompositionEngine
 			return node;
 		}
 
-		private enum NodeType
-		{
-			Normal,
-			Sequence,
-			Loop
-		}
-
-		private struct NodeFrame
-		{
-			public NodeType Type;
-			public int Iteration;
-			public InstructionGraphNode Node;
-			public object This;
-			public string Source;
-		}
-
 		private bool IsNodeInStack(InstructionGraphNode node)
 		{
 			foreach (var frame in _callstack)
@@ -200,16 +259,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			return false;
-		}
-
-		#region Playback Interface
-
-		private IEnumerator RunNode(InstructionGraphNode node, int iteration)
-		{
-			if (IsImmediate(node))
-				RunEnumerator(node, node.Run(this, _rootStore, iteration));
-			else
-				yield return node.Run(this, _rootStore, iteration);
 		}
 
 		private void RunEnumerator(InstructionGraphNode node, IEnumerator enumerator)
@@ -225,56 +274,28 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-#if UNITY_EDITOR
-
-		public void StartRunning()
+		private void HandleBreak()
 		{
-			DebugState = PlaybackState.Running;
+			while (_callstack.Count > 0)
+			{
+				var loop = _callstack.Pop();
+
+				if (loop.Type == NodeType.Loop)
+				{
+					var target = (loop.Node as ILoopNode).GetBreakNode();
+
+					_callstack.Push(new NodeFrame { Type = NodeType.Normal, Node = loop.Node, Source = loop.Source, This = loop.This, Iteration = loop.Iteration });
+					GoTo(target.Node, loop.This, target.Name);
+					break;
+				}
+			}
 		}
-
-		public bool ShouldContinue()
-		{
-			return DebugState != PlaybackState.Stopped && (_callstack.Count > 0 || _nextNode.Node != null);
-		}
-
-		public IEnumerator ProcessNode(InstructionGraphNode node, int iteration)
-		{
-			if (node.IsBreakpoint && IsDebugBreakEnabled)
-				DebugState = PlaybackState.Paused;
-
-			while (DebugState == PlaybackState.Paused)
-				yield return null;
-
-			if (DebugState == PlaybackState.Stopped)
-				yield break;
-
-			yield return RunNode(node, iteration);
-
-			if (DebugState == PlaybackState.Step)
-				DebugState = PlaybackState.Paused;
-		}
-
-#else
-
-		public void StartRunning()
-		{
-		}
-
-		public bool IsRunning()
-		{
-			return _callstack.Count > 0 || _nextNode.Node != null;
-		}
-
-		public IEnumerator ProcessNode(InstructionGraphNode node, int iteration)
-		{
-			yield return RunNode(node, iteration);
-		}
-
-#endif
 
 		#endregion
 
-		#region Editor Interface
+		#region Debugging
+
+#if UNITY_EDITOR
 
 		public enum PlaybackState
 		{
@@ -284,24 +305,10 @@ namespace PiRhoSoft.CompositionEngine
 			Stopped
 		}
 
-		[HideInInspector] public Vector2 StartPosition;
-
 		public PlaybackState DebugState { get; private set; }
 
-		public virtual void GetConnections(InstructionGraphNode.NodeData data)
-		{
-			data.AddConnections(this);
-		}
-
-		public virtual void SetConnection(InstructionGraphNode.ConnectionData connection, InstructionGraphNode target)
-		{
-			connection.ApplyConnection(this, target);
-		}
-
-#if UNITY_EDITOR
-
 		public static bool IsDebugBreakEnabled = true;
-		public static bool IsDebugLoggingEnabled = true;
+		public static bool IsDebugLoggingEnabled = false;
 
 		public bool CanDebugPlay => IsRunning && DebugState == PlaybackState.Paused;
 		public bool CanDebugPause => IsRunning && DebugState == PlaybackState.Running;
@@ -366,6 +373,22 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 #endif
+
+		#endregion
+
+		#region Editor Interface
+
+		[HideInInspector] public Vector2 StartPosition;
+
+		public virtual void GetConnections(InstructionGraphNode.NodeData data)
+		{
+			data.AddConnections(this);
+		}
+
+		public virtual void SetConnection(InstructionGraphNode.ConnectionData connection, InstructionGraphNode target)
+		{
+			connection.ApplyConnection(this, target);
+		}
 
 		#endregion
 	}

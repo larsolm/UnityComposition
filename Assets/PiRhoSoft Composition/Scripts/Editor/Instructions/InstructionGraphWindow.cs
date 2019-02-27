@@ -37,10 +37,21 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly IconButton _inputButton = new IconButton("sv_icon_dot0_sml", "Drag an output to here to make a connection");
 		private static readonly IconButton _removeButton = new IconButton("d_Toolbar Minus", "Remove this node");
 		private static readonly IconButton _playButton = new IconButton("Animation.Play", "Resume graph execution");
+		private static readonly IconButton _playDisabledButton = new IconButton("Animation.Play");
 		private static readonly Base64Button _pauseButton = new Base64Button(_pauseIcon, "Pause graph execution before running the next node");
+		private static readonly Base64Button _pauseDisabledButton = new Base64Button(_pauseIcon);
 		private static readonly IconButton _stepButton = new IconButton("Animation.NextKey", "Run the next node then pause again");
+		private static readonly IconButton _stepDisabledButton = new IconButton("Animation.NextKey");
 		private static readonly Base64Button _stopButton = new Base64Button(_stopIcon, "Halt execution of the current branch of the graph and continue with the next branch");
-		private static readonly IconButton _breakpointButton = new IconButton("Animation.Record", "Toggle this node as a breakpoint");
+		private static readonly Base64Button _stopDisabledButton = new Base64Button(_stopIcon);
+		private static readonly IconButton _addBreakpointButton = new IconButton("Animation.Record", "Set a breakpoint on this node");
+		private static readonly IconButton _removeBreakpointButton = new IconButton("Animation.Record", "Remove the breakpoint from this node");
+		private static readonly IconButton _breakpointDisabledButton = new IconButton("Animation.Record");
+
+		private static readonly IconButton _enableBreakpointsButton = new IconButton("Animation.Record", "Enable node breakpoints");
+		private static readonly IconButton _disableBreakpointsButton = new IconButton("Animation.Record", "Disable node breakpoins");
+		private static readonly IconButton _enableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Enable logging of graph execution");
+		private static readonly IconButton _disableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Disable logging of graph execution");
 
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
@@ -50,8 +61,10 @@ namespace PiRhoSoft.CompositionEditor
 
 		private const float _gridSize = 64.0f / 5.0f;
 
-		private static BoolPreference _snapToGrid = new BoolPreference("PiRhoSoft.Composition.SnapToGrid", true);
-		private static IntPreference _snapAmount = new IntPreference("PiRhoSoft.Composition.InstructionGraphWindow", 1);
+		private static BoolPreference _breakpointsEnabled = new BoolPreference("PiRhoSoft.Composition.InstructionGraph.BreakpointsEnabled", true);
+		private static BoolPreference _loggingEnabled = new BoolPreference("PiRhoSoft.Composition.InstructionGraph.LoggingEnabled", false);
+		private static BoolPreference _snapToGrid = new BoolPreference("PiRhoSoft.Composition.InstructionGraph.SnapToGrid", true);
+		private static IntPreference _snapAmount = new IntPreference("PiRhoSoft.Composition.InstructionGraph.SnapAmount", 1);
 
 		private static Color _hoveredColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 		private static Color _selectedColor = new Color(0.96f, 0.95f, 0.2f, 0.75f);
@@ -59,6 +72,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static Color _knobColor = new Color(0.49f, 0.73f, 1.0f, 1.0f);
 
 		private static Color _breakColor = new Color(1.0f, 0.2f, 0.2f, 1.0f);
+		private static Color _disabledBreakColor = new Color(1.0f, 0.6f, 0.6f, 1.0f);
 		private static Color _activeColor = new Color(0.0f, 0.9f, 0.0f, 1.0f);
 		private static Color _callstackColor = new Color(0.3f, 0.8f, 0.3f, 1.0f);
 
@@ -130,6 +144,9 @@ namespace PiRhoSoft.CompositionEditor
 			Undo.undoRedoPerformed += UndoPerformed;
 			Selection.selectionChanged += UpdateSelection;
 			OpenInstance = this;
+
+			InstructionGraph.IsDebugBreakEnabled = _breakpointsEnabled.Value;
+			InstructionGraph.IsDebugLoggingEnabled = _loggingEnabled.Value;
 		}
 
 		protected override void Teardown()
@@ -693,10 +710,15 @@ namespace PiRhoSoft.CompositionEditor
 
 				using (new EditorGUI.DisabledScope(!isEnabled))
 				{
-					var shouldPlay = GUILayout.Toggle(isPlaying, _playButton.Content, EditorStyles.toolbarButton);
-					var shouldPause = GUILayout.Toggle(isPaused, _pauseButton.Content, EditorStyles.toolbarButton);
-					var shouldStep = GUILayout.Toggle(isStepping, _stepButton.Content, EditorStyles.toolbarButton);
-					var shouldStop = GUILayout.Toggle(isStopping, _stopButton.Content, EditorStyles.toolbarButton);
+					var playButton = isPlaying || !isEnabled ? _playDisabledButton : _playButton;
+					var pauseButton = isPaused || !isEnabled ? _pauseDisabledButton : _pauseButton;
+					var stepButton = isStepping || !isEnabled ? _stepDisabledButton : _stepButton;
+					var stopButton = isStopping || !isEnabled ? _stopDisabledButton : _stopButton;
+
+					var shouldPlay = GUILayout.Toggle(isPlaying, playButton.Content, EditorStyles.toolbarButton);
+					var shouldPause = GUILayout.Toggle(isPaused, pauseButton.Content, EditorStyles.toolbarButton);
+					var shouldStep = GUILayout.Toggle(isStepping, stepButton.Content, EditorStyles.toolbarButton);
+					var shouldStop = GUILayout.Toggle(isStopping, stopButton.Content, EditorStyles.toolbarButton);
 
 					if (isEnabled)
 					{
@@ -712,13 +734,20 @@ namespace PiRhoSoft.CompositionEditor
 
 				using (new EditorGUI.DisabledScope(!canBreak))
 				{
-					hasBreak = GUILayout.Toggle(hasBreak, _breakpointButton.Content, EditorStyles.toolbarButton);
+					var breakpointButton = canBreak ? (hasBreak ? _removeBreakpointButton : _addBreakpointButton) : _breakpointDisabledButton;
+					hasBreak = GUILayout.Toggle(hasBreak, breakpointButton.Content, EditorStyles.toolbarButton);
 
 					if (canBreak)
 						_selectedNodes[0].Node.IsBreakpoint = hasBreak;
 				}
 
 				GUILayout.FlexibleSpace();
+
+				InstructionGraph.IsDebugBreakEnabled = GUILayout.Toggle(InstructionGraph.IsDebugBreakEnabled, InstructionGraph.IsDebugBreakEnabled ? _disableBreakpointsButton.Content : _enableBreakpointsButton.Content, EditorStyles.toolbarButton);
+				InstructionGraph.IsDebugLoggingEnabled = GUILayout.Toggle(InstructionGraph.IsDebugLoggingEnabled, InstructionGraph.IsDebugLoggingEnabled ? _disableLoggingButton.Content : _enableLoggingButton.Content, EditorStyles.toolbarButton);
+
+				_breakpointsEnabled.Value = InstructionGraph.IsDebugBreakEnabled;
+				_loggingEnabled.Value = InstructionGraph.IsDebugLoggingEnabled;
 
 				if (GUILayout.Button("Settings", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
 					PopupWindow.Show(new Rect(position.width - (3 * _toolbarButtonWidth), _toolbarHeight, 0, 0), _settingsMenu);
@@ -878,7 +907,7 @@ namespace PiRhoSoft.CompositionEditor
 				lineColor = _callstackColor;
 
 			if (to.Node.IsBreakpoint)
-				endColor = _breakColor;
+				endColor = InstructionGraph.IsDebugBreakEnabled ? _breakColor : _disabledBreakColor;
 
 			if (outputBounds.xMax > inputBounds.xMin)
 			{
