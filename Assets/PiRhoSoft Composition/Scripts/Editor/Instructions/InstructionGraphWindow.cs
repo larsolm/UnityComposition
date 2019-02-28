@@ -32,6 +32,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly GUIContent _titleLabel = new GUIContent("Instruction Graph");
 		private static readonly StaticStyle _headerStyle = new StaticStyle(CreateHeaderStyle);
 		private static readonly StaticStyle _connectionStyle = new StaticStyle(CreateConnectionStyle);
+		private static readonly StaticStyle _commentStyle = new StaticStyle(CreateCommentStyle);
 		private static readonly IconButton _outputButton = new IconButton("sv_icon_dot0_sml", "Click and drag to make a connection from this output");
 		private static readonly IconButton _inputButton = new IconButton("sv_icon_dot0_sml", "Drag an output to here to make a connection");
 		private static readonly IconButton _removeButton = new IconButton("d_Toolbar Minus", "Remove this node");
@@ -71,6 +72,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static Color _hoveredColor = new Color(0.5f, 0.5f, 0.5f, 0.5f);
 		private static Color _selectedColor = new Color(0.96f, 0.95f, 0.2f, 0.75f);
 		private static Color _nodeColor = new Color(0.23f, 0.24f, 0.29f, 1.0f);
+		private static Color _commentColor = new Color(0.13f, 0.24f, 0.14f, 1.0f);
 		private static Color _knobColor = new Color(0.49f, 0.73f, 1.0f, 1.0f);
 
 		private static Color _breakColor = new Color(1.0f, 0.2f, 0.2f, 1.0f);
@@ -298,7 +300,12 @@ namespace PiRhoSoft.CompositionEditor
 				// add all the nodes first so connection nodes are available before trying to wire them up
 
 				foreach (var node in _nodes)
-					SetupOutputConnections(node);
+				{
+					if (node.Node is CommentNode comment)
+						node.InnerHeight = _commentStyle.Style.CalcHeight(new GUIContent(comment.Comment), InstructionGraphNode.NodeData.Width);
+					else
+						SetupOutputConnections(node);
+				}
 			}
 		}
 
@@ -313,9 +320,16 @@ namespace PiRhoSoft.CompositionEditor
 			var data = GetNodeData(node);
 			if (data != null)
 			{
-				data.ClearConnections();
-				node.GetConnections(data);
-				SetupOutputConnections(data);
+				if (node is CommentNode comment)
+				{
+					data.InnerHeight = _commentStyle.Style.CalcHeight(new GUIContent(comment.Comment), InstructionGraphNode.NodeData.Width);
+				}
+				else
+				{
+					data.ClearConnections();
+					node.GetConnections(data);
+					SetupOutputConnections(data);
+				}
 			}
 		}
 
@@ -576,6 +590,10 @@ namespace PiRhoSoft.CompositionEditor
 				previousMenu = type.Menu;
 				menu.AddItem(new GUIContent(type.Menu + type.Name), false, () => CreateNode(type.Type, type.Name, _createPosition));
 			}
+
+			menu.AddItem(new GUIContent(prefix), false, null);
+			menu.AddItem(new GUIContent(prefix + "Comment"), false, () => CreateNode(typeof(CommentNode), "Comment", _createPosition));
+			menu.AddItem(new GUIContent(prefix + "Mockup"), false, () => CreateNode(typeof(MockupNode), "Mockup", _createPosition));
 		}
 
 		private GenericMenu CreateContextMenu()
@@ -689,14 +707,6 @@ namespace PiRhoSoft.CompositionEditor
 			return null;
 		}
 
-		private int GetInteraction(InstructionGraphNode.NodeData node, Vector2 position)
-		{
-			if (GetInteractionBounds(node, 0).Contains(position))
-				return 0;
-
-			return -1;
-		}
-
 		#endregion
 
 		#region Drawing
@@ -716,6 +726,18 @@ namespace PiRhoSoft.CompositionEditor
 			style.fixedWidth = InstructionGraphNode.NodeData.Width - 3 * RectHelper.IconWidth;
 			style.alignment = TextAnchor.MiddleLeft;
 			style.normal.textColor = new Color(0.8f, 0.8f, 0.8f, 1.0f);
+			return style;
+		}
+
+		private static GUIStyle CreateCommentStyle()
+		{
+			var style = new GUIStyle();
+			style.padding.left = 5;
+			style.clipping = TextClipping.Clip;
+			style.fixedWidth = InstructionGraphNode.NodeData.Width;
+			style.alignment = TextAnchor.UpperLeft;
+			style.normal.textColor = new Color(0.7f, 0.7f, 0.7f, 1.0f);
+			style.wordWrap = true;
 			return style;
 		}
 
@@ -799,7 +821,7 @@ namespace PiRhoSoft.CompositionEditor
 					}
 				}
 
-				var canBreak = _selectedNodes.Count == 1 && _selectedNodes[0].Node != _start;
+				var canBreak = _selectedNodes.Count == 1 && _selectedNodes[0].Node != _start && !(_selectedNodes[0].Node is CommentNode);
 				var hasBreak = canBreak && _selectedNodes[0].Node.IsBreakpoint;
 
 				using (new EditorGUI.DisabledScope(!canBreak))
@@ -856,6 +878,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void DrawNode(InstructionGraphNode.NodeData node)
 		{
+			var isComment = node.Node is CommentNode;
 			var rect = node.Bounds;
 
 			var outlineRect = rect;
@@ -863,21 +886,34 @@ namespace PiRhoSoft.CompositionEditor
 			var inputRect = GetInputBounds(node);
 			var deleteRect = GetInteractionBounds(node, 0);
 			var headerColor = node.Node.GetNodeColor();
+			var nodeColor = isComment ? _commentColor : _nodeColor;
 
 			var labelRect = RectHelper.AdjustHeight(headerRect, EditorGUIUtility.singleLineHeight, RectVerticalAlignment.Middle);
 			var inputIconRect = RectHelper.Adjust(inputRect, _inputButton.Content.image.width, _inputButton.Content.image.height, RectHorizontalAlignment.Center, RectVerticalAlignment.Middle);
 			var deleteIconRect = RectHelper.Adjust(deleteRect, _removeButton.Content.image.width, _removeButton.Content.image.height, RectHorizontalAlignment.Center, RectVerticalAlignment.Middle);
 
-			RectHelper.TakeWidth(ref labelRect, headerRect.height);
+			if (!isComment && node.Node != _start)
+				RectHelper.TakeWidth(ref labelRect, RectHelper.IconWidth);
+
 			RectHelper.TakeTrailingWidth(ref labelRect, headerRect.height);
 
-			EditorGUI.DrawRect(headerRect, headerColor);
+			if (isComment)
+			{
+				EditorGUI.DrawRect(outlineRect, _commentColor);
+			}
+			else
+			{
+				EditorGUI.DrawRect(headerRect, headerColor);
+				EditorGUI.DrawRect(rect, nodeColor);
+			}
 
-			if (node.Node != _start)
+			if (node.Node != _start && !isComment)
 				EditorGUI.LabelField(inputIconRect, _inputButton.Content, GUIStyle.none);
 
 			var iteration = GetNodeIteration(node);
-			var nodeLabel = iteration > 0 ? string.Format("{0} ({1})", node.Node.Name, iteration) : node.Node.Name;
+			var nodeLabel = iteration > 0
+				? string.Format("{0} ({1})", node.Node.Name, iteration)
+				: node.Node.Name;
 
 			EditorGUI.LabelField(labelRect, nodeLabel, _headerStyle.Style);
 
@@ -892,26 +928,34 @@ namespace PiRhoSoft.CompositionEditor
 					Handles.DrawSolidRectangleWithOutline(deleteRect, Color.clear, _selectedColor);
 			}
 
-			EditorGUI.DrawRect(rect, _nodeColor);
-
-			foreach (var connection in node.Connections)
+			if (isComment)
 			{
-				var outputRect = GetOutputBounds(connection);
-				var outputIconRect = RectHelper.Adjust(outputRect, _outputButton.Content.image.width, _outputButton.Content.image.height, RectHorizontalAlignment.Center, RectVerticalAlignment.Middle);
-				var outputLabelRect = RectHelper.TakeHeight(ref rect, InstructionGraphNode.NodeData.LineHeight);
+				var commentRect = RectHelper.Inset(rect, 0.0f, 0.0f, 0.0f, InstructionGraphNode.NodeData.FooterHeight);
+				var commentNode = node.Node as CommentNode;
 
-				// tooltip positioning is pretty messed up with zoom but nothing can really be done about that short
-				// of implementing a custom tooltip system
-				var label = new GUIContent(ObjectNames.NicifyVariableName(connection.Name), Label.GetTooltip(connection.From.GetType(), connection.Field));
+				EditorGUI.LabelField(commentRect, commentNode.Comment, _commentStyle.Style);
+			}
+			else
+			{
+				foreach (var connection in node.Connections)
+				{
+					var outputRect = GetOutputBounds(connection);
+					var outputIconRect = RectHelper.Adjust(outputRect, _outputButton.Content.image.width, _outputButton.Content.image.height, RectHorizontalAlignment.Center, RectVerticalAlignment.Middle);
+					var outputLabelRect = RectHelper.TakeHeight(ref rect, InstructionGraphNode.NodeData.LineHeight);
 
-				EditorGUI.LabelField(outputLabelRect, label, _connectionStyle.Style);
-				EditorGUI.LabelField(outputIconRect, _outputButton.Content, GUIStyle.none);
+					// tooltip positioning is pretty messed up with zoom but nothing can really be done about that short
+					// of implementing a custom tooltip system
+					var label = new GUIContent(ObjectNames.NicifyVariableName(connection.Name), Label.GetTooltip(connection.From.GetType(), connection.Field));
 
-				if (connection == _hoveredOutput)
-					Handles.DrawSolidRectangleWithOutline(outputRect, Color.clear, _hoveredColor);
+					EditorGUI.LabelField(outputLabelRect, label, _connectionStyle.Style);
+					EditorGUI.LabelField(outputIconRect, _outputButton.Content, GUIStyle.none);
 
-				if (_selectedConnections.Contains(connection))
-					Handles.DrawSolidRectangleWithOutline(outputRect, Color.clear, _selectedColor);
+					if (connection == _hoveredOutput)
+						Handles.DrawSolidRectangleWithOutline(outputRect, Color.clear, _hoveredColor);
+
+					if (_selectedConnections.Contains(connection))
+						Handles.DrawSolidRectangleWithOutline(outputRect, Color.clear, _selectedColor);
+				}
 			}
 
 			var selected = _selectedNodes.Contains(node);
@@ -1114,7 +1158,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseUp, InputManager.MouseButton.Right)
-				.AddCondition(() => _graph != null && _hoveredNode == null && !wasMouseDragged)
+				.AddCondition(() => _graph != null && _hoveredNode == null && !wasMouseDragged && !_simulateDrag)
 				.AddAction(() => _showContextMenu = true);
 		}
 
@@ -1142,7 +1186,7 @@ namespace PiRhoSoft.CompositionEditor
 
 					if (connection != null)
 						SetHoveredOutput(connection);
-					else if (GetInputBounds(node).Contains(Event.current.mousePosition) && HasInput(node))
+					else if (GetInputBounds(node).Contains(Event.current.mousePosition) && HasInput(node) && !(node.Node is CommentNode))
 						SetHoveredInput(node);
 					else if (node.Node != _start && GetInteractionBounds(node, 0).Contains(Event.current.mousePosition))
 						SetHoveredInteraction(node);
@@ -1255,7 +1299,7 @@ namespace PiRhoSoft.CompositionEditor
 						SetSelection(_hoveredNode);
 
 					if (_selectedNodes.Count > 0)
-						_mouseDragOffset = Event.current.mousePosition - _selectedNodes[0].Node.GraphPosition;
+						_mouseDragOffset = Event.current.mousePosition - _selectedNodes[0].Position;
 
 					break;
 				}
@@ -1331,12 +1375,12 @@ namespace PiRhoSoft.CompositionEditor
 				}
 				case MouseState.Move:
 				{
-					var origin = _selectedNodes[0].Node.GraphPosition;
+					var origin = _selectedNodes[0].Position;
 					var offset = Event.current.mousePosition - _mouseDragOffset;
 
 					foreach (var node in _selectedNodes)
 					{
-						var position = (node.Node.GraphPosition - origin) + offset;
+						var position = (node.Position - origin) + offset;
 
 						position.x = _snapToGrid.Value ? MathHelper.Snap(position.x, _gridSize * _snapAmount.Value) : position.x;
 						position.y = _snapToGrid.Value ? MathHelper.Snap(position.y, _gridSize * _snapAmount.Value) : position.y;
@@ -1349,7 +1393,7 @@ namespace PiRhoSoft.CompositionEditor
 				case MouseState.Connect:
 				{
 					var node = GetNode(Event.current.mousePosition);
-					var canConnect = node != null && node.Node != _start && !_selectedConnections.Select(connection => connection.From).Contains(node.Node);
+					var canConnect = node != null && node.Node != _start && !(node.Node is CommentNode) && !_selectedConnections.Select(connection => connection.From).Contains(node.Node);
 
 					if (dragging)
 						_simulateDrag = false;
@@ -1512,7 +1556,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			foreach (var node in _selectedNodes)
 			{
-				var position = node.Node.GraphPosition + new Vector2(_gridSize * amount.x, _gridSize * amount.y);
+				var position = node.Position + new Vector2(_gridSize * amount.x, _gridSize * amount.y);
 				InstructionGraphEditor.SetNodePosition(_graph, node, position, node.Node == _start);
 			}
 

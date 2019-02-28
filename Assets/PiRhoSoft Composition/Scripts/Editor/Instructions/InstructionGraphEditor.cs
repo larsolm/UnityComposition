@@ -54,7 +54,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			using (new UndoScope(isStart ? graph as ScriptableObject : node.Node, true))
 			{
-				node.SetPosition(position);
+				node.Position = position;
 
 				if (isStart)
 					graph.StartPosition = position;

@@ -90,19 +90,41 @@ namespace PiRhoSoft.CompositionEngine
 			public const float LineHeight = 18.0f;
 			public const float FooterHeight = 2.0f;
 
+			private float _innerHeight = 0.0f;
+
 			public InstructionGraphNode Node { get; private set; }
 			public Rect Bounds { get; private set; }
 			public List<ConnectionData> Connections = new List<ConnectionData>();
 
+			public Vector2 Position
+			{
+				get
+				{
+					return Node.GraphPosition;
+				}
+				set
+				{
+					Node.GraphPosition = value;
+					UpdateBounds();
+				}
+			}
+
+			public float InnerHeight
+			{
+				get
+				{
+					return _innerHeight;
+				}
+				set
+				{
+					_innerHeight = value;
+					UpdateBounds();
+				}
+			}
+
 			public NodeData(InstructionGraphNode node)
 			{
 				Node = node;
-				UpdateBounds();
-			}
-
-			public void SetPosition(Vector2 position)
-			{
-				Node.GraphPosition = position;
 				UpdateBounds();
 			}
 
@@ -160,7 +182,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			private void UpdateBounds()
 			{
-				Bounds = new Rect(Node.GraphPosition, new Vector2(Width, Connections.Count * LineHeight + HeaderHeight + FooterHeight));
+				Bounds = new Rect(Position, new Vector2(Width, Connections.Count * LineHeight + HeaderHeight + FooterHeight + _innerHeight));
 			}
 		}
 

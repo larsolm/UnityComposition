@@ -16,9 +16,8 @@ namespace PiRhoSoft.CompositionEngine
 	public class MockupConnectionList : SerializedList<MockupConnection>
 	{
 	}
-
-	[CreateInstructionGraphNodeMenu("General/Mockup")]
-	[HelpURL(Composition.DocumentationUrl + "mockup")]
+	
+	[HelpURL(Composition.DocumentationUrl + "mockup-node")]
 	public class MockupNode : InstructionGraphNode
 	{
 		[Tooltip("The connections from this node")]
