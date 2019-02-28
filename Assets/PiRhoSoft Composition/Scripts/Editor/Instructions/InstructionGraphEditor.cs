@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -19,58 +20,6 @@ namespace PiRhoSoft.CompositionEditor
 		public static void SelectNode(InstructionGraphNode node)
 		{
 			Selection.activeObject = node;
-		}
-
-		public static InstructionGraphNode CreateNode(InstructionGraph graph, Type type, string name, Vector2 position)
-		{
-			using (new UndoScope(graph, true))
-			{
-				var node = CreateInstance(type) as InstructionGraphNode;
-				node.hideFlags = HideFlags.HideInHierarchy;
-				node.name = name;
-				node.Name = name;
-				node.GraphPosition = position;
-
-				graph.Nodes.Add(node);
-
-				Undo.RegisterCreatedObjectUndo(node, "Create Node");
-				AssetDatabase.AddObjectToAsset(node, graph);
-				AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(graph));
-				return node;
-			}
-		}
-
-		public static void DestroyNode(InstructionGraph graph, InstructionGraphNode node)
-		{
-			using (new UndoScope(graph, true))
-			{
-				graph.Nodes.Remove(node);
-				Undo.DestroyObjectImmediate(node);
-				AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(graph));
-			}
-		}
-
-		public static void SetNodePosition(InstructionGraph graph, InstructionGraphNode.NodeData node, Vector2 position, bool isStart)
-		{
-			using (new UndoScope(isStart ? graph as ScriptableObject : node.Node, true))
-			{
-				node.Position = position;
-
-				if (isStart)
-					graph.StartPosition = position;
-			}
-		}
-
-		public static void ChangeConnectionTarget(InstructionGraphNode.ConnectionData connection, InstructionGraphNode.NodeData target)
-		{
-			using (new UndoScope(connection.From, true)) // From is only node that changes in this method - the rest will be rebuild automatically
-				connection.ChangeTarget(target);
-		}
-
-		public static void SetGraphNodeTarget(InstructionGraph graph, ref InstructionGraphNode node, InstructionGraphNode target)
-		{
-			using (new UndoScope(graph, true))
-				node = target;
 		}
 
 		void OnEnable()
@@ -128,5 +77,60 @@ namespace PiRhoSoft.CompositionEditor
 				}
 			}
 		}
+
+		#region Graph Modification
+
+		public static InstructionGraphNode CreateNode(InstructionGraph graph, Type type, string name, Vector2 position)
+		{
+			using (new UndoScope(graph, true))
+			{
+				var node = CreateInstance(type) as InstructionGraphNode;
+				node.hideFlags = HideFlags.HideInHierarchy;
+				node.name = name;
+				node.Name = name;
+				node.GraphPosition = position;
+
+				graph.Nodes.Add(node);
+
+				Undo.RegisterCreatedObjectUndo(node, "Create Node");
+				AssetDatabase.AddObjectToAsset(node, graph);
+				AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(graph));
+				return node;
+			}
+		}
+
+		public static void DestroyNode(InstructionGraph graph, InstructionGraphNode node, IList<InstructionGraphNode.ConnectionData> connections, InstructionGraphNode start)
+		{
+			foreach (var connection in connections)
+				ChangeConnectionTarget(graph, connection, null, connection.From == start);
+
+			using (new UndoScope(graph, true))
+			{
+				graph.Nodes.Remove(node);
+				Undo.DestroyObjectImmediate(node);
+				AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(graph));
+			}
+		}
+
+		public static void SetNodePosition(InstructionGraph graph, InstructionGraphNode.NodeData node, Vector2 position, bool isStart)
+		{
+			using (new UndoScope(isStart ? graph as ScriptableObject : node.Node, true))
+			{
+				node.Position = position;
+
+				if (isStart)
+					graph.StartPosition = position;
+			}
+		}
+
+		public static void ChangeConnectionTarget(InstructionGraph graph, InstructionGraphNode.ConnectionData connection, InstructionGraphNode.NodeData target, bool isStart)
+		{
+			using (new UndoScope(isStart ? graph as ScriptableObject : connection.From, true)) // From is only node that changes in this method - the rest will be rebuild automatically
+			{
+				connection.ChangeTarget(target);
+			}
+		}
+
+		#endregion
 	}
 }

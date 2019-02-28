@@ -349,10 +349,14 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void RemoveNode(InstructionGraphNode.NodeData node)
 		{
+			var connections = _nodes
+				.SelectMany(data => data.Connections)
+				.Where(connection => connection.Target == node)
+				.ToList();
+
 			if (node.Node != _start)
 			{
-				RemoveInputConnections(node);
-				InstructionGraphEditor.DestroyNode(_graph, node.Node);
+				InstructionGraphEditor.DestroyNode(_graph, node.Node, connections, _start);
 				_nodes.Remove(node);
 			}
 		}
@@ -425,21 +429,9 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private void RemoveInputConnections(InstructionGraphNode.NodeData node)
-		{
-			foreach (var input in _nodes)
-			{
-				foreach (var output in input.Connections)
-				{
-					if (output.Target == node)
-						output.ChangeTarget(null);
-				}
-			}
-		}
-
 		private void SetConnection(InstructionGraphNode.ConnectionData connection, InstructionGraphNode.NodeData node)
 		{
-			InstructionGraphEditor.ChangeConnectionTarget(connection, node);
+			InstructionGraphEditor.ChangeConnectionTarget(_graph, connection, node, connection.From == _start);
 		}
 
 		#endregion
@@ -482,9 +474,15 @@ namespace PiRhoSoft.CompositionEditor
 				RefreshNode(_start);
 		}
 
-		private void DeleteSelectedNodes()
+		private void RemoveSelectedNodes()
 		{
-			// TODO
+			// make a copy since remove will modify the list
+			var nodes = _selectedNodes
+				.Where(node => node.Node != _start)
+				.ToList();
+
+			foreach (var node in nodes)
+				RemoveNode(node);
 		}
 
 		#endregion
@@ -495,6 +493,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			TeardownNodes();
 			SetupNodes();
+			UpdateSelection();
 			Repaint();
 		}
 
@@ -560,6 +559,7 @@ namespace PiRhoSoft.CompositionEditor
 				menu = new GenericMenu();
 
 			var types = TypeHelper.ListDerivedTypes<InstructionGraphNode>()
+				.Where(type => type != typeof(MockupNode) && type != typeof(CommentNode))
 				.Select(type =>
 				{
 					var attribute = TypeHelper.GetAttribute<CreateInstructionGraphNodeMenuAttribute>(type);
@@ -1100,7 +1100,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			input.Create<InputManager.KeyboardTrigger>()
 				.SetEvent(EventType.KeyDown, KeyCode.Delete)
-				.AddAction(DeleteSelectedNodes);
+				.AddAction(RemoveSelectedNodes);
 
 			input.Create<InputManager.KeyboardTrigger>()
 				.SetEvent(EventType.KeyDown, KeyCode.Home)
@@ -1433,9 +1433,7 @@ namespace PiRhoSoft.CompositionEditor
 					if (_pendingInput != null)
 					{
 						foreach (var connection in _selectedConnections)
-						{
 							SetConnection(connection, _pendingInput);
-						}
 
 						_pendingInput = null;
 					}
