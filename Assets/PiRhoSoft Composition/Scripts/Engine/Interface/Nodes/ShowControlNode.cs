@@ -13,10 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The control to show")]
 		public InterfaceReference Control = new InterfaceReference();
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.0f, 0.0f, 0.45f);
-		}
+		public override Color NodeColor => Colors.InterfaceLight;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

@@ -16,10 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The binding group to update (updates all if empty)")]
 		public string Group;
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.0f, 0.0f, 0.35f);
-		}
+		public override Color NodeColor => Colors.Interface;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

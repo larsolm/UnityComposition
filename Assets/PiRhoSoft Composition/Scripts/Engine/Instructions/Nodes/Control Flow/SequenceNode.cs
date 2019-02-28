@@ -14,10 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(AllowCollapse = false)]
 		public InstructionGraphNodeList Sequence = new InstructionGraphNodeList();
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.5f, 0.2f, 0.2f);
-		}
+		public override Color NodeColor => Colors.Sequence;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

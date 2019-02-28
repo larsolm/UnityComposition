@@ -25,14 +25,17 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Whether the Transition should automatically end after its specified duration or remain running")]
 		public bool AutoFinish = true;
 
-		public override Color GetNodeColor()
+		public override Color NodeColor
 		{
-			switch (Phase)
+			get
 			{
-				case TransitionPhase.Out: return new Color(0.0f, 0.25f, 0.0f);
-				case TransitionPhase.Obscure: return new Color(0.0f, 0.35f, 0.0f);
-				case TransitionPhase.In: return new Color(0.0f, 0.45f, 0.0f);
-				default: return base.GetNodeColor();
+				switch (Phase)
+				{
+					case TransitionPhase.Out: return Colors.SequencingDark;
+					case TransitionPhase.Obscure: return Colors.Sequencing;
+					case TransitionPhase.In: return Colors.SequencingLight;
+					default: return base.NodeColor;
+				}
 			}
 		}
 

@@ -26,10 +26,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The parent object to attach the object to (optional) - if set position will be in local space")]
 		public VariableReference Parent = new VariableReference();
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.0f, 0.45f, 0.0f);
-		}
+		public override Color NodeColor => Colors.SequencingLight;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{

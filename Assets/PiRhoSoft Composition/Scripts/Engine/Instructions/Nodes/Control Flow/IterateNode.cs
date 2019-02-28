@@ -12,10 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to for each object in the iteration")]
 		public InstructionGraphNode Loop = null;
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.35f, 0.1f, 0.1f);
-		}
+		public override Color NodeColor => Colors.Loop;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

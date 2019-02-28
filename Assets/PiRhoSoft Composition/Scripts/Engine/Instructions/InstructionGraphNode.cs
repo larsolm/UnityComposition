@@ -32,6 +32,27 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class InstructionGraphNode : ScriptableObject
 	{
+		public static class Colors
+		{
+			public static readonly Color Start = new Color(0.1f, 0.1f, 0.1f);
+			public static readonly Color Default = new Color(0.35f, 0.35f, 0.35f);
+			public static readonly Color ExecutionLight = new Color(0.45f, 0.45f, 0.0f);
+			public static readonly Color ExecutionDark = new Color(0.25f, 0.25f, 0.0f);
+			public static readonly Color Animation = new Color(0.35f, 0.0f, 0.35f);
+			public static readonly Color Sequence = new Color(0.5f, 0.2f, 0.2f);
+			public static readonly Color Loop = new Color(0.35f, 0.1f, 0.1f);
+			public static readonly Color Branch = new Color(0.2f, 0.1f, 0.1f);
+			public static readonly Color Break = new Color(0.1f, 0.05f, 0.05f);
+			public static readonly Color Sequencing = new Color(0.0f, 0.35f, 0.0f);
+			public static readonly Color SequencingLight = new Color(0.0f, 0.45f, 0.0f);
+			public static readonly Color SequencingDark = new Color(0.0f, 0.25f, 0.0f);
+			public static readonly Color Interface = new Color(0.0f, 0.0f, 0.35f);
+			public static readonly Color InterfaceLight = new Color(0.0f, 0.0f, 0.45f);
+			public static readonly Color InterfaceDark = new Color(0.0f, 0.0f, 0.25f);
+			public static readonly Color InterfaceCyan = new Color(0.0f, 0.3f, 0.5f);
+			public static readonly Color InterfaceTeal = new Color(0.0f, 0.5f, 0.3f);
+		}
+
 		private const string _missingThisWarning = "(CCNMT) unable to find variable {0} for instruction graph node {1}";
 		private const string _invalidThisWarning = "(CCNIT) variable {0} for instruction graph node {1} must be an object or store";
 		private const string _missingKeyError = "(CCNMK) failed to set target: unable to find key {0} for instruction graph node {1}";
@@ -78,10 +99,7 @@ namespace PiRhoSoft.CompositionEngine
 		[HideInInspector] public Vector2 GraphPosition;
 		[HideInInspector] public bool IsBreakpoint = false;
 
-		public virtual Color GetNodeColor()
-		{
-			return new Color(0.35f, 0.35f, 0.35f);
-		}
+		public virtual Color NodeColor => Colors.Default;
 
 		public class NodeData
 		{

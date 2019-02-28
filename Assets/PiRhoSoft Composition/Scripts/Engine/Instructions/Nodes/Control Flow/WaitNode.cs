@@ -15,10 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Minimum(0.0f)]
 		public float Time = 1.0f;
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.0f, 0.25f, 0.0f);
-		}
+		public override Color NodeColor => Colors.Sequencing;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

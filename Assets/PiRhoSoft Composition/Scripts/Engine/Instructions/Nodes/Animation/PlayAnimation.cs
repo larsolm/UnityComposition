@@ -28,10 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool IsExecutionImmediate => !WaitForCompletion;
 		
-		public override Color GetNodeColor()
-		{
-			return new Color(0.35f, 0.0f, 0.35f);
-		}
+		public override Color NodeColor => Colors.Animation;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{

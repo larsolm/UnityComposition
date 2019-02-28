@@ -234,7 +234,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			public InstructionGraph Graph;
 
-			public override Color GetNodeColor() => new Color(0.1f, 0.1f, 0.1f);
+			public override Color NodeColor => Colors.Start;
 			protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration) { yield break; }
 
 			public override void GetConnections(NodeData data) => Graph.GetConnections(data);
@@ -248,7 +248,6 @@ namespace PiRhoSoft.CompositionEditor
 				_graph = graph;
 				TeardownNodes();
 				SetupNodes();
-				GoToStart();
 				ShowAll();
 			}
 		}
@@ -885,7 +884,7 @@ namespace PiRhoSoft.CompositionEditor
 			var headerRect = TakeHeaderHeight(ref rect);
 			var inputRect = GetInputBounds(node);
 			var deleteRect = GetInteractionBounds(node, 0);
-			var headerColor = node.Node.GetNodeColor();
+			var headerColor = node.Node.NodeColor;
 			var nodeColor = isComment ? _commentColor : _nodeColor;
 
 			var labelRect = RectHelper.AdjustHeight(headerRect, EditorGUIUtility.singleLineHeight, RectVerticalAlignment.Middle);

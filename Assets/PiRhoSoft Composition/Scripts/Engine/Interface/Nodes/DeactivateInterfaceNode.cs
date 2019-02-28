@@ -15,10 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The name of the interface to activate")]
 		public string InterfaceName;
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.0f, 0.0f, 0.25f);
-		}
+		public override Color NodeColor => Colors.InterfaceDark;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

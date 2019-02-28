@@ -23,10 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The message to display when this node is traversed")]
 		public Message Message = new Message();
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.0f, 0.3f, 0.5f);
-		}
+		public override Color NodeColor => Colors.InterfaceCyan;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{

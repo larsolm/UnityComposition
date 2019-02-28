@@ -31,10 +31,7 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Foldout, EmptyText = "Add items to create selection options")]
 		public SelectionNodeItemList Items = new SelectionNodeItemList();
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.0f, 0.5f, 0.3f);
-		}
+		public override Color NodeColor => Colors.InterfaceTeal;
 
 		public override void GetConnections(NodeData data)
 		{

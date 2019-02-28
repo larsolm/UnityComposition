@@ -27,10 +27,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The display color of the node")]
 		public Color DisplayColor = new Color(0.35f, 0.35f, 0.35f);
 
-		public override Color GetNodeColor()
-		{
-			return DisplayColor;
-		}
+		public override Color NodeColor => DisplayColor;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

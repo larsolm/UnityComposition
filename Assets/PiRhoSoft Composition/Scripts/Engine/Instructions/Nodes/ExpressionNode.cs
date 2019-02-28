@@ -14,10 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The expression to execute")]
 		public Expression Expression = new Expression();
 
-		public override Color GetNodeColor()
-		{
-			return new Color(0.25f, 0.25f, 0.0f);
-		}
+		public override Color NodeColor => Colors.ExecutionDark;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
