@@ -253,12 +253,13 @@ namespace PiRhoSoft.CompositionEditor
 				}
 				case VariableType.Object:
 				{
-					var typeConstraint = !string.IsNullOrEmpty(constraint.TypeConstraint) ? Type.GetType(constraint.TypeConstraint) : null;
-
 					DrawIndentedLabel(ref rect, _objectConstraintLabel);
-					TypePopupDrawer.Draw<Object>(rect, GUIContent.none, typeConstraint);
 
-					constraint.TypeConstraint = typeConstraint != null ? typeConstraint.AssemblyQualifiedName : "";
+					var typeConstraint = !string.IsNullOrEmpty(constraint.TypeConstraint) ? Type.GetType(constraint.TypeConstraint) : null;
+					var selectedConstraint = TypePopupDrawer.Draw<Object>(rect, GUIContent.none, typeConstraint);
+
+					constraint.TypeConstraint = selectedConstraint != null ? selectedConstraint.AssemblyQualifiedName : "";
+
 					break;
 				}
 			}

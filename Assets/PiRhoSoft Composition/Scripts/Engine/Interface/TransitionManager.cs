@@ -14,7 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 		private List<TransitionRenderer> _renderers = new List<TransitionRenderer>();
 
 		public Transition CurrentTransition { get; private set; }
-		public TransitionRenderer CurrentRenderer => _renderers.Count > 0 ? _renderers[0] : null;
+		public TransitionRenderer CurrentRenderer => _renderers.Count > 0 ? _renderers[_renderers.Count - 1] : null;
 
 		public void AddRenderer(TransitionRenderer renderer)
 		{
