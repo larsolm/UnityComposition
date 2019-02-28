@@ -203,8 +203,9 @@ namespace PiRhoSoft.CompositionEditor
 			SetupNodes();
 
 			autoRepaintOnSceneChange = true;
-			Undo.undoRedoPerformed += UndoPerformed;
+			Undo.undoRedoPerformed += RebuildNodes;
 			Selection.selectionChanged += UpdateSelection;
+			EditorApplication.playModeStateChanged += RebuildNodes;
 
 			// this has to be here because Unity doesn't allow EditorPrefs access in a static constructor
 			InstructionGraph.IsDebugBreakEnabled = _breakpointsEnabled.Value;
@@ -213,8 +214,9 @@ namespace PiRhoSoft.CompositionEditor
 
 		protected override void Teardown()
 		{
+			EditorApplication.playModeStateChanged -= RebuildNodes;
 			Selection.selectionChanged -= UpdateSelection;
-			Undo.undoRedoPerformed -= UndoPerformed;
+			Undo.undoRedoPerformed -= RebuildNodes;
 
 			TeardownNodes();
 
@@ -224,6 +226,19 @@ namespace PiRhoSoft.CompositionEditor
 			_settingsMenu = null;
 
 			base.Teardown();
+		}
+
+		private void RebuildNodes()
+		{
+			TeardownNodes();
+			SetupNodes();
+			UpdateSelection();
+			Repaint();
+		}
+
+		private void RebuildNodes(PlayModeStateChange state)
+		{
+			RebuildNodes();
 		}
 
 		#endregion
@@ -299,12 +314,7 @@ namespace PiRhoSoft.CompositionEditor
 				// add all the nodes first so connection nodes are available before trying to wire them up
 
 				foreach (var node in _nodes)
-				{
-					if (node.Node is CommentNode comment)
-						node.InnerHeight = _commentStyle.Style.CalcHeight(new GUIContent(comment.Comment), InstructionGraphNode.NodeData.Width);
-					else
-						SetupOutputConnections(node);
-				}
+					SetupOutputConnections(node);
 			}
 		}
 
@@ -319,16 +329,9 @@ namespace PiRhoSoft.CompositionEditor
 			var data = GetNodeData(node);
 			if (data != null)
 			{
-				if (node is CommentNode comment)
-				{
-					data.InnerHeight = _commentStyle.Style.CalcHeight(new GUIContent(comment.Comment), InstructionGraphNode.NodeData.Width);
-				}
-				else
-				{
-					data.ClearConnections();
-					node.GetConnections(data);
-					SetupOutputConnections(data);
-				}
+				data.ClearConnections();
+				node.GetConnections(data);
+				SetupOutputConnections(data);
 			}
 		}
 
@@ -483,18 +486,6 @@ namespace PiRhoSoft.CompositionEditor
 
 			foreach (var node in nodes)
 				RemoveNode(node);
-		}
-
-		#endregion
-
-		#region Undo Handling
-
-		private void UndoPerformed()
-		{
-			TeardownNodes();
-			SetupNodes();
-			UpdateSelection();
-			Repaint();
 		}
 
 		#endregion
@@ -878,6 +869,10 @@ namespace PiRhoSoft.CompositionEditor
 		private void DrawNode(InstructionGraphNode.NodeData node)
 		{
 			var isComment = node.Node is CommentNode;
+
+			if (isComment)
+				node.InnerHeight = _commentStyle.Style.CalcHeight(new GUIContent((node.Node as CommentNode).Comment), InstructionGraphNode.NodeData.Width);
+
 			var rect = node.Bounds;
 
 			var outlineRect = rect;

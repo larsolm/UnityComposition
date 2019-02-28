@@ -14,43 +14,21 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _nodes:
     _items:
-    - {fileID: 114446285143757668}
-    - {fileID: 114390569148400404}
-    - {fileID: 114984586603906136}
-  StartPosition: {x: -384, y: -281.6}
+    - {fileID: 114458700894370910}
+    - {fileID: 114973674835382346}
+    - {fileID: 114616102912950854}
+    - {fileID: 114124363587895830}
+    - {fileID: 114486160474867244}
+  StartPosition: {x: -972.8, y: -537.60004}
   EntryPoints:
     _items:
     - Name: One
       Node: {fileID: 0}
     - Name: Two
-      Node: {fileID: 0}
---- !u!114 &114390569148400404
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4238dfdb59c60404a84af819381016ca, type: 3}
-  m_Name: Mockup
-  m_EditorClassIdentifier: 
-  Name: Mockup
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 384, y: -256}
-  _executionMode: 0
-  Connections:
-    _items:
+      Node: {fileID: 114486160474867244}
     - Name: Three
       Node: {fileID: 0}
-    - Name: Four
-      Node: {fileID: 0}
---- !u!114 &114446285143757668
+--- !u!114 &114124363587895830
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -68,15 +46,40 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -89.6, y: -204.8}
-  _executionMode: 0
+  GraphPosition: {x: -524.8, y: -640}
+  IsBreakpoint: 0
   Connections:
-    _items:
-    - Name: One
-      Node: {fileID: 0}
-    - Name: Two
-      Node: {fileID: 0}
---- !u!114 &114984586603906136
+    _items: []
+  DisplayColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+--- !u!114 &114458700894370910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -780.8, y: -307.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    InterfaceName: InterfaceName
+    ControlName: ControlName
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: 
+--- !u!114 &114486160474867244
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -86,17 +89,66 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4238dfdb59c60404a84af819381016ca, type: 3}
-  m_Name: Mockup
+  m_Name: Mockup Node
   m_EditorClassIdentifier: 
-  Name: Mockup
+  Name: Mockup Node
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 256, y: -358.4}
-  _executionMode: 0
+  GraphPosition: {x: -460.80002, y: -409.6}
+  IsBreakpoint: 0
   Connections:
-    _items:
-    - Name: new
-      Node: {fileID: 0}
+    _items: []
+  DisplayColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+--- !u!114 &114616102912950854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -947.2, y: -716.8}
+  IsBreakpoint: 0
+  Comment: Hey here is a long comment that wraps and automatically resizes even during
+    zoom
+--- !u!114 &114973674835382346
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -614.4, y: -550.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114486160474867244}
+  Control:
+    InterfaceName: InterfaceName
+    ControlName: ControlName
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: 

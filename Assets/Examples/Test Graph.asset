@@ -36,6 +36,7 @@ MonoBehaviour:
     _lookups:
     - 
   GraphPosition: {x: 358.4, y: 0}
+  IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
     InterfaceName: Interface
