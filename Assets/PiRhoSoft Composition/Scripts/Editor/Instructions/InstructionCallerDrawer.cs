@@ -31,8 +31,8 @@ namespace PiRhoSoft.CompositionEditor
 		private void Refresh()
 		{
 			_caller.UpdateVariables();
-			_inputs.Setup(_caller.Inputs);
-			_outputs.Setup(_caller.Outputs);
+			_inputs.Setup(_caller.Inputs as IList);
+			_outputs.Setup(_caller.Outputs as IList);
 		}
 
 		private void DrawInstruction(Rect rect, GUIContent label)

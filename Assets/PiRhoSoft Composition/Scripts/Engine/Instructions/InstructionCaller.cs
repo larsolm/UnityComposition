@@ -10,8 +10,8 @@ namespace PiRhoSoft.CompositionEngine
 	public class InstructionCaller
 	{
 		[Tooltip("The Instruction to execute when this is called")] [SerializeField] private Instruction _instruction;
-		[Tooltip("The input values to set for the Instruction")] [SerializeField] private List<InstructionInput> _inputs = new List<InstructionInput>();
-		[Tooltip("The output values from the Instruction to store")] [SerializeField] private List<InstructionOutput> _outputs = new List<InstructionOutput>();
+		[Tooltip("The input values to set for the Instruction")] [SerializeField] private InstructionInputList _inputs = new InstructionInputList();
+		[Tooltip("The output values from the Instruction to store")] [SerializeField] private InstructionOutputList _outputs = new InstructionOutputList();
 
 		public Instruction Instruction
 		{
@@ -19,8 +19,8 @@ namespace PiRhoSoft.CompositionEngine
 			set { _instruction = value; UpdateVariables(); }
 		}
 
-		public List<InstructionInput> Inputs => _inputs;
-		public List<InstructionOutput> Outputs => _outputs;
+		public IList<InstructionInput> Inputs => _inputs;
+		public IList<InstructionOutput> Outputs => _outputs;
 		public bool IsRunning => Instruction != null && Instruction.IsRunning;
 
 		public IEnumerator Execute(InstructionContext context, object thisObject)
@@ -45,7 +45,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void UpdateInputs()
 		{
-			var inputs = new List<InstructionInput>();
+			var inputs = new InstructionInputList();
 			var inputDefinitions = new List<VariableDefinition>();
 
 			if (_instruction != null)
@@ -73,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void UpdateOutputs()
 		{
-			var outputs = new List<InstructionOutput>();
+			var outputs = new InstructionOutputList();
 			var outputDefinitions = new List<VariableDefinition>();
 
 			if (_instruction != null)

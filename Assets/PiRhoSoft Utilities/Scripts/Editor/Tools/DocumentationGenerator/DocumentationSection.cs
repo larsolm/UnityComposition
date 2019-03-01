@@ -90,6 +90,9 @@ namespace PiRhoSoft.UtilityEditor
 					.Replace(DocumentationGenerator.SectionNameTag, Name)
 					.Replace(DocumentationGenerator.SectionNiceNameTag, niceName)
 					.Replace(DocumentationGenerator.SectionIdTag, id)
+					.Replace(DocumentationGenerator.TypeIdTag, type.Id)
+					.Replace(DocumentationGenerator.TypeIdTag, type.Name)
+					.Replace(DocumentationGenerator.TypeIdTag, type.NiceName)
 					.Replace(_membersTag, members)
 				: "";
 		}

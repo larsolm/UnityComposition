@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using PiRhoSoft.UtilityEngine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -16,6 +17,9 @@ namespace PiRhoSoft.CompositionEngine
 		Ignore,
 		Reference
 	}
+
+	[Serializable] public class InstructionInputList : SerializedList<InstructionInput> { }
+	[Serializable] public class InstructionOutputList : SerializedList<InstructionOutput> { }
 
 	[Serializable]
 	public class InstructionInput : ISerializationCallbackReceiver
@@ -103,7 +107,7 @@ namespace PiRhoSoft.CompositionEngine
 			This = thisObject;
 		}
 
-		public void WriteInputs(List<InstructionInput> inputs)
+		public void WriteInputs(IList<InstructionInput> inputs)
 		{
 			foreach (var input in inputs)
 			{
@@ -123,7 +127,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public void ReadOutputs(List<InstructionOutput> outputs)
+		public void ReadOutputs(IList<InstructionOutput> outputs)
 		{
 			foreach (var output in outputs)
 			{

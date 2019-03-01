@@ -2,7 +2,53 @@
 
 ## Instruction
 
+The Instruction type is the foundation of the Composition system. It provides a simple interface for exposing code and properties to the Unity Editor in a generic, re-usable way. Most Instructions are implemented as <<manual/instruction-graph,Instruction Graphs>> which add an additional level of user friendliness by exposing composable functionality to the Unity Editor.
 
+### Using Instructions
+
+Instructions are exposed as properties of https://docs.unity3d.com/Manual/UsingComponents.html[Components^]. Instructions themselves are assets so they are assigned on a https://docs.unity3d.com/Manual/UsingComponents.html[Component^] in the same way as, for example, a https://docs.unity3d.com/Manual/Sprites.html[Sprite^] or https://docs.unity3d.com/Manual/Textures.html[Texture^]. Most Instructions are exposed with an link:reference/instruction-caller.html[Instruction Caller] which allows input values to be sent to the Instruction and output values to be retrieved from the Instruction.
+
+image::instruction-instruction-caller.png[]
+
+When an Instruction is selected, the inspector will be automatically populated with the input fields the selected Instruction is expecting to access, and the output fields the selected Instruction is providing to the caller after it completes its execution. Input values can be specified as either literal values (the exact value is specified in the editor) or copies of values stored in other locations. These other locations are game specific and can be set up easily using an link:reference/instruction-store.html[Instruction Store].
+
+image::instruction-instruction-input.png[]
+
+Output values can be ignored, meaning the caller doesn't care about it, or copied to another location. The available locations are the same for both input values and output values however input values are read from and output values are written to.
+
+image::instruction-instruction-output.png[]
+
+The actual functionality of a specific Instruction can vary considerably depending on the implementation. This framework implements one Instruction type: the <<manual/instruction-graph,InstructionGraph>>, however it is very simple to create your own.
+
+### Writing Instructions
+
+Custom Instructions are very powerful but often it makes more sense to write a custom <<manual/instruction-graph-node.html,Instruction Graph Node>> instead. The implementation and functionality provided is largely the same, however a <<manual/instruction-graph-node.html,node>> allows the functionality to be exposed directly to an <<manual/instruction-graph,Instruction Graph>>. There isn't a specific use case for when an Instruction should be implemented rather than a <<manual/instruction-graph-node.html,node>>. Instead it is an organizational preference to keep a self-contained piece of functionality specific to a certain game separate from the <<manual/instruction-graph,graph>> system. When in doubt, create a custom <<manual/instruction-graph-node.html,node>>.
+
+#### Properties
+
+Instructions are https://docs.unity3d.com/Manual/class-ScriptableObject.html[Scriptable Objects^] so properties are serialized and exposed to the editor just as they would be for any other custom https://docs.unity3d.com/Manual/CreatingComponents.html[component^] or https://docs.unity3d.com/Manual/class-ScriptableObject.html[asset^] and follow the same https://docs.unity3d.com/Manual/script-Serialization.html[serialization rules^].
+
+#### Execution
+
+The entirety of an Instruction's execution is implemented with the abstract _Run_ method. This method is an iterator so it is implemented in the same way (and is in fact run as) a https://docs.unity3d.com/Manual/Coroutines.html[Coroutine^]. That means an Instruction can yield to automatically defer execution while waiting for user input, perform long running tasks across multiple frames, or wait for other events to complete. There are no limitations on what tasks an Instruction can perform.
+
+Access to the game state is provided by an <<reference/instruction-store.html,Instruction Store>> which is passed as the lone parameter to the _Run_ method. The <<reference/instruction-store.html,store>> contains variables as inputs, outputs, and locals. Additionally, callers can provide global variables as a <<reference/instruction-context.html,context>> on the <<reference/instruction-store.html,store>>. These four different variable locations are used for the following purpose:
+
+[cols"1,3"]
+|===
+| Property | Function
+
+| Inputs | The _Inputs_ <<reference/i-variable-store,store>> is populated by the caller with values specified in the editor. Implement the virtual _GetInputs_ method (read on for more) to specify the variables the Instruction expects to use. Input variables can be read but cannot be changed and cannot be added outside the _GetInputs_ method.
+| Outputs | The _Outputs_ <<reference/i-variable-store,store>> is populated by the Instruction itself so the values can be read by the caller. Implement the virtual _GetOutputs_ method to specify the variables the Instruction will be providing to the caller (read on for more). Output variables can be read and written but new outputs cannot be added outside the _GetOutputs_ method.
+| Locals | The _Locals_ <<reference/i-variable-store,store>> is empty at the start of execution and can have variables added, removed, read, and written at will. _Locals_ will not be accessed outside of the Instruction so it can be used for any purpose without directly affecting game state.
+| Context | The _Context_ <<reference/i-variable-store,store>> is similar to _Inputs_ in that it is populated by the caller and is read only. However the contents are specified in code by the object that creates the <<reference/instruction-store.html,Instruction Store>> rather than in the editor. The contents are specific to each implementation.
+|===
+
+The store also has a _This_ property that stores a custom object of any type passed from the caller. While this can be used in custom Instructions, because of the untyped nature it is mostly used in <<manual/instruction-graph.html,Instruction Graphs>>.
+
+#### Inputs and Outputs
+
+The _GetInputs_ and _GetOutputs_ virtual methods are implemented to expose variables to the editor. Both of these methods receive a https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1[List^] of <<reference/variable-definition.html,VariableDefinitions>> that the method is expected to populate. Inputs and outputs are not required in any way. It is up to each Instruction to decide whether to expose variables as fields editable on the Instruction asset (see the _Properties_ section above), editable by the <<reference/instruction-caller.html,caller>> (using these methods), or specified in the caller code (using the <<reference/instruction-context.html,context>>).
 
 ifdef::backend-multipage_html5[]
 link:reference/instruction.html[Reference]
