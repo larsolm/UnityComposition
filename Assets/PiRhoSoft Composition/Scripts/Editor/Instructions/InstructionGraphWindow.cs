@@ -55,10 +55,14 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static readonly IconButton _lockButton = new IconButton("AssemblyLock", "Lock this window so it won't be used when other graphs are opened");
 		private static readonly IconButton _unlockButton = new IconButton("AssemblyLock", "Unlock this window so it can be used to show other graphs");
+		private static readonly IconButton _disabledWatchButton = new IconButton("UnityEditor.LookDevView");
+		private static readonly IconButton _openWatchButton = new IconButton("UnityEditor.LookDevView", "Open the variables panel");
+		private static readonly IconButton _closeWatchButton = new IconButton("UnityEditor.LookDevView", "Close the variables panel");
 
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
 		private const float _toolbarHeight = 17.0f;
+		private const float _watchWidth = 256.0f;
 		private const float _toolbarButtonWidth = 60.0f;
 		private const float _dragTolerance = 4.0f;
 
@@ -88,6 +92,10 @@ namespace PiRhoSoft.CompositionEditor
 		private InstructionGraphNode.NodeData _toRemove = null;
 		private bool _showContextMenu = false;
 
+		private bool _isLocked = false;
+		private bool _isWatchOpen = false;
+		private Vector2 _watchScrollPosition;
+
 		private MouseState _mouseMoveState = MouseState.Select;
 		private MouseState _mouseDragState = MouseState.Hover;
 		private bool _simulateDrag = false;
@@ -109,8 +117,6 @@ namespace PiRhoSoft.CompositionEditor
 		private InstructionGraphNode.NodeData _selectedInteraction;
 
 		#region Window Access
-
-		private bool _isLocked = false;
 
 		public static InstructionGraphWindow FindWindowForGraph(InstructionGraph graph)
 		{
@@ -701,6 +707,10 @@ namespace PiRhoSoft.CompositionEditor
 
 		#region Drawing
 
+		private float ToolbarBottom => _toolbarHeight;
+		private bool IsWatchOpen => Application.isPlaying && _graph != null && _graph.IsRunning && _isWatchOpen;
+		private float WatchLeft => _isWatchOpen ? position.width - _watchWidth : position.width;
+
 		private static GUIStyle CreateHeaderStyle()
 		{
 			var style = CreateConnectionStyle();
@@ -750,6 +760,9 @@ namespace PiRhoSoft.CompositionEditor
 		protected override void PostDraw(Rect rect)
 		{
 			DrawToolbar(rect);
+
+			if (IsWatchOpen)
+				DrawWatch(rect);
 
 			if (_toRemove != null)
 			{
@@ -841,6 +854,12 @@ namespace PiRhoSoft.CompositionEditor
 				}
 
 				_isLocked = GUILayout.Toggle(_isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);
+
+				using (new EditorGUI.DisabledScope(_graph == null || !_graph.IsRunning))
+				{
+					var icon = _graph.IsRunning ? (_isWatchOpen ? _closeWatchButton : _openWatchButton) : _disabledWatchButton;
+					_isWatchOpen = GUILayout.Toggle(_isWatchOpen, icon.Content, EditorStyles.toolbarButton);
+				}
 			}
 		}
 
@@ -1048,6 +1067,23 @@ namespace PiRhoSoft.CompositionEditor
 			HandleHelper.DrawCircle(end, _knobRadius, endColor);
 		}
 
+		private void DrawWatch(Rect rect)
+		{
+			rect.x = WatchLeft;
+			rect.y = ToolbarBottom;
+			rect.width -= WatchLeft;
+			rect.height -= ToolbarBottom + 1;
+
+			using (new GUILayout.AreaScope(rect))
+			{
+				using (var scroller = new EditorGUILayout.ScrollViewScope(_watchScrollPosition, false, false, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.box, GUILayout.Width(rect.width), GUILayout.Height(rect.height)))
+				{
+					VariableStoreControl.Draw(_graph.Store);
+					_watchScrollPosition = scroller.scrollPosition;
+				}
+			}
+		}
+
 		#endregion
 
 		#region Input
@@ -1072,14 +1108,29 @@ namespace PiRhoSoft.CompositionEditor
 			SetupContextMenu(input);
 		}
 
+		protected override bool IsMouseInViewport()
+		{
+			var mouse = ViewportToWindow(Event.current.mousePosition);
+
+			if (mouse.y <= ToolbarBottom)
+				return false;
+
+			if (IsWatchOpen && mouse.x >= WatchLeft)
+				return false;
+
+			return true;
+		}
+
 		private void SetupSelection(InputManager input)
 		{
 			input.Create<InputManager.EventTrigger>()
 				.SetEvent(EventType.MouseMove)
+				.AddCondition(IsMouseInViewport)
 				.AddAction(UpdateHover);
 
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseDown, InputManager.MouseButton.Left)
+				.AddCondition(IsMouseInViewport)
 				.AddAction(StartSelection);
 
 			input.Create<InputManager.MouseTrigger>()
@@ -1148,10 +1199,12 @@ namespace PiRhoSoft.CompositionEditor
 
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseDown, InputManager.MouseButton.Right)
+				.AddCondition(IsMouseInViewport)
 				.AddAction(() => _createPosition = Event.current.mousePosition);
 
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseUp, InputManager.MouseButton.Right)
+				.AddCondition(IsMouseInViewport)
 				.AddCondition(() => _graph != null && _hoveredNode == null && !wasMouseDragged && !_simulateDrag)
 				.AddAction(() => _showContextMenu = true);
 		}
@@ -1165,10 +1218,6 @@ namespace PiRhoSoft.CompositionEditor
 			if (_simulateDrag)
 			{
 				UpdateDrag(false);
-			}
-			else if (ViewportToWindow(Event.current.mousePosition).y < _toolbarHeight)
-			{
-				_mouseMoveState = MouseState.Hover;
 			}
 			else
 			{

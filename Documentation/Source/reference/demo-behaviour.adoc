@@ -1,0 +1,23 @@
+[#reference/demo-behaviour]
+
+## DemoBehaviour
+
+PiRhoSoft.CompositionEngine.DemoBehaviour : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<manual/i-variable-store,I Variable Store>>
+
+### Description
+
+### Constructors
+
+DemoBehaviour()::
+
+### Public Fields
+
+float _Speed_::
+
+### Public Methods
+
+<<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
+
+<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::

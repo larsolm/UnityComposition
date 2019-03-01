@@ -1,0 +1,9 @@
+[#manual/disable-component-node]
+
+## Disable Component Node
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/disable-component-node.html[Reference]
+endif::[]

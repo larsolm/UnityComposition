@@ -8,7 +8,15 @@ PiRhoSoft.CompositionEngine.ExpressionCommand : <<manual/command,Command>>
 
 ### Static Fields
 
-<<manual/expression-command-parameter-store,Parameter Store>> _Store_::
+int _InitialStoreCount_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Stack-1[Stack^]<<<manual/expression-command-parameter-store,Parameter Store>>> _Stores_::
+
+### Static Methods
+
+<<manual/expression-command-parameter-store,Parameter Store>> ReserveStore()::
+
+void ReleaseStore(<<manual/expression-command-parameter-store,Parameter Store>> store)::
 
 ### Constructors
 

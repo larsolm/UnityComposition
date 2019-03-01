@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -184,6 +185,13 @@ namespace PiRhoSoft.CompositionEngine
 						return Locals.SetVariable(name, value);
 				}
 			}
+		}
+
+		public IEnumerable<string> GetVariableNames()
+		{
+			return new List<string> { InputStoreName, OutputStoreName, ThisStoreName, SceneStoreName }
+				.Concat(_contextStore.GetVariableNames())
+				.Concat(Locals.GetVariableNames());
 		}
 
 		private class ContextStore : VariableStore

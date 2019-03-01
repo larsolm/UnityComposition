@@ -4,17 +4,15 @@
 
 ### Fields
 
-<<manual/variable-reference,Variable Reference>> _Target_::
-
-string _Parameter_::
+<<manual/string-variable-source,String Variable Source>> _Parameter_::
 
 https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.html[AnimatorControllerParameterType^] _Type_::
 
-bool _Bool Value_::
+<<manual/boolean-variable-source,Boolean Variable Source>> _Bool Value_::
 
-int _Int Value_::
+<<manual/integer-variable-source,Integer Variable Source>> _Int Value_::
 
-float _Float Value_::
+<<manual/number-variable-source,Number Variable Source>> _Float Value_::
 
 ifdef::backend-multipage_html5[]
 link:reference/set-animation-parameter.html[Reference]

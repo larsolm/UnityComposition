@@ -1,0 +1,8 @@
+[#reference/i-loop-node]
+
+## ILoopNode
+
+PiRhoSoft.CompositionEngine.ILoopNode
+
+### Description
+

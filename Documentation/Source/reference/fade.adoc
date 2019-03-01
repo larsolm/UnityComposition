@@ -1,0 +1,19 @@
+[#reference/fade]
+
+## Fade
+
+PiRhoSoft.CompositionEngine.Fade : <<manual/cutoff,Cutoff>>
+
+### Description
+
+### Constructors
+
+Fade()::
+
+### Public Fields
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
+
+### Protected Methods
+
+void Setup() _(virtual)_::

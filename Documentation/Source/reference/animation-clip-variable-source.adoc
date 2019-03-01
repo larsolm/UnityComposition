@@ -1,0 +1,11 @@
+[#reference/animation-clip-variable-source]
+
+## AnimationClipVariableSource
+
+PiRhoSoft.CompositionEngine.AnimationClipVariableSource : <<manual/object-variable-source-1,Object Variable Source>><https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^]>
+
+### Description
+
+### Constructors
+
+AnimationClipVariableSource()::

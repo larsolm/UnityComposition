@@ -26,6 +26,8 @@ https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnum
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(string text, <<manual/message-interaction-type,Message Interaction Type>> interaction, bool isLast) _(virtual)_::
 
+void Setup() _(virtual)_::
+
 void Teardown() _(virtual)_::
 
 void SetInteraction(<<manual/message-control-display,Message Control Display>> display, <<manual/message-interaction-type,Message Interaction Type>> interaction, bool isLast)::

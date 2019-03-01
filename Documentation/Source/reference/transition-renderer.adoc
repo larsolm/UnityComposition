@@ -1,0 +1,11 @@
+[#reference/transition-renderer]
+
+## TransitionRenderer
+
+PiRhoSoft.CompositionEngine.TransitionRenderer : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+TransitionRenderer()::

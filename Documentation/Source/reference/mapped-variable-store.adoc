@@ -22,6 +22,8 @@ void Setup(<<manual/variable-map,Variable Map>> map, <<manual/i-variable-list,I 
 
 <<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
 
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::
+
 string GetVariableName(int index) _(virtual)_::
 
 <<manual/variable-value,Variable Value>> GetVariableValue(int index) _(virtual)_::

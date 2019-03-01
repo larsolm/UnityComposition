@@ -8,6 +8,10 @@ include::reference/acos-command.adoc[]
 
 <<<
 
+include::reference/activate-interface-node.adoc[]
+
+<<<
+
 include::reference/add-assign-operator.adoc[]
 
 <<<
@@ -21,6 +25,10 @@ include::reference/and-assign-operator.adoc[]
 <<<
 
 include::reference/and-operator.adoc[]
+
+<<<
+
+include::reference/animation-clip-variable-source.adoc[]
 
 <<<
 
@@ -76,6 +84,14 @@ include::reference/clamp-command.adoc[]
 
 <<<
 
+include::reference/clear-transition.adoc[]
+
+<<<
+
+include::reference/instruction-graph-node-colors.adoc[]
+
+<<<
+
 include::reference/command.adoc[]
 
 <<<
@@ -89,6 +105,10 @@ include::reference/command-operation.adoc[]
 <<<
 
 include::reference/command-set.adoc[]
+
+<<<
+
+include::reference/comment-node.adoc[]
 
 <<<
 
@@ -132,6 +152,22 @@ include::reference/custom-command-list.adoc[]
 
 <<<
 
+include::reference/cutoff.adoc[]
+
+<<<
+
+include::reference/deactivate-interface-node.adoc[]
+
+<<<
+
+include::reference/demo-behaviour.adoc[]
+
+<<<
+
+include::reference/demo-interaction.adoc[]
+
+<<<
+
 include::reference/dependent-object-list.adoc[]
 
 <<<
@@ -140,7 +176,15 @@ include::reference/destroy-object-node.adoc[]
 
 <<<
 
-include::reference/disable-object-node.adoc[]
+include::reference/disable-component-node.adoc[]
+
+<<<
+
+include::reference/disable-game-object-node.adoc[]
+
+<<<
+
+include::reference/dissolve.adoc[]
 
 <<<
 
@@ -152,7 +196,11 @@ include::reference/divide-operator.adoc[]
 
 <<<
 
-include::reference/enable-object-node.adoc[]
+include::reference/enable-component-node.adoc[]
+
+<<<
+
+include::reference/enable-game-object-node.adoc[]
 
 <<<
 
@@ -212,6 +260,10 @@ include::reference/expression-token-type.adoc[]
 
 <<<
 
+include::reference/fade.adoc[]
+
+<<<
+
 include::reference/floor-command.adoc[]
 
 <<<
@@ -232,7 +284,19 @@ include::reference/hide-control-node.adoc[]
 
 <<<
 
+include::reference/i-immediate.adoc[]
+
+<<<
+
 include::reference/i-indexed-variable-store.adoc[]
+
+<<<
+
+include::reference/i-is-immediate.adoc[]
+
+<<<
+
+include::reference/i-loop-node.adoc[]
 
 <<<
 
@@ -268,15 +332,7 @@ include::reference/instruction-context.adoc[]
 
 <<<
 
-include::reference/instruction-dictionary.adoc[]
-
-<<<
-
 include::reference/instruction-graph.adoc[]
-
-<<<
-
-include::reference/instruction-graph-execution-mode.adoc[]
 
 <<<
 
@@ -297,10 +353,6 @@ include::reference/instruction-input.adoc[]
 <<<
 
 include::reference/instruction-input-type.adoc[]
-
-<<<
-
-include::reference/instruction-list.adoc[]
 
 <<<
 
@@ -349,6 +401,10 @@ include::reference/interface-reference.adoc[]
 <<<
 
 include::reference/invert-operator.adoc[]
+
+<<<
+
+include::reference/i-sequence-node.adoc[]
 
 <<<
 
@@ -512,6 +568,10 @@ include::reference/expression-command-parameter-store.adoc[]
 
 <<<
 
+include::reference/pixelate.adoc[]
+
+<<<
+
 include::reference/play-animation.adoc[]
 
 <<<
@@ -520,11 +580,23 @@ include::reference/play-animation-state.adoc[]
 
 <<<
 
+include::reference/instruction-graph-playback-state.adoc[]
+
+<<<
+
+include::reference/play-transition.adoc[]
+
+<<<
+
 include::reference/pow-command.adoc[]
 
 <<<
 
 include::reference/prefix-operation.adoc[]
+
+<<<
+
+include::reference/primary-axis.adoc[]
 
 <<<
 
@@ -645,6 +717,30 @@ include::reference/ternary-operator.adoc[]
 <<<
 
 include::reference/text-binding.adoc[]
+
+<<<
+
+include::reference/transition.adoc[]
+
+<<<
+
+include::reference/transition-list.adoc[]
+
+<<<
+
+include::reference/transition-manager.adoc[]
+
+<<<
+
+include::reference/transition-phase.adoc[]
+
+<<<
+
+include::reference/transition-renderer.adoc[]
+
+<<<
+
+include::reference/transition-variable-source.adoc[]
 
 <<<
 

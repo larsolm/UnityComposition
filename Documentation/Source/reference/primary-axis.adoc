@@ -1,0 +1,13 @@
+[#reference/primary-axis]
+
+## PrimaryAxis
+
+PiRhoSoft.CompositionEngine.PrimaryAxis
+
+### Description
+
+### Values
+
+<<manual/primary-axis,Primary Axis>> _Column_::
+
+<<manual/primary-axis,Primary Axis>> _Row_::

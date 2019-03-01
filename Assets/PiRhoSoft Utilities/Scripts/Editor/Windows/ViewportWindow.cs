@@ -32,6 +32,8 @@ namespace PiRhoSoft.UtilityEditor
 
 		void OnGUI()
 		{
+			var windowRect = new Rect(0, 0, position.width, position.height);
+
 			if (_previousPosition != position)
 			{
 				// when the window resizes recompute the view matrix
@@ -39,7 +41,7 @@ namespace PiRhoSoft.UtilityEditor
 				_previousPosition = position;
 			}
 
-			PreDraw(position);
+			PreDraw(windowRect);
 
 			var transform = ReplaceTransform();
 			var clipping = ReplaceClipping();
@@ -50,7 +52,7 @@ namespace PiRhoSoft.UtilityEditor
 			RestoreClipping(clipping);
 			RestoreTransform(transform);
 
-			PostDraw(position);
+			PostDraw(windowRect);
 		}
 
 		protected virtual void Setup(InputManager input)
@@ -74,10 +76,16 @@ namespace PiRhoSoft.UtilityEditor
 
 		#region Input
 
+		protected virtual bool IsMouseInViewport()
+		{
+			return true;
+		}
+
 		protected void UseScrollWheelToZoom()
 		{
 			_input.Create<InputManager.EventTrigger>()
 				.SetEvent(EventType.ScrollWheel)
+				.AddCondition(IsMouseInViewport)
 				.AddAction(() =>
 				{
 					var change = Mathf.Sign(Event.current.delta.y) * -ScrollWheelZoomAmount;
@@ -91,14 +99,14 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				_input.Create<InputManager.MouseTrigger>()
 					.SetEvent(EventType.MouseDrag, InputManager.MouseButton.Left, false, false, true)
-					.AddAction(() => Pan(Event.current.delta));
+					.AddAction(PanWithMouse);
 			}
 
 			if (middleClick)
 			{
 				_input.Create<InputManager.MouseTrigger>()
 					.SetEvent(EventType.MouseDrag, InputManager.MouseButton.Middle)
-					.AddAction(() => Pan(Event.current.delta));
+					.AddAction(PanWithMouse);
 			}
 
 			if (rightClick)
@@ -117,11 +125,17 @@ namespace PiRhoSoft.UtilityEditor
 					.AddAction(() =>
 					{
 						if (canDrag)
-							Pan(Event.current.delta);
+							PanWithMouse();
 
 						canDrag = true;
 					});
 			}
+		}
+
+		private void PanWithMouse()
+		{
+			if (IsMouseInViewport())
+				Pan(Event.current.delta);
 		}
 
 		#endregion

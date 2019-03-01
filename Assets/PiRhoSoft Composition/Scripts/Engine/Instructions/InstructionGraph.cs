@@ -21,6 +21,7 @@ namespace PiRhoSoft.CompositionEngine
 		private bool _shouldBreak = false;
 
 		public InstructionGraphNodeList Nodes => _nodes; // _nodes is private with a getter so it isn't found by node data reflection
+		public InstructionStore Store => _rootStore;
 
 		public bool IsExecutionImmediate
 		{

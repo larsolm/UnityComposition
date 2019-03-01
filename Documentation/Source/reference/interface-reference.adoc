@@ -18,12 +18,12 @@ string _ControlName_::
 
 ### Public Methods
 
-void Activate()::
+void Activate(https://docs.unity3d.com/ScriptReference/Object.html[Object^] context)::
 
-ControlType Activate<ControlType>()::
+ControlType Activate<ControlType>(https://docs.unity3d.com/ScriptReference/Object.html[Object^] context)::
 
-void Deactivate()::
+void Deactivate(https://docs.unity3d.com/ScriptReference/Object.html[Object^] context)::
 
-InterfaceType GetInterface<InterfaceType>()::
+InterfaceType GetInterface<InterfaceType>(https://docs.unity3d.com/ScriptReference/Object.html[Object^] context)::
 
-ControlType GetControl<ControlType>()::
+ControlType GetControl<ControlType>(https://docs.unity3d.com/ScriptReference/Object.html[Object^] context)::

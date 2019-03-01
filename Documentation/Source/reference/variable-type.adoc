@@ -21,3 +21,5 @@ PiRhoSoft.CompositionEngine.VariableType
 <<manual/variable-type,Variable Type>> _Object_::
 
 <<manual/variable-type,Variable Type>> _Store_::
+
+<<manual/variable-type,Variable Type>> _Null_::

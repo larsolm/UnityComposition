@@ -3,23 +3,19 @@
 
 ### Warnings
 
-CAPAAN:: Unable to play animation on {0}: animation must not be null
+CAPAIP:: Unable to play animation for {0}: the given variables must me an AnimationPlayer
 --
 --
 
-CAPANA:: Unable to find animator {0}: the animator could not be found
+CAPANF:: Unable to play animation for {0}: the animation could not be found
 --
 --
 
-CAPANF:: Unable to play animation on {0}: animation could not be found
+CAPASANF:: Unable to play animation state on {0}: the given variables must be an Animator
 --
 --
 
-CAPASANF:: Unable to find animator {0}: the animator could not be found
---
---
-
-CAPASSNF:: Unable to play animation state {0}: the state could not be found
+CAPASSNF:: Unable to play animation state on {0}: the state could not be found
 --
 --
 
@@ -35,7 +31,27 @@ CCME:: The Command '{0}' could not be registered because the Expression has not 
 --
 --
 
-CCNMV:: unable to find variable {0} for instruction graph node
+CCNIT:: variable {0} for instruction graph node {1} must be an object or store
+--
+--
+
+CCNMT:: unable to find variable {0} for instruction graph node {1}
+--
+--
+
+CDCNMC:: Unable to disable component for {0}: the given variables must be a MonoBehaviour
+--
+--
+
+CDGONMO:: Unable to disable object for {0}: the given variables must be a GameObject
+--
+--
+
+CECNMC:: Unable to enable component for {0}: the given variables must be a MonoBehaviour
+--
+--
+
+CEGONMO:: Unable to enable object for {0}: the given variables must be a GameObject
 --
 --
 
@@ -43,35 +59,39 @@ CEIR:: The Expression '{0}' was expected to return type {1} but instead returned
 --
 --
 
-COMCOONF:: Unable to create object {0}: the object could not be found
+CISNIIN:: Unable to activate interface for {0}: the interface '{1}' does not exist
 --
 --
 
-COMDONF:: Unable to disable object {0}: the object could not be found
+COMCOONF:: Unable to create object for {0}: the object could not be found
 --
 --
 
-COMDOONF:: Unable to destroy object {0}: the object could not be found
+COMDOONF:: Unable to destroy object for {0}: the given variables must be a Unity Object
 --
 --
 
-COMEONF:: Unable to enable object {0}: the object could not be found
+CTMIA:: this TransitionRenderer has already been added
 --
 --
 
-IIRMCN:: Unable to find interface control: the interface {0} does not have a control named {1}
+CTMIR:: this TransitionRenderer has not been added
 --
 --
 
-IIRMICT:: Unable to find interface control {0}: the interface control is not a {1}
+IIRMC:: Unable to find interface control for {0}: the interface '{1}' does not have a control named '{2}'
 --
 --
 
-IIRMIIT:: Unable to find interface {0}: the interface is not a {1}
+IIRMI:: Unable to find interface for {0}: the interface '{1}' could not be found
 --
 --
 
-IIRMIN:: Unable to find interface {0}: the interface could not be found
+IIRMICT:: Unable to find interface control for {0}: the interface control '{1}' is not a {2}
+--
+--
+
+IIRMIIT:: Unable to find interface for {0}: the interface '{1}' is not a {1}
 --
 --
 
@@ -79,7 +99,19 @@ ISCIE:: Failed to expand item {0}: the variable '{1}' is not an IIndexedVariable
 --
 --
 
-WASAPANF:: Unable to find animator {0}: the animator could not be found
+WASAPANF:: Unable to set animation parameter for {0}: the given variables must be an Animator
+--
+--
+
+WASAPPNF:: Unable to set animation parameter for {0}: the parameter could not be found
+--
+--
+
+WASAPVNF:: Unable to set animation parameter for {0}: the value could not be found
+--
+--
+
+WPTTM:: Unable to play transition for {0}: the transition could not be found
 --
 --
 
@@ -97,15 +129,15 @@ CCMPF:: Failed to process Instruction '{0}': the Instruction yielded a value oth
 --
 --
 
-CCNMF:: failed to set target: unable to find field {0}
+CCNMF:: failed to set target: unable to find field {0} for instruction graph node {1}
 --
 --
 
-CCNMI:: failed to set target: index {0} is out of range
+CCNMI:: failed to set target: index {0} is out of range for instruction graph node {1}
 --
 --
 
-CCNMK:: failed to set target: unable to find key {0}
+CCNMK:: failed to set target: unable to find key {0} for instruction graph node {1}
 --
 --
 
@@ -157,7 +189,11 @@ CISROO:: failed to store output {0}: the variable '{1}' is read only
 --
 --
 
-CSQIS:: failed to run sequence: node {0} has not been connected
+CSQIS:: Unable to run sequence for {0}: index {1} has no been connection
+--
+--
+
+CTMS:: Failed to load Transition: shader {0} not found
 --
 --
 

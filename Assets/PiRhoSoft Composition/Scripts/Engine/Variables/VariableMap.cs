@@ -14,6 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 		public bool Contains(string name) => _indices.ContainsKey(name);
 		public int GetIndex(string name) => _indices.TryGetValue(name, out int index) ? index : -1;
 		public bool TryGetIndex(string name, out int index) => _indices.TryGetValue(name, out index);
+		public IEnumerable<string> GetNames() => _indices.Keys;
 
 		public VariableMap(int version)
 		{

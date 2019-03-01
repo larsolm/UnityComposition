@@ -1,0 +1,25 @@
+[#reference/pixelate]
+
+## Pixelate
+
+PiRhoSoft.CompositionEngine.Pixelate : <<manual/transition,Transition>>
+
+### Description
+
+### Constructors
+
+Pixelate()::
+
+### Public Fields
+
+int _MaxAmount_::
+
+### Public Methods
+
+void Begin(<<manual/transition-phase,Transition Phase>> phase) _(virtual)_::
+
+void Process(float time, <<manual/transition-phase,Transition Phase>> phase) _(virtual)_::
+
+### Protected Methods
+
+void Update() _(virtual)_::

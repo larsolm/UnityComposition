@@ -4,13 +4,7 @@
 
 ### Fields
 
-<<manual/variable-source-type,Variable Source Type>> _Type_::
-
-<<manual/variable-reference,Variable Reference>> _Target_::
-
-string _State_::
-
-<<manual/variable-reference,Variable Reference>> _State Reference_::
+<<manual/string-variable-source,String Variable Source>> _State_::
 
 ifdef::backend-multipage_html5[]
 link:reference/play-animation-state.html[Reference]

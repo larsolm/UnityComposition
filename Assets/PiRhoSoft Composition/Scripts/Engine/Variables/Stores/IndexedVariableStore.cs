@@ -1,4 +1,6 @@
 ﻿using PiRhoSoft.UtilityEngine;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -33,6 +35,14 @@ namespace PiRhoSoft.CompositionEngine
 			else return SetVariableResult.NotFound;
 		}
 
+		public static IEnumerable<string> GetVariableNames(IIndexedVariableStore variables)
+		{
+			return Enumerable
+				.Repeat("", variables.Count)
+				.Select((value, index) => ItemVariable + index)
+				.Concat(Enumerable.Repeat(nameof(IIndexedVariableStore.Count), 1));
+		}
+
 		private static int ParseIndex(string s, int start, int length)
 		{
 			// this exists as a way to parse an integer without having to instantiate a substring first
@@ -50,5 +60,6 @@ namespace PiRhoSoft.CompositionEngine
 		public IVariableStore GetItem(int index) => index >= 0 && index < List.Count ? List[index] : null;
 		public VariableValue GetVariable(string name) => IndexedVariableStore.GetVariable(this, name);
 		public SetVariableResult SetVariable(string name, VariableValue value) => IndexedVariableStore.SetVariable(this, name, value);
+		public IEnumerable<string> GetVariableNames() => IndexedVariableStore.GetVariableNames(this);
 	}
 }

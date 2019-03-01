@@ -10,6 +10,12 @@ PiRhoSoft.CompositionEngine.InstructionGraph : <<manual/instruction,Instruction>
 
 string __processFailedError_::
 
+bool _IsDebugBreakEnabled_::
+
+bool _IsDebugLoggingEnabled_::
+
+Action<<<manual/instruction-graph,Instruction Graph>>, <<manual/instruction-graph,Instruction Graph>>> _OnBreakpointHit_::
+
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _StartPosition_::
@@ -18,19 +24,49 @@ https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _StartPosition_:
 
 <<manual/instruction-graph-node-list,Instruction Graph Node List>> _Nodes_ _(read only)_::
 
-bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
+<<manual/instruction-store,Instruction Store>> _Store_ _(read only)_::
+
+bool _IsExecutionImmediate_ _(read only)_::
+
+<<manual/instruction-graph-playback-state,Playback State>> _DebugState_ _(read only)_::
+
+bool _CanDebugPlay_ _(read only)_::
+
+bool _CanDebugPause_ _(read only)_::
+
+bool _CanDebugStep_ _(read only)_::
+
+bool _CanDebugStop_ _(read only)_::
 
 ### Public Methods
+
+bool IsImmediate(<<manual/instruction-graph-node,Instruction Graph Node>> node)::
 
 void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
 
 void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> outputs) _(virtual)_::
 
-void GoTo(<<manual/instruction-graph-node,Instruction Graph Node>> node)::
+void GoTo(<<manual/instruction-graph-node,Instruction Graph Node>> node, Object thisObject, string name)::
 
-void GoTo(<<manual/instruction-graph-node,Instruction Graph Node>> node, <<manual/i-variable-store,I Variable Store>> thisStore)::
+void GoTo(<<manual/instruction-graph-node,Instruction Graph Node>> node, Object thisObject, string name, int index)::
 
-void BreakTo(<<manual/instruction-graph-node,Instruction Graph Node>> node)::
+void GoTo(<<manual/instruction-graph-node,Instruction Graph Node>> node, Object thisObject, string name, string key)::
+
+void Break()::
+
+void DebugPlay()::
+
+void DebugPause()::
+
+void DebugStep()::
+
+void DebugStop()::
+
+int IsInCallStack(<<manual/instruction-graph-node,Instruction Graph Node>> node)::
+
+bool IsInCallStack(<<manual/instruction-graph-node,Instruction Graph Node>> node, string source)::
+
+bool IsExecuting(<<manual/instruction-graph-node,Instruction Graph Node>> node)::
 
 void GetConnections(<<manual/instruction-graph-node-node-data,Node Data>> data) _(virtual)_::
 
@@ -42,4 +78,4 @@ InstructionGraph()::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables, <<manual/instruction-graph-node,Instruction Graph Node>> root)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables, <<manual/instruction-graph-node,Instruction Graph Node>> root, string source)::

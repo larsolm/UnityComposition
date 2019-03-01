@@ -1,0 +1,8 @@
+[#reference/i-sequence-node]
+
+## ISequenceNode
+
+PiRhoSoft.CompositionEngine.ISequenceNode
+
+### Description
+

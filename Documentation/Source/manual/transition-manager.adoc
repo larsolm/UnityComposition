@@ -1,0 +1,9 @@
+[#manual/transition-manager]
+
+## Transition Manager
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/transition-manager.html[Reference]
+endif::[]

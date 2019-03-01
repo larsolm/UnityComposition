@@ -1,5 +1,7 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -42,6 +44,11 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (name == nameof(Label)) return SetVariableResult.ReadOnly;
 			else return Variables.SetVariable(name, value);
+		}
+
+		public IEnumerable<string> GetVariableNames()
+		{
+			return Variables.GetVariableNames().Concat(Enumerable.Repeat(nameof(Label), 1));
 		}
 	}
 }

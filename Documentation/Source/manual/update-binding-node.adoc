@@ -6,7 +6,7 @@
 
 <<manual/interface-reference,Interface Reference>> _Control_::
 
-string _Bindings_::
+string _Group_::
 
 ifdef::backend-multipage_html5[]
 link:reference/update-binding-node.html[Reference]

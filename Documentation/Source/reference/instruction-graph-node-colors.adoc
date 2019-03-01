@@ -1,0 +1,43 @@
+[#reference/instruction-graph-node-colors]
+
+## Colors
+
+PiRhoSoft.CompositionEngine.Colors
+
+### Description
+
+### Static Fields
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Start_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Default_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _ExecutionLight_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _ExecutionDark_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Animation_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Sequence_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Loop_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Branch_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Break_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Sequencing_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _SequencingLight_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _SequencingDark_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Interface_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceLight_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceDark_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceCyan_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceTeal_::

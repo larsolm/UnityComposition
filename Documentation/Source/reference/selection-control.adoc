@@ -16,6 +16,12 @@ bool _VerticalWrapping_::
 
 bool _HorizontalWrapping_::
 
+<<manual/primary-axis,Primary Axis>> _PrimaryAxis_::
+
+int _ColumnCount_::
+
+int _RowCount_::
+
 ### Public Properties
 
 <<manual/selection-item,Selection Item>> _FocusedItem_ _(read only)_::
@@ -67,8 +73,6 @@ bool SetFocusToValidLocation(int startingColumn, int startingRow)::
 int __columnCount_::
 
 int __rowCount_::
-
-bool __columnMajor_::
 
 int __columnIndex_::
 

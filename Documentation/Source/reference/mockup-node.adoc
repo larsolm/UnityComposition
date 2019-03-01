@@ -14,11 +14,11 @@ MockupNode()::
 
 <<manual/mockup-connection-list,Mockup Connection List>> _Connections_::
 
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _DisplayColor_::
+
 ### Public Properties
 
-bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
-
-<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 

@@ -1,0 +1,9 @@
+[#manual/disable-game-object-node]
+
+## Disable Game Object Node
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/disable-game-object-node.html[Reference]
+endif::[]

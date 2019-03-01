@@ -1,0 +1,11 @@
+[#reference/transition-variable-source]
+
+## TransitionVariableSource
+
+PiRhoSoft.CompositionEngine.TransitionVariableSource : <<manual/object-variable-source-1,Object Variable Source>><<<manual/transition,Transition>>>
+
+### Description
+
+### Constructors
+
+TransitionVariableSource()::

@@ -11,3 +11,5 @@ PiRhoSoft.CompositionEngine.IVariableStore
 <<manual/variable-value,Variable Value>> GetVariable(string name) _(abstract)_::
 
 <<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(abstract)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(abstract)_::

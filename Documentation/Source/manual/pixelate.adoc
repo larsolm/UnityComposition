@@ -1,0 +1,11 @@
+[#manual/pixelate]
+
+## Pixelate
+
+### Fields
+
+int _Max Amount_::
+
+ifdef::backend-multipage_html5[]
+link:reference/pixelate.html[Reference]
+endif::[]

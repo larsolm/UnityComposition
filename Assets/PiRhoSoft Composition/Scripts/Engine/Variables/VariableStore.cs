@@ -6,6 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		VariableValue GetVariable(string name);
 		SetVariableResult SetVariable(string name, VariableValue value);
+		IEnumerable<string> GetVariableNames();
 	}
 
 	public class VariableStore : IVariableStore
@@ -35,6 +36,11 @@ namespace PiRhoSoft.CompositionEngine
 				AddVariable(name, value);
 
 			return SetVariableResult.Success;
+		}
+
+		public IEnumerable<string> GetVariableNames()
+		{
+			return _map.Keys;
 		}
 
 		public void Clear()

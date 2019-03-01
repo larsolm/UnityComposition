@@ -1,0 +1,11 @@
+[#reference/i-is-immediate]
+
+## IIsImmediate
+
+PiRhoSoft.CompositionEngine.IIsImmediate
+
+### Description
+
+### Public Properties
+
+bool _IsExecutionImmediate_ _(read only)_ _(abstract)_::

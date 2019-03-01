@@ -2,7 +2,7 @@
 
 ## InstructionNode
 
-PiRhoSoft.CompositionEngine.InstructionNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+PiRhoSoft.CompositionEngine.InstructionNode : <<manual/instruction-graph-node,Instruction Graph Node>>, <<manual/i-is-immediate,I Is Immediate>>
 
 ### Description
 
@@ -22,7 +22,7 @@ bool _WaitForCompletion_::
 
 bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
 
-<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
 
 ### Protected Methods
 

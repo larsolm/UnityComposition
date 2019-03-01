@@ -14,11 +14,11 @@ string _Name_::
 
 https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _GraphPosition_::
 
+bool _IsBreakpoint_::
+
 ### Public Properties
 
-bool _IsExecutionImmediate_ _(read only)_ _(abstract)_::
-
-<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(abstract)_::
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 
@@ -27,8 +27,6 @@ void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Ge
 void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> outputs) _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int executionIndex)::
-
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] GetNodeColor() _(virtual)_::
 
 void GetConnections(<<manual/instruction-graph-node-node-data,Node Data>> data) _(virtual)_::
 

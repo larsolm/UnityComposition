@@ -30,6 +30,8 @@ float _Number_ _(read only)_::
 
 string _String_ _(read only)_::
 
+Object _RawObject_ _(read only)_::
+
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_ _(read only)_::
 
 <<manual/i-variable-store,I Variable Store>> _Store_ _(read only)_::

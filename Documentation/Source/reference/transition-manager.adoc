@@ -1,0 +1,29 @@
+[#reference/transition-manager]
+
+## TransitionManager
+
+PiRhoSoft.CompositionEngine.TransitionManager : GlobalBehaviour<<<manual/transition-manager,Transition Manager>>>
+
+### Description
+
+### Constructors
+
+TransitionManager()::
+
+### Public Properties
+
+<<manual/transition,Transition>> _CurrentTransition_ _(read only)_::
+
+<<manual/transition-renderer,Transition Renderer>> _CurrentRenderer_ _(read only)_::
+
+### Public Methods
+
+void AddRenderer(<<manual/transition-renderer,Transition Renderer>> renderer)::
+
+void RemoveRenderer(<<manual/transition-renderer,Transition Renderer>> renderer)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] RunTransition(<<manual/transition,Transition>> transition, <<manual/transition-phase,Transition Phase>> phase)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] StartTransition(<<manual/transition,Transition>> transition, <<manual/transition-phase,Transition Phase>> phase)::
+
+void EndTransition()::

@@ -4,9 +4,9 @@
 
 ### Fields
 
-<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> __execution Mode_::
-
 <<manual/mockup-connection-list,Mockup Connection List>> _Connections_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Display Color_::
 
 ifdef::backend-multipage_html5[]
 link:reference/mockup-node.html[Reference]

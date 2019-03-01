@@ -20,6 +20,10 @@ CompositionManager()::
 
 ### Public Methods
 
-void RunInstruction(<<manual/instruction,Instruction>> instruction, <<manual/instruction-context,Instruction Context>> context, <<manual/i-variable-store,I Variable Store>> thisStore)::
+bool IsImmediate(<<manual/instruction,Instruction>> instruction)::
 
-void RunInstruction(<<manual/instruction-caller,Instruction Caller>> caller, <<manual/instruction-context,Instruction Context>> context, <<manual/i-variable-store,I Variable Store>> thisStore)::
+bool IsImmediate(<<manual/instruction-caller,Instruction Caller>> caller)::
+
+void RunInstruction(<<manual/instruction,Instruction>> instruction, <<manual/instruction-context,Instruction Context>> context, Object thisObject)::
+
+void RunInstruction(<<manual/instruction-caller,Instruction Caller>> caller, <<manual/instruction-context,Instruction Context>> context, Object thisObject)::

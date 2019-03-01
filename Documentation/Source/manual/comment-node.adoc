@@ -1,0 +1,11 @@
+[#manual/comment-node]
+
+## Comment Node
+
+### Fields
+
+string _Comment_::
+
+ifdef::backend-multipage_html5[]
+link:reference/comment-node.html[Reference]
+endif::[]

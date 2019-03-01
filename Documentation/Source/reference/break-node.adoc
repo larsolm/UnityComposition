@@ -2,7 +2,7 @@
 
 ## BreakNode
 
-PiRhoSoft.CompositionEngine.BreakNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+PiRhoSoft.CompositionEngine.BreakNode : <<manual/instruction-graph-node,Instruction Graph Node>>, <<manual/i-immediate,I Immediate>>
 
 ### Description
 
@@ -10,15 +10,9 @@ PiRhoSoft.CompositionEngine.BreakNode : <<manual/instruction-graph-node,Instruct
 
 BreakNode()::
 
-### Public Fields
-
-<<manual/instruction-graph-node,Instruction Graph Node>> _Next_::
-
 ### Public Properties
 
-bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
-
-<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
 
 ### Protected Methods
 

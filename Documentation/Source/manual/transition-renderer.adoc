@@ -1,0 +1,9 @@
+[#manual/transition-renderer]
+
+## Transition Renderer
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/transition-renderer.html[Reference]
+endif::[]

@@ -10,8 +10,6 @@ PiRhoSoft.CompositionEngine.Instruction : https://docs.unity3d.com/ScriptReferen
 
 bool _IsRunning_ _(read only)_::
 
-bool _IsExecutionImmediate_ _(read only)_ _(abstract)_::
-
 ### Public Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<manual/instruction-store,Instruction Store>> variables)::
@@ -25,5 +23,9 @@ void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.G
 Instruction()::
 
 ### Protected Methods
+
+void OnEnable() _(virtual)_::
+
+void OnDisable() _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables) _(abstract)_::

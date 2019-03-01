@@ -1,0 +1,11 @@
+[#reference/transition-list]
+
+## TransitionList
+
+PiRhoSoft.CompositionEngine.TransitionList : SerializedList<<<manual/transition,Transition>>>
+
+### Description
+
+### Constructors
+
+TransitionList()::

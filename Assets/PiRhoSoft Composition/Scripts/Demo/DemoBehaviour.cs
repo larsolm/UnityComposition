@@ -1,4 +1,6 @@
 ﻿using PiRhoSoft.UtilityEngine;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -52,6 +54,11 @@ namespace PiRhoSoft.CompositionEngine
 		public SetVariableResult SetVariable(string name, VariableValue value)
 		{
 			return SetVariableResult.NotFound;
+		}
+
+		public IEnumerable<string> GetVariableNames()
+		{
+			return Enumerable.Empty<string>();
 		}
 	}
 }

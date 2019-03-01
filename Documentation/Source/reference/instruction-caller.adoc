@@ -20,10 +20,8 @@ https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[Li
 
 bool _IsRunning_ _(read only)_::
 
-bool _IsExecutionImmediate_ _(read only)_::
-
 ### Public Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<manual/instruction-context,Instruction Context>> context, <<manual/i-variable-store,I Variable Store>> thisStore)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<manual/instruction-context,Instruction Context>> context, Object thisObject)::
 
 void UpdateVariables()::

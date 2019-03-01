@@ -1,0 +1,15 @@
+[#reference/transition-phase]
+
+## TransitionPhase
+
+PiRhoSoft.CompositionEngine.TransitionPhase
+
+### Description
+
+### Values
+
+<<manual/transition-phase,Transition Phase>> _Out_::
+
+<<manual/transition-phase,Transition Phase>> _Obscure_::
+
+<<manual/transition-phase,Transition Phase>> _In_::

@@ -8,6 +8,12 @@ bool _Vertical Wrapping_::
 
 bool _Horizontal Wrapping_::
 
+<<manual/primary-axis,Primary Axis>> _Primary Axis_::
+
+int _Column Count_::
+
+int _Row Count_::
+
 ifdef::backend-multipage_html5[]
 link:reference/selection-control.html[Reference]
 endif::[]

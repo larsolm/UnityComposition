@@ -1,0 +1,33 @@
+[#reference/play-transition]
+
+## PlayTransition
+
+PiRhoSoft.CompositionEngine.PlayTransition : <<manual/instruction-graph-node,Instruction Graph Node>>
+
+### Description
+
+### Constructors
+
+PlayTransition()::
+
+### Public Fields
+
+<<manual/instruction-graph-node,Instruction Graph Node>> _Next_::
+
+<<manual/transition-variable-source,Transition Variable Source>> _Transition_::
+
+<<manual/transition-phase,Transition Phase>> _Phase_::
+
+bool _AutoFinish_::
+
+### Public Properties
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::

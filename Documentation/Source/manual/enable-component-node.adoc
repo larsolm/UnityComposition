@@ -1,0 +1,9 @@
+[#manual/enable-component-node]
+
+## Enable Component Node
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/enable-component-node.html[Reference]
+endif::[]

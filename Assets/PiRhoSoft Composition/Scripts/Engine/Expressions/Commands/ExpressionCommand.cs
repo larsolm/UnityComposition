@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -27,6 +28,11 @@ namespace PiRhoSoft.CompositionEngine
 			public SetVariableResult SetVariable(string name, VariableValue value)
 			{
 				return SetVariableResult.ReadOnly;
+			}
+
+			public IEnumerable<string> GetVariableNames()
+			{
+				return Parameters.Select((value, index) => ParameterName + index);
 			}
 		}
 

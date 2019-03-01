@@ -30,9 +30,11 @@ https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[Li
 
 https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _Bounds_ _(read only)_::
 
-### Public Methods
+https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Position_::
 
-void SetPosition(https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] position)::
+float _InnerHeight_::
+
+### Public Methods
 
 void ClearConnections()::
 

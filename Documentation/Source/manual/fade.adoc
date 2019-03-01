@@ -1,0 +1,11 @@
+[#manual/fade]
+
+## Fade
+
+### Fields
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
+
+ifdef::backend-multipage_html5[]
+link:reference/fade.html[Reference]
+endif::[]

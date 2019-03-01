@@ -1,0 +1,19 @@
+[#reference/comment-node]
+
+## CommentNode
+
+PiRhoSoft.CompositionEngine.CommentNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+
+### Description
+
+### Constructors
+
+CommentNode()::
+
+### Public Fields
+
+string _Comment_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::

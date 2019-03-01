@@ -2,7 +2,7 @@
 
 ## UpdateBindingNode
 
-PiRhoSoft.CompositionEngine.UpdateBindingNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+PiRhoSoft.CompositionEngine.UpdateBindingNode : <<manual/instruction-graph-node,Instruction Graph Node>>, <<manual/i-immediate,I Immediate>>
 
 ### Description
 
@@ -16,13 +16,11 @@ UpdateBindingNode()::
 
 <<manual/interface-reference,Interface Reference>> _Control_::
 
-string _Bindings_::
+string _Group_::
 
 ### Public Properties
 
-bool _IsExecutionImmediate_ _(read only)_ _(virtual)_::
-
-<<manual/instruction-graph-execution-mode,Instruction Graph Execution Mode>> _ExecutionMode_ _(read only)_ _(virtual)_::
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
 
 ### Protected Methods
 

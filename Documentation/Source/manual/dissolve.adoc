@@ -1,0 +1,15 @@
+[#manual/dissolve]
+
+## Dissolve
+
+### Fields
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
+
+https://docs.unity3d.com/ScriptReference/Texture2D.html[Texture2D^] _Texture_::
+
+float _Noise Scale_::
+
+ifdef::backend-multipage_html5[]
+link:reference/dissolve.html[Reference]
+endif::[]

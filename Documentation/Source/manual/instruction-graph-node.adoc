@@ -10,6 +10,8 @@ string _Name_::
 
 https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Graph Position_::
 
+bool _Is Breakpoint_::
+
 ifdef::backend-multipage_html5[]
 link:reference/instruction-graph-node.html[Reference]
 endif::[]

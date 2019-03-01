@@ -1,0 +1,9 @@
+[#manual/enable-game-object-node]
+
+## Enable Game Object Node
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/enable-game-object-node.html[Reference]
+endif::[]

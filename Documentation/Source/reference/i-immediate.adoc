@@ -1,0 +1,8 @@
+[#reference/i-immediate]
+
+## IImmediate
+
+PiRhoSoft.CompositionEngine.IImmediate
+
+### Description
+

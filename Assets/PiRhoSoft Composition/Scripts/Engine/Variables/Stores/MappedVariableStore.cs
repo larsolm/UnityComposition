@@ -1,4 +1,6 @@
-﻿namespace PiRhoSoft.CompositionEngine
+﻿using System.Collections.Generic;
+
+namespace PiRhoSoft.CompositionEngine
 {
 	public class MappedVariableStore : IVariableStore, IVariableList
 	{
@@ -25,6 +27,11 @@
 			return _map != null && _map.TryGetIndex(name, out int index)
 				? SetVariableValue(index, value)
 				: SetVariableResult.NotFound;
+		}
+
+		public IEnumerable<string> GetVariableNames()
+		{
+			return _map.GetNames();
 		}
 
 		#endregion

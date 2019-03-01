@@ -4,13 +4,7 @@
 
 ### Fields
 
-<<manual/variable-source-type,Variable Source Type>> _Type_::
-
-<<manual/variable-reference,Variable Reference>> _Target_::
-
-https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] _Animation_::
-
-<<manual/variable-reference,Variable Reference>> _Animation Reference_::
+<<manual/animation-clip-variable-source,Animation Clip Variable Source>> _Animation_::
 
 bool _Wait For Completion_::
 

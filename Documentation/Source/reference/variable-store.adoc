@@ -18,8 +18,12 @@ https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionar
 
 ### Public Methods
 
+void AddVariable(string name, <<manual/variable-value,Variable Value>> value)::
+
 <<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
 
 <<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::
 
 void Clear()::

@@ -1,5 +1,9 @@
 :imagesdir: manual/
 
+include::manual/activate-interface-node.adoc[]
+
+<<<
+
 include::manual/axis-input.adoc[]
 
 <<<
@@ -28,7 +32,15 @@ include::manual/button-input.adoc[]
 
 <<<
 
+include::manual/clear-transition.adoc[]
+
+<<<
+
 include::manual/command-set.adoc[]
+
+<<<
+
+include::manual/comment-node.adoc[]
 
 <<<
 
@@ -44,19 +56,51 @@ include::manual/create-object-node.adoc[]
 
 <<<
 
+include::manual/cutoff.adoc[]
+
+<<<
+
+include::manual/deactivate-interface-node.adoc[]
+
+<<<
+
+include::manual/demo-behaviour.adoc[]
+
+<<<
+
+include::manual/demo-interaction.adoc[]
+
+<<<
+
 include::manual/destroy-object-node.adoc[]
 
 <<<
 
-include::manual/disable-object-node.adoc[]
+include::manual/disable-component-node.adoc[]
 
 <<<
 
-include::manual/enable-object-node.adoc[]
+include::manual/disable-game-object-node.adoc[]
+
+<<<
+
+include::manual/dissolve.adoc[]
+
+<<<
+
+include::manual/enable-component-node.adoc[]
+
+<<<
+
+include::manual/enable-game-object-node.adoc[]
 
 <<<
 
 include::manual/expression-node.adoc[]
+
+<<<
+
+include::manual/fade.adoc[]
 
 <<<
 
@@ -136,11 +180,19 @@ include::manual/mockup-node.adoc[]
 
 <<<
 
+include::manual/pixelate.adoc[]
+
+<<<
+
 include::manual/play-animation.adoc[]
 
 <<<
 
 include::manual/play-animation-state.adoc[]
+
+<<<
+
+include::manual/play-transition.adoc[]
 
 <<<
 
@@ -181,6 +233,18 @@ include::manual/simple-graph.adoc[]
 <<<
 
 include::manual/text-binding.adoc[]
+
+<<<
+
+include::manual/transition.adoc[]
+
+<<<
+
+include::manual/transition-manager.adoc[]
+
+<<<
+
+include::manual/transition-renderer.adoc[]
 
 <<<
 

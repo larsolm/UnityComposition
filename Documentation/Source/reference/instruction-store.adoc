@@ -24,13 +24,13 @@ bool IsOutput(<<manual/variable-reference,Variable Reference>> variable)::
 
 ### Constructors
 
-InstructionStore(<<manual/instruction-context,Instruction Context>> context, <<manual/i-variable-store,I Variable Store>> thisStore)::
+InstructionStore(<<manual/instruction-context,Instruction Context>> context, Object thisObject)::
 
 ### Public Properties
 
 <<manual/instruction-context,Instruction Context>> _Context_ _(read only)_::
 
-<<manual/i-variable-store,I Variable Store>> _This_ _(read only)_::
+Object _This_ _(read only)_::
 
 <<manual/i-variable-store,I Variable Store>> _Locals_ _(read only)_::
 
@@ -38,7 +38,7 @@ InstructionStore(<<manual/instruction-context,Instruction Context>> context, <<m
 
 void SetContext(<<manual/instruction-context,Instruction Context>> context)::
 
-void ChangeThis(<<manual/i-variable-store,I Variable Store>> store)::
+void ChangeThis(Object thisObject)::
 
 void WriteInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/instruction-input,Instruction Input>>> inputs)::
 
@@ -47,3 +47,5 @@ void ReadOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.
 <<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
 
 <<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::

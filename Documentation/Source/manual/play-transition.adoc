@@ -1,0 +1,15 @@
+[#manual/play-transition]
+
+## Play Transition
+
+### Fields
+
+<<manual/transition-variable-source,Transition Variable Source>> _Transition_::
+
+<<manual/transition-phase,Transition Phase>> _Phase_::
+
+bool _Auto Finish_::
+
+ifdef::backend-multipage_html5[]
+link:reference/play-transition.html[Reference]
+endif::[]
