@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("General/Instruction")]
 	[HelpURL(Composition.DocumentationUrl + "instruction-node")]
-	public class InstructionNode : InstructionGraphNode, IIsImmediate
+	public class InstructionNode : InstructionGraphNode
 	{
 		[Tooltip("The instruction to run when this node is reached")]
 		public InstructionCaller Instruction = new InstructionCaller();
@@ -15,8 +15,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("Whether to wait for the instruction to finish before moving to Next")]
 		public bool WaitForCompletion = false;
-
-		public bool IsExecutionImmediate => !WaitForCompletion || CompositionManager.Instance.IsImmediate(Instruction);
 
 		public override Color NodeColor => Colors.ExecutionLight;
 

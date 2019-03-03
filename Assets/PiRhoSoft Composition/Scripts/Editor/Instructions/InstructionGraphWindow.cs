@@ -857,7 +857,7 @@ namespace PiRhoSoft.CompositionEditor
 
 				using (new EditorGUI.DisabledScope(_graph == null || !_graph.IsRunning))
 				{
-					var icon = _graph.IsRunning ? (_isWatchOpen ? _closeWatchButton : _openWatchButton) : _disabledWatchButton;
+					var icon = (_graph != null && _graph.IsRunning) ? (_isWatchOpen ? _closeWatchButton : _openWatchButton) : _disabledWatchButton;
 					_isWatchOpen = GUILayout.Toggle(_isWatchOpen, icon.Content, EditorStyles.toolbarButton);
 				}
 			}
@@ -874,7 +874,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private int GetNodeIteration(InstructionGraphNode.NodeData node)
 		{
-			if (Application.isPlaying && _graph.IsRunning)
+			if (Application.isPlaying && _graph != null && _graph.IsRunning)
 			{
 				if (node.Node == _start)
 					return 0;

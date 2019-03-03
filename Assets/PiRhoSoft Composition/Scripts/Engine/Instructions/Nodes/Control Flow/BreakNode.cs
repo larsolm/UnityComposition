@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Break", 22)]
 	[HelpURL(Composition.DocumentationUrl + "break-node")]
-	public class BreakNode : InstructionGraphNode, IImmediate
+	public class BreakNode : InstructionGraphNode
 	{
 		public override Color NodeColor => Colors.Break;
 

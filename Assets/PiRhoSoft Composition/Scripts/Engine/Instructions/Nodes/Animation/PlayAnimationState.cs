@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Animation/Play Animation State")]
 	[HelpURL(Composition.DocumentationUrl + "play-animation-state")]
-	public class PlayAnimationState : InstructionGraphNode, IImmediate
+	public class PlayAnimationState : InstructionGraphNode
 	{
 		private const string _stateNotFoundWarning = "(CAPASSNF) Unable to play animation state on {0}: the state could not be found";
 		private const string _animatorNotFoundWarning = "(CAPASANF) Unable to play animation state on {0}: the given variables must be an Animator";

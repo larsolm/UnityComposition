@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Object Manipulation/Create Object", 0)]
 	[HelpURL(Composition.DocumentationUrl + "create-object-node")]
-	public class CreateObjectNode : InstructionGraphNode, IImmediate
+	public class CreateObjectNode : InstructionGraphNode
 	{
 		private const string _objectNotFoundWarning = "(COMCOONF) Unable to create object for {0}: the object could not be found";
 		private const string _parentNotFoundWarning = "(COMCOONF) Unable to assign parent object for {0}: the specified object '{1}' could not be found";

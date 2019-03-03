@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Object Manipulation/Enable Component", 22)]
 	[HelpURL(Composition.DocumentationUrl + "enable-component-node")]
-	public class EnableComponentNode : InstructionGraphNode, IImmediate
+	public class EnableComponentNode : InstructionGraphNode
 	{
 		private const string _missingComponentWarning = "(CECNMC) Unable to enable component for {0}: the given variables must be a MonoBehaviour";
 

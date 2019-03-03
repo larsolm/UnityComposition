@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	[CreateInstructionGraphNodeMenu("Animation/Play Animation")]
 	[HelpURL(Composition.DocumentationUrl + "play-animation")]
-	public class PlayAnimation : InstructionGraphNode, IIsImmediate
+	public class PlayAnimation : InstructionGraphNode
 	{
 		private const string _animationNotFoundWarning = "(CAPANF) Unable to play animation for {0}: the animation could not be found";
 		private const string _invalidPlayerWarning = "(CAPAIP) Unable to play animation for {0}: the given variables must me an AnimationPlayer";
@@ -26,8 +26,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Whether to wait for the animation to finish")]
 		public bool WaitForCompletion = false;
 
-		public bool IsExecutionImmediate => !WaitForCompletion;
-		
 		public override Color NodeColor => Colors.Animation;
 
 		public override void GetInputs(List<VariableDefinition> inputs)

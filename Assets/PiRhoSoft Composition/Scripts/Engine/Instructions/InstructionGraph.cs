@@ -23,30 +23,6 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNodeList Nodes => _nodes; // _nodes is private with a getter so it isn't found by node data reflection
 		public InstructionStore Store => _rootStore;
 
-		public bool IsExecutionImmediate
-		{
-			get
-			{
-				foreach (var node in Nodes)
-				{
-					if (!IsImmediate(node))
-						return false;
-				}
-
-				return true;
-			}
-		}
-
-		public bool IsImmediate(InstructionGraphNode node)
-		{
-			if (node is IImmediate)
-				return true;
-			else if (node is IIsImmediate isImmediate)
-				return isImmediate.IsExecutionImmediate;
-			else
-				return false;
-		}
-
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			foreach (var node in Nodes)
@@ -157,7 +133,7 @@ namespace PiRhoSoft.CompositionEngine
 			DebugState = PlaybackState.Running;
 
 			if (IsDebugLoggingEnabled)
-				Debug.LogFormat(this, "Instruction Graph {0}: running branch '{1}'", name, source);
+				Debug.LogFormat(this, "(Frame {0}) Instruction Graph {1}: running branch '{2}'", Time.frameCount, name, source);
 		}
 
 		private bool ShouldContinue()
@@ -165,9 +141,9 @@ namespace PiRhoSoft.CompositionEngine
 			if (IsDebugLoggingEnabled)
 			{
 				if (DebugState == PlaybackState.Stopped)
-					Debug.LogFormat(this, "Instruction Graph {0}: halting branch '{1}'", name, _currentBranch);
+					Debug.LogFormat(this, "(Frame {0}) Instruction Graph {1}: halting branch '{2}'", Time.frameCount, name, _currentBranch);
 				else if (_callstack.Count == 0 && _nextNode.Node == null)
-					Debug.LogFormat(this, "Instruction Graph {0}: finished running branch '{1}'", name, _currentBranch);
+					Debug.LogFormat(this, "(Frame {0}) Instruction Graph {1}: finished running branch '{2}'", Time.frameCount, name, _currentBranch);
 			}
 
 			return DebugState != PlaybackState.Stopped && (_callstack.Count > 0 || _nextNode.Node != null);
@@ -182,7 +158,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			if (DebugState == PlaybackState.Paused && IsDebugLoggingEnabled)
-				Debug.LogFormat(this, "Instruction Graph {0}: pausing at node '{1}'", name, frame.Node.Name);
+				Debug.LogFormat(this, "(Frame {0}) Instruction Graph {1}: pausing at node '{2}'", Time.frameCount, name, frame.Node.Name);
 
 			while (DebugState == PlaybackState.Paused)
 				yield return null;
@@ -193,15 +169,12 @@ namespace PiRhoSoft.CompositionEngine
 			if (IsDebugLoggingEnabled)
 			{
 				if (frame.Iteration > 0)
-					Debug.LogFormat(this, "Instruction Graph {0}: running iteration {1} of node '{2}' ", name, frame.Iteration + 1, frame.Node.Name);
+					Debug.LogFormat(this, "(Frame {0}) Instruction Graph {1}: running iteration {2} of node '{3}' ", Time.frameCount, name, frame.Iteration + 1, frame.Node.Name);
 				else
-					Debug.LogFormat(this, "Instruction Graph {0}: following '{1}' to node '{2}'", name, frame.Source, frame.Node.Name);
+					Debug.LogFormat(this, "(Frame {0}) Instruction Graph {1}: following '{2}' to node '{3}'", Time.frameCount, name, frame.Source, frame.Node.Name);
 			}
 
-			if (IsImmediate(frame.Node))
-				RunEnumerator(frame.Node, frame.Node.Run(this, _rootStore, frame.Iteration));
-			else
-				yield return frame.Node.Run(this, _rootStore, frame.Iteration);
+			yield return frame.Node.Run(this, _rootStore, frame.Iteration);
 
 			if (DebugState == PlaybackState.Step)
 				DebugState = PlaybackState.Paused;
@@ -269,19 +242,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			return false;
-		}
-
-		private void RunEnumerator(InstructionGraphNode node, IEnumerator enumerator)
-		{
-			while (enumerator.MoveNext())
-			{
-				switch (enumerator.Current)
-				{
-					case null: break;
-					case IEnumerator child: RunEnumerator(node, child); break;
-					default: Debug.LogErrorFormat(node, _processFailedError, node.Name); break;
-				}
-			}
 		}
 
 		private void HandleBreak()

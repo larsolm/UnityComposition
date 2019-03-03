@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Animation/Set Animation Parameter")]
 	[HelpURL(Composition.DocumentationUrl + "set-animation-parameter")]
-	public class SetAnimationParameter : InstructionGraphNode, IImmediate
+	public class SetAnimationParameter : InstructionGraphNode
 	{
 		private const string _animatorNotFoundWarning = "(WASAPANF) Unable to set animation parameter for {0}: the given variables must be an Animator";
 		private const string _parameterNotFoundWarning = "(WASAPPNF) Unable to set animation parameter for {0}: the parameter could not be found";

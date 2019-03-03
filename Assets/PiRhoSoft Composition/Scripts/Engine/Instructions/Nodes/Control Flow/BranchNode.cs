@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Branch", 1)]
 	[HelpURL(Composition.DocumentationUrl + "branch-node")]
-	public class BranchNode : InstructionGraphNode, IImmediate
+	public class BranchNode : InstructionGraphNode
 	{
 		[Tooltip("The expression to evaluate to determine which node to follow")]
 		public Expression Switch = new Expression();

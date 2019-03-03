@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Iterate", 21)]
 	[HelpURL(Composition.DocumentationUrl + "iterate-node")]
-	public class IterateNode : InstructionGraphNode, IImmediate, ILoopNode
+	public class IterateNode : InstructionGraphNode, ILoopNode
 	{
 		private const string _invalidStoreWarning = "(CCFINIS) Unable to iterate objects for {0}: the given variables must be an IIndexedVariableStore";
 

@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Object Manipulation/Disable Component", 23)]
 	[HelpURL(Composition.DocumentationUrl + "disable-component-node")]
-	public class DisableComponentNode : InstructionGraphNode, IImmediate
+	public class DisableComponentNode : InstructionGraphNode
 	{
 		private const string _missingComponentWarning = "(CDCNMC) Unable to disable component for {0}: the given variables must be a MonoBehaviour";
 

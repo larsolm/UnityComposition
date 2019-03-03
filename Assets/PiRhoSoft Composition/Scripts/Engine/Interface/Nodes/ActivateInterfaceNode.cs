@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "activate-interface-node")]
 	[CreateInstructionGraphNodeMenu("Interface/Activate Interface", 50)]
-	public class ActivateInterfaceNode : InstructionGraphNode, IImmediate
+	public class ActivateInterfaceNode : InstructionGraphNode
 	{
 		private const string _invalidInterfaceNameWarning = "(CISNIIN) Unable to activate interface for {0}: the interface '{1}' does not exist";
 

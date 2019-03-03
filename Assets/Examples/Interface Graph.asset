@@ -21,8 +21,6 @@ MonoBehaviour:
     - {fileID: 114491858242574332}
     - {fileID: 114645294882131556}
     - {fileID: 114231118671215082}
-    - {fileID: 114271699670727288}
-    - {fileID: 114305969122559274}
   StartPosition: {x: -51.2, y: 25.6}
   Enter: {fileID: 114075139471534364}
   Process: {fileID: 114008137707473446}
@@ -68,9 +66,9 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -64, y: -115.200005}
+  GraphPosition: {x: 166.40001, y: -115.200005}
   IsBreakpoint: 0
-  Next: {fileID: 114305969122559274}
+  Next: {fileID: 0}
 --- !u!114 &114173259072431178
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -112,57 +110,6 @@ MonoBehaviour:
     - 
   GraphPosition: {x: 1369.6, y: -0}
   IsBreakpoint: 0
---- !u!114 &114271699670727288
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
-  m_Name: Play Transition
-  m_EditorClassIdentifier: 
-  Name: Play Transition
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 460.80002, y: -243.2}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Transition:
-    Type: 0
-    Reference:
-      _variable: []
-      _lookups: []
-    Value: {fileID: 11400000, guid: 1cf3fc2a8c995f140a2dd9b8efcf9a93, type: 2}
-  Phase: 0
-  AutoFinish: 1
---- !u!114 &114305969122559274
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8902113db831cde4f94ab1958d9ca3b0, type: 3}
-  m_Name: Activate Interface
-  m_EditorClassIdentifier: 
-  Name: Activate Interface
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 153.6, y: -204.8}
-  IsBreakpoint: 0
-  Next: {fileID: 114271699670727288}
-  InterfaceName: Interface
 --- !u!114 &114491858242574332
 MonoBehaviour:
   m_ObjectHideFlags: 1

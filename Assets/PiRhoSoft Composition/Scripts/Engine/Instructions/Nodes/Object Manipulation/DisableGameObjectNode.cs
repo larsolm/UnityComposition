@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Object Manipulation/Disable Game Object", 21)]
 	[HelpURL(Composition.DocumentationUrl + "disable-game-object-node")]
-	public class DisableGameObjectNode : InstructionGraphNode, IImmediate
+	public class DisableGameObjectNode : InstructionGraphNode
 	{
 		private const string _missingObjectWarning = "(CDGONMO) Unable to disable object for {0}: the given variables must be a GameObject";
 

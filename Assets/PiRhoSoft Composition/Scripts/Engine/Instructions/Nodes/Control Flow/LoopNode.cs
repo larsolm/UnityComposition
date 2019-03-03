@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Loop", 20)]
 	[HelpURL(Composition.DocumentationUrl + "loop-node")]
-	public class LoopNode : InstructionGraphNode, IImmediate, ILoopNode
+	public class LoopNode : InstructionGraphNode, ILoopNode
 	{
 		[Tooltip("The statement to execute to check if the loop should continue")]
 		public Expression Condition = new Expression();

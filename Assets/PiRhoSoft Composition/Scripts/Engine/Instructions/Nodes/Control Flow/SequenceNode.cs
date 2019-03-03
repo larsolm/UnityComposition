@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Sequence", 10)]
 	[HelpURL(Composition.DocumentationUrl + "sequence-node")]
-	public class SequenceNode : InstructionGraphNode, IImmediate, ISequenceNode
+	public class SequenceNode : InstructionGraphNode, ISequenceNode
 	{
 		private const string _invalidSequenceError = "(CSQIS) Unable to run sequence for {0}: index {1} has no been connection";
 

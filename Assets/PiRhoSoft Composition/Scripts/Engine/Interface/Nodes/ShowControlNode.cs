@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "show-control-node")]
 	[CreateInstructionGraphNodeMenu("Interface/Show Control", 101)]
-	public class ShowControlNode : InstructionGraphNode, IImmediate
+	public class ShowControlNode : InstructionGraphNode
 	{
 		[Tooltip("The node to go to once the control is shown")]
 		public InstructionGraphNode Next = null;

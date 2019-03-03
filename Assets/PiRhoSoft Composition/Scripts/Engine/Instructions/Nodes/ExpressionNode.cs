@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("General/Expression")]
 	[HelpURL(Composition.DocumentationUrl + "run-expression")]
-	public class ExpressionNode : InstructionGraphNode, IImmediate
+	public class ExpressionNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
