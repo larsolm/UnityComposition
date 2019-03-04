@@ -36,7 +36,7 @@ namespace PiRhoSoft.CompositionEngine
 		public override void GetConnections(NodeData data)
 		{
 			foreach (var item in Items)
-				data.AddConnection(nameof(Items), item.Label, item.OnSelected);
+				data.AddConnection(nameof(Items), item.Id, item.OnSelected);
 
 			base.GetConnections(data);
 		}
@@ -47,7 +47,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				foreach (var item in Items)
 				{
-					if (item.Label == connection.FieldKey)
+					if (item.Id == connection.FieldKey)
 					{
 						item.OnSelected = target;
 						return;
@@ -91,7 +91,7 @@ namespace PiRhoSoft.CompositionEngine
 			Control.Deactivate(this);
 
 			if (selectedItem != null)
-				graph.GoTo(selectedItem.OnSelected, selectedVariables, nameof(Items), selectedItem.Label);
+				graph.GoTo(selectedItem.OnSelected, selectedVariables, nameof(Items), selectedItem.Id);
 			else
 				graph.GoTo(OnCanceled, variables.This, nameof(OnCanceled));
 		}

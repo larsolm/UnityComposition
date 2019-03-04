@@ -342,8 +342,41 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Caller:
     _instruction: {fileID: 11400000, guid: 64e4f245b581cbc4bbd11435b90da29c, type: 2}
-    _inputs: []
-    _outputs: []
+    _inputs:
+    - Type: 1
+      Definition:
+        _name: test
+        _type: 0
+        _availability: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable: []
+        _lookups: []
+      _value:
+        Name: 
+        Type: 1
+        Data: False
+        Object: {fileID: 0}
+    _outputs:
+    - Type: 1
+      Definition:
+        _name: something
+        _type: 0
+        _availability: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable: []
+        _lookups: []
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0

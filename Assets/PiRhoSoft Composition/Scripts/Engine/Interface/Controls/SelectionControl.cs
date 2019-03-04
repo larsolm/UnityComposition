@@ -176,10 +176,10 @@ namespace PiRhoSoft.CompositionEngine
 					}
 					else if (item.Source == SelectionItem.ObjectSource.Scene)
 					{
-						var obj = transform.Find(item.Label);
+						var obj = transform.Find(item.Name);
 
 						if (obj == null)
-							Debug.LogErrorFormat(this, _missingChildError, item.Label, name);
+							Debug.LogErrorFormat(this, _missingChildError, item.Name, name);
 						else
 							AddItem(item, obj.gameObject, item, store, index++);
 					}
@@ -199,12 +199,12 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (value.Type == VariableType.Empty)
 				{
-					Debug.LogErrorFormat(this, _missingItemError, item.Label, item.Item);
+					Debug.LogErrorFormat(this, _missingItemError, item.Id, item.Item);
 					return null;
 				}
 				else if (!value.TryGetStore(out var store))
 				{
-					Debug.LogErrorFormat(this, _invalidItemError, item.Label, item.Item);
+					Debug.LogErrorFormat(this, _invalidItemError, item.Id, item.Item);
 					return null;
 				}
 				else
