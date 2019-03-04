@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var name = Switch.Execute(variables, VariableType.String).String;
+			var name = Switch.Execute(this, variables, VariableType.String).String;
 
 			if (Outputs.TryGetValue(name, out var output))
 				graph.GoTo(output, variables.This, nameof(Outputs), name);

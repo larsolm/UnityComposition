@@ -117,7 +117,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Initializer != null && Initializer.IsValid && variables != null)
 			{
-				var value = Initializer.Execute(variables);
+				// if variables isn't an object there isn't a context that makes sense anyway, so null is fine
+				var value = Initializer.Execute(variables as Object, variables);
 
 				if (value.Type == Type)
 					return Variable.Create(Name, value);

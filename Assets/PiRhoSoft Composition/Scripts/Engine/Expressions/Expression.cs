@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -50,7 +51,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public VariableValue Execute(IVariableStore variables)
+		public VariableValue Execute(Object context, IVariableStore variables)
 		{
 			try
 			{
@@ -58,22 +59,22 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			catch (ExpressionEvaluationException exception)
 			{
-				Debug.LogErrorFormat(_expressionEvaluationError, _statement, exception.Message);
+				Debug.LogErrorFormat(context, _expressionEvaluationError, _statement, exception.Message);
 			}
 			catch (CommandEvaluationException exception)
 			{
-				Debug.LogErrorFormat(_commandEvaluationError, exception.Command, exception.Message);
+				Debug.LogErrorFormat(context, _commandEvaluationError, exception.Command, exception.Message);
 			}
 
 			return VariableValue.Empty;
 		}
 
-		public VariableValue Execute(IVariableStore variables, VariableType expectedType)
+		public VariableValue Execute(Object context, IVariableStore variables, VariableType expectedType)
 		{
-			var result = Execute(variables);
+			var result = Execute(context, variables);
 
 			if (result.Type != expectedType) // Empty might mean there was an exception so logging would be duplicated, but that kind of makes sense in this case
-				Debug.LogWarningFormat(_invalidResultWarning, _statement, expectedType, result.Type);
+				Debug.LogWarningFormat(context, _invalidResultWarning, _statement, expectedType, result.Type);
 
 			return result;
 		}

@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var condition = Condition.Execute(variables, VariableType.Boolean);
+			var condition = Condition.Execute(this, variables, VariableType.Boolean);
 
 			if (condition.Boolean && Loop != null)
 				graph.GoTo(Loop, variables.This, nameof(Loop));

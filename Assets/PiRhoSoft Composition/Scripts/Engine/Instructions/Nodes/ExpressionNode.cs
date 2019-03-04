@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			Expression.Execute(variables);
+			Expression.Execute(this, variables);
 			graph.GoTo(Next, variables.This, nameof(Next));
 			yield break;
 		}

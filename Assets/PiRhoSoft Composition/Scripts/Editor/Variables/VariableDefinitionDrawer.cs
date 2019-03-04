@@ -172,7 +172,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static void DrawDefaultValue(Rect rect, ref VariableDefinition definition)
 		{
-			var value = definition.Initializer.Execute(null);
+			var value = definition.Initializer.Execute(null, null); // context isn't necessary since the object that would be the context is currently drawing
 
 			DrawIndentedLabel(ref rect, _defaultLabel);
 
