@@ -195,16 +195,20 @@ MonoBehaviour:
     _items:
     - Label: Continue
       Item:
-        _variable: []
-        _lookups: []
+        _variable:
+        - This
+        _lookups:
+        - 
       Source: 0
       Template: {fileID: 0}
       Expand: 0
       OnSelected: {fileID: 114491858242574332}
     - Label: Break
       Item:
-        _variable: []
-        _lookups: []
+        _variable:
+        - This
+        _lookups:
+        - 
       Source: 0
       Template: {fileID: 0}
       Expand: 0

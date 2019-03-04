@@ -4,7 +4,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class InstructionContext
 	{
-		internal Dictionary<string, IVariableStore> Stores { get; } = new Dictionary<string, IVariableStore>();
+		public Dictionary<string, IVariableStore> Stores { get; } = new Dictionary<string, IVariableStore>();
 
 		public void SetStore(string name, IVariableStore store)
 		{

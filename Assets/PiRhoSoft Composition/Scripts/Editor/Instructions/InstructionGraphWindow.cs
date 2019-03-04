@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using MenuItem = UnityEditor.MenuItem;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -116,6 +117,8 @@ namespace PiRhoSoft.CompositionEditor
 		private List<InstructionGraphNode.NodeData> _selectedNodes = new List<InstructionGraphNode.NodeData>();
 		private List<InstructionGraphNode.ConnectionData> _selectedConnections = new List<InstructionGraphNode.ConnectionData>();
 		private InstructionGraphNode.NodeData _selectedInteraction;
+
+		private IVariableStore _selectedStore = null;
 
 		#region Window Access
 
@@ -1068,6 +1071,12 @@ namespace PiRhoSoft.CompositionEditor
 			HandleHelper.DrawCircle(end, _knobRadius, endColor);
 		}
 
+		private void DrawStoreLink(string name, object obj)
+		{
+			if (VariableStoreControl.DrawLink(name, obj))
+				_selectedStore = obj as IVariableStore;
+		}
+
 		private void DrawWatch(Rect rect)
 		{
 			rect.x = WatchLeft;
@@ -1079,8 +1088,27 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				using (var scroller = new EditorGUILayout.ScrollViewScope(_watchScrollPosition, false, false, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.box, GUILayout.Width(rect.width), GUILayout.Height(rect.height)))
 				{
-					VariableStoreControl.Draw(_graph.Store);
-					_watchScrollPosition = scroller.scrollPosition;
+					DrawStoreLink(InstructionStore.ThisStoreName, _graph.Store.This);
+					DrawStoreLink(InstructionStore.InputStoreName, _graph.Store.Inputs);
+					DrawStoreLink(InstructionStore.OutputStoreName, _graph.Store.Outputs);
+					DrawStoreLink(InstructionStore.LocalStoreName, _graph.Store.Locals);
+
+					if (_graph.Store.Context != null)
+					{
+						foreach (var context in _graph.Store.Context.Stores)
+							DrawStoreLink(context.Key, context.Value);
+					}
+
+					if (_selectedStore != null)
+					{
+						GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(1));
+
+						var selected = VariableStoreControl.DrawTable(_selectedStore, _selectedStore == _graph.Store.Locals);
+						_watchScrollPosition = scroller.scrollPosition;
+
+						if (selected != null)
+							_selectedStore = selected;
+					}
 				}
 			}
 		}

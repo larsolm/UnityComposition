@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using PiRhoSoft.UtilityEngine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -66,15 +65,17 @@ namespace PiRhoSoft.CompositionEngine
 		public const string SceneStoreName = "scene";
 		public const string InputStoreName = "input";
 		public const string OutputStoreName = "output";
+		public const string LocalStoreName = "local";
 
 		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
-		public InstructionContext Context { get; private set; }
 		public object This { get; private set; }
-		public IVariableStore Locals { get; } = new VariableStore();
+		public InstructionContext Context { get; private set; }
 
-		private VariableStore _inputStore = new VariableStore();
-		private VariableStore _outputStore = new VariableStore();
+		public VariableStore Inputs { get; } = new VariableStore();
+		public VariableStore Outputs { get; } = new VariableStore();
+		public VariableStore Locals { get; } = new VariableStore();
+
 		private ContextStore _contextStore = new ContextStore();
 
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName.ToLowerInvariant() == InputStoreName;
@@ -113,13 +114,13 @@ namespace PiRhoSoft.CompositionEngine
 					var value = input.Reference.GetValue(this);
 
 					if (value.Type != VariableType.Empty)
-						_inputStore.SetVariable(input.Definition.Name, value);
+						Inputs.SetVariable(input.Definition.Name, value);
 					else
 						Debug.LogWarningFormat(_missingInputError, input.Definition.Name, input.Reference);
 				}
 				else if (input.Type == InstructionInputType.Value)
 				{
-					_inputStore.SetVariable(input.Definition.Name, input.Value);
+					Inputs.SetVariable(input.Definition.Name, input.Value);
 				}
 			}
 		}
@@ -130,7 +131,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				if (output.Type == InstructionOutputType.Reference)
 				{
-					var value = _outputStore.GetVariable(output.Definition.Name);
+					var value = Outputs.GetVariable(output.Definition.Name);
 
 					if (value.Type != VariableType.Empty)
 					{
@@ -154,17 +155,10 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				case ThisStoreName: return VariableValue.Create(This);
 				case SceneStoreName: return VariableValue.Create(_sceneStore);
-				case InputStoreName: return VariableValue.Create(_inputStore);
-				case OutputStoreName: return VariableValue.Create(_outputStore);
-				default:
-				{
-					var context = _contextStore.GetVariable(name);
-
-					if (context.Type != VariableType.Empty)
-						return context;
-					else
-						return Locals.GetVariable(name);
-				}
+				case InputStoreName: return VariableValue.Create(Inputs);
+				case OutputStoreName: return VariableValue.Create(Outputs);
+				case LocalStoreName: return VariableValue.Create(Locals);
+				default: return _contextStore.GetVariable(name);
 			}
 		}
 
@@ -176,23 +170,15 @@ namespace PiRhoSoft.CompositionEngine
 				case SceneStoreName: return SetVariableResult.ReadOnly;
 				case InputStoreName: return SetVariableResult.ReadOnly;
 				case OutputStoreName: return SetVariableResult.ReadOnly;
-				default:
-				{
-					var context = _contextStore.SetVariable(name, value);
-
-					if (context == SetVariableResult.ReadOnly)
-						return context;
-					else
-						return Locals.SetVariable(name, value);
-				}
+				case LocalStoreName: return SetVariableResult.ReadOnly;
+				default: return _contextStore.SetVariable(name, value);
 			}
 		}
 
 		public IEnumerable<string> GetVariableNames()
 		{
-			return new List<string> { InputStoreName, OutputStoreName, ThisStoreName, SceneStoreName }
-				.Concat(_contextStore.GetVariableNames())
-				.Concat(Locals.GetVariableNames());
+			return new List<string> { ThisStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName }
+				.Concat(_contextStore.GetVariableNames());
 		}
 
 		private class ContextStore : VariableStore
