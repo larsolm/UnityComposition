@@ -12,6 +12,7 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static IconButton _refreshButton = new IconButton(IconButton.Refresh, "Refresh the list of inputs and outputs");
 		private readonly static Label _inputsLabel = new Label(typeof(InstructionCaller), "_inputs");
 		private readonly static Label _outputsLabel = new Label(typeof(InstructionCaller), "_outputs");
+		private readonly static GUIContent[] _inputTypeOptions = new GUIContent[] { new GUIContent("Value/Boolean"), new GUIContent("Value/Integer"), new GUIContent("Value/Number"), new GUIContent("Value/String"), new GUIContent("Value/Object"), new GUIContent(""), new GUIContent("Reference") };
 
 		private InstructionCaller _caller;
 		private ObjectListControl _inputs = new ObjectListControl();
@@ -55,12 +56,53 @@ namespace PiRhoSoft.CompositionEditor
 			RectHelper.TakeHorizontalSpace(ref rect);
 
 			EditorGUI.LabelField(labelRect, input.Definition.Name);
-			input.Type = (InstructionInputType)EditorGUI.EnumPopup(typeRect, input.Type);
+
+			if (input.Definition.Type == VariableType.Empty)
+			{
+				var typeIndex = input.Type == InstructionInputType.Reference ? 6 : GetIndexForType(input.Value.Type);
+				var newIndex = EditorGUI.Popup(typeRect, typeIndex, _inputTypeOptions);
+
+				if (newIndex != typeIndex)
+				{
+					input.Type = newIndex == 6 ? InstructionInputType.Reference : InstructionInputType.Value;
+					input.Value = VariableValue.Create(GetTypeFromIndex(newIndex));
+				}
+			}
+			else
+			{
+				input.Type = (InstructionInputType)EditorGUI.EnumPopup(typeRect, input.Type);
+			}
 
 			switch (input.Type)
 			{
 				case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
 				case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, input.Definition); break;
+			}
+		}
+
+		private int GetIndexForType(VariableType type)
+		{
+			switch (type)
+			{
+				case VariableType.Boolean: return 0;
+				case VariableType.Integer: return 1;
+				case VariableType.Number: return 2;
+				case VariableType.String: return 3;
+				case VariableType.Object: return 4;
+				default: return -1;
+			}
+		}
+
+		private VariableType GetTypeFromIndex(int index)
+		{
+			switch (index)
+			{
+				case 0: return VariableType.Boolean;
+				case 1: return VariableType.Integer;
+				case 2: return VariableType.Number;
+				case 3: return VariableType.String;
+				case 4: return VariableType.Object;
+				default: return VariableType.Empty;
 			}
 		}
 

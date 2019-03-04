@@ -801,7 +801,7 @@ namespace PiRhoSoft.CompositionEditor
 				if (GUILayout.Button("View", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
 					_viewMenu.DropDown(new Rect(padding, _toolbarHeight, 0f, 0f));
 
-				var isEnabled = Application.isPlaying && _graph.IsRunning;
+				var isEnabled = Application.isPlaying && _graph != null && _graph.IsRunning;
 				var isPlaying = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Running;
 				var isPaused = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Paused;
 				var isStepping = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Step;
@@ -849,12 +849,12 @@ namespace PiRhoSoft.CompositionEditor
 				_loggingEnabled.Value = InstructionGraph.IsDebugLoggingEnabled;
 
 				if (GUILayout.Button("Settings", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
-					PopupWindow.Show(new Rect(position.width - (3 * _toolbarButtonWidth), _toolbarHeight, 0, 0), _settingsMenu);
+					PopupWindow.Show(new Rect(position.width - (4 * _toolbarButtonWidth), _toolbarHeight, 0, 0), _settingsMenu);
 
 				if (GUILayout.Button(_graph == null ? "No Graph Selected" : _graph.name, EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth * 2)))
 				{
 					var menu = CreateSelectMenu();
-					menu.DropDown(new Rect(position.width - (2 * _toolbarButtonWidth), _toolbarHeight, 0, 0));
+					menu.DropDown(new Rect(position.width - (3 * _toolbarButtonWidth), _toolbarHeight, 0, 0));
 				}
 
 				_isLocked = GUILayout.Toggle(_isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);
