@@ -10,8 +10,6 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("Composition/Composition Manager")]
 	public class CompositionManager : SingletonBehaviour<CompositionManager>
 	{
-		public const string _processFailedError = "(CCMPF) Failed to process Instruction '{0}': the Instruction yielded a value other than null or IEnumerator";
-
 		[Tooltip("The Composition asset to load when this CompositionManager is loaded")]
 		[AssetPopup]
 		public CommandSet Commands; // this exists to provide a place to assign a Composition asset so that it will be loaded by Unity
@@ -33,8 +31,13 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class JoinEnumerator : IEnumerator
 	{
+		private const string _iterationLimitWarning = "(CJEIL) Cancelling JoinEnumerator after 1000 unyielding iterations";
+
+		public static int MaximumIterations = 1000;
+
 		private IEnumerator _root;
 		private Stack<IEnumerator> _enumerators = new Stack<IEnumerator>(10);
+		private int _iterations = 0;
 
 		public object Current
 		{
@@ -49,6 +52,27 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool MoveNext()
 		{
+			_iterations = 0;
+			return MoveNext_();
+		}
+
+		private bool MoveNext_()
+		{
+			// TODO: this should probably be iterative instead of recursive since the stack can get pretty deep
+
+			_iterations++;
+
+			if (_iterations >= MaximumIterations)
+			{
+				// This is a protection against infinite loops that require a Unity restart. As it stands, a stack
+				// overflow will happen if the iterator continues for too long, but that will change if this becomes
+				// iterative instead of recursive. Also, the iterations warning is a little nicer.
+
+				Debug.LogWarningFormat(_iterationLimitWarning, MaximumIterations);
+				_enumerators.Clear();
+				return false;
+			}
+
 			var enumerator = _enumerators.Peek();
 			var next = enumerator.MoveNext();
 
@@ -62,12 +86,12 @@ namespace PiRhoSoft.CompositionEngine
 				_enumerators.Pop();
 
 				if (_enumerators.Count > 0)
-					MoveNext();
+					MoveNext_();
 			}
 			else if (enumerator.Current is IEnumerator child)
 			{
 				_enumerators.Push(child);
-				MoveNext();
+				MoveNext_();
 			}
 
 			return _enumerators.Count > 0;
