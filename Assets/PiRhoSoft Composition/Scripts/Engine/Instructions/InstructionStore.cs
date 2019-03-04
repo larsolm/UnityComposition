@@ -72,11 +72,11 @@ namespace PiRhoSoft.CompositionEngine
 		public object This { get; private set; }
 		public InstructionContext Context { get; private set; }
 
-		public VariableStore Inputs { get; } = new VariableStore();
-		public VariableStore Outputs { get; } = new VariableStore();
+		public VariableStore Inputs { get; } = new WritableStore();
+		public VariableStore Outputs { get; } = new WritableStore();
 		public VariableStore Locals { get; } = new VariableStore();
 
-		private ContextStore _contextStore = new ContextStore();
+		private ReadOnlyStore _contextStore = new ReadOnlyStore();
 
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName.ToLowerInvariant() == InputStoreName;
 		public static bool IsOutput(VariableReference variable) => variable.IsAssigned && variable.StoreName.ToLowerInvariant() == OutputStoreName;
@@ -114,15 +114,21 @@ namespace PiRhoSoft.CompositionEngine
 					var value = input.Reference.GetValue(this);
 
 					if (value.Type != VariableType.Empty)
-						Inputs.SetVariable(input.Definition.Name, value);
+						Inputs.AddVariable(input.Definition.Name, value);
 					else
 						Debug.LogWarningFormat(_missingInputError, input.Definition.Name, input.Reference);
 				}
 				else if (input.Type == InstructionInputType.Value)
 				{
-					Inputs.SetVariable(input.Definition.Name, input.Value);
+					Inputs.AddVariable(input.Definition.Name, input.Value);
 				}
 			}
+		}
+
+		public void WriteOutputs(IList<InstructionOutput> outputs)
+		{
+			foreach (var output in outputs)
+				Outputs.AddVariable(output.Definition.Name, VariableValue.Create(output.Definition.Type));
 		}
 
 		public void ReadOutputs(IList<InstructionOutput> outputs)
@@ -179,17 +185,6 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return new List<string> { ThisStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName }
 				.Concat(_contextStore.GetVariableNames());
-		}
-
-		private class ContextStore : VariableStore
-		{
-			public override SetVariableResult SetVariable(string name, VariableValue value)
-			{
-				if (Map.TryGetValue(name, out int index))
-					return SetVariableResult.ReadOnly;
-				else
-					return SetVariableResult.NotFound;
-			}
 		}
 	}
 }

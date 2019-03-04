@@ -30,12 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public virtual SetVariableResult SetVariable(string name, VariableValue value)
 		{
-			if (_map.TryGetValue(name, out int index))
-				_variables[index] = Variable.Create(name, value);
-			else
-				AddVariable(name, value);
-
-			return SetVariableResult.Success;
+			return SetVariable(name, value, true);
 		}
 
 		public virtual IEnumerable<string> GetVariableNames()
@@ -47,6 +42,37 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_variables.Clear();
 			_map.Clear();
+		}
+
+		protected SetVariableResult SetVariable(string name, VariableValue value, bool allowAdd)
+		{
+			if (_map.TryGetValue(name, out int index))
+				_variables[index] = Variable.Create(name, value);
+			else if (allowAdd)
+				AddVariable(name, value);
+			else
+				return SetVariableResult.NotFound;
+
+			return SetVariableResult.Success;
+		}
+	}
+
+	public class WritableStore : VariableStore
+	{
+		public override SetVariableResult SetVariable(string name, VariableValue value)
+		{
+			return SetVariable(name, value, false);
+		}
+	}
+
+	public class ReadOnlyStore : VariableStore
+	{
+		public override SetVariableResult SetVariable(string name, VariableValue value)
+		{
+			if (Map.TryGetValue(name, out int index))
+				return SetVariableResult.ReadOnly;
+			else
+				return SetVariableResult.NotFound;
 		}
 	}
 }

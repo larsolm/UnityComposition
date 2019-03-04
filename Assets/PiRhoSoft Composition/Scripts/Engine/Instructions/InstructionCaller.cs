@@ -30,6 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 				var store = new InstructionStore(context, thisObject);
 
 				store.WriteInputs(_inputs);
+				store.WriteOutputs(_outputs);
 				yield return Instruction.Execute(store);
 				store.ReadOutputs(_outputs);
 			}
