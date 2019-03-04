@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The blend colors to apply to the image depending on the fill amount")]
 		public Gradient FillColors = new Gradient();
 
-		private Image _image;
+		protected Image _image;
 
 		void Awake()
 		{
@@ -31,6 +31,14 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 		public override void UpdateBinding(IVariableStore variables)
+		{
+			var fill = GetFill(variables);
+
+			_image.color = FillColors.Evaluate(fill);
+			_image.fillAmount = fill;
+		}
+
+		protected float GetFill(IVariableStore variables)
 		{
 			var amountValue = AmountVariable.GetValue(variables);
 			var totalValue = TotalVariable.GetValue(variables);
@@ -53,10 +61,7 @@ namespace PiRhoSoft.CompositionEngine
 				default: Debug.LogErrorFormat(this, _invalidTotalError, TotalVariable); total = 1.0f; break;
 			}
 
-			var fill = amount / total;
-
-			_image.color = FillColors.Evaluate(fill);
-			_image.fillAmount = fill;
+			return amount / total;
 		}
 	}
 }

@@ -22,13 +22,10 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (Loop != null && item != null)
 					graph.GoTo(Loop, item, nameof(Loop));
-				else
-					graph.Break();
 			}
 			else
 			{
 				Debug.LogFormat(this, _invalidStoreWarning, Name);
-				graph.Break();
 			}
 
 			yield break;

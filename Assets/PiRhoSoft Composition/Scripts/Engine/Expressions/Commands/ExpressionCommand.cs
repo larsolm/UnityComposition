@@ -5,12 +5,12 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class ExpressionCommand : Command
 	{
-		public class ParameterStore : IVariableStore
+		public class ParameterStore : VariableStore
 		{
 			public const string ParameterName = "P";
 			public List<VariableValue> Parameters = new List<VariableValue>(5);
 
-			public VariableValue GetVariable(string name)
+			public override VariableValue GetVariable(string name)
 			{
 				if (name.StartsWith(ParameterName))
 				{
@@ -22,17 +22,28 @@ namespace PiRhoSoft.CompositionEngine
 						return Parameters[index];
 				}
 
-				return VariableValue.Empty;
+				return base.GetVariable(name);
 			}
 
-			public SetVariableResult SetVariable(string name, VariableValue value)
+			public override SetVariableResult SetVariable(string name, VariableValue value)
 			{
-				return SetVariableResult.ReadOnly;
+				if (name.StartsWith(ParameterName))
+				{
+					var index = 0;
+					for (var i = ParameterName.Length; i < name.Length; i++)
+						index = index * 10 + (name[i] - '0');
+
+					if (index >= 0 && index < Parameters.Count)
+						return SetVariableResult.ReadOnly;
+				}
+
+				return base.SetVariable(name, value);
 			}
 
 			public IEnumerable<string> GetVariableNames()
 			{
-				return Parameters.Select((value, index) => ParameterName + index);
+				var parameters = Parameters.Select((value, index) => ParameterName + index);
+				return base.GetVariableNames().Concat(parameters);
 			}
 		}
 

@@ -38,12 +38,12 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Prefab)
 			{
-				Transform parent = null;
+				GameObject parent = null;
 
 				if (Parent.IsAssigned && !Parent.GetValue(variables).TryGetObject(out parent))
 					Debug.LogWarningFormat(this, _parentNotFoundWarning, Name, Parent);
 
-				var spawned = parent ? Instantiate(Prefab, parent.position + (Vector3)Position, Quaternion.identity, parent.transform) : Instantiate(Prefab, Position, Quaternion.identity);
+				var spawned = parent ? Instantiate(Prefab, parent.transform.position + (Vector3)Position, Quaternion.identity, parent.transform) : Instantiate(Prefab, Position, Quaternion.identity);
 				spawned.name = ObjectName;
 
 				graph.GoTo(Next, spawned, nameof(Next));

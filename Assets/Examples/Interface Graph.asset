@@ -21,7 +21,7 @@ MonoBehaviour:
     - {fileID: 114491858242574332}
     - {fileID: 114645294882131556}
     - {fileID: 114231118671215082}
-  StartPosition: {x: -51.2, y: 25.6}
+  StartPosition: {x: -25.600002, y: 25.600002}
   Enter: {fileID: 114075139471534364}
   Process: {fileID: 114008137707473446}
   Exit: {fileID: 114173259072431178}

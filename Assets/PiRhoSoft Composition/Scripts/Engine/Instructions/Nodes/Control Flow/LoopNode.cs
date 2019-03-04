@@ -27,8 +27,6 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (condition.Boolean && Loop != null)
 				graph.GoTo(Loop, variables.This, nameof(Loop));
-			else
-				graph.Break();
 
 			yield break;
 		}
