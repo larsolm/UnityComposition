@@ -18,9 +18,6 @@ namespace PiRhoSoft.CompositionEngine
 		Reference
 	}
 
-	[Serializable] public class InstructionInputList : SerializedList<InstructionInput> { }
-	[Serializable] public class InstructionOutputList : SerializedList<InstructionOutput> { }
-
 	[Serializable]
 	public class InstructionInput : ISerializationCallbackReceiver
 	{

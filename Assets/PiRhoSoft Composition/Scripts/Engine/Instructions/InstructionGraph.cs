@@ -205,6 +205,11 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (node.Node == null)
 			{
+				// the current frame should never continue if there is no next
+
+				if (_callstack.Count > 0)
+					_callstack.Pop();
+
 				// check if there is a sequence or loop node in the call stack to iterate
 
 				while (_callstack.Count > 0)

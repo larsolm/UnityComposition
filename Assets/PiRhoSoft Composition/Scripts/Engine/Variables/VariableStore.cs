@@ -38,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 			return SetVariableResult.Success;
 		}
 
-		public IEnumerable<string> GetVariableNames()
+		public virtual IEnumerable<string> GetVariableNames()
 		{
 			return _map.Keys;
 		}

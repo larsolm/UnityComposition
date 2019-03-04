@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.SnippetsEditor;
 using PiRhoSoft.UtilityEditor;
 using PiRhoSoft.UtilityEngine;
 using System;
@@ -161,7 +162,7 @@ namespace PiRhoSoft.CompositionEditor
 			return window;
 		}
 
-		[MenuItem("Window/Composition/Instruction Graph")]
+		[MenuItem("Window/PiRho Soft/Instruction Graph")]
 		public static InstructionGraphWindow ShowNewWindow()
 		{
 			var window = CreateInstance<InstructionGraphWindow>();

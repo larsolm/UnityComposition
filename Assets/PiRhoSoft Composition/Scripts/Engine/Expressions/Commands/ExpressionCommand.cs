@@ -40,7 +40,7 @@ namespace PiRhoSoft.CompositionEngine
 				return base.SetVariable(name, value);
 			}
 
-			public IEnumerable<string> GetVariableNames()
+			public override IEnumerable<string> GetVariableNames()
 			{
 				var parameters = Parameters.Select((value, index) => ParameterName + index);
 				return base.GetVariableNames().Concat(parameters);

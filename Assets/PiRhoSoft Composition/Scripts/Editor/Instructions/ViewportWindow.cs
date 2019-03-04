@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
-namespace PiRhoSoft.UtilityEditor
+namespace PiRhoSoft.SnippetsEditor
 {
 	public abstract class ViewportWindow : EditorWindow
 	{
@@ -238,6 +239,27 @@ namespace PiRhoSoft.UtilityEditor
 		#endregion
 
 		#region GUI Transforming
+
+		private static class GUIClip
+		{
+			private static Func<Rect> _getTopRect;
+
+			static GUIClip()
+			{
+				var assembly = Assembly.GetAssembly(typeof(GUI));
+				var type = assembly?.GetType("UnityEngine.GUIClip", false);
+
+				if (type != null)
+				{
+					var method = type.GetMethod(nameof(GetTopRect), BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic);
+					_getTopRect = method != null ? (Func<Rect>)Delegate.CreateDelegate(typeof(Func<Rect>), method, false) : null;
+					
+					// TODO: handle _getTopRect == null
+				}
+			}
+
+			public static Rect GetTopRect() => _getTopRect();
+		}
 
 		private Matrix4x4 ReplaceTransform()
 		{

@@ -5,8 +5,6 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class LookupOperation : Operation
 	{
-		private const string _missingVariableException = "the variable '{0}' could not be found";
-
 		public VariableReference Reference = new VariableReference();
 
 		public LookupOperation(string variable)
@@ -16,12 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override VariableValue Evaluate(IVariableStore variables)
 		{
-			var value = Reference.GetValue(variables);
-
-			if (value.Type == VariableType.Empty)
-				throw new ExpressionEvaluationException(_missingVariableException, Reference);
-
-			return value;
+			return Reference.GetValue(variables);
 		}
 
 		public override void ToString(StringBuilder builder)

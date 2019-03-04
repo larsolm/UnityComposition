@@ -1,9 +1,8 @@
-﻿using UnityEngine;
-using UnityEditor;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
-namespace PiRhoSoft.UtilityEditor
+namespace PiRhoSoft.SnippetsEditor
 {
 	public class InputManager
 	{

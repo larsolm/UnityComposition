@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidResultWarning = "(CEIR) The Expression '{0}' was expected to return type {1} but instead returned type {2}";
 
 		[SerializeField] private string _statement;
-		private List<Operation> _operations;
+		[NonSerialized] private List<Operation> _operations;
 
 		public bool IsValid => _operations != null && _operations.Count > 0;
 		public bool HasError => !string.IsNullOrEmpty(_statement) && _operations == null;
