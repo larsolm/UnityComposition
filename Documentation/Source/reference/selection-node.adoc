@@ -2,7 +2,7 @@
 
 ## SelectionNode
 
-PiRhoSoft.CompositionEngine.SelectionNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+PiRhoSoft.CompositionEngine.SelectionNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
@@ -12,13 +12,13 @@ SelectionNode()::
 
 ### Public Fields
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _OnCanceled_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _OnCanceled_::
 
-<<manual/interface-reference,Interface Reference>> _Control_::
+<<reference/interface-reference.html,InterfaceReference>> _Control_::
 
 bool _IsSelectionRequired_::
 
-<<manual/selection-node-item-list,Selection Node Item List>> _Items_::
+<<reference/selection-node-item-list.html,SelectionNodeItemList>> _Items_::
 
 ### Public Properties
 
@@ -26,10 +26,10 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Public Methods
 
-void GetConnections(<<manual/instruction-graph-node-node-data,Node Data>> data) _(virtual)_::
+void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
 
-void SetConnection(<<manual/instruction-graph-node-connection-data,Connection Data>> connection, <<manual/instruction-graph-node,Instruction Graph Node>> target) _(virtual)_::
+void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

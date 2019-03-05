@@ -8,14 +8,14 @@ PiRhoSoft.CompositionEngine.Variable : ValueType
 
 ### Static Properties
 
-<<manual/variable,Variable>> _Empty_ _(read only)_::
+<<reference/variable.html,Variable>> _Empty_ _(read only)_::
 
 ### Static Methods
 
-<<manual/variable,Variable>> Create(string name, <<manual/variable-value,Variable Value>> value)::
+<<reference/variable.html,Variable>> Create(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
 ### Public Properties
 
 string _Name_ _(read only)_::
 
-<<manual/variable-value,Variable Value>> _Value_ _(read only)_::
+<<reference/variable-value.html,VariableValue>> _Value_ _(read only)_::

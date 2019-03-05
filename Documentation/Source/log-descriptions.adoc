@@ -3,6 +3,10 @@
 
 ### Warnings
 
+CAINIIN:: Unable to activate interface for {0}: the interface '{1}' does not exist
+--
+--
+
 CAPAIP:: Unable to play animation for {0}: the given variables must me an AnimationPlayer
 --
 --
@@ -39,11 +43,23 @@ CCNMT:: unable to find variable {0} for instruction graph node {1}
 --
 --
 
+CCONMO:: Unable to create object for {0}: the object could not be found
+--
+--
+
+CCONMP:: Unable to assign parent object for {0}: the specified object '{1}' could not be found
+--
+--
+
 CDCNMC:: Unable to disable component for {0}: the given variables must be a MonoBehaviour
 --
 --
 
 CDGONMO:: Unable to disable object for {0}: the given variables must be a GameObject
+--
+--
+
+CDINIIN:: Unable to activate interface for {0}: the interface '{1}' does not exist
 --
 --
 
@@ -59,15 +75,31 @@ CEIR:: The Expression '{0}' was expected to return type {1} but instead returned
 --
 --
 
-CISNIIN:: Unable to activate interface for {0}: the interface '{1}' does not exist
+CIRICT:: Unable to find interface control for {0}: the interface control '{1}' is not a {2}
 --
 --
 
-COMCOONF:: Unable to create object for {0}: the object could not be found
+CIRIIT:: Unable to find interface for {0}: the interface '{1}' is not a {1}
+--
+--
+
+CIRMC:: Unable to find interface control for {0}: the interface '{1}' does not have a control named '{2}'
+--
+--
+
+CIRMI:: Unable to find interface for {0}: the interface '{1}' could not be found
+--
+--
+
+CJEIL:: Cancelling JoinEnumerator after 1000 unyielding iterations
 --
 --
 
 COMDOONF:: Unable to destroy object for {0}: the given variables must be a Unity Object
+--
+--
+
+CSCIE:: Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore
 --
 --
 
@@ -76,26 +108,6 @@ CTMIA:: this TransitionRenderer has already been added
 --
 
 CTMIR:: this TransitionRenderer has not been added
---
---
-
-IIRMC:: Unable to find interface control for {0}: the interface '{1}' does not have a control named '{2}'
---
---
-
-IIRMI:: Unable to find interface for {0}: the interface '{1}' could not be found
---
---
-
-IIRMICT:: Unable to find interface control for {0}: the interface control '{1}' is not a {2}
---
---
-
-IIRMIIT:: Unable to find interface for {0}: the interface '{1}' is not a {1}
---
---
-
-ISCIE:: Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore
 --
 --
 
@@ -117,15 +129,35 @@ WPTTM:: Unable to play transition for {0}: the transition could not be found
 
 ### Errors
 
+CBBIA:: Failed to update bar binding: the amount variable '{0}' is not an Integer or Number
+--
+--
+
+CBBIT:: Failed to update bar binding: the total variable '{0}' is not an Integer or Number
+--
+--
+
+CBBMA:: Failed to update bar binding: the amount variable '{0}' could not be found
+--
+--
+
+CBBMT:: Failed to update bar binding: the total variable '{0}' could not be found
+--
+--
+
+CBCIB:: Failed to update binding: the variable '{0}' is not an IVariableStore
+--
+--
+
+CBCMB:: Failed to update binding: the variable '{0}' could not be found
+--
+--
+
 CCEE:: Failed to execute Command '{0}': {1}
 --
 --
 
 CCIGPF:: Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator
---
---
-
-CCMPF:: Failed to process Instruction '{0}': the Instruction yielded a value other than null or IEnumerator
 --
 --
 
@@ -173,6 +205,22 @@ CIAR:: Failed to run Instruction '{0}': the Instruction is already running
 --
 --
 
+CIBIV:: Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite
+--
+--
+
+CIBMV:: Failed to update image binding: the variable '{0}' could not be found
+--
+--
+
+CIMIA:: Failed to add Interface: an Interface named {0} has already been added
+--
+--
+
+CIMIR:: Failed to remove Interface: an Interface named {0} has not been added
+--
+--
+
 CISIOT:: failed to store output {0}: the variable '{1}' has an incompatible type
 --
 --
@@ -186,6 +234,14 @@ CISMO:: failed to store output {0}: the variable '{1}' could not be found
 --
 
 CISROO:: failed to store output {0}: the variable '{1}' is read only
+--
+--
+
+CSCII:: Failed to create item {0}: the variable '{1}' is not an IVariableStore
+--
+--
+
+CSCMI:: Failed to create item {0}: the variable '{1}' could not be found
 --
 --
 
@@ -213,46 +269,10 @@ CVSRM:: failed to get value from source: the variable '{0}' could not be found
 --
 --
 
-IBBIA:: Failed to update bar binding: the amount variable '{0}' is not an Integer or Number
+ISCMC:: Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name
 --
 --
 
-IBBIT:: Failed to update bar binding: the total variable '{0}' is not an Integer or Number
---
---
-
-IBBMA:: Failed to update bar binding: the amount variable '{0}' could not be found
---
---
-
-IBBMT:: Failed to update bar binding: the total variable '{0}' could not be found
---
---
-
-IBCMB:: Failed to update binding: the variable '{0}' could not be found
---
---
-
-IBMIB:: Failed to update binding: the variable '{0}' is not an IVariableStore
---
---
-
-IIBIV:: Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite
---
---
-
-IIBMV:: Failed to update image binding: the variable '{0}' could not be found
---
---
-
-IIMIA:: Failed to add Interface: an Interface named {0} has already been added
---
---
-
-IIMIR:: Failed to remove Interface: an Interface named {0} has not been added
---
---
-
-ISCMI:: Failed to create item {0}: the variable '{1}' could not be found
+ISCMT:: Failed to create item {0}: the object template has not been assigned
 --
 --

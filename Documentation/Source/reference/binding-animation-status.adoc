@@ -1,0 +1,21 @@
+[#reference/binding-animation-status]
+
+## BindingAnimationStatus
+
+PiRhoSoft.CompositionEngine.BindingAnimationStatus
+
+### Description
+
+### Constructors
+
+BindingAnimationStatus()::
+
+### Public Methods
+
+void Reset()::
+
+bool IsFinished()::
+
+void Increment()::
+
+void Decrement()::

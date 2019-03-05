@@ -2,7 +2,7 @@
 
 ## AbsCommand
 
-PiRhoSoft.CompositionEngine.AbsCommand : <<manual/command,Command>>
+PiRhoSoft.CompositionEngine.AbsCommand : <<reference/command.html,Command>>
 
 ### Description
 
@@ -12,4 +12,4 @@ AbsCommand()::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables, string name, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/operation,Operation>>> parameters) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(virtual)_::

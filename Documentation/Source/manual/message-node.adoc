@@ -4,13 +4,13 @@
 
 ### Fields
 
-<<manual/interface-reference,Interface Reference>> _Control_::
+<<manual/interface-reference.html,Interface Reference>> _Control_::
 
-<<manual/message-interaction-type,Message Interaction Type>> _Interaction_::
+<<manual/message-interaction-type.html,Message Interaction Type>> _Interaction_::
 
 bool _Is Last_::
 
-<<manual/message,Message>> _Message_::
+<<manual/message.html,Message>> _Message_::
 
 ifdef::backend-multipage_html5[]
 link:reference/message-node.html[Reference]

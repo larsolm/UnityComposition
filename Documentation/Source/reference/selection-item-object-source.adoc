@@ -8,6 +8,6 @@ PiRhoSoft.CompositionEngine.ObjectSource
 
 ### Values
 
-<<manual/selection-item-object-source,Object Source>> _Scene_::
+<<reference/selection-item-object-source.html,ObjectSource>> _Scene_::
 
-<<manual/selection-item-object-source,Object Source>> _Asset_::
+<<reference/selection-item-object-source.html,ObjectSource>> _Asset_::

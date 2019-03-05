@@ -6,7 +6,7 @@
 
 string _Name_::
 
-<<manual/interface-control-dictionary,Interface Control Dictionary>> _Interface Controls_::
+<<manual/interface-control-dictionary.html,Interface Control Dictionary>> _Interface Controls_::
 
 ifdef::backend-multipage_html5[]
 link:reference/interface.html[Reference]

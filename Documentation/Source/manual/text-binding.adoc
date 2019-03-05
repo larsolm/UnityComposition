@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/variable-reference,Variable Reference>> _Variable_::
+<<manual/variable-reference.html,Variable Reference>> _Variable_::
 
 ifdef::backend-multipage_html5[]
 link:reference/text-binding.html[Reference]

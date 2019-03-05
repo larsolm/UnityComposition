@@ -5,6 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Conditional", 0)]
+	[HelpURL(Composition.DocumentationUrl + "conditional-node")]
 	public class ConditionalNode : InstructionGraphNode
 	{
 		[Tooltip("The node to follow if Condition is true")]

@@ -12,17 +12,17 @@ CommandSet()::
 
 ### Public Fields
 
-<<manual/custom-command-list,Custom Command List>> _CustomCommands_::
+<<reference/custom-command-list.html,CustomCommandList>> _CustomCommands_::
 
 ### Public Methods
 
-void AddExpression(string name)::
+void AddExpression(string _name_)::
 
-void RemoveCommand(int index)::
+void RemoveCommand(int _index_)::
 
-void SetExpression(int index, <<manual/expression,Expression>> expression)::
+void SetExpression(int _index_, <<reference/expression.html,Expression>> _expression_)::
 
-bool IsNameAvailable(string name)::
+bool IsNameAvailable(string _name_)::
 
 ### Protected Methods
 

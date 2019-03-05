@@ -14,7 +14,7 @@ SerializedVariable()::
 
 string _Name_::
 
-<<manual/variable-type,Variable Type>> _Type_::
+<<reference/variable-type.html,VariableType>> _Type_::
 
 string _Data_::
 
@@ -22,10 +22,10 @@ https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_::
 
 ### Public Methods
 
-void SetVariable(<<manual/variable,Variable>> variable)::
+void SetVariable(<<reference/variable.html,Variable>> _variable_)::
 
-void SetValue(<<manual/variable-value,Variable Value>> value)::
+void SetValue(<<reference/variable-value.html,VariableValue>> _value_)::
 
-<<manual/variable,Variable>> GetVariable()::
+<<reference/variable.html,Variable>> GetVariable()::
 
-<<manual/variable-value,Variable Value>> GetValue()::
+<<reference/variable-value.html,VariableValue>> GetValue()::

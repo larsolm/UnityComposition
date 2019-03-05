@@ -8,9 +8,9 @@ PiRhoSoft.CompositionEngine.ExpressionParseException : Exception
 
 ### Constructors
 
-ExpressionParseException(int location, string error)::
+ExpressionParseException(int _location_, string _error_)::
 
-ExpressionParseException(int location, string errorFormat, Object[] arguments)::
+ExpressionParseException(int _location_, string _errorFormat_, Object[] _arguments_)::
 
 ### Public Fields
 

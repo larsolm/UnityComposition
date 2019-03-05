@@ -2,13 +2,9 @@
 
 ## CompositionManager
 
-PiRhoSoft.CompositionEngine.CompositionManager : SingletonBehaviour<<<manual/composition-manager,Composition Manager>>>
+PiRhoSoft.CompositionEngine.CompositionManager : link:/projects/unity-utilities/documentation/#/v10/reference/singleton-behaviour-1[SingletonBehaviour^]<<<reference/composition-manager.html,CompositionManager>>>
 
 ### Description
-
-### Static Fields
-
-string __processFailedError_::
 
 ### Constructors
 
@@ -16,14 +12,10 @@ CompositionManager()::
 
 ### Public Fields
 
-<<manual/command-set,Command Set>> _Commands_::
+<<reference/command-set.html,CommandSet>> _Commands_::
 
 ### Public Methods
 
-bool IsImmediate(<<manual/instruction,Instruction>> instruction)::
+void RunInstruction(<<reference/instruction.html,Instruction>> _instruction_, <<reference/instruction-context.html,InstructionContext>> _context_, Object _thisObject_)::
 
-bool IsImmediate(<<manual/instruction-caller,Instruction Caller>> caller)::
-
-void RunInstruction(<<manual/instruction,Instruction>> instruction, <<manual/instruction-context,Instruction Context>> context, Object thisObject)::
-
-void RunInstruction(<<manual/instruction-caller,Instruction Caller>> caller, <<manual/instruction-context,Instruction Context>> context, Object thisObject)::
+void RunInstruction(<<reference/instruction-caller.html,InstructionCaller>> _caller_, <<reference/instruction-context.html,InstructionContext>> _context_, Object _thisObject_)::

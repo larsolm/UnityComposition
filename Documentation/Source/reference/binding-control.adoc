@@ -2,7 +2,7 @@
 
 ## BindingControl
 
-PiRhoSoft.CompositionEngine.BindingControl : <<manual/interface-control,Interface Control>>
+PiRhoSoft.CompositionEngine.BindingControl : <<reference/interface-control.html,InterfaceControl>>
 
 ### Description
 
@@ -12,8 +12,8 @@ BindingControl()::
 
 ### Public Fields
 
-<<manual/variable-reference,Variable Reference>> _Binding_::
+<<reference/variable-reference.html,VariableReference>> _Binding_::
 
 ### Public Methods
 
-void UpdateBindings(<<manual/i-variable-store,I Variable Store>> variables, string group) _(virtual)_::
+void UpdateBindings(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

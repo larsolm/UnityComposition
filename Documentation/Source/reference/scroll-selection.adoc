@@ -2,7 +2,7 @@
 
 ## ScrollSelection
 
-PiRhoSoft.CompositionEngine.ScrollSelection : <<manual/selection-control,Selection Control>>
+PiRhoSoft.CompositionEngine.ScrollSelection : <<reference/selection-control.html,SelectionControl>>
 
 ### Description
 

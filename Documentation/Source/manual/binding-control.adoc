@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/variable-reference,Variable Reference>> _Binding_::
+<<manual/variable-reference.html,Variable Reference>> _Binding_::
 
 ifdef::backend-multipage_html5[]
 link:reference/binding-control.html[Reference]

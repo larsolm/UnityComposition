@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/instruction-graph-node-list,Instruction Graph Node List>> __nodes_::
+<<manual/instruction-graph-node-list.html,Instruction Graph Node List>> __nodes_::
 
 https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Start Position_::
 

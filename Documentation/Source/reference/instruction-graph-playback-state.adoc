@@ -8,10 +8,10 @@ PiRhoSoft.CompositionEngine.PlaybackState
 
 ### Values
 
-<<manual/instruction-graph-playback-state,Playback State>> _Running_::
+<<reference/instruction-graph-playback-state.html,PlaybackState>> _Running_::
 
-<<manual/instruction-graph-playback-state,Playback State>> _Paused_::
+<<reference/instruction-graph-playback-state.html,PlaybackState>> _Paused_::
 
-<<manual/instruction-graph-playback-state,Playback State>> _Step_::
+<<reference/instruction-graph-playback-state.html,PlaybackState>> _Step_::
 
-<<manual/instruction-graph-playback-state,Playback State>> _Stopped_::
+<<reference/instruction-graph-playback-state.html,PlaybackState>> _Stopped_::

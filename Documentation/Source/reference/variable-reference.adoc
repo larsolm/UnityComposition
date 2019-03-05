@@ -10,7 +10,7 @@ PiRhoSoft.CompositionEngine.VariableReference
 
 VariableReference()::
 
-VariableReference(string variable)::
+VariableReference(string _variable_)::
 
 ### Public Properties
 
@@ -22,10 +22,10 @@ string _RootName_ _(read only)_::
 
 ### Public Methods
 
-void Update(string variable)::
+void Update(string _variable_)::
 
-<<manual/variable-value,Variable Value>> GetValue(<<manual/i-variable-store,I Variable Store>> variables)::
+<<reference/variable-value.html,VariableValue>> GetValue(<<reference/i-variable-store.html,IVariableStore>> _variables_)::
 
-<<manual/set-variable-result,Set Variable Result>> SetValue(<<manual/i-variable-store,I Variable Store>> variables, <<manual/variable-value,Variable Value>> value)::
+<<reference/set-variable-result.html,SetVariableResult>> SetValue(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-value.html,VariableValue>> _value_)::
 
 string ToString() _(virtual)_::

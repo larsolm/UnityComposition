@@ -18,15 +18,15 @@ float _FooterHeight_::
 
 ### Constructors
 
-NodeData(<<manual/instruction-graph-node,Instruction Graph Node>> node)::
+NodeData(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_)::
 
 ### Public Fields
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/instruction-graph-node-connection-data,Connection Data>>> _Connections_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/instruction-graph-node-connection-data.html,ConnectionData>>> _Connections_::
 
 ### Public Properties
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Node_ _(read only)_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Node_ _(read only)_::
 
 https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _Bounds_ _(read only)_::
 
@@ -38,10 +38,10 @@ float _InnerHeight_::
 
 void ClearConnections()::
 
-void AddConnections(Object obj)::
+void AddConnections(Object _obj_)::
 
-void AddConnection(string name, <<manual/instruction-graph-node,Instruction Graph Node>> to)::
+void AddConnection(string _name_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_)::
 
-void AddConnection(string name, string key, <<manual/instruction-graph-node,Instruction Graph Node>> to)::
+void AddConnection(string _name_, string _key_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_)::
 
-void AddConnection(string name, int index, <<manual/instruction-graph-node,Instruction Graph Node>> to)::
+void AddConnection(string _name_, int _index_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_)::

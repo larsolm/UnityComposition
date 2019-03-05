@@ -2,7 +2,7 @@
 
 ## Fade
 
-PiRhoSoft.CompositionEngine.Fade : <<manual/cutoff,Cutoff>>
+PiRhoSoft.CompositionEngine.Fade : <<reference/cutoff.html,Cutoff>>
 
 ### Description
 

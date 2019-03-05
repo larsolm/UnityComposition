@@ -2,13 +2,13 @@
 
 ## ModuloOperator
 
-PiRhoSoft.CompositionEngine.ModuloOperator : <<manual/infix-operation,Infix Operation>>
+PiRhoSoft.CompositionEngine.ModuloOperator : <<reference/infix-operation.html,InfixOperation>>
 
 ### Description
 
 ### Static Methods
 
-<<manual/variable-value,Variable Value>> Modulo(<<manual/variable-value&,Variable Value>> left _(ref)_, <<manual/variable-value&,Variable Value>> right _(ref)_)::
+<<reference/variable-value.html,VariableValue>> Modulo(<<reference/variable-value&.html,VariableValue>> _left_ _(ref)_, <<reference/variable-value&.html,VariableValue>> _right_ _(ref)_)::
 
 ### Constructors
 
@@ -16,4 +16,4 @@ ModuloOperator()::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

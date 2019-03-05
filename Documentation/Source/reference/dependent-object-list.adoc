@@ -2,7 +2,7 @@
 
 ## DependentObjectList
 
-PiRhoSoft.CompositionEngine.DependentObjectList : SerializedList<https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]>
+PiRhoSoft.CompositionEngine.DependentObjectList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]>
 
 ### Description
 

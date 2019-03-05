@@ -2,16 +2,16 @@
 
 ## LiteralOperation
 
-PiRhoSoft.CompositionEngine.LiteralOperation : <<manual/operation,Operation>>
+PiRhoSoft.CompositionEngine.LiteralOperation : <<reference/operation.html,Operation>>
 
 ### Description
 
 ### Constructors
 
-LiteralOperation(<<manual/variable-value,Variable Value>> value)::
+LiteralOperation(<<reference/variable-value.html,VariableValue>> _value_)::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::
 
-void ToString(StringBuilder builder) _(virtual)_::
+void ToString(StringBuilder _builder_) _(virtual)_::

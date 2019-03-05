@@ -2,7 +2,7 @@
 
 ## VisibleBinding
 
-PiRhoSoft.CompositionEngine.VisibleBinding : <<manual/interface-binding,Interface Binding>>
+PiRhoSoft.CompositionEngine.VisibleBinding : <<reference/interface-binding.html,InterfaceBinding>>
 
 ### Description
 
@@ -12,8 +12,8 @@ VisibleBinding()::
 
 ### Public Fields
 
-<<manual/expression,Expression>> _Condition_::
+<<reference/expression.html,Expression>> _Condition_::
 
 ### Public Methods
 
-void UpdateBinding(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

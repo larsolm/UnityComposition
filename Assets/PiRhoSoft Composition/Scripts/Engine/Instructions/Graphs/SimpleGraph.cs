@@ -4,6 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateAssetMenu(fileName = nameof(SimpleGraph), menuName = "Composition/Instruction Graph - Simple", order = 125)]
+	[HelpURL(Composition.DocumentationUrl + "simple-graph")]
 	public class SimpleGraph : InstructionGraph
 	{
 		public InstructionGraphNode Process = null;

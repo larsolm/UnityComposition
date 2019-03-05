@@ -8,6 +8,6 @@ PiRhoSoft.CompositionEngine.ExpressionEvaluationException : Exception
 
 ### Constructors
 
-ExpressionEvaluationException(string error)::
+ExpressionEvaluationException(string _error_)::
 
-ExpressionEvaluationException(string errorFormat, Object[] arguments)::
+ExpressionEvaluationException(string _errorFormat_, Object[] _arguments_)::

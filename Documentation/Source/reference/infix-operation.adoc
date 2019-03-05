@@ -2,23 +2,23 @@
 
 ## InfixOperation
 
-PiRhoSoft.CompositionEngine.InfixOperation : <<manual/operation,Operation>>
+PiRhoSoft.CompositionEngine.InfixOperation : <<reference/operation.html,Operation>>
 
 ### Description
 
 ### Public Fields
 
-<<manual/operation,Operation>> _Left_::
+<<reference/operation.html,Operation>> _Left_::
 
 string _Symbol_::
 
-<<manual/operation,Operation>> _Right_::
+<<reference/operation.html,Operation>> _Right_::
 
 ### Public Methods
 
-void ToString(StringBuilder builder) _(virtual)_::
+void ToString(StringBuilder _builder_) _(virtual)_::
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs, string source) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
 
 ### Protected Constructors
 

@@ -2,7 +2,7 @@
 
 ## BarBinding
 
-PiRhoSoft.CompositionEngine.BarBinding : <<manual/interface-binding,Interface Binding>>
+PiRhoSoft.CompositionEngine.BarBinding : <<reference/interface-binding.html,InterfaceBinding>>
 
 ### Description
 
@@ -12,12 +12,22 @@ BarBinding()::
 
 ### Public Fields
 
-<<manual/variable-reference,Variable Reference>> _AmountVariable_::
+float _Speed_::
 
-<<manual/variable-reference,Variable Reference>> _TotalVariable_::
+<<reference/variable-reference.html,VariableReference>> _AmountVariable_::
+
+<<reference/variable-reference.html,VariableReference>> _TotalVariable_::
 
 https://docs.unity3d.com/ScriptReference/Gradient.html[Gradient^] _FillColors_::
 
 ### Public Methods
 
-void UpdateBinding(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::
+
+### Protected Fields
+
+https://docs.unity3d.com/ScriptReference/Image.html[Image^] __image_::
+
+### Protected Methods
+
+float GetFill(<<reference/i-variable-store.html,IVariableStore>> _variables_)::

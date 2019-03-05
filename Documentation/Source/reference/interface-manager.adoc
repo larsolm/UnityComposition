@@ -2,7 +2,7 @@
 
 ## InterfaceManager
 
-PiRhoSoft.CompositionEngine.InterfaceManager : SingletonBehaviour<<<manual/interface-manager,Interface Manager>>>
+PiRhoSoft.CompositionEngine.InterfaceManager : link:/projects/unity-utilities/documentation/#/v10/reference/singleton-behaviour-1[SingletonBehaviour^]<<<reference/interface-manager.html,InterfaceManager>>>
 
 ### Description
 
@@ -30,25 +30,25 @@ https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _StartKey_::
 
 ### Public Properties
 
-<<manual/interface,Interface>> _FocusedInterface_ _(read only)_::
+<<reference/interface.html,Interface>> _FocusedInterface_ _(read only)_::
 
-ButtonState _Left_ _(read only)_::
+link:/projects/unity-utilities/documentation/#/v10/reference/button-state[ButtonState^] _Left_ _(read only)_::
 
-ButtonState _Right_ _(read only)_::
+link:/projects/unity-utilities/documentation/#/v10/reference/button-state[ButtonState^] _Right_ _(read only)_::
 
-ButtonState _Up_ _(read only)_::
+link:/projects/unity-utilities/documentation/#/v10/reference/button-state[ButtonState^] _Up_ _(read only)_::
 
-ButtonState _Down_ _(read only)_::
+link:/projects/unity-utilities/documentation/#/v10/reference/button-state[ButtonState^] _Down_ _(read only)_::
 
-ButtonState _Accept_ _(read only)_::
+link:/projects/unity-utilities/documentation/#/v10/reference/button-state[ButtonState^] _Accept_ _(read only)_::
 
-ButtonState _Cancel_ _(read only)_::
+link:/projects/unity-utilities/documentation/#/v10/reference/button-state[ButtonState^] _Cancel_ _(read only)_::
 
-ButtonState _Start_ _(read only)_::
+link:/projects/unity-utilities/documentation/#/v10/reference/button-state[ButtonState^] _Start_ _(read only)_::
 
 ### Public Methods
 
-InterfaceType GetInterface<InterfaceType>(string name)::
+InterfaceType GetInterface<InterfaceType>(string _name_)::
 
 ### Protected Methods
 

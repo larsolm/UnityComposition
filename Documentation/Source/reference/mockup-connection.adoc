@@ -14,4 +14,4 @@ MockupConnection()::
 
 string _Name_::
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Node_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Node_::

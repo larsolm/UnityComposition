@@ -2,7 +2,7 @@
 
 ## Property
 
-PiRhoSoft.CompositionEngine.Property<_OwnerType_>
+PiRhoSoft.CompositionEngine.Property<__OwnerType__>
 
 ### Description
 

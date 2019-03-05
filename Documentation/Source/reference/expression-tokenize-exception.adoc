@@ -8,9 +8,9 @@ PiRhoSoft.CompositionEngine.ExpressionTokenizeException : Exception
 
 ### Constructors
 
-ExpressionTokenizeException(int location, string error)::
+ExpressionTokenizeException(int _location_, string _error_)::
 
-ExpressionTokenizeException(int location, string errorFormat, Object[] arguments)::
+ExpressionTokenizeException(int _location_, string _errorFormat_, Object[] _arguments_)::
 
 ### Public Fields
 

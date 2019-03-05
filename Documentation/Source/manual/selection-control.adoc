@@ -8,7 +8,7 @@ bool _Vertical Wrapping_::
 
 bool _Horizontal Wrapping_::
 
-<<manual/primary-axis,Primary Axis>> _Primary Axis_::
+<<manual/primary-axis.html,Primary Axis>> _Primary Axis_::
 
 int _Column Count_::
 

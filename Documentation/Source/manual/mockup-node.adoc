@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/mockup-connection-list,Mockup Connection List>> _Connections_::
+<<manual/mockup-connection-list.html,Mockup Connection List>> _Connections_::
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Display Color_::
 

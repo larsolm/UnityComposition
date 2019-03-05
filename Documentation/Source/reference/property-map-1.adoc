@@ -2,7 +2,7 @@
 
 ## PropertyMap
 
-PiRhoSoft.CompositionEngine.PropertyMap<_OwnerType_> : <<manual/property-map,Property Map>>
+PiRhoSoft.CompositionEngine.PropertyMap<__OwnerType__> : <<reference/property-map.html,PropertyMap>>
 
 ### Description
 
@@ -12,7 +12,7 @@ PropertyMap()::
 
 ### Public Fields
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/property-1,Property>><OwnerType>> _Properties_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/property-1.html,Property>><OwnerType>> _Properties_::
 
 ### Public Properties
 
@@ -20,8 +20,8 @@ int _PropertyCount_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 
-string GetPropertyName(int index) _(virtual)_::
+string GetPropertyName(int _index_) _(virtual)_::
 
-<<manual/i-variable-list,I Variable List>> CreateList(Object owner) _(virtual)_::
+<<reference/i-variable-list.html,IVariableList>> CreateList(Object _owner_) _(virtual)_::
 
-<<manual/property-map-1,Property Map>><_OwnerType_> Add(string name, Func<OwnerType, OwnerType> getter, Func<OwnerType, OwnerType, OwnerType> setter)::
+<<reference/property-map-1.html,PropertyMap>><__OwnerType__> Add(string _name_, Func<OwnerType, OwnerType> _getter_, Func<OwnerType, OwnerType, OwnerType> _setter_)::

@@ -23,8 +23,8 @@
                         "LinkTemplate": "https://docs.unity3d.com/ScriptReference/{TypeName}.html[{TypeName}^]"
                     },
                     {
-                        "Namespace": "PiRhosoft.UnityUtilities",
-                        "LinkTemplate": "link:/projects/unity-utilities/documentation/#/reference/{CategoryId}/{TypeId}.html[{TypeName}^]"
+                        "Namespace": "PiRhoSoft.UtilityEngine",
+                        "LinkTemplate": "link:/projects/unity-utilities/documentation/#/v10/reference/{TypeId}[{TypeName}^]"
                     }
                 ]
             },
@@ -43,7 +43,7 @@
                 "Type": "include::{TypeFilename}[]",
                 "TypeSeparator": "\n\n<<<\n\n",
                 "TypeFile": "[#{CategoryId}/{TypeId}]\n\n## {TypeNiceName}\n\n{Sections}\n\nifdef::backend-multipage_html5[]\nlink:reference/{TypeId}.html[Reference]\nendif::[]",
-                "Generic": "_{Name}_",
+                "Generic": "__{Name}__",
                 "GenericOpener": "",
                 "GenericCloser": "",
                 "GenericSeparator": "",
@@ -60,7 +60,7 @@
                 "ParameterSeparator": "",
                 "Decorator": "",
                 "DecoratorSeparator": "",
-                "InternalLink": "<<{CategoryId}/{TypeId},{TypeNiceName}>>",
+                "InternalLink": "<<{CategoryId}/{TypeId}.html,{TypeNiceName}>>",
                 "UnknownLink": "{TypeName}"
             }
         },
@@ -86,8 +86,8 @@
                         "LinkTemplate": "https://docs.unity3d.com/ScriptReference/{TypeName}.html[{TypeName}^]"
                     },
                     {
-                        "Namespace": "PiRhoSoft.UnityUtilities",
-                        "LinkTemplate": "link:/projects/unity-utilities/documentation/#/reference/{CategoryId}/{TypeId}.html[{TypeName}^]"
+                        "Namespace": "PiRhoSoft.UtilityEngine",
+                        "LinkTemplate": "link:/projects/unity-utilities/documentation/#/v10/reference/{TypeId}[{TypeName}^]"
                     }
                 ]
             },
@@ -172,7 +172,7 @@
                 "Type": "include::{TypeFilename}[]",
                 "TypeSeparator": "\n\n<<<\n\n",
                 "TypeFile": "[#{CategoryId}/{TypeId}]\n\n## {TypeName}\n\n{TypeNamespace}.{TypeName}{Generics}{Bases}\n\n### Description\n\n{Sections}",
-                "Generic": "_{Name}_",
+                "Generic": "__{Name}__",
                 "GenericOpener": "<",
                 "GenericCloser": ">",
                 "GenericSeparator": ", ",
@@ -185,11 +185,11 @@
                 "Property": "{Type} _{Name}_{Decorators}::",
                 "Method": "{Type} {Name}({Parameters}){Decorators}::",
                 "MemberSeparator": "\n\n",
-                "Parameter": "{Type} {Name}{Decorators}",
+                "Parameter": "{Type} _{Name}_{Decorators}",
                 "ParameterSeparator": ", ",
                 "Decorator": " _({Name})_",
                 "DecoratorSeparator": "",
-                "InternalLink": "<<{CategoryId}/{TypeId},{TypeNiceName}>>",
+                "InternalLink": "<<{CategoryId}/{TypeId}.html,{TypeName}>>",
                 "UnknownLink": "{TypeName}"
             }
         }

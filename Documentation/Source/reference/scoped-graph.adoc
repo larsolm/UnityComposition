@@ -2,7 +2,7 @@
 
 ## ScopedGraph
 
-PiRhoSoft.CompositionEngine.ScopedGraph : <<manual/instruction-graph,Instruction Graph>>
+PiRhoSoft.CompositionEngine.ScopedGraph : <<reference/instruction-graph.html,InstructionGraph>>
 
 ### Description
 
@@ -12,12 +12,12 @@ ScopedGraph()::
 
 ### Public Fields
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Enter_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Enter_::
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Process_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Process_::
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Exit_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Exit_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(virtual)_::

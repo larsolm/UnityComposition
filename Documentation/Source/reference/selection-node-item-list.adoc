@@ -2,7 +2,7 @@
 
 ## SelectionNodeItemList
 
-PiRhoSoft.CompositionEngine.SelectionNodeItemList : SerializedList<<<manual/selection-node-item,Selection Node Item>>>
+PiRhoSoft.CompositionEngine.SelectionNodeItemList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/selection-node-item.html,SelectionNodeItem>>>
 
 ### Description
 

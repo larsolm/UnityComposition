@@ -4,6 +4,10 @@ include::manual/activate-interface-node.adoc[]
 
 <<<
 
+include::manual/auto-size-text.adoc[]
+
+<<<
+
 include::manual/axis-input.adoc[]
 
 <<<
@@ -61,14 +65,6 @@ include::manual/cutoff.adoc[]
 <<<
 
 include::manual/deactivate-interface-node.adoc[]
-
-<<<
-
-include::manual/demo-behaviour.adoc[]
-
-<<<
-
-include::manual/demo-interaction.adoc[]
 
 <<<
 

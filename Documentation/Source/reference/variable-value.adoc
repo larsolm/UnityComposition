@@ -2,25 +2,25 @@
 
 ## VariableValue
 
-PiRhoSoft.CompositionEngine.VariableValue : ValueType, IComparable<string>, IComparable<float>, IComparable<int>, IComparable<bool>, IComparable<<<manual/variable-value,Variable Value>>>, IEquatable<string>, IEquatable<float>, IEquatable<int>, IEquatable<bool>, IEquatable<<<manual/variable-value,Variable Value>>>
+PiRhoSoft.CompositionEngine.VariableValue : ValueType, IComparable<string>, IComparable<float>, IComparable<int>, IComparable<bool>, IComparable<<<reference/variable-value.html,VariableValue>>>, IEquatable<string>, IEquatable<float>, IEquatable<int>, IEquatable<bool>, IEquatable<<<reference/variable-value.html,VariableValue>>>
 
 ### Description
 
 ### Static Fields
 
-<<manual/variable-value,Variable Value>> _Empty_::
+<<reference/variable-value.html,VariableValue>> _Empty_::
 
 ### Static Methods
 
-<<manual/variable-type,Variable Type>> GetType(Type type)::
+<<reference/variable-type.html,VariableType>> GetType(Type _type_)::
 
-<<manual/variable-value,Variable Value>> Create(<<manual/variable-type,Variable Type>> type)::
+<<reference/variable-value.html,VariableValue>> Create(<<reference/variable-type.html,VariableType>> _type_)::
 
-<<manual/variable-value,Variable Value>> Create<T>(T value)::
+<<reference/variable-value.html,VariableValue>> Create<T>(T _value_)::
 
 ### Public Properties
 
-<<manual/variable-type,Variable Type>> _Type_ _(read only)_::
+<<reference/variable-type.html,VariableType>> _Type_ _(read only)_::
 
 bool _Boolean_ _(read only)_::
 
@@ -34,58 +34,58 @@ Object _RawObject_ _(read only)_::
 
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_ _(read only)_::
 
-<<manual/i-variable-store,I Variable Store>> _Store_ _(read only)_::
+<<reference/i-variable-store.html,IVariableStore>> _Store_ _(read only)_::
 
 ### Public Methods
 
 string ToString() _(virtual)_::
 
-bool TryGetBoolean(bool value _(out)_)::
+bool TryGetBoolean(bool _value_ _(out)_)::
 
-bool TryGetInteger(int value _(out)_)::
+bool TryGetInteger(int _value_ _(out)_)::
 
-bool TryGetNumber(float value _(out)_)::
+bool TryGetNumber(float _value_ _(out)_)::
 
-bool TryGetString(string value _(out)_)::
+bool TryGetString(string _value_ _(out)_)::
 
-bool TryGetObject(https://docs.unity3d.com/ScriptReference/Object.html[Object^] value _(out)_)::
+bool TryGetObject(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _value_ _(out)_)::
 
-bool TryGetObject<T>(<<manual/t&,T>> obj _(out)_)::
+bool TryGetObject<T>(<<reference/t&.html,T>> _obj_ _(out)_)::
 
-bool TryGetStore(<<manual/i-variable-store&,I Variable Store>> variables _(out)_)::
+bool TryGetStore(<<reference/i-variable-store&.html,IVariableStore>> _variables_ _(out)_)::
 
-bool Equals(<<manual/variable-value,Variable Value>> other) _(virtual)_::
+bool Equals(<<reference/variable-value.html,VariableValue>> _other_) _(virtual)_::
 
-bool Equals(bool value) _(virtual)_::
+bool Equals(bool _value_) _(virtual)_::
 
-bool Equals(int value) _(virtual)_::
+bool Equals(int _value_) _(virtual)_::
 
-bool Equals(float value) _(virtual)_::
+bool Equals(float _value_) _(virtual)_::
 
-bool Equals(string value) _(virtual)_::
+bool Equals(string _value_) _(virtual)_::
 
-bool Equals(https://docs.unity3d.com/ScriptReference/Object.html[Object^] value)::
+bool Equals(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _value_)::
 
-bool Equals(<<manual/i-variable-store,I Variable Store>> value)::
+bool Equals(<<reference/i-variable-store.html,IVariableStore>> _value_)::
 
-bool Equals(Object other) _(virtual)_::
+bool Equals(Object _other_) _(virtual)_::
 
-int CompareTo(<<manual/variable-value,Variable Value>> other) _(virtual)_::
+int CompareTo(<<reference/variable-value.html,VariableValue>> _other_) _(virtual)_::
 
-int CompareTo(bool value) _(virtual)_::
+int CompareTo(bool _value_) _(virtual)_::
 
-int CompareTo(int value) _(virtual)_::
+int CompareTo(int _value_) _(virtual)_::
 
-int CompareTo(float value) _(virtual)_::
+int CompareTo(float _value_) _(virtual)_::
 
-int CompareTo(string value) _(virtual)_::
+int CompareTo(string _value_) _(virtual)_::
 
-int CompareTo(https://docs.unity3d.com/ScriptReference/Object.html[Object^] unityObject)::
+int CompareTo(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _unityObject_)::
 
-int CompareTo(<<manual/i-variable-store,I Variable Store>> store)::
+int CompareTo(<<reference/i-variable-store.html,IVariableStore>> _store_)::
 
 int GetHashCode() _(virtual)_::
 
 string Write()::
 
-void Read(string value)::
+void Read(string _value_)::

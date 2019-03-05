@@ -8,8 +8,8 @@ PiRhoSoft.CompositionEngine.VariableInitializerType
 
 ### Values
 
-<<manual/variable-initializer-type,Variable Initializer Type>> _Expression_::
+<<reference/variable-initializer-type.html,VariableInitializerType>> _Expression_::
 
-<<manual/variable-initializer-type,Variable Initializer Type>> _DefaultValue_::
+<<reference/variable-initializer-type.html,VariableInitializerType>> _DefaultValue_::
 
-<<manual/variable-initializer-type,Variable Initializer Type>> _None_::
+<<reference/variable-initializer-type.html,VariableInitializerType>> _None_::

@@ -1,0 +1,9 @@
+[#manual/auto-size-text]
+
+## Auto Size Text
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/auto-size-text.html[Reference]
+endif::[]

@@ -2,7 +2,7 @@
 
 ## TransitionManager
 
-PiRhoSoft.CompositionEngine.TransitionManager : GlobalBehaviour<<<manual/transition-manager,Transition Manager>>>
+PiRhoSoft.CompositionEngine.TransitionManager : link:/projects/unity-utilities/documentation/#/v10/reference/global-behaviour-1[GlobalBehaviour^]<<<reference/transition-manager.html,TransitionManager>>>
 
 ### Description
 
@@ -12,18 +12,18 @@ TransitionManager()::
 
 ### Public Properties
 
-<<manual/transition,Transition>> _CurrentTransition_ _(read only)_::
+<<reference/transition.html,Transition>> _CurrentTransition_ _(read only)_::
 
-<<manual/transition-renderer,Transition Renderer>> _CurrentRenderer_ _(read only)_::
+<<reference/transition-renderer.html,TransitionRenderer>> _CurrentRenderer_ _(read only)_::
 
 ### Public Methods
 
-void AddRenderer(<<manual/transition-renderer,Transition Renderer>> renderer)::
+void AddRenderer(<<reference/transition-renderer.html,TransitionRenderer>> _renderer_)::
 
-void RemoveRenderer(<<manual/transition-renderer,Transition Renderer>> renderer)::
+void RemoveRenderer(<<reference/transition-renderer.html,TransitionRenderer>> _renderer_)::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] RunTransition(<<manual/transition,Transition>> transition, <<manual/transition-phase,Transition Phase>> phase)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] RunTransition(<<reference/transition.html,Transition>> _transition_, <<reference/transition-phase.html,TransitionPhase>> _phase_)::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] StartTransition(<<manual/transition,Transition>> transition, <<manual/transition-phase,Transition Phase>> phase)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] StartTransition(<<reference/transition.html,Transition>> _transition_, <<reference/transition-phase.html,TransitionPhase>> _phase_)::
 
 void EndTransition()::

@@ -2,7 +2,7 @@
 
 ## CommentNode
 
-PiRhoSoft.CompositionEngine.CommentNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+PiRhoSoft.CompositionEngine.CommentNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
@@ -16,4 +16,4 @@ string _Comment_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

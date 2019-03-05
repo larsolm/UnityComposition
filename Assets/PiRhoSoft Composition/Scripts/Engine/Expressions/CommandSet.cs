@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class CustomCommandList : SerializedList<CustomCommand> { }
 
 	[CreateAssetMenu(fileName = nameof(CommandSet), menuName = "Composition/Command Set", order = 100)]
-	[HelpURL(Composition.DocumentationUrl + "composition")]
+	[HelpURL(Composition.DocumentationUrl + "command-set")]
 	public class CommandSet : ScriptableObject
 	{
 		private const string _missingExpressionWarning = "(CCME) The Command '{0}' could not be registered because the Expression has not been set";

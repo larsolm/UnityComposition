@@ -2,7 +2,7 @@
 
 ## MessageNode
 
-PiRhoSoft.CompositionEngine.MessageNode : <<manual/instruction-graph-node,Instruction Graph Node>>
+PiRhoSoft.CompositionEngine.MessageNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
@@ -12,15 +12,15 @@ MessageNode()::
 
 ### Public Fields
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Next_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-<<manual/interface-reference,Interface Reference>> _Control_::
+<<reference/interface-reference.html,InterfaceReference>> _Control_::
 
-<<manual/message-interaction-type,Message Interaction Type>> _Interaction_::
+<<reference/message-interaction-type.html,MessageInteractionType>> _Interaction_::
 
 bool _IsLast_::
 
-<<manual/message,Message>> _Message_::
+<<reference/message.html,Message>> _Message_::
 
 ### Public Properties
 
@@ -28,8 +28,8 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

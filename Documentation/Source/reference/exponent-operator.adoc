@@ -2,13 +2,13 @@
 
 ## ExponentOperator
 
-PiRhoSoft.CompositionEngine.ExponentOperator : <<manual/infix-operation,Infix Operation>>
+PiRhoSoft.CompositionEngine.ExponentOperator : <<reference/infix-operation.html,InfixOperation>>
 
 ### Description
 
 ### Static Methods
 
-<<manual/variable-value,Variable Value>> Raise(<<manual/variable-value&,Variable Value>> left _(ref)_, <<manual/variable-value&,Variable Value>> right _(ref)_)::
+<<reference/variable-value.html,VariableValue>> Raise(<<reference/variable-value&.html,VariableValue>> _left_ _(ref)_, <<reference/variable-value&.html,VariableValue>> _right_ _(ref)_)::
 
 ### Constructors
 
@@ -16,4 +16,4 @@ ExponentOperator()::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

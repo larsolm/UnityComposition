@@ -8,29 +8,29 @@ PiRhoSoft.CompositionEngine.OperatorPrecedence : ValueType
 
 ### Static Fields
 
-<<manual/operator-precedence,Operator Precedence>> _Assignment_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Assignment_::
 
-<<manual/operator-precedence,Operator Precedence>> _Or_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Or_::
 
-<<manual/operator-precedence,Operator Precedence>> _And_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _And_::
 
-<<manual/operator-precedence,Operator Precedence>> _Ternary_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Ternary_::
 
-<<manual/operator-precedence,Operator Precedence>> _Equality_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Equality_::
 
-<<manual/operator-precedence,Operator Precedence>> _Comparison_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Comparison_::
 
-<<manual/operator-precedence,Operator Precedence>> _Addition_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Addition_::
 
-<<manual/operator-precedence,Operator Precedence>> _Multiplication_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Multiplication_::
 
-<<manual/operator-precedence,Operator Precedence>> _Exponentiation_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Exponentiation_::
 
 ### Static Methods
 
-<<manual/operator-precedence,Operator Precedence>> LeftAssociative(int value)::
+<<reference/operator-precedence.html,OperatorPrecedence>> LeftAssociative(int _value_)::
 
-<<manual/operator-precedence,Operator Precedence>> RightAssociative(int value)::
+<<reference/operator-precedence.html,OperatorPrecedence>> RightAssociative(int _value_)::
 
 ### Public Properties
 

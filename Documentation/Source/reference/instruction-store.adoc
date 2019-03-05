@@ -2,7 +2,7 @@
 
 ## InstructionStore
 
-PiRhoSoft.CompositionEngine.InstructionStore : <<manual/i-variable-store,I Variable Store>>
+PiRhoSoft.CompositionEngine.InstructionStore : <<reference/i-variable-store.html,IVariableStore>>
 
 ### Description
 
@@ -16,36 +16,44 @@ string _InputStoreName_::
 
 string _OutputStoreName_::
 
+string _LocalStoreName_::
+
 ### Static Methods
 
-bool IsInput(<<manual/variable-reference,Variable Reference>> variable)::
+bool IsInput(<<reference/variable-reference.html,VariableReference>> _variable_)::
 
-bool IsOutput(<<manual/variable-reference,Variable Reference>> variable)::
+bool IsOutput(<<reference/variable-reference.html,VariableReference>> _variable_)::
 
 ### Constructors
 
-InstructionStore(<<manual/instruction-context,Instruction Context>> context, Object thisObject)::
+InstructionStore(<<reference/instruction-context.html,InstructionContext>> _context_, Object _thisObject_)::
 
 ### Public Properties
 
-<<manual/instruction-context,Instruction Context>> _Context_ _(read only)_::
-
 Object _This_ _(read only)_::
 
-<<manual/i-variable-store,I Variable Store>> _Locals_ _(read only)_::
+<<reference/instruction-context.html,InstructionContext>> _Context_ _(read only)_::
+
+<<reference/variable-store.html,VariableStore>> _Inputs_ _(read only)_::
+
+<<reference/variable-store.html,VariableStore>> _Outputs_ _(read only)_::
+
+<<reference/variable-store.html,VariableStore>> _Locals_ _(read only)_::
 
 ### Public Methods
 
-void SetContext(<<manual/instruction-context,Instruction Context>> context)::
+void SetContext(<<reference/instruction-context.html,InstructionContext>> _context_)::
 
-void ChangeThis(Object thisObject)::
+void ChangeThis(Object _thisObject_)::
 
-void WriteInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/instruction-input,Instruction Input>>> inputs)::
+void WriteInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-input.html,InstructionInput>>> _inputs_)::
 
-void ReadOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/instruction-output,Instruction Output>>> outputs)::
+void WriteOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _outputs_)::
 
-<<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
+void ReadOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _outputs_)::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::

@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/expression,Expression>> _Expression_::
+<<manual/expression.html,Expression>> _Expression_::
 
 ifdef::backend-multipage_html5[]
 link:reference/expression-node.html[Reference]

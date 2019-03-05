@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/message,Message>> _Message_::
+<<manual/message.html,Message>> _Message_::
 
 ifdef::backend-multipage_html5[]
 link:reference/message-binding.html[Reference]

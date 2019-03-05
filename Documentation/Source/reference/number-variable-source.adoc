@@ -2,7 +2,7 @@
 
 ## NumberVariableSource
 
-PiRhoSoft.CompositionEngine.NumberVariableSource : <<manual/variable-source-1,Variable Source>><float>
+PiRhoSoft.CompositionEngine.NumberVariableSource : <<reference/variable-source-1.html,VariableSource>><float>
 
 ### Description
 
@@ -10,8 +10,8 @@ PiRhoSoft.CompositionEngine.NumberVariableSource : <<manual/variable-source-1,Va
 
 NumberVariableSource()::
 
-NumberVariableSource(float defaultValue)::
+NumberVariableSource(float _defaultValue_)::
 
 ### Protected Methods
 
-bool TryGetValue(<<manual/variable-value,Variable Value>> variable, float value _(out)_) _(virtual)_::
+bool TryGetValue(<<reference/variable-value.html,VariableValue>> _variable_, float _value_ _(out)_) _(virtual)_::

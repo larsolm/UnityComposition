@@ -12,10 +12,10 @@ InstructionInput()::
 
 ### Public Fields
 
-<<manual/instruction-input-type,Instruction Input Type>> _Type_::
+<<reference/instruction-input-type.html,InstructionInputType>> _Type_::
 
-<<manual/variable-definition,Variable Definition>> _Definition_::
+<<reference/variable-definition.html,VariableDefinition>> _Definition_::
 
-<<manual/variable-reference,Variable Reference>> _Reference_::
+<<reference/variable-reference.html,VariableReference>> _Reference_::
 
-<<manual/variable-value,Variable Value>> _Value_::
+<<reference/variable-value.html,VariableValue>> _Value_::

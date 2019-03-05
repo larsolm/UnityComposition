@@ -8,8 +8,8 @@ PiRhoSoft.CompositionEngine.IVariableStore
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> GetVariable(string name) _(abstract)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(abstract)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(abstract)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(abstract)_::

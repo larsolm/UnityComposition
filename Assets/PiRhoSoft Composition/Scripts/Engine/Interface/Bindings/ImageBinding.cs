@@ -9,8 +9,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("Composition/Interface/Image Binding")]
 	public class ImageBinding : InterfaceBinding
 	{
-		public const string _invalidVariableError = "(IIBIV) Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite";
-		public const string _missingVariableError = "(IIBMV) Failed to update image binding: the variable '{0}' could not be found";
+		public const string _invalidVariableError = "(CIBIV) Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite";
+		public const string _missingVariableError = "(CIBMV) Failed to update image binding: the variable '{0}' could not be found";
 
 		[Tooltip("The variable holding the image to show on this object")]
 		public VariableReference Variable = new VariableReference();

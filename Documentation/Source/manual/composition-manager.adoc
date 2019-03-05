@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/command-set,Command Set>> _Commands_::
+<<manual/command-set.html,Command Set>> _Commands_::
 
 ifdef::backend-multipage_html5[]
 link:reference/composition-manager.html[Reference]

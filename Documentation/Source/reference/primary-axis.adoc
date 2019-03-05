@@ -8,6 +8,6 @@ PiRhoSoft.CompositionEngine.PrimaryAxis
 
 ### Values
 
-<<manual/primary-axis,Primary Axis>> _Column_::
+<<reference/primary-axis.html,PrimaryAxis>> _Column_::
 
-<<manual/primary-axis,Primary Axis>> _Row_::
+<<reference/primary-axis.html,PrimaryAxis>> _Row_::

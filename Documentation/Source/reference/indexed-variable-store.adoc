@@ -12,8 +12,8 @@ string _ItemVariable_::
 
 ### Static Methods
 
-<<manual/variable-value,Variable Value>> GetVariable(<<manual/i-indexed-variable-store,I Indexed Variable Store>> variables, string name)::
+<<reference/variable-value.html,VariableValue>> GetVariable(<<reference/i-indexed-variable-store.html,IIndexedVariableStore>> _variables_, string _name_)::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariable(<<manual/i-indexed-variable-store,I Indexed Variable Store>> variables, string name, <<manual/variable-value,Variable Value>> value)::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(<<reference/i-indexed-variable-store.html,IIndexedVariableStore>> _variables_, string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames(<<manual/i-indexed-variable-store,I Indexed Variable Store>> variables)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames(<<reference/i-indexed-variable-store.html,IIndexedVariableStore>> _variables_)::

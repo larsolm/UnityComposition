@@ -2,7 +2,7 @@
 
 ## SimpleGraph
 
-PiRhoSoft.CompositionEngine.SimpleGraph : <<manual/instruction-graph,Instruction Graph>>
+PiRhoSoft.CompositionEngine.SimpleGraph : <<reference/instruction-graph.html,InstructionGraph>>
 
 ### Description
 
@@ -12,8 +12,8 @@ SimpleGraph()::
 
 ### Public Fields
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Process_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Process_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(virtual)_::

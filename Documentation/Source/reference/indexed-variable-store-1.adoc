@@ -2,7 +2,7 @@
 
 ## IndexedVariableStore
 
-PiRhoSoft.CompositionEngine.IndexedVariableStore<_ItemType_> : SerializedList<ItemType>, <<manual/i-variable-store,I Variable Store>>, <<manual/i-indexed-variable-store,I Indexed Variable Store>>
+PiRhoSoft.CompositionEngine.IndexedVariableStore<__ItemType__> : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<ItemType>, <<reference/i-variable-store.html,IVariableStore>>, <<reference/i-indexed-variable-store.html,IIndexedVariableStore>>
 
 ### Description
 
@@ -12,10 +12,10 @@ IndexedVariableStore()::
 
 ### Public Methods
 
-<<manual/i-variable-store,I Variable Store>> GetItem(int index) _(virtual)_::
+<<reference/i-variable-store.html,IVariableStore>> GetItem(int _index_) _(virtual)_::
 
-<<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::

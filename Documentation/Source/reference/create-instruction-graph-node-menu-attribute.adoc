@@ -8,7 +8,7 @@ PiRhoSoft.CompositionEngine.CreateInstructionGraphNodeMenuAttribute : Attribute
 
 ### Constructors
 
-CreateInstructionGraphNodeMenuAttribute(string menuName, int order)::
+CreateInstructionGraphNodeMenuAttribute(string _menuName_, int _order_)::
 
 ### Public Properties
 

@@ -8,8 +8,8 @@ PiRhoSoft.CompositionEngine.VariableInitializerAttribute : Attribute
 
 ### Constructors
 
-VariableInitializerAttribute(<<manual/variable-initializer-type,Variable Initializer Type>> type)::
+VariableInitializerAttribute(<<reference/variable-initializer-type.html,VariableInitializerType>> _type_)::
 
 ### Public Fields
 
-<<manual/variable-initializer-type,Variable Initializer Type>> _Type_::
+<<reference/variable-initializer-type.html,VariableInitializerType>> _Type_::

@@ -1,0 +1,15 @@
+[#reference/read-only-store]
+
+## ReadOnlyStore
+
+PiRhoSoft.CompositionEngine.ReadOnlyStore : <<reference/variable-store.html,VariableStore>>
+
+### Description
+
+### Constructors
+
+ReadOnlyStore()::
+
+### Public Methods
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::

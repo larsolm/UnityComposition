@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/instruction-caller,Instruction Caller>> _Instruction_::
+<<manual/instruction-caller.html,Instruction Caller>> _Instruction_::
 
 bool _Wait For Completion_::
 

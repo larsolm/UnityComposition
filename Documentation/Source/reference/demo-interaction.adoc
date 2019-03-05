@@ -12,4 +12,4 @@ DemoInteraction()::
 
 ### Public Fields
 
-<<manual/instruction-caller,Instruction Caller>> _Caller_::
+<<reference/instruction-caller.html,InstructionCaller>> _Caller_::

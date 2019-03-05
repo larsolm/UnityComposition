@@ -5,6 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateAssetMenu(fileName = nameof(SimpleGraph), menuName = "Composition/Instruction Graph - Mockup", order = 145)]
+	[HelpURL(Composition.DocumentationUrl + "mockup-graph")]
 	public class MockupGraph : InstructionGraph
 	{
 		[Tooltip("The root nodes")]

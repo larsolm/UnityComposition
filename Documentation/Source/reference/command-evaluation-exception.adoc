@@ -8,9 +8,9 @@ PiRhoSoft.CompositionEngine.CommandEvaluationException : Exception
 
 ### Constructors
 
-CommandEvaluationException(string command, string error)::
+CommandEvaluationException(string _command_, string _error_)::
 
-CommandEvaluationException(string command, string errorFormat, Object[] arguments)::
+CommandEvaluationException(string _command_, string _errorFormat_, Object[] _arguments_)::
 
 ### Public Fields
 

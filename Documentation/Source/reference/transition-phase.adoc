@@ -8,8 +8,8 @@ PiRhoSoft.CompositionEngine.TransitionPhase
 
 ### Values
 
-<<manual/transition-phase,Transition Phase>> _Out_::
+<<reference/transition-phase.html,TransitionPhase>> _Out_::
 
-<<manual/transition-phase,Transition Phase>> _Obscure_::
+<<reference/transition-phase.html,TransitionPhase>> _Obscure_::
 
-<<manual/transition-phase,Transition Phase>> _In_::
+<<reference/transition-phase.html,TransitionPhase>> _In_::

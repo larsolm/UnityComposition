@@ -8,18 +8,18 @@ PiRhoSoft.CompositionEngine.VariableType
 
 ### Values
 
-<<manual/variable-type,Variable Type>> _Empty_::
+<<reference/variable-type.html,VariableType>> _Empty_::
 
-<<manual/variable-type,Variable Type>> _Boolean_::
+<<reference/variable-type.html,VariableType>> _Boolean_::
 
-<<manual/variable-type,Variable Type>> _Integer_::
+<<reference/variable-type.html,VariableType>> _Integer_::
 
-<<manual/variable-type,Variable Type>> _Number_::
+<<reference/variable-type.html,VariableType>> _Number_::
 
-<<manual/variable-type,Variable Type>> _String_::
+<<reference/variable-type.html,VariableType>> _String_::
 
-<<manual/variable-type,Variable Type>> _Object_::
+<<reference/variable-type.html,VariableType>> _Object_::
 
-<<manual/variable-type,Variable Type>> _Store_::
+<<reference/variable-type.html,VariableType>> _Store_::
 
-<<manual/variable-type,Variable Type>> _Null_::
+<<reference/variable-type.html,VariableType>> _Null_::

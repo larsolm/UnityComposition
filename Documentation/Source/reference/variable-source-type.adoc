@@ -8,6 +8,6 @@ PiRhoSoft.CompositionEngine.VariableSourceType
 
 ### Values
 
-<<manual/variable-source-type,Variable Source Type>> _Value_::
+<<reference/variable-source-type.html,VariableSourceType>> _Value_::
 
-<<manual/variable-source-type,Variable Source Type>> _Reference_::
+<<reference/variable-source-type.html,VariableSourceType>> _Reference_::

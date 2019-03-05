@@ -2,7 +2,7 @@
 
 ## MockupGraph
 
-PiRhoSoft.CompositionEngine.MockupGraph : <<manual/instruction-graph,Instruction Graph>>
+PiRhoSoft.CompositionEngine.MockupGraph : <<reference/instruction-graph.html,InstructionGraph>>
 
 ### Description
 
@@ -12,14 +12,14 @@ MockupGraph()::
 
 ### Public Fields
 
-<<manual/mockup-connection-list,Mockup Connection List>> _EntryPoints_::
+<<reference/mockup-connection-list.html,MockupConnectionList>> _EntryPoints_::
 
 ### Public Methods
 
-void GetConnections(<<manual/instruction-graph-node-node-data,Node Data>> data) _(virtual)_::
+void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
 
-void SetConnection(<<manual/instruction-graph-node-connection-data,Connection Data>> connection, <<manual/instruction-graph-node,Instruction Graph Node>> target) _(virtual)_::
+void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<manual/instruction-store,Instruction Store>> variables) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(virtual)_::

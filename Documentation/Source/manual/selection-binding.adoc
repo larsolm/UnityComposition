@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/selection-control,Selection Control>> _Selection Control_::
+<<manual/selection-control.html,Selection Control>> _Selection Control_::
 
 string _Binding Group_::
 

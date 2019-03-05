@@ -6,7 +6,7 @@
 
 string _Name_::
 
-<<manual/variable-reference,Variable Reference>> _This_::
+<<manual/variable-reference.html,Variable Reference>> _This_::
 
 https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Graph Position_::
 

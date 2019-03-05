@@ -12,8 +12,8 @@ int _VariableCount_ _(read only)_ _(abstract)_::
 
 ### Public Methods
 
-string GetVariableName(int index) _(abstract)_::
+string GetVariableName(int _index_) _(abstract)_::
 
-<<manual/variable-value,Variable Value>> GetVariableValue(int index) _(abstract)_::
+<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(abstract)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariableValue(int index, <<manual/variable-value,Variable Value>> value) _(abstract)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::

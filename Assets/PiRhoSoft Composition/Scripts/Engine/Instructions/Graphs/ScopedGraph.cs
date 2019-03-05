@@ -4,6 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateAssetMenu(fileName = nameof(ScopedGraph), menuName = "Composition/Instruction Graph - Scoped", order = 126)]
+	[HelpURL(Composition.DocumentationUrl + "scoped-graph")]
 	public class ScopedGraph : InstructionGraph
 	{
 		public InstructionGraphNode Enter = null;

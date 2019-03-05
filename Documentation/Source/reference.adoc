@@ -44,11 +44,19 @@ include::reference/atan-command.adoc[]
 
 <<<
 
+include::reference/auto-size-text.adoc[]
+
+<<<
+
 include::reference/axis-input.adoc[]
 
 <<<
 
 include::reference/bar-binding.adoc[]
+
+<<<
+
+include::reference/binding-animation-status.adoc[]
 
 <<<
 
@@ -157,14 +165,6 @@ include::reference/cutoff.adoc[]
 <<<
 
 include::reference/deactivate-interface-node.adoc[]
-
-<<<
-
-include::reference/demo-behaviour.adoc[]
-
-<<<
-
-include::reference/demo-interaction.adoc[]
 
 <<<
 
@@ -284,15 +284,7 @@ include::reference/hide-control-node.adoc[]
 
 <<<
 
-include::reference/i-immediate.adoc[]
-
-<<<
-
 include::reference/i-indexed-variable-store.adoc[]
-
-<<<
-
-include::reference/i-is-immediate.adoc[]
 
 <<<
 
@@ -425,6 +417,10 @@ include::reference/i-variable-listener.adoc[]
 <<<
 
 include::reference/i-variable-store.adoc[]
+
+<<<
+
+include::reference/join-enumerator.adoc[]
 
 <<<
 
@@ -617,6 +613,10 @@ include::reference/property-map-1.adoc[]
 <<<
 
 include::reference/random-command.adoc[]
+
+<<<
+
+include::reference/read-only-store.adoc[]
 
 <<<
 
@@ -817,3 +817,7 @@ include::reference/visible-binding.adoc[]
 <<<
 
 include::reference/wait-node.adoc[]
+
+<<<
+
+include::reference/writable-store.adoc[]

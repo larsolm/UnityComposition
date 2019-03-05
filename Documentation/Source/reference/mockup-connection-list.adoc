@@ -2,7 +2,7 @@
 
 ## MockupConnectionList
 
-PiRhoSoft.CompositionEngine.MockupConnectionList : SerializedList<<<manual/mockup-connection,Mockup Connection>>>
+PiRhoSoft.CompositionEngine.MockupConnectionList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/mockup-connection.html,MockupConnection>>>
 
 ### Description
 

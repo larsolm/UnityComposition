@@ -2,7 +2,7 @@
 
 ## TernaryOperator
 
-PiRhoSoft.CompositionEngine.TernaryOperator : <<manual/operation,Operation>>
+PiRhoSoft.CompositionEngine.TernaryOperator : <<reference/operation.html,Operation>>
 
 ### Description
 
@@ -12,14 +12,14 @@ TernaryOperator()::
 
 ### Public Fields
 
-<<manual/operation,Operation>> _Condition_::
+<<reference/operation.html,Operation>> _Condition_::
 
-<<manual/operation,Operation>> _TrueBranch_::
+<<reference/operation.html,Operation>> _TrueBranch_::
 
-<<manual/operation,Operation>> _FalseBranch_::
+<<reference/operation.html,Operation>> _FalseBranch_::
 
 ### Public Methods
 
-void ToString(StringBuilder builder) _(virtual)_::
+void ToString(StringBuilder _builder_) _(virtual)_::
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

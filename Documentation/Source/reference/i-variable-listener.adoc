@@ -8,4 +8,4 @@ PiRhoSoft.CompositionEngine.IVariableListener
 
 ### Public Methods
 
-void VariableChanged(int index, <<manual/variable-value,Variable Value>> value) _(abstract)_::
+void VariableChanged(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::

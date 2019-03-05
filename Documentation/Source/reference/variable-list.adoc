@@ -2,7 +2,7 @@
 
 ## VariableList
 
-PiRhoSoft.CompositionEngine.VariableList : <<manual/i-variable-list,I Variable List>>
+PiRhoSoft.CompositionEngine.VariableList : <<reference/i-variable-list.html,IVariableList>>
 
 ### Description
 
@@ -12,9 +12,9 @@ VariableList()::
 
 ### Public Properties
 
-<<manual/variable-schema,Variable Schema>> _Schema_ _(read only)_::
+<<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_::
 
-<<manual/i-variable-store,I Variable Store>> _Owner_ _(read only)_::
+<<reference/i-variable-store.html,IVariableStore>> _Owner_ _(read only)_::
 
 bool _NeedsUpdate_ _(read only)_::
 
@@ -22,24 +22,24 @@ int _VariableCount_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 
-void LoadFrom(<<manual/variable-list,Variable List>> variables, string availability)::
+void LoadFrom(<<reference/variable-list.html,VariableList>> _variables_, string _availability_)::
 
-void SaveTo(<<manual/variable-list,Variable List>> variables, string availability)::
+void SaveTo(<<reference/variable-list.html,VariableList>> _variables_, string _availability_)::
 
-void Setup(<<manual/variable-schema,Variable Schema>> schema, <<manual/i-variable-store,I Variable Store>> owner)::
+void Setup(<<reference/variable-schema.html,VariableSchema>> _schema_, <<reference/i-variable-store.html,IVariableStore>> _owner_)::
 
 void Update()::
 
-void Reset(int index)::
+void Reset(int _index_)::
 
-void Reset(string availability)::
+void Reset(string _availability_)::
 
-void Reset(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> variables)::
+void Reset(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_)::
 
 void Clear()::
 
-string GetVariableName(int index) _(virtual)_::
+string GetVariableName(int _index_) _(virtual)_::
 
-<<manual/variable-value,Variable Value>> GetVariableValue(int index) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(virtual)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariableValue(int index, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::

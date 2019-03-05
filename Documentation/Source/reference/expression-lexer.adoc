@@ -8,4 +8,4 @@ PiRhoSoft.CompositionEngine.ExpressionLexer
 
 ### Static Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/expression-token,Expression Token>>> Tokenize(string input)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/expression-token.html,ExpressionToken>>> Tokenize(string _input_)::

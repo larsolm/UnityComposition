@@ -2,7 +2,7 @@
 
 ## VariableStore
 
-PiRhoSoft.CompositionEngine.VariableStore : <<manual/i-variable-store,I Variable Store>>
+PiRhoSoft.CompositionEngine.VariableStore : <<reference/i-variable-store.html,IVariableStore>>
 
 ### Description
 
@@ -12,18 +12,22 @@ VariableStore()::
 
 ### Public Properties
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable,Variable>>> _Variables_ _(read only)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable.html,Variable>>> _Variables_ _(read only)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2[Dictionary^]<string, string> _Map_ _(read only)_::
 
 ### Public Methods
 
-void AddVariable(string name, <<manual/variable-value,Variable Value>> value)::
+void AddVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
-<<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::
 
 void Clear()::
+
+### Protected Methods
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_, bool _allowAdd_)::

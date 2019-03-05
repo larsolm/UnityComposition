@@ -8,10 +8,10 @@ PiRhoSoft.CompositionEngine.SetVariableResult
 
 ### Values
 
-<<manual/set-variable-result,Set Variable Result>> _Success_::
+<<reference/set-variable-result.html,SetVariableResult>> _Success_::
 
-<<manual/set-variable-result,Set Variable Result>> _NotFound_::
+<<reference/set-variable-result.html,SetVariableResult>> _NotFound_::
 
-<<manual/set-variable-result,Set Variable Result>> _ReadOnly_::
+<<reference/set-variable-result.html,SetVariableResult>> _ReadOnly_::
 
-<<manual/set-variable-result,Set Variable Result>> _TypeMismatch_::
+<<reference/set-variable-result.html,SetVariableResult>> _TypeMismatch_::

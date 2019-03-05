@@ -14,7 +14,7 @@ ExpressionToken()::
 
 int _Location_::
 
-<<manual/expression-token-type,Expression Token Type>> _Type_::
+<<reference/expression-token-type.html,ExpressionTokenType>> _Type_::
 
 string _Text_::
 

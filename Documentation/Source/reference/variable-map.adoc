@@ -8,7 +8,7 @@ PiRhoSoft.CompositionEngine.VariableMap
 
 ### Constructors
 
-VariableMap(int version)::
+VariableMap(int _version_)::
 
 ### Public Properties
 
@@ -18,14 +18,14 @@ int _Count_ _(read only)_::
 
 ### Public Methods
 
-bool Contains(string name)::
+bool Contains(string _name_)::
 
-int GetIndex(string name)::
+int GetIndex(string _name_)::
 
-bool TryGetIndex(string name, int index _(out)_)::
+bool TryGetIndex(string _name_, int _index_ _(out)_)::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetNames()::
 
-<<manual/variable-map,Variable Map>> Add(<<manual/variable-schema,Variable Schema>> schema)::
+<<reference/variable-map.html,VariableMap>> Add(<<reference/variable-schema.html,VariableSchema>> _schema_)::
 
-<<manual/variable-map,Variable Map>> Add(<<manual/property-map,Property Map>> map)::
+<<reference/variable-map.html,VariableMap>> Add(<<reference/property-map.html,PropertyMap>> _map_)::

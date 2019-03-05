@@ -2,13 +2,13 @@
 
 ## VariableListener
 
-PiRhoSoft.CompositionEngine.VariableListener : <<manual/i-variable-list,I Variable List>>
+PiRhoSoft.CompositionEngine.VariableListener : <<reference/i-variable-list.html,IVariableList>>
 
 ### Description
 
 ### Constructors
 
-VariableListener(<<manual/i-variable-listener,I Variable Listener>> listener, <<manual/i-variable-list,I Variable List>> list)::
+VariableListener(<<reference/i-variable-listener.html,IVariableListener>> _listener_, <<reference/i-variable-list.html,IVariableList>> _list_)::
 
 ### Public Properties
 
@@ -16,8 +16,8 @@ int _VariableCount_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 
-string GetVariableName(int index) _(virtual)_::
+string GetVariableName(int _index_) _(virtual)_::
 
-<<manual/variable-value,Variable Value>> GetVariableValue(int index) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(virtual)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariableValue(int index, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::

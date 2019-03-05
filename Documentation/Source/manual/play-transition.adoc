@@ -4,9 +4,9 @@
 
 ### Fields
 
-<<manual/transition-variable-source,Transition Variable Source>> _Transition_::
+<<manual/transition-variable-source.html,Transition Variable Source>> _Transition_::
 
-<<manual/transition-phase,Transition Phase>> _Phase_::
+<<manual/transition-phase.html,Transition Phase>> _Phase_::
 
 bool _Auto Finish_::
 

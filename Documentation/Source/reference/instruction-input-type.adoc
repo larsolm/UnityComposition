@@ -8,6 +8,6 @@ PiRhoSoft.CompositionEngine.InstructionInputType
 
 ### Values
 
-<<manual/instruction-input-type,Instruction Input Type>> _Reference_::
+<<reference/instruction-input-type.html,InstructionInputType>> _Reference_::
 
-<<manual/instruction-input-type,Instruction Input Type>> _Value_::
+<<reference/instruction-input-type.html,InstructionInputType>> _Value_::

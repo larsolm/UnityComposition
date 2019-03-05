@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Control Flow/Wait", 100)]
-	[HelpURL(Composition.DocumentationUrl + "wait")]
+	[HelpURL(Composition.DocumentationUrl + "wait-node")]
 	public class WaitNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

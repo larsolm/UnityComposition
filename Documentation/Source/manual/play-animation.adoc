@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/animation-clip-variable-source,Animation Clip Variable Source>> _Animation_::
+<<manual/animation-clip-variable-source.html,Animation Clip Variable Source>> _Animation_::
 
 bool _Wait For Completion_::
 

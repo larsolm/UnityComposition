@@ -4,9 +4,9 @@
 
 ### Fields
 
-<<manual/expression,Expression>> _Switch_::
+<<manual/expression.html,Expression>> _Switch_::
 
-<<manual/instruction-graph-node-dictionary,Instruction Graph Node Dictionary>> _Outputs_::
+<<manual/instruction-graph-node-dictionary.html,Instruction Graph Node Dictionary>> _Outputs_::
 
 ifdef::backend-multipage_html5[]
 link:reference/branch-node.html[Reference]

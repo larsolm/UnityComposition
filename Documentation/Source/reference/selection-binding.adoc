@@ -12,6 +12,6 @@ SelectionBinding()::
 
 ### Public Fields
 
-<<manual/selection-control,Selection Control>> _SelectionControl_::
+<<reference/selection-control.html,SelectionControl>> _SelectionControl_::
 
 string _BindingGroup_::

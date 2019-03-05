@@ -2,7 +2,7 @@
 
 ## ImageBinding
 
-PiRhoSoft.CompositionEngine.ImageBinding : <<manual/interface-binding,Interface Binding>>
+PiRhoSoft.CompositionEngine.ImageBinding : <<reference/interface-binding.html,InterfaceBinding>>
 
 ### Description
 
@@ -18,8 +18,8 @@ ImageBinding()::
 
 ### Public Fields
 
-<<manual/variable-reference,Variable Reference>> _Variable_::
+<<reference/variable-reference.html,VariableReference>> _Variable_::
 
 ### Public Methods
 
-void UpdateBinding(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

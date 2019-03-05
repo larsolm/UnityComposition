@@ -9,8 +9,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("Composition/Interface Manager")]
 	public class InterfaceManager : SingletonBehaviour<InterfaceManager>
 	{
-		private const string _invalidAddError = "(IIMIA) Failed to add Interface: an Interface named {0} has already been added";
-		private const string _invalidRemoveError = "(IIMIR) Failed to remove Interface: an Interface named {0} has not been added";
+		private const string _invalidAddError = "(CIMIA) Failed to add Interface: an Interface named {0} has already been added";
+		private const string _invalidRemoveError = "(CIMIR) Failed to remove Interface: an Interface named {0} has not been added";
 
 		[Tooltip("The name of the axis to use for left and right navigation")] public string HorizontalAxis = "Horizontal";
 		[Tooltip("The name of the axis to use for up and down navigation")] public string VerticalAxis = "Vertical";

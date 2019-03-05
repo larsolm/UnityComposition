@@ -8,7 +8,7 @@ PiRhoSoft.CompositionEngine.ConnectionData
 
 ### Constructors
 
-ConnectionData(string field, string key, int index, <<manual/instruction-graph-node,Instruction Graph Node>> from, <<manual/instruction-graph-node,Instruction Graph Node>> to, int fromIndex)::
+ConnectionData(string _field_, string _key_, int _index_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _from_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_, int _fromIndex_)::
 
 ### Public Properties
 
@@ -18,24 +18,24 @@ string _FieldKey_ _(read only)_::
 
 int _FieldIndex_ _(read only)_::
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _From_ _(read only)_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _From_ _(read only)_::
 
 int _FromIndex_ _(read only)_::
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _To_ _(read only)_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _To_ _(read only)_::
 
-<<manual/instruction-graph-node-node-data,Node Data>> _Target_ _(read only)_::
+<<reference/instruction-graph-node-node-data.html,NodeData>> _Target_ _(read only)_::
 
 string _Name_ _(read only)_::
 
 ### Public Methods
 
-bool Equals(Object obj) _(virtual)_::
+bool Equals(Object _obj_) _(virtual)_::
 
 int GetHashCode() _(virtual)_::
 
-void SetTarget(<<manual/instruction-graph-node-node-data,Node Data>> target)::
+void SetTarget(<<reference/instruction-graph-node-node-data.html,NodeData>> _target_)::
 
-void ChangeTarget(<<manual/instruction-graph-node-node-data,Node Data>> target)::
+void ChangeTarget(<<reference/instruction-graph-node-node-data.html,NodeData>> _target_)::
 
-void ApplyConnection(Object obj, <<manual/instruction-graph-node,Instruction Graph Node>> target)::
+void ApplyConnection(Object _obj_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_)::

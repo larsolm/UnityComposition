@@ -2,7 +2,7 @@
 
 ## IntegerVariableSource
 
-PiRhoSoft.CompositionEngine.IntegerVariableSource : <<manual/variable-source-1,Variable Source>><int>
+PiRhoSoft.CompositionEngine.IntegerVariableSource : <<reference/variable-source-1.html,VariableSource>><int>
 
 ### Description
 
@@ -10,8 +10,8 @@ PiRhoSoft.CompositionEngine.IntegerVariableSource : <<manual/variable-source-1,V
 
 IntegerVariableSource()::
 
-IntegerVariableSource(int defaultValue)::
+IntegerVariableSource(int _defaultValue_)::
 
 ### Protected Methods
 
-bool TryGetValue(<<manual/variable-value,Variable Value>> variable, int value _(out)_) _(virtual)_::
+bool TryGetValue(<<reference/variable-value.html,VariableValue>> _variable_, int _value_ _(out)_) _(virtual)_::

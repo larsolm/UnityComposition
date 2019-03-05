@@ -8,8 +8,8 @@ PiRhoSoft.CompositionEngine.MessageControlDisplay
 
 ### Values
 
-<<manual/message-control-display,Message Control Display>> _None_::
+<<reference/message-control-display.html,MessageControlDisplay>> _None_::
 
-<<manual/message-control-display,Message Control Display>> _Continue_::
+<<reference/message-control-display.html,MessageControlDisplay>> _Continue_::
 
-<<manual/message-control-display,Message Control Display>> _Finished_::
+<<reference/message-control-display.html,MessageControlDisplay>> _Finished_::

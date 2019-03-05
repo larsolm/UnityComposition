@@ -2,7 +2,7 @@
 
 ## ExpressionCommand
 
-PiRhoSoft.CompositionEngine.ExpressionCommand : <<manual/command,Command>>
+PiRhoSoft.CompositionEngine.ExpressionCommand : <<reference/command.html,Command>>
 
 ### Description
 
@@ -10,22 +10,22 @@ PiRhoSoft.CompositionEngine.ExpressionCommand : <<manual/command,Command>>
 
 int _InitialStoreCount_::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Stack-1[Stack^]<<<manual/expression-command-parameter-store,Parameter Store>>> _Stores_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Stack-1[Stack^]<<<reference/expression-command-parameter-store.html,ParameterStore>>> _Stores_::
 
 ### Static Methods
 
-<<manual/expression-command-parameter-store,Parameter Store>> ReserveStore()::
+<<reference/expression-command-parameter-store.html,ParameterStore>> ReserveStore()::
 
-void ReleaseStore(<<manual/expression-command-parameter-store,Parameter Store>> store)::
+void ReleaseStore(<<reference/expression-command-parameter-store.html,ParameterStore>> _store_)::
 
 ### Constructors
 
-ExpressionCommand(<<manual/expression,Expression>> expression)::
+ExpressionCommand(<<reference/expression.html,Expression>> _expression_)::
 
 ### Public Properties
 
-<<manual/expression,Expression>> _Expression_ _(read only)_::
+<<reference/expression.html,Expression>> _Expression_ _(read only)_::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables, string name, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/operation,Operation>>> parameters) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(virtual)_::

@@ -2,18 +2,18 @@
 
 ## ConstantCommand
 
-PiRhoSoft.CompositionEngine.ConstantCommand : <<manual/command,Command>>
+PiRhoSoft.CompositionEngine.ConstantCommand : <<reference/command.html,Command>>
 
 ### Description
 
 ### Constructors
 
-ConstantCommand(<<manual/variable-value,Variable Value>> value)::
+ConstantCommand(<<reference/variable-value.html,VariableValue>> _value_)::
 
 ### Public Properties
 
-<<manual/variable-value,Variable Value>> _Value_ _(read only)_::
+<<reference/variable-value.html,VariableValue>> _Value_ _(read only)_::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables, string name, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/operation,Operation>>> parameters) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(virtual)_::

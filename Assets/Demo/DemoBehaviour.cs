@@ -1,9 +1,10 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.UtilityEngine;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PiRhoSoft.CompositionEngine
+namespace PiRhoSoft.CompositionDemo
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	[AddComponentMenu("PiRho Soft/Composition/Demo Character")]

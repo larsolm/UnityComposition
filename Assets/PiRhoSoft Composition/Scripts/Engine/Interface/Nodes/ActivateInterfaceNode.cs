@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[CreateInstructionGraphNodeMenu("Interface/Activate Interface", 50)]
 	public class ActivateInterfaceNode : InstructionGraphNode
 	{
-		private const string _invalidInterfaceNameWarning = "(CISNIIN) Unable to activate interface for {0}: the interface '{1}' does not exist";
+		private const string _invalidInterfaceNameWarning = "(CAINIIN) Unable to activate interface for {0}: the interface '{1}' does not exist";
 
 		[Tooltip("The node to go to once the control is shown")]
 		public InstructionGraphNode Next = null;

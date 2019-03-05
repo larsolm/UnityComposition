@@ -16,11 +16,11 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("Composition/Interface/Selection Control")]
 	public class SelectionControl : InterfaceControl
 	{
-		private const string _invalidExpandWarning = "(ISCIE) Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore";
-		private const string _missingItemError = "(ISCMI) Failed to create item {0}: the variable '{1}' could not be found";
-		private const string _invalidItemError = "(ISCMI) Failed to create item {0}: the variable '{1}' is not an IVariableStore";
-		private const string _missingTemplateError = "(ISCMI) Failed to create item {0}: the object template has not been assigned";
-		private const string _missingChildError = "(ISCMI) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
+		private const string _invalidExpandWarning = "(CSCIE) Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore";
+		private const string _missingItemError = "(CSCMI) Failed to create item {0}: the variable '{1}' could not be found";
+		private const string _invalidItemError = "(CSCII) Failed to create item {0}: the variable '{1}' is not an IVariableStore";
+		private const string _missingTemplateError = "(ISCMT) Failed to create item {0}: the object template has not been assigned";
+		private const string _missingChildError = "(ISCMC) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
 
 		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a column")]
 		public bool VerticalWrapping = false;

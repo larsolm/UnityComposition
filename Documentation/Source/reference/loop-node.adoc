@@ -2,7 +2,7 @@
 
 ## LoopNode
 
-PiRhoSoft.CompositionEngine.LoopNode : <<manual/instruction-graph-node,Instruction Graph Node>>, <<manual/i-loop-node,I Loop Node>>, <<manual/i-immediate,I Immediate>>
+PiRhoSoft.CompositionEngine.LoopNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>, <<reference/i-loop-node.html,ILoopNode>>
 
 ### Description
 
@@ -12,9 +12,9 @@ LoopNode()::
 
 ### Public Fields
 
-<<manual/expression,Expression>> _Condition_::
+<<reference/expression.html,Expression>> _Condition_::
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Loop_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Loop_::
 
 ### Public Properties
 
@@ -22,8 +22,8 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

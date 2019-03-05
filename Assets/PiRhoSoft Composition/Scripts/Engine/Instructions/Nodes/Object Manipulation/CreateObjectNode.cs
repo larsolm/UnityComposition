@@ -8,8 +8,8 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "create-object-node")]
 	public class CreateObjectNode : InstructionGraphNode
 	{
-		private const string _objectNotFoundWarning = "(COMCOONF) Unable to create object for {0}: the object could not be found";
-		private const string _parentNotFoundWarning = "(COMCOONF) Unable to assign parent object for {0}: the specified object '{1}' could not be found";
+		private const string _missingObjectWarning = "(CCONMO) Unable to create object for {0}: the object could not be found";
+		private const string _missingParentWarning = "(CCONMP) Unable to assign parent object for {0}: the specified object '{1}' could not be found";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
@@ -41,7 +41,7 @@ namespace PiRhoSoft.CompositionEngine
 				GameObject parent = null;
 
 				if (Parent.IsAssigned && !Parent.GetValue(variables).TryGetObject(out parent))
-					Debug.LogWarningFormat(this, _parentNotFoundWarning, Name, Parent);
+					Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
 
 				var spawned = parent ? Instantiate(Prefab, parent.transform.position + (Vector3)Position, Quaternion.identity, parent.transform) : Instantiate(Prefab, Position, Quaternion.identity);
 				spawned.name = ObjectName;
@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			else
 			{
-				Debug.LogWarningFormat(this, _objectNotFoundWarning, Name);
+				Debug.LogWarningFormat(this, _missingObjectWarning, Name);
 				graph.GoTo(Next, variables.This, nameof(Next));
 			}
 

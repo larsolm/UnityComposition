@@ -10,10 +10,10 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("Composition/Interface/Bar Binding")]
 	public class BarBinding : InterfaceBinding
 	{
-		private const string _invalidAmountError = "(IBBIA) Failed to update bar binding: the amount variable '{0}' is not an Integer or Number";
-		private const string _missingAmountError = "(IBBMA) Failed to update bar binding: the amount variable '{0}' could not be found";
-		private const string _invalidTotalError = "(IBBIT) Failed to update bar binding: the total variable '{0}' is not an Integer or Number";
-		private const string _missingTotalError = "(IBBMT) Failed to update bar binding: the total variable '{0}' could not be found";
+		private const string _invalidAmountError = "(CBBIA) Failed to update bar binding: the amount variable '{0}' is not an Integer or Number";
+		private const string _missingAmountError = "(CBBMA) Failed to update bar binding: the amount variable '{0}' could not be found";
+		private const string _invalidTotalError = "(CBBIT) Failed to update bar binding: the total variable '{0}' is not an Integer or Number";
+		private const string _missingTotalError = "(CBBMT) Failed to update bar binding: the total variable '{0}' could not be found";
 
 		[Tooltip("The speed at which to animate the fill change (in % per second, 0 means immediate)")]
 		[Range(0.0f, 1.0f)]

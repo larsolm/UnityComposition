@@ -14,27 +14,27 @@ string _Saved_::
 
 ### Static Methods
 
-<<manual/variable-definition,Variable Definition>> Create(string name, <<manual/variable-type,Variable Type>> type, string availability, <<manual/expression,Expression>> initializer)::
+<<reference/variable-definition.html,VariableDefinition>> Create(string _name_, <<reference/variable-type.html,VariableType>> _type_, string _availability_, <<reference/expression.html,Expression>> _initializer_)::
 
-<<manual/variable-definition,Variable Definition>> Create(string name, int minimum, int maximum, string availability, <<manual/expression,Expression>> initializer)::
+<<reference/variable-definition.html,VariableDefinition>> Create(string _name_, int _minimum_, int _maximum_, string _availability_, <<reference/expression.html,Expression>> _initializer_)::
 
-<<manual/variable-definition,Variable Definition>> Create(string name, float minimum, float maximum, string availability, <<manual/expression,Expression>> initializer)::
+<<reference/variable-definition.html,VariableDefinition>> Create(string _name_, float _minimum_, float _maximum_, string _availability_, <<reference/expression.html,Expression>> _initializer_)::
 
-<<manual/variable-definition,Variable Definition>> Create(string name, string values, string availability, <<manual/expression,Expression>> initializer)::
+<<reference/variable-definition.html,VariableDefinition>> Create(string _name_, string _values_, string _availability_, <<reference/expression.html,Expression>> _initializer_)::
 
-<<manual/variable-definition,Variable Definition>> Create<T>(string name, string availability, <<manual/expression,Expression>> initializer)::
+<<reference/variable-definition.html,VariableDefinition>> Create<T>(string _name_, string _availability_, <<reference/expression.html,Expression>> _initializer_)::
 
-<<manual/variable-definition,Variable Definition>> Create(string name, <<manual/variable-type,Variable Type>> type, bool constrainRange, float minimum, float maximum, string typeConstraint, string availability, <<manual/expression,Expression>> initializer)::
+<<reference/variable-definition.html,VariableDefinition>> Create(string _name_, <<reference/variable-type.html,VariableType>> _type_, bool _constrainRange_, float _minimum_, float _maximum_, string _typeConstraint_, string _availability_, <<reference/expression.html,Expression>> _initializer_)::
 
 ### Public Properties
 
 string _Name_ _(read only)_::
 
-<<manual/variable-type,Variable Type>> _Type_ _(read only)_::
+<<reference/variable-type.html,VariableType>> _Type_ _(read only)_::
 
 string _Availability_ _(read only)_::
 
-<<manual/expression,Expression>> _Initializer_ _(read only)_::
+<<reference/expression.html,Expression>> _Initializer_ _(read only)_::
 
 bool _UseRangeConstraint_ _(read only)_::
 
@@ -46,4 +46,4 @@ string _TypeConstraint_ _(read only)_::
 
 ### Public Methods
 
-<<manual/variable,Variable>> Generate(<<manual/i-variable-store,I Variable Store>> variables)::
+<<reference/variable.html,Variable>> Generate(<<reference/i-variable-store.html,IVariableStore>> _variables_)::

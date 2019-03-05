@@ -12,16 +12,16 @@ ItemSelector()::
 
 ### Public Properties
 
-<<manual/selection-control,Selection Control>> _Selection_ _(read only)_::
+<<reference/selection-control.html,SelectionControl>> _Selection_ _(read only)_::
 
 int _Index_ _(read only)_::
 
 ### Public Methods
 
-void OnPointerEnter(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] eventData) _(virtual)_::
+void OnPointerEnter(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
 
-void OnPointerExit(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] eventData) _(virtual)_::
+void OnPointerExit(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
 
-void OnPointerDown(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] eventData) _(virtual)_::
+void OnPointerDown(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
 
-void OnPointerUp(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] eventData) _(virtual)_::
+void OnPointerUp(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("General/Expression")]
-	[HelpURL(Composition.DocumentationUrl + "run-expression")]
+	[HelpURL(Composition.DocumentationUrl + "expression-node")]
 	public class ExpressionNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

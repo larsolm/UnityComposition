@@ -8,7 +8,7 @@ PiRhoSoft.CompositionEngine.VariableAvailabilitiesAttribute : Attribute
 
 ### Constructors
 
-VariableAvailabilitiesAttribute(string[] availabilities)::
+VariableAvailabilitiesAttribute(string[] _availabilities_)::
 
 ### Public Fields
 

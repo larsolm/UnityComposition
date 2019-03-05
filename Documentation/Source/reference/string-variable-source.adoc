@@ -2,7 +2,7 @@
 
 ## StringVariableSource
 
-PiRhoSoft.CompositionEngine.StringVariableSource : <<manual/variable-source-1,Variable Source>><string>
+PiRhoSoft.CompositionEngine.StringVariableSource : <<reference/variable-source-1.html,VariableSource>><string>
 
 ### Description
 
@@ -10,8 +10,8 @@ PiRhoSoft.CompositionEngine.StringVariableSource : <<manual/variable-source-1,Va
 
 StringVariableSource()::
 
-StringVariableSource(string defaultValue)::
+StringVariableSource(string _defaultValue_)::
 
 ### Protected Methods
 
-bool TryGetValue(<<manual/variable-value,Variable Value>> variable, string value _(out)_) _(virtual)_::
+bool TryGetValue(<<reference/variable-value.html,VariableValue>> _variable_, string _value_ _(out)_) _(virtual)_::

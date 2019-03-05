@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/instruction-caller,Instruction Caller>> _Caller_::
+<<manual/instruction-caller.html,Instruction Caller>> _Caller_::
 
 ifdef::backend-multipage_html5[]
 link:reference/demo-interaction.html[Reference]

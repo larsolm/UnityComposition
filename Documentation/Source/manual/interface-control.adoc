@@ -4,7 +4,7 @@
 
 ### Fields
 
-<<manual/dependent-object-list,Dependent Object List>> _Dependent Objects_::
+<<manual/dependent-object-list.html,Dependent Object List>> _Dependent Objects_::
 
 ifdef::backend-multipage_html5[]
 link:reference/interface-control.html[Reference]

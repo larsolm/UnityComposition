@@ -2,7 +2,7 @@
 
 ## MappedVariableStore
 
-PiRhoSoft.CompositionEngine.MappedVariableStore : <<manual/i-variable-store,I Variable Store>>, <<manual/i-variable-list,I Variable List>>
+PiRhoSoft.CompositionEngine.MappedVariableStore : <<reference/i-variable-store.html,IVariableStore>>, <<reference/i-variable-list.html,IVariableList>>
 
 ### Description
 
@@ -16,16 +16,16 @@ int _VariableCount_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 
-void Setup(<<manual/variable-map,Variable Map>> map, <<manual/i-variable-list,I Variable List>>[] lists)::
+void Setup(<<reference/variable-map.html,VariableMap>> _map_, <<reference/i-variable-list.html,IVariableList>>[] _lists_)::
 
-<<manual/variable-value,Variable Value>> GetVariable(string name) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariable(string name, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::
 
-string GetVariableName(int index) _(virtual)_::
+string GetVariableName(int _index_) _(virtual)_::
 
-<<manual/variable-value,Variable Value>> GetVariableValue(int index) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(virtual)_::
 
-<<manual/set-variable-result,Set Variable Result>> SetVariableValue(int index, <<manual/variable-value,Variable Value>> value) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::

@@ -2,22 +2,22 @@
 
 ## LookupOperation
 
-PiRhoSoft.CompositionEngine.LookupOperation : <<manual/operation,Operation>>
+PiRhoSoft.CompositionEngine.LookupOperation : <<reference/operation.html,Operation>>
 
 ### Description
 
 ### Constructors
 
-LookupOperation(string variable)::
+LookupOperation(string _variable_)::
 
 ### Public Fields
 
-<<manual/variable-reference,Variable Reference>> _Reference_::
+<<reference/variable-reference.html,VariableReference>> _Reference_::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::
 
-void ToString(StringBuilder builder) _(virtual)_::
+void ToString(StringBuilder _builder_) _(virtual)_::
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs, string source) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::

@@ -2,7 +2,7 @@
 
 ## ObjectVariableSource
 
-PiRhoSoft.CompositionEngine.ObjectVariableSource<_ObjectType_> : <<manual/variable-source-1,Variable Source>><ObjectType>
+PiRhoSoft.CompositionEngine.ObjectVariableSource<__ObjectType__> : <<reference/variable-source-1.html,VariableSource>><ObjectType>
 
 ### Description
 
@@ -12,4 +12,4 @@ ObjectVariableSource()::
 
 ### Protected Methods
 
-bool TryGetValue(<<manual/variable-value,Variable Value>> variable, <<manual/object-type&,Object Type>> value _(out)_) _(virtual)_::
+bool TryGetValue(<<reference/variable-value.html,VariableValue>> _variable_, <<reference/object-type&.html,ObjectType>> _value_ _(out)_) _(virtual)_::

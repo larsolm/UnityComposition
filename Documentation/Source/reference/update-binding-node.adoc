@@ -2,7 +2,7 @@
 
 ## UpdateBindingNode
 
-PiRhoSoft.CompositionEngine.UpdateBindingNode : <<manual/instruction-graph-node,Instruction Graph Node>>, <<manual/i-immediate,I Immediate>>
+PiRhoSoft.CompositionEngine.UpdateBindingNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
@@ -12,11 +12,13 @@ UpdateBindingNode()::
 
 ### Public Fields
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Next_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-<<manual/interface-reference,Interface Reference>> _Control_::
+<<reference/interface-reference.html,InterfaceReference>> _Control_::
 
 string _Group_::
+
+bool _WaitForCompletion_::
 
 ### Public Properties
 
@@ -24,4 +26,4 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

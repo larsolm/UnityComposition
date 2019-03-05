@@ -2,7 +2,7 @@
 
 ## InterfaceControlDictionary
 
-PiRhoSoft.CompositionEngine.InterfaceControlDictionary : SerializedDictionary<string, string>
+PiRhoSoft.CompositionEngine.InterfaceControlDictionary : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-dictionary-2[SerializedDictionary^]<string, string>
 
 ### Description
 

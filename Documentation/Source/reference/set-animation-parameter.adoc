@@ -2,7 +2,7 @@
 
 ## SetAnimationParameter
 
-PiRhoSoft.CompositionEngine.SetAnimationParameter : <<manual/instruction-graph-node,Instruction Graph Node>>, <<manual/i-immediate,I Immediate>>
+PiRhoSoft.CompositionEngine.SetAnimationParameter : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
@@ -12,17 +12,17 @@ SetAnimationParameter()::
 
 ### Public Fields
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _Next_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-<<manual/string-variable-source,String Variable Source>> _Parameter_::
+<<reference/string-variable-source.html,StringVariableSource>> _Parameter_::
 
 https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.html[AnimatorControllerParameterType^] _Type_::
 
-<<manual/boolean-variable-source,Boolean Variable Source>> _BoolValue_::
+<<reference/boolean-variable-source.html,BooleanVariableSource>> _BoolValue_::
 
-<<manual/integer-variable-source,Integer Variable Source>> _IntValue_::
+<<reference/integer-variable-source.html,IntegerVariableSource>> _IntValue_::
 
-<<manual/number-variable-source,Number Variable Source>> _FloatValue_::
+<<reference/number-variable-source.html,NumberVariableSource>> _FloatValue_::
 
 ### Public Properties
 
@@ -30,8 +30,8 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<manual/instruction-graph,Instruction Graph>> graph, <<manual/instruction-store,Instruction Store>> variables, int iteration) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

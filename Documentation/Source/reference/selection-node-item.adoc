@@ -2,7 +2,7 @@
 
 ## SelectionNodeItem
 
-PiRhoSoft.CompositionEngine.SelectionNodeItem : <<manual/selection-item,Selection Item>>
+PiRhoSoft.CompositionEngine.SelectionNodeItem : <<reference/selection-item.html,SelectionItem>>
 
 ### Description
 
@@ -12,4 +12,4 @@ SelectionNodeItem()::
 
 ### Public Fields
 
-<<manual/instruction-graph-node,Instruction Graph Node>> _OnSelected_::
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _OnSelected_::

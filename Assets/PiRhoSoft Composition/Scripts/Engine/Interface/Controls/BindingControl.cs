@@ -7,8 +7,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("Composition/Interface/Binding Control")]
 	public class BindingControl : InterfaceControl
 	{
-		private const string _invalidBindingError = "(IBMIB) Failed to update binding: the variable '{0}' is not an IVariableStore";
-		private const string _missingBindingError = "(IBCMB) Failed to update binding: the variable '{0}' could not be found";
+		private const string _invalidBindingError = "(CBCIB) Failed to update binding: the variable '{0}' is not an IVariableStore";
+		private const string _missingBindingError = "(CBCMB) Failed to update binding: the variable '{0}' could not be found";
 
 		[Tooltip("The variable to set as the root for any sibling and child bindings")]
 		public VariableReference Binding = new VariableReference();

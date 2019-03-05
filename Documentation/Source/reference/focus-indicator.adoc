@@ -12,4 +12,4 @@ FocusIndicator()::
 
 ### Public Methods
 
-void SetFocused(bool focused) _(virtual)_::
+void SetFocused(bool _focused_) _(virtual)_::

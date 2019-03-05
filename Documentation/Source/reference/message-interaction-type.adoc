@@ -8,10 +8,10 @@ PiRhoSoft.CompositionEngine.MessageInteractionType
 
 ### Values
 
-<<manual/message-interaction-type,Message Interaction Type>> _WaitForInput_::
+<<reference/message-interaction-type.html,MessageInteractionType>> _WaitForInput_::
 
-<<manual/message-interaction-type,Message Interaction Type>> _WaitForFinalInput_::
+<<reference/message-interaction-type.html,MessageInteractionType>> _WaitForFinalInput_::
 
-<<manual/message-interaction-type,Message Interaction Type>> _WaitForDisplay_::
+<<reference/message-interaction-type.html,MessageInteractionType>> _WaitForDisplay_::
 
-<<manual/message-interaction-type,Message Interaction Type>> _DontWait_::
+<<reference/message-interaction-type.html,MessageInteractionType>> _DontWait_::

@@ -10,6 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Canvas))]
 	[AddComponentMenu("Composition/Interface/Interface")]
+	[HelpURL(Composition.DocumentationUrl + "interface")]
 	public class Interface : MonoBehaviour
 	{
 		[Tooltip("The name of the Interface to use when looking it up on the Interface Manager")]

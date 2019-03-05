@@ -7,10 +7,10 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class InterfaceReference
 	{
-		private const string _missingInterfaceWarning = "(IIRMI) Unable to find interface for {0}: the interface '{1}' could not be found";
-		private const string _missingControlWarning = "(IIRMC) Unable to find interface control for {0}: the interface '{1}' does not have a control named '{2}'";
-		private const string _invalidInterfaceTypeWarning = "(IIRMIIT) Unable to find interface for {0}: the interface '{1}' is not a {1}";
-		private const string _invalidControlTypeWarning = "(IIRMICT) Unable to find interface control for {0}: the interface control '{1}' is not a {2}";
+		private const string _missingInterfaceWarning = "(CIRMI) Unable to find interface for {0}: the interface '{1}' could not be found";
+		private const string _missingControlWarning = "(CIRMC) Unable to find interface control for {0}: the interface '{1}' does not have a control named '{2}'";
+		private const string _invalidInterfaceTypeWarning = "(CIRIIT) Unable to find interface for {0}: the interface '{1}' is not a {1}";
+		private const string _invalidControlTypeWarning = "(CIRICT) Unable to find interface control for {0}: the interface control '{1}' is not a {2}";
 
 		[Tooltip("The name of the interface to display (if empty, the active Interface will be used")]
 		public string InterfaceName = "InterfaceName";

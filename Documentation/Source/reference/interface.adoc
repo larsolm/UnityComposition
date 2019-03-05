@@ -14,7 +14,7 @@ Interface()::
 
 string _Name_::
 
-<<manual/interface-control-dictionary,Interface Control Dictionary>> _InterfaceControls_::
+<<reference/interface-control-dictionary.html,InterfaceControlDictionary>> _InterfaceControls_::
 
 ### Public Methods
 
@@ -22,7 +22,7 @@ void Activate()::
 
 void Deactivate()::
 
-ControlType GetControl<ControlType>(string name)::
+ControlType GetControl<ControlType>(string _name_)::
 
 ### Protected Methods
 

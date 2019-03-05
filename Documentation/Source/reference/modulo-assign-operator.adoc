@@ -2,7 +2,7 @@
 
 ## ModuloAssignOperator
 
-PiRhoSoft.CompositionEngine.ModuloAssignOperator : <<manual/assign-operator,Assign Operator>>
+PiRhoSoft.CompositionEngine.ModuloAssignOperator : <<reference/assign-operator.html,AssignOperator>>
 
 ### Description
 
@@ -12,4 +12,4 @@ ModuloAssignOperator()::
 
 ### Public Methods
 
-<<manual/variable-value,Variable Value>> Evaluate(<<manual/i-variable-store,I Variable Store>> variables) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

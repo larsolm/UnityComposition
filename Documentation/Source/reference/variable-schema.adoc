@@ -16,14 +16,14 @@ int _Version_ _(read only)_::
 
 int _Count_ _(read only)_::
 
-<<manual/variable-definition,Variable Definition>> _Item_::
+<<reference/variable-definition.html,VariableDefinition>> _Item_::
 
 ### Public Methods
 
-int GetIndex(string name)::
+int GetIndex(string _name_)::
 
-bool HasDefinition(string name)::
+bool HasDefinition(string _name_)::
 
-bool AddDefinition(string name, <<manual/variable-type,Variable Type>> type)::
+bool AddDefinition(string _name_, <<reference/variable-type.html,VariableType>> _type_)::
 
-void RemoveDefinition(int index)::
+void RemoveDefinition(int _index_)::

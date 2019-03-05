@@ -2,23 +2,23 @@
 
 ## VariableSource
 
-PiRhoSoft.CompositionEngine.VariableSource<_T_>
+PiRhoSoft.CompositionEngine.VariableSource<__T__>
 
 ### Description
 
 ### Public Fields
 
-<<manual/variable-source-type,Variable Source Type>> _Type_::
+<<reference/variable-source-type.html,VariableSourceType>> _Type_::
 
-<<manual/variable-reference,Variable Reference>> _Reference_::
+<<reference/variable-reference.html,VariableReference>> _Reference_::
 
 T _Value_::
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<manual/variable-definition,Variable Definition>>> inputs)::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_)::
 
-bool TryGetValue(<<manual/i-variable-store,I Variable Store>> variables, https://docs.unity3d.com/ScriptReference/Object.html[Object^] context, <<manual/t&,T>> value _(out)_)::
+bool TryGetValue(<<reference/i-variable-store.html,IVariableStore>> _variables_, https://docs.unity3d.com/ScriptReference/Object.html[Object^] _context_, <<reference/t&.html,T>> _value_ _(out)_)::
 
 ### Protected Constructors
 
@@ -26,4 +26,4 @@ VariableSource()::
 
 ### Protected Methods
 
-bool TryGetValue(<<manual/variable-value,Variable Value>> variable, <<manual/t&,T>> Value _(out)_) _(abstract)_::
+bool TryGetValue(<<reference/variable-value.html,VariableValue>> _variable_, <<reference/t&.html,T>> _Value_ _(out)_) _(abstract)_::

@@ -1,0 +1,11 @@
+[#reference/auto-size-text]
+
+## AutoSizeText
+
+PiRhoSoft.CompositionEngine.AutoSizeText : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+AutoSizeText()::

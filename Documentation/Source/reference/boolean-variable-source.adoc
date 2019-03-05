@@ -2,7 +2,7 @@
 
 ## BooleanVariableSource
 
-PiRhoSoft.CompositionEngine.BooleanVariableSource : <<manual/variable-source-1,Variable Source>><bool>
+PiRhoSoft.CompositionEngine.BooleanVariableSource : <<reference/variable-source-1.html,VariableSource>><bool>
 
 ### Description
 
@@ -10,8 +10,8 @@ PiRhoSoft.CompositionEngine.BooleanVariableSource : <<manual/variable-source-1,V
 
 BooleanVariableSource()::
 
-BooleanVariableSource(bool defaultValue)::
+BooleanVariableSource(bool _defaultValue_)::
 
 ### Protected Methods
 
-bool TryGetValue(<<manual/variable-value,Variable Value>> variable, bool value _(out)_) _(virtual)_::
+bool TryGetValue(<<reference/variable-value.html,VariableValue>> _variable_, bool _value_ _(out)_) _(virtual)_::
