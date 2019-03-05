@@ -10,7 +10,6 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using MenuItem = UnityEditor.MenuItem;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -35,6 +34,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly StaticStyle _headerStyle = new StaticStyle(CreateHeaderStyle);
 		private static readonly StaticStyle _connectionStyle = new StaticStyle(CreateConnectionStyle);
 		private static readonly StaticStyle _commentStyle = new StaticStyle(CreateCommentStyle);
+		private static readonly StaticStyle _watchStyle = new StaticStyle(CreateWatchStyle);
 		private static readonly IconButton _outputButton = new IconButton("sv_icon_dot0_sml", "Click and drag to make a connection from this output");
 		private static readonly IconButton _inputButton = new IconButton("sv_icon_dot0_sml", "Drag an output to here to make a connection");
 		private static readonly IconButton _removeButton = new IconButton("d_Toolbar Minus", "Remove this node");
@@ -64,7 +64,7 @@ namespace PiRhoSoft.CompositionEditor
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
 		private const float _toolbarHeight = 17.0f;
-		private const float _watchWidth = 256.0f;
+		private const float _watchWidth = 300.0f;
 		private const float _toolbarButtonWidth = 60.0f;
 		private const float _dragTolerance = 4.0f;
 
@@ -118,7 +118,13 @@ namespace PiRhoSoft.CompositionEditor
 		private List<InstructionGraphNode.ConnectionData> _selectedConnections = new List<InstructionGraphNode.ConnectionData>();
 		private InstructionGraphNode.NodeData _selectedInteraction;
 
-		private IVariableStore _selectedStore = null;
+		private InstructionGraph _watching;
+		private VariableStoreControl _thisStore;
+		private VariableStoreControl _inputStore;
+		private VariableStoreControl _outputStore;
+		private VariableStoreControl _localStore;
+		private VariableStoreControl _selectedStore;
+		private Dictionary<string, VariableStoreControl> _contextStores = new Dictionary<string, VariableStoreControl>();
 
 		#region Window Access
 
@@ -215,7 +221,7 @@ namespace PiRhoSoft.CompositionEditor
 			autoRepaintOnSceneChange = true;
 			Undo.undoRedoPerformed += RebuildNodes;
 			Selection.selectionChanged += UpdateSelection;
-			EditorApplication.playModeStateChanged += RebuildNodes;
+			EditorApplication.playModeStateChanged += PlayModeChanged;
 
 			// this has to be here because Unity doesn't allow EditorPrefs access in a static constructor
 			InstructionGraph.IsDebugBreakEnabled = _breakpointsEnabled.Value;
@@ -224,7 +230,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		protected override void Teardown()
 		{
-			EditorApplication.playModeStateChanged -= RebuildNodes;
+			EditorApplication.playModeStateChanged -= PlayModeChanged;
 			Selection.selectionChanged -= UpdateSelection;
 			Undo.undoRedoPerformed -= RebuildNodes;
 
@@ -238,17 +244,20 @@ namespace PiRhoSoft.CompositionEditor
 			base.Teardown();
 		}
 
+		private void PlayModeChanged(PlayModeStateChange state)
+		{
+			RebuildNodes();
+
+			if (state == PlayModeStateChange.EnteredEditMode)
+				TeardownWatch();
+		}
+
 		private void RebuildNodes()
 		{
 			TeardownNodes();
 			SetupNodes();
 			UpdateSelection();
 			Repaint();
-		}
-
-		private void RebuildNodes(PlayModeStateChange state)
-		{
-			RebuildNodes();
 		}
 
 		#endregion
@@ -745,6 +754,13 @@ namespace PiRhoSoft.CompositionEditor
 			return style;
 		}
 
+		private static GUIStyle CreateWatchStyle()
+		{
+			var style = new GUIStyle();
+			style.normal.background = EditorGUIUtility.whiteTexture;
+			return style;
+		}
+
 		protected override void Draw(Rect rect)
 		{
 			RefreshSelectedNode();
@@ -763,10 +779,10 @@ namespace PiRhoSoft.CompositionEditor
 
 		protected override void PostDraw(Rect rect)
 		{
-			DrawToolbar(rect);
-
 			if (IsWatchOpen)
 				DrawWatch(rect);
+
+			DrawToolbar(rect);
 
 			if (_toRemove != null)
 			{
@@ -1071,46 +1087,100 @@ namespace PiRhoSoft.CompositionEditor
 			HandleHelper.DrawCircle(end, _knobRadius, endColor);
 		}
 
-		private void DrawStoreLink(string name, object obj)
-		{
-			if (VariableStoreControl.DrawLink(name, obj))
-				_selectedStore = obj as IVariableStore;
-		}
-
 		private void DrawWatch(Rect rect)
 		{
+			if (_watching != _graph)
+				SetupWatch();
+			else if (_thisStore == null || _thisStore.Store != _graph.Store.This)
+				UpdateWatchThis();
+
 			rect.x = WatchLeft;
 			rect.y = ToolbarBottom;
 			rect.width -= WatchLeft;
 			rect.height -= ToolbarBottom + 1;
 
+			using (ColorScope.BackgroundColor(new Color(0.82f, 0.82f, 0.82f)))
+			{
+				GUI.Box(rect, "", _watchStyle.Style);
+			}
+
 			using (new GUILayout.AreaScope(rect))
 			{
-				using (var scroller = new EditorGUILayout.ScrollViewScope(_watchScrollPosition, false, false, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.box, GUILayout.Width(rect.width), GUILayout.Height(rect.height)))
+				using (var scroller = new EditorGUILayout.ScrollViewScope(_watchScrollPosition, false, false, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.scrollView, GUILayout.Width(rect.width), GUILayout.Height(rect.height)))
 				{
-					DrawStoreLink(InstructionStore.ThisStoreName, _graph.Store.This);
-					DrawStoreLink(InstructionStore.InputStoreName, _graph.Store.Inputs);
-					DrawStoreLink(InstructionStore.OutputStoreName, _graph.Store.Outputs);
-					DrawStoreLink(InstructionStore.LocalStoreName, _graph.Store.Locals);
+					EditorGUILayout.Space();
 
-					if (_graph.Store.Context != null)
-					{
-						foreach (var context in _graph.Store.Context.Stores)
-							DrawStoreLink(context.Key, context.Value);
-					}
+					if (_selectedStore != null) _selectedStore.Draw();
+					if (_thisStore != null) _thisStore.Draw();
+					if (_localStore != null) _localStore.Draw();
+					if (_inputStore != null) _inputStore.Draw();
+					if (_outputStore != null) _outputStore.Draw();
 
-					if (_selectedStore != null)
-					{
-						GUILayout.Box("", GUILayout.ExpandWidth(true), GUILayout.Height(1));
+					foreach (var contextStore in _contextStores)
+						if (contextStore.Value != null) contextStore.Value.Draw();
 
-						var selected = VariableStoreControl.DrawTable(_selectedStore, _selectedStore == _graph.Store.Locals);
-						_watchScrollPosition = scroller.scrollPosition;
+					_watchScrollPosition = scroller.scrollPosition;
 
-						if (selected != null)
-							_selectedStore = selected;
-					}
+					EditorGUILayout.Space();
 				}
 			}
+
+			UpdateWatchSelected(_selectedStore);
+			UpdateWatchSelected(_thisStore);
+			UpdateWatchSelected(_localStore);
+			UpdateWatchSelected(_inputStore);
+			UpdateWatchSelected(_outputStore);
+
+			foreach (var contextStore in _contextStores)
+				UpdateWatchSelected(contextStore.Value);
+		}
+
+		private void SetupWatch()
+		{
+			_watching = _graph;
+			_thisStore = CreateStoreControl(InstructionStore.ThisStoreName, _graph.Store.This as IVariableStore, _thisStore);
+			_inputStore = CreateStoreControl(InstructionStore.InputStoreName, _graph.Store.Inputs, _inputStore);
+			_outputStore = CreateStoreControl(InstructionStore.OutputStoreName, _graph.Store.Outputs, _outputStore);
+			_localStore = CreateStoreControl(InstructionStore.LocalStoreName, _graph.Store.Locals, _localStore);
+
+			if (_graph.Store.Context != null)
+			{
+				foreach (var context in _graph.Store.Context.Stores)
+				{
+					var control = _contextStores[context.Key];
+					_contextStores[context.Key] = CreateStoreControl(context.Key, context.Value, control);
+				}
+			}
+		}
+
+		private void TeardownWatch()
+		{
+			_watching = null;
+			_thisStore = null;
+			_inputStore = null;
+			_outputStore = null;
+			_localStore = null;
+			_selectedStore = null;
+			_contextStores.Clear();
+		}
+
+		private void UpdateWatchThis()
+		{
+			_thisStore = CreateStoreControl(InstructionStore.ThisStoreName, _graph.Store.This as IVariableStore, _thisStore);
+		}
+
+		private void UpdateWatchSelected(VariableStoreControl control)
+		{
+			if (control != null && control.Selected != null)
+				_selectedStore = CreateStoreControl(control.SelectedName, control.Selected, _selectedStore);
+		}
+
+		private VariableStoreControl CreateStoreControl(string name, IVariableStore store, VariableStoreControl existing)
+		{
+			if (existing == null || existing.Store != store)
+				return store != null ? new VariableStoreControl().Setup(name, store) : null;
+			else
+				return existing;
 		}
 
 		#endregion
