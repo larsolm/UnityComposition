@@ -2,7 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -13,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[HelpURL(Composition.DocumentationUrl + "selection-control")]
-	[AddComponentMenu("Composition/Interface/Selection Control")]
+	[AddComponentMenu("PiRho Soft/Interface/Selection Control")]
 	public class SelectionControl : InterfaceControl
 	{
 		private const string _invalidExpandWarning = "(CSCIE) Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore";

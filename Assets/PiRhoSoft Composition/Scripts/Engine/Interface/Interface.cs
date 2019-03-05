@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Canvas))]
-	[AddComponentMenu("Composition/Interface/Interface")]
+	[AddComponentMenu("PiRho Soft/Interface/Interface")]
 	[HelpURL(Composition.DocumentationUrl + "interface")]
 	public class Interface : MonoBehaviour
 	{

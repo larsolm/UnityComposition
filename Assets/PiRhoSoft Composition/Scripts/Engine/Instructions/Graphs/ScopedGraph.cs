@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(fileName = nameof(ScopedGraph), menuName = "Composition/Instruction Graph - Scoped", order = 126)]
+	[CreateAssetMenu(fileName = nameof(ScopedGraph), menuName = "PiRho Soft/Graphs/Scoped", order = 101)]
 	[HelpURL(Composition.DocumentationUrl + "scoped-graph")]
 	public class ScopedGraph : InstructionGraph
 	{

@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Camera))]
 	[HelpURL(Composition.DocumentationUrl + "transition-renderer")]
-	[AddComponentMenu("Composition/Transition Renderer")]
+	[AddComponentMenu("PiRho Soft/Interface/Transition Renderer")]
 	public class TransitionRenderer : MonoBehaviour
 	{
 		void OnEnable()

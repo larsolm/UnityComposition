@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(fileName = nameof(SimpleGraph), menuName = "Composition/Instruction Graph - Simple", order = 125)]
+	[CreateAssetMenu(fileName = nameof(SimpleGraph), menuName = "PiRho Soft/Graphs/Simple", order = 100)]
 	[HelpURL(Composition.DocumentationUrl + "simple-graph")]
 	public class SimpleGraph : InstructionGraph
 	{

@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	[HelpURL(Composition.DocumentationUrl + "message-binding")]
-	[AddComponentMenu("Composition/Interface/Message Binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Message Binding")]
 	public class MessageBinding : InterfaceBinding
 	{
 		[Tooltip("The message to resolve and display as text in this object")]

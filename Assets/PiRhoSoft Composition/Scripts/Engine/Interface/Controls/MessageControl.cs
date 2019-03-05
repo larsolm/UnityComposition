@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[HelpURL(Composition.DocumentationUrl + "message-control")]
-	[AddComponentMenu("Composition/Interface/Message Control")]
+	[AddComponentMenu("PiRho Soft/Interface/Message Control")]
 	public class MessageControl : InterfaceControl
 	{
 		[Tooltip("The object that message text will be displayed in")]

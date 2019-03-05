@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	[HelpURL(Composition.DocumentationUrl + "text-binding")]
-	[AddComponentMenu("Composition/Interface/Text Binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Text Binding")]
 	public class TextBinding : InterfaceBinding
 	{
 		[Tooltip("The variable holding the value to display as text in this object")]

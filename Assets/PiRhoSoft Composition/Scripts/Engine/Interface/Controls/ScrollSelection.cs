@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "scroll-selection")]
-	[AddComponentMenu("Composition/Interface/Scroll Selection")]
+	[AddComponentMenu("PiRho Soft/Interface/Scroll Selection")]
 	public class ScrollSelection : SelectionControl
 	{
 		[Tooltip("The speed of which to scroll the content")] public float ScrollSpeed = -1;

@@ -9,7 +9,7 @@ public class GraphRunner : MonoBehaviour, IVariableStore
 
 	void Start()
 	{
-		CompositionManager.Instance.RunInstruction(GraphCaller, null, this);
+		InstructionManager.Instance.RunInstruction(GraphCaller, null, this);
 	}
 
 	public VariableValue GetVariable(string name)

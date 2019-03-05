@@ -3,7 +3,7 @@
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "visible-binding")]
-	[AddComponentMenu("Composition/Interface/Visible Binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Visible Binding")]
 	public class VisibleBinding : InterfaceBinding
 	{
 		[Tooltip("The expression to run to determine if this object should be visible")]

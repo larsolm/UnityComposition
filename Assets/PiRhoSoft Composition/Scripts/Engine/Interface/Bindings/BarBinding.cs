@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Image))]
 	[HelpURL(Composition.DocumentationUrl + "bar-binding")]
-	[AddComponentMenu("Composition/Interface/Bar Binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Bar Binding")]
 	public class BarBinding : InterfaceBinding
 	{
 		private const string _invalidAmountError = "(CBBIA) Failed to update bar binding: the amount variable '{0}' is not an Integer or Number";

@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "item-selector")]
-	[AddComponentMenu("Composition/Interface/Item Selector")]
+	[AddComponentMenu("PiRho Soft/Interface/Item Selector")]
 	public class ItemSelector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 	{
 		public SelectionControl Selection { get; internal set; }

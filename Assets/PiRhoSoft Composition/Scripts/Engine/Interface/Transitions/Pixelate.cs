@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(menuName = "Composition/Transitions/Pixelate")]
+	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Pixelate", fileName = nameof(Pixelate), order = 111)]
 	[HelpURL(Composition.DocumentationUrl + "pixelate")]
 	public class Pixelate : Transition
 	{

@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "interface-control")]
-	[AddComponentMenu("Composition/Interface/Interface Control")]
+	[AddComponentMenu("PiRho Soft/Interface/Interface Control")]
 	public class InterfaceControl : MonoBehaviour
 	{
 		[Tooltip("GameObjects in the scene that should be activated and deactivated with this control")]

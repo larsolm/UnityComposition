@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(menuName = "Composition/Transitions/Fade", fileName = nameof(Fade))]
+	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Fade", fileName = nameof(Fade), order = 109)]
 	[HelpURL(Composition.DocumentationUrl + "fade")]
 	public class Fade : Cutoff
 	{

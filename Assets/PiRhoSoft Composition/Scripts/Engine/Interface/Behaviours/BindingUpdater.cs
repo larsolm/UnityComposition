@@ -4,7 +4,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[RequireComponent(typeof(InterfaceControl))]
 	[HelpURL(Composition.DocumentationUrl + "binding-updater")]
-	[AddComponentMenu("Composition/Interface/Binding Updater")]
+	[AddComponentMenu("PiRho Soft/Interface/Binding Updater")]
 	public class BindingUpdater : MonoBehaviour
 	{
 		[Tooltip("The binding group to automatically update (update all if empty)")]

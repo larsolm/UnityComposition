@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(fileName = nameof(SimpleGraph), menuName = "Composition/Instruction Graph - Mockup", order = 145)]
+	[CreateAssetMenu(fileName = nameof(MockupGraph), menuName = "PiRho Soft/Graphs/Mockup", order = 102)]
 	[HelpURL(Composition.DocumentationUrl + "mockup-graph")]
 	public class MockupGraph : InstructionGraph
 	{

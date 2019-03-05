@@ -6,13 +6,13 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
-	[AddComponentMenu("Composition/Composition Manager")]
-	public class CompositionManager : SingletonBehaviour<CompositionManager>
+	[HelpURL(Composition.DocumentationUrl + "instruction-manager")]
+	[AddComponentMenu("PiRho Soft/Instructions/Instruction Manager")]
+	public class InstructionManager : SingletonBehaviour<InstructionManager>
 	{
-		[Tooltip("The Composition asset to load when this CompositionManager is loaded")]
+		[Tooltip("The CommandSet to load when this InstructionManager is loaded")]
 		[AssetPopup]
-		public CommandSet Commands; // this exists to provide a place to assign a Composition asset so that it will be loaded by Unity
+		public CommandSet Commands; // this exists to provide a place to assign a CommandSet asset so that it will be loaded by Unity
 
 		public void RunInstruction(Instruction instruction, InstructionContext context, object thisObject)
 		{

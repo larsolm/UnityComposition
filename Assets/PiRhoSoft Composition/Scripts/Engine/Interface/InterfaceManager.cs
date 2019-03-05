@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "interface-manager")]
-	[AddComponentMenu("Composition/Interface Manager")]
+	[AddComponentMenu("PiRho Soft/Interface/Interface Manager")]
 	public class InterfaceManager : SingletonBehaviour<InterfaceManager>
 	{
 		private const string _invalidAddError = "(CIMIA) Failed to add Interface: an Interface named {0} has already been added";

@@ -7,7 +7,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionDemo
 {
 	[RequireComponent(typeof(Rigidbody2D))]
-	[AddComponentMenu("PiRho Soft/Composition/Demo Character")]
+	[AddComponentMenu("PiRho Soft/Demo/Demo Character")]
 	public class DemoBehaviour : MonoBehaviour, IVariableStore
 	{
 		public float Speed = 5.0f;
@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionDemo
 				{
 					var interaction = _colliders[0].GetComponent<DemoInteraction>();
 					if (interaction != null)
-						CompositionManager.Instance.RunInstruction(interaction.Caller, null, this);
+						InstructionManager.Instance.RunInstruction(interaction.Caller, null, this);
 				}
 			}
 		}

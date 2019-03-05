@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "axis-input")]
-	[AddComponentMenu("Composition/Interface/Axis Input")]
+	[AddComponentMenu("PiRho Soft/Interface/Axis Input")]
 	public class AxisInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	{
 		[Tooltip("The name of the axis to set when this is pressed")]

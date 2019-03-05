@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(menuName = "Composition/Transitions/Dissolve", fileName = nameof(Dissolve))]
+	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Dissolve", fileName = nameof(Dissolve), order = 110)]
 	[HelpURL(Composition.DocumentationUrl + "dissolve")]
 	public class Dissolve : Cutoff
 	{

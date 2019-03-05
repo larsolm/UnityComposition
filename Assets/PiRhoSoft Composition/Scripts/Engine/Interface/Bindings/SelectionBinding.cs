@@ -3,7 +3,7 @@
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "selection-binding")]
-	[AddComponentMenu("Composition/Interface/Selection Binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Selection Binding")]
 	public class SelectionBinding : MonoBehaviour
 	{
 		[Tooltip("The Selection Control whose focused item to use for binding variables")]

@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Image))]
 	[HelpURL(Composition.DocumentationUrl + "image-binding")]
-	[AddComponentMenu("Composition/Interface/Image Binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Image Binding")]
 	public class ImageBinding : InterfaceBinding
 	{
 		public const string _invalidVariableError = "(CIBIV) Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite";

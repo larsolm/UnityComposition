@@ -3,7 +3,7 @@
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "focus-indicator")]
-	[AddComponentMenu("Composition/Interface/Focus Indicator")]
+	[AddComponentMenu("PiRho Soft/Interface/Focus Indicator")]
 	public class FocusIndicator : MonoBehaviour
 	{
 		void Awake()

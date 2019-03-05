@@ -4,7 +4,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "binding-control")]
-	[AddComponentMenu("Composition/Interface/Binding Control")]
+	[AddComponentMenu("PiRho Soft/Interface/Binding Control")]
 	public class BindingControl : InterfaceControl
 	{
 		private const string _invalidBindingError = "(CBCIB) Failed to update binding: the variable '{0}' is not an IVariableStore";

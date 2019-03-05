@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class CustomCommandList : SerializedList<CustomCommand> { }
 
-	[CreateAssetMenu(fileName = nameof(CommandSet), menuName = "Composition/Command Set", order = 100)]
+	[CreateAssetMenu(fileName = nameof(CommandSet), menuName = "PiRho Soft/Command Set", order = 118)]
 	[HelpURL(Composition.DocumentationUrl + "command-set")]
 	public class CommandSet : ScriptableObject
 	{
