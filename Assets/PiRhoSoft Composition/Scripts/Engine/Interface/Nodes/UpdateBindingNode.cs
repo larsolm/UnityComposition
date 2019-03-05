@@ -16,14 +16,27 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The binding group to update (updates all if empty)")]
 		public string Group;
 
+		[Tooltip("Wether to wait for any possible animations the bindings will perform")]
+		public bool WaitForCompletion = false;
+
 		public override Color NodeColor => Colors.Interface;
+
+		private BindingAnimationStatus _status = new BindingAnimationStatus();
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			var control = Control.GetControl<InterfaceControl>(this);
 
+			_status.Reset();
+
 			if (control)
-				control.UpdateBindings(variables, Group);
+				control.UpdateBindings(variables, Group, _status);
+
+			if (WaitForCompletion)
+			{
+				while (!_status.IsFinished())
+					yield return null;
+			}
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 

@@ -25,11 +25,6 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly string _pauseIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAGVJREFUOE+l0bERwCAMQ1EvxACswWhZ2LHuKKSLKByKV+gfrojMvGZjl41dnzDnHOXZxqkxGVCPVsltnRqTAe7ANSYD3IFrTAa4A9eYDHAHrjEZ4A5cYzKgHt1/8R82dtnYERHxAqpHVWhCcdFJAAAAAElFTkSuQmCC";
 		private static readonly string _stopIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAE9JREFUOE/t0bENACAIBMBfiAFYg9FcGKEUiBFtLa7gw9MAVX1Whl1l2JUCZiYzNih2lsHZkhjdkNhZBudLoRT9I9nRkfcX3yjDrjLsAIAJNpdTpphdxWYAAAAASUVORK5CYII=";
 
-		private static GenericMenu _viewMenu;
-		private static GenericMenu _nodeMenu;
-		private static GenericMenu _contextMenu;
-		private static SettingsMenu _settingsMenu;
-
 		private static readonly GUIContent _titleLabel = new GUIContent("Instruction Graph");
 		private static readonly StaticStyle _headerStyle = new StaticStyle(CreateHeaderStyle);
 		private static readonly StaticStyle _connectionStyle = new StaticStyle(CreateConnectionStyle);
@@ -85,6 +80,11 @@ namespace PiRhoSoft.CompositionEditor
 		private static Color _disabledBreakColor = new Color(1.0f, 0.6f, 0.6f, 1.0f);
 		private static Color _activeColor = new Color(0.0f, 0.9f, 0.0f, 1.0f);
 		private static Color _callstackColor = new Color(0.3f, 0.8f, 0.3f, 1.0f);
+
+		private GenericMenu _viewMenu;
+		private GenericMenu _nodeMenu;
+		private GenericMenu _contextMenu;
+		private SettingsMenu _settingsMenu;
 
 		private InstructionGraph _graph = null;
 		private StartNode _start = null;

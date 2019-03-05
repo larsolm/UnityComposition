@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var variables = SelectionControl.FocusedVariables;
 				if (variables != null)
-					InterfaceBinding.UpdateBindings(gameObject, variables, BindingGroup);
+					InterfaceBinding.UpdateBindings(gameObject, variables, BindingGroup, null);
 			}
 		}
 	}

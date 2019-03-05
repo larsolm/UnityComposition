@@ -13,14 +13,14 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The variable to set as the root for any sibling and child bindings")]
 		public VariableReference Binding = new VariableReference();
 
-		public override void UpdateBindings(IVariableStore variables, string group)
+		public override void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
 		{
 			Variables = variables;
 
 			var binding = Binding.GetValue(variables);
 
 			if (binding.TryGetStore(out IVariableStore store))
-				InterfaceBinding.UpdateBindings(gameObject, store, group);
+				InterfaceBinding.UpdateBindings(gameObject, store, group, status);
 			else if (binding.Type == VariableType.Empty)
 				Debug.LogWarningFormat(this, _missingBindingError, Binding);
 			else

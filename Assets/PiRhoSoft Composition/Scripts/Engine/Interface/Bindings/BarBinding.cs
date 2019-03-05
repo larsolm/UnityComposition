@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 using UnityEngine.UI;
 
 namespace PiRhoSoft.CompositionEngine
@@ -13,6 +14,10 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _missingAmountError = "(IBBMA) Failed to update bar binding: the amount variable '{0}' could not be found";
 		private const string _invalidTotalError = "(IBBIT) Failed to update bar binding: the total variable '{0}' is not an Integer or Number";
 		private const string _missingTotalError = "(IBBMT) Failed to update bar binding: the total variable '{0}' could not be found";
+
+		[Tooltip("The speed at which to animate the fill change (in % per second, 0 means immediate)")]
+		[Range(0.0f, 1.0f)]
+		public float Speed = 0.0f;
 
 		[Tooltip("The variable holding the amount (numerator) the image should be filled")]
 		public VariableReference AmountVariable = new VariableReference();
@@ -30,12 +35,22 @@ namespace PiRhoSoft.CompositionEngine
 			_image = GetComponent<Image>();
 		}
 
-		public override void UpdateBinding(IVariableStore variables)
+		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
+			status?.Increment();
+
 			var fill = GetFill(variables);
 
-			_image.color = FillColors.Evaluate(fill);
-			_image.fillAmount = fill;
+			if (Speed <= 0.0f)
+			{
+				SetFill(fill);
+				status.Decrement();
+			}
+			else
+			{
+				StopAllCoroutines();
+				StartCoroutine(AnimateFill(fill, status));
+			}
 		}
 
 		protected float GetFill(IVariableStore variables)
@@ -62,6 +77,29 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			return amount / total;
+		}
+
+		private IEnumerator AnimateFill(float target, BindingAnimationStatus status)
+		{
+			while (_image.fillAmount != target)
+			{
+				var speed = Speed * Time.deltaTime;
+				var fill = Mathf.MoveTowards(_image.fillAmount, target, speed);
+
+				SetFill(fill);
+
+				yield return null;
+			}
+
+			status?.Decrement();
+		}
+
+		private void SetFill(float amount)
+		{
+			var fill = Mathf.Clamp01(amount);
+
+			_image.color = FillColors.Evaluate(amount);
+			_image.fillAmount = amount;
 		}
 	}
 }

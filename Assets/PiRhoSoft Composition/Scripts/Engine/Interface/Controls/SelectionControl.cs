@@ -60,12 +60,12 @@ namespace PiRhoSoft.CompositionEngine
 		private bool _isSelectionRequired = false;
 		private bool _isClosing = false;
 
-		public override void UpdateBindings(IVariableStore variables, string group)
+		public override void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
 		{
-			base.UpdateBindings(variables, group);
+			base.UpdateBindings(variables, group, status);
 
 			foreach (var item in _items)
-				InterfaceBinding.UpdateBindings(item.Object, item.Variables, group);
+				InterfaceBinding.UpdateBindings(item.Object, item.Variables, group, status);
 		}
 
 		public IEnumerator MakeSelection(IVariableStore variables, IEnumerable<SelectionItem> items, bool isSelectionRequired)
@@ -77,7 +77,7 @@ namespace PiRhoSoft.CompositionEngine
 			_selectedItem = null;
 
 			CreateItems(variables, items);
-			UpdateBindings(variables, null);
+			UpdateBindings(variables, null, null);
 			DetermineLayout();
 
 			if (IsLocationFocusable(_columnIndex, _rowIndex))

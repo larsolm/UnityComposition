@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 			_image = GetComponent<Image>();
 		}
 
-		public override void UpdateBinding(IVariableStore variables)
+		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			var value = Variable.GetValue(variables);
 

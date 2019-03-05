@@ -19,7 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 			_text = GetComponent<TextMeshProUGUI>();
 		}
 
-		public override void UpdateBinding(IVariableStore variables)
+		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			_text.text = Variable.GetValue(variables).ToString();
 		}

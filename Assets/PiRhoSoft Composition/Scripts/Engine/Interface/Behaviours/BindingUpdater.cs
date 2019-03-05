@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 		void Update()
 		{
 			if (_control.Variables != null)
-				_control.UpdateBindings(_control.Variables, Group);
+				_control.UpdateBindings(_control.Variables, Group, null);
 		}
 	}
 }

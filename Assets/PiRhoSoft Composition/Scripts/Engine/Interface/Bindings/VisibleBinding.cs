@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The expression to run to determine if this object should be visible")]
 		public Expression Condition = new Expression();
 
-		public override void UpdateBinding(IVariableStore variables)
+		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			var active = false;
 
