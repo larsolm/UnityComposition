@@ -30,9 +30,9 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly StaticStyle _connectionStyle = new StaticStyle(CreateConnectionStyle);
 		private static readonly StaticStyle _commentStyle = new StaticStyle(CreateCommentStyle);
 		private static readonly StaticStyle _watchStyle = new StaticStyle(CreateWatchStyle);
-		private static readonly IconButton _outputButton = new IconButton("sv_icon_dot0_sml", "Click and drag to make a connection from this output");
-		private static readonly IconButton _inputButton = new IconButton("sv_icon_dot0_sml", "Drag an output to here to make a connection");
-		private static readonly IconButton _removeButton = new IconButton("d_Toolbar Minus", "Remove this node");
+		private static readonly IconButton _outputButton = new IconButton("sv_icon_dot0_sml");//, "Click and drag to make a connection from this output");
+		private static readonly IconButton _inputButton = new IconButton("sv_icon_dot0_sml");//, "Drag an output to here to make a connection");
+		private static readonly IconButton _removeButton = new IconButton("d_Toolbar Minus");//, "Remove this node");
 		private static readonly IconButton _playButton = new IconButton("Animation.Play", "Resume graph execution");
 		private static readonly IconButton _playDisabledButton = new IconButton("Animation.Play");
 		private static readonly Base64Button _pauseButton = new Base64Button(_pauseIcon, "Pause graph execution before running the next node");
@@ -123,8 +123,8 @@ namespace PiRhoSoft.CompositionEditor
 		private VariableStoreControl _inputStore;
 		private VariableStoreControl _outputStore;
 		private VariableStoreControl _localStore;
+		private VariableStoreControl _globalStore;
 		private VariableStoreControl _selectedStore;
-		private Dictionary<string, VariableStoreControl> _contextStores = new Dictionary<string, VariableStoreControl>();
 
 		#region Window Access
 
@@ -258,6 +258,12 @@ namespace PiRhoSoft.CompositionEditor
 			SetupNodes();
 			UpdateSelection();
 			Repaint();
+		}
+
+		void OnInspectorUpdate()
+		{
+			if (IsWatchOpen)
+				Repaint();
 		}
 
 		#endregion
@@ -976,9 +982,8 @@ namespace PiRhoSoft.CompositionEditor
 					var outputIconRect = RectHelper.Adjust(outputRect, _outputButton.Content.image.width, _outputButton.Content.image.height, RectHorizontalAlignment.Center, RectVerticalAlignment.Middle);
 					var outputLabelRect = RectHelper.TakeHeight(ref rect, InstructionGraphNode.NodeData.LineHeight);
 
-					// tooltip positioning is pretty messed up with zoom but nothing can really be done about that short
-					// of implementing a custom tooltip system
-					var label = new GUIContent(ObjectNames.NicifyVariableName(connection.Name), Label.GetTooltip(connection.From.GetType(), connection.Field));
+					// tooltip positioning is pretty messed up with zoom so not showing them for now
+					var label = new GUIContent(ObjectNames.NicifyVariableName(connection.Name));//, Label.GetTooltip(connection.From.GetType(), connection.Field));
 
 					EditorGUI.LabelField(outputLabelRect, label, _connectionStyle.Style);
 					EditorGUI.LabelField(outputIconRect, _outputButton.Content, GUIStyle.none);
@@ -1062,11 +1067,20 @@ namespace PiRhoSoft.CompositionEditor
 			var start = outputBounds.center;
 			var end = inputBounds.center;
 
+			var startColor = _knobColor;
 			var lineColor = _knobColor;
 			var endColor = _knobColor;
 
 			if (Application.isPlaying && _graph.IsInCallStack(to.Node, from.Name))
+			{
+				startColor = _callstackColor;
 				lineColor = _callstackColor;
+				endColor = _callstackColor; // breakpoint color takes precedence
+			}
+			else if (_selectedNodes.Contains(GetNodeData(from.From)))
+			{
+				lineColor = _selectedColor; // callstack color takes precedence
+			}
 
 			if (to.Node.IsBreakpoint)
 				endColor = InstructionGraph.IsDebugBreakEnabled ? _breakColor : _disabledBreakColor;
@@ -1083,7 +1097,7 @@ namespace PiRhoSoft.CompositionEditor
 				HandleHelper.DrawBezier(start, end, lineColor);
 			}
 
-			HandleHelper.DrawCircle(start, _knobRadius, lineColor);
+			HandleHelper.DrawCircle(start, _knobRadius, startColor);
 			HandleHelper.DrawCircle(end, _knobRadius, endColor);
 		}
 
@@ -1113,11 +1127,9 @@ namespace PiRhoSoft.CompositionEditor
 					if (_selectedStore != null) _selectedStore.Draw();
 					if (_thisStore != null) _thisStore.Draw();
 					if (_localStore != null) _localStore.Draw();
+					if (_globalStore != null) _globalStore.Draw();
 					if (_inputStore != null) _inputStore.Draw();
 					if (_outputStore != null) _outputStore.Draw();
-
-					foreach (var contextStore in _contextStores)
-						if (contextStore.Value != null) contextStore.Value.Draw();
 
 					_watchScrollPosition = scroller.scrollPosition;
 
@@ -1128,29 +1140,19 @@ namespace PiRhoSoft.CompositionEditor
 			UpdateWatchSelected(_selectedStore);
 			UpdateWatchSelected(_thisStore);
 			UpdateWatchSelected(_localStore);
+			UpdateWatchSelected(_globalStore);
 			UpdateWatchSelected(_inputStore);
 			UpdateWatchSelected(_outputStore);
-
-			foreach (var contextStore in _contextStores)
-				UpdateWatchSelected(contextStore.Value);
 		}
 
 		private void SetupWatch()
 		{
 			_watching = _graph;
 			_thisStore = CreateStoreControl(InstructionStore.ThisStoreName, _graph.Store.This as IVariableStore, _thisStore);
-			_inputStore = CreateStoreControl(InstructionStore.InputStoreName, _graph.Store.Inputs, _inputStore);
-			_outputStore = CreateStoreControl(InstructionStore.OutputStoreName, _graph.Store.Outputs, _outputStore);
-			_localStore = CreateStoreControl(InstructionStore.LocalStoreName, _graph.Store.Locals, _localStore);
-
-			if (_graph.Store.Context != null)
-			{
-				foreach (var context in _graph.Store.Context.Stores)
-				{
-					var control = _contextStores[context.Key];
-					_contextStores[context.Key] = CreateStoreControl(context.Key, context.Value, control);
-				}
-			}
+			_inputStore = CreateStoreControl(InstructionStore.InputStoreName, _graph.Store.Input, _inputStore);
+			_outputStore = CreateStoreControl(InstructionStore.OutputStoreName, _graph.Store.Output, _outputStore);
+			_localStore = CreateStoreControl(InstructionStore.LocalStoreName, _graph.Store.Local, _localStore);
+			_globalStore = CreateStoreControl(InstructionStore.GlobalStoreName, _graph.Store.Global, _globalStore);
 		}
 
 		private void TeardownWatch()
@@ -1160,8 +1162,8 @@ namespace PiRhoSoft.CompositionEditor
 			_inputStore = null;
 			_outputStore = null;
 			_localStore = null;
+			_globalStore = null;
 			_selectedStore = null;
-			_contextStores.Clear();
 		}
 
 		private void UpdateWatchThis()

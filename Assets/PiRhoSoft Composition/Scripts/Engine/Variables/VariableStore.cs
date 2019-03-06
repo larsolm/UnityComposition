@@ -23,6 +23,11 @@ namespace PiRhoSoft.CompositionEngine
 			_variables.Add(Variable.Create(name, value));
 		}
 
+		public bool RemoveVariable(string name)
+		{
+			return _map.Remove(name);
+		}
+
 		public virtual VariableValue GetVariable(string name)
 		{
 			return _map.TryGetValue(name, out int index) ? _variables[index].Value : VariableValue.Empty;

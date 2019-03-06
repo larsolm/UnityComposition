@@ -26,6 +26,11 @@ namespace PiRhoSoft.CompositionEngine
 			Switch.GetInputs(inputs, InstructionStore.InputStoreName);
 		}
 
+		public override void GetOutputs(List<VariableDefinition> outputs)
+		{
+			Switch.GetOutputs(outputs, InstructionStore.OutputStoreName);
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			var name = Switch.Execute(this, variables, VariableType.String).String;

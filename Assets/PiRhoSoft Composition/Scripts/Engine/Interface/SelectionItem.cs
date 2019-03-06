@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 		[Tooltip("The variable representing the store to use for bindings")]
-		public VariableReference Item = new VariableReference("this");
+		public VariableReference Variables = new VariableReference("this");
 
 		[Tooltip("The location to retrieve the object from")]
 		public ObjectSource Source;
@@ -39,23 +39,23 @@ namespace PiRhoSoft.CompositionEngine
 
 		public string Id => Source == ObjectSource.Scene ? Name : Label;
 
-		internal IVariableStore Variables { get; set; }
+		internal IVariableStore Store { get; set; }
 
 		public VariableValue GetVariable(string name)
 		{
 			if (name == nameof(Label)) return VariableValue.Create(Label);
-			else return Variables.GetVariable(name);
+			else return Store.GetVariable(name);
 		}
 
 		public SetVariableResult SetVariable(string name, VariableValue value)
 		{
 			if (name == nameof(Label)) return SetVariableResult.ReadOnly;
-			else return Variables.SetVariable(name, value);
+			else return Store.SetVariable(name, value);
 		}
 
 		public IEnumerable<string> GetVariableNames()
 		{
-			return Variables.GetVariableNames().Concat(Enumerable.Repeat(nameof(Label), 1));
+			return Store.GetVariableNames().Concat(new List<string> { nameof(Label) });
 		}
 	}
 }

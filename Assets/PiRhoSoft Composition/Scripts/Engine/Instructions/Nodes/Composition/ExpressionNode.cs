@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("General/Expression")]
+	[CreateInstructionGraphNodeMenu("Composition/Expression", 0)]
 	[HelpURL(Composition.DocumentationUrl + "expression-node")]
 	public class ExpressionNode : InstructionGraphNode
 	{

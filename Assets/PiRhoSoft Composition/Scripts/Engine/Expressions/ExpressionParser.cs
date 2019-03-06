@@ -34,25 +34,21 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static void AddCommand(string name, Command command)
 		{
-			var n = name.ToLowerInvariant();
-
-			if (!_commands.ContainsKey(n))
-				_commands.Add(n, command);
+			if (!_commands.ContainsKey(name))
+				_commands.Add(name, command);
 			else
 				Debug.LogErrorFormat(_duplicateCommandError, name);
 		}
 
 		public static void RemoveCommand(string name)
 		{
-			var n = name.ToLowerInvariant();
-
-			if (!_commands.Remove(n))
+			if (!_commands.Remove(name))
 				Debug.LogErrorFormat(_missingCommandError, name);
 		}
 
 		public static Command GetCommand(string name)
 		{
-			return _commands.TryGetValue(name.ToLowerInvariant(), out Command command) ? command : null;
+			return _commands.TryGetValue(name, out Command command) ? command : null;
 		}
 
 		public static void AddPrefixOperator<OperatorType>(string symbol) where OperatorType : PrefixOperation, new()

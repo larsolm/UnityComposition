@@ -164,12 +164,12 @@ namespace PiRhoSoft.CompositionEngine
 							else
 							{
 								AddItem(item, null, store, store, index++);
-								Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Item);
+								Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Variables);
 							}
 						}
 						else
 						{
-							item.Variables = store;
+							item.Store = store;
 							AddItem(item, null, item, store, index++);
 						}
 					}
@@ -188,22 +188,22 @@ namespace PiRhoSoft.CompositionEngine
 
 		private IVariableStore GetStore(IVariableStore variables, SelectionItem item)
 		{
-			if (!item.Item.IsAssigned)
+			if (!item.Variables.IsAssigned)
 			{
 				return variables;
 			}
 			else
 			{
-				var value = item.Item.GetValue(variables);
+				var value = item.Variables.GetValue(variables);
 
 				if (value.Type == VariableType.Empty)
 				{
-					Debug.LogErrorFormat(this, _missingItemError, item.Id, item.Item);
+					Debug.LogErrorFormat(this, _missingItemError, item.Id, item.Variables);
 					return null;
 				}
 				else if (!value.TryGetStore(out var store))
 				{
-					Debug.LogErrorFormat(this, _invalidItemError, item.Id, item.Item);
+					Debug.LogErrorFormat(this, _invalidItemError, item.Id, item.Variables);
 					return null;
 				}
 				else

@@ -68,6 +68,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public virtual void GetInputs(List<VariableDefinition> inputs) { }
 		public virtual void GetOutputs(List<VariableDefinition> outputs) { }
+
 		protected abstract IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration);
 
 		public IEnumerator Run(InstructionGraph graph, InstructionStore variables, int executionIndex)

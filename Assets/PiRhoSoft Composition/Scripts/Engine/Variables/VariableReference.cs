@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		private static string[] _emptyLookups = new string[0];
 		private static char[] _splitter = new char[] { '.' };
 		private static string _joiner = _splitter[0].ToString();
-		private static string _gameObjectName = "gameobject";
+		private static string _gameObjectName = "GameObject";
 
 		[SerializeField] private string[] _variable = _emptyVariable;
 		[SerializeField] private string[] _lookups = _emptyLookups;
@@ -104,7 +104,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (!string.IsNullOrEmpty(lookup) && value.Type == VariableType.Object)
 			{
-				if (lookup.ToLowerInvariant() == _gameObjectName)
+				if (lookup == _gameObjectName)
 				{
 					var obj = ComponentHelper.GetAsGameObject(value.Object);
 					value = obj != null ? VariableValue.Create(obj) : VariableValue.Empty;

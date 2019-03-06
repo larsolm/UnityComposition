@@ -1,9 +1,10 @@
 ﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("General/Instruction")]
+	[CreateInstructionGraphNodeMenu("Composition/Instruction", 10)]
 	[HelpURL(Composition.DocumentationUrl + "instruction-node")]
 	public class InstructionNode : InstructionGraphNode
 	{
@@ -14,9 +15,27 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("Whether to wait for the instruction to finish before moving to Next")]
-		public bool WaitForCompletion = false;
+		public bool WaitForCompletion = true;
 
 		public override Color NodeColor => Colors.ExecutionLight;
+
+		public override void GetInputs(List<VariableDefinition> inputs)
+		{
+			foreach (var input in Instruction.Inputs)
+			{
+				if (InstructionStore.IsInput(input))
+					inputs.Add(input.Definition);
+			}
+		}
+
+		public override void GetOutputs(List<VariableDefinition> outputs)
+		{
+			foreach (var output in Instruction.Outputs)
+			{
+				if (InstructionStore.IsOutput(output))
+					outputs.Add(output.Definition);
+			}
+		}
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

@@ -24,12 +24,22 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override void GetInputs(List<VariableDefinition> inputs, string source)
 		{
+			GetVariables(inputs, source);
+		}
+
+		public override void GetOutputs(List<VariableDefinition> outputs, string source)
+		{
+			GetVariables(outputs, source);
+		}
+
+		private void GetVariables(List<VariableDefinition> inputs, string source)
+		{
 			if (source == null)
 			{
 				if (Reference.IsAssigned && string.IsNullOrEmpty(Reference.StoreName))
 					inputs.Add(VariableDefinition.Create(Reference.RootName, VariableType.Empty));
 			}
-			else if (Reference.IsAssigned && Reference.StoreName.ToLowerInvariant() == source.ToLowerInvariant())
+			else if (Reference.IsAssigned && Reference.StoreName == source)
 			{
 				inputs.Add(VariableDefinition.Create(Reference.RootName, VariableType.Empty));
 			}

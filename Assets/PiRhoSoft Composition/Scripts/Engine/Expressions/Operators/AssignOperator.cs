@@ -37,14 +37,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override void GetInputs(List<VariableDefinition> inputs, string source)
 		{
+			Left.GetInputs(inputs, source);
 			Right.GetInputs(inputs, source);
 		}
 
 		public override void GetOutputs(List<VariableDefinition> outputs, string source)
 		{
-			// This is not a typo. Left is required to be an IdentifierExpression, which uses GetInputs to specify the
-			// variable it references.
-			Left.GetInputs(outputs, source);
+			Left.GetOutputs(outputs, source);
 		}
 	}
 }

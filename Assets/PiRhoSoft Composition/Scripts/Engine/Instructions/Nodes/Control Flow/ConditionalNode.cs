@@ -24,6 +24,11 @@ namespace PiRhoSoft.CompositionEngine
 			Condition.GetInputs(inputs, InstructionStore.InputStoreName);
 		}
 
+		public override void GetOutputs(List<VariableDefinition> outputs)
+		{
+			Condition.GetOutputs(outputs, InstructionStore.OutputStoreName);
+		}
+
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			var condition = Condition.Execute(this, variables, VariableType.Boolean).Boolean;

@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 			foreach (var node in Nodes)
 			{
 				if (InstructionStore.IsInput(node.This))
-					inputs.Add(VariableDefinition.Create(node.This.RootName, VariableType.Store));
+					inputs.Add(VariableDefinition.Create(node.This.RootName, VariableType.Empty));
 
 				node.GetInputs(inputs);
 			}

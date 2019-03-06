@@ -44,7 +44,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (Speed <= 0.0f)
 			{
 				SetFill(fill);
-				status.Decrement();
+				status?.Decrement();
 			}
 			else
 			{

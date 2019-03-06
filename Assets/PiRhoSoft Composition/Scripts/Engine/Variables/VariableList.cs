@@ -21,8 +21,14 @@ namespace PiRhoSoft.CompositionEngine
 		SetVariableResult SetVariableValue(int index, VariableValue value);
 	}
 
+	public interface IVariableReset
+	{
+		void ResetAvailability(string availability);
+		void ResetVariables(IList<string> variables);
+	}
+
 	[Serializable]
-	public class VariableList : IVariableList, ISerializationCallbackReceiver
+	public class VariableList : IVariableList, IVariableReset, ISerializationCallbackReceiver
 	{
 		[SerializeField] private List<SerializedVariable> _data;
 		[SerializeField] private int _version = 0;
@@ -119,29 +125,6 @@ namespace PiRhoSoft.CompositionEngine
 				_variables[index] = _schema[index].Generate(_owner);
 		}
 
-		public void Reset(string availability)
-		{
-			if (_schema != null)
-			{
-				for (var i = 0; i < _schema.Count; i++)
-				{
-					if (_schema[i].Availability == availability)
-						Reset(i);
-				}
-			}
-		}
-
-		public void Reset(IList<string> variables)
-		{
-			if (_schema != null)
-			{
-				for (var i = 0; i < _schema.Count; i++)
-				{
-					if (variables.Contains(_schema[i].Name))
-						Reset(i);
-				}
-			}
-		}
 
 		public void Clear()
 		{
@@ -198,6 +181,34 @@ namespace PiRhoSoft.CompositionEngine
 				return SetValue(index, value) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
 			else
 				return SetVariableResult.NotFound;
+		}
+
+		#endregion
+
+		#region IVariableReset Implementation
+
+		public void ResetAvailability(string availability)
+		{
+			if (_schema != null)
+			{
+				for (var i = 0; i < _schema.Count; i++)
+				{
+					if (_schema[i].Availability == availability)
+						Reset(i);
+				}
+			}
+		}
+
+		public void ResetVariables(IList<string> variables)
+		{
+			if (_schema != null)
+			{
+				for (var i = 0; i < _schema.Count; i++)
+				{
+					if (variables.Contains(_schema[i].Name))
+						Reset(i);
+				}
+			}
 		}
 
 		#endregion

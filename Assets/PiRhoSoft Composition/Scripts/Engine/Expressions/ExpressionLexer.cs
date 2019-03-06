@@ -148,9 +148,7 @@ namespace PiRhoSoft.CompositionEngine
 				type = ExpressionTokenType.Command;
 			}
 
-			var keyword = text.ToLowerInvariant();
-
-			switch (keyword)
+			switch (text)
 			{
 				case "true": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 1, Number = 1.0f }, whitespace); break;
 				case "false": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
