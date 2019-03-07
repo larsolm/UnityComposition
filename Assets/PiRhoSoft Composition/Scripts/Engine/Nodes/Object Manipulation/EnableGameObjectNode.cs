@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "enable-game-object-node")]
 	public class EnableGameObjectNode : InstructionGraphNode
 	{
-		private const string _missingObjectWarning = "(CEGONMO) Unable to enable object for {0}: the given variables must be a GameObject";
+		private const string _missingObjectWarning = "(COMEGONMO) Unable to enable object for {0}: the given variables must be a GameObject";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

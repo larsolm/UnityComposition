@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Animation/Set Animation Parameter")]
+	[CreateInstructionGraphNodeMenu("Animation/Set Animation Parameter", 2)]
 	[HelpURL(Composition.DocumentationUrl + "set-animation-parameter")]
 	public class SetAnimationParameter : InstructionGraphNode
 	{

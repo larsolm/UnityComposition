@@ -152,4 +152,7 @@ namespace PiRhoSoft.CompositionEngine
 			return value != null;
 		}
 	}
+
+	[Serializable]
+	public class GameObjectVariableSource : ObjectVariableSource<GameObject> { }
 }
