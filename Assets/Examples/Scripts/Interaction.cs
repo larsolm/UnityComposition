@@ -1,7 +1,7 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using UnityEngine;
 
-namespace PiRhoSoft.CompositionDemo
+namespace PiRhoSoft.CompositionExample
 {
 	[AddComponentMenu("PiRho Soft/Examples/Interaction")]
 	public class Interaction : MonoBehaviour

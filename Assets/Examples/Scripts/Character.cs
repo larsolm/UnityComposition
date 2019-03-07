@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PiRhoSoft.CompositionDemo
+namespace PiRhoSoft.CompositionExample
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	[AddComponentMenu("PiRho Soft/Examples/Character")]

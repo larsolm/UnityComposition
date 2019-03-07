@@ -3,19 +3,14 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 
-namespace PiRhoSoft.UtilityEngine
+namespace PiRhoSoft.CompositionEngine
 {
-	interface IAnimationNotifier
-	{
-		bool IsDone { get; }
-	}
-
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Animator))]
 	[AddComponentMenu("PiRho Soft/Animation/Animation Player")]
-	public class AnimationPlayer : MonoBehaviour, IAnimationNotifier
+	public class AnimationPlayer : MonoBehaviour, ICompletionNotifier
 	{
-		private const string _infiniteLoopingWarning = "(UAAPIL) Unable to wait on animation for {0}: the animation '{1}' was set to loop and would have never finished";
+		private const string _infiniteLoopingWarning = "(UAAPIL) Unable to wait on animation for {0}: the clip '{1}' was set to loop and would have never finished";
 
 		private Animator _animator;
 		private PlayableGraph _graph;
@@ -24,7 +19,7 @@ namespace PiRhoSoft.UtilityEngine
 		private double _animationSpeed = 1.0;
 		private bool _started = false;
 
-		public bool IsDone
+		public bool IsComplete
 		{
 			get
 			{
@@ -78,7 +73,7 @@ namespace PiRhoSoft.UtilityEngine
 
 			if (!animation.isLooping)
 			{
-				while (!IsDone)
+				while (!IsComplete)
 					yield return null;
 			}
 			else
