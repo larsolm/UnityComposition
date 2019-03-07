@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -17,13 +18,27 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The group to which this binding belongs (empty means it will update with all groups)")]
 		public string BindingGroup = "";
 
+		private static List<InterfaceBinding> _bindings = new List<InterfaceBinding>();
+
 		public abstract void UpdateBinding(IVariableStore variables, BindingAnimationStatus status);
+
+		public static void UpdateSelfBindings(GameObject obj, IVariableStore variables, string group, BindingAnimationStatus status)
+		{
+			_bindings.Clear();
+
+			obj.GetComponents(_bindings);
+
+			foreach (var binding in _bindings)
+				binding.UpdateBinding(variables, group, status);
+		}
 
 		public static void UpdateBindings(GameObject obj, IVariableStore variables, string group, BindingAnimationStatus status)
 		{
-			var bindings = obj.GetComponentsInChildren<InterfaceBinding>(true); // this includes components directly on obj
+			_bindings.Clear();
 
-			foreach (var binding in bindings)
+			obj.GetComponentsInChildren(true, _bindings); // this includes components directly on obj
+
+			foreach (var binding in _bindings)
 				binding.UpdateBinding(variables, group, status);
 		}
 

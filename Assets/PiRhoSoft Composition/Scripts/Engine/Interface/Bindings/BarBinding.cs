@@ -48,12 +48,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			else
 			{
-				StopAllCoroutines();
 				StartCoroutine(AnimateFill(fill, status));
 			}
 		}
 
-		protected float GetFill(IVariableStore variables)
+		private float GetFill(IVariableStore variables)
 		{
 			var amountValue = AmountVariable.GetValue(variables);
 			var totalValue = TotalVariable.GetValue(variables);
@@ -79,6 +78,14 @@ namespace PiRhoSoft.CompositionEngine
 			return amount / total;
 		}
 
+		private void SetFill(float amount)
+		{
+			var fill = Mathf.Clamp01(amount);
+
+			_image.color = FillColors.Evaluate(amount);
+			_image.fillAmount = amount;
+		}
+
 		private IEnumerator AnimateFill(float target, BindingAnimationStatus status)
 		{
 			while (_image.fillAmount != target)
@@ -92,14 +99,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			status?.Decrement();
-		}
-
-		private void SetFill(float amount)
-		{
-			var fill = Mathf.Clamp01(amount);
-
-			_image.color = FillColors.Evaluate(amount);
-			_image.fillAmount = amount;
 		}
 	}
 }

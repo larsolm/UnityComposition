@@ -61,7 +61,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
 		{
-			base.UpdateBindings(variables, group, status);
+			Variables = variables;
+
+			InterfaceBinding.UpdateSelfBindings(gameObject, variables, group, status);
+
+			foreach (var obj in DependentObjects)
+				InterfaceBinding.UpdateBindings(obj, variables, group, status);
 
 			foreach (var item in _items)
 				InterfaceBinding.UpdateBindings(item.Object, item.Variables, group, status);

@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The name of the interface to activate")]
-		public string InterfaceName;
+		public string InterfaceName = "Interface";
 
 		public override Color NodeColor => Colors.InterfaceDark;
 
