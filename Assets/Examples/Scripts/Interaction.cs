@@ -4,8 +4,8 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionDemo
 {
 	[RequireComponent(typeof(Rigidbody2D))]
-	[AddComponentMenu("PiRho Soft/Demo/Demo Interaction")]
-	public class DemoInteraction : MonoBehaviour
+	[AddComponentMenu("PiRho Soft/Examples/Interaction")]
+	public class Interaction : MonoBehaviour
 	{
 		public InstructionCaller Caller = new InstructionCaller();
 	}

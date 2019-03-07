@@ -43,7 +43,7 @@ namespace PiRhoSoft.CompositionEngine
 		public virtual void End() { }
 
 
-		public virtual void Render(TransitionRenderer renderer, RenderTexture source, RenderTexture destination)
+		public virtual void Render(RenderTexture source, RenderTexture destination)
 		{
 			Update();
 

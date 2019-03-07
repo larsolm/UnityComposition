@@ -5,16 +5,47 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
+	[DisallowMultipleComponent]
+	[RequireComponent(typeof(Camera))]
 	[HelpURL(Composition.DocumentationUrl + "transition-manager")]
 	public class TransitionManager : GlobalBehaviour<TransitionManager>
 	{
 		private const string _invalidAddWarning = "(CTMIA) this TransitionRenderer has already been added";
 		private const string _invalidRemoveWarning = "(CTMIR) this TransitionRenderer has not been added";
 
+		private RenderTexture _target;
 		private List<TransitionRenderer> _renderers = new List<TransitionRenderer>();
 
 		public Transition CurrentTransition { get; private set; }
-		public TransitionRenderer CurrentRenderer => _renderers.Count > 0 ? _renderers[_renderers.Count - 1] : null;
+
+		void Awake()
+		{
+			CreateCamera();
+			CreateTarget();
+		}
+
+		void OnDestroy()
+		{
+			DestroyTarget();
+		}
+
+		private void CreateCamera()
+		{
+			var camera = GetComponent<Camera>();
+			camera.clearFlags = CameraClearFlags.Nothing;
+			camera.cullingMask = 0;
+		}
+
+		private void CreateTarget()
+		{
+			_target = new RenderTexture(Screen.width, Screen.height, 32, RenderTextureFormat.ARGB32);
+		}
+
+		private void DestroyTarget()
+		{
+			_target.Release();
+			_target = null;
+		}
 
 		public void AddRenderer(TransitionRenderer renderer)
 		{
@@ -42,6 +73,15 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (transition)
 			{
+				if (_target.width != Screen.width || _target.height != Screen.height)
+				{
+					DestroyTarget();
+					CreateTarget();
+				}
+
+				foreach (var renderer in _renderers)
+					renderer.SetTarget(_target);
+
 				CurrentTransition = transition;
 				CurrentTransition.Begin(phase);
 
@@ -57,9 +97,18 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (CurrentTransition)
 			{
+				foreach (var renderer in _renderers)
+					renderer.SetTarget(null);
+
 				CurrentTransition.End();
 				CurrentTransition = null;
 			}
+		}
+
+		void OnPostRender()
+		{
+			if (CurrentTransition)
+				CurrentTransition.Render(_target, null);
 		}
 	}
 }

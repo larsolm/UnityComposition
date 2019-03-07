@@ -8,8 +8,11 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Transition Renderer")]
 	public class TransitionRenderer : MonoBehaviour
 	{
+		private Camera _camera;
+
 		void OnEnable()
 		{
+			_camera = GetComponent<Camera>();
 			TransitionManager.Instance.AddRenderer(this);
 		}
 
@@ -19,14 +22,9 @@ namespace PiRhoSoft.CompositionEngine
 				TransitionManager.Instance.RemoveRenderer(this);
 		}
 
-		void OnRenderImage(RenderTexture source, RenderTexture destination)
+		public virtual void SetTarget(RenderTexture target)
 		{
-			// all loaded and enabled renderers will get called, but the transition should only be drawn once
-
-			if (TransitionManager.Instance.CurrentTransition != null && TransitionManager.Instance.CurrentRenderer == this)
-				TransitionManager.Instance.CurrentTransition.Render(this, source, destination);
-			else
-				Graphics.Blit(source, destination);
+			_camera.targetTexture = target;
 		}
 	}
 }

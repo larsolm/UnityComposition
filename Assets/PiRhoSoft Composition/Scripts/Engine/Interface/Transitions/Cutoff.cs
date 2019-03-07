@@ -75,7 +75,7 @@ namespace PiRhoSoft.CompositionEngine
 			SetFade(progress);
 		}
 
-		public override sealed void Render(TransitionRenderer renderer, RenderTexture source, RenderTexture destination)
+		public override sealed void Render(RenderTexture source, RenderTexture destination)
 		{
 			if (Material != null)
 			{

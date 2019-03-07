@@ -8,7 +8,7 @@ namespace PiRhoSoft.UtilityEngine
 
 		public static T Instance { get; private set; }
 
-		protected virtual void Awake()
+		public SingletonBehaviour()
 		{
 			if (Instance == null)
 			{
@@ -19,6 +19,10 @@ namespace PiRhoSoft.UtilityEngine
 				Debug.LogWarningFormat(_secondInstanceWarning, GetType().Name);
 				Destroy(this);
 			}
+		}
+
+		protected virtual void Awake()
+		{
 		}
 
 		protected virtual void OnDestroy()
