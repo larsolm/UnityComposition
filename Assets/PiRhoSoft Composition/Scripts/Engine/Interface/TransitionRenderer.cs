@@ -10,13 +10,13 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private Camera _camera;
 
-		void OnEnable()
+		protected virtual void OnEnable()
 		{
 			_camera = GetComponent<Camera>();
 			TransitionManager.Instance.AddRenderer(this);
 		}
 
-		void OnDisable()
+		protected virtual void OnDisable()
 		{
 			if (TransitionManager.Exists)
 				TransitionManager.Instance.RemoveRenderer(this);
