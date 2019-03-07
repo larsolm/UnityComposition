@@ -34,6 +34,7 @@ namespace PiRhoSoft.CompositionEngine
 			var camera = GetComponent<Camera>();
 			camera.clearFlags = CameraClearFlags.Nothing;
 			camera.cullingMask = 0;
+			camera.depth = 1000;
 		}
 
 		private void CreateTarget()

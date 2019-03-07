@@ -11,18 +11,16 @@ namespace PiRhoSoft.UtilityEngine
 		public SingletonBehaviour()
 		{
 			if (Instance == null)
-			{
 				Instance = this as T;
-			}
-			else
-			{
-				Debug.LogWarningFormat(_secondInstanceWarning, GetType().Name);
-				Destroy(this);
-			}
 		}
 
 		protected virtual void Awake()
 		{
+			if (Instance != this)
+			{
+				Debug.LogWarningFormat(_secondInstanceWarning, GetType().Name);
+				Destroy(this);
+			}
 		}
 
 		protected virtual void OnDestroy()
