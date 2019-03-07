@@ -201,7 +201,8 @@
             "_items": [
                 "Variables",
                 "Expressions",
-                "Instructions"
+                "Instructions",
+                "Nodes"
             ]
         },
         "Templates": {

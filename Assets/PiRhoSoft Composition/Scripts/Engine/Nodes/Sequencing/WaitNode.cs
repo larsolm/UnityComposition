@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Control Flow/Wait", 100)]
+	[CreateInstructionGraphNodeMenu("Sequencing/Wait", 200)]
 	[HelpURL(Composition.DocumentationUrl + "wait-node")]
 	public class WaitNode : InstructionGraphNode
 	{

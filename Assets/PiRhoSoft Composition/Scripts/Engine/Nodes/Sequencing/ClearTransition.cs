@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Interface/Clear Transition", 201)]
+	[CreateInstructionGraphNodeMenu("Sequencing/Clear Transition", 1)]
 	[HelpURL(Composition.DocumentationUrl + "clear-transition")]
 	public class ClearTransition : InstructionGraphNode
 	{

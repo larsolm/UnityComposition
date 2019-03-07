@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Interface/Play Transition", 200)]
+	[CreateInstructionGraphNodeMenu("Sequencing/Play Transition", 0)]
 	[HelpURL(Composition.DocumentationUrl + "play-transition")]
 	public class PlayTransition : InstructionGraphNode
 	{
