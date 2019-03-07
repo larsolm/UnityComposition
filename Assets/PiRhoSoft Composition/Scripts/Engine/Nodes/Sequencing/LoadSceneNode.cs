@@ -27,9 +27,9 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (WaitForCompletion)
-				InstructionManager.Instance.StartCoroutine(LoadScene());
-			else
 				yield return LoadScene();
+			else
+				InstructionManager.Instance.StartCoroutine(LoadScene());
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}

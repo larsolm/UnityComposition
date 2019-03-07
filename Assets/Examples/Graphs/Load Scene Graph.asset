@@ -17,10 +17,37 @@ MonoBehaviour:
     - {fileID: 114262339221940102}
     - {fileID: 114084016071233676}
     - {fileID: 114632312655307498}
+    - {fileID: 114114667142854504}
+    - {fileID: 114835874309033530}
+    - {fileID: 114011671160039150}
+    - {fileID: 114529778478796030}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114262339221940102}
-  Process: {fileID: 114632312655307498}
+  Process: {fileID: 114835874309033530}
   Exit: {fileID: 114084016071233676}
+--- !u!114 &114011671160039150
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Decrement Countdown
+  m_EditorClassIdentifier: 
+  Name: Decrement Countdown
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 755.2, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114529778478796030}
+  Expression:
+    _statement: input.Countdown -= 1
 --- !u!114 &114084016071233676
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -46,6 +73,29 @@ MonoBehaviour:
     Path: Assets/Examples/Scenes/TestLoad.unity
   WaitForCompletion: 1
   CleanupAssets: 1
+--- !u!114 &114114667142854504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
+  m_Name: Loop
+  m_EditorClassIdentifier: 
+  Name: Loop
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 665.60004, y: -64}
+  IsBreakpoint: 0
+  Condition:
+    _statement: input.Countdown > 0
+  Loop: {fileID: 114011671160039150}
 --- !u!114 &114262339221940102
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -71,6 +121,32 @@ MonoBehaviour:
     Path: Assets/Examples/Scenes/TestLoad.unity
   WaitForCompletion: 1
   CleanupAssets: 1
+--- !u!114 &114529778478796030
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Text
+  m_EditorClassIdentifier: 
+  Name: Update Text
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 870.4, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 114632312655307498}
+  Control:
+    InterfaceName: Interface
+    ControlName: Countdown
+  Group: 
+  WaitForCompletion: 0
 --- !u!114 &114632312655307498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -89,7 +165,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 358.4, y: 0}
+  GraphPosition: {x: 1024, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Time:
@@ -97,4 +173,28 @@ MonoBehaviour:
     Reference:
       _variable: []
       _lookups: []
-    Value: 5
+    Value: 1
+--- !u!114 &114835874309033530
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
+  m_Name: Show Control
+  m_EditorClassIdentifier: 
+  Name: Show Control
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 358.4, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114114667142854504}
+  Control:
+    InterfaceName: Interface
+    ControlName: Countdown
