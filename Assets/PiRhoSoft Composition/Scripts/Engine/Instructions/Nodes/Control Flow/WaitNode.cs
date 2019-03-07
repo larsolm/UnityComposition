@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.UtilityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The amount of time (in seconds) to wait")]
+		[InlineDisplay(PropagateLabel = true)]
 		public NumberVariableSource Time = new NumberVariableSource(1.0f);
 
 		public override Color NodeColor => Colors.Sequencing;

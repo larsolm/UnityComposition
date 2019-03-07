@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "update-binding-node")]
-	[CreateInstructionGraphNodeMenu("Interface/Update Binding", 201)]
+	[CreateInstructionGraphNodeMenu("Interface/Update Binding", 300)]
 	public class UpdateBindingNode : InstructionGraphNode
 	{
 		[Tooltip("The node to go to once the control is shown")]

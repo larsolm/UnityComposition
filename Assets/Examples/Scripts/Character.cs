@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionDemo
 		public float Speed = 5.0f;
 
 		private Rigidbody2D _body;
-		private Collider2D[] _colliders = new Collider2D[1];
+		private Collider2D[] _colliders = new Collider2D[2];
 
 		void Awake()
 		{
@@ -24,13 +24,15 @@ namespace PiRhoSoft.CompositionDemo
 		{
 			if (InputHelper.GetWasButtonPressed(KeyCode.Space, "Submit"))
 			{
-				var count = _body.GetContacts(_colliders);
-
-				if (count > 0)
+				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = false }, _colliders);
+				for (var i = 0; i < count; i++)
 				{
-					var interaction = _colliders[0].GetComponent<Interaction>();
-					if (interaction != null)
+					var interaction = _colliders[i].GetComponent<Interaction>();
+					if (interaction)
+					{
 						InstructionManager.Instance.RunInstruction(interaction.Caller, null, this);
+						break;
+					}
 				}
 			}
 		}
@@ -45,6 +47,13 @@ namespace PiRhoSoft.CompositionDemo
 			velocity.y = vertical * Speed;
 
 			_body.velocity = velocity;
+		}
+
+		void OnTriggerEnter2D(Collider2D collision)
+		{
+			var interaction = collision.GetComponent<Interaction>();
+			if (interaction)
+				InstructionManager.Instance.RunInstruction(interaction.Caller, null, this);
 		}
 
 		public VariableValue GetVariable(string name)
