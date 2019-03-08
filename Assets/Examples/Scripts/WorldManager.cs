@@ -25,6 +25,12 @@ namespace PiRhoSoft.CompositionExample
 		[MappedVariable] public string StringField = "Hello";
 		[MappedVariable] public string StringProperty { get; set; }
 
+		[MappedVariable] public Character ObjectField;
+		[MappedVariable] public Character ObjectProperty { get; set; }
+
+		[MappedVariable] public IVariableStore StoreField;
+		[MappedVariable] public IVariableStore StoreProperty { get; set; }
+
 		public virtual void OnEnable()
 		{
 			Store.Setup(this, Schema, Variables);
@@ -41,5 +47,13 @@ namespace PiRhoSoft.CompositionExample
 		public IEnumerable<string> GetVariableNames() => Store.GetVariableNames();
 
 		#endregion
+	}
+
+	public class SubWorldManager : WorldManager
+	{
+		public override void OnEnable()
+		{
+			Store.Setup(this, Schema, Variables);
+		}
 	}
 }

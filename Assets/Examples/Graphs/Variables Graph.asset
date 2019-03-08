@@ -30,10 +30,44 @@ MonoBehaviour:
     - {fileID: 114281964665549280}
     - {fileID: 114766472818757950}
     - {fileID: 114063821750428484}
+    - {fileID: 114041415445576420}
+    - {fileID: 114334237225043210}
+    - {fileID: 114280789961282946}
+    - {fileID: 114507292207840828}
+    - {fileID: 114207152032771554}
+    - {fileID: 114292271410321422}
   StartPosition: {x: -704, y: -0}
   Enter: {fileID: 114194465311013594}
   Process: {fileID: 114811635731448696}
   Exit: {fileID: 114808125583764164}
+--- !u!114 &114041415445576420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -230.40001, y: 140.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114507292207840828}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: String:{World.ObjectField}, {World.ObjectProperty}, {World.ObjectSchema}
 --- !u!114 &114063821750428484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -52,9 +86,9 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 512, y: 115.200005}
+  GraphPosition: {x: 665.60004, y: 64}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 114280789961282946}
   Control:
     InterfaceName: Interface
     ControlName: Message
@@ -80,7 +114,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 128, y: -38.4}
+  GraphPosition: {x: 217.6, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 114587536697093782}
   Expression:
@@ -132,6 +166,59 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114165754504386198}
   InterfaceName: Interface
+--- !u!114 &114207152032771554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 217.6, y: 217.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114778787991903320}
+  Expression:
+    _statement: 'World.StoreField = this;
+
+      World.StoreProperty = Character;'
+--- !u!114 &114280789961282946
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 665.60004, y: 140.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114292271410321422}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: String:{World.ObjectField}, {World.ObjectProperty}, {World.ObjectSchema}
 --- !u!114 &114281964665549280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -150,7 +237,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 512, y: -38.4}
+  GraphPosition: {x: 665.60004, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 114766472818757950}
   Control:
@@ -160,6 +247,34 @@ MonoBehaviour:
   IsLast: 1
   Message:
     Text: Int:{World.IntField}, {World.IntProperty}, {World.IntSchema}
+--- !u!114 &114292271410321422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 665.60004, y: 217.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: String:{World.StoreField}, {World.StoreProperty}, {World.StoreSchema}
 --- !u!114 &114304356319197900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -181,6 +296,33 @@ MonoBehaviour:
   GraphPosition: {x: -576, y: 192}
   IsBreakpoint: 0
   Next: {fileID: 0}
+--- !u!114 &114334237225043210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 217.6, y: 140.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114207152032771554}
+  Expression:
+    _statement: 'World.ObjectField = this;
+
+      World.ObjectProperty = Character;
+
+      World.ObjectSchema = World;'
 --- !u!114 &114415663065504694
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,7 +341,35 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -256, y: 115.200005}
+  GraphPosition: {x: -230.40001, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 114041415445576420}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: String:{World.StringField}, {World.StringProperty}, {World.StringSchema}
+--- !u!114 &114507292207840828
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -230.40001, y: 217.6}
   IsBreakpoint: 0
   Next: {fileID: 114660387639631496}
   Control:
@@ -208,7 +378,7 @@ MonoBehaviour:
   Interaction: 0
   IsLast: 1
   Message:
-    Text: String:{World.StringField}, {World.StringProperty}, {World.StringSchema}
+    Text: String:{World.StoreField}, {World.StoreProperty}, {World.StoreSchema}
 --- !u!114 &114524682042660420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +397,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -256, y: -38.4}
+  GraphPosition: {x: -230.40001, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 114847860988142318}
   Control:
@@ -255,7 +425,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 128, y: 38.4}
+  GraphPosition: {x: 217.6, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114676519705400190}
   Expression:
@@ -282,7 +452,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 128, y: -115.200005}
+  GraphPosition: {x: 217.6, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 114085982110002696}
   Expression:
@@ -309,9 +479,9 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 128, y: 115.200005}
+  GraphPosition: {x: 217.6, y: 64}
   IsBreakpoint: 0
-  Next: {fileID: 114778787991903320}
+  Next: {fileID: 114334237225043210}
   Expression:
     _statement: 'World.StringField = "Field";
 
@@ -336,7 +506,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 512, y: 38.4}
+  GraphPosition: {x: 665.60004, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114063821750428484}
   Control:
@@ -364,7 +534,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 512, y: -115.200005}
+  GraphPosition: {x: 665.60004, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 114281964665549280}
   Control:
@@ -414,7 +584,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -256, y: -115.200005}
+  GraphPosition: {x: -230.40001, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 114524682042660420}
   Control:
@@ -442,7 +612,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -256, y: 38.4}
+  GraphPosition: {x: -230.40001, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114415663065504694}
   Control:

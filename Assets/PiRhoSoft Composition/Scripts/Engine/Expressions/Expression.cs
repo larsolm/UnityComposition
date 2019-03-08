@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private const string _expressionTokenizeError = "(CETE) Failed to parse Expression '{0} at location {1}': {2}";
 		private const string _expressionParseError = "(CEPE) Failed to parse Expression '{0}' at location {1}: {2}";
-		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}': {1}";
+		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression: {1}";
 		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}': {1}";
 		private const string _invalidResultWarning = "(CEIR) The Expression '{0}' was expected to return type {1} but instead returned type {2}";
 

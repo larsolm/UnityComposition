@@ -1735,6 +1735,7 @@ MonoBehaviour:
   IntField: 7
   FloatField: 17
   StringField: Hello
+  ObjectField: {fileID: 0}
 --- !u!1 &1078675538
 GameObject:
   m_ObjectHideFlags: 0
