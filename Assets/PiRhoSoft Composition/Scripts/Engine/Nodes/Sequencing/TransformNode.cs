@@ -70,17 +70,20 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (variables.This is Component component)
-				yield return Transform(component.transform);
+				yield return Move(component.transform);
 			else if (variables.This is GameObject gameObject)
-				yield return Transform(gameObject.transform);
+				yield return Move(gameObject.transform);
 			else
 				Debug.LogWarningFormat(this, _invalidObjectWarning, Name);
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}
 
-		private IEnumerator Transform(Transform transform)
+		private IEnumerator Move(Transform transform)
 		{
+			var body2d = transform.GetComponent<Rigidbody2D>();
+			var body3d = transform.GetComponent<Rigidbody>();
+
 			var targetPosition = UseRelativePosition ? transform.position + TargetPosition : TargetPosition;
 			var targetRotation = UseRelativeRotation ? transform.rotation * TargetRotation : TargetRotation;
 			var targetScale = TargetScale;
@@ -90,6 +93,13 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (AnimationMethod == AnimationType.None)
 			{
+				if (body2d)
+					DoRigidBody2D(body2d, targetPosition, targetRotation, targetScale);
+				else if (body3d)
+					DoRigidBody3D(body3d, targetPosition, targetRotation, targetScale);
+				else
+					DoTransform(transform, targetPosition, targetRotation, targetScale);
+
 				transform.position = targetPosition;
 				transform.rotation = targetRotation;
 				transform.localScale = targetScale;
@@ -102,14 +112,14 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (AnimationMethod == AnimationType.Duration)
 				{
-					var step = Duration * Time.deltaTime;
+					var step = Duration > 0.0f ? Time.deltaTime / Duration : 0.0f;
 					var moveDistance = (targetPosition - transform.position).magnitude;
 					var rotationDistance = Quaternion.Angle(targetRotation, transform.rotation);
 					var scaleDifference = (targetScale - transform.localScale).magnitude;
 
-					moveSpeed = moveDistance > 0.0f ? step / moveDistance : 0.0f;
-					rotationSpeed = rotationDistance > 0.0f ? step / rotationDistance : 0.0f;
-					scaleSpeed = scaleDifference > 0.0f ? step / scaleDifference : 0.0f;
+					moveSpeed = moveDistance > 0.0f ? moveDistance * step : 0.0f;
+					rotationSpeed = rotationDistance > 0.0f ? moveDistance * step : 0.0f;
+					scaleSpeed = scaleDifference > 0.0f ? scaleDifference * step : 0.0f;
 				}
 				else if (AnimationMethod == AnimationType.Speed)
 				{
@@ -119,22 +129,51 @@ namespace PiRhoSoft.CompositionEngine
 				}
 
 				if (WaitForCompletion)
-					yield return DoTransform(transform, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed);
+					yield return DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed);
 				else
-					InstructionManager.Instance.StartCoroutine(DoTransform(transform, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed));
+					InstructionManager.Instance.StartCoroutine(DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed));
 			}
 		}
 
-		private IEnumerator DoTransform(Transform transform, Vector3 targetPosition, Quaternion targetRotation, Vector3 targetScale, float moveSpeed, float rotationSpeed, float scaleSpeed)
+		private IEnumerator DoMove(Transform transform, Rigidbody2D body2d, Rigidbody body3d, Vector3 targetPosition, Quaternion targetRotation, Vector3 targetScale, float moveSpeed, float rotationSpeed, float scaleSpeed)
 		{
 			while (transform.position != targetPosition || transform.rotation != targetRotation || transform.localScale != targetScale)
 			{
-				transform.position = moveSpeed > 0.0f ? Vector3.MoveTowards(transform.position, targetPosition, moveSpeed) : targetPosition;
-				transform.rotation = rotationSpeed > 0.0f ? Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed) : targetRotation;
-				transform.localScale = scaleSpeed > 0.0f ? Vector3.MoveTowards(transform.localScale, targetScale, scaleSpeed) : targetScale;
+				var position = moveSpeed > 0.0f ? Vector3.MoveTowards(transform.position, targetPosition, moveSpeed) : targetPosition;
+				var rotation = rotationSpeed > 0.0f ? Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed) : targetRotation;
+				var scale = scaleSpeed > 0.0f ? Vector3.MoveTowards(transform.localScale, targetScale, scaleSpeed) : targetScale;
+
+				if (body2d)
+					DoRigidBody2D(body2d, position, rotation, scale);
+				else if (body3d)
+					DoRigidBody3D(body3d, position, rotation, scale);
+				else
+					DoTransform(transform, position, rotation, scale);
+
 
 				yield return null;
 			}
+		}
+
+		private void DoRigidBody2D(Rigidbody2D body, Vector2 position, Quaternion rotation, Vector3 scale)
+		{
+			body.MovePosition(position);
+			body.MoveRotation(rotation.eulerAngles.z);
+			body.transform.localScale = scale;
+		}
+
+		private void DoRigidBody3D(Rigidbody body, Vector3 position, Quaternion rotation, Vector3 scale)
+		{
+			body.MovePosition(position);
+			body.MoveRotation(rotation);
+			body.transform.localScale = scale;
+		}
+
+		private void DoTransform(Transform transform, Vector3 position, Quaternion rotation, Vector3 scale)
+		{
+			transform.position = position;
+			transform.rotation = rotation;
+			transform.localScale = scale;
 		}
 	}
 }
