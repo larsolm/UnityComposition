@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidAssignmentException = "only identifiers can be assigned";
 		private const string _missingAssignmentException = "the variable '{0}' could not be found";
 		private const string _readOnlyAssignmentException = "the variable '{0}' is read only and cannot be assigned";
-		private const string _mismatchedAssignmentException = "the variable '{0}' cannot be assigned a value of type {0}";
+		private const string _mismatchedAssignmentException = "the variable '{0}' cannot be assigned a value of type {1}";
 
 		public override VariableValue Evaluate(IVariableStore variables)
 		{

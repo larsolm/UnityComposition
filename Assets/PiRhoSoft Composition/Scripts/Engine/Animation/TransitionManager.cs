@@ -10,6 +10,8 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "transition-manager")]
 	public class TransitionManager : GlobalBehaviour<TransitionManager>
 	{
+		// implementation based on this post from the Unity forums: https://forum.unity.com/threads/postprocessing-issues-with-several-cameras.313903/#post-2040534
+
 		private const string _invalidAddWarning = "(CTMIA) this TransitionRenderer has already been added";
 		private const string _invalidRemoveWarning = "(CTMIR) this TransitionRenderer has not been added";
 

@@ -1,42 +1,59 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEngine;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	[AddComponentMenu("PiRho Soft/Examples/Character")]
-	public class Character : MonoBehaviour, IVariableStore
+	public class Character : MonoBehaviour, IVariableStore, IReloadable
 	{
+		[AssetPopup] [ReloadOnChange] public VariableSchema Schema;
+
 		public Camera Camera;
-		public float Speed = 5.0f;
+		public WorldManager World;
+		public float Acceleration = 1.0f;
+
+		public VariableList Variables;
+		public MappedVariableStore Store = new MappedVariableStore();
+		public InstructionContext Context = new InstructionContext();
 
 		private Rigidbody2D _body;
 		private Collider2D[] _colliders = new Collider2D[6];
+
+		public void OnEnable()
+		{
+			Context.Stores.Add(nameof(Character), this);
+			Context.Stores.Add(nameof(World), World);
+			Store.Setup(this, Schema, Variables);
+		}
+
+		public void OnDisable()
+		{
+			Context.Stores.Clear();
+			_body.velocity = Vector2.zero;
+		}
 
 		void Awake()
 		{
 			_body = GetComponent<Rigidbody2D>();
 		}
 
-		void OnDisable()
-		{
-			_body.velocity = Vector2.zero;
-		}
-
 		void Update()
 		{
+			if (Camera)
+				Camera.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.transform.position.z);
+
 			if (InputHelper.GetWasButtonPressed(KeyCode.Space, "Submit"))
 			{
 				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = true }, _colliders);
 				for (var i = 0; i < count; i++)
 				{
 					var interaction = _colliders[i].GetComponent<Interaction>();
-					if (interaction && interaction.RequireKeypress)
+					if (interaction)
 					{
-						InstructionManager.Instance.RunInstruction(interaction.Caller, null, this);
+						InstructionManager.Instance.RunInstruction(interaction.OnInteract, Context, interaction);
 						break;
 					}
 				}
@@ -48,36 +65,32 @@ namespace PiRhoSoft.CompositionExample
 
 		void FixedUpdate()
 		{
-			var velocity = _body.velocity;
 			var horizontal = InputHelper.GetAxis("Horizontal");
 			var vertical = InputHelper.GetAxis("Vertical");
 
-			velocity.x = horizontal * Speed;
-			velocity.y = vertical * Speed;
-
-			_body.velocity = velocity;
+			_body.AddForce(new Vector2(horizontal * Acceleration, vertical * Acceleration), ForceMode2D.Impulse);
 		}
 
 		void OnTriggerEnter2D(Collider2D collision)
 		{
 			var interaction = collision.GetComponent<Interaction>();
-			if (interaction && !interaction.RequireKeypress)
-				InstructionManager.Instance.RunInstruction(interaction.Caller, null, this);
+			if (interaction)
+				InstructionManager.Instance.RunInstruction(interaction.OnEnter, Context, interaction);
 		}
 
-		public VariableValue GetVariable(string name)
+		void OnTriggerExit2D(Collider2D collision)
 		{
-			return VariableValue.Empty;
+			var interaction = collision.GetComponent<Interaction>();
+			if (interaction)
+				InstructionManager.Instance.RunInstruction(interaction.OnLeave, Context, interaction);
 		}
 
-		public SetVariableResult SetVariable(string name, VariableValue value)
-		{
-			return SetVariableResult.NotFound;
-		}
+		#region IVariableStore Implementation
 
-		public IEnumerable<string> GetVariableNames()
-		{
-			return Enumerable.Empty<string>();
-		}
+		public VariableValue GetVariable(string name) => Store.GetVariable(name);
+		public SetVariableResult SetVariable(string name, VariableValue value) => Store.SetVariable(name, value);
+		public IEnumerable<string> GetVariableNames() => Store.GetVariableNames();
+
+		#endregion
 	}
 }

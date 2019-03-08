@@ -45,6 +45,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				Activate();
 
+				yield return null;
 				yield return Run(text, interaction, isLast);
 				yield return null; // Always wait one frame to reset the accept press.
 

@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Reflection;
 using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
 using UnityEditor;
@@ -7,53 +6,46 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEditor
 {
-	public class VariableSchemaControl : ObjectControl<VariableSchema>
+	[CustomEditor(typeof(VariableSchema))]
+	public class VariableSchemaEditor : Editor
 	{
+		private readonly static GUIContent _label = new GUIContent("Definitions", "The variables available to objects using this schema");
 		private readonly static IconButton _addDefinitionButton = new IconButton(IconButton.CustomAdd, "Add a Definition to the Schema");
 		private readonly static IconButton _removeDefinitionButton = new IconButton(IconButton.Remove, "Remove this Definition from the Schema");
 		private readonly static GUIContent _addDefinitionLabel = new GUIContent("Add Definition");
 		private readonly static GUIContent _emptyLabel = new GUIContent("This Schema is empty");
 
-		public ObjectListControl List { get; private set; } = new ObjectListControl();
-
-		private Object _owner;
 		private VariableSchema _schema;
 		private DefinitionsProxy _proxy;
-		private VariableInitializerType _type;
-		private string[] _availabilities;
 
-		public override void Setup(VariableSchema target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
+		private ObjectListControl _list = new ObjectListControl();
+
+		void OnEnable()
 		{
-			_owner = property.serializedObject.targetObject;
-			_schema = target;
-			_proxy = new DefinitionsProxy { Schema = target };
+			_schema = target as VariableSchema;
+			_proxy = new DefinitionsProxy { Schema = _schema };
 
-			List.Setup(_proxy)
+			_list.Setup(_proxy)
 				.MakeDrawable(DrawDefinition)
 				.MakeRemovable(_removeDefinitionButton, RemoveDefinition)
-				.MakeCollapsable(property.serializedObject.targetObject.GetType().Name + "." + property.propertyPath + ".IsOpen")
+				.MakeCollapsable("VariableSchema." + _schema.name + ".IsOpen")
 				.MakeReorderable()
 				.MakeHeaderButton(_addDefinitionButton, new AddPopup(new AddVariableContent(this), _addDefinitionLabel), Color.white)
 				.MakeCustomHeight(GetDefinitionHeight)
 				.MakeEmptyLabel(_emptyLabel);
-
-			_type = TypeHelper.GetAttribute<VariableInitializerAttribute>(fieldInfo)?.Type ?? VariableInitializerType.Expression;
-			_availabilities = TypeHelper.GetAttribute<VariableAvailabilitiesAttribute>(fieldInfo)?.Availabilities;
 		}
-
-		public override float GetHeight(GUIContent label)
+		
+		public override void OnInspectorGUI()
 		{
-			return List.GetHeight();
-		}
+			base.OnInspectorGUI();
 
-		public override void Draw(Rect position, GUIContent label)
-		{
-			List.Draw(position, label);
+			using (new UndoScope(_schema, false))
+				_list.Draw(_label);
 		}
 
 		private void AddDefinition(string name, VariableType type)
 		{
-			using (new UndoScope(_owner, true))
+			using (new UndoScope(_schema, true))
 				_schema.AddDefinition(name, type);
 		}
 
@@ -64,14 +56,14 @@ namespace PiRhoSoft.CompositionEditor
 
 		private float GetDefinitionHeight(int index)
 		{
-			return VariableDefinitionDrawer.GetHeight(_schema[index], _type, _availabilities);
+			return VariableDefinitionDrawer.GetHeight(_schema[index], _schema.InitializerType, _schema.Availabilities);
 		}
 
 		private void DrawDefinition(Rect rect, IList list, int index)
 		{
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{
-				var definition = VariableDefinitionDrawer.Draw(rect, _schema[index], _type, _availabilities);
+				var definition = VariableDefinitionDrawer.Draw(rect, _schema[index], _schema.InitializerType, _schema.Availabilities);
 
 				if (changes.changed)
 					_schema[index] = definition;
@@ -88,13 +80,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		private class AddVariableContent : AddNamedItemContent
 		{
-			private VariableSchemaControl _control;
+			private VariableSchemaEditor _editor;
 			private VariableType _type = VariableType.Empty;
 			private bool _typeValid = true;
 
-			public AddVariableContent(VariableSchemaControl control)
+			public AddVariableContent(VariableSchemaEditor editor)
 			{
-				_control = control;
+				_editor = editor;
 			}
 
 			protected override float GetHeight_()
@@ -118,18 +110,13 @@ namespace PiRhoSoft.CompositionEditor
 
 			protected override void Add_(string name)
 			{
-				_control.AddDefinition(name, _type);
+				_editor.AddDefinition(name, _type);
 			}
 
 			protected override bool IsNameInUse(string name)
 			{
-				return _control._schema.HasDefinition(name);
+				return _editor._schema.HasDefinition(name);
 			}
 		}
-	}
-
-	[CustomPropertyDrawer(typeof(VariableSchema))]
-	public class VariableSchemaDrawer : ControlDrawer<VariableSchemaControl>
-	{
 	}
 }

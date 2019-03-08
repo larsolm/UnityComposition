@@ -22,7 +22,8 @@
 
 		public VariableValue GetVariableValue(int index)
 		{
-			return index >= 0 && index < _map.Properties.Count ? _map.Properties[index].Getter(_owner) : VariableValue.Empty;
+			var getter = index >= 0 && index < _map.Properties.Count ? _map.Properties[index].Getter : null;
+			return getter != null ? getter(_owner) : VariableValue.Empty;
 		}
 
 		public SetVariableResult SetVariableValue(int index, VariableValue value)

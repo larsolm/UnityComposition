@@ -18,6 +18,10 @@ namespace PiRhoSoft.CompositionEngine
 		[ConditionalDisplaySelf(nameof(AutoAdvance), Invert = true)]
 		public float Progress = 0.0f;
 
+		[Tooltip("Progress is affected by Time.timeScale")]
+		[ConditionalDisplaySelf(nameof(AutoAdvance), Invert = true)]
+		public bool UseScaledTime = true;
+
 		[Tooltip("The duration of the animation (in seconds)")]
 		[ConditionalDisplaySelf(nameof(AutoAdvance))]
 		public float Duration = 2.0f;
@@ -45,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 		protected virtual void LateUpdate()
 		{
 			if (AutoAdvance)
-				Progress += Time.deltaTime;
+				Progress += UseScaledTime ? Time.deltaTime : Time.unscaledDeltaTime;
 
 			var progress = AutoAdvance ? Mathf.Clamp01(Progress) : Mathf.Clamp01(Progress / Duration);
 

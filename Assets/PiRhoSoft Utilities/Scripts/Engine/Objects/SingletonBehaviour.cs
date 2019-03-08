@@ -10,8 +10,11 @@ namespace PiRhoSoft.UtilityEngine
 
 		public SingletonBehaviour()
 		{
-			if (Instance == null)
-				Instance = this as T;
+			// this is set in the constructor as opposed to Awake to avoid load order issues - other objects in the
+			// same scene may want to access the singleton during enable but if they happen to be loaded before the
+			// singleton, Instance otherwise wouldn't yet be available
+
+			Instance = this as T;
 		}
 
 		protected virtual void Awake()

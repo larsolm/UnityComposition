@@ -34,9 +34,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
-  m_Name: Play Transition
+  m_Name: Fade Out
   m_EditorClassIdentifier: 
-  Name: Play Transition
+  Name: Fade Out
   This:
     _variable:
     - this
@@ -63,14 +63,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
-  m_Name: Disable Component
+  m_Name: Disable Character
   m_EditorClassIdentifier: 
-  Name: Disable Component
+  Name: Disable Character
   This:
     _variable:
-    - this
-    _lookups:
     - Character
+    _lookups:
+    - 
   GraphPosition: {x: 320, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 114380796924779904}
@@ -84,14 +84,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
-  m_Name: Enable Component
+  m_Name: Enable Character
   m_EditorClassIdentifier: 
-  Name: Enable Component
+  Name: Enable Character
   This:
     _variable:
-    - this
-    _lookups:
     - Character
+    _lookups:
+    - 
   GraphPosition: {x: 640, y: 140.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
@@ -105,17 +105,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
-  m_Name: Transform Object
+  m_Name: Teleport Camera
   m_EditorClassIdentifier: 
-  Name: Transform Object
+  Name: Teleport Camera
   This:
     _variable:
     - scene
-    - Main Camera
+    - MainCamera
     _lookups:
     - 
     - 
-  GraphPosition: {x: 640, y: 12.8}
+  GraphPosition: {x: 640, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   TargetPosition: {x: 8.5, y: 0, z: -10}
@@ -140,15 +140,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
-  m_Name: Transform Object
+  m_Name: Teleport Character
   m_EditorClassIdentifier: 
-  Name: Transform Object
+  Name: Teleport Character
   This:
     _variable:
-    - this
+    - Character
     _lookups:
     - 
-  GraphPosition: {x: 320, y: 12.8}
+  GraphPosition: {x: 320, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 114797353208024318}
   TargetPosition: {x: 8.5, y: 0, z: 0}
@@ -173,9 +173,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
-  m_Name: Play Transition
+  m_Name: Fade In
   m_EditorClassIdentifier: 
-  Name: Play Transition
+  Name: Fade In
   This:
     _variable:
     - this

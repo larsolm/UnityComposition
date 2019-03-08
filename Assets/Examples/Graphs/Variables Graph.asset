@@ -10,22 +10,22 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
-  m_Name: Load Scene Graph
+  m_Name: Variables Graph
   m_EditorClassIdentifier: 
   _nodes:
     _items:
-    - {fileID: 114262339221940102}
-    - {fileID: 114084016071233676}
-    - {fileID: 114632312655307498}
-    - {fileID: 114114667142854504}
-    - {fileID: 114835874309033530}
-    - {fileID: 114011671160039150}
-    - {fileID: 114529778478796030}
-  StartPosition: {x: 0, y: 0}
-  Enter: {fileID: 114262339221940102}
-  Process: {fileID: 114835874309033530}
-  Exit: {fileID: 114084016071233676}
---- !u!114 &114011671160039150
+    - {fileID: 114194465311013594}
+    - {fileID: 114808125583764164}
+    - {fileID: 114165754504386198}
+    - {fileID: 114304356319197900}
+    - {fileID: 114152541676970108}
+    - {fileID: 114085982110002696}
+    - {fileID: 114524682042660420}
+  StartPosition: {x: -704, y: -0}
+  Enter: {fileID: 114194465311013594}
+  Process: {fileID: 114524682042660420}
+  Exit: {fileID: 114808125583764164}
+--- !u!114 &114085982110002696
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -35,20 +35,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Decrement Countdown
+  m_Name: Expression
   m_EditorClassIdentifier: 
-  Name: Decrement Countdown
+  Name: Expression
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 755.2, y: -0}
+  GraphPosition: {x: -64, y: 12.8}
   IsBreakpoint: 0
-  Next: {fileID: 114529778478796030}
+  Next: {fileID: 114152541676970108}
   Expression:
-    _statement: input.Countdown -= 1
---- !u!114 &114084016071233676
+    _statement: 'World.IntProperty = 1;
+
+      World.IntField = 2;
+
+      World.IntSchema = 3;'
+--- !u!114 &114152541676970108
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -57,97 +61,26 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 183840318e2db944bba6e02dab617394, type: 3}
-  m_Name: Unload Test Scene
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
   m_EditorClassIdentifier: 
-  Name: Unload Test Scene
+  Name: Message
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 358.4, y: 102.4}
+  GraphPosition: {x: 256, y: 12.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
-  Scene:
-    Path: Assets/Examples/Scenes/TestLoad.unity
-  WaitForCompletion: 1
-  CleanupAssets: 1
---- !u!114 &114114667142854504
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
-  m_Name: While Counting Down
-  m_EditorClassIdentifier: 
-  Name: While Counting Down
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 665.60004, y: -64}
-  IsBreakpoint: 0
-  Condition:
-    _statement: input.Countdown > 0
-  Loop: {fileID: 114011671160039150}
---- !u!114 &114262339221940102
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
-  m_Name: Load Test Scene
-  m_EditorClassIdentifier: 
-  Name: Load Test Scene
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 358.4, y: -89.6}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Scene:
-    Path: Assets/Examples/Scenes/TestLoad.unity
-  WaitForCompletion: 1
-  CleanupAssets: 1
---- !u!114 &114529778478796030
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
-  m_Name: Update Countdown
-  m_EditorClassIdentifier: 
-  Name: Update Countdown
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 870.4, y: 64}
-  IsBreakpoint: 0
-  Next: {fileID: 114632312655307498}
   Control:
     InterfaceName: Interface
-    ControlName: Countdown
-  Group: 
-  WaitForCompletion: 0
---- !u!114 &114632312655307498
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: Property is {World.IntProperty}, Field is {World.IntField}, Schema is {World.IntSchema}
+--- !u!114 &114165754504386198
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -156,26 +89,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2858c7af4d722bf49a2fc1993f96ed16, type: 3}
-  m_Name: Wait 1 Second
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Component
   m_EditorClassIdentifier: 
-  Name: Wait 1 Second
+  Name: Disable Component
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 1024, y: 128}
+  GraphPosition: {x: -576, y: -153.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
-  Time:
-    Type: 0
-    Reference:
-      _variable: []
-      _lookups: []
-    Value: 1
-  UseScaledTime: 1
---- !u!114 &114835874309033530
+--- !u!114 &114194465311013594
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -184,18 +110,87 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
-  m_Name: Show Countdown
+  m_Script: {fileID: 11500000, guid: 8902113db831cde4f94ab1958d9ca3b0, type: 3}
+  m_Name: Activate Interface
   m_EditorClassIdentifier: 
-  Name: Show Countdown
+  Name: Activate Interface
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 358.4, y: 0}
+  GraphPosition: {x: -640, y: -76.8}
   IsBreakpoint: 0
-  Next: {fileID: 114114667142854504}
+  Next: {fileID: 114165754504386198}
+  InterfaceName: Interface
+--- !u!114 &114304356319197900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
+  m_Name: Enable Component
+  m_EditorClassIdentifier: 
+  Name: Enable Component
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -576, y: 192}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+--- !u!114 &114524682042660420
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -384, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114085982110002696}
   Control:
     InterfaceName: Interface
-    ControlName: Countdown
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: Property is {World.IntProperty}, Field is {World.IntField}, Schema is {World.IntSchema}
+--- !u!114 &114808125583764164
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1cbffcd456f584aa31f44c7dfbc873, type: 3}
+  m_Name: Deactivate Interface
+  m_EditorClassIdentifier: 
+  Name: Deactivate Interface
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -640, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114304356319197900}
+  InterfaceName: Interface

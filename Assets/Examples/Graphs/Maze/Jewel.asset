@@ -38,9 +38,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destroy Object
+  m_Name: Destory Door
   m_EditorClassIdentifier: 
-  Name: Destroy Object
+  Name: Destory Door
   This:
     _variable:
     - scene
@@ -48,7 +48,7 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  GraphPosition: {x: 1638.4, y: 64}
+  GraphPosition: {x: 1638.4, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
 --- !u!114 &114019920891345730
@@ -61,9 +61,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destroy Object
+  m_Name: Destroy Jewel
   m_EditorClassIdentifier: 
-  Name: Destroy Object
+  Name: Destroy Jewel
   This:
     _variable:
     - input
@@ -71,7 +71,7 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  GraphPosition: {x: 652.8, y: 0}
+  GraphPosition: {x: 640, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114543985970655702}
 --- !u!114 &114071169975569116
@@ -84,9 +84,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67bb5ec06b2e5fe49b57475f7382e327, type: 3}
-  m_Name: Play Effect
+  m_Name: Play Indicator Sparkle
   m_EditorClassIdentifier: 
-  Name: Play Effect
+  Name: Play Indicator Sparkle
   This:
     _variable:
     - this
@@ -131,15 +131,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67bb5ec06b2e5fe49b57475f7382e327, type: 3}
-  m_Name: Play Effect
+  m_Name: Play Jewel Sparkle
   m_EditorClassIdentifier: 
-  Name: Play Effect
+  Name: Play Jewel Sparkle
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 652.8, y: -64}
+  GraphPosition: {x: 640, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 114071169975569116}
   Effect:
@@ -182,15 +182,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Conditional
+  m_Name: Check Complete
   m_EditorClassIdentifier: 
-  Name: Conditional
+  Name: Check Complete
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 985.60004, y: 89.6}
+  GraphPosition: {x: 960, y: 64}
   IsBreakpoint: 0
   OnTrue: {fileID: 114754646623374914}
   OnFalse: {fileID: 0}
@@ -206,15 +206,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
-  m_Name: Sequence
+  m_Name: Effect Sequence
   m_EditorClassIdentifier: 
-  Name: Sequence
+  Name: Effect Sequence
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 332.80002, y: -51.2}
+  GraphPosition: {x: 320, y: -51.2}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -231,19 +231,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression
+  m_Name: Increment Jewel Count
   m_EditorClassIdentifier: 
-  Name: Expression
+  Name: Increment Jewel Count
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 640, y: 115.200005}
+  GraphPosition: {x: 640, y: 64}
   IsBreakpoint: 0
   Next: {fileID: 114244240457525348}
   Expression:
-    _statement: local.Jewels = 1
+    _statement: World.Jewels += 1
 --- !u!114 &114375116766900952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -254,9 +254,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
-  m_Name: Enable Component
+  m_Name: Enable Character
   m_EditorClassIdentifier: 
-  Name: Enable Component
+  Name: Enable Character
   This:
     _variable:
     - scene
@@ -264,7 +264,7 @@ MonoBehaviour:
     _lookups:
     - 
     - Character
-  GraphPosition: {x: 1638.4, y: 140.8}
+  GraphPosition: {x: 1638.4, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
 --- !u!114 &114417380751933736
@@ -277,16 +277,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
-  m_Name: Disable Component
+  m_Name: Disable Character
   m_EditorClassIdentifier: 
-  Name: Disable Component
+  Name: Disable Character
   This:
     _variable:
-    - scene
     - Character
     _lookups:
     - 
-    - Character
   GraphPosition: {x: 1638.4, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
@@ -300,9 +298,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destroy Object
+  m_Name: Destroy Indicator
   m_EditorClassIdentifier: 
-  Name: Destroy Object
+  Name: Destroy Indicator
   This:
     _variable:
     - input
@@ -323,15 +321,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
-  m_Name: Sequence
+  m_Name: Open Door
   m_EditorClassIdentifier: 
-  Name: Sequence
+  Name: Open Door
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 1292.8, y: -12.8}
+  GraphPosition: {x: 1280, y: -64}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -349,9 +347,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fc26ad2350ac454caf9577c6255fa6e, type: 3}
-  m_Name: Play Animation
+  m_Name: Play Door Animation
   m_EditorClassIdentifier: 
-  Name: Play Animation
+  Name: Play Door Animation
   This:
     _variable:
     - scene

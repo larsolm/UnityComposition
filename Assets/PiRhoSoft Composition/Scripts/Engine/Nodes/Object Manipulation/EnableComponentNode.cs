@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is MonoBehaviour behaviour)
+			if (variables.This is Behaviour behaviour)
 				behaviour.enabled = true;
 			else
 				Debug.LogWarningFormat(this, _missingComponentWarning, Name);

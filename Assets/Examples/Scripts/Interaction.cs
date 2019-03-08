@@ -6,7 +6,8 @@ namespace PiRhoSoft.CompositionExample
 	[AddComponentMenu("PiRho Soft/Examples/Interaction")]
 	public class Interaction : MonoBehaviour
 	{
-		public bool RequireKeypress = true;
-		public InstructionCaller Caller = new InstructionCaller();
+		public InstructionCaller OnInteract = new InstructionCaller();
+		public InstructionCaller OnEnter = new InstructionCaller();
+		public InstructionCaller OnLeave = new InstructionCaller();
 	}
 }
