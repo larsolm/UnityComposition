@@ -93,16 +93,8 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (AnimationMethod == AnimationType.None)
 			{
-				if (body2d)
-					DoRigidBody2D(body2d, targetPosition, targetRotation, targetScale);
-				else if (body3d)
-					DoRigidBody3D(body3d, targetPosition, targetRotation, targetScale);
-				else
-					DoTransform(transform, targetPosition, targetRotation, targetScale);
-
-				transform.position = targetPosition;
-				transform.rotation = targetRotation;
-				transform.localScale = targetScale;
+				// Don't use body's because we want to directly warp
+				DoTransform(transform, targetPosition, targetRotation, targetScale);
 			}
 			else
 			{
@@ -118,7 +110,7 @@ namespace PiRhoSoft.CompositionEngine
 					var scaleDifference = (targetScale - transform.localScale).magnitude;
 
 					moveSpeed = moveDistance > 0.0f ? moveDistance * step : 0.0f;
-					rotationSpeed = rotationDistance > 0.0f ? moveDistance * step : 0.0f;
+					rotationSpeed = rotationDistance > 0.0f ? rotationDistance * step : 0.0f;
 					scaleSpeed = scaleDifference > 0.0f ? scaleDifference * step : 0.0f;
 				}
 				else if (AnimationMethod == AnimationType.Speed)
@@ -149,7 +141,6 @@ namespace PiRhoSoft.CompositionEngine
 					DoRigidBody3D(body3d, position, rotation, scale);
 				else
 					DoTransform(transform, position, rotation, scale);
-
 
 				yield return null;
 			}

@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionExample
 		public InstructionContext Context = new InstructionContext();
 
 		private Rigidbody2D _body;
-		private Collider2D[] _colliders = new Collider2D[2];
+		private Collider2D[] _colliders = new Collider2D[6];
 
 		public void OnEnable()
 		{
@@ -32,6 +32,7 @@ namespace PiRhoSoft.CompositionExample
 		public void OnDisable()
 		{
 			Context.Stores.Clear();
+			_body.velocity = Vector2.zero;
 		}
 
 		void Awake()
@@ -46,17 +47,20 @@ namespace PiRhoSoft.CompositionExample
 
 			if (InputHelper.GetWasButtonPressed(KeyCode.Space, "Submit"))
 			{
-				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = false }, _colliders);
+				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = true }, _colliders);
 				for (var i = 0; i < count; i++)
 				{
 					var interaction = _colliders[i].GetComponent<Interaction>();
 					if (interaction)
 					{
-						InstructionManager.Instance.RunInstruction(interaction.OnInteract, Context, this);
+						InstructionManager.Instance.RunInstruction(interaction.OnInteract, Context, interaction);
 						break;
 					}
 				}
 			}
+
+			if (Camera)
+				Camera.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.transform.position.z);
 		}
 
 		void FixedUpdate()
@@ -71,14 +75,14 @@ namespace PiRhoSoft.CompositionExample
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnEnter, Context, this);
+				InstructionManager.Instance.RunInstruction(interaction.OnEnter, Context, interaction);
 		}
 
 		void OnTriggerExit2D(Collider2D collision)
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnLeave, Context, this);
+				InstructionManager.Instance.RunInstruction(interaction.OnLeave, Context, interaction);
 		}
 
 		#region IVariableStore Implementation

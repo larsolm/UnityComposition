@@ -7,7 +7,6 @@ namespace PiRhoSoft.CompositionExample
 	public class Interaction : MonoBehaviour
 	{
 		public InstructionCaller OnInteract = new InstructionCaller();
-
 		public InstructionCaller OnEnter = new InstructionCaller();
 		public InstructionCaller OnLeave = new InstructionCaller();
 	}

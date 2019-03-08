@@ -9,8 +9,16 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "create-object-node")]
 	public class CreateObjectNode : InstructionGraphNode
 	{
+		public enum ObjectPositioning
+		{
+			Absolute,
+			RelativeToObject,
+			ChildOfParent
+		}
+
 		private const string _missingObjectWarning = "(COMCONMO) Unable to create object for {0}: the specified object could not be found";
-		private const string _missingParentWarning = "(COMCONMP) Unable to assign parent object for {0}: the specified object '{1}' could not be found";
+		private const string _missingParentWarning = "(COMCONMP) Unable to assign parent object for {0}: the parent '{1}' could not be found";
+		private const string _missingRelativeWarning = "(COMCONMR) Unable to create object for {0}: the relative '{1}' could not be found";
 		private const string _missingNameWarning = "(COMCONMN) Unable to assign name for {0}: the specified name could not could not be found";
 
 		[Tooltip("The node to move to when this node is finished")]
@@ -24,10 +32,18 @@ namespace PiRhoSoft.CompositionEngine
 		[InlineDisplay(PropagateLabel = true)]
 		public StringVariableSource ObjectName = new StringVariableSource("Spawned Object");
 
-		[Tooltip("The parent object to attach the object to (optional) - if set, position will be in local space")]
+		[Tooltip("How to create and position the object, with an exact position, relative to another object, or as a child of another object")]
+		public ObjectPositioning Positioning = ObjectPositioning.Absolute;
+
+		[Tooltip("The object to position the created object relative to")]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.RelativeToObject)]
+		public VariableReference Object = new VariableReference();
+
+		[Tooltip("The parent object to make the created object a child of")]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.ChildOfParent)]
 		public VariableReference Parent = new VariableReference();
 
-		[Tooltip("The position to spawn the object at - in local space if parent is set")]
+		[Tooltip("The position to spawn the object at")]
 		public Vector3 Position;
 
 		public override Color NodeColor => Colors.SequencingLight;
@@ -37,21 +53,39 @@ namespace PiRhoSoft.CompositionEngine
 			Prefab.GetInputs(inputs);
 			ObjectName.GetInputs(inputs);
 
-			if (InstructionStore.IsInput(Parent))
+			if (Positioning == ObjectPositioning.ChildOfParent && InstructionStore.IsInput(Parent))
 				inputs.Add(VariableDefinition.Create<GameObject>(Parent.RootName));
+
+			if (Positioning == ObjectPositioning.RelativeToObject && InstructionStore.IsInput(Object))
+				inputs.Add(VariableDefinition.Create<GameObject>(Object.RootName));
 		}
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Prefab.TryGetValue(variables, this, out var prefab))
 			{
-				GameObject parent = null;
+				GameObject spawned = null;
 
-				if (Parent.IsAssigned && !Parent.GetValue(variables).TryGetObject(out parent))
-					Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
+				if (Positioning == ObjectPositioning.Absolute)
+				{
+					spawned = Instantiate(prefab, Position, Quaternion.identity);
+				}
+				else if (Positioning == ObjectPositioning.RelativeToObject)
+				{
+					if (Object.GetValue(variables).TryGetObject<GameObject>(out var obj))
+						spawned = Instantiate(prefab, obj.transform.position + Position, Quaternion.identity);
+					else
+						Debug.LogWarningFormat(this, _missingRelativeWarning, Name, Object);
+				}
+				else if (Positioning == ObjectPositioning.ChildOfParent)
+				{
+					if (Parent.GetValue(variables).TryGetObject<GameObject>(out var parent))
+						spawned = Instantiate(prefab, parent.transform.position + Position, Quaternion.identity, parent.transform);
+					else
+						Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
+				}
 
-				var spawned = parent ? Instantiate(prefab, parent.transform.position + Position, Quaternion.identity, parent.transform) : Instantiate(prefab, Position, Quaternion.identity);
-				if (ObjectName.TryGetValue(variables, this, out var objectName))
+				if (spawned && ObjectName.TryGetValue(variables, this, out var objectName))
 					spawned.name = objectName;
 				else
 					Debug.LogWarningFormat(this, _missingNameWarning, Name, Parent);

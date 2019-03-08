@@ -58,9 +58,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 183840318e2db944bba6e02dab617394, type: 3}
-  m_Name: Unload Scene
+  m_Name: Unload Test Scene
   m_EditorClassIdentifier: 
-  Name: Unload Scene
+  Name: Unload Test Scene
   This:
     _variable:
     - this
@@ -83,9 +83,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
-  m_Name: Loop
+  m_Name: While Counting Down
   m_EditorClassIdentifier: 
-  Name: Loop
+  Name: While Counting Down
   This:
     _variable:
     - this
@@ -106,9 +106,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
-  m_Name: Load Scene
+  m_Name: Load Test Scene
   m_EditorClassIdentifier: 
-  Name: Load Scene
+  Name: Load Test Scene
   This:
     _variable:
     - this
@@ -131,9 +131,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
-  m_Name: Update Text
+  m_Name: Update Countdown
   m_EditorClassIdentifier: 
-  Name: Update Text
+  Name: Update Countdown
   This:
     _variable:
     - this
@@ -157,9 +157,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2858c7af4d722bf49a2fc1993f96ed16, type: 3}
-  m_Name: Wait
+  m_Name: Wait 1 Second
   m_EditorClassIdentifier: 
-  Name: Wait
+  Name: Wait 1 Second
   This:
     _variable:
     - this
@@ -174,6 +174,7 @@ MonoBehaviour:
       _variable: []
       _lookups: []
     Value: 1
+  UseScaledTime: 1
 --- !u!114 &114835874309033530
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -184,9 +185,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
-  m_Name: Show Control
+  m_Name: Show Countdown
   m_EditorClassIdentifier: 
-  Name: Show Control
+  Name: Show Countdown
   This:
     _variable:
     - this
