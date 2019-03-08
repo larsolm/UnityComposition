@@ -18,13 +18,50 @@ MonoBehaviour:
     - {fileID: 114808125583764164}
     - {fileID: 114165754504386198}
     - {fileID: 114304356319197900}
-    - {fileID: 114152541676970108}
     - {fileID: 114085982110002696}
     - {fileID: 114524682042660420}
+    - {fileID: 114811635731448696}
+    - {fileID: 114847860988142318}
+    - {fileID: 114415663065504694}
+    - {fileID: 114660387639631496}
+    - {fileID: 114587536697093782}
+    - {fileID: 114676519705400190}
+    - {fileID: 114778787991903320}
+    - {fileID: 114281964665549280}
+    - {fileID: 114766472818757950}
+    - {fileID: 114063821750428484}
   StartPosition: {x: -704, y: -0}
   Enter: {fileID: 114194465311013594}
-  Process: {fileID: 114524682042660420}
+  Process: {fileID: 114811635731448696}
   Exit: {fileID: 114808125583764164}
+--- !u!114 &114063821750428484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 512, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: String:{World.StringField}, {World.StringProperty}, {World.StringSchema}
 --- !u!114 &114085982110002696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -43,43 +80,15 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -64, y: 12.8}
+  GraphPosition: {x: 128, y: -38.4}
   IsBreakpoint: 0
-  Next: {fileID: 114152541676970108}
+  Next: {fileID: 114587536697093782}
   Expression:
-    _statement: 'World.IntProperty = 1;
+    _statement: 'World.IntField = 1;
 
-      World.IntField = 2;
+      World.IntProperty = 2;
 
       World.IntSchema = 3;'
---- !u!114 &114152541676970108
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Message
-  m_EditorClassIdentifier: 
-  Name: Message
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 256, y: 12.8}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Control:
-    InterfaceName: Interface
-    ControlName: Message
-  Interaction: 0
-  IsLast: 1
-  Message:
-    Text: Property is {World.IntProperty}, Field is {World.IntField}, Schema is {World.IntSchema}
 --- !u!114 &114165754504386198
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -123,6 +132,34 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114165754504386198}
   InterfaceName: Interface
+--- !u!114 &114281964665549280
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 512, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114766472818757950}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: Int:{World.IntField}, {World.IntProperty}, {World.IntSchema}
 --- !u!114 &114304356319197900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -144,6 +181,34 @@ MonoBehaviour:
   GraphPosition: {x: -576, y: 192}
   IsBreakpoint: 0
   Next: {fileID: 0}
+--- !u!114 &114415663065504694
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -256, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114660387639631496}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: String:{World.StringField}, {World.StringProperty}, {World.StringSchema}
 --- !u!114 &114524682042660420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,16 +227,153 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -384, y: 12.8}
+  GraphPosition: {x: -256, y: -38.4}
   IsBreakpoint: 0
-  Next: {fileID: 114085982110002696}
+  Next: {fileID: 114847860988142318}
   Control:
     InterfaceName: Interface
     ControlName: Message
   Interaction: 0
   IsLast: 1
   Message:
-    Text: Property is {World.IntProperty}, Field is {World.IntField}, Schema is {World.IntSchema}
+    Text: Int:{World.IntField}, {World.IntProperty}, {World.IntSchema}
+--- !u!114 &114587536697093782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 128, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114676519705400190}
+  Expression:
+    _statement: 'World.FloatField = 11;
+
+      World.FloatProperty = -2.8;
+
+      World.FloatSchema = 103.5;'
+--- !u!114 &114660387639631496
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 128, y: -115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114085982110002696}
+  Expression:
+    _statement: 'World.BoolField = false;
+
+      World.BoolProperty = true;
+
+      World.BoolSchema = false;'
+--- !u!114 &114676519705400190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 128, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114778787991903320}
+  Expression:
+    _statement: 'World.StringField = "Field";
+
+      World.StringProperty = "Property";
+
+      World.StringSchema = "Schema";'
+--- !u!114 &114766472818757950
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 512, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114063821750428484}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: Float:{World.FloatField}, {World.FloatProperty}, {World.FloatSchema}
+--- !u!114 &114778787991903320
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 512, y: -115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114281964665549280}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: Bool:{World.BoolField}, {World.BoolProperty}, {World.BoolSchema}
 --- !u!114 &114808125583764164
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,3 +396,59 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114304356319197900}
   InterfaceName: Interface
+--- !u!114 &114811635731448696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -256, y: -115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114524682042660420}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: Bool:{World.BoolField}, {World.BoolProperty}, {World.BoolSchema}
+--- !u!114 &114847860988142318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -256, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114415663065504694}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  IsLast: 1
+  Message:
+    Text: Float:{World.FloatField}, {World.FloatProperty}, {World.FloatSchema}

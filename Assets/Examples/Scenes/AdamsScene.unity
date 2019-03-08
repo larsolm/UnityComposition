@@ -1706,12 +1706,35 @@ MonoBehaviour:
   Schema: {fileID: 11400000, guid: ce72ac8d95e932d48960beaaf44404b3, type: 2}
   Variables:
     _data:
+    - Name: BoolSchema
+      Type: 1
+      Data: True
+      Object: {fileID: 0}
     - Name: IntSchema
       Type: 2
       Data: 91
       Object: {fileID: 0}
-    _version: 3
+    - Name: FloatSchema
+      Type: 3
+      Data: 5.2
+      Object: {fileID: 0}
+    - Name: StringSchema
+      Type: 4
+      Data: What
+      Object: {fileID: 0}
+    - Name: ObjectSchema
+      Type: 5
+      Data: 
+      Object: {fileID: 0}
+    - Name: StoreSchema
+      Type: 6
+      Data: 
+      Object: {fileID: 0}
+    _version: 22
+  BoolField: 1
   IntField: 7
+  FloatField: 17
+  StringField: Hello
 --- !u!1 &1078675538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2506,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34c0c14dd663d042a12ed42c60b8752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Schema: {fileID: 0}
   Camera: {fileID: 519420031}
   World: {fileID: 1014531345}
   Acceleration: 1
