@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at - in local space if parent is set")]
-		public Vector2 Position;
+		public Vector3 Position;
 
 		public override Color NodeColor => Colors.SequencingLight;
 
@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (Parent.IsAssigned && !Parent.GetValue(variables).TryGetObject(out parent))
 					Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
 
-				var spawned = parent ? Instantiate(prefab, parent.transform.position + (Vector3)Position, Quaternion.identity, parent.transform) : Instantiate(prefab, Position, Quaternion.identity);
+				var spawned = parent ? Instantiate(prefab, parent.transform.position + Position, Quaternion.identity, parent.transform) : Instantiate(prefab, Position, Quaternion.identity);
 				if (ObjectName.TryGetValue(variables, this, out var objectName))
 					spawned.name = objectName;
 				else

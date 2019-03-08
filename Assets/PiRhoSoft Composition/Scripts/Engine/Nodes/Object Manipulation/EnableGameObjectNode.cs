@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Object Manipulation/Enable Game Object", 20)]
+	[CreateInstructionGraphNodeMenu("Object Manipulation/Enable Game Object", 10)]
 	[HelpURL(Composition.DocumentationUrl + "enable-game-object-node")]
 	public class EnableGameObjectNode : InstructionGraphNode
 	{
