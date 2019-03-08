@@ -9,9 +9,17 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "play-effect")]
 	public class PlayEffect : InstructionGraphNode
 	{
+		public enum ObjectPositioning
+		{
+			Absolute,
+			RelativeToObject,
+			ChildOfParent
+		}
+
 		private const string _missingObjectWarning = "(CAPEMO) Unable to create object for {0}: the specified object could not be found";
-		private const string _missingParentWarning = "(CAPEMP) Unable to assign parent object for {0}: the specified object '{1}' could not be found";
-		private const string _missingNameWarning = "(CAPEMN) Unable to assign name for {0}: the specified name could not could not be found";
+		private const string _missingParentWarning = "(CAPEMP) Unable to assign parent object for {0}: the parent '{1}' could not be found";
+		private const string _missingRelativeWarning = "(CAPMR) Unable to create object for {0}: the relative '{1}' could not be found";
+		private const string _missingNameWarning = "(CAPMN) Unable to assign name for {0}: the specified name could not could not be found";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
@@ -24,7 +32,15 @@ namespace PiRhoSoft.CompositionEngine
 		[InlineDisplay(PropagateLabel = true)]
 		public StringVariableSource EffectName = new StringVariableSource("Spawned Effect");
 
-		[Tooltip("The parent object to attach the object to (optional) - if set, position will be in local space")]
+		[Tooltip("How to create and position the effect, with an exact position, relative to another object, or as a child of another object")]
+		public ObjectPositioning Positioning = ObjectPositioning.Absolute;
+
+		[Tooltip("The object to position the effect relative to")]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.RelativeToObject)]
+		public VariableReference Object = new VariableReference();
+
+		[Tooltip("The parent object to make the effect a child of")]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.ChildOfParent)]
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at - in local space if parent is set")]
@@ -53,13 +69,28 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Effect.TryGetValue(variables, this, out var effect))
 			{
-				GameObject parent = null;
+				GameObject spawned = null;
 
-				if (Parent.IsAssigned && !Parent.GetValue(variables).TryGetObject(out parent))
-					Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
+				if (Positioning == ObjectPositioning.Absolute)
+				{
+					spawned = Instantiate(effect, Position, Quaternion.identity);
+				}
+				else if (Positioning == ObjectPositioning.RelativeToObject)
+				{
+					if (Object.GetValue(variables).TryGetObject<GameObject>(out var obj))
+						spawned = Instantiate(effect, obj.transform.position + Position, Quaternion.identity);
+					else
+						Debug.LogWarningFormat(this, _missingRelativeWarning, Name, Object);
+				}
+				else if (Positioning == ObjectPositioning.ChildOfParent)
+				{
+					if (Parent.GetValue(variables).TryGetObject<GameObject>(out var parent))
+						spawned = Instantiate(effect, parent.transform.position + Position, Quaternion.identity, parent.transform);
+					else
+						Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
+				}
 
-				var spawned = parent ? Instantiate(effect, parent.transform.position + Position, Quaternion.identity, parent.transform) : Instantiate(effect, Position, Quaternion.identity);
-				if (EffectName.TryGetValue(variables, this, out var objectName))
+				if (spawned && EffectName.TryGetValue(variables, this, out var objectName))
 					spawned.name = objectName;
 				else
 					Debug.LogWarningFormat(this, _missingNameWarning, Name, Parent);
