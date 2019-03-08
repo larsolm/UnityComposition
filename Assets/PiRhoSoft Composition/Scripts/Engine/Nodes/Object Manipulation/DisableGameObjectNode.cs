@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Object Manipulation/Disable Game Object", 21)]
+	[CreateInstructionGraphNodeMenu("Object Manipulation/Disable Game Object", 11)]
 	[HelpURL(Composition.DocumentationUrl + "disable-game-object-node")]
 	public class DisableGameObjectNode : InstructionGraphNode
 	{
-		private const string _missingObjectWarning = "(CDGONMO) Unable to disable object for {0}: the given variables must be a GameObject";
+		private const string _missingObjectWarning = "(COMDGONMO) Unable to disable object for {0}: the given variables must be a GameObject";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

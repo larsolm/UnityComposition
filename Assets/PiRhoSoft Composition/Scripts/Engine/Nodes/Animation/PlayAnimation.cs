@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class AnimationClipVariableSource : ObjectVariableSource<AnimationClip> { }
 
-	[CreateInstructionGraphNodeMenu("Animation/Play Animation")]
+	[CreateInstructionGraphNodeMenu("Animation/Play Animation", 0)]
 	[HelpURL(Composition.DocumentationUrl + "play-animation")]
 	public class PlayAnimation : InstructionGraphNode
 	{

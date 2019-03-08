@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Object Manipulation/Enable Component", 22)]
+	[CreateInstructionGraphNodeMenu("Object Manipulation/Enable Component", 20)]
 	[HelpURL(Composition.DocumentationUrl + "enable-component-node")]
 	public class EnableComponentNode : InstructionGraphNode
 	{
-		private const string _missingComponentWarning = "(CECNMC) Unable to enable component for {0}: the given variables must be a MonoBehaviour";
+		private const string _missingComponentWarning = "(COMECNMC) Unable to enable component for {0}: the given variables must be a MonoBehaviour";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

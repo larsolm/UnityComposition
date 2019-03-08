@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Animation/Play Animation State")]
+	[CreateInstructionGraphNodeMenu("Animation/Play Animation State", 1)]
 	[HelpURL(Composition.DocumentationUrl + "play-animation-state")]
 	public class PlayAnimationState : InstructionGraphNode
 	{
