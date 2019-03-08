@@ -13,8 +13,17 @@ namespace PiRhoSoft.CompositionExample
 		public VariableList Variables = new VariableList();
 		public MappedVariableStore Store = new MappedVariableStore();
 
+		[MappedVariable] public bool BoolField = true;
+		[MappedVariable] public bool BoolProperty { get; set; }
+
 		[MappedVariable] public int IntField = 7;
 		[MappedVariable] public int IntProperty { get; set; }
+
+		[MappedVariable] public float FloatField = 17.0f;
+		[MappedVariable] public float FloatProperty { get; set; }
+
+		[MappedVariable] public string StringField = "Hello";
+		[MappedVariable] public string StringProperty { get; set; }
 
 		public virtual void OnEnable()
 		{

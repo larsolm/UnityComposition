@@ -1711,7 +1711,10 @@ MonoBehaviour:
       Data: 91
       Object: {fileID: 0}
     _version: 3
+  BoolField: 1
   IntField: 7
+  FloatField: 17
+  StringField: Hello
 --- !u!1 &1078675538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2483,6 +2486,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34c0c14dd663d042a12ed42c60b8752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Schema: {fileID: 0}
   Camera: {fileID: 519420031}
   World: {fileID: 1014531345}
   Acceleration: 1

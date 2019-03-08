@@ -15,6 +15,15 @@ MonoBehaviour:
   InitializerType: 1
   Availabilities: []
   _definitions:
+  - _name: BoolSchema
+    _type: 1
+    _availability: Always (not saved)
+    _initializer:
+      _statement: true
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
   - _name: IntSchema
     _type: 2
     _availability: Always (not saved)
@@ -24,4 +33,40 @@ MonoBehaviour:
     _minimumConstraint: 0
     _maximumConstraint: 0
     _typeConstraint: 
-  _version: 3
+  - _name: FloatSchema
+    _type: 3
+    _availability: Always (not saved)
+    _initializer:
+      _statement: 5.2
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: StringSchema
+    _type: 4
+    _availability: Always (not saved)
+    _initializer:
+      _statement: '"What"'
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: ObjectSchema
+    _type: 5
+    _availability: Always (not saved)
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: StoreSchema
+    _type: 6
+    _availability: Always (not saved)
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  _version: 22

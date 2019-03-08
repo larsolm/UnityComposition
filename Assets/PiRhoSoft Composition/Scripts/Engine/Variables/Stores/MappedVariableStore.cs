@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -25,6 +26,9 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class MappedVariableStore : IVariableStore, IVariableList
 	{
+		private const string _invalidFieldError = "(CMVSIF) failed to map field '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived field types can be mapped";
+		private const string _invalidPropertyError = "(CMVSIP) failed to map property '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived property types can be mapped";
+
 		private VariableMap _map;
 		private IVariableList[] _lists;
 
@@ -196,6 +200,9 @@ namespace PiRhoSoft.CompositionEngine
 
 			while (type != null && type != typeof(MonoBehaviour) && type != typeof(object))
 			{
+				// when using Delegate.CreateDelegate, the object type in the method signature can be a more derived
+				// type than the declaring type, but not a less derived type
+
 				var map = GetPropertyMap<OwnerType>(type);
 
 				if (map != null)
@@ -232,8 +239,44 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (mapping != null)
 				{
-					var getter = mapping.Readable ? CreateGetter<OwnerType, int>(field) : null;
-					var setter = mapping.Writable ? CreateIntSetter<OwnerType>(field) : null;
+					Func<OwnerType, VariableValue> getter = null;
+					Func<OwnerType, VariableValue, SetVariableResult> setter = null;
+
+					if (field.FieldType == typeof(bool))
+					{
+						getter = mapping.Readable ? CreateGetter<OwnerType, bool>(field) : null;
+						setter = mapping.Writable ? CreateBoolSetter<OwnerType>(field) : null;
+					}
+					else if (field.FieldType == typeof(int))
+					{
+						getter = mapping.Readable ? CreateGetter<OwnerType, int>(field) : null;
+						setter = mapping.Writable ? CreateIntSetter<OwnerType>(field) : null;
+					}
+					else if (field.FieldType == typeof(float))
+					{
+						getter = mapping.Readable ? CreateGetter<OwnerType, float>(field) : null;
+						setter = mapping.Writable ? CreateFloatSetter<OwnerType>(field) : null;
+					}
+					else if (field.FieldType == typeof(string))
+					{
+						getter = mapping.Readable ? CreateGetter<OwnerType, string>(field) : null;
+						setter = mapping.Writable ? CreateStringSetter<OwnerType>(field) : null;
+					}
+					else if (typeof(Object).IsAssignableFrom(field.FieldType))
+					{
+						getter = mapping.Readable ? CreateGetter<OwnerType, Object>(field) : null;
+						setter = mapping.Writable ? CreateObjectSetter<OwnerType>(field) : null;
+					}
+					else if (typeof(IVariableStore).IsAssignableFrom(field.FieldType))
+					{
+						getter = mapping.Readable ? CreateGetter<OwnerType, IVariableStore>(field) : null;
+						setter = mapping.Writable ? CreateStoreSetter<OwnerType>(field) : null;
+					}
+					else
+					{
+						Debug.LogErrorFormat(_invalidFieldError, field.Name, field.FieldType.Name);
+						continue;
+					}
 
 					map.Add(field.Name, getter, setter);
 				}
@@ -251,24 +294,41 @@ namespace PiRhoSoft.CompositionEngine
 					Func<OwnerType, VariableValue> getter = null;
 					Func<OwnerType, VariableValue, SetVariableResult> setter = null;
 
-					if (property.PropertyType == typeof(int))
+					if (property.PropertyType == typeof(bool))
+					{
+						getter = getMethod != null ? CreateGetter<OwnerType, bool>(getMethod) : null;
+						setter = setMethod != null ? CreateBoolSetter<OwnerType>(setMethod) : null;
+					}
+					else if (property.PropertyType == typeof(int))
 					{
 						getter = getMethod != null ? CreateGetter<OwnerType, int>(getMethod) : null;
 						setter = setMethod != null ? CreateIntSetter<OwnerType>(setMethod) : null;
 					}
-
-					// sbyte, short, int, long, byte, ushort, uint, ulong, char, Enum
-					// float, double, decimal
-					// bool
-					// Object
-					// IVariableStore
-
-					//if (type == typeof(bool)) return VariableType.Boolean;
-					//else if (type == typeof(int)) return VariableType.Integer;
-					//else if (type == typeof(float)) return VariableType.Number;
-					//else if (type == typeof(string)) return VariableType.String;
-					//else if (typeof(Object).IsAssignableFrom(type)) return VariableType.Object;
-					//else if (typeof(IVariableStore).IsAssignableFrom(type)) return VariableType.Store;
+					else if (property.PropertyType == typeof(float))
+					{
+						getter = getMethod != null ? CreateGetter<OwnerType, float>(getMethod) : null;
+						setter = setMethod != null ? CreateFloatSetter<OwnerType>(setMethod) : null;
+					}
+					else if (property.PropertyType == typeof(string))
+					{
+						getter = getMethod != null ? CreateGetter<OwnerType, string>(getMethod) : null;
+						setter = setMethod != null ? CreateStringSetter<OwnerType>(setMethod) : null;
+					}
+					else if (typeof(Object).IsAssignableFrom(property.PropertyType))
+					{
+						getter = getMethod != null ? CreateGetter<OwnerType, Object>(getMethod) : null;
+						setter = setMethod != null ? CreateObjectSetter<OwnerType>(setMethod) : null;
+					}
+					else if (typeof(IVariableStore).IsAssignableFrom(property.PropertyType))
+					{
+						getter = getMethod != null ? CreateGetter<OwnerType, IVariableStore>(getMethod) : null;
+						setter = setMethod != null ? CreateStoreSetter<OwnerType>(setMethod) : null;
+					}
+					else
+					{
+						Debug.LogErrorFormat(_invalidPropertyError, property.Name, property.PropertyType.Name);
+						continue;
+					}
 
 					map.Add(property.Name, getter, setter);
 				}
@@ -288,6 +348,22 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateBoolSetter<OwnerType>(FieldInfo field)
+		{
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Boolean)
+				{
+					field.SetValue(obj, value.Boolean);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
 		private Func<OwnerType, VariableValue, SetVariableResult> CreateIntSetter<OwnerType>(FieldInfo field)
 		{
 			return (obj, value) =>
@@ -295,6 +371,71 @@ namespace PiRhoSoft.CompositionEngine
 				if (value.Type == VariableType.Integer)
 				{
 					field.SetValue(obj, value.Integer);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateFloatSetter<OwnerType>(FieldInfo field)
+		{
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Number || value.Type == VariableType.Integer)
+				{
+					field.SetValue(obj, value.Number);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateStringSetter<OwnerType>(FieldInfo field)
+		{
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.String)
+				{
+					field.SetValue(obj, value.String);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateObjectSetter<OwnerType>(FieldInfo field)
+		{
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				{
+					field.SetValue(obj, value.Object);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateStoreSetter<OwnerType>(FieldInfo field)
+		{
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				{
+					field.SetValue(obj, value.Store);
 					return SetVariableResult.Success;
 				}
 				else
@@ -319,6 +460,24 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateBoolSetter<OwnerType>(MethodInfo setter)
+		{
+			var caller = (Action<OwnerType, bool>)Delegate.CreateDelegate(typeof(Action<OwnerType, bool>), setter);
+
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Boolean)
+				{
+					caller(obj, value.Boolean);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
 		private Func<OwnerType, VariableValue, SetVariableResult> CreateIntSetter<OwnerType>(MethodInfo setter)
 		{
 			var caller = (Action<OwnerType, int>)Delegate.CreateDelegate(typeof(Action<OwnerType, int>), setter);
@@ -328,6 +487,78 @@ namespace PiRhoSoft.CompositionEngine
 				if (value.Type == VariableType.Integer)
 				{
 					caller(obj, value.Integer);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateFloatSetter<OwnerType>(MethodInfo setter)
+		{
+			var caller = (Action<OwnerType, float>)Delegate.CreateDelegate(typeof(Action<OwnerType, float>), setter);
+
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Number || value.Type == VariableType.Integer)
+				{
+					caller(obj, value.Number);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateStringSetter<OwnerType>(MethodInfo setter)
+		{
+			var caller = (Action<OwnerType, string>)Delegate.CreateDelegate(typeof(Action<OwnerType, string>), setter);
+
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.String)
+				{
+					caller(obj, value.String);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateObjectSetter<OwnerType>(MethodInfo setter)
+		{
+			var caller = (Action<OwnerType, Object>)Delegate.CreateDelegate(typeof(Action<OwnerType, Object>), setter);
+
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				{
+					caller(obj, value.Object);
+					return SetVariableResult.Success;
+				}
+				else
+				{
+					return SetVariableResult.TypeMismatch;
+				}
+			};
+		}
+
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateStoreSetter<OwnerType>(MethodInfo setter)
+		{
+			var caller = (Action<OwnerType, IVariableStore>)Delegate.CreateDelegate(typeof(Action<OwnerType, IVariableStore>), setter);
+
+			return (obj, value) =>
+			{
+				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				{
+					caller(obj, value.Store);
 					return SetVariableResult.Success;
 				}
 				else
