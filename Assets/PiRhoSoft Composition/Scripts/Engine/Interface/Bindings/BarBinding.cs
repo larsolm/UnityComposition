@@ -19,6 +19,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Range(0.0f, 1.0f)]
 		public float Speed = 0.0f;
 
+		[Tooltip("Speed is affected by Time.timeScale")]
+		public bool UseScaledTime = true;
+
 		[Tooltip("The variable holding the amount (numerator) the image should be filled")]
 		public VariableReference AmountVariable = new VariableReference();
 
@@ -90,7 +93,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			while (_image.fillAmount != target)
 			{
-				var speed = Speed * Time.deltaTime;
+				var delta = UseScaledTime ? Time.deltaTime : Time.unscaledDeltaTime;
+				var speed = Speed * delta;
 				var fill = Mathf.MoveTowards(_image.fillAmount, target, speed);
 
 				SetFill(fill);

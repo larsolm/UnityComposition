@@ -18,6 +18,9 @@ namespace PiRhoSoft.CompositionEngine
 		[InlineDisplay(PropagateLabel = true)]
 		public NumberVariableSource Time = new NumberVariableSource(1.0f);
 
+		[Tooltip("Time is affected by Time.timeScale")]
+		public bool UseScaledTime = true;
+
 		public override Color NodeColor => Colors.Sequencing;
 
 		public override void GetInputs(List<VariableDefinition> inputs)
@@ -28,9 +31,16 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Time.TryGetValue(variables, this, out var time))
-				yield return new WaitForSeconds(time);
+			{
+				if (UseScaledTime)
+					yield return new WaitForSeconds(time);
+				else
+					yield return new WaitForSecondsRealtime(time);
+			}
 			else
+			{
 				Debug.LogFormat(this, _timeNotFoundWarning, Name);
+			}
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}

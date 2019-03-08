@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Speed Graph
+  m_EditorClassIdentifier: 
+  _nodes:
+    _items:
+    - {fileID: 114953240794615210}
+  StartPosition: {x: -281.6, y: -25.6}
+  Process: {fileID: 114953240794615210}
+--- !u!114 &114953240794615210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 38.4, y: -25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: this.Acceleration = input.Acceleration;

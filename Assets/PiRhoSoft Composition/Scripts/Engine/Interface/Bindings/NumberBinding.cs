@@ -19,6 +19,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Min(0)]
 		public int Speed = 0;
 
+		[Tooltip("Speed is affected by Time.timeScale")]
+		public bool UseScaledTime = true;
+
 		private TextMeshProUGUI _text;
 
 		void Awake()
@@ -60,8 +63,9 @@ namespace PiRhoSoft.CompositionEngine
 				var value = (float)current;
 				while (current != target)
 				{
-					var speed = Speed * Time.deltaTime;
-					value = Mathf.MoveTowards(value, (float)target, speed);
+					var delta = UseScaledTime ? Time.deltaTime : Time.unscaledDeltaTime;
+					var speed = Speed * delta;
+					value = Mathf.MoveTowards(value, target, speed);
 					current = Mathf.RoundToInt(value);
 
 					SetValue(current);

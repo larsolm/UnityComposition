@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -11,23 +10,15 @@ namespace PiRhoSoft.CompositionEngine
 		None
 	}
 
-	public class VariableInitializerAttribute : Attribute
+	[HelpURL(Composition.DocumentationUrl + "variable-schema")]
+	[CreateAssetMenu(menuName = "PiRho Soft/Schema", fileName = "Schema", order = 119)]
+	public class VariableSchema : ScriptableObject
 	{
-		public VariableInitializerType Type;
-		public VariableInitializerAttribute(VariableInitializerType type) => Type = type;
-	}
+		public VariableInitializerType InitializerType = VariableInitializerType.DefaultValue;
+		public string[] Availabilities = new string[0];
 
-	public class VariableAvailabilitiesAttribute : Attribute
-	{
-		public string[] Availabilities;
-		public VariableAvailabilitiesAttribute(params string[] availabilities) => Availabilities = availabilities;
-	}
-
-	[Serializable]
-	public class VariableSchema
-	{
-		[SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
-		[SerializeField] private int _version = 0;
+		[HideInInspector] [SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
+		[HideInInspector] [SerializeField] private int _version = 0;
 
 		public int Version
 		{
