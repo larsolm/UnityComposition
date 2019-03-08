@@ -175,19 +175,23 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (!_mappingDatas.TryGetValue(key, out var data) || data.Map.Version != version)
 			{
-				data = new MappingData
+				if (data == null)
 				{
-					Map = new VariableMap(version),
-					Properties = GetPropertyMaps<OwnerType>()
-				};
+					data = new MappingData
+					{
+						Properties = GetPropertyMaps<OwnerType>()
+					};
+
+					_mappingDatas.Add(key, data);
+				}
+
+				data.Map = new VariableMap(version);
 
 				foreach (var propertyMap in data.Properties)
 					data.Map.Add(propertyMap);
 
 				if (schema != null)
 					data.Map.Add(schema);
-
-				_mappingDatas.Add(key, data);
 			}
 
 			return data;

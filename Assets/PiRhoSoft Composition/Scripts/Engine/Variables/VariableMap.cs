@@ -18,6 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableMap(int version)
 		{
+			Version = version;
 		}
 
 		public VariableMap Add(VariableSchema schema)
