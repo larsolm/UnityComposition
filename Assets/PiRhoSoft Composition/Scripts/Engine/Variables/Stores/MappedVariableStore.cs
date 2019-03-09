@@ -234,8 +234,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void FindProperties<OwnerType>(Type type, PropertyMap<OwnerType> map) where OwnerType : class
 		{
-			var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+			var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
 
 			foreach (var field in fields)
 			{

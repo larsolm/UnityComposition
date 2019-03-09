@@ -138,7 +138,7 @@ MonoBehaviour:
   Name: Disable Component
   This:
     _variable:
-    - this
+    - Character
     _lookups:
     - 
   GraphPosition: {x: -576, y: -153.6}
@@ -290,7 +290,7 @@ MonoBehaviour:
   Name: Enable Component
   This:
     _variable:
-    - this
+    - Character
     _lookups:
     - 
   GraphPosition: {x: -576, y: 192}

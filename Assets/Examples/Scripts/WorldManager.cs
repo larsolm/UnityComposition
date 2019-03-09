@@ -16,15 +16,6 @@ namespace PiRhoSoft.CompositionExample
 		[MappedVariable] public bool BoolField = true;
 		[MappedVariable] public bool BoolProperty { get; set; }
 
-		[MappedVariable] public int IntField = 7;
-		[MappedVariable] public int IntProperty { get; set; }
-
-		[MappedVariable] public float FloatField = 17.0f;
-		[MappedVariable] public float FloatProperty { get; set; }
-
-		[MappedVariable] public string StringField = "Hello";
-		[MappedVariable] public string StringProperty { get; set; }
-
 		[MappedVariable] public Character ObjectField;
 		[MappedVariable] public Character ObjectProperty { get; set; }
 
@@ -47,13 +38,5 @@ namespace PiRhoSoft.CompositionExample
 		public IEnumerable<string> GetVariableNames() => Store.GetVariableNames();
 
 		#endregion
-	}
-
-	public class SubWorldManager : WorldManager
-	{
-		public override void OnEnable()
-		{
-			Store.Setup(this, Schema, Variables);
-		}
 	}
 }

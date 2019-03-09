@@ -657,7 +657,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 358724776}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.04, y: 1.82, z: 0}
+  m_LocalPosition: {x: -0, y: 2, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1700,7 +1700,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1014531341}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f35b9325b45f4f743b66b77333454ba0, type: 3}
+  m_Script: {fileID: 11500000, guid: 64fcf6fe198270a4ca9f3f9bd56dd1ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: ce72ac8d95e932d48960beaaf44404b3, type: 2}
@@ -1730,12 +1730,20 @@ MonoBehaviour:
       Type: 6
       Data: 
       Object: {fileID: 0}
-    _version: 22
+    - Name: Door1Open
+      Type: 1
+      Data: False
+      Object: {fileID: 0}
+    - Name: Jewels
+      Type: 2
+      Data: 0
+      Object: {fileID: 0}
+    _version: 26
   BoolField: 1
+  ObjectField: {fileID: 0}
   IntField: 7
   FloatField: 17
   StringField: Hello
-  ObjectField: {fileID: 0}
 --- !u!1 &1078675538
 GameObject:
   m_ObjectHideFlags: 0
@@ -2509,7 +2517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 0}
   Camera: {fileID: 519420031}
-  World: {fileID: 1014531345}
+  World: {fileID: 0}
   Acceleration: 1
   Variables:
     _data: []
