@@ -36,6 +36,9 @@ MonoBehaviour:
     - {fileID: 114507292207840828}
     - {fileID: 114207152032771554}
     - {fileID: 114292271410321422}
+    - {fileID: 114283850131218016}
+    - {fileID: 114046428756713556}
+    - {fileID: 114527314800342358}
   StartPosition: {x: -704, y: -0}
   Enter: {fileID: 114194465311013594}
   Process: {fileID: 114811635731448696}
@@ -68,6 +71,31 @@ MonoBehaviour:
   IsLast: 1
   Message:
     Text: Object:{World.ObjectField}, {World.ObjectProperty}, {World.ObjectSchema}
+--- !u!114 &114046428756713556
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -512, y: -268.80002}
+  IsBreakpoint: 0
+  Next: {fileID: 114527314800342358}
+  Expression:
+    _statement: 'local.one = 1
+
+      local.two = 2'
 --- !u!114 &114063821750428484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -143,7 +171,7 @@ MonoBehaviour:
     - 
   GraphPosition: {x: -576, y: -153.6}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 114046428756713556}
 --- !u!114 &114194465311013594
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,6 +275,32 @@ MonoBehaviour:
   IsLast: 1
   Message:
     Text: Int:{World.IntField}, {World.IntProperty}, {World.IntSchema}
+--- !u!114 &114283850131218016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Binding
+  m_EditorClassIdentifier: 
+  Name: Update Binding
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 166.40001, y: -384}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    InterfaceName: Interface
+    ControlName: Expression
+  Group: 
+  WaitForCompletion: 0
 --- !u!114 &114292271410321422
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,6 +461,30 @@ MonoBehaviour:
   IsLast: 1
   Message:
     Text: Int:{World.IntField}, {World.IntProperty}, {World.IntSchema}
+--- !u!114 &114527314800342358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
+  m_Name: Show Control
+  m_EditorClassIdentifier: 
+  Name: Show Control
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: -128, y: -307.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114283850131218016}
+  Control:
+    InterfaceName: Interface
+    ControlName: Expression
 --- !u!114 &114587536697093782
 MonoBehaviour:
   m_ObjectHideFlags: 1
