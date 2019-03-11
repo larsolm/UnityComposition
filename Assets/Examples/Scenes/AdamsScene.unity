@@ -2517,7 +2517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 0}
   Camera: {fileID: 519420031}
-  World: {fileID: 0}
+  World: {fileID: 1014531345}
   Acceleration: 1
   Variables:
     _data: []

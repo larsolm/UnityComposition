@@ -12,10 +12,10 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class Operation
 	{
-		public const string MismatchedMathType1Exception = "the operator '{0}' was passed a value of type {0} but can only operate on values of type Integer and Number";
-		public const string MismatchedMathType2Exception = "the operator '{0}' was passed values of type {0} and {1} but can only operate on values of type Integer and Number";
-		public const string MismatchedBooleanType1Exception = "the operator '{0}' was passed a value of type {0} but can only operate on values of type Boolean";
-		public const string MismatchedBooleanType2Exception = "the operator '{0}' was passed values of type {0} and {1} but can only operate on values of type Boolean";
+		public const string MismatchedMathType1Exception = "the operator '{0}' was passed a value of type {1} but can only operate on values of type Integer and Number";
+		public const string MismatchedMathType2Exception = "the operator '{0}' was passed values of type {1} and {2} but can only operate on values of type Integer and Number";
+		public const string MismatchedBooleanType1Exception = "the operator '{0}' was passed a value of type {1} but can only operate on values of type Boolean";
+		public const string MismatchedBooleanType2Exception = "the operator '{0}' was passed values of type {1} and {2} but can only operate on values of type Boolean";
 
 		public abstract VariableValue Evaluate(IVariableStore variables);
 		public abstract void ToString(StringBuilder builder);

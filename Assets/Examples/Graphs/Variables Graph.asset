@@ -58,7 +58,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -230.40001, y: 140.8}
+  GraphPosition: {x: -192, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 114507292207840828}
   Control:
@@ -67,7 +67,7 @@ MonoBehaviour:
   Interaction: 0
   IsLast: 1
   Message:
-    Text: String:{World.ObjectField}, {World.ObjectProperty}, {World.ObjectSchema}
+    Text: Object:{World.ObjectField}, {World.ObjectProperty}, {World.ObjectSchema}
 --- !u!114 &114063821750428484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,7 +86,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 665.60004, y: 64}
+  GraphPosition: {x: 704, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114280789961282946}
   Control:
@@ -114,7 +114,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 217.6, y: -89.6}
+  GraphPosition: {x: 256, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114587536697093782}
   Expression:
@@ -184,11 +184,11 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 217.6, y: 217.6}
+  GraphPosition: {x: 256, y: 204.8}
   IsBreakpoint: 0
   Next: {fileID: 114778787991903320}
   Expression:
-    _statement: 'World.StoreField = this;
+    _statement: 'World.StoreField = Character;
 
       World.StoreProperty = Character;'
 --- !u!114 &114280789961282946
@@ -209,7 +209,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 665.60004, y: 140.8}
+  GraphPosition: {x: 704, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 114292271410321422}
   Control:
@@ -218,7 +218,7 @@ MonoBehaviour:
   Interaction: 0
   IsLast: 1
   Message:
-    Text: String:{World.ObjectField}, {World.ObjectProperty}, {World.ObjectSchema}
+    Text: Object:{World.ObjectField}, {World.ObjectProperty}, {World.ObjectSchema}
 --- !u!114 &114281964665549280
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -237,7 +237,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 665.60004, y: -89.6}
+  GraphPosition: {x: 704, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114766472818757950}
   Control:
@@ -265,7 +265,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 665.60004, y: 217.6}
+  GraphPosition: {x: 704, y: 204.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -274,7 +274,7 @@ MonoBehaviour:
   Interaction: 0
   IsLast: 1
   Message:
-    Text: String:{World.StoreField}, {World.StoreProperty}, {World.StoreSchema}
+    Text: Store:{World.StoreField}, {World.StoreProperty}, {World.StoreSchema}
 --- !u!114 &114304356319197900
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,11 +314,11 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 217.6, y: 140.8}
+  GraphPosition: {x: 256, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 114207152032771554}
   Expression:
-    _statement: 'World.ObjectField = this;
+    _statement: 'World.ObjectField = Character;
 
       World.ObjectProperty = Character;
 
@@ -341,7 +341,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -230.40001, y: 64}
+  GraphPosition: {x: -192, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114041415445576420}
   Control:
@@ -369,7 +369,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -230.40001, y: 217.6}
+  GraphPosition: {x: -192, y: 204.8}
   IsBreakpoint: 0
   Next: {fileID: 114660387639631496}
   Control:
@@ -378,7 +378,7 @@ MonoBehaviour:
   Interaction: 0
   IsLast: 1
   Message:
-    Text: String:{World.StoreField}, {World.StoreProperty}, {World.StoreSchema}
+    Text: Store:{World.StoreField}, {World.StoreProperty}, {World.StoreSchema}
 --- !u!114 &114524682042660420
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,7 +397,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -230.40001, y: -89.6}
+  GraphPosition: {x: -192, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114847860988142318}
   Control:
@@ -425,7 +425,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 217.6, y: -12.8}
+  GraphPosition: {x: 256, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114676519705400190}
   Expression:
@@ -452,7 +452,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 217.6, y: -166.40001}
+  GraphPosition: {x: 256, y: -179.2}
   IsBreakpoint: 0
   Next: {fileID: 114085982110002696}
   Expression:
@@ -479,7 +479,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 217.6, y: 64}
+  GraphPosition: {x: 256, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114334237225043210}
   Expression:
@@ -506,7 +506,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 665.60004, y: -12.8}
+  GraphPosition: {x: 704, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114063821750428484}
   Control:
@@ -534,7 +534,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 665.60004, y: -166.40001}
+  GraphPosition: {x: 704, y: -179.2}
   IsBreakpoint: 0
   Next: {fileID: 114281964665549280}
   Control:
@@ -584,7 +584,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -230.40001, y: -166.40001}
+  GraphPosition: {x: -192, y: -179.2}
   IsBreakpoint: 0
   Next: {fileID: 114524682042660420}
   Control:
@@ -612,7 +612,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -230.40001, y: -12.8}
+  GraphPosition: {x: -192, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114415663065504694}
   Control:
