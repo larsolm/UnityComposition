@@ -1288,15 +1288,15 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void SetupContextMenu(InputManager input)
 		{
-			var wasMouseDragged = false;
+			var wasMouseDragged = 0;
 
 			input.Create<InputManager.EventTrigger>()
 				.SetEvent(EventType.MouseDown)
-				.AddAction(() => wasMouseDragged = false);
+				.AddAction(() => wasMouseDragged = 0);
 
 			input.Create<InputManager.EventTrigger>()
 				.SetEvent(EventType.MouseDrag)
-				.AddAction(() => wasMouseDragged = true);
+				.AddAction(() => wasMouseDragged++);
 
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseDown, InputManager.MouseButton.Right)
@@ -1306,7 +1306,7 @@ namespace PiRhoSoft.CompositionEditor
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseUp, InputManager.MouseButton.Right)
 				.AddCondition(IsMouseInViewport)
-				.AddCondition(() => _graph != null && _hoveredNode == null && !wasMouseDragged && !_simulateDrag)
+				.AddCondition(() => _graph != null && _hoveredNode == null && wasMouseDragged < 4 && !_simulateDrag)
 				.AddAction(() => _showContextMenu = true);
 		}
 
