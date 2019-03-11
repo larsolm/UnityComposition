@@ -10,9 +10,13 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Instructions/Instruction Manager")]
 	public class InstructionManager : SingletonBehaviour<InstructionManager>
 	{
-		[Tooltip("The CommandSet to load when this InstructionManager is loaded")]
-		[AssetPopup]
-		public CommandSet Commands; // this exists to provide a place to assign a CommandSet asset so that it will be loaded by Unity
+		public static string CommandFolder = "Commands";
+
+		protected override void Awake()
+		{
+			base.Awake();
+			Resources.LoadAll(CommandFolder);
+		}
 
 		public void RunInstruction(Instruction instruction, InstructionContext context, object thisObject)
 		{
@@ -31,7 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class JoinEnumerator : IEnumerator
 	{
-		private const string _iterationLimitWarning = "(CJEIL) Cancelling JoinEnumerator after 1000 unyielding iterations";
+		private const string _iterationLimitWarning = "(CJEIL) Cancelling JoinEnumerator after {0} unyielding iterations";
 
 		public static int MaximumIterations = 1000;
 

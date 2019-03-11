@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class RandomCommand : Command
+	public class RandomCommand : ICommand
 	{
-		public override VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			switch (parameters.Count)
 			{
@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 					ValidateType(ref max, name, 1);
 
 					if (min > max)
-						throw new CommandEvaluationException(name, InvalidRangeException, min, max);
+						throw new CommandEvaluationException(name, Command.InvalidRangeException, min, max);
 
 					if (min.Type == VariableType.Integer)
 					{
@@ -52,7 +52,7 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				default:
 				{
-					throw new CommandEvaluationException(name, TooManyParametersException, parameters.Count, "s", 2);
+					throw new CommandEvaluationException(name, Command.TooManyParametersException, parameters.Count, "s", 2);
 				}
 			}
 		}
@@ -60,7 +60,7 @@ namespace PiRhoSoft.CompositionEngine
 		private void ValidateType(ref VariableValue value, string name, int index)
 		{
 			if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-				throw new CommandEvaluationException(name, WrongParameterType2Exception, value.Type, index, VariableType.Integer, VariableType.Number);
+				throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, value.Type, index, VariableType.Integer, VariableType.Number);
 		}
 	}
 }

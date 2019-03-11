@@ -95,7 +95,9 @@ MonoBehaviour:
   Expression:
     _statement: 'local.one = 1
 
-      local.two = 2'
+      local.two = 2
+
+      local.three = CustomThing(local.one, local.two)'
 --- !u!114 &114063821750428484
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -479,7 +481,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: -128, y: -307.2}
+  GraphPosition: {x: -179.2, y: -307.2}
   IsBreakpoint: 0
   Next: {fileID: 114283850131218016}
   Control:

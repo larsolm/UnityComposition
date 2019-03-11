@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class AcosCommand : Command
+	public class AcosCommand : ICommand
 	{
-		public override VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 1)
 			{
@@ -15,12 +15,12 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					case VariableType.Integer: return VariableValue.Create(Mathf.Acos(result.Integer));
 					case VariableType.Number: return VariableValue.Create(Mathf.Acos(result.Number));
-					default: throw new CommandEvaluationException(name, WrongParameterType1Exception, result.Type, 0, VariableType.Number);
+					default: throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, result.Type, 0, VariableType.Number);
 				}
 			}
 			else
 			{
-				throw new CommandEvaluationException(name, WrongParameterCountException, parameters.Count, "s", 1);
+				throw new CommandEvaluationException(name, Command.WrongParameterCountException, parameters.Count, "s", 1);
 			}
 		}
 	}

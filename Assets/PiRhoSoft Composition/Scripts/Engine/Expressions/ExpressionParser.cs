@@ -24,7 +24,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidToken1Exception = "{0} expected";
 		private const string _invalidToken3Exception = "{0}, {1}, or {2} expected";
 
-		private static Dictionary<string, Command> _commands = new Dictionary<string, Command>();
+		private static Dictionary<string, ICommand> _commands = new Dictionary<string, ICommand>();
 		private static Dictionary<string, OperatorCreator> _prefixOperators = new Dictionary<string, OperatorCreator>();
 		private static Dictionary<string, OperatorCreator> _infixOperators = new Dictionary<string, OperatorCreator>();
 		private static Dictionary<string, OperatorPrecedence> _precedences = new Dictionary<string, OperatorPrecedence>();
@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 		private List<ExpressionToken> _tokens;
 		private int _index;
 
-		public static void AddCommand(string name, Command command)
+		public static void AddCommand(string name, ICommand command)
 		{
 			if (!_commands.ContainsKey(name))
 				_commands.Add(name, command);
@@ -46,9 +46,9 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogErrorFormat(_missingCommandError, name);
 		}
 
-		public static Command GetCommand(string name)
+		public static ICommand GetCommand(string name)
 		{
-			return _commands.TryGetValue(name, out Command command) ? command : null;
+			return _commands.TryGetValue(name, out ICommand command) ? command : null;
 		}
 
 		public static void AddPrefixOperator<OperatorType>(string symbol) where OperatorType : PrefixOperation, new()

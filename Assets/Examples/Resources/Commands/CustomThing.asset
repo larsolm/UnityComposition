@@ -9,12 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ed19218dbe37e0646bb07ba3b2eeadc5, type: 3}
-  m_Name: World
+  m_Script: {fileID: 11500000, guid: 85fe587d520831147b347d0bb61b984d, type: 3}
+  m_Name: CustomThing
   m_EditorClassIdentifier: 
-  WorldSchema:
-    _definitions: []
-    _version: 0
-  CharacterSchema:
-    _definitions: []
-    _version: 0
+  Name: CustomThing
+  Parameters:
+    _items:
+    - Name: numerator
+      Type: 3
+    - Name: denominator
+      Type: 3
+  Expression:
+    _statement: numerator / denominator

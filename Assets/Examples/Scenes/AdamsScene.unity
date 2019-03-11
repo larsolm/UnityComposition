@@ -1659,7 +1659,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c3f7831992e3aa4dae6e7dc1474acfe, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Commands: {fileID: 11400000, guid: e91c2b4745cdace45b993f249278978a, type: 2}
 --- !u!114 &1014531343
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1715,11 +1714,11 @@ MonoBehaviour:
       Object: {fileID: 0}
     - Name: IntSchema
       Type: 2
-      Data: 91
+      Data: 4
       Object: {fileID: 0}
     - Name: FloatSchema
       Type: 3
-      Data: 5.2
+      Data: 0.7
       Object: {fileID: 0}
     - Name: StringSchema
       Type: 4
@@ -1741,7 +1740,7 @@ MonoBehaviour:
       Type: 2
       Data: 0
       Object: {fileID: 0}
-    _version: 26
+    _version: 65
   BoolField: 1
   ObjectField: {fileID: 0}
   IntField: 7
@@ -2709,7 +2708,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   Expression:
-    _statement: local.one + local.two
+    _statement: local.three
 --- !u!114 &2031901161
 MonoBehaviour:
   m_ObjectHideFlags: 0

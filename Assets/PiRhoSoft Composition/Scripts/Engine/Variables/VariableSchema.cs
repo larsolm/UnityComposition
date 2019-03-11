@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[HelpURL(Composition.DocumentationUrl + "variable-schema")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Schema", fileName = "Schema", order = 119)]
+	[CreateAssetMenu(menuName = "PiRho Soft/Schema", fileName = "Schema", order = 129)]
 	public class VariableSchema : ScriptableObject
 	{
 		public VariableInitializerType InitializerType = VariableInitializerType.DefaultValue;
