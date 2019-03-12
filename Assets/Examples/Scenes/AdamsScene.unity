@@ -2517,13 +2517,45 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34c0c14dd663d042a12ed42c60b8752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 0}
+  Schema: {fileID: 11400000, guid: ce72ac8d95e932d48960beaaf44404b3, type: 2}
   Camera: {fileID: 519420031}
   World: {fileID: 1014531345}
   Acceleration: 1
   Variables:
-    _data: []
-    _version: 0
+    _data:
+    - Name: BoolSchema
+      Type: 1
+      Data: True
+      Object: {fileID: 0}
+    - Name: IntSchema
+      Type: 2
+      Data: 4
+      Object: {fileID: 0}
+    - Name: FloatSchema
+      Type: 3
+      Data: 0.7
+      Object: {fileID: 0}
+    - Name: StringSchema
+      Type: 4
+      Data: What
+      Object: {fileID: 0}
+    - Name: ObjectSchema
+      Type: 5
+      Data: 
+      Object: {fileID: 0}
+    - Name: StoreSchema
+      Type: 6
+      Data: 
+      Object: {fileID: 0}
+    - Name: Door1Open
+      Type: 1
+      Data: False
+      Object: {fileID: 0}
+    - Name: Jewels
+      Type: 2
+      Data: 0
+      Object: {fileID: 0}
+    _version: 65
 --- !u!58 &1842361157
 CircleCollider2D:
   m_ObjectHideFlags: 0

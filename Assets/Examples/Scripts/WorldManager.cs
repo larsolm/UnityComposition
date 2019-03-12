@@ -6,9 +6,9 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionExample
 {
 	[AddComponentMenu("PiRho Soft/Examples/World Manager")]
-	public class WorldManager : MonoBehaviour, IReloadable, IVariableStore
+	public class WorldManager : MonoBehaviour, IVariableStore
 	{
-		[ReloadOnChange] [AssetPopup] public VariableSchema Schema;
+		[ChangeTrigger(nameof(SetupSchema))] [AssetPopup] public VariableSchema Schema;
 
 		public VariableList Variables = new VariableList();
 		public MappedVariableStore Store = new MappedVariableStore();
@@ -22,13 +22,14 @@ namespace PiRhoSoft.CompositionExample
 		[MappedVariable] public IVariableStore StoreField;
 		[MappedVariable] public IVariableStore StoreProperty { get; set; }
 
-		public virtual void OnEnable()
+		void OnEnable()
 		{
-			Store.Setup(this, Schema, Variables);
+			SetupSchema();
 		}
 
-		public void OnDisable()
+		protected virtual void SetupSchema()
 		{
+			Store.Setup(this, Schema, Variables);
 		}
 
 		#region IVariableStore Implementation

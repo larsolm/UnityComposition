@@ -18,11 +18,19 @@ namespace PiRhoSoft.UtilityEditor
 
 		public static T GetObject<T>(SerializedProperty property) where T : class
 		{
+			return GetAncestor<T>(property, 0);
+		}
+
+		public static T GetAncestor<T>(SerializedProperty property, int generations) where T : class
+		{
 			var obj = (object)property.serializedObject.targetObject;
 			var elements = property.propertyPath.Replace("Array.data[", "[").Split('.');
+			var count = elements.Length - generations;
 
-			foreach (var element in elements)
+			for (var i = 0; i < count; i++)
 			{
+				var element = elements[i];
+
 				if (element.StartsWith("["))
 				{
 					var indexString = element.Substring(1, element.Length - 2);

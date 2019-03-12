@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	[HelpURL(Composition.DocumentationUrl + "variable-command")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Command", fileName = "Command", order = 119)]
-	public class Command : ScriptableObject, ICommand, IReloadable
+	public class Command : ScriptableObject, ICommand
 	{
 		[Serializable]
 		public class Parameter
@@ -39,28 +39,40 @@ namespace PiRhoSoft.CompositionEngine
 		public const string WrongParameterType2Exception = "the Command was passed a {0} for parameter {1} but expected a {2} or {3}";
 		public const string InvalidRangeException = "the min value ({0}) should be less than the max value ({1})";
 
-		[ReloadOnChange] public string Name;
+		[ChangeTrigger(nameof(OnNameChanged))] [Delayed] public string Name;
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline)] public ParameterList Parameters = new ParameterList();
 		public Expression Expression = new Expression();
 
 		private string _registeredName;
 
-		public void OnEnable()
+		void OnEnable()
 		{
-			if (!string.IsNullOrEmpty(Name))
-			{
-				_registeredName = Name;
-				ExpressionParser.AddCommand(_registeredName, this);
-			}
+			Register();
 		}
 
-		public void OnDisable()
+		void OnDisable()
+		{
+			Unregister();
+		}
+
+		private void OnNameChanged()
+		{
+			Unregister();
+			Register();
+		}
+
+		private void Register()
+		{
+			if (!string.IsNullOrEmpty(Name))
+				ExpressionParser.AddCommand(Name, this);
+
+			_registeredName = Name;
+		}
+
+		private void Unregister()
 		{
 			if (!string.IsNullOrEmpty(_registeredName))
-			{
 				ExpressionParser.RemoveCommand(_registeredName);
-				_registeredName = null;
-			}
 		}
 
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)

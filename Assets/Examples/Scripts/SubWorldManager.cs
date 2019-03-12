@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionExample
 		[MappedVariable] public string StringField = "Hello";
 		[MappedVariable] public string StringProperty { get; set; }
 
-		public override void OnEnable()
+		protected override void SetupSchema()
 		{
 			Store.Setup(this, Schema, Variables);
 		}

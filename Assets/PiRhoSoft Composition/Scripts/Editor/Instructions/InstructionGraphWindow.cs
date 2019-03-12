@@ -567,9 +567,12 @@ namespace PiRhoSoft.CompositionEditor
 			if (menu == null)
 				menu = new GenericMenu();
 
-			menu.AddItem(new GUIContent(prefix + "Go To Start"), false, GoToStart);
-			menu.AddItem(new GUIContent(prefix + "Zoom To Selection"), false, GoToSelection);
-			menu.AddItem(new GUIContent(prefix + "Show All"), false, ShowAll);
+			menu.AddItem(new GUIContent(prefix + "Go To Start _HOME"), false, GoToStart);
+			menu.AddItem(new GUIContent(prefix + "Zoom To Selection _TAB"), false, GoToSelection);
+			menu.AddItem(new GUIContent(prefix + "Show All _END"), false, ShowAll);
+			menu.AddSeparator(prefix);
+			menu.AddItem(new GUIContent(prefix + "Zoom In _PGUP"), false, ShowAll);
+			menu.AddItem(new GUIContent(prefix + "Zoom Out _PGDN"), false, ShowAll);
 		}
 
 		private void CreateNodeMenu(ref GenericMenu menu, string prefix)
@@ -619,9 +622,12 @@ namespace PiRhoSoft.CompositionEditor
 			if (menu == null)
 				menu = new GenericMenu();
 
-			menu.AddItem(new GUIContent(prefix + "Cut"), false, CutNodes);
-			menu.AddItem(new GUIContent(prefix + "Copy"), false, CopyNodes);
-			menu.AddItem(new GUIContent(prefix + "Paste"), false, PasteNodes);
+			menu.AddItem(new GUIContent(prefix + "Cut %x"), false, CutNodes);
+			menu.AddItem(new GUIContent(prefix + "Copy %c"), false, CopyNodes);
+			menu.AddItem(new GUIContent(prefix + "Paste %v"), false, PasteNodes);
+			menu.AddSeparator(prefix);
+			menu.AddItem(new GUIContent(prefix + "Duplicate %d"), false, ShowAll);
+			menu.AddItem(new GUIContent(prefix + "Delete _DELETE"), false, ShowAll);
 		}
 
 		private GenericMenu CreateContextMenu()
