@@ -133,6 +133,16 @@ namespace PiRhoSoft.UtilityEditor
 			return v;
 		}
 
+		public static Rect Union(Rect one, Rect two)
+		{
+			var left = Mathf.Min(one.xMin, two.xMin);
+			var right = Mathf.Max(one.xMax, two.xMax);
+			var top = Mathf.Min(one.yMin, two.yMin);
+			var bottom = Mathf.Max(one.yMax, two.yMax);
+
+			return new Rect(left, top, right - left, bottom - top);
+		}
+
 		public static Rect AdjustHeight(Rect rect, float height, RectVerticalAlignment alignment)
 		{
 			var offset = 0.0f;

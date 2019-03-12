@@ -99,6 +99,36 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
+		public static InstructionGraphNode CloneNode(InstructionGraphNode node)
+		{
+			var clone = Instantiate(node);
+			clone.hideFlags = HideFlags.HideInHierarchy;
+			return clone;
+		}
+
+		public static void AddClonedNodes(InstructionGraph graph, IList<InstructionGraphNode.NodeData> nodes, Vector2 position)
+		{
+			var bounds = nodes[0].Bounds;
+
+			foreach (var node in nodes)
+				bounds = RectHelper.Union(bounds, node.Bounds);
+
+			var offset = new Vector2(position.x - bounds.xMin, position.y - bounds.yMin);
+
+			using (new UndoScope(graph, true))
+			{
+				foreach (var node in nodes)
+				{
+					node.Position += offset;
+					graph.Nodes.Add(node.Node);
+					Undo.RegisterCreatedObjectUndo(node.Node, "Paste Node");
+					AssetDatabase.AddObjectToAsset(node.Node, graph);
+				}
+
+				AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(graph));
+			}
+		}
+
 		public static void DestroyNode(InstructionGraph graph, InstructionGraphNode node, IList<InstructionGraphNode.ConnectionData> connections, InstructionGraphNode start)
 		{
 			foreach (var connection in connections)
