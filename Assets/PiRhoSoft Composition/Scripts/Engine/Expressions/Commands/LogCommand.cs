@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class LogCommand : Command
+	public class LogCommand : ICommand
 	{
-		public override VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 1)
 			{
@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 				var power = 10.0f;
 
 				if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, WrongParameterType1Exception, value.Type, 0, VariableType.Number);
+					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, value.Type, 0, VariableType.Number);
 
 				return VariableValue.Create(Mathf.Log(value.Number, power));
 			}
@@ -23,16 +23,16 @@ namespace PiRhoSoft.CompositionEngine
 				var power = parameters[1].Evaluate(variables);
 
 				if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, WrongParameterType1Exception, value.Type, 0, VariableType.Number);
+					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, value.Type, 0, VariableType.Number);
 
 				if (power.Type != VariableType.Integer && power.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, WrongParameterType1Exception, power.Type, 1, VariableType.Number);
+					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, power.Type, 1, VariableType.Number);
 
 				return VariableValue.Create(Mathf.Log(value.Number, power.Number));
 			}
 			else
 			{
-				throw new CommandEvaluationException(name, WrongParameterRangeException, parameters.Count, "s", 1, 2);
+				throw new CommandEvaluationException(name, Command.WrongParameterRangeException, parameters.Count, "s", 1, 2);
 			}
 		}
 	}

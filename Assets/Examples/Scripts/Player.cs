@@ -7,9 +7,9 @@ namespace PiRhoSoft.CompositionExample
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	[AddComponentMenu("PiRho Soft/Examples/Player")]
-	public class Player : MonoBehaviour, IVariableStore, IReloadable
+	public class Player : MonoBehaviour, IVariableStore
 	{
-		[AssetPopup] [ReloadOnChange] public VariableSchema Schema;
+		[AssetPopup] [ChangeTrigger(nameof(SetupSchema))] public VariableSchema Schema;
 
 		public Camera Camera;
 		public WorldManager World;
@@ -25,14 +25,19 @@ namespace PiRhoSoft.CompositionExample
 		private Rigidbody2D _body;
 		private Collider2D[] _colliders = new Collider2D[6];
 
-		public void OnEnable()
+		void Awake()
+		{
+			_body = GetComponent<Rigidbody2D>();
+		}
+
+		void OnEnable()
 		{
 			Context.Stores.Add(nameof(Player), this);
 			Context.Stores.Add(nameof(World), World);
-			Store.Setup(this, Schema, Variables);
+			SetupSchema();
 		}
 
-		public void OnDisable()
+		void OnDisable()
 		{
 			Context.Stores.Clear();
 
@@ -40,9 +45,9 @@ namespace PiRhoSoft.CompositionExample
 				_body.velocity = Vector2.zero;
 		}
 
-		void Awake()
+		private void SetupSchema()
 		{
-			_body = GetComponent<Rigidbody2D>();
+			Store.Setup(this, Schema, Variables);
 		}
 
 		void Start()

@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private const string _invalidTokenException = "invalid character '{0}'";
 
-		private const char _sentinelCharacter = ';';
+		private const string _sentinelCharacters = ";\n";
 		private const string _operatorCharacters = "+-!^*/%<=>&|?:";
 
 		public static List<ExpressionToken> Tokenize(string input)
@@ -28,14 +28,14 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var c = input[start];
 
-				if (char.IsWhiteSpace(c))
+				if (c != '\n' && char.IsWhiteSpace(c))
 				{
 					whitespace += c;
 					start++;
 				}
 				else
 				{
-					if (c == _sentinelCharacter) AddSentinel(tokens, input, start, ref start);
+					if (_sentinelCharacters.IndexOf(c) >= 0) AddSentinel(tokens, input, start, ref start);
 					else if (char.IsDigit(c)) AddInteger(tokens, input, start, ref start, whitespace);
 					else if (c == '\"' || c == '\'') AddString(tokens, input, start, ref start, c);
 					else if (IsIdentifierStartCharacter(c)) AddIdentifier(tokens, input, start, ref start, whitespace);
@@ -177,7 +177,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static void AddSentinel(List<ExpressionToken> tokens, string input, int start, ref int end)
 		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Sentinel });
+			if (tokens.Count > 0 && tokens[tokens.Count - 1].Type != ExpressionTokenType.Sentinel)
+				tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Sentinel });
+
 			end = start + 1;
 		}
 

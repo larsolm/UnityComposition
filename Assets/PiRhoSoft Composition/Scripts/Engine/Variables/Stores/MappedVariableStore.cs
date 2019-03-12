@@ -234,8 +234,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void FindProperties<OwnerType>(Type type, PropertyMap<OwnerType> map) where OwnerType : class
 		{
-			var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+			var fields = type.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+			var properties = type.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
 
 			foreach (var field in fields)
 			{
@@ -321,12 +321,12 @@ namespace PiRhoSoft.CompositionEngine
 					else if (typeof(Object).IsAssignableFrom(property.PropertyType))
 					{
 						getter = getMethod != null ? CreateGetter<OwnerType, Object>(getMethod) : null;
-						setter = setMethod != null ? CreateObjectSetter<OwnerType>(setMethod) : null;
+						setter = setMethod != null ? CreateObjectSetter<OwnerType>(property.PropertyType, setMethod) : null;
 					}
 					else if (typeof(IVariableStore).IsAssignableFrom(property.PropertyType))
 					{
 						getter = getMethod != null ? CreateGetter<OwnerType, IVariableStore>(getMethod) : null;
-						setter = setMethod != null ? CreateStoreSetter<OwnerType>(setMethod) : null;
+						setter = setMethod != null ? CreateStoreSetter<OwnerType>(property.PropertyType, setMethod) : null;
 					}
 					else
 					{
@@ -420,9 +420,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return (obj, value) =>
 			{
-				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				if ((value.Type == VariableType.Object || value.Type == VariableType.Store) && field.FieldType.IsAssignableFrom(value.RawObject.GetType()))
 				{
-					field.SetValue(obj, value.Object);
+					field.SetValue(obj, value.RawObject);
 					return SetVariableResult.Success;
 				}
 				else
@@ -437,9 +437,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return (obj, value) =>
 			{
-				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				if ((value.Type == VariableType.Object || value.Type == VariableType.Store) && field.FieldType.IsAssignableFrom(value.RawObject.GetType()))
 				{
-					field.SetValue(obj, value.Store);
+					field.SetValue(obj, value.RawObject);
 					return SetVariableResult.Success;
 				}
 				else
@@ -536,15 +536,16 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
-		private Func<OwnerType, VariableValue, SetVariableResult> CreateObjectSetter<OwnerType>(MethodInfo setter)
-		{
-			var caller = (Action<OwnerType, Object>)Delegate.CreateDelegate(typeof(Action<OwnerType, Object>), setter);
+		private static object[] _setParameters = new object[1];
 
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateObjectSetter<OwnerType>(Type objectType, MethodInfo setter)
+		{
 			return (obj, value) =>
 			{
-				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				if ((value.Type == VariableType.Object || value.Type == VariableType.Store) && objectType.IsAssignableFrom(value.RawObject.GetType()))
 				{
-					caller(obj, value.Object);
+					_setParameters[0] = value.RawObject;
+					setter.Invoke(obj, _setParameters);
 					return SetVariableResult.Success;
 				}
 				else
@@ -554,15 +555,14 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
-		private Func<OwnerType, VariableValue, SetVariableResult> CreateStoreSetter<OwnerType>(MethodInfo setter)
+		private Func<OwnerType, VariableValue, SetVariableResult> CreateStoreSetter<OwnerType>(Type storeType, MethodInfo setter)
 		{
-			var caller = (Action<OwnerType, IVariableStore>)Delegate.CreateDelegate(typeof(Action<OwnerType, IVariableStore>), setter);
-
 			return (obj, value) =>
 			{
-				if (value.Type == VariableType.Object || value.Type == VariableType.Store)
+				if ((value.Type == VariableType.Object || value.Type == VariableType.Store) && storeType.IsAssignableFrom(value.RawObject.GetType()))
 				{
-					caller(obj, value.Store);
+					_setParameters[0] = value.RawObject;
+					setter.Invoke(obj, _setParameters);
 					return SetVariableResult.Success;
 				}
 				else

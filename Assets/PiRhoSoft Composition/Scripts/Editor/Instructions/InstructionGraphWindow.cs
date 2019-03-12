@@ -83,6 +83,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private GenericMenu _viewMenu;
 		private GenericMenu _nodeMenu;
+		private GenericMenu _editMenu;
 		private GenericMenu _contextMenu;
 		private SettingsMenu _settingsMenu;
 
@@ -92,7 +93,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private Vector2 _createPosition;
 		private InstructionGraphNode.NodeData _toRemove = null;
-		private bool _showContextMenu = false;
+		private int _showContextMenu = 0;
 
 		private bool _isLocked = false;
 		private bool _isWatchOpen = false;
@@ -211,6 +212,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			CreateViewMenu(ref _viewMenu, string.Empty);
 			CreateNodeMenu(ref _nodeMenu, string.Empty);
+			CreateEditMenu(ref _editMenu, string.Empty);
 
 			_contextMenu = CreateContextMenu();
 			_settingsMenu = new SettingsMenu();
@@ -238,6 +240,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			_viewMenu = null;
 			_nodeMenu = null;
+			_editMenu = null;
 			_contextMenu = null;
 			_settingsMenu = null;
 
@@ -564,9 +567,12 @@ namespace PiRhoSoft.CompositionEditor
 			if (menu == null)
 				menu = new GenericMenu();
 
-			menu.AddItem(new GUIContent(prefix + "Go To Start"), false, GoToStart);
-			menu.AddItem(new GUIContent(prefix + "Zoom To Selection"), false, GoToSelection);
-			menu.AddItem(new GUIContent(prefix + "Show All"), false, ShowAll);
+			menu.AddItem(new GUIContent(prefix + "Go To Start _HOME"), false, GoToStart);
+			menu.AddItem(new GUIContent(prefix + "Zoom To Selection _TAB"), false, GoToSelection);
+			menu.AddItem(new GUIContent(prefix + "Show All _END"), false, ShowAll);
+			menu.AddSeparator(prefix);
+			menu.AddItem(new GUIContent(prefix + "Zoom In _PGUP"), false, ShowAll);
+			menu.AddItem(new GUIContent(prefix + "Zoom Out _PGDN"), false, ShowAll);
 		}
 
 		private void CreateNodeMenu(ref GenericMenu menu, string prefix)
@@ -611,12 +617,27 @@ namespace PiRhoSoft.CompositionEditor
 			menu.AddItem(new GUIContent(prefix + "Mockup"), false, () => CreateNode(typeof(MockupNode), "Mockup", _createPosition));
 		}
 
+		private void CreateEditMenu(ref GenericMenu menu, string prefix)
+		{
+			if (menu == null)
+				menu = new GenericMenu();
+
+			menu.AddItem(new GUIContent(prefix + "Cut %x"), false, CutNodes);
+			menu.AddItem(new GUIContent(prefix + "Copy %c"), false, CopyNodes);
+			menu.AddItem(new GUIContent(prefix + "Paste %v"), false, PasteNodes);
+			menu.AddSeparator(prefix);
+			menu.AddItem(new GUIContent(prefix + "Duplicate %d"), false, ShowAll);
+			menu.AddItem(new GUIContent(prefix + "Delete _DELETE"), false, ShowAll);
+		}
+
 		private GenericMenu CreateContextMenu()
 		{
 			var menu = new GenericMenu();
 
 			CreateNodeMenu(ref menu, "Create/");
 			CreateViewMenu(ref menu, "View/");
+			menu.AddSeparator(string.Empty);
+			CreateEditMenu(ref menu, string.Empty);
 
 			return menu;
 		}
@@ -796,10 +817,17 @@ namespace PiRhoSoft.CompositionEditor
 				_toRemove = null;
 			}
 
-			if (_showContextMenu)
+			if (_showContextMenu == 1 && Event.current.type == EventType.Repaint)
+			{
+				// When a popup menu is shown no repaint event will get sent until it is dismissed. This delays the
+				// context menu until one repaint event has been processed.
+				_showContextMenu = 2;
+				Repaint();
+			}
+			else if (_showContextMenu == 2)
 			{
 				_contextMenu.ShowAsContext();
-				_showContextMenu = false;
+				_showContextMenu = 0;
 			}
 		}
 
@@ -816,12 +844,20 @@ namespace PiRhoSoft.CompositionEditor
 						_createPosition = ViewArea.center;
 						_nodeMenu.DropDown(new Rect(padding, _toolbarHeight, 0.0f, 0.0f));
 					}
+
+					padding += _toolbarButtonWidth;
+
+					if (GUILayout.Button("View", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
+						_viewMenu.DropDown(new Rect(padding, _toolbarHeight, 0f, 0f));
+
+					padding += _toolbarButtonWidth;
+
+					if (GUILayout.Button("Edit", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
+					{
+						_createPosition = ViewArea.center;
+						_editMenu.DropDown(new Rect(padding, _toolbarHeight, 0f, 0f));
+					}
 				}
-
-				padding += _toolbarButtonWidth;
-
-				if (GUILayout.Button("View", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
-					_viewMenu.DropDown(new Rect(padding, _toolbarHeight, 0f, 0f));
 
 				var isEnabled = Application.isPlaying && _graph != null && _graph.IsRunning;
 				var isPlaying = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Running;
@@ -1187,6 +1223,64 @@ namespace PiRhoSoft.CompositionEditor
 
 		#endregion
 
+		#region Copy and Paste
+
+		private static List<InstructionGraphNode.NodeData> _copiedNodes = new List<InstructionGraphNode.NodeData>();
+
+		private void CutNodes()
+		{
+			CopyNodes();
+			RemoveSelectedNodes();
+		}
+
+		private void CopyNodes()
+		{
+			if (_graph != null && _selectedNodes.Count > 0)
+			{
+				_copiedNodes.Clear();
+
+				var sourceNodes = _selectedNodes.Select(node => node.Node).Where(node => node != _start).ToList();
+
+				foreach (var node in sourceNodes)
+				{
+					var copy = InstructionGraphEditor.CloneNode(node);
+					var data = new InstructionGraphNode.NodeData(copy);
+					copy.GetConnections(data);
+					_copiedNodes.Add(data);
+				}
+
+				foreach (var copy in _copiedNodes)
+				{
+					foreach (var connection in copy.Connections)
+					{
+						var index = connection.To != null ? sourceNodes.IndexOf(connection.To) : -1;
+						connection.ChangeTarget(index >= 0 ? _copiedNodes[index] : null);
+					}
+				}
+			}
+		}
+
+		private void PasteNodes()
+		{
+			if (_graph != null && _copiedNodes.Count > 0)
+			{
+				var pastedNodes = new List<InstructionGraphNode.NodeData>();
+
+				foreach (var node in _copiedNodes)
+				{
+					_nodes.Add(node);
+					pastedNodes.Add(node);
+					SetupOutputConnections(node);
+				}
+
+				InstructionGraphEditor.AddClonedNodes(_graph, _copiedNodes, _createPosition);
+				TransferSelection(ref pastedNodes);
+				CopyNodes(); // re-copy so the same set of nodes can be pasted twice
+			}
+		}
+
+		#endregion
+
 		#region Input
 
 		private enum MouseState
@@ -1284,19 +1378,35 @@ namespace PiRhoSoft.CompositionEditor
 			input.Create<InputManager.KeyboardTrigger>()
 				.SetEvent(EventType.KeyDown, KeyCode.DownArrow)
 				.AddAction(MoveDown);
+
+			input.Create<InputManager.KeyboardTrigger>()
+				.SetEvent(EventType.KeyDown, KeyCode.X, control: true)
+				.AddAction(CutNodes);
+
+			input.Create<InputManager.KeyboardTrigger>()
+				.SetEvent(EventType.KeyDown, KeyCode.C, control: true)
+				.AddAction(CopyNodes);
+
+			input.Create<InputManager.KeyboardTrigger>()
+				.SetEvent(EventType.KeyDown, KeyCode.V, control: true)
+				.AddAction(() => { _createPosition = ViewArea.center; PasteNodes(); });
+
+			input.Create<InputManager.KeyboardTrigger>()
+				.SetEvent(EventType.KeyDown, KeyCode.D, control: true)
+				.AddAction(() => { _createPosition = ViewArea.center; CopyNodes(); PasteNodes(); });
 		}
 
 		private void SetupContextMenu(InputManager input)
 		{
-			var wasMouseDragged = false;
+			var wasMouseDragged = 0;
 
 			input.Create<InputManager.EventTrigger>()
 				.SetEvent(EventType.MouseDown)
-				.AddAction(() => wasMouseDragged = false);
+				.AddAction(() => wasMouseDragged = 0);
 
 			input.Create<InputManager.EventTrigger>()
 				.SetEvent(EventType.MouseDrag)
-				.AddAction(() => wasMouseDragged = true);
+				.AddAction(() => wasMouseDragged++);
 
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseDown, InputManager.MouseButton.Right)
@@ -1306,8 +1416,23 @@ namespace PiRhoSoft.CompositionEditor
 			input.Create<InputManager.MouseTrigger>()
 				.SetEvent(EventType.MouseUp, InputManager.MouseButton.Right)
 				.AddCondition(IsMouseInViewport)
-				.AddCondition(() => _graph != null && _hoveredNode == null && !wasMouseDragged && !_simulateDrag)
-				.AddAction(() => _showContextMenu = true);
+				.AddCondition(() => _graph != null && wasMouseDragged < 4 && !_simulateDrag)
+				.AddAction(PrepareContextMenu);
+		}
+
+		private void PrepareContextMenu()
+		{
+			if (_hoveredNode != null && !_selectedNodes.Contains(_hoveredNode))
+			{
+				_showContextMenu = 1;
+
+				SetSelection(_hoveredNode);
+				Repaint();
+			}
+			else
+			{
+				_showContextMenu = 2;
+			}
 		}
 
 		#endregion

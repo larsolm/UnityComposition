@@ -10,6 +10,14 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Instructions/Instruction Manager")]
 	public class InstructionManager : GlobalBehaviour<InstructionManager>
 	{
+		public static string CommandFolder = "Commands";
+
+		protected override void Awake()
+		{
+			base.Awake();
+			Resources.LoadAll(CommandFolder);
+		}
+
 		public void RunInstruction(Instruction instruction, InstructionContext context, object thisObject)
 		{
 			var store = new InstructionStore(context, thisObject);
@@ -27,7 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class JoinEnumerator : IEnumerator
 	{
-		private const string _iterationLimitWarning = "(CJEIL) Cancelling JoinEnumerator after 1000 unyielding iterations";
+		private const string _iterationLimitWarning = "(CJEIL) Cancelling JoinEnumerator after {0} unyielding iterations";
 
 		public static int MaximumIterations = 1000;
 

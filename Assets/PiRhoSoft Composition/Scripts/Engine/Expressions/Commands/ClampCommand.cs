@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ClampCommand : Command
+	public class ClampCommand : ICommand
 	{
-		public override VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 3)
 			{
@@ -14,22 +14,22 @@ namespace PiRhoSoft.CompositionEngine
 				var max = parameters[2].Evaluate(variables);
 
 				if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, WrongParameterType2Exception, value.Type, 0, VariableType.Integer, VariableType.Number);
+					throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, value.Type, 0, VariableType.Integer, VariableType.Number);
 
 				if (min.Type != VariableType.Integer && min.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, WrongParameterType2Exception, min.Type, 1, VariableType.Integer, VariableType.Number);
+					throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, min.Type, 1, VariableType.Integer, VariableType.Number);
 
 				if (max.Type != VariableType.Integer && max.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, WrongParameterType2Exception, max.Type, 2, VariableType.Integer, VariableType.Number);
+					throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, max.Type, 2, VariableType.Integer, VariableType.Number);
 
 				if (min.Number > max.Number)
-					throw new CommandEvaluationException(name, InvalidRangeException, min.Number, max.Number);
+					throw new CommandEvaluationException(name, Command.InvalidRangeException, min.Number, max.Number);
 
 				return VariableValue.Create(Mathf.Clamp(value.Number, min.Number, max.Number));
 			}
 			else
 			{
-				throw new CommandEvaluationException(name, WrongParameterCountException, parameters.Count, parameters.Count == 1 ? "" : "s", 3);
+				throw new CommandEvaluationException(name, Command.WrongParameterCountException, parameters.Count, parameters.Count == 1 ? "" : "s", 3);
 			}
 		}
 	}
