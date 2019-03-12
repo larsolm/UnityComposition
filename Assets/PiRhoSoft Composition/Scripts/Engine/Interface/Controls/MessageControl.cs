@@ -32,14 +32,14 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The object to show when the message is the last in a sequence")]
 		public GameObject FinishedIndicator = null;
 
-		public IEnumerator Show(IVariableStore variables, string text, MessageInteractionType interaction, bool isLast)
+		public IEnumerator Show(IVariableStore variables, string text, MessageInteractionType interaction, bool isLast, float wait)
 		{
 			UpdateBindings(variables, null, null);
 			SetInteraction(MessageControlDisplay.None, interaction, isLast);
 
 			if (interaction == MessageInteractionType.DontWait)
 			{
-				StartCoroutine(Run(text, interaction, isLast));
+				StartCoroutine(DoRun(text, interaction, isLast, wait));
 			}
 			else
 			{
@@ -53,6 +53,16 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		private IEnumerator DoRun(string text, MessageInteractionType interaction, bool isLast, float wait)
+		{
+			Activate();
+
+			yield return Run(text, interaction, isLast);
+			yield return new WaitForSecondsRealtime(wait);
+
+			Deactivate();
+		}
+
 		protected virtual IEnumerator Run(string text, MessageInteractionType interaction, bool isLast)
 		{
 			if (DisplayText != null)
@@ -60,7 +70,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			SetInteraction(MessageControlDisplay.Finished, interaction, isLast);
 
-			while (interaction != MessageInteractionType.WaitForDisplay && !InterfaceManager.Instance.Accept.Pressed)
+			while (interaction != MessageInteractionType.DontWait && interaction != MessageInteractionType.WaitForDisplay && !Interface.Accept.Pressed)
 				yield return null;
 
 			SetInteraction(MessageControlDisplay.None, interaction, isLast);

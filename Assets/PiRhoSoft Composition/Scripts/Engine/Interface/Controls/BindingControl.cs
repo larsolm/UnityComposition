@@ -13,11 +13,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The variable to set as the root for any sibling and child bindings")]
 		public VariableReference Binding = new VariableReference();
 
-		public override void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
+		protected override void UpdateBindings(string group, BindingAnimationStatus status)
 		{
-			Variables = variables;
-
-			var binding = Binding.GetValue(variables);
+			var binding = Binding.GetValue(Variables);
 
 			if (binding.TryGetStore(out IVariableStore store))
 				InterfaceBinding.UpdateBindings(gameObject, store, group, status);

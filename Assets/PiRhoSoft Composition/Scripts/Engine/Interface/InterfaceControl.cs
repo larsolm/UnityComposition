@@ -16,7 +16,8 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(AllowCollapse = false, ShowEditButton = true, EmptyText = "Add items that need to be enabled along with this control")]
 		public DependentObjectList DependentObjects = new DependentObjectList();
 
-		public IVariableStore Variables { get; protected set; }
+		public Interface Interface { get; private set; }
+		public IVariableStore Variables { get; private set; }
 
 		private int _activeCount = 0;
 
@@ -26,6 +27,11 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_activeCount = 0;
 			Disable();
+		}
+
+		public void Initialize(Interface interface_)
+		{
+			Interface = interface_;
 		}
 
 		public void Activate()
@@ -50,22 +56,27 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		public void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
+		{
+			Variables = variables;
+
+			UpdateBindings(group, status);
+		}
+
+		protected virtual void UpdateBindings(string group, BindingAnimationStatus status)
+		{
+			InterfaceBinding.UpdateBindings(gameObject, Variables, group, status);
+
+			foreach (var obj in DependentObjects)
+				InterfaceBinding.UpdateBindings(obj, Variables, group, status);
+		}
+
 		protected virtual void Setup()
 		{
 		}
 
 		protected virtual void Teardown()
 		{
-		}
-
-		public virtual void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
-		{
-			Variables = variables;
-
-			InterfaceBinding.UpdateBindings(gameObject, variables, group, status);
-			
-			foreach (var obj in DependentObjects)
-				InterfaceBinding.UpdateBindings(obj, variables, group, status);
 		}
 
 		private void Enable()

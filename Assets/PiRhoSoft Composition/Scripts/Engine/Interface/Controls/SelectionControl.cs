@@ -40,7 +40,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Minimum(1)]
 		public int RowCount = 1;
 
-
 		public SelectionItem FocusedItem => _focusedItem?.Item;
 		public IVariableStore FocusedVariables => _focusedItem?.Variables;
 
@@ -58,19 +57,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		private bool _isSelectionRequired = false;
 		private bool _isClosing = false;
-
-		public override void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
-		{
-			Variables = variables;
-
-			InterfaceBinding.UpdateSelfBindings(gameObject, variables, group, status);
-
-			foreach (var obj in DependentObjects)
-				InterfaceBinding.UpdateBindings(obj, variables, group, status);
-
-			foreach (var item in _items)
-				InterfaceBinding.UpdateBindings(item.Object, item.Variables, group, status);
-		}
 
 		public IEnumerator MakeSelection(IVariableStore variables, IEnumerable<SelectionItem> items, bool isSelectionRequired)
 		{
@@ -91,12 +77,12 @@ namespace PiRhoSoft.CompositionEngine
 
 			while (_selectedItem == null && !_isClosing)
 			{
-				if (InterfaceManager.Instance.Up.Pressed) MoveFocusUp();
-				else if (InterfaceManager.Instance.Down.Pressed) MoveFocusDown();
-				else if (InterfaceManager.Instance.Left.Pressed) MoveFocusLeft();
-				else if (InterfaceManager.Instance.Right.Pressed) MoveFocusRight();
-				else if (InterfaceManager.Instance.Accept.Pressed && _focusedItem != null) _selectedItem = _focusedItem;
-				else if (InterfaceManager.Instance.Cancel.Pressed) Close();
+				if (Interface.Up.Pressed) MoveFocusUp();
+				else if (Interface.Down.Pressed) MoveFocusDown();
+				else if (Interface.Left.Pressed) MoveFocusLeft();
+				else if (Interface.Right.Pressed) MoveFocusRight();
+				else if (Interface.Accept.Pressed && _focusedItem != null) _selectedItem = _focusedItem;
+				else if (Interface.Cancel.Pressed) Close();
 
 				yield return null;
 			}
@@ -108,6 +94,17 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (!_isSelectionRequired)
 				_isClosing = true;
+		}
+
+		protected override void UpdateBindings(string group, BindingAnimationStatus status)
+		{
+			InterfaceBinding.UpdateSelfBindings(gameObject, Variables, group, status);
+
+			foreach (var obj in DependentObjects)
+				InterfaceBinding.UpdateBindings(obj, Variables, group, status);
+
+			foreach (var item in _items)
+				InterfaceBinding.UpdateBindings(item.Object, item.Variables, group, status);
 		}
 
 		protected override void Teardown()
@@ -286,10 +283,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void MoveFocus(int index)
 		{
-			var item = index >= 0 && index < _items.Count ? _items[index] : null;
+			var column = index % _columnCount;
+			var row = index / _rowCount;
 
-			if (item != null)
-				FocusItem(item);
+			MoveFocusToLocation(column, row);
 		}
 
 		public virtual void MoveFocusUp()

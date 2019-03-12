@@ -195,7 +195,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114754646623374914}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: local.Jewels >= 1
+    _statement: World.Jewels >= 3
 --- !u!114 &114252435143868472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,7 +214,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 320, y: -51.2}
+  GraphPosition: {x: 320, y: -38.4}
   IsBreakpoint: 0
   Sequence:
     _items:

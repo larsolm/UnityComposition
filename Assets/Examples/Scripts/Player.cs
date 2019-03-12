@@ -6,8 +6,8 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionExample
 {
 	[RequireComponent(typeof(Rigidbody2D))]
-	[AddComponentMenu("PiRho Soft/Examples/Character")]
-	public class Character : MonoBehaviour, IVariableStore, IReloadable
+	[AddComponentMenu("PiRho Soft/Examples/Player")]
+	public class Player : MonoBehaviour, IVariableStore, IReloadable
 	{
 		[AssetPopup] [ReloadOnChange] public VariableSchema Schema;
 
@@ -15,16 +15,19 @@ namespace PiRhoSoft.CompositionExample
 		public WorldManager World;
 		public float Acceleration = 1.0f;
 
+		public InstructionCaller OnStart = new InstructionCaller();
+
 		public VariableList Variables;
 		public MappedVariableStore Store = new MappedVariableStore();
 		public InstructionContext Context = new InstructionContext();
+
 
 		private Rigidbody2D _body;
 		private Collider2D[] _colliders = new Collider2D[6];
 
 		public void OnEnable()
 		{
-			Context.Stores.Add(nameof(Character), this);
+			Context.Stores.Add(nameof(Player), this);
 			Context.Stores.Add(nameof(World), World);
 			Store.Setup(this, Schema, Variables);
 		}
@@ -32,7 +35,9 @@ namespace PiRhoSoft.CompositionExample
 		public void OnDisable()
 		{
 			Context.Stores.Clear();
-			_body.velocity = Vector2.zero;
+
+			if (_body)
+				_body.velocity = Vector2.zero;
 		}
 
 		void Awake()
@@ -40,12 +45,18 @@ namespace PiRhoSoft.CompositionExample
 			_body = GetComponent<Rigidbody2D>();
 		}
 
+		void Start()
+		{
+			if (OnStart.Instruction)
+				InstructionManager.Instance.RunInstruction(OnStart, Context, this);
+		}
+
 		void Update()
 		{
 			if (Camera)
 				Camera.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.transform.position.z);
 
-			if (InputHelper.GetWasButtonPressed(KeyCode.Space, "Submit"))
+			if (InputHelper.GetWasButtonPressed("Submit"))
 			{
 				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = true }, _colliders);
 				for (var i = 0; i < count; i++)
@@ -81,6 +92,20 @@ namespace PiRhoSoft.CompositionExample
 		void OnTriggerExit2D(Collider2D collision)
 		{
 			var interaction = collision.GetComponent<Interaction>();
+			if (interaction)
+				InstructionManager.Instance.RunInstruction(interaction.OnLeave, Context, interaction);
+		}
+
+		void OnCollisionEnter2D(Collision2D collision)
+		{
+			var interaction = collision.collider.GetComponent<Interaction>();
+			if (interaction)
+				InstructionManager.Instance.RunInstruction(interaction.OnEnter, Context, interaction);
+		}
+
+		void OnCollisionExit2D(Collision2D collision)
+		{
+			var interaction = collision.collider.GetComponent<Interaction>();
 			if (interaction)
 				InstructionManager.Instance.RunInstruction(interaction.OnLeave, Context, interaction);
 		}

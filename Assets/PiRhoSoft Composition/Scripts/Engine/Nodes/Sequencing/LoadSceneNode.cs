@@ -22,6 +22,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Whether to cleanup assets and trigger the GarbageCollector")]
 		public bool CleanupAssets = true;
 
+		[Tooltip("Whether to load the Scene additive or not - this should be used with caution as some references could become invalid")]
+		public bool Additive = true;
+
 		public override Color NodeColor => Colors.ExecutionLight;
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
@@ -36,7 +39,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private IEnumerator LoadScene()
 		{
-			var loadStatus = SceneManager.LoadSceneAsync(Scene.Index, LoadSceneMode.Additive);
+			var loadStatus = SceneManager.LoadSceneAsync(Scene.Index, Additive ? LoadSceneMode.Additive : LoadSceneMode.Single);
 
 			while (!loadStatus.isDone)
 				yield return null;

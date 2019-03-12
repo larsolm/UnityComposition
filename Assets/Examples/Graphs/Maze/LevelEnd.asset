@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: LevelEnd
+  m_EditorClassIdentifier: 
+  _nodes:
+    _items:
+    - {fileID: 114565799762134696}
+    - {fileID: 114372619974763020}
+    - {fileID: 114186283410596920}
+    - {fileID: 114951541933712660}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 114565799762134696}
+--- !u!114 &114186283410596920
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
+  m_Name: Play Transition
+  m_EditorClassIdentifier: 
+  Name: Play Transition
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 960, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114951541933712660}
+  Transition:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Value: {fileID: 11400000, guid: 2f9b1c789d8e6c247a156f501f3393db, type: 2}
+  Phase: 0
+  AutoFinish: 0
+  WaitForCompletion: 1
+--- !u!114 &114372619974763020
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Complete Message
+  m_EditorClassIdentifier: 
+  Name: Complete Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 640, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114186283410596920}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 0
+  WaitTime: 0
+  IsLast: 1
+  Message:
+    Text: 'Complete! Time: {Player.Time};
+
+      <size=50%>(Press Enter to load next level)'
+--- !u!114 &114565799762134696
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Character
+  m_EditorClassIdentifier: 
+  Name: Disable Character
+  This:
+    _variable:
+    - Player
+    _lookups:
+    - 
+  GraphPosition: {x: 320, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114372619974763020}
+--- !u!114 &114951541933712660
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Scene
+  m_EditorClassIdentifier: 
+  Name: Load Scene
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 1280, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Scene:
+    Path: Assets/Examples/Scenes/Maze/Maze2.unity
+  WaitForCompletion: 1
+  CleanupAssets: 1
+  Additive: 0

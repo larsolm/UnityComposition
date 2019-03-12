@@ -25,6 +25,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Whether the Transition should automatically end after its specified duration or remain running")]
 		public bool AutoFinish = true;
 
+		[Tooltip("Whether to wait for the Transition to end before moving on to Next")]
+		public bool WaitForCompletion = true;
+
 		public override Color NodeColor
 		{
 			get
@@ -47,9 +50,16 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Transition.TryGetValue(variables, this, out var transition))
-				yield return AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase);
+			{
+				if (WaitForCompletion)
+					yield return AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase);
+				else
+					InstructionManager.Instance.StartCoroutine(AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase));
+			}
 			else
+			{
 				Debug.LogWarningFormat(this, _transitionMissingWarning, Name);
+			}
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}

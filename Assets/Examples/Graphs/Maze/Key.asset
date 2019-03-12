@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: Key
+  m_EditorClassIdentifier: 
+  _nodes:
+    _items:
+    - {fileID: 114324533435646440}
+    - {fileID: 114307965388404476}
+    - {fileID: 114516925259956716}
+    - {fileID: 114590033146103502}
+  StartPosition: {x: 0, y: 0}
+  Enter: {fileID: 0}
+  Process: {fileID: 114324533435646440}
+  Exit: {fileID: 0}
+--- !u!114 &114307965388404476
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Message
+  m_EditorClassIdentifier: 
+  Name: Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 768, y: 102.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 3
+  WaitTime: 2
+  IsLast: 0
+  Message:
+    Text: '{input.Color} Key Acquired!'
+--- !u!114 &114324533435646440
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destroy Object
+  m_EditorClassIdentifier: 
+  Name: Destroy Object
+  This:
+    _variable:
+    - this
+    _lookups:
+    - GameObject
+  GraphPosition: {x: 320, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114590033146103502}
+--- !u!114 &114516925259956716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 691.2, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114307965388404476}
+  Expression:
+    _statement: 'output.Key = input.Key + 1
+
+'
+--- !u!114 &114590033146103502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 107498313b25ee645824b68d26c02864, type: 3}
+  m_Name: Play Sound
+  m_EditorClassIdentifier: 
+  Name: Play Sound
+  This:
+    _variable:
+    - Player
+    _lookups:
+    - AudioPlayer
+  GraphPosition: {x: 627.2, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114516925259956716}
+  Sound:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Value: {fileID: 8300000, guid: 7a89cbd47fc1cd4469b77fc25c8b7f33, type: 3}
+  Volume:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Value: 1
+  WaitForCompletion: 0

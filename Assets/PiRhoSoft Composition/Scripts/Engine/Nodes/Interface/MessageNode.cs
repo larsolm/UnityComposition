@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.UtilityEngine;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -16,6 +17,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("Controls when the interface waits for interaction from the user")]
 		public MessageInteractionType Interaction = MessageInteractionType.WaitForInput;
+
+		[Tooltip("How long to wait after the text is displayed before deactivating")]
+		[ConditionalDisplaySelf(nameof(Interaction), EnumValue = (int)MessageInteractionType.DontWait)]
+		public float WaitTime = 0.0f;
 
 		[Tooltip("If true the interface will consider this message the last in a sequence, altering the way the interaction cues are displayed")]
 		public bool IsLast = true;
@@ -36,7 +41,7 @@ namespace PiRhoSoft.CompositionEngine
 			var text = Message.GetText(variables);
 
 			if (control != null)
-				yield return control.Show(variables, text, Interaction, IsLast);
+				yield return control.Show(variables, text, Interaction, IsLast, WaitTime);
 			else
 				Debug.Log(text);
 

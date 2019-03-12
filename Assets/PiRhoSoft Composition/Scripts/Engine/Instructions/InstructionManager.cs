@@ -8,12 +8,8 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "instruction-manager")]
 	[AddComponentMenu("PiRho Soft/Instructions/Instruction Manager")]
-	public class InstructionManager : SingletonBehaviour<InstructionManager>
+	public class InstructionManager : GlobalBehaviour<InstructionManager>
 	{
-		[Tooltip("The CommandSet to load when this InstructionManager is loaded")]
-		[AssetPopup]
-		public CommandSet Commands; // this exists to provide a place to assign a CommandSet asset so that it will be loaded by Unity
-
 		public void RunInstruction(Instruction instruction, InstructionContext context, object thisObject)
 		{
 			var store = new InstructionStore(context, thisObject);
