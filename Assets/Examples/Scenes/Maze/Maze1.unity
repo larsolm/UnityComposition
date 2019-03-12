@@ -601,8 +601,8 @@ GameObject:
   m_Component:
   - component: {fileID: 558059543}
   - component: {fileID: 558059546}
-  - component: {fileID: 558059545}
   - component: {fileID: 558059544}
+  - component: {fileID: 558059545}
   m_Layer: 0
   m_Name: Key (3)
   m_TagString: Untagged
@@ -667,7 +667,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 24023a659eb1cc94b9a2f8763384cba4, type: 2}
+    _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Type: 1
       Definition:
@@ -984,8 +984,8 @@ GameObject:
   m_Component:
   - component: {fileID: 664957348}
   - component: {fileID: 664957351}
-  - component: {fileID: 664957350}
   - component: {fileID: 664957349}
+  - component: {fileID: 664957350}
   m_Layer: 0
   m_Name: Key (1)
   m_TagString: Untagged
@@ -1050,7 +1050,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 24023a659eb1cc94b9a2f8763384cba4, type: 2}
+    _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Type: 1
       Definition:
@@ -1424,7 +1424,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 77882bfa7f666af419d6c785f1d10179, type: 3}
   m_Color: {r: 0.8018868, g: 0.2912513, b: 0.2912513, a: 1}
   m_FlipX: 0
@@ -1568,8 +1568,8 @@ GameObject:
   m_Component:
   - component: {fileID: 867759260}
   - component: {fileID: 867759261}
-  - component: {fileID: 867759263}
   - component: {fileID: 867759262}
+  - component: {fileID: 867759263}
   m_Layer: 0
   m_Name: Key
   m_TagString: Untagged
@@ -1682,7 +1682,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 24023a659eb1cc94b9a2f8763384cba4, type: 2}
+    _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Type: 1
       Definition:
@@ -2534,7 +2534,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 8146aa4ed14dee34c83fcc438394bd2a, type: 2}
+    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
     _inputs:
     - Type: 0
       Definition:
@@ -2707,7 +2707,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 8146aa4ed14dee34c83fcc438394bd2a, type: 2}
+    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
     _inputs:
     - Type: 0
       Definition:
@@ -2880,7 +2880,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 8146aa4ed14dee34c83fcc438394bd2a, type: 2}
+    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
     _inputs:
     - Type: 0
       Definition:
@@ -3265,7 +3265,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 8146aa4ed14dee34c83fcc438394bd2a, type: 2}
+    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
     _inputs:
     - Type: 0
       Definition:
@@ -3536,8 +3536,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2121685703}
   - component: {fileID: 2121685706}
-  - component: {fileID: 2121685705}
   - component: {fileID: 2121685704}
+  - component: {fileID: 2121685705}
   m_Layer: 0
   m_Name: Key (2)
   m_TagString: Untagged
@@ -3602,7 +3602,7 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 24023a659eb1cc94b9a2f8763384cba4, type: 2}
+    _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Type: 1
       Definition:

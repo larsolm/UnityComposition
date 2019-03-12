@@ -9,43 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
-  m_Name: Door2
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Door
   m_EditorClassIdentifier: 
   _nodes:
     _items:
-    - {fileID: 114699203399596068}
-    - {fileID: 114739092230441864}
-    - {fileID: 114701663600844830}
-    - {fileID: 114000053508526640}
-    - {fileID: 114291322066528020}
-    - {fileID: 114656837331475840}
+    - {fileID: 114229702285869292}
+    - {fileID: 114926778890910636}
+    - {fileID: 114945545809423866}
+    - {fileID: 114329444707264830}
+    - {fileID: 114097974279871678}
+    - {fileID: 114812006277454240}
   StartPosition: {x: 0, y: 0}
-  Enter: {fileID: 0}
-  Process: {fileID: 114699203399596068}
-  Exit: {fileID: 0}
---- !u!114 &114000053508526640
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destroy Door
-  m_EditorClassIdentifier: 
-  Name: Destroy Door
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 1100.8, y: 64}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
---- !u!114 &114291322066528020
+  Process: {fileID: 114229702285869292}
+--- !u!114 &114097974279871678
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -55,41 +32,20 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression
+  m_Name: Use Key
   m_EditorClassIdentifier: 
-  Name: Expression
+  Name: Use Key
   This:
     _variable:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 665.60004, y: 0}
+  GraphPosition: {x: 691.2, y: -38.4}
   IsBreakpoint: 0
-  Next: {fileID: 114656837331475840}
+  Next: {fileID: 114812006277454240}
   Expression:
     _statement: input.Key -= 1
---- !u!114 &114656837331475840
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
-  m_Name: Disable Component
-  m_EditorClassIdentifier: 
-  Name: Disable Component
-  This:
-    _variable:
-    - this
-    _lookups:
-    - BoxCollider2D
-  GraphPosition: {x: 972.8, y: -64}
-  IsBreakpoint: 0
-  Next: {fileID: 114701663600844830}
---- !u!114 &114699203399596068
+--- !u!114 &114229702285869292
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,13 +63,84 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 320, y: 25.6}
+  GraphPosition: {x: 345.6, y: -12.8}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114291322066528020}
-  OnFalse: {fileID: 114739092230441864}
+  OnTrue: {fileID: 114097974279871678}
+  OnFalse: {fileID: 114926778890910636}
   Condition:
     _statement: input.Key >= 1
---- !u!114 &114701663600844830
+--- !u!114 &114329444707264830
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destroy Door(Clone)
+  m_EditorClassIdentifier: 
+  Name: Destroy Door
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 1126.4, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+--- !u!114 &114812006277454240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Collision
+  m_EditorClassIdentifier: 
+  Name: Disable Collision
+  This:
+    _variable:
+    - this
+    _lookups:
+    - BoxCollider2D
+  GraphPosition: {x: 998.4, y: -102.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114945545809423866}
+--- !u!114 &114926778890910636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Key Needed Message
+  m_EditorClassIdentifier: 
+  Name: Key Needed Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 691.2, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 3
+  WaitTime: 1
+  IsLast: 0
+  Message:
+    Text: '{input.Color} Key Needed!'
+--- !u!114 &114945545809423866
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -123,7 +150,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
-  m_Name: Animate Door
+  m_Name: Animate Door(Clone)
   m_EditorClassIdentifier: 
   Name: Animate Door
   This:
@@ -131,9 +158,9 @@ MonoBehaviour:
     - this
     _lookups:
     - GameObject
-  GraphPosition: {x: 1024, y: -0}
+  GraphPosition: {x: 1049.6, y: -38.4}
   IsBreakpoint: 0
-  Next: {fileID: 114000053508526640}
+  Next: {fileID: 114329444707264830}
   TargetPosition: {x: 0, y: 0, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 0, y: 0, z: 1}
@@ -146,32 +173,3 @@ MonoBehaviour:
   MoveSpeed: 1
   RotationSpeed: 1
   ScaleSpeed: 1
---- !u!114 &114739092230441864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Message
-  m_EditorClassIdentifier: 
-  Name: Message
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 665.60004, y: 76.8}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Control:
-    InterfaceName: Interface
-    ControlName: Message
-  Interaction: 3
-  WaitTime: 1
-  IsLast: 0
-  Message:
-    Text: '{input.Color} Key Needed!'

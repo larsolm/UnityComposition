@@ -16,8 +16,8 @@ namespace PiRhoSoft.CompositionExample
 		[MappedVariable] public bool BoolField = true;
 		[MappedVariable] public bool BoolProperty { get; set; }
 
-		[MappedVariable] public Character ObjectField;
-		[MappedVariable] public Character ObjectProperty { get; set; }
+		[MappedVariable] public Player ObjectField;
+		[MappedVariable] public Player ObjectProperty { get; set; }
 
 		[MappedVariable] public IVariableStore StoreField;
 		[MappedVariable] public IVariableStore StoreProperty { get; set; }

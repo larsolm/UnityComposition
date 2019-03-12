@@ -9,49 +9,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
   _nodes:
     _items:
-    - {fileID: 114324533435646440}
-    - {fileID: 114307965388404476}
-    - {fileID: 114516925259956716}
-    - {fileID: 114590033146103502}
+    - {fileID: 114416159429543150}
+    - {fileID: 114626076434710948}
+    - {fileID: 114613277615437018}
+    - {fileID: 114523905499944702}
   StartPosition: {x: 0, y: 0}
-  Enter: {fileID: 0}
-  Process: {fileID: 114324533435646440}
-  Exit: {fileID: 0}
---- !u!114 &114307965388404476
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Message
-  m_EditorClassIdentifier: 
-  Name: Message
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 768, y: 102.4}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Control:
-    InterfaceName: Interface
-    ControlName: Message
-  Interaction: 3
-  WaitTime: 2
-  IsLast: 0
-  Message:
-    Text: '{input.Color} Key Acquired!'
---- !u!114 &114324533435646440
+  Process: {fileID: 114416159429543150}
+--- !u!114 &114416159429543150
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -61,43 +30,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destroy Object
+  m_Name: Destroy Key
   m_EditorClassIdentifier: 
-  Name: Destroy Object
+  Name: Destroy Key
   This:
     _variable:
     - this
     _lookups:
     - GameObject
-  GraphPosition: {x: 320, y: 25.6}
+  GraphPosition: {x: 332.80002, y: 0}
   IsBreakpoint: 0
-  Next: {fileID: 114590033146103502}
---- !u!114 &114516925259956716
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression
-  m_EditorClassIdentifier: 
-  Name: Expression
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 691.2, y: 25.6}
-  IsBreakpoint: 0
-  Next: {fileID: 114307965388404476}
-  Expression:
-    _statement: 'output.Key = input.Key + 1
-
-'
---- !u!114 &114590033146103502
+  Next: {fileID: 114523905499944702}
+--- !u!114 &114523905499944702
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -107,17 +51,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 107498313b25ee645824b68d26c02864, type: 3}
-  m_Name: Play Sound
+  m_Name: Play Pickup Sound
   m_EditorClassIdentifier: 
-  Name: Play Sound
+  Name: Play Pickup Sound
   This:
     _variable:
     - Player
     _lookups:
     - AudioPlayer
-  GraphPosition: {x: 627.2, y: -51.2}
+  GraphPosition: {x: 640, y: -76.8}
   IsBreakpoint: 0
-  Next: {fileID: 114516925259956716}
+  Next: {fileID: 114613277615437018}
   Sound:
     Type: 0
     Reference:
@@ -131,3 +75,57 @@ MonoBehaviour:
       _lookups: []
     Value: 1
   WaitForCompletion: 0
+--- !u!114 &114613277615437018
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Increment Key Count
+  m_EditorClassIdentifier: 
+  Name: Increment Key Count
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 704, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114626076434710948}
+  Expression:
+    _statement: 'output.Key = input.Key + 1
+
+'
+--- !u!114 &114626076434710948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Key Acquired Message
+  m_EditorClassIdentifier: 
+  Name: Key Acquired Message
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 780.8, y: 76.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    InterfaceName: Interface
+    ControlName: Message
+  Interaction: 3
+  WaitTime: 2
+  IsLast: 0
+  Message:
+    Text: '{input.Color} Key Acquired!'

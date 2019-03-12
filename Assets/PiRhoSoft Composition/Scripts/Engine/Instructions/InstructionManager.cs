@@ -12,9 +12,8 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public static string CommandFolder = "Commands";
 
-		protected override void Awake()
+		void Awake()
 		{
-			base.Awake();
 			Resources.LoadAll(CommandFolder);
 		}
 

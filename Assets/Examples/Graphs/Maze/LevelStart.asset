@@ -20,6 +20,7 @@ MonoBehaviour:
     - {fileID: 114874321698637932}
     - {fileID: 114620517716717954}
     - {fileID: 114866516215429464}
+    - {fileID: 114854819618255414}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114906063048417074}
   Process: {fileID: 114866516215429464}
@@ -65,11 +66,12 @@ MonoBehaviour:
     - 
   GraphPosition: {x: 1177.6, y: 25.6}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 114854819618255414}
   Control:
     InterfaceName: Interface
     ControlName: Message
   Interaction: 0
+  WaitTime: 0
   IsLast: 1
   Message:
     Text: 'Level {input.Level}
@@ -101,6 +103,32 @@ MonoBehaviour:
   WaitForCompletion: 1
   CleanupAssets: 1
   Additive: 1
+--- !u!114 &114854819618255414
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Start Timer
+  m_EditorClassIdentifier: 
+  Name: Start Timer
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 1484.8, y: 25.6}
+  IsBreakpoint: 0
+  Instruction:
+    _instruction: {fileID: 11400000, guid: 2b4848afb74946443a55bbef3441d398, type: 2}
+    _inputs: []
+    _outputs: []
+  Next: {fileID: 0}
+  WaitForCompletion: 0
 --- !u!114 &114866516215429464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -111,9 +139,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
-  m_Name: Play Transition
+  m_Name: Obscure
   m_EditorClassIdentifier: 
-  Name: Play Transition
+  Name: Obscure
   This:
     _variable:
     - this
@@ -141,9 +169,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
-  m_Name: Play Transition
+  m_Name: Fade In
   m_EditorClassIdentifier: 
-  Name: Play Transition
+  Name: Fade In
   This:
     _variable:
     - this
