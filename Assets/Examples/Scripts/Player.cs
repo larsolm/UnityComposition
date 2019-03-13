@@ -26,10 +26,6 @@ namespace PiRhoSoft.CompositionExample
 		void Awake()
 		{
 			_body = GetComponent<Rigidbody2D>();
-		}
-
-		void OnEnable()
-		{
 			SetupSchema();
 		}
 

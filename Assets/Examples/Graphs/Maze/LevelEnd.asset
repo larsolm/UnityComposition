@@ -18,6 +18,7 @@ MonoBehaviour:
     - {fileID: 114372619974763020}
     - {fileID: 114186283410596920}
     - {fileID: 114951541933712660}
+    - {fileID: 114539580467139412}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114565799762134696}
 --- !u!114 &114186283410596920
@@ -38,7 +39,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 960, y: 0}
+  GraphPosition: {x: 960, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114951541933712660}
   Transition:
@@ -68,7 +69,7 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 640, y: -0}
+  GraphPosition: {x: 640, y: 12.8}
   IsBreakpoint: 0
   Next: {fileID: 114186283410596920}
   Control:
@@ -78,9 +79,34 @@ MonoBehaviour:
   WaitTime: 0
   IsLast: 1
   Message:
-    Text: 'Complete! Time: {Player.Time};
+    Text: 'Complete!
+
+      Time: {Player.Timer}
 
       <size=50%>(Press Enter to load next level)'
+--- !u!114 &114539580467139412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Finished
+  m_EditorClassIdentifier: 
+  Name: Set Finished
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 640, y: -64}
+  IsBreakpoint: 0
+  Next: {fileID: 114372619974763020}
+  Expression:
+    _statement: Player.LevelFinished = true;
 --- !u!114 &114565799762134696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +127,7 @@ MonoBehaviour:
     - 
   GraphPosition: {x: 320, y: -0}
   IsBreakpoint: 0
-  Next: {fileID: 114372619974763020}
+  Next: {fileID: 114539580467139412}
 --- !u!114 &114951541933712660
 MonoBehaviour:
   m_ObjectHideFlags: 1

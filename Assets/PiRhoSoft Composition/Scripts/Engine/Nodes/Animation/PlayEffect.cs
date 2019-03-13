@@ -61,8 +61,11 @@ namespace PiRhoSoft.CompositionEngine
 			Effect.GetInputs(inputs);
 			EffectName.GetInputs(inputs);
 
-			if (InstructionStore.IsInput(Parent))
+			if (Positioning == ObjectPositioning.ChildOfParent && InstructionStore.IsInput(Parent))
 				inputs.Add(VariableDefinition.Create<GameObject>(Parent.RootName));
+
+			if (Positioning == ObjectPositioning.RelativeToObject && InstructionStore.IsInput(Object))
+				inputs.Add(VariableDefinition.Create<GameObject>(Object.RootName));
 		}
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
