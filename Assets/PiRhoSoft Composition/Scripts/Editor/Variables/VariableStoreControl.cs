@@ -141,13 +141,13 @@ namespace PiRhoSoft.CompositionEditor
 
 			if (unity != null)
 			{
-				if (GUI.Button(editRect, VariableStoreControl.EditButton.Content, GUIStyle.none))
+				if (GUI.Button(editRect, EditButton.Content, GUIStyle.none))
 					Selection.activeObject = unity;
 			}
 
 			if (store != null)
 			{
-				if (GUI.Button(rect, VariableStoreControl.ViewButton.Content, GUIStyle.none))
+				if (GUI.Button(viewRect, ViewButton.Content, GUIStyle.none))
 					selected = true;
 			}
 

@@ -1387,7 +1387,15 @@ MonoBehaviour:
       Type: 2
       Data: 0
       Object: {fileID: 0}
-    _version: 6
+    - Name: LevelFinished
+      Type: 1
+      Data: False
+      Object: {fileID: 0}
+    - Name: Timer
+      Type: 3
+      Data: 0
+      Object: {fileID: 0}
+    _version: 8
 --- !u!212 &863000628
 SpriteRenderer:
   m_ObjectHideFlags: 0

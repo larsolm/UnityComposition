@@ -113,9 +113,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Start Timer
+  m_Name: LevelLoop
   m_EditorClassIdentifier: 
-  Name: Start Timer
+  Name: LevelLoop
   This:
     _variable:
     - this

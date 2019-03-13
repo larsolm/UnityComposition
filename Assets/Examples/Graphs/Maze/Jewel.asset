@@ -22,11 +22,10 @@ MonoBehaviour:
     - {fileID: 114375116766900952}
     - {fileID: 114417380751933736}
     - {fileID: 114010021192242288}
-    - {fileID: 114543985970655702}
     - {fileID: 114019920891345730}
-    - {fileID: 114071169975569116}
     - {fileID: 114252435143868472}
-  StartPosition: {x: -0, y: 0}
+    - {fileID: 114162353018551766}
+  StartPosition: {x: -0, y: -25.6}
   Process: {fileID: 114252435143868472}
 --- !u!114 &114010021192242288
 MonoBehaviour:
@@ -44,11 +43,11 @@ MonoBehaviour:
   This:
     _variable:
     - scene
-    - Door2
+    - FinishDoor
     _lookups:
     - 
     - 
-  GraphPosition: {x: 1638.4, y: 25.6}
+  GraphPosition: {x: 1600, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 0}
 --- !u!114 &114019920891345730
@@ -66,61 +65,12 @@ MonoBehaviour:
   Name: Destroy Jewel
   This:
     _variable:
-    - input
-    - This
-    _lookups:
-    - 
-    - 
-  GraphPosition: {x: 640, y: 0}
-  IsBreakpoint: 0
-  Next: {fileID: 114543985970655702}
---- !u!114 &114071169975569116
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 67bb5ec06b2e5fe49b57475f7382e327, type: 3}
-  m_Name: Play Indicator Sparkle
-  m_EditorClassIdentifier: 
-  Name: Play Indicator Sparkle
-  This:
-    _variable:
     - this
     _lookups:
-    - 
-  GraphPosition: {x: 960, y: -64}
+    - GameObject
+  GraphPosition: {x: 640, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
-  Effect:
-    Type: 0
-    Reference:
-      _variable: []
-      _lookups: []
-    Value: {fileID: 4255263820053153510, guid: 3ccbc9d9af56dc949a68c82852e228e8, type: 3}
-  EffectName:
-    Type: 0
-    Reference:
-      _variable: []
-      _lookups: []
-    Value: Spawned Effect
-  Positioning: 1
-  Object:
-    _variable:
-    - input
-    - Indicator
-    _lookups:
-    - 
-    - 
-  Parent:
-    _variable: []
-    _lookups: []
-  Position: {x: 0, y: 0, z: 0}
-  WaitForCompletion: 0
-  DestroyOnComplete: 1
 --- !u!114 &114083666097521882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -139,9 +89,9 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 640, y: -64}
+  GraphPosition: {x: 640, y: -102.4}
   IsBreakpoint: 0
-  Next: {fileID: 114071169975569116}
+  Next: {fileID: 0}
   Effect:
     Type: 0
     Reference:
@@ -157,21 +107,41 @@ MonoBehaviour:
   Positioning: 1
   Object:
     _variable:
-    - input
-    - This
+    - this
     _lookups:
-    - 
-    - 
+    - GameObject
   Parent:
-    _variable:
-    - input
-    - Indicator
-    _lookups:
-    - 
-    - 
+    _variable: []
+    _lookups: []
   Position: {x: 0, y: 0, z: 0}
   WaitForCompletion: 0
   DestroyOnComplete: 1
+--- !u!114 &114162353018551766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Binding
+  m_EditorClassIdentifier: 
+  Name: Update Binding
+  This:
+    _variable:
+    - this
+    _lookups:
+    - 
+  GraphPosition: {x: 947.2, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114244240457525348}
+  Control:
+    InterfaceName: Interface
+    ControlName: Jewels
+  Group: 
+  WaitForCompletion: 0
 --- !u!114 &114244240457525348
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,12 +160,12 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 960, y: 64}
+  GraphPosition: {x: 960, y: -89.6}
   IsBreakpoint: 0
   OnTrue: {fileID: 114754646623374914}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: World.Jewels >= 3
+    _statement: Player.Jewels == Player.JewelsNeeded
 --- !u!114 &114252435143868472
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,11 +209,11 @@ MonoBehaviour:
     - this
     _lookups:
     - 
-  GraphPosition: {x: 640, y: 64}
+  GraphPosition: {x: 640, y: 38.4}
   IsBreakpoint: 0
-  Next: {fileID: 114244240457525348}
+  Next: {fileID: 114162353018551766}
   Expression:
-    _statement: World.Jewels += 1
+    _statement: Player.Jewels += 1
 --- !u!114 &114375116766900952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,12 +229,10 @@ MonoBehaviour:
   Name: Enable Character
   This:
     _variable:
-    - scene
-    - Character
+    - Player
     _lookups:
     - 
-    - Character
-  GraphPosition: {x: 1638.4, y: 89.6}
+  GraphPosition: {x: 1600, y: 64}
   IsBreakpoint: 0
   Next: {fileID: 0}
 --- !u!114 &114417380751933736
@@ -282,33 +250,10 @@ MonoBehaviour:
   Name: Disable Character
   This:
     _variable:
-    - Character
+    - Player
     _lookups:
     - 
-  GraphPosition: {x: 1638.4, y: -102.4}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
---- !u!114 &114543985970655702
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destroy Indicator
-  m_EditorClassIdentifier: 
-  Name: Destroy Indicator
-  This:
-    _variable:
-    - input
-    - Indicator
-    _lookups:
-    - 
-    - 
-  GraphPosition: {x: 960, y: 0}
+  GraphPosition: {x: 1600, y: -128}
   IsBreakpoint: 0
   Next: {fileID: 0}
 --- !u!114 &114754646623374914
@@ -353,11 +298,11 @@ MonoBehaviour:
   This:
     _variable:
     - scene
-    - Door2
+    - FinishDoor
     _lookups:
     - 
     - AnimationPlayer
-  GraphPosition: {x: 1638.4, y: -38.4}
+  GraphPosition: {x: 1600, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Animation:
@@ -365,5 +310,5 @@ MonoBehaviour:
     Reference:
       _variable: []
       _lookups: []
-    Value: {fileID: 7400000, guid: 01d80d141ca61864998825005998d318, type: 2}
+    Value: {fileID: 7400000, guid: 55c9b8f38d72cbe47a0bc311a8d15b72, type: 2}
   WaitForCompletion: 1

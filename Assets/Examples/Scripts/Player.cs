@@ -28,19 +28,19 @@ namespace PiRhoSoft.CompositionExample
 		void Awake()
 		{
 			_body = GetComponent<Rigidbody2D>();
+
+			Context.Stores.Add(nameof(Player), this);
+			Context.Stores.Add(nameof(World), World);
+
+			SetupSchema();
 		}
 
 		void OnEnable()
 		{
-			Context.Stores.Add(nameof(Player), this);
-			Context.Stores.Add(nameof(World), World);
-			SetupSchema();
 		}
 
 		void OnDisable()
 		{
-			Context.Stores.Clear();
-
 			if (_body)
 				_body.velocity = Vector2.zero;
 		}
