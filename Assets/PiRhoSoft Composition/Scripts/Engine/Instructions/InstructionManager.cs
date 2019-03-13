@@ -12,22 +12,24 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public static string CommandFolder = "Commands";
 
+		public VariableStore GlobalStore = new VariableStore();
+
 		void Awake()
 		{
 			Resources.LoadAll(CommandFolder);
 		}
 
-		public void RunInstruction(Instruction instruction, InstructionContext context, object thisObject)
+		public void RunInstruction(Instruction instruction, object thisObject)
 		{
-			var store = new InstructionStore(context, thisObject);
+			var store = new InstructionStore(thisObject);
 			var enumerator = instruction.Execute(store);
 
 			StartCoroutine(new JoinEnumerator(enumerator));
 		}
 
-		public void RunInstruction(InstructionCaller caller, InstructionContext context, object thisObject)
+		public void RunInstruction(InstructionCaller caller, object thisObject)
 		{
-			var enumerator = caller.Execute(context, thisObject);
+			var enumerator = caller.Execute(thisObject);
 			StartCoroutine(new JoinEnumerator(enumerator));
 		}
 	}

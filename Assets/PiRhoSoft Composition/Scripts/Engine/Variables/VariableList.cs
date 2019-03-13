@@ -5,158 +5,39 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public enum SetVariableResult
-	{
-		Success,
-		NotFound,
-		ReadOnly,
-		TypeMismatch
-	}
-
-	public interface IVariableList
-	{
-		int VariableCount { get; }
-		string GetVariableName(int index);
-		VariableValue GetVariableValue(int index);
-		SetVariableResult SetVariableValue(int index, VariableValue value);
-	}
-
-	public interface IVariableReset
-	{
-		void ResetAvailability(string availability);
-		void ResetVariables(IList<string> variables);
-	}
-
 	[Serializable]
-	public class VariableList : IVariableList, IVariableReset, ISerializationCallbackReceiver
+	public class VariableList : IVariableList, ISerializationCallbackReceiver
 	{
 		[SerializeField] private List<SerializedVariable> _data;
-		[SerializeField] private int _version = 0;
-		[NonSerialized] private VariableSchema _schema;
-		[NonSerialized] private IVariableStore _owner;
 		[NonSerialized] private List<Variable> _variables = new List<Variable>();
 
-		public VariableSchema Schema => _schema;
-		public IVariableStore Owner => _owner;
-
-		#region Persistence
-
-		public void LoadFrom(VariableList variables, string availability)
+		public void AddVariable(string name, VariableValue value)
 		{
-			foreach (Variable fromVariable in variables._variables)
-			{
-				var index = _schema != null ? _schema.GetIndex(fromVariable.Name) : -1;
-
-				if (index >= 0)
-				{
-					if (availability == null || _schema[index].Availability == availability)
-						SetValue(index, fromVariable.Value);
-				}
-			}
+			_variables.Add(Variable.Create(name, value));
 		}
 
-		public void SaveTo(VariableList variables, string availability)
+		public void RemoveVariable(string name)
 		{
-			foreach (Variable fromVariable in _variables)
-			{
-				var index = _schema != null ? _schema.GetIndex(fromVariable.Name) : -1;
-
-				if (index >= 0)
-				{
-					if (availability == null || _schema[index].Availability == availability)
-						variables._variables.Add(fromVariable);
-				}
-			}
-
-			variables._version = _version;
+			var index = GetVariableIndex(name);
+			if (index >= 0)
+				_variables.RemoveAt(index);
 		}
 
-		#endregion
-
-		#region Schema Management
-
-		public bool NeedsUpdate => _schema != null && _version != _schema.Version;
-
-		public void Setup(VariableSchema schema, IVariableStore owner)
-		{
-			_schema = schema;
-			_owner = owner;
-
-			Update();
-		}
-
-		public void Update()
-		{
-			if (_schema != null && _version != _schema.Version)
-			{
-				var variables = new List<Variable>(_schema.Count);
-
-				for (var i = 0; i < _schema.Count; i++)
-				{
-					var definition = _schema[i];
-					var variable = GetVariable(definition.Name);
-
-					if (variable.Value.Type == definition.Type)
-						variables.Add(variable);
-					else
-						variables.Add(Variable.Create(definition.Name, VariableValue.Empty));
-				}
-
-				_variables = variables;
-				_version = _schema.Version;
-
-				for (var i = 0; i < _schema.Count; i++)
-				{
-					// The list must be updated completely first before any initializers are run in case the schema has
-					// any initializers that reference other variables on the same list.
-
-					if (_variables[i].Value.Type == VariableType.Empty)
-					{
-						var definition = _schema[i];
-						_variables[i] = definition.Generate(_owner);
-					}
-				}
-			}
-		}
-
-		public void Reset(int index)
-		{
-			if (_schema != null)
-				_variables[index] = _schema[index].Generate(_owner);
-		}
-
-
-		public void Clear()
-		{
-			_variables.Clear();
-			_version = 0;
-			_schema = null;
-			_owner = null;
-		}
-
-		private Variable GetVariable(string name)
+		public int GetVariableIndex(string name)
 		{
 			for (var i = 0; i < _variables.Count; i++)
 			{
 				if (_variables[i].Name == name)
-					return _variables[i];
+					return i;
 			}
 
-			return Variable.Create(name, VariableValue.Empty);
+			return -1;
 		}
 
-		private bool SetValue(int index, VariableValue value)
+		public void Clear()
 		{
-			if (_variables[index].Value.Type == value.Type || _variables[index].Value.Type == VariableType.Empty)
-			{
-				_variables[index] = Variable.Create(_variables[index].Name, value);
-				return true;
-			}
-
-			return false;
+			_variables.Clear();
 		}
-
-		#endregion
 
 		#region IVariableList Implementation
 
@@ -178,36 +59,13 @@ namespace PiRhoSoft.CompositionEngine
 		public SetVariableResult SetVariableValue(int index, VariableValue value)
 		{
 			if (index >= 0 && index < _variables.Count)
-				return SetValue(index, value) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
-			else
-				return SetVariableResult.NotFound;
-		}
-
-		#endregion
-
-		#region IVariableReset Implementation
-
-		public void ResetAvailability(string availability)
-		{
-			if (_schema != null)
 			{
-				for (var i = 0; i < _schema.Count; i++)
-				{
-					if (_schema[i].Availability == availability)
-						Reset(i);
-				}
+				_variables[index] = Variable.Create(_variables[index].Name, value);
+				return SetVariableResult.Success;
 			}
-		}
-
-		public void ResetVariables(IList<string> variables)
-		{
-			if (_schema != null)
+			else
 			{
-				for (var i = 0; i < _schema.Count; i++)
-				{
-					if (variables.Contains(_schema[i].Name))
-						Reset(i);
-				}
+				return SetVariableResult.NotFound;
 			}
 		}
 

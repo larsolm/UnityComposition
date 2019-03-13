@@ -10,7 +10,7 @@ namespace PiRhoSoft.CompositionExample
 	{
 		[ChangeTrigger(nameof(SetupSchema))] [AssetPopup] public VariableSchema Schema;
 
-		public VariableList Variables = new VariableList();
+		public VariableSet Variables = new VariableSet();
 		public MappedVariableStore Store = new MappedVariableStore();
 
 		[MappedVariable] public bool BoolField = true;

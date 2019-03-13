@@ -23,11 +23,11 @@ namespace PiRhoSoft.CompositionEngine
 		public IList<InstructionOutput> Outputs => _outputs;
 		public bool IsRunning => Instruction != null && Instruction.IsRunning;
 
-		public IEnumerator Execute(InstructionContext context, object thisObject)
+		public IEnumerator Execute(object thisObject)
 		{
 			if (Instruction)
 			{
-				var store = new InstructionStore(context, thisObject);
+				var store = new InstructionStore(thisObject);
 
 				store.WriteInputs(_inputs);
 				store.WriteOutputs(_outputs);

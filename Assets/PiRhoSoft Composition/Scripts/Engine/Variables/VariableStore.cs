@@ -2,6 +2,14 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
+	public enum SetVariableResult
+	{
+		Success,
+		NotFound,
+		ReadOnly,
+		TypeMismatch
+	}
+
 	public interface IVariableStore
 	{
 		VariableValue GetVariable(string name);

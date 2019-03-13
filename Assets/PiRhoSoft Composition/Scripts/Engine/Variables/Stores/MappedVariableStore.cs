@@ -6,6 +6,14 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
+	public interface IVariableList
+	{
+		int VariableCount { get; }
+		string GetVariableName(int index);
+		VariableValue GetVariableValue(int index);
+		SetVariableResult SetVariableValue(int index, VariableValue value);
+	}
+
 	public class MappedVariableAttribute : Attribute
 	{
 		public bool Readable;
@@ -32,7 +40,7 @@ namespace PiRhoSoft.CompositionEngine
 		private VariableMap _map;
 		private IVariableList[] _lists;
 
-		public void Setup<OwnerType>(OwnerType owner, VariableSchema schema, VariableList variables) where OwnerType : class
+		public void Setup<OwnerType>(OwnerType owner, VariableSchema schema, VariableSet variables) where OwnerType : class
 		{
 			var mapping = GetMapping(owner, schema);
 			var listCount = mapping.Properties.Count;

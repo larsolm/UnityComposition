@@ -68,38 +68,24 @@ namespace PiRhoSoft.CompositionEngine
 		public const string LocalStoreName = "local";
 		public const string GlobalStoreName = "global";
 
+		private static string[] _variableNames = new string[] { ThisStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, GlobalStoreName };
 		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
 		public object This { get; private set; }
-		public InstructionContext Context { get; private set; }
 
 		public VariableStore Input { get; } = new WritableStore();
 		public VariableStore Output { get; } = new WritableStore();
 		public VariableStore Local { get; } = new VariableStore();
-		public ReadOnlyStore Global { get; } = new ReadOnlyStore();
+		public VariableStore Global { get; } = InstructionManager.Instance.GlobalStore;
 
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName == InputStoreName;
 		public static bool IsOutput(VariableReference variable) => variable.IsAssigned && variable.StoreName == OutputStoreName;
 		public static bool IsInput(InstructionInput input) => input.Type == InstructionInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
 		public static bool IsOutput(InstructionOutput output) => output.Type == InstructionOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
-		public InstructionStore(InstructionContext context, object thisObject)
+		public InstructionStore(object thisObject)
 		{
-			SetContext(context);
 			ChangeThis(thisObject);
-		}
-
-		public void SetContext(InstructionContext context)
-		{
-			Global.Clear();
-
-			if (context != null)
-			{
-				foreach (var store in context.Stores)
-					Global.AddVariable(store.Key, VariableValue.Create(store.Value));
-			}
-
-			Context = context;
 		}
 
 		public void ChangeThis(object thisObject)
@@ -187,8 +173,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public IEnumerable<string> GetVariableNames()
 		{
-			return new List<string> { ThisStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName }
-				.Concat(Global.GetVariableNames());
+			return _variableNames;
 		}
 	}
 }

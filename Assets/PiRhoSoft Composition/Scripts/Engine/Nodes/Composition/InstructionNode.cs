@@ -40,9 +40,9 @@ namespace PiRhoSoft.CompositionEngine
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (WaitForCompletion)
-				yield return Instruction.Execute(variables.Context, variables.This);
+				yield return Instruction.Execute(variables.This);
 			else
-				InstructionManager.Instance.RunInstruction(Instruction, variables.Context, variables.This);
+				InstructionManager.Instance.RunInstruction(Instruction, variables.This);
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}

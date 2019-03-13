@@ -17,10 +17,8 @@ namespace PiRhoSoft.CompositionExample
 
 		public InstructionCaller OnStart = new InstructionCaller();
 
-		public VariableList Variables;
+		public VariableSet Variables;
 		public MappedVariableStore Store = new MappedVariableStore();
-		public InstructionContext Context = new InstructionContext();
-
 
 		private Rigidbody2D _body;
 		private Collider2D[] _colliders = new Collider2D[6];
@@ -32,17 +30,12 @@ namespace PiRhoSoft.CompositionExample
 
 		void OnEnable()
 		{
-			Context.Stores.Add(nameof(Player), this);
-			Context.Stores.Add(nameof(World), World);
 			SetupSchema();
 		}
 
 		void OnDisable()
 		{
-			Context.Stores.Clear();
-
-			if (_body)
-				_body.velocity = Vector2.zero;
+			_body.velocity = Vector2.zero;
 		}
 
 		private void SetupSchema()
@@ -53,7 +46,7 @@ namespace PiRhoSoft.CompositionExample
 		void Start()
 		{
 			if (OnStart.Instruction)
-				InstructionManager.Instance.RunInstruction(OnStart, Context, this);
+				InstructionManager.Instance.RunInstruction(OnStart, this);
 		}
 
 		void Update()
@@ -69,7 +62,7 @@ namespace PiRhoSoft.CompositionExample
 					var interaction = _colliders[i].GetComponent<Interaction>();
 					if (interaction)
 					{
-						InstructionManager.Instance.RunInstruction(interaction.OnInteract, Context, interaction);
+						InstructionManager.Instance.RunInstruction(interaction.OnInteract, interaction);
 						break;
 					}
 				}
@@ -91,28 +84,28 @@ namespace PiRhoSoft.CompositionExample
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnEnter, Context, interaction);
+				InstructionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
 		}
 
 		void OnTriggerExit2D(Collider2D collision)
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnLeave, Context, interaction);
+				InstructionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
 		}
 
 		void OnCollisionEnter2D(Collision2D collision)
 		{
 			var interaction = collision.collider.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnEnter, Context, interaction);
+				InstructionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
 		}
 
 		void OnCollisionExit2D(Collision2D collision)
 		{
 			var interaction = collision.collider.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnLeave, Context, interaction);
+				InstructionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
 		}
 
 		#region IVariableStore Implementation
