@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using PiRhoSoft.UtilityEngine;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -53,11 +54,9 @@ namespace PiRhoSoft.CompositionEngine
 			public static readonly Color InterfaceTeal = new Color(0.0f, 0.5f, 0.3f);
 		}
 
-		private const string _missingThisWarning = "(CCNMT) unable to find variable {0} for instruction graph node {1}";
-		private const string _invalidThisWarning = "(CCNIT) variable {0} for instruction graph node {1} must be an object or store";
-		private const string _missingKeyError = "(CCNMK) failed to set target: unable to find key {0} for instruction graph node {1}";
-		private const string _missingIndexError = "(CCNMI) failed to set target: index {0} is out of range for instruction graph node {1}";
-		private const string _missingFieldError = "(CCNMF) failed to set target: unable to find field {0} for instruction graph node {1}";
+		private const string _missingVariableWarning = "(CIGNMV) failed to resolve variable '{0}' on node '{1}': the variable could not be found";
+		private const string _invalidVariableWarning = "(CIGNIV) failed to resolve variable '{0}' on node '{1}': the variable has type {2} and should have type {3}";
+		private const string _invalidObjectWarning = "(CIGNIO) failed to resolve variable '{0}' on node '{1}': the object is not, and cannot be converted to, type {2}";
 
 		[Tooltip("The name of the node")]
 		[AssetName]
@@ -65,7 +64,192 @@ namespace PiRhoSoft.CompositionEngine
 
 		public abstract IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration);
 
+		#region Variable Lookup
+
+		public bool Resolve<ObjectType>(IVariableStore variables, VariableSource<ObjectType> source, out ObjectType result) where ObjectType : Object
+		{
+			switch (source.Type)
+			{
+				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
+				case VariableSourceType.Value: result = source.Value; return true;
+			}
+
+			result = default;
+			return false;
+		}
+
+		public bool Resolve<ObjectType>(IVariableStore variables, VariableReference reference, out ObjectType result) where ObjectType : Object
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.Object != null)
+			{
+				result = ComponentHelper.GetAsObject<ObjectType>(value.Object);
+
+				if (result != null)
+					return true;
+
+				Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, typeof(ObjectType).Name);
+				return false;
+			}
+			else
+			{
+				result = null;
+				LogResolveWarning(value, reference, VariableType.Object);
+				return false;
+			}
+		}
+
+		// IVariableStore can't be set in the editor so a VariableSource<IVariableStore> overload makes no sense
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out IVariableStore result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.Store != null)
+			{
+				result = value.Store;
+				return true;
+			}
+			else
+			{
+				result = null;
+				LogResolveWarning(value, reference, VariableType.Object);
+				return false;
+			}
+		}
+
+		public bool Resolve(IVariableStore variables, BooleanVariableSource source, out bool result)
+		{
+			switch (source.Type)
+			{
+				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
+				case VariableSourceType.Value: result = source.Value; return true;
+			}
+
+			result = default;
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out bool result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.Type == VariableType.Boolean)
+			{
+				result = value.Boolean;
+				return true;
+			}
+			else
+			{
+				LogResolveWarning(value, reference, VariableType.Boolean);
+				result = false;
+				return false;
+			}
+		}
+
+		public bool Resolve(IVariableStore variables, IntegerVariableSource source, out int result)
+		{
+			switch (source.Type)
+			{
+				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
+				case VariableSourceType.Value: result = source.Value; return true;
+			}
+
+			result = default;
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out int result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.Type == VariableType.Integer)
+			{
+				result = value.Integer;
+				return true;
+			}
+			else
+			{
+				LogResolveWarning(value, reference, VariableType.Integer);
+				result = 0;
+				return false;
+			}
+		}
+
+		public bool Resolve(IVariableStore variables, NumberVariableSource source, out float result)
+		{
+			switch (source.Type)
+			{
+				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
+				case VariableSourceType.Value: result = source.Value; return true;
+			}
+
+			result = default;
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out float result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.Type == VariableType.Number || value.Type == VariableType.Integer)
+			{
+				result = value.Number;
+				return true;
+			}
+			else
+			{
+				LogResolveWarning(value, reference, VariableType.Number);
+				result = 0;
+				return false;
+			}
+		}
+
+		public bool Resolve(IVariableStore variables, StringVariableSource source, out string result)
+		{
+			switch (source.Type)
+			{
+				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
+				case VariableSourceType.Value: result = source.Value; return true;
+			}
+
+			result = string.Empty;
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out string result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.Type == VariableType.String)
+			{
+				result = value.String;
+				return true;
+			}
+			else
+			{
+				LogResolveWarning(value, reference, VariableType.String);
+				result = string.Empty;
+				return false;
+			}
+		}
+
+		private void LogResolveWarning(VariableValue value, VariableReference reference, VariableType expectedType)
+		{
+			if (value.Type == VariableType.Empty)
+				Debug.LogWarningFormat(this, _missingVariableWarning, reference, name);
+			else
+				Debug.LogWarningFormat(this, _invalidVariableWarning, reference, name, value.Type, expectedType);
+		}
+
+		#endregion
+
 		#region Editor Interface
+
+		private const string _missingKeyError = "(CCNMK) failed to set target: unable to find key {0} for instruction graph node {1}";
+		private const string _missingIndexError = "(CCNMI) failed to set target: index {0} is out of range for instruction graph node {1}";
+		private const string _missingFieldError = "(CCNMF) failed to set target: unable to find field {0} for instruction graph node {1}";
 
 		[HideInInspector] public Vector2 GraphPosition;
 		[HideInInspector] public bool IsBreakpoint = false;

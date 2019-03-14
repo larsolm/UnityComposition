@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Time.TryGetValue(variables, this, out var time))
+			if (Resolve(variables, Time, out var time))
 			{
 				if (UseScaledTime)
 					yield return new WaitForSeconds(time);

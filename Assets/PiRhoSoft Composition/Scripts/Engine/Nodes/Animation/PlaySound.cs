@@ -7,7 +7,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[Serializable]
-	public class AudioClipVariableSource : ObjectVariableSource<AudioClip> { }
+	public class AudioClipVariableSource : VariableSource<AudioClip> { }
 
 	[CreateInstructionGraphNodeMenu("Animation/Play Sound", 101)]
 	[HelpURL(Composition.DocumentationUrl + "play-sound")]
@@ -42,9 +42,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (variables.Root is AudioPlayer player)
 			{
-				if (Sound.TryGetValue(variables, this, out var sound))
+				if (Resolve(variables, Sound, out var sound))
 				{
-					if (!Volume.TryGetValue(variables, this, out var volume))
+					if (!Resolve(variables, Volume, out var volume))
 					{
 						volume = 1.0f;
 						Debug.LogWarningFormat(this, _invalidVolumeWarning, Name);

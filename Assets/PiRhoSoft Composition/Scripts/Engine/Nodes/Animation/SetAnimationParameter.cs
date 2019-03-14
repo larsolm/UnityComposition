@@ -67,13 +67,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void Trigger(IVariableStore variables, Animator animator)
 		{
-			if (Parameter.TryGetValue(variables, this, out var parameter))
+			if (Resolve(variables, Parameter, out var parameter))
 			{
 				switch (Type)
 				{
 					case AnimatorControllerParameterType.Bool:
 					{
-						if (BoolValue.TryGetValue(variables, this, out var value))
+						if (Resolve(variables, BoolValue, out var value))
 							animator.SetBool(parameter, value);
 						else
 							Debug.LogWarningFormat(this, _valueNotFoundWarning, Name);
@@ -82,7 +82,7 @@ namespace PiRhoSoft.CompositionEngine
 					}
 					case AnimatorControllerParameterType.Int:
 					{
-						if (IntValue.TryGetValue(variables, this, out var value))
+						if (Resolve(variables, IntValue, out var value))
 							animator.SetInteger(parameter, value);
 						else
 							Debug.LogWarningFormat(this, _valueNotFoundWarning, Name);
@@ -91,7 +91,7 @@ namespace PiRhoSoft.CompositionEngine
 					}
 					case AnimatorControllerParameterType.Float:
 					{
-						if (FloatValue.TryGetValue(variables, this, out var value))
+						if (Resolve(variables, FloatValue, out var value))
 							animator.SetFloat(parameter, value);
 						else
 							Debug.LogWarningFormat(this, _valueNotFoundWarning, Name);

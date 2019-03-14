@@ -27,7 +27,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (TimeScale.TryGetValue(variables, this, out var time))
+			if (Resolve(variables, TimeScale, out var time))
 				Time.timeScale = time;
 			else
 				Debug.LogFormat(this, _timeNotFoundWarning, Name);
