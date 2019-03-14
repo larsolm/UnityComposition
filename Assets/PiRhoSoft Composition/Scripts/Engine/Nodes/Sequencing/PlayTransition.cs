@@ -54,7 +54,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (WaitForCompletion)
 					yield return AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase);
 				else
-					InstructionManager.Instance.StartCoroutine(AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase));
+					CompositionManager.Instance.StartCoroutine(AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase));
 			}
 			else
 			{

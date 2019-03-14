@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "instruction-manager")]
 	[AddComponentMenu("PiRho Soft/Instructions/Instruction Manager")]
-	public class InstructionManager : GlobalBehaviour<InstructionManager>
+	public class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
 		public static string CommandFolder = "Commands";
 
@@ -17,6 +17,11 @@ namespace PiRhoSoft.CompositionEngine
 		void Awake()
 		{
 			Resources.LoadAll(CommandFolder);
+		}
+
+		void LateUpdate()
+		{
+			InputHelper.LateUpdate();
 		}
 
 		public void RunInstruction(Instruction instruction, object thisObject)

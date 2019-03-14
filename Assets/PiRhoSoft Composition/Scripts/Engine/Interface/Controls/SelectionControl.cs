@@ -21,6 +21,18 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _missingTemplateError = "(ISCMT) Failed to create item {0}: the object template has not been assigned";
 		private const string _missingChildError = "(ISCMC) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
 
+		[Tooltip("The input axis to use for horizontal movement")]
+		public string HorizontalAxis = "Horizontal";
+
+		[Tooltip("The input axis to use for vertical movement")]
+		public string VerticalAxis = "Vertical";
+
+		[Tooltip("The input button to use for accepting the selection")]
+		public string AcceptButton = "Submit";
+
+		[Tooltip("The input button to use for canceling the selection")]
+		public string CancelButton = "Cancel";
+
 		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a column")]
 		public bool VerticalWrapping = false;
 
@@ -76,12 +88,19 @@ namespace PiRhoSoft.CompositionEngine
 
 			while (_selectedItem == null && !_isClosing)
 			{
-				if (Interface.Up.Pressed) MoveFocusUp();
-				else if (Interface.Down.Pressed) MoveFocusDown();
-				else if (Interface.Left.Pressed) MoveFocusLeft();
-				else if (Interface.Right.Pressed) MoveFocusRight();
-				else if (Interface.Accept.Pressed && _focusedItem != null) _selectedItem = _focusedItem;
-				else if (Interface.Cancel.Pressed) Close();
+				var left = InputHelper.GetWasAxisPressed(HorizontalAxis, -0.25f);
+				var right = InputHelper.GetWasAxisPressed(HorizontalAxis, 0.25f);
+				var up = InputHelper.GetWasAxisPressed(VerticalAxis, 0.25f);
+				var down = InputHelper.GetWasAxisPressed(VerticalAxis, -0.25f);
+				var accept = InputHelper.GetWasButtonPressed(AcceptButton);
+				var cancel = InputHelper.GetWasButtonPressed(CancelButton);
+
+				if (up) MoveFocusUp();
+				else if (down) MoveFocusDown();
+				else if (left) MoveFocusLeft();
+				else if (right) MoveFocusRight();
+				else if (accept && _focusedItem != null) _selectedItem = _focusedItem;
+				else if (cancel) Close();
 
 				yield return null;
 			}

@@ -123,7 +123,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (WaitForCompletion)
 					yield return DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed);
 				else
-					InstructionManager.Instance.StartCoroutine(DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed));
+					CompositionManager.Instance.StartCoroutine(DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed));
 			}
 		}
 

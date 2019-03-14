@@ -16,7 +16,6 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(AllowCollapse = false, ShowEditButton = true, EmptyText = "Add items that need to be enabled along with this control")]
 		public DependentObjectList DependentObjects = new DependentObjectList();
 
-		public Interface Interface { get; private set; }
 		public IVariableStore Variables { get; private set; }
 
 		private int _activeCount = 0;
@@ -27,11 +26,6 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_activeCount = 0;
 			Disable();
-		}
-
-		public void Initialize(Interface interface_)
-		{
-			Interface = interface_;
 		}
 
 		public void Activate()

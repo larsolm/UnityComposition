@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (WaitForCompletion)
 				yield return Instruction.Execute(variables.This);
 			else
-				InstructionManager.Instance.RunInstruction(Instruction, variables.This);
+				CompositionManager.Instance.RunInstruction(Instruction, variables.This);
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}

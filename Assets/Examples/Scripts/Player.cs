@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionExample
 		void Start()
 		{
 			if (OnStart.Instruction)
-				InstructionManager.Instance.RunInstruction(OnStart, this);
+				CompositionManager.Instance.RunInstruction(OnStart, this);
 		}
 
 		void Update()
@@ -58,7 +58,7 @@ namespace PiRhoSoft.CompositionExample
 					var interaction = _colliders[i].GetComponent<Interaction>();
 					if (interaction)
 					{
-						InstructionManager.Instance.RunInstruction(interaction.OnInteract, interaction);
+						CompositionManager.Instance.RunInstruction(interaction.OnInteract, interaction);
 						break;
 					}
 				}
@@ -80,28 +80,28 @@ namespace PiRhoSoft.CompositionExample
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
 		}
 
 		void OnTriggerExit2D(Collider2D collision)
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
 		}
 
 		void OnCollisionEnter2D(Collision2D collision)
 		{
 			var interaction = collision.collider.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
 		}
 
 		void OnCollisionExit2D(Collision2D collision)
 		{
 			var interaction = collision.collider.GetComponent<Interaction>();
 			if (interaction)
-				InstructionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
 		}
 
 		#region IVariableStore Implementation

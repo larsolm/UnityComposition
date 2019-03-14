@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var name = Variables.GetVariableName(i);
 				var value = Variables.GetVariableValue(i);
-				InstructionManager.Instance.GlobalStore.SetVariable(name, value);
+				CompositionManager.Instance.GlobalStore.SetVariable(name, value);
 			}
 		}
 
@@ -27,7 +27,7 @@ namespace PiRhoSoft.CompositionEngine
 			for (var i = 0; i < Variables.VariableCount; i++)
 			{
 				var name = Variables.GetVariableName(i);
-				InstructionManager.Instance.GlobalStore.RemoveVariable(name);
+				CompositionManager.Instance.GlobalStore.RemoveVariable(name);
 			}
 		}
 	}

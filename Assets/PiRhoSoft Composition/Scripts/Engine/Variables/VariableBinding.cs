@@ -40,7 +40,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (string.IsNullOrEmpty(group) || BindingGroup == group)
 			{
-				var variables = (_root != null ? _root.Variables : null) ?? InstructionManager.Instance.GlobalStore;
+				var variables = (_root != null ? _root.Variables : null) ?? CompositionManager.Instance.GlobalStore;
 				UpdateBinding(variables, status ?? _ignoredStatus);
 			}
 		}

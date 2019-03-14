@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.UtilityEngine;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -31,6 +32,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The object to show when the message is the last in a sequence")]
 		public GameObject FinishedIndicator = null;
+
+		[Tooltip("The input button to use to advance the text")]
+		public string AcceptButton = "Submit";
 
 		public IEnumerator Show(IVariableStore variables, string text, MessageInteractionType interaction, bool isLast, float wait)
 		{
@@ -69,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			SetInteraction(MessageControlDisplay.Finished, interaction, isLast);
 
-			while (interaction != MessageInteractionType.DontWait && interaction != MessageInteractionType.WaitForDisplay && !Interface.Accept.Pressed)
+			while (interaction != MessageInteractionType.DontWait && interaction != MessageInteractionType.WaitForDisplay && !InputHelper.GetWasButtonPressed(AcceptButton))
 				yield return null;
 
 			SetInteraction(MessageControlDisplay.None, interaction, isLast);

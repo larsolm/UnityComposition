@@ -76,7 +76,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableStore Input { get; } = new WritableStore();
 		public VariableStore Output { get; } = new WritableStore();
 		public VariableStore Local { get; } = new VariableStore();
-		public VariableStore Global { get; } = InstructionManager.Instance.GlobalStore;
+		public VariableStore Global { get; } = CompositionManager.Instance.GlobalStore;
 
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName == InputStoreName;
 		public static bool IsOutput(VariableReference variable) => variable.IsAssigned && variable.StoreName == OutputStoreName;
