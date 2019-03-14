@@ -4,6 +4,41 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
+	public class VariableConstraintAttribute : Attribute
+	{
+		private VariableDefinition _definition;
+
+		public VariableConstraintAttribute(VariableType type)
+		{
+			_definition = VariableDefinition.Create("", type);
+		}
+
+		public VariableConstraintAttribute(int minimum, int maximum)
+		{
+			_definition = VariableDefinition.Create("", minimum, maximum);
+		}
+
+		public VariableConstraintAttribute(float minimum, float maximum)
+		{
+			_definition = VariableDefinition.Create("", minimum, maximum);
+		}
+
+		public VariableConstraintAttribute(string values)
+		{
+			_definition = VariableDefinition.Create("", values);
+		}
+
+		public VariableConstraintAttribute(Type type)
+		{
+			_definition = VariableDefinition.Create("", type);
+		}
+
+		public VariableDefinition GetDefinition(string name)
+		{
+			return VariableDefinition.Create(name, _definition.Type, _definition.UseRangeConstraint, _definition.MinimumConstraint, _definition.MaximumConstraint, _definition.TypeConstraint);
+		}
+	}
+
 	[Serializable]
 	public struct VariableDefinition
 	{
@@ -88,13 +123,18 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static VariableDefinition Create<T>(string name, string availability = "", Expression initializer = null) where T : Object
 		{
+			return Create(name, typeof(T), availability, initializer);
+		}
+
+		public static VariableDefinition Create(string name, Type type, string availability = "", Expression initializer = null)
+		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.Object,
 				_availability = availability,
 				_initializer = initializer,
-				_typeConstraint = typeof(T).AssemblyQualifiedName
+				_typeConstraint = type.AssemblyQualifiedName
 			};
 		}
 
