@@ -21,7 +21,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			_text.text = Variable.GetValue(variables).ToString();
+			var value = Variable.GetValue(variables);
+
+			_text.enabled = value.Type != VariableType.Empty;
+			_text.text = value.ToString();
 		}
 	}
 }

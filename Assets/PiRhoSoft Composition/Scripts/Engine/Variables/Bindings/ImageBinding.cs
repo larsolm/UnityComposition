@@ -9,9 +9,6 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Image Binding")]
 	public class ImageBinding : VariableBinding
 	{
-		public const string _invalidVariableError = "(CIBIV) Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite";
-		public const string _missingVariableError = "(CIBMV) Failed to update image binding: the variable '{0}' could not be found";
-
 		[Tooltip("The variable holding the image to show on this object")]
 		public VariableReference Variable = new VariableReference();
 
@@ -27,11 +24,14 @@ namespace PiRhoSoft.CompositionEngine
 			var value = Variable.GetValue(variables);
 
 			if (value.TryGetObject(out Sprite sprite))
+			{
+				_image.enabled = true;
 				_image.sprite = sprite;
-			else if (value.Type == VariableType.Empty)
-				Debug.LogErrorFormat(this, _missingVariableError, Variable);
+			}
 			else
-				Debug.LogErrorFormat(this, _invalidVariableError, Variable);
+			{
+				_image.enabled = false;
+			}
 		}
 	}
 }

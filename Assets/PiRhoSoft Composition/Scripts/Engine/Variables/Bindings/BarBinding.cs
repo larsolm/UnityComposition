@@ -10,11 +10,6 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Bar Binding")]
 	public class BarBinding : VariableBinding
 	{
-		private const string _invalidAmountError = "(CBBIA) Failed to update bar binding: the amount variable '{0}' is not an Integer or Number";
-		private const string _missingAmountError = "(CBBMA) Failed to update bar binding: the amount variable '{0}' could not be found";
-		private const string _invalidTotalError = "(CBBIT) Failed to update bar binding: the total variable '{0}' is not an Integer or Number";
-		private const string _missingTotalError = "(CBBMT) Failed to update bar binding: the total variable '{0}' could not be found";
-
 		[Tooltip("The speed at which to animate the fill change (in % per second, 0 means immediate)")]
 		[Range(0.0f, 1.0f)]
 		public float Speed = 0.0f;
@@ -42,43 +37,26 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			status?.Increment();
 
-			var fill = GetFill(variables);
-
-			if (Speed <= 0.0f)
-			{
-				SetFill(fill);
-				status?.Decrement();
-			}
-			else
-			{
-				StartCoroutine(AnimateFill(fill, status));
-			}
-		}
-
-		private float GetFill(IVariableStore variables)
-		{
 			var amountValue = AmountVariable.GetValue(variables);
 			var totalValue = TotalVariable.GetValue(variables);
 
-			float amount, total;
+			_image.enabled = (amountValue.Type == VariableType.Integer || amountValue.Type == VariableType.Number)
+				&& (totalValue.Type == VariableType.Integer || totalValue.Type == VariableType.Number);
 
-			switch (amountValue.Type)
+			if (_image.enabled)
 			{
-				case VariableType.Empty: Debug.LogErrorFormat(this, _missingAmountError, AmountVariable); amount = 0.0f; break;
-				case VariableType.Integer: amount = amountValue.Integer; break;
-				case VariableType.Number: amount = amountValue.Number; break;
-				default: Debug.LogErrorFormat(this, _invalidAmountError, AmountVariable); amount = 0.0f; break;
-			}
+				var fill = amountValue.Number / totalValue.Number;
 
-			switch (totalValue.Type)
-			{
-				case VariableType.Empty: Debug.LogErrorFormat(this, _missingTotalError, TotalVariable); total = 1.0f; break;
-				case VariableType.Integer: total = totalValue.Integer; break;
-				case VariableType.Number: total = totalValue.Number; break;
-				default: Debug.LogErrorFormat(this, _invalidTotalError, TotalVariable); total = 1.0f; break;
+				if (Speed <= 0.0f)
+				{
+					SetFill(fill);
+					status?.Decrement();
+				}
+				else
+				{
+					StartCoroutine(AnimateFill(fill, status));
+				}
 			}
-
-			return amount / total;
 		}
 
 		private void SetFill(float amount)

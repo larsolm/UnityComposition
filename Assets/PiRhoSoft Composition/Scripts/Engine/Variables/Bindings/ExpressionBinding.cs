@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Expression Binding")]
 	public class ExpressionBinding : VariableBinding
 	{
-		[Tooltip("The expression to evaulate and display as text in this object")]
+		[Tooltip("The expression to evaluate and display as text in this object")]
 		public Expression Expression;
 
 		public TextMeshProUGUI Text
@@ -27,7 +27,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			Text.text = Expression.Execute(this, variables).ToString();
+			try
+			{
+				var result = Expression.Evaluate(variables);
+
+				Text.enabled = result.Type != VariableType.Empty;
+				Text.text = result.ToString();
+			}
+			catch
+			{
+				Text.enabled = false;
+			}
 		}
 	}
 }

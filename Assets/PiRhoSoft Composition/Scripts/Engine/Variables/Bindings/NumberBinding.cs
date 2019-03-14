@@ -33,22 +33,21 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			status?.Increment();
 
-			var value = GetValue(variables);
+			var value = Variable.GetValue(variables);
+			_text.enabled = value.Type == VariableType.Integer || value.Type == VariableType.Number;
 
-			if (Speed <= 0)
+			if (_text.enabled)
 			{
-				SetValue(value);
-				status?.Decrement();
+				if (Speed <= 0)
+				{
+					SetValue(value.Integer);
+					status?.Decrement();
+				}
+				else
+				{
+					StartCoroutine(AnimateValue(value.Integer, status));
+				}
 			}
-			else
-			{
-				StartCoroutine(AnimateValue(value, status));
-			}
-		}
-
-		private int GetValue(IVariableStore variables)
-		{
-			return Variable.GetValue(variables).Integer;
 		}
 
 		private void SetValue(int value)
