@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public interface IVariableReset
 	{
-		void ResetAvailability(string availability);
+		void ResetTag(string tag);
 		void ResetVariables(IList<string> variables);
 	}
 
@@ -25,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Persistence
 
-		public void LoadFrom(VariableSet variables, string availability)
+		public void LoadFrom(VariableSet variables, string tag)
 		{
 			foreach (Variable fromVariable in variables._variables)
 			{
@@ -33,13 +33,13 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (index >= 0)
 				{
-					if (availability == null || _schema[index].Availability == availability)
+					if (tag == null || _schema[index].Tag == tag)
 						SetValue(index, fromVariable.Value);
 				}
 			}
 		}
 
-		public void SaveTo(VariableSet variables, string availability)
+		public void SaveTo(VariableSet variables, string tag)
 		{
 			foreach (Variable fromVariable in _variables)
 			{
@@ -47,7 +47,7 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (index >= 0)
 				{
-					if (availability == null || _schema[index].Availability == availability)
+					if (tag == null || _schema[index].Tag == tag)
 						variables._variables.Add(fromVariable);
 				}
 			}
@@ -171,13 +171,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region IVariableReset Implementation
 
-		public void ResetAvailability(string availability)
+		public void ResetTag(string tag)
 		{
 			if (_schema != null)
 			{
 				for (var i = 0; i < _schema.Count; i++)
 				{
-					if (_schema[i].Availability == availability)
+					if (_schema[i].Tag == tag)
 						Reset(i);
 				}
 			}

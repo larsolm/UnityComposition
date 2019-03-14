@@ -49,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[SerializeField] private string _name;
 		[SerializeField] private VariableType _type;
-		[SerializeField] private string _availability;
+		[SerializeField] private string _tag;
 		[SerializeField] private Expression _initializer;
 
 		// These constraints are not checked at runtime - they are only for providing information to the editor so it
@@ -62,7 +62,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public string Name => _name;
 		public VariableType Type => _type;
-		public string Availability => _availability;
+		public string Tag => _tag;
 		public Expression Initializer => _initializer;
 
 		public bool UseRangeConstraint => _useRangeConstraint;
@@ -70,24 +70,24 @@ namespace PiRhoSoft.CompositionEngine
 		public float MaximumConstraint => _maximumConstraint;
 		public string TypeConstraint => _typeConstraint;
 
-		public static VariableDefinition Create(string name, VariableType type, string availability = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, VariableType type, string tag = "", Expression initializer = null)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = type,
-				_availability = availability,
+				_tag = tag,
 				_initializer = initializer
 			};
 		}
 
-		public static VariableDefinition Create(string name, int minimum, int maximum, string availability = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, int minimum, int maximum, string tag = "", Expression initializer = null)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.Integer,
-				_availability = availability,
+				_tag = tag,
 				_initializer = initializer,
 				_useRangeConstraint = true,
 				_minimumConstraint = minimum,
@@ -95,13 +95,13 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
-		public static VariableDefinition Create(string name, float minimum, float maximum, string availability = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, float minimum, float maximum, string tag = "", Expression initializer = null)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.Number,
-				_availability = availability,
+				_tag = tag,
 				_initializer = initializer,
 				_useRangeConstraint = true,
 				_minimumConstraint = minimum,
@@ -109,42 +109,42 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
-		public static VariableDefinition Create(string name, string values, string availability = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, string values, string tag = "", Expression initializer = null)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.String,
-				_availability = availability,
+				_tag = tag,
 				_initializer = initializer,
 				_typeConstraint = values
 			};
 		}
 
-		public static VariableDefinition Create<T>(string name, string availability = "", Expression initializer = null) where T : Object
+		public static VariableDefinition Create<T>(string name, string tag = "", Expression initializer = null) where T : Object
 		{
-			return Create(name, typeof(T), availability, initializer);
+			return Create(name, typeof(T), tag, initializer);
 		}
 
-		public static VariableDefinition Create(string name, Type type, string availability = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, Type type, string tag = "", Expression initializer = null)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.Object,
-				_availability = availability,
+				_tag = tag,
 				_initializer = initializer,
 				_typeConstraint = type.AssemblyQualifiedName
 			};
 		}
 
-		public static VariableDefinition Create(string name, VariableType type, bool constrainRange, float minimum, float maximum, string typeConstraint, string availability = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, VariableType type, bool constrainRange, float minimum, float maximum, string typeConstraint, string tag = "", Expression initializer = null)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = type,
-				_availability = availability,
+				_tag = tag,
 				_initializer = initializer,
 				_useRangeConstraint = constrainRange,
 				_minimumConstraint = minimum,

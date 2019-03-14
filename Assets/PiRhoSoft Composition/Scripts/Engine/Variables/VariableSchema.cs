@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -10,12 +12,17 @@ namespace PiRhoSoft.CompositionEngine
 		None
 	}
 
+	[Serializable]
+	public class TagList : SerializedList<string> { }
+
 	[HelpURL(Composition.DocumentationUrl + "variable-schema")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Schema", fileName = "Schema", order = 129)]
 	public class VariableSchema : ScriptableObject
 	{
 		public VariableInitializerType InitializerType = VariableInitializerType.DefaultValue;
-		public string[] Availabilities = new string[0];
+
+		[ListDisplay(EmptyText = "Add tags to differentiate variables in the schema into different catagories (usually for resetting and persistance)")]
+		public TagList Tags = new TagList();
 
 		[HideInInspector] [SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
 		[HideInInspector] [SerializeField] private int _version = 0;

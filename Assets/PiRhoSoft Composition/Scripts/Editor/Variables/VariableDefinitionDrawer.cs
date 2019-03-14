@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
 using UnityEditor;
@@ -16,7 +17,7 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static GUIContent _numberConstraintLabel = new GUIContent("Constraint", "The range of values allowed for the variable");
 		private readonly static GUIContent _stringConstraintLabel = new GUIContent("Constraint", "The comma separated list of valid values for the variable");
 		private readonly static GUIContent _objectConstraintLabel = new GUIContent("Constraint", "The Object type that the assigned object must be derived from or have an instance of");
-		private readonly static GUIContent _availabilityLabel = new GUIContent("Availability", "The state of the game during which this variable is available and after which it will be reset");
+		private readonly static GUIContent _tagLabel = new GUIContent("Tag", "An identifier that can be used to reset or persist this variable");
 		private readonly static GUIContent _useRangeConstraintLabel = new GUIContent("");
 		private readonly static GUIContent _minimumConstraintLabel = new GUIContent("Between");
 		private readonly static GUIContent _maximumConstraintLabel = new GUIContent("and");
@@ -25,18 +26,18 @@ namespace PiRhoSoft.CompositionEditor
 		private const float _labelWidth = 100.0f;
 		private const float _labelIndent = 4.0f;
 
-		public static float GetHeight(SerializedProperty property, VariableInitializerType initializerType, string[] availabilities)
+		public static float GetHeight(SerializedProperty property, VariableInitializerType initializerType, TagList tags)
 		{
 			var typeProperty = property.FindPropertyRelative(nameof(VariableDefinition.Type));
-			return GetHeight((VariableType)typeProperty.enumValueIndex, initializerType, null, availabilities);
+			return GetHeight((VariableType)typeProperty.enumValueIndex, initializerType, null, tags);
 		}
 
-		public static float GetHeight(VariableDefinition definition, VariableInitializerType initializerType, string[] availabilities)
+		public static float GetHeight(VariableDefinition definition, VariableInitializerType initializerType, TagList tags)
 		{
-			return GetHeight(definition.Type, initializerType, definition.Initializer, availabilities);
+			return GetHeight(definition.Type, initializerType, definition.Initializer, tags);
 		}
 
-		private static float GetHeight(VariableType type, VariableInitializerType initializerType, Expression initializer, string[] availabilities)
+		private static float GetHeight(VariableType type, VariableInitializerType initializerType, Expression initializer, TagList tags)
 		{
 			var height = EditorGUIUtility.singleLineHeight;
 
@@ -51,18 +52,18 @@ namespace PiRhoSoft.CompositionEditor
 			if (HasConstraint(type))
 				height += RectHelper.LineHeight;
 
-			if (HasAvailability(availabilities))
+			if (HasTags(tags))
 				height += RectHelper.LineHeight;
 
 			return height;
 		}
 
-		public static void Draw(Rect position, SerializedProperty property, VariableInitializerType initializer, string[] availabilities)
+		public static void Draw(Rect position, SerializedProperty property, VariableInitializerType initializer, TagList tags)
 		{
 			var nameProperty = property.FindPropertyRelative(nameof(VariableDefinition.Name));
 			var typeProperty = property.FindPropertyRelative(nameof(VariableDefinition.Type));
 			var initializerProperty = property.FindPropertyRelative(nameof(VariableDefinition.Initializer)).FindPropertyRelative("_statement");
-			var availabilityProperty = property.FindPropertyRelative(nameof(VariableDefinition.Availability));
+			var tagProperty = property.FindPropertyRelative(nameof(VariableDefinition.Tag));
 			var useRangeConstraintProperty = property.FindPropertyRelative(nameof(VariableDefinition.UseRangeConstraint));
 			var minimumConstraintProperty = property.FindPropertyRelative(nameof(VariableDefinition.MinimumConstraint));
 			var maximumConstraintProperty = property.FindPropertyRelative(nameof(VariableDefinition.MaximumConstraint));
@@ -77,30 +78,30 @@ namespace PiRhoSoft.CompositionEditor
 				minimumConstraintProperty.floatValue,
 				maximumConstraintProperty.floatValue,
 				typeConstraintProperty.stringValue,
-				availabilityProperty.stringValue,
+				tagProperty.stringValue,
 				_expression);
 
-			Draw(position, definition, initializer, availabilities);
+			Draw(position, definition, initializer, tags);
 
 			nameProperty.stringValue = definition.Name;
 			typeProperty.enumValueIndex = (int)definition.Type;
 			initializerProperty.stringValue = definition.Initializer != null ? definition.Initializer.Statement : "";
-			availabilityProperty.stringValue = definition.Availability;
+			tagProperty.stringValue = definition.Tag;
 			useRangeConstraintProperty.boolValue = definition.UseRangeConstraint;
 			minimumConstraintProperty.floatValue = definition.MinimumConstraint;
 			maximumConstraintProperty.floatValue = definition.MaximumConstraint;
 			typeConstraintProperty.stringValue = definition.TypeConstraint;
 		}
 
-		public static VariableDefinition Draw(Rect position, VariableDefinition definition, VariableInitializerType initializer, string[] availabilities)
+		public static VariableDefinition Draw(Rect position, VariableDefinition definition, VariableInitializerType initializer, TagList tags)
 		{
 			var type = definition.Type;
-			var availability = definition.Availability;
+			var tag = definition.Tag;
 			var constraint = new Constraint(definition);
 
 			var hasInitializer = HasInitializer(definition.Type, initializer);
 			var hasConstraint = HasConstraint(definition.Type);
-			var hasAvailability = HasAvailability(availabilities);
+			var hasTag = HasTags(tags);
 
 			var typeRect = RectHelper.TakeLine(ref position);
 			DrawType(typeRect, definition);
@@ -127,13 +128,13 @@ namespace PiRhoSoft.CompositionEditor
 				constraint = DrawConstraint(constraintRect, type, constraint);
 			}
 
-			if (hasAvailability)
+			if (hasTag)
 			{
-				var availabilityRect = RectHelper.TakeLine(ref position);
-				availability = DrawAvailability(availabilityRect, availability, availabilities);
+				var tagRect = RectHelper.TakeLine(ref position);
+				tag = DrawTag(tagRect, tag, tags);
 			}
 
-			return VariableDefinition.Create(definition.Name, type, constraint.UseRangeConstraint, constraint.MinimumConstraint, constraint.MaximumConstraint, constraint.TypeConstraint, availability, definition.Initializer);
+			return VariableDefinition.Create(definition.Name, type, constraint.UseRangeConstraint, constraint.MinimumConstraint, constraint.MaximumConstraint, constraint.TypeConstraint, tag, definition.Initializer);
 		}
 
 		private static bool HasInitializer(VariableType type, VariableInitializerType initializer)
@@ -146,9 +147,9 @@ namespace PiRhoSoft.CompositionEditor
 			return type == VariableType.Integer || type == VariableType.Number || type == VariableType.String || type == VariableType.Object;
 		}
 
-		private static bool HasAvailability(string[] availabilities)
+		private static bool HasTags(TagList tags)
 		{
-			return availabilities != null && availabilities.Length > 0;
+			return tags != null && tags.Count > 0;
 		}
 
 		private static void DrawIndentedLabel(ref Rect rect, GUIContent label)
@@ -267,13 +268,13 @@ namespace PiRhoSoft.CompositionEditor
 			return constraint;
 		}
 
-		private static string DrawAvailability(Rect rect, string availability, string[] availabilities)
+		private static string DrawTag(Rect rect, string tag, TagList tags)
 		{
-			DrawIndentedLabel(ref rect, _availabilityLabel);
+			DrawIndentedLabel(ref rect, _tagLabel);
 
-			var availabilityIndex = Array.IndexOf(availabilities, availability);
-			availabilityIndex = EditorGUI.Popup(rect, availabilityIndex, availabilities);
-			return availabilityIndex >= 0 ? availabilities[availabilityIndex] : "";
+			var tagIndex = tags.IndexOf(tag);
+			tagIndex = EditorGUI.Popup(rect, tagIndex, tags.ToArray());
+			return tagIndex >= 0 ? tags[tagIndex] : "";
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
