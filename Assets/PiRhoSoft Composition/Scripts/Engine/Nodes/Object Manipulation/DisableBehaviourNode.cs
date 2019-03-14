@@ -3,23 +3,23 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Object Manipulation/Destroy Object", 1)]
-	[HelpURL(Composition.DocumentationUrl + "destroy-object-node")]
-	public class DestroyObjectNode : InstructionGraphNode
+	[CreateInstructionGraphNodeMenu("Object Manipulation/Disable Behaviour", 21)]
+	[HelpURL(Composition.DocumentationUrl + "disable-behaviour-node")]
+	public class DisableBehaviourNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
-		[Tooltip("The target GameObject to destroy")]
-		[VariableConstraint(typeof(GameObject))]
+		[Tooltip("The target Behaviour to enable")]
+		[VariableConstraint(typeof(Behaviour))]
 		public VariableReference Target = new VariableReference();
 
 		public override Color NodeColor => Colors.SequencingDark;
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<GameObject>(variables, Target, out var target))
-				Destroy(target);
+			if (Resolve<Behaviour>(variables, Target, out var behaviour))
+				behaviour.enabled = false;
 
 			graph.GoTo(Next, nameof(Next));
 

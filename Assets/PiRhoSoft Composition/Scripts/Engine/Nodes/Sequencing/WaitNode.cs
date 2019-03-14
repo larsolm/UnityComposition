@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -9,8 +8,6 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "wait-node")]
 	public class WaitNode : InstructionGraphNode
 	{
-		private const string _timeNotFoundWarning = "(CCFTNF) Unable to wait for time on {0}: the time could not be found";
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
@@ -23,11 +20,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Sequencing;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
-		{
-			Time.GetInputs(inputs);
-		}
-
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Resolve(variables, Time, out var time))
@@ -36,10 +28,6 @@ namespace PiRhoSoft.CompositionEngine
 					yield return new WaitForSeconds(time);
 				else
 					yield return new WaitForSecondsRealtime(time);
-			}
-			else
-			{
-				Debug.LogFormat(this, _timeNotFoundWarning, Name);
 			}
 
 			graph.GoTo(Next, nameof(Next));

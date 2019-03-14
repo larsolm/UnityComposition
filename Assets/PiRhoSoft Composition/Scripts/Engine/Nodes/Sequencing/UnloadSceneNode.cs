@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The Scene to unload")]
-		[SceneReference("New Scene", "SetupScene")]
+		[SceneReference("New Scene", nameof(SetupScene))]
 		public SceneReference Scene = new SceneReference();
 
 		[Tooltip("Whether to wait for Scene to finish unloading before moving to Next")]

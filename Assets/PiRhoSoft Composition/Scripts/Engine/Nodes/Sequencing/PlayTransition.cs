@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -9,8 +8,6 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "play-transition")]
 	public class PlayTransition : InstructionGraphNode
 	{
-		private const string _transitionMissingWarning = "(WPTTM) Unable to play transition for {0}: the transition could not be found";
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
@@ -42,11 +39,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override void GetInputs(List<VariableDefinition> inputs)
-		{
-			Transition.GetInputs(inputs);
-		}
-
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Resolve(variables, Transition, out var transition))
@@ -55,10 +47,6 @@ namespace PiRhoSoft.CompositionEngine
 					yield return AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase);
 				else
 					CompositionManager.Instance.StartCoroutine(AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase));
-			}
-			else
-			{
-				Debug.LogWarningFormat(this, _transitionMissingWarning, Name);
 			}
 
 			graph.GoTo(Next, nameof(Next));
