@@ -7,11 +7,11 @@ namespace PiRhoSoft.CompositionEngine
 	[CreateInstructionGraphNodeMenu("Interface/Update Binding", 300)]
 	public class UpdateBindingNode : InstructionGraphNode
 	{
+		private const string _missingObjectWarning = "(CUBNMO) failed to update bindings: unable to find object '{0}'";
+		private const string _invalidObjectWarning = "(CUBNIO) failed to update bindings: '{0}' is not a GameObject, InterfaceControl, or Component";
+
 		[Tooltip("The node to go to once the control is shown")]
 		public InstructionGraphNode Next = null;
-
-		[Tooltip("The control to update")]
-		public InterfaceReference Control = new InterfaceReference();
 
 		[Tooltip("The binding group to update (updates all if empty)")]
 		public string Group;
@@ -25,12 +25,32 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var control = Control.GetControl<InterfaceControl>(this);
-
 			_status.Reset();
 
-			if (control)
-				control.UpdateBindings(variables, Group, _status);
+			if (variables.This is GameObject obj)
+			{
+				VariableBinding.UpdateBinding(obj, Group, _status);
+			}
+			else if (variables.This is InterfaceControl control)
+			{
+				VariableBinding.UpdateBinding(control.gameObject, Group, _status);
+
+				foreach (var dependency in control.DependentObjects)
+					VariableBinding.UpdateBinding(dependency, Group, _status);
+			}
+			else if (variables.This is Component component)
+			{
+				VariableBinding.UpdateBinding(component.gameObject, Group, _status);
+			}
+			else
+			{
+				if (variables.This == null)
+					Debug.LogWarningFormat(this, _missingObjectWarning, This);
+				else
+					Debug.LogWarningFormat(this, _invalidObjectWarning, This);
+
+				yield break;
+			}
 
 			if (WaitForCompletion)
 			{
@@ -39,7 +59,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			graph.GoTo(Next, variables.This, nameof(Next));
-
 			yield break;
 		}
 	}

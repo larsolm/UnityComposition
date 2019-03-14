@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	[HelpURL(Composition.DocumentationUrl + "number-binding")]
 	[AddComponentMenu("PiRho Soft/Interface/Number Binding")]
-	public class NumberBinding : InterfaceBinding
+	public class NumberBinding : VariableBinding
 	{
 		private const string _invalidTextWarning = "(CIBNBIT) Unable to animate text for number binding {0}: the displayed text is not an int";
 
@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 			_text = GetComponent<TextMeshProUGUI>();
 		}
 
-		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			status?.Increment();
 

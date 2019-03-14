@@ -67,7 +67,6 @@ namespace PiRhoSoft.CompositionEngine
 			_selectedItem = null;
 
 			CreateItems(variables, items);
-			UpdateBindings(variables, null, null);
 			DetermineLayout();
 
 			if (IsLocationFocusable(_columnIndex, _rowIndex))
@@ -94,17 +93,6 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (!_isSelectionRequired)
 				_isClosing = true;
-		}
-
-		protected override void UpdateBindings(string group, BindingAnimationStatus status)
-		{
-			InterfaceBinding.UpdateSelfBindings(gameObject, Variables, group, status);
-
-			foreach (var obj in DependentObjects)
-				InterfaceBinding.UpdateBindings(obj, Variables, group, status);
-
-			foreach (var item in _items)
-				InterfaceBinding.UpdateBindings(item.Object, item.Variables, group, status);
 		}
 
 		protected override void Teardown()

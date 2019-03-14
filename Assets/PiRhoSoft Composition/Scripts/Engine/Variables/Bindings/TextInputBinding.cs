@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(TMP_InputField))]
 	[HelpURL(Composition.DocumentationUrl + "text-input-binding")]
 	[AddComponentMenu("PiRho Soft/Interface/Text Input Binding")]
-	public class TextInputBinding : InterfaceBinding
+	public class TextInputBinding : VariableBinding
 	{
 		private const string _variableNotFoundWarning = "(CIBTIBVNF) Unable to bind text to variable on {0}: the variable '{1}' could not be found";
 		private const string _readOnlyWarning = "(CIBTIBRO) Unable to bind text to variable on {0}: the variable '{1}' is read only";
@@ -24,7 +24,7 @@ namespace PiRhoSoft.CompositionEngine
 			_text.onValueChanged.AddListener(TextChanged);
 		}
 
-		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			_variables = variables;
 			_text.textComponent.text = Variable.GetValue(_variables).ToString();

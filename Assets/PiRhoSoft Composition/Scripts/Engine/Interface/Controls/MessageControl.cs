@@ -34,7 +34,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		public IEnumerator Show(IVariableStore variables, string text, MessageInteractionType interaction, bool isLast, float wait)
 		{
-			UpdateBindings(variables, null, null);
 			SetInteraction(MessageControlDisplay.None, interaction, isLast);
 
 			if (interaction == MessageInteractionType.DontWait)

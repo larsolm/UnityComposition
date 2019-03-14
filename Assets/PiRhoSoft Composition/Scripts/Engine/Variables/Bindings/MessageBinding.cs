@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	[HelpURL(Composition.DocumentationUrl + "message-binding")]
 	[AddComponentMenu("PiRho Soft/Interface/Message Binding")]
-	public class MessageBinding : InterfaceBinding
+	public class MessageBinding : VariableBinding
 	{
 		[Tooltip("The message to resolve and display as text in this object")]
 		public Message Message;
@@ -25,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private TextMeshProUGUI _text;
 
-		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			Text.text = Message.GetText(variables);
 		}

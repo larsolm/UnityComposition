@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(TextMeshProUGUI))]
 	[HelpURL(Composition.DocumentationUrl + "text-binding")]
 	[AddComponentMenu("PiRho Soft/Interface/Text Binding")]
-	public class TextBinding : InterfaceBinding
+	public class TextBinding : VariableBinding
 	{
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
@@ -19,7 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 			_text = GetComponent<TextMeshProUGUI>();
 		}
 
-		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			_text.text = Variable.GetValue(variables).ToString();
 		}

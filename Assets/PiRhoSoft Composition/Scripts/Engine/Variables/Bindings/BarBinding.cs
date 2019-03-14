@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(Image))]
 	[HelpURL(Composition.DocumentationUrl + "bar-binding")]
 	[AddComponentMenu("PiRho Soft/Interface/Bar Binding")]
-	public class BarBinding : InterfaceBinding
+	public class BarBinding : VariableBinding
 	{
 		private const string _invalidAmountError = "(CBBIA) Failed to update bar binding: the amount variable '{0}' is not an Integer or Number";
 		private const string _missingAmountError = "(CBBMA) Failed to update bar binding: the amount variable '{0}' could not be found";
@@ -38,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 			_image = GetComponent<Image>();
 		}
 
-		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			status?.Increment();
 

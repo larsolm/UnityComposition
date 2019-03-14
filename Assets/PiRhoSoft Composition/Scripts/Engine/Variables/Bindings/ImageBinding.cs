@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(Image))]
 	[HelpURL(Composition.DocumentationUrl + "image-binding")]
 	[AddComponentMenu("PiRho Soft/Interface/Image Binding")]
-	public class ImageBinding : InterfaceBinding
+	public class ImageBinding : VariableBinding
 	{
 		public const string _invalidVariableError = "(CIBIV) Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite";
 		public const string _missingVariableError = "(CIBMV) Failed to update image binding: the variable '{0}' could not be found";
@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 			_image = GetComponent<Image>();
 		}
 
-		public override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			var value = Variable.GetValue(variables);
 

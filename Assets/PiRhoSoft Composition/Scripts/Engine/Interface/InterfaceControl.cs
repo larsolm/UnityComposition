@@ -56,21 +56,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public void UpdateBindings(IVariableStore variables, string group, BindingAnimationStatus status)
-		{
-			Variables = variables;
-
-			UpdateBindings(group, status);
-		}
-
-		protected virtual void UpdateBindings(string group, BindingAnimationStatus status)
-		{
-			InterfaceBinding.UpdateBindings(gameObject, Variables, group, status);
-
-			foreach (var obj in DependentObjects)
-				InterfaceBinding.UpdateBindings(obj, Variables, group, status);
-		}
-
 		protected virtual void Setup()
 		{
 		}
