@@ -20,6 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidItemError = "(CSCII) Failed to create item {0}: the variable '{1}' is not an IVariableStore";
 		private const string _missingTemplateError = "(ISCMT) Failed to create item {0}: the object template has not been assigned";
 		private const string _missingChildError = "(ISCMC) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
+		private const string _missingBindingError = "(CSCMB) Failed to initialize item {0}: the template '{1}' does not have a Binding Root";
 
 		[Tooltip("The input axis to use for horizontal movement")]
 		public string HorizontalAxis = "Horizontal";
@@ -236,8 +237,14 @@ namespace PiRhoSoft.CompositionEngine
 			var obj = child == null ? Instantiate(item.Template, parent) : child; // Don't null coalesce
 			obj.transform.SetSiblingIndex(index);
 
+			var binding = obj.GetComponent<BindingRoot>();
 			var indicator = obj.GetComponentInChildren<FocusIndicator>(true);
 			var selector = obj.GetComponentInChildren<ItemSelector>();
+
+			if (binding != null)
+				binding.Variables = variables;
+			else if (item.Source == SelectionItem.ObjectSource.Asset)
+				Debug.LogErrorFormat(this, _missingBindingError, item.Name, item.Template.name);
 
 			if (selector)
 			{
