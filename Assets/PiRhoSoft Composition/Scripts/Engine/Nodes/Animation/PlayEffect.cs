@@ -16,11 +16,6 @@ namespace PiRhoSoft.CompositionEngine
 			ChildOfParent
 		}
 
-		private const string _missingObjectWarning = "(CAPEMO) Unable to create object for {0}: the specified object could not be found";
-		private const string _missingParentWarning = "(CAPEMP) Unable to assign parent object for {0}: the parent '{1}' could not be found";
-		private const string _missingRelativeWarning = "(CAPMR) Unable to create object for {0}: the relative '{1}' could not be found";
-		private const string _missingNameWarning = "(CAPMN) Unable to assign name for {0}: the specified name could not could not be found";
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
@@ -80,32 +75,22 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else if (Positioning == ObjectPositioning.RelativeToObject)
 				{
-					if (Object.GetValue(variables).TryGetObject<GameObject>(out var obj))
+					if (Resolve(variables, Object, out GameObject obj))
 						spawned = Instantiate(effect, obj.transform.position + Position, Quaternion.identity);
-					else
-						Debug.LogWarningFormat(this, _missingRelativeWarning, Name, Object);
 				}
 				else if (Positioning == ObjectPositioning.ChildOfParent)
 				{
-					if (Parent.GetValue(variables).TryGetObject<GameObject>(out var parent))
+					if (Resolve(variables, Parent, out GameObject parent))
 						spawned = Instantiate(effect, parent.transform.position + Position, Quaternion.identity, parent.transform);
-					else
-						Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
 				}
 
 				if (spawned && Resolve(variables, EffectName, out var objectName))
 					spawned.name = objectName;
-				else
-					Debug.LogWarningFormat(this, _missingNameWarning, Name, Parent);
 
 				if (WaitForCompletion)
 					yield return WaitForFinish(spawned);
 				else if (DestroyOnComplete)
 					CompositionManager.Instance.StartCoroutine(WaitForFinish(spawned));
-			}
-			else
-			{
-				Debug.LogWarningFormat(this, _missingObjectWarning, Name);
 			}
 
 			graph.GoTo(Next, nameof(Next));

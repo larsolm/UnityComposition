@@ -20,7 +20,11 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
-		[Tooltip("The sound to play")]
+		[Tooltip("The Audio Player to play the sound on")]
+		[VariableConstraint(typeof(AudioPlayer))]
+		public VariableReference Player;
+
+		[Tooltip("The Audio Clip to play")]
 		[InlineDisplay(PropagateLabel = true)]
 		public AudioClipVariableSource Sound = new AudioClipVariableSource();
 
@@ -33,14 +37,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
-		{
-			Sound.GetInputs(inputs);
-		}
-
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.Root is AudioPlayer player)
+			if (Resolve(variables, Player, out AudioPlayer player))
 			{
 				if (Resolve(variables, Sound, out var sound))
 				{
@@ -55,14 +54,6 @@ namespace PiRhoSoft.CompositionEngine
 					else
 						player.PlaySound(sound, volume);
 				}
-				else
-				{
-					Debug.LogWarningFormat(this, _soundNotFoundWarning, player);
-				}
-			}
-			else
-			{
-				Debug.LogWarningFormat(this, _invalidPlayerWarning, name);
 			}
 
 			graph.GoTo(Next, nameof(Next));

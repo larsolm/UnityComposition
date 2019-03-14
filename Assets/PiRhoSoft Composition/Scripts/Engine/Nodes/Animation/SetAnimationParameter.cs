@@ -9,10 +9,6 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "set-animation-parameter")]
 	public class SetAnimationParameter : InstructionGraphNode
 	{
-		private const string _animatorNotFoundWarning = "(WASAPANF) Unable to set animation parameter for {0}: the given variables must be an Animator";
-		private const string _parameterNotFoundWarning = "(WASAPPNF) Unable to set animation parameter for {0}: the parameter could not be found";
-		private const string _valueNotFoundWarning = "(WASAPVNF) Unable to set animation parameter for {0}: the value could not be found";
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
@@ -22,6 +18,10 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The type of the parameter to set")]
 		[EnumButtons]
 		public AnimatorControllerParameterType Type;
+
+		[Tooltip("The Animator to set the parameter on")]
+		[VariableConstraint(typeof(Animator))]
+		public VariableReference Animator;
 
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Bool)]
@@ -55,10 +55,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.Root is Animator animator)
+			if (Resolve(variables, Animator, out Animator animator))
 				Trigger(variables, animator);
-			else
-				Debug.LogWarningFormat(this, _animatorNotFoundWarning, Name);
 
 			graph.GoTo(Next, nameof(Next));
 
@@ -75,8 +73,6 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						if (Resolve(variables, BoolValue, out var value))
 							animator.SetBool(parameter, value);
-						else
-							Debug.LogWarningFormat(this, _valueNotFoundWarning, Name);
 
 						break;
 					}
@@ -84,8 +80,6 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						if (Resolve(variables, IntValue, out var value))
 							animator.SetInteger(parameter, value);
-						else
-							Debug.LogWarningFormat(this, _valueNotFoundWarning, Name);
 
 						break;
 					}
@@ -93,8 +87,6 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						if (Resolve(variables, FloatValue, out var value))
 							animator.SetFloat(parameter, value);
-						else
-							Debug.LogWarningFormat(this, _valueNotFoundWarning, Name);
 
 						break;
 					}
@@ -104,10 +96,6 @@ namespace PiRhoSoft.CompositionEngine
 						break;
 					}
 				}
-			}
-			else
-			{
-				Debug.LogWarningFormat(this, _parameterNotFoundWarning, Name);
 			}
 		}
 	}

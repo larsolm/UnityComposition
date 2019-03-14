@@ -14,6 +14,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
+		[Tooltip("The object to use as the root for Instruction")]
+		public VariableReference Root = new VariableReference(InstructionStore.RootStoreName);
+
 		[Tooltip("Whether to wait for the instruction to finish before moving to Next")]
 		public bool WaitForCompletion = true;
 
@@ -39,6 +42,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
+			//if (!Resolve(variables, Root, out object root))
+			//	root = variables.Root;
+
 			if (WaitForCompletion)
 				yield return Instruction.Execute(variables.Root);
 			else
