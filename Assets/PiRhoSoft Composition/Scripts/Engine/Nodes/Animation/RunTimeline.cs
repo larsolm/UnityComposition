@@ -9,7 +9,7 @@ using UnityEngine.Timeline;
 namespace PiRhoSoft.CompositionEngine
 {
 	[Serializable]
-	public class TimelineVariableSource : ObjectVariableSource<TimelineAsset> { }
+	public class TimelineVariableSource : VariableSource<TimelineAsset> { }
 
 	[CreateInstructionGraphNodeMenu("Animation/Run Timeline", 200)]
 	[HelpURL(Composition.DocumentationUrl + "play-animation")]
@@ -43,7 +43,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (variables.Root is PlayableDirector playable)
 			{
-				if (Timeline.TryGetValue(variables, this, out var timeline))
+				if (Resolve(variables, Timeline, out var timeline))
 				{
 					playable.Play(timeline, Mode);
 

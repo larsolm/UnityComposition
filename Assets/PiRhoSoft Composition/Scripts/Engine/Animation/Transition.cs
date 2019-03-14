@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable] public class TransitionList : SerializedList<Transition> { }
-	[Serializable] public class TransitionVariableSource : ObjectVariableSource<Transition> { }
+	[Serializable] public class TransitionVariableSource : VariableSource<Transition> { }
 
 	public abstract class Transition : ScriptableObject
 	{

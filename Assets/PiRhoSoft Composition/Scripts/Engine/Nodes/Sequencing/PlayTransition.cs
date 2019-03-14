@@ -49,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Transition.TryGetValue(variables, this, out var transition))
+			if (Resolve(variables, Transition, out var transition))
 			{
 				if (WaitForCompletion)
 					yield return AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase);

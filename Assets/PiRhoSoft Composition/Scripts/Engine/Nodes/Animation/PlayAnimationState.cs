@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (variables.Root is Animator animator)
 			{
-				if (State.TryGetValue(variables, this, out var state))
+				if (Resolve(variables, State, out var state))
 					animator.Play(state);
 				else
 					Debug.LogWarningFormat(this, _stateNotFoundWarning, Name);

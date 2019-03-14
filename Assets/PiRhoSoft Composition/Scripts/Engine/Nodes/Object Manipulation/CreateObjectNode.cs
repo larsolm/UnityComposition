@@ -62,7 +62,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Prefab.TryGetValue(variables, this, out var prefab))
+			if (Resolve(variables, Prefab, out var prefab))
 			{
 				GameObject spawned = null;
 
@@ -85,7 +85,7 @@ namespace PiRhoSoft.CompositionEngine
 						Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
 				}
 
-				if (spawned && ObjectName.TryGetValue(variables, this, out var objectName))
+				if (spawned && Resolve(variables, ObjectName, out var objectName))
 					spawned.name = objectName;
 				else
 					Debug.LogWarningFormat(this, _missingNameWarning, Name, Parent);

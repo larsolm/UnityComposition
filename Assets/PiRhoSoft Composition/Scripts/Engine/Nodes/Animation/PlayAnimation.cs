@@ -7,7 +7,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[Serializable]
-	public class AnimationClipVariableSource : ObjectVariableSource<AnimationClip> { }
+	public class AnimationClipVariableSource : VariableSource<AnimationClip> { }
 
 	[CreateInstructionGraphNodeMenu("Animation/Play Animation", 0)]
 	[HelpURL(Composition.DocumentationUrl + "play-animation")]
@@ -37,7 +37,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (variables.Root is AnimationPlayer player)
 			{
-				if (Animation.TryGetValue(variables, this, out var animation))
+				if (Resolve(variables, Animation, out var animation))
 				{
 					if (WaitForCompletion)
 						yield return player.PlayAnimationAndWait(animation);
