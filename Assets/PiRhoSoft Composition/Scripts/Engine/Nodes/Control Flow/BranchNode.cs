@@ -1,6 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.UtilityEngine;
+using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -20,16 +19,6 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Default;
 
 		public override Color NodeColor => Colors.Branch;
-
-		public override void GetInputs(List<VariableDefinition> inputs)
-		{
-			Switch.GetInputs(inputs, InstructionStore.InputStoreName);
-		}
-
-		public override void GetOutputs(List<VariableDefinition> outputs)
-		{
-			Switch.GetOutputs(outputs, InstructionStore.OutputStoreName);
-		}
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{

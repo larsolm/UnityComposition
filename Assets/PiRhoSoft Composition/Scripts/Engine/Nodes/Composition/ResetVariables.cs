@@ -12,10 +12,11 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "reset-variables")]
 	public class ResetVariables : InstructionGraphNode
 	{
-		private const string _invalidVariablesWarning = "(CCRTTNF) Unable to reset variables for {0}: the given variables must be an IVariableReset";
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
+
+		[Tooltip("The object containing the variables to reset")]
+		public VariableReference Object;
 
 		[Tooltip("The list of variables to reset")]
 		[ListDisplay(AllowCollapse = false, EmptyText = "No variables will be reset")]
@@ -25,13 +26,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.Root is IVariableReset reset)
+			if (ResolveOther(variables, Object, out IVariableReset reset))
 				reset.ResetVariables(Variables);
-			else
-				Debug.LogWarningFormat(this, _invalidVariablesWarning, Name);
 
 			graph.GoTo(Next, nameof(Next));
-
 			yield break;
 		}
 	}

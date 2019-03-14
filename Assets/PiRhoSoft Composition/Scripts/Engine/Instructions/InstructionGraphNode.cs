@@ -239,6 +239,44 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		public bool ResolveOther<T>(IVariableStore variables, VariableSource<T> source, out T result)
+		{
+			switch (source.Type)
+			{
+				case VariableSourceType.Reference: return ResolveOther(variables, source.Reference, out result);
+				case VariableSourceType.Value: result = source.Value; return true;
+			}
+
+			result = default;
+			return false;
+		}
+
+		public bool ResolveOther<T>(IVariableStore variables, VariableReference reference, out T result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.RawObject != null)
+			{
+				if (value.RawObject is T t)
+				{
+					result = t;
+					return true;
+				}
+				else
+				{
+					result = default;
+					Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, typeof(T).Name);
+					return false;
+				}
+			}
+			else
+			{
+				result = default;
+				LogResolveWarning(value, reference, VariableType.Object);
+				return false;
+			}
+		}
+
 		private void LogResolveWarning(VariableValue value, VariableReference reference, VariableType expectedType)
 		{
 			if (value.Type == VariableType.Empty)

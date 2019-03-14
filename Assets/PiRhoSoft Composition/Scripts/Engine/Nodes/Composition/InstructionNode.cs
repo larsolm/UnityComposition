@@ -42,13 +42,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			//if (!Resolve(variables, Root, out object root))
-			//	root = variables.Root;
+			if (!ResolveOther(variables, Root, out object root))
+				root = variables.Root;
 
 			if (WaitForCompletion)
-				yield return Instruction.Execute(variables.Root);
+				yield return Instruction.Execute(root);
 			else
-				CompositionManager.Instance.RunInstruction(Instruction, variables.Root);
+				CompositionManager.Instance.RunInstruction(Instruction, root);
 
 			graph.GoTo(Next, nameof(Next));
 		}
