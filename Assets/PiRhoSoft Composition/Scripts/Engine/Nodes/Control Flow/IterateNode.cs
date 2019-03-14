@@ -14,14 +14,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Loop;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is IIndexedVariableStore store)
+			if (variables.Root is IIndexedVariableStore store)
 			{
 				var item = store.GetItem(iteration);
 
 				if (Loop != null && item != null)
-					graph.GoTo(Loop, item, nameof(Loop));
+				{
+					graph.ChangeRoot(item);
+					graph.GoTo(Loop, nameof(Loop));
+				}
 			}
 			else
 			{

@@ -31,14 +31,14 @@ namespace PiRhoSoft.CompositionEngine
 			Switch.GetOutputs(outputs, InstructionStore.OutputStoreName);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			var name = Switch.Execute(this, variables, VariableType.String).String;
 
 			if (Outputs.TryGetValue(name, out var output))
-				graph.GoTo(output, variables.This, nameof(Outputs), name);
+				graph.GoTo(output, nameof(Outputs), name);
 			else
-				graph.GoTo(Default, variables.This, nameof(Default));
+				graph.GoTo(Default, nameof(Default));
 
 			yield break;
 		}

@@ -16,14 +16,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Sequence;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (iteration < Sequence.Count)
 			{
 				if (Sequence[iteration] == null)
 					Debug.LogErrorFormat(this, _invalidSequenceError, Name, iteration);
 
-				graph.GoTo(Sequence[iteration], variables.This, nameof(Sequence), iteration);
+				graph.GoTo(Sequence[iteration], nameof(Sequence), iteration);
 			}
 
 			yield break;

@@ -23,31 +23,31 @@ namespace PiRhoSoft.CompositionEngine
 
 		private BindingAnimationStatus _status = new BindingAnimationStatus();
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			_status.Reset();
 
-			if (variables.This is GameObject obj)
+			if (variables.Root is GameObject obj)
 			{
 				VariableBinding.UpdateBinding(obj, Group, _status);
 			}
-			else if (variables.This is InterfaceControl control)
+			else if (variables.Root is InterfaceControl control)
 			{
 				VariableBinding.UpdateBinding(control.gameObject, Group, _status);
 
 				foreach (var dependency in control.DependentObjects)
 					VariableBinding.UpdateBinding(dependency, Group, _status);
 			}
-			else if (variables.This is Component component)
+			else if (variables.Root is Component component)
 			{
 				VariableBinding.UpdateBinding(component.gameObject, Group, _status);
 			}
 			else
 			{
-				if (variables.This == null)
-					Debug.LogWarningFormat(this, _missingObjectWarning, This);
-				else
-					Debug.LogWarningFormat(this, _invalidObjectWarning, This);
+				//if (variables.This == null)
+				//	Debug.LogWarningFormat(this, _missingObjectWarning, This);
+				//else
+				//	Debug.LogWarningFormat(this, _invalidObjectWarning, This);
 
 				yield break;
 			}
@@ -58,7 +58,7 @@ namespace PiRhoSoft.CompositionEngine
 					yield return null;
 			}
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 			yield break;
 		}
 	}

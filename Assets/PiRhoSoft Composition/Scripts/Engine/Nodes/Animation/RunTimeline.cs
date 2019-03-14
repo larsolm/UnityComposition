@@ -39,9 +39,9 @@ namespace PiRhoSoft.CompositionEngine
 			Timeline.GetInputs(inputs);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is PlayableDirector playable)
+			if (variables.Root is PlayableDirector playable)
 			{
 				if (Timeline.TryGetValue(variables, this, out var timeline))
 				{
@@ -71,7 +71,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _invalidDirectorWarning, Name);
 			}
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 		}
 	}
 }

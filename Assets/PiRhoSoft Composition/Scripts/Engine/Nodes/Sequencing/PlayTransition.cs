@@ -47,7 +47,7 @@ namespace PiRhoSoft.CompositionEngine
 			Transition.GetInputs(inputs);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Transition.TryGetValue(variables, this, out var transition))
 			{
@@ -61,7 +61,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _transitionMissingWarning, Name);
 			}
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 		}
 	}
 }

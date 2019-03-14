@@ -12,10 +12,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.InterfaceDark;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			//Control.Deactivate(this);
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 			yield break;
 		}
 	}

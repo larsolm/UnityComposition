@@ -10,7 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 		[TextArea(3, 8)]
 		public string Comment;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			yield break;
 		}

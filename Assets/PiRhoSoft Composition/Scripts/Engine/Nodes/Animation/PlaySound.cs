@@ -38,9 +38,9 @@ namespace PiRhoSoft.CompositionEngine
 			Sound.GetInputs(inputs);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is AudioPlayer player)
+			if (variables.Root is AudioPlayer player)
 			{
 				if (Sound.TryGetValue(variables, this, out var sound))
 				{
@@ -65,7 +65,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _invalidPlayerWarning, name);
 			}
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 		}
 	}
 }

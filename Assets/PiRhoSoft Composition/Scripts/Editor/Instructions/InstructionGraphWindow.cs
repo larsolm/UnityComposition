@@ -278,7 +278,7 @@ namespace PiRhoSoft.CompositionEditor
 			public InstructionGraph Graph;
 
 			public override Color NodeColor => Colors.Start;
-			protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration) { yield break; }
+			public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration) { yield break; }
 
 			public override void GetConnections(NodeData data) => Graph.GetConnections(data);
 			public override void SetConnection(ConnectionData connection, InstructionGraphNode target) => Graph.SetConnection(connection, target);
@@ -1141,7 +1141,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (_watching != _graph)
 				SetupWatch();
-			else if (_thisStore == null || _thisStore.Store != _graph.Store.This)
+			else if (_thisStore == null || _thisStore.Store != _graph.Store.Root)
 				UpdateWatchThis();
 
 			rect.x = WatchLeft;
@@ -1184,7 +1184,7 @@ namespace PiRhoSoft.CompositionEditor
 		private void SetupWatch()
 		{
 			_watching = _graph;
-			_thisStore = CreateStoreControl(InstructionStore.ThisStoreName, _graph.Store.This as IVariableStore, _thisStore);
+			_thisStore = CreateStoreControl(InstructionStore.RootStoreName, _graph.Store.Root as IVariableStore, _thisStore);
 			_inputStore = CreateStoreControl(InstructionStore.InputStoreName, _graph.Store.Input, _inputStore);
 			_outputStore = CreateStoreControl(InstructionStore.OutputStoreName, _graph.Store.Output, _outputStore);
 			_localStore = CreateStoreControl(InstructionStore.LocalStoreName, _graph.Store.Local, _localStore);
@@ -1204,7 +1204,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void UpdateWatchThis()
 		{
-			_thisStore = CreateStoreControl(InstructionStore.ThisStoreName, _graph.Store.This as IVariableStore, _thisStore);
+			_thisStore = CreateStoreControl(InstructionStore.RootStoreName, _graph.Store.Root as IVariableStore, _thisStore);
 		}
 
 		private void UpdateWatchSelected(VariableStoreControl control)

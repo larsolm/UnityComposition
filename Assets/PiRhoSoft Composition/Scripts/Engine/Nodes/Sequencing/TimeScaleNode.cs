@@ -25,14 +25,14 @@ namespace PiRhoSoft.CompositionEngine
 			TimeScale.GetInputs(inputs);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (TimeScale.TryGetValue(variables, this, out var time))
 				Time.timeScale = time;
 			else
 				Debug.LogFormat(this, _timeNotFoundWarning, Name);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 			yield break;
 		}
 	}

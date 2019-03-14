@@ -26,10 +26,10 @@ namespace PiRhoSoft.CompositionEngine
 			Expression.GetOutputs(outputs, InstructionStore.OutputStoreName);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			Expression.Execute(this, variables);
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 			yield break;
 		}
 	}

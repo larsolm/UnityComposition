@@ -37,14 +37,14 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (WaitForCompletion)
-				yield return Instruction.Execute(variables.This);
+				yield return Instruction.Execute(variables.Root);
 			else
-				CompositionManager.Instance.RunInstruction(Instruction, variables.This);
+				CompositionManager.Instance.RunInstruction(Instruction, variables.Root);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 		}
 	}
 }

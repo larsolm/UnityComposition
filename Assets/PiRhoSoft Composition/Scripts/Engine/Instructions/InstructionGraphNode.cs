@@ -63,37 +63,9 @@ namespace PiRhoSoft.CompositionEngine
 		[AssetName]
 		public string Name;
 
-		[Tooltip("The variable to use as input for operations on this node")]
-		public VariableReference This = new VariableReference("this");
-
 		public virtual void GetInputs(List<VariableDefinition> inputs) { }
 		public virtual void GetOutputs(List<VariableDefinition> outputs) { }
-
-		protected abstract IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration);
-
-		public IEnumerator Run(InstructionGraph graph, InstructionStore variables, int executionIndex)
-		{
-			if (This.IsAssigned)
-			{
-				var value = This.GetValue(variables);
-
-				if (value.Type == VariableType.Empty)
-				{
-					Debug.LogWarningFormat(_missingThisWarning, This, name);
-				}
-				else if (value.Type != VariableType.Null)
-				{
-					// null is a valid this object, but primitive types are not
-
-					if (value.RawObject == null)
-						Debug.LogWarningFormat(_invalidThisWarning, This, name);
-					else
-						variables.ChangeThis(value.RawObject);
-				}
-			}
-
-			yield return Run_(graph, variables, executionIndex);
-		}
+		public abstract IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration);
 
 		#region Editor Interface
 

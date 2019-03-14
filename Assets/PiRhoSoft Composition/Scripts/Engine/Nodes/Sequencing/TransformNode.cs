@@ -67,16 +67,16 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Sequencing;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is Component component)
+			if (variables.Root is Component component)
 				yield return Move(component.transform);
-			else if (variables.This is GameObject gameObject)
+			else if (variables.Root is GameObject gameObject)
 				yield return Move(gameObject.transform);
 			else
 				Debug.LogWarningFormat(this, _invalidObjectWarning, Name);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 		}
 
 		private IEnumerator Move(Transform transform)
