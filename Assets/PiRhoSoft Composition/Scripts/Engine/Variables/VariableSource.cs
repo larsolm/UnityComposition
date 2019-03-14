@@ -11,7 +11,12 @@ namespace PiRhoSoft.CompositionEngine
 		Reference
 	}
 
-	public abstract class VariableSource<T>
+	public abstract class VariableSource
+	{
+		public abstract void GetInputs(List<VariableDefinition> inputs);
+	}
+
+	public abstract class VariableSource<T> : VariableSource
 	{
 		protected const string _referenceMissingError = "(CVSRM) failed to get value from source: the variable '{0}' could not be found";
 		protected const string _referenceInvalidError = "(CVSRI) failed to get value from source: the variable '{0}' is of type {1} and should be of type {2}";
@@ -28,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Value)]
 		public T Value;
 
-		public void GetInputs(List<VariableDefinition> inputs)
+		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			if (Type == VariableSourceType.Reference && InstructionStore.IsInput(Reference))
 			{
