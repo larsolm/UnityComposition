@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The type of input")]
 		public ButtonType Type = ButtonType.Axis;
 
-		[Tooltip("The input axis that is triggered")]
+		[Tooltip("The input axis that is triggers this branch")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)ButtonType.Key, Invert = true)]
 		public string Name;
 

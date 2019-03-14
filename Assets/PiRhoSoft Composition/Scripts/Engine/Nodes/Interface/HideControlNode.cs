@@ -10,12 +10,19 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to once the control is hidden")]
 		public InstructionGraphNode Next = null;
 
+		[Tooltip("The InterfaceControl to hide")]
+		[VariableConstraint(typeof(InterfaceControl))]
+		public VariableReference Control = new VariableReference();
+
 		public override Color NodeColor => Colors.InterfaceDark;
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			//Control.Deactivate(this);
+			if (Resolve<InterfaceControl>(variables, Control, out var control))
+				control.Deactivate();
+
 			graph.GoTo(Next, nameof(Next));
+
 			yield break;
 		}
 	}

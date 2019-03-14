@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -11,6 +10,10 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The node to follow when the message is dismissed")]
 		public InstructionGraphNode Next = null;
+
+		[Tooltip("The MessageControl to show")]
+		[VariableConstraint(typeof(MessageControl))]
+		public VariableReference Control = new VariableReference();
 
 		[Tooltip("Controls when the interface waits for interaction from the user")]
 		public MessageInteractionType Interaction = MessageInteractionType.WaitForInput;
@@ -27,26 +30,16 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.InterfaceCyan;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
-		{
-			Message.GetInputs(inputs);
-		}
-
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			//var control = Control.Activate<MessageControl>(this);
-			//var text = Message.GetText(variables);
-			//
-			//if (control != null)
-			//	yield return control.Show(variables, text, Interaction, IsLast, WaitTime);
-			//else
-			//	Debug.Log(text);
-			//
-			//Control.Deactivate(this);
+			var text = Message.GetText(variables);
+
+			if (Resolve<MessageControl>(variables, Control, out var message))
+				yield return message.Show(variables, text, Interaction, IsLast, WaitTime);
+			else
+				Debug.Log(text);
 
 			graph.GoTo(Next, nameof(Next));
-
-			yield break;
 		}
 	}
 }

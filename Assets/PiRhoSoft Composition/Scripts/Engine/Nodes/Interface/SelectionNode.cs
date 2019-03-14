@@ -1,7 +1,7 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections;
 using System.Text;
-using PiRhoSoft.UtilityEngine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -20,6 +20,10 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The node to go to when no selection is made")]
 		public InstructionGraphNode OnCanceled;
+
+		[Tooltip("The SelectionControl to show")]
+		[VariableConstraint(typeof(SelectionControl))]
+		public VariableReference Control = new VariableReference();
 
 		[Tooltip("If set an item will always be selected (unless there are none)")]
 		public bool IsSelectionRequired = false;
@@ -62,30 +66,27 @@ namespace PiRhoSoft.CompositionEngine
 			SelectionNodeItem selectedItem = null;
 			IVariableStore selectedVariables = null;
 
-			//var control = Control.Activate<SelectionControl>(this);
-			//if (control != null)
-			//{
-			//	yield return control.MakeSelection(variables, Items, IsSelectionRequired);
-			//
-			//	selectedItem = control.SelectedItem as SelectionNodeItem;
-			//	selectedVariables = control.SelectedVariables;
-			//}
-			//else
-			//{
-			//	var builder = new StringBuilder();
-			//
-			//	for (var i = 0; i < Items.Count; i++)
-			//	{
-			//		var item = Items[i];
-			//
-			//		builder.Append(i == 0 ? ": " : ", ");
-			//		builder.Append(item);
-			//	}
-			//
-			//	Debug.Log(builder);
-			//}
-			//
-			//Control.Deactivate(this);
+			if (Resolve<SelectionControl>(variables, Control, out var control))
+			{
+				yield return control.MakeSelection(variables, Items, IsSelectionRequired);
+
+				selectedItem = control.SelectedItem as SelectionNodeItem;
+				selectedVariables = control.SelectedVariables;
+			}
+			else
+			{
+				var builder = new StringBuilder();
+
+				for (var i = 0; i < Items.Count; i++)
+				{
+					var item = Items[i];
+
+					builder.Append(i == 0 ? ": " : ", ");
+					builder.Append(item);
+				}
+
+				Debug.Log(builder);
+			}
 
 			if (selectedItem != null)
 			{
@@ -96,8 +97,6 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				graph.GoTo(OnCanceled, nameof(OnCanceled));
 			}
-
-			yield break;
 		}
 	}
 }

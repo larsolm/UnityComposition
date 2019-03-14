@@ -12,14 +12,9 @@ namespace PiRhoSoft.CompositionEngine
 		public enum ObjectPositioning
 		{
 			Absolute,
-			RelativeToObject,
-			ChildOfParent
+			Relative,
+			Child
 		}
-
-		private const string _missingObjectWarning = "(COMCONMO) Unable to create object for {0}: the specified object could not be found";
-		private const string _missingParentWarning = "(COMCONMP) Unable to assign parent object for {0}: the parent '{1}' could not be found";
-		private const string _missingRelativeWarning = "(COMCONMR) Unable to create object for {0}: the relative '{1}' could not be found";
-		private const string _missingNameWarning = "(COMCONMN) Unable to assign name for {0}: the specified name could not could not be found";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
@@ -32,15 +27,20 @@ namespace PiRhoSoft.CompositionEngine
 		[InlineDisplay(PropagateLabel = true)]
 		public StringVariableSource ObjectName = new StringVariableSource("Spawned Object");
 
+		[Tooltip("A variable reference to assign the created object to so that it can be referenced later")]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Child)]
+		public VariableReference ObjectVariable = new VariableReference();
+
 		[Tooltip("How to create and position the object, with an exact position, relative to another object, or as a child of another object")]
+		[EnumButtons]
 		public ObjectPositioning Positioning = ObjectPositioning.Absolute;
 
 		[Tooltip("The object to position the created object relative to")]
-		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.RelativeToObject)]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Relative)]
 		public VariableReference Object = new VariableReference();
 
 		[Tooltip("The parent object to make the created object a child of")]
-		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.ChildOfParent)]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Child)]
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at")]
@@ -53,11 +53,17 @@ namespace PiRhoSoft.CompositionEngine
 			Prefab.GetInputs(inputs);
 			ObjectName.GetInputs(inputs);
 
-			if (Positioning == ObjectPositioning.ChildOfParent && InstructionStore.IsInput(Parent))
+			if (Positioning == ObjectPositioning.Child && InstructionStore.IsInput(Parent))
 				inputs.Add(VariableDefinition.Create<GameObject>(Parent.RootName));
 
-			if (Positioning == ObjectPositioning.RelativeToObject && InstructionStore.IsInput(Object))
+			if (Positioning == ObjectPositioning.Relative && InstructionStore.IsInput(Object))
 				inputs.Add(VariableDefinition.Create<GameObject>(Object.RootName));
+		}
+
+		public override void GetOutputs(List<VariableDefinition> outputs)
+		{
+			if (InstructionStore.IsOutput(ObjectVariable))
+				outputs.Add(VariableDefinition.Create<GameObject>(ObjectVariable.RootName));
 		}
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
@@ -70,34 +76,28 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					spawned = Instantiate(prefab, Position, Quaternion.identity);
 				}
-				else if (Positioning == ObjectPositioning.RelativeToObject)
+				else if (Positioning == ObjectPositioning.Relative)
 				{
-					if (Object.GetValue(variables).TryGetObject<GameObject>(out var obj))
+					if (Resolve<GameObject>(variables, Object, out var obj))
 						spawned = Instantiate(prefab, obj.transform.position + Position, Quaternion.identity);
-					else
-						Debug.LogWarningFormat(this, _missingRelativeWarning, Name, Object);
 				}
-				else if (Positioning == ObjectPositioning.ChildOfParent)
+				else if (Positioning == ObjectPositioning.Child)
 				{
-					if (Parent.GetValue(variables).TryGetObject<GameObject>(out var parent))
+					if (Resolve<GameObject>(variables, Parent, out var parent))
 						spawned = Instantiate(prefab, parent.transform.position + Position, Quaternion.identity, parent.transform);
-					else
-						Debug.LogWarningFormat(this, _missingParentWarning, Name, Parent);
 				}
 
-				if (spawned && Resolve(variables, ObjectName, out var objectName))
-					spawned.name = objectName;
-				else
-					Debug.LogWarningFormat(this, _missingNameWarning, Name, Parent);
+				if (spawned)
+				{
+					if (Resolve(variables, ObjectName, out var objectName) && !string.IsNullOrEmpty(objectName))
+						spawned.name = objectName;
 
-				graph.ChangeRoot(spawned);
-				graph.GoTo(Next, nameof(Next));
+					if (ObjectVariable.IsAssigned)
+						Assign(variables, ObjectVariable, VariableValue.Create(spawned));
+				}
 			}
-			else
-			{
-				Debug.LogWarningFormat(this, _missingObjectWarning, Name);
-				graph.GoTo(Next, nameof(Next));
-			}
+
+			graph.GoTo(Next, nameof(Next));
 
 			yield break;
 		}

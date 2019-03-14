@@ -10,12 +10,19 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to once the control is shown")]
 		public InstructionGraphNode Next = null;
 
+		[Tooltip("The InterfaceControl to show")]
+		[VariableConstraint(typeof(InterfaceControl))]
+		public VariableReference Control = new VariableReference();
+
 		public override Color NodeColor => Colors.InterfaceLight;
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			//Control.Activate(this);
+			if (Resolve<InterfaceControl>(variables, Control, out var control))
+				control.Activate();
+
 			graph.GoTo(Next, nameof(Next));
+
 			yield break;
 		}
 	}

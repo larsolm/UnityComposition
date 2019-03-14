@@ -287,6 +287,11 @@ namespace PiRhoSoft.CompositionEngine
 					var value = field.GetValue(this) as Expression;
 					value.GetInputs(inputs, InstructionStore.InputStoreName);
 				}
+				else if (field.FieldType == typeof(Message))
+				{
+					var value = field.GetValue(this) as Message;
+					value.GetInputs(inputs);
+				}
 				else if (typeof(VariableSource).IsAssignableFrom(field.FieldType))
 				{
 					var value = field.GetValue(this) as VariableSource;

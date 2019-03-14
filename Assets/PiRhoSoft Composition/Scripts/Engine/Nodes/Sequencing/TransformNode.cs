@@ -14,10 +14,13 @@ namespace PiRhoSoft.CompositionEngine
 			Speed,
 			Duration
 		}
-		private const string _invalidObjectWarning = "(CSTNIO) Unable to transform object for {0}: the given variables must be a GameObject or a MonoBehaviour";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
+
+		[Tooltip("The Tranform to modify")]
+		[VariableConstraint(typeof(Transform))]
+		public VariableReference Transform = new VariableReference();
 
 		[Tooltip("The target position to move to - offset from the original if UseRelativePosition is set")]
 		public Vector3 TargetPosition = Vector3.zero;
@@ -69,12 +72,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.Root is Component component)
-				yield return Move(component.transform);
-			else if (variables.Root is GameObject gameObject)
-				yield return Move(gameObject.transform);
-			else
-				Debug.LogWarningFormat(this, _invalidObjectWarning, Name);
+			if (Resolve<Transform>(variables, Transform, out var transform))
+				yield return Move(transform);
 
 			graph.GoTo(Next, nameof(Next));
 		}

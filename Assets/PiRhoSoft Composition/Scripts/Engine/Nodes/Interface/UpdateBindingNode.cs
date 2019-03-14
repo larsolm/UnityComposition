@@ -13,6 +13,10 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to once the control is shown")]
 		public InstructionGraphNode Next = null;
 
+		[Tooltip("The Object to update bindings for")]
+		[VariableConstraint(typeof(Object))]
+		public VariableReference Object = new VariableReference();
+
 		[Tooltip("The binding group to update (updates all if empty)")]
 		public string Group;
 
@@ -27,29 +31,23 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_status.Reset();
 
-			if (variables.Root is GameObject obj)
+			if (Resolve<Object>(variables, Object, out var obj))
 			{
-				VariableBinding.UpdateBinding(obj, Group, _status);
-			}
-			else if (variables.Root is InterfaceControl control)
-			{
-				VariableBinding.UpdateBinding(control.gameObject, Group, _status);
+				if (variables.Root is GameObject gameObject)
+				{
+					VariableBinding.UpdateBinding(gameObject, Group, _status);
+				}
+				else if (variables.Root is InterfaceControl control)
+				{
+					VariableBinding.UpdateBinding(control.gameObject, Group, _status);
 
-				foreach (var dependency in control.DependentObjects)
-					VariableBinding.UpdateBinding(dependency, Group, _status);
-			}
-			else if (variables.Root is Component component)
-			{
-				VariableBinding.UpdateBinding(component.gameObject, Group, _status);
-			}
-			else
-			{
-				//if (variables.This == null)
-				//	Debug.LogWarningFormat(this, _missingObjectWarning, This);
-				//else
-				//	Debug.LogWarningFormat(this, _invalidObjectWarning, This);
-
-				yield break;
+					foreach (var dependency in control.DependentObjects)
+						VariableBinding.UpdateBinding(dependency, Group, _status);
+				}
+				else if (variables.Root is Component component)
+				{
+					VariableBinding.UpdateBinding(component.gameObject, Group, _status);
+				}
 			}
 
 			if (WaitForCompletion)
@@ -59,7 +57,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			graph.GoTo(Next, nameof(Next));
-			yield break;
 		}
 	}
 }
