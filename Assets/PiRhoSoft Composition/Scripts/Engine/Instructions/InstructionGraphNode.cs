@@ -58,6 +58,10 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidVariableWarning = "(CIGNIV) failed to resolve variable '{0}' on node '{1}': the variable has type {2} and should have type {3}";
 		private const string _invalidObjectWarning = "(CIGNIO) failed to resolve variable '{0}' on node '{1}': the object is not, and cannot be converted to, type {2}";
 
+		private const string _missingAssignmentWarning = "(CIGNMA) failed to assign to variable '{0}': the variable could not be found";
+		private const string _readOnlyAssignmentWarning = "(CIGNROA) failed to assign to variable '{0}': the variable is read only";
+		private const string _invalidAssignmentWarning = "(CIGNIA) failed to assign to variable '{0}': the variable has an incompatible type";
+
 		[Tooltip("The name of the node")]
 		[AssetName]
 		public string Name;
@@ -241,6 +245,84 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _missingVariableWarning, reference, name);
 			else
 				Debug.LogWarningFormat(this, _invalidVariableWarning, reference, name, value.Type, expectedType);
+		}
+
+		#endregion
+
+		#region Variable Assignment
+
+		public void Assign(IVariableStore variables, VariableReference reference, VariableValue value)
+		{
+			var result = reference.SetValue(variables, value);
+
+			switch (result)
+			{
+				case SetVariableResult.NotFound: Debug.LogWarningFormat(this, _missingAssignmentWarning, reference); break;
+				case SetVariableResult.ReadOnly: Debug.LogWarningFormat(this, _readOnlyAssignmentWarning, reference); break;
+				case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(this, _invalidAssignmentWarning, reference); break;
+			}
+		}
+
+		#endregion
+
+		#region Inputs and Outputs
+
+		public virtual void GetInputs(List<VariableDefinition> inputs)
+		{
+			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+
+			foreach (var field in fields)
+			{
+				if (field.FieldType == typeof(VariableReference))
+				{
+					var value = field.GetValue(this) as VariableReference;
+					var constraint = field.GetCustomAttribute<VariableConstraintAttribute>();
+					var definition = constraint == null ? VariableDefinition.Create(value.RootName, VariableType.Empty) : constraint.GetDefinition(value.RootName);
+
+					if (InstructionStore.IsInput(value))
+						inputs.Add(definition);
+				}
+				else if (field.FieldType == typeof(Expression))
+				{
+					var value = field.GetValue(this) as Expression;
+					value.GetInputs(inputs, InstructionStore.InputStoreName);
+				}
+				else if (typeof(VariableSource).IsAssignableFrom(field.FieldType))
+				{
+					var value = field.GetValue(this) as VariableSource;
+
+					var constraint = field.GetCustomAttribute<VariableConstraintAttribute>();
+					if (constraint != null)
+					{
+						if (value.Type == VariableSourceType.Reference && InstructionStore.IsInput(value.Reference))
+							inputs.Add(constraint.GetDefinition(value.Reference.RootName));
+					}
+					else
+					{
+						value.GetInputs(inputs);
+					}
+				}
+			}
+		}
+
+		public virtual void GetOutputs(List<VariableDefinition> outputs)
+		{
+			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+
+			foreach (var field in fields)
+			{
+				if (field.FieldType == typeof(VariableReference))
+				{
+					var value = field.GetValue(this) as VariableReference;
+					if (InstructionStore.IsOutput(value))
+						outputs.Add(VariableDefinition.Create(value.RootName, VariableType.Empty));
+				}
+				else if (field.FieldType == typeof(Expression))
+				{
+					var value = field.GetValue(this) as Expression;
+					value.GetOutputs(outputs, InstructionStore.OutputStoreName);
+				}
+			}
 		}
 
 		#endregion
@@ -474,54 +556,6 @@ namespace PiRhoSoft.CompositionEngine
 				else
 				{
 					Debug.LogErrorFormat(_missingFieldError, Field, Target.Node.name);
-				}
-			}
-		}
-		
-		public virtual void GetInputs(List<VariableDefinition> inputs)
-		{
-			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
-
-			foreach (var field in fields)
-			{
-				if (field.FieldType == typeof(VariableReference))
-				{
-					var value = field.GetValue(this) as VariableReference;
-					var constraint = field.GetCustomAttribute<VariableConstraintAttribute>();
-					var definition = constraint == null ? VariableDefinition.Create(value.RootName, VariableType.Empty) : constraint.GetDefinition(value.RootName);
-					if (InstructionStore.IsInput(value))
-						inputs.Add(definition);
-				}
-				else if (field.FieldType == typeof(Expression))
-				{
-					var value = field.GetValue(this) as Expression;
-					value.GetInputs(inputs, InstructionStore.InputStoreName);
-				}
-				else if (typeof(VariableSource).IsAssignableFrom(field.FieldType))
-				{
-					var value = field.GetValue(this) as VariableSource;
-					value.GetInputs(inputs);
-				}
-			}
-		}
-
-		public virtual void GetOutputs(List<VariableDefinition> outputs)
-		{
-			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
-
-			foreach (var field in fields)
-			{
-				if (field.FieldType == typeof(VariableReference))
-				{
-					var value = field.GetValue(this) as VariableReference;
-					if (InstructionStore.IsOutput(value))
-						outputs.Add(VariableDefinition.Create(value.RootName, VariableType.Empty));
-
-				}
-				else if (field.FieldType == typeof(Expression))
-				{
-					var value = field.GetValue(this) as Expression;
-					value.GetOutputs(outputs, InstructionStore.OutputStoreName);
 				}
 			}
 		}

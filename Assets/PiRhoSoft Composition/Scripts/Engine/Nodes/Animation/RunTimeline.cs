@@ -1,7 +1,6 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
@@ -15,11 +14,12 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "play-animation")]
 	public class RunTimeline : InstructionGraphNode
 	{
-		private const string _timelineNotFoundWarning = "(CARTTNF) Unable to run timeline for {0}: the timeline could not be found";
-		private const string _invalidDirectorWarning = "(CARTID) Unable to run timeline for {0}: the given variables must me a PlayableDirector";
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
+
+		[Tooltip("The Playable Director to run the timeline on")]
+		[VariableConstraint(typeof(PlayableDirector))]
+		public VariableReference Director;
 
 		[Tooltip("The timeline to run")]
 		[InlineDisplay(PropagateLabel = true)]
@@ -34,41 +34,28 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
-		{
-			Timeline.GetInputs(inputs);
-		}
-
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.Root is PlayableDirector playable)
+			if (Resolve(variables, Director, out PlayableDirector director))
 			{
 				if (Resolve(variables, Timeline, out var timeline))
 				{
-					playable.Play(timeline, Mode);
+					director.Play(timeline, Mode);
 
 					if (WaitForCompletion)
 					{
 						if (Mode == DirectorWrapMode.None)
 						{
-							while (playable.state == PlayState.Playing)
+							while (director.state == PlayState.Playing)
 								yield return null;
 						}
 						else if (Mode == DirectorWrapMode.Hold)
 						{
-							while (playable.time < playable.duration)
+							while (director.time < director.duration)
 								yield return null;
 						}
 					}
 				}
-				else
-				{
-					Debug.LogWarningFormat(this, _timelineNotFoundWarning, timeline);
-				}
-			}
-			else
-			{
-				Debug.LogWarningFormat(this, _invalidDirectorWarning, Name);
 			}
 
 			graph.GoTo(Next, nameof(Next));
