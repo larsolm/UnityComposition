@@ -2584,10 +2584,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnStart:
-    _instruction: {fileID: 11400000, guid: 7abe48f7508acc947a3fc52b4fe59951, type: 2}
-    _inputs: []
-    _outputs: []
   OnInteract:
     _instruction: {fileID: 0}
     _inputs: []
