@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -18,16 +17,6 @@ namespace PiRhoSoft.CompositionEngine
 		public Expression Condition = new Expression();
 
 		public override Color NodeColor => Colors.Branch;
-
-		public override void GetInputs(List<VariableDefinition> inputs)
-		{
-			Condition.GetInputs(inputs, InstructionStore.InputStoreName);
-		}
-
-		public override void GetOutputs(List<VariableDefinition> outputs)
-		{
-			Condition.GetOutputs(outputs, InstructionStore.OutputStoreName);
-		}
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
