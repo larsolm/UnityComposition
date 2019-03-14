@@ -24,17 +24,17 @@ namespace PiRhoSoft.CompositionEngine
 			InputHelper.LateUpdate();
 		}
 
-		public void RunInstruction(Instruction instruction, object thisObject)
+		public void RunInstruction(Instruction instruction, object root)
 		{
-			var store = new InstructionStore(thisObject);
+			var store = new InstructionStore(root);
 			var enumerator = instruction.Execute(store);
 
 			StartCoroutine(new JoinEnumerator(enumerator));
 		}
 
-		public void RunInstruction(InstructionCaller caller, object thisObject)
+		public void RunInstruction(InstructionCaller caller, object root)
 		{
-			var enumerator = caller.Execute(thisObject);
+			var enumerator = caller.Execute(root);
 			StartCoroutine(new JoinEnumerator(enumerator));
 		}
 	}
