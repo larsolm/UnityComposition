@@ -10,9 +10,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to go to once the control is shown")]
 		public InstructionGraphNode Next = null;
 
-		[Tooltip("The control to update")]
-		public InterfaceReference Control = new InterfaceReference();
-
 		[Tooltip("The binding group to update (updates all if empty)")]
 		public string Group;
 
@@ -25,18 +22,18 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var control = Control.GetControl<InterfaceControl>(this);
-
-			_status.Reset();
-
-			if (control)
-				control.UpdateBindings(variables, Group, _status);
-
-			if (WaitForCompletion)
-			{
-				while (!_status.IsFinished())
-					yield return null;
-			}
+			//var control = Control.GetControl<InterfaceControl>(this);
+			//
+			//_status.Reset();
+			//
+			//if (control)
+			//	control.UpdateBindings(variables, Group, _status);
+			//
+			//if (WaitForCompletion)
+			//{
+			//	while (!_status.IsFinished())
+			//		yield return null;
+			//}
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 

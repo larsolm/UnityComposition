@@ -101,7 +101,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (WaitForCompletion)
 					yield return WaitForFinish(spawned);
 				else if (DestroyOnComplete)
-					InstructionManager.Instance.StartCoroutine(WaitForFinish(spawned));
+					CompositionManager.Instance.StartCoroutine(WaitForFinish(spawned));
 			}
 			else
 			{

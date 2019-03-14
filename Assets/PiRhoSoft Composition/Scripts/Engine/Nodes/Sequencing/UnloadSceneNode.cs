@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (WaitForCompletion)
 				yield return UnloadScene();
 			else
-				InstructionManager.Instance.StartCoroutine(UnloadScene());
+				CompositionManager.Instance.StartCoroutine(UnloadScene());
 
 			graph.GoTo(Next, variables.This, nameof(Next));
 		}

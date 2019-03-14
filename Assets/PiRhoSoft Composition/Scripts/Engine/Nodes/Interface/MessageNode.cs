@@ -12,9 +12,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to follow when the message is dismissed")]
 		public InstructionGraphNode Next = null;
 
-		[Tooltip("The control to display the message in")]
-		public InterfaceReference Control = new InterfaceReference();
-
 		[Tooltip("Controls when the interface waits for interaction from the user")]
 		public MessageInteractionType Interaction = MessageInteractionType.WaitForInput;
 
@@ -37,17 +34,19 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var control = Control.Activate<MessageControl>(this);
-			var text = Message.GetText(variables);
-
-			if (control != null)
-				yield return control.Show(variables, text, Interaction, IsLast, WaitTime);
-			else
-				Debug.Log(text);
-
-			Control.Deactivate(this);
+			//var control = Control.Activate<MessageControl>(this);
+			//var text = Message.GetText(variables);
+			//
+			//if (control != null)
+			//	yield return control.Show(variables, text, Interaction, IsLast, WaitTime);
+			//else
+			//	Debug.Log(text);
+			//
+			//Control.Deactivate(this);
 
 			graph.GoTo(Next, variables.This, nameof(Next));
+
+			yield break;
 		}
 	}
 }
