@@ -26,12 +26,7 @@ namespace PiRhoSoft.CompositionEngine
 		public override void GetInputs(List<VariableDefinition> inputs)
 		{
 			foreach (var node in Nodes)
-			{
-				if (InstructionStore.IsInput(node.This))
-					inputs.Add(VariableDefinition.Create(node.This.RootName, VariableType.Empty));
-
 				node.GetInputs(inputs);
-			}
 		}
 
 		public override void GetOutputs(List<VariableDefinition> outputs)
@@ -40,55 +35,24 @@ namespace PiRhoSoft.CompositionEngine
 				node.GetOutputs(outputs);
 		}
 
-		public void GoTo(InstructionGraphNode node, object thisObject, string name)
-		{
-			switch (node)
-			{
-				case ILoopNode loop: _nextNode.Type = NodeType.Loop; break;
-				case ISequenceNode sequence: _nextNode.Type = NodeType.Sequence; break;
-				default: _nextNode.Type = NodeType.Normal; break;
-			}
-
-			_nextNode.Iteration = 0;
-			_nextNode.Node = node;
-			_nextNode.This = thisObject;
-			_nextNode.Source = name;
-		}
-
-		public void GoTo(InstructionGraphNode node, object thisObject, string name, int index)
-		{
-			var source = string.Format("{0} {1}", name, index);
-			GoTo(node, thisObject, source);
-		}
-
-		public void GoTo(InstructionGraphNode node, object thisObject, string name, string key)
-		{
-			var source = string.Format("{0} {1}", name, key);
-			GoTo(node, thisObject, source);
-		}
-
-		public void Break()
-		{
-			_shouldBreak = true;
-		}
-
 		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root, string source)
 		{
 			StartRunning(root, source);
 
-			var rootThis = variables.This;
+			var rootVariables = variables.Root;
 			_rootStore = variables;
-			GoTo(root, _rootStore.This, source);
+
+			GoTo(root, source);
 
 			while (ShouldContinue())
 			{
 				var frame = SetupFrame(_nextNode);
-				_nextNode.Node = null;
+				_nextNode.Reset();
 
 				if (frame.Node != null)
 				{
 					_callstack.Push(frame);
-					_rootStore.ChangeThis(frame.This);
+					_rootStore.ChangeRoot(frame.This);
 
 					yield return ProcessFrame(frame);
 				}
@@ -101,8 +65,51 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			_callstack.Clear();
-			variables.ChangeThis(rootThis);
+			_nextNode.Reset();
+			_rootStore.ChangeRoot(rootVariables);
 		}
+
+		#region Traversal
+
+		public void ChangeRoot(object root)
+		{
+			_nextNode.This = root;
+		}
+
+		public void GoTo(InstructionGraphNode node, string name)
+		{
+			switch (node)
+			{
+				case ILoopNode loop: _nextNode.Type = NodeType.Loop; break;
+				case ISequenceNode sequence: _nextNode.Type = NodeType.Sequence; break;
+				default: _nextNode.Type = NodeType.Normal; break;
+			}
+
+			_nextNode.Node = node;
+			_nextNode.Source = name;
+
+			if (_nextNode.This == null && _callstack.Count > 0)
+				_nextNode.This = _callstack.Peek().This;
+		}
+
+		public void GoTo(InstructionGraphNode node, string name, int index)
+		{
+			var source = string.Format("{0} {1}", name, index);
+			GoTo(node, source);
+		}
+
+		public void GoTo(InstructionGraphNode node, string name, string key)
+		{
+			var source = string.Format("{0} {1}", name, key);
+			GoTo(node, source);
+		}
+
+		public void Break()
+		{
+			_shouldBreak = true;
+		}
+
+		#endregion
 
 		#region Playback
 
@@ -120,6 +127,27 @@ namespace PiRhoSoft.CompositionEngine
 			public InstructionGraphNode Node;
 			public object This;
 			public string Source;
+
+			public NodeFrame Increment()
+			{
+				var frame = this;
+				frame.Iteration++;
+				return frame;
+			}
+
+			public NodeFrame Break()
+			{
+				var frame = this;
+				frame.Type = NodeType.Normal;
+				return frame;
+			}
+
+			public void Reset()
+			{
+				Iteration = 0;
+				Node = null;
+				This = null;
+			}
 		}
 
 #if UNITY_EDITOR
@@ -217,7 +245,7 @@ namespace PiRhoSoft.CompositionEngine
 					var frame = _callstack.Pop();
 
 					if (frame.Type != NodeType.Normal)
-						return new NodeFrame { Type = frame.Type, Iteration = frame.Iteration + 1, Node = frame.Node, Source = frame.Source, This = frame.This };
+						return frame.Increment();
 				}
 			}
 			else if (IsNodeInStack(node.Node))
@@ -231,7 +259,7 @@ namespace PiRhoSoft.CompositionEngine
 					var frame = _callstack.Pop();
 
 					if (frame.Node == node.Node)
-						return new NodeFrame { Type = frame.Type, Iteration = frame.Iteration + 1, Node = frame.Node, Source = frame.Source, This = frame.This };
+						return frame.Increment();
 				}
 			}
 
@@ -253,12 +281,12 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			while (_callstack.Count > 0)
 			{
-				var loop = _callstack.Pop();
+				var frame = _callstack.Pop();
 
-				if (loop.Type == NodeType.Loop)
+				if (frame.Type == NodeType.Loop)
 				{
-					_callstack.Push(new NodeFrame { Type = NodeType.Normal, Node = loop.Node, Source = loop.Source, This = loop.This, Iteration = loop.Iteration });
-					GoTo(null, null, "");
+					_callstack.Push(frame.Break());
+					GoTo(null, string.Empty);
 					break;
 				}
 			}

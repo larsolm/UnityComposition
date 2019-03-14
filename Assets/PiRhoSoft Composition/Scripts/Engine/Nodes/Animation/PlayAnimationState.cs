@@ -26,9 +26,9 @@ namespace PiRhoSoft.CompositionEngine
 			State.GetInputs(inputs);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is Animator animator)
+			if (variables.Root is Animator animator)
 			{
 				if (State.TryGetValue(variables, this, out var state))
 					animator.Play(state);
@@ -40,7 +40,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _animatorNotFoundWarning, Name);
 			}
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 
 			yield break;
 		}

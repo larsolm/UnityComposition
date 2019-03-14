@@ -14,14 +14,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.SequencingLight;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is Behaviour behaviour)
+			if (variables.Root is Behaviour behaviour)
 				behaviour.enabled = true;
 			else
 				Debug.LogWarningFormat(this, _missingComponentWarning, Name);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 
 			yield break;
 		}

@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => DisplayColor;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			yield break;
 		}

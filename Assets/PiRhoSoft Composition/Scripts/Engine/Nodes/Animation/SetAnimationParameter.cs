@@ -53,14 +53,14 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is Animator animator)
+			if (variables.Root is Animator animator)
 				Trigger(variables, animator);
 			else
 				Debug.LogWarningFormat(this, _animatorNotFoundWarning, Name);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 
 			yield break;
 		}

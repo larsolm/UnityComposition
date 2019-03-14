@@ -23,14 +23,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is IVariableReset reset)
+			if (variables.Root is IVariableReset reset)
 				reset.ResetVariables(Variables);
 			else
 				Debug.LogWarningFormat(this, _invalidVariablesWarning, Name);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 
 			yield break;
 		}

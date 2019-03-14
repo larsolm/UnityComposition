@@ -73,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			while (true)
 			{
@@ -87,7 +87,7 @@ namespace PiRhoSoft.CompositionEngine
 						{
 							if (InputHelper.GetWasAxisPressed(button.Name, button.Value))
 							{
-								graph.GoTo(button.OnSelected, variables.This, nameof(Buttons), button.Name);
+								graph.GoTo(button.OnSelected, nameof(Buttons), button.Name);
 								yield break;
 							}
 
@@ -97,7 +97,7 @@ namespace PiRhoSoft.CompositionEngine
 						{
 							if (InputHelper.GetWasButtonPressed(button.Name))
 							{
-								graph.GoTo(button.OnSelected, variables.This, nameof(Buttons), button.Name);
+								graph.GoTo(button.OnSelected, nameof(Buttons), button.Name);
 								yield break;
 							}
 
@@ -107,7 +107,7 @@ namespace PiRhoSoft.CompositionEngine
 						{
 							if (InputHelper.GetWasKeyPressed(button.Key))
 							{
-								graph.GoTo(button.OnSelected, variables.This, nameof(Buttons), button.Key.ToString());
+								graph.GoTo(button.OnSelected, nameof(Buttons), button.Key.ToString());
 								yield break;
 							}
 

@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public override Color NodeColor => Colors.Break;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			graph.Break();
 			yield break;

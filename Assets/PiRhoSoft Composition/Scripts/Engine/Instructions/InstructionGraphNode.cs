@@ -63,82 +63,7 @@ namespace PiRhoSoft.CompositionEngine
 		[AssetName]
 		public string Name;
 
-		[Tooltip("The variable to use as input for operations on this node")]
-		public VariableReference This = new VariableReference("this");
-
-		public virtual void GetInputs(List<VariableDefinition> inputs)
-		{
-			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
-
-			foreach (var field in fields)
-			{
-				if (field.FieldType == typeof(VariableReference))
-				{
-					var value = field.GetValue(this) as VariableReference;
-					var constraint = field.GetCustomAttribute<VariableConstraintAttribute>();
-					var definition = constraint == null ? VariableDefinition.Create(value.RootName, VariableType.Empty) : constraint.GetDefinition(value.RootName);
-					if (InstructionStore.IsInput(value))
-						inputs.Add(definition);
-				}
-				else if (field.FieldType == typeof(Expression))
-				{
-					var value = field.GetValue(this) as Expression;
-					value.GetInputs(inputs, InstructionStore.InputStoreName);
-				}
-				else if (typeof(VariableSource).IsAssignableFrom(field.FieldType))
-				{
-					var value = field.GetValue(this) as VariableSource;
-					value.GetInputs(inputs);
-				}
-			}
-		}
-
-		public virtual void GetOutputs(List<VariableDefinition> outputs)
-		{
-			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
-
-			foreach (var field in fields)
-			{
-				if (field.FieldType == typeof(VariableReference))
-				{
-					var value = field.GetValue(this) as VariableReference;
-					if (InstructionStore.IsOutput(value))
-						outputs.Add(VariableDefinition.Create(value.RootName, VariableType.Empty));
-
-				}
-				else if (field.FieldType == typeof(Expression))
-				{
-					var value = field.GetValue(this) as Expression;
-					value.GetOutputs(outputs, InstructionStore.OutputStoreName);
-				}
-			}
-		}
-
-		protected abstract IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration);
-
-		public IEnumerator Run(InstructionGraph graph, InstructionStore variables, int executionIndex)
-		{
-			if (This.IsAssigned)
-			{
-				var value = This.GetValue(variables);
-
-				if (value.Type == VariableType.Empty)
-				{
-					Debug.LogWarningFormat(_missingThisWarning, This, name);
-				}
-				else if (value.Type != VariableType.Null)
-				{
-					// null is a valid this object, but primitive types are not
-
-					if (value.RawObject == null)
-						Debug.LogWarningFormat(_invalidThisWarning, This, name);
-					else
-						variables.ChangeThis(value.RawObject);
-				}
-			}
-
-			yield return Run_(graph, variables, executionIndex);
-		}
+		public abstract IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration);
 
 		#region Editor Interface
 
@@ -365,6 +290,54 @@ namespace PiRhoSoft.CompositionEngine
 				else
 				{
 					Debug.LogErrorFormat(_missingFieldError, Field, Target.Node.name);
+				}
+			}
+		}
+		
+		public virtual void GetInputs(List<VariableDefinition> inputs)
+		{
+			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+
+			foreach (var field in fields)
+			{
+				if (field.FieldType == typeof(VariableReference))
+				{
+					var value = field.GetValue(this) as VariableReference;
+					var constraint = field.GetCustomAttribute<VariableConstraintAttribute>();
+					var definition = constraint == null ? VariableDefinition.Create(value.RootName, VariableType.Empty) : constraint.GetDefinition(value.RootName);
+					if (InstructionStore.IsInput(value))
+						inputs.Add(definition);
+				}
+				else if (field.FieldType == typeof(Expression))
+				{
+					var value = field.GetValue(this) as Expression;
+					value.GetInputs(inputs, InstructionStore.InputStoreName);
+				}
+				else if (typeof(VariableSource).IsAssignableFrom(field.FieldType))
+				{
+					var value = field.GetValue(this) as VariableSource;
+					value.GetInputs(inputs);
+				}
+			}
+		}
+
+		public virtual void GetOutputs(List<VariableDefinition> outputs)
+		{
+			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
+
+			foreach (var field in fields)
+			{
+				if (field.FieldType == typeof(VariableReference))
+				{
+					var value = field.GetValue(this) as VariableReference;
+					if (InstructionStore.IsOutput(value))
+						outputs.Add(VariableDefinition.Create(value.RootName, VariableType.Empty));
+
+				}
+				else if (field.FieldType == typeof(Expression))
+				{
+					var value = field.GetValue(this) as Expression;
+					value.GetOutputs(outputs, InstructionStore.OutputStoreName);
 				}
 			}
 		}

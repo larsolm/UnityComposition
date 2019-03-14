@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -61,17 +60,17 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _readOnlyOutputError = "(CISROO) failed to store output {0}: the variable '{1}' is read only";
 		private const string _invalidOutputError = "(CISIOT) failed to store output {0}: the variable '{1}' has an incompatible type";
 
-		public const string ThisStoreName = "this";
+		public const string RootStoreName = "root";
 		public const string SceneStoreName = "scene";
 		public const string InputStoreName = "input";
 		public const string OutputStoreName = "output";
 		public const string LocalStoreName = "local";
 		public const string GlobalStoreName = "global";
 
-		private static string[] _variableNames = new string[] { ThisStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, GlobalStoreName };
+		private static string[] _variableNames = new string[] { RootStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, GlobalStoreName };
 		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
-		public object This { get; private set; }
+		public object Root { get; private set; }
 
 		public VariableStore Input { get; } = new WritableStore();
 		public VariableStore Output { get; } = new WritableStore();
@@ -83,14 +82,14 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool IsInput(InstructionInput input) => input.Type == InstructionInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
 		public static bool IsOutput(InstructionOutput output) => output.Type == InstructionOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
-		public InstructionStore(object thisObject)
+		public InstructionStore(object root)
 		{
-			ChangeThis(thisObject);
+			ChangeRoot(root);
 		}
 
-		public void ChangeThis(object thisObject)
+		public void ChangeRoot(object root)
 		{
-			This = thisObject;
+			Root = root;
 		}
 
 		public void WriteInputs(IList<InstructionInput> inputs)
@@ -147,7 +146,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			switch (name)
 			{
-				case ThisStoreName: return VariableValue.Create(This);
+				case RootStoreName: return VariableValue.Create(Root);
 				case SceneStoreName: return VariableValue.Create(_sceneStore);
 				case InputStoreName: return VariableValue.Create(Input);
 				case OutputStoreName: return VariableValue.Create(Output);
@@ -161,7 +160,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			switch (name)
 			{
-				case ThisStoreName: return SetVariableResult.ReadOnly;
+				case RootStoreName: return SetVariableResult.ReadOnly;
 				case SceneStoreName: return SetVariableResult.ReadOnly;
 				case InputStoreName: return SetVariableResult.ReadOnly;
 				case OutputStoreName: return SetVariableResult.ReadOnly;

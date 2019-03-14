@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 			Message.GetInputs(inputs);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			//var control = Control.Activate<MessageControl>(this);
 			//var text = Message.GetText(variables);
@@ -44,7 +44,7 @@ namespace PiRhoSoft.CompositionEngine
 			//
 			//Control.Deactivate(this);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 
 			yield break;
 		}

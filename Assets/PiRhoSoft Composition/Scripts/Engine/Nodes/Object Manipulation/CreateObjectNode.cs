@@ -60,7 +60,7 @@ namespace PiRhoSoft.CompositionEngine
 				inputs.Add(VariableDefinition.Create<GameObject>(Object.RootName));
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Prefab.TryGetValue(variables, this, out var prefab))
 			{
@@ -90,12 +90,13 @@ namespace PiRhoSoft.CompositionEngine
 				else
 					Debug.LogWarningFormat(this, _missingNameWarning, Name, Parent);
 
-				graph.GoTo(Next, spawned, nameof(Next));
+				graph.ChangeRoot(spawned);
+				graph.GoTo(Next, nameof(Next));
 			}
 			else
 			{
 				Debug.LogWarningFormat(this, _missingObjectWarning, Name);
-				graph.GoTo(Next, variables.This, nameof(Next));
+				graph.GoTo(Next, nameof(Next));
 			}
 
 			yield break;

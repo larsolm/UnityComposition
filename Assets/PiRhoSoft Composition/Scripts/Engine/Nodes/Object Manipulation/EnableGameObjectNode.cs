@@ -14,14 +14,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.SequencingLight;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (variables.This is GameObject target)
+			if (variables.Root is GameObject target)
 				target.SetActive(true);
 			else
 				Debug.LogWarningFormat(this, _missingObjectWarning, Name);
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 
 			yield break;
 		}

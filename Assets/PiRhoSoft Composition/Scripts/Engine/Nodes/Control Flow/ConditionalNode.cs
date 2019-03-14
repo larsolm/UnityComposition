@@ -29,14 +29,14 @@ namespace PiRhoSoft.CompositionEngine
 			Condition.GetOutputs(outputs, InstructionStore.OutputStoreName);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			var condition = Condition.Execute(this, variables, VariableType.Boolean).Boolean;
 
 			if (condition)
-				graph.GoTo(OnTrue, variables.This, nameof(OnTrue));
+				graph.GoTo(OnTrue, nameof(OnTrue));
 			else
-				graph.GoTo(OnFalse, variables.This, nameof(OnFalse));
+				graph.GoTo(OnFalse, nameof(OnFalse));
 
 			yield break;
 		}

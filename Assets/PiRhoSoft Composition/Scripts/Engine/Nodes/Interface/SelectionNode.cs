@@ -57,7 +57,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			SelectionNodeItem selectedItem = null;
 			IVariableStore selectedVariables = null;
@@ -88,9 +88,14 @@ namespace PiRhoSoft.CompositionEngine
 			//Control.Deactivate(this);
 
 			if (selectedItem != null)
-				graph.GoTo(selectedItem.OnSelected, selectedVariables, nameof(Items), selectedItem.Id);
+			{
+				graph.ChangeRoot(selectedVariables);
+				graph.GoTo(selectedItem.OnSelected, nameof(Items), selectedItem.Id);
+			}
 			else
-				graph.GoTo(OnCanceled, variables.This, nameof(OnCanceled));
+			{
+				graph.GoTo(OnCanceled, nameof(OnCanceled));
+			}
 
 			yield break;
 		}

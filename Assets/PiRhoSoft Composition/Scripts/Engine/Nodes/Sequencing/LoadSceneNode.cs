@@ -27,14 +27,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (WaitForCompletion)
 				yield return LoadScene();
 			else
 				CompositionManager.Instance.StartCoroutine(LoadScene());
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 		}
 
 		private IEnumerator LoadScene()

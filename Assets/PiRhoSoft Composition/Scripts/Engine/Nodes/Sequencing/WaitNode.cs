@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 			Time.GetInputs(inputs);
 		}
 
-		protected override IEnumerator Run_(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Time.TryGetValue(variables, this, out var time))
 			{
@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogFormat(this, _timeNotFoundWarning, Name);
 			}
 
-			graph.GoTo(Next, variables.This, nameof(Next));
+			graph.GoTo(Next, nameof(Next));
 		}
 	}
 }
