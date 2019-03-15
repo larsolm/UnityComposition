@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionExample
 		[AssetPopup] [ChangeTrigger(nameof(SetupSchema))] public VariableSchema Schema;
 
 		public Camera Camera;
-		public WorldManager World;
+		public UnityEngine.XR.WSA.WorldManager World;
 		public float Acceleration = 1.0f;
 
 		public InstructionCaller OnStart = new InstructionCaller();

@@ -1,13 +1,10 @@
-﻿using PiRhoSoft.UtilityEngine;
-using System;
-using UnityEngine;
-using Object = UnityEngine.Object;
+﻿using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[Serializable] public class ObjectDictionary : SerializedDictionary<string, Object> { }
-
-	public class VariableLink : MonoBehaviour
+	[HelpURL(Composition.DocumentationUrl + "global-variable-link")]
+	[AddComponentMenu("PiRho Soft/Composition/Global Variable Link")]
+	public class GlobalVariableLink : MonoBehaviour
 	{
 		[Tooltip("The variables to add to the global variable store")]
 		public VariableList Variables = new VariableList();
