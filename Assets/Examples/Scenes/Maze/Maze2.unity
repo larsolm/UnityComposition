@@ -1754,7 +1754,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 647905b9567d4a24cbb18c2ba0fb8dd3, type: 2}
   Camera: {fileID: 284457785}
-  World: {fileID: 0}
   Acceleration: 1
   OnStart:
     _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}

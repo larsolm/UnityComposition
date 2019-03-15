@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57ec9df794c5c343a16d06a66b49f40, type: 3}
   m_Name: VariableAssetList
   m_EditorClassIdentifier: 
-  Assets:
+  VariableStoreAssets:
     _items: []

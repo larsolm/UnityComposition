@@ -10,6 +10,12 @@ namespace PiRhoSoft.CompositionEditor
 	{
 		private VariableReference _variableReference;
 
+		public static void Draw(GUIContent label, VariableReference reference)
+		{
+			var rect = EditorGUILayout.GetControlRect(false);
+			Draw(rect, reference, label);
+		}
+
 		public static void Draw(Rect position, VariableReference reference, GUIContent label)
 		{
 			using (var changes = new EditorGUI.ChangeCheckScope())
