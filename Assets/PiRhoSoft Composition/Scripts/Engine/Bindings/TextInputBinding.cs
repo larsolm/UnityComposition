@@ -35,6 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (_variables != null)
 			{
 				var result = Variable.SetValue(_variables, VariableValue.Create(_text.textComponent.text));
+
 				if (result == SetVariableResult.NotFound)
 					Debug.LogWarningFormat(this, _variableNotFoundWarning, name, Variable);
 				else if (result == SetVariableResult.ReadOnly)
