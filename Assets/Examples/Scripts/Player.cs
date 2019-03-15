@@ -1,24 +1,17 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEngine;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	[AddComponentMenu("PiRho Soft/Examples/Player")]
-	public class Player : MonoBehaviour, IVariableStore
+	public class Player : VariableStoreComponent
 	{
-		[AssetPopup] [ChangeTrigger(nameof(SetupSchema))] public VariableSchema Schema;
-
-		public Camera Camera;
-		public UnityEngine.XR.WSA.WorldManager World;
-		public float Acceleration = 1.0f;
+		[MappedVariable] public Camera Camera;
+		[MappedVariable] public float Acceleration = 1.0f;
 
 		public InstructionCaller OnStart = new InstructionCaller();
-
-		public VariableSet Variables;
-		public MappedVariableStore Store = new MappedVariableStore();
 
 		private Rigidbody2D _body;
 		private Collider2D[] _colliders = new Collider2D[6];
@@ -26,17 +19,11 @@ namespace PiRhoSoft.CompositionExample
 		void Awake()
 		{
 			_body = GetComponent<Rigidbody2D>();
-			SetupSchema();
 		}
 
 		void OnDisable()
 		{
 			_body.velocity = Vector2.zero;
-		}
-
-		private void SetupSchema()
-		{
-			Store.Setup(this, Schema, Variables);
 		}
 
 		void Start()
@@ -103,13 +90,5 @@ namespace PiRhoSoft.CompositionExample
 			if (interaction)
 				CompositionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
 		}
-
-		#region IVariableStore Implementation
-
-		public VariableValue GetVariable(string name) => Store.GetVariable(name);
-		public SetVariableResult SetVariable(string name, VariableValue value) => Store.SetVariable(name, value);
-		public IEnumerable<string> GetVariableNames() => Store.GetVariableNames();
-
-		#endregion
 	}
 }

@@ -1,11 +1,11 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class PropertyList<OwnerType> : IVariableList where OwnerType : class
+	public class PropertyList : IVariableList
 	{
-		private OwnerType _owner;
-		private PropertyMap<OwnerType> _map;
+		private object _owner;
+		private PropertyMap _map;
 
-		public PropertyList(OwnerType owner, PropertyMap<OwnerType> map)
+		public PropertyList(object owner, PropertyMap map)
 		{
 			_owner = owner;
 			_map = map;
@@ -22,21 +22,14 @@
 
 		public VariableValue GetVariableValue(int index)
 		{
-			var getter = index >= 0 && index < _map.Properties.Count ? _map.Properties[index].Getter : null;
-			return getter != null ? getter(_owner) : VariableValue.Empty;
+			if (index >= 0 && index < _map.Properties.Count) return _map.Properties[index].Get(_owner);
+			else return VariableValue.Empty;
 		}
 
 		public SetVariableResult SetVariableValue(int index, VariableValue value)
 		{
-			if (index < 0 || index >= _map.Properties.Count)
-				return SetVariableResult.NotFound;
-
-			var setter = _map.Properties[index].Setter;
-
-			if (setter == null)
-				return SetVariableResult.ReadOnly;
-
-			return setter(_owner, value);
+			if (index >= 0 && index < _map.Properties.Count) return _map.Properties[index].Set(_owner, value);
+			else return SetVariableResult.NotFound;
 		}
 
 		#endregion

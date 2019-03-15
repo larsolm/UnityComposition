@@ -1,33 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public abstract class PropertyMap
+	public class PropertyMap
 	{
-		public abstract int PropertyCount { get; }
-		public abstract string GetPropertyName(int index);
-		public abstract IVariableList CreateList(object owner);
-	}
+		public List<Property> Properties = new List<Property>();
 
-	public class PropertyMap<OwnerType> : PropertyMap where OwnerType : class
-	{
-		public List<Property<OwnerType>> Properties = new List<Property<OwnerType>>();
-
-		public override int PropertyCount => Properties.Count;
-		public override string GetPropertyName(int index) => index >= 0 && index < Properties.Count ? Properties[index].Name : "";
-		public override IVariableList CreateList(object owner) => new PropertyList<OwnerType>(owner as OwnerType, this);
-
-		public PropertyMap<OwnerType> Add(string name, Func<OwnerType, VariableValue> getter, Func<OwnerType, VariableValue, SetVariableResult> setter)
+		public PropertyMap(Type ownerType)
 		{
-			Properties.Add(new Property<OwnerType>
-			{
-				Name = name,
-				Getter = getter,
-				Setter = setter
-			});
+			var fields = ownerType.GetFields(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
+			var properties = ownerType.GetProperties(BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.DeclaredOnly);
 
-			return this;
+			foreach (var info in fields)
+			{
+				var mapping = info.GetCustomAttribute<MappedVariableAttribute>();
+
+				if (mapping != null)
+				{
+					var property = Property.Create(ownerType, info, mapping.Readable, mapping.Writable);
+					Properties.Add(property);
+				}
+			}
+
+			foreach (var info in properties)
+			{
+				var mapping = info.GetCustomAttribute<MappedVariableAttribute>();
+
+				if (mapping != null)
+				{
+					var property = Property.Create(ownerType, info, mapping.Readable, mapping.Writable);
+					Properties.Add(property);
+				}
+			}
 		}
 	}
 }
