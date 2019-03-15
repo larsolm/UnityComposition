@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	public interface IIndexedVariableStore : IVariableStore
 	{
 		int Count { get; }
-		IVariableStore GetItem(int index);
+		object GetItem(int index);
 	}
 
 	public static class IndexedVariableStore
@@ -55,9 +55,9 @@ namespace PiRhoSoft.CompositionEngine
 		}
 	}
 
-	public class IndexedVariableStore<ItemType> : SerializedList<ItemType>, IIndexedVariableStore where ItemType : class, IVariableStore
+	public class IndexedVariableStore<ItemType> : SerializedList<ItemType>, IIndexedVariableStore where ItemType : class
 	{
-		public IVariableStore GetItem(int index) => index >= 0 && index < List.Count ? List[index] : null;
+		public object GetItem(int index) => index >= 0 && index < List.Count ? List[index] : null;
 		public VariableValue GetVariable(string name) => IndexedVariableStore.GetVariable(this, name);
 		public SetVariableResult SetVariable(string name, VariableValue value) => IndexedVariableStore.SetVariable(this, name, value);
 		public IEnumerable<string> GetVariableNames() => IndexedVariableStore.GetVariableNames(this);

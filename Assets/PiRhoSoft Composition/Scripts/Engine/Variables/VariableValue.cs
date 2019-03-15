@@ -13,6 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 		String,
 		Object,
 		Store,
+		Raw,
 		Null
 	}
 
@@ -41,6 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 				case VariableType.String: return String;
 				case VariableType.Object: return Object != null ? Object.name : "(object)";
 				case VariableType.Store: return "(store)";
+				case VariableType.Raw: return _object != null ? _object.ToString() : "(raw)";
 				case VariableType.Null: return "(null)";
 			}
 
@@ -59,8 +61,7 @@ namespace PiRhoSoft.CompositionEngine
 			else if (type == typeof(string)) return VariableType.String;
 			else if (typeof(Object).IsAssignableFrom(type)) return VariableType.Object;
 			else if (typeof(IVariableStore).IsAssignableFrom(type)) return VariableType.Store;
-
-			return VariableType.Empty;
+			else return VariableType.Raw;
 		}
 
 		public static VariableValue Create(VariableType type)
@@ -83,6 +84,7 @@ namespace PiRhoSoft.CompositionEngine
 				case string string_: variable.String = string_; break;
 				case Object object_: variable._object = object_; break;
 				case IVariableStore store_: variable._object = store_; break;
+				default: variable._object = value; break;
 			}
 
 			return variable;
@@ -179,6 +181,7 @@ namespace PiRhoSoft.CompositionEngine
 				case VariableType.String: return Equals(other.String);
 				case VariableType.Object: return Equals(other.Object);
 				case VariableType.Store: return Equals(other.Store);
+				case VariableType.Raw: return Type == VariableType.Raw && _object == other._object;
 				case VariableType.Null: return Type == VariableType.Empty || Type == VariableType.Null;
 			}
 
@@ -231,6 +234,7 @@ namespace PiRhoSoft.CompositionEngine
 				case VariableType.String: return CompareTo(other.String);
 				case VariableType.Object: return CompareTo(other.Object);
 				case VariableType.Store: return CompareTo(other.Store);
+				case VariableType.Raw: return Type == VariableType.Raw ? (_object == other._object ? 0 : 1) : -1;
 				case VariableType.Null: return Type == VariableType.Empty || Type == VariableType.Null ? 0 : 1;
 			}
 
@@ -313,8 +317,9 @@ namespace PiRhoSoft.CompositionEngine
 					case VariableType.Integer: hash = (hash * 397) ^ Integer.GetHashCode(); break;
 					case VariableType.Number: hash = (hash * 397) ^ Number.GetHashCode(); break;
 					case VariableType.String: hash = (hash * 397) ^ String.GetHashCode(); break;
-					case VariableType.Object: hash = (hash * 397) ^ ComponentHelper.GetAsBaseObject(Object).GetHashCode(); break;
+					case VariableType.Object: hash = (hash * 397) ^ Object.GetHashCode(); break;
 					case VariableType.Store: hash = (hash * 397) ^ Store.GetHashCode(); break;
+					case VariableType.Raw: hash = (hash * 397) ^ _object.GetHashCode(); break;
 				}
 
 				return hash;

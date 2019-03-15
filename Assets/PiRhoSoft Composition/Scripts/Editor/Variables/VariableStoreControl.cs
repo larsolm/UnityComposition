@@ -70,6 +70,7 @@ namespace PiRhoSoft.CompositionEditor
 					case VariableType.Integer: DrawInteger(rect, name, ref value); break;
 					case VariableType.Number: DrawNumber(rect, name, ref value); break;
 					case VariableType.String: DrawString(rect, name, ref value); break;
+					case VariableType.Raw: DrawRaw(rect, name, ref value); break;
 					case VariableType.Null: DrawNull(rect, name, ref value); break;
 					default:
 					{
@@ -152,6 +153,11 @@ namespace PiRhoSoft.CompositionEditor
 			}
 
 			return selected;
+		}
+
+		private void DrawRaw(Rect rect, string name, ref VariableValue variable)
+		{
+			EditorGUI.LabelField(rect, name, variable.ToString());
 		}
 
 		public static bool DrawLink(string name, object obj)

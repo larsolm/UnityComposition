@@ -21,6 +21,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _missingTemplateError = "(ISCMT) Failed to create item {0}: the object template has not been assigned";
 		private const string _missingChildError = "(ISCMC) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
 		private const string _missingBindingError = "(CSCMB) Failed to initialize item {0}: the template '{1}' does not have a Binding Root";
+		private const string _invalidBindingError = "(CSCMB) Failed to bind index {0} of item {1}: the binding is not an IVariableStore";
 
 		[Tooltip("The input axis to use for horizontal movement")]
 		public string HorizontalAxis = "Horizontal";
@@ -167,8 +168,11 @@ namespace PiRhoSoft.CompositionEngine
 							{
 								for (var i = 0; i < indexed.Count; i++)
 								{
-									var indexedItem = indexed.GetItem(i);
-									AddItem(item, null, indexedItem, indexedItem, index++);
+									var indexedItem = indexed.GetItem(i) as IVariableStore;
+									if (indexedItem != null)
+										AddItem(item, null, indexedItem, indexedItem, index++);
+									else
+										Debug.LogWarningFormat(this, _invalidBindingError, i, item.Name);
 								}
 							}
 							else
