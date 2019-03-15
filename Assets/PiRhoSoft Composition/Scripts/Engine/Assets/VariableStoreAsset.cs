@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 			SetupSchema();
 		}
 
-		protected virtual void SetupSchema()
+		private void SetupSchema()
 		{
 			Store.Setup(this, Schema, Variables);
 		}

@@ -31,8 +31,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableMap Add(PropertyMap map)
 		{
-			for (var i = 0; i < map.PropertyCount; i++)
-				Add(map.GetPropertyName(i));
+			for (var i = 0; i < map.Properties.Count; i++)
+				Add(map.Properties[i].Name);
 
 			return this;
 		}
