@@ -16,12 +16,12 @@ namespace PiRhoSoft.CompositionEngine
 	public class TagList : SerializedList<string> { }
 
 	[HelpURL(Composition.DocumentationUrl + "variable-schema")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Schema", fileName = "Schema", order = 129)]
+	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 129)]
 	public class VariableSchema : ScriptableObject
 	{
 		public VariableInitializerType InitializerType = VariableInitializerType.DefaultValue;
 
-		[ListDisplay(EmptyText = "Add tags to differentiate variables in the schema into different catagories (usually for resetting and persistance)")]
+		[ListDisplay(EmptyText = "Add tags to categorize variables (usually for resetting and persistance)")]
 		public TagList Tags = new TagList();
 
 		[HideInInspector] [SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();

@@ -6,8 +6,8 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "instruction-manager")]
-	[AddComponentMenu("PiRho Soft/Instructions/Instruction Manager")]
+	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
+	[AddComponentMenu("PiRho Soft/Composition/Composition Manager")]
 	public class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
 		public static string CommandFolder = "Commands";
