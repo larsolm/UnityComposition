@@ -8,6 +8,12 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariableValueDrawer
 	{
+		public static VariableValue Draw(GUIContent label, VariableValue value, VariableDefinition definition)
+		{
+			var rect = EditorGUILayout.GetControlRect(false);
+			return Draw(rect, label, value, definition);
+		}
+
 		public static VariableValue Draw(Rect position, GUIContent label, VariableValue value, VariableDefinition definition)
 		{
 			position = EditorGUI.PrefixLabel(position, label);
