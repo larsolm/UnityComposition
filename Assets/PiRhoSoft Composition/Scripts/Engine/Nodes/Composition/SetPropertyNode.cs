@@ -48,13 +48,13 @@ namespace PiRhoSoft.CompositionEngine
 
 					switch (value.Type)
 					{
-						case VariableType.Boolean: obj = value.Boolean; break;
-						case VariableType.Integer: obj = value.Integer; break;
-						case VariableType.Number: obj = value.Number; break;
+						case VariableType.Bool: obj = value.Bool; break;
+						case VariableType.Int: obj = value.Int; break;
+						case VariableType.Float: obj = value.Float; break;
 						case VariableType.String: obj = value.String; break;
 						case VariableType.Object: obj = value.Object; break;
 						case VariableType.Store: obj = value.Store; break;
-						case VariableType.Raw: obj = value.RawObject; break;
+						case VariableType.Other: obj = value.Other; break;
 					}
 
 					if (obj != null)
