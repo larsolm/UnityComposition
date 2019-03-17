@@ -6,23 +6,31 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
-			if (parameters.Count < 2)
-				throw new CommandEvaluationException(name, Command.TooFewParametersException, parameters.Count, parameters.Count == 1 ? "" : "s", 2);
-
-			var biggest = VariableValue.Create(int.MinValue);
-
-			for (var i = 0; i < parameters.Count; i++)
+			if (parameters.Count >= 2)
 			{
-				var p = parameters[i].Evaluate(variables);
+				var biggestValue = VariableValue.Empty;
+				var biggestNumber = float.MinValue;
 
-				if (p.Type != VariableType.Integer && p.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, p.Type, i, VariableType.Integer, VariableType.Number);
+				for (var i = 0; i < parameters.Count; i++)
+				{
+					var p = parameters[i].Evaluate(variables);
 
-				if (p > biggest)
-					biggest = p;
+					if (!p.HasNumber)
+						throw CommandEvaluationException.WrongParameterType(name, i, p.Type, VariableType.Int, VariableType.Float);
+
+					if (p.Number > biggestNumber)
+					{
+						biggestNumber = p.Number;
+						biggestValue = p;
+					}
+				}
+
+				return biggestValue;
 			}
-
-			return biggest;
+			else
+			{
+				throw CommandEvaluationException.TooFewParameters(name, parameters.Count, 2);
+			}
 		}
 	}
 }

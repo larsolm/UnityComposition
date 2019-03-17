@@ -66,15 +66,14 @@ namespace PiRhoSoft.CompositionEditor
 				switch (value.Type)
 				{
 					case VariableType.Empty: DrawEmpty(rect, name, ref value); break;
-					case VariableType.Boolean: DrawBoolean(rect, name, ref value); break;
-					case VariableType.Integer: DrawInteger(rect, name, ref value); break;
-					case VariableType.Number: DrawNumber(rect, name, ref value); break;
+					case VariableType.Bool: DrawBool(rect, name, ref value); break;
+					case VariableType.Int: DrawInt(rect, name, ref value); break;
+					case VariableType.Float: DrawFloat(rect, name, ref value); break;
 					case VariableType.String: DrawString(rect, name, ref value); break;
-					case VariableType.Raw: DrawRaw(rect, name, ref value); break;
-					case VariableType.Null: DrawNull(rect, name, ref value); break;
+					case VariableType.Other: DrawOther(rect, name, ref value); break;
 					default:
 					{
-						if (DrawStore(rect, name, value.RawObject)) // TODO: show object picker
+						if (DrawStore(rect, name, value.Store)) // TODO: show object picker
 						{
 							Selected = value.Store;
 							SelectedName = name;
@@ -94,21 +93,21 @@ namespace PiRhoSoft.CompositionEditor
 			EditorGUI.LabelField(rect, name, variable.ToString());
 		}
 
-		private void DrawBoolean(Rect rect, string name, ref VariableValue variable)
+		private void DrawBool(Rect rect, string name, ref VariableValue variable)
 		{
-			var value = EditorGUI.Toggle(rect, name, variable.Boolean);
+			var value = EditorGUI.Toggle(rect, name, variable.Bool);
 			variable = VariableValue.Create(value);
 		}
 
-		private void DrawInteger(Rect rect, string name, ref VariableValue variable)
+		private void DrawInt(Rect rect, string name, ref VariableValue variable)
 		{
-			var value = EditorGUI.IntField(rect, name, variable.Integer);
+			var value = EditorGUI.IntField(rect, name, variable.Int);
 			variable = VariableValue.Create(value);
 		}
 
-		private void DrawNumber(Rect rect, string name, ref VariableValue variable)
+		private void DrawFloat(Rect rect, string name, ref VariableValue variable)
 		{
-			var value = EditorGUI.FloatField(rect, name, variable.Number);
+			var value = EditorGUI.FloatField(rect, name, variable.Float);
 			variable = VariableValue.Create(value);
 		}
 
@@ -116,11 +115,6 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var value = EditorGUI.TextField(rect, name, variable.String);
 			variable = VariableValue.Create(value);
-		}
-
-		private void DrawNull(Rect rect, string name, ref VariableValue variable)
-		{
-			EditorGUI.LabelField(rect, name, variable.ToString());
 		}
 
 		private void DrawObject(Rect rect, string name, ref VariableValue variable)
@@ -155,7 +149,7 @@ namespace PiRhoSoft.CompositionEditor
 			return selected;
 		}
 
-		private void DrawRaw(Rect rect, string name, ref VariableValue variable)
+		private void DrawOther(Rect rect, string name, ref VariableValue variable)
 		{
 			EditorGUI.LabelField(rect, name, variable.ToString());
 		}
@@ -199,14 +193,13 @@ namespace PiRhoSoft.CompositionEditor
 					switch (value.Type)
 					{
 						case VariableType.Empty: DrawEmpty(name, ref value); break;
-						case VariableType.Boolean: DrawBoolean(name, ref value); break;
-						case VariableType.Integer: DrawInteger(name, ref value); break;
-						case VariableType.Number: DrawNumber(name, ref value); break;
+						case VariableType.Bool: DrawBool(name, ref value); break;
+						case VariableType.Int: DrawInt(name, ref value); break;
+						case VariableType.Float: DrawFloat(name, ref value); break;
 						case VariableType.String: DrawString(name, ref value); break;
-						case VariableType.Null: DrawNull(name, ref value); break;
 						default:
 						{
-							if (DrawLink(name, value.RawObject)) // TODO: show object picker
+							if (DrawLink(name, value.Object)) // TODO: show object picker
 								selectedStore = value.Store;
 
 							break;
@@ -231,21 +224,21 @@ namespace PiRhoSoft.CompositionEditor
 			EditorGUILayout.LabelField(name, variable.ToString());
 		}
 
-		private static void DrawBoolean(string name, ref VariableValue variable)
+		private static void DrawBool(string name, ref VariableValue variable)
 		{
-			var value = EditorGUILayout.Toggle(name, variable.Boolean);
+			var value = EditorGUILayout.Toggle(name, variable.Bool);
 			variable = VariableValue.Create(value);
 		}
 
-		private static void DrawInteger(string name, ref VariableValue variable)
+		private static void DrawInt(string name, ref VariableValue variable)
 		{
-			var value = EditorGUILayout.IntField(name, variable.Integer);
+			var value = EditorGUILayout.IntField(name, variable.Int);
 			variable = VariableValue.Create(value);
 		}
 
-		private static void DrawNumber(string name, ref VariableValue variable)
+		private static void DrawFloat(string name, ref VariableValue variable)
 		{
-			var value = EditorGUILayout.FloatField(name, variable.Number);
+			var value = EditorGUILayout.FloatField(name, variable.Float);
 			variable = VariableValue.Create(value);
 		}
 

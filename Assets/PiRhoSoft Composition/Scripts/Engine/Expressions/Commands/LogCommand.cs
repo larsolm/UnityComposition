@@ -7,32 +7,34 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
-			if (parameters.Count == 1)
+			switch (parameters.Count)
 			{
-				var value = parameters[0].Evaluate(variables);
-				var power = 10.0f;
+				case 1:
+				{
+					var value = parameters[0].Evaluate(variables);
 
-				if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, value.Type, 0, VariableType.Number);
+					if (value.TryGetFloat(out var number))
+						return VariableValue.Create(Mathf.Log(number, 10.0f));
+					else
+						throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Float);
+				}
+				case 2:
+				{
+					var value = parameters[0].Evaluate(variables);
+					var power = parameters[1].Evaluate(variables);
 
-				return VariableValue.Create(Mathf.Log(value.Number, power));
-			}
-			else if (parameters.Count == 2)
-			{
-				var value = parameters[0].Evaluate(variables);
-				var power = parameters[1].Evaluate(variables);
+					if (!value.HasNumber)
+						throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Float);
 
-				if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, value.Type, 0, VariableType.Number);
+					if (!power.HasNumber)
+						throw CommandEvaluationException.WrongParameterType(name, 1, power.Type, VariableType.Int, VariableType.Float);
 
-				if (power.Type != VariableType.Integer && power.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, power.Type, 1, VariableType.Number);
-
-				return VariableValue.Create(Mathf.Log(value.Number, power.Number));
-			}
-			else
-			{
-				throw new CommandEvaluationException(name, Command.WrongParameterRangeException, parameters.Count, "s", 1, 2);
+					return VariableValue.Create(Mathf.Log(value.Number, power.Number));
+				}
+				default:
+				{
+					throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 1, 2);
+				}
 			}
 		}
 	}

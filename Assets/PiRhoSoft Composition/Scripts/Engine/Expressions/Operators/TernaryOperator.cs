@@ -4,7 +4,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class TernaryOperator : Operation
 	{
-		private const string _invalidTernaryTypeException = "the operator '?' was passed a value of type {0} but can only operate on values of type Boolean";
+		private const string _invalidTernaryTypeException = "the operator '?' was passed a value of type {0} but can only operate on values of type Bool";
 
 		public Operation Condition;
 		public Operation TrueBranch;
@@ -23,10 +23,10 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var left = Condition.Evaluate(variables);
 			
-			if (left.Type != VariableType.Boolean)
+			if (left.Type != VariableType.Bool)
 				throw new ExpressionEvaluationException(_invalidTernaryTypeException, left.Type);
 
-			if (left.Boolean)
+			if (left.Bool)
 				return TrueBranch.Evaluate(variables);
 			else
 				return FalseBranch.Evaluate(variables);

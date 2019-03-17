@@ -17,50 +17,46 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var max = parameters[0].Evaluate(variables);
 
-					ValidateType(ref max, name, 0);
-
-					if (max.Type == VariableType.Integer)
-						return VariableValue.Create(Random.Range(0, max.Integer));
+					if (max.Type == VariableType.Int)
+						return VariableValue.Create(Random.Range(0, max.Int));
+					else if (max.Type == VariableType.Float)
+						return VariableValue.Create(Random.Range(0.0f, max.Float));
 					else
-						return VariableValue.Create(Random.Range(0.0f, max.Number));
+						throw CommandEvaluationException.WrongParameterType(name, 0, max.Type, VariableType.Int, VariableType.Float);
 				}
 				case 2:
 				{
 					var min = parameters[0].Evaluate(variables);
 					var max = parameters[1].Evaluate(variables);
 
-					ValidateType(ref min, name, 0);
-					ValidateType(ref max, name, 1);
-
-					if (min > max)
-						throw new CommandEvaluationException(name, Command.InvalidRangeException, min, max);
-
-					if (min.Type == VariableType.Integer)
+					if (min.Type == VariableType.Int)
 					{
-						if (max.Type == VariableType.Integer)
-							return VariableValue.Create(Random.Range(min.Integer, max.Integer));
+						if (max.Type == VariableType.Int)
+							return VariableValue.Create(Random.Range(min.Int, max.Int));
+						else if (max.Type == VariableType.Float)
+							return VariableValue.Create(Random.Range(min.Int, max.Float));
 						else
-							return VariableValue.Create(Random.Range(min.Integer, max.Number));
+							throw CommandEvaluationException.WrongParameterType(name, 1, max.Type, VariableType.Int, VariableType.Float);
+					}
+					else if (min.Type == VariableType.Float)
+					{
+						if (max.Type == VariableType.Int)
+							return VariableValue.Create(Random.Range(min.Float, max.Int));
+						else if (max.Type == VariableType.Float)
+							return VariableValue.Create(Random.Range(min.Float, max.Float));
+						else
+							throw CommandEvaluationException.WrongParameterType(name, 1, max.Type, VariableType.Int, VariableType.Float);
 					}
 					else
 					{
-						if (max.Type == VariableType.Integer)
-							return VariableValue.Create(Random.Range(min.Number, max.Integer));
-						else
-							return VariableValue.Create(Random.Range(min.Number, max.Number));
+						throw CommandEvaluationException.WrongParameterType(name, 0, min.Type, VariableType.Int, VariableType.Float);
 					}
 				}
 				default:
 				{
-					throw new CommandEvaluationException(name, Command.TooManyParametersException, parameters.Count, "s", 2);
+					throw CommandEvaluationException.TooManyParameters(name, parameters.Count, 2);
 				}
 			}
-		}
-
-		private void ValidateType(ref VariableValue value, string name, int index)
-		{
-			if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-				throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, value.Type, index, VariableType.Integer, VariableType.Number);
 		}
 	}
 }

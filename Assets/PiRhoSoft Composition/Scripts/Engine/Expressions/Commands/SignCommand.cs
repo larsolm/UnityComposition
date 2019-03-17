@@ -13,14 +13,15 @@ namespace PiRhoSoft.CompositionEngine
 
 				switch (result.Type)
 				{
-					case VariableType.Integer: return VariableValue.Create(result.Integer < 0 ? -1 : 1);
-					case VariableType.Number: return VariableValue.Create(Mathf.Sign(result.Number));
-					default: throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, result.Type, 0, VariableType.Integer, VariableType.Number);
+					case VariableType.Int: return VariableValue.Create(result.Int < 0 ? -1 : 1);
+					case VariableType.Float: return VariableValue.Create(Mathf.Sign(result.Float));
 				}
+
+				throw CommandEvaluationException.WrongParameterType(name, 0, result.Type, VariableType.Int, VariableType.Float);
 			}
 			else
 			{
-				throw new CommandEvaluationException(name, Command.WrongParameterCountException, parameters.Count, "s", 1);
+				throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 1);
 			}
 		}
 	}

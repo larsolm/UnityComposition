@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -11,6 +12,82 @@ namespace PiRhoSoft.CompositionEngine
 
 		public CommandEvaluationException(string command, string error) : base(error) => Command = command;
 		public CommandEvaluationException(string command, string errorFormat, params object[] arguments) : this(command, string.Format(errorFormat, arguments)) { }
+
+		#region Errors
+
+		private const string _wrongParameterCount1Exception = "the Command was passed {0} parameter but expected {1}";
+		private const string _wrongParameterCount2Exception = "the Command was passed {0} parameter but expected either {1} or {2}";
+		private const string _wrongParameterRangeException = "the Command was passed {0} parameter but expected between {1} and {2}";
+		private const string _tooFewParametersException = "the Command was passed {0} parameter but expected at least {1}";
+		private const string _tooManyParametersException = "the Command was passed {0} parameter but expected at most {1}";
+		private const string _wrongParameterCount1PluralException = "the Command was passed {0} parameters but expected {1}";
+		private const string _wrongParameterCount2PluralException = "the Command was passed {0} parameters but expected either {1} or {2}";
+		private const string _wrongParameterRangePluralException = "the Command was passed {0} parameters but expected between {1} and {2}";
+		private const string _tooFewParametersPluralException = "the Command was passed {0} parameters but expected at least {1}";
+		private const string _tooManyParametersPluralException = "the Command was passed {0} parameters but expected at most {1}";
+		private const string _wrongParameterType1Exception = "the Command was passed a value of type {0} for parameter {1} but expected a value of type {2}";
+		private const string _wrongParameterType2Exception = "the Command was passed a value of type {0} for parameter {1} but expected a value of type {2} or {3}";
+		private const string _wrongParameterTypeXException = "the Command was passed a value of type {0} for parameter {1} but expected a value of type {2}, or {3}";
+
+		public static CommandEvaluationException WrongParameterCount(string commandName, int got, int expected)
+		{
+			if (got == 1)
+				return new CommandEvaluationException(commandName, _wrongParameterCount1Exception, got, expected);
+			else
+				return new CommandEvaluationException(commandName, _wrongParameterCount1PluralException, got, expected);
+		}
+
+		public static CommandEvaluationException WrongParameterCount(string commandName, int got, int expected1, int expected2)
+		{
+			if (got == 1)
+				return new CommandEvaluationException(commandName, _wrongParameterCount2Exception, got, expected1, expected2);
+			else
+				return new CommandEvaluationException(commandName, _wrongParameterCount2PluralException, got, expected1, expected2);
+		}
+
+		public static CommandEvaluationException WrongParameterRange(string commandName, int got, int expectedMinimum, int expectedMaximum)
+		{
+			if (got == 1)
+				return new CommandEvaluationException(commandName, _wrongParameterRangeException, got, expectedMinimum, expectedMaximum);
+			else
+				return new CommandEvaluationException(commandName, _wrongParameterRangePluralException, got, expectedMinimum, expectedMaximum);
+		}
+
+		public static CommandEvaluationException TooFewParameters(string commandName, int got, int expected)
+		{
+			if (got == 1)
+				return new CommandEvaluationException(commandName, _tooFewParametersException, got, expected);
+			else
+				return new CommandEvaluationException(commandName, _tooFewParametersPluralException, got, expected);
+		}
+
+		public static CommandEvaluationException TooManyParameters(string commandName, int got, int expected)
+		{
+			if (got == 1)
+				return new CommandEvaluationException(commandName, _tooManyParametersException, got, expected);
+			else
+				return new CommandEvaluationException(commandName, _tooManyParametersPluralException, got, expected);
+		}
+
+		public static CommandEvaluationException WrongParameterType(string commandName, int index, VariableType got, VariableType expected)
+		{
+			return new CommandEvaluationException(commandName, _wrongParameterType1Exception, got, index + 1, expected);
+		}
+
+		public static CommandEvaluationException WrongParameterType(string commandName, int index, VariableType got, VariableType expected1, VariableType expected2)
+		{
+			return new CommandEvaluationException(commandName, _wrongParameterType2Exception, got, index + 1, expected1, expected2);
+		}
+
+		public static CommandEvaluationException WrongParameterType(string commandName, int index, VariableType got, params VariableType[] expected)
+		{
+			var first = string.Join(",", expected.Take(expected.Length - 1));
+			var last = expected[expected.Length - 1];
+
+			return new CommandEvaluationException(commandName, _wrongParameterTypeXException, got, index + 1, first, last);
+		}
+
+		#endregion
 	}
 
 	public interface ICommand
@@ -30,14 +107,6 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 		[Serializable] public class ParameterList : SerializedList<Parameter> { }
-
-		public const string WrongParameterCountException = "the Command was passed {0} parameter{1} but expected {2}";
-		public const string WrongParameterRangeException = "the Command was passed {0} parameter{1} but expected between {2} and {3}";
-		public const string TooFewParametersException = "the Command was passed {0} parameter{1} but expected at least {2}";
-		public const string TooManyParametersException = "the Command was passed {0} parameter{1} but expected at most {2}";
-		public const string WrongParameterType1Exception = "the Command was passed a {0} for parameter {1} but expected a {2}";
-		public const string WrongParameterType2Exception = "the Command was passed a {0} for parameter {1} but expected a {2} or {3}";
-		public const string InvalidRangeException = "the min value ({0}) should be less than the max value ({1})";
 
 		[ChangeTrigger(nameof(OnNameChanged))] [Delayed] public string Name;
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline)] public ParameterList Parameters = new ParameterList();
@@ -80,7 +149,7 @@ namespace PiRhoSoft.CompositionEngine
 			var store = ReserveStore();
 
 			if (Parameters.Count != parameters.Count)
-				throw new CommandEvaluationException(Name, WrongParameterCountException, parameters.Count, parameters.Count == 1 ? "" : "s", Parameters.Count);
+				throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, Parameters.Count);
 
 			for (var i = 0; i < parameters.Count; i++)
 			{
@@ -88,7 +157,7 @@ namespace PiRhoSoft.CompositionEngine
 				var value = parameters[i].Evaluate(variables);
 
 				if (parameter.Type != VariableType.Empty && parameter.Type != value.Type)
-					throw new CommandEvaluationException(Name, WrongParameterType1Exception, value.Type, i + 1, parameter.Type);
+					throw CommandEvaluationException.WrongParameterType(name, i, value.Type, parameter.Type);
 
 				store.AddVariable(Parameters[i].Name, value);
 			}
@@ -98,28 +167,32 @@ namespace PiRhoSoft.CompositionEngine
 			return result;
 		}
 
+		protected CommandEvaluationException WrongParameterType(int index, VariableType got, VariableType expected) => CommandEvaluationException.WrongParameterType(Name, index, got, expected);
+		protected CommandEvaluationException WrongParameterType(int index, VariableType got, VariableType expected1, VariableType expected2) => CommandEvaluationException.WrongParameterType(Name, index, got, expected1, expected2);
+		protected CommandEvaluationException WrongParameterType(int index, VariableType got, params VariableType[] expected) => CommandEvaluationException.WrongParameterType(Name, index, got, expected);
+
 		#region Parameters
 
-		public const int InitialStoreCount = 5; // multiple because commands can call other commands
-		public static Stack<VariableStore> Stores = new Stack<VariableStore>(InitialStoreCount);
+		private const int _initialStoreCount = 5; // multiple because commands can call other commands
+		private static Stack<VariableStore> _stores = new Stack<VariableStore>(_initialStoreCount);
 
 		static Command()
 		{
-			for (var i = 0; i < InitialStoreCount; i++)
-				Stores.Push(new VariableStore());
+			for (var i = 0; i < _initialStoreCount; i++)
+				_stores.Push(new VariableStore());
 		}
 
-		public static VariableStore ReserveStore()
+		private static VariableStore ReserveStore()
 		{
-			if (Stores.Count == 0)
-				Stores.Push(new VariableStore());
+			if (_stores.Count == 0)
+				_stores.Push(new VariableStore());
 
-			return Stores.Pop();
+			return _stores.Pop();
 		}
 
-		public static void ReleaseStore(VariableStore store)
+		private static void ReleaseStore(VariableStore store)
 		{
-			Stores.Push(store);
+			_stores.Push(store);
 			store.Clear();
 		}
 

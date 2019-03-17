@@ -11,14 +11,14 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var result = parameters[0].Evaluate(variables);
 
-				if (result.Type == VariableType.Number)
-					return VariableValue.Create(Mathf.FloorToInt(result.Number));
+				if (result.TryGetFloat(out var number))
+					return VariableValue.Create(Mathf.FloorToInt(number));
 				else
-					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, result.Type, 0, VariableType.Number);
+					throw CommandEvaluationException.WrongParameterType(name, 0, result.Type, VariableType.Float);
 			}
 			else
 			{
-				throw new CommandEvaluationException(name, Command.WrongParameterCountException, parameters.Count, "s", 1);
+				throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 1);
 			}
 		}
 	}

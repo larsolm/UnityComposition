@@ -139,14 +139,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.Type == VariableType.Boolean)
+			if (value.Type == VariableType.Bool)
 			{
-				result = value.Boolean;
+				result = value.Bool;
 				return true;
 			}
 			else
 			{
-				LogResolveWarning(value, reference, VariableType.Boolean);
+				LogResolveWarning(value, reference, VariableType.Bool);
 				result = false;
 				return false;
 			}
@@ -168,14 +168,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.Type == VariableType.Integer)
+			if (value.Type == VariableType.Int)
 			{
-				result = value.Integer;
+				result = value.Int;
 				return true;
 			}
 			else
 			{
-				LogResolveWarning(value, reference, VariableType.Integer);
+				LogResolveWarning(value, reference, VariableType.Int);
 				result = 0;
 				return false;
 			}
@@ -197,14 +197,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.Type == VariableType.Number || value.Type == VariableType.Integer)
+			if (value.HasNumber)
 			{
 				result = value.Number;
 				return true;
 			}
 			else
 			{
-				LogResolveWarning(value, reference, VariableType.Number);
+				LogResolveWarning(value, reference, VariableType.Float);
 				result = 0;
 				return false;
 			}
@@ -255,9 +255,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.RawObject != null)
+			if (value.HasObject)
 			{
-				if (value.RawObject is T t)
+				if (value.Other is T t)
 				{
 					result = t;
 					return true;

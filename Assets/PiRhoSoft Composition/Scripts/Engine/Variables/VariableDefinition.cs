@@ -86,7 +86,7 @@ namespace PiRhoSoft.CompositionEngine
 			return new VariableDefinition
 			{
 				_name = name,
-				_type = VariableType.Integer,
+				_type = VariableType.Int,
 				_tag = tag,
 				_initializer = initializer,
 				_useRangeConstraint = true,
@@ -100,7 +100,7 @@ namespace PiRhoSoft.CompositionEngine
 			return new VariableDefinition
 			{
 				_name = name,
-				_type = VariableType.Number,
+				_type = VariableType.Float,
 				_tag = tag,
 				_initializer = initializer,
 				_useRangeConstraint = true,

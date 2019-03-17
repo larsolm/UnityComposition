@@ -18,5 +18,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			Right.GetInputs(inputs, source);
 		}
+
+		protected ExpressionEvaluationException TypeMismatch(VariableType type, VariableType expected) => ExpressionEvaluationException.PrefixTypeMismatch(Symbol, type, expected);
+		protected ExpressionEvaluationException TypeMismatch(VariableType type, VariableType expected1, VariableType expected2) => ExpressionEvaluationException.PrefixTypeMismatch(Symbol, type, expected1, expected2);
+		protected ExpressionEvaluationException TypeMismatch(VariableType type, params VariableType[] expected) => ExpressionEvaluationException.PrefixTypeMismatch(Symbol, type, expected);
 	}
 }

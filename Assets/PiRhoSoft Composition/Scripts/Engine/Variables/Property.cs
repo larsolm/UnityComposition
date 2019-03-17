@@ -188,9 +188,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetBool(OwnerType owner, VariableValue value, FieldInfo field)
 		{
-			if (value.Type == VariableType.Boolean)
+			if (value.Type == VariableType.Bool)
 			{
-				field.SetValue(owner, value.Boolean);
+				field.SetValue(owner, value.Bool);
 				return SetVariableResult.Success;
 			}
 
@@ -199,9 +199,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetInt(OwnerType owner, VariableValue value, FieldInfo field)
 		{
-			if (value.Type == VariableType.Integer)
+			if (value.Type == VariableType.Int)
 			{
-				field.SetValue(owner, value.Integer);
+				field.SetValue(owner, value.Int);
 				return SetVariableResult.Success;
 			}
 
@@ -210,7 +210,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetFloat(OwnerType owner, VariableValue value, FieldInfo field)
 		{
-			if (value.Type == VariableType.Number || value.Type == VariableType.Integer)
+			if (value.HasNumber)
 			{
 				field.SetValue(owner, value.Number);
 				return SetVariableResult.Success;
@@ -232,11 +232,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetObject(OwnerType owner, VariableValue value, FieldInfo field)
 		{
-			if (value.Type == VariableType.Raw || value.Type == VariableType.Store || value.Type == VariableType.Object)
+			if (value.HasObject && value.Other != null)
 			{
-				if (field.FieldType.IsAssignableFrom(value.RawObject.GetType()))
+				if (field.FieldType.IsAssignableFrom(value.Other.GetType()))
 				{
-					field.SetValue(owner, value.RawObject);
+					field.SetValue(owner, value.Other);
 					return SetVariableResult.Success;
 				}
 			}
@@ -250,9 +250,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetBool(OwnerType owner, VariableValue value, Action<OwnerType, bool> setter)
 		{
-			if (value.Type == VariableType.Boolean)
+			if (value.Type == VariableType.Bool)
 			{
-				setter(owner, value.Boolean);
+				setter(owner, value.Bool);
 				return SetVariableResult.Success;
 			}
 
@@ -261,9 +261,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetInt(OwnerType owner, VariableValue value, Action<OwnerType, int> setter)
 		{
-			if (value.Type == VariableType.Integer)
+			if (value.Type == VariableType.Int)
 			{
-				setter(owner, value.Integer);
+				setter(owner, value.Int);
 				return SetVariableResult.Success;
 			}
 
@@ -272,7 +272,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetFloat(OwnerType owner, VariableValue value, Action<OwnerType, float> setter)
 		{
-			if (value.Type == VariableType.Number || value.Type == VariableType.Integer)
+			if (value.Type == VariableType.Float || value.Type == VariableType.Int)
 			{
 				setter(owner, value.Number);
 				return SetVariableResult.Success;
@@ -294,11 +294,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetObject(Type propertyType, OwnerType owner, VariableValue value, Action<OwnerType, object> setter)
 		{
-			if (value.Type == VariableType.Raw || value.Type == VariableType.Store || value.Type == VariableType.Object)
+			if (value.HasObject && value.Other != null)
 			{
-				if (propertyType.IsAssignableFrom(value.RawObject.GetType()))
+				if (propertyType.IsAssignableFrom(value.Other.GetType()))
 				{
-					setter(owner, value.RawObject);
+					setter(owner, value.Other);
 					return SetVariableResult.Success;
 				}
 			}

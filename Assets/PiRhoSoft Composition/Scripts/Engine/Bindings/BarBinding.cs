@@ -40,12 +40,12 @@ namespace PiRhoSoft.CompositionEngine
 			var amountValue = AmountVariable.GetValue(variables);
 			var totalValue = TotalVariable.GetValue(variables);
 
-			_image.enabled = (amountValue.Type == VariableType.Integer || amountValue.Type == VariableType.Number)
-				&& (totalValue.Type == VariableType.Integer || totalValue.Type == VariableType.Number);
+			_image.enabled = (amountValue.Type == VariableType.Int || amountValue.Type == VariableType.Float)
+				&& (totalValue.Type == VariableType.Int || totalValue.Type == VariableType.Float);
 
 			if (_image.enabled)
 			{
-				var fill = amountValue.Number / totalValue.Number;
+				var fill = amountValue.Float / totalValue.Float;
 
 				if (Speed <= 0.0f)
 				{

@@ -10,10 +10,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
-			if (parameters.Count != 0)
-				throw new CommandEvaluationException(name, Command.TooManyParametersException, parameters.Count, parameters.Count == 1 ? "" : "s", 0);
-
-			return Value;
+			if (parameters.Count == 0)
+				return Value;
+			else
+				throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 0);
 		}
 	}
 }

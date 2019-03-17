@@ -17,25 +17,24 @@ namespace PiRhoSoft.CompositionEditor
 			switch (type)
 			{
 				case VariableType.Empty: return value;
-				case VariableType.Boolean: return DrawBoolean(position, value, definition);
-				case VariableType.Integer: return DrawInteger(position, value, definition);
-				case VariableType.Number: return DrawNumber(position, value, definition);
+				case VariableType.Bool: return DrawBool(position, value, definition);
+				case VariableType.Int: return DrawInt(position, value, definition);
+				case VariableType.Float: return DrawFloat(position, value, definition);
 				case VariableType.String: return DrawString(position, value, definition);
 				case VariableType.Object: return DrawObject(position, value, definition);
-				case VariableType.Null: return value;
 				default: return value;
 			}
 		}
 
-		private static VariableValue DrawBoolean(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawBool(Rect rect, VariableValue value, VariableDefinition definition)
 		{
-			var boolean = EditorGUI.ToggleLeft(rect, GUIContent.none, value.Boolean);
+			var boolean = EditorGUI.ToggleLeft(rect, GUIContent.none, value.Bool);
 			return VariableValue.Create(boolean);
 		}
 
-		private static VariableValue DrawInteger(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawInt(Rect rect, VariableValue value, VariableDefinition definition)
 		{
-			var integer = value.Integer;
+			var integer = value.Int;
 
 			if (definition.UseRangeConstraint)
 				integer = EditorGUI.IntSlider(rect, GUIContent.none, integer, (int)definition.MinimumConstraint, (int)definition.MaximumConstraint);
@@ -45,9 +44,9 @@ namespace PiRhoSoft.CompositionEditor
 			return VariableValue.Create(integer);
 		}
 
-		private static VariableValue DrawNumber(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawFloat(Rect rect, VariableValue value, VariableDefinition definition)
 		{
-			var number = value.Number;
+			var number = value.Float;
 
 			if (definition.UseRangeConstraint)
 				number = EditorGUI.Slider(rect, GUIContent.none, number, definition.MinimumConstraint, definition.MaximumConstraint);

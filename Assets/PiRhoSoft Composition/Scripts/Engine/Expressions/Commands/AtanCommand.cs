@@ -7,31 +7,36 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
-			if (parameters.Count == 1)
+			switch (parameters.Count)
 			{
-				var value = parameters[0].Evaluate(variables);
+				case 1:
+				{
+					var value = parameters[0].Evaluate(variables);
 
-				if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, value.Type, 0, VariableType.Number);
+					if (value.TryGetFloat(out var number))
+						return VariableValue.Create(Mathf.Atan(number));
+					else if (value.TryGetVector2(out var vector))
+						return VariableValue.Create(Mathf.Atan2(vector.y, vector.x));
+					else
+						throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Float, VariableType.Vector2);
+				}
+				case 2:
+				{
+					var y = parameters[0].Evaluate(variables);
+					var x = parameters[1].Evaluate(variables);
 
-				return VariableValue.Create(Mathf.Atan(value.Number));
-			}
-			else if (parameters.Count == 2)
-			{
-				var y = parameters[0].Evaluate(variables);
-				var x = parameters[1].Evaluate(variables);
+					if (!y.HasNumber)
+						throw CommandEvaluationException.WrongParameterType(name, 0, y.Type, VariableType.Float);
 
-				if (y.Type != VariableType.Integer && y.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, y.Type, 0, VariableType.Number);
+					if (!x.HasNumber)
+						throw CommandEvaluationException.WrongParameterType(name, 1, x.Type, VariableType.Float);
 
-				if (x.Type != VariableType.Integer && x.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, x.Type, 1, VariableType.Number);
-
-				return VariableValue.Create(Mathf.Atan2(y.Number, x.Number));
-			}
-			else
-			{
-				throw new CommandEvaluationException(name, Command.WrongParameterRangeException, parameters.Count, "s", 1, 2);
+					return VariableValue.Create(Mathf.Atan2(y.Number, x.Number));
+				}
+				default:
+				{
+					throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 1, 2);
+				}
 			}
 		}
 	}
