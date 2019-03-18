@@ -255,9 +255,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.HasObject)
+			if (value.HasReference)
 			{
-				if (value.Other is T t)
+				if (value.Reference is T t)
 				{
 					result = t;
 					return true;

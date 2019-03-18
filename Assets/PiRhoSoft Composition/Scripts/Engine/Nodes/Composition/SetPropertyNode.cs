@@ -65,7 +65,7 @@ namespace PiRhoSoft.CompositionEngine
 						case VariableType.String: obj = value.String; break;
 						case VariableType.Object: obj = value.Object; break;
 						case VariableType.Store: obj = value.Store; break;
-						case VariableType.Other: obj = value.Other; break;
+						case VariableType.Other: obj = value.Reference; break;
 					}
 
 					if (obj != null)

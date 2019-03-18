@@ -543,11 +543,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetObject(OwnerType owner, VariableValue value, FieldInfo field)
 		{
-			if (value.HasObject && value.Other != null)
+			if (value.HasReference && value.Reference != null)
 			{
-				if (field.FieldType.IsAssignableFrom(value.Other.GetType()))
+				if (field.FieldType.IsAssignableFrom(value.Reference.GetType()))
 				{
-					field.SetValue(owner, value.Other);
+					field.SetValue(owner, value.Reference);
 					return SetVariableResult.Success;
 				}
 			}
@@ -726,11 +726,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetObject(Type propertyType, OwnerType owner, VariableValue value, Action<OwnerType, object> setter)
 		{
-			if (value.HasObject && value.Other != null)
+			if (value.HasReference && value.Reference != null)
 			{
-				if (propertyType.IsAssignableFrom(value.Other.GetType()))
+				if (propertyType.IsAssignableFrom(value.Reference.GetType()))
 				{
-					setter(owner, value.Other);
+					setter(owner, value.Reference);
 					return SetVariableResult.Success;
 				}
 			}

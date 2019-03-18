@@ -13,7 +13,7 @@
 				case VariableType.Empty:
 				{
 					if (right.Type == VariableType.Empty) return true;
-					else if (right.HasObject) return right.IsNull;
+					else if (right.HasRect) return right.IsNull;
 					else throw ComparisonMismatch(left.Type, right.Type, VariableType.Empty, VariableType.Object, VariableType.Store, VariableType.Other);
 				}
 				case VariableType.Bool:
@@ -93,7 +93,7 @@
 				}
 				default: // Object, Store, Other
 				{
-					return left.Other.Equals(right.Other);
+					return left.Reference.Equals(right.Reference);
 				}
 			}
 		}

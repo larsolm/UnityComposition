@@ -202,18 +202,22 @@ namespace PiRhoSoft.CompositionEngine
 
 		private Operation ParseLookup(ExpressionToken token)
 		{
-			var nextToken = ViewNextToken();
 			var parameter = (Operation)null;
 
-			if (nextToken.Type == ExpressionTokenType.StartLookup)
+			if (_index < _tokens.Count)
 			{
-				SkipNextToken(ExpressionTokenType.StartLookup);
-				nextToken = ViewNextToken();
+				var nextToken = ViewNextToken();
 
-				if (nextToken.Type != ExpressionTokenType.EndLookup)
-					parameter = Parse(0);
+				if (nextToken.Type == ExpressionTokenType.StartLookup)
+				{
+					SkipNextToken(ExpressionTokenType.StartLookup);
+					nextToken = ViewNextToken();
 
-				SkipNextToken(ExpressionTokenType.EndLookup);
+					if (nextToken.Type != ExpressionTokenType.EndLookup)
+						parameter = Parse(0);
+
+					SkipNextToken(ExpressionTokenType.EndLookup);
+				}
 			}
 
 			return new LookupOperation(token.Text, parameter);

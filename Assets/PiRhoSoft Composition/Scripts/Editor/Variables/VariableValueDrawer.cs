@@ -210,8 +210,8 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static VariableValue DrawOther(Rect rect, VariableValue value, VariableDefinition definition)
 		{
-			if (value.Other != null)
-				EditorGUI.LabelField(rect, value.Other.ToString());
+			if (value.Reference != null)
+				EditorGUI.LabelField(rect, value.Reference.ToString());
 
 			return value;
 		}

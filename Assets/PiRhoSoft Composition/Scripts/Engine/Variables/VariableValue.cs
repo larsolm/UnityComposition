@@ -76,10 +76,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableType Type => _type;
 		public bool IsEmpty => _type == VariableType.Empty;
-
 		public bool IsNull => HasReference && _reference == null;
-		public bool HasValue => !HasReference;
-		public bool HasReference => _type == VariableType.String || _type == VariableType.Object || _type == VariableType.Store || HasObject;
+
+		public bool HasValue => !HasReference && !HasString;
+		public bool HasString => _type == VariableType.String;
+		public bool HasReference => _type == VariableType.Object || _type == VariableType.Store || _type == VariableType.Other;
 
 		public bool HasNumber => _type == VariableType.Int || _type == VariableType.Float;
 		public bool HasNumber2 => _type == VariableType.Int2 || _type == VariableType.Vector2;
@@ -87,7 +88,6 @@ namespace PiRhoSoft.CompositionEngine
 		public bool HasNumber4 => _type == VariableType.Vector4 || HasNumber3;
 		public bool HasRect => _type == VariableType.IntRect || _type == VariableType.Rect;
 		public bool HasBounds => _type == VariableType.IntBounds || _type == VariableType.Bounds;
-		public bool HasObject => _type == VariableType.Object || _type == VariableType.Store || _type == VariableType.Other;
 
 		public override string ToString()
 		{
@@ -212,12 +212,14 @@ namespace PiRhoSoft.CompositionEngine
 		public string String => _reference as string;
 		public Object Object => _reference as Object;
 		public IVariableStore Store => _reference as IVariableStore;
-		public object Other => _reference;
 
 		public float Number => TryGetFloat(out var number) ? number : 0.0f;
 		public Vector2 Number2 => TryGetVector2(out var vector) ? vector : Vector2.zero;
 		public Vector3 Number3 => TryGetVector3(out var vector) ? vector : Vector3.zero;
 		public Vector4 Number4 => TryGetVector4(out var vector) ? vector : Vector4.zero;
+		public Rect NumberRect => TryGetRect(out var rect) ? rect : new Rect(0, 0, 0, 0);
+		public Bounds NumberBounds => TryGetBounds(out var bounds) ? bounds : new Bounds(Vector3.zero, Vector3.zero);
+		public object Reference => _reference;
 
 		#endregion
 
