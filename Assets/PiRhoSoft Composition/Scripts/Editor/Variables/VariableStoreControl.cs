@@ -34,6 +34,11 @@ namespace PiRhoSoft.CompositionEditor
 			_label = new GUIContent(name);
 			_names = store.GetVariableNames().ToList();
 
+			if (store is IIndexedVariableStore indexed)
+				_names = store.GetVariableNames().Concat(Enumerable.Repeat(string.Empty, indexed.Count).Select((value, index) => VariableReference.LookupOpen + index.ToString() + VariableReference.LookupClose)).ToList();
+			else
+				_names = store.GetVariableNames().ToList();
+
 			Setup(_names)
 				.MakeEmptyLabel(new GUIContent("The store is empty"))
 				.MakeCollapsable(nameof(VariableStore) + "." + Name + ".IsOpen")
@@ -69,8 +74,18 @@ namespace PiRhoSoft.CompositionEditor
 			Selected = null;
 
 			var name = _names[index];
-			var value = Store.GetVariable(name);
 			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
+			var value = VariableValue.Empty;
+
+			if (name.Length > 0 && name[0] == VariableReference.LookupOpen && Store is IIndexedVariableStore indexed)
+			{
+				var i = int.Parse(name.Substring(1, name.Length - 2));
+				value = VariableValue.Create(indexed.GetItem(i));
+			}
+			else
+			{
+				value = Store.GetVariable(name);
+			}
 
 			if (value.Type == VariableType.Store)
 			{
