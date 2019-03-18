@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 		[SerializeField] private string[] _lookups = _emptyLookups;
 
 		public bool IsAssigned => _variable != null && _variable.Length > 0;
-		public string StoreName => _variable != null && _variable.Length > 1 ? _variable[0] : "";
+		public string StoreName => _variable != null && _variable.Length > 1 ? _variable[0] : string.Empty;
 		public string RootName => IsAssigned ? (_variable.Length > 1 ? _variable[1] : _variable[0]) : null;
 
 		public VariableReference()

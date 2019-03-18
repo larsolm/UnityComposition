@@ -21,7 +21,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static List<ExpressionToken> Tokenize(string input)
 		{
 			var tokens = new List<ExpressionToken>();
-			var whitespace = "";
+			var whitespace = string.Empty;
 			var start = 0;
 
 			while (start < input.Length)
@@ -45,7 +45,7 @@ namespace PiRhoSoft.CompositionEngine
 					else if (IsOperatorCharacter(c)) AddOperator(tokens, input, start, ref start);
 					else throw new ExpressionTokenizeException(start, _invalidTokenException, c);
 
-					whitespace = "";
+					whitespace = string.Empty;
 				}
 			}
 

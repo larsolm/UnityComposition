@@ -341,7 +341,7 @@ namespace PiRhoSoft.CompositionEngine
 				case VariableType.Integer: return Integer.ToString();
 				case VariableType.Number: return Number.ToString();
 				case VariableType.String: return String;
-				default: return "";
+				default: return string.Empty;
 			}
 		}
 

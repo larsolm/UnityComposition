@@ -38,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static IEnumerable<string> GetVariableNames(IIndexedVariableStore variables)
 		{
 			return Enumerable
-				.Repeat("", variables.Count)
+				.Repeat(string.Empty, variables.Count)
 				.Select((value, index) => ItemVariable + index)
 				.Concat(Enumerable.Repeat(nameof(IIndexedVariableStore.Count), 1));
 		}

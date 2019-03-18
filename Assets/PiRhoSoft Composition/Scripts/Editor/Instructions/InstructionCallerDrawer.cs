@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static IconButton _refreshButton = new IconButton(IconButton.Refresh, "Refresh the list of inputs and outputs");
 		private readonly static Label _inputsLabel = new Label(typeof(InstructionCaller), "_inputs");
 		private readonly static Label _outputsLabel = new Label(typeof(InstructionCaller), "_outputs");
-		private readonly static GUIContent[] _inputTypeOptions = new GUIContent[] { new GUIContent("Value/Boolean"), new GUIContent("Value/Integer"), new GUIContent("Value/Number"), new GUIContent("Value/String"), new GUIContent("Value/Object"), new GUIContent(""), new GUIContent("Reference") };
+		private readonly static GUIContent[] _inputTypeOptions = new GUIContent[] { new GUIContent("Value/Boolean"), new GUIContent("Value/Integer"), new GUIContent("Value/Number"), new GUIContent("Value/String"), new GUIContent("Value/Object"), new GUIContent(), new GUIContent("Reference") };
 
 		private InstructionCaller _caller;
 		private ObjectListControl _inputs = new ObjectListControl();

@@ -600,7 +600,7 @@ namespace PiRhoSoft.CompositionEditor
 				.ThenBy(type => type.Order);
 
 			var previousOrder = 0;
-			var previousMenu = "";
+			var previousMenu = string.Empty;
 
 			foreach (var type in types)
 			{
@@ -654,7 +654,7 @@ namespace PiRhoSoft.CompositionEditor
 			var graphs = AssetHelper.GetAssetList<InstructionGraph>(false, false);
 
 			if (graphs.Assets.Count > 0)
-				menu.AddSeparator("");
+				menu.AddSeparator(string.Empty);
 
 			foreach (var graph in graphs.Assets)
 				menu.AddItem(new GUIContent(graph.name), graph == _graph, SetGraph, graph);
@@ -684,7 +684,7 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				var data = GetNodeData(node);
 				GoTo(data.Bounds.center, 1.0f); // go to zoom 1 first so ViewArea is the right size
-				Pan(new Vector2(ViewArea.width * -0.5f + data.Bounds.width, 0.0f)); // then pan so the node is on the left side
+				Pan(new Vector2(0.0f, 0.0f));
 			}
 		}
 
@@ -1151,7 +1151,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			using (ColorScope.BackgroundColor(new Color(0.82f, 0.82f, 0.82f)))
 			{
-				GUI.Box(rect, "", _watchStyle.Style);
+				GUI.Box(rect, string.Empty, _watchStyle.Style);
 			}
 
 			using (new GUILayout.AreaScope(rect))

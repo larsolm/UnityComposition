@@ -17,7 +17,7 @@
 
 		public string GetVariableName(int index)
 		{
-			return index >= 0 && index < _map.Properties.Count ? _map.Properties[index].Name : "";
+			return index >= 0 && index < _map.Properties.Count ? _map.Properties[index].Name : string.Empty;
 		}
 
 		public VariableValue GetVariableValue(int index)

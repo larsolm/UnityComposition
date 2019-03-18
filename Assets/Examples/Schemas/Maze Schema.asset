@@ -13,11 +13,12 @@ MonoBehaviour:
   m_Name: Maze Schema
   m_EditorClassIdentifier: 
   InitializerType: 1
-  Availabilities: []
+  Tags:
+    _items: []
   _definitions:
   - _name: RedKey
     _type: 2
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
@@ -26,7 +27,7 @@ MonoBehaviour:
     _typeConstraint: 
   - _name: BlueKey
     _type: 2
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
@@ -35,7 +36,7 @@ MonoBehaviour:
     _typeConstraint: 
   - _name: GreenKey
     _type: 2
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
@@ -44,7 +45,7 @@ MonoBehaviour:
     _typeConstraint: 
   - _name: YellowKey
     _type: 2
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
@@ -53,16 +54,7 @@ MonoBehaviour:
     _typeConstraint: 
   - _name: LevelFinished
     _type: 1
-    _availability: Always (not saved)
-    _initializer:
-      _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
-  - _name: Timer
-    _type: 3
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
@@ -71,7 +63,7 @@ MonoBehaviour:
     _typeConstraint: 
   - _name: JewelsNeeded
     _type: 2
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
@@ -80,11 +72,20 @@ MonoBehaviour:
     _typeConstraint: 
   - _name: Jewels
     _type: 2
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
     _minimumConstraint: 0
     _maximumConstraint: 0
     _typeConstraint: 
-  _version: 10
+  - _name: StartTime
+    _type: 3
+    _tag: Always (not saved)
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  _version: 14

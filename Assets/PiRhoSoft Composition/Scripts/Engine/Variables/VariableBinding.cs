@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 	public abstract class VariableBinding : MonoBehaviour
 	{
 		[Tooltip("The group to which this binding belongs (empty means it will update with all groups)")]
-		public string BindingGroup = "";
+		public string BindingGroup = string.Empty;
 
 		[Tooltip("When set, the binding will update automatically when the variable changes")]
 		public bool AutoUpdate = true;

@@ -1,4 +1,5 @@
-﻿using TMPro;
+﻿using PiRhoSoft.UtilityEngine;
+using TMPro;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -9,6 +10,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Expression Binding")]
 	public class ExpressionBinding : VariableBinding
 	{
+		public BindingFormatter Formatting;
+
 		[Tooltip("The expression to evaluate and display as text in this object")]
 		public Expression Expression;
 
@@ -32,7 +35,11 @@ namespace PiRhoSoft.CompositionEngine
 				var result = Expression.Evaluate(variables);
 
 				Text.enabled = result.Type != VariableType.Empty;
-				Text.text = result.ToString();
+
+				if (Formatting.Formatting != BindingFormatter.FormatType.None && result.TryGetNumber(out var number))
+					Text.text = Formatting.GetFormattedString(number);
+				else
+					Text.text = result.ToString();
 			}
 			catch
 			{

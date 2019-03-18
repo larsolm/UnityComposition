@@ -104,7 +104,7 @@ namespace PiRhoSoft.DocGenEditor
 		{
 			var open = message.IndexOf('(');
 			var close = message.IndexOf(')');
-			var id = "";
+			var id = string.Empty;
 
 			if (open == 0 && close > 1)
 			{

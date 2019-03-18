@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static GUIContent _stringConstraintLabel = new GUIContent("Constraint", "The comma separated list of valid values for the variable");
 		private readonly static GUIContent _objectConstraintLabel = new GUIContent("Constraint", "The Object type that the assigned object must be derived from or have an instance of");
 		private readonly static GUIContent _tagLabel = new GUIContent("Tag", "An identifier that can be used to reset or persist this variable");
-		private readonly static GUIContent _useRangeConstraintLabel = new GUIContent("");
+		private readonly static GUIContent _useRangeConstraintLabel = new GUIContent();
 		private readonly static GUIContent _minimumConstraintLabel = new GUIContent("Between");
 		private readonly static GUIContent _maximumConstraintLabel = new GUIContent("and");
 
@@ -85,7 +85,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			nameProperty.stringValue = definition.Name;
 			typeProperty.enumValueIndex = (int)definition.Type;
-			initializerProperty.stringValue = definition.Initializer != null ? definition.Initializer.Statement : "";
+			initializerProperty.stringValue = definition.Initializer != null ? definition.Initializer.Statement : string.Empty;
 			tagProperty.stringValue = definition.Tag;
 			useRangeConstraintProperty.boolValue = definition.UseRangeConstraint;
 			minimumConstraintProperty.floatValue = definition.MinimumConstraint;
@@ -259,7 +259,7 @@ namespace PiRhoSoft.CompositionEditor
 					var typeConstraint = !string.IsNullOrEmpty(constraint.TypeConstraint) ? Type.GetType(constraint.TypeConstraint) : null;
 					var selectedConstraint = TypePopupDrawer.Draw<Object>(rect, GUIContent.none, typeConstraint);
 
-					constraint.TypeConstraint = selectedConstraint != null ? selectedConstraint.AssemblyQualifiedName : "";
+					constraint.TypeConstraint = selectedConstraint != null ? selectedConstraint.AssemblyQualifiedName : string.Empty;
 
 					break;
 				}
@@ -274,7 +274,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			var tagIndex = tags.IndexOf(tag);
 			tagIndex = EditorGUI.Popup(rect, tagIndex, tags.ToArray());
-			return tagIndex >= 0 ? tags[tagIndex] : "";
+			return tagIndex >= 0 ? tags[tagIndex] : string.Empty;
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)

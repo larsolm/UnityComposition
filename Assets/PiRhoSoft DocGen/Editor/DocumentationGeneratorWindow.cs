@@ -25,7 +25,7 @@ namespace PiRhoSoft.DocGenEditor
 		private DocumentationGenerator _generator;
 		private Editor _editor;
 		private GenerationState _state = GenerationState.Waiting;
-		private string _message = "";
+		private string _message = string.Empty;
 		private float _progress = 0.0f;
 		private Thread _thread = null;
 		private Vector2 _scrollPosition;
@@ -262,7 +262,7 @@ namespace PiRhoSoft.DocGenEditor
 			catch (Exception exception)
 			{
 				Debug.LogException(exception);
-				SetGenerator(null, "");
+				SetGenerator(null, string.Empty);
 			}
 		}
 

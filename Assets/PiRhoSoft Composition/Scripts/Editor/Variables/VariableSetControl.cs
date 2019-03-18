@@ -47,7 +47,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var name = _variables.GetVariableName(index);
 			var value = _variables.GetVariableValue(index);
-			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index] : VariableDefinition.Create("", VariableType.Empty);
+			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index] : VariableDefinition.Create(string.Empty, VariableType.Empty);
 
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{

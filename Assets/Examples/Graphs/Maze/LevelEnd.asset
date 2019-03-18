@@ -34,11 +34,6 @@ MonoBehaviour:
   m_Name: Fade Out
   m_EditorClassIdentifier: 
   Name: Fade Out
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 960, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114951541933712660}
@@ -64,17 +59,12 @@ MonoBehaviour:
   m_Name: Complete Message
   m_EditorClassIdentifier: 
   Name: Complete Message
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 640, y: 12.8}
   IsBreakpoint: 0
   Next: {fileID: 114186283410596920}
   Control:
-    InterfaceName: Interface
-    ControlName: Message
+    _variable: []
+    _lookups: []
   Interaction: 0
   WaitTime: 0
   IsLast: 1
@@ -97,11 +87,6 @@ MonoBehaviour:
   m_Name: Set Finished
   m_EditorClassIdentifier: 
   Name: Set Finished
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 640, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 114372619974763020}
@@ -120,14 +105,12 @@ MonoBehaviour:
   m_Name: Disable Character
   m_EditorClassIdentifier: 
   Name: Disable Character
-  This:
-    _variable:
-    - Player
-    _lookups:
-    - 
   GraphPosition: {x: 320, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 114539580467139412}
+  Target:
+    _variable: []
+    _lookups: []
 --- !u!114 &114951541933712660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,11 +124,6 @@ MonoBehaviour:
   m_Name: Load Scene
   m_EditorClassIdentifier: 
   Name: Load Scene
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 1280, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 0}

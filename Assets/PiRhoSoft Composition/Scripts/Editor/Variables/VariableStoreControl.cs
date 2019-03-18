@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEditor
 			Name = name;
 			Store = store;
 			Selected = null;
-			SelectedName = "";
+			SelectedName = string.Empty;
 
 			_label = new GUIContent(name);
 			_names = store.GetVariableNames().ToList();

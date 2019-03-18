@@ -12,7 +12,7 @@ namespace PiRhoSoft.UtilityEditor
 	{
 		private static AssetDeleteResult OnWillDeleteAsset(string path, RemoveAssetOptions options)
 		{
-			SceneReference.SceneMoved?.Invoke(path, "");
+			SceneReference.SceneMoved?.Invoke(path, string.Empty);
 			return AssetDeleteResult.DidNotDelete;
 		}
 

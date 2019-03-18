@@ -72,7 +72,7 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				var index = Array.IndexOf(values, s);
 				index = EditorGUI.Popup(rect, index, values);
-				s = index >= 0 ? values[index] : "";
+				s = index >= 0 ? values[index] : string.Empty;
 			}
 			else
 			{
