@@ -53,7 +53,33 @@ namespace PiRhoSoft.CompositionEngine
 			return string.Format(Format, numberString);
 		}
 
+		public string GetFormattedString(int number)
+		{
+			var numberString = GetNumberString(number);
+			return string.Format(Format, numberString);
+		}
+
 		private string GetNumberString(float number)
+		{
+			switch (Formatting)
+			{
+				case FormatType.Time:
+				{
+					var time = TimeSpan.FromSeconds(number);
+					return time.ToString(ValueFormat);
+				}
+				case FormatType.Number:
+				{
+					return number.ToString(ValueFormat);
+				}
+				default:
+				{
+					return number.ToString();
+				}
+			}
+		}
+
+		private string GetNumberString(int number)
 		{
 			switch (Formatting)
 			{
