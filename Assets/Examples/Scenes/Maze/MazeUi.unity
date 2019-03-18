@@ -349,7 +349,7 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 1
   Condition:
-    _statement: Player.JewelsNeeded > 0
+    _statement: Player.JewelsNeeded > 0;
 --- !u!114 &1161540521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -671,7 +671,7 @@ MonoBehaviour:
     NumberFormatting: 0
     ValueFormat: mm\:ss
   Expression:
-    _statement: Time() - Player.StartTime
+    _statement: Time() - Player.StartTime;
 --- !u!1 &1642846548
 GameObject:
   m_ObjectHideFlags: 0

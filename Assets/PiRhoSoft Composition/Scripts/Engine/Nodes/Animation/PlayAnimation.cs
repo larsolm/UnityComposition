@@ -17,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The Animation Player to play the clip on")]
 		[VariableConstraint(typeof(AnimationPlayer))]
-		public VariableReference Player;
+		public VariableReference AnimationPlayer;
 
 		[Tooltip("The Animation Clip to play")]
 		[InlineDisplay(PropagateLabel = true)]
@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<AnimationPlayer>(variables, Player, out var player))
+			if (Resolve<AnimationPlayer>(variables, AnimationPlayer, out var player))
 			{
 				if (Resolve(variables, Animation, out var animation))
 				{
