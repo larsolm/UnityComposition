@@ -5,16 +5,12 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class LookupOperation : Operation
 	{
-		public VariableReference Reference = new VariableReference();
-
-		public LookupOperation(string variable)
+		public VariableReference Reference { get; private set; }
+		public Operation Parameter { get; private set; }
+		public LookupOperation(string variable, Operation parameter)
 		{
-			Reference.Update(variable);
-		}
-
-		public override VariableValue Evaluate(IVariableStore variables)
-		{
-			return Reference.GetValue(variables);
+			Reference = new VariableReference(variable);
+			Parameter = parameter;
 		}
 
 		public override void ToString(StringBuilder builder)
@@ -25,6 +21,7 @@ namespace PiRhoSoft.CompositionEngine
 		public override void GetInputs(List<VariableDefinition> inputs, string source)
 		{
 			GetVariables(inputs, source);
+			Parameter?.GetInputs(inputs, source);
 		}
 
 		public override void GetOutputs(List<VariableDefinition> outputs, string source)
@@ -42,6 +39,27 @@ namespace PiRhoSoft.CompositionEngine
 			else if (Reference.IsAssigned && Reference.StoreName == source)
 			{
 				inputs.Add(VariableDefinition.Create(Reference.RootName, VariableType.Empty));
+			}
+		}
+
+		public override VariableValue Evaluate(IVariableStore variables)
+		{
+			var value = Reference.GetValue(variables);
+
+			if (Parameter == null)
+			{
+				return value;
+			}
+			else
+			{
+				var lookup = Parameter.Evaluate(variables);
+
+				if (lookup.Type == VariableType.String)
+					return VariableReference.ResolveLookup(value, lookup.String);
+				else if (lookup.Type == VariableType.Int)
+					return VariableReference.ResolveLookup(value, lookup.Int);
+				else
+					return VariableValue.Empty;
 			}
 		}
 	}
