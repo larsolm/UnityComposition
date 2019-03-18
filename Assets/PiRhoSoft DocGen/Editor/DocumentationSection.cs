@@ -40,7 +40,7 @@ namespace PiRhoSoft.DocGenEditor
 			All = ~0
 		}
 
-		public string Name = "";
+		public string Name = string.Empty;
 
 		[EnumButtons(MinimumWidth = 80)] public DeclarationType IncludedDeclarations = DeclarationType.Instance;
 		[EnumButtons(MinimumWidth = 80)] public AccessLevel IncludedAccessLevels = AccessLevel.Public | AccessLevel.Protected;
@@ -95,7 +95,7 @@ namespace PiRhoSoft.DocGenEditor
 					.Replace(DocumentationGenerator.TypeIdTag, type.Name)
 					.Replace(DocumentationGenerator.TypeIdTag, type.NiceName)
 					.Replace(_membersTag, members)
-				: "";
+				: string.Empty;
 		}
 
 		private string GenerateValues(DocumentationType type, DocumentationCategory category)
@@ -280,7 +280,7 @@ namespace PiRhoSoft.DocGenEditor
 		private string GenerateProperty(PropertyInfo property, DocumentationCategory category)
 		{
 			var method = GetAbstractDecorator(property.GetMethod);
-			var readOnly = !IsIncluded(property.SetMethod, IncludedAccessLevels) ? _readOnlyDecorator : "";
+			var readOnly = !IsIncluded(property.SetMethod, IncludedAccessLevels) ? _readOnlyDecorator : string.Empty;
 
 			var decorators = GenerateDecorators(category, readOnly, method);
 			var type = category.GetLink(property.PropertyType);
@@ -311,7 +311,7 @@ namespace PiRhoSoft.DocGenEditor
 		{
 			return method.IsAbstract
 				? _abstractDecorator
-				: (method.IsVirtual ? _virtualDecorator : "");
+				: (method.IsVirtual ? _virtualDecorator : string.Empty);
 		}
 
 		private string GenerateDecorators(DocumentationCategory category, params string[] decorators)
@@ -333,7 +333,7 @@ namespace PiRhoSoft.DocGenEditor
 
 		private string GenerateParameter(ParameterInfo parameter, DocumentationCategory category)
 		{
-			var decorator = parameter.ParameterType.IsByRef ? (parameter.IsOut ? _outDecorator : _refDecorator) : "";
+			var decorator = parameter.ParameterType.IsByRef ? (parameter.IsOut ? _outDecorator : _refDecorator) : string.Empty;
 
 			var decorators = GenerateDecorators(category, decorator);
 			var type = category.GetLink(parameter.ParameterType);
@@ -350,7 +350,7 @@ namespace PiRhoSoft.DocGenEditor
 
 			return !string.IsNullOrEmpty(members)
 				? string.Format("{0}{1}{2}", _genericOpener, members, _genericCloser)
-				: "";
+				: string.Empty;
 		}
 
 		private string GenerateGenericParameter(Type type, DocumentationCategory category)

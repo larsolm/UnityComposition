@@ -8,11 +8,11 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "instruction-node")]
 	public class InstructionNode : InstructionGraphNode
 	{
-		[Tooltip("The instruction to run when this node is reached")]
-		public InstructionCaller Instruction = new InstructionCaller();
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
+
+		[Tooltip("The instruction to run when this node is reached")]
+		public InstructionCaller Instruction = new InstructionCaller();
 
 		[Tooltip("The object to use as the root for Instruction")]
 		public VariableReference Root = new VariableReference(InstructionStore.RootStoreName);

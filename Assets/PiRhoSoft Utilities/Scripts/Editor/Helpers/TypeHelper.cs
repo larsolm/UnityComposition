@@ -157,7 +157,7 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				var types = ListDerivedTypes(baseType);
 				var ordered = types.Select(type => new ListedType(types, baseType, type)).OrderBy(type => type.Name);
-				var none = includeNone ? new List<GUIContent> { new GUIContent("None"), new GUIContent("") } : new List<GUIContent>();
+				var none = includeNone ? new List<GUIContent> { new GUIContent("None"), new GUIContent() } : new List<GUIContent>();
 
 				list.Types = ordered.Select(type => type.Type).ToList();
 				list.Names = Enumerable.Concat(none, ordered.Select(type => new GUIContent(type.Name))).ToArray();

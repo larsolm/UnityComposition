@@ -673,7 +673,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -716,7 +716,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -1056,7 +1056,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -1075,7 +1075,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -1099,7 +1099,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -1286,6 +1286,7 @@ GameObject:
   - component: {fileID: 863000625}
   - component: {fileID: 863000631}
   - component: {fileID: 863000630}
+  - component: {fileID: 863000632}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1343,32 +1344,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 647905b9567d4a24cbb18c2ba0fb8dd3, type: 2}
-  Camera: {fileID: 663784546}
-  World: {fileID: 0}
-  Acceleration: 1
-  OnStart:
-    _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}
-    _inputs:
-    - Type: 1
-      Definition:
-        _name: Level
-        _type: 4
-        _availability: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable: []
-        _lookups: []
-      _value:
-        Name: 
-        Type: 4
-        Data: 1
-        Object: {fileID: 0}
-    _outputs: []
   Variables:
     _data:
     - Name: RedKey
@@ -1395,7 +1370,17 @@ MonoBehaviour:
       Type: 3
       Data: 0
       Object: {fileID: 0}
-    _version: 8
+    - Name: JewelsNeeded
+      Type: 2
+      Data: 0
+      Object: {fileID: 0}
+    - Name: Jewels
+      Type: 2
+      Data: 0
+      Object: {fileID: 0}
+    _version: 10
+  Camera: {fileID: 663784546}
+  Acceleration: 1
 --- !u!212 &863000628
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1566,6 +1551,41 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &863000632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863000624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAwake:
+    _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}
+    _inputs:
+    - Type: 1
+      Definition:
+        _name: Level
+        _type: 4
+        _tag: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable: []
+        _lookups: []
+      _value:
+        Name: 
+        Type: 4
+        Data: 1
+        Object: {fileID: 0}
+    _outputs: []
 --- !u!1 &867759259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1696,7 +1716,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -1715,7 +1735,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -1739,7 +1759,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -2548,7 +2568,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -2571,7 +2591,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -2721,7 +2741,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -2744,7 +2764,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -2894,7 +2914,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -2917,7 +2937,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -3279,7 +3299,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -3302,7 +3322,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -3616,7 +3636,7 @@ MonoBehaviour:
       Definition:
         _name: Color
         _type: 4
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -3635,7 +3655,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0
@@ -3659,7 +3679,7 @@ MonoBehaviour:
       Definition:
         _name: Key
         _type: 0
-        _availability: 
+        _tag: 
         _initializer:
           _statement: 
         _useRangeConstraint: 0

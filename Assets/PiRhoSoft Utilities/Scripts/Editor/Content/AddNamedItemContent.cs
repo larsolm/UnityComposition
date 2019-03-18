@@ -5,7 +5,7 @@ namespace PiRhoSoft.UtilityEditor
 {
 	public abstract class AddNamedItemContent : IAddContent
 	{
-		private string _name = "";
+		private string _name = string.Empty;
 		private bool _nameValid = true;
 		private bool _focusName = true;
 
@@ -55,7 +55,7 @@ namespace PiRhoSoft.UtilityEditor
 
 		public void Reset()
 		{
-			_name = "";
+			_name = string.Empty;
 			Reset_();
 		}
 	}

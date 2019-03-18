@@ -76,7 +76,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (result.Type != expectedType && _currentOperation == null) // _currentOperation will not be null if there was an exception in which case an error was already logged
 			{
-				var statement = _operations != null && _operations.Count > 0 ? _operations[_operations.Count - 1].ToString() : "";
+				var statement = _operations != null && _operations.Count > 0 ? _operations[_operations.Count - 1].ToString() : string.Empty;
 				Debug.LogWarningFormat(context, _invalidResultWarning, statement, expectedType, result.Type);
 			}
 

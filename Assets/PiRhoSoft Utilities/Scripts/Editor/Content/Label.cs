@@ -34,7 +34,7 @@ namespace PiRhoSoft.UtilityEditor
 
 		public static string GetTooltip(FieldInfo field)
 		{
-			return field?.GetCustomAttribute<TooltipAttribute>()?.tooltip ?? "";
+			return field?.GetCustomAttribute<TooltipAttribute>()?.tooltip ?? string.Empty;
 		}
 
 		#endregion

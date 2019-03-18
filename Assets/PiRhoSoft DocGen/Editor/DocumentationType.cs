@@ -88,7 +88,7 @@ namespace PiRhoSoft.DocGenEditor
 		{
 			return Type.IsGenericType
 				? category.GetGenerics(Type)
-				: "";
+				: string.Empty;
 		}
 
 		private string GenerateBases(DocumentationCategory category)

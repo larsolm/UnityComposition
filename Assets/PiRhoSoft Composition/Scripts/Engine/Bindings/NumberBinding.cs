@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.UtilityEngine;
+using System.Collections;
 using TMPro;
 using UnityEngine;
 
@@ -11,6 +12,8 @@ namespace PiRhoSoft.CompositionEngine
 	public class NumberBinding : VariableBinding
 	{
 		private const string _invalidTextWarning = "(CIBNBIT) Unable to animate text for number binding {0}: the displayed text is not an int";
+
+		public BindingFormatter Format;
 
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
@@ -52,7 +55,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void SetValue(int value)
 		{
-			_text.text = value.ToString();
+			_text.text = Format.GetFormattedString(value);
 		}
 
 		private IEnumerator AnimateValue(int target, BindingAnimationStatus status)

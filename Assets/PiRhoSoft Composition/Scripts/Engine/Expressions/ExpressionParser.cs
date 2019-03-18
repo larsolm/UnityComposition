@@ -375,6 +375,9 @@ namespace PiRhoSoft.CompositionEngine
 			AddCommand("Sqrt", new SqrtCommand());
 			AddCommand("Tan", new TanCommand());
 			AddCommand("Truncate", new TruncateCommand());
+			AddCommand("Time", new TimeCommand());
+			AddCommand("Realtime", new RealtimeCommand());
+			AddCommand("UnscaledTime", new UnscaledTimeCommand());
 
 			AddCommand("PI", new ConstantCommand(VariableValue.Create(Mathf.PI)));
 			AddCommand("Deg2Rad", new ConstantCommand(VariableValue.Create(Mathf.Deg2Rad)));

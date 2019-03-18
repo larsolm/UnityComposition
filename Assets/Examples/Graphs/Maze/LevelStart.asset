@@ -20,7 +20,7 @@ MonoBehaviour:
     - {fileID: 114874321698637932}
     - {fileID: 114620517716717954}
     - {fileID: 114866516215429464}
-    - {fileID: 114854819618255414}
+    - {fileID: 114728111643151580}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114906063048417074}
   Process: {fileID: 114866516215429464}
@@ -38,14 +38,14 @@ MonoBehaviour:
   m_Name: Enable Player
   m_EditorClassIdentifier: 
   Name: Enable Player
-  This:
-    _variable:
-    - Player
-    _lookups:
-    - 
   GraphPosition: {x: 320, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 0}
+  Target:
+    _variable:
+    - root
+    _lookups:
+    - 
 --- !u!114 &114602872160050604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,17 +59,12 @@ MonoBehaviour:
   m_Name: Level Message
   m_EditorClassIdentifier: 
   Name: Level Message
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 1177.6, y: 25.6}
+  GraphPosition: {x: 793.60004, y: 102.4}
   IsBreakpoint: 0
-  Next: {fileID: 114854819618255414}
+  Next: {fileID: 114728111643151580}
   Control:
-    InterfaceName: Interface
-    ControlName: Message
+    _variable: []
+    _lookups: []
   Interaction: 0
   WaitTime: 0
   IsLast: 1
@@ -90,12 +85,7 @@ MonoBehaviour:
   m_Name: Load Ui
   m_EditorClassIdentifier: 
   Name: Load Ui
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 601.60004, y: 25.6}
+  GraphPosition: {x: 640, y: -51.2}
   IsBreakpoint: 0
   Next: {fileID: 114874321698637932}
   Scene:
@@ -103,7 +93,7 @@ MonoBehaviour:
   WaitForCompletion: 1
   CleanupAssets: 1
   Additive: 1
---- !u!114 &114854819618255414
+--- !u!114 &114728111643151580
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,23 +102,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: LevelLoop
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Start Time
   m_EditorClassIdentifier: 
-  Name: LevelLoop
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 1484.8, y: 25.6}
+  Name: Set Start Time
+  GraphPosition: {x: 1088, y: 25.6}
   IsBreakpoint: 0
-  Instruction:
-    _instruction: {fileID: 11400000, guid: 2b4848afb74946443a55bbef3441d398, type: 2}
-    _inputs: []
-    _outputs: []
   Next: {fileID: 0}
-  WaitForCompletion: 0
+  Expression:
+    _statement: Player.StartTime = Time();
 --- !u!114 &114866516215429464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,11 +124,6 @@ MonoBehaviour:
   m_Name: Obscure
   m_EditorClassIdentifier: 
   Name: Obscure
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 320, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 114620517716717954}
@@ -172,12 +149,7 @@ MonoBehaviour:
   m_Name: Fade In
   m_EditorClassIdentifier: 
   Name: Fade In
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 883.2, y: 25.6}
+  GraphPosition: {x: 704, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 114602872160050604}
   Transition:
@@ -202,11 +174,11 @@ MonoBehaviour:
   m_Name: Disable Player
   m_EditorClassIdentifier: 
   Name: Disable Player
-  This:
-    _variable:
-    - Player
-    _lookups:
-    - 
   GraphPosition: {x: 320, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 0}
+  Target:
+    _variable:
+    - root
+    _lookups:
+    - 

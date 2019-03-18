@@ -295,8 +295,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindingGroup: 
+  AutoUpdate: 1
   Condition:
-    _statement: local.Operation == "Multiply";
+    _statement: Operation == "Multiply";
 --- !u!114 &134126814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -346,9 +347,8 @@ GameObject:
   - component: {fileID: 139945629}
   - component: {fileID: 139945628}
   - component: {fileID: 139945627}
-  - component: {fileID: 139945631}
   m_Layer: 5
-  m_Name: Calculator
+  m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -434,28 +434,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &139945631
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 139945626}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdd7460612f788e41879903f8778af9c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Calculator
-  HorizontalAxis: Horizontal
-  VerticalAxis: Vertical
-  AcceptButton: Submit
-  CancelButton: Cancel
-  InterfaceControls:
-    _keys:
-    - Display
-    _values:
-    - {fileID: 1589266199}
 --- !u!1 &231015804
 GameObject:
   m_ObjectHideFlags: 0
@@ -1479,12 +1457,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindingGroup: 
+  AutoUpdate: 1
   Variable:
     _variable:
-    - local
     - Display
     _lookups:
-    - 
     - 
   Speed: 0
   UseScaledTime: 1
@@ -2564,7 +2541,6 @@ GameObject:
   - component: {fileID: 922716117}
   - component: {fileID: 922716116}
   - component: {fileID: 922716115}
-  - component: {fileID: 922716114}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -2572,30 +2548,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &922716114
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 922716113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnLeave:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
 --- !u!81 &922716115
 AudioListener:
   m_ObjectHideFlags: 0
@@ -3201,8 +3153,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindingGroup: 
+  AutoUpdate: 1
   Condition:
-    _statement: local.Operation == "Plus";
+    _statement: Operation == "Plus";
 --- !u!114 &1136881293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3717,8 +3670,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindingGroup: 
+  AutoUpdate: 1
   Condition:
-    _statement: local.Operation == "Divide";
+    _statement: Operation == "Divide";
 --- !u!114 &1413441507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4061,7 +4015,7 @@ GameObject:
   - component: {fileID: 1589266197}
   - component: {fileID: 1589266199}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Calculator
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4149,11 +4103,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1589266195}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 02fbd8944e4ac4c4783de45f377eeddd, type: 3}
+  m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DependentObjects:
-    _items: []
+  OnAwake:
+    _instruction: {fileID: 11400000, guid: 76258c046af12fe4381f5750a0690a1d, type: 2}
+    _inputs: []
+    _outputs: []
 --- !u!1 &1611542636
 GameObject:
   m_ObjectHideFlags: 0
@@ -4205,8 +4161,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BindingGroup: 
+  AutoUpdate: 1
   Condition:
-    _statement: local.Operation == "Minus";
+    _statement: Operation == "Minus";
 --- !u!114 &1611542639
 MonoBehaviour:
   m_ObjectHideFlags: 0

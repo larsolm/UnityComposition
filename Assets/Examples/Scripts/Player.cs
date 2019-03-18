@@ -11,25 +11,12 @@ namespace PiRhoSoft.CompositionExample
 		[MappedVariable] public Camera Camera;
 		[MappedVariable] public float Acceleration = 1.0f;
 
-		public InstructionCaller OnStart = new InstructionCaller();
-
 		private Rigidbody2D _body;
 		private Collider2D[] _colliders = new Collider2D[6];
 
 		void Awake()
 		{
 			_body = GetComponent<Rigidbody2D>();
-		}
-
-		void OnDisable()
-		{
-			_body.velocity = Vector2.zero;
-		}
-
-		void Start()
-		{
-			if (OnStart.Instruction)
-				CompositionManager.Instance.RunInstruction(OnStart, this);
 		}
 
 		void Update()

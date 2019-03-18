@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 		public string Name { get; private set; }
 		public VariableValue Value { get; private set; }
 
-		public static Variable Empty => Create("", VariableValue.Empty);
+		public static Variable Empty => Create(string.Empty, VariableValue.Empty);
 
 		public static Variable Create(string name, VariableValue value)
 		{

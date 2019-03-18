@@ -42,7 +42,7 @@ namespace PiRhoSoft.UtilityEditor
 						_dictionaryControl.MakeDrawable(display.ItemDisplay, null);
 
 					if (display.AllowAdd)
-						_dictionaryControl.MakeAddable(_addButton, display.AddLabel == null ? new GUIContent("Add Item") : (display.AddLabel == "" ? GUIContent.none : new GUIContent(display.AddLabel)));
+						_dictionaryControl.MakeAddable(_addButton, display.AddLabel == null ? new GUIContent("Add Item") : (display.AddLabel == string.Empty ? GUIContent.none : new GUIContent(display.AddLabel)));
 
 					if (display.AllowRemove)
 						_dictionaryControl.MakeRemovable(_removeButton);

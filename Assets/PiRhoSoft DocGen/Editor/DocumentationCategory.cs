@@ -41,7 +41,7 @@ namespace PiRhoSoft.DocGenEditor
 			[TextArea(2, 8)] public string ParameterSeparator = ", ";
 
 			[TextArea(2, 8)] public string Decorator = "{Name} ";
-			[TextArea(2, 8)] public string DecoratorSeparator = "";
+			[TextArea(2, 8)] public string DecoratorSeparator = string.Empty;
 
 			public string InternalLink = "{TypeName}/{TypeNiceName}/{TypeId}: {TypeFilename}";
 			public string UnknownLink = "{TypeName}/{TypeNiceName}/{TypeId}";
@@ -57,7 +57,7 @@ namespace PiRhoSoft.DocGenEditor
 		[Serializable]
 		public class ExternalNamespaceList : SerializedList<ExternalNamespace> { }
 
-		public string Name = "";
+		public string Name = string.Empty;
 		public string CategoryFilename = "Generated/{CategoryId}.txt";
 		public string TypeFilename = "Generated/{CategoryId}/{TypeId}.txt";
 

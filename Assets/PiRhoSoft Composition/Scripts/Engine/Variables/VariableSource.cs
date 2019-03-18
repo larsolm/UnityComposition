@@ -64,7 +64,7 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class StringVariableSource : VariableSource<string>
 	{
-		public StringVariableSource() => Value = "";
+		public StringVariableSource() => Value = string.Empty;
 		public StringVariableSource(string defaultValue) => Value = defaultValue;
 	}
 

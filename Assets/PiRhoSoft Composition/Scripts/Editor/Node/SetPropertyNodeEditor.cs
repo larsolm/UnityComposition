@@ -43,7 +43,8 @@ namespace PiRhoSoft.CompositionEditor
 			if (_node.ComponentType != null)
 			{
 				var fields = _node.ComponentType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly);
-				var properties = _node.ComponentType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly).Where(property => property.SetMethod != null && property.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
+				var properties = _node.ComponentType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
+					.Where(property => property.SetMethod != null && property.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
 
 				_propertyNames = new string[fields.Length + properties.Length];
 				_propertyTypes = new Type[fields.Length + properties.Length];
@@ -93,7 +94,7 @@ namespace PiRhoSoft.CompositionEditor
 						if (_node.SourceType == VariableSourceType.Reference)
 							VariableReferenceControl.Draw(_valueReferenceContent.Content, _node.ValueReference);
 						else if (_node.SourceType == VariableSourceType.Value) // special case VariableType.Object here so we get a constrained object picker
-							_node.Value = VariableValueDrawer.Draw(_valueContent.Content, _node.Value, _variableType == VariableType.Object ? VariableDefinition.Create("", _node.PropertyType) : VariableDefinition.Create("", _variableType));
+							_node.Value = VariableValueDrawer.Draw(_valueContent.Content, _node.Value, _variableType == VariableType.Object ? VariableDefinition.Create(string.Empty, _node.PropertyType) : VariableDefinition.Create(string.Empty, _variableType));
 					}
 				}
 			}

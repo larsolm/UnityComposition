@@ -84,7 +84,7 @@ namespace PiRhoSoft.CompositionEngine
 			SetInteraction(MessageControlDisplay.None, MessageInteractionType.DontWait, false);
 
 			if (DisplayText != null)
-				DisplayText.text = "";
+				DisplayText.text = string.Empty;
 		}
 
 		protected override void Teardown()
@@ -92,7 +92,7 @@ namespace PiRhoSoft.CompositionEngine
 			SetInteraction(MessageControlDisplay.None, MessageInteractionType.DontWait, false);
 
 			if (DisplayText != null)
-				DisplayText.text = "";
+				DisplayText.text = string.Empty;
 		}
 
 		protected void SetInteraction(MessageControlDisplay display, MessageInteractionType interaction, bool isLast)

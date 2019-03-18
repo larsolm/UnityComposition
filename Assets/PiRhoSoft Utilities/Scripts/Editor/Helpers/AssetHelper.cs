@@ -203,7 +203,7 @@ namespace PiRhoSoft.UtilityEditor
 				if (includeNone)
 				{
 					list.Names[index++] = new GUIContent("None");
-					list.Names[index++] = new GUIContent("");
+					list.Names[index++] = new GUIContent();
 				}
 
 				for (var i = 0; i < list.Assets.Count; i++)
@@ -215,7 +215,7 @@ namespace PiRhoSoft.UtilityEditor
 
 				if (includeCreate)
 				{
-					list.Names[index++] = new GUIContent("");
+					list.Names[index++] = new GUIContent();
 
 					foreach (var name in list.Types.Names)
 						list.Names[index++] = new GUIContent("Create/" + name.text);
@@ -239,7 +239,7 @@ namespace PiRhoSoft.UtilityEditor
 
 		public static string FindCommonPath(IEnumerable<string> paths)
 		{
-			var prefix = paths.FirstOrDefault() ?? "";
+			var prefix = paths.FirstOrDefault() ?? string.Empty;
 
 			foreach (var path in paths)
 			{
@@ -256,7 +256,7 @@ namespace PiRhoSoft.UtilityEditor
 
 				var slash = prefix.LastIndexOf('/');
 				if (slash != prefix.Length - 1)
-					prefix = slash >= 0 ? prefix.Substring(0, slash + 1) : "";
+					prefix = slash >= 0 ? prefix.Substring(0, slash + 1) : string.Empty;
 			}
 
 			return prefix;
