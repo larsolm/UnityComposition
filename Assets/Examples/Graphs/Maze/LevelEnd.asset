@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: Complete Message
   m_EditorClassIdentifier: 
   Name: Complete Message
-  GraphPosition: {x: 640, y: 12.8}
+  GraphPosition: {x: 640, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114186283410596920}
   Control:

@@ -44,7 +44,8 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at")]
-		public Vector3 Position;
+		[InlineDisplay(PropagateLabel = true)]
+		public Vector3VariableSource Position = new Vector3VariableSource();
 
 		public override Color NodeColor => Colors.SequencingLight;
 
@@ -52,6 +53,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			Prefab.GetInputs(inputs);
 			ObjectName.GetInputs(inputs);
+			Position.GetInputs(inputs);
 
 			if (Positioning == ObjectPositioning.Child && InstructionStore.IsInput(Parent))
 				inputs.Add(VariableDefinition.Create<GameObject>(Parent.RootName));
@@ -72,19 +74,21 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				GameObject spawned = null;
 
+				ResolveOther(variables, Position, out var position);
+
 				if (Positioning == ObjectPositioning.Absolute)
 				{
-					spawned = Instantiate(prefab, Position, Quaternion.identity);
+					spawned = Instantiate(prefab, position, Quaternion.identity);
 				}
 				else if (Positioning == ObjectPositioning.Relative)
 				{
 					if (Resolve<GameObject>(variables, Object, out var obj))
-						spawned = Instantiate(prefab, obj.transform.position + Position, Quaternion.identity);
+						spawned = Instantiate(prefab, obj.transform.position + position, Quaternion.identity);
 				}
 				else if (Positioning == ObjectPositioning.Child)
 				{
 					if (Resolve<GameObject>(variables, Parent, out var parent))
-						spawned = Instantiate(prefab, parent.transform.position + Position, Quaternion.identity, parent.transform);
+						spawned = Instantiate(prefab, parent.transform.position + position, Quaternion.identity, parent.transform);
 				}
 
 				if (spawned)

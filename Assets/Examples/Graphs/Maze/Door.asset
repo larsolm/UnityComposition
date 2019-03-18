@@ -35,11 +35,6 @@ MonoBehaviour:
   m_Name: Use Key
   m_EditorClassIdentifier: 
   Name: Use Key
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 691.2, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: 114812006277454240}
@@ -58,12 +53,7 @@ MonoBehaviour:
   m_Name: Has Key
   m_EditorClassIdentifier: 
   Name: Has Key
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
-  GraphPosition: {x: 345.6, y: -12.8}
+  GraphPosition: {x: 332.80002, y: -12.8}
   IsBreakpoint: 0
   OnTrue: {fileID: 114097974279871678}
   OnFalse: {fileID: 114926778890910636}
@@ -82,14 +72,12 @@ MonoBehaviour:
   m_Name: Destroy Door(Clone)
   m_EditorClassIdentifier: 
   Name: Destroy Door
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 1126.4, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
+  Target:
+    _variable: []
+    _lookups: []
 --- !u!114 &114812006277454240
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,14 +91,14 @@ MonoBehaviour:
   m_Name: Disable Collision
   m_EditorClassIdentifier: 
   Name: Disable Collision
-  This:
-    _variable:
-    - this
-    _lookups:
-    - BoxCollider2D
   GraphPosition: {x: 998.4, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114945545809423866}
+  Target:
+    _variable:
+    - Root
+    _lookups:
+    - Collider2D
 --- !u!114 &114926778890910636
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,17 +112,16 @@ MonoBehaviour:
   m_Name: Key Needed Message
   m_EditorClassIdentifier: 
   Name: Key Needed Message
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 691.2, y: 38.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    InterfaceName: Interface
-    ControlName: Message
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
   Interaction: 3
   WaitTime: 1
   IsLast: 0
@@ -150,17 +137,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
-  m_Name: Animate Door(Clone)
+  m_Name: Animate Door
   m_EditorClassIdentifier: 
   Name: Animate Door
-  This:
-    _variable:
-    - this
-    _lookups:
-    - GameObject
   GraphPosition: {x: 1049.6, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: 114329444707264830}
+  Transform:
+    _variable: []
+    _lookups: []
   TargetPosition: {x: 0, y: 0, z: 0}
   TargetRotation: {x: 0, y: 0, z: 0, w: 1}
   TargetScale: {x: 0, y: 0, z: 1}

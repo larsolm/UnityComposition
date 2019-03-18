@@ -38,8 +38,9 @@ namespace PiRhoSoft.CompositionEngine
 		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.ChildOfParent)]
 		public VariableReference Parent = new VariableReference();
 
-		[Tooltip("The position to spawn the object at - in local space if parent is set")]
-		public Vector3 Position;
+		[Tooltip("The position to spawn the object at")]
+		[InlineDisplay(PropagateLabel = true)]
+		public Vector3VariableSource Position = new Vector3VariableSource();
 
 		[Tooltip("Whether to wait for the effect to finish before moving to Next")]
 		public bool WaitForCompletion = false;
@@ -55,6 +56,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			Effect.GetInputs(inputs);
 			EffectName.GetInputs(inputs);
+			Position.GetInputs(inputs);
 
 			if (Positioning == ObjectPositioning.ChildOfParent && InstructionStore.IsInput(Parent))
 				inputs.Add(VariableDefinition.Create<GameObject>(Parent.RootName));
@@ -69,19 +71,21 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				GameObject spawned = null;
 
+				ResolveOther(variables, Position, out var position);
+
 				if (Positioning == ObjectPositioning.Absolute)
 				{
-					spawned = Instantiate(effect, Position, Quaternion.identity);
+					spawned = Instantiate(effect, position, Quaternion.identity);
 				}
 				else if (Positioning == ObjectPositioning.RelativeToObject)
 				{
 					if (Resolve(variables, Object, out GameObject obj))
-						spawned = Instantiate(effect, obj.transform.position + Position, Quaternion.identity);
+						spawned = Instantiate(effect, obj.transform.position + position, Quaternion.identity);
 				}
 				else if (Positioning == ObjectPositioning.ChildOfParent)
 				{
 					if (Resolve(variables, Parent, out GameObject parent))
-						spawned = Instantiate(effect, parent.transform.position + Position, Quaternion.identity, parent.transform);
+						spawned = Instantiate(effect, parent.transform.position + position, Quaternion.identity, parent.transform);
 				}
 
 				if (spawned && Resolve(variables, EffectName, out var objectName))
