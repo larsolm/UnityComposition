@@ -6,10 +6,10 @@
 		{
 			var result = Right.Evaluate(variables);
 
-			if (result.Type == VariableType.Boolean)
-				return VariableValue.Create(!result.Boolean);
+			if (result.Type == VariableType.Bool)
+				return VariableValue.Create(!result.Bool);
 			else
-				throw new ExpressionEvaluationException(MismatchedBooleanType1Exception, '-', result.Type);
+				throw TypeMismatch(result.Type, VariableType.Bool);
 		}
 	}
 }

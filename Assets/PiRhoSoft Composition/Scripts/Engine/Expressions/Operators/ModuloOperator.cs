@@ -2,38 +2,36 @@
 {
 	public class ModuloOperator : InfixOperation
 	{
-		private const string _invalidDivisionException = "cannot divide by 0";
-
-		public static VariableValue Modulo(ref VariableValue left, ref VariableValue right)
+		public static VariableValue Modulo(string symbol, ref VariableValue left, ref VariableValue right)
 		{
 			switch (right.Type)
 			{
-				case VariableType.Integer:
+				case VariableType.Int:
 				{
-					if (right.Integer == 0)
-						throw new ExpressionEvaluationException(_invalidDivisionException);
+					if (right.Int == 0)
+						throw ExpressionEvaluationException.DivideByZero(symbol);
 
 					switch (left.Type)
 					{
-						case VariableType.Integer: return VariableValue.Create(left.Integer % right.Integer);
-						case VariableType.Number: return VariableValue.Create(left.Number % right.Integer);
+						case VariableType.Int: return VariableValue.Create(left.Int % right.Int);
+						case VariableType.Float: return VariableValue.Create(left.Float % right.Float);
 					}
 
 					break;
 				}
-				case VariableType.Number:
+				case VariableType.Float:
 				{
 					switch (left.Type)
 					{
-						case VariableType.Integer: return VariableValue.Create(left.Integer % right.Number);
-						case VariableType.Number: return VariableValue.Create(left.Number % right.Number);
+						case VariableType.Int: return VariableValue.Create(left.Int % right.Float);
+						case VariableType.Float: return VariableValue.Create(left.Float % right.Float);
 					}
 
 					break;
 				}
 			}
 
-			throw new ExpressionEvaluationException(MismatchedMathType2Exception, '%', left.Type, right.Type);
+			throw ExpressionEvaluationException.InfixTypeMismatch(symbol, left.Type, right.Type, VariableType.Int, VariableType.Float);
 		}
 
 		public override VariableValue Evaluate(IVariableStore variables)
@@ -41,7 +39,7 @@
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);
 
-			return Modulo(ref left, ref right);
+			return Modulo(Symbol, ref left, ref right);
 		}
 	}
 }

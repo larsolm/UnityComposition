@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 		[VariableConstraint(typeof(Component))]
 		public VariableReference Target = new VariableReference();
 
-		[Tooltip("Whether to set the value to a reference or a specfied value")]
+		[Tooltip("Whether to set the value to a reference or a specified value")]
 		public VariableSourceType SourceType;
 
 		[Tooltip("The target value reference to set the property to")]
@@ -48,13 +48,24 @@ namespace PiRhoSoft.CompositionEngine
 
 					switch (value.Type)
 					{
-						case VariableType.Boolean: obj = value.Boolean; break;
-						case VariableType.Integer: obj = value.Integer; break;
-						case VariableType.Number: obj = value.Number; break;
+						case VariableType.Bool: obj = value.Bool; break;
+						case VariableType.Int: obj = value.Int; break;
+						case VariableType.Float: obj = value.Float; break;
+						case VariableType.Int2: obj = value.Int2; break;
+						case VariableType.Int3: obj = value.Int3; break;
+						case VariableType.IntRect: obj = value.IntRect; break;
+						case VariableType.IntBounds: obj = value.IntBounds; break;
+						case VariableType.Vector2: obj = value.Vector2; break;
+						case VariableType.Vector3: obj = value.Vector3; break;
+						case VariableType.Vector4: obj = value.Vector4; break;
+						case VariableType.Quaternion: obj = value.Quaternion; break;
+						case VariableType.Rect: obj = value.Rect; break;
+						case VariableType.Bounds: obj = value.Bounds; break;
+						case VariableType.Color: obj = value.Color; break;
 						case VariableType.String: obj = value.String; break;
 						case VariableType.Object: obj = value.Object; break;
 						case VariableType.Store: obj = value.Store; break;
-						case VariableType.Raw: obj = value.RawObject; break;
+						case VariableType.Other: obj = value.Other; break;
 					}
 
 					if (obj != null)

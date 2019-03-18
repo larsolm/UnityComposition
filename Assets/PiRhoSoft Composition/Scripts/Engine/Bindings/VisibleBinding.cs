@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			try
 			{
-				Condition.Evaluate(variables).TryGetBoolean(out active);
+				Condition.Evaluate(variables).TryGetBool(out active);
 			}
 			catch
 			{

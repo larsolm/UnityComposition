@@ -13,23 +13,23 @@ namespace PiRhoSoft.CompositionEngine
 				var min = parameters[1].Evaluate(variables);
 				var max = parameters[2].Evaluate(variables);
 
-				if (value.Type != VariableType.Integer && value.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, value.Type, 0, VariableType.Integer, VariableType.Number);
+				if (!value.HasNumber)
+					throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Int, VariableType.Float);
 
-				if (min.Type != VariableType.Integer && min.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, min.Type, 1, VariableType.Integer, VariableType.Number);
+				if (!min.HasNumber)
+					throw CommandEvaluationException.WrongParameterType(name, 1, min.Type, VariableType.Int, VariableType.Float);
 
-				if (max.Type != VariableType.Integer && max.Type != VariableType.Number)
-					throw new CommandEvaluationException(name, Command.WrongParameterType2Exception, max.Type, 2, VariableType.Integer, VariableType.Number);
+				if (!max.HasNumber)
+					throw CommandEvaluationException.WrongParameterType(name, 2, max.Type, VariableType.Int, VariableType.Float);
 
-				if (min.Number > max.Number)
-					throw new CommandEvaluationException(name, Command.InvalidRangeException, min.Number, max.Number);
-
-				return VariableValue.Create(Mathf.Clamp(value.Number, min.Number, max.Number));
+				if (value.Type == VariableType.Int && min.Type == VariableType.Int && max.Type == VariableType.Int)
+					return VariableValue.Create(Mathf.Clamp(value.Int, min.Int, max.Int));
+				else
+					return VariableValue.Create(Mathf.Clamp(value.Number, min.Number, max.Number));
 			}
 			else
 			{
-				throw new CommandEvaluationException(name, Command.WrongParameterCountException, parameters.Count, parameters.Count == 1 ? "" : "s", 3);
+				throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 3);
 			}
 		}
 	}

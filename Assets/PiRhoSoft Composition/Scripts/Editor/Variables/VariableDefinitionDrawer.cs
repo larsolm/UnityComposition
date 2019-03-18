@@ -139,12 +139,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static bool HasInitializer(VariableType type, VariableInitializerType initializer)
 		{
-			return initializer != VariableInitializerType.None && (type == VariableType.Boolean || type == VariableType.Integer || type == VariableType.Number || type == VariableType.String);
+			return initializer != VariableInitializerType.None && (type == VariableType.Bool || type == VariableType.Int || type == VariableType.Float || type == VariableType.String);
 		}
 
 		private static bool HasConstraint(VariableType type)
 		{
-			return type == VariableType.Integer || type == VariableType.Number || type == VariableType.String || type == VariableType.Object;
+			return type == VariableType.Int || type == VariableType.Float || type == VariableType.String || type == VariableType.Object;
 		}
 
 		private static bool HasTags(TagList tags)
@@ -185,9 +185,9 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					switch (definition.Type)
 					{
-						case VariableType.Boolean: definition.Initializer.SetStatement(value.Boolean ? "true" : "false"); break;
-						case VariableType.Integer: definition.Initializer.SetStatement(value.Integer.ToString()); break;
-						case VariableType.Number: definition.Initializer.SetStatement(value.Number.ToString()); break;
+						case VariableType.Bool: definition.Initializer.SetStatement(value.Bool ? "true" : "false"); break;
+						case VariableType.Int: definition.Initializer.SetStatement(value.Int.ToString()); break;
+						case VariableType.Float: definition.Initializer.SetStatement(value.Float.ToString()); break;
 						case VariableType.String: definition.Initializer.SetStatement("\"" + value.String + "\""); break;
 					}
 				}
@@ -214,8 +214,8 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			switch (type)
 			{
-				case VariableType.Integer:
-				case VariableType.Number:
+				case VariableType.Int:
+				case VariableType.Float:
 				{
 					DrawIndentedLabel(ref rect, _numberConstraintLabel);
 

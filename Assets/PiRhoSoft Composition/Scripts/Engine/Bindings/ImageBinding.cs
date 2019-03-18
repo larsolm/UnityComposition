@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = Variable.GetValue(variables);
 
-			if (value.TryGetObject(out Sprite sprite))
+			if (value.TryGetReference(out Sprite sprite))
 			{
 				_image.enabled = true;
 				_image.sprite = sprite;

@@ -11,16 +11,14 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var result = parameters[0].Evaluate(variables);
 
-				switch (result.Type)
-				{
-					case VariableType.Integer: return VariableValue.Create(Mathf.Sqrt(result.Integer));
-					case VariableType.Number: return VariableValue.Create(Mathf.Sqrt(result.Number));
-					default: throw new CommandEvaluationException(name, Command.WrongParameterType1Exception, result.Type, 0, VariableType.Number);
-				}
+				if (result.TryGetFloat(out var number))
+					return VariableValue.Create(Mathf.Sqrt(number));
+				else
+					throw CommandEvaluationException.WrongParameterType(name, 0, result.Type, VariableType.Float);
 			}
 			else
 			{
-				throw new CommandEvaluationException(name, Command.WrongParameterCountException, parameters.Count, "s", 1);
+				throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 1);
 			}
 		}
 	}

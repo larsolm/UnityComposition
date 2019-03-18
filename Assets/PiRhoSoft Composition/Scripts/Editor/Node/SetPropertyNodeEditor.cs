@@ -86,7 +86,7 @@ namespace PiRhoSoft.CompositionEditor
 
 					if (_node.PropertyType != null)
 					{
-						if (_variableType == VariableType.Raw || _variableType == VariableType.Store)
+						if (_variableType == VariableType.Other)
 							_node.SourceType = VariableSourceType.Reference;
 						else
 							_node.SourceType = (VariableSourceType)EnumButtonsDrawer.Draw(_sourceTypeContent.Content, (int)_node.SourceType, typeof(VariableSourceType), 2, 50);
