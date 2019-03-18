@@ -158,7 +158,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Create(Rect value) => Create(VariableType.Rect, new ValueData { Rect = value });
 		public static VariableValue Create(Bounds value) => Create(VariableType.Bounds, new ValueData { Bounds = value });
 		public static VariableValue Create(Color value) => Create(VariableType.Color, new ValueData { Color = value });
-		public static VariableValue Create(string reference) => Create(VariableType.String);
+		public static VariableValue Create(string reference) => Create(VariableType.String, reference);
 		public static VariableValue Create(Object reference) => Create(VariableType.Object, reference);
 		public static VariableValue Create(IVariableStore reference) => Create(VariableType.Store, reference);
 
