@@ -36,8 +36,8 @@ namespace PiRhoSoft.CompositionEngine
 
 				Text.enabled = result.Type != VariableType.Empty;
 
-				if (Formatting.Formatting != BindingFormatter.FormatType.None && result.TryGetNumber(out var number))
-					Text.text = Formatting.GetFormattedString(number);
+				if (Formatting.Formatting != BindingFormatter.FormatType.None && result.HasNumber)
+					Text.text = Formatting.GetFormattedString(result.Number);
 				else
 					Text.text = result.ToString();
 			}
