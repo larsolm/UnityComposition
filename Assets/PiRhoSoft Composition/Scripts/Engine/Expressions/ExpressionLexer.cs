@@ -15,8 +15,25 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private const string _invalidTokenException = "invalid character '{0}'";
 
+		private const char _lookupOpen = '[';
+		private const char _lookupClose = ']';
+		private const char _stringOpen = '\"';
+		private const char _stringClose = '\"';
+		private const char _groupOpen = '(';
+		private const char _groupClose = ')';
+		private const char _separator = ',';
+
+		private const string _trueLiteral = "true";
+		private const string _falseLiteral = "false";
+		private const string _nullLiteral = "null";
+
 		private const string _sentinelCharacters = ";\n";
 		private const string _operatorCharacters = "+-!^*/%<=>&|?:";
+
+		private static bool IsSentinelCharacter(char c) => _sentinelCharacters.IndexOf(c) >= 0;
+		private static bool IsIdentifierStartCharacter(char c) => char.IsLetter(c) || c == '_';
+		private static bool IsIdentifierCharacter(char c) => char.IsLetterOrDigit(c) || c == '_' || c == VariableReference.Separator || c == VariableReference.LookupOpen || c == VariableReference.LookupClose;
+		private static bool IsOperatorCharacter(char c) => _operatorCharacters.IndexOf(c) >= 0;
 
 		public static List<ExpressionToken> Tokenize(string input)
 		{
@@ -28,20 +45,22 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				var c = input[start];
 
-				if (c != '\n' && char.IsWhiteSpace(c))
+				if (char.IsWhiteSpace(c) && !IsSentinelCharacter(c))
 				{
 					whitespace += c;
 					start++;
 				}
 				else
 				{
-					if (_sentinelCharacters.IndexOf(c) >= 0) AddSentinel(tokens, input, start, ref start);
+					if (IsSentinelCharacter(c)) AddSentinel(tokens, input, start, ref start);
 					else if (char.IsDigit(c)) AddInteger(tokens, input, start, ref start, whitespace);
-					else if (c == '\"' || c == '\'') AddString(tokens, input, start, ref start, c);
+					else if (c == _stringOpen) AddString(tokens, input, start, ref start, _stringClose);
 					else if (IsIdentifierStartCharacter(c)) AddIdentifier(tokens, input, start, ref start, whitespace);
-					else if (c == '(') AddStartGroup(tokens, input, start, ref start);
-					else if (c == ')') AddEndGroup(tokens, input, start, ref start);
-					else if (c == ',') AddSeparator(tokens, input, start, ref start);
+					else if (c == _lookupOpen) AddStartLookup(tokens, input, start, ref start);
+					else if (c == _lookupClose) AddEndLookup(tokens, input, start, ref start);
+					else if (c == _groupOpen) AddStartGroup(tokens, input, start, ref start);
+					else if (c == _groupClose) AddEndGroup(tokens, input, start, ref start);
+					else if (c == _separator) AddSeparator(tokens, input, start, ref start);
 					else if (IsOperatorCharacter(c)) AddOperator(tokens, input, start, ref start);
 					else throw new ExpressionTokenizeException(start, _invalidTokenException, c);
 
@@ -50,21 +69,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			return tokens;
-		}
-
-		private static bool IsIdentifierStartCharacter(char c)
-		{
-			return char.IsLetter(c) || c == '_';
-		}
-
-		private static bool IsIdentifierCharacter(char c)
-		{
-			return char.IsLetterOrDigit(c) || c == '_' || c == '[' || c == ']' || c == '.';
-		}
-
-		private static bool IsOperatorCharacter(char c)
-		{
-			return _operatorCharacters.IndexOf(c) >= 0;
 		}
 
 		private static int SkipInteger(string input, int start)
@@ -142,7 +146,7 @@ namespace PiRhoSoft.CompositionEngine
 			var text = input.Substring(start, end - start);
 			var type = ExpressionTokenType.Identifier;
 
-			if (end < input.Length && input[end] == '(')
+			if (end < input.Length && input[end] == _groupOpen)
 			{
 				++end;
 				type = ExpressionTokenType.Command;
@@ -150,11 +154,23 @@ namespace PiRhoSoft.CompositionEngine
 
 			switch (text)
 			{
-				case "true": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 1, Number = 1.0f }, whitespace); break;
-				case "false": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
-				case "null": AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Null, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
+				case _trueLiteral: AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 1, Number = 1.0f }, whitespace); break;
+				case _falseLiteral: AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
+				case _nullLiteral: AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Null, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
 				default: AddToken(tokens, new ExpressionToken { Location = start, Type = type, Text = text }, whitespace); break;
 			}
+		}
+
+		private static void AddStartLookup(List<ExpressionToken> tokens, string input, int start, ref int end)
+		{
+			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.StartLookup });
+			end = start + 1;
+		}
+
+		private static void AddEndLookup(List<ExpressionToken> tokens, string input, int start, ref int end)
+		{
+			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.EndLookup });
+			end = start + 1;
 		}
 
 		private static void AddStartGroup(List<ExpressionToken> tokens, string input, int start, ref int end)

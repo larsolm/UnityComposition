@@ -168,7 +168,7 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.Number: return new LiteralOperation(VariableValue.Create(token.Number));
 				case ExpressionTokenType.String: return new LiteralOperation(VariableValue.Create(token.Text));
 				case ExpressionTokenType.Null: return new LiteralOperation(VariableValue.Create(VariableType.Object));
-				case ExpressionTokenType.Identifier: return new LookupOperation(token.Text);
+				case ExpressionTokenType.Identifier: return ParseLookup(token);
 				case ExpressionTokenType.StartGroup: return ParseGroup();
 				case ExpressionTokenType.Command: return ParseCommand(token);
 				case ExpressionTokenType.Operator: return ParsePrefixOperator(token);
@@ -198,6 +198,25 @@ namespace PiRhoSoft.CompositionEngine
 			var expression = Parse(0);
 			SkipNextToken(ExpressionTokenType.EndGroup);
 			return expression;
+		}
+
+		private Operation ParseLookup(ExpressionToken token)
+		{
+			var nextToken = ViewNextToken();
+			var parameter = (Operation)null;
+
+			if (nextToken.Type == ExpressionTokenType.StartLookup)
+			{
+				SkipNextToken(ExpressionTokenType.StartLookup);
+				nextToken = ViewNextToken();
+
+				if (nextToken.Type != ExpressionTokenType.EndLookup)
+					parameter = Parse(0);
+
+				SkipNextToken(ExpressionTokenType.EndLookup);
+			}
+
+			return new LookupOperation(token.Text, parameter);
 		}
 
 		private Operation ParseCommand(ExpressionToken token)
@@ -289,6 +308,7 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.Number: return int.MaxValue - 1;
 				case ExpressionTokenType.Identifier: return int.MaxValue - 1;
 				case ExpressionTokenType.Command: return int.MaxValue - 1;
+				case ExpressionTokenType.EndLookup: return 0;
 				case ExpressionTokenType.StartGroup: return int.MaxValue;
 				case ExpressionTokenType.EndGroup: return 0;
 				case ExpressionTokenType.Separator: return 0;

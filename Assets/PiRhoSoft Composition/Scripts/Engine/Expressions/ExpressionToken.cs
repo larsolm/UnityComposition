@@ -11,6 +11,8 @@
 		Identifier,
 		Command,
 		Operator,
+		StartLookup,
+		EndLookup,
 		StartGroup,
 		EndGroup,
 		Separator

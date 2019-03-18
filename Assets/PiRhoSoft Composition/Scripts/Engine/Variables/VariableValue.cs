@@ -158,10 +158,19 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Create(Rect value) => Create(VariableType.Rect, new ValueData { Rect = value });
 		public static VariableValue Create(Bounds value) => Create(VariableType.Bounds, new ValueData { Bounds = value });
 		public static VariableValue Create(Color value) => Create(VariableType.Color, new ValueData { Color = value });
-		public static VariableValue Create(string reference) => Create(VariableType.String, reference);
+		public static VariableValue Create(string reference) => Create(VariableType.String, reference == null ? string.Empty : reference);
 		public static VariableValue Create(Object reference) => Create(VariableType.Object, reference);
 		public static VariableValue Create(IVariableStore reference) => Create(VariableType.Store, reference);
-		public static VariableValue Create(object reference) => Create(VariableType.Other, reference);
+
+		public static VariableValue Create(object reference)
+		{
+			if (reference is Object)
+				return Create(VariableType.Object, reference);
+			else if (reference is IVariableStore)
+				return Create(VariableType.Store, reference);
+			else
+				return Create(VariableType.Other, reference);
+		}
 
 		private static VariableValue Create(VariableType type, ValueData value)
 		{
@@ -177,7 +186,7 @@ namespace PiRhoSoft.CompositionEngine
 			return new VariableValue
 			{
 				_type = type,
-				_reference = type == VariableType.String && reference == null ? string.Empty : reference
+				_reference = reference
 			};
 		}
 
