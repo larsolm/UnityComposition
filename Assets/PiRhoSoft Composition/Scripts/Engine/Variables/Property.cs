@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -18,6 +19,8 @@ namespace PiRhoSoft.CompositionEngine
 			if (info.FieldType == typeof(bool)) property.SetupAsBool(info, allowRead, allowWrite);
 			else if (info.FieldType == typeof(int)) property.SetupAsInt(info, allowRead, allowWrite);
 			else if (info.FieldType == typeof(float)) property.SetupAsFloat(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Vector2Int)) property.SetupAsInt2(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Vector3Int)) property.SetupAsInt3(info, allowRead, allowWrite);
 			else if (info.FieldType == typeof(string)) property.SetupAsString(info, allowRead, allowWrite);
 			else property.SetupAsObject(info, allowRead, allowWrite);
 
@@ -57,12 +60,34 @@ namespace PiRhoSoft.CompositionEngine
 		protected abstract void SetupAsBool(FieldInfo field, bool allowRead, bool allowWrite);
 		protected abstract void SetupAsInt(FieldInfo field, bool allowRead, bool allowWrite);
 		protected abstract void SetupAsFloat(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsInt2(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsInt3(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsIntRect(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsIntBounds(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsVector2(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsVector3(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsVector4(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsQuaternion(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsRect(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsBounds(FieldInfo field, bool allowRead, bool allowWrite);
+		protected abstract void SetupAsColor(FieldInfo field, bool allowRead, bool allowWrite);
 		protected abstract void SetupAsString(FieldInfo field, bool allowRead, bool allowWrite);
 		protected abstract void SetupAsObject(FieldInfo field, bool allowRead, bool allowWrite);
 
 		protected abstract void SetupAsBool(MethodInfo getMethod, MethodInfo setMethod);
 		protected abstract void SetupAsInt(MethodInfo getMethod, MethodInfo setMethod);
 		protected abstract void SetupAsFloat(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsInt2(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsInt3(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsIntRect(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsIntBounds(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsVector2(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsVector3(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsVector4(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsQuaternion(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsRect(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsBounds(MethodInfo getMethod, MethodInfo setMethod);
+		protected abstract void SetupAsColor(MethodInfo getMethod, MethodInfo setMethod);
 		protected abstract void SetupAsString(MethodInfo getMethod, MethodInfo setMethod);
 		protected abstract void SetupAsObject(Type objectType, MethodInfo getMethod, MethodInfo setMethod);
 
@@ -99,6 +124,72 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (allowRead) Getter = obj => Get<float>(obj, field);
 			if (allowWrite) Setter = (obj, value) => SetFloat(obj, value, field);
+		}
+
+		protected override void SetupAsInt2(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Vector2Int>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetInt2(obj, value, field);
+		}
+
+		protected override void SetupAsInt3(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Vector3Int>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetInt3(obj, value, field);
+		}
+
+		protected override void SetupAsIntRect(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<RectInt>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetIntRect(obj, value, field);
+		}
+
+		protected override void SetupAsIntBounds(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<BoundsInt>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetIntBounds(obj, value, field);
+		}
+
+		protected override void SetupAsVector2(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Vector2>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetVector2(obj, value, field);
+		}
+
+		protected override void SetupAsVector3(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Vector3>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetVector3(obj, value, field);
+		}
+
+		protected override void SetupAsVector4(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Vector4>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetVector4(obj, value, field);
+		}
+
+		protected override void SetupAsQuaternion(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Quaternion>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetQuaternion(obj, value, field);
+		}
+
+		protected override void SetupAsRect(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Rect>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetRect(obj, value, field);
+		}
+
+		protected override void SetupAsBounds(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Bounds>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetBounds(obj, value, field);
+		}
+
+		protected override void SetupAsColor(FieldInfo field, bool allowRead, bool allowWrite)
+		{
+			if (allowRead) Getter = obj => Get<Color>(obj, field);
+			if (allowWrite) Setter = (obj, value) => SetColor(obj, value, field);
 		}
 
 		protected override void SetupAsString(FieldInfo field, bool allowRead, bool allowWrite)
@@ -142,6 +233,105 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (get != null) Getter = obj => Get(obj, get);
 			if (set != null) Setter = (obj, value) => SetFloat(obj, value, set);
+		}
+
+		protected override void SetupAsInt2(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Vector2Int>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Vector2Int>));
+			var set = (Action<OwnerType, Vector2Int>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Vector2Int>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetInt2(obj, value, set);
+		}
+
+		protected override void SetupAsInt3(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Vector3Int>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Vector3Int>));
+			var set = (Action<OwnerType, Vector3Int>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Vector3Int>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetInt3(obj, value, set);
+		}
+
+		protected override void SetupAsIntRect(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, RectInt>)getMethod?.CreateDelegate(typeof(Func<OwnerType, RectInt>));
+			var set = (Action<OwnerType, RectInt>)setMethod?.CreateDelegate(typeof(Action<OwnerType, RectInt>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetIntRect(obj, value, set);
+		}
+
+		protected override void SetupAsIntBounds(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, BoundsInt>)getMethod?.CreateDelegate(typeof(Func<OwnerType, BoundsInt>));
+			var set = (Action<OwnerType, BoundsInt>)setMethod?.CreateDelegate(typeof(Action<OwnerType, BoundsInt>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetIntBounds(obj, value, set);
+		}
+
+		protected override void SetupAsVector2(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Vector2>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Vector2>));
+			var set = (Action<OwnerType, Vector2>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Vector2>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetVector2(obj, value, set);
+		}
+
+		protected override void SetupAsVector3(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Vector3>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Vector3>));
+			var set = (Action<OwnerType, Vector3>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Vector3>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetVector3(obj, value, set);
+		}
+
+		protected override void SetupAsVector4(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Vector4>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Vector4>));
+			var set = (Action<OwnerType, Vector4>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Vector4>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetVector4(obj, value, set);
+		}
+
+		protected override void SetupAsQuaternion(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Quaternion>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Quaternion>));
+			var set = (Action<OwnerType, Quaternion>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Quaternion>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetQuaternion(obj, value, set);
+		}
+
+		protected override void SetupAsRect(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Rect>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Rect>));
+			var set = (Action<OwnerType, Rect>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Rect>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetRect(obj, value, set);
+		}
+
+		protected override void SetupAsBounds(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Bounds>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Bounds>));
+			var set = (Action<OwnerType, Bounds>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Bounds>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetBounds(obj, value, set);
+		}
+
+		protected override void SetupAsColor(MethodInfo getMethod, MethodInfo setMethod)
+		{
+			var get = (Func<OwnerType, Color>)getMethod?.CreateDelegate(typeof(Func<OwnerType, Color>));
+			var set = (Action<OwnerType, Color>)setMethod?.CreateDelegate(typeof(Action<OwnerType, Color>));
+
+			if (get != null) Getter = obj => Get(obj, get);
+			if (set != null) Setter = (obj, value) => SetColor(obj, value, set);
 		}
 
 		protected override void SetupAsString(MethodInfo getMethod, MethodInfo setMethod)
@@ -219,6 +409,127 @@ namespace PiRhoSoft.CompositionEngine
 			return SetVariableResult.TypeMismatch;
 		}
 
+		private static SetVariableResult SetInt2(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Int2)
+			{
+				field.SetValue(owner, value.Int2);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetInt3(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Int3)
+			{
+				field.SetValue(owner, value.Int3);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetIntRect(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.IntRect)
+			{
+				field.SetValue(owner, value.IntRect);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetIntBounds(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.IntBounds)
+			{
+				field.SetValue(owner, value.IntBounds);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetVector2(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Vector2)
+			{
+				field.SetValue(owner, value.Vector2);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetVector3(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Vector3)
+			{
+				field.SetValue(owner, value.Vector3);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetVector4(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Vector4)
+			{
+				field.SetValue(owner, value.Vector4);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetQuaternion(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Quaternion)
+			{
+				field.SetValue(owner, value.Quaternion);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetRect(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Rect)
+			{
+				field.SetValue(owner, value.Rect);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetBounds(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Bounds)
+			{
+				field.SetValue(owner, value.Bounds);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetColor(OwnerType owner, VariableValue value, FieldInfo field)
+		{
+			if (value.Type == VariableType.Color)
+			{
+				field.SetValue(owner, value.Color);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
 		private static SetVariableResult SetString(OwnerType owner, VariableValue value, FieldInfo field)
 		{
 			if (value.Type == VariableType.String)
@@ -275,6 +586,127 @@ namespace PiRhoSoft.CompositionEngine
 			if (value.Type == VariableType.Float || value.Type == VariableType.Int)
 			{
 				setter(owner, value.Number);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetInt2(OwnerType owner, VariableValue value, Action<OwnerType, Vector2Int> setter)
+		{
+			if (value.Type == VariableType.Int2)
+			{
+				setter(owner, value.Int2);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetInt3(OwnerType owner, VariableValue value, Action<OwnerType, Vector3Int> setter)
+		{
+			if (value.Type == VariableType.Int3)
+			{
+				setter(owner, value.Int3);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetIntRect(OwnerType owner, VariableValue value, Action<OwnerType, RectInt> setter)
+		{
+			if (value.Type == VariableType.IntRect)
+			{
+				setter(owner, value.IntRect);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetIntBounds(OwnerType owner, VariableValue value, Action<OwnerType, BoundsInt> setter)
+		{
+			if (value.Type == VariableType.IntBounds)
+			{
+				setter(owner, value.IntBounds);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetVector2(OwnerType owner, VariableValue value, Action<OwnerType, Vector2> setter)
+		{
+			if (value.Type == VariableType.Vector2)
+			{
+				setter(owner, value.Vector2);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetVector3(OwnerType owner, VariableValue value, Action<OwnerType, Vector3> setter)
+		{
+			if (value.Type == VariableType.Vector3)
+			{
+				setter(owner, value.Vector3);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetVector4(OwnerType owner, VariableValue value, Action<OwnerType, Vector4> setter)
+		{
+			if (value.Type == VariableType.Vector4)
+			{
+				setter(owner, value.Vector4);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetQuaternion(OwnerType owner, VariableValue value, Action<OwnerType, Quaternion> setter)
+		{
+			if (value.Type == VariableType.Quaternion)
+			{
+				setter(owner, value.Quaternion);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetRect(OwnerType owner, VariableValue value, Action<OwnerType, Rect> setter)
+		{
+			if (value.Type == VariableType.Rect)
+			{
+				setter(owner, value.Rect);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetBounds(OwnerType owner, VariableValue value, Action<OwnerType, Bounds> setter)
+		{
+			if (value.Type == VariableType.Bounds)
+			{
+				setter(owner, value.Bounds);
+				return SetVariableResult.Success;
+			}
+
+			return SetVariableResult.TypeMismatch;
+		}
+
+		private static SetVariableResult SetColor(OwnerType owner, VariableValue value, Action<OwnerType, Color> setter)
+		{
+			if (value.Type == VariableType.Color)
+			{
+				setter(owner, value.Color);
 				return SetVariableResult.Success;
 			}
 
