@@ -51,6 +51,17 @@ namespace PiRhoSoft.CompositionEngine
 						case VariableType.Bool: obj = value.Bool; break;
 						case VariableType.Int: obj = value.Int; break;
 						case VariableType.Float: obj = value.Float; break;
+						case VariableType.Int2: obj = value.Int2; break;
+						case VariableType.Int3: obj = value.Int3; break;
+						case VariableType.IntRect: obj = value.IntRect; break;
+						case VariableType.IntBounds: obj = value.IntBounds; break;
+						case VariableType.Vector2: obj = value.Vector2; break;
+						case VariableType.Vector3: obj = value.Vector3; break;
+						case VariableType.Vector4: obj = value.Vector4; break;
+						case VariableType.Quaternion: obj = value.Quaternion; break;
+						case VariableType.Rect: obj = value.Rect; break;
+						case VariableType.Bounds: obj = value.Bounds; break;
+						case VariableType.Color: obj = value.Color; break;
 						case VariableType.String: obj = value.String; break;
 						case VariableType.Object: obj = value.Object; break;
 						case VariableType.Store: obj = value.Store; break;
