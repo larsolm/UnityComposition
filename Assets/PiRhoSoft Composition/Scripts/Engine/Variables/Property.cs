@@ -21,6 +21,15 @@ namespace PiRhoSoft.CompositionEngine
 			else if (info.FieldType == typeof(float)) property.SetupAsFloat(info, allowRead, allowWrite);
 			else if (info.FieldType == typeof(Vector2Int)) property.SetupAsInt2(info, allowRead, allowWrite);
 			else if (info.FieldType == typeof(Vector3Int)) property.SetupAsInt3(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(RectInt)) property.SetupAsIntRect(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(BoundsInt)) property.SetupAsIntBounds(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Vector2)) property.SetupAsVector2(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Vector3)) property.SetupAsVector3(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Vector4)) property.SetupAsVector4(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Quaternion)) property.SetupAsQuaternion(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Rect)) property.SetupAsRect(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Bounds)) property.SetupAsBounds(info, allowRead, allowWrite);
+			else if (info.FieldType == typeof(Color)) property.SetupAsColor(info, allowRead, allowWrite);
 			else if (info.FieldType == typeof(string)) property.SetupAsString(info, allowRead, allowWrite);
 			else property.SetupAsObject(info, allowRead, allowWrite);
 
@@ -39,6 +48,17 @@ namespace PiRhoSoft.CompositionEngine
 			if (info.PropertyType == typeof(bool)) property.SetupAsBool(getMethod, setMethod);
 			else if (info.PropertyType == typeof(int)) property.SetupAsInt(getMethod, setMethod);
 			else if (info.PropertyType == typeof(float)) property.SetupAsFloat(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Vector2Int)) property.SetupAsInt2(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Vector3Int)) property.SetupAsInt3(getMethod, setMethod);
+			else if (info.PropertyType == typeof(RectInt)) property.SetupAsIntRect(getMethod, setMethod);
+			else if (info.PropertyType == typeof(BoundsInt)) property.SetupAsIntBounds(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Vector2)) property.SetupAsVector2(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Vector3)) property.SetupAsVector3(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Vector4)) property.SetupAsVector4(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Quaternion)) property.SetupAsQuaternion(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Rect)) property.SetupAsRect(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Bounds)) property.SetupAsBounds(getMethod, setMethod);
+			else if (info.PropertyType == typeof(Color)) property.SetupAsColor(getMethod, setMethod);
 			else if (info.PropertyType == typeof(string)) property.SetupAsString(getMethod, setMethod);
 			else property.SetupAsObject(info.PropertyType, getMethod, setMethod);
 
