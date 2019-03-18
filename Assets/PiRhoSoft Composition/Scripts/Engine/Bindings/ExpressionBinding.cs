@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
-using TMPro;
+﻿using TMPro;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -36,8 +35,10 @@ namespace PiRhoSoft.CompositionEngine
 
 				Text.enabled = result.Type != VariableType.Empty;
 
-				if (Formatting.Formatting != BindingFormatter.FormatType.None && result.HasNumber)
-					Text.text = Formatting.GetFormattedString(result.Number);
+				if (result.Type == VariableType.Int)
+					Text.text = Formatting.GetFormattedString(result.Int);
+				if (result.Type == VariableType.Float)
+					Text.text = Formatting.GetFormattedString(result.Float);
 				else
 					Text.text = result.ToString();
 			}
