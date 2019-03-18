@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 		[VariableConstraint(typeof(Component))]
 		public VariableReference Target = new VariableReference();
 
-		[Tooltip("Whether to set the value to a reference or a specfied value")]
+		[Tooltip("Whether to set the value to a reference or a specified value")]
 		public VariableSourceType SourceType;
 
 		[Tooltip("The target value reference to set the property to")]

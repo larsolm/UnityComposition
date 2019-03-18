@@ -36,10 +36,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		static VariableValue()
 		{
-			ValueData value = new ValueData();
-			BoundsInt bounds = new BoundsInt();
-			Debug.LogFormat("ValueData: {0}", System.Runtime.InteropServices.Marshal.SizeOf(value));
-			Debug.LogFormat("BoundsInt: {0}", System.Runtime.InteropServices.Marshal.SizeOf(bounds));
+			if (Marshal.SizeOf(new ValueData()) != 24)
+				Debug.Log("ValueData is not 24 bytes!");
 		}
 
 		[StructLayout(LayoutKind.Explicit)]

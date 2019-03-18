@@ -36,7 +36,8 @@ namespace PiRhoSoft.CompositionEditor
 
 			Setup(_names)
 				.MakeEmptyLabel(new GUIContent("The store is empty"))
-				.MakeCollapsable(nameof(VariableStore) + "." + Name + ".IsOpen");
+				.MakeCollapsable(nameof(VariableStore) + "." + Name + ".IsOpen")
+				.MakeCustomHeight(GetHeight);
 
 			if (store is Object obj)
 				MakeHeaderButton(EditButton, rect => Selection.activeObject = obj, Color.white);
@@ -54,73 +55,41 @@ namespace PiRhoSoft.CompositionEditor
 			Draw(rect, _label);
 		}
 
+		private float GetHeight(int index)
+		{
+			var name = _names[index];
+			var value = Store.GetVariable(name);
+			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
+
+			return VariableValueDrawer.GetHeight(value, definition);
+		}
+
 		protected override void Draw(Rect rect, int index)
 		{
 			Selected = null;
 
 			var name = _names[index];
 			var value = Store.GetVariable(name);
+			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
 
-			using (var changes = new EditorGUI.ChangeCheckScope())
+			if (value.Type == VariableType.Store)
 			{
-				switch (value.Type)
+				if (DrawStore(rect, name, value.Store)) // TODO: show object picker
 				{
-					case VariableType.Empty: DrawEmpty(rect, name, ref value); break;
-					case VariableType.Bool: DrawBool(rect, name, ref value); break;
-					case VariableType.Int: DrawInt(rect, name, ref value); break;
-					case VariableType.Float: DrawFloat(rect, name, ref value); break;
-					case VariableType.String: DrawString(rect, name, ref value); break;
-					case VariableType.Other: DrawOther(rect, name, ref value); break;
-					default:
-					{
-						if (DrawStore(rect, name, value.Store)) // TODO: show object picker
-						{
-							Selected = value.Store;
-							SelectedName = name;
-						}
-
-						break;
-					}
+					Selected = value.Store;
+					SelectedName = name;
 				}
-
-				if (changes.changed)
-					Store.SetVariable(name, value);
 			}
-		}
+			else
+			{
+				using (var changes = new EditorGUI.ChangeCheckScope())
+				{
+					value = VariableValueDrawer.Draw(new GUIContent(name), value, definition);
 
-		private void DrawEmpty(Rect rect, string name, ref VariableValue variable)
-		{
-			EditorGUI.LabelField(rect, name, variable.ToString());
-		}
-
-		private void DrawBool(Rect rect, string name, ref VariableValue variable)
-		{
-			var value = EditorGUI.Toggle(rect, name, variable.Bool);
-			variable = VariableValue.Create(value);
-		}
-
-		private void DrawInt(Rect rect, string name, ref VariableValue variable)
-		{
-			var value = EditorGUI.IntField(rect, name, variable.Int);
-			variable = VariableValue.Create(value);
-		}
-
-		private void DrawFloat(Rect rect, string name, ref VariableValue variable)
-		{
-			var value = EditorGUI.FloatField(rect, name, variable.Float);
-			variable = VariableValue.Create(value);
-		}
-
-		private void DrawString(Rect rect, string name, ref VariableValue variable)
-		{
-			var value = EditorGUI.TextField(rect, name, variable.String);
-			variable = VariableValue.Create(value);
-		}
-
-		private void DrawObject(Rect rect, string name, ref VariableValue variable)
-		{
-			var value = EditorGUI.ObjectField(rect, name, variable.Object, variable.Object.GetType(), true);
-			variable = VariableValue.Create(value);
+					if (changes.changed)
+						Store.SetVariable(name, value);
+				}
+			}
 		}
 
 		private bool DrawStore(Rect rect, string name, object obj)
@@ -147,116 +116,6 @@ namespace PiRhoSoft.CompositionEditor
 			}
 
 			return selected;
-		}
-
-		private void DrawOther(Rect rect, string name, ref VariableValue variable)
-		{
-			EditorGUI.LabelField(rect, name, variable.ToString());
-		}
-
-		public static bool DrawLink(string name, object obj)
-		{
-			var selected = false;
-
-			using (new GUILayout.HorizontalScope())
-			{
-				GUILayout.Label(name);
-				GUILayout.FlexibleSpace();
-
-				if (obj is Object unityObject)
-				{
-					if (GUILayout.Button(EditButton.Content, GUIStyle.none))
-						Selection.activeObject = unityObject;
-				}
-
-				if (obj is IVariableStore store)
-				{
-					if (GUILayout.Button(ViewButton.Content, GUIStyle.none))
-						selected = true;
-				}
-			}
-
-			return selected;
-		}
-
-		public static IVariableStore DrawTable(IVariableStore store, bool allowAddRemove)
-		{
-			var names = store.GetVariableNames();
-			IVariableStore selectedStore = null;
-
-			foreach (var name in names)
-			{
-				var value = store.GetVariable(name);
-
-				using (var changes = new EditorGUI.ChangeCheckScope())
-				{
-					switch (value.Type)
-					{
-						case VariableType.Empty: DrawEmpty(name, ref value); break;
-						case VariableType.Bool: DrawBool(name, ref value); break;
-						case VariableType.Int: DrawInt(name, ref value); break;
-						case VariableType.Float: DrawFloat(name, ref value); break;
-						case VariableType.String: DrawString(name, ref value); break;
-						default:
-						{
-							if (DrawLink(name, value.Object)) // TODO: show object picker
-								selectedStore = value.Store;
-
-							break;
-						}
-					}
-
-					if (changes.changed)
-						store.SetVariable(name, value);
-				}
-			}
-
-			return selectedStore;
-		}
-
-		private static void DrawEmptyStore(string name, IVariableStore store)
-		{
-			EditorGUILayout.LabelField(name, "(empty store)");
-		}
-
-		private static void DrawEmpty(string name, ref VariableValue variable)
-		{
-			EditorGUILayout.LabelField(name, variable.ToString());
-		}
-
-		private static void DrawBool(string name, ref VariableValue variable)
-		{
-			var value = EditorGUILayout.Toggle(name, variable.Bool);
-			variable = VariableValue.Create(value);
-		}
-
-		private static void DrawInt(string name, ref VariableValue variable)
-		{
-			var value = EditorGUILayout.IntField(name, variable.Int);
-			variable = VariableValue.Create(value);
-		}
-
-		private static void DrawFloat(string name, ref VariableValue variable)
-		{
-			var value = EditorGUILayout.FloatField(name, variable.Float);
-			variable = VariableValue.Create(value);
-		}
-
-		private static void DrawString(string name, ref VariableValue variable)
-		{
-			var value = EditorGUILayout.TextField(name, variable.String);
-			variable = VariableValue.Create(value);
-		}
-
-		private static void DrawNull(string name, ref VariableValue variable)
-		{
-			EditorGUILayout.LabelField(name, variable.ToString());
-		}
-
-		private static void DrawObject(string name, ref VariableValue variable)
-		{
-			var value = EditorGUILayout.ObjectField(name, variable.Object, variable.Object.GetType(), true);
-			variable = VariableValue.Create(value);
 		}
 	}
 }
