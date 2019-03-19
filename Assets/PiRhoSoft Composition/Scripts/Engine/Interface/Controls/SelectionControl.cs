@@ -81,6 +81,7 @@ namespace PiRhoSoft.CompositionEngine
 			_selectedItem = null;
 
 			CreateItems(variables, items);
+			VariableBinding.UpdateBinding(gameObject, string.Empty, null);
 			DetermineLayout();
 
 			if (IsLocationFocusable(_columnIndex, _rowIndex))
@@ -90,6 +91,8 @@ namespace PiRhoSoft.CompositionEngine
 
 			while (_selectedItem == null && !_isClosing)
 			{
+				yield return null; // wait one frame for input
+
 				var left = InputHelper.GetWasAxisPressed(HorizontalAxis, -0.25f);
 				var right = InputHelper.GetWasAxisPressed(HorizontalAxis, 0.25f);
 				var up = InputHelper.GetWasAxisPressed(VerticalAxis, 0.25f);
@@ -103,8 +106,6 @@ namespace PiRhoSoft.CompositionEngine
 				else if (right) MoveFocusRight();
 				else if (accept && _focusedItem != null) _selectedItem = _focusedItem;
 				else if (cancel) Close();
-
-				yield return null;
 			}
 
 			Deactivate();
@@ -301,10 +302,20 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void MoveFocus(int index)
 		{
-			var column = index % _columnCount;
-			var row = index / _rowCount;
+			if (PrimaryAxis == PrimaryAxis.Column)
+			{
+				var column = index / (_items.Count / _columnCount);
+				var row = index % _rowCount;
 
-			MoveFocusToLocation(column, row);
+				MoveFocusToLocation(column, row);
+			}
+			else if (PrimaryAxis == PrimaryAxis.Row)
+			{
+				var column = index % _columnCount;
+				var row = index / (_items.Count / _rowCount);
+
+				MoveFocusToLocation(column, row);
+			}
 		}
 
 		public virtual void MoveFocusUp()

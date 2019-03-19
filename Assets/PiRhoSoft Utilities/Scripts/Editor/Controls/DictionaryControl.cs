@@ -276,7 +276,7 @@ namespace PiRhoSoft.UtilityEditor
 		private void SetExpanded(int index, bool isExpanded)
 		{
 			while (_isExpanded.Count <= index)
-				_isExpanded.Add(false);
+				_isExpanded.Add(true);
 
 			_isExpanded[index] = isExpanded;
 		}

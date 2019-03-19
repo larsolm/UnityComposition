@@ -239,7 +239,7 @@ namespace PiRhoSoft.UtilityEditor
 		private void EnsureExpandedCount(int count)
 		{
 			while (_isExpanded.Count <= count)
-				_isExpanded.Add(false);
+				_isExpanded.Add(true);
 		}
 	}
 }

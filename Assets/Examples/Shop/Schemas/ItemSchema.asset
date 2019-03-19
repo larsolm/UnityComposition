@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a7e42c1f2776d5043957247cb96f24d3, type: 3}
+  m_Name: ItemSchema
+  m_EditorClassIdentifier: 
+  InitializerType: 1
+  Tags:
+    _items: []
+  _definitions:
+  - _name: Name
+    _type: 15
+    _tag: Always (not saved)
+    _initializer:
+      _statement: '"Name"'
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: Cost
+    _type: 2
+    _tag: Always (not saved)
+    _initializer:
+      _statement: 100
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: Description
+    _type: 15
+    _tag: Always (not saved)
+    _initializer:
+      _statement: '"Description"'
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  _version: 21

@@ -11,8 +11,8 @@ namespace PiRhoSoft.CompositionExample
 	public class VariableStoreComponentList : SerializedList<Object> { }
 
 	[HelpURL(Composition.DocumentationUrl + "indexed-variable-store-asset")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Indexed Variable Store", fileName = nameof(IndexedVariableStoreAsset), order = 131)]
-	public class IndexedVariableStoreComponent : ScriptableObject, IIndexedVariableStore
+	[AddComponentMenu("PiRho Soft/Composition/Indexed Variable Store")]
+	public class IndexedVariableStoreComponent : MonoBehaviour, IIndexedVariableStore
 	{
 		[Tooltip("The objects accessable in this list")]
 		[ListDisplay]

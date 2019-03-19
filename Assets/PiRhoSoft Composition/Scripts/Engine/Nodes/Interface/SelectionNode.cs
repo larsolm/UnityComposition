@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 		public bool IsSelectionRequired = false;
 
 		[Tooltip("The items to show as part of the selection")]
-		[ListDisplay(ItemDisplay = ListItemDisplayType.Foldout, EmptyText = "Add items to create selection options")]
+		[ListDisplay(ItemDisplay = ListItemDisplayType.Foldout, AllowCollapse = false, EmptyText = "Add items to create selection options")]
 		public SelectionNodeItemList Items = new SelectionNodeItemList();
 
 		public override Color NodeColor => Colors.InterfaceTeal;

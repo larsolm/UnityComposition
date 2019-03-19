@@ -10,13 +10,6 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Bar Binding")]
 	public class BarBinding : VariableBinding
 	{
-		[Tooltip("The speed at which to animate the fill change (in % per second, 0 means immediate)")]
-		[Range(0.0f, 1.0f)]
-		public float Speed = 0.0f;
-
-		[Tooltip("Speed is affected by Time.timeScale")]
-		public bool UseScaledTime = true;
-
 		[Tooltip("The variable holding the amount (numerator) the image should be filled")]
 		public VariableReference AmountVariable = new VariableReference();
 
@@ -25,6 +18,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The blend colors to apply to the image depending on the fill amount")]
 		public Gradient FillColors = new Gradient();
+
+		[Tooltip("The speed at which to animate the fill change (in % per second, 0 means immediate)")]
+		[Range(0.0f, 1.0f)]
+		public float Speed = 0.0f;
+
+		[Tooltip("Speed is affected by Time.timeScale")]
+		public bool UseScaledTime = true;
 
 		protected Image _image;
 
@@ -54,6 +54,7 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else
 				{
+					StopAllCoroutines();
 					StartCoroutine(AnimateFill(fill, status));
 				}
 			}
