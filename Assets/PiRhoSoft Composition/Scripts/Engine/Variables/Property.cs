@@ -380,12 +380,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static VariableValue Get<T>(OwnerType owner, Func<OwnerType, T> getter)
 		{
-			return VariableValue.Create(getter(owner));
+			T value = getter(owner);
+			return VariableValue.CreateValue(value);
 		}
 
 		private static VariableValue Get<T>(OwnerType owner, FieldInfo field)
 		{
-			return VariableValue.Create((T)field.GetValue(owner));
+			T value = (T)field.GetValue(owner);
+			return VariableValue.CreateValue(value);
 		}
 
 		#endregion

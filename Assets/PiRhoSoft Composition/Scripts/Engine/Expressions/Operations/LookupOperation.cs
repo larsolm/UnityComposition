@@ -44,22 +44,46 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override VariableValue Evaluate(IVariableStore variables)
 		{
-			var value = Reference.GetValue(variables);
-
 			if (Parameter == null)
 			{
-				return value;
+				return Reference.GetValue(variables);
 			}
 			else
 			{
+				var owner = Reference.GetValue(variables);
 				var lookup = Parameter.Evaluate(variables);
 
-				if (lookup.Type == VariableType.String)
-					return VariableReference.ResolveLookup(value, lookup.String);
-				else if (lookup.Type == VariableType.Int)
-					return VariableReference.ResolveLookup(value, lookup.Int);
+				if (lookup.Type == VariableType.String || lookup.Type == VariableType.Int)
+					return VariableReference.LookupVariable(owner, lookup.ToString());
 				else
 					return VariableValue.Empty;
+			}
+		}
+
+		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
+		{
+			if (Parameter == null)
+			{
+				return Reference.SetValue(variables, value);
+			}
+			else
+			{
+				var owner = Reference.GetValue(variables);
+				var lookup = Parameter.Evaluate(variables);
+
+				if (lookup.Type == VariableType.String || lookup.Type == VariableType.Int)
+				{
+					var result = VariableReference.ApplyVariable(ref owner, lookup.ToString(), value);
+
+					if (!owner.HasStore && result == SetVariableResult.Success)
+						return Reference.SetValue(variables, owner);
+					else
+						return result;
+				}
+				else
+				{
+					return SetVariableResult.NotFound;
+				}
 			}
 		}
 	}

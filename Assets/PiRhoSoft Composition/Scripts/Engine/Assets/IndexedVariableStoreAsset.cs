@@ -20,6 +20,7 @@ namespace PiRhoSoft.CompositionExample
 
 		public int Count => Assets.Count;
 		public object GetItem(int index) => index >= 0 && index < Assets.Count ? Assets[index] : null;
+		public bool SetItem(int index, object item) => false;
 		public bool AddItem(object item) => false;
 		public bool RemoveItem(int index) => false;
 		public VariableValue GetVariable(string name) => IndexedVariableStore.GetVariable(this, name);

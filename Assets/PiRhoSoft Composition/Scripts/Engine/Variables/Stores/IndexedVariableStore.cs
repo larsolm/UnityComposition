@@ -7,6 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		int Count { get; }
 		object GetItem(int index);
+		bool SetItem(int index, object item);
 		bool AddItem(object item);
 		bool RemoveItem(int index);
 	}
@@ -41,6 +42,17 @@ namespace PiRhoSoft.CompositionEngine
 				return List[index];
 			else
 				return null;
+		}
+
+		public bool SetItem(int index, object item)
+		{
+			if (index >= 0 && index < List.Count && item is ItemType obj)
+			{
+				List[index] = obj;
+				return true;
+			}
+
+			return false;
 		}
 
 		public bool AddItem(object item)
