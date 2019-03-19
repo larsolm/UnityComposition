@@ -25,39 +25,11 @@ MonoBehaviour:
     - {fileID: 114519871788225294}
     - {fileID: 114269850318714992}
     - {fileID: 114709914363264112}
-    - {fileID: 114005516978369318}
+    - {fileID: 114847745371924412}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114088153181717158}
   Process: {fileID: 114141269857799520}
   Exit: {fileID: 114183395291032680}
---- !u!114 &114005516978369318
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: How Many
-  m_EditorClassIdentifier: 
-  Name: How Many
-  GraphPosition: {x: 1792, y: -217.6}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
-  Interaction: 3
-  WaitTime: 0
-  IsLast: 0
-  Message:
-    Text: How many?
 --- !u!114 &114088153181717158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -195,7 +167,7 @@ MonoBehaviour:
         type: 3}
       Label: Inventory
       Expand: 1
-      OnSelected: {fileID: 114005516978369318}
+      OnSelected: {fileID: 0}
     - Variables:
         _variable: []
         _lookups: []
@@ -358,8 +330,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   OnCanceled: {fileID: 114141269857799520}
   Control:
-    _variable: []
-    _lookups: []
+    _variable:
+    - scene
+    - Items
+    _lookups:
+    - 
+    - 
   IsSelectionRequired: 0
   Items:
     _items:
@@ -372,7 +348,8 @@ MonoBehaviour:
         - 
       Source: 1
       Name: 
-      Template: {fileID: 0}
+      Template: {fileID: 2157962887867631546, guid: 224e1e2f12478f5438747a3cfb741815,
+        type: 3}
       Label: Inventory
       Expand: 1
       OnSelected: {fileID: 0}
@@ -407,3 +384,31 @@ MonoBehaviour:
     - Player
     _lookups:
     - 
+--- !u!114 &114847745371924412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Confirmation
+  m_EditorClassIdentifier: 
+  Name: Confirmation
+  GraphPosition: {x: 1869.383, y: -152.42574}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 2
+  WaitTime: 0
+  IsLast: 1
+  Message:
+    Text: 1 {root.Name}, that will cost ${root.Cost}. Are you sure?

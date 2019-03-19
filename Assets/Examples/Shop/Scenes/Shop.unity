@@ -901,6 +901,7 @@ GameObject:
   - component: {fileID: 840948832}
   - component: {fileID: 840948835}
   - component: {fileID: 840948836}
+  - component: {fileID: 840948838}
   - component: {fileID: 840948834}
   - component: {fileID: 840948837}
   m_Layer: 0
@@ -992,10 +993,10 @@ MonoBehaviour:
       Data: ECcAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: Inventory
-      Type: 17
+      Type: 16
       Data: 
-      Object: {fileID: 0}
-    _version: 7
+      Object: {fileID: 840948838}
+    _version: 12
   Camera: {fileID: 0}
   Acceleration: 3
 --- !u!50 &840948835
@@ -1057,6 +1058,20 @@ MonoBehaviour:
       Type: 16
       Data: 
       Object: {fileID: 11400000, guid: 007b7768badae644c998b1e77ad85a27, type: 2}
+--- !u!114 &840948838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 840948831}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6596faa30e8604295dd4da8c9bda94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+    _items: []
 --- !u!1 &911554669
 GameObject:
   m_ObjectHideFlags: 0
