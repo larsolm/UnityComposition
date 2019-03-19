@@ -23,4 +23,8 @@ MonoBehaviour:
       Type: 2
       Data: 9AEAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
-    _version: 9
+    - Name: Description
+      Type: 15
+      Data: Use to attack
+      Object: {fileID: 0}
+    _version: 21

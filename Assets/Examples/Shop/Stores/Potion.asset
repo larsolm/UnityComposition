@@ -23,4 +23,8 @@ MonoBehaviour:
       Type: 2
       Data: ZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
-    _version: 9
+    - Name: Description
+      Type: 15
+      Data: Heal 20 HP
+      Object: {fileID: 0}
+    _version: 21

@@ -23,4 +23,8 @@ MonoBehaviour:
       Type: 2
       Data: 6AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
-    _version: 9
+    - Name: Description
+      Type: 15
+      Data: Restore life
+      Object: {fileID: 0}
+    _version: 21

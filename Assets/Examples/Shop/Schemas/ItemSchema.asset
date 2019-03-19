@@ -34,4 +34,13 @@ MonoBehaviour:
     _minimumConstraint: 0
     _maximumConstraint: 0
     _typeConstraint: 
-  _version: 9
+  - _name: Description
+    _type: 15
+    _tag: Always (not saved)
+    _initializer:
+      _statement: '"Description"'
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  _version: 21

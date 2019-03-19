@@ -23,12 +23,20 @@ namespace PiRhoSoft.CompositionEngine
 
 		private BindingRoot _root;
 
-		protected abstract void UpdateBinding(IVariableStore variables, BindingAnimationStatus status);
-
-		void Awake()
+		public BindingRoot Root
 		{
-			_root = BindingRoot.FindRoot(gameObject);
+			get
+			{
+				// can't look up in awake because it's possible to update bindings before the component is enabled
+
+				if (!_root)
+					_root = BindingRoot.FindRoot(gameObject);
+
+				return _root;
+			}
 		}
+
+		protected abstract void UpdateBinding(IVariableStore variables, BindingAnimationStatus status);
 
 		void Update()
 		{
@@ -40,7 +48,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (string.IsNullOrEmpty(group) || BindingGroup == group)
 			{
-				var variables = (_root != null ? _root.Variables : null) ?? CompositionManager.Instance.GlobalStore;
+				var variables = (Root != null ? Root.Variables : null) ?? CompositionManager.Instance.GlobalStore;
 				UpdateBinding(variables, status ?? _ignoredStatus);
 			}
 		}

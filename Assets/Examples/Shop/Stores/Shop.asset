@@ -12,10 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d57ec9df794c5c343a16d06a66b49f40, type: 3}
   m_Name: Shop
   m_EditorClassIdentifier: 
-  VariableStoreAssets:
+  Assets:
     _items:
-    - {fileID: 11400000, guid: 5effb37f32ac47746ba1be3a37a14119, type: 2}
-    - {fileID: 11400000, guid: 05b4cfaafe467224582ed93f0284df60, type: 2}
-    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
-    - {fileID: 11400000, guid: 9077bd585c101694f86c433c24d7f890, type: 2}
     - {fileID: 11400000, guid: fa0442ad09dd84943b2d317722d4e3a6, type: 2}
+    - {fileID: 11400000, guid: 05b4cfaafe467224582ed93f0284df60, type: 2}
+    - {fileID: 11400000, guid: 5effb37f32ac47746ba1be3a37a14119, type: 2}
+    - {fileID: 11400000, guid: 9077bd585c101694f86c433c24d7f890, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}

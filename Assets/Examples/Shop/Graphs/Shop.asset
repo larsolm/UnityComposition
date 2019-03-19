@@ -191,7 +191,8 @@ MonoBehaviour:
         - 
       Source: 1
       Name: 
-      Template: {fileID: 0}
+      Template: {fileID: 2157962887867631546, guid: 224e1e2f12478f5438747a3cfb741815,
+        type: 3}
       Label: Inventory
       Expand: 1
       OnSelected: {fileID: 114005516978369318}
@@ -203,7 +204,7 @@ MonoBehaviour:
       Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Back
-      Expand: 1
+      Expand: 0
       OnSelected: {fileID: 114141269857799520}
 --- !u!114 &114489635538051110
 MonoBehaviour:
