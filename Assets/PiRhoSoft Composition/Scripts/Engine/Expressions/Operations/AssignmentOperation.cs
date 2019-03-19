@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (left == null)
 				throw ExpressionEvaluationException.InvalidAssignment(Symbol);
 
-			var result = left.Reference.SetValue(variables, value);
+			var result = left.SetValue(variables, value);
 
 			switch (result)
 			{

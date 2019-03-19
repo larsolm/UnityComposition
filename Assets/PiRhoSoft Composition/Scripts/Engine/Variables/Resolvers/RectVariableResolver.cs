@@ -1,0 +1,57 @@
+﻿using UnityEngine;
+
+namespace PiRhoSoft.CompositionEngine
+{
+	public class RectVariableResolver : VariableResolver
+	{
+		public override VariableValue Lookup(VariableValue owner, string lookup)
+		{
+			switch (lookup)
+			{
+				case "x": return VariableValue.Create(owner.Rect.position.x);
+				case "y": return VariableValue.Create(owner.Rect.position.y);
+				case "w": return VariableValue.Create(owner.Rect.size.x);
+				case "h": return VariableValue.Create(owner.Rect.size.y);
+				default: return VariableValue.Empty;
+			}
+		}
+
+		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		{
+			if (value.TryGetFloat(out var number))
+			{
+				switch (lookup)
+				{
+					case "x":
+					{
+						owner = VariableValue.Create(new Rect(number, owner.Rect.position.y, owner.Rect.size.x, owner.Rect.size.y));
+						return SetVariableResult.Success;
+					}
+					case "y":
+					{
+						owner = VariableValue.Create(new Rect(owner.Rect.position.x, number, owner.Rect.size.x, owner.Rect.size.y));
+						return SetVariableResult.Success;
+					}
+					case "w":
+					{
+						owner = VariableValue.Create(new Rect(owner.Rect.position.x, owner.Rect.position.y, number, owner.Rect.size.y));
+						return SetVariableResult.Success;
+					}
+					case "h":
+					{
+						owner = VariableValue.Create(new Rect(owner.Rect.position.x, owner.Rect.position.y, owner.Rect.size.x, number));
+						return SetVariableResult.Success;
+					}
+					default:
+					{
+						return SetVariableResult.NotFound;
+					}
+				}
+			}
+			else
+			{
+				return SetVariableResult.TypeMismatch;
+			}
+		}
+	}
+}

@@ -146,7 +146,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			switch (name)
 			{
-				case RootStoreName: return VariableValue.Create(Root);
+				case RootStoreName: return VariableValue.CreateReference(Root);
 				case SceneStoreName: return VariableValue.Create(_sceneStore);
 				case InputStoreName: return VariableValue.Create(Input);
 				case OutputStoreName: return VariableValue.Create(Output);

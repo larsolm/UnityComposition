@@ -76,11 +76,12 @@ namespace PiRhoSoft.CompositionEditor
 			var name = _names[index];
 			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
 			var value = VariableValue.Empty;
+			var storeIndex = -1;
 
 			if (name.Length > 0 && name[0] == VariableReference.LookupOpen && Store is IIndexedVariableStore indexed)
 			{
-				var i = int.Parse(name.Substring(1, name.Length - 2));
-				value = VariableValue.Create(indexed.GetItem(i));
+				storeIndex = int.Parse(name.Substring(1, name.Length - 2));
+				value = VariableValue.CreateReference(indexed.GetItem(storeIndex));
 			}
 			else
 			{
@@ -101,8 +102,13 @@ namespace PiRhoSoft.CompositionEditor
 					SelectedName = name;
 				}
 
-				if (reference != value.Reference) // indexed?
-					Store.SetVariable(name, VariableValue.Create(reference));
+				if (reference != value.Reference)
+				{
+					if (storeIndex >= 0)
+						(Store as IIndexedVariableStore).SetItem(storeIndex, reference);
+					else
+						Store.SetVariable(name, VariableValue.CreateReference(reference));
+				}
 			}
 			else
 			{

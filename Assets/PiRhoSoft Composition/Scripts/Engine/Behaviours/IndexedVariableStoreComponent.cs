@@ -28,6 +28,17 @@ namespace PiRhoSoft.CompositionExample
 				return null;
 		}
 
+		public bool SetItem(int index, object item)
+		{
+			if (index >= 0 && index < Objects.Count && item is Object obj)
+			{
+				Objects[index] = obj;
+				return true;
+			}
+
+			return false;
+		}
+
 		public bool AddItem(object item)
 		{
 			if (item is Object obj)

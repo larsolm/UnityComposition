@@ -80,6 +80,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool HasValue => !HasReference && !HasString;
 		public bool HasString => _type == VariableType.String;
+		public bool HasObject => _reference is Object;
+		public bool HasStore => _reference is IVariableStore;
 		public bool HasReference => _type == VariableType.Object || _type == VariableType.Store || _type == VariableType.Other;
 
 		public bool HasNumber => _type == VariableType.Int || _type == VariableType.Float;
@@ -162,11 +164,34 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Create(Object reference) => Create(VariableType.Object, reference);
 		public static VariableValue Create(IVariableStore reference) => Create(VariableType.Store, reference);
 
-		public static VariableValue Create(object reference)
+		public static VariableValue CreateValue<T>(T value)
 		{
-			if (reference is string)
-				return Create(VariableType.String, reference);
-			else if (reference is Object)
+			// the compiler can't resolve the Create overload from a generic
+
+			switch (value)
+			{
+				case bool b: return Create(b);
+				case int i: return Create(i);
+				case float f: return Create(f);
+				case Vector2Int v: return Create(v);
+				case Vector3Int v: return Create(v);
+				case RectInt r: return Create(r);
+				case BoundsInt b: return Create(b);
+				case Vector2 v: return Create(v);
+				case Vector3 v: return Create(v);
+				case Vector4 v: return Create(v);
+				case Quaternion q: return Create(q);
+				case Rect r: return Create(r);
+				case Bounds b: return Create(b);
+				case Color c: return Create(c);
+				case string s: return Create(s);
+				default: return CreateReference(value);
+			}
+		}
+
+		public static VariableValue CreateReference(object reference)
+		{
+			if (reference is Object)
 				return Create(VariableType.Object, reference);
 			else if (reference is IVariableStore)
 				return Create(VariableType.Store, reference);
