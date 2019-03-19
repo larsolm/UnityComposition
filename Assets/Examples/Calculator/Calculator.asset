@@ -37,7 +37,7 @@ MonoBehaviour:
     - {fileID: 114268825771250320}
     - {fileID: 114817616350442620}
     - {fileID: 114986298978509238}
-  StartPosition: {x: 512, y: 281.6}
+  StartPosition: {x: 512, y: 384}
   Process: {fileID: 114878619638461498}
 --- !u!114 &114003219145756106
 MonoBehaviour:
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_Name: Loop
   m_EditorClassIdentifier: 
   Name: Loop
-  GraphPosition: {x: 755.2, y: 102.4}
+  GraphPosition: {x: 780.8, y: 102.4}
   IsBreakpoint: 0
   Condition:
     _statement: true
@@ -401,7 +401,7 @@ MonoBehaviour:
   m_Name: Initialize
   m_EditorClassIdentifier: 
   Name: Initialize
-  GraphPosition: {x: 908.8, y: 384}
+  GraphPosition: {x: 819.2, y: 384}
   IsBreakpoint: 0
   Next: {fileID: 114160120226984220}
   Expression:
@@ -586,4 +586,6 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: Operation = "";
+    _statement: 'Memory = Display;
+
+      Operation = "";'

@@ -296,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  Behaviour: {fileID: 134126814}
   Condition:
     _statement: Operation == "Multiply";
 --- !u!114 &134126814
@@ -1458,13 +1459,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  Format:
+    Format: '{0}'
+    Formatting: 0
+    TimeFormatting: 3
+    NumberFormatting: 3
+    ValueFormat: 
   Variable:
     _variable:
     - Display
     _lookups:
     - 
-  Speed: 0
-  UseScaledTime: 1
 --- !u!1 &569431106
 GameObject:
   m_ObjectHideFlags: 0
@@ -3154,6 +3159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  Behaviour: {fileID: 1136881293}
   Condition:
     _statement: Operation == "Plus";
 --- !u!114 &1136881293
@@ -3671,6 +3677,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  Behaviour: {fileID: 1413441507}
   Condition:
     _statement: Operation == "Divide";
 --- !u!114 &1413441507
@@ -4162,6 +4169,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  Behaviour: {fileID: 1611542639}
   Condition:
     _statement: Operation == "Minus";
 --- !u!114 &1611542639

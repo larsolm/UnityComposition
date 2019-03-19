@@ -34,10 +34,21 @@ namespace PiRhoSoft.CompositionEngine
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			var value = Variable.GetValue(variables);
-			Text.enabled = value.Type == VariableType.Int || value.Type == VariableType.Float;
 
-			if (Text.enabled)
+			if (value.Type == VariableType.Int)
+			{
+				Text.enabled = true;
 				Text.text = Format.GetFormattedString(value.Int);
+			}
+			else if (value.Type == VariableType.Float)
+			{
+				Text.enabled = true;
+				Text.text = Format.GetFormattedString(value.Float);
+			}
+			else
+			{
+				Text.enabled = false;
+			}
 		}
 	}
 }
