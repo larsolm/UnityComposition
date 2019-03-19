@@ -10,6 +10,7 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using MenuItem = UnityEditor.MenuItem;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -1157,8 +1158,12 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					EditorGUILayout.Space();
 
+					var rootBox = EditorGUILayout.GetControlRect(false, EditorGUIUtility.standardVerticalSpacing + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing);
+					GUI.Box(rootBox, string.Empty);
+					rootBox = RectHelper.Inset(rootBox, EditorGUIUtility.standardVerticalSpacing);
+
 					var root = _graph.Store.Root;
-					if (VariableStoreControl.DrawObject(InstructionStore.RootStoreName, ref root, false))
+					if (VariableStoreControl.DrawObject(rootBox, InstructionStore.RootStoreName, ref root, false))
 						UpdateWatchSelected(InstructionStore.RootStoreName, root as IVariableStore);
 
 					if (_selectedStore != null) _selectedStore.Draw();
@@ -1207,6 +1212,9 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void UpdateWatchSelected(string name, IVariableStore store)
 		{
+			if (store is Object obj)
+				name += string.Format(" ({0})", obj.name);
+
 			_selectedStore = CreateStoreControl(name, store, _selectedStore);
 		}
 

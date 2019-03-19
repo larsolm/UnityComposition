@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionExample
 					var interaction = _colliders[i].GetComponent<Interaction>();
 					if (interaction)
 					{
-						CompositionManager.Instance.RunInstruction(interaction.OnInteract, interaction);
+						CompositionManager.Instance.RunInstruction(interaction.OnInteract, this);
 						break;
 					}
 				}

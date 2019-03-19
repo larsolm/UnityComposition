@@ -52,11 +52,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		public void Draw()
 		{
+			Selected = null;
 			Draw(_label);
 		}
 
 		public void Draw(Rect rect)
 		{
+			Selected = null;
 			Draw(rect, _label);
 		}
 
@@ -71,8 +73,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		protected override void Draw(Rect rect, int index)
 		{
-			Selected = null;
-
 			var name = _names[index];
 			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
 			var value = VariableValue.Empty;
@@ -87,11 +87,15 @@ namespace PiRhoSoft.CompositionEditor
 				value = Store.GetVariable(name);
 			}
 
-			if (value.HasReference)
+			if (value.IsEmpty)
+			{
+				EditorGUI.LabelField(rect, name, VariableValue.EmptyString);
+			}
+			else if (value.HasReference)
 			{
 				var reference = value.Reference;
 
-				if (DrawObject(rect, name, ref reference, true))
+				if (DrawObject(rect, name, ref reference, value.Type == VariableType.Object))
 				{
 					Selected = value.Store;
 					SelectedName = name;
@@ -124,8 +128,6 @@ namespace PiRhoSoft.CompositionEditor
 			var unity = obj as Object;
 			var store = obj as IVariableStore;
 
-			rect = EditorGUI.PrefixLabel(rect, new GUIContent(name));
-
 			if (store != null)
 			{
 				var viewRect = RectHelper.TakeTrailingIcon(ref rect);
@@ -142,21 +144,14 @@ namespace PiRhoSoft.CompositionEditor
 					Selection.activeObject = unity;
 			}
 
-			if (obj == null)
-			{
-				GUI.Label(rect, VariableValue.NullString);
-			}
+			if (isEditable)
+				obj = EditorGUI.ObjectField(rect, name, unity, typeof(Object), true);
 			else if (unity != null)
-			{
-				if (isEditable)
-					obj = EditorGUI.ObjectField(rect, unity, typeof(Object), true);
-				else
-					GUI.Label(rect, unity.name);
-			}
+				EditorGUI.LabelField(rect, name, unity.name);
+			else if (obj != null)
+				EditorGUI.LabelField(rect, name, obj.ToString());
 			else
-			{
-				GUI.Label(rect, obj.ToString());
-			}
+				EditorGUI.LabelField(rect, name, "");
 
 			return selected;
 		}
