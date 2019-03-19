@@ -1589,6 +1589,7 @@ GameObject:
   - component: {fileID: 869418890}
   - component: {fileID: 869418889}
   - component: {fileID: 869418896}
+  - component: {fileID: 869418897}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1776,15 +1777,19 @@ MonoBehaviour:
       Type: 1
       Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
-    - Name: Timer
-      Type: 3
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
     - Name: JewelsNeeded
+      Type: 2
+      Data: FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      Object: {fileID: 0}
+    - Name: Jewels
       Type: 2
       Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
-    _version: 9
+    - Name: StartTime
+      Type: 3
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      Object: {fileID: 0}
+    _version: 22
   Camera: {fileID: 284457785}
   Acceleration: 1
 --- !u!212 &869418894
@@ -1866,7 +1871,7 @@ MonoBehaviour:
     _inputs:
     - Type: 1
       Definition:
-        _name: Level
+        _name: LevelName
         _type: 15
         _tag: 
         _initializer:
@@ -1881,9 +1886,27 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 15
-        Data: 
+        Data: Level 2
         Object: {fileID: 0}
     _outputs: []
+--- !u!114 &869418897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869418888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Variables:
+    _data:
+    - Name: Player
+      Type: 16
+      Data: 
+      Object: {fileID: 869418893}
 --- !u!1 &925914639
 GameObject:
   m_ObjectHideFlags: 0

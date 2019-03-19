@@ -12,12 +12,12 @@ EditorBuildSettings:
     path: Assets/Examples/Scenes/TestLoad.unity
     guid: 6cc252cbef461664abc3161167391558
   - enabled: 1
-    path: Assets/Examples/Scenes/Maze/MazeUi.unity
+    path: Assets/Examples/Maze/Maze/MazeUi.unity
     guid: 8520597be97ca5443b7edb3a5e54a69f
   - enabled: 1
-    path: Assets/Examples/Scenes/Maze/Maze1.unity
+    path: Assets/Examples/Maze/Maze/Maze1.unity
     guid: abe652b0bf8ca354984f60f9d340b6df
   - enabled: 1
-    path: Assets/Examples/Scenes/Maze/Maze2.unity
+    path: Assets/Examples/Maze/Maze/Maze2.unity
     guid: a25ee3ef7b27eec4cb8afbb8a12609d2
   m_configObjects: {}
