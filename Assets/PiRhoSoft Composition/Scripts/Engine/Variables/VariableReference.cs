@@ -156,7 +156,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static VariableValue ResolveLookup(VariableValue value, int lookup)
 		{
-			if (value.Type == VariableType.Store && value.Store is IIndexedVariableStore indexed)
+			if (value.HasReference && value.Reference is IIndexedVariableStore indexed)
 				return VariableValue.Create(indexed.GetItem(lookup));
 			else
 				return VariableValue.Empty;

@@ -1,0 +1,240 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: Simple Generation
+  m_EditorClassIdentifier: 
+  _nodes:
+    _items:
+    - {fileID: 114777378443045636}
+    - {fileID: 114690327738691884}
+    - {fileID: 114051174418471494}
+    - {fileID: 114789152154498086}
+    - {fileID: 114079288357498444}
+    - {fileID: 114481506311885118}
+    - {fileID: 114768701327047442}
+    - {fileID: 114677748597240622}
+    - {fileID: 114023438155082066}
+    - {fileID: 114649020333618766}
+  StartPosition: {x: 0, y: 0}
+  Enter: {fileID: 114023438155082066}
+  Process: {fileID: 114777378443045636}
+  Exit: {fileID: 114649020333618766}
+--- !u!114 &114023438155082066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Behaviour
+  m_EditorClassIdentifier: 
+  Name: Disable Behaviour
+  GraphPosition: {x: 320, y: -128}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable:
+    - player
+    _lookups:
+    - 
+--- !u!114 &114051174418471494
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: -0, y: 115.200005}
+  IsBreakpoint: 0
+  Comment: input.Quality should be a number between 0 and 5 indicating how good of
+    loot to generate (i.e the amount of gold and rarity of the items)
+--- !u!114 &114079288357498444
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
+  m_Name: Show Control
+  m_EditorClassIdentifier: 
+  Name: Show Control
+  GraphPosition: {x: 960, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114768701327047442}
+  Control:
+    _variable:
+    - scene
+    - Loot Display
+    _lookups:
+    - 
+    - 
+--- !u!114 &114481506311885118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Binding
+  m_EditorClassIdentifier: 
+  Name: Update Binding
+  GraphPosition: {x: 640, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114079288357498444}
+  Object:
+    _variable:
+    - scene
+    - Loot Display
+    _lookups:
+    - 
+    - 
+  Group: 
+  WaitForCompletion: 0
+--- !u!114 &114649020333618766
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
+  m_Name: Enable Behaviour
+  m_EditorClassIdentifier: 
+  Name: Enable Behaviour
+  GraphPosition: {x: 320, y: 166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable:
+    - player
+    _lookups:
+    - 
+--- !u!114 &114677748597240622
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408dd5d67693c3545bbddb6cfc900c4a, type: 3}
+  m_Name: Hide Control
+  m_EditorClassIdentifier: 
+  Name: Hide Control
+  GraphPosition: {x: 1600, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable:
+    - scene
+    - Loot Display
+    _lookups:
+    - 
+    - 
+--- !u!114 &114690327738691884
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Generate Gold
+  m_EditorClassIdentifier: 
+  Name: Generate Gold
+  GraphPosition: {x: 640, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: generatedGold = Truncate(input.quality * Random(50, 100))
+--- !u!114 &114768701327047442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1909964fbb3034da624df32dc0993c, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  Name: Input
+  GraphPosition: {x: 1280, y: 115.200005}
+  IsBreakpoint: 0
+  Buttons:
+    _items:
+    - Type: 1
+      Name: Submit
+      Value: 0
+      Key: 0
+      OnSelected: {fileID: 114677748597240622}
+--- !u!114 &114777378443045636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Sequence(Clone)
+  m_EditorClassIdentifier: 
+  Name: Sequence
+  GraphPosition: {x: 320, y: 0}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114690327738691884}
+    - {fileID: 114789152154498086}
+    - {fileID: 114481506311885118}
+--- !u!114 &114789152154498086
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Generate Item
+  m_EditorClassIdentifier: 
+  Name: Generate Item
+  GraphPosition: {x: 640, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 'local.itemIndex = Random(0, input.ItemSet.Count)
+
+      generatedItem = input.ItemSet[local.itemIndex]'

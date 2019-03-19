@@ -52,11 +52,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		public void Draw()
 		{
+			Selected = null;
 			Draw(_label);
 		}
 
 		public void Draw(Rect rect)
 		{
+			Selected = null;
 			Draw(rect, _label);
 		}
 
@@ -71,8 +73,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		protected override void Draw(Rect rect, int index)
 		{
-			Selected = null;
-
 			var name = _names[index];
 			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
 			var value = VariableValue.Empty;
@@ -87,13 +87,22 @@ namespace PiRhoSoft.CompositionEditor
 				value = Store.GetVariable(name);
 			}
 
-			if (value.Type == VariableType.Store)
+			if (value.IsEmpty)
 			{
-				if (DrawStore(rect, name, value.Store)) // TODO: show object picker
+				EditorGUI.LabelField(rect, name, VariableValue.EmptyString);
+			}
+			else if (value.HasReference)
+			{
+				var reference = value.Reference;
+
+				if (DrawObject(rect, name, ref reference, value.Type == VariableType.Object))
 				{
 					Selected = value.Store;
 					SelectedName = name;
 				}
+
+				if (reference != value.Reference) // indexed?
+					Store.SetVariable(name, VariableValue.Create(reference));
 			}
 			else
 			{
@@ -107,28 +116,42 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private bool DrawStore(Rect rect, string name, object obj)
+		public static bool DrawObject(string name, ref object obj, bool isEditable)
+		{
+			var rect = EditorGUILayout.GetControlRect(true, EditorGUIUtility.singleLineHeight);
+			return DrawObject(rect, name, ref obj, isEditable);
+		}
+
+		public static bool DrawObject(Rect rect, string name, ref object obj, bool isEditable)
 		{
 			var selected = false;
 			var unity = obj as Object;
 			var store = obj as IVariableStore;
 
-			var viewRect = store != null ? RectHelper.TakeTrailingIcon(ref rect) : rect;
-			var editRect = unity != null ? RectHelper.TakeTrailingIcon(ref rect) : rect;
-
-			GUI.Label(rect, name);
-
-			if (unity != null)
+			if (store != null)
 			{
+				var viewRect = RectHelper.TakeTrailingIcon(ref rect);
+
+				if (GUI.Button(viewRect, ViewButton.Content, GUIStyle.none))
+					selected = true;
+			}
+
+			if (unity != null && !isEditable)
+			{
+				var editRect = RectHelper.TakeTrailingIcon(ref rect);
+
 				if (GUI.Button(editRect, EditButton.Content, GUIStyle.none))
 					Selection.activeObject = unity;
 			}
 
-			if (store != null)
-			{
-				if (GUI.Button(viewRect, ViewButton.Content, GUIStyle.none))
-					selected = true;
-			}
+			if (isEditable)
+				obj = EditorGUI.ObjectField(rect, name, unity, typeof(Object), true);
+			else if (unity != null)
+				EditorGUI.LabelField(rect, name, unity.name);
+			else if (obj != null)
+				EditorGUI.LabelField(rect, name, obj.ToString());
+			else
+				EditorGUI.LabelField(rect, name, "");
 
 			return selected;
 		}
