@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The Audio Player to play the sound on")]
 		[VariableConstraint(typeof(AudioPlayer))]
-		public VariableReference Player;
+		public VariableReference AudioPlayer;
 
 		[Tooltip("The Audio Clip to play")]
 		[InlineDisplay(PropagateLabel = true)]
@@ -39,7 +39,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve(variables, Player, out AudioPlayer player))
+			if (Resolve(variables, AudioPlayer, out AudioPlayer player))
 			{
 				if (Resolve(variables, Sound, out var sound))
 				{

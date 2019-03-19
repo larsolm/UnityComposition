@@ -21,10 +21,52 @@ MonoBehaviour:
     - {fileID: 114620517716717954}
     - {fileID: 114866516215429464}
     - {fileID: 114728111643151580}
+    - {fileID: 114319477458661940}
+    - {fileID: 114016649170688582}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114906063048417074}
   Process: {fileID: 114866516215429464}
   Exit: {fileID: 114325057445265208}
+--- !u!114 &114016649170688582
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
+  m_Name: Show Timer
+  m_EditorClassIdentifier: 
+  Name: Show Timer
+  GraphPosition: {x: 1088, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114728111643151580}
+  Control:
+    _variable:
+    - scene
+    - Timer
+    _lookups:
+    - 
+    - 
+--- !u!114 &114319477458661940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 0, y: -115.200005}
+  IsBreakpoint: 0
+  Comment: Begin the level obscured with the Player's input disabled, load the UI,
+    fade in and show a message, then initialize the timer and enable the Player
 --- !u!114 &114325057445265208
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -59,17 +101,21 @@ MonoBehaviour:
   m_Name: Level Message
   m_EditorClassIdentifier: 
   Name: Level Message
-  GraphPosition: {x: 793.60004, y: 102.4}
+  GraphPosition: {x: 780.8, y: 102.4}
   IsBreakpoint: 0
-  Next: {fileID: 114728111643151580}
+  Next: {fileID: 114016649170688582}
   Control:
-    _variable: []
-    _lookups: []
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
   Interaction: 0
   WaitTime: 0
   IsLast: 1
   Message:
-    Text: 'Level {input.Level}
+    Text: '{input.LevelName}
 
       <size=50%>(Press Enter To Start)'
 --- !u!114 &114620517716717954
@@ -106,7 +152,7 @@ MonoBehaviour:
   m_Name: Set Start Time
   m_EditorClassIdentifier: 
   Name: Set Start Time
-  GraphPosition: {x: 1088, y: 25.6}
+  GraphPosition: {x: 1152, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:

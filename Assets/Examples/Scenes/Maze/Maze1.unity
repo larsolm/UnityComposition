@@ -671,8 +671,8 @@ MonoBehaviour:
     _inputs:
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -685,12 +685,12 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Red
         Object: {fileID: 0}
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -709,12 +709,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     _outputs:
     - Type: 1
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -1054,8 +1054,8 @@ MonoBehaviour:
     _inputs:
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -1068,12 +1068,12 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Blue
         Object: {fileID: 0}
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -1092,12 +1092,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     _outputs:
     - Type: 1
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -1286,6 +1286,7 @@ GameObject:
   - component: {fileID: 863000625}
   - component: {fileID: 863000631}
   - component: {fileID: 863000630}
+  - component: {fileID: 863000633}
   - component: {fileID: 863000632}
   m_Layer: 0
   m_Name: Player
@@ -1348,37 +1349,41 @@ MonoBehaviour:
     _data:
     - Name: RedKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: BlueKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: GreenKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: YellowKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: LevelFinished
       Type: 1
-      Data: False
-      Object: {fileID: 0}
-    - Name: Timer
-      Type: 3
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: JewelsNeeded
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: Jewels
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
-    _version: 10
+    - Name: StartTime
+      Type: 3
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      Object: {fileID: 0}
+    - Name: Started
+      Type: 1
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      Object: {fileID: 0}
+    _version: 17
   Camera: {fileID: 663784546}
   Acceleration: 1
 --- !u!212 &863000628
@@ -1568,8 +1573,8 @@ MonoBehaviour:
     _inputs:
     - Type: 1
       Definition:
-        _name: Level
-        _type: 4
+        _name: LevelName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -1582,10 +1587,28 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
-        Data: 1
+        Type: 15
+        Data: Level 1
         Object: {fileID: 0}
     _outputs: []
+--- !u!114 &863000633
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 863000624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Variables:
+    _data:
+    - Name: Player
+      Type: 16
+      Data: 
+      Object: {fileID: 863000627}
 --- !u!1 &867759259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1714,8 +1737,8 @@ MonoBehaviour:
     _inputs:
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -1728,12 +1751,12 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Green
         Object: {fileID: 0}
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -1752,12 +1775,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     _outputs:
     - Type: 1
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -2566,7 +2589,7 @@ MonoBehaviour:
     _inputs:
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -2585,12 +2608,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -2603,10 +2626,28 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Green
         Object: {fileID: 0}
-    _outputs: []
+    _outputs:
+    - Type: 1
+      Definition:
+        _name: KeyCount
+        _type: 0
+        _tag: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable:
+        - Player
+        - GreenKey
+        _lookups:
+        - 
+        - 
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2739,7 +2780,7 @@ MonoBehaviour:
     _inputs:
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -2758,12 +2799,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -2776,10 +2817,28 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Red
         Object: {fileID: 0}
-    _outputs: []
+    _outputs:
+    - Type: 1
+      Definition:
+        _name: KeyCount
+        _type: 0
+        _tag: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable:
+        - Player
+        - RedKey
+        _lookups:
+        - 
+        - 
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2912,7 +2971,7 @@ MonoBehaviour:
     _inputs:
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -2931,12 +2990,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -2949,10 +3008,28 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Yellow
         Object: {fileID: 0}
-    _outputs: []
+    _outputs:
+    - Type: 1
+      Definition:
+        _name: KeyCount
+        _type: 0
+        _tag: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable:
+        - Player
+        - YellowKey
+        _lookups:
+        - 
+        - 
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3297,7 +3374,7 @@ MonoBehaviour:
     _inputs:
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -3316,12 +3393,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -3334,10 +3411,28 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Blue
         Object: {fileID: 0}
-    _outputs: []
+    _outputs:
+    - Type: 1
+      Definition:
+        _name: KeyCount
+        _type: 0
+        _tag: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable:
+        - Player
+        - BlueKey
+        _lookups:
+        - 
+        - 
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3634,8 +3729,8 @@ MonoBehaviour:
     _inputs:
     - Type: 1
       Definition:
-        _name: Color
-        _type: 4
+        _name: KeyName
+        _type: 15
         _tag: 
         _initializer:
           _statement: 
@@ -3648,12 +3743,12 @@ MonoBehaviour:
         _lookups: []
       _value:
         Name: 
-        Type: 4
+        Type: 15
         Data: Yellow
         Object: {fileID: 0}
     - Type: 0
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:
@@ -3672,12 +3767,12 @@ MonoBehaviour:
       _value:
         Name: 
         Type: 0
-        Data: 
+        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
         Object: {fileID: 0}
     _outputs:
     - Type: 1
       Definition:
-        _name: Key
+        _name: KeyCount
         _type: 0
         _tag: 
         _initializer:

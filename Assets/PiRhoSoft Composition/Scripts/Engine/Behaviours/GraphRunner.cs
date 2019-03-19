@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public InstructionCaller OnAwake = new InstructionCaller();
 
-		void Awake()
+		void Start()
 		{
 			if (OnAwake.Instruction)
 				CompositionManager.Instance.RunInstruction(OnAwake, this);

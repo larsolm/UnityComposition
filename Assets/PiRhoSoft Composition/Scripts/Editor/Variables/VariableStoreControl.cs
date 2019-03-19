@@ -99,7 +99,7 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				using (var changes = new EditorGUI.ChangeCheckScope())
 				{
-					value = VariableValueDrawer.Draw(new GUIContent(name), value, definition);
+					value = VariableValueDrawer.Draw(rect, new GUIContent(name), value, definition);
 
 					if (changes.changed)
 						Store.SetVariable(name, value);

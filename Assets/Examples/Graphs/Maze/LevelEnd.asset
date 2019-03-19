@@ -19,6 +19,8 @@ MonoBehaviour:
     - {fileID: 114186283410596920}
     - {fileID: 114951541933712660}
     - {fileID: 114539580467139412}
+    - {fileID: 114205645420715292}
+    - {fileID: 114856192172782058}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114565799762134696}
 --- !u!114 &114186283410596920
@@ -46,6 +48,29 @@ MonoBehaviour:
   Phase: 0
   AutoFinish: 0
   WaitForCompletion: 1
+--- !u!114 &114205645420715292
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8c57d2e8114e8488985fd8d4c221a0, type: 3}
+  m_Name: Disable Timer
+  m_EditorClassIdentifier: 
+  Name: Disable Timer
+  GraphPosition: {x: 320, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114539580467139412}
+  Target:
+    _variable:
+    - scene
+    - Timer
+    _lookups:
+    - 
+    - 
 --- !u!114 &114372619974763020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -63,15 +88,19 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114186283410596920}
   Control:
-    _variable: []
-    _lookups: []
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
   Interaction: 0
   WaitTime: 0
   IsLast: 1
   Message:
     Text: 'Complete!
 
-      Time: {Player.Timer}
+      Time: {local.Time}
 
       <size=50%>(Press Enter to load next level)'
 --- !u!114 &114539580467139412
@@ -91,7 +120,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114372619974763020}
   Expression:
-    _statement: Player.LevelFinished = true;
+    _statement: 'Player.LevelFinished = true;
+
+      local.Time = Time() - Player.StartTime;'
 --- !u!114 &114565799762134696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,15 +133,34 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
-  m_Name: Disable Character
+  m_Name: Disable Player
   m_EditorClassIdentifier: 
-  Name: Disable Character
-  GraphPosition: {x: 320, y: -0}
+  Name: Disable Player
+  GraphPosition: {x: 320, y: -64}
   IsBreakpoint: 0
-  Next: {fileID: 114539580467139412}
+  Next: {fileID: 114205645420715292}
   Target:
-    _variable: []
-    _lookups: []
+    _variable:
+    - Player
+    _lookups:
+    - 
+--- !u!114 &114856192172782058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: -0, y: -128}
+  IsBreakpoint: 0
+  Comment: End the level by disabling the Player's input, showing a message, fading
+    out and then loading the next scene
 --- !u!114 &114951541933712660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -124,7 +174,7 @@ MonoBehaviour:
   m_Name: Load Scene
   m_EditorClassIdentifier: 
   Name: Load Scene
-  GraphPosition: {x: 1280, y: -0}
+  GraphPosition: {x: 1280, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Scene:

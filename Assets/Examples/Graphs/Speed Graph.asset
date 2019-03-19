@@ -30,11 +30,6 @@ MonoBehaviour:
   m_Name: Expression
   m_EditorClassIdentifier: 
   Name: Expression
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 38.4, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 0}

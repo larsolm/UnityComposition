@@ -88,4 +88,13 @@ MonoBehaviour:
     _minimumConstraint: 0
     _maximumConstraint: 0
     _typeConstraint: 
-  _version: 14
+  - _name: Started
+    _type: 1
+    _tag: Always (not saved)
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  _version: 17
