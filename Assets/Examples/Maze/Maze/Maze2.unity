@@ -1588,6 +1588,8 @@ GameObject:
   - component: {fileID: 869418891}
   - component: {fileID: 869418890}
   - component: {fileID: 869418889}
+  - component: {fileID: 869418896}
+  - component: {fileID: 869418897}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1753,62 +1755,43 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 647905b9567d4a24cbb18c2ba0fb8dd3, type: 2}
-  Camera: {fileID: 284457785}
-  Acceleration: 1
-  OnStart:
-    _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}
-    _inputs:
-    - Type: 1
-      Definition:
-        _name: Level
-        _type: 4
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable: []
-        _lookups: []
-      _value:
-        Name: 
-        Type: 4
-        Data: 2
-        Object: {fileID: 0}
-    _outputs: []
   Variables:
     _data:
     - Name: RedKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: BlueKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: GreenKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: YellowKey
       Type: 2
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: LevelFinished
       Type: 1
-      Data: False
-      Object: {fileID: 0}
-    - Name: Timer
-      Type: 3
-      Data: 0
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
     - Name: JewelsNeeded
       Type: 2
-      Data: 24
+      Data: FAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
       Object: {fileID: 0}
-    _version: 9
+    - Name: Jewels
+      Type: 2
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      Object: {fileID: 0}
+    - Name: StartTime
+      Type: 3
+      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
+      Object: {fileID: 0}
+    _version: 22
+  Camera: {fileID: 284457785}
+  Acceleration: 1
 --- !u!212 &869418894
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1871,6 +1854,59 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &869418896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869418888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAwake:
+    _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}
+    _inputs:
+    - Type: 1
+      Definition:
+        _name: LevelName
+        _type: 15
+        _tag: 
+        _initializer:
+          _statement: 
+        _useRangeConstraint: 0
+        _minimumConstraint: 0
+        _maximumConstraint: 0
+        _typeConstraint: 
+      Reference:
+        _variable: []
+        _lookups: []
+      _value:
+        Name: 
+        Type: 15
+        Data: Level 2
+        Object: {fileID: 0}
+    _outputs: []
+--- !u!114 &869418897
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 869418888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Variables:
+    _data:
+    - Name: Player
+      Type: 16
+      Data: 
+      Object: {fileID: 869418893}
 --- !u!1 &925914639
 GameObject:
   m_ObjectHideFlags: 0

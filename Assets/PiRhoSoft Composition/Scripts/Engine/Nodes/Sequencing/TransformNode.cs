@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -23,23 +24,28 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Transform = new VariableReference();
 
 		[Tooltip("The target position to move to - offset from the original if UseRelativePosition is set")]
-		public Vector3 TargetPosition = Vector3.zero;
+		[InlineDisplay(PropagateLabel = true)]
+		public Vector3VariableSource TargetPosition = new Vector3VariableSource();
 
 		[Tooltip("The target rotation to change to - offset from the original if UseRelativeRotation is set")]
-		[EulerAngles]
-		public Quaternion TargetRotation = Quaternion.identity;
+		[InlineDisplay(PropagateLabel = true)]
+		public Vector3VariableSource TargetRotation = new Vector3VariableSource();
 
 		[Tooltip("The target scale to size to - multiplicative from the original if UseRelativeScale is set")]
-		public Vector3 TargetScale = Vector3.one;
+		[InlineDisplay(PropagateLabel = true)]
+		public Vector3VariableSource TargetScale = new Vector3VariableSource(Vector3.one);
 
 		[Tooltip("Whether to use a relative position from the original or an absolute position")]
-		public bool UseRelativePosition = true;
+		[InlineDisplay(PropagateLabel = true)]
+		public BooleanVariableSource UseRelativePosition = new BooleanVariableSource(true);
 
 		[Tooltip("Whether to use a relative rotation from the original or an absolute rotation")]
-		public bool UseRelativeRotation = true;
+		[InlineDisplay(PropagateLabel = true)]
+		public BooleanVariableSource UseRelativeRotation = new BooleanVariableSource(true);
 
 		[Tooltip("Whether to use a relative scale from the original or an absolute scale")]
-		public bool UseRelativeScale = true;
+		[InlineDisplay(PropagateLabel = true)]
+		public BooleanVariableSource UseRelativeScale = new BooleanVariableSource(true);
 
 		[Tooltip("The method in which to animate toward the target transform")]
 		public AnimationType AnimationMethod = AnimationType.None;
@@ -50,45 +56,76 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The amount of time it takes to move to the target transform")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Duration)]
-		[Minimum(0.0f)]
-		public float Duration = 1.0f;
+		[InlineDisplay(PropagateLabel = true)]
+		public NumberVariableSource Duration = new NumberVariableSource(1.0f);
 
 		[Tooltip("The speed at which to move toward the target position (units per second)")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Speed)]
-		[Minimum(0.0f)]
-		public float MoveSpeed = 1.0f;
+		[InlineDisplay(PropagateLabel = true)]
+		public NumberVariableSource MoveSpeed = new NumberVariableSource(1.0f);
 
 		[Tooltip("The speed at which to move toward the target rotation (degrees per second)")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Speed)]
-		[Minimum(0.0f)]
-		public float RotationSpeed = 1.0f;
+		[InlineDisplay(PropagateLabel = true)]
+		public NumberVariableSource RotationSpeed = new NumberVariableSource(1.0f);
 
 		[Tooltip("The speed at which to scale toward the target scale (units per second)")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Speed)]
-		[Minimum(0.0f)]
-		public float ScaleSpeed = 1.0f;
+		[InlineDisplay(PropagateLabel = true)]
+		public NumberVariableSource ScaleSpeed = new NumberVariableSource(1.0f);
 
 		public override Color NodeColor => Colors.Sequencing;
+
+		public override void GetInputs(List<VariableDefinition> inputs)
+		{
+			TargetPosition.GetInputs(inputs);
+			TargetRotation.GetInputs(inputs);
+			TargetScale.GetInputs(inputs);
+
+			UseRelativePosition.GetInputs(inputs);
+			UseRelativeRotation.GetInputs(inputs);
+			UseRelativeScale.GetInputs(inputs);
+
+			if (AnimationMethod == AnimationType.Duration)
+			{
+				Duration.GetInputs(inputs);
+			}
+			else if (AnimationMethod == AnimationType.Speed)
+			{
+				MoveSpeed.GetInputs(inputs);
+				RotationSpeed.GetInputs(inputs);
+				ScaleSpeed.GetInputs(inputs);
+			}
+		}
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (Resolve<Transform>(variables, Transform, out var transform))
-				yield return Move(transform);
+				yield return Move(transform, variables);
 
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator Move(Transform transform)
+		private IEnumerator Move(Transform transform, InstructionStore variables)
 		{
 			var body2d = transform.GetComponent<Rigidbody2D>();
 			var body3d = transform.GetComponent<Rigidbody>();
 
-			var targetPosition = UseRelativePosition ? transform.position + TargetPosition : TargetPosition;
-			var targetRotation = UseRelativeRotation ? transform.rotation * TargetRotation : TargetRotation;
-			var targetScale = TargetScale;
+			ResolveOther(variables, UseRelativePosition, out var useRelativePosition);
+			ResolveOther(variables, UseRelativeRotation, out var useRelativeRotation);
+			ResolveOther(variables, UseRelativeScale, out var useRelativeScale);
 
-			if (UseRelativeScale)
+			ResolveOther(variables, TargetPosition, out var targetPosition);
+			ResolveOther(variables, TargetRotation, out var targetAngles);
+			ResolveOther(variables, TargetScale, out var targetScale);
+
+			if (useRelativePosition)
+				targetPosition += transform.position;
+
+			if (useRelativeScale)
 				targetScale.Scale(transform.localScale);
+
+			var targetRotation = useRelativeRotation ? transform.rotation * Quaternion.Euler(targetAngles) : Quaternion.Euler(targetAngles);
 
 			if (AnimationMethod == AnimationType.None)
 			{
@@ -103,7 +140,9 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (AnimationMethod == AnimationType.Duration)
 				{
-					var step = Duration > 0.0f ? Time.deltaTime / Duration : 0.0f;
+					ResolveOther(variables, Duration, out var duration);
+
+					var step = duration > 0.0f ? Time.deltaTime / duration : 0.0f;
 					var moveDistance = (targetPosition - transform.position).magnitude;
 					var rotationDistance = Quaternion.Angle(targetRotation, transform.rotation);
 					var scaleDifference = (targetScale - transform.localScale).magnitude;
@@ -114,9 +153,13 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else if (AnimationMethod == AnimationType.Speed)
 				{
-					moveSpeed = MoveSpeed * Time.deltaTime;
-					rotationSpeed = RotationSpeed * Time.deltaTime;
-					scaleSpeed = ScaleSpeed * Time.deltaTime;
+					ResolveOther(variables, MoveSpeed, out moveSpeed);
+					ResolveOther(variables, RotationSpeed, out rotationSpeed);
+					ResolveOther(variables, ScaleSpeed, out scaleSpeed);
+
+					moveSpeed *= Time.deltaTime;
+					rotationSpeed *= Time.deltaTime;
+					scaleSpeed *= Time.deltaTime;
 				}
 
 				if (WaitForCompletion)

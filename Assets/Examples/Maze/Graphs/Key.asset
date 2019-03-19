@@ -18,6 +18,7 @@ MonoBehaviour:
     - {fileID: 114626076434710948}
     - {fileID: 114613277615437018}
     - {fileID: 114523905499944702}
+    - {fileID: 114840982862560130}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114416159429543150}
 --- !u!114 &114416159429543150
@@ -33,14 +34,14 @@ MonoBehaviour:
   m_Name: Destroy Key
   m_EditorClassIdentifier: 
   Name: Destroy Key
-  This:
-    _variable:
-    - this
-    _lookups:
-    - GameObject
   GraphPosition: {x: 332.80002, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114523905499944702}
+  Target:
+    _variable:
+    - root
+    _lookups:
+    - 
 --- !u!114 &114523905499944702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -54,14 +55,14 @@ MonoBehaviour:
   m_Name: Play Pickup Sound
   m_EditorClassIdentifier: 
   Name: Play Pickup Sound
-  This:
-    _variable:
-    - Player
-    _lookups:
-    - AudioPlayer
   GraphPosition: {x: 640, y: -76.8}
   IsBreakpoint: 0
   Next: {fileID: 114613277615437018}
+  AudioPlayer:
+    _variable:
+    - Player
+    _lookups:
+    - 
   Sound:
     Type: 0
     Reference:
@@ -88,16 +89,11 @@ MonoBehaviour:
   m_Name: Increment Key Count
   m_EditorClassIdentifier: 
   Name: Increment Key Count
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 704, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114626076434710948}
   Expression:
-    _statement: 'output.Key = input.Key + 1
+    _statement: 'output.KeyCount = input.KeyCount + 1
 
 '
 --- !u!114 &114626076434710948
@@ -113,19 +109,35 @@ MonoBehaviour:
   m_Name: Key Acquired Message
   m_EditorClassIdentifier: 
   Name: Key Acquired Message
-  This:
-    _variable:
-    - this
-    _lookups:
-    - 
   GraphPosition: {x: 780.8, y: 76.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    InterfaceName: Interface
-    ControlName: Message
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
   Interaction: 3
   WaitTime: 2
   IsLast: 0
   Message:
-    Text: '{input.Color} Key Acquired!'
+    Text: '{input.KeyName} Key Acquired!'
+--- !u!114 &114840982862560130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: -0, y: -76.8}
+  IsBreakpoint: 0
+  Comment: Destroy the picked up key and play a sound and display a message confirming
+    so

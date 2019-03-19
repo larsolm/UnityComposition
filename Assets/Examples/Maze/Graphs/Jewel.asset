@@ -24,6 +24,7 @@ MonoBehaviour:
     - {fileID: 114010021192242288}
     - {fileID: 114019920891345730}
     - {fileID: 114252435143868472}
+    - {fileID: 114679176875131434}
   StartPosition: {x: -0, y: -25.6}
   Process: {fileID: 114252435143868472}
 --- !u!114 &114010021192242288
@@ -67,7 +68,7 @@ MonoBehaviour:
   Next: {fileID: 0}
   Target:
     _variable:
-    - Root
+    - root
     _lookups:
     - 
 --- !u!114 &114083666097521882
@@ -101,7 +102,7 @@ MonoBehaviour:
   Positioning: 1
   Object:
     _variable:
-    - Root
+    - root
     _lookups:
     - 
   Parent:
@@ -214,6 +215,23 @@ MonoBehaviour:
     - Player
     _lookups:
     - 
+--- !u!114 &114679176875131434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 0, y: -128}
+  IsBreakpoint: 0
+  Comment: Play an effect and destroy the jewel that was picked up then check if enough
+    keys are needed to open the finish door and open it if so
 --- !u!114 &114754646623374914
 MonoBehaviour:
   m_ObjectHideFlags: 1

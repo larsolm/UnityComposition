@@ -42,6 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 			var rootVariables = variables.Root;
 			_rootStore = variables;
 
+			ChangeRoot(rootVariables);
 			GoTo(root, source);
 
 			while (ShouldContinue())

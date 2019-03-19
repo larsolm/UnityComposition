@@ -42,6 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (interaction == MessageInteractionType.DontWait)
 			{
+				Activate(); // This must be done here because if the object is inactive, coroutines cannot begin
 				StartCoroutine(DoRun(text, interaction, isLast, wait));
 			}
 			else
@@ -58,8 +59,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		private IEnumerator DoRun(string text, MessageInteractionType interaction, bool isLast, float wait)
 		{
-			Activate();
-
 			yield return Run(text, interaction, isLast);
 			yield return new WaitForSecondsRealtime(wait);
 

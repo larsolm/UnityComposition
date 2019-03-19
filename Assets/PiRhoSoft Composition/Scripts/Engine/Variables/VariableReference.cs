@@ -125,7 +125,7 @@ namespace PiRhoSoft.CompositionEngine
 				builder.Append(_variable[i]);
 
 				if (!string.IsNullOrEmpty(_lookups[i]))
-					builder.AppendFormat("{0}{1},{2}", LookupOpen, _lookups[i], LookupClose);
+					builder.AppendFormat("{0}{1}{2}", LookupOpen, _lookups[i], LookupClose);
 			}
 
 			return builder.ToString();

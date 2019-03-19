@@ -10,68 +10,60 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7e42c1f2776d5043957247cb96f24d3, type: 3}
-  m_Name: World Schema
+  m_Name: Maze Schema
   m_EditorClassIdentifier: 
-  InitializerType: 0
-  Availabilities: []
+  InitializerType: 1
+  Tags:
+    _items: []
   _definitions:
-  - _name: BoolSchema
-    _type: 1
-    _availability: Always (not saved)
-    _initializer:
-      _statement: true
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
-  - _name: IntSchema
+  - _name: RedKey
     _type: 2
-    _availability: Always (not saved)
-    _initializer:
-      _statement: 4
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
-  - _name: FloatSchema
-    _type: 3
-    _availability: Always (not saved)
-    _initializer:
-      _statement: CustomThing(3.5, 5.0)
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
-  - _name: StringSchema
-    _type: 4
-    _availability: Always (not saved)
-    _initializer:
-      _statement: '"What"'
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
-  - _name: ObjectSchema
-    _type: 5
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
     _minimumConstraint: 0
     _maximumConstraint: 0
     _typeConstraint: 
-  - _name: StoreSchema
-    _type: 6
-    _availability: Always (not saved)
+  - _name: BlueKey
+    _type: 2
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
     _minimumConstraint: 0
     _maximumConstraint: 0
     _typeConstraint: 
-  - _name: Door1Open
+  - _name: GreenKey
+    _type: 2
+    _tag: 
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: YellowKey
+    _type: 2
+    _tag: 
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: LevelFinished
     _type: 1
-    _availability: Always (not saved)
+    _tag: 
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  - _name: JewelsNeeded
+    _type: 2
+    _tag: 
     _initializer:
       _statement: 
     _useRangeConstraint: 0
@@ -80,11 +72,20 @@ MonoBehaviour:
     _typeConstraint: 
   - _name: Jewels
     _type: 2
-    _availability: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
-    _useRangeConstraint: 1
+    _useRangeConstraint: 0
     _minimumConstraint: 0
-    _maximumConstraint: 3
+    _maximumConstraint: 0
     _typeConstraint: 
-  _version: 65
+  - _name: StartTime
+    _type: 3
+    _tag: Always (not saved)
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  _version: 22

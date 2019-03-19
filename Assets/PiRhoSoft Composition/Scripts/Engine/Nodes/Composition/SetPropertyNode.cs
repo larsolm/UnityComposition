@@ -70,8 +70,8 @@ namespace PiRhoSoft.CompositionEngine
 
 					if (obj != null)
 					{
-						Field?.SetValue(component, Value);
-						Property?.SetValue(component, Value);
+						Field?.SetValue(component, obj);
+						Property?.SetValue(component, obj);
 					}
 				}
 				else
