@@ -33,18 +33,18 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (Resolve<Object>(variables, Object, out var obj))
 			{
-				if (variables.Root is GameObject gameObject)
+				if (obj is GameObject gameObject)
 				{
 					VariableBinding.UpdateBinding(gameObject, Group, _status);
 				}
-				else if (variables.Root is InterfaceControl control)
+				else if (obj is InterfaceControl control)
 				{
 					VariableBinding.UpdateBinding(control.gameObject, Group, _status);
 
 					foreach (var dependency in control.DependentObjects)
 						VariableBinding.UpdateBinding(dependency, Group, _status);
 				}
-				else if (variables.Root is Component component)
+				else if (obj is Component component)
 				{
 					VariableBinding.UpdateBinding(component.gameObject, Group, _status);
 				}

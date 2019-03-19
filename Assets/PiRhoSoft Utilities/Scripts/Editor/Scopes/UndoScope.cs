@@ -45,11 +45,14 @@ namespace PiRhoSoft.UtilityEditor
 
 				if (_object && (changed || _forceDirty))
 				{
-					EditorUtility.SetDirty(_object); // Set dirty doesn't mark scene as dirty
-					if (_object is GameObject obj)
-						EditorSceneManager.MarkSceneDirty(obj.scene);
-					else if (_object is MonoBehaviour behaviour)
-						EditorSceneManager.MarkSceneDirty(behaviour.gameObject.scene);
+					if (!Application.isPlaying)
+					{
+						EditorUtility.SetDirty(_object); // Set dirty doesn't mark scene as dirty
+						if (_object is GameObject obj)
+							EditorSceneManager.MarkSceneDirty(obj.scene);
+						else if (_object is MonoBehaviour behaviour)
+							EditorSceneManager.MarkSceneDirty(behaviour.gameObject.scene);
+					}
 				}
 			}
 

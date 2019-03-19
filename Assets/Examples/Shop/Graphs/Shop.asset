@@ -1,0 +1,408 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: Shop
+  m_EditorClassIdentifier: 
+  _nodes:
+    _items:
+    - {fileID: 114513816592485760}
+    - {fileID: 114088153181717158}
+    - {fileID: 114729775811911802}
+    - {fileID: 114183395291032680}
+    - {fileID: 114643623610735892}
+    - {fileID: 114141269857799520}
+    - {fileID: 114489635538051110}
+    - {fileID: 114252091448020546}
+    - {fileID: 114519871788225294}
+    - {fileID: 114269850318714992}
+    - {fileID: 114709914363264112}
+    - {fileID: 114005516978369318}
+  StartPosition: {x: 0, y: 0}
+  Enter: {fileID: 114088153181717158}
+  Process: {fileID: 114141269857799520}
+  Exit: {fileID: 114183395291032680}
+--- !u!114 &114005516978369318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: How Many
+  m_EditorClassIdentifier: 
+  Name: How Many
+  GraphPosition: {x: 1792, y: -217.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 3
+  WaitTime: 0
+  IsLast: 0
+  Message:
+    Text: How many?
+--- !u!114 &114088153181717158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Player
+  m_EditorClassIdentifier: 
+  Name: Disable Player
+  GraphPosition: {x: 25.6, y: -89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114513816592485760}
+  Target:
+    _variable:
+    - Player
+    _lookups:
+    - 
+--- !u!114 &114141269857799520
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Greeting
+  m_EditorClassIdentifier: 
+  Name: Greeting
+  GraphPosition: {x: 345.6, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114489635538051110}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 3
+  WaitTime: 0
+  IsLast: 0
+  Message:
+    Text: What can I do for you today?
+--- !u!114 &114183395291032680
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408dd5d67693c3545bbddb6cfc900c4a, type: 3}
+  m_Name: Hide Message
+  m_EditorClassIdentifier: 
+  Name: Hide Message
+  GraphPosition: {x: 25.6, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114729775811911802}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+--- !u!114 &114252091448020546
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Buy Message
+  m_EditorClassIdentifier: 
+  Name: Buy Message
+  GraphPosition: {x: 1075.2001, y: -153.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114269850318714992}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 3
+  WaitTime: 0
+  IsLast: 0
+  Message:
+    Text: What would you like to buy?
+--- !u!114 &114269850318714992
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Buy Selection
+  m_EditorClassIdentifier: 
+  Name: Buy Selection
+  GraphPosition: {x: 1472, y: -179.2}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114141269857799520}
+  Control:
+    _variable:
+    - scene
+    - Items
+    _lookups:
+    - 
+    - 
+  IsSelectionRequired: 0
+  Items:
+    _items:
+    - Variables:
+        _variable:
+        - Shop
+        _lookups:
+        - 
+      Source: 1
+      Name: 
+      Template: {fileID: 0}
+      Label: Inventory
+      Expand: 1
+      OnSelected: {fileID: 114005516978369318}
+    - Variables:
+        _variable: []
+        _lookups: []
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Back
+      Expand: 1
+      OnSelected: {fileID: 114141269857799520}
+--- !u!114 &114489635538051110
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Shop Selection
+  m_EditorClassIdentifier: 
+  Name: Shop Selection
+  GraphPosition: {x: 678.4, y: -12.8}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114643623610735892}
+  Control:
+    _variable:
+    - scene
+    - Selection
+    _lookups:
+    - 
+    - 
+  IsSelectionRequired: 0
+  Items:
+    _items:
+    - Variables:
+        _variable: []
+        _lookups: []
+      Source: 1
+      Name: Buy
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Buy
+      Expand: 0
+      OnSelected: {fileID: 114252091448020546}
+    - Variables:
+        _variable: []
+        _lookups: []
+      Source: 1
+      Name: Sell
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Sell
+      Expand: 0
+      OnSelected: {fileID: 114519871788225294}
+    - Variables:
+        _variable: []
+        _lookups: []
+      Source: 1
+      Name: Exit
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Exit
+      Expand: 0
+      OnSelected: {fileID: 114643623610735892}
+--- !u!114 &114513816592485760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
+  m_Name: Show Message
+  m_EditorClassIdentifier: 
+  Name: Show Message
+  GraphPosition: {x: 128, y: -166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+--- !u!114 &114519871788225294
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Sell Message
+  m_EditorClassIdentifier: 
+  Name: Sell Message
+  GraphPosition: {x: 1113.6, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114709914363264112}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 0
+  WaitTime: 0
+  IsLast: 0
+  Message:
+    Text: What would you like to sell?
+--- !u!114 &114643623610735892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Goodbye
+  m_EditorClassIdentifier: 
+  Name: Goodbye
+  GraphPosition: {x: 755.2, y: 166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 0
+  WaitTime: 0
+  IsLast: 1
+  Message:
+    Text: Come back again!
+--- !u!114 &114709914363264112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Sell Selection
+  m_EditorClassIdentifier: 
+  Name: Sell Selection
+  GraphPosition: {x: 1472, y: 140.8}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114141269857799520}
+  Control:
+    _variable: []
+    _lookups: []
+  IsSelectionRequired: 0
+  Items:
+    _items:
+    - Variables:
+        _variable:
+        - Player
+        - Inventory
+        _lookups:
+        - 
+        - 
+      Source: 1
+      Name: 
+      Template: {fileID: 0}
+      Label: Inventory
+      Expand: 1
+      OnSelected: {fileID: 0}
+    - Variables:
+        _variable: []
+        _lookups: []
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Back
+      Expand: 0
+      OnSelected: {fileID: 114141269857799520}
+--- !u!114 &114729775811911802
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
+  m_Name: Enable Player
+  m_EditorClassIdentifier: 
+  Name: Enable Player
+  GraphPosition: {x: 140.8, y: 192}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable:
+    - Player
+    _lookups:
+    - 
