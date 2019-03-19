@@ -21,10 +21,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		void OnDisable()
 		{
-			for (var i = 0; i < Variables.VariableCount; i++)
+			if (CompositionManager.Exists)
 			{
-				var name = Variables.GetVariableName(i);
-				CompositionManager.Instance.GlobalStore.RemoveVariable(name);
+				for (var i = 0; i < Variables.VariableCount; i++)
+				{
+					var name = Variables.GetVariableName(i);
+					CompositionManager.Instance.GlobalStore.RemoveVariable(name);
+				}
 			}
 		}
 	}

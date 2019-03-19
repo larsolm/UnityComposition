@@ -87,19 +87,24 @@ namespace PiRhoSoft.CompositionEditor
 				value = Store.GetVariable(name);
 			}
 
-			if (value.Type == VariableType.Store)
+			if (value.HasReference)
 			{
-				if (DrawStore(rect, name, value.Store)) // TODO: show object picker
+				var reference = value.Reference;
+
+				if (DrawObject(rect, name, ref reference, true))
 				{
 					Selected = value.Store;
 					SelectedName = name;
 				}
+
+				if (reference != value.Reference) // indexed?
+					Store.SetVariable(name, VariableValue.Create(reference));
 			}
 			else
 			{
 				using (var changes = new EditorGUI.ChangeCheckScope())
 				{
-					value = VariableValueDrawer.Draw(new GUIContent(name), value, definition);
+					value = VariableValueDrawer.Draw(rect, new GUIContent(name), value, definition);
 
 					if (changes.changed)
 						Store.SetVariable(name, value);
@@ -107,27 +112,50 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private bool DrawStore(Rect rect, string name, object obj)
+		public static bool DrawObject(string name, ref object obj, bool isEditable)
+		{
+			var rect = EditorGUILayout.GetControlRect(true, EditorGUIUtility.singleLineHeight);
+			return DrawObject(rect, name, ref obj, isEditable);
+		}
+
+		public static bool DrawObject(Rect rect, string name, ref object obj, bool isEditable)
 		{
 			var selected = false;
 			var unity = obj as Object;
 			var store = obj as IVariableStore;
 
-			var viewRect = store != null ? RectHelper.TakeTrailingIcon(ref rect) : rect;
-			var editRect = unity != null ? RectHelper.TakeTrailingIcon(ref rect) : rect;
+			rect = EditorGUI.PrefixLabel(rect, new GUIContent(name));
 
-			GUI.Label(rect, name);
-
-			if (unity != null)
+			if (store != null)
 			{
+				var viewRect = RectHelper.TakeTrailingIcon(ref rect);
+
+				if (GUI.Button(viewRect, ViewButton.Content, GUIStyle.none))
+					selected = true;
+			}
+
+			if (unity != null && !isEditable)
+			{
+				var editRect = RectHelper.TakeTrailingIcon(ref rect);
+
 				if (GUI.Button(editRect, EditButton.Content, GUIStyle.none))
 					Selection.activeObject = unity;
 			}
 
-			if (store != null)
+			if (obj == null)
 			{
-				if (GUI.Button(viewRect, ViewButton.Content, GUIStyle.none))
-					selected = true;
+				GUI.Label(rect, VariableValue.NullString);
+			}
+			else if (unity != null)
+			{
+				if (isEditable)
+					obj = EditorGUI.ObjectField(rect, unity, typeof(Object), true);
+				else
+					GUI.Label(rect, unity.name);
+			}
+			else
+			{
+				GUI.Label(rect, obj.ToString());
 			}
 
 			return selected;

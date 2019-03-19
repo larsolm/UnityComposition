@@ -31,8 +31,8 @@ namespace PiRhoSoft.CompositionEngine
 
 	public struct VariableValue
 	{
-		private const string _emptyString = "(empty)";
-		private const string _nullString = "(null)";
+		public const string EmptyString = "(empty)";
+		public const string NullString = "(null)";
 
 		static VariableValue()
 		{
@@ -93,7 +93,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			switch (Type)
 			{
-				case VariableType.Empty: return _emptyString;
+				case VariableType.Empty: return EmptyString;
 				case VariableType.Bool: return _value.Bool.ToString();
 				case VariableType.Int: return _value.Int.ToString();
 				case VariableType.Float: return _value.Float.ToString();
@@ -109,10 +109,10 @@ namespace PiRhoSoft.CompositionEngine
 				case VariableType.Bounds: return _value.Bounds.ToString();
 				case VariableType.Color: return _value.Color.ToString();
 				case VariableType.String: return (string)_reference;
-				case VariableType.Object: return _reference != null ? _reference.ToString() : _nullString;
-				case VariableType.Store: return _reference != null ? _reference.ToString() : _nullString;
-				case VariableType.Other: return _reference != null ? _reference.ToString() : _nullString;
-				default: return _emptyString;
+				case VariableType.Object: return _reference != null ? _reference.ToString() : NullString;
+				case VariableType.Store: return _reference != null ? _reference.ToString() : NullString;
+				case VariableType.Other: return _reference != null ? _reference.ToString() : NullString;
+				default: return EmptyString;
 			}
 		}
 

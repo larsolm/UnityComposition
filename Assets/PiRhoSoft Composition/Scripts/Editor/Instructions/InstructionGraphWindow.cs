@@ -120,7 +120,6 @@ namespace PiRhoSoft.CompositionEditor
 		private InstructionGraphNode.NodeData _selectedInteraction;
 
 		private InstructionGraph _watching;
-		private VariableStoreControl _thisStore;
 		private VariableStoreControl _inputStore;
 		private VariableStoreControl _outputStore;
 		private VariableStoreControl _localStore;
@@ -1141,8 +1140,6 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (_watching != _graph)
 				SetupWatch();
-			else if (_thisStore == null || _thisStore.Store != _graph.Store.Root)
-				UpdateWatchThis();
 
 			rect.x = WatchLeft;
 			rect.y = ToolbarBottom;
@@ -1160,8 +1157,11 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					EditorGUILayout.Space();
 
+					var root = _graph.Store.Root;
+					if (VariableStoreControl.DrawObject(InstructionStore.RootStoreName, ref root, false))
+						UpdateWatchSelected(InstructionStore.RootStoreName, root as IVariableStore);
+
 					if (_selectedStore != null) _selectedStore.Draw();
-					if (_thisStore != null) _thisStore.Draw();
 					if (_localStore != null) _localStore.Draw();
 					if (_globalStore != null) _globalStore.Draw();
 					if (_inputStore != null) _inputStore.Draw();
@@ -1174,7 +1174,6 @@ namespace PiRhoSoft.CompositionEditor
 			}
 
 			UpdateWatchSelected(_selectedStore);
-			UpdateWatchSelected(_thisStore);
 			UpdateWatchSelected(_localStore);
 			UpdateWatchSelected(_globalStore);
 			UpdateWatchSelected(_inputStore);
@@ -1184,7 +1183,6 @@ namespace PiRhoSoft.CompositionEditor
 		private void SetupWatch()
 		{
 			_watching = _graph;
-			_thisStore = CreateStoreControl(InstructionStore.RootStoreName, _graph.Store.Root as IVariableStore, _thisStore);
 			_inputStore = CreateStoreControl(InstructionStore.InputStoreName, _graph.Store.Input, _inputStore);
 			_outputStore = CreateStoreControl(InstructionStore.OutputStoreName, _graph.Store.Output, _outputStore);
 			_localStore = CreateStoreControl(InstructionStore.LocalStoreName, _graph.Store.Local, _localStore);
@@ -1194,7 +1192,6 @@ namespace PiRhoSoft.CompositionEditor
 		private void TeardownWatch()
 		{
 			_watching = null;
-			_thisStore = null;
 			_inputStore = null;
 			_outputStore = null;
 			_localStore = null;
@@ -1202,15 +1199,15 @@ namespace PiRhoSoft.CompositionEditor
 			_selectedStore = null;
 		}
 
-		private void UpdateWatchThis()
-		{
-			_thisStore = CreateStoreControl(InstructionStore.RootStoreName, _graph.Store.Root as IVariableStore, _thisStore);
-		}
-
 		private void UpdateWatchSelected(VariableStoreControl control)
 		{
 			if (control != null && control.Selected != null)
-				_selectedStore = CreateStoreControl(control.SelectedName, control.Selected, _selectedStore);
+				UpdateWatchSelected(control.SelectedName, control.Selected);
+		}
+
+		private void UpdateWatchSelected(string name, IVariableStore store)
+		{
+			_selectedStore = CreateStoreControl(name, store, _selectedStore);
 		}
 
 		private VariableStoreControl CreateStoreControl(string name, IVariableStore store, VariableStoreControl existing)

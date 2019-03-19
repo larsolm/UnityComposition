@@ -27,9 +27,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		private TextMeshProUGUI _text;
 
-		void Awake()
+		public TextMeshProUGUI Text
 		{
-			_text = GetComponent<TextMeshProUGUI>();
+			get
+			{
+				// can't look up in awake because it's possible to update bindings before the component is enabled
+
+				if (!_text)
+					_text = GetComponent<TextMeshProUGUI>();
+
+				return _text;
+			}
 		}
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
@@ -37,9 +45,9 @@ namespace PiRhoSoft.CompositionEngine
 			status?.Increment();
 
 			var value = Variable.GetValue(variables);
-			_text.enabled = value.Type == VariableType.Int || value.Type == VariableType.Float;
+			Text.enabled = value.Type == VariableType.Int || value.Type == VariableType.Float;
 
-			if (_text.enabled)
+			if (Text.enabled)
 			{
 				if (Speed <= 0)
 				{
@@ -55,12 +63,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void SetValue(int value)
 		{
-			_text.text = Format.GetFormattedString(value);
+			Text.text = Format.GetFormattedString(value);
 		}
 
 		private IEnumerator AnimateValue(int target, BindingAnimationStatus status)
 		{
-			if (int.TryParse(_text.text, out var current))
+			if (int.TryParse(Text.text, out var current))
 			{
 				var value = (float)current;
 				while (current != target)

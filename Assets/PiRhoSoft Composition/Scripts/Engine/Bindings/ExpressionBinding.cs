@@ -14,18 +14,20 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The expression to evaluate and display as text in this object")]
 		public Expression Expression;
 
+		private TextMeshProUGUI _text;
+
 		public TextMeshProUGUI Text
 		{
 			get
 			{
+				// can't look up in awake because it's possible to update bindings before the component is enabled
+
 				if (!_text)
 					_text = GetComponent<TextMeshProUGUI>();
 
 				return _text;
 			}
 		}
-
-		private TextMeshProUGUI _text;
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
