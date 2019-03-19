@@ -26,6 +26,17 @@ MonoBehaviour:
     - {fileID: 114269850318714992}
     - {fileID: 114709914363264112}
     - {fileID: 114847745371924412}
+    - {fileID: 114369005393090606}
+    - {fileID: 114673305543053256}
+    - {fileID: 114947140308444364}
+    - {fileID: 114939757092951248}
+    - {fileID: 114233368618955598}
+    - {fileID: 114091925254926252}
+    - {fileID: 114671574917590644}
+    - {fileID: 114222172517623174}
+    - {fileID: 114347475480548014}
+    - {fileID: 114426157756128116}
+    - {fileID: 114404937425963358}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114088153181717158}
   Process: {fileID: 114141269857799520}
@@ -50,6 +61,34 @@ MonoBehaviour:
     _variable:
     - Player
     _lookups:
+    - 
+--- !u!114 &114091925254926252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2d22bf28ff71de94f81d70a4b18b9cea, type: 3}
+  m_Name: Add To Store
+  m_EditorClassIdentifier: 
+  Name: Add To Store
+  GraphPosition: {x: 2828.8, y: -166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 114939757092951248}
+  Value:
+    _variable:
+    - root
+    _lookups:
+    - 
+  Store:
+    _variable:
+    - Player
+    - Inventory
+    _lookups:
+    - 
     - 
 --- !u!114 &114141269857799520
 MonoBehaviour:
@@ -102,6 +141,72 @@ MonoBehaviour:
     _lookups:
     - 
     - 
+--- !u!114 &114222172517623174
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Selection
+  m_EditorClassIdentifier: 
+  Name: Selection
+  GraphPosition: {x: 2227.2, y: 192}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114519871788225294}
+  Control:
+    _variable:
+    - scene
+    - Selection
+    _lookups:
+    - 
+    - 
+  IsSelectionRequired: 0
+  Items:
+    _items:
+    - Variables:
+        _variable:
+        - root
+        _lookups:
+        - 
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Yes
+      Expand: 0
+      OnSelected: {fileID: 114426157756128116}
+    - Variables:
+        _variable: []
+        _lookups: []
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: No
+      Expand: 0
+      OnSelected: {fileID: 114519871788225294}
+--- !u!114 &114233368618955598
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Purchase
+  m_EditorClassIdentifier: 
+  Name: Purchase
+  GraphPosition: {x: 2752, y: -256}
+  IsBreakpoint: 0
+  Next: {fileID: 114091925254926252}
+  Expression:
+    _statement: Player.Money -= root.Cost
 --- !u!114 &114252091448020546
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -125,7 +230,7 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  Interaction: 3
+  Interaction: 2
   WaitTime: 0
   IsLast: 0
   Message:
@@ -143,7 +248,7 @@ MonoBehaviour:
   m_Name: Buy Selection
   m_EditorClassIdentifier: 
   Name: Buy Selection
-  GraphPosition: {x: 1472, y: -179.2}
+  GraphPosition: {x: 1228.8, y: -396.80002}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114141269857799520}
   Control:
@@ -167,7 +272,7 @@ MonoBehaviour:
         type: 3}
       Label: Inventory
       Expand: 1
-      OnSelected: {fileID: 0}
+      OnSelected: {fileID: 114847745371924412}
     - Variables:
         _variable: []
         _lookups: []
@@ -178,6 +283,128 @@ MonoBehaviour:
       Label: Back
       Expand: 0
       OnSelected: {fileID: 114141269857799520}
+--- !u!114 &114347475480548014
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Purchased
+  m_EditorClassIdentifier: 
+  Name: Purchased
+  GraphPosition: {x: 2662.4001, y: 422.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114519871788225294}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 0
+  WaitTime: 0
+  IsLast: 0
+  Message:
+    Text: Pleasure doing business.
+--- !u!114 &114369005393090606
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Selection
+  m_EditorClassIdentifier: 
+  Name: Selection
+  GraphPosition: {x: 2048, y: -384}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114252091448020546}
+  Control:
+    _variable:
+    - scene
+    - Selection
+    _lookups:
+    - 
+    - 
+  IsSelectionRequired: 0
+  Items:
+    _items:
+    - Variables:
+        _variable:
+        - root
+        _lookups:
+        - 
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Yes
+      Expand: 0
+      OnSelected: {fileID: 114673305543053256}
+    - Variables:
+        _variable: []
+        _lookups: []
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: No
+      Expand: 0
+      OnSelected: {fileID: 114252091448020546}
+--- !u!114 &114404937425963358
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d23260fd44acc814e83bdb65c30a9926, type: 3}
+  m_Name: Remove From Store
+  m_EditorClassIdentifier: 
+  Name: Remove From Store
+  GraphPosition: {x: 2598.4001, y: 230.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 114347475480548014}
+  Value:
+    _variable:
+    - root
+    _lookups:
+    - 
+  Store:
+    _variable:
+    - Player
+    - Inventory
+    _lookups:
+    - 
+    - 
+--- !u!114 &114426157756128116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Sell
+  m_EditorClassIdentifier: 
+  Name: Sell
+  GraphPosition: {x: 2547.2, y: 128}
+  IsBreakpoint: 0
+  Next: {fileID: 114404937425963358}
+  Expression:
+    _statement: Player.Money += root.Cost
 --- !u!114 &114489635538051110
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -280,7 +507,7 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  Interaction: 0
+  Interaction: 2
   WaitTime: 0
   IsLast: 0
   Message:
@@ -298,7 +525,7 @@ MonoBehaviour:
   m_Name: Goodbye
   m_EditorClassIdentifier: 
   Name: Goodbye
-  GraphPosition: {x: 755.2, y: 166.40001}
+  GraphPosition: {x: 768, y: 204.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -313,6 +540,54 @@ MonoBehaviour:
   IsLast: 1
   Message:
     Text: Come back again!
+--- !u!114 &114671574917590644
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Confirmation
+  m_EditorClassIdentifier: 
+  Name: Confirmation
+  GraphPosition: {x: 1856, y: 307.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114222172517623174}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 2
+  WaitTime: 0
+  IsLast: 1
+  Message:
+    Text: Are you sure you want to sell your {root.Name}? I'll give you ${root.Cost}
+      for it.
+--- !u!114 &114673305543053256
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Can Purchase
+  m_EditorClassIdentifier: 
+  Name: Can Purchase
+  GraphPosition: {x: 2432, y: -153.6}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114233368618955598}
+  OnFalse: {fileID: 114947140308444364}
+  Condition:
+    _statement: root.Cost <= Player.Money
 --- !u!114 &114709914363264112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -326,7 +601,7 @@ MonoBehaviour:
   m_Name: Sell Selection
   m_EditorClassIdentifier: 
   Name: Sell Selection
-  GraphPosition: {x: 1472, y: 140.8}
+  GraphPosition: {x: 1331.2001, y: 204.8}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114141269857799520}
   Control:
@@ -352,7 +627,7 @@ MonoBehaviour:
         type: 3}
       Label: Inventory
       Expand: 1
-      OnSelected: {fileID: 0}
+      OnSelected: {fileID: 114671574917590644}
     - Variables:
         _variable: []
         _lookups: []
@@ -397,9 +672,9 @@ MonoBehaviour:
   m_Name: Confirmation
   m_EditorClassIdentifier: 
   Name: Confirmation
-  GraphPosition: {x: 1869.383, y: -152.42574}
+  GraphPosition: {x: 1664, y: -358.4}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 114369005393090606}
   Control:
     _variable:
     - scene
@@ -412,3 +687,59 @@ MonoBehaviour:
   IsLast: 1
   Message:
     Text: 1 {root.Name}, that will cost ${root.Cost}. Are you sure?
+--- !u!114 &114939757092951248
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Purchased
+  m_EditorClassIdentifier: 
+  Name: Purchased
+  GraphPosition: {x: 2688, y: -25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114252091448020546}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 0
+  WaitTime: 0
+  IsLast: 0
+  Message:
+    Text: Pleasure doing business.
+--- !u!114 &114947140308444364
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Not Enough
+  m_EditorClassIdentifier: 
+  Name: Not Enough
+  GraphPosition: {x: 2419.2, y: -345.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114252091448020546}
+  Control:
+    _variable:
+    - scene
+    - Message
+    _lookups:
+    - 
+    - 
+  Interaction: 0
+  WaitTime: 0
+  IsLast: 0
+  Message:
+    Text: You don't have enough money!

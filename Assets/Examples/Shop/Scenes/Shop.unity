@@ -1057,7 +1057,7 @@ MonoBehaviour:
     - Name: Shop
       Type: 16
       Data: 
-      Object: {fileID: 11400000, guid: 007b7768badae644c998b1e77ad85a27, type: 2}
+      Object: {fileID: 948553111}
 --- !u!114 &840948838
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1190,6 +1190,7 @@ GameObject:
   - component: {fileID: 948553107}
   - component: {fileID: 948553110}
   - component: {fileID: 948553109}
+  - component: {fileID: 948553111}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -1309,6 +1310,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!114 &948553111
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 948553106}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db6596faa30e8604295dd4da8c9bda94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Objects:
+    _items:
+    - {fileID: 11400000, guid: fa0442ad09dd84943b2d317722d4e3a6, type: 2}
+    - {fileID: 11400000, guid: 05b4cfaafe467224582ed93f0284df60, type: 2}
+    - {fileID: 11400000, guid: 5effb37f32ac47746ba1be3a37a14119, type: 2}
+    - {fileID: 11400000, guid: 9077bd585c101694f86c433c24d7f890, type: 2}
+    - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
 --- !u!1 &955332814
 GameObject:
   m_ObjectHideFlags: 0
