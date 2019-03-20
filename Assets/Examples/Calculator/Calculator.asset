@@ -58,7 +58,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 7;'
+      Display += 7;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114074590478759008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -116,7 +118,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 3;'
+      Display += 3;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114268825771250320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,7 +160,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 6;'
+      Display += 6;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114423297059122700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,7 +182,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 5;'
+      Display += 5;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114471882883978834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,7 +204,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 9;'
+      Display += 9;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114504027795530736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +248,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 1;'
+      Display += 1;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114706579226399194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,7 +307,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Equals
   GraphPosition: {x: 1689.6, y: 614.4}
-  IsBreakpoint: 0
+  IsBreakpoint: 1
   Switch:
     _statement: Operation
   Outputs:
@@ -329,7 +341,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 2;'
+      Display += 2;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114817616350442620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,7 +379,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: Display *= 10;
+    _statement: 'Display *= 10;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114860816399287706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -409,6 +425,8 @@ MonoBehaviour:
 
       Memory = 0;
 
+      Answer = 0;
+
       Operation = "";'
 --- !u!114 &114880064803500324
 MonoBehaviour:
@@ -429,7 +447,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 4;'
+      Display += 4;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114886018136812124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,7 +566,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 8;'
+      Display += 8;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114964897600493096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -583,9 +605,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Expression
   GraphPosition: {x: 2342.4001, y: 678.4}
-  IsBreakpoint: 0
+  IsBreakpoint: 1
   Next: {fileID: 0}
   Expression:
     _statement: 'Memory = Display;
 
-      Operation = "";'
+      Answer = Display;
+
+      Display = 0;
+
+      Operation = "Equals";'

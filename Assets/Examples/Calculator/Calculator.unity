@@ -1295,7 +1295,7 @@ GameObject:
   - component: {fileID: 552873877}
   - component: {fileID: 552873879}
   - component: {fileID: 552873878}
-  - component: {fileID: 552873880}
+  - component: {fileID: 552873881}
   m_Layer: 5
   m_Name: Display
   m_TagString: Untagged
@@ -1445,7 +1445,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552873876}
   m_CullTransparentMesh: 0
---- !u!114 &552873880
+--- !u!114 &552873881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1454,22 +1454,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 552873876}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dce8c1ecc2c4f74fb409ca68328b964, type: 3}
+  m_Script: {fileID: 11500000, guid: 1214deb82f6846a438ec84ca40a9c95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Format:
+  Formatting:
     Format: '{0}'
     Formatting: 0
     TimeFormatting: 3
     NumberFormatting: 3
     ValueFormat: 
-  Variable:
-    _variable:
-    - Display
-    _lookups:
-    - 
+  Expression:
+    _statement: 'Operation == "Equals" ? Answer : Display'
 --- !u!1 &569431106
 GameObject:
   m_ObjectHideFlags: 0
