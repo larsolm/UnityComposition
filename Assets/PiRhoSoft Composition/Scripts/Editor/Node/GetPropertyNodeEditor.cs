@@ -8,23 +8,23 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEditor
 {
-	[CustomEditor(typeof(SetPropertyNode))]
-	class SetPropertyNodeEditor : Editor
+	[CustomEditor(typeof(GetPropertyNode))]
+	class GetPropertyNodeEditor : Editor
 	{
-		private static readonly Label _nextContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.Next));
-		private static readonly Label _targetContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.Target));
-		private static readonly Label _targetTypeContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.TargetTypeName));
-		private static readonly Label _propertyContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.PropertyName));
+		private static readonly Label _nextContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.Next));
+		private static readonly Label _targetTypeContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.TargetTypeName));
+		private static readonly Label _propertyContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.PropertyName));
+		private static readonly Label _outputContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.Output));
 
-		private SetPropertyNode _node;
+		private GetPropertyNode _node;
 		private string[] _propertyNames;
 		private Type[] _propertyTypes;
-		private SerializedProperty _valueProperty;
+		private SerializedProperty _targetProperty;
 
 		void OnEnable()
 		{
-			_node = target as SetPropertyNode;
-			_valueProperty = serializedObject.FindProperty(nameof(SetPropertyNode.Value));
+			_node = target as GetPropertyNode;
+			_targetProperty = serializedObject.FindProperty(nameof(GetPropertyNode.Target));
 
 			BuildPropertyList();
 		}
@@ -37,7 +37,7 @@ namespace PiRhoSoft.CompositionEditor
 					.Where(field => VariableValue.GetType(field.FieldType) != VariableType.Other).ToArray(); // TODO: Filter this list by other unwanted types
 
 				var properties = _node.TargetType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-					.Where(property => property.SetMethod != null)
+					.Where(property => property.GetMethod != null)
 					.Where(property => VariableValue.GetType(property.PropertyType) != VariableType.Other)
 					.Where(property => property.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
 
@@ -68,10 +68,13 @@ namespace PiRhoSoft.CompositionEditor
 		public override void OnInspectorGUI()
 		{
 			using (new UndoScope(_node, false))
-			{
 				InstructionGraphNodeDrawer.Draw(_nextContent.Content, _node.Next);
-				VariableReferenceControl.Draw(_targetContent.Content, _node.Target);
 
+			using (new UndoScope(serializedObject))
+				EditorGUILayout.PropertyField(_targetProperty);
+
+			using (new UndoScope(_node, false))
+			{
 				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent.Content, _node.TargetType, false);
 				if (selectedTargetType != _node.TargetType)
 					SetTargetType(selectedTargetType);
@@ -83,13 +86,10 @@ namespace PiRhoSoft.CompositionEditor
 
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty], _propertyTypes[selectedProperty]);
-				}
-			}
 
-			if (_node.TargetType != null && _node.PropertyType != null)
-			{
-				using (new UndoScope(serializedObject))
-					EditorGUILayout.PropertyField(_valueProperty);
+					if (_node.PropertyType != null)
+						VariableReferenceControl.Draw(_outputContent.Content, _node.Output);
+				}
 			}
 		}
 
@@ -110,11 +110,6 @@ namespace PiRhoSoft.CompositionEditor
 			_node.PropertyName = name;
 			_node.Field = _node.TargetType.GetField(name);
 			_node.Property = _node.TargetType.GetProperty(name);
-
-			var variableType = VariableValue.GetType(type);
-			var definition = variableType == VariableType.Object ? VariableDefinition.Create(string.Empty, type) : VariableDefinition.Create(string.Empty, variableType);
-
-			_node.Value = new VariableValueSource(variableType, definition);
 		}
 	}
 }

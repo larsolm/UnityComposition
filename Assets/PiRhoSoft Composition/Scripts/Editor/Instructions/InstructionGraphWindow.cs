@@ -580,7 +580,7 @@ namespace PiRhoSoft.CompositionEditor
 			if (menu == null)
 				menu = new GenericMenu();
 
-			var types = TypeHelper.ListDerivedTypes<InstructionGraphNode>()
+			var types = TypeHelper.ListDerivedTypes<InstructionGraphNode>(true)
 				.Where(type => type != typeof(MockupNode) && type != typeof(CommentNode))
 				.Select(type =>
 				{
@@ -644,7 +644,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private GenericMenu CreateSelectMenu()
 		{
-			var types = TypeHelper.ListDerivedTypes<InstructionGraph>();
+			var types = TypeHelper.ListDerivedTypes<InstructionGraph>(true);
 
 			var menu = new GenericMenu();
 

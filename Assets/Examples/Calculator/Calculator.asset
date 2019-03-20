@@ -224,11 +224,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Multiply";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Multiply";'
 --- !u!114 &114574101557959856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -268,11 +270,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Minus";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Minus";'
 --- !u!114 &114706923481939690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -307,7 +311,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Equals
   GraphPosition: {x: 1689.6, y: 614.4}
-  IsBreakpoint: 1
+  IsBreakpoint: 0
   Switch:
     _statement: Operation
   Outputs:
@@ -399,11 +403,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Divide";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Divide";'
 --- !u!114 &114878619638461498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -586,11 +592,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Plus";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Plus";'
 --- !u!114 &114986298978509238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -605,7 +613,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Expression
   GraphPosition: {x: 2342.4001, y: 678.4}
-  IsBreakpoint: 1
+  IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
     _statement: 'Memory = Display;

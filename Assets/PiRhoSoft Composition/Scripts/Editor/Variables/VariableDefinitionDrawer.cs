@@ -257,7 +257,7 @@ namespace PiRhoSoft.CompositionEditor
 					DrawIndentedLabel(ref rect, _objectConstraintLabel);
 
 					var typeConstraint = !string.IsNullOrEmpty(constraint.TypeConstraint) ? Type.GetType(constraint.TypeConstraint) : null;
-					var selectedConstraint = TypePopupDrawer.Draw<Object>(rect, GUIContent.none, typeConstraint);
+					var selectedConstraint = TypePopupDrawer.Draw<Object>(rect, GUIContent.none, typeConstraint, false);
 
 					constraint.TypeConstraint = selectedConstraint != null ? selectedConstraint.AssemblyQualifiedName : string.Empty;
 

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Composition/Set Property", 1)]
+	[CreateInstructionGraphNodeMenu("Composition/Set Property", 11)]
 	[HelpURL(Composition.DocumentationUrl + "set-property-node")]
 	public class SetPropertyNode : InstructionGraphNode, ISerializationCallbackReceiver
 	{
@@ -18,19 +18,16 @@ namespace PiRhoSoft.CompositionEngine
 		[VariableConstraint(typeof(Component))]
 		public VariableReference Target = new VariableReference();
 
-		[Tooltip("Whether to set the value to a reference or a specified value")]
-		public VariableSourceType SourceType;
-
-		[Tooltip("The target value reference to set the property to")]
-		public VariableReference ValueReference = new VariableReference();
-
 		[Tooltip("The target value to set the property to")]
-		public VariableValue Value;
+		public VariableValueSource Value = new VariableValueSource();
 
-		public string ComponentTypeName;
+		[Tooltip("The Type of the target object to set the property for")]
+		public string TargetTypeName;
+
+		[Tooltip("The name of the Property to set")]
 		public string PropertyName;
 
-		public Type ComponentType { get; set; }
+		public Type TargetType { get; set; }
 		public Type PropertyType { get; set; }
 		public FieldInfo Field { get; set; }
 		public PropertyInfo Property { get; set; }
@@ -39,11 +36,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<Component>(variables, Target, out var component))
+			if (Resolve<Component>(variables, Target, out var target))
 			{
-				if (component.GetType() == ComponentType)
+				if (target.GetType() == TargetType)
 				{
-					var value = SourceType == VariableSourceType.Reference ? ValueReference.GetValue(variables) : Value;
+					ResolveOther(variables, Value, out var value);
 					object obj = null;
 
 					switch (value.Type)
@@ -70,13 +67,13 @@ namespace PiRhoSoft.CompositionEngine
 
 					if (obj != null)
 					{
-						Field?.SetValue(component, obj);
-						Property?.SetValue(component, obj);
+						Field?.SetValue(target, obj);
+						Property?.SetValue(target, obj);
 					}
 				}
 				else
 				{
-					Debug.LogWarningFormat(this, _invalidComponentTypeWarning, Name, Target, ComponentTypeName);
+					Debug.LogWarningFormat(this, _invalidComponentTypeWarning, Name, Target, TargetTypeName);
 				}
 			}
 
@@ -89,15 +86,15 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnAfterDeserialize()
 		{
-			ComponentType = Type.GetType(ComponentTypeName);
-			Field = ComponentType?.GetField(PropertyName);
-			Property = ComponentType?.GetProperty(PropertyName);
+			TargetType = Type.GetType(TargetTypeName);
+			Field = TargetType?.GetField(PropertyName);
+			Property = TargetType?.GetProperty(PropertyName);
 			PropertyType = (Field?.FieldType) ?? (Property?.PropertyType);
 		}
 
 		public void OnBeforeSerialize()
 		{
-			ComponentTypeName = ComponentType?.AssemblyQualifiedName;
+			TargetTypeName = TargetType?.AssemblyQualifiedName;
 			PropertyName = (Field?.Name) ?? (Property?.Name);
 		}
 
