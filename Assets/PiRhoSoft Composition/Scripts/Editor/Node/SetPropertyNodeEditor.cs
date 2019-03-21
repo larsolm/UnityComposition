@@ -86,7 +86,7 @@ namespace PiRhoSoft.CompositionEditor
 				}
 			}
 
-			if (_node.TargetType != null && _node.PropertyType != null)
+			if (_node.TargetType != null && !string.IsNullOrEmpty(_node.PropertyName))
 			{
 				using (new UndoScope(serializedObject))
 					EditorGUILayout.PropertyField(_valueProperty);
@@ -96,7 +96,6 @@ namespace PiRhoSoft.CompositionEditor
 		private void SetTargetType(Type type)
 		{
 			_node.TargetType = type;
-			_node.PropertyType = null;
 			_node.PropertyName = null;
 			_node.Field = null;
 			_node.Property = null;
@@ -106,7 +105,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void SetProperty(string name, Type type)
 		{
-			_node.PropertyType = type;
 			_node.PropertyName = name;
 			_node.Field = _node.TargetType.GetField(name);
 			_node.Property = _node.TargetType.GetProperty(name);

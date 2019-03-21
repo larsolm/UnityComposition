@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -29,11 +30,12 @@ namespace PiRhoSoft.CompositionEngine
 		public string PropertyName;
 
 		public Type TargetType { get; set; }
-		public Type PropertyType { get; set; }
 		public FieldInfo Field { get; set; }
 		public PropertyInfo Property { get; set; }
 
 		public override Color NodeColor => Colors.ExecutionDark;
+
+		private Getter _getter;
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
@@ -41,10 +43,17 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				if (target.GetType() == TargetType)
 				{
-					var obj = Field?.GetValue(target) ?? Property?.GetValue(target);
-					var value = VariableValue.CreateValue(obj);
-
-					Assign(variables, Output, value);
+					if (_getter != null)
+					{
+						var value = _getter.Get(target);
+						Assign(variables, Output, value);
+					}
+					else if (Field != null)
+					{
+						var obj = Field?.GetValue(target);
+						var value = VariableValue.CreateValue(obj);
+						Assign(variables, Output, value);
+					}
 				}
 				else
 				{
@@ -64,7 +73,8 @@ namespace PiRhoSoft.CompositionEngine
 			TargetType = Type.GetType(TargetTypeName);
 			Field = TargetType?.GetField(PropertyName);
 			Property = TargetType?.GetProperty(PropertyName);
-			PropertyType = (Field?.FieldType) ?? (Property?.PropertyType);
+
+			_getter = Getter.Create(TargetType, Property);
 		}
 
 		public void OnBeforeSerialize()
@@ -74,5 +84,50 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 		#endregion
+
+		private abstract class Getter
+		{
+			public static Getter Create(Type objectType, PropertyInfo property)
+			{
+				if (objectType != null || property == null)
+					return null;
+
+				var getter = Create(objectType, property.PropertyType);
+				var getMethod = property.GetGetMethod();
+
+				getter.Setup(getMethod);
+
+				return getter;
+			}
+
+			private static Getter Create(Type componentType, Type propertyType)
+			{
+				var open = typeof(Getter<,>);
+				var closed = open.MakeGenericType(componentType, propertyType);
+
+				return Activator.CreateInstance(closed) as Getter;
+			}
+
+			public abstract VariableValue Get(Object obj);
+
+			protected abstract void Setup(MethodInfo getMethod);
+		}
+
+		private class Getter<ObjectType, PropertyType> : Getter where ObjectType : Object
+		{
+			public Func<ObjectType, PropertyType> Method;
+
+			public override VariableValue Get(Object obj)
+			{
+				var component = (ObjectType)obj;
+				var value = Method(component);
+				return VariableValue.CreateValue(value);
+			}
+
+			protected override void Setup(MethodInfo getMethod)
+			{
+				Method = (Func<ObjectType, PropertyType>)getMethod.CreateDelegate(typeof(Func<ObjectType, PropertyType>));
+			}
+		}
 	}
 }

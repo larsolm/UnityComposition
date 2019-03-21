@@ -49,6 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				if (target.GetType() == TargetType)
 				{
+					ResolveParameters(variables);
 					var obj = Method.Invoke(target, _parameters);
 
 					if (obj != null)
@@ -66,6 +67,39 @@ namespace PiRhoSoft.CompositionEngine
 			graph.GoTo(Next, nameof(Next));
 
 			yield break;
+		}
+
+		private void ResolveParameters(InstructionStore variables)
+		{
+			for (var i = 0; i < Parameters.Count; i++)
+			{
+				if (ResolveOther(variables, Parameters[i], out var value))
+					_parameters[i] = GetBoxedValue(value);
+			}
+		}
+
+		private object GetBoxedValue(VariableValue value)
+		{
+			switch (value.Type)
+			{
+				case VariableType.Bool: return value.Bool;
+				case VariableType.Int: return value.Int;
+				case VariableType.Float: return value.Float;
+				case VariableType.Int2: return value.Int2;
+				case VariableType.Int3: return value.Int3;
+				case VariableType.IntRect: return value.IntRect;
+				case VariableType.IntBounds: return value.IntBounds;
+				case VariableType.Vector2: return value.Vector2;
+				case VariableType.Vector3: return value.Vector3;
+				case VariableType.Vector4: return value.Vector4;
+				case VariableType.Quaternion: return value.Quaternion;
+				case VariableType.Rect: return value.Rect;
+				case VariableType.Bounds: return value.Bounds;
+				case VariableType.Color: return value.Color;
+				case VariableType.String: return value.String;
+				case VariableType.Object: return value.Object;
+				default: return null;
+			}
 		}
 
 		#region ISerializationCallbackReceiver Implementation

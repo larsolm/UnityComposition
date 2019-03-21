@@ -18,7 +18,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		private GetPropertyNode _node;
 		private string[] _propertyNames;
-		private Type[] _propertyTypes;
 		private SerializedProperty _targetProperty;
 
 		void OnEnable()
@@ -42,26 +41,18 @@ namespace PiRhoSoft.CompositionEditor
 					.Where(property => property.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
 
 				_propertyNames = new string[fields.Length + properties.Length];
-				_propertyTypes = new Type[fields.Length + properties.Length];
 
 				var index = 0;
 
 				foreach (var field in fields)
-				{
-					_propertyNames[index] = field.Name;
-					_propertyTypes[index++] = field.FieldType;
-				}
+					_propertyNames[index++] = field.Name;
 
 				foreach (var property in properties)
-				{
-					_propertyNames[index] = property.Name;
-					_propertyTypes[index++] = property.PropertyType;
-				}
+					_propertyNames[index++] = property.Name;
 			}
 			else
 			{
 				_propertyNames = null;
-				_propertyTypes = null;
 			}
 		}
 
@@ -85,9 +76,9 @@ namespace PiRhoSoft.CompositionEditor
 					var selectedProperty = EditorGUILayout.Popup(_propertyContent.Content, property, _propertyNames);
 
 					if (selectedProperty != property)
-						SetProperty(_propertyNames[selectedProperty], _propertyTypes[selectedProperty]);
+						SetProperty(_propertyNames[selectedProperty]);
 
-					if (_node.PropertyType != null)
+					if (!string.IsNullOrEmpty(_node.PropertyName))
 						VariableReferenceControl.Draw(_outputContent.Content, _node.Output);
 				}
 			}
@@ -96,7 +87,6 @@ namespace PiRhoSoft.CompositionEditor
 		private void SetTargetType(Type type)
 		{
 			_node.TargetType = type;
-			_node.PropertyType = null;
 			_node.PropertyName = null;
 			_node.Field = null;
 			_node.Property = null;
@@ -104,9 +94,8 @@ namespace PiRhoSoft.CompositionEditor
 			BuildPropertyList();
 		}
 
-		private void SetProperty(string name, Type type)
+		private void SetProperty(string name)
 		{
-			_node.PropertyType = type;
 			_node.PropertyName = name;
 			_node.Field = _node.TargetType.GetField(name);
 			_node.Property = _node.TargetType.GetProperty(name);
