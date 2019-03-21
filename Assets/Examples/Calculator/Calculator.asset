@@ -37,7 +37,7 @@ MonoBehaviour:
     - {fileID: 114268825771250320}
     - {fileID: 114817616350442620}
     - {fileID: 114986298978509238}
-  StartPosition: {x: 512, y: 281.6}
+  StartPosition: {x: 512, y: 384}
   Process: {fileID: 114878619638461498}
 --- !u!114 &114003219145756106
 MonoBehaviour:
@@ -58,7 +58,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 7;'
+      Display += 7;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114074590478759008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -92,7 +94,7 @@ MonoBehaviour:
   m_Name: Loop
   m_EditorClassIdentifier: 
   Name: Loop
-  GraphPosition: {x: 755.2, y: 102.4}
+  GraphPosition: {x: 780.8, y: 102.4}
   IsBreakpoint: 0
   Condition:
     _statement: true
@@ -116,7 +118,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 3;'
+      Display += 3;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114268825771250320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,7 +160,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 6;'
+      Display += 6;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114423297059122700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -176,7 +182,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 5;'
+      Display += 5;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114471882883978834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -196,7 +204,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 9;'
+      Display += 9;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114504027795530736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -214,11 +224,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Multiply";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Multiply";'
 --- !u!114 &114574101557959856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -238,7 +250,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 1;'
+      Display += 1;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114706579226399194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -256,11 +270,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Minus";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Minus";'
 --- !u!114 &114706923481939690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -329,7 +345,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 2;'
+      Display += 2;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114817616350442620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -365,7 +383,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: Display *= 10;
+    _statement: 'Display *= 10;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114860816399287706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -383,11 +403,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Divide";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Divide";'
 --- !u!114 &114878619638461498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -401,13 +423,15 @@ MonoBehaviour:
   m_Name: Initialize
   m_EditorClassIdentifier: 
   Name: Initialize
-  GraphPosition: {x: 908.8, y: 384}
+  GraphPosition: {x: 819.2, y: 384}
   IsBreakpoint: 0
   Next: {fileID: 114160120226984220}
   Expression:
     _statement: 'Display = 0;
 
       Memory = 0;
+
+      Answer = 0;
 
       Operation = "";'
 --- !u!114 &114880064803500324
@@ -429,7 +453,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 4;'
+      Display += 4;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114886018136812124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,7 +572,9 @@ MonoBehaviour:
   Expression:
     _statement: 'Display *= 10;
 
-      Display += 8;'
+      Display += 8;
+
+      Operation = Operation == "Equals" ? "" : Operation;'
 --- !u!114 &114964897600493096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -564,11 +592,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Operation = "Plus";
+    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
 
-      Memory = Display;
+      Display = 0;
 
-      Display = 0;'
+      Answer = 0;
+
+      Operation = "Plus";'
 --- !u!114 &114986298978509238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -586,4 +616,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: Operation = "";
+    _statement: 'Memory = Display;
+
+      Answer = Display;
+
+      Display = 0;
+
+      Operation = "Equals";'

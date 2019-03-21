@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -146,6 +147,11 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
+	public class ObjectVariableSource : VariableSource<Object>
+	{
+	}
+
+	[Serializable]
 	public class GameObjectVariableSource : VariableSource<GameObject>
 	{
 	}
@@ -158,5 +164,14 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class ListVariableSource : VariableSource<IVariableList>
 	{
+	}
+
+	[Serializable]
+	public class VariableValueSource : VariableSource<VariableValue>
+	{
+		public VariableDefinition Definition;
+
+		public VariableValueSource() { Value = VariableValue.Empty; Definition = VariableDefinition.Create(string.Empty, VariableType.Empty); }
+		public VariableValueSource(VariableType type, VariableDefinition definition) { Value = VariableValue.Create(type); Definition = definition; }
 	}
 }

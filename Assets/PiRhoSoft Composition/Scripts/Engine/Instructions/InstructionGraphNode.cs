@@ -71,6 +71,21 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Variable Lookup
 
+		public bool Resolve(IVariableStore variables, VariableValueSource source, out VariableValue result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out VariableValue result)
+		{
+			result = reference.GetValue(variables);
+			return true;
+		}
+
 		public bool Resolve(IVariableStore variables, BoolVariableSource source, out bool result)
 		{
 			if (source.Type == VariableSourceType.Reference)

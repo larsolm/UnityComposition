@@ -11,17 +11,17 @@ namespace PiRhoSoft.UtilityEditor
 			return EditorGUIUtility.singleLineHeight;
 		}
 		
-		public static Type Draw<BaseType>(GUIContent label, Type type)
+		public static Type Draw<BaseType>(GUIContent label, Type type, bool creatable)
 		{
 			var height = GetHeight();
 			var rect = EditorGUILayout.GetControlRect(false, height);
 
-			return Draw<BaseType>(rect, label, type);
+			return Draw<BaseType>(rect, label, type, creatable);
 		}
 
-		public static Type Draw<BaseType>(Rect position, GUIContent label, Type type)
+		public static Type Draw<BaseType>(Rect position, GUIContent label, Type type, bool creatable)
 		{
-			var list = TypeHelper.GetTypeList<BaseType>(true);
+			var list = TypeHelper.GetTypeList<BaseType>(true, creatable);
 			var index = list.GetIndex(type);
 
 			index = EditorGUI.Popup(position, label, index, list.Names);

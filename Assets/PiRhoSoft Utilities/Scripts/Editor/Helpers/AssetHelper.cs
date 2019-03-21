@@ -187,7 +187,7 @@ namespace PiRhoSoft.UtilityEditor
 			if (list.Assets == null)
 			{
 				list.Assets = ListAssets(assetType);
-				list.Types = includeCreate ? TypeHelper.GetTypeList(assetType, false) : null;
+				list.Types = includeCreate ? TypeHelper.GetTypeList(assetType, false, true) : null;
 
 				var index = 0;
 				var count = 0;

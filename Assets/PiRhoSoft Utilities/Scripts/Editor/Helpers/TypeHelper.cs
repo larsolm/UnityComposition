@@ -105,14 +105,14 @@ namespace PiRhoSoft.UtilityEditor
 
 		#region Listing
 
-		public static List<Type> ListDerivedTypes<BaseType>()
+		public static List<Type> ListDerivedTypes<BaseType>(bool creatable)
 		{
-			return FindTypes(type => IsCreatableAs<BaseType>(type)).ToList();
+			return ListDerivedTypes(typeof(BaseType), creatable);
 		}
 
-		public static List<Type> ListDerivedTypes(Type baseType)
+		public static List<Type> ListDerivedTypes(Type baseType, bool creatable)
 		{
-			return FindTypes(type => IsCreatableAs(baseType, type)).ToList();
+			return FindTypes(type => creatable ? IsCreatableAs(baseType, type) : baseType.IsAssignableFrom(type)).ToList();
 		}
 
 		public static List<Type> ListTypesWithAttribute<AttributeType>() where AttributeType : Attribute
@@ -136,15 +136,15 @@ namespace PiRhoSoft.UtilityEditor
 				.Where(predicate);
 		}
 
-		public static TypeList GetTypeList<T>(bool includeNone)
+		public static TypeList GetTypeList<T>(bool includeNone, bool creatable)
 		{
-			return GetTypeList(typeof(T), includeNone);
+			return GetTypeList(typeof(T), includeNone, creatable);
 		}
 
-		public static TypeList GetTypeList(Type baseType, bool includeNone)
+		public static TypeList GetTypeList(Type baseType, bool includeNone, bool creatable)
 		{
 			// include the settings in the name so lists of the same type can be created with different settings
-			var listName = string.Format("{0}-{1}", includeNone, baseType.AssemblyQualifiedName);
+			var listName = string.Format("{0}-{1}-{2}", includeNone, creatable, baseType.AssemblyQualifiedName);
 
 			TypeList list;
 			if (!_derivedTypeLists.TryGetValue(listName, out list))
@@ -155,7 +155,7 @@ namespace PiRhoSoft.UtilityEditor
 
 			if (list.Types == null)
 			{
-				var types = ListDerivedTypes(baseType);
+				var types = ListDerivedTypes(baseType, creatable);
 				var ordered = types.Select(type => new ListedType(types, baseType, type)).OrderBy(type => type.Name);
 				var none = includeNone ? new List<GUIContent> { new GUIContent("None"), new GUIContent() } : new List<GUIContent>();
 
