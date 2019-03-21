@@ -67,11 +67,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve(variables, Effect, out var effect))
+			if (ResolveObject(variables, Effect, out var effect))
 			{
 				GameObject spawned = null;
 
-				ResolveOther(variables, Position, out var position);
+				Resolve(variables, Position, out var position);
 
 				if (Positioning == ObjectPositioning.Absolute)
 				{
@@ -79,12 +79,12 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else if (Positioning == ObjectPositioning.RelativeToObject)
 				{
-					if (Resolve(variables, Object, out GameObject obj))
+					if (ResolveObject(variables, Object, out GameObject obj))
 						spawned = Instantiate(effect, obj.transform.position + position, Quaternion.identity);
 				}
 				else if (Positioning == ObjectPositioning.ChildOfParent)
 				{
-					if (Resolve(variables, Parent, out GameObject parent))
+					if (ResolveObject(variables, Parent, out GameObject parent))
 						spawned = Instantiate(effect, parent.transform.position + position, Quaternion.identity, parent.transform);
 				}
 

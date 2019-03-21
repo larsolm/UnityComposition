@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class PropertyList : IVariableList
+	public class PropertyList : IMappedVariableList
 	{
 		private object _owner;
 		private PropertyMap _map;

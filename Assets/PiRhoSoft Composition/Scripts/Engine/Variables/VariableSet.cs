@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -12,13 +12,15 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
-	public class VariableSet : IVariableList, IVariableReset, ISerializationCallbackReceiver
+	public class VariableSet : IMappedVariableList, IVariableReset, ISerializationCallbackReceiver
 	{
-		[SerializeField] private List<SerializedVariable> _data;
-		[SerializeField] private int _version = 0;
 		[NonSerialized] private VariableSchema _schema;
 		[NonSerialized] private IVariableStore _owner;
 		[NonSerialized] private List<Variable> _variables = new List<Variable>();
+
+		[SerializeField] private int _version = 0;
+		[SerializeField] private List<string> _variablesData;
+		[SerializeField] private List<Object> _variablesObjects;
 
 		public VariableSchema Schema => _schema;
 		public IVariableStore Owner => _owner;
@@ -131,7 +133,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		private bool SetValue(int index, VariableValue value)
 		{
-			if (_variables[index].Value.Type == value.Type || _variables[index].Value.Type == VariableType.Empty)
+			var type = _variables[index].Value.Type;
+
+			if (type == VariableType.Empty || (type == VariableType.Enum && _variables[index].Value.EnumType == value.EnumType) || (type != VariableType.Enum && type == value.Type))
 			{
 				_variables[index] = Variable.Create(_variables[index].Name, value);
 				return true;
@@ -201,32 +205,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnBeforeSerialize()
 		{
-			_data = new List<SerializedVariable>(_variables.Count);
-
-			var builder = new StringBuilder();
-
-			foreach (var variable in _variables)
-			{
-				var data = new SerializedVariable();
-				data.SetVariable(variable);
-				_data.Add(data);
-			}
+			Variable.Save(_variables, ref _variablesData, ref _variablesObjects);
 		}
 
 		public void OnAfterDeserialize()
 		{
-			_variables.Clear();
-
-			if (_data != null)
-			{
-				foreach (var data in _data)
-				{
-					var variable = data.GetVariable();
-					_variables.Add(variable);
-				}
-			}
-
-			_data = null;
+			Variable.Load(_variables, ref _variablesData, ref _variablesObjects);
 		}
 
 		#endregion

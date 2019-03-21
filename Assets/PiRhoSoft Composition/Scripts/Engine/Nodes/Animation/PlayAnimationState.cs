@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<Animator>(variables, Animator, out var animator))
+			if (ResolveObject<Animator>(variables, Animator, out var animator))
 			{
 				if (Resolve(variables, State, out var state))
 					animator.Play(state);

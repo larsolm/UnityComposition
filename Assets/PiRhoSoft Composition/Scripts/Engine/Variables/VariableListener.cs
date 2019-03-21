@@ -5,12 +5,12 @@
 		void VariableChanged(int index, VariableValue value);
 	}
 
-	public class VariableListener : IVariableList
+	public class VariableListener : IMappedVariableList
 	{
 		private IVariableListener _listener;
-		private IVariableList _list;
+		private IMappedVariableList _list;
 
-		public VariableListener(IVariableListener listener, IVariableList list)
+		public VariableListener(IVariableListener listener, IMappedVariableList list)
 		{
 			_listener = listener;
 			_list = list;

@@ -31,7 +31,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_status.Reset();
 
-			if (Resolve<Object>(variables, Object, out var obj))
+			if (ResolveObject(variables, Object, out Object obj))
 			{
 				if (obj is GameObject gameObject)
 				{

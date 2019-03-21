@@ -41,31 +41,52 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
-	public class BooleanVariableSource : VariableSource<bool>
+	public class BoolVariableSource : VariableSource<bool>
 	{
-		public BooleanVariableSource() => Value = false;
-		public BooleanVariableSource(bool defaultValue) => Value = defaultValue;
+		public BoolVariableSource() => Value = false;
+		public BoolVariableSource(bool defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
-	public class IntegerVariableSource : VariableSource<int>
+	public class IntVariableSource : VariableSource<int>
 	{
-		public IntegerVariableSource() => Value = 0;
-		public IntegerVariableSource(int defaultValue) => Value = defaultValue;
+		public IntVariableSource() => Value = 0;
+		public IntVariableSource(int defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
-	public class NumberVariableSource : VariableSource<float>
+	public class FloatVariableSource : VariableSource<float>
 	{
-		public NumberVariableSource() => Value = 0.0f;
-		public NumberVariableSource(float defaultValue) => Value = defaultValue;
+		public FloatVariableSource() => Value = 0.0f;
+		public FloatVariableSource(float defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
-	public class StringVariableSource : VariableSource<string>
+	public class Int2VariableSource : VariableSource<Vector2Int>
 	{
-		public StringVariableSource() => Value = string.Empty;
-		public StringVariableSource(string defaultValue) => Value = defaultValue;
+		public Int2VariableSource() => Value = Vector2Int.zero;
+		public Int2VariableSource(Vector2Int defaultValue) => Value = defaultValue;
+	}
+
+	[Serializable]
+	public class Int3VariableSource : VariableSource<Vector3Int>
+	{
+		public Int3VariableSource() => Value = Vector3Int.zero;
+		public Int3VariableSource(Vector3Int defaultValue) => Value = defaultValue;
+	}
+
+	[Serializable]
+	public class IntRectVariableSource : VariableSource<RectInt>
+	{
+		public IntRectVariableSource() => Value = new RectInt(Vector2Int.zero, Vector2Int.one);
+		public IntRectVariableSource(RectInt defaultValue) => Value = defaultValue;
+	}
+
+	[Serializable]
+	public class IntBoundsVariableSource : VariableSource<BoundsInt>
+	{
+		public IntBoundsVariableSource() => Value = new BoundsInt(Vector3Int.zero, Vector3Int.one);
+		public IntBoundsVariableSource(BoundsInt defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
@@ -76,24 +97,10 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
-	public class Vector2IntVariableSource : VariableSource<Vector2Int>
-	{
-		public Vector2IntVariableSource() => Value = Vector2Int.zero;
-		public Vector2IntVariableSource(Vector2Int defaultValue) => Value = defaultValue;
-	}
-
-	[Serializable]
 	public class Vector3VariableSource : VariableSource<Vector3>
 	{
 		public Vector3VariableSource() => Value = Vector2.zero;
 		public Vector3VariableSource(Vector3 defaultValue) => Value = defaultValue;
-	}
-
-	[Serializable]
-	public class Vector3IntVariableSource : VariableSource<Vector3Int>
-	{
-		public Vector3IntVariableSource() => Value = Vector3Int.zero;
-		public Vector3IntVariableSource(Vector3Int defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
@@ -111,24 +118,10 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
-	public class ColorVariableSource : VariableSource<Color>
-	{
-		public ColorVariableSource() => Value = Color.black;
-		public ColorVariableSource(Color defaultValue) => Value = defaultValue;
-	}
-
-	[Serializable]
 	public class RectVariableSource : VariableSource<Rect>
 	{
 		public RectVariableSource() => Value = new Rect(Vector2.zero, Vector2.one);
 		public RectVariableSource(Rect defaultValue) => Value = defaultValue;
-	}
-
-	[Serializable]
-	public class RectIntVariableSource : VariableSource<RectInt>
-	{
-		public RectIntVariableSource() => Value = new RectInt(Vector2Int.zero, Vector2Int.one);
-		public RectIntVariableSource(RectInt defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
@@ -139,14 +132,31 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
-	public class BoundsIntVariableSource : VariableSource<BoundsInt>
+	public class ColorVariableSource : VariableSource<Color>
 	{
-		public BoundsIntVariableSource() => Value = new BoundsInt(Vector3Int.zero, Vector3Int.one);
-		public BoundsIntVariableSource(BoundsInt defaultValue) => Value = defaultValue;
+		public ColorVariableSource() => Value = Color.black;
+		public ColorVariableSource(Color defaultValue) => Value = defaultValue;
+	}
+
+	[Serializable]
+	public class StringVariableSource : VariableSource<string>
+	{
+		public StringVariableSource() => Value = string.Empty;
+		public StringVariableSource(string defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
 	public class GameObjectVariableSource : VariableSource<GameObject>
+	{
+	}
+
+	[Serializable]
+	public class StoreVariableSource : VariableSource<IVariableStore>
+	{
+	}
+
+	[Serializable]
+	public class ListVariableSource : VariableSource<IVariableList>
 	{
 	}
 }

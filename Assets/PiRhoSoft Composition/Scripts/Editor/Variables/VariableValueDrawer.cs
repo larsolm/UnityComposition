@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.UtilityEditor;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -30,9 +31,22 @@ namespace PiRhoSoft.CompositionEditor
 				case VariableType.Bounds: return EditorGUI.GetPropertyHeight(SerializedPropertyType.Bounds, GUIContent.none);
 				case VariableType.Color: return EditorGUI.GetPropertyHeight(SerializedPropertyType.Color, GUIContent.none);
 				case VariableType.String: return EditorGUI.GetPropertyHeight(SerializedPropertyType.String, GUIContent.none);
+				case VariableType.Enum: return EditorGUI.GetPropertyHeight(SerializedPropertyType.Enum, GUIContent.none);
 				case VariableType.Object: return EditorGUI.GetPropertyHeight(SerializedPropertyType.ObjectReference, GUIContent.none);
 				case VariableType.Store: return EditorGUIUtility.singleLineHeight;
-				case VariableType.Other: return EditorGUIUtility.singleLineHeight;
+				case VariableType.List:
+				{
+					var height = value.List.Count == 0 ? EditorGUIUtility.singleLineHeight : 0.0f;
+					for (var i = 0; i < value.List.Count; i++)
+					{
+						if (i != 0)
+							height += EditorGUIUtility.standardVerticalSpacing;
+
+						height += GetHeight(value, VariableDefinition.Create(string.Empty, VariableType.Empty));
+					}
+
+					return height;
+				}
 				default: return EditorGUIUtility.singleLineHeight;
 			}
 		}
@@ -68,9 +82,10 @@ namespace PiRhoSoft.CompositionEditor
 				case VariableType.Bounds: return DrawBounds(position, value, definition);
 				case VariableType.Color: return DrawColor(position, value, definition);
 				case VariableType.String: return DrawString(position, value, definition);
+				case VariableType.Enum: return DrawEnum(position, value, definition);
 				case VariableType.Object: return DrawObject(position, value, definition);
 				case VariableType.Store: return DrawStore(position, value, definition);
-				case VariableType.Other: return DrawOther(position, value, definition);
+				case VariableType.List: return DrawList(position, value, definition);
 				default: return value;
 			}
 		}
@@ -190,6 +205,12 @@ namespace PiRhoSoft.CompositionEditor
 			return s == null ? VariableValue.Create(VariableType.String) : VariableValue.Create(s);
 		}
 
+		private static VariableValue DrawEnum(Rect rect, VariableValue value, VariableDefinition definition)
+		{
+			var e = EditorGUI.EnumPopup(rect, GUIContent.none, value.Enum);
+			return VariableValue.Create(e);
+		}
+
 		private static VariableValue DrawObject(Rect rect, VariableValue value, VariableDefinition definition)
 		{
 			var objectType = (!string.IsNullOrEmpty(definition.TypeConstraint) ? Type.GetType(definition.TypeConstraint) : null) ?? typeof(Object);
@@ -208,10 +229,20 @@ namespace PiRhoSoft.CompositionEditor
 			return value;
 		}
 
-		private static VariableValue DrawOther(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawList(Rect rect, VariableValue value, VariableDefinition definition)
 		{
-			if (value.Reference != null)
-				EditorGUI.LabelField(rect, value.Reference.ToString());
+			for (var i = 0; i < value.List.Count; i++)
+			{
+				if (i != 0)
+					RectHelper.TakeVerticalSpace(ref rect);
+
+				var item = value.List.GetVariable(i);
+				var itemDefinition = VariableDefinition.Create("", VariableType.Empty);
+				var height = GetHeight(value, itemDefinition);
+				var itemRect = RectHelper.TakeHeight(ref rect, height);
+
+				Draw(itemRect, new GUIContent(i.ToString()), item, itemDefinition);
+			}
 
 			return value;
 		}

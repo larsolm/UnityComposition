@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -24,25 +25,24 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Reference = new VariableReference();
 		[NonSerialized] public VariableValue Value;
 
-		[SerializeField] private SerializedVariable _value;
+		[SerializeField] private string _valueData;
+		[SerializeField] private List<Object> _valueObjects;
+
+		#region ISerializationCallbackReceiver Implementation
 
 		public void OnBeforeSerialize()
 		{
 			if (Type == InstructionInputType.Value)
-			{
-				_value = new SerializedVariable();
-				_value.SetValue(Value);
-			}
+				VariableValue.Save(Value, ref _valueData, ref _valueObjects);
 		}
 
 		public void OnAfterDeserialize()
 		{
 			if (Type == InstructionInputType.Value)
-			{
-				Value = _value.GetValue();
-				_value = null;
-			}
+				VariableValue.Load(Value, ref _valueData, ref _valueObjects);
 		}
+
+		#endregion
 	}
 
 	[Serializable]

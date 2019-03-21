@@ -26,17 +26,17 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Bool)]
 		[InlineDisplay(PropagateLabel = true)]
-		public BooleanVariableSource BoolValue = new BooleanVariableSource();
+		public BoolVariableSource BoolValue = new BoolVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Int)]
 		[InlineDisplay(PropagateLabel = true)]
-		public IntegerVariableSource IntValue = new IntegerVariableSource();
+		public IntVariableSource IntValue = new IntVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Float)]
 		[InlineDisplay(PropagateLabel = true)]
-		public NumberVariableSource FloatValue = new NumberVariableSource();
+		public FloatVariableSource FloatValue = new FloatVariableSource();
 
 		public override Color NodeColor => Colors.Animation;
 
@@ -55,7 +55,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve(variables, Animator, out Animator animator))
+			if (ResolveObject(variables, Animator, out Animator animator))
 				Trigger(variables, animator);
 
 			graph.GoTo(Next, nameof(Next));

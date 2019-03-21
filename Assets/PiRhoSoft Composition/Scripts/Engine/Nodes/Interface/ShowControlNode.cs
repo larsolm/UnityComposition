@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<InterfaceControl>(variables, Control, out var control))
+			if (ResolveObject(variables, Control, out InterfaceControl control))
 				control.Activate();
 
 			graph.GoTo(Next, nameof(Next));

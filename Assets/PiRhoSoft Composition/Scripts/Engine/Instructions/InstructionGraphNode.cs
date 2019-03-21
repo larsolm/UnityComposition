@@ -56,7 +56,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		private const string _missingVariableWarning = "(CIGNMV) failed to resolve variable '{0}' on node '{1}': the variable could not be found";
 		private const string _invalidVariableWarning = "(CIGNIV) failed to resolve variable '{0}' on node '{1}': the variable has type {2} and should have type {3}";
-		private const string _invalidObjectWarning = "(CIGNIO) failed to resolve variable '{0}' on node '{1}': the object is not, and cannot be converted to, type {2}";
+		private const string _invalidEnumWarning = "(CIGNIV) failed to resolve variable '{0}' on node '{1}': the variable has enum type {2} and should have enum type {3}";
+		private const string _invalidObjectWarning = "(CIGNIO) failed to resolve variable '{0}' on node '{1}': the object is a {2} and cannot be converted to a {3}";
 
 		private const string _missingAssignmentWarning = "(CIGNMA) failed to assign to variable '{0}': the variable could not be found";
 		private const string _readOnlyAssignmentWarning = "(CIGNROA) failed to assign to variable '{0}': the variable is read only";
@@ -70,217 +71,452 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Variable Lookup
 
-		public bool Resolve<ObjectType>(IVariableStore variables, VariableSource<ObjectType> source, out ObjectType result) where ObjectType : Object
+		public bool Resolve(IVariableStore variables, BoolVariableSource source, out bool result)
 		{
-			switch (source.Type)
-			{
-				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
-				case VariableSourceType.Value: result = source.Value; return true;
-			}
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
 
-			result = default;
-			return false;
-		}
-
-		public bool Resolve<ObjectType>(IVariableStore variables, VariableReference reference, out ObjectType result) where ObjectType : Object
-		{
-			var value = reference.GetValue(variables);
-
-			if (value.Object != null)
-			{
-				result = ComponentHelper.GetAsObject<ObjectType>(value.Object);
-
-				if (result != null)
-					return true;
-
-				Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, typeof(ObjectType).Name);
-				return false;
-			}
-			else
-			{
-				result = null;
-				LogResolveWarning(value, reference, VariableType.Object);
-				return false;
-			}
-		}
-
-		// IVariableStore can't be set in the editor so a VariableSource<IVariableStore> overload makes no sense
-
-		public bool Resolve(IVariableStore variables, VariableReference reference, out IVariableStore result)
-		{
-			var value = reference.GetValue(variables);
-
-			if (value.Store != null)
-			{
-				result = value.Store;
-				return true;
-			}
-			else
-			{
-				result = null;
-				LogResolveWarning(value, reference, VariableType.Object);
-				return false;
-			}
-		}
-
-		public bool Resolve(IVariableStore variables, BooleanVariableSource source, out bool result)
-		{
-			switch (source.Type)
-			{
-				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
-				case VariableSourceType.Value: result = source.Value; return true;
-			}
-
-			result = default;
-			return false;
+			result = source.Value;
+			return true;
 		}
 
 		public bool Resolve(IVariableStore variables, VariableReference reference, out bool result)
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.Type == VariableType.Bool)
-			{
-				result = value.Bool;
+			if (value.TryGetBool(out result))
 				return true;
-			}
-			else
-			{
-				LogResolveWarning(value, reference, VariableType.Bool);
-				result = false;
-				return false;
-			}
+
+			LogResolveWarning(value, reference, VariableType.Bool);
+			return false;
 		}
 
-		public bool Resolve(IVariableStore variables, IntegerVariableSource source, out int result)
+		public bool Resolve(IVariableStore variables, IntVariableSource source, out int result)
 		{
-			switch (source.Type)
-			{
-				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
-				case VariableSourceType.Value: result = source.Value; return true;
-			}
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
 
-			result = default;
-			return false;
+			result = source.Value;
+			return true;
 		}
 
 		public bool Resolve(IVariableStore variables, VariableReference reference, out int result)
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.Type == VariableType.Int)
-			{
-				result = value.Int;
+			if (value.TryGetInt(out result))
 				return true;
-			}
-			else
-			{
-				LogResolveWarning(value, reference, VariableType.Int);
-				result = 0;
-				return false;
-			}
+
+			LogResolveWarning(value, reference, VariableType.Int);
+			return false;
 		}
 
-		public bool Resolve(IVariableStore variables, NumberVariableSource source, out float result)
+		public bool Resolve(IVariableStore variables, FloatVariableSource source, out float result)
 		{
-			switch (source.Type)
-			{
-				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
-				case VariableSourceType.Value: result = source.Value; return true;
-			}
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
 
-			result = default;
-			return false;
+			result = source.Value;
+			return true;
 		}
 
 		public bool Resolve(IVariableStore variables, VariableReference reference, out float result)
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.HasNumber)
-			{
-				result = value.Number;
+			if (value.TryGetFloat(out result))
 				return true;
-			}
-			else
-			{
-				LogResolveWarning(value, reference, VariableType.Float);
-				result = 0;
-				return false;
-			}
+
+			LogResolveWarning(value, reference, VariableType.Int);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, Int2VariableSource source, out Vector2Int result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Vector2Int result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetInt2(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Int2);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, Int3VariableSource source, out Vector3Int result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Vector3Int result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetInt3(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Int3);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, IntRectVariableSource source, out RectInt result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out RectInt result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetIntRect(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.IntRect);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, IntBoundsVariableSource source, out BoundsInt result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out BoundsInt result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetIntBounds(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.IntBounds);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, Vector2VariableSource source, out Vector2 result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Vector2 result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetVector2(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Vector2);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, Vector3VariableSource source, out Vector3 result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Vector3 result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetVector3(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Vector3);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, Vector4VariableSource source, out Vector4 result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Vector4 result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetVector4(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Vector4);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, QuaternionVariableSource source, out Quaternion result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Quaternion result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetQuaternion(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Quaternion);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, RectVariableSource source, out Rect result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Rect result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetRect(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Rect);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, BoundsVariableSource source, out Bounds result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Bounds result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetBounds(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Bounds);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, ColorVariableSource source, out Color result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Color result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetColor(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Color);
+			return false;
 		}
 
 		public bool Resolve(IVariableStore variables, StringVariableSource source, out string result)
 		{
-			switch (source.Type)
-			{
-				case VariableSourceType.Reference: return Resolve(variables, source.Reference, out result);
-				case VariableSourceType.Value: result = source.Value; return true;
-			}
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
 
-			result = string.Empty;
-			return false;
+			result = source.Value;
+			return true;
 		}
 
 		public bool Resolve(IVariableStore variables, VariableReference reference, out string result)
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.Type == VariableType.String)
-			{
-				result = value.String;
+			if (value.TryGetString(out result))
 				return true;
-			}
-			else
-			{
-				LogResolveWarning(value, reference, VariableType.String);
-				result = string.Empty;
-				return false;
-			}
-		}
 
-		public bool ResolveOther<T>(IVariableStore variables, VariableSource<T> source, out T result)
-		{
-			switch (source.Type)
-			{
-				case VariableSourceType.Reference: return ResolveOther(variables, source.Reference, out result);
-				case VariableSourceType.Value: result = source.Value; return true;
-			}
-
-			result = default;
+			LogResolveWarning(value, reference, VariableType.String);
 			return false;
 		}
 
-		public bool ResolveOther<T>(IVariableStore variables, VariableReference reference, out T result)
+		public bool Resolve<EnumType>(IVariableStore variables, VariableSource<EnumType> source, out EnumType result) where EnumType : Enum
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve<EnumType>(IVariableStore variables, VariableReference reference, out EnumType result) where EnumType : Enum
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetEnum(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Enum, typeof(EnumType));
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, StoreVariableSource source, out IVariableStore result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out IVariableStore result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetStore(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.Store);
+			return false;
+		}
+
+		public bool Resolve(IVariableStore variables, ListVariableSource source, out IVariableList result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return Resolve(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool Resolve(IVariableStore variables, VariableReference reference, out IVariableList result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetList(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.List);
+			return false;
+		}
+
+		public bool ResolveObject<ObjectType>(IVariableStore variables, VariableSource<ObjectType> source, out ObjectType result) where ObjectType : Object
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return ResolveObject(variables, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public bool ResolveObject<ObjectType>(IVariableStore variables, VariableReference reference, out ObjectType result) where ObjectType : Object
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.HasObject)
+			{
+				result = ComponentHelper.GetAsObject<ObjectType>(value.Object);
+
+				if (result != null)
+					return true;
+			}
+
+			result = null;
+			LogResolveWarning(value, reference, VariableType.Object, typeof(ObjectType));
+			return false;
+		}
+
+		public bool ResolveStore<StoreType>(IVariableStore variables, VariableReference reference, out StoreType result) where StoreType : class, IVariableStore
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetReference(out result))
+				return true;
+			
+			LogResolveWarning(value, reference, VariableType.Store, typeof(StoreType));
+			return false;
+		}
+
+		public bool ResolveList<ListType>(IVariableStore variables, VariableReference reference, out ListType result) where ListType : class, IVariableList
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetReference(out result))
+				return true;
+
+			LogResolveWarning(value, reference, VariableType.List, typeof(ListType));
+			return false;
+		}
+
+		public bool ResolveInterface<InterfaceType>(IVariableStore variables, VariableReference reference, out InterfaceType result) where InterfaceType : class
 		{
 			var value = reference.GetValue(variables);
 
 			if (value.HasReference)
 			{
-				if (value.Reference is T t)
-				{
-					result = t;
-					return true;
-				}
-				else
-				{
-					result = default;
-					Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, typeof(T).Name);
-					return false;
-				}
+				result = value.Reference as InterfaceType;
+				return true;
 			}
-			else
-			{
-				result = default;
-				LogResolveWarning(value, reference, VariableType.Object);
-				return false;
-			}
+
+			result = null;
+			LogResolveWarning(value, reference, VariableType.Object);
+			return false;
 		}
 
-		private void LogResolveWarning(VariableValue value, VariableReference reference, VariableType expectedType)
+		public bool ResolveReference(IVariableStore variables, VariableReference reference, out object result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.HasReference)
+			{
+				result = value.Reference;
+				return true;
+			}
+
+			result = null;
+			LogResolveWarning(value, reference, VariableType.Object);
+			return false;
+		}
+
+		private void LogResolveWarning(VariableValue value, VariableReference reference, VariableType expectedType, Type resolveType = null)
 		{
 			if (value.Type == VariableType.Empty)
 				Debug.LogWarningFormat(this, _missingVariableWarning, reference, name);
+			else if (value.Type == VariableType.Enum && resolveType != null)
+				Debug.LogWarningFormat(this, _invalidEnumWarning, reference, name, value.EnumType.Name, resolveType.Name);
+			else if (value.HasReference && resolveType != null)
+				Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, value.ReferenceType.Name, resolveType.Name);
 			else
 				Debug.LogWarningFormat(this, _invalidVariableWarning, reference, name, value.Type, expectedType);
 		}

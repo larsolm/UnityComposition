@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.IO;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
@@ -18,46 +20,89 @@ namespace PiRhoSoft.CompositionEngine
 				Value = value
 			};
 		}
-	}
 
-	[Serializable]
-	public class SerializedVariable
-	{
-		public string Name;
-		public VariableType Type;
-		public string Data;
-		public Object Object;
+		#region Persistence
 
-		public void SetVariable(Variable variable)
+		// TODO: needs error reporting
+
+		public static void Save(Variable variable, ref string data, ref List<Object> objects)
 		{
-			Name = variable.Name;
-			SetValue(variable.Value);
+			objects = new List<Object>();
+			data = variable.Write(objects);
 		}
 
-		public void SetValue(VariableValue value)
+		public static void Save(IList<Variable> variables, ref List<string> data, ref List<Object> objects)
 		{
-			Type = value.Type;
-			Data = value.Write();
-			Object = value.Object;
-		}
+			data = new List<string>();
+			objects = new List<Object>();
 
-		public Variable GetVariable()
-		{
-			return Variable.Create(Name, GetValue());
-		}
-
-		public VariableValue GetValue()
-		{
-			if (Type == VariableType.Object)
+			foreach (var variable in variables)
 			{
-				return VariableValue.Create(Object);
-			}
-			else
-			{
-				var value = VariableValue.Create(Type);
-				value.Read(Data);
-				return value;
+				var variableData = variable.Write(objects);
+				data.Add(variableData);
 			}
 		}
+
+		public static void Load(Variable variable, ref string data, ref List<Object> objects)
+		{
+			variable.Read(data, objects);
+
+			data = null;
+			objects = null;
+		}
+
+		public static void Load(IList<Variable> variables, ref List<string> data, ref List<Object> objects)
+		{
+			variables.Clear();
+
+			foreach (var variableData in data)
+			{
+				var variable = Empty;
+				variable.Read(variableData, objects);
+				variables.Add(variable);
+			}
+
+			data = null;
+			objects = null;
+		}
+
+		private string Write(List<Object> objects)
+		{
+			using (var stream = new MemoryStream())
+			{
+				using (var writer = new BinaryWriter(stream))
+				{
+					writer.Write(Name);
+					Value.Write(writer, objects);
+				}
+
+				return Convert.ToBase64String(stream.ToArray());
+			}
+		}
+
+		private bool Read(string data, List<Object> objects)
+		{
+			try
+			{
+				var bytes = Convert.FromBase64String(data);
+
+				using (var stream = new MemoryStream(bytes))
+				{
+					using (var reader = new BinaryReader(stream))
+					{
+						Name = reader.ReadString();
+						Value.Read(reader, objects);
+					}
+				}
+
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
+		#endregion
 	}
 }

@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
 		public string Label;
 
-		[Tooltip("If Variables is an IIndexedVariableStore and this is set, this selection will be duplicated for each of the children")]
+		[Tooltip("If Variables is a List and this is set, this selection will be duplicated for each of the items in the list")]
 		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
 		public bool Expand = false;
 

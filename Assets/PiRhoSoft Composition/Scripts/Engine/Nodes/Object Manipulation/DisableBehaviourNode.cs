@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<Behaviour>(variables, Target, out var behaviour))
+			if (ResolveObject(variables, Target, out Behaviour behaviour))
 				behaviour.enabled = false;
 
 			graph.GoTo(Next, nameof(Next));

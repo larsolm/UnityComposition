@@ -34,11 +34,6 @@ namespace PiRhoSoft.CompositionEditor
 			_label = new GUIContent(name);
 			_names = store.GetVariableNames().ToList();
 
-			if (store is IIndexedVariableStore indexed)
-				_names = store.GetVariableNames().Concat(Enumerable.Repeat(string.Empty, indexed.Count).Select((value, index) => VariableReference.LookupOpen + index.ToString() + VariableReference.LookupClose)).ToList();
-			else
-				_names = store.GetVariableNames().ToList();
-
 			Setup(_names)
 				.MakeEmptyLabel(new GUIContent("The store is empty"))
 				.MakeCollapsable(nameof(VariableStore) + "." + Name + ".IsOpen")
@@ -76,42 +71,21 @@ namespace PiRhoSoft.CompositionEditor
 			var name = _names[index];
 			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
 			var value = VariableValue.Empty;
-			var storeIndex = -1;
 
-			if (name.Length > 0 && name[0] == VariableReference.LookupOpen && Store is IIndexedVariableStore indexed)
-			{
-				storeIndex = int.Parse(name.Substring(1, name.Length - 2));
-				value = VariableValue.CreateReference(indexed.GetItem(storeIndex));
-			}
-			else
-			{
-				value = Store.GetVariable(name);
-			}
+			value = Store.GetVariable(name);
 
 			if (value.IsEmpty)
 			{
 				EditorGUI.LabelField(rect, name, VariableValue.EmptyString);
 			}
-			else if (value.HasReference)
-			{
-				var reference = value.Reference;
-
-				if (DrawObject(rect, name, ref reference, value.Type == VariableType.Object))
-				{
-					Selected = value.Store;
-					SelectedName = name;
-				}
-
-				if (reference != value.Reference)
-				{
-					if (storeIndex >= 0)
-						(Store as IIndexedVariableStore).SetItem(storeIndex, reference);
-					else
-						Store.SetVariable(name, VariableValue.CreateReference(reference));
-				}
-			}
 			else
 			{
+				if (value.HasStore)
+				{
+					if (DrawStoreView(ref rect))
+						Selected = value.Store;
+				}
+
 				using (var changes = new EditorGUI.ChangeCheckScope())
 				{
 					value = VariableValueDrawer.Draw(rect, new GUIContent(name), value, definition);
@@ -122,44 +96,10 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		public static bool DrawObject(string name, ref object obj, bool isEditable)
+		public static bool DrawStoreView(ref Rect rect)
 		{
-			var rect = EditorGUILayout.GetControlRect(true, EditorGUIUtility.singleLineHeight);
-			return DrawObject(rect, name, ref obj, isEditable);
-		}
-
-		public static bool DrawObject(Rect rect, string name, ref object obj, bool isEditable)
-		{
-			var selected = false;
-			var unity = obj as Object;
-			var store = obj as IVariableStore;
-
-			if (store != null)
-			{
-				var viewRect = RectHelper.TakeTrailingIcon(ref rect);
-
-				if (GUI.Button(viewRect, ViewButton.Content, GUIStyle.none))
-					selected = true;
-			}
-
-			if (unity != null && !isEditable)
-			{
-				var editRect = RectHelper.TakeTrailingIcon(ref rect);
-
-				if (GUI.Button(editRect, EditButton.Content, GUIStyle.none))
-					Selection.activeObject = unity;
-			}
-
-			if (isEditable)
-				obj = EditorGUI.ObjectField(rect, name, unity, typeof(Object), true);
-			else if (unity != null)
-				EditorGUI.LabelField(rect, name, unity.name);
-			else if (obj != null)
-				EditorGUI.LabelField(rect, name, obj.ToString());
-			else
-				EditorGUI.LabelField(rect, name, "");
-
-			return selected;
+			var viewRect = RectHelper.TakeTrailingIcon(ref rect);
+			return GUI.Button(viewRect, ViewButton.Content, GUIStyle.none);
 		}
 	}
 }

@@ -1,4 +1,6 @@
-﻿namespace PiRhoSoft.CompositionEngine
+﻿using System;
+
+namespace PiRhoSoft.CompositionEngine
 {
 	public abstract class ComparisonOperation : InfixOperation
 	{
@@ -6,15 +8,54 @@
 		// definition with the addition that VariableType Empty compares equal to null objects. Comparison results
 		// follow the same rules as the .net CompareTo method.
 
+		public static bool IsEqual(VariableValue left, VariableValue right)
+		{
+			switch (left.Type)
+			{
+				case VariableType.Bool: return right.Type == VariableType.Bool && left.Bool == right.Bool;
+				case VariableType.Int: return right.Type == VariableType.Int && left.Int == right.Int;
+				case VariableType.Float: return right.TryGetFloat(out var number) && left.Float == right.Number;
+				case VariableType.Int2: return right.TryGetInt2(out var int2) && left.Int2 == int2;
+				case VariableType.Int3: return right.TryGetInt3(out var int3) && left.Int3 == int3;
+				case VariableType.IntRect: return right.TryGetIntRect(out var intRect) &&  left.IntRect.x == intRect.x && left.IntRect.y == intRect.y && left.IntRect.width == intRect.width && left.IntRect.height == intRect.height;
+				case VariableType.IntBounds: return right.TryGetIntBounds(out var intBounds) && left.IntBounds == intBounds;
+				case VariableType.Vector2: return right.TryGetVector2(out var vector2) && left.Vector2 == vector2;
+				case VariableType.Vector3: return right.TryGetVector3(out var vector3) && left.Vector3 == vector3;
+				case VariableType.Vector4: return right.TryGetVector4(out var vector4) && left.Vector4 == vector4;
+				case VariableType.Quaternion: return right.TryGetQuaternion(out var quaternion) && left.Quaternion == quaternion;
+				case VariableType.Rect: return right.TryGetRect(out var rect) && left.Rect == rect;
+				case VariableType.Bounds: return right.TryGetBounds(out var bounds) && left.Bounds == bounds;
+				case VariableType.Color: return right.TryGetColor(out var color) && left.Color == color;
+				case VariableType.String: return right.TryGetString(out var str) && left.String == str;
+				case VariableType.Enum: return right.HasEnum && left.EnumType == right.EnumType && left.Enum == right.Enum;
+				case VariableType.Object:
+				case VariableType.List:
+				case VariableType.Store:
+				{
+					if (right.IsEmpty) return left.IsNull;
+					else if (right.HasReference) return left.IsNull && right.IsNull || left.Reference == right.Reference;
+					else return false;
+				}
+				case VariableType.Empty:
+				{
+					if (right.IsEmpty) return true;
+					else if (right.HasReference) return right.IsNull;
+					else return false;
+				}
+			}
+
+			return false;
+		}
+
 		protected bool Equals(VariableValue left, VariableValue right)
 		{
 			switch (left.Type)
 			{
 				case VariableType.Empty:
 				{
-					if (right.Type == VariableType.Empty) return true;
-					else if (right.HasRect) return right.IsNull;
-					else throw ComparisonMismatch(left.Type, right.Type, VariableType.Empty, VariableType.Object, VariableType.Store, VariableType.Other);
+					if (right.IsEmpty) return true;
+					else if (right.HasReference) return right.IsNull;
+					else throw ComparisonMismatch(left.Type, right.Type, VariableType.Empty, VariableType.Object, VariableType.Store, VariableType.List);
 				}
 				case VariableType.Bool:
 				{
@@ -91,9 +132,29 @@
 					if (right.TryGetString(out var str)) return left.String == str;
 					else throw ComparisonMismatch(left.Type, right.Type, VariableType.String);
 				}
-				default: // Object, Store, Other
+				case VariableType.Enum:
 				{
-					return left.Reference.Equals(right.Reference);
+					if (right.HasEnum)
+					{
+						if (left.EnumType == right.EnumType) return left.Enum == right.Enum;
+						else throw ComparisonEnumMismatch(left.EnumType, right.EnumType);
+					}
+					else
+					{
+						throw ComparisonMismatch(left.Type, right.Type, VariableType.Enum);
+					}
+				}
+				case VariableType.Object:
+				case VariableType.List:
+				case VariableType.Store:
+				{
+					if (right.IsEmpty) return left.IsNull;
+					else if (right.HasReference) return left.IsNull && right.IsNull || left.Reference == right.Reference;
+					else throw ComparisonMismatch(left.Type, right.Type, VariableType.Empty, VariableType.Object, VariableType.List, VariableType.Store);
+				}
+				default:
+				{
+					return false;
 				}
 			}
 		}
@@ -117,6 +178,18 @@
 					if (right.Type == VariableType.String) return left.String.CompareTo(right.String);
 					else throw ComparisonMismatch(left.Type, right.Type, VariableType.String);
 				}
+				case VariableType.Enum:
+				{
+					if (right.HasEnum)
+					{
+						if (left.EnumType == right.EnumType) return left.Enum.CompareTo(right.Enum);
+						else throw ComparisonEnumMismatch(left.EnumType, right.EnumType);
+					}
+					else
+					{
+						throw ComparisonMismatch(left.Type, right.Type, VariableType.Enum);
+					}
+				}
 			}
 
 			throw TypeMismatch(left.Type, right.Type, VariableType.Int, VariableType.Float, VariableType.String);
@@ -125,5 +198,6 @@
 		private ExpressionEvaluationException ComparisonMismatch(VariableType left, VariableType right, VariableType expected) => ExpressionEvaluationException.ComparisonTypeMismatch(Symbol, left, right, expected);
 		private ExpressionEvaluationException ComparisonMismatch(VariableType left, VariableType right, VariableType expected1, VariableType expected2) => ExpressionEvaluationException.ComparisonTypeMismatch(Symbol, left, right, expected1, expected2);
 		private ExpressionEvaluationException ComparisonMismatch(VariableType left, VariableType right, params VariableType[] expected) => ExpressionEvaluationException.ComparisonTypeMismatch(Symbol, left, right, expected);
+		private ExpressionEvaluationException ComparisonEnumMismatch(Type left, Type right) => ExpressionEvaluationException.ComparisonEnumMismatch(Symbol, left, right);
 	}
 }

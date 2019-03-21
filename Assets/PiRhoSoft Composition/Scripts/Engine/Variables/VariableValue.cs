@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -24,9 +25,10 @@ namespace PiRhoSoft.CompositionEngine
 		Bounds,
 		Color,
 		String,
+		Enum,
 		Object,
 		Store,
-		Other
+		List
 	}
 
 	public struct VariableValue
@@ -34,11 +36,34 @@ namespace PiRhoSoft.CompositionEngine
 		public const string EmptyString = "(empty)";
 		public const string NullString = "(null)";
 
-		static VariableValue()
-		{
-			if (Marshal.SizeOf(new ValueData()) != 24)
-				Debug.Log("ValueData is not 24 bytes!");
-		}
+		private VariableType _type;
+		private ValueData _value;
+		private object _reference;
+
+		public VariableType Type => _type;
+		public bool IsEmpty => _type == VariableType.Empty;
+		public bool IsNull => HasReference && _reference == null;
+
+		public bool HasValue => !HasString && !HasEnum && !HasReference;
+		public bool HasString => _type == VariableType.String;
+		public bool HasEnum => _type == VariableType.Enum;
+		public bool HasReference => _type == VariableType.Object || _type == VariableType.Store || _type == VariableType.List;
+
+		public bool HasObject => _reference is Object;
+		public bool HasStore => _reference is IVariableStore;
+		public bool HasList => _reference is IVariableList;
+
+		public bool HasNumber => _type == VariableType.Int || _type == VariableType.Float;
+		public bool HasNumber2 => _type == VariableType.Int2 || _type == VariableType.Vector2;
+		public bool HasNumber3 => _type == VariableType.Int3 || _type == VariableType.Vector3 || HasNumber2;
+		public bool HasNumber4 => _type == VariableType.Vector4 || HasNumber3;
+		public bool HasRect => _type == VariableType.IntRect || _type == VariableType.Rect;
+		public bool HasBounds => _type == VariableType.IntBounds || _type == VariableType.Bounds;
+
+		public bool HasEnumType<Type>() where Type : Enum => HasEnum && EnumType == typeof(Type);
+		public bool HasReferenceType<Type>() where Type : class => HasReference && _reference != null && typeof(Type).IsAssignableFrom(ReferenceType);
+
+		#region Storage
 
 		[StructLayout(LayoutKind.Explicit)]
 		private struct ValueData
@@ -70,59 +95,13 @@ namespace PiRhoSoft.CompositionEngine
 			[FieldOffset(20)] public int Word6;
 		}
 
-		private VariableType _type;
-		private ValueData _value;
-		private object _reference;
-
-		public VariableType Type => _type;
-		public bool IsEmpty => _type == VariableType.Empty;
-		public bool IsNull => HasReference && _reference == null;
-
-		public bool HasValue => !HasReference && !HasString;
-		public bool HasString => _type == VariableType.String;
-		public bool HasObject => _reference is Object;
-		public bool HasStore => _reference is IVariableStore;
-		public bool HasReference => _type == VariableType.Object || _type == VariableType.Store || _type == VariableType.Other;
-
-		public bool HasNumber => _type == VariableType.Int || _type == VariableType.Float;
-		public bool HasNumber2 => _type == VariableType.Int2 || _type == VariableType.Vector2;
-		public bool HasNumber3 => _type == VariableType.Int3 || _type == VariableType.Vector3 || HasNumber2;
-		public bool HasNumber4 => _type == VariableType.Vector4 || HasNumber3;
-		public bool HasRect => _type == VariableType.IntRect || _type == VariableType.Rect;
-		public bool HasBounds => _type == VariableType.IntBounds || _type == VariableType.Bounds;
-
-		public override string ToString()
-		{
-			switch (Type)
-			{
-				case VariableType.Empty: return EmptyString;
-				case VariableType.Bool: return _value.Bool.ToString();
-				case VariableType.Int: return _value.Int.ToString();
-				case VariableType.Float: return _value.Float.ToString();
-				case VariableType.Int2: return _value.Int2.ToString();
-				case VariableType.Int3: return _value.Int3.ToString();
-				case VariableType.IntRect: return _value.IntRect.ToString();
-				case VariableType.IntBounds: return _value.IntBounds.ToString();
-				case VariableType.Vector2: return _value.Vector2.ToString();
-				case VariableType.Vector3: return _value.Vector3.ToString();
-				case VariableType.Vector4: return _value.Vector4.ToString();
-				case VariableType.Quaternion: return _value.Quaternion.ToString();
-				case VariableType.Rect: return _value.Rect.ToString();
-				case VariableType.Bounds: return _value.Bounds.ToString();
-				case VariableType.Color: return _value.Color.ToString();
-				case VariableType.String: return (string)_reference;
-				case VariableType.Object: return _reference != null ? _reference.ToString() : NullString;
-				case VariableType.Store: return _reference != null ? _reference.ToString() : NullString;
-				case VariableType.Other: return _reference != null ? _reference.ToString() : NullString;
-				default: return EmptyString;
-			}
-		}
+		#endregion
 
 		#region Creation
 
 		public static VariableType GetType(Type type)
 		{
-			// if something is both an IVariableStore and Object it will be considered an Object
+			// Object takes precedence over Store which takes precedence over List
 
 			if (type == typeof(bool)) return VariableType.Bool;
 			else if (type == typeof(int)) return VariableType.Int;
@@ -139,30 +118,34 @@ namespace PiRhoSoft.CompositionEngine
 			else if (type == typeof(Bounds)) return VariableType.Bounds;
 			else if (type == typeof(Color)) return VariableType.Color;
 			else if (type == typeof(string)) return VariableType.String;
+			else if (type.IsEnum) return VariableType.Enum;
 			else if (typeof(Object).IsAssignableFrom(type)) return VariableType.Object;
 			else if (typeof(IVariableStore).IsAssignableFrom(type)) return VariableType.Store;
-			else return VariableType.Other;
+			else if (typeof(IVariableList).IsAssignableFrom(type)) return VariableType.List;
+			else return VariableType.Empty;
 		}
 
-		public static VariableValue Empty => Create(VariableType.Empty, null);
-		public static VariableValue Create(VariableType type) => Create(type, null);
-		public static VariableValue Create(bool value) => Create(VariableType.Bool, new ValueData { Bool = value });
-		public static VariableValue Create(int value) => Create(VariableType.Int, new ValueData { Int = value });
-		public static VariableValue Create(float value) => Create(VariableType.Float, new ValueData { Float = value });
-		public static VariableValue Create(Vector2Int value) => Create(VariableType.Int2, new ValueData { Int2 = value });
-		public static VariableValue Create(Vector3Int value) => Create(VariableType.Int3, new ValueData { Int3 = value });
-		public static VariableValue Create(RectInt value) => Create(VariableType.IntRect, new ValueData { IntRect = value });
-		public static VariableValue Create(BoundsInt value) => Create(VariableType.IntBounds, new ValueData { IntBounds = value });
-		public static VariableValue Create(Vector2 value) => Create(VariableType.Vector2, new ValueData { Vector2 = value });
-		public static VariableValue Create(Vector3 value) => Create(VariableType.Vector3, new ValueData { Vector3 = value });
-		public static VariableValue Create(Vector4 value) => Create(VariableType.Vector4, new ValueData { Vector4 = value });
-		public static VariableValue Create(Quaternion value) => Create(VariableType.Quaternion, new ValueData { Quaternion = value });
-		public static VariableValue Create(Rect value) => Create(VariableType.Rect, new ValueData { Rect = value });
-		public static VariableValue Create(Bounds value) => Create(VariableType.Bounds, new ValueData { Bounds = value });
-		public static VariableValue Create(Color value) => Create(VariableType.Color, new ValueData { Color = value });
-		public static VariableValue Create(string reference) => Create(VariableType.String, reference);
-		public static VariableValue Create(Object reference) => Create(VariableType.Object, reference);
-		public static VariableValue Create(IVariableStore reference) => Create(VariableType.Store, reference);
+		public static VariableValue Empty => CreateReference(VariableType.Empty, null);
+		public static VariableValue Create(VariableType type) => CreateReference(type, null);
+		public static VariableValue Create(bool value) => CreateValue(VariableType.Bool, new ValueData { Bool = value });
+		public static VariableValue Create(int value) => CreateValue(VariableType.Int, new ValueData { Int = value });
+		public static VariableValue Create(float value) => CreateValue(VariableType.Float, new ValueData { Float = value });
+		public static VariableValue Create(Vector2Int value) => CreateValue(VariableType.Int2, new ValueData { Int2 = value });
+		public static VariableValue Create(Vector3Int value) => CreateValue(VariableType.Int3, new ValueData { Int3 = value });
+		public static VariableValue Create(RectInt value) => CreateValue(VariableType.IntRect, new ValueData { IntRect = value });
+		public static VariableValue Create(BoundsInt value) => CreateValue(VariableType.IntBounds, new ValueData { IntBounds = value });
+		public static VariableValue Create(Vector2 value) => CreateValue(VariableType.Vector2, new ValueData { Vector2 = value });
+		public static VariableValue Create(Vector3 value) => CreateValue(VariableType.Vector3, new ValueData { Vector3 = value });
+		public static VariableValue Create(Vector4 value) => CreateValue(VariableType.Vector4, new ValueData { Vector4 = value });
+		public static VariableValue Create(Quaternion value) => CreateValue(VariableType.Quaternion, new ValueData { Quaternion = value });
+		public static VariableValue Create(Rect value) => CreateValue(VariableType.Rect, new ValueData { Rect = value });
+		public static VariableValue Create(Bounds value) => CreateValue(VariableType.Bounds, new ValueData { Bounds = value });
+		public static VariableValue Create(Color value) => CreateValue(VariableType.Color, new ValueData { Color = value });
+		public static VariableValue Create(string str) => CreateReference(VariableType.String, str == null ? string.Empty : str);
+		public static VariableValue Create(Enum e) => CreateReference(VariableType.Enum, e);
+		public static VariableValue Create(Object obj) => CreateReference(VariableType.Object, obj);
+		public static VariableValue Create(IVariableStore store) => CreateReference(VariableType.Store, store);
+		public static VariableValue Create(IVariableList list) => CreateReference(VariableType.List, list);
 
 		public static VariableValue CreateValue<T>(T value)
 		{
@@ -185,21 +168,21 @@ namespace PiRhoSoft.CompositionEngine
 				case Bounds b: return Create(b);
 				case Color c: return Create(c);
 				case string s: return Create(s);
-				default: return CreateReference(value);
+				default: return Empty;
 			}
 		}
 
 		public static VariableValue CreateReference(object reference)
 		{
-			if (reference is Object)
-				return Create(VariableType.Object, reference);
-			else if (reference is IVariableStore)
-				return Create(VariableType.Store, reference);
-			else
-				return Create(VariableType.Other, reference);
+			if (reference is string) return CreateReference(VariableType.String, reference);
+			else if (reference is Enum) return CreateReference(VariableType.Enum, reference);
+			else if (reference is Object) return CreateReference(VariableType.Object, reference);
+			else if (reference is IVariableStore) return CreateReference(VariableType.Store, reference);
+			else if (reference is IVariableList) return CreateReference(VariableType.List, reference);
+			else return Empty;
 		}
 
-		private static VariableValue Create(VariableType type, ValueData value)
+		private static VariableValue CreateValue(VariableType type, ValueData value)
 		{
 			return new VariableValue
 			{
@@ -208,12 +191,12 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
-		private static VariableValue Create(VariableType type, object reference)
+		private static VariableValue CreateReference(VariableType type, object reference)
 		{
 			return new VariableValue
 			{
 				_type = type,
-				_reference = type == VariableType.String && reference == null ? string.Empty : reference
+				_reference = reference
 			};
 		}
 
@@ -235,10 +218,11 @@ namespace PiRhoSoft.CompositionEngine
 		public Rect Rect => _value.Rect;
 		public Bounds Bounds => _value.Bounds;
 		public Color Color => _value.Color;
-
 		public string String => _reference as string;
+		public Enum Enum => _reference as Enum;
 		public Object Object => _reference as Object;
 		public IVariableStore Store => _reference as IVariableStore;
+		public IVariableList List => _reference as IVariableList;
 
 		public float Number => TryGetFloat(out var number) ? number : 0.0f;
 		public Vector2 Number2 => TryGetVector2(out var vector) ? vector : Vector2.zero;
@@ -247,6 +231,51 @@ namespace PiRhoSoft.CompositionEngine
 		public Rect NumberRect => TryGetRect(out var rect) ? rect : new Rect(0, 0, 0, 0);
 		public Bounds NumberBounds => TryGetBounds(out var bounds) ? bounds : new Bounds(Vector3.zero, Vector3.zero);
 		public object Reference => _reference;
+
+		public Type EnumType => HasEnum ? _reference.GetType() : null;
+		public Type ReferenceType => HasReference && _reference != null ? _reference.GetType() : null;
+
+		public override string ToString()
+		{
+			switch (Type)
+			{
+				case VariableType.Empty: return EmptyString;
+				case VariableType.Bool: return _value.Bool.ToString();
+				case VariableType.Int: return _value.Int.ToString();
+				case VariableType.Float: return _value.Float.ToString();
+				case VariableType.Int2: return _value.Int2.ToString();
+				case VariableType.Int3: return _value.Int3.ToString();
+				case VariableType.IntRect: return _value.IntRect.ToString();
+				case VariableType.IntBounds: return _value.IntBounds.ToString();
+				case VariableType.Vector2: return _value.Vector2.ToString();
+				case VariableType.Vector3: return _value.Vector3.ToString();
+				case VariableType.Vector4: return _value.Vector4.ToString();
+				case VariableType.Quaternion: return _value.Quaternion.ToString();
+				case VariableType.Rect: return _value.Rect.ToString();
+				case VariableType.Bounds: return _value.Bounds.ToString();
+				case VariableType.Color: return _value.Color.ToString();
+				case VariableType.String: return String;
+				case VariableType.Enum: return _reference.ToString();
+				case VariableType.Object: return _reference != null ? _reference.ToString() : NullString;
+				case VariableType.Store: return _reference != null ? _reference.ToString() : NullString;
+				case VariableType.List: return _reference != null ? _reference.ToString() : NullString;
+				default: return EmptyString;
+			}
+		}
+
+		private VariableType GetListType()
+		{
+			var list = List;
+			var type = list.Count > 0 ? list.GetVariable(0).Type : VariableType.Empty;
+
+			for (var i = 1; i < list.Count; i++)
+			{
+				if (list.GetVariable(i).Type != type)
+					return VariableType.Empty;
+			}
+
+			return type;
+		}
 
 		#endregion
 
@@ -261,7 +290,10 @@ namespace PiRhoSoft.CompositionEngine
 		// TryGetVector4		Vector3 (w = 1), Vector2 (z = 0, w = 1), Int3 (w = 1), Int2 (z = 0, w = 1)
 		// TryGetRect			IntRect
 		// TryGetBounds			IntBounds, Rect (z = 0, d = 0), IntRect(z = 0, d = 0)
-		// TryGetReference		valid whenever the cast to ObjectType succeeds
+		// TryGetObject			valid whenever _reference is an Object
+		// TryGetStore			valid whenever _reference is an IVariableStore
+		// TryGetList			valid whenever _reference is an IVariableList
+		// TryGetReference		valid whenever _reference is a T
 
 		public bool TryGetBool(out bool value)
 		{
@@ -504,16 +536,30 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public bool TryGetString(out string reference)
+		public bool TryGetString(out string s)
 		{
 			if (_type == VariableType.String)
 			{
-				reference = (string)_reference;
+				s = (string)_reference;
 				return true;
 			}
 			else
 			{
-				reference = string.Empty;
+				s = string.Empty;
+				return false;
+			}
+		}
+
+		public bool TryGetEnum<EnumType>(out EnumType value) where EnumType : Enum
+		{
+			if (HasEnumType<EnumType>())
+			{
+				value = (EnumType)Enum;
+				return true;
+			}
+			else
+			{
+				value = default;
 				return false;
 			}
 		}
@@ -530,81 +576,206 @@ namespace PiRhoSoft.CompositionEngine
 			return store != null;
 		}
 
-		public bool TryGetReference<ObjectType>(out ObjectType reference) where ObjectType : class
+		public bool TryGetList(out IVariableList list)
 		{
-			reference = _reference as ObjectType;
-			return reference != null;
+			list = _reference as IVariableList;
+			return list != null;
+		}
+
+		public bool TryGetReference<T>(out T t) where T : class
+		{
+			t = _reference as T;
+			return t != null;
 		}
 
 		#endregion
 
 		#region Persistence
 
-		// _reference is persisted via SerializedVariable and any type that is not an Object cannot be saved
+		// TODO: needs error reporting
 
-		public string Write()
+		public static void Save(VariableValue value, ref string data, ref List<Object> objects)
 		{
-			if (Type == VariableType.String)
-			{
-				return _reference.ToString();
-			}
-			else if (HasValue)
-			{
-				using (var stream = new MemoryStream())
-				{
-					using (var writer = new BinaryWriter(stream))
-					{
-						writer.Write(_value.Word1);
-						writer.Write(_value.Word2);
-						writer.Write(_value.Word3);
-						writer.Write(_value.Word4);
-						writer.Write(_value.Word5);
-						writer.Write(_value.Word6);
+			objects = new List<Object>();
+			data = value.Write(objects);
+		}
 
-						return Convert.ToBase64String(stream.ToArray());
+		public static void Load(VariableValue value, ref string data, ref List<Object> objects)
+		{
+			value.Read(data, objects);
+
+			data = null;
+			objects = null;
+		}
+
+		private string Write(List<Object> objects)
+		{
+			using (var stream = new MemoryStream())
+			{
+				using (var writer = new BinaryWriter(stream))
+					Write(writer, objects);
+
+				return Convert.ToBase64String(stream.ToArray());
+			}
+		}
+
+		private bool Read(string data, List<Object> objects)
+		{
+			try
+			{
+				var bytes = Convert.FromBase64String(data);
+
+				using (var stream = new MemoryStream(bytes))
+				{
+					using (var reader = new BinaryReader(stream))
+						Read(reader, objects);
+				}
+
+				return true;
+			}
+			catch
+			{
+				return false;
+			}
+		}
+
+		internal void Write(BinaryWriter writer, List<Object> objects)
+		{
+			writer.Write((int)_type);
+
+			if (_type == VariableType.Empty)
+			{
+			}
+			else if (_type == VariableType.String)
+			{
+				writer.Write(String);
+			}
+			else if (_type == VariableType.Enum)
+			{
+				// saved as string since it's the simplest way of handling enums with non Int32 underlying type
+
+				writer.Write(_reference.GetType().AssemblyQualifiedName);
+				writer.Write(_reference.ToString());
+			}
+			else if (_type == VariableType.Object)
+			{
+				writer.Write(objects.Count);
+				objects.Add(Object);
+			}
+			else if (_type == VariableType.Store)
+			{
+				var store = _reference as VariableStore;
+
+				if (store != null)
+				{
+					writer.Write(store.Variables.Count);
+
+					for (var i = 0; i < store.Variables.Count; i++)
+					{
+						writer.Write(store.Variables[i].Name);
+						store.Variables[i].Value.Write(objects);
 					}
+				}
+				else
+				{
+					writer.Write(-1);
+				}
+			}
+			else if (_type == VariableType.List)
+			{
+				var list = _reference as VariableList;
+
+				if (list != null)
+				{
+					writer.Write(list.Count);
+
+					for (var i = 0; i < list.Count; i++)
+						list.GetVariable(i).Write(writer, objects);
+				}
+				else
+				{
+					writer.Write(-1);
 				}
 			}
 			else
 			{
-				return "";
+				writer.Write(_value.Word1);
+				writer.Write(_value.Word2);
+				writer.Write(_value.Word3);
+				writer.Write(_value.Word4);
+				writer.Write(_value.Word5);
+				writer.Write(_value.Word6);
 			}
 		}
 
-		public void Read(string value)
+		internal void Read(BinaryReader reader, List<Object> objects)
 		{
-			if (Type == VariableType.String)
-			{
-				_reference = value;
-			}
-			else if (HasValue)
-			{
-				try
-				{
-					var data = Convert.FromBase64String(value);
+			_type = (VariableType)reader.ReadInt32();
 
-					using (var stream = new MemoryStream(data))
-					{
-						using (var reader = new BinaryReader(stream))
-						{
-							_value.Word1 = reader.ReadInt32();
-							_value.Word2 = reader.ReadInt32();
-							_value.Word3 = reader.ReadInt32();
-							_value.Word4 = reader.ReadInt32();
-							_value.Word5 = reader.ReadInt32();
-							_value.Word6 = reader.ReadInt32();
-						}
-					}
-				}
-				catch
+			if (_type == VariableType.String)
+			{
+				_reference = reader.ReadString();
+			}
+			else if (_type == VariableType.Enum)
+			{
+				var typeName = reader.ReadString();
+				var value = reader.ReadString();
+
+				var type = System.Type.GetType(typeName);
+				_reference = Enum.Parse(type, value);
+			}
+			else if (_type == VariableType.Object)
+			{
+				var index = reader.ReadInt32();
+				_reference = objects[index];
+			}
+			else if (_type == VariableType.Store)
+			{
+				var count = reader.ReadInt32();
+
+				if (count >= 0)
 				{
-					_value.Word1 = 0;
-					_value.Word2 = 0;
-					_value.Word3 = 0;
-					_value.Word4 = 0;
-					_value.Word5 = 0;
-					_value.Word6 = 0;
+					var store = new VariableStore();
+
+					for (var i = 0; i < count; i++)
+					{
+						var name = reader.ReadString();
+						var value = new VariableValue();
+
+						value.Read(reader, objects);
+						store.AddVariable(name, value);
+					}
+
+					_reference = store;
 				}
+			}
+			else if (_type == VariableType.List)
+			{
+				var count = reader.ReadInt32();
+
+				if (count >= 0)
+				{
+					var list = new VariableList();
+
+					for (var i = 0; i < count; i++)
+					{
+						var value = new VariableValue();
+
+						value.Read(reader, objects);
+						list.AddVariable(value);
+					}
+
+					_reference = list;
+				}
+			}
+			else
+			{
+				_value.Word1 = reader.ReadInt32();
+				_value.Word2 = reader.ReadInt32();
+				_value.Word3 = reader.ReadInt32();
+				_value.Word4 = reader.ReadInt32();
+				_value.Word5 = reader.ReadInt32();
+				_value.Word6 = reader.ReadInt32();
 			}
 		}
 

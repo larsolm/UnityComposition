@@ -15,9 +15,9 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Selection Control")]
 	public class SelectionControl : InterfaceControl
 	{
-		private const string _invalidExpandWarning = "(CSCIE) Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore";
+		private const string _invalidExpandWarning = "(CSCIE) Failed to expand item {0}: the variable '{1}' is not an IVariableList";
 		private const string _missingItemError = "(CSCMI) Failed to create item {0}: the variable '{1}' could not be found";
-		private const string _invalidItemError = "(CSCII) Failed to create item {0}: the variable '{1}' is not an IVariableStore";
+		private const string _invalidItemError = "(CSCII) Failed to create item {0}: the variable '{1}' is not an IVariableStore or IVariableList";
 		private const string _missingTemplateError = "(ISCMT) Failed to create item {0}: the object template has not been assigned";
 		private const string _missingChildError = "(ISCMC) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
 		private const string _missingBindingError = "(CSCMB) Failed to initialize item {0}: the template '{1}' does not have a Binding Root";
@@ -58,7 +58,7 @@ namespace PiRhoSoft.CompositionEngine
 		public IVariableStore FocusedVariables => _focusedItem?.Variables;
 
 		public SelectionItem SelectedItem => _selectedItem?.Item;
-		public IVariableStore SelectedVariables => _selectedItem?.SelectedVariables;
+		public object SelectedVariables => _selectedItem?.Selection;
 
 		protected int _columnCount;
 		protected int _rowCount;
@@ -136,7 +136,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			public SelectionItem Item;
 			public IVariableStore Variables;
-			public IVariableStore SelectedVariables;
+			public object Selection;
 			public GameObject Object;
 			public bool Generated;
 			public FocusIndicator Indicator;
@@ -154,92 +154,93 @@ namespace PiRhoSoft.CompositionEngine
 
 			foreach (var item in items)
 			{
-				var store = GetStore(variables, item);
-				if (store != null)
+				if (item.Variables.IsAssigned)
 				{
-					if (item.Source == SelectionItem.ObjectSource.Asset)
-					{
-						if (item.Template == null)
-						{
-							Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
-						}
-						else if (item.Expand)
-						{
-							if (store is IIndexedVariableStore indexed)
-							{
-								for (var i = 0; i < indexed.Count; i++)
-								{
-									var indexedItem = indexed.GetItem(i) as IVariableStore;
-									if (indexedItem != null)
-										AddItem(item, null, indexedItem, indexedItem, index++);
-									else
-										Debug.LogWarningFormat(this, _invalidBindingError, i, item.Name);
-								}
-							}
-							else
-							{
-								AddItem(item, null, store, store, index++);
-								Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Variables);
-							}
-						}
-						else
-						{
-							item.Store = store;
-							AddItem(item, null, item, store, index++);
-						}
-					}
-					else if (item.Source == SelectionItem.ObjectSource.Scene)
-					{
-						var obj = transform.Find(item.Name);
+					var value = item.Variables.GetValue(variables);
 
-						if (obj == null)
-							Debug.LogErrorFormat(this, _missingChildError, item.Name, name);
-						else
-							AddItem(item, obj.gameObject, item, store, index++);
-					}
-				}
-			}
-		}
-
-		private IVariableStore GetStore(IVariableStore variables, SelectionItem item)
-		{
-			if (!item.Variables.IsAssigned)
-			{
-				return variables;
-			}
-			else
-			{
-				var value = item.Variables.GetValue(variables);
-
-				if (value.Type == VariableType.Empty)
-				{
-					Debug.LogErrorFormat(this, _missingItemError, item.Id, item.Variables);
-					return null;
-				}
-				else if (!value.TryGetStore(out var store))
-				{
-					Debug.LogErrorFormat(this, _invalidItemError, item.Id, item.Variables);
-					return null;
+					if (value.TryGetList(out var list))
+						CreateListItem(item, variables, list, ref index);
+					else if (value.TryGetStore(out var store))
+						CreateStoreItem(item, variables, store, ref index);
+					else if (value.Type == VariableType.Empty)
+						Debug.LogErrorFormat(this, _missingItemError, item.Id, item.Variables);
+					else
+						Debug.LogErrorFormat(this, _invalidItemError, item.Id, item.Variables);
 				}
 				else
 				{
-					return store;
+					CreateStoreItem(item, variables, variables, ref index);
 				}
 			}
 		}
 
-		private void AddItem(SelectionItem item, GameObject child, IVariableStore variables, IVariableStore selectedVariables, int index)
+		private void CreateStoreItem(SelectionItem item, IVariableStore variables, IVariableStore store, ref int index)
+		{
+			if (item.Source == SelectionItem.ObjectSource.Asset)
+			{
+				if (item.Template == null)
+					Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
+				else if (item.Expand)
+					Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Variables);
+				else
+					AddItem(item, null, store, store, index++);
+			}
+			else if (item.Source == SelectionItem.ObjectSource.Scene)
+			{
+				CreateSceneItem(item, store, ref index);
+			}
+		}
+
+		private void CreateListItem(SelectionItem item, IVariableStore variables, IVariableList list, ref int index)
+		{
+			if (item.Source == SelectionItem.ObjectSource.Asset)
+			{
+				if (item.Template == null)
+					Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
+				else if (item.Expand)
+					CreateExpandedItems(item, list, ref index);
+				else
+					AddItem(item, null, item, list, index++);
+			}
+			else if (item.Source == SelectionItem.ObjectSource.Scene)
+			{
+				CreateSceneItem(item, variables, ref index);
+			}
+		}
+
+		private void CreateExpandedItems(SelectionItem item, IVariableList list, ref int index)
+		{
+			for (var i = 0; i < list.Count; i++)
+			{
+				if (list.GetVariable(i).TryGetStore(out var itemStore))
+					AddItem(item, null, itemStore, itemStore, index++);
+				else
+					Debug.LogWarningFormat(this, _invalidBindingError, i, item.Name);
+			}
+		}
+
+		private void CreateSceneItem(SelectionItem item, IVariableStore store, ref int index)
+		{
+			var obj = transform.Find(item.Name);
+
+			if (obj != null)
+				AddItem(item, obj.gameObject, item, store, index++);
+			else
+				Debug.LogErrorFormat(this, _missingChildError, item.Name, name);
+		}
+
+		private void AddItem(SelectionItem item, GameObject child, IVariableStore variables, object selection, int index)
 		{
 			if (index < _items.Count)
 			{
-				if (_items[index].Item == item && _items[index].Variables == variables)
+				if (_items[index].Item == item && _items[index].Variables == variables && _items[index].Selection == selection)
 					return;
 
 				_items.RemoveRange(index, _items.Count - index);
 			}
 
 			var parent = GetItemParent();
-			var obj = child == null ? Instantiate(item.Template, parent) : child; // Don't null coalesce
+			var obj = child == null ? Instantiate(item.Template, parent) : child;
 			obj.transform.SetSiblingIndex(index);
 
 			var binding = obj.GetComponent<BindingRoot>();
@@ -261,7 +262,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				Item = item,
 				Variables = variables,
-				SelectedVariables = selectedVariables,
+				Selection = selection,
 				Object = obj,
 				Generated = child == null,
 				Indicator = indicator,

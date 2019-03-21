@@ -131,7 +131,7 @@ namespace PiRhoSoft.CompositionEngine
 			return new VariableDefinition
 			{
 				_name = name,
-				_type = VariableType.Object,
+				_type = VariableValue.GetType(type),
 				_tag = tag,
 				_initializer = initializer,
 				_typeConstraint = type.AssemblyQualifiedName

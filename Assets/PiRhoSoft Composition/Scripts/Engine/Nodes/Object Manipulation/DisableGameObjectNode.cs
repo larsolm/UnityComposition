@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<GameObject>(variables, Target, out var target))
+			if (ResolveObject(variables, Target, out GameObject target))
 				target.SetActive(false);
 
 			graph.GoTo(Next, nameof(Next));

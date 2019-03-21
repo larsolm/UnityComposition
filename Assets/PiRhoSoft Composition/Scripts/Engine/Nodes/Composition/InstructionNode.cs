@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (!ResolveOther(variables, Root, out object root))
+			if (!ResolveReference(variables, Root, out var root))
 				root = variables.Root;
 
 			if (WaitForCompletion)

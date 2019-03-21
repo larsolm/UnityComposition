@@ -39,7 +39,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve<Component>(variables, Target, out var component))
+			if (ResolveObject(variables, Target, out Component component))
 			{
 				if (component.GetType() == ComponentType)
 				{
@@ -63,9 +63,10 @@ namespace PiRhoSoft.CompositionEngine
 						case VariableType.Bounds: obj = value.Bounds; break;
 						case VariableType.Color: obj = value.Color; break;
 						case VariableType.String: obj = value.String; break;
+						case VariableType.Enum: obj = value.Enum; break;
 						case VariableType.Object: obj = value.Object; break;
 						case VariableType.Store: obj = value.Store; break;
-						case VariableType.Other: obj = value.Reference; break;
+						case VariableType.List: obj = value.Reference; break;
 					}
 
 					if (obj != null)

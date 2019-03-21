@@ -153,7 +153,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		static VariableReference()
 		{
-			_resolvers = new VariableResolver[(int)(VariableType.Other + 1)];
+			_resolvers = new VariableResolver[(int)(VariableType.List + 1)];
 			_resolvers[(int)VariableType.Int2] = new Int2VariableResolver();
 			_resolvers[(int)VariableType.Int3] = new Int3VariableResolver();
 			_resolvers[(int)VariableType.IntRect] = new IntRectVariableResolver();
@@ -167,6 +167,7 @@ namespace PiRhoSoft.CompositionEngine
 			_resolvers[(int)VariableType.Color] = new ColorVariableResolver();
 			_resolvers[(int)VariableType.Object] = new ObjectVariableResolver();
 			_resolvers[(int)VariableType.Store] = new StoreVariableResolver();
+			_resolvers[(int)VariableType.List] = new ListVariableResolver();
 		}
 
 		public static VariableValue LookupVariable(VariableValue owner, string lookup)

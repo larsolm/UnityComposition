@@ -1162,9 +1162,11 @@ namespace PiRhoSoft.CompositionEditor
 					GUI.Box(rootBox, string.Empty);
 					rootBox = RectHelper.Inset(rootBox, EditorGUIUtility.standardVerticalSpacing);
 
-					var root = _graph.Store.Root;
-					if (VariableStoreControl.DrawObject(rootBox, InstructionStore.RootStoreName, ref root, false))
-						UpdateWatchSelected(InstructionStore.RootStoreName, root as IVariableStore);
+					var root = VariableValue.CreateReference(_graph.Store.Root);
+					if (root.HasStore && VariableStoreControl.DrawStoreView(ref rootBox))
+						UpdateWatchSelected(InstructionStore.RootStoreName, root.Store);
+
+					VariableValueDrawer.Draw(new GUIContent(InstructionStore.RootStoreName), root, VariableDefinition.Create("", VariableType.Empty));
 
 					if (_selectedStore != null) _selectedStore.Draw();
 					if (_localStore != null) _localStore.Draw();

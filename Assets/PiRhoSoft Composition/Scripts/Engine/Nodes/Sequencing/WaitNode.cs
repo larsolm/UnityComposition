@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The amount of time (in seconds) to wait")]
 		[InlineDisplay(PropagateLabel = true)]
-		public NumberVariableSource Time = new NumberVariableSource(1.0f);
+		public FloatVariableSource Time = new FloatVariableSource(1.0f);
 
 		[Tooltip("Time is affected by Time.timeScale")]
 		public bool UseScaledTime = true;

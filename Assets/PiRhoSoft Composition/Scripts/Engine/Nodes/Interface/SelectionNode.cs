@@ -64,9 +64,9 @@ namespace PiRhoSoft.CompositionEngine
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			SelectionNodeItem selectedItem = null;
-			IVariableStore selectedVariables = null;
+			object selectedVariables = null;
 
-			if (Resolve<SelectionControl>(variables, Control, out var control))
+			if (ResolveObject(variables, Control, out SelectionControl control))
 			{
 				yield return control.MakeSelection(variables, Items, IsSelectionRequired);
 

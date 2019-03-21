@@ -34,7 +34,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var text = Message.GetText(variables);
 
-			if (Resolve<MessageControl>(variables, Control, out var message))
+			if (ResolveObject(variables, Control, out MessageControl message))
 				yield return message.Show(variables, text, Interaction, IsLast, WaitTime);
 			else
 				Debug.Log(text);

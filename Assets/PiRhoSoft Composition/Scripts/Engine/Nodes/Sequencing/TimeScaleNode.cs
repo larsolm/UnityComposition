@@ -14,7 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The value to set the TimeScale to")]
 		[InlineDisplay(PropagateLabel = true)]
 		[VariableConstraint(0.0f, 100.0f)]
-		public NumberVariableSource TimeScale = new NumberVariableSource(1.0f);
+		public FloatVariableSource TimeScale = new FloatVariableSource(1.0f);
 
 		public override Color NodeColor => Colors.Sequencing;
 

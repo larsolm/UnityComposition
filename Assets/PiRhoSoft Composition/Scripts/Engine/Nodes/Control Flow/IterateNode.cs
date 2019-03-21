@@ -17,13 +17,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (ResolveOther<IIndexedVariableStore>(variables, Container, out var store))
+			if (Resolve(variables, Container, out IVariableList list))
 			{
-				var item = store.GetItem(iteration);
+				var item = list.GetVariable(iteration);
 
-				if (Loop != null && item != null)
+				if (Loop != null && item.HasReference)
 				{
-					graph.ChangeRoot(item);
+					graph.ChangeRoot(item.Reference);
 					graph.GoTo(Loop, nameof(Loop));
 				}
 			}

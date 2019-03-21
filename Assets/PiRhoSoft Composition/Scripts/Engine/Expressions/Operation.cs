@@ -25,7 +25,13 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _comparisonTypeMismatch1Exception = "the operator '{0}' was passed values of type {1} and {2} but type {1} can only be compared with values of type {3}";
 		private const string _comparisonTypeMismatch2Exception = "the operator '{0}' was passed values of type {1} and {2} but type {1} can only be compared with values of type {3} and {4}";
 		private const string _comparisonTypeMismatchXException = "the operator '{0}' was passed values of type {1} and {2} but type {1} can only be compared with values of type {3}, and {4}";
+		private const string _comparisonEnumMismatchException = "the operator '{0}' was passed enums of type {1} and {2} but enums can only be compared with other enums of the same type";
 		private const string _divideByZeroException = "the operator '{0}' attempted to divide by 0";
+		private const string _missingAddException = "the list '{0}' cannot have values added";
+		private const string _readOnlyAddException = "the list '{0}' is read only and cannot have values added";
+		private const string _mismatchedAddException = "the list '{0}' cannot have values of type {1} added";
+		private const string _readOnlyRemoveException = "the list '{0}' is read only and cannot have values removed";
+		private const string _mismatchedRemoveException = "the list '{0}' cannot have values of type {1} removed";
 
 		public static ExpressionEvaluationException InvalidAssignment(string symbol)
 		{
@@ -39,12 +45,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static ExpressionEvaluationException ReadOnlyAssignment(string symbol, VariableReference variable)
 		{
-			return new ExpressionEvaluationException(_missingAssignmentException, variable);
+			return new ExpressionEvaluationException(_readOnlyAssignmentException, variable);
 		}
 
 		public static ExpressionEvaluationException MismatchedAssignment(string symbol, VariableReference variable, VariableType type)
 		{
-			return new ExpressionEvaluationException(_missingAssignmentException, variable, type);
+			return new ExpressionEvaluationException(_mismatchedAssignmentException, variable, type);
 		}
 
 		public static ExpressionEvaluationException PrefixTypeMismatch(string symbol, VariableType type, VariableType expected)
@@ -101,9 +107,39 @@ namespace PiRhoSoft.CompositionEngine
 			return new ExpressionEvaluationException(_comparisonTypeMismatchXException, symbol, left, right, first, last);
 		}
 
+		public static ExpressionEvaluationException ComparisonEnumMismatch(string symbol, Type left, Type right)
+		{
+			return new ExpressionEvaluationException(_comparisonEnumMismatchException, symbol, left.Name, right.Name);
+		}
+
 		public static ExpressionEvaluationException DivideByZero(string symbol)
 		{
 			return new ExpressionEvaluationException(_divideByZeroException, symbol);
+		}
+
+		public static ExpressionEvaluationException MissingAdd(string symbol, VariableReference variable)
+		{
+			return new ExpressionEvaluationException(_missingAddException, variable);
+		}
+
+		public static ExpressionEvaluationException ReadOnlyAdd(string symbol, VariableReference variable)
+		{
+			return new ExpressionEvaluationException(_readOnlyAddException, variable);
+		}
+
+		public static ExpressionEvaluationException MismatchedAdd(string symbol, VariableReference variable, VariableType type)
+		{
+			return new ExpressionEvaluationException(_mismatchedAddException, variable, type);
+		}
+
+		public static ExpressionEvaluationException ReadOnlyRemove(string symbol, VariableReference variable)
+		{
+			return new ExpressionEvaluationException(_readOnlyRemoveException, variable);
+		}
+
+		public static ExpressionEvaluationException MismatchedRemove(string symbol, VariableReference variable, VariableType type)
+		{
+			return new ExpressionEvaluationException(_mismatchedRemoveException, variable, type);
 		}
 
 		#endregion

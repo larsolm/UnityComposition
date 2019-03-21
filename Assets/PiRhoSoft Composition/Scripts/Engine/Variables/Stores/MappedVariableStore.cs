@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public interface IVariableList
+	public interface IMappedVariableList
 	{
 		int VariableCount { get; }
 		string GetVariableName(int index);
@@ -30,13 +30,13 @@ namespace PiRhoSoft.CompositionEngine
 		}
 	}
 
-	public class MappedVariableStore : IVariableStore, IVariableList
+	public class MappedVariableStore : IVariableStore, IMappedVariableList
 	{
 		private const string _invalidFieldError = "(CMVSIF) failed to map field '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived field types can be mapped";
 		private const string _invalidPropertyError = "(CMVSIP) failed to map property '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived property types can be mapped";
 
 		private VariableMap _map;
-		private IVariableList[] _lists;
+		private IMappedVariableList[] _lists;
 
 		public void Setup(object owner, VariableSchema schema, VariableSet variables)
 		{
@@ -46,7 +46,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (schema != null && variables != null)
 				listCount++;
 
-			var lists = new IVariableList[listCount];
+			var lists = new IMappedVariableList[listCount];
 
 			for (var i = 0; i < mapping.Properties.Count; i++)
 				lists[i] = new PropertyList(owner, mapping.Properties[i]);
@@ -71,7 +71,7 @@ namespace PiRhoSoft.CompositionEngine
 			Setup(mapping.Map, lists);
 		}
 
-		public void Setup(VariableMap map, params IVariableList[] lists)
+		public void Setup(VariableMap map, params IMappedVariableList[] lists)
 		{
 			_map = map;
 			_lists = lists;

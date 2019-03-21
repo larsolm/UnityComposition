@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The volume to play the sound at")]
 		[InlineDisplay(PropagateLabel = true)]
-		public NumberVariableSource Volume = new NumberVariableSource(1.0f);
+		public FloatVariableSource Volume = new FloatVariableSource(1.0f);
 
 		[Tooltip("Whether to wait for the sound to finish before moving to Next")]
 		public bool WaitForCompletion = false;
@@ -39,9 +39,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve(variables, AudioPlayer, out AudioPlayer player))
+			if (ResolveObject(variables, AudioPlayer, out AudioPlayer player))
 			{
-				if (Resolve(variables, Sound, out var sound))
+				if (ResolveObject(variables, Sound, out var sound))
 				{
 					if (!Resolve(variables, Volume, out var volume))
 					{

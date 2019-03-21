@@ -82,28 +82,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		private int GetIndexForType(VariableType type)
 		{
-			switch (type)
-			{
-				case VariableType.Bool: return 0;
-				case VariableType.Int: return 1;
-				case VariableType.Float: return 2;
-				case VariableType.String: return 3;
-				case VariableType.Object: return 4;
-				default: return -1;
-			}
+			return (int)type - 1;
 		}
 
 		private VariableType GetTypeFromIndex(int index)
 		{
-			switch (index)
-			{
-				case 0: return VariableType.Bool;
-				case 1: return VariableType.Int;
-				case 2: return VariableType.Float;
-				case 3: return VariableType.String;
-				case 4: return VariableType.Object;
-				default: return VariableType.Empty;
-			}
+			return (VariableType)(index + 1);
 		}
 
 		private void DrawOutput(Rect rect, IList list, int index)
