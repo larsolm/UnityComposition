@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -19,9 +20,16 @@ namespace PiRhoSoft.CompositionEngine
 		private const char _lookupClose = ']';
 		private const char _stringOpen = '\"';
 		private const char _stringClose = '\"';
+		private const char _vectorOpen = '<';
+		private const char _vectorClose = '>';
+		private const char _rectOpen = '[';
+		private const char _rectClose = ']';
+		private const char _quaternionOpen = '}';
+		private const char _quaternionClose = '{';
 		private const char _groupOpen = '(';
 		private const char _groupClose = ')';
 		private const char _separator = ',';
+		private const char _colorOpen = '#';
 
 		private const string _trueLiteral = "true";
 		private const string _falseLiteral = "false";
@@ -29,10 +37,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		private const string _sentinelCharacters = ";\n";
 		private const string _operatorCharacters = "+-!^*/%<=>&|?:";
+		private const string _hexCharacters = "0123456789ABCDEFabcdef";
 
 		private static bool IsSentinelCharacter(char c) => _sentinelCharacters.IndexOf(c) >= 0;
 		private static bool IsIdentifierStartCharacter(char c) => char.IsLetter(c) || c == '_';
 		private static bool IsIdentifierCharacter(char c) => char.IsLetterOrDigit(c) || c == '_' || c == VariableReference.Separator || c == VariableReference.LookupOpen || c == VariableReference.LookupClose;
+		private static bool IsHexCharacter(char c) => _hexCharacters.IndexOf(c) >= 0;
 		private static bool IsOperatorCharacter(char c) => _operatorCharacters.IndexOf(c) >= 0;
 
 		public static List<ExpressionToken> Tokenize(string input)
@@ -61,6 +71,7 @@ namespace PiRhoSoft.CompositionEngine
 					else if (c == _groupOpen) AddStartGroup(tokens, input, start, ref start);
 					else if (c == _groupClose) AddEndGroup(tokens, input, start, ref start);
 					else if (c == _separator) AddSeparator(tokens, input, start, ref start);
+					else if (c == _colorOpen) AddColor(tokens, input, start, ref start);
 					else if (IsOperatorCharacter(c)) AddOperator(tokens, input, start, ref start);
 					else throw new ExpressionTokenizeException(start, _invalidTokenException, c);
 
@@ -90,6 +101,14 @@ namespace PiRhoSoft.CompositionEngine
 		private static int SkipOperator(string input, int start)
 		{
 			while (start < input.Length && IsOperatorCharacter(input[start]))
+				++start;
+
+			return start;
+		}
+
+		private static int SkipHex(string input, int start)
+		{
+			while (start < input.Length && IsHexCharacter(input[start]))
 				++start;
 
 			return start;
@@ -197,6 +216,30 @@ namespace PiRhoSoft.CompositionEngine
 				tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Sentinel });
 
 			end = start + 1;
+		}
+
+		private static void AddColor(List<ExpressionToken> tokens, string input, int start, ref int end)
+		{
+			end = SkipHex(input, end + 1);
+
+			var r = GetHexValue(input, start + 1, end);
+			var g = GetHexValue(input, start + 3, end);
+			var b = GetHexValue(input, start + 5, end);
+			var a = GetHexValue(input, start + 7, end);
+
+			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Color, Color = new Color(r, g, b, a) });
+
+			end++;
+		}
+
+		private static float GetHexValue(string input, int start, int end)
+		{
+			if (start + 2 > end)
+				return 1.0f;
+
+			var text = input.Substring(start, 2);
+			var value = byte.Parse(text, System.Globalization.NumberStyles.AllowHexSpecifier);
+			return value / 255.0f;
 		}
 
 		private static void AddOperator(List<ExpressionToken> tokens, string input, int start, ref int end)

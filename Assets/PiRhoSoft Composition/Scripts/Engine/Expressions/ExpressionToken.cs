@@ -1,4 +1,6 @@
-﻿namespace PiRhoSoft.CompositionEngine
+﻿using UnityEngine;
+
+namespace PiRhoSoft.CompositionEngine
 {
 	public enum ExpressionTokenType
 	{
@@ -7,6 +9,7 @@
 		Integer,
 		Number,
 		String,
+		Color,
 		Null,
 		Identifier,
 		Command,
@@ -25,5 +28,6 @@
 		public string Text;
 		public int Integer;
 		public float Number;
+		public Color Color;
 	}
 }
