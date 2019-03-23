@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ColorVariableResolver : VariableResolver
+	public class ColorVariableResolver : VariableHandler
 	{
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{

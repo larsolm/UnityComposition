@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class IntRectVariableResolver : VariableResolver
+	public class IntRectVariableResolver : VariableHandler
 	{
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{

@@ -2,13 +2,12 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class Int3VariableResolver : VariableResolver
+	public class Int2VariableResolver : VariableHandler
 	{
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{
-			if (lookup == "x") return VariableValue.Create(owner.Int3.x);
-			else if (lookup == "y") return VariableValue.Create(owner.Int3.y);
-			else if (lookup == "z") return VariableValue.Create(owner.Int3.z);
+			if (lookup == "x") return VariableValue.Create(owner.Int2.x);
+			else if (lookup == "y") return VariableValue.Create(owner.Int2.y);
 			else return VariableValue.Empty;
 		}
 
@@ -18,17 +17,12 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				if (lookup == "x")
 				{
-					owner = VariableValue.Create(new Vector3Int(value.Int, owner.Int3.y, owner.Int3.z));
+					owner = VariableValue.Create(new Vector2Int(value.Int, owner.Int2.y));
 					return SetVariableResult.Success;
 				}
 				else if (lookup == "y")
 				{
-					owner = VariableValue.Create(new Vector3Int(owner.Int3.x, value.Int, owner.Int3.z));
-					return SetVariableResult.Success;
-				}
-				else if (lookup == "z")
-				{
-					owner = VariableValue.Create(new Vector3Int(owner.Int3.x, owner.Int3.y, value.Int));
+					owner = VariableValue.Create(new Vector2Int(owner.Int2.x, value.Int));
 					return SetVariableResult.Success;
 				}
 				else

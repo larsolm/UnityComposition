@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class Vector3VariableResolver : VariableResolver
+	public class Vector3VariableResolver : VariableHandler
 	{
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{

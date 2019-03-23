@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class QuaternionVariableResolver : VariableResolver
+	public class QuaternionVariableResolver : VariableHandler
 	{
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{

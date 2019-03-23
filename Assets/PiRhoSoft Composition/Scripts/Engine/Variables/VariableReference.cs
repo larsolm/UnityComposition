@@ -105,7 +105,7 @@ namespace PiRhoSoft.CompositionEngine
 			var value = variables.GetVariable(variable);
 
 			if (!string.IsNullOrEmpty(lookup))
-				value = LookupVariable(value, lookup);
+				value = value.Handler.Lookup(value, lookup);
 
 			return value;
 		}
@@ -118,7 +118,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (!string.IsNullOrEmpty(lookup))
 			{
 				var owner = variables.GetVariable(variable);
-				var result = ApplyVariable(ref owner, lookup, value);
+				var result = owner.Handler.Apply(ref owner, lookup, value);
 
 				if (result == SetVariableResult.Success)
 					value = owner;
@@ -146,50 +146,5 @@ namespace PiRhoSoft.CompositionEngine
 
 			return builder.ToString();
 		}
-
-		#region Variable Resolving
-
-		private static VariableResolver[] _resolvers;
-
-		static VariableReference()
-		{
-			_resolvers = new VariableResolver[(int)(VariableType.List + 1)];
-			_resolvers[(int)VariableType.Int2] = new Int2VariableResolver();
-			_resolvers[(int)VariableType.Int3] = new Int3VariableResolver();
-			_resolvers[(int)VariableType.IntRect] = new IntRectVariableResolver();
-			_resolvers[(int)VariableType.IntBounds] = new IntBoundsVariableResolver();
-			_resolvers[(int)VariableType.Vector2] = new Vector2VariableResolver();
-			_resolvers[(int)VariableType.Vector3] = new Vector3VariableResolver();
-			_resolvers[(int)VariableType.Vector4] = new Vector4VariableResolver();
-			_resolvers[(int)VariableType.Quaternion] = new QuaternionVariableResolver();
-			_resolvers[(int)VariableType.Rect] = new RectVariableResolver();
-			_resolvers[(int)VariableType.Bounds] = new BoundsVariableResolver();
-			_resolvers[(int)VariableType.Color] = new ColorVariableResolver();
-			_resolvers[(int)VariableType.Object] = new ObjectVariableResolver();
-			_resolvers[(int)VariableType.Store] = new StoreVariableResolver();
-			_resolvers[(int)VariableType.List] = new ListVariableResolver();
-		}
-
-		public static VariableValue LookupVariable(VariableValue owner, string lookup)
-		{
-			var resolver = _resolvers[(int)owner.Type];
-
-			if (resolver != null)
-				return resolver.Lookup(owner, lookup);
-			else
-				return VariableValue.Empty;
-		}
-
-		public static SetVariableResult ApplyVariable(ref VariableValue owner, string lookup, VariableValue value)
-		{
-			var resolver = _resolvers[(int)owner.Type];
-
-			if (resolver != null)
-				return resolver.Apply(ref owner, lookup, value);
-			else
-				return SetVariableResult.NotFound;
-		}
-
-		#endregion
 	}
 }

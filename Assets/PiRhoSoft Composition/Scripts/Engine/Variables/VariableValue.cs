@@ -63,6 +63,8 @@ namespace PiRhoSoft.CompositionEngine
 		public bool HasEnumType<Type>() where Type : Enum => HasEnum && EnumType == typeof(Type);
 		public bool HasReferenceType<Type>() where Type : class => HasReference && _reference != null && typeof(Type).IsAssignableFrom(ReferenceType);
 
+		public VariableHandler Handler => VariableHandler.Get(_type);
+
 		#region Storage
 
 		[StructLayout(LayoutKind.Explicit)]
@@ -85,14 +87,6 @@ namespace PiRhoSoft.CompositionEngine
 			[FieldOffset(0)] public Bounds Bounds;
 
 			[FieldOffset(0)] public Color Color;
-
-			// 24 bytes covers all types in this structure
-			[FieldOffset(0)] public int Word1;
-			[FieldOffset(4)] public int Word2;
-			[FieldOffset(8)] public int Word3;
-			[FieldOffset(12)] public int Word4;
-			[FieldOffset(16)] public int Word5;
-			[FieldOffset(20)] public int Word6;
 		}
 
 		#endregion

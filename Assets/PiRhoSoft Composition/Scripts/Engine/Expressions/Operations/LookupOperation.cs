@@ -54,7 +54,7 @@ namespace PiRhoSoft.CompositionEngine
 				var lookup = Parameter.Evaluate(variables);
 
 				if (lookup.Type == VariableType.String || lookup.Type == VariableType.Int)
-					return VariableReference.LookupVariable(owner, lookup.ToString());
+					return owner.Handler.Lookup(owner, lookup.ToString());
 				else
 					return VariableValue.Empty;
 			}
@@ -73,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (lookup.Type == VariableType.String || lookup.Type == VariableType.Int)
 				{
-					var result = VariableReference.ApplyVariable(ref owner, lookup.ToString(), value);
+					var result = owner.Handler.Apply(ref owner, lookup.ToString(), value);
 
 					if (!owner.HasStore && result == SetVariableResult.Success)
 						return Reference.SetValue(variables, owner);
