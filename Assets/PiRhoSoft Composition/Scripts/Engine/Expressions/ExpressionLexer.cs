@@ -222,6 +222,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			end = SkipHex(input, end + 1);
 
+			if ((end - start) % 2 == 0)
+				throw new ExpressionTokenizeException(start, _invalidTokenException);
+
 			var r = GetHexValue(input, start + 1, end);
 			var g = GetHexValue(input, start + 3, end);
 			var b = GetHexValue(input, start + 5, end);

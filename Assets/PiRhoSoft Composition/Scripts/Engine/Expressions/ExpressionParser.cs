@@ -167,6 +167,7 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.Integer: return new LiteralOperation(VariableValue.Create(token.Integer));
 				case ExpressionTokenType.Number: return new LiteralOperation(VariableValue.Create(token.Number));
 				case ExpressionTokenType.String: return new LiteralOperation(VariableValue.Create(token.Text));
+				case ExpressionTokenType.Color: return new LiteralOperation(VariableValue.Create(token.Color));
 				case ExpressionTokenType.Null: return new LiteralOperation(VariableValue.Create(VariableType.Object));
 				case ExpressionTokenType.Identifier: return ParseLookup(token);
 				case ExpressionTokenType.StartGroup: return ParseGroup();
