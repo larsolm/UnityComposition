@@ -1,9 +1,33 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class IntBoundsVariableResolver : VariableHandler
+	public class IntBoundsVariableHandler : VariableHandler
 	{
+		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		{
+			writer.Write(value.IntBounds.min.x);
+			writer.Write(value.IntBounds.min.y);
+			writer.Write(value.IntBounds.min.z);
+			writer.Write(value.IntBounds.size.x);
+			writer.Write(value.IntBounds.size.y);
+			writer.Write(value.IntBounds.size.z);
+		}
+
+		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		{
+			var x = reader.ReadInt32();
+			var y = reader.ReadInt32();
+			var z = reader.ReadInt32();
+			var w = reader.ReadInt32();
+			var h = reader.ReadInt32();
+			var d = reader.ReadInt32();
+
+			value = VariableValue.Create(new BoundsInt(x, y, z, w, h, d));
+		}
+
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{
 			switch (lookup)

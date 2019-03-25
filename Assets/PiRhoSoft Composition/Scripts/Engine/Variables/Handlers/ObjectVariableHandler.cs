@@ -1,12 +1,27 @@
 ﻿using PiRhoSoft.UtilityEngine;
+using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ObjectVariableResolver : StoreVariableResolver
+	public class ObjectVariableHandler : StoreVariableHandler
 	{
 		private const string _gameObjectName = "GameObject";
 
 		private bool IsClassName(string lookup) => char.IsLetter(lookup[0]) || lookup[0] == '_';
+
+		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		{
+			writer.Write(objects.Count);
+			objects.Add(value.Object);
+		}
+
+		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		{
+			var index = reader.ReadInt32();
+			value = VariableValue.Create(objects[index]);
+		}
 
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{

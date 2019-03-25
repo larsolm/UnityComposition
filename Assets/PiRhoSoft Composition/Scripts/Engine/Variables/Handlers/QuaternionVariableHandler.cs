@@ -1,9 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class QuaternionVariableResolver : VariableHandler
+	public class QuaternionVariableHandler : VariableHandler
 	{
+		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		{
+			writer.Write(value.Quaternion.x);
+			writer.Write(value.Quaternion.y);
+			writer.Write(value.Quaternion.z);
+			writer.Write(value.Quaternion.w);
+		}
+
+		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		{
+			var x = reader.ReadSingle();
+			var y = reader.ReadSingle();
+			var z = reader.ReadSingle();
+			var w = reader.ReadSingle();
+
+			value = VariableValue.Create(new Quaternion(x, y, z, w));
+		}
+
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{
 			var euler = owner.Quaternion.eulerAngles;
