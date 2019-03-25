@@ -1,9 +1,29 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ColorVariableResolver : VariableResolver
+	public class ColorVariableHandler : VariableHandler
 	{
+		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		{
+			writer.Write(value.Color.r);
+			writer.Write(value.Color.g);
+			writer.Write(value.Color.b);
+			writer.Write(value.Color.a);
+		}
+
+		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		{
+			var r = reader.ReadSingle();
+			var g = reader.ReadSingle();
+			var b = reader.ReadSingle();
+			var a = reader.ReadSingle();
+
+			value = VariableValue.Create(new Color(r, g, b, a));
+		}
+
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{
 			if (lookup == "r") return VariableValue.Create(owner.Color.r);

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -168,7 +169,7 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.Number: return new LiteralOperation(VariableValue.Create(token.Number));
 				case ExpressionTokenType.String: return new LiteralOperation(VariableValue.Create(token.Text));
 				case ExpressionTokenType.Color: return new LiteralOperation(VariableValue.Create(token.Color));
-				case ExpressionTokenType.Null: return new LiteralOperation(VariableValue.Create(VariableType.Object));
+				case ExpressionTokenType.Null: return new LiteralOperation(VariableValue.Create((Object)null));
 				case ExpressionTokenType.Identifier: return ParseLookup(token);
 				case ExpressionTokenType.StartGroup: return ParseGroup();
 				case ExpressionTokenType.StartLookup: return ParseRect();

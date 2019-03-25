@@ -63,6 +63,8 @@ namespace PiRhoSoft.CompositionEngine
 		public bool HasEnumType<Type>() where Type : Enum => HasEnum && EnumType == typeof(Type);
 		public bool HasReferenceType<Type>() where Type : class => HasReference && _reference != null && typeof(Type).IsAssignableFrom(ReferenceType);
 
+		public VariableHandler Handler => VariableHandler.Get(_type);
+
 		#region Storage
 
 		[StructLayout(LayoutKind.Explicit)]
@@ -85,14 +87,6 @@ namespace PiRhoSoft.CompositionEngine
 			[FieldOffset(0)] public Bounds Bounds;
 
 			[FieldOffset(0)] public Color Color;
-
-			// 24 bytes covers all types in this structure
-			[FieldOffset(0)] public int Word1;
-			[FieldOffset(4)] public int Word2;
-			[FieldOffset(8)] public int Word3;
-			[FieldOffset(12)] public int Word4;
-			[FieldOffset(16)] public int Word5;
-			[FieldOffset(20)] public int Word6;
 		}
 
 		#endregion
@@ -141,7 +135,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Create(Rect value) => CreateValue(VariableType.Rect, new ValueData { Rect = value });
 		public static VariableValue Create(Bounds value) => CreateValue(VariableType.Bounds, new ValueData { Bounds = value });
 		public static VariableValue Create(Color value) => CreateValue(VariableType.Color, new ValueData { Color = value });
-		public static VariableValue Create(string str) => CreateReference(VariableType.String, str == null ? string.Empty : str);
+		public static VariableValue Create(string str) => CreateReference(VariableType.String, str);
 		public static VariableValue Create(Enum e) => CreateReference(VariableType.Enum, e);
 		public static VariableValue Create(Object obj) => CreateReference(VariableType.Object, obj);
 		public static VariableValue Create(IVariableStore store) => CreateReference(VariableType.Store, store);
@@ -193,6 +187,15 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static VariableValue CreateReference(VariableType type, object reference)
 		{
+			if (type == VariableType.String && reference == null)
+				reference = string.Empty;
+
+			if (type == VariableType.Store && reference == null)
+				reference = new VariableStore();
+
+			if (type == VariableType.List && reference == null)
+				reference = new VariableList();
+
 			return new VariableValue
 			{
 				_type = type,
@@ -597,29 +600,17 @@ namespace PiRhoSoft.CompositionEngine
 		public static void Save(VariableValue value, ref string data, ref List<Object> objects)
 		{
 			objects = new List<Object>();
-			data = value.Write(objects);
-		}
 
-		public static void Load(VariableValue value, ref string data, ref List<Object> objects)
-		{
-			value.Read(data, objects);
-
-			data = null;
-			objects = null;
-		}
-
-		private string Write(List<Object> objects)
-		{
 			using (var stream = new MemoryStream())
 			{
 				using (var writer = new BinaryWriter(stream))
-					Write(writer, objects);
+					value.Write(writer, objects);
 
-				return Convert.ToBase64String(stream.ToArray());
+				data = Convert.ToBase64String(stream.ToArray());
 			}
 		}
 
-		private bool Read(string data, List<Object> objects)
+		public static void Load(ref VariableValue value, ref string data, ref List<Object> objects)
 		{
 			try
 			{
@@ -628,157 +619,29 @@ namespace PiRhoSoft.CompositionEngine
 				using (var stream = new MemoryStream(bytes))
 				{
 					using (var reader = new BinaryReader(stream))
-						Read(reader, objects);
+						value.Read(reader, objects);
 				}
-
-				return true;
 			}
 			catch
 			{
-				return false;
 			}
+
+			data = null;
+			objects = null;
 		}
 
 		internal void Write(BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write((int)_type);
-
-			if (_type == VariableType.Empty)
-			{
-			}
-			else if (_type == VariableType.String)
-			{
-				writer.Write(String);
-			}
-			else if (_type == VariableType.Enum)
-			{
-				// saved as string since it's the simplest way of handling enums with non Int32 underlying type
-
-				writer.Write(_reference.GetType().AssemblyQualifiedName);
-				writer.Write(_reference.ToString());
-			}
-			else if (_type == VariableType.Object)
-			{
-				writer.Write(objects.Count);
-				objects.Add(Object);
-			}
-			else if (_type == VariableType.Store)
-			{
-				var store = _reference as VariableStore;
-
-				if (store != null)
-				{
-					writer.Write(store.Variables.Count);
-
-					for (var i = 0; i < store.Variables.Count; i++)
-					{
-						writer.Write(store.Variables[i].Name);
-						store.Variables[i].Value.Write(objects);
-					}
-				}
-				else
-				{
-					writer.Write(-1);
-				}
-			}
-			else if (_type == VariableType.List)
-			{
-				var list = _reference as VariableList;
-
-				if (list != null)
-				{
-					writer.Write(list.Count);
-
-					for (var i = 0; i < list.Count; i++)
-						list.GetVariable(i).Write(writer, objects);
-				}
-				else
-				{
-					writer.Write(-1);
-				}
-			}
-			else
-			{
-				writer.Write(_value.Word1);
-				writer.Write(_value.Word2);
-				writer.Write(_value.Word3);
-				writer.Write(_value.Word4);
-				writer.Write(_value.Word5);
-				writer.Write(_value.Word6);
-			}
+			Handler.Write(this, writer, objects);
 		}
 
 		internal void Read(BinaryReader reader, List<Object> objects)
 		{
 			_type = (VariableType)reader.ReadInt32();
-
-			if (_type == VariableType.String)
-			{
-				_reference = reader.ReadString();
-			}
-			else if (_type == VariableType.Enum)
-			{
-				var typeName = reader.ReadString();
-				var value = reader.ReadString();
-
-				var type = System.Type.GetType(typeName);
-				_reference = Enum.Parse(type, value);
-			}
-			else if (_type == VariableType.Object)
-			{
-				var index = reader.ReadInt32();
-				_reference = objects[index];
-			}
-			else if (_type == VariableType.Store)
-			{
-				var count = reader.ReadInt32();
-
-				if (count >= 0)
-				{
-					var store = new VariableStore();
-
-					for (var i = 0; i < count; i++)
-					{
-						var name = reader.ReadString();
-						var value = new VariableValue();
-
-						value.Read(reader, objects);
-						store.AddVariable(name, value);
-					}
-
-					_reference = store;
-				}
-			}
-			else if (_type == VariableType.List)
-			{
-				var count = reader.ReadInt32();
-
-				if (count >= 0)
-				{
-					var list = new VariableList();
-
-					for (var i = 0; i < count; i++)
-					{
-						var value = new VariableValue();
-
-						value.Read(reader, objects);
-						list.AddVariable(value);
-					}
-
-					_reference = list;
-				}
-			}
-			else
-			{
-				_value.Word1 = reader.ReadInt32();
-				_value.Word2 = reader.ReadInt32();
-				_value.Word3 = reader.ReadInt32();
-				_value.Word4 = reader.ReadInt32();
-				_value.Word5 = reader.ReadInt32();
-				_value.Word6 = reader.ReadInt32();
-			}
+			Handler.Read(ref this, reader, objects);
 		}
-
+		
 		#endregion
 	}
 }

@@ -242,11 +242,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 3
-        Data: AAAAPwAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: AwAAAAAAAD8=
+      _valueObjects: []
     - Type: 1
       Definition:
         _name: ItemSet
@@ -261,11 +258,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 16
-        Data: 
-        Object: {fileID: 11400000, guid: 62d4b78b93fa3bf42bf785c86fb2dddb, type: 2}
+      _valueData: AAAAAA==
+      _valueObjects: []
     _outputs: []
   OnEnter:
     _instruction: {fileID: 0}
@@ -428,8 +422,6 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  Speed: 0
-  UseScaledTime: 1
 --- !u!114 &1122238126
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -834,12 +826,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Variables:
-    _data:
-    - Name: player
-      Type: 16
-      Data: 
-      Object: {fileID: 1576479861}
+  _variablesData: []
+  _variablesObjects: []
 --- !u!58 &1576479859
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -891,44 +879,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 0351a06999dc62147ad2c65c593517c8, type: 2}
   Variables:
-    _data:
-    - Name: Gold
-      Type: 2
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: Head
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
-    - Name: Shoulders
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
-    - Name: Body
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
-    - Name: Arms
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
-    - Name: Legs
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
-    - Name: Feet
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
-    - Name: LeftHand
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
-    - Name: RightHand
-      Type: 16
-      Data: 
-      Object: {fileID: 0}
     _version: 20
+    _variablesData: []
+    _variablesObjects: []
   Camera: {fileID: 100958297}
   Acceleration: 1
 --- !u!212 &1576479862
@@ -1147,8 +1100,6 @@ MonoBehaviour:
     - generatedGold
     _lookups:
     - 
-  Speed: 0
-  UseScaledTime: 1
 --- !u!114 &1885225003
 MonoBehaviour:
   m_ObjectHideFlags: 0

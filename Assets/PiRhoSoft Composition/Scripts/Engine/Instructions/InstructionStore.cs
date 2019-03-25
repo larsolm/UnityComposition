@@ -39,7 +39,7 @@ namespace PiRhoSoft.CompositionEngine
 		public void OnAfterDeserialize()
 		{
 			if (Type == InstructionInputType.Value)
-				VariableValue.Load(Value, ref _valueData, ref _valueObjects);
+				VariableValue.Load(ref Value, ref _valueData, ref _valueObjects);
 		}
 
 		#endregion

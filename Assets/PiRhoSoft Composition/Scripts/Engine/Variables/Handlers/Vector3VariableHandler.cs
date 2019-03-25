@@ -1,9 +1,27 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using System.IO;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class Vector3VariableResolver : VariableResolver
+	public class Vector3VariableHandler : VariableHandler
 	{
+		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		{
+			writer.Write(value.Vector3.x);
+			writer.Write(value.Vector3.y);
+			writer.Write(value.Vector3.z);
+		}
+
+		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		{
+			var x = reader.ReadSingle();
+			var y = reader.ReadSingle();
+			var z = reader.ReadSingle();
+
+			value = VariableValue.Create(new Vector3(x, y, z));
+		}
+
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{
 			if (lookup == "x") return VariableValue.Create(owner.Vector3.x);

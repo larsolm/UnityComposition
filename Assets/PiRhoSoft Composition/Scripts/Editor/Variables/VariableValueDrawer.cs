@@ -202,7 +202,7 @@ namespace PiRhoSoft.CompositionEditor
 				s = EditorGUI.TextField(rect, GUIContent.none, s);
 			}
 
-			return s == null ? VariableValue.Create(VariableType.String) : VariableValue.Create(s);
+			return s == null ? VariableValue.Create(string.Empty) : VariableValue.Create(s);
 		}
 
 		private static VariableValue DrawEnum(Rect rect, VariableValue value, VariableDefinition definition)
@@ -216,7 +216,7 @@ namespace PiRhoSoft.CompositionEditor
 			var objectType = (!string.IsNullOrEmpty(definition.TypeConstraint) ? Type.GetType(definition.TypeConstraint) : null) ?? typeof(Object);
 			var unityObject = EditorGUI.ObjectField(rect, GUIContent.none, value.Object, objectType, true);
 
-			return unityObject == null ? VariableValue.Create(VariableType.Object) : VariableValue.Create(unityObject);
+			return unityObject == null ? VariableValue.Create((Object)null) : VariableValue.Create(unityObject);
 		}
 
 		private static VariableValue DrawStore(Rect rect, VariableValue value, VariableDefinition definition)
