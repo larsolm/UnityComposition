@@ -34,7 +34,7 @@ namespace PiRhoSoft.CompositionEditor
 			if (_node.TargetType != null)
 			{
 				var fields = _node.TargetType.GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
-					.Where(field => VariableValue.GetType(field.FieldType) != VariableType.Empty).ToArray(); // TODO: Filter this list by other unwanted types
+					.Where(field => VariableValue.GetType(field.FieldType) != VariableType.Empty).ToArray();
 
 				var properties = _node.TargetType.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
 					.Where(property => property.SetMethod != null)
