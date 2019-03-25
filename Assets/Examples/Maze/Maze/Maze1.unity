@@ -683,11 +683,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Red
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     - Type: 0
       Definition:
         _name: KeyCount
@@ -706,11 +703,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:
@@ -1066,11 +1060,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Blue
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     - Type: 0
       Definition:
         _name: KeyCount
@@ -1089,11 +1080,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:
@@ -1346,44 +1334,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 647905b9567d4a24cbb18c2ba0fb8dd3, type: 2}
   Variables:
-    _data:
-    - Name: RedKey
-      Type: 2
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: BlueKey
-      Type: 2
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: GreenKey
-      Type: 2
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: YellowKey
-      Type: 2
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: LevelFinished
-      Type: 1
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: JewelsNeeded
-      Type: 2
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: Jewels
-      Type: 2
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: StartTime
-      Type: 3
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: Started
-      Type: 1
-      Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
     _version: 17
+    _variablesData: []
+    _variablesObjects: []
   Camera: {fileID: 663784546}
   Acceleration: 1
 --- !u!212 &863000628
@@ -1585,11 +1538,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Level 1
-        Object: {fileID: 0}
+      _valueData: DwAAAAA=
+      _valueObjects: []
     _outputs: []
 --- !u!114 &863000633
 MonoBehaviour:
@@ -1603,12 +1553,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Variables:
-    _data:
-    - Name: Player
-      Type: 16
-      Data: 
-      Object: {fileID: 863000627}
+  _variablesData: []
+  _variablesObjects: []
 --- !u!1 &867759259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1749,11 +1695,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Green
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     - Type: 0
       Definition:
         _name: KeyCount
@@ -1772,11 +1715,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:
@@ -2605,11 +2545,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     - Type: 1
       Definition:
         _name: KeyName
@@ -2624,11 +2561,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Green
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:
@@ -2796,11 +2730,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     - Type: 1
       Definition:
         _name: KeyName
@@ -2815,11 +2746,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Red
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:
@@ -2987,11 +2915,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     - Type: 1
       Definition:
         _name: KeyName
@@ -3006,11 +2931,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Yellow
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:
@@ -3390,11 +3312,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     - Type: 1
       Definition:
         _name: KeyName
@@ -3409,11 +3328,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Blue
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:
@@ -3741,11 +3657,8 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _value:
-        Name: 
-        Type: 15
-        Data: Yellow
-        Object: {fileID: 0}
+      _valueData: AAAAAA==
+      _valueObjects: []
     - Type: 0
       Definition:
         _name: KeyCount
@@ -3764,11 +3677,8 @@ MonoBehaviour:
         _lookups:
         - 
         - 
-      _value:
-        Name: 
-        Type: 0
-        Data: AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-        Object: {fileID: 0}
+      _valueData: 
+      _valueObjects: []
     _outputs:
     - Type: 1
       Definition:

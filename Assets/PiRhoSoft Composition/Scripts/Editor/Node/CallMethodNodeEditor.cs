@@ -12,10 +12,11 @@ namespace PiRhoSoft.CompositionEditor
 	class CallMethodNodeEditor : Editor
 	{
 		private static readonly Label _nextContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.Next));
-		private static readonly Label _targetTypeContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.TargetTypeName));
-		private static readonly Label _methodContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.MethodName));
 		private static readonly Label _outputContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.Output));
 		private static readonly Label _parametersContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.Parameters));
+
+		private static readonly GUIContent _targetTypeContent = new GUIContent("Object Type", "The Type of the object to call the method on");
+		private static readonly GUIContent _methodContent = new GUIContent("Method", "The method to call on the target object");
 
 		private CallMethodNode _node;
 		private MethodInfo[] _methods;
@@ -77,14 +78,14 @@ namespace PiRhoSoft.CompositionEditor
 
 			using (new UndoScope(_node, false))
 			{
-				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent.Content, _node.TargetType, false);
+				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false);
 				if (selectedTargetType != _node.TargetType)
 					SetTargetType(selectedTargetType);
 
 				if (_node.TargetType != null)
 				{
 					var method = Array.IndexOf(_methodNames, _node.MethodName);
-					var selectedMethod = EditorGUILayout.Popup(_methodContent.Content, method, _methodNames);
+					var selectedMethod = EditorGUILayout.Popup(_methodContent, method, _methodNames);
 
 					if (selectedMethod != method)
 						SetMethod(_methods[selectedMethod]);

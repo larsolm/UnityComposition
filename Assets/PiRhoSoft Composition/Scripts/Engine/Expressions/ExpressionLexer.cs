@@ -20,10 +20,6 @@ namespace PiRhoSoft.CompositionEngine
 		private const char _lookupClose = ']';
 		private const char _stringOpen = '\"';
 		private const char _stringClose = '\"';
-		private const char _vectorOpen = '<';
-		private const char _vectorClose = '>';
-		private const char _quaternionOpen = '{';
-		private const char _quaternionClose = '}';
 		private const char _groupOpen = '(';
 		private const char _groupClose = ')';
 		private const char _separator = ',';
@@ -64,10 +60,6 @@ namespace PiRhoSoft.CompositionEngine
 					else if (char.IsDigit(c)) AddInteger(tokens, input, start, ref start, whitespace);
 					else if (c == _stringOpen) AddString(tokens, input, start, ref start, _stringClose);
 					else if (IsIdentifierStartCharacter(c)) AddIdentifier(tokens, input, start, ref start, whitespace);
-					else if (c == _vectorOpen) AddStartVector(tokens, input, start, ref start);
-					else if (c == _vectorClose) AddEndVector(tokens, input, start, ref start);
-					else if (c == _quaternionOpen) AddStartQuaternion(tokens, input, start, ref start);
-					else if (c == _quaternionClose) AddEndQuaternion(tokens, input, start, ref start);
 					else if (c == _lookupOpen) AddStartLookup(tokens, input, start, ref start);
 					else if (c == _lookupClose) AddEndLookup(tokens, input, start, ref start);
 					else if (c == _groupOpen) AddStartGroup(tokens, input, start, ref start);
@@ -158,30 +150,6 @@ namespace PiRhoSoft.CompositionEngine
 			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.String, Text = text });
 
 			end++;
-		}
-
-		private static void AddStartVector(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.StartVector });
-			end = start + 1;
-		}
-
-		private static void AddEndVector(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.EndVector });
-			end = start + 1;
-		}
-
-		private static void AddStartQuaternion(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.StartQuaternion });
-			end = start + 1;
-		}
-
-		private static void AddEndQuaternion(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.EndQuaternion });
-			end = start + 1;
 		}
 
 		private static void AddIdentifier(List<ExpressionToken> tokens, string input, int start, ref int end, string whitespace)

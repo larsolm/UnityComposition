@@ -12,9 +12,9 @@ namespace PiRhoSoft.CompositionEditor
 	class GetPropertyNodeEditor : Editor
 	{
 		private static readonly Label _nextContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.Next));
-		private static readonly Label _targetTypeContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.TargetTypeName));
-		private static readonly Label _propertyContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.PropertyName));
 		private static readonly Label _outputContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.Output));
+		private static readonly GUIContent _targetTypeContent = new GUIContent("Object Type", "The Type of object to get the property of");
+		private static readonly GUIContent _propertyContent = new GUIContent("Property", "The property to get the value of");
 
 		private GetPropertyNode _node;
 		private string[] _propertyNames;
@@ -66,14 +66,14 @@ namespace PiRhoSoft.CompositionEditor
 
 			using (new UndoScope(_node, false))
 			{
-				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent.Content, _node.TargetType, false);
+				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false);
 				if (selectedTargetType != _node.TargetType)
 					SetTargetType(selectedTargetType);
 
 				if (_node.TargetType != null)
 				{
 					var property = Array.IndexOf(_propertyNames, _node.PropertyName);
-					var selectedProperty = EditorGUILayout.Popup(_propertyContent.Content, property, _propertyNames);
+					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyNames);
 
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty]);

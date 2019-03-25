@@ -13,8 +13,8 @@ namespace PiRhoSoft.CompositionEditor
 	{
 		private static readonly Label _nextContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.Next));
 		private static readonly Label _targetContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.Target));
-		private static readonly Label _targetTypeContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.TargetTypeName));
-		private static readonly Label _propertyContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.PropertyName));
+		private static readonly GUIContent _targetTypeContent = new GUIContent("Component Type", "The Type of the component to set the property for");
+		private static readonly GUIContent _propertyContent = new GUIContent("Property", "The name of the property to set");
 
 		private SetPropertyNode _node;
 		private string[] _propertyNames;
@@ -72,14 +72,14 @@ namespace PiRhoSoft.CompositionEditor
 				InstructionGraphNodeDrawer.Draw(_nextContent.Content, _node.Next);
 				VariableReferenceControl.Draw(_targetContent.Content, _node.Target);
 
-				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent.Content, _node.TargetType, false);
+				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false);
 				if (selectedTargetType != _node.TargetType)
 					SetTargetType(selectedTargetType);
 
 				if (_node.TargetType != null)
 				{
 					var property = Array.IndexOf(_propertyNames, _node.PropertyName);
-					var selectedProperty = EditorGUILayout.Popup(_propertyContent.Content, property, _propertyNames);
+					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyNames);
 
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty], _propertyTypes[selectedProperty]);

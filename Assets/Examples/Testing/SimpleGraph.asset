@@ -72,13 +72,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'local.Something = #ffffFF;
-
-      local.Vec = <2, 2, 2>;
-
-      local.Rect = [0, 1, 1, 1];
-
-      local.Q = {65, 55, 98};'
+    _statement: local.Vec = <2, 2, 2>
 --- !u!114 &114669712450491454
 MonoBehaviour:
   m_ObjectHideFlags: 1
