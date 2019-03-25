@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
 using System.Collections;
+using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -12,11 +13,20 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static IconButton _refreshButton = new IconButton(IconButton.Refresh, "Refresh the list of inputs and outputs");
 		private readonly static Label _inputsLabel = new Label(typeof(InstructionCaller), "_inputs");
 		private readonly static Label _outputsLabel = new Label(typeof(InstructionCaller), "_outputs");
-		private readonly static GUIContent[] _inputTypeOptions = new GUIContent[] { new GUIContent("Value/Boolean"), new GUIContent("Value/Integer"), new GUIContent("Value/Number"), new GUIContent("Value/String"), new GUIContent("Value/Object"), new GUIContent(), new GUIContent("Reference") };
+		private readonly static GUIContent[] _inputTypeOptions;
 
 		private InstructionCaller _caller;
 		private ObjectListControl _inputs = new ObjectListControl();
 		private ObjectListControl _outputs = new ObjectListControl();
+
+		static InstructionCallerControl()
+		{
+			_inputTypeOptions = typeof(VariableType).GetEnumNames()
+				.Select(name => new GUIContent("Value/" + name))
+				.Append(new GUIContent(""))
+				.Append(new GUIContent("Reference"))
+				.ToArray();
+		}
 
 		public override void Setup(InstructionCaller target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
@@ -82,12 +92,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		private int GetIndexForType(VariableType type)
 		{
-			return (int)type - 1;
+			return (int)type;
 		}
 
 		private VariableType GetTypeFromIndex(int index)
 		{
-			return (VariableType)(index + 1);
+			return (VariableType)index;
 		}
 
 		private void DrawOutput(Rect rect, IList list, int index)

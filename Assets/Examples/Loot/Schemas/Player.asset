@@ -105,4 +105,13 @@ MonoBehaviour:
     _maximumConstraint: 0
     _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  _version: 20
+  - _name: Inventory
+    _type: 19
+    _tag: Always (not saved)
+    _initializer:
+      _statement: 
+    _useRangeConstraint: 0
+    _minimumConstraint: 0
+    _maximumConstraint: 0
+    _typeConstraint: 
+  _version: 21

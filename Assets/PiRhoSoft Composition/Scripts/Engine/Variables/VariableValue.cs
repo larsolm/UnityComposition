@@ -135,7 +135,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Create(Rect value) => CreateValue(VariableType.Rect, new ValueData { Rect = value });
 		public static VariableValue Create(Bounds value) => CreateValue(VariableType.Bounds, new ValueData { Bounds = value });
 		public static VariableValue Create(Color value) => CreateValue(VariableType.Color, new ValueData { Color = value });
-		public static VariableValue Create(string str) => CreateReference(VariableType.String, str == null ? string.Empty : str);
+		public static VariableValue Create(string str) => CreateReference(VariableType.String, str);
 		public static VariableValue Create(Enum e) => CreateReference(VariableType.Enum, e);
 		public static VariableValue Create(Object obj) => CreateReference(VariableType.Object, obj);
 		public static VariableValue Create(IVariableStore store) => CreateReference(VariableType.Store, store);
@@ -187,6 +187,15 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static VariableValue CreateReference(VariableType type, object reference)
 		{
+			if (type == VariableType.String && reference == null)
+				reference = string.Empty;
+
+			if (type == VariableType.Store && reference == null)
+				reference = new VariableStore();
+
+			if (type == VariableType.List && reference == null)
+				reference = new VariableList();
+
 			return new VariableValue
 			{
 				_type = type,
@@ -601,7 +610,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public static void Load(VariableValue value, ref string data, ref List<Object> objects)
+		public static void Load(ref VariableValue value, ref string data, ref List<Object> objects)
 		{
 			try
 			{
