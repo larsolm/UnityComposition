@@ -59,7 +59,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114097974279871678}
   OnFalse: {fileID: 114926778890910636}
   Condition:
-    _statement: input.KeyCount >= 1
+    _statement: input.KeyCount >= 1;
 --- !u!114 &114329444707264830
 MonoBehaviour:
   m_ObjectHideFlags: 1

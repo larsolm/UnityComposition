@@ -16,6 +16,10 @@ namespace PiRhoSoft.CompositionEngine
 		Operator,
 		StartLookup,
 		EndLookup,
+		StartVector,
+		EndVector,
+		StartQuaternion,
+		EndQuaternion,
 		StartGroup,
 		EndGroup,
 		Separator

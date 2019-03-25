@@ -171,6 +171,9 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.Null: return new LiteralOperation(VariableValue.Create(VariableType.Object));
 				case ExpressionTokenType.Identifier: return ParseLookup(token);
 				case ExpressionTokenType.StartGroup: return ParseGroup();
+				case ExpressionTokenType.StartLookup: return ParseRect();
+				case ExpressionTokenType.StartVector: return ParseVector();
+				case ExpressionTokenType.StartQuaternion: return ParseQuaternion();
 				case ExpressionTokenType.Command: return ParseCommand(token);
 				case ExpressionTokenType.Operator: return ParsePrefixOperator(token);
 				default: throw new ExpressionParseException(token.Location, _invalidToken3Exception, ExpressionTokenType.Command, ExpressionTokenType.Operator, ExpressionTokenType.Identifier);
@@ -222,6 +225,75 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			return new LookupOperation(token.Text, parameter);
+		}
+
+		private Operation ParseRect()
+		{
+			var nextToken = ViewNextToken();
+			var parameters = new List<Operation>();
+
+			while (nextToken.Type != ExpressionTokenType.EndLookup)
+			{
+				var parameter = Parse(0);
+				parameters.Add(parameter);
+				nextToken = ViewNextToken();
+
+				if (nextToken.Type == ExpressionTokenType.Separator)
+				{
+					TakeNextToken();
+					nextToken = ViewNextToken();
+				}
+			}
+
+			SkipNextToken(ExpressionTokenType.EndLookup);
+
+			return new RectOperation(parameters);
+		}
+
+		private Operation ParseVector()
+		{
+			var nextToken = ViewNextToken();
+			var parameters = new List<Operation>();
+
+			while (nextToken.Type != ExpressionTokenType.EndVector)
+			{
+				var parameter = Parse(0);
+				parameters.Add(parameter);
+				nextToken = ViewNextToken();
+
+				if (nextToken.Type == ExpressionTokenType.Separator)
+				{
+					TakeNextToken();
+					nextToken = ViewNextToken();
+				}
+			}
+
+			SkipNextToken(ExpressionTokenType.EndVector);
+
+			return new VectorOperation(parameters);
+		}
+
+		private Operation ParseQuaternion()
+		{
+			var nextToken = ViewNextToken();
+			var parameters = new List<Operation>();
+
+			while (nextToken.Type != ExpressionTokenType.EndQuaternion)
+			{
+				var parameter = Parse(0);
+				parameters.Add(parameter);
+				nextToken = ViewNextToken();
+
+				if (nextToken.Type == ExpressionTokenType.Separator)
+				{
+					TakeNextToken();
+					nextToken = ViewNextToken();
+				}
+			}
+
+			SkipNextToken(ExpressionTokenType.EndQuaternion);
+
+			return new QuaternionOperation(parameters);
 		}
 
 		private Operation ParseCommand(ExpressionToken token)
@@ -317,6 +389,11 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.StartGroup: return int.MaxValue;
 				case ExpressionTokenType.EndGroup: return 0;
 				case ExpressionTokenType.Separator: return 0;
+				case ExpressionTokenType.Color: return int.MaxValue - 1;
+				case ExpressionTokenType.StartVector: return int.MaxValue;
+				case ExpressionTokenType.EndVector: return 0;
+				case ExpressionTokenType.StartQuaternion: return int.MaxValue;
+				case ExpressionTokenType.EndQuaternion: return 0;
 			}
 
 			OperatorPrecedence precedence;
