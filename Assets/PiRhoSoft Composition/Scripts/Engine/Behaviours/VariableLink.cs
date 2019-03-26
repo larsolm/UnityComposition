@@ -1,20 +1,16 @@
-﻿using PiRhoSoft.UtilityEngine;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[Serializable] public class GlobalVariableList : SerializedList<Variable> { }
-
 	[HelpURL(Composition.DocumentationUrl + "global-variable-link")]
-	[AddComponentMenu("PiRho Soft/Composition/Global Variable Link")]
-	public class GlobalVariableLink : MonoBehaviour
+	[AddComponentMenu("PiRho Soft/Composition/Variable Link")]
+	public class VariableLink : MonoBehaviour, ISerializationCallbackReceiver
 	{
-		[NonSerialized]
 		[Tooltip("The variables to add to the global variable store")]
-		public GlobalVariableList Variables = new GlobalVariableList();
+		public List<Variable> Variables = new List<Variable>();
+		public List<VariableDefinition> Constraints = new List<VariableDefinition>();
 
 		[SerializeField] private List<string> _variablesData;
 		[SerializeField] private List<Object> _variablesObjects;

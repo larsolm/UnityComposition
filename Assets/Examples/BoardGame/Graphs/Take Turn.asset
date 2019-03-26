@@ -1,0 +1,147 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: Take Turn
+  m_EditorClassIdentifier: 
+  Inputs:
+    _items:
+    - _name: CurrentPlayer
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114488789328873348}
+    - {fileID: 114854795816413990}
+    - {fileID: 114541750554709886}
+    - {fileID: 114754685201061410}
+    - {fileID: 114646063541107878}
+  StartPosition: {x: 0, y: 0}
+  Enter: {fileID: 0}
+  Process: {fileID: 114488789328873348}
+  Exit: {fileID: 0}
+--- !u!114 &114488789328873348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
+  m_Name: Show Roll
+  m_EditorClassIdentifier: 
+  Name: Show Roll
+  GraphPosition: {x: 332.80002, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114646063541107878}
+  Control:
+    _variable:
+    - scene
+    - Roll
+    _lookups:
+    - 
+    - 
+--- !u!114 &114541750554709886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  GraphPosition: {x: 1011.2, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114754685201061410}
+  Expression:
+    _statement: local.Roll = Random(1, 6);
+--- !u!114 &114646063541107878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Turn Message
+  m_EditorClassIdentifier: 
+  Name: Turn Message
+  GraphPosition: {x: 665.60004, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114854795816413990}
+  Control:
+    _variable: []
+    _lookups: []
+  Interaction: 0
+  WaitTime: 0
+  IsLast: 1
+  Message:
+    Text: '{input.CurrentPlayer.Name}''s turn'
+--- !u!114 &114754685201061410
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408dd5d67693c3545bbddb6cfc900c4a, type: 3}
+  m_Name: Hide Control
+  m_EditorClassIdentifier: 
+  Name: Hide Control
+  GraphPosition: {x: 1331.2001, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable:
+    - scene
+    - Roll
+    _lookups:
+    - 
+    - 
+--- !u!114 &114854795816413990
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1909964fbb3034da624df32dc0993c, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  Name: Input
+  GraphPosition: {x: 665.60004, y: 64}
+  IsBreakpoint: 0
+  Buttons:
+    _items:
+    - Type: 1
+      Name: Submit
+      Value: 0
+      Key: 0
+      OnSelected: {fileID: 114541750554709886}

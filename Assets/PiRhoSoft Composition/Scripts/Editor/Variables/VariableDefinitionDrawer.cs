@@ -49,6 +49,12 @@ namespace PiRhoSoft.CompositionEditor
 			return height;
 		}
 
+		public static VariableDefinition Draw(VariableDefinition definition, VariableInitializerType initializer, TagList tags)
+		{
+			var rect = EditorGUILayout.GetControlRect(false, GetHeight(definition, initializer, tags));
+			return Draw(rect, definition, initializer, tags);
+		}
+
 		public static VariableDefinition Draw(Rect position, VariableDefinition definition, VariableInitializerType initializer, TagList tags)
 		{
 			var tag = definition.Tag;
@@ -59,8 +65,13 @@ namespace PiRhoSoft.CompositionEditor
 			var hasTag = HasTags(tags);
 
 			var typeRect = RectHelper.TakeLine(ref position);
-			var labelRect = RectHelper.TakeWidth(ref typeRect, _labelWidth);
-			EditorGUI.LabelField(labelRect, definition.Name);
+
+			if (!string.IsNullOrEmpty(definition.Name))
+			{
+				var labelRect = RectHelper.TakeWidth(ref typeRect, _labelWidth);
+
+				EditorGUI.LabelField(labelRect, definition.Name);
+			}
 
 			var type = DrawType(typeRect, definition.IsTypeLocked, definition.Type);
 
