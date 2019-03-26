@@ -20,12 +20,6 @@ namespace PiRhoSoft.CompositionEngine
 		private const char _lookupClose = ']';
 		private const char _stringOpen = '\"';
 		private const char _stringClose = '\"';
-		private const char _vectorOpen = '<';
-		private const char _vectorClose = '>';
-		private const char _rectOpen = '[';
-		private const char _rectClose = ']';
-		private const char _quaternionOpen = '}';
-		private const char _quaternionClose = '{';
 		private const char _groupOpen = '(';
 		private const char _groupClose = ')';
 		private const char _separator = ',';

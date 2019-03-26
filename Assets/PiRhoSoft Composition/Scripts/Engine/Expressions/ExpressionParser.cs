@@ -312,22 +312,22 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.Boolean: return int.MaxValue - 1;
 				case ExpressionTokenType.Integer: return int.MaxValue - 1;
 				case ExpressionTokenType.Number: return int.MaxValue - 1;
+				case ExpressionTokenType.Color: return int.MaxValue - 1;
 				case ExpressionTokenType.Identifier: return int.MaxValue - 1;
 				case ExpressionTokenType.Command: return int.MaxValue - 1;
+				case ExpressionTokenType.StartLookup: return int.MaxValue;
 				case ExpressionTokenType.EndLookup: return 0;
 				case ExpressionTokenType.StartGroup: return int.MaxValue;
 				case ExpressionTokenType.EndGroup: return 0;
 				case ExpressionTokenType.Separator: return 0;
 			}
 
-			OperatorPrecedence precedence;
-			return _precedences.TryGetValue(token.Text, out precedence) ? precedence.Value : 0;
+			return _precedences.TryGetValue(token.Text, out var precedence) ? precedence.Value : 0;
 		}
 
 		private int GetAssociativePrecedence(ExpressionToken token)
 		{
-			OperatorPrecedence precedence;
-			return _precedences.TryGetValue(token.Text, out precedence) ? precedence.AssociativeValue : 0;
+			return _precedences.TryGetValue(token.Text, out var precedence) ? precedence.AssociativeValue : 0;
 		}
 
 		static ExpressionParser()
@@ -384,6 +384,16 @@ namespace PiRhoSoft.CompositionEngine
 			AddCommand("Time", new TimeCommand());
 			AddCommand("Realtime", new RealtimeCommand());
 			AddCommand("UnscaledTime", new UnscaledTimeCommand());
+			AddCommand("Vector2", new Vector2Command());
+			AddCommand("Vector2Int", new Vector2IntCommand());
+			AddCommand("Vector3", new Vector3Command());
+			AddCommand("Vector3Int", new Vector3IntCommand());
+			AddCommand("Vector4", new Vector4Command());
+			AddCommand("Quaternion", new QuaternionCommand());
+			AddCommand("Rect", new RectCommand());
+			AddCommand("RectInt", new RectIntCommand());
+			AddCommand("Bounds", new BoundsCommand());
+			AddCommand("BoundsInt", new BoundsIntCommand());
 
 			AddCommand("PI", new ConstantCommand(VariableValue.Create(Mathf.PI)));
 			AddCommand("Deg2Rad", new ConstantCommand(VariableValue.Create(Mathf.Deg2Rad)));

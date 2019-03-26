@@ -27,10 +27,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The values to pass as parameters to the method")]
 		public List<VariableValueSource> Parameters = new List<VariableValueSource>();
 
-		[Tooltip("The Type of the target to call the method on")]
 		public string TargetTypeName;
-
-		[Tooltip("The name of the method to call")]
 		public string MethodName;
 
 		public string[] ParameterTypeNames;

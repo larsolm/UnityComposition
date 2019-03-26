@@ -23,10 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The reference to store the retreived value in")]
 		public VariableReference Output = new VariableReference();
 
-		[Tooltip("The Type of the target object to get the property of")]
 		public string TargetTypeName;
-
-		[Tooltip("The property to get")]
 		public string PropertyName;
 
 		public Type TargetType { get; set; }

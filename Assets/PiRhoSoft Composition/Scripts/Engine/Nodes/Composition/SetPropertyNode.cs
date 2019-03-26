@@ -21,10 +21,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The target value to set the property to")]
 		public VariableValueSource Value = new VariableValueSource();
 
-		[Tooltip("The Type of the target object to set the property for")]
 		public string TargetTypeName;
-
-		[Tooltip("The name of the Property to set")]
 		public string PropertyName;
 
 		public Type TargetType { get; set; }
