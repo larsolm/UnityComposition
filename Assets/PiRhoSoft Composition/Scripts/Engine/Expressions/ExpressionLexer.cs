@@ -35,7 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static bool IsSentinelCharacter(char c) => _sentinelCharacters.IndexOf(c) >= 0;
 		private static bool IsIdentifierStartCharacter(char c) => char.IsLetter(c) || c == '_';
-		private static bool IsIdentifierCharacter(char c) => char.IsLetterOrDigit(c) || c == '_' || c == VariableReference.Separator || c == VariableReference.LookupOpen || c == VariableReference.LookupClose;
+		private static bool IsIdentifierCharacter(char c) => char.IsLetterOrDigit(c) || c == '_' || c == ListVariableHandler.CountSymbol || c == VariableReference.Separator || c == VariableReference.LookupOpen || c == VariableReference.LookupClose;
 		private static bool IsHexCharacter(char c) => _hexCharacters.IndexOf(c) >= 0;
 		private static bool IsOperatorCharacter(char c) => _operatorCharacters.IndexOf(c) >= 0;
 

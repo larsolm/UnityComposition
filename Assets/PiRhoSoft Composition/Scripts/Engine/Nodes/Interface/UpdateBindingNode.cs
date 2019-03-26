@@ -4,12 +4,9 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "update-binding-node")]
-	[CreateInstructionGraphNodeMenu("Interface/Update Binding", 300)]
+	[CreateInstructionGraphNodeMenu("Interface/Update Binding", 301)]
 	public class UpdateBindingNode : InstructionGraphNode
 	{
-		private const string _missingObjectWarning = "(CUBNMO) failed to update bindings: unable to find object '{0}'";
-		private const string _invalidObjectWarning = "(CUBNIO) failed to update bindings: '{0}' is not a GameObject, InterfaceControl, or Component";
-
 		[Tooltip("The node to go to once the control is shown")]
 		public InstructionGraphNode Next = null;
 
