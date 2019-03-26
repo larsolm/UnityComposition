@@ -15,9 +15,8 @@ MonoBehaviour:
   Inputs:
     _items:
     - _name: quality
-      _type: 17
-      _constraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      _type: 3
+      _constraint: 0|1
       _tag: 
       _initializer:
         _statement: 
@@ -38,7 +37,6 @@ MonoBehaviour:
     _items:
     - {fileID: 114777378443045636}
     - {fileID: 114690327738691884}
-    - {fileID: 114051174418471494}
     - {fileID: 114789152154498086}
     - {fileID: 114079288357498444}
     - {fileID: 114481506311885118}
@@ -46,6 +44,7 @@ MonoBehaviour:
     - {fileID: 114677748597240622}
     - {fileID: 114023438155082066}
     - {fileID: 114649020333618766}
+    - {fileID: 114845213966855522}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114023438155082066}
   Process: {fileID: 114777378443045636}
@@ -71,23 +70,6 @@ MonoBehaviour:
     - player
     _lookups:
     - 
---- !u!114 &114051174418471494
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
-  m_Name: Comment
-  m_EditorClassIdentifier: 
-  Name: Comment
-  GraphPosition: {x: -0, y: 115.200005}
-  IsBreakpoint: 0
-  Comment: input.Quality should be a number between 0 and 5 indicating how good of
-    loot to generate (i.e the amount of gold and rarity of the items)
 --- !u!114 &114079288357498444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -101,7 +83,7 @@ MonoBehaviour:
   m_Name: Show Control
   m_EditorClassIdentifier: 
   Name: Show Control
-  GraphPosition: {x: 960, y: 115.200005}
+  GraphPosition: {x: 768, y: 256}
   IsBreakpoint: 0
   Next: {fileID: 114768701327047442}
   Control:
@@ -124,7 +106,7 @@ MonoBehaviour:
   m_Name: Update Binding
   m_EditorClassIdentifier: 
   Name: Update Binding
-  GraphPosition: {x: 640, y: 115.200005}
+  GraphPosition: {x: 704, y: 192}
   IsBreakpoint: 0
   Next: {fileID: 114079288357498444}
   Object:
@@ -170,7 +152,7 @@ MonoBehaviour:
   m_Name: Hide Control
   m_EditorClassIdentifier: 
   Name: Hide Control
-  GraphPosition: {x: 1600, y: 115.200005}
+  GraphPosition: {x: 896, y: 384}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -197,7 +179,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: generatedGold = Truncate(input.quality * Random(50, 100))
+    _statement: local.generatedGold = Truncate(input.quality * Random(50, 100))
 --- !u!114 &114768701327047442
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -211,7 +193,7 @@ MonoBehaviour:
   m_Name: Input
   m_EditorClassIdentifier: 
   Name: Input
-  GraphPosition: {x: 1280, y: 115.200005}
+  GraphPosition: {x: 832, y: 320}
   IsBreakpoint: 0
   Buttons:
     _items:
@@ -239,7 +221,7 @@ MonoBehaviour:
     _items:
     - {fileID: 114690327738691884}
     - {fileID: 114789152154498086}
-    - {fileID: 114481506311885118}
+    - {fileID: 114845213966855522}
 --- !u!114 &114789152154498086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -257,6 +239,34 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'local.itemIndex = Random(0, input.ItemSet.Count)
+    _statement: 'local.itemIndex = Random(0, input.ItemSet<#>)
 
-      generatedItem = input.ItemSet[local.itemIndex]'
+      local.generatedItem = input.ItemSet[local.itemIndex]'
+--- !u!114 &114845213966855522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3530830e117b2949a9ed9bb41115c88, type: 3}
+  m_Name: Set Binding
+  m_EditorClassIdentifier: 
+  Name: Set Binding
+  GraphPosition: {x: 640, y: 128}
+  IsBreakpoint: 0
+  Next: {fileID: 114481506311885118}
+  Object:
+    _variable:
+    - scene
+    - Loot Display
+    _lookups:
+    - 
+    - 
+  Binding:
+    _variable:
+    - local
+    _lookups:
+    - 

@@ -1139,8 +1139,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void DrawWatch(Rect rect)
 		{
-			if (_watching != _graph)
-				SetupWatch();
+			SetupWatch();
 
 			rect.x = WatchLeft;
 			rect.y = ToolbarBottom;

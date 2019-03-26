@@ -50,7 +50,8 @@ namespace PiRhoSoft.CompositionEditor
 						if (i != 0)
 							height += EditorGUIUtility.standardVerticalSpacing;
 
-						height += GetHeight(value, itemDefinition);
+						var item = value.List.GetVariable(i);
+						height += GetHeight(item, itemDefinition);
 					}
 
 					return height;
@@ -231,7 +232,7 @@ namespace PiRhoSoft.CompositionEditor
 			var objectType = (definition.Constraint is ObjectVariableConstraint objectConstraint ? objectConstraint.Type : null) ?? typeof(Object);
 			var unityObject = EditorGUI.ObjectField(rect, GUIContent.none, value.Object, objectType, true);
 
-			return unityObject == null ? VariableValue.Create((Object)null) : VariableValue.Create(unityObject);
+			return VariableValue.Create(unityObject);
 		}
 
 		private static VariableValue DrawStore(Rect rect, VariableValue value, VariableDefinition definition)

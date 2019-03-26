@@ -6,6 +6,8 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class ListVariableHandler : VariableHandler
 	{
+		public const char CountSymbol = '#';
+
 		protected override VariableConstraint CreateConstraint() => new ListVariableConstraint();
 
 		public override VariableValue CreateDefault(VariableConstraint constraint)
@@ -52,7 +54,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{
-			if (lookup.Length == 1 && lookup[0] == '#')
+			if (lookup.Length == 1 && lookup[0] == CountSymbol)
 				return VariableValue.Create(owner.List.Count);
 			else if (int.TryParse(lookup, out var index) && index >= 0 && index < owner.List.Count)
 				return owner.List.GetVariable(index);
@@ -64,7 +66,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (int.TryParse(lookup, out var index) && index >= 0 && index < owner.List.Count)
 				return owner.List.SetVariable(index, value);
-			else if (lookup.Length == 1 && lookup[0] == '#')
+			else if (lookup.Length == 1 && lookup[0] == CountSymbol)
 				return SetVariableResult.ReadOnly;
 			else
 				return SetVariableResult.NotFound;

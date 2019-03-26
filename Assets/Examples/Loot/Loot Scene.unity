@@ -233,17 +233,17 @@ MonoBehaviour:
       Reference:
         _variable: []
         _lookups: []
-      _valueData: EQAAAAAAAAA=
-      _valueObjects:
-      - {fileID: 11400000, guid: fa0442ad09dd84943b2d317722d4e3a6, type: 2}
+      _valueData: AwAAAAAAAD8=
+      _valueObjects: []
     - Name: ItemSet
       Type: 1
       Reference:
         _variable: []
         _lookups: []
-      _valueData: EwAAAAEAAAARAAAAAAAAAA==
+      _valueData: EwAAAAIAAAARAAAAAAAAABEAAAABAAAA
       _valueObjects:
-      - {fileID: 11400000, guid: 076c50fe7357f0444ba3530150997a12, type: 2}
+      - {fileID: 11400000, guid: f0d9148c71ae95f4c80e8b8ad38f5050, type: 2}
+      - {fileID: 11400000, guid: fed62dfecb027a54f9c58094ee010a3a, type: 2}
     _outputs: []
   OnEnter:
     _instruction: {fileID: 0}
@@ -942,6 +942,7 @@ GameObject:
   - component: {fileID: 1825989187}
   - component: {fileID: 1825989186}
   - component: {fileID: 1825989188}
+  - component: {fileID: 1825989189}
   m_Layer: 5
   m_Name: Loot Display
   m_TagString: Untagged
@@ -1021,6 +1022,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   DependentObjects:
     _items: []
+--- !u!114 &1825989189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1825989184}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9348dc783052e141874f524ecc2f92c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1885225000
 GameObject:
   m_ObjectHideFlags: 0
