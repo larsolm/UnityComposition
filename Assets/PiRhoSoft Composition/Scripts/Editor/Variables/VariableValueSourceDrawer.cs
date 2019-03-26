@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEditor
 {
 	[CustomPropertyDrawer(typeof(VariableValueSource))]
-	public class VaribaleValueSourceDrawer : PropertyDrawer
+	public class VariableValueSourceDrawer : PropertyDrawer
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
@@ -27,9 +27,22 @@ namespace PiRhoSoft.CompositionEditor
 					target.Type = (VariableSourceType)EnumButtonsDrawer.Draw(typeRect, label, (int)target.Type, typeof(VariableSourceType), 50);
 
 					if (target.Type == VariableSourceType.Value)
+					{
+						if (!target.Definition.IsTypeLocked)
+						{
+							var variableRect = RectHelper.TakeWidth(ref position, position.width * 0.5f);
+							RectHelper.TakeHorizontalSpace(ref position);
+							var definitionType = (VariableType)EditorGUI.EnumPopup(variableRect, target.Definition.Type);
+
+							target.Definition = VariableDefinition.Create(target.Definition.Name, definitionType, target.Definition.Constraint, target.Definition.Tag, target.Definition.Initializer, false, false);
+						}
+
 						target.Value = VariableValueDrawer.Draw(position, GUIContent.none, target.Value, target.Definition);
+					}
 					else if (target.Type == VariableSourceType.Reference)
+					{
 						VariableReferenceControl.Draw(position, target.Reference, GUIContent.none);
+					}
 				}
 			}
 		}

@@ -810,8 +810,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _variablesData: []
-  _variablesObjects: []
+  Constraints:
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _variablesData:
+  - BnBsYXllchEAAAAAAAAA
+  _variablesObjects:
+  - {fileID: 1576479861}
 --- !u!58 &1576479859
 CircleCollider2D:
   m_ObjectHideFlags: 0

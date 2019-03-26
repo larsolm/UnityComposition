@@ -15,6 +15,11 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class TagList : SerializedList<string> { }
 
+	public interface ISchemaOwner
+	{
+		void SetupSchema();
+	}
+
 	[HelpURL(Composition.DocumentationUrl + "variable-schema")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 129)]
 	public class VariableSchema : ScriptableObject

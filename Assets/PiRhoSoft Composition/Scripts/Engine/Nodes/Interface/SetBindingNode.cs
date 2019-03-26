@@ -25,7 +25,10 @@ namespace PiRhoSoft.CompositionEngine
 			if (ResolveObject(variables, Object, out BindingRoot root))
 			{
 				if (Resolve(variables, Binding, out IVariableStore binding))
+				{
 					root.Variables = binding;
+					VariableBinding.UpdateBinding(root.gameObject, null, null);
+				}
 			}
 
 			graph.GoTo(Next, nameof(Next));

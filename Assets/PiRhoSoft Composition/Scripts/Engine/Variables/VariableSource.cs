@@ -167,11 +167,24 @@ namespace PiRhoSoft.CompositionEngine
 	}
 
 	[Serializable]
-	public class VariableValueSource : VariableSource<VariableValue>
+	public class VariableValueSource : VariableSource<VariableValue>, ISerializationCallbackReceiver
 	{
 		public VariableDefinition Definition;
 
+		[SerializeField] private string _data;
+		[SerializeField] private List<Object> _objects;
+
 		public VariableValueSource() { Value = VariableValue.Empty; Definition = VariableDefinition.Create(string.Empty, VariableType.Empty); }
 		public VariableValueSource(VariableType type, VariableDefinition definition) { Value = definition.Generate(null); Definition = definition; }
+
+		public void OnBeforeSerialize()
+		{
+			VariableValue.Save(Value, ref _data, ref _objects);
+		}
+
+		public void OnAfterDeserialize()
+		{
+			VariableValue.Load(ref Value, ref _data, ref _objects);
+		}
 	}
 }

@@ -5,11 +5,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(TMP_Text))]
-	[HelpURL(Composition.DocumentationUrl + "text-binding")]
-	[AddComponentMenu("PiRho Soft/Interface/Text Binding")]
-	public class TextBinding : VariableBinding
+	[HelpURL(Composition.DocumentationUrl + "text-color-binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Text Color Binding")]
+	public class TextColorBinding : VariableBinding
 	{
-		[Tooltip("The variable holding the value to display as text in this object")]
+		[Tooltip("The variable holding the color value to use for the text")]
 		public VariableReference Variable = new VariableReference();
 
 		private TMP_Text _text;
@@ -31,8 +31,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = Variable.GetValue(variables);
 
-			Text.enabled = value.Type != VariableType.Empty;
-			Text.text = value.ToString();
+			Text.enabled = value.Type == VariableType.Color;
+			Text.color = value.Color;
 		}
 	}
 }

@@ -1,29 +1,28 @@
 ﻿using UnityEngine;
-using UnityEngine.UI;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
-	[RequireComponent(typeof(Image))]
-	[HelpURL(Composition.DocumentationUrl + "image-binding")]
-	[AddComponentMenu("PiRho Soft/Interface/Image Binding")]
-	public class ImageBinding : VariableBinding
+	[RequireComponent(typeof(SpriteRenderer))]
+	[HelpURL(Composition.DocumentationUrl + "sprite-binding")]
+	[AddComponentMenu("PiRho Soft/Interface/Sprite Binding")]
+	public class SpriteBinding : VariableBinding
 	{
 		[Tooltip("The variable holding the image to show on this object")]
 		public VariableReference Variable = new VariableReference();
 
-		private Image _image;
+		private SpriteRenderer _sprite;
 
-		public Image Image
+		public SpriteRenderer Sprite
 		{
 			get
 			{
 				// can't look up in awake because it's possible to update bindings before the component is enabled
 
-				if (!_image)
-					_image = GetComponent<Image>();
+				if (!_sprite)
+					_sprite = GetComponent<SpriteRenderer>();
 
-				return _image;
+				return _sprite;
 			}
 		}
 
@@ -33,12 +32,12 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (value.TryGetReference(out Sprite sprite))
 			{
-				Image.enabled = true;
-				Image.sprite = sprite;
+				Sprite.enabled = true;
+				Sprite.sprite = sprite;
 			}
 			else
 			{
-				Image.enabled = false;
+				Sprite.enabled = false;
 			}
 		}
 	}

@@ -270,6 +270,28 @@ namespace PiRhoSoft.CompositionEngine
 			return type;
 		}
 
+		public object GetBoxedValue()
+		{
+			switch (_type)
+			{
+				case VariableType.Bool: return _value.Bool;
+				case VariableType.Int: return _value.Int;
+				case VariableType.Float: return _value.Float;
+				case VariableType.Int2: return _value.Int2;
+				case VariableType.Int3: return _value.Int3;
+				case VariableType.IntRect: return _value.IntRect;
+				case VariableType.IntBounds: return _value.IntBounds;
+				case VariableType.Vector2: return _value.Vector2;
+				case VariableType.Vector3: return _value.Vector3;
+				case VariableType.Vector4: return _value.Vector4;
+				case VariableType.Quaternion: return _value.Quaternion;
+				case VariableType.Rect: return _value.Rect;
+				case VariableType.Bounds: return _value.Bounds;
+				case VariableType.Color: return _value.Color;
+				default: return _reference;
+			}
+		}
+
 		#endregion
 
 		#region Casting

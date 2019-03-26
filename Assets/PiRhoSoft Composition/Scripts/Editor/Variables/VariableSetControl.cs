@@ -21,6 +21,9 @@ namespace PiRhoSoft.CompositionEditor
 			_variables = target;
 			_proxy = new VariablesProxy { List = target };
 
+			if (property.serializedObject.targetObject is ISchemaOwner owner)
+				owner.SetupSchema();
+
 			if (_variables.Owner != null && _variables.NeedsUpdate)
 			{
 				_variables.Update();
@@ -29,6 +32,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			_list.Setup(_proxy)
 				.MakeDrawable(DrawVariable)
+				.MakeCustomHeight(GetVariableHeight)
 				.MakeCollapsable(property.serializedObject.targetObject.GetType().Name + "." + property.propertyPath + ".IsOpen")
 				.MakeEmptyLabel(_emptyLabel);
 		}
@@ -41,6 +45,15 @@ namespace PiRhoSoft.CompositionEditor
 		public override void Draw(Rect position, GUIContent label)
 		{
 			_list.Draw(position, label);
+		}
+
+		private float GetVariableHeight(int index)
+		{
+			var name = _variables.GetVariableName(index);
+			var value = _variables.GetVariableValue(index);
+			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index] : VariableDefinition.Create(string.Empty, VariableType.Empty);
+
+			return VariableValueDrawer.GetHeight(value, definition);
 		}
 
 		private void DrawVariable(Rect rect, IList list, int index)

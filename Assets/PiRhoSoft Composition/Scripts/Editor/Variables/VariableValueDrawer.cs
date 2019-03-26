@@ -199,7 +199,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var s = value.String;
 
-			if (definition.Constraint is StringVariableConstraint stringConstraint)
+			if (definition.Constraint is StringVariableConstraint stringConstraint && stringConstraint.Values.Length > 0)
 			{
 				var index = Array.IndexOf(stringConstraint.Values, s);
 				index = EditorGUI.Popup(rect, index, stringConstraint.Values);
