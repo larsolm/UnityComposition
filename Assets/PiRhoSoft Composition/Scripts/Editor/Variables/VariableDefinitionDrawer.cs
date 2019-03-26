@@ -49,13 +49,13 @@ namespace PiRhoSoft.CompositionEditor
 			return height;
 		}
 
-		public static VariableDefinition Draw(VariableDefinition definition, VariableInitializerType initializer, TagList tags)
+		public static VariableDefinition Draw(VariableDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel)
 		{
 			var rect = EditorGUILayout.GetControlRect(false, GetHeight(definition, initializer, tags));
-			return Draw(rect, definition, initializer, tags);
+			return Draw(rect, definition, initializer, tags, showConstraintLabel);
 		}
 
-		public static VariableDefinition Draw(Rect position, VariableDefinition definition, VariableInitializerType initializer, TagList tags)
+		public static VariableDefinition Draw(Rect position, VariableDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel)
 		{
 			var tag = definition.Tag;
 			var constraint = definition.Constraint;
@@ -80,7 +80,7 @@ namespace PiRhoSoft.CompositionEditor
 				var constraintHeight = GetConstraintHeight(definition.Type, definition.Constraint);
 				var constraintRect = RectHelper.TakeHeight(ref position, constraintHeight);
 
-				DrawConstraint(constraintRect, type, definition.IsConstraintLocked, ref constraint, true);
+				DrawConstraint(constraintRect, type, definition.IsConstraintLocked, ref constraint, showConstraintLabel);
 			}
 
 			if (hasInitializer && definition.Initializer != null)
@@ -352,7 +352,7 @@ namespace PiRhoSoft.CompositionEditor
 			var constraint = VariableHandler.Get((VariableType)typeProperty.enumValueIndex).CreateConstraint(constraintProperty.stringValue);
 			var definition = VariableDefinition.Create(name, type, constraint, null, null, isTypeLockedProperty.boolValue, isConstraintLockedProperty.boolValue);
 
-			definition = Draw(position, definition, VariableInitializerType.None, null);
+			definition = Draw(position, definition, VariableInitializerType.None, null, true);
 
 			nameProperty.stringValue = definition.Name;
 			typeProperty.enumValueIndex = (int)definition.Type;

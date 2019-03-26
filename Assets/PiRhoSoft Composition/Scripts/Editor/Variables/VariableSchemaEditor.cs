@@ -63,7 +63,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{
-				var definition = VariableDefinitionDrawer.Draw(rect, _schema[index], _schema.InitializerType, _schema.Tags);
+				var definition = VariableDefinitionDrawer.Draw(rect, _schema[index], _schema.InitializerType, _schema.Tags, true);
 
 				if (changes.changed)
 					_schema[index] = definition;

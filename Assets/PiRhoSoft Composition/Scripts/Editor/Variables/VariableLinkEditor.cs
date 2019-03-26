@@ -60,11 +60,11 @@ namespace PiRhoSoft.CompositionEditor
 			_variables.Variables[index] = Variable.Create(name, value);
 		}
 
-		private void AddVariable(string name, VariableType type, VariableDefinition definition)
+		private void AddVariable(string name, VariableDefinition definition)
 		{
 			using (new UndoScope(_variables, true))
 			{
-				var value = VariableHandler.Get(type).CreateDefault(null);
+				var value = definition.Generate(null);
 				_variables.Variables.Add(Variable.Create(name, value));
 				_variables.Constraints.Add(definition);
 			}
@@ -86,47 +86,37 @@ namespace PiRhoSoft.CompositionEditor
 		private class AddVariableContent : AddNamedItemContent
 		{
 			private VariableLinkEditor _editor;
-			private VariableType _type = VariableType.Empty;
 			private VariableDefinition _definition;
 			private bool _typeValid = true;
 
 			public AddVariableContent(VariableLinkEditor editor)
 			{
 				_editor = editor;
+				_definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
 			}
 
 			protected override float GetHeight_()
 			{
-				return _type == VariableType.Empty ? RectHelper.LineHeight : RectHelper.LineHeight * 3;
+				return VariableDefinitionDrawer.GetHeight(_definition, VariableInitializerType.None, null);
 			}
 
 			protected override bool Draw_(bool clean)
 			{
 				using (new InvalidScope(clean || _typeValid))
-				{
-					var type = (VariableType)EditorGUILayout.EnumPopup(_type);
-					if (_type != type)
-					{
-						_type = type;
-						_definition = VariableDefinition.Create(string.Empty, _type);
-					}
-				}
-
-				if (_type != VariableType.Empty)
-					_definition = VariableDefinitionDrawer.Draw(_definition, VariableInitializerType.None, null);
+					_definition = VariableDefinitionDrawer.Draw(_definition, VariableInitializerType.None, null, false);
 
 				return false;
 			}
 
 			protected override bool Validate_()
 			{
-				_typeValid = _type != VariableType.Empty;
+				_typeValid = _definition.Type != VariableType.Empty;
 				return _typeValid;
 			}
 
 			protected override void Add_(string name)
 			{
-				_editor.AddVariable(name, _type, _definition);
+				_editor.AddVariable(name, _definition);
 			}
 
 			protected override bool IsNameInUse(string name)
