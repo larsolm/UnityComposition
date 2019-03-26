@@ -61,7 +61,7 @@ namespace PiRhoSoft.CompositionEditor
 					if (_variables.Schema != null)
 					{
 						if (GUI.Button(buttonRect, _refreshButton.Content, GUIStyle.none))
-							value = _variables.Schema[index].Generate(_variables.Owner).Value;
+							value = _variables.Schema[index].Generate(_variables.Owner);
 					}
 				}
 				else

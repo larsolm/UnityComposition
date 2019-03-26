@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 			builder.Append(')');
 		}
 
-		public override void GetInputs(List<VariableDefinition> inputs, string source)
+		public override void GetInputs(IList<VariableDefinition> inputs, string source)
 		{
 			foreach (var parameter in Parameters)
 				parameter.GetInputs(inputs, source);

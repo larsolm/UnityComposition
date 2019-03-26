@@ -52,7 +52,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private List<ICompletionNotifier> _animations = new List<ICompletionNotifier>(5);
 
-		public override void GetInputs(List<VariableDefinition> inputs)
+		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			Effect.GetInputs(inputs);
 			EffectName.GetInputs(inputs);

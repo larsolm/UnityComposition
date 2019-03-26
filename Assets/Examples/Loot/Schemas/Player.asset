@@ -18,100 +18,82 @@ MonoBehaviour:
   _definitions:
   - _name: Gold
     _type: 2
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Head
-    _type: 16
+    _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Shoulders
-    _type: 16
+    _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Body
-    _type: 16
+    _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Arms
-    _type: 16
+    _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Legs
-    _type: 16
+    _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Feet
-    _type: 16
+    _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-  - _name: LeftHand
-    _type: 16
-    _tag: Always (not saved)
-    _initializer:
-      _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: RightHand
-    _type: 16
+    _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  - _name: LeftHand
+    _type: 17
+    _constraint: 
+    _tag: Always (not saved)
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Inventory
     _type: 19
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
-  _version: 21
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  _version: 35

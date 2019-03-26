@@ -76,7 +76,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Sequencing;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
+		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			TargetPosition.GetInputs(inputs);
 			TargetRotation.GetInputs(inputs);

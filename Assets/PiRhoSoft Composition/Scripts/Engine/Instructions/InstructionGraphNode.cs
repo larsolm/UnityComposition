@@ -556,7 +556,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Inputs and Outputs
 
-		public virtual void GetInputs(List<VariableDefinition> inputs)
+		public virtual void GetInputs(IList<VariableDefinition> inputs)
 		{
 			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
 
@@ -599,7 +599,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public virtual void GetOutputs(List<VariableDefinition> outputs)
+		public virtual void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
 

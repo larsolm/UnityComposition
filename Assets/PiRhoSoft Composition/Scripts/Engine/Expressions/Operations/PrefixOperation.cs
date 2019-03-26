@@ -14,7 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 			Right.ToString(builder);
 		}
 
-		public override void GetInputs(List<VariableDefinition> inputs, string source)
+		public override void GetInputs(IList<VariableDefinition> inputs, string source)
 		{
 			Right.GetInputs(inputs, source);
 		}

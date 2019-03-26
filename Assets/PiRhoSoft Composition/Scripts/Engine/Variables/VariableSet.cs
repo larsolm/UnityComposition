@@ -99,7 +99,8 @@ namespace PiRhoSoft.CompositionEngine
 					if (_variables[i].Value.Type == VariableType.Empty)
 					{
 						var definition = _schema[i];
-						_variables[i] = definition.Generate(_owner);
+						var value = definition.Generate(_owner);
+						_variables[i] = Variable.Create(definition.Name, value);
 					}
 				}
 			}
@@ -108,9 +109,12 @@ namespace PiRhoSoft.CompositionEngine
 		public void Reset(int index)
 		{
 			if (_schema != null)
-				_variables[index] = _schema[index].Generate(_owner);
+			{
+				var definition = _schema[index];
+				var value = definition.Generate(_owner);
+				_variables[index] = Variable.Create(definition.Name, value);
+			}
 		}
-
 
 		public void Clear()
 		{

@@ -6,6 +6,16 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class IntVariableHandler : VariableHandler
 	{
+		protected override VariableConstraint CreateConstraint() => new IntVariableConstraint();
+
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			if (constraint is IntVariableConstraint intConstraint)
+				return VariableValue.Create(intConstraint.Minimum);
+			else
+				return VariableValue.Create(0);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Int);

@@ -22,21 +22,21 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
+		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			foreach (var input in Instruction.Inputs)
 			{
 				if (InstructionStore.IsInput(input))
-					inputs.Add(input.Definition);
+					inputs.Add(Instruction.GetInputDefinition(input));
 			}
 		}
 
-		public override void GetOutputs(List<VariableDefinition> outputs)
+		public override void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			foreach (var output in Instruction.Outputs)
 			{
 				if (InstructionStore.IsOutput(output))
-					outputs.Add(output.Definition);
+					outputs.Add(Instruction.GetOutputDefinition(output));
 			}
 		}
 

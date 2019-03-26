@@ -49,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.SequencingLight;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
+		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			Prefab.GetInputs(inputs);
 			ObjectName.GetInputs(inputs);
@@ -62,7 +62,7 @@ namespace PiRhoSoft.CompositionEngine
 				inputs.Add(VariableDefinition.Create<GameObject>(Object.RootName));
 		}
 
-		public override void GetOutputs(List<VariableDefinition> outputs)
+		public override void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			if (InstructionStore.IsOutput(ObjectVariable))
 				outputs.Add(VariableDefinition.Create<GameObject>(ObjectVariable.RootName));

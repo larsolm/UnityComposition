@@ -23,13 +23,13 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNodeList Nodes => _nodes; // _nodes is private with a getter so it isn't found by node data reflection
 		public InstructionStore Store => _rootStore;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
+		protected override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			foreach (var node in Nodes)
 				node.GetInputs(inputs);
 		}
 
-		public override void GetOutputs(List<VariableDefinition> outputs)
+		protected override void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			foreach (var node in Nodes)
 				node.GetOutputs(outputs);

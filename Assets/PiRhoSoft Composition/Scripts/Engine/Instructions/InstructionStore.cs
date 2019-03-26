@@ -20,8 +20,8 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class InstructionInput : ISerializationCallbackReceiver
 	{
+		public string Name;
 		public InstructionInputType Type;
-		public VariableDefinition Definition;
 		public VariableReference Reference = new VariableReference();
 		[NonSerialized] public VariableValue Value;
 
@@ -48,8 +48,8 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class InstructionOutput
 	{
+		public string Name;
 		public InstructionOutputType Type;
-		public VariableDefinition Definition;
 		public VariableReference Reference = new VariableReference();
 	}
 
@@ -101,13 +101,13 @@ namespace PiRhoSoft.CompositionEngine
 					var value = input.Reference.GetValue(this);
 
 					if (value.Type != VariableType.Empty)
-						Input.AddVariable(input.Definition.Name, value);
+						Input.AddVariable(input.Name, value);
 					else
-						Debug.LogWarningFormat(_missingInputError, input.Definition.Name, input.Reference);
+						Debug.LogWarningFormat(_missingInputError, input.Name, input.Reference);
 				}
 				else if (input.Type == InstructionInputType.Value)
 				{
-					Input.AddVariable(input.Definition.Name, input.Value);
+					Input.AddVariable(input.Name, input.Value);
 				}
 			}
 		}
@@ -115,7 +115,7 @@ namespace PiRhoSoft.CompositionEngine
 		public void WriteOutputs(IList<InstructionOutput> outputs)
 		{
 			foreach (var output in outputs)
-				Output.AddVariable(output.Definition.Name, VariableValue.Create(output.Definition.Type));
+				Output.AddVariable(output.Name, VariableValue.Empty);
 		}
 
 		public void ReadOutputs(IList<InstructionOutput> outputs)
@@ -124,7 +124,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				if (output.Type == InstructionOutputType.Reference)
 				{
-					var value = Output.GetVariable(output.Definition.Name);
+					var value = Output.GetVariable(output.Name);
 
 					if (value.Type != VariableType.Empty)
 					{
@@ -133,9 +133,9 @@ namespace PiRhoSoft.CompositionEngine
 						switch (result)
 						{
 							case SetVariableResult.Success: break;
-							case SetVariableResult.NotFound: Debug.LogWarningFormat(_missingOutputError, output.Definition.Name, output.Reference); break;
-							case SetVariableResult.ReadOnly: Debug.LogWarningFormat(_readOnlyOutputError, output.Definition.Name, output.Reference); break;
-							case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(_invalidOutputError, output.Definition.Name, output.Reference); break;
+							case SetVariableResult.NotFound: Debug.LogWarningFormat(_missingOutputError, output.Name, output.Reference); break;
+							case SetVariableResult.ReadOnly: Debug.LogWarningFormat(_readOnlyOutputError, output.Name, output.Reference); break;
+							case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(_invalidOutputError, output.Name, output.Reference); break;
 						}
 					}
 				}

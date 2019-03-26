@@ -6,6 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class Vector3VariableHandler : VariableHandler
 	{
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			return VariableValue.Create(Vector3.zero);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Vector3.x);

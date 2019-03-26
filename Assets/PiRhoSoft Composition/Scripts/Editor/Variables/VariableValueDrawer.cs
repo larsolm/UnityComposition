@@ -9,6 +9,9 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariableValueDrawer
 	{
+		private static readonly IconButton _addButton = new IconButton(IconButton.Add, "Add an item to the list");
+		private static readonly IconButton _removeButton = new IconButton(IconButton.Remove, "Remove this item from the list");
+
 		public static float GetHeight(VariableValue value, VariableDefinition definition)
 		{
 			var type = definition.Type != VariableType.Empty ? definition.Type : value.Type;
@@ -36,13 +39,18 @@ namespace PiRhoSoft.CompositionEditor
 				case VariableType.Store: return EditorGUIUtility.singleLineHeight;
 				case VariableType.List:
 				{
-					var height = value.List.Count == 0 ? EditorGUIUtility.singleLineHeight : 0.0f;
+					var height = EditorGUIUtility.singleLineHeight;
+
+					var itemDefinition = definition.Constraint is ListVariableConstraint listConstraint
+						? VariableDefinition.Create(string.Empty, listConstraint.ItemType, listConstraint.ItemConstraint)
+						: VariableDefinition.Create("", VariableType.Empty);
+
 					for (var i = 0; i < value.List.Count; i++)
 					{
 						if (i != 0)
 							height += EditorGUIUtility.standardVerticalSpacing;
 
-						height += GetHeight(value, VariableDefinition.Create(string.Empty, VariableType.Empty));
+						height += GetHeight(value, itemDefinition);
 					}
 
 					return height;
@@ -100,8 +108,8 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var integer = value.Int;
 
-			if (definition.UseRangeConstraint)
-				integer = EditorGUI.IntSlider(rect, GUIContent.none, integer, (int)definition.MinimumConstraint, (int)definition.MaximumConstraint);
+			if (definition.Constraint is IntVariableConstraint intConstraint)
+				integer = EditorGUI.IntSlider(rect, GUIContent.none, integer, intConstraint.Minimum, intConstraint.Maximum);
 			else
 				integer = EditorGUI.IntField(rect, GUIContent.none, integer);
 
@@ -112,8 +120,8 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var number = value.Float;
 
-			if (definition.UseRangeConstraint)
-				number = EditorGUI.Slider(rect, GUIContent.none, number, definition.MinimumConstraint, definition.MaximumConstraint);
+			if (definition.Constraint is FloatVariableConstraint floatConstraint)
+				number = EditorGUI.Slider(rect, GUIContent.none, number, floatConstraint.Minimum, floatConstraint.Maximum);
 			else
 				number = EditorGUI.FloatField(rect, GUIContent.none, number);
 
@@ -189,13 +197,12 @@ namespace PiRhoSoft.CompositionEditor
 		private static VariableValue DrawString(Rect rect, VariableValue value, VariableDefinition definition)
 		{
 			var s = value.String;
-			var values = !string.IsNullOrEmpty(definition.TypeConstraint) ? definition.TypeConstraint.Split(',') : null;
 
-			if (values != null)
+			if (definition.Constraint is StringVariableConstraint stringConstraint)
 			{
-				var index = Array.IndexOf(values, s);
-				index = EditorGUI.Popup(rect, index, values);
-				s = index >= 0 ? values[index] : string.Empty;
+				var index = Array.IndexOf(stringConstraint.Values, s);
+				index = EditorGUI.Popup(rect, index, stringConstraint.Values);
+				s = index >= 0 ? stringConstraint.Values[index] : string.Empty;
 			}
 			else
 			{
@@ -207,13 +214,21 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static VariableValue DrawEnum(Rect rect, VariableValue value, VariableDefinition definition)
 		{
+			// value can have type Empty if the definition doesn't define the enum type
+
+			if (value.Type == VariableType.Empty)
+			{
+				EditorGUI.LabelField(rect, "Enum type not specified");
+				return value;
+			}
+
 			var e = EditorGUI.EnumPopup(rect, GUIContent.none, value.Enum);
 			return VariableValue.Create(e);
 		}
 
 		private static VariableValue DrawObject(Rect rect, VariableValue value, VariableDefinition definition)
 		{
-			var objectType = (!string.IsNullOrEmpty(definition.TypeConstraint) ? Type.GetType(definition.TypeConstraint) : null) ?? typeof(Object);
+			var objectType = (definition.Constraint is ObjectVariableConstraint objectConstraint ? objectConstraint.Type : null) ?? typeof(Object);
 			var unityObject = EditorGUI.ObjectField(rect, GUIContent.none, value.Object, objectType, true);
 
 			return unityObject == null ? VariableValue.Create((Object)null) : VariableValue.Create(unityObject);
@@ -231,18 +246,36 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static VariableValue DrawList(Rect rect, VariableValue value, VariableDefinition definition)
 		{
+			var itemDefinition = definition.Constraint is ListVariableConstraint listConstraint
+				? VariableDefinition.Create(string.Empty, listConstraint.ItemType, listConstraint.ItemConstraint)
+				: VariableDefinition.Create("", VariableType.Empty);
+
+			var remove = -1;
+
 			for (var i = 0; i < value.List.Count; i++)
 			{
 				if (i != 0)
 					RectHelper.TakeVerticalSpace(ref rect);
 
 				var item = value.List.GetVariable(i);
-				var itemDefinition = VariableDefinition.Create("", VariableType.Empty);
-				var height = GetHeight(value, itemDefinition);
+				var height = GetHeight(item, itemDefinition);
 				var itemRect = RectHelper.TakeHeight(ref rect, height);
+				var removeRect = RectHelper.TakeTrailingIcon(ref itemRect);
 
-				Draw(itemRect, new GUIContent(i.ToString()), item, itemDefinition);
+				item = Draw(itemRect, GUIContent.none, item, itemDefinition);
+				value.List.SetVariable(i, item);
+
+				if (GUI.Button(removeRect, _removeButton.Content, GUIStyle.none))
+					remove = i;
 			}
+
+			var addRect = RectHelper.TakeTrailingIcon(ref rect);
+
+			if (GUI.Button(addRect, _addButton.Content, GUIStyle.none))
+				value.List.AddVariable(itemDefinition.Generate(null));
+
+			if (remove >= 0)
+				value.List.RemoveVariable(remove);
 
 			return value;
 		}

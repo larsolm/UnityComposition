@@ -23,13 +23,13 @@ namespace PiRhoSoft.CompositionEngine
 			return value;
 		}
 
-		public override void GetInputs(List<VariableDefinition> inputs, string source)
+		public override void GetInputs(IList<VariableDefinition> inputs, string source)
 		{
 			Left.GetInputs(inputs, source);
 			Right.GetInputs(inputs, source);
 		}
 
-		public override void GetOutputs(List<VariableDefinition> outputs, string source)
+		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
 		{
 			Left.GetOutputs(outputs, source);
 			Right.GetOutputs(outputs, source);

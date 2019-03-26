@@ -6,6 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class StoreVariableHandler : ListVariableHandler
 	{
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			return VariableValue.Create((IVariableStore)null);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			var store = value.Store as VariableStore;

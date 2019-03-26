@@ -39,7 +39,7 @@ namespace PiRhoSoft.UtilityEditor
 				{
 					if (display.AssetType != null)
 						_listControl.MakeDrawable(ListItemDisplayType.AssetPopup, display.AssetType);
-					else if (display.ItemDisplay != ListItemDisplayType.Normal)
+					else// if (display.ItemDisplay != ListItemDisplayType.Normal)
 						_listControl.MakeDrawable(display.ItemDisplay, null);
 
 					if (display.AllowAdd)

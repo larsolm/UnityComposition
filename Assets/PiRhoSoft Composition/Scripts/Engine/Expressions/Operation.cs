@@ -149,8 +149,8 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public abstract VariableValue Evaluate(IVariableStore variables);
 		public abstract void ToString(StringBuilder builder);
-		public virtual void GetInputs(List<VariableDefinition> inputs, string source) { }
-		public virtual void GetOutputs(List<VariableDefinition> outputs, string source) { }
+		public virtual void GetInputs(IList<VariableDefinition> inputs, string source) { }
+		public virtual void GetOutputs(IList<VariableDefinition> outputs, string source) { }
 
 		public override string ToString()
 		{

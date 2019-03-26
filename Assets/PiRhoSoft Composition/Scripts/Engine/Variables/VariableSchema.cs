@@ -64,7 +64,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (string.IsNullOrEmpty(name) || HasDefinition(name))
 				return false;
 
-			_definitions.Add(VariableDefinition.Create(name, type, VariableDefinition.NotSaved));
+			_definitions.Add(VariableDefinition.Create(name, type, null));
 			IncrementVersion();
 			return true;
 		}

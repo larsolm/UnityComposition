@@ -6,6 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class IntRectVariableHandler : VariableHandler
 	{
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			return VariableValue.Create(new RectInt());
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.IntRect.position.x);

@@ -44,26 +44,33 @@ namespace PiRhoSoft.CompositionEngine
 			UpdateOutputs();
 		}
 
+		public VariableDefinition GetInputDefinition(InstructionInput input)
+		{
+			return Instruction != null
+				? Instruction.Inputs.Where(i => input.Name == i.Name).FirstOrDefault()
+				: VariableDefinition.Create(input.Name, VariableType.Empty);
+		}
+
+		public VariableDefinition GetOutputDefinition(InstructionOutput output)
+		{
+			return Instruction != null
+				? Instruction.Outputs.Where(o => output.Name == o.Name).FirstOrDefault()
+				: VariableDefinition.Create(output.Name, VariableType.Empty);
+		}
+
 		private void UpdateInputs()
 		{
 			var inputs = new List<InstructionInput>();
-			var inputDefinitions = new List<VariableDefinition>();
 
 			if (_instruction != null)
 			{
-				_instruction.GetInputs(inputDefinitions);
+				_instruction.RefreshInputs();
 
-				for (var i = 0; i < inputDefinitions.Count; i++)
+				foreach (var definition in _instruction.Inputs)
 				{
-					var definition = inputDefinitions[i];
+					var existing = _inputs.Where(input => input.Name == definition.Name).FirstOrDefault();
 
-					// ignore duplicates
-					if (inputs.Any(input => input.Definition.Name == definition.Name)) // TODO: make sure definitions are compatible
-						continue;
-
-					var existing = _inputs.Where(input => input.Definition.Name == definition.Name).FirstOrDefault();
-
-					if (existing != null)
+					if (existing != null && (existing.Type == InstructionInputType.Reference || definition.IsValid(existing.Value)))
 					{
 						inputs.Add(existing);
 					}
@@ -71,8 +78,9 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						inputs.Add(new InstructionInput
 						{
+							Name = definition.Name,
 							Type = InstructionInputType.Value,
-							Definition = definition
+							Value = definition.Generate(null)
 						});
 					}
 				}
@@ -84,21 +92,14 @@ namespace PiRhoSoft.CompositionEngine
 		private void UpdateOutputs()
 		{
 			var outputs = new List<InstructionOutput>();
-			var outputDefinitions = new List<VariableDefinition>();
 
 			if (_instruction != null)
 			{
-				_instruction.GetOutputs(outputDefinitions);
+				_instruction.RefreshOutputs();
 
-				for (var i = 0; i < outputDefinitions.Count; i++)
+				foreach (var definition in _instruction.Outputs)
 				{
-					var definition = outputDefinitions[i];
-
-					// ignore duplicates
-					if (outputs.Any(output => output.Definition.Name == definition.Name)) // TODO: duplicates should warn
-						continue;
-
-					var existing = _outputs.Where(output => output.Definition.Name == definition.Name).FirstOrDefault();
+					var existing = _outputs.Where(output => output.Name == definition.Name).FirstOrDefault();
 
 					if (existing != null)
 					{
@@ -108,8 +109,8 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						outputs.Add(new InstructionOutput
 						{
-							Type = InstructionOutputType.Ignore,
-							Definition = definition
+							Name = definition.Name,
+							Type = InstructionOutputType.Ignore
 						});
 					}
 				}

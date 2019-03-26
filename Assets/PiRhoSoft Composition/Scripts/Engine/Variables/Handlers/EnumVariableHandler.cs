@@ -7,6 +7,16 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class EnumVariableHandler : VariableHandler
 	{
+		protected override VariableConstraint CreateConstraint() => new EnumVariableConstraint();
+
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			if (constraint is EnumVariableConstraint enumConstraint)
+				return VariableValue.Create((Enum)Enum.ToObject(enumConstraint.Type, 0));
+			else
+				return VariableValue.Empty;
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			// saving as a string is the simplest way of handling enums with non Int32 underlying type

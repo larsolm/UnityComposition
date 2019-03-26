@@ -17,40 +17,31 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static GUIContent _numberConstraintLabel = new GUIContent("Constraint", "The range of values allowed for the variable");
 		private readonly static GUIContent _stringConstraintLabel = new GUIContent("Constraint", "The comma separated list of valid values for the variable");
 		private readonly static GUIContent _objectConstraintLabel = new GUIContent("Constraint", "The Object type that the assigned object must be derived from or have an instance of");
+		private readonly static GUIContent _enumConstraintLabel = new GUIContent("Constraint", "The enum type of values added to the list");
+		private readonly static GUIContent _listConstraintLabel = new GUIContent("Constraint", "The variable type of values added to the list");
 		private readonly static GUIContent _tagLabel = new GUIContent("Tag", "An identifier that can be used to reset or persist this variable");
 		private readonly static GUIContent _useRangeConstraintLabel = new GUIContent();
 		private readonly static GUIContent _minimumConstraintLabel = new GUIContent("Between");
 		private readonly static GUIContent _maximumConstraintLabel = new GUIContent("and");
 
 		private static Expression _expression = new Expression();
-		private const float _labelWidth = 100.0f;
-		private const float _labelIndent = 4.0f;
-
-		public static float GetHeight(SerializedProperty property, VariableInitializerType initializerType, TagList tags)
-		{
-			var typeProperty = property.FindPropertyRelative(nameof(VariableDefinition.Type));
-			return GetHeight((VariableType)typeProperty.enumValueIndex, initializerType, null, tags);
-		}
+		private const float _labelWidth = 120.0f;
+		private const float _labelIndent = 12.0f;
 
 		public static float GetHeight(VariableDefinition definition, VariableInitializerType initializerType, TagList tags)
 		{
-			return GetHeight(definition.Type, initializerType, definition.Initializer, tags);
-		}
-
-		private static float GetHeight(VariableType type, VariableInitializerType initializerType, Expression initializer, TagList tags)
-		{
 			var height = EditorGUIUtility.singleLineHeight;
 
-			if (HasInitializer(type, initializerType))
+			if (HasConstraint(definition.Type, definition.Constraint, definition.IsConstraintLocked))
+				height += GetConstraintHeight(definition.Type, definition.Constraint);
+
+			if (HasInitializer(definition.Type, initializerType))
 			{
-				if (initializerType == VariableInitializerType.Expression && initializer != null)
-					height += ExpressionControl.GetHeight(initializer, true) + RectHelper.VerticalSpace;
+				if (initializerType == VariableInitializerType.Expression && definition.Initializer != null)
+					height += ExpressionControl.GetHeight(definition.Initializer, true) + RectHelper.VerticalSpace;
 				else
 					height += RectHelper.LineHeight;
 			}
-
-			if (HasConstraint(type))
-				height += RectHelper.LineHeight;
 
 			if (HasTags(tags))
 				height += RectHelper.LineHeight;
@@ -58,53 +49,28 @@ namespace PiRhoSoft.CompositionEditor
 			return height;
 		}
 
-		public static void Draw(Rect position, SerializedProperty property, VariableInitializerType initializer, TagList tags)
-		{
-			var nameProperty = property.FindPropertyRelative(nameof(VariableDefinition.Name));
-			var typeProperty = property.FindPropertyRelative(nameof(VariableDefinition.Type));
-			var initializerProperty = property.FindPropertyRelative(nameof(VariableDefinition.Initializer)).FindPropertyRelative("_statement");
-			var tagProperty = property.FindPropertyRelative(nameof(VariableDefinition.Tag));
-			var useRangeConstraintProperty = property.FindPropertyRelative(nameof(VariableDefinition.UseRangeConstraint));
-			var minimumConstraintProperty = property.FindPropertyRelative(nameof(VariableDefinition.MinimumConstraint));
-			var maximumConstraintProperty = property.FindPropertyRelative(nameof(VariableDefinition.MaximumConstraint));
-			var typeConstraintProperty = property.FindPropertyRelative(nameof(VariableDefinition.TypeConstraint));
-
-			_expression.SetStatement(initializerProperty.stringValue);
-
-			var definition = VariableDefinition.Create(
-				nameProperty.stringValue,
-				(VariableType)typeProperty.enumValueIndex,
-				useRangeConstraintProperty.boolValue,
-				minimumConstraintProperty.floatValue,
-				maximumConstraintProperty.floatValue,
-				typeConstraintProperty.stringValue,
-				tagProperty.stringValue,
-				_expression);
-
-			Draw(position, definition, initializer, tags);
-
-			nameProperty.stringValue = definition.Name;
-			typeProperty.enumValueIndex = (int)definition.Type;
-			initializerProperty.stringValue = definition.Initializer != null ? definition.Initializer.Statement : string.Empty;
-			tagProperty.stringValue = definition.Tag;
-			useRangeConstraintProperty.boolValue = definition.UseRangeConstraint;
-			minimumConstraintProperty.floatValue = definition.MinimumConstraint;
-			maximumConstraintProperty.floatValue = definition.MaximumConstraint;
-			typeConstraintProperty.stringValue = definition.TypeConstraint;
-		}
-
 		public static VariableDefinition Draw(Rect position, VariableDefinition definition, VariableInitializerType initializer, TagList tags)
 		{
-			var type = definition.Type;
 			var tag = definition.Tag;
-			var constraint = new Constraint(definition);
+			var constraint = definition.Constraint;
 
 			var hasInitializer = HasInitializer(definition.Type, initializer);
-			var hasConstraint = HasConstraint(definition.Type);
+			var hasConstraint = HasConstraint(definition.Type, definition.Constraint, definition.IsConstraintLocked);
 			var hasTag = HasTags(tags);
 
 			var typeRect = RectHelper.TakeLine(ref position);
-			DrawType(typeRect, definition);
+			var labelRect = RectHelper.TakeWidth(ref typeRect, _labelWidth);
+			EditorGUI.LabelField(labelRect, definition.Name);
+
+			var type = DrawType(typeRect, definition.IsTypeLocked, definition.Type);
+
+			if (hasConstraint || !definition.IsConstraintLocked)
+			{
+				var constraintHeight = GetConstraintHeight(definition.Type, definition.Constraint);
+				var constraintRect = RectHelper.TakeHeight(ref position, constraintHeight);
+
+				DrawConstraint(constraintRect, type, definition.IsConstraintLocked, ref constraint, true);
+			}
 
 			if (hasInitializer && definition.Initializer != null)
 			{
@@ -122,29 +88,35 @@ namespace PiRhoSoft.CompositionEditor
 				}
 			}
 
-			if (hasConstraint)
-			{
-				var constraintRect = RectHelper.TakeLine(ref position);
-				constraint = DrawConstraint(constraintRect, type, constraint);
-			}
-
 			if (hasTag)
 			{
 				var tagRect = RectHelper.TakeLine(ref position);
 				tag = DrawTag(tagRect, tag, tags);
 			}
 
-			return VariableDefinition.Create(definition.Name, type, constraint.UseRangeConstraint, constraint.MinimumConstraint, constraint.MaximumConstraint, constraint.TypeConstraint, tag, definition.Initializer);
+			return VariableDefinition.Create(definition.Name, type, constraint, tag, definition.Initializer, definition.IsTypeLocked, definition.IsConstraintLocked);
+		}
+
+		private static bool HasConstraint(VariableType type, VariableConstraint constraint, bool isConstraintLocked)
+		{
+			if (!isConstraintLocked)
+			{
+				return type == VariableType.Int
+					|| type == VariableType.Float
+					|| type == VariableType.String
+					|| type == VariableType.Enum
+					|| type == VariableType.Object
+					|| type == VariableType.List;
+			}
+			else
+			{
+				return constraint != null;
+			}
 		}
 
 		private static bool HasInitializer(VariableType type, VariableInitializerType initializer)
 		{
 			return initializer != VariableInitializerType.None && (type == VariableType.Bool || type == VariableType.Int || type == VariableType.Float || type == VariableType.String);
-		}
-
-		private static bool HasConstraint(VariableType type)
-		{
-			return type == VariableType.Int || type == VariableType.Float || type == VariableType.String || type == VariableType.Object;
 		}
 
 		private static bool HasTags(TagList tags)
@@ -159,10 +131,10 @@ namespace PiRhoSoft.CompositionEditor
 			EditorGUI.LabelField(labelRect, label);
 		}
 
-		private static void DrawType(Rect position, VariableDefinition definition)
+		private static VariableType DrawType(Rect position, bool isTypeLocked, VariableType type)
 		{
-			var name = string.Format("{0} ({1})", definition.Name, definition.Type);
-			EditorGUI.LabelField(position, name);
+			using (new EditorGUI.DisabledScope(isTypeLocked))
+				return (VariableType)EditorGUI.EnumPopup(position, type);
 		}
 
 		private static void DrawInitializer(Rect rect, ref VariableDefinition definition)
@@ -194,78 +166,141 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private struct Constraint
+		private static float GetConstraintHeight(VariableType type, VariableConstraint constraint)
 		{
-			public bool UseRangeConstraint;
-			public float MinimumConstraint;
-			public float MaximumConstraint;
-			public string TypeConstraint;
+			var height = RectHelper.LineHeight;
 
-			public Constraint(VariableDefinition definition)
+			if (type == VariableType.List && constraint is ListVariableConstraint listConstraint)
 			{
-				UseRangeConstraint = definition.UseRangeConstraint;
-				MinimumConstraint = definition.MinimumConstraint;
-				MaximumConstraint = definition.MaximumConstraint;
-				TypeConstraint = definition.TypeConstraint;
+				if (HasConstraint(listConstraint.ItemType, listConstraint.ItemConstraint, false))
+					height += GetConstraintHeight(listConstraint.ItemType, listConstraint.ItemConstraint);
 			}
+
+			return height;
 		}
 
-		private static Constraint DrawConstraint(Rect rect, VariableType type, Constraint constraint)
+		private static void DrawConstraint(Rect rect, VariableType type, bool isConstraintLocked, ref VariableConstraint constraint, bool top)
 		{
-			switch (type)
+			using (new EditorGUI.DisabledScope(isConstraintLocked))
 			{
-				case VariableType.Int:
-				case VariableType.Float:
+				switch (type)
 				{
-					DrawIndentedLabel(ref rect, _numberConstraintLabel);
-
-					var fromLabel = _minimumConstraintLabel;
-					var toLabel = _maximumConstraintLabel;
-
-					var fromSize = EditorStyles.label.CalcSize(fromLabel);
-					var toSize = EditorStyles.label.CalcSize(toLabel);
-					var spacing = 5.0f;
-
-					var inputWidth = (rect.width - rect.height - fromSize.x - toSize.x - spacing * 4) * 0.5f;
-
-					var checkboxRect = new Rect(rect.x, rect.y, rect.height, rect.height);
-					var fromRect = new Rect(checkboxRect.xMax + spacing, rect.y, fromSize.x, rect.height);
-					var minimumRect = new Rect(fromRect.xMax + spacing, rect.y, inputWidth, rect.height);
-					var toRect = new Rect(minimumRect.xMax + spacing, rect.y, toSize.x, rect.height);
-					var maximumRect = new Rect(toRect.xMax + spacing, rect.y, inputWidth, rect.height);
-
-					constraint.UseRangeConstraint = GUI.Toggle(checkboxRect, constraint.UseRangeConstraint, _useRangeConstraintLabel);
-
-					if (constraint.UseRangeConstraint)
+					case VariableType.Int:
+					case VariableType.Float:
 					{
-						GUI.Label(fromRect, fromLabel);
-						constraint.MinimumConstraint = EditorGUI.FloatField(minimumRect, constraint.MinimumConstraint);
-						GUI.Label(toRect, toLabel);
-						constraint.MaximumConstraint = EditorGUI.FloatField(maximumRect, constraint.MaximumConstraint);
+						if (top)
+							DrawIndentedLabel(ref rect, _numberConstraintLabel);
+
+						var fromLabel = _minimumConstraintLabel;
+						var toLabel = _maximumConstraintLabel;
+
+						var fromSize = EditorStyles.label.CalcSize(fromLabel);
+						var toSize = EditorStyles.label.CalcSize(toLabel);
+						var spacing = 5.0f;
+
+						var inputWidth = (rect.width - rect.height - fromSize.x - toSize.x - spacing * 4) * 0.5f;
+
+						var checkboxRect = new Rect(rect.x, rect.y, rect.height, rect.height);
+						var fromRect = new Rect(checkboxRect.xMax + spacing, rect.y, fromSize.x, rect.height);
+						var minimumRect = new Rect(fromRect.xMax + spacing, rect.y, inputWidth, rect.height);
+						var toRect = new Rect(minimumRect.xMax + spacing, rect.y, toSize.x, rect.height);
+						var maximumRect = new Rect(toRect.xMax + spacing, rect.y, inputWidth, rect.height);
+
+						var useRangeConstraint = GUI.Toggle(checkboxRect, constraint != null, _useRangeConstraintLabel);
+
+						if (!useRangeConstraint)
+						{
+							constraint = null;
+						}
+						else if (type == VariableType.Int)
+						{
+							if (!(constraint is IntVariableConstraint intConstraint))
+							{
+								intConstraint = new IntVariableConstraint { Minimum = 0, Maximum = 100 };
+								constraint = intConstraint;
+							}
+
+							GUI.Label(fromRect, fromLabel);
+							intConstraint.Minimum = EditorGUI.IntField(minimumRect, intConstraint.Minimum);
+							GUI.Label(toRect, toLabel);
+							intConstraint.Maximum = EditorGUI.IntField(maximumRect, intConstraint.Maximum);
+						}
+						else if (type == VariableType.Float)
+						{
+							if (!(constraint is FloatVariableConstraint floatConstraint))
+							{
+								floatConstraint = new FloatVariableConstraint { Minimum = 0, Maximum = 100 };
+								constraint = floatConstraint;
+							}
+
+							GUI.Label(fromRect, fromLabel);
+							floatConstraint.Minimum = EditorGUI.FloatField(minimumRect, floatConstraint.Minimum);
+							GUI.Label(toRect, toLabel);
+							floatConstraint.Maximum = EditorGUI.FloatField(maximumRect, floatConstraint.Maximum);
+						}
+
+						break;
 					}
+					case VariableType.String:
+					{
+						if (top)
+							DrawIndentedLabel(ref rect, _stringConstraintLabel);
 
-					break;
-				}
-				case VariableType.String:
-				{
-					DrawIndentedLabel(ref rect, _stringConstraintLabel);
-					constraint.TypeConstraint = EditorGUI.TextField(rect, constraint.TypeConstraint);
-					break;
-				}
-				case VariableType.Object:
-				{
-					DrawIndentedLabel(ref rect, _objectConstraintLabel);
+						//constraint.TypeConstraint = EditorGUI.TextField(rect, constraint.TypeConstraint);
+						break;
+					}
+					case VariableType.Object:
+					{
+						if (top)
+							DrawIndentedLabel(ref rect, _objectConstraintLabel);
 
-					var typeConstraint = !string.IsNullOrEmpty(constraint.TypeConstraint) ? Type.GetType(constraint.TypeConstraint) : null;
-					var selectedConstraint = TypePopupDrawer.Draw<Object>(rect, GUIContent.none, typeConstraint, false);
+						if (!(constraint is ObjectVariableConstraint objectConstraint))
+						{
+							objectConstraint = new ObjectVariableConstraint { Type = typeof(Object) };
+							constraint = objectConstraint;
+						}
 
-					constraint.TypeConstraint = selectedConstraint != null ? selectedConstraint.AssemblyQualifiedName : string.Empty;
+						objectConstraint.Type = TypePopupDrawer.Draw<Object>(rect, GUIContent.none, objectConstraint.Type, false);
 
-					break;
+						break;
+					}
+					case VariableType.Enum:
+					{
+						if (top)
+							DrawIndentedLabel(ref rect, _enumConstraintLabel);
+
+						if (!(constraint is EnumVariableConstraint enumConstraint))
+						{
+							enumConstraint = new EnumVariableConstraint { Type = null };
+							constraint = enumConstraint;
+						}
+
+						enumConstraint.Type = TypePopupDrawer.Draw<Enum>(rect, GUIContent.none, enumConstraint.Type, false);
+
+						break;
+					}
+					case VariableType.List:
+					{
+						if (top)
+							DrawIndentedLabel(ref rect, _listConstraintLabel);
+
+						if (!(constraint is ListVariableConstraint listConstraint))
+						{
+							listConstraint = new ListVariableConstraint { ItemType = VariableType.Empty, ItemConstraint = null };
+							constraint = listConstraint;
+						}
+
+						var typeRect = RectHelper.TakeLine(ref rect);
+
+						listConstraint.ItemType = (VariableType)EditorGUI.EnumPopup(typeRect, listConstraint.ItemType);
+
+						if (HasConstraint(listConstraint.ItemType, listConstraint.ItemConstraint, false))
+							DrawConstraint(rect, listConstraint.ItemType, false, ref listConstraint.ItemConstraint, false);
+
+						break;
+					}
 				}
 			}
-
-			return constraint;
 		}
 
 		private static string DrawTag(Rect rect, string tag, TagList tags)
@@ -279,12 +314,38 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			return GetHeight(property, VariableInitializerType.Expression, null);
+			var nameProperty = property.FindPropertyRelative("_name");
+			var typeProperty = property.FindPropertyRelative("_type");
+			var constraintProperty = property.FindPropertyRelative("_constraint");
+			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
+			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
+
+			var name = nameProperty.stringValue;
+			var type = (VariableType)typeProperty.enumValueIndex;
+			var constraint = VariableHandler.Get((VariableType)typeProperty.enumValueIndex).CreateConstraint(constraintProperty.stringValue);
+			var definition = VariableDefinition.Create(name, type, constraint, null, null, isTypeLockedProperty.boolValue, isConstraintLockedProperty.boolValue);
+
+			return GetHeight(definition, VariableInitializerType.None, null);
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
-			Draw(position, property, VariableInitializerType.Expression, null);
+			var nameProperty = property.FindPropertyRelative("_name");
+			var typeProperty = property.FindPropertyRelative("_type");
+			var constraintProperty = property.FindPropertyRelative("_constraint");
+			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
+			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
+
+			var name = nameProperty.stringValue;
+			var type = (VariableType)typeProperty.enumValueIndex;
+			var constraint = VariableHandler.Get((VariableType)typeProperty.enumValueIndex).CreateConstraint(constraintProperty.stringValue);
+			var definition = VariableDefinition.Create(name, type, constraint, null, null, isTypeLockedProperty.boolValue, isConstraintLockedProperty.boolValue);
+
+			definition = Draw(position, definition, VariableInitializerType.None, null);
+
+			nameProperty.stringValue = definition.Name;
+			typeProperty.enumValueIndex = (int)definition.Type;
+			constraintProperty.stringValue = definition.Constraint != null ? definition.Constraint.Write() : string.Empty;
 		}
 	}
 }

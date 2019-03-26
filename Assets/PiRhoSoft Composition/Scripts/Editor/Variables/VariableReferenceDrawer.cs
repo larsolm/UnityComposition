@@ -10,6 +10,11 @@ namespace PiRhoSoft.CompositionEditor
 	{
 		private VariableReference _variableReference;
 
+		public static float GetHeight()
+		{
+			return EditorGUIUtility.singleLineHeight;
+		}
+
 		public static void Draw(GUIContent label, VariableReference reference)
 		{
 			var rect = EditorGUILayout.GetControlRect(false);

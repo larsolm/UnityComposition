@@ -38,6 +38,25 @@ namespace PiRhoSoft.CompositionEngine
 			return _handlers[(int)type];
 		}
 
+		public VariableConstraint CreateConstraint(string data)
+		{
+			if (!string.IsNullOrEmpty(data))
+			{
+				var constraint = CreateConstraint();
+
+				if (constraint != null)
+				{
+					if (constraint.Read(data))
+						return constraint;
+				}
+			}
+
+			return null;
+		}
+
+		protected virtual VariableConstraint CreateConstraint() { return null; }
+
+		public abstract VariableValue CreateDefault(VariableConstraint constraint);
 		public abstract void Write(VariableValue value, BinaryWriter writer, List<Object> objects);
 		public abstract void Read(ref VariableValue value, BinaryReader reader, List<Object> objects);
 		public abstract VariableValue Lookup(VariableValue owner, string lookup);

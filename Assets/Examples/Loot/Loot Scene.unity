@@ -228,38 +228,22 @@ MonoBehaviour:
   OnInteract:
     _instruction: {fileID: 11400000, guid: 5956446e31eb3044ab00042234eb6020, type: 2}
     _inputs:
-    - Type: 1
-      Definition:
-        _name: quality
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: quality
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
-      _valueData: AwAAAAAAAD8=
-      _valueObjects: []
-    - Type: 1
-      Definition:
-        _name: ItemSet
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+      _valueData: EQAAAAAAAAA=
+      _valueObjects:
+      - {fileID: 11400000, guid: fa0442ad09dd84943b2d317722d4e3a6, type: 2}
+    - Name: ItemSet
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
-      _valueData: AAAAAA==
-      _valueObjects: []
+      _valueData: EwAAAAEAAAARAAAAAAAAAA==
+      _valueObjects:
+      - {fileID: 11400000, guid: 076c50fe7357f0444ba3530150997a12, type: 2}
     _outputs: []
   OnEnter:
     _instruction: {fileID: 0}

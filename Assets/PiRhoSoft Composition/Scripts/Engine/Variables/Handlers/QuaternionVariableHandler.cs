@@ -6,6 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class QuaternionVariableHandler : VariableHandler
 	{
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			return VariableValue.Create(Quaternion.identity);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Quaternion.x);

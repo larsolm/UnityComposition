@@ -6,6 +6,16 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class StringVariableHandler : VariableHandler
 	{
+		protected override VariableConstraint CreateConstraint() => new StringVariableConstraint();
+
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			if (constraint is StringVariableConstraint stringConstraint)
+				return VariableValue.Create(stringConstraint.Values.Length > 0 ? stringConstraint.Values[0] : string.Empty);
+			else
+				return VariableValue.Create(string.Empty);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.String);

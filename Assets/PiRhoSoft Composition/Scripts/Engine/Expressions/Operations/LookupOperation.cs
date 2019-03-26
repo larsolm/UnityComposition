@@ -18,18 +18,18 @@ namespace PiRhoSoft.CompositionEngine
 			builder.Append(Reference.ToString());
 		}
 
-		public override void GetInputs(List<VariableDefinition> inputs, string source)
+		public override void GetInputs(IList<VariableDefinition> inputs, string source)
 		{
 			GetVariables(inputs, source);
 			Parameter?.GetInputs(inputs, source);
 		}
 
-		public override void GetOutputs(List<VariableDefinition> outputs, string source)
+		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
 		{
 			GetVariables(outputs, source);
 		}
 
-		private void GetVariables(List<VariableDefinition> inputs, string source)
+		private void GetVariables(IList<VariableDefinition> inputs, string source)
 		{
 			if (source == null)
 			{

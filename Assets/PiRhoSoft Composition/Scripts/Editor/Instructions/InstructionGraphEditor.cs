@@ -27,6 +27,9 @@ namespace PiRhoSoft.CompositionEditor
 			_graph = target as InstructionGraph;
 			_nodesProperty = serializedObject.FindProperty("_nodes");
 
+			_graph.RefreshInputs();
+			_graph.RefreshOutputs();
+
 			SyncNodes();
 			SetupNodes(_nodesProperty);
 		}

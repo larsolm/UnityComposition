@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 		public string Text = string.Empty;
 		public bool HasText => !string.IsNullOrEmpty(Text);
 
-		public void GetInputs(List<VariableDefinition> inputs)
+		public void GetInputs(IList<VariableDefinition> inputs)
 		{
 			var start = 0;
 

@@ -40,7 +40,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override void GetInputs(List<VariableDefinition> inputs)
+		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			Parameter.GetInputs(inputs);
 

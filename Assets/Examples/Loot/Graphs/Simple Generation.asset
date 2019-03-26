@@ -12,6 +12,28 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: Simple Generation
   m_EditorClassIdentifier: 
+  Inputs:
+    _items:
+    - _name: quality
+      _type: 17
+      _constraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _name: ItemSet
+      _type: 19
+      _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
+        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+  Outputs:
+    _items: []
   _nodes:
     _items:
     - {fileID: 114777378443045636}

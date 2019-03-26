@@ -6,6 +6,16 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class FloatVariableHandler : VariableHandler
 	{
+		protected override VariableConstraint CreateConstraint() => new FloatVariableConstraint();
+
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			if (constraint is FloatVariableConstraint floatConstraint)
+				return VariableValue.Create(floatConstraint.Minimum);
+			else
+				return VariableValue.Create(0.0f);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Float);

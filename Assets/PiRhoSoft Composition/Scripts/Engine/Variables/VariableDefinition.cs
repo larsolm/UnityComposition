@@ -1,172 +1,160 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class VariableConstraintAttribute : Attribute
-	{
-		private VariableDefinition _definition;
-
-		public VariableConstraintAttribute(VariableType type)
-		{
-			_definition = VariableDefinition.Create(string.Empty, type);
-		}
-
-		public VariableConstraintAttribute(int minimum, int maximum)
-		{
-			_definition = VariableDefinition.Create(string.Empty, minimum, maximum);
-		}
-
-		public VariableConstraintAttribute(float minimum, float maximum)
-		{
-			_definition = VariableDefinition.Create(string.Empty, minimum, maximum);
-		}
-
-		public VariableConstraintAttribute(string values)
-		{
-			_definition = VariableDefinition.Create(string.Empty, values);
-		}
-
-		public VariableConstraintAttribute(Type type)
-		{
-			_definition = VariableDefinition.Create(string.Empty, type);
-		}
-
-		public VariableDefinition GetDefinition(string name)
-		{
-			return VariableDefinition.Create(name, _definition.Type, _definition.UseRangeConstraint, _definition.MinimumConstraint, _definition.MaximumConstraint, _definition.TypeConstraint);
-		}
-	}
+	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition> { }
 
 	[Serializable]
-	public struct VariableDefinition
+	public struct VariableDefinition : ISerializationCallbackReceiver
 	{
 		private const string _invalidInitializerError = "(CVDII) Failed to initialize variable '{0}': the definition specifies type {1} but the initializer returned type {2}";
 
-		public const string NotSaved = "Always (not saved)";
-		public const string Saved = "Always (saved)";
-
 		[SerializeField] private string _name;
 		[SerializeField] private VariableType _type;
-		[SerializeField] private string _tag;
-		[SerializeField] private Expression _initializer;
+		[SerializeField] private string _constraint;
+		[SerializeField] public string _tag;
+		[SerializeField] public Expression _initializer;
 
-		// These constraints are not checked at runtime - they are only for providing information to the editor so it
-		// can show friendlier controls.
-
-		[SerializeField] private bool _useRangeConstraint;
-		[SerializeField] private float _minimumConstraint;
-		[SerializeField] private float _maximumConstraint;
-		[SerializeField] private string _typeConstraint;
+		[SerializeField] private bool _isTypeLocked;
+		[SerializeField] private bool _isConstraintLocked;
 
 		public string Name => _name;
 		public VariableType Type => _type;
+		public VariableConstraint Constraint { get; private set; }
 		public string Tag => _tag;
 		public Expression Initializer => _initializer;
 
-		public bool UseRangeConstraint => _useRangeConstraint;
-		public float MinimumConstraint => _minimumConstraint;
-		public float MaximumConstraint => _maximumConstraint;
-		public string TypeConstraint => _typeConstraint;
+		public bool IsTypeLocked => _isTypeLocked;
+		public bool IsConstraintLocked => _isConstraintLocked;
 
-		public static VariableDefinition Create(string name, VariableType type, string tag = "", Expression initializer = null)
+		public VariableValue Generate(IVariableStore variables)
+		{
+			if (_initializer != null && _initializer.IsValid && variables != null)
+			{
+				// if variables isn't an object there isn't a context that makes sense anyway, so null is fine
+				var value = _initializer.Execute(variables as Object, variables);
+
+				if (value.Type == Type)
+					return value;
+
+				Debug.LogErrorFormat(_invalidInitializerError, Name, Type, value.Type);
+			}
+
+			return VariableHandler.Get(Type).CreateDefault(Constraint);
+		}
+
+		public bool IsValid(VariableValue value)
+		{
+			return _type == value.Type && (Constraint == null || Constraint.IsValid(value));
+		}
+
+		#region Creation
+
+		public static VariableDefinition Create(string name, VariableType type)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = type,
-				_tag = tag,
-				_initializer = initializer
+				_isTypeLocked = type != VariableType.Empty,
+				_isConstraintLocked = false
 			};
 		}
 
-		public static VariableDefinition Create(string name, int minimum, int maximum, string tag = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, int minimum, int maximum)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.Int,
-				_tag = tag,
-				_initializer = initializer,
-				_useRangeConstraint = true,
-				_minimumConstraint = minimum,
-				_maximumConstraint = maximum
+				_isTypeLocked = true,
+				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create(string name, float minimum, float maximum, string tag = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, float minimum, float maximum)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.Float,
-				_tag = tag,
-				_initializer = initializer,
-				_useRangeConstraint = true,
-				_minimumConstraint = minimum,
-				_maximumConstraint = maximum
+				_isTypeLocked = true,
+				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create(string name, string values, string tag = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, string[] values)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableType.String,
-				_tag = tag,
-				_initializer = initializer,
-				_typeConstraint = values
+				_isTypeLocked = true,
+				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create<T>(string name, string tag = "", Expression initializer = null) where T : Object
+		public static VariableDefinition Create<T>(string name) where T : Object
 		{
-			return Create(name, typeof(T), tag, initializer);
+			return Create(name, typeof(T));
 		}
 
-		public static VariableDefinition Create(string name, Type type, string tag = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, Type type)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = VariableValue.GetType(type),
-				_tag = tag,
-				_initializer = initializer,
-				_typeConstraint = type.AssemblyQualifiedName
+				_isTypeLocked = true,
+				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create(string name, VariableType type, bool constrainRange, float minimum, float maximum, string typeConstraint, string tag = "", Expression initializer = null)
+		public static VariableDefinition Create(string name, VariableType type, VariableConstraint constraint)
 		{
 			return new VariableDefinition
 			{
 				_name = name,
 				_type = type,
-				_tag = tag,
-				_initializer = initializer,
-				_useRangeConstraint = constrainRange,
-				_minimumConstraint = minimum,
-				_maximumConstraint = maximum,
-				_typeConstraint = typeConstraint
+				_isTypeLocked = type != VariableType.Empty,
+				_isConstraintLocked = constraint != null,
+				Constraint = constraint
 			};
 		}
 
-		public Variable Generate(IVariableStore variables)
+		public static VariableDefinition Create(string name, VariableType type, VariableConstraint constraint, string tag, Expression initializer, bool isTypeLocked, bool isConstraintLocked)
 		{
-			if (Initializer != null && Initializer.IsValid && variables != null)
+			return new VariableDefinition
 			{
-				// if variables isn't an object there isn't a context that makes sense anyway, so null is fine
-				var value = Initializer.Execute(variables as Object, variables);
-
-				if (value.Type == Type)
-					return Variable.Create(Name, value);
-
-				Debug.LogErrorFormat(_invalidInitializerError, Name, Type, value.Type);
-			}
-
-			return Variable.Create(Name, VariableValue.Create(Type));
+				_name = name,
+				_type = type,
+				_isTypeLocked = isTypeLocked,
+				_isConstraintLocked = isConstraintLocked,
+				Constraint = constraint,
+				_tag = tag,
+				_initializer = initializer
+			};
 		}
+
+		#endregion
+
+		#region ISerializationCallbackReceiver
+
+		public void OnAfterDeserialize()
+		{
+			Constraint = VariableHandler.Get(Type).CreateConstraint(_constraint);
+			_constraint = null;
+		}
+
+		public void OnBeforeSerialize()
+		{
+			if (Constraint != null)
+				_constraint = Constraint.Write();
+		}
+
+		#endregion
 	}
 }

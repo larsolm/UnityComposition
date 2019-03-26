@@ -6,6 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class BoundsVariableHandler : VariableHandler
 	{
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			return VariableValue.Create(new Bounds());
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Bounds.center.x);

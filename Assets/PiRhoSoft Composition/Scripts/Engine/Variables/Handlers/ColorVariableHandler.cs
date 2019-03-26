@@ -6,6 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class ColorVariableHandler : VariableHandler
 	{
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			return VariableValue.Create(Color.black);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Color.r);

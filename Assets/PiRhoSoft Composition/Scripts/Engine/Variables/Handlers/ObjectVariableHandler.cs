@@ -11,6 +11,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		private bool IsClassName(string lookup) => char.IsLetter(lookup[0]) || lookup[0] == '_';
 
+		protected override VariableConstraint CreateConstraint() => new ObjectVariableConstraint();
+
+		public override VariableValue CreateDefault(VariableConstraint constraint)
+		{
+			return VariableValue.Create((Object)null);
+		}
+
 		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(objects.Count);

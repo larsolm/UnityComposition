@@ -1,7 +1,7 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
+using System;
 using System.Collections;
-using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
@@ -13,20 +13,10 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static IconButton _refreshButton = new IconButton(IconButton.Refresh, "Refresh the list of inputs and outputs");
 		private readonly static Label _inputsLabel = new Label(typeof(InstructionCaller), "_inputs");
 		private readonly static Label _outputsLabel = new Label(typeof(InstructionCaller), "_outputs");
-		private readonly static GUIContent[] _inputTypeOptions;
 
 		private InstructionCaller _caller;
 		private ObjectListControl _inputs = new ObjectListControl();
 		private ObjectListControl _outputs = new ObjectListControl();
-
-		static InstructionCallerControl()
-		{
-			_inputTypeOptions = typeof(VariableType).GetEnumNames()
-				.Select(name => new GUIContent("Value/" + name))
-				.Append(new GUIContent(""))
-				.Append(new GUIContent("Reference"))
-				.ToArray();
-		}
 
 		public override void Setup(InstructionCaller target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
@@ -34,8 +24,15 @@ namespace PiRhoSoft.CompositionEditor
 
 			Refresh();
 
-			_inputs.MakeDrawable(DrawInput).MakeHeaderButton(_refreshButton, (rect) => Refresh(), Color.black);
-			_outputs.MakeDrawable(DrawOutput).MakeHeaderButton(_refreshButton, (rect) => Refresh(), Color.black);
+			_inputs
+				.MakeDrawable(DrawInput)
+				.MakeCustomHeight(GetInputHeight)
+				.MakeHeaderButton(_refreshButton, (rect) => Refresh(), Color.black);
+
+			_outputs
+				.MakeDrawable(DrawOutput)
+				.MakeCustomHeight(GetOutputHeight)
+				.MakeHeaderButton(_refreshButton, (rect) => Refresh(), Color.black);
 		}
 
 		private void Refresh()
@@ -55,49 +52,54 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
+		private float GetInputHeight(int index)
+		{
+			var input = _caller.Inputs[index];
+			var definition = _caller.GetInputDefinition(input);
+
+			switch (input.Type)
+			{
+				case InstructionInputType.Reference: return VariableReferenceControl.GetHeight();
+				case InstructionInputType.Value: return VariableValueDrawer.GetHeight(input.Value, definition);
+				default: return EditorGUIUtility.singleLineHeight;
+			}
+		}
+
 		private void DrawInput(Rect rect, IList list, int index)
 		{
 			var labelWidth = rect.width * 0.25f;
 			var typeWidth = rect.width * 0.25f;
 
 			var input = _caller.Inputs[index];
+			var definition = _caller.GetInputDefinition(input);
 			var labelRect = RectHelper.TakeWidth(ref rect, labelWidth);
 			var typeRect = RectHelper.TakeWidth(ref rect, typeWidth);
 			RectHelper.TakeHorizontalSpace(ref rect);
 
-			EditorGUI.LabelField(labelRect, input.Definition.Name);
+			EditorGUI.LabelField(labelRect, definition.Name);
 
-			if (input.Definition.Type == VariableType.Empty)
-			{
-				var typeIndex = input.Type == InstructionInputType.Reference ? 6 : GetIndexForType(input.Value.Type);
-				var newIndex = EditorGUI.Popup(typeRect, typeIndex, _inputTypeOptions);
-
-				if (newIndex != typeIndex)
-				{
-					input.Type = newIndex == 6 ? InstructionInputType.Reference : InstructionInputType.Value;
-					input.Value = VariableValue.Create(GetTypeFromIndex(newIndex));
-				}
-			}
-			else
+			if (definition.Type != VariableType.Empty)
 			{
 				input.Type = (InstructionInputType)EditorGUI.EnumPopup(typeRect, input.Type);
-			}
 
-			switch (input.Type)
+				switch (input.Type)
+				{
+					case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
+					case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition); break;
+				}
+			}
+		}
+
+		private float GetOutputHeight(int index)
+		{
+			var output = _caller.Outputs[index];
+			var definition = _caller.GetOutputDefinition(output);
+
+			switch (output.Type)
 			{
-				case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
-				case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, input.Definition); break;
+				case InstructionOutputType.Reference: return VariableReferenceControl.GetHeight();
+				default: return EditorGUIUtility.singleLineHeight;
 			}
-		}
-
-		private int GetIndexForType(VariableType type)
-		{
-			return (int)type;
-		}
-
-		private VariableType GetTypeFromIndex(int index)
-		{
-			return (VariableType)index;
 		}
 
 		private void DrawOutput(Rect rect, IList list, int index)
@@ -110,7 +112,7 @@ namespace PiRhoSoft.CompositionEditor
 			var typeRect = RectHelper.TakeWidth(ref rect, typeWidth);
 			RectHelper.TakeHorizontalSpace(ref rect);
 
-			EditorGUI.LabelField(labelRect, output.Definition.Name);
+			EditorGUI.LabelField(labelRect, output.Name);
 			output.Type = (InstructionOutputType)EditorGUI.EnumPopup(typeRect, output.Type);
 
 			switch (output.Type)

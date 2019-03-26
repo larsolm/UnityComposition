@@ -34,7 +34,7 @@ namespace PiRhoSoft.CompositionEngine
 			return Compile();
 		}
 
-		public void GetInputs(List<VariableDefinition> inputs, string source)
+		public void GetInputs(IList<VariableDefinition> inputs, string source)
 		{
 			if (_operations != null)
 			{
@@ -43,7 +43,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public void GetOutputs(List<VariableDefinition> outputs, string source)
+		public void GetOutputs(IList<VariableDefinition> outputs, string source)
 		{
 			if (_operations != null)
 			{
