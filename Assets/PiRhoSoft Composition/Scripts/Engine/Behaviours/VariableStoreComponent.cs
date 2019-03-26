@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "variable-store-component")]
-	[AddComponentMenu("PiRho Soft/Composition/Global Variable Link")]
+	[AddComponentMenu("PiRho Soft/Composition/Variable Store Component")]
 	public class VariableStoreComponent : MonoBehaviour, IVariableStore
 	{
 		[ChangeTrigger(nameof(SetupSchema))] [AssetPopup] public VariableSchema Schema;

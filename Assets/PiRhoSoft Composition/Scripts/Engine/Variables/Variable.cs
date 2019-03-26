@@ -91,7 +91,11 @@ namespace PiRhoSoft.CompositionEngine
 					using (var reader = new BinaryReader(stream))
 					{
 						Name = reader.ReadString();
-						Value.Read(reader, objects);
+
+						// Make a temporary copy because 'ref this' doesn't work because Value copies the backing field
+						var value = VariableValue.Empty;
+						value.Read(reader, objects);
+						Value = value;
 					}
 				}
 

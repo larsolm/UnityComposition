@@ -1,0 +1,209 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: Turn Loop
+  m_EditorClassIdentifier: 
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114506005044156910}
+    - {fileID: 114220515761573856}
+    - {fileID: 114584171325308614}
+    - {fileID: 114667983929491124}
+    - {fileID: 114545528968405250}
+    - {fileID: 114495194182785554}
+    - {fileID: 114850106445648138}
+    - {fileID: 114202153145853136}
+  StartPosition: {x: 0, y: 0}
+  Enter: {fileID: 0}
+  Process: {fileID: 114506005044156910}
+  Exit: {fileID: 0}
+--- !u!114 &114202153145853136
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Take Turn
+  m_EditorClassIdentifier: 
+  Name: Take Turn
+  GraphPosition: {x: 1049.6, y: 89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114667983929491124}
+  Instruction:
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
+  Root:
+    _variable:
+    - root
+    _lookups:
+    - 
+  WaitForCompletion: 1
+--- !u!114 &114220515761573856
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Turn Order
+  m_EditorClassIdentifier: 
+  Name: Turn Order
+  GraphPosition: {x: 652.8, y: -0}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114584171325308614}
+    - {fileID: 114495194182785554}
+    - {fileID: 114202153145853136}
+    - {fileID: 114850106445648138}
+--- !u!114 &114495194182785554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Take Turn
+  m_EditorClassIdentifier: 
+  Name: Take Turn
+  GraphPosition: {x: 1062.4, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114667983929491124}
+  Instruction:
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
+  Root:
+    _variable:
+    - root
+    _lookups:
+    - 
+  WaitForCompletion: 1
+--- !u!114 &114506005044156910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
+  m_Name: Loop Until Winner
+  m_EditorClassIdentifier: 
+  Name: Loop Until Winner
+  GraphPosition: {x: 320, y: 25.6}
+  IsBreakpoint: 0
+  Condition:
+    _statement: local.Winner == ""
+  Loop: {fileID: 114220515761573856}
+--- !u!114 &114545528968405250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbf36d44c8307646ae6b4c67ca8b89d, type: 3}
+  m_Name: Break
+  m_EditorClassIdentifier: 
+  Name: Break
+  GraphPosition: {x: 1664, y: 140.8}
+  IsBreakpoint: 0
+--- !u!114 &114584171325308614
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Take Turn
+  m_EditorClassIdentifier: 
+  Name: Take Turn
+  GraphPosition: {x: 1062.4, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114667983929491124}
+  Instruction:
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
+  Root:
+    _variable:
+    - root
+    _lookups:
+    - 
+  WaitForCompletion: 1
+--- !u!114 &114667983929491124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Conditional
+  m_EditorClassIdentifier: 
+  Name: Conditional
+  GraphPosition: {x: 1433.6, y: 12.8}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114545528968405250}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: local.Winner != null;
+--- !u!114 &114850106445648138
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Take Turn
+  m_EditorClassIdentifier: 
+  Name: Take Turn
+  GraphPosition: {x: 1062.4, y: 166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 114667983929491124}
+  Instruction:
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
+  Root:
+    _variable:
+    - root
+    _lookups:
+    - 
+  WaitForCompletion: 1

@@ -7,7 +7,6 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
-	[AddComponentMenu("PiRho Soft/Composition/Composition Manager")]
 	public class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
 		public static string CommandFolder = "Commands";
