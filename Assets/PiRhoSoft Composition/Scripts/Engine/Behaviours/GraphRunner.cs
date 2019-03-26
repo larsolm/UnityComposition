@@ -6,12 +6,19 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Composition/Graph Runner")]
 	public class GraphRunner : MonoBehaviour
 	{
-		public InstructionCaller OnAwake = new InstructionCaller();
+		[Tooltip("The graph to run when this runner is triggered")]
+		public InstructionCaller Graph = new InstructionCaller();
 
-		void Start()
+		[Tooltip("The event to run")]
+		public string Event;
+
+		public void Run()
 		{
-			if (OnAwake.Instruction)
-				CompositionManager.Instance.RunInstruction(OnAwake, this);
+			if (Graph.Instruction is EventGraph graph)
+				graph.CurrentEvent = Event;
+
+			if (Graph.Instruction)
+				CompositionManager.Instance.RunInstruction(Graph, this);
 		}
 	}
 }

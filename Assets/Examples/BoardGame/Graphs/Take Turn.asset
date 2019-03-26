@@ -44,10 +44,28 @@ MonoBehaviour:
     - {fileID: 114693783200656058}
     - {fileID: 114914250831332318}
     - {fileID: 114887802204009984}
+    - {fileID: 114037837091086526}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114265074885488086}
   Process: {fileID: 114646063541107878}
   Exit: {fileID: 0}
+--- !u!114 &114037837091086526
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea1909964fbb3034da624df32dc0993c, type: 3}
+  m_Name: Input
+  m_EditorClassIdentifier: 
+  Name: Input
+  GraphPosition: {x: 2035.2001, y: 294.4}
+  IsBreakpoint: 0
+  Buttons:
+    _items: []
 --- !u!114 &114265074885488086
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -400,7 +418,7 @@ MonoBehaviour:
     - {fileID: 114767383999022486}
     - {fileID: 114887802204009984}
     - {fileID: 114914250831332318}
-    - {fileID: 0}
+    - {fileID: 114037837091086526}
 --- !u!114 &114754685201061410
 MonoBehaviour:
   m_ObjectHideFlags: 1

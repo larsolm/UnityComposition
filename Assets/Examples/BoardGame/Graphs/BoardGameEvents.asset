@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c840128e9c8e304f8d18597cc53904e, type: 3}
+  m_Name: BoardGameEvents
+  m_EditorClassIdentifier: 
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114664206832613844}
+  StartPosition: {x: 0, y: 0}
+  Events:
+    _keys:
+    - PieceClick
+    _values:
+    - {fileID: 114664206832613844}
+--- !u!114 &114664206832613844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  GraphPosition: {x: 320, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 
