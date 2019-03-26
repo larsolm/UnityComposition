@@ -272,6 +272,34 @@ Transform:
   m_Father: {fileID: 1518509052}
   m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &131298233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9045485462091330651, guid: edcdc76103e9ff34eb4adb86245a30af,
+    type: 3}
+  m_PrefabInstance: {fileID: 9045485462063056866}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &131298234 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 9045485462091330648, guid: edcdc76103e9ff34eb4adb86245a30af,
+    type: 3}
+  m_PrefabInstance: {fileID: 9045485462063056866}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &131298235
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 131298233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAwake:
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
 --- !u!1 &148439555
 GameObject:
   m_ObjectHideFlags: 0
@@ -521,7 +549,7 @@ GameObject:
   - component: {fileID: 175348906}
   - component: {fileID: 175348908}
   m_Layer: 0
-  m_Name: YellowStart
+  m_Name: Yellow
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -605,14 +633,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 46
+    _version: 79
     _variablesData:
-    - BE5hbWUAAAAA
-    - BlBpZWNlMQAAAAA=
-    - BlBpZWNlMgAAAAA=
-    - BlBpZWNlMwAAAAA=
-    - DVN0YXJ0aW5nU3BhY2UAAAAA
-    _variablesObjects: []
+    - BE5hbWUPAAAABlllbGxvdw==
+    - BlBpZWNlMREAAAAAAAAA
+    - BlBpZWNlMhEAAAABAAAA
+    - BlBpZWNlMxEAAAACAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAABgAAAA==
+    _variablesObjects:
+    - {fileID: 1742799527}
+    - {fileID: 352595676}
+    - {fileID: 1782260800}
 --- !u!1 &186492595
 GameObject:
   m_ObjectHideFlags: 0
@@ -625,7 +656,7 @@ GameObject:
   - component: {fileID: 186492596}
   - component: {fileID: 186492598}
   m_Layer: 0
-  m_Name: GreenPlayer2
+  m_Name: GreenPiece2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -705,11 +736,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 0}
+  Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 0
-    _variablesData: []
-    _variablesObjects: []
+    _version: 84
+    _variablesData:
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAEAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAPAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAMzPzQMP1SMAAAAAA
+    _variablesObjects:
+    - {fileID: 2137111255}
 --- !u!1 &203898554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1106,7 +1144,7 @@ GameObject:
   - component: {fileID: 352595674}
   - component: {fileID: 352595676}
   m_Layer: 0
-  m_Name: YellowPlayer2
+  m_Name: YellowPiece2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1188,14 +1226,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAEAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAGAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA6SZ5QI2X7kAAAAAA
+    _variablesObjects:
+    - {fileID: 175348908}
 --- !u!1 &380795402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1387,7 +1427,7 @@ GameObject:
   - component: {fileID: 397694034}
   - component: {fileID: 397694036}
   m_Layer: 0
-  m_Name: BluePlayer3
+  m_Name: BluePiece3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1469,14 +1509,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAIAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAzczkwDMzM0AAAAAA
+    _variablesObjects:
+    - {fileID: 1746312865}
 --- !u!1 &445214365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2383,7 +2425,7 @@ GameObject:
   - component: {fileID: 572341736}
   - component: {fileID: 572341738}
   m_Layer: 0
-  m_Name: GreenPlayer1
+  m_Name: GreenPiece1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2463,11 +2505,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 0}
+  Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 0
-    _variablesData: []
-    _variablesObjects: []
+    _version: 84
+    _variablesData:
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAAAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAPAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA7FHQQNejQMAAAAAA
+    _variablesObjects:
+    - {fileID: 2137111255}
 --- !u!1 &683729304
 GameObject:
   m_ObjectHideFlags: 0
@@ -3828,7 +3877,7 @@ GameObject:
   - component: {fileID: 1100380291}
   - component: {fileID: 1100380293}
   m_Layer: 0
-  m_Name: GreenPlayer3
+  m_Name: GreenPiece3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3908,11 +3957,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 0}
+  Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 0
-    _variablesData: []
-    _variablesObjects: []
+    _version: 84
+    _variablesData:
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAIAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAPAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA16PgQHE9esAAAAAA
+    _variablesObjects:
+    - {fileID: 2137111255}
 --- !u!1 &1113757093
 GameObject:
   m_ObjectHideFlags: 0
@@ -4480,7 +4536,7 @@ GameObject:
   - component: {fileID: 1315274198}
   - component: {fileID: 1315274200}
   m_Layer: 0
-  m_Name: RedStart
+  m_Name: Red
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4564,14 +4620,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 48
+    _version: 79
     _variablesData:
-    - BE5hbWUAAAAA
-    - BlBpZWNlMQAAAAA=
-    - BlBpZWNlMgAAAAA=
-    - BlBpZWNlMwAAAAA=
-    - DVN0YXJ0aW5nU3BhY2UAAAAA
-    _variablesObjects: []
+    - BE5hbWUPAAAAA1JlZA==
+    - BlBpZWNlMREAAAAAAAAA
+    - BlBpZWNlMhEAAAABAAAA
+    - BlBpZWNlMxEAAAACAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAAGAAAAA==
+    _variablesObjects:
+    - {fileID: 2115652726}
+    - {fileID: 2106075350}
+    - {fileID: 1424553997}
 --- !u!1 &1321914242
 GameObject:
   m_ObjectHideFlags: 0
@@ -4821,7 +4880,7 @@ GameObject:
   - component: {fileID: 1424553995}
   - component: {fileID: 1424553997}
   m_Layer: 0
-  m_Name: RedPlayer3
+  m_Name: RedPiece3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4903,14 +4962,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAIAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAYAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK5XwGZm9sAAAAAA
+    _variablesObjects:
+    - {fileID: 1315274200}
 --- !u!1 &1453955088
 GameObject:
   m_ObjectHideFlags: 0
@@ -5396,6 +5457,7 @@ GameObject:
   - component: {fileID: 1518509052}
   - component: {fileID: 1518509053}
   - component: {fileID: 1518509054}
+  - component: {fileID: 1518509055}
   m_Layer: 0
   m_Name: Board
   m_TagString: Untagged
@@ -5465,9 +5527,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Constraints: []
-  _variablesData: []
-  _variablesObjects: []
+  Constraints:
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _variablesData:
+  - A1JlZBEAAAAAAAAA
+  - BUdyZWVuEQAAAAEAAAA=
+  - BlllbGxvdxEAAAACAAAA
+  - BEJsdWURAAAAAwAAAA==
+  _variablesObjects:
+  - {fileID: 1315274200}
+  - {fileID: 2137111255}
+  - {fileID: 175348908}
+  - {fileID: 1746312865}
 --- !u!114 &1518509054
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5485,6 +5591,22 @@ MonoBehaviour:
     _version: 0
     _variablesData: []
     _variablesObjects: []
+--- !u!114 &1518509055
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518509051}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  OnAwake:
+    _instruction: {fileID: 11400000, guid: 7808f76519b4aa447979131b37d15f98, type: 2}
+    _inputs: []
+    _outputs: []
 --- !u!1 &1541816115
 GameObject:
   m_ObjectHideFlags: 0
@@ -6118,7 +6240,7 @@ GameObject:
   - component: {fileID: 1742799525}
   - component: {fileID: 1742799527}
   m_Layer: 0
-  m_Name: YellowPlayer1
+  m_Name: YellowPiece1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6200,14 +6322,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAAAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAGAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAaJE1QCPb8UAAAAAA
+    _variablesObjects:
+    - {fileID: 175348908}
 --- !u!1 &1746312862
 GameObject:
   m_ObjectHideFlags: 0
@@ -6220,7 +6344,7 @@ GameObject:
   - component: {fileID: 1746312863}
   - component: {fileID: 1746312865}
   m_Layer: 0
-  m_Name: BlueStart
+  m_Name: Blue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6304,14 +6428,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 46
+    _version: 79
     _variablesData:
-    - BE5hbWUAAAAA
-    - BlBpZWNlMQAAAAA=
-    - BlBpZWNlMgAAAAA=
-    - BlBpZWNlMwAAAAA=
-    - DVN0YXJ0aW5nU3BhY2UAAAAA
-    _variablesObjects: []
+    - BE5hbWUPAAAABEJsdWU=
+    - BlBpZWNlMREAAAAAAAAA
+    - BlBpZWNlMhEAAAABAAAA
+    - BlBpZWNlMxEAAAACAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAAIQAAAA==
+    _variablesObjects:
+    - {fileID: 1813092580}
+    - {fileID: 1863044773}
+    - {fileID: 397694036}
 --- !u!1 &1782260797
 GameObject:
   m_ObjectHideFlags: 0
@@ -6324,7 +6451,7 @@ GameObject:
   - component: {fileID: 1782260798}
   - component: {fileID: 1782260800}
   m_Layer: 0
-  m_Name: YellowPlayer3
+  m_Name: YellowPiece3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6406,14 +6533,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAIAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAGAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAApptUQBKD0EAAAAAA
+    _variablesObjects:
+    - {fileID: 175348908}
 --- !u!1 &1813092577
 GameObject:
   m_ObjectHideFlags: 0
@@ -6426,7 +6555,7 @@ GameObject:
   - component: {fileID: 1813092578}
   - component: {fileID: 1813092580}
   m_Layer: 0
-  m_Name: BluePlayer1
+  m_Name: BluePiece1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6508,14 +6637,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAAAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAApHD1wIXrcUAAAAAA
+    _variablesObjects:
+    - {fileID: 1746312865}
 --- !u!1 &1863044770
 GameObject:
   m_ObjectHideFlags: 0
@@ -6528,7 +6659,7 @@ GameObject:
   - component: {fileID: 1863044771}
   - component: {fileID: 1863044773}
   m_Layer: 0
-  m_Name: BluePlayer2
+  m_Name: BluePiece2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6610,14 +6741,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAEAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK7PwHsUbkAAAAAA
+    _variablesObjects:
+    - {fileID: 1746312865}
 --- !u!1 &1932431722
 GameObject:
   m_ObjectHideFlags: 0
@@ -6946,7 +7079,7 @@ GameObject:
   - component: {fileID: 2106075348}
   - component: {fileID: 2106075350}
   m_Layer: 0
-  m_Name: RedPlayer2
+  m_Name: RedPiece2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7028,14 +7161,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAEAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAYAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAArkcxwB+F28AAAAAA
+    _variablesObjects:
+    - {fileID: 1315274200}
 --- !u!1 &2115652723
 GameObject:
   m_ObjectHideFlags: 0
@@ -7048,7 +7183,7 @@ GameObject:
   - component: {fileID: 2115652724}
   - component: {fileID: 2115652726}
   m_Layer: 0
-  m_Name: RedPlayer1
+  m_Name: RedPiece1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7112,7 +7247,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0.38268343, w: 0.92387956}
   m_LocalPosition: {x: -3.91, y: -6.84, z: 0}
   m_LocalScale: {x: 0.75, y: 0.75, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 131298234}
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
@@ -7130,14 +7266,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 58
+    _version: 84
     _variablesData:
-    - BlBsYXllcgAAAAA=
-    - BUluZGV4AAAAAA==
-    - DEN1cnJlbnRTcGFjZQAAAAA=
-    - BEZyZWUAAAAA
-    - CEZpbmlzaGVkAAAAAA==
-    _variablesObjects: []
+    - BlBsYXllchEAAAAAAAAA
+    - BUluZGV4AgAAAAAAAAA=
+    - DEN1cnJlbnRTcGFjZQIAAAAYAAAA
+    - BEZyZWUBAAAAAA==
+    - CEZpbmlzaGVkAQAAAAA=
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAcT16wEjh2sAAAAAA
+    _variablesObjects:
+    - {fileID: 1315274200}
 --- !u!1 &2137111252
 GameObject:
   m_ObjectHideFlags: 0
@@ -7150,7 +7288,7 @@ GameObject:
   - component: {fileID: 2137111253}
   - component: {fileID: 2137111255}
   m_Layer: 0
-  m_Name: GreenStart
+  m_Name: Green
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -7234,11 +7372,48 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 46
+    _version: 79
     _variablesData:
-    - BE5hbWUAAAAA
-    - BlBpZWNlMQAAAAA=
-    - BlBpZWNlMgAAAAA=
-    - BlBpZWNlMwAAAAA=
-    - DVN0YXJ0aW5nU3BhY2UAAAAA
-    _variablesObjects: []
+    - BE5hbWUPAAAAA1JlZA==
+    - BlBpZWNlMREAAAAAAAAA
+    - BlBpZWNlMhEAAAABAAAA
+    - BlBpZWNlMxEAAAACAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAADwAAAA==
+    _variablesObjects:
+    - {fileID: 572341738}
+    - {fileID: 186492598}
+    - {fileID: 1100380293}
+--- !u!1001 &9045485462063056866
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2115652725}
+    m_Modifications:
+    - target: {fileID: 9045485462091330651, guid: edcdc76103e9ff34eb4adb86245a30af,
+        type: 3}
+      propertyPath: m_Name
+      value: Highlight
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045485462091330648, guid: edcdc76103e9ff34eb4adb86245a30af,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045485462091330648, guid: edcdc76103e9ff34eb4adb86245a30af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045485462091330648, guid: edcdc76103e9ff34eb4adb86245a30af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9045485462091330648, guid: edcdc76103e9ff34eb4adb86245a30af,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: edcdc76103e9ff34eb4adb86245a30af, type: 3}

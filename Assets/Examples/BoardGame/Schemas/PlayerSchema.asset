@@ -18,50 +18,45 @@ MonoBehaviour:
   _definitions:
   - _name: Name
     _type: 15
+    _constraint: Red,Yellow,Green,Blue
     _tag: Always (not saved)
     _initializer:
       _statement: '"Red"'
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: Red,Blue,Yellow,Green
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: Piece1
     _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: Piece2
     _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: Piece3
     _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: StartingSpace
     _type: 2
+    _constraint: 0|35
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 1
-    _minimumConstraint: 0
-    _maximumConstraint: 35
-    _typeConstraint: 
-  _version: 48
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _version: 79

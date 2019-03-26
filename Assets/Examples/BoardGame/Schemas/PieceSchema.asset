@@ -14,28 +14,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitializerType: 0
   Tags:
-    _items: []
+    _items:
+    - Persistent
+    - NewGame
   _definitions:
   - _name: Player
     _type: 17
-    _constraint: 
-    _tag: Always (not saved)
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: Persistent
     _initializer:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
   - _name: Index
     _type: 2
-    _constraint: 
-    _tag: Always (not saved)
+    _constraint: 0|2
+    _tag: Persistent
     _initializer:
       _statement: 0
     _isTypeLocked: 0
     _isConstraintLocked: 0
   - _name: CurrentSpace
     _type: 2
-    _constraint: 
-    _tag: Always (not saved)
+    _constraint: 0|35
+    _tag: NewGame
     _initializer:
       _statement: Player.StartingSpace
     _isTypeLocked: 0
@@ -43,7 +46,7 @@ MonoBehaviour:
   - _name: Free
     _type: 1
     _constraint: 
-    _tag: Always (not saved)
+    _tag: NewGame
     _initializer:
       _statement: false
     _isTypeLocked: 0
@@ -51,9 +54,17 @@ MonoBehaviour:
   - _name: Finished
     _type: 1
     _constraint: 
-    _tag: Always (not saved)
+    _tag: NewGame
     _initializer:
       _statement: false
     _isTypeLocked: 0
     _isConstraintLocked: 0
-  _version: 60
+  - _name: StartingPosition
+    _type: 9
+    _constraint: 
+    _tag: Persistent
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  _version: 84

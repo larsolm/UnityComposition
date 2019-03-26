@@ -40,15 +40,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Take Turn
+  m_Name: Yellow Turn
   m_EditorClassIdentifier: 
-  Name: Take Turn
-  GraphPosition: {x: 1049.6, y: 89.6}
+  Name: Yellow Turn
+  GraphPosition: {x: 960, y: 64}
   IsBreakpoint: 0
   Next: {fileID: 114667983929491124}
   Instruction:
-    _instruction: {fileID: 0}
-    _inputs: []
+    _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
+    _inputs:
+    - Name: CurrentPlayer
+      Type: 1
+      Reference:
+        _variable: []
+        _lookups: []
+      _valueData: EQAAAAAAAAA=
+      _valueObjects:
+      - {fileID: 0}
     _outputs: []
   Root:
     _variable:
@@ -69,7 +77,7 @@ MonoBehaviour:
   m_Name: Turn Order
   m_EditorClassIdentifier: 
   Name: Turn Order
-  GraphPosition: {x: 652.8, y: -0}
+  GraphPosition: {x: 640, y: -0}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -87,15 +95,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Take Turn
+  m_Name: Blue Turn
   m_EditorClassIdentifier: 
-  Name: Take Turn
-  GraphPosition: {x: 1062.4, y: 25.6}
+  Name: Blue Turn
+  GraphPosition: {x: 960, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 114667983929491124}
   Instruction:
-    _instruction: {fileID: 0}
-    _inputs: []
+    _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
+    _inputs:
+    - Name: CurrentPlayer
+      Type: 1
+      Reference:
+        _variable: []
+        _lookups: []
+      _valueData: EQAAAAAAAAA=
+      _valueObjects:
+      - {fileID: 0}
     _outputs: []
   Root:
     _variable:
@@ -119,7 +135,7 @@ MonoBehaviour:
   GraphPosition: {x: 320, y: 25.6}
   IsBreakpoint: 0
   Condition:
-    _statement: local.Winner == ""
+    _statement: local.Winner == null
   Loop: {fileID: 114220515761573856}
 --- !u!114 &114545528968405250
 MonoBehaviour:
@@ -134,7 +150,7 @@ MonoBehaviour:
   m_Name: Break
   m_EditorClassIdentifier: 
   Name: Break
-  GraphPosition: {x: 1664, y: 140.8}
+  GraphPosition: {x: 1600, y: 0}
   IsBreakpoint: 0
 --- !u!114 &114584171325308614
 MonoBehaviour:
@@ -146,15 +162,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Take Turn
+  m_Name: Red Turn
   m_EditorClassIdentifier: 
-  Name: Take Turn
-  GraphPosition: {x: 1062.4, y: -51.2}
+  Name: Red Turn
+  GraphPosition: {x: 960, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 114667983929491124}
   Instruction:
-    _instruction: {fileID: 0}
-    _inputs: []
+    _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
+    _inputs:
+    - Name: CurrentPlayer
+      Type: 1
+      Reference:
+        _variable: []
+        _lookups: []
+      _valueData: EQAAAAAAAAA=
+      _valueObjects:
+      - {fileID: 0}
     _outputs: []
   Root:
     _variable:
@@ -175,7 +199,7 @@ MonoBehaviour:
   m_Name: Conditional
   m_EditorClassIdentifier: 
   Name: Conditional
-  GraphPosition: {x: 1433.6, y: 12.8}
+  GraphPosition: {x: 1280, y: -0}
   IsBreakpoint: 0
   OnTrue: {fileID: 114545528968405250}
   OnFalse: {fileID: 0}
@@ -191,15 +215,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Take Turn
+  m_Name: Green Turn
   m_EditorClassIdentifier: 
-  Name: Take Turn
-  GraphPosition: {x: 1062.4, y: 166.40001}
+  Name: Green Turn
+  GraphPosition: {x: 960, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 114667983929491124}
   Instruction:
-    _instruction: {fileID: 0}
-    _inputs: []
+    _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
+    _inputs:
+    - Name: CurrentPlayer
+      Type: 1
+      Reference:
+        _variable: []
+        _lookups: []
+      _valueData: EQAAAAAAAAA=
+      _valueObjects:
+      - {fileID: 0}
     _outputs: []
   Root:
     _variable:

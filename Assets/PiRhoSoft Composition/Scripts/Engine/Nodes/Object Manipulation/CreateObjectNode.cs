@@ -28,7 +28,6 @@ namespace PiRhoSoft.CompositionEngine
 		public StringVariableSource ObjectName = new StringVariableSource("Spawned Object");
 
 		[Tooltip("A variable reference to assign the created object to so that it can be referenced later")]
-		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Child)]
 		public VariableReference ObjectVariable = new VariableReference();
 
 		[Tooltip("How to create and position the object, with an exact position, relative to another object, or as a child of another object")]
