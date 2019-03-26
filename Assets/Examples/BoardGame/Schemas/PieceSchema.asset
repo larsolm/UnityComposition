@@ -18,48 +18,42 @@ MonoBehaviour:
   _definitions:
   - _name: Player
     _type: 17
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: Index
     _type: 2
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: 0
-    _useRangeConstraint: 1
-    _minimumConstraint: 0
-    _maximumConstraint: 2
-    _typeConstraint: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: CurrentSpace
     _type: 2
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: Player.StartingSpace
-    _useRangeConstraint: 1
-    _minimumConstraint: 0
-    _maximumConstraint: 35
-    _typeConstraint: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: Free
     _type: 1
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: false
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   - _name: Finished
     _type: 1
+    _constraint: 
     _tag: Always (not saved)
     _initializer:
       _statement: false
-    _useRangeConstraint: 0
-    _minimumConstraint: 0
-    _maximumConstraint: 0
-    _typeConstraint: 
-  _version: 58
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _version: 60

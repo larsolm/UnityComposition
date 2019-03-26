@@ -24,6 +24,9 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static GUIContent _minimumConstraintLabel = new GUIContent("Between");
 		private readonly static GUIContent _maximumConstraintLabel = new GUIContent("and");
 
+		private static readonly IconButton _addButton = new IconButton(IconButton.Add, "Add a string to this constraint");
+		private static readonly IconButton _removeButton = new IconButton(IconButton.Remove, "Remove this string constraint");
+
 		private static Expression _expression = new Expression();
 		private const float _labelWidth = 120.0f;
 		private const float _labelIndent = 12.0f;
@@ -75,7 +78,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			var type = DrawType(typeRect, definition.IsTypeLocked, definition.Type);
 
-			if (hasConstraint || !definition.IsConstraintLocked)
+			if (hasConstraint)
 			{
 				var constraintHeight = GetConstraintHeight(definition.Type, definition.Constraint);
 				var constraintRect = RectHelper.TakeHeight(ref position, constraintHeight);
@@ -186,6 +189,10 @@ namespace PiRhoSoft.CompositionEditor
 				if (HasConstraint(listConstraint.ItemType, listConstraint.ItemConstraint, false))
 					height += GetConstraintHeight(listConstraint.ItemType, listConstraint.ItemConstraint);
 			}
+			else if (type == VariableType.String && constraint is StringVariableConstraint stringConstraint)
+			{
+				height = (1 + stringConstraint.Values.Length) * RectHelper.LineHeight;
+			}
 
 			return height;
 		}
@@ -257,7 +264,37 @@ namespace PiRhoSoft.CompositionEditor
 						if (top)
 							DrawIndentedLabel(ref rect, _stringConstraintLabel);
 
-						//constraint.TypeConstraint = EditorGUI.TextField(rect, constraint.TypeConstraint);
+						if (!(constraint is StringVariableConstraint stringConstraint))
+						{
+							stringConstraint = new StringVariableConstraint { Values = new string[] { } };
+							constraint = stringConstraint;
+						}
+
+						var remove = -1;
+
+						for (var i = 0; i < stringConstraint.Values.Length; i++)
+						{
+							if (i != 0)
+								RectHelper.TakeVerticalSpace(ref rect);
+
+							var item = stringConstraint.Values[i];
+							var itemRect = RectHelper.TakeLine(ref rect);
+							var removeRect = RectHelper.TakeTrailingIcon(ref itemRect);
+
+							stringConstraint.Values[i] = EditorGUI.TextField(itemRect, item);
+
+							if (GUI.Button(removeRect, _removeButton.Content, GUIStyle.none))
+								remove = i;
+						}
+
+						var addRect = RectHelper.TakeTrailingIcon(ref rect);
+
+						if (GUI.Button(addRect, _addButton.Content, GUIStyle.none))
+							ArrayUtility.Add(ref stringConstraint.Values, string.Empty);
+
+						if (remove >= 0)
+							ArrayUtility.RemoveAt(ref stringConstraint.Values, remove);
+
 						break;
 					}
 					case VariableType.Object:
