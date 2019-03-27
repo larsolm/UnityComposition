@@ -71,9 +71,9 @@ MonoBehaviour:
     _type: 17
     _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
-    _tag: Persistent
+    _tag: NewGame
     _initializer:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
-  _version: 88
+  _version: 89

@@ -19,18 +19,16 @@ MonoBehaviour:
   _nodes:
     _items:
     - {fileID: 114506005044156910}
-    - {fileID: 114220515761573856}
-    - {fileID: 114584171325308614}
     - {fileID: 114667983929491124}
     - {fileID: 114545528968405250}
-    - {fileID: 114495194182785554}
-    - {fileID: 114850106445648138}
-    - {fileID: 114202153145853136}
+    - {fileID: 114688480945551876}
+    - {fileID: 114843919956122944}
+    - {fileID: 114093446906697678}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 0}
   Process: {fileID: 114506005044156910}
   Exit: {fileID: 0}
---- !u!114 &114202153145853136
+--- !u!114 &114093446906697678
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,86 +38,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Yellow Turn
+  m_Name: Take Turn
   m_EditorClassIdentifier: 
-  Name: Yellow Turn
-  GraphPosition: {x: 960, y: 64}
+  Name: Take Turn
+  GraphPosition: {x: 998.4, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 114667983929491124}
   Instruction:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
-    _inputs:
-    - Name: CurrentPlayer
-      Type: 0
-      Reference:
-        _variable:
-        - global
-        - Yellow
-        _lookups:
-        - 
-        - 
-      _valueData: EQAAAAAAAAA=
-      _valueObjects:
-      - {fileID: 0}
-    _outputs: []
-  Root:
-    _variable:
-    - root
-    _lookups:
-    - 
-  WaitForCompletion: 1
---- !u!114 &114220515761573856
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
-  m_Name: Turn Order
-  m_EditorClassIdentifier: 
-  Name: Turn Order
-  GraphPosition: {x: 640, y: 0}
-  IsBreakpoint: 0
-  Sequence:
-    _items:
-    - {fileID: 114584171325308614}
-    - {fileID: 114495194182785554}
-    - {fileID: 114202153145853136}
-    - {fileID: 114850106445648138}
---- !u!114 &114495194182785554
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Blue Turn
-  m_EditorClassIdentifier: 
-  Name: Blue Turn
-  GraphPosition: {x: 960, y: -0}
-  IsBreakpoint: 0
-  Next: {fileID: 114667983929491124}
-  Instruction:
-    _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
-    _inputs:
-    - Name: CurrentPlayer
-      Type: 0
-      Reference:
-        _variable:
-        - global
-        - Blue
-        _lookups:
-        - 
-        - 
-      _valueData: EQAAAAAAAAA=
-      _valueObjects:
-      - {fileID: 0}
+    _inputs: []
     _outputs: []
   Root:
     _variable:
@@ -140,9 +67,9 @@ MonoBehaviour:
   m_Name: Loop Until Winner
   m_EditorClassIdentifier: 
   Name: Loop Until Winner
-  GraphPosition: {x: 320, y: 25.6}
+  GraphPosition: {x: 345.6, y: 12.8}
   IsBreakpoint: 0
-  Loop: {fileID: 114220515761573856}
+  Loop: {fileID: 114688480945551876}
   Condition:
     _statement: local.Winner == null
 --- !u!114 &114545528968405250
@@ -158,46 +85,8 @@ MonoBehaviour:
   m_Name: Break
   m_EditorClassIdentifier: 
   Name: Break
-  GraphPosition: {x: 1600, y: 0}
+  GraphPosition: {x: 1830.4, y: 76.8}
   IsBreakpoint: 0
---- !u!114 &114584171325308614
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Red Turn
-  m_EditorClassIdentifier: 
-  Name: Red Turn
-  GraphPosition: {x: 960, y: -64}
-  IsBreakpoint: 0
-  Next: {fileID: 114667983929491124}
-  Instruction:
-    _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
-    _inputs:
-    - Name: CurrentPlayer
-      Type: 0
-      Reference:
-        _variable:
-        - global
-        - Red
-        _lookups:
-        - 
-        - 
-      _valueData: EQAAAAAAAAA=
-      _valueObjects:
-      - {fileID: 0}
-    _outputs: []
-  Root:
-    _variable:
-    - root
-    _lookups:
-    - 
-  WaitForCompletion: 1
 --- !u!114 &114667983929491124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,16 +97,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Conditional
+  m_Name: Check Finished
   m_EditorClassIdentifier: 
-  Name: Conditional
-  GraphPosition: {x: 1280, y: -0}
+  Name: Check Finished
+  GraphPosition: {x: 1344, y: 0}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114545528968405250}
+  OnTrue: {fileID: 114843919956122944}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: local.Winner != null;
---- !u!114 &114850106445648138
+    _statement: root.Piece1.Finished && root.Piece2.Finished && root.Piece3.Finished
+--- !u!114 &114688480945551876
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,32 +115,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
-  m_Name: Green Turn
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Players
   m_EditorClassIdentifier: 
-  Name: Green Turn
-  GraphPosition: {x: 960, y: 128}
+  Name: Iterate Players
+  GraphPosition: {x: 691.2, y: 12.8}
   IsBreakpoint: 0
-  Next: {fileID: 114667983929491124}
-  Instruction:
-    _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
-    _inputs:
-    - Name: CurrentPlayer
-      Type: 0
-      Reference:
-        _variable:
-        - global
-        - Green
-        _lookups:
-        - 
-        - 
-      _valueData: EQAAAAAAAAA=
-      _valueObjects:
-      - {fileID: 0}
-    _outputs: []
-  Root:
+  Container:
     _variable:
-    - root
+    - global
+    - Players
     _lookups:
     - 
-  WaitForCompletion: 1
+    - 
+  Loop: {fileID: 114093446906697678}
+--- !u!114 &114843919956122944
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Winner
+  m_EditorClassIdentifier: 
+  Name: Set Winner
+  GraphPosition: {x: 1651.2001, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114545528968405250}
+  Expression:
+    _statement: local.Winner = root
