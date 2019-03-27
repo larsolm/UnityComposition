@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (!zValue.HasNumber)
 					throw CommandEvaluationException.WrongParameterType(name, 2, zValue.Type, VariableType.Float);
 
-				return VariableValue.Create(new Vector3(xValue.Number, yValue.Number, yValue.Number));
+				return VariableValue.Create(new Vector3(xValue.Number, yValue.Number, zValue.Number));
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 3);

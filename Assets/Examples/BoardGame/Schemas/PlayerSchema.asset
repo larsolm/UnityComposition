@@ -59,4 +59,13 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
-  _version: 79
+  - _name: SelectedPiece
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  _version: 81

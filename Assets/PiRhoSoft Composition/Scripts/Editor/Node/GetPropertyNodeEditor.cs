@@ -11,19 +11,23 @@ namespace PiRhoSoft.CompositionEditor
 	[CustomEditor(typeof(GetPropertyNode))]
 	class GetPropertyNodeEditor : Editor
 	{
-		private static readonly Label _nextContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.Next));
-		private static readonly Label _outputContent = new Label(typeof(GetPropertyNode), nameof(GetPropertyNode.Output));
 		private static readonly GUIContent _targetTypeContent = new GUIContent("Object Type", "The Type of object to get the property of");
 		private static readonly GUIContent _propertyContent = new GUIContent("Property", "The property to get the value of");
 
 		private GetPropertyNode _node;
 		private string[] _propertyNames;
+		private SerializedProperty _nameProperty;
+		private SerializedProperty _nextProperty;
 		private SerializedProperty _targetProperty;
+		private SerializedProperty _outputProperty;
 
 		void OnEnable()
 		{
 			_node = target as GetPropertyNode;
+			_nameProperty = serializedObject.FindProperty(nameof(GetPropertyNode.Name));
+			_nextProperty = serializedObject.FindProperty(nameof(GetPropertyNode.Next));
 			_targetProperty = serializedObject.FindProperty(nameof(GetPropertyNode.Target));
+			_outputProperty = serializedObject.FindProperty(nameof(GetPropertyNode.Output));
 
 			BuildPropertyList();
 		}
@@ -58,11 +62,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void OnInspectorGUI()
 		{
-			using (new UndoScope(_node, false))
-				InstructionGraphNodeDrawer.Draw(_nextContent.Content, _node.Next);
-
 			using (new UndoScope(serializedObject))
+			{
+				EditorGUILayout.PropertyField(_nameProperty);
+				EditorGUILayout.PropertyField(_nextProperty);
 				EditorGUILayout.PropertyField(_targetProperty);
+			}
 
 			using (new UndoScope(_node, false))
 			{
@@ -77,10 +82,13 @@ namespace PiRhoSoft.CompositionEditor
 
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty]);
-
-					if (!string.IsNullOrEmpty(_node.PropertyName))
-						VariableReferenceControl.Draw(_outputContent.Content, _node.Output);
 				}
+			}
+
+			if (_node.TargetType != null && !string.IsNullOrEmpty(_node.PropertyName))
+			{
+				using (new UndoScope(serializedObject))
+					EditorGUILayout.PropertyField(_outputProperty);
 			}
 		}
 

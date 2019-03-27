@@ -68,7 +68,10 @@ namespace PiRhoSoft.CompositionEngine
 		protected virtual IEnumerator Run(string text, MessageInteractionType interaction, bool isLast)
 		{
 			if (DisplayText != null)
+			{
 				DisplayText.text = text;
+				DisplayText.ForceMeshUpdate();
+			}
 
 			SetInteraction(MessageControlDisplay.Finished, interaction, isLast);
 

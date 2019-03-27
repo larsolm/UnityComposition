@@ -46,6 +46,10 @@ namespace PiRhoSoft.CompositionEngine
 		[InlineDisplay(PropagateLabel = true)]
 		public Vector3VariableSource Position = new Vector3VariableSource();
 
+		[Tooltip("The rotation to spawn the object at")]
+		[InlineDisplay(PropagateLabel = true)]
+		public Vector3VariableSource Rotation = new Vector3VariableSource();
+
 		public override Color NodeColor => Colors.SequencingLight;
 
 		public override void GetInputs(IList<VariableDefinition> inputs)
@@ -74,20 +78,21 @@ namespace PiRhoSoft.CompositionEngine
 				GameObject spawned = null;
 
 				Resolve(variables, Position, out var position);
+				Resolve(variables, Rotation, out var rotation);
 
 				if (Positioning == ObjectPositioning.Absolute)
 				{
-					spawned = Instantiate(prefab, position, Quaternion.identity);
+					spawned = Instantiate(prefab, position, Quaternion.Euler(rotation));
 				}
 				else if (Positioning == ObjectPositioning.Relative)
 				{
 					if (ResolveObject(variables, Object, out GameObject obj))
-						spawned = Instantiate(prefab, obj.transform.position + position, Quaternion.identity);
+						spawned = Instantiate(prefab, obj.transform.position + position, Quaternion.Euler(rotation));
 				}
 				else if (Positioning == ObjectPositioning.Child)
 				{
 					if (ResolveObject(variables, Parent, out GameObject parent))
-						spawned = Instantiate(prefab, parent.transform.position + position, Quaternion.identity, parent.transform);
+						spawned = Instantiate(prefab, parent.transform.position + position, Quaternion.Euler(rotation), parent.transform);
 				}
 
 				if (spawned)

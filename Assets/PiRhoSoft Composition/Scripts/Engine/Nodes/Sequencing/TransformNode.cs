@@ -23,6 +23,15 @@ namespace PiRhoSoft.CompositionEngine
 		[VariableConstraint(typeof(Transform))]
 		public VariableReference Transform = new VariableReference();
 
+		[Tooltip("Whether to use a relative position from the original or an absolute position")]
+		public bool UseRelativePosition = true;
+
+		[Tooltip("Whether to use a relative rotation from the original or an absolute rotation")]
+		public bool UseRelativeRotation = true;
+
+		[Tooltip("Whether to use a relative scale from the original or an absolute scale")]
+		public bool UseRelativeScale = true;
+
 		[Tooltip("The target position to move to - offset from the original if UseRelativePosition is set")]
 		[InlineDisplay(PropagateLabel = true)]
 		public Vector3VariableSource TargetPosition = new Vector3VariableSource();
@@ -34,18 +43,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The target scale to size to - multiplicative from the original if UseRelativeScale is set")]
 		[InlineDisplay(PropagateLabel = true)]
 		public Vector3VariableSource TargetScale = new Vector3VariableSource(Vector3.one);
-
-		[Tooltip("Whether to use a relative position from the original or an absolute position")]
-		[InlineDisplay(PropagateLabel = true)]
-		public BoolVariableSource UseRelativePosition = new BoolVariableSource(true);
-
-		[Tooltip("Whether to use a relative rotation from the original or an absolute rotation")]
-		[InlineDisplay(PropagateLabel = true)]
-		public BoolVariableSource UseRelativeRotation = new BoolVariableSource(true);
-
-		[Tooltip("Whether to use a relative scale from the original or an absolute scale")]
-		[InlineDisplay(PropagateLabel = true)]
-		public BoolVariableSource UseRelativeScale = new BoolVariableSource(true);
 
 		[Tooltip("The method in which to animate toward the target transform")]
 		public AnimationType AnimationMethod = AnimationType.None;
@@ -82,10 +79,6 @@ namespace PiRhoSoft.CompositionEngine
 			TargetRotation.GetInputs(inputs);
 			TargetScale.GetInputs(inputs);
 
-			UseRelativePosition.GetInputs(inputs);
-			UseRelativeRotation.GetInputs(inputs);
-			UseRelativeScale.GetInputs(inputs);
-
 			if (AnimationMethod == AnimationType.Duration)
 			{
 				Duration.GetInputs(inputs);
@@ -111,21 +104,17 @@ namespace PiRhoSoft.CompositionEngine
 			var body2d = transform.GetComponent<Rigidbody2D>();
 			var body3d = transform.GetComponent<Rigidbody>();
 
-			Resolve(variables, UseRelativePosition, out var useRelativePosition);
-			Resolve(variables, UseRelativeRotation, out var useRelativeRotation);
-			Resolve(variables, UseRelativeScale, out var useRelativeScale);
-
 			Resolve(variables, TargetPosition, out var targetPosition);
 			Resolve(variables, TargetRotation, out var targetAngles);
 			Resolve(variables, TargetScale, out var targetScale);
 
-			if (useRelativePosition)
+			if (UseRelativePosition)
 				targetPosition += transform.position;
 
-			if (useRelativeScale)
+			if (UseRelativeScale)
 				targetScale.Scale(transform.localScale);
 
-			var targetRotation = useRelativeRotation ? transform.rotation * Quaternion.Euler(targetAngles) : Quaternion.Euler(targetAngles);
+			var targetRotation = UseRelativeRotation ? transform.rotation * Quaternion.Euler(targetAngles) : Quaternion.Euler(targetAngles);
 
 			if (AnimationMethod == AnimationType.None)
 			{

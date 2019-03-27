@@ -11,7 +11,6 @@ namespace PiRhoSoft.CompositionEditor
 	[CustomEditor(typeof(CallMethodNode))]
 	class CallMethodNodeEditor : Editor
 	{
-		private static readonly Label _nextContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.Next));
 		private static readonly Label _outputContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.Output));
 		private static readonly Label _parametersContent = new Label(typeof(CallMethodNode), nameof(CallMethodNode.Parameters));
 
@@ -22,6 +21,8 @@ namespace PiRhoSoft.CompositionEditor
 		private MethodInfo[] _methods;
 		private string[] _methodNames;
 		private string[] _parameterNames;
+		private SerializedProperty _nameProperty;
+		private SerializedProperty _nextProperty;
 		private SerializedProperty _targetProperty;
 
 		private PropertyListControl _parametersControl;
@@ -29,6 +30,8 @@ namespace PiRhoSoft.CompositionEditor
 		void OnEnable()
 		{
 			_node = target as CallMethodNode;
+			_nameProperty = serializedObject.FindProperty(nameof(CallMethodNode.Name));
+			_nextProperty = serializedObject.FindProperty(nameof(CallMethodNode.Next));
 			_targetProperty = serializedObject.FindProperty(nameof(CallMethodNode.Target));
 
 			BuildMethodList();
@@ -70,11 +73,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void OnInspectorGUI()
 		{
-			using (new UndoScope(_node, false))
-				InstructionGraphNodeDrawer.Draw(_nextContent.Content, _node.Next);
-
 			using (new UndoScope(serializedObject))
+			{
+				EditorGUILayout.PropertyField(_nameProperty);
+				EditorGUILayout.PropertyField(_nextProperty);
 				EditorGUILayout.PropertyField(_targetProperty);
+			}
 
 			using (new UndoScope(_node, false))
 			{

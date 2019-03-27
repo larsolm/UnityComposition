@@ -7,11 +7,11 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "loop-node")]
 	public class LoopNode : InstructionGraphNode, ILoopNode
 	{
-		[Tooltip("The statement to execute to check if the loop should continue")]
-		public Expression Condition = new Expression();
-
 		[Tooltip("The node to repeatedly go to while Condition evaluates to true")]
 		public InstructionGraphNode Loop = null;
+
+		[Tooltip("The loop will continue to execute while this expression is true")]
+		public Expression Condition = new Expression();
 
 		public override Color NodeColor => Colors.Loop;
 

@@ -11,19 +11,23 @@ namespace PiRhoSoft.CompositionEditor
 	[CustomEditor(typeof(SetPropertyNode))]
 	class SetPropertyNodeEditor : Editor
 	{
-		private static readonly Label _nextContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.Next));
-		private static readonly Label _targetContent = new Label(typeof(SetPropertyNode), nameof(SetPropertyNode.Target));
 		private static readonly GUIContent _targetTypeContent = new GUIContent("Component Type", "The Type of the component to set the property for");
 		private static readonly GUIContent _propertyContent = new GUIContent("Property", "The name of the property to set");
 
 		private SetPropertyNode _node;
 		private string[] _propertyNames;
 		private Type[] _propertyTypes;
+		private SerializedProperty _nameProperty;
+		private SerializedProperty _nextProperty;
+		private SerializedProperty _targetProperty;
 		private SerializedProperty _valueProperty;
 
 		void OnEnable()
 		{
 			_node = target as SetPropertyNode;
+			_nameProperty = serializedObject.FindProperty(nameof(SetPropertyNode.Name));
+			_nextProperty = serializedObject.FindProperty(nameof(SetPropertyNode.Next));
+			_targetProperty = serializedObject.FindProperty(nameof(SetPropertyNode.Target));
 			_valueProperty = serializedObject.FindProperty(nameof(SetPropertyNode.Value));
 
 			BuildPropertyList();
@@ -67,11 +71,15 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void OnInspectorGUI()
 		{
+			using (new UndoScope(serializedObject))
+			{
+				EditorGUILayout.PropertyField(_nameProperty);
+				EditorGUILayout.PropertyField(_nextProperty);
+				EditorGUILayout.PropertyField(_targetProperty);
+			}
+
 			using (new UndoScope(_node, false))
 			{
-				InstructionGraphNodeDrawer.Draw(_nextContent.Content, _node.Next);
-				VariableReferenceControl.Draw(_targetContent.Content, _node.Target);
-
 				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false);
 				if (selectedTargetType != _node.TargetType)
 					SetTargetType(selectedTargetType);
