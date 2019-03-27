@@ -5,11 +5,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ObjectVariableHandler : StoreVariableHandler
+	public class ObjectVariableHandler : VariableHandler
 	{
 		private const string _gameObjectName = "GameObject";
-
-		private bool IsClassName(string lookup) => char.IsLetter(lookup[0]) || lookup[0] == '_';
 
 		protected override VariableConstraint CreateConstraint() => new ObjectVariableConstraint();
 
@@ -32,31 +30,49 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override VariableValue Lookup(VariableValue owner, string lookup)
 		{
-			if (IsClassName(lookup))
+			if (owner.HasList)
 			{
-				if (lookup == _gameObjectName)
-				{
-					var gameObject = ComponentHelper.GetAsGameObject(owner.Object);
-					return VariableValue.Create(gameObject);
-				}
-				else
-				{
-					var component = ComponentHelper.GetAsComponent(owner.Object, lookup);
-					return VariableValue.Create(component);
-				}
+				var value = ListVariableHandler.ListLookup(owner, lookup);
+				if (!value.IsEmpty)
+					return value;
+			}
+
+			if (owner.HasStore)
+			{
+				var value = StoreVariableHandler.StoreLookup(owner, lookup);
+				if (!value.IsEmpty)
+					return value;
+			}
+
+			if (lookup == _gameObjectName)
+			{
+				var gameObject = ComponentHelper.GetAsGameObject(owner.Object);
+				return VariableValue.Create(gameObject);
 			}
 			else
 			{
-				return base.Lookup(owner, lookup);
+				var component = ComponentHelper.GetAsComponent(owner.Object, lookup);
+				return VariableValue.Create(component);
 			}
 		}
 
 		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
 		{
-			if (IsClassName(lookup))
-				return SetVariableResult.ReadOnly;
-			else
-				return base.Apply(ref owner, lookup, value);
+			if (owner.HasList)
+			{
+				var result = ListVariableHandler.ListApply(ref owner, lookup, value);
+				if (result == SetVariableResult.Success)
+					return result;
+			}
+
+			if (owner.HasStore)
+			{
+				var result = StoreVariableHandler.StoreApply(ref owner, lookup, value);
+				if (result == SetVariableResult.Success)
+					return result;
+			}
+
+			return SetVariableResult.ReadOnly;
 		}
 	}
 }

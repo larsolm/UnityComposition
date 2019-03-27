@@ -1,0 +1,231 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Check Card
+  m_EditorClassIdentifier: 
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114204127550149548}
+    - {fileID: 114318365090266194}
+    - {fileID: 114152915467528118}
+    - {fileID: 114524819183424472}
+    - {fileID: 114932163569064684}
+    - {fileID: 114662382626097016}
+    - {fileID: 114497143050049916}
+    - {fileID: 114400101997620392}
+    - {fileID: 114390368604380124}
+    - {fileID: 114246263796642296}
+  StartPosition: {x: -0, y: 0}
+  Process: {fileID: 114497143050049916}
+--- !u!114 &114152915467528118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Is Other Complete
+  m_EditorClassIdentifier: 
+  Name: Is Other Complete
+  GraphPosition: {x: 640, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114524819183424472}
+  Expression:
+    _statement: 'local.suit = Deck[root.Suit.Name]
+
+      root.Complete = local.suit<#> == root.Index && local.suit == local.Rows[root.Row]'
+--- !u!114 &114204127550149548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Is 2 Complete
+  m_EditorClassIdentifier: 
+  Name: Is 2 Complete
+  GraphPosition: {x: 640, y: -25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114524819183424472}
+  Expression:
+    _statement: 'local.suit = Deck[root.Suit.Name]
+
+      root.Complete = local.suit<#> == root.Index && root.Column == 0'
+--- !u!114 &114246263796642296
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Row
+  m_EditorClassIdentifier: 
+  Name: Set Row
+  GraphPosition: {x: 1920, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: Deck.Rows[root.Row] = Deck[root.Suit.Name]
+--- !u!114 &114318365090266194
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 960, y: 128}
+  IsBreakpoint: 0
+  Comment: A card is in the right place (i.e complete) if the number of cards in the
+    list for its suit matches its index.
+--- !u!114 &114390368604380124
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is 2
+  m_EditorClassIdentifier: 
+  Name: Is 2
+  GraphPosition: {x: 1600, y: -12.8}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114246263796642296}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: root.Index == 0
+--- !u!114 &114400101997620392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 1280, y: 128}
+  IsBreakpoint: 0
+  Comment: Whenever a card is completed, the whole game might have been completed.
+    This is easily tested by checking the size of the Cards list - if only Aces are
+    left, the game is won.
+--- !u!114 &114497143050049916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299c4f4ec492e74ebc48ccf20f59272, type: 3}
+  m_Name: Complete Branch
+  m_EditorClassIdentifier: 
+  Name: Complete Branch
+  GraphPosition: {x: 320, y: -12.8}
+  IsBreakpoint: 0
+  Switch:
+    _statement: root.Rank
+  Outputs:
+    _keys:
+    - A
+    - 2
+    _values:
+    - {fileID: 0}
+    - {fileID: 114204127550149548}
+  Default: {fileID: 114152915467528118}
+--- !u!114 &114524819183424472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is Complete
+  m_EditorClassIdentifier: 
+  Name: Is Complete
+  GraphPosition: {x: 960, y: 0}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114932163569064684}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: root.Complete
+--- !u!114 &114662382626097016
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 320, y: 128}
+  IsBreakpoint: 0
+  Comment: Aces are never marked complete because they need to be part of any reshuffle.
+    Twos are a special case because they additionally need to be in the left most
+    column.
+--- !u!114 &114932163569064684
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Make Complete
+  m_EditorClassIdentifier: 
+  Name: Make Complete
+  GraphPosition: {x: 1280, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114390368604380124}
+  Expression:
+    _statement: 'local.suit += root
+
+      Deck.Cards -= root
+
+
+      root.Complete = true
+
+      Deck.Complete = Deck.Cards<#> == 4'

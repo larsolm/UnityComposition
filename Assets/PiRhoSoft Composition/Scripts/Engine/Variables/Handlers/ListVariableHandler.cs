@@ -52,7 +52,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		public static VariableValue ListLookup(VariableValue owner, string lookup)
 		{
 			if (lookup.Length == 1 && lookup[0] == CountSymbol)
 				return VariableValue.Create(owner.List.Count);
@@ -62,7 +62,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		public static SetVariableResult ListApply(ref VariableValue owner, string lookup, VariableValue value)
 		{
 			if (int.TryParse(lookup, out var index) && index >= 0 && index < owner.List.Count)
 				return owner.List.SetVariable(index, value);
@@ -70,6 +70,16 @@ namespace PiRhoSoft.CompositionEngine
 				return SetVariableResult.ReadOnly;
 			else
 				return SetVariableResult.NotFound;
+		}
+
+		public override VariableValue Lookup(VariableValue owner, string lookup)
+		{
+			return ListLookup(owner, lookup);
+		}
+
+		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		{
+			return ListApply(ref owner, lookup, value);
 		}
 	}
 }

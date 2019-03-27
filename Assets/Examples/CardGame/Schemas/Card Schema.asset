@@ -24,6 +24,14 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
+  - _name: Index
+    _type: 2
+    _constraint: 0|12
+    _tag: 
+    _initializer:
+      _statement: 0
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: Suit
     _type: 17
     _constraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
@@ -33,4 +41,36 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
-  _version: 20
+  - _name: Column
+    _type: 2
+    _constraint: 0|12
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  - _name: Row
+    _type: 2
+    _constraint: 0|3
+    _tag: 
+    _initializer:
+      _statement: 0
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  - _name: Complete
+    _type: 1
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  - _name: Movable
+    _type: 1
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  _version: 170

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6f95977d1adbba4b9a826aff14f0418, type: 3}
-  m_Name: Deck
+  m_Name: Cards
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: f703de78debd2b548937aa2e2622e5cc, type: 2}
   Variables:

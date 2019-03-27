@@ -500,8 +500,17 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (value.HasReference)
 			{
-				result = value.Reference as InterfaceType;
-				return true;
+				if (value.Reference is InterfaceType i)
+				{
+					result = i;
+					return true;
+				}
+				else
+				{
+					result = null;
+					LogResolveWarning(value, reference, VariableType.Object, typeof(InterfaceType));
+					return false;
+				}
 			}
 
 			result = null;

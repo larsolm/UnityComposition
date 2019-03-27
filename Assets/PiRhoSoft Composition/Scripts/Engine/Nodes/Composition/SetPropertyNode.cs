@@ -36,7 +36,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (ResolveObject(variables, Target, out Component target))
 			{
-				if (target.GetType() == TargetType)
+				if (TargetType.IsAssignableFrom(target.GetType()))
 				{
 					Resolve(variables, Value, out var value);
 
@@ -102,7 +102,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			public static Setter Create(Type componentType, PropertyInfo property)
 			{
-				if (componentType != null || property == null)
+				if (componentType == null || property == null)
 					return null;
 
 				var setter = Create(componentType, property.PropertyType);

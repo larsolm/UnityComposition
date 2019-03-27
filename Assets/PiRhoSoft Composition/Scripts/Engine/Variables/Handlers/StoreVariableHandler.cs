@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class StoreVariableHandler : ListVariableHandler
+	public class StoreVariableHandler : VariableHandler
 	{
 		public override VariableValue CreateDefault(VariableConstraint constraint)
 		{
@@ -52,20 +52,38 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		public static VariableValue StoreLookup(VariableValue owner, string lookup)
 		{
 			if (owner.HasList)
-				return base.Lookup(owner, lookup);
-			else
-				return VariableValue.Empty;
+			{
+				var value = ListVariableHandler.ListLookup(owner, lookup);
+				if (!value.IsEmpty)
+					return value;
+			}
+
+			return owner.Store.GetVariable(lookup);
+		}
+
+		public static SetVariableResult StoreApply(ref VariableValue owner, string lookup, VariableValue value)
+		{
+			if (owner.HasList)
+			{
+				var result = ListVariableHandler.ListApply(ref owner, lookup, value);
+				if (result == SetVariableResult.Success)
+					return result;
+			}
+
+			return owner.Store.SetVariable(lookup, value);
+		}
+
+		public override VariableValue Lookup(VariableValue owner, string lookup)
+		{
+			return StoreLookup(owner, lookup);
 		}
 
 		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
 		{
-			if (owner.HasList)
-				return base.Apply(ref owner, lookup, value);
-			else
-				return SetVariableResult.NotFound;
+			return StoreApply(ref owner, lookup, value);
 		}
 	}
 }

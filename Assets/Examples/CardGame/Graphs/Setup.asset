@@ -1,0 +1,556 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Setup
+  m_EditorClassIdentifier: 
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114535085460959768}
+    - {fileID: 114712361278663726}
+    - {fileID: 114976938042591072}
+    - {fileID: 114497655987214522}
+    - {fileID: 114177033925600632}
+    - {fileID: 114692782786590986}
+    - {fileID: 114153217319545620}
+    - {fileID: 114913596938624506}
+    - {fileID: 114849978814778934}
+    - {fileID: 114765051230656708}
+    - {fileID: 114003969666751754}
+    - {fileID: 114016161476593912}
+    - {fileID: 114629489196500842}
+    - {fileID: 114680897799219872}
+    - {fileID: 114318404605216878}
+    - {fileID: 114611128734656702}
+    - {fileID: 114970367505422064}
+    - {fileID: 114807407756385756}
+    - {fileID: 114861530932333374}
+    - {fileID: 114938385428883198}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 114003969666751754}
+--- !u!114 &114003969666751754
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  Name: Sequence
+  GraphPosition: {x: 320, y: -12.8}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114629489196500842}
+    - {fileID: 114016161476593912}
+    - {fileID: 114712361278663726}
+    - {fileID: 114765051230656708}
+--- !u!114 &114016161476593912
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81db09edfc25024b94b5b1d2295f584, type: 3}
+  m_Name: New Game
+  m_EditorClassIdentifier: 
+  Name: New Game
+  GraphPosition: {x: 768, y: -102.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114535085460959768}
+  Object:
+    _variable:
+    - global
+    - Deck
+    _lookups:
+    - 
+    - 
+  Tag: New Game
+--- !u!114 &114153217319545620
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Card Data
+  m_EditorClassIdentifier: 
+  Name: Set Card Data
+  GraphPosition: {x: 1356.8, y: 76.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114861530932333374}
+  Expression:
+    _statement: 'local.card = local.createdCard<VariableStoreComponent>
+
+      local.card.Rank = local.rank
+
+      local.card.Index = local.rankIndex
+
+      local.card.Suit = local.suit
+
+
+      Deck.Cards += local.card
+
+      local.rankIndex += 1'
+--- !u!114 &114177033925600632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Rank and Name
+  m_EditorClassIdentifier: 
+  Name: Set Rank and Name
+  GraphPosition: {x: 972.8, y: 192}
+  IsBreakpoint: 0
+  Next: {fileID: 114692782786590986}
+  Expression:
+    _statement: 'local.rank = root
+
+      local.cardName = local.suit.Name + local.rank'
+--- !u!114 &114318404605216878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate
+  m_EditorClassIdentifier: 
+  Name: Iterate
+  GraphPosition: {x: 448, y: -217.6}
+  IsBreakpoint: 0
+  Container:
+    _variable:
+    - Deck
+    - Cards
+    _lookups:
+    - 
+    - 
+  Loop: {fileID: 114611128734656702}
+--- !u!114 &114497655987214522
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Suit
+  m_EditorClassIdentifier: 
+  Name: Set Suit
+  GraphPosition: {x: 844.8, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 114976938042591072}
+  Expression:
+    _statement: 'local.suit = root
+
+      local.rankIndex = 0'
+--- !u!114 &114535085460959768
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8a5ac2c28dcdd4099e34a89d50d686, type: 3}
+  m_Name: Set Cards
+  m_EditorClassIdentifier: 
+  Name: Set Cards
+  GraphPosition: {x: 832, y: -179.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114970367505422064}
+  Variable:
+    _variable:
+    - local
+    - cards
+    _lookups:
+    - 
+    - 
+  Value:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Definition:
+      _name: 
+      _type: 17
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: EQAAAAAAAAA=
+    _objects:
+    - {fileID: 11400000, guid: 4f706c0cf5be2c548aaabb17b2590955, type: 2}
+--- !u!114 &114611128734656702
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destroy Object
+  m_EditorClassIdentifier: 
+  Name: Destroy Object
+  GraphPosition: {x: 512, y: -307.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable:
+    - root
+    _lookups:
+    - 
+--- !u!114 &114629489196500842
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Processing
+  m_EditorClassIdentifier: 
+  Name: Set Processing
+  GraphPosition: {x: 384, y: -128}
+  IsBreakpoint: 0
+  Next: {fileID: 114318404605216878}
+  Expression:
+    _statement: Processing += 1
+--- !u!114 &114680897799219872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Clear Processing
+  m_EditorClassIdentifier: 
+  Name: Clear Processing
+  GraphPosition: {x: 448, y: 204.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: Processing -= 1
+--- !u!114 &114692782786590986
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd36ba06a52fe140b79c7a1d0217802, type: 3}
+  m_Name: Create Card
+  m_EditorClassIdentifier: 
+  Name: Create Card
+  GraphPosition: {x: 1280, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114153217319545620}
+  Prefab:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Value: {fileID: 3439422775805370993, guid: 534776d88da9cf542ab9c00f35936365, type: 3}
+  ObjectName:
+    Type: 1
+    Reference:
+      _variable:
+      - local
+      - cardName
+      _lookups:
+      - 
+      - 
+    Value: Card
+  ObjectVariable:
+    _variable:
+    - local
+    - createdCard
+    _lookups:
+    - 
+    - 
+  Positioning: 2
+  Object:
+    _variable: []
+    _lookups: []
+  Parent:
+    _variable:
+    - Deck
+    _lookups:
+    - 
+  Position:
+    Type: 0
+    Reference:
+      _variable:
+      - local
+      - cardPosition
+      _lookups:
+      - 
+      - 
+    Value: {x: 0, y: 0, z: 0}
+--- !u!114 &114712361278663726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Suits
+  m_EditorClassIdentifier: 
+  Name: Iterate Suits
+  GraphPosition: {x: 768, y: 0}
+  IsBreakpoint: 0
+  Container:
+    _variable:
+    - local
+    - cards
+    - Suits
+    _lookups:
+    - 
+    - 
+    - 
+  Loop: {fileID: 114497655987214522}
+--- !u!114 &114765051230656708
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Shuffle
+  m_EditorClassIdentifier: 
+  Name: Shuffle
+  GraphPosition: {x: 384, y: 128}
+  IsBreakpoint: 0
+  Next: {fileID: 114680897799219872}
+  Instruction:
+    _instruction: {fileID: 11400000, guid: 99f12e2c846ae7544894f2b8049e0b17, type: 2}
+    _inputs: []
+    _outputs: []
+  Root:
+    _variable:
+    - root
+    _lookups:
+    - 
+  WaitForCompletion: 1
+--- !u!114 &114807407756385756
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Initialize Rows
+  m_EditorClassIdentifier: 
+  Name: Initialize Rows
+  GraphPosition: {x: 960, y: -332.80002}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 'Deck.Rows += local.emptyList
+
+      Deck.Rows += local.emptyList
+
+      Deck.Rows += local.emptyList
+
+      Deck.Rows += local.emptyList'
+--- !u!114 &114849978814778934
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1214b928c8b2a48b55a137ca3023dc, type: 3}
+  m_Name: Yield
+  m_EditorClassIdentifier: 
+  Name: Yield
+  GraphPosition: {x: 1600, y: 345.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+--- !u!114 &114861530932333374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is Ace
+  m_EditorClassIdentifier: 
+  Name: Is Ace
+  GraphPosition: {x: 1408, y: 153.6}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114938385428883198}
+  OnFalse: {fileID: 114913596938624506}
+  Condition:
+    _statement: local.card.Rank == "A"
+--- !u!114 &114913596938624506
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3530830e117b2949a9ed9bb41115c88, type: 3}
+  m_Name: Set Card Binding
+  m_EditorClassIdentifier: 
+  Name: Set Card Binding
+  GraphPosition: {x: 1536, y: 268.80002}
+  IsBreakpoint: 0
+  Next: {fileID: 114849978814778934}
+  Object:
+    _variable:
+    - local
+    - createdCard
+    _lookups:
+    - 
+    - BindingRoot
+  Binding:
+    _variable:
+    - local
+    - createdCard
+    _lookups:
+    - 
+    - VariableStoreComponent
+--- !u!114 &114938385428883198
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Add Ace
+  m_EditorClassIdentifier: 
+  Name: Add Ace
+  GraphPosition: {x: 1728, y: 153.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114913596938624506}
+  Expression:
+    _statement: Deck.Aces += local.card
+--- !u!114 &114970367505422064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e8a5ac2c28dcdd4099e34a89d50d686, type: 3}
+  m_Name: Create Empty Row
+  m_EditorClassIdentifier: 
+  Name: Create Empty Row
+  GraphPosition: {x: 896, y: -256}
+  IsBreakpoint: 0
+  Next: {fileID: 114807407756385756}
+  Variable:
+    _variable:
+    - local
+    - emptyList
+    _lookups:
+    - 
+    - 
+  Value:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Definition:
+      _name: 
+      _type: 19
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: EwAAAAAAAAA=
+    _objects: []
+--- !u!114 &114976938042591072
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Ranks
+  m_EditorClassIdentifier: 
+  Name: Iterate Ranks
+  GraphPosition: {x: 896, y: 128}
+  IsBreakpoint: 0
+  Container:
+    _variable:
+    - local
+    - cards
+    - Ranks
+    _lookups:
+    - 
+    - 
+    - 
+  Loop: {fileID: 114177033925600632}

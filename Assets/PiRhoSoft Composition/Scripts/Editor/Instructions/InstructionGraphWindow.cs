@@ -1165,7 +1165,7 @@ namespace PiRhoSoft.CompositionEditor
 					if (root.HasStore && VariableStoreControl.DrawStoreView(ref rootBox))
 						UpdateWatchSelected(InstructionStore.RootStoreName, root.Store);
 
-					VariableValueDrawer.Draw(new GUIContent(InstructionStore.RootStoreName), root, VariableDefinition.Create("", VariableType.Empty));
+					VariableValueDrawer.Draw(rootBox, new GUIContent(InstructionStore.RootStoreName), root, VariableDefinition.Create("", VariableType.Empty));
 
 					if (_selectedStore != null) _selectedStore.Draw();
 					if (_localStore != null) _localStore.Draw();

@@ -7,11 +7,15 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "yield-node")]
 	public class YieldNode : InstructionGraphNode
 	{
-		public override Color NodeColor => Colors.Loop;
+		[Tooltip("The node to move to when this node is finished")]
+		public InstructionGraphNode Next = null;
+
+		public override Color NodeColor => Colors.Break;
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			yield return null;
+			graph.GoTo(Next, nameof(Next));
 		}
 	}
 }

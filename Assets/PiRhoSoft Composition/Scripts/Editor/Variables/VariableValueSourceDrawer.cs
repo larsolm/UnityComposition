@@ -10,7 +10,15 @@ namespace PiRhoSoft.CompositionEditor
 	{
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
-			return RectHelper.LineHeight * 2;
+			var target = PropertyHelper.GetObject<VariableValueSource>(property);
+			var height = RectHelper.LineHeight;
+
+			if (target.Type == VariableSourceType.Value)
+				height += VariableValueDrawer.GetHeight(target.Value, target.Definition);
+			else
+				height += RectHelper.LineHeight;
+
+			return height;
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -34,7 +42,11 @@ namespace PiRhoSoft.CompositionEditor
 							RectHelper.TakeHorizontalSpace(ref position);
 							var definitionType = (VariableType)EditorGUI.EnumPopup(variableRect, target.Definition.Type);
 
-							target.Definition = VariableDefinition.Create(target.Definition.Name, definitionType, target.Definition.Constraint, target.Definition.Tag, target.Definition.Initializer, false, false);
+							if (definitionType != target.Definition.Type)
+							{
+								target.Definition = VariableDefinition.Create(target.Definition.Name, definitionType, target.Definition.Constraint, target.Definition.Tag, target.Definition.Initializer, false, false);
+								target.Value = target.Definition.Generate(null);
+							}
 						}
 
 						target.Value = VariableValueDrawer.Draw(position, GUIContent.none, target.Value, target.Definition);

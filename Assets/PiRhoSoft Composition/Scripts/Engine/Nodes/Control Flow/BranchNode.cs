@@ -22,12 +22,15 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var name = Switch.Execute(this, variables, VariableType.String).String;
+			var value = Switch.Execute(this, variables, VariableType.String);
 
-			if (Outputs.TryGetValue(name, out var output))
-				graph.GoTo(output, nameof(Outputs), name);
-			else
-				graph.GoTo(Default, nameof(Default));
+			if (value.TryGetString(out var name))
+			{
+				if (Outputs.TryGetValue(name, out var output))
+					graph.GoTo(output, nameof(Outputs), name);
+				else
+					graph.GoTo(Default, nameof(Default));
+			}
 
 			yield break;
 		}
