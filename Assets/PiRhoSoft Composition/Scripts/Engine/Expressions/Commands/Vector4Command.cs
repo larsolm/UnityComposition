@@ -26,7 +26,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (!wValue.HasNumber)
 					throw CommandEvaluationException.WrongParameterType(name, 3, wValue.Type, VariableType.Float);
 
-				return VariableValue.Create(new Vector4(xValue.Number, yValue.Number, yValue.Number, wValue.Number));
+				return VariableValue.Create(new Vector4(xValue.Number, yValue.Number, zValue.Number, wValue.Number));
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 4);

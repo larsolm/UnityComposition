@@ -22,7 +22,7 @@ MonoBehaviour:
   StartPosition: {x: 0, y: 0}
   Events:
     _keys:
-    - PieceClick
+    - PieceClicked
     _values:
     - {fileID: 114664206832613844}
 --- !u!114 &114664206832613844
@@ -35,11 +35,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression
+  m_Name: Set Seleceted Piece
   m_EditorClassIdentifier: 
-  Name: Expression
-  GraphPosition: {x: 320, y: -38.4}
+  Name: Set Seleceted Piece
+  GraphPosition: {x: 320, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 
+    _statement: 'local.Piece = root<VariableStoreComponent>.Piece;
+
+      local.Piece.Player.SelectedPiece = local.Piece;'

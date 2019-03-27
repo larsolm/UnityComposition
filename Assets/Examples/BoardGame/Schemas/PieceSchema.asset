@@ -67,4 +67,13 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
-  _version: 84
+  - _name: Highlight
+    _type: 17
+    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _tag: Persistent
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  _version: 88

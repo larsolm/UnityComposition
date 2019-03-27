@@ -44,7 +44,10 @@ namespace PiRhoSoft.CompositionEditor
 
 		private float GetHeight(int index)
 		{
-			return RectHelper.LineHeight;
+			var variable = _variables.Variables[index];
+			var definition = _variables.Constraints[index];
+
+			return VariableValueDrawer.GetHeight(variable.Value, definition);
 		}
 
 		private void DrawVariable(Rect rect, IList list, int index)
@@ -53,6 +56,8 @@ namespace PiRhoSoft.CompositionEditor
 			var definition = _variables.Constraints[index];
 			var nameRect = RectHelper.TakeLabel(ref rect);
 			var valueRect = RectHelper.TakeHorizontalSpace(ref rect);
+
+			nameRect.height = EditorGUIUtility.singleLineHeight;
 
 			var name = EditorGUI.TextField(nameRect, variable.Name);
 			var value = VariableValueDrawer.Draw(rect, GUIContent.none, variable.Value, definition);

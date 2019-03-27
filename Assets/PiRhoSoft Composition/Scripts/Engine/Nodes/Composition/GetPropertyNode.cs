@@ -86,7 +86,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			public static Getter Create(Type objectType, PropertyInfo property)
 			{
-				if (objectType != null || property == null)
+				if (objectType == null || property == null)
 					return null;
 
 				var getter = Create(objectType, property.PropertyType);

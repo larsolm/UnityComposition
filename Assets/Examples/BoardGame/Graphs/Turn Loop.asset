@@ -50,10 +50,14 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
     _inputs:
     - Name: CurrentPlayer
-      Type: 1
+      Type: 0
       Reference:
-        _variable: []
-        _lookups: []
+        _variable:
+        - global
+        - Yellow
+        _lookups:
+        - 
+        - 
       _valueData: EQAAAAAAAAA=
       _valueObjects:
       - {fileID: 0}
@@ -77,7 +81,7 @@ MonoBehaviour:
   m_Name: Turn Order
   m_EditorClassIdentifier: 
   Name: Turn Order
-  GraphPosition: {x: 640, y: -0}
+  GraphPosition: {x: 640, y: 0}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -105,10 +109,14 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
     _inputs:
     - Name: CurrentPlayer
-      Type: 1
+      Type: 0
       Reference:
-        _variable: []
-        _lookups: []
+        _variable:
+        - global
+        - Blue
+        _lookups:
+        - 
+        - 
       _valueData: EQAAAAAAAAA=
       _valueObjects:
       - {fileID: 0}
@@ -134,9 +142,9 @@ MonoBehaviour:
   Name: Loop Until Winner
   GraphPosition: {x: 320, y: 25.6}
   IsBreakpoint: 0
+  Loop: {fileID: 114220515761573856}
   Condition:
     _statement: local.Winner == null
-  Loop: {fileID: 114220515761573856}
 --- !u!114 &114545528968405250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -172,10 +180,14 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
     _inputs:
     - Name: CurrentPlayer
-      Type: 1
+      Type: 0
       Reference:
-        _variable: []
-        _lookups: []
+        _variable:
+        - global
+        - Red
+        _lookups:
+        - 
+        - 
       _valueData: EQAAAAAAAAA=
       _valueObjects:
       - {fileID: 0}
@@ -225,10 +237,14 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
     _inputs:
     - Name: CurrentPlayer
-      Type: 1
+      Type: 0
       Reference:
-        _variable: []
-        _lookups: []
+        _variable:
+        - global
+        - Green
+        _lookups:
+        - 
+        - 
       _valueData: EQAAAAAAAAA=
       _valueObjects:
       - {fileID: 0}
