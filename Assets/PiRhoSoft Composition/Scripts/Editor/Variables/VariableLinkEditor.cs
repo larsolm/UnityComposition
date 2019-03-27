@@ -84,8 +84,8 @@ namespace PiRhoSoft.CompositionEditor
 		private void Reorder(int from, int to)
 		{
 			var previous = _variables.Constraints[from];
-			_variables.Constraints[from] = _variables.Constraints[to];
-			_variables.Constraints[to] = previous;
+			_variables.Constraints.RemoveAt(from);
+			_variables.Constraints.Insert(to, previous);
 		}
 
 		private class AddVariableContent : AddNamedItemContent

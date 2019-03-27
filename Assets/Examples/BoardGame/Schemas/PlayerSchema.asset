@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a7e42c1f2776d5043957247cb96f24d3, type: 3}
   m_Name: PlayerSchema
   m_EditorClassIdentifier: 
-  InitializerType: 1
+  InitializerType: 0
   Tags:
     _items: []
   _definitions:
@@ -56,7 +56,7 @@ MonoBehaviour:
     _constraint: 0|35
     _tag: Always (not saved)
     _initializer:
-      _statement: 
+      _statement: 0
     _isTypeLocked: 0
     _isConstraintLocked: 0
   - _name: SelectedPiece
@@ -68,4 +68,12 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
-  _version: 81
+  - _name: FinishSpace
+    _type: 2
+    _constraint: 0|35
+    _tag: 
+    _initializer:
+      _statement: StartingSpace - 2
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  _version: 103

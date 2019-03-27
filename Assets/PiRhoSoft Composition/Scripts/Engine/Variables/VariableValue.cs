@@ -136,7 +136,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Create(Color value) => CreateValue(VariableType.Color, new ValueData { Color = value });
 		public static VariableValue Create(string str) => CreateReference(VariableType.String, str ?? string.Empty);
 		public static VariableValue Create(Enum e) => CreateReference(VariableType.Enum, e);
-		public static VariableValue Create(Object obj) => CreateReference(VariableType.Object, obj);
+		public static VariableValue Create(Object obj) => CreateObject(obj);
 		public static VariableValue Create(IVariableStore store) => CreateReference(VariableType.Store, store);
 		public static VariableValue Create(IVariableList list) => CreateReference(VariableType.List, list ?? new VariableList());
 
@@ -169,7 +169,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (reference is string) return CreateReference(VariableType.String, reference);
 			else if (reference is Enum) return CreateReference(VariableType.Enum, reference);
-			else if (reference is Object) return CreateReference(VariableType.Object, reference);
+			else if (reference is Object obj) return CreateObject(obj);
 			else if (reference is IVariableStore) return CreateReference(VariableType.Store, reference);
 			else if (reference is IVariableList) return CreateReference(VariableType.List, reference);
 			else return Empty;
@@ -182,6 +182,12 @@ namespace PiRhoSoft.CompositionEngine
 				_type = type,
 				_value = value
 			};
+		}
+
+		private static VariableValue CreateObject(Object reference)
+		{
+			// make sure "destroyed" unity objects are stored as real null
+			return CreateReference(VariableType.Object, reference == null ? null : reference); 
 		}
 
 		private static VariableValue CreateReference(VariableType type, object reference)
