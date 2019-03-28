@@ -1,13 +1,11 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	[Serializable]
-	public class SelectionItem : IVariableStore
+	public class SelectionItem
 	{
 		public enum ObjectSource
 		{
@@ -16,7 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 		[Tooltip("The variable representing the store to use for bindings")]
-		public VariableReference Variables = new VariableReference("this");
+		public VariableReference Variables = new VariableReference();
 
 		[Tooltip("The location to retrieve the object from")]
 		public ObjectSource Source;
@@ -38,24 +36,5 @@ namespace PiRhoSoft.CompositionEngine
 		public bool Expand = false;
 
 		public string Id => Source == ObjectSource.Scene ? Name : Label;
-
-		internal IVariableStore Store { get; set; }
-
-		public VariableValue GetVariable(string name)
-		{
-			if (name == nameof(Label)) return VariableValue.Create(Label);
-			else return Store.GetVariable(name);
-		}
-
-		public SetVariableResult SetVariable(string name, VariableValue value)
-		{
-			if (name == nameof(Label)) return SetVariableResult.ReadOnly;
-			else return Store.SetVariable(name, value);
-		}
-
-		public IEnumerable<string> GetVariableNames()
-		{
-			return Store.GetVariableNames().Concat(new List<string> { nameof(Label) });
-		}
 	}
 }

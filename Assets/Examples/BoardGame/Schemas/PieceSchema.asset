@@ -59,10 +59,26 @@ MonoBehaviour:
       _statement: false
     _isTypeLocked: 0
     _isConstraintLocked: 0
+  - _name: CanMove
+    _type: 1
+    _constraint: 
+    _tag: NewGame
+    _initializer:
+      _statement: false
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
   - _name: StartingPosition
     _type: 9
     _constraint: 
     _tag: Persistent
+    _initializer:
+      _statement: 
+    _isTypeLocked: 1
+    _isConstraintLocked: 0
+  - _name: FinishPosition
+    _type: 9
+    _constraint: 
+    _tag: 
     _initializer:
       _statement: 
     _isTypeLocked: 1
@@ -76,4 +92,4 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
-  _version: 89
+  _version: 106

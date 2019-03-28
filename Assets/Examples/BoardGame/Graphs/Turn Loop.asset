@@ -24,6 +24,12 @@ MonoBehaviour:
     - {fileID: 114688480945551876}
     - {fileID: 114843919956122944}
     - {fileID: 114093446906697678}
+    - {fileID: 114261969380187438}
+    - {fileID: 114318641242556822}
+    - {fileID: 114267983059919554}
+    - {fileID: 114764470530715806}
+    - {fileID: 114780222226876822}
+    - {fileID: 114390618060680096}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 0}
   Process: {fileID: 114506005044156910}
@@ -41,9 +47,9 @@ MonoBehaviour:
   m_Name: Take Turn
   m_EditorClassIdentifier: 
   Name: Take Turn
-  GraphPosition: {x: 998.4, y: -0}
+  GraphPosition: {x: 1024, y: 0}
   IsBreakpoint: 0
-  Next: {fileID: 114667983929491124}
+  Next: {fileID: 114261969380187438}
   Instruction:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
     _inputs: []
@@ -54,6 +60,81 @@ MonoBehaviour:
     _lookups:
     - 
   WaitForCompletion: 1
+--- !u!114 &114261969380187438
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Check Finished
+  m_EditorClassIdentifier: 
+  Name: Check Finished
+  GraphPosition: {x: 1254.4, y: 102.4}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114267983059919554}
+    - {fileID: 114780222226876822}
+--- !u!114 &114267983059919554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Finished
+  m_EditorClassIdentifier: 
+  Name: Set Finished
+  GraphPosition: {x: 1548.8, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114318641242556822}
+  Expression:
+    _statement: local.Finished = true;
+--- !u!114 &114318641242556822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Pieces
+  m_EditorClassIdentifier: 
+  Name: Iterate Pieces
+  GraphPosition: {x: 1868.8, y: 25.6}
+  IsBreakpoint: 0
+  Container:
+    _variable:
+    - root
+    - Pieces
+    _lookups:
+    - 
+    - 
+  Loop: {fileID: 114667983929491124}
+--- !u!114 &114390618060680096
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbf36d44c8307646ae6b4c67ca8b89d, type: 3}
+  m_Name: Break
+  m_EditorClassIdentifier: 
+  Name: Break
+  GraphPosition: {x: 2188.8, y: 115.200005}
+  IsBreakpoint: 0
 --- !u!114 &114506005044156910
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -85,7 +166,7 @@ MonoBehaviour:
   m_Name: Break
   m_EditorClassIdentifier: 
   Name: Break
-  GraphPosition: {x: 1830.4, y: 76.8}
+  GraphPosition: {x: 2803.2, y: 12.8}
   IsBreakpoint: 0
 --- !u!114 &114667983929491124
 MonoBehaviour:
@@ -100,12 +181,12 @@ MonoBehaviour:
   m_Name: Check Finished
   m_EditorClassIdentifier: 
   Name: Check Finished
-  GraphPosition: {x: 1344, y: 0}
+  GraphPosition: {x: 2176, y: 12.8}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114843919956122944}
-  OnFalse: {fileID: 0}
+  OnTrue: {fileID: 0}
+  OnFalse: {fileID: 114764470530715806}
   Condition:
-    _statement: root.Piece1.Finished && root.Piece2.Finished && root.Piece3.Finished
+    _statement: root.Finished
 --- !u!114 &114688480945551876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -129,6 +210,43 @@ MonoBehaviour:
     - 
     - 
   Loop: {fileID: 114093446906697678}
+--- !u!114 &114764470530715806
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Not Finished
+  m_EditorClassIdentifier: 
+  Name: Set Not Finished
+  GraphPosition: {x: 2483.2, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114545528968405250}
+  Expression:
+    _statement: local.Finished = false;
+--- !u!114 &114780222226876822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Check Winner
+  m_EditorClassIdentifier: 
+  Name: Check Winner
+  GraphPosition: {x: 1548.8, y: 115.200005}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114843919956122944}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: local.Finished
 --- !u!114 &114843919956122944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -142,8 +260,8 @@ MonoBehaviour:
   m_Name: Set Winner
   m_EditorClassIdentifier: 
   Name: Set Winner
-  GraphPosition: {x: 1651.2001, y: -38.4}
+  GraphPosition: {x: 1868.8, y: 115.200005}
   IsBreakpoint: 0
-  Next: {fileID: 114545528968405250}
+  Next: {fileID: 114390618060680096}
   Expression:
     _statement: local.Winner = root

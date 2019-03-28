@@ -1,19 +1,11 @@
-﻿using PiRhoSoft.UtilityEngine;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public enum PrimaryAxis
-	{
-		Column,
-		Row
-	}
-
 	[HelpURL(Composition.DocumentationUrl + "selection-control")]
-	[AddComponentMenu("PiRho Soft/Interface/Selection Control")]
-	public class SelectionControl : InterfaceControl
+	public abstract class SelectionControl : InterfaceControl
 	{
 		private const string _invalidExpandWarning = "(CSCIE) Failed to expand item {0}: the variable '{1}' is not an IVariableList";
 		private const string _missingItemError = "(CSCMI) Failed to create item {0}: the variable '{1}' could not be found";
@@ -21,126 +13,112 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _missingTemplateError = "(ISCMT) Failed to create item {0}: the object template has not been assigned";
 		private const string _missingChildError = "(ISCMC) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
 		private const string _missingBindingError = "(CSCMB) Failed to initialize item {0}: the template '{1}' does not have a Binding Root";
-		private const string _invalidBindingError = "(CSCMB) Failed to bind index {0} of item {1}: the binding is not an IVariableStore";
 
-		[Tooltip("The input axis to use for horizontal movement")]
-		public string HorizontalAxis = "Horizontal";
+		public bool IsRunning { get; private set; } = false;
+		public bool IsSelectionRequired { get; private set; } = false;
+		public bool IsClosing { get; private set; } = false;
 
-		[Tooltip("The input axis to use for vertical movement")]
-		public string VerticalAxis = "Vertical";
-
-		[Tooltip("The input button to use for accepting the selection")]
-		public string AcceptButton = "Submit";
-
-		[Tooltip("The input button to use for canceling the selection")]
-		public string CancelButton = "Cancel";
-
-		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a column")]
-		public bool VerticalWrapping = false;
-
-		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a row")]
-		public bool HorizontalWrapping = false;
-
-		[Tooltip("Specifies the axis in which the items in the selection are ordered")]
-		public PrimaryAxis PrimaryAxis = PrimaryAxis.Column;
-
-		[Tooltip("How many columns are in this selection")]
-		[ConditionalDisplaySelf(nameof(PrimaryAxis), EnumValue = (int)PrimaryAxis.Column)]
-		[Minimum(1)]
-		public int ColumnCount = 1;
-
-		[Tooltip("How many rows are in this selection")]
-		[ConditionalDisplaySelf(nameof(PrimaryAxis), EnumValue = (int)PrimaryAxis.Row)]
-		[Minimum(1)]
-		public int RowCount = 1;
+		public bool HasFocusedItem => _focusedItem != null;
+		public bool HasSelectedItem => _selectedItem != null;
 
 		public SelectionItem FocusedItem => _focusedItem?.Item;
-		public IVariableStore FocusedVariables => _focusedItem?.Variables;
+		public int FocusedIndex => _focusedItem == null ? -1 : _selectedItem.Index;
+		public VariableValue FocusedValue => _focusedItem == null ? VariableValue.Empty : _focusedItem.Value;
 
 		public SelectionItem SelectedItem => _selectedItem?.Item;
-		public object SelectedVariables => _selectedItem?.Selection;
-
-		protected int _columnCount;
-		protected int _rowCount;
-		protected int _columnIndex = 0;
-		protected int _rowIndex = 0;
+		public int SelectedIndex => _selectedItem == null ? -1 : _selectedItem.Index;
+		public VariableValue SelectedValue => _selectedItem == null ? VariableValue.Empty : _selectedItem.Value;
 
 		protected List<MenuItem> _items = new List<MenuItem>();
+		protected int _focusedIndex;
 		protected MenuItem _focusedItem;
 		protected MenuItem _selectedItem;
 
-		private bool _isSelectionRequired = false;
-		private bool _isClosing = false;
-
-		public IEnumerator MakeSelection(IVariableStore variables, IEnumerable<SelectionItem> items, bool isSelectionRequired)
+		public void Show(IVariableStore variables, IEnumerable<SelectionItem> items, bool isSelectionRequired, bool resetIndex)
 		{
 			Activate();
+			StopAllCoroutines();
+			Initialize(isSelectionRequired, resetIndex);
+			Create(variables, items);
+			StartCoroutine(Run_());
+		}
 
-			_isSelectionRequired = isSelectionRequired;
-			_isClosing = false;
+		private IEnumerator Run_()
+		{
+			IsRunning = true;
+
+			yield return Run();
+
+			IsRunning = false;
+		}
+
+		private void Initialize(bool isSelectionRequired, bool resetIndex)
+		{
+			IsSelectionRequired = isSelectionRequired;
+			IsClosing = false;
+
 			_selectedItem = null;
+			_focusedItem = null;
 
+			if (resetIndex)
+				_focusedIndex = 0;
+
+			OnInitialize();
+		}
+
+		private void Create(IVariableStore variables, IEnumerable<SelectionItem> items)
+		{
 			CreateItems(variables, items);
-			VariableBinding.UpdateBinding(gameObject, string.Empty, null);
-			DetermineLayout();
-
-			if (IsLocationFocusable(_columnIndex, _rowIndex))
-				SetFocus(_columnIndex, _rowIndex, true);
-			else
-				SetFocusToValidLocation(0, 0);
-
-			while (_selectedItem == null && !_isClosing)
-			{
-				yield return null; // wait one frame for input
-
-				var left = InputHelper.GetWasAxisPressed(HorizontalAxis, -0.25f);
-				var right = InputHelper.GetWasAxisPressed(HorizontalAxis, 0.25f);
-				var up = InputHelper.GetWasAxisPressed(VerticalAxis, 0.25f);
-				var down = InputHelper.GetWasAxisPressed(VerticalAxis, -0.25f);
-				var accept = InputHelper.GetWasButtonPressed(AcceptButton);
-				var cancel = InputHelper.GetWasButtonPressed(CancelButton);
-
-				if (up) MoveFocusUp();
-				else if (down) MoveFocusDown();
-				else if (left) MoveFocusLeft();
-				else if (right) MoveFocusRight();
-				else if (accept && _focusedItem != null) _selectedItem = _focusedItem;
-				else if (cancel) Close();
-			}
-
-			Deactivate();
+			MoveFocus(_focusedIndex);
+			OnCreate();
 		}
 
 		public void Close()
 		{
-			if (!_isSelectionRequired)
-				_isClosing = true;
+			if (!IsSelectionRequired)
+				IsClosing = true;
 		}
 
-		protected override void Teardown()
+		public void Select()
 		{
-			foreach (var item in _items)
-			{
-				if (item.Generated)
-					Destroy(item.Object);
-			}
-
-			_items.Clear();
-
-			base.Teardown();
+			if (_focusedItem != null)
+				_selectedItem = _focusedItem;
 		}
 
 		#region Item Management
 
-		protected class MenuItem
+		protected class MenuItem : IVariableStore
 		{
 			public SelectionItem Item;
-			public IVariableStore Variables;
-			public object Selection;
 			public GameObject Object;
 			public bool Generated;
-			public FocusIndicator Indicator;
-			public ItemSelector Selector;
+
+			public int Index;
+			public bool Focused;
+			public string Label;
+			public VariableValue Value;
+
+			public VariableValue GetVariable(string name)
+			{
+				switch (name)
+				{
+					case nameof(Index): return VariableValue.Create(Index);
+					case nameof(Label): return VariableValue.Create(Label);
+					case nameof(Focused): return VariableValue.Create(Focused);
+					case nameof(Value): return Value;
+					default: return VariableValue.Empty;
+				}
+			}
+
+			public SetVariableResult SetVariable(string name, VariableValue value)
+			{
+				return SetVariableResult.ReadOnly;
+			}
+
+			public IEnumerable<string> GetVariableNames()
+			{
+				return new List<string> { nameof(Index), nameof(Label), nameof(Focused), nameof(Value) };
+			}
 		}
 
 		protected virtual Transform GetItemParent()
@@ -158,23 +136,23 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var value = item.Variables.GetValue(variables);
 
-					if (value.TryGetList(out var list))
-						CreateListItem(item, variables, list, ref index);
-					else if (value.TryGetStore(out var store))
-						CreateStoreItem(item, variables, store, ref index);
-					else if (value.Type == VariableType.Empty)
+					if (value.HasList)
+						CreateListItem(item, value, ref index);
+					else if (value.HasStore)
+						CreateStoreItem(item, value, ref index);
+					else if (value.IsEmpty)
 						Debug.LogErrorFormat(this, _missingItemError, item.Id, item.Variables);
 					else
 						Debug.LogErrorFormat(this, _invalidItemError, item.Id, item.Variables);
 				}
 				else
 				{
-					CreateStoreItem(item, variables, variables, ref index);
+					CreateStoreItem(item, VariableValue.Create(variables), ref index);
 				}
 			}
 		}
 
-		private void CreateStoreItem(SelectionItem item, IVariableStore variables, IVariableStore store, ref int index)
+		private void CreateStoreItem(SelectionItem item, VariableValue value, ref int index)
 		{
 			if (item.Source == SelectionItem.ObjectSource.Asset)
 			{
@@ -183,90 +161,80 @@ namespace PiRhoSoft.CompositionEngine
 				else if (item.Expand)
 					Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Variables);
 				else
-					AddItem(item, null, store, store, index++);
+					AddItem(item, null, value, index++);
 			}
 			else if (item.Source == SelectionItem.ObjectSource.Scene)
 			{
-				CreateSceneItem(item, store, ref index);
+				CreateSceneItem(item, value, ref index);
 			}
 		}
 
-		private void CreateListItem(SelectionItem item, IVariableStore variables, IVariableList list, ref int index)
+		private void CreateListItem(SelectionItem item, VariableValue value, ref int index)
 		{
 			if (item.Source == SelectionItem.ObjectSource.Asset)
 			{
 				if (item.Template == null)
 					Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
 				else if (item.Expand)
-					CreateExpandedItems(item, list, ref index);
+					CreateExpandedItems(item, value, ref index);
 				else
-					AddItem(item, null, item, list, index++);
+					AddItem(item, null, value, index++);
 			}
 			else if (item.Source == SelectionItem.ObjectSource.Scene)
 			{
-				CreateSceneItem(item, variables, ref index);
+				CreateSceneItem(item, value, ref index);
 			}
 		}
 
-		private void CreateExpandedItems(SelectionItem item, IVariableList list, ref int index)
+		private void CreateExpandedItems(SelectionItem item, VariableValue value, ref int index)
 		{
+			var list = value.List;
+
 			for (var i = 0; i < list.Count; i++)
-			{
-				if (list.GetVariable(i).TryGetStore(out var itemStore))
-					AddItem(item, null, itemStore, itemStore, index++);
-				else
-					Debug.LogWarningFormat(this, _invalidBindingError, i, item.Name);
-			}
+				AddItem(item, null, list.GetVariable(i), index++);
 		}
 
-		private void CreateSceneItem(SelectionItem item, IVariableStore store, ref int index)
+		private void CreateSceneItem(SelectionItem item, VariableValue value, ref int index)
 		{
 			var obj = transform.Find(item.Name);
 
-			if (obj != null)
-				AddItem(item, obj.gameObject, item, store, index++);
+			if (obj)
+				AddItem(item, obj.gameObject, value, index++);
 			else
 				Debug.LogErrorFormat(this, _missingChildError, item.Name, name);
 		}
 
-		private void AddItem(SelectionItem item, GameObject child, IVariableStore variables, object selection, int index)
+		private void AddItem(SelectionItem item, GameObject existing, VariableValue value, int index)
 		{
 			if (index < _items.Count)
 			{
-				if (_items[index].Item == item && _items[index].Variables == variables && _items[index].Selection == selection)
+				if (_items[index].Item == item)
 					return;
 
 				_items.RemoveRange(index, _items.Count - index);
 			}
 
 			var parent = GetItemParent();
-			var obj = child == null ? Instantiate(item.Template, parent) : child;
+			var obj = existing == null ? Instantiate(item.Template, parent) : existing;
 			obj.transform.SetSiblingIndex(index);
 
 			var binding = obj.GetComponent<BindingRoot>();
-			var indicator = obj.GetComponentInChildren<FocusIndicator>(true);
-			var selector = obj.GetComponentInChildren<ItemSelector>();
 
-			if (binding != null)
-				binding.Value = VariableValue.Create(variables);
+			if (binding)
+				binding.Value = value;
 			else if (item.Source == SelectionItem.ObjectSource.Asset)
 				Debug.LogErrorFormat(this, _missingBindingError, item.Name, item.Template.name);
-
-			if (selector)
-			{
-				selector.Selection = this;
-				selector.Index = index;
-			}
-
+			
 			_items.Add(new MenuItem
 			{
 				Item = item,
-				Variables = variables,
-				Selection = selection,
 				Object = obj,
-				Generated = child == null,
-				Indicator = indicator,
-				Selector = selector
+				Generated = existing == null,
+
+				Index = index,
+				Label = item.Id,
+				Value = value,
+				Focused = false
 			});
 		}
 
@@ -275,13 +243,19 @@ namespace PiRhoSoft.CompositionEngine
 			_selectedItem = index >= 0 && index < _items.Count ? _items[index] : null;
 		}
 
-		protected MenuItem GetItem(int column, int row)
+		public int GetIndex(ItemSelector selector)
 		{
-			var mainIndex = PrimaryAxis == PrimaryAxis.Column ? column : row;
-			var crossIndex = PrimaryAxis == PrimaryAxis.Column ? row : column;
-			var crossCount = PrimaryAxis == PrimaryAxis.Column ? _rowCount : _columnCount;
+			foreach (var item in _items)
+			{
+				if (item.Object.GetComponentInChildren<ItemSelector>() == selector)
+					return item.Index;
+			}
 
-			var index = mainIndex * crossCount + crossIndex;
+			return -1;
+		}
+
+		protected MenuItem GetItem(int index)
+		{
 			return index >= 0 && index < _items.Count ? _items[index] : null;
 		}
 
@@ -289,293 +263,54 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Focus Management
 
-		protected virtual void FocusItem(MenuItem item)
+		public virtual void MoveFocus(int index)
 		{
-			if (item.Indicator)
-				item.Indicator.SetFocused(true);
+			var item = GetItem(index);
+
+			if (_focusedItem != null)
+				BlurItem(_focusedItem);
+
+			if (item != null)
+				FocusItem(item);
 		}
 
-		protected virtual void BlurItem(MenuItem item)
+		private void FocusItem(MenuItem item)
 		{
-			if (item.Indicator)
-				item.Indicator.SetFocused(false);
+			item.Focused = true;
+			_focusedIndex = item.Index;
 		}
 
-		public void MoveFocus(int index)
+		private void BlurItem(MenuItem item)
 		{
-			if (PrimaryAxis == PrimaryAxis.Column)
-			{
-				var column = index / (_items.Count / _columnCount);
-				var row = index % _rowCount;
-
-				MoveFocusToLocation(column, row);
-			}
-			else if (PrimaryAxis == PrimaryAxis.Row)
-			{
-				var column = index % _columnCount;
-				var row = index / (_items.Count / _rowCount);
-
-				MoveFocusToLocation(column, row);
-			}
-		}
-
-		public virtual void MoveFocusUp()
-		{
-			var row = _rowIndex;
-			var column = _columnIndex;
-
-			MoveFocus(-1, VerticalWrapping, GetRowCount(column), 0, ref row, ref column, ref row);
-		}
-
-		public virtual void MoveFocusDown()
-		{
-			var row = _rowIndex;
-			var column = _columnIndex;
-
-			MoveFocus(1, VerticalWrapping, GetRowCount(column), 0, ref row, ref column, ref row);
-		}
-
-		public virtual void MoveFocusLeft()
-		{
-			var row = _rowIndex;
-			var column = _columnIndex;
-
-			MoveFocus(-1, HorizontalWrapping, GetColumnCount(row), 0, ref column, ref column, ref row);
-		}
-
-		public virtual void MoveFocusRight()
-		{
-			var row = _rowIndex;
-			var column = _columnIndex;
-
-			MoveFocus(1, HorizontalWrapping, GetColumnCount(row), 0, ref column, ref column, ref row);
-		}
-
-		public bool MoveFocusToStart()
-		{
-			return MoveFocusToLocation(0, 0);
-		}
-
-		public bool MoveFocusToEnd()
-		{
-			return MoveFocusToLocation(_columnCount - 1, _rowCount - 1);
-		}
-
-		public bool MoveFocusToTop()
-		{
-			return MoveFocusToLocation(_columnIndex, 0);
-		}
-
-		public bool MoveFocusToBottom()
-		{
-			return MoveFocusToLocation(_columnIndex, _rowCount - 1);
-		}
-
-		public bool MoveFocusToLeft()
-		{
-			return MoveFocusToLocation(0, _rowIndex);
-		}
-
-		public bool MoveFocusToRight()
-		{
-			return MoveFocusToLocation(_columnCount - 1, _rowIndex);
-		}
-
-		public bool MoveFocusToLocation(int column, int row)
-		{
-			if (IsLocationFocusable(column, row))
-			{
-				SetFocus(column, row, false);
-				return true;
-			}
-
-			return false;
-		}
-
-		public bool SetFocusToValidLocation(int startingColumn, int startingRow)
-		{
-			if (PrimaryAxis == PrimaryAxis.Column)
-				return SetFocusToValidRow(startingColumn, startingRow);
-			else if (PrimaryAxis == PrimaryAxis.Row)
-				return SetFocusToValidColumn(startingColumn, startingRow);
-			else
-				return false;
-		}
-
-		protected void MoveFocus(int change, bool wrap, int count, int depth, ref int index, ref int column, ref int row)
-		{
-			index += change;
-
-			if (index < 0) index = wrap ? count - 1 : 0;
-			else if (index >= count) index = wrap ? 0 : count - 1;
-
-			var focusable = IsLocationFocusable(column, row);
-
-			if (focusable)
-				SetFocus(column, row, false);
-			else if (depth < count) // No need to recurse more than once through the column or row
-				MoveFocus(change, wrap, count, depth + 1, ref index, ref column, ref row);
-		}
-
-		protected void SetFocus(int column, int row, bool force)
-		{
-			if (force || column != _columnIndex || row != _rowIndex)
-			{
-				if (_focusedItem != null)
-					BlurItem(_focusedItem);
-
-				_columnIndex = column;
-				_rowIndex = row;
-				_focusedItem = GetItem(column, row);
-
-				if (_focusedItem != null)
-					FocusItem(_focusedItem);
-			}
-		}
-
-		protected bool SetFocusToValidColumn(int startingColumn, int startingRow)
-		{
-			for (var row = startingRow; row < _rowCount; row++)
-			{
-				if (SetFocusToValidColumnInRow(startingColumn, row))
-					return true;
-			}
-
-			for (var row = 0; row < startingRow; row++)
-			{
-				if (SetFocusToValidColumnInRow(startingColumn, row))
-					return true;
-			}
-
-			return false;
-		}
-
-		protected bool SetFocusToValidColumnInRow(int startingColumn, int row)
-		{
-			for (var column = startingColumn; column < _columnCount; column++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			for (var column = 0; column < startingColumn; column++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		protected bool SetFocusToValidRow(int startingColumn, int startingRow)
-		{
-			for (var column = startingColumn; column < _columnCount; column++)
-			{
-				if (SetFocusToValidRowInColumn(column, startingRow))
-					return true;
-			}
-
-			for (var column = 0; column < startingColumn; column++)
-			{
-				if (SetFocusToValidRowInColumn(column, startingRow))
-					return true;
-			}
-
-			return false;
-		}
-
-		protected bool SetFocusToValidRowInColumn(int column, int startingRow)
-		{
-			for (var row = startingRow; row < _rowCount; row++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			for (var row = 0; row < startingRow; row++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		protected bool IsLocationFocusable(int column, int row)
-		{
-			var item = GetItem(column, row);
-			return item != null && item.Object.activeInHierarchy;
+			item.Focused = false;
 		}
 
 		#endregion
 
-		#region Layout
+		#region Virtual Interface
 
-		private void DetermineLayout()
+		protected virtual void OnInitialize()
 		{
-			if (PrimaryAxis == PrimaryAxis.Column)
-			{
-				_columnCount = ColumnCount;
-				_rowCount = GetCrossSize(_columnCount);
-			}
-			else if (PrimaryAxis == PrimaryAxis.Row)
-			{
-				_rowCount = RowCount;
-				_columnCount = GetCrossSize(_rowCount);
-			}
 		}
 
-		private int GetCrossSize(int count)
+		protected virtual void OnCreate()
 		{
-			return Mathf.CeilToInt(_items.Count / (float)count);
 		}
 
-		private int GetColumnCount(int row)
+		protected virtual IEnumerator Run()
 		{
-			if (PrimaryAxis == PrimaryAxis.Row)
-			{
-				if (row < GetRowCount(_columnCount - 1))
-					return _columnCount;
-				else
-					return _columnCount - 1;
-			}
-			else
-			{
-				if (row == _rowCount - 1)
-					return _columnCount - (_columnCount * _rowCount - _items.Count);
-				else
-					return _columnCount;
-			}
+			yield break;
 		}
 
-		private int GetRowCount(int column)
+		protected override void Teardown()
 		{
-			if (PrimaryAxis == PrimaryAxis.Column)
+			foreach (var item in _items)
 			{
-				if (column == _columnCount - 1)
-					return _rowCount - (_rowCount * _columnCount - _items.Count);
-				else
-					return _rowCount;
+				if (item.Generated)
+					Destroy(item.Object);
 			}
-			else
-			{
-				if (column < GetColumnCount(_rowCount - 1))
-					return _rowCount;
-				else
-					return _rowCount - 1;
-			}
+
+			_items.Clear();
 		}
 
 		#endregion

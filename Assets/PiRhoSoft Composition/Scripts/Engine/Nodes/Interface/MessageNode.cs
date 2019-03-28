@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "message-node")]
-	[CreateInstructionGraphNodeMenu("Interface/Message", 1)]
+	[CreateInstructionGraphNodeMenu("Interface/Show Message", 1)]
 	public class MessageNode : InstructionGraphNode
 	{
 		[Tooltip("The node to follow when the message is dismissed")]
@@ -15,15 +15,15 @@ namespace PiRhoSoft.CompositionEngine
 		[VariableConstraint(typeof(MessageControl))]
 		public VariableReference Control = new VariableReference();
 
-		[Tooltip("Controls when the interface waits for interaction from the user")]
-		public MessageInteractionType Interaction = MessageInteractionType.WaitForInput;
+		[Tooltip("Specifies whether to wait for the message to complete before moving on to Next")]
+		public bool WaitForCompletion = true;
 
-		[Tooltip("How long to wait after the text is displayed before deactivating")]
-		[ConditionalDisplaySelf(nameof(Interaction), EnumValue = (int)MessageInteractionType.DontWait)]
+		[Tooltip("Specifies whether to automatically hide the message when it is complete")]
+		public bool AutoHide = false;
+
+		[Tooltip("How long to wait after message is complete before hiding")]
+		[ConditionalDisplaySelf(nameof(AutoHide))]
 		public float WaitTime = 0.0f;
-
-		[Tooltip("If true the interface will consider this message the last in a sequence, altering the way the interaction cues are displayed")]
-		public bool IsLast = true;
 
 		[Tooltip("The message to display when this node is traversed")]
 		public Message Message = new Message();
@@ -35,11 +35,30 @@ namespace PiRhoSoft.CompositionEngine
 			var text = Message.GetText(variables);
 
 			if (ResolveObject(variables, Control, out MessageControl message))
-				yield return message.Show(variables, text, Interaction, IsLast, WaitTime);
+				yield return Show(message, text);
 			else
 				Debug.Log(text);
 
 			graph.GoTo(Next, nameof(Next));
+		}
+
+		private IEnumerator Show(MessageControl message, string text)
+		{
+			message.Show(text);
+
+			if (WaitForCompletion)
+			{
+				while (message.IsRunning)
+					yield return null;
+			}
+
+			if (AutoHide)
+			{
+				if (WaitTime > 0.0f)
+					yield return new WaitForSeconds(WaitTime);
+
+				message.Deactivate();
+			}
 		}
 	}
 }

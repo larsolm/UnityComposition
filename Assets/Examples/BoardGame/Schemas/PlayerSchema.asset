@@ -24,32 +24,14 @@ MonoBehaviour:
       _statement: '"Red"'
     _isTypeLocked: 0
     _isConstraintLocked: 0
-  - _name: Piece1
-    _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+  - _name: Pieces
+    _type: 19
+    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Always (not saved)
+    _tag: 
     _initializer:
       _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: Piece2
-    _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Always (not saved)
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: Piece3
-    _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Always (not saved)
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
+    _isTypeLocked: 1
     _isConstraintLocked: 0
   - _name: StartingSpace
     _type: 2
@@ -76,4 +58,4 @@ MonoBehaviour:
       _statement: StartingSpace - 2
     _isTypeLocked: 1
     _isConstraintLocked: 0
-  _version: 103
+  _version: 116

@@ -16,38 +16,33 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(AllowCollapse = false, ShowEditButton = true, EmptyText = "Add items that need to be enabled along with this control")]
 		public DependentObjectList DependentObjects = new DependentObjectList();
 
-		public IVariableStore Variables { get; private set; }
-
-		private int _activeCount = 0;
-
-		public bool IsActive => _activeCount > 0;
+		public bool IsActive { get; private set; } = false;
 
 		void Awake()
 		{
-			_activeCount = 0;
 			Disable();
 		}
 
 		public void Activate()
 		{
-			if (_activeCount == 0)
+			if (!IsActive)
 			{
 				Enable();
 				Setup();
 			}
 
-			_activeCount++;
+			IsActive = true;
 		}
 
 		public void Deactivate()
 		{
-			_activeCount--;
-
-			if (_activeCount == 0)
+			if (IsActive)
 			{
 				Teardown();
 				Disable();
 			}
+
+			IsActive = false;
 		}
 
 		protected virtual void Setup()
