@@ -10,7 +10,6 @@ using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
 using MenuItem = UnityEditor.MenuItem;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -53,14 +52,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static readonly IconButton _lockButton = new IconButton("AssemblyLock", "Lock this window so it won't be used when other graphs are opened");
 		private static readonly IconButton _unlockButton = new IconButton("AssemblyLock", "Unlock this window so it can be used to show other graphs");
-		private static readonly IconButton _disabledWatchButton = new IconButton("UnityEditor.LookDevView");
-		private static readonly IconButton _openWatchButton = new IconButton("UnityEditor.LookDevView", "Open the variables panel");
-		private static readonly IconButton _closeWatchButton = new IconButton("UnityEditor.LookDevView", "Close the variables panel");
+		private static readonly IconButton _openWatchButton = new IconButton("UnityEditor.LookDevView", "Open the watch window");
+		private static readonly IconButton _openLogButton = new IconButton("UnityEditor.LookDevView", "Open the log window");
 
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
 		private const float _toolbarHeight = 17.0f;
-		private const float _watchWidth = 300.0f;
 		private const float _toolbarButtonWidth = 60.0f;
 		private const float _dragTolerance = 4.0f;
 
@@ -97,8 +94,6 @@ namespace PiRhoSoft.CompositionEditor
 		private int _showContextMenu = 0;
 
 		private bool _isLocked = false;
-		private bool _isWatchOpen = false;
-		private Vector2 _watchScrollPosition;
 
 		private MouseState _mouseMoveState = MouseState.Select;
 		private MouseState _mouseDragState = MouseState.Hover;
@@ -119,13 +114,6 @@ namespace PiRhoSoft.CompositionEditor
 		private List<InstructionGraphNode.NodeData> _selectedNodes = new List<InstructionGraphNode.NodeData>();
 		private List<InstructionGraphNode.ConnectionData> _selectedConnections = new List<InstructionGraphNode.ConnectionData>();
 		private InstructionGraphNode.NodeData _selectedInteraction;
-
-		private InstructionGraph _watching;
-		private VariableStoreControl _inputStore;
-		private VariableStoreControl _outputStore;
-		private VariableStoreControl _localStore;
-		private VariableStoreControl _globalStore;
-		private VariableStoreControl _selectedStore;
 
 		#region Window Access
 
@@ -250,9 +238,6 @@ namespace PiRhoSoft.CompositionEditor
 		private void PlayModeChanged(PlayModeStateChange state)
 		{
 			RebuildNodes();
-
-			if (state == PlayModeStateChange.EnteredEditMode)
-				TeardownWatch();
 		}
 
 		private void RebuildNodes()
@@ -261,12 +246,6 @@ namespace PiRhoSoft.CompositionEditor
 			SetupNodes();
 			UpdateSelection();
 			Repaint();
-		}
-
-		void OnInspectorUpdate()
-		{
-			if (IsWatchOpen)
-				Repaint();
 		}
 
 		#endregion
@@ -748,8 +727,6 @@ namespace PiRhoSoft.CompositionEditor
 		#region Drawing
 
 		private float ToolbarBottom => _toolbarHeight;
-		private bool IsWatchOpen => Application.isPlaying && _graph != null && _graph.IsRunning && _isWatchOpen;
-		private float WatchLeft => _isWatchOpen ? position.width - _watchWidth : position.width;
 
 		private static GUIStyle CreateHeaderStyle()
 		{
@@ -806,9 +783,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		protected override void PostDraw(Rect rect)
 		{
-			if (IsWatchOpen)
-				DrawWatch(rect);
-
 			DrawToolbar(rect);
 
 			if (_toRemove != null)
@@ -917,11 +891,11 @@ namespace PiRhoSoft.CompositionEditor
 
 				_isLocked = GUILayout.Toggle(_isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);
 
-				using (new EditorGUI.DisabledScope(_graph == null || !_graph.IsRunning))
-				{
-					var icon = (_graph != null && _graph.IsRunning) ? (_isWatchOpen ? _closeWatchButton : _openWatchButton) : _disabledWatchButton;
-					_isWatchOpen = GUILayout.Toggle(_isWatchOpen, icon.Content, EditorStyles.toolbarButton);
-				}
+				if (GUILayout.Button(_openWatchButton.Content, EditorStyles.toolbarButton))
+					WatchWindow.ShowWindow();
+
+				if (GUILayout.Button(_openLogButton.Content, EditorStyles.toolbarButton))
+					LogWindow.ShowWindow();
 			}
 		}
 
@@ -1137,96 +1111,6 @@ namespace PiRhoSoft.CompositionEditor
 			HandleHelper.DrawCircle(end, _knobRadius, endColor);
 		}
 
-		private void DrawWatch(Rect rect)
-		{
-			SetupWatch();
-
-			rect.x = WatchLeft;
-			rect.y = ToolbarBottom;
-			rect.width -= WatchLeft;
-			rect.height -= ToolbarBottom + 1;
-
-			using (ColorScope.BackgroundColor(new Color(0.82f, 0.82f, 0.82f)))
-			{
-				GUI.Box(rect, string.Empty, _watchStyle.Style);
-			}
-
-			using (new GUILayout.AreaScope(rect))
-			{
-				using (var scroller = new EditorGUILayout.ScrollViewScope(_watchScrollPosition, false, false, GUI.skin.horizontalScrollbar, GUI.skin.verticalScrollbar, GUI.skin.scrollView, GUILayout.Width(rect.width), GUILayout.Height(rect.height)))
-				{
-					EditorGUILayout.Space();
-
-					var rootBox = EditorGUILayout.GetControlRect(false, EditorGUIUtility.standardVerticalSpacing + EditorGUIUtility.singleLineHeight + EditorGUIUtility.standardVerticalSpacing);
-					GUI.Box(rootBox, string.Empty);
-					rootBox = RectHelper.Inset(rootBox, EditorGUIUtility.standardVerticalSpacing);
-
-					var root = VariableValue.CreateReference(_graph.Store.Root);
-					if (root.HasStore && VariableStoreControl.DrawStoreView(ref rootBox))
-						UpdateWatchSelected(InstructionStore.RootStoreName, root.Store);
-
-					VariableValueDrawer.Draw(rootBox, new GUIContent(InstructionStore.RootStoreName), root, VariableDefinition.Create("", VariableType.Empty));
-
-					if (_selectedStore != null) _selectedStore.Draw();
-					if (_localStore != null) _localStore.Draw();
-					if (_globalStore != null) _globalStore.Draw();
-					if (_inputStore != null) _inputStore.Draw();
-					if (_outputStore != null) _outputStore.Draw();
-
-					_watchScrollPosition = scroller.scrollPosition;
-
-					EditorGUILayout.Space();
-				}
-			}
-
-			UpdateWatchSelected(_selectedStore);
-			UpdateWatchSelected(_localStore);
-			UpdateWatchSelected(_globalStore);
-			UpdateWatchSelected(_inputStore);
-			UpdateWatchSelected(_outputStore);
-		}
-
-		private void SetupWatch()
-		{
-			_watching = _graph;
-			_inputStore = CreateStoreControl(InstructionStore.InputStoreName, _graph.Store.Input, _inputStore);
-			_outputStore = CreateStoreControl(InstructionStore.OutputStoreName, _graph.Store.Output, _outputStore);
-			_localStore = CreateStoreControl(InstructionStore.LocalStoreName, _graph.Store.Local, _localStore);
-			_globalStore = CreateStoreControl(InstructionStore.GlobalStoreName, _graph.Store.Global, _globalStore);
-		}
-
-		private void TeardownWatch()
-		{
-			_watching = null;
-			_inputStore = null;
-			_outputStore = null;
-			_localStore = null;
-			_globalStore = null;
-			_selectedStore = null;
-		}
-
-		private void UpdateWatchSelected(VariableStoreControl control)
-		{
-			if (control != null && control.Selected != null)
-				UpdateWatchSelected(control.SelectedName, control.Selected);
-		}
-
-		private void UpdateWatchSelected(string name, IVariableStore store)
-		{
-			if (store is Object obj)
-				name += string.Format(" ({0})", obj.name);
-
-			_selectedStore = CreateStoreControl(name, store, _selectedStore);
-		}
-
-		private VariableStoreControl CreateStoreControl(string name, IVariableStore store, VariableStoreControl existing)
-		{
-			if (existing == null || existing.Store != store)
-				return store != null ? new VariableStoreControl().Setup(name, store) : null;
-			else
-				return existing;
-		}
-
 		#endregion
 
 		#region Copy and Paste
@@ -1314,9 +1198,6 @@ namespace PiRhoSoft.CompositionEditor
 			var mouse = ViewportToWindow(Event.current.mousePosition);
 
 			if (mouse.y <= ToolbarBottom)
-				return false;
-
-			if (IsWatchOpen && mouse.x >= WatchLeft)
 				return false;
 
 			return true;

@@ -43,7 +43,7 @@ namespace PiRhoSoft.CompositionEditor
 
 					var itemDefinition = definition.Constraint is ListVariableConstraint listConstraint
 						? VariableDefinition.Create(string.Empty, listConstraint.ItemType, listConstraint.ItemConstraint)
-						: VariableDefinition.Create("", VariableType.Empty);
+						: VariableDefinition.Create(string.Empty, VariableType.Empty);
 
 					for (var i = 0; i < value.List.Count; i++)
 					{
@@ -237,11 +237,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static VariableValue DrawStore(Rect rect, VariableValue value, VariableDefinition definition)
 		{
-			var store = value.Store;
-
-			if (store != null)
-				EditorGUI.LabelField(rect, store.ToString());
-
 			return value;
 		}
 

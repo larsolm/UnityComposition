@@ -13,6 +13,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The loop will continue to execute while this expression is true")]
 		public Expression Condition = new Expression();
 
+		[Tooltip("The variable that will hold the number of times the loop has run")]
+		public VariableReference Index = new VariableReference();
+
 		public override Color NodeColor => Colors.Loop;
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
@@ -20,7 +23,12 @@ namespace PiRhoSoft.CompositionEngine
 			var condition = Condition.Execute(this, variables, VariableType.Bool);
 
 			if (condition.Bool && Loop != null)
+			{
+				if (Index.IsAssigned)
+					Index.SetValue(variables, VariableValue.Create(iteration));
+
 				graph.GoTo(Loop, nameof(Loop));
+			}
 
 			yield break;
 		}

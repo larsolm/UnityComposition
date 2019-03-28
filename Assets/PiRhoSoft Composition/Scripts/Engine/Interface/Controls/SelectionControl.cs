@@ -248,7 +248,7 @@ namespace PiRhoSoft.CompositionEngine
 			var selector = obj.GetComponentInChildren<ItemSelector>();
 
 			if (binding != null)
-				binding.Variables = variables;
+				binding.Value = VariableValue.Create(variables);
 			else if (item.Source == SelectionItem.ObjectSource.Asset)
 				Debug.LogErrorFormat(this, _missingBindingError, item.Name, item.Template.name);
 

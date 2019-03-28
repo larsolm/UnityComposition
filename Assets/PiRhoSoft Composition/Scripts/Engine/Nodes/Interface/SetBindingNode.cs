@@ -26,7 +26,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				if (Resolve(variables, Binding, out IVariableStore binding))
 				{
-					root.Variables = binding;
+					root.Value = VariableValue.Create(binding);
 					VariableBinding.UpdateBinding(root.gameObject, null, null);
 				}
 			}

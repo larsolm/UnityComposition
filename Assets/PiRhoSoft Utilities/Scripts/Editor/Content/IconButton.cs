@@ -14,6 +14,7 @@ namespace PiRhoSoft.UtilityEditor
 		public const string Refresh = "d_preAudioLoopOff";
 		public const string Load = "SceneLoadIn";
 		public const string Unload = "SceneLoadOut";
+		public const string Close = "LookDevClose";
 
 		public string IconName;
 		public string Tooltip;

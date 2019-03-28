@@ -65,9 +65,8 @@ namespace PiRhoSoft.CompositionEngine
 		public const string InputStoreName = "input";
 		public const string OutputStoreName = "output";
 		public const string LocalStoreName = "local";
-		public const string GlobalStoreName = "global";
 
-		private static string[] _variableNames = new string[] { RootStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, GlobalStoreName };
+		private static string[] _variableNames = new string[] { RootStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName };
 		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
 		public object Root { get; private set; }
@@ -151,8 +150,8 @@ namespace PiRhoSoft.CompositionEngine
 				case InputStoreName: return VariableValue.Create(Input);
 				case OutputStoreName: return VariableValue.Create(Output);
 				case LocalStoreName: return VariableValue.Create(Local);
-				case GlobalStoreName: return VariableValue.Create(Global);
-				default: return Global.GetVariable(name);
+				case CompositionManager.GlobalStoreName: return VariableValue.Create(Global);
+				default: return Local.GetVariable(name);
 			}
 		}
 
@@ -165,8 +164,8 @@ namespace PiRhoSoft.CompositionEngine
 				case InputStoreName: return SetVariableResult.ReadOnly;
 				case OutputStoreName: return SetVariableResult.ReadOnly;
 				case LocalStoreName: return SetVariableResult.ReadOnly;
-				case GlobalStoreName: return SetVariableResult.ReadOnly;
-				default: return Global.SetVariable(name, value);
+				case CompositionManager.GlobalStoreName: return SetVariableResult.ReadOnly;
+				default: return Local.SetVariable(name, value);
 			}
 		}
 

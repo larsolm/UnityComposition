@@ -21,22 +21,20 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("When set, the binding will update automatically when the variable changes")]
 		public bool AutoUpdate = true;
 
-		private BindingRoot _root;
+		private IVariableStore _variables;
 
-		public BindingRoot Root
+		public IVariableStore Variables
 		{
 			get
 			{
 				// can't look up in awake because it's possible to update bindings before the component is enabled
 
-				if (!_root)
-					_root = BindingRoot.FindRoot(gameObject);
+				if (_variables == null)
+					_variables = BindingRoot.FindParent(gameObject);
 
-				return _root;
+				return _variables;
 			}
 		}
-
-		protected abstract void UpdateBinding(IVariableStore variables, BindingAnimationStatus status);
 
 		void Update()
 		{
@@ -47,11 +45,10 @@ namespace PiRhoSoft.CompositionEngine
 		public void UpdateBinding(string group, BindingAnimationStatus status)
 		{
 			if (string.IsNullOrEmpty(group) || BindingGroup == group)
-			{
-				var variables = (Root != null ? Root.Variables : null) ?? CompositionManager.Instance.GlobalStore;
-				UpdateBinding(variables, status ?? _ignoredStatus);
-			}
+				UpdateBinding(Variables, status ?? _ignoredStatus);
 		}
+
+		protected abstract void UpdateBinding(IVariableStore variables, BindingAnimationStatus status);
 
 		#region Static Helpers
 

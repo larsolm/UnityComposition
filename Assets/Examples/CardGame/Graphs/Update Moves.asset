@@ -58,7 +58,7 @@ MonoBehaviour:
   m_Name: Set Card
   m_EditorClassIdentifier: 
   Name: Set Card
-  GraphPosition: {x: 448, y: -0}
+  GraphPosition: {x: 448, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114893726994580232}
   Expression:

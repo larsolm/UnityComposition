@@ -7,10 +7,16 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "iterate-node")]
 	public class IterateNode : InstructionGraphNode, ILoopNode
 	{
-		[Tooltip("The Indexed Variable Store containing the objects to iterate")]
-		public VariableReference Container;
+		[Tooltip("The variable list containing the objects to iterate")]
+		public VariableReference Container = new VariableReference();
 
-		[Tooltip("The node to go to for each object in the iteration")]
+		[Tooltip("The variable that will hold the number of times the iteration has run")]
+		public VariableReference Index = new VariableReference();
+
+		[Tooltip("The variable to assign the value of each iteration")]
+		public VariableReference Value = new VariableReference();
+
+		[Tooltip("The node to go to for each value in the iteration")]
 		public InstructionGraphNode Loop = null;
 
 		public override Color NodeColor => Colors.Loop;
@@ -22,7 +28,13 @@ namespace PiRhoSoft.CompositionEngine
 				if (iteration < list.Count)
 				{
 					var item = list.GetVariable(iteration);
-					graph.ChangeRoot(item.GetBoxedValue());
+
+					if (Index.IsAssigned)
+						Index.SetValue(variables, VariableValue.Create(iteration));
+
+					if (Value.IsAssigned)
+						Value.SetValue(variables, item);
+
 					graph.GoTo(Loop, nameof(Loop));
 				}
 			}

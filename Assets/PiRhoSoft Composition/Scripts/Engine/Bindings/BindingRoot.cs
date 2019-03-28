@@ -1,36 +1,52 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "binding-root")]
 	[AddComponentMenu("PiRho Soft/Interface/Binding Root")]
-	public class BindingRoot : MonoBehaviour
+	public class BindingRoot : MonoBehaviour, IVariableStore
 	{
-		private IVariableStore _variables;
-		private BindingRoot _root;
+		public string Name;
+		public VariableValue Value { get; set; }
 
-		public virtual IVariableStore Variables
-		{
-			get => _variables ?? (_root != null ? _root.Variables : null);
-			set => _variables = value;
-		}
+		private IVariableStore _parent;
 
 		void Awake()
 		{
-			_root = FindRoot(gameObject);
+			if (transform.parent)
+				_parent = FindParent(transform.parent.gameObject);
+			else
+				_parent = _base;
 		}
 
-		#region Lookup
+		#region Hierarchy
 
+		private static BaseBindingRoot _base = new BaseBindingRoot();
 		private static List<BindingRoot> _roots = new List<BindingRoot>();
 
-		public static BindingRoot FindRoot(GameObject obj)
+		private class BaseBindingRoot : IVariableStore
+		{
+			public IEnumerable<string> GetVariableNames() => Enumerable.Repeat(CompositionManager.GlobalStoreName, 1);
+			public VariableValue GetVariable(string name) => name == CompositionManager.GlobalStoreName ? CompositionManager.Instance.GlobalStore.GetVariable(name) : VariableValue.Empty;
+			public SetVariableResult SetVariable(string name, VariableValue value) => name == CompositionManager.GlobalStoreName ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
+		}
+
+		public static IVariableStore FindParent(GameObject obj)
 		{
 			_roots.Clear();
 			obj.GetComponentsInParent(true, _roots);
-			return _roots.Count > 0 ? _roots[0] : null;
+			return _roots.Count > 0 ? (IVariableStore)_roots[0] : _base;
 		}
+
+		#endregion
+
+		#region IVariableStore Implementation
+
+		public virtual IEnumerable<string> GetVariableNames() => Enumerable.Repeat(Name, 1);
+		public virtual VariableValue GetVariable(string name) => name == Name ? Value : _parent.GetVariable(name);
+		public virtual SetVariableResult SetVariable(string name, VariableValue value) => name == Name ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
 
 		#endregion
 	}

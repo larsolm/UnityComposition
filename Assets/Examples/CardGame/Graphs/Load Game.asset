@@ -20,7 +20,6 @@ MonoBehaviour:
     _items:
     - {fileID: 114309927829230756}
     - {fileID: 114471212589741664}
-    - {fileID: 114578480169967386}
     - {fileID: 114730956879713784}
     - {fileID: 114675892718543162}
     - {fileID: 114696056752831474}
@@ -56,8 +55,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - Deck
     - Spades
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - card
     _lookups:
     - 
     - 
@@ -79,7 +90,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114495678880178976}
   Expression:
-    _statement: State.Processing += 1
+    _statement: global.State.Processing += 1
 --- !u!114 &114233220627467950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,7 +104,7 @@ MonoBehaviour:
   m_Name: Set Card Binding
   m_EditorClassIdentifier: 
   Name: Set Card Binding
-  GraphPosition: {x: 1292.8, y: 76.8}
+  GraphPosition: {x: 1228.8, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114846660907590690}
   Object:
@@ -127,7 +138,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: State.Processing -= 1
+    _statement: global.State.Processing -= 1
 --- !u!114 &114309927829230756
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,16 +152,32 @@ MonoBehaviour:
   m_Name: Iterate Suits
   m_EditorClassIdentifier: 
   Name: Iterate Suits
-  GraphPosition: {x: 640, y: -51.2}
+  GraphPosition: {x: 640, y: -38.4}
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - Cards
     - Suits
     _lookups:
     - 
     - 
-  Loop: {fileID: 114578480169967386}
+    - 
+  Index:
+    _variable:
+    - local
+    - rankIndex
+    _lookups:
+    - 
+    - 
+  Value:
+    _variable:
+    - local
+    - suit
+    _lookups:
+    - 
+    - 
+  Loop: {fileID: 114471212589741664}
 --- !u!114 &114471212589741664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,12 +191,24 @@ MonoBehaviour:
   m_Name: Iterate Ranks
   m_EditorClassIdentifier: 
   Name: Iterate Ranks
-  GraphPosition: {x: 755.2, y: 76.8}
+  GraphPosition: {x: 704, y: 25.6}
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - Cards
     - Ranks
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - rank
     _lookups:
     - 
     - 
@@ -192,8 +231,10 @@ MonoBehaviour:
   Next: {fileID: 0}
   Target:
     _variable:
-    - root
+    - local
+    - card
     _lookups:
+    - 
     - 
 --- !u!114 &114495678880178976
 MonoBehaviour:
@@ -233,32 +274,24 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - Deck
     - Clubs
     _lookups:
     - 
     - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - card
+    _lookups:
+    - 
+    - 
   Loop: {fileID: 114486140500255154}
---- !u!114 &114578480169967386
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Set Suit
-  m_EditorClassIdentifier: 
-  Name: Set Suit
-  GraphPosition: {x: 704, y: 12.8}
-  IsBreakpoint: 0
-  Next: {fileID: 114471212589741664}
-  Expression:
-    _statement: 'local.suit = root
-
-      local.rankIndex = 0'
 --- !u!114 &114673358792983352
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -276,8 +309,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - Deck
     - Hearts
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - card
     _lookups:
     - 
     - 
@@ -295,7 +340,7 @@ MonoBehaviour:
   m_Name: Create Card
   m_EditorClassIdentifier: 
   Name: Create Card
-  GraphPosition: {x: 1164.8, y: -51.2}
+  GraphPosition: {x: 1100.8, y: -76.8}
   IsBreakpoint: 0
   Next: {fileID: 114696056752831474}
   Prefab:
@@ -327,8 +372,10 @@ MonoBehaviour:
     _lookups: []
   Parent:
     _variable:
+    - global
     - Deck
     _lookups:
+    - 
     - 
   Position:
     Type: 0
@@ -359,7 +406,7 @@ MonoBehaviour:
   m_Name: Set Card Data
   m_EditorClassIdentifier: 
   Name: Set Card Data
-  GraphPosition: {x: 1228.8, y: 12.8}
+  GraphPosition: {x: 1164.8, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114233220627467950}
   Expression:
@@ -372,7 +419,7 @@ MonoBehaviour:
       local.card.Suit = local.suit
 
 
-      Deck[local.suit.Name] += local.card
+      global.Deck[local.suit.Name] += local.card
 
       local.rankIndex += 1'
 --- !u!114 &114730956879713784
@@ -385,16 +432,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Set Rank and Name
+  m_Name: Set Name
   m_EditorClassIdentifier: 
-  Name: Set Rank and Name
-  GraphPosition: {x: 832, y: 140.8}
+  Name: Set Name
+  GraphPosition: {x: 768, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 114675892718543162}
   Expression:
-    _statement: 'local.rank = root
-
-      local.cardName = local.suit.Name + local.rank'
+    _statement: local.cardName = local.suit.Name + local.rank
 --- !u!114 &114764902459509120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -412,8 +457,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - Deck
     - Diamonds
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - card
     _lookups:
     - 
     - 
@@ -431,7 +488,7 @@ MonoBehaviour:
   m_Name: Yield
   m_EditorClassIdentifier: 
   Name: Yield
-  GraphPosition: {x: 1356.8, y: 140.8}
+  GraphPosition: {x: 1292.8, y: 115.200005}
   IsBreakpoint: 0
   Next: {fileID: 0}
 --- !u!114 &114902517910671770
@@ -452,7 +509,9 @@ MonoBehaviour:
   Next: {fileID: 114309927829230756}
   Object:
     _variable:
+    - global
     - Deck
     _lookups:
+    - 
     - 
   Tag: Load
