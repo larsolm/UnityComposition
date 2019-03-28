@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "scroll-selection")]
 	[AddComponentMenu("PiRho Soft/Interface/Scroll Selection")]
-	public class ScrollSelection : SelectionControl
+	public class ScrollSelection : InputSelection
 	{
 		[Tooltip("The speed of which to scroll the content")] public float ScrollSpeed = -1;
 		[Tooltip("The number of items displayed vertically before scrolling happens")] public int DisplayedVertical = 1;
@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 			return _scroll.content;
 		}
 
-		public override void MoveFocusUp()
+		protected override void MoveFocusUp(int amount = 1)
 		{
 			var count = Mathf.Min(_rowCount, DisplayedVertical);
 
@@ -51,7 +51,7 @@ namespace PiRhoSoft.CompositionEngine
 			UpdateTargetPosition();
 		}
 
-		public override void MoveFocusDown()
+		protected override void MoveFocusDown(int amount = 1)
 		{
 			var count = Mathf.Min(_rowCount, DisplayedVertical);
 
@@ -69,7 +69,7 @@ namespace PiRhoSoft.CompositionEngine
 			UpdateTargetPosition();
 		}
 
-		public override void MoveFocusLeft()
+		protected override void MoveFocusLeft(int amount = 1)
 		{
 			var count = Mathf.Min(_columnCount, DisplayedHorizontal);
 
@@ -87,7 +87,7 @@ namespace PiRhoSoft.CompositionEngine
 			UpdateTargetPosition();
 		}
 
-		public override void MoveFocusRight()
+		protected override void MoveFocusRight(int amount = 1)
 		{
 			var count = Mathf.Min(_columnCount, DisplayedHorizontal);
 
@@ -105,7 +105,7 @@ namespace PiRhoSoft.CompositionEngine
 			UpdateTargetPosition();
 		}
 
-		void UpdateTargetPosition()
+		private void UpdateTargetPosition()
 		{
 			var xDiff = _columnCount - DisplayedHorizontal;
 			var yDiff = _rowCount - DisplayedVertical;

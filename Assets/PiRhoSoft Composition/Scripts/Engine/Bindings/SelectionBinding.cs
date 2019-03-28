@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IVariableStore Variables
 		{
-			get => SelectionControl != null ? SelectionControl.FocusedVariables : base.Variables;
+			get => SelectionControl != null ? SelectionControl.FocusedValue.Store : base.Variables; // TODO CHANGE WHEN NEW BINDING STUFF IS HERE
 		}
 	}
 }

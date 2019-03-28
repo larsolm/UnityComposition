@@ -9,13 +9,14 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class SelectionNodeItem : SelectionItem
 	{
-		[Tooltip("The node to go to when this item is selected")] public InstructionGraphNode OnSelected;
+		[Tooltip("The node to go to when this item is selected")]
+		public InstructionGraphNode OnSelected;
 	}
 
 	[Serializable] public class SelectionNodeItemList : SerializedList<SelectionNodeItem> { }
 
 	[HelpURL(Composition.DocumentationUrl + "selection-node")]
-	[CreateInstructionGraphNodeMenu("Interface/Selection", 2)]
+	[CreateInstructionGraphNodeMenu("Interface/Show Selection", 2)]
 	public class SelectionNode : InstructionGraphNode
 	{
 		[Tooltip("The node to go to when no selection is made")]
@@ -25,8 +26,17 @@ namespace PiRhoSoft.CompositionEngine
 		[VariableConstraint(typeof(SelectionControl))]
 		public VariableReference Control = new VariableReference();
 
+		[Tooltip("The variable to store the selected item's variables in")]
+		public VariableReference SelectedItem = new VariableReference("selectedItem");
+
+		[Tooltip("The variable to store the selected item's index in")]
+		public VariableReference SelectedIndex = new VariableReference("selectedIndex");
+
 		[Tooltip("If set an item will always be selected (unless there are none)")]
 		public bool IsSelectionRequired = false;
+
+		[Tooltip("Specifies whether to automatically hide the selection control when a selection is made")]
+		public bool AutoHide = true;
 
 		[Tooltip("The items to show as part of the selection")]
 		[ListDisplay(ItemDisplay = ListItemDisplayType.Foldout, AllowCollapse = false, EmptyText = "Add items to create selection options")]
@@ -63,15 +73,20 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			SelectionNodeItem selectedItem = null;
-			object selectedVariables = null;
-
 			if (ResolveObject(variables, Control, out SelectionControl control))
 			{
-				yield return control.MakeSelection(variables, Items, IsSelectionRequired);
+				control.Show(variables, Items, IsSelectionRequired, iteration == 0);
 
-				selectedItem = control.SelectedItem as SelectionNodeItem;
-				selectedVariables = control.SelectedVariables;
+				while (control.IsRunning)
+					yield return null;
+
+				Assign(variables, SelectedItem, control.SelectedValue);
+				Assign(variables, SelectedIndex, VariableValue.Create(control.SelectedIndex));
+
+				if (control.SelectedItem is SelectionNodeItem selectedItem)
+					graph.GoTo(selectedItem.OnSelected, nameof(Items), selectedItem.Id);
+				else
+					graph.GoTo(OnCanceled, nameof(OnCanceled));
 			}
 			else
 			{
@@ -86,15 +101,7 @@ namespace PiRhoSoft.CompositionEngine
 				}
 
 				Debug.Log(builder);
-			}
 
-			if (selectedItem != null)
-			{
-				graph.ChangeRoot(selectedVariables);
-				graph.GoTo(selectedItem.OnSelected, nameof(Items), selectedItem.Id);
-			}
-			else
-			{
 				graph.GoTo(OnCanceled, nameof(OnCanceled));
 			}
 		}

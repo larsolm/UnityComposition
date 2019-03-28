@@ -8,13 +8,21 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Item Selector")]
 	public class ItemSelector : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler, IPointerDownHandler, IPointerUpHandler
 	{
-		public SelectionControl Selection { get; internal set; }
-		public int Index { get; internal set; }
+		private int _index;
+		private SelectionControl _selection;
+
+		void Awake()
+		{
+			_selection = GetComponentInParent<SelectionControl>();
+
+			if (_selection)
+				_index = _selection.GetIndex(this);
+		}
 
 		public void OnPointerEnter(PointerEventData eventData)
 		{
-			if (Selection)
-				Selection.MoveFocus(Index);
+			if (_selection)
+				_selection.MoveFocus(_index);
 		}
 
 		public void OnPointerExit(PointerEventData eventData)
@@ -27,8 +35,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnPointerUp(PointerEventData eventData)
 		{
-			if (Selection)
-				Selection.SelectItem(Index);
+			if (_selection)
+				_selection.SelectItem(_index);
 		}
 	}
 }
