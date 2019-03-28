@@ -28,6 +28,7 @@ MonoBehaviour:
     - {fileID: 114400101997620392}
     - {fileID: 114390368604380124}
     - {fileID: 114246263796642296}
+    - {fileID: 114846672467179898}
   StartPosition: {x: -0, y: 0}
   Process: {fileID: 114497143050049916}
 --- !u!114 &114152915467528118
@@ -47,9 +48,15 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114524819183424472}
   Expression:
-    _statement: 'local.suit = Deck[root.Suit.Name]
+    _statement: 'local.stateSuit = State[root.Suit.Name]
 
-      root.Complete = local.suit<#> == root.Index && local.suit == local.Rows[root.Row]'
+      local.deckSuit = Deck[root.Suit.Name]
+
+      local.previous = local.deckSuit[root.Index - 1]
+
+
+      root.Complete = local.stateSuit<#> == root.Index && local.previous.Complete
+      && local.stateSuit == State.Rows[root.Row]'
 --- !u!114 &114204127550149548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,9 +74,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114524819183424472}
   Expression:
-    _statement: 'local.suit = Deck[root.Suit.Name]
+    _statement: 'local.stateSuit = State[root.Suit.Name]
 
-      root.Complete = local.suit<#> == root.Index && root.Column == 0'
+      root.Complete = local.stateSuit<#> == root.Index && root.Column == 0'
 --- !u!114 &114246263796642296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,7 +94,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: Deck.Rows[root.Row] = Deck[root.Suit.Name]
+    _statement: State.Rows[root.Row] = State[root.Suit.Name]
 --- !u!114 &114318365090266194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,6 +211,23 @@ MonoBehaviour:
   Comment: Aces are never marked complete because they need to be part of any reshuffle.
     Twos are a special case because they additionally need to be in the left most
     column.
+--- !u!114 &114846672467179898
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 1600, y: 128}
+  IsBreakpoint: 0
+  Comment: 'TODO: After moving a card, the following card might have been completed,
+    too.'
 --- !u!114 &114932163569064684
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -217,15 +241,17 @@ MonoBehaviour:
   m_Name: Make Complete
   m_EditorClassIdentifier: 
   Name: Make Complete
-  GraphPosition: {x: 1280, y: 0}
+  GraphPosition: {x: 1280, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 114390368604380124}
   Expression:
-    _statement: 'local.suit += root
+    _statement: 'local.stateSuit += root
 
-      Deck.Cards -= root
+      State.Cards -= root
 
+
+      State.Complete = State.Cards<#> == 4
 
       root.Complete = true
 
-      Deck.Complete = Deck.Cards<#> == 4'
+      root.Movable = false'

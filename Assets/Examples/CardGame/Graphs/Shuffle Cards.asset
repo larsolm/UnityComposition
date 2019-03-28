@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
-  m_Name: Shuffle
+  m_Name: Shuffle Cards
   m_EditorClassIdentifier: 
   Inputs:
     _items: []
@@ -25,7 +25,6 @@ MonoBehaviour:
     - {fileID: 114438301544111286}
     - {fileID: 114117616305717732}
     - {fileID: 114828798773068104}
-    - {fileID: 114948096665605490}
     - {fileID: 114065889936685652}
     - {fileID: 114795660760492428}
     - {fileID: 114749951981520494}
@@ -52,7 +51,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: Processing += 1
+    _statement: State.Processing += 1
 --- !u!114 &114117616305717732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -63,7 +62,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2c1214b928c8b2a48b55a137ca3023dc, type: 3}
-  m_Name: Yield(Clone)
+  m_Name: Yield
   m_EditorClassIdentifier: 
   Name: Yield
   GraphPosition: {x: 2240, y: 25.6}
@@ -87,7 +86,7 @@ MonoBehaviour:
   Next: {fileID: 114438301544111286}
   Variable:
     _variable:
-    - Deck
+    - State
     - Cards
     _lookups:
     - 
@@ -139,7 +138,7 @@ MonoBehaviour:
   Expression:
     _statement: 'local.row = 0
 
-      local.rowList = Deck.Rows[local.row]
+      local.rowList = State.Rows[local.row]
 
       local.column = local.rowList<#>'
 --- !u!114 &114613535626573654
@@ -185,7 +184,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
-    - Deck
+    - State
     - Cards
     _lookups:
     - 
@@ -227,9 +226,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Processing -= 1
+    _statement: 'State.Processing -= 1
 
-      Deck.Shuffles -= 1'
+      State.Shuffles -= 1'
 --- !u!114 &114800223129982834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -240,7 +239,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 19fe84203620ae1459b63160dacc8610, type: 3}
-  m_Name: Set Property(Clone)(Clone)
+  m_Name: Set Property
   m_EditorClassIdentifier: 
   Name: Set Property
   GraphPosition: {x: 1600, y: 25.6}
@@ -319,24 +318,6 @@ MonoBehaviour:
   Expression:
     _statement: 'local.row += 1
 
-      local.rowList = Deck.Rows[local.row]
+      local.rowList = State.Rows[local.row]
 
       local.column = local.rowList<#>'
---- !u!114 &114948096665605490
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
-  m_Name: Comment
-  m_EditorClassIdentifier: 
-  Name: Comment
-  GraphPosition: {x: 640, y: 128}
-  IsBreakpoint: 0
-  Comment: Because cards are placed left to right and completed cards aren't moved,
-    when a card is placed it can always be determined if it was placed in a completed
-    state or not.
