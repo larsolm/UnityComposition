@@ -15,79 +15,42 @@ MonoBehaviour:
   InitializerType: 1
   Tags:
     _items:
-    - New Game
+    - Load
   _definitions:
-  - _name: Cards
+  - _name: Spades
     _type: 19
     _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: New Game
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Spades
-    _type: 19
-    _constraint: Empty|
-    _tag: New Game
+    _tag: Load
     _initializer:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
   - _name: Clubs
     _type: 19
-    _constraint: Empty|
-    _tag: New Game
+    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: Load
     _initializer:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
   - _name: Hearts
     _type: 19
-    _constraint: Empty|
-    _tag: New Game
+    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: Load
     _initializer:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
   - _name: Diamonds
     _type: 19
-    _constraint: Empty|
-    _tag: New Game
+    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: Load
     _initializer:
       _statement: 
     _isTypeLocked: 1
     _isConstraintLocked: 0
-  - _name: Complete
-    _type: 1
-    _constraint: 
-    _tag: New Game
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Shuffles
-    _type: 2
-    _constraint: 
-    _tag: New Game
-    _initializer:
-      _statement: 4
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Rows
-    _type: 19
-    _constraint: List|Empty|
-    _tag: New Game
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Aces
-    _type: 19
-    _constraint: Empty|
-    _tag: New Game
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  _version: 28
+  _version: 45

@@ -82,7 +82,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
-    - Deck
+    - State
     - Aces
     _lookups:
     - 
@@ -122,7 +122,12 @@ MonoBehaviour:
   OnTrue: {fileID: 114853665359960698}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: local.card.Index == root.Column && Deck[local.card.Suit.Name] == Deck.Rows[root.Row]
+    _statement: 'local.deckSuit = Deck[local.card.Suit.Name]
+
+      local.previous = local.deckSuit[local.card.Index - 1]
+
+
+      local.previous.Row == root.Row && local.previous.Column == root.Column - 1'
 --- !u!114 &114586229638486660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -159,7 +164,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
-    - Deck
+    - State
     - Aces
     _lookups:
     - 
@@ -225,7 +230,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
-    - Deck
+    - State
     - Cards
     _lookups:
     - 

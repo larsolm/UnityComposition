@@ -286,6 +286,7 @@ GameObject:
   - component: {fileID: 167390631}
   - component: {fileID: 167390630}
   - component: {fileID: 167390634}
+  - component: {fileID: 167390635}
   m_Layer: 5
   m_Name: New Game Button
   m_TagString: Untagged
@@ -326,7 +327,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Graph:
-    _instruction: {fileID: 11400000, guid: dd132375c964fd44a8324453d5cf5a51, type: 2}
+    _instruction: {fileID: 11400000, guid: 7c695ba6f2ecc044e9217fb32b16a509, type: 2}
     _inputs: []
     _outputs: []
   Event: 
@@ -425,7 +426,149 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 167390630}
   Condition:
-    _statement: Processing == 0
+    _statement: State.Processing == 0
+--- !u!114 &167390635
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 167390628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2854d5c100c2d14d98d17458e0eef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BindingGroup: 
+  AutoUpdate: 1
+  Behaviour: {fileID: 167390631}
+  Condition:
+    _statement: State.Processing == 0
+--- !u!1 &500038791
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 500038795}
+  - component: {fileID: 500038794}
+  - component: {fileID: 500038793}
+  - component: {fileID: 500038792}
+  m_Layer: 0
+  m_Name: State
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &500038792
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500038791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Constraints:
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _name: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _variablesData:
+  - BERlY2sRAAAAAAAAAA==
+  - BVN0YXRlEQAAAAEAAAA=
+  - BUNhcmRzEQAAAAIAAAA=
+  _variablesObjects:
+  - {fileID: 1723087962}
+  - {fileID: 500038794}
+  - {fileID: 11400000, guid: 4f706c0cf5be2c548aaabb17b2590955, type: 2}
+--- !u!114 &500038793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500038791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graph:
+    _instruction: {fileID: 11400000, guid: 88fda268543e79046aa3ab510ca1bbb2, type: 2}
+    _inputs: []
+    _outputs: []
+  Event: 
+--- !u!114 &500038794
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500038791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Schema: {fileID: 11400000, guid: 63a314e9c6be02b40970ec2a9b241471, type: 2}
+  Variables:
+    _version: 46
+    _variablesData:
+    - ClByb2Nlc3NpbmcCAAAAAAAAAA==
+    - BUNhcmRzEwAAAAAAAAA=
+    - BlNwYWRlcxMAAAAAAAAA
+    - BUNsdWJzEwAAAAAAAAA=
+    - BkhlYXJ0cxMAAAAAAAAA
+    - CERpYW1vbmRzEwAAAAAAAAA=
+    - BEFjZXMTAAAAAAAAAA==
+    - BFJvd3MTAAAAAAAAAA==
+    - CFNodWZmbGVzAgAAAAQAAAA=
+    - CENvbXBsZXRlAQAAAAA=
+    _variablesObjects: []
+--- !u!4 &500038795
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 500038791}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &562347060
 GameObject:
   m_ObjectHideFlags: 0
@@ -440,6 +583,7 @@ GameObject:
   - component: {fileID: 562347062}
   - component: {fileID: 562347066}
   - component: {fileID: 562347065}
+  - component: {fileID: 562347067}
   m_Layer: 5
   m_Name: Shuffle Button
   m_TagString: Untagged
@@ -562,7 +706,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 562347066}
   Condition:
-    _statement: Deck.Shuffles > 0 && Processing == 0
+    _statement: State.Shuffles > 0 && State.Processing == 0
 --- !u!114 &562347066
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -580,6 +724,23 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   Event: 
+--- !u!114 &562347067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 562347060}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2854d5c100c2d14d98d17458e0eef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BindingGroup: 
+  AutoUpdate: 1
+  Behaviour: {fileID: 562347062}
+  Condition:
+    _statement: State.Shuffles > 0 && State.Processing == 0
 --- !u!1 &1187750164
 GameObject:
   m_ObjectHideFlags: 0
@@ -772,7 +933,7 @@ RectTransform:
   - {fileID: 167390629}
   - {fileID: 562347061}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -832,7 +993,7 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 1
   Message:
-    Text: Shuffle ({Deck.Shuffles} Left)
+    Text: Shuffle ({State.Shuffles} Left)
 --- !u!114 &1464314231
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1020,7 +1181,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1723087959
 GameObject:
@@ -1031,9 +1192,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1723087960}
-  - component: {fileID: 1723087961}
   - component: {fileID: 1723087962}
-  - component: {fileID: 1723087963}
   m_Layer: 0
   m_Name: Deck
   m_TagString: Untagged
@@ -1055,23 +1214,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1723087961
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723087959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Graph:
-    _instruction: {fileID: 11400000, guid: dd132375c964fd44a8324453d5cf5a51, type: 2}
-    _inputs: []
-    _outputs: []
-  Event: 
 --- !u!114 &1723087962
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1086,49 +1228,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 2bb7269032061c048a61bd8260212ead, type: 2}
   Variables:
-    _version: 26
+    _version: 45
     _variablesData:
-    - BUNhcmRzEwAAAAAAAAA=
     - BlNwYWRlcxMAAAAAAAAA
     - BUNsdWJzEwAAAAAAAAA=
     - BkhlYXJ0cxMAAAAAAAAA
     - CERpYW1vbmRzEwAAAAAAAAA=
-    - CENvbXBsZXRlAQAAAAA=
-    - CFNodWZmbGVzAgAAAAQAAAA=
-    - BFJvd3MTAAAAAAAAAA==
     _variablesObjects: []
---- !u!114 &1723087963
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1723087959}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Constraints:
-  - _name: 
-    _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: 
-    _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  _variablesData:
-  - BERlY2sRAAAAAAAAAA==
-  - ClByb2Nlc3NpbmcCAAAAAAAAAA==
-  _variablesObjects:
-  - {fileID: 1723087962}
