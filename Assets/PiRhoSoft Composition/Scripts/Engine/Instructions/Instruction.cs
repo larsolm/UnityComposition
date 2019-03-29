@@ -32,13 +32,13 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			else
 			{
-				CompositionManager.Instance.InstructionStarted(this, variables);
+				CompositionManager.InstructionStarted(this, variables);
 
 				IsRunning = true;
 				yield return Run(variables);
 				IsRunning = false;
 
-				CompositionManager.Instance.InstructionComplete(this);
+				CompositionManager.InstructionComplete(this);
 			}
 		}
 

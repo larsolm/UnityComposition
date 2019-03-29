@@ -42,6 +42,13 @@ namespace PiRhoSoft.CompositionEngine
 
 #if UNITY_EDITOR
 
+		public static bool LogInstructions = false;
+
+		private const string _instructionStartFormat = "{0} started";
+		private const string _instructionCompleteFormat = "{0} complete: ran for {1} frames and {2:F} seconds\n";
+
+		public static Dictionary<Instruction, InstructionData> InstructionState { get; } = new Dictionary<Instruction, InstructionData>();
+
 		public class InstructionData
 		{
 			public Instruction Instruction;
@@ -62,6 +69,9 @@ namespace PiRhoSoft.CompositionEngine
 				Variables = variables;
 				StartFrame = Time.frameCount;
 				StartSeconds = Time.realtimeSinceStartup;
+
+				if (LogInstructions)
+					Debug.LogFormat(_instructionStartFormat, Instruction.name);
 			}
 
 			public void SetComplete()
@@ -69,65 +79,30 @@ namespace PiRhoSoft.CompositionEngine
 				IsComplete = true;
 				EndFrame = Time.frameCount;
 				EndSeconds = Time.realtimeSinceStartup;
+
+				if (LogInstructions)
+					Debug.LogFormat(_instructionCompleteFormat, Instruction.name, TotalFrames, TotalSeconds);
 			}
 		}
 
-		public class ExpressionData
-		{
-			public Operation Operation;
-			public VariableValue Result;
-
-			public ExpressionData(Operation operation, VariableValue result)
-			{
-				Operation = operation;
-				Result = result;
-			}
-		}
-
-		public Dictionary<Instruction, InstructionData> InstructionState { get; } = new Dictionary<Instruction, InstructionData>();
-		public List<InstructionData> InstructionHistory { get; } = new List<InstructionData>();
-		public List<ExpressionData> ExpressionHistory { get; } = new List<ExpressionData>();
-
-		private int _instructionHistoryCount = 100;
-		//private int _expressionHistoryCount = 100;
-
-		internal void InstructionStarted(Instruction instruction, IVariableStore variables)
+		internal static void InstructionStarted(Instruction instruction, IVariableStore variables)
 		{
 			InstructionState.Add(instruction, new InstructionData(instruction, variables));
 		}
 
-		internal void InstructionComplete(Instruction instruction)
+		internal static void InstructionComplete(Instruction instruction)
 		{
 			if (InstructionState.TryGetValue(instruction, out var data))
 			{
 				InstructionState.Remove(instruction);
 				data.SetComplete();
-				InstructionHistory.Add(data);
-
-				if (InstructionHistory.Count > _instructionHistoryCount)
-					InstructionHistory.RemoveAt(0);
 			}
 		}
 
-		internal void OperationComplete(Operation operation, VariableValue result)
-		{
-			//ExpressionHistory.Add(new ExpressionData(operation, result));
-			//
-			//if (ExpressionHistory.Count > _expressionHistoryCount)
-			//	ExpressionHistory.RemoveAt(0);
-		}
-
-		public void ClearHistory()
-		{
-			InstructionHistory.Clear();
-			ExpressionHistory.Clear();
-		}
-
 #else
-		
-		internal void InstructionStarted(Instruction instruction, IVariableStore variables) { }
-		internal void InstructionComplete(Instruction instruction) { }
-		internal void OperationComplete(Operation operation, VariableValue result) { }
+
+		internal static void InstructionStarted(Instruction instruction, IVariableStore variables) { }
+		internal static void InstructionComplete(Instruction instruction) { }
 
 #endif
 

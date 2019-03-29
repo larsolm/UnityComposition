@@ -53,7 +53,6 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly IconButton _lockButton = new IconButton("AssemblyLock", "Lock this window so it won't be used when other graphs are opened");
 		private static readonly IconButton _unlockButton = new IconButton("AssemblyLock", "Unlock this window so it can be used to show other graphs");
 		private static readonly IconButton _openWatchButton = new IconButton("UnityEditor.LookDevView", "Open the watch window");
-		private static readonly IconButton _openLogButton = new IconButton("UnityEditor.LookDevView", "Open the log window");
 
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
@@ -893,9 +892,6 @@ namespace PiRhoSoft.CompositionEditor
 
 				if (GUILayout.Button(_openWatchButton.Content, EditorStyles.toolbarButton))
 					WatchWindow.ShowWindow();
-
-				if (GUILayout.Button(_openLogButton.Content, EditorStyles.toolbarButton))
-					LogWindow.ShowWindow();
 			}
 		}
 

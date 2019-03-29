@@ -94,8 +94,6 @@ namespace PiRhoSoft.CompositionEngine
 					_currentOperation = operation;
 					result = operation.Evaluate(variables);
 					_currentOperation = null;
-
-					CompositionManager.Instance.OperationComplete(operation, result);
 				}
 			}
 
