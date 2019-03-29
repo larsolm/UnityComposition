@@ -249,7 +249,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private Operation ParsePrefixOperator(ExpressionToken token)
 		{
-			var right = Parse(5);
+			var right = Parse(OperatorPrecedence.Prefix.Value);
 			return CreatePrefixOperator(token, right);
 		}
 
