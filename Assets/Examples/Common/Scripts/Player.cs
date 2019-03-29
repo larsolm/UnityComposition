@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionExample
 					var interaction = _colliders[i].GetComponent<Interaction>();
 					if (interaction)
 					{
-						CompositionManager.Instance.RunInstruction(interaction.OnInteract, this);
+						CompositionManager.Instance.RunInstruction(interaction.OnInteract, VariableValue.CreateReference(this));
 						break;
 					}
 				}
@@ -54,28 +54,28 @@ namespace PiRhoSoft.CompositionExample
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnEnter, VariableValue.Create(interaction));
 		}
 
 		void OnTriggerExit2D(Collider2D collision)
 		{
 			var interaction = collision.GetComponent<Interaction>();
 			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnLeave, VariableValue.Create(interaction));
 		}
 
 		void OnCollisionEnter2D(Collision2D collision)
 		{
 			var interaction = collision.collider.GetComponent<Interaction>();
 			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnEnter, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnEnter, VariableValue.Create(interaction));
 		}
 
 		void OnCollisionExit2D(Collision2D collision)
 		{
 			var interaction = collision.collider.GetComponent<Interaction>();
 			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnLeave, interaction);
+				CompositionManager.Instance.RunInstruction(interaction.OnLeave, VariableValue.Create(interaction));
 		}
 	}
 }

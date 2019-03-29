@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 		public const string _processFailedError = "(CCIGPF) Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator";
 
 		[Tooltip("The list of all nodes in this graph")]
-		[ListDisplay(AllowAdd = false, AllowCollapse = false, AllowRemove = false, AllowReorder = false, EmptyText = "Use the Instruction Graph Window to add nodes to this graph")]
+		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyText = "Use the Instruction Graph Window to add nodes to this graph")]
 		[SerializeField] [HideInInspector] // editor draws this manually so it shows up at the bottom for derived classes
 		private InstructionGraphNodeList _nodes = new InstructionGraphNodeList();
 
@@ -37,12 +37,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root, string source)
 		{
-			StartRunning(root, source);
-
-			var rootVariables = variables.Root;
 			_rootStore = variables;
 
-			ChangeRoot(rootVariables);
+			StartRunning(root, source);
 			GoTo(root, source);
 
 			while (ShouldContinue())
@@ -53,7 +50,6 @@ namespace PiRhoSoft.CompositionEngine
 				if (frame.Node != null)
 				{
 					_callstack.Push(frame);
-					_rootStore.ChangeRoot(frame.This);
 
 					yield return ProcessFrame(frame);
 				}
@@ -67,15 +63,9 @@ namespace PiRhoSoft.CompositionEngine
 
 			_callstack.Clear();
 			_nextNode.Reset();
-			_rootStore.ChangeRoot(rootVariables);
 		}
 
 		#region Traversal
-
-		public void ChangeRoot(object root)
-		{
-			_nextNode.This = root;
-		}
 
 		public void GoTo(InstructionGraphNode node, string name)
 		{
@@ -88,9 +78,6 @@ namespace PiRhoSoft.CompositionEngine
 
 			_nextNode.Node = node;
 			_nextNode.Source = name;
-
-			if (_nextNode.This == null && _callstack.Count > 0)
-				_nextNode.This = _callstack.Peek().This;
 		}
 
 		public void GoTo(InstructionGraphNode node, string name, int index)
@@ -126,7 +113,6 @@ namespace PiRhoSoft.CompositionEngine
 			public NodeType Type;
 			public int Iteration;
 			public InstructionGraphNode Node;
-			public object This;
 			public string Source;
 
 			public NodeFrame Increment()
@@ -147,7 +133,6 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				Iteration = 0;
 				Node = null;
-				This = null;
 			}
 		}
 

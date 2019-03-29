@@ -20,11 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void Setup()
 		{
-			base.Setup();
-
 			_scroll = GetComponent<ScrollRect>();
-			_rowFocus = 0;
-			_columnFocus = 0;
 			_targetPosition = Vector2.zero;
 		}
 

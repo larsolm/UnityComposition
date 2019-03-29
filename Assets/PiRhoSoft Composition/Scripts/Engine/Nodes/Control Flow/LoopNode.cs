@@ -10,11 +10,11 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to repeatedly go to while Condition evaluates to true")]
 		public InstructionGraphNode Loop = null;
 
-		[Tooltip("The loop will continue to execute while this expression is true")]
-		public Expression Condition = new Expression();
-
 		[Tooltip("The variable that will hold the number of times the loop has run")]
 		public VariableReference Index = new VariableReference();
+
+		[Tooltip("The loop will continue to execute while this expression is true")]
+		public Expression Condition = new Expression();
 
 		public override Color NodeColor => Colors.Loop;
 
