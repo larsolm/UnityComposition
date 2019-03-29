@@ -1,7 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Text;
-
-namespace PiRhoSoft.CompositionEngine
+﻿namespace PiRhoSoft.CompositionEngine
 {
 	public struct OperatorPrecedence
 	{
@@ -14,6 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static OperatorPrecedence Addition = LeftAssociative(70);
 		public static OperatorPrecedence Multiplication = LeftAssociative(80);
 		public static OperatorPrecedence Exponentiation = RightAssociative(90);
+		public static OperatorPrecedence Prefix = LeftAssociative(100);
 
 		public static OperatorPrecedence LeftAssociative(int value)
 		{
