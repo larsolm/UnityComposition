@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 				graph.CurrentEvent = Event;
 
 			if (Graph.Instruction)
-				CompositionManager.Instance.RunInstruction(Graph, this);
+				CompositionManager.Instance.RunInstruction(Graph, VariableValue.Create(this));
 		}
 	}
 }

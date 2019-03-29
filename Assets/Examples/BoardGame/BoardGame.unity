@@ -758,10 +758,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAAMzPzQMP1SMAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAADMz80DD9VhAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 2137111255}
-    - {fileID: 0}
 --- !u!1 &203898554
 GameObject:
   m_ObjectHideFlags: 0
@@ -1288,10 +1287,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAA6SZ5QI2X7kAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAFK4LsDXo+hAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 175348908}
-    - {fileID: 0}
 --- !u!1 &380795402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1595,10 +1593,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAAzczkwDMzM0AAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAM3M5MDhenTAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1746312865}
-    - {fileID: 0}
 --- !u!1 &445214365
 GameObject:
   m_ObjectHideFlags: 0
@@ -2406,9 +2403,6 @@ MonoBehaviour:
   DependentObjects:
     _items: []
   DisplayText: {fileID: 557731055}
-  ContinueIndicator: {fileID: 0}
-  FinishedIndicator: {fileID: 0}
-  AcceptButton: Submit
 --- !u!1 &563998578
 GameObject:
   m_ObjectHideFlags: 0
@@ -2671,10 +2665,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAA7FHQQNejQMAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAOxR0EAzM3NAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 2137111255}
-    - {fileID: 0}
 --- !u!1 &683729304
 GameObject:
   m_ObjectHideFlags: 0
@@ -4499,10 +4492,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAA16PgQHE9esAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAB+F20B7FC5AAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 2137111255}
-    - {fileID: 0}
 --- !u!1 &1113757093
 GameObject:
   m_ObjectHideFlags: 0
@@ -5900,10 +5892,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK5XwGZm9sAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAOxRWEBmZvbAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1315274200}
-    - {fileID: 0}
 --- !u!1 &1431587069
 GameObject:
   m_ObjectHideFlags: 0
@@ -7434,14 +7425,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1686139848}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d264bfadf51340c4d9dab818a83aae8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 08ac88b8f693cea4ba3170a47ced16e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DependentObjects:
     _items: []
   DisplayText: {fileID: 525998823}
-  ContinueIndicator: {fileID: 0}
-  FinishedIndicator: {fileID: 0}
   AcceptButton: Submit
 --- !u!114 &1686139855
 MonoBehaviour:
@@ -7760,10 +7749,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAAaJE1QCPb8UAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAFyPcsBI4fJAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 175348908}
-    - {fileID: 0}
 --- !u!1 &1746312862
 GameObject:
   m_ObjectHideFlags: 0
@@ -7975,10 +7963,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAApptUQBKD0EAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAK5HUcBmZs5AAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 175348908}
-    - {fileID: 0}
 --- !u!1 &1813092577
 GameObject:
   m_ObjectHideFlags: 0
@@ -8083,10 +8070,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAApHD1wIXrcUAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAKRw9cAUrjfAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1746312865}
-    - {fileID: 0}
 --- !u!1 &1863044770
 GameObject:
   m_ObjectHideFlags: 0
@@ -8191,10 +8177,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK7PwHsUbkAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAFK4zsAUrkfAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1746312865}
-    - {fileID: 0}
 --- !u!1 &1932431722
 GameObject:
   m_ObjectHideFlags: 0
@@ -8672,10 +8657,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAArkcxwB+F28AAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAOxRgECkcNXAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1315274200}
-    - {fileID: 0}
 --- !u!1 &2115652723
 GameObject:
   m_ObjectHideFlags: 0
@@ -8780,10 +8764,9 @@ MonoBehaviour:
     - B0Nhbk1vdmUBAAAAAA==
     - EFN0YXJ0aW5nUG9zaXRpb24JAAAAcT16wEjh2sAAAAAA
     - DkZpbmlzaFBvc2l0aW9uCQAAAJqZOUAUrtfAAAAAAA==
-    - CUhpZ2hsaWdodBEAAAABAAAA
+    - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1315274200}
-    - {fileID: 0}
 --- !u!1 &2137111252
 GameObject:
   m_ObjectHideFlags: 0

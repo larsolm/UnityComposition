@@ -9,6 +9,9 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private const string _alreadyRunningError = "(CIAR) Failed to run Instruction '{0}': the Instruction is already running";
 
+		public string ContextName = "context"; // this is drawn manually by the editor
+		public VariableDefinition ContextDefinition = VariableDefinition.Create(string.Empty, VariableType.Empty);
+
 		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false)] public VariableDefinitionList Inputs = new VariableDefinitionList();
 		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false)] public VariableDefinitionList Outputs = new VariableDefinitionList();
 

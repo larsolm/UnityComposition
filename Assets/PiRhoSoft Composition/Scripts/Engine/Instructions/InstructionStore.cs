@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -55,21 +56,22 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class InstructionStore : IVariableStore
 	{
+		private const string _invalidContextError = "(CISIC) failed to create context {0}: the variable '{1}' does not satisfy the contraint";
 		private const string _missingInputError = "(CISMI) failed to read input {0}: the variable '{1}' could not be found";
 		private const string _missingOutputError = "(CISMO) failed to store output {0}: the variable '{1}' could not be found";
 		private const string _readOnlyOutputError = "(CISROO) failed to store output {0}: the variable '{1}' is read only";
 		private const string _invalidOutputError = "(CISIOT) failed to store output {0}: the variable '{1}' has an incompatible type";
 
-		public const string RootStoreName = "root";
 		public const string SceneStoreName = "scene";
 		public const string InputStoreName = "input";
 		public const string OutputStoreName = "output";
 		public const string LocalStoreName = "local";
 
-		private static string[] _variableNames = new string[] { RootStoreName, SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName };
+		private static string[] _variableNames = new string[] { SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName };
 		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
-		public object Root { get; private set; }
+		public string ContextName { get; private set; }
+		public VariableValue Context { get; private set; }
 
 		public VariableStore Input { get; } = new WritableStore();
 		public VariableStore Output { get; } = new WritableStore();
@@ -81,14 +83,13 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool IsInput(InstructionInput input) => input.Type == InstructionInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
 		public static bool IsOutput(InstructionOutput output) => output.Type == InstructionOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
-		public InstructionStore(object root)
+		public InstructionStore(string contextName, VariableDefinition contextDefinition, VariableValue context)
 		{
-			ChangeRoot(root);
-		}
+			ContextName = contextName;
+			Context = context;
 
-		public void ChangeRoot(object root)
-		{
-			Root = root;
+			if (contextDefinition.Constraint != null && !contextDefinition.Constraint.IsValid(context))
+				Debug.LogWarningFormat(_invalidContextError, contextName, context);
 		}
 
 		public void WriteInputs(IList<InstructionInput> inputs)
@@ -143,9 +144,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableValue GetVariable(string name)
 		{
+			if (ContextName == name)
+				return Context;
+
 			switch (name)
 			{
-				case RootStoreName: return VariableValue.CreateReference(Root);
 				case SceneStoreName: return VariableValue.Create(_sceneStore);
 				case InputStoreName: return VariableValue.Create(Input);
 				case OutputStoreName: return VariableValue.Create(Output);
@@ -157,9 +160,11 @@ namespace PiRhoSoft.CompositionEngine
 
 		public SetVariableResult SetVariable(string name, VariableValue value)
 		{
+			if (ContextName == name)
+				return SetVariableResult.ReadOnly;
+
 			switch (name)
 			{
-				case RootStoreName: return SetVariableResult.ReadOnly;
 				case SceneStoreName: return SetVariableResult.ReadOnly;
 				case InputStoreName: return SetVariableResult.ReadOnly;
 				case OutputStoreName: return SetVariableResult.ReadOnly;
@@ -171,7 +176,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public IEnumerable<string> GetVariableNames()
 		{
-			return _variableNames;
+			return _variableNames.Append(ContextName);
 		}
 	}
 }

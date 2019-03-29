@@ -56,7 +56,7 @@ MonoBehaviour:
     _outputs: []
   Root:
     _variable:
-    - root
+    - currentPlayer
     _lookups:
     - 
   WaitForCompletion: 1
@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Name: Check Finished
   m_EditorClassIdentifier: 
   Name: Check Finished
-  GraphPosition: {x: 1254.4, y: 102.4}
+  GraphPosition: {x: 1241.6, y: 89.6}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -96,7 +96,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114318641242556822}
   Expression:
-    _statement: local.Finished = true;
+    _statement: lfinished = true;
 --- !u!114 &114318641242556822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -118,6 +118,14 @@ MonoBehaviour:
     - Pieces
     _lookups:
     - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - currentPiece
+    _lookups:
     - 
   Loop: {fileID: 114667983929491124}
 --- !u!114 &114390618060680096
@@ -151,8 +159,11 @@ MonoBehaviour:
   GraphPosition: {x: 345.6, y: 12.8}
   IsBreakpoint: 0
   Loop: {fileID: 114688480945551876}
+  Index:
+    _variable: []
+    _lookups: []
   Condition:
-    _statement: local.Winner == null
+    _statement: winner == null
 --- !u!114 &114545528968405250
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -186,7 +197,7 @@ MonoBehaviour:
   OnTrue: {fileID: 0}
   OnFalse: {fileID: 114764470530715806}
   Condition:
-    _statement: root.Finished
+    _statement: currentPiece.Finished
 --- !u!114 &114688480945551876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,6 +220,14 @@ MonoBehaviour:
     _lookups:
     - 
     - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - currentPlayer
+    _lookups:
+    - 
   Loop: {fileID: 114093446906697678}
 --- !u!114 &114764470530715806
 MonoBehaviour:
@@ -227,7 +246,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114545528968405250}
   Expression:
-    _statement: local.Finished = false;
+    _statement: finished = false;
 --- !u!114 &114780222226876822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,7 +265,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114843919956122944}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: local.Finished
+    _statement: finished
 --- !u!114 &114843919956122944
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -264,4 +283,4 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114390618060680096}
   Expression:
-    _statement: local.Winner = root
+    _statement: winner = currentPlayer
