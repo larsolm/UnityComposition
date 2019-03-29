@@ -66,7 +66,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var name = _proxy.GetName(index);
 			var value = Store.GetVariable(name);
-			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
+			var definition = ValueDefinition.Create(VariableType.Empty);
 
 			return VariableValueDrawer.GetHeight(value, definition);
 		}
@@ -75,7 +75,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var name = _proxy.GetName(index);
 			var value = Store.GetVariable(name);
-			var definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
+			var definition = ValueDefinition.Create(VariableType.Empty);
 
 			if (value.IsEmpty)
 			{

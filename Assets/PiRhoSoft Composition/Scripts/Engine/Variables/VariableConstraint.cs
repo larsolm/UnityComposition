@@ -4,36 +4,36 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class VariableConstraintAttribute : Attribute
 	{
-		private VariableDefinition _definition;
+		private ValueDefinition _definition;
 
 		public VariableConstraintAttribute(VariableType type)
 		{
-			_definition = VariableDefinition.Create(string.Empty, type);
+			_definition = ValueDefinition.Create(type);
 		}
 
 		public VariableConstraintAttribute(int minimum, int maximum)
 		{
-			_definition = VariableDefinition.Create(string.Empty, minimum, maximum);
+			_definition = ValueDefinition.Create(minimum, maximum);
 		}
 
 		public VariableConstraintAttribute(float minimum, float maximum)
 		{
-			_definition = VariableDefinition.Create(string.Empty, minimum, maximum);
+			_definition = ValueDefinition.Create(minimum, maximum);
 		}
 
 		public VariableConstraintAttribute(string[] values)
 		{
-			_definition = VariableDefinition.Create(string.Empty, values);
+			_definition = ValueDefinition.Create(values);
 		}
 
 		public VariableConstraintAttribute(Type type)
 		{
-			_definition = VariableDefinition.Create(string.Empty, type);
+			_definition = ValueDefinition.Create(type);
 		}
 
-		public VariableDefinition GetDefinition(string name)
+		public ValueDefinition GetDefinition()
 		{
-			return VariableDefinition.Create(name, _definition.Type, _definition.Constraint);
+			return ValueDefinition.Create(_definition.Type, _definition.Constraint);
 		}
 	}
 

@@ -65,7 +65,7 @@ namespace PiRhoSoft.CompositionEditor
 			_variables.Variables[index] = Variable.Create(name, value);
 		}
 
-		private void AddVariable(string name, VariableDefinition definition)
+		private void AddVariable(string name, ValueDefinition definition)
 		{
 			using (new UndoScope(_variables, true))
 			{
@@ -91,24 +91,24 @@ namespace PiRhoSoft.CompositionEditor
 		private class AddVariableContent : AddNamedItemContent
 		{
 			private VariableLinkEditor _editor;
-			private VariableDefinition _definition;
+			private ValueDefinition _definition;
 			private bool _typeValid = true;
 
 			public AddVariableContent(VariableLinkEditor editor)
 			{
 				_editor = editor;
-				_definition = VariableDefinition.Create(string.Empty, VariableType.Empty);
+				_definition = ValueDefinition.Create(VariableType.Empty);
 			}
 
 			protected override float GetHeight_()
 			{
-				return VariableDefinitionDrawer.GetHeight(_definition, VariableInitializerType.None, null);
+				return ValueDefinitionDrawer.GetHeight(_definition, VariableInitializerType.None, null);
 			}
 
 			protected override bool Draw_(bool clean)
 			{
 				using (new InvalidScope(clean || _typeValid))
-					_definition = VariableDefinitionDrawer.Draw(_definition, VariableInitializerType.None, null, false);
+					_definition = ValueDefinitionDrawer.Draw(GUIContent.none, _definition, VariableInitializerType.None, null, false);
 
 				return false;
 			}

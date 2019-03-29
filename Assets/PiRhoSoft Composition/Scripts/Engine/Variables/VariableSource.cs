@@ -36,7 +36,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (Type == VariableSourceType.Reference && InstructionStore.IsInput(Reference))
 			{
 				var type = VariableValue.GetType(typeof(T));
-				inputs.Add(VariableDefinition.Create(Reference.RootName, type));
+				inputs.Add(new VariableDefinition { Name = Reference.RootName, Definition = ValueDefinition.Create(type) });
 			}
 		}
 	}
@@ -169,13 +169,13 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class VariableValueSource : VariableSource<VariableValue>, ISerializationCallbackReceiver
 	{
-		public VariableDefinition Definition;
+		public ValueDefinition Definition;
 
 		[SerializeField] private string _data;
 		[SerializeField] private List<Object> _objects;
 
-		public VariableValueSource() { Value = VariableValue.Empty; Definition = VariableDefinition.Create(string.Empty, VariableType.Empty); }
-		public VariableValueSource(VariableType type, VariableDefinition definition) { Value = definition.Generate(null); Definition = definition; }
+		public VariableValueSource() { Value = VariableValue.Empty; Definition = ValueDefinition.Create(VariableType.Empty); }
+		public VariableValueSource(VariableType type, ValueDefinition definition) { Value = definition.Generate(null); Definition = definition; }
 
 		public void OnBeforeSerialize()
 		{

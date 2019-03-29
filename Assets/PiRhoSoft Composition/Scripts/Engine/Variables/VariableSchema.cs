@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -29,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(EmptyText = "Add tags to categorize variables (usually for resetting and persistance)")]
 		public TagList Tags = new TagList();
 
-		[HideInInspector] [SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
+		[HideInInspector] [SerializeField] private VariableDefinitionList _definitions = new VariableDefinitionList();
 		[HideInInspector] [SerializeField] private int _version = 0;
 
 		public int Version
@@ -69,7 +68,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (string.IsNullOrEmpty(name) || HasDefinition(name))
 				return false;
 
-			_definitions.Add(VariableDefinition.Create(name, type, null));
+			_definitions.Add(new VariableDefinition { Name = name, Definition = ValueDefinition.Create(type, null) });
 			IncrementVersion();
 			return true;
 		}

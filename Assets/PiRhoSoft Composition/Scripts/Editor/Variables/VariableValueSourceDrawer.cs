@@ -44,7 +44,7 @@ namespace PiRhoSoft.CompositionEditor
 
 							if (definitionType != target.Definition.Type)
 							{
-								target.Definition = VariableDefinition.Create(target.Definition.Name, definitionType, target.Definition.Constraint, target.Definition.Tag, target.Definition.Initializer, false, false);
+								target.Definition = ValueDefinition.Create(definitionType, target.Definition.Constraint, target.Definition.Tag, target.Definition.Initializer, false, false);
 								target.Value = target.Definition.Generate(null);
 							}
 						}

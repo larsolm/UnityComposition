@@ -83,12 +83,12 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool IsInput(InstructionInput input) => input.Type == InstructionInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
 		public static bool IsOutput(InstructionOutput output) => output.Type == InstructionOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
-		public InstructionStore(string contextName, VariableDefinition contextDefinition, VariableValue context)
+		public InstructionStore(string contextName, ValueDefinition contextDefinition, VariableValue context)
 		{
 			ContextName = contextName;
 			Context = context;
 
-			if (contextDefinition.Constraint != null && !contextDefinition.Constraint.IsValid(context))
+			if (!contextDefinition.IsValid(context))
 				Debug.LogWarningFormat(_invalidContextError, contextName, context);
 		}
 

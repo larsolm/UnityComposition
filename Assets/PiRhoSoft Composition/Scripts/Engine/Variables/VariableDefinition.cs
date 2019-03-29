@@ -6,13 +6,20 @@ using Object = UnityEngine.Object;
 namespace PiRhoSoft.CompositionEngine
 {
 	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition> { }
+	[Serializable] public class ValueDefinitionList : SerializedList<ValueDefinition> { }
 
 	[Serializable]
-	public struct VariableDefinition : ISerializationCallbackReceiver
+	public struct VariableDefinition
 	{
-		private const string _invalidInitializerError = "(CVDII) Failed to initialize variable '{0}': the definition specifies type {1} but the initializer returned type {2}";
+		public string Name;
+		public ValueDefinition Definition;
+	}
 
-		[SerializeField] private string _name;
+	[Serializable]
+	public struct ValueDefinition : ISerializationCallbackReceiver
+	{
+		private const string _invalidInitializerError = "(CVDII) Failed to initialize variable: the definition specifies type {0} but the initializer returned type {1}";
+
 		[SerializeField] private VariableType _type;
 		[SerializeField] private string _constraint;
 		[SerializeField] public string _tag;
@@ -21,7 +28,6 @@ namespace PiRhoSoft.CompositionEngine
 		[SerializeField] private bool _isTypeLocked;
 		[SerializeField] private bool _isConstraintLocked;
 
-		public string Name => _name;
 		public VariableType Type => _type;
 		public VariableConstraint Constraint { get; private set; }
 		public string Tag => _tag;
@@ -40,7 +46,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (value.Type == Type)
 					return value;
 
-				Debug.LogErrorFormat(_invalidInitializerError, Name, Type, value.Type);
+				Debug.LogErrorFormat(_invalidInitializerError, Type, value.Type);
 			}
 
 			return VariableHandler.Get(Type).CreateDefault(Constraint);
@@ -53,71 +59,65 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Creation
 
-		public static VariableDefinition Create(string name, VariableType type)
+		public static ValueDefinition Create(VariableType type)
 		{
-			return new VariableDefinition
+			return new ValueDefinition
 			{
-				_name = name,
 				_type = type,
 				_isTypeLocked = type != VariableType.Empty,
 				_isConstraintLocked = false
 			};
 		}
 
-		public static VariableDefinition Create(string name, int minimum, int maximum)
+		public static ValueDefinition Create(int minimum, int maximum)
 		{
-			return new VariableDefinition
+			return new ValueDefinition
 			{
-				_name = name,
 				_type = VariableType.Int,
 				_isTypeLocked = true,
 				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create(string name, float minimum, float maximum)
+		public static ValueDefinition Create(float minimum, float maximum)
 		{
-			return new VariableDefinition
+			return new ValueDefinition
 			{
-				_name = name,
 				_type = VariableType.Float,
 				_isTypeLocked = true,
 				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create(string name, string[] values)
+		public static ValueDefinition Create(string[] values)
 		{
-			return new VariableDefinition
+			return new ValueDefinition
 			{
-				_name = name,
 				_type = VariableType.String,
 				_isTypeLocked = true,
 				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create<T>(string name) where T : Object
+		public static ValueDefinition Create<T>() where T : Object
 		{
-			return Create(name, typeof(T));
+			return Create(typeof(T));
 		}
 
-		public static VariableDefinition Create(string name, Type type)
+		public static ValueDefinition Create(Type type)
 		{
-			return new VariableDefinition
+			return new ValueDefinition
 			{
-				_name = name,
 				_type = VariableValue.GetType(type),
 				_isTypeLocked = true,
 				_isConstraintLocked = true
 			};
 		}
 
-		public static VariableDefinition Create(string name, VariableType type, VariableConstraint constraint)
+		public static ValueDefinition Create(VariableType type, VariableConstraint constraint)
 		{
-			return new VariableDefinition
+			return new ValueDefinition
 			{
-				_name = name,
 				_type = type,
 				_isTypeLocked = type != VariableType.Empty,
 				_isConstraintLocked = constraint != null,
@@ -125,11 +125,10 @@ namespace PiRhoSoft.CompositionEngine
 			};
 		}
 
-		public static VariableDefinition Create(string name, VariableType type, VariableConstraint constraint, string tag, Expression initializer, bool isTypeLocked, bool isConstraintLocked)
+		public static ValueDefinition Create(VariableType type, VariableConstraint constraint, string tag, Expression initializer, bool isTypeLocked, bool isConstraintLocked)
 		{
-			return new VariableDefinition
+			return new ValueDefinition
 			{
-				_name = name,
 				_type = type,
 				_isTypeLocked = isTypeLocked,
 				_isConstraintLocked = isConstraintLocked,

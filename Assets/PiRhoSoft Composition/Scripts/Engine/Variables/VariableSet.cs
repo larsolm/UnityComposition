@@ -35,7 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (index >= 0)
 				{
-					if (tag == null || _schema[index].Tag == tag)
+					if (tag == null || _schema[index].Definition.Tag == tag)
 						SetValue(index, fromVariable.Value);
 				}
 			}
@@ -49,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (index >= 0)
 				{
-					if (tag == null || _schema[index].Tag == tag)
+					if (tag == null || _schema[index].Definition.Tag == tag)
 						variables._variables.Add(fromVariable);
 				}
 			}
@@ -82,7 +82,7 @@ namespace PiRhoSoft.CompositionEngine
 					var definition = _schema[i];
 					var variable = GetVariable(definition.Name);
 
-					if (variable.Value.Type == definition.Type)
+					if (variable.Value.Type == definition.Definition.Type)
 						variables.Add(variable);
 					else
 						variables.Add(Variable.Create(definition.Name, VariableValue.Empty));
@@ -99,7 +99,7 @@ namespace PiRhoSoft.CompositionEngine
 					if (_variables[i].Value.Type == VariableType.Empty)
 					{
 						var definition = _schema[i];
-						var value = definition.Generate(_owner);
+						var value = definition.Definition.Generate(_owner);
 						_variables[i] = Variable.Create(definition.Name, value);
 					}
 				}
@@ -111,7 +111,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (_schema != null)
 			{
 				var definition = _schema[index];
-				var value = definition.Generate(_owner);
+				var value = definition.Definition.Generate(_owner);
 				_variables[index] = Variable.Create(definition.Name, value);
 			}
 		}
@@ -185,7 +185,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				for (var i = 0; i < _schema.Count; i++)
 				{
-					if (_schema[i].Tag == tag)
+					if (_schema[i].Definition.Tag == tag)
 						Reset(i);
 				}
 			}

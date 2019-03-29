@@ -118,7 +118,7 @@ namespace PiRhoSoft.CompositionEditor
 			_node.Property = _node.TargetType.GetProperty(name);
 
 			var variableType = VariableValue.GetType(type);
-			var definition = variableType == VariableType.Object ? VariableDefinition.Create(string.Empty, type) : VariableDefinition.Create(string.Empty, variableType);
+			var definition = variableType == VariableType.Object ? ValueDefinition.Create(type) : ValueDefinition.Create(variableType);
 
 			_node.Value = new VariableValueSource(variableType, definition);
 		}
