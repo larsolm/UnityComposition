@@ -45,13 +45,16 @@ namespace PiRhoSoft.CompositionEditor
 						? ValueDefinition.Create(listConstraint.ItemType, listConstraint.ItemConstraint)
 						: ValueDefinition.Create(VariableType.Empty);
 
-					for (var i = 0; i < value.List.Count; i++)
+					if (value.List != null)
 					{
-						if (i != 0)
-							height += EditorGUIUtility.standardVerticalSpacing;
+						for (var i = 0; i < value.List.Count; i++)
+						{
+							if (i != 0)
+								height += EditorGUIUtility.standardVerticalSpacing;
 
-						var item = value.List.GetVariable(i);
-						height += GetHeight(item, itemDefinition);
+							var item = value.List.GetVariable(i);
+							height += GetHeight(item, itemDefinition);
+						}
 					}
 
 					return height;
@@ -245,6 +248,9 @@ namespace PiRhoSoft.CompositionEditor
 			var itemDefinition = definition.Constraint is ListVariableConstraint listConstraint
 				? ValueDefinition.Create(listConstraint.ItemType, listConstraint.ItemConstraint)
 				: ValueDefinition.Create(VariableType.Empty);
+
+			if (value.List == null)
+				value = definition.Generate(null);
 
 			var remove = -1;
 

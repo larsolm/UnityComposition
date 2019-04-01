@@ -20,9 +20,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		void OnEnable()
 		{
-			if (!target)
-				return;
-
 			_variables = target as VariableLink;
 			_list.Setup(_variables.Variables)
 				.MakeDrawable(DrawVariable)

@@ -18,78 +18,79 @@ MonoBehaviour:
     - Persistent
     - NewGame
   _definitions:
-  - _name: Player
-    _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Persistent
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: Index
-    _type: 2
-    _constraint: 0|2
-    _tag: Persistent
-    _initializer:
-      _statement: 0
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: CurrentSpace
-    _type: 2
-    _constraint: 0|35
-    _tag: NewGame
-    _initializer:
-      _statement: Player.StartingSpace
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: Free
-    _type: 1
-    _constraint: 
-    _tag: NewGame
-    _initializer:
-      _statement: false
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: Finished
-    _type: 1
-    _constraint: 
-    _tag: NewGame
-    _initializer:
-      _statement: false
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: CanMove
-    _type: 1
-    _constraint: 
-    _tag: NewGame
-    _initializer:
-      _statement: false
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: StartingPosition
-    _type: 9
-    _constraint: 
-    _tag: Persistent
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: FinishPosition
-    _type: 9
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Highlight
-    _type: 17
-    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    _tag: NewGame
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  _version: 106
+    _items:
+    - Name: Player
+      Definition:
+        _type: 17
+        _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _tag: Persistent
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: CurrentSpace
+      Definition:
+        _type: 2
+        _constraint: 
+        _tag: NewGame
+        _initializer:
+          _statement: Player.StartingSpace
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: StartingPosition
+      Definition:
+        _type: 9
+        _constraint: 
+        _tag: Persistent
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: FinishPosition
+      Definition:
+        _type: 9
+        _constraint: 
+        _tag: Persistent
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Free
+      Definition:
+        _type: 1
+        _constraint: 
+        _tag: NewGame
+        _initializer:
+          _statement: false
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Finished
+      Definition:
+        _type: 1
+        _constraint: 
+        _tag: NewGame
+        _initializer:
+          _statement: false
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: CanMove
+      Definition:
+        _type: 1
+        _constraint: 
+        _tag: NewGame
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Highlight
+      Definition:
+        _type: 17
+        _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _tag: NewGame
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 177

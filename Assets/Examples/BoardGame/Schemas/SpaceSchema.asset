@@ -16,13 +16,15 @@ MonoBehaviour:
   Tags:
     _items: []
   _definitions:
-  - _name: CurrentPiece
-    _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  _version: 2
+    _items:
+    - Name: CurrentPiece
+      Definition:
+        _type: 17
+        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 3

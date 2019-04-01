@@ -12,6 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: Turn Loop
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 17
+    _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -30,7 +40,7 @@ MonoBehaviour:
     - {fileID: 114764470530715806}
     - {fileID: 114780222226876822}
     - {fileID: 114390618060680096}
-  StartPosition: {x: 0, y: 0}
+  StartPosition: {x: -0, y: 0}
   Enter: {fileID: 0}
   Process: {fileID: 114506005044156910}
   Exit: {fileID: 0}
@@ -54,11 +64,23 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
     _inputs: []
     _outputs: []
-  Root:
-    _variable:
-    - currentPlayer
-    _lookups:
-    - 
+  Context:
+    Type: 1
+    Reference:
+      _variable:
+      - player
+      _lookups:
+      - 
+    Definition:
+      _type: 2
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AgAAAAAAAAA=
+    _objects: []
   WaitForCompletion: 1
 --- !u!114 &114261969380187438
 MonoBehaviour:
@@ -96,7 +118,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114318641242556822}
   Expression:
-    _statement: lfinished = true;
+    _statement: finished = true;
 --- !u!114 &114318641242556822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -114,7 +136,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
-    - root
+    - player
     - Pieces
     _lookups:
     - 
@@ -124,7 +146,7 @@ MonoBehaviour:
     _lookups: []
   Value:
     _variable:
-    - currentPiece
+    - piece
     _lookups:
     - 
   Loop: {fileID: 114667983929491124}
@@ -197,7 +219,7 @@ MonoBehaviour:
   OnTrue: {fileID: 0}
   OnFalse: {fileID: 114764470530715806}
   Condition:
-    _statement: currentPiece.Finished
+    _statement: piece.Finished
 --- !u!114 &114688480945551876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,7 +247,7 @@ MonoBehaviour:
     _lookups: []
   Value:
     _variable:
-    - currentPlayer
+    - player
     _lookups:
     - 
   Loop: {fileID: 114093446906697678}
@@ -283,4 +305,4 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114390618060680096}
   Expression:
-    _statement: winner = currentPlayer
+    _statement: winner = player
