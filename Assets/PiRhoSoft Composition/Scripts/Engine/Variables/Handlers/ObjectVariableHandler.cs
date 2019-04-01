@@ -74,5 +74,15 @@ namespace PiRhoSoft.CompositionEngine
 
 			return SetVariableResult.ReadOnly;
 		}
+
+		public override bool? IsEqual(VariableValue left, VariableValue right)
+		{
+			if (right.IsEmpty)
+				return left.IsNull;
+			else if (right.HasReference)
+				return left.IsNull && right.IsNull || left.Reference == right.Reference;
+			else
+				return null;
+		}
 	}
 }

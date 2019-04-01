@@ -81,5 +81,13 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return ListApply(ref owner, lookup, value);
 		}
+
+		public override bool? IsEqual(VariableValue left, VariableValue right)
+		{
+			if (right.HasReference)
+				return left.Reference == right.Reference;
+			else
+				return null;
+		}
 	}
 }

@@ -54,7 +54,11 @@ namespace PiRhoSoft.CompositionEngine
 			return null;
 		}
 
-		protected virtual VariableConstraint CreateConstraint() { return null; }
+		protected virtual VariableConstraint CreateConstraint() => null;
+
+		public virtual bool IsAssignable(VariableValue from, VariableValue to) => from.Type == to.Type;
+		public virtual bool? IsEqual(VariableValue left, VariableValue right) => null;
+		public virtual int? Compare(VariableValue left, VariableValue right) => null;
 
 		public abstract VariableValue CreateDefault(VariableConstraint constraint);
 		public abstract void Write(VariableValue value, BinaryWriter writer, List<Object> objects);

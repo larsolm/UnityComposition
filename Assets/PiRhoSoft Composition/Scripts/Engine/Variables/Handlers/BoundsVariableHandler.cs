@@ -94,5 +94,13 @@ namespace PiRhoSoft.CompositionEngine
 				return SetVariableResult.TypeMismatch;
 			}
 		}
+
+		public override bool? IsEqual(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetBounds(out var bounds))
+				return left.Bounds == bounds;
+			else
+				return null;
+		}
 	}
 }

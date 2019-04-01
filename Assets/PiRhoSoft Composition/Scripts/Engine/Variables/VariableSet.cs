@@ -137,15 +137,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		private bool SetValue(int index, VariableValue value)
 		{
-			var type = _variables[index].Value.Type;
+			var existing = _variables[index].Value;
+			var assignable = _variables[index].Value.Handler.IsAssignable(existing, value);
 
-			if (type == VariableType.Empty || (type == VariableType.Enum && _variables[index].Value.EnumType == value.EnumType) || (type != VariableType.Enum && type == value.Type))
-			{
+			if (assignable)
 				_variables[index] = Variable.Create(_variables[index].Name, value);
-				return true;
-			}
 
-			return false;
+			return assignable;
 		}
 
 		#endregion

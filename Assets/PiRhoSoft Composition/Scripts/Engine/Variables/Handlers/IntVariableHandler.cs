@@ -36,5 +36,21 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return SetVariableResult.NotFound;
 		}
+
+		public override bool? IsEqual(VariableValue left, VariableValue right)
+		{
+			if (right.Type == VariableType.Int)
+				return left.Int == right.Int;
+			else
+				return null;
+		}
+
+		public override int? Compare(VariableValue left, VariableValue right)
+		{
+			if (right.Type == VariableType.Int)
+				return left.Int.CompareTo(right.Int);
+			else
+				return null;
+		}
 	}
 }

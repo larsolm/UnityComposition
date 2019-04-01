@@ -43,5 +43,43 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return SetVariableResult.NotFound;
 		}
+
+		public static bool TryParse(Type enumType, string value, out Enum result)
+		{
+			try
+			{
+				result = (Enum)Enum.Parse(enumType, value);
+				return true;
+			}
+			catch
+			{
+				result = null;
+				return false;
+			}
+		}
+
+		public override bool IsAssignable(VariableValue from, VariableValue to)
+		{
+			if (to.HasString)
+				return TryParse(from.EnumType, to.String, out _);
+			else
+				return to.HasEnumType(from.EnumType);
+		}
+
+		public override bool? IsEqual(VariableValue left, VariableValue right)
+		{
+			if (right.HasEnumType(left.EnumType))
+				return left.Enum == right.Enum;
+			else
+				return null;
+		}
+
+		public override int? Compare(VariableValue left, VariableValue right)
+		{
+			if (right.HasEnumType(left.EnumType))
+				return left.Enum.CompareTo(right.Enum);
+			else
+				return null;
+		}
 	}
 }

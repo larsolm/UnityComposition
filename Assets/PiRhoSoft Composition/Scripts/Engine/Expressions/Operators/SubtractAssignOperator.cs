@@ -14,7 +14,9 @@
 
 				for (var i = 0; i < list.Count; i++)
 				{
-					if (ComparisonOperation.IsEqual(list.GetVariable(i), right))
+					var comparison = left.Handler.IsEqual(left, right);
+
+					if (comparison.HasValue && comparison.Value)
 					{
 						removeIndex = i;
 						break;

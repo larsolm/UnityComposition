@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
@@ -508,10 +507,20 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static SetVariableResult SetEnum(OwnerType owner, VariableValue value, FieldInfo field)
 		{
-			if (value.Type == VariableType.Enum && value.EnumType == field.FieldType)
+			if (value.HasEnumType(field.FieldType))
 			{
 				field.SetValue(owner, value.Enum);
 				return SetVariableResult.Success;
+			}
+			else if (value.HasString)
+			{
+				try
+				{
+					var e = (Enum)Enum.Parse(field.FieldType, value.String);
+					field.SetValue(owner, e);
+					return SetVariableResult.Success;
+				}
+				catch { }
 			}
 
 			return SetVariableResult.TypeMismatch;
@@ -683,7 +692,7 @@ namespace PiRhoSoft.CompositionEngine
 			var set = setMethod != null ? creator.CreateSetter(setMethod) : null;
 
 			if (get != null) Getter = obj => GetEnum(obj, get);
-			if (set != null) Setter = (obj, value) => SetEnum(obj, value, set);
+			if (set != null) Setter = (obj, value) => SetEnum(enumType,  obj, value, set);
 		}
 
 		protected override void SetupAsObject(Type objectType, MethodInfo getMethod, MethodInfo setMethod)
@@ -955,12 +964,22 @@ namespace PiRhoSoft.CompositionEngine
 			return SetVariableResult.TypeMismatch;
 		}
 
-		private static SetVariableResult SetEnum(OwnerType owner, VariableValue value, Action<OwnerType, object> setter)
+		private static SetVariableResult SetEnum(Type enumType, OwnerType owner, VariableValue value, Action<OwnerType, object> setter)
 		{
-			if (value.Type == VariableType.String)
+			if (value.HasEnumType(enumType))
 			{
 				setter(owner, value.Enum);
 				return SetVariableResult.Success;
+			}
+			else if (value.Type == VariableType.String)
+			{
+				try
+				{
+					var e = (Enum)Enum.Parse(enumType, value.String);
+					setter(owner, e);
+					return SetVariableResult.Success;
+				}
+				catch { }
 			}
 
 			return SetVariableResult.TypeMismatch;

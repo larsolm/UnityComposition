@@ -59,9 +59,11 @@ namespace PiRhoSoft.CompositionEngine
 		public bool HasNumber4 => _type == VariableType.Vector4 || HasNumber3;
 		public bool HasRect => _type == VariableType.IntRect || _type == VariableType.Rect;
 		public bool HasBounds => _type == VariableType.IntBounds || _type == VariableType.Bounds;
-
-		public bool HasEnumType<Type>() where Type : Enum => HasEnum && EnumType == typeof(Type);
-		public bool HasReferenceType<Type>() where Type : class => HasReference && _reference != null && typeof(Type).IsAssignableFrom(ReferenceType);
+		
+		public bool HasEnumType<Type>() where Type : Enum => HasEnumType(typeof(Type));
+		public bool HasReferenceType<Type>() where Type : class => HasReferenceType(typeof(Type));
+		public bool HasEnumType(Type type) => HasEnum && EnumType == type;
+		public bool HasReferenceType(Type type) => HasReference && _reference != null && type.IsAssignableFrom(ReferenceType);
 
 		public VariableHandler Handler => VariableHandler.Get(_type);
 

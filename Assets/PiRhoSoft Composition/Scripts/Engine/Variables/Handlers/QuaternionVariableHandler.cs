@@ -68,5 +68,13 @@ namespace PiRhoSoft.CompositionEngine
 				return SetVariableResult.TypeMismatch;
 			}
 		}
+
+		public override bool? IsEqual(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetQuaternion(out var quaternion))
+				return left.Quaternion == quaternion;
+			else
+				return null;
+		}
 	}
 }

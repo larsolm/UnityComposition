@@ -22,10 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _infixTypeMismatch1Exception = "the operator '{0}' was passed values of type {1} and {2} but can only operate on values of type {3}";
 		private const string _infixTypeMismatch2Exception = "the operator '{0}' was passed values of type {1} and {2} but can only operate on values of type {3} and {4}";
 		private const string _infixTypeMismatchXException = "the operator '{0}' was passed values of type {1} and {2} but can only operate on values of type {3}, and {4}";
-		private const string _comparisonTypeMismatch1Exception = "the operator '{0}' was passed values of type {1} and {2} but type {1} can only be compared with values of type {3}";
-		private const string _comparisonTypeMismatch2Exception = "the operator '{0}' was passed values of type {1} and {2} but type {1} can only be compared with values of type {3} and {4}";
-		private const string _comparisonTypeMismatchXException = "the operator '{0}' was passed values of type {1} and {2} but type {1} can only be compared with values of type {3}, and {4}";
-		private const string _comparisonEnumMismatchException = "the operator '{0}' was passed enums of type {1} and {2} but enums can only be compared with other enums of the same type";
+		private const string _comparisonTypeMismatchException = "the operator '{0}' was passed values of type {1} and {2} but these types cannot be compared with each other";
 		private const string _divideByZeroException = "the operator '{0}' attempted to divide by 0";
 		private const string _missingAddException = "the list '{0}' cannot have values added";
 		private const string _readOnlyAddException = "the list '{0}' is read only and cannot have values added";
@@ -89,27 +86,9 @@ namespace PiRhoSoft.CompositionEngine
 			return new ExpressionEvaluationException(_infixTypeMismatchXException, symbol, left, right, first, last);
 		}
 
-		public static ExpressionEvaluationException ComparisonTypeMismatch(string symbol, VariableType left, VariableType right, VariableType expected)
+		public static ExpressionEvaluationException ComparisonTypeMismatch(string symbol, VariableType left, VariableType right)
 		{
-			return new ExpressionEvaluationException(_comparisonTypeMismatch1Exception, symbol, left, right, expected);
-		}
-
-		public static ExpressionEvaluationException ComparisonTypeMismatch(string symbol, VariableType left, VariableType right, VariableType expected1, VariableType expected2)
-		{
-			return new ExpressionEvaluationException(_comparisonTypeMismatch2Exception, symbol, left, right, expected1, expected2);
-		}
-
-		public static ExpressionEvaluationException ComparisonTypeMismatch(string symbol, VariableType left, VariableType right, params VariableType[] expected)
-		{
-			var first = string.Join(",", expected.Take(expected.Length - 1));
-			var last = expected[expected.Length - 1];
-
-			return new ExpressionEvaluationException(_comparisonTypeMismatchXException, symbol, left, right, first, last);
-		}
-
-		public static ExpressionEvaluationException ComparisonEnumMismatch(string symbol, Type left, Type right)
-		{
-			return new ExpressionEvaluationException(_comparisonEnumMismatchException, symbol, left.Name, right.Name);
+			return new ExpressionEvaluationException(_comparisonTypeMismatchException, symbol, left, right);
 		}
 
 		public static ExpressionEvaluationException DivideByZero(string symbol)

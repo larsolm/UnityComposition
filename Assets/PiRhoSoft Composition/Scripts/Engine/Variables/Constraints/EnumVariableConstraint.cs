@@ -19,7 +19,15 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override bool IsValid(VariableValue value)
 		{
-			return Type != null && value.EnumType == Type;
+			if (Type != null)
+			{
+				if (value.EnumType == Type)
+					return true;
+				else if (value.Type == VariableType.String)
+					return EnumVariableHandler.TryParse(Type, value.String, out _);
+			}
+
+			return false;
 		}
 	}
 }

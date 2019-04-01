@@ -28,5 +28,20 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return SetVariableResult.NotFound;
 		}
+
+		public override bool IsAssignable(VariableValue from, VariableValue to)
+		{
+			return true;
+		}
+
+		public override bool? IsEqual(VariableValue left, VariableValue right)
+		{
+			if (right.IsEmpty)
+				return true;
+			else if (right.HasReference)
+				return right.IsNull;
+			else
+				return null;
+		}
 	}
 }
