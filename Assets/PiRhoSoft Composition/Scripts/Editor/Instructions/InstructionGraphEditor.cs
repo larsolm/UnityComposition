@@ -47,20 +47,6 @@ namespace PiRhoSoft.CompositionEditor
 		{
 		}
 
-		protected virtual void DrawContext()
-		{
-			using (new UndoScope(_graph, false))
-			{
-				EditorGUILayout.LabelField("Context");
-
-				using (new EditorGUILayout.HorizontalScope())
-				{
-					_graph.ContextName = EditorGUILayout.TextField(_graph.ContextName, GUILayout.Width(RectHelper.CurrentLabelWidth));
-					_graph.ContextDefinition = VariableDefinitionDrawer.Draw(_graph.ContextDefinition, VariableInitializerType.None, null, true);
-				}
-			}
-		}
-
 		protected virtual void DrawNodes(SerializedProperty nodes)
 		{
 			EditorGUILayout.PropertyField(_nodesProperty);

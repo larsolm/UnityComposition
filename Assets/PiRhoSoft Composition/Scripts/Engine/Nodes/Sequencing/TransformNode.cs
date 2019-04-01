@@ -20,7 +20,6 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The Tranform to modify")]
-		[VariableConstraint(typeof(Transform))]
 		public VariableReference Transform = new VariableReference();
 
 		[Tooltip("Whether to use a relative position from the original or an absolute position")]
@@ -75,6 +74,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
+			if (InstructionStore.IsInput(Transform))
+				inputs.Add(new VariableDefinition { Name = Transform.RootName, Definition = ValueDefinition.Create<Transform>() });
+
 			TargetPosition.GetInputs(inputs);
 			TargetRotation.GetInputs(inputs);
 			TargetScale.GetInputs(inputs);

@@ -57,18 +57,19 @@ namespace PiRhoSoft.CompositionEngine
 			Prefab.GetInputs(inputs);
 			ObjectName.GetInputs(inputs);
 			Position.GetInputs(inputs);
+			Rotation.GetInputs(inputs);
 
 			if (Positioning == ObjectPositioning.Child && InstructionStore.IsInput(Parent))
-				inputs.Add(VariableDefinition.Create<GameObject>(Parent.RootName));
+				inputs.Add(new VariableDefinition { Name = Parent.RootName, Definition = ValueDefinition.Create<GameObject>() });
 
 			if (Positioning == ObjectPositioning.Relative && InstructionStore.IsInput(Object))
-				inputs.Add(VariableDefinition.Create<GameObject>(Object.RootName));
+				inputs.Add(new VariableDefinition { Name = Object.RootName, Definition = ValueDefinition.Create<GameObject>() });
 		}
 
 		public override void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			if (InstructionStore.IsOutput(ObjectVariable))
-				outputs.Add(VariableDefinition.Create<GameObject>(ObjectVariable.RootName));
+				outputs.Add(new VariableDefinition { Name = ObjectVariable.RootName, Definition = ValueDefinition.Create<GameObject>() });
 		}
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)

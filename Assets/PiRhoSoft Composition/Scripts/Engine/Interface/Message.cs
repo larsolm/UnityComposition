@@ -38,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 					_temporaryReference.Update(variable);
 
 					if (InstructionStore.IsInput(_temporaryReference))
-						inputs.Add(VariableDefinition.Create(_temporaryReference.RootName, VariableType.Empty));
+						inputs.Add(new VariableDefinition { Name = _temporaryReference.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
 
 					start = close + 1;
 				}

@@ -48,14 +48,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return Instruction != null
 				? Instruction.Inputs.Where(i => input.Name == i.Name).FirstOrDefault()
-				: VariableDefinition.Create(input.Name, VariableType.Empty);
+				: new VariableDefinition { Name = input.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
 		}
 
 		public VariableDefinition GetOutputDefinition(InstructionOutput output)
 		{
 			return Instruction != null
 				? Instruction.Outputs.Where(o => output.Name == o.Name).FirstOrDefault()
-				: VariableDefinition.Create(output.Name, VariableType.Empty);
+				: new VariableDefinition { Name = output.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
 		}
 
 		private void UpdateInputs()
@@ -70,7 +70,7 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var existing = _inputs.Where(input => input.Name == definition.Name).FirstOrDefault();
 
-					if (existing != null && (existing.Type == InstructionInputType.Reference || definition.IsValid(existing.Value)))
+					if (existing != null && (existing.Type == InstructionInputType.Reference || definition.Definition.IsValid(existing.Value)))
 					{
 						inputs.Add(existing);
 					}
@@ -80,7 +80,7 @@ namespace PiRhoSoft.CompositionEngine
 						{
 							Name = definition.Name,
 							Type = InstructionInputType.Value,
-							Value = definition.Generate(null)
+							Value = definition.Definition.Generate(null)
 						});
 					}
 				}

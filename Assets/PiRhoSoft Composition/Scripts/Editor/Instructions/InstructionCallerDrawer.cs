@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
-using System;
 using System.Collections;
 using System.Reflection;
 using UnityEditor;
@@ -60,7 +59,7 @@ namespace PiRhoSoft.CompositionEditor
 			switch (input.Type)
 			{
 				case InstructionInputType.Reference: return VariableReferenceControl.GetHeight();
-				case InstructionInputType.Value: return VariableValueDrawer.GetHeight(input.Value, definition);
+				case InstructionInputType.Value: return VariableValueDrawer.GetHeight(input.Value, definition.Definition);
 				default: return EditorGUIUtility.singleLineHeight;
 			}
 		}
@@ -78,14 +77,14 @@ namespace PiRhoSoft.CompositionEditor
 
 			EditorGUI.LabelField(labelRect, definition.Name);
 
-			if (definition.Type != VariableType.Empty)
+			if (definition.Definition.Type != VariableType.Empty)
 			{
 				input.Type = (InstructionInputType)EditorGUI.EnumPopup(typeRect, input.Type);
 
 				switch (input.Type)
 				{
 					case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
-					case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition); break;
+					case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition.Definition); break;
 				}
 			}
 		}

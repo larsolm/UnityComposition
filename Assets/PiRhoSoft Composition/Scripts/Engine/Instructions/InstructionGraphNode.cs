@@ -575,7 +575,7 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var value = field.GetValue(this) as VariableReference;
 					var constraint = field.GetCustomAttribute<VariableConstraintAttribute>();
-					var definition = constraint == null ? VariableDefinition.Create(value.RootName, VariableType.Empty) : constraint.GetDefinition(value.RootName);
+					var definition = new VariableDefinition { Name = value.RootName, Definition = constraint == null ? ValueDefinition.Create(VariableType.Empty) : constraint.GetDefinition() };
 
 					if (InstructionStore.IsInput(value))
 						inputs.Add(definition);
@@ -598,7 +598,7 @@ namespace PiRhoSoft.CompositionEngine
 					if (constraint != null)
 					{
 						if (value.Type == VariableSourceType.Reference && InstructionStore.IsInput(value.Reference))
-							inputs.Add(constraint.GetDefinition(value.Reference.RootName));
+							inputs.Add(new VariableDefinition { Name = value.Reference.RootName, Definition = constraint.GetDefinition() });
 					}
 					else
 					{
@@ -618,7 +618,7 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var value = field.GetValue(this) as VariableReference;
 					if (InstructionStore.IsOutput(value))
-						outputs.Add(VariableDefinition.Create(value.RootName, VariableType.Empty));
+						outputs.Add(new VariableDefinition { Name = value.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
 				}
 				else if (field.FieldType == typeof(Expression))
 				{

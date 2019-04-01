@@ -59,10 +59,10 @@ namespace PiRhoSoft.CompositionEngine
 			Position.GetInputs(inputs);
 
 			if (Positioning == ObjectPositioning.ChildOfParent && InstructionStore.IsInput(Parent))
-				inputs.Add(VariableDefinition.Create<GameObject>(Parent.RootName));
+				inputs.Add(new VariableDefinition { Name = Parent.RootName, Definition = ValueDefinition.Create<GameObject>() });
 
 			if (Positioning == ObjectPositioning.RelativeToObject && InstructionStore.IsInput(Object))
-				inputs.Add(VariableDefinition.Create<GameObject>(Object.RootName));
+				inputs.Add(new VariableDefinition { Name = Object.RootName, Definition = ValueDefinition.Create<GameObject>() });
 		}
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)

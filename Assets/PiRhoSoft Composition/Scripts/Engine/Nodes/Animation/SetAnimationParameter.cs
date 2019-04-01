@@ -42,6 +42,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
+			if (InstructionStore.IsInput(Animator))
+				inputs.Add(new VariableDefinition { Name = Animator.RootName, Definition = ValueDefinition.Create<Animator>() });
+
 			Parameter.GetInputs(inputs);
 
 			switch (Type)

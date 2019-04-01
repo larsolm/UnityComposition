@@ -133,7 +133,7 @@ namespace PiRhoSoft.CompositionEditor
 			foreach (var parameter in parameters)
 			{
 				var variableType = VariableValue.GetType(parameter.ParameterType);
-				var definition = variableType == VariableType.Object ? VariableDefinition.Create(string.Empty, parameter.ParameterType) : VariableDefinition.Create(string.Empty, variableType);
+				var definition = variableType == VariableType.Object ? ValueDefinition.Create(parameter.ParameterType) : ValueDefinition.Create(variableType);
 
 				_node.Parameters.Add(new VariableValueSource(variableType, definition));
 			}

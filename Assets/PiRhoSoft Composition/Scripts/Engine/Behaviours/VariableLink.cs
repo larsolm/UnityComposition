@@ -10,7 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The variables to add to the global variable store")]
 		public List<Variable> Variables = new List<Variable>();
-		public List<VariableDefinition> Constraints = new List<VariableDefinition>();
+		public List<ValueDefinition> Constraints = new List<ValueDefinition>();
 
 		[SerializeField] private List<string> _variablesData;
 		[SerializeField] private List<Object> _variablesObjects;

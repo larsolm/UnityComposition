@@ -51,7 +51,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var name = _variables.GetVariableName(index);
 			var value = _variables.GetVariableValue(index);
-			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index] : VariableDefinition.Create(string.Empty, VariableType.Empty);
+			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index].Definition : ValueDefinition.Create(VariableType.Empty);
 
 			return VariableValueDrawer.GetHeight(value, definition);
 		}
@@ -60,7 +60,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var name = _variables.GetVariableName(index);
 			var value = _variables.GetVariableValue(index);
-			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index] : VariableDefinition.Create(string.Empty, VariableType.Empty);
+			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index].Definition : ValueDefinition.Create(VariableType.Empty);
 
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{
@@ -74,7 +74,7 @@ namespace PiRhoSoft.CompositionEditor
 					if (_variables.Schema != null)
 					{
 						if (GUI.Button(buttonRect, _refreshButton.Content, GUIStyle.none))
-							value = _variables.Schema[index].Generate(_variables.Owner);
+							value = _variables.Schema[index].Definition.Generate(_variables.Owner);
 					}
 				}
 				else

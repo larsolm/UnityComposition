@@ -56,17 +56,18 @@ namespace PiRhoSoft.CompositionEditor
 
 		private float GetDefinitionHeight(int index)
 		{
-			return VariableDefinitionDrawer.GetHeight(_schema[index], _schema.InitializerType, _schema.Tags);
+			return ValueDefinitionDrawer.GetHeight(_schema[index].Definition, _schema.InitializerType, _schema.Tags);
 		}
 
 		private void DrawDefinition(Rect rect, IList list, int index)
 		{
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{
-				var definition = VariableDefinitionDrawer.Draw(rect, _schema[index], _schema.InitializerType, _schema.Tags, true);
+				var schema = _schema[index];
+				var definition = ValueDefinitionDrawer.Draw(rect, new GUIContent(schema.Name), schema.Definition, _schema.InitializerType, _schema.Tags, true);
 
 				if (changes.changed)
-					_schema[index] = definition;
+					_schema[index] = new VariableDefinition { Name = schema.Name, Definition = definition };
 			}
 		}
 

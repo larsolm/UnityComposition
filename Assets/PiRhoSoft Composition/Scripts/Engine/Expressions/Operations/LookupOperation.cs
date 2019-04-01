@@ -34,11 +34,11 @@ namespace PiRhoSoft.CompositionEngine
 			if (source == null)
 			{
 				if (Reference.IsAssigned && string.IsNullOrEmpty(Reference.StoreName))
-					inputs.Add(VariableDefinition.Create(Reference.RootName, VariableType.Empty));
+					inputs.Add(new VariableDefinition { Name = Reference.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
 			}
 			else if (Reference.IsAssigned && Reference.StoreName == source)
 			{
-				inputs.Add(VariableDefinition.Create(Reference.RootName, VariableType.Empty));
+				inputs.Add(new VariableDefinition { Name = Reference.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
 			}
 		}
 

@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly IconButton _addButton = new IconButton(IconButton.Add, "Add an item to the list");
 		private static readonly IconButton _removeButton = new IconButton(IconButton.Remove, "Remove this item from the list");
 
-		public static float GetHeight(VariableValue value, VariableDefinition definition)
+		public static float GetHeight(VariableValue value, ValueDefinition definition)
 		{
 			var type = definition.Type != VariableType.Empty ? definition.Type : value.Type;
 
@@ -42,8 +42,8 @@ namespace PiRhoSoft.CompositionEditor
 					var height = EditorGUIUtility.singleLineHeight;
 
 					var itemDefinition = definition.Constraint is ListVariableConstraint listConstraint
-						? VariableDefinition.Create(string.Empty, listConstraint.ItemType, listConstraint.ItemConstraint)
-						: VariableDefinition.Create(string.Empty, VariableType.Empty);
+						? ValueDefinition.Create(listConstraint.ItemType, listConstraint.ItemConstraint)
+						: ValueDefinition.Create(VariableType.Empty);
 
 					for (var i = 0; i < value.List.Count; i++)
 					{
@@ -60,14 +60,14 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		public static VariableValue Draw(GUIContent label, VariableValue value, VariableDefinition definition)
+		public static VariableValue Draw(GUIContent label, VariableValue value, ValueDefinition definition)
 		{
 			var height = GetHeight(value, definition);
 			var rect = EditorGUILayout.GetControlRect(true, height);
 			return Draw(rect, label, value, definition);
 		}
 
-		public static VariableValue Draw(Rect position, GUIContent label, VariableValue value, VariableDefinition definition)
+		public static VariableValue Draw(Rect position, GUIContent label, VariableValue value, ValueDefinition definition)
 		{
 			position = EditorGUI.PrefixLabel(position, label);
 
@@ -99,13 +99,13 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private static VariableValue DrawBool(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawBool(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var boolean = EditorGUI.ToggleLeft(rect, GUIContent.none, value.Bool);
 			return VariableValue.Create(boolean);
 		}
 
-		private static VariableValue DrawInt(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawInt(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var integer = value.Int;
 
@@ -117,7 +117,7 @@ namespace PiRhoSoft.CompositionEditor
 			return VariableValue.Create(integer);
 		}
 
-		private static VariableValue DrawFloat(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawFloat(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var number = value.Float;
 
@@ -129,73 +129,73 @@ namespace PiRhoSoft.CompositionEditor
 			return VariableValue.Create(number);
 		}
 
-		private static VariableValue DrawInt2(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawInt2(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.Vector2IntField(rect, GUIContent.none, value.Int2);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawInt3(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawInt3(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.Vector3IntField(rect, GUIContent.none, value.Int3);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawIntRect(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawIntRect(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.RectIntField(rect, GUIContent.none, value.IntRect);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawIntBounds(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawIntBounds(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.BoundsIntField(rect, GUIContent.none, value.IntBounds);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawVector2(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawVector2(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.Vector2Field(rect, GUIContent.none, value.Vector2);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawVector3(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawVector3(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.Vector3Field(rect, GUIContent.none, value.Vector3);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawVector4(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawVector4(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.Vector4Field(rect, GUIContent.none, value.Vector4);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawQuaternion(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawQuaternion(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.Vector3Field(rect, GUIContent.none, value.Quaternion.eulerAngles);
 			return VariableValue.Create(Quaternion.Euler(result));
 		}
 
-		private static VariableValue DrawRect(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawRect(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.RectField(rect, GUIContent.none, value.Rect);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawBounds(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawBounds(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.BoundsField(rect, GUIContent.none, value.Bounds);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawColor(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawColor(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var result = EditorGUI.ColorField(rect, GUIContent.none, value.Color);
 			return VariableValue.Create(result);
 		}
 
-		private static VariableValue DrawString(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawString(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var s = value.String;
 
@@ -213,7 +213,7 @@ namespace PiRhoSoft.CompositionEditor
 			return s == null ? VariableValue.Create(string.Empty) : VariableValue.Create(s);
 		}
 
-		private static VariableValue DrawEnum(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawEnum(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			// value can have type Empty if the definition doesn't define the enum type
 
@@ -227,7 +227,7 @@ namespace PiRhoSoft.CompositionEditor
 			return VariableValue.Create(e);
 		}
 
-		private static VariableValue DrawObject(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawObject(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var objectType = (definition.Constraint is ObjectVariableConstraint objectConstraint ? objectConstraint.Type : null) ?? typeof(Object);
 			var unityObject = EditorGUI.ObjectField(rect, GUIContent.none, value.Object, objectType, true);
@@ -235,16 +235,16 @@ namespace PiRhoSoft.CompositionEditor
 			return VariableValue.Create(unityObject);
 		}
 
-		private static VariableValue DrawStore(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawStore(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			return value;
 		}
 
-		private static VariableValue DrawList(Rect rect, VariableValue value, VariableDefinition definition)
+		private static VariableValue DrawList(Rect rect, VariableValue value, ValueDefinition definition)
 		{
 			var itemDefinition = definition.Constraint is ListVariableConstraint listConstraint
-				? VariableDefinition.Create(string.Empty, listConstraint.ItemType, listConstraint.ItemConstraint)
-				: VariableDefinition.Create("", VariableType.Empty);
+				? ValueDefinition.Create(listConstraint.ItemType, listConstraint.ItemConstraint)
+				: ValueDefinition.Create(VariableType.Empty);
 
 			var remove = -1;
 
