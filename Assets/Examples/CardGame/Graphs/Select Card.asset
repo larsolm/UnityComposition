@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
   m_Name: Select Card
   m_EditorClassIdentifier: 
+  ContextName: cardContainer
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -105,8 +114,10 @@ MonoBehaviour:
   Next: {fileID: 114980614166743252}
   Target:
     _variable:
+    - global
     - SelectedCard
     _lookups:
+    - 
     - Transform
   Value:
     Type: 1
@@ -118,7 +129,6 @@ MonoBehaviour:
       - 
       - 
     Definition:
-      _name: 
       _type: 9
       _constraint: 
       _tag: 
@@ -164,7 +174,6 @@ MonoBehaviour:
       - 
       - 
     Definition:
-      _name: 
       _type: 9
       _constraint: 
       _tag: 
@@ -206,14 +215,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression
+  m_Name: Set Card
   m_EditorClassIdentifier: 
-  Name: Expression
+  Name: Set Card
   GraphPosition: {x: 0, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114481829014540738}
   Expression:
-    _statement: local.card = root<VariableStoreComponent>
+    _statement: local.card = cardContainer<VariableStoreComponent>
 --- !u!114 &114944409301683160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -234,11 +243,21 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 2856362fb37151f4ba58f690e759d477, type: 2}
     _inputs: []
     _outputs: []
-  Root:
-    _variable:
-    - root
-    _lookups:
-    - 
+  Context:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
   WaitForCompletion: 1
 --- !u!114 &114948380721648204
 MonoBehaviour:
@@ -261,13 +280,13 @@ MonoBehaviour:
 
       local.column = local.card.Column
 
-      local.card.Row = SelectedCard.Row
+      local.card.Row = global.SelectedCard.Row
 
-      local.card.Column = SelectedCard.Column
+      local.card.Column = global.SelectedCard.Column
 
-      SelectedCard.Row = local.row
+      global.SelectedCard.Row = local.row
 
-      SelectedCard.Column = local.column
+      global.SelectedCard.Column = local.column
 
 
       local.rootx = local.card.Column * 2.5 - 16.25
@@ -277,9 +296,9 @@ MonoBehaviour:
       local.rootPosition = Vector3(local.rootx, local.rooty, 0)
 
 
-      local.cardx = SelectedCard.Column * 2.5 - 16.25
+      local.cardx = global.SelectedCard.Column * 2.5 - 16.25
 
-      local.cardy = SelectedCard.Row * 3.5 - 6
+      local.cardy = global.SelectedCard.Row * 3.5 - 6
 
       local.cardPosition = Vector3(local.cardx, local.cardy, 0)'
 --- !u!114 &114979908025208874
@@ -299,7 +318,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: SelectedCard = null
+    _statement: global.SelectedCard = null
 --- !u!114 &114980614166743252
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -320,9 +339,23 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 813ba8867a65fb149aff0667ff4d5dcc, type: 2}
     _inputs: []
     _outputs: []
-  Root:
-    _variable:
-    - SelectedCard
-    _lookups:
-    - 
+  Context:
+    Type: 1
+    Reference:
+      _variable:
+      - local
+      - card
+      _lookups:
+      - 
+      - 
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
   WaitForCompletion: 1

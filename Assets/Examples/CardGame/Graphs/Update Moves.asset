@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
   m_Name: Update Moves
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -55,16 +64,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Set Card
+  m_Name: Lock Card
   m_EditorClassIdentifier: 
-  Name: Set Card
+  Name: Lock Card
   GraphPosition: {x: 448, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114893726994580232}
   Expression:
-    _statement: 'local.card = root
-
-      local.card.Movable = false'
+    _statement: local.card.Movable = false
 --- !u!114 &114340042515488770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -82,8 +89,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - State
     - Aces
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - ace
     _lookups:
     - 
     - 
@@ -122,12 +141,13 @@ MonoBehaviour:
   OnTrue: {fileID: 114853665359960698}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: 'local.deckSuit = Deck[local.card.Suit.Name]
+    _statement: 'local.deckSuit = global.Deck[local.card.Suit.Name]
 
       local.previous = local.deckSuit[local.card.Index - 1]
 
 
-      local.previous.Row == root.Row && local.previous.Column == root.Column - 1'
+      local.previous.Row == local.ace.Row && local.previous.Column == local.ace.Column
+      - 1'
 --- !u!114 &114586229638486660
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -146,7 +166,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114853665359960698}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: root.Column == 0
+    _statement: local.ace.Column == 0
 --- !u!114 &114754531436896202
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,8 +184,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - State
     - Aces
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - ace
     _lookups:
     - 
     - 
@@ -230,8 +262,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - State
     - Cards
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - card
     _lookups:
     - 
     - 

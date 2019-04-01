@@ -16,29 +16,33 @@ MonoBehaviour:
   Tags:
     _items: []
   _definitions:
-  - _name: Name
-    _type: 15
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Color
-    _type: 14
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Sprite
-    _type: 17
-    _constraint: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  _version: 8
+    _items:
+    - Name: Name
+      Definition:
+        _type: 15
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Color
+      Definition:
+        _type: 14
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Sprite
+      Definition:
+        _type: 17
+        _constraint: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 12

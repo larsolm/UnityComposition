@@ -17,40 +17,45 @@ MonoBehaviour:
     _items:
     - Load
   _definitions:
-  - _name: Spades
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Load
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Clubs
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Load
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Hearts
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Load
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Diamonds
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Load
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  _version: 45
+    _items:
+    - Name: Spades
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Load
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Clubs
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Load
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Hearts
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Load
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Diamonds
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Load
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 64

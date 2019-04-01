@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: Load Game
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -164,12 +173,8 @@ MonoBehaviour:
     - 
     - 
   Index:
-    _variable:
-    - local
-    - rankIndex
-    _lookups:
-    - 
-    - 
+    _variable: []
+    _lookups: []
   Value:
     _variable:
     - local
@@ -203,8 +208,12 @@ MonoBehaviour:
     - 
     - 
   Index:
-    _variable: []
-    _lookups: []
+    _variable:
+    - local
+    - rankIndex
+    _lookups:
+    - 
+    - 
   Value:
     _variable:
     - local
@@ -419,9 +428,7 @@ MonoBehaviour:
       local.card.Suit = local.suit
 
 
-      global.Deck[local.suit.Name] += local.card
-
-      local.rankIndex += 1'
+      global.Deck[local.suit.Name] += local.card'
 --- !u!114 &114730956879713784
 MonoBehaviour:
   m_ObjectHideFlags: 1

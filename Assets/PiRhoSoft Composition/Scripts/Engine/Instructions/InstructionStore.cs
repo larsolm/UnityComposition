@@ -88,7 +88,7 @@ namespace PiRhoSoft.CompositionEngine
 			ContextName = contextName;
 			Context = context;
 
-			if (!contextDefinition.IsValid(context))
+			if (contextDefinition.Type != VariableType.Empty && !contextDefinition.IsValid(context))
 				Debug.LogWarningFormat(_invalidContextError, contextName, context);
 		}
 

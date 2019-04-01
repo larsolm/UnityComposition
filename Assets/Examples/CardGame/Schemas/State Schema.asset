@@ -18,90 +18,101 @@ MonoBehaviour:
     - None
     - Setup
   _definitions:
-  - _name: Processing
-    _type: 2
-    _constraint: 
-    _tag: None
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Cards
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Spades
-    _type: 19
-    _constraint: List|Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Clubs
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Hearts
-    _type: 19
-    _constraint: List|Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Diamonds
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Aces
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Rows
-    _type: 19
-    _constraint: List|Empty|
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Shuffles
-    _type: 2
-    _constraint: 
-    _tag: Setup
-    _initializer:
-      _statement: 4
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: Complete
-    _type: 1
-    _constraint: 
-    _tag: Setup
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  _version: 47
+    _items:
+    - Name: Processing
+      Definition:
+        _type: 2
+        _constraint: 
+        _tag: None
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Cards
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Spades
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Clubs
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Hearts
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Diamonds
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Aces
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Rows
+      Definition:
+        _type: 19
+        _constraint: Empty|
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Shuffles
+      Definition:
+        _type: 2
+        _constraint: 
+        _tag: Setup
+        _initializer:
+          _statement: 4
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Complete
+      Definition:
+        _type: 1
+        _constraint: 
+        _tag: Setup
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 80

@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: Shuffle Cards
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -51,7 +60,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: State.Processing += 1
+    _statement: global.State.Processing += 1
 --- !u!114 &114117616305717732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -86,9 +95,11 @@ MonoBehaviour:
   Next: {fileID: 114438301544111286}
   Variable:
     _variable:
+    - global
     - State
     - Cards
     _lookups:
+    - 
     - 
     - 
 --- !u!114 &114432394057212114
@@ -108,13 +119,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114800223129982834}
   Expression:
-    _statement: 'root.Column = local.column
+    _statement: 'local.card.Column = local.column
 
-      root.Row = local.row
+      local.card.Row = local.row
 
-      local.cardx = root.Column * 2.5 - 16.25
+      local.cardx = local.card.Column * 2.5 - 16.25
 
-      local.cardy = root.Row * 3.5 - 6
+      local.cardy = local.card.Row * 3.5 - 6
 
       local.cardPosition = Vector3(local.cardx, local.cardy, 0)
 
@@ -138,7 +149,7 @@ MonoBehaviour:
   Expression:
     _statement: 'local.row = 0
 
-      local.rowList = State.Rows[local.row]
+      local.rowList = global.State.Rows[local.row]
 
       local.column = local.rowList<#>'
 --- !u!114 &114613535626573654
@@ -161,11 +172,21 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 2856362fb37151f4ba58f690e759d477, type: 2}
     _inputs: []
     _outputs: []
-  Root:
-    _variable:
-    - root
-    _lookups:
-    - 
+  Context:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
   WaitForCompletion: 1
 --- !u!114 &114713345150838420
 MonoBehaviour:
@@ -184,8 +205,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - State
     - Cards
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - card
     _lookups:
     - 
     - 
@@ -226,9 +259,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'State.Processing -= 1
+    _statement: 'global.State.Processing -= 1
 
-      State.Shuffles -= 1'
+      global.State.Shuffles -= 1'
 --- !u!114 &114800223129982834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -247,8 +280,10 @@ MonoBehaviour:
   Next: {fileID: 114828798773068104}
   Target:
     _variable:
-    - root
+    - local
+    - card
     _lookups:
+    - 
     - Transform
   Value:
     Type: 1
@@ -260,7 +295,6 @@ MonoBehaviour:
       - 
       - 
     Definition:
-      _name: 
       _type: 9
       _constraint: 
       _tag: 
@@ -293,11 +327,25 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 813ba8867a65fb149aff0667ff4d5dcc, type: 2}
     _inputs: []
     _outputs: []
-  Root:
-    _variable:
-    - root
-    _lookups:
-    - 
+  Context:
+    Type: 1
+    Reference:
+      _variable:
+      - local
+      - card
+      _lookups:
+      - 
+      - 
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
   WaitForCompletion: 1
 --- !u!114 &114905633981755912
 MonoBehaviour:
@@ -318,6 +366,6 @@ MonoBehaviour:
   Expression:
     _statement: 'local.row += 1
 
-      local.rowList = State.Rows[local.row]
+      local.rowList = global.State.Rows[local.row]
 
       local.column = local.rowList<#>'
