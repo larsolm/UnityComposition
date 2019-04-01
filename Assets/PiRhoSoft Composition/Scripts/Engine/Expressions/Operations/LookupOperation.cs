@@ -5,6 +5,10 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class LookupOperation : Operation
 	{
+		private const string _missingVariableException = "unable to find variable {0}";
+		private const string _missingLookupException = "unable to find variable {0}[{1}]";
+		private const string _invalidLookupException = "unable to lookup [{1}] on variable {0}";
+
 		public VariableReference Reference { get; private set; }
 		public Operation Parameter { get; private set; }
 		public LookupOperation(string variable, Operation parameter)
@@ -46,7 +50,12 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Parameter == null)
 			{
-				return Reference.GetValue(variables);
+				var value = Reference.GetValue(variables);
+
+				if (value.IsEmpty)
+					throw new ExpressionEvaluationException(_missingVariableException, Reference);
+				else
+					return value;
 			}
 			else
 			{
@@ -54,9 +63,18 @@ namespace PiRhoSoft.CompositionEngine
 				var lookup = Parameter.Evaluate(variables);
 
 				if (lookup.Type == VariableType.String || lookup.Type == VariableType.Int)
-					return owner.Handler.Lookup(owner, lookup.ToString());
+				{
+					var value = owner.Handler.Lookup(owner, lookup.ToString());
+
+					if (value.IsEmpty)
+						throw new ExpressionEvaluationException(_missingLookupException, Reference, Parameter);
+					else
+						return value;
+				}
 				else
-					return VariableValue.Empty;
+				{
+					throw new ExpressionEvaluationException(_invalidLookupException, Reference, Parameter);
+				}
 			}
 		}
 

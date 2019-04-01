@@ -39,7 +39,9 @@ namespace PiRhoSoft.CompositionEditor
 			if (GUILayout.Button("Open Editor"))
 				InstructionGraphWindow.ShowWindowForGraph(_graph);
 
-			DrawPropertiesExcluding(serializedObject, "m_Script", "_nodes");
+			using (new UndoScope(serializedObject))
+				DrawPropertiesExcluding(serializedObject, "m_Script", "_nodes");
+
 			DrawNodes(_nodesProperty);
 		}
 

@@ -1,13 +1,11 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class InequalOperator : ComparisonOperation
+	public class InequalOperator : EqualOperator
 	{
 		public override VariableValue Evaluate(IVariableStore variables)
 		{
-			var left = Left.Evaluate(variables);
-			var right = Right.Evaluate(variables);
-
-			return VariableValue.Create(!Equals(left, right));
+			var equal = base.Evaluate(variables);
+			return VariableValue.Create(!equal.Bool);
 		}
 	}
 }

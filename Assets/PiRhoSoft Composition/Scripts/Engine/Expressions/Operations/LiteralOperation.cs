@@ -4,21 +4,21 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class LiteralOperation : Operation
 	{
-		private VariableValue _value;
+		public VariableValue Value;
 
 		public LiteralOperation(VariableValue value)
 		{
-			_value = value;
+			Value = value;
 		}
 
 		public override VariableValue Evaluate(IVariableStore variables)
 		{
-			return _value;
+			return Value;
 		}
 
 		public override void ToString(StringBuilder builder)
 		{
-			builder.Append(_value);
+			builder.Append(Value);
 		}
 	}
 }

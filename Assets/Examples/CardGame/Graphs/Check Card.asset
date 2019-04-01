@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
   m_Name: Check Card
   m_EditorClassIdentifier: 
+  ContextName: card
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -48,15 +57,15 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114524819183424472}
   Expression:
-    _statement: 'local.stateSuit = State[root.Suit.Name]
+    _statement: 'local.stateSuit = global.State[card.Suit.Name]
 
-      local.deckSuit = Deck[root.Suit.Name]
+      local.deckSuit = global.Deck[card.Suit.Name]
 
-      local.previous = local.deckSuit[root.Index - 1]
+      local.previous = local.deckSuit[card.Index - 1]
 
 
-      root.Complete = local.stateSuit<#> == root.Index && local.previous.Complete
-      && local.stateSuit == State.Rows[root.Row]'
+      card.Complete = local.stateSuit<#> == card.Index && local.previous.Complete
+      && local.stateSuit == global.State.Rows[card.Row]'
 --- !u!114 &114204127550149548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -74,9 +83,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114524819183424472}
   Expression:
-    _statement: 'local.stateSuit = State[root.Suit.Name]
+    _statement: 'local.stateSuit = global.State[card.Suit.Name]
 
-      root.Complete = local.stateSuit<#> == root.Index && root.Column == 0'
+      card.Complete = local.stateSuit<#> == 0 && card.Column == 0'
 --- !u!114 &114246263796642296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -94,7 +103,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: State.Rows[root.Row] = State[root.Suit.Name]
+    _statement: global.State.Rows[card.Row] = global.State[card.Suit.Name]
 --- !u!114 &114318365090266194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -130,7 +139,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114246263796642296}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: root.Index == 0
+    _statement: card.Index == 0
 --- !u!114 &114400101997620392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -165,7 +174,7 @@ MonoBehaviour:
   GraphPosition: {x: 320, y: -12.8}
   IsBreakpoint: 0
   Switch:
-    _statement: root.Rank
+    _statement: card.Rank
   Outputs:
     _keys:
     - A
@@ -192,7 +201,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114932163569064684}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: root.Complete
+    _statement: card.Complete
 --- !u!114 &114662382626097016
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -245,13 +254,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114390368604380124}
   Expression:
-    _statement: 'local.stateSuit += root
+    _statement: 'local.stateSuit += card
 
-      State.Cards -= root
+      global.State.Cards -= card
 
 
-      State.Complete = State.Cards<#> == 4
+      global.State.Complete = global.State.Cards<#> == 4
 
-      root.Complete = true
+      card.Complete = true
 
-      root.Movable = false'
+      card.Movable = false'

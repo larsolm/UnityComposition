@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: Setup Game
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -53,8 +62,10 @@ MonoBehaviour:
   Next: {fileID: 0}
   Object:
     _variable:
+    - global
     - State
     _lookups:
+    - 
     - 
   Tag: Setup
 --- !u!114 &114170637917079714
@@ -86,7 +97,6 @@ MonoBehaviour:
       _variable: []
       _lookups: []
     Definition:
-      _name: 
       _type: 19
       _constraint: 
       _tag: 
@@ -113,7 +123,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: State.Processing -= 1
+    _statement: global.State.Processing -= 1
 --- !u!114 &114403376651189868
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -131,7 +141,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: State.Aces += root
+    _statement: global.State.Aces += local.card
 --- !u!114 &114453830272232166
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -149,8 +159,20 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
+    - global
     - Cards
     - Suits
+    _lookups:
+    - 
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - suit
     _lookups:
     - 
     - 
@@ -172,7 +194,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114122231132940762}
   Expression:
-    _statement: State.Processing += 1
+    _statement: global.State.Processing += 1
 --- !u!114 &114534255571413984
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -190,7 +212,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114882391638149820}
   Expression:
-    _statement: State.Cards += root
+    _statement: global.State.Cards += local.card
 --- !u!114 &114789499897121068
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -208,13 +230,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114453830272232166}
   Expression:
-    _statement: 'State.Rows += local.emptyList
+    _statement: 'global.State.Rows += local.emptyList
 
-      State.Rows += local.emptyList
+      global.State.Rows += local.emptyList
 
-      State.Rows += local.emptyList
+      global.State.Rows += local.emptyList
 
-      State.Rows += local.emptyList'
+      global.State.Rows += local.emptyList'
 --- !u!114 &114861526200370258
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -232,7 +254,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114936137521299786}
   Expression:
-    _statement: local.suit = Deck[root.Name]
+    _statement: local.suitList = global.Deck[local.suit.Name]
 --- !u!114 &114882391638149820
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,11 +291,21 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 99f12e2c846ae7544894f2b8049e0b17, type: 2}
     _inputs: []
     _outputs: []
-  Root:
-    _variable:
-    - root
-    _lookups:
-    - 
+  Context:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
   WaitForCompletion: 1
 --- !u!114 &114928084405713316
 MonoBehaviour:
@@ -293,7 +325,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114403376651189868}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: root.Rank == "A"
+    _statement: local.card.Rank == "A"
 --- !u!114 &114936137521299786
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -312,7 +344,17 @@ MonoBehaviour:
   Container:
     _variable:
     - local
-    - suit
+    - suitList
+    _lookups:
+    - 
+    - 
+  Index:
+    _variable: []
+    _lookups: []
+  Value:
+    _variable:
+    - local
+    - card
     _lookups:
     - 
     - 
