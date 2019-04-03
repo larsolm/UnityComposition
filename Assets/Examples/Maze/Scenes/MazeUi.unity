@@ -350,7 +350,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 1161540523}
   Condition:
-    _statement: Player.JewelsNeeded > 0;
+    _statement: global.JewelsNeeded > 0;
 --- !u!114 &1161540521
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -366,7 +366,7 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 1
   Message:
-    Text: 'Jewels: {Player.Jewels} / {Player.JewelsNeeded}'
+    Text: 'Jewels: {global.Jewels} / {global.JewelsNeeded}'
 --- !u!114 &1161540523
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -687,7 +687,7 @@ MonoBehaviour:
     NumberFormatting: 0
     ValueFormat: m\:ss
   Expression:
-    _statement: Time() - Player.StartTime;
+    _statement: Time() - global.StartTime;
 --- !u!1 &1642846548
 GameObject:
   m_ObjectHideFlags: 0
@@ -716,14 +716,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1642846548}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d264bfadf51340c4d9dab818a83aae8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 08ac88b8f693cea4ba3170a47ced16e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DependentObjects:
     _items: []
   DisplayText: {fileID: 1642846550}
-  ContinueIndicator: {fileID: 0}
-  FinishedIndicator: {fileID: 0}
   AcceptButton: Submit
 --- !u!114 &1642846550
 MonoBehaviour:

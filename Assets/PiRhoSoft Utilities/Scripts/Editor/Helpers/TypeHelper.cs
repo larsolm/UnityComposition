@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -23,7 +24,7 @@ namespace PiRhoSoft.UtilityEditor
 
 			if (HasNone)
 			{
-				if (index >= 0) index += 2; // skip 'None' and separator
+				if (index >= 0) index++; // skip 'None'
 				else index = 0;
 			}
 
@@ -32,7 +33,7 @@ namespace PiRhoSoft.UtilityEditor
 
 		public Type GetType(int index)
 		{
-			if (HasNone) index -= 2;  // skip 'None' and separator
+			if (HasNone) index--;  // skip 'None'
 			return index >= 0 && index < Types.Count ? Types[index] : null;
 		}
 
@@ -157,10 +158,10 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				var types = ListDerivedTypes(baseType, creatable);
 				var ordered = types.Select(type => new ListedType(types, baseType, type)).OrderBy(type => type.Name);
-				var none = includeNone ? new List<GUIContent> { new GUIContent("None"), new GUIContent() } : new List<GUIContent>();
+				var none = includeNone ? new List<GUIContent> { new GUIContent("None") } : new List<GUIContent>();
 
 				list.Types = ordered.Select(type => type.Type).ToList();
-				list.Names = Enumerable.Concat(none, ordered.Select(type => new GUIContent(type.Name))).ToArray();
+				list.Names = Enumerable.Concat(none, ordered.Select(type => new GUIContent(type.Name, AssetPreview.GetMiniTypeThumbnail(type.Type)))).ToArray();
 			}
 
 			return list;

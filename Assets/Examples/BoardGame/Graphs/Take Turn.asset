@@ -193,7 +193,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114460562760816066}
   Expression:
-    _statement: global.Spaces[player.SelectedPiece.CurrentSpace] = null;
+    _statement: 'previousSpace = global.Spaces[player.SelectedPiece.CurrentSpace];
+
+      previousSpace.CurrentPiece = null;'
 --- !u!114 &114208458872356858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -998,7 +1000,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114971039841928306}
   Expression:
-    _statement: currentSpace = global.Spaces[player.SelectedPiece.CurrentSpace]
+    _statement: currentSpace = global.Spaces[player.SelectedPiece.CurrentSpace];
 --- !u!114 &114747329603379744
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1094,14 +1096,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'nextSpace = (piece.CurrentSpace + global.Roll) % 36
-
-      freed = !piece.Free && global.Roll == 6;
-
-      passingFinish = piece.Free && ((nextSpace < player.FinishSpace) == (piece.CurrentSpace
-      < player.FinishSpace));
-
-      piece.CanMove = !piece.Finished && (freed || !passingFinish)
+    _statement: 'piece.CanMove = !piece.Finished && (piece.Free || global.Roll ==
+      6);
 
       canMove = canMove || piece.CanMove;'
 --- !u!114 &114910375662549112
@@ -1204,8 +1200,10 @@ MonoBehaviour:
     Reference:
       _variable:
       - player
+      - SelectedPiece
       - FinishPosition
       _lookups:
+      - 
       - 
       - 
     Value: {x: 0, y: 0, z: 0}

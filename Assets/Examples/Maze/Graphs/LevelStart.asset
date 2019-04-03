@@ -12,6 +12,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: LevelStart
   m_EditorClassIdentifier: 
+  ContextName: player
+  ContextDefinition:
+    _type: 17
+    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items:
+    - Name: LevelName
+      Definition:
+        _type: 15
+        _constraint: '-'
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
+  Outputs:
+    _items: []
   _nodes:
     _items:
     - {fileID: 114906063048417074}
@@ -85,7 +108,7 @@ MonoBehaviour:
   Next: {fileID: 0}
   Target:
     _variable:
-    - root
+    - player
     _lookups:
     - 
 --- !u!114 &114602872160050604
@@ -111,9 +134,9 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  Interaction: 0
+  WaitForCompletion: 1
+  AutoHide: 1
   WaitTime: 0
-  IsLast: 1
   Message:
     Text: '{input.LevelName}
 
@@ -135,7 +158,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114874321698637932}
   Scene:
-    Path: Assets/Examples/Scenes/Maze/MazeUi.unity
+    Path: Assets/Examples/Maze/Scenes/MazeUi.unity
   WaitForCompletion: 1
   CleanupAssets: 1
   Additive: 1
@@ -156,7 +179,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: Player.StartTime = Time();
+    _statement: global.StartTime = Time();
 --- !u!114 &114866516215429464
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -225,6 +248,6 @@ MonoBehaviour:
   Next: {fileID: 0}
   Target:
     _variable:
-    - root
+    - player
     _lookups:
     - 

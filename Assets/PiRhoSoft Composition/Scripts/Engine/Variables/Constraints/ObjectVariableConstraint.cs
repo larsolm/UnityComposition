@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override bool Read(string data)
 		{
-			Type = System.Type.GetType(data, false);
+			Type = Type.GetType(data, false);
 			return Type != null;
 		}
 

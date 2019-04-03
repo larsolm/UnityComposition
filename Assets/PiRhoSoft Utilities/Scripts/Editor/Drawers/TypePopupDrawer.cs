@@ -24,7 +24,11 @@ namespace PiRhoSoft.UtilityEditor
 			var list = TypeHelper.GetTypeList<BaseType>(true, creatable);
 			var index = list.GetIndex(type);
 
-			index = EditorGUI.Popup(position, label, index, list.Names);
+			if (GUI.Button(position, type.Name))
+				SearchTreeControl.Show(position, list.Names, new GUIContent(typeof(BaseType).Name), index);
+
+			if (SearchTreeControl.Selection >= 0)
+				return list.GetType(SearchTreeControl.Selection);
 
 			return list.GetType(index);
 		}
