@@ -146,9 +146,8 @@ namespace PiRhoSoft.UtilityEditor
 		{
 			// include the settings in the name so lists of the same type can be created with different settings
 			var listName = string.Format("{0}-{1}-{2}", includeNone, creatable, baseType.AssemblyQualifiedName);
-
-			TypeList list;
-			if (!_derivedTypeLists.TryGetValue(listName, out list))
+			
+			if (!_derivedTypeLists.TryGetValue(listName, out var list))
 			{
 				list = new TypeList { BaseType = baseType, HasNone = includeNone };
 				_derivedTypeLists.Add(listName, list);
@@ -161,7 +160,7 @@ namespace PiRhoSoft.UtilityEditor
 				var none = includeNone ? new List<GUIContent> { new GUIContent("None") } : new List<GUIContent>();
 
 				list.Types = ordered.Select(type => type.Type).ToList();
-				list.Names = Enumerable.Concat(none, ordered.Select(type => new GUIContent(type.Name, AssetPreview.GetMiniTypeThumbnail(type.Type)))).ToArray();
+				list.Names = none.Concat(ordered.Select(type => new GUIContent(type.Name, AssetPreview.GetMiniTypeThumbnail(type.Type)))).ToArray();
 			}
 
 			return list;

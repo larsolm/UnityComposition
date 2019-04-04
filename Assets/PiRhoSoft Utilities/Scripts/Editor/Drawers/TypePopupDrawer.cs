@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -24,8 +25,8 @@ namespace PiRhoSoft.UtilityEditor
 			var list = TypeHelper.GetTypeList<BaseType>(true, creatable);
 			var index = list.GetIndex(type);
 
-			if (GUI.Button(position, type.Name))
-				SearchTreeControl.Show(position, list.Names, new GUIContent(typeof(BaseType).Name), index);
+			if (GUI.Button(position, type == null ? "None" : type.Name))
+				SearchTreeControl.Show(position, new List<GUIContent[]> { list.Names }, new List<GUIContent> { new GUIContent(typeof(BaseType).Name) }, index);
 
 			if (SearchTreeControl.Selection >= 0)
 				return list.GetType(SearchTreeControl.Selection);

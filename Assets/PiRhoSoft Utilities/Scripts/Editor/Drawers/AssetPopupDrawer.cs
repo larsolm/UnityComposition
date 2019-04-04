@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
@@ -79,7 +80,7 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				var editRect = RectHelper.TakeTrailingIcon(ref position);
 
-				if (asset != null)
+				if (asset)
 				{
 					if (GUI.Button(editRect, _editButton.Content, GUIStyle.none))
 						Selection.activeObject = asset;
@@ -88,17 +89,36 @@ namespace PiRhoSoft.UtilityEditor
 
 			var list = AssetHelper.GetAssetList(type, showNoneOption, showCreateOptions);
 			var index = list.GetIndex(asset);
+			
+			var rect = EditorGUI.PrefixLabel(position, label);
 
-			index = EditorGUI.Popup(position, label, index, list.Names);
-
-			asset = list.GetAsset(index);
-
-			if (asset == null)
+			if (GUI.Button(rect, asset ? asset.name : "None"))
 			{
-				var createType = list.GetType(index);
+				var trees = new List<GUIContent[]> { list.Names };
+				var tabs = new List<GUIContent> { new GUIContent(type.Name) };
 
-				if (createType != null)
-					asset = AssetHelper.CreateAsset(createType.Name, createType);
+				if (showCreateOptions)
+				{
+					trees.Add(list.Types.Names);
+					tabs.Add(new GUIContent("Create"));
+				}
+
+				SearchTreeControl.Show(rect, trees, tabs, index);
+			}
+
+			if (SearchTreeControl.Tab == 0)
+			{
+				if (SearchTreeControl.Selection >= 0)
+					asset = list.GetAsset(SearchTreeControl.Selection);
+			}
+			else if (SearchTreeControl.Tab == 1)
+			{
+				if (SearchTreeControl.Selection >= 0)
+				{
+					var createType = list.GetType(SearchTreeControl.Selection);
+					if (createType != null)
+						asset = AssetHelper.CreateAsset(createType.Name, createType);
+				}
 			}
 
 			return asset;

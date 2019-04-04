@@ -6,7 +6,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.UtilityEditor
 {
-	[InitializeOnLoad]
+	// Adapted from Unity's AddComponentWindow as linked to in the following thread:
+	// https://forum.unity.com/threads/custom-add-component-like-button.439730/
+
 	public class SearchTreeControl : EditorWindow
 	{
 		private class Element
@@ -63,18 +65,21 @@ namespace PiRhoSoft.UtilityEditor
 			}
 		}
 
+		private const string _invalidTreeWarning = "(UCSTCIT) Unable to show search tree: invalid tabs and content";
+
 		private const int _headerHeight = 25;
 		private const int _itemHeight = 20;
 		private const int _visibleItemCount = 14;
 		private const int _windowHeight = 2 * _headerHeight + _itemHeight * _visibleItemCount;
 
+		public static int Tab = 0;
 		public static int Selection = -1;
 
 		private static Styles _styles;
 		private static SearchTreeControl _instance;
-		private Element[] _tree;
-		private Element[] _searchTree;
-		private List<GroupElement> _stack = new List<GroupElement>();
+		private List<List<Element>> _trees = new List<List<Element>>();
+		private List<Element> _searchTree = new List<Element>();
+		private List<List<GroupElement>> _stacks = new List<List<GroupElement>>();
 		private float _animation = 1.0f;
 		private int _animationTarget = 1;
 		private long _lastTime;
@@ -82,11 +87,14 @@ namespace PiRhoSoft.UtilityEditor
 		private string _delayedSearch;
 		private string _search = string.Empty;
 
+		private bool _isAnimating => _animation != _animationTarget;
 		private bool _hasSearch => !string.IsNullOrEmpty(_search);
 
-		private GroupElement _activeParent => _stack[_stack.Count - 2 + _animationTarget];
+		private List<Element> _currentTree => _trees[Tab];
+		private List<GroupElement> _currentStack => _stacks[Tab];
 
-		private Element[] _activeTree => (!_hasSearch) ? _tree : _searchTree;
+		private List<Element> _activeTree => _hasSearch ? _searchTree : _currentTree;
+		private GroupElement _activeParent => _currentStack[_currentStack.Count - 2 + _animationTarget];
 
 		private Element _activeElement
 		{
@@ -100,94 +108,66 @@ namespace PiRhoSoft.UtilityEditor
 			}
 		}
 
-		private bool _isAnimating => _animation != _animationTarget;
-
-		public static void Show(Rect rect, GUIContent[] names, GUIContent label, int currentIndex)
+		public static void Show(Rect rect, List<GUIContent[]> trees, List<GUIContent> tabs, int currentIndex)
 		{
+			if (trees.Count != tabs.Count)
+				Debug.LogWarning(_invalidTreeWarning);
+
 			if (_instance == null)
 				_instance = CreateInstance<SearchTreeControl>();
 
-			_instance.Init(rect, names, label, currentIndex);
+			_instance.Init(rect, trees, tabs, currentIndex);
 		}
 
-		private void Init(Rect rect, GUIContent[] names, GUIContent label, int currentIndex)
+		private void Init(Rect rect, List<GUIContent[]> trees, List<GUIContent> tabs, int currentIndex)
 		{
 			wantsMouseMove = true;
 
+			Tab = 0;
 			Selection = currentIndex;
 
 			var position = GUIUtility.GUIToScreenPoint(rect.position);
 
-			CreateTree(names, label);
+			CreateTrees(trees, tabs);
 			ShowAsDropDown(new Rect(position, rect.size), new Vector2(rect.width, _windowHeight));
 			Focus();
 		}
 
-		private void CreateTree(GUIContent[] names, GUIContent label)
+		private void CreateTrees(List<GUIContent[]> trees, List<GUIContent> tabs)
 		{
-			var submenus = new List<string> { label.text };
-			var elements = new List<Element> { new GroupElement(0, label) };
-
-			for (var i = 0; i < names.Length; i++)
+			for (var t = 0; t < trees.Count; t++)
 			{
-				var content = names[i];
-				var path = label.text + "/" + names[i].text; // Add the top level group
-				var menus = path.Split(new char[] { '/' });
-				var name = new GUIContent(menus[menus.Length - 1], content.image); 
+				var tree = trees[t];
+				var tab = tabs[t];
 
-				while (menus.Length - 1 < submenus.Count)
-					submenus.RemoveAt(submenus.Count - 1);
+				var submenus = new List<string> { tab.text };
+				var elements = new List<Element> { new GroupElement(0, tab) };
 
-				while (submenus.Count > 0 && menus[submenus.Count - 1] != submenus[submenus.Count - 1])
-					submenus.RemoveAt(submenus.Count - 1);
-
-				while (menus.Length - 1 > submenus.Count)
+				for (var i = 0; i < tree.Length; i++)
 				{
-					var menu = menus[submenus.Count];
-					elements.Add(new GroupElement(submenus.Count, new GUIContent(menu)));
-					submenus.Add(menu);
-				}
+					var leaf = tree[i];
+					var path = tab.text + "/" + leaf.text; // Prepend the top level tab group
+					var menus = path.Split(new char[] { '/' });
+					var content = new GUIContent(menus.Last(), leaf.image);
 
-				elements.Add(new LeafElement(submenus.Count, name, i));
-			}
+					while (menus.Length - 1 < submenus.Count)
+						submenus.RemoveAt(submenus.Count - 1);
 
-			_tree = elements.ToArray();
+					while (submenus.Count > 0 && menus[submenus.Count - 1] != submenus.Last())
+						submenus.RemoveAt(submenus.Count - 1);
 
-			if (_stack.Count == 0)
-			{
-				_stack.Add(_tree[0] as GroupElement);
-			}
-			else
-			{
-				var groupElement = _tree[0] as GroupElement;
-				var level = 0;
-
-				while (true)
-				{
-					var groupElement2 = _stack[level];
-
-					_stack[level] = groupElement;
-					_stack[level].SelectedIndex = groupElement2.SelectedIndex;
-					_stack[level].Scroll = groupElement2.Scroll;
-
-					level++;
-
-					if (level == _stack.Count)
-						break;
-
-					var children = GetChildren(_activeTree, groupElement);
-					var element = children.FirstOrDefault(child => child.Content.text == _stack[level].Content.text);
-
-					if (element != null && element is GroupElement group)
+					while (menus.Length - 1 > submenus.Count)
 					{
-						groupElement = group;
+						var menu = menus[submenus.Count];
+						elements.Add(new GroupElement(submenus.Count, new GUIContent(menu)));
+						submenus.Add(menu);
 					}
-					else
-					{
-						while (_stack.Count > level)
-							_stack.RemoveAt(level);
-					}
+
+					elements.Add(new LeafElement(submenus.Count, content, i));
 				}
+				
+				_stacks.Add(new List<GroupElement> { elements.First() as GroupElement });
+				_trees.Add(elements);
 			}
 
 			RebuildSearch();
@@ -205,7 +185,6 @@ namespace PiRhoSoft.UtilityEditor
 			GUI.Label(backgroundRect, GUIContent.none, _styles.Background);
 			GUI.SetNextControlName("Search");
 			EditorGUI.FocusTextInControl("Search");
-
 			RectHelper.TakeVerticalSpace(ref backgroundRect);
 
 			var searchRect = RectHelper.Inset(RectHelper.TakeHeight(ref backgroundRect, _headerHeight), 8, 8, RectHelper.VerticalSpace, RectHelper.VerticalSpace);
@@ -242,23 +221,23 @@ namespace PiRhoSoft.UtilityEditor
 			if (_isAnimating && Event.current.type == EventType.Repaint)
 			{
 				var ticks = DateTime.Now.Ticks;
-				var num = (ticks - _lastTime) / 1E+07f;
+				var speed = (ticks - _lastTime) / 0.25E+07f;
 
 				_lastTime = ticks;
-				_animation = Mathf.MoveTowards(_animation, _animationTarget, num * 4);
+				_animation = Mathf.MoveTowards(_animation, _animationTarget, speed);
 
 				if (_animationTarget == 0 && _animation == 0.0f)
 				{
 					_animation = 1.0f;
 					_animationTarget = 1;
-					_stack.RemoveAt(_stack.Count - 1);
+					_currentStack.RemoveAt(_currentStack.Count - 1);
 				}
 
 				Repaint();
 			}
 		}
 
-		private void DrawHeader(Rect rect, Element[] tree, float animation, GroupElement parent, GroupElement grandParent)
+		private void DrawHeader(Rect rect, List<Element> tree, float animation, GroupElement parent, GroupElement grandParent)
 		{
 			animation = Mathf.Floor(animation) + Mathf.SmoothStep(0.0f, 1.0f, Mathf.Repeat(animation, 1.0f));
 
@@ -275,14 +254,25 @@ namespace PiRhoSoft.UtilityEditor
 				if (GUI.Button(arrowRect, GUIContent.none, _styles.LeftArrow))
 					GoToParent();
 			}
+			else if (_trees.Count > 1)
+			{
+				var leftRect = RectHelper.AdjustHeight(RectHelper.TakeLeadingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
+				var rightRect = RectHelper.AdjustHeight(RectHelper.TakeTrailingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
+
+				if (GUI.Button(leftRect, GUIContent.none, _styles.LeftArrow))
+					ChangeTab(-1);
+
+				if (GUI.Button(rightRect, GUIContent.none, _styles.RightArrow))
+					ChangeTab(1);
+			}
 
 			DrawList(rect, tree, parent);
 		}
 
-		private void DrawList(Rect rect, Element[] tree, GroupElement parent)
+		private void DrawList(Rect rect, List<Element> tree, GroupElement parent)
 		{
 			var children = GetChildren(tree, parent);
-			var width = children.Count > 14 ? rect.width - RectHelper.IconWidth : rect.width;
+			var width = children.Count > _visibleItemCount ? rect.width - RectHelper.IconWidth : rect.width;
 			var area = new Rect(Vector2.zero, new Vector2(width, _itemHeight * children.Count));
 			var selectedRect = area;
 
@@ -350,16 +340,14 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				if (current.keyCode == KeyCode.DownArrow)
 				{
-					_activeParent.SelectedIndex++;
-					_activeParent.SelectedIndex = Mathf.Min(_activeParent.SelectedIndex, GetChildren(_activeTree, _activeParent).Count - 1);
+					_activeParent.SelectedIndex = Mathf.Min(_activeParent.SelectedIndex + 1, GetChildren(_activeTree, _activeParent).Count - 1);
 					_scrollToSelected = true;
 					current.Use();
 				}
 
 				if (current.keyCode == KeyCode.UpArrow)
 				{
-					_activeParent.SelectedIndex--;
-					_activeParent.SelectedIndex = Mathf.Max(_activeParent.SelectedIndex, 0);
+					_activeParent.SelectedIndex = Mathf.Max(_activeParent.SelectedIndex - 1, 0);
 					_scrollToSelected = true;
 					current.Use();
 				}
@@ -395,12 +383,12 @@ namespace PiRhoSoft.UtilityEditor
 		{
 			if (!_hasSearch)
 			{
-				_searchTree = null;
+				_searchTree.Clear();
 
-				if (_stack[_stack.Count - 1].Content.text == "Search")
+				if (_currentStack.Last().Content.text == "Search")
 				{
-					_stack.Clear();
-					_stack.Add(_tree[0] as GroupElement);
+					_currentStack.Clear();
+					_currentStack.Add(_currentTree.First() as GroupElement);
 				}
 
 				_animationTarget = 1;
@@ -413,11 +401,11 @@ namespace PiRhoSoft.UtilityEditor
 				var starts = new List<Element>();
 				var contains = new List<Element>();
 
-				foreach (var element in _tree)
+				foreach (var element in _currentTree)
 				{
 					if (element is LeafElement)
 					{
-						if (subwords.Length > 0 && element.SearchName.StartsWith(subwords[0]))
+						if (subwords.Length > 0 && element.SearchName.StartsWith(subwords.First()))
 							starts.Add(element);
 
 						foreach (var subword in subwords)
@@ -428,16 +416,15 @@ namespace PiRhoSoft.UtilityEditor
 					}
 				}
 
-				var results = new List<Element>();
 				var search = new GroupElement(0, new GUIContent("Search"));
-				results.Add(search);
-				results.AddRange(starts);
-				results.AddRange(contains);
 
-				_searchTree = results.ToArray();
+				_searchTree.Clear();
+				_searchTree.Add(search);
+				_searchTree.AddRange(starts);
+				_searchTree.AddRange(contains);
 
-				_stack.Clear();
-				_stack.Add(search);
+				_currentStack.Clear();
+				_currentStack.Add(search);
 
 				if (GetChildren(_activeTree, _activeParent).Count >= 1)
 					_activeParent.SelectedIndex = 0;
@@ -448,13 +435,23 @@ namespace PiRhoSoft.UtilityEditor
 
 		private GroupElement GetElementRelative(int relative)
 		{
-			var index = _stack.Count + relative - 1;
-			return index < 0 ? null : _stack[index];
+			var index = _currentStack.Count + relative - 1;
+			return index < 0 ? null : _currentStack[index];
+		}
+
+		private void ChangeTab(int increment)
+		{
+			Tab += increment;
+
+			if (Tab < 0)
+				Tab = _trees.Count - 1;
+			else if (Tab >= _trees.Count)
+				Tab = 0;
 		}
 
 		private void GoToParent()
 		{
-			if (_stack.Count > 1)
+			if (_currentStack.Count > 1)
 			{
 				_animationTarget = 0;
 				_lastTime = DateTime.Now.Ticks;
@@ -471,7 +468,7 @@ namespace PiRhoSoft.UtilityEditor
 					Close();
 				}
 			}
-			else if (!_hasSearch)
+			else if (element is GroupElement group && !_hasSearch)
 			{
 				_lastTime = DateTime.Now.Ticks;
 
@@ -482,22 +479,23 @@ namespace PiRhoSoft.UtilityEditor
 				else if (_animation == 1.0f)
 				{
 					_animation = 0.0f;
-					_stack.Add(element as GroupElement);
+					_currentStack.Add(group);
 				}
 			}
 		}
 
-		private List<Element> GetChildren(Element[] tree, Element parent)
+		private List<Element> GetChildren(List<Element> tree, Element parent)
 		{
 			var children = new List<Element>();
 			var level = -1;
-			var i = 0;
-			for (i = 0; i < tree.Length; i++)
+			var index = 0;
+
+			for (index = 0; index < tree.Count; index++)
 			{
-				if (tree[i] == parent)
+				if (tree[index] == parent)
 				{
 					level = parent.Level + 1;
-					i++;
+					index++;
 					break;
 				}
 			}
@@ -505,9 +503,9 @@ namespace PiRhoSoft.UtilityEditor
 			if (level == -1)
 				return children;
 
-			for (; i < tree.Length; i++)
+			for (; index < tree.Count; index++)
 			{
-				var element = tree[i];
+				var element = tree[index];
 
 				if (element.Level < level)
 					break;
