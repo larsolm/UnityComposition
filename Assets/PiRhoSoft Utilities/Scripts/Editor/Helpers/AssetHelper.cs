@@ -39,17 +39,7 @@ namespace PiRhoSoft.UtilityEditor
 
 		public Type GetType(int index)
 		{
-			if (Types != null)
-			{
-				if (HasNone) index--; // skip 'None'
-				index -= Assets.Count; // skip assets
-
-				return Types.GetType(index);
-			}
-			else
-			{
-				return null;
-			}
+			return Types?.GetType(index);
 		}
 
 		#endregion
@@ -65,6 +55,26 @@ namespace PiRhoSoft.UtilityEditor
 		}
 
 		#region Creation
+
+		public static ScriptableObject CreateAssetWindow(Type type)
+		{
+			var path = EditorUtility.SaveFilePanel("Create a new " + ObjectNames.NicifyVariableName(type.Name), "Assets", type.Name + ".asset", "asset");
+			if (path.Length != 0)
+			{
+				var startIndex = path.IndexOf("Assets");
+
+				if (startIndex > 0)
+				{
+					var relativePath = path.Substring(startIndex);
+					var asset = ScriptableObject.CreateInstance(type);
+					AssetDatabase.CreateAsset(asset, relativePath);
+
+					return asset;
+				}
+			}
+
+			return null;
+		}
 
 		public static AssetType CreateAsset<AssetType>(string name) where AssetType : ScriptableObject
 		{
@@ -207,7 +217,7 @@ namespace PiRhoSoft.UtilityEditor
 					var asset = list.Assets[i];
 					var path = GetPath(asset).Substring(prefix.Length);
 					var name = path.Length > 0 ? path + asset.name : asset.name;
-					list.Names[index++] = new GUIContent(name, AssetPreview.GetAssetPreview(asset));
+					list.Names[index++] = new GUIContent(name, AssetPreview.GetMiniThumbnail(asset) ?? AssetPreview.GetMiniTypeThumbnail(asset.GetType()));
 				}
 			}
 

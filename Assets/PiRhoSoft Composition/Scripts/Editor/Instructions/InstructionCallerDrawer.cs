@@ -43,11 +43,31 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void DrawInstruction(Rect rect, GUIContent label)
 		{
-			var instruction = InstructionDrawer.Draw(rect, label, _caller.Instruction);
-			if (_caller.Instruction != instruction)
+			AssetPopupControl.Draw(rect, label, _caller.Instruction, SetInstruction, true, true, true);
+		}
+
+		private void SetInstruction(int tab, int selection)
+		{
+			if (selection >= 0)
 			{
-				_caller.Instruction = instruction;
-				Refresh();
+				var list = AssetHelper.GetAssetList<Instruction>(true, true);
+				var instruction = _caller.Instruction;
+
+				if (tab == 0)
+				{
+					instruction = list.GetAsset(selection) as Instruction;
+				}
+				else if (tab == 1)
+				{
+					var type = list.GetType(selection);
+					instruction = AssetHelper.CreateAssetWindow(type) as Instruction;
+				}
+
+				if (_caller.Instruction != instruction)
+				{
+					_caller.Instruction = instruction;
+					Refresh();
+				}
 			}
 		}
 
@@ -123,7 +143,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override float GetHeight(GUIContent label)
 		{
-			var height = InstructionDrawer.GetHeight();
+			var height = AssetPopupControl.GetHeight();
 
 			if (_caller.Inputs.Count > 0 || _caller.Outputs.Count > 0)
 				height += RectHelper.VerticalSpace;
@@ -139,7 +159,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void Draw(Rect position, GUIContent label)
 		{
-			var instructionHeight = InstructionDrawer.GetHeight();
+			var instructionHeight = AssetPopupControl.GetHeight();
 			var instructionRect = RectHelper.TakeHeight(ref position, instructionHeight);
 
 			DrawInstruction(instructionRect, label);

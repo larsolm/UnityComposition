@@ -283,19 +283,9 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (selected is Type type)
 			{
-				var path = EditorUtility.SaveFilePanel("Create a new Instruction Graph", "Assets", type.Name + ".asset", "asset");
-				if (path.Length != 0)
-				{
-					var index = path.IndexOf("Assets");
-
-					if (index > 0)
-					{
-						var relativePath = path.Substring(index);
-						var graph = CreateInstance(type);
-						AssetDatabase.CreateAsset(graph, relativePath);
-						SetGraph(graph);
-					}
-				}
+				var graph = AssetHelper.CreateAssetWindow(type);
+				if (graph)
+					SetGraph(graph);
 			}
 		}
 

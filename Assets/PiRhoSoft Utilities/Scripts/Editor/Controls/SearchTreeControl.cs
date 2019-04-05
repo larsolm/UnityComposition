@@ -11,59 +11,59 @@ namespace PiRhoSoft.UtilityEditor
 
 	public class SearchTreeControl : EditorWindow
 	{
-		private class Element
+		private class TreeItem
 		{
-			public int Level;
-			public GUIContent Content;
+			public int ItemIndex;
+			public string Path;
 			public string SearchName;
+			public string Name;
+			public GUIContent Content;
 
-			protected Element(int level, GUIContent name)
+			public TreeItem Parent;
+			public List<TreeItem> Children;
+
+			public int SelectedIndex = -1;
+			public Vector2 ScrollPosition = Vector2.zero;
+
+			public bool IsBranch => Children != null;
+			public TreeItem SelectedItem => IsBranch && SelectedIndex >= 0 && SelectedIndex < Children.Count ? Children[SelectedIndex] : null;
+
+			public static TreeItem Leaf(int index, string path, GUIContent content, TreeItem parent)
 			{
-				Level = level;
-				Content = name;
-				SearchName = name.text.Replace(" ", string.Empty).ToLower();
+				var item = new TreeItem
+				{
+					ItemIndex = index,
+					Path = path,
+					SearchName = content.text.Replace(" ", string.Empty).ToLower(),
+					Name = content.text,
+					Content = content,
+					Parent = parent,
+				};
+
+				if (item.Parent != null)
+					item.Parent.Children.Add(item);
+
+				return item;
+			}
+
+			public static TreeItem Branch(string path, GUIContent content, TreeItem parent)
+			{
+				var item = Leaf(-1, path, content, parent);
+				item.Children = new List<TreeItem>();
+				return item;
 			}
 		}
 
-		private class LeafElement : Element
-		{
-			public int Index;
-
-			public LeafElement(int level, GUIContent name, int index) : base(level, name)
-			{
-				Index = index;
-			}
-		}
-
-		[Serializable]
-		private class GroupElement : Element
-		{
-			public Vector2 Scroll;
-			public int SelectedIndex;
-
-			public GroupElement(int level, GUIContent name) : base(level, name)
-			{
-			}
-		}
-
-		private class Styles
-		{
-			public GUIStyle Header = new GUIStyle("In BigTitle");
-			public GUIStyle ItemButton = new GUIStyle("PR Label");
-			public GUIStyle Background = new GUIStyle("grey_border");
-			public GUIStyle RightArrow = new GUIStyle("AC RightArrow");
-			public GUIStyle LeftArrow = new GUIStyle("AC LeftArrow");
-			public GUIStyle SearchText = new GUIStyle("SearchTextField");
-			public GUIStyle SearchCancelEmpty = new GUIStyle("SearchCancelButtonEmpty");
-			public GUIStyle SearchCancel = new GUIStyle("SearchCancelButton");
-
-			public Styles()
-			{
-				Header.font = EditorStyles.boldLabel.font;
-				ItemButton.alignment = TextAnchor.MiddleLeft;
-				ItemButton.fixedHeight = _itemHeight;
-			}
-		}
+		private static readonly StaticStyle Header = new StaticStyle(() => new GUIStyle("In BigTitle") { font = EditorStyles.boldLabel.font });
+		private static readonly StaticStyle ItemButton = new StaticStyle(() => new GUIStyle("PR Label") { alignment = TextAnchor.MiddleLeft, fixedHeight = _itemHeight });
+		private static readonly StaticStyle Background = new StaticStyle(() => new GUIStyle("grey_border"));
+		private static readonly StaticStyle RightArrow = new StaticStyle(() => new GUIStyle("AC RightArrow"));
+		private static readonly StaticStyle LeftArrow = new StaticStyle(() => new GUIStyle("AC LeftArrow"));
+		private static readonly StaticStyle SearchText = new StaticStyle(() => new GUIStyle("SearchTextField"));
+		private static readonly StaticStyle SearchCancelEmpty = new StaticStyle(() => new GUIStyle("SearchCancelButtonEmpty"));
+		private static readonly StaticStyle SearchCancel = new StaticStyle(() => new GUIStyle("SearchCancelButton"));
+		private static readonly IconButton FolderIcon = new IconButton("FolderEmpty Icon");
+		private static readonly IconButton DefaultTypeIcon = new IconButton("cs Script Icon");
 
 		private const string _invalidTreeWarning = "(UCSTCIT) Unable to show search tree: invalid tabs and content";
 
@@ -72,14 +72,21 @@ namespace PiRhoSoft.UtilityEditor
 		private const int _visibleItemCount = 14;
 		private const int _windowHeight = 2 * _headerHeight + _itemHeight * _visibleItemCount;
 
-		public static int Tab = 0;
-		public static int Selection = -1;
-
-		private static Styles _styles;
 		private static SearchTreeControl _instance;
-		private List<List<Element>> _trees = new List<List<Element>>();
-		private List<Element> _searchTree = new List<Element>();
-		private List<List<GroupElement>> _stacks = new List<List<GroupElement>>();
+
+		public int _currentTab = 0;
+
+		private List<TreeItem> _roots = new List<TreeItem>();
+		private List<List<TreeItem>> _searchList = new List<List<TreeItem>>();
+
+		private TreeItem _targetBranch;
+		private TreeItem _currentBranch;
+		private TreeItem _searchRoot;
+		
+		private TreeItem _activeBranch => _hasSearch ? _searchRoot : _currentBranch;
+		private List<TreeItem> _currentLeaves => _searchList[_currentTab];
+
+		private Action<int, int> _onSelected;
 		private float _animation = 1.0f;
 		private int _animationTarget = 1;
 		private long _lastTime;
@@ -90,25 +97,7 @@ namespace PiRhoSoft.UtilityEditor
 		private bool _isAnimating => _animation != _animationTarget;
 		private bool _hasSearch => !string.IsNullOrEmpty(_search);
 
-		private List<Element> _currentTree => _trees[Tab];
-		private List<GroupElement> _currentStack => _stacks[Tab];
-
-		private List<Element> _activeTree => _hasSearch ? _searchTree : _currentTree;
-		private GroupElement _activeParent => _currentStack[_currentStack.Count - 2 + _animationTarget];
-
-		private Element _activeElement
-		{
-			get
-			{
-				if (_activeTree == null)
-					return null;
-
-				var children = GetChildren(_activeTree, _activeParent);
-				return children.Count == 0 ? null : children[_activeParent.SelectedIndex];
-			}
-		}
-
-		public static void Show(Rect rect, List<GUIContent[]> trees, List<GUIContent> tabs, int currentIndex)
+		public static void Show(Rect rect, List<GUIContent[]> trees, List<GUIContent> tabs, Action<int, int> onSelected, int currentTab, int currentIndex = 0)
 		{
 			if (trees.Count != tabs.Count)
 				Debug.LogWarning(_invalidTreeWarning);
@@ -116,81 +105,137 @@ namespace PiRhoSoft.UtilityEditor
 			if (_instance == null)
 				_instance = CreateInstance<SearchTreeControl>();
 
-			_instance.Init(rect, trees, tabs, currentIndex);
+			_instance.Init(rect, trees, tabs, onSelected, currentIndex, currentTab);
 		}
 
-		private void Init(Rect rect, List<GUIContent[]> trees, List<GUIContent> tabs, int currentIndex)
+		private void Init(Rect rect, List<GUIContent[]> trees, List<GUIContent> tabs, Action<int, int> onSelected, int currentTab, int currentIndex)
 		{
-			wantsMouseMove = true;
+			_onSelected = onSelected;
+			_currentTab = currentTab;
 
-			Tab = 0;
-			Selection = currentIndex;
-
-			var position = GUIUtility.GUIToScreenPoint(rect.position);
-
-			CreateTrees(trees, tabs);
-			ShowAsDropDown(new Rect(position, rect.size), new Vector2(rect.width, _windowHeight));
+			CreateTrees(trees, tabs, currentIndex);
+			ShowAsDropDown(new Rect(GUIUtility.GUIToScreenPoint(rect.position), rect.size), new Vector2(rect.width, _windowHeight));
 			Focus();
+
+			wantsMouseMove = true;
 		}
 
-		private void CreateTrees(List<GUIContent[]> trees, List<GUIContent> tabs)
+		private TreeItem GetChild(TreeItem parent, string path)
+		{
+			if (parent.Path == path)
+				return parent;
+
+			if (parent.IsBranch)
+			{
+				foreach (var child in parent.Children)
+				{
+					var found = GetChild(child, path);
+					if (found != null)
+						return found;
+				}
+			}
+
+			return null;
+		}
+
+		private void CreateTrees(List<GUIContent[]> trees, List<GUIContent> tabs, int selection)
 		{
 			for (var t = 0; t < trees.Count; t++)
 			{
 				var tree = trees[t];
 				var tab = tabs[t];
 
-				var submenus = new List<string> { tab.text };
-				var elements = new List<Element> { new GroupElement(0, tab) };
+				var root = TreeItem.Branch(string.Empty, tab, null);
+				var rootPath = tab.text + "/";
+				var leaves = new List<TreeItem>();
 
-				for (var i = 0; i < tree.Length; i++)
+				for (var index = 0; index < tree.Length; index++)
 				{
-					var leaf = tree[i];
-					var path = tab.text + "/" + leaf.text; // Prepend the top level tab group
-					var menus = path.Split(new char[] { '/' });
-					var content = new GUIContent(menus.Last(), leaf.image);
+					var node = tree[index];
+					var fullPath = rootPath + node.text;
+					var submenus = fullPath.Split('/');
 
-					while (menus.Length - 1 < submenus.Count)
-						submenus.RemoveAt(submenus.Count - 1);
+					var path = rootPath;
+					var child = root;
 
-					while (submenus.Count > 0 && menus[submenus.Count - 1] != submenus.Last())
-						submenus.RemoveAt(submenus.Count - 1);
-
-					while (menus.Length - 1 > submenus.Count)
+					for (var i = 1; i < submenus.Length - 1; i++)
 					{
-						var menu = menus[submenus.Count];
-						elements.Add(new GroupElement(submenus.Count, new GUIContent(menu)));
-						submenus.Add(menu);
+						var menu = submenus[i];
+						path += menu + "/";
+
+						var previousChild = child;
+						child = GetChild(child, path);
+
+						if (child == null)
+							child = TreeItem.Branch(path, new GUIContent(menu, FolderIcon.Content.image), previousChild);
 					}
 
-					elements.Add(new LeafElement(submenus.Count, content, i));
+					leaves.Add(TreeItem.Leaf(index, path, new GUIContent(submenus.Last(), node.image ?? DefaultTypeIcon.Content.image), child));
 				}
-				
-				_stacks.Add(new List<GroupElement> { elements.First() as GroupElement });
-				_trees.Add(elements);
+
+				_roots.Add(root);
+				_searchList.Add(leaves);
 			}
+
+			_searchRoot = TreeItem.Branch("Search", new GUIContent("Search"), null);
+			_currentBranch = _currentLeaves[selection].Parent;
 
 			RebuildSearch();
 		}
 
+		private void RebuildSearch()
+		{
+			_searchRoot.Children.Clear();
+			_searchRoot.SelectedIndex = -1;
+
+			if (!_hasSearch)
+			{
+				_animationTarget = 1;
+				_lastTime = DateTime.Now.Ticks;
+			}
+			else
+			{
+				var subwords = _search.ToLower().Split(' ').Where(subword => !string.IsNullOrEmpty(subword)).ToArray();
+				var starts = new List<TreeItem>();
+				var contains = new List<TreeItem>();
+
+				foreach (var item in _currentLeaves)
+				{
+					if (subwords.Length > 0 && item.SearchName.StartsWith(subwords.First()))
+					{
+						starts.Add(item);
+					}
+					else
+					{
+						foreach (var subword in subwords)
+						{
+							if (item.SearchName.Contains(subword))
+								contains.Add(item);
+						}
+					}
+				}
+
+				_searchRoot.Children.AddRange(starts);
+				_searchRoot.Children.AddRange(contains);
+			}
+		}
+
+
 		void OnGUI()
 		{
-			if (_styles == null)
-				_styles = new Styles();
-
 			HandleKeyboard();
 
 			var backgroundRect = new Rect(Vector2.zero, position.size);
 
-			GUI.Label(backgroundRect, GUIContent.none, _styles.Background);
+			GUI.Label(backgroundRect, GUIContent.none, Background.Style);
 			GUI.SetNextControlName("Search");
 			EditorGUI.FocusTextInControl("Search");
 			RectHelper.TakeVerticalSpace(ref backgroundRect);
 
 			var searchRect = RectHelper.Inset(RectHelper.TakeHeight(ref backgroundRect, _headerHeight), 8, 8, RectHelper.VerticalSpace, RectHelper.VerticalSpace);
 			var cancelRect = RectHelper.TakeTrailingWidth(ref searchRect, RectHelper.IconWidth);
-			var search = GUI.TextField(searchRect, _delayedSearch ?? _search, _styles.SearchText);
-			var buttonStyle = string.IsNullOrEmpty(_search) ? _styles.SearchCancelEmpty : _styles.SearchCancel;
+			var search = GUI.TextField(searchRect, _delayedSearch ?? _search, SearchText.Style);
+			var buttonStyle = string.IsNullOrEmpty(_search) ? SearchCancelEmpty.Style : SearchCancel.Style;
 
 			if (GUI.Button(cancelRect, GUIContent.none, buttonStyle))
 			{
@@ -213,10 +258,10 @@ namespace PiRhoSoft.UtilityEditor
 				}
 			}
 
-			DrawHeader(backgroundRect, _activeTree, _animation, GetElementRelative(0), GetElementRelative(-1));
+			DrawHeader(backgroundRect, _activeBranch, _animation);
 
-			if (_animation < 1.0f)
-				DrawHeader(backgroundRect, _activeTree, _animation + 1.0f, GetElementRelative(-1), GetElementRelative(-2));
+			if (_animation < 1.0f && _targetBranch != null)
+				DrawHeader(backgroundRect, _targetBranch, _animation + 1.0f);
 
 			if (_isAnimating && Event.current.type == EventType.Repaint)
 			{
@@ -230,105 +275,113 @@ namespace PiRhoSoft.UtilityEditor
 				{
 					_animation = 1.0f;
 					_animationTarget = 1;
-					_currentStack.RemoveAt(_currentStack.Count - 1);
+					_currentBranch = _targetBranch;
+					_targetBranch = null;
 				}
 
 				Repaint();
 			}
 		}
 
-		private void DrawHeader(Rect rect, List<Element> tree, float animation, GroupElement parent, GroupElement grandParent)
+		private void DrawHeader(Rect rect, TreeItem parent, float animation)
 		{
-			animation = Mathf.Floor(animation) + Mathf.SmoothStep(0.0f, 1.0f, Mathf.Repeat(animation, 1.0f));
-
-			rect.x = rect.width * (1 - animation);
-
-			var headerRect = RectHelper.Inset(RectHelper.TakeHeight(ref rect, _headerHeight), 1, 1, 0, 0);
-
-			GUI.Label(headerRect, parent.Content, _styles.Header);
-
-			if (grandParent != null)
+			if (parent != null)
 			{
-				var arrowRect = RectHelper.AdjustHeight(RectHelper.TakeLeadingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
+				animation = Mathf.Floor(animation) + Mathf.SmoothStep(0.0f, 1.0f, Mathf.Repeat(animation, 1.0f));
 
-				if (GUI.Button(arrowRect, GUIContent.none, _styles.LeftArrow))
-					GoToParent();
+				rect.x = rect.width * (1 - animation);
+
+				var headerRect = RectHelper.Inset(RectHelper.TakeHeight(ref rect, _headerHeight), 1, 1, 0, 0);
+
+				GUI.Label(headerRect, parent.Content, Header.Style);
+
+				if (parent.Parent != null)
+				{
+					var arrowRect = RectHelper.AdjustHeight(RectHelper.TakeLeadingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
+
+					if (GUI.Button(arrowRect, GUIContent.none, LeftArrow.Style))
+						GoToParent();
+				}
+				else if (_roots.Count > 1)
+				{
+					var leftRect = RectHelper.AdjustHeight(RectHelper.TakeLeadingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
+					var rightRect = RectHelper.AdjustHeight(RectHelper.TakeTrailingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
+
+					if (GUI.Button(leftRect, GUIContent.none, LeftArrow.Style))
+						ChangeTab(-1);
+
+					if (GUI.Button(rightRect, GUIContent.none, RightArrow.Style))
+						ChangeTab(1);
+				}
+
+				DrawChildren(rect, parent);
 			}
-			else if (_trees.Count > 1)
-			{
-				var leftRect = RectHelper.AdjustHeight(RectHelper.TakeLeadingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
-				var rightRect = RectHelper.AdjustHeight(RectHelper.TakeTrailingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
-
-				if (GUI.Button(leftRect, GUIContent.none, _styles.LeftArrow))
-					ChangeTab(-1);
-
-				if (GUI.Button(rightRect, GUIContent.none, _styles.RightArrow))
-					ChangeTab(1);
-			}
-
-			DrawList(rect, tree, parent);
 		}
 
-		private void DrawList(Rect rect, List<Element> tree, GroupElement parent)
+		private void DrawChildren(Rect rect, TreeItem parent)
 		{
-			var children = GetChildren(tree, parent);
-			var width = children.Count > _visibleItemCount ? rect.width - RectHelper.IconWidth : rect.width;
-			var area = new Rect(Vector2.zero, new Vector2(width, _itemHeight * children.Count));
-			var selectedRect = area;
-
-			using (var scroll = new GUI.ScrollViewScope(rect, parent.Scroll, area))
+			if (parent.Children.Count > 0)
 			{
-				parent.Scroll = scroll.scrollPosition;
+				var width = parent.Children.Count > _visibleItemCount ? rect.width - RectHelper.IconWidth : rect.width;
+				var area = new Rect(Vector2.zero, new Vector2(width, _itemHeight * parent.Children.Count));
+				var selectedRect = area;
 
-				for (var i = 0; i < children.Count; i++)
+				using (var scroll = new GUI.ScrollViewScope(rect, parent.ScrollPosition, area))
 				{
-					var element = children[i];
-					var itemRect = RectHelper.TakeHeight(ref area, _itemHeight);
+					parent.ScrollPosition = scroll.scrollPosition;
 
-					if ((Event.current.type == EventType.MouseMove || Event.current.type == EventType.MouseDown) && parent.SelectedIndex != i && itemRect.Contains(Event.current.mousePosition))
+					for (var i = 0; i < parent.Children.Count; i++)
 					{
-						parent.SelectedIndex = i;
+						var item = parent.Children[i];
+						var itemRect = RectHelper.TakeHeight(ref area, _itemHeight);
+
+						if ((Event.current.type == EventType.MouseMove || Event.current.type == EventType.MouseDown) && parent.SelectedIndex != i && itemRect.Contains(Event.current.mousePosition))
+						{
+							parent.SelectedIndex = i;
+							Repaint();
+						}
+
+						var selected = i == parent.SelectedIndex;
+
+						if (selected)
+							selectedRect = itemRect;
+
+						if (Event.current.type == EventType.Repaint)
+						{
+							ItemButton.Style.Draw(itemRect, item.Content, false, false, selected, selected);
+
+							if (item.IsBranch)
+							{
+								var arrowRect = RectHelper.TakeTrailingIcon(ref itemRect);
+
+								RightArrow.Style.Draw(arrowRect, false, false, false, false);
+							}
+						}
+
+						if (Event.current.type == EventType.MouseDown && itemRect.Contains(Event.current.mousePosition))
+						{
+							Event.current.Use();
+							parent.SelectedIndex = i;
+							SelectChild();
+						}
+					}
+				}
+
+				if (_scrollToSelected && Event.current.type == EventType.Repaint)
+				{
+					_scrollToSelected = false;
+
+					if (selectedRect.yMax - rect.height > parent.ScrollPosition.y)
+					{
+						parent.ScrollPosition.y = selectedRect.yMax - rect.height;
 						Repaint();
 					}
 
-					var selected = i == parent.SelectedIndex;
-
-					if (selected)
-						selectedRect = itemRect;
-
-					if (Event.current.type == EventType.Repaint)
+					if (selectedRect.y < parent.ScrollPosition.y)
 					{
-						_styles.ItemButton.Draw(itemRect, element.Content, false, false, selected, selected);
-
-						var rightRect = RectHelper.TakeTrailingIcon(ref itemRect);
-
-						if (element is GroupElement)
-							_styles.RightArrow.Draw(rightRect, false, false, false, false);
+						parent.ScrollPosition.y = selectedRect.y;
+						Repaint();
 					}
-
-					if (Event.current.type == EventType.MouseDown && itemRect.Contains(Event.current.mousePosition))
-					{
-						Event.current.Use();
-						parent.SelectedIndex = i;
-						GoToChild(element, true);
-					}
-				}
-			}
-
-			if (_scrollToSelected && Event.current.type == EventType.Repaint)
-			{
-				_scrollToSelected = false;
-			
-				if (selectedRect.yMax - rect.height > parent.Scroll.y)
-				{
-					parent.Scroll.y = selectedRect.yMax - rect.height;
-					Repaint();
-				}
-
-				if (selectedRect.y < parent.Scroll.y)
-				{
-					parent.Scroll.y = selectedRect.y;
-					Repaint();
 				}
 			}
 		}
@@ -340,25 +393,25 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				if (current.keyCode == KeyCode.DownArrow)
 				{
-					_activeParent.SelectedIndex = Mathf.Min(_activeParent.SelectedIndex + 1, GetChildren(_activeTree, _activeParent).Count - 1);
+					_activeBranch.SelectedIndex = Mathf.Min(_activeBranch.SelectedIndex + 1, _activeBranch.Children.Count - 1);
 					_scrollToSelected = true;
 					current.Use();
 				}
 
 				if (current.keyCode == KeyCode.UpArrow)
 				{
-					_activeParent.SelectedIndex = Mathf.Max(_activeParent.SelectedIndex - 1, 0);
+					_activeBranch.SelectedIndex = Mathf.Max(_activeBranch.SelectedIndex - 1, 0);
 					_scrollToSelected = true;
 					current.Use();
 				}
 
 				if (current.keyCode == KeyCode.Return || current.keyCode == KeyCode.KeypadEnter)
 				{
-					GoToChild(_activeElement, true);
+					SelectChild();
 					current.Use();
 				}
 
-				if (!_hasSearch)
+				if (!_hasSearch) // Keep this in the check because it will otherwise override the search text
 				{
 					if (current.keyCode == KeyCode.LeftArrow || current.keyCode == KeyCode.Backspace)
 					{
@@ -367,7 +420,7 @@ namespace PiRhoSoft.UtilityEditor
 					}
 					if (current.keyCode == KeyCode.RightArrow)
 					{
-						GoToChild(_activeElement, false);
+						SelectChild();
 						current.Use();
 					}
 					if (current.keyCode == KeyCode.Escape)
@@ -379,142 +432,70 @@ namespace PiRhoSoft.UtilityEditor
 			}
 		}
 
-		private void RebuildSearch()
-		{
-			if (!_hasSearch)
-			{
-				_searchTree.Clear();
-
-				if (_currentStack.Last().Content.text == "Search")
-				{
-					_currentStack.Clear();
-					_currentStack.Add(_currentTree.First() as GroupElement);
-				}
-
-				_animationTarget = 1;
-				_lastTime = DateTime.Now.Ticks;
-			}
-			else
-			{
-				var subwords = _search.ToLower().Split(' ').Where(subword => !string.IsNullOrEmpty(subword)).ToArray();
-
-				var starts = new List<Element>();
-				var contains = new List<Element>();
-
-				foreach (var element in _currentTree)
-				{
-					if (element is LeafElement)
-					{
-						if (subwords.Length > 0 && element.SearchName.StartsWith(subwords.First()))
-							starts.Add(element);
-
-						foreach (var subword in subwords)
-						{
-							if (element.SearchName.Contains(subword))
-								contains.Add(element);
-						}
-					}
-				}
-
-				var search = new GroupElement(0, new GUIContent("Search"));
-
-				_searchTree.Clear();
-				_searchTree.Add(search);
-				_searchTree.AddRange(starts);
-				_searchTree.AddRange(contains);
-
-				_currentStack.Clear();
-				_currentStack.Add(search);
-
-				if (GetChildren(_activeTree, _activeParent).Count >= 1)
-					_activeParent.SelectedIndex = 0;
-				else
-					_activeParent.SelectedIndex = -1;
-			}
-		}
-
-		private GroupElement GetElementRelative(int relative)
-		{
-			var index = _currentStack.Count + relative - 1;
-			return index < 0 ? null : _currentStack[index];
-		}
-
 		private void ChangeTab(int increment)
 		{
-			Tab += increment;
+			_currentTab += increment;
 
-			if (Tab < 0)
-				Tab = _trees.Count - 1;
-			else if (Tab >= _trees.Count)
-				Tab = 0;
+			if (_currentTab < 0)
+				_currentTab = _roots.Count - 1;
+			else if (_currentTab >= _roots.Count)
+				_currentTab = 0;
+
+			if (increment < 0)
+				AnimateLeft(_roots[_currentTab]);
+			else if (increment > 0)
+				AnimateRight(_roots[_currentTab]);
+
+			_targetBranch.SelectedIndex = -1;
+			_activeBranch.SelectedIndex = -1;
+		}
+
+		private void AnimateLeft(TreeItem target)
+		{
+			_lastTime = DateTime.Now.Ticks;
+			_animationTarget = 0;
+			_targetBranch = target;
+		}
+
+		private void AnimateRight(TreeItem target)
+		{
+			if (_animationTarget == 0)
+			{
+				_animationTarget = 1;
+				_targetBranch = target;
+			}
+			else if (_animation == 1.0f)
+			{
+				_animation = 0.0f;
+				_targetBranch = _activeBranch;
+				_currentBranch = target;
+			}
+
+			_lastTime = DateTime.Now.Ticks;
 		}
 
 		private void GoToParent()
 		{
-			if (_currentStack.Count > 1)
-			{
-				_animationTarget = 0;
-				_lastTime = DateTime.Now.Ticks;
-			}
+			if (_activeBranch.Parent != null)
+				AnimateLeft(_activeBranch.Parent);
 		}
 
-		private void GoToChild(Element element, bool addIfComponent)
+		private void SelectChild()
 		{
-			if (element is LeafElement leaf)
+			var selection = _activeBranch.SelectedItem;
+
+			if (selection != null)
 			{
-				if (addIfComponent)
+				if (selection.IsBranch)
 				{
-					Selection = leaf.Index;
+					AnimateRight(selection);
+				}
+				else
+				{
+					_onSelected(_currentTab, selection.ItemIndex);
 					Close();
 				}
 			}
-			else if (element is GroupElement group && !_hasSearch)
-			{
-				_lastTime = DateTime.Now.Ticks;
-
-				if (_animationTarget == 0)
-				{
-					_animationTarget = 1;
-				}
-				else if (_animation == 1.0f)
-				{
-					_animation = 0.0f;
-					_currentStack.Add(group);
-				}
-			}
-		}
-
-		private List<Element> GetChildren(List<Element> tree, Element parent)
-		{
-			var children = new List<Element>();
-			var level = -1;
-			var index = 0;
-
-			for (index = 0; index < tree.Count; index++)
-			{
-				if (tree[index] == parent)
-				{
-					level = parent.Level + 1;
-					index++;
-					break;
-				}
-			}
-
-			if (level == -1)
-				return children;
-
-			for (; index < tree.Count; index++)
-			{
-				var element = tree[index];
-
-				if (element.Level < level)
-					break;
-
-				if (element.Level == level || _hasSearch)
-					children.Add(element);
-			}
-
-			return children;
 		}
 	}
 }

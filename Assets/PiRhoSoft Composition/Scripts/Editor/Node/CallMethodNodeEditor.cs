@@ -80,13 +80,11 @@ namespace PiRhoSoft.CompositionEditor
 				EditorGUILayout.PropertyField(_targetProperty);
 			}
 
-			using (new UndoScope(_node, false))
-			{
-				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false);
-				if (selectedTargetType != _node.TargetType)
-					SetTargetType(selectedTargetType);
+			TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false, SetTargetType);
 
-				if (_node.TargetType != null)
+			if (_node.TargetType != null)
+			{
+				using (new UndoScope(_node, false))
 				{
 					var method = Array.IndexOf(_methodNames, _node.MethodName);
 					var selectedMethod = EditorGUILayout.Popup(_methodContent, method, _methodNames);
@@ -100,24 +98,33 @@ namespace PiRhoSoft.CompositionEditor
 							VariableReferenceControl.Draw(_outputContent.Content, _node.Output);
 					}
 				}
-			}
 
-			if (_node.TargetType != null && _node.Method != null && _node.Parameters.Count > 0)
-			{
-				using (new UndoScope(serializedObject))
-					_parametersControl.Draw(_parametersContent.Content);
+				if (_node.Method != null && _node.Parameters.Count > 0)
+				{
+					using (new UndoScope(serializedObject))
+						_parametersControl.Draw(_parametersContent.Content);
+				}
 			}
 		}
 
-		private void SetTargetType(Type type)
+		private void SetTargetType(int tab, int selection)
 		{
-			_node.TargetType = type;
-			_node.Method = null;
-			_node.MethodName = null;
-			_node.ParameterTypes = null;
-			_node.Parameters.Clear();
+			var types = TypeHelper.GetTypeList<Component>(true, false);
+			var type = types.GetType(selection);
 
-			BuildMethodList();
+			if (type != _node.TargetType)
+			{
+				using (new UndoScope(_node, false))
+				{
+					_node.TargetType = type;
+					_node.Method = null;
+					_node.MethodName = null;
+					_node.ParameterTypes = null;
+					_node.Parameters.Clear();
+
+					BuildMethodList();
+				}
+			}
 		}
 
 		private void SetMethod(MethodInfo method)

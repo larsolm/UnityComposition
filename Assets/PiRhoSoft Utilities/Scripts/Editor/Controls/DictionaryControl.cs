@@ -135,7 +135,7 @@ namespace PiRhoSoft.UtilityEditor
 				}
 				case ListItemDisplayType.AssetPopup:
 				{
-					return AssetPopupDrawer.GetHeight();
+					return 0;//AssetPopupDrawer.GetHeight();
 				}
 			}
 
@@ -195,7 +195,7 @@ namespace PiRhoSoft.UtilityEditor
 					var labelRect = RectHelper.TakeWidth(ref rect, rect.width * 0.25f);
 
 					EditorGUI.LabelField(labelRect, key);
-					AssetPopupDrawer.Draw(rect, GUIContent.none, property, _assetPopupType, true, false, true);
+					//AssetPopupDrawer.Draw(rect, GUIContent.none, property, _assetPopupType, true, false, true);
 
 					break;
 				}

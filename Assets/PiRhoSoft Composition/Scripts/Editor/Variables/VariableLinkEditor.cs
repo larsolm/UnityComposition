@@ -99,13 +99,13 @@ namespace PiRhoSoft.CompositionEditor
 
 			protected override float GetHeight_()
 			{
-				return ValueDefinitionDrawer.GetHeight(_definition, VariableInitializerType.None, null);
+				return ValueDefinitionControl.GetHeight(_definition, VariableInitializerType.None, null);
 			}
 
 			protected override bool Draw_(bool clean)
 			{
 				using (new InvalidScope(clean || _typeValid))
-					_definition = ValueDefinitionDrawer.Draw(GUIContent.none, _definition, VariableInitializerType.None, null, false);
+					_definition = ValueDefinitionControl.Draw(GUIContent.none, _definition, VariableInitializerType.None, null, false);
 
 				return false;
 			}
