@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -56,7 +57,8 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class InstructionStore : IVariableStore
 	{
-		private const string _invalidContextError = "(CISIC) failed to create context {0}: the variable '{1}' does not satisfy the contraint";
+		private const string _invalidContextError = "(CISIC) failed to create context for {0}: the variable '{1}' does not satisfy the contraint";
+		private const string _invalidInputError = "(CISII) failed to create input for {0}: the variable '{1}' does not satisfy the contraint";
 		private const string _missingInputError = "(CISMI) failed to read input {0}: the variable '{1}' could not be found";
 		private const string _missingOutputError = "(CISMO) failed to store output {0}: the variable '{1}' could not be found";
 		private const string _readOnlyOutputError = "(CISROO) failed to store output {0}: the variable '{1}' is read only";
@@ -83,22 +85,22 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool IsInput(InstructionInput input) => input.Type == InstructionInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
 		public static bool IsOutput(InstructionOutput output) => output.Type == InstructionOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
-		public InstructionStore(string contextName, ValueDefinition contextDefinition, VariableValue context)
+		public InstructionStore(Instruction instruction, VariableValue context)
 		{
-			ContextName = contextName;
-			Context = context;
-
-			if (contextDefinition.Type != VariableType.Empty && !contextDefinition.IsValid(context))
-				Debug.LogWarningFormat(_invalidContextError, contextName, context);
+			ContextName = instruction.ContextName;
+			Context = ResolveValue(instruction.ContextDefinition, context, instruction, _invalidContextError, ContextName);
 		}
 
-		public void WriteInputs(IList<InstructionInput> inputs)
+		public void WriteInputs(InstructionCaller instruction, IList<InstructionInput> inputs)
 		{
 			foreach (var input in inputs)
 			{
 				if (input.Type == InstructionInputType.Reference)
 				{
 					var value = input.Reference.GetValue(this);
+					var definition = instruction.GetInputDefinition(input);
+
+					value = ResolveValue(definition.Definition, value, instruction.Instruction, _invalidInputError, definition.Name);
 
 					if (value.Type != VariableType.Empty)
 						Input.AddVariable(input.Name, value);
@@ -177,6 +179,20 @@ namespace PiRhoSoft.CompositionEngine
 		public IEnumerable<string> GetVariableNames()
 		{
 			return _variableNames.Append(ContextName);
+		}
+
+		private VariableValue ResolveValue(ValueDefinition definition, VariableValue value, Object errorContext, string invalidError, string variableName)
+		{
+			if (definition.Type == VariableType.Object && definition.Constraint is ObjectVariableConstraint constraint && value.TryGetObject(out var obj))
+			{
+				var resolved = ComponentHelper.GetAsObject(constraint.Type, obj);
+				value = VariableValue.Create(resolved);
+			}
+
+			if (definition.Type != VariableType.Empty && !definition.IsValid(value))
+				Debug.LogWarningFormat(invalidError, variableName, value);
+
+			return value;
 		}
 	}
 }

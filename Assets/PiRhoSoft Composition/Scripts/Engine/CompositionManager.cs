@@ -26,7 +26,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void RunInstruction(Instruction instruction, VariableValue context)
 		{
-			var store = new InstructionStore(instruction.ContextName, instruction.ContextDefinition, context);
+			var store = new InstructionStore(instruction, context);
 			var enumerator = instruction.Execute(store);
 
 			StartCoroutine(new JoinEnumerator(enumerator));

@@ -4240,7 +4240,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -6809,11 +6809,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 7808f76519b4aa447979131b37d15f98, type: 2}
     _inputs: []
     _outputs: []
-  Event: 
 --- !u!1 &1541816115
 GameObject:
   m_ObjectHideFlags: 0

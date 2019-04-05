@@ -260,11 +260,15 @@ namespace PiRhoSoft.CompositionEditor
 
 			var inputWidth = (rect.width - rect.height - fromSize.x - toSize.x - spacing * 4) * 0.5f;
 
-			var checkboxRect = new Rect(rect.x, rect.y, rect.height, rect.height);
-			var fromRect = new Rect(checkboxRect.xMax + spacing, rect.y, fromSize.x, rect.height);
-			var minimumRect = new Rect(fromRect.xMax + spacing, rect.y, inputWidth, rect.height);
-			var toRect = new Rect(minimumRect.xMax + spacing, rect.y, toSize.x, rect.height);
-			var maximumRect = new Rect(toRect.xMax + spacing, rect.y, inputWidth, rect.height);
+			var checkboxRect =	RectHelper.TakeWidth(ref rect, rect.height);
+								RectHelper.TakeWidth(ref rect, spacing);
+			var fromRect =		RectHelper.TakeWidth(ref rect, fromSize.x);
+								RectHelper.TakeWidth(ref rect, spacing);
+			var minimumRect =	RectHelper.TakeWidth(ref rect, inputWidth);
+								RectHelper.TakeWidth(ref rect, spacing);
+			var toRect =		RectHelper.TakeWidth(ref rect, toSize.x);
+								RectHelper.TakeWidth(ref rect, spacing);
+			var maximumRect =	RectHelper.TakeWidth(ref rect, inputWidth);
 
 			var useRangeConstraint = GUI.Toggle(checkboxRect, constraint != null, _useRangeConstraintLabel);
 

@@ -40,7 +40,7 @@ MonoBehaviour:
     - {fileID: 114764470530715806}
     - {fileID: 114780222226876822}
     - {fileID: 114390618060680096}
-  StartPosition: {x: -0, y: 0}
+  StartPosition: {x: 0, y: 0}
   Enter: {fileID: 0}
   Process: {fileID: 114506005044156910}
   Exit: {fileID: 0}

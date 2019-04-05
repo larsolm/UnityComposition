@@ -22,8 +22,8 @@ MonoBehaviour:
     - Name: Player
       Definition:
         _type: 17
-        _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
+        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         _tag: Persistent
         _initializer:
           _statement: 
@@ -32,7 +32,7 @@ MonoBehaviour:
     - Name: CurrentSpace
       Definition:
         _type: 2
-        _constraint: 
+        _constraint: 0|35
         _tag: NewGame
         _initializer:
           _statement: Player.StartingSpace
@@ -80,7 +80,7 @@ MonoBehaviour:
         _constraint: 
         _tag: NewGame
         _initializer:
-          _statement: 
+          _statement: false
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Highlight
@@ -93,4 +93,4 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 177
+  _version: 195

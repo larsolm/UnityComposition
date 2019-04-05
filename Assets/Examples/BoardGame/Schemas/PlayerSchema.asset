@@ -20,7 +20,7 @@ MonoBehaviour:
     - Name: Name
       Definition:
         _type: 15
-        _constraint: Red,Green,Blue,Yellow
+        _constraint: +Red,Yellow,Green,Blue
         _tag: 
         _initializer:
           _statement: '"Red"'
@@ -64,4 +64,4 @@ MonoBehaviour:
           _statement: StartSpace - 2
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 207
+  _version: 233
