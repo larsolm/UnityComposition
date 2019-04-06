@@ -16,46 +16,52 @@ MonoBehaviour:
   Tags:
     _items: []
   _definitions:
-  - _name: Name
-    _type: 15
-    _constraint: Red,Yellow,Green,Blue
-    _tag: Always (not saved)
-    _initializer:
-      _statement: '"Red"'
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: Pieces
-    _type: 19
-    _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: StartingSpace
-    _type: 2
-    _constraint: 0|35
-    _tag: Always (not saved)
-    _initializer:
-      _statement: 0
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _name: SelectedPiece
-    _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  - _name: FinishSpace
-    _type: 2
-    _constraint: 0|35
-    _tag: 
-    _initializer:
-      _statement: StartingSpace - 2
-    _isTypeLocked: 1
-    _isConstraintLocked: 0
-  _version: 116
+    _items:
+    - Name: Name
+      Definition:
+        _type: 15
+        _constraint: +Red,Yellow,Green,Blue
+        _tag: 
+        _initializer:
+          _statement: '"Red"'
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Pieces
+      Definition:
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: SelectedPiece
+      Definition:
+        _type: 17
+        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: StartingSpace
+      Definition:
+        _type: 2
+        _constraint: 0|35
+        _tag: 
+        _initializer:
+          _statement: 0
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: FinishSpace
+      Definition:
+        _type: 2
+        _constraint: 0|35
+        _tag: 
+        _initializer:
+          _statement: StartSpace - 2
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 233

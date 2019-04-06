@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextName: context
   ContextDefinition:
-    _type: 0
-    _constraint: 
+    _type: 17
+    _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
     _tag: 
     _initializer:
       _statement: 
@@ -64,19 +65,21 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   Context:
-    Type: 0
+    Type: 1
     Reference:
-      _variable: []
-      _lookups: []
+      _variable:
+      - player
+      _lookups:
+      - 
     Definition:
-      _type: 0
+      _type: 2
       _constraint: 
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AgAAAAAAAAA=
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114261969380187438
@@ -115,7 +118,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114318641242556822}
   Expression:
-    _statement: lfinished = true;
+    _statement: finished = true;
 --- !u!114 &114318641242556822
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -133,7 +136,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Container:
     _variable:
-    - root
+    - player
     - Pieces
     _lookups:
     - 
@@ -143,7 +146,7 @@ MonoBehaviour:
     _lookups: []
   Value:
     _variable:
-    - currentPiece
+    - piece
     _lookups:
     - 
   Loop: {fileID: 114667983929491124}
@@ -216,7 +219,7 @@ MonoBehaviour:
   OnTrue: {fileID: 0}
   OnFalse: {fileID: 114764470530715806}
   Condition:
-    _statement: currentPiece.Finished
+    _statement: piece.Finished
 --- !u!114 &114688480945551876
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -244,7 +247,7 @@ MonoBehaviour:
     _lookups: []
   Value:
     _variable:
-    - currentPlayer
+    - player
     _lookups:
     - 
   Loop: {fileID: 114093446906697678}
@@ -302,4 +305,4 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114390618060680096}
   Expression:
-    _statement: winner = currentPlayer
+    _statement: winner = player

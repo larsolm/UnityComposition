@@ -6,11 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Composition/Graph Runner")]
 	public class GraphRunner : MonoBehaviour
 	{
+		[Tooltip("The event to run if the graph is an EventGraph")]
+		public string Event;
+
 		[Tooltip("The graph to run when this runner is triggered")]
 		public InstructionCaller Graph = new InstructionCaller();
-
-		[Tooltip("The event to run")]
-		public string Event;
 
 		public void Run()
 		{

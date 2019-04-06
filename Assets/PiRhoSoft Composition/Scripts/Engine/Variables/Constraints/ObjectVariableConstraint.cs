@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -13,7 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override bool Read(string data)
 		{
-			Type = System.Type.GetType(data, false);
+			Type = Type.GetType(data, false);
 			return Type != null;
 		}
 
@@ -21,5 +22,17 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return Type != null && Type.IsAssignableFrom(value.ReferenceType);
 		}
+
+		#region Editor Interface
+
+		public List<Type> Types;
+
+		public void SetType(int tab, int selection)
+		{
+			// Account for none
+			Type = selection <= 0 ? null : Types[selection - 1];
+		}
+
+		#endregion
 	}
 }

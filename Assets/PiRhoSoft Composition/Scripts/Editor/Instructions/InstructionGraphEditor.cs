@@ -40,9 +40,10 @@ namespace PiRhoSoft.CompositionEditor
 				InstructionGraphWindow.ShowWindowForGraph(_graph);
 
 			using (new UndoScope(serializedObject))
+			{
 				DrawPropertiesExcluding(serializedObject, "m_Script", "_nodes");
-
-			DrawNodes(_nodesProperty);
+				DrawNodes(_nodesProperty);
+			}
 		}
 
 		protected virtual void SetupNodes(SerializedProperty nodes)

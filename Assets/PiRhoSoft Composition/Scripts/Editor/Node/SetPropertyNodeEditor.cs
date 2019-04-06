@@ -78,13 +78,11 @@ namespace PiRhoSoft.CompositionEditor
 				EditorGUILayout.PropertyField(_targetProperty);
 			}
 
-			using (new UndoScope(_node, false))
-			{
-				var selectedTargetType = TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false);
-				if (selectedTargetType != _node.TargetType)
-					SetTargetType(selectedTargetType);
+			TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false, SetTargetType);
 
-				if (_node.TargetType != null)
+			if (_node.TargetType != null)
+			{
+				using (new UndoScope(_node, false))
 				{
 					var property = Array.IndexOf(_propertyNames, _node.PropertyName);
 					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyNames);
@@ -92,23 +90,32 @@ namespace PiRhoSoft.CompositionEditor
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty], _propertyTypes[selectedProperty]);
 				}
-			}
 
-			if (_node.TargetType != null && !string.IsNullOrEmpty(_node.PropertyName))
-			{
-				using (new UndoScope(serializedObject))
-					EditorGUILayout.PropertyField(_valueProperty);
+				if (!string.IsNullOrEmpty(_node.PropertyName))
+				{
+					using (new UndoScope(serializedObject))
+						EditorGUILayout.PropertyField(_valueProperty);
+				}
 			}
 		}
 
-		private void SetTargetType(Type type)
+		private void SetTargetType(int tab, int selection)
 		{
-			_node.TargetType = type;
-			_node.PropertyName = null;
-			_node.Field = null;
-			_node.Property = null;
+			var types = TypeHelper.GetTypeList<Component>(true, false);
+			var type = types.GetType(selection);
 
-			BuildPropertyList();
+			if (type != _node.TargetType)
+			{
+				using (new UndoScope(_node, false))
+				{
+					_node.TargetType = type;
+					_node.PropertyName = null;
+					_node.Field = null;
+					_node.Property = null;
+
+					BuildPropertyList();
+				}
+			}
 		}
 
 		private void SetProperty(string name, Type type)

@@ -24,7 +24,7 @@ namespace PiRhoSoft.UtilityEditor
 
 			if (HasNone)
 			{
-				if (index >= 0) index += 2; // skip 'None' and separator
+				if (index >= 0) index++; // skip 'None'
 				else index = 0;
 			}
 
@@ -33,23 +33,13 @@ namespace PiRhoSoft.UtilityEditor
 
 		public ScriptableObject GetAsset(int index)
 		{
-			if (HasNone) index -= 2;  // skip 'None' and separator
+			if (HasNone) index--;  // skip 'None'
 			return index >= 0 && index < Assets.Count ? Assets[index] : null;
 		}
 
 		public Type GetType(int index)
 		{
-			if (Types != null)
-			{
-				if (HasNone) index -= 2; // skip 'None' and separator
-				index -= Assets.Count + 1; // skip assets and separator
-
-				return Types.GetType(index);
-			}
-			else
-			{
-				return null;
-			}
+			return Types?.GetType(index);
 		}
 
 		#endregion
@@ -65,6 +55,26 @@ namespace PiRhoSoft.UtilityEditor
 		}
 
 		#region Creation
+
+		public static ScriptableObject CreateAssetWindow(Type type)
+		{
+			var path = EditorUtility.SaveFilePanel("Create a new " + ObjectNames.NicifyVariableName(type.Name), "Assets", type.Name + ".asset", "asset");
+			if (path.Length != 0)
+			{
+				var startIndex = path.IndexOf("Assets");
+
+				if (startIndex > 0)
+				{
+					var relativePath = path.Substring(startIndex);
+					var asset = ScriptableObject.CreateInstance(type);
+					AssetDatabase.CreateAsset(asset, relativePath);
+
+					return asset;
+				}
+			}
+
+			return null;
+		}
 
 		public static AssetType CreateAsset<AssetType>(string name) where AssetType : ScriptableObject
 		{
@@ -190,35 +200,24 @@ namespace PiRhoSoft.UtilityEditor
 				list.Types = includeCreate ? TypeHelper.GetTypeList(assetType, false, true) : null;
 
 				var index = 0;
-				var count = 0;
+				var count = list.Assets.Count;
 				var paths = list.Assets.Select(asset => GetPath(asset));
 				var prefix = FindCommonPath(paths);
 
-				if (includeNone) count += 2; // 'None' and separator
-				count += list.Assets.Count;
-				if (includeCreate) count += list.Types.Names.Length + 1; // separator and types
+				if (includeNone)
+					count++;
 
 				list.Names = new GUIContent[count];
 
 				if (includeNone)
-				{
 					list.Names[index++] = new GUIContent("None");
-					list.Names[index++] = new GUIContent();
-				}
 
 				for (var i = 0; i < list.Assets.Count; i++)
 				{
-					var path = GetPath(list.Assets[i]).Substring(prefix.Length);
-					var name = path.Length > 0 ? path + list.Assets[i].name : list.Assets[i].name;
-					list.Names[index++] = new GUIContent(name);
-				}
-
-				if (includeCreate)
-				{
-					list.Names[index++] = new GUIContent();
-
-					foreach (var name in list.Types.Names)
-						list.Names[index++] = new GUIContent("Create/" + name.text);
+					var asset = list.Assets[i];
+					var path = GetPath(asset).Substring(prefix.Length);
+					var name = path.Length > 0 ? path + asset.name : asset.name;
+					list.Names[index++] = new GUIContent(name, AssetPreview.GetMiniThumbnail(asset) ?? AssetPreview.GetMiniTypeThumbnail(asset.GetType()));
 				}
 			}
 

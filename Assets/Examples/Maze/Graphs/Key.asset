@@ -12,6 +12,47 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
   m_Name: Key
   m_EditorClassIdentifier: 
+  ContextName: key
+  ContextDefinition:
+    _type: 17
+    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items:
+    - Name: KeyName
+      Definition:
+        _type: 15
+        _constraint: Red,Yellow,Green,Blue
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
+    - Name: KeyCount
+      Definition:
+        _type: 2
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
+  Outputs:
+    _items:
+    - Name: KeyCount
+      Definition:
+        _type: 0
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   _nodes:
     _items:
     - {fileID: 114416159429543150}
@@ -39,7 +80,7 @@ MonoBehaviour:
   Next: {fileID: 114523905499944702}
   Target:
     _variable:
-    - root
+    - key
     _lookups:
     - 
 --- !u!114 &114523905499944702
@@ -60,8 +101,10 @@ MonoBehaviour:
   Next: {fileID: 114613277615437018}
   AudioPlayer:
     _variable:
+    - global
     - Player
     _lookups:
+    - 
     - 
   Sound:
     Type: 0
@@ -119,9 +162,9 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  Interaction: 3
+  WaitForCompletion: 0
+  AutoHide: 1
   WaitTime: 2
-  IsLast: 0
   Message:
     Text: '{input.KeyName} Key Acquired!'
 --- !u!114 &114840982862560130

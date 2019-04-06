@@ -27,15 +27,14 @@ namespace PiRhoSoft.UtilityEditor
 			public ControlType Control;
 		}
 
-		private Dictionary<string, ControlData> _controls = new Dictionary<string, ControlData>();
+		private static Dictionary<string, ControlData> _controls = new Dictionary<string, ControlData>();
 
 		private ControlType GetControl(SerializedProperty property)
 		{
 			var path = property.serializedObject.targetObject.name + property.propertyPath;
 
-			// if an object is deleted, then a new object with the same name is created (or some other scenarios where
-			// a new serialized object is created wrapping the same object), the property path won't change but the
-			// data in most cases shouldn't be reused
+			// if an object is deleted, then a new object with the same name is created (or in cases where the serialized object changes),
+			// the property path won't change but the data should be recreated for the new object
 
 			if (!_controls.TryGetValue(path, out ControlData control) || control.Object != property.serializedObject)
 			{

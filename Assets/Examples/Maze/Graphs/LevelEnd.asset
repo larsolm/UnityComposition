@@ -12,6 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
   m_Name: LevelEnd
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 17
+    _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
   _nodes:
     _items:
     - {fileID: 114565799762134696}
@@ -94,13 +108,13 @@ MonoBehaviour:
     _lookups:
     - 
     - 
-  Interaction: 0
+  WaitForCompletion: 1
+  AutoHide: 1
   WaitTime: 0
-  IsLast: 1
   Message:
     Text: 'Complete!
 
-      Time: {local.Time}
+      Time: {time}
 
       <size=50%>(Press Enter to load next level)'
 --- !u!114 &114539580467139412
@@ -120,9 +134,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114372619974763020}
   Expression:
-    _statement: 'Player.LevelFinished = true;
+    _statement: 'global.LevelFinished = true;
 
-      local.Time = Time() - Player.StartTime;'
+      time = Time() - global.StartTime;'
 --- !u!114 &114565799762134696
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -141,8 +155,10 @@ MonoBehaviour:
   Next: {fileID: 114205645420715292}
   Target:
     _variable:
+    - global
     - Player
     _lookups:
+    - 
     - 
 --- !u!114 &114856192172782058
 MonoBehaviour:
@@ -178,7 +194,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Scene:
-    Path: Assets/Examples/Scenes/Maze/Maze2.unity
+    Path: 
   WaitForCompletion: 1
   CleanupAssets: 1
   Additive: 0

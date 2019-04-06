@@ -669,61 +669,26 @@ MonoBehaviour:
   OnEnter:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyName
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
-      _valueData: AAAAAA==
+      _valueData: DwAAAAA=
       _valueObjects: []
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyCount
+      Type: 1
       Reference:
-        _variable:
-        - Player
-        - RedKey
-        _lookups:
-        - 
-        - 
-      _valueData: 
+        _variable: []
+        _lookups: []
+      _valueData: AgAAAAAAAAA=
       _valueObjects: []
     _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyCount
+      Type: 0
       Reference:
-        _variable:
-        - Player
-        - RedKey
-        _lookups:
-        - 
-        - 
+        _variable: []
+        _lookups: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -1046,61 +1011,26 @@ MonoBehaviour:
   OnEnter:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyName
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
-      _valueData: AAAAAA==
+      _valueData: DwAAAANSZWQ=
       _valueObjects: []
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyCount
+      Type: 1
       Reference:
-        _variable:
-        - Player
-        - BlueKey
-        _lookups:
-        - 
-        - 
-      _valueData: 
+        _variable: []
+        _lookups: []
+      _valueData: AgAAAAAAAAA=
       _valueObjects: []
     _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyCount
+      Type: 1
       Reference:
-        _variable:
-        - Player
-        - BlueKey
-        _lookups:
-        - 
-        - 
+        _variable: []
+        _lookups: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -1269,11 +1199,11 @@ GameObject:
   m_Component:
   - component: {fileID: 863000629}
   - component: {fileID: 863000628}
-  - component: {fileID: 863000627}
   - component: {fileID: 863000626}
   - component: {fileID: 863000625}
   - component: {fileID: 863000631}
   - component: {fileID: 863000630}
+  - component: {fileID: 863000627}
   - component: {fileID: 863000633}
   - component: {fileID: 863000632}
   m_Layer: 0
@@ -1332,9 +1262,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34c0c14dd663d042a12ed42c60b8752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: 647905b9567d4a24cbb18c2ba0fb8dd3, type: 2}
+  Schema: {fileID: 0}
   Variables:
-    _version: 17
+    _version: 0
     _variablesData: []
     _variablesObjects: []
   Camera: {fileID: 663784546}
@@ -1521,24 +1451,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnAwake:
+  Event: 
+  Graph:
     _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}
     _inputs:
-    - Type: 1
-      Definition:
-        _name: LevelName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: LevelName
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
-      _valueData: DwAAAAA=
+      _valueData: DwAAAAdMZXZlbCAx
       _valueObjects: []
     _outputs: []
 --- !u!114 &863000633
@@ -1553,8 +1475,67 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _variablesData: []
-  _variablesObjects: []
+  Constraints:
+  - _type: 17
+    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 2
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 2
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 2
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 2
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 2
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 2
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _variablesData:
+  - BlBsYXllchEAAAAAAAAA
+  - BlJlZEtleQIAAAAAAAAA
+  - B0JsdWVLZXkCAAAAAAAAAA==
+  - CVllbGxvd0tleQIAAAAAAAAA
+  - CEdyZWVuS2V5AgAAAAAAAAA=
+  - Bkpld2VscwIAAAAAAAAA
+  - DEpld2Vsc05lZWRlZAIAAAAAAAAA
+  _variablesObjects:
+  - {fileID: 863000627}
 --- !u!1 &867759259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,61 +1662,26 @@ MonoBehaviour:
   OnEnter:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyName
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
-      _valueData: AAAAAA==
+      _valueData: DwAAAANSZWQ=
       _valueObjects: []
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyCount
+      Type: 1
       Reference:
-        _variable:
-        - Player
-        - GreenKey
-        _lookups:
-        - 
-        - 
-      _valueData: 
+        _variable: []
+        _lookups: []
+      _valueData: AgAAAAAAAAA=
       _valueObjects: []
     _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: KeyCount
+      Type: 0
       Reference:
-        _variable:
-        - Player
-        - GreenKey
-        _lookups:
-        - 
-        - 
+        _variable: []
+        _lookups: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2525,19 +2471,10 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
+    _instruction: {fileID: 0}
     _inputs:
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 0
       Reference:
         _variable:
         - Player
@@ -2547,34 +2484,16 @@ MonoBehaviour:
         - 
       _valueData: 
       _valueObjects: []
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
       _valueData: AAAAAA==
       _valueObjects: []
     _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 1
       Reference:
         _variable:
         - Player
@@ -2710,63 +2629,9 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
-    _inputs:
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable:
-        - Player
-        - RedKey
-        _lookups:
-        - 
-        - 
-      _valueData: 
-      _valueObjects: []
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable: []
-        _lookups: []
-      _valueData: AAAAAA==
-      _valueObjects: []
-    _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable:
-        - Player
-        - RedKey
-        _lookups:
-        - 
-        - 
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2895,63 +2760,9 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
-    _inputs:
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable:
-        - Player
-        - YellowKey
-        _lookups:
-        - 
-        - 
-      _valueData: 
-      _valueObjects: []
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable: []
-        _lookups: []
-      _valueData: AAAAAA==
-      _valueObjects: []
-    _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
-      Reference:
-        _variable:
-        - Player
-        - YellowKey
-        _lookups:
-        - 
-        - 
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3292,19 +3103,10 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 11400000, guid: 38fc06a07bb8810458cd9f812bad45d6, type: 2}
+    _instruction: {fileID: 0}
     _inputs:
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 0
       Reference:
         _variable:
         - Player
@@ -3314,34 +3116,16 @@ MonoBehaviour:
         - 
       _valueData: 
       _valueObjects: []
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
       _valueData: AAAAAA==
       _valueObjects: []
     _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 1
       Reference:
         _variable:
         - Player
@@ -3643,33 +3427,15 @@ MonoBehaviour:
   OnEnter:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
-    - Type: 1
-      Definition:
-        _name: KeyName
-        _type: 15
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 1
       Reference:
         _variable: []
         _lookups: []
       _valueData: AAAAAA==
       _valueObjects: []
-    - Type: 0
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 0
       Reference:
         _variable:
         - Player
@@ -3680,17 +3446,8 @@ MonoBehaviour:
       _valueData: 
       _valueObjects: []
     _outputs:
-    - Type: 1
-      Definition:
-        _name: KeyCount
-        _type: 0
-        _tag: 
-        _initializer:
-          _statement: 
-        _useRangeConstraint: 0
-        _minimumConstraint: 0
-        _maximumConstraint: 0
-        _typeConstraint: 
+    - Name: 
+      Type: 1
       Reference:
         _variable:
         - Player

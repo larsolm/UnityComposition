@@ -285,9 +285,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
+    _version: 3
     _variablesData:
     - DEN1cnJlbnRQaWVjZQAAAAA=
     _variablesObjects: []
@@ -541,11 +541,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &175348905
 GameObject:
@@ -643,12 +642,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 116
+    _version: 207
     _variablesData:
     - BE5hbWUPAAAABlllbGxvdw==
     - BlBpZWNlcxMAAAADAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAA
-    - DVN0YXJ0aW5nU3BhY2UCAAAABgAAAA==
     - DVNlbGVjdGVkUGllY2UAAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAABgAAAA==
     - C0ZpbmlzaFNwYWNlAgAAAAQAAAA=
     _variablesObjects:
     - {fileID: 1742799527}
@@ -748,16 +747,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAEAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAPAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAMzPzQMP1SMAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAADMz80DD9VhAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAMzPzQMP1SMAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAADMz80DD9VhAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 2137111255}
@@ -853,11 +851,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &257233741
 GameObject:
@@ -1017,11 +1014,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &291751411
 GameObject:
@@ -1277,16 +1273,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAEAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAGAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA6SZ5QI2X7kAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAFK4LsDXo+hAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA6SZ5QI2X7kAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAFK4LsDXo+hAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 175348908}
@@ -1483,11 +1478,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &397694033
 GameObject:
@@ -1583,16 +1577,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAIAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAzczkwDMzM0AAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAM3M5MDhenTAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAzczkwDMzM0AAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAM3M5MDhenTAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1746312865}
@@ -1688,11 +1681,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &476976521
 GameObject:
@@ -1865,11 +1857,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &507648850
 GameObject:
@@ -1963,11 +1954,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &523651962
 GameObject:
@@ -2061,11 +2051,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &525998821
 GameObject:
@@ -2313,8 +2302,8 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
-  m_fontSizeBase: 50
+  m_fontSize: 36
+  m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -2331,7 +2320,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -2655,16 +2644,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAAAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAPAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA7FHQQNejQMAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAOxR0EAzM3NAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA7FHQQNejQMAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAOxR0EAzM3NAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 2137111255}
@@ -2839,11 +2827,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &762444998
 GameObject:
@@ -3016,11 +3003,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &807934846
 GameObject:
@@ -3114,11 +3100,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &850895883
 GameObject:
@@ -3212,11 +3197,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &860180873
 GameObject:
@@ -3389,11 +3373,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &885766903
 GameObject:
@@ -3449,7 +3432,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 885766906}
   Condition:
-    _statement: Roll >= 4
+    _statement: global.Roll >= 4
 --- !u!114 &885766906
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3464,7 +3447,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -3660,11 +3643,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &922073038
 GameObject:
@@ -3758,11 +3740,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &963431518
 GameObject:
@@ -4093,9 +4074,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
+    _version: 3
     _variablesData:
     - DEN1cnJlbnRQaWVjZQAAAAA=
     _variablesObjects: []
@@ -4191,11 +4172,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1047783525
 GameObject:
@@ -4260,7 +4240,7 @@ Camera:
   m_TargetDisplay: 0
   m_TargetEye: 3
   m_HDR: 1
-  m_AllowMSAA: 1
+  m_AllowMSAA: 0
   m_AllowDynamicResolution: 0
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
@@ -4350,7 +4330,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 1051963475}
   Condition:
-    _statement: Roll == 6
+    _statement: global.Roll == 6
 --- !u!114 &1051963475
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4365,7 +4345,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -4482,16 +4462,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAIAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAPAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA16PgQHE9esAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAB+F20B7FC5AAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAA16PgQHE9esAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAB+F20B7FC5AAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 2137111255}
@@ -4587,11 +4566,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1120201182
 GameObject:
@@ -4781,9 +4759,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
+    _version: 3
     _variablesData:
     - DEN1cnJlbnRQaWVjZQAAAAA=
     _variablesObjects: []
@@ -4920,7 +4898,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 1176230111}
   Condition:
-    _statement: Roll != 1
+    _statement: global.Roll != 1
 --- !u!114 &1176230111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4935,7 +4913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5129,11 +5107,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1271150014
 GameObject:
@@ -5227,11 +5204,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1304832350
 GameObject:
@@ -5410,12 +5386,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 116
+    _version: 207
     _variablesData:
     - BE5hbWUPAAAAA1JlZA==
     - BlBpZWNlcxMAAAADAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAA
-    - DVN0YXJ0aW5nU3BhY2UCAAAAGAAAAA==
     - DVNlbGVjdGVkUGllY2UAAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAAGAAAAA==
     - C0ZpbmlzaFNwYWNlAgAAABYAAAA=
     _variablesObjects:
     - {fileID: 2115652726}
@@ -5554,7 +5530,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 1373607108}
   Condition:
-    _statement: Roll >= 4
+    _statement: global.Roll >= 4
 --- !u!114 &1373607108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5569,7 +5545,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -5684,11 +5660,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1390020151
 GameObject:
@@ -5782,11 +5757,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1424553994
 GameObject:
@@ -5882,16 +5856,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAIAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAYAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK5XwGZm9sAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAOxRWEBmZvbAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK5XwGZm9sAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAOxRWEBmZvbAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1315274200}
@@ -5949,7 +5922,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 1431587072}
   Condition:
-    _statement: Roll == 6
+    _statement: global.Roll == 6
 --- !u!114 &1431587072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5964,7 +5937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6039,7 +6012,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -6078,7 +6051,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 1452397023}
   Condition:
-    _statement: Roll % 2 == 1
+    _statement: global.Roll % 2 == 1
 --- !u!1 &1453955088
 GameObject:
   m_ObjectHideFlags: 0
@@ -6171,11 +6144,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1462689797
 GameObject:
@@ -6269,11 +6241,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1471280072
 GameObject:
@@ -6367,11 +6338,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1482112306
 GameObject:
@@ -6465,11 +6435,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1508270032
 GameObject:
@@ -6563,9 +6532,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
+    _version: 3
     _variablesData:
     - DEN1cnJlbnRQaWVjZQAAAAA=
     _variablesObjects: []
@@ -6661,11 +6630,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1518509051
 GameObject:
@@ -6748,8 +6716,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Constraints:
-  - _name: 
-    _type: 19
+  - _type: 19
     _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     _tag: 
@@ -6757,8 +6724,7 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
-  - _name: 
-    _type: 19
+  - _type: 19
     _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     _tag: 
@@ -6766,8 +6732,7 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
-  - _name: 
-    _type: 19
+  - _type: 19
     _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     _tag: 
@@ -6844,11 +6809,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 7808f76519b4aa447979131b37d15f98, type: 2}
     _inputs: []
     _outputs: []
-  Event: 
 --- !u!1 &1541816115
 GameObject:
   m_ObjectHideFlags: 0
@@ -6941,11 +6906,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1557897069
 GameObject:
@@ -7197,11 +7161,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1639193542
 GameObject:
@@ -7547,11 +7510,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1722683692
 GameObject:
@@ -7607,7 +7569,7 @@ MonoBehaviour:
   AutoUpdate: 1
   Behaviour: {fileID: 1722683695}
   Condition:
-    _statement: Roll != 1
+    _statement: global.Roll != 1
 --- !u!114 &1722683695
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7622,7 +7584,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -7739,16 +7701,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAAAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAGAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAaJE1QCPb8UAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAFyPcsBI4fJAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAaJE1QCPb8UAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAFyPcsBI4fJAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 175348908}
@@ -7848,12 +7809,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 116
+    _version: 207
     _variablesData:
     - BE5hbWUPAAAABEJsdWU=
     - BlBpZWNlcxMAAAADAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAA
-    - DVN0YXJ0aW5nU3BhY2UCAAAAIQAAAA==
     - DVNlbGVjdGVkUGllY2UAAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAAIQAAAA==
     - C0ZpbmlzaFNwYWNlAgAAAB8AAAA=
     _variablesObjects:
     - {fileID: 1813092580}
@@ -7953,16 +7914,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAIAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAGAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAApptUQBKD0EAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAK5HUcBmZs5AAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAApptUQBKD0EAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAK5HUcBmZs5AAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 175348908}
@@ -8060,16 +8020,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAAAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAApHD1wIXrcUAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAKRw9cAUrjfAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAApHD1wIXrcUAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAKRw9cAUrjfAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1746312865}
@@ -8167,16 +8126,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAEAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK7PwHsUbkAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAFK4zsAUrkfAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAFK7PwHsUbkAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAFK4zsAUrkfAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1746312865}
@@ -8272,11 +8230,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &1949420441
 GameObject:
@@ -8449,11 +8406,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &2046480223
 GameObject:
@@ -8547,11 +8503,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: b6f520946819a2c4083246904cfae522, type: 2}
+  Schema: {fileID: 11400000, guid: 9a8ed501f76d7a7449dfa48e31ee3e7a, type: 2}
   Variables:
-    _version: 2
-    _variablesData:
-    - DEN1cnJlbnRQaWVjZQAAAAA=
+    _version: 0
+    _variablesData: []
     _variablesObjects: []
 --- !u!1 &2106075347
 GameObject:
@@ -8647,16 +8602,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAEAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAYAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAArkcxwB+F28AAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAOxRgECkcNXAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAArkcxwB+F28AAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAOxRgECkcNXAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1315274200}
@@ -8754,16 +8708,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 106
+    _version: 177
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
-    - BUluZGV4AgAAAAAAAAA=
     - DEN1cnJlbnRTcGFjZQIAAAAYAAAA
+    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAcT16wEjh2sAAAAAA
+    - DkZpbmlzaFBvc2l0aW9uCQAAAJqZOUAUrtfAAAAAAA==
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - EFN0YXJ0aW5nUG9zaXRpb24JAAAAcT16wEjh2sAAAAAA
-    - DkZpbmlzaFBvc2l0aW9uCQAAAJqZOUAUrtfAAAAAAA==
     - CUhpZ2hsaWdodAAAAAA=
     _variablesObjects:
     - {fileID: 1315274200}
@@ -8863,12 +8816,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 26abe7f9b523d624cbe14fb90c882549, type: 2}
   Variables:
-    _version: 116
+    _version: 207
     _variablesData:
     - BE5hbWUPAAAABUdyZWVu
     - BlBpZWNlcxMAAAADAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAA
-    - DVN0YXJ0aW5nU3BhY2UCAAAADwAAAA==
     - DVNlbGVjdGVkUGllY2UAAAAA
+    - DVN0YXJ0aW5nU3BhY2UCAAAADwAAAA==
     - C0ZpbmlzaFNwYWNlAgAAAA0AAAA=
     _variablesObjects:
     - {fileID: 572341738}

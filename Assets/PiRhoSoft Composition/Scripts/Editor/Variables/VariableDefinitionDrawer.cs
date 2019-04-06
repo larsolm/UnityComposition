@@ -12,20 +12,20 @@ namespace PiRhoSoft.CompositionEditor
 
 		public static VariableDefinition Draw(VariableDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel)
 		{
-			var rect = EditorGUILayout.GetControlRect(false, ValueDefinitionDrawer.GetHeight(definition.Definition, initializer, tags));
+			var rect = EditorGUILayout.GetControlRect(false, ValueDefinitionControl.GetHeight(definition.Definition, initializer, tags));
 			return Draw(rect, definition, initializer, tags, showConstraintLabel);
 		}
 
 		public static VariableDefinition Draw(Rect position, VariableDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel)
 		{
-			definition.Definition = ValueDefinitionDrawer.Draw(position, new GUIContent(definition.Name), definition.Definition, initializer, tags, showConstraintLabel);
+			definition.Definition = ValueDefinitionControl.Draw(position, new GUIContent(definition.Name), definition.Definition, initializer, tags, showConstraintLabel);
 			return definition;
 		}
 
 		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
 		{
 			var definitionProperty = property.FindPropertyRelative(nameof(VariableDefinition.Definition));
-			return ValueDefinitionDrawer.GetHeight(definitionProperty);
+			return EditorGUI.GetPropertyHeight(definitionProperty);
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEditor
 			var nameProperty = property.FindPropertyRelative(nameof(VariableDefinition.Name));
 			var definitionProperty = property.FindPropertyRelative(nameof(VariableDefinition.Definition));
 
-			ValueDefinitionDrawer.Draw(position, definitionProperty, new GUIContent(nameProperty.stringValue));
+			EditorGUI.PropertyField(position, definitionProperty, new GUIContent(nameProperty.stringValue));
 		}
 	}
 }

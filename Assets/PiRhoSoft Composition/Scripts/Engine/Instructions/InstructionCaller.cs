@@ -27,9 +27,9 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Instruction)
 			{
-				var store = new InstructionStore(Instruction.ContextName, Instruction.ContextDefinition, context);
+				var store = new InstructionStore(Instruction, context);
 
-				store.WriteInputs(_inputs);
+				store.WriteInputs(this, _inputs);
 				store.WriteOutputs(_outputs);
 				yield return Instruction.Execute(store);
 				store.ReadOutputs(_outputs);
@@ -46,16 +46,30 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableDefinition GetInputDefinition(InstructionInput input)
 		{
-			return Instruction != null
-				? Instruction.Inputs.Where(i => input.Name == i.Name).FirstOrDefault()
-				: new VariableDefinition { Name = input.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
+			if (Instruction)
+			{
+				foreach (var definition in Instruction.Inputs)
+				{
+					if (input.Name == definition.Name)
+						return definition;
+				}
+			}
+
+			return new VariableDefinition { Name = input.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
 		}
 
 		public VariableDefinition GetOutputDefinition(InstructionOutput output)
 		{
-			return Instruction != null
-				? Instruction.Outputs.Where(o => output.Name == o.Name).FirstOrDefault()
-				: new VariableDefinition { Name = output.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
+			if (Instruction)
+			{
+				foreach (var definition in Instruction.Outputs)
+				{
+					if (output.Name == definition.Name)
+						return definition;
+				}
+			}
+
+			return new VariableDefinition { Name = output.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
 		}
 
 		private void UpdateInputs()
