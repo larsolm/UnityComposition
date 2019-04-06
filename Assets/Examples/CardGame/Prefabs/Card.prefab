@@ -200,16 +200,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 7462663e621bccc4196e3139458e6f96, type: 2}
   Variables:
-    _version: 170
+    _version: 184
     _variablesData:
     - BFJhbmsPAAAAAA==
     - BUluZGV4AgAAAAAAAAA=
-    - BFN1aXQAAAAA
+    - BFN1aXQRAAAAAAAAAA==
     - BkNvbHVtbgIAAAAAAAAA
     - A1JvdwIAAAAAAAAA
     - CENvbXBsZXRlAQAAAAA=
     - B01vdmFibGUBAAAAAA==
-    _variablesObjects: []
+    _variablesObjects:
+    - {fileID: 0}
 --- !u!114 &3439422775805371005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,14 +520,14 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 0
   Variable:
-    _variable:
-    - Card
-    - Suit
-    - Color
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: Card.Suit.Color
+    _tokens:
+    - Type: 0
+      Text: Card
+    - Type: 0
+      Text: Suit
+    - Type: 0
+      Text: Color
 --- !u!114 &3439422776283744777
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -542,12 +543,12 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 0
   Variable:
-    _variable:
-    - Card
-    - Rank
-    _lookups:
-    - 
-    - 
+    _variable: Card.Rank
+    _tokens:
+    - Type: 0
+      Text: Card
+    - Type: 0
+      Text: Rank
 --- !u!114 &1053607631120851452
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -662,14 +663,8 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 0
   Variable:
-    _variable:
-    - Card
-    - Suit
-    - Color
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: 
+    _tokens: []
 --- !u!114 &6870339411475911359
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -685,14 +680,14 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 0
   Variable:
-    _variable:
-    - Card
-    - Suit
-    - Sprite
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: Card.Suit.Sprite
+    _tokens:
+    - Type: 0
+      Text: Card
+    - Type: 0
+      Text: Suit
+    - Type: 0
+      Text: Sprite
 --- !u!114 &246462522293454649
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -88,24 +88,14 @@ MonoBehaviour:
   GraphPosition: {x: 1088, y: 51.2}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - State
-    - Aces
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.State.Aces
+    _tokens: []
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - local
-    - ace
-    _lookups:
-    - 
-    - 
+    _variable: local.ace
+    _tokens: []
   Loop: {fileID: 114580086176516034}
 --- !u!114 &114504160098888134
 MonoBehaviour:
@@ -183,24 +173,14 @@ MonoBehaviour:
   GraphPosition: {x: 1088, y: -38.4}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - State
-    - Aces
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.State.Aces
+    _tokens: []
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - local
-    - ace
-    _lookups:
-    - 
-    - 
+    _variable: local.ace
+    _tokens: []
   Loop: {fileID: 114586229638486660}
 --- !u!114 &114853665359960698
 MonoBehaviour:
@@ -261,22 +241,12 @@ MonoBehaviour:
   GraphPosition: {x: -192, y: -0}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - State
-    - Cards
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.State.Cards
+    _tokens: []
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens: []
   Loop: {fileID: 114504160098888134}

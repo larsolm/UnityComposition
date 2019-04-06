@@ -1,17 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class IntBoundsVariableHandler : VariableHandler
 	{
-		public override VariableValue CreateDefault(VariableConstraint constraint)
-		{
-			return VariableValue.Create(new BoundsInt());
-		}
+		protected override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(new BoundsInt());
+		protected override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.IntBounds);
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.IntBounds.min.x);
 			writer.Write(value.IntBounds.min.y);
@@ -21,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.IntBounds.size.z);
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var x = reader.ReadInt32();
 			var y = reader.ReadInt32();
@@ -30,64 +29,69 @@ namespace PiRhoSoft.CompositionEngine
 			var h = reader.ReadInt32();
 			var d = reader.ReadInt32();
 
-			value = VariableValue.Create(new BoundsInt(x, y, z, w, h, d));
+			return VariableValue.Create(new BoundsInt(new Vector3Int(x, y, z), new Vector3Int(w, h, d)));
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
-			switch (lookup)
+			if (lookup.Type == VariableType.String)
 			{
-				case "x": return VariableValue.Create(owner.IntBounds.min.x);
-				case "y": return VariableValue.Create(owner.IntBounds.min.y);
-				case "z": return VariableValue.Create(owner.IntBounds.min.z);
-				case "w": return VariableValue.Create(owner.IntBounds.size.x);
-				case "h": return VariableValue.Create(owner.IntBounds.size.y);
-				case "d": return VariableValue.Create(owner.IntBounds.size.z);
-				default: return VariableValue.Empty;
-			}
-		}
-
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
-		{
-			if (value.Type == VariableType.Int)
-			{
-				switch (lookup)
+				switch (lookup.String)
 				{
-					case "x":
+					case "x": return VariableValue.Create(owner.IntBounds.min.x);
+					case "y": return VariableValue.Create(owner.IntBounds.min.y);
+					case "z": return VariableValue.Create(owner.IntBounds.min.z);
+					case "w": return VariableValue.Create(owner.IntBounds.size.x);
+					case "h": return VariableValue.Create(owner.IntBounds.size.y);
+					case "d": return VariableValue.Create(owner.IntBounds.size.z);
+				}
+			}
+
+			return VariableValue.Empty;
+		}
+
+		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		{
+			if (value.TryGetInt(out var number))
+			{
+				if (lookup.Type == VariableType.String)
+				{
+					switch (lookup.String)
 					{
-						owner = VariableValue.Create(new BoundsInt(new Vector3Int(value.Int, owner.IntBounds.min.y, owner.IntBounds.min.z), owner.IntBounds.size));
-						return SetVariableResult.Success;
-					}
-					case "y":
-					{
-						owner = VariableValue.Create(new BoundsInt(new Vector3Int(owner.IntBounds.min.x, value.Int, owner.IntBounds.min.z), owner.IntBounds.size));
-						return SetVariableResult.Success;
-					}
-					case "z":
-					{
-						owner = VariableValue.Create(new BoundsInt(new Vector3Int(owner.IntBounds.min.x, owner.IntBounds.min.y, value.Int), owner.IntBounds.size));
-						return SetVariableResult.Success;
-					}
-					case "w":
-					{
-						owner = VariableValue.Create(new BoundsInt(owner.IntBounds.min, new Vector3Int(value.Int, owner.IntBounds.size.y, owner.IntBounds.size.z)));
-						return SetVariableResult.Success;
-					}
-					case "h":
-					{
-						owner = VariableValue.Create(new BoundsInt(owner.IntBounds.min, new Vector3Int(owner.IntBounds.size.x, value.Int, owner.IntBounds.size.z)));
-						return SetVariableResult.Success;
-					}
-					case "d":
-					{
-						owner = VariableValue.Create(new BoundsInt(owner.IntBounds.min, new Vector3Int(owner.IntBounds.size.x, owner.IntBounds.size.y, value.Int)));
-						return SetVariableResult.Success;
-					}
-					default:
-					{
-						return SetVariableResult.NotFound;
+						case "x":
+						{
+							owner = VariableValue.Create(new BoundsInt(new Vector3Int(number, owner.IntBounds.min.y, owner.IntBounds.min.z), owner.IntBounds.size));
+							return SetVariableResult.Success;
+						}
+						case "y":
+						{
+							owner = VariableValue.Create(new BoundsInt(new Vector3Int(owner.IntBounds.min.x, number, owner.IntBounds.min.z), owner.IntBounds.size));
+							return SetVariableResult.Success;
+						}
+						case "z":
+						{
+							owner = VariableValue.Create(new BoundsInt(new Vector3Int(owner.IntBounds.min.x, owner.IntBounds.min.y, number), owner.IntBounds.size));
+							return SetVariableResult.Success;
+						}
+						case "w":
+						{
+							owner = VariableValue.Create(new BoundsInt(owner.IntBounds.min, new Vector3Int(number, owner.IntBounds.size.y, owner.IntBounds.size.z)));
+							return SetVariableResult.Success;
+						}
+						case "h":
+						{
+							owner = VariableValue.Create(new BoundsInt(owner.IntBounds.min, new Vector3Int(owner.IntBounds.size.x, number, owner.IntBounds.size.z)));
+							return SetVariableResult.Success;
+						}
+						case "d":
+						{
+							owner = VariableValue.Create(new BoundsInt(owner.IntBounds.min, new Vector3Int(owner.IntBounds.size.x, owner.IntBounds.size.y, number)));
+							return SetVariableResult.Success;
+						}
 					}
 				}
+
+				return SetVariableResult.NotFound;
 			}
 			else
 			{
@@ -95,10 +99,10 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
-			if (right.TryGetIntBounds(out var intBounds))
-				return left.IntBounds == intBounds;
+			if (right.TryGetIntBounds(out var bounds))
+				return left.IntBounds == bounds;
 			else
 				return null;
 		}

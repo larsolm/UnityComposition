@@ -79,7 +79,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			if (value.IsEmpty)
 			{
-				EditorGUI.LabelField(rect, name, VariableValue.EmptyString);
+				EditorGUI.LabelField(rect, name, EmptyVariableHandler.EmptyText);
 			}
 			else
 			{

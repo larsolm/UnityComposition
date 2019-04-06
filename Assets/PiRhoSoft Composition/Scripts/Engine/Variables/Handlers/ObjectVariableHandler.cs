@@ -1,73 +1,75 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class ObjectVariableHandler : VariableHandler
 	{
+		public const string NullText = "(null)";
+
 		private const string _gameObjectName = "GameObject";
 
 		protected override VariableConstraint CreateConstraint() => new ObjectVariableConstraint();
 
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create((Object)null);
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void ToString_(VariableValue value, StringBuilder builder)
+		{
+			if (value.Object == null)
+				builder.Append(NullText);
+			else
+				builder.Append(value.Object.name);
+		}
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(objects.Count);
 			objects.Add(value.Object);
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var index = reader.ReadInt32();
-			value = VariableValue.Create(objects[index]);
+			return VariableValue.Create(objects[index]);
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (owner.HasList)
 			{
-				var value = ListVariableHandler.ListLookup(owner, lookup);
+				var value = ListVariableHandler.LookupInList(owner, lookup);
 				if (!value.IsEmpty)
 					return value;
 			}
 
 			if (owner.HasStore)
 			{
-				var value = StoreVariableHandler.StoreLookup(owner, lookup);
+				var value = StoreVariableHandler.LookupInStore(owner, lookup);
 				if (!value.IsEmpty)
 					return value;
 			}
 
-			if (lookup == _gameObjectName)
-			{
-				var gameObject = ComponentHelper.GetAsGameObject(owner.Object);
-				return VariableValue.Create(gameObject);
-			}
-			else
-			{
-				var component = ComponentHelper.GetAsComponent(owner.Object, lookup);
-				return VariableValue.Create(component);
-			}
+			return VariableValue.Empty;
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (owner.HasList)
 			{
-				var result = ListVariableHandler.ListApply(ref owner, lookup, value);
+				var result = ListVariableHandler.ApplyToList(ref owner, lookup, value);
 				if (result == SetVariableResult.Success)
 					return result;
 			}
 
 			if (owner.HasStore)
 			{
-				var result = StoreVariableHandler.StoreApply(ref owner, lookup, value);
+				var result = StoreVariableHandler.ApplyToStore(ref owner, lookup, value);
 				if (result == SetVariableResult.Success)
 					return result;
 			}
@@ -75,7 +77,21 @@ namespace PiRhoSoft.CompositionEngine
 			return SetVariableResult.ReadOnly;
 		}
 
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override VariableValue Cast_(VariableValue owner, string type)
+		{
+			if (type == _gameObjectName)
+			{
+				var gameObject = ComponentHelper.GetAsGameObject(owner.Object);
+				return VariableValue.Create(gameObject);
+			}
+			else
+			{
+				var component = ComponentHelper.GetAsComponent(owner.Object, type);
+				return VariableValue.Create(component);
+			}
+		}
+
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.IsEmpty)
 				return left.IsNull;

@@ -9,10 +9,14 @@ namespace PiRhoSoft.CompositionEditor
 	public class ExpressionControl : ObjectControl<Expression>
 	{
 		private Expression _expression;
+		private string _lastError;
 
 		public static float GetHeight(Expression expression, bool foldout)
 		{
-			return foldout ? FoldoutStringDrawer.GetHeight(expression.IsExpanded) : RectHelper.LineHeight * 5;
+			var expressionHeight = foldout ? FoldoutStringDrawer.GetHeight(expression.IsExpanded) : RectHelper.LineHeight * 5;
+			var errorHeight = GetErrorHeight(expression, foldout);
+
+			return expressionHeight + errorHeight;
 		}
 
 		public static void Draw(Expression expression, GUIContent label)
@@ -25,6 +29,8 @@ namespace PiRhoSoft.CompositionEditor
 		public static void Draw(Rect position, Expression expression, GUIContent label)
 		{
 			var rect = RectHelper.TakeLine(ref position);
+			var errorHeight = GetErrorHeight(expression, false);
+			var errorRect = RectHelper.TakeTrailingHeight(ref position, errorHeight);
 
 			EditorGUI.LabelField(rect, label);
 
@@ -34,10 +40,15 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					var statement = EditorGUI.TextArea(position, expression.Statement);
 
-					if (changes.changed)
-						expression.SetStatement(statement);
+					if (changes.changed || (expression.HasError && string.IsNullOrEmpty(expression.LastResult)))
+					{
+						var result = expression.SetStatement(statement);
+						expression.LastResult = result.Success ? null : result.Message;
+					}
 				}
 			}
+
+			DrawError(errorRect, expression, false);
 		}
 
 		public static void DrawFoldout(Expression expression, GUIContent label)
@@ -49,15 +60,40 @@ namespace PiRhoSoft.CompositionEditor
 
 		public static void DrawFoldout(Rect position, Expression expression, GUIContent label)
 		{
+			var errorHeight = GetErrorHeight(expression, true);
+			var errorRect = RectHelper.TakeTrailingHeight(ref position, errorHeight);
+
 			using (new InvalidScope(!expression.HasError))
 			{
 				using (var changes = new EditorGUI.ChangeCheckScope())
 				{
 					var statement = FoldoutStringDrawer.Draw(position, label, expression.Statement, ref expression.IsExpanded);
 
-					if (changes.changed)
-						expression.SetStatement(statement);
+					if (changes.changed || (expression.HasError && string.IsNullOrEmpty(expression.LastResult)))
+					{
+						var result = expression.SetStatement(statement);
+						expression.LastResult = result.Success ? null : result.Message;
+					}
 				}
+			}
+
+			DrawError(errorRect, expression, true);
+		}
+
+		private static float GetErrorHeight(Expression expression, bool foldout)
+		{
+			if (!foldout || expression.IsExpanded)
+				return RectHelper.VerticalSpace + EditorGUIUtility.singleLineHeight * 3;
+			else
+				return 0.0f;
+		}
+
+		private static void DrawError(Rect rect, Expression expression, bool foldout)
+		{
+			if ((!foldout || expression.IsExpanded) && expression.HasError)
+			{
+				RectHelper.TakeVerticalSpace(ref rect);
+				EditorGUI.HelpBox(rect, expression.LastResult, MessageType.Error);
 			}
 		}
 

@@ -12,6 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: Turn Loop
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items: []
   Outputs:
@@ -54,11 +63,21 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: 194074662ac526a44b56f77efa264c2e, type: 2}
     _inputs: []
     _outputs: []
-  Root:
-    _variable:
-    - currentPlayer
-    _lookups:
-    - 
+  Context:
+    Type: 0
+    Reference:
+      _variable: []
+      _lookups: []
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
   WaitForCompletion: 1
 --- !u!114 &114261969380187438
 MonoBehaviour:

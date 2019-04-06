@@ -14,7 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextName: context
   ContextDefinition:
-    _name: 
     _type: 0
     _constraint: 
     _tag: 
@@ -1125,12 +1124,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'local.NextSpace = (root.CurrentSpace + global.Roll) % 36;
-
-      root.CanMove = (!root.Finished) && (((!root.Free) && global.Roll == 6) || (root.Free
-      && ((local.NextSpace < root.Player.FinishSpace) == (root.CurrentSpace < root.Player.FinishSpace))));
-
-      local.CanMove = local.CanMove || root.CanMove;'
+    _statement: (root.CurrentSpace < root.Player.FinishSpace)
 --- !u!114 &114910375662549112
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -1,38 +1,42 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class BoolVariableHandler : VariableHandler
 	{
-		public override VariableValue CreateDefault(VariableConstraint constraint)
-		{
-			return VariableValue.Create(false);
-		}
+		protected override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(false);
+		protected override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.Bool);
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Bool);
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var b = reader.ReadBoolean();
-			value = VariableValue.Create(b);
+			return VariableValue.Create(b);
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableValue And_(VariableValue left, VariableValue right)
 		{
-			return VariableValue.Empty;
+			return right.Type == VariableType.Bool ? VariableValue.Create(left.Bool && right.Bool) : VariableValue.Empty;
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override VariableValue Or_(VariableValue left, VariableValue right)
 		{
-			return SetVariableResult.NotFound;
+			return right.Type == VariableType.Bool ? VariableValue.Create(left.Bool || right.Bool) : VariableValue.Empty;
 		}
 
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override VariableValue Not_(VariableValue value)
+		{
+			return VariableValue.Create(!value.Bool);
+		}
+
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.Type == VariableType.Bool)
 				return left.Bool == right.Bool;

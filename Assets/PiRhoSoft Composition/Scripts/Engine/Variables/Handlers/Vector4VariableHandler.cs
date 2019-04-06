@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class Vector4VariableHandler : VariableHandler
 	{
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
-			return VariableValue.Create(Vector4.zero);
+			return VariableValue.Create(new Vector4());
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void ToString_(VariableValue value, StringBuilder builder)
+		{
+			builder.Append(value.Vector4);
+		}
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Vector4.x);
 			writer.Write(value.Vector4.y);
@@ -19,53 +25,95 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Vector4.w);
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
 			var z = reader.ReadSingle();
 			var w = reader.ReadSingle();
 
-			value = VariableValue.Create(new Vector4(x, y, z, w));
+			return VariableValue.Create(new Vector4(x, y, z, w));
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableValue Add_(VariableValue left, VariableValue right)
 		{
-			if (lookup == "x") return VariableValue.Create(owner.Vector4.x);
-			else if (lookup == "y") return VariableValue.Create(owner.Vector4.y);
-			else if (lookup == "z") return VariableValue.Create(owner.Vector4.z);
-			else if (lookup == "w") return VariableValue.Create(owner.Vector4.w);
-			else return VariableValue.Empty;
+			if (right.TryGetVector4(out var v4))
+				return VariableValue.Create(left.Vector4 + v4);
+			else
+				return VariableValue.Empty;
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override VariableValue Subtract_(VariableValue left, VariableValue right)
 		{
-			if (value.TryGetFloat(out var number))
+			if (right.TryGetVector4(out var v4))
+				return VariableValue.Create(left.Vector4 - v4);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Multiply_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetFloat(out var f))
+				return VariableValue.Create(left.Vector4 * f);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Divide_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetFloat(out var number))
+				return VariableValue.Create(left.Vector4 / number);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Negate_(VariableValue value)
+		{
+			return VariableValue.Create(new Vector4(-value.Vector4.x, -value.Vector4.y, -value.Vector4.z, value.Vector4.w));
+		}
+
+		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		{
+			if (lookup.Type == VariableType.String)
 			{
-				if (lookup == "x")
+				if (lookup.String == "x") return VariableValue.Create(owner.Vector4.x);
+				else if (lookup.String == "y") return VariableValue.Create(owner.Vector4.y);
+				else if (lookup.String == "z") return VariableValue.Create(owner.Vector4.z);
+				else if (lookup.String == "w") return VariableValue.Create(owner.Vector4.w);
+			}
+
+			return VariableValue.Empty;
+		}
+
+		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		{
+			if (value.TryGetFloat(out var f))
+			{
+				if (lookup.Type == VariableType.String)
 				{
-					owner = VariableValue.Create(new Vector4(number, owner.Vector4.y, owner.Vector4.z, owner.Vector4.w));
-					return SetVariableResult.Success;
+					if (lookup.String == "x")
+					{
+						owner = VariableValue.Create(new Vector4(f, owner.Vector4.y, owner.Vector4.z, owner.Vector4.w));
+						return SetVariableResult.Success;
+					}
+					else if (lookup.String == "y")
+					{
+						owner = VariableValue.Create(new Vector4(owner.Vector4.x, f, owner.Vector4.z, owner.Vector4.w));
+						return SetVariableResult.Success;
+					}
+					else if (lookup.String == "z")
+					{
+						owner = VariableValue.Create(new Vector4(owner.Vector4.x, owner.Vector4.y, f, owner.Vector4.w));
+						return SetVariableResult.Success;
+					}
+					else if (lookup.String == "w")
+					{
+						owner = VariableValue.Create(new Vector4(owner.Vector4.x, owner.Vector4.y, owner.Vector4.z, f));
+						return SetVariableResult.Success;
+					}
 				}
-				else if (lookup == "y")
-				{
-					owner = VariableValue.Create(new Vector4(owner.Vector4.x, number, owner.Vector4.z, owner.Vector4.w));
-					return SetVariableResult.Success;
-				}
-				else if (lookup == "z")
-				{
-					owner = VariableValue.Create(new Vector4(owner.Vector4.x, owner.Vector4.y, number, owner.Vector4.w));
-					return SetVariableResult.Success;
-				}
-				else if (lookup == "w")
-				{
-					owner = VariableValue.Create(new Vector4(owner.Vector4.x, owner.Vector4.y, owner.Vector4.z, number));
-					return SetVariableResult.Success;
-				}
-				else
-				{
-					return SetVariableResult.NotFound;
-				}
+
+				return SetVariableResult.NotFound;
 			}
 			else
 			{
@@ -73,10 +121,10 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
-			if (right.TryGetVector4(out var vector4))
-				return left.Vector4 == vector4;
+			if (right.TryGetVector4(out var v4))
+				return left.Vector4 == v4;
 			else
 				return null;
 		}

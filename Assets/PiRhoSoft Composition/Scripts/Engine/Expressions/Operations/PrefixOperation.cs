@@ -5,8 +5,16 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public abstract class PrefixOperation : Operation
 	{
+		private const string _typeMismatchException = "the operator '{0}' cannot be applied to a value of type {1}";
+
 		public string Symbol;
 		public Operation Right;
+
+		public override void Parse(ExpressionParser parser, ExpressionToken token)
+		{
+			Symbol = parser.GetText(token);
+			Right = parser.ParseLeft(OperatorPrecedence.Prefix);
+		}
 
 		public override void ToString(StringBuilder builder)
 		{
@@ -19,8 +27,9 @@ namespace PiRhoSoft.CompositionEngine
 			Right.GetInputs(inputs, source);
 		}
 
-		protected ExpressionEvaluationException TypeMismatch(VariableType type, VariableType expected) => ExpressionEvaluationException.PrefixTypeMismatch(Symbol, type, expected);
-		protected ExpressionEvaluationException TypeMismatch(VariableType type, VariableType expected1, VariableType expected2) => ExpressionEvaluationException.PrefixTypeMismatch(Symbol, type, expected1, expected2);
-		protected ExpressionEvaluationException TypeMismatch(VariableType type, params VariableType[] expected) => ExpressionEvaluationException.PrefixTypeMismatch(Symbol, type, expected);
+		protected ExpressionEvaluationException TypeMismatch(VariableType type)
+		{
+			return new ExpressionEvaluationException(_typeMismatchException, Symbol, type);
+		}
 	}
 }

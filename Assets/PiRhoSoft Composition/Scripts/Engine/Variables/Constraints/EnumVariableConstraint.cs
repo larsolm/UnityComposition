@@ -22,9 +22,20 @@ namespace PiRhoSoft.CompositionEngine
 			if (Type != null)
 			{
 				if (value.EnumType == Type)
+				{
 					return true;
+				}
 				else if (value.Type == VariableType.String)
-					return EnumVariableHandler.TryParse(Type, value.String, out _);
+				{
+					try
+					{
+						var _ = (Enum)Enum.Parse(Type, value.String);
+						return true;
+					}
+					catch
+					{
+					}
+				}
 			}
 
 			return false;

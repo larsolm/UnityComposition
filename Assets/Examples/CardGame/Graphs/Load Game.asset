@@ -63,24 +63,28 @@ MonoBehaviour:
   GraphPosition: {x: 768, y: -332.80002}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - Deck
-    - Spades
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.Deck.Spades
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Deck
+    - Type: 0
+      Text: Spades
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Loop: {fileID: 114486140500255154}
 --- !u!114 &114169463803128364
 MonoBehaviour:
@@ -117,19 +121,21 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114846660907590690}
   Object:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - BindingRoot
+    _variable: local.card as BindingRoot
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
+    - Type: 2
+      Text: BindingRoot
   Binding:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
 --- !u!114 &114281345652415844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -164,24 +170,28 @@ MonoBehaviour:
   GraphPosition: {x: 640, y: -38.4}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - Cards
-    - Suits
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.Cards.Suits
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Cards
+    - Type: 0
+      Text: Suits
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
-    _variable:
-    - local
-    - suit
-    _lookups:
-    - 
-    - 
+    _variable: local.suit
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: suit
   Loop: {fileID: 114471212589741664}
 --- !u!114 &114471212589741664
 MonoBehaviour:
@@ -199,28 +209,28 @@ MonoBehaviour:
   GraphPosition: {x: 704, y: 25.6}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - Cards
-    - Ranks
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.Cards.Ranks
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Cards
+    - Type: 0
+      Text: Ranks
   Index:
-    _variable:
-    - local
-    - rankIndex
-    _lookups:
-    - 
-    - 
+    _variable: local.rankIndex
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: rankIndex
   Value:
-    _variable:
-    - local
-    - rank
-    _lookups:
-    - 
-    - 
+    _variable: local.rank
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: rank
   Loop: {fileID: 114730956879713784}
 --- !u!114 &114486140500255154
 MonoBehaviour:
@@ -239,12 +249,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
 --- !u!114 &114495678880178976
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -282,24 +292,28 @@ MonoBehaviour:
   GraphPosition: {x: 768, y: -281.6}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - Deck
-    - Clubs
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.Deck.Clubs
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Deck
+    - Type: 0
+      Text: Clubs
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Loop: {fileID: 114486140500255154}
 --- !u!114 &114673358792983352
 MonoBehaviour:
@@ -317,24 +331,28 @@ MonoBehaviour:
   GraphPosition: {x: 768, y: -230.40001}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - Deck
-    - Hearts
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.Deck.Hearts
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Deck
+    - Type: 0
+      Text: Hearts
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Loop: {fileID: 114486140500255154}
 --- !u!114 &114675892718543162
 MonoBehaviour:
@@ -355,52 +373,64 @@ MonoBehaviour:
   Prefab:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Value: {fileID: 3439422775805370993, guid: 534776d88da9cf542ab9c00f35936365, type: 3}
   ObjectName:
     Type: 1
     Reference:
-      _variable:
-      - local
-      - cardName
-      _lookups:
-      - 
-      - 
+      _variable: local.cardName
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: cardName
     Value: Card
   ObjectVariable:
-    _variable:
-    - local
-    - createdCard
-    _lookups:
-    - 
-    - 
+    _variable: local.createdCard
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: createdCard
   Positioning: 2
   Object:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Parent:
-    _variable:
-    - global
-    - Deck
-    _lookups:
-    - 
-    - 
+    _variable: global.Deck
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Deck
   Position:
     Type: 0
     Reference:
-      _variable:
-      - local
-      - cardPosition
-      _lookups:
-      - 
-      - 
+      _variable: 
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Value: {x: 0, y: 0, z: 0}
   Rotation:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Value: {x: 0, y: 0, z: 0}
 --- !u!114 &114696056752831474
 MonoBehaviour:
@@ -419,7 +449,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114233220627467950}
   Expression:
-    _statement: 'local.card = local.createdCard<VariableStoreComponent>
+    _statement: 'local.card = local.createdCard as VariableStoreComponent
 
       local.card.Rank = local.rank
 
@@ -463,24 +493,28 @@ MonoBehaviour:
   GraphPosition: {x: 768, y: -179.2}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - Deck
-    - Diamonds
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.Deck.Diamonds
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Deck
+    - Type: 0
+      Text: Diamonds
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Loop: {fileID: 114486140500255154}
 --- !u!114 &114846660907590690
 MonoBehaviour:
@@ -515,10 +549,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114309927829230756}
   Object:
-    _variable:
-    - global
-    - Deck
-    _lookups:
-    - 
-    - 
+    _variable: global.Deck
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Deck
   Tag: Load

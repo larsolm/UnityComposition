@@ -1,14 +1,14 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
+using System.Text;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class FloatVariableHandler : VariableHandler
 	{
-		protected override VariableConstraint CreateConstraint() => new FloatVariableConstraint();
-
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			if (constraint is FloatVariableConstraint floatConstraint)
 				return VariableValue.Create(floatConstraint.Minimum);
@@ -16,28 +16,83 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Create(0.0f);
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void ToString_(VariableValue value, StringBuilder builder)
+		{
+			builder.Append(value.Float);
+		}
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Float);
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var f = reader.ReadSingle();
-			value = VariableValue.Create(f);
+			return VariableValue.Create(f);
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableConstraint CreateConstraint()
 		{
-			return VariableValue.Empty;
+			return new FloatVariableConstraint();
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override VariableValue Add_(VariableValue left, VariableValue right)
 		{
-			return SetVariableResult.NotFound;
+			if (right.TryGetFloat(out var number))
+				return VariableValue.Create(left.Float + number);
+			else if (right.Type == VariableType.String)
+				return VariableValue.Create(left.Float + right.String);
+			else
+				return VariableValue.Empty;
 		}
 
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override VariableValue Subtract_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetFloat(out var number))
+				return VariableValue.Create(left.Float - number);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Multiply_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetFloat(out var number))
+				return VariableValue.Create(left.Float * number);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Divide_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetFloat(out var number))
+				return VariableValue.Create(left.Float / number);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Modulo_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetFloat(out var number))
+				return VariableValue.Create(left.Float % number);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Exponent_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetFloat(out var number))
+				return VariableValue.Create((float)Math.Pow(left.Float, number));
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Negate_(VariableValue value)
+		{
+			return VariableValue.Create(-value.Float);
+		}
+
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return left.Float == number;
@@ -45,10 +100,10 @@ namespace PiRhoSoft.CompositionEngine
 				return null;
 		}
 
-		public override int? Compare(VariableValue left, VariableValue right)
+		protected override int? Compare_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
-				return left.Float.CompareTo(right.Number);
+				return left.Float.CompareTo(number);
 			else
 				return null;
 		}

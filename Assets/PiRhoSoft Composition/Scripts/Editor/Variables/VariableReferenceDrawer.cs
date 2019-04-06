@@ -23,12 +23,15 @@ namespace PiRhoSoft.CompositionEditor
 
 		public static void Draw(Rect position, VariableReference reference, GUIContent label)
 		{
-			using (var changes = new EditorGUI.ChangeCheckScope())
+			using (new InvalidScope(reference.IsValid))
 			{
-				var output = EditorGUI.TextField(position, label, reference.ToString());
+				using (var changes = new EditorGUI.ChangeCheckScope())
+				{
+					var variable = EditorGUI.TextField(position, label, reference.Variable);
 
-				if (changes.changed)
-					reference.Update(output);
+					if (changes.changed)
+						reference.Variable = variable;
+				}
 			}
 		}
 

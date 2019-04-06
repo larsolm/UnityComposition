@@ -1,77 +1,81 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class RectVariableHandler : VariableHandler
 	{
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(new Rect());
+		protected override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.Rect);
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
-			return VariableValue.Create(new Rect());
+			writer.Write(value.Rect.x);
+			writer.Write(value.Rect.y);
+			writer.Write(value.Rect.width);
+			writer.Write(value.Rect.height);
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			writer.Write(value.IntRect.position.x);
-			writer.Write(value.IntRect.position.y);
-			writer.Write(value.IntRect.size.x);
-			writer.Write(value.IntRect.size.y);
-		}
-
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
 			var w = reader.ReadSingle();
 			var h = reader.ReadSingle();
 
-			value = VariableValue.Create(new Rect(x, y, w, h));
+			return VariableValue.Create(new Rect(x, y, w, h));
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
-			switch (lookup)
+			if (lookup.Type == VariableType.String)
 			{
-				case "x": return VariableValue.Create(owner.Rect.position.x);
-				case "y": return VariableValue.Create(owner.Rect.position.y);
-				case "w": return VariableValue.Create(owner.Rect.size.x);
-				case "h": return VariableValue.Create(owner.Rect.size.y);
-				default: return VariableValue.Empty;
+				switch (lookup.String)
+				{
+					case "x": return VariableValue.Create(owner.Rect.x);
+					case "y": return VariableValue.Create(owner.Rect.y);
+					case "w": return VariableValue.Create(owner.Rect.width);
+					case "h": return VariableValue.Create(owner.Rect.height);
+				}
 			}
+
+			return VariableValue.Empty;
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (value.TryGetFloat(out var number))
 			{
-				switch (lookup)
+				if (lookup.Type == VariableType.String)
 				{
-					case "x":
+					switch (lookup.String)
 					{
-						owner = VariableValue.Create(new Rect(number, owner.Rect.position.y, owner.Rect.size.x, owner.Rect.size.y));
-						return SetVariableResult.Success;
-					}
-					case "y":
-					{
-						owner = VariableValue.Create(new Rect(owner.Rect.position.x, number, owner.Rect.size.x, owner.Rect.size.y));
-						return SetVariableResult.Success;
-					}
-					case "w":
-					{
-						owner = VariableValue.Create(new Rect(owner.Rect.position.x, owner.Rect.position.y, number, owner.Rect.size.y));
-						return SetVariableResult.Success;
-					}
-					case "h":
-					{
-						owner = VariableValue.Create(new Rect(owner.Rect.position.x, owner.Rect.position.y, owner.Rect.size.x, number));
-						return SetVariableResult.Success;
-					}
-					default:
-					{
-						return SetVariableResult.NotFound;
+						case "x":
+						{
+							owner = VariableValue.Create(new Rect(number, owner.Rect.y, owner.Rect.width, owner.Rect.height));
+							return SetVariableResult.Success;
+						}
+						case "y":
+						{
+							owner = VariableValue.Create(new Rect(owner.Rect.x, number, owner.Rect.width, owner.Rect.height));
+							return SetVariableResult.Success;
+						}
+						case "w":
+						{
+							owner = VariableValue.Create(new Rect(owner.Rect.x, owner.Rect.y, number, owner.Rect.height));
+							return SetVariableResult.Success;
+						}
+						case "h":
+						{
+							owner = VariableValue.Create(new Rect(owner.Rect.x, owner.Rect.y, owner.Rect.width, number));
+							return SetVariableResult.Success;
+						}
 					}
 				}
+
+				return SetVariableResult.NotFound;
 			}
 			else
 			{
@@ -79,10 +83,10 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
-			if (right.TryGetRect(out var rect))
-				return left.Rect == rect;
+			if (right.TryGetRect(out var bounds))
+				return left.Rect == bounds;
 			else
 				return null;
 		}

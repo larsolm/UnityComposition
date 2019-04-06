@@ -1,17 +1,23 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class StoreVariableHandler : VariableHandler
 	{
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create((IVariableStore)null);
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void ToString_(VariableValue value, StringBuilder builder)
+		{
+			builder.Append(value.Store);
+		}
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			var store = value.Store as VariableStore;
 
@@ -22,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 				for (var i = 0; i < store.Variables.Count; i++)
 				{
 					writer.Write(store.Variables[i].Name);
-					store.Variables[i].Value.Write(writer, objects);
+					Write(store.Variables[i].Value, writer, objects);
 				}
 			}
 			else
@@ -31,67 +37,68 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var count = reader.ReadInt32();
+			var store = new VariableStore();
 
-			if (count >= 0)
+			for (var i = 0; i < count; i++)
 			{
-				var store = new VariableStore();
+				var name = reader.ReadString();
+				var item = Read(reader, objects);
 
-				for (var i = 0; i < count; i++)
-				{
-					var name = reader.ReadString();
-					var item = new VariableValue();
-
-					item.Read(reader, objects);
-					store.AddVariable(name, item);
-				}
-
-				value = VariableValue.Create(store);
-			}
-		}
-
-		public static VariableValue StoreLookup(VariableValue owner, string lookup)
-		{
-			if (owner.HasList)
-			{
-				var value = ListVariableHandler.ListLookup(owner, lookup);
-				if (!value.IsEmpty)
-					return value;
+				store.AddVariable(name, item);
 			}
 
-			return owner.Store.GetVariable(lookup);
+			return VariableValue.Create(store);
 		}
 
-		public static SetVariableResult StoreApply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
-			if (owner.HasList)
-			{
-				var result = ListVariableHandler.ListApply(ref owner, lookup, value);
-				if (result == SetVariableResult.Success)
-					return result;
-			}
-
-			return owner.Store.SetVariable(lookup, value);
+			return LookupInStore(owner, lookup);
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
-			return StoreLookup(owner, lookup);
+			return ApplyToStore(ref owner, lookup, value);
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
-		{
-			return StoreApply(ref owner, lookup, value);
-		}
-
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.HasReference)
 				return left.Reference == right.Reference;
 			else
 				return null;
+		}
+
+		public static VariableValue LookupInStore(VariableValue owner, VariableValue lookup)
+		{
+			if (owner.HasList)
+			{
+				var value = ListVariableHandler.LookupInList(owner, lookup);
+				if (!value.IsEmpty)
+					return value;
+			}
+
+			if (lookup.Type == VariableType.String)
+				return owner.Store.GetVariable(lookup.String);
+
+			return VariableValue.Empty;
+		}
+
+		public static SetVariableResult ApplyToStore(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		{
+			if (owner.HasList)
+			{
+				var result = ListVariableHandler.ApplyToList(ref owner, lookup, value);
+				if (result == SetVariableResult.Success)
+					return result;
+			}
+
+			if (lookup.Type == VariableType.String)
+				return owner.Store.SetVariable(lookup.String, value);
+			else
+				return SetVariableResult.TypeMismatch;
 		}
 	}
 }

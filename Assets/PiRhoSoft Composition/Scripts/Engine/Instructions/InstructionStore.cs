@@ -34,13 +34,13 @@ namespace PiRhoSoft.CompositionEngine
 		public void OnBeforeSerialize()
 		{
 			if (Type == InstructionInputType.Value)
-				VariableValue.Save(Value, ref _valueData, ref _valueObjects);
+				VariableHandler.Save(Value, ref _valueData, ref _valueObjects);
 		}
 
 		public void OnAfterDeserialize()
 		{
 			if (Type == InstructionInputType.Value)
-				VariableValue.Load(ref Value, ref _valueData, ref _valueObjects);
+				Value = VariableHandler.Load(ref _valueData, ref _valueObjects);
 		}
 
 		#endregion

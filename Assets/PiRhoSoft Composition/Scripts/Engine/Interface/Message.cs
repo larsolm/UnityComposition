@@ -34,8 +34,7 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else
 				{
-					var variable = Text.Substring(open + 1, close - open - 1);
-					_temporaryReference.Update(variable);
+					_temporaryReference.Variable = Text.Substring(open + 1, close - open - 1);
 
 					if (InstructionStore.IsInput(_temporaryReference))
 						inputs.Add(new VariableDefinition { Name = _temporaryReference.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
@@ -76,8 +75,7 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					output.Append(input, start, open - start);
 
-					var variable = input.Substring(open + 1, close - open - 1);
-					_temporaryReference.Update(variable);
+					_temporaryReference.Variable = input.Substring(open + 1, close - open - 1);
 
 					var value = _temporaryReference.GetValue(variables);
 					Append(variables, value.ToString(), output);

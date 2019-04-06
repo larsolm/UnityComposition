@@ -1,40 +1,20 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class EmptyVariableHandler : VariableHandler
 	{
-		public override VariableValue CreateDefault(VariableConstraint constraint)
-		{
-			return VariableValue.Empty;
-		}
+		public const string EmptyText = "(empty)";
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-		}
+		protected override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Empty;
+		protected override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(EmptyText);
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects) { }
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects) => VariableValue.Empty;
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
-		{
-		}
-
-		public override VariableValue Lookup(VariableValue owner, string lookup)
-		{
-			return VariableValue.Empty;
-		}
-
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
-		{
-			return SetVariableResult.NotFound;
-		}
-
-		public override bool IsAssignable(VariableValue from, VariableValue to)
-		{
-			return true;
-		}
-
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.IsEmpty)
 				return true;

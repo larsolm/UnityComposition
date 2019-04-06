@@ -1,16 +1,13 @@
-﻿using UnityEngine;
-
-namespace PiRhoSoft.CompositionEngine
+﻿namespace PiRhoSoft.CompositionEngine
 {
 	public enum ExpressionTokenType
 	{
 		Sentinel,
-		Boolean,
-		Integer,
-		Number,
+		Constant,
+		Int,
+		Float,
 		String,
 		Color,
-		Null,
 		Identifier,
 		Command,
 		Operator,
@@ -18,16 +15,16 @@ namespace PiRhoSoft.CompositionEngine
 		EndLookup,
 		StartGroup,
 		EndGroup,
-		Separator
+		Separator,
+		Alternation,
+		Unknown
 	}
 
 	public class ExpressionToken
 	{
-		public int Location;
 		public ExpressionTokenType Type;
-		public string Text;
-		public int Integer;
-		public float Number;
-		public Color Color;
+		public int Location;
+		public int Start;
+		public int End;
 	}
 }

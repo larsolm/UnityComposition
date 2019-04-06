@@ -595,6 +595,9 @@ MonoBehaviour:
     - CFNodWZmbGVzAgAAAAQAAAA=
     - CENvbXBsZXRlAQAAAAA=
     _variablesObjects: []
+  Reference:
+    _variable: 
+    _tokens: []
 --- !u!4 &500038795
 Transform:
   m_ObjectHideFlags: 0
@@ -1404,3 +1407,10 @@ MonoBehaviour:
     - BkhlYXJ0cxMAAAAAAAAA
     - CERpYW1vbmRzEwAAAAAAAAA=
     _variablesObjects: []
+  Reference:
+    _variable: test.lookup
+    _tokens:
+    - Type: 0
+      Text: test
+    - Type: 0
+      Text: lookup

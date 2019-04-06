@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class Expression : ISerializationCallbackReceiver
 	{
 		private const string _expressionTokenizeError = "(CETE) Failed to parse Expression at location {1}: {2}\nExpression: {0}";
-		private const string _expressionParseError = "(CEPE) Failed to parse Expression at location {1}: {2}\nExpression: {0}";
+		private const string _expressionParseError = "(CEPE) Failed to parse Expression at location {1} ({2}): {3}\nExpression: {0}";
 		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}': {1}";
 		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}': {1}";
 		private const string _invalidResultWarning = "(CEIR) The Expression '{0}' was expected to return type {1} but instead returned type {2}";
@@ -110,17 +110,14 @@ namespace PiRhoSoft.CompositionEngine
 				try
 				{
 					var tokens = ExpressionLexer.Tokenize(_statement);
-					_operations = ExpressionParser.Parse(tokens);
-				}
-				catch (ExpressionTokenizeException exception)
-				{
-					result.Success = false;
-					result.Message = string.Format(_expressionTokenizeError, _statement, exception.Location, exception.Message);
+					_operations = ExpressionParser.Parse(_statement, tokens);
 				}
 				catch (ExpressionParseException exception)
 				{
+					var text = _statement.Substring(exception.Token.Start, exception.Token.End - exception.Token.Start);
+
 					result.Success = false;
-					result.Message = string.Format(_expressionParseError, _statement, exception.Location, exception.Message);
+					result.Message = string.Format(_expressionParseError, _statement, exception.Token.Location, text, exception.Message);
 				}
 			}
 
@@ -142,6 +139,7 @@ namespace PiRhoSoft.CompositionEngine
 		#region Editor Support
 #if UNITY_EDITOR
 		[NonSerialized] public bool IsExpanded = false;
+		[NonSerialized] public string LastResult;
 #endif
 		#endregion
 	}

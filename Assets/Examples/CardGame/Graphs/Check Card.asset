@@ -64,7 +64,7 @@ MonoBehaviour:
       local.previous = local.deckSuit[card.Index - 1]
 
 
-      card.Complete = local.stateSuit<#> == card.Index && local.previous.Complete
+      card.Complete = local.stateSuit.Count == card.Index && local.previous.Complete
       && local.stateSuit == global.State.Rows[card.Row]'
 --- !u!114 &114204127550149548
 MonoBehaviour:
@@ -85,7 +85,7 @@ MonoBehaviour:
   Expression:
     _statement: 'local.stateSuit = global.State[card.Suit.Name]
 
-      card.Complete = local.stateSuit<#> == 0 && card.Column == 0'
+      card.Complete = local.stateSuit.Count == 0 && card.Column == 0'
 --- !u!114 &114246263796642296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -259,7 +259,7 @@ MonoBehaviour:
       global.State.Cards -= card
 
 
-      global.State.Complete = global.State.Cards<#> == 4
+      global.State.Complete = global.State.Cards.Count == 4
 
       card.Complete = true
 

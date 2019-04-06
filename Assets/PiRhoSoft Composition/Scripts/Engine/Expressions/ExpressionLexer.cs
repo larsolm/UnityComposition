@@ -1,88 +1,131 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ExpressionTokenizeException : Exception
-	{
-		public int Location;
-
-		public ExpressionTokenizeException(int location, string error) : base(error) => Location = location;
-		public ExpressionTokenizeException(int location, string errorFormat, params object[] arguments) : this(location, string.Format(errorFormat, arguments)) { }
-	}
-
 	public static class ExpressionLexer
 	{
-		private const string _invalidTokenException = "invalid character '{0}'";
+		public const string NullConstant = "null";
+		public const string TrueConstant = "true";
+		public const string FalseConstant = "false";
+		public const string PiConstant = "PI";
+		public const string Deg2RadConstant = "Deg2Rad";
+		public const string Rad2DegConstant = "Rad2Deg";
 
-		private const char _lookupOpen = '[';
-		private const char _lookupClose = ']';
-		private const char _stringOpen = '\"';
-		private const char _stringClose = '\"';
-		private const char _groupOpen = '(';
-		private const char _groupClose = ')';
-		private const char _separator = ',';
-		private const char _colorOpen = '#';
+		public const string TernaryOperator = "?";
+		public const string CastOperator = VariableReference.Cast;
+		public const string TestOperator = "is";
 
-		private const string _trueLiteral = "true";
-		private const string _falseLiteral = "false";
-		private const string _nullLiteral = "null";
+		public const char StringSymbol = StringVariableHandler.Symbol;
+		public const char ColorSymbol = ColorVariableHandler.Symbol;
+		public const char MemberAccessSymbol = VariableReference.Separator;
+		public const char LookupOpenSymbol = VariableReference.LookupOpen;
+		public const char LookupCloseSymbol = VariableReference.LookupClose;
+		public const char GroupOpenSymbol = '(';
+		public const char GroupCloseSymbol = ')';
+		public const char SeparatorSymbol = ',';
+		public const char AlternationSymbol = ':';
 
 		private const string _sentinelCharacters = ";\n";
-		private const string _operatorCharacters = "+-!^*/%<=>&|?:";
+		private const string _operatorCharacters = "+-!^*/%<=>&|?.";
 		private const string _hexCharacters = "0123456789ABCDEFabcdef";
 
-		private static bool IsSentinelCharacter(char c) => _sentinelCharacters.IndexOf(c) >= 0;
-		private static bool IsIdentifierStartCharacter(char c) => char.IsLetter(c) || c == '_';
-		private static bool IsIdentifierCharacter(char c) => char.IsLetterOrDigit(c) || c == '_' || c == ListVariableHandler.CountSymbol || c == VariableReference.Separator || c == VariableReference.LookupOpen || c == VariableReference.LookupClose;
-		private static bool IsHexCharacter(char c) => _hexCharacters.IndexOf(c) >= 0;
-		private static bool IsOperatorCharacter(char c) => _operatorCharacters.IndexOf(c) >= 0;
+		private const string _duplicateKeywordError = "(CELDK) Failed to add keyword '{0}': a keyword with the same text has already been added";
+		private const string _duplicateConstantError = "(CELDL) Failed to add constant '{0}': a constant with the same text has already been added";
 
 		public static List<ExpressionToken> Tokenize(string input)
 		{
 			var tokens = new List<ExpressionToken>();
-			var whitespace = string.Empty;
 			var start = 0;
 
 			while (start < input.Length)
 			{
 				var c = input[start];
 
-				if (char.IsWhiteSpace(c) && !IsSentinelCharacter(c))
-				{
-					whitespace += c;
-					start++;
-				}
-				else
-				{
-					if (IsSentinelCharacter(c)) AddSentinel(tokens, input, start, ref start);
-					else if (char.IsDigit(c)) AddInteger(tokens, input, start, ref start, whitespace);
-					else if (c == _stringOpen) AddString(tokens, input, start, ref start, _stringClose);
-					else if (IsIdentifierStartCharacter(c)) AddIdentifier(tokens, input, start, ref start, whitespace);
-					else if (c == _lookupOpen) AddStartLookup(tokens, input, start, ref start);
-					else if (c == _lookupClose) AddEndLookup(tokens, input, start, ref start);
-					else if (c == _groupOpen) AddStartGroup(tokens, input, start, ref start);
-					else if (c == _groupClose) AddEndGroup(tokens, input, start, ref start);
-					else if (c == _separator) AddSeparator(tokens, input, start, ref start);
-					else if (c == _colorOpen) AddColor(tokens, input, start, ref start);
-					else if (IsOperatorCharacter(c)) AddOperator(tokens, input, start, ref start);
-					else throw new ExpressionTokenizeException(start, _invalidTokenException, c);
-
-					whitespace = string.Empty;
-				}
+				if (IsSentinelCharacter(c)) AddSentinel(tokens, input, start, ref start);
+				else if (char.IsWhiteSpace(c)) start++;
+				else if (IsIdentifierStartCharacter(c)) AddIdentifier(tokens, input, start, ref start);
+				else if (IsOperatorCharacter(c)) AddOperator(tokens, input, start, ref start);
+				else if (char.IsDigit(c)) AddNumber(tokens, input, start, ref start);
+				else if (c == StringSymbol) AddString(tokens, input, start, ref start, StringSymbol);
+				else if (c == ColorSymbol) AddColor(tokens, input, start, ref start);
+				else if (c == LookupOpenSymbol) AddSingleToken(tokens, ExpressionTokenType.StartLookup, ref start);
+				else if (c == LookupCloseSymbol) AddSingleToken(tokens, ExpressionTokenType.EndLookup, ref start);
+				else if (c == GroupOpenSymbol) AddSingleToken(tokens, ExpressionTokenType.StartGroup, ref start);
+				else if (c == GroupCloseSymbol) AddSingleToken(tokens, ExpressionTokenType.EndGroup, ref start);
+				else if (c == SeparatorSymbol) AddSingleToken(tokens, ExpressionTokenType.Separator, ref start);
+				else if (c == AlternationSymbol) AddSingleToken(tokens, ExpressionTokenType.Alternation, ref start);
+				else AddUnknown(tokens, input, start, ref start);
 			}
 
 			return tokens;
 		}
 
-		private static int SkipInteger(string input, int start)
+		#region Reserved Words
+
+		private static Dictionary<string, VariableValue> _constants = new Dictionary<string, VariableValue>();
+		private static HashSet<string> _keywords = new HashSet<string>();
+
+		static ExpressionLexer()
 		{
-			while (start < input.Length && char.IsDigit(input[start]))
+			AddConstant(NullConstant, VariableValue.Create((Object)null));
+			AddConstant(TrueConstant, VariableValue.Create(true));
+			AddConstant(FalseConstant, VariableValue.Create(false));
+			AddConstant(PiConstant, VariableValue.Create(Mathf.PI));
+			AddConstant(Deg2RadConstant, VariableValue.Create(Mathf.Deg2Rad));
+			AddConstant(Rad2DegConstant, VariableValue.Create(Mathf.Rad2Deg));
+
+			AddKeyword(CastOperator);
+			AddKeyword(TestOperator);
+		}
+
+		public static void AddConstant(string text, VariableValue value)
+		{
+			if (!_constants.ContainsKey(text))
+				_constants.Add(text, value);
+			else
+				Debug.LogErrorFormat(_duplicateConstantError, text);
+		}
+
+		public static void AddKeyword(string text)
+		{
+			if (!_keywords.Contains(text))
+				_keywords.Add(text);
+			else
+				Debug.LogErrorFormat(_duplicateKeywordError, text);
+		}
+
+		public static VariableValue GetConstant(string text)
+		{
+			return _constants.TryGetValue(text, out var value) ? value : VariableValue.Empty;
+		}
+
+		#endregion
+
+		#region Sentinel
+
+		private static bool IsSentinelCharacter(char c) => _sentinelCharacters.IndexOf(c) >= 0;
+
+		private static int SkipSentinel(string input, int start)
+		{
+			while (start < input.Length && IsSentinelCharacter(input[start]))
 				++start;
 
 			return start;
 		}
+
+		private static void AddSentinel(List<ExpressionToken> tokens, string input, int start, ref int end)
+		{
+			end = SkipSentinel(input, end + 1);
+			AddToken(tokens, ExpressionTokenType.Sentinel, start, end, 0);
+		}
+
+		#endregion
+
+		#region Identifiers
+
+		private static bool IsIdentifierStartCharacter(char c) => char.IsLetter(c) || c == '_';
+		private static bool IsIdentifierCharacter(char c) => char.IsLetterOrDigit(c) || c == '_';
 
 		private static int SkipIdentifier(string input, int start)
 		{
@@ -92,12 +135,88 @@ namespace PiRhoSoft.CompositionEngine
 			return start;
 		}
 
+		private static void AddIdentifier(List<ExpressionToken> tokens, string input, int start, ref int end)
+		{
+			end = SkipIdentifier(input, end + 1);
+
+			var text = input.Substring(start, end - start);
+			var type = GetIdentifierType(text);
+
+			if (type == ExpressionTokenType.Identifier)
+			{
+				if (end < input.Length && input[end] == GroupOpenSymbol)
+				{
+					++end;
+					type = ExpressionTokenType.Command;
+				}
+
+				AddMergeableToken(tokens, type, start, end);
+			}
+			else
+			{
+				AddToken(tokens, type, start, end, 0);
+			}
+		}
+
+		private static ExpressionTokenType GetIdentifierType(string text)
+		{
+			if (_keywords.Contains(text))
+				return ExpressionTokenType.Operator;
+			else if (_constants.ContainsKey(text))
+				return ExpressionTokenType.Constant;
+			else
+				return ExpressionTokenType.Identifier;
+		}
+
+		#endregion
+
+		#region Operators
+
+		private static bool IsOperatorCharacter(char c) => _operatorCharacters.IndexOf(c) >= 0;
+
 		private static int SkipOperator(string input, int start)
 		{
 			while (start < input.Length && IsOperatorCharacter(input[start]))
 				++start;
 
 			return start;
+		}
+
+		private static void AddOperator(List<ExpressionToken> tokens, string input, int start, ref int end)
+		{
+			end = SkipOperator(input, end + 1);
+			AddToken(tokens, ExpressionTokenType.Operator, start, end, 0);
+		}
+
+		#endregion
+
+		#region Literals
+
+		private static bool IsHexCharacter(char c) => _hexCharacters.IndexOf(c) >= 0;
+
+		private static int SkipInt(string input, int start)
+		{
+			while (start < input.Length && char.IsDigit(input[start]))
+				++start;
+
+			return start;
+		}
+
+		private static void AddNumber(List<ExpressionToken> tokens, string input, int start, ref int end)
+		{
+			end = SkipInt(input, end + 1);
+
+			// checks the character after the . so something like "Object 2.property" is not interpreted as a float
+
+			if (end < (input.Length - 1) && input[end] == MemberAccessSymbol && char.IsDigit(input[end + 1]))
+			{
+				end = SkipInt(input, end + 1);
+				AddMergeableToken(tokens, ExpressionTokenType.Float, start, end);
+			}
+			else
+			{
+				AddMergeableToken(tokens, ExpressionTokenType.Int, start, end);
+			}
 		}
 
 		private static int SkipHex(string input, int start)
@@ -108,168 +227,88 @@ namespace PiRhoSoft.CompositionEngine
 			return start;
 		}
 
-		private static void AddInteger(List<ExpressionToken> tokens, string input, int start, ref int end, string whitespace)
+		private static void AddColor(List<ExpressionToken> tokens, string input, int start, ref int end)
 		{
-			end = SkipInteger(input, end + 1);
-
-			if (end < input.Length && char.IsLetter(input[end]))
-			{
-				AddIdentifier(tokens, input, start, ref end, whitespace);
-			}
-			else if (end < input.Length && input[end] == '.')
-			{
-				AddNumber(tokens, input, start, ref end, whitespace);
-			}
-			else
-			{
-				var text = input.Substring(start, end - start);
-				var integer = int.Parse(text);
-
-				AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Integer, Text = text, Integer = integer, Number = integer }, whitespace);
-			}
+			end = SkipHex(input, end + 1);
+			AddToken(tokens, ExpressionTokenType.Color, start, end, 1);
 		}
 
-		private static void AddNumber(List<ExpressionToken> tokens, string input, int start, ref int end, string whitespace)
+		private static int SkipTo(string input, int start, char delimiter)
 		{
-			end = SkipInteger(input, end + 1);
+			while (start < input.Length && input[start] != delimiter)
+				++start;
 
-			var text = input.Substring(start, end - start);
-			var number = float.Parse(text);
-
-			AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Number, Text = text, Integer = (int)number, Number = number }, whitespace);
+			return start;
 		}
 
 		private static void AddString(List<ExpressionToken> tokens, string input, int start, ref int end, char delimiter)
 		{
-			end++;
-
-			while (end < input.Length && input[end] != delimiter)
-				end++;
-
-			var text = input.Substring(start + 1, end - start - 1);
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.String, Text = text });
-
+			end = SkipTo(input, end + 1, delimiter);
+			AddToken(tokens, ExpressionTokenType.String, start, end, 1);
 			end++;
 		}
 
-		private static void AddIdentifier(List<ExpressionToken> tokens, string input, int start, ref int end, string whitespace)
+		#endregion
+
+		#region Unknown
+
+		private static void AddUnknown(List<ExpressionToken> tokens, string input, int start, ref int end)
 		{
-			end = SkipIdentifier(input, end + 1);
+			end = start + 1;
 
-			var text = input.Substring(start, end - start);
-			var type = ExpressionTokenType.Identifier;
+			if (tokens.Count > 0 && tokens[tokens.Count - 1].Type == ExpressionTokenType.Unknown)
+				MergeToken(tokens, ExpressionTokenType.Unknown, end);
+			else
+				AddToken(tokens, ExpressionTokenType.Unknown, start, end, 0);
+		}
 
-			if (end < input.Length && input[end] == _groupOpen)
+		#endregion
+
+		#region Tokens
+
+		private static void AddToken(List<ExpressionToken> tokens, ExpressionTokenType type, int start, int end, int offset)
+		{
+			tokens.Add(new ExpressionToken { Location = start, Type = type, Start = start + offset, End = end });
+		}
+
+		private static void AddSingleToken(List<ExpressionToken> tokens, ExpressionTokenType type, ref int start)
+		{
+			tokens.Add(new ExpressionToken { Location = start, Type = type, Start = start, End = start + 1 });
+			++start;
+		}
+
+		private static void MergeToken(List<ExpressionToken> tokens, ExpressionTokenType type, int end)
+		{
+			var previous = tokens[tokens.Count - 1];
+			previous.Type = type;
+			previous.End = end;
+		}
+
+		private static bool IsMergeable(ExpressionTokenType type)
+		{
+			return type == ExpressionTokenType.Int || type == ExpressionTokenType.Float || type == ExpressionTokenType.Identifier;
+		}
+
+		private static void AddMergeableToken(List<ExpressionToken> tokens, ExpressionTokenType type, int start, int end)
+		{
+			// This handles merging names separated by whitespace so "Thing 2" becomes a single Identifier token
+			// instead of an Identifier followed by an Int.
+
+			if (tokens.Count > 0 && IsMergeable(tokens[tokens.Count - 1].Type))
 			{
-				++end;
-				type = ExpressionTokenType.Command;
+				if (IsMergeable(type))
+					MergeToken(tokens, ExpressionTokenType.Identifier, end);
+				else if (type == ExpressionTokenType.Command)
+					MergeToken(tokens, ExpressionTokenType.Command, end);
+				else
+					AddToken(tokens, type, start, end, 0);
 			}
-
-			switch (text)
+			else
 			{
-				case _trueLiteral: AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 1, Number = 1.0f }, whitespace); break;
-				case _falseLiteral: AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Boolean, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
-				case _nullLiteral: AddToken(tokens, new ExpressionToken { Location = start, Type = ExpressionTokenType.Null, Text = text, Integer = 0, Number = 0.0f }, whitespace); break;
-				default: AddToken(tokens, new ExpressionToken { Location = start, Type = type, Text = text }, whitespace); break;
+				AddToken(tokens, type, start, end, 0);
 			}
 		}
 
-		private static void AddStartLookup(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.StartLookup });
-			end = start + 1;
-		}
-
-		private static void AddEndLookup(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.EndLookup });
-			end = start + 1;
-		}
-
-		private static void AddStartGroup(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.StartGroup });
-			end = start + 1;
-		}
-
-		private static void AddEndGroup(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.EndGroup });
-			end = start + 1;
-		}
-
-		private static void AddSeparator(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Separator });
-			end = start + 1;
-		}
-
-		private static void AddSentinel(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			if (tokens.Count > 0 && tokens[tokens.Count - 1].Type != ExpressionTokenType.Sentinel)
-				tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Sentinel });
-
-			end = start + 1;
-		}
-
-		private static void AddColor(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			end = SkipHex(input, end + 1);
-
-			if ((end - start) % 2 == 0)
-				throw new ExpressionTokenizeException(start, _invalidTokenException);
-
-			var r = GetHexValue(input, start + 1, end);
-			var g = GetHexValue(input, start + 3, end);
-			var b = GetHexValue(input, start + 5, end);
-			var a = GetHexValue(input, start + 7, end);
-
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Color, Color = new Color(r, g, b, a) });
-
-			end++;
-		}
-
-		private static float GetHexValue(string input, int start, int end)
-		{
-			if (start + 2 > end)
-				return 1.0f;
-
-			var text = input.Substring(start, 2);
-			var value = byte.Parse(text, System.Globalization.NumberStyles.AllowHexSpecifier);
-			return value / 255.0f;
-		}
-
-		private static void AddOperator(List<ExpressionToken> tokens, string input, int start, ref int end)
-		{
-			end = SkipOperator(input, end + 1);
-			var text = input.Substring(start, end - start);
-			tokens.Add(new ExpressionToken { Location = start, Type = ExpressionTokenType.Operator, Text = text });
-		}
-
-		private static void AddToken(List<ExpressionToken> tokens, ExpressionToken token, string whitespace)
-		{
-			if (tokens.Count > 0)
-			{
-				var previous = tokens[tokens.Count - 1];
-
-				if (previous.Type == ExpressionTokenType.Boolean || previous.Type == ExpressionTokenType.Integer || previous.Type == ExpressionTokenType.Number || previous.Type == ExpressionTokenType.Null || previous.Type == ExpressionTokenType.Identifier)
-				{
-					if (token.Type == ExpressionTokenType.Boolean || token.Type == ExpressionTokenType.Integer || token.Type == ExpressionTokenType.Number || token.Type == ExpressionTokenType.Null || token.Type == ExpressionTokenType.Identifier)
-					{
-						previous.Text = previous.Text + whitespace + token.Text;
-						previous.Type = ExpressionTokenType.Identifier;
-						return;
-					}
-					else if (token.Type == ExpressionTokenType.Command)
-					{
-						previous.Text = previous.Text + whitespace + token.Text;
-						previous.Type = ExpressionTokenType.Command;
-						return;
-					}
-				}
-			}
-
-			tokens.Add(token);
-		}
+		#endregion
 	}
 }

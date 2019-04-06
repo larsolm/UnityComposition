@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -7,144 +7,232 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class VariableReference
 	{
+		public const string Cast = "as";
 		public const char Separator = '.';
-		public const char LookupOpen = '<';
-		public const char LookupClose = '>';
+		public const char LookupOpen = '[';
+		public const char LookupClose = ']';
 
-		private static string[] _emptyVariable = new string[0];
-		private static string[] _emptyLookups = new string[0];
-		private static char[] _splitter = new char[] { Separator };
-		private static string _joiner = _splitter[0].ToString();
+		[SerializeField] private string _variable = string.Empty;
+		[SerializeField] private List<VariableToken> _tokens = new List<VariableToken>();
 
-		[SerializeField] private string[] _variable = _emptyVariable;
-		[SerializeField] private string[] _lookups = _emptyLookups;
+		public bool IsValid => string.IsNullOrEmpty(_variable) || _tokens.Count > 0;
+		public bool IsAssigned => _tokens.Count > 0;
+		public string StoreName => IsAssigned ? (_tokens.Count > 1 ? _tokens[0].Text : string.Empty) : string.Empty;
+		public string RootName => IsAssigned ? (_tokens.Count > 1 ? _tokens[1].Text : _tokens[0].Text) : string.Empty;
 
-		public bool IsAssigned => _variable != null && _variable.Length > 0;
-		public string StoreName => _variable != null && _variable.Length > 1 ? _variable[0] : string.Empty;
-		public string RootName => IsAssigned ? (_variable.Length > 1 ? _variable[1] : _variable[0]) : null;
-
-		public VariableReference()
+		public string Variable
 		{
-		}
-
-		public VariableReference(string variable)
-		{
-			Update(variable);
-		}
-
-		public void Update(string variable)
-		{
-			if (string.IsNullOrEmpty(variable))
+			get
 			{
-				_variable = _emptyVariable;
-				_lookups = _emptyLookups;
+				return _variable;
 			}
-			else
+			set
 			{
-				_variable = variable.Split(_splitter);
-				_lookups = new string[_variable.Length];
-
-				for (var i = 0; i < _variable.Length; i++)
-				{
-					var v = _variable[i];
-					var open = v.IndexOf(LookupOpen);
-					var close = v.IndexOf(LookupClose);
-
-					// the invalid case will result in a variable name including lookup tokens which will ultimately
-					// print an error when the lookup fails
-
-					if (open > 0 && close == v.Length - 1)
-					{
-						_variable[i] = v.Substring(0, open);
-						_lookups[i] = v.Substring(open + 1, close - open - 1);
-					}
-				}
+				_variable = value;
+				_tokens = Parse(value);
 			}
 		}
+
+		#region Lookup
 
 		public VariableValue GetValue(IVariableStore variables)
 		{
-			var store = GetStore(variables);
+			var value = IsAssigned ? VariableValue.Create(variables) : VariableValue.Empty;
 
-			if (store != null)
-				return GetValue(store, _variable.Length - 1);
-			else
-				return VariableValue.Empty;
-		}
-
-		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
-		{
-			var store = GetStore(variables);
-
-			if (store != null)
-				return SetValue(store, _variable.Length - 1, value);
-			else
-				return SetVariableResult.NotFound;
-		}
-
-		private IVariableStore GetStore(IVariableStore variables)
-		{
-			if (IsAssigned)
+			foreach (var token in _tokens)
 			{
-				var store = variables;
+				switch (token.Type)
+				{
+					case VariableTokenType.Name: value = VariableHandler.Lookup(value, VariableValue.Create(token.Text)); break;
+					case VariableTokenType.Number: value = VariableHandler.Lookup(value, VariableValue.Create(int.Parse(token.Text))); break;
+					case VariableTokenType.Type: value = VariableHandler.Cast(value, token.Text); break;
+				}
 
-				for (var i = 0; i < _variable.Length - 1 && store != null; i++)
-					 store = GetValue(store, i).Store;
-
-				return store;
+				if (value.IsEmpty)
+					break;
 			}
-
-			return null;
-		}
-
-		private VariableValue GetValue(IVariableStore variables, int index)
-		{
-			var variable = _variable[index];
-			var lookup = _lookups[index];
-
-			var value = variables.GetVariable(variable);
-
-			if (!string.IsNullOrEmpty(lookup))
-				value = value.Handler.Lookup(value, lookup);
 
 			return value;
 		}
 
-		private SetVariableResult SetValue(IVariableStore variables, int index, VariableValue value)
+		#endregion
+
+		#region Assignment
+
+		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
 		{
-			var variable = _variable[index];
-			var lookup = _lookups[index];
-
-			if (!string.IsNullOrEmpty(lookup))
+			if (IsAssigned)
 			{
-				var owner = variables.GetVariable(variable);
-				var result = owner.Handler.Apply(ref owner, lookup, value);
+				var owner = VariableValue.Create(variables);
+				return SetValue_(ref owner, value, 0);
+			}
+			else
+			{
+				return SetVariableResult.NotFound;
+			}
+		}
 
-				if (result == SetVariableResult.Success)
-					value = owner;
-				else
+		private SetVariableResult SetValue_(ref VariableValue owner, VariableValue value, int index)
+		{
+			var token = _tokens[index];
+
+			if (index == _tokens.Count - 1)
+			{
+				switch (token.Type)
+				{
+					case VariableTokenType.Name:
+					{
+						return VariableHandler.Apply(ref owner, VariableValue.Create(token.Text), value);
+					}
+					case VariableTokenType.Number:
+					{
+						if (int.TryParse(token.Text, out var number))
+							return VariableHandler.Apply(ref owner, VariableValue.Create(number), value);
+
+						break;
+					}
+					case VariableTokenType.Type:
+					{
+						return SetVariableResult.ReadOnly;
+					}
+				}
+			}
+			else
+			{
+				var lookup = VariableValue.Empty;
+				var child = VariableValue.Empty;
+
+				switch (token.Type)
+				{
+					case VariableTokenType.Name:
+					{
+						lookup = VariableValue.Create(token.Text);
+						child = VariableHandler.Lookup(owner, lookup);
+						break;
+					}
+					case VariableTokenType.Number:
+					{
+						if (int.TryParse(token.Text, out var number))
+						{
+							lookup = VariableValue.Create(number);
+							child = VariableHandler.Lookup(owner, lookup);
+						}
+
+						break;
+					}
+					case VariableTokenType.Type:
+					{
+						child = VariableHandler.Cast(owner, token.Text);
+						break;
+					}
+				}
+
+				if (!child.IsEmpty)
+				{
+					// if a value is set on a struct (Vector3.x for instance), the variable value needs to be
+					// reassigned to its owner
+
+					var result = SetValue_(ref child, value, index + 1);
+
+					if (result == SetVariableResult.Success && !child.HasReference)
+						result = VariableHandler.Apply(ref owner, lookup, child);
+
 					return result;
+				}
 			}
 
-			return variables.SetVariable(variable, value);
+			return SetVariableResult.NotFound;
 		}
 
-		public override string ToString()
+		#endregion
+
+		#region Parsing
+
+		public enum VariableTokenType
 		{
-			var builder = new StringBuilder();
+			Name,
+			Number,
+			Type
+		}
 
-			for (var i = 0; i < _variable.Length; i++)
+		[Serializable]
+		public class VariableToken
+		{
+			public VariableTokenType Type;
+			public string Text;
+		}
+
+		private static List<VariableToken> Parse(string variable)
+		{
+			var parsed = new List<VariableToken>();
+			var tokens = ExpressionLexer.Tokenize(variable);
+			var state = ExpressionTokenType.Identifier;
+
+			foreach (var token in tokens)
 			{
-				if (i != 0)
-					builder.Append(Separator);
+				var text = variable.Substring(token.Start, token.End - token.Start);
 
-				builder.Append(_variable[i]);
+				if (!CheckState(state, token))
+					return new List<VariableToken>();
 
-				if (!string.IsNullOrEmpty(_lookups[i]))
-					builder.AppendFormat("{0}{1}{2}", LookupOpen, _lookups[i], LookupClose);
+				switch (token.Type)
+				{
+					case ExpressionTokenType.Identifier:
+					{
+						parsed.Add(new VariableToken { Type = state == ExpressionTokenType.Command ? VariableTokenType.Type : VariableTokenType.Name, Text = text });
+						state = ExpressionTokenType.Operator;
+						break;
+					}
+					case ExpressionTokenType.Int:
+					{
+						parsed.Add(new VariableToken { Type = VariableTokenType.Number, Text = text });
+						state = ExpressionTokenType.EndLookup;
+						break;
+					}
+					case ExpressionTokenType.Operator:
+					{
+						if (text == Cast)
+							state = ExpressionTokenType.Command;
+						else if (text.Length == 1 && text[0] == Separator)
+							state = ExpressionTokenType.Identifier;
+						else
+							return new List<VariableToken>();
+
+						break;
+					}
+					case ExpressionTokenType.StartLookup:
+					{
+						state = ExpressionTokenType.Int;
+						break;
+					}
+					case ExpressionTokenType.EndLookup:
+					{
+						state = ExpressionTokenType.Operator;
+						break;
+					}
+					default:
+					{
+						return new List<VariableToken>();
+					}
+				}
 			}
 
-			return builder.ToString();
+			return state == ExpressionTokenType.Operator ? parsed : new List<VariableToken>();
 		}
+
+		private static bool CheckState(ExpressionTokenType state, ExpressionToken token)
+		{
+			switch (state)
+			{
+				case ExpressionTokenType.Identifier: return token.Type == ExpressionTokenType.Identifier;
+				case ExpressionTokenType.Command: return token.Type == ExpressionTokenType.Identifier;
+				case ExpressionTokenType.Int: return token.Type == ExpressionTokenType.Int;
+				case ExpressionTokenType.Operator: return token.Type == ExpressionTokenType.Operator || token.Type == ExpressionTokenType.StartLookup;
+				case ExpressionTokenType.EndLookup: return token.Type == ExpressionTokenType.EndLookup;
+				default: return false;
+			}
+		}
+
+		#endregion
 	}
 }

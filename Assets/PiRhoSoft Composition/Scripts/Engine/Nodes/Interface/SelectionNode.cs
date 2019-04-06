@@ -27,10 +27,10 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Control = new VariableReference();
 
 		[Tooltip("The variable to store the selected item's variables in")]
-		public VariableReference SelectedItem = new VariableReference("selectedItem");
+		public VariableReference SelectedItem = new VariableReference { Variable = "selectedItem" };
 
 		[Tooltip("The variable to store the selected item's index in")]
-		public VariableReference SelectedIndex = new VariableReference("selectedIndex");
+		public VariableReference SelectedIndex = new VariableReference { Variable = "selectedIndex" };
 
 		[Tooltip("If set an item will always be selected (unless there are none)")]
 		public bool IsSelectionRequired = false;

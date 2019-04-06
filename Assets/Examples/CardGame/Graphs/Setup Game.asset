@@ -61,12 +61,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Object:
-    _variable:
-    - global
-    - State
-    _lookups:
-    - 
-    - 
+    _variable: global.State
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: State
   Tag: Setup
 --- !u!114 &114170637917079714
 MonoBehaviour:
@@ -85,17 +85,17 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114789499897121068}
   Variable:
-    _variable:
-    - local
-    - emptyList
-    _lookups:
-    - 
-    - 
+    _variable: local.emptyList
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: emptyList
   Value:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Definition:
       _type: 19
       _constraint: 
@@ -158,24 +158,24 @@ MonoBehaviour:
   GraphPosition: {x: 768, y: -76.8}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - Cards
-    - Suits
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.Cards.Suits
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Cards
+    - Type: 0
+      Text: Suits
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - local
-    - suit
-    _lookups:
-    - 
-    - 
+    _variable: local.suit
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: suit
   Loop: {fileID: 114861526200370258}
 --- !u!114 &114458235486340204
 MonoBehaviour:
@@ -294,8 +294,8 @@ MonoBehaviour:
   Context:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Definition:
       _type: 0
       _constraint: 
@@ -342,20 +342,20 @@ MonoBehaviour:
   GraphPosition: {x: 896, y: 51.2}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - local
-    - suitList
-    _lookups:
-    - 
-    - 
+    _variable: local.suitList
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: suitList
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Loop: {fileID: 114534255571413984}

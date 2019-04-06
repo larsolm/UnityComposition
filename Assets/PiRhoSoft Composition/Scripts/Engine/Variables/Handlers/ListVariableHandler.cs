@@ -1,21 +1,27 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class ListVariableHandler : VariableHandler
 	{
-		public const char CountSymbol = '#';
+		public const string CountText = "Count";
 
 		protected override VariableConstraint CreateConstraint() => new ListVariableConstraint();
 
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create(new VariableList());
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void ToString_(VariableValue value, StringBuilder builder)
+		{
+			builder.Append(value.List);
+		}
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			var list = value.List as VariableList;
 
@@ -24,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 				writer.Write(list.Count);
 
 				for (var i = 0; i < list.Count; i++)
-					list.GetVariable(i).Write(writer, objects);
+					Write(list.GetVariable(i), writer, objects);
 			}
 			else
 			{
@@ -32,62 +38,74 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var count = reader.ReadInt32();
+			var list = new VariableList();
 
-			if (count >= 0)
+			for (var i = 0; i < count; i++)
 			{
-				var list = new VariableList();
-
-				for (var i = 0; i < count; i++)
-				{
-					var item = new VariableValue();
-
-					item.Read(reader, objects);
-					list.AddVariable(item);
-				}
-
-				value = VariableValue.Create(list);
+				var item = Read(reader, objects);
+				list.AddVariable(item);
 			}
+
+			return VariableValue.Create(list);
 		}
 
-		public static VariableValue ListLookup(VariableValue owner, string lookup)
+		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
-			if (lookup.Length == 1 && lookup[0] == CountSymbol)
-				return VariableValue.Create(owner.List.Count);
-			else if (int.TryParse(lookup, out var index) && index >= 0 && index < owner.List.Count)
-				return owner.List.GetVariable(index);
-			else
-				return VariableValue.Empty;
+			return LookupInList(owner, lookup);
 		}
 
-		public static SetVariableResult ListApply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
-			if (int.TryParse(lookup, out var index) && index >= 0 && index < owner.List.Count)
-				return owner.List.SetVariable(index, value);
-			else if (lookup.Length == 1 && lookup[0] == CountSymbol)
-				return SetVariableResult.ReadOnly;
-			else
-				return SetVariableResult.NotFound;
+			return ApplyToList(ref owner, lookup, value);
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
-		{
-			return ListLookup(owner, lookup);
-		}
-
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
-		{
-			return ListApply(ref owner, lookup, value);
-		}
-
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.HasReference)
 				return left.Reference == right.Reference;
 			else
 				return null;
+		}
+
+		public static VariableValue LookupInList(VariableValue owner, VariableValue lookup)
+		{
+			if (lookup.Type == VariableType.String)
+			{
+				if (lookup.String == CountText)
+					return VariableValue.Create(owner.List.Count);
+			}
+			else if (lookup.Type == VariableType.Int)
+			{
+				if (lookup.Int >= 0 && lookup.Int < owner.List.Count)
+					return owner.List.GetVariable(lookup.Int);
+			}
+
+			return VariableValue.Empty;
+		}
+
+		public static SetVariableResult ApplyToList(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		{
+			if (lookup.Type == VariableType.String)
+			{
+				if (lookup.String == CountText)
+					return SetVariableResult.ReadOnly;
+				else
+					return SetVariableResult.NotFound;
+			}
+			else if (lookup.Type == VariableType.Int)
+			{
+				if (lookup.Int >= 0 && lookup.Int < owner.List.Count)
+					return owner.List.SetVariable(lookup.Int, value);
+				else
+					return SetVariableResult.NotFound;
+			}
+			else
+			{
+				return SetVariableResult.TypeMismatch;
+			}
 		}
 	}
 }

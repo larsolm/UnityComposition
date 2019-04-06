@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -33,9 +31,6 @@ namespace PiRhoSoft.CompositionEngine
 
 	public struct VariableValue
 	{
-		public const string EmptyString = "(empty)";
-		public const string NullString = "(null)";
-
 		private VariableType _type;
 		private ValueData _value;
 		private object _reference;
@@ -64,8 +59,6 @@ namespace PiRhoSoft.CompositionEngine
 		public bool HasReferenceType<Type>() where Type : class => HasReferenceType(typeof(Type));
 		public bool HasEnumType(Type type) => HasEnum && EnumType == type;
 		public bool HasReferenceType(Type type) => HasReference && _reference != null && type.IsAssignableFrom(ReferenceType);
-
-		public VariableHandler Handler => VariableHandler.Get(_type);
 
 		#region Storage
 
@@ -236,33 +229,7 @@ namespace PiRhoSoft.CompositionEngine
 		public Type EnumType => HasEnum ? _reference.GetType() : null;
 		public Type ReferenceType => HasReference && _reference != null ? _reference.GetType() : null;
 
-		public override string ToString()
-		{
-			switch (Type)
-			{
-				case VariableType.Empty: return EmptyString;
-				case VariableType.Bool: return _value.Bool.ToString();
-				case VariableType.Int: return _value.Int.ToString();
-				case VariableType.Float: return _value.Float.ToString();
-				case VariableType.Int2: return _value.Int2.ToString();
-				case VariableType.Int3: return _value.Int3.ToString();
-				case VariableType.IntRect: return _value.IntRect.ToString();
-				case VariableType.IntBounds: return _value.IntBounds.ToString();
-				case VariableType.Vector2: return _value.Vector2.ToString();
-				case VariableType.Vector3: return _value.Vector3.ToString();
-				case VariableType.Vector4: return _value.Vector4.ToString();
-				case VariableType.Quaternion: return _value.Quaternion.ToString();
-				case VariableType.Rect: return _value.Rect.ToString();
-				case VariableType.Bounds: return _value.Bounds.ToString();
-				case VariableType.Color: return _value.Color.ToString();
-				case VariableType.String: return String;
-				case VariableType.Enum: return _reference.ToString();
-				case VariableType.Object: return _reference != null ? _reference.ToString() : NullString;
-				case VariableType.Store: return _reference != null ? _reference.ToString() : NullString;
-				case VariableType.List: return _reference != null ? _reference.ToString() : NullString;
-				default: return EmptyString;
-			}
-		}
+		public override string ToString() => VariableHandler.ToString(this);
 
 		private VariableType GetListType()
 		{
@@ -611,57 +578,6 @@ namespace PiRhoSoft.CompositionEngine
 			return t != null;
 		}
 
-		#endregion
-
-		#region Persistence
-
-		// TODO: needs error reporting
-
-		public static void Save(VariableValue value, ref string data, ref List<Object> objects)
-		{
-			objects = new List<Object>();
-
-			using (var stream = new MemoryStream())
-			{
-				using (var writer = new BinaryWriter(stream))
-					value.Write(writer, objects);
-
-				data = Convert.ToBase64String(stream.ToArray());
-			}
-		}
-
-		public static void Load(ref VariableValue value, ref string data, ref List<Object> objects)
-		{
-			try
-			{
-				var bytes = Convert.FromBase64String(data);
-
-				using (var stream = new MemoryStream(bytes))
-				{
-					using (var reader = new BinaryReader(stream))
-						value.Read(reader, objects);
-				}
-			}
-			catch
-			{
-			}
-
-			data = null;
-			objects = null;
-		}
-
-		internal void Write(BinaryWriter writer, List<Object> objects)
-		{
-			writer.Write((int)_type);
-			Handler.Write(this, writer, objects);
-		}
-
-		internal void Read(BinaryReader reader, List<Object> objects)
-		{
-			_type = (VariableType)reader.ReadInt32();
-			Handler.Read(ref this, reader, objects);
-		}
-		
 		#endregion
 	}
 }

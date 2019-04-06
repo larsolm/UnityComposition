@@ -365,7 +365,7 @@ namespace PiRhoSoft.CompositionEditor
 			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
 
 			var type = (VariableType)typeProperty.enumValueIndex;
-			var constraint = VariableHandler.Get((VariableType)typeProperty.enumValueIndex).CreateConstraint(constraintProperty.stringValue);
+			var constraint = VariableHandler.CreateConstraint((VariableType)typeProperty.enumValueIndex, constraintProperty.stringValue);
 			var definition = ValueDefinition.Create(type, constraint, null, null, isTypeLockedProperty.boolValue, isConstraintLockedProperty.boolValue);
 
 			return GetHeight(definition, VariableInitializerType.None, null);
@@ -379,7 +379,7 @@ namespace PiRhoSoft.CompositionEditor
 			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
 
 			var type = (VariableType)typeProperty.enumValueIndex;
-			var constraint = VariableHandler.Get((VariableType)typeProperty.enumValueIndex).CreateConstraint(constraintProperty.stringValue);
+			var constraint = VariableHandler.CreateConstraint((VariableType)typeProperty.enumValueIndex, constraintProperty.stringValue);
 			var definition = ValueDefinition.Create(type, constraint, null, null, isTypeLockedProperty.boolValue, isConstraintLockedProperty.boolValue);
 
 			definition = Draw(position, label, definition, VariableInitializerType.None, null, true);

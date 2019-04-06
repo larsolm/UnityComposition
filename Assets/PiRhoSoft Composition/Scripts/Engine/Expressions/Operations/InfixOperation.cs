@@ -5,9 +5,24 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public abstract class InfixOperation : Operation
 	{
-		public Operation Left;
-		public string Symbol;
-		public Operation Right;
+		private const string _typeMismatchException = "the operator '{0}' cannot be applied to values of type {1} and {2}";
+
+		protected Operation Left;
+		protected string Symbol;
+		protected Operation Right;
+
+		public abstract OperatorPrecedence Precedence { get; }
+
+		internal void Setup(Operation left)
+		{
+			Left = left;
+		}
+
+		public override void Parse(ExpressionParser parser, ExpressionToken token)
+		{
+			Symbol = parser.GetText(token);
+			Right = parser.ParseRight(Precedence);
+		}
 
 		public override void ToString(StringBuilder builder)
 		{
@@ -24,8 +39,9 @@ namespace PiRhoSoft.CompositionEngine
 			Right.GetInputs(inputs, source);
 		}
 
-		protected ExpressionEvaluationException TypeMismatch(VariableType left, VariableType right, VariableType expected) => ExpressionEvaluationException.InfixTypeMismatch(Symbol, left, right, expected);
-		protected ExpressionEvaluationException TypeMismatch(VariableType left, VariableType right, VariableType expected1, VariableType expected2) => ExpressionEvaluationException.InfixTypeMismatch(Symbol, left, right, expected1, expected2);
-		protected ExpressionEvaluationException TypeMismatch(VariableType left, VariableType right, params VariableType[] expected) => ExpressionEvaluationException.InfixTypeMismatch(Symbol, left, right, expected);
+		protected ExpressionEvaluationException TypeMismatch(VariableType left, VariableType right)
+		{
+			return new ExpressionEvaluationException(_typeMismatchException, Symbol, left, right);
+		}
 	}
 }

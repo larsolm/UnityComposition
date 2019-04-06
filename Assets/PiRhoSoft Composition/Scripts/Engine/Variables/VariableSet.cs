@@ -138,12 +138,20 @@ namespace PiRhoSoft.CompositionEngine
 		private bool SetValue(int index, VariableValue value)
 		{
 			var existing = _variables[index].Value;
-			var assignable = _variables[index].Value.Handler.IsAssignable(existing, value);
 
-			if (assignable)
-				_variables[index] = Variable.Create(_variables[index].Name, value);
+			if (_schema != null)
+			{
+				var definition = _schema[index].Definition;
 
-			return assignable;
+				if (definition.Type != VariableType.Empty && definition.Type != value.Type)
+					return false;
+
+				if (definition.Constraint != null && !definition.Constraint.IsValid(value))
+					return false;
+			}
+
+			_variables[index] = Variable.Create(_variables[index].Name, value);
+			return true;
 		}
 
 		#endregion

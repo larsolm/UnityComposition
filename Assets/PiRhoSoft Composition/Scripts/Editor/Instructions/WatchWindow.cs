@@ -255,7 +255,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private bool AddWatch(string variable)
 		{
-			var reference = new VariableReference(variable);
+			var reference = new VariableReference { Variable = variable };
 
 			foreach (var instruction in CompositionManager.InstructionState)
 			{

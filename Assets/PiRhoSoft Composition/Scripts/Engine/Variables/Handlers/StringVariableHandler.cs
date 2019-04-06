@@ -1,14 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class StringVariableHandler : VariableHandler
 	{
+		public const char Symbol = '\"';
+
 		protected override VariableConstraint CreateConstraint() => new StringVariableConstraint();
 
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			if (constraint is StringVariableConstraint stringConstraint)
 				return VariableValue.Create(stringConstraint.Values.Length > 0 ? stringConstraint.Values[0] : string.Empty);
@@ -16,28 +19,36 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Create(string.Empty);
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void ToString_(VariableValue value, StringBuilder builder)
+		{
+			builder.Append(Symbol);
+			builder.Append(value.String);
+			builder.Append(Symbol);
+		}
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.String);
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var s = reader.ReadString();
-			value = VariableValue.Create(s);
+			return VariableValue.Create(s);
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableValue Add_(VariableValue left, VariableValue right)
 		{
-			return VariableValue.Empty;
+			switch (right.Type)
+			{
+				case VariableType.Int: return VariableValue.Create(left.String + right.Int);
+				case VariableType.Float: return VariableValue.Create(left.String + right.Float);
+				case VariableType.String: return VariableValue.Create(left.String + right.String);
+				default: return VariableValue.Empty;
+			}
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
-		{
-			return SetVariableResult.NotFound;
-		}
-
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetString(out var str))
 				return left.String == str;
@@ -45,7 +56,7 @@ namespace PiRhoSoft.CompositionEngine
 				return null;
 		}
 
-		public override int? Compare(VariableValue left, VariableValue right)
+		protected override int? Compare_(VariableValue left, VariableValue right)
 		{
 			if (right.Type == VariableType.String)
 				return left.String.CompareTo(right.String);

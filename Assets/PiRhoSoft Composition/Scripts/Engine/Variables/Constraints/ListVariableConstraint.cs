@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (!Enum.TryParse(data.Substring(0, pipe), out ItemType))
 				return false;
 			
-			ItemConstraint = VariableHandler.Get(ItemType).CreateConstraint(data.Substring(pipe + 1));
+			ItemConstraint = VariableHandler.CreateConstraint(ItemType, data.Substring(pipe + 1));
 			return true;
 		}
 

@@ -1,14 +1,15 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Text;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class IntVariableHandler : VariableHandler
 	{
-		protected override VariableConstraint CreateConstraint() => new IntVariableConstraint();
-
-		public override VariableValue CreateDefault(VariableConstraint constraint)
+		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			if (constraint is IntVariableConstraint intConstraint)
 				return VariableValue.Create(intConstraint.Minimum);
@@ -16,39 +17,96 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Create(0);
 		}
 
-		public override void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected override void ToString_(VariableValue value, StringBuilder builder)
+		{
+			builder.Append(value.Int);
+		}
+
+		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Int);
 		}
 
-		public override void Read(ref VariableValue value, BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
 			var i = reader.ReadInt32();
-			value = VariableValue.Create(i);
+			return VariableValue.Create(i);
 		}
 
-		public override VariableValue Lookup(VariableValue owner, string lookup)
+		protected override VariableConstraint CreateConstraint()
 		{
-			return VariableValue.Empty;
+			return new IntVariableConstraint();
 		}
 
-		public override SetVariableResult Apply(ref VariableValue owner, string lookup, VariableValue value)
+		protected override VariableValue Add_(VariableValue left, VariableValue right)
 		{
-			return SetVariableResult.NotFound;
+			if (right.TryGetInt(out var i))
+				return VariableValue.Create(left.Int + i);
+			else if (right.Type == VariableType.String)
+				return VariableValue.Create(left.Int + right.String);
+			else
+				return VariableValue.Empty;
 		}
 
-		public override bool? IsEqual(VariableValue left, VariableValue right)
+		protected override VariableValue Subtract_(VariableValue left, VariableValue right)
 		{
-			if (right.Type == VariableType.Int)
-				return left.Int == right.Int;
+			if (right.TryGetInt(out var i))
+				return VariableValue.Create(left.Int - i);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Multiply_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetInt(out var i))
+				return VariableValue.Create(left.Int * i);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Divide_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetInt(out var i) && i != 0)
+				return VariableValue.Create(left.Int / i);
+			else if (right.TryGetFloat(out var f))
+				return VariableValue.Create(left.Int / f);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Modulo_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetInt(out var i) && i != 0)
+				return VariableValue.Create(left.Int % i);
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Exponent_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetInt(out var i))
+				return VariableValue.Create((float)Math.Pow(left.Int, i));
+			else
+				return VariableValue.Empty;
+		}
+
+		protected override VariableValue Negate_(VariableValue value)
+		{
+			return VariableValue.Create(-value.Int);
+		}
+
+		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		{
+			if (right.TryGetInt(out var i))
+				return left.Int == i;
 			else
 				return null;
 		}
 
-		public override int? Compare(VariableValue left, VariableValue right)
+		protected override int? Compare_(VariableValue left, VariableValue right)
 		{
-			if (right.Type == VariableType.Int)
-				return left.Int.CompareTo(right.Int);
+			if (right.TryGetInt(out var i))
+				return left.Int.CompareTo(i);
 			else
 				return null;
 		}

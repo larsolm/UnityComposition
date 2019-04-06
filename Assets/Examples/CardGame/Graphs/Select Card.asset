@@ -113,21 +113,21 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114980614166743252}
   Target:
-    _variable:
-    - global
-    - SelectedCard
-    _lookups:
-    - 
-    - Transform
+    _variable: global.selectedCard
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
     Type: 1
     Reference:
-      _variable:
-      - local
-      - cardPosition
-      _lookups:
-      - 
-      - 
+      _variable: local.cardPosition
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Definition:
       _type: 9
       _constraint: 
@@ -158,21 +158,21 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114606885731722130}
   Target:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - Transform
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
     Type: 1
     Reference:
-      _variable:
-      - local
-      - rootPosition
-      _lookups:
-      - 
-      - 
+      _variable: local.rootPosition
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Definition:
       _type: 9
       _constraint: 
@@ -222,7 +222,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114481829014540738}
   Expression:
-    _statement: local.card = cardContainer<VariableStoreComponent>
+    _statement: local.card = cardContainer as VariableStoreComponent
 --- !u!114 &114944409301683160
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -246,8 +246,12 @@ MonoBehaviour:
   Context:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Definition:
       _type: 0
       _constraint: 
@@ -342,12 +346,12 @@ MonoBehaviour:
   Context:
     Type: 1
     Reference:
-      _variable:
-      - local
-      - card
-      _lookups:
-      - 
-      - 
+      _variable: local.card
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Definition:
       _type: 0
       _constraint: 

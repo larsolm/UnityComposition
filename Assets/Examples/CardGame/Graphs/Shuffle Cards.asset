@@ -94,14 +94,14 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114438301544111286}
   Variable:
-    _variable:
-    - global
-    - State
-    - Cards
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: global.State.Cards
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: State
+    - Type: 0
+      Text: Cards
 --- !u!114 &114432394057212114
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -151,7 +151,7 @@ MonoBehaviour:
 
       local.rowList = global.State.Rows[local.row]
 
-      local.column = local.rowList<#>'
+      local.column = local.rowList.Count'
 --- !u!114 &114613535626573654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -175,8 +175,8 @@ MonoBehaviour:
   Context:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Definition:
       _type: 0
       _constraint: 
@@ -204,24 +204,24 @@ MonoBehaviour:
   GraphPosition: {x: 960, y: 25.6}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - global
-    - State
-    - Cards
-    _lookups:
-    - 
-    - 
-    - 
+    _variable: local.State.Cards
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: State
+    - Type: 0
+      Text: Cards
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - 
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Loop: {fileID: 114432394057212114}
 --- !u!114 &114749951981520494
 MonoBehaviour:
@@ -279,21 +279,21 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114828798773068104}
   Target:
-    _variable:
-    - local
-    - card
-    _lookups:
-    - 
-    - Transform
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
   Value:
     Type: 1
     Reference:
-      _variable:
-      - local
-      - cardPosition
-      _lookups:
-      - 
-      - 
+      _variable: local.cardPosition
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: cardPosition
     Definition:
       _type: 9
       _constraint: 
@@ -330,12 +330,12 @@ MonoBehaviour:
   Context:
     Type: 1
     Reference:
-      _variable:
-      - local
-      - card
-      _lookups:
-      - 
-      - 
+      _variable: local.card
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
     Definition:
       _type: 0
       _constraint: 
@@ -368,4 +368,4 @@ MonoBehaviour:
 
       local.rowList = global.State.Rows[local.row]
 
-      local.column = local.rowList<#>'
+      local.column = local.rowList.Count'

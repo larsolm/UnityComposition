@@ -49,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogErrorFormat(_invalidInitializerError, Type, value.Type);
 			}
 
-			return VariableHandler.Get(Type).CreateDefault(Constraint);
+			return VariableHandler.CreateDefault(Type, Constraint);
 		}
 
 		public bool IsValid(VariableValue value)
@@ -144,7 +144,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnAfterDeserialize()
 		{
-			Constraint = VariableHandler.Get(Type).CreateConstraint(_constraint);
+			Constraint = VariableHandler.CreateConstraint(Type, _constraint);
 			_constraint = null;
 		}
 

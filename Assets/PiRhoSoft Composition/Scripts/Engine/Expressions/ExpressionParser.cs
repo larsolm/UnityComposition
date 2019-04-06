@@ -1,37 +1,57 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class ExpressionParseException : Exception
 	{
-		public int Location;
+		public ExpressionToken Token;
 
-		public ExpressionParseException(int location, string error) : base(error) => Location = location;
-		public ExpressionParseException(int location, string errorFormat, params object[] arguments) : this(location, string.Format(errorFormat, arguments)) { }
+		public ExpressionParseException(ExpressionToken token, string error) : base(error) => Token = token;
+		public ExpressionParseException(ExpressionToken token, string errorFormat, params object[] arguments) : this(token, string.Format(errorFormat, arguments)) { }
 	}
 
 	public class ExpressionParser
 	{
-		private const string _duplicateCommandError = "(CEPDC) Failed to add Command '{0}': a Command with that name has already been added";
-		private const string _duplicateInfixOperatorError = "(CEPDIO) Failed to add infix operator '{0}': an infix operator with that symbol has already been added";
-		private const string _duplicatePrefixOperatorError = "(CEPDPO) Failed to add prefix operator '{0}': a prefix operator with that symbol has already been added";
-		private const string _missingCommandError = "(CEPMC) Failed to remove Command '{0}': a Command with that name has not been added";
-		private const string _endOfInputException = "Expression is incomplete";
-		private const string _invalidInfixOperatorException = "{0} is not a valid infix operator";
-		private const string _invalidPrefixOperatorException = "{0} is not a valid prefix operator";
-		private const string _invalidToken1Exception = "{0} expected";
-		private const string _invalidToken3Exception = "{0}, {1}, or {2} expected";
+		private const string _duplicateCommandError = "(CEPDC) Failed to add Command '{0}': a Command with the same name has already been added";
+		private const string _missingCommandError = "(CEPMC) Failed to remove Command '{0}': a Command with the same name has not been added";
+		private const string _duplicatePrefixOperatorError = "(CEPDPO) Failed to add prefix operator '{0}': a prefix operator with the same symbol has already been added";
+		private const string _duplicateInfixOperatorError = "(CEPDIO) Failed to add infix operator '{0}': an infix operator with the same symbol has already been added";
+
+		private const string _invalidStatementException = "a statement cannot begin with '{0}'";
+		private const string _invalidConstantException = "'{0}' is not a valid constant";
+		private const string _invalidOperatorException = "'{0}' is not a valid operator";
+		private const string _invalidTokenException = "expected '{0}' instead of '{1}'";
+		private const string _invalidEndException = "expression is incomplete";
 
 		private static Dictionary<string, ICommand> _commands = new Dictionary<string, ICommand>();
 		private static Dictionary<string, OperatorCreator> _prefixOperators = new Dictionary<string, OperatorCreator>();
 		private static Dictionary<string, OperatorCreator> _infixOperators = new Dictionary<string, OperatorCreator>();
 		private static Dictionary<string, OperatorPrecedence> _precedences = new Dictionary<string, OperatorPrecedence>();
 		
+		private string _input;
 		private List<ExpressionToken> _tokens;
 		private int _index;
+
+		public static List<Operation> Parse(string input, List<ExpressionToken> tokens)
+		{
+			var parser = new ExpressionParser { _input = input, _tokens = tokens, _index = 0 };
+			var expressions = new List<Operation>();
+
+			while (parser._index < parser._tokens.Count)
+			{
+				var expression = parser.ParseLeft(OperatorPrecedence.Default);
+				expressions.Add(expression);
+
+				if (parser._index < parser._tokens.Count)
+					parser.SkipToken(ExpressionTokenType.Sentinel, ";");
+			}
+
+			return expressions;
+		}
+
+		#region Commands
 
 		public static void AddCommand(string name, ICommand command)
 		{
@@ -50,6 +70,20 @@ namespace PiRhoSoft.CompositionEngine
 		public static ICommand GetCommand(string name)
 		{
 			return _commands.TryGetValue(name, out ICommand command) ? command : null;
+		}
+
+		#endregion
+
+		#region Operators
+
+		private abstract class OperatorCreator
+		{
+			public abstract Operation Create();
+		}
+
+		private class OperatorCreator<OperatorType> : OperatorCreator where OperatorType : Operation, new()
+		{
+			public override Operation Create() => new OperatorType();
 		}
 
 		public static void AddPrefixOperator<OperatorType>(string symbol) where OperatorType : PrefixOperation, new()
@@ -73,235 +107,48 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public static void AddTernaryOperator(string symbol, OperatorPrecedence precedence)
+		private Operation CreatePrefixOperator(ExpressionToken token)
 		{
-			_precedences.Add(symbol, precedence);
-		}
+			var op = GetText(token);
 
-		public static List<Operation> Parse(List<ExpressionToken> tokens)
-		{
-			var parser = new ExpressionParser(tokens);
-			var expressions = new List<Operation>();
-
-			while (parser._index < parser._tokens.Count)
-			{
-				var expression = parser.Parse(0);
-				expressions.Add(expression);
-
-				if (parser._index < parser._tokens.Count)
-					parser.SkipNextToken(ExpressionTokenType.Sentinel);
-			}
-
-			return expressions;
-		}
-
-		private abstract class OperatorCreator
-		{
-			public abstract Operation Create();
-		}
-
-		private class OperatorCreator<OperatorType> : OperatorCreator where OperatorType : Operation, new()
-		{
-			public override Operation Create() => new OperatorType();
-		}
-
-		private static Operation CreatePrefixOperator(ExpressionToken token, Operation right)
-		{
-			if (_prefixOperators.TryGetValue(token.Text, out OperatorCreator creator))
-			{
-				var op = creator.Create() as PrefixOperation;
-				op.Symbol = token.Text;
-				op.Right = right;
-
-				return op;
-			}
+			if (_prefixOperators.TryGetValue(op, out var creator))
+				return creator.Create();
 			else
-			{
-				throw new ExpressionParseException(token.Location, _invalidPrefixOperatorException, token.Text);
-			}
+				throw new ExpressionParseException(token, _invalidOperatorException, op);
 		}
 
-		private static Operation CreateInfixOperator(Operation left, ExpressionToken token, Operation right)
+		private InfixOperation CreateInfixOperator(ExpressionToken token)
 		{
-			if (_infixOperators.TryGetValue(token.Text, out OperatorCreator creator))
-			{
-				var op = creator.Create() as InfixOperation;
-				op.Left = left;
-				op.Symbol = token.Text;
-				op.Right = right;
-				return op;
-			}
+			var op = GetText(token);
+
+			if (_infixOperators.TryGetValue(op, out var creator))
+				return creator.Create() as InfixOperation;
 			else
-			{
-				throw new ExpressionParseException(token.Location, _invalidInfixOperatorException, token.Text);
-			}
+				throw new ExpressionParseException(token, _invalidOperatorException, op);
 		}
 
-		private static Operation CreateTernaryOperator(Operation left, Operation trueBranch, Operation falseBranch)
+		#endregion
+
+		#region Parsing
+
+		public Operation ParseLeft(OperatorPrecedence precedence)
 		{
-			return new TernaryOperator { Condition = left, TrueBranch = trueBranch, FalseBranch = falseBranch };
+			return Parse(precedence.Value);
 		}
 
-		private ExpressionParser(List<ExpressionToken> tokens)
+		public Operation ParseRight(OperatorPrecedence precedence)
 		{
-			_tokens = tokens;
-			_index = 0;
+			return Parse(precedence.AssociativeValue);
 		}
 
 		private Operation Parse(int precedence)
 		{
-			var expression = ParsePrefix();
+			var operation = ParsePrefix();
 
 			while (_index < _tokens.Count && precedence < GetPrecedence(_tokens[_index]))
-				expression = ParseInfix(expression);
+				operation = ParseInfix(operation);
 
-			return expression;
-		}
-
-		private Operation ParsePrefix()
-		{
-			var token = TakeNextToken();
-
-			switch (token.Type)
-			{
-				case ExpressionTokenType.Boolean: return new LiteralOperation(VariableValue.Create(token.Integer == 0 ? false : true));
-				case ExpressionTokenType.Integer: return new LiteralOperation(VariableValue.Create(token.Integer));
-				case ExpressionTokenType.Number: return new LiteralOperation(VariableValue.Create(token.Number));
-				case ExpressionTokenType.String: return new LiteralOperation(VariableValue.Create(token.Text));
-				case ExpressionTokenType.Color: return new LiteralOperation(VariableValue.Create(token.Color));
-				case ExpressionTokenType.Null: return new LiteralOperation(VariableValue.Create((Object)null));
-				case ExpressionTokenType.Identifier: return ParseLookup(token);
-				case ExpressionTokenType.StartGroup: return ParseGroup();
-				case ExpressionTokenType.Command: return ParseCommand(token);
-				case ExpressionTokenType.Operator: return ParsePrefixOperator(token);
-				default: throw new ExpressionParseException(token.Location, _invalidToken3Exception, ExpressionTokenType.Command, ExpressionTokenType.Operator, ExpressionTokenType.Identifier);
-			}
-		}
-
-		private Operation ParseInfix(Operation left)
-		{
-			var token = TakeNextToken();
-
-			if (token.Type == ExpressionTokenType.Operator)
-			{
-				if (token.Text == "?")
-					return ParseTernaryOperator(token, left);
-				else
-					return ParseInfixOperator(token, left);
-			}
-			else
-			{
-				throw new ExpressionParseException(token.Location, _invalidToken1Exception, ExpressionTokenType.Operator);
-			}
-		}
-
-		private Operation ParseGroup()
-		{
-			var expression = Parse(0);
-			SkipNextToken(ExpressionTokenType.EndGroup);
-			return expression;
-		}
-
-		private Operation ParseLookup(ExpressionToken token)
-		{
-			var parameter = (Operation)null;
-
-			if (_index < _tokens.Count)
-			{
-				var nextToken = ViewNextToken();
-
-				if (nextToken.Type == ExpressionTokenType.StartLookup)
-				{
-					SkipNextToken(ExpressionTokenType.StartLookup);
-					nextToken = ViewNextToken();
-
-					if (nextToken.Type != ExpressionTokenType.EndLookup)
-						parameter = Parse(0);
-
-					SkipNextToken(ExpressionTokenType.EndLookup);
-				}
-			}
-
-			return new LookupOperation(token.Text, parameter);
-		}
-
-		private Operation ParseCommand(ExpressionToken token)
-		{
-			var nextToken = ViewNextToken();
-			var parameters = new List<Operation>();
-
-			while (nextToken.Type != ExpressionTokenType.EndGroup)
-			{
-				var parameter = Parse(0);
-				parameters.Add(parameter);
-				nextToken = ViewNextToken();
-
-				if (nextToken.Type == ExpressionTokenType.Separator)
-				{
-					TakeNextToken();
-					nextToken = ViewNextToken();
-				}
-			}
-
-			SkipNextToken(ExpressionTokenType.EndGroup);
-			return new CommandOperation(token.Text, parameters);
-		}
-
-		private Operation ParsePrefixOperator(ExpressionToken token)
-		{
-			var right = Parse(OperatorPrecedence.Prefix.Value);
-			return CreatePrefixOperator(token, right);
-		}
-
-		private Operation ParseInfixOperator(ExpressionToken token, Operation left)
-		{
-			var precedence = GetAssociativePrecedence(token);
-			var right = Parse(precedence);
-			return CreateInfixOperator(left, token, right);
-		}
-
-		private Operation ParseTernaryOperator(ExpressionToken token, Operation left)
-		{
-			var precedence = GetAssociativePrecedence(token);
-			var trueBranch = Parse(precedence);
-
-			SkipNextToken(ExpressionTokenType.Operator, ":");
-
-			var falseBranch = Parse(precedence);
-
-			return CreateTernaryOperator(left, trueBranch, falseBranch);
-		}
-
-		private ExpressionToken TakeNextToken()
-		{
-			if (_index < _tokens.Count)
-				return _tokens[_index++];
-			else
-				throw new ExpressionParseException(0, _endOfInputException);
-		}
-
-		private ExpressionToken ViewNextToken()
-		{
-			if (_index < _tokens.Count)
-				return _tokens[_index];
-			else
-				throw new ExpressionParseException(0, _endOfInputException);
-		}
-
-		private void SkipNextToken(ExpressionTokenType type)
-		{
-			var token = TakeNextToken();
-
-			if (token.Type != type)
-				throw new ExpressionParseException(token.Location, _invalidToken1Exception, type);
-		}
-
-		private void SkipNextToken(ExpressionTokenType type, string text)
-		{
-			var token = TakeNextToken();
-
-			if (token.Type != type || token.Text != text)
-				throw new ExpressionParseException(token.Location, _invalidToken1Exception, text);
+			return operation;
 		}
 
 		private int GetPrecedence(ExpressionToken token)
@@ -309,46 +156,160 @@ namespace PiRhoSoft.CompositionEngine
 			switch (token.Type)
 			{
 				case ExpressionTokenType.Sentinel: return int.MinValue;
-				case ExpressionTokenType.Boolean: return int.MaxValue - 1;
-				case ExpressionTokenType.Integer: return int.MaxValue - 1;
-				case ExpressionTokenType.Number: return int.MaxValue - 1;
+				case ExpressionTokenType.Constant: return int.MaxValue - 1;
+				case ExpressionTokenType.Int: return int.MaxValue - 1;
+				case ExpressionTokenType.Float: return int.MaxValue - 1;
+				case ExpressionTokenType.String: return int.MaxValue - 1;
 				case ExpressionTokenType.Color: return int.MaxValue - 1;
 				case ExpressionTokenType.Identifier: return int.MaxValue - 1;
 				case ExpressionTokenType.Command: return int.MaxValue - 1;
-				case ExpressionTokenType.StartLookup: return int.MaxValue;
+				case ExpressionTokenType.StartLookup: return OperatorPrecedence.MemberAccess.Value;
 				case ExpressionTokenType.EndLookup: return 0;
 				case ExpressionTokenType.StartGroup: return int.MaxValue;
 				case ExpressionTokenType.EndGroup: return 0;
 				case ExpressionTokenType.Separator: return 0;
+				case ExpressionTokenType.Alternation: return OperatorPrecedence.Ternary.Value;
+				case ExpressionTokenType.Unknown: return 0;
 			}
 
-			return _precedences.TryGetValue(token.Text, out var precedence) ? precedence.Value : 0;
+			var text = GetText(token);
+			return _precedences.TryGetValue(text, out var precedence) ? precedence.Value : 0;
 		}
 
-		private int GetAssociativePrecedence(ExpressionToken token)
+		private Operation ParsePrefix()
 		{
-			return _precedences.TryGetValue(token.Text, out var precedence) ? precedence.AssociativeValue : 0;
+			var token = TakeToken();
+			var operation = CreatePrefixOperation(token);
+
+			operation.Parse(this, token);
+
+			return operation;
 		}
+
+		private Operation ParseInfix(Operation left)
+		{
+			var token = TakeToken();
+			var operation = CreateInfixOperation(token);
+
+			operation.Setup(left);
+			operation.Parse(this, token);
+
+			return operation;
+		}
+
+		private Operation CreatePrefixOperation(ExpressionToken token)
+		{
+			switch (token.Type)
+			{
+				case ExpressionTokenType.Constant: return CreateConstantOperation(token);
+				case ExpressionTokenType.Int: return new LiteralOperation();
+				case ExpressionTokenType.Float: return new LiteralOperation();
+				case ExpressionTokenType.String: return new LiteralOperation();
+				case ExpressionTokenType.Color: return new LiteralOperation();
+				case ExpressionTokenType.Identifier: return new IdentifierOperation();
+				case ExpressionTokenType.Command: return new CommandOperation();
+				case ExpressionTokenType.Operator: return CreatePrefixOperator(token);
+				case ExpressionTokenType.StartGroup: return new GroupOperation();
+			}
+
+			throw new ExpressionParseException(token, _invalidStatementException, GetText(token));
+		}
+
+		private InfixOperation CreateInfixOperation(ExpressionToken token)
+		{
+			switch (token.Type)
+			{
+				case ExpressionTokenType.Operator: return CreateInfixOperator(token);
+				case ExpressionTokenType.StartLookup: return new LookupOperator();
+				default: throw new ExpressionParseException(token, _invalidOperatorException, GetText(token));
+			}
+		}
+
+		private ConstantOperation CreateConstantOperation(ExpressionToken token)
+		{
+			var text = GetText(token);
+			var value = ExpressionLexer.GetConstant(GetText(token));
+
+			if (value.IsEmpty)
+				throw new ExpressionParseException(token, _invalidConstantException, text);
+
+			return new ConstantOperation(value);
+		}
+
+		#endregion
+
+		#region Tokens
+
+		public string GetText(ExpressionToken token)
+		{
+			return _input.Substring(token.Start, token.End - token.Start);
+		}
+
+		public bool HasText(ExpressionToken token, string text)
+		{
+			var length = token.End - token.Start;
+
+			if (length != text.Length)
+				return false;
+
+			for (var i = 0; i < length; i++)
+			{
+				if (text[i] != _input[token.Start + i])
+					return false;
+			}
+
+			return true;
+		}
+
+		public bool HasToken(ExpressionTokenType type)
+		{
+			return _index < _tokens.Count && _tokens[_index].Type == type;
+		}
+
+		public void SkipToken(ExpressionTokenType type, string expected)
+		{
+			var token = TakeToken();
+
+			if (token.Type != type)
+			{
+				var text = GetText(token);
+				throw new ExpressionParseException(token, _invalidTokenException, expected, text);
+			}
+		}
+
+		private ExpressionToken TakeToken()
+		{
+			if (_index < _tokens.Count)
+				return _tokens[_index++];
+			else
+				throw new ExpressionParseException(_tokens[_tokens.Count - 1], _invalidEndException);
+		}
+
+		#endregion
+
+		#region Built In Operators and Commands
 
 		static ExpressionParser()
 		{
 			AddPrefixOperator<NegateOperator>("-");
-			AddPrefixOperator<InvertOperator>("!");
-
 			AddInfixOperator<AddOperator>("+", OperatorPrecedence.Addition);
 			AddInfixOperator<SubtractOperator>("-", OperatorPrecedence.Addition);
 			AddInfixOperator<MultiplyOperator>("*", OperatorPrecedence.Multiplication);
 			AddInfixOperator<DivideOperator>("/", OperatorPrecedence.Multiplication);
 			AddInfixOperator<ModuloOperator>("%", OperatorPrecedence.Multiplication);
 			AddInfixOperator<ExponentOperator>("^", OperatorPrecedence.Exponentiation);
+
+			AddPrefixOperator<InvertOperator>("!");
 			AddInfixOperator<AndOperator>("&&", OperatorPrecedence.And);
 			AddInfixOperator<OrOperator>("||", OperatorPrecedence.Or);
+
 			AddInfixOperator<EqualOperator>("==", OperatorPrecedence.Equality);
 			AddInfixOperator<InequalOperator>("!=", OperatorPrecedence.Equality);
 			AddInfixOperator<LessOperator>("<", OperatorPrecedence.Comparison);
 			AddInfixOperator<GreaterOperator>(">", OperatorPrecedence.Comparison);
 			AddInfixOperator<LessOrEqualOperator>("<=", OperatorPrecedence.Comparison);
 			AddInfixOperator<GreaterOrEqualOperator>(">=", OperatorPrecedence.Comparison);
+
 			AddInfixOperator<AssignOperator>("=", OperatorPrecedence.Assignment);
 			AddInfixOperator<AddAssignOperator>("+=", OperatorPrecedence.Assignment);
 			AddInfixOperator<SubtractAssignOperator>("-=", OperatorPrecedence.Assignment);
@@ -359,7 +320,12 @@ namespace PiRhoSoft.CompositionEngine
 			AddInfixOperator<AndAssignOperator>("&=", OperatorPrecedence.Assignment);
 			AddInfixOperator<OrAssignOperator>("|=", OperatorPrecedence.Assignment);
 
-			AddTernaryOperator("?", OperatorPrecedence.Ternary);
+			AddInfixOperator<AccessOperator>(".", OperatorPrecedence.MemberAccess);
+			AddInfixOperator<LookupOperator>("[", OperatorPrecedence.MemberAccess);
+			AddInfixOperator<CastOperator>(ExpressionLexer.CastOperator, OperatorPrecedence.MemberAccess);
+			AddInfixOperator<TestOperator>(ExpressionLexer.TestOperator, OperatorPrecedence.Comparison);
+
+			AddInfixOperator<TernaryOperator>(ExpressionLexer.TernaryOperator, OperatorPrecedence.Ternary);
 
 			AddCommand("Abs", new AbsCommand());
 			AddCommand("Acos", new AcosCommand());
@@ -381,9 +347,7 @@ namespace PiRhoSoft.CompositionEngine
 			AddCommand("Sqrt", new SqrtCommand());
 			AddCommand("Tan", new TanCommand());
 			AddCommand("Truncate", new TruncateCommand());
-			AddCommand("Time", new TimeCommand());
-			AddCommand("Realtime", new RealtimeCommand());
-			AddCommand("UnscaledTime", new UnscaledTimeCommand());
+
 			AddCommand("Vector2", new Vector2Command());
 			AddCommand("Vector2Int", new Vector2IntCommand());
 			AddCommand("Vector3", new Vector3Command());
@@ -395,9 +359,11 @@ namespace PiRhoSoft.CompositionEngine
 			AddCommand("Bounds", new BoundsCommand());
 			AddCommand("BoundsInt", new BoundsIntCommand());
 
-			AddCommand("PI", new ConstantCommand(VariableValue.Create(Mathf.PI)));
-			AddCommand("Deg2Rad", new ConstantCommand(VariableValue.Create(Mathf.Deg2Rad)));
-			AddCommand("Rad2Deg", new ConstantCommand(VariableValue.Create(Mathf.Rad2Deg)));
+			AddCommand("Time", new TimeCommand());
+			AddCommand("Realtime", new RealtimeCommand());
+			AddCommand("UnscaledTime", new UnscaledTimeCommand());
 		}
+
+		#endregion
 	}
 }

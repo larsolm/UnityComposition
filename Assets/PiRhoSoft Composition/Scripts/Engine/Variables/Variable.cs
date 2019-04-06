@@ -73,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 				using (var writer = new BinaryWriter(stream))
 				{
 					writer.Write(Name);
-					Value.Write(writer, objects);
+					VariableHandler.Write(Value, writer, objects);
 				}
 
 				return Convert.ToBase64String(stream.ToArray());
@@ -91,11 +91,7 @@ namespace PiRhoSoft.CompositionEngine
 					using (var reader = new BinaryReader(stream))
 					{
 						Name = reader.ReadString();
-
-						// Make a temporary copy because 'ref this' doesn't work because Value copies the backing field
-						var value = VariableValue.Empty;
-						value.Read(reader, objects);
-						Value = value;
+						Value = VariableHandler.Read(reader, objects);
 					}
 				}
 
