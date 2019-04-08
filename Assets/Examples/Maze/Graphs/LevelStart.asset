@@ -27,7 +27,7 @@ MonoBehaviour:
     - Name: LevelName
       Definition:
         _type: 15
-        _constraint: '-'
+        _constraint: +Level 1,Level 2
         _tag: 
         _initializer:
           _statement: 
@@ -67,12 +67,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114728111643151580}
   Control:
-    _variable:
-    - scene
-    - Timer
-    _lookups:
-    - 
-    - 
+    _variable: scene.Timer
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Timer
 --- !u!114 &114319477458661940
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -107,10 +107,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - player
-    _lookups:
-    - 
+    _variable: player
+    _tokens:
+    - Type: 0
+      Text: player
 --- !u!114 &114602872160050604
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -128,12 +128,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114016649170688582}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: 
+    _tokens: []
   WaitForCompletion: 1
   AutoHide: 1
   WaitTime: 0
@@ -199,8 +195,8 @@ MonoBehaviour:
   Transition:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {fileID: 11400000, guid: 2f9b1c789d8e6c247a156f501f3393db, type: 2}
   Phase: 1
   AutoFinish: 0
@@ -224,8 +220,8 @@ MonoBehaviour:
   Transition:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {fileID: 11400000, guid: 2f9b1c789d8e6c247a156f501f3393db, type: 2}
   Phase: 2
   AutoFinish: 1
@@ -247,7 +243,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - player
-    _lookups:
-    - 
+    _variable: player
+    _tokens:
+    - Type: 0
+      Text: player
