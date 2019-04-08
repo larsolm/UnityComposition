@@ -676,7 +676,27 @@ MonoBehaviour:
         _tokens: []
       _valueData: DwAAAANSZWQ=
       _valueObjects: []
-    _outputs: []
+    - Name: KeyCount
+      Type: 0
+      Reference:
+        _variable: global.RedKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: RedKey
+      _valueData: AgAAAAAAAAA=
+      _valueObjects: []
+    _outputs:
+    - Name: KeyCount
+      Type: 1
+      Reference:
+        _variable: global.RedKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: RedKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -1006,7 +1026,27 @@ MonoBehaviour:
         _tokens: []
       _valueData: DwAAAARCbHVl
       _valueObjects: []
-    _outputs: []
+    - Name: KeyCount
+      Type: 0
+      Reference:
+        _variable: global.BlueKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: BlueKey
+      _valueData: AgAAAAAAAAA=
+      _valueObjects: []
+    _outputs:
+    - Name: KeyCount
+      Type: 1
+      Reference:
+        _variable: global.BlueKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: BlueKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -1165,361 +1205,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &863000624
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 863000629}
-  - component: {fileID: 863000628}
-  - component: {fileID: 863000626}
-  - component: {fileID: 863000625}
-  - component: {fileID: 863000631}
-  - component: {fileID: 863000630}
-  - component: {fileID: 863000627}
-  - component: {fileID: 863000633}
-  - component: {fileID: 863000632}
-  m_Layer: 0
-  m_Name: Player
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!58 &863000625
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Radius: 0.5
---- !u!50 &863000626
-Rigidbody2D:
-  serializedVersion: 4
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_BodyType: 0
-  m_Simulated: 1
-  m_UseFullKinematicContacts: 1
-  m_UseAutoMass: 1
-  m_Mass: 0.7853982
-  m_LinearDrag: 6
-  m_AngularDrag: 0
-  m_GravityScale: 0
-  m_Material: {fileID: 0}
-  m_Interpolate: 1
-  m_SleepingMode: 1
-  m_CollisionDetection: 1
-  m_Constraints: 0
---- !u!114 &863000627
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c34c0c14dd663d042a12ed42c60b8752, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Schema: {fileID: 0}
-  Variables:
-    _version: 0
-    _variablesData: []
-    _variablesObjects: []
-  Camera: {fileID: 663784546}
-  Acceleration: 1
---- !u!212 &863000628
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RenderingLayerMask: 1
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 0
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: 77882bfa7f666af419d6c785f1d10179, type: 3}
-  m_Color: {r: 0.8018868, g: 0.2912513, b: 0.2912513, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!4 &863000629
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &863000630
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7cbeca6c027c0b4593fc38df8180494, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!82 &863000631
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!114 &863000632
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Event: 
-  Graph:
-    _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}
-    _inputs:
-    - Name: LevelName
-      Type: 1
-      Reference:
-        _variable: 
-        _tokens: []
-      _valueData: DwAAAAdMZXZlbCAx
-      _valueObjects: []
-    _outputs: []
---- !u!114 &863000633
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 863000624}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Constraints:
-  - _type: 17
-    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 15
-    _constraint: '-'
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  _variablesData:
-  - BlBsYXllchEAAAAAAAAA
-  - BlJlZEtleQIAAAAAAAAA
-  - B0JsdWVLZXkCAAAAAAAAAA==
-  - CVllbGxvd0tleQIAAAAAAAAA
-  - CEdyZWVuS2V5AgAAAAAAAAA=
-  - Bkpld2VscwIAAAAAAAAA
-  - DEpld2Vsc05lZWRlZAIAAAAAAAAA
-  - CU5leHRMZXZlbA8AAAAFTWF6ZTI=
-  _variablesObjects:
-  - {fileID: 863000627}
 --- !u!1 &867759259
 GameObject:
   m_ObjectHideFlags: 0
@@ -1653,7 +1338,27 @@ MonoBehaviour:
         _tokens: []
       _valueData: DwAAAAVHcmVlbg==
       _valueObjects: []
-    _outputs: []
+    - Name: KeyCount
+      Type: 0
+      Reference:
+        _variable: global.GreenKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: GreenKey
+      _valueData: AgAAAAAAAAA=
+      _valueObjects: []
+    _outputs:
+    - Name: KeyCount
+      Type: 1
+      Reference:
+        _variable: global.GreenKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: GreenKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2443,28 +2148,36 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 0}
+    _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
     _inputs:
-    - Name: 
+    - Name: KeyCount
       Type: 0
       Reference:
-        _variable: 
-        _tokens: []
-      _valueData: 
+        _variable: global.GreenKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: GreenKey
+      _valueData: AgAAAAAAAAA=
       _valueObjects: []
-    - Name: 
+    - Name: KeyName
       Type: 1
       Reference:
         _variable: 
         _tokens: []
-      _valueData: AAAAAA==
+      _valueData: DwAAAAVHcmVlbg==
       _valueObjects: []
     _outputs:
-    - Name: 
+    - Name: KeyCount
       Type: 1
       Reference:
-        _variable: 
-        _tokens: []
+        _variable: global.GreenKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: GreenKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2593,9 +2306,36 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
+    _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
+    _inputs:
+    - Name: KeyCount
+      Type: 0
+      Reference:
+        _variable: global.RedKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: RedKey
+      _valueData: AgAAAAAAAAA=
+      _valueObjects: []
+    - Name: KeyName
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: DwAAAANSZWQ=
+      _valueObjects: []
+    _outputs:
+    - Name: KeyCount
+      Type: 1
+      Reference:
+        _variable: global.RedKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: RedKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2724,9 +2464,36 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
+    _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
+    _inputs:
+    - Name: KeyCount
+      Type: 0
+      Reference:
+        _variable: global.YellowKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: YellowKey
+      _valueData: AgAAAAAAAAA=
+      _valueObjects: []
+    - Name: KeyName
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: DwAAAAZZZWxsb3c=
+      _valueObjects: []
+    _outputs:
+    - Name: KeyCount
+      Type: 1
+      Reference:
+        _variable: global.YellowKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: YellowKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3067,9 +2834,36 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   OnEnter:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
+    _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
+    _inputs:
+    - Name: KeyCount
+      Type: 0
+      Reference:
+        _variable: global.BlueKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: BlueKey
+      _valueData: AgAAAAAAAAA=
+      _valueObjects: []
+    - Name: KeyName
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: DwAAAARCbHVl
+      _valueObjects: []
+    _outputs:
+    - Name: KeyCount
+      Type: 1
+      Reference:
+        _variable: global.BlueKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: BlueKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3371,7 +3165,27 @@ MonoBehaviour:
         _tokens: []
       _valueData: DwAAAAZZZWxsb3c=
       _valueObjects: []
-    _outputs: []
+    - Name: KeyCount
+      Type: 0
+      Reference:
+        _variable: global.YellowKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: YellowKey
+      _valueData: AgAAAAAAAAA=
+      _valueObjects: []
+    _outputs:
+    - Name: KeyCount
+      Type: 1
+      Reference:
+        _variable: global.YellowKey
+        _tokens:
+        - Type: 0
+          Text: global
+        - Type: 0
+          Text: YellowKey
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3530,3 +3344,77 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &2643244533606278071
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 2643244533930277767, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_Name
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277764, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Camera
+      value: 
+      objectReference: {fileID: 663784546}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 6f1753990295b7d43952ed76b4723a1d, type: 3}

@@ -58,12 +58,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - scene
-    - FinishDoor
-    _lookups:
-    - 
-    - 
+    _variable: scene.FinishDoor
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: FinishDoor
 --- !u!114 &114019920891345730
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,10 +81,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - jewel
-    _lookups:
-    - 
+    _variable: jewel
+    _tokens:
+    - Type: 0
+      Text: jewel
 --- !u!114 &114083666097521882
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -104,29 +104,38 @@ MonoBehaviour:
   Effect:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {fileID: 4255263820053153510, guid: 3ccbc9d9af56dc949a68c82852e228e8, type: 2}
   EffectName:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: Spawned Effect
+  EffectVariable:
+    _variable: 
+    _tokens: []
   Positioning: 1
   Object:
-    _variable:
-    - jewel
-    _lookups:
-    - 
+    _variable: jewel
+    _tokens:
+    - Type: 0
+      Text: jewel
   Parent:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Position:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  Rotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
     Value: {x: 0, y: 0, z: 0}
   WaitForCompletion: 0
   DestroyOnComplete: 1
@@ -186,7 +195,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114244240457525348}
   Expression:
-    _statement: global.Player.Jewels += 1;
+    _statement: global.Jewels += 1;
 --- !u!114 &114375116766900952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -204,12 +213,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - global
-    - Player
-    _lookups:
-    - 
-    - 
+    _variable: global.Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
 --- !u!114 &114417380751933736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,12 +236,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - global
-    - Player
-    _lookups:
-    - 
-    - 
+    _variable: global.Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
 --- !u!114 &114679176875131434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,23 +290,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 7fc26ad2350ac454caf9577c6255fa6e, type: 3}
-  m_Name: Play Door Animation
+  m_Name: Play Finish Animation
   m_EditorClassIdentifier: 
-  Name: Play Door Animation
+  Name: Play Finish Animation
   GraphPosition: {x: 1587.2001, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 0}
   AnimationPlayer:
-    _variable:
-    - scene
-    - FinishDoor
-    _lookups:
-    - 
-    - 
+    _variable: scene.FinishDoor
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: FinishDoor
   Animation:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {fileID: 7400000, guid: 55c9b8f38d72cbe47a0bc311a8d15b72, type: 2}
   WaitForCompletion: 1

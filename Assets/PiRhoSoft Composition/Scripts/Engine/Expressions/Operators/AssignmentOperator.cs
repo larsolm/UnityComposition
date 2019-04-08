@@ -16,7 +16,6 @@ namespace PiRhoSoft.CompositionEngine
 		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
 		{
 			Left.GetOutputs(outputs, source);
-			Right.GetOutputs(outputs, source); // for chained assignment (output.value1 = output.value2 = value) which is supported but not advertised
 		}
 
 		protected VariableValue Assign(IVariableStore variables, VariableValue value)

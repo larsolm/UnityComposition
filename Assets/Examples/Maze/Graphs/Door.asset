@@ -15,24 +15,54 @@ MonoBehaviour:
   ContextName: door
   ContextDefinition:
     _type: 17
-    _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
     _tag: 
     _initializer:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
   Inputs:
-    _items: []
+    _items:
+    - Name: KeyCount
+      Definition:
+        _type: 2
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
+    - Name: KeyName
+      Definition:
+        _type: 15
+        _constraint: +Red,Green,Blue,Yellow
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   Outputs:
-    _items: []
+    _items:
+    - Name: KeyCount
+      Definition:
+        _type: 0
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   _nodes:
     _items:
     - {fileID: 114370956569731158}
-    - {fileID: 114038658616853824}
+    - {fileID: 114613405383245240}
+    - {fileID: 114137955550642130}
+    - {fileID: 114368051375255452}
+    - {fileID: 114031907044163494}
   StartPosition: {x: -0, y: 0}
   Process: {fileID: 114370956569731158}
---- !u!114 &114038658616853824
+--- !u!114 &114031907044163494
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -41,25 +71,66 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7fc26ad2350ac454caf9577c6255fa6e, type: 3}
-  m_Name: Play Animation
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Behaviour
   m_EditorClassIdentifier: 
-  Name: Play Animation
-  GraphPosition: {x: 640, y: -64}
+  Name: Disable Behaviour
+  GraphPosition: {x: 627.2, y: -140.8}
   IsBreakpoint: 0
-  Next: {fileID: 0}
-  AnimationPlayer:
-    _variable: door
+  Next: {fileID: 114613405383245240}
+  Target:
+    _variable: door as Collider2D
     _tokens:
     - Type: 0
       Text: door
-  Animation:
-    Type: 0
-    Reference:
-      _variable: 
-      _tokens: []
-    Value: {fileID: 0}
+    - Type: 2
+      Text: Collider2D
+--- !u!114 &114137955550642130
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Decrement Keys
+  m_EditorClassIdentifier: 
+  Name: Decrement Keys
+  GraphPosition: {x: 921.60004, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: output.KeyCount = input.KeyCount - 1;
+--- !u!114 &114368051375255452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Can't Open Message
+  m_EditorClassIdentifier: 
+  Name: Can't Open Message
+  GraphPosition: {x: 614.4, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 0
+  AutoHide: 1
+  WaitTime: 2
+  Message:
+    Text: '{input.KeyName} Key needed!'
 --- !u!114 &114370956569731158
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -70,12 +141,80 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Conditional
+  m_Name: Has Key
   m_EditorClassIdentifier: 
-  Name: Conditional
+  Name: Has Key
   GraphPosition: {x: 307.2, y: -12.8}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114038658616853824}
-  OnFalse: {fileID: 0}
+  OnTrue: {fileID: 114031907044163494}
+  OnFalse: {fileID: 114368051375255452}
   Condition:
     _statement: input.KeyCount > 0;
+--- !u!114 &114613405383245240
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Door Disappear
+  m_EditorClassIdentifier: 
+  Name: Door Disappear
+  GraphPosition: {x: 742.4, y: -64}
+  IsBreakpoint: 0
+  Next: {fileID: 114137955550642130}
+  Transform:
+    _variable: door
+    _tokens:
+    - Type: 0
+      Text: door
+  UseRelativePosition: 1
+  UseRelativeRotation: 1
+  UseRelativeScale: 0
+  TargetPosition:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  AnimationMethod: 2
+  WaitForCompletion: 0
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 0.25
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1

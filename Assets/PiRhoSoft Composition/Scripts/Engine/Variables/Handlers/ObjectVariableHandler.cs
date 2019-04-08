@@ -68,11 +68,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			if (owner.HasStore)
-			{
-				var result = StoreVariableHandler.ApplyToStore(ref owner, lookup, value);
-				if (result == SetVariableResult.Success)
-					return result;
-			}
+				return StoreVariableHandler.ApplyToStore(ref owner, lookup, value);
 
 			return SetVariableResult.ReadOnly;
 		}

@@ -193,7 +193,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114460562760816066}
   Expression:
-    _statement: global.Spaces[player.SelectedPiece.CurrentSpace].CurrentSpace = null;
+    _statement: global.Spaces[player.SelectedPiece.CurrentSpace].CurrentPiece = null;
 --- !u!114 &114208458872356858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -784,9 +784,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114720587560010244}
   Expression:
-    _statement: 'player.SelectedPiece.CurrentSpace += global.Roll
+    _statement: 'nextSpace = player.SelectedPiece.CurrentSpace + global.Roll;
 
-      player.SelectedPiece.CurrentSpace %= 36;'
+      player.SelectedPiece.CurrentSpace = nextSpace % 36;'
 --- !u!114 &114601505796252814
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -19,7 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override bool IsValid(VariableValue value)
 		{
-			return Type != null && Type.IsAssignableFrom(value.ReferenceType);
+			return Type != null && (value.IsNull || Type.IsAssignableFrom(value.ReferenceType));
 		}
 	}
 }

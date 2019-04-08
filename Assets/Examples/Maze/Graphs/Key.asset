@@ -33,8 +33,26 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 0
         _isConstraintLocked: 0
+    - Name: KeyCount
+      Definition:
+        _type: 2
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   Outputs:
-    _items: []
+    _items:
+    - Name: KeyCount
+      Definition:
+        _type: 0
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   _nodes:
     _items:
     - {fileID: 114416159429543150}
@@ -138,8 +156,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    _variable: 
-    _tokens: []
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 0
   AutoHide: 1
   WaitTime: 2
