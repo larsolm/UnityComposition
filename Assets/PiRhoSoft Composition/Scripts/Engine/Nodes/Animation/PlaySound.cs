@@ -25,11 +25,11 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference AudioPlayer;
 
 		[Tooltip("The Audio Clip to play")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public AudioClipVariableSource Sound = new AudioClipVariableSource();
 
 		[Tooltip("The volume to play the sound at")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public FloatVariableSource Volume = new FloatVariableSource(1.0f);
 
 		[Tooltip("Whether to wait for the sound to finish before moving to Next")]

@@ -70,7 +70,20 @@ namespace PiRhoSoft.CompositionEditor
 				EditorGUILayout.PropertyField(_targetProperty);
 			}
 
-			TypePopupDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false, SetTargetType);
+			var type = TypeDisplayDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false, true);
+
+			if (type != _node.TargetType)
+			{
+				using (new UndoScope(_node, false))
+				{
+					_node.TargetType = type;
+					_node.PropertyName = null;
+					_node.Field = null;
+					_node.Property = null;
+
+					BuildPropertyList();
+				}
+			}
 
 			if (_node.TargetType != null)
 			{
@@ -87,25 +100,6 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					using (new UndoScope(serializedObject))
 						EditorGUILayout.PropertyField(_outputProperty);
-				}
-			}
-		}
-
-		private void SetTargetType(int tab, int selection)
-		{
-			var types = TypeHelper.GetTypeList<Component>(true, false);
-			var type = types.GetType(selection);
-
-			if (type != _node.TargetType)
-			{
-				using (new UndoScope(_node, false))
-				{
-					_node.TargetType = type;
-					_node.PropertyName = null;
-					_node.Field = null;
-					_node.Property = null;
-
-					BuildPropertyList();
 				}
 			}
 		}

@@ -10,8 +10,8 @@ namespace PiRhoSoft.CompositionEditor
 	public class VariableSchemaEditor : Editor
 	{
 		private readonly static GUIContent _label = new GUIContent("Definitions", "The variables available to objects using this schema");
-		private readonly static IconButton _addDefinitionButton = new IconButton(IconButton.CustomAdd, "Add a Definition to the Schema");
-		private readonly static IconButton _removeDefinitionButton = new IconButton(IconButton.Remove, "Remove this Definition from the Schema");
+		private readonly static Label _addDefinitionButton = new Label(Icon.BuiltIn(Icon.CustomAdd), "", "Add a Definition to the Schema");
+		private readonly static Label _removeDefinitionButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this Definition from the Schema");
 		private readonly static GUIContent _addDefinitionLabel = new GUIContent("Add Definition");
 		private readonly static GUIContent _emptyLabel = new GUIContent("This Schema is empty");
 
@@ -19,18 +19,21 @@ namespace PiRhoSoft.CompositionEditor
 		private DefinitionsProxy _proxy;
 
 		private ObjectListControl _list = new ObjectListControl();
+		private CreateVariablePopup _createPopup = new CreateVariablePopup();
 
 		void OnEnable()
 		{
 			_schema = target as VariableSchema;
 			_proxy = new DefinitionsProxy { Schema = _schema };
 
+			_createPopup.Setup(_addDefinitionLabel, PopupCreate, PopupValidate);
+
 			_list.Setup(_proxy)
 				.MakeDrawable(DrawDefinition)
 				.MakeRemovable(_removeDefinitionButton, RemoveDefinition)
 				.MakeCollapsable("VariableSchema." + _schema.name + ".IsOpen")
 				.MakeReorderable()
-				.MakeHeaderButton(_addDefinitionButton, new AddPopup(new AddVariableContent(this), _addDefinitionLabel), Color.white)
+				.MakeHeaderButton(_addDefinitionButton, _createPopup, Color.white)
 				.MakeCustomHeight(GetDefinitionHeight)
 				.MakeEmptyLabel(_emptyLabel);
 		}
@@ -71,6 +74,19 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
+		private void PopupCreate()
+		{
+			AddDefinition(_createPopup.Name, _createPopup.Type);
+		}
+
+		private bool PopupValidate()
+		{
+			_createPopup.IsNameValid = !_schema.HasDefinition(_createPopup.Name);
+			_createPopup.IsTypeValid = _createPopup.Type != VariableType.Empty;
+
+			return _createPopup.IsNameValid && _createPopup.IsTypeValid;
+		}
+
 		private class DefinitionsProxy : ListProxy
 		{
 			public VariableSchema Schema;
@@ -79,44 +95,24 @@ namespace PiRhoSoft.CompositionEditor
 			public override object this[int index] { get => Schema[index]; set => Schema[index] = (VariableDefinition)value; }
 		}
 
-		private class AddVariableContent : AddNamedItemContent
+		private class CreateVariablePopup : CreateNamedPopup
 		{
-			private VariableSchemaEditor _editor;
-			private VariableType _type = VariableType.Empty;
-			private bool _typeValid = true;
+			public VariableType Type = VariableType.Empty;
+			public bool IsTypeValid = true;
 
-			public AddVariableContent(VariableSchemaEditor editor)
+			protected override float GetContentHeight()
 			{
-				_editor = editor;
+				return base.GetContentHeight() + EditorGUIUtility.standardVerticalSpacing + EditorGUIUtility.singleLineHeight;
 			}
 
-			protected override float GetHeight_()
+			protected override bool DrawContent()
 			{
-				return EditorGUIUtility.singleLineHeight;
-			}
+				var create = base.DrawContent();
 
-			protected override bool Draw_(bool clean)
-			{
-				using (new InvalidScope(clean || _typeValid))
-					_type = (VariableType)EditorGUILayout.EnumPopup(_type);
+				using (new InvalidScope(!HasChanged || IsTypeValid))
+					Type = (VariableType)EditorGUILayout.EnumPopup(Type);
 
-				return false;
-			}
-
-			protected override bool Validate_()
-			{
-				_typeValid = _type != VariableType.Empty;
-				return _typeValid;
-			}
-
-			protected override void Add_(string name)
-			{
-				_editor.AddDefinition(name, _type);
-			}
-
-			protected override bool IsNameInUse(string name)
-			{
-				return _editor._schema.HasDefinition(name);
+				return create;
 			}
 		}
 	}

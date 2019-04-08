@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The target Object to call the method on")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public ObjectVariableSource Target = new ObjectVariableSource();
 
 		[Tooltip("The reference to store the returned value in")]

@@ -108,8 +108,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Serializable] public class ParameterList : SerializedList<Parameter> { }
 
-		[ChangeTrigger(nameof(OnNameChanged))] [Delayed] public string Name;
-		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline)] public ParameterList Parameters = new ParameterList();
+		[ChangeTrigger(nameof(OnNameChanged))][Delayed] public string Name;
+		[ListDisplay] [ClassDisplay(Type = ClassDisplayType.Inline)] public ParameterList Parameters = new ParameterList();
 		public Expression Expression = new Expression();
 
 		private string _registeredName;

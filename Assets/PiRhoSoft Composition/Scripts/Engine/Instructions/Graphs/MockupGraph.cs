@@ -9,7 +9,8 @@ namespace PiRhoSoft.CompositionEngine
 	public class MockupGraph : InstructionGraph
 	{
 		[Tooltip("The root nodes")]
-		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline)]
+		[ListDisplay]
+		[ClassDisplay(Type = ClassDisplayType.Inline)]
 		public MockupConnectionList EntryPoints = new MockupConnectionList();
 
 		public override void GetConnections(InstructionGraphNode.NodeData data)

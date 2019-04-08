@@ -19,40 +19,39 @@ namespace PiRhoSoft.CompositionEditor
 		// inspiration and parts of the implementation for this class have been adapted from the MIT licensed Unity
 		// Node Editor Base Extension: https://unitylist.com/p/tb/Unity-Node-Editor-Base
 
-		private static readonly Base64Texture _gridTexture = new Base64Texture("iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xNzNun2MAAAKnSURBVGhD7ZnbbiJBDETzNwTCfbm/Av//S3uGKkXTETYbCS2zG5+HpNsu3F3tYWaUvH2kTCaT1Wq13W4ZgKMtSv26obETLYpTarlcRhogNZ1Od7vdbDZLZOPxeL1eX6/XMlAGvkCqDPSgRBkwipcBUwZ6KPUyA4gS0LHeZrNhAI62KEU50NiJFsUptVgsIg2QYn/4xEYie39/52Q7A/zKYUnOw5MYlgRPYihFozyJQcZxeHIPjhXN5XJ508IJ6MCTmD+XeZTyUMaxHg6HzoBbEkATh34JORBAiaEb6L7SMUjRUU4fc7RFqZfdhRwIoEQZMIqXAVMGeihVBgyp7xlAlICO9epB1qH48w2o9QnUoqGexCADT2Io9VCGSWT89PweHNZ+v+/ehRwIQMd6lLud79rRFqVu+99q7ESL4tpZpIFP2ef4Lhy/DbglATSxvgNG8ecbQJ2AFB3l9DFHW5RSZzV2okVxSj35NupAACXKgFG8DJgy0EOpMmBIfc8AogR0rFfPgQ7Fn9uB1/xh66FMGvD8HnTyeDx2BjiPBNrNufIBBuBoi1JU1OUBTrQoTikKRhpQit3T+UQ2n88p9V+8zOmSikA69LuQAwGUKANG8TJgykAPpcqAIfXDDCBKQMd6g36QoUugljpws/3haItS6oDGTrQorg5EGiDF2dMBXhYSGR5YrnuVQPovwkH4ZQ67OVwYqD2JUQc8iaEULfUkgLNni1xpnt+DJrgDuqQiuAqH/h1AnYB06HchBwIoUQaM4mXAlIEeSpUBQ+qHGWCUwPOC5w47YwCOtiiFT9DYiRbFKcWDNtIAKfaNT3aZyEajEQfRGcBHAnviMHjr0P4cbVFqf0NjJ1oUpxSbizSg1Ol0wmoiY/f+Jx8mchCBJzF/X4bgfD7/Bp0ChIMH9TUUAAAAAElFTkSuQmCC");
-		private static readonly Base64Texture _windowIcon = new Base64Texture("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wEOBR4Wp+XVagAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAATdJREFUOE+lkUtuglAYhWnnfQwITUdEQF6CPFRimBqcdKCzdl3GCZg0cS8O3IeJ2NA90HNSBsqlsYkkPx+H++VcbpDqur5pfm+SdJem6UOSJI/Xhh79i4LRaPQ0Ho8PmNNkMqnAsqGQMQf6FwVBEDzj5ck0zfcwDD/7/f4badv2x3nmOj36QkEcx5XneVs878FNQyHToy8URFFUYsdsOByuDcOYksjzVs7odRZg+AU5xJ3v+ysSuWjlnF5nAYQSZ1wOBoMCnDUUMr3OAuxSOY6zhbgHNw2FTE8oUFWVBWWv18sgrZGnJM4+P89cp0dfKMD5+AW567o7cNWwaOWcXmcBFktd1xeWZRWaps1I5GUrL+j9VXDEb/oCv8FTw658FApw3SuK8iLL8uu1oUf/ouCW6Xz5/6mlH0LCqCZdcm2YAAAAAElFTkSuQmCC");
-
-		private static readonly string _pauseIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAGVJREFUOE+l0bERwCAMQ1EvxACswWhZ2LHuKKSLKByKV+gfrojMvGZjl41dnzDnHOXZxqkxGVCPVsltnRqTAe7ANSYD3IFrTAa4A9eYDHAHrjEZ4A5cYzKgHt1/8R82dtnYERHxAqpHVWhCcdFJAAAAAElFTkSuQmCC";
-		private static readonly string _stopIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAE9JREFUOE/t0bENACAIBMBfiAFYg9FcGKEUiBFtLa7gw9MAVX1Whl1l2JUCZiYzNih2lsHZkhjdkNhZBudLoRT9I9nRkfcX3yjDrjLsAIAJNpdTpphdxWYAAAAASUVORK5CYII=";
+		private static readonly Icon _gridTexture = Icon.Base64("iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xNzNun2MAAAKnSURBVGhD7ZnbbiJBDETzNwTCfbm/Av//S3uGKkXTETYbCS2zG5+HpNsu3F3tYWaUvH2kTCaT1Wq13W4ZgKMtSv26obETLYpTarlcRhogNZ1Od7vdbDZLZOPxeL1eX6/XMlAGvkCqDPSgRBkwipcBUwZ6KPUyA4gS0LHeZrNhAI62KEU50NiJFsUptVgsIg2QYn/4xEYie39/52Q7A/zKYUnOw5MYlgRPYihFozyJQcZxeHIPjhXN5XJ508IJ6MCTmD+XeZTyUMaxHg6HzoBbEkATh34JORBAiaEb6L7SMUjRUU4fc7RFqZfdhRwIoEQZMIqXAVMGeihVBgyp7xlAlICO9epB1qH48w2o9QnUoqGexCADT2Io9VCGSWT89PweHNZ+v+/ehRwIQMd6lLud79rRFqVu+99q7ESL4tpZpIFP2ef4Lhy/DbglATSxvgNG8ecbQJ2AFB3l9DFHW5RSZzV2okVxSj35NupAACXKgFG8DJgy0EOpMmBIfc8AogR0rFfPgQ7Fn9uB1/xh66FMGvD8HnTyeDx2BjiPBNrNufIBBuBoi1JU1OUBTrQoTikKRhpQit3T+UQ2n88p9V+8zOmSikA69LuQAwGUKANG8TJgykAPpcqAIfXDDCBKQMd6g36QoUugljpws/3haItS6oDGTrQorg5EGiDF2dMBXhYSGR5YrnuVQPovwkH4ZQ67OVwYqD2JUQc8iaEULfUkgLNni1xpnt+DJrgDuqQiuAqH/h1AnYB06HchBwIoUQaM4mXAlIEeSpUBQ+qHGWCUwPOC5w47YwCOtiiFT9DYiRbFKcWDNtIAKfaNT3aZyEajEQfRGcBHAnviMHjr0P4cbVFqf0NjJ1oUpxSbizSg1Ol0wmoiY/f+Jx8mchCBJzF/X4bgfD7/Bp0ChIMH9TUUAAAAAElFTkSuQmCC");
+		private static readonly Icon _windowIcon = Icon.Base64("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wEOBR4Wp+XVagAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAATdJREFUOE+lkUtuglAYhWnnfQwITUdEQF6CPFRimBqcdKCzdl3GCZg0cS8O3IeJ2NA90HNSBsqlsYkkPx+H++VcbpDqur5pfm+SdJem6UOSJI/Xhh79i4LRaPQ0Ho8PmNNkMqnAsqGQMQf6FwVBEDzj5ck0zfcwDD/7/f4badv2x3nmOj36QkEcx5XneVs878FNQyHToy8URFFUYsdsOByuDcOYksjzVs7odRZg+AU5xJ3v+ysSuWjlnF5nAYQSZ1wOBoMCnDUUMr3OAuxSOY6zhbgHNw2FTE8oUFWVBWWv18sgrZGnJM4+P89cp0dfKMD5+AW567o7cNWwaOWcXmcBFktd1xeWZRWaps1I5GUrL+j9VXDEb/oCv8FTw658FApw3SuK8iLL8uu1oUf/ouCW6Xz5/6mlH0LCqCZdcm2YAAAAAElFTkSuQmCC");
+		private const string _pauseIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAGVJREFUOE+l0bERwCAMQ1EvxACswWhZ2LHuKKSLKByKV+gfrojMvGZjl41dnzDnHOXZxqkxGVCPVsltnRqTAe7ANSYD3IFrTAa4A9eYDHAHrjEZ4A5cYzKgHt1/8R82dtnYERHxAqpHVWhCcdFJAAAAAElFTkSuQmCC";
+		private const string _stopIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAE9JREFUOE/t0bENACAIBMBfiAFYg9FcGKEUiBFtLa7gw9MAVX1Whl1l2JUCZiYzNih2lsHZkhjdkNhZBudLoRT9I9nRkfcX3yjDrjLsAIAJNpdTpphdxWYAAAAASUVORK5CYII=";
 
 		private static readonly GUIContent _titleLabel = new GUIContent("Instruction Graph");
-		private static readonly StaticStyle _headerStyle = new StaticStyle(CreateHeaderStyle);
-		private static readonly StaticStyle _connectionStyle = new StaticStyle(CreateConnectionStyle);
-		private static readonly StaticStyle _commentStyle = new StaticStyle(CreateCommentStyle);
-		private static readonly StaticStyle _watchStyle = new StaticStyle(CreateWatchStyle);
-		private static readonly IconButton _outputButton = new IconButton("sv_icon_dot0_sml");//, "Click and drag to make a connection from this output");
-		private static readonly IconButton _inputButton = new IconButton("sv_icon_dot0_sml");//, "Drag an output to here to make a connection");
-		private static readonly IconButton _removeButton = new IconButton("d_Toolbar Minus");//, "Remove this node");
-		private static readonly IconButton _playButton = new IconButton("Animation.Play", "Resume graph execution");
-		private static readonly IconButton _playDisabledButton = new IconButton("Animation.Play");
-		private static readonly Base64Button _pauseButton = new Base64Button(_pauseIcon, "Pause graph execution before running the next node");
-		private static readonly Base64Button _pauseDisabledButton = new Base64Button(_pauseIcon);
-		private static readonly IconButton _stepButton = new IconButton("Animation.NextKey", "Run the next node then pause again");
-		private static readonly IconButton _stepDisabledButton = new IconButton("Animation.NextKey");
-		private static readonly Base64Button _stopButton = new Base64Button(_stopIcon, "Halt execution of the current branch of the graph and continue with the next branch");
-		private static readonly Base64Button _stopDisabledButton = new Base64Button(_stopIcon);
-		private static readonly IconButton _addBreakpointButton = new IconButton("Animation.Record", "Set a breakpoint on this node");
-		private static readonly IconButton _removeBreakpointButton = new IconButton("Animation.Record", "Remove the breakpoint from this node");
-		private static readonly IconButton _breakpointDisabledButton = new IconButton("Animation.Record");
+		private static readonly Style _headerStyle = new Style(CreateHeaderStyle);
+		private static readonly Style _connectionStyle = new Style(CreateConnectionStyle);
+		private static readonly Style _commentStyle = new Style(CreateCommentStyle);
+		private static readonly Style _watchStyle = new Style(CreateWatchStyle);
+		private static readonly Label _outputButton = new Label(Icon.BuiltIn("sv_icon_dot0_sml"));//, "Click and drag to make a connection from this output");
+		private static readonly Label _inputButton = new Label(Icon.BuiltIn("sv_icon_dot0_sml"));//, "Drag an output to here to make a connection");
+		private static readonly Label _removeButton = new Label(Icon.BuiltIn("d_Toolbar Minus"));//, "Remove this node");
+		private static readonly Label _playButton = new Label(Icon.BuiltIn("Animation.Play"), "", "Resume graph execution");
+		private static readonly Label _playDisabledButton = new Label(Icon.BuiltIn("Animation.Play"));
+		private static readonly Label _pauseButton = new Label(Icon.Base64(_pauseIcon), "", "Pause graph execution before running the next node");
+		private static readonly Label _pauseDisabledButton = new Label(Icon.Base64(_pauseIcon));
+		private static readonly Label _stepButton = new Label(Icon.BuiltIn("Animation.NextKey"), "", "Run the next node then pause again");
+		private static readonly Label _stepDisabledButton = new Label(Icon.BuiltIn("Animation.NextKey"));
+		private static readonly Label _stopButton = new Label(Icon.Base64(_stopIcon), "", "Halt execution of the current branch of the graph and continue with the next branch");
+		private static readonly Label _stopDisabledButton = new Label(Icon.Base64(_stopIcon));
+		private static readonly Label _addBreakpointButton = new Label(Icon.BuiltIn("Animation.Record"), "", "Set a breakpoint on this node");
+		private static readonly Label _removeBreakpointButton = new Label(Icon.BuiltIn("Animation.Record"), "", "Remove the breakpoint from this node");
+		private static readonly Label _breakpointDisabledButton = new Label(Icon.BuiltIn("Animation.Record"));
 
-		private static readonly IconButton _enableBreakpointsButton = new IconButton("Animation.Record", "Enable node breakpoints for all graphs");
-		private static readonly IconButton _disableBreakpointsButton = new IconButton("Animation.Record", "Disable node breakpoins for all graphs");
-		private static readonly IconButton _enableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Enable logging of graph execution for all graphs");
-		private static readonly IconButton _disableLoggingButton = new IconButton("UnityEditor.ConsoleWindow", "Disable logging of graph execution for all graphs");
+		private static readonly Label _enableBreakpointsButton = new Label(Icon.BuiltIn("Animation.Record"), "", "Enable node breakpoints for all graphs");
+		private static readonly Label _disableBreakpointsButton = new Label(Icon.BuiltIn("Animation.Record"), "", "Disable node breakpoins for all graphs");
+		private static readonly Label _enableLoggingButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Enable logging of graph execution for all graphs");
+		private static readonly Label _disableLoggingButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Disable logging of graph execution for all graphs");
 
-		private static readonly IconButton _lockButton = new IconButton("AssemblyLock", "Lock this window so it won't be used when other graphs are opened");
-		private static readonly IconButton _unlockButton = new IconButton("AssemblyLock", "Unlock this window so it can be used to show other graphs");
-		private static readonly IconButton _openWatchButton = new IconButton("UnityEditor.LookDevView", "Open the watch window");
+		private static readonly Label _lockButton = new Label(Icon.BuiltIn("AssemblyLock"), "", "Lock this window so it won't be used when other graphs are opened");
+		private static readonly Label _unlockButton = new Label(Icon.BuiltIn("AssemblyLock"), "", "Unlock this window so it can be used to show other graphs");
+		private static readonly Label _openWatchButton = new Label(Icon.BuiltIn("UnityEditor.LookDevView"), "", "Open the watch window");
 
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarPadding = 17.0f;
@@ -195,7 +194,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			base.Setup(input);
 
-			titleContent.image = _windowIcon.Texture;
+			titleContent.image = _windowIcon.Content;
 
 			CreateViewMenu(ref _viewMenu, string.Empty);
 			CreateNodeMenu(ref _nodeMenu, string.Empty);
@@ -283,7 +282,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (selected is Type type)
 			{
-				var graph = AssetHelper.CreateAssetWindow(type);
+				var graph = AssetHelper.Create(type, AssetLocation.Selectable, null);
 				if (graph)
 					SetGraph(graph);
 			}
@@ -760,7 +759,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			if (Event.current.type == EventType.Repaint)
 			{
-				DrawOffsetBackground(rect, _gridTexture.Texture);
+				DrawOffsetBackground(rect, _gridTexture.Content);
 				DrawNodes(rect);
 				DrawConnections(rect);
 				DrawConnectionPreview();
@@ -912,7 +911,7 @@ namespace PiRhoSoft.CompositionEditor
 			var isComment = node.Node is CommentNode;
 
 			if (isComment)
-				node.InnerHeight = _commentStyle.Style.CalcHeight(new GUIContent((node.Node as CommentNode).Comment), InstructionGraphNode.NodeData.Width);
+				node.InnerHeight = _commentStyle.Content.CalcHeight(new GUIContent((node.Node as CommentNode).Comment), InstructionGraphNode.NodeData.Width);
 
 			var rect = node.Bounds;
 
@@ -950,7 +949,7 @@ namespace PiRhoSoft.CompositionEditor
 				? string.Format("{0} ({1})", node.Node.Name, iteration)
 				: node.Node.Name;
 
-			EditorGUI.LabelField(labelRect, nodeLabel, _headerStyle.Style);
+			EditorGUI.LabelField(labelRect, nodeLabel, _headerStyle.Content);
 
 			if (node.Node != _start)
 			{
@@ -968,7 +967,7 @@ namespace PiRhoSoft.CompositionEditor
 				var commentRect = RectHelper.Inset(rect, 0.0f, 0.0f, 0.0f, InstructionGraphNode.NodeData.FooterHeight);
 				var commentNode = node.Node as CommentNode;
 
-				EditorGUI.LabelField(commentRect, commentNode.Comment, _commentStyle.Style);
+				EditorGUI.LabelField(commentRect, commentNode.Comment, _commentStyle.Content);
 			}
 			else
 			{
@@ -981,7 +980,7 @@ namespace PiRhoSoft.CompositionEditor
 					// tooltip positioning is pretty messed up with zoom so not showing them for now
 					var label = new GUIContent(ObjectNames.NicifyVariableName(connection.Name));//, Label.GetTooltip(connection.From.GetType(), connection.Field));
 
-					EditorGUI.LabelField(outputLabelRect, label, _connectionStyle.Style);
+					EditorGUI.LabelField(outputLabelRect, label, _connectionStyle.Content);
 					EditorGUI.LabelField(outputIconRect, _outputButton.Content, GUIStyle.none);
 
 					if (connection == _hoveredOutput)

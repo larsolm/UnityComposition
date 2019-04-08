@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference AnimationPlayer;
 
 		[Tooltip("The Animation Clip to play")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public AnimationClipVariableSource Animation = new AnimationClipVariableSource();
 
 		[Tooltip("Whether to wait for the animation to finish")]

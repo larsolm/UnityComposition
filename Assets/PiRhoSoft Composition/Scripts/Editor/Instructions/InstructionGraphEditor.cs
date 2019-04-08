@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEditor
 	[CustomEditor(typeof(InstructionGraph), true)]
 	public class InstructionGraphEditor : Editor
 	{
-		private static readonly IconButton _editButton = new IconButton(IconButton.Edit, "Edit this node");
+		private static readonly Label _editButton = new Label(Icon.BuiltIn(Icon.Edit), "", "Edit this node");
 
 		private SerializedProperty _nodesProperty;
 

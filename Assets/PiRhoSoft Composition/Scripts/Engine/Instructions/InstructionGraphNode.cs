@@ -64,7 +64,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidAssignmentWarning = "(CIGNIA) failed to assign to variable '{0}': the variable has an incompatible type";
 
 		[Tooltip("The name of the node")]
-		[AssetName]
+		[ChangeTrigger(nameof(UpdateName))]
 		public string Name;
 
 		public abstract IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration);
@@ -640,6 +640,11 @@ namespace PiRhoSoft.CompositionEngine
 		[HideInInspector] public bool IsBreakpoint = false;
 
 		public virtual Color NodeColor => Colors.Default;
+
+		public void UpdateName()
+		{
+			name = Name;
+		}
 
 		public class NodeData
 		{

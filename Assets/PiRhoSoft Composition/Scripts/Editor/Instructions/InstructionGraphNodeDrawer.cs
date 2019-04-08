@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEditor
 	[CustomPropertyDrawer(typeof(InstructionGraphNode))]
 	public class InstructionGraphNodeDrawer : PropertyDrawer
 	{
-		private static readonly IconButton _editIcon = new IconButton(IconButton.Edit, "Select and edit this instruction graph node");
+		private static readonly Label _editIcon = new Label(Icon.BuiltIn(Icon.Edit), "", "Select and edit this instruction graph node");
 
 		public static void Draw(GUIContent label, InstructionGraphNode target)
 		{

@@ -16,6 +16,8 @@ namespace PiRhoSoft.UtilityEditor
 		public GUIContent[] Names;
 		public List<Type> Types;
 
+		public SelectionTree Tree;
+
 		#region Lookup
 
 		public int GetIndex(Type type)
@@ -106,14 +108,14 @@ namespace PiRhoSoft.UtilityEditor
 
 		#region Listing
 
-		public static List<Type> ListDerivedTypes<BaseType>(bool creatable)
+		public static List<Type> ListDerivedTypes<BaseType>(bool includeAbstract)
 		{
-			return ListDerivedTypes(typeof(BaseType), creatable);
+			return ListDerivedTypes(typeof(BaseType), includeAbstract);
 		}
 
-		public static List<Type> ListDerivedTypes(Type baseType, bool creatable)
+		public static List<Type> ListDerivedTypes(Type baseType, bool includeAbstract)
 		{
-			return FindTypes(type => creatable ? IsCreatableAs(baseType, type) : baseType.IsAssignableFrom(type)).ToList();
+			return FindTypes(type => includeAbstract ? baseType.IsAssignableFrom(type) : IsCreatableAs(baseType, type)).ToList();
 		}
 
 		public static List<Type> ListTypesWithAttribute<AttributeType>() where AttributeType : Attribute
@@ -137,15 +139,15 @@ namespace PiRhoSoft.UtilityEditor
 				.Where(predicate);
 		}
 
-		public static TypeList GetTypeList<T>(bool includeNone, bool creatable)
+		public static TypeList GetTypeList<T>(bool includeNone, bool includeAbstract)
 		{
-			return GetTypeList(typeof(T), includeNone, creatable);
+			return GetTypeList(typeof(T), includeNone, includeAbstract);
 		}
 
-		public static TypeList GetTypeList(Type baseType, bool includeNone, bool creatable)
+		public static TypeList GetTypeList(Type baseType, bool includeNone, bool includeAbstract)
 		{
 			// include the settings in the name so lists of the same type can be created with different settings
-			var listName = string.Format("{0}-{1}-{2}", includeNone, creatable, baseType.AssemblyQualifiedName);
+			var listName = string.Format("{0}-{1}-{2}", includeNone, includeAbstract, baseType.AssemblyQualifiedName);
 			
 			if (!_derivedTypeLists.TryGetValue(listName, out var list))
 			{
@@ -155,12 +157,15 @@ namespace PiRhoSoft.UtilityEditor
 
 			if (list.Types == null)
 			{
-				var types = ListDerivedTypes(baseType, creatable);
+				var types = ListDerivedTypes(baseType, includeAbstract);
 				var ordered = types.Select(type => new ListedType(types, baseType, type)).OrderBy(type => type.Name);
 				var none = includeNone ? new List<GUIContent> { new GUIContent("None") } : new List<GUIContent>();
 
 				list.Types = ordered.Select(type => type.Type).ToList();
 				list.Names = none.Concat(ordered.Select(type => new GUIContent(type.Name, AssetPreview.GetMiniTypeThumbnail(type.Type)))).ToArray();
+
+				list.Tree = new SelectionTree();
+				list.Tree.Add(baseType.Name, list.Names);
 			}
 
 			return list;

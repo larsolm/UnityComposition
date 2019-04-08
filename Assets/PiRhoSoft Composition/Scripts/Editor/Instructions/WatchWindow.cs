@@ -20,9 +20,9 @@ namespace PiRhoSoft.CompositionEditor
 		private const string _invalidWatchWarning = "(CWWIW) unable to watch variable {0} of type {1} - only variable stores can be watched";
 
 		private static BoolPreference _logInstructionsEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogInstructionsEnabled", false);
-		private static readonly IconButton _enableLogInstructionsButton = new IconButton("UnityEditor.ConsoleWindow", "Enable logging of instruction execution");
-		private static readonly IconButton _disableLogInstructionsButton = new IconButton("UnityEditor.ConsoleWindow", "Disable logging of instruction execution");
-		private static readonly IconButton _executeButton = new IconButton(IconButton.Add, "Execute the expression");
+		private static readonly Label _enableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Enable logging of instruction execution");
+		private static readonly Label _disableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Disable logging of instruction execution");
+		private static readonly Label _executeButton = new Label(Icon.BuiltIn(Icon.Add), "", "Execute the expression");
 
 		private Vector2 _scrollPosition;
 		private WatchMenu _watchMenu;
@@ -207,7 +207,7 @@ namespace PiRhoSoft.CompositionEditor
 			private string _variable = string.Empty;
 			private bool _valid = true;
 
-			private static readonly IconButton _addButton = new IconButton(IconButton.Add, "Add the variable to the watch window");
+			private static readonly Label _addButton = new Label(Icon.BuiltIn(Icon.Add), "", "Add the variable to the watch window");
 
 			public override Vector2 GetWindowSize()
 			{
@@ -226,7 +226,7 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					using (var changes = new EditorGUI.ChangeCheckScope())
 					{
-						add = EnterFieldDrawer.DrawString("AddWatchVariable", rect, GUIContent.none, ref _variable);
+						add = EnterField.DrawString("AddWatchVariable", rect, GUIContent.none, ref _variable);
 
 						if (changes.changed)
 							_valid = true;
@@ -339,7 +339,7 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					using (var changes = new EditorGUI.ChangeCheckScope())
 					{
-						execute = EnterFieldDrawer.DrawString("PromptEntry", rect, GUIContent.none, ref _promptText);
+						execute = EnterField.DrawString("PromptEntry", rect, GUIContent.none, ref _promptText);
 
 						if (changes.changed)
 							_promptValid = true;

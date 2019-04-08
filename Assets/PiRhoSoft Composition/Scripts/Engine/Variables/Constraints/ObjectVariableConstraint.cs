@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -22,17 +21,5 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			return Type != null && Type.IsAssignableFrom(value.ReferenceType);
 		}
-
-		#region Editor Interface
-
-		public List<Type> Types;
-
-		public void SetType(int tab, int selection)
-		{
-			// Account for none
-			Type = selection <= 0 ? null : Types[selection - 1];
-		}
-
-		#endregion
 	}
 }

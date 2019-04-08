@@ -168,7 +168,7 @@ namespace PiRhoSoft.CompositionEngine
 				case ExpressionTokenType.StartGroup: return int.MaxValue;
 				case ExpressionTokenType.EndGroup: return 0;
 				case ExpressionTokenType.Separator: return 0;
-				case ExpressionTokenType.Alternation: return OperatorPrecedence.Ternary.Value;
+				case ExpressionTokenType.Alternation: return OperatorPrecedence.Ternary.AssociativeValue;
 				case ExpressionTokenType.Unknown: return 0;
 			}
 

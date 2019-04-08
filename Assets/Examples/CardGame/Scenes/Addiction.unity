@@ -326,11 +326,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669426905e76c64290400a5749602c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 7c695ba6f2ecc044e9217fb32b16a509, type: 2}
     _inputs: []
     _outputs: []
-  Event: 
 --- !u!114 &167390631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -563,11 +563,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 88fda268543e79046aa3ab510ca1bbb2, type: 2}
     _inputs: []
     _outputs: []
-  Event: 
 --- !u!114 &500038794
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -595,9 +595,6 @@ MonoBehaviour:
     - CFNodWZmbGVzAgAAAAQAAAA=
     - CENvbXBsZXRlAQAAAAA=
     _variablesObjects: []
-  Reference:
-    _variable: 
-    _tokens: []
 --- !u!4 &500038795
 Transform:
   m_ObjectHideFlags: 0
@@ -762,11 +759,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669426905e76c64290400a5749602c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 99f12e2c846ae7544894f2b8049e0b17, type: 2}
     _inputs: []
     _outputs: []
-  Event: 
 --- !u!114 &562347067
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1407,10 +1404,3 @@ MonoBehaviour:
     - BkhlYXJ0cxMAAAAAAAAA
     - CERpYW1vbmRzEwAAAAAAAAA=
     _variablesObjects: []
-  Reference:
-    _variable: test.lookup
-    _tokens:
-    - Type: 0
-      Text: test
-    - Type: 0
-      Text: lookup

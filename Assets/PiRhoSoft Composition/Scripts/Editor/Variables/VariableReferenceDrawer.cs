@@ -52,7 +52,7 @@ namespace PiRhoSoft.CompositionEditor
 	}
 
 	[CustomPropertyDrawer(typeof(VariableReference))]
-	public class VariableReferenceDrawer : ControlDrawer<VariableReferenceControl>
+	public class VariableReferenceDrawer : PropertyDrawer<VariableReferenceControl>
 	{
 	}
 }

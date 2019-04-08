@@ -9,8 +9,8 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariableValueDrawer
 	{
-		private static readonly IconButton _addButton = new IconButton(IconButton.Add, "Add an item to the list");
-		private static readonly IconButton _removeButton = new IconButton(IconButton.Remove, "Remove this item from the list");
+		private static readonly Label _addButton = new Label(Icon.BuiltIn(Icon.Add), "", "Add an item to the list");
+		private static readonly Label _removeButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this item from the list");
 
 		public static float GetHeight(VariableValue value, ValueDefinition definition)
 		{

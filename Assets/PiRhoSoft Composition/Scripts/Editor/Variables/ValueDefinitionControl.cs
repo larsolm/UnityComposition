@@ -24,8 +24,8 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static GUIContent _minimumConstraintLabel = new GUIContent("Between");
 		private readonly static GUIContent _maximumConstraintLabel = new GUIContent("and");
 
-		private static readonly IconButton _addButton = new IconButton(IconButton.Add, "Add a string to this constraint");
-		private static readonly IconButton _removeButton = new IconButton(IconButton.Remove, "Remove this string constraint");
+		private static readonly Label _addButton = new Label(Icon.BuiltIn(Icon.Add), "", "Add a string to this constraint");
+		private static readonly Label _removeButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this string constraint");
 
 		private static Expression _expression = new Expression();
 
@@ -161,7 +161,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static void DrawInitializer(Rect rect, ref ValueDefinition definition)
 		{
 			DrawIndentedLabel(ref rect, _initializerLabel);
-			ExpressionControl.DrawFoldout(rect, definition.Initializer, GUIContent.none);
+			ExpressionControl.Draw(rect, definition.Initializer, GUIContent.none, true);
 		}
 
 		private static void DrawDefaultValue(Rect rect, ref ValueDefinition definition)
@@ -346,8 +346,7 @@ namespace PiRhoSoft.CompositionEditor
 				constraint = objectConstraint;
 			}
 
-			TypePopupDrawer.Draw<Object>(rect, GUIContent.none, objectConstraint.Type, false, ref objectConstraint.Types, objectConstraint.SetType);
-
+			objectConstraint.Type = TypeDisplayDrawer.Draw<Object>(rect, GUIContent.none, objectConstraint.Type, false, true);
 		}
 
 		private static void DrawEnumConstraint(Rect rect, ref VariableConstraint constraint)
@@ -358,8 +357,7 @@ namespace PiRhoSoft.CompositionEditor
 				constraint = enumConstraint;
 			}
 
-			TypePopupDrawer.Draw<Enum>(rect, GUIContent.none, enumConstraint.Type, false, ref enumConstraint.Types, enumConstraint.SetType);
-
+			enumConstraint.Type = TypeDisplayDrawer.Draw<Enum>(rect, GUIContent.none, enumConstraint.Type, false, true);
 		}
 
 		private static void DrawListConstraint(Rect rect, ref VariableConstraint constraint)
@@ -431,7 +429,7 @@ namespace PiRhoSoft.CompositionEditor
 	}
 
 	[CustomPropertyDrawer(typeof(ValueDefinition))]
-	public class ValueDefinitionDrawer : ControlDrawer<ValueDefinitionControl>
+	public class ValueDefinitionDrawer : PropertyDrawer<ValueDefinitionControl>
 	{
 	}
 }

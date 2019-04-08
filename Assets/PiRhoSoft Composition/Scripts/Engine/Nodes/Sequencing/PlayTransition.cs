@@ -12,11 +12,11 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The transition to play")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public TransitionVariableSource Transition = new TransitionVariableSource();
 
 		[Tooltip("The phase of the transition to run")]
-		[EnumButtons]
+		[EnumDisplay]
 		public TransitionPhase Phase = TransitionPhase.Out;
 
 		[Tooltip("Whether the Transition should automatically end after its specified duration or remain running")]

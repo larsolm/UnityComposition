@@ -143,7 +143,7 @@ namespace PiRhoSoft.SnippetsEditor
 
 		#region Drawing
 
-		protected void DrawOffsetBackground(Rect rect, Texture2D texture)
+		protected void DrawOffsetBackground(Rect rect, Texture texture)
 		{
 			// to keep the vertical grid lines aligned with the snap positions, the v coordinate needs to be adjusted
 			// since window coordinates have positive down and texture coordinates have positive up
