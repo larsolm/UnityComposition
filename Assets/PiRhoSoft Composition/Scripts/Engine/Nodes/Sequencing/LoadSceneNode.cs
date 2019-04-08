@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The source of the scene to load")]
-		[EnumButtons]
+		[EnumDisplay]
 		public SceneSource Source = SceneSource.Value;
 
 		[Tooltip("The Scene to load")]
