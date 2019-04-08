@@ -25,12 +25,6 @@ namespace PiRhoSoft.CompositionEngine
 				outputs.Add(new VariableDefinition { Name = _rightIdentifier.Name, Definition = ValueDefinition.Create(VariableType.Empty) });
 		}
 
-		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
-		{
-			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
-				outputs.Add(new VariableDefinition { Name = _rightIdentifier.Name, Definition = ValueDefinition.Create(VariableType.Empty) });
-		}
-
 		public override void Parse(ExpressionParser parser, ExpressionToken token)
 		{
 			base.Parse(parser, token);
