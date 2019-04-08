@@ -21,7 +21,8 @@ namespace PiRhoSoft.CompositionEngine
 	public class MockupNode : InstructionGraphNode
 	{
 		[Tooltip("The connections from this node")]
-		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline)]
+		[ListDisplay]
+		[ClassDisplay(Type = ClassDisplayType.Inline)]
 		public MockupConnectionList Connections = new MockupConnectionList();
 
 		[Tooltip("The display color of the node")]

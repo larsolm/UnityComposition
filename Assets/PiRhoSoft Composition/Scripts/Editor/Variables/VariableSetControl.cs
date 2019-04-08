@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariableSetControl : ObjectControl<VariableSet>
 	{
-		private readonly static IconButton _refreshButton = new IconButton(IconButton.Refresh, "Re-compute this variable based on the schema initializer");
+		private readonly static Label _refreshButton = new Label(Icon.BuiltIn(Icon.Refresh), "", "Re-compute this variable based on the schema initializer");
 		private readonly static GUIContent _emptyLabel = new GUIContent("Add definitions to the corresponding Schema to populate this list");
 
 		private ObjectListControl _list = new ObjectListControl();
@@ -97,7 +97,7 @@ namespace PiRhoSoft.CompositionEditor
 	}
 
 	[CustomPropertyDrawer(typeof(VariableSet))]
-	public class VariableSetDrawer : ControlDrawer<VariableSetControl>
+	public class VariableSetDrawer : PropertyDrawer<VariableSetControl>
 	{
 	}
 }

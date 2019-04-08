@@ -8,7 +8,10 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Composition/Variable Store Component")]
 	public class VariableStoreComponent : MonoBehaviour, IVariableStore, IVariableReset, ISchemaOwner
 	{
-		[ChangeTrigger(nameof(SetupSchema))] [AssetPopup] public VariableSchema Schema;
+		[ChangeTrigger(nameof(SetupSchema))]
+		[AssetDisplay(SaveLocation = AssetLocation.Selectable)]
+		public VariableSchema Schema;
+
 		public VariableSet Variables;
 
 		public MappedVariableStore Store { get; private set; } = new MappedVariableStore();

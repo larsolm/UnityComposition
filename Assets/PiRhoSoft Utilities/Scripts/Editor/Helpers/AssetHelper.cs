@@ -1,8 +1,10 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.UtilityEditor
 {
@@ -13,12 +15,14 @@ namespace PiRhoSoft.UtilityEditor
 		public bool HasCreate;
 
 		public GUIContent[] Names;
-		public List<ScriptableObject> Assets;
+		public List<Object> Assets;
 		public TypeList Types;
+
+		public SelectionTree Tree;
 
 		#region Lookup
 
-		public int GetIndex(ScriptableObject asset)
+		public int GetIndex(Object asset)
 		{
 			var index = Assets.IndexOf(asset);
 
@@ -31,7 +35,7 @@ namespace PiRhoSoft.UtilityEditor
 			return index;
 		}
 
-		public ScriptableObject GetAsset(int index)
+		public Object GetAsset(int index)
 		{
 			if (HasNone) index--;  // skip 'None'
 			return index >= 0 && index < Assets.Count ? Assets[index] : null;
@@ -48,6 +52,7 @@ namespace PiRhoSoft.UtilityEditor
 	public class AssetHelper : AssetPostprocessor
 	{
 		private static Dictionary<string, AssetList> _assetLists = new Dictionary<string, AssetList>();
+		private const string _invalidPathError = "(UAHIP) failed to create asset at path {0}: the path must be inside the 'Assets' folder for this project";
 
 		static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 		{
@@ -56,21 +61,33 @@ namespace PiRhoSoft.UtilityEditor
 
 		#region Creation
 
-		public static ScriptableObject CreateAssetWindow(Type type)
+		public static ObjectType Create<ObjectType>(AssetLocation location, string defaultName) where ObjectType : ScriptableObject
 		{
-			var path = EditorUtility.SaveFilePanel("Create a new " + ObjectNames.NicifyVariableName(type.Name), "Assets", type.Name + ".asset", "asset");
-			if (path.Length != 0)
-			{
-				var startIndex = path.IndexOf("Assets");
+			return (ObjectType)Create(typeof(ObjectType), location, defaultName);
+		}
 
-				if (startIndex > 0)
+		public static Object Create(Type createType, AssetLocation location, string defaultName)
+		{
+			var title = string.Format("Create a new {0}", createType.Name);
+			var name = string.IsNullOrEmpty(defaultName) ? createType.Name : defaultName;
+
+			if (location == AssetLocation.Selectable)
+			{
+				var path = EditorUtility.SaveFilePanel(title, "Assets", name + ".asset", "asset");
+
+				if (!string.IsNullOrEmpty(path))
 				{
-					var relativePath = path.Substring(startIndex);
-					var asset = ScriptableObject.CreateInstance(type);
-					AssetDatabase.CreateAsset(asset, relativePath);
+					var asset = CreateAssetAtPath(path, createType);
+
+					if (asset == null)
+						Debug.LogErrorFormat(_invalidPathError, path);
 
 					return asset;
 				}
+			}
+			else if (location == AssetLocation.AssetRoot)
+			{
+				return CreateAsset(name, createType);
 			}
 
 			return null;
@@ -104,10 +121,25 @@ namespace PiRhoSoft.UtilityEditor
 
 		public static ScriptableObject GetOrCreateAsset(string name, Type type)
 		{
-			var asset = GetAsset(type);
+			var asset = GetAsset(type) as ScriptableObject;
 
 			if (asset == null)
 				asset = CreateAsset(name, type);
+
+			return asset;
+		}
+
+		public static ScriptableObject CreateAssetAtPath(string path, Type type)
+		{
+			if (!path.StartsWith(Application.dataPath))
+				return null;
+
+			path = path.Substring(Application.dataPath.Length - 6); // keep 'Assets' as the root folder
+			
+			var asset = ScriptableObject.CreateInstance(type);
+
+			AssetDatabase.CreateAsset(asset, path);
+			AssetDatabase.SaveAssets();
 
 			return asset;
 		}
@@ -116,69 +148,69 @@ namespace PiRhoSoft.UtilityEditor
 
 		#region Lookup
 
-		public static AssetType GetAsset<AssetType>() where AssetType : ScriptableObject
+		public static AssetType GetAsset<AssetType>() where AssetType : Object
 		{
 			return FindAssets<AssetType>().FirstOrDefault();
 		}
 
-		public static AssetType GetAssetWithId<AssetType>(string id) where AssetType : ScriptableObject
+		public static AssetType GetAssetWithId<AssetType>(string id) where AssetType : Object
 		{
 			var path = AssetDatabase.GUIDToAssetPath(id);
 			return GetAssetAtPath<AssetType>(path);
 		}
 
-		public static AssetType GetAssetAtPath<AssetType>(string path) where AssetType : ScriptableObject
+		public static AssetType GetAssetAtPath<AssetType>(string path) where AssetType : Object
 		{
 			return AssetDatabase.LoadAssetAtPath<AssetType>(path);
 		}
 
-		public static ScriptableObject GetAsset(Type assetType)
+		public static Object GetAsset(Type assetType)
 		{
 			return FindAssets(assetType).FirstOrDefault();
 		}
 
-		public static ScriptableObject GetAssetWithId(string id, Type type)
+		public static Object GetAssetWithId(string id, Type type)
 		{
 			var path = AssetDatabase.GUIDToAssetPath(id);
 			return GetAssetAtPath(path, type);
 		}
 
-		public static ScriptableObject GetAssetAtPath(string path, Type type)
+		public static Object GetAssetAtPath(string path, Type type)
 		{
-			return AssetDatabase.LoadAssetAtPath(path, type) as ScriptableObject;
+			return AssetDatabase.LoadAssetAtPath(path, type) as Object;
 		}
 
 		#endregion
 
 		#region Listing
 
-		public static List<AssetType> ListAssets<AssetType>() where AssetType : ScriptableObject
+		public static List<AssetType> ListAssets<AssetType>() where AssetType : Object
 		{
 			return FindAssets<AssetType>().ToList();
 		}
 
-		public static IEnumerable<AssetType> FindAssets<AssetType>() where AssetType : ScriptableObject
+		public static IEnumerable<AssetType> FindAssets<AssetType>() where AssetType : Object
 		{
 			return FindAssets(typeof(AssetType)).Select(asset => asset as AssetType);
 		}
 
-		public static List<ScriptableObject> ListAssets(Type assetType)
+		public static List<Object> ListAssets(Type assetType)
 		{
 			return FindAssets(assetType).ToList();
 		}
 
-		public static IEnumerable<ScriptableObject> FindAssets(Type assetType)
+		public static IEnumerable<Object> FindAssets(Type assetType)
 		{
 			// This query seems to occassionally miss finding some objects. Renaming, moving, or modifying the missing
 			// object seems to fix it but the underlying cause is unknown. It might have something to do with loading
 			// objects whose serialized representation has changed in which case AssetDatabase.ForceReserializeAssets
 			// might also fix it. That could be exposed as a workaround with a refresh button in the AssetPopup ui.
 
-			var query = string.Format("t:{0}", assetType);
+			var query = string.Format("t:{0}", assetType).Replace("UnityEngine.", "");
 			return AssetDatabase.FindAssets(query).Select(id => GetAssetWithId(id, assetType));
 		}
 
-		public static AssetList GetAssetList<AssetType>(bool includeNone, bool includeCreate) where AssetType : ScriptableObject
+		public static AssetList GetAssetList<AssetType>(bool includeNone, bool includeCreate) where AssetType : Object
 		{
 			return GetAssetList(typeof(AssetType), includeNone, includeCreate);
 		}
@@ -197,7 +229,7 @@ namespace PiRhoSoft.UtilityEditor
 			if (list.Assets == null)
 			{
 				list.Assets = ListAssets(assetType);
-				list.Types = includeCreate ? TypeHelper.GetTypeList(assetType, false, true) : null;
+				list.Types = includeCreate ? TypeHelper.GetTypeList(assetType, false, false) : null;
 
 				var index = 0;
 				var count = list.Assets.Count;
@@ -219,12 +251,18 @@ namespace PiRhoSoft.UtilityEditor
 					var name = path.Length > 0 ? path + asset.name : asset.name;
 					list.Names[index++] = new GUIContent(name, AssetPreview.GetMiniThumbnail(asset) ?? AssetPreview.GetMiniTypeThumbnail(asset.GetType()));
 				}
+
+				list.Tree = new SelectionTree();
+				list.Tree.Add(assetType.Name, list.Names);
+				
+				if (includeCreate)
+					list.Tree.Add("Create", list.Types.Names);
 			}
 
 			return list;
 		}
 
-		private static string GetPath(ScriptableObject asset)
+		private static string GetPath(Object asset)
 		{
 			var path = AssetDatabase.GetAssetPath(asset);
 			var slash = path.LastIndexOf('/');

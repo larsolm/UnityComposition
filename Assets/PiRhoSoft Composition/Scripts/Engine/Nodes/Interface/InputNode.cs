@@ -41,7 +41,8 @@ namespace PiRhoSoft.CompositionEngine
 	public class InputNode : InstructionGraphNode
 	{
 		[Tooltip("The buttons that can trigger selections")]
-		[ListDisplay(ItemDisplay = ListItemDisplayType.Inline, EmptyText = "Add items to create input options")]
+		[ListDisplay(EmptyText = "Add items to create input options")]
+		[ClassDisplay(Type = ClassDisplayType.Inline)]
 		public InputNodeButtonList Buttons = new InputNodeButtonList();
 
 		public override Color NodeColor => Colors.InterfaceTeal;

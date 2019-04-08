@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
 using System.Collections;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -10,23 +11,25 @@ namespace PiRhoSoft.CompositionEditor
 	public class VariableLinkEditor : Editor
 	{
 		private static readonly Label _variablesLabel = new Label(typeof(VariableLink), nameof(VariableLink.Variables));
-		private readonly static IconButton _addVariableButton = new IconButton(IconButton.CustomAdd, "Add a Variable to the list");
-		private readonly static IconButton _removeVariableButton = new IconButton(IconButton.Remove, "Remove this Variable from the list");
+		private readonly static Label _addVariableButton = new Label(Icon.BuiltIn(Icon.CustomAdd), "", "Add a Variable to the list");
+		private readonly static Label _removeVariableButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this Variable from the list");
 		private readonly static GUIContent _addVariableContent = new GUIContent("Add Variable");
 		private static readonly GUIContent _emptyContent = new GUIContent("Add Variables to be inserted into the global variable store");
 
 		private ObjectListControl _list = new ObjectListControl();
+		private CreateVariablePopup _createPopup = new CreateVariablePopup();
 		private VariableLink _variables;
 
 		void OnEnable()
 		{
+			_createPopup.Setup(_addVariableContent, PopupCreate, PopupValidate);
 			_variables = target as VariableLink;
 			_list.Setup(_variables.Variables)
 				.MakeDrawable(DrawVariable)
 				.MakeRemovable(_removeVariableButton, RemoveVariable)
 				.MakeCollapsable(serializedObject.targetObject.GetType().Name + ".IsOpen")
 				.MakeReorderable(Reorder)
-				.MakeHeaderButton(_addVariableButton, new AddPopup(new AddVariableContent(this), _addVariableContent), Color.white)
+				.MakeHeaderButton(_addVariableButton, _createPopup, Color.white)
 				.MakeCustomHeight(GetHeight)
 				.MakeEmptyLabel(_emptyContent);
 		}
@@ -85,45 +88,42 @@ namespace PiRhoSoft.CompositionEditor
 			_variables.Constraints.Insert(to, previous);
 		}
 
-		private class AddVariableContent : AddNamedItemContent
+		private void PopupCreate()
 		{
-			private VariableLinkEditor _editor;
-			private ValueDefinition _definition;
-			private bool _typeValid = true;
+			AddVariable(_createPopup.Name, _createPopup.Definition);
+		}
 
-			public AddVariableContent(VariableLinkEditor editor)
+		private bool PopupValidate()
+		{
+			_createPopup.IsNameValid = !_variables.Variables.Any(v => v.Name == _createPopup.Name);
+			_createPopup.IsTypeValid = _createPopup.Definition.Type != VariableType.Empty;
+
+			return _createPopup.IsNameValid && _createPopup.IsTypeValid;
+		}
+
+		private class CreateVariablePopup : CreateNamedPopup
+		{
+			public ValueDefinition Definition;
+			public bool IsTypeValid = true;
+
+			public CreateVariablePopup()
 			{
-				_editor = editor;
-				_definition = ValueDefinition.Create(VariableType.Empty);
+				Definition = ValueDefinition.Create(VariableType.Empty);
 			}
 
-			protected override float GetHeight_()
+			protected override float GetContentHeight()
 			{
-				return ValueDefinitionControl.GetHeight(_definition, VariableInitializerType.None, null);
+				return base.GetContentHeight() + ValueDefinitionControl.GetHeight(Definition, VariableInitializerType.None, null);
 			}
 
-			protected override bool Draw_(bool clean)
+			protected override bool DrawContent()
 			{
-				using (new InvalidScope(clean || _typeValid))
-					_definition = ValueDefinitionControl.Draw(GUIContent.none, _definition, VariableInitializerType.None, null, false);
+				var create = base.DrawContent();
 
-				return false;
-			}
+				using (new InvalidScope(!HasChanged || IsTypeValid))
+					Definition = ValueDefinitionControl.Draw(GUIContent.none, Definition, VariableInitializerType.None, null, false);
 
-			protected override bool Validate_()
-			{
-				_typeValid = _definition.Type != VariableType.Empty;
-				return _typeValid;
-			}
-
-			protected override void Add_(string name)
-			{
-				_editor.AddVariable(name, _definition);
-			}
-
-			protected override bool IsNameInUse(string name)
-			{
-				return _editor._variables.Variables.Exists(variable => variable.Name == name);
+				return create;
 			}
 		}
 	}

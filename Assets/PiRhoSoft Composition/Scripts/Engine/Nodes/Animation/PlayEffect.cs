@@ -20,11 +20,11 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The GameObject to spawn")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public GameObjectVariableSource Effect = new GameObjectVariableSource();
 
 		[Tooltip("The name of the spawned effect object")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public StringVariableSource EffectName = new StringVariableSource("Spawned Effect");
 
 		[Tooltip("How to create and position the effect, with an exact position, relative to another object, or as a child of another object")]
@@ -39,7 +39,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public Vector3VariableSource Position = new Vector3VariableSource();
 
 		[Tooltip("Whether to wait for the effect to finish before moving to Next")]

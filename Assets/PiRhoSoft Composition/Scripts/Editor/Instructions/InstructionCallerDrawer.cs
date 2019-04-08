@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
+using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using System.Reflection;
 using UnityEditor;
@@ -9,7 +10,7 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class InstructionCallerControl : ObjectControl<InstructionCaller>
 	{
-		private readonly static IconButton _refreshButton = new IconButton(IconButton.Refresh, "Refresh the list of inputs and outputs");
+		private readonly static Label _refreshButton = new Label(Icon.BuiltIn(Icon.Refresh), "", "Refresh the list of inputs and outputs");
 		private readonly static Label _inputsLabel = new Label(typeof(InstructionCaller), "_inputs");
 		private readonly static Label _outputsLabel = new Label(typeof(InstructionCaller), "_outputs");
 
@@ -43,31 +44,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void DrawInstruction(Rect rect, GUIContent label)
 		{
-			AssetPopupControl.Draw(rect, label, _caller.Instruction, SetInstruction, true, true, true);
-		}
+			var instruction = AssetDisplayDrawer.Draw(rect, label, _caller.Instruction, true, true, AssetLocation.Selectable, null);
 
-		private void SetInstruction(int tab, int selection)
-		{
-			if (selection >= 0)
+			if (_caller.Instruction != instruction)
 			{
-				var list = AssetHelper.GetAssetList<Instruction>(true, true);
-				var instruction = _caller.Instruction;
-
-				if (tab == 0)
-				{
-					instruction = list.GetAsset(selection) as Instruction;
-				}
-				else if (tab == 1)
-				{
-					var type = list.GetType(selection);
-					instruction = AssetHelper.CreateAssetWindow(type) as Instruction;
-				}
-
-				if (_caller.Instruction != instruction)
-				{
-					_caller.Instruction = instruction;
-					Refresh();
-				}
+				_caller.Instruction = instruction;
+				Refresh();
 			}
 		}
 
@@ -143,7 +125,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override float GetHeight(GUIContent label)
 		{
-			var height = AssetPopupControl.GetHeight();
+			var height = AssetDisplayDrawer.GetHeight(label);
 
 			if (_caller.Inputs.Count > 0 || _caller.Outputs.Count > 0)
 				height += RectHelper.VerticalSpace;
@@ -159,7 +141,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void Draw(Rect position, GUIContent label)
 		{
-			var instructionHeight = AssetPopupControl.GetHeight();
+			var instructionHeight = AssetDisplayDrawer.GetHeight(label);
 			var instructionRect = RectHelper.TakeHeight(ref position, instructionHeight);
 
 			DrawInstruction(instructionRect, label);
@@ -187,7 +169,7 @@ namespace PiRhoSoft.CompositionEditor
 	}
 
 	[CustomPropertyDrawer(typeof(InstructionCaller))]
-	public class InstructionCallerDrawer : ControlDrawer<InstructionCallerControl>
+	public class InstructionCallerDrawer : PropertyDrawer<InstructionCallerControl>
 	{
 	}
 }

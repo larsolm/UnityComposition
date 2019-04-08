@@ -13,32 +13,34 @@ namespace PiRhoSoft.CompositionEditor
 
 		public static float GetHeight(Expression expression, bool foldout)
 		{
-			var expressionHeight = foldout ? FoldoutStringDrawer.GetHeight(expression.IsExpanded) : RectHelper.LineHeight * 5;
+			var expressionHeight = foldout
+				? StringDisplayDrawer.GetFoldoutBoxHeight(expression.Statement, expression.IsExpanded, true, false, 2, 10)
+				: StringDisplayDrawer.GetAreaHeight(expression.Statement, true, false, 2, 10);
+
 			var errorHeight = GetErrorHeight(expression, foldout);
 
 			return expressionHeight + errorHeight;
 		}
 
-		public static void Draw(Expression expression, GUIContent label)
+		public static void Draw(Expression expression, GUIContent label, bool foldout)
 		{
-			var height = GetHeight(expression, false);
+			var height = GetHeight(expression, foldout);
 			var rect = EditorGUILayout.GetControlRect(false, height);
-			Draw(rect, expression, label);
+			Draw(rect, expression, label, foldout);
 		}
 
-		public static void Draw(Rect position, Expression expression, GUIContent label)
+		public static void Draw(Rect position, Expression expression, GUIContent label, bool foldout)
 		{
-			var rect = RectHelper.TakeLine(ref position);
 			var errorHeight = GetErrorHeight(expression, false);
 			var errorRect = RectHelper.TakeTrailingHeight(ref position, errorHeight);
-
-			EditorGUI.LabelField(rect, label);
 
 			using (new InvalidScope(!expression.HasError))
 			{
 				using (var changes = new EditorGUI.ChangeCheckScope())
 				{
-					var statement = EditorGUI.TextArea(position, expression.Statement);
+					var statement = foldout
+						? StringDisplayDrawer.DrawFoldoutArea(position, label, expression.Statement, ref expression.IsExpanded, true, false)
+						: StringDisplayDrawer.DrawArea(position, label, expression.Statement, true, false);
 
 					if (changes.changed || (expression.HasError && string.IsNullOrEmpty(expression.LastResult)))
 					{
@@ -49,35 +51,6 @@ namespace PiRhoSoft.CompositionEditor
 			}
 
 			DrawError(errorRect, expression, false);
-		}
-
-		public static void DrawFoldout(Expression expression, GUIContent label)
-		{
-			var height = GetHeight(expression, true);
-			var rect = EditorGUILayout.GetControlRect(false, height);
-			Draw(rect, expression, label);
-		}
-
-		public static void DrawFoldout(Rect position, Expression expression, GUIContent label)
-		{
-			var errorHeight = GetErrorHeight(expression, true);
-			var errorRect = RectHelper.TakeTrailingHeight(ref position, errorHeight);
-
-			using (new InvalidScope(!expression.HasError))
-			{
-				using (var changes = new EditorGUI.ChangeCheckScope())
-				{
-					var statement = FoldoutStringDrawer.Draw(position, label, expression.Statement, ref expression.IsExpanded);
-
-					if (changes.changed || (expression.HasError && string.IsNullOrEmpty(expression.LastResult)))
-					{
-						var result = expression.SetStatement(statement);
-						expression.LastResult = result.Success ? null : result.Message;
-					}
-				}
-			}
-
-			DrawError(errorRect, expression, true);
 		}
 
 		private static float GetErrorHeight(Expression expression, bool foldout)
@@ -109,12 +82,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void Draw(Rect position, GUIContent label)
 		{
-			Draw(position, _expression, label);
+			Draw(position, _expression, label, false);
 		}
 	}
 
 	[CustomPropertyDrawer(typeof(Expression))]
-	public class ExpressionDrawer : ControlDrawer<ExpressionControl>
+	public class ExpressionDrawer : PropertyDrawer<ExpressionControl>
 	{
 	}
 }

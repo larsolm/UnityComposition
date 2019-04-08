@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public Expression Switch = new Expression();
 
 		[Tooltip("The node to follow depending on the result of Switch")]
-		[DictionaryDisplay(EmptyText = "No outputs", ShowEditButton = true)]
+		[DictionaryDisplay(EmptyText = "No outputs")]
 		public InstructionGraphNodeDictionary Outputs = new InstructionGraphNodeDictionary();
 
 		[Tooltip("The node to follow if the result of Switch is not in Outputs")]

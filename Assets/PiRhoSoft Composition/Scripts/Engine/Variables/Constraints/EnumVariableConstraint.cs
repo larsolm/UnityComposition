@@ -41,17 +41,5 @@ namespace PiRhoSoft.CompositionEngine
 
 			return false;
 		}
-
-		#region Editor Interface
-
-		public List<Type> Types;
-
-		public void SetType(int tab, int selection)
-		{
-			// Account for none
-			Type = selection <= 0 ? null : Types[selection - 1];
-		}
-
-		#endregion
 	}
 }

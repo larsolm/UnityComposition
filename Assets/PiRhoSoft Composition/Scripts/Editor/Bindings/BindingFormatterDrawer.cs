@@ -73,7 +73,7 @@ namespace PiRhoSoft.CompositionEditor
 	}
 
 	[CustomPropertyDrawer(typeof(BindingFormatter))]
-	public class BindingFormatterDrawer : ControlDrawer<BindingFormatterControl>
+	public class BindingFormatterDrawer : PropertyDrawer<BindingFormatterControl>
 	{
 	}
 }

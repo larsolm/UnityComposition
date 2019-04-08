@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
+using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,7 +33,7 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				using (new UndoScope(property.serializedObject.targetObject, false))
 				{
-					target.Type = (VariableSourceType)EnumButtonsDrawer.Draw(typeRect, label, (int)target.Type, typeof(VariableSourceType), 50);
+					target.Type = (VariableSourceType)EnumDisplayDrawer.Draw(typeRect, label, (int)target.Type, typeof(VariableSourceType), EnumDisplayType.Buttons, false, 50);
 
 					if (target.Type == VariableSourceType.Value)
 					{

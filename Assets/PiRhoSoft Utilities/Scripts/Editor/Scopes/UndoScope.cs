@@ -45,6 +45,8 @@ namespace PiRhoSoft.UtilityEditor
 
 				if (_object && (changed || _forceDirty))
 				{
+					// SetDirty is for assets (including prefabs), MarkSceneDirty is for GameObjects
+
 					if (!Application.isPlaying)
 					{
 						EditorUtility.SetDirty(_object); // Set dirty doesn't mark scene as dirty

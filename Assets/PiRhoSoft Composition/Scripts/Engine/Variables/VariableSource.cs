@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 	public abstract class VariableSource
 	{
 		[Tooltip("Whether the source points to a variable reference or an actual value")]
-		[EnumButtons]
+		[EnumDisplay]
 		public VariableSourceType Type = VariableSourceType.Value;
 
 		[Tooltip("The variable reference to lookup the value from")]

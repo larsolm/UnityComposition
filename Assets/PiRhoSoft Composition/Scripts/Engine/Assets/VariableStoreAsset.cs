@@ -8,7 +8,10 @@ namespace PiRhoSoft.CompositionEngine
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Store", fileName = nameof(VariableStoreAsset), order = 130)]
 	public class VariableStoreAsset : ScriptableObject, IVariableStore, IVariableReset
 	{
-		[ChangeTrigger(nameof(SetupSchema))] [AssetPopup] public VariableSchema Schema;
+		[ChangeTrigger(nameof(SetupSchema))]
+		[AssetDisplay(SaveLocation = AssetLocation.Selectable)]
+		public VariableSchema Schema;
+
 		public VariableSet Variables;
 
 		public MappedVariableStore Store { get; private set; } = new MappedVariableStore();

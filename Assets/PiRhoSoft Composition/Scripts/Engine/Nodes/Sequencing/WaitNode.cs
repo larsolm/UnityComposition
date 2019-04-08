@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The amount of time (in seconds) to wait")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public FloatVariableSource Time = new FloatVariableSource(1.0f);
 
 		[Tooltip("Time is affected by Time.timeScale")]

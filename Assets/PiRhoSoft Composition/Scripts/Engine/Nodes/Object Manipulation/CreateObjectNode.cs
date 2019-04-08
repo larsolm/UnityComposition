@@ -20,18 +20,18 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The prefab object to spawn")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public GameObjectVariableSource Prefab = new GameObjectVariableSource();
 
 		[Tooltip("The name of the new object")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public StringVariableSource ObjectName = new StringVariableSource("Spawned Object");
 
 		[Tooltip("A variable reference to assign the created object to so that it can be referenced later")]
 		public VariableReference ObjectVariable = new VariableReference();
 
 		[Tooltip("How to create and position the object, with an exact position, relative to another object, or as a child of another object")]
-		[EnumButtons]
+		[EnumDisplay]
 		public ObjectPositioning Positioning = ObjectPositioning.Absolute;
 
 		[Tooltip("The object to position the created object relative to")]
@@ -43,11 +43,11 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public Vector3VariableSource Position = new Vector3VariableSource();
 
 		[Tooltip("The rotation to spawn the object at")]
-		[InlineDisplay(PropagateLabel = true)]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public Vector3VariableSource Rotation = new Vector3VariableSource();
 
 		public override Color NodeColor => Colors.SequencingLight;
