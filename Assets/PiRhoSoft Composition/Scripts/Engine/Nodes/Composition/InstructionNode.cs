@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionCaller Instruction = new InstructionCaller();
 
 		[Tooltip("The object to use as the root for Instruction")]
-		public VariableValueSource Context = new VariableValueSource { Type = VariableSourceType.Reference, Reference = new VariableReference("context") };
+		public VariableValueSource Context = new VariableValueSource { Type = VariableSourceType.Reference, Reference = new VariableReference { Variable = "context" } };
 
 		[Tooltip("Whether to wait for the instruction to finish before moving to Next")]
 		public bool WaitForCompletion = true;

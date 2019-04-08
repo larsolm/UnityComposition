@@ -406,7 +406,7 @@ namespace PiRhoSoft.CompositionEditor
 			_isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
 			_isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
 
-			_constraint = VariableHandler.Get((VariableType)_typeProperty.enumValueIndex).CreateConstraint(_constraintProperty.stringValue);
+			_constraint = VariableHandler.CreateConstraint((VariableType)_typeProperty.enumValueIndex, _constraintProperty.stringValue);
 		}
 
 		public override float GetHeight(SerializedProperty property, GUIContent label)
