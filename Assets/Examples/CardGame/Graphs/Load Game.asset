@@ -43,6 +43,7 @@ MonoBehaviour:
     - {fileID: 114560535190961996}
     - {fileID: 114673358792983352}
     - {fileID: 114764902459509120}
+    - {fileID: 114215242899641412}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114169463803128364}
   Process: {fileID: 114902517910671770}
@@ -101,9 +102,27 @@ MonoBehaviour:
   Name: Set Processing
   GraphPosition: {x: 128, y: -89.6}
   IsBreakpoint: 0
-  Next: {fileID: 114495678880178976}
+  Next: {fileID: 114215242899641412}
   Expression:
     _statement: global.State.Processing += 1
+--- !u!114 &114215242899641412
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression
+  m_EditorClassIdentifier: 
+  Name: Expression
+  GraphPosition: {x: 103.99997, y: -228.22906}
+  IsBreakpoint: 0
+  Next: {fileID: 114495678880178976}
+  Expression:
+    _statement: global.Deck.Test[1] = null
 --- !u!114 &114233220627467950
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -269,7 +288,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Clean Up Sequence
   GraphPosition: {x: 448, y: -281.6}
-  IsBreakpoint: 0
+  IsBreakpoint: 1
   Sequence:
     _items:
     - {fileID: 114048462506149892}
