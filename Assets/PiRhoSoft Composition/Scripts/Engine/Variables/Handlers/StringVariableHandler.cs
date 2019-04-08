@@ -21,9 +21,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void ToString_(VariableValue value, StringBuilder builder)
 		{
-			builder.Append(Symbol);
 			builder.Append(value.String);
-			builder.Append(Symbol);
 		}
 
 		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)

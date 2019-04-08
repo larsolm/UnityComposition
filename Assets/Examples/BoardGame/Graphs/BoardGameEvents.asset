@@ -48,10 +48,10 @@ MonoBehaviour:
   m_Name: Set Seleceted Piece
   m_EditorClassIdentifier: 
   Name: Set Seleceted Piece
-  GraphPosition: {x: 320, y: -64}
+  GraphPosition: {x: 320, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'piece = highlight<VariableStoreComponent>.Piece;
+    _statement: 'piece = highlight as VariableStoreComponent.Piece;
 
       piece.Player.SelectedPiece = piece;'

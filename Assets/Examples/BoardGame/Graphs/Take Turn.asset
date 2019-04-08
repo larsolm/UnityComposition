@@ -36,7 +36,6 @@ MonoBehaviour:
     - {fileID: 114503757033569924}
     - {fileID: 114767383999022486}
     - {fileID: 114693783200656058}
-    - {fileID: 114558442242668972}
     - {fileID: 114208458872356858}
     - {fileID: 114452511902477958}
     - {fileID: 114955431750335060}
@@ -59,7 +58,6 @@ MonoBehaviour:
     - {fileID: 114881147754536536}
     - {fileID: 114968466692099586}
     - {fileID: 114387968987782918}
-    - {fileID: 114747329603379744}
     - {fileID: 114134270896229670}
     - {fileID: 114530582379309674}
     - {fileID: 114380065659813780}
@@ -74,6 +72,8 @@ MonoBehaviour:
     - {fileID: 114161564551485726}
     - {fileID: 114580852792490862}
     - {fileID: 114890588813715902}
+    - {fileID: 114978121118815360}
+    - {fileID: 114771119900408706}
   StartPosition: {x: 12.8, y: 0}
   Enter: {fileID: 114646063541107878}
   Process: {fileID: 114090938575764022}
@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Name: Roll Sequence
   m_EditorClassIdentifier: 
   Name: Roll Sequence
-  GraphPosition: {x: 614.4, y: 12.8}
+  GraphPosition: {x: 320, y: 0}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -112,16 +112,16 @@ MonoBehaviour:
   m_Name: Reset Piece
   m_EditorClassIdentifier: 
   Name: Reset Piece
-  GraphPosition: {x: 5056, y: 716.8}
+  GraphPosition: {x: 4646.4, y: 550.4}
   IsBreakpoint: 0
   Next: {fileID: 114348498317395866}
   Object:
-    _variable:
-    - currentSpace
-    - CurrentPiece
-    _lookups:
-    - 
-    - 
+    _variable: currentSpace.CurrentPiece
+    _tokens:
+    - Type: 0
+      Text: currentSpace
+    - Type: 0
+      Text: CurrentPiece
   Tag: NewGame
 --- !u!114 &114134270896229670
 MonoBehaviour:
@@ -136,7 +136,7 @@ MonoBehaviour:
   m_Name: Check for Occupier
   m_EditorClassIdentifier: 
   Name: Check for Occupier
-  GraphPosition: {x: 4672, y: 742.4}
+  GraphPosition: {x: 4032, y: 640}
   IsBreakpoint: 0
   OnTrue: {fileID: 114530582379309674}
   OnFalse: {fileID: 114348498317395866}
@@ -155,7 +155,7 @@ MonoBehaviour:
   m_Name: Check Pieces Available
   m_EditorClassIdentifier: 
   Name: Check Pieces Available
-  GraphPosition: {x: 1049.6, y: 102.4}
+  GraphPosition: {x: 780.8, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 114580852792490862}
   Expression:
@@ -173,7 +173,7 @@ MonoBehaviour:
   m_Name: Yield
   m_EditorClassIdentifier: 
   Name: Yield
-  GraphPosition: {x: 2944, y: 204.8}
+  GraphPosition: {x: 2304, y: 281.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
 --- !u!114 &114196805404475916
@@ -189,13 +189,11 @@ MonoBehaviour:
   m_Name: Clear Previous Space
   m_EditorClassIdentifier: 
   Name: Clear Previous Space
-  GraphPosition: {x: 2982.4001, y: 537.60004}
+  GraphPosition: {x: 2432, y: 512}
   IsBreakpoint: 0
   Next: {fileID: 114460562760816066}
   Expression:
-    _statement: 'previousSpace = global.Spaces[player.SelectedPiece.CurrentSpace];
-
-      previousSpace.CurrentPiece = null;'
+    _statement: global.Spaces[player.SelectedPiece.CurrentSpace].CurrentSpace = null;
 --- !u!114 &114208458872356858
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -209,12 +207,12 @@ MonoBehaviour:
   m_Name: Wait For Selected Piece
   m_EditorClassIdentifier: 
   Name: Wait For Selected Piece
-  GraphPosition: {x: 2611.2, y: 179.2}
+  GraphPosition: {x: 2176, y: 217.6}
   IsBreakpoint: 0
   Loop: {fileID: 114189809193653676}
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Condition:
     _statement: player.SelectedPiece == null;
 --- !u!114 &114261942468430504
@@ -230,7 +228,7 @@ MonoBehaviour:
   m_Name: Set Finished
   m_EditorClassIdentifier: 
   Name: Set Finished
-  GraphPosition: {x: 4032, y: 499.2}
+  GraphPosition: {x: 3392, y: 486.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -250,7 +248,7 @@ MonoBehaviour:
   m_Name: Is Piece Free
   m_EditorClassIdentifier: 
   Name: Is Piece Free
-  GraphPosition: {x: 2598.4001, y: 499.2}
+  GraphPosition: {x: 2112, y: 512}
   IsBreakpoint: 0
   OnTrue: {fileID: 114196805404475916}
   OnFalse: {fileID: 114941350798319070}
@@ -269,12 +267,12 @@ MonoBehaviour:
   m_Name: Roll Loop
   m_EditorClassIdentifier: 
   Name: Roll Loop
-  GraphPosition: {x: 985.60004, y: -12.8}
+  GraphPosition: {x: 1036.8, y: -102.4}
   IsBreakpoint: 0
   Loop: {fileID: 114541750554709886}
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Condition:
     _statement: Time() - rollTime < 0.5
 --- !u!114 &114324481243377518
@@ -290,16 +288,16 @@ MonoBehaviour:
   m_Name: Roll Message
   m_EditorClassIdentifier: 
   Name: Roll Message
-  GraphPosition: {x: 921.60004, y: -89.6}
+  GraphPosition: {x: 640, y: -115.200005}
   IsBreakpoint: 0
   Next: {fileID: 114332784708165080}
   Control:
-    _variable:
-    - scene
-    - Button
-    _lookups:
-    - 
-    - 
+    _variable: scene.Button
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Button
   WaitForCompletion: 1
   AutoHide: 1
   WaitTime: 0
@@ -318,16 +316,16 @@ MonoBehaviour:
   m_Name: Show Roll
   m_EditorClassIdentifier: 
   Name: Show Roll
-  GraphPosition: {x: 1088, y: -179.2}
+  GraphPosition: {x: 832, y: -192}
   IsBreakpoint: 0
   Next: {fileID: 114495507418696002}
   Control:
-    _variable:
-    - scene
-    - Roll
-    _lookups:
-    - 
-    - 
+    _variable: scene.Roll
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Roll
 --- !u!114 &114348498317395866
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,7 +339,7 @@ MonoBehaviour:
   m_Name: Set New Occupier
   m_EditorClassIdentifier: 
   Name: Set New Occupier
-  GraphPosition: {x: 5171.2, y: 819.2}
+  GraphPosition: {x: 4454.4, y: 665.60004}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -359,68 +357,68 @@ MonoBehaviour:
   m_Name: Return to Start
   m_EditorClassIdentifier: 
   Name: Return to Start
-  GraphPosition: {x: 5004.8003, y: 614.4}
+  GraphPosition: {x: 4454.4, y: 448}
   IsBreakpoint: 0
   Next: {fileID: 114114799702549004}
   Transform:
-    _variable:
-    - currentSpace
-    - CurrentPiece
-    _lookups:
-    - 
-    - 
+    _variable: currentSpace.CurrentPiece
+    _tokens:
+    - Type: 0
+      Text: currentSpace
+    - Type: 0
+      Text: CurrentPiece
   UseRelativePosition: 0
   UseRelativeRotation: 1
   UseRelativeScale: 1
   TargetPosition:
     Type: 1
     Reference:
-      _variable:
-      - currentSpace
-      - CurrentPiece
-      - StartingPosition
-      _lookups:
-      - 
-      - 
-      - 
+      _variable: currentSpace.CurrentPiece.StartPosition
+      _tokens:
+      - Type: 0
+        Text: currentSpace
+      - Type: 0
+        Text: CurrentPiece
+      - Type: 0
+        Text: StartPosition
     Value: {x: 0, y: 0, z: 0}
   TargetRotation:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 0, y: 0, z: 0}
   TargetScale:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 1, y: 1, z: 1}
   AnimationMethod: 1
   WaitForCompletion: 1
   Duration:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
   MoveSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 10
   RotationSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
   ScaleSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
 --- !u!114 &114387968987782918
 MonoBehaviour:
@@ -432,15 +430,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Piece Has Highlight
+  m_Name: Piece Can Move
   m_EditorClassIdentifier: 
-  Name: Piece Has Highlight
-  GraphPosition: {x: 2944, y: 307.2}
+  Name: Piece Can Move
+  GraphPosition: {x: 2432, y: 384}
   IsBreakpoint: 0
   OnTrue: {fileID: 114968466692099586}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: piece.Highlight != null
+    _statement: piece.CanMove
 --- !u!114 &114433092151972732
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -454,16 +452,16 @@ MonoBehaviour:
   m_Name: Free Message
   m_EditorClassIdentifier: 
   Name: Free Message
-  GraphPosition: {x: 1856, y: 64}
+  GraphPosition: {x: 1305.6, y: 230.40001}
   IsBreakpoint: 0
   Next: {fileID: 114693783200656058}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 1
   AutoHide: 0
   WaitTime: 0
@@ -481,14 +479,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Set Higlight
+  m_Name: Set Piece
   m_EditorClassIdentifier: 
-  Name: Set Higlight
-  GraphPosition: {x: 3558.4001, y: 51.2}
+  Name: Set Piece
+  GraphPosition: {x: 3072, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: piece.Highlight<VariableStoreComponent>.Piece = piece;
+    _statement: piece.Highlight as VariableStoreComponent.Piece = piece;
 --- !u!114 &114460562760816066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -502,7 +500,7 @@ MonoBehaviour:
   m_Name: Check for Finish
   m_EditorClassIdentifier: 
   Name: Check for Finish
-  GraphPosition: {x: 3315.2, y: 524.8}
+  GraphPosition: {x: 2752, y: 512}
   IsBreakpoint: 0
   OnTrue: {fileID: 114961482151784122}
   OnFalse: {fileID: 114583877898817900}
@@ -521,50 +519,48 @@ MonoBehaviour:
   m_Name: Create Highlight
   m_EditorClassIdentifier: 
   Name: Create Highlight
-  GraphPosition: {x: 3238.4001, y: 51.2}
+  GraphPosition: {x: 2752, y: 128}
   IsBreakpoint: 0
   Next: {fileID: 114452511902477958}
   Prefab:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {fileID: 2924353485232009036, guid: edcdc76103e9ff34eb4adb86245a30af, type: 3}
   ObjectName:
     Type: 0
     Reference:
-      _variable:
-      - Current
-      _lookups:
-      - 
+      _variable: 
+      _tokens: []
     Value: Highlight
   ObjectVariable:
-    _variable:
-    - piece
-    - Highlight
-    _lookups:
-    - 
-    - 
+    _variable: piece.Highlight
+    _tokens:
+    - Type: 0
+      Text: piece
+    - Type: 0
+      Text: Highlight
   Positioning: 2
   Object:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Parent:
-    _variable:
-    - piece
-    _lookups:
-    - 
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
   Position:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 0, y: 0, z: 1}
   Rotation:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 0, y: 0, z: 45}
 --- !u!114 &114471912037488666
 MonoBehaviour:
@@ -579,7 +575,7 @@ MonoBehaviour:
   m_Name: Pieces Available
   m_EditorClassIdentifier: 
   Name: Pieces Available
-  GraphPosition: {x: 1062.4, y: 230.40001}
+  GraphPosition: {x: 704, y: 320}
   IsBreakpoint: 0
   OnTrue: {fileID: 114601505796252814}
   OnFalse: {fileID: 114503757033569924}
@@ -598,7 +594,7 @@ MonoBehaviour:
   m_Name: Start Roll
   m_EditorClassIdentifier: 
   Name: Start Roll
-  GraphPosition: {x: 1292.8, y: -268.80002}
+  GraphPosition: {x: 1036.8, y: -268.80002}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -616,16 +612,16 @@ MonoBehaviour:
   m_Name: Can't Move Message
   m_EditorClassIdentifier: 
   Name: Can't Move Message
-  GraphPosition: {x: 1459.2001, y: 243.2}
+  GraphPosition: {x: 832, y: 422.4}
   IsBreakpoint: 0
   Next: {fileID: 114955431750335060}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 1
   AutoHide: 0
   WaitTime: 0
@@ -646,16 +642,16 @@ MonoBehaviour:
   m_Name: Select Piece Message
   m_EditorClassIdentifier: 
   Name: Select Piece Message
-  GraphPosition: {x: 1856, y: 140.8}
+  GraphPosition: {x: 1305.6, y: 435.2}
   IsBreakpoint: 0
   Next: {fileID: 114693783200656058}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 1
   AutoHide: 0
   WaitTime: 0
@@ -674,23 +670,23 @@ MonoBehaviour:
   m_Name: Iterate Pieces
   m_EditorClassIdentifier: 
   Name: Iterate Pieces
-  GraphPosition: {x: 2611.2, y: 307.2}
+  GraphPosition: {x: 2112, y: 384}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - player
-    - Pieces
-    _lookups:
-    - 
-    - 
+    _variable: player.Pieces
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: Pieces
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - piece
-    _lookups:
-    - 
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
   Loop: {fileID: 114387968987782918}
 --- !u!114 &114530582379309674
 MonoBehaviour:
@@ -705,16 +701,16 @@ MonoBehaviour:
   m_Name: Boom!
   m_EditorClassIdentifier: 
   Name: Boom!
-  GraphPosition: {x: 4684.8003, y: 640}
+  GraphPosition: {x: 4224, y: 550.4}
   IsBreakpoint: 0
   Next: {fileID: 114380065659813780}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 1
   AutoHide: 0
   WaitTime: 0
@@ -733,33 +729,13 @@ MonoBehaviour:
   m_Name: Set Roll
   m_EditorClassIdentifier: 
   Name: Set Roll
-  GraphPosition: {x: 1318.4, y: -89.6}
+  GraphPosition: {x: 1126.4, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114910375662549112}
   Expression:
     _statement: 'global.Roll = Random(1, 7);
 
       rollDisplay = global.Roll > 1 ? "Spaces" : "Space";'
---- !u!114 &114558442242668972
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Reset Selected Piece
-  m_EditorClassIdentifier: 
-  Name: Reset Selected Piece
-  GraphPosition: {x: 2560, y: -38.4}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Expression:
-    _statement: 'player.SelectedPiece = null;
-
-'
 --- !u!114 &114580852792490862
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -773,23 +749,23 @@ MonoBehaviour:
   m_Name: Iterate Pieces
   m_EditorClassIdentifier: 
   Name: Iterate Pieces
-  GraphPosition: {x: 1446.4, y: 12.8}
+  GraphPosition: {x: 857.60004, y: 102.4}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - player
-    - Pieces
-    _lookups:
-    - 
-    - 
+    _variable: player.Pieces
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: Pieces
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - piece
-    _lookups:
-    - 
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
   Loop: {fileID: 114890588813715902}
 --- !u!114 &114583877898817900
 MonoBehaviour:
@@ -804,7 +780,7 @@ MonoBehaviour:
   m_Name: Move Spaces
   m_EditorClassIdentifier: 
   Name: Move Spaces
-  GraphPosition: {x: 3673.6, y: 563.2}
+  GraphPosition: {x: 3072, y: 576}
   IsBreakpoint: 0
   Next: {fileID: 114720587560010244}
   Expression:
@@ -821,10 +797,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Free Roll
+  m_Name: Roll Free
   m_EditorClassIdentifier: 
-  Name: Free Roll
-  GraphPosition: {x: 1497.6, y: 128}
+  Name: Roll Free
+  GraphPosition: {x: 1152, y: 320}
   IsBreakpoint: 0
   OnTrue: {fileID: 114433092151972732}
   OnFalse: {fileID: 114507340405130716}
@@ -843,16 +819,16 @@ MonoBehaviour:
   m_Name: Turn Message
   m_EditorClassIdentifier: 
   Name: Turn Message
-  GraphPosition: {x: 345.6, y: -89.6}
+  GraphPosition: {x: 320, y: -128}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 0
   AutoHide: 0
   WaitTime: 0
@@ -871,64 +847,64 @@ MonoBehaviour:
   m_Name: Move To Space
   m_EditorClassIdentifier: 
   Name: Move To Space
-  GraphPosition: {x: 4364.8003, y: 742.4}
+  GraphPosition: {x: 3712, y: 640}
   IsBreakpoint: 0
   Next: {fileID: 114134270896229670}
   Transform:
-    _variable:
-    - player
-    - SelectedPiece
-    _lookups:
-    - 
-    - 
+    _variable: player.SelectedPiece
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: SelectedPiece
   UseRelativePosition: 0
   UseRelativeRotation: 1
   UseRelativeScale: 1
   TargetPosition:
     Type: 1
     Reference:
-      _variable:
-      - targetPosition
-      _lookups:
-      - 
+      _variable: targetPosition
+      _tokens:
+      - Type: 0
+        Text: targetPosition
     Value: {x: 0, y: 0, z: 0}
   TargetRotation:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 0, y: 0, z: 0}
   TargetScale:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 1, y: 1, z: 1}
   AnimationMethod: 1
   WaitForCompletion: 1
   Duration:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
   MoveSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 10
   RotationSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
   ScaleSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
 --- !u!114 &114693783200656058
 MonoBehaviour:
@@ -943,11 +919,11 @@ MonoBehaviour:
   m_Name: Create Highlights
   m_EditorClassIdentifier: 
   Name: Create Highlights
-  GraphPosition: {x: 2227.2, y: 51.2}
+  GraphPosition: {x: 1651.2001, y: 320}
   IsBreakpoint: 0
   Sequence:
     _items:
-    - {fileID: 114558442242668972}
+    - {fileID: 114978121118815360}
     - {fileID: 114709412097267508}
     - {fileID: 114208458872356858}
     - {fileID: 114525640525504800}
@@ -965,23 +941,23 @@ MonoBehaviour:
   m_Name: Iterate Pieces
   m_EditorClassIdentifier: 
   Name: Iterate Pieces
-  GraphPosition: {x: 2598.4001, y: 64}
+  GraphPosition: {x: 2112, y: 128}
   IsBreakpoint: 0
   Container:
-    _variable:
-    - player
-    - Pieces
-    _lookups:
-    - 
-    - 
+    _variable: player.Pieces
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: Pieces
   Index:
-    _variable: []
-    _lookups: []
+    _variable: 
+    _tokens: []
   Value:
-    _variable:
-    - piece
-    _lookups:
-    - 
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
   Loop: {fileID: 114767383999022486}
 --- !u!114 &114720587560010244
 MonoBehaviour:
@@ -996,29 +972,11 @@ MonoBehaviour:
   m_Name: Get Current Space
   m_EditorClassIdentifier: 
   Name: Get Current Space
-  GraphPosition: {x: 3545.6, y: 768}
+  GraphPosition: {x: 3072, y: 691.2}
   IsBreakpoint: 0
   Next: {fileID: 114971039841928306}
   Expression:
     _statement: currentSpace = global.Spaces[player.SelectedPiece.CurrentSpace];
---- !u!114 &114747329603379744
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Reset Highlight
-  m_EditorClassIdentifier: 
-  Name: Reset Highlight
-  GraphPosition: {x: 3584, y: 307.2}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Expression:
-    _statement: piece.Highlight = null
 --- !u!114 &114767383999022486
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1032,12 +990,36 @@ MonoBehaviour:
   m_Name: Piece Can Move
   m_EditorClassIdentifier: 
   Name: Piece Can Move
-  GraphPosition: {x: 2931.2, y: 51.2}
+  GraphPosition: {x: 2432, y: 128}
   IsBreakpoint: 0
   OnTrue: {fileID: 114464788586605564}
   OnFalse: {fileID: 0}
   Condition:
     _statement: piece.CanMove
+--- !u!114 &114771119900408706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6689d1e5c6f155c4182dd0da101fd0cc, type: 3}
+  m_Name: Reset Highlight
+  m_EditorClassIdentifier: 
+  Name: Reset Highlight
+  GraphPosition: {x: 3072, y: 384}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Variables:
+    _items:
+    - Highlight
 --- !u!114 &114822751121370718
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1051,16 +1033,16 @@ MonoBehaviour:
   m_Name: Hide Roll
   m_EditorClassIdentifier: 
   Name: Hide Roll
-  GraphPosition: {x: 332.80002, y: 179.2}
+  GraphPosition: {x: 320, y: 192}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    _variable:
-    - scene
-    - Roll
-    _lookups:
-    - 
-    - 
+    _variable: scene.Roll
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Roll
 --- !u!114 &114881147754536536
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1074,11 +1056,11 @@ MonoBehaviour:
   m_Name: Cutoff Z
   m_EditorClassIdentifier: 
   Name: Cutoff Z
-  GraphPosition: {x: 4134.4, y: 614.4}
+  GraphPosition: {x: 3392, y: 729.60004}
   IsBreakpoint: 0
   Next: {fileID: 114668657672623782}
   Expression:
-    _statement: targetPosition = Vector3(targetPosition<x>, targetPosition<y>, 0.0)
+    _statement: targetPosition = Vector3(targetPosition.x, targetPosition.y, 0.0);
 --- !u!114 &114890588813715902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1092,7 +1074,7 @@ MonoBehaviour:
   m_Name: Set Can Move
   m_EditorClassIdentifier: 
   Name: Set Can Move
-  GraphPosition: {x: 1817.6, y: -51.2}
+  GraphPosition: {x: 960, y: 179.2}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -1113,14 +1095,14 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   Name: Wait
-  GraphPosition: {x: 1651.2001, y: -179.2}
+  GraphPosition: {x: 1241.6, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Time:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 0.1
   UseScaledTime: 1
 --- !u!114 &114941350798319070
@@ -1136,7 +1118,7 @@ MonoBehaviour:
   m_Name: Make Free
   m_EditorClassIdentifier: 
   Name: Make Free
-  GraphPosition: {x: 3046.4001, y: 704}
+  GraphPosition: {x: 2560, y: 640}
   IsBreakpoint: 0
   Next: {fileID: 114720587560010244}
   Expression:
@@ -1154,16 +1136,16 @@ MonoBehaviour:
   m_Name: Next Turn Message
   m_EditorClassIdentifier: 
   Name: Next Turn Message
-  GraphPosition: {x: 1612.8, y: 332.80002}
+  GraphPosition: {x: 832, y: 499.2}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    _variable:
-    - scene
-    - Button
-    _lookups:
-    - 
-    - 
+    _variable: scene.Button
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Button
   WaitForCompletion: 1
   AutoHide: 1
   WaitTime: 0
@@ -1182,68 +1164,68 @@ MonoBehaviour:
   m_Name: Move To Finish
   m_EditorClassIdentifier: 
   Name: Move To Finish
-  GraphPosition: {x: 3699.2, y: 473.6}
+  GraphPosition: {x: 3072, y: 486.4}
   IsBreakpoint: 0
   Next: {fileID: 114261942468430504}
   Transform:
-    _variable:
-    - player
-    - SelectedPiece
-    _lookups:
-    - 
-    - 
+    _variable: player.SelectedPiece
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: SelectedPiece
   UseRelativePosition: 0
   UseRelativeRotation: 1
   UseRelativeScale: 1
   TargetPosition:
     Type: 1
     Reference:
-      _variable:
-      - player
-      - SelectedPiece
-      - FinishPosition
-      _lookups:
-      - 
-      - 
-      - 
+      _variable: player.SelectedPiece.FinishPosition
+      _tokens:
+      - Type: 0
+        Text: player
+      - Type: 0
+        Text: SelectedPiece
+      - Type: 0
+        Text: FinishPosition
     Value: {x: 0, y: 0, z: 0}
   TargetRotation:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 0, y: 0, z: 0}
   TargetScale:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {x: 1, y: 1, z: 1}
   AnimationMethod: 1
   WaitForCompletion: 0
   Duration:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
   MoveSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 10
   RotationSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
   ScaleSpeed:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
 --- !u!114 &114968466692099586
 MonoBehaviour:
@@ -1255,19 +1237,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destroy Object
+  m_Name: Destroy Highlight
   m_EditorClassIdentifier: 
-  Name: Destroy Object
-  GraphPosition: {x: 3264, y: 307.2}
+  Name: Destroy Highlight
+  GraphPosition: {x: 2752, y: 384}
   IsBreakpoint: 0
-  Next: {fileID: 114747329603379744}
+  Next: {fileID: 114771119900408706}
   Target:
-    _variable:
-    - piece
-    - Highlight
-    _lookups:
-    - 
-    - 
+    _variable: piece.Highlight
+    _tokens:
+    - Type: 0
+      Text: piece
+    - Type: 0
+      Text: Highlight
 --- !u!114 &114971039841928306
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1278,25 +1260,49 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Get Space Position
+  m_Name: Get Target Position
   m_EditorClassIdentifier: 
-  Name: Get Space Position
-  GraphPosition: {x: 3916.8, y: 742.4}
+  Name: Get Target Position
+  GraphPosition: {x: 3392, y: 640}
   IsBreakpoint: 0
   Next: {fileID: 114881147754536536}
   Target:
     Type: 1
     Reference:
-      _variable:
-      - currentSpace
-      _lookups:
-      - Transform
+      _variable: currentSpace
+      _tokens:
+      - Type: 0
+        Text: currentSpace
     Value: {fileID: 0}
   Output:
-    _variable:
-    - targetPosition
-    _lookups:
-    - 
+    _variable: targetPosition
+    _tokens:
+    - Type: 0
+      Text: targetPosition
   TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
   PropertyName: position
+--- !u!114 &114978121118815360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6689d1e5c6f155c4182dd0da101fd0cc, type: 3}
+  m_Name: Reset Selected Piece
+  m_EditorClassIdentifier: 
+  Name: Reset Selected Piece
+  GraphPosition: {x: 2112, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: player
+    _tokens:
+    - Type: 0
+      Text: player
+  Variables:
+    _items:
+    - SelectedPiece

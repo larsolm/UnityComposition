@@ -12,6 +12,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
   m_Name: Calculator
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
   _nodes:
     _items:
     - {fileID: 114160120226984220}
@@ -37,6 +50,7 @@ MonoBehaviour:
     - {fileID: 114268825771250320}
     - {fileID: 114817616350442620}
     - {fileID: 114986298978509238}
+    - {fileID: 114478230851987404}
   StartPosition: {x: 512, y: 384}
   Process: {fileID: 114878619638461498}
 --- !u!114 &114003219145756106
@@ -96,9 +110,12 @@ MonoBehaviour:
   Name: Loop
   GraphPosition: {x: 780.8, y: 102.4}
   IsBreakpoint: 0
+  Loop: {fileID: 114886018136812124}
+  Index:
+    _variable: 
+    _tokens: []
   Condition:
     _statement: true
-  Loop: {fileID: 114886018136812124}
 --- !u!114 &114171684132402094
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,6 +224,34 @@ MonoBehaviour:
       Display += 9;
 
       Operation = Operation == "Equals" ? "" : Operation;'
+--- !u!114 &114478230851987404
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3530830e117b2949a9ed9bb41115c88, type: 3}
+  m_Name: Set Bindings
+  m_EditorClassIdentifier: 
+  Name: Set Bindings
+  GraphPosition: {x: 793.60004, y: 243.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114160120226984220}
+  Object:
+    _variable: scene.Calculator
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Calculator
+  Binding:
+    _variable: local
+    _tokens:
+    - Type: 0
+      Text: local
 --- !u!114 &114504027795530736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -425,7 +470,7 @@ MonoBehaviour:
   Name: Initialize
   GraphPosition: {x: 819.2, y: 384}
   IsBreakpoint: 0
-  Next: {fileID: 114160120226984220}
+  Next: {fileID: 114478230851987404}
   Expression:
     _statement: 'Display = 0;
 
@@ -609,9 +654,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression
+  m_Name: Reset
   m_EditorClassIdentifier: 
-  Name: Expression
+  Name: Reset
   GraphPosition: {x: 2342.4001, y: 678.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
