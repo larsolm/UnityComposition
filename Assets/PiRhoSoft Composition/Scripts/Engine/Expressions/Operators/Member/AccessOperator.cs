@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class AccessOperator : InfixOperation, IAssignableOperation
+	public class AccessOperator : MemberOperator, IAssignableOperation
 	{
 		private const string _invalidMemberAccessException = "the operator '{0}' expected an identifer instead of '{1}'";
 		private const string _invalidMemberAssignException = "unable to assign '{0}' to '{1}'";
@@ -15,6 +15,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
 				inputs.Add(new VariableDefinition { Name = _rightIdentifier.Name, Definition = ValueDefinition.Create(VariableType.Empty) });
+			else
+				base.GetInputs(inputs, source);
+		}
+
+		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
+		{
+			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
+				outputs.Add(new VariableDefinition { Name = _rightIdentifier.Name, Definition = ValueDefinition.Create(VariableType.Empty) });
 		}
 
 		public override void Parse(ExpressionParser parser, ExpressionToken token)

@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class CastOperator : InfixOperation
+	public class CastOperator : MemberOperator
 	{
 		private const string _invalidCastException = "the operator '{0}' expected an identifer instead of '{1}'";
 		private const string _invalidAssignException = "unable to assign '{0}' as '{1}' to '{2}'";

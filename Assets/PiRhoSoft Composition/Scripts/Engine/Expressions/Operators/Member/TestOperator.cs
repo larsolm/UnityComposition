@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class TestOperator : InfixOperation
+	public class TestOperator : MemberOperator
 	{
 		private const string _invalidTestException = "the operator '{0}' expected an identifer instead of '{1}'";
 
