@@ -113,12 +113,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114980614166743252}
   Target:
-    _variable: global.selectedCard
+    _variable: global.SelectedCard
     _tokens:
     - Type: 0
-      Text: local
+      Text: global
     - Type: 0
-      Text: card
+      Text: SelectedCard
   Value:
     Type: 1
     Reference:
@@ -127,7 +127,7 @@ MonoBehaviour:
       - Type: 0
         Text: local
       - Type: 0
-        Text: card
+        Text: cardPosition
     Definition:
       _type: 9
       _constraint: 
@@ -172,7 +172,7 @@ MonoBehaviour:
       - Type: 0
         Text: local
       - Type: 0
-        Text: card
+        Text: rootPosition
     Definition:
       _type: 9
       _constraint: 

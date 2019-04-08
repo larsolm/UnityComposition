@@ -204,13 +204,12 @@ MonoBehaviour:
     _variablesData:
     - BFJhbmsPAAAAAA==
     - BUluZGV4AgAAAAAAAAA=
-    - BFN1aXQRAAAAAAAAAA==
+    - BFN1aXQAAAAA
     - BkNvbHVtbgIAAAAAAAAA
     - A1JvdwIAAAAAAAAA
     - CENvbXBsZXRlAQAAAAA=
     - B01vdmFibGUBAAAAAA==
-    _variablesObjects:
-    - {fileID: 0}
+    _variablesObjects: []
 --- !u!114 &3439422775805371005
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -290,11 +289,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669426905e76c64290400a5749602c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 23b3e746401f5544c8f909d2b34a2cd5, type: 2}
     _inputs: []
     _outputs: []
-  Event: 
 --- !u!1 &3439422776283744783
 GameObject:
   m_ObjectHideFlags: 0
@@ -663,8 +662,14 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 0
   Variable:
-    _variable: 
-    _tokens: []
+    _variable: Card.Suit.Color
+    _tokens:
+    - Type: 0
+      Text: Card
+    - Type: 0
+      Text: Suit
+    - Type: 0
+      Text: Color
 --- !u!114 &6870339411475911359
 MonoBehaviour:
   m_ObjectHideFlags: 0

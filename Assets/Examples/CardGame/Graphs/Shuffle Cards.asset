@@ -204,10 +204,10 @@ MonoBehaviour:
   GraphPosition: {x: 960, y: 25.6}
   IsBreakpoint: 0
   Container:
-    _variable: local.State.Cards
+    _variable: global.State.Cards
     _tokens:
     - Type: 0
-      Text: local
+      Text: global
     - Type: 0
       Text: State
     - Type: 0

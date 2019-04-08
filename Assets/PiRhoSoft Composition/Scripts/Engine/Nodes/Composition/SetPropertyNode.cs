@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
@@ -36,14 +37,16 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (ResolveObject(variables, Target, out Component target))
 			{
-				if (TargetType.IsAssignableFrom(target.GetType()))
+				var cast = ComponentHelper.GetAsComponent(TargetType, target);
+
+				if (TargetType.IsAssignableFrom(cast.GetType()))
 				{
 					Resolve(variables, Value, out var value);
 
 					if (_setter != null)
-						_setter.Set(target, value);
+						_setter.Set(cast, value);
 					else if (Field != null)
-						Set(target, value);
+						Set(cast, value);
 				}
 				else
 				{

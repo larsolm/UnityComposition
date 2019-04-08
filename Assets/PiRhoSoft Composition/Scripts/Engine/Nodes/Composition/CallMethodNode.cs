@@ -44,10 +44,12 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (ResolveObject(variables, Target, out var target))
 			{
-				if (target.GetType() == TargetType)
+				var cast = ComponentHelper.GetAsComponent(TargetType, target);
+
+				if (cast.GetType() == TargetType)
 				{
 					ResolveParameters(variables);
-					var obj = Method.Invoke(target, _parameters);
+					var obj = Method.Invoke(cast, _parameters);
 
 					if (obj != null)
 					{

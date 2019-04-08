@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
-using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
@@ -42,6 +41,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (right.TryGetInt(out var i))
 				return VariableValue.Create(left.Int + i);
+			else if (right.TryGetFloat(out var f))
+				return VariableValue.Create(left.Int + f);
 			else if (right.Type == VariableType.String)
 				return VariableValue.Create(left.Int + right.String);
 			else
@@ -52,6 +53,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (right.TryGetInt(out var i))
 				return VariableValue.Create(left.Int - i);
+			else if (right.TryGetFloat(out var f))
+				return VariableValue.Create(left.Int - f);
 			else
 				return VariableValue.Empty;
 		}
@@ -60,6 +63,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (right.TryGetInt(out var i))
 				return VariableValue.Create(left.Int * i);
+			else if (right.TryGetFloat(out var f))
+				return VariableValue.Create(left.Int * f);
 			else
 				return VariableValue.Empty;
 		}
@@ -86,6 +91,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (right.TryGetInt(out var i))
 				return VariableValue.Create((float)Math.Pow(left.Int, i));
+			else if (right.TryGetFloat(out var f))
+				return VariableValue.Create((float)Math.Pow(left.Int, f));
 			else
 				return VariableValue.Empty;
 		}
