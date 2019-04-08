@@ -58,13 +58,4 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: TestList
-      Definition:
-        _type: 19
-        _constraint: Int|
-        _tag: 
-        _initializer:
-          _statement: 
-        _isTypeLocked: 1
-        _isConstraintLocked: 0
-  _version: 76
+  _version: 82

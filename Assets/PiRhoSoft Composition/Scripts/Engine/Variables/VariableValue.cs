@@ -181,8 +181,16 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static VariableValue CreateObject(Object reference)
 		{
-			// make sure "destroyed" unity objects are stored as real null
-			return CreateReference(VariableType.Object, reference == null ? null : reference); 
+			// Make sure fake null unity objects are stored as real null. When loading, the fake null check will throw
+			// an exception for fake nulls (though, not for valid objects) since it is happening on a background
+			// thread.
+
+			Object fixedReference;
+
+			try { fixedReference = reference == null ? null : reference; }
+			catch { fixedReference = null; }
+
+			return CreateReference(VariableType.Object, fixedReference); 
 		}
 
 		private static VariableValue CreateReference(VariableType type, object reference)
