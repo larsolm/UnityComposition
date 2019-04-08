@@ -63,7 +63,7 @@ MonoBehaviour:
   m_Name: Show Timer
   m_EditorClassIdentifier: 
   Name: Show Timer
-  GraphPosition: {x: 1088, y: 38.4}
+  GraphPosition: {x: 1088, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 114728111643151580}
   Control:
@@ -124,12 +124,16 @@ MonoBehaviour:
   m_Name: Level Message
   m_EditorClassIdentifier: 
   Name: Level Message
-  GraphPosition: {x: 780.8, y: 102.4}
+  GraphPosition: {x: 768, y: 102.4}
   IsBreakpoint: 0
   Next: {fileID: 114016649170688582}
   Control:
-    _variable: 
-    _tokens: []
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 1
   AutoHide: 1
   WaitTime: 0
@@ -153,8 +157,14 @@ MonoBehaviour:
   GraphPosition: {x: 640, y: -51.2}
   IsBreakpoint: 0
   Next: {fileID: 114874321698637932}
+  Source: 0
   Scene:
     Path: Assets/Examples/Maze/Scenes/MazeUi.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
   WaitForCompletion: 1
   CleanupAssets: 1
   Additive: 1
@@ -171,7 +181,7 @@ MonoBehaviour:
   m_Name: Set Start Time
   m_EditorClassIdentifier: 
   Name: Set Start Time
-  GraphPosition: {x: 1152, y: 128}
+  GraphPosition: {x: 1152, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:

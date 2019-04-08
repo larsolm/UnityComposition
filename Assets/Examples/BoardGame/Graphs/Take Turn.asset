@@ -1269,10 +1269,12 @@ MonoBehaviour:
   Target:
     Type: 1
     Reference:
-      _variable: currentSpace
+      _variable: currentSpace as Transform
       _tokens:
       - Type: 0
         Text: currentSpace
+      - Type: 2
+        Text: Transform
     Value: {fileID: 0}
   Output:
     _variable: targetPosition

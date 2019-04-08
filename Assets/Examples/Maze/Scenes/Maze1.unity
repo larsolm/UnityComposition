@@ -672,23 +672,11 @@ MonoBehaviour:
     - Name: KeyName
       Type: 1
       Reference:
-        _variable: []
-        _lookups: []
-      _valueData: DwAAAAA=
+        _variable: 
+        _tokens: []
+      _valueData: DwAAAANSZWQ=
       _valueObjects: []
-    - Name: KeyCount
-      Type: 1
-      Reference:
-        _variable: []
-        _lookups: []
-      _valueData: AgAAAAAAAAA=
-      _valueObjects: []
-    _outputs:
-    - Name: KeyCount
-      Type: 0
-      Reference:
-        _variable: []
-        _lookups: []
+    _outputs: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -1014,23 +1002,11 @@ MonoBehaviour:
     - Name: KeyName
       Type: 1
       Reference:
-        _variable: []
-        _lookups: []
-      _valueData: DwAAAANSZWQ=
+        _variable: 
+        _tokens: []
+      _valueData: DwAAAARCbHVl
       _valueObjects: []
-    - Name: KeyCount
-      Type: 1
-      Reference:
-        _variable: []
-        _lookups: []
-      _valueData: AgAAAAAAAAA=
-      _valueObjects: []
-    _outputs:
-    - Name: KeyCount
-      Type: 1
-      Reference:
-        _variable: []
-        _lookups: []
+    _outputs: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -1458,8 +1434,8 @@ MonoBehaviour:
     - Name: LevelName
       Type: 1
       Reference:
-        _variable: []
-        _lookups: []
+        _variable: 
+        _tokens: []
       _valueData: DwAAAAdMZXZlbCAx
       _valueObjects: []
     _outputs: []
@@ -1526,6 +1502,13 @@ MonoBehaviour:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
+  - _type: 15
+    _constraint: '-'
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   _variablesData:
   - BlBsYXllchEAAAAAAAAA
   - BlJlZEtleQIAAAAAAAAA
@@ -1534,6 +1517,7 @@ MonoBehaviour:
   - CEdyZWVuS2V5AgAAAAAAAAA=
   - Bkpld2VscwIAAAAAAAAA
   - DEpld2Vsc05lZWRlZAIAAAAAAAAA
+  - CU5leHRMZXZlbA8AAAAFTWF6ZTI=
   _variablesObjects:
   - {fileID: 863000627}
 --- !u!1 &867759259
@@ -1665,23 +1649,11 @@ MonoBehaviour:
     - Name: KeyName
       Type: 1
       Reference:
-        _variable: []
-        _lookups: []
-      _valueData: DwAAAANSZWQ=
+        _variable: 
+        _tokens: []
+      _valueData: DwAAAAVHcmVlbg==
       _valueObjects: []
-    - Name: KeyCount
-      Type: 1
-      Reference:
-        _variable: []
-        _lookups: []
-      _valueData: AgAAAAAAAAA=
-      _valueObjects: []
-    _outputs:
-    - Name: KeyCount
-      Type: 0
-      Reference:
-        _variable: []
-        _lookups: []
+    _outputs: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -2476,31 +2448,23 @@ MonoBehaviour:
     - Name: 
       Type: 0
       Reference:
-        _variable:
-        - Player
-        - GreenKey
-        _lookups:
-        - 
-        - 
+        _variable: 
+        _tokens: []
       _valueData: 
       _valueObjects: []
     - Name: 
       Type: 1
       Reference:
-        _variable: []
-        _lookups: []
+        _variable: 
+        _tokens: []
       _valueData: AAAAAA==
       _valueObjects: []
     _outputs:
     - Name: 
       Type: 1
       Reference:
-        _variable:
-        - Player
-        - GreenKey
-        _lookups:
-        - 
-        - 
+        _variable: 
+        _tokens: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3104,35 +3068,8 @@ MonoBehaviour:
     _outputs: []
   OnEnter:
     _instruction: {fileID: 0}
-    _inputs:
-    - Name: 
-      Type: 0
-      Reference:
-        _variable:
-        - Player
-        - BlueKey
-        _lookups:
-        - 
-        - 
-      _valueData: 
-      _valueObjects: []
-    - Name: 
-      Type: 1
-      Reference:
-        _variable: []
-        _lookups: []
-      _valueData: AAAAAA==
-      _valueObjects: []
-    _outputs:
-    - Name: 
-      Type: 1
-      Reference:
-        _variable:
-        - Player
-        - BlueKey
-        _lookups:
-        - 
-        - 
+    _inputs: []
+    _outputs: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []
@@ -3427,34 +3364,14 @@ MonoBehaviour:
   OnEnter:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
-    - Name: 
+    - Name: KeyName
       Type: 1
       Reference:
-        _variable: []
-        _lookups: []
-      _valueData: AAAAAA==
+        _variable: 
+        _tokens: []
+      _valueData: DwAAAAZZZWxsb3c=
       _valueObjects: []
-    - Name: 
-      Type: 0
-      Reference:
-        _variable:
-        - Player
-        - YellowKey
-        _lookups:
-        - 
-        - 
-      _valueData: 
-      _valueObjects: []
-    _outputs:
-    - Name: 
-      Type: 1
-      Reference:
-        _variable:
-        - Player
-        - YellowKey
-        _lookups:
-        - 
-        - 
+    _outputs: []
   OnLeave:
     _instruction: {fileID: 0}
     _inputs: []

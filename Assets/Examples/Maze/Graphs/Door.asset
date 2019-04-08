@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Door
+  m_EditorClassIdentifier: 
+  ContextName: door
+  ContextDefinition:
+    _type: 17
+    _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+      PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114370956569731158}
+    - {fileID: 114038658616853824}
+  StartPosition: {x: -0, y: 0}
+  Process: {fileID: 114370956569731158}
+--- !u!114 &114038658616853824
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc26ad2350ac454caf9577c6255fa6e, type: 3}
+  m_Name: Play Animation
+  m_EditorClassIdentifier: 
+  Name: Play Animation
+  GraphPosition: {x: 640, y: -64}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  AnimationPlayer:
+    _variable: door
+    _tokens:
+    - Type: 0
+      Text: door
+  Animation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 0}
+  WaitForCompletion: 0
+--- !u!114 &114370956569731158
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Conditional
+  m_EditorClassIdentifier: 
+  Name: Conditional
+  GraphPosition: {x: 307.2, y: -12.8}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114038658616853824}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: input.KeyCount > 0;

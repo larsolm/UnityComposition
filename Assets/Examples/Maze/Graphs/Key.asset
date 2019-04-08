@@ -27,32 +27,14 @@ MonoBehaviour:
     - Name: KeyName
       Definition:
         _type: 15
-        _constraint: Red,Yellow,Green,Blue
-        _tag: 
-        _initializer:
-          _statement: 
-        _isTypeLocked: 0
-        _isConstraintLocked: 0
-    - Name: KeyCount
-      Definition:
-        _type: 2
-        _constraint: 
+        _constraint: +Red,Yellow,Green,Blue
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 0
         _isConstraintLocked: 0
   Outputs:
-    _items:
-    - Name: KeyCount
-      Definition:
-        _type: 0
-        _constraint: 
-        _tag: 
-        _initializer:
-          _statement: 
-        _isTypeLocked: 0
-        _isConstraintLocked: 0
+    _items: []
   _nodes:
     _items:
     - {fileID: 114416159429543150}
@@ -79,10 +61,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114523905499944702}
   Target:
-    _variable:
-    - key
-    _lookups:
-    - 
+    _variable: key
+    _tokens:
+    - Type: 0
+      Text: key
 --- !u!114 &114523905499944702
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -100,23 +82,23 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114613277615437018}
   AudioPlayer:
-    _variable:
-    - global
-    - Player
-    _lookups:
-    - 
-    - 
+    _variable: global.Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
   Sound:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {fileID: 8300000, guid: 7a89cbd47fc1cd4469b77fc25c8b7f33, type: 3}
   Volume:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: 1
   WaitForCompletion: 0
 --- !u!114 &114613277615437018
@@ -156,12 +138,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: 
+    _tokens: []
   WaitForCompletion: 0
   AutoHide: 1
   WaitTime: 2

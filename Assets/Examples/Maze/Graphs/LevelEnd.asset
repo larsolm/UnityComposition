@@ -14,9 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextName: context
   ContextDefinition:
-    _type: 17
-    _constraint: UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-      PublicKeyToken=null
+    _type: 0
+    _constraint: 
     _tag: 
     _initializer:
       _statement: 
@@ -56,8 +55,8 @@ MonoBehaviour:
   Transition:
     Type: 0
     Reference:
-      _variable: []
-      _lookups: []
+      _variable: 
+      _tokens: []
     Value: {fileID: 11400000, guid: 2f9b1c789d8e6c247a156f501f3393db, type: 2}
   Phase: 0
   AutoFinish: 0
@@ -79,12 +78,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114539580467139412}
   Target:
-    _variable:
-    - scene
-    - Timer
-    _lookups:
-    - 
-    - 
+    _variable: scene.Timer
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Timer
 --- !u!114 &114372619974763020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,12 +101,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114186283410596920}
   Control:
-    _variable:
-    - scene
-    - Message
-    _lookups:
-    - 
-    - 
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
   WaitForCompletion: 1
   AutoHide: 1
   WaitTime: 0
@@ -154,12 +153,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114205645420715292}
   Target:
-    _variable:
-    - global
-    - Player
-    _lookups:
-    - 
-    - 
+    _variable: global.Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
 --- !u!114 &114856192172782058
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -187,14 +186,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
-  m_Name: Load Scene
+  m_Name: Load Next Level
   m_EditorClassIdentifier: 
-  Name: Load Scene
+  Name: Load Next Level
   GraphPosition: {x: 1280, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
+  Source: 1
   Scene:
     Path: 
+  SceneVariable:
+    _variable: global.NextLevel
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: NextLevel
+  SceneName: 
+  SceneIndex: 0
   WaitForCompletion: 1
   CleanupAssets: 1
   Additive: 0

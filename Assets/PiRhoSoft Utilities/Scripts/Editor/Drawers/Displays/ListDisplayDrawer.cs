@@ -39,7 +39,10 @@ namespace PiRhoSoft.UtilityEditor
 				if (attribute is ListDisplayAttribute display)
 				{
 					if (_itemDrawer != null)
+					{
 						_listControl.MakeDrawable(DrawItem);
+						_listControl.MakeCustomHeight(GetItemHeight);
+					}
 
 					if (display.AllowAdd)
 						_listControl.MakeAddable(_addButton);
@@ -80,6 +83,12 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				EditorGUI.PropertyField(position, property, label);
 			}
+		}
+
+		private float GetItemHeight(int index)
+		{
+			var property = _property.GetArrayElementAtIndex(index);
+			return _itemDrawer.GetPropertyHeight(property, GUIContent.none);
 		}
 
 		private void DrawItem(Rect position, SerializedProperty property, int index)
