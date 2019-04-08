@@ -82,25 +82,27 @@ namespace PiRhoSoft.CompositionEngine
 
 		private bool Read(string data, List<Object> objects)
 		{
-			try
-			{
-				var bytes = Convert.FromBase64String(data);
+			var bytes = GetBytes(data);
 
-				using (var stream = new MemoryStream(bytes))
-				{
-					using (var reader = new BinaryReader(stream))
-					{
-						Name = reader.ReadString();
-						Value = VariableHandler.Read(reader, objects);
-					}
-				}
-
-				return true;
-			}
-			catch
-			{
+			if (bytes == null)
 				return false;
+
+			using (var stream = new MemoryStream(bytes))
+			{
+				using (var reader = new BinaryReader(stream))
+				{
+					Name = reader.ReadString();
+					Value = VariableHandler.Read(reader, objects);
+				}
 			}
+
+			return true;
+		}
+
+		private byte[] GetBytes(string data)
+		{
+			try { return Convert.FromBase64String(data); }
+			catch (FormatException) { return null; }
 		}
 
 		#endregion

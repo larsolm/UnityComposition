@@ -1397,11 +1397,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 2bb7269032061c048a61bd8260212ead, type: 2}
   Variables:
-    _version: 76
+    _version: 78
     _variablesData:
     - BlNwYWRlcxMAAAAAAAAA
     - BUNsdWJzEwAAAAAAAAA=
     - BkhlYXJ0cxMAAAAAAAAA
     - CERpYW1vbmRzEwAAAAAAAAA=
-    - CFRlc3RMaXN0EwAAAAQAAAACAAAAAAAAAAIAAAABAAAAAgAAAAIAAAACAAAAAwAAAA==
     _variablesObjects: []
