@@ -33,6 +33,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		public override string ToString()
+		{
+			return _variable;
+		}
+
 		#region Lookup
 
 		public VariableValue GetValue(IVariableStore variables)

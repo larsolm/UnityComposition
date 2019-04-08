@@ -1,4 +1,6 @@
-﻿namespace PiRhoSoft.CompositionEngine
+﻿using System.Collections.Generic;
+
+namespace PiRhoSoft.CompositionEngine
 {
 	public class AccessOperator : InfixOperation, IAssignableOperation
 	{
@@ -8,6 +10,12 @@
 		private IdentifierOperation _rightIdentifier;
 
 		public override OperatorPrecedence Precedence => OperatorPrecedence.MemberAccess;
+
+		public override void GetInputs(IList<VariableDefinition> inputs, string source)
+		{
+			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
+				inputs.Add(new VariableDefinition { Name = _rightIdentifier.Name, Definition = ValueDefinition.Create(VariableType.Empty) });
+		}
 
 		public override void Parse(ExpressionParser parser, ExpressionToken token)
 		{

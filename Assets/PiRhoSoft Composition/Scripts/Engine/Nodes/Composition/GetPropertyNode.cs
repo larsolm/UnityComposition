@@ -38,16 +38,18 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (ResolveObject(variables, Target, out var target))
 			{
-				if (target.GetType() == TargetType)
+				var cast = ComponentHelper.GetAsComponent(TargetType, target);
+
+				if (cast.GetType() == TargetType)
 				{
 					if (_getter != null)
 					{
-						var value = _getter.Get(target);
+						var value = _getter.Get(cast);
 						Assign(variables, Output, value);
 					}
 					else if (Field != null)
 					{
-						var obj = Field?.GetValue(target);
+						var obj = Field?.GetValue(cast);
 						var value = VariableValue.CreateValue(obj);
 						Assign(variables, Output, value);
 					}
