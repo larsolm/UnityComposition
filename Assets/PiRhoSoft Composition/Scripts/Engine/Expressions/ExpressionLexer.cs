@@ -145,12 +145,9 @@ namespace PiRhoSoft.CompositionEngine
 			if (type == ExpressionTokenType.Identifier)
 			{
 				if (end < input.Length && input[end] == GroupOpenSymbol)
-				{
-					++end;
-					type = ExpressionTokenType.Command;
-				}
-
-				AddMergeableToken(tokens, type, start, end);
+					AddMergeableToken(tokens, ExpressionTokenType.Command, start, end++);
+				else
+					AddMergeableToken(tokens, type, start, end);
 			}
 			else
 			{

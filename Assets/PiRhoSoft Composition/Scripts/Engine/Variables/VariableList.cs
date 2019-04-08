@@ -19,10 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableValue GetVariable(int index)
 		{
-			if (index >= 0 && index < _values.Count)
-				return _values[index];
-			else
-				return VariableValue.Empty;
+			return index >= 0 && index < _values.Count ? _values[index] : VariableValue.Empty;
 		}
 
 		public SetVariableResult AddVariable(VariableValue value)
