@@ -14,17 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 4493c45d3e7fc784cb565f442705e8ad, type: 2}
   Variables:
-    _data:
-    - Name: Name
-      Type: 15
-      Data: Elixer
-      Object: {fileID: 0}
-    - Name: Cost
-      Type: 2
-      Data: 6AMAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: Description
-      Type: 15
-      Data: Restore life
-      Object: {fileID: 0}
-    _version: 21
+    _version: 26
+    _variablesData:
+    - BE5hbWUPAAAABkVsaXhlcg==
+    - C0Rlc2NyaXB0aW9uDwAAABhGdWxseSByZXN0b3JlcyBhbGwgc3RhdHM=
+    - BENvc3QCAAAA6AMAAA==
+    _variablesObjects: []

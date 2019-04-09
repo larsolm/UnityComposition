@@ -12,25 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
   m_Name: Simple Generation
   m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
   Inputs:
     _items:
-    - _name: quality
-      _type: 3
-      _constraint: 0|1
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 0
-      _isConstraintLocked: 0
-    - _name: ItemSet
-      _type: 19
-      _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-        Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 0
-      _isConstraintLocked: 0
+    - Name: quality
+      Definition:
+        _type: 0
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   Outputs:
     _items: []
   _nodes:
@@ -66,10 +67,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - player
-    _lookups:
-    - 
+    _variable: 
+    _tokens: []
 --- !u!114 &114079288357498444
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -87,12 +86,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114768701327047442}
   Control:
-    _variable:
-    - scene
-    - Loot Display
-    _lookups:
-    - 
-    - 
+    _variable: 
+    _tokens: []
 --- !u!114 &114481506311885118
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -110,12 +105,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114079288357498444}
   Object:
-    _variable:
-    - scene
-    - Loot Display
-    _lookups:
-    - 
-    - 
+    _variable: 
+    _tokens: []
   Group: 
   WaitForCompletion: 0
 --- !u!114 &114649020333618766
@@ -135,10 +126,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable:
-    - player
-    _lookups:
-    - 
+    _variable: 
+    _tokens: []
 --- !u!114 &114677748597240622
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,12 +145,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
-    _variable:
-    - scene
-    - Loot Display
-    _lookups:
-    - 
-    - 
+    _variable: 
+    _tokens: []
 --- !u!114 &114690327738691884
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -239,7 +224,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'local.itemIndex = Random(0, input.ItemSet<#>)
+    _statement: 'local.itemIndex = Random(0, input.ItemSet)
 
       local.generatedItem = input.ItemSet[local.itemIndex]'
 --- !u!114 &114845213966855522
@@ -259,14 +244,8 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114481506311885118}
   Object:
-    _variable:
-    - scene
-    - Loot Display
-    _lookups:
-    - 
-    - 
+    _variable: 
+    _tokens: []
   Binding:
-    _variable:
-    - local
-    _lookups:
-    - 
+    _variable: 
+    _tokens: []

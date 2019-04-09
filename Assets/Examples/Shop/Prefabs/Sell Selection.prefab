@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7997313288589461250}
   - component: {fileID: 4944623855138478196}
   m_Layer: 5
-  m_Name: Buy Selection
+  m_Name: Sell Selection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -76,7 +76,7 @@ GameObject:
   - component: {fileID: 2157962888552959376}
   - component: {fileID: 2157962888552959378}
   - component: {fileID: 2157962888552959379}
-  - component: {fileID: 2157962888552959381}
+  - component: {fileID: 210775138500819140}
   m_Layer: 5
   m_Name: Cost
   m_TagString: Untagged
@@ -226,7 +226,7 @@ MonoBehaviour:
   - {fileID: 0}
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &2157962888552959381
+--- !u!114 &210775138500819140
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -235,26 +235,19 @@ MonoBehaviour:
   m_GameObject: {fileID: 2157962888552959377}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9dce8c1ecc2c4f74fb409ca68328b964, type: 3}
+  m_Script: {fileID: 11500000, guid: 1214deb82f6846a438ec84ca40a9c95d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Format:
+  Formatting:
     Format: ${0}
     Formatting: 2
     TimeFormatting: 3
     NumberFormatting: 1
     ValueFormat: '#,###,##0'
-  Variable:
-    _variable: Item.Value.Cost
-    _tokens:
-    - Type: 0
-      Text: Item
-    - Type: 0
-      Text: Value
-    - Type: 0
-      Text: Cost
+  Expression:
+    _statement: Item.Value.Cost / 2
 --- !u!1 &2157962888658598977
 GameObject:
   m_ObjectHideFlags: 0

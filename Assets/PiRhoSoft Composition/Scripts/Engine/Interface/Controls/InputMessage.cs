@@ -13,6 +13,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override IEnumerator Run()
 		{
+			yield return null; // Always wait one frame for input
+
 			while (!InputHelper.GetWasButtonPressed(AcceptButton))
 				yield return null;
 		}

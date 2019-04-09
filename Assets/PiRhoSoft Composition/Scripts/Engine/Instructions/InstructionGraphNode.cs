@@ -551,13 +551,16 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void Assign(IVariableStore variables, VariableReference reference, VariableValue value)
 		{
-			var result = reference.SetValue(variables, value);
-
-			switch (result)
+			if (reference.IsAssigned)
 			{
-				case SetVariableResult.NotFound: Debug.LogWarningFormat(this, _missingAssignmentWarning, reference); break;
-				case SetVariableResult.ReadOnly: Debug.LogWarningFormat(this, _readOnlyAssignmentWarning, reference); break;
-				case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(this, _invalidAssignmentWarning, reference); break;
+				var result = reference.SetValue(variables, value);
+
+				switch (result)
+				{
+					case SetVariableResult.NotFound: Debug.LogWarningFormat(this, _missingAssignmentWarning, reference); break;
+					case SetVariableResult.ReadOnly: Debug.LogWarningFormat(this, _readOnlyAssignmentWarning, reference); break;
+					case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(this, _invalidAssignmentWarning, reference); break;
+				}
 			}
 		}
 
