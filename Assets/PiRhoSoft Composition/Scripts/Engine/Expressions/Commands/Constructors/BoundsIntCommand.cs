@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Create(new BoundsInt(xValue.Int, yValue.Int, zValue.Int, widthValue.Int, heightValue.Int, depthValue.Int));
 			}
 
-			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 2);
+			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 2, 6);
 		}
 	}
 }

@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: Battle
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items: []
+  StartPosition: {x: 0, y: 0}
+  Enter: {fileID: 0}
+  Process: {fileID: 0}
+  Exit: {fileID: 0}

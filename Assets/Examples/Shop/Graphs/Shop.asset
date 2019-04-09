@@ -45,8 +45,6 @@ MonoBehaviour:
     - {fileID: 114688380554860160}
     - {fileID: 114568876951756076}
     - {fileID: 114011359646806548}
-    - {fileID: 114704926690257554}
-    - {fileID: 114703276660192972}
     - {fileID: 114268554473494930}
     - {fileID: 114431175969337706}
     - {fileID: 114455030176294822}
@@ -187,7 +185,7 @@ MonoBehaviour:
   m_Name: Sell
   m_EditorClassIdentifier: 
   Name: Sell
-  GraphPosition: {x: 2496, y: 204.8}
+  GraphPosition: {x: 2508.8, y: 140.8}
   IsBreakpoint: 0
   Next: {fileID: 114297131327371340}
   Expression:
@@ -207,7 +205,7 @@ MonoBehaviour:
   m_Name: Sold
   m_EditorClassIdentifier: 
   Name: Sold
-  GraphPosition: {x: 2496, y: 294.4}
+  GraphPosition: {x: 2508.8, y: 230.40001}
   IsBreakpoint: 0
   Next: {fileID: 114633494972163274}
   Control:
@@ -235,7 +233,7 @@ MonoBehaviour:
   m_Name: Sell Message
   m_EditorClassIdentifier: 
   Name: Sell Message
-  GraphPosition: {x: 1241.6, y: 76.8}
+  GraphPosition: {x: 1228.8, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 114455184779207692}
   Control:
@@ -263,7 +261,7 @@ MonoBehaviour:
   m_Name: Set Price
   m_EditorClassIdentifier: 
   Name: Set Price
-  GraphPosition: {x: 1843.2001, y: 153.6}
+  GraphPosition: {x: 1856, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 114431175969337706}
   Expression:
@@ -281,7 +279,7 @@ MonoBehaviour:
   m_Name: Confirmation
   m_EditorClassIdentifier: 
   Name: Confirmation
-  GraphPosition: {x: 1856, y: 243.2}
+  GraphPosition: {x: 1868.8, y: 179.2}
   IsBreakpoint: 0
   Next: {fileID: 114455030176294822}
   Control:
@@ -310,7 +308,7 @@ MonoBehaviour:
   m_Name: Confirmation(Clone)
   m_EditorClassIdentifier: 
   Name: Confirmation
-  GraphPosition: {x: 2176, y: 204.8}
+  GraphPosition: {x: 2188.8, y: 140.8}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114633494972163274}
   Control:
@@ -360,7 +358,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
-  m_Name: Sell Selection(Clone)(Clone)
+  m_Name: Sell Selection
   m_EditorClassIdentifier: 
   Name: Sell Selection
   GraphPosition: {x: 1472, y: 204.8}
@@ -426,7 +424,7 @@ MonoBehaviour:
   m_Name: Prevent reset of the selection(Clone)
   m_EditorClassIdentifier: 
   Name: Prevent reset of the selection
-  GraphPosition: {x: 2265.6, y: 384}
+  GraphPosition: {x: 2278.4001, y: 320}
   IsBreakpoint: 0
   Comment: Have the cancel options go "forward" to a new identical message so that
     the index of the selection is not reset.
@@ -504,9 +502,9 @@ MonoBehaviour:
   m_Name: Hide Items
   m_EditorClassIdentifier: 
   Name: Hide Items
-  GraphPosition: {x: 1574.4, y: -38.4}
+  GraphPosition: {x: 1600, y: -102.4}
   IsBreakpoint: 0
-  Next: {fileID: 114704926690257554}
+  Next: {fileID: 114849375679229266}
   Control:
     _variable: scene.Items
     _tokens:
@@ -527,7 +525,7 @@ MonoBehaviour:
   m_Name: Sell Message(Clone)
   m_EditorClassIdentifier: 
   Name: Sell Message
-  GraphPosition: {x: 1856, y: 396.80002}
+  GraphPosition: {x: 1868.8, y: 332.80002}
   IsBreakpoint: 0
   Next: {fileID: 114455184779207692}
   Control:
@@ -590,51 +588,6 @@ MonoBehaviour:
     _statement: 'global.Player.Money -= selectedItem.Cost;
 
       global.Player.Inventory += selectedItem;'
---- !u!114 &114703276660192972
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
-  m_Name: Prevent reset of the selection
-  m_EditorClassIdentifier: 
-  Name: Prevent reset of the selection
-  GraphPosition: {x: 1907.2001, y: -51.2}
-  IsBreakpoint: 0
-  Comment: Have the cancel options go "forward" to a new identical message so that
-    the index of the selection is not reset.
---- !u!114 &114704926690257554
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Greeting(Clone)
-  m_EditorClassIdentifier: 
-  Name: Greeting
-  GraphPosition: {x: 1804.8, y: -140.8}
-  IsBreakpoint: 0
-  Next: {fileID: 114872046646202062}
-  Control:
-    _variable: scene.Message
-    _tokens:
-    - Type: 0
-      Text: scene
-    - Type: 0
-      Text: Message
-  WaitForCompletion: 0
-  AutoHide: 0
-  WaitTime: 0
-  Message:
-    Text: What can I do for you today?
 --- !u!114 &114761850297236770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -648,7 +601,7 @@ MonoBehaviour:
   m_Name: Goodbye
   m_EditorClassIdentifier: 
   Name: Goodbye
-  GraphPosition: {x: 908.8, y: 204.8}
+  GraphPosition: {x: 985.60004, y: 217.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -704,7 +657,7 @@ MonoBehaviour:
   m_Name: Shop Selection(Clone)(Clone)
   m_EditorClassIdentifier: 
   Name: Shop Selection
-  GraphPosition: {x: 806.4, y: -12.8}
+  GraphPosition: {x: 806.4, y: 38.4}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114761850297236770}
   Control:
