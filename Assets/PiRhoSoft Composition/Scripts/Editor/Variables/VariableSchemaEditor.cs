@@ -17,6 +17,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VariableSchema _schema;
 		private DefinitionsProxy _proxy;
+		private SerializedProperty _definitions;
 
 		private ObjectListControl _list = new ObjectListControl();
 		private CreateVariablePopup _createPopup = new CreateVariablePopup();
@@ -25,6 +26,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			_schema = target as VariableSchema;
 			_proxy = new DefinitionsProxy { Schema = _schema };
+			_definitions = serializedObject.FindProperty("_definitions._items");
 
 			_createPopup.Setup(_addDefinitionLabel, PopupCreate, PopupValidate);
 
@@ -58,19 +60,25 @@ namespace PiRhoSoft.CompositionEditor
 
 		private float GetDefinitionHeight(int index)
 		{
-			return ValueDefinitionControl.GetHeight(_schema[index].Definition, _schema.InitializerType, _schema.Tags);
+			var property = _definitions.GetArrayElementAtIndex(index);
+			return ValueDefinitionControl.GetHeight(_schema[index].Definition, _schema.InitializerType, _schema.Tags, property.isExpanded);
 		}
 
 		private void DrawDefinition(Rect rect, IList list, int index)
 		{
+			var property = _definitions.GetArrayElementAtIndex(index);
+			var expanded = property.isExpanded;
+
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{
 				var schema = _schema[index];
-				var definition = ValueDefinitionControl.Draw(rect, new GUIContent(schema.Name), schema.Definition, _schema.InitializerType, _schema.Tags, true);
+				var definition = ValueDefinitionControl.Draw(rect, new GUIContent(schema.Name), schema.Definition, _schema.InitializerType, _schema.Tags, true, ref expanded);
 
 				if (changes.changed)
 					_schema[index] = new VariableDefinition { Name = schema.Name, Definition = definition };
 			}
+
+			property.isExpanded = expanded;
 		}
 
 		private void PopupCreate()

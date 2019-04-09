@@ -5,9 +5,19 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public struct ExpressionCompilationResult
+	public class ExpressionDisplayAttribute : PropertyAttribute
 	{
-		public bool Success;
+		public bool Foldout = false;
+		public bool FullWidth = true;
+		public int MinimumLines = 2;
+		public int MaximumLines = 8;
+	}
+
+	public class ExpressionCompilationResult
+	{
+		public bool Success = true;
+		public int Location;
+		public string Token;
 		public string Message;
 	}
 
@@ -24,6 +34,7 @@ namespace PiRhoSoft.CompositionEngine
 		[NonSerialized] private List<Operation> _operations;
 		[NonSerialized] private Operation _currentOperation;
 
+		public ExpressionCompilationResult CompilationResult { get; private set; } = new ExpressionCompilationResult();
 		public bool IsValid => _operations != null && _operations.Count > 0;
 		public bool HasError => !string.IsNullOrEmpty(_statement) && _operations == null;
 		public string Statement => _statement;
@@ -103,7 +114,6 @@ namespace PiRhoSoft.CompositionEngine
 		private ExpressionCompilationResult Compile()
 		{
 			_operations = null;
-			var result = new ExpressionCompilationResult { Success = true };
 
 			if (!string.IsNullOrEmpty(_statement))
 			{
@@ -111,17 +121,22 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var tokens = ExpressionLexer.Tokenize(_statement);
 					_operations = ExpressionParser.Parse(_statement, tokens);
+
+					CompilationResult.Success = true;
+					CompilationResult.Location = 0;
+					CompilationResult.Token = null;
+					CompilationResult.Message = null;
 				}
 				catch (ExpressionParseException exception)
 				{
-					var text = _statement.Substring(exception.Token.Start, exception.Token.End - exception.Token.Start);
-
-					result.Success = false;
-					result.Message = string.Format(_expressionParseError, _statement, exception.Token.Location, text, exception.Message);
+					CompilationResult.Success = false;
+					CompilationResult.Location = exception.Token.Location;
+					CompilationResult.Token = _statement.Substring(exception.Token.Start, exception.Token.End - exception.Token.Start);
+					CompilationResult.Message = exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message;
 				}
 			}
 
-			return result;
+			return CompilationResult;
 		}
 
 		public void OnBeforeSerialize()
@@ -133,14 +148,7 @@ namespace PiRhoSoft.CompositionEngine
 			var error = Compile();
 
 			if (!error.Success)
-				Debug.LogError(error.Message);
+				string.Format(_expressionParseError, _statement, error.Location, error.Token, error.Message);
 		}
-
-		#region Editor Support
-#if UNITY_EDITOR
-		[NonSerialized] public bool IsExpanded = false;
-		[NonSerialized] public string LastResult;
-#endif
-		#endregion
 	}
 }

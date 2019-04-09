@@ -31,7 +31,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		#region Static Interface
 
-		public static float GetHeight(ValueDefinition definition, VariableInitializerType initializerType, TagList tags)
+		public static float GetHeight(ValueDefinition definition, VariableInitializerType initializerType, TagList tags, bool isExpanded)
 		{
 			var height = EditorGUIUtility.singleLineHeight;
 
@@ -41,7 +41,7 @@ namespace PiRhoSoft.CompositionEditor
 			if (HasInitializer(definition.Type, initializerType))
 			{
 				if (initializerType == VariableInitializerType.Expression && definition.Initializer != null)
-					height += ExpressionControl.GetHeight(definition.Initializer, true) + RectHelper.VerticalSpace;
+					height += ExpressionControl.GetFoldoutHeight(definition.Initializer, isExpanded, true, 2, 3) + RectHelper.VerticalSpace;
 				else
 					height += RectHelper.LineHeight;
 			}
@@ -52,13 +52,13 @@ namespace PiRhoSoft.CompositionEditor
 			return height;
 		}
 
-		public static ValueDefinition Draw(GUIContent label, ValueDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel)
+		public static ValueDefinition Draw(GUIContent label, ValueDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel, ref bool isExpanded)
 		{
-			var rect = EditorGUILayout.GetControlRect(false, GetHeight(definition, initializer, tags));
-			return Draw(rect, label, definition, initializer, tags, showConstraintLabel);
+			var rect = EditorGUILayout.GetControlRect(false, GetHeight(definition, initializer, tags, false));
+			return Draw(rect, label, definition, initializer, tags, showConstraintLabel, ref isExpanded);
 		}
 
-		public static ValueDefinition Draw(Rect position, GUIContent label, ValueDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel)
+		public static ValueDefinition Draw(Rect position, GUIContent label, ValueDefinition definition, VariableInitializerType initializer, TagList tags, bool showConstraintLabel, ref bool isExpanded)
 		{
 			var tag = definition.Tag;
 			var constraint = definition.Constraint;
@@ -89,10 +89,10 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				if (initializer == VariableInitializerType.Expression)
 				{
-					var initializerHeight = ExpressionControl.GetHeight(definition.Initializer, true);
+					var initializerHeight = ExpressionControl.GetFoldoutHeight(definition.Initializer, isExpanded, true, 2, 3);
 					var initializerRect = RectHelper.TakeHeight(ref position, initializerHeight);
 					RectHelper.TakeVerticalSpace(ref position);
-					DrawInitializer(initializerRect, ref definition);
+					DrawInitializer(initializerRect, ref definition, ref isExpanded);
 				}
 				else if (initializer == VariableInitializerType.DefaultValue)
 				{
@@ -158,10 +158,9 @@ namespace PiRhoSoft.CompositionEditor
 				return (VariableType)EditorGUI.EnumPopup(position, type);
 		}
 
-		private static void DrawInitializer(Rect rect, ref ValueDefinition definition)
+		private static void DrawInitializer(Rect rect, ref ValueDefinition definition, ref bool isExpanded)
 		{
-			DrawIndentedLabel(ref rect, _initializerLabel);
-			ExpressionControl.Draw(rect, definition.Initializer, GUIContent.none, true);
+			ExpressionControl.DrawFoldout(rect, definition.Initializer, _initializerLabel, ref isExpanded, true);
 		}
 
 		private static void DrawDefaultValue(Rect rect, ref ValueDefinition definition)
@@ -412,17 +411,19 @@ namespace PiRhoSoft.CompositionEditor
 			var type = (VariableType)_typeProperty.enumValueIndex;
 			var definition = ValueDefinition.Create(type, _constraint, null, null, _isTypeLockedProperty.boolValue, _isConstraintLockedProperty.boolValue);
 
-			return GetHeight(definition, VariableInitializerType.None, null);
+			return GetHeight(definition, VariableInitializerType.None, null, property.isExpanded);
 		}
 
 		public override void Draw(Rect position, SerializedProperty property, GUIContent label)
 		{
+			var expanded = property.isExpanded;
 			var definition = ValueDefinition.Create((VariableType)_typeProperty.enumValueIndex, _constraint, null, null, _isTypeLockedProperty.boolValue, _isConstraintLockedProperty.boolValue);
-			definition = Draw(position, label, definition, VariableInitializerType.None, null, true);
+			definition = Draw(position, label, definition, VariableInitializerType.None, null, true, ref expanded);
 
 			_typeProperty.enumValueIndex = (int)definition.Type;
 			_constraint = definition.Constraint;
 			_constraintProperty.stringValue = _constraint != null ? _constraint.Write() : string.Empty;
+			property.isExpanded = expanded;
 		}
 
 		#endregion

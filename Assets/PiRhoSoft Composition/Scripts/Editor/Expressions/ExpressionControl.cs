@@ -8,82 +8,154 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class ExpressionControl : ObjectControl<Expression>
 	{
-		private Expression _expression;
-		private string _lastError;
+		private static readonly Label _errorLabel = new Label(Icon.BuiltIn("console.erroricon"));
 
-		public static float GetHeight(Expression expression, bool foldout)
+		#region Static Object Interface
+
+		public static float GetHeight(Expression expression, bool fullWidth, int minimumLines, int maximumLines)
 		{
-			var expressionHeight = foldout
-				? StringDisplayDrawer.GetFoldoutBoxHeight(expression.Statement, expression.IsExpanded, true, false, 2, 10)
-				: StringDisplayDrawer.GetAreaHeight(expression.Statement, true, false, 2, 10);
-
-			var errorHeight = GetErrorHeight(expression, foldout);
+			var expressionHeight = StringDisplayDrawer.GetAreaHeight(expression.Statement, fullWidth, false, minimumLines, maximumLines);
+			var errorHeight = GetErrorHeight(expression);
 
 			return expressionHeight + errorHeight;
 		}
 
-		public static void Draw(Expression expression, GUIContent label, bool foldout)
+		public static float GetFoldoutHeight(Expression expression, bool isExpanded, bool fullWidth, int minimumLines, int maximumLines)
 		{
-			var height = GetHeight(expression, foldout);
-			var rect = EditorGUILayout.GetControlRect(false, height);
-			Draw(rect, expression, label, foldout);
+			var expressionHeight = StringDisplayDrawer.GetFoldoutAreaHeight(expression.Statement, isExpanded, fullWidth, false, minimumLines, maximumLines);
+			var errorHeight = isExpanded ? GetErrorHeight(expression) : 0.0f;
+
+			return expressionHeight + errorHeight;
 		}
 
-		public static void Draw(Rect position, Expression expression, GUIContent label, bool foldout)
+		public static void Draw(Expression expression, GUIContent label, bool fullWidth, int minimumLines, int maximumLines)
 		{
-			var errorHeight = GetErrorHeight(expression, false);
+			var height = GetHeight(expression, fullWidth, minimumLines, maximumLines);
+			var rect = EditorGUILayout.GetControlRect(false, height);
+			Draw(rect, expression, label, fullWidth);
+		}
+
+		public static void Draw(Rect position, Expression expression, GUIContent label, bool fullWidth)
+		{
+			var errorHeight = GetErrorHeight(expression);
+			var errorRect = RectHelper.TakeTrailingHeight(ref position, errorHeight);
+			var expanded = true;
+
+			DrawExpression(position, expression, label, fullWidth, false, ref expanded);
+			DrawError(errorRect, expression, label, fullWidth);
+		}
+
+		public static void DrawFoldout(Expression expression, GUIContent label, ref bool isExpanded, bool fullWidth, int minimumLines, int maximumLines)
+		{
+			var height = GetFoldoutHeight(expression, isExpanded, fullWidth, minimumLines, maximumLines);
+			var rect = EditorGUILayout.GetControlRect(false, height);
+			DrawFoldout(rect, expression, label, ref isExpanded, fullWidth);
+		}
+
+		public static void DrawFoldout(Rect position, Expression expression, GUIContent label, ref bool isExpanded, bool fullWidth)
+		{
+			var errorHeight = GetErrorHeight(expression);
 			var errorRect = RectHelper.TakeTrailingHeight(ref position, errorHeight);
 
+			DrawExpression(position, expression, label, fullWidth, true, ref isExpanded);
+
+			if (isExpanded)
+				DrawError(errorRect, expression, label, fullWidth);
+		}
+
+		private static float GetErrorHeight(Expression expression)
+		{
+			if (expression.HasError)
+			{
+				_errorLabel.Content.text = expression.CompilationResult.Message;
+				var height = EditorStyles.helpBox.CalcHeight(_errorLabel.Content, RectHelper.CurrentViewWidth - RectHelper.Indent);
+
+				return RectHelper.VerticalSpace + height;
+			}
+			else
+			{
+				return 0.0f;
+			}
+		}
+
+		private static void DrawExpression(Rect position, Expression expression, GUIContent label, bool fullWidth, bool foldout, ref bool isExpanded)
+		{
 			using (new InvalidScope(!expression.HasError))
 			{
 				using (var changes = new EditorGUI.ChangeCheckScope())
 				{
 					var statement = foldout
-						? StringDisplayDrawer.DrawFoldoutArea(position, label, expression.Statement, ref expression.IsExpanded, true, false)
-						: StringDisplayDrawer.DrawArea(position, label, expression.Statement, true, false);
+						? StringDisplayDrawer.DrawFoldoutArea(position, label, expression.Statement, ref isExpanded, fullWidth, false)
+						: StringDisplayDrawer.DrawArea(position, label, expression.Statement, fullWidth, false);
 
-					if (changes.changed || (expression.HasError && string.IsNullOrEmpty(expression.LastResult)))
-					{
-						var result = expression.SetStatement(statement);
-						expression.LastResult = result.Success ? null : result.Message;
-					}
+					if (changes.changed)
+						expression.SetStatement(statement);
 				}
 			}
-
-			DrawError(errorRect, expression, false);
 		}
 
-		private static float GetErrorHeight(Expression expression, bool foldout)
+		private static void DrawError(Rect rect, Expression expression, GUIContent label, bool fullWidth)
 		{
-			if (!foldout || expression.IsExpanded)
-				return RectHelper.VerticalSpace + EditorGUIUtility.singleLineHeight * 3;
-			else
-				return 0.0f;
-		}
-
-		private static void DrawError(Rect rect, Expression expression, bool foldout)
-		{
-			if ((!foldout || expression.IsExpanded) && expression.HasError)
+			if (expression.HasError)
 			{
 				RectHelper.TakeVerticalSpace(ref rect);
-				EditorGUI.HelpBox(rect, expression.LastResult, MessageType.Error);
+
+				if (fullWidth)
+					RectHelper.TakeWidth(ref rect, RectHelper.Indent);
+				else if (!string.IsNullOrEmpty(label.text))
+					RectHelper.TakeLabel(ref rect);
+
+				EditorGUI.HelpBox(rect, expression.CompilationResult.Message, MessageType.Error);
 			}
 		}
+
+		#endregion
+
+		#region Control Interface
+
+		private SerializedProperty _property;
+		private Expression _expression;
+		private bool _foldout = false;
+		private bool _fullWidth = true;
+		private int _minimumLines = 2;
+		private int _maximumLines = 8;
 
 		public override void Setup(Expression target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
+			var display = TypeHelper.GetAttribute<ExpressionDisplayAttribute>(fieldInfo);
+
+			_property = property;
 			_expression = target;
+
+			if (display != null)
+			{
+				_foldout = display.Foldout;
+				_fullWidth = display.FullWidth;
+				_minimumLines = display.MinimumLines;
+				_maximumLines = display.MaximumLines;
+			}
 		}
 
 		public override float GetHeight(GUIContent label)
 		{
-			return GetHeight(_expression, false);
+			return _foldout
+				? GetFoldoutHeight(_expression, _property.isExpanded, _fullWidth, _minimumLines, _maximumLines)
+				: GetHeight(_expression, _fullWidth, _minimumLines, _maximumLines);
 		}
 
 		public override void Draw(Rect position, GUIContent label)
 		{
-			Draw(position, _expression, label, false);
+			var expanded = _property.isExpanded;
+
+			if (_foldout)
+				DrawFoldout(position, _expression, label, ref expanded, _fullWidth);
+			else
+				Draw(position, _expression, label, _fullWidth);
+
+			_property.isExpanded = expanded;
 		}
+
+		#endregion
 	}
 
 	[CustomPropertyDrawer(typeof(Expression))]

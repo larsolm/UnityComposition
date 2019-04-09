@@ -112,15 +112,16 @@ namespace PiRhoSoft.CompositionEditor
 
 			protected override float GetContentHeight()
 			{
-				return base.GetContentHeight() + ValueDefinitionControl.GetHeight(Definition, VariableInitializerType.None, null);
+				return base.GetContentHeight() + ValueDefinitionControl.GetHeight(Definition, VariableInitializerType.None, null, false);
 			}
 
 			protected override bool DrawContent()
 			{
 				var create = base.DrawContent();
+				var expanded = false;
 
 				using (new InvalidScope(!HasChanged || IsTypeValid))
-					Definition = ValueDefinitionControl.Draw(GUIContent.none, Definition, VariableInitializerType.None, null, false);
+					Definition = ValueDefinitionControl.Draw(GUIContent.none, Definition, VariableInitializerType.None, null, false, ref expanded);
 
 				return create;
 			}

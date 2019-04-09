@@ -11,6 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The expression to execute")]
+		[ExpressionDisplay(MaximumLines = 20)]
 		public Expression Expression = new Expression();
 
 		public override Color NodeColor => Colors.ExecutionDark;
