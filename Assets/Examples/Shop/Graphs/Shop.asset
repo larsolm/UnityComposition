@@ -44,10 +44,49 @@ MonoBehaviour:
     - {fileID: 114253256043686126}
     - {fileID: 114688380554860160}
     - {fileID: 114568876951756076}
+    - {fileID: 114011359646806548}
+    - {fileID: 114704926690257554}
+    - {fileID: 114703276660192972}
+    - {fileID: 114268554473494930}
+    - {fileID: 114431175969337706}
+    - {fileID: 114455030176294822}
+    - {fileID: 114366536537710430}
+    - {fileID: 114297131327371340}
+    - {fileID: 114275367290712044}
+    - {fileID: 114633494972163274}
+    - {fileID: 114477289048704104}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114098421550622078}
   Process: {fileID: 114849375679229266}
   Exit: {fileID: 114877582954433592}
+--- !u!114 &114011359646806548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Buy Message
+  m_EditorClassIdentifier: 
+  Name: Buy Message
+  GraphPosition: {x: 1676.8, y: -512}
+  IsBreakpoint: 0
+  Next: {fileID: 114553789090646844}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: What would you like to buy?
 --- !u!114 &114098421550622078
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -81,12 +120,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Purchased(Clone)(Clone)
+  m_Name: Purchased
   m_EditorClassIdentifier: 
   Name: Purchased
-  GraphPosition: {x: 2636.8, y: -38.4}
+  GraphPosition: {x: 2700.8, y: -358.4}
   IsBreakpoint: 0
-  Next: {fileID: 114948982670601020}
+  Next: {fileID: 114011359646806548}
   Control:
     _variable: scene.Message
     _tokens:
@@ -118,7 +157,44 @@ MonoBehaviour:
   OnFalse: {fileID: 114650361421308572}
   Condition:
     _statement: selectedItem.Cost <= global.Player.Money
---- !u!114 &114359358539974854
+--- !u!114 &114268554473494930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Prevent reset of the selection(Clone)
+  m_EditorClassIdentifier: 
+  Name: Prevent reset of the selection
+  GraphPosition: {x: 2278.4001, y: -512}
+  IsBreakpoint: 0
+  Comment: Have the cancel options go "forward" to a new identical message so that
+    the index of the selection is not reset.
+--- !u!114 &114275367290712044
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Sell
+  m_EditorClassIdentifier: 
+  Name: Sell
+  GraphPosition: {x: 2496, y: 204.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114297131327371340}
+  Expression:
+    _statement: 'global.Player.Money += price;
+
+      global.Player.Inventory -= selectedItem;'
+--- !u!114 &114297131327371340
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -128,12 +204,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Sell Message(Clone)(Clone)
+  m_Name: Sold
   m_EditorClassIdentifier: 
-  Name: Sell Message
-  GraphPosition: {x: 1241.6, y: 12.8}
+  Name: Sold
+  GraphPosition: {x: 2496, y: 294.4}
   IsBreakpoint: 0
-  Next: {fileID: 114455184779207692}
+  Next: {fileID: 114633494972163274}
   Control:
     _variable: scene.Message
     _tokens:
@@ -145,7 +221,135 @@ MonoBehaviour:
   AutoHide: 0
   WaitTime: 0
   Message:
+    Text: Pleasure doing business.
+--- !u!114 &114359358539974854
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Sell Message
+  m_EditorClassIdentifier: 
+  Name: Sell Message
+  GraphPosition: {x: 1241.6, y: 76.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114455184779207692}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
     Text: What would you like to sell?
+--- !u!114 &114366536537710430
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Price
+  m_EditorClassIdentifier: 
+  Name: Set Price
+  GraphPosition: {x: 1843.2001, y: 153.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114431175969337706}
+  Expression:
+    _statement: price = selectedItem.Cost / 2;
+--- !u!114 &114431175969337706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Confirmation
+  m_EditorClassIdentifier: 
+  Name: Confirmation
+  GraphPosition: {x: 1856, y: 243.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114455030176294822}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: Are you sure you want to sell your {selectedItem.Name}? I'll give you ${price}
+      for it.
+--- !u!114 &114455030176294822
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Confirmation(Clone)
+  m_EditorClassIdentifier: 
+  Name: Confirmation
+  GraphPosition: {x: 2176, y: 204.8}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114633494972163274}
+  Control:
+    _variable: scene.Selection
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Selection
+  SelectedItem:
+    _variable: 
+    _tokens: []
+  SelectedIndex:
+    _variable: 
+    _tokens: []
+  IsSelectionRequired: 0
+  AutoHide: 1
+  Items:
+    _items:
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: Yes
+      Expand: 0
+      OnSelected: {fileID: 114275367290712044}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 1
+      Name: 
+      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+        type: 3}
+      Label: No
+      Expand: 0
+      OnSelected: {fileID: 114633494972163274}
 --- !u!114 &114455184779207692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -161,7 +365,7 @@ MonoBehaviour:
   Name: Sell Selection
   GraphPosition: {x: 1472, y: 204.8}
   IsBreakpoint: 0
-  OnCanceled: {fileID: 114849375679229266}
+  OnCanceled: {fileID: 114568876951756076}
   Control:
     _variable: scene.Items
     _tokens:
@@ -180,7 +384,7 @@ MonoBehaviour:
     - Type: 0
       Text: selectedIndex
   IsSelectionRequired: 0
-  AutoHide: 1
+  AutoHide: 0
   Items:
     _items:
     - Variables:
@@ -194,11 +398,11 @@ MonoBehaviour:
           Text: Inventory
       Source: 1
       Name: 
-      Template: {fileID: 2157962887867631546, guid: 224e1e2f12478f5438747a3cfb741815,
+      Template: {fileID: 2157962887867631546, guid: 44cfd751abf56144d8cf1f3052105a59,
         type: 3}
       Label: Inventory
       Expand: 1
-      OnSelected: {fileID: 0}
+      OnSelected: {fileID: 114366536537710430}
     - Variables:
         _variable: 
         _tokens: []
@@ -208,7 +412,24 @@ MonoBehaviour:
         type: 3}
       Label: Back
       Expand: 0
-      OnSelected: {fileID: 114849375679229266}
+      OnSelected: {fileID: 114568876951756076}
+--- !u!114 &114477289048704104
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Prevent reset of the selection(Clone)
+  m_EditorClassIdentifier: 
+  Name: Prevent reset of the selection
+  GraphPosition: {x: 2265.6, y: 384}
+  IsBreakpoint: 0
+  Comment: Have the cancel options go "forward" to a new identical message so that
+    the index of the selection is not reset.
 --- !u!114 &114553789090646844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -283,9 +504,9 @@ MonoBehaviour:
   m_Name: Hide Items
   m_EditorClassIdentifier: 
   Name: Hide Items
-  GraphPosition: {x: 870.4, y: -204.8}
+  GraphPosition: {x: 1574.4, y: -38.4}
   IsBreakpoint: 0
-  Next: {fileID: 114849375679229266}
+  Next: {fileID: 114704926690257554}
   Control:
     _variable: scene.Items
     _tokens:
@@ -293,6 +514,34 @@ MonoBehaviour:
       Text: scene
     - Type: 0
       Text: Items
+--- !u!114 &114633494972163274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Sell Message(Clone)
+  m_EditorClassIdentifier: 
+  Name: Sell Message
+  GraphPosition: {x: 1856, y: 396.80002}
+  IsBreakpoint: 0
+  Next: {fileID: 114455184779207692}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: What would you like to sell?
 --- !u!114 &114650361421308572
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -303,12 +552,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Not Enough(Clone)(Clone)
+  m_Name: Not Enough
   m_EditorClassIdentifier: 
   Name: Not Enough
   GraphPosition: {x: 2355.2, y: -358.4}
   IsBreakpoint: 0
-  Next: {fileID: 114948982670601020}
+  Next: {fileID: 114011359646806548}
   Control:
     _variable: scene.Message
     _tokens:
@@ -341,6 +590,51 @@ MonoBehaviour:
     _statement: 'global.Player.Money -= selectedItem.Cost;
 
       global.Player.Inventory += selectedItem;'
+--- !u!114 &114703276660192972
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Prevent reset of the selection
+  m_EditorClassIdentifier: 
+  Name: Prevent reset of the selection
+  GraphPosition: {x: 1907.2001, y: -51.2}
+  IsBreakpoint: 0
+  Comment: Have the cancel options go "forward" to a new identical message so that
+    the index of the selection is not reset.
+--- !u!114 &114704926690257554
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Greeting(Clone)
+  m_EditorClassIdentifier: 
+  Name: Greeting
+  GraphPosition: {x: 1804.8, y: -140.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114872046646202062}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: What can I do for you today?
 --- !u!114 &114761850297236770
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -351,7 +645,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Goodbye(Clone)(Clone)
+  m_Name: Goodbye
   m_EditorClassIdentifier: 
   Name: Goodbye
   GraphPosition: {x: 908.8, y: 204.8}
@@ -379,7 +673,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Greeting(Clone)(Clone)
+  m_Name: Greeting
   m_EditorClassIdentifier: 
   Name: Greeting
   GraphPosition: {x: 473.6, y: 25.6}
@@ -392,7 +686,7 @@ MonoBehaviour:
       Text: scene
     - Type: 0
       Text: Message
-  WaitForCompletion: 1
+  WaitForCompletion: 0
   AutoHide: 0
   WaitTime: 0
   Message:
@@ -498,7 +792,7 @@ MonoBehaviour:
   Name: Confirmation
   GraphPosition: {x: 1996.8, y: -384}
   IsBreakpoint: 0
-  OnCanceled: {fileID: 114948982670601020}
+  OnCanceled: {fileID: 114011359646806548}
   Control:
     _variable: scene.Selection
     _tokens:
@@ -535,7 +829,7 @@ MonoBehaviour:
         type: 3}
       Label: No
       Expand: 0
-      OnSelected: {fileID: 114948982670601020}
+      OnSelected: {fileID: 114011359646806548}
 --- !u!114 &114948982670601020
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -546,7 +840,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Buy Message(Clone)(Clone)
+  m_Name: Buy Message
   m_EditorClassIdentifier: 
   Name: Buy Message
   GraphPosition: {x: 1216, y: -153.6}
@@ -574,7 +868,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Confirmation(Clone)(Clone)
+  m_Name: Confirmation
   m_EditorClassIdentifier: 
   Name: Confirmation
   GraphPosition: {x: 1676.8, y: -345.6}
@@ -587,8 +881,8 @@ MonoBehaviour:
       Text: scene
     - Type: 0
       Text: Message
-  WaitForCompletion: 1
+  WaitForCompletion: 0
   AutoHide: 0
   WaitTime: 0
   Message:
-    Text: 1 {selectedItem.Name}, that will cost ${selectedItime.Cost}. Are you sure?
+    Text: 1 {selectedItem.Name}, that will cost ${selectedItem.Cost}. Are you sure?
