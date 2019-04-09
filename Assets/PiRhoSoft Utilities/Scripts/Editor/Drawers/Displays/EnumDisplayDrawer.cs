@@ -83,16 +83,16 @@ namespace PiRhoSoft.UtilityEditor
 
 		public static int Draw(Rect position, GUIContent label, int value, Type enumType, EnumDisplayType type, bool forceFlags, float minimumButtonWidth = EnumDisplayAttribute.DefaultMinimumWidth)
 		{
-			var width = label.text != string.Empty ? RectHelper.CurrentFieldWidth : RectHelper.CurrentViewWidth;
-			GetButtonInfo(enumType, width, minimumButtonWidth, out var info, out var buttonWidth, out var rows, out var columns);
-
-			var useFlags = forceFlags || info.IsFlags;
+			var useFlags = forceFlags || enumType.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0;
 
 			switch (type)
 			{
 				case EnumDisplayType.Buttons:
 				{
 					position = EditorGUI.PrefixLabel(position, label);
+
+					var width = label.text != string.Empty ? RectHelper.CurrentFieldWidth : RectHelper.CurrentViewWidth;
+					GetButtonInfo(enumType, width, minimumButtonWidth, out var info, out var buttonWidth, out var rows, out var columns);
 
 					if (useFlags)
 						value = DrawFlagButtons(position, value, info, buttonWidth, rows, columns);
@@ -151,7 +151,6 @@ namespace PiRhoSoft.UtilityEditor
 		private class EnumInfo
 		{
 			public int Count;
-			public bool IsFlags;
 			public GUIContent[] Names;
 			public Array Values;
 		}
@@ -169,7 +168,6 @@ namespace PiRhoSoft.UtilityEditor
 					info.Names = enumType.GetEnumNames().Select(name => new GUIContent(name)).ToArray();
 					info.Values = enumType.GetEnumValues();
 					info.Count = info.Values.Length;
-					info.IsFlags = enumType.GetCustomAttributes(typeof(FlagsAttribute), false).Length > 0;
 				}
 				else
 				{
@@ -177,7 +175,6 @@ namespace PiRhoSoft.UtilityEditor
 					info.Names = new GUIContent[0];
 					info.Values = new Enum[0];
 					info.Count = 0;
-					info.IsFlags = false;
 				}
 
 				_infos.Add(enumType, info);

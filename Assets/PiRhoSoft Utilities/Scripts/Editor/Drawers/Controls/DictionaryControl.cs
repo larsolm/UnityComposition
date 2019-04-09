@@ -35,6 +35,12 @@ namespace PiRhoSoft.UtilityEditor
 			return this;
 		}
 
+		public DictionaryControl MakeCollapsable()
+		{
+			MakeCollapsable(_rootProperty.isExpanded, OnExpanded);
+			return this;
+		}
+
 		public DictionaryControl MakeDrawable(Action<Rect, SerializedProperty, int, string> callback)
 		{
 			_customDraw = callback;
@@ -54,6 +60,11 @@ namespace PiRhoSoft.UtilityEditor
 			MakeItemButton(button, Remove, Color.white);
 			_customRemove = callback;
 			return this;
+		}
+
+		private void OnExpanded(bool expanded)
+		{
+			_rootProperty.isExpanded = expanded;
 		}
 
 		private void DoDefaultAdd(string key)

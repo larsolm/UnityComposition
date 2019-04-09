@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Reflection;
 using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
@@ -12,12 +13,14 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static Label _refreshButton = new Label(Icon.BuiltIn(Icon.Refresh), "", "Re-compute this variable based on the schema initializer");
 		private readonly static GUIContent _emptyLabel = new GUIContent("Add definitions to the corresponding Schema to populate this list");
 
+		private SerializedProperty _property;
 		private ObjectListControl _list = new ObjectListControl();
 		private VariableSet _variables;
 		private VariablesProxy _proxy;
 
 		public override void Setup(VariableSet target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
+			_property = property;
 			_variables = target;
 			_proxy = new VariablesProxy { List = target };
 
@@ -33,8 +36,13 @@ namespace PiRhoSoft.CompositionEditor
 			_list.Setup(_proxy)
 				.MakeDrawable(DrawVariable)
 				.MakeCustomHeight(GetVariableHeight)
-				.MakeCollapsable(property.serializedObject.targetObject.GetType().Name + "." + property.propertyPath + ".IsOpen")
+				.MakeCollapsable(property.isExpanded, OnCollapse)
 				.MakeEmptyLabel(_emptyLabel);
+		}
+
+		private void OnCollapse(bool visible)
+		{
+			_property.isExpanded = visible;
 		}
 
 		public override float GetHeight(GUIContent label)

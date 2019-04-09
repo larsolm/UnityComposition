@@ -45,9 +45,10 @@ namespace PiRhoSoft.UtilityEditor
 
 		public ReorderableList List { get; private set; } // this is Unity's undocumented list class that does the bulk of the drawing and layout
 
-		private string _collapsablePreference;
 		private GUIContent _emptyLabel;
 		private ReorderableList.ElementHeightCallbackDelegate _getElementHeight;
+		private bool _canCollapse = false;
+		private Action<bool> _onCollapse;
 		private bool _canReorder = false;
 		private Action<int, int> _onReorder;
 		private List<HeaderButton> _headerButtons = new List<HeaderButton>();
@@ -78,10 +79,11 @@ namespace PiRhoSoft.UtilityEditor
 			Visible = _isVisible;
 		}
 
-		public ListControl MakeCollapsable(string preferenceName)
+		public ListControl MakeCollapsable(bool isExpanded, Action<bool> callback = null)
 		{
-			_collapsablePreference = preferenceName;
-			Visible = EditorPrefs.GetBool(_collapsablePreference, true);
+			_canCollapse = true;
+			_onCollapse = callback;
+			Visible = isExpanded;
 			return this;
 		}
 
@@ -288,9 +290,6 @@ namespace PiRhoSoft.UtilityEditor
 
 		private void PostDraw()
 		{
-			if (_collapsablePreference != null)
-				EditorPrefs.SetBool(_collapsablePreference, Visible);
-
 			ProcessClickedButton();
 		}
 
@@ -300,14 +299,17 @@ namespace PiRhoSoft.UtilityEditor
 			var buttonsRect = RectHelper.TakeTrailingWidth(ref rect, buttonsWidth);
 			var labelRect = new Rect(rect);
 
-			if (_collapsablePreference != null)
+			if (_canCollapse)
 			{
 				var arrowRect = RectHelper.TakeLeadingIcon(ref labelRect);
 
 				EditorGUI.LabelField(arrowRect, Visible ? _collapseButton.Content : _expandButton.Content);
 
 				if (GUI.Button(rect, GUIContent.none, GUIStyle.none))
+				{
 					Visible = !Visible;
+					_onCollapse?.Invoke(Visible);
+				}
 			}
 
 			EditorGUI.LabelField(labelRect, _label);

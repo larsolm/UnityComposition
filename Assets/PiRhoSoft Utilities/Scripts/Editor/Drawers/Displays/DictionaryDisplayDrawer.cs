@@ -47,7 +47,7 @@ namespace PiRhoSoft.UtilityEditor
 						_dictionaryControl.MakeRemovable(_removeButton);
 
 					if (display.AllowCollapse)
-						_dictionaryControl.MakeCollapsable(GetOpenPreference(property));
+						_dictionaryControl.MakeCollapsable();
 
 					if (display.EmptyText != null)
 						_dictionaryControl.MakeEmptyLabel(new GUIContent(display.EmptyText));

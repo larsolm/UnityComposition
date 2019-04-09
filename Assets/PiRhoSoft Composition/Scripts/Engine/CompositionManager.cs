@@ -141,40 +141,33 @@ namespace PiRhoSoft.CompositionEngine
 
 		private bool MoveNext_()
 		{
-			// TODO: this should probably be iterative instead of recursive since the stack can get pretty deep
-
-			_iterations++;
-
-			if (_iterations >= MaximumIterations)
+			while (_enumerators.Count > 0)
 			{
-				// This is a protection against infinite loops that require a Unity restart. As it stands, a stack
-				// overflow will happen if the iterator continues for too long, but that will change if this becomes
-				// iterative instead of recursive. Also, the iterations warning is a little nicer.
+				_iterations++;
 
-				Debug.LogWarningFormat(_iterationLimitWarning, MaximumIterations);
-				_enumerators.Clear();
-				return false;
-			}
+				if (_iterations >= MaximumIterations)
+				{
+					// this is a protection against infinite loops that can crash or hang Unity
 
-			var enumerator = _enumerators.Peek();
-			var next = enumerator.MoveNext();
+					Debug.LogWarningFormat(_iterationLimitWarning, MaximumIterations);
+					_enumerators.Clear();
+					return false;
+				}
 
-			// three scenarios
-			//  - enumerator has a next and it is an IEnumerator: process that enumerator
-			//  - enumerator has a next and it is something else: stop so that something else is retrievable from Current
-			//  - enumerator has no next: continue running the parent, unless enumerator is the root, in which case this enumerator is finished
+				var enumerator = _enumerators.Peek();
+				var next = enumerator.MoveNext();
 
-			if (!next)
-			{
-				_enumerators.Pop();
+				// three scenarios
+				//  - enumerator has no next: resume the parent (unless this is the root)
+				//  - enumerator has a next and it is an IEnumerator: process that enumerator
+				//  - enumerator has a next and it is something else: yield
 
-				if (_enumerators.Count > 0)
-					MoveNext_();
-			}
-			else if (enumerator.Current is IEnumerator child)
-			{
-				_enumerators.Push(child);
-				MoveNext_();
+				if (!next)
+					_enumerators.Pop();
+				else if (enumerator.Current is IEnumerator child)
+					_enumerators.Push(child);
+				else
+					break;
 			}
 
 			return _enumerators.Count > 0;
