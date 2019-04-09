@@ -14,14 +14,16 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitializerType: 0
   Tags:
-    _items: []
+    _items:
+    - Constant
+    - Random
   _definitions:
     _items:
     - Name: Name
       Definition:
         _type: 15
         _constraint: +Triangle,Hexagon
-        _tag: 
+        _tag: Constant
         _initializer:
           _statement: 
         _isTypeLocked: 1
@@ -30,7 +32,7 @@ MonoBehaviour:
       Definition:
         _type: 14
         _constraint: 
-        _tag: 
+        _tag: Random
         _initializer:
           _statement: Color(Random(), Random(), Random())
         _isTypeLocked: 1
@@ -39,7 +41,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
-        _tag: 
+        _tag: Random
         _initializer:
           _statement: Random(75, 150)
         _isTypeLocked: 1
@@ -48,7 +50,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
-        _tag: 
+        _tag: Random
         _initializer:
           _statement: Random(75, 100)
         _isTypeLocked: 1
@@ -57,7 +59,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
-        _tag: 
+        _tag: Random
         _initializer:
           _statement: Random(75, 100)
         _isTypeLocked: 1
@@ -66,7 +68,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
-        _tag: 
+        _tag: Random
         _initializer:
           _statement: Random(75, 100)
         _isTypeLocked: 1
@@ -75,9 +77,9 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
-        _tag: 
+        _tag: Random
         _initializer:
           _statement: HP
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 191
+  _version: 199

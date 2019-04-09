@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   InitializerType: 1
   Tags:
-    _items: []
+    _items:
+    - NewGame
   _definitions:
     _items:
     - Name: CurrentPiece
@@ -22,9 +23,9 @@ MonoBehaviour:
         _type: 17
         _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        _tag: 
+        _tag: NewGame
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 3
+  _version: 4

@@ -22,12 +22,849 @@ MonoBehaviour:
     _isTypeLocked: 0
     _isConstraintLocked: 0
   Inputs:
-    _items: []
+    _items:
+    - Name: Multiplayer
+      Definition:
+        _type: 1
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   Outputs:
     _items: []
   _nodes:
-    _items: []
+    _items:
+    - {fileID: 114232644684142356}
+    - {fileID: 114776698254722046}
+    - {fileID: 114364025646214274}
+    - {fileID: 114060690231789576}
+    - {fileID: 114774129968821760}
+    - {fileID: 114016950435173752}
+    - {fileID: 114762621837390418}
+    - {fileID: 114956810405518286}
+    - {fileID: 114878644477084902}
+    - {fileID: 114680524125233324}
+    - {fileID: 114824544855869636}
+    - {fileID: 114348266381536424}
+    - {fileID: 114861798838267012}
+    - {fileID: 114276880049557452}
+    - {fileID: 114181512053963512}
+    - {fileID: 114131616769279628}
+    - {fileID: 114441288586741344}
+    - {fileID: 114112693297798952}
+    - {fileID: 114271038274048284}
+    - {fileID: 114293157531778302}
+    - {fileID: 114307718193888456}
+    - {fileID: 114538599604373634}
+    - {fileID: 114295100908661426}
+    - {fileID: 114671663166635790}
+    - {fileID: 114908214382322204}
+    - {fileID: 114090214110672374}
+    - {fileID: 114337536328452838}
+    - {fileID: 114624661328644618}
+    - {fileID: 114814383495575178}
   StartPosition: {x: 0, y: 0}
-  Enter: {fileID: 0}
-  Process: {fileID: 0}
-  Exit: {fileID: 0}
+  Enter: {fileID: 114016950435173752}
+  Process: {fileID: 114364025646214274}
+  Exit: {fileID: 114776698254722046}
+--- !u!114 &114016950435173752
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Initialize Sequence
+  m_EditorClassIdentifier: 
+  Name: Initialize Sequence
+  GraphPosition: {x: 102.4, y: -204.8}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114060690231789576}
+    - {fileID: 114232644684142356}
+--- !u!114 &114060690231789576
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Initialize Fighters
+  m_EditorClassIdentifier: 
+  Name: Initialize Fighters
+  GraphPosition: {x: 409.6, y: -256}
+  IsBreakpoint: 0
+  Container:
+    _variable: global.Fighters
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Fighters
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  Loop: {fileID: 114774129968821760}
+--- !u!114 &114090214110672374
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is Target Dead
+  m_EditorClassIdentifier: 
+  Name: Is Target Dead
+  GraphPosition: {x: 3353.6, y: 153.6}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 0}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: fighter.Target.CurrentHP <= 0
+--- !u!114 &114112693297798952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Item Message
+  m_EditorClassIdentifier: 
+  Name: Item Message
+  GraphPosition: {x: 2636.8, y: -76.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114441288586741344}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: 
+--- !u!114 &114131616769279628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Show Selection
+  m_EditorClassIdentifier: 
+  Name: Show Selection
+  GraphPosition: {x: 2931.2, y: -358.4}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114293157531778302}
+  Control:
+    _variable: scene.Selection
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Selection
+  SelectedItem:
+    _variable: selectedMove
+    _tokens:
+    - Type: 0
+      Text: selectedMove
+  SelectedIndex:
+    _variable: 
+    _tokens: []
+  IsSelectionRequired: 0
+  AutoHide: 1
+  Items:
+    _items:
+    - Variables:
+        _variable: fighter.Moves
+        _tokens:
+        - Type: 0
+          Text: fighter
+        - Type: 0
+          Text: Moves
+      Source: 1
+      Name: 
+      Template: {fileID: 0}
+      Label: Moves
+      Expand: 1
+      OnSelected: {fileID: 114307718193888456}
+--- !u!114 &114181512053963512
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Show Selection
+  m_EditorClassIdentifier: 
+  Name: Show Selection
+  GraphPosition: {x: 2521.6, y: -204.8}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 0}
+  Control:
+    _variable: scene.Selection
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Selection
+  SelectedItem:
+    _variable: 
+    _tokens: []
+  SelectedIndex:
+    _variable: 
+    _tokens: []
+  IsSelectionRequired: 1
+  AutoHide: 1
+  Items:
+    _items:
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 1
+      Name: 
+      Template: {fileID: 0}
+      Label: Fight
+      Expand: 0
+      OnSelected: {fileID: 114271038274048284}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 1
+      Name: 
+      Template: {fileID: 0}
+      Label: Items
+      Expand: 0
+      OnSelected: {fileID: 114112693297798952}
+--- !u!114 &114232644684142356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
+  m_Name: Fade In
+  m_EditorClassIdentifier: 
+  Name: Fade In
+  GraphPosition: {x: 473.6, y: -166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Transition:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 11400000, guid: 2f9b1c789d8e6c247a156f501f3393db, type: 2}
+  Phase: 2
+  AutoFinish: 1
+  WaitForCompletion: 1
+--- !u!114 &114271038274048284
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Move Message
+  m_EditorClassIdentifier: 
+  Name: Move Message
+  GraphPosition: {x: 2636.8, y: -307.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114131616769279628}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: Select a move.
+--- !u!114 &114276880049557452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Action Message
+  m_EditorClassIdentifier: 
+  Name: Action Message
+  GraphPosition: {x: 2201.6, y: -179.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114181512053963512}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: 'What will
+
+      {fighter.Name} do?'
+--- !u!114 &114293157531778302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Action Message
+  m_EditorClassIdentifier: 
+  Name: Action Message
+  GraphPosition: {x: 2918.4001, y: -192}
+  IsBreakpoint: 0
+  Next: {fileID: 114181512053963512}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: 'What will
+
+      {fighter.Name} do?'
+--- !u!114 &114295100908661426
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is Still Alive
+  m_EditorClassIdentifier: 
+  Name: Is Still Alive
+  GraphPosition: {x: 1843.2001, y: 217.6}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114671663166635790}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: fighter.CurrentHP > 0
+--- !u!114 &114307718193888456
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Move
+  m_EditorClassIdentifier: 
+  Name: Set Move
+  GraphPosition: {x: 3264, y: -358.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 'fighter.SelectedMove = selectedMove;
+
+      fighter.Action = "Move";'
+--- !u!114 &114337536328452838
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is User Dead
+  m_EditorClassIdentifier: 
+  Name: Is User Dead
+  GraphPosition: {x: 3353.6, y: 243.2}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 0}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: fighter.CurrentHP <= 0
+--- !u!114 &114348266381536424
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Execute Action
+  m_EditorClassIdentifier: 
+  Name: Execute Action
+  GraphPosition: {x: 1497.6, y: 192}
+  IsBreakpoint: 0
+  Container:
+    _variable: global.Fighters
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Fighters
+  Index:
+    _variable: index
+    _tokens:
+    - Type: 0
+      Text: index
+  Value:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  Loop: {fileID: 114295100908661426}
+--- !u!114 &114364025646214274
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Battle Sequence
+  m_EditorClassIdentifier: 
+  Name: Battle Sequence
+  GraphPosition: {x: 448, y: 25.6}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114762621837390418}
+    - {fileID: 114878644477084902}
+    - {fileID: 114956810405518286}
+--- !u!114 &114441288586741344
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: Show Selection
+  m_EditorClassIdentifier: 
+  Name: Show Selection
+  GraphPosition: {x: 2931.2, y: -51.2}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 114293157531778302}
+  Control:
+    _variable: scene.Selection
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Selection
+  SelectedItem:
+    _variable: selectedItem
+    _tokens:
+    - Type: 0
+      Text: selectedItem
+  SelectedIndex:
+    _variable: 
+    _tokens: []
+  IsSelectionRequired: 0
+  AutoHide: 1
+  Items:
+    _items:
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 1
+      Name: 
+      Template: {fileID: 0}
+      Label: Items
+      Expand: 1
+      OnSelected: {fileID: 114538599604373634}
+--- !u!114 &114538599604373634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Item
+  m_EditorClassIdentifier: 
+  Name: Set Item
+  GraphPosition: {x: 3264, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 'fighter.SelectedItem = selectedItem;
+
+      fighter.Action = "Item";'
+--- !u!114 &114624661328644618
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Execute Move
+  m_EditorClassIdentifier: 
+  Name: Execute Move
+  GraphPosition: {x: 2969.6, y: 192}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Instruction:
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
+  Context:
+    Type: 1
+    Reference:
+      _variable: fighter
+      _tokens:
+      - Type: 0
+        Text: fighter
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
+  WaitForCompletion: 1
+--- !u!114 &114671663166635790
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299c4f4ec492e74ebc48ccf20f59272, type: 3}
+  m_Name: Branch
+  m_EditorClassIdentifier: 
+  Name: Branch
+  GraphPosition: {x: 2188.8, y: 204.8}
+  IsBreakpoint: 0
+  Switch:
+    _statement: fighter.Action
+  Outputs:
+    _keys:
+    - Move
+    - Item
+    _values:
+    - {fileID: 114908214382322204}
+    - {fileID: 114814383495575178}
+  Default: {fileID: 0}
+--- !u!114 &114680524125233324
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Choose Action
+  m_EditorClassIdentifier: 
+  Name: Choose Action
+  GraphPosition: {x: 1497.6, y: -76.8}
+  IsBreakpoint: 0
+  Container:
+    _variable: global.Fighters
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Fighters
+  Index:
+    _variable: index
+    _tokens:
+    - Type: 0
+      Text: index
+  Value:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  Loop: {fileID: 114861798838267012}
+--- !u!114 &114762621837390418
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Intro Message
+  m_EditorClassIdentifier: 
+  Name: Intro Message
+  GraphPosition: {x: 640, y: -76.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: Defeat the {fighter2.Name}!
+--- !u!114 &114774129968821760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81db09edfc25024b94b5b1d2295f584, type: 3}
+  m_Name: Reset Stats
+  m_EditorClassIdentifier: 
+  Name: Reset Stats
+  GraphPosition: {x: 716.8, y: -256}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  Tag: Random
+--- !u!114 &114776698254722046
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
+  m_Name: Fade Out
+  m_EditorClassIdentifier: 
+  Name: Fade Out
+  GraphPosition: {x: 128, y: 140.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Transition:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 0}
+  Phase: 0
+  AutoFinish: 1
+  WaitForCompletion: 1
+--- !u!114 &114814383495575178
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Use Item
+  m_EditorClassIdentifier: 
+  Name: Use Item
+  GraphPosition: {x: 2560, y: 307.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Instruction:
+    _instruction: {fileID: 0}
+    _inputs: []
+    _outputs: []
+  Context:
+    Type: 1
+    Reference:
+      _variable: fighter
+      _tokens:
+      - Type: 0
+        Text: fighter
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
+  WaitForCompletion: 1
+--- !u!114 &114824544855869636
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Turn Sequnece
+  m_EditorClassIdentifier: 
+  Name: Turn Sequnece
+  GraphPosition: {x: 1164.8, y: 38.4}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114680524125233324}
+    - {fileID: 114348266381536424}
+--- !u!114 &114861798838267012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is Player
+  m_EditorClassIdentifier: 
+  Name: Is Player
+  GraphPosition: {x: 1856, y: -153.6}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114276880049557452}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: index == 0 || input.Multiplayer
+--- !u!114 &114878644477084902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
+  m_Name: Turn Loop
+  m_EditorClassIdentifier: 
+  Name: Turn Loop
+  GraphPosition: {x: 832, y: 38.4}
+  IsBreakpoint: 0
+  Loop: {fileID: 114824544855869636}
+  Index:
+    _variable: 
+    _tokens: []
+  Condition:
+    _statement: winner == null
+--- !u!114 &114908214382322204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Sequence
+  m_EditorClassIdentifier: 
+  Name: Sequence
+  GraphPosition: {x: 2560, y: 128}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 0}
+    - {fileID: 114624661328644618}
+--- !u!114 &114956810405518286
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Win Message
+  m_EditorClassIdentifier: 
+  Name: Win Message
+  GraphPosition: {x: 640, y: 179.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 1
+  WaitTime: 0
+  Message:
+    Text: You won!

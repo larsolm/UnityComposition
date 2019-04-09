@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
-  m_Name: Take Turn
+  m_Name: TakeTurn
   m_EditorClassIdentifier: 
   ContextName: player
   ContextDefinition:
