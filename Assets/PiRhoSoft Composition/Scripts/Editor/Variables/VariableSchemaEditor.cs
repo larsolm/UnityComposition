@@ -31,7 +31,6 @@ namespace PiRhoSoft.CompositionEditor
 			_list.Setup(_proxy)
 				.MakeDrawable(DrawDefinition)
 				.MakeRemovable(_removeDefinitionButton, RemoveDefinition)
-				.MakeCollapsable("VariableSchema." + _schema.name + ".IsOpen")
 				.MakeReorderable()
 				.MakeHeaderButton(_addDefinitionButton, _createPopup, Color.white)
 				.MakeCustomHeight(GetDefinitionHeight)

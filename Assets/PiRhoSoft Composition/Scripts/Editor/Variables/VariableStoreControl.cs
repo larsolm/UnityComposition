@@ -36,7 +36,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			Setup(_proxy)
 				.MakeEmptyLabel(new GUIContent("The store is empty"))
-				.MakeCollapsable(nameof(VariableStore) + "." + name + ".IsOpen")
+				.MakeCollapsable(true)
 				.MakeCustomHeight(GetHeight);
 
 			if (store is Object obj)

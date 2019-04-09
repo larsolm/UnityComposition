@@ -20,6 +20,12 @@ namespace PiRhoSoft.UtilityEditor
 			return this;
 		}
 
+		public PropertyListControl MakeCollapsable()
+		{
+			MakeCollapsable(List.serializedProperty.isExpanded, OnExpanded);
+			return this;
+		}
+
 		public PropertyListControl MakeDrawable(Action<Rect, SerializedProperty, int> callback)
 		{
 			_customDraw = callback;
@@ -77,6 +83,11 @@ namespace PiRhoSoft.UtilityEditor
 		{
 			var property = List.serializedProperty.GetArrayElementAtIndex(index);
 			EditorGUI.PropertyField(rect, property, GUIContent.none);
+		}
+
+		private void OnExpanded(bool expanded)
+		{
+			List.serializedProperty.isExpanded = expanded;
 		}
 
 		private float GetItemHeight(int index)

@@ -27,7 +27,6 @@ namespace PiRhoSoft.CompositionEditor
 			_list.Setup(_variables.Variables)
 				.MakeDrawable(DrawVariable)
 				.MakeRemovable(_removeVariableButton, RemoveVariable)
-				.MakeCollapsable(serializedObject.targetObject.GetType().Name + ".IsOpen")
 				.MakeReorderable(Reorder)
 				.MakeHeaderButton(_addVariableButton, _createPopup, Color.white)
 				.MakeCustomHeight(GetHeight)

@@ -54,7 +54,7 @@ namespace PiRhoSoft.UtilityEditor
 						_listControl.MakeReorderable();
 
 					if (display.AllowCollapse)
-						_listControl.MakeCollapsable(GetOpenPreference(property));
+						_listControl.MakeCollapsable();
 
 					if (display.EmptyText != null)
 						_listControl.MakeEmptyLabel(new GUIContent(display.EmptyText));
