@@ -125,16 +125,16 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				for (var i = 0; i < _instructionStores.Count; i++)
 				{
-					if (!CompositionManager.InstructionState.Any(data => data.Value.Variables == _instructionStores[i].Store))
+					if (!CompositionManager.InstructionState.Any(data => data.Key.Variables == _instructionStores[i].Store))
 						_instructionStores.RemoveAt(i--);
 				}
 
 				foreach (var instruction in CompositionManager.InstructionState)
 				{
-					if (!_instructionStores.Any(control => control.Store == instruction.Value.Variables))
+					if (!_instructionStores.Any(control => control.Store == instruction.Key.Variables))
 					{
 						var control = new VariableStoreControl();
-						control.Setup(instruction.Key.name, instruction.Value.Variables, true, false);
+						control.Setup(instruction.Key.name, instruction.Key.Variables, true, false);
 						_instructionStores.Add(control);
 					}
 				}
@@ -259,7 +259,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			foreach (var instruction in CompositionManager.InstructionState)
 			{
-				var value = reference.GetValue(instruction.Value.Variables);
+				var value = reference.GetValue(instruction.Key.Variables);
 				if (!value.IsEmpty)
 				{
 					if (value.HasStore)
@@ -375,7 +375,7 @@ namespace PiRhoSoft.CompositionEditor
 				var instruction = CompositionManager.InstructionState.FirstOrDefault();
 
 				if (instruction.Key != null)
-					result = expression.Execute(instruction.Value.Instruction, instruction.Value.Variables);
+					result = expression.Execute(instruction.Value.Instruction, instruction.Key.Variables);
 				else
 					result = expression.Execute(null, CompositionManager.Instance.GlobalStore);
 

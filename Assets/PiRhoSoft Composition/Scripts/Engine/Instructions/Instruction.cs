@@ -15,16 +15,21 @@ namespace PiRhoSoft.CompositionEngine
 		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false)] public VariableDefinitionList Inputs = new VariableDefinitionList();
 		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false)] public VariableDefinitionList Outputs = new VariableDefinitionList();
 
+		public IVariableStore Variables { get; private set; }
 		public bool IsRunning { get; private set; }
 
 		protected virtual void OnEnable()
 		{
-			IsRunning = false; // in case the editor exits play mode while the instruction is running
+			// in case the editor exits play mode while the instruction is running
+			Variables = null;
+			IsRunning = false;
 		}
 
 		protected virtual void OnDisable()
 		{
-			IsRunning = false; // not really necessary but might as well
+			// not really necessary but might as well
+			Variables = null;
+			IsRunning = false;
 		}
 
 		public IEnumerator Execute(InstructionStore variables)
@@ -35,13 +40,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			else
 			{
-				CompositionManager.InstructionStarted(this, variables);
-
+				Variables = variables;
 				IsRunning = true;
 				yield return Run(variables);
 				IsRunning = false;
-
-				CompositionManager.InstructionComplete(this);
+				Variables = null;
 			}
 		}
 

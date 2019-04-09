@@ -33,7 +33,6 @@ MonoBehaviour:
     - {fileID: 114675892718543162}
     - {fileID: 114696056752831474}
     - {fileID: 114233220627467950}
-    - {fileID: 114846660907590690}
     - {fileID: 114902517910671770}
     - {fileID: 114169463803128364}
     - {fileID: 114281345652415844}
@@ -119,7 +118,7 @@ MonoBehaviour:
   Name: Set Card Binding
   GraphPosition: {x: 1228.8, y: 51.2}
   IsBreakpoint: 0
-  Next: {fileID: 114846660907590690}
+  Next: {fileID: 0}
   Object:
     _variable: local.card as BindingRoot
     _tokens:
@@ -516,22 +515,6 @@ MonoBehaviour:
     - Type: 0
       Text: card
   Loop: {fileID: 114486140500255154}
---- !u!114 &114846660907590690
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1214b928c8b2a48b55a137ca3023dc, type: 3}
-  m_Name: Yield
-  m_EditorClassIdentifier: 
-  Name: Yield
-  GraphPosition: {x: 1292.8, y: 115.200005}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
 --- !u!114 &114902517910671770
 MonoBehaviour:
   m_ObjectHideFlags: 1
