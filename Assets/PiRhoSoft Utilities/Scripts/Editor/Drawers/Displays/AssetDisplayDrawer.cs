@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
@@ -114,8 +115,36 @@ namespace PiRhoSoft.UtilityEditor
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			var assetDisplay = attribute as AssetDisplayAttribute;
+			var type = fieldInfo.FieldType;
 
-			Draw(position, label, property, fieldInfo.FieldType, assetDisplay.ShowNoneOption, assetDisplay.ShowEditButton, assetDisplay.SaveLocation, assetDisplay.DefaultName);
+			if (type.IsArray)
+			{
+				type = type.GetElementType();
+			}
+			else if (!typeof(Object).IsAssignableFrom(type))
+			{
+				var interfaces = type.GetInterfaces();
+
+				foreach (var i in interfaces)
+				{
+					if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IList<>))
+					{
+						type = i.GetGenericArguments()[0];
+						break;
+					}
+
+					if (i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IDictionary<,>))
+					{
+						type = i.GetGenericArguments()[1];
+						break;
+					}
+				}
+			}
+
+			if (!typeof(Object).IsAssignableFrom(type))
+				type = typeof(Object);
+
+			Draw(position, label, property, type, assetDisplay.ShowNoneOption, assetDisplay.ShowEditButton, assetDisplay.SaveLocation, assetDisplay.DefaultName);
 		}
 
 		#endregion
