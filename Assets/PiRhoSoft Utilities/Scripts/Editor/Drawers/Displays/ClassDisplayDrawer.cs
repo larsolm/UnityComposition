@@ -11,53 +11,6 @@ namespace PiRhoSoft.UtilityEditor
 
 		#region Static Interface
 
-		public static float GetHeightOfChildren(SerializedProperty property)
-		{
-			var height = 0.0f;
-			var end = property.GetEndProperty();
-
-			property.NextVisible(true);
-
-			while (!SerializedProperty.EqualContents(property, end))
-			{
-				height += EditorGUI.GetPropertyHeight(property) + RectHelper.VerticalSpace;
-				property.NextVisible(false);
-			}
-
-			return height;
-		}
-
-		public static void DrawChildren(Rect position, SerializedProperty property, GUIContent firstLabel)
-		{
-			firstLabel = firstLabel != null ? new GUIContent(firstLabel) : null; // GetPropertyHeight overwrites the most recent label
-
-			var end = property.GetEndProperty();
-			var useLabel = firstLabel != null;
-
-			property.NextVisible(true);
-
-			while (!SerializedProperty.EqualContents(property, end))
-			{
-				var height = EditorGUI.GetPropertyHeight(property);
-				var rect = RectHelper.TakeHeight(ref position, height);
-
-				if (useLabel)
-				{
-					// passing label to PropertyField would overwrite the tooltip
-					rect = EditorGUI.PrefixLabel(rect, firstLabel);
-					EditorGUI.PropertyField(rect, property, GUIContent.none);
-				}
-				else
-				{
-					EditorGUI.PropertyField(rect, property);
-				}
-
-				RectHelper.TakeVerticalSpace(ref position);
-				property.NextVisible(false);
-				firstLabel = _emptyContent;
-			}
-		}
-
 		public static float GetHeight(GUIContent label, SerializedProperty property, ClassDisplayType type)
 		{
 			if (type == ClassDisplayType.Inline || type == ClassDisplayType.Propogated)
@@ -112,6 +65,55 @@ namespace PiRhoSoft.UtilityEditor
 
 				using (new EditorGUI.IndentLevelScope())
 					DrawChildren(position, property, null);
+			}
+		}
+
+		private static float GetHeightOfChildren(SerializedProperty property)
+		{
+			var height = 0.0f;
+			var end = property.GetEndProperty();
+
+			property.NextVisible(true);
+
+			while (!SerializedProperty.EqualContents(property, end))
+			{
+				height += EditorGUI.GetPropertyHeight(property) + RectHelper.VerticalSpace;
+				property.NextVisible(false);
+			}
+
+			return height;
+		}
+
+		private static void DrawChildren(Rect position, SerializedProperty property, GUIContent firstLabel)
+		{
+			firstLabel = firstLabel != null ? new GUIContent(firstLabel) : null; // GetPropertyHeight overwrites the most recent label
+
+			var end = property.GetEndProperty();
+			var useLabel = firstLabel != null;
+
+			property.NextVisible(true);
+
+			while (!SerializedProperty.EqualContents(property, end))
+			{
+				var height = EditorGUI.GetPropertyHeight(property);
+				var rect = RectHelper.TakeHeight(ref position, height);
+
+				if (useLabel)
+				{
+					// passing label to PropertyField would overwrite the tooltip
+					rect = EditorGUI.PrefixLabel(rect, firstLabel);
+
+					using (new ContextMarginScope(RectHelper.CurrentLabelWidth))
+						EditorGUI.PropertyField(rect, property, GUIContent.none);
+				}
+				else
+				{
+					EditorGUI.PropertyField(rect, property);
+				}
+
+				RectHelper.TakeVerticalSpace(ref position);
+				property.NextVisible(false);
+				firstLabel = _emptyContent;
 			}
 		}
 
