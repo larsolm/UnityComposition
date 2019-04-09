@@ -1461,10 +1461,10 @@ MonoBehaviour:
   AutoUpdate: 1
   Formatting:
     Format: '{0}'
-    Formatting: 0
+    Formatting: 2
     TimeFormatting: 3
-    NumberFormatting: 3
-    ValueFormat: 
+    NumberFormatting: 0
+    ValueFormat: 0
   Expression:
     _statement: 'Calculator.Operation == "Equals" ? Calculator.Answer : Calculator.Display'
 --- !u!1 &569431106

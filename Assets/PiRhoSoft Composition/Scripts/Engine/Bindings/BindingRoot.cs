@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class BindingRoot : MonoBehaviour, IVariableStore
 	{
 		public string Name;
-		public VariableValue Value { get; set; }
+		public virtual VariableValue Value { get; set; }
 
 		private IVariableStore _parent;
 

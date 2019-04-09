@@ -55,6 +55,9 @@ namespace PiRhoSoft.CompositionEngine
 			VariableBinding.UpdateBinding(gameObject, string.Empty, null);
 
 			DetermineLayout();
+
+			_columnIndex = PrimaryAxis == PrimaryAxis.Column ? _focusedIndex / _rowCount : _focusedIndex % _columnCount;
+			_rowIndex = PrimaryAxis == PrimaryAxis.Column ? _focusedIndex % _rowCount : _focusedIndex / _columnCount;
 		}
 
 		protected override IEnumerator Run()
@@ -94,24 +97,6 @@ namespace PiRhoSoft.CompositionEngine
 		#endregion
 
 		#region Focus Management
-
-		public override void MoveFocus(int index)
-		{
-			if (PrimaryAxis == PrimaryAxis.Column)
-			{
-				var column = index / (_items.Count / _columnCount);
-				var row = index % _rowCount;
-
-				MoveFocusToLocation(column, row);
-			}
-			else if (PrimaryAxis == PrimaryAxis.Row)
-			{
-				var column = index % _columnCount;
-				var row = index / (_items.Count / _rowCount);
-
-				MoveFocusToLocation(column, row);
-			}
-		}
 
 		protected virtual void MoveFocusUp(int amount = 1)
 		{
@@ -220,7 +205,8 @@ namespace PiRhoSoft.CompositionEngine
 
 				var item = GetItem(column, row);
 				
-				MoveFocus(_focusedItem.Index);
+				if (item != null)
+					MoveFocus(item.Index);
 			}
 		}
 

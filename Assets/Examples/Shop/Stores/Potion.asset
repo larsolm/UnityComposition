@@ -14,17 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: 4493c45d3e7fc784cb565f442705e8ad, type: 2}
   Variables:
-    _data:
-    - Name: Name
-      Type: 15
-      Data: Potion
-      Object: {fileID: 0}
-    - Name: Cost
-      Type: 2
-      Data: ZAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: Description
-      Type: 15
-      Data: Heal 20 HP
-      Object: {fileID: 0}
-    _version: 21
+    _version: 26
+    _variablesData:
+    - BE5hbWUPAAAABlBvdGlvbg==
+    - C0Rlc2NyaXB0aW9uDwAAAAtIZWFscyA1MCBIUA==
+    - BENvc3QCAAAAZAAAAA==
+    _variablesObjects: []

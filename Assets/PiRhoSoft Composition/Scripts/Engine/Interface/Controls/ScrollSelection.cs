@@ -7,9 +7,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Scroll Selection")]
 	public class ScrollSelection : InputSelection
 	{
-		[Tooltip("The speed of which to scroll the content")] public float ScrollSpeed = -1;
-		[Tooltip("The number of items displayed vertically before scrolling happens")] public int DisplayedVertical = 1;
-		[Tooltip("The speed of items displayed horizontalyl before scrolling happens")] public int DisplayedHorizontal = 5;
+		[Tooltip("The number of items displayed vertically before scrolling happens")] public int DisplayedVertical = 5;
+		[Tooltip("The speed of items displayed horizontalyl before scrolling happens")] public int DisplayedHorizontal = 1;
 
 		private ScrollRect _scroll;
 
@@ -22,6 +21,13 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_scroll = GetComponent<ScrollRect>();
 			_targetPosition = Vector2.zero;
+		}
+
+		protected override void OnCreate()
+		{
+			base.OnCreate();
+
+			UpdateTargetPosition();
 		}
 
 		protected override Transform GetItemParent()

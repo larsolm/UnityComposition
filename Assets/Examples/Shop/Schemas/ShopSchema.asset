@@ -10,32 +10,24 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7e42c1f2776d5043957247cb96f24d3, type: 3}
-  m_Name: ItemSchema
+  m_Name: ShopSchema
   m_EditorClassIdentifier: 
   InitializerType: 1
   Tags:
     _items: []
   _definitions:
     _items:
-    - Name: Name
+    - Name: Inventory
       Definition:
-        _type: 15
-        _constraint: 
+        _type: 19
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: Description
-      Definition:
-        _type: 15
-        _constraint: 
-        _tag: 
-        _initializer:
-          _statement: 
-        _isTypeLocked: 1
-        _isConstraintLocked: 0
-    - Name: Cost
+    - Name: Money
       Definition:
         _type: 2
         _constraint: 
@@ -44,4 +36,4 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 26
+  _version: 16

@@ -58,10 +58,12 @@ namespace PiRhoSoft.CompositionEngine
 			IsClosing = false;
 
 			_selectedItem = null;
-			_focusedItem = null;
 
 			if (resetIndex)
+			{
+				Blur();
 				_focusedIndex = 0;
+			}
 
 			OnInitialize();
 		}
@@ -70,7 +72,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			CreateItems(variables, items);
 			MoveFocus(_focusedIndex);
-			OnCreate();
+			VariableBinding.UpdateBinding(gameObject, null, null);
 		}
 
 		public void Close()
@@ -147,9 +149,11 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else
 				{
-					CreateStoreItem(item, VariableValue.Create(variables), ref index);
+					CreateStoreItem(item, VariableValue.Empty, ref index);
 				}
 			}
+
+			OnCreate();
 		}
 
 		private void CreateStoreItem(SelectionItem item, VariableValue value, ref int index)
@@ -218,14 +222,7 @@ namespace PiRhoSoft.CompositionEngine
 			var obj = existing == null ? Instantiate(item.Template, parent) : existing;
 			obj.transform.SetSiblingIndex(index);
 
-			var binding = obj.GetComponent<BindingRoot>();
-
-			if (binding)
-				binding.Value = value;
-			else if (item.Source == SelectionItem.ObjectSource.Asset)
-				Debug.LogErrorFormat(this, _missingBindingError, item.Name, item.Template.name);
-			
-			_items.Add(new MenuItem
+			var menuItem = new MenuItem
 			{
 				Item = item,
 				Object = obj,
@@ -235,7 +232,16 @@ namespace PiRhoSoft.CompositionEngine
 				Label = item.Id,
 				Value = value,
 				Focused = false
-			});
+			};
+
+			var binding = obj.GetComponent<BindingRoot>();
+
+			if (binding)
+				binding.Value = VariableValue.Create(menuItem);
+			else if (item.Source == SelectionItem.ObjectSource.Asset)
+				Debug.LogErrorFormat(this, _missingBindingError, item.Name, item.Template.name);
+			
+			_items.Add(menuItem);
 		}
 
 		public void SelectItem(int index)
@@ -263,26 +269,32 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Focus Management
 
-		public virtual void MoveFocus(int index)
+		public void MoveFocus(int index)
 		{
 			var item = GetItem(index);
 
+			Blur();
+			Focus(item);
+		}
+
+		private void Blur()
+		{
 			if (_focusedItem != null)
-				BlurItem(_focusedItem);
+			{
+				_focusedItem.Focused = false;
+				_focusedItem = null;
+				_focusedIndex = -1;
+			}
+		}
 
+		private void Focus(MenuItem item)
+		{
 			if (item != null)
-				FocusItem(item);
-		}
-
-		private void FocusItem(MenuItem item)
-		{
-			item.Focused = true;
-			_focusedIndex = item.Index;
-		}
-
-		private void BlurItem(MenuItem item)
-		{
-			item.Focused = false;
+			{
+				_focusedItem = item;
+				_focusedItem.Focused = true;
+				_focusedIndex = item.Index;
+			}
 		}
 
 		#endregion

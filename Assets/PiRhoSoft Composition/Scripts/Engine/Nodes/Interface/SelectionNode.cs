@@ -88,6 +88,9 @@ namespace PiRhoSoft.CompositionEngine
 					graph.GoTo(selectedItem.OnSelected, nameof(Items), selectedItem.Id);
 				else
 					graph.GoTo(OnCanceled, nameof(OnCanceled));
+
+				if (AutoHide)
+					control.Deactivate();
 			}
 			else
 			{

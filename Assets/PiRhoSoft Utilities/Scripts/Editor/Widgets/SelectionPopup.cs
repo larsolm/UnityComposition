@@ -130,7 +130,10 @@ namespace PiRhoSoft.UtilityEditor
 				Show(id, position, state, tree);
 
 			if (HasSelection(id))
+			{
+				GUI.changed = true;
 				return TakeSelection();
+			}
 
 			return state;
 		}

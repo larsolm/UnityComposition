@@ -197,15 +197,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 92609182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d264bfadf51340c4d9dab818a83aae8f, type: 3}
+  m_Script: {fileID: 11500000, guid: 08ac88b8f693cea4ba3170a47ced16e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DependentObjects:
     _items:
     - {fileID: 1421869730}
   DisplayText: {fileID: 621823148}
-  ContinueIndicator: {fileID: 0}
-  FinishedIndicator: {fileID: 0}
   AcceptButton: Submit
 --- !u!1 &128260285
 GameObject:
@@ -381,6 +379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fed3b8e403aedb649804bb97e37f71db, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Name: Item
   SelectionControl: {fileID: 1777570538}
 --- !u!114 &128260290
 MonoBehaviour:
@@ -397,10 +396,12 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 1
   Variable:
-    _variable:
-    - Description
-    _lookups:
-    - 
+    _variable: Item.Description
+    _tokens:
+    - Type: 0
+      Text: Item
+    - Type: 0
+      Text: Description
 --- !u!1 &457249289
 GameObject:
   m_ObjectHideFlags: 0
@@ -412,9 +413,9 @@ GameObject:
   - component: {fileID: 457249290}
   - component: {fileID: 457249292}
   - component: {fileID: 457249291}
-  - component: {fileID: 457249293}
   - component: {fileID: 457249295}
   - component: {fileID: 457249294}
+  - component: {fileID: 457249293}
   m_Layer: 5
   m_Name: Selection
   m_TagString: Untagged
@@ -487,7 +488,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 457249289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9ca6908392c93a4458927f7b0404c4f5, type: 3}
+  m_Script: {fileID: 11500000, guid: 12b73b61112c324459d866b529f2feb6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DependentObjects:
@@ -901,7 +902,6 @@ GameObject:
   - component: {fileID: 840948832}
   - component: {fileID: 840948835}
   - component: {fileID: 840948836}
-  - component: {fileID: 840948838}
   - component: {fileID: 840948834}
   - component: {fileID: 840948837}
   m_Layer: 0
@@ -987,16 +987,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
   Variables:
-    _data:
-    - Name: Money
-      Type: 2
-      Data: ECcAAAAAAAAAAAAAAAAAAAAAAAAAAAAA
-      Object: {fileID: 0}
-    - Name: Inventory
-      Type: 16
-      Data: 
-      Object: {fileID: 840948838}
-    _version: 12
+    _version: 16
+    _variablesData:
+    - CUludmVudG9yeRMAAAAAAAAA
+    - BU1vbmV5AgAAABAnAAA=
+    _variablesObjects: []
   Camera: {fileID: 0}
   Acceleration: 3
 --- !u!50 &840948835
@@ -1048,30 +1043,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Variables:
-    _data:
-    - Name: Player
-      Type: 16
-      Data: 
-      Object: {fileID: 840948834}
-    - Name: Shop
-      Type: 16
-      Data: 
-      Object: {fileID: 948553111}
---- !u!114 &840948838
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 840948831}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6596faa30e8604295dd4da8c9bda94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Objects:
-    _items: []
+  Constraints:
+  - _type: 17
+    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _variablesData:
+  - BlBsYXllchEAAAAAAAAA
+  _variablesObjects:
+  - {fileID: 840948834}
 --- !u!1 &911554669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1189,8 +1173,8 @@ GameObject:
   - component: {fileID: 948553108}
   - component: {fileID: 948553107}
   - component: {fileID: 948553110}
-  - component: {fileID: 948553109}
   - component: {fileID: 948553111}
+  - component: {fileID: 948553109}
   m_Layer: 0
   m_Name: Shop
   m_TagString: Untagged
@@ -1273,7 +1257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   OnInteract:
-    _instruction: {fileID: 11400000, guid: 2a5f01c390ac18548bb73525cfc3e5a4, type: 2}
+    _instruction: {fileID: 11400000, guid: 2a058fecf74825b4b98e6b68072931b3, type: 2}
     _inputs: []
     _outputs: []
   OnEnter:
@@ -1319,16 +1303,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 948553106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db6596faa30e8604295dd4da8c9bda94, type: 3}
+  m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Objects:
-    _items:
+  Schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
+  Variables:
+    _version: 16
+    _variablesData:
+    - CUludmVudG9yeRMAAAAIAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAAEQAAAAMAAAARAAAABAAAABEAAAAFAAAAEQAAAAYAAAARAAAABwAAAA==
+    - BU1vbmV5AgAAAAAAAAA=
+    _variablesObjects:
     - {fileID: 11400000, guid: fa0442ad09dd84943b2d317722d4e3a6, type: 2}
-    - {fileID: 11400000, guid: 05b4cfaafe467224582ed93f0284df60, type: 2}
     - {fileID: 11400000, guid: 5effb37f32ac47746ba1be3a37a14119, type: 2}
-    - {fileID: 11400000, guid: 9077bd585c101694f86c433c24d7f890, type: 2}
+    - {fileID: 11400000, guid: 05b4cfaafe467224582ed93f0284df60, type: 2}
     - {fileID: 11400000, guid: 61176a10ea98bb84bb0dbd3cf8f1be84, type: 2}
+    - {fileID: 11400000, guid: 9077bd585c101694f86c433c24d7f890, type: 2}
+    - {fileID: 11400000, guid: 1d94a25ea548c6c44b7ec9820b507e88, type: 2}
+    - {fileID: 11400000, guid: d12786a4c29d4354aaf2dae64445e7af, type: 2}
+    - {fileID: 11400000, guid: 35cf6dd8963b51843b225a77beb1079d, type: 2}
 --- !u!1 &955332814
 GameObject:
   m_ObjectHideFlags: 0
@@ -1511,12 +1503,14 @@ MonoBehaviour:
     NumberFormatting: 1
     ValueFormat: '#,###,##0'
   Variable:
-    _variable:
-    - Player
-    - Money
-    _lookups:
-    - 
-    - 
+    _variable: global.Player.Money
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
+    - Type: 0
+      Text: Money
 --- !u!1 &1030221940
 GameObject:
   m_ObjectHideFlags: 0
@@ -2376,9 +2370,8 @@ MonoBehaviour:
   PrimaryAxis: 0
   ColumnCount: 1
   RowCount: 1
-  ScrollSpeed: -1
-  DisplayedVertical: 1
-  DisplayedHorizontal: 5
+  DisplayedVertical: 5
+  DisplayedHorizontal: 1
 --- !u!1 &1777673323
 GameObject:
   m_ObjectHideFlags: 0
