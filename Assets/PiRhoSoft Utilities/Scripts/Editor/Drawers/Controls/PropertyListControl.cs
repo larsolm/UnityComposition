@@ -16,6 +16,7 @@ namespace PiRhoSoft.UtilityEditor
 		{
 			var reorderableList = new ReorderableList(property.serializedObject, property, false, true, false, false);
 			Setup(reorderableList);
+			MakeCustomHeight(GetItemHeight);
 			return this;
 		}
 
@@ -76,6 +77,12 @@ namespace PiRhoSoft.UtilityEditor
 		{
 			var property = List.serializedProperty.GetArrayElementAtIndex(index);
 			EditorGUI.PropertyField(rect, property, GUIContent.none);
+		}
+
+		private float GetItemHeight(int index)
+		{
+			var property = List.serializedProperty.GetArrayElementAtIndex(index);
+			return EditorGUI.GetPropertyHeight(property);
 		}
 
 		private void Add(Rect rect)

@@ -12,8 +12,8 @@ namespace PiRhoSoft.CompositionEngine
 		public enum ObjectPositioning
 		{
 			Absolute,
-			RelativeToObject,
-			ChildOfParent
+			Relative,
+			Child
 		}
 
 		[Tooltip("The node to move to when this node is finished")]
@@ -27,20 +27,28 @@ namespace PiRhoSoft.CompositionEngine
 		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public StringVariableSource EffectName = new StringVariableSource("Spawned Effect");
 
+		[Tooltip("A variable reference to assign the created effect to so that it can be referenced later")]
+		public VariableReference EffectVariable = new VariableReference();
+
 		[Tooltip("How to create and position the effect, with an exact position, relative to another object, or as a child of another object")]
+		[EnumDisplay]
 		public ObjectPositioning Positioning = ObjectPositioning.Absolute;
 
 		[Tooltip("The object to position the effect relative to")]
-		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.RelativeToObject)]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Relative)]
 		public VariableReference Object = new VariableReference();
 
 		[Tooltip("The parent object to make the effect a child of")]
-		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.ChildOfParent)]
+		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Child)]
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at")]
 		[ClassDisplay(Type = ClassDisplayType.Propogated)]
 		public Vector3VariableSource Position = new Vector3VariableSource();
+
+		[Tooltip("The rotation to spawn the object at")]
+		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		public Vector3VariableSource Rotation = new Vector3VariableSource();
 
 		[Tooltip("Whether to wait for the effect to finish before moving to Next")]
 		public bool WaitForCompletion = false;
@@ -57,12 +65,19 @@ namespace PiRhoSoft.CompositionEngine
 			Effect.GetInputs(inputs);
 			EffectName.GetInputs(inputs);
 			Position.GetInputs(inputs);
+			Rotation.GetInputs(inputs);
 
-			if (Positioning == ObjectPositioning.ChildOfParent && InstructionStore.IsInput(Parent))
+			if (Positioning == ObjectPositioning.Child && InstructionStore.IsInput(Parent))
 				inputs.Add(new VariableDefinition { Name = Parent.RootName, Definition = ValueDefinition.Create<GameObject>() });
 
-			if (Positioning == ObjectPositioning.RelativeToObject && InstructionStore.IsInput(Object))
+			if (Positioning == ObjectPositioning.Relative && InstructionStore.IsInput(Object))
 				inputs.Add(new VariableDefinition { Name = Object.RootName, Definition = ValueDefinition.Create<GameObject>() });
+		}
+
+		public override void GetOutputs(IList<VariableDefinition> outputs)
+		{
+			if (InstructionStore.IsOutput(EffectVariable))
+				outputs.Add(new VariableDefinition { Name = EffectVariable.RootName, Definition = ValueDefinition.Create<GameObject>() });
 		}
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
@@ -72,24 +87,31 @@ namespace PiRhoSoft.CompositionEngine
 				GameObject spawned = null;
 
 				Resolve(variables, Position, out var position);
+				Resolve(variables, Rotation, out var rotation);
 
 				if (Positioning == ObjectPositioning.Absolute)
 				{
-					spawned = Instantiate(effect, position, Quaternion.identity);
+					spawned = Instantiate(effect, position, Quaternion.Euler(rotation));
 				}
-				else if (Positioning == ObjectPositioning.RelativeToObject)
+				else if (Positioning == ObjectPositioning.Relative)
 				{
 					if (ResolveObject(variables, Object, out GameObject obj))
-						spawned = Instantiate(effect, obj.transform.position + position, Quaternion.identity);
+						spawned = Instantiate(effect, obj.transform.position + position, Quaternion.Euler(rotation));
 				}
-				else if (Positioning == ObjectPositioning.ChildOfParent)
+				else if (Positioning == ObjectPositioning.Child)
 				{
 					if (ResolveObject(variables, Parent, out GameObject parent))
-						spawned = Instantiate(effect, parent.transform.position + position, Quaternion.identity, parent.transform);
+						spawned = Instantiate(effect, parent.transform.position + position, Quaternion.Euler(rotation), parent.transform);
 				}
 
-				if (spawned && Resolve(variables, EffectName, out var objectName))
-					spawned.name = objectName;
+				if (spawned)
+				{
+					if (Resolve(variables, EffectName, out var effectName) && !string.IsNullOrEmpty(effectName))
+						spawned.name = effectName;
+
+					if (EffectVariable.IsAssigned)
+						Assign(variables, EffectVariable, VariableValue.Create(spawned));
+				}
 
 				if (WaitForCompletion)
 					yield return WaitForFinish(spawned);

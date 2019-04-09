@@ -54,11 +54,19 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (AutoHide)
 			{
-				if (WaitTime > 0.0f)
-					yield return new WaitForSeconds(WaitTime);
-
-				message.Deactivate();
+				if (WaitForCompletion)
+					yield return Hide(message);
+				else
+					message.StartCoroutine(Hide(message));
 			}
+		}
+
+		private IEnumerator Hide(MessageControl message)
+		{
+			if (WaitTime > 0.0f)
+				yield return new WaitForSeconds(WaitTime);
+	
+			message.Deactivate();
 		}
 	}
 }
