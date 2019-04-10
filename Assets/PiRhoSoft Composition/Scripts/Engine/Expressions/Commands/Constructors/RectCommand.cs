@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Create(new Rect(xValue.Number, yValue.Number, widthValue.Number, heightValue.Number));
 			}
 
-			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 2);
+			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 2, 4);
 		}
 	}
 }

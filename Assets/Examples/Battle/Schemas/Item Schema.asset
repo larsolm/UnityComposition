@@ -10,22 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7e42c1f2776d5043957247cb96f24d3, type: 3}
-  m_Name: SpaceSchema
+  m_Name: Item Schema
   m_EditorClassIdentifier: 
   InitializerType: 1
   Tags:
-    _items:
-    - NewGame
+    _items: []
   _definitions:
-    _items:
-    - Name: CurrentPiece
-      Definition:
-        _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-        _tag: NewGame
-        _initializer:
-          _statement: 
-        _isTypeLocked: 1
-        _isConstraintLocked: 0
-  _version: 4
+    _items: []
+  _version: 0

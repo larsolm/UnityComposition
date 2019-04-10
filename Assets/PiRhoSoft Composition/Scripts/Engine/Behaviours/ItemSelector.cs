@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 		private int _index;
 		private SelectionControl _selection;
 
-		void Awake()
+		void Start()
 		{
 			_selection = GetComponentInParent<SelectionControl>();
 

@@ -133,7 +133,28 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static bool HasInitializer(VariableType type, VariableInitializerType initializer)
 		{
-			return initializer != VariableInitializerType.None && (type == VariableType.Bool || type == VariableType.Int || type == VariableType.Float || type == VariableType.String);
+			if (initializer == VariableInitializerType.None)
+				return false;
+
+			switch (type)
+			{
+				case VariableType.Bool:
+				case VariableType.Float:
+				case VariableType.Int:
+				case VariableType.Int2:
+				case VariableType.Int3:
+				case VariableType.IntRect:
+				case VariableType.IntBounds:
+				case VariableType.Vector2:
+				case VariableType.Vector3:
+				case VariableType.Vector4:
+				case VariableType.Quaternion:
+				case VariableType.Rect:
+				case VariableType.Bounds:
+				case VariableType.Color:
+				case VariableType.String: return true;
+				default: return false;
+			}
 		}
 
 		private static bool HasTags(TagList tags)
@@ -178,8 +199,19 @@ namespace PiRhoSoft.CompositionEditor
 					switch (definition.Type)
 					{
 						case VariableType.Bool: definition.Initializer.SetStatement(value.Bool ? "true" : "false"); break;
-						case VariableType.Int: definition.Initializer.SetStatement(value.Int.ToString()); break;
 						case VariableType.Float: definition.Initializer.SetStatement(value.Float.ToString()); break;
+						case VariableType.Int: definition.Initializer.SetStatement(value.Int.ToString()); break;
+						case VariableType.Int2: definition.Initializer.SetStatement(string.Format("Vector2Int({0}, {1})", value.Int2.x, value.Int2.y)); break;
+						case VariableType.Int3: definition.Initializer.SetStatement(string.Format("Vector3Int({0}, {1}, {2})", value.Int3.x, value.Int3.y, value.Int3.z)); break;
+						case VariableType.IntRect: definition.Initializer.SetStatement(string.Format("RectInt({0}, {1}, {2}, {3})", value.IntRect.x, value.IntRect.y, value.IntRect.width, value.IntRect.height)); break;
+						case VariableType.IntBounds: definition.Initializer.SetStatement(string.Format("BoundsInt({0}, {1}, {2}, {3}, {4}, {5})", value.IntBounds.x, value.IntBounds.y, value.IntBounds.z, value.IntBounds.size.x, value.IntBounds.size.y, value.IntBounds.size.z)); break;
+						case VariableType.Vector2: definition.Initializer.SetStatement(string.Format("Vector2({0}, {1})", value.Vector2.x, value.Vector2.y)); break;
+						case VariableType.Vector3: definition.Initializer.SetStatement(string.Format("Vector3({0}, {1}, {2})", value.Vector3.x, value.Vector3.y, value.Vector3.z)); break;
+						case VariableType.Vector4: definition.Initializer.SetStatement(string.Format("Vector4({0}, {1}, {2}, {3})", value.Vector4.x, value.Vector4.y, value.Vector4.z, value.Vector4.w)); break;
+						case VariableType.Quaternion: var euler = value.Quaternion.eulerAngles; definition.Initializer.SetStatement(string.Format("Quaternion({0}, {1}, {2})", euler.x, euler.y, euler.z)); break;
+						case VariableType.Rect: definition.Initializer.SetStatement(string.Format("Rect({0}, {1}, {2}, {3})", value.Rect.x, value.Rect.y, value.Rect.width, value.Rect.height)); break;
+						case VariableType.Bounds: definition.Initializer.SetStatement(string.Format("Bounds({0}, {1})", value.Bounds.center, value.Bounds.extents)); break;
+						case VariableType.Color: definition.Initializer.SetStatement(string.Format("#{0:X2}{1:X2}{2:X2}{3:X2}", Mathf.RoundToInt(value.Color.r * 255), Mathf.RoundToInt(value.Color.g * 255), Mathf.RoundToInt(value.Color.b * 255), Mathf.RoundToInt(value.Color.a * 255))); break;
 						case VariableType.String: definition.Initializer.SetStatement("\"" + value.String + "\""); break;
 					}
 				}

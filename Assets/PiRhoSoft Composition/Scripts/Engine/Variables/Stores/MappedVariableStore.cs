@@ -51,6 +51,8 @@ namespace PiRhoSoft.CompositionEngine
 			for (var i = 0; i < mapping.Properties.Count; i++)
 				lists[i] = new PropertyList(owner, mapping.Properties[i]);
 
+			Setup(mapping.Map, lists); // variable initializers may need the map set to access other variables
+
 			if (variables != null)
 			{
 				if (schema != null)
@@ -67,8 +69,6 @@ namespace PiRhoSoft.CompositionEngine
 					variables.Clear();
 				}
 			}
-
-			Setup(mapping.Map, lists);
 		}
 
 		public void Setup(VariableMap map, params IMappedVariableList[] lists)

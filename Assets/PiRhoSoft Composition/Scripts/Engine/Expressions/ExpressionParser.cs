@@ -358,6 +358,7 @@ namespace PiRhoSoft.CompositionEngine
 			AddCommand("RectInt", new RectIntCommand());
 			AddCommand("Bounds", new BoundsCommand());
 			AddCommand("BoundsInt", new BoundsIntCommand());
+			AddCommand("Color", new ColorCommand());
 
 			AddCommand("Time", new TimeCommand());
 			AddCommand("Realtime", new RealtimeCommand());
