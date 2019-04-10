@@ -1,0 +1,312 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: MazeJewel
+  m_EditorClassIdentifier: 
+  ContextName: jewel
+  ContextDefinition:
+    _type: 17
+    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114271981509365210}
+    - {fileID: 114244240457525348}
+    - {fileID: 114797155301925872}
+    - {fileID: 114083666097521882}
+    - {fileID: 114754646623374914}
+    - {fileID: 114375116766900952}
+    - {fileID: 114417380751933736}
+    - {fileID: 114010021192242288}
+    - {fileID: 114019920891345730}
+    - {fileID: 114252435143868472}
+    - {fileID: 114679176875131434}
+  StartPosition: {x: -0, y: -25.6}
+  Process: {fileID: 114252435143868472}
+--- !u!114 &114010021192242288
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destory Door
+  m_EditorClassIdentifier: 
+  Name: Destory Door
+  GraphPosition: {x: 1587.2001, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: scene.FinishDoor
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: FinishDoor
+--- !u!114 &114019920891345730
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destroy Jewel
+  m_EditorClassIdentifier: 
+  Name: Destroy Jewel
+  GraphPosition: {x: 640, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: jewel
+    _tokens:
+    - Type: 0
+      Text: jewel
+--- !u!114 &114083666097521882
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb5ec06b2e5fe49b57475f7382e327, type: 3}
+  m_Name: Play Jewel Sparkle
+  m_EditorClassIdentifier: 
+  Name: Play Jewel Sparkle
+  GraphPosition: {x: 640, y: -102.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Effect:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 4255263820053153510, guid: 3ccbc9d9af56dc949a68c82852e228e8, type: 3}
+  EffectName:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: Spawned Effect
+  EffectVariable:
+    _variable: 
+    _tokens: []
+  Positioning: 1
+  Object:
+    _variable: jewel
+    _tokens:
+    - Type: 0
+      Text: jewel
+  Parent:
+    _variable: 
+    _tokens: []
+  Position:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  Rotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  WaitForCompletion: 0
+  DestroyOnComplete: 1
+--- !u!114 &114244240457525348
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Check Complete
+  m_EditorClassIdentifier: 
+  Name: Check Complete
+  GraphPosition: {x: 947.2, y: -38.4}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114754646623374914}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: global.Player.Jewels == global.Player.JewelsNeeded;
+--- !u!114 &114252435143868472
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Effect Sequence
+  m_EditorClassIdentifier: 
+  Name: Effect Sequence
+  GraphPosition: {x: 320, y: -38.4}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114083666097521882}
+    - {fileID: 114019920891345730}
+    - {fileID: 114271981509365210}
+--- !u!114 &114271981509365210
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Increment Jewel Count
+  m_EditorClassIdentifier: 
+  Name: Increment Jewel Count
+  GraphPosition: {x: 640, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114244240457525348}
+  Expression:
+    _statement: global.Jewels += 1;
+--- !u!114 &114375116766900952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
+  m_Name: Enable Player
+  m_EditorClassIdentifier: 
+  Name: Enable Player
+  GraphPosition: {x: 1587.2001, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: global.Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
+--- !u!114 &114417380751933736
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Player
+  m_EditorClassIdentifier: 
+  Name: Disable Player
+  GraphPosition: {x: 1587.2001, y: -128}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: global.Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
+--- !u!114 &114679176875131434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 0, y: -128}
+  IsBreakpoint: 0
+  Comment: Play an effect and destroy the jewel that was picked up then check if enough
+    keys are needed to open the finish door and open it if so
+--- !u!114 &114754646623374914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Open Door
+  m_EditorClassIdentifier: 
+  Name: Open Door
+  GraphPosition: {x: 1267.2001, y: -64}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114417380751933736}
+    - {fileID: 114797155301925872}
+    - {fileID: 114010021192242288}
+    - {fileID: 114375116766900952}
+--- !u!114 &114797155301925872
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc26ad2350ac454caf9577c6255fa6e, type: 3}
+  m_Name: Play Finish Animation
+  m_EditorClassIdentifier: 
+  Name: Play Finish Animation
+  GraphPosition: {x: 1587.2001, y: -64}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  AnimationPlayer:
+    _variable: scene.FinishDoor
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: FinishDoor
+  Animation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 7400000, guid: 55c9b8f38d72cbe47a0bc311a8d15b72, type: 2}
+  WaitForCompletion: 1

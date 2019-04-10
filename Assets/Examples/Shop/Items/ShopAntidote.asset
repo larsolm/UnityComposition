@@ -10,14 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d6f95977d1adbba4b9a826aff14f0418, type: 3}
-  m_Name: Diamonds
+  m_Name: ShopAntidote
   m_EditorClassIdentifier: 
-  _schema: {fileID: 11400000, guid: 0bde4de34e851b6498f46b4bfa4a0c78, type: 2}
+  _schema: {fileID: 11400000, guid: 4493c45d3e7fc784cb565f442705e8ad, type: 2}
   Variables:
-    _version: 12
+    _version: 26
     _variablesData:
-    - BE5hbWUPAAAACERpYW1vbmRz
-    - BUNvbG9yDgAAAAAAgD8AAAAAAAAAAAAAgD8=
-    - BlNwcml0ZREAAAAAAAAA
-    _variablesObjects:
-    - {fileID: 21300000, guid: fade66bd17edfc04cb596b30e43d7d76, type: 3}
+    - BE5hbWUPAAAACEFudGlkb3Rl
+    - C0Rlc2NyaXB0aW9uDwAAAAxDdXJlcyBwb2lzb24=
+    - BENvc3QCAAAAMgAAAA==
+    _variablesObjects: []

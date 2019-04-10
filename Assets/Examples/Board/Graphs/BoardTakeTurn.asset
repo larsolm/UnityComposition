@@ -1,0 +1,1310 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: BoardTakeTurn
+  m_EditorClassIdentifier: 
+  ContextName: player
+  ContextDefinition:
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114541750554709886}
+    - {fileID: 114646063541107878}
+    - {fileID: 114464788586605564}
+    - {fileID: 114507340405130716}
+    - {fileID: 114471912037488666}
+    - {fileID: 114503757033569924}
+    - {fileID: 114767383999022486}
+    - {fileID: 114693783200656058}
+    - {fileID: 114208458872356858}
+    - {fileID: 114452511902477958}
+    - {fileID: 114955431750335060}
+    - {fileID: 114324481243377518}
+    - {fileID: 114332784708165080}
+    - {fileID: 114311972553101958}
+    - {fileID: 114495507418696002}
+    - {fileID: 114090938575764022}
+    - {fileID: 114822751121370718}
+    - {fileID: 114189809193653676}
+    - {fileID: 114910375662549112}
+    - {fileID: 114668657672623782}
+    - {fileID: 114941350798319070}
+    - {fileID: 114299101603332070}
+    - {fileID: 114583877898817900}
+    - {fileID: 114971039841928306}
+    - {fileID: 114720587560010244}
+    - {fileID: 114601505796252814}
+    - {fileID: 114433092151972732}
+    - {fileID: 114881147754536536}
+    - {fileID: 114968466692099586}
+    - {fileID: 114387968987782918}
+    - {fileID: 114134270896229670}
+    - {fileID: 114530582379309674}
+    - {fileID: 114380065659813780}
+    - {fileID: 114348498317395866}
+    - {fileID: 114114799702549004}
+    - {fileID: 114196805404475916}
+    - {fileID: 114460562760816066}
+    - {fileID: 114961482151784122}
+    - {fileID: 114261942468430504}
+    - {fileID: 114709412097267508}
+    - {fileID: 114525640525504800}
+    - {fileID: 114161564551485726}
+    - {fileID: 114580852792490862}
+    - {fileID: 114890588813715902}
+    - {fileID: 114978121118815360}
+    - {fileID: 114771119900408706}
+  StartPosition: {x: 12.8, y: 0}
+  Enter: {fileID: 114646063541107878}
+  Process: {fileID: 114090938575764022}
+  Exit: {fileID: 114822751121370718}
+--- !u!114 &114090938575764022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Roll Sequence
+  m_EditorClassIdentifier: 
+  Name: Roll Sequence
+  GraphPosition: {x: 320, y: 0}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114324481243377518}
+    - {fileID: 114311972553101958}
+    - {fileID: 114161564551485726}
+    - {fileID: 114471912037488666}
+--- !u!114 &114114799702549004
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81db09edfc25024b94b5b1d2295f584, type: 3}
+  m_Name: Reset Piece
+  m_EditorClassIdentifier: 
+  Name: Reset Piece
+  GraphPosition: {x: 4595.2, y: 550.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114348498317395866}
+  Object:
+    _variable: currentSpace.CurrentPiece
+    _tokens:
+    - Type: 0
+      Text: currentSpace
+    - Type: 0
+      Text: CurrentPiece
+  Tag: NewGame
+--- !u!114 &114134270896229670
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Check for Occupier
+  m_EditorClassIdentifier: 
+  Name: Check for Occupier
+  GraphPosition: {x: 4032, y: 640}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114530582379309674}
+  OnFalse: {fileID: 114348498317395866}
+  Condition:
+    _statement: currentSpace.CurrentPiece != null
+--- !u!114 &114161564551485726
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Check Pieces Available
+  m_EditorClassIdentifier: 
+  Name: Check Pieces Available
+  GraphPosition: {x: 780.8, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114580852792490862}
+  Expression:
+    _statement: canMove = false
+--- !u!114 &114189809193653676
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1214b928c8b2a48b55a137ca3023dc, type: 3}
+  m_Name: Yield
+  m_EditorClassIdentifier: 
+  Name: Yield
+  GraphPosition: {x: 2304, y: 281.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+--- !u!114 &114196805404475916
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Clear Previous Space
+  m_EditorClassIdentifier: 
+  Name: Clear Previous Space
+  GraphPosition: {x: 2432, y: 512}
+  IsBreakpoint: 0
+  Next: {fileID: 114460562760816066}
+  Expression:
+    _statement: global.Spaces[player.SelectedPiece.CurrentSpace].CurrentPiece = null;
+--- !u!114 &114208458872356858
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
+  m_Name: Wait For Selected Piece
+  m_EditorClassIdentifier: 
+  Name: Wait For Selected Piece
+  GraphPosition: {x: 2176, y: 217.6}
+  IsBreakpoint: 0
+  Loop: {fileID: 114189809193653676}
+  Index:
+    _variable: 
+    _tokens: []
+  Condition:
+    _statement: player.SelectedPiece == null;
+--- !u!114 &114261942468430504
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Finished
+  m_EditorClassIdentifier: 
+  Name: Set Finished
+  GraphPosition: {x: 3392, y: 486.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 'player.SelectedPiece.Finished = true;
+
+      player.SelectedPiece.CurrentSpace = player.FinishSpace;'
+--- !u!114 &114299101603332070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is Piece Free
+  m_EditorClassIdentifier: 
+  Name: Is Piece Free
+  GraphPosition: {x: 2112, y: 512}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114196805404475916}
+  OnFalse: {fileID: 114941350798319070}
+  Condition:
+    _statement: player.SelectedPiece.Free
+--- !u!114 &114311972553101958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
+  m_Name: Roll Loop
+  m_EditorClassIdentifier: 
+  Name: Roll Loop
+  GraphPosition: {x: 1036.8, y: -102.4}
+  IsBreakpoint: 0
+  Loop: {fileID: 114541750554709886}
+  Index:
+    _variable: 
+    _tokens: []
+  Condition:
+    _statement: Time() - rollTime < 0.5
+--- !u!114 &114324481243377518
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Roll Message
+  m_EditorClassIdentifier: 
+  Name: Roll Message
+  GraphPosition: {x: 640, y: -115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114332784708165080}
+  Control:
+    _variable: scene.Button
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Button
+  WaitForCompletion: 1
+  AutoHide: 1
+  WaitTime: 0
+  Message:
+    Text: ROLL!
+--- !u!114 &114332784708165080
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 620c304c909d25644bbd55063dfe3ba6, type: 3}
+  m_Name: Show Roll
+  m_EditorClassIdentifier: 
+  Name: Show Roll
+  GraphPosition: {x: 832, y: -192}
+  IsBreakpoint: 0
+  Next: {fileID: 114495507418696002}
+  Control:
+    _variable: scene.Roll
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Roll
+--- !u!114 &114348498317395866
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set New Occupier
+  m_EditorClassIdentifier: 
+  Name: Set New Occupier
+  GraphPosition: {x: 4454.4, y: 665.60004}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: currentSpace.CurrentPiece = player.SelectedPiece;
+--- !u!114 &114380065659813780
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Return to Start
+  m_EditorClassIdentifier: 
+  Name: Return to Start
+  GraphPosition: {x: 4390.4, y: 460.80002}
+  IsBreakpoint: 0
+  Next: {fileID: 114114799702549004}
+  Transform:
+    _variable: currentSpace.CurrentPiece
+    _tokens:
+    - Type: 0
+      Text: currentSpace
+    - Type: 0
+      Text: CurrentPiece
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: currentSpace.CurrentPiece.StartingPosition
+      _tokens:
+      - Type: 0
+        Text: currentSpace
+      - Type: 0
+        Text: CurrentPiece
+      - Type: 0
+        Text: StartingPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 1
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 10
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114387968987782918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Piece Can Move
+  m_EditorClassIdentifier: 
+  Name: Piece Can Move
+  GraphPosition: {x: 2432, y: 384}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114968466692099586}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: piece.CanMove
+--- !u!114 &114433092151972732
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Free Message
+  m_EditorClassIdentifier: 
+  Name: Free Message
+  GraphPosition: {x: 1305.6, y: 230.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 114693783200656058}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: 'Select a piece
+
+      to move 6 or free'
+--- !u!114 &114452511902477958
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Piece
+  m_EditorClassIdentifier: 
+  Name: Set Piece
+  GraphPosition: {x: 3072, y: 128}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: piece.Highlight as VariableStoreComponent.Piece = piece;
+--- !u!114 &114460562760816066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Check for Finish
+  m_EditorClassIdentifier: 
+  Name: Check for Finish
+  GraphPosition: {x: 2752, y: 512}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114961482151784122}
+  OnFalse: {fileID: 114583877898817900}
+  Condition:
+    _statement: player.SelectedPiece.CurrentSpace + global.Roll == player.FinishSpace
+--- !u!114 &114464788586605564
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd36ba06a52fe140b79c7a1d0217802, type: 3}
+  m_Name: Create Highlight
+  m_EditorClassIdentifier: 
+  Name: Create Highlight
+  GraphPosition: {x: 2752, y: 128}
+  IsBreakpoint: 0
+  Next: {fileID: 114452511902477958}
+  Prefab:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 2924353485232009036, guid: edcdc76103e9ff34eb4adb86245a30af, type: 3}
+  ObjectName:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: Highlight
+  ObjectVariable:
+    _variable: piece.Highlight
+    _tokens:
+    - Type: 0
+      Text: piece
+    - Type: 0
+      Text: Highlight
+  Positioning: 2
+  Object:
+    _variable: 
+    _tokens: []
+  Parent:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Position:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 1}
+  Rotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 45}
+--- !u!114 &114471912037488666
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Pieces Available
+  m_EditorClassIdentifier: 
+  Name: Pieces Available
+  GraphPosition: {x: 704, y: 320}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114601505796252814}
+  OnFalse: {fileID: 114503757033569924}
+  Condition:
+    _statement: canMove
+--- !u!114 &114495507418696002
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Start Roll
+  m_EditorClassIdentifier: 
+  Name: Start Roll
+  GraphPosition: {x: 1036.8, y: -268.80002}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: rollTime = Time();
+--- !u!114 &114503757033569924
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Can't Move Message
+  m_EditorClassIdentifier: 
+  Name: Can't Move Message
+  GraphPosition: {x: 832, y: 422.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114955431750335060}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: 'No pieces can
+
+      move!'
+--- !u!114 &114507340405130716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Select Piece Message
+  m_EditorClassIdentifier: 
+  Name: Select Piece Message
+  GraphPosition: {x: 1305.6, y: 435.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114693783200656058}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: "Select a piece \nto move {global.Roll} {rollDisplay}"
+--- !u!114 &114525640525504800
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Pieces
+  m_EditorClassIdentifier: 
+  Name: Iterate Pieces
+  GraphPosition: {x: 2112, y: 384}
+  IsBreakpoint: 0
+  Container:
+    _variable: player.Pieces
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: Pieces
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Loop: {fileID: 114387968987782918}
+--- !u!114 &114530582379309674
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Boom!
+  m_EditorClassIdentifier: 
+  Name: Boom!
+  GraphPosition: {x: 4224, y: 550.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114380065659813780}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: Boom!
+--- !u!114 &114541750554709886
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Roll
+  m_EditorClassIdentifier: 
+  Name: Set Roll
+  GraphPosition: {x: 1126.4, y: -25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114910375662549112}
+  Expression:
+    _statement: 'global.Roll = Random(1, 7);
+
+      rollDisplay = global.Roll > 1 ? "Spaces" : "Space";'
+--- !u!114 &114580852792490862
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Pieces
+  m_EditorClassIdentifier: 
+  Name: Iterate Pieces
+  GraphPosition: {x: 857.60004, y: 102.4}
+  IsBreakpoint: 0
+  Container:
+    _variable: player.Pieces
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: Pieces
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Loop: {fileID: 114890588813715902}
+--- !u!114 &114583877898817900
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Move Spaces
+  m_EditorClassIdentifier: 
+  Name: Move Spaces
+  GraphPosition: {x: 3072, y: 576}
+  IsBreakpoint: 0
+  Next: {fileID: 114720587560010244}
+  Expression:
+    _statement: 'nextSpace = player.SelectedPiece.CurrentSpace + global.Roll;
+
+      player.SelectedPiece.CurrentSpace = nextSpace % 36;'
+--- !u!114 &114601505796252814
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Roll Free
+  m_EditorClassIdentifier: 
+  Name: Roll Free
+  GraphPosition: {x: 1152, y: 320}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114433092151972732}
+  OnFalse: {fileID: 114507340405130716}
+  Condition:
+    _statement: global.Roll == 6
+--- !u!114 &114646063541107878
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Turn Message
+  m_EditorClassIdentifier: 
+  Name: Turn Message
+  GraphPosition: {x: 320, y: -128}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{player.Name}''s turn'
+--- !u!114 &114668657672623782
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Move To Space
+  m_EditorClassIdentifier: 
+  Name: Move To Space
+  GraphPosition: {x: 3712, y: 640}
+  IsBreakpoint: 0
+  Next: {fileID: 114134270896229670}
+  Transform:
+    _variable: player.SelectedPiece
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: SelectedPiece
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: targetPosition
+      _tokens:
+      - Type: 0
+        Text: targetPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 1
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 10
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114693783200656058
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: Create Highlights
+  m_EditorClassIdentifier: 
+  Name: Create Highlights
+  GraphPosition: {x: 1651.2001, y: 320}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114978121118815360}
+    - {fileID: 114709412097267508}
+    - {fileID: 114208458872356858}
+    - {fileID: 114525640525504800}
+    - {fileID: 114299101603332070}
+--- !u!114 &114709412097267508
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Pieces
+  m_EditorClassIdentifier: 
+  Name: Iterate Pieces
+  GraphPosition: {x: 2112, y: 128}
+  IsBreakpoint: 0
+  Container:
+    _variable: player.Pieces
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: Pieces
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Loop: {fileID: 114767383999022486}
+--- !u!114 &114720587560010244
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Get Current Space
+  m_EditorClassIdentifier: 
+  Name: Get Current Space
+  GraphPosition: {x: 3072, y: 691.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114971039841928306}
+  Expression:
+    _statement: currentSpace = global.Spaces[player.SelectedPiece.CurrentSpace];
+--- !u!114 &114767383999022486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Piece Can Move
+  m_EditorClassIdentifier: 
+  Name: Piece Can Move
+  GraphPosition: {x: 2432, y: 128}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114464788586605564}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: piece.CanMove
+--- !u!114 &114771119900408706
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6689d1e5c6f155c4182dd0da101fd0cc, type: 3}
+  m_Name: Reset Highlight
+  m_EditorClassIdentifier: 
+  Name: Reset Highlight
+  GraphPosition: {x: 3072, y: 384}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Variables:
+    _items:
+    - Highlight
+--- !u!114 &114822751121370718
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 408dd5d67693c3545bbddb6cfc900c4a, type: 3}
+  m_Name: Hide Roll
+  m_EditorClassIdentifier: 
+  Name: Hide Roll
+  GraphPosition: {x: 320, y: 192}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Roll
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Roll
+--- !u!114 &114881147754536536
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Cutoff Z
+  m_EditorClassIdentifier: 
+  Name: Cutoff Z
+  GraphPosition: {x: 3392, y: 729.60004}
+  IsBreakpoint: 0
+  Next: {fileID: 114668657672623782}
+  Expression:
+    _statement: targetPosition = Vector3(targetPosition.x, targetPosition.y, 0.0);
+--- !u!114 &114890588813715902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Can Move
+  m_EditorClassIdentifier: 
+  Name: Set Can Move
+  GraphPosition: {x: 960, y: 179.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 'piece.CanMove = !piece.Finished && (piece.Free || global.Roll ==
+      6);
+
+      canMove = canMove || piece.CanMove;'
+--- !u!114 &114910375662549112
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2858c7af4d722bf49a2fc1993f96ed16, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Name: Wait
+  GraphPosition: {x: 1241.6, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Time:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 0.1
+  UseScaledTime: 1
+--- !u!114 &114941350798319070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Make Free
+  m_EditorClassIdentifier: 
+  Name: Make Free
+  GraphPosition: {x: 2560, y: 640}
+  IsBreakpoint: 0
+  Next: {fileID: 114720587560010244}
+  Expression:
+    _statement: player.SelectedPiece.Free = true;
+--- !u!114 &114955431750335060
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Next Turn Message
+  m_EditorClassIdentifier: 
+  Name: Next Turn Message
+  GraphPosition: {x: 832, y: 499.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Button
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Button
+  WaitForCompletion: 1
+  AutoHide: 1
+  WaitTime: 0
+  Message:
+    Text: Next Turn
+--- !u!114 &114961482151784122
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Move To Finish
+  m_EditorClassIdentifier: 
+  Name: Move To Finish
+  GraphPosition: {x: 3072, y: 486.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114261942468430504}
+  Transform:
+    _variable: player.SelectedPiece
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: SelectedPiece
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: player.SelectedPiece.FinishPosition
+      _tokens:
+      - Type: 0
+        Text: player
+      - Type: 0
+        Text: SelectedPiece
+      - Type: 0
+        Text: FinishPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 1
+  WaitForCompletion: 0
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 10
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114968466692099586
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destroy Highlight
+  m_EditorClassIdentifier: 
+  Name: Destroy Highlight
+  GraphPosition: {x: 2752, y: 384}
+  IsBreakpoint: 0
+  Next: {fileID: 114771119900408706}
+  Target:
+    _variable: piece.Highlight
+    _tokens:
+    - Type: 0
+      Text: piece
+    - Type: 0
+      Text: Highlight
+--- !u!114 &114971039841928306
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
+  m_Name: Get Target Position
+  m_EditorClassIdentifier: 
+  Name: Get Target Position
+  GraphPosition: {x: 3392, y: 640}
+  IsBreakpoint: 0
+  Next: {fileID: 114881147754536536}
+  Target:
+    Type: 1
+    Reference:
+      _variable: currentSpace as Transform
+      _tokens:
+      - Type: 0
+        Text: currentSpace
+      - Type: 2
+        Text: Transform
+    Value: {fileID: 0}
+  Output:
+    _variable: targetPosition
+    _tokens:
+    - Type: 0
+      Text: targetPosition
+  TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  PropertyName: position
+--- !u!114 &114978121118815360
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6689d1e5c6f155c4182dd0da101fd0cc, type: 3}
+  m_Name: Reset Selected Piece
+  m_EditorClassIdentifier: 
+  Name: Reset Selected Piece
+  GraphPosition: {x: 2112, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: player
+    _tokens:
+    - Type: 0
+      Text: player
+  Variables:
+    _items:
+    - SelectedPiece
