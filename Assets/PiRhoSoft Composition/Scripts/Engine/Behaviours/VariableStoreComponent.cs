@@ -10,10 +10,12 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[ChangeTrigger(nameof(SetupSchema))]
 		[AssetDisplay(SaveLocation = AssetLocation.Selectable)]
-		public VariableSchema Schema;
+		[SerializeField]
+		private VariableSchema _schema = null;
 
 		public VariableSet Variables;
 
+		public VariableSchema Schema => _schema;
 		public MappedVariableStore Store { get; private set; } = new MappedVariableStore();
 
 		protected virtual void OnEnable()
@@ -23,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void SetupSchema()
 		{
-			Store.Setup(this, Schema, Variables);
+			Store.Setup(this, _schema, Variables);
 		}
 
 		#region IVariableStore Implementation

@@ -1,11 +1,14 @@
-﻿namespace PiRhoSoft.CompositionEngine
+﻿using System.Collections.Generic;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionEngine
 {
 	public class IntVariableConstraint : VariableConstraint
 	{
 		public int Minimum;
 		public int Maximum;
 
-		public override string Write()
+		public override string Write(IList<Object> objects)
 		{
 			if (Maximum != 100)
 				return string.Format("{0}|{1}", Minimum, Maximum);
@@ -13,7 +16,7 @@
 				return string.Format("{0}|{1}", Minimum, Maximum);
 		}
 
-		public override bool Read(string data)
+		public override bool Read(string data, IList<Object> objects)
 		{
 			var range = data.Split('|');
 

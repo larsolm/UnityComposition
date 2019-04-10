@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
+using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -19,6 +21,7 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static GUIContent _objectConstraintLabel = new GUIContent("Constraint", "The Object type that the assigned object must be derived from or have an instance of");
 		private readonly static GUIContent _enumConstraintLabel = new GUIContent("Constraint", "The enum type of values added to the list");
 		private readonly static GUIContent _listConstraintLabel = new GUIContent("Constraint", "The variable type of values added to the list");
+		private readonly static GUIContent _storeConstraintLabel = new GUIContent("Constraint", "The schema the store must use");
 		private readonly static GUIContent _tagLabel = new GUIContent("Tag", "An identifier that can be used to reset or persist this variable");
 		private readonly static GUIContent _useRangeConstraintLabel = new GUIContent();
 		private readonly static GUIContent _minimumConstraintLabel = new GUIContent("Between");
@@ -123,6 +126,7 @@ namespace PiRhoSoft.CompositionEditor
 					|| type == VariableType.String
 					|| type == VariableType.Enum
 					|| type == VariableType.Object
+					|| type == VariableType.Store
 					|| type == VariableType.List;
 			}
 			else
@@ -220,7 +224,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		#endregion
 
-		#region Contraints
+		#region Constraints
 
 		private static float GetConstraintHeight(VariableType type, VariableConstraint constraint)
 		{
@@ -268,6 +272,12 @@ namespace PiRhoSoft.CompositionEditor
 					{
 						if (top) DrawIndentedLabel(ref rect, _enumConstraintLabel);
 						DrawEnumConstraint(rect, ref constraint);
+						break;
+					}
+					case VariableType.Store:
+					{
+						if (top) DrawIndentedLabel(ref rect, _storeConstraintLabel);
+						DrawStoreConstraint(rect, ref constraint);
 						break;
 					}
 					case VariableType.List:
@@ -391,6 +401,17 @@ namespace PiRhoSoft.CompositionEditor
 			enumConstraint.Type = TypeDisplayDrawer.Draw<Enum>(rect, GUIContent.none, enumConstraint.Type, false, true);
 		}
 
+		private static void DrawStoreConstraint(Rect rect, ref VariableConstraint constraint)
+		{
+			if (!(constraint is StoreVariableConstraint storeConstraint))
+			{
+				storeConstraint = new StoreVariableConstraint { Schema = null };
+				constraint = storeConstraint;
+			}
+
+			storeConstraint.Schema = AssetDisplayDrawer.Draw(rect, GUIContent.none, storeConstraint.Schema, false, false, AssetLocation.None, null);
+		}
+
 		private static void DrawListConstraint(Rect rect, ref VariableConstraint constraint)
 		{
 			if (!(constraint is ListVariableConstraint listConstraint))
@@ -423,6 +444,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private SerializedProperty _typeProperty;
 		private SerializedProperty _constraintProperty;
+		private SerializedProperty _objectsProperty;
 		private SerializedProperty _isTypeLockedProperty;
 		private SerializedProperty _isConstraintLockedProperty;
 
@@ -432,10 +454,16 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			_typeProperty = property.FindPropertyRelative("_type");
 			_constraintProperty = property.FindPropertyRelative("_constraint");
+			_objectsProperty = property.FindPropertyRelative("_objects");
 			_isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
 			_isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
 
-			_constraint = VariableHandler.CreateConstraint((VariableType)_typeProperty.enumValueIndex, _constraintProperty.stringValue);
+			var objects = new List<Object>();
+
+			for (var i = 0; i < _objectsProperty.arraySize; i++)
+				objects.Add(_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
+
+			_constraint = VariableHandler.CreateConstraint((VariableType)_typeProperty.enumValueIndex, _constraintProperty.stringValue, objects);
 		}
 
 		public override float GetHeight(SerializedProperty property, GUIContent label)
@@ -448,13 +476,19 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void Draw(Rect position, SerializedProperty property, GUIContent label)
 		{
+			var objects = new List<Object>();
 			var expanded = property.isExpanded;
 			var definition = ValueDefinition.Create((VariableType)_typeProperty.enumValueIndex, _constraint, null, null, _isTypeLockedProperty.boolValue, _isConstraintLockedProperty.boolValue);
 			definition = Draw(position, label, definition, VariableInitializerType.None, null, true, ref expanded);
 
 			_typeProperty.enumValueIndex = (int)definition.Type;
 			_constraint = definition.Constraint;
-			_constraintProperty.stringValue = _constraint != null ? _constraint.Write() : string.Empty;
+			_constraintProperty.stringValue = _constraint != null ? _constraint.Write(objects) : string.Empty;
+			_objectsProperty.arraySize = objects.Count;
+
+			for (var i = 0; i < objects.Count; i++)
+				_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = objects[i];
+
 			property.isExpanded = expanded;
 		}
 

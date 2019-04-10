@@ -6,14 +6,16 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "variable-store-asset")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Store", fileName = nameof(VariableStoreAsset), order = 130)]
-	public class VariableStoreAsset : ScriptableObject, IVariableStore, IVariableReset
+	public class VariableStoreAsset : ScriptableObject, IVariableStore, IVariableReset, ISchemaOwner
 	{
 		[ChangeTrigger(nameof(SetupSchema))]
 		[AssetDisplay(SaveLocation = AssetLocation.Selectable)]
-		public VariableSchema Schema;
+		[SerializeField]
+		private VariableSchema _schema = null;
 
 		public VariableSet Variables;
 
+		public VariableSchema Schema => _schema;
 		public MappedVariableStore Store { get; private set; } = new MappedVariableStore();
 
 		protected virtual void OnEnable()
@@ -21,9 +23,9 @@ namespace PiRhoSoft.CompositionEngine
 			SetupSchema();
 		}
 
-		private void SetupSchema()
+		public void SetupSchema()
 		{
-			Store.Setup(this, Schema, Variables);
+			Store.Setup(this, _schema, Variables);
 		}
 
 		#region IVariableStore Implementation

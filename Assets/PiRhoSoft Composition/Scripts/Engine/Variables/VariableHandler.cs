@@ -113,7 +113,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Constraints
 
-		public static VariableConstraint CreateConstraint(VariableType type, string data)
+		public static VariableConstraint CreateConstraint(VariableType type, string data, IList<Object> objects)
 		{
 			if (!string.IsNullOrEmpty(data))
 			{
@@ -122,7 +122,7 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (constraint != null)
 				{
-					if (constraint.Read(data))
+					if (constraint.Read(data, objects))
 						return constraint;
 				}
 			}

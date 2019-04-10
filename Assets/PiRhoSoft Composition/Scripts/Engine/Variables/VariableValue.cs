@@ -132,7 +132,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Create(string str) => CreateReference(VariableType.String, str ?? string.Empty);
 		public static VariableValue Create(Enum e) => CreateReference(VariableType.Enum, e);
 		public static VariableValue Create(Object obj) => CreateObject(obj);
-		public static VariableValue Create(IVariableStore store) => CreateReference(VariableType.Store, store);
+		public static VariableValue Create(IVariableStore store) => CreateReference(VariableType.Store, store ?? new VariableStore());
 		public static VariableValue Create(IVariableList list) => CreateReference(VariableType.List, list ?? new VariableList());
 
 		public static VariableValue CreateValue<T>(T value)

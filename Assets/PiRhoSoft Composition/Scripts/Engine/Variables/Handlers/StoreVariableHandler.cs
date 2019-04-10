@@ -9,7 +9,14 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		protected override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
-			return VariableValue.Create((IVariableStore)null);
+			IVariableStore store;
+
+			if (constraint is StoreVariableConstraint storeConstraint && storeConstraint.Schema != null)
+				store = new ConstrainedStore(storeConstraint.Schema);
+			else
+				store = new VariableStore();
+
+			return VariableValue.Create(store);
 		}
 
 		protected override void ToString_(VariableValue value, StringBuilder builder)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -7,12 +8,12 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public Type Type;
 
-		public override string Write()
+		public override string Write(IList<Object> objects)
 		{
 			return Type != null ? Type.AssemblyQualifiedName : string.Empty;
 		}
 
-		public override bool Read(string data)
+		public override bool Read(string data, IList<Object> objects)
 		{
 			Type = System.Type.GetType(data, false);
 			return Type != null;

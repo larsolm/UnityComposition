@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
+using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -10,13 +12,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		public string[] Values;
 
-		public override string Write()
+		public override string Write(IList<Object> objects)
 		{
 			// A character needs to precede the values array so that it is not stored as an empty string which is checked for in the CreateConstraint method
 			return Values.Length == 0 ? _emptyCharacter.ToString() : _nonEmptyCharacter + string.Join(_separatorCharacter.ToString(), Values);
 		}
 
-		public override bool Read(string data)
+		public override bool Read(string data, IList<Object> objects)
 		{
 			// string.Split returns a single length array if the string is empty but we want an empty array if there are no values to parse
 			var empty = data[0];

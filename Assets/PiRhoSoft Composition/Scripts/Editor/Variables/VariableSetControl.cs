@@ -1,8 +1,7 @@
-﻿using System;
+﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.UtilityEditor;
 using System.Collections;
 using System.Reflection;
-using PiRhoSoft.CompositionEngine;
-using PiRhoSoft.UtilityEditor;
 using UnityEditor;
 using UnityEngine;
 

@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -22,6 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[SerializeField] private VariableType _type;
 		[SerializeField] private string _constraint;
+		[SerializeField] private List<Object> _objects;
 		[SerializeField] public string _tag;
 		[SerializeField] public Expression _initializer;
 
@@ -144,14 +146,18 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnAfterDeserialize()
 		{
-			Constraint = VariableHandler.CreateConstraint(Type, _constraint);
+			Constraint = VariableHandler.CreateConstraint(Type, _constraint, _objects);
 			_constraint = null;
+			_objects = null;
 		}
 
 		public void OnBeforeSerialize()
 		{
 			if (Constraint != null)
-				_constraint = Constraint.Write();
+			{
+				_objects = new List<Object>();
+				_constraint = Constraint.Write(_objects);
+			}
 		}
 
 		#endregion

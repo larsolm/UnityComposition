@@ -16,6 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	public interface ISchemaOwner
 	{
+		VariableSchema Schema { get; }
 		void SetupSchema();
 	}
 

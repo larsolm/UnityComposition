@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -7,13 +9,13 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableType ItemType;
 		public VariableConstraint ItemConstraint;
 
-		public override string Write()
+		public override string Write(IList<Object> objects)
 		{
-			var constraint = ItemConstraint != null ? ItemConstraint.Write() : string.Empty;
+			var constraint = ItemConstraint != null ? ItemConstraint.Write(objects) : string.Empty;
 			return string.Format("{0}|{1}", ItemType, constraint);
 		}
 
-		public override bool Read(string data)
+		public override bool Read(string data, IList<Object> objects)
 		{
 			var pipe = data.IndexOf('|');
 
@@ -23,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (!Enum.TryParse(data.Substring(0, pipe), out ItemType))
 				return false;
 			
-			ItemConstraint = VariableHandler.CreateConstraint(ItemType, data.Substring(pipe + 1));
+			ItemConstraint = VariableHandler.CreateConstraint(ItemType, data.Substring(pipe + 1), objects);
 			return true;
 		}
 

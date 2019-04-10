@@ -2,6 +2,7 @@
 using PiRhoSoft.UtilityEditor;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 
@@ -144,5 +145,30 @@ namespace PiRhoSoft.CompositionEditor
 		}
 
 		#endregion
+	}
+
+	public class VariableStoreThing : ObjectControl<VariableStore>
+	{
+		VariableStoreControl _control = new VariableStoreControl();
+
+		public override void Setup(VariableStore target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
+		{
+			_control.Setup("", target, false, false);
+		}
+
+		public override float GetHeight(GUIContent label)
+		{
+			return _control.GetHeight();
+		}
+
+		public override void Draw(Rect position, GUIContent label)
+		{
+			_control.Draw(position);
+		}
+	}
+
+	[CustomPropertyDrawer(typeof(VariableStore))]
+	public class VariableStoreDrawer : PropertyDrawer<VariableStoreThing>
+	{
 	}
 }
