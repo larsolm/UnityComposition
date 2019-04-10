@@ -31,7 +31,6 @@ MonoBehaviour:
     - {fileID: 114936137521299786}
     - {fileID: 114861526200370258}
     - {fileID: 114534255571413984}
-    - {fileID: 114882391638149820}
     - {fileID: 114887996478865902}
     - {fileID: 114122231132940762}
     - {fileID: 114458235486340204}
@@ -137,7 +136,7 @@ MonoBehaviour:
   m_Name: Add Ace
   m_EditorClassIdentifier: 
   Name: Add Ace
-  GraphPosition: {x: 1408, y: 89.6}
+  GraphPosition: {x: 1344, y: 115.200005}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -210,7 +209,7 @@ MonoBehaviour:
   Name: Add Card
   GraphPosition: {x: 960, y: 115.200005}
   IsBreakpoint: 0
-  Next: {fileID: 114882391638149820}
+  Next: {fileID: 114928084405713316}
   Expression:
     _statement: global.State.Cards += local.card
 --- !u!114 &114789499897121068
@@ -255,22 +254,6 @@ MonoBehaviour:
   Next: {fileID: 114936137521299786}
   Expression:
     _statement: local.suitList = global.Deck[local.suit.Name]
---- !u!114 &114882391638149820
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1214b928c8b2a48b55a137ca3023dc, type: 3}
-  m_Name: Yield
-  m_EditorClassIdentifier: 
-  Name: Yield
-  GraphPosition: {x: 1280, y: -64}
-  IsBreakpoint: 0
-  Next: {fileID: 114928084405713316}
 --- !u!114 &114887996478865902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -320,7 +303,7 @@ MonoBehaviour:
   m_Name: Is Ace
   m_EditorClassIdentifier: 
   Name: Is Ace
-  GraphPosition: {x: 1344, y: 0}
+  GraphPosition: {x: 1280, y: 12.8}
   IsBreakpoint: 0
   OnTrue: {fileID: 114403376651189868}
   OnFalse: {fileID: 0}

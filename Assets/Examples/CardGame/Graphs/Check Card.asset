@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextName: card
   ContextDefinition:
-    _type: 0
-    _constraint: 
+    _type: 17
+    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
     _tag: 
     _initializer:
       _statement: 
@@ -64,8 +65,8 @@ MonoBehaviour:
       local.previous = local.deckSuit[card.Index - 1]
 
 
-      card.Complete = local.stateSuit.Count == card.Index && local.previous.Complete
-      && local.stateSuit == global.State.Rows[card.Row]'
+      card.Complete = local.previous.Complete && card.Row == local.previous.Row &&
+      card.Column == local.previous.Column + 1'
 --- !u!114 &114204127550149548
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -83,9 +84,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114524819183424472}
   Expression:
-    _statement: 'local.stateSuit = global.State[card.Suit.Name]
-
-      card.Complete = local.stateSuit.Count == 0 && card.Column == 0'
+    _statement: card.Complete = card.Column == 0
 --- !u!114 &114246263796642296
 MonoBehaviour:
   m_ObjectHideFlags: 1

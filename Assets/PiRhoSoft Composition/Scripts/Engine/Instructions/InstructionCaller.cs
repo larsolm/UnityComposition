@@ -23,16 +23,16 @@ namespace PiRhoSoft.CompositionEngine
 		public IList<InstructionOutput> Outputs => _outputs;
 		public bool IsRunning => Instruction != null && Instruction.IsRunning;
 
-		public IEnumerator Execute(VariableValue context)
+		public IEnumerator Execute(IVariableStore store, VariableValue context)
 		{
 			if (Instruction)
 			{
-				var store = new InstructionStore(Instruction, context);
+				var localStore = new InstructionStore(Instruction, context);
 
-				store.WriteInputs(this, _inputs);
-				store.WriteOutputs(_outputs);
-				yield return Instruction.Execute(store);
-				store.ReadOutputs(_outputs);
+				localStore.WriteInputs(this, _inputs, store);
+				localStore.WriteOutputs(_outputs);
+				yield return Instruction.Execute(localStore);
+				localStore.ReadOutputs(_outputs, store);
 			}
 		}
 
@@ -86,7 +86,8 @@ namespace PiRhoSoft.CompositionEngine
 
 					if (existing != null && (existing.Type == InstructionInputType.Reference || definition.Definition.IsValid(existing.Value)))
 					{
-						inputs.Add(existing);
+						if (!inputs.Any(input => input.Name == definition.Name))
+							inputs.Add(existing);
 					}
 					else
 					{
@@ -117,7 +118,8 @@ namespace PiRhoSoft.CompositionEngine
 
 					if (existing != null)
 					{
-						outputs.Add(existing);
+						if (!outputs.Any(output => output.Name == definition.Name))
+							outputs.Add(existing);
 					}
 					else
 					{

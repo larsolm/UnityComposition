@@ -34,7 +34,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void RunInstruction(InstructionCaller caller, VariableValue context)
 		{
-			var enumerator = caller.Execute(context);
+			RunInstruction(caller, GlobalStore, context);
+		}
+
+		public void RunInstruction(InstructionCaller caller, IVariableStore store, VariableValue context)
+		{
+			var enumerator = caller.Execute(store, context);
 			StartCoroutine(new JoinEnumerator(enumerator, caller.Instruction));
 		}
 
@@ -44,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			private const string _iterationLimitWarning = "(CJEIL) Cancelling JoinEnumerator after {0} unyielding iterations";
 
-			public static int MaximumIterations = 5000;
+			public static int MaximumIterations = 10000;
 
 			private IEnumerator _root;
 			private Stack<IEnumerator> _enumerators = new Stack<IEnumerator>(10);
@@ -159,7 +164,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool LogInstructions = false;
 
 		private const string _instructionStartFormat = "{0} started";
-		private const string _instructionCompleteFormat = "{0} complete: ran {1} iterations in {2} frames and {3:F} seconds\n";
+		private const string _instructionCompleteFormat = "{0} complete: ran {1} iterations in {2} frames and {3:F3} seconds\n";
 
 		public static Dictionary<Instruction, InstructionData> InstructionState { get; } = new Dictionary<Instruction, InstructionData>();
 

@@ -132,7 +132,7 @@ namespace PiRhoSoft.CompositionEngine
 					CompilationResult.Success = false;
 					CompilationResult.Location = exception.Token.Location;
 					CompilationResult.Token = _statement.Substring(exception.Token.Start, exception.Token.End - exception.Token.Start);
-					CompilationResult.Message = exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message + exception.Message;
+					CompilationResult.Message = exception.Message;
 				}
 			}
 

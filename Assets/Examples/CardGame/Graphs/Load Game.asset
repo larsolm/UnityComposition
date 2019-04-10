@@ -456,6 +456,8 @@ MonoBehaviour:
 
       local.card.Suit = local.suit
 
+      local.card.Visible = local.card.Rank != "A"
+
 
       global.Deck[local.suit.Name] += local.card'
 --- !u!114 &114730956879713784

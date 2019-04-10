@@ -110,7 +110,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[ChangeTrigger(nameof(OnNameChanged))][Delayed] public string Name;
 		[ListDisplay] [ClassDisplay(Type = ClassDisplayType.Inline)] public ParameterList Parameters = new ParameterList();
-		public Expression Expression = new Expression();
+		[ExpressionDisplay(MinimumLines = 5, MaximumLines = 20)] public Expression Expression = new Expression();
 
 		private string _registeredName;
 

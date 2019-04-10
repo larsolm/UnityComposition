@@ -27,19 +27,15 @@ MonoBehaviour:
     _items: []
   _nodes:
     _items:
-    - {fileID: 114893726994580232}
-    - {fileID: 114853665359960698}
     - {fileID: 114206857050440126}
-    - {fileID: 114754531436896202}
-    - {fileID: 114586229638486660}
-    - {fileID: 114074848338094142}
-    - {fileID: 114340042515488770}
-    - {fileID: 114580086176516034}
     - {fileID: 114928373657034508}
-    - {fileID: 114504160098888134}
-  StartPosition: {x: -512, y: 0}
+    - {fileID: 114501313728011252}
+    - {fileID: 114072053865888632}
+    - {fileID: 114645094158174062}
+    - {fileID: 114344252803231214}
+  StartPosition: {x: -512, y: -0}
   Process: {fileID: 114928373657034508}
---- !u!114 &114074848338094142
+--- !u!114 &114072053865888632
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -48,12 +44,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dcbf36d44c8307646ae6b4c67ca8b89d, type: 3}
-  m_Name: Break
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Ace Iteration(Clone)(Clone)
   m_EditorClassIdentifier: 
-  Name: Break
-  GraphPosition: {x: 2048, y: 12.8}
+  Name: Ace Iteration
+  GraphPosition: {x: 448, y: -0}
   IsBreakpoint: 0
+  Container:
+    _variable: global.State.Aces
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: State
+    - Type: 0
+      Text: Aces
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: local.ace
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: ace
+  Loop: {fileID: 114501313728011252}
 --- !u!114 &114206857050440126
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -67,160 +83,12 @@ MonoBehaviour:
   m_Name: Lock Card
   m_EditorClassIdentifier: 
   Name: Lock Card
-  GraphPosition: {x: 448, y: 0}
-  IsBreakpoint: 0
-  Next: {fileID: 114893726994580232}
-  Expression:
-    _statement: local.card.Movable = false
---- !u!114 &114340042515488770
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
-  m_Name: Ace Iteration
-  m_EditorClassIdentifier: 
-  Name: Ace Iteration
-  GraphPosition: {x: 1088, y: 51.2}
-  IsBreakpoint: 0
-  Container:
-    _variable: global.State.Aces
-    _tokens:
-    - Type: 0
-      Text: global
-    - Type: 0
-      Text: State
-    - Type: 0
-      Text: Aces
-  Index:
-    _variable: 
-    _tokens: []
-  Value:
-    _variable: local.ace
-    _tokens:
-    - Type: 0
-      Text: local
-    - Type: 0
-      Text: ace
-  Loop: {fileID: 114580086176516034}
---- !u!114 &114504160098888134
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2c1214b928c8b2a48b55a137ca3023dc, type: 3}
-  m_Name: Yield
-  m_EditorClassIdentifier: 
-  Name: Yield
   GraphPosition: {x: 128, y: -0}
   IsBreakpoint: 0
-  Next: {fileID: 114206857050440126}
---- !u!114 &114580086176516034
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Movable Test
-  m_EditorClassIdentifier: 
-  Name: Movable Test
-  GraphPosition: {x: 1408, y: 38.4}
-  IsBreakpoint: 0
-  OnTrue: {fileID: 114853665359960698}
-  OnFalse: {fileID: 0}
-  Condition:
-    _statement: 'local.deckSuit = global.Deck[local.card.Suit.Name]
-
-      local.previous = local.deckSuit[local.card.Index - 1]
-
-
-      local.previous.Row == local.ace.Row && local.previous.Column == local.ace.Column
-      - 1'
---- !u!114 &114586229638486660
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Movable Test for 2
-  m_EditorClassIdentifier: 
-  Name: Movable Test for 2
-  GraphPosition: {x: 1408, y: -51.2}
-  IsBreakpoint: 0
-  OnTrue: {fileID: 114853665359960698}
-  OnFalse: {fileID: 0}
-  Condition:
-    _statement: local.ace.Column == 0
---- !u!114 &114754531436896202
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
-  m_Name: Ace Iteration for 2
-  m_EditorClassIdentifier: 
-  Name: Ace Iteration for 2
-  GraphPosition: {x: 1088, y: -38.4}
-  IsBreakpoint: 0
-  Container:
-    _variable: global.State.Aces
-    _tokens:
-    - Type: 0
-      Text: global
-    - Type: 0
-      Text: State
-    - Type: 0
-      Text: Aces
-  Index:
-    _variable: 
-    _tokens: []
-  Value:
-    _variable: local.ace
-    _tokens:
-    - Type: 0
-      Text: local
-    - Type: 0
-      Text: ace
-  Loop: {fileID: 114586229638486660}
---- !u!114 &114853665359960698
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Movable
-  m_EditorClassIdentifier: 
-  Name: Movable
-  GraphPosition: {x: 1728, y: -0}
-  IsBreakpoint: 0
-  Next: {fileID: 114074848338094142}
+  Next: {fileID: 114072053865888632}
   Expression:
-    _statement: local.card.Movable = true
---- !u!114 &114893726994580232
+    _statement: local.card.Movable = false
+--- !u!114 &114344252803231214
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -229,22 +97,106 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3299c4f4ec492e74ebc48ccf20f59272, type: 3}
-  m_Name: Rank Branch
+  m_Script: {fileID: 11500000, guid: dcbf36d44c8307646ae6b4c67ca8b89d, type: 3}
+  m_Name: Break
   m_EditorClassIdentifier: 
-  Name: Rank Branch
-  GraphPosition: {x: 768, y: -12.8}
+  Name: Break
+  GraphPosition: {x: 1408, y: 0}
   IsBreakpoint: 0
-  Switch:
-    _statement: local.card.Rank
-  Outputs:
-    _keys:
-    - A
-    - 2
-    _values:
-    - {fileID: 0}
-    - {fileID: 114754531436896202}
-  Default: {fileID: 114340042515488770}
+--- !u!114 &114501313728011252
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Is Movable
+  m_EditorClassIdentifier: 
+  Name: Is Movable
+  GraphPosition: {x: 768, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114645094158174062}
+  Instruction:
+    _instruction: {fileID: 11400000, guid: a232be99990832a49a8a87a42662616c, type: 2}
+    _inputs:
+    - Name: card
+      Type: 0
+      Reference:
+        _variable: local.card
+        _tokens:
+        - Type: 0
+          Text: local
+        - Type: 0
+          Text: card
+      _valueData: EQAAAAAAAAA=
+      _valueObjects:
+      - {fileID: 0}
+    - Name: ace
+      Type: 0
+      Reference:
+        _variable: local.ace
+        _tokens:
+        - Type: 0
+          Text: local
+        - Type: 0
+          Text: ace
+      _valueData: EQAAAAAAAAA=
+      _valueObjects:
+      - {fileID: 0}
+    _outputs:
+    - Name: movable
+      Type: 1
+      Reference:
+        _variable: local.card.Movable
+        _tokens:
+        - Type: 0
+          Text: local
+        - Type: 0
+          Text: card
+        - Type: 0
+          Text: Movable
+  Context:
+    Type: 0
+    Reference:
+      _variable: local.card
+      _tokens:
+      - Type: 0
+        Text: local
+      - Type: 0
+        Text: card
+    Definition:
+      _type: 0
+      _constraint: 
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AAAAAA==
+    _objects: []
+  WaitForCompletion: 1
+--- !u!114 &114645094158174062
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Conditional
+  m_EditorClassIdentifier: 
+  Name: Conditional
+  GraphPosition: {x: 1088, y: -12.8}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114344252803231214}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: local.card.Movable
 --- !u!114 &114928373657034508
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -279,4 +231,4 @@ MonoBehaviour:
       Text: local
     - Type: 0
       Text: card
-  Loop: {fileID: 114504160098888134}
+  Loop: {fileID: 114206857050440126}

@@ -58,23 +58,28 @@ namespace PiRhoSoft.CompositionEngine
 		public void RefreshInputs()
 		{
 			var inputs = new VariableDefinitionList();
-			var requests = new VariableDefinitionList();
-
-			GetInputs(requests);
-
-			foreach (var request in requests)
-				UpdateDefinition(inputs, request, true);
-
-			foreach (var existing in Inputs)
-				UpdateDefinition(inputs, existing, false);
-
-			Inputs = inputs;
+			GetInputs(inputs);
+			Inputs = RefreshDefinitions(inputs);
 		}
 
 		public void RefreshOutputs()
 		{
-			Outputs = new VariableDefinitionList();
-			GetOutputs(Outputs);
+			var outputs = new VariableDefinitionList();
+			GetOutputs(outputs);
+			Outputs = RefreshDefinitions(outputs);
+		}
+
+		private VariableDefinitionList RefreshDefinitions(VariableDefinitionList requests)
+		{
+			var results = new VariableDefinitionList();
+
+			foreach (var request in requests)
+				UpdateDefinition(results, request, true);
+
+			foreach (var existing in Inputs)
+				UpdateDefinition(results, existing, false);
+
+			return results;
 		}
 
 		private void UpdateDefinition(VariableDefinitionList definitions, VariableDefinition definition, bool add)

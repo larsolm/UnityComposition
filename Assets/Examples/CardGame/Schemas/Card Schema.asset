@@ -63,6 +63,15 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
+    - Name: Visible
+      Definition:
+        _type: 1
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: false
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
     - Name: Complete
       Definition:
         _type: 1
@@ -81,4 +90,13 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 184
+    - Name: Active
+      Definition:
+        _type: 1
+        _constraint: 
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 191

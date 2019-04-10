@@ -57,8 +57,8 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class InstructionStore : IVariableStore
 	{
-		private const string _invalidContextError = "(CISIC) failed to create context for {0}: the variable '{1}' does not satisfy the contraint";
-		private const string _invalidInputError = "(CISII) failed to create input for {0}: the variable '{1}' does not satisfy the contraint";
+		private const string _invalidContextError = "(CISIC) failed to create context for {0}: the variable '{1}' does not satisfy the constraint";
+		private const string _invalidInputError = "(CISII) failed to create input for {0}: the variable '{1}' does not satisfy the constraint";
 		private const string _missingInputError = "(CISMI) failed to read input {0}: the variable '{1}' could not be found";
 		private const string _missingOutputError = "(CISMO) failed to store output {0}: the variable '{1}' could not be found";
 		private const string _readOnlyOutputError = "(CISROO) failed to store output {0}: the variable '{1}' is read only";
@@ -91,13 +91,13 @@ namespace PiRhoSoft.CompositionEngine
 			Context = ResolveValue(instruction.ContextDefinition, context, instruction, _invalidContextError, ContextName);
 		}
 
-		public void WriteInputs(InstructionCaller instruction, IList<InstructionInput> inputs)
+		public void WriteInputs(InstructionCaller instruction, IList<InstructionInput> inputs, IVariableStore caller)
 		{
 			foreach (var input in inputs)
 			{
 				if (input.Type == InstructionInputType.Reference)
 				{
-					var value = input.Reference.GetValue(this);
+					var value = input.Reference.GetValue(caller);
 					var definition = instruction.GetInputDefinition(input);
 
 					value = ResolveValue(definition.Definition, value, instruction.Instruction, _invalidInputError, definition.Name);
@@ -120,7 +120,7 @@ namespace PiRhoSoft.CompositionEngine
 				Output.AddVariable(output.Name, VariableValue.Empty);
 		}
 
-		public void ReadOutputs(IList<InstructionOutput> outputs)
+		public void ReadOutputs(IList<InstructionOutput> outputs, IVariableStore caller)
 		{
 			foreach (var output in outputs)
 			{
@@ -130,7 +130,7 @@ namespace PiRhoSoft.CompositionEngine
 
 					if (value.Type != VariableType.Empty)
 					{
-						var result = output.Reference.SetValue(this, value);
+						var result = output.Reference.SetValue(caller, value);
 
 						switch (result)
 						{

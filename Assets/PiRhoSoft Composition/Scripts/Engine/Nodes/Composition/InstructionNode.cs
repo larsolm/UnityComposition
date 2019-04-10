@@ -46,9 +46,9 @@ namespace PiRhoSoft.CompositionEngine
 				context = variables.Context;
 
 			if (WaitForCompletion)
-				yield return Instruction.Execute(context);
+				yield return Instruction.Execute(variables, context);
 			else
-				CompositionManager.Instance.RunInstruction(Instruction, context);
+				CompositionManager.Instance.RunInstruction(Instruction, variables, context);
 
 			graph.GoTo(Next, nameof(Next));
 		}
