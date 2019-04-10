@@ -91,7 +91,7 @@ MonoBehaviour:
     - Name: Rows
       Definition:
         _type: 19
-        _constraint: Empty|
+        _constraint: String|-
         _tag: Setup
         _initializer:
           _statement: 
@@ -115,4 +115,4 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 80
+  _version: 81

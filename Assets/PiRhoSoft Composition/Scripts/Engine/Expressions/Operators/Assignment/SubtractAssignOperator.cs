@@ -17,7 +17,8 @@
 
 				for (var i = 0; i < list.Count; i++)
 				{
-					var comparison = VariableHandler.IsEqual(left, right);
+					var item = list.GetVariable(i);
+					var comparison = VariableHandler.IsEqual(item, right);
 
 					if (comparison.HasValue && comparison.Value)
 					{

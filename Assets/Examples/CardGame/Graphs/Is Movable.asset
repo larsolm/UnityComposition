@@ -142,7 +142,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114376349029503948}
   OnFalse: {fileID: 114245761533034482}
   Condition:
-    _statement: input.ace.Column == 0
+    _statement: input.ace.Column == 0 && !input.card.Complete
 --- !u!114 &114894803618125250
 MonoBehaviour:
   m_ObjectHideFlags: 1

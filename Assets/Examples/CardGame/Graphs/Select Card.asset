@@ -579,10 +579,12 @@ MonoBehaviour:
   Context:
     Type: 1
     Reference:
-      _variable: card
+      _variable: global.SelectedCard
       _tokens:
       - Type: 0
-        Text: card
+        Text: global
+      - Type: 0
+        Text: SelectedCard
     Definition:
       _type: 0
       _constraint: 

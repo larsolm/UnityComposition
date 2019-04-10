@@ -84,7 +84,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114524819183424472}
   Expression:
-    _statement: card.Complete = card.Column == 0
+    _statement: 'local.stateSuit = global.State[card.Suit.Name]
+
+
+      card.Complete = card.Column == 0'
 --- !u!114 &114246263796642296
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -99,10 +102,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Name: Set Row
   GraphPosition: {x: 1920, y: -0}
-  IsBreakpoint: 0
+  IsBreakpoint: 1
   Next: {fileID: 0}
   Expression:
-    _statement: global.State.Rows[card.Row] = global.State[card.Suit.Name]
+    _statement: global.State.Rows[card.Row] = card.Suit.Name
 --- !u!114 &114318365090266194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -138,7 +141,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114246263796642296}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: card.Index == 0
+    _statement: card.Index == 1
 --- !u!114 &114400101997620392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -249,7 +252,7 @@ MonoBehaviour:
   m_Name: Make Complete
   m_EditorClassIdentifier: 
   Name: Make Complete
-  GraphPosition: {x: 1280, y: -0}
+  GraphPosition: {x: 1280, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114390368604380124}
   Expression:

@@ -149,9 +149,9 @@ MonoBehaviour:
   Expression:
     _statement: 'local.row = 0
 
-      local.rowList = global.State.Rows[local.row]
+      local.rowSuit = global.State.Rows[local.row]
 
-      local.column = local.rowList.Count'
+      local.column = local.rowSuit == "" ? 0 : global.State[local.rowSuit].Count'
 --- !u!114 &114613535626573654
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -366,6 +366,6 @@ MonoBehaviour:
   Expression:
     _statement: 'local.row += 1
 
-      local.rowList = global.State.Rows[local.row]
+      local.rowSuit = global.State.Rows[local.row]
 
-      local.column = local.rowList.Count'
+      local.column = local.rowSuit == "" ? 0 : global.State[local.rowSuit].Count'
