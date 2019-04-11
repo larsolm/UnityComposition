@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f95977d1adbba4b9a826aff14f0418, type: 3}
+  m_Name: BattlePotion
+  m_EditorClassIdentifier: 
+  _schema: {fileID: 11400000, guid: a310b37e56d4d4b41af7727ae3a763a4, type: 2}
+  Variables:
+    _version: 10
+    _variablesData:
+    - BE5hbWUPAAAABlBvdGlvbg==
+    - C0Rlc2NyaXB0aW9uDwAAAAxIZWFscyAxMDAgSFA=
+    - C0luc3RydWN0aW9uEQAAAAAAAAA=
+    _variablesObjects:
+    - {fileID: 11400000, guid: cd2404c6788c6ab4a84852d3fd384900, type: 2}

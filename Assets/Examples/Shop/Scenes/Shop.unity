@@ -999,7 +999,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c34c0c14dd663d042a12ed42c60b8752, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
+  _schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
   Variables:
     _version: 16
     _variablesData:
@@ -1320,7 +1320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
+  _schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
   Variables:
     _version: 16
     _variablesData:

@@ -1,0 +1,266 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: BoardNewGame
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114822524818316652}
+    - {fileID: 114273874678444446}
+    - {fileID: 114456419000300960}
+    - {fileID: 114447587388730026}
+    - {fileID: 114985672940832184}
+    - {fileID: 114351045605106056}
+    - {fileID: 114230166674494026}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 114822524818316652}
+--- !u!114 &114230166674494026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81db09edfc25024b94b5b1d2295f584, type: 3}
+  m_Name: Reset Piece(Clone)
+  m_EditorClassIdentifier: 
+  Name: Reset Piece
+  GraphPosition: {x: 1267.2001, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114351045605106056}
+  Object:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Tag: NewGame
+--- !u!114 &114273874678444446
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Reset Spaces(Clone)
+  m_EditorClassIdentifier: 
+  Name: Reset Spaces
+  GraphPosition: {x: 627.2, y: -51.2}
+  IsBreakpoint: 0
+  Container:
+    _variable: global.Spaces
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Spaces
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: space
+    _tokens:
+    - Type: 0
+      Text: space
+  Loop: {fileID: 114456419000300960}
+--- !u!114 &114351045605106056
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Return to Start(Clone)
+  m_EditorClassIdentifier: 
+  Name: Return to Start
+  GraphPosition: {x: 1574.4, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Transform:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: piece.StartingPosition
+      _tokens:
+      - Type: 0
+        Text: piece
+      - Type: 0
+        Text: StartingPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 1
+  WaitForCompletion: 0
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 10
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114447587388730026
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Reset Players(Clone)
+  m_EditorClassIdentifier: 
+  Name: Reset Players
+  GraphPosition: {x: 627.2, y: 38.4}
+  IsBreakpoint: 0
+  Container:
+    _variable: global.Players
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Players
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: player
+    _tokens:
+    - Type: 0
+      Text: player
+  Loop: {fileID: 114985672940832184}
+--- !u!114 &114456419000300960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81db09edfc25024b94b5b1d2295f584, type: 3}
+  m_Name: Reset Space(Clone)
+  m_EditorClassIdentifier: 
+  Name: Reset Space
+  GraphPosition: {x: 947.2, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: space
+    _tokens:
+    - Type: 0
+      Text: space
+  Tag: NewGame
+--- !u!114 &114822524818316652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: New Game
+  m_EditorClassIdentifier: 
+  Name: New Game
+  GraphPosition: {x: 307.2, y: -12.8}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114273874678444446}
+    - {fileID: 114447587388730026}
+--- !u!114 &114985672940832184
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Reset Pieces(Clone)
+  m_EditorClassIdentifier: 
+  Name: Reset Pieces
+  GraphPosition: {x: 947.2, y: 38.4}
+  IsBreakpoint: 0
+  Container:
+    _variable: player.Pieces
+    _tokens:
+    - Type: 0
+      Text: player
+    - Type: 0
+      Text: Pieces
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: piece
+    _tokens:
+    - Type: 0
+      Text: piece
+  Loop: {fileID: 114230166674494026}

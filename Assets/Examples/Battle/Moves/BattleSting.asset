@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f95977d1adbba4b9a826aff14f0418, type: 3}
+  m_Name: BattleSting
+  m_EditorClassIdentifier: 
+  _schema: {fileID: 11400000, guid: 6081066e2f332ac4d842b4cb3d6bde7a, type: 2}
+  Variables:
+    _version: 10
+    _variablesData:
+    - BE5hbWUPAAAABVN0aW5n
+    - C0Rlc2NyaXB0aW9uDwAAAA1DYXVzZXMgcG9pc29u
+    - C0luc3RydWN0aW9uEQAAAAAAAAA=
+    _variablesObjects:
+    - {fileID: 11400000, guid: 6c59d32e18a3b3f4c9abcc783f0be824, type: 2}

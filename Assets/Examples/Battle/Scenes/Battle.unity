@@ -1327,8 +1327,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1243335644}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 3, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
@@ -1345,18 +1345,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: 49b4029d444822046b7e00b8d9f69991, type: 2}
+  _schema: {fileID: 11400000, guid: 49b4029d444822046b7e00b8d9f69991, type: 2}
   Variables:
-    _version: 199
+    _version: 265
     _variablesData:
     - BE5hbWUPAAAAB0hleGFnb24=
+    - B0Rpc3BsYXkRAAAAAAAAAA==
+    - CUludmVudG9yeRMAAAAAAAAA
+    - BU1vdmVzEwAAAAEAAAARAAAAAQAAAA==
     - BUNvbG9yDgAAAIpxQz81NDQ/hvBVPwAAgD8=
     - AkhQAgAAAGIAAAA=
     - BkF0dGFjawIAAABhAAAA
     - B0RlZmVuc2UCAAAAUQAAAA==
     - BVNwZWVkAgAAAFoAAAA=
     - CUN1cnJlbnRIUAIAAABiAAAA
-    _variablesObjects: []
+    - BlBvaXNvbgEAAAAA
+    - CVZhcmlhYmxlcxIAAAAAAAAA
+    _variablesObjects:
+    - {fileID: 400237417}
+    - {fileID: 11400000, guid: db94baa9dc138d344874ff35932e2d73, type: 2}
 --- !u!1 &1468025358
 GameObject:
   m_ObjectHideFlags: 0
@@ -1431,8 +1438,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1468025358}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3, y: -1, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: -3, y: 0, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
@@ -1449,18 +1456,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: 49b4029d444822046b7e00b8d9f69991, type: 2}
+  _schema: {fileID: 11400000, guid: 49b4029d444822046b7e00b8d9f69991, type: 2}
   Variables:
-    _version: 191
+    _version: 265
     _variablesData:
     - BE5hbWUPAAAACFRyaWFuZ2xl
+    - B0Rpc3BsYXkRAAAAAAAAAA==
+    - CUludmVudG9yeRMAAAAAAAAA
+    - BU1vdmVzEwAAAAEAAAARAAAAAQAAAA==
     - BUNvbG9yDgAAACweaj/iLfE+6W6qPgAAgD8=
     - AkhQAgAAAFEAAAA=
     - BkF0dGFjawIAAABfAAAA
     - B0RlZmVuc2UCAAAAYAAAAA==
     - BVNwZWVkAgAAAFMAAAA=
     - CUN1cnJlbnRIUAIAAABRAAAA
-    _variablesObjects: []
+    - BlBvaXNvbgEAAAAA
+    - CVZhcmlhYmxlcxIAAAAAAAAA
+    _variablesObjects:
+    - {fileID: 706810104}
+    - {fileID: 11400000, guid: db94baa9dc138d344874ff35932e2d73, type: 2}
 --- !u!1 &1610588314
 GameObject:
   m_ObjectHideFlags: 0
@@ -1932,6 +1946,8 @@ GameObject:
   - component: {fileID: 2128294646}
   - component: {fileID: 2128294645}
   - component: {fileID: 2128294644}
+  - component: {fileID: 2128294647}
+  - component: {fileID: 2128294648}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -2003,3 +2019,53 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2128294647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128294643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graph:
+    _instruction: {fileID: 11400000, guid: 7f8dda64f58b71d4a9bff0753f1751b7, type: 2}
+    _inputs:
+    - Name: Multiplayer
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQAAAAE=
+      _valueObjects: []
+    _outputs: []
+--- !u!114 &2128294648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2128294643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Constraints:
+  - _type: 19
+    _constraint: Object|PiRhoSoft.CompositionEngine.BindingRoot, Assembly-CSharp,
+      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  _variablesData:
+  - CEZpZ2h0ZXJzEwAAAAIAAAARAAAAAAAAABEAAAABAAAA
+  _variablesObjects:
+  - {fileID: 1243335647}
+  - {fileID: 1468025361}
