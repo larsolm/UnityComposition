@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionExample
 {
 	[RequireComponent(typeof(Rigidbody2D))]
 	[AddComponentMenu("PiRho Soft/Examples/Player")]
-	public class Player : VariableStoreComponent
+	public class Player : VariableSetComponent
 	{
 		[MappedVariable] public Camera Camera;
 		[MappedVariable] public float Acceleration = 1.0f;

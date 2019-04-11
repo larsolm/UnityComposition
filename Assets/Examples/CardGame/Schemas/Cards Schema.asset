@@ -20,7 +20,8 @@ MonoBehaviour:
     - Name: Ranks
       Definition:
         _type: 19
-        _constraint: String|
+        _constraint: String|-
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -29,11 +30,12 @@ MonoBehaviour:
     - Name: Suits
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: Object|UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 28
+  _version: 29

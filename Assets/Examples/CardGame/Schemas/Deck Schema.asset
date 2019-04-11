@@ -21,8 +21,9 @@ MonoBehaviour:
     - Name: Spades
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: Object|UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: Load
         _initializer:
           _statement: 
@@ -31,8 +32,9 @@ MonoBehaviour:
     - Name: Clubs
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: Object|UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: Load
         _initializer:
           _statement: 
@@ -41,8 +43,9 @@ MonoBehaviour:
     - Name: Hearts
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: Object|UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: Load
         _initializer:
           _statement: 
@@ -51,11 +54,12 @@ MonoBehaviour:
     - Name: Diamonds
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: Object|UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: Load
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 82
+  _version: 84

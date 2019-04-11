@@ -520,24 +520,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Constraints:
   - _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
   - _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
   - _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -580,9 +580,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: 63a314e9c6be02b40970ec2a9b241471, type: 2}
+  _schema: {fileID: 11400000, guid: 63a314e9c6be02b40970ec2a9b241471, type: 2}
   Variables:
-    _version: 80
+    _version: 83
     _variablesData:
     - ClByb2Nlc3NpbmcCAAAAAAAAAA==
     - BUNhcmRzEwAAAAAAAAA=
@@ -1395,9 +1395,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Schema: {fileID: 11400000, guid: 2bb7269032061c048a61bd8260212ead, type: 2}
+  _schema: {fileID: 11400000, guid: 2bb7269032061c048a61bd8260212ead, type: 2}
   Variables:
-    _version: 82
+    _version: 84
     _variablesData:
     - BlNwYWRlcxMAAAAAAAAA
     - BUNsdWJzEwAAAAAAAAA=

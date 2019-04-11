@@ -33,12 +33,35 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool RemoveVariable(string name)
 		{
-			return _map.Remove(name);
+			if (_map.TryGetValue(name, out var index))
+			{
+				RemoveVariableAt(index);
+				_map.Remove(name);
+				return true;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+		public void RemoveVariable(int index)
+		{
+			_map.Remove(_variables[index].Name);
+			RemoveVariableAt(index);
+		}
+
+		private void RemoveVariableAt(int index)
+		{
+			_variables.RemoveAt(index);
+
+			for (var i = index; i < _variables.Count; i++)
+				_map[_variables[i].Name] = i;
 		}
 
 		public virtual VariableValue GetVariable(string name)
 		{
-			return _map.TryGetValue(name, out int index) ? _variables[index].Value : VariableValue.Empty;
+			return _map.TryGetValue(name, out var index) ? _variables[index].Value : VariableValue.Empty;
 		}
 
 		public virtual SetVariableResult SetVariable(string name, VariableValue value)

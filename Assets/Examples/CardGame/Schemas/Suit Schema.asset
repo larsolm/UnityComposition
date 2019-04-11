@@ -20,16 +20,18 @@ MonoBehaviour:
     - Name: Name
       Definition:
         _type: 15
-        _constraint: 
+        _constraint: '-'
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: '""'
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Color
       Definition:
         _type: 14
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -40,9 +42,10 @@ MonoBehaviour:
         _type: 17
         _constraint: UnityEngine.Sprite, UnityEngine.CoreModule, Version=0.0.0.0,
           Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 12
+  _version: 14
