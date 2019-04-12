@@ -142,7 +142,7 @@ Transform:
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 4
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &17113802
 BoxCollider2D:
@@ -248,7 +248,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 15
+  m_RootOrder: 20
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &165059241
 BoxCollider2D:
@@ -351,31 +351,31 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: -0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
+  - {fileID: 867759260}
+  - {fileID: 664957348}
+  - {fileID: 2121685703}
+  - {fileID: 558059543}
+  - {fileID: 1607238516}
+  - {fileID: 1851505503}
+  - {fileID: 1609538562}
+  - {fileID: 1656553357}
+  - {fileID: 1488146956}
   - {fileID: 949008250}
   - {fileID: 1924036096}
   - {fileID: 1488107316}
   - {fileID: 985545290}
   - {fileID: 17113801}
+  - {fileID: 2144736050}
   - {fileID: 1138514899}
-  - {fileID: 867759260}
-  - {fileID: 1488146956}
   - {fileID: 1797301556}
   - {fileID: 1856927973}
   - {fileID: 319425322}
-  - {fileID: 1609538562}
   - {fileID: 1828784267}
-  - {fileID: 1851505503}
-  - {fileID: 2144736050}
   - {fileID: 165059240}
   - {fileID: 1289615186}
   - {fileID: 294805585}
   - {fileID: 627235131}
   - {fileID: 706395713}
-  - {fileID: 1656553357}
-  - {fileID: 1607238516}
-  - {fileID: 664957348}
-  - {fileID: 2121685703}
-  - {fileID: 558059543}
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -409,7 +409,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 17
+  m_RootOrder: 22
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &294805586
 BoxCollider2D:
@@ -515,7 +515,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 10
+  m_RootOrder: 18
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &319425323
 BoxCollider2D:
@@ -604,7 +604,7 @@ GameObject:
   - component: {fileID: 558059544}
   - component: {fileID: 558059545}
   m_Layer: 0
-  m_Name: Key (3)
+  m_Name: RedKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -622,7 +622,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 24
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!61 &558059544
 BoxCollider2D:
@@ -659,14 +659,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 558059542}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Name: KeyName
@@ -697,7 +693,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: RedKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -779,7 +775,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 18
+  m_RootOrder: 23
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &627235132
 BoxCollider2D:
@@ -954,7 +950,7 @@ GameObject:
   - component: {fileID: 664957349}
   - component: {fileID: 664957350}
   m_Layer: 0
-  m_Name: Key (1)
+  m_Name: BlueKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -972,7 +968,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 22
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!61 &664957349
 BoxCollider2D:
@@ -1009,14 +1005,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 664957347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Name: KeyName
@@ -1047,7 +1039,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: BlueKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -1129,7 +1121,7 @@ Transform:
   m_LocalScale: {x: 2, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 19
+  m_RootOrder: 24
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &706395714
 BoxCollider2D:
@@ -1218,7 +1210,7 @@ GameObject:
   - component: {fileID: 867759262}
   - component: {fileID: 867759263}
   m_Layer: 0
-  m_Name: Key
+  m_Name: GreenKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1236,7 +1228,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 6
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!212 &867759261
 SpriteRenderer:
@@ -1321,14 +1313,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 867759259}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Name: KeyName
@@ -1359,7 +1347,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: GreenKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -1393,7 +1381,7 @@ Transform:
   m_LocalScale: {x: 10, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 0
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &949008251
 BoxCollider2D:
@@ -1499,7 +1487,7 @@ Transform:
   m_LocalScale: {x: 7.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 3
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &985545291
 BoxCollider2D:
@@ -1605,7 +1593,7 @@ Transform:
   m_LocalScale: {x: 3.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 5
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1138514900
 BoxCollider2D:
@@ -1711,7 +1699,7 @@ Transform:
   m_LocalScale: {x: 3.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 16
+  m_RootOrder: 21
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1289615187
 BoxCollider2D:
@@ -1817,7 +1805,7 @@ Transform:
   m_LocalScale: {x: 1, y: 4, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 2
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1488107317
 BoxCollider2D:
@@ -1924,7 +1912,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1488146957
 SpriteRenderer:
@@ -1983,18 +1971,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1488146955}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: 6c29bd36606710b49874065ef0555329, type: 2}
     _inputs: []
     _outputs: []
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -2037,7 +2021,7 @@ GameObject:
   - component: {fileID: 1607238517}
   - component: {fileID: 1607238519}
   m_Layer: 0
-  m_Name: Square (37)
+  m_Name: GreenDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2055,7 +2039,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 21
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1607238517
 BoxCollider2D:
@@ -2140,14 +2124,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1607238515}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
     _inputs:
     - Name: KeyCount
@@ -2178,7 +2158,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: GreenKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -2195,7 +2175,7 @@ GameObject:
   - component: {fileID: 1609538563}
   - component: {fileID: 1609538565}
   m_Layer: 0
-  m_Name: Square (30)
+  m_Name: RedDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2213,7 +2193,7 @@ Transform:
   m_LocalScale: {x: 2, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 11
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1609538563
 BoxCollider2D:
@@ -2298,14 +2278,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1609538561}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
     _inputs:
     - Name: KeyCount
@@ -2336,7 +2312,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: RedKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -2353,7 +2329,7 @@ GameObject:
   - component: {fileID: 1656553358}
   - component: {fileID: 1656553360}
   m_Layer: 0
-  m_Name: Square (36)
+  m_Name: YellowDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2371,7 +2347,7 @@ Transform:
   m_LocalScale: {x: 2, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 20
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1656553358
 BoxCollider2D:
@@ -2456,14 +2432,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1656553356}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
     _inputs:
     - Name: KeyCount
@@ -2494,7 +2466,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: YellowKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -2528,7 +2500,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 8
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1797301557
 BoxCollider2D:
@@ -2634,7 +2606,7 @@ Transform:
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 12
+  m_RootOrder: 19
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1828784268
 BoxCollider2D:
@@ -2723,7 +2695,7 @@ GameObject:
   - component: {fileID: 1851505504}
   - component: {fileID: 1851505506}
   m_Layer: 0
-  m_Name: Square (32)
+  m_Name: BlueDoor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2741,7 +2713,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 2, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 13
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1851505504
 BoxCollider2D:
@@ -2826,14 +2798,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1851505502}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: 2983611709602f14ba166d23b2cba35f, type: 2}
     _inputs:
     - Name: KeyCount
@@ -2864,7 +2832,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: BlueKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -2898,7 +2866,7 @@ Transform:
   m_LocalScale: {x: 4, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 9
+  m_RootOrder: 17
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1856927974
 BoxCollider2D:
@@ -3004,7 +2972,7 @@ Transform:
   m_LocalScale: {x: 7.5, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 1
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1924036097
 BoxCollider2D:
@@ -3093,7 +3061,7 @@ GameObject:
   - component: {fileID: 2121685704}
   - component: {fileID: 2121685705}
   m_Layer: 0
-  m_Name: Key (2)
+  m_Name: YellowKey
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3111,7 +3079,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children: []
   m_Father: {fileID: 247694928}
-  m_RootOrder: 23
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
 --- !u!61 &2121685704
 BoxCollider2D:
@@ -3148,14 +3116,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2121685702}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: e7e81eac6427188488388c6b2136a63a, type: 2}
     _inputs:
     - Name: KeyName
@@ -3186,7 +3150,7 @@ MonoBehaviour:
           Text: global
         - Type: 0
           Text: YellowKey
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
@@ -3416,5 +3380,56 @@ PrefabInstance:
       propertyPath: Camera
       value: 
       objectReference: {fileID: 663784546}
+    - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[0]
+      value: BlBsYXllchEAAAAAAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[1]
+      value: BlJlZEtleQAAAAA=
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[0]._type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[0]._constraint
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[1]._type
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[1]._constraint
+      value: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300098842929943238, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6300098842929943238, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[7]
+      value: CU5leHRMZXZlbA8AAAAFTWF6ZTI=
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f1753990295b7d43952ed76b4723a1d, type: 3}

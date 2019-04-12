@@ -29,17 +29,14 @@ namespace PiRhoSoft.CompositionExample
 				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = true }, _colliders);
 				for (var i = 0; i < count; i++)
 				{
-					var interaction = _colliders[i].GetComponent<Interaction>();
+					var interaction = _colliders[i].GetComponent<GraphTrigger>();
 					if (interaction)
 					{
-						CompositionManager.Instance.RunInstruction(interaction.OnInteract, VariableValue.Create(interaction));
+						interaction.Run();
 						break;
 					}
 				}
 			}
-
-			if (Camera)
-				Camera.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.transform.position.z);
 		}
 
 		void FixedUpdate()
@@ -50,32 +47,10 @@ namespace PiRhoSoft.CompositionExample
 			_body.AddForce(new Vector2(horizontal * Acceleration, vertical * Acceleration), ForceMode2D.Impulse);
 		}
 
-		void OnTriggerEnter2D(Collider2D collision)
+		void LateUpdate()
 		{
-			var interaction = collision.GetComponent<Interaction>();
-			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnEnter, VariableValue.Create(interaction));
-		}
-
-		void OnTriggerExit2D(Collider2D collision)
-		{
-			var interaction = collision.GetComponent<Interaction>();
-			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnLeave, VariableValue.Create(interaction));
-		}
-
-		void OnCollisionEnter2D(Collision2D collision)
-		{
-			var interaction = collision.collider.GetComponent<Interaction>();
-			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnEnter, VariableValue.Create(interaction));
-		}
-
-		void OnCollisionExit2D(Collision2D collision)
-		{
-			var interaction = collision.collider.GetComponent<Interaction>();
-			if (interaction)
-				CompositionManager.Instance.RunInstruction(interaction.OnLeave, VariableValue.Create(interaction));
+			if (Camera)
+				Camera.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.transform.position.z);
 		}
 	}
 }

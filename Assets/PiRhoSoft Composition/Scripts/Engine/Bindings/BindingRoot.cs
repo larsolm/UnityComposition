@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 		private class BaseBindingRoot : IVariableStore
 		{
 			public IEnumerable<string> GetVariableNames() => Enumerable.Repeat(CompositionManager.GlobalStoreName, 1);
-			public VariableValue GetVariable(string name) => name == CompositionManager.GlobalStoreName ? VariableValue.Create(CompositionManager.Instance.GlobalStore) : VariableValue.Empty;
+			public VariableValue GetVariable(string name) => name == CompositionManager.GlobalStoreName ? VariableValue.Create(CompositionManager.Instance.DefaultStore) : VariableValue.Empty;
 			public SetVariableResult SetVariable(string name, VariableValue value) => name == CompositionManager.GlobalStoreName ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
 		}
 

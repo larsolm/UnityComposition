@@ -137,6 +137,13 @@ namespace PiRhoSoft.CompositionEditor
 				_definition = control._pool.Definitions[index];
 			}
 
+			public override void OnOpen()
+			{
+				// This needs to be set so that when when a constraint changes in the selectionpopup the change is reflected immediately
+				// Can't be set in setup because editorWindow is null at that time
+				editorWindow.autoRepaintOnSceneChange = true;
+			}
+
 			public override Vector2 GetWindowSize()
 			{
 				var size = base.GetWindowSize();
@@ -149,9 +156,9 @@ namespace PiRhoSoft.CompositionEditor
 				return size;
 			}
 
-			public override void OnGUI(Rect rect)
+			public override void OnGUI(Rect position)
 			{
-				rect = RectHelper.Inset(rect, 5.0f);
+				var rect = RectHelper.Inset(position, 5.0f);
 				var nameRect = RectHelper.TakeLine(ref rect);
 				var buttonRect = RectHelper.TakeTrailingHeight(ref rect, EditorGUIUtility.singleLineHeight);
 				RectHelper.TakeTrailingHeight(ref rect, RectHelper.VerticalSpace);

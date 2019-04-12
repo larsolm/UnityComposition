@@ -9,10 +9,18 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
 	public class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
+		private class DefaultGlobalStore : IVariableStore
+		{
+			public IEnumerable<string> GetVariableNames() => new List<string> { GlobalStoreName };
+			public VariableValue GetVariable(string name) => name == GlobalStoreName ? VariableValue.Create(Instance.GlobalStore) : VariableValue.Empty;
+			public SetVariableResult SetVariable(string name, VariableValue value) => name == GlobalStoreName ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
+		}
+
 		public const string GlobalStoreName = "global";
 		public static string CommandFolder = "Commands";
 
-		public VariableStore GlobalStore = new VariableStore();
+		public IVariableStore DefaultStore { get; private set; } = new DefaultGlobalStore();
+		public VariableStore GlobalStore { get; private set; } = new VariableStore();
 
 		void Awake()
 		{
@@ -34,12 +42,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void RunInstruction(InstructionCaller caller, VariableValue context)
 		{
-			RunInstruction(caller, GlobalStore, context);
+			RunInstruction(caller, DefaultStore, context);
 		}
 
 		public void RunInstruction(InstructionCaller caller, IVariableStore store, VariableValue context)
 		{
-			var enumerator = caller.Execute(store, context);
+			var enumerator = caller.Execute(store ?? DefaultStore, context);
 			StartCoroutine(new JoinEnumerator(enumerator, caller.Instruction));
 		}
 
