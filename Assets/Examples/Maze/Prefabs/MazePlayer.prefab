@@ -15,10 +15,11 @@ GameObject:
   - component: {fileID: 2643244533930277760}
   - component: {fileID: 2643244533930277761}
   - component: {fileID: 2643244533930277764}
-  - component: {fileID: 2643244533930277774}
   - component: {fileID: 2643244533930277775}
+  - component: {fileID: 4980581016010646345}
+  - component: {fileID: 1749428514748622999}
   m_Layer: 0
-  m_Name: Player
+  m_Name: MazePlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -250,87 +251,6 @@ MonoBehaviour:
     _variablesObjects: []
   Camera: {fileID: 0}
   Acceleration: 1
---- !u!114 &2643244533930277774
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2643244533930277767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Constraints:
-  - _type: 17
-    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 15
-    _constraint: '-'
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  _variablesData:
-  - BlBsYXllchEAAAAAAAAA
-  - BlJlZEtleQIAAAAAAAAA
-  - B0JsdWVLZXkCAAAAAAAAAA==
-  - CVllbGxvd0tleQIAAAAAAAAA
-  - CEdyZWVuS2V5AgAAAAAAAAA=
-  - Bkpld2VscwIAAAAAAAAA
-  - DEpld2Vsc05lZWRlZAIAAAAAAAAA
-  - CU5leHRMZXZlbA8AAAAFTWF6ZTI=
-  _variablesObjects:
-  - {fileID: 2643244533930277764}
 --- !u!114 &2643244533930277775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -343,7 +263,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: cab4e1fde852f104ea0748e49bd383c7, type: 2}
     _inputs:
@@ -355,3 +274,105 @@ MonoBehaviour:
       _valueData: DwAAAAdMZXZlbCAx
       _valueObjects: []
     _outputs: []
+--- !u!114 &4980581016010646345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2643244533930277767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e26cf2f98de8c074eb7eb04e1ae985ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1749428514748622999
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2643244533930277767}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Variables:
+    _variablesData:
+    - BlBsYXllchEAAAAAAAAA
+    - BlJlZEtleQIAAAAAAAAA
+    - B0JsdWVLZXkCAAAAAAAAAA==
+    - CEdyZWVuS2V5AgAAAAAAAAA=
+    - CVllbGxvd0tleQIAAAAAAAAA
+    - Bkpld2VscwIAAAAAAAAA
+    - DEpld2Vsc05lZWRlZAIAAAAAAAAA
+    - CU5leHRMZXZlbA8AAAAA
+    _variablesObjects:
+    - {fileID: 2643244533930277764}
+    Definitions:
+    - _type: 17
+      _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 2
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 2
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 2
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 2
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 2
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 2
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 15
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0

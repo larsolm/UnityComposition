@@ -281,7 +281,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			if (CompositionManager.Exists)
 			{
-				var value = reference.GetValue(CompositionManager.Instance.GlobalStore);
+				var value = reference.GetValue(CompositionManager.Instance.DefaultStore);
 
 				if (value.HasStore)
 				{
@@ -381,7 +381,7 @@ namespace PiRhoSoft.CompositionEditor
 				if (instruction.Key != null)
 					result = expression.Execute(instruction.Value.Instruction, instruction.Key.Variables);
 				else
-					result = expression.Execute(null, CompositionManager.Instance.GlobalStore);
+					result = expression.Execute(null, CompositionManager.Instance.DefaultStore);
 
 				Debug.LogFormat(_expressionResultLog, expression.Statement, result.Type, result);
 				return !result.IsEmpty;

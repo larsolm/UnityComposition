@@ -11,9 +11,9 @@ GameObject:
   - component: {fileID: 1687517679531072581}
   - component: {fileID: 1687517679531072583}
   - component: {fileID: 1687517679531072580}
-  - component: {fileID: 1687517679531072582}
+  - component: {fileID: 6221373470176365934}
   m_Layer: 0
-  m_Name: Jewel
+  m_Name: MazeJewel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -97,7 +97,7 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 0.5
---- !u!114 &1687517679531072582
+--- !u!114 &6221373470176365934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -106,18 +106,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1687517679531072602}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: fcf4a53052eb2184c99dfd3fa035b01e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnEnter:
+  EnterGraph:
     _instruction: {fileID: 11400000, guid: 9533a36b00e621e48a215d168b4b4a43, type: 2}
     _inputs: []
     _outputs: []
-  OnLeave:
+  ExitGraph:
     _instruction: {fileID: 0}
     _inputs: []
     _outputs: []

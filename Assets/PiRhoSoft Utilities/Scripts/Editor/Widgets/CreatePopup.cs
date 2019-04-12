@@ -65,13 +65,14 @@ namespace PiRhoSoft.UtilityEditor
 					HasChanged = true;
 			}
 
-			using (new EditorGUI.DisabledScope(!IsValid))
+			using (new EditorGUI.DisabledScope(!IsValid && !HasChanged))
 				create |= GUILayout.Button(_createButton.Content);
 
 			if (create)
 			{
 				IsValid = _validator();
 				HasChanged = false;
+				editorWindow.Repaint();
 
 				if (IsValid)
 				{
@@ -99,7 +100,7 @@ namespace PiRhoSoft.UtilityEditor
 		{
 			var create = false;
 
-			using (new InvalidScope(!HasChanged || IsNameValid))
+			using (new InvalidScope(HasChanged || IsNameValid))
 			{
 				var name = Name;
 				create |= EnterField.DrawString("NewItemName", GUIContent.none, ref name);
@@ -118,6 +119,11 @@ namespace PiRhoSoft.UtilityEditor
 		protected override void Reset()
 		{
 			Name = string.Empty;
+		}
+
+		public override void OnClose()
+		{
+			_focusName = true;
 		}
 	}
 }

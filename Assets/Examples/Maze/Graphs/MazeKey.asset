@@ -10,13 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
-  m_Name: Key
+  m_Name: MazeKey
   m_EditorClassIdentifier: 
   ContextName: key
   ContextDefinition:
     _type: 17
     _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -28,6 +29,7 @@ MonoBehaviour:
       Definition:
         _type: 15
         _constraint: +Red,Yellow,Green,Blue
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -37,6 +39,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -46,8 +49,9 @@ MonoBehaviour:
     _items:
     - Name: KeyCount
       Definition:
-        _type: 0
+        _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 

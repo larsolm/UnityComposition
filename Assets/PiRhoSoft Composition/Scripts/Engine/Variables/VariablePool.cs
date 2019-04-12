@@ -86,6 +86,8 @@ namespace PiRhoSoft.CompositionEngine
 
 			Variable.Load(variables, ref _variablesData, ref _variablesObjects);
 
+			base.Clear();
+
 			foreach (var variable in variables)
 				base.AddVariable(variable.Name, variable.Value); // bypass the override so the definition isn't added
 		}
