@@ -16,22 +16,24 @@ namespace PiRhoSoft.CompositionEngine
 
 		public enum TimeFormatType
 		{
-			Full,
+			SecondsMilliseconds,
 			MinutesSeconds,
 			MinutesSecondsMilliseconds,
+			HoursMinutes,
 			Custom
 		}
 
 		public enum NumberFormatType
 		{
-			Integer,
-			Commas,
 			Percentage,
+			Commas,
+			Rounded,
+			Decimal,
 			Custom
 		}
 
-		public static readonly string[] TimeFormats = new string[(int)TimeFormatType.Custom]{ "g", @"mm\:ss", @"mm\:ss\.fff" };
-		public static readonly string[] NumberFormats = new string[(int)NumberFormatType.Custom] { "0", "#,###,##0", "0.#%" };
+		public static readonly string[] TimeFormats = new string[(int)TimeFormatType.Custom]{ @"s\.fff", @"m\:ss", @"m\:ss\.fff", @"h\:mm" };
+		public static readonly string[] NumberFormats = new string[(int)NumberFormatType.Custom] { "0.#%", "#,###,##0", "0", "0.00" };
 
 		[Tooltip("The format of the displayed string")]
 		public string Format = "{0}";

@@ -20,8 +20,9 @@ MonoBehaviour:
     - Name: Inventory
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableSetComponent, Assembly-CSharp,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -31,9 +32,10 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: 0
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 16
+  _version: 29
