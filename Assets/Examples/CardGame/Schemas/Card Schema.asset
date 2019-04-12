@@ -20,16 +20,18 @@ MonoBehaviour:
     - Name: Rank
       Definition:
         _type: 15
-        _constraint: 
+        _constraint: '-'
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: '""'
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Index
       Definition:
         _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -38,8 +40,8 @@ MonoBehaviour:
     - Name: Suit
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -49,6 +51,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 0|12
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -58,6 +61,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 0|3
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -67,6 +71,7 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: false
@@ -76,6 +81,7 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -85,6 +91,7 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -94,9 +101,10 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 191
+  _version: 197

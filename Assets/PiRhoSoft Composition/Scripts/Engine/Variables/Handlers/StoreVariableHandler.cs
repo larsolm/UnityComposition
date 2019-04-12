@@ -24,12 +24,27 @@ namespace PiRhoSoft.CompositionEngine
 			builder.Append(value.Store);
 		}
 
+		protected override VariableConstraint CreateConstraint()
+		{
+			return new StoreVariableConstraint();
+		}
+
 		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			var store = value.Store as VariableStore;
 
 			if (store != null)
 			{
+				if (store is ISchemaOwner schemaOwner)
+				{
+					writer.Write(objects.Count);
+					objects.Add(schemaOwner.Schema);
+				}
+				else
+				{
+					writer.Write(-1);
+				}
+
 				writer.Write(store.Variables.Count);
 
 				for (var i = 0; i < store.Variables.Count; i++)
@@ -46,15 +61,21 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
 		{
+			var index = reader.ReadInt32();
+			var schema = index >= 0 && index < objects.Count ? objects[index] as VariableSchema : null;
+			var store = schema != null ? new ConstrainedStore(schema) : new VariableStore();
+
 			var count = reader.ReadInt32();
-			var store = new VariableStore();
 
 			for (var i = 0; i < count; i++)
 			{
 				var name = reader.ReadString();
 				var item = Read(reader, objects);
 
-				store.AddVariable(name, item);
+				if (schema != null)
+					store.SetVariable(name, item);
+				else
+					store.AddVariable(name, item);
 			}
 
 			return VariableValue.Create(store);

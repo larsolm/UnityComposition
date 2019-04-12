@@ -326,7 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669426905e76c64290400a5749602c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 7c695ba6f2ecc044e9217fb32b16a509, type: 2}
     _inputs: []
@@ -520,24 +519,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Constraints:
   - _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
   - _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
   - _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 2
+    _constraint: 0|100
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  - _type: 18
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -547,6 +562,7 @@ MonoBehaviour:
   - BERlY2sRAAAAAAAAAA==
   - BVN0YXRlEQAAAAEAAAA=
   - BUNhcmRzEQAAAAIAAAA=
+  - A0ludAIAAAAAAAAA
   _variablesObjects:
   - {fileID: 1723087962}
   - {fileID: 500038794}
@@ -563,7 +579,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 88fda268543e79046aa3ab510ca1bbb2, type: 2}
     _inputs: []
@@ -582,7 +597,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: 63a314e9c6be02b40970ec2a9b241471, type: 2}
   Variables:
-    _version: 80
+    _version: 83
     _variablesData:
     - ClByb2Nlc3NpbmcCAAAAAAAAAA==
     - BUNhcmRzEwAAAAAAAAA=
@@ -759,7 +774,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5669426905e76c64290400a5749602c4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 99f12e2c846ae7544894f2b8049e0b17, type: 2}
     _inputs: []
@@ -1397,7 +1411,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: 2bb7269032061c048a61bd8260212ead, type: 2}
   Variables:
-    _version: 82
+    _version: 88
     _variablesData:
     - BlNwYWRlcxMAAAAAAAAA
     - BUNsdWJzEwAAAAAAAAA=

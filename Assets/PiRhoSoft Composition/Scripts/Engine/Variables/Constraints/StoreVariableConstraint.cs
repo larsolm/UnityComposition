@@ -16,12 +16,9 @@ namespace PiRhoSoft.CompositionEngine
 		public override bool Read(string data, IList<Object> objects)
 		{
 			if (int.TryParse(data, out var index) && index >= 0 && index < objects.Count)
-			{
 				Schema = objects[index] as VariableSchema;
-				return true;
-			}
 
-			return false;
+			return Schema != null;
 		}
 
 		public override bool IsValid(VariableValue value)

@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[HelpURL(Composition.DocumentationUrl + "variable-store-component")]
-	[AddComponentMenu("PiRho Soft/Composition/Variable Store Component")]
-	public class VariableStoreComponent : MonoBehaviour, IVariableStore, IVariableReset, ISchemaOwner
+	[HelpURL(Composition.DocumentationUrl + "variable-set-asset")]
+	[CreateAssetMenu(menuName = "PiRho Soft/Variable Set", fileName = nameof(VariableSetAsset), order = 130)]
+	public class VariableSetAsset : ScriptableObject, IVariableStore, IVariableReset, ISchemaOwner
 	{
 		[ChangeTrigger(nameof(SetupSchema))]
 		[AssetDisplay(SaveLocation = AssetLocation.Selectable)]

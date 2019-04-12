@@ -24,6 +24,7 @@ namespace PiRhoSoft.CompositionEngine
 		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			// saving as a string is the simplest way of handling enums with non Int32 underlying type
+			// it also allows reordering/adding/removing of enum values without affecting saved data
 
 			writer.Write(value.EnumType.AssemblyQualifiedName);
 			writer.Write(value.Enum.ToString());
