@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEditor
 			var height = RectHelper.LineHeight;
 
 			if (target.Type == VariableSourceType.Value)
-				height += VariableValueDrawer.GetHeight(target.Value, target.Definition);
+				height += VariableValueDrawer.GetHeight(target.Value, target.Definition, true);
 			else
 				height += RectHelper.LineHeight;
 
@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEditor
 							}
 						}
 
-						target.Value = VariableValueDrawer.Draw(position, GUIContent.none, target.Value, target.Definition);
+						target.Value = VariableValueDrawer.Draw(position, GUIContent.none, target.Value, target.Definition, true);
 					}
 					else if (target.Type == VariableSourceType.Reference)
 					{

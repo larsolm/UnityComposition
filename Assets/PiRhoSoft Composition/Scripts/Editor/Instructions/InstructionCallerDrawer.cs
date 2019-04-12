@@ -61,7 +61,7 @@ namespace PiRhoSoft.CompositionEditor
 			switch (input.Type)
 			{
 				case InstructionInputType.Reference: return VariableReferenceControl.GetHeight();
-				case InstructionInputType.Value: return VariableValueDrawer.GetHeight(input.Value, definition.Definition);
+				case InstructionInputType.Value: return VariableValueDrawer.GetHeight(input.Value, definition.Definition, true);
 				default: return EditorGUIUtility.singleLineHeight;
 			}
 		}
@@ -86,7 +86,7 @@ namespace PiRhoSoft.CompositionEditor
 				switch (input.Type)
 				{
 					case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
-					case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition.Definition); break;
+					case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition.Definition, true); break;
 				}
 			}
 		}

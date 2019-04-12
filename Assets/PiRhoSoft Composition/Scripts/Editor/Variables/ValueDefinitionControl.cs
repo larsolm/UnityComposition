@@ -196,7 +196,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{
-				value = VariableValueDrawer.Draw(rect, GUIContent.none, value, definition);
+				value = VariableValueDrawer.Draw(rect, GUIContent.none, value, definition, true);
 
 				if (changes.changed)
 				{

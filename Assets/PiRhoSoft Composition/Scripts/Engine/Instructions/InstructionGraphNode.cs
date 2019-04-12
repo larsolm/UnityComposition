@@ -578,7 +578,7 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					var value = field.GetValue(this) as VariableReference;
 					var constraint = field.GetCustomAttribute<VariableConstraintAttribute>();
-					var definition = new VariableDefinition { Name = value.RootName, Definition = constraint == null ? ValueDefinition.Create(VariableType.Empty) : constraint.GetDefinition() };
+					var definition = new VariableDefinition { Name = value.RootName, Definition = constraint == null ? ValueDefinition.Create(VariableType.Empty) : constraint.Definition };
 
 					if (InstructionStore.IsInput(value))
 						inputs.Add(definition);
@@ -601,7 +601,7 @@ namespace PiRhoSoft.CompositionEngine
 					if (constraint != null)
 					{
 						if (value.Type == VariableSourceType.Reference && InstructionStore.IsInput(value.Reference))
-							inputs.Add(new VariableDefinition { Name = value.Reference.RootName, Definition = constraint.GetDefinition() });
+							inputs.Add(new VariableDefinition { Name = value.Reference.RootName, Definition = constraint.Definition });
 					}
 					else
 					{

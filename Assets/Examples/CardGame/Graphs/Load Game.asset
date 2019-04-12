@@ -16,6 +16,7 @@ MonoBehaviour:
   ContextDefinition:
     _type: 0
     _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -448,7 +449,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114233220627467950}
   Expression:
-    _statement: 'local.card = local.createdCard as VariableStoreComponent
+    _statement: 'local.card = local.createdCard as VariableSetComponent
 
       local.card.Rank = local.rank
 

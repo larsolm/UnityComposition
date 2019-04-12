@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly Label _removeListButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this item from the list");
 		private const float _storeLabelWidth = 100.0f;
 
-		public static float GetHeight(VariableValue value, ValueDefinition definition)
+		public static float GetHeight(VariableValue value, ValueDefinition definition, bool drawStores)
 		{
 			var type = definition.Type != VariableType.Empty ? definition.Type : value.Type;
 
@@ -40,20 +40,20 @@ namespace PiRhoSoft.CompositionEditor
 				case VariableType.String: return GetStringHeight();
 				case VariableType.Enum: return GetEnumHeight();
 				case VariableType.Object: return GetObjectHeight();
-				case VariableType.Store: return GetStoreHeight(value, definition.Constraint as StoreVariableConstraint);
-				case VariableType.List: return GetListHeight(value, definition.Constraint as ListVariableConstraint);
+				case VariableType.Store: return GetStoreHeight(value, definition.Constraint as StoreVariableConstraint, drawStores);
+				case VariableType.List: return GetListHeight(value, definition.Constraint as ListVariableConstraint, drawStores);
 				default: return EditorGUIUtility.singleLineHeight;
 			}
 		}
 
-		public static VariableValue Draw(GUIContent label, VariableValue value, ValueDefinition definition)
+		public static VariableValue Draw(GUIContent label, VariableValue value, ValueDefinition definition, bool drawStores)
 		{
-			var height = GetHeight(value, definition);
+			var height = GetHeight(value, definition, drawStores);
 			var rect = EditorGUILayout.GetControlRect(true, height);
-			return Draw(rect, label, value, definition);
+			return Draw(rect, label, value, definition, drawStores);
 		}
 
-		public static VariableValue Draw(Rect position, GUIContent label, VariableValue value, ValueDefinition definition)
+		public static VariableValue Draw(Rect position, GUIContent label, VariableValue value, ValueDefinition definition, bool drawStores)
 		{
 			position = EditorGUI.PrefixLabel(position, label);
 
@@ -77,8 +77,8 @@ namespace PiRhoSoft.CompositionEditor
 				case VariableType.String: return DrawString(position, value, definition.Constraint as StringVariableConstraint);
 				case VariableType.Enum: return DrawEnum(position, value, definition.Constraint as EnumVariableConstraint);
 				case VariableType.Object: return DrawObject(position, value, definition.Constraint as ObjectVariableConstraint);
-				case VariableType.Store: return DrawStore(position, value, definition.Constraint as StoreVariableConstraint);
-				case VariableType.List: return DrawList(position, value, definition.Constraint as ListVariableConstraint);
+				case VariableType.Store: return DrawStore(position, value, definition.Constraint as StoreVariableConstraint, drawStores);
+				case VariableType.List: return DrawList(position, value, definition.Constraint as ListVariableConstraint, drawStores);
 				default: return value;
 			}
 		}
@@ -386,75 +386,86 @@ namespace PiRhoSoft.CompositionEditor
 
 		#region Store
 
-		public static float GetStoreHeight(VariableValue value, StoreVariableConstraint constraint)
+		public static float GetStoreHeight(VariableValue value, StoreVariableConstraint constraint, bool drawStores)
 		{
-			var names = value.Store.GetVariableNames();
 			var height = EditorGUIUtility.singleLineHeight;
-			var index = 0;
 
-			foreach (var name in names)
+			if (drawStores)
 			{
-				var variable = value.Store.GetVariable(name);
-				var itemDefinition = constraint?.Schema != null ? constraint.Schema[index].Definition : ValueDefinition.Create(VariableType.Empty);
+				var index = 0;
+				var names = value.Store.GetVariableNames();
 
-				height += RectHelper.VerticalSpace;
-				height += GetHeight(variable, itemDefinition);
-				index++;
+				foreach (var name in names)
+				{
+					var variable = value.Store.GetVariable(name);
+					var itemDefinition = constraint?.Schema != null ? constraint.Schema[index].Definition : ValueDefinition.Create(VariableType.Empty);
+
+					height += RectHelper.VerticalSpace;
+					height += GetHeight(variable, itemDefinition, true);
+					index++;
+				}
 			}
 
 			return height;
 		}
 
-		private static VariableValue DrawStore(Rect rect, VariableValue value, StoreVariableConstraint constraint)
+		private static VariableValue DrawStore(Rect rect, VariableValue value, StoreVariableConstraint constraint, bool drawStores)
 		{
-			var names = value.Store.GetVariableNames();
-			var remove = string.Empty;
-			var first = true;
-			var empty = ValueDefinition.Create(VariableType.Empty);
-
-			foreach (var name in names)
+			if (drawStores)
 			{
-				if (!first)
-					RectHelper.TakeVerticalSpace(ref rect);
+				var names = value.Store.GetVariableNames();
+				var remove = string.Empty;
+				var first = true;
+				var empty = ValueDefinition.Create(VariableType.Empty);
 
-				var index = constraint?.Schema != null ? constraint.Schema.GetIndex(name) : -1;
-				var definition = index >= 0 ? constraint.Schema[index].Definition : empty;
-
-				var item = value.Store.GetVariable(name);
-				var height = GetHeight(item, definition);
-				var itemRect = RectHelper.TakeHeight(ref rect, height);
-				var labelRect = RectHelper.TakeWidth(ref itemRect, _storeLabelWidth);
-				labelRect = RectHelper.TakeLine(ref labelRect);
-
-				EditorGUI.LabelField(labelRect, name);
-
-				if (constraint?.Schema == null && value.Store is VariableStore)
+				foreach (var name in names)
 				{
-					var removeRect = RectHelper.TakeTrailingIcon(ref itemRect);
+					if (!first)
+						RectHelper.TakeVerticalSpace(ref rect);
 
-					if (GUI.Button(removeRect, _removeStoreButton.Content, GUIStyle.none))
-						remove = name;
+					var index = constraint?.Schema != null ? constraint.Schema.GetIndex(name) : -1;
+					var definition = index >= 0 ? constraint.Schema[index].Definition : empty;
+
+					var item = value.Store.GetVariable(name);
+					var height = GetHeight(item, definition, true);
+					var itemRect = RectHelper.TakeHeight(ref rect, height);
+					var labelRect = RectHelper.TakeWidth(ref itemRect, _storeLabelWidth);
+					labelRect = RectHelper.TakeLine(ref labelRect);
+
+					EditorGUI.LabelField(labelRect, name);
+
+					if (constraint?.Schema == null && value.Store is VariableStore)
+					{
+						var removeRect = RectHelper.TakeTrailingIcon(ref itemRect);
+
+						if (GUI.Button(removeRect, _removeStoreButton.Content, GUIStyle.none))
+							remove = name;
+					}
+
+					item = Draw(itemRect, GUIContent.none, item, definition, true);
+					value.Store.SetVariable(name, item);
+
+					first = false;
 				}
 
-				item = Draw(itemRect, GUIContent.none, item, definition);
-				value.Store.SetVariable(name, item);
+				if (constraint?.Schema == null && value.Store is VariableStore store)
+				{
+					var addRect = RectHelper.TakeTrailingIcon(ref rect);
 
-				first = false;
+					if (GUI.Button(addRect, _addStoreButton.Content, GUIStyle.none))
+					{
+						AddToStorePopup.Store = store;
+						AddToStorePopup.Name = "";
+						PopupWindow.Show(addRect, AddToStorePopup.Instance);
+					}
+
+					if (!string.IsNullOrEmpty(remove))
+						(value.Store as VariableStore).RemoveVariable(remove);
+				}
 			}
-
-			if (constraint?.Schema == null && value.Store is VariableStore store)
+			else
 			{
-				var addRect = RectHelper.TakeTrailingIcon(ref rect);
-
-				if (GUI.Button(addRect, _addStoreButton.Content, GUIStyle.none))
-				{
-					AddToStorePopup.Store = store;
-					AddToStorePopup.Name = "";
-					PopupWindow.Show(addRect, AddToStorePopup.Instance);
-				}
-
-				if (!string.IsNullOrEmpty(remove))
-					(value.Store as VariableStore).RemoveVariable(remove);
+				EditorGUI.LabelField(rect, value.Store.ToString());
 			}
 
 			return value;
@@ -502,7 +513,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		#region List
 
-		public static float GetListHeight(VariableValue value, ListVariableConstraint constraint)
+		public static float GetListHeight(VariableValue value, ListVariableConstraint constraint, bool drawStores)
 		{
 			var height = EditorGUIUtility.singleLineHeight;
 
@@ -516,13 +527,13 @@ namespace PiRhoSoft.CompositionEditor
 					height += EditorGUIUtility.standardVerticalSpacing;
 
 				var item = value.List.GetVariable(i);
-				height += GetHeight(item, itemDefinition);
+				height += GetHeight(item, itemDefinition, drawStores);
 			}
 
 			return height;
 		}
 
-		private static VariableValue DrawList(Rect rect, VariableValue value, ListVariableConstraint constraint)
+		private static VariableValue DrawList(Rect rect, VariableValue value, ListVariableConstraint constraint, bool drawStores)
 		{
 			var itemDefinition = constraint != null
 				? ValueDefinition.Create(constraint.ItemType, constraint.ItemConstraint)
@@ -536,11 +547,11 @@ namespace PiRhoSoft.CompositionEditor
 					RectHelper.TakeVerticalSpace(ref rect);
 
 				var item = value.List.GetVariable(i);
-				var height = GetHeight(item, itemDefinition);
+				var height = GetHeight(item, itemDefinition, drawStores);
 				var itemRect = RectHelper.TakeHeight(ref rect, height);
 				var removeRect = RectHelper.TakeTrailingIcon(ref itemRect);
 
-				item = Draw(itemRect, GUIContent.none, item, itemDefinition);
+				item = Draw(itemRect, GUIContent.none, item, itemDefinition, drawStores);
 				value.List.SetVariable(i, item);
 
 				if (GUI.Button(removeRect, _removeListButton.Content, GUIStyle.none))
