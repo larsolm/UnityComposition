@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Pool", fileName = nameof(VariablePoolAsset), order = 131)]
 	public class VariablePoolAsset : ScriptableObject, IVariableStore
 	{
-		public PoolVariableStore Variables = new PoolVariableStore();
+		public VariablePool Variables = new VariablePool();
 
 		#region IVariableStore Implementation
 

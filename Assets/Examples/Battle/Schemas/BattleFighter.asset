@@ -45,7 +45,7 @@ MonoBehaviour:
         _type: 19
         _constraint: Store|0
         _objects:
-        - {fileID: 11400000, guid: a310b37e56d4d4b41af7727ae3a763a4, type: 2}
+        - {fileID: 0}
         _tag: Constant
         _initializer:
           _statement: 
@@ -56,7 +56,7 @@ MonoBehaviour:
         _type: 19
         _constraint: Store|0
         _objects:
-        - {fileID: 11400000, guid: 6081066e2f332ac4d842b4cb3d6bde7a, type: 2}
+        - {fileID: 0}
         _tag: Constant
         _initializer:
           _statement: 
@@ -143,4 +143,4 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 265
+  _version: 276

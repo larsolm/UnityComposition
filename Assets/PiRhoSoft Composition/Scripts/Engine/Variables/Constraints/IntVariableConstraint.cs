@@ -10,10 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override string Write(IList<Object> objects)
 		{
-			if (Maximum != 100)
-				return string.Format("{0}|{1}", Minimum, Maximum);
-			else
-				return string.Format("{0}|{1}", Minimum, Maximum);
+			return string.Format("{0}|{1}", Minimum, Maximum);
 		}
 
 		public override bool Read(string data, IList<Object> objects)

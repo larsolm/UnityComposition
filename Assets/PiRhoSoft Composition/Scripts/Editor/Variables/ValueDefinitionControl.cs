@@ -245,6 +245,8 @@ namespace PiRhoSoft.CompositionEditor
 
 		private static void DrawConstraint(Rect rect, VariableType type, bool isConstraintLocked, ref VariableConstraint constraint, bool top)
 		{
+			RectHelper.TakeTrailingHeight(ref rect, RectHelper.VerticalSpace);
+
 			using (new EditorGUI.DisabledScope(isConstraintLocked))
 			{
 				switch (type)

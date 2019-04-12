@@ -25,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 		public List<Variable> Variables => _variables;
 		public Dictionary<string, int> Map => _map;
 
-		public void AddVariable(string name, VariableValue value)
+		public virtual void AddVariable(string name, VariableValue value)
 		{
 			_map.Add(name, _variables.Count);
 			_variables.Add(Variable.Create(name, value));
@@ -35,8 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (_map.TryGetValue(name, out var index))
 			{
-				RemoveVariableAt(index);
-				_map.Remove(name);
+				RemoveVariable(name, index);
 				return true;
 			}
 			else
@@ -47,34 +46,28 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void RemoveVariable(int index)
 		{
-			_map.Remove(_variables[index].Name);
-			RemoveVariableAt(index);
+			var name = _variables[index].Name;
+			RemoveVariable(name, index);
 		}
 
-		private void RemoveVariableAt(int index)
+		protected virtual void RemoveVariable(string name, int index)
 		{
+			_map.Remove(name);
 			_variables.RemoveAt(index);
 
 			for (var i = index; i < _variables.Count; i++)
 				_map[_variables[i].Name] = i;
 		}
 
-		public virtual VariableValue GetVariable(string name)
+		public virtual void VariableMoved(int from, int to)
 		{
-			return _map.TryGetValue(name, out var index) ? _variables[index].Value : VariableValue.Empty;
+			_map.Clear();
+
+			for (var i = 0; i < _variables.Count; i++)
+				_map.Add(_variables[i].Name, i);
 		}
 
-		public virtual SetVariableResult SetVariable(string name, VariableValue value)
-		{
-			return SetVariable(name, value, true);
-		}
-
-		public virtual IEnumerable<string> GetVariableNames()
-		{
-			return _map.Keys;
-		}
-
-		public void Clear()
+		public virtual void Clear()
 		{
 			_variables.Clear();
 			_map.Clear();
@@ -91,46 +84,24 @@ namespace PiRhoSoft.CompositionEngine
 
 			return SetVariableResult.Success;
 		}
-	}
 
-	public class WritableStore : VariableStore
-	{
-		public override SetVariableResult SetVariable(string name, VariableValue value)
+		#region IVariableStore Implementation
+
+		public virtual IEnumerable<string> GetVariableNames()
 		{
-			return SetVariable(name, value, false);
-		}
-	}
-
-	public class ReadOnlyStore : VariableStore
-	{
-		public override SetVariableResult SetVariable(string name, VariableValue value)
-		{
-			if (Map.TryGetValue(name, out int index))
-				return SetVariableResult.ReadOnly;
-			else
-				return SetVariableResult.NotFound;
-		}
-	}
-
-	public class ConstrainedStore : WritableStore, ISchemaOwner
-	{
-		public VariableSchema Schema { get; private set; }
-
-		public ConstrainedStore(VariableSchema schema)
-		{
-			Schema = schema;
-			SetupSchema();
+			return _map.Keys;
 		}
 
-		public void SetupSchema()
+		public virtual VariableValue GetVariable(string name)
 		{
-			for (var i = 0; i < Schema.Count; i++)
-			{
-				var definition = Schema[i];
-				var value = definition.Definition.Generate(null);
-
-				AddVariable(definition.Name, value);
-			}
+			return _map.TryGetValue(name, out var index) ? _variables[index].Value : VariableValue.Empty;
 		}
+
+		public virtual SetVariableResult SetVariable(string name, VariableValue value)
+		{
+			return SetVariable(name, value, true);
+		}
+
+		#endregion
 	}
 }
