@@ -95,7 +95,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114324781071790490}
   Expression:
-    _statement: fighter.Variables.Target = global.Fighters[(index + 1) % 2];
+    _statement: fighter.Pool.Target = global.Fighters[(index + 1) % 2];
 --- !u!114 &114016950435173752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -185,7 +185,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114247473089136118}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: fighter.Variables.Target.CurrentHP <= 0
+    _statement: fighter.Pool.Target.CurrentHP <= 0
 --- !u!114 &114112693297798952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -227,7 +227,7 @@ MonoBehaviour:
   m_Name: Bind Display
   m_EditorClassIdentifier: 
   Name: Bind Display
-  GraphPosition: {x: 1049.6, y: -102.4}
+  GraphPosition: {x: 1049.6, y: -115.200005}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Object:
@@ -266,12 +266,12 @@ MonoBehaviour:
     - Type: 0
       Text: Selection
   SelectedItem:
-    _variable: fighter.Variables.SelectedMove
+    _variable: fighter.Pool.SelectedMove
     _tokens:
     - Type: 0
       Text: fighter
     - Type: 0
-      Text: Variables
+      Text: Pool
     - Type: 0
       Text: SelectedMove
   SelectedIndex:
@@ -476,7 +476,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: fighter.Variables.Action = "Move";
+    _statement: fighter.Pool.Action = "Move";
 --- !u!114 &114324781071790490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -610,12 +610,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Instruction:
-    _variable: fighter.Variables.SelectedItem.Instruction
+    _variable: fighter.Pool.SelectedItem.Instruction
     _tokens:
     - Type: 0
       Text: fighter
     - Type: 0
-      Text: Variables
+      Text: Pool
     - Type: 0
       Text: SelectedItem
     - Type: 0
@@ -663,12 +663,12 @@ MonoBehaviour:
     - Type: 0
       Text: Selection
   SelectedItem:
-    _variable: fighter.Variables.SelectedItem
+    _variable: fighter.Pool.SelectedItem
     _tokens:
     - Type: 0
       Text: fighter
     - Type: 0
-      Text: Variables
+      Text: Pool
     - Type: 0
       Text: SelectedItem
   SelectedIndex:
@@ -738,7 +738,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: fighter.Variables.Action = "Item";
+    _statement: fighter.Pool.Action = "Item";
 --- !u!114 &114590944712922838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -756,12 +756,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114459983394791818}
   Instruction:
-    _variable: fighter.Variables.SelectedMove.Instruction
+    _variable: fighter.Pool.SelectedMove.Instruction
     _tokens:
     - Type: 0
       Text: fighter
     - Type: 0
-      Text: Variables
+      Text: Pool
     - Type: 0
       Text: SelectedMove
     - Type: 0
@@ -801,7 +801,7 @@ MonoBehaviour:
   GraphPosition: {x: 2188.8, y: 179.2}
   IsBreakpoint: 0
   Switch:
-    _statement: fighter.Variables.Action
+    _statement: fighter.Pool.Action
   Outputs:
     _keys:
     - Move
@@ -989,7 +989,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114783432147138550}
   Expression:
-    _statement: winner = fighter.Variables.Target;
+    _statement: winner = fighter.Pool.Target;
 --- !u!114 &114861798838267012
 MonoBehaviour:
   m_ObjectHideFlags: 1

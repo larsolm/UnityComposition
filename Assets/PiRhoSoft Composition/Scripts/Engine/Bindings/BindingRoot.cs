@@ -18,26 +18,18 @@ namespace PiRhoSoft.CompositionEngine
 			if (transform.parent)
 				_parent = FindParent(transform.parent.gameObject);
 			else
-				_parent = _base;
+				_parent = CompositionManager.Instance.DefaultStore;
 		}
 
 		#region Hierarchy
 
-		private static BaseBindingRoot _base = new BaseBindingRoot();
 		private static List<BindingRoot> _roots = new List<BindingRoot>();
-
-		private class BaseBindingRoot : IVariableStore
-		{
-			public IEnumerable<string> GetVariableNames() => Enumerable.Repeat(CompositionManager.GlobalStoreName, 1);
-			public VariableValue GetVariable(string name) => name == CompositionManager.GlobalStoreName ? VariableValue.Create(CompositionManager.Instance.DefaultStore) : VariableValue.Empty;
-			public SetVariableResult SetVariable(string name, VariableValue value) => name == CompositionManager.GlobalStoreName ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
-		}
 
 		public static IVariableStore FindParent(GameObject obj)
 		{
 			_roots.Clear();
 			obj.GetComponentsInParent(true, _roots);
-			return _roots.Count > 0 ? (IVariableStore)_roots[0] : _base;
+			return _roots.Count > 0 ? _roots[0] : CompositionManager.Instance.DefaultStore;
 		}
 
 		#endregion

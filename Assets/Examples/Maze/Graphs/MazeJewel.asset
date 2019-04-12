@@ -17,6 +17,7 @@ MonoBehaviour:
     _type: 17
     _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -157,7 +158,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114754646623374914}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: global.Player.Jewels == global.Player.JewelsNeeded;
+    _statement: global.Jewels == global.JewelsNeeded;
 --- !u!114 &114252435143868472
 MonoBehaviour:
   m_ObjectHideFlags: 1

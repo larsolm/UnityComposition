@@ -54,8 +54,8 @@ MonoBehaviour:
     - Name: Moves
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: Object|UnityEngine.Object, UnityEngine.CoreModule, Version=0.0.0.0,
+          Culture=neutral, PublicKeyToken=null
         _objects: []
         _tag: Constant
         _initializer:
@@ -163,14 +163,15 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: Variables
+    - Name: Pool
       Definition:
         _type: 18
-        _constraint: 
-        _objects: []
+        _constraint: 0
+        _objects:
+        - {fileID: 0}
         _tag: Reset
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 321
+  _version: 334
