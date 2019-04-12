@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The buttons that can trigger selections")]
 		[ListDisplay(EmptyText = "Add items to create input options")]
-		[ClassDisplay(Type = ClassDisplayType.Inline)]
+		[ClassDisplay(ClassDisplayType.Inline)]
 		public InputNodeButtonList Buttons = new InputNodeButtonList();
 
 		public override Color NodeColor => Colors.InterfaceTeal;

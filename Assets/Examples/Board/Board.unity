@@ -1273,7 +1273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 177
+    _version: 195
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
     - DEN1cnJlbnRTcGFjZQIAAAAGAAAA
@@ -1282,9 +1282,10 @@ MonoBehaviour:
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - CUhpZ2hsaWdodAAAAAA=
+    - CUhpZ2hsaWdodBEAAAABAAAA
     _variablesObjects:
     - {fileID: 175348908}
+    - {fileID: 0}
 --- !u!1 &380795402
 GameObject:
   m_ObjectHideFlags: 0
@@ -1577,7 +1578,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 177
+    _version: 195
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
     - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
@@ -1586,9 +1587,10 @@ MonoBehaviour:
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - CUhpZ2hsaWdodAAAAAA=
+    - CUhpZ2hsaWdodBEAAAABAAAA
     _variablesObjects:
     - {fileID: 1746312865}
+    - {fileID: 0}
 --- !u!1 &445214365
 GameObject:
   m_ObjectHideFlags: 0
@@ -6719,6 +6721,7 @@ MonoBehaviour:
   - _type: 19
     _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -6727,6 +6730,7 @@ MonoBehaviour:
   - _type: 19
     _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -6735,6 +6739,7 @@ MonoBehaviour:
   - _type: 19
     _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -8019,7 +8024,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: 22c40ec1c496e684fb637073f177faff, type: 2}
   Variables:
-    _version: 177
+    _version: 195
     _variablesData:
     - BlBsYXllchEAAAAAAAAA
     - DEN1cnJlbnRTcGFjZQIAAAAhAAAA
@@ -8028,9 +8033,10 @@ MonoBehaviour:
     - BEZyZWUBAAAAAA==
     - CEZpbmlzaGVkAQAAAAA=
     - B0Nhbk1vdmUBAAAAAA==
-    - CUhpZ2hsaWdodAAAAAA=
+    - CUhpZ2hsaWdodBEAAAABAAAA
     _variablesObjects:
     - {fileID: 1746312865}
+    - {fileID: 0}
 --- !u!1 &1863044770
 GameObject:
   m_ObjectHideFlags: 0

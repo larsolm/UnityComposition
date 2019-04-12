@@ -56,8 +56,16 @@ namespace PiRhoSoft.CompositionEngine
 
 			DetermineLayout();
 
-			_columnIndex = PrimaryAxis == PrimaryAxis.Column ? _focusedIndex / _rowCount : _focusedIndex % _columnCount;
-			_rowIndex = PrimaryAxis == PrimaryAxis.Column ? _focusedIndex % _rowCount : _focusedIndex / _columnCount;
+			if (_rowCount > 0 && _columnCount > 0)
+			{
+				_columnIndex = PrimaryAxis == PrimaryAxis.Column ? _focusedIndex / _rowCount : _focusedIndex % _columnCount;
+				_rowIndex = PrimaryAxis == PrimaryAxis.Column ? _focusedIndex % _rowCount : _focusedIndex / _columnCount;
+			}
+			else
+			{
+				_rowIndex = 0;
+				_columnIndex = 0;
+			}
 		}
 
 		protected override IEnumerator Run()

@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The target Object to call the method on")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public ObjectVariableSource Target = new ObjectVariableSource();
 
 		[Tooltip("The reference to store the returned value in")]
@@ -45,8 +45,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (ResolveObject(variables, Target, out var target))
 			{
 				var cast = ComponentHelper.GetAsComponent(TargetType, target);
-
-				if (cast.GetType() == TargetType)
+				if (cast)
 				{
 					ResolveParameters(variables);
 					var obj = Method.Invoke(cast, _parameters);

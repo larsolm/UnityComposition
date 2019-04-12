@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The Scene to unload")]
 		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)SceneSource.Value)]
-		[SceneReference("New Scene", "SetupScene")]
+		[SceneReference(SaveLocation = AssetLocation.Selectable, DefaultName = "New Scene", Creator = "SetupScene")]
 		public SceneReference Scene = new SceneReference();
 
 		[Tooltip("The variable reference that stores the scene to unload (can be an index or a name")]

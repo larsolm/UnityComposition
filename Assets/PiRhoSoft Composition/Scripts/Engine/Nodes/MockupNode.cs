@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The connections from this node")]
 		[ListDisplay]
-		[ClassDisplay(Type = ClassDisplayType.Inline)]
+		[ClassDisplay(ClassDisplayType.Inline)]
 		public MockupConnectionList Connections = new MockupConnectionList();
 
 		[Tooltip("The display color of the node")]

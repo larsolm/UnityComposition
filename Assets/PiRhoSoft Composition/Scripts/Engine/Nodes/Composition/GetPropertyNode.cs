@@ -17,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The target Object to get the property of")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public ObjectVariableSource Target = new ObjectVariableSource();
 
 		[Tooltip("The reference to store the retreived value in")]

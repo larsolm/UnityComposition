@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Animator;
 
 		[Tooltip("The name of the animation state to play")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public StringVariableSource State = new StringVariableSource();
 
 		public override Color NodeColor => Colors.Animation;

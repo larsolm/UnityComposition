@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -15,7 +16,7 @@ namespace PiRhoSoft.UtilityEditor
 		public GUIContent[] Names;
 		public List<string> Paths;
 
-		public int CreateIndex => HasCreate ? Names.Length - 1 : -1;
+		public SelectionTree Tree;
 
 		public int GetIndex(string path)
 		{
@@ -26,7 +27,7 @@ namespace PiRhoSoft.UtilityEditor
 
 			if (HasNone)
 			{
-				if (index >= 0) index += 2;
+				if (index >= 0) index ++;
 				else index = 0;
 			}
 
@@ -36,7 +37,7 @@ namespace PiRhoSoft.UtilityEditor
 		public string GetPath(int index)
 		{
 			if (HasNone)
-				index -= 2;
+				index--;
 
 			return index >= 0 && index < Paths.Count ? Paths[index] : null;
 		}
@@ -101,7 +102,7 @@ namespace PiRhoSoft.UtilityEditor
 				// selection of scenes that aren't in build settings.
 
 				list.Paths = new List<string>(SceneManager.sceneCountInBuildSettings);
-				list.Names = new GUIContent[SceneManager.sceneCountInBuildSettings + (list.HasNone ? 2 : 0) + (list.HasCreate ? 2 : 0)];
+				list.Names = new GUIContent[SceneManager.sceneCountInBuildSettings + (list.HasNone ? 1 : 0)];
 
 				for (var i = 0; i < SceneManager.sceneCountInBuildSettings; i++)
 					list.Paths.Add(SceneUtility.GetScenePathByBuildIndex(i));
@@ -110,22 +111,21 @@ namespace PiRhoSoft.UtilityEditor
 				var prefix = AssetHelper.FindCommonPath(list.Paths);
 
 				if (list.HasNone)
-				{
 					list.Names[index++] = new GUIContent("None");
-					list.Names[index++] = new GUIContent();
-				}
+
+				var thumbnail = AssetPreview.GetMiniTypeThumbnail(typeof(SceneAsset));
 
 				foreach (var path in list.Paths)
 				{
-					var scene = path.Substring(prefix.Length);
-					list.Names[index++] = new GUIContent(scene);
+					var scene = path.Substring(prefix.Length, path.Length - prefix.Length - 6); // remove the ".unity" extension
+					list.Names[index++] = new GUIContent(scene, thumbnail);
 				}
 
+				list.Tree = new SelectionTree();
+				list.Tree.Add("Scene", list.Names);
+
 				if (list.HasCreate)
-				{
-					list.Names[index++] = new GUIContent();
-					list.Names[index++] = new GUIContent("Create Scene");
-				}
+					list.Tree.Add("Create", new GUIContent[] { new GUIContent("New Scene", thumbnail) });
 			}
 
 			return list;
@@ -135,16 +135,37 @@ namespace PiRhoSoft.UtilityEditor
 
 		#region Creation
 
-		public static Scene CreateScene(string name, Action create)
+		public static Scene CreateScene(AssetLocation location, string defaultName, Action create)
+		{
+			var title = string.Format("Create a new Scene");
+			var name = string.IsNullOrEmpty(defaultName) ? "New Scene" : defaultName;
+
+			if (location == AssetLocation.Selectable)
+			{
+				var path = EditorUtility.SaveFilePanel(title, "Assets", name + ".unity", "unity");
+
+				if (path.StartsWith(Application.dataPath))
+					return CreateScene(path.Substring(Application.dataPath.Length - 6), create);
+			}
+			else if (location == AssetLocation.AssetRoot)
+			{
+				var path = "Assets/" + name + ".unity";
+				return CreateScene(path, create);
+			}
+
+			return new Scene();
+		}
+
+		private static Scene CreateScene(string path, Action create)
 		{
 			var scene = EditorSceneManager.NewScene(NewSceneSetup.EmptyScene, NewSceneMode.Additive);
 			SceneManager.SetActiveScene(scene);
 
 			create();
 
-			EditorSceneManager.SaveScene(scene, "Assets/" + name + ".unity");
+			EditorSceneManager.SaveScene(scene, path);
 			AddSceneToBuild(scene);
-
+			
 			return scene;
 		}
 

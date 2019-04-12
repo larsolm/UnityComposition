@@ -16,6 +16,7 @@ MonoBehaviour:
   ContextDefinition:
     _type: 0
     _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -27,6 +28,7 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -55,7 +57,6 @@ MonoBehaviour:
     - {fileID: 114441288586741344}
     - {fileID: 114112693297798952}
     - {fileID: 114271038274048284}
-    - {fileID: 114293157531778302}
     - {fileID: 114307718193888456}
     - {fileID: 114538599604373634}
     - {fileID: 114671663166635790}
@@ -184,7 +185,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114247473089136118}
   OnFalse: {fileID: 0}
   Condition:
-    _statement: fighter.Target.CurrentHP <= 0
+    _statement: fighter.Variables.Target.CurrentHP <= 0
 --- !u!114 &114112693297798952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -256,19 +257,23 @@ MonoBehaviour:
   Name: Show Selection
   GraphPosition: {x: 2931.2, y: -358.4}
   IsBreakpoint: 0
-  OnCanceled: {fileID: 114293157531778302}
+  OnCanceled: {fileID: 114276880049557452}
   Control:
-    _variable: scene.Selection
+    _variable: fighter.Selection
     _tokens:
     - Type: 0
-      Text: scene
+      Text: fighter
     - Type: 0
       Text: Selection
   SelectedItem:
-    _variable: selectedMove
+    _variable: fighter.Variables.SelectedMove
     _tokens:
     - Type: 0
-      Text: selectedMove
+      Text: fighter
+    - Type: 0
+      Text: Variables
+    - Type: 0
+      Text: SelectedMove
   SelectedIndex:
     _variable: 
     _tokens: []
@@ -285,10 +290,21 @@ MonoBehaviour:
           Text: Moves
       Source: 1
       Name: 
-      Template: {fileID: 0}
+      Template: {fileID: 1176305143222214389, guid: 3e9333ace537e884cb9c731b14e2b059,
+        type: 3}
       Label: Moves
       Expand: 1
       OnSelected: {fileID: 114307718193888456}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 1
+      Name: 
+      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+        type: 3}
+      Label: Back
+      Expand: 0
+      OnSelected: {fileID: 114276880049557452}
 --- !u!114 &114181512053963512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -306,10 +322,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   OnCanceled: {fileID: 0}
   Control:
-    _variable: scene.Selection
+    _variable: fighter.Selection
     _tokens:
     - Type: 0
-      Text: scene
+      Text: fighter
     - Type: 0
       Text: Selection
   SelectedItem:
@@ -327,7 +343,8 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 0}
+      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+        type: 3}
       Label: Fight
       Expand: 0
       OnSelected: {fileID: 114271038274048284}
@@ -336,7 +353,8 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 0}
+      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+        type: 3}
       Label: Items
       Expand: 0
       OnSelected: {fileID: 114112693297798952}
@@ -441,36 +459,6 @@ MonoBehaviour:
     Text: 'What will
 
       {fighter.Name} do?'
---- !u!114 &114293157531778302
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: Action Message
-  m_EditorClassIdentifier: 
-  Name: Action Message
-  GraphPosition: {x: 2918.4001, y: -192}
-  IsBreakpoint: 0
-  Next: {fileID: 114181512053963512}
-  Control:
-    _variable: scene.Message
-    _tokens:
-    - Type: 0
-      Text: scene
-    - Type: 0
-      Text: Message
-  WaitForCompletion: 0
-  AutoHide: 0
-  WaitTime: 0
-  Message:
-    Text: 'What will
-
-      {fighter.Name} do?'
 --- !u!114 &114307718193888456
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -488,9 +476,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'fighter.Variables.SelectedMove = selectedMove;
-
-      fighter.Variables.Action = "Move";'
+    _statement: fighter.Variables.Action = "Move";
 --- !u!114 &114324781071790490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -524,6 +510,7 @@ MonoBehaviour:
     Definition:
       _type: 14
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
@@ -643,6 +630,7 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
@@ -666,19 +654,23 @@ MonoBehaviour:
   Name: Show Selection
   GraphPosition: {x: 2931.2, y: -51.2}
   IsBreakpoint: 0
-  OnCanceled: {fileID: 114293157531778302}
+  OnCanceled: {fileID: 114276880049557452}
   Control:
-    _variable: scene.Selection
+    _variable: fighter.Selection
     _tokens:
     - Type: 0
-      Text: scene
+      Text: fighter
     - Type: 0
       Text: Selection
   SelectedItem:
-    _variable: selectedItem
+    _variable: fighter.Variables.SelectedItem
     _tokens:
     - Type: 0
-      Text: selectedItem
+      Text: fighter
+    - Type: 0
+      Text: Variables
+    - Type: 0
+      Text: SelectedItem
   SelectedIndex:
     _variable: 
     _tokens: []
@@ -687,14 +679,29 @@ MonoBehaviour:
   Items:
     _items:
     - Variables:
+        _variable: fighter.Inventory
+        _tokens:
+        - Type: 0
+          Text: fighter
+        - Type: 0
+          Text: Inventory
+      Source: 1
+      Name: 
+      Template: {fileID: 1176305143222214389, guid: 3e9333ace537e884cb9c731b14e2b059,
+        type: 3}
+      Label: Items
+      Expand: 1
+      OnSelected: {fileID: 114538599604373634}
+    - Variables:
         _variable: 
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 0}
-      Label: Items
-      Expand: 1
-      OnSelected: {fileID: 114538599604373634}
+      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+        type: 3}
+      Label: Back
+      Expand: 0
+      OnSelected: {fileID: 114276880049557452}
 --- !u!114 &114459983394791818
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -731,9 +738,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'fighter.Variables.SelectedItem = selectedItem;
-
-      fighter.Variables.Action = "Item";'
+    _statement: fighter.Variables.Action = "Item";
 --- !u!114 &114590944712922838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -771,6 +776,7 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 

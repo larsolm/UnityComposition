@@ -65,8 +65,8 @@ namespace PiRhoSoft.DocGenEditor
 
 		[EnumDisplay] public DocumentationTypeCategory IncludedTypes = DocumentationTypeCategory.All;
 		[ListDisplay] public DocumentationNamespaceList IncludedNamespaces = new DocumentationNamespaceList();
-		[ListDisplay] [ClassDisplay(Type = ClassDisplayType.Inline)] public ExternalNamespaceList ExternalNamespaces = new ExternalNamespaceList();
-		[ListDisplay] [ClassDisplay(Type = ClassDisplayType.Inline)] public DocumentationSectionList Sections = new DocumentationSectionList();
+		[ListDisplay] [ClassDisplay(ClassDisplayType.Inline)] public ExternalNamespaceList ExternalNamespaces = new ExternalNamespaceList();
+		[ListDisplay] [ClassDisplay(ClassDisplayType.Inline)] public DocumentationSectionList Sections = new DocumentationSectionList();
 
 		public TemplateSet Templates = new TemplateSet();
 

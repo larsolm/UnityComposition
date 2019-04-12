@@ -20,6 +20,7 @@ namespace PiRhoSoft.CompositionEditor
 		private const string _invalidWatchWarning = "(CWWIW) unable to watch variable {0} of type {1} - only variable stores can be watched";
 
 		private static BoolPreference _logInstructionsEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogInstructionsEnabled", false);
+		private static readonly Label _windowLabel = new Label(Icon.BuiltIn("UnityEditor.LookDevView"), label: "Watch Window");
 		private static readonly Label _enableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Enable logging of instruction execution");
 		private static readonly Label _disableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Disable logging of instruction execution");
 		private static readonly Label _executeButton = new Label(Icon.BuiltIn(Icon.Add), "", "Execute the expression");
@@ -37,7 +38,8 @@ namespace PiRhoSoft.CompositionEditor
 		[MenuItem("Window/PiRho Soft/Watch Window")]
 		public static void ShowWindow()
 		{
-			GetWindow<WatchWindow>("Watch Window").Show();
+			var window = GetWindow<WatchWindow>("Watch Window");
+			window.Show();
 		}
 
 		void OnEnable()
@@ -46,6 +48,7 @@ namespace PiRhoSoft.CompositionEditor
 			minSize = new Vector2(_minimumWidth, minSize.y);
 
 			CompositionManager.LogTracking = _logInstructionsEnabled.Value;
+			titleContent = _windowLabel.Content;
 
 			SetupToolbar();
 		}

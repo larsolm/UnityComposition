@@ -12,6 +12,8 @@ namespace PiRhoSoft.UtilityEngine
 
 	public class ClassDisplayAttribute : PropertyAttribute
 	{
-		public ClassDisplayType Type = ClassDisplayType.Indented;
+		public ClassDisplayType Type { get; private set; }
+
+		public ClassDisplayAttribute(ClassDisplayType type) => Type = type;
 	}
 }

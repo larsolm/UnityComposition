@@ -92,7 +92,8 @@ namespace PiRhoSoft.UtilityEditor
 
 			if (selection.Tab == 0)
 			{
-				return list.GetAsset(selection.Index);
+				if (selection.Index != index)
+					return list.GetAsset(selection.Index);
 			}
 			else if (selection.Tab == 1)
 			{
