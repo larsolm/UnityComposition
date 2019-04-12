@@ -47,9 +47,8 @@ namespace PiRhoSoft.CompositionEditor
 			EditorApplication.playModeStateChanged += PlayModeStateChanged;
 			minSize = new Vector2(_minimumWidth, minSize.y);
 
+			CompositionManager.LogTracking = _logInstructionsEnabled.Value;
 			titleContent = _windowLabel.Content;
-
-			CompositionManager.LogInstructions = _logInstructionsEnabled.Value;
 
 			SetupToolbar();
 		}
@@ -129,11 +128,11 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				for (var i = 0; i < _instructionStores.Count; i++)
 				{
-					if (!CompositionManager.InstructionState.Any(data => data.Key.Variables == _instructionStores[i].Store))
+					if (!CompositionManager.TrackingState.Any(data => data.Key.Variables == _instructionStores[i].Store))
 						_instructionStores.RemoveAt(i--);
 				}
 
-				foreach (var instruction in CompositionManager.InstructionState)
+				foreach (var instruction in CompositionManager.TrackingState)
 				{
 					if (!_instructionStores.Any(control => control.Store == instruction.Key.Variables))
 					{
@@ -261,7 +260,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var reference = new VariableReference { Variable = variable };
 
-			foreach (var instruction in CompositionManager.InstructionState)
+			foreach (var instruction in CompositionManager.TrackingState)
 			{
 				var value = reference.GetValue(instruction.Key.Variables);
 				if (!value.IsEmpty)
@@ -321,8 +320,8 @@ namespace PiRhoSoft.CompositionEditor
 
 				GUILayout.FlexibleSpace();
 
-				CompositionManager.LogInstructions = GUILayout.Toggle(CompositionManager.LogInstructions, CompositionManager.LogInstructions ? _disableLogInstructionsButton.Content : _enableLogInstructionsButton.Content, EditorStyles.toolbarButton);
-				_logInstructionsEnabled.Value = CompositionManager.LogInstructions;
+				CompositionManager.LogTracking = GUILayout.Toggle(CompositionManager.LogTracking, CompositionManager.LogTracking ? _disableLogInstructionsButton.Content : _enableLogInstructionsButton.Content, EditorStyles.toolbarButton);
+				_logInstructionsEnabled.Value = CompositionManager.LogTracking;
 			}
 		}
 
@@ -376,7 +375,7 @@ namespace PiRhoSoft.CompositionEditor
 			else
 			{
 				var result = VariableValue.Empty;
-				var instruction = CompositionManager.InstructionState.FirstOrDefault();
+				var instruction = CompositionManager.TrackingState.FirstOrDefault();
 
 				if (instruction.Key != null)
 					result = expression.Execute(instruction.Value.Instruction, instruction.Key.Variables);

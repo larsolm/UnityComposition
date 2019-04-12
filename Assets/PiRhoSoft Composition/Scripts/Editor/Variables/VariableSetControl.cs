@@ -60,7 +60,7 @@ namespace PiRhoSoft.CompositionEditor
 			var value = _variables.GetVariableValue(index);
 			var definition = _variables.Schema != null && index < _variables.Schema.Count ? _variables.Schema[index].Definition : ValueDefinition.Create(VariableType.Empty);
 
-			return VariableValueDrawer.GetHeight(value, definition);
+			return VariableValueDrawer.GetHeight(value, definition, true);
 		}
 
 		private void DrawVariable(Rect rect, IList list, int index)
@@ -76,7 +76,7 @@ namespace PiRhoSoft.CompositionEditor
 					var variableRect = new Rect(rect.x, rect.y, rect.width - EditorGUIUtility.singleLineHeight, rect.height);
 					var buttonRect = new Rect(variableRect.xMax, rect.y, EditorGUIUtility.singleLineHeight, rect.height);
 
-					value = VariableValueDrawer.Draw(variableRect, new GUIContent(name), value, definition);
+					value = VariableValueDrawer.Draw(variableRect, new GUIContent(name), value, definition, true);
 
 					if (_variables.Schema != null)
 					{
@@ -86,7 +86,7 @@ namespace PiRhoSoft.CompositionEditor
 				}
 				else
 				{
-					value = VariableValueDrawer.Draw(rect, new GUIContent(name), value, definition);
+					value = VariableValueDrawer.Draw(rect, new GUIContent(name), value, definition, true);
 				}
 
 				if (changes.changed)

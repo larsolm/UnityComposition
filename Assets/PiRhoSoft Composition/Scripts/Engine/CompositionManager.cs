@@ -61,7 +61,6 @@ namespace PiRhoSoft.CompositionEngine
 
 			private IEnumerator _root;
 			private Stack<IEnumerator> _enumerators = new Stack<IEnumerator>(10);
-			private int _iterations = 0;
 
 			public object Current
 			{
@@ -71,37 +70,13 @@ namespace PiRhoSoft.CompositionEngine
 			public JoinEnumerator(IEnumerator coroutine, Instruction instruction)
 			{
 				_root = coroutine;
-				_enumerators.Push(coroutine);
-
-				Start(instruction);
-			}
-
-			public bool MoveNext()
-			{
-				_iterations = 0;
-				var result = MoveNext_();
-
-				Continue(_iterations);
-				if (!result) Finish();
-
-				return result;
+				Push(coroutine);
 			}
 
 			private bool MoveNext_()
 			{
-				while (_enumerators.Count > 0)
+				while (_enumerators.Count > 0 && Track())
 				{
-					_iterations++;
-
-					if (_iterations >= MaximumIterations)
-					{
-						// this is a protection against infinite loops that can crash or hang Unity
-
-						Debug.LogWarningFormat(_iterationLimitWarning, MaximumIterations);
-						_enumerators.Clear();
-						return false;
-					}
-
 					var enumerator = _enumerators.Peek();
 					var next = enumerator.MoveNext();
 
@@ -111,9 +86,9 @@ namespace PiRhoSoft.CompositionEngine
 					//  - enumerator has a next and it is something else: yield
 
 					if (!next)
-						_enumerators.Pop();
+						Pop();
 					else if (enumerator.Current is IEnumerator child)
-						_enumerators.Push(child);
+						Push(child);
 					else
 						break;
 				}
@@ -121,7 +96,7 @@ namespace PiRhoSoft.CompositionEngine
 				return _enumerators.Count > 0;
 			}
 
-			public void Reset()
+			private void Reset_()
 			{
 				while (_enumerators.Count > 0)
 					_enumerators.Pop();
@@ -130,53 +105,113 @@ namespace PiRhoSoft.CompositionEngine
 				_root.Reset();
 			}
 
-			#region Debugging
-
 #if UNITY_EDITOR
 
-			private InstructionData _data;
+			private int _iterations = 0;
+			private Stack<TrackingEnumerator> _trackers = new Stack<TrackingEnumerator>(5);
 
-			private void Start(Instruction instruction)
+			public bool MoveNext()
 			{
-				_data = new InstructionData();
-				_data.Start(instruction);
+				_iterations = 0;
+				return MoveNext_();
 			}
 
-			private void Continue(int iterations)
+			public void Reset()
 			{
-				_data.Continue(iterations);
+				Reset_();
+				_trackers.Clear();
+				_iterations = 0;
 			}
 
-			private void Finish()
+			private void Push(IEnumerator enumerator)
 			{
-				_data.Finish();
+				_enumerators.Push(enumerator);
+
+				if (enumerator is TrackingEnumerator tracker)
+					_trackers.Push(tracker);
 			}
 
+			private void Pop()
+			{
+				if (_trackers.Count > 0 && _enumerators.Peek() == _trackers.Peek())
+				{
+					_trackers.Peek().Finish();
+					_trackers.Pop();
+				}
+
+				_enumerators.Pop();
+			}
+
+			private bool Track()
+			{
+				_iterations++;
+
+				if (_iterations >= MaximumIterations)
+				{
+					// this is a protection against infinite loops that can crash or hang Unity
+
+					Debug.LogWarningFormat(_iterationLimitWarning, MaximumIterations);
+					_enumerators.Clear();
+					_trackers.Clear();
+					return false;
+				}
+
+				if (_trackers.Count > 0)
+					_trackers.Peek().Continue();
+
+				return true;
+			}
 #else
+		
+			public bool MoveNext() => MoveNext_();
+			public void Reset() => Reset_();
+			private void Push(IEnumerator enumerator) => _enumerators.Push(enumerator);
+			private void Pop() => _enumerators.Pop();
+			private bool Track() => true;
 
-			private void Start(Instruction instruction) { }
-			private void Continue(int iterations) { }
-			private void Finish() { }
-			
 #endif
-
-			#endregion
 		}
 
 		#endregion
 
-		#region Debugging
+		#region Tracking
 
 #if UNITY_EDITOR
 
-		public static bool LogInstructions = false;
+		public static bool LogTracking = false;
 
-		private const string _instructionStartFormat = "{0} started";
-		private const string _instructionCompleteFormat = "{0} complete: ran {1} iterations in {2} frames and {3:F3} seconds\n";
+		private const string _trackingStartFormat = "{0} started";
+		private const string _trackingCompleteFormat = "{0} complete: ran {1} iterations in {2} frames and {3:F3} seconds\n";
 
-		public static Dictionary<Instruction, InstructionData> InstructionState { get; } = new Dictionary<Instruction, InstructionData>();
+		public static Dictionary<Instruction, TrackingData> TrackingState { get; } = new Dictionary<Instruction, TrackingData>();
 
-		public class InstructionData
+		public class TrackingEnumerator : IEnumerator
+		{
+			private IEnumerator _trackee;
+			private TrackingData _data;
+
+			public TrackingEnumerator(Instruction instruction, IEnumerator trackee)
+			{
+				_data = new TrackingData(instruction);
+				_trackee = trackee;
+			}
+
+			public void Continue()
+			{
+				_data.TotalIterations++;
+			}
+
+			public void Finish()
+			{
+				_data.Finish();
+			}
+
+			public object Current => _trackee.Current;
+			public bool MoveNext() => _trackee.MoveNext();
+			public void Reset() => _trackee.Reset();
+		}
+
+		public class TrackingData
 		{
 			public Instruction Instruction;
 			public bool IsComplete;
@@ -189,21 +224,16 @@ namespace PiRhoSoft.CompositionEngine
 			public int TotalFrames => IsComplete ? EndFrame - StartFrame : Time.frameCount - StartFrame;
 			public float TotalSeconds => IsComplete ? EndSeconds - StartSeconds : Time.realtimeSinceStartup - StartSeconds;
 
-			public void Start(Instruction instruction)
+			public TrackingData(Instruction instruction)
 			{
-				InstructionState.Add(instruction, this);
-
-				if (LogInstructions)
-					Debug.LogFormat(_instructionStartFormat, instruction.name);
+				TrackingState.Add(instruction, this);
 
 				Instruction = instruction;
 				StartFrame = Time.frameCount;
 				StartSeconds = Time.realtimeSinceStartup;
-			}
 
-			public void Continue(int iterations)
-			{
-				TotalIterations += iterations;
+				if (LogTracking)
+					Debug.LogFormat(Instruction, _trackingStartFormat, Instruction);
 			}
 
 			public void Finish()
@@ -212,12 +242,18 @@ namespace PiRhoSoft.CompositionEngine
 				EndFrame = Time.frameCount;
 				EndSeconds = Time.realtimeSinceStartup;
 
-				if (LogInstructions)
-					Debug.LogFormat(_instructionCompleteFormat, Instruction.name, TotalIterations, TotalFrames, TotalSeconds);
+				if (LogTracking)
+					Debug.LogFormat(Instruction, _trackingCompleteFormat, Instruction, TotalIterations, TotalFrames, TotalSeconds);
 
-				InstructionState.Remove(Instruction);
+				TrackingState.Remove(Instruction);
 			}
 		}
+
+		public static IEnumerator Track(Instruction instruction, IEnumerator enumerator) => new TrackingEnumerator(instruction, enumerator);
+
+#else
+		
+		public static IEnumerator Track(Instruction instruction, IEnumerator enumerator) => enumerator;
 
 #endif
 

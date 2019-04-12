@@ -68,7 +68,7 @@ namespace PiRhoSoft.CompositionEditor
 			var value = Store.GetVariable(name);
 			var definition = ValueDefinition.Create(VariableType.Empty);
 
-			return VariableValueDrawer.GetHeight(value, definition);
+			return VariableValueDrawer.GetHeight(value, definition, false);
 		}
 
 		protected override void Draw(Rect rect, int index)
@@ -98,7 +98,7 @@ namespace PiRhoSoft.CompositionEditor
 					labelRect = RectHelper.TakeHeight(ref labelRect, EditorGUIUtility.singleLineHeight);
 
 					EditorGUI.LabelField(labelRect, name);
-					value = VariableValueDrawer.Draw(rect, GUIContent.none, value, definition);
+					value = VariableValueDrawer.Draw(rect, GUIContent.none, value, definition, false);
 
 					if (changes.changed)
 						Store.SetVariable(name, value);

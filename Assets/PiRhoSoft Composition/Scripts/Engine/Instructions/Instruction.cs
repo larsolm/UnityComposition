@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				Variables = variables;
 				IsRunning = true;
-				yield return Run(variables);
+				yield return CompositionManager.Track(this, Run(variables));
 				IsRunning = false;
 				Variables = null;
 			}

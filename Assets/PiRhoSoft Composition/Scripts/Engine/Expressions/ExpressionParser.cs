@@ -299,6 +299,11 @@ namespace PiRhoSoft.CompositionEngine
 			AddInfixOperator<ModuloOperator>("%", OperatorPrecedence.Multiplication);
 			AddInfixOperator<ExponentOperator>("^", OperatorPrecedence.Exponentiation);
 
+			AddPrefixOperator<IncrementOperator>("++");
+			AddPrefixOperator<DecrementOperator>("--");
+			AddInfixOperator<PostIncrementOperator>("++", OperatorPrecedence.Postfix);
+			AddInfixOperator<PostDecrementOperator>("--", OperatorPrecedence.Postfix);
+
 			AddPrefixOperator<InvertOperator>("!");
 			AddInfixOperator<AndOperator>("&&", OperatorPrecedence.And);
 			AddInfixOperator<OrOperator>("||", OperatorPrecedence.Or);
