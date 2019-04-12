@@ -47,8 +47,10 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (variable.Name != name)
 			{
-				RemoveVariable(variable.Name);
-				AddVariable(name, variable.Value);
+				Map.Remove(variable.Name);
+				Map.Add(name, index);
+				
+				Variables[index] = Variable.Create(name, variable.Value);
 			}
 		}
 

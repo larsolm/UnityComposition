@@ -287,6 +287,8 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (_graph != null)
 			{
+				InstructionGraphEditor.SyncNodes(_graph);
+
 				_start = CreateInstance<StartNode>();
 				_start.Name = "Start";
 				_start.GraphPosition = _graph.StartPosition;
