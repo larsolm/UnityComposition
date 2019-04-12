@@ -31,7 +31,7 @@ namespace PiRhoSoft.CompositionEditor
 			_graph.RefreshInputs();
 			_graph.RefreshOutputs();
 
-			SyncNodes();
+			SyncNodes(_graph);
 			SetupNodes(_nodesProperty);
 		}
 
@@ -56,31 +56,31 @@ namespace PiRhoSoft.CompositionEditor
 			EditorGUILayout.PropertyField(_nodesProperty);
 		}
 
-		private void SyncNodes()
+		public static void SyncNodes(InstructionGraph graph)
 		{
-			var assets = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(_graph))
+			var assets = AssetDatabase.LoadAllAssetsAtPath(AssetDatabase.GetAssetPath(graph))
 				.Select(asset => asset as InstructionGraphNode)
 				.Where(node => node != null)
 				.ToList();
 
-			for (var i = 0; i < _graph.Nodes.Count; i++)
+			for (var i = 0; i < graph.Nodes.Count; i++)
 			{
-				if (!assets.Contains(_graph.Nodes[i]))
+				if (!assets.Contains(graph.Nodes[i]))
 				{
-					Debug.LogWarningFormat(this, "Syncing nodes for InstructionGraph {0}: removed a node that was not in the asset list", _graph.name);
-					_graph.Nodes.RemoveAt(i--);
-					DestroyImmediate(_graph.Nodes[i], true);
-					EditorUtility.SetDirty(_graph);
+					Debug.LogWarningFormat(graph, "Syncing nodes for InstructionGraph {0}: removed a node that was not in the asset list", graph.name);
+					DestroyImmediate(graph.Nodes[i], true);
+					graph.Nodes.RemoveAt(i--);
+					EditorUtility.SetDirty(graph);
 				}
 			}
 
 			foreach (var asset in assets)
 			{
-				if (asset is InstructionGraphNode node && !_graph.Nodes.Contains(node))
+				if (asset is InstructionGraphNode node && !graph.Nodes.Contains(node))
 				{
-					_graph.Nodes.Add(node);
-					Debug.LogWarningFormat(this, "Syncing nodes for InstructionGraph {0}: added the node {1} that was an asset but was not contained in the list", _graph.name, node.Name);
-					EditorUtility.SetDirty(_graph);
+					graph.Nodes.Add(node);
+					Debug.LogWarningFormat(graph, "Syncing nodes for InstructionGraph {0}: added the node {1} that was an asset but was not contained in the list", graph.name, node.Name);
+					EditorUtility.SetDirty(graph);
 				}
 			}
 		}
