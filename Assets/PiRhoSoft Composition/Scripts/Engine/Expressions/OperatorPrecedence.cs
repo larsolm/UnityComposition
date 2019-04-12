@@ -13,6 +13,7 @@
 		public static OperatorPrecedence Multiplication = LeftAssociative(80);
 		public static OperatorPrecedence Exponentiation = RightAssociative(90);
 		public static OperatorPrecedence Prefix = LeftAssociative(100);
+		public static OperatorPrecedence Postfix = LeftAssociative(110);
 		public static OperatorPrecedence MemberAccess = LeftAssociative(200);
 
 		public static OperatorPrecedence LeftAssociative(int value)
