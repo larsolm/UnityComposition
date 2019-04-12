@@ -10,7 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The root nodes")]
 		[ListDisplay]
-		[ClassDisplay(Type = ClassDisplayType.Inline)]
+		[ClassDisplay(ClassDisplayType.Inline)]
 		public MockupConnectionList EntryPoints = new MockupConnectionList();
 
 		public override void GetConnections(InstructionGraphNode.NodeData data)

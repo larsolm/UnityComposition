@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Director;
 
 		[Tooltip("The timeline to run")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public TimelineVariableSource Timeline = new TimelineVariableSource();
 
 		[Tooltip("The mode of the director when the timeline gets to the end")]

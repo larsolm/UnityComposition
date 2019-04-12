@@ -40,12 +40,12 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: Inventory
+    - Name: Selection
       Definition:
-        _type: 19
-        _constraint: Store|0
-        _objects:
-        - {fileID: 11400000, guid: a310b37e56d4d4b41af7727ae3a763a4, type: 2}
+        _type: 17
+        _constraint: PiRhoSoft.CompositionEngine.SelectionControl, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: Constant
         _initializer:
           _statement: 
@@ -54,9 +54,9 @@ MonoBehaviour:
     - Name: Moves
       Definition:
         _type: 19
-        _constraint: Store|0
-        _objects:
-        - {fileID: 11400000, guid: 6081066e2f332ac4d842b4cb3d6bde7a, type: 2}
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: Constant
         _initializer:
           _statement: 
@@ -79,7 +79,7 @@ MonoBehaviour:
         _objects: []
         _tag: Reset
         _initializer:
-          _statement: Random(75, 150)
+          _statement: Random(100, 150)
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Attack
@@ -122,6 +122,26 @@ MonoBehaviour:
           _statement: HP
         _isTypeLocked: 1
         _isConstraintLocked: 0
+    - Name: AttackMod
+      Definition:
+        _type: 2
+        _constraint: 
+        _objects: []
+        _tag: Reset
+        _initializer:
+          _statement: 0
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: DefenseMod
+      Definition:
+        _type: 2
+        _constraint: 
+        _objects: []
+        _tag: Reset
+        _initializer:
+          _statement: 0
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
     - Name: Poison
       Definition:
         _type: 1
@@ -132,15 +152,25 @@ MonoBehaviour:
           _statement: false
         _isTypeLocked: 1
         _isConstraintLocked: 0
+    - Name: Inventory
+      Definition:
+        _type: 19
+        _constraint: Store|0
+        _objects:
+        - {fileID: 0}
+        _tag: Constant
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
     - Name: Variables
       Definition:
         _type: 18
-        _constraint: 0
-        _objects:
-        - {fileID: 0}
+        _constraint: 
+        _objects: []
         _tag: Reset
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 265
+  _version: 321

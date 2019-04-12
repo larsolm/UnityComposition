@@ -17,6 +17,7 @@ MonoBehaviour:
     _type: 17
     _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
       Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -28,6 +29,7 @@ MonoBehaviour:
       Definition:
         _type: 15
         _constraint: +Level 1,Level 2
+        _objects: []
         _tag: 
         _initializer:
           _statement: 

@@ -17,6 +17,7 @@ MonoBehaviour:
     _type: 17
     _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -394,14 +395,14 @@ MonoBehaviour:
   Target:
     Type: 1
     Reference:
-      _variable: fighter.Variables.target
+      _variable: fighter.Variables.Target
       _tokens:
       - Type: 0
         Text: fighter
       - Type: 0
         Text: Variables
       - Type: 0
-        Text: target
+        Text: Target
     Value: {fileID: 0}
   Output:
     _variable: targetPosition

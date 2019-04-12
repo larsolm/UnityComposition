@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The value to set the TimeScale to")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		[VariableConstraint(0.0f, 100.0f)]
 		public FloatVariableSource TimeScale = new FloatVariableSource(1.0f);
 

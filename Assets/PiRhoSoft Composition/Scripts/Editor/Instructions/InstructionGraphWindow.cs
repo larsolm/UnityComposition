@@ -20,11 +20,11 @@ namespace PiRhoSoft.CompositionEditor
 		// Node Editor Base Extension: https://unitylist.com/p/tb/Unity-Node-Editor-Base
 
 		private static readonly Icon _gridTexture = Icon.Base64("iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAIAAAAlC+aJAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAOwgAADsIBFShKgAAAABl0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMC4xNzNun2MAAAKnSURBVGhD7ZnbbiJBDETzNwTCfbm/Av//S3uGKkXTETYbCS2zG5+HpNsu3F3tYWaUvH2kTCaT1Wq13W4ZgKMtSv26obETLYpTarlcRhogNZ1Od7vdbDZLZOPxeL1eX6/XMlAGvkCqDPSgRBkwipcBUwZ6KPUyA4gS0LHeZrNhAI62KEU50NiJFsUptVgsIg2QYn/4xEYie39/52Q7A/zKYUnOw5MYlgRPYihFozyJQcZxeHIPjhXN5XJ508IJ6MCTmD+XeZTyUMaxHg6HzoBbEkATh34JORBAiaEb6L7SMUjRUU4fc7RFqZfdhRwIoEQZMIqXAVMGeihVBgyp7xlAlICO9epB1qH48w2o9QnUoqGexCADT2Io9VCGSWT89PweHNZ+v+/ehRwIQMd6lLud79rRFqVu+99q7ESL4tpZpIFP2ef4Lhy/DbglATSxvgNG8ecbQJ2AFB3l9DFHW5RSZzV2okVxSj35NupAACXKgFG8DJgy0EOpMmBIfc8AogR0rFfPgQ7Fn9uB1/xh66FMGvD8HnTyeDx2BjiPBNrNufIBBuBoi1JU1OUBTrQoTikKRhpQit3T+UQ2n88p9V+8zOmSikA69LuQAwGUKANG8TJgykAPpcqAIfXDDCBKQMd6g36QoUugljpws/3haItS6oDGTrQorg5EGiDF2dMBXhYSGR5YrnuVQPovwkH4ZQ67OVwYqD2JUQc8iaEULfUkgLNni1xpnt+DJrgDuqQiuAqH/h1AnYB06HchBwIoUQaM4mXAlIEeSpUBQ+qHGWCUwPOC5w47YwCOtiiFT9DYiRbFKcWDNtIAKfaNT3aZyEajEQfRGcBHAnviMHjr0P4cbVFqf0NjJ1oUpxSbizSg1Ol0wmoiY/f+Jx8mchCBJzF/X4bgfD7/Bp0ChIMH9TUUAAAAAElFTkSuQmCC");
-		private static readonly Icon _windowIcon = Icon.Base64("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wEOBR4Wp+XVagAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAATdJREFUOE+lkUtuglAYhWnnfQwITUdEQF6CPFRimBqcdKCzdl3GCZg0cS8O3IeJ2NA90HNSBsqlsYkkPx+H++VcbpDqur5pfm+SdJem6UOSJI/Xhh79i4LRaPQ0Ho8PmNNkMqnAsqGQMQf6FwVBEDzj5ck0zfcwDD/7/f4badv2x3nmOj36QkEcx5XneVs878FNQyHToy8URFFUYsdsOByuDcOYksjzVs7odRZg+AU5xJ3v+ysSuWjlnF5nAYQSZ1wOBoMCnDUUMr3OAuxSOY6zhbgHNw2FTE8oUFWVBWWv18sgrZGnJM4+P89cp0dfKMD5+AW567o7cNWwaOWcXmcBFktd1xeWZRWaps1I5GUrL+j9VXDEb/oCv8FTw658FApw3SuK8iLL8uu1oUf/ouCW6Xz5/6mlH0LCqCZdcm2YAAAAAElFTkSuQmCC");
+		private const string _windowIcon = "iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wEOBR4Wp+XVagAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAATdJREFUOE+lkUtuglAYhWnnfQwITUdEQF6CPFRimBqcdKCzdl3GCZg0cS8O3IeJ2NA90HNSBsqlsYkkPx+H++VcbpDqur5pfm+SdJem6UOSJI/Xhh79i4LRaPQ0Ho8PmNNkMqnAsqGQMQf6FwVBEDzj5ck0zfcwDD/7/f4badv2x3nmOj36QkEcx5XneVs878FNQyHToy8URFFUYsdsOByuDcOYksjzVs7odRZg+AU5xJ3v+ysSuWjlnF5nAYQSZ1wOBoMCnDUUMr3OAuxSOY6zhbgHNw2FTE8oUFWVBWWv18sgrZGnJM4+P89cp0dfKMD5+AW567o7cNWwaOWcXmcBFktd1xeWZRWaps1I5GUrL+j9VXDEb/oCv8FTw658FApw3SuK8iLL8uu1oUf/ouCW6Xz5/6mlH0LCqCZdcm2YAAAAAElFTkSuQmCC";
 		private const string _pauseIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAGVJREFUOE+l0bERwCAMQ1EvxACswWhZ2LHuKKSLKByKV+gfrojMvGZjl41dnzDnHOXZxqkxGVCPVsltnRqTAe7ANSYD3IFrTAa4A9eYDHAHrjEZ4A5cYzKgHt1/8R82dtnYERHxAqpHVWhCcdFJAAAAAElFTkSuQmCC";
 		private const string _stopIcon = "iVBORw0KGgoAAAANSUhEUgAAABEAAAAOCAYAAADJ7fe0AAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAAA7CAAAOwgEVKEqAAAAAB3RJTUUH4wEOBR0hNHUjpgAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAAE9JREFUOE/t0bENACAIBMBfiAFYg9FcGKEUiBFtLa7gw9MAVX1Whl1l2JUCZiYzNih2lsHZkhjdkNhZBudLoRT9I9nRkfcX3yjDrjLsAIAJNpdTpphdxWYAAAAASUVORK5CYII=";
 
-		private static readonly GUIContent _titleLabel = new GUIContent("Instruction Graph");
+		private static readonly Label _windowLabel = new Label(Icon.Base64(_windowIcon), label: "Instruction Graph");
 		private static readonly Style _headerStyle = new Style(CreateHeaderStyle);
 		private static readonly Style _connectionStyle = new Style(CreateConnectionStyle);
 		private static readonly Style _commentStyle = new Style(CreateCommentStyle);
@@ -54,7 +54,6 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly Label _openWatchButton = new Label(Icon.BuiltIn("UnityEditor.LookDevView"), "", "Open the watch window");
 
 		private const float _knobRadius = 6.0f;
-		private const float _toolbarPadding = 17.0f;
 		private const float _toolbarHeight = 17.0f;
 		private const float _toolbarButtonWidth = 60.0f;
 		private const float _dragTolerance = 4.0f;
@@ -78,10 +77,11 @@ namespace PiRhoSoft.CompositionEditor
 		private static Color _callstackColor = new Color(0.3f, 0.8f, 0.3f, 1.0f);
 
 		private GenericMenu _viewMenu;
-		private GenericMenu _nodeMenu;
 		private GenericMenu _editMenu;
 		private GenericMenu _contextMenu;
 		private SettingsMenu _settingsMenu;
+		private SelectionTree _nodeTree;
+		private NodeList _nodeList;
 
 		private InstructionGraph _graph = null;
 		private StartNode _start = null;
@@ -162,7 +162,6 @@ namespace PiRhoSoft.CompositionEditor
 		public static InstructionGraphWindow ShowNewWindow()
 		{
 			var window = CreateInstance<InstructionGraphWindow>();
-			window.titleContent = _titleLabel;
 			window.Show();
 			return window;
 		}
@@ -194,11 +193,11 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			base.Setup(input);
 
-			titleContent.image = _windowIcon.Content;
+			titleContent = _windowLabel.Content;
 
+			CreateNodeTree(ref _nodeTree, ref _nodeList);
 			CreateViewMenu(ref _viewMenu, string.Empty);
-			CreateNodeMenu(ref _nodeMenu, string.Empty);
-			CreateEditMenu(ref _editMenu, string.Empty);
+			CreateEditMenu(ref _editMenu);
 
 			_contextMenu = CreateContextMenu();
 			_settingsMenu = new SettingsMenu();
@@ -225,10 +224,11 @@ namespace PiRhoSoft.CompositionEditor
 			TeardownNodes();
 
 			_viewMenu = null;
-			_nodeMenu = null;
 			_editMenu = null;
 			_contextMenu = null;
 			_settingsMenu = null;
+			_nodeTree = null;
+			_nodeList = null;
 
 			base.Teardown();
 		}
@@ -272,20 +272,11 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private void SetGraph(object selected)
+		private void CreateGraph(Type type)
 		{
-			if (selected is InstructionGraph graph)
+			var graph = AssetHelper.Create(type, AssetLocation.Selectable, type.Name) as InstructionGraph;
+			if (graph)
 				SetGraph(graph);
-		}
-
-		private void CreateGraph(object selected)
-		{
-			if (selected is Type type)
-			{
-				var graph = AssetHelper.Create(type, AssetLocation.Selectable, null);
-				if (graph)
-					SetGraph(graph);
-			}
 		}
 
 		#endregion
@@ -529,6 +520,12 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
+		private class NodeList
+		{
+			public List<Type> Types;
+			public GUIContent[] Names;
+		}
+
 		private void CreateViewMenu(ref GenericMenu menu, string prefix)
 		{
 			if (menu == null)
@@ -542,8 +539,29 @@ namespace PiRhoSoft.CompositionEditor
 			menu.AddItem(new GUIContent(prefix + "Zoom Out _PGDN"), false, ShowAll);
 		}
 
-		private void CreateNodeMenu(ref GenericMenu menu, string prefix)
+		private void CreateNodeTree(ref SelectionTree tree, ref NodeList nodes)
 		{
+			if (tree == null)
+				tree = new SelectionTree();
+
+			if (nodes == null)
+				nodes = new NodeList();
+
+			nodes.Types = TypeHelper.ListDerivedTypes<InstructionGraphNode>(false);
+			nodes.Names = nodes.Types.Select(type =>
+				{
+					var attribute = TypeHelper.GetAttribute<CreateInstructionGraphNodeMenuAttribute>(type);
+					return new GUIContent(attribute == null ? type.Name : attribute.MenuName, AssetPreview.GetMiniTypeThumbnail(type));
+				})
+				.ToArray();
+
+			tree.Add("Nodes", nodes.Names);
+		}
+
+		private void CreateNodeMenu(ref GenericMenu menu)
+		{
+			var prefix = "Create/";
+
 			if (menu == null)
 				menu = new GenericMenu();
 
@@ -584,47 +602,27 @@ namespace PiRhoSoft.CompositionEditor
 			menu.AddItem(new GUIContent(prefix + "Mockup"), false, () => CreateNode(typeof(MockupNode), "Mockup", _createPosition));
 		}
 
-		private void CreateEditMenu(ref GenericMenu menu, string prefix)
+		private void CreateEditMenu(ref GenericMenu menu)
 		{
 			if (menu == null)
 				menu = new GenericMenu();
 
-			menu.AddItem(new GUIContent(prefix + "Cut %x"), false, CutNodes);
-			menu.AddItem(new GUIContent(prefix + "Copy %c"), false, CopyNodes);
-			menu.AddItem(new GUIContent(prefix + "Paste %v"), false, PasteNodes);
-			menu.AddSeparator(prefix);
-			menu.AddItem(new GUIContent(prefix + "Duplicate %d"), false, ShowAll);
-			menu.AddItem(new GUIContent(prefix + "Delete _DELETE"), false, ShowAll);
+			menu.AddItem(new GUIContent("Cut %x"), false, CutNodes);
+			menu.AddItem(new GUIContent("Copy %c"), false, CopyNodes);
+			menu.AddItem(new GUIContent("Paste %v"), false, PasteNodes);
+			menu.AddItem(new GUIContent("Duplicate %d"), false, DuplicateNodes);
+			menu.AddSeparator(string.Empty);
+			menu.AddItem(new GUIContent("Delete _DELETE"), false, ShowAll);
 		}
 
 		private GenericMenu CreateContextMenu()
 		{
 			var menu = new GenericMenu();
 
-			CreateNodeMenu(ref menu, "Create/");
+			CreateNodeMenu(ref menu);
 			CreateViewMenu(ref menu, "View/");
 			menu.AddSeparator(string.Empty);
-			CreateEditMenu(ref menu, string.Empty);
-
-			return menu;
-		}
-
-		private GenericMenu CreateSelectMenu()
-		{
-			var types = TypeHelper.ListDerivedTypes<InstructionGraph>(false);
-
-			var menu = new GenericMenu();
-
-			foreach (var type in types)
-				menu.AddItem(new GUIContent("Create Graph/" + ObjectNames.NicifyVariableName(type.Name)), false, CreateGraph, type);
-
-			var graphs = AssetHelper.GetAssetList<InstructionGraph>(false, false);
-
-			if (graphs.Assets.Count > 0)
-				menu.AddSeparator(string.Empty);
-
-			foreach (var graph in graphs.Assets)
-				menu.AddItem(new GUIContent(graph.name), graph == _graph, SetGraph, graph);
+			CreateEditMenu(ref menu);
 
 			return menu;
 		}
@@ -795,94 +793,123 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void DrawToolbar(Rect rect)
 		{
-			var padding = _toolbarPadding;
+			var toolbarRect = RectHelper.TakeHeight(ref rect, _toolbarHeight);
+			var buttonWidth = 28;
 
-			using (new EditorGUILayout.HorizontalScope(EditorStyles.toolbar))
+			GUI.Box(toolbarRect, GUIContent.none, EditorStyles.toolbar);
+
+			RectHelper.TakeWidth(ref toolbarRect, 5);
+			RectHelper.TakeTrailingWidth(ref toolbarRect, 5);
+
+			var createRect = RectHelper.TakeWidth(ref toolbarRect, _toolbarButtonWidth);
+			var viewRect = RectHelper.TakeWidth(ref toolbarRect, _toolbarButtonWidth);
+			var editRect = RectHelper.TakeWidth(ref toolbarRect, _toolbarButtonWidth);
+			var playRect = RectHelper.TakeWidth(ref toolbarRect, buttonWidth);
+			var pauseRect = RectHelper.TakeWidth(ref toolbarRect, buttonWidth);
+			var stepRect = RectHelper.TakeWidth(ref toolbarRect, buttonWidth);
+			var stopRect = RectHelper.TakeWidth(ref toolbarRect, buttonWidth);
+			var breakRect = RectHelper.TakeWidth(ref toolbarRect, buttonWidth);
+
+			var watchRect = RectHelper.TakeTrailingWidth(ref toolbarRect, buttonWidth);
+			var lockRect = RectHelper.TakeTrailingWidth(ref toolbarRect, buttonWidth);
+
+			var graphRect = RectHelper.TakeTrailingWidth(ref toolbarRect, _toolbarButtonWidth * 2);
+
+			var settingsRect = RectHelper.TakeTrailingWidth(ref toolbarRect, _toolbarButtonWidth);
+			var debugLoggingRect = RectHelper.TakeTrailingWidth(ref toolbarRect, buttonWidth);
+			var debugBreakRect = RectHelper.TakeTrailingWidth(ref toolbarRect, buttonWidth);
+
+			using (new EditorGUI.DisabledGroupScope(_graph == null))
 			{
-				using (new EditorGUI.DisabledGroupScope(_graph == null))
+				var createSelection = SelectionPopup.Draw(createRect, new GUIContent("Create", "Create a new Node"), EditorStyles.toolbarDropDown, new SelectionState { Index = -1 }, _nodeTree);
+				if (createSelection.Index >= 0 && createSelection.Index < _nodeList.Types.Count)
 				{
-					if (GUILayout.Button("Create", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
-					{
-						_createPosition = ViewArea.center;
-						_nodeMenu.DropDown(new Rect(padding, _toolbarHeight, 0.0f, 0.0f));
-					}
-
-					padding += _toolbarButtonWidth;
-
-					if (GUILayout.Button("View", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
-						_viewMenu.DropDown(new Rect(padding, _toolbarHeight, 0f, 0f));
-
-					padding += _toolbarButtonWidth;
-
-					if (GUILayout.Button("Edit", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
-					{
-						_createPosition = ViewArea.center;
-						_editMenu.DropDown(new Rect(padding, _toolbarHeight, 0f, 0f));
-					}
+					var type = _nodeList.Types[createSelection.Index];
+					CreateNode(type, type.Name, ViewArea.center);
 				}
 
-				var isEnabled = Application.isPlaying && _graph != null && _graph.IsRunning;
-				var isPlaying = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Running;
-				var isPaused = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Paused;
-				var isStepping = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Step;
-				var isStopping = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Stopped;
+				if (GUI.Button(viewRect, "View", EditorStyles.toolbarDropDown))
+					_viewMenu.DropDown(new Rect(viewRect.x, viewRect.yMax, 0f, 0f));
 
-				using (new EditorGUI.DisabledScope(!isEnabled))
+				if (GUI.Button(editRect, "Edit", EditorStyles.toolbarDropDown))
 				{
-					var playButton = isPlaying || !isEnabled ? _playDisabledButton : _playButton;
-					var pauseButton = isPaused || !isEnabled ? _pauseDisabledButton : _pauseButton;
-					var stepButton = isStepping || !isEnabled ? _stepDisabledButton : _stepButton;
-					var stopButton = isStopping || !isEnabled ? _stopDisabledButton : _stopButton;
-
-					var shouldPlay = GUILayout.Toggle(isPlaying, playButton.Content, EditorStyles.toolbarButton);
-					var shouldPause = GUILayout.Toggle(isPaused, pauseButton.Content, EditorStyles.toolbarButton);
-					var shouldStep = GUILayout.Toggle(isStepping, stepButton.Content, EditorStyles.toolbarButton);
-					var shouldStop = GUILayout.Toggle(isStopping, stopButton.Content, EditorStyles.toolbarButton);
-
-					if (isEnabled)
-					{
-						if (shouldPlay != isPlaying) _graph.DebugPlay();
-						if (shouldPause != isPaused) _graph.DebugPause();
-						if (shouldStep != isStepping) _graph.DebugStep();
-						if (shouldStop != isStopping) _graph.DebugStop();
-					}
+					_createPosition = ViewArea.center;
+					_editMenu.DropDown(new Rect(editRect.x, editRect.yMax, 0f, 0f));
 				}
-
-				var canBreak = _selectedNodes.Count == 1 && _selectedNodes[0].Node != _start && !(_selectedNodes[0].Node is CommentNode);
-				var hasBreak = canBreak && _selectedNodes[0].Node.IsBreakpoint;
-
-				using (new EditorGUI.DisabledScope(!canBreak))
-				{
-					var breakpointButton = canBreak ? (hasBreak ? _removeBreakpointButton : _addBreakpointButton) : _breakpointDisabledButton;
-					hasBreak = GUILayout.Toggle(hasBreak, breakpointButton.Content, EditorStyles.toolbarButton);
-
-					if (canBreak)
-						_selectedNodes[0].Node.IsBreakpoint = hasBreak;
-				}
-
-				GUILayout.FlexibleSpace();
-
-				InstructionGraph.IsDebugBreakEnabled = GUILayout.Toggle(InstructionGraph.IsDebugBreakEnabled, InstructionGraph.IsDebugBreakEnabled ? _disableBreakpointsButton.Content : _enableBreakpointsButton.Content, EditorStyles.toolbarButton);
-				InstructionGraph.IsDebugLoggingEnabled = GUILayout.Toggle(InstructionGraph.IsDebugLoggingEnabled, InstructionGraph.IsDebugLoggingEnabled ? _disableLoggingButton.Content : _enableLoggingButton.Content, EditorStyles.toolbarButton);
-
-				_breakpointsEnabled.Value = InstructionGraph.IsDebugBreakEnabled;
-				_loggingEnabled.Value = InstructionGraph.IsDebugLoggingEnabled;
-
-				if (GUILayout.Button("Settings", EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth)))
-					PopupWindow.Show(new Rect(position.width - (4 * _toolbarButtonWidth), _toolbarHeight, 0, 0), _settingsMenu);
-
-				if (GUILayout.Button(_graph == null ? "No Graph Selected" : _graph.name, EditorStyles.toolbarDropDown, GUILayout.Width(_toolbarButtonWidth * 2)))
-				{
-					var menu = CreateSelectMenu();
-					menu.DropDown(new Rect(position.width - (3 * _toolbarButtonWidth), _toolbarHeight, 0, 0));
-				}
-
-				_isLocked = GUILayout.Toggle(_isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);
-
-				if (GUILayout.Button(_openWatchButton.Content, EditorStyles.toolbarButton))
-					WatchWindow.ShowWindow();
 			}
+
+			var isEnabled = Application.isPlaying && _graph != null && _graph.IsRunning;
+			var isPlaying = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Running;
+			var isPaused = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Paused;
+			var isStepping = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Step;
+			var isStopping = isEnabled && _graph.DebugState == InstructionGraph.PlaybackState.Stopped;
+
+			using (new EditorGUI.DisabledScope(!isEnabled))
+			{
+				var playButton = isPlaying || !isEnabled ? _playDisabledButton : _playButton;
+				var pauseButton = isPaused || !isEnabled ? _pauseDisabledButton : _pauseButton;
+				var stepButton = isStepping || !isEnabled ? _stepDisabledButton : _stepButton;
+				var stopButton = isStopping || !isEnabled ? _stopDisabledButton : _stopButton;
+
+				var shouldPlay = GUI.Toggle(playRect, isPlaying, playButton.Content, EditorStyles.toolbarButton);
+				var shouldPause = GUI.Toggle(pauseRect, isPaused, pauseButton.Content, EditorStyles.toolbarButton);
+				var shouldStep = GUI.Toggle(stepRect, isStepping, stepButton.Content, EditorStyles.toolbarButton);
+				var shouldStop = GUI.Toggle(stopRect, isStopping, stopButton.Content, EditorStyles.toolbarButton);
+
+				if (isEnabled)
+				{
+					if (shouldPlay != isPlaying) _graph.DebugPlay();
+					if (shouldPause != isPaused) _graph.DebugPause();
+					if (shouldStep != isStepping) _graph.DebugStep();
+					if (shouldStop != isStopping) _graph.DebugStop();
+				}
+			}
+
+			var canBreak = _selectedNodes.Count == 1 && _selectedNodes[0].Node != _start && !(_selectedNodes[0].Node is CommentNode);
+			var hasBreak = canBreak && _selectedNodes[0].Node.IsBreakpoint;
+
+			using (new EditorGUI.DisabledScope(!canBreak))
+			{
+				var breakpointButton = canBreak ? (hasBreak ? _removeBreakpointButton : _addBreakpointButton) : _breakpointDisabledButton;
+				hasBreak = GUI.Toggle(breakRect, hasBreak, breakpointButton.Content, EditorStyles.toolbarButton);
+
+				if (canBreak)
+					_selectedNodes[0].Node.IsBreakpoint = hasBreak;
+			}
+
+			InstructionGraph.IsDebugBreakEnabled = GUI.Toggle(debugBreakRect, InstructionGraph.IsDebugBreakEnabled, InstructionGraph.IsDebugBreakEnabled ? _disableBreakpointsButton.Content : _enableBreakpointsButton.Content, EditorStyles.toolbarButton);
+			InstructionGraph.IsDebugLoggingEnabled = GUI.Toggle(debugLoggingRect, InstructionGraph.IsDebugLoggingEnabled, InstructionGraph.IsDebugLoggingEnabled ? _disableLoggingButton.Content : _enableLoggingButton.Content, EditorStyles.toolbarButton);
+
+			_breakpointsEnabled.Value = InstructionGraph.IsDebugBreakEnabled;
+			_loggingEnabled.Value = InstructionGraph.IsDebugLoggingEnabled;
+
+			if (GUI.Button(settingsRect, "Settings", EditorStyles.toolbarDropDown))
+				PopupWindow.Show(new Rect(settingsRect.x, settingsRect.yMax, 0f, 0f), _settingsMenu);
+
+			var graphList = AssetHelper.GetAssetList<InstructionGraph>(false, true);
+			var graphIndex = graphList.GetIndex(_graph);
+			var graphSelection = SelectionPopup.Draw(graphRect, new GUIContent(_graph ? _graph.name : "No Graph Selected", "Select or create a new Instruction Graph"), EditorStyles.toolbarDropDown, new SelectionState { Index = graphIndex, Tab = 0 }, graphList.Tree);
+
+			if (graphSelection.Tab == 0)
+			{
+				if (graphSelection.Index != graphIndex)
+				{
+					var graph = graphList.GetAsset(graphSelection.Index) as InstructionGraph;
+					SetGraph(graph);
+				}
+			}
+			else if (graphSelection.Tab == 1)
+			{
+				var type = graphList.GetType(graphSelection.Index);
+				CreateGraph(type);
+			}
+
+			_isLocked = GUI.Toggle(lockRect, _isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);
+
+			if (GUI.Button(watchRect, _openWatchButton.Content, EditorStyles.toolbarButton))
+				WatchWindow.ShowWindow();
 		}
+		
 
 		private void DrawNodes(Rect rect)
 		{
@@ -1154,6 +1181,12 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
+		private void DuplicateNodes()
+		{
+			CopyNodes();
+			PasteNodes();
+		}
+
 		#endregion
 
 		#region Input
@@ -1265,7 +1298,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			input.Create<InputManager.KeyboardTrigger>()
 				.SetEvent(EventType.KeyDown, KeyCode.D, control: true)
-				.AddAction(() => { _createPosition = ViewArea.center; CopyNodes(); PasteNodes(); });
+				.AddAction(() => { _createPosition = ViewArea.center; DuplicateNodes(); });
 		}
 
 		private void SetupContextMenu(InputManager input)

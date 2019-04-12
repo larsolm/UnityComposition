@@ -13,6 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The name of the parameter to set")]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public StringVariableSource Parameter = new StringVariableSource();
 
 		[Tooltip("The type of the parameter to set")]
@@ -25,17 +26,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Bool)]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public BoolVariableSource BoolValue = new BoolVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Int)]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public IntVariableSource IntValue = new IntVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Float)]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public FloatVariableSource FloatValue = new FloatVariableSource();
 
 		public override Color NodeColor => Colors.Animation;

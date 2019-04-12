@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.UtilityEditor
 {
@@ -73,16 +72,18 @@ namespace PiRhoSoft.UtilityEditor
 			}
 		}
 
-		private static readonly Style Header = new Style(() => new GUIStyle("In BigTitle") { font = EditorStyles.boldLabel.font });
-		private static readonly Style ItemButton = new Style(() => new GUIStyle("PR Label") { alignment = TextAnchor.MiddleLeft, fixedHeight = _itemHeight });
-		private static readonly Style Background = new Style(() => new GUIStyle("grey_border"));
-		private static readonly Style RightArrow = new Style(() => new GUIStyle("AC RightArrow"));
-		private static readonly Style LeftArrow = new Style(() => new GUIStyle("AC LeftArrow"));
-		private static readonly Style SearchText = new Style(() => new GUIStyle("SearchTextField"));
-		private static readonly Style SearchCancelEmpty = new Style(() => new GUIStyle("SearchCancelButtonEmpty"));
-		private static readonly Style SearchCancel = new Style(() => new GUIStyle("SearchCancelButton"));
-		private static readonly Label FolderIcon = new Label(Icon.BuiltIn("FolderEmpty Icon"));
-		private static readonly Label DefaultTypeIcon = new Label(Icon.BuiltIn("cs Script Icon"));
+		private static readonly Style _headerStyle = new Style(() => new GUIStyle("In BigTitle") { font = EditorStyles.boldLabel.font });
+		private static readonly Style _itemButtonStyle = new Style(() => new GUIStyle("PR Label") { alignment = TextAnchor.MiddleLeft, fixedHeight = _itemHeight });
+		private static readonly Style _backgroundStyle = new Style(() => new GUIStyle("grey_border"));
+		private static readonly Style _childArrowStyle = new Style(() => new GUIStyle("AC RightArrow"));
+		private static readonly Style _parentArrowStyle = new Style(() => new GUIStyle("AC LeftArrow"));
+		private static readonly Style _searchTextStyle = new Style(() => new GUIStyle("SearchTextField"));
+		private static readonly Style _searchCancelEmptyStyle = new Style(() => new GUIStyle("SearchCancelButtonEmpty"));
+		private static readonly Style _searchCancelStyle = new Style(() => new GUIStyle("SearchCancelButton"));
+		private static readonly Label _leftTabIcon = new Label(Icon.BuiltIn("tab_prev"));
+		private static readonly Label _rightTabIcon = new Label(Icon.BuiltIn("tab_next"));
+		private static readonly Label _folderIcon = new Label(Icon.BuiltIn("FolderEmpty Icon"));
+		private static readonly Label _defaultTypeIcon = new Label(Icon.BuiltIn("cs Script Icon"));
 
 		private const string _invalidTreeWarning = "(USCIT) Unable to show search tree: invalid tabs and content";
 
@@ -90,6 +91,7 @@ namespace PiRhoSoft.UtilityEditor
 		private const int _itemHeight = 20;
 		private const int _visibleItemCount = 14;
 		private const int _windowHeight = 2 * _headerHeight + _itemHeight * _visibleItemCount;
+		private const int _minimumWidth = 250;
 
 		private static SelectionPopup _instance;
 		private static int _selectionId = -1;
@@ -122,11 +124,11 @@ namespace PiRhoSoft.UtilityEditor
 		public static bool HasSelection(int id) => _selectionId == id && _selectionMade;
 		public static SelectionState TakeSelection() { _selectionId = -1; _selectionMade = false; return _selectionState; }
 
-		public static SelectionState Draw(Rect position, GUIContent label, SelectionState state, SelectionTree tree)
+		public static SelectionState Draw(Rect position, GUIContent label, GUIStyle style, SelectionState state, SelectionTree tree)
 		{
 			var id = GUIUtility.GetControlID(FocusType.Passive);
 
-			if (GUI.Button(position, label))
+			if (GUI.Button(position, label, style))
 				Show(id, position, state, tree);
 
 			if (HasSelection(id))
@@ -136,6 +138,11 @@ namespace PiRhoSoft.UtilityEditor
 			}
 
 			return state;
+		}
+
+		public static SelectionState Draw(Rect position, GUIContent label, SelectionState state, SelectionTree tree)
+		{
+			return Draw(position, label, GUI.skin.button, state, tree);
 		}
 
 		public static void Show(int id, Rect position, SelectionState state, SelectionTree tree)
@@ -148,10 +155,8 @@ namespace PiRhoSoft.UtilityEditor
 			_selectionState = state;
 
 			_instance = CreateInstance<SelectionPopup>();
-			_instance.Setup(position, state, tree);
-
-			_instance.ShowAsDropDown(new Rect(GUIUtility.GUIToScreenPoint(position.position), position.size), new Vector2(position.width, _windowHeight));
-			_instance.Focus();
+			_instance.Setup(state, tree);
+			_instance.ShowAsDropDown(new Rect(GUIUtility.GUIToScreenPoint(new Vector2(position.x, position.yMax)), Vector2.zero), new Vector2(Mathf.Max(_minimumWidth, position.width), _windowHeight));
 		}
 
 		void OnDestroy()
@@ -161,7 +166,7 @@ namespace PiRhoSoft.UtilityEditor
 
 		#endregion
 
-		private void Setup(Rect position, SelectionState state, SelectionTree tree)
+		private void Setup(SelectionState state, SelectionTree tree)
 		{
 			CreateTrees(tree);
 			SetState(state);
@@ -199,10 +204,10 @@ namespace PiRhoSoft.UtilityEditor
 						child = GetChild(child, path);
 
 						if (child == null)
-							child = TreeItem.Branch(path, new GUIContent(menu, FolderIcon.Content.image), previousChild);
+							child = TreeItem.Branch(path, new GUIContent(menu, _folderIcon.Content.image), previousChild);
 					}
 
-					leaves.Add(TreeItem.Leaf(index, path, new GUIContent(submenus.Last(), node.image ?? DefaultTypeIcon.Content.image), child));
+					leaves.Add(TreeItem.Leaf(index, path, new GUIContent(submenus.Last(), node.image ?? _defaultTypeIcon.Content.image), child));
 				}
 
 				_roots.Add(root);
@@ -280,15 +285,15 @@ namespace PiRhoSoft.UtilityEditor
 
 			var backgroundRect = new Rect(Vector2.zero, position.size);
 
-			GUI.Label(backgroundRect, GUIContent.none, Background.Content);
+			GUI.Label(backgroundRect, GUIContent.none, _backgroundStyle.Content);
 			GUI.SetNextControlName("Search");
 			EditorGUI.FocusTextInControl("Search");
 			RectHelper.TakeVerticalSpace(ref backgroundRect);
 
 			var searchRect = RectHelper.Inset(RectHelper.TakeHeight(ref backgroundRect, _headerHeight), 8, 8, RectHelper.VerticalSpace, RectHelper.VerticalSpace);
 			var cancelRect = RectHelper.TakeTrailingWidth(ref searchRect, RectHelper.IconWidth);
-			var search = GUI.TextField(searchRect, _delayedSearch ?? _search, SearchText.Content);
-			var buttonStyle = string.IsNullOrEmpty(_search) ? SearchCancelEmpty.Content : SearchCancel.Content;
+			var search = GUI.TextField(searchRect, _delayedSearch ?? _search, _searchTextStyle.Content);
+			var buttonStyle = string.IsNullOrEmpty(_search) ? _searchCancelEmptyStyle.Content : _searchCancelStyle.Content;
 
 			if (GUI.Button(cancelRect, GUIContent.none, buttonStyle))
 			{
@@ -346,25 +351,31 @@ namespace PiRhoSoft.UtilityEditor
 
 				var headerRect = RectHelper.Inset(RectHelper.TakeHeight(ref rect, _headerHeight), 1, 1, 0, 0);
 
-				GUI.Label(headerRect, parent.Content, Header.Content);
+				GUI.Label(headerRect, parent.Content, _headerStyle.Content);
 
 				if (parent.Parent != null)
 				{
 					var arrowRect = RectHelper.AdjustHeight(RectHelper.TakeLeadingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
 
-					if (GUI.Button(arrowRect, GUIContent.none, LeftArrow.Content))
+					if (GUI.Button(arrowRect, GUIContent.none, _parentArrowStyle.Content))
 						GoToParent();
 				}
 				else if (_roots.Count > 1)
 				{
-					var leftRect = RectHelper.AdjustHeight(RectHelper.TakeLeadingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
-					var rightRect = RectHelper.AdjustHeight(RectHelper.TakeTrailingIcon(ref headerRect), RectHelper.IconWidth, RectVerticalAlignment.Middle);
+					var leftRect = RectHelper.TakeWidth(ref headerRect, _headerHeight);
+					var rightRect = RectHelper.TakeTrailingWidth(ref headerRect, _headerHeight);
 
-					if (GUI.Button(leftRect, GUIContent.none, LeftArrow.Content))
-						ChangeTab(-1);
+					if (_currentTab > 0)
+					{
+						if (GUI.Button(leftRect, _leftTabIcon.Content))
+							ChangeTab(-1);
+					}
 
-					if (GUI.Button(rightRect, GUIContent.none, RightArrow.Content))
-						ChangeTab(1);
+					if (_currentTab < _roots.Count - 1)
+					{
+						if (GUI.Button(rightRect, _rightTabIcon.Content))
+							ChangeTab(1);
+					}
 				}
 
 				DrawChildren(rect, parent);
@@ -401,13 +412,13 @@ namespace PiRhoSoft.UtilityEditor
 
 						if (Event.current.type == EventType.Repaint)
 						{
-							ItemButton.Content.Draw(itemRect, item.Content, false, false, selected, selected);
+							_itemButtonStyle.Content.Draw(itemRect, item.Content, false, false, selected, selected);
 
 							if (item.IsBranch)
 							{
 								var arrowRect = RectHelper.TakeTrailingIcon(ref itemRect);
 
-								RightArrow.Content.Draw(arrowRect, false, false, false, false);
+								_childArrowStyle.Content.Draw(arrowRect, false, false, false, false);
 							}
 						}
 

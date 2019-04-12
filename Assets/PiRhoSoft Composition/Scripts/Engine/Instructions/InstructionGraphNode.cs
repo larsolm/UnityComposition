@@ -452,7 +452,7 @@ namespace PiRhoSoft.CompositionEngine
 				return ResolveObject(variables, source.Reference, out result);
 
 			result = source.Value;
-			return true;
+			return result;
 		}
 
 		public bool ResolveObject<ObjectType>(IVariableStore variables, VariableReference reference, out ObjectType result) where ObjectType : Object

@@ -6,14 +6,9 @@ namespace PiRhoSoft.UtilityEngine
 {
 	public class SceneReferenceAttribute : Attribute
 	{
-		public string Name { get; private set; }
-		public string Creator { get; private set; }
-
-		public SceneReferenceAttribute(string name, string creator)
-		{
-			Name = name;
-			Creator = creator;
-		}
+		public AssetLocation SaveLocation = AssetLocation.None;
+		public string DefaultName = null;
+		public string Creator = null;
 	}
 
 	[Serializable]

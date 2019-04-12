@@ -32,15 +32,15 @@ namespace PiRhoSoft.CompositionEngine
 		public bool UseRelativeScale = true;
 
 		[Tooltip("The target position to move to - offset from the original if UseRelativePosition is set")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public Vector3VariableSource TargetPosition = new Vector3VariableSource();
 
 		[Tooltip("The target rotation to change to - offset from the original if UseRelativeRotation is set")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public Vector3VariableSource TargetRotation = new Vector3VariableSource();
 
 		[Tooltip("The target scale to size to - multiplicative from the original if UseRelativeScale is set")]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public Vector3VariableSource TargetScale = new Vector3VariableSource(Vector3.one);
 
 		[Tooltip("The method in which to animate toward the target transform")]
@@ -52,22 +52,22 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The amount of time it takes to move to the target transform")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Duration)]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public FloatVariableSource Duration = new FloatVariableSource(1.0f);
 
 		[Tooltip("The speed at which to move toward the target position (units per second)")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Speed)]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public FloatVariableSource MoveSpeed = new FloatVariableSource(1.0f);
 
 		[Tooltip("The speed at which to move toward the target rotation (degrees per second)")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Speed)]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public FloatVariableSource RotationSpeed = new FloatVariableSource(1.0f);
 
 		[Tooltip("The speed at which to scale toward the target scale (units per second)")]
 		[ConditionalDisplaySelf(nameof(AnimationMethod), EnumValue = (int)AnimationType.Speed)]
-		[ClassDisplay(Type = ClassDisplayType.Propogated)]
+		[ClassDisplay(ClassDisplayType.Propogated)]
 		public FloatVariableSource ScaleSpeed = new FloatVariableSource(1.0f);
 
 		public override Color NodeColor => Colors.Sequencing;
