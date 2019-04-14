@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.String);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var s = reader.ReadString();
 			return VariableValue.Create(s);

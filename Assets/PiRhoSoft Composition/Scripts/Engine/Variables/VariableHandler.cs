@@ -9,6 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	public abstract class VariableHandler
 	{
 		private static VariableHandler[] _handlers;
+		private static short _dataVersion = 1;
 
 		static VariableHandler()
 		{
@@ -52,6 +53,7 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue CreateDefault(VariableType type, VariableConstraint constraint) => Get(type).CreateDefault_(constraint);
 		public static void ToString(VariableValue value, StringBuilder builder) => Get(value.Type).ToString_(value, builder);
 
+		protected virtual VariableConstraint CreateConstraint() => null;
 		protected abstract VariableValue CreateDefault_(VariableConstraint constraint);
 		protected abstract void ToString_(VariableValue value, StringBuilder builder);
 
@@ -59,78 +61,270 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Serialization
 
-		public static void Save(VariableValue value, ref string data, ref List<Object> objects)
+		protected abstract void Write_(VariableValue value, BinaryWriter writer, List<Object> objects);
+		protected abstract VariableValue Read_(BinaryReader reader, List<Object> objects, short version);
+
+		// error reporting
+
+		private static short ReadVersion(BinaryReader reader)
 		{
-			objects = new List<Object>();
+			var version = reader.ReadInt16();
 
-			using (var stream = new MemoryStream())
+			// temporary enforcement that version is 1
+			if (version != 1)
 			{
-				using (var writer = new BinaryWriter(stream))
-					Write(value, writer, objects);
-
-				data = Convert.ToBase64String(stream.ToArray());
+				version = 0;
+				reader.BaseStream.Seek(0, SeekOrigin.Begin);
 			}
+
+			return version;
 		}
 
-		public static VariableValue Load(ref string data, ref List<Object> objects)
+		private static void WriteVersion(BinaryWriter writer)
 		{
-			try
-			{
-				var bytes = Convert.FromBase64String(data);
+			writer.Write(_dataVersion);
+		}
 
-				using (var stream = new MemoryStream(bytes))
-				{
-					using (var reader = new BinaryReader(stream))
-						return Read(reader, objects);
-				}
-			}
-			catch
+		private static byte[] GetBytes(string data)
+		{
+			try { return Convert.FromBase64String(data); }
+			catch (FormatException) { return null; }
+		}
+
+		private static string GetString(byte[] bytes)
+		{
+			return Convert.ToBase64String(bytes);
+		}
+
+		#region Variables
+
+		public static List<string> SaveVariables(IList<Variable> variables, ref List<Object> objects)
+		{
+			var data = new List<string>();
+			objects = new List<Object>();
+
+			foreach (var variable in variables)
 			{
+				var variableData = WriteVariable(variable, objects);
+				data.Add(variableData);
+			}
+
+			return data;
+		}
+
+		public static List<Variable> LoadVariables(ref List<string> data, ref List<Object> objects)
+		{
+			var variables = new List<Variable>();
+
+			foreach (var variableData in data)
+			{
+				var variable = ReadVariable(variableData, objects);
+				variables.Add(variable);
 			}
 
 			data = null;
 			objects = null;
 
-			return VariableValue.Empty;
+			return variables;
 		}
 
-		public static void Write(VariableValue value, BinaryWriter writer, List<Object> objects)
+		public static string SaveVariable(Variable variable, ref List<Object> objects)
+		{
+			objects = new List<Object>();
+			return WriteVariable(variable, objects);
+		}
+
+		public static Variable LoadVariable(ref string data, ref List<Object> objects)
+		{
+			var variable = ReadVariable(data, objects);
+
+			data = null;
+			objects = null;
+
+			return variable;
+		}
+
+		private static string WriteVariable(Variable variable, List<Object> objects)
+		{
+			using (var stream = new MemoryStream())
+			{
+				using (var writer = new BinaryWriter(stream))
+				{
+					WriteVersion(writer);
+					WriteVariable(variable, writer, objects);
+				}
+
+				return GetString(stream.ToArray());
+			}
+		}
+
+		private static Variable ReadVariable(string data, List<Object> objects)
+		{
+			var bytes = GetBytes(data);
+
+			if (bytes == null)
+				return Variable.Empty;
+
+			using (var stream = new MemoryStream(bytes))
+			{
+				using (var reader = new BinaryReader(stream))
+				{
+					var version = ReadVersion(reader);
+					return ReadVariable(reader, objects, version);
+				}
+			}
+		}
+
+		private static void WriteVariable(Variable variable, BinaryWriter writer, List<Object> objects)
+		{
+			writer.Write(variable.Name);
+			WriteValue(variable.Value, writer, objects);
+		}
+
+		private static Variable ReadVariable(BinaryReader reader, List<Object> objects, short version)
+		{
+			var name = reader.ReadString();
+			var value = ReadValue(reader, objects, version);
+
+			return Variable.Create(name, value);
+		}
+
+		#endregion
+
+		#region Values
+
+		public static string SaveValue(VariableValue value, ref List<Object> objects)
+		{
+			objects = new List<Object>();
+			return WriteValue(value, objects);
+		}
+
+		public static VariableValue LoadValue(ref string data, ref List<Object> objects)
+		{
+			var value = ReadValue(data, objects);
+
+			data = null;
+			objects = null;
+
+			return value;
+		}
+
+		private static string WriteValue(VariableValue value, List<Object> objects)
+		{
+			using (var stream = new MemoryStream())
+			{
+				using (var writer = new BinaryWriter(stream))
+				{
+					WriteVersion(writer);
+					WriteValue(value, writer, objects);
+				}
+
+				return GetString(stream.ToArray());
+			}
+		}
+
+		private static VariableValue ReadValue(string data, List<Object> objects)
+		{
+			var bytes = GetBytes(data);
+
+			if (bytes == null)
+				return VariableValue.Empty;
+
+			using (var stream = new MemoryStream(bytes))
+			{
+				using (var reader = new BinaryReader(stream))
+				{
+					var version = ReadVersion(reader);
+					return ReadValue(reader, objects, version);
+				}
+			}
+		}
+
+		protected static void WriteValue(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write((int)value.Type);
 			Get(value.Type).Write_(value, writer, objects);
 		}
 
-		public static VariableValue Read(BinaryReader reader, List<Object> objects)
+		protected static VariableValue ReadValue(BinaryReader reader, List<Object> objects, short version)
 		{
 			var type = (VariableType)reader.ReadInt32();
-			return Get(type).Read_(reader, objects);
+			return Get(type).Read_(reader, objects, version);
 		}
-
-		protected abstract void Write_(VariableValue value, BinaryWriter writer, List<Object> objects);
-		protected abstract VariableValue Read_(BinaryReader reader, List<Object> objects);
 
 		#endregion
 
 		#region Constraints
 
-		public static VariableConstraint CreateConstraint(VariableType type, string data, IList<Object> objects)
+		public static string SaveConstraint(VariableType type, VariableConstraint constraint, ref List<Object> objects)
 		{
-			if (!string.IsNullOrEmpty(data))
-			{
-				var handler = Get(type);
-				var constraint = handler.CreateConstraint();
-
-				if (constraint != null)
-				{
-					if (constraint.Read(data, objects))
-						return constraint;
-				}
-			}
-
-			return null;
+			objects = new List<Object>();
+			return WriteConstraint(type, constraint, objects);
 		}
 
-		protected virtual VariableConstraint CreateConstraint() => null;
+		public static VariableConstraint LoadConstraint(ref string data, ref List<Object> objects)
+		{
+			var constraint = ReadConstraint(data, objects);
+
+			data = null;
+			objects = null;
+
+			return constraint;
+		}
+
+		private static string WriteConstraint(VariableType type, VariableConstraint constraint, List<Object> objects)
+		{
+			using (var stream = new MemoryStream())
+			{
+				using (var writer = new BinaryWriter(stream))
+				{
+					WriteVersion(writer);
+					WriteConstraint(type, constraint, writer, objects);
+				}
+
+				return GetString(stream.ToArray());
+			}
+		}
+
+		private static VariableConstraint ReadConstraint(string data, List<Object> objects)
+		{
+			var bytes = string.IsNullOrEmpty(data) ? null : GetBytes(data);
+
+			if (bytes == null)
+				return null;
+
+			using (var stream = new MemoryStream(bytes))
+			{
+				using (var reader = new BinaryReader(stream))
+				{
+					var version = ReadVersion(reader);
+					return ReadConstraint(reader, objects, version);
+				}
+			}
+		}
+
+		public static void WriteConstraint(VariableType type, VariableConstraint constraint, BinaryWriter writer, IList<Object> objects)
+		{
+			writer.Write((int)type);
+			constraint.Write(writer, objects);
+		}
+
+		public static VariableConstraint ReadConstraint(BinaryReader reader, IList<Object> objects, short version)
+		{
+			try
+			{
+				var type = (VariableType)reader.ReadInt32();
+				var constraint = Get(type).CreateConstraint();
+				constraint.Read(reader, objects, version);
+				return constraint;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+		#endregion
 
 		#endregion
 

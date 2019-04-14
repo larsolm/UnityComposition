@@ -26,7 +26,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Float);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var f = reader.ReadSingle();
 			return VariableValue.Create(f);

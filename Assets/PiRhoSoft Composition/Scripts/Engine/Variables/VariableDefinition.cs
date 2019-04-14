@@ -146,18 +146,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnAfterDeserialize()
 		{
-			Constraint = VariableHandler.CreateConstraint(Type, _constraint, _objects);
-			_constraint = null;
-			_objects = null;
+			if (!string.IsNullOrEmpty(_constraint))
+				VariableHandler.LoadConstraint(ref _constraint, ref _objects);
 		}
 
 		public void OnBeforeSerialize()
 		{
 			if (Constraint != null)
-			{
-				_objects = new List<Object>();
-				_constraint = Constraint.Write(_objects);
-			}
+				_constraint = VariableHandler.SaveConstraint(Type, Constraint, ref _objects);
 		}
 
 		#endregion

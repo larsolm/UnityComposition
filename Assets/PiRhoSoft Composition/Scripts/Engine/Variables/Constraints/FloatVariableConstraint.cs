@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -8,18 +9,16 @@ namespace PiRhoSoft.CompositionEngine
 		public float Minimum;
 		public float Maximum;
 
-		public override string Write(IList<Object> objects)
+		public override void Write(BinaryWriter writer, IList<Object> objects)
 		{
-			return string.Format("{0}|{1}", Minimum, Maximum);
+			writer.Write(Minimum);
+			writer.Write(Maximum);
 		}
 
-		public override bool Read(string data, IList<Object> objects)
+		public override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
-			var range = data.Split('|');
-
-			return range.Length == 2
-				&& float.TryParse(range[0], out Minimum)
-				&& float.TryParse(range[1], out Maximum);
+			Minimum = reader.ReadSingle();
+			Maximum = reader.ReadSingle();
 		}
 
 		public override bool IsValid(VariableValue value)

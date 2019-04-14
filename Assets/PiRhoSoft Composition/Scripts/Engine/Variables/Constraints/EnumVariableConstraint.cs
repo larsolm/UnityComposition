@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
@@ -8,15 +9,15 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public Type Type;
 
-		public override string Write(IList<Object> objects)
+		public override void Write(BinaryWriter writer, IList<Object> objects)
 		{
-			return Type != null ? Type.AssemblyQualifiedName : string.Empty;
+			writer.Write(Type != null ? Type.AssemblyQualifiedName : string.Empty);
 		}
 
-		public override bool Read(string data, IList<Object> objects)
+		public override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
-			Type = System.Type.GetType(data, false);
-			return Type != null;
+			var type = reader.ReadString();
+			Type = Type.GetType(type, true);
 		}
 
 		public override bool IsValid(VariableValue value)

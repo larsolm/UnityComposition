@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Enum.ToString());
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var typeName = reader.ReadString();
 			var enumValue = reader.ReadString();

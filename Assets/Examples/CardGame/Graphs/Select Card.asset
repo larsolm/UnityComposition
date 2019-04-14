@@ -15,8 +15,8 @@ MonoBehaviour:
   ContextName: card
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -145,12 +145,13 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114246320320649072
@@ -216,12 +217,13 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114446061808747656
@@ -349,12 +351,13 @@ MonoBehaviour:
     Definition:
       _type: 9
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 1
       _isConstraintLocked: 0
-    _data: CQAAAAAAAAAAAAAAAAAAAA==
+    _data: AQAJAAAAAAAAAAAAAAAAAAAA
     _objects: []
   TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
@@ -392,12 +395,13 @@ MonoBehaviour:
     Definition:
       _type: 9
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 1
       _isConstraintLocked: 0
-    _data: CQAAAAAAAAAAAAAAAAAAAA==
+    _data: AQAJAAAAAAAAAAAAAAAAAAAA
     _objects: []
   TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
@@ -488,12 +492,13 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114948380721648204
@@ -588,11 +593,12 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1

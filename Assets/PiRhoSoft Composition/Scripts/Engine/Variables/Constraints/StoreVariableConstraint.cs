@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -7,18 +8,16 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public VariableSchema Schema;
 
-		public override string Write(IList<Object> objects)
+		public override void Write(BinaryWriter writer, IList<Object> objects)
 		{
+			writer.Write(objects.Count);
 			objects.Add(Schema);
-			return (objects.Count - 1).ToString();
 		}
 
-		public override bool Read(string data, IList<Object> objects)
+		public override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
-			if (int.TryParse(data, out var index) && index >= 0 && index < objects.Count)
-				Schema = objects[index] as VariableSchema;
-
-			return Schema != null;
+			var index = reader.ReadInt32();
+			Schema = objects[index] as VariableSchema;
 		}
 
 		public override bool IsValid(VariableValue value)

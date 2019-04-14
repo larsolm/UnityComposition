@@ -16,6 +16,7 @@ MonoBehaviour:
   ContextDefinition:
     _type: 0
     _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -26,8 +27,8 @@ MonoBehaviour:
     - Name: card
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -36,8 +37,8 @@ MonoBehaviour:
     - Name: ace
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -49,6 +50,7 @@ MonoBehaviour:
       Definition:
         _type: 0
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 

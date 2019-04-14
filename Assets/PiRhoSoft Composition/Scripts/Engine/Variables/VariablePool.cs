@@ -79,14 +79,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnBeforeSerialize()
 		{
-			Variable.Save(Variables, ref _variablesData, ref _variablesObjects);
+			_variablesData = VariableHandler.SaveVariables(Variables, ref _variablesObjects);
 		}
 
 		public void OnAfterDeserialize()
 		{
-			var variables = new List<Variable>();
-
-			Variable.Load(variables, ref _variablesData, ref _variablesObjects);
+			var variables = VariableHandler.LoadVariables(ref _variablesData, ref _variablesObjects);
 
 			base.Clear();
 
