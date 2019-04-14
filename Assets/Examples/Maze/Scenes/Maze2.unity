@@ -404,11 +404,6 @@ PrefabInstance:
       propertyPath: _variablesData.Array.data[6]
       value: DEpld2Vsc05lZWRlZAIAAAAUAAAA
       objectReference: {fileID: 0}
-    - target: {fileID: 2643244533930277775, guid: 6f1753990295b7d43952ed76b4723a1d,
-        type: 3}
-      propertyPath: Graph._inputs.Array.data[0]._valueData
-      value: DwAAAAdMZXZlbCAy
-      objectReference: {fileID: 0}
     - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
         type: 3}
       propertyPath: Variables._variablesData.Array.data[7]
@@ -418,6 +413,11 @@ PrefabInstance:
         type: 3}
       propertyPath: Variables._variablesData.Array.data[6]
       value: DEpld2Vsc05lZWRlZAIAAAAUAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277775, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Graph._inputs.Array.data[0]._valueData
+      value: DwAAAAdMZXZlbCAy
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f1753990295b7d43952ed76b4723a1d, type: 3}
@@ -574,7 +574,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnterGraph:
     _instruction: {fileID: 11400000, guid: 6c29bd36606710b49874065ef0555329, type: 2}
-    _inputs: []
+    _inputs:
+    - Name: NextLevel
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQAPAAAABU1hemUx
+      _valueObjects: []
     _outputs: []
   ExitGraph:
     _instruction: {fileID: 0}

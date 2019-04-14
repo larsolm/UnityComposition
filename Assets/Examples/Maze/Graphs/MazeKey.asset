@@ -15,8 +15,7 @@ MonoBehaviour:
   ContextName: key
   ContextDefinition:
     _type: 17
-    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    _constraint: AQARAAAAZVVuaXR5RW5naW5lLkdhbWVPYmplY3QsIFVuaXR5RW5naW5lLkNvcmVNb2R1bGUsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
     _objects: []
     _tag: 
     _initializer:
@@ -28,7 +27,7 @@ MonoBehaviour:
     - Name: KeyName
       Definition:
         _type: 15
-        _constraint: +Red,Yellow,Green,Blue
+        _constraint: AQAPAAAABAAAAANSZWQEQmx1ZQVHcmVlbgZZZWxsb3c=
         _objects: []
         _tag: 
         _initializer:
@@ -64,7 +63,7 @@ MonoBehaviour:
     - {fileID: 114613277615437018}
     - {fileID: 114523905499944702}
     - {fileID: 114840982862560130}
-  StartPosition: {x: 0, y: 0}
+  StartPosition: {x: -0, y: 0}
   Process: {fileID: 114416159429543150}
 --- !u!114 &114416159429543150
 MonoBehaviour:

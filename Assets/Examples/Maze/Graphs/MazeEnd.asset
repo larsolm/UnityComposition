@@ -16,13 +16,24 @@ MonoBehaviour:
   ContextDefinition:
     _type: 0
     _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
     _isTypeLocked: 0
     _isConstraintLocked: 0
   Inputs:
-    _items: []
+    _items:
+    - Name: NextLevel
+      Definition:
+        _type: 15
+        _constraint: AQAPAAAAAAAAAA==
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
   Outputs:
     _items: []
   _nodes:
@@ -196,10 +207,10 @@ MonoBehaviour:
   Scene:
     Path: 
   SceneVariable:
-    _variable: global.NextLevel
+    _variable: input.NextLevel
     _tokens:
     - Type: 0
-      Text: global
+      Text: input
     - Type: 0
       Text: NextLevel
   SceneName: 

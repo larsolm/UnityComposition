@@ -271,7 +271,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAAdMZXZlbCAx
+      _valueData: AQAPAAAAB0xldmVsIDE=
       _valueObjects: []
     _outputs: []
 --- !u!114 &4980581016010646345
@@ -300,27 +300,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Variables:
     _variablesData:
-    - BlBsYXllchEAAAAAAAAA
-    - BlJlZEtleQIAAAAAAAAA
-    - B0JsdWVLZXkCAAAAAAAAAA==
-    - CEdyZWVuS2V5AgAAAAAAAAA=
-    - CVllbGxvd0tleQIAAAAAAAAA
-    - Bkpld2VscwIAAAAAAAAA
-    - DEpld2Vsc05lZWRlZAIAAAAAAAAA
-    - CU5leHRMZXZlbA8AAAAA
+    - AQAGUGxheWVyEQAAAAAAAAA=
+    - AQAGUmVkS2V5AgAAAAAAAAA=
+    - AQAHQmx1ZUtleQIAAAAAAAAA
+    - AQAIR3JlZW5LZXkCAAAAAAAAAA==
+    - AQAJWWVsbG93S2V5AgAAAAAAAAA=
+    - AQAGSmV3ZWxzAgAAAAAAAAA=
+    - AQAMSmV3ZWxzTmVlZGVkAgAAAAAAAAA=
     _variablesObjects:
     - {fileID: 2643244533930277764}
     Definitions:
     - _type: 17
-      _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
-      _objects: []
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 0
-      _isConstraintLocked: 0
-    - _type: 2
       _constraint: 
       _objects: []
       _tag: 
@@ -368,7 +358,7 @@ MonoBehaviour:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    - _type: 15
+    - _type: 2
       _constraint: 
       _objects: []
       _tag: 

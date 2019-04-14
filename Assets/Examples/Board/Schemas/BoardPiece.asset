@@ -22,8 +22,8 @@ MonoBehaviour:
     - Name: Player
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: AQARAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+        _objects: []
         _tag: Persistent
         _initializer:
           _statement: 
@@ -32,7 +32,8 @@ MonoBehaviour:
     - Name: CurrentSpace
       Definition:
         _type: 2
-        _constraint: 0|35
+        _constraint: AQACAAAAAAAAACMAAAA=
+        _objects: []
         _tag: NewGame
         _initializer:
           _statement: Player.StartingSpace
@@ -42,6 +43,7 @@ MonoBehaviour:
       Definition:
         _type: 9
         _constraint: 
+        _objects: []
         _tag: Persistent
         _initializer:
           _statement: 
@@ -51,6 +53,7 @@ MonoBehaviour:
       Definition:
         _type: 9
         _constraint: 
+        _objects: []
         _tag: Persistent
         _initializer:
           _statement: 
@@ -60,6 +63,7 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: NewGame
         _initializer:
           _statement: false
@@ -69,6 +73,7 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: NewGame
         _initializer:
           _statement: false
@@ -78,6 +83,7 @@ MonoBehaviour:
       Definition:
         _type: 1
         _constraint: 
+        _objects: []
         _tag: NewGame
         _initializer:
           _statement: false
@@ -86,11 +92,11 @@ MonoBehaviour:
     - Name: Highlight
       Definition:
         _type: 17
-        _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
+        _constraint: AQARAAAAZVVuaXR5RW5naW5lLkdhbWVPYmplY3QsIFVuaXR5RW5naW5lLkNvcmVNb2R1bGUsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
+        _objects: []
         _tag: NewGame
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 195
+  _version: 202

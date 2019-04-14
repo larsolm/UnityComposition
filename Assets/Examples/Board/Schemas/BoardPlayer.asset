@@ -20,7 +20,8 @@ MonoBehaviour:
     - Name: Name
       Definition:
         _type: 15
-        _constraint: +Red,Yellow,Green,Blue
+        _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: '"Red"'
@@ -29,8 +30,8 @@ MonoBehaviour:
     - Name: Pieces
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: AQATAAAAEQAAAAERAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -39,8 +40,8 @@ MonoBehaviour:
     - Name: SelectedPiece
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: AQARAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -49,7 +50,8 @@ MonoBehaviour:
     - Name: StartingSpace
       Definition:
         _type: 2
-        _constraint: 0|35
+        _constraint: AQACAAAAAAAAACMAAAA=
+        _objects: []
         _tag: 
         _initializer:
           _statement: 0
@@ -58,10 +60,11 @@ MonoBehaviour:
     - Name: FinishSpace
       Definition:
         _type: 2
-        _constraint: 0|35
+        _constraint: AQACAAAAAAAAACMAAAA=
+        _objects: []
         _tag: 
         _initializer:
           _statement: StartSpace - 2
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 239
+  _version: 250

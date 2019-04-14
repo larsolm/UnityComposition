@@ -15,8 +15,7 @@ MonoBehaviour:
   ContextName: jewel
   ContextDefinition:
     _type: 17
-    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    _constraint: AQARAAAAZVVuaXR5RW5naW5lLkdhbWVPYmplY3QsIFVuaXR5RW5naW5lLkNvcmVNb2R1bGUsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
     _objects: []
     _tag: 
     _initializer:

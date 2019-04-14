@@ -670,7 +670,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAANSZWQ=
+      _valueData: AQAPAAAAA1JlZA==
       _valueObjects: []
     - Name: KeyCount
       Type: 0
@@ -1016,7 +1016,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAARCbHVl
+      _valueData: AQAPAAAABEJsdWU=
       _valueObjects: []
     - Name: KeyCount
       Type: 0
@@ -1324,7 +1324,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAAVHcmVlbg==
+      _valueData: AQAPAAAABUdyZWVu
       _valueObjects: []
     - Name: KeyCount
       Type: 0
@@ -1976,7 +1976,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EnterGraph:
     _instruction: {fileID: 11400000, guid: 6c29bd36606710b49874065ef0555329, type: 2}
-    _inputs: []
+    _inputs:
+    - Name: NextLevel
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQAPAAAABU1hemUy
+      _valueObjects: []
     _outputs: []
   ExitGraph:
     _instruction: {fileID: 0}
@@ -2146,7 +2153,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAAVHcmVlbg==
+      _valueData: AQAPAAAABUdyZWVu
       _valueObjects: []
     _outputs:
     - Name: KeyCount
@@ -2300,7 +2307,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAANSZWQ=
+      _valueData: AQAPAAAAA1JlZA==
       _valueObjects: []
     _outputs:
     - Name: KeyCount
@@ -2454,7 +2461,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAAZZZWxsb3c=
+      _valueData: AQAPAAAABlllbGxvdw==
       _valueObjects: []
     _outputs:
     - Name: KeyCount
@@ -2820,7 +2827,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAARCbHVl
+      _valueData: AQAPAAAABEJsdWU=
       _valueObjects: []
     _outputs:
     - Name: KeyCount
@@ -3127,7 +3134,7 @@ MonoBehaviour:
       Reference:
         _variable: 
         _tokens: []
-      _valueData: DwAAAAZZZWxsb3c=
+      _valueData: AQAPAAAABlllbGxvdw==
       _valueObjects: []
     - Name: KeyCount
       Type: 0
@@ -3425,11 +3432,6 @@ PrefabInstance:
         type: 3}
       propertyPath: Variables.Definitions.Array.size
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
-        type: 3}
-      propertyPath: Variables._variablesData.Array.data[7]
-      value: CU5leHRMZXZlbA8AAAAFTWF6ZTI=
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f1753990295b7d43952ed76b4723a1d, type: 3}

@@ -15,8 +15,8 @@ MonoBehaviour:
   ContextName: door
   ContextDefinition:
     _type: 17
-    _constraint: UnityEngine.GameObject, UnityEngine.CoreModule, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    _constraint: AQARAAAAZVVuaXR5RW5naW5lLkdhbWVPYmplY3QsIFVuaXR5RW5naW5lLkNvcmVNb2R1bGUsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -28,6 +28,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -36,7 +37,8 @@ MonoBehaviour:
     - Name: KeyName
       Definition:
         _type: 15
-        _constraint: +Red,Green,Blue,Yellow
+        _constraint: AQAPAAAABAAAAANSZWQFR3JlZW4EQmx1ZQZZZWxsb3c=
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -48,6 +50,7 @@ MonoBehaviour:
       Definition:
         _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 

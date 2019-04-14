@@ -1464,7 +1464,7 @@ MonoBehaviour:
     Formatting: 2
     TimeFormatting: 3
     NumberFormatting: 0
-    ValueFormat: 0
+    ValueFormat: 0.#%
   Expression:
     _statement: 'Calculator.Operation == "Equals" ? Calculator.Answer : Calculator.Display'
 --- !u!1 &569431106
@@ -4111,7 +4111,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Event: 
   Graph:
     _instruction: {fileID: 11400000, guid: 76258c046af12fe4381f5750a0690a1d, type: 2}
     _inputs: []

@@ -15,8 +15,7 @@ MonoBehaviour:
   ContextName: player
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
+    _constraint: AQARAAAAa1BpUmhvU29mdC5Db21wb3NpdGlvbkV4YW1wbGUuUGxheWVyLCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
     _objects: []
     _tag: 
     _initializer:
@@ -28,7 +27,7 @@ MonoBehaviour:
     - Name: LevelName
       Definition:
         _type: 15
-        _constraint: +Level 1,Level 2
+        _constraint: AQAPAAAAAAAAAA==
         _objects: []
         _tag: 
         _initializer:
