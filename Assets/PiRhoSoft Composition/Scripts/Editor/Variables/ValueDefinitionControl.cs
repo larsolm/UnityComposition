@@ -121,13 +121,17 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (!isConstraintLocked)
 			{
-				return type == VariableType.Int
-					|| type == VariableType.Float
-					|| type == VariableType.String
-					|| type == VariableType.Enum
-					|| type == VariableType.Object
-					|| type == VariableType.Store
-					|| type == VariableType.List;
+				switch (type)
+				{
+					case VariableType.Int:
+					case VariableType.Float:
+					case VariableType.String:
+					case VariableType.Enum:
+					case VariableType.Object:
+					case VariableType.Store:
+					case VariableType.List: return true;
+					default: return false;
+				}
 			}
 			else
 			{
@@ -191,6 +195,9 @@ namespace PiRhoSoft.CompositionEditor
 		private static void DrawDefaultValue(Rect rect, ref ValueDefinition definition)
 		{
 			var value = definition.Initializer.Execute(null, null); // context isn't necessary since the object that would be the context is currently drawing
+
+			if (value.IsEmpty) // If the initializer hasn't been set, use the default value.
+				value = VariableHandler.CreateDefault(definition.Type, definition.Constraint);
 
 			DrawIndentedLabel(ref rect, _defaultLabel);
 
