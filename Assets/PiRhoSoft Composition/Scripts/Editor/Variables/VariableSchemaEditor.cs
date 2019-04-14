@@ -88,7 +88,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private bool PopupValidate()
 		{
-			_createPopup.IsNameValid = !_schema.HasDefinition(_createPopup.Name);
+			_createPopup.IsNameValid = !_schema.HasDefinition(_createPopup.Name) && !string.IsNullOrEmpty(_createPopup.Name);
 			_createPopup.IsTypeValid = _createPopup.Type != VariableType.Empty;
 
 			return _createPopup.IsNameValid && _createPopup.IsTypeValid;

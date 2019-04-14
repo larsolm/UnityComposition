@@ -1001,7 +1001,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
   Variables:
-    _version: 16
+    _version: 25
     _variablesData:
     - CUludmVudG9yeRMAAAAAAAAA
     - BU1vbmV5AgAAABAnAAA=
@@ -1057,19 +1057,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Constraints:
-  - _type: 17
-    _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
-      Culture=neutral, PublicKeyToken=null
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  _variablesData:
-  - BlBsYXllchEAAAAAAAAA
-  _variablesObjects:
-  - {fileID: 840948834}
+  Variables:
+    _variablesData:
+    - BlBsYXllchEAAAAAAAAA
+    _variablesObjects:
+    - {fileID: 840948834}
+    Definitions:
+    - _type: 17
+      _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
+        Culture=neutral, PublicKeyToken=null
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
 --- !u!1 &911554669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1267,19 +1269,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 948553106}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 06b69d0956827844bac3c5d366233db1, type: 3}
+  m_Script: {fileID: 11500000, guid: ddc4d7dd630ab8f488062a168a3dfe4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  OnInteract:
+  Graph:
     _instruction: {fileID: 11400000, guid: 2a058fecf74825b4b98e6b68072931b3, type: 2}
-    _inputs: []
-    _outputs: []
-  OnEnter:
-    _instruction: {fileID: 0}
-    _inputs: []
-    _outputs: []
-  OnLeave:
-    _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
 --- !u!61 &948553110
@@ -1322,7 +1316,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
   Variables:
-    _version: 16
+    _version: 25
     _variablesData:
     - CUludmVudG9yeRMAAAAIAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAAEQAAAAMAAAARAAAABAAAABEAAAAFAAAAEQAAAAYAAAARAAAABwAAAA==
     - BU1vbmV5AgAAAAAAAAA=

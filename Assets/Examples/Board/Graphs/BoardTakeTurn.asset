@@ -15,8 +15,9 @@ MonoBehaviour:
   ContextName: player
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+    _constraint: PiRhoSoft.CompositionEngine.VariableSetComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -486,7 +487,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: piece.Highlight as VariableStoreComponent.Piece = piece;
+    _statement: piece.Highlight as VariablePoolComponent.Piece = piece;
 --- !u!114 &114460562760816066
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1269,12 +1270,10 @@ MonoBehaviour:
   Target:
     Type: 1
     Reference:
-      _variable: currentSpace as Transform
+      _variable: currentSpace
       _tokens:
       - Type: 0
         Text: currentSpace
-      - Type: 2
-        Text: Transform
     Value: {fileID: 0}
   Output:
     _variable: targetPosition

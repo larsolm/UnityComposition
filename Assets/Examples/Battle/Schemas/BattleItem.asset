@@ -20,29 +20,32 @@ MonoBehaviour:
     - Name: Name
       Definition:
         _type: 15
-        _constraint: 
+        _constraint: '-'
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: '""'
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Description
       Definition:
         _type: 15
-        _constraint: 
+        _constraint: '-'
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: '""'
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Instruction
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.Instruction, Assembly-CSharp, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
+        _constraint: PiRhoSoft.CompositionEngine.InstructionGraph, Assembly-CSharp,
+          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 10
+  _version: 14

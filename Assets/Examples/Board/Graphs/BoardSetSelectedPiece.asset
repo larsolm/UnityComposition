@@ -15,8 +15,9 @@ MonoBehaviour:
   ContextName: highlight
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+    _constraint: PiRhoSoft.CompositionEngine.VariablePoolComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 

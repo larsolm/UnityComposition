@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private bool PopupValidate()
 		{
-			_createPopup.IsNameValid = !_pool.Map.ContainsKey(_createPopup.Name);
+			_createPopup.IsNameValid = !_pool.Map.ContainsKey(_createPopup.Name) && !string.IsNullOrEmpty(_createPopup.Name);
 			return _createPopup.IsNameValid;
 		}
 
@@ -135,13 +135,6 @@ namespace PiRhoSoft.CompositionEditor
 
 				_name = control._pool.Variables[index].Name;
 				_definition = control._pool.Definitions[index];
-			}
-
-			public override void OnOpen()
-			{
-				// This needs to be set so that when when a constraint changes in the selectionpopup the change is reflected immediately
-				// Can't be set in setup because editorWindow is null at that time
-				editorWindow.autoRepaintOnSceneChange = true;
 			}
 
 			public override Vector2 GetWindowSize()

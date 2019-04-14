@@ -16,6 +16,7 @@ MonoBehaviour:
   ContextDefinition:
     _type: 0
     _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -94,6 +95,7 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
@@ -130,9 +132,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression
+  m_Name: Reset Winner
   m_EditorClassIdentifier: 
-  Name: Expression
+  Name: Reset Winner
   GraphPosition: {x: 729.60004, y: -140.8}
   IsBreakpoint: 0
   Next: {fileID: 114614621858364604}
@@ -272,6 +274,7 @@ MonoBehaviour:
     Definition:
       _type: 2
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 

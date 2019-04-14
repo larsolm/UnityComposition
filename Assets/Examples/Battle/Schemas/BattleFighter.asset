@@ -54,9 +54,20 @@ MonoBehaviour:
     - Name: Moves
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableStoreAsset, Assembly-CSharp,
+        _constraint: Object|PiRhoSoft.CompositionEngine.VariableSetAsset, Assembly-CSharp,
           Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
         _objects: []
+        _tag: Constant
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Inventory
+      Definition:
+        _type: 19
+        _constraint: Store|0
+        _objects:
+        - {fileID: 11400000, guid: a310b37e56d4d4b41af7727ae3a763a4, type: 2}
         _tag: Constant
         _initializer:
           _statement: 
@@ -152,18 +163,7 @@ MonoBehaviour:
           _statement: false
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: Inventory
-      Definition:
-        _type: 19
-        _constraint: Store|0
-        _objects:
-        - {fileID: 0}
-        _tag: Constant
-        _initializer:
-          _statement: 
-        _isTypeLocked: 1
-        _isConstraintLocked: 0
-    - Name: Variables
+    - Name: Pool
       Definition:
         _type: 18
         _constraint: 
@@ -173,4 +173,4 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 321
+  _version: 355

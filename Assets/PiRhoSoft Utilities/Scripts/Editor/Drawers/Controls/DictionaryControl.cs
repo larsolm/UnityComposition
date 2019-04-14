@@ -124,7 +124,7 @@ namespace PiRhoSoft.UtilityEditor
 
 		private bool PopupValidate()
 		{
-			_createPopup.IsNameValid = !IsEntryInUse(_createPopup.Name);
+			_createPopup.IsNameValid = !IsEntryInUse(_createPopup.Name) && !string.IsNullOrEmpty(_createPopup.Name);
 			return _createPopup.IsNameValid;
 		}
 

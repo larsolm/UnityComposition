@@ -15,8 +15,9 @@ MonoBehaviour:
   ContextName: shop
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
+    _constraint: PiRhoSoft.CompositionEngine.VariableSetComponent, Assembly-CSharp,
       Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _objects: []
     _tag: 
     _initializer:
       _statement: 

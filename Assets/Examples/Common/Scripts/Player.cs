@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionExample
 				for (var i = 0; i < count; i++)
 				{
 					var interaction = _colliders[i].GetComponent<GraphTrigger>();
-					if (interaction)
+					if (interaction && interaction.gameObject != gameObject)
 					{
 						interaction.Run();
 						break;

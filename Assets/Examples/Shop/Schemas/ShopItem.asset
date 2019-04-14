@@ -20,28 +20,31 @@ MonoBehaviour:
     - Name: Name
       Definition:
         _type: 15
-        _constraint: 
+        _constraint: '-'
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: '""'
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Description
       Definition:
         _type: 15
-        _constraint: 
+        _constraint: '-'
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: '""'
         _isTypeLocked: 1
         _isConstraintLocked: 0
     - Name: Cost
       Definition:
         _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 
+          _statement: 0
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 26
+  _version: 29

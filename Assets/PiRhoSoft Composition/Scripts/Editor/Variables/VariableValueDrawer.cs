@@ -18,9 +18,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		public static float GetHeight(VariableValue value, ValueDefinition definition, bool drawStores)
 		{
-			var type = definition.Type != VariableType.Empty ? definition.Type : value.Type;
-
-			switch (type)
+			switch (value.Type)
 			{
 				case VariableType.Empty: return GetEmptyHeight();
 				case VariableType.Bool: return GetBoolHeight();

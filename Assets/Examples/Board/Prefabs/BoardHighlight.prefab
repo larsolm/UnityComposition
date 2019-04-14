@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2924353485232009035}
   - component: {fileID: 2924353485232009032}
   - component: {fileID: 2924353485232009033}
-  - component: {fileID: 2924353485232009038}
+  - component: {fileID: 1630250097440627457}
   m_Layer: 0
   m_Name: BoardHighlight
   m_TagString: Untagged
@@ -124,7 +124,7 @@ MonoBehaviour:
     _instruction: {fileID: 11400000, guid: d521dd5cd786b874696082140be52660, type: 2}
     _inputs: []
     _outputs: []
---- !u!114 &2924353485232009038
+--- !u!114 &1630250097440627457
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -133,12 +133,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2924353485232009036}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7cd7e980f644ec743b6d6313b10eb7f1, type: 3}
+  m_Script: {fileID: 11500000, guid: 1dd749ab8c6fb184596ebfe06ce4c583, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _schema: {fileID: 11400000, guid: 592c627819b34bb4787a3d25b71e4237, type: 2}
   Variables:
-    _version: 4
-    _variablesData:
-    - BVBpZWNlAAAAAA==
+    _variablesData: []
     _variablesObjects: []
+    Definitions: []
