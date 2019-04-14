@@ -147,7 +147,7 @@ namespace PiRhoSoft.CompositionEngine
 		public void OnAfterDeserialize()
 		{
 			if (!string.IsNullOrEmpty(_constraint))
-				VariableHandler.LoadConstraint(ref _constraint, ref _objects);
+				Constraint = VariableHandler.LoadConstraint(ref _constraint, ref _objects);
 		}
 
 		public void OnBeforeSerialize()
