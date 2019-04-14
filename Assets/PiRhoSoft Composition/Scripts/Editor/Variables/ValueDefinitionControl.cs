@@ -458,6 +458,7 @@ namespace PiRhoSoft.CompositionEditor
 		private SerializedProperty _isConstraintLockedProperty;
 
 		private VariableConstraint _constraint;
+		private List<Object> _objects;
 
 		public override void Setup(SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
@@ -467,12 +468,13 @@ namespace PiRhoSoft.CompositionEditor
 			_isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
 			_isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
 
-			var objects = new List<Object>();
+			var data = _constraintProperty.stringValue;
+			_objects = new List<Object>();
 
 			for (var i = 0; i < _objectsProperty.arraySize; i++)
-				objects.Add(_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
+				_objects.Add(_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
 
-			_constraint = VariableHandler.CreateConstraint((VariableType)_typeProperty.enumValueIndex, _constraintProperty.stringValue, objects);
+			_constraint = VariableHandler.LoadConstraint(ref data, ref _objects);
 		}
 
 		public override float GetHeight(SerializedProperty property, GUIContent label)
@@ -485,18 +487,25 @@ namespace PiRhoSoft.CompositionEditor
 
 		public override void Draw(Rect position, SerializedProperty property, GUIContent label)
 		{
-			var objects = new List<Object>();
 			var expanded = property.isExpanded;
 			var definition = ValueDefinition.Create((VariableType)_typeProperty.enumValueIndex, _constraint, null, null, _isTypeLockedProperty.boolValue, _isConstraintLockedProperty.boolValue);
 			definition = Draw(position, label, definition, VariableInitializerType.None, null, true, ref expanded);
 
 			_typeProperty.enumValueIndex = (int)definition.Type;
 			_constraint = definition.Constraint;
-			_constraintProperty.stringValue = _constraint != null ? _constraint.Write(objects) : string.Empty;
-			_objectsProperty.arraySize = objects.Count;
+			_constraintProperty.stringValue = _constraint != null ? VariableHandler.SaveConstraint(definition.Type, _constraint, ref _objects) : string.Empty;
 
-			for (var i = 0; i < objects.Count; i++)
-				_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = objects[i];
+			if (_objects != null)
+			{
+				_objectsProperty.arraySize = _objects.Count;
+
+				for (var i = 0; i < _objects.Count; i++)
+					_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = _objects[i];
+			}
+			else
+			{
+				_objectsProperty.arraySize = 0;
+			}
 
 			property.isExpanded = expanded;
 		}

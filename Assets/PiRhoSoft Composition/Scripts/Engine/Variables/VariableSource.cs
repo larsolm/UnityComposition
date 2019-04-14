@@ -179,12 +179,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnBeforeSerialize()
 		{
-			VariableHandler.Save(Value, ref _data, ref _objects);
+			_data = VariableHandler.SaveValue(Value, ref _objects);
 		}
 
 		public void OnAfterDeserialize()
 		{
-			Value = VariableHandler.Load(ref _data, ref _objects);
+			Value = VariableHandler.LoadValue(ref _data, ref _objects);
 		}
 	}
 }

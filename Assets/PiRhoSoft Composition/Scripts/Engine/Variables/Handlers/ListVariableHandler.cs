@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 				writer.Write(list.Count);
 
 				for (var i = 0; i < list.Count; i++)
-					Write(list.GetVariable(i), writer, objects);
+					WriteValue(list.GetVariable(i), writer, objects);
 			}
 			else
 			{
@@ -38,14 +38,14 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var count = reader.ReadInt32();
 			var list = new VariableList();
 
 			for (var i = 0; i < count; i++)
 			{
-				var item = Read(reader, objects);
+				var item = ReadValue(reader, objects, version);
 				list.AddVariable(item);
 			}
 

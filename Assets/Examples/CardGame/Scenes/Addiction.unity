@@ -517,56 +517,40 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: eac2bf3ac39f45d48be2d728ca624c4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Constraints:
-  - _type: 17
-    _constraint: 
-    _objects: []
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 17
-    _constraint: 
-    _objects: []
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 17
-    _constraint: 
-    _objects: []
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 2
-    _constraint: 0|100
-    _objects: []
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  - _type: 18
-    _constraint: 
-    _objects: []
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
-  _variablesData:
-  - BERlY2sRAAAAAAAAAA==
-  - BVN0YXRlEQAAAAEAAAA=
-  - BUNhcmRzEQAAAAIAAAA=
-  - A0ludAIAAAAAAAAA
-  _variablesObjects:
-  - {fileID: 1723087962}
-  - {fileID: 500038794}
-  - {fileID: 11400000, guid: 4f706c0cf5be2c548aaabb17b2590955, type: 2}
+  Variables:
+    _variablesData:
+    - AQAERGVjaxEAAAAAAAAA
+    - AQAFU3RhdGURAAAAAQAAAA==
+    - AQAFQ2FyZHMRAAAAAgAAAA==
+    _variablesObjects:
+    - {fileID: 1723087962}
+    - {fileID: 500038794}
+    - {fileID: 11400000, guid: 4f706c0cf5be2c548aaabb17b2590955, type: 2}
+    Definitions:
+    - _type: 17
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 17
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 17
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
 --- !u!114 &500038793
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -599,16 +583,16 @@ MonoBehaviour:
   Variables:
     _version: 83
     _variablesData:
-    - ClByb2Nlc3NpbmcCAAAAAAAAAA==
-    - BUNhcmRzEwAAAAAAAAA=
-    - BlNwYWRlcxMAAAAAAAAA
-    - BUNsdWJzEwAAAAAAAAA=
-    - BkhlYXJ0cxMAAAAAAAAA
-    - CERpYW1vbmRzEwAAAAAAAAA=
-    - BEFjZXMTAAAAAAAAAA==
-    - BFJvd3MTAAAAAAAAAA==
-    - CFNodWZmbGVzAgAAAAQAAAA=
-    - CENvbXBsZXRlAQAAAAA=
+    - AQAKUHJvY2Vzc2luZwIAAAAAAAAA
+    - AQAFQ2FyZHMTAAAAAAAAAA==
+    - AQAGU3BhZGVzEwAAAAAAAAA=
+    - AQAFQ2x1YnMTAAAAAAAAAA==
+    - AQAGSGVhcnRzEwAAAAAAAAA=
+    - AQAIRGlhbW9uZHMTAAAAAAAAAA==
+    - AQAEQWNlcxMAAAAAAAAA
+    - AQAEUm93cxMAAAAAAAAA
+    - AQAIU2h1ZmZsZXMCAAAABAAAAA==
+    - AQAIQ29tcGxldGUBAAAAAA==
     _variablesObjects: []
 --- !u!4 &500038795
 Transform:
@@ -1413,8 +1397,8 @@ MonoBehaviour:
   Variables:
     _version: 88
     _variablesData:
-    - BlNwYWRlcxMAAAAAAAAA
-    - BUNsdWJzEwAAAAAAAAA=
-    - BkhlYXJ0cxMAAAAAAAAA
-    - CERpYW1vbmRzEwAAAAAAAAA=
+    - AQAGU3BhZGVzEwAAAAAAAAA=
+    - AQAFQ2x1YnMTAAAAAAAAAA==
+    - AQAGSGVhcnRzEwAAAAAAAAA=
+    - AQAIRGlhbW9uZHMTAAAAAAAAAA==
     _variablesObjects: []

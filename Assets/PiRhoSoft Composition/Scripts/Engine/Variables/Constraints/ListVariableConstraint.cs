@@ -1,5 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.IO;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
@@ -9,24 +9,23 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableType ItemType;
 		public VariableConstraint ItemConstraint;
 
-		public override string Write(IList<Object> objects)
+		public override void Write(BinaryWriter writer, IList<Object> objects)
 		{
-			var constraint = ItemConstraint != null ? ItemConstraint.Write(objects) : string.Empty;
-			return string.Format("{0}|{1}", ItemType, constraint);
+			writer.Write((int)ItemType);
+			writer.Write(ItemConstraint != null);
+
+			if (ItemConstraint != null)
+				VariableHandler.WriteConstraint(ItemType, ItemConstraint, writer, objects);
 		}
 
-		public override bool Read(string data, IList<Object> objects)
+		public override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
-			var pipe = data.IndexOf('|');
+			ItemType = (VariableType)reader.ReadInt32();
 
-			if (pipe < 0)
-				return false;
+			var constrained = reader.ReadBoolean();
 
-			if (!Enum.TryParse(data.Substring(0, pipe), out ItemType))
-				return false;
-			
-			ItemConstraint = VariableHandler.CreateConstraint(ItemType, data.Substring(pipe + 1), objects);
-			return true;
+			if (constrained)
+				ItemConstraint = VariableHandler.ReadConstraint(reader, objects, version);
 		}
 
 		public override bool IsValid(VariableValue value)

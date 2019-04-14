@@ -215,12 +215,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnBeforeSerialize()
 		{
-			Variable.Save(_variables, ref _variablesData, ref _variablesObjects);
+			_variablesData = VariableHandler.SaveVariables(_variables, ref _variablesObjects);
 		}
 
 		public void OnAfterDeserialize()
 		{
-			Variable.Load(_variables, ref _variablesData, ref _variablesObjects);
+			_variables = VariableHandler.LoadVariables(ref _variablesData, ref _variablesObjects);
 		}
 
 		#endregion

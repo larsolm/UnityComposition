@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
@@ -36,8 +37,8 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class VariableConstraint
 	{
-		public abstract string Write(IList<Object> objects);
-		public abstract bool Read(string data, IList<Object> objects);
+		public abstract void Write(BinaryWriter writer, IList<Object> objects);
+		public abstract void Read(BinaryReader reader, IList<Object> objects, short version);
 
 		public abstract bool IsValid(VariableValue value);
 	}

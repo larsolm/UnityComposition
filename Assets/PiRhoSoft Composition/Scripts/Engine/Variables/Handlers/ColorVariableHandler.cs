@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Color.a);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var r = reader.ReadSingle();
 			var g = reader.ReadSingle();

@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 			objects.Add(value.Object);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var index = reader.ReadInt32();
 			return VariableValue.Create(objects[index]);

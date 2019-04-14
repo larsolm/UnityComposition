@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEngine
 				for (var i = 0; i < store.Variables.Count; i++)
 				{
 					writer.Write(store.Variables[i].Name);
-					Write(store.Variables[i].Value, writer, objects);
+					WriteValue(store.Variables[i].Value, writer, objects);
 				}
 			}
 			else
@@ -59,7 +59,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var index = reader.ReadInt32();
 			var schema = index >= 0 && index < objects.Count ? objects[index] as VariableSchema : null;
@@ -70,7 +70,7 @@ namespace PiRhoSoft.CompositionEngine
 			for (var i = 0; i < count; i++)
 			{
 				var name = reader.ReadString();
-				var item = Read(reader, objects);
+				var item = ReadValue(reader, objects, version);
 
 				if (schema != null)
 					store.SetVariable(name, item);

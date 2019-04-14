@@ -24,7 +24,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Vector3.z);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects)
+		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
