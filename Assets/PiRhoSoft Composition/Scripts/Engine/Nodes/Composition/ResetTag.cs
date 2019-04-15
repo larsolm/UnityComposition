@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Composition/Reset Tag", 21)]
+	[CreateInstructionGraphNodeMenu("Composition/Reset Tag", 31)]
 	[HelpURL(Composition.DocumentationUrl + "reset-tag")]
 	public class ResetTag : InstructionGraphNode
 	{

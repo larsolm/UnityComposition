@@ -15,8 +15,8 @@ MonoBehaviour:
   ContextName: fighter
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -27,6 +27,550 @@ MonoBehaviour:
   Outputs:
     _items: []
   _nodes:
-    _items: []
+    _items:
+    - {fileID: 114232945736125484}
+    - {fileID: 114531949902930302}
+    - {fileID: 114983396039377012}
+    - {fileID: 114232764692765722}
+    - {fileID: 114580898461610352}
+    - {fileID: 114825411958646812}
+    - {fileID: 114711448032534652}
+    - {fileID: 114279173415776722}
+    - {fileID: 114081490847643118}
+    - {fileID: 114279101270522892}
+    - {fileID: 114702339389740078}
+    - {fileID: 114687242891515022}
+    - {fileID: 114318626462138392}
+    - {fileID: 114984453898130342}
   StartPosition: {x: 0, y: 0}
-  Process: {fileID: 0}
+  Process: {fileID: 114232945736125484}
+--- !u!114 &114081490847643118
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Move to Start(Clone)
+  m_EditorClassIdentifier: 
+  Name: Move to Start
+  GraphPosition: {x: 2099.2, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114580898461610352}
+  Transform:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: startPosition
+      _tokens:
+      - Type: 0
+        Text: startPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 2
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114232764692765722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb5ec06b2e5fe49b57475f7382e327, type: 3}
+  m_Name: Charge Effect
+  m_EditorClassIdentifier: 
+  Name: Charge Effect
+  GraphPosition: {x: 1600, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114825411958646812}
+  Effect:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 0}
+  EffectName:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: Spawned Effect
+  EffectVariable:
+    _variable: 
+    _tokens: []
+  Positioning: 0
+  Object:
+    _variable: 
+    _tokens: []
+  Parent:
+    _variable: 
+    _tokens: []
+  Position:
+    Type: 1
+    Reference:
+      _variable: targetPosition
+      _tokens:
+      - Type: 0
+        Text: targetPosition
+    Value: {x: 0, y: 0, z: 0}
+  Rotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  WaitForCompletion: 0
+  DestroyOnComplete: 1
+--- !u!114 &114232945736125484
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Charge Message
+  m_EditorClassIdentifier: 
+  Name: Charge Message
+  GraphPosition: {x: 320, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114279173415776722}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{fighter.Name} used Charge!'
+--- !u!114 &114279101270522892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2858c7af4d722bf49a2fc1993f96ed16, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Name: Wait
+  GraphPosition: {x: 652.8, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 114702339389740078}
+  Time:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 0.5
+  UseScaledTime: 1
+--- !u!114 &114279173415776722
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
+  m_Name: Store Start Position(Clone)
+  m_EditorClassIdentifier: 
+  Name: Store Start Position
+  GraphPosition: {x: 652.8, y: -76.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114983396039377012}
+  Target:
+    Type: 1
+    Reference:
+      _variable: fighter
+      _tokens:
+      - Type: 0
+        Text: fighter
+    Value: {fileID: 0}
+  Output:
+    _variable: startPosition
+    _tokens:
+    - Type: 0
+      Text: startPosition
+  TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  PropertyName: position
+--- !u!114 &114318626462138392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Offset Target Position
+  m_EditorClassIdentifier: 
+  Name: Offset Target Position
+  GraphPosition: {x: 1216, y: 89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114687242891515022}
+  Expression:
+    _statement: targetPosition = Vector3(targetPosition.x, targetPosition.y + 2, targetPosition.z);
+--- !u!114 &114531949902930302
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Move to Target(Clone)
+  m_EditorClassIdentifier: 
+  Name: Move to Target
+  GraphPosition: {x: 1292.8, y: -25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114232764692765722}
+  Transform:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: targetPosition
+      _tokens:
+      - Type: 0
+        Text: targetPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 2
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 0.1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114580898461610352
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Binding(Clone)
+  m_EditorClassIdentifier: 
+  Name: Update Binding
+  GraphPosition: {x: 2188.8, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: fighter.Pool.Target.Display
+    _tokens:
+    - Type: 0
+      Text: fighter
+    - Type: 0
+      Text: Pool
+    - Type: 0
+      Text: Target
+    - Type: 0
+      Text: Display
+  Group: 
+  WaitForCompletion: 1
+--- !u!114 &114687242891515022
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Move to Target(Clone)(Clone)
+  m_EditorClassIdentifier: 
+  Name: Move to Target
+  GraphPosition: {x: 1369.6, y: 166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 114984453898130342}
+  Transform:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: targetPosition
+      _tokens:
+      - Type: 0
+        Text: targetPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 2
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 0.1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114702339389740078
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Accuracy Check
+  m_EditorClassIdentifier: 
+  Name: Accuracy Check
+  GraphPosition: {x: 985.60004, y: -12.8}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114531949902930302}
+  OnFalse: {fileID: 114318626462138392}
+  Condition:
+    _statement: Random(0.0, 1.0) > 0.5
+--- !u!114 &114711448032534652
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Damage Message(Clone)
+  m_EditorClassIdentifier: 
+  Name: Damage Message
+  GraphPosition: {x: 2009.6, y: -25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114081490847643118}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{damage} damage!'
+--- !u!114 &114825411958646812
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Apply Damage(Clone)
+  m_EditorClassIdentifier: 
+  Name: Apply Damage
+  GraphPosition: {x: 1932.8, y: -89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114711448032534652}
+  Expression:
+    _statement: 'target = fighter.Pool.Target;
+
+      damage = Damage(Random(100, 125), fighter.Attack, fighter.AttackMod, target.Defense,
+      target.DefenseMod);
+
+      target.CurrentHP -= damage;
+
+      target.CurrentHP = Max(0, target.CurrentHP);'
+--- !u!114 &114983396039377012
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
+  m_Name: Store Target Position(Clone)
+  m_EditorClassIdentifier: 
+  Name: Store Target Position
+  GraphPosition: {x: 652.8, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114279101270522892}
+  Target:
+    Type: 1
+    Reference:
+      _variable: fighter.Pool.Target
+      _tokens:
+      - Type: 0
+        Text: fighter
+      - Type: 0
+        Text: Pool
+      - Type: 0
+        Text: Target
+    Value: {fileID: 0}
+  Output:
+    _variable: targetPosition
+    _tokens:
+    - Type: 0
+      Text: targetPosition
+  TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  PropertyName: position
+--- !u!114 &114984453898130342
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Missed Message
+  m_EditorClassIdentifier: 
+  Name: Missed Message
+  GraphPosition: {x: 1728, y: 89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114081490847643118}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: The attack missed...

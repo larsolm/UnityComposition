@@ -15,8 +15,7 @@ MonoBehaviour:
   ContextName: fighter
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: AQARAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
     _objects: []
     _tag: 
     _initializer:
@@ -38,6 +37,7 @@ MonoBehaviour:
     - {fileID: 114068179680205262}
     - {fileID: 114182749721879712}
     - {fileID: 114430784282294890}
+    - {fileID: 114786529422199906}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114843694311622104}
 --- !u!114 &114068179680205262
@@ -53,7 +53,7 @@ MonoBehaviour:
   m_Name: Damage Message
   m_EditorClassIdentifier: 
   Name: Damage Message
-  GraphPosition: {x: 1318.4, y: -12.8}
+  GraphPosition: {x: 1420.8, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114852501960501228}
   Control:
@@ -183,24 +183,26 @@ MonoBehaviour:
   m_Name: Scratch Effect
   m_EditorClassIdentifier: 
   Name: Scratch Effect
-  GraphPosition: {x: 972.8, y: -25.6}
+  GraphPosition: {x: 985.60004, y: -64}
   IsBreakpoint: 0
-  Next: {fileID: 114696895779975292}
+  Next: {fileID: 114786529422199906}
   Effect:
     Type: 0
     Reference:
       _variable: 
       _tokens: []
-    Value: {fileID: 0}
+    Value: {fileID: 578509661807874277, guid: 5aa8f38458bff7e4486995d012634ea2, type: 3}
   EffectName:
     Type: 0
     Reference:
       _variable: 
       _tokens: []
-    Value: Spawned Effect
+    Value: ScratchEffect
   EffectVariable:
-    _variable: 
-    _tokens: []
+    _variable: scratch
+    _tokens:
+    - Type: 0
+      Text: scratch
   Positioning: 0
   Object:
     _variable: 
@@ -237,7 +239,7 @@ MonoBehaviour:
   m_Name: Move to Start
   m_EditorClassIdentifier: 
   Name: Move to Start
-  GraphPosition: {x: 1676.8, y: -12.8}
+  GraphPosition: {x: 1779.2001, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Transform:
@@ -307,11 +309,11 @@ MonoBehaviour:
   m_Name: Apply Damage
   m_EditorClassIdentifier: 
   Name: Apply Damage
-  GraphPosition: {x: 1254.4, y: -89.6}
+  GraphPosition: {x: 1356.8, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114068179680205262}
   Expression:
-    _statement: 'target = fighter.Variables.Target;
+    _statement: 'target = fighter.Pool.Target;
 
       damage = Damage(Random(45, 55), fighter.Attack, fighter.AttackMod, target.Defense,
       target.DefenseMod);
@@ -319,6 +321,34 @@ MonoBehaviour:
       target.CurrentHP -= damage;
 
       target.CurrentHP = Max(0, target.CurrentHP);'
+--- !u!114 &114786529422199906
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc26ad2350ac454caf9577c6255fa6e, type: 3}
+  m_Name: Play Animation
+  m_EditorClassIdentifier: 
+  Name: Play Animation
+  GraphPosition: {x: 1036.8, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114696895779975292}
+  AnimationPlayer:
+    _variable: scratch
+    _tokens:
+    - Type: 0
+      Text: scratch
+  Animation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 7400000, guid: a669d5620e129004296c174e412a860d, type: 2}
+  WaitForCompletion: 1
 --- !u!114 &114843694311622104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -360,16 +390,16 @@ MonoBehaviour:
   m_Name: Update Binding
   m_EditorClassIdentifier: 
   Name: Update Binding
-  GraphPosition: {x: 1433.6, y: 64}
+  GraphPosition: {x: 1536, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114430784282294890}
   Object:
-    _variable: fighter.Variables.Target.Display
+    _variable: fighter.Pool.Target.Display
     _tokens:
     - Type: 0
       Text: fighter
     - Type: 0
-      Text: Variables
+      Text: Pool
     - Type: 0
       Text: Target
     - Type: 0
@@ -395,12 +425,12 @@ MonoBehaviour:
   Target:
     Type: 1
     Reference:
-      _variable: fighter.Variables.Target
+      _variable: fighter.Pool.Target
       _tokens:
       - Type: 0
         Text: fighter
       - Type: 0
-        Text: Variables
+        Text: Pool
       - Type: 0
         Text: Target
     Value: {fileID: 0}

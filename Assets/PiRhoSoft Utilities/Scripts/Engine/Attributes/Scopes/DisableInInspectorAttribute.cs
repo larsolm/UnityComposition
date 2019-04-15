@@ -2,7 +2,7 @@
 {
 	public class DisableInInspectorAttribute : PropertyScopeAttribute
 	{
-		public const int DefaultOrder = int.MaxValue - 100;
+		public const int DefaultOrder = int.MaxValue - 10;
 
 		public DisableInInspectorAttribute() : base(DefaultOrder) { }
 	}

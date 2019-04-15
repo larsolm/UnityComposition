@@ -26,8 +26,8 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private const string _expressionTokenizeError = "(CETE) Failed to parse Expression at location {1}: {2}\nExpression: {0}";
 		private const string _expressionParseError = "(CEPE) Failed to parse Expression at location {1} ({2}): {3}\nExpression: {0}";
-		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}': {1}";
-		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}': {1}";
+		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}' on '{1}': {2}";
+		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}' on '{1}': {2}";
 		private const string _invalidResultWarning = "(CEIR) The Expression '{0}' was expected to return type {1} but instead returned type {2}";
 
 		[SerializeField] private string _statement;
@@ -71,11 +71,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			catch (ExpressionEvaluationException exception)
 			{
-				Debug.LogErrorFormat(context, _expressionEvaluationError, _currentOperation.ToString(), exception.Message);
+				Debug.LogErrorFormat(context, _expressionEvaluationError, _currentOperation, context.name, exception.Message);
 			}
 			catch (CommandEvaluationException exception)
 			{
-				Debug.LogErrorFormat(context, _commandEvaluationError, exception.Command, exception.Message);
+				Debug.LogErrorFormat(context, _commandEvaluationError, exception.Command, context.name, exception.Message);
 			}
 
 			return VariableValue.Empty;

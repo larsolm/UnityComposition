@@ -15,6 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private List<VariableValue> _values = new List<VariableValue>();
 
+		public List<VariableValue> List => _values;
 		public int Count => _values.Count;
 
 		public VariableValue GetVariable(int index)

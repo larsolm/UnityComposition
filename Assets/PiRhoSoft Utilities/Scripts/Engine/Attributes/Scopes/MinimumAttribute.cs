@@ -2,7 +2,7 @@
 {
 	public class MinimumAttribute : PropertyScopeAttribute
 	{
-		public const int DefaultOrder = int.MaxValue - 30;
+		public const int DefaultOrder = int.MaxValue - 130;
 
 		public float MinimumValue { get; private set; }
 

@@ -15,8 +15,8 @@ MonoBehaviour:
   ContextName: fighter
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -27,6 +27,219 @@ MonoBehaviour:
   Outputs:
     _items: []
   _nodes:
-    _items: []
+    _items:
+    - {fileID: 114074223480161794}
+    - {fileID: 114994260495325796}
+    - {fileID: 114348965472999880}
+    - {fileID: 114581279059730088}
+    - {fileID: 114932166376189610}
+    - {fileID: 114946708066334716}
+    - {fileID: 114917882428548890}
   StartPosition: {x: 0, y: 0}
-  Process: {fileID: 0}
+  Process: {fileID: 114074223480161794}
+--- !u!114 &114074223480161794
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Use Message
+  m_EditorClassIdentifier: 
+  Name: Use Message
+  GraphPosition: {x: 320, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114994260495325796}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{fighter.Name} used Potion.'
+--- !u!114 &114348965472999880
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Did Heal
+  m_EditorClassIdentifier: 
+  Name: Did Heal
+  GraphPosition: {x: 1574.4, y: -12.8}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114932166376189610}
+  OnFalse: {fileID: 114581279059730088}
+  Condition:
+    _statement: recovery > 0;
+--- !u!114 &114581279059730088
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: No Effect Message(Clone)
+  m_EditorClassIdentifier: 
+  Name: No Effect Message
+  GraphPosition: {x: 1894.4, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: It had no effect...
+--- !u!114 &114917882428548890
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Binding
+  m_EditorClassIdentifier: 
+  Name: Update Binding
+  GraphPosition: {x: 1267.2001, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114348965472999880}
+  Object:
+    _variable: fighter.Display
+    _tokens:
+    - Type: 0
+      Text: fighter
+    - Type: 0
+      Text: Display
+  Group: 
+  WaitForCompletion: 0
+--- !u!114 &114932166376189610
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Healed Message(Clone)
+  m_EditorClassIdentifier: 
+  Name: Healed Message
+  GraphPosition: {x: 1894.4, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{fighter.Name} healed {recovery} HP!'
+--- !u!114 &114946708066334716
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Heal
+  m_EditorClassIdentifier: 
+  Name: Heal
+  GraphPosition: {x: 960, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114917882428548890}
+  Expression:
+    _statement: 'previous = fighter.CurrentHP;
+
+      fighter.CurrentHP += 100;
+
+      fighter.CurrentHP = Min(fighter.CurrentHP, fighter.HP);
+
+      recovery = fighter.CurrentHP - previous;'
+--- !u!114 &114994260495325796
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 67bb5ec06b2e5fe49b57475f7382e327, type: 3}
+  m_Name: Potion Effect
+  m_EditorClassIdentifier: 
+  Name: Potion Effect
+  GraphPosition: {x: 640, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114946708066334716}
+  Effect:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 1142003810304141286, guid: 4c55472978d77aa429d524da4329200e, type: 3}
+  EffectName:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: PotionEffect
+  EffectVariable:
+    _variable: 
+    _tokens: []
+  Positioning: 1
+  Object:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  Parent:
+    _variable: 
+    _tokens: []
+  Position:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  Rotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  WaitForCompletion: 1
+  DestroyOnComplete: 1

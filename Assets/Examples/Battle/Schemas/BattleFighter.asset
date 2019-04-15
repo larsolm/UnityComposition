@@ -22,7 +22,7 @@ MonoBehaviour:
     - Name: Name
       Definition:
         _type: 15
-        _constraint: +Triangle,Hexagon
+        _constraint: 
         _objects: []
         _tag: Constant
         _initializer:
@@ -32,8 +32,7 @@ MonoBehaviour:
     - Name: Display
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.BindingRoot, Assembly-CSharp, Version=0.0.0.0,
-          Culture=neutral, PublicKeyToken=null
+        _constraint: AQARAAAAb1BpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5CaW5kaW5nUm9vdCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
         _objects: []
         _tag: Constant
         _initializer:
@@ -43,8 +42,17 @@ MonoBehaviour:
     - Name: Selection
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.SelectionControl, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: AQARAAAAclBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5JbnB1dFNlbGVjdGlvbiwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+        _objects: []
+        _tag: Constant
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Animation
+      Definition:
+        _type: 17
+        _constraint: AQARAAAAaFVuaXR5RW5naW5lLkFuaW1hdG9yLCBVbml0eUVuZ2luZS5BbmltYXRpb25Nb2R1bGUsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
         _objects: []
         _tag: Constant
         _initializer:
@@ -54,8 +62,7 @@ MonoBehaviour:
     - Name: Moves
       Definition:
         _type: 19
-        _constraint: Object|PiRhoSoft.CompositionEngine.VariableSetAsset, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: AQATAAAAEQAAAAERAAAAdFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldEFzc2V0LCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
         _objects: []
         _tag: Constant
         _initializer:
@@ -65,7 +72,7 @@ MonoBehaviour:
     - Name: Inventory
       Definition:
         _type: 19
-        _constraint: Store|0
+        _constraint: AQATAAAAEgAAAAESAAAAAAAAAA==
         _objects:
         - {fileID: 11400000, guid: a310b37e56d4d4b41af7727ae3a763a4, type: 2}
         _tag: Constant
@@ -173,4 +180,4 @@ MonoBehaviour:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 355
+  _version: 394

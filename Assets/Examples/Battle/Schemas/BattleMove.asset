@@ -20,7 +20,7 @@ MonoBehaviour:
     - Name: Name
       Definition:
         _type: 15
-        _constraint: '-'
+        _constraint: 
         _objects: []
         _tag: 
         _initializer:
@@ -30,7 +30,7 @@ MonoBehaviour:
     - Name: Description
       Definition:
         _type: 15
-        _constraint: '-'
+        _constraint: 
         _objects: []
         _tag: 
         _initializer:
@@ -40,12 +40,11 @@ MonoBehaviour:
     - Name: Instruction
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.InstructionGraph, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: AQARAAAAdFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5JbnN0cnVjdGlvbkdyYXBoLCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
         _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 38
+  _version: 41

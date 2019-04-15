@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Composition/Shuffle", 15)]
+	[CreateInstructionGraphNodeMenu("Composition/Shuffle", 20)]
 	[HelpURL(Composition.DocumentationUrl + "shuffle")]
 	public class ShuffleNode : InstructionGraphNode
 	{

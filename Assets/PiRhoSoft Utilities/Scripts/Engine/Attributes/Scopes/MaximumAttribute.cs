@@ -2,7 +2,7 @@
 {
 	public class MaximumAttribute : PropertyScopeAttribute
 	{
-		public const int DefaultOrder = int.MaxValue - 20;
+		public const int DefaultOrder = int.MaxValue - 120;
 
 		public float MaximumValue { get; private set; }
 
