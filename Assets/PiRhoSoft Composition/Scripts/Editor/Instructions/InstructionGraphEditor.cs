@@ -109,6 +109,7 @@ namespace PiRhoSoft.CompositionEditor
 		public static InstructionGraphNode CloneNode(InstructionGraphNode node)
 		{
 			var clone = Instantiate(node);
+			clone.name = node.name;
 			clone.hideFlags = HideFlags.HideInHierarchy;
 			return clone;
 		}

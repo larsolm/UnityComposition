@@ -97,13 +97,13 @@ MonoBehaviour:
 
       fighter.Pool.SpeedPriority = -fighter.Speed;
 
-      fighter.Inventory += global.Items[Random(0, global.Items.Count)];
+      fighter.Inventory += Random(global.Items);
 
-      fighter.Inventory += global.Items[Random(0, global.Items.Count)];
+      fighter.Inventory += Random(global.Items);
 
-      fighter.Inventory += global.Items[Random(0, global.Items.Count)];
+      fighter.Inventory += Random(global.Items);
 
-      fighter.Inventory += global.Items[Random(0, global.Items.Count)];'
+      fighter.Inventory += Random(global.Items);'
 --- !u!114 &114016950435173752
 MonoBehaviour:
   m_ObjectHideFlags: 1

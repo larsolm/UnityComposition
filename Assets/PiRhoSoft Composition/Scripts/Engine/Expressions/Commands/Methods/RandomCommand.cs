@@ -15,14 +15,15 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				case 1:
 				{
-					var max = parameters[0].Evaluate(variables);
+					var value = parameters[0].Evaluate(variables);
 
-					if (max.Type == VariableType.Int)
-						return VariableValue.Create(Random.Range(0, max.Int));
-					else if (max.Type == VariableType.Float)
-						return VariableValue.Create(Random.Range(0.0f, max.Float));
-					else
-						throw CommandEvaluationException.WrongParameterType(name, 0, max.Type, VariableType.Int, VariableType.Float);
+					switch (value.Type)
+					{
+						case VariableType.Int: return VariableValue.Create(Random.Range(0, value.Int));
+						case VariableType.Float: return VariableValue.Create(Random.Range(0.0f, value.Float));
+						case VariableType.List: return value.List.GetVariable(Random.Range(0, value.List.Count));
+						default: throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Int, VariableType.Float, VariableType.List);
+					}
 				}
 				case 2:
 				{
