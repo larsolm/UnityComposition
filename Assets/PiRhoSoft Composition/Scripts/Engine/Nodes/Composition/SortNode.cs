@@ -30,33 +30,31 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Resolve(variables, List, out IVariableList variableList))
+			if (Resolve(variables, List, out IVariableList variableList) && variableList is VariableList list)
 			{
-				if (variableList is VariableList list)
+				if (SortByProperty)
 				{
-					if (SortByProperty)
+					list.Values.Sort((left, right) =>
 					{
-						list.List.Sort((left, right) =>
+						foreach (var condition in SortConditions)
 						{
-							foreach (var condition in SortConditions)
-							{
-								var leftValue = condition.GetValue(left.Store);
-								var rightValue = condition.GetValue(right.Store);
+							var leftValue = condition.GetValue(left.Store);
+							var rightValue = condition.GetValue(right.Store);
 
-								var compare = VariableHandler.Compare(leftValue, rightValue).GetValueOrDefault(0);
-								if (compare != 0)
-									return compare;
-							}
+							var compare = VariableHandler.Compare(leftValue, rightValue).GetValueOrDefault(0);
+							if (compare != 0)
+								return compare;
+						}
 
-							return 0;
-						});
-					}
-					else
-					{
-						list.List.Sort((left, right) => VariableHandler.Compare(left, right).GetValueOrDefault(0));
-					}
+						return 0;
+					});
+				}
+				else
+				{
+					list.Values.Sort((left, right) => VariableHandler.Compare(left, right).GetValueOrDefault(0));
 				}
 			}
+			
 
 			graph.GoTo(Next, nameof(Next));
 
