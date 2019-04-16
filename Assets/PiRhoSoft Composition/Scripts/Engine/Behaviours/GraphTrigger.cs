@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void Run()
 		{
-			if (Graph.Instruction)
+			if (Graph.Instruction && !Graph.IsRunning)
 				CompositionManager.Instance.RunInstruction(Graph, VariableValue.Create(this));
 		}
 	}

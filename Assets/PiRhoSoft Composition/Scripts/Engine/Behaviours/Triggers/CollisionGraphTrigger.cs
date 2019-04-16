@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void Run(InstructionCaller graph)
 		{
-			if (graph.Instruction)
+			if (graph.Instruction && !graph.IsRunning)
 				CompositionManager.Instance.RunInstruction(graph, VariableValue.Create(this));
 		}
 	}
