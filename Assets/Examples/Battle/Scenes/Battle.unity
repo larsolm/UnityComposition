@@ -164,7 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 51267653}
+  Object: {fileID: 51267653}
   Condition:
     _statement: Fighter.Poison
 --- !u!114 &51267653
@@ -1049,7 +1049,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 698223272}
+  Object: {fileID: 698223272}
   Condition:
     _statement: Fighter.Poison
 --- !u!114 &698223272
