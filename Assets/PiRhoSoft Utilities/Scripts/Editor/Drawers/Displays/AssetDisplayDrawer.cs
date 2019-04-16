@@ -118,7 +118,7 @@ namespace PiRhoSoft.UtilityEditor
 						DragAndDrop.AcceptDrag();
 						return obj;
 					}
-				}				
+				}
 			}
 
 			return asset;
