@@ -14,21 +14,24 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		VariableValue GetVariable(string name);
 		SetVariableResult SetVariable(string name, VariableValue value);
-		IEnumerable<string> GetVariableNames();
+		IList<string> GetVariableNames();
 	}
 
 	public class VariableStore : IVariableStore
 	{
-		private List<Variable> _variables = new List<Variable>();
+		private List<string> _names = new List<string>();
+		private List<VariableValue> _variables = new List<VariableValue>();
 		private Dictionary<string, int> _map = new Dictionary<string, int>();
 
-		public List<Variable> Variables => _variables;
+		public List<string> Names => _names;
+		public List<VariableValue> Variables => _variables;
 		public Dictionary<string, int> Map => _map;
 
 		public virtual void AddVariable(string name, VariableValue value)
 		{
 			_map.Add(name, _variables.Count);
-			_variables.Add(Variable.Create(name, value));
+			_variables.Add(value);
+			_names.Add(name);
 		}
 
 		public bool RemoveVariable(string name)
@@ -46,7 +49,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void RemoveVariable(int index)
 		{
-			var name = _variables[index].Name;
+			var name = _names[index];
 			RemoveVariable(name, index);
 		}
 
@@ -54,29 +57,31 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_map.Remove(name);
 			_variables.RemoveAt(index);
+			_names.RemoveAt(index);
 
-			for (var i = index; i < _variables.Count; i++)
-				_map[_variables[i].Name] = i;
+			for (var i = index; i < _names.Count; i++)
+				_map[_names[i]] = i;
 		}
 
 		public virtual void VariableMoved(int from, int to)
 		{
 			_map.Clear();
 
-			for (var i = 0; i < _variables.Count; i++)
-				_map.Add(_variables[i].Name, i);
+			for (var i = 0; i < _names.Count; i++)
+				_map.Add(_names[i], i);
 		}
 
 		public virtual void Clear()
 		{
 			_variables.Clear();
+			_names.Clear();
 			_map.Clear();
 		}
 
 		protected SetVariableResult SetVariable(string name, VariableValue value, bool allowAdd)
 		{
 			if (_map.TryGetValue(name, out int index))
-				_variables[index] = Variable.Create(name, value);
+				_variables[index] = value;
 			else if (allowAdd)
 				AddVariable(name, value);
 			else
@@ -87,14 +92,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region IVariableStore Implementation
 
-		public virtual IEnumerable<string> GetVariableNames()
+		public virtual IList<string> GetVariableNames()
 		{
-			return _map.Keys;
+			return _names;
 		}
 
 		public virtual VariableValue GetVariable(string name)
 		{
-			return _map.TryGetValue(name, out var index) ? _variables[index].Value : VariableValue.Empty;
+			return _map.TryGetValue(name, out var index) ? _variables[index] : VariableValue.Empty;
 		}
 
 		public virtual SetVariableResult SetVariable(string name, VariableValue value)

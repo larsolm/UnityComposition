@@ -11,7 +11,9 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private class DefaultGlobalStore : IVariableStore
 		{
-			public IEnumerable<string> GetVariableNames() => new List<string> { GlobalStoreName };
+			private static readonly string[] _names = new string[] { GlobalStoreName };
+
+			public IList<string> GetVariableNames() => _names;
 			public VariableValue GetVariable(string name) => name == GlobalStoreName ? VariableValue.Create(Instance.GlobalStore) : VariableValue.Empty;
 			public SetVariableResult SetVariable(string name, VariableValue value) => name == GlobalStoreName ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
 		}

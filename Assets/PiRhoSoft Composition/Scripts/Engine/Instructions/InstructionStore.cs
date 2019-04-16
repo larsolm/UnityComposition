@@ -69,7 +69,6 @@ namespace PiRhoSoft.CompositionEngine
 		public const string OutputStoreName = "output";
 		public const string LocalStoreName = "local";
 
-		private static string[] _variableNames = new string[] { SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName };
 		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
 		public string ContextName { get; private set; }
@@ -85,10 +84,14 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool IsInput(InstructionInput input) => input.Type == InstructionInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
 		public static bool IsOutput(InstructionOutput output) => output.Type == InstructionOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
+		private readonly string[] _variableNames = new string[] { SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName, string.Empty };
+
 		public InstructionStore(Instruction instruction, VariableValue context)
 		{
 			ContextName = instruction.ContextName;
 			Context = ResolveValue(instruction.ContextDefinition, context, instruction, _invalidContextError, ContextName);
+
+			_variableNames[_variableNames.Length - 1] = ContextName;
 		}
 
 		public void WriteInputs(InstructionCaller instruction, IList<InstructionInput> inputs, IVariableStore caller)
@@ -176,9 +179,9 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public IEnumerable<string> GetVariableNames()
+		public IList<string> GetVariableNames()
 		{
-			return _variableNames.Append(ContextName);
+			return _variableNames;
 		}
 
 		private VariableValue ResolveValue(ValueDefinition definition, VariableValue value, Object errorContext, string invalidError, string variableName)

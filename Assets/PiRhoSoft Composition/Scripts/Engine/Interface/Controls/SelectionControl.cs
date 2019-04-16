@@ -100,6 +100,8 @@ namespace PiRhoSoft.CompositionEngine
 			public string Label;
 			public VariableValue Value;
 
+			private static readonly List<string> _names = new List<string> { nameof(Index), nameof(Label), nameof(Focused), nameof(Value) };
+
 			public VariableValue GetVariable(string name)
 			{
 				switch (name)
@@ -117,9 +119,9 @@ namespace PiRhoSoft.CompositionEngine
 				return SetVariableResult.ReadOnly;
 			}
 
-			public IEnumerable<string> GetVariableNames()
+			public IList<string> GetVariableNames()
 			{
-				return new List<string> { nameof(Index), nameof(Label), nameof(Focused), nameof(Value) };
+				return _names;
 			}
 		}
 

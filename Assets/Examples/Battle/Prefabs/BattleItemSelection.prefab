@@ -37,7 +37,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 122.37, y: 55.86}
+  m_SizeDelta: {x: 122.79, y: 55.86}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1176305142928360777
 CanvasRenderer:
@@ -374,6 +374,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 1176305144472632037}
+  Object: {fileID: 1176305144472632037}
   Condition:
     _statement: Item.Focused

@@ -1,7 +1,6 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
 
@@ -32,7 +31,7 @@ namespace PiRhoSoft.CompositionEditor
 			SelectedName = string.Empty;
 
 			_label = new GUIContent(name);
-			_proxy = isStatic ? (ValuesProxy)new StaticValuesProxy { Names = store.GetVariableNames().ToList() } : new DynamicValuesProxy { Store = store };
+			_proxy = isStatic ? (ValuesProxy)new StaticValuesProxy { Names = store.GetVariableNames() } : new DynamicValuesProxy { Store = store };
 
 			Setup(_proxy)
 				.MakeEmptyLabel(new GUIContent("The store is empty"))
@@ -129,7 +128,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private class StaticValuesProxy : ValuesProxy
 		{
-			public List<string> Names;
+			public IList<string> Names;
 
 			public override int Count => Names.Count;
 			public override string GetName(int index) => Names[index];
@@ -139,8 +138,8 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			public IVariableStore Store;
 
-			public override int Count => Store.GetVariableNames().Count();
-			public override string GetName(int index) => Store.GetVariableNames().ToList()[index];
+			public override int Count => Store.GetVariableNames().Count;
+			public override string GetName(int index) => Store.GetVariableNames()[index];
 		}
 
 		#endregion

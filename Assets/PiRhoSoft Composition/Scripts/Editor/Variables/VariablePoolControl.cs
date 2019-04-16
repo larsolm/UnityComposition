@@ -76,11 +76,12 @@ namespace PiRhoSoft.CompositionEditor
 			var variable = _pool.Variables[index];
 			var definition = ValueDefinition.Create(VariableType.Empty);
 
-			return VariableValueDrawer.GetHeight(variable.Value, definition, true);
+			return VariableValueDrawer.GetHeight(variable, definition, true);
 		}
 
 		private void DrawVariable(Rect rect, IList list, int index)
 		{
+			var name = _pool.Names[index];
 			var variable = _pool.Variables[index];
 			var definition = _pool.Definitions[index];
 
@@ -94,11 +95,11 @@ namespace PiRhoSoft.CompositionEditor
 				PopupWindow.Show(editRect, _editPopup);
 			}
 
-			EditorGUI.LabelField(labelRect, variable.Name);
+			EditorGUI.LabelField(labelRect, name);
 
 			using (var changes = new EditorGUI.ChangeCheckScope())
 			{
-				var value = VariableValueDrawer.Draw(rect, GUIContent.none, variable.Value, definition, true);
+				var value = VariableValueDrawer.Draw(rect, GUIContent.none, variable, definition, true);
 
 				if (changes.changed)
 					_pool.SetVariable(index, value);
@@ -133,7 +134,7 @@ namespace PiRhoSoft.CompositionEditor
 				_control = control;
 				_index = index;
 
-				_name = control._pool.Variables[index].Name;
+				_name = control._pool.Names[index];
 				_definition = control._pool.Definitions[index];
 			}
 

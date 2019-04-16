@@ -23,23 +23,41 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (Loop != null && Resolve(variables, Container, out IVariableList list))
+			if (Loop != null)
 			{
-				if (iteration < list.Count)
+				if (Resolve(variables, Container, out IVariableList list))
 				{
-					var item = list.GetVariable(iteration);
+					if (iteration < list.Count)
+					{
+						var item = list.GetVariable(iteration);
+						SetValues(graph, variables, iteration, item);
+					}
+				}
+				else if (Resolve(variables, Container, out IVariableStore store))
+				{
+					var names = store.GetVariableNames();
+					if (iteration < names.Count)
+					{
+						var name = names[iteration];
+						var item = store.GetVariable(name);
 
-					if (Index.IsAssigned)
-						Index.SetValue(variables, VariableValue.Create(iteration));
-
-					if (Value.IsAssigned)
-						Value.SetValue(variables, item);
-
-					graph.GoTo(Loop, nameof(Loop));
+						SetValues(graph, variables, iteration, item);
+					}
 				}
 			}
 
 			yield break;
+		}
+
+		private void SetValues(InstructionGraph graph, InstructionStore variables, int iteration, VariableValue item)
+		{
+			if (Index.IsAssigned)
+				Index.SetValue(variables, VariableValue.Create(iteration));
+
+			if (Value.IsAssigned)
+				Value.SetValue(variables, item);
+
+			graph.GoTo(Loop, nameof(Loop));
 		}
 	}
 }

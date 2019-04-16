@@ -43,14 +43,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void ChangeName(int index, string name)
 		{
-			var variable = Variables[index];
+			var variableName = Names[index];
 
-			if (variable.Name != name)
+			if (variableName != name)
 			{
-				Map.Remove(variable.Name);
+				Map.Remove(variableName);
 				Map.Add(name, index);
 				
-				Variables[index] = Variable.Create(name, variable.Value);
+				Names[index] = name;
 			}
 		}
 
@@ -58,16 +58,16 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var variable = Variables[index];
 
-			if (!definition.IsValid(variable.Value))
-				Variables[index] = Variable.Create(variable.Name, definition.Generate(null));
+			if (!definition.IsValid(variable))
+				Variables[index] = definition.Generate(null);
 
 			Definitions[index] = definition;
 		}
 
 		public SetVariableResult SetVariable(int index, VariableValue value)
 		{
-			var variable = Variables[index];
-			var result = SetVariable(variable.Name, value);
+			var name = Names[index];
+			var result = SetVariable(name, value);
 
 			if (result == SetVariableResult.Success && value.Type != Definitions[index].Type)
 				Definitions[index] = ValueDefinition.Create(value.Type, null, null, null, false, false);
@@ -79,7 +79,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnBeforeSerialize()
 		{
-			_variablesData = VariableHandler.SaveVariables(Variables, ref _variablesObjects);
+			var variables = new List<Variable>();
+
+			for (var i = 0; i < Names.Count && i < Variables.Count; i++)
+				variables.Add(Variable.Create(Names[i], Variables[i]));
+
+			_variablesData = VariableHandler.SaveVariables(variables, ref _variablesObjects);
 		}
 
 		public void OnAfterDeserialize()
