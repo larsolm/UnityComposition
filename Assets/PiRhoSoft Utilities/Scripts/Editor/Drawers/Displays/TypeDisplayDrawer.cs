@@ -76,6 +76,27 @@ namespace PiRhoSoft.UtilityEditor
 			var popupLabel = type != null ? new GUIContent(type.Name, thumbnail) : new GUIContent("None");
 
 			var selection = SelectionPopup.Draw(rect, popupLabel, new SelectionState { Tab = 0, Index = index }, list.Tree);
+
+			if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
+			{
+				var drag = DragAndDrop.objectReferences[0].GetType();
+
+				if (rootType.IsAssignableFrom(drag))
+				{
+					if (Event.current.type == EventType.DragUpdated)
+					{
+						DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+						Event.current.Use();
+					}
+
+					if (Event.current.type == EventType.DragPerform)
+					{
+						DragAndDrop.AcceptDrag();
+						return drag;
+					}
+				}
+			}
+
 			return list.GetType(selection.Index);
 		}
 
