@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Examples/Battle/Scenes/Battle.unity
     guid: a82db6072ca36a84392916da7197fcbd
+  - enabled: 1
+    path: Assets/Examples/Board/Board.unity
+    guid: 7551e52e67c584f46bf3bbac4bfc60e2
   m_configObjects: {}
