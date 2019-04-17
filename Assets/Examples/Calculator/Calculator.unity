@@ -296,9 +296,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 134126814}
+  Object: {fileID: 134126814}
   Condition:
-    _statement: Operation == "Multiply";
+    _statement: Calculator.Operation == "Multiply";
 --- !u!114 &134126814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3156,9 +3156,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 1136881293}
+  Object: {fileID: 1136881293}
   Condition:
-    _statement: Operation == "Plus";
+    _statement: Calculator.Operation == "Plus";
 --- !u!114 &1136881293
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3674,9 +3674,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 1413441507}
+  Object: {fileID: 1413441507}
   Condition:
-    _statement: Operation == "Divide";
+    _statement: Calculator.Operation == "Divide";
 --- !u!114 &1413441507
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4180,9 +4180,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 1611542639}
+  Object: {fileID: 1611542639}
   Condition:
-    _statement: Operation == "Minus";
+    _statement: Calculator.Operation == "Minus";
 --- !u!114 &1611542639
 MonoBehaviour:
   m_ObjectHideFlags: 0

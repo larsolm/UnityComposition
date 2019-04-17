@@ -85,7 +85,7 @@ MonoBehaviour:
   m_Name: Initialize Variables
   m_EditorClassIdentifier: 
   Name: Initialize Variables
-  GraphPosition: {x: 844.8, y: -243.2}
+  GraphPosition: {x: 844.8, y: -230.40001}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -1006,7 +1006,7 @@ MonoBehaviour:
   m_Name: Reset Stats
   m_EditorClassIdentifier: 
   Name: Reset Stats
-  GraphPosition: {x: 716.8, y: -307.2}
+  GraphPosition: {x: 704, y: -320}
   IsBreakpoint: 0
   Next: {fileID: 114014620528468878}
   Object:
