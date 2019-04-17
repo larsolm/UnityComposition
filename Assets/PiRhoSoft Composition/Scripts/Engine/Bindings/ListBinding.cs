@@ -67,7 +67,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (!equal.HasValue || !equal.Value)
 			{
 				var binding = Instantiate(Template, transform);
-				binding.transform.SetSiblingIndex(i);
+				binding.transform.SetSiblingIndex(index);
 				binding.Value = item;
 
 				_items[index] = binding;
