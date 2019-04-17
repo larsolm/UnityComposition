@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 41002894b0a65c94aa4ee0f013c49178, type: 3}
+  m_Name: Data
+  m_EditorClassIdentifier: 
+  Variables:
+    _variablesData:
+    - AQAFSXRlbXMTAAAAAgAAABEAAAAAAAAAEQAAAAEAAAA=
+    - AQAHV2VhcG9ucxMAAAAFAAAAEQAAAAIAAAARAAAAAwAAABEAAAAEAAAAEQAAAAUAAAARAAAABgAAAA==
+    - AQAIUmFyaXRpZXMTAAAABAAAAA8AAAAGQ29tbW9uDwAAAAhVbmNvbW1vbg8AAAAEUmFyZQ8AAAAJTGVnZW5kYXJ5
+    - AQAKRXF1aXBtZW50cxMAAAABAAAADwAAAAdXZWFwb25z
+    _variablesObjects:
+    - {fileID: 11400000, guid: 57985650b77b7474ab67a59223c1ca93, type: 2}
+    - {fileID: 11400000, guid: a35a81f63e29e7e44b95c3d61267a7f3, type: 2}
+    - {fileID: 11400000, guid: 0e1f70661051b194ba21823f62300cdd, type: 2}
+    - {fileID: 11400000, guid: 90c75e57474ff244292442aa0c3ff5dd, type: 2}
+    - {fileID: 11400000, guid: b19b410ac1490c74786851af9d845a70, type: 2}
+    - {fileID: 11400000, guid: 7c780be5d692f2b4bb6b70718de32490, type: 2}
+    - {fileID: 11400000, guid: 62fc392f3ba7f70458bb14bf716bfb58, type: 2}
+    Definitions:
+    - _type: 19
+      _constraint: AQATAAAAEQAAAAERAAAAdFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldEFzc2V0LCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 19
+      _constraint: AQATAAAAEQAAAAERAAAAdFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldEFzc2V0LCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 19
+      _constraint: AQATAAAADwAAAAEPAAAAAAAAAA==
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 19
+      _constraint: AQATAAAADwAAAAEPAAAAAAAAAA==
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0

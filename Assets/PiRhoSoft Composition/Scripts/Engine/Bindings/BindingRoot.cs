@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private IVariableStore _parent;
 
-		void Awake()
+		protected virtual void Awake()
 		{
 			if (transform.parent)
 				_parent = FindParent(transform.parent.gameObject);

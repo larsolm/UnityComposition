@@ -65,15 +65,18 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var loadStatus = Unload(variables);
 
-			while (!loadStatus.isDone)
-				yield return null;
-
-			if (CleanupAssets)
+			if (loadStatus != null)
 			{
-				var unloadStatus = Resources.UnloadUnusedAssets();
-
-				while (!unloadStatus.isDone)
+				while (!loadStatus.isDone)
 					yield return null;
+
+				if (CleanupAssets)
+				{
+					var unloadStatus = Resources.UnloadUnusedAssets();
+
+					while (!unloadStatus.isDone)
+						yield return null;
+				}
 			}
 		}
 

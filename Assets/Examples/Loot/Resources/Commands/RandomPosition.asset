@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85fe587d520831147b347d0bb61b984d, type: 3}
+  m_Name: RandomPosition
+  m_EditorClassIdentifier: 
+  Name: RandomPosition
+  Parameters:
+    _items:
+    - Name: MinimumDistance
+      Type: 3
+    - Name: MaximumDistance
+      Type: 3
+  Expression:
+    _statement: 'angle = Random(0, PI * 2)
+
+      distance = Random(MinimumDistance, MaximumDistance)
+
+      x = Cos(angle)
+
+      y = Sin(angle)
+
+      Vector3(x, y, 0) * distance'
