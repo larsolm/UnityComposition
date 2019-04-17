@@ -21,32 +21,57 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = Variable.GetValue(variables);
 
-			if (value.TryGetList(out var list) && Template != null)
+			if (Template != null)
 			{
-				while (_items.Count < list.Count)
-					_items.Add(null);
-
-				if (_items.Count > list.Count)
-					_items.RemoveRange(list.Count, _items.Count - list.Count);
-
-				for (var i = 0; i < list.Count; i++)
+				if (value.TryGetList(out var list))
 				{
-					var item = list.GetVariable(i);
-					var equal = _items[i] != null ? VariableHandler.IsEqual(_items[i].Value, item) : null;
+					SyncItems(list.Count);
 
-					if (!equal.HasValue || !equal.Value)
+					for (var i = 0; i < list.Count; i++)
 					{
-						var binding = Instantiate(Template, transform);
-						binding.transform.SetSiblingIndex(i);
-						binding.Value = item;
+						var item = list.GetVariable(i);
+						SetItem(i, item);
+					}
+				}
+				else if (value.TryGetStore(out var store))
+				{
+					var names = store.GetVariableNames();
 
-						_items[i] = binding;
+					SyncItems(names.Count);
+
+					for (var i = 0; i < names.Count; i++)
+					{
+						var item = store.GetVariable(names[i]);
+						SetItem(i, item);
 					}
 				}
 			}
 
 			foreach (var item in _items)
 				UpdateBinding(item.gameObject, string.Empty, status, _bindings);
+		}
+
+		private void SyncItems(int count)
+		{
+			while (_items.Count < count)
+				_items.Add(null);
+
+			if (_items.Count > count)
+				_items.RemoveRange(count, _items.Count - count);
+		}
+
+		private void SetItem(int index, VariableValue item)
+		{
+			var equal = _items[index] != null ? VariableHandler.IsEqual(_items[index].Value, item) : null;
+
+			if (!equal.HasValue || !equal.Value)
+			{
+				var binding = Instantiate(Template, transform);
+				binding.transform.SetSiblingIndex(i);
+				binding.Value = item;
+
+				_items[index] = binding;
+			}
 		}
 	}
 }
