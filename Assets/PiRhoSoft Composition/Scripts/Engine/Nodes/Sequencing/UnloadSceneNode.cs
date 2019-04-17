@@ -114,9 +114,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static void SetupScene()
 		{
-			var cameraObject = new GameObject("MainCamera");
-			cameraObject.AddComponent<Camera>();
-			cameraObject.AddComponent<TransitionRenderer>();
+			new GameObject("MainCamera", typeof(Camera), typeof(TransitionRenderer));
 		}
 
 		#endregion

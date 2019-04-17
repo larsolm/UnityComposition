@@ -26,7 +26,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("Speed is affected by Time.timeScale")]
 		public bool UseScaledTime = true;
 
-		protected Image _image;
+		private Image _image;
 
 		void Awake()
 		{

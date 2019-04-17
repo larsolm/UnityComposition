@@ -14,7 +14,7 @@ namespace PiRhoSoft.UtilityEngine
 			{
 				if (_instance == null)
 				{
-					GameObject gameObject = new GameObject();
+					GameObject gameObject = new GameObject(typeof(T).Name);
 					_instance = gameObject.AddComponent<T>();
 					gameObject.hideFlags = HideFlags.HideInHierarchy;
 					DontDestroyOnLoad(gameObject);

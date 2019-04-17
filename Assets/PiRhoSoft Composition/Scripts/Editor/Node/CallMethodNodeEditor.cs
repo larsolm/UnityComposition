@@ -3,6 +3,7 @@ using PiRhoSoft.UtilityEditor;
 using System;
 using System.Linq;
 using System.Reflection;
+using System.Text;
 using UnityEditor;
 using UnityEngine;
 
@@ -48,7 +49,26 @@ namespace PiRhoSoft.CompositionEditor
 					.Where(method => !method.GetParameters().Any(parameter => VariableValue.GetType(parameter.ParameterType) == VariableType.Empty))
 					.Where(method => method.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
 
-				_methodNames = _methods.Select(method => method.Name).ToArray();
+				_methodNames = _methods.Select(method =>
+				{
+					var stringBuilder = new StringBuilder(method.Name).Append('(');
+					var parameters = method.GetParameters();
+					if (parameters.Length > 0)
+					{
+						var first = parameters.First();
+						stringBuilder.Append(first.ParameterType.Name).Append(' ').Append(first.Name);
+
+						for (var i = 1; i < parameters.Length; i++)
+						{
+							var parameter = parameters[i];
+							stringBuilder.Append(", ").Append(parameter.ParameterType.Name).Append(' ').Append(parameter.Name);
+						}
+					}
+
+					stringBuilder.Append(')');
+
+					return stringBuilder.ToString();
+				}).ToArray();
 			}
 			else
 			{
@@ -100,7 +120,7 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				using (new UndoScope(_node, false))
 				{
-					var method = Array.IndexOf(_methodNames, _node.MethodName);
+					var method = Array.IndexOf(_methods, _node.Method);
 					var selectedMethod = EditorGUILayout.Popup(_methodContent, method, _methodNames);
 
 					if (selectedMethod != method)
