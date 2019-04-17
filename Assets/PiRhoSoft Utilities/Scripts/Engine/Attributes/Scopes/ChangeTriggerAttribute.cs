@@ -4,6 +4,6 @@
 	{
 		public string Callback { get; private set; }
 
-		public ChangeTriggerAttribute(string callback) : base(int.MaxValue - 50) => Callback = callback;
+		public ChangeTriggerAttribute(string callback) : base(int.MaxValue - 10) => Callback = callback;
 	}
 }

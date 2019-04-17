@@ -101,6 +101,26 @@ namespace PiRhoSoft.UtilityEditor
 				return AssetHelper.Create(type, saveLocation, defaultName);
 			}
 
+			if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
+			{
+				var obj = DragAndDrop.objectReferences[0];
+
+				if (assetType.IsAssignableFrom(obj.GetType()))
+				{
+					if (Event.current.type == EventType.DragUpdated)
+					{
+						DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+						Event.current.Use();
+					}
+
+					if (Event.current.type == EventType.DragPerform)
+					{
+						DragAndDrop.AcceptDrag();
+						return obj;
+					}
+				}
+			}
+
 			return asset;
 		}
 

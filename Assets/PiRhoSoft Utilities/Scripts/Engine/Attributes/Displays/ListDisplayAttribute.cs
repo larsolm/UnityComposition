@@ -13,7 +13,7 @@ namespace PiRhoSoft.UtilityEngine
 
 		public ListDisplayAttribute()
 		{
-			order = int.MaxValue;
+			order = int.MaxValue - 100;
 		}
 	}
 }

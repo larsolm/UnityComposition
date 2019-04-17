@@ -2,7 +2,7 @@
 {
 	public class SnapAttribute : PropertyScopeAttribute
 	{
-		public const int DefaultOrder = int.MaxValue - 10;
+		public const int DefaultOrder = int.MaxValue - 110;
 
 		public float SnapValue { get; private set; }
 

@@ -18,6 +18,8 @@ namespace PiRhoSoft.CompositionEngine
 		private Menu _parent;
 		private Data _data = new Data();
 
+		private readonly string[] _names = new string[] { string.Empty, string.Empty };
+
 		protected override void Awake()
 		{
 			base.Awake();
@@ -42,9 +44,11 @@ namespace PiRhoSoft.CompositionEngine
 				_parent.MoveItem(this);
 		}
 
-		public override IEnumerable<string> GetVariableNames()
+		public override IList<string> GetVariableNames()
 		{
-			return base.GetVariableNames().Concat(Enumerable.Repeat(ItemName, 1));
+			_names[0] = Name;
+			_names[1] = ItemName;
+			return _names;
 		}
 
 		public override VariableValue GetVariable(string name)
@@ -64,9 +68,11 @@ namespace PiRhoSoft.CompositionEngine
 			public string Label;
 			public bool Focused;
 
-			public IEnumerable<string> GetVariableNames()
+			private static List<string> _variableNames = new List<string> { nameof(Index), nameof(Label), nameof(Focused) };
+
+			public IList<string> GetVariableNames()
 			{
-				return new List<string> { nameof(Index), nameof(Label), nameof(Focused) };
+				return _variableNames;
 			}
 
 			public VariableValue GetVariable(string name)

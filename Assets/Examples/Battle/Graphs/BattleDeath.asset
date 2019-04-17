@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: BattleDeath
+  m_EditorClassIdentifier: 
+  ContextName: fighter
+  ContextDefinition:
+    _type: 17
+    _constraint: AQARAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114965222403114964}
+    - {fileID: 114471685298128452}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 114965222403114964}
+--- !u!114 &114471685298128452
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Death Message
+  m_EditorClassIdentifier: 
+  Name: Death Message
+  GraphPosition: {x: 640, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{fighter.Name} died.'
+--- !u!114 &114965222403114964
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Move Death
+  m_EditorClassIdentifier: 
+  Name: Move Death
+  GraphPosition: {x: 320, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114471685298128452}
+  Transform:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  UseRelativePosition: 1
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: -5, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 2
+  WaitForCompletion: 0
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1

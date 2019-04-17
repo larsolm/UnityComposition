@@ -47,10 +47,10 @@ namespace PiRhoSoft.CompositionEngine
 
 				writer.Write(store.Variables.Count);
 
-				for (var i = 0; i < store.Variables.Count; i++)
+				for (var i = 0; i < store.Names.Count && i < store.Variables.Count; i++)
 				{
-					writer.Write(store.Variables[i].Name);
-					WriteValue(store.Variables[i].Value, writer, objects);
+					writer.Write(store.Names[i]);
+					WriteValue(store.Variables[i], writer, objects);
 				}
 			}
 			else

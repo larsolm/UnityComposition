@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			get
 			{
-				var done = _currentAnimation.IsDone();
+				var done = !_currentAnimation.IsNull() && _currentAnimation.IsDone();
 
 				if (_started && done) // Reset started here since PlayAnimation cannot
 					_started = false;

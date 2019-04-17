@@ -90,6 +90,26 @@ namespace PiRhoSoft.UtilityEditor
 				var newScene = SceneHelper.CreateScene(location, newSceneName, creator);
 				scene.Path = newScene.path;
 			}
+
+			if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
+			{
+				var obj = DragAndDrop.objectReferences[0];
+
+				if (obj is SceneAsset asset)
+				{
+					if (Event.current.type == EventType.DragUpdated)
+					{
+						DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+						Event.current.Use();
+					}
+
+					if (Event.current.type == EventType.DragPerform)
+					{
+						scene.Path = AssetDatabase.GetAssetPath(asset);
+						DragAndDrop.AcceptDrag();
+					}
+				}
+			}
 		}
 
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)

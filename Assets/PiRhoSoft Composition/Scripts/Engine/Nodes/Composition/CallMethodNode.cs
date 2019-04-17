@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Composition/Call Method", 12)]
+	[CreateInstructionGraphNodeMenu("Composition/Call Method", 13)]
 	[HelpURL(Composition.DocumentationUrl + "call-method-node")]
 	public class CallMethodNode : InstructionGraphNode, ISerializationCallbackReceiver
 	{

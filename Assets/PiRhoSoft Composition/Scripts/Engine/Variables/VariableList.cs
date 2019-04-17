@@ -13,26 +13,25 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class VariableList : IVariableList
 	{
-		private List<VariableValue> _values = new List<VariableValue>();
-
-		public int Count => _values.Count;
+		public List<VariableValue> Values { get; private set; } = new List<VariableValue>();
+		public int Count => Values.Count;
 
 		public VariableValue GetVariable(int index)
 		{
-			return index >= 0 && index < _values.Count ? _values[index] : VariableValue.Empty;
+			return index >= 0 && index < Values.Count ? Values[index] : VariableValue.Empty;
 		}
 
 		public SetVariableResult AddVariable(VariableValue value)
 		{
-			_values.Add(value);
+			Values.Add(value);
 			return SetVariableResult.Success;
 		}
 
 		public SetVariableResult RemoveVariable(int index)
 		{
-			if (index >= 0 && index < _values.Count)
+			if (index >= 0 && index < Values.Count)
 			{
-				_values.RemoveAt(index);
+				Values.RemoveAt(index);
 				return SetVariableResult.Success;
 			}
 
@@ -41,9 +40,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		public SetVariableResult SetVariable(int index, VariableValue value)
 		{
-			if (index >= 0 && index < _values.Count)
+			if (index >= 0 && index < Values.Count)
 			{
-				_values[index] = value;
+				Values[index] = value;
 				return SetVariableResult.Success;
 			}
 

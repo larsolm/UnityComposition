@@ -9,12 +9,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		public int Version { get; private set; }
 		private Dictionary<string, int> _indices = new Dictionary<string, int>();
+		private List<string> _names = new List<string>();
 
 		public int Count => _indices.Count;
 		public bool Contains(string name) => _indices.ContainsKey(name);
 		public int GetIndex(string name) => _indices.TryGetValue(name, out int index) ? index : -1;
 		public bool TryGetIndex(string name, out int index) => _indices.TryGetValue(name, out index);
-		public IEnumerable<string> GetNames() => _indices.Keys;
+		public IList<string> GetNames() => _names;
 
 		public VariableMap(int version)
 		{
@@ -36,13 +37,18 @@ namespace PiRhoSoft.CompositionEngine
 
 			return this;
 		}
-		
+
 		private void Add(string name)
 		{
 			if (!_indices.ContainsKey(name))
+			{
 				_indices.Add(name, _indices.Count);
+				_names.Add(name);
+			}
 			else
+			{
 				Debug.LogErrorFormat(_duplicateVariableError, name);
+			}
 		}
 	}
 }

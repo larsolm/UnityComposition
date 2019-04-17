@@ -93,7 +93,7 @@ namespace PiRhoSoft.CompositionEngine
 				: SetVariableResult.NotFound;
 		}
 
-		public IEnumerable<string> GetVariableNames()
+		public IList<string> GetVariableNames()
 		{
 			return _map.GetNames();
 		}

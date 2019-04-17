@@ -11,16 +11,16 @@ namespace PiRhoSoft.CompositionEngine
 
 		void OnEnable()
 		{
-			foreach (var variable in Variables.Variables)
-				CompositionManager.Instance.GlobalStore.SetVariable(variable.Name, variable.Value);
+			for (var i = 0; i < Variables.Names.Count && i < Variables.Variables.Count; i++)
+				CompositionManager.Instance.GlobalStore.SetVariable(Variables.Names[i], Variables.Variables[i]);
 		}
 
 		void OnDisable()
 		{
 			if (CompositionManager.Exists)
 			{
-				foreach (var variable in Variables.Variables)
-					CompositionManager.Instance.GlobalStore.RemoveVariable(variable.Name);
+				foreach (var name in Variables.Names)
+					CompositionManager.Instance.GlobalStore.RemoveVariable(name);
 			}
 		}
 	}

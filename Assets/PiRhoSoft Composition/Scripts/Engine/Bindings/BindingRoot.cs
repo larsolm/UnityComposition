@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -8,7 +7,10 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Binding Root")]
 	public class BindingRoot : MonoBehaviour, IVariableStore
 	{
+		private readonly string[] _names = new string[] { string.Empty };
+
 		public string Name;
+
 		public virtual VariableValue Value { get; set; }
 
 		private IVariableStore _parent;
@@ -36,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region IVariableStore Implementation
 
-		public virtual IEnumerable<string> GetVariableNames() => Enumerable.Repeat(Name, 1);
+		public virtual IList<string> GetVariableNames() { _names[0] = Name; return _names; }
 		public virtual VariableValue GetVariable(string name) => name == Name ? Value : _parent.GetVariable(name);
 		public virtual SetVariableResult SetVariable(string name, VariableValue value) => name == Name ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
 

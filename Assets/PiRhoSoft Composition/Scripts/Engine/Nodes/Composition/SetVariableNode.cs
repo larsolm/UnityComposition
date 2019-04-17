@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Composition/Set Variable", 14)]
+	[CreateInstructionGraphNodeMenu("Composition/Set Variable", 12)]
 	[HelpURL(Composition.DocumentationUrl + "set-variable-node")]
 	public class SetVariableNode : InstructionGraphNode
 	{

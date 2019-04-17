@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableValue GetVariable(string name) => Store.GetVariable(name);
 		public SetVariableResult SetVariable(string name, VariableValue value) => Store.SetVariable(name, value);
-		public IEnumerable<string> GetVariableNames() => Store.GetVariableNames();
+		public IList<string> GetVariableNames() => Store.GetVariableNames();
 
 		#endregion
 

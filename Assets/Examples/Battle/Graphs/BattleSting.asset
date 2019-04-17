@@ -15,8 +15,8 @@ MonoBehaviour:
   ContextName: fighter
   ContextDefinition:
     _type: 17
-    _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-      Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+    _constraint: AQARAAAAYVVuaXR5RW5naW5lLk9iamVjdCwgVW5pdHlFbmdpbmUuQ29yZU1vZHVsZSwgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGw=
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -27,6 +27,289 @@ MonoBehaviour:
   Outputs:
     _items: []
   _nodes:
-    _items: []
+    _items:
+    - {fileID: 114072452998471064}
+    - {fileID: 114935585411761918}
+    - {fileID: 114944993041365290}
+    - {fileID: 114862257652215422}
+    - {fileID: 114832450634291630}
+    - {fileID: 114309490965616434}
+    - {fileID: 114417349051196134}
+    - {fileID: 114023022173439066}
   StartPosition: {x: 0, y: 0}
-  Process: {fileID: 0}
+  Process: {fileID: 114072452998471064}
+--- !u!114 &114023022173439066
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destroy Effect
+  m_EditorClassIdentifier: 
+  Name: Destroy Effect
+  GraphPosition: {x: 1011.2, y: -89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114862257652215422}
+  Target:
+    _variable: sting
+    _tokens:
+    - Type: 0
+      Text: sting
+--- !u!114 &114072452998471064
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Sting Message
+  m_EditorClassIdentifier: 
+  Name: Sting Message
+  GraphPosition: {x: 320, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114417349051196134}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{fighter.Name} used Sting!'
+--- !u!114 &114309490965616434
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abd36ba06a52fe140b79c7a1d0217802, type: 3}
+  m_Name: Create Effect
+  m_EditorClassIdentifier: 
+  Name: Create Effect
+  GraphPosition: {x: 652.8, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114944993041365290}
+  Prefab:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 3499576830722531424, guid: 7f635a8ffe5698d48802cdfa85907f1b, type: 3}
+  ObjectName:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: Sting
+  ObjectVariable:
+    _variable: sting
+    _tokens:
+    - Type: 0
+      Text: sting
+  Positioning: 1
+  Object:
+    _variable: fighter
+    _tokens:
+    - Type: 0
+      Text: fighter
+  Parent:
+    _variable: 
+    _tokens: []
+  Position:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  Rotation:
+    Type: 1
+    Reference:
+      _variable: rotation
+      _tokens:
+      - Type: 0
+        Text: rotation
+    Value: {x: 0, y: 0, z: 0}
+--- !u!114 &114417349051196134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Effect Rotation
+  m_EditorClassIdentifier: 
+  Name: Effect Rotation
+  GraphPosition: {x: 652.8, y: -128}
+  IsBreakpoint: 0
+  Next: {fileID: 114309490965616434}
+  Expression:
+    _statement: 'rotation = Vector3(0, 0, fighter.Pool.Index == 0 ? -90 : 90);'
+--- !u!114 &114832450634291630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Poison Message
+  m_EditorClassIdentifier: 
+  Name: Poison Message
+  GraphPosition: {x: 1139.2001, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{fighter.Pool.Target.Name} was poisoned!'
+--- !u!114 &114862257652215422
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Apply Poison
+  m_EditorClassIdentifier: 
+  Name: Apply Poison
+  GraphPosition: {x: 1062.4, y: -12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114832450634291630}
+  Expression:
+    _statement: fighter.Pool.Target.Poison = true;
+--- !u!114 &114935585411761918
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Move to Target
+  m_EditorClassIdentifier: 
+  Name: Move to Target
+  GraphPosition: {x: 652.8, y: 102.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114023022173439066}
+  Transform:
+    _variable: sting
+    _tokens:
+    - Type: 0
+      Text: sting
+  UseRelativePosition: 0
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 1
+    Reference:
+      _variable: targetPosition
+      _tokens:
+      - Type: 0
+        Text: targetPosition
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 2
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 0.25
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &114944993041365290
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
+  m_Name: Store Target Position
+  m_EditorClassIdentifier: 
+  Name: Store Target Position
+  GraphPosition: {x: 652.8, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114935585411761918}
+  Target:
+    Type: 1
+    Reference:
+      _variable: fighter.Pool.Target
+      _tokens:
+      - Type: 0
+        Text: fighter
+      - Type: 0
+        Text: Pool
+      - Type: 0
+        Text: Target
+    Value: {fileID: 0}
+  Output:
+    _variable: targetPosition
+    _tokens:
+    - Type: 0
+      Text: targetPosition
+  TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  PropertyName: position

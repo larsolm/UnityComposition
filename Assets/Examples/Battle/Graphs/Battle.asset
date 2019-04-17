@@ -23,17 +23,7 @@ MonoBehaviour:
     _isTypeLocked: 0
     _isConstraintLocked: 0
   Inputs:
-    _items:
-    - Name: Multiplayer
-      Definition:
-        _type: 1
-        _constraint: 
-        _objects: []
-        _tag: 
-        _initializer:
-          _statement: 
-        _isTypeLocked: 0
-        _isConstraintLocked: 0
+    _items: []
   Outputs:
     _items: []
   _nodes:
@@ -50,7 +40,6 @@ MonoBehaviour:
     - {fileID: 114680524125233324}
     - {fileID: 114824544855869636}
     - {fileID: 114348266381536424}
-    - {fileID: 114861798838267012}
     - {fileID: 114276880049557452}
     - {fileID: 114181512053963512}
     - {fileID: 114131616769279628}
@@ -74,6 +63,13 @@ MonoBehaviour:
     - {fileID: 114030335073519336}
     - {fileID: 114743014648346664}
     - {fileID: 114864074634680384}
+    - {fileID: 114093961000405166}
+    - {fileID: 114249794967731700}
+    - {fileID: 114994863791174408}
+    - {fileID: 114479347403044168}
+    - {fileID: 114100410672664356}
+    - {fileID: 114465621572967356}
+    - {fileID: 114161050808359334}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114016950435173752}
   Process: {fileID: 114364025646214274}
@@ -95,7 +91,19 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114324781071790490}
   Expression:
-    _statement: fighter.Pool.Target = global.Fighters[(index + 1) % 2];
+    _statement: 'fighter.Pool.Target = global.Fighters[(index + 1) % 2];
+
+      fighter.Pool.Index = index;
+
+      fighter.Pool.SpeedPriority = -fighter.Speed;
+
+      fighter.Inventory += Random(global.Items);
+
+      fighter.Inventory += Random(global.Items);
+
+      fighter.Inventory += Random(global.Items);
+
+      fighter.Inventory += Random(global.Items);'
 --- !u!114 &114016950435173752
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -182,10 +190,53 @@ MonoBehaviour:
   Name: Is Target Dead
   GraphPosition: {x: 3200, y: 102.4}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114247473089136118}
+  OnTrue: {fileID: 114994863791174408}
   OnFalse: {fileID: 0}
   Condition:
     _statement: fighter.Pool.Target.CurrentHP <= 0
+--- !u!114 &114093961000405166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Binding
+  m_EditorClassIdentifier: 
+  Name: Update Binding
+  GraphPosition: {x: 2880, y: 435.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114249794967731700}
+  Object:
+    _variable: fighter.Display
+    _tokens:
+    - Type: 0
+      Text: fighter
+    - Type: 0
+      Text: Display
+  Group: 
+  WaitForCompletion: 0
+--- !u!114 &114100410672664356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Remove Item
+  m_EditorClassIdentifier: 
+  Name: Remove Item
+  GraphPosition: {x: 2880, y: 294.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: fighter.Inventory -= fighter.Pool.SelectedItem;
 --- !u!114 &114112693297798952
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -199,7 +250,7 @@ MonoBehaviour:
   m_Name: Item Message
   m_EditorClassIdentifier: 
   Name: Item Message
-  GraphPosition: {x: 2636.8, y: -76.8}
+  GraphPosition: {x: 2291.2, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: 114441288586741344}
   Control:
@@ -255,7 +306,7 @@ MonoBehaviour:
   m_Name: Show Selection
   m_EditorClassIdentifier: 
   Name: Show Selection
-  GraphPosition: {x: 2931.2, y: -358.4}
+  GraphPosition: {x: 2585.6, y: -320}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114276880049557452}
   Control:
@@ -305,6 +356,24 @@ MonoBehaviour:
       Label: Back
       Expand: 0
       OnSelected: {fileID: 114276880049557452}
+--- !u!114 &114161050808359334
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Reset Sorted
+  m_EditorClassIdentifier: 
+  Name: Reset Sorted
+  GraphPosition: {x: 1497.6, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 114465621572967356}
+  Expression:
+    _statement: sortedFighters = global.Fighters
 --- !u!114 &114181512053963512
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -318,7 +387,7 @@ MonoBehaviour:
   m_Name: Show Selection
   m_EditorClassIdentifier: 
   Name: Show Selection
-  GraphPosition: {x: 2521.6, y: -204.8}
+  GraphPosition: {x: 2176, y: -166.40001}
   IsBreakpoint: 0
   OnCanceled: {fileID: 0}
   Control:
@@ -396,11 +465,39 @@ MonoBehaviour:
   m_Name: Set Winner
   m_EditorClassIdentifier: 
   Name: Set Winner
-  GraphPosition: {x: 3507.2, y: 128}
+  GraphPosition: {x: 3840, y: 115.200005}
   IsBreakpoint: 0
   Next: {fileID: 114783432147138550}
   Expression:
     _statement: winner = fighter;
+--- !u!114 &114249794967731700
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Poison Damage Message
+  m_EditorClassIdentifier: 
+  Name: Poison Damage Message
+  GraphPosition: {x: 2969.6, y: 524.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114337536328452838}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: '{fighter.Name} took {damage} damage from poison!'
 --- !u!114 &114271038274048284
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -414,7 +511,7 @@ MonoBehaviour:
   m_Name: Move Message
   m_EditorClassIdentifier: 
   Name: Move Message
-  GraphPosition: {x: 2636.8, y: -307.2}
+  GraphPosition: {x: 2291.2, y: -268.80002}
   IsBreakpoint: 0
   Next: {fileID: 114131616769279628}
   Control:
@@ -442,7 +539,7 @@ MonoBehaviour:
   m_Name: Action Message
   m_EditorClassIdentifier: 
   Name: Action Message
-  GraphPosition: {x: 2201.6, y: -179.2}
+  GraphPosition: {x: 1856, y: -140.8}
   IsBreakpoint: 0
   Next: {fileID: 114181512053963512}
   Control:
@@ -472,11 +569,13 @@ MonoBehaviour:
   m_Name: Set Move
   m_EditorClassIdentifier: 
   Name: Set Move
-  GraphPosition: {x: 3264, y: -358.4}
+  GraphPosition: {x: 2918.4001, y: -320}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: fighter.Pool.Action = "Move";
+    _statement: 'fighter.Pool.Action = "Move";
+
+      fighter.Pool.ActionPriority = 1'
 --- !u!114 &114324781071790490
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -494,10 +593,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114113976695432700}
   Target:
-    _variable: fighter
+    _variable: fighter.Animation
     _tokens:
     - Type: 0
       Text: fighter
+    - Type: 0
+      Text: Animation
   Value:
     Type: 1
     Reference:
@@ -516,7 +617,7 @@ MonoBehaviour:
         _statement: 
       _isTypeLocked: 1
       _isConstraintLocked: 0
-    _data: DgAAAAAAAAAAAAAAAAAAAAAAgD8=
+    _data: AQAOAAAAAAAAAAAAAAAAAAAAAACAPw==
     _objects: []
   TargetTypeName: UnityEngine.SpriteRenderer, UnityEngine.CoreModule, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
@@ -536,7 +637,7 @@ MonoBehaviour:
   Name: Is User Dead
   GraphPosition: {x: 3200, y: 192}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114833082563927494}
+  OnTrue: {fileID: 114479347403044168}
   OnFalse: {fileID: 0}
   Condition:
     _statement: fighter.CurrentHP <= 0
@@ -606,9 +707,9 @@ MonoBehaviour:
   m_Name: Use Item
   m_EditorClassIdentifier: 
   Name: Use Item
-  GraphPosition: {x: 2560, y: 256}
+  GraphPosition: {x: 2560, y: 294.4}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 114100410672664356}
   Instruction:
     _variable: fighter.Pool.SelectedItem.Instruction
     _tokens:
@@ -636,7 +737,7 @@ MonoBehaviour:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114441288586741344
@@ -652,7 +753,7 @@ MonoBehaviour:
   m_Name: Show Selection
   m_EditorClassIdentifier: 
   Name: Show Selection
-  GraphPosition: {x: 2931.2, y: -51.2}
+  GraphPosition: {x: 2585.6, y: -12.8}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114276880049557452}
   Control:
@@ -721,6 +822,81 @@ MonoBehaviour:
     _items:
     - {fileID: 114090214110672374}
     - {fileID: 114337536328452838}
+--- !u!114 &114465621572967356
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c557cbd41cfc9b741bc6d717f28aaa3e, type: 3}
+  m_Name: Sort Fighters
+  m_EditorClassIdentifier: 
+  Name: Sort Fighters
+  GraphPosition: {x: 1804.8, y: 51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  List:
+    _variable: sortedFighters
+    _tokens:
+    - Type: 0
+      Text: sortedFighters
+  SortByProperty: 1
+  SortConditions:
+    _items:
+    - _variable: Pool.ActionPriority
+      _tokens:
+      - Type: 0
+        Text: Pool
+      - Type: 0
+        Text: ActionPriority
+    - _variable: Pool.SpeedPriority
+      _tokens:
+      - Type: 0
+        Text: Pool
+      - Type: 0
+        Text: SpeedPriority
+--- !u!114 &114479347403044168
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: User Died
+  m_EditorClassIdentifier: 
+  Name: User Died
+  GraphPosition: {x: 3520, y: 192}
+  IsBreakpoint: 0
+  Next: {fileID: 114833082563927494}
+  Instruction:
+    _instruction: {fileID: 11400000, guid: cdf9c17b29d90884c873ffe43a693672, type: 2}
+    _inputs: []
+    _outputs: []
+  Context:
+    Type: 1
+    Reference:
+      _variable: fighter
+      _tokens:
+      - Type: 0
+        Text: fighter
+    Definition:
+      _type: 0
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AQAAAAAA
+    _objects: []
+  WaitForCompletion: 1
 --- !u!114 &114538599604373634
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -734,11 +910,13 @@ MonoBehaviour:
   m_Name: Set Item
   m_EditorClassIdentifier: 
   Name: Set Item
-  GraphPosition: {x: 3264, y: -51.2}
+  GraphPosition: {x: 2918.4001, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: fighter.Pool.Action = "Item";
+    _statement: 'fighter.Pool.Action = "Item";
+
+      fighter.Pool.ActionPriority = 0;'
 --- !u!114 &114590944712922838
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -782,7 +960,7 @@ MonoBehaviour:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114671663166635790
@@ -842,7 +1020,7 @@ MonoBehaviour:
     _tokens:
     - Type: 0
       Text: fighter
-  Loop: {fileID: 114861798838267012}
+  Loop: {fileID: 114276880049557452}
 --- !u!114 &114743014648346664
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -936,7 +1114,7 @@ MonoBehaviour:
       _tokens: []
     Value: {fileID: 11400000, guid: 2f9b1c789d8e6c247a156f501f3393db, type: 2}
   Phase: 0
-  AutoFinish: 1
+  AutoFinish: 0
   WaitForCompletion: 1
 --- !u!114 &114783432147138550
 MonoBehaviour:
@@ -951,7 +1129,7 @@ MonoBehaviour:
   m_Name: Break
   m_EditorClassIdentifier: 
   Name: Break
-  GraphPosition: {x: 3827.2, y: 179.2}
+  GraphPosition: {x: 4160, y: 166.40001}
   IsBreakpoint: 0
 --- !u!114 &114824544855869636
 MonoBehaviour:
@@ -971,6 +1149,7 @@ MonoBehaviour:
   Sequence:
     _items:
     - {fileID: 114680524125233324}
+    - {fileID: 114161050808359334}
     - {fileID: 114348266381536424}
 --- !u!114 &114833082563927494
 MonoBehaviour:
@@ -985,30 +1164,11 @@ MonoBehaviour:
   m_Name: Set Winner(Clone)
   m_EditorClassIdentifier: 
   Name: Set Winner
-  GraphPosition: {x: 3507.2, y: 204.8}
+  GraphPosition: {x: 3840, y: 192}
   IsBreakpoint: 0
   Next: {fileID: 114783432147138550}
   Expression:
     _statement: winner = fighter.Pool.Target;
---- !u!114 &114861798838267012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: Is Player
-  m_EditorClassIdentifier: 
-  Name: Is Player
-  GraphPosition: {x: 1856, y: -153.6}
-  IsBreakpoint: 0
-  OnTrue: {fileID: 114276880049557452}
-  OnFalse: {fileID: 0}
-  Condition:
-    _statement: index == 0 || input.Multiplayer
 --- !u!114 &114864074634680384
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1022,13 +1182,17 @@ MonoBehaviour:
   m_Name: Poison Damage
   m_EditorClassIdentifier: 
   Name: Poison Damage
-  GraphPosition: {x: 2560, y: 345.6}
+  GraphPosition: {x: 2560, y: 499.2}
   IsBreakpoint: 0
-  Next: {fileID: 114337536328452838}
+  Next: {fileID: 114093961000405166}
   Expression:
-    _statement: 'fighter.CurrentHP -= fighter.CurrentHP / 10;
+    _statement: 'previous = fighter.CurrentHP;
 
-      fighter.CurrentHP = Max(fighter.CurrentHP, 0);'
+      fighter.CurrentHP -= fighter.CurrentHP / 4;
+
+      fighter.CurrentHP = Max(fighter.CurrentHP, 0);
+
+      damage = previous - fighter.CurrentHP;'
 --- !u!114 &114878644477084902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1078,3 +1242,46 @@ MonoBehaviour:
   WaitTime: 0
   Message:
     Text: '{winner.Name} wins!'
+--- !u!114 &114994863791174408
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Target Died
+  m_EditorClassIdentifier: 
+  Name: Target Died
+  GraphPosition: {x: 3520, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 114247473089136118}
+  Instruction:
+    _instruction: {fileID: 11400000, guid: cdf9c17b29d90884c873ffe43a693672, type: 2}
+    _inputs: []
+    _outputs: []
+  Context:
+    Type: 1
+    Reference:
+      _variable: fighter.Pool.Target
+      _tokens:
+      - Type: 0
+        Text: fighter
+      - Type: 0
+        Text: Pool
+      - Type: 0
+        Text: Target
+    Definition:
+      _type: 0
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AQAAAAAA
+    _objects: []
+  WaitForCompletion: 1

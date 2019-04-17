@@ -1,12 +1,13 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	public class SceneVariableStore : IVariableStore
 	{
+		private static readonly string[] _emptyNames = new string[0];
+
 		public VariableValue GetVariable(string name)
 		{
 			var gameObject = GameObject.Find(name); // this won't find inactive objects but is fast (comparatively)
@@ -25,9 +26,9 @@ namespace PiRhoSoft.CompositionEngine
 			return SetVariableResult.ReadOnly;
 		}
 
-		public IEnumerable<string> GetVariableNames()
+		public IList<string> GetVariableNames()
 		{
-			return Enumerable.Empty<string>();
+			return _emptyNames;
 		}
 	}
 }
