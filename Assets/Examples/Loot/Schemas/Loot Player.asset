@@ -10,38 +10,51 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a7e42c1f2776d5043957247cb96f24d3, type: 3}
-  m_Name: Loot Weapon Template
+  m_Name: Loot Player
   m_EditorClassIdentifier: 
   InitializerType: 1
   Tags:
     _items: []
   _definitions:
     _items:
-    - Name: Name
+    - Name: Gold
       Definition:
-        _type: 15
+        _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: Minimum Strength
+    - Name: Equipment
       Definition:
-        _type: 2
+        _type: 19
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 50
+          _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: Maximum Strength
+    - Name: Items
       Definition:
-        _type: 2
-        _constraint: 
+        _type: 19
+        _constraint: AQATAAAAEQAAAAERAAAAdFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldEFzc2V0LCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
+        _objects: []
         _tag: 
         _initializer:
-          _statement: 100
+          _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 32
+    - Name: Weapon
+      Definition:
+        _type: 17
+        _constraint: 
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 22

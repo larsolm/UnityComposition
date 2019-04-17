@@ -1,0 +1,102 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Pickup Loot Item
+  m_EditorClassIdentifier: 
+  ContextName: item
+  ContextDefinition:
+    _type: 17
+    _constraint: AQARAAAAeVBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVBvb2xDb21wb25lbnQsIEFzc2VtYmx5LUNTaGFycCwgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGw=
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114908591692360764}
+    - {fileID: 114054457211618328}
+    - {fileID: 114205480592497070}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 114908591692360764}
+--- !u!114 &114054457211618328
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: Destroy Object(Clone)
+  m_EditorClassIdentifier: 
+  Name: Destroy Object
+  GraphPosition: {x: 960, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: item
+    _tokens:
+    - Type: 0
+      Text: item
+--- !u!114 &114205480592497070
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Show Message(Clone)
+  m_EditorClassIdentifier: 
+  Name: Show Message
+  GraphPosition: {x: 640, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114054457211618328}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 1
+  WaitTime: 2
+  Message:
+    Text: Picked up {item.Item.Name}
+--- !u!114 &114908591692360764
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Expression(Clone)
+  m_EditorClassIdentifier: 
+  Name: Expression
+  GraphPosition: {x: 320, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114205480592497070}
+  Expression:
+    _statement: global.Player.Items += item.Item

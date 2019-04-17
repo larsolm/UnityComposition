@@ -24,15 +24,24 @@ namespace PiRhoSoft.CompositionEngine
 		public IVariableStore DefaultStore { get; private set; } = new DefaultGlobalStore();
 		public VariableStore GlobalStore { get; private set; } = new VariableStore();
 
+		private List<VariableBinding> _bindings = new List<VariableBinding>();
+
 		void Awake()
 		{
 			Resources.LoadAll(CommandFolder);
+		}
+
+		void Update()
+		{
+			UpdateBindings();
 		}
 
 		void LateUpdate()
 		{
 			InputHelper.LateUpdate();
 		}
+
+		#region Instructions
 
 		public void RunInstruction(Instruction instruction, VariableValue context)
 		{
@@ -258,6 +267,31 @@ namespace PiRhoSoft.CompositionEngine
 		public static IEnumerator Track(Instruction instruction, IEnumerator enumerator) => enumerator;
 
 #endif
+
+		#endregion
+
+		#endregion
+
+		#region Bindings
+
+		public void AddBinding(VariableBinding binding)
+		{
+			_bindings.Add(binding);
+		}
+
+		public void RemoveBinding(VariableBinding binding)
+		{
+			_bindings.Remove(binding);
+		}
+
+		private void UpdateBindings()
+		{
+			foreach (var binding in _bindings)
+			{
+				if (binding.AutoUpdate)
+					binding.UpdateBinding(string.Empty, null);
+			}
+		}
 
 		#endregion
 	}

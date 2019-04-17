@@ -1,0 +1,85 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Hide Loot Inventory
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114569040724117588}
+    - {fileID: 114318430747636952}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 114569040724117588}
+--- !u!114 &114318430747636952
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
+  m_Name: Enable Player
+  m_EditorClassIdentifier: 
+  Name: Enable Player
+  GraphPosition: {x: 640, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: global.Player as Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
+    - Type: 2
+      Text: Player
+--- !u!114 &114569040724117588
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183840318e2db944bba6e02dab617394, type: 3}
+  m_Name: Unload Scene
+  m_EditorClassIdentifier: 
+  Name: Unload Scene
+  GraphPosition: {x: 320, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114318430747636952}
+  Source: 0
+  Scene:
+    Path: Assets/Examples/Loot/Scenes/Loot Menu.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1

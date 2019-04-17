@@ -17,23 +17,64 @@ MonoBehaviour:
     _items: []
   _definitions:
     _items:
-    - Name: Template
+    - Name: Name
       Definition:
-        _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.VariableStoreComponent, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _type: 15
+        _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-    - Name: Strength
+    - Name: MinimumSpeed
+      Definition:
+        _type: 3
+        _constraint: 
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: MaximumSpeed
+      Definition:
+        _type: 3
+        _constraint: 
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: MinimumStrength
       Definition:
         _type: 2
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 5
+    - Name: MaximumStrength
+      Definition:
+        _type: 2
+        _constraint: 
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+    - Name: Icon
+      Definition:
+        _type: 17
+        _constraint: AQARAAAAYVVuaXR5RW5naW5lLlNwcml0ZSwgVW5pdHlFbmdpbmUuQ29yZU1vZHVsZSwgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGw=
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 27

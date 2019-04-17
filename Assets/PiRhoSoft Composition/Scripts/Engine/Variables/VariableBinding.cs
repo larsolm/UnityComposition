@@ -36,10 +36,15 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		void Update()
+		protected virtual void OnEnable()
 		{
-			if (AutoUpdate)
-				UpdateBinding(string.Empty, null);
+			CompositionManager.Instance.AddBinding(this);
+		}
+
+		protected virtual void OnDisable()
+		{
+			if (CompositionManager.Exists)
+				CompositionManager.Instance.RemoveBinding(this);
 		}
 
 		public void UpdateBinding(string group, BindingAnimationStatus status)
@@ -55,24 +60,27 @@ namespace PiRhoSoft.CompositionEngine
 		private static BindingAnimationStatus _ignoredStatus = new BindingAnimationStatus();
 		private static List<VariableBinding> _bindings = new List<VariableBinding>();
 
-		public static List<VariableBinding> GetBindings(GameObject obj, bool includeChildren)
-		{
-			_bindings.Clear();
-
-			if (includeChildren)
-				obj.GetComponentsInChildren(true, _bindings); // includes components directly on obj
-			else
-				obj.GetComponents(_bindings); // always includes inactive
-
-			return _bindings;
-		}
-
 		public static void UpdateBinding(GameObject obj, string group, BindingAnimationStatus status)
 		{
-			var bindings = GetBindings(obj, true);
+			UpdateBinding(obj, group, status, _bindings);
+		}
 
-			foreach (var binding in _bindings)
+		public static void UpdateBinding(GameObject obj, string group, BindingAnimationStatus status, List<VariableBinding> bindings)
+		{
+			GetBindings(obj, true, bindings);
+
+			foreach (var binding in bindings)
 				binding.UpdateBinding(group, status);
+		}
+
+		private static void GetBindings(GameObject obj, bool includeChildren, List<VariableBinding> bindings)
+		{
+			bindings.Clear();
+
+			if (includeChildren)
+				obj.GetComponentsInChildren(true, bindings); // includes components directly on obj
+			else
+				obj.GetComponents(bindings); // always includes inactive
 		}
 
 		#endregion

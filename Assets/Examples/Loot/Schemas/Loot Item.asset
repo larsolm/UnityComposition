@@ -21,6 +21,7 @@ MonoBehaviour:
       Definition:
         _type: 15
         _constraint: 
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
@@ -29,11 +30,21 @@ MonoBehaviour:
     - Name: Use Graph
       Definition:
         _type: 17
-        _constraint: PiRhoSoft.CompositionEngine.InstructionGraph, Assembly-CSharp,
-          Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+        _constraint: AQARAAAAdFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5JbnN0cnVjdGlvbkdyYXBoLCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
+        _objects: []
         _tag: 
         _initializer:
           _statement: 
         _isTypeLocked: 1
         _isConstraintLocked: 0
-  _version: 4
+    - Name: Icon
+      Definition:
+        _type: 17
+        _constraint: AQARAAAAYVVuaXR5RW5naW5lLlNwcml0ZSwgVW5pdHlFbmdpbmUuQ29yZU1vZHVsZSwgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGw=
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
+  _version: 9
