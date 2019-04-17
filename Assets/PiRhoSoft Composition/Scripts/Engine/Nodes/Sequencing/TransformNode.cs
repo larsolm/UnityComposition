@@ -72,6 +72,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.Sequencing;
 
+		private static Dictionary<int, Coroutine> _currentlyRunning = new Dictionary<int, Coroutine>();
+
 		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			if (InstructionStore.IsInput(Transform))
@@ -153,10 +155,21 @@ namespace PiRhoSoft.CompositionEngine
 					scaleSpeed *= Time.deltaTime;
 				}
 
+
 				if (WaitForCompletion)
+				{
 					yield return DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed);
+				}
 				else
-					CompositionManager.Instance.StartCoroutine(DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed));
+				{
+					if (_currentlyRunning.TryGetValue(transform.GetInstanceID(), out var old) && old != null)
+						CompositionManager.Instance.StopCoroutine(old);
+
+					var coroutine = CompositionManager.Instance.StartCoroutine(DoMove(transform, body2d, body3d, targetPosition, targetRotation, targetScale, moveSpeed, rotationSpeed, scaleSpeed));
+
+					if (coroutine != null)
+						_currentlyRunning[transform.GetInstanceID()] = coroutine;
+				}
 			}
 		}
 
@@ -177,6 +190,8 @@ namespace PiRhoSoft.CompositionEngine
 
 				yield return null;
 			}
+
+			_currentlyRunning.Remove(transform.GetInstanceID());
 		}
 
 		private void DoRigidBody2D(Rigidbody2D body, Vector2 position, Quaternion rotation, Vector3 scale)

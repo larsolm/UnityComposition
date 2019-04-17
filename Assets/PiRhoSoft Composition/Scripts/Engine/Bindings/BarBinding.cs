@@ -35,8 +35,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			status?.Increment();
-
 			var amountValue = AmountVariable.GetValue(variables);
 			var totalValue = TotalVariable.GetValue(variables);
 
@@ -50,7 +48,6 @@ namespace PiRhoSoft.CompositionEngine
 				if (Speed <= 0.0f)
 				{
 					SetFill(fill);
-					status?.Decrement();
 				}
 				else
 				{
@@ -70,6 +67,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		private IEnumerator AnimateFill(float target, BindingAnimationStatus status)
 		{
+			status.Increment();
+
 			while (_image.fillAmount != target)
 			{
 				var delta = UseScaledTime ? Time.deltaTime : Time.unscaledDeltaTime;
@@ -81,7 +80,7 @@ namespace PiRhoSoft.CompositionEngine
 				yield return null;
 			}
 
-			status?.Decrement();
+			status.Decrement();
 		}
 	}
 }

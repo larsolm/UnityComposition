@@ -58,8 +58,6 @@ MonoBehaviour:
     - {fileID: 114014620528468878}
     - {fileID: 114247473089136118}
     - {fileID: 114833082563927494}
-    - {fileID: 114324781071790490}
-    - {fileID: 114113976695432700}
     - {fileID: 114030335073519336}
     - {fileID: 114743014648346664}
     - {fileID: 114864074634680384}
@@ -89,7 +87,7 @@ MonoBehaviour:
   Name: Initialize Variables
   GraphPosition: {x: 844.8, y: -243.2}
   IsBreakpoint: 0
-  Next: {fileID: 114324781071790490}
+  Next: {fileID: 0}
   Expression:
     _statement: 'fighter.Pool.Target = global.Fighters[(index + 1) % 2];
 
@@ -217,7 +215,7 @@ MonoBehaviour:
       Text: fighter
     - Type: 0
       Text: Display
-  Group: 
+  Group: HP
   WaitForCompletion: 0
 --- !u!114 &114100410672664356
 MonoBehaviour:
@@ -265,34 +263,6 @@ MonoBehaviour:
   WaitTime: 0
   Message:
     Text: 
---- !u!114 &114113976695432700
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3530830e117b2949a9ed9bb41115c88, type: 3}
-  m_Name: Bind Display
-  m_EditorClassIdentifier: 
-  Name: Bind Display
-  GraphPosition: {x: 1049.6, y: -115.200005}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Object:
-    _variable: fighter.Display
-    _tokens:
-    - Type: 0
-      Text: fighter
-    - Type: 0
-      Text: Display
-  Binding:
-    _variable: fighter
-    _tokens:
-    - Type: 0
-      Text: fighter
 --- !u!114 &114131616769279628
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -576,52 +546,6 @@ MonoBehaviour:
     _statement: 'fighter.Pool.Action = "Move";
 
       fighter.Pool.ActionPriority = 1'
---- !u!114 &114324781071790490
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19fe84203620ae1459b63160dacc8610, type: 3}
-  m_Name: Set Color
-  m_EditorClassIdentifier: 
-  Name: Set Color
-  GraphPosition: {x: 947.2, y: -179.2}
-  IsBreakpoint: 0
-  Next: {fileID: 114113976695432700}
-  Target:
-    _variable: fighter.Animation
-    _tokens:
-    - Type: 0
-      Text: fighter
-    - Type: 0
-      Text: Animation
-  Value:
-    Type: 1
-    Reference:
-      _variable: fighter.Color
-      _tokens:
-      - Type: 0
-        Text: fighter
-      - Type: 0
-        Text: Color
-    Definition:
-      _type: 14
-      _constraint: 
-      _objects: []
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 1
-      _isConstraintLocked: 0
-    _data: AQAOAAAAAAAAAAAAAAAAAAAAAACAPw==
-    _objects: []
-  TargetTypeName: UnityEngine.SpriteRenderer, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  PropertyName: color
 --- !u!114 &114337536328452838
 MonoBehaviour:
   m_ObjectHideFlags: 1

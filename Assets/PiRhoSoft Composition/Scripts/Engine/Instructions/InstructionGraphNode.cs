@@ -535,7 +535,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void LogResolveWarning(VariableValue value, VariableReference reference, VariableType expectedType, Type resolveType = null)
 		{
-			if (value.Type == VariableType.Empty)
+			if (value.Type == VariableType.Empty || value.IsNull)
 				Debug.LogWarningFormat(this, _missingVariableWarning, reference, name);
 			else if (value.Type == VariableType.Enum && resolveType != null)
 				Debug.LogWarningFormat(this, _invalidEnumWarning, reference, name, value.EnumType.Name, resolveType.Name);

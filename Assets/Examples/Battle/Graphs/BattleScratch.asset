@@ -404,7 +404,7 @@ MonoBehaviour:
       Text: Target
     - Type: 0
       Text: Display
-  Group: 
+  Group: HP
   WaitForCompletion: 1
 --- !u!114 &114853674139064338
 MonoBehaviour:
