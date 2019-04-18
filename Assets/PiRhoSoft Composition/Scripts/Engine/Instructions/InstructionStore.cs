@@ -64,12 +64,9 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _readOnlyOutputError = "(CISROO) failed to store output {0}: the variable '{1}' is read only";
 		private const string _invalidOutputError = "(CISIOT) failed to store output {0}: the variable '{1}' has an incompatible type";
 
-		public const string SceneStoreName = "scene";
 		public const string InputStoreName = "input";
 		public const string OutputStoreName = "output";
 		public const string LocalStoreName = "local";
-
-		private static SceneVariableStore _sceneStore = new SceneVariableStore();
 
 		public string ContextName { get; private set; }
 		public VariableValue Context { get; private set; }
@@ -78,13 +75,14 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableStore Output { get; } = new WritableStore();
 		public VariableStore Local { get; } = new VariableStore();
 		public VariableStore Global { get; } = CompositionManager.Instance.GlobalStore;
+		public SceneVariableStore Scene { get; } = CompositionManager.Instance.SceneStore;
 
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName == InputStoreName;
 		public static bool IsOutput(VariableReference variable) => variable.IsAssigned && variable.StoreName == OutputStoreName;
 		public static bool IsInput(InstructionInput input) => input.Type == InstructionInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
 		public static bool IsOutput(InstructionOutput output) => output.Type == InstructionOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
-		private readonly string[] _variableNames = new string[] { SceneStoreName, InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName, string.Empty };
+		private readonly string[] _variableNames = new string[] { InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName, CompositionManager.SceneStoreName, string.Empty };
 
 		public InstructionStore(Instruction instruction, VariableValue context)
 		{
@@ -154,11 +152,11 @@ namespace PiRhoSoft.CompositionEngine
 
 			switch (name)
 			{
-				case SceneStoreName: return VariableValue.Create(_sceneStore);
 				case InputStoreName: return VariableValue.Create(Input);
 				case OutputStoreName: return VariableValue.Create(Output);
 				case LocalStoreName: return VariableValue.Create(Local);
 				case CompositionManager.GlobalStoreName: return VariableValue.Create(Global);
+				case CompositionManager.SceneStoreName: return VariableValue.Create(Scene);
 				default: return Local.GetVariable(name);
 			}
 		}
@@ -170,11 +168,11 @@ namespace PiRhoSoft.CompositionEngine
 
 			switch (name)
 			{
-				case SceneStoreName: return SetVariableResult.ReadOnly;
 				case InputStoreName: return SetVariableResult.ReadOnly;
 				case OutputStoreName: return SetVariableResult.ReadOnly;
 				case LocalStoreName: return SetVariableResult.ReadOnly;
 				case CompositionManager.GlobalStoreName: return SetVariableResult.ReadOnly;
+				case CompositionManager.SceneStoreName: return SetVariableResult.ReadOnly;
 				default: return Local.SetVariable(name, value);
 			}
 		}

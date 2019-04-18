@@ -26,8 +26,8 @@ MonoBehaviour:
     _items:
     - Name: loot
       Definition:
-        _type: 17
-        _constraint: AQARAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+        _type: 0
+        _constraint: 
         _objects: []
         _tag: 
         _initializer:
@@ -51,11 +51,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Expression(Clone)
+  m_Name: Expression
   m_EditorClassIdentifier: 
   Name: Expression
   GraphPosition: {x: 320, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: input.loot
+    _statement: global.Player.Weapon = input.loot.Equipment

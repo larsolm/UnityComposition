@@ -105,7 +105,7 @@ namespace PiRhoSoft.CompositionEngine
 			RefreshLayout();
 		}
 
-		private void OnItemMoved(MenuItem item, int from)
+		private void OnItemMoved(MenuItem item)
 		{
 			RefreshLayout();
 		}
@@ -243,7 +243,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void Leave()
 		{
-			_menu.SetFocusedItem(null);
+			_menu.FocusedItem = null;
 		}
 
 		public void MoveFocusUp(int amount)
@@ -366,7 +366,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (item != null && item.enabled)
 			{
-				_menu.SetFocusedItem(item);
+				_menu.FocusedItem = item;
 				ScrollToItem(item);
 				return true;
 			}

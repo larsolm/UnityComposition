@@ -79,15 +79,12 @@ namespace PiRhoSoft.CompositionEditor
 
 			EditorGUI.LabelField(labelRect, definition.Name);
 
-			if (definition.Definition.Type != VariableType.Empty)
-			{
-				input.Type = (InstructionInputType)EditorGUI.EnumPopup(typeRect, input.Type);
+			input.Type = (InstructionInputType)EditorGUI.EnumPopup(typeRect, input.Type);
 
-				switch (input.Type)
-				{
-					case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
-					case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition.Definition, true); break;
-				}
+			switch (input.Type)
+			{
+				case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
+				case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition.Definition, true); break;
 			}
 		}
 

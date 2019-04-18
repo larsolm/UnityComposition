@@ -11,18 +11,20 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private class DefaultGlobalStore : IVariableStore
 		{
-			private static readonly string[] _names = new string[] { GlobalStoreName };
+			private static readonly string[] _names = new string[] { GlobalStoreName, SceneStoreName };
 
 			public IList<string> GetVariableNames() => _names;
-			public VariableValue GetVariable(string name) => name == GlobalStoreName ? VariableValue.Create(Instance.GlobalStore) : VariableValue.Empty;
-			public SetVariableResult SetVariable(string name, VariableValue value) => name == GlobalStoreName ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
+			public VariableValue GetVariable(string name) => name == GlobalStoreName ? VariableValue.Create(Instance.GlobalStore) : (name == SceneStoreName ? VariableValue.Create(Instance.SceneStore) : VariableValue.Empty);
+			public SetVariableResult SetVariable(string name, VariableValue value) => (name == GlobalStoreName || name == SceneStoreName) ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
 		}
 
 		public const string GlobalStoreName = "global";
+		public const string SceneStoreName = "scene";
 		public static string CommandFolder = "Commands";
 
 		public IVariableStore DefaultStore { get; private set; } = new DefaultGlobalStore();
 		public VariableStore GlobalStore { get; private set; } = new VariableStore();
+		public SceneVariableStore SceneStore { get; private set; } = new SceneVariableStore();
 
 		private List<VariableBinding> _bindings = new List<VariableBinding>();
 

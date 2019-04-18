@@ -1,43 +1,56 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "menu")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu")]
-	public class Menu : MonoBehaviour
+	public class Menu : MonoBehaviour, IVariableStore
 	{
 		public Action<MenuItem> OnItemAdded;
 		public Action<MenuItem> OnItemRemoved;
-		public Action<MenuItem, int> OnItemMoved;
+		public Action<MenuItem> OnItemMoved;
 		public Action<MenuItem> OnItemBlurred;
 		public Action<MenuItem> OnItemFocused;
 		public Action<MenuItem> OnItemSelected;
 		public Action OnCancelled;
 
 		public List<MenuItem> Items { get; } = new List<MenuItem>();
-		public MenuItem FocusedItem { get; private set; }
-		public int FocusedIndex { get; private set; }
 
-		public void SetFocusedItem(MenuItem item)
+		private MenuItem _focusedItem;
+		private int _focusedIndex = -1;
+		private int _removedFocus = -1;
+		private bool _itemsDirty = false;
+
+		public MenuItem FocusedItem { get => _focusedItem; set => SetFocusedItem(value); }
+		public int FocusedIndex { get => _focusedItem != null ? _focusedItem.Index : -1; set => SetFocusedIndex(value); }
+
+		private void SetFocusedItem(MenuItem item)
 		{
-			if (FocusedItem)
-				FocusedItem.Focused = false;
+			if (_focusedItem)
+				_focusedItem.Focused = false;
 
-			var from = FocusedItem;
-			FocusedItem = item;
-			FocusedIndex = item ? item.Index : -1;
+			var from = _focusedItem;
+			_focusedItem = item;
+			_focusedIndex = item ? item.Index : -1;
 
-			if (FocusedItem)
-				FocusedItem.Focused = true;
+			if (_focusedItem)
+				_focusedItem.Focused = true;
 
 			if (from)
 				ItemBlurred(from);
 
 			if (item)
 				ItemFocused(item);
+		}
+
+		private void SetFocusedIndex(int index)
+		{
+			SetFocusedItem(index >= 0 && index < Items.Count ? Items[index] : null);
 		}
 
 		public void SelectItem(MenuItem item)
@@ -63,40 +76,53 @@ namespace PiRhoSoft.CompositionEngine
 		internal void AddItem(MenuItem item)
 		{
 			Items.Add(item);
-
-			RefreshItems();
 			ItemAdded(item);
+			SetItemsDirty();
 		}
 
 		internal void RemoveItem(MenuItem item)
 		{
 			Items.Remove(item);
-
-			RefreshItems();
 			ItemRemoved(item);
+			SetItemsDirty();
+
+			if (item.Focused)
+				_removedFocus = item.Index;
 		}
 
 		internal void MoveItem(MenuItem item)
 		{
-			var from = Items.IndexOf(item);
-			RefreshItems();
-			var to = Items.IndexOf(item);
-
-			if (from != to)
-				ItemMoved(item, from);
+			ItemMoved(item);
+			SetItemsDirty();
 		}
 
-		private void RefreshItems()
+		private static WaitForEndOfFrame _refreshWait = new WaitForEndOfFrame();
+
+		private IEnumerator RefreshItems()
 		{
+			yield return _refreshWait;
+
 			Items.Sort(_comparer);
 
 			for (var i = 0; i < Items.Count; i++)
-				RefreshItem(Items[i], i);
+				Items[i].Index = i;
+
+			if (_removedFocus >= 0)
+			{
+				SetFocusedIndex(_removedFocus >= Items.Count ? Items.Count - 1 : _removedFocus);
+				_removedFocus = -1;
+			}
+
+			_itemsDirty = false;
 		}
 
-		private void RefreshItem(MenuItem item, int index)
+		private void SetItemsDirty()
 		{
-			item.Index = index;
+			if (!_itemsDirty && gameObject.activeInHierarchy)
+			{
+				StartCoroutine(RefreshItems());
+				_itemsDirty = true;
+			}
 		}
 
 		#endregion
@@ -113,9 +139,9 @@ namespace PiRhoSoft.CompositionEngine
 			OnItemRemoved?.Invoke(item);
 		}
 
-		protected virtual void ItemMoved(MenuItem item, int from)
+		protected virtual void ItemMoved(MenuItem item)
 		{
-			OnItemMoved?.Invoke(item, from);
+			OnItemMoved?.Invoke(item);
 		}
 		
 		protected virtual void ItemFocused(MenuItem item)
@@ -136,6 +162,55 @@ namespace PiRhoSoft.CompositionEngine
 		protected virtual void Cancelled()
 		{
 			OnCancelled?.Invoke();
+		}
+
+		#endregion
+
+		#region IVariableStore Implementation
+
+		private static string[] _variableNames = new string[] { nameof(FocusedItem), nameof(FocusedIndex) };
+
+		public IList<string> GetVariableNames()
+		{
+			return _variableNames;
+		}
+
+		public VariableValue GetVariable(string name)
+		{
+			switch (name)
+			{
+				case nameof(FocusedItem): return VariableValue.Create((Object)FocusedItem);
+				case nameof(FocusedIndex): return VariableValue.Create(FocusedIndex);
+				default: return VariableValue.Empty;
+			}
+		}
+
+		public SetVariableResult SetVariable(string name, VariableValue value)
+		{
+			switch (name)
+			{
+				case nameof(FocusedItem):
+				{
+					if (value.TryGetReference(out MenuItem item))
+					{
+						FocusedItem = item;
+						return SetVariableResult.Success;
+					}
+
+					return SetVariableResult.TypeMismatch;
+				}
+				case nameof(FocusedIndex):
+				{
+					if (value.TryGetInt(out var index))
+					{
+						FocusedIndex = index;
+						return SetVariableResult.Success;
+					}
+
+					return SetVariableResult.TypeMismatch;
+				}
+				default: return SetVariableResult.NotFound;
+			}
 		}
 
 		#endregion
