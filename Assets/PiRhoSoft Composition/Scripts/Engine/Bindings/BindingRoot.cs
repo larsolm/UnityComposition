@@ -5,6 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "binding-root")]
 	[AddComponentMenu("PiRho Soft/Interface/Binding Root")]
+	[DisallowMultipleComponent]
 	public class BindingRoot : MonoBehaviour, IVariableStore
 	{
 		private readonly string[] _names = new string[] { string.Empty };

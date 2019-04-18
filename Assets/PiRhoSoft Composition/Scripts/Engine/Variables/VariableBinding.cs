@@ -36,12 +36,12 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected virtual void OnEnable()
+		protected virtual void Awake()
 		{
 			CompositionManager.Instance.AddBinding(this);
 		}
 
-		protected virtual void OnDisable()
+		protected virtual void OnDestroy()
 		{
 			if (CompositionManager.Exists)
 				CompositionManager.Instance.RemoveBinding(this);

@@ -185,7 +185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 4783115814922992325}
+  Object: {fileID: 4783115814922992325}
   Condition:
     _statement: menu.Focused
 --- !u!1 &8928605443419529117

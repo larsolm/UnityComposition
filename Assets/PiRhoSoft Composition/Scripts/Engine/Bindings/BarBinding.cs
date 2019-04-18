@@ -28,8 +28,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected Image _image;
 
-		void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			_image = GetComponent<Image>();
 		}
 

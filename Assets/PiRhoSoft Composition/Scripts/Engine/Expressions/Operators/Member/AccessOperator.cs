@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -33,6 +34,13 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (_rightIdentifier == null)
 				throw new ExpressionParseException(token, _invalidMemberAccessException, Symbol, Right);
+		}
+
+		public override void ToString(StringBuilder builder)
+		{
+			Left.ToString(builder);
+			builder.Append(Symbol);
+			Right.ToString(builder);
 		}
 
 		public override VariableValue Evaluate(IVariableStore variables)

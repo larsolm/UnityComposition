@@ -18,8 +18,10 @@ namespace PiRhoSoft.CompositionEngine
 		private TMP_InputField _text;
 		private IVariableStore _variables;
 
-		void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
+
 			_text = GetComponent<TMP_InputField>();
 			_text.onValueChanged.AddListener(TextChanged);
 		}

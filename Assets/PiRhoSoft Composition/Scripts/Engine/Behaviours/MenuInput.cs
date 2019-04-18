@@ -1,8 +1,16 @@
 ﻿using PiRhoSoft.UtilityEngine;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace PiRhoSoft.CompositionEngine
 {
+	public enum MenuInputPointerAction
+	{
+		None,
+		Focus,
+		Select
+	}
+
 	[HelpURL(Composition.DocumentationUrl + "menu-input")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu Input")]
 	[RequireComponent(typeof(Menu))]
@@ -20,6 +28,12 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The input button to use for canceling the selection")]
 		public string CancelButton = "Cancel";
 
+		[Tooltip("The action to perform when hovering over a menu item")]
+		public MenuInputPointerAction HoverAction = MenuInputPointerAction.Focus;
+
+		[Tooltip("The action to perform when clicking a menu item")]
+		public MenuInputPointerAction ClickAction = MenuInputPointerAction.Focus;
+
 		[Tooltip("Specifies the axis along which the items in the menu are ordered")]
 		public PrimaryAxis PrimaryAxis = PrimaryAxis.Column;
 
@@ -33,18 +47,29 @@ namespace PiRhoSoft.CompositionEngine
 		[Minimum(1)]
 		public int ColumnCount = 1;
 
-		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a column")]
-		[ConditionalDisplaySelf(nameof(RowCount), IntValue = 1, Invert = true)]
-		public bool VerticalWrapping = false;
+		[Tooltip("The menu to transfer input to when moving past the left of this menu")]
+		public MenuInput NextLeft;
 
-		[Tooltip("Specifies if focus should wrap when moving the cursor past the beginning or end of a row")]
-		[ConditionalDisplaySelf(nameof(ColumnCount), IntValue = 1, Invert = true)]
-		public bool HorizontalWrapping = false;
+		[Tooltip("The menu to transfer input to when moving past the right of this menu")]
+		public MenuInput NextRight;
 
+		[Tooltip("The menu to transfer input to when moving past the top of this menu")]
+		public MenuInput NextUp;
+
+		[Tooltip("The menu to transfer input to when moving past the bottom of this menu")]
+		public MenuInput NextDown;
+
+		[Tooltip("Set this to enable input for this menu when it first loads")]
+		public bool FocusOnLoad = true;
+
+		[Tooltip("The distance between the edge of the scroll viewport and the menu item when scrolling to the menu item")]
+		public float ScrollPadding = 10.0f;
+
+		private bool _shouldFocus;
 		private int _rowCount;
 		private int _columnCount;
-		private int _rowIndex = 0;
-		private int _columnIndex = 0;
+		private int _rowIndex = -1;
+		private int _columnIndex = -1;
 
 		private Menu _menu;
 
@@ -54,26 +79,46 @@ namespace PiRhoSoft.CompositionEngine
 			_menu.OnItemAdded += OnItemAdded;
 			_menu.OnItemRemoved += OnItemRemoved;
 			_menu.OnItemMoved += OnItemMoved;
+
+			_shouldFocus = FocusOnLoad;
 		}
 
 		void Update()
 		{
-			var left = InputHelper.GetWasAxisPressed(HorizontalAxis, -0.25f);
-			var right = InputHelper.GetWasAxisPressed(HorizontalAxis, 0.25f);
-			var up = InputHelper.GetWasAxisPressed(VerticalAxis, 0.25f);
-			var down = InputHelper.GetWasAxisPressed(VerticalAxis, -0.25f);
-			var select = InputHelper.GetWasButtonPressed(SelectButton);
-			var cancel = InputHelper.GetWasButtonPressed(CancelButton);
-			
-			if (left) MoveFocusLeft();
-			else if (right) MoveFocusRight();
-			else if (up) MoveFocusUp();
-			else if (down) MoveFocusDown();
-			else if (select) _menu.SelectFocusedItem();
-			else if (cancel) _menu.Cancel();
+			if (_menu.FocusedItem != null)
+			{
+				var left = !string.IsNullOrEmpty(HorizontalAxis) ? InputHelper.GetWasAxisPressed(HorizontalAxis, -0.25f) : false;
+				var right = !string.IsNullOrEmpty(HorizontalAxis) ? InputHelper.GetWasAxisPressed(HorizontalAxis, 0.25f) : false;
+				var up = !string.IsNullOrEmpty(VerticalAxis) ? InputHelper.GetWasAxisPressed(VerticalAxis, 0.25f) : false;
+				var down = !string.IsNullOrEmpty(VerticalAxis) ? InputHelper.GetWasAxisPressed(VerticalAxis, -0.25f) : false;
+				var select = !string.IsNullOrEmpty(SelectButton) ? InputHelper.GetWasButtonPressed(SelectButton) : false;
+				var cancel = !string.IsNullOrEmpty(CancelButton) ? InputHelper.GetWasButtonPressed(CancelButton) : false;
+
+				if (left) MoveFocusLeft(1);
+				else if (right) MoveFocusRight(1);
+				else if (up) MoveFocusUp(1);
+				else if (down) MoveFocusDown(1);
+				else if (select) _menu.SelectItem(_menu.FocusedItem);
+				else if (cancel) _menu.Cancel();
+			}
+
+			switch (HoverAction)
+			{
+				case MenuInputPointerAction.Focus: FocusWithMouse(); break;
+				case MenuInputPointerAction.Select: SelectWithMouse(); break;
+			}
+
+			if (InputHelper.GetWasPointerPressed())
+			{
+				switch (ClickAction)
+				{
+					case MenuInputPointerAction.Focus: FocusWithMouse(); break;
+					case MenuInputPointerAction.Select: SelectWithMouse(); break;
+				}
+			}
 		}
 
-		#region Item Management
+		#region Items
 
 		private void OnItemAdded(MenuItem item)
 		{
@@ -92,204 +137,192 @@ namespace PiRhoSoft.CompositionEngine
 
 		#endregion
 
-		#region Focus Management
+		#region Input
 
-		private void MoveFocusUp(int amount = 1)
+		private void FocusWithMouse()
 		{
-			var row = _rowIndex;
-			var column = _columnIndex;
+			var rect = (transform as RectTransform);
+			var local = rect.InverseTransformPoint(Input.mousePosition);
 
-			MoveFocus(-amount, VerticalWrapping, _rowCount, 0, ref row, ref column, ref row);
+			if (rect.rect.Contains(local))
+			{
+				var item = GetItem(local, out var column, out var row);
+				if (item != null)
+				{
+					ChangeFocus(column, row);
+
+					if (NextLeft) NextLeft.Leave();
+					if (NextRight) NextRight.Leave();
+					if (NextUp) NextUp.Leave();
+					if (NextDown) NextDown.Leave();
+				}
+			}
 		}
 
-		private void MoveFocusDown(int amount = 1)
+		private void SelectWithMouse()
 		{
-			var row = _rowIndex;
-			var column = _columnIndex;
+			var rect = (transform as RectTransform);
+			var local = rect.InverseTransformPoint(Input.mousePosition);
 
-			MoveFocus(amount, VerticalWrapping, _rowCount, 0, ref row, ref column, ref row);
+			if (rect.rect.Contains(local))
+			{
+				var item = GetItem(local, out var column, out var row);
+				if (item != null)
+					_menu.SelectItem(item);
+			}
 		}
 
-		private void MoveFocusLeft(int amount = 1)
-		{
-			var row = _rowIndex;
-			var column = _columnIndex;
+		#endregion
 
-			MoveFocus(-amount, HorizontalWrapping, _columnCount, 0, ref column, ref column, ref row);
+		#region Focus
+
+		private void EnterLeft(int fromRow)
+		{
+			_columnIndex = 0;
+			_rowIndex = fromRow;
+
+			MoveFocusUp(0);
 		}
 
-		private void MoveFocusRight(int amount = 1)
+		private void EnterRight(int fromRow)
 		{
-			var row = _rowIndex;
-			var column = _columnIndex;
+			_columnIndex = _columnCount - 1;
+			_rowIndex = fromRow;
 
-			MoveFocus(amount, HorizontalWrapping, _columnCount, 0, ref column, ref column, ref row);
+			MoveFocusUp(0);
+		}
+
+		private void EnterTop(int fromColumn)
+		{
+			_columnIndex = fromColumn;
+			_rowIndex = 0;
+
+			MoveFocusLeft(0);
+		}
+
+		private void EnterBottom(int fromColumn)
+		{
+			_columnIndex = fromColumn;
+			_rowIndex = _rowCount - 1;
+
+			MoveFocusLeft(0);
+		}
+
+		public void Leave()
+		{
+			_menu.SetFocusedItem(null);
+		}
+
+		public void MoveFocusUp(int amount)
+		{
+			if (!ChangeFocus(_columnIndex, _rowIndex - amount))
+			{
+				if (_rowIndex > amount)
+				{
+					MoveFocusUp(amount + 1);
+				}
+				else if (NextUp && NextUp._menu.Items.Count > 0)
+				{
+					Leave();
+					NextUp.EnterBottom(_columnIndex);
+				}
+			}
+		}
+
+		public void MoveFocusDown(int amount)
+		{
+			if (!ChangeFocus(_columnIndex, _rowIndex + amount))
+			{
+				if (_rowIndex < (_rowCount - amount))
+				{
+					MoveFocusDown(amount + 1);
+				}
+				else if (NextDown && NextDown._menu.Items.Count > 0)
+				{
+					Leave();
+					NextDown.EnterTop(_columnIndex);
+				}
+			}
+		}
+
+		private void MoveFocusLeft(int amount)
+		{
+			if (!ChangeFocus(_columnIndex - amount, _rowIndex))
+			{
+				if (_columnIndex > amount)
+				{
+					MoveFocusLeft(amount + 1);
+				}
+				else if (NextLeft && NextLeft._menu.Items.Count > 0)
+				{
+					Leave();
+					NextLeft.EnterRight(_rowIndex);
+				}
+			}
+		}
+
+		private void MoveFocusRight(int amount)
+		{
+			if (!ChangeFocus(_columnIndex + amount, _rowIndex))
+			{
+				if (_columnIndex < (_columnCount - amount))
+				{
+					MoveFocusRight(amount + 1);
+				}
+				else if (NextRight && NextRight._menu.Items.Count > 0)
+				{
+					Leave();
+					NextRight.EnterLeft(_rowIndex);
+				}
+			}
 		}
 
 		private bool MoveFocusToStart()
 		{
-			return MoveFocusToLocation(0, 0);
+			return ChangeFocus(0, 0);
 		}
 
 		private bool MoveFocusToEnd()
 		{
-			return MoveFocusToLocation(_columnCount - 1, _rowCount - 1);
+			return ChangeFocus(_columnCount - 1, _rowCount - 1);
 		}
 
 		private bool MoveFocusToTop()
 		{
-			return MoveFocusToLocation(_columnIndex, 0);
+			return ChangeFocus(_columnIndex, 0);
 		}
 
 		private bool MoveFocusToBottom()
 		{
-			return MoveFocusToLocation(_columnIndex, _rowCount - 1);
+			return ChangeFocus(_columnIndex, _rowCount - 1);
 		}
 
 		private bool MoveFocusToLeft()
 		{
-			return MoveFocusToLocation(0, _rowIndex);
+			return ChangeFocus(0, _rowIndex);
 		}
 
 		private bool MoveFocusToRight()
 		{
-			return MoveFocusToLocation(_columnCount - 1, _rowIndex);
+			return ChangeFocus(_columnCount - 1, _rowIndex);
 		}
 
-		private bool MoveFocusToLocation(int column, int row)
+		private bool ChangeFocus(int column, int row)
 		{
-			if (IsLocationFocusable(column, row))
+			var item = GetItem(column, row);
+
+			if (item != null && item.enabled)
 			{
-				SetFocus(column, row, false);
+				_columnIndex = column;
+				_rowIndex = row;
+				_menu.SetFocusedItem(item);
+
+				ScrollToItem(item);
+
 				return true;
 			}
 
 			return false;
-		}
-
-		private bool SetFocusToValidLocation(int startingColumn, int startingRow)
-		{
-			if (PrimaryAxis == PrimaryAxis.Column)
-				return SetFocusToValidRow(startingColumn, startingRow);
-			else if (PrimaryAxis == PrimaryAxis.Row)
-				return SetFocusToValidColumn(startingColumn, startingRow);
-			else
-				return false;
-		}
-
-		private void MoveFocus(int change, bool wrap, int count, int depth, ref int index, ref int column, ref int row)
-		{
-			index += change;
-
-			if (index < 0) index = wrap ? count + index : 0;
-			else if (index >= count) index = wrap ? index - count : count - 1;
-
-			var focusable = IsLocationFocusable(column, row);
-
-			if (focusable)
-				SetFocus(column, row, false);
-			else if (depth < count) // No need to recurse more than once through the column or row
-				MoveFocus(change, wrap, count, depth + 1, ref index, ref column, ref row);
-		}
-
-		private void SetFocus(int column, int row, bool force)
-		{
-			if (force || column != _columnIndex || row != _rowIndex)
-			{
-				_columnIndex = column;
-				_rowIndex = row;
-
-				var item = GetItem(column, row);
-
-				if (item != null)
-					_menu.SetFocusedItem(item);
-			}
-		}
-
-		private bool SetFocusToValidColumn(int startingColumn, int startingRow)
-		{
-			for (var row = startingRow; row < _rowCount; row++)
-			{
-				if (SetFocusToValidColumnInRow(startingColumn, row))
-					return true;
-			}
-
-			for (var row = 0; row < startingRow; row++)
-			{
-				if (SetFocusToValidColumnInRow(startingColumn, row))
-					return true;
-			}
-
-			return false;
-		}
-
-		private bool SetFocusToValidColumnInRow(int startingColumn, int row)
-		{
-			for (var column = startingColumn; column < _columnCount; column++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			for (var column = 0; column < startingColumn; column++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		private bool SetFocusToValidRow(int startingColumn, int startingRow)
-		{
-			for (var column = startingColumn; column < _columnCount; column++)
-			{
-				if (SetFocusToValidRowInColumn(column, startingRow))
-					return true;
-			}
-
-			for (var column = 0; column < startingColumn; column++)
-			{
-				if (SetFocusToValidRowInColumn(column, startingRow))
-					return true;
-			}
-
-			return false;
-		}
-
-		private bool SetFocusToValidRowInColumn(int column, int startingRow)
-		{
-			for (var row = startingRow; row < _rowCount; row++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			for (var row = 0; row < startingRow; row++)
-			{
-				if (IsLocationFocusable(column, row))
-				{
-					SetFocus(column, row, true);
-					return true;
-				}
-			}
-
-			return false;
-		}
-
-		private bool IsLocationFocusable(int column, int row)
-		{
-			var item = GetItem(column, row);
-			return item != null && item.gameObject.activeInHierarchy;
 		}
 
 		#endregion
@@ -309,17 +342,87 @@ namespace PiRhoSoft.CompositionEngine
 				_columnCount = Mathf.CeilToInt(_menu.Items.Count / (float)_rowCount);
 			}
 
-			SetFocusToValidLocation(_columnIndex, _rowIndex);
+			if (_shouldFocus && _menu.Items.Count > 0)
+			{
+				ChangeFocus(0, 0);
+				_shouldFocus = false;
+			}
 		}
 
 		private MenuItem GetItem(int column, int row)
 		{
-			var mainIndex = PrimaryAxis == PrimaryAxis.Column ? column : row;
-			var crossIndex = PrimaryAxis == PrimaryAxis.Column ? row : column;
-			var crossCount = PrimaryAxis == PrimaryAxis.Column ? _rowCount : _columnCount;
+			if (column >= 0 && row >= 0 && column < _columnCount && row < _rowCount)
+			{
+				var mainIndex = PrimaryAxis == PrimaryAxis.Column ? column : row;
+				var crossIndex = PrimaryAxis == PrimaryAxis.Column ? row : column;
+				var crossCount = PrimaryAxis == PrimaryAxis.Column ? _rowCount : _columnCount;
 
-			var index = mainIndex * crossCount + crossIndex;
-			return index >= 0 && index < _menu.Items.Count ? _menu.Items[index] : null;
+				var index = mainIndex * crossCount + crossIndex;
+				return index >= 0 && index < _menu.Items.Count ? _menu.Items[index] : null;
+			}
+			else
+			{
+				return null;
+			}
+		}
+
+		public MenuItem GetItem(Vector2 position, out int column, out int row)
+		{
+			for (column = 0; column < _columnCount; column++)
+			{
+				for (row = 0; row < _rowCount; row++)
+				{
+					var item = GetItem(column, row);
+
+					if (item?.transform is RectTransform rect)
+					{
+						if (rect.offsetMin.x < position.x && rect.offsetMin.y < position.y && rect.offsetMax.x > position.x && rect.offsetMax.y > position.y)
+							return item;
+					}
+				}
+			}
+
+			row = 0;
+			return null;
+		}
+
+		public void ScrollToItem(MenuItem item)
+		{
+			var itemRect = item.transform as RectTransform;
+			var scroller = item.GetComponentInParent<ScrollRect>();
+
+			if (scroller.horizontal)
+			{
+				var left = itemRect.offsetMin.x - ScrollPadding;
+				var right = itemRect.offsetMax.x + ScrollPadding;
+
+				scroller.horizontalNormalizedPosition = GetScrollPosition(scroller.horizontalNormalizedPosition, left, right, scroller.content.rect.width, scroller.viewport.rect.width);
+			}
+
+			if (scroller.vertical)
+			{
+				var top = itemRect.offsetMin.y - ScrollPadding;
+				var bottom = itemRect.offsetMax.y + ScrollPadding;
+
+				scroller.verticalNormalizedPosition = GetScrollPosition(scroller.verticalNormalizedPosition, top, bottom, scroller.content.rect.height, scroller.viewport.rect.height);
+			}
+		}
+
+		private float GetScrollPosition(float current, float min, float max, float content, float viewport)
+		{
+			var size = (content - viewport);
+			var visibleMin = current * size;
+			var visibleMax = visibleMin + viewport;
+
+			// do right/top first without an else so items that are too wide/tall are positioned at the top left
+
+			if (max > visibleMax)
+				current = Mathf.Clamp01((max - viewport) / size);
+
+			if (min < visibleMin)
+				current = Mathf.Clamp01(min / size);
+
+			return current;
 		}
 
 		#endregion

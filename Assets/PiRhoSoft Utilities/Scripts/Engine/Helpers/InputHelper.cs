@@ -29,6 +29,24 @@ namespace PiRhoSoft.UtilityEngine
 			Held = Input.GetKey(key);
 			Released = Input.GetKeyUp(key);
 		}
+
+		public ButtonState(int touch)
+		{
+			if (Input.touchCount > touch)
+			{
+				var phase = Input.GetTouch(touch).phase;
+
+				Pressed = phase == TouchPhase.Began;
+				Held = phase != TouchPhase.Canceled && phase != TouchPhase.Ended;
+				Released = phase == TouchPhase.Canceled || phase == TouchPhase.Ended;
+			}
+			else
+			{
+				Pressed = false;
+				Held = false;
+				Released = false;
+			}
+		}
 	}
 
 	public static class InputHelper
@@ -122,6 +140,57 @@ namespace PiRhoSoft.UtilityEngine
 		public static bool GetWasKeyReleased(KeyCode key)
 		{
 			return Input.GetKeyUp(key);
+		}
+
+		#endregion
+
+		#region Pointer State
+
+		public static bool GetIsPointerDown()
+		{
+			return GetIsTouching(0) || Input.GetMouseButton(0);
+		}
+
+		public static bool GetWasPointerPressed()
+		{
+			return GetTouchStarted(0) || Input.GetMouseButtonDown(0);
+		}
+
+		public static bool GetWasPointerReleased()
+		{
+			return GetTouchEnded(0) || Input.GetMouseButtonUp(0);
+		}
+
+		#endregion
+
+		#region Touch State
+
+		public static ButtonState GetTouchState(int touch)
+		{
+			return new ButtonState(touch);
+		}
+
+		public static TouchPhase? GetTouchPhase(int touch)
+		{
+			return Input.touchCount > touch ? Input.GetTouch(touch).phase : (TouchPhase?)null;
+		}
+
+		public static bool GetIsTouching(int touch)
+		{
+			var phase = GetTouchPhase(touch);
+			return phase.HasValue && (phase.Value == TouchPhase.Began || phase.Value == TouchPhase.Stationary || phase.Value == TouchPhase.Moved);
+		}
+
+		public static bool GetTouchStarted(int touch)
+		{
+			var phase = GetTouchPhase(touch);
+			return phase.HasValue && (phase.Value == TouchPhase.Began);
+		}
+
+		public static bool GetTouchEnded(int touch)
+		{
+			var phase = GetTouchPhase(touch);
+			return phase.HasValue && (phase.Value == TouchPhase.Ended || phase.Value == TouchPhase.Canceled);
 		}
 
 		#endregion
