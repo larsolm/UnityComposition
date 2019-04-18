@@ -13,6 +13,16 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class VariableList : IVariableList
 	{
+		public VariableList()
+		{
+		}
+
+		public VariableList(int count)
+		{
+			for (var i = 0; i < count; i++)
+				Values.Add(VariableValue.Empty);
+		}
+
 		public List<VariableValue> Values { get; private set; } = new List<VariableValue>();
 		public int Count => Values.Count;
 

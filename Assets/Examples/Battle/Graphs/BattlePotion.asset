@@ -135,7 +135,7 @@ MonoBehaviour:
       Text: fighter
     - Type: 0
       Text: Display
-  Group: 
+  Group: HP
   WaitForCompletion: 0
 --- !u!114 &114932166376189610
 MonoBehaviour:

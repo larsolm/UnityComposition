@@ -202,6 +202,11 @@
                 "Variables",
                 "Expressions",
                 "Instructions",
+                "Interface",
+                "Animation",
+                "Assets",
+                "Behaviours",
+                "Bindings",
                 "Nodes"
             ]
         },

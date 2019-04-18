@@ -95,8 +95,8 @@ namespace PiRhoSoft.CompositionEngine
 		VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters);
 	}
 
-	[HelpURL(Composition.DocumentationUrl + "variable-command")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Command", fileName = "Command", order = 119)]
+	[HelpURL(Composition.DocumentationUrl + "command")]
+	[CreateAssetMenu(menuName = "PiRho Soft/Command", fileName = nameof(Command), order = 119)]
 	public class Command : ScriptableObject, ICommand
 	{
 		[Serializable]

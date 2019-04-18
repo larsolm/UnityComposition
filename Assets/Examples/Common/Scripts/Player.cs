@@ -29,7 +29,7 @@ namespace PiRhoSoft.CompositionExample
 				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = true }, _colliders);
 				for (var i = 0; i < count; i++)
 				{
-					var interaction = _colliders[i].GetComponent<GraphTrigger>();
+					var interaction = _colliders[i].GetComponent<InstructionTrigger>();
 					if (interaction && interaction.gameObject != gameObject)
 					{
 						interaction.Run();
