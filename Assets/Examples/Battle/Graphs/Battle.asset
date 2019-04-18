@@ -311,7 +311,7 @@ MonoBehaviour:
           Text: Moves
       Source: 1
       Name: 
-      Template: {fileID: 1176305143222214389, guid: 3e9333ace537e884cb9c731b14e2b059,
+      Template: {fileID: 5582100939622335077, guid: 3e9333ace537e884cb9c731b14e2b059,
         type: 3}
       Label: Moves
       Expand: 1
@@ -321,7 +321,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+      Template: {fileID: 6679602720640942256, guid: 90db91e797312cd42825ad07049ff63c,
         type: 3}
       Label: Back
       Expand: 0
@@ -382,7 +382,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+      Template: {fileID: 6679602720640942256, guid: 90db91e797312cd42825ad07049ff63c,
         type: 3}
       Label: Fight
       Expand: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+      Template: {fileID: 6679602720640942256, guid: 90db91e797312cd42825ad07049ff63c,
         type: 3}
       Label: Items
       Expand: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
           Text: Inventory
       Source: 1
       Name: 
-      Template: {fileID: 1176305143222214389, guid: 3e9333ace537e884cb9c731b14e2b059,
+      Template: {fileID: 5582100939622335077, guid: 3e9333ace537e884cb9c731b14e2b059,
         type: 3}
       Label: Items
       Expand: 1
@@ -722,7 +722,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 9033734836098780785, guid: 90db91e797312cd42825ad07049ff63c,
+      Template: {fileID: 6679602720640942256, guid: 90db91e797312cd42825ad07049ff63c,
         type: 3}
       Label: Back
       Expand: 0

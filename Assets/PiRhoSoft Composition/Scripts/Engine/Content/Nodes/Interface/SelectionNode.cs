@@ -7,7 +7,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[Serializable]
-	public class SelectionNodeItem : SelectionItem
+	public class SelectionNodeItem : MenuItemTemplate
 	{
 		[Tooltip("The node to go to when this item is selected")]
 		public InstructionGraphNode OnSelected;
@@ -84,7 +84,7 @@ namespace PiRhoSoft.CompositionEngine
 				Assign(variables, SelectedItem, control.SelectedValue);
 				Assign(variables, SelectedIndex, VariableValue.Create(control.SelectedIndex));
 
-				if (control.SelectedItem is SelectionNodeItem selectedItem)
+				if (control.SelectedItem?.Template is SelectionNodeItem selectedItem)
 					graph.GoTo(selectedItem.OnSelected, nameof(Items), selectedItem.Id);
 				else
 					graph.GoTo(OnCanceled, nameof(OnCanceled));

@@ -5,7 +5,8 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "selection-control")]
-	public abstract class SelectionControl : InterfaceControl
+	[RequireComponent(typeof(Menu))]
+	public class SelectionControl : InterfaceControl
 	{
 		private const string _invalidExpandWarning = "(CSCIE) Failed to expand item {0}: the variable '{1}' is not an IVariableList";
 		private const string _missingItemError = "(CSCMI) Failed to create item {0}: the variable '{1}' could not be found";
@@ -18,28 +19,31 @@ namespace PiRhoSoft.CompositionEngine
 		public bool IsSelectionRequired { get; private set; } = false;
 		public bool IsClosing { get; private set; } = false;
 
-		public bool HasFocusedItem => _focusedItem != null;
+		public bool HasFocusedItem => _menu.FocusedItem != null;
 		public bool HasSelectedItem => _selectedItem != null;
 
-		public SelectionItem FocusedItem => _focusedItem?.Item;
-		public int FocusedIndex => _focusedItem == null ? -1 : _selectedItem.Index;
-		public VariableValue FocusedValue => _focusedItem == null ? VariableValue.Empty : _focusedItem.Value;
+		public MenuItem FocusedItem => _menu.FocusedItem;
+		public int FocusedIndex => _menu.FocusedIndex;
+		public VariableValue FocusedValue => _menu.FocusedItem == null ? VariableValue.Empty : _menu.FocusedItem.Value;
 
-		public SelectionItem SelectedItem => _selectedItem?.Item;
+		public MenuItem SelectedItem => _selectedItem;
 		public int SelectedIndex => _selectedItem == null ? -1 : _selectedItem.Index;
 		public VariableValue SelectedValue => _selectedItem == null ? VariableValue.Empty : _selectedItem.Value;
 
-		protected List<MenuItem> _items = new List<MenuItem>();
-		protected int _focusedIndex;
-		protected MenuItem _focusedItem;
+		protected Menu _menu;
 		protected MenuItem _selectedItem;
 
-		public void Show(IVariableStore variables, IEnumerable<SelectionItem> items, bool isSelectionRequired, bool resetIndex)
+		void Awake()
+		{
+			_menu = GetComponent<Menu>();
+		}
+
+		public void Show(IVariableStore variables, IEnumerable<MenuItemTemplate> items, bool isSelectionRequired, bool resetIndex)
 		{
 			Activate();
 			StopAllCoroutines();
+			CreateItems(variables, items);
 			Initialize(isSelectionRequired, resetIndex);
-			Create(variables, items);
 			StartCoroutine(Run_());
 		}
 
@@ -47,7 +51,13 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			IsRunning = true;
 
+			_menu.OnItemSelected += Select;
+			_menu.OnCancelled += Close;
+
 			yield return Run();
+
+			_menu.OnItemSelected -= Select;
+			_menu.OnCancelled -= Close;
 
 			IsRunning = false;
 		}
@@ -59,78 +69,34 @@ namespace PiRhoSoft.CompositionEngine
 
 			_selectedItem = null;
 
-			if (resetIndex)
-			{
-				Blur();
-				_focusedIndex = 0;
-			}
+			if (resetIndex && _menu.Items.Count > 0)
+				_menu.SetFocusedItem(_menu.Items[0]);
 
 			OnInitialize();
+
+			VariableBinding.UpdateBinding(gameObject, null, null);
 		}
 
-		private void Create(IVariableStore variables, IEnumerable<SelectionItem> items)
+		public void Select(MenuItem item)
 		{
-			CreateItems(variables, items);
-			MoveFocus(_focusedIndex);
-			VariableBinding.UpdateBinding(gameObject, null, null);
+			_selectedItem = item;
+			Close();
 		}
 
 		public void Close()
 		{
-			if (!IsSelectionRequired)
+			if (!IsSelectionRequired || _selectedItem != null)
 				IsClosing = true;
 		}
 
-		public void Select()
-		{
-			if (_focusedItem != null)
-				_selectedItem = _focusedItem;
-		}
-
 		#region Item Management
-
-		protected class MenuItem : IVariableStore
-		{
-			public SelectionItem Item;
-			public GameObject Object;
-			public bool Generated;
-
-			public int Index;
-			public bool Focused;
-			public string Label;
-			public VariableValue Value;
-
-			private static readonly List<string> _names = new List<string> { nameof(Index), nameof(Label), nameof(Focused), nameof(Value) };
-
-			public VariableValue GetVariable(string name)
-			{
-				switch (name)
-				{
-					case nameof(Index): return VariableValue.Create(Index);
-					case nameof(Label): return VariableValue.Create(Label);
-					case nameof(Focused): return VariableValue.Create(Focused);
-					case nameof(Value): return Value;
-					default: return VariableValue.Empty;
-				}
-			}
-
-			public SetVariableResult SetVariable(string name, VariableValue value)
-			{
-				return SetVariableResult.ReadOnly;
-			}
-
-			public IList<string> GetVariableNames()
-			{
-				return _names;
-			}
-		}
 
 		protected virtual Transform GetItemParent()
 		{
 			return transform;
 		}
 
-		private void CreateItems(IVariableStore variables, IEnumerable<SelectionItem> items)
+		private void CreateItems(IVariableStore variables, IEnumerable<MenuItemTemplate> items)
 		{
 			var index = 0;
 
@@ -158,9 +124,9 @@ namespace PiRhoSoft.CompositionEngine
 			OnCreate();
 		}
 
-		private void CreateStoreItem(SelectionItem item, VariableValue value, ref int index)
+		private void CreateStoreItem(MenuItemTemplate item, VariableValue value, ref int index)
 		{
-			if (item.Source == SelectionItem.ObjectSource.Asset)
+			if (item.Source == MenuItemTemplate.ObjectSource.Asset)
 			{
 				if (item.Template == null)
 					Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
@@ -169,15 +135,15 @@ namespace PiRhoSoft.CompositionEngine
 				else
 					AddItem(item, null, value, index++);
 			}
-			else if (item.Source == SelectionItem.ObjectSource.Scene)
+			else if (item.Source == MenuItemTemplate.ObjectSource.Scene)
 			{
 				CreateSceneItem(item, value, ref index);
 			}
 		}
 
-		private void CreateListItem(SelectionItem item, VariableValue value, ref int index)
+		private void CreateListItem(MenuItemTemplate item, VariableValue value, ref int index)
 		{
-			if (item.Source == SelectionItem.ObjectSource.Asset)
+			if (item.Source == MenuItemTemplate.ObjectSource.Asset)
 			{
 				if (item.Template == null)
 					Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
@@ -186,13 +152,13 @@ namespace PiRhoSoft.CompositionEngine
 				else
 					AddItem(item, null, value, index++);
 			}
-			else if (item.Source == SelectionItem.ObjectSource.Scene)
+			else if (item.Source == MenuItemTemplate.ObjectSource.Scene)
 			{
 				CreateSceneItem(item, value, ref index);
 			}
 		}
 
-		private void CreateExpandedItems(SelectionItem item, VariableValue value, ref int index)
+		private void CreateExpandedItems(MenuItemTemplate item, VariableValue value, ref int index)
 		{
 			var list = value.List;
 
@@ -200,92 +166,29 @@ namespace PiRhoSoft.CompositionEngine
 				AddItem(item, null, list.GetVariable(i), index++);
 		}
 
-		private void CreateSceneItem(SelectionItem item, VariableValue value, ref int index)
+		private void CreateSceneItem(MenuItemTemplate item, VariableValue value, ref int index)
 		{
 			var obj = transform.Find(item.Name);
+			var menu = obj != null ? obj.GetComponent<MenuItem>() : null;
 
-			if (obj)
-				AddItem(item, obj.gameObject, value, index++);
+			if (menu)
+				AddItem(item, menu, value, index++);
 			else
 				Debug.LogErrorFormat(this, _missingChildError, item.Name, name);
 		}
 
-		private void AddItem(SelectionItem item, GameObject existing, VariableValue value, int index)
+		private void AddItem(MenuItemTemplate item, MenuItem existing, VariableValue value, int index)
 		{
-			if (index < _items.Count)
-			{
-				if (_items[index].Item == item)
-					return;
-
-				_items.RemoveRange(index, _items.Count - index);
-			}
-
 			var parent = GetItemParent();
 			var obj = existing == null ? Instantiate(item.Template, parent) : existing;
-			obj.transform.SetSiblingIndex(index);
 
-			var menuItem = new MenuItem
-			{
-				Item = item,
-				Object = obj,
-				Generated = existing == null,
+			obj.Setup(item, existing == null);
+			obj.Move(index);
 
-				Index = index,
-				Label = item.Id,
-				Value = value,
-				Focused = false
-			};
-
-			var binding = obj.GetComponent<BindingRoot>();
-
-			if (binding)
-				binding.Value = VariableValue.Create(menuItem);
-			else if (item.Source == SelectionItem.ObjectSource.Asset)
-				Debug.LogErrorFormat(this, _missingBindingError, item.Name, item.Template.name);
-			
-			_items.Add(menuItem);
-		}
-
-		public void SelectItem(int index)
-		{
-			_selectedItem = index >= 0 && index < _items.Count ? _items[index] : null;
-		}
-
-		protected MenuItem GetItem(int index)
-		{
-			return index >= 0 && index < _items.Count ? _items[index] : null;
-		}
-
-		#endregion
-
-		#region Focus Management
-
-		public void MoveFocus(int index)
-		{
-			var item = GetItem(index);
-
-			Blur();
-			Focus(item);
-		}
-
-		private void Blur()
-		{
-			if (_focusedItem != null)
-			{
-				_focusedItem.Focused = false;
-				_focusedItem = null;
-				_focusedIndex = -1;
-			}
-		}
-
-		private void Focus(MenuItem item)
-		{
-			if (item != null)
-			{
-				_focusedItem = item;
-				_focusedItem.Focused = true;
-				_focusedIndex = item.Index;
-			}
+			obj.Index = index;
+			obj.Label = item.Id;
+			obj.Value = value;
+			obj.Focused = false;
 		}
 
 		#endregion
@@ -302,18 +205,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected virtual IEnumerator Run()
 		{
-			yield break;
+			while (!IsClosing)
+				yield return null;
 		}
 
 		protected override void Teardown()
 		{
-			foreach (var item in _items)
+			foreach (var item in _menu.Items)
 			{
 				if (item.Generated)
-					Destroy(item.Object);
+					Destroy(item.gameObject);
 			}
-
-			_items.Clear();
 		}
 
 		#endregion
