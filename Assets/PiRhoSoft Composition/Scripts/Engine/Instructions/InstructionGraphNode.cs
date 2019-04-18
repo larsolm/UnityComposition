@@ -56,7 +56,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private const string _missingVariableWarning = "(CIGNMV) failed to resolve variable '{0}' on node '{1}': the variable could not be found";
 		private const string _invalidVariableWarning = "(CIGNIV) failed to resolve variable '{0}' on node '{1}': the variable has type {2} and should have type {3}";
-		private const string _invalidEnumWarning = "(CIGNIV) failed to resolve variable '{0}' on node '{1}': the variable has enum type {2} and should have enum type {3}";
+		private const string _invalidEnumWarning = "(CIGNIE) failed to resolve variable '{0}' on node '{1}': the variable has enum type {2} and should have enum type {3}";
 		private const string _invalidObjectWarning = "(CIGNIO) failed to resolve variable '{0}' on node '{1}': the object is a {2} and cannot be converted to a {3}";
 
 		private const string _missingAssignmentWarning = "(CIGNMA) failed to assign to variable '{0}': the variable could not be found";
