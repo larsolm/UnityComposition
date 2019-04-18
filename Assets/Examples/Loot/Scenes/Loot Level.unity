@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 339073856}
   - component: {fileID: 339073855}
   - component: {fileID: 339073854}
+  - component: {fileID: 339073858}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -274,6 +275,51 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 339073852}
   m_CullTransparentMesh: 0
+--- !u!114 &339073858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 339073852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb02fa84e316ff4f9d38741f47bcc3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graph:
+    _instruction: {fileID: 11400000, guid: 695a6f1d77f97764e87e16009a457913, type: 2}
+    _inputs:
+    - Name: MinimumGold
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQACAAAAFAAAAA==
+      _valueObjects: []
+    - Name: MaximumGold
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQACAAAAMgAAAA==
+      _valueObjects: []
+    - Name: ItemChance
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQADAAAAAAAAPw==
+      _valueObjects: []
+    - Name: EquipmentQuality
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQADAAAAAAAAPw==
+      _valueObjects: []
+    _outputs: []
+  Button: Fire3
 --- !u!1 &522876343
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +800,8 @@ GameObject:
   - component: {fileID: 927056320}
   - component: {fileID: 927056319}
   - component: {fileID: 927056318}
+  - component: {fileID: 927056322}
+  - component: {fileID: 927056321}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -822,6 +870,40 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &927056321
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927056317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2854d5c100c2d14d98d17458e0eef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BindingGroup: 
+  AutoUpdate: 1
+  Object: {fileID: 2038815341}
+  Condition:
+    _statement: global.InventoryOpen == null
+--- !u!114 &927056322
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927056317}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2854d5c100c2d14d98d17458e0eef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BindingGroup: 
+  AutoUpdate: 1
+  Object: {fileID: 1088233150}
+  Condition:
+    _statement: global.InventoryOpen == null
 --- !u!1 &1088233150
 GameObject:
   m_ObjectHideFlags: 0
@@ -1049,6 +1131,7 @@ GameObject:
   - component: {fileID: 1168119991}
   - component: {fileID: 1168119990}
   - component: {fileID: 1168119989}
+  - component: {fileID: 1168119993}
   m_Layer: 5
   m_Name: Button
   m_TagString: Untagged
@@ -1153,7 +1236,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 68fbfcdf7dffb3546b8dc44267969cd8, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 8f3bcae80f3468949bf55b9eb0c579da, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1170,6 +1253,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1168119987}
   m_CullTransparentMesh: 0
+--- !u!114 &1168119993
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1168119987}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8eb02fa84e316ff4f9d38741f47bcc3d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graph:
+    _instruction: {fileID: 11400000, guid: 299946b68a98555438d26e40db79bdc6, type: 2}
+    _inputs: []
+    _outputs: []
+  Button: Cancel
 --- !u!1 &1186169034
 GameObject:
   m_ObjectHideFlags: 0

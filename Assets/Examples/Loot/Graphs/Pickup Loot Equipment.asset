@@ -78,7 +78,17 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114026835272159702}
   Expression:
-    _statement: global.Player.Equipment += equipment.Equipment
+    _statement: 'local.equipment = Store()
+
+      local.equipment.Name = equipment.Name
+
+      local.equipment.Equipment = equipment.Equipment
+
+      local.equipment.Speed = equipment.Speed
+
+      local.equipment.Strength = equipment.Strength
+
+      global.Player.Equipment += local.equipment'
 --- !u!114 &114876700460873716
 MonoBehaviour:
   m_ObjectHideFlags: 1

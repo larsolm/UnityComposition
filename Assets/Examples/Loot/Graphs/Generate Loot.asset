@@ -264,14 +264,12 @@ MonoBehaviour:
     - Type: 0
       Text: eq
   Binding:
-    _variable: local.eq.Equipment
+    _variable: local.eq
     _tokens:
     - Type: 0
       Text: local
     - Type: 0
       Text: eq
-    - Type: 0
-      Text: Equipment
 --- !u!114 &114440950479316254
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -705,6 +703,7 @@ MonoBehaviour:
   Expression:
     _statement: "\rlocal.split = Random(0.0, 2.0)\nlocal.speedQuality = Min(local.equipmentQuality
       * split, 1.0)\nlocal.strengthQuality = Min(local.equipmentQuality * (2.0 - split),
-      1.0)\n\nlocal.eq.Speed = Lerp(local.eq.Equipment.MinimumSpeed, local.eq.Equipment.MaximumSpeed,
-      local.speedQuality)\n\rlocal.eq.Strength = Lerp(local.eq.Equipment.MinimumStrength,
-      local.eq.Equipment.MaximumStrength, local.strengthQuality)\n"
+      1.0)\n\nlocal.speed = Lerp(local.eq.Equipment.MinimumSpeed, local.eq.Equipment.MaximumSpeed,
+      local.speedQuality)\n\rlocal.strength = Lerp(local.eq.Equipment.MinimumStrength,
+      local.eq.Equipment.MaximumStrength, local.strengthQuality)\n\nlocal.eq.Speed
+      = Round(local.speed * 100)\nlocal.eq.Strength = Round(local.strength)"

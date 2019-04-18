@@ -90,10 +90,12 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 0
   Variable:
-    _variable: equipment.Icon
+    _variable: equipment.Equipment.Icon
     _tokens:
     - Type: 0
       Text: equipment
+    - Type: 0
+      Text: Equipment
     - Type: 0
       Text: Icon
 --- !u!1 &6944828329197947424
@@ -185,7 +187,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 902823311255069426}
+  Object: {fileID: 902823311255069426}
   Condition:
     _statement: menu.Focused
 --- !u!1 &8698028815574688362

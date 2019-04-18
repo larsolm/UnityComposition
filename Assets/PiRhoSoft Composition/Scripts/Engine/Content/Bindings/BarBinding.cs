@@ -30,8 +30,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		private Image _image;
 
-		void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			_image = GetComponent<Image>();
 
 			if (_image.type != Image.Type.Filled)

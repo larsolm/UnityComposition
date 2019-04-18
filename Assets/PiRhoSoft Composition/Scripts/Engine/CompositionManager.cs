@@ -288,7 +288,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			foreach (var binding in _bindings)
 			{
-				if (binding.AutoUpdate)
+				if (binding.enabled && binding.AutoUpdate)
 					binding.UpdateBinding(string.Empty, null);
 			}
 		}

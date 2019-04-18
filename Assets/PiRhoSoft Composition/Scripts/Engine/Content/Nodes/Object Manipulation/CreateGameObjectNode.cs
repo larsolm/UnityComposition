@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Object Manipulation/Create Object", 0)]
-	[HelpURL(Composition.DocumentationUrl + "create-object-node")]
-	public class CreateObjectNode : InstructionGraphNode
+	[CreateInstructionGraphNodeMenu("Object Manipulation/Create Game Object", 0)]
+	[HelpURL(Composition.DocumentationUrl + "create-game-object-node")]
+	public class CreateGameObjectNode : InstructionGraphNode
 	{
 		public enum ObjectPositioning
 		{

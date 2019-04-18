@@ -40,10 +40,10 @@ namespace PiRhoSoft.CompositionEngine
 				ItemFocused(item);
 		}
 
-		public void SelectFocusedItem()
+		public void SelectItem(MenuItem item)
 		{
-			if (FocusedItem)
-				ItemSelected(FocusedItem);
+			if (item)
+				ItemSelected(item);
 		}
 
 		public void Cancel()

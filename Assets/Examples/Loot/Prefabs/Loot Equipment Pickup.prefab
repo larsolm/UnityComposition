@@ -200,9 +200,11 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 0
   Variable:
-    _variable: equipment.Icon
+    _variable: equipment.Equipment.Icon
     _tokens:
     - Type: 0
       Text: equipment
+    - Type: 0
+      Text: Equipment
     - Type: 0
       Text: Icon
