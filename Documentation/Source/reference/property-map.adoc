@@ -6,16 +6,10 @@ PiRhoSoft.CompositionEngine.PropertyMap
 
 ### Description
 
-### Public Properties
+### Constructors
 
-int _PropertyCount_ _(read only)_ _(abstract)_::
+PropertyMap(Type _ownerType_)::
 
-### Public Methods
+### Public Fields
 
-string GetPropertyName(int _index_) _(abstract)_::
-
-<<reference/i-variable-list.html,IVariableList>> CreateList(Object _owner_) _(abstract)_::
-
-### Protected Constructors
-
-PropertyMap()::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/property.html,Property>>> _Properties_::

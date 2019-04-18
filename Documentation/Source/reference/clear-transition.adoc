@@ -18,6 +18,6 @@ ClearTransition()::
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
 
-### Protected Methods
+### Public Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

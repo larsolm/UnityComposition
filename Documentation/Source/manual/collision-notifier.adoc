@@ -1,0 +1,9 @@
+[#manual/collision-notifier]
+
+## Collision Notifier
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/collision-notifier.html[Reference]
+endif::[]

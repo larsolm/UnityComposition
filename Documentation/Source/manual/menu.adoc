@@ -1,0 +1,9 @@
+[#manual/menu]
+
+## Menu
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/menu.html[Reference]
+endif::[]

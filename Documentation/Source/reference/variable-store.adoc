@@ -12,22 +12,32 @@ VariableStore()::
 
 ### Public Properties
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable.html,Variable>>> _Variables_ _(read only)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<string> _Names_ _(read only)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-value.html,VariableValue>>> _Variables_ _(read only)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2[Dictionary^]<string, string> _Map_ _(read only)_::
 
 ### Public Methods
 
-void AddVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
+void AddVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+bool RemoveVariable(string _name_)::
+
+void RemoveVariable(int _index_)::
+
+void VariableMoved(int _from_, int _to_) _(virtual)_::
+
+void Clear() _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
 
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::
-
-void Clear()::
-
 ### Protected Methods
+
+void RemoveVariable(string _name_, int _index_) _(virtual)_::
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_, bool _allowAdd_)::

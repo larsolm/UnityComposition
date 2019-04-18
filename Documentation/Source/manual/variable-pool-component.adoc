@@ -1,0 +1,16 @@
+[#manual/variable-pool-component]
+
+## Variable Pool Component
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Variables	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/variable-pool-component.html[Reference]
+endif::[]

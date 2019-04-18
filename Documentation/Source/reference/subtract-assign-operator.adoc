@@ -2,7 +2,7 @@
 
 ## SubtractAssignOperator
 
-PiRhoSoft.CompositionEngine.SubtractAssignOperator : <<reference/assign-operator.html,AssignOperator>>
+PiRhoSoft.CompositionEngine.SubtractAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
 
 ### Description
 

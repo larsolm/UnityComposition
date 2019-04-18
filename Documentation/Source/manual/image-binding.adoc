@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/variable-reference.html,Variable Reference>> _Variable_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Variable	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/image-binding.html[Reference]

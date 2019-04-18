@@ -1,0 +1,13 @@
+[#reference/int-rect-variable-source]
+
+## IntRectVariableSource
+
+PiRhoSoft.CompositionEngine.IntRectVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^]>
+
+### Description
+
+### Constructors
+
+IntRectVariableSource()::
+
+IntRectVariableSource(https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _defaultValue_)::

@@ -12,22 +12,18 @@ MessageControl()::
 
 ### Public Fields
 
-TextMeshProUGUI _DisplayText_::
+TMP_Text _DisplayText_::
 
-https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _ContinueIndicator_::
+### Public Properties
 
-https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _FinishedIndicator_::
+bool _IsRunning_ _(read only)_::
 
 ### Public Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Show(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _text_, <<reference/message-interaction-type.html,MessageInteractionType>> _interaction_, bool _isLast_)::
+void Show(string _text_)::
 
 ### Protected Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(string _text_, <<reference/message-interaction-type.html,MessageInteractionType>> _interaction_, bool _isLast_) _(virtual)_::
-
-void Setup() _(virtual)_::
-
 void Teardown() _(virtual)_::
 
-void SetInteraction(<<reference/message-control-display.html,MessageControlDisplay>> _display_, <<reference/message-interaction-type.html,MessageInteractionType>> _interaction_, bool _isLast_)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::

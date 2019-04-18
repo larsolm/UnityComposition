@@ -9,3 +9,13 @@ PiRhoSoft.CompositionEngine.TransitionRenderer : https://docs.unity3d.com/Script
 ### Constructors
 
 TransitionRenderer()::
+
+### Public Methods
+
+void SetTarget(https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _target_) _(virtual)_::
+
+### Protected Methods
+
+void OnEnable() _(virtual)_::
+
+void OnDisable() _(virtual)_::

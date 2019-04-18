@@ -1,0 +1,17 @@
+[#reference/variable-reference-variable-token]
+
+## VariableToken
+
+PiRhoSoft.CompositionEngine.VariableToken
+
+### Description
+
+### Constructors
+
+VariableToken()::
+
+### Public Fields
+
+<<reference/variable-reference-variable-token-type.html,VariableTokenType>> _Type_::
+
+string _Text_::

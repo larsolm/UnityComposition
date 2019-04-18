@@ -2,7 +2,7 @@
 
 ## MessageBinding
 
-PiRhoSoft.CompositionEngine.MessageBinding : <<reference/interface-binding.html,InterfaceBinding>>
+PiRhoSoft.CompositionEngine.MessageBinding : <<reference/variable-binding.html,VariableBinding>>
 
 ### Description
 
@@ -18,6 +18,6 @@ MessageBinding()::
 
 TextMeshProUGUI _Text_ _(read only)_::
 
-### Public Methods
+### Protected Methods
 
 void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

@@ -1,0 +1,15 @@
+[#reference/transform-node-animation-type]
+
+## AnimationType
+
+PiRhoSoft.CompositionEngine.AnimationType
+
+### Description
+
+### Values
+
+<<reference/transform-node-animation-type.html,AnimationType>> _None_::
+
+<<reference/transform-node-animation-type.html,AnimationType>> _Speed_::
+
+<<reference/transform-node-animation-type.html,AnimationType>> _Duration_::

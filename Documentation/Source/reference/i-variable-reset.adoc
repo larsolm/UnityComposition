@@ -1,0 +1,13 @@
+[#reference/i-variable-reset]
+
+## IVariableReset
+
+PiRhoSoft.CompositionEngine.IVariableReset
+
+### Description
+
+### Public Methods
+
+void ResetTag(string _tag_) _(abstract)_::
+
+void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_) _(abstract)_::

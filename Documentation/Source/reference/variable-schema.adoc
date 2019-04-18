@@ -2,13 +2,19 @@
 
 ## VariableSchema
 
-PiRhoSoft.CompositionEngine.VariableSchema
+PiRhoSoft.CompositionEngine.VariableSchema : https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^]
 
 ### Description
 
 ### Constructors
 
 VariableSchema()::
+
+### Public Fields
+
+<<reference/variable-initializer-type.html,VariableInitializerType>> _InitializerType_::
+
+<<reference/tag-list.html,TagList>> _Tags_::
 
 ### Public Properties
 

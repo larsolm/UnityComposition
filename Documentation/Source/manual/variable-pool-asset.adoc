@@ -1,0 +1,16 @@
+[#manual/variable-pool-asset]
+
+## Variable Pool Asset
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Variables	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/variable-pool-asset.html[Reference]
+endif::[]

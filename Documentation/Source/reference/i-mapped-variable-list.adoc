@@ -1,0 +1,19 @@
+[#reference/i-mapped-variable-list]
+
+## IMappedVariableList
+
+PiRhoSoft.CompositionEngine.IMappedVariableList
+
+### Description
+
+### Public Properties
+
+int _VariableCount_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+string GetVariableName(int _index_) _(abstract)_::
+
+<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(abstract)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::

@@ -1,0 +1,35 @@
+[#reference/binding-root]
+
+## BindingRoot
+
+PiRhoSoft.CompositionEngine.BindingRoot : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-variable-store.html,IVariableStore>>
+
+### Description
+
+### Static Methods
+
+<<reference/i-variable-store.html,IVariableStore>> FindParent(https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _obj_)::
+
+### Constructors
+
+BindingRoot()::
+
+### Public Fields
+
+string _Name_::
+
+### Public Properties
+
+<<reference/variable-value.html,VariableValue>> _Value_ _(virtual)_::
+
+### Public Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+### Protected Methods
+
+void Awake() _(virtual)_::

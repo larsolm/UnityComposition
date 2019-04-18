@@ -14,9 +14,15 @@ SelectionNode()::
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _OnCanceled_::
 
-<<reference/interface-reference.html,InterfaceReference>> _Control_::
+<<reference/variable-reference.html,VariableReference>> _Control_::
+
+<<reference/variable-reference.html,VariableReference>> _SelectedItem_::
+
+<<reference/variable-reference.html,VariableReference>> _SelectedIndex_::
 
 bool _IsSelectionRequired_::
+
+bool _AutoHide_::
 
 <<reference/selection-node-item-list.html,SelectionNodeItemList>> _Items_::
 
@@ -30,6 +36,4 @@ void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>>
 
 void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
 
-### Protected Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

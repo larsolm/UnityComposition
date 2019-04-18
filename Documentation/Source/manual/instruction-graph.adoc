@@ -4,9 +4,13 @@
 
 ### Fields
 
-<<manual/instruction-graph-node-list.html,Instruction Graph Node List>> __nodes_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Start Position_::
+| _nodes	| 
+| Start Position	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/instruction-graph.html[Reference]

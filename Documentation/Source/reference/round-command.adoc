@@ -2,7 +2,7 @@
 
 ## RoundCommand
 
-PiRhoSoft.CompositionEngine.RoundCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.RoundCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

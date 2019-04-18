@@ -2,7 +2,7 @@
 
 ## LogCommand
 
-PiRhoSoft.CompositionEngine.LogCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.LogCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

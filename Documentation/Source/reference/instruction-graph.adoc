@@ -38,15 +38,11 @@ bool _CanDebugStop_ _(read only)_::
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
+void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_)::
 
-void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_) _(virtual)_::
+void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_, int _index_)::
 
-void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, Object _thisObject_, string _name_)::
-
-void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, Object _thisObject_, string _name_, int _index_)::
-
-void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, Object _thisObject_, string _name_, string _key_)::
+void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_, string _key_)::
 
 void Break()::
 
@@ -73,5 +69,9 @@ void SetConnection(<<reference/instruction-graph-node-connection-data.html,Conne
 InstructionGraph()::
 
 ### Protected Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
+
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_) _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _root_, string _source_)::

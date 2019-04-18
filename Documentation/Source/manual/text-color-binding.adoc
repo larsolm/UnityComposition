@@ -1,0 +1,16 @@
+[#manual/text-color-binding]
+
+## Text Color Binding
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Variable	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/text-color-binding.html[Reference]
+endif::[]

@@ -1,0 +1,15 @@
+[#reference/play-effect-object-positioning]
+
+## ObjectPositioning
+
+PiRhoSoft.CompositionEngine.ObjectPositioning
+
+### Description
+
+### Values
+
+<<reference/play-effect-object-positioning.html,ObjectPositioning>> _Absolute_::
+
+<<reference/play-effect-object-positioning.html,ObjectPositioning>> _Relative_::
+
+<<reference/play-effect-object-positioning.html,ObjectPositioning>> _Child_::

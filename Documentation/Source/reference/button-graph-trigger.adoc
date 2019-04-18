@@ -1,0 +1,15 @@
+[#reference/button-graph-trigger]
+
+## ButtonGraphTrigger
+
+PiRhoSoft.CompositionEngine.ButtonGraphTrigger : <<reference/instruction-trigger.html,InstructionTrigger>>
+
+### Description
+
+### Constructors
+
+ButtonGraphTrigger()::
+
+### Public Fields
+
+string _Button_::

@@ -2,7 +2,7 @@
 
 ## FloorCommand
 
-PiRhoSoft.CompositionEngine.FloorCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.FloorCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

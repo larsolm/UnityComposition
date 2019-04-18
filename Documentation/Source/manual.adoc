@@ -1,10 +1,10 @@
 :imagesdir: manual/
 
-include::manual/activate-interface-node.adoc[]
+include::manual/animation-player.adoc[]
 
 <<<
 
-include::manual/auto-size-text.adoc[]
+include::manual/audio-player.adoc[]
 
 <<<
 
@@ -16,11 +16,7 @@ include::manual/bar-binding.adoc[]
 
 <<<
 
-include::manual/binding-control.adoc[]
-
-<<<
-
-include::manual/binding-updater.adoc[]
+include::manual/binding-root.adoc[]
 
 <<<
 
@@ -32,7 +28,15 @@ include::manual/break-node.adoc[]
 
 <<<
 
+include::manual/button-graph-trigger.adoc[]
+
+<<<
+
 include::manual/button-input.adoc[]
+
+<<<
+
+include::manual/call-method-node.adoc[]
 
 <<<
 
@@ -40,7 +44,19 @@ include::manual/clear-transition.adoc[]
 
 <<<
 
-include::manual/command-set.adoc[]
+include::manual/click-graph-trigger.adoc[]
+
+<<<
+
+include::manual/collision-graph-trigger.adoc[]
+
+<<<
+
+include::manual/collision-notifier.adoc[]
+
+<<<
+
+include::manual/command.adoc[]
 
 <<<
 
@@ -64,15 +80,11 @@ include::manual/cutoff.adoc[]
 
 <<<
 
-include::manual/deactivate-interface-node.adoc[]
-
-<<<
-
 include::manual/destroy-object-node.adoc[]
 
 <<<
 
-include::manual/disable-component-node.adoc[]
+include::manual/disable-behaviour-node.adoc[]
 
 <<<
 
@@ -84,11 +96,23 @@ include::manual/dissolve.adoc[]
 
 <<<
 
-include::manual/enable-component-node.adoc[]
+include::manual/enable-behaviour-node.adoc[]
+
+<<<
+
+include::manual/enable-binding.adoc[]
 
 <<<
 
 include::manual/enable-game-object-node.adoc[]
+
+<<<
+
+include::manual/enable-graph-trigger.adoc[]
+
+<<<
+
+include::manual/expression-binding.adoc[]
 
 <<<
 
@@ -100,7 +124,15 @@ include::manual/fade.adoc[]
 
 <<<
 
-include::manual/focus-indicator.adoc[]
+include::manual/focus-binding.adoc[]
+
+<<<
+
+include::manual/get-property-node.adoc[]
+
+<<<
+
+include::manual/graph-trigger-binding.adoc[]
 
 <<<
 
@@ -109,6 +141,18 @@ include::manual/hide-control-node.adoc[]
 <<<
 
 include::manual/image-binding.adoc[]
+
+<<<
+
+include::manual/input-message.adoc[]
+
+<<<
+
+include::manual/input-node.adoc[]
+
+<<<
+
+include::manual/input-selection.adoc[]
 
 <<<
 
@@ -128,11 +172,11 @@ include::manual/instruction-node.adoc[]
 
 <<<
 
-include::manual/interface.adoc[]
+include::manual/instruction-reference-node.adoc[]
 
 <<<
 
-include::manual/interface-binding.adoc[]
+include::manual/instruction-trigger.adoc[]
 
 <<<
 
@@ -140,19 +184,35 @@ include::manual/interface-control.adoc[]
 
 <<<
 
-include::manual/interface-manager.adoc[]
-
-<<<
-
-include::manual/item-selector.adoc[]
-
-<<<
-
 include::manual/iterate-node.adoc[]
 
 <<<
 
+include::manual/list-binding.adoc[]
+
+<<<
+
+include::manual/load-scene-node.adoc[]
+
+<<<
+
 include::manual/loop-node.adoc[]
+
+<<<
+
+include::manual/material-animation.adoc[]
+
+<<<
+
+include::manual/menu.adoc[]
+
+<<<
+
+include::manual/menu-input.adoc[]
+
+<<<
+
+include::manual/menu-item.adoc[]
 
 <<<
 
@@ -176,6 +236,14 @@ include::manual/mockup-node.adoc[]
 
 <<<
 
+include::manual/number-binding.adoc[]
+
+<<<
+
+include::manual/object-binding-root.adoc[]
+
+<<<
+
 include::manual/pixelate.adoc[]
 
 <<<
@@ -188,7 +256,27 @@ include::manual/play-animation-state.adoc[]
 
 <<<
 
+include::manual/play-effect.adoc[]
+
+<<<
+
+include::manual/play-sound.adoc[]
+
+<<<
+
 include::manual/play-transition.adoc[]
+
+<<<
+
+include::manual/reset-tag.adoc[]
+
+<<<
+
+include::manual/reset-variables.adoc[]
+
+<<<
+
+include::manual/run-timeline.adoc[]
 
 <<<
 
@@ -220,7 +308,23 @@ include::manual/set-animation-parameter.adoc[]
 
 <<<
 
+include::manual/set-binding-node.adoc[]
+
+<<<
+
+include::manual/set-property-node.adoc[]
+
+<<<
+
+include::manual/set-variable-node.adoc[]
+
+<<<
+
 include::manual/show-control-node.adoc[]
+
+<<<
+
+include::manual/shuffle-node.adoc[]
 
 <<<
 
@@ -228,7 +332,39 @@ include::manual/simple-graph.adoc[]
 
 <<<
 
+include::manual/sort-node.adoc[]
+
+<<<
+
+include::manual/sprite-binding.adoc[]
+
+<<<
+
+include::manual/sprite-color-binding.adoc[]
+
+<<<
+
+include::manual/start-graph-trigger.adoc[]
+
+<<<
+
 include::manual/text-binding.adoc[]
+
+<<<
+
+include::manual/text-color-binding.adoc[]
+
+<<<
+
+include::manual/text-input-binding.adoc[]
+
+<<<
+
+include::manual/time-scale-node.adoc[]
+
+<<<
+
+include::manual/transform-node.adoc[]
 
 <<<
 
@@ -244,12 +380,44 @@ include::manual/transition-renderer.adoc[]
 
 <<<
 
+include::manual/unload-scene-node.adoc[]
+
+<<<
+
 include::manual/update-binding-node.adoc[]
 
 <<<
 
-include::manual/visible-binding.adoc[]
+include::manual/variable-binding.adoc[]
+
+<<<
+
+include::manual/variable-link.adoc[]
+
+<<<
+
+include::manual/variable-pool-asset.adoc[]
+
+<<<
+
+include::manual/variable-pool-component.adoc[]
+
+<<<
+
+include::manual/variable-schema.adoc[]
+
+<<<
+
+include::manual/variable-set-asset.adoc[]
+
+<<<
+
+include::manual/variable-set-component.adoc[]
 
 <<<
 
 include::manual/wait-node.adoc[]
+
+<<<
+
+include::manual/yield-node.adoc[]

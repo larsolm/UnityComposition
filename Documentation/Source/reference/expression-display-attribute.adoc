@@ -1,0 +1,21 @@
+[#reference/expression-display-attribute]
+
+## ExpressionDisplayAttribute
+
+PiRhoSoft.CompositionEngine.ExpressionDisplayAttribute : https://docs.unity3d.com/ScriptReference/PropertyAttribute.html[PropertyAttribute^]
+
+### Description
+
+### Constructors
+
+ExpressionDisplayAttribute()::
+
+### Public Fields
+
+bool _Foldout_::
+
+bool _FullWidth_::
+
+int _MinimumLines_::
+
+int _MaximumLines_::

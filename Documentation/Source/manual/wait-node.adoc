@@ -4,7 +4,13 @@
 
 ### Fields
 
-float _Time_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Time	| 
+| Use Scaled Time	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/wait-node.html[Reference]

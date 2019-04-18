@@ -2,7 +2,7 @@
 
 ## SqrtCommand
 
-PiRhoSoft.CompositionEngine.SqrtCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.SqrtCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

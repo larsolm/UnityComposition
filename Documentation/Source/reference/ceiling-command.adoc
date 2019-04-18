@@ -2,7 +2,7 @@
 
 ## CeilingCommand
 
-PiRhoSoft.CompositionEngine.CeilingCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.CeilingCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

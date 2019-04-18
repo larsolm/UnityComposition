@@ -2,7 +2,7 @@
 
 ## MaxCommand
 
-PiRhoSoft.CompositionEngine.MaxCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.MaxCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

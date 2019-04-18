@@ -2,7 +2,14 @@
 
 ## Enable Game Object Node
 
+### Fields
 
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Target	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/enable-game-object-node.html[Reference]

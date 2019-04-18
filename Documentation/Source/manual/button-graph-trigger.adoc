@@ -1,0 +1,16 @@
+[#manual/button-graph-trigger]
+
+## Button Graph Trigger
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Button	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/button-graph-trigger.html[Reference]
+endif::[]

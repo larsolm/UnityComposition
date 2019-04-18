@@ -1,0 +1,17 @@
+[#manual/variable-binding]
+
+## Variable Binding
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Binding Group	| 
+| Auto Update	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/variable-binding.html[Reference]
+endif::[]

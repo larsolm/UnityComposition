@@ -1,0 +1,15 @@
+[#reference/decrement-operator]
+
+## DecrementOperator
+
+PiRhoSoft.CompositionEngine.DecrementOperator : <<reference/prefix-operation.html,PrefixOperation>>
+
+### Description
+
+### Constructors
+
+DecrementOperator()::
+
+### Public Methods
+
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

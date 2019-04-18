@@ -1,0 +1,19 @@
+[#reference/instruction-trigger]
+
+## InstructionTrigger
+
+PiRhoSoft.CompositionEngine.InstructionTrigger : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+InstructionTrigger()::
+
+### Public Fields
+
+<<reference/instruction-caller.html,InstructionCaller>> _Graph_::
+
+### Public Methods
+
+void Run()::

@@ -22,6 +22,10 @@ bool _IsRunning_ _(read only)_::
 
 ### Public Methods
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<reference/instruction-context.html,InstructionContext>> _context_, Object _thisObject_)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<reference/i-variable-store.html,IVariableStore>> _store_, <<reference/variable-value.html,VariableValue>> _context_)::
 
 void UpdateVariables()::
+
+<<reference/variable-definition.html,VariableDefinition>> GetInputDefinition(<<reference/instruction-input.html,InstructionInput>> _input_)::
+
+<<reference/variable-definition.html,VariableDefinition>> GetOutputDefinition(<<reference/instruction-output.html,InstructionOutput>> _output_)::

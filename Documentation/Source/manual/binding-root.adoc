@@ -1,0 +1,22 @@
+[#manual/binding-root]
+
+## Binding Root
+
+Binding Root is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that acts as a root object for all child <<variable-binding,Variable Bindings>> to bind data on. Binding Roots have a _Value_ property that can be accessed through link:reference/variable-reference.html[Variable References] via the _Name_ property.  _Value_ can be set from a derived class such as <<object-binding-root,Object Binding Root>> or through a <<set-binding-node,Set Binding Node>>. When accessing variables on a Binding Root, the search will cascade upward to the next Binding Root in the hierarchy with the the default variable store on the <<composition-manager,Composition Manager>> as the base. <<selection-control,Selection Controls>> and <<menu,Menus>> use Binding Roots on each of their child <<menu-item,Menu Items>> to group each item's data.
+
+See the _"Card"_ prefab in the CardGame project for an example usage.
+
+### Fields
+
+image:binding-root.png[]
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Name	| The name of the variable that child <<variable-binding,Variable Bindings>> can use in order to access this Binding Root's data.
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/binding-root.html[Reference]
+endif::[]

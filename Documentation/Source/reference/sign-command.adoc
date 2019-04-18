@@ -2,7 +2,7 @@
 
 ## SignCommand
 
-PiRhoSoft.CompositionEngine.SignCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.SignCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

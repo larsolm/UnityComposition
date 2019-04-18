@@ -49,13 +49,13 @@
                 "GenericSeparator": "",
                 "BaseOpener": "",
                 "BaseSeparator": "",
-                "Section": "### {SectionName}\n\n{Members}",
+                "Section": "### {SectionName}\n\n[cols=\"1,2\"]\n|===\n| Name\t| Description\n\n{Members}\n|===",
                 "SectionSeparator": "",
                 "Constructor": "",
-                "Field": "{Type} _{NiceName}_::",
+                "Field": "| {NiceName}\t| ",
                 "Property": "",
                 "Method": "",
-                "MemberSeparator": "\n\n",
+                "MemberSeparator": "\n",
                 "Parameter": "",
                 "ParameterSeparator": "",
                 "Decorator": "",
@@ -204,10 +204,7 @@
                 "Instructions",
                 "Interface",
                 "Animation",
-                "Assets",
-                "Behaviours",
-                "Bindings",
-                "Nodes"
+                "Content"
             ]
         },
         "Templates": {

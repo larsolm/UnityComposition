@@ -2,7 +2,7 @@
 
 ## Property
 
-PiRhoSoft.CompositionEngine.Property<__OwnerType__>
+PiRhoSoft.CompositionEngine.Property<__OwnerType__> : <<reference/property.html,Property>>
 
 ### Description
 
@@ -12,8 +12,90 @@ Property()::
 
 ### Public Fields
 
-string _Name_::
-
 Func<OwnerType, OwnerType> _Getter_::
 
 Func<OwnerType, OwnerType, OwnerType> _Setter_::
+
+### Public Methods
+
+<<reference/variable-value.html,VariableValue>> Get(Object _obj_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> Set(Object _obj_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+### Protected Methods
+
+void SetupAsBool(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsInt(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsFloat(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsInt2(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsInt3(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsIntRect(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsIntBounds(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsVector2(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsVector3(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsVector4(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsQuaternion(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsRect(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsBounds(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsColor(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsString(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsEnum(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsObject(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsStore(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsList(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(virtual)_::
+
+void SetupAsBool(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsInt(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsFloat(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsInt2(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsInt3(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsIntRect(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsIntBounds(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsVector2(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsVector3(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsVector4(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsQuaternion(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsRect(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsBounds(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsColor(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsString(MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsEnum(Type _enumType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsObject(Type _objectType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsStore(Type _storeType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::
+
+void SetupAsList(Type _listType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(virtual)_::

@@ -1,0 +1,23 @@
+[#reference/variable-pool-component]
+
+## VariablePoolComponent
+
+PiRhoSoft.CompositionEngine.VariablePoolComponent : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-variable-store.html,IVariableStore>>
+
+### Description
+
+### Constructors
+
+VariablePoolComponent()::
+
+### Public Fields
+
+<<reference/variable-pool.html,VariablePool>> _Variables_::
+
+### Public Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::

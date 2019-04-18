@@ -2,7 +2,7 @@
 
 ## AndAssignOperator
 
-PiRhoSoft.CompositionEngine.AndAssignOperator : <<reference/assign-operator.html,AssignOperator>>
+PiRhoSoft.CompositionEngine.AndAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
 
 ### Description
 

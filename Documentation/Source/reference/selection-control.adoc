@@ -6,79 +6,51 @@ PiRhoSoft.CompositionEngine.SelectionControl : <<reference/interface-control.htm
 
 ### Description
 
-### Constructors
-
-SelectionControl()::
-
-### Public Fields
-
-bool _VerticalWrapping_::
-
-bool _HorizontalWrapping_::
-
-<<reference/primary-axis.html,PrimaryAxis>> _PrimaryAxis_::
-
-int _ColumnCount_::
-
-int _RowCount_::
-
 ### Public Properties
+
+bool _IsRunning_ _(read only)_::
+
+bool _IsSelectionRequired_ _(read only)_::
+
+bool _IsClosing_ _(read only)_::
+
+bool _HasFocusedItem_ _(read only)_::
+
+bool _HasSelectedItem_ _(read only)_::
 
 <<reference/selection-item.html,SelectionItem>> _FocusedItem_ _(read only)_::
 
-<<reference/i-variable-store.html,IVariableStore>> _FocusedVariables_ _(read only)_::
+int _FocusedIndex_ _(read only)_::
+
+<<reference/variable-value.html,VariableValue>> _FocusedValue_ _(read only)_::
 
 <<reference/selection-item.html,SelectionItem>> _SelectedItem_ _(read only)_::
 
-<<reference/i-variable-store.html,IVariableStore>> _SelectedVariables_ _(read only)_::
+int _SelectedIndex_ _(read only)_::
+
+<<reference/variable-value.html,VariableValue>> _SelectedValue_ _(read only)_::
 
 ### Public Methods
 
-void UpdateBindings(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] MakeSelection(<<reference/i-variable-store.html,IVariableStore>> _variables_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<<<reference/selection-item.html,SelectionItem>>> _items_, bool _isSelectionRequired_)::
+void Show(<<reference/i-variable-store.html,IVariableStore>> _variables_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<<<reference/selection-item.html,SelectionItem>>> _items_, bool _isSelectionRequired_, bool _resetIndex_)::
 
 void Close()::
+
+void Select()::
 
 void SelectItem(int _index_)::
 
 void MoveFocus(int _index_)::
 
-void MoveFocusUp() _(virtual)_::
+### Protected Constructors
 
-void MoveFocusDown() _(virtual)_::
-
-void MoveFocusLeft() _(virtual)_::
-
-void MoveFocusRight() _(virtual)_::
-
-bool MoveFocusToStart()::
-
-bool MoveFocusToEnd()::
-
-bool MoveFocusToTop()::
-
-bool MoveFocusToBottom()::
-
-bool MoveFocusToLeft()::
-
-bool MoveFocusToRight()::
-
-bool MoveFocusToLocation(int _column_, int _row_)::
-
-bool SetFocusToValidLocation(int _startingColumn_, int _startingRow_)::
+SelectionControl()::
 
 ### Protected Fields
 
-int __columnCount_::
-
-int __rowCount_::
-
-int __columnIndex_::
-
-int __rowIndex_::
-
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/selection-control-menu-item.html,MenuItem>>> __items_::
+
+int __focusedIndex_::
 
 <<reference/selection-control-menu-item.html,MenuItem>> __focusedItem_::
 
@@ -86,26 +58,14 @@ https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[Li
 
 ### Protected Methods
 
-void Teardown() _(virtual)_::
-
 https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] GetItemParent() _(virtual)_::
 
-<<reference/selection-control-menu-item.html,MenuItem>> GetItem(int _column_, int _row_)::
+<<reference/selection-control-menu-item.html,MenuItem>> GetItem(int _index_)::
 
-void FocusItem(<<reference/selection-control-menu-item.html,MenuItem>> _item_) _(virtual)_::
+void OnInitialize() _(virtual)_::
 
-void BlurItem(<<reference/selection-control-menu-item.html,MenuItem>> _item_) _(virtual)_::
+void OnCreate() _(virtual)_::
 
-void MoveFocus(int _change_, bool _wrap_, int _count_, int _depth_, int _index_ _(ref)_, int _column_ _(ref)_, int _row_ _(ref)_)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::
 
-void SetFocus(int _column_, int _row_, bool _force_)::
-
-bool SetFocusToValidColumn(int _startingColumn_, int _startingRow_)::
-
-bool SetFocusToValidColumnInRow(int _startingColumn_, int _row_)::
-
-bool SetFocusToValidRow(int _startingColumn_, int _startingRow_)::
-
-bool SetFocusToValidRowInColumn(int _column_, int _startingRow_)::
-
-bool IsLocationFocusable(int _column_, int _row_)::
+void Teardown() _(virtual)_::

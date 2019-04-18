@@ -1,0 +1,17 @@
+[#reference/variable-value-source]
+
+## VariableValueSource
+
+PiRhoSoft.CompositionEngine.VariableValueSource : <<reference/variable-source-1.html,VariableSource>><<<reference/variable-value.html,VariableValue>>>
+
+### Description
+
+### Constructors
+
+VariableValueSource()::
+
+VariableValueSource(<<reference/variable-type.html,VariableType>> _type_, <<reference/value-definition.html,ValueDefinition>> _definition_)::
+
+### Public Fields
+
+<<reference/value-definition.html,ValueDefinition>> _Definition_::

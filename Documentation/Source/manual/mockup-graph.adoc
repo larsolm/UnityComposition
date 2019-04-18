@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/mockup-connection-list.html,Mockup Connection List>> _Entry Points_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Entry Points	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/mockup-graph.html[Reference]

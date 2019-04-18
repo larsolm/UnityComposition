@@ -1,0 +1,15 @@
+[#reference/binding-formatter-format-type]
+
+## FormatType
+
+PiRhoSoft.CompositionEngine.FormatType
+
+### Description
+
+### Values
+
+<<reference/binding-formatter-format-type.html,FormatType>> _None_::
+
+<<reference/binding-formatter-format-type.html,FormatType>> _Time_::
+
+<<reference/binding-formatter-format-type.html,FormatType>> _Number_::

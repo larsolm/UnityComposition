@@ -1,0 +1,15 @@
+[#reference/increment-operator]
+
+## IncrementOperator
+
+PiRhoSoft.CompositionEngine.IncrementOperator : <<reference/prefix-operation.html,PrefixOperation>>
+
+### Description
+
+### Constructors
+
+IncrementOperator()::
+
+### Public Methods
+
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

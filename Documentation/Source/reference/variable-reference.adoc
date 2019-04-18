@@ -6,13 +6,23 @@ PiRhoSoft.CompositionEngine.VariableReference
 
 ### Description
 
+### Static Fields
+
+string _Cast_::
+
+Char _Separator_::
+
+Char _LookupOpen_::
+
+Char _LookupClose_::
+
 ### Constructors
 
 VariableReference()::
 
-VariableReference(string _variable_)::
-
 ### Public Properties
+
+bool _IsValid_ _(read only)_::
 
 bool _IsAssigned_ _(read only)_::
 
@@ -20,12 +30,12 @@ string _StoreName_ _(read only)_::
 
 string _RootName_ _(read only)_::
 
+string _Variable_::
+
 ### Public Methods
 
-void Update(string _variable_)::
+string ToString() _(virtual)_::
 
 <<reference/variable-value.html,VariableValue>> GetValue(<<reference/i-variable-store.html,IVariableStore>> _variables_)::
 
 <<reference/set-variable-result.html,SetVariableResult>> SetValue(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-value.html,VariableValue>> _value_)::
-
-string ToString() _(virtual)_::

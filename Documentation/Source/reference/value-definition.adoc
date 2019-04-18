@@ -1,0 +1,51 @@
+[#reference/value-definition]
+
+## ValueDefinition
+
+PiRhoSoft.CompositionEngine.ValueDefinition : ValueType
+
+### Description
+
+### Static Methods
+
+<<reference/value-definition.html,ValueDefinition>> Create(<<reference/variable-type.html,VariableType>> _type_)::
+
+<<reference/value-definition.html,ValueDefinition>> Create(int _minimum_, int _maximum_)::
+
+<<reference/value-definition.html,ValueDefinition>> Create(float _minimum_, float _maximum_)::
+
+<<reference/value-definition.html,ValueDefinition>> Create(string[] _values_)::
+
+<<reference/value-definition.html,ValueDefinition>> Create<T>()::
+
+<<reference/value-definition.html,ValueDefinition>> Create(Type _type_)::
+
+<<reference/value-definition.html,ValueDefinition>> Create(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_)::
+
+<<reference/value-definition.html,ValueDefinition>> Create(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_, string _tag_, <<reference/expression.html,Expression>> _initializer_, bool _isTypeLocked_, bool _isConstraintLocked_)::
+
+### Public Fields
+
+string __tag_::
+
+<<reference/expression.html,Expression>> __initializer_::
+
+### Public Properties
+
+<<reference/variable-type.html,VariableType>> _Type_ _(read only)_::
+
+<<reference/variable-constraint.html,VariableConstraint>> _Constraint_ _(read only)_::
+
+string _Tag_ _(read only)_::
+
+<<reference/expression.html,Expression>> _Initializer_ _(read only)_::
+
+bool _IsTypeLocked_ _(read only)_::
+
+bool _IsConstraintLocked_ _(read only)_::
+
+### Public Methods
+
+<<reference/variable-value.html,VariableValue>> Generate(<<reference/i-variable-store.html,IVariableStore>> _variables_)::
+
+bool IsValid(<<reference/variable-value.html,VariableValue>> _value_)::

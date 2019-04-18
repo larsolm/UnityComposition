@@ -4,7 +4,12 @@
 
 ### Fields
 
-string _Button Name_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Button Name	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/button-input.html[Reference]

@@ -6,7 +6,23 @@ PiRhoSoft.CompositionEngine.InfixOperation : <<reference/operation.html,Operatio
 
 ### Description
 
-### Public Fields
+### Public Properties
+
+<<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+void Parse(<<reference/expression-parser.html,ExpressionParser>> _parser_, <<reference/expression-token.html,ExpressionToken>> _token_) _(virtual)_::
+
+void ToString(StringBuilder _builder_) _(virtual)_::
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
+
+### Protected Constructors
+
+InfixOperation()::
+
+### Protected Fields
 
 <<reference/operation.html,Operation>> _Left_::
 
@@ -14,12 +30,6 @@ string _Symbol_::
 
 <<reference/operation.html,Operation>> _Right_::
 
-### Public Methods
+### Protected Methods
 
-void ToString(StringBuilder _builder_) _(virtual)_::
-
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
-
-### Protected Constructors
-
-InfixOperation()::
+<<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> TypeMismatch(<<reference/variable-type.html,VariableType>> _left_, <<reference/variable-type.html,VariableType>> _right_)::

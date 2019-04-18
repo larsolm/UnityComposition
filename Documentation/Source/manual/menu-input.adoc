@@ -1,0 +1,24 @@
+[#manual/menu-input]
+
+## Menu Input
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Horizontal Axis	| 
+| Vertical Axis	| 
+| Select Button	| 
+| Cancel Button	| 
+| Primary Axis	| 
+| Row Count	| 
+| Column Count	| 
+| Vertical Wrapping	| 
+| Horizontal Wrapping	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/menu-input.html[Reference]
+endif::[]

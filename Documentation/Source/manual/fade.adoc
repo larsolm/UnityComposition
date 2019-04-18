@@ -4,7 +4,12 @@
 
 ### Fields
 
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Color	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/fade.html[Reference]

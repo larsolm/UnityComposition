@@ -8,10 +8,10 @@ PiRhoSoft.CompositionEngine.ExpressionParseException : Exception
 
 ### Constructors
 
-ExpressionParseException(int _location_, string _error_)::
+ExpressionParseException(<<reference/expression-token.html,ExpressionToken>> _token_, string _error_)::
 
-ExpressionParseException(int _location_, string _errorFormat_, Object[] _arguments_)::
+ExpressionParseException(<<reference/expression-token.html,ExpressionToken>> _token_, string _errorFormat_, Object[] _arguments_)::
 
 ### Public Fields
 
-int _Location_::
+<<reference/expression-token.html,ExpressionToken>> _Token_::

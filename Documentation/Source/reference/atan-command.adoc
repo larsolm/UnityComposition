@@ -2,7 +2,7 @@
 
 ## AtanCommand
 
-PiRhoSoft.CompositionEngine.AtanCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.AtanCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

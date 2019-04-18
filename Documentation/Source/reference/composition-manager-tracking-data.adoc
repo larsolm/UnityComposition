@@ -1,0 +1,37 @@
+[#reference/composition-manager-tracking-data]
+
+## TrackingData
+
+PiRhoSoft.CompositionEngine.TrackingData
+
+### Description
+
+### Constructors
+
+TrackingData(<<reference/instruction.html,Instruction>> _instruction_)::
+
+### Public Fields
+
+<<reference/instruction.html,Instruction>> _Instruction_::
+
+bool _IsComplete_::
+
+int _StartFrame_::
+
+float _StartSeconds_::
+
+int _EndFrame_::
+
+float _EndSeconds_::
+
+int _TotalIterations_::
+
+### Public Properties
+
+int _TotalFrames_ _(read only)_::
+
+float _TotalSeconds_ _(read only)_::
+
+### Public Methods
+
+void Finish()::

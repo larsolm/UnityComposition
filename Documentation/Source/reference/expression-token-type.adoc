@@ -10,15 +10,15 @@ PiRhoSoft.CompositionEngine.ExpressionTokenType
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Sentinel_::
 
-<<reference/expression-token-type.html,ExpressionTokenType>> _Boolean_::
+<<reference/expression-token-type.html,ExpressionTokenType>> _Constant_::
 
-<<reference/expression-token-type.html,ExpressionTokenType>> _Integer_::
+<<reference/expression-token-type.html,ExpressionTokenType>> _Int_::
 
-<<reference/expression-token-type.html,ExpressionTokenType>> _Number_::
+<<reference/expression-token-type.html,ExpressionTokenType>> _Float_::
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _String_::
 
-<<reference/expression-token-type.html,ExpressionTokenType>> _Null_::
+<<reference/expression-token-type.html,ExpressionTokenType>> _Color_::
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Identifier_::
 
@@ -26,8 +26,16 @@ PiRhoSoft.CompositionEngine.ExpressionTokenType
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Operator_::
 
+<<reference/expression-token-type.html,ExpressionTokenType>> _StartLookup_::
+
+<<reference/expression-token-type.html,ExpressionTokenType>> _EndLookup_::
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _StartGroup_::
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _EndGroup_::
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Separator_::
+
+<<reference/expression-token-type.html,ExpressionTokenType>> _Alternation_::
+
+<<reference/expression-token-type.html,ExpressionTokenType>> _Unknown_::

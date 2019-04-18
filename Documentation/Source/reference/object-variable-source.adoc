@@ -1,0 +1,11 @@
+[#reference/object-variable-source]
+
+## ObjectVariableSource
+
+PiRhoSoft.CompositionEngine.ObjectVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/Object.html[Object^]>
+
+### Description
+
+### Constructors
+
+ObjectVariableSource()::

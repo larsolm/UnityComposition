@@ -1,0 +1,23 @@
+[#reference/sprite-color-binding]
+
+## SpriteColorBinding
+
+PiRhoSoft.CompositionEngine.SpriteColorBinding : <<reference/variable-binding.html,VariableBinding>>
+
+### Description
+
+### Constructors
+
+SpriteColorBinding()::
+
+### Public Fields
+
+<<reference/variable-reference.html,VariableReference>> _Variable_::
+
+### Public Properties
+
+https://docs.unity3d.com/ScriptReference/SpriteRenderer.html[SpriteRenderer^] _Sprite_ _(read only)_::
+
+### Protected Methods
+
+void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

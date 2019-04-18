@@ -1,0 +1,17 @@
+[#manual/set-binding-node]
+
+## Set Binding Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Object	| 
+| Binding	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/set-binding-node.html[Reference]
+endif::[]

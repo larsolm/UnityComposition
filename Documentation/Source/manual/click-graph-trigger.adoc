@@ -1,0 +1,9 @@
+[#manual/click-graph-trigger]
+
+## Click Graph Trigger
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/click-graph-trigger.html[Reference]
+endif::[]

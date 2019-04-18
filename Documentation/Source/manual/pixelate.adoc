@@ -4,7 +4,12 @@
 
 ### Fields
 
-int _Max Amount_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Max Amount	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/pixelate.html[Reference]

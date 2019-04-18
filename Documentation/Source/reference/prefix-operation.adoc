@@ -14,10 +14,16 @@ string _Symbol_::
 
 ### Public Methods
 
+void Parse(<<reference/expression-parser.html,ExpressionParser>> _parser_, <<reference/expression-token.html,ExpressionToken>> _token_) _(virtual)_::
+
 void ToString(StringBuilder _builder_) _(virtual)_::
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
 
 ### Protected Constructors
 
 PrefixOperation()::
+
+### Protected Methods
+
+<<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> TypeMismatch(<<reference/variable-type.html,VariableType>> _type_)::

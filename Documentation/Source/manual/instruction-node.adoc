@@ -4,9 +4,14 @@
 
 ### Fields
 
-<<manual/instruction-caller.html,Instruction Caller>> _Instruction_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-bool _Wait For Completion_::
+| Instruction	| 
+| Context	| 
+| Wait For Completion	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/instruction-node.html[Reference]

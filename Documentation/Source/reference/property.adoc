@@ -1,0 +1,109 @@
+[#reference/property]
+
+## Property
+
+PiRhoSoft.CompositionEngine.Property
+
+### Description
+
+### Static Methods
+
+<<reference/property.html,Property>> Create(Type _ownerType_, FieldInfo _info_, bool _allowRead_, bool _allowWrite_)::
+
+<<reference/property.html,Property>> Create(Type _ownerType_, PropertyInfo _info_, bool _allowRead_, bool _allowWrite_)::
+
+bool IsSupportedType(Type _type_)::
+
+bool IsSupportedList(Type _type_)::
+
+### Public Fields
+
+string _Name_::
+
+### Public Methods
+
+<<reference/variable-value.html,VariableValue>> Get(Object _obj_) _(abstract)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> Set(Object _obj_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
+
+### Protected Constructors
+
+Property()::
+
+### Protected Methods
+
+void SetupAsBool(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsInt(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsFloat(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsInt2(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsInt3(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsIntRect(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsIntBounds(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsVector2(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsVector3(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsVector4(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsQuaternion(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsRect(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsBounds(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsColor(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsString(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsEnum(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsObject(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsStore(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsList(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::
+
+void SetupAsBool(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsInt(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsFloat(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsInt2(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsInt3(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsIntRect(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsIntBounds(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsVector2(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsVector3(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsVector4(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsQuaternion(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsRect(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsBounds(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsColor(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsString(MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsEnum(Type _enumType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsObject(Type _objectType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsStore(Type _storeType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::
+
+void SetupAsList(Type _listType_, MethodInfo _getMethod_, MethodInfo _setMethod_) _(abstract)_::

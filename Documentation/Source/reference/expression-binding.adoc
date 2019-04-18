@@ -1,0 +1,25 @@
+[#reference/expression-binding]
+
+## ExpressionBinding
+
+PiRhoSoft.CompositionEngine.ExpressionBinding : <<reference/variable-binding.html,VariableBinding>>
+
+### Description
+
+### Constructors
+
+ExpressionBinding()::
+
+### Public Fields
+
+<<reference/binding-formatter.html,BindingFormatter>> _Formatting_::
+
+<<reference/expression.html,Expression>> _Expression_::
+
+### Public Properties
+
+TextMeshProUGUI _Text_ _(read only)_::
+
+### Protected Methods
+
+void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

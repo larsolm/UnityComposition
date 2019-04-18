@@ -3,71 +3,31 @@
 
 ### Warnings
 
-CAINIIN:: Unable to activate interface for {0}: the interface '{1}' does not exist
+CAANPIL:: Unable to wait on animation for {0}: the clip '{1}' was set to loop and would have never finished
 --
 --
 
-CAPAIP:: Unable to play animation for {0}: the given variables must me an AnimationPlayer
+CAAUPIL:: Unable to wait on sound for {0}: the clip '{1}' was set to loop and would have never finished
 --
 --
 
-CAPANF:: Unable to play animation for {0}: the animation could not be found
+CAPSIP:: Unable to play sound for {0}: the given variables must me an AudioPlayer
 --
 --
 
-CAPASANF:: Unable to play animation state on {0}: the given variables must be an Animator
+CAPSIV:: Unable to set volume for {0}: the volume could not be found - defaulting to 1
 --
 --
 
-CAPASSNF:: Unable to play animation state on {0}: the state could not be found
+CAPSSNF:: Unable to play sound for {0}: the audio clip could not be found
 --
 --
 
-CCFINIS:: Unable to iterate objects for {0}: the given variables must be an IIndexedVariableStore
+CBEBIO:: Failed to enable or disable object '{0}': the object must be a GameObject, Behaviour, or Renderer
 --
 --
 
-CCIE:: The Command '{0}' could not be added because the Expression '{1}' failed to compile
---
---
-
-CCME:: The Command '{0}' could not be registered because the Expression has not been set
---
---
-
-CCNIT:: variable {0} for instruction graph node {1} must be an object or store
---
---
-
-CCNMT:: unable to find variable {0} for instruction graph node {1}
---
---
-
-CCONMO:: Unable to create object for {0}: the object could not be found
---
---
-
-CCONMP:: Unable to assign parent object for {0}: the specified object '{1}' could not be found
---
---
-
-CDCNMC:: Unable to disable component for {0}: the given variables must be a MonoBehaviour
---
---
-
-CDGONMO:: Unable to disable object for {0}: the given variables must be a GameObject
---
---
-
-CDINIIN:: Unable to activate interface for {0}: the interface '{1}' does not exist
---
---
-
-CECNMC:: Unable to enable component for {0}: the given variables must be a MonoBehaviour
---
---
-
-CEGONMO:: Unable to enable object for {0}: the given variables must be a GameObject
+CECSCIS:: Failed to create constrained variable store with the schema '{0}': the schema could not be found. Make sure it is in a "Resources" folder and the correct path was specified.
 --
 --
 
@@ -75,31 +35,67 @@ CEIR:: The Expression '{0}' was expected to return type {1} but instead returned
 --
 --
 
-CIRICT:: Unable to find interface control for {0}: the interface control '{1}' is not a {2}
+CIBNBIT:: Unable to animate text for number binding {0}: the displayed text is not an int
 --
 --
 
-CIRIIT:: Unable to find interface for {0}: the interface '{1}' is not a {1}
+CIBTIBRO:: Unable to bind text to variable on {0}: the variable '{1}' is read only
 --
 --
 
-CIRMC:: Unable to find interface control for {0}: the interface '{1}' does not have a control named '{2}'
+CIBTIBVNF:: Unable to bind text to variable on {0}: the variable '{1}' could not be found
 --
 --
 
-CIRMI:: Unable to find interface for {0}: the interface '{1}' could not be found
+CIGNIA:: failed to assign to variable '{0}': the variable has an incompatible type
 --
 --
 
-CJEIL:: Cancelling JoinEnumerator after 1000 unyielding iterations
+CIGNIE:: failed to resolve variable '{0}' on node '{1}': the variable has enum type {2} and should have enum type {3}
 --
 --
 
-COMDOONF:: Unable to destroy object for {0}: the given variables must be a Unity Object
+CIGNIO:: failed to resolve variable '{0}' on node '{1}': the object is a {2} and cannot be converted to a {3}
 --
 --
 
-CSCIE:: Failed to expand item {0}: the variable '{1}' is not an IIndexedVariableStore
+CIGNIV:: failed to resolve variable '{0}' on node '{1}': the variable has type {2} and should have type {3}
+--
+--
+
+CIGNMA:: failed to assign to variable '{0}': the variable could not be found
+--
+--
+
+CIGNMV:: failed to resolve variable '{0}' on node '{1}': the variable could not be found
+--
+--
+
+CIGNROA:: failed to assign to variable '{0}': the variable is read only
+--
+--
+
+CNCCMNIOT:: Unable to call method for {0}: the Target '{1}' was not of type '{2}'
+--
+--
+
+CNCGPNIOT:: Unable to get property for {0}: the Target '{1}' was not of type '{2}'
+--
+--
+
+CNCSPNICT:: Unable to set property for {0}: the Target '{1}' was not of type '{2}'
+--
+--
+
+CNSLS:: Unable to load scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
+--
+--
+
+CNSUS:: Unable to unload scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
+--
+--
+
+CSCIE:: Failed to expand item {0}: the variable '{1}' is not an IVariableList
 --
 --
 
@@ -111,49 +107,17 @@ CTMIR:: this TransitionRenderer has not been added
 --
 --
 
-WASAPANF:: Unable to set animation parameter for {0}: the given variables must be an Animator
+CWWIW:: unable to watch variable {0} of type {1} - only variable stores can be watched
 --
 --
 
-WASAPPNF:: Unable to set animation parameter for {0}: the parameter could not be found
---
---
-
-WASAPVNF:: Unable to set animation parameter for {0}: the value could not be found
---
---
-
-WPTTM:: Unable to play transition for {0}: the transition could not be found
+CWWMW:: unable to find variable {0} to watch
 --
 --
 
 ### Errors
 
-CBBIA:: Failed to update bar binding: the amount variable '{0}' is not an Integer or Number
---
---
-
-CBBIT:: Failed to update bar binding: the total variable '{0}' is not an Integer or Number
---
---
-
-CBBMA:: Failed to update bar binding: the amount variable '{0}' could not be found
---
---
-
-CBBMT:: Failed to update bar binding: the total variable '{0}' could not be found
---
---
-
-CBCIB:: Failed to update binding: the variable '{0}' is not an IVariableStore
---
---
-
-CBCMB:: Failed to update binding: the variable '{0}' could not be found
---
---
-
-CCEE:: Failed to execute Command '{0}': {1}
+CCEE:: Failed to execute Command '{0}' on '{1}': {2}
 --
 --
 
@@ -173,31 +137,41 @@ CCNMK:: failed to set target: unable to find key {0} for instruction graph node 
 --
 --
 
-CEEE:: Failed to execute Expression '{0}': {1}
+CEEE:: Failed to execute Expression '{0}' on '{1}': {2}
 --
 --
 
-CEPDC:: Failed to add Command '{0}': a Command with that name has already been added
+CELDK:: Failed to add keyword '{0}': a keyword with the same text has already been added
 --
 --
 
-CEPDIO:: Failed to add infix operator '{0}': an infix operator with that symbol has already been added
+CELDL:: Failed to add constant '{0}': a constant with the same text has already been added
 --
 --
 
-CEPDPO:: Failed to add prefix operator '{0}': a prefix operator with that symbol has already been added
+CEPDC:: Failed to add Command '{0}': a Command with the same name has already been added
 --
 --
 
-CEPE:: Failed to parse Expression '{0}' at location {1}: {2}
+CEPDIO:: Failed to add infix operator '{0}': an infix operator with the same symbol has already been added
 --
 --
 
-CEPMC:: Failed to remove Command '{0}': a Command with that name has not been added
+CEPDPO:: Failed to add prefix operator '{0}': a prefix operator with the same symbol has already been added
 --
 --
 
-CETE:: Failed to parse Expression '{0} at location {1}': {2}
+CEPE:: Failed to parse Expression at location {1} ({2}): {3}
+Expression: {0}
+--
+--
+
+CEPMC:: Failed to remove Command '{0}': a Command with the same name has not been added
+--
+--
+
+CETE:: Failed to parse Expression at location {1}: {2}
+Expression: {0}
 --
 --
 
@@ -205,19 +179,11 @@ CIAR:: Failed to run Instruction '{0}': the Instruction is already running
 --
 --
 
-CIBIV:: Failed to update image binding: the variable '{0}' is not a Sprite and does not have a Sprite
+CISIC:: failed to create context for {0}: the variable '{1}' does not satisfy the constraint
 --
 --
 
-CIBMV:: Failed to update image binding: the variable '{0}' could not be found
---
---
-
-CIMIA:: Failed to add Interface: an Interface named {0} has already been added
---
---
-
-CIMIR:: Failed to remove Interface: an Interface named {0} has not been added
+CISII:: failed to create input for {0}: the variable '{1}' does not satisfy the constraint
 --
 --
 
@@ -237,7 +203,27 @@ CISROO:: failed to store output {0}: the variable '{1}' is read only
 --
 --
 
-CSCII:: Failed to create item {0}: the variable '{1}' is not an IVariableStore
+CMVSIF:: failed to map field '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived field types can be mapped
+--
+--
+
+CMVSIP:: failed to map property '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived property types can be mapped
+--
+--
+
+CPMIF:: failed to map field '{0}' on type {1}: {2} is not a supported type
+--
+--
+
+CPMIP:: failed to map property '{0}' on type {1}: {2} is not a supported type
+--
+--
+
+CSCII:: Failed to create item {0}: the variable '{1}' is not an IVariableStore or IVariableList
+--
+--
+
+CSCMB:: Failed to initialize item {0}: the template '{1}' does not have a Binding Root
 --
 --
 
@@ -245,7 +231,7 @@ CSCMI:: Failed to create item {0}: the variable '{1}' could not be found
 --
 --
 
-CSQIS:: Unable to run sequence for {0}: index {1} has no been connection
+CSQIS:: Unable to run sequence for {0}: index {1} has no connection
 --
 --
 
@@ -253,19 +239,11 @@ CTMS:: Failed to load Transition: shader {0} not found
 --
 --
 
-CVDII:: Failed to initialize variable '{0}': the definition specifies type {1} but the initializer returned type {2}
+CVDII:: Failed to initialize variable: the definition specifies type {0} but the initializer returned type {1}
 --
 --
 
 CVMDV:: Failed to map variable '{0}': a variable with that name already exists in the map
---
---
-
-CVSRI:: failed to get value from source: the variable '{0}' is of type {1} and should be of type {2}
---
---
-
-CVSRM:: failed to get value from source: the variable '{0}' could not be found
 --
 --
 

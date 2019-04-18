@@ -18,11 +18,13 @@ SetAnimationParameter()::
 
 https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.html[AnimatorControllerParameterType^] _Type_::
 
-<<reference/boolean-variable-source.html,BooleanVariableSource>> _BoolValue_::
+<<reference/variable-reference.html,VariableReference>> _Animator_::
 
-<<reference/integer-variable-source.html,IntegerVariableSource>> _IntValue_::
+<<reference/bool-variable-source.html,BoolVariableSource>> _BoolValue_::
 
-<<reference/number-variable-source.html,NumberVariableSource>> _FloatValue_::
+<<reference/int-variable-source.html,IntVariableSource>> _IntValue_::
+
+<<reference/float-variable-source.html,FloatVariableSource>> _FloatValue_::
 
 ### Public Properties
 
@@ -30,8 +32,6 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
 
-### Protected Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

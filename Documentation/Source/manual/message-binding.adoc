@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/message.html,Message>> _Message_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Message	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/message-binding.html[Reference]

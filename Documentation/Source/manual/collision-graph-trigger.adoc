@@ -1,0 +1,17 @@
+[#manual/collision-graph-trigger]
+
+## Collision Graph Trigger
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Enter Graph	| 
+| Exit Graph	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/collision-graph-trigger.html[Reference]
+endif::[]

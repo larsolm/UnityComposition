@@ -1,0 +1,19 @@
+[#reference/binding-formatter-time-format-type]
+
+## TimeFormatType
+
+PiRhoSoft.CompositionEngine.TimeFormatType
+
+### Description
+
+### Values
+
+<<reference/binding-formatter-time-format-type.html,TimeFormatType>> _SecondsMilliseconds_::
+
+<<reference/binding-formatter-time-format-type.html,TimeFormatType>> _MinutesSeconds_::
+
+<<reference/binding-formatter-time-format-type.html,TimeFormatType>> _MinutesSecondsMilliseconds_::
+
+<<reference/binding-formatter-time-format-type.html,TimeFormatType>> _HoursMinutes_::
+
+<<reference/binding-formatter-time-format-type.html,TimeFormatType>> _Custom_::

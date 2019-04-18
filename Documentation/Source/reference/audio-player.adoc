@@ -1,0 +1,25 @@
+[#reference/audio-player]
+
+## AudioPlayer
+
+PiRhoSoft.CompositionEngine.AudioPlayer : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-completion-notifier.html,ICompletionNotifier>>
+
+### Description
+
+### Constructors
+
+AudioPlayer()::
+
+### Public Properties
+
+bool _IsComplete_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void PlaySound(https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^] _sound_, float _volume_)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] PlaySoundAndWait(https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^] _sound_, float _volume_)::
+
+### Protected Methods
+
+void Awake() _(virtual)_::

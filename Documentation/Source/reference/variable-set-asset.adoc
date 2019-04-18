@@ -1,0 +1,39 @@
+[#reference/variable-set-asset]
+
+## VariableSetAsset
+
+PiRhoSoft.CompositionEngine.VariableSetAsset : https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^], <<reference/i-schema-owner.html,ISchemaOwner>>, <<reference/i-variable-reset.html,IVariableReset>>, <<reference/i-variable-store.html,IVariableStore>>
+
+### Description
+
+### Constructors
+
+VariableSetAsset()::
+
+### Public Fields
+
+<<reference/variable-set.html,VariableSet>> _Variables_::
+
+### Public Properties
+
+<<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_ _(virtual)_::
+
+<<reference/mapped-variable-store.html,MappedVariableStore>> _Store_ _(read only)_::
+
+### Public Methods
+
+void SetupSchema() _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+
+void ResetTag(string _tag_) _(virtual)_::
+
+void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_) _(virtual)_::
+
+### Protected Methods
+
+void OnEnable() _(virtual)_::

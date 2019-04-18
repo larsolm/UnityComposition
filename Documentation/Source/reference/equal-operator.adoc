@@ -2,13 +2,17 @@
 
 ## EqualOperator
 
-PiRhoSoft.CompositionEngine.EqualOperator : <<reference/infix-operation.html,InfixOperation>>
+PiRhoSoft.CompositionEngine.EqualOperator : <<reference/comparison-operator.html,ComparisonOperator>>
 
 ### Description
 
 ### Constructors
 
 EqualOperator()::
+
+### Public Properties
+
+<<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 

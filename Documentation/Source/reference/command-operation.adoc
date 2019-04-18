@@ -8,18 +8,14 @@ PiRhoSoft.CompositionEngine.CommandOperation : <<reference/operation.html,Operat
 
 ### Constructors
 
-CommandOperation(string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_)::
-
-### Public Properties
-
-string _Name_ _(read only)_::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _Parameters_ _(read only)_::
+CommandOperation()::
 
 ### Public Methods
 
-void ToString(StringBuilder _builder_) _(virtual)_::
-
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
+void Parse(<<reference/expression-parser.html,ExpressionParser>> _parser_, <<reference/expression-token.html,ExpressionToken>> _token_) _(virtual)_::
 
 <<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::
+
+void ToString(StringBuilder _builder_) _(virtual)_::
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::

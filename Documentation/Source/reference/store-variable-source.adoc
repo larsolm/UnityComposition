@@ -1,0 +1,11 @@
+[#reference/store-variable-source]
+
+## StoreVariableSource
+
+PiRhoSoft.CompositionEngine.StoreVariableSource : <<reference/variable-source-1.html,VariableSource>><<<reference/i-variable-store.html,IVariableStore>>>
+
+### Description
+
+### Constructors
+
+StoreVariableSource()::

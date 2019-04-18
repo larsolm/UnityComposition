@@ -1,0 +1,16 @@
+[#manual/input-node]
+
+## Input Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Buttons	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/input-node.html[Reference]
+endif::[]

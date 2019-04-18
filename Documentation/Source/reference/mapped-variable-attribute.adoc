@@ -1,0 +1,19 @@
+[#reference/mapped-variable-attribute]
+
+## MappedVariableAttribute
+
+PiRhoSoft.CompositionEngine.MappedVariableAttribute : Attribute
+
+### Description
+
+### Constructors
+
+MappedVariableAttribute()::
+
+MappedVariableAttribute(bool _readable_, bool _writable_)::
+
+### Public Fields
+
+bool _Readable_::
+
+bool _Writable_::

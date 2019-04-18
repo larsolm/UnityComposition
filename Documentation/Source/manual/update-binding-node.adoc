@@ -4,11 +4,14 @@
 
 ### Fields
 
-<<manual/interface-reference.html,Interface Reference>> _Control_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-string _Group_::
-
-bool _Wait For Completion_::
+| Object	| 
+| Group	| 
+| Wait For Completion	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/update-binding-node.html[Reference]

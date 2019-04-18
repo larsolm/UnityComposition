@@ -1,0 +1,19 @@
+[#manual/material-animation]
+
+## Material Animation
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Auto Advance	| 
+| Progress	| 
+| Use Scaled Time	| 
+| Duration	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/material-animation.html[Reference]
+endif::[]

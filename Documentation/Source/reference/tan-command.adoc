@@ -2,7 +2,7 @@
 
 ## TanCommand
 
-PiRhoSoft.CompositionEngine.TanCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.TanCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

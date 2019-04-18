@@ -1,0 +1,18 @@
+[#manual/sort-node]
+
+## Sort Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| List	| 
+| Sort By Property	| 
+| Sort Conditions	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/sort-node.html[Reference]
+endif::[]

@@ -1,0 +1,16 @@
+[#manual/variable-link]
+
+## Variable Link
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Variables	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/variable-link.html[Reference]
+endif::[]

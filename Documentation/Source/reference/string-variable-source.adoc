@@ -11,7 +11,3 @@ PiRhoSoft.CompositionEngine.StringVariableSource : <<reference/variable-source-1
 StringVariableSource()::
 
 StringVariableSource(string _defaultValue_)::
-
-### Protected Methods
-
-bool TryGetValue(<<reference/variable-value.html,VariableValue>> _variable_, string _value_ _(out)_) _(virtual)_::

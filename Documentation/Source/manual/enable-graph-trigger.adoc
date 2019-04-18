@@ -1,0 +1,9 @@
+[#manual/enable-graph-trigger]
+
+## Enable Graph Trigger
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/enable-graph-trigger.html[Reference]
+endif::[]

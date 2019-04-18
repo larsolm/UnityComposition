@@ -1,0 +1,11 @@
+[#reference/tag-list]
+
+## TagList
+
+PiRhoSoft.CompositionEngine.TagList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<string>
+
+### Description
+
+### Constructors
+
+TagList()::

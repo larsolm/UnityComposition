@@ -1,0 +1,29 @@
+[#reference/material-animation]
+
+## MaterialAnimation
+
+PiRhoSoft.CompositionEngine.MaterialAnimation : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-completion-notifier.html,ICompletionNotifier>>
+
+### Description
+
+### Constructors
+
+MaterialAnimation()::
+
+### Public Fields
+
+bool _AutoAdvance_::
+
+float _Progress_::
+
+bool _UseScaledTime_::
+
+float _Duration_::
+
+### Public Properties
+
+bool _IsComplete_ _(read only)_ _(virtual)_::
+
+### Protected Methods
+
+void LateUpdate() _(virtual)_::

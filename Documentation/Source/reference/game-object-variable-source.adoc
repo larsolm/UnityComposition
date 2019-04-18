@@ -1,0 +1,11 @@
+[#reference/game-object-variable-source]
+
+## GameObjectVariableSource
+
+PiRhoSoft.CompositionEngine.GameObjectVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]>
+
+### Description
+
+### Constructors
+
+GameObjectVariableSource()::

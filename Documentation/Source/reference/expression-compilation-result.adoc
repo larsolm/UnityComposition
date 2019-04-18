@@ -2,12 +2,20 @@
 
 ## ExpressionCompilationResult
 
-PiRhoSoft.CompositionEngine.ExpressionCompilationResult : ValueType
+PiRhoSoft.CompositionEngine.ExpressionCompilationResult
 
 ### Description
+
+### Constructors
+
+ExpressionCompilationResult()::
 
 ### Public Fields
 
 bool _Success_::
+
+int _Location_::
+
+string _Token_::
 
 string _Message_::

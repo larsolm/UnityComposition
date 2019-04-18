@@ -1,0 +1,16 @@
+[#manual/time-scale-node]
+
+## Time Scale Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Time Scale	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/time-scale-node.html[Reference]
+endif::[]

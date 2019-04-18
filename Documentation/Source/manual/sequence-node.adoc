@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/instruction-graph-node-list.html,Instruction Graph Node List>> _Sequence_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Sequence	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/sequence-node.html[Reference]

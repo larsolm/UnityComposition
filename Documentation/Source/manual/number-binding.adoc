@@ -1,0 +1,17 @@
+[#manual/number-binding]
+
+## Number Binding
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Format	| 
+| Variable	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/number-binding.html[Reference]
+endif::[]

@@ -10,6 +10,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Bar Binding")]
 	public class BarBinding : VariableBinding
 	{
+		private const string _wrongTypeWarning = "(CBBBWT) Bar Binding '{0}' has an Image component with a type that is not 'Filled'";
+
 		[Tooltip("The variable holding the amount (numerator) the image should be filled")]
 		public VariableReference AmountVariable = new VariableReference();
 
@@ -31,6 +33,9 @@ namespace PiRhoSoft.CompositionEngine
 		void Awake()
 		{
 			_image = GetComponent<Image>();
+
+			if (_image.type != Image.Type.Filled)
+				Debug.LogFormat(this, _wrongTypeWarning, name);
 		}
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)

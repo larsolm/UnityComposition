@@ -10,36 +10,20 @@ PiRhoSoft.CompositionEngine.VariableList : <<reference/i-variable-list.html,IVar
 
 VariableList()::
 
+VariableList(int _count_)::
+
 ### Public Properties
 
-<<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-value.html,VariableValue>>> _Values_ _(read only)_::
 
-<<reference/i-variable-store.html,IVariableStore>> _Owner_ _(read only)_::
-
-bool _NeedsUpdate_ _(read only)_::
-
-int _VariableCount_ _(read only)_ _(virtual)_::
+int _Count_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 
-void LoadFrom(<<reference/variable-list.html,VariableList>> _variables_, string _availability_)::
+<<reference/variable-value.html,VariableValue>> GetVariable(int _index_) _(virtual)_::
 
-void SaveTo(<<reference/variable-list.html,VariableList>> _variables_, string _availability_)::
+<<reference/set-variable-result.html,SetVariableResult>> AddVariable(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
-void Setup(<<reference/variable-schema.html,VariableSchema>> _schema_, <<reference/i-variable-store.html,IVariableStore>> _owner_)::
+<<reference/set-variable-result.html,SetVariableResult>> RemoveVariable(int _index_) _(virtual)_::
 
-void Update()::
-
-void Reset(int _index_)::
-
-void Reset(string _availability_)::
-
-void Reset(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_)::
-
-void Clear()::
-
-string GetVariableName(int _index_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(virtual)_::
-
-<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::

@@ -2,15 +2,9 @@
 
 ## ImageBinding
 
-PiRhoSoft.CompositionEngine.ImageBinding : <<reference/interface-binding.html,InterfaceBinding>>
+PiRhoSoft.CompositionEngine.ImageBinding : <<reference/variable-binding.html,VariableBinding>>
 
 ### Description
-
-### Static Fields
-
-string __invalidVariableError_::
-
-string __missingVariableError_::
 
 ### Constructors
 
@@ -20,6 +14,10 @@ ImageBinding()::
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
-### Public Methods
+### Public Properties
+
+https://docs.unity3d.com/ScriptReference/Image.html[Image^] _Image_ _(read only)_::
+
+### Protected Methods
 
 void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

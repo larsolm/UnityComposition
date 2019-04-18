@@ -1,0 +1,31 @@
+[#reference/animation-player]
+
+## AnimationPlayer
+
+PiRhoSoft.CompositionEngine.AnimationPlayer : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-completion-notifier.html,ICompletionNotifier>>
+
+### Description
+
+### Constructors
+
+AnimationPlayer()::
+
+### Public Properties
+
+bool _IsComplete_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void PlayAnimation(https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] _animation_)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] PlayAnimationAndWait(https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] _animation_)::
+
+void Pause()::
+
+void Unpause()::
+
+### Protected Methods
+
+void Awake() _(virtual)_::
+
+void OnDestroy() _(virtual)_::

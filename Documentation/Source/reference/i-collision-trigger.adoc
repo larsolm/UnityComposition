@@ -1,0 +1,13 @@
+[#reference/i-collision-trigger]
+
+## ICollisionTrigger
+
+PiRhoSoft.CompositionEngine.ICollisionTrigger
+
+### Description
+
+### Public Methods
+
+void Enter() _(abstract)_::
+
+void Exit() _(abstract)_::

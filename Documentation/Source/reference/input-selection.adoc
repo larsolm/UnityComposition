@@ -1,0 +1,71 @@
+[#reference/input-selection]
+
+## InputSelection
+
+PiRhoSoft.CompositionEngine.InputSelection : <<reference/selection-control.html,SelectionControl>>
+
+### Description
+
+### Constructors
+
+InputSelection()::
+
+### Public Fields
+
+string _HorizontalAxis_::
+
+string _VerticalAxis_::
+
+string _AcceptButton_::
+
+string _CancelButton_::
+
+bool _VerticalWrapping_::
+
+bool _HorizontalWrapping_::
+
+<<reference/primary-axis.html,PrimaryAxis>> _PrimaryAxis_::
+
+int _ColumnCount_::
+
+int _RowCount_::
+
+### Protected Fields
+
+int __columnCount_::
+
+int __rowCount_::
+
+int __columnIndex_::
+
+int __rowIndex_::
+
+### Protected Methods
+
+void OnCreate() _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::
+
+<<reference/selection-control-menu-item.html,MenuItem>> GetItem(int _column_, int _row_)::
+
+void MoveFocusUp(int _amount_) _(virtual)_::
+
+void MoveFocusDown(int _amount_) _(virtual)_::
+
+void MoveFocusLeft(int _amount_) _(virtual)_::
+
+void MoveFocusRight(int _amount_) _(virtual)_::
+
+bool MoveFocusToStart() _(virtual)_::
+
+bool MoveFocusToEnd() _(virtual)_::
+
+bool MoveFocusToTop() _(virtual)_::
+
+bool MoveFocusToBottom() _(virtual)_::
+
+bool MoveFocusToLeft() _(virtual)_::
+
+bool MoveFocusToRight() _(virtual)_::
+
+bool MoveFocusToLocation(int _column_, int _row_)::

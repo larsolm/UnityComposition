@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/expression.html,Expression>> _Expression_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Expression	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/expression-node.html[Reference]

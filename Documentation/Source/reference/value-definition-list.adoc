@@ -1,0 +1,11 @@
+[#reference/value-definition-list]
+
+## ValueDefinitionList
+
+PiRhoSoft.CompositionEngine.ValueDefinitionList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/value-definition.html,ValueDefinition>>>
+
+### Description
+
+### Constructors
+
+ValueDefinitionList()::

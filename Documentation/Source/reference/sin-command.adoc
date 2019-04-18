@@ -2,7 +2,7 @@
 
 ## SinCommand
 
-PiRhoSoft.CompositionEngine.SinCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.SinCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

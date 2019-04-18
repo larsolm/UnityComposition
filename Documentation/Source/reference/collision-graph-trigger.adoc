@@ -1,0 +1,23 @@
+[#reference/collision-graph-trigger]
+
+## CollisionGraphTrigger
+
+PiRhoSoft.CompositionEngine.CollisionGraphTrigger : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-collision-trigger.html,ICollisionTrigger>>
+
+### Description
+
+### Constructors
+
+CollisionGraphTrigger()::
+
+### Public Fields
+
+<<reference/instruction-caller.html,InstructionCaller>> _EnterGraph_::
+
+<<reference/instruction-caller.html,InstructionCaller>> _ExitGraph_::
+
+### Public Methods
+
+void Enter() _(virtual)_::
+
+void Exit() _(virtual)_::

@@ -2,7 +2,7 @@
 
 ## ClampCommand
 
-PiRhoSoft.CompositionEngine.ClampCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.ClampCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

@@ -1,0 +1,17 @@
+[#manual/graph-trigger-binding]
+
+## Graph Trigger Binding
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Graph	| 
+| Variable	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/graph-trigger-binding.html[Reference]
+endif::[]

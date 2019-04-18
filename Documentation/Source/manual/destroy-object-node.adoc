@@ -2,7 +2,14 @@
 
 ## Destroy Object Node
 
+### Fields
 
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Target	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/destroy-object-node.html[Reference]

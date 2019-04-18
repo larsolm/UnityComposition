@@ -4,7 +4,13 @@
 
 ### Fields
 
-<<manual/string-variable-source.html,String Variable Source>> _State_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Animator	| 
+| State	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/play-animation-state.html[Reference]

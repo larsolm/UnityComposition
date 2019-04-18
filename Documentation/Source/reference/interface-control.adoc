@@ -16,8 +16,6 @@ InterfaceControl()::
 
 ### Public Properties
 
-<<reference/i-variable-store.html,IVariableStore>> _Variables_ _(read only)_::
-
 bool _IsActive_ _(read only)_::
 
 ### Public Methods
@@ -25,8 +23,6 @@ bool _IsActive_ _(read only)_::
 void Activate()::
 
 void Deactivate()::
-
-void UpdateBindings(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::
 
 ### Protected Methods
 

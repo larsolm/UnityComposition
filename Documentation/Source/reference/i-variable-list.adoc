@@ -8,12 +8,14 @@ PiRhoSoft.CompositionEngine.IVariableList
 
 ### Public Properties
 
-int _VariableCount_ _(read only)_ _(abstract)_::
+int _Count_ _(read only)_ _(abstract)_::
 
 ### Public Methods
 
-string GetVariableName(int _index_) _(abstract)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(int _index_) _(abstract)_::
 
-<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(abstract)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
 
-<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
+<<reference/set-variable-result.html,SetVariableResult>> AddVariable(<<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> RemoveVariable(int _index_) _(abstract)_::

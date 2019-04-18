@@ -6,6 +6,24 @@ PiRhoSoft.CompositionEngine.CommandEvaluationException : Exception
 
 ### Description
 
+### Static Methods
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterCount(string _commandName_, int _got_, int _expected_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterCount(string _commandName_, int _got_, int _expected1_, int _expected2_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterRange(string _commandName_, int _got_, int _expectedMinimum_, int _expectedMaximum_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> TooFewParameters(string _commandName_, int _got_, int _expected_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> TooManyParameters(string _commandName_, int _got_, int _expected_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(string _commandName_, int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>> _expected_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(string _commandName_, int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>> _expected1_, <<reference/variable-type.html,VariableType>> _expected2_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(string _commandName_, int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>>[] _expected_)::
+
 ### Constructors
 
 CommandEvaluationException(string _command_, string _error_)::
