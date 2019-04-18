@@ -1,9 +1,44 @@
-﻿using System.Collections.Generic;
-using System.Linq;
+﻿using PiRhoSoft.UtilityEngine;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
+	[Serializable]
+	public class MenuItemTemplate
+	{
+		public enum ObjectSource
+		{
+			Scene,
+			Asset
+		}
+
+		[Tooltip("The variable representing the store to use for bindings")]
+		public VariableReference Variables = new VariableReference();
+
+		[Tooltip("The location to retrieve the object from")]
+		public ObjectSource Source;
+
+		[Tooltip("The name of the object in the scene to associate with this Item")]
+		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Scene)]
+		public string Name;
+
+		[Tooltip("The prefab to instantiate when showing this item on a SelectionControl")]
+		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		public MenuItem Template;
+
+		[Tooltip("The label used to identify the item")]
+		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		public string Label;
+
+		[Tooltip("If Variables is a List and this is set, this selection will be duplicated for each of the items in the list")]
+		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		public bool Expand = false;
+
+		public string Id => Source == ObjectSource.Scene ? Name : Label;
+	}
+
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "menu-item")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu Item")]
@@ -11,9 +46,14 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public string ItemName = "item";
 
-		public int Index { get => _data.Index; set => _data.Index = value; }
-		public string Label { get => _data.Label; set => _data.Label = value; }
-		public bool Focused { get => _data.Focused; set => _data.Focused = value; }
+		public int Index { get => _data.Index; internal set => _data.Index = value; }
+		public int Column { get => _data.Column; internal set => _data.Column = value; }
+		public int Row { get => _data.Row; internal set => _data.Row = value; }
+		public string Label { get => _data.Label; internal set => _data.Label = value; }
+		public bool Focused { get => _data.Focused; internal set => _data.Focused = value; }
+
+		public MenuItemTemplate Template { get; private set; }
+		public bool Generated { get; private set; }
 
 		private Menu _parent;
 		private Data _data = new Data();
@@ -34,6 +74,12 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (_parent)
 				_parent.RemoveItem(this);
+		}
+
+		public void Setup(MenuItemTemplate template, bool generated)
+		{
+			Template = template;
+			Generated = generated;
 		}
 
 		public void Move(int index)
@@ -65,6 +111,8 @@ namespace PiRhoSoft.CompositionEngine
 		private class Data : IVariableStore
 		{
 			public int Index;
+			public int Column;
+			public int Row;
 			public string Label;
 			public bool Focused;
 
@@ -80,6 +128,8 @@ namespace PiRhoSoft.CompositionEngine
 				switch (name)
 				{
 					case nameof(Index): return VariableValue.Create(Index);
+					case nameof(Column): return VariableValue.Create(Column);
+					case nameof(Row): return VariableValue.Create(Row);
 					case nameof(Label): return VariableValue.Create(Label);
 					case nameof(Focused): return VariableValue.Create(Focused);
 					default: return VariableValue.Empty;

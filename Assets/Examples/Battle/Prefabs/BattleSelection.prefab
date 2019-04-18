@@ -104,7 +104,6 @@ GameObject:
   - component: {fileID: 9033734835384948173}
   - component: {fileID: 9033734835384948178}
   - component: {fileID: 9033734835384948175}
-  - component: {fileID: 9033734835384948172}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -275,18 +274,6 @@ MonoBehaviour:
       Text: Item
     - Type: 0
       Text: Label
---- !u!114 &9033734835384948172
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033734835384948176}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab19296c7b087d4fb255e2432e5bd5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &9033734836098780785
 GameObject:
   m_ObjectHideFlags: 0
@@ -297,8 +284,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9033734836098780784}
   - component: {fileID: 9033734836098780787}
-  - component: {fileID: 1824606653288460154}
-  - component: {fileID: 1757150618376853619}
+  - component: {fileID: 6679602720640942256}
   m_Layer: 5
   m_Name: BattleSelection
   m_TagString: Untagged
@@ -350,7 +336,7 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 0
   m_ChildControlHeight: 0
---- !u!114 &1824606653288460154
+--- !u!114 &6679602720640942256
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -359,19 +345,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 9033734836098780785}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9348dc783052e141874f524ecc2f92c, type: 3}
+  m_Script: {fileID: 11500000, guid: dc429dfa5555e624494c6b603344f1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Item
---- !u!114 &1757150618376853619
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9033734836098780785}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c26bd231adc3b4e971d4df77b62de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Name: Value
+  ItemName: Item

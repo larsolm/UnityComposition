@@ -4,6 +4,12 @@ using UnityEngine.UI;
 
 namespace PiRhoSoft.CompositionEngine
 {
+	public enum PrimaryAxis
+	{
+		Column,
+		Row
+	}
+
 	public enum MenuInputPointerAction
 	{
 		None,
@@ -68,8 +74,6 @@ namespace PiRhoSoft.CompositionEngine
 		private bool _shouldFocus;
 		private int _rowCount;
 		private int _columnCount;
-		private int _rowIndex = -1;
-		private int _columnIndex = -1;
 
 		private Menu _menu;
 
@@ -85,37 +89,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		void Update()
 		{
-			if (_menu.FocusedItem != null)
-			{
-				var left = !string.IsNullOrEmpty(HorizontalAxis) ? InputHelper.GetWasAxisPressed(HorizontalAxis, -0.25f) : false;
-				var right = !string.IsNullOrEmpty(HorizontalAxis) ? InputHelper.GetWasAxisPressed(HorizontalAxis, 0.25f) : false;
-				var up = !string.IsNullOrEmpty(VerticalAxis) ? InputHelper.GetWasAxisPressed(VerticalAxis, 0.25f) : false;
-				var down = !string.IsNullOrEmpty(VerticalAxis) ? InputHelper.GetWasAxisPressed(VerticalAxis, -0.25f) : false;
-				var select = !string.IsNullOrEmpty(SelectButton) ? InputHelper.GetWasButtonPressed(SelectButton) : false;
-				var cancel = !string.IsNullOrEmpty(CancelButton) ? InputHelper.GetWasButtonPressed(CancelButton) : false;
-
-				if (left) MoveFocusLeft(1);
-				else if (right) MoveFocusRight(1);
-				else if (up) MoveFocusUp(1);
-				else if (down) MoveFocusDown(1);
-				else if (select) _menu.SelectItem(_menu.FocusedItem);
-				else if (cancel) _menu.Cancel();
-			}
-
-			switch (HoverAction)
-			{
-				case MenuInputPointerAction.Focus: FocusWithMouse(); break;
-				case MenuInputPointerAction.Select: SelectWithMouse(); break;
-			}
-
-			if (InputHelper.GetWasPointerPressed())
-			{
-				switch (ClickAction)
-				{
-					case MenuInputPointerAction.Focus: FocusWithMouse(); break;
-					case MenuInputPointerAction.Select: SelectWithMouse(); break;
-				}
-			}
+			HandleButtons();
+			HandlePointer();
 		}
 
 		#region Items
@@ -139,6 +114,44 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Input
 
+		private void HandleButtons()
+		{
+			if (_menu.FocusedItem != null)
+			{
+				var left = !string.IsNullOrEmpty(HorizontalAxis) ? InputHelper.GetWasAxisPressed(HorizontalAxis, -0.25f) : false;
+				var right = !string.IsNullOrEmpty(HorizontalAxis) ? InputHelper.GetWasAxisPressed(HorizontalAxis, 0.25f) : false;
+				var up = !string.IsNullOrEmpty(VerticalAxis) ? InputHelper.GetWasAxisPressed(VerticalAxis, 0.25f) : false;
+				var down = !string.IsNullOrEmpty(VerticalAxis) ? InputHelper.GetWasAxisPressed(VerticalAxis, -0.25f) : false;
+				var select = !string.IsNullOrEmpty(SelectButton) ? InputHelper.GetWasButtonPressed(SelectButton) : false;
+				var cancel = !string.IsNullOrEmpty(CancelButton) ? InputHelper.GetWasButtonPressed(CancelButton) : false;
+
+				if (left) MoveFocusLeft(1);
+				else if (right) MoveFocusRight(1);
+				else if (up) MoveFocusUp(1);
+				else if (down) MoveFocusDown(1);
+				else if (select) _menu.SelectItem(_menu.FocusedItem);
+				else if (cancel) _menu.Cancel();
+			}
+		}
+
+		private void HandlePointer()
+		{
+			switch (HoverAction)
+			{
+				case MenuInputPointerAction.Focus: FocusWithMouse(); break;
+				case MenuInputPointerAction.Select: SelectWithMouse(); break;
+			}
+
+			if (InputHelper.GetWasPointerPressed())
+			{
+				switch (ClickAction)
+				{
+					case MenuInputPointerAction.Focus: FocusWithMouse(); break;
+					case MenuInputPointerAction.Select: SelectWithMouse(); break;
+				}
+			}
+		}
+
 		private void FocusWithMouse()
 		{
 			var rect = (transform as RectTransform);
@@ -146,10 +159,10 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (rect.rect.Contains(local))
 			{
-				var item = GetItem(local, out var column, out var row);
+				var item = GetItem(local);
 				if (item != null)
 				{
-					ChangeFocus(column, row);
+					ChangeFocus(item.Column, item.Row);
 
 					if (NextLeft) NextLeft.Leave();
 					if (NextRight) NextRight.Leave();
@@ -166,7 +179,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (rect.rect.Contains(local))
 			{
-				var item = GetItem(local, out var column, out var row);
+				var item = GetItem(local);
 				if (item != null)
 					_menu.SelectItem(item);
 			}
@@ -176,36 +189,56 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Focus
 
-		private void EnterLeft(int fromRow)
+		public void EnterFromBeginning()
 		{
-			_columnIndex = 0;
-			_rowIndex = fromRow;
-
-			MoveFocusUp(0);
+			if (_menu.Items.Count > 0)
+				ChangeFocus(_menu.Items[0]);
 		}
 
-		private void EnterRight(int fromRow)
+		public void EnterFromEnd()
 		{
-			_columnIndex = _columnCount - 1;
-			_rowIndex = fromRow;
-
-			MoveFocusUp(0);
+			if (_menu.Items.Count > 0)
+				ChangeFocus(_menu.Items[_menu.Items.Count - 1]);
 		}
 
-		private void EnterTop(int fromColumn)
+		public void EnterFromLeft(int fromRow)
 		{
-			_columnIndex = fromColumn;
-			_rowIndex = 0;
+			var item = GetItem(0, fromRow);
 
-			MoveFocusLeft(0);
+			if (item != null)
+				ChangeFocus(item);
+			else
+				EnterFromEnd();
 		}
 
-		private void EnterBottom(int fromColumn)
+		public void EnterFromRight(int fromRow)
 		{
-			_columnIndex = fromColumn;
-			_rowIndex = _rowCount - 1;
+			var item = GetItem(_columnCount - 1, fromRow);
 
-			MoveFocusLeft(0);
+			if (item != null)
+				ChangeFocus(item);
+			else
+				EnterFromEnd();
+		}
+
+		public void EnterFromTop(int fromColumn)
+		{
+			var item = GetItem(fromColumn, 0);
+
+			if (item != null)
+				ChangeFocus(item);
+			else
+				EnterFromEnd();
+		}
+
+		public void EnterFromBottom(int fromColumn)
+		{
+			var item = GetItem(fromColumn, _rowCount - 1);
+
+			if (item != null)
+				ChangeFocus(item);
+			else
+				EnterFromEnd();
 		}
 
 		public void Leave()
@@ -215,64 +248,80 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void MoveFocusUp(int amount)
 		{
-			if (!ChangeFocus(_columnIndex, _rowIndex - amount))
+			if (_menu.FocusedItem == null)
 			{
-				if (_rowIndex > amount)
+				EnterFromEnd();
+			}
+			else if (!ChangeFocus(_menu.FocusedItem.Column, _menu.FocusedItem.Row - amount))
+			{
+				if (_menu.FocusedItem.Row > amount)
 				{
 					MoveFocusUp(amount + 1);
 				}
 				else if (NextUp && NextUp._menu.Items.Count > 0)
 				{
+					NextUp.EnterFromBottom(_menu.FocusedItem.Column);
 					Leave();
-					NextUp.EnterBottom(_columnIndex);
 				}
 			}
 		}
 
 		public void MoveFocusDown(int amount)
 		{
-			if (!ChangeFocus(_columnIndex, _rowIndex + amount))
+			if (_menu.FocusedItem == null)
 			{
-				if (_rowIndex < (_rowCount - amount))
+				EnterFromBeginning();
+			}
+			else if (!ChangeFocus(_menu.FocusedItem.Column, _menu.FocusedItem.Row + amount))
+			{
+				if (_menu.FocusedItem.Row < (_rowCount - amount))
 				{
 					MoveFocusDown(amount + 1);
 				}
 				else if (NextDown && NextDown._menu.Items.Count > 0)
 				{
+					NextDown.EnterFromTop(_menu.FocusedItem.Column);
 					Leave();
-					NextDown.EnterTop(_columnIndex);
 				}
 			}
 		}
 
 		private void MoveFocusLeft(int amount)
 		{
-			if (!ChangeFocus(_columnIndex - amount, _rowIndex))
+			if (_menu.FocusedItem == null)
 			{
-				if (_columnIndex > amount)
+				EnterFromEnd();
+			}
+			else if (!ChangeFocus(_menu.FocusedItem.Column - amount, _menu.FocusedItem.Row))
+			{
+				if (_menu.FocusedItem.Column > amount)
 				{
 					MoveFocusLeft(amount + 1);
 				}
 				else if (NextLeft && NextLeft._menu.Items.Count > 0)
 				{
+					NextLeft.EnterFromRight(_menu.FocusedItem.Row);
 					Leave();
-					NextLeft.EnterRight(_rowIndex);
 				}
 			}
 		}
 
 		private void MoveFocusRight(int amount)
 		{
-			if (!ChangeFocus(_columnIndex + amount, _rowIndex))
+			if (_menu.FocusedItem == null)
 			{
-				if (_columnIndex < (_columnCount - amount))
+				EnterFromBeginning();
+			}
+			else if (!ChangeFocus(_menu.FocusedItem.Column + amount, _menu.FocusedItem.Row))
+			{
+				if (_menu.FocusedItem.Column < (_columnCount - amount))
 				{
 					MoveFocusRight(amount + 1);
 				}
 				else if (NextRight && NextRight._menu.Items.Count > 0)
 				{
+					NextRight.EnterFromLeft(_menu.FocusedItem.Row);
 					Leave();
-					NextRight.EnterLeft(_rowIndex);
 				}
 			}
 		}
@@ -289,36 +338,36 @@ namespace PiRhoSoft.CompositionEngine
 
 		private bool MoveFocusToTop()
 		{
-			return ChangeFocus(_columnIndex, 0);
+			return ChangeFocus(_menu.FocusedItem.Column, 0);
 		}
 
 		private bool MoveFocusToBottom()
 		{
-			return ChangeFocus(_columnIndex, _rowCount - 1);
+			return ChangeFocus(_menu.FocusedItem.Column, _rowCount - 1);
 		}
 
 		private bool MoveFocusToLeft()
 		{
-			return ChangeFocus(0, _rowIndex);
+			return ChangeFocus(0, _menu.FocusedItem.Row);
 		}
 
 		private bool MoveFocusToRight()
 		{
-			return ChangeFocus(_columnCount - 1, _rowIndex);
+			return ChangeFocus(_columnCount - 1, _menu.FocusedItem.Row);
 		}
 
 		private bool ChangeFocus(int column, int row)
 		{
 			var item = GetItem(column, row);
+			return ChangeFocus(item);
+		}
 
+		private bool ChangeFocus(MenuItem item)
+		{
 			if (item != null && item.enabled)
 			{
-				_columnIndex = column;
-				_rowIndex = row;
 				_menu.SetFocusedItem(item);
-
 				ScrollToItem(item);
-
 				return true;
 			}
 
@@ -340,6 +389,19 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				_rowCount = RowCount;
 				_columnCount = Mathf.CeilToInt(_menu.Items.Count / (float)_rowCount);
+			}
+
+			for (var column = 0; column < _columnCount; column++)
+			{
+				for (var row = 0; row < _rowCount; row++)
+				{
+					var item = GetItem(column, row);
+					if (item)
+					{
+						item.Column = column;
+						item.Row = row;
+					}
+				}
 			}
 
 			if (_shouldFocus && _menu.Items.Count > 0)
@@ -366,11 +428,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public MenuItem GetItem(Vector2 position, out int column, out int row)
+		public MenuItem GetItem(Vector2 position)
 		{
-			for (column = 0; column < _columnCount; column++)
+			for (var column = 0; column < _columnCount; column++)
 			{
-				for (row = 0; row < _rowCount; row++)
+				for (var row = 0; row < _rowCount; row++)
 				{
 					var item = GetItem(column, row);
 
@@ -382,7 +444,6 @@ namespace PiRhoSoft.CompositionEngine
 				}
 			}
 
-			row = 0;
 			return null;
 		}
 
@@ -391,7 +452,7 @@ namespace PiRhoSoft.CompositionEngine
 			var itemRect = item.transform as RectTransform;
 			var scroller = item.GetComponentInParent<ScrollRect>();
 
-			if (scroller.horizontal)
+			if (scroller && scroller.horizontal)
 			{
 				var left = itemRect.offsetMin.x - ScrollPadding;
 				var right = itemRect.offsetMax.x + ScrollPadding;
@@ -399,7 +460,7 @@ namespace PiRhoSoft.CompositionEngine
 				scroller.horizontalNormalizedPosition = GetScrollPosition(scroller.horizontalNormalizedPosition, left, right, scroller.content.rect.width, scroller.viewport.rect.width);
 			}
 
-			if (scroller.vertical)
+			if (scroller && scroller.vertical)
 			{
 				var top = itemRect.offsetMin.y - ScrollPadding;
 				var bottom = itemRect.offsetMax.y + ScrollPadding;
