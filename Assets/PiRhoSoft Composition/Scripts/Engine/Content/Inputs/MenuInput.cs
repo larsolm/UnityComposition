@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.UtilityEngine;
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -455,10 +456,10 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (scroller && scroller.vertical)
 			{
-				var top = itemRect.offsetMin.y - ScrollPadding;
-				var bottom = itemRect.offsetMax.y + ScrollPadding;
+				var bottom = Math.Abs(itemRect.offsetMin.y - ScrollPadding);
+				var top = Math.Abs(itemRect.offsetMax.y + ScrollPadding);
 
-				scroller.verticalNormalizedPosition = GetScrollPosition(scroller.verticalNormalizedPosition, top, bottom, scroller.content.rect.height, scroller.viewport.rect.height);
+				scroller.verticalNormalizedPosition = 1.0f - GetScrollPosition(1.0f - scroller.verticalNormalizedPosition, top, bottom, scroller.content.rect.height, scroller.viewport.rect.height);
 			}
 		}
 
