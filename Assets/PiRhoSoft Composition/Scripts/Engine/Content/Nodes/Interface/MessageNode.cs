@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var text = Message.GetText(variables);
+			var text = Message.GetText(variables, false);
 
 			if (ResolveObject(variables, Control, out MessageControl message))
 				yield return Show(message, text);

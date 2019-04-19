@@ -466,9 +466,7 @@ MonoBehaviour:
   AutoHide: 0
   WaitTime: 0
   Message:
-    Text: 'Select a piece
-
-      to move 6 or free'
+    Text: Select a piece to move 6 or free
 --- !u!114 &114452511902477958
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -626,9 +624,7 @@ MonoBehaviour:
   AutoHide: 0
   WaitTime: 0
   Message:
-    Text: 'No pieces can
-
-      move!'
+    Text: No pieces can move!
 --- !u!114 &114507340405130716
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -656,7 +652,7 @@ MonoBehaviour:
   AutoHide: 0
   WaitTime: 0
   Message:
-    Text: "Select a piece \nto move {global.Roll} {rollDisplay}"
+    Text: Select a piece to move {global.Roll} {rollDisplay}
 --- !u!114 &114525640525504800
 MonoBehaviour:
   m_ObjectHideFlags: 1

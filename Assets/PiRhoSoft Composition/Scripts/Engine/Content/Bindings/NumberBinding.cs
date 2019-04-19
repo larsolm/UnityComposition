@@ -1,54 +1,33 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[DisallowMultipleComponent]
-	[RequireComponent(typeof(TextMeshProUGUI))]
 	[HelpURL(Composition.DocumentationUrl + "number-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Number Binding")]
-	public class NumberBinding : VariableBinding
+	public class NumberBinding : StringBinding
 	{
-		private const string _invalidTextWarning = "(CIBNBIT) Unable to animate text for number binding {0}: the displayed text is not an int";
+		private const string _missingVariableWarning = "(CBNBMV) Unable to bind text for number binding '{0}': the variable '{1}' could not be found";
+		private const string _invalidVariableWarning = "(CBNBIV) Unable to bind text for number binding '{0}': the variable '{1}' is not an int or a float";
 
 		public BindingFormatter Format;
 
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
 
-		private TextMeshProUGUI _text;
-
-		public TextMeshProUGUI Text
-		{
-			get
-			{
-				// can't look up in awake because it's possible to update bindings before the component is enabled
-
-				if (!_text)
-					_text = GetComponent<TextMeshProUGUI>();
-
-				return _text;
-			}
-		}
-
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			var value = Variable.GetValue(variables);
+			var enabled = value.HasNumber;
+			var text = string.Empty;
 
-			if (value.Type == VariableType.Int)
-			{
-				Text.enabled = true;
-				Text.text = Format.GetFormattedString(value.Int);
-			}
-			else if (value.Type == VariableType.Float)
-			{
-				Text.enabled = true;
-				Text.text = Format.GetFormattedString(value.Float);
-			}
-			else
-			{
-				Text.enabled = false;
-			}
+			if (value.TryGetInt(out var intValue))
+				text = Format.GetFormattedString(value.Int);
+			else if (value.TryGetFloat(out var floatValue))
+				text = Format.GetFormattedString(value.Float);
+			else if (!SuppressErrors)
+				Debug.LogWarningFormat(this, value.IsEmpty ? _missingVariableWarning : _invalidVariableWarning, name, Variable);
+
+			SetText(text, enabled);
 		}
 	}
 }

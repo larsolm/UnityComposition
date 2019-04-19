@@ -15,7 +15,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			var text = Message.GetText(variables);
+			var text = Message.GetText(variables, false);
 			Debug.Log(text);
 			graph.GoTo(Next, nameof(Next));
 			yield break;

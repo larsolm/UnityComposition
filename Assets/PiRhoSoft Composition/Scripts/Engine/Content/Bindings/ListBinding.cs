@@ -8,6 +8,10 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/List Binding")]
 	public class ListBinding : VariableBinding
 	{
+		private const string _missingTemplateWarning = "(CBLBMT) Unable to create list for list binding '{0}': the object template was null";
+		private const string _missingVariableWarning = "(CBLBMV) Unable to create list for list binding '{0}': the variable '{1}' could not be found";
+		private const string _invalidVariableWarning = "(CBLBIV) Unable to create list for list binding '{0}': the variable '{1}' is not a color";
+
 		[Tooltip("The variable holding the list of items to show on this object")]
 		public VariableReference Variable = new VariableReference();
 		
@@ -45,6 +49,14 @@ namespace PiRhoSoft.CompositionEngine
 						SetItem(i, item);
 					}
 				}
+				else if (!SuppressErrors)
+				{
+					Debug.LogWarningFormat(this, value.IsEmpty ? _missingVariableWarning : _invalidVariableWarning, name, Variable);
+				}
+			}
+			else
+			{
+				Debug.LogWarningFormat(this, _missingTemplateWarning, name);
 			}
 
 			foreach (var item in _items)

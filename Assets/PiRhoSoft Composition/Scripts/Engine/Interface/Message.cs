@@ -8,6 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class Message
 	{
+		private const string _missingVariableWarning = "(CIMMV) Unable to set text on message '{0}': the variable '{1}' could not be found";
 		private static VariableReference _temporaryReference = new VariableReference();
 		private static StringBuilder _temporaryBuilder = new StringBuilder();
 
@@ -44,14 +45,14 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public string GetText(IVariableStore variables)
+		public string GetText(IVariableStore variables, bool suppressErrors)
 		{
 			_temporaryBuilder.Clear();
-			Append(variables, Text, _temporaryBuilder);
+			Append(variables, Text, _temporaryBuilder, suppressErrors);
 			return _temporaryBuilder.ToString();
 		}
 
-		private void Append(IVariableStore variables, string input, StringBuilder output)
+		private void Append(IVariableStore variables, string input, StringBuilder output, bool suppressErrors)
 		{
 			var start = 0;
 
@@ -78,7 +79,11 @@ namespace PiRhoSoft.CompositionEngine
 					_temporaryReference.Variable = input.Substring(open + 1, close - open - 1);
 
 					var value = _temporaryReference.GetValue(variables);
-					Append(variables, value.ToString(), output);
+
+					if (!suppressErrors && value.IsEmpty)
+						Debug.LogWarningFormat(_missingVariableWarning, input, _temporaryReference.Variable);
+
+					Append(variables, value.ToString(), output, suppressErrors);
 					start = close + 1;
 				}
 			}
