@@ -2,9 +2,9 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[HelpURL(Composition.DocumentationUrl + "focus-binding")]
-	[AddComponentMenu("PiRho Soft/Bindings/Focus Binding")]
-	public class FocusBinding : BindingRoot
+	[HelpURL(Composition.DocumentationUrl + "focus-binding-root")]
+	[AddComponentMenu("PiRho Soft/Bindings/Focus Binding Root")]
+	public class FocusBindingRoot : BindingRoot
 	{
 		[Tooltip("The Menu whose focused item to use for binding variables")]
 		public Menu Menu;
