@@ -224,11 +224,15 @@ include::reference/cos-command.adoc[]
 
 <<<
 
+include::reference/create-game-object-node.adoc[]
+
+<<<
+
 include::reference/create-instruction-graph-node-menu-attribute.adoc[]
 
 <<<
 
-include::reference/create-object-node.adoc[]
+include::reference/create-scriptable-object-node.adoc[]
 
 <<<
 
@@ -372,7 +376,7 @@ include::reference/floor-command.adoc[]
 
 <<<
 
-include::reference/focus-binding.adoc[]
+include::reference/focus-binding-root.adoc[]
 
 <<<
 
@@ -436,6 +440,10 @@ include::reference/image-binding.adoc[]
 
 <<<
 
+include::reference/image-color-binding.adoc[]
+
+<<<
+
 include::reference/i-mapped-variable-list.adoc[]
 
 <<<
@@ -465,10 +473,6 @@ include::reference/input-node-button.adoc[]
 <<<
 
 include::reference/input-node-button-list.adoc[]
-
-<<<
-
-include::reference/input-selection.adoc[]
 
 <<<
 
@@ -652,6 +656,10 @@ include::reference/log-command.adoc[]
 
 <<<
 
+include::reference/log-node.adoc[]
+
+<<<
+
 include::reference/lookup-operator.adoc[]
 
 <<<
@@ -688,7 +696,15 @@ include::reference/menu-input.adoc[]
 
 <<<
 
+include::reference/menu-input-pointer-action.adoc[]
+
+<<<
+
 include::reference/menu-item.adoc[]
+
+<<<
+
+include::reference/menu-item-template.adoc[]
 
 <<<
 
@@ -768,11 +784,11 @@ include::reference/play-effect-object-positioning.adoc[]
 
 <<<
 
-include::reference/create-object-node-object-positioning.adoc[]
+include::reference/create-game-object-node-object-positioning.adoc[]
 
 <<<
 
-include::reference/selection-item-object-source.adoc[]
+include::reference/menu-item-template-object-source.adoc[]
 
 <<<
 
@@ -952,19 +968,7 @@ include::reference/scoped-graph.adoc[]
 
 <<<
 
-include::reference/scroll-selection.adoc[]
-
-<<<
-
-include::reference/selection-binding.adoc[]
-
-<<<
-
 include::reference/selection-control.adoc[]
-
-<<<
-
-include::reference/selection-item.adoc[]
 
 <<<
 
@@ -1061,6 +1065,10 @@ include::reference/store-variable-handler.adoc[]
 <<<
 
 include::reference/store-variable-source.adoc[]
+
+<<<
+
+include::reference/string-binding.adoc[]
 
 <<<
 

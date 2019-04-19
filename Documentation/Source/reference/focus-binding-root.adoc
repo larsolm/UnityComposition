@@ -1,14 +1,14 @@
-[#reference/focus-binding]
+[#reference/focus-binding-root]
 
-## FocusBinding
+## FocusBindingRoot
 
-PiRhoSoft.CompositionEngine.FocusBinding : <<reference/binding-root.html,BindingRoot>>
+PiRhoSoft.CompositionEngine.FocusBindingRoot : <<reference/binding-root.html,BindingRoot>>
 
 ### Description
 
 ### Constructors
 
-FocusBinding()::
+FocusBindingRoot()::
 
 ### Public Fields
 

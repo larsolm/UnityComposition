@@ -1,18 +1,22 @@
-[#reference/text-binding]
+[#reference/image-color-binding]
 
-## TextBinding
+## ImageColorBinding
 
-PiRhoSoft.CompositionEngine.TextBinding : <<reference/string-binding.html,StringBinding>>
+PiRhoSoft.CompositionEngine.ImageColorBinding : <<reference/variable-binding.html,VariableBinding>>
 
 ### Description
 
 ### Constructors
 
-TextBinding()::
+ImageColorBinding()::
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
+
+### Public Properties
+
+https://docs.unity3d.com/ScriptReference/Image.html[Image^] _Sprite_ _(read only)_::
 
 ### Protected Methods
 

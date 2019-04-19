@@ -61,7 +61,8 @@
 					<li><a class='menu-link' href='manual/collision-notifier.html'>CollisionNotifier</a></li>
 					<li><a class='menu-link' href='manual/comment-node.html'>CommentNode</a></li>
 					<li><a class='menu-link' href='manual/conditional-node.html'>ConditionalNode</a></li>
-					<li><a class='menu-link' href='manual/create-object-node.html'>CreateObjectNode</a></li>
+					<li><a class='menu-link' href='manual/create-game-object-node.html'>CreateGameObjectNode</a></li>
+					<li><a class='menu-link' href='manual/create-scriptable-object-node.html'>CreateScriptableObjectNode</a></li>
 					<li><a class='menu-link' href='manual/cutoff.html'>Cutoff</a></li>
 					<li><a class='menu-link' href='manual/destroy-object-node.html'>DestroyObjectNode</a></li>
 					<li><a class='menu-link' href='manual/disable-behaviour-node.html'>DisableBehaviourNode</a></li>
@@ -74,22 +75,22 @@
 					<li><a class='menu-link' href='manual/expression-binding.html'>ExpressionBinding</a></li>
 					<li><a class='menu-link' href='manual/expression-node.html'>ExpressionNode</a></li>
 					<li><a class='menu-link' href='manual/fade.html'>Fade</a></li>
-					<li><a class='menu-link' href='manual/focus-binding.html'>FocusBinding</a></li>
+					<li><a class='menu-link' href='manual/focus-binding-root.html'>FocusBindingRoot</a></li>
 					<li><a class='menu-link' href='manual/get-property-node.html'>GetPropertyNode</a></li>
 					<li><a class='menu-link' href='manual/graph-trigger-binding.html'>GraphTriggerBinding</a></li>
 					<li><a class='menu-link' href='manual/hide-control-node.html'>HideControlNode</a></li>
 					<li><a class='menu-link' href='manual/image-binding.html'>ImageBinding</a></li>
+					<li><a class='menu-link' href='manual/image-color-binding.html'>ImageColorBinding</a></li>
 					<li><a class='menu-link' href='manual/input-message.html'>InputMessage</a></li>
 					<li><a class='menu-link' href='manual/input-node.html'>InputNode</a></li>
-					<li><a class='menu-link' href='manual/input-selection.html'>InputSelection</a></li>
 					<li><a class='menu-link' href='manual/instruction-node.html'>InstructionNode</a></li>
 					<li><a class='menu-link' href='manual/instruction-reference-node.html'>InstructionReferenceNode</a></li>
 					<li><a class='menu-link' href='manual/iterate-node.html'>IterateNode</a></li>
 					<li><a class='menu-link' href='manual/list-binding.html'>ListBinding</a></li>
 					<li><a class='menu-link' href='manual/load-scene-node.html'>LoadSceneNode</a></li>
+					<li><a class='menu-link' href='manual/log-node.html'>LogNode</a></li>
 					<li><a class='menu-link' href='manual/loop-node.html'>LoopNode</a></li>
 					<li><a class='menu-link' href='manual/menu-input.html'>MenuInput</a></li>
-					<li><a class='menu-link' href='manual/menu-item.html'>MenuItem</a></li>
 					<li><a class='menu-link' href='manual/message-binding.html'>MessageBinding</a></li>
 					<li><a class='menu-link' href='manual/message-control.html'>MessageControl</a></li>
 					<li><a class='menu-link' href='manual/message-node.html'>MessageNode</a></li>
@@ -107,8 +108,6 @@
 					<li><a class='menu-link' href='manual/reset-variables.html'>ResetVariables</a></li>
 					<li><a class='menu-link' href='manual/run-timeline.html'>RunTimeline</a></li>
 					<li><a class='menu-link' href='manual/scoped-graph.html'>ScopedGraph</a></li>
-					<li><a class='menu-link' href='manual/scroll-selection.html'>ScrollSelection</a></li>
-					<li><a class='menu-link' href='manual/selection-binding.html'>SelectionBinding</a></li>
 					<li><a class='menu-link' href='manual/selection-control.html'>SelectionControl</a></li>
 					<li><a class='menu-link' href='manual/selection-node.html'>SelectionNode</a></li>
 					<li><a class='menu-link' href='manual/sequence-node.html'>SequenceNode</a></li>
@@ -123,6 +122,7 @@
 					<li><a class='menu-link' href='manual/sprite-binding.html'>SpriteBinding</a></li>
 					<li><a class='menu-link' href='manual/sprite-color-binding.html'>SpriteColorBinding</a></li>
 					<li><a class='menu-link' href='manual/start-graph-trigger.html'>StartGraphTrigger</a></li>
+					<li><a class='menu-link' href='manual/string-binding.html'>StringBinding</a></li>
 					<li><a class='menu-link' href='manual/text-binding.html'>TextBinding</a></li>
 					<li><a class='menu-link' href='manual/text-color-binding.html'>TextColorBinding</a></li>
 					<li><a class='menu-link' href='manual/text-input-binding.html'>TextInputBinding</a></li>
@@ -356,9 +356,9 @@
 					<li><a class='menu-link' href='reference/interface-control.html'>InterfaceControl</a></li>
 					<li><a class='menu-link' href='reference/menu.html'>Menu</a></li>
 					<li><a class='menu-link' href='reference/menu-item.html'>MenuItem</a></li>
+					<li><a class='menu-link' href='reference/menu-item-template.html'>MenuItemTemplate</a></li>
 					<li><a class='menu-link' href='reference/message.html'>Message</a></li>
-					<li><a class='menu-link' href='reference/selection-item-object-source.html'>ObjectSource</a></li>
-					<li><a class='menu-link' href='reference/selection-item.html'>SelectionItem</a></li>
+					<li><a class='menu-link' href='reference/menu-item-template-object-source.html'>ObjectSource</a></li>
 				</ul>
 			</li>
 			<li>
@@ -397,7 +397,8 @@
 					<li><a class='menu-link' href='reference/collision-notifier.html'>CollisionNotifier</a></li>
 					<li><a class='menu-link' href='reference/comment-node.html'>CommentNode</a></li>
 					<li><a class='menu-link' href='reference/conditional-node.html'>ConditionalNode</a></li>
-					<li><a class='menu-link' href='reference/create-object-node.html'>CreateObjectNode</a></li>
+					<li><a class='menu-link' href='reference/create-game-object-node.html'>CreateGameObjectNode</a></li>
+					<li><a class='menu-link' href='reference/create-scriptable-object-node.html'>CreateScriptableObjectNode</a></li>
 					<li><a class='menu-link' href='reference/cutoff.html'>Cutoff</a></li>
 					<li><a class='menu-link' href='reference/destroy-object-node.html'>DestroyObjectNode</a></li>
 					<li><a class='menu-link' href='reference/disable-behaviour-node.html'>DisableBehaviourNode</a></li>
@@ -410,25 +411,26 @@
 					<li><a class='menu-link' href='reference/expression-binding.html'>ExpressionBinding</a></li>
 					<li><a class='menu-link' href='reference/expression-node.html'>ExpressionNode</a></li>
 					<li><a class='menu-link' href='reference/fade.html'>Fade</a></li>
-					<li><a class='menu-link' href='reference/focus-binding.html'>FocusBinding</a></li>
+					<li><a class='menu-link' href='reference/focus-binding-root.html'>FocusBindingRoot</a></li>
 					<li><a class='menu-link' href='reference/binding-formatter-format-type.html'>FormatType</a></li>
 					<li><a class='menu-link' href='reference/get-property-node.html'>GetPropertyNode</a></li>
 					<li><a class='menu-link' href='reference/graph-trigger-binding.html'>GraphTriggerBinding</a></li>
 					<li><a class='menu-link' href='reference/hide-control-node.html'>HideControlNode</a></li>
 					<li><a class='menu-link' href='reference/image-binding.html'>ImageBinding</a></li>
+					<li><a class='menu-link' href='reference/image-color-binding.html'>ImageColorBinding</a></li>
 					<li><a class='menu-link' href='reference/input-message.html'>InputMessage</a></li>
 					<li><a class='menu-link' href='reference/input-node.html'>InputNode</a></li>
 					<li><a class='menu-link' href='reference/input-node-button.html'>InputNodeButton</a></li>
 					<li><a class='menu-link' href='reference/input-node-button-list.html'>InputNodeButtonList</a></li>
-					<li><a class='menu-link' href='reference/input-selection.html'>InputSelection</a></li>
 					<li><a class='menu-link' href='reference/instruction-node.html'>InstructionNode</a></li>
 					<li><a class='menu-link' href='reference/instruction-reference-node.html'>InstructionReferenceNode</a></li>
 					<li><a class='menu-link' href='reference/iterate-node.html'>IterateNode</a></li>
 					<li><a class='menu-link' href='reference/list-binding.html'>ListBinding</a></li>
 					<li><a class='menu-link' href='reference/load-scene-node.html'>LoadSceneNode</a></li>
+					<li><a class='menu-link' href='reference/log-node.html'>LogNode</a></li>
 					<li><a class='menu-link' href='reference/loop-node.html'>LoopNode</a></li>
 					<li><a class='menu-link' href='reference/menu-input.html'>MenuInput</a></li>
-					<li><a class='menu-link' href='reference/menu-item.html'>MenuItem</a></li>
+					<li><a class='menu-link' href='reference/menu-input-pointer-action.html'>MenuInputPointerAction</a></li>
 					<li><a class='menu-link' href='reference/message-binding.html'>MessageBinding</a></li>
 					<li><a class='menu-link' href='reference/message-control.html'>MessageControl</a></li>
 					<li><a class='menu-link' href='reference/message-node.html'>MessageNode</a></li>
@@ -440,7 +442,7 @@
 					<li><a class='menu-link' href='reference/binding-formatter-number-format-type.html'>NumberFormatType</a></li>
 					<li><a class='menu-link' href='reference/object-binding-root.html'>ObjectBindingRoot</a></li>
 					<li><a class='menu-link' href='reference/play-effect-object-positioning.html'>ObjectPositioning</a></li>
-					<li><a class='menu-link' href='reference/create-object-node-object-positioning.html'>ObjectPositioning</a></li>
+					<li><a class='menu-link' href='reference/create-game-object-node-object-positioning.html'>ObjectPositioning</a></li>
 					<li><a class='menu-link' href='reference/pixelate.html'>Pixelate</a></li>
 					<li><a class='menu-link' href='reference/play-animation.html'>PlayAnimation</a></li>
 					<li><a class='menu-link' href='reference/play-animation-state.html'>PlayAnimationState</a></li>
@@ -455,8 +457,6 @@
 					<li><a class='menu-link' href='reference/load-scene-node-scene-source.html'>SceneSource</a></li>
 					<li><a class='menu-link' href='reference/unload-scene-node-scene-source.html'>SceneSource</a></li>
 					<li><a class='menu-link' href='reference/scoped-graph.html'>ScopedGraph</a></li>
-					<li><a class='menu-link' href='reference/scroll-selection.html'>ScrollSelection</a></li>
-					<li><a class='menu-link' href='reference/selection-binding.html'>SelectionBinding</a></li>
 					<li><a class='menu-link' href='reference/selection-control.html'>SelectionControl</a></li>
 					<li><a class='menu-link' href='reference/selection-node.html'>SelectionNode</a></li>
 					<li><a class='menu-link' href='reference/selection-node-item.html'>SelectionNodeItem</a></li>
@@ -474,6 +474,7 @@
 					<li><a class='menu-link' href='reference/sprite-binding.html'>SpriteBinding</a></li>
 					<li><a class='menu-link' href='reference/sprite-color-binding.html'>SpriteColorBinding</a></li>
 					<li><a class='menu-link' href='reference/start-graph-trigger.html'>StartGraphTrigger</a></li>
+					<li><a class='menu-link' href='reference/string-binding.html'>StringBinding</a></li>
 					<li><a class='menu-link' href='reference/text-binding.html'>TextBinding</a></li>
 					<li><a class='menu-link' href='reference/text-color-binding.html'>TextColorBinding</a></li>
 					<li><a class='menu-link' href='reference/text-input-binding.html'>TextInputBinding</a></li>

@@ -22,4 +22,4 @@ bool _HasText_ _(read only)_::
 
 void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_)::
 
-string GetText(<<reference/i-variable-store.html,IVariableStore>> _variables_)::
+string GetText(<<reference/i-variable-store.html,IVariableStore>> _variables_, bool _suppressErrors_)::

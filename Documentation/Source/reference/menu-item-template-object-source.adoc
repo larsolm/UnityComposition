@@ -1,0 +1,13 @@
+[#reference/menu-item-template-object-source]
+
+## ObjectSource
+
+PiRhoSoft.CompositionEngine.ObjectSource
+
+### Description
+
+### Values
+
+<<reference/menu-item-template-object-source.html,ObjectSource>> _Scene_::
+
+<<reference/menu-item-template-object-source.html,ObjectSource>> _Asset_::

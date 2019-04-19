@@ -2,7 +2,7 @@
 
 ## NumberBinding
 
-PiRhoSoft.CompositionEngine.NumberBinding : <<reference/variable-binding.html,VariableBinding>>
+PiRhoSoft.CompositionEngine.NumberBinding : <<reference/string-binding.html,StringBinding>>
 
 ### Description
 
@@ -15,10 +15,6 @@ NumberBinding()::
 <<reference/binding-formatter.html,BindingFormatter>> _Format_::
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
-
-### Public Properties
-
-TextMeshProUGUI _Text_ _(read only)_::
 
 ### Protected Methods
 

@@ -23,7 +23,107 @@ CAPSSNF:: Unable to play sound for {0}: the audio clip could not be found
 --
 --
 
-CBEBIO:: Failed to enable or disable object '{0}': the object must be a GameObject, Behaviour, or Renderer
+CBBBWT:: Bar Binding '{0}' has an Image component with a type that is not 'Filled'
+--
+--
+
+CBBIV:: unable to bind {0} for binding {1}: variable '{2}' is not an int or float
+--
+--
+
+CBBMV:: unable to bind {0} for binding {1}: variable '{2}' could not be found
+--
+--
+
+CBGTBMV:: Unable to run graph for graph trigger binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBIBIV:: Unable to bind image for image binding '{0}': the variable '{1}' is not a sprite
+--
+--
+
+CBIBMV:: Unable to bind image for image binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBICBIV:: Unable to bind color for image color binding '{0}': the variable '{1}' is not a color
+--
+--
+
+CBICBMV:: Unable to bind color for image color binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBLBIV:: Unable to create list for list binding '{0}': the variable '{1}' is not a color
+--
+--
+
+CBLBMT:: Unable to create list for list binding '{0}': the object template was null
+--
+--
+
+CBLBMV:: Unable to create list for list binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBMBMV:: Unable to bind text for text binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBNBIV:: Unable to bind text for number binding '{0}': the variable '{1}' is not an int or a float
+--
+--
+
+CBNBMV:: Unable to bind text for number binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBSCBIV:: Unable to bind color for sprite color binding '{0}': the variable '{1}' is not a color
+--
+--
+
+CBSCBMV:: Unable to bind color for sprite color binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBTBMV:: Unable to bind text for text binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBTCBIV:: Unable to bind color for text color binding '{0}': the variable '{1}' is not a color
+--
+--
+
+CBTCBMV:: Unable to bind color for text color binding '{0}': the variable '{1}' could not be found
+--
+--
+
+CBTIBRO:: Unable to bind text to variable on {0}: the variable '{1}' is read only
+--
+--
+
+CBTIBVNF:: Unable to bind text to variable on {0}: the variable '{1}' could not be found
+--
+--
+
+CEBFC:: unable to bind enabled state for binding {0}: the Command '{1}' failed with error {2}
+--
+--
+
+CEBFE:: unable to bind enabled state for binding {0}: the expression '{1}' failed with error {2}
+--
+--
+
+CEBIO:: unable to bind enabled state for binding {0): the object '{1}' is not a GameObject, Behaviour, or Renderer
+--
+--
+
+CEBIV:: unable to bind enabled state for binding {0}: the expression '{1}' did not evaluate to a bool
+--
+--
+
+CEBMV:: unable to bind enabled state for binding {0}: the expression is empty
 --
 --
 
@@ -35,15 +135,15 @@ CEIR:: The Expression '{0}' was expected to return type {1} but instead returned
 --
 --
 
-CIBNBIT:: Unable to animate text for number binding {0}: the displayed text is not an int
+CEXBFC:: unable to bind text for binding {0}: the Command '{1}' failed with error {2}
 --
 --
 
-CIBTIBRO:: Unable to bind text to variable on {0}: the variable '{1}' is read only
+CEXBFE:: unable to bind text for binding {0}: the expression '{1}' failed with error {2}
 --
 --
 
-CIBTIBVNF:: Unable to bind text to variable on {0}: the variable '{1}' could not be found
+CEXBMV:: unable to bind text for binding {0}: the expression is empty
 --
 --
 
@@ -75,6 +175,10 @@ CIGNROA:: failed to assign to variable '{0}': the variable is read only
 --
 --
 
+CIMMV:: Unable to set text on message '{0}': the variable '{1}' could not be found
+--
+--
+
 CNCCMNIOT:: Unable to call method for {0}: the Target '{1}' was not of type '{2}'
 --
 --
@@ -83,7 +187,7 @@ CNCGPNIOT:: Unable to get property for {0}: the Target '{1}' was not of type '{2
 --
 --
 
-CNCSPNICT:: Unable to set property for {0}: the Target '{1}' was not of type '{2}'
+CNCSPNIOT:: Unable to set property for {0}: the Target '{1}' was not of type '{2}'
 --
 --
 
@@ -92,6 +196,14 @@ CNSLS:: Unable to load scene for {0}: the scene '{1}' could not be found. Make s
 --
 
 CNSUS:: Unable to unload scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
+--
+--
+
+CSBIV:: unable to bind sprite for binding {0}: variable '{1}' is not a Sprite
+--
+--
+
+CSBMV:: unable to bind sprite for binding {0}: variable '{1}' could not be found
 --
 --
 
@@ -134,6 +246,14 @@ CCNMI:: failed to set target: index {0} is out of range for instruction graph no
 --
 
 CCNMK:: failed to set target: unable to find key {0} for instruction graph node {1}
+--
+--
+
+CCSONIO:: failed to create object for {0}: an object of type '{1}' could not be instantiated
+--
+--
+
+CCSONIT:: failed to create object for {0}: the type '{1}' could not be found
 --
 --
 

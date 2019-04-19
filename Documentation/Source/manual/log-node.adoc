@@ -1,6 +1,6 @@
-[#manual/focus-binding]
+[#manual/log-node]
 
-## Focus Binding
+## Log Node
 
 ### Fields
 
@@ -8,9 +8,9 @@
 |===
 | Name	| Description
 
-| Menu	| 
+| Message	| 
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/focus-binding.html[Reference]
+link:reference/log-node.html[Reference]
 endif::[]

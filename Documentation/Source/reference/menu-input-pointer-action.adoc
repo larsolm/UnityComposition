@@ -1,0 +1,15 @@
+[#reference/menu-input-pointer-action]
+
+## MenuInputPointerAction
+
+PiRhoSoft.CompositionEngine.MenuInputPointerAction
+
+### Description
+
+### Values
+
+<<reference/menu-input-pointer-action.html,MenuInputPointerAction>> _None_::
+
+<<reference/menu-input-pointer-action.html,MenuInputPointerAction>> _Focus_::
+
+<<reference/menu-input-pointer-action.html,MenuInputPointerAction>> _Select_::

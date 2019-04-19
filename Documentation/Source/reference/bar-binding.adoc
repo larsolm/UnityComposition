@@ -24,4 +24,6 @@ bool _UseScaledTime_::
 
 ### Protected Methods
 
+void Awake() _(virtual)_::
+
 void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

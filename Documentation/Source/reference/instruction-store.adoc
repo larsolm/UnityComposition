@@ -8,8 +8,6 @@ PiRhoSoft.CompositionEngine.InstructionStore : <<reference/i-variable-store.html
 
 ### Static Fields
 
-string _SceneStoreName_::
-
 string _InputStoreName_::
 
 string _OutputStoreName_::
@@ -43,6 +41,8 @@ string _ContextName_ _(read only)_::
 <<reference/variable-store.html,VariableStore>> _Local_ _(read only)_::
 
 <<reference/variable-store.html,VariableStore>> _Global_ _(read only)_::
+
+<<reference/scene-variable-store.html,SceneVariableStore>> _Scene_ _(read only)_::
 
 ### Public Methods
 

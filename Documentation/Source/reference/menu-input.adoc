@@ -20,16 +20,50 @@ string _SelectButton_::
 
 string _CancelButton_::
 
+<<reference/menu-input-pointer-action.html,MenuInputPointerAction>> _HoverAction_::
+
+<<reference/menu-input-pointer-action.html,MenuInputPointerAction>> _ClickAction_::
+
 <<reference/primary-axis.html,PrimaryAxis>> _PrimaryAxis_::
 
 int _RowCount_::
 
 int _ColumnCount_::
 
-bool _VerticalWrapping_::
+<<reference/menu-input.html,MenuInput>> _NextLeft_::
 
-bool _HorizontalWrapping_::
+<<reference/menu-input.html,MenuInput>> _NextRight_::
+
+<<reference/menu-input.html,MenuInput>> _NextUp_::
+
+<<reference/menu-input.html,MenuInput>> _NextDown_::
+
+bool _FocusOnLoad_::
+
+float _ScrollPadding_::
 
 ### Public Methods
 
+void EnterFromBeginning()::
+
+void EnterFromEnd()::
+
+void EnterFromLeft(int _fromRow_)::
+
+void EnterFromRight(int _fromRow_)::
+
+void EnterFromTop(int _fromColumn_)::
+
+void EnterFromBottom(int _fromColumn_)::
+
+void Leave()::
+
+void MoveFocusUp(int _amount_)::
+
+void MoveFocusDown(int _amount_)::
+
 void RefreshLayout()::
+
+<<reference/menu-item.html,MenuItem>> GetItem(https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _screenPoint_)::
+
+void ScrollToItem(<<reference/menu-item.html,MenuItem>> _item_)::

@@ -16,13 +16,23 @@ string _ItemName_::
 
 ### Public Properties
 
-int _Index_::
+int _Index_ _(read only)_::
 
-string _Label_::
+int _Column_ _(read only)_::
 
-bool _Focused_::
+int _Row_ _(read only)_::
+
+string _Label_ _(read only)_::
+
+bool _Focused_ _(read only)_::
+
+<<reference/menu-item-template.html,MenuItemTemplate>> _Template_ _(read only)_::
+
+bool _Generated_ _(read only)_::
 
 ### Public Methods
+
+void Setup(<<reference/menu-item-template.html,MenuItemTemplate>> _template_, bool _generated_)::
 
 void Move(int _index_)::
 

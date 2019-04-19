@@ -2,7 +2,7 @@
 
 ## SelectionNodeItem
 
-PiRhoSoft.CompositionEngine.SelectionNodeItem : <<reference/selection-item.html,SelectionItem>>
+PiRhoSoft.CompositionEngine.SelectionNodeItem : <<reference/menu-item-template.html,MenuItemTemplate>>
 
 ### Description
 

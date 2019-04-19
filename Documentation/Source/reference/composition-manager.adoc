@@ -10,6 +10,8 @@ PiRhoSoft.CompositionEngine.CompositionManager : link:/projects/unity-utilities/
 
 string _GlobalStoreName_::
 
+string _SceneStoreName_::
+
 string _CommandFolder_::
 
 bool _LogTracking_::
@@ -31,6 +33,8 @@ CompositionManager()::
 <<reference/i-variable-store.html,IVariableStore>> _DefaultStore_ _(read only)_::
 
 <<reference/variable-store.html,VariableStore>> _GlobalStore_ _(read only)_::
+
+<<reference/scene-variable-store.html,SceneVariableStore>> _SceneStore_ _(read only)_::
 
 ### Public Methods
 

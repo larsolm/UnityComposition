@@ -2,7 +2,7 @@
 
 ## MessageBinding
 
-PiRhoSoft.CompositionEngine.MessageBinding : <<reference/variable-binding.html,VariableBinding>>
+PiRhoSoft.CompositionEngine.MessageBinding : <<reference/string-binding.html,StringBinding>>
 
 ### Description
 
@@ -13,10 +13,6 @@ MessageBinding()::
 ### Public Fields
 
 <<reference/message.html,Message>> _Message_::
-
-### Public Properties
-
-TextMeshProUGUI _Text_ _(read only)_::
 
 ### Protected Methods
 

@@ -1,9 +1,0 @@
-[#manual/selection-binding]
-
-## Selection Binding
-
-
-
-ifdef::backend-multipage_html5[]
-link:reference/selection-binding.html[Reference]
-endif::[]

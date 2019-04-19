@@ -16,7 +16,7 @@ BindingRoot()::
 
 ### Public Fields
 
-string _Name_::
+string _ValueName_::
 
 ### Public Properties
 

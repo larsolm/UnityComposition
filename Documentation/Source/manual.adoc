@@ -72,7 +72,11 @@ include::manual/conditional-node.adoc[]
 
 <<<
 
-include::manual/create-object-node.adoc[]
+include::manual/create-game-object-node.adoc[]
+
+<<<
+
+include::manual/create-scriptable-object-node.adoc[]
 
 <<<
 
@@ -124,7 +128,7 @@ include::manual/fade.adoc[]
 
 <<<
 
-include::manual/focus-binding.adoc[]
+include::manual/focus-binding-root.adoc[]
 
 <<<
 
@@ -144,15 +148,15 @@ include::manual/image-binding.adoc[]
 
 <<<
 
+include::manual/image-color-binding.adoc[]
+
+<<<
+
 include::manual/input-message.adoc[]
 
 <<<
 
 include::manual/input-node.adoc[]
-
-<<<
-
-include::manual/input-selection.adoc[]
 
 <<<
 
@@ -193,6 +197,10 @@ include::manual/list-binding.adoc[]
 <<<
 
 include::manual/load-scene-node.adoc[]
+
+<<<
+
+include::manual/log-node.adoc[]
 
 <<<
 
@@ -284,14 +292,6 @@ include::manual/scoped-graph.adoc[]
 
 <<<
 
-include::manual/scroll-selection.adoc[]
-
-<<<
-
-include::manual/selection-binding.adoc[]
-
-<<<
-
 include::manual/selection-control.adoc[]
 
 <<<
@@ -345,6 +345,10 @@ include::manual/sprite-color-binding.adoc[]
 <<<
 
 include::manual/start-graph-trigger.adoc[]
+
+<<<
+
+include::manual/string-binding.adoc[]
 
 <<<
 

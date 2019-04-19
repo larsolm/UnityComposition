@@ -12,11 +12,17 @@
 | Vertical Axis	| 
 | Select Button	| 
 | Cancel Button	| 
+| Hover Action	| 
+| Click Action	| 
 | Primary Axis	| 
 | Row Count	| 
 | Column Count	| 
-| Vertical Wrapping	| 
-| Horizontal Wrapping	| 
+| Next Left	| 
+| Next Right	| 
+| Next Up	| 
+| Next Down	| 
+| Focus On Load	| 
+| Scroll Padding	| 
 |===
 
 ifdef::backend-multipage_html5[]

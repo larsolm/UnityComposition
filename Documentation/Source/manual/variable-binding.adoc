@@ -10,6 +10,7 @@
 
 | Binding Group	| 
 | Auto Update	| 
+| Suppress Errors	| 
 |===
 
 ifdef::backend-multipage_html5[]

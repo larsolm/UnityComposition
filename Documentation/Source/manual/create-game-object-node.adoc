@@ -1,6 +1,6 @@
-[#manual/create-object-node]
+[#manual/create-game-object-node]
 
-## Create Object Node
+## Create Game Object Node
 
 ### Fields
 
@@ -19,5 +19,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/create-object-node.html[Reference]
+link:reference/create-game-object-node.html[Reference]
 endif::[]

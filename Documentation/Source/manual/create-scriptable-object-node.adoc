@@ -1,0 +1,17 @@
+[#manual/create-scriptable-object-node]
+
+## Create Scriptable Object Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Scriptable Object Type	| 
+| Object Variable	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/create-scriptable-object-node.html[Reference]
+endif::[]

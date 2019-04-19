@@ -14,7 +14,7 @@ image:binding-root.png[]
 |===
 | Name	| Description
 
-| Name	| The name of the variable that child <<variable-binding,Variable Bindings>> can use in order to access this Binding Root's data.
+| Value Name	| The name of the variable that child <<variable-binding,Variable Bindings>> can use in order to access this Binding Root's data.
 |===
 
 ifdef::backend-multipage_html5[]

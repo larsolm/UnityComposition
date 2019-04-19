@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.SelectionControl : <<reference/interface-control.htm
 
 ### Description
 
+### Constructors
+
+SelectionControl()::
+
 ### Public Properties
 
 bool _IsRunning_ _(read only)_::
@@ -18,13 +22,13 @@ bool _HasFocusedItem_ _(read only)_::
 
 bool _HasSelectedItem_ _(read only)_::
 
-<<reference/selection-item.html,SelectionItem>> _FocusedItem_ _(read only)_::
+<<reference/menu-item.html,MenuItem>> _FocusedItem_ _(read only)_::
 
 int _FocusedIndex_ _(read only)_::
 
 <<reference/variable-value.html,VariableValue>> _FocusedValue_ _(read only)_::
 
-<<reference/selection-item.html,SelectionItem>> _SelectedItem_ _(read only)_::
+<<reference/menu-item.html,MenuItem>> _SelectedItem_ _(read only)_::
 
 int _SelectedIndex_ _(read only)_::
 
@@ -32,35 +36,23 @@ int _SelectedIndex_ _(read only)_::
 
 ### Public Methods
 
-void Show(<<reference/i-variable-store.html,IVariableStore>> _variables_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<<<reference/selection-item.html,SelectionItem>>> _items_, bool _isSelectionRequired_, bool _resetIndex_)::
+void Show(<<reference/i-variable-store.html,IVariableStore>> _variables_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<<<reference/menu-item-template.html,MenuItemTemplate>>> _items_, bool _isSelectionRequired_, bool _resetIndex_)::
+
+void Select(<<reference/menu-item.html,MenuItem>> _item_)::
 
 void Close()::
 
-void Select()::
-
-void SelectItem(int _index_)::
-
-void MoveFocus(int _index_)::
-
-### Protected Constructors
-
-SelectionControl()::
-
 ### Protected Fields
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/selection-control-menu-item.html,MenuItem>>> __items_::
+<<reference/menu.html,Menu>> __menu_::
 
-int __focusedIndex_::
-
-<<reference/selection-control-menu-item.html,MenuItem>> __focusedItem_::
-
-<<reference/selection-control-menu-item.html,MenuItem>> __selectedItem_::
+<<reference/menu-item.html,MenuItem>> __selectedItem_::
 
 ### Protected Methods
 
-https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] GetItemParent() _(virtual)_::
+void Awake() _(virtual)_::
 
-<<reference/selection-control-menu-item.html,MenuItem>> GetItem(int _index_)::
+https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] GetItemParent() _(virtual)_::
 
 void OnInitialize() _(virtual)_::
 

@@ -18,6 +18,8 @@ string _BindingGroup_::
 
 bool _AutoUpdate_::
 
+bool _SuppressErrors_::
+
 ### Public Properties
 
 <<reference/i-variable-store.html,IVariableStore>> _Variables_ _(read only)_::
@@ -32,8 +34,8 @@ VariableBinding()::
 
 ### Protected Methods
 
-void OnEnable() _(virtual)_::
+void Awake() _(virtual)_::
 
-void OnDisable() _(virtual)_::
+void OnDestroy() _(virtual)_::
 
 void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(abstract)_::

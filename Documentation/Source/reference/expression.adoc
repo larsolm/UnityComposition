@@ -14,6 +14,8 @@ Expression()::
 
 <<reference/expression-compilation-result.html,ExpressionCompilationResult>> _CompilationResult_ _(read only)_::
 
+<<reference/operation.html,Operation>> _LastOperation_ _(read only)_::
+
 bool _IsValid_ _(read only)_::
 
 bool _HasError_ _(read only)_::

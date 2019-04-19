@@ -2,7 +2,7 @@
 
 ## Menu
 
-PiRhoSoft.CompositionEngine.Menu : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+PiRhoSoft.CompositionEngine.Menu : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-variable-store.html,IVariableStore>>
 
 ### Description
 
@@ -16,7 +16,7 @@ Action<<<reference/menu-item.html,MenuItem>>> _OnItemAdded_::
 
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemRemoved_::
 
-Action<<<reference/menu-item.html,MenuItem>>, <<reference/menu-item.html,MenuItem>>> _OnItemMoved_::
+Action<<<reference/menu-item.html,MenuItem>>> _OnItemMoved_::
 
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemBlurred_::
 
@@ -30,17 +30,21 @@ Action _OnCancelled_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/menu-item.html,MenuItem>>> _Items_ _(read only)_::
 
-<<reference/menu-item.html,MenuItem>> _FocusedItem_ _(read only)_::
+<<reference/menu-item.html,MenuItem>> _FocusedItem_::
 
-int _FocusedIndex_ _(read only)_::
+int _FocusedIndex_::
 
 ### Public Methods
 
-void SetFocusedItem(<<reference/menu-item.html,MenuItem>> _item_)::
-
-void SelectFocusedItem()::
+void SelectItem(<<reference/menu-item.html,MenuItem>> _item_)::
 
 void Cancel()::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
 ### Protected Methods
 
@@ -48,7 +52,7 @@ void ItemAdded(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 
 void ItemRemoved(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 
-void ItemMoved(<<reference/menu-item.html,MenuItem>> _item_, int _from_) _(virtual)_::
+void ItemMoved(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 
 void ItemFocused(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 

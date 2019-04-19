@@ -26,6 +26,8 @@ void Deactivate()::
 
 ### Protected Methods
 
+void Awake() _(virtual)_::
+
 void Setup() _(virtual)_::
 
 void Teardown() _(virtual)_::

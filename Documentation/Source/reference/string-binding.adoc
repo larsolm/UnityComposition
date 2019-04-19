@@ -1,0 +1,23 @@
+[#reference/string-binding]
+
+## StringBinding
+
+PiRhoSoft.CompositionEngine.StringBinding : <<reference/variable-binding.html,VariableBinding>>
+
+### Description
+
+### Public Fields
+
+bool _AutoSizeContainer_::
+
+### Public Properties
+
+TMP_Text _Text_ _(read only)_::
+
+### Protected Constructors
+
+StringBinding()::
+
+### Protected Methods
+
+void SetText(string _text_, bool _enabled_)::

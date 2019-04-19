@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class BarBinding : VariableBinding
 	{
 		private const string _missingVariableWarning = "(CBBMV) unable to bind {0} for binding {1}: variable '{2}' could not be found";
-		private const string _invalidVariableWarning = "(CSBIV) unable to bind {0} for binding {1}: variable '{2}' is not an int or float";
+		private const string _invalidVariableWarning = "(CBBIV) unable to bind {0} for binding {1}: variable '{2}' is not an int or float";
 		private const string _wrongTypeWarning = "(CBBBWT) Bar Binding '{0}' has an Image component with a type that is not 'Filled'";
 
 		[Tooltip("The variable holding the amount (numerator) the image should be filled")]

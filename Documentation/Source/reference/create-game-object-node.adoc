@@ -1,14 +1,14 @@
-[#reference/create-object-node]
+[#reference/create-game-object-node]
 
-## CreateObjectNode
+## CreateGameObjectNode
 
-PiRhoSoft.CompositionEngine.CreateObjectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.CreateGameObjectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
 ### Constructors
 
-CreateObjectNode()::
+CreateGameObjectNode()::
 
 ### Public Fields
 
@@ -20,7 +20,7 @@ CreateObjectNode()::
 
 <<reference/variable-reference.html,VariableReference>> _ObjectVariable_::
 
-<<reference/create-object-node-object-positioning.html,ObjectPositioning>> _Positioning_::
+<<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Positioning_::
 
 <<reference/variable-reference.html,VariableReference>> _Object_::
 

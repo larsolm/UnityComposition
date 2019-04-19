@@ -1,0 +1,15 @@
+[#reference/create-game-object-node-object-positioning]
+
+## ObjectPositioning
+
+PiRhoSoft.CompositionEngine.ObjectPositioning
+
+### Description
+
+### Values
+
+<<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Absolute_::
+
+<<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Relative_::
+
+<<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Child_::

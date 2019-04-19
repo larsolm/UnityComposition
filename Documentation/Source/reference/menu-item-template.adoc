@@ -1,0 +1,29 @@
+[#reference/menu-item-template]
+
+## MenuItemTemplate
+
+PiRhoSoft.CompositionEngine.MenuItemTemplate
+
+### Description
+
+### Constructors
+
+MenuItemTemplate()::
+
+### Public Fields
+
+<<reference/variable-reference.html,VariableReference>> _Variables_::
+
+<<reference/menu-item-template-object-source.html,ObjectSource>> _Source_::
+
+string _Name_::
+
+<<reference/menu-item.html,MenuItem>> _Template_::
+
+string _Label_::
+
+bool _Expand_::
+
+### Public Properties
+
+string _Id_ _(read only)_::

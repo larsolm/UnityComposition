@@ -1,0 +1,16 @@
+[#manual/focus-binding-root]
+
+## Focus Binding Root
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Menu	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/focus-binding-root.html[Reference]
+endif::[]

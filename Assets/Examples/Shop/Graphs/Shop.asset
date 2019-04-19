@@ -652,7 +652,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
-  m_Name: Shop Selection(Clone)(Clone)
+  m_Name: Shop Selection
   m_EditorClassIdentifier: 
   Name: Shop Selection
   GraphPosition: {x: 806.4, y: 38.4}

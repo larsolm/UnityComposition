@@ -14,7 +14,7 @@ SetPropertyNode()::
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-<<reference/variable-reference.html,VariableReference>> _Target_::
+<<reference/object-variable-source.html,ObjectVariableSource>> _Target_::
 
 <<reference/variable-value-source.html,VariableValueSource>> _Value_::
 
