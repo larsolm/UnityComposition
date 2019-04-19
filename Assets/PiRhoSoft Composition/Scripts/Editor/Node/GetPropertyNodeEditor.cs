@@ -1,11 +1,11 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEditor;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -17,6 +17,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private GetPropertyNode _node;
 		private string[] _propertyNames;
+		private string[] _propertyDisplays;
 		private SerializedProperty _nameProperty;
 		private SerializedProperty _nextProperty;
 		private SerializedProperty _targetProperty;
@@ -46,14 +47,21 @@ namespace PiRhoSoft.CompositionEditor
 					.Where(property => property.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
 
 				_propertyNames = new string[fields.Length + properties.Length];
+				_propertyDisplays = new string[fields.Length + properties.Length];
 
 				var index = 0;
 
 				foreach (var field in fields)
-					_propertyNames[index++] = field.Name;
+				{
+					_propertyNames[index] = field.Name;
+					_propertyDisplays[index++] = string.Format("{0} {1}", field.FieldType.Name, field.Name);
+				}
 
 				foreach (var property in properties)
-					_propertyNames[index++] = property.Name;
+				{
+					_propertyNames[index] = property.Name;
+					_propertyDisplays[index++] = string.Format("{0} {1}", property.PropertyType.Name, property.Name);
+				}
 			}
 			else
 			{
@@ -70,7 +78,7 @@ namespace PiRhoSoft.CompositionEditor
 				EditorGUILayout.PropertyField(_targetProperty);
 			}
 
-			var type = TypeDisplayDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false, true);
+			var type = TypeDisplayDrawer.Draw<Object>(_targetTypeContent, _node.TargetType, false, true);
 
 			if (type != _node.TargetType)
 			{
@@ -90,7 +98,7 @@ namespace PiRhoSoft.CompositionEditor
 				using (new UndoScope(_node, false))
 				{
 					var property = Array.IndexOf(_propertyNames, _node.PropertyName);
-					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyNames);
+					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyDisplays);
 
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty]);

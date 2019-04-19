@@ -187,7 +187,7 @@ MonoBehaviour:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114713345150838420
@@ -218,10 +218,8 @@ MonoBehaviour:
     _variable: 
     _tokens: []
   Value:
-    _variable: local.card
+    _variable: card
     _tokens:
-    - Type: 0
-      Text: local
     - Type: 0
       Text: card
   Loop: {fileID: 114432394057212114}
@@ -281,12 +279,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114828798773068104}
   Target:
-    _variable: local.card
-    _tokens:
-    - Type: 0
-      Text: local
-    - Type: 0
-      Text: card
+    Type: 1
+    Reference:
+      _variable: card
+      _tokens:
+      - Type: 0
+        Text: card
+    Value: {fileID: 0}
   Value:
     Type: 1
     Reference:
@@ -305,7 +304,7 @@ MonoBehaviour:
         _statement: 
       _isTypeLocked: 1
       _isConstraintLocked: 0
-    _data: CQAAAAAAAAAAAAAAAAAAAA==
+    _data: AQAJAAAAAAAAAAAAAAAAAAAA
     _objects: []
   TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
@@ -348,7 +347,7 @@ MonoBehaviour:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114905633981755912

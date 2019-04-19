@@ -6,6 +6,7 @@ using System.Reflection;
 using System.Text;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -46,28 +47,26 @@ namespace PiRhoSoft.CompositionEditor
 				_methods = _node.TargetType.GetMethods(BindingFlags.Public | BindingFlags.Instance | BindingFlags.DeclaredOnly)
 					.Where(method => !method.IsSpecialName)
 					.Where(method => method.ReturnType == typeof(void) || VariableValue.GetType(method.ReturnType) != VariableType.Empty)
-					.Where(method => !method.GetParameters().Any(parameter => VariableValue.GetType(parameter.ParameterType) == VariableType.Empty))
+					.Where(method => !method.GetParameters().Any(parameter => parameter.ParameterType.IsEnum || VariableValue.GetType(parameter.ParameterType) == VariableType.Empty))
 					.Where(method => method.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
 
 				_methodNames = _methods.Select(method =>
 				{
-					var stringBuilder = new StringBuilder(method.Name).Append('(');
+					var parameterNames = string.Empty;
 					var parameters = method.GetParameters();
 					if (parameters.Length > 0)
 					{
 						var first = parameters.First();
-						stringBuilder.Append(first.ParameterType.Name).Append(' ').Append(first.Name);
+						parameterNames += string.Format("{0} {1}", first.ParameterType.Name, first.Name);
 
 						for (var i = 1; i < parameters.Length; i++)
 						{
 							var parameter = parameters[i];
-							stringBuilder.Append(", ").Append(parameter.ParameterType.Name).Append(' ').Append(parameter.Name);
+							parameterNames += string.Format(", {0} {1}", parameter.ParameterType.Name, parameter.Name);
 						}
 					}
 
-					stringBuilder.Append(')');
-
-					return stringBuilder.ToString();
+					return string.Format("{0} {1}({2})", method.ReturnType.Name, method.Name, parameterNames);
 				}).ToArray();
 			}
 			else
@@ -100,7 +99,7 @@ namespace PiRhoSoft.CompositionEditor
 				EditorGUILayout.PropertyField(_targetProperty);
 			}
 
-			var type = TypeDisplayDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false, true);
+			var type = TypeDisplayDrawer.Draw<Object>(_targetTypeContent, _node.TargetType, false, true);
 
 			if (type != _node.TargetType)
 			{

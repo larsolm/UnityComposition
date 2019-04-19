@@ -2,14 +2,20 @@
 
 ## Collision Graph Trigger
 
+Collision Graph Trigger is an <<instruction-trigger,Instruction Trigger>> that will run its <<instruction-graph,Instruction Graph>> on collisions. Collision Graph Trigger works in conjunction with a <<collision-notifier,Collision Notifier>> which will call the respective Enter and Exit functions on the Collision Graph Trigger.
+
+See the _"Maze1"_ scene in the Maze project for an example usage.
+
 ### Fields
+
+image:collision-graph-trigger.png[]
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Enter Graph	| 
-| Exit Graph	| 
+| Enter Graph	| The <<instruction-graph,Instruction Graph>> to run when this object is collided with.
+| Exit Graph	| The <<instruction-graph,Instruction Graph>> to run when this object is exited.
 |===
 
 ifdef::backend-multipage_html5[]

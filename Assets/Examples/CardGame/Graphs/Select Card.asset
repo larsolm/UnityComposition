@@ -333,12 +333,15 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114980614166743252}
   Target:
-    _variable: global.SelectedCard
-    _tokens:
-    - Type: 0
-      Text: global
-    - Type: 0
-      Text: SelectedCard
+    Type: 1
+    Reference:
+      _variable: global.SelectedCard
+      _tokens:
+      - Type: 0
+        Text: global
+      - Type: 0
+        Text: SelectedCard
+    Value: {fileID: 0}
   Value:
     Type: 1
     Reference:
@@ -379,10 +382,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114606885731722130}
   Target:
-    _variable: card
-    _tokens:
-    - Type: 0
-      Text: card
+    Type: 1
+    Reference:
+      _variable: card
+      _tokens:
+      - Type: 0
+        Text: card
+    Value: {fileID: 0}
   Value:
     Type: 1
     Reference:
