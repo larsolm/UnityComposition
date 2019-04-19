@@ -36,7 +36,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 50, y: 50}
+  m_SizeDelta: {x: 50, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7665172485807183099
 CanvasRenderer:
@@ -89,7 +89,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 7665172485807183098}
+  Object: {fileID: 7665172485807183098}
   Condition:
     _statement: Item.Focused
 --- !u!1 &7665172486976860394
@@ -102,10 +102,9 @@ GameObject:
   m_Component:
   - component: {fileID: 7665172486976860395}
   - component: {fileID: 7665172486976860392}
-  - component: {fileID: 1039243195532546529}
-  - component: {fileID: 1106982907430495976}
+  - component: {fileID: 2375334278759694730}
   m_Layer: 5
-  m_Name: Shop Selection
+  m_Name: ShopSelection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -152,10 +151,10 @@ MonoBehaviour:
   m_ChildAlignment: 3
   m_Spacing: 0
   m_ChildForceExpandWidth: 0
-  m_ChildForceExpandHeight: 0
+  m_ChildForceExpandHeight: 1
   m_ChildControlWidth: 0
-  m_ChildControlHeight: 0
---- !u!114 &1039243195532546529
+  m_ChildControlHeight: 1
+--- !u!114 &2375334278759694730
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -164,22 +163,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 7665172486976860394}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9348dc783052e141874f524ecc2f92c, type: 3}
+  m_Script: {fileID: 11500000, guid: dc429dfa5555e624494c6b603344f1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Item
---- !u!114 &1106982907430495976
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7665172486976860394}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c26bd231adc3b4e971d4df77b62de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Name: Value
+  ItemName: Item
 --- !u!1 &7665172487354067787
 GameObject:
   m_ObjectHideFlags: 0
@@ -192,7 +180,6 @@ GameObject:
   - component: {fileID: 7665172487354067798}
   - component: {fileID: 7665172487354067785}
   - component: {fileID: 7665172487354067796}
-  - component: {fileID: 7665172487354067799}
   m_Layer: 5
   m_Name: Label
   m_TagString: Untagged
@@ -217,7 +204,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 122.37, y: 55.86}
+  m_SizeDelta: {x: 122.37, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7665172487354067798
 CanvasRenderer:
@@ -275,13 +262,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 44.75
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 513
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -356,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  AutoSizeContainer: 1
   Variable:
     _variable: Item.Label
     _tokens:
@@ -363,15 +351,3 @@ MonoBehaviour:
       Text: Item
     - Type: 0
       Text: Label
---- !u!114 &7665172487354067799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7665172487354067787}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aab19296c7b087d4fb255e2432e5bd5a, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

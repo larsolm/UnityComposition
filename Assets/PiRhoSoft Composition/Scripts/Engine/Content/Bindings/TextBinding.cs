@@ -1,38 +1,19 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[DisallowMultipleComponent]
-	[RequireComponent(typeof(TMP_Text))]
 	[HelpURL(Composition.DocumentationUrl + "text-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Text Binding")]
-	public class TextBinding : VariableBinding
+	public class TextBinding : StringBinding
 	{
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
-
-		private TMP_Text _text;
-
-		public TMP_Text Text
-		{
-			get
-			{
-				// can't look up in awake because it's possible to update bindings before the component is enabled
-
-				if (!_text)
-					_text = GetComponent<TMP_Text>();
-
-				return _text;
-			}
-		}
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			var value = Variable.GetValue(variables);
 
-			Text.enabled = value.Type != VariableType.Empty;
-			Text.text = value.ToString();
+			SetText(value.ToString(), value.Type != VariableType.Empty);
 		}
 	}
 }

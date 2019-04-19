@@ -68,6 +68,8 @@ MonoBehaviour:
     - {fileID: 114100410672664356}
     - {fileID: 114465621572967356}
     - {fileID: 114161050808359334}
+    - {fileID: 114192279811104960}
+    - {fileID: 114389460248260116}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114016950435173752}
   Process: {fileID: 114364025646214274}
@@ -278,7 +280,7 @@ MonoBehaviour:
   Name: Show Selection
   GraphPosition: {x: 2585.6, y: -320}
   IsBreakpoint: 0
-  OnCanceled: {fileID: 114276880049557452}
+  OnCanceled: {fileID: 114192279811104960}
   Control:
     _variable: fighter.Selection
     _tokens:
@@ -325,7 +327,7 @@ MonoBehaviour:
         type: 3}
       Label: Back
       Expand: 0
-      OnSelected: {fileID: 114276880049557452}
+      OnSelected: {fileID: 114192279811104960}
 --- !u!114 &114161050808359334
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -397,6 +399,36 @@ MonoBehaviour:
       Label: Items
       Expand: 0
       OnSelected: {fileID: 114112693297798952}
+--- !u!114 &114192279811104960
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: Action Message
+  m_EditorClassIdentifier: 
+  Name: Action Message
+  GraphPosition: {x: 2547.2, y: -153.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114181512053963512}
+  Control:
+    _variable: scene.Message
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Message
+  WaitForCompletion: 0
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: 'What will
+
+      {fighter.Name} do?'
 --- !u!114 &114232644684142356
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -664,6 +696,23 @@ MonoBehaviour:
     _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
+--- !u!114 &114389460248260116
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 2854.4001, y: -179.2}
+  IsBreakpoint: 0
+  Comment: Have the cancel options go "forward" to an identical message so that the
+    selection index isn't reset.
 --- !u!114 &114441288586741344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -679,7 +728,7 @@ MonoBehaviour:
   Name: Show Selection
   GraphPosition: {x: 2585.6, y: -12.8}
   IsBreakpoint: 0
-  OnCanceled: {fileID: 114276880049557452}
+  OnCanceled: {fileID: 114192279811104960}
   Control:
     _variable: fighter.Selection
     _tokens:
@@ -726,7 +775,7 @@ MonoBehaviour:
         type: 3}
       Label: Back
       Expand: 0
-      OnSelected: {fileID: 114276880049557452}
+      OnSelected: {fileID: 114192279811104960}
 --- !u!114 &114459983394791818
 MonoBehaviour:
   m_ObjectHideFlags: 1

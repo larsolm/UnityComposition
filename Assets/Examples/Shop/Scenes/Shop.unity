@@ -230,7 +230,6 @@ GameObject:
   - component: {fileID: 128260286}
   - component: {fileID: 128260288}
   - component: {fileID: 128260287}
-  - component: {fileID: 128260289}
   - component: {fileID: 128260290}
   m_Layer: 5
   m_Name: Label
@@ -306,14 +305,14 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 44.75
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
-  m_textAlignment: 257
+  m_fontStyle: 1
+  m_textAlignment: 513
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -324,7 +323,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -381,20 +380,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128260285}
   m_CullTransparentMesh: 0
---- !u!114 &128260289
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 128260285}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fed3b8e403aedb649804bb97e37f71db, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Name: Item
-  SelectionControl: {fileID: 1777570538}
 --- !u!114 &128260290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -409,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  AutoSizeContainer: 0
   Variable:
     _variable: Item.Description
     _tokens:
@@ -429,6 +415,8 @@ GameObject:
   - component: {fileID: 457249291}
   - component: {fileID: 457249295}
   - component: {fileID: 457249294}
+  - component: {fileID: 457249297}
+  - component: {fileID: 457249296}
   - component: {fileID: 457249293}
   m_Layer: 5
   m_Name: Selection
@@ -502,20 +490,24 @@ MonoBehaviour:
   m_GameObject: {fileID: 457249289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 12b73b61112c324459d866b529f2feb6, type: 3}
+  m_Script: {fileID: 11500000, guid: ee3d10c34cfa2c64bad432f917bcecc6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  DependentObjects:
-    _items: []
   HorizontalAxis: Horizontal
   VerticalAxis: Vertical
-  AcceptButton: Submit
+  SelectButton: Submit
   CancelButton: Cancel
-  VerticalWrapping: 0
-  HorizontalWrapping: 0
+  HoverAction: 1
+  ClickAction: 2
   PrimaryAxis: 0
-  ColumnCount: 1
   RowCount: 1
+  ColumnCount: 1
+  NextLeft: {fileID: 0}
+  NextRight: {fileID: 0}
+  NextUp: {fileID: 0}
+  NextDown: {fileID: 0}
+  FocusOnLoad: 0
+  ScrollPadding: 10
 --- !u!114 &457249294
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -553,6 +545,32 @@ MonoBehaviour:
   m_ChildForceExpandHeight: 0
   m_ChildControlWidth: 1
   m_ChildControlHeight: 0
+--- !u!114 &457249296
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457249289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca6908392c93a4458927f7b0404c4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DependentObjects:
+    _items: []
+--- !u!114 &457249297
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 457249289}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba90df7ea48051549b6efe50068d1731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &524422936
 GameObject:
   m_ObjectHideFlags: 0
@@ -697,7 +715,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -200, y: -70}
+  m_SizeDelta: {x: -200, y: -140}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &621823148
 MonoBehaviour:
@@ -747,13 +765,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 53.7
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 257
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -1003,8 +1021,8 @@ MonoBehaviour:
   Variables:
     _version: 25
     _variablesData:
-    - CUludmVudG9yeRMAAAAAAAAA
-    - BU1vbmV5AgAAABAnAAA=
+    - AQAJSW52ZW50b3J5EwAAAAAAAAA=
+    - AQAFTW9uZXkCAAAAECcAAA==
     _variablesObjects: []
   Camera: {fileID: 0}
   Acceleration: 3
@@ -1059,13 +1077,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Variables:
     _variablesData:
-    - BlBsYXllchEAAAAAAAAA
+    - AQAGUGxheWVyEQAAAAAAAAA=
     _variablesObjects:
     - {fileID: 840948834}
     Definitions:
     - _type: 17
-      _constraint: PiRhoSoft.CompositionExample.Player, Assembly-CSharp, Version=0.0.0.0,
-        Culture=neutral, PublicKeyToken=null
+      _constraint: 
       _objects: []
       _tag: 
       _initializer:
@@ -1316,10 +1333,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _schema: {fileID: 11400000, guid: e44cfa1616522534689bcaa837947f81, type: 2}
   Variables:
-    _version: 25
+    _version: 33
     _variablesData:
-    - CUludmVudG9yeRMAAAAIAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAAEQAAAAMAAAARAAAABAAAABEAAAAFAAAAEQAAAAYAAAARAAAABwAAAA==
-    - BU1vbmV5AgAAAAAAAAA=
+    - AQAJSW52ZW50b3J5EwAAAAgAAAARAAAAAAAAABEAAAABAAAAEQAAAAIAAAARAAAAAwAAABEAAAAEAAAAEQAAAAUAAAARAAAABgAAABEAAAAHAAAA
+    - AQAFTW9uZXkCAAAAAAAAAA==
     _variablesObjects:
     - {fileID: 11400000, guid: fa0442ad09dd84943b2d317722d4e3a6, type: 2}
     - {fileID: 11400000, guid: 5effb37f32ac47746ba1be3a37a14119, type: 2}
@@ -1415,13 +1432,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 44.75
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 260
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -1433,7 +1450,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -1619,8 +1636,11 @@ GameObject:
   - component: {fileID: 1097411772}
   - component: {fileID: 1097411773}
   - component: {fileID: 1097411774}
+  - component: {fileID: 1097411777}
+  - component: {fileID: 1097411776}
+  - component: {fileID: 1097411775}
   m_Layer: 5
-  m_Name: Content
+  m_Name: Items
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1666,7 +1686,7 @@ MonoBehaviour:
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 1
+  m_ChildControlWidth: 0
   m_ChildControlHeight: 0
 --- !u!114 &1097411774
 MonoBehaviour:
@@ -1682,6 +1702,59 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &1097411775
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097411771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee3d10c34cfa2c64bad432f917bcecc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  HorizontalAxis: Horizontal
+  VerticalAxis: Vertical
+  SelectButton: Submit
+  CancelButton: Cancel
+  HoverAction: 1
+  ClickAction: 2
+  PrimaryAxis: 0
+  RowCount: 1
+  ColumnCount: 1
+  NextLeft: {fileID: 0}
+  NextRight: {fileID: 0}
+  NextUp: {fileID: 0}
+  NextDown: {fileID: 0}
+  FocusOnLoad: 1
+  ScrollPadding: 50
+--- !u!114 &1097411776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097411771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ca6908392c93a4458927f7b0404c4f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  DependentObjects:
+    _items: []
+--- !u!114 &1097411777
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1097411771}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba90df7ea48051549b6efe50068d1731, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1421869730
 GameObject:
   m_ObjectHideFlags: 0
@@ -2257,9 +2330,8 @@ GameObject:
   - component: {fileID: 1777570537}
   - component: {fileID: 1777570536}
   - component: {fileID: 1777570535}
-  - component: {fileID: 1777570538}
   m_Layer: 5
-  m_Name: Items
+  m_Name: ItemsContainer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2354,32 +2426,6 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.ScrollRect+ScrollRectEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
---- !u!114 &1777570538
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1777570533}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3ecfab4720000a34293f659436718b92, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  DependentObjects:
-    _items:
-    - {fileID: 620175606}
-  HorizontalAxis: Horizontal
-  VerticalAxis: Vertical
-  AcceptButton: Submit
-  CancelButton: Cancel
-  VerticalWrapping: 0
-  HorizontalWrapping: 0
-  PrimaryAxis: 0
-  ColumnCount: 1
-  RowCount: 1
-  DisplayedVertical: 5
-  DisplayedHorizontal: 1
 --- !u!1 &1777673323
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,13 +2511,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 44.75
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 257
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -2483,7 +2529,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0

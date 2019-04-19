@@ -9,10 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2157962887867631549}
-  - component: {fileID: 7997313288589461250}
-  - component: {fileID: 4944623855138478196}
+  - component: {fileID: 8758579436997999125}
   m_Layer: 5
-  m_Name: Buy Selection
+  m_Name: ShopBuySelection
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -40,7 +39,7 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &7997313288589461250
+--- !u!114 &8758579436997999125
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -49,22 +48,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 2157962887867631546}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f9348dc783052e141874f524ecc2f92c, type: 3}
+  m_Script: {fileID: 11500000, guid: dc429dfa5555e624494c6b603344f1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Item
---- !u!114 &4944623855138478196
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2157962887867631546}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 24c26bd231adc3b4e971d4df77b62de1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  Name: Value
+  ItemName: Item
 --- !u!1 &2157962888552959377
 GameObject:
   m_ObjectHideFlags: 0
@@ -159,13 +147,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 44.75
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 4100
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -177,7 +165,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -247,10 +235,8 @@ MonoBehaviour:
     NumberFormatting: 1
     ValueFormat: '#,###,##0'
   Variable:
-    _variable: Item.Value.Cost
+    _variable: Value.Cost
     _tokens:
-    - Type: 0
-      Text: Item
     - Type: 0
       Text: Value
     - Type: 0
@@ -344,7 +330,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 2157962888658598979}
+  Object: {fileID: 2157962888658598979}
   Condition:
     _statement: Item.Focused
 --- !u!1 &2157962888818605098
@@ -441,13 +427,13 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 50
+  m_fontSize: 44.75
   m_fontSizeBase: 50
   m_fontWeight: 400
-  m_enableAutoSizing: 0
+  m_enableAutoSizing: 1
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_textAlignment: 4097
   m_isAlignmentEnumConverted: 1
   m_characterSpacing: 0
@@ -459,7 +445,7 @@ MonoBehaviour:
   m_enableWordWrapping: 0
   m_wordWrappingRatios: 0.4
   m_overflowMode: 0
-  m_firstOverflowCharacterIndex: 0
+  m_firstOverflowCharacterIndex: -1
   m_linkedTextComponent: {fileID: 0}
   m_isLinkedTextComponent: 0
   m_isTextTruncated: 0
@@ -522,11 +508,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  AutoSizeContainer: 0
   Variable:
-    _variable: Item.Value.Name
+    _variable: Value.Name
     _tokens:
-    - Type: 0
-      Text: Item
     - Type: 0
       Text: Value
     - Type: 0

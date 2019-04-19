@@ -333,7 +333,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Yes
       Expand: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: No
       Expand: 0
@@ -396,7 +396,7 @@ MonoBehaviour:
           Text: Inventory
       Source: 1
       Name: 
-      Template: {fileID: 2157962887867631546, guid: 44cfd751abf56144d8cf1f3052105a59,
+      Template: {fileID: 5893988392438392035, guid: 44cfd751abf56144d8cf1f3052105a59,
         type: 3}
       Label: Inventory
       Expand: 1
@@ -406,7 +406,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Back
       Expand: 0
@@ -474,7 +474,7 @@ MonoBehaviour:
           Text: Inventory
       Source: 1
       Name: 
-      Template: {fileID: 2157962887867631546, guid: 224e1e2f12478f5438747a3cfb741815,
+      Template: {fileID: 8758579436997999125, guid: 224e1e2f12478f5438747a3cfb741815,
         type: 3}
       Label: Inventory
       Expand: 1
@@ -484,7 +484,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Back
       Expand: 0
@@ -682,7 +682,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: Buy
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Buy
       Expand: 0
@@ -692,7 +692,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: Sell
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Sell
       Expand: 0
@@ -702,7 +702,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: Exit
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Exit
       Expand: 0
@@ -768,7 +768,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: Yes
       Expand: 0
@@ -778,7 +778,7 @@ MonoBehaviour:
         _tokens: []
       Source: 1
       Name: 
-      Template: {fileID: 7665172486976860394, guid: 8e76209dec662924790fe2b78657edd5,
+      Template: {fileID: 2375334278759694730, guid: 8e76209dec662924790fe2b78657edd5,
         type: 3}
       Label: No
       Expand: 0
