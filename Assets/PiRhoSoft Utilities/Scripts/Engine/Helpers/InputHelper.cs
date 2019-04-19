@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.UtilityEngine
@@ -224,28 +225,34 @@ namespace PiRhoSoft.UtilityEngine
 
 		public static bool GetButtonDown(string button)
 		{
-			if (_manualButtons.TryGetValue(button, out ButtonData state))
-				return state.Held;
+			var down = false;
 
-			try { return Input.GetButton(button); }
+			if (_manualButtons.TryGetValue(button, out ButtonData state))
+				down = state.Held;
+
+			try { return down || Input.GetButton(button); }
 			catch { return false; }
 		}
 		
 		public static bool GetWasButtonPressed(string button)
 		{
-			if (_manualButtons.TryGetValue(button, out ButtonData state))
-				return state.Pressed;
+			var pressed = false;
 
-			try { return Input.GetButtonDown(button); }
+			if (_manualButtons.TryGetValue(button, out ButtonData state))
+				pressed = state.Pressed;
+
+			try { return pressed || Input.GetButtonDown(button); }
 			catch { return false; }
 		}
 		
 		public static bool GetWasButtonReleased(string button)
 		{
-			if (_manualButtons.TryGetValue(button, out ButtonData state))
-				return state.Released;
+			var released = false;
 
-			try { return Input.GetButtonUp(button); }
+			if (_manualButtons.TryGetValue(button, out ButtonData state))
+				released = state.Released;
+
+			try { return released || Input.GetButtonUp(button); }
 			catch { return false; }
 		}
 
@@ -299,10 +306,12 @@ namespace PiRhoSoft.UtilityEngine
 
 		private static float GetCurrentAxisValue(string axis)
 		{
-			if (_manualAxes.TryGetValue(axis, out AxisData data))
+			var value = Input.GetAxisRaw(axis);
+
+			if (_manualAxes.TryGetValue(axis, out AxisData data) && Math.Abs(data.Value) > Math.Abs(value))
 				return data.Value;
-			else
-				return Input.GetAxisRaw(axis);
+
+			return value;
 		}
 
 		private static float GetPreviousAxisValue(string axis)

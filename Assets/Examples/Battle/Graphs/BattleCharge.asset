@@ -15,7 +15,7 @@ MonoBehaviour:
   ContextName: fighter
   ContextDefinition:
     _type: 17
-    _constraint: 
+    _constraint: AQARAAAAYVVuaXR5RW5naW5lLk9iamVjdCwgVW5pdHlFbmdpbmUuQ29yZU1vZHVsZSwgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGw=
     _objects: []
     _tag: 
     _initializer:

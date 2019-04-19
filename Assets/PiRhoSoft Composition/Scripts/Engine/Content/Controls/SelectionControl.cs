@@ -70,7 +70,7 @@ namespace PiRhoSoft.CompositionEngine
 			_selectedItem = null;
 
 			if (resetIndex && _menu.Items.Count > 0)
-				_menu.SetFocusedItem(_menu.Items[0]);
+				_menu.FocusedItem = _menu.Items[0];
 
 			OnInitialize();
 

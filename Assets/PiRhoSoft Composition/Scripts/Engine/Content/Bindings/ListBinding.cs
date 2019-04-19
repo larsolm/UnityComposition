@@ -56,22 +56,32 @@ namespace PiRhoSoft.CompositionEngine
 			while (_items.Count < count)
 				_items.Add(null);
 
-			if (_items.Count > count)
+			if (count < _items.Count)
+			{
+				for (var i = count; i < _items.Count; i++)
+					Destroy(_items[i].gameObject);
+
 				_items.RemoveRange(count, _items.Count - count);
+			}
 		}
 
 		private void SetItem(int index, VariableValue item)
 		{
-			var equal = _items[index] != null ? VariableHandler.IsEqual(_items[index].Value, item) : null;
-
-			if (!equal.HasValue || !equal.Value)
+			if (_items[index] != null)
 			{
-				var binding = Instantiate(Template, transform);
-				binding.transform.SetSiblingIndex(index);
-				binding.Value = item;
+				var equal = VariableHandler.IsEqual(_items[index].Value, item);
 
-				_items[index] = binding;
+				if (equal.HasValue && equal.Value)
+					return;
+
+				Destroy(_items[index].gameObject);
 			}
+
+			var binding = Instantiate(Template, transform);
+			binding.transform.SetSiblingIndex(index);
+			binding.Value = item;
+
+			_items[index] = binding;
 		}
 	}
 }
