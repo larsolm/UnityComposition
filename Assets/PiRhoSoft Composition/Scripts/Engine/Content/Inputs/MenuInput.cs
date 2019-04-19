@@ -154,35 +154,25 @@ namespace PiRhoSoft.CompositionEngine
 
 		private void FocusWithMouse()
 		{
-			var rect = (transform as RectTransform);
-			var local = rect.InverseTransformPoint(Input.mousePosition);
+			var item = GetItem(Input.mousePosition);
 
-			if (rect.rect.Contains(local))
+			if (item != null)
 			{
-				var item = GetItem(local);
-				if (item != null)
-				{
-					ChangeFocus(item.Column, item.Row);
+				ChangeFocus(item.Column, item.Row);
 
-					if (NextLeft) NextLeft.Leave();
-					if (NextRight) NextRight.Leave();
-					if (NextUp) NextUp.Leave();
-					if (NextDown) NextDown.Leave();
-				}
+				if (NextLeft) NextLeft.Leave();
+				if (NextRight) NextRight.Leave();
+				if (NextUp) NextUp.Leave();
+				if (NextDown) NextDown.Leave();
 			}
 		}
 
 		private void SelectWithMouse()
 		{
-			var rect = (transform as RectTransform);
-			var local = rect.InverseTransformPoint(Input.mousePosition);
+			var item = GetItem(Input.mousePosition);
 
-			if (rect.rect.Contains(local))
-			{
-				var item = GetItem(local);
-				if (item != null)
-					_menu.SelectItem(item);
-			}
+			if (item != null)
+				_menu.SelectItem(item);
 		}
 
 		#endregion
@@ -428,8 +418,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public MenuItem GetItem(Vector2 position)
+		public MenuItem GetItem(Vector2 screenPoint)
 		{
+			var canvas = GetComponentInParent<Canvas>();
+			var camera = canvas != null ? canvas.worldCamera : null;
+
 			for (var column = 0; column < _columnCount; column++)
 			{
 				for (var row = 0; row < _rowCount; row++)
@@ -438,7 +431,7 @@ namespace PiRhoSoft.CompositionEngine
 
 					if (item?.transform is RectTransform rect)
 					{
-						if (rect.offsetMin.x < position.x && rect.offsetMin.y < position.y && rect.offsetMax.x > position.x && rect.offsetMax.y > position.y)
+						if (RectTransformUtility.RectangleContainsScreenPoint(rect, screenPoint, camera))
 							return item;
 					}
 				}
