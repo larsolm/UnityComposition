@@ -1,0 +1,11 @@
+[#reference/i-completion-notifier]
+
+## ICompletionNotifier
+
+PiRhoSoft.CompositionEngine.ICompletionNotifier
+
+### Description
+
+### Public Properties
+
+bool _IsComplete_ _(read only)_ _(abstract)_::

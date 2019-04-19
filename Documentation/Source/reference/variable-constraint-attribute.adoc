@@ -1,0 +1,23 @@
+[#reference/variable-constraint-attribute]
+
+## VariableConstraintAttribute
+
+PiRhoSoft.CompositionEngine.VariableConstraintAttribute : Attribute
+
+### Description
+
+### Constructors
+
+VariableConstraintAttribute(<<reference/variable-type.html,VariableType>> _type_)::
+
+VariableConstraintAttribute(int _minimum_, int _maximum_)::
+
+VariableConstraintAttribute(float _minimum_, float _maximum_)::
+
+VariableConstraintAttribute(string[] _values_)::
+
+VariableConstraintAttribute(Type _type_)::
+
+### Public Properties
+
+<<reference/value-definition.html,ValueDefinition>> _Definition_ _(read only)_::

@@ -4,9 +4,14 @@
 
 ### Fields
 
-<<manual/animation-clip-variable-source.html,Animation Clip Variable Source>> _Animation_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-bool _Wait For Completion_::
+| Animation Player	| 
+| Animation	| 
+| Wait For Completion	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/play-animation.html[Reference]

@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.ExponentOperator : <<reference/infix-operation.html,
 
 ### Description
 
-### Static Methods
-
-<<reference/variable-value.html,VariableValue>> Raise(<<reference/variable-value&.html,VariableValue>> _left_ _(ref)_, <<reference/variable-value&.html,VariableValue>> _right_ _(ref)_)::
-
 ### Constructors
 
 ExponentOperator()::
+
+### Public Properties
+
+<<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 

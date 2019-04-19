@@ -1,0 +1,25 @@
+[#manual/play-effect]
+
+## Play Effect
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Effect	| 
+| Effect Name	| 
+| Effect Variable	| 
+| Positioning	| 
+| Object	| 
+| Parent	| 
+| Position	| 
+| Rotation	| 
+| Wait For Completion	| 
+| Destroy On Complete	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/play-effect.html[Reference]
+endif::[]

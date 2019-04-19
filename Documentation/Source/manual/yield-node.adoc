@@ -1,0 +1,9 @@
+[#manual/yield-node]
+
+## Yield Node
+
+
+
+ifdef::backend-multipage_html5[]
+link:reference/yield-node.html[Reference]
+endif::[]

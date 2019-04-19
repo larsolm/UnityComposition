@@ -4,11 +4,13 @@
 
 ### Fields
 
-float _Scroll Speed_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-int _Displayed Vertical_::
-
-int _Displayed Horizontal_::
+| Displayed Vertical	| 
+| Displayed Horizontal	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/scroll-selection.html[Reference]

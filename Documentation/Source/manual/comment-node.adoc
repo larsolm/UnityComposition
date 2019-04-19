@@ -4,7 +4,12 @@
 
 ### Fields
 
-string _Comment_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Comment	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/comment-node.html[Reference]

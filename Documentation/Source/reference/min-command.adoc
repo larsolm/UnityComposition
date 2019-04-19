@@ -2,7 +2,7 @@
 
 ## MinCommand
 
-PiRhoSoft.CompositionEngine.MinCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.MinCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

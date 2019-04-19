@@ -1,0 +1,13 @@
+[#reference/bool-variable-source]
+
+## BoolVariableSource
+
+PiRhoSoft.CompositionEngine.BoolVariableSource : <<reference/variable-source-1.html,VariableSource>><bool>
+
+### Description
+
+### Constructors
+
+BoolVariableSource()::
+
+BoolVariableSource(bool _defaultValue_)::

@@ -2,7 +2,7 @@
 
 ## AbsCommand
 
-PiRhoSoft.CompositionEngine.AbsCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.AbsCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

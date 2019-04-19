@@ -10,11 +10,9 @@ PiRhoSoft.CompositionEngine.Expression
 
 Expression()::
 
-### Public Fields
-
-bool _IsExpanded_::
-
 ### Public Properties
+
+<<reference/expression-compilation-result.html,ExpressionCompilationResult>> _CompilationResult_ _(read only)_::
 
 bool _IsValid_ _(read only)_::
 
@@ -26,9 +24,9 @@ string _Statement_ _(read only)_::
 
 <<reference/expression-compilation-result.html,ExpressionCompilationResult>> SetStatement(string _statement_)::
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_)::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_)::
 
-void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_, string _source_)::
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_, string _source_)::
 
 <<reference/variable-value.html,VariableValue>> Execute(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _context_, <<reference/i-variable-store.html,IVariableStore>> _variables_)::
 

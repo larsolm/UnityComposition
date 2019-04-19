@@ -54,9 +54,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Set Close Position
+  m_Name: Store Close Position
   m_EditorClassIdentifier: 
-  Name: Set Close Position
+  Name: Store Close Position
   GraphPosition: {x: 307.2, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 114620740042104694}
@@ -88,9 +88,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Set Open Position
+  m_Name: Store Open Position
   m_EditorClassIdentifier: 
-  Name: Set Open Position
+  Name: Store Open Position
   GraphPosition: {x: 307.2, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 114844542458262784}
@@ -114,10 +114,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable: gate
-    _tokens:
-    - Type: 0
-      Text: gate
+    Type: 1
+    Reference:
+      _variable: gate
+      _tokens:
+      - Type: 0
+        Text: gate
+    Value: {fileID: 0}
   Value:
     Type: 1
     Reference:

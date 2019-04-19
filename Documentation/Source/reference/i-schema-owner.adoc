@@ -1,0 +1,15 @@
+[#reference/i-schema-owner]
+
+## ISchemaOwner
+
+PiRhoSoft.CompositionEngine.ISchemaOwner
+
+### Description
+
+### Public Properties
+
+<<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_ _(abstract)_::
+
+### Public Methods
+
+void SetupSchema() _(abstract)_::

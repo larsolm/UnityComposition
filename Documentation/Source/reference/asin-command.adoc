@@ -2,7 +2,7 @@
 
 ## AsinCommand
 
-PiRhoSoft.CompositionEngine.AsinCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.AsinCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

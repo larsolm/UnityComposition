@@ -8,16 +8,32 @@ PiRhoSoft.CompositionEngine.ExpressionParser
 
 ### Static Methods
 
-void AddCommand(string _name_, <<reference/command.html,Command>> _command_)::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> Parse(string _input_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/expression-token.html,ExpressionToken>>> _tokens_)::
+
+void AddCommand(string _name_, <<reference/i-command.html,ICommand>> _command_)::
 
 void RemoveCommand(string _name_)::
 
-<<reference/command.html,Command>> GetCommand(string _name_)::
+<<reference/i-command.html,ICommand>> GetCommand(string _name_)::
 
 void AddPrefixOperator<OperatorType>(string _symbol_)::
 
 void AddInfixOperator<OperatorType>(string _symbol_, <<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
 
-void AddTernaryOperator(string _symbol_, <<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
+### Constructors
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> Parse(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/expression-token.html,ExpressionToken>>> _tokens_)::
+ExpressionParser()::
+
+### Public Methods
+
+<<reference/operation.html,Operation>> ParseLeft(<<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
+
+<<reference/operation.html,Operation>> ParseRight(<<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
+
+string GetText(<<reference/expression-token.html,ExpressionToken>> _token_)::
+
+bool HasText(<<reference/expression-token.html,ExpressionToken>> _token_, string _text_)::
+
+bool HasToken(<<reference/expression-token-type.html,ExpressionTokenType>> _type_)::
+
+void SkipToken(<<reference/expression-token-type.html,ExpressionTokenType>> _type_, string _expected_)::

@@ -1,0 +1,17 @@
+[#reference/command-parameter]
+
+## Parameter
+
+PiRhoSoft.CompositionEngine.Parameter
+
+### Description
+
+### Constructors
+
+Parameter()::
+
+### Public Fields
+
+string _Name_::
+
+<<reference/variable-type.html,VariableType>> _Type_::

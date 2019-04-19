@@ -1,0 +1,16 @@
+[#manual/shuffle-node]
+
+## Shuffle Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Variable	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/shuffle-node.html[Reference]
+endif::[]

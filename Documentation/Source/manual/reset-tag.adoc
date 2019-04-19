@@ -1,0 +1,17 @@
+[#manual/reset-tag]
+
+## Reset Tag
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Object	| 
+| Tag	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/reset-tag.html[Reference]
+endif::[]

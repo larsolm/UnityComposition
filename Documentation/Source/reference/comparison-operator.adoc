@@ -1,0 +1,17 @@
+[#reference/comparison-operator]
+
+## ComparisonOperator
+
+PiRhoSoft.CompositionEngine.ComparisonOperator : <<reference/infix-operation.html,InfixOperation>>
+
+### Description
+
+### Protected Constructors
+
+ComparisonOperator()::
+
+### Protected Methods
+
+bool Equals(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+int Compare(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::

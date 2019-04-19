@@ -1,0 +1,15 @@
+[#reference/variable-link]
+
+## VariableLink
+
+PiRhoSoft.CompositionEngine.VariableLink : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+VariableLink()::
+
+### Public Fields
+
+<<reference/variable-pool.html,VariablePool>> _Variables_::

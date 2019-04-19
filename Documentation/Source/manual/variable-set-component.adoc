@@ -1,0 +1,17 @@
+[#manual/variable-set-component]
+
+## Variable Set Component
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| _schema	| 
+| Variables	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/variable-set-component.html[Reference]
+endif::[]

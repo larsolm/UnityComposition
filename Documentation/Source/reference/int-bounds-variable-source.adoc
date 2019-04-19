@@ -1,0 +1,13 @@
+[#reference/int-bounds-variable-source]
+
+## IntBoundsVariableSource
+
+PiRhoSoft.CompositionEngine.IntBoundsVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^]>
+
+### Description
+
+### Constructors
+
+IntBoundsVariableSource()::
+
+IntBoundsVariableSource(https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _defaultValue_)::

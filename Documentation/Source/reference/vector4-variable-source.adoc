@@ -1,0 +1,13 @@
+[#reference/vector4-variable-source]
+
+## Vector4VariableSource
+
+PiRhoSoft.CompositionEngine.Vector4VariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^]>
+
+### Description
+
+### Constructors
+
+Vector4VariableSource()::
+
+Vector4VariableSource(https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _defaultValue_)::

@@ -2,7 +2,7 @@
 
 ## RandomCommand
 
-PiRhoSoft.CompositionEngine.RandomCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.RandomCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

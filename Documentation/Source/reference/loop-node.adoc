@@ -12,9 +12,11 @@ LoopNode()::
 
 ### Public Fields
 
-<<reference/expression.html,Expression>> _Condition_::
-
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Loop_::
+
+<<reference/variable-reference.html,VariableReference>> _Index_::
+
+<<reference/expression.html,Expression>> _Condition_::
 
 ### Public Properties
 
@@ -22,8 +24,4 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
-
-### Protected Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

@@ -2,7 +2,7 @@
 
 ## ModuloAssignOperator
 
-PiRhoSoft.CompositionEngine.ModuloAssignOperator : <<reference/assign-operator.html,AssignOperator>>
+PiRhoSoft.CompositionEngine.ModuloAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
 
 ### Description
 

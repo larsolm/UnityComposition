@@ -1,0 +1,39 @@
+[#reference/menu-item]
+
+## MenuItem
+
+PiRhoSoft.CompositionEngine.MenuItem : <<reference/binding-root.html,BindingRoot>>
+
+### Description
+
+### Constructors
+
+MenuItem()::
+
+### Public Fields
+
+string _ItemName_::
+
+### Public Properties
+
+int _Index_::
+
+string _Label_::
+
+bool _Focused_::
+
+### Public Methods
+
+void Move(int _index_)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+### Protected Methods
+
+void Awake() _(virtual)_::
+
+void OnDestroy() _(virtual)_::

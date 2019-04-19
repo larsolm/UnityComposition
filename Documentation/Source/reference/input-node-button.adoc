@@ -1,0 +1,23 @@
+[#reference/input-node-button]
+
+## InputNodeButton
+
+PiRhoSoft.CompositionEngine.InputNodeButton
+
+### Description
+
+### Constructors
+
+InputNodeButton()::
+
+### Public Fields
+
+<<reference/input-node-button-button-type.html,ButtonType>> _Type_::
+
+string _Name_::
+
+float _Value_::
+
+https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _Key_::
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _OnSelected_::

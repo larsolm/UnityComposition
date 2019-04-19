@@ -1,0 +1,9 @@
+[#manual/collision-notifier]
+
+## Collision Notifier
+
+Collision Notifier is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] used to trigger events on during collisions.
+
+ifdef::backend-multipage_html5[]
+link:reference/collision-notifier.html[Reference]
+endif::[]

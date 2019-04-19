@@ -2,7 +2,7 @@
 
 ## MultiplyAssignOperator
 
-PiRhoSoft.CompositionEngine.MultiplyAssignOperator : <<reference/assign-operator.html,AssignOperator>>
+PiRhoSoft.CompositionEngine.MultiplyAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
 
 ### Description
 

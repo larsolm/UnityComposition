@@ -1,0 +1,13 @@
+[#reference/int-variable-source]
+
+## IntVariableSource
+
+PiRhoSoft.CompositionEngine.IntVariableSource : <<reference/variable-source-1.html,VariableSource>><int>
+
+### Description
+
+### Constructors
+
+IntVariableSource()::
+
+IntVariableSource(int _defaultValue_)::

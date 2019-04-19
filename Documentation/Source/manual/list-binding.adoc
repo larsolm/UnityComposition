@@ -1,0 +1,17 @@
+[#manual/list-binding]
+
+## List Binding
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Variable	| 
+| Template	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/list-binding.html[Reference]
+endif::[]

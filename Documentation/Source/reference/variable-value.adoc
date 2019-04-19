@@ -2,90 +2,200 @@
 
 ## VariableValue
 
-PiRhoSoft.CompositionEngine.VariableValue : ValueType, IComparable<string>, IComparable<float>, IComparable<int>, IComparable<bool>, IComparable<<<reference/variable-value.html,VariableValue>>>, IEquatable<string>, IEquatable<float>, IEquatable<int>, IEquatable<bool>, IEquatable<<<reference/variable-value.html,VariableValue>>>
+PiRhoSoft.CompositionEngine.VariableValue : ValueType
 
 ### Description
 
-### Static Fields
+### Static Properties
 
-<<reference/variable-value.html,VariableValue>> _Empty_::
+<<reference/variable-value.html,VariableValue>> _Empty_ _(read only)_::
 
 ### Static Methods
 
 <<reference/variable-type.html,VariableType>> GetType(Type _type_)::
 
-<<reference/variable-value.html,VariableValue>> Create(<<reference/variable-type.html,VariableType>> _type_)::
+<<reference/variable-value.html,VariableValue>> Create(bool _value_)::
 
-<<reference/variable-value.html,VariableValue>> Create<T>(T _value_)::
+<<reference/variable-value.html,VariableValue>> Create(int _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(float _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Color.html[Color^] _value_)::
+
+<<reference/variable-value.html,VariableValue>> Create(string _str_)::
+
+<<reference/variable-value.html,VariableValue>> Create(Enum _e_)::
+
+<<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _obj_)::
+
+<<reference/variable-value.html,VariableValue>> Create(<<reference/i-variable-store.html,IVariableStore>> _store_)::
+
+<<reference/variable-value.html,VariableValue>> Create(<<reference/i-variable-list.html,IVariableList>> _list_)::
+
+<<reference/variable-value.html,VariableValue>> CreateValue<T>(T _value_)::
+
+<<reference/variable-value.html,VariableValue>> CreateReference(Object _reference_)::
 
 ### Public Properties
 
 <<reference/variable-type.html,VariableType>> _Type_ _(read only)_::
 
-bool _Boolean_ _(read only)_::
+bool _IsEmpty_ _(read only)_::
 
-int _Integer_ _(read only)_::
+bool _IsNull_ _(read only)_::
 
-float _Number_ _(read only)_::
+bool _HasValue_ _(read only)_::
+
+bool _HasString_ _(read only)_::
+
+bool _HasEnum_ _(read only)_::
+
+bool _HasReference_ _(read only)_::
+
+bool _HasObject_ _(read only)_::
+
+bool _HasStore_ _(read only)_::
+
+bool _HasList_ _(read only)_::
+
+bool _HasNumber_ _(read only)_::
+
+bool _HasNumber2_ _(read only)_::
+
+bool _HasNumber3_ _(read only)_::
+
+bool _HasNumber4_ _(read only)_::
+
+bool _HasRect_ _(read only)_::
+
+bool _HasBounds_ _(read only)_::
+
+bool _Bool_ _(read only)_::
+
+int _Int_ _(read only)_::
+
+float _Float_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _Int2_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _Int3_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _IntRect_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _IntBounds_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Vector2_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _Vector3_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _Vector4_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _Quaternion_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _Rect_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _Bounds_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_ _(read only)_::
 
 string _String_ _(read only)_::
 
-Object _RawObject_ _(read only)_::
+Enum _Enum_ _(read only)_::
 
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_ _(read only)_::
 
 <<reference/i-variable-store.html,IVariableStore>> _Store_ _(read only)_::
 
+<<reference/i-variable-list.html,IVariableList>> _List_ _(read only)_::
+
+float _Number_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Number2_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _Number3_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _Number4_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _NumberRect_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _NumberBounds_ _(read only)_::
+
+Object _Reference_ _(read only)_::
+
+Type _EnumType_ _(read only)_::
+
+Type _ReferenceType_ _(read only)_::
+
 ### Public Methods
+
+bool HasEnumType<Type>()::
+
+bool HasReferenceType<Type>()::
+
+bool HasEnumType(Type _type_)::
+
+bool HasReferenceType(Type _type_)::
 
 string ToString() _(virtual)_::
 
-bool TryGetBoolean(bool _value_ _(out)_)::
+Object GetBoxedValue()::
 
-bool TryGetInteger(int _value_ _(out)_)::
+bool TryGetBool(bool _value_ _(out)_)::
 
-bool TryGetNumber(float _value_ _(out)_)::
+bool TryGetInt(int _value_ _(out)_)::
 
-bool TryGetString(string _value_ _(out)_)::
+bool TryGetFloat(float _value_ _(out)_)::
 
-bool TryGetObject(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _value_ _(out)_)::
+bool TryGetInt2(https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _value_ _(out)_)::
 
-bool TryGetObject<T>(<<reference/t&.html,T>> _obj_ _(out)_)::
+bool TryGetInt3(https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _value_ _(out)_)::
 
-bool TryGetStore(<<reference/i-variable-store&.html,IVariableStore>> _variables_ _(out)_)::
+bool TryGetIntRect(https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _value_ _(out)_)::
 
-bool Equals(<<reference/variable-value.html,VariableValue>> _other_) _(virtual)_::
+bool TryGetIntBounds(https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _value_ _(out)_)::
 
-bool Equals(bool _value_) _(virtual)_::
+bool TryGetVector2(https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _value_ _(out)_)::
 
-bool Equals(int _value_) _(virtual)_::
+bool TryGetVector3(https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _value_ _(out)_)::
 
-bool Equals(float _value_) _(virtual)_::
+bool TryGetVector4(https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _value_ _(out)_)::
 
-bool Equals(string _value_) _(virtual)_::
+bool TryGetQuaternion(https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _value_ _(out)_)::
 
-bool Equals(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _value_)::
+bool TryGetRect(https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _value_ _(out)_)::
 
-bool Equals(<<reference/i-variable-store.html,IVariableStore>> _value_)::
+bool TryGetBounds(https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _value_ _(out)_)::
 
-bool Equals(Object _other_) _(virtual)_::
+bool TryGetColor(https://docs.unity3d.com/ScriptReference/Color.html[Color^] _value_ _(out)_)::
 
-int CompareTo(<<reference/variable-value.html,VariableValue>> _other_) _(virtual)_::
+bool TryGetString(string _s_ _(out)_)::
 
-int CompareTo(bool _value_) _(virtual)_::
+bool TryGetEnum<EnumType>(<<reference/enum-type&.html,EnumType>> _value_ _(out)_)::
 
-int CompareTo(int _value_) _(virtual)_::
+bool TryGetObject(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _obj_ _(out)_)::
 
-int CompareTo(float _value_) _(virtual)_::
+bool TryGetStore(<<reference/i-variable-store&.html,IVariableStore>> _store_ _(out)_)::
 
-int CompareTo(string _value_) _(virtual)_::
+bool TryGetList(<<reference/i-variable-list&.html,IVariableList>> _list_ _(out)_)::
 
-int CompareTo(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _unityObject_)::
-
-int CompareTo(<<reference/i-variable-store.html,IVariableStore>> _store_)::
-
-int GetHashCode() _(virtual)_::
-
-string Write()::
-
-void Read(string _value_)::
+bool TryGetReference<T>(<<reference/t&.html,T>> _t_ _(out)_)::

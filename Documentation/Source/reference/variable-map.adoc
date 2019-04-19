@@ -24,7 +24,7 @@ int GetIndex(string _name_)::
 
 bool TryGetIndex(string _name_, int _index_ _(out)_)::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetNames()::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetNames()::
 
 <<reference/variable-map.html,VariableMap>> Add(<<reference/variable-schema.html,VariableSchema>> _schema_)::
 

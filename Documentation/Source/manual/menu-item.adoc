@@ -1,0 +1,16 @@
+[#manual/menu-item]
+
+## Menu Item
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Item Name	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/menu-item.html[Reference]
+endif::[]

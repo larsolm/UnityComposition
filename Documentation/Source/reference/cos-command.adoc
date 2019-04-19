@@ -2,7 +2,7 @@
 
 ## CosCommand
 
-PiRhoSoft.CompositionEngine.CosCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.CosCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

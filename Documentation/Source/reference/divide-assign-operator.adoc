@@ -2,7 +2,7 @@
 
 ## DivideAssignOperator
 
-PiRhoSoft.CompositionEngine.DivideAssignOperator : <<reference/assign-operator.html,AssignOperator>>
+PiRhoSoft.CompositionEngine.DivideAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
 
 ### Description
 

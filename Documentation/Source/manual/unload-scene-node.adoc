@@ -1,0 +1,22 @@
+[#manual/unload-scene-node]
+
+## Unload Scene Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Source	| 
+| Scene	| 
+| Scene Variable	| 
+| Scene Name	| 
+| Scene Index	| 
+| Wait For Completion	| 
+| Cleanup Assets	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/unload-scene-node.html[Reference]
+endif::[]

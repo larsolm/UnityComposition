@@ -1,0 +1,11 @@
+[#reference/i-command]
+
+## ICommand
+
+PiRhoSoft.CompositionEngine.ICommand
+
+### Description
+
+### Public Methods
+
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(abstract)_::

@@ -1,0 +1,16 @@
+[#manual/enable-behaviour-node]
+
+## Enable Behaviour Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Target	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/enable-behaviour-node.html[Reference]
+endif::[]

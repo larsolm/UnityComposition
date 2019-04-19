@@ -2,7 +2,7 @@
 
 ## TernaryOperator
 
-PiRhoSoft.CompositionEngine.TernaryOperator : <<reference/operation.html,Operation>>
+PiRhoSoft.CompositionEngine.TernaryOperator : <<reference/infix-operation.html,InfixOperation>>
 
 ### Description
 
@@ -10,15 +10,13 @@ PiRhoSoft.CompositionEngine.TernaryOperator : <<reference/operation.html,Operati
 
 TernaryOperator()::
 
-### Public Fields
+### Public Properties
 
-<<reference/operation.html,Operation>> _Condition_::
-
-<<reference/operation.html,Operation>> _TrueBranch_::
-
-<<reference/operation.html,Operation>> _FalseBranch_::
+<<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(virtual)_::
 
 ### Public Methods
+
+void Parse(<<reference/expression-parser.html,ExpressionParser>> _parser_, <<reference/expression-token.html,ExpressionToken>> _token_) _(virtual)_::
 
 void ToString(StringBuilder _builder_) _(virtual)_::
 

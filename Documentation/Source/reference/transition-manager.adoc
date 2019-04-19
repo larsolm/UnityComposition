@@ -14,8 +14,6 @@ TransitionManager()::
 
 <<reference/transition.html,Transition>> _CurrentTransition_ _(read only)_::
 
-<<reference/transition-renderer.html,TransitionRenderer>> _CurrentRenderer_ _(read only)_::
-
 ### Public Methods
 
 void AddRenderer(<<reference/transition-renderer.html,TransitionRenderer>> _renderer_)::

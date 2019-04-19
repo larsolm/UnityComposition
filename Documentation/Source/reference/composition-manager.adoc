@@ -2,20 +2,44 @@
 
 ## CompositionManager
 
-PiRhoSoft.CompositionEngine.CompositionManager : link:/projects/unity-utilities/documentation/#/v10/reference/singleton-behaviour-1[SingletonBehaviour^]<<<reference/composition-manager.html,CompositionManager>>>
+PiRhoSoft.CompositionEngine.CompositionManager : link:/projects/unity-utilities/documentation/#/v10/reference/global-behaviour-1[GlobalBehaviour^]<<<reference/composition-manager.html,CompositionManager>>>
 
 ### Description
+
+### Static Fields
+
+string _GlobalStoreName_::
+
+string _CommandFolder_::
+
+bool _LogTracking_::
+
+### Static Properties
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2[Dictionary^]<<<reference/instruction.html,Instruction>>, <<reference/instruction.html,Instruction>>> _TrackingState_ _(read only)_::
+
+### Static Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Track(<<reference/instruction.html,Instruction>> _instruction_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] _enumerator_)::
 
 ### Constructors
 
 CompositionManager()::
 
-### Public Fields
+### Public Properties
 
-<<reference/command-set.html,CommandSet>> _Commands_::
+<<reference/i-variable-store.html,IVariableStore>> _DefaultStore_ _(read only)_::
+
+<<reference/variable-store.html,VariableStore>> _GlobalStore_ _(read only)_::
 
 ### Public Methods
 
-void RunInstruction(<<reference/instruction.html,Instruction>> _instruction_, <<reference/instruction-context.html,InstructionContext>> _context_, Object _thisObject_)::
+void RunInstruction(<<reference/instruction.html,Instruction>> _instruction_, <<reference/variable-value.html,VariableValue>> _context_)::
 
-void RunInstruction(<<reference/instruction-caller.html,InstructionCaller>> _caller_, <<reference/instruction-context.html,InstructionContext>> _context_, Object _thisObject_)::
+void RunInstruction(<<reference/instruction-caller.html,InstructionCaller>> _caller_, <<reference/variable-value.html,VariableValue>> _context_)::
+
+void RunInstruction(<<reference/instruction-caller.html,InstructionCaller>> _caller_, <<reference/i-variable-store.html,IVariableStore>> _store_, <<reference/variable-value.html,VariableValue>> _context_)::
+
+void AddBinding(<<reference/variable-binding.html,VariableBinding>> _binding_)::
+
+void RemoveBinding(<<reference/variable-binding.html,VariableBinding>> _binding_)::

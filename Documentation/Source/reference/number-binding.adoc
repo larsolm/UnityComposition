@@ -1,0 +1,25 @@
+[#reference/number-binding]
+
+## NumberBinding
+
+PiRhoSoft.CompositionEngine.NumberBinding : <<reference/variable-binding.html,VariableBinding>>
+
+### Description
+
+### Constructors
+
+NumberBinding()::
+
+### Public Fields
+
+<<reference/binding-formatter.html,BindingFormatter>> _Format_::
+
+<<reference/variable-reference.html,VariableReference>> _Variable_::
+
+### Public Properties
+
+TextMeshProUGUI _Text_ _(read only)_::
+
+### Protected Methods
+
+void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

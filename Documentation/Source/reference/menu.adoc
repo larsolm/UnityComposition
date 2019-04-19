@@ -1,0 +1,59 @@
+[#reference/menu]
+
+## Menu
+
+PiRhoSoft.CompositionEngine.Menu : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+Menu()::
+
+### Public Fields
+
+Action<<<reference/menu-item.html,MenuItem>>> _OnItemAdded_::
+
+Action<<<reference/menu-item.html,MenuItem>>> _OnItemRemoved_::
+
+Action<<<reference/menu-item.html,MenuItem>>, <<reference/menu-item.html,MenuItem>>> _OnItemMoved_::
+
+Action<<<reference/menu-item.html,MenuItem>>> _OnItemBlurred_::
+
+Action<<<reference/menu-item.html,MenuItem>>> _OnItemFocused_::
+
+Action<<<reference/menu-item.html,MenuItem>>> _OnItemSelected_::
+
+Action _OnCancelled_::
+
+### Public Properties
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/menu-item.html,MenuItem>>> _Items_ _(read only)_::
+
+<<reference/menu-item.html,MenuItem>> _FocusedItem_ _(read only)_::
+
+int _FocusedIndex_ _(read only)_::
+
+### Public Methods
+
+void SetFocusedItem(<<reference/menu-item.html,MenuItem>> _item_)::
+
+void SelectFocusedItem()::
+
+void Cancel()::
+
+### Protected Methods
+
+void ItemAdded(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
+
+void ItemRemoved(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
+
+void ItemMoved(<<reference/menu-item.html,MenuItem>> _item_, int _from_) _(virtual)_::
+
+void ItemFocused(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
+
+void ItemBlurred(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
+
+void ItemSelected(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
+
+void Cancelled() _(virtual)_::

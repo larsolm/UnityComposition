@@ -1,0 +1,16 @@
+[#manual/input-message]
+
+## Input Message
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Accept Button	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/input-message.html[Reference]
+endif::[]

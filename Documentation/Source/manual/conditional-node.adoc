@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/expression.html,Expression>> _Condition_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Condition	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/conditional-node.html[Reference]

@@ -4,11 +4,14 @@
 
 ### Fields
 
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-https://docs.unity3d.com/ScriptReference/Texture2D.html[Texture2D^] _Texture_::
-
-float _Noise Scale_::
+| Color	| 
+| Texture	| 
+| Noise Scale	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/dissolve.html[Reference]

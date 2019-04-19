@@ -2,7 +2,7 @@
 
 ## AcosCommand
 
-PiRhoSoft.CompositionEngine.AcosCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.AcosCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

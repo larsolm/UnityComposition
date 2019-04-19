@@ -1,0 +1,13 @@
+[#reference/float-variable-source]
+
+## FloatVariableSource
+
+PiRhoSoft.CompositionEngine.FloatVariableSource : <<reference/variable-source-1.html,VariableSource>><float>
+
+### Description
+
+### Constructors
+
+FloatVariableSource()::
+
+FloatVariableSource(float _defaultValue_)::

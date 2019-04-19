@@ -1,0 +1,19 @@
+[#reference/input-message]
+
+## InputMessage
+
+PiRhoSoft.CompositionEngine.InputMessage : <<reference/message-control.html,MessageControl>>
+
+### Description
+
+### Constructors
+
+InputMessage()::
+
+### Public Fields
+
+string _AcceptButton_::
+
+### Protected Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::

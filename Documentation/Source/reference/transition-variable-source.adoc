@@ -2,7 +2,7 @@
 
 ## TransitionVariableSource
 
-PiRhoSoft.CompositionEngine.TransitionVariableSource : <<reference/object-variable-source-1.html,ObjectVariableSource>><<<reference/transition.html,Transition>>>
+PiRhoSoft.CompositionEngine.TransitionVariableSource : <<reference/variable-source-1.html,VariableSource>><<<reference/transition.html,Transition>>>
 
 ### Description
 

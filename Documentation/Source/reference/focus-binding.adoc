@@ -1,0 +1,19 @@
+[#reference/focus-binding]
+
+## FocusBinding
+
+PiRhoSoft.CompositionEngine.FocusBinding : <<reference/binding-root.html,BindingRoot>>
+
+### Description
+
+### Constructors
+
+FocusBinding()::
+
+### Public Fields
+
+<<reference/menu.html,Menu>> _Menu_::
+
+### Public Properties
+
+<<reference/variable-value.html,VariableValue>> _Value_ _(read only)_ _(virtual)_::

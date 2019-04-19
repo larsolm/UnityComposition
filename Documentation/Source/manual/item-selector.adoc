@@ -1,9 +1,0 @@
-[#manual/item-selector]
-
-## Item Selector
-
-
-
-ifdef::backend-multipage_html5[]
-link:reference/item-selector.html[Reference]
-endif::[]

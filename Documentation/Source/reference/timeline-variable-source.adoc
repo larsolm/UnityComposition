@@ -1,0 +1,11 @@
+[#reference/timeline-variable-source]
+
+## TimelineVariableSource
+
+PiRhoSoft.CompositionEngine.TimelineVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/TimelineAsset.html[TimelineAsset^]>
+
+### Description
+
+### Constructors
+
+TimelineVariableSource()::

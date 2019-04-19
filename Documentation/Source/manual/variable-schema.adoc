@@ -1,0 +1,19 @@
+[#manual/variable-schema]
+
+## Variable Schema
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Initializer Type	| 
+| Tags	| 
+| _definitions	| 
+| _version	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/variable-schema.html[Reference]
+endif::[]

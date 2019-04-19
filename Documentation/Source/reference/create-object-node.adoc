@@ -14,13 +14,21 @@ CreateObjectNode()::
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _Prefab_::
+<<reference/game-object-variable-source.html,GameObjectVariableSource>> _Prefab_::
 
-string _ObjectName_::
+<<reference/string-variable-source.html,StringVariableSource>> _ObjectName_::
 
-https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Position_::
+<<reference/variable-reference.html,VariableReference>> _ObjectVariable_::
+
+<<reference/create-object-node-object-positioning.html,ObjectPositioning>> _Positioning_::
+
+<<reference/variable-reference.html,VariableReference>> _Object_::
 
 <<reference/variable-reference.html,VariableReference>> _Parent_::
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _Position_::
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _Rotation_::
 
 ### Public Properties
 
@@ -28,8 +36,8 @@ https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read o
 
 ### Public Methods
 
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
 
-### Protected Methods
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_) _(virtual)_::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run_(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

@@ -2,13 +2,17 @@
 
 ## LessOperator
 
-PiRhoSoft.CompositionEngine.LessOperator : <<reference/infix-operation.html,InfixOperation>>
+PiRhoSoft.CompositionEngine.LessOperator : <<reference/comparison-operator.html,ComparisonOperator>>
 
 ### Description
 
 ### Constructors
 
 LessOperator()::
+
+### Public Properties
+
+<<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 

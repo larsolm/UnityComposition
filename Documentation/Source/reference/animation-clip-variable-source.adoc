@@ -2,7 +2,7 @@
 
 ## AnimationClipVariableSource
 
-PiRhoSoft.CompositionEngine.AnimationClipVariableSource : <<reference/object-variable-source-1.html,ObjectVariableSource>><https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^]>
+PiRhoSoft.CompositionEngine.AnimationClipVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^]>
 
 ### Description
 

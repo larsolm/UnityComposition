@@ -1,0 +1,19 @@
+[#reference/constrained-store]
+
+## ConstrainedStore
+
+PiRhoSoft.CompositionEngine.ConstrainedStore : <<reference/writable-store.html,WritableStore>>, <<reference/i-schema-owner.html,ISchemaOwner>>
+
+### Description
+
+### Constructors
+
+ConstrainedStore(<<reference/variable-schema.html,VariableSchema>> _schema_)::
+
+### Public Properties
+
+<<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void SetupSchema() _(virtual)_::

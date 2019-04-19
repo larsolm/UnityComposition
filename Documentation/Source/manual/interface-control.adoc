@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/dependent-object-list.html,Dependent Object List>> _Dependent Objects_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Dependent Objects	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/interface-control.html[Reference]

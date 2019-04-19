@@ -1,0 +1,19 @@
+[#reference/binding-formatter-number-format-type]
+
+## NumberFormatType
+
+PiRhoSoft.CompositionEngine.NumberFormatType
+
+### Description
+
+### Values
+
+<<reference/binding-formatter-number-format-type.html,NumberFormatType>> _Percentage_::
+
+<<reference/binding-formatter-number-format-type.html,NumberFormatType>> _Commas_::
+
+<<reference/binding-formatter-number-format-type.html,NumberFormatType>> _Rounded_::
+
+<<reference/binding-formatter-number-format-type.html,NumberFormatType>> _Decimal_::
+
+<<reference/binding-formatter-number-format-type.html,NumberFormatType>> _Custom_::

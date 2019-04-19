@@ -6,6 +6,50 @@ PiRhoSoft.CompositionEngine.ExpressionLexer
 
 ### Description
 
+### Static Fields
+
+string _NullConstant_::
+
+string _TrueConstant_::
+
+string _FalseConstant_::
+
+string _PiConstant_::
+
+string _Deg2RadConstant_::
+
+string _Rad2DegConstant_::
+
+string _TernaryOperator_::
+
+string _CastOperator_::
+
+string _TestOperator_::
+
+Char _StringSymbol_::
+
+Char _ColorSymbol_::
+
+Char _MemberAccessSymbol_::
+
+Char _LookupOpenSymbol_::
+
+Char _LookupCloseSymbol_::
+
+Char _GroupOpenSymbol_::
+
+Char _GroupCloseSymbol_::
+
+Char _SeparatorSymbol_::
+
+Char _AlternationSymbol_::
+
 ### Static Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/expression-token.html,ExpressionToken>>> Tokenize(string _input_)::
+
+void AddConstant(string _text_, <<reference/variable-value.html,VariableValue>> _value_)::
+
+void AddKeyword(string _text_)::
+
+<<reference/variable-value.html,VariableValue>> GetConstant(string _text_)::

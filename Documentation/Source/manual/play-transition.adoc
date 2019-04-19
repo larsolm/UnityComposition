@@ -4,11 +4,15 @@
 
 ### Fields
 
-<<manual/transition-variable-source.html,Transition Variable Source>> _Transition_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-<<manual/transition-phase.html,Transition Phase>> _Phase_::
-
-bool _Auto Finish_::
+| Transition	| 
+| Phase	| 
+| Auto Finish	| 
+| Wait For Completion	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/play-transition.html[Reference]

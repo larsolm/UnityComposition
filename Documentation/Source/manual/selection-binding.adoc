@@ -2,11 +2,7 @@
 
 ## Selection Binding
 
-### Fields
 
-<<manual/selection-control.html,Selection Control>> _Selection Control_::
-
-string _Binding Group_::
 
 ifdef::backend-multipage_html5[]
 link:reference/selection-binding.html[Reference]

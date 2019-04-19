@@ -1,0 +1,18 @@
+[#manual/command]
+
+## Command
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Name	| 
+| Parameters	| 
+| Expression	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/command.html[Reference]
+endif::[]

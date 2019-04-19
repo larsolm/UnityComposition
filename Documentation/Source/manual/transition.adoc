@@ -4,7 +4,12 @@
 
 ### Fields
 
-float _Duration_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Duration	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/transition.html[Reference]

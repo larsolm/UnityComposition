@@ -12,12 +12,10 @@ ExpressionToken()::
 
 ### Public Fields
 
-int _Location_::
-
 <<reference/expression-token-type.html,ExpressionTokenType>> _Type_::
 
-string _Text_::
+int _Location_::
 
-int _Integer_::
+int _Start_::
 
-float _Number_::
+int _End_::

@@ -1,0 +1,15 @@
+[#reference/input-node-button-button-type]
+
+## ButtonType
+
+PiRhoSoft.CompositionEngine.ButtonType
+
+### Description
+
+### Values
+
+<<reference/input-node-button-button-type.html,ButtonType>> _Axis_::
+
+<<reference/input-node-button-button-type.html,ButtonType>> _Button_::
+
+<<reference/input-node-button-button-type.html,ButtonType>> _Key_::

@@ -1,0 +1,51 @@
+[#reference/transform-node]
+
+## TransformNode
+
+PiRhoSoft.CompositionEngine.TransformNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+### Constructors
+
+TransformNode()::
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+<<reference/variable-reference.html,VariableReference>> _Transform_::
+
+bool _UseRelativePosition_::
+
+bool _UseRelativeRotation_::
+
+bool _UseRelativeScale_::
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _TargetPosition_::
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _TargetRotation_::
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _TargetScale_::
+
+<<reference/transform-node-animation-type.html,AnimationType>> _AnimationMethod_::
+
+bool _WaitForCompletion_::
+
+<<reference/float-variable-source.html,FloatVariableSource>> _Duration_::
+
+<<reference/float-variable-source.html,FloatVariableSource>> _MoveSpeed_::
+
+<<reference/float-variable-source.html,FloatVariableSource>> _RotationSpeed_::
+
+<<reference/float-variable-source.html,FloatVariableSource>> _ScaleSpeed_::
+
+### Public Properties
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

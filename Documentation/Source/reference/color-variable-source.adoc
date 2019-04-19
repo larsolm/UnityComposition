@@ -1,0 +1,13 @@
+[#reference/color-variable-source]
+
+## ColorVariableSource
+
+PiRhoSoft.CompositionEngine.ColorVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/Color.html[Color^]>
+
+### Description
+
+### Constructors
+
+ColorVariableSource()::
+
+ColorVariableSource(https://docs.unity3d.com/ScriptReference/Color.html[Color^] _defaultValue_)::

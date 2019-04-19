@@ -10,7 +10,7 @@ PiRhoSoft.CompositionEngine.Cutoff : <<reference/transition.html,Transition>>
 
 void Process(float _time_, <<reference/transition-phase.html,TransitionPhase>> _phase_) _(virtual)_::
 
-void Render(<<reference/transition-renderer.html,TransitionRenderer>> _renderer_, https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _source_, https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _destination_) _(virtual)_::
+void Render(https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _source_, https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _destination_) _(virtual)_::
 
 ### Protected Constructors
 

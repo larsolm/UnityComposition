@@ -1,0 +1,19 @@
+[#manual/get-property-node]
+
+## Get Property Node
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Target	| 
+| Output	| 
+| Target Type Name	| 
+| Property Name	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/get-property-node.html[Reference]
+endif::[]

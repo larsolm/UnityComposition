@@ -2,7 +2,7 @@
 
 ## TruncateCommand
 
-PiRhoSoft.CompositionEngine.TruncateCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.TruncateCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

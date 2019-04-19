@@ -5,17 +5,19 @@ using System.Linq;
 using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
 	[CustomEditor(typeof(SetPropertyNode))]
 	class SetPropertyNodeEditor : Editor
 	{
-		private static readonly GUIContent _targetTypeContent = new GUIContent("Component Type", "The Type of the component to set the property for");
+		private static readonly GUIContent _targetTypeContent = new GUIContent("Object Type", "The Type of the object to set the property for");
 		private static readonly GUIContent _propertyContent = new GUIContent("Property", "The name of the property to set");
 
 		private SetPropertyNode _node;
 		private string[] _propertyNames;
+		private string[] _propertyDisplays;
 		private Type[] _propertyTypes;
 		private SerializedProperty _nameProperty;
 		private SerializedProperty _nextProperty;
@@ -46,20 +48,23 @@ namespace PiRhoSoft.CompositionEditor
 					.Where(property => property.GetCustomAttribute<ObsoleteAttribute>() == null).ToArray();
 
 				_propertyNames = new string[fields.Length + properties.Length];
+				_propertyDisplays = new string[fields.Length + properties.Length];
 				_propertyTypes = new Type[fields.Length + properties.Length];
 
 				var index = 0;
 
 				foreach (var field in fields)
 				{
+					_propertyTypes[index] = field.FieldType;
 					_propertyNames[index] = field.Name;
-					_propertyTypes[index++] = field.FieldType;
+					_propertyDisplays[index++] = string.Format("{0} {1}", field.FieldType.Name, field.Name);
 				}
 
 				foreach (var property in properties)
 				{
+					_propertyTypes[index] = property.PropertyType;
 					_propertyNames[index] = property.Name;
-					_propertyTypes[index++] = property.PropertyType;
+					_propertyDisplays[index++] = string.Format("{0} {1}", property.PropertyType.Name, property.Name);
 				}
 			}
 			else
@@ -78,7 +83,7 @@ namespace PiRhoSoft.CompositionEditor
 				EditorGUILayout.PropertyField(_targetProperty);
 			}
 
-			var type = TypeDisplayDrawer.Draw<Component>(_targetTypeContent, _node.TargetType, false, true);
+			var type = TypeDisplayDrawer.Draw<Object>(_targetTypeContent, _node.TargetType, false, true);
 
 			if (type != _node.TargetType)
 			{
@@ -97,8 +102,8 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				using (new UndoScope(_node, false))
 				{
-					var property = Array.IndexOf(_propertyNames, _node.PropertyName);
-					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyNames);
+					var property = Array.IndexOf(_propertyTypes, _node.Property?.PropertyType);
+					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyDisplays);
 
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty], _propertyTypes[selectedProperty]);

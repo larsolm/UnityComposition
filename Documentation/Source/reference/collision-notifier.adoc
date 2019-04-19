@@ -1,0 +1,11 @@
+[#reference/collision-notifier]
+
+## CollisionNotifier
+
+PiRhoSoft.CompositionEngine.CollisionNotifier : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+CollisionNotifier()::

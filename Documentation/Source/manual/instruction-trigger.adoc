@@ -1,0 +1,16 @@
+[#manual/instruction-trigger]
+
+## Instruction Trigger
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Graph	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/instruction-trigger.html[Reference]
+endif::[]

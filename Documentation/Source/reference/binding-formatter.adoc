@@ -1,0 +1,35 @@
+[#reference/binding-formatter]
+
+## BindingFormatter
+
+PiRhoSoft.CompositionEngine.BindingFormatter
+
+### Description
+
+### Static Fields
+
+string[] _TimeFormats_::
+
+string[] _NumberFormats_::
+
+### Constructors
+
+BindingFormatter()::
+
+### Public Fields
+
+string _Format_::
+
+<<reference/binding-formatter-format-type.html,FormatType>> _Formatting_::
+
+<<reference/binding-formatter-time-format-type.html,TimeFormatType>> _TimeFormatting_::
+
+<<reference/binding-formatter-number-format-type.html,NumberFormatType>> _NumberFormatting_::
+
+string _ValueFormat_::
+
+### Public Methods
+
+string GetFormattedString(float _number_)::
+
+string GetFormattedString(int _number_)::

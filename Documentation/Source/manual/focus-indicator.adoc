@@ -1,9 +1,0 @@
-[#manual/focus-indicator]
-
-## Focus Indicator
-
-
-
-ifdef::backend-multipage_html5[]
-link:reference/focus-indicator.html[Reference]
-endif::[]

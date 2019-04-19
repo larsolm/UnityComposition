@@ -3,6 +3,7 @@ using System;
 using System.Collections;
 using System.Reflection;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -10,14 +11,14 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "set-property-node")]
 	public class SetPropertyNode : InstructionGraphNode, ISerializationCallbackReceiver
 	{
-		private const string _invalidComponentTypeWarning = "(CNCSPNICT) Unable to set property for {0}: the Target '{1}' was not of type '{2}'";
+		private const string _invalidObjectTypeWarning = "(CNCSPNIOT) Unable to set property for {0}: the Target '{1}' was not of type '{2}'";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The target Component to set the property on")]
-		[VariableConstraint(typeof(Component))]
-		public VariableReference Target = new VariableReference();
+		[ClassDisplay(ClassDisplayType.Propogated)]
+		public ObjectVariableSource Target = new ObjectVariableSource();
 
 		[Tooltip("The target value to set the property to")]
 		public VariableValueSource Value = new VariableValueSource();
@@ -35,11 +36,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
-			if (ResolveObject(variables, Target, out Component target))
+			if (ResolveObject(variables, Target, out var target))
 			{
-				var cast = ComponentHelper.GetAsComponent(TargetType, target);
-
-				if (cast && TargetType.IsAssignableFrom(cast.GetType()))
+				var cast = ComponentHelper.GetAsObject(TargetType, target);
+				if (cast)
 				{
 					Resolve(variables, Value, out var value);
 
@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else
 				{
-					Debug.LogWarningFormat(this, _invalidComponentTypeWarning, Name, Target, TargetTypeName);
+					Debug.LogWarningFormat(this, _invalidObjectTypeWarning, Name, Target, TargetTypeName);
 				}
 			}
 
@@ -59,7 +59,7 @@ namespace PiRhoSoft.CompositionEngine
 			yield break;
 		}
 
-		private void Set(Component target, VariableValue value)
+		private void Set(Object target, VariableValue value)
 		{
 			switch (value.Type)
 			{
@@ -139,7 +139,7 @@ namespace PiRhoSoft.CompositionEngine
 				return Activator.CreateInstance(closed) as Setter;
 			}
 
-			public abstract void Set(Component obj, VariableValue value);
+			public abstract void Set(Object obj, VariableValue value);
 
 			protected abstract void SetupAsBool(MethodInfo setMethod);
 			protected abstract void SetupAsInt(MethodInfo setMethod);
@@ -159,128 +159,128 @@ namespace PiRhoSoft.CompositionEngine
 			protected abstract void SetupAsObject(MethodInfo setMethod);
 		}
 
-		private class Setter<ComponentType, PropertyType> : Setter where ComponentType : Component
+		private class Setter<ObjectType, PropertyType> : Setter where ObjectType : Object
 		{
-			public Action<ComponentType, VariableValue> Method;
+			public Action<ObjectType, VariableValue> Method;
 
-			public override void Set(Component obj, VariableValue value)
+			public override void Set(Object obj, VariableValue value)
 			{
-				var component = (ComponentType)obj;
-				Method(component, value);
+				var o = (ObjectType)obj;
+				Method(o, value);
 			}
 
 			protected override void SetupAsBool(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, bool>)setMethod.CreateDelegate(typeof(Action<ComponentType, bool>));
+				var set = (Action<ObjectType, bool>)setMethod.CreateDelegate(typeof(Action<ObjectType, bool>));
 				Method = (component, value) => SetBool(component, value, set);
 			}
 
 			protected override void SetupAsInt(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, int>)setMethod.CreateDelegate(typeof(Action<ComponentType, int>));
+				var set = (Action<ObjectType, int>)setMethod.CreateDelegate(typeof(Action<ObjectType, int>));
 				Method = (component, value) => SetInt(component, value, set);
 			}
 
 			protected override void SetupAsFloat(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, float>)setMethod.CreateDelegate(typeof(Action<ComponentType, float>));
+				var set = (Action<ObjectType, float>)setMethod.CreateDelegate(typeof(Action<ObjectType, float>));
 				Method = (component, value) => SetFloat(component, value, set);
 			}
 
 			protected override void SetupAsInt2(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Vector2Int>)setMethod.CreateDelegate(typeof(Action<ComponentType, Vector2Int>));
+				var set = (Action<ObjectType, Vector2Int>)setMethod.CreateDelegate(typeof(Action<ObjectType, Vector2Int>));
 				Method = (component, value) => SetInt2(component, value, set);
 			}
 
 			protected override void SetupAsInt3(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Vector3Int>)setMethod.CreateDelegate(typeof(Action<ComponentType, Vector3Int>));
+				var set = (Action<ObjectType, Vector3Int>)setMethod.CreateDelegate(typeof(Action<ObjectType, Vector3Int>));
 				Method = (component, value) => SetInt3(component, value, set);
 			}
 
 			protected override void SetupAsIntRect(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, RectInt>)setMethod.CreateDelegate(typeof(Action<ComponentType, RectInt>));
+				var set = (Action<ObjectType, RectInt>)setMethod.CreateDelegate(typeof(Action<ObjectType, RectInt>));
 				Method = (component, value) => SetIntRect(component, value, set);
 			}
 
 			protected override void SetupAsIntBounds(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, BoundsInt>)setMethod.CreateDelegate(typeof(Action<ComponentType, BoundsInt>));
+				var set = (Action<ObjectType, BoundsInt>)setMethod.CreateDelegate(typeof(Action<ObjectType, BoundsInt>));
 				Method = (component, value) => SetIntBounds(component, value, set);
 			}
 
 			protected override void SetupAsVector2(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Vector2>)setMethod.CreateDelegate(typeof(Action<ComponentType, Vector2>));
+				var set = (Action<ObjectType, Vector2>)setMethod.CreateDelegate(typeof(Action<ObjectType, Vector2>));
 				Method = (component, value) => SetVector2(component, value, set);
 			}
 
 			protected override void SetupAsVector3(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Vector3>)setMethod.CreateDelegate(typeof(Action<ComponentType, Vector3>));
+				var set = (Action<ObjectType, Vector3>)setMethod.CreateDelegate(typeof(Action<ObjectType, Vector3>));
 				Method = (component, value) => SetVector3(component, value, set);
 			}
 
 			protected override void SetupAsVector4(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Vector4>)setMethod.CreateDelegate(typeof(Action<ComponentType, Vector4>));
+				var set = (Action<ObjectType, Vector4>)setMethod.CreateDelegate(typeof(Action<ObjectType, Vector4>));
 				Method = (component, value) => SetVector4(component, value, set);
 			}
 
 			protected override void SetupAsQuaternion(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Quaternion>)setMethod.CreateDelegate(typeof(Action<ComponentType, Quaternion>));
+				var set = (Action<ObjectType, Quaternion>)setMethod.CreateDelegate(typeof(Action<ObjectType, Quaternion>));
 				Method = (component, value) => SetQuaternion(component, value, set);
 			}
 
 			protected override void SetupAsRect(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Rect>)setMethod.CreateDelegate(typeof(Action<ComponentType, Rect>));
+				var set = (Action<ObjectType, Rect>)setMethod.CreateDelegate(typeof(Action<ObjectType, Rect>));
 				Method = (component, value) => SetRect(component, value, set);
 			}
 
 			protected override void SetupAsBounds(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Bounds>)setMethod.CreateDelegate(typeof(Action<ComponentType, Bounds>));
+				var set = (Action<ObjectType, Bounds>)setMethod.CreateDelegate(typeof(Action<ObjectType, Bounds>));
 				Method = (component, value) => SetBounds(component, value, set);
 			}
 
 			protected override void SetupAsColor(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, Color>)setMethod.CreateDelegate(typeof(Action<ComponentType, Color>));
+				var set = (Action<ObjectType, Color>)setMethod.CreateDelegate(typeof(Action<ObjectType, Color>));
 				Method = (component, value) => SetColor(component, value, set);
 			}
 
 			protected override void SetupAsString(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, string>)setMethod.CreateDelegate(typeof(Action<ComponentType, string>));
+				var set = (Action<ObjectType, string>)setMethod.CreateDelegate(typeof(Action<ObjectType, string>));
 				Method = (component, value) => SetString(component, value, set);
 			}
 
 			protected override void SetupAsObject(MethodInfo setMethod)
 			{
-				var set = (Action<ComponentType, PropertyType>)setMethod.CreateDelegate(typeof(Action<ComponentType, PropertyType>));
+				var set = (Action<ObjectType, PropertyType>)setMethod.CreateDelegate(typeof(Action<ObjectType, PropertyType>));
 				Method = (component, value) => SetObject(component, value, set);
 			}
 
-			private static void SetBool(ComponentType component, VariableValue value, Action<ComponentType, bool> setter) => setter(component, value.Bool);
-			private static void SetInt(ComponentType component, VariableValue value, Action<ComponentType, int> setter) => setter(component, value.Int);
-			private static void SetFloat(ComponentType component, VariableValue value, Action<ComponentType, float> setter) => setter(component, value.Number);
-			private static void SetInt2(ComponentType component, VariableValue value, Action<ComponentType, Vector2Int> setter) => setter(component, value.Int2);
-			private static void SetInt3(ComponentType component, VariableValue value, Action<ComponentType, Vector3Int> setter) => setter(component, value.Int3);
-			private static void SetIntRect(ComponentType component, VariableValue value, Action<ComponentType, RectInt> setter) => setter(component, value.IntRect);
-			private static void SetIntBounds(ComponentType component, VariableValue value, Action<ComponentType, BoundsInt> setter) => setter(component, value.IntBounds);
-			private static void SetVector2(ComponentType component, VariableValue value, Action<ComponentType, Vector2> setter) => setter(component, value.Vector2);
-			private static void SetVector3(ComponentType component, VariableValue value, Action<ComponentType, Vector3> setter) => setter(component, value.Vector3);
-			private static void SetVector4(ComponentType component, VariableValue value, Action<ComponentType, Vector4> setter) => setter(component, value.Vector4);
-			private static void SetQuaternion(ComponentType component, VariableValue value, Action<ComponentType, Quaternion> setter) => setter(component, value.Quaternion);
-			private static void SetRect(ComponentType component, VariableValue value, Action<ComponentType, Rect> setter) => setter(component, value.Rect);
-			private static void SetBounds(ComponentType component, VariableValue value, Action<ComponentType, Bounds> setter) => setter(component, value.Bounds);
-			private static void SetColor(ComponentType component, VariableValue value, Action<ComponentType, Color> setter) => setter(component, value.Color);
-			private static void SetString(ComponentType component, VariableValue value, Action<ComponentType, string> setter) => setter(component, value.String);
-			private static void SetObject(ComponentType component, VariableValue value, Action<ComponentType, PropertyType> setter) => setter(component, (PropertyType)value.Reference);
+			private static void SetBool(ObjectType component, VariableValue value, Action<ObjectType, bool> setter) => setter(component, value.Bool);
+			private static void SetInt(ObjectType component, VariableValue value, Action<ObjectType, int> setter) => setter(component, value.Int);
+			private static void SetFloat(ObjectType component, VariableValue value, Action<ObjectType, float> setter) => setter(component, value.Number);
+			private static void SetInt2(ObjectType component, VariableValue value, Action<ObjectType, Vector2Int> setter) => setter(component, value.Int2);
+			private static void SetInt3(ObjectType component, VariableValue value, Action<ObjectType, Vector3Int> setter) => setter(component, value.Int3);
+			private static void SetIntRect(ObjectType component, VariableValue value, Action<ObjectType, RectInt> setter) => setter(component, value.IntRect);
+			private static void SetIntBounds(ObjectType component, VariableValue value, Action<ObjectType, BoundsInt> setter) => setter(component, value.IntBounds);
+			private static void SetVector2(ObjectType component, VariableValue value, Action<ObjectType, Vector2> setter) => setter(component, value.Vector2);
+			private static void SetVector3(ObjectType component, VariableValue value, Action<ObjectType, Vector3> setter) => setter(component, value.Vector3);
+			private static void SetVector4(ObjectType component, VariableValue value, Action<ObjectType, Vector4> setter) => setter(component, value.Vector4);
+			private static void SetQuaternion(ObjectType component, VariableValue value, Action<ObjectType, Quaternion> setter) => setter(component, value.Quaternion);
+			private static void SetRect(ObjectType component, VariableValue value, Action<ObjectType, Rect> setter) => setter(component, value.Rect);
+			private static void SetBounds(ObjectType component, VariableValue value, Action<ObjectType, Bounds> setter) => setter(component, value.Bounds);
+			private static void SetColor(ObjectType component, VariableValue value, Action<ObjectType, Color> setter) => setter(component, value.Color);
+			private static void SetString(ObjectType component, VariableValue value, Action<ObjectType, string> setter) => setter(component, value.String);
+			private static void SetObject(ObjectType component, VariableValue value, Action<ObjectType, PropertyType> setter) => setter(component, (PropertyType)value.Reference);
 		}
 	}
 }

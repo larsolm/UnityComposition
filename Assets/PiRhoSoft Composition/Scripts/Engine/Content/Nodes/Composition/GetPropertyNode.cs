@@ -99,10 +99,10 @@ namespace PiRhoSoft.CompositionEngine
 				return getter;
 			}
 
-			private static Getter Create(Type componentType, Type propertyType)
+			private static Getter Create(Type objectType, Type propertyType)
 			{
 				var open = typeof(Getter<,>);
-				var closed = open.MakeGenericType(componentType, propertyType);
+				var closed = open.MakeGenericType(objectType, propertyType);
 
 				return Activator.CreateInstance(closed) as Getter;
 			}
@@ -118,8 +118,8 @@ namespace PiRhoSoft.CompositionEngine
 
 			public override VariableValue Get(Object obj)
 			{
-				var component = (ObjectType)obj;
-				var value = Method(component);
+				var o = (ObjectType)obj;
+				var value = Method(o);
 				return VariableValue.CreateValue(value);
 			}
 

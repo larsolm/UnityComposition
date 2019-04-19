@@ -2,7 +2,7 @@
 
 ## LerpCommand
 
-PiRhoSoft.CompositionEngine.LerpCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.LerpCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

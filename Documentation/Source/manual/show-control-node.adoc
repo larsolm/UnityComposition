@@ -4,7 +4,12 @@
 
 ### Fields
 
-<<manual/interface-reference.html,Interface Reference>> _Control_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Control	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/show-control-node.html[Reference]

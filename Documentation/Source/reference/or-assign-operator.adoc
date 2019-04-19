@@ -2,7 +2,7 @@
 
 ## OrAssignOperator
 
-PiRhoSoft.CompositionEngine.OrAssignOperator : <<reference/assign-operator.html,AssignOperator>>
+PiRhoSoft.CompositionEngine.OrAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
 
 ### Description
 

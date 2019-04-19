@@ -2,13 +2,17 @@
 
 ## GreaterOrEqualOperator
 
-PiRhoSoft.CompositionEngine.GreaterOrEqualOperator : <<reference/infix-operation.html,InfixOperation>>
+PiRhoSoft.CompositionEngine.GreaterOrEqualOperator : <<reference/comparison-operator.html,ComparisonOperator>>
 
 ### Description
 
 ### Constructors
 
 GreaterOrEqualOperator()::
+
+### Public Properties
+
+<<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 

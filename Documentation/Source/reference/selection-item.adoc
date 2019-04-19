@@ -2,7 +2,7 @@
 
 ## SelectionItem
 
-PiRhoSoft.CompositionEngine.SelectionItem : <<reference/i-variable-store.html,IVariableStore>>
+PiRhoSoft.CompositionEngine.SelectionItem
 
 ### Description
 
@@ -12,7 +12,7 @@ SelectionItem()::
 
 ### Public Fields
 
-<<reference/variable-reference.html,VariableReference>> _Item_::
+<<reference/variable-reference.html,VariableReference>> _Variables_::
 
 <<reference/selection-item-object-source.html,ObjectSource>> _Source_::
 
@@ -27,11 +27,3 @@ bool _Expand_::
 ### Public Properties
 
 string _Id_ _(read only)_::
-
-### Public Methods
-
-<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
-
-<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::

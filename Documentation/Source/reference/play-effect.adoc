@@ -1,0 +1,47 @@
+[#reference/play-effect]
+
+## PlayEffect
+
+PiRhoSoft.CompositionEngine.PlayEffect : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+### Constructors
+
+PlayEffect()::
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+<<reference/game-object-variable-source.html,GameObjectVariableSource>> _Effect_::
+
+<<reference/string-variable-source.html,StringVariableSource>> _EffectName_::
+
+<<reference/variable-reference.html,VariableReference>> _EffectVariable_::
+
+<<reference/play-effect-object-positioning.html,ObjectPositioning>> _Positioning_::
+
+<<reference/variable-reference.html,VariableReference>> _Object_::
+
+<<reference/variable-reference.html,VariableReference>> _Parent_::
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _Position_::
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _Rotation_::
+
+bool _WaitForCompletion_::
+
+bool _DestroyOnComplete_::
+
+### Public Properties
+
+https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
+
+void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_) _(virtual)_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

@@ -1,0 +1,11 @@
+[#reference/start-graph-trigger]
+
+## StartGraphTrigger
+
+PiRhoSoft.CompositionEngine.StartGraphTrigger : <<reference/instruction-trigger.html,InstructionTrigger>>
+
+### Description
+
+### Constructors
+
+StartGraphTrigger()::

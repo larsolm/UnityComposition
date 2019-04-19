@@ -4,13 +4,16 @@
 
 ### Fields
 
-<<manual/interface-reference.html,Interface Reference>> _Control_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-<<manual/message-interaction-type.html,Message Interaction Type>> _Interaction_::
-
-bool _Is Last_::
-
-<<manual/message.html,Message>> _Message_::
+| Control	| 
+| Wait For Completion	| 
+| Auto Hide	| 
+| Wait Time	| 
+| Message	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/message-node.html[Reference]

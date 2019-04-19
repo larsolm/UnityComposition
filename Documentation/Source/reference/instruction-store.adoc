@@ -8,8 +8,6 @@ PiRhoSoft.CompositionEngine.InstructionStore : <<reference/i-variable-store.html
 
 ### Static Fields
 
-string _ThisStoreName_::
-
 string _SceneStoreName_::
 
 string _InputStoreName_::
@@ -24,36 +22,38 @@ bool IsInput(<<reference/variable-reference.html,VariableReference>> _variable_)
 
 bool IsOutput(<<reference/variable-reference.html,VariableReference>> _variable_)::
 
+bool IsInput(<<reference/instruction-input.html,InstructionInput>> _input_)::
+
+bool IsOutput(<<reference/instruction-output.html,InstructionOutput>> _output_)::
+
 ### Constructors
 
-InstructionStore(<<reference/instruction-context.html,InstructionContext>> _context_, Object _thisObject_)::
+InstructionStore(<<reference/instruction.html,Instruction>> _instruction_, <<reference/variable-value.html,VariableValue>> _context_)::
 
 ### Public Properties
 
-Object _This_ _(read only)_::
+string _ContextName_ _(read only)_::
 
-<<reference/instruction-context.html,InstructionContext>> _Context_ _(read only)_::
+<<reference/variable-value.html,VariableValue>> _Context_ _(read only)_::
 
-<<reference/variable-store.html,VariableStore>> _Inputs_ _(read only)_::
+<<reference/variable-store.html,VariableStore>> _Input_ _(read only)_::
 
-<<reference/variable-store.html,VariableStore>> _Outputs_ _(read only)_::
+<<reference/variable-store.html,VariableStore>> _Output_ _(read only)_::
 
-<<reference/variable-store.html,VariableStore>> _Locals_ _(read only)_::
+<<reference/variable-store.html,VariableStore>> _Local_ _(read only)_::
+
+<<reference/variable-store.html,VariableStore>> _Global_ _(read only)_::
 
 ### Public Methods
 
-void SetContext(<<reference/instruction-context.html,InstructionContext>> _context_)::
-
-void ChangeThis(Object _thisObject_)::
-
-void WriteInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-input.html,InstructionInput>>> _inputs_)::
+void WriteInputs(<<reference/instruction-caller.html,InstructionCaller>> _instruction_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-input.html,InstructionInput>>> _inputs_, <<reference/i-variable-store.html,IVariableStore>> _caller_)::
 
 void WriteOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _outputs_)::
 
-void ReadOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _outputs_)::
+void ReadOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _outputs_, <<reference/i-variable-store.html,IVariableStore>> _caller_)::
 
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<string> GetVariableNames() _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::

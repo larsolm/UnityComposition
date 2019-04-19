@@ -12,9 +12,9 @@ InstructionInput()::
 
 ### Public Fields
 
-<<reference/instruction-input-type.html,InstructionInputType>> _Type_::
+string _Name_::
 
-<<reference/variable-definition.html,VariableDefinition>> _Definition_::
+<<reference/instruction-input-type.html,InstructionInputType>> _Type_::
 
 <<reference/variable-reference.html,VariableReference>> _Reference_::
 

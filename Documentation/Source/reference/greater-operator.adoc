@@ -2,13 +2,17 @@
 
 ## GreaterOperator
 
-PiRhoSoft.CompositionEngine.GreaterOperator : <<reference/infix-operation.html,InfixOperation>>
+PiRhoSoft.CompositionEngine.GreaterOperator : <<reference/comparison-operator.html,ComparisonOperator>>
 
 ### Description
 
 ### Constructors
 
 GreaterOperator()::
+
+### Public Properties
+
+<<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(virtual)_::
 
 ### Public Methods
 

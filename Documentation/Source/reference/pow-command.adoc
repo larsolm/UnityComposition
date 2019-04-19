@@ -2,7 +2,7 @@
 
 ## PowCommand
 
-PiRhoSoft.CompositionEngine.PowCommand : <<reference/command.html,Command>>
+PiRhoSoft.CompositionEngine.PowCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 

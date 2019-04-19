@@ -1,0 +1,35 @@
+[#reference/menu-input]
+
+## MenuInput
+
+PiRhoSoft.CompositionEngine.MenuInput : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Constructors
+
+MenuInput()::
+
+### Public Fields
+
+string _HorizontalAxis_::
+
+string _VerticalAxis_::
+
+string _SelectButton_::
+
+string _CancelButton_::
+
+<<reference/primary-axis.html,PrimaryAxis>> _PrimaryAxis_::
+
+int _RowCount_::
+
+int _ColumnCount_::
+
+bool _VerticalWrapping_::
+
+bool _HorizontalWrapping_::
+
+### Public Methods
+
+void RefreshLayout()::

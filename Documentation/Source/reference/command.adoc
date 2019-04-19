@@ -2,30 +2,30 @@
 
 ## Command
 
-PiRhoSoft.CompositionEngine.Command
+PiRhoSoft.CompositionEngine.Command : https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^], <<reference/i-command.html,ICommand>>
 
 ### Description
 
-### Static Fields
+### Constructors
 
-string _WrongParameterCountException_::
+Command()::
 
-string _WrongParameterRangeException_::
+### Public Fields
 
-string _TooFewParametersException_::
+string _Name_::
 
-string _TooManyParametersException_::
+<<reference/command-parameter-list.html,ParameterList>> _Parameters_::
 
-string _WrongParameterType1Exception_::
-
-string _WrongParameterType2Exception_::
-
-string _InvalidRangeException_::
+<<reference/expression.html,Expression>> _Expression_::
 
 ### Public Methods
 
-<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(abstract)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(virtual)_::
 
-### Protected Constructors
+### Protected Methods
 
-Command()::
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>> _expected_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>> _expected1_, <<reference/variable-type.html,VariableType>> _expected2_)::
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>>[] _expected_)::

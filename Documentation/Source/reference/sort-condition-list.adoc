@@ -1,0 +1,11 @@
+[#reference/sort-condition-list]
+
+## SortConditionList
+
+PiRhoSoft.CompositionEngine.SortConditionList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/variable-reference.html,VariableReference>>>
+
+### Description
+
+### Constructors
+
+SortConditionList()::

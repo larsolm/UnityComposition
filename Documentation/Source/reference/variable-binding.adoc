@@ -1,0 +1,39 @@
+[#reference/variable-binding]
+
+## VariableBinding
+
+PiRhoSoft.CompositionEngine.VariableBinding : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Static Methods
+
+void UpdateBinding(https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _obj_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_)::
+
+void UpdateBinding(https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _obj_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-binding.html,VariableBinding>>> _bindings_)::
+
+### Public Fields
+
+string _BindingGroup_::
+
+bool _AutoUpdate_::
+
+### Public Properties
+
+<<reference/i-variable-store.html,IVariableStore>> _Variables_ _(read only)_::
+
+### Public Methods
+
+void UpdateBinding(string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_)::
+
+### Protected Constructors
+
+VariableBinding()::
+
+### Protected Methods
+
+void OnEnable() _(virtual)_::
+
+void OnDisable() _(virtual)_::
+
+void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(abstract)_::

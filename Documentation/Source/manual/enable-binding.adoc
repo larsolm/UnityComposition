@@ -1,0 +1,17 @@
+[#manual/enable-binding]
+
+## Enable Binding
+
+### Fields
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Object	| 
+| Condition	| 
+|===
+
+ifdef::backend-multipage_html5[]
+link:reference/enable-binding.html[Reference]
+endif::[]

@@ -2,7 +2,7 @@
 
 ## ExponentAssignOperator
 
-PiRhoSoft.CompositionEngine.ExponentAssignOperator : <<reference/assign-operator.html,AssignOperator>>
+PiRhoSoft.CompositionEngine.ExponentAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
 
 ### Description
 

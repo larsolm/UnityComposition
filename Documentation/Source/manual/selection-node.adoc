@@ -4,11 +4,17 @@
 
 ### Fields
 
-<<manual/interface-reference.html,Interface Reference>> _Control_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-bool _Is Selection Required_::
-
-<<manual/selection-node-item-list.html,Selection Node Item List>> _Items_::
+| Control	| 
+| Selected Item	| 
+| Selected Index	| 
+| Is Selection Required	| 
+| Auto Hide	| 
+| Items	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/selection-node.html[Reference]

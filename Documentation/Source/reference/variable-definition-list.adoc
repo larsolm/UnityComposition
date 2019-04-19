@@ -1,0 +1,11 @@
+[#reference/variable-definition-list]
+
+## VariableDefinitionList
+
+PiRhoSoft.CompositionEngine.VariableDefinitionList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/variable-definition.html,VariableDefinition>>>
+
+### Description
+
+### Constructors
+
+VariableDefinitionList()::

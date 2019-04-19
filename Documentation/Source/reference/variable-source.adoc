@@ -1,0 +1,21 @@
+[#reference/variable-source]
+
+## VariableSource
+
+PiRhoSoft.CompositionEngine.VariableSource
+
+### Description
+
+### Public Fields
+
+<<reference/variable-source-type.html,VariableSourceType>> _Type_::
+
+<<reference/variable-reference.html,VariableReference>> _Reference_::
+
+### Public Methods
+
+void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(abstract)_::
+
+### Protected Constructors
+
+VariableSource()::

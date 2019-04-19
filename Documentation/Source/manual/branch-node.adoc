@@ -2,11 +2,22 @@
 
 ## Branch Node
 
+A Branch Node is an <<instruction-graph-node,Instruction Graph Node>> that will branch to any number of different nodes based on the the string evaluation of an link:reference/expression.html[Expression^]. This can be thought of similar to a switch statement in C#.
+
+See the node named _"Branch on Action_" on the _"Battle"_ <<instruction-graph,Instruction Graph>> in the Battle project for an example usage.
+
 ### Fields
 
-<<manual/expression.html,Expression>> _Switch_::
+image:branch-node.png[]
 
-<<manual/instruction-graph-node-dictionary.html,Instruction Graph Node Dictionary>> _Outputs_::
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Switch	| The link:reference/expression.html[Expression^] to run to determine the node to branch to
+| Outputs	| The dictionary of names to nodes to branch to based on _Switch_
+| Default	| The default node to go to if the value of _Switch_ is not in the _Outputs_ dictionary
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/branch-node.html[Reference]

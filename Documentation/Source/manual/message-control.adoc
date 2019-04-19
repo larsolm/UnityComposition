@@ -2,13 +2,7 @@
 
 ## Message Control
 
-### Fields
 
-TextMeshProUGUI _Display Text_::
-
-https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _Continue Indicator_::
-
-https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _Finished Indicator_::
 
 ifdef::backend-multipage_html5[]
 link:reference/message-control.html[Reference]

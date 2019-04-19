@@ -4,13 +4,14 @@
 
 ### Fields
 
-string _Name_::
+[cols="1,2"]
+|===
+| Name	| Description
 
-<<manual/variable-reference.html,Variable Reference>> _This_::
-
-https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Graph Position_::
-
-bool _Is Breakpoint_::
+| Name	| 
+| Graph Position	| 
+| Is Breakpoint	| 
+|===
 
 ifdef::backend-multipage_html5[]
 link:reference/instruction-graph-node.html[Reference]

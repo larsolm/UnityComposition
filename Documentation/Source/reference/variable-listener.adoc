@@ -2,13 +2,13 @@
 
 ## VariableListener
 
-PiRhoSoft.CompositionEngine.VariableListener : <<reference/i-variable-list.html,IVariableList>>
+PiRhoSoft.CompositionEngine.VariableListener : <<reference/i-mapped-variable-list.html,IMappedVariableList>>
 
 ### Description
 
 ### Constructors
 
-VariableListener(<<reference/i-variable-listener.html,IVariableListener>> _listener_, <<reference/i-variable-list.html,IVariableList>> _list_)::
+VariableListener(<<reference/i-variable-listener.html,IVariableListener>> _listener_, <<reference/i-mapped-variable-list.html,IMappedVariableList>> _list_)::
 
 ### Public Properties
 

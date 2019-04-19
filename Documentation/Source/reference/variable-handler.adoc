@@ -1,0 +1,115 @@
+[#reference/variable-handler]
+
+## VariableHandler
+
+PiRhoSoft.CompositionEngine.VariableHandler
+
+### Description
+
+### Static Methods
+
+string ToString(<<reference/variable-value.html,VariableValue>> _value_)::
+
+<<reference/variable-value.html,VariableValue>> CreateDefault(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_)::
+
+void ToString(<<reference/variable-value.html,VariableValue>> _value_, StringBuilder _builder_)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<string> SaveVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable.html,Variable>>> _variables_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable.html,Variable>>> LoadVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+string SaveVariable(<<reference/variable.html,Variable>> _variable_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+<<reference/variable.html,Variable>> LoadVariable(string _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+string SaveValue(<<reference/variable-value.html,VariableValue>> _value_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+<<reference/variable-value.html,VariableValue>> LoadValue(string _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+string SaveConstraint(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+<<reference/variable-constraint.html,VariableConstraint>> LoadConstraint(string _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+void WriteConstraint(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_, BinaryWriter _writer_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_)::
+
+<<reference/variable-constraint.html,VariableConstraint>> ReadConstraint(BinaryReader _reader_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_, Int16 _version_)::
+
+<<reference/variable-value.html,VariableValue>> Add(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Subtract(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Multiply(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Divide(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Modulo(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Exponent(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Negate(<<reference/variable-value.html,VariableValue>> _value_)::
+
+<<reference/variable-value.html,VariableValue>> And(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Or(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Not(<<reference/variable-value.html,VariableValue>> _value_)::
+
+Nullable<bool> IsEqual(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+Nullable<int> Compare(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+<<reference/variable-value.html,VariableValue>> Lookup(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _lookup_)::
+
+<<reference/set-variable-result.html,SetVariableResult>> Apply(<<reference/variable-value&.html,VariableValue>> _owner_ _(ref)_, <<reference/variable-value.html,VariableValue>> _lookup_, <<reference/variable-value.html,VariableValue>> _value_)::
+
+<<reference/variable-value.html,VariableValue>> Cast(<<reference/variable-value.html,VariableValue>> _owner_, string _type_)::
+
+bool Test(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _test_)::
+
+### Protected Constructors
+
+VariableHandler()::
+
+### Protected Methods
+
+<<reference/variable-constraint.html,VariableConstraint>> CreateConstraint() _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> CreateDefault_(<<reference/variable-constraint.html,VariableConstraint>> _constraint_) _(abstract)_::
+
+void ToString_(<<reference/variable-value.html,VariableValue>> _value_, StringBuilder _builder_) _(abstract)_::
+
+void Write_(<<reference/variable-value.html,VariableValue>> _value_, BinaryWriter _writer_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_) _(abstract)_::
+
+<<reference/variable-value.html,VariableValue>> Read_(BinaryReader _reader_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_, Int16 _version_) _(abstract)_::
+
+<<reference/variable-value.html,VariableValue>> Add_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Subtract_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Multiply_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Divide_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Modulo_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Exponent_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Negate_(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> And_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Or_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Not_(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+Nullable<bool> IsEqual_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+Nullable<int> Compare_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Lookup_(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _lookup_) _(virtual)_::
+
+<<reference/set-variable-result.html,SetVariableResult>> Apply_(<<reference/variable-value&.html,VariableValue>> _owner_ _(ref)_, <<reference/variable-value.html,VariableValue>> _lookup_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+
+<<reference/variable-value.html,VariableValue>> Cast_(<<reference/variable-value.html,VariableValue>> _owner_, string _type_) _(virtual)_::
+
+bool Test_(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _test_) _(virtual)_::

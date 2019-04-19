@@ -12,8 +12,8 @@ InstructionOutput()::
 
 ### Public Fields
 
-<<reference/instruction-output-type.html,InstructionOutputType>> _Type_::
+string _Name_::
 
-<<reference/variable-definition.html,VariableDefinition>> _Definition_::
+<<reference/instruction-output-type.html,InstructionOutputType>> _Type_::
 
 <<reference/variable-reference.html,VariableReference>> _Reference_::
