@@ -9,6 +9,9 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Text Color Binding")]
 	public class TextColorBinding : VariableBinding
 	{
+		private const string _missingVariableWarning = "(CBTCBMV) Unable to bind color for text color binding '{0}': the variable '{1}' could not be found";
+		private const string _invalidVariableWarning = "(CBTCBIV) Unable to bind color for text color binding '{0}': the variable '{1}' is not a color";
+
 		[Tooltip("The variable holding the color value to use for the text")]
 		public VariableReference Variable = new VariableReference();
 
@@ -33,6 +36,9 @@ namespace PiRhoSoft.CompositionEngine
 
 			Text.enabled = value.Type == VariableType.Color;
 			Text.color = value.Color;
+
+			if (!SuppressErrors && value.Type != VariableType.Color)
+				Debug.LogWarningFormat(this, value.IsEmpty ? _missingVariableWarning : _invalidVariableWarning, name, Variable);
 		}
 	}
 }

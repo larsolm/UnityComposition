@@ -1,31 +1,32 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(SpriteRenderer))]
-	[HelpURL(Composition.DocumentationUrl + "sprite-color-binding")]
-	[AddComponentMenu("PiRho Soft/Bindings/Sprite Color Binding")]
-	public class SpriteColorBinding : VariableBinding
+	[HelpURL(Composition.DocumentationUrl + "image-color-binding")]
+	[AddComponentMenu("PiRho Soft/Bindings/Image Color Binding")]
+	public class ImageColorBinding : VariableBinding
 	{
-		private const string _missingVariableWarning = "(CBSCBMV) Unable to bind color for sprite color binding '{0}': the variable '{1}' could not be found";
-		private const string _invalidVariableWarning = "(CBSCBIV) Unable to bind color for sprite color binding '{0}': the variable '{1}' is not a color";
+		private const string _missingVariableWarning = "(CBICBMV) Unable to bind color for image color binding '{0}': the variable '{1}' could not be found";
+		private const string _invalidVariableWarning = "(CBICBIV) Unable to bind color for image color binding '{0}': the variable '{1}' is not a color";
 
 		[Tooltip("The variable holding the image to show on this object")]
 		public VariableReference Variable = new VariableReference();
 
-		private SpriteRenderer _sprite;
+		private Image _image;
 
-		public SpriteRenderer Sprite
+		public Image Sprite
 		{
 			get
 			{
 				// can't look up in awake because it's possible to update bindings before the component is enabled
 
-				if (!_sprite)
-					_sprite = GetComponent<SpriteRenderer>();
+				if (!_image)
+					_image = GetComponent<Image>();
 
-				return _sprite;
+				return _image;
 			}
 		}
 

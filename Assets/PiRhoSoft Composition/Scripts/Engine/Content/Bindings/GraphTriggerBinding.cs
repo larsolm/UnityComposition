@@ -7,6 +7,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Graph Trigger Binding")]
 	public class GraphTriggerBinding : VariableBinding
 	{
+		private const string _missingVariableWarning = "(CBGTBMV) Unable to run graph for graph trigger binding '{0}': the variable '{1}' could not be found";
+
 		[Tooltip("The graph to run when Variable changes")]
 		public InstructionCaller Graph = new InstructionCaller();
 
@@ -20,6 +22,9 @@ namespace PiRhoSoft.CompositionEngine
 			if (Graph.Instruction && !Graph.IsRunning)
 			{
 				var value = Variable.GetValue(variables);
+
+				if (!SuppressErrors && value.IsEmpty)
+					Debug.LogWarningFormat(this, _missingVariableWarning, name, Variable);
 
 				if (!VariableHandler.IsEqual(_value, value).GetValueOrDefault(false))
 					StartCoroutine(VariableChanged(value, status));

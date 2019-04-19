@@ -296,6 +296,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 134126814}
   Condition:
     _statement: Calculator.Operation == "Multiply";
@@ -1459,12 +1460,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Formatting:
     Format: '{0}'
     Formatting: 2
     TimeFormatting: 3
-    NumberFormatting: 0
-    ValueFormat: 0.#%
+    NumberFormatting: 2
+    ValueFormat: 0
   Expression:
     _statement: 'Calculator.Operation == "Equals" ? Calculator.Answer : Calculator.Display'
 --- !u!1 &569431106
@@ -3156,6 +3159,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1136881293}
   Condition:
     _statement: Calculator.Operation == "Plus";
@@ -3674,6 +3678,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1413441507}
   Condition:
     _statement: Calculator.Operation == "Divide";
@@ -4180,6 +4185,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1611542639}
   Condition:
     _statement: Calculator.Operation == "Minus";
