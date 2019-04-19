@@ -230,6 +230,7 @@ GameObject:
   - component: {fileID: 128260286}
   - component: {fileID: 128260288}
   - component: {fileID: 128260287}
+  - component: {fileID: 128260289}
   - component: {fileID: 128260290}
   m_Layer: 5
   m_Name: Label
@@ -380,6 +381,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 128260285}
   m_CullTransparentMesh: 0
+--- !u!114 &128260289
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 128260285}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22128564e9e45e84988038b441a01170, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ValueName: Item
+  Menu: {fileID: 1097411777}
 --- !u!114 &128260290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -396,10 +411,12 @@ MonoBehaviour:
   AutoUpdate: 1
   AutoSizeContainer: 0
   Variable:
-    _variable: Item.Description
+    _variable: Item.Value.Description
     _tokens:
     - Type: 0
       Text: Item
+    - Type: 0
+      Text: Value
     - Type: 0
       Text: Description
 --- !u!1 &457249289
@@ -506,7 +523,7 @@ MonoBehaviour:
   NextRight: {fileID: 0}
   NextUp: {fileID: 0}
   NextDown: {fileID: 0}
-  FocusOnLoad: 0
+  FocusOnLoad: 1
   ScrollPadding: 10
 --- !u!114 &457249294
 MonoBehaviour:
@@ -1686,7 +1703,7 @@ MonoBehaviour:
   m_Spacing: 10
   m_ChildForceExpandWidth: 1
   m_ChildForceExpandHeight: 0
-  m_ChildControlWidth: 0
+  m_ChildControlWidth: 1
   m_ChildControlHeight: 0
 --- !u!114 &1097411774
 MonoBehaviour:
@@ -1742,7 +1759,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DependentObjects:
-    _items: []
+    _items:
+    - {fileID: 620175606}
+    - {fileID: 1777570533}
 --- !u!114 &1097411777
 MonoBehaviour:
   m_ObjectHideFlags: 0
