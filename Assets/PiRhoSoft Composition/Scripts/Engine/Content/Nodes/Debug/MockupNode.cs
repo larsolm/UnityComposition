@@ -18,6 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 	}
 	
 	[HelpURL(Composition.DocumentationUrl + "mockup-node")]
+	[CreateInstructionGraphNodeMenu("Debug/Mockup", 402)]
 	public class MockupNode : InstructionGraphNode
 	{
 		[Tooltip("The connections from this node")]

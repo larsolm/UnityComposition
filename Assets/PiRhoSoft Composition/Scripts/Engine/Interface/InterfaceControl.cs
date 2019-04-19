@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool IsActive { get; private set; } = false;
 
-		void Awake()
+		protected virtual void Awake()
 		{
 			Disable();
 		}

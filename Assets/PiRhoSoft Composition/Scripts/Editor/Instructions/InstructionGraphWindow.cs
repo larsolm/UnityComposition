@@ -568,7 +568,6 @@ namespace PiRhoSoft.CompositionEditor
 				menu = new GenericMenu();
 
 			var types = TypeHelper.ListDerivedTypes<InstructionGraphNode>(false)
-				.Where(type => type != typeof(MockupNode) && type != typeof(CommentNode))
 				.Select(type =>
 				{
 					var attribute = TypeHelper.GetAttribute<CreateInstructionGraphNodeMenuAttribute>(type);
@@ -598,10 +597,6 @@ namespace PiRhoSoft.CompositionEditor
 				previousMenu = type.Menu;
 				menu.AddItem(new GUIContent(type.Menu + type.Name), false, () => CreateNode(type.Type, type.Name, _createPosition));
 			}
-
-			menu.AddItem(new GUIContent(prefix), false, null);
-			menu.AddItem(new GUIContent(prefix + "Comment"), false, () => CreateNode(typeof(CommentNode), "Comment", _createPosition));
-			menu.AddItem(new GUIContent(prefix + "Mockup"), false, () => CreateNode(typeof(MockupNode), "Mockup", _createPosition));
 		}
 
 		private void CreateEditMenu(ref GenericMenu menu)

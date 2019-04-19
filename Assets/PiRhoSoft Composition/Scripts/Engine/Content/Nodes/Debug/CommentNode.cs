@@ -4,6 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "comment-node")]
+	[CreateInstructionGraphNodeMenu("Debug/Comment", 400)]
 	public class CommentNode : InstructionGraphNode
 	{
 		[Tooltip("The text of the comment")]
