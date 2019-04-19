@@ -35,6 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 		[NonSerialized] private Operation _currentOperation;
 
 		public ExpressionCompilationResult CompilationResult { get; private set; } = new ExpressionCompilationResult();
+		public Operation LastOperation => _currentOperation;
 		public bool IsValid => _operations != null && _operations.Count > 0;
 		public bool HasError => !string.IsNullOrEmpty(_statement) && _operations == null;
 		public string Statement => _statement;
@@ -85,7 +86,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var result = Execute(context, variables);
 
-			if (result.Type != expectedType && _currentOperation == null) // _currentOperation will not be null if there was an exception in which case an error was already logged
+			if (result.Type != expectedType)
 			{
 				var statement = _operations != null && _operations.Count > 0 ? _operations[_operations.Count - 1].ToString() : string.Empty;
 				Debug.LogWarningFormat(context, _invalidResultWarning, statement, expectedType, result.Type);
@@ -104,7 +105,6 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					_currentOperation = operation;
 					result = operation.Evaluate(variables);
-					_currentOperation = null;
 				}
 			}
 

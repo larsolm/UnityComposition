@@ -629,6 +629,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 1
+  AutoSizeContainer: 0
   Message:
     Text: '{focus.equipment.Name} - Speed: {focus.equipment.Speed}, Strength: {focus.equipment.Strength}'
 --- !u!114 &238192715
@@ -802,6 +804,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 710592857}
   Condition:
     _statement: focus != null
@@ -819,6 +822,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1337987434}
   Condition:
     _statement: focus != null
@@ -850,6 +854,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1654414926}
   Condition:
     _statement: focus != null
@@ -1520,6 +1525,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Variable:
     _variable: global.Player.Items
     _tokens:
@@ -1693,6 +1699,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1653464401}
   Condition:
     _statement: focus.item != null
@@ -1710,6 +1717,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 215756017}
   Condition:
     _statement: focus.item != null
@@ -1741,6 +1749,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 308230888}
   Condition:
     _statement: focus.item != null
@@ -2365,6 +2374,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Variable:
     _variable: global.Player.Equipment
     _tokens:
@@ -3219,6 +3229,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 1
+  AutoSizeContainer: 0
   Variable:
     _variable: focus.item.Name
     _tokens:
@@ -3469,6 +3481,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 1
+  AutoSizeContainer: 0
   Formatting:
     Format: '{0} DPS'
     Formatting: 2
