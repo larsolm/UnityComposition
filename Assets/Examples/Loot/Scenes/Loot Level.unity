@@ -873,6 +873,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 2038815341}
   Condition:
     _statement: global.InventoryOpen == null
@@ -890,6 +891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1088233150}
   Condition:
     _statement: global.InventoryOpen == null
@@ -1311,6 +1313,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Message:
     Text: 'Gold: {global.Player.Gold}'
 --- !u!114 &1186169037
@@ -1548,6 +1552,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 1
   Variable:
     _variable: global.Player.Weapon.Icon
     _tokens:
