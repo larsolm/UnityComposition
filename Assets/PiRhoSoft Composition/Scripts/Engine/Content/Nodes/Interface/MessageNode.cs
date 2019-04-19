@@ -36,8 +36,6 @@ namespace PiRhoSoft.CompositionEngine
 
 			if (ResolveObject(variables, Control, out MessageControl message))
 				yield return Show(message, text);
-			else
-				Debug.Log(text);
 
 			graph.GoTo(Next, nameof(Next));
 		}

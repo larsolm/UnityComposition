@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Examples/Maze/Scenes/Maze2.unity
     guid: a25ee3ef7b27eec4cb8afbb8a12609d2
   - enabled: 1
+    path: Assets/Examples/Maze/Scenes/Maze3.unity
+    guid: 23ea7ca4e281a684f8d66b6598a0db09
+  - enabled: 1
     path: Assets/Examples/Shop/Scenes/Shop.unity
     guid: 16a12d16ebddc394b89965660f81d2b5
   - enabled: 1
@@ -29,4 +32,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Examples/Loot/Scenes/Loot Menu.unity
     guid: 5fffb9d7559f85f4d97477252e4d73e9
+  - enabled: 1
+    path: Assets/Examples/CardGame/Scenes/Addiction.unity
+    guid: d1f22be716299764b9e5d303d0972632
   m_configObjects: {}
