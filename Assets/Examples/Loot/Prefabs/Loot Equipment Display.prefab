@@ -240,5 +240,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc429dfa5555e624494c6b603344f1dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: equipment
+  ValueName: equipment
   ItemName: menu

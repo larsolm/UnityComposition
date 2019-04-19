@@ -697,7 +697,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Fighter
+  ValueName: Fighter
   Object: {fileID: 1243335647}
 --- !u!1 &465188641
 GameObject:
@@ -1289,7 +1289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Fighter
+  ValueName: Fighter
   Object: {fileID: 1468025361}
 --- !u!1 &741864752
 GameObject:
@@ -1844,7 +1844,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Fighter
+  ValueName: Fighter
   Object: {fileID: 1243335647}
 --- !u!4 &1243335646
 Transform:
@@ -2220,7 +2220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Fighter
+  ValueName: Fighter
   Object: {fileID: 1468025361}
 --- !u!4 &1468025360
 Transform:

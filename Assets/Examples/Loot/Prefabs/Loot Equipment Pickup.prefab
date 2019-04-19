@@ -184,7 +184,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9348dc783052e141874f524ecc2f92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: equipment
+  ValueName: equipment
 --- !u!114 &3790233787522075400
 MonoBehaviour:
   m_ObjectHideFlags: 0

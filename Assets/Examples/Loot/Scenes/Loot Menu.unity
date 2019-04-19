@@ -786,7 +786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22128564e9e45e84988038b441a01170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: focus
+  ValueName: focus
   Menu: {fileID: 959090452}
 --- !u!114 &288258356
 MonoBehaviour:
@@ -1643,7 +1643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22128564e9e45e84988038b441a01170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: focus
+  ValueName: focus
   Menu: {fileID: 959090452}
 --- !u!1 &784845101
 GameObject:
@@ -1677,7 +1677,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22128564e9e45e84988038b441a01170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: focus
+  ValueName: focus
   Menu: {fileID: 669086856}
 --- !u!114 &784845103
 MonoBehaviour:
@@ -3108,7 +3108,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 22128564e9e45e84988038b441a01170, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: focus
+  ValueName: focus
   Menu: {fileID: 669086856}
 --- !u!224 &1653464403
 RectTransform:

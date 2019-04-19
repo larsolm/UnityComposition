@@ -44,7 +44,7 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Menu Item")]
 	public class MenuItem : BindingRoot
 	{
-		public string ItemName = "item";
+		public string ItemName = "Item";
 
 		public int Index { get => _data.Index; internal set => _data.Index = value; }
 		public int Column { get => _data.Column; internal set => _data.Column = value; }
@@ -92,7 +92,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override IList<string> GetVariableNames()
 		{
-			_names[0] = Name;
+			_names[0] = ValueName;
 			_names[1] = ItemName;
 			return _names;
 		}

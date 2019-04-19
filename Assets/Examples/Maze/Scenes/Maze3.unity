@@ -1188,7 +1188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Gate
+  ValueName: Gate
   Object: {fileID: 1476854366}
 --- !u!1 &1477216200
 GameObject:
@@ -1491,7 +1491,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Gate
+  ValueName: Gate
   Object: {fileID: 1565040942}
 --- !u!1 &1772924070
 GameObject:
@@ -2212,5 +2212,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Gate
+  ValueName: Gate
   Object: {fileID: 2124901409}

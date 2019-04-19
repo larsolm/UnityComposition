@@ -324,7 +324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f9348dc783052e141874f524ecc2f92c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: Card
+  ValueName: Card
 --- !u!210 &6264893461457841766
 SortingGroup:
   m_ObjectHideFlags: 0
