@@ -33,8 +33,9 @@ namespace PiRhoSoft.CompositionEngine
 		protected Menu _menu;
 		protected MenuItem _selectedItem;
 
-		void Awake()
+		protected override void Awake()
 		{
+			base.Awake();
 			_menu = GetComponent<Menu>();
 		}
 
