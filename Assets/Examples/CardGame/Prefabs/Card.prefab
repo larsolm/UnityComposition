@@ -94,6 +94,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 6710845346550712290}
   Condition:
     _statement: Card.Complete
@@ -191,6 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 1
   Object: {fileID: 2006859865152935716}
   Condition:
     _statement: global.SelectedCard == Card || Card.Active
@@ -392,6 +394,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Object: {fileID: 3439422775805370995}
   Condition:
     _statement: Card.Visible
@@ -619,6 +622,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Variable:
     _variable: Card.Suit.Color
     _tokens:
@@ -642,6 +646,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Variable:
     _variable: Card.Rank
     _tokens:
@@ -663,6 +669,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Object: {fileID: 3439422776283744779}
   Condition:
     _statement: Card.Visible
@@ -762,6 +769,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Variable:
     _variable: Card.Suit.Color
     _tokens:
@@ -785,6 +793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Variable:
     _variable: Card.Suit.Sprite
     _tokens:
@@ -808,6 +817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Object: {fileID: 3439422776975113457}
   Condition:
     _statement: Card.Visible
@@ -984,6 +994,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 5877317518305532645}
   Condition:
     _statement: Card.Movable
