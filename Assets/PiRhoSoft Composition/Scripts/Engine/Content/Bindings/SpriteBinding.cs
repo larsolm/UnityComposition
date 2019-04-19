@@ -8,6 +8,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Sprite Binding")]
 	public class SpriteBinding : VariableBinding
 	{
+		private const string _missingVariableWarning = "(CSBMV) unable to bind sprite for binding {0}: variable '{1}' could not be found";
+
 		[Tooltip("The variable holding the image to show on this object")]
 		public VariableReference Variable = new VariableReference();
 
@@ -38,6 +40,9 @@ namespace PiRhoSoft.CompositionEngine
 			else
 			{
 				Sprite.enabled = false;
+
+				if (!SuppressErrors)
+					Debug.LogWarningFormat(this, _missingVariableWarning, this, Variable);
 			}
 		}
 	}

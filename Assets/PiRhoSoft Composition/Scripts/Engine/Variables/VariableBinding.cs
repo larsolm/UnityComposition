@@ -21,6 +21,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("When set, the binding will update automatically when the variable changes")]
 		public bool AutoUpdate = true;
 
+		[Tooltip("When set, errors in resolving the binding will be treated as a valid condition that hides or disables corresponding components")]
+		public bool SuppressErrors = false;
+
 		private IVariableStore _variables;
 
 		public IVariableStore Variables
