@@ -37,6 +37,7 @@ namespace PiRhoSoft.CompositionEngine
 			var from = _focusedItem;
 			_focusedItem = item;
 			_focusedIndex = item ? item.Index : -1;
+			_removedFocus = -1;
 
 			if (_focusedItem)
 				_focusedItem.Focused = true;
