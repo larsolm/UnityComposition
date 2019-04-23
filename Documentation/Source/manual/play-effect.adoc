@@ -21,5 +21,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/play-effect.html[Reference]
+<<reference/play-effect.html,Reference>>
 endif::[]

@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.CreateGameObjectNode : <<reference/instruction-graph
 
 ### Description
 
-### Constructors
-
-CreateGameObjectNode()::
-
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
@@ -29,15 +25,3 @@ CreateGameObjectNode()::
 <<reference/vector3-variable-source.html,Vector3VariableSource>> _Position_::
 
 <<reference/vector3-variable-source.html,Vector3VariableSource>> _Rotation_::
-
-### Public Properties
-
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
-
-### Public Methods
-
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
-
-void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_) _(virtual)_::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

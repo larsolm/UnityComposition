@@ -13,7 +13,3 @@ void Write(BinaryWriter _writer_, https://docs.microsoft.com/en-us/dotnet/api/Sy
 void Read(BinaryReader _reader_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_, Int16 _version_) _(abstract)_::
 
 bool IsValid(<<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
-
-### Protected Constructors
-
-VariableConstraint()::

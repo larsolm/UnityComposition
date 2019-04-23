@@ -6,16 +6,8 @@ PiRhoSoft.CompositionEngine.EnableBinding : <<reference/variable-binding.html,Va
 
 ### Description
 
-### Constructors
-
-EnableBinding()::
-
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_::
 
 <<reference/expression.html,Expression>> _Condition_::
-
-### Protected Methods
-
-void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

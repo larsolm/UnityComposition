@@ -17,5 +17,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/selection-node.html[Reference]
+<<reference/selection-node.html,Reference>>
 endif::[]

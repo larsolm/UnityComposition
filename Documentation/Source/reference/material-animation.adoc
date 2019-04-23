@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.MaterialAnimation : https://docs.unity3d.com/ScriptR
 
 ### Description
 
-### Constructors
-
-MaterialAnimation()::
-
 ### Public Fields
 
 bool _AutoAdvance_::

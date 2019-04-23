@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ExpressionDisplayAttribute : https://docs.unity3d.co
 
 ### Description
 
-### Constructors
-
-ExpressionDisplayAttribute()::
-
 ### Public Fields
 
 bool _Foldout_::

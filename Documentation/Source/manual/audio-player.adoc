@@ -2,10 +2,10 @@
 
 ## Audio Player
 
-Audio Player is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that utilizes Unity's Playables API to play simple https://docs.unity3d.com/ScriptReference/AnimationClip.html[AudioClips^] on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
+Audio Player is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that utilizes Unity's Playables API to play simple https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClips^] on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
 
 See the _"Maze1"_ scene and the _"MazeKey"_ <<instruction-graph,Instruction Graph>> in the Maze project for an example usage.
 
 ifdef::backend-multipage_html5[]
-link:reference/audio-player.html[Reference]
+<<reference/audio-player.html,Reference>>
 endif::[]

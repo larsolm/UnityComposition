@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.FloatVariableSource : <<reference/variable-source-1.
 
 ### Constructors
 
-FloatVariableSource()::
-
 FloatVariableSource(float _defaultValue_)::

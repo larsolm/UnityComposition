@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariableSet : <<reference/i-variable-reset.html,IVar
 
 ### Description
 
-### Constructors
-
-VariableSet()::
-
 ### Public Properties
 
 <<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_::

@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.TransitionList : link:/projects/unity-utilities/docu
 
 ### Description
 
-### Constructors
-
-TransitionList()::

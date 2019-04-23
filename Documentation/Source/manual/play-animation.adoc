@@ -14,5 +14,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/play-animation.html[Reference]
+<<reference/play-animation.html,Reference>>
 endif::[]

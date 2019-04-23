@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.InstructionInput
 
 ### Description
 
-### Constructors
-
-InstructionInput()::
-
 ### Public Fields
 
 string _Name_::

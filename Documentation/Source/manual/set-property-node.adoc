@@ -15,5 +15,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/set-property-node.html[Reference]
+<<reference/set-property-node.html,Reference>>
 endif::[]

@@ -13,5 +13,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/enable-binding.html[Reference]
+<<reference/enable-binding.html,Reference>>
 endif::[]

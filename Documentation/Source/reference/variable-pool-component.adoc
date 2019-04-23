@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariablePoolComponent : https://docs.unity3d.com/Scr
 
 ### Description
 
-### Constructors
-
-VariablePoolComponent()::
-
 ### Public Fields
 
 <<reference/variable-pool.html,VariablePool>> _Variables_::

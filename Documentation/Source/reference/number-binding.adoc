@@ -6,16 +6,8 @@ PiRhoSoft.CompositionEngine.NumberBinding : <<reference/string-binding.html,Stri
 
 ### Description
 
-### Constructors
-
-NumberBinding()::
-
 ### Public Fields
 
 <<reference/binding-formatter.html,BindingFormatter>> _Format_::
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
-
-### Protected Methods
-
-void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.VariableDefinitionList : link:/projects/unity-utilit
 
 ### Description
 
-### Constructors
-
-VariableDefinitionList()::

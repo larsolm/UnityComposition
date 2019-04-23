@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/time-scale-node.html[Reference]
+<<reference/time-scale-node.html,Reference>>
 endif::[]

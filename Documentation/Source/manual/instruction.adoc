@@ -15,5 +15,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/instruction.html[Reference]
+<<reference/instruction.html,Reference>>
 endif::[]

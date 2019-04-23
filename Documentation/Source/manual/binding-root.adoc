@@ -18,5 +18,5 @@ image:binding-root.png[]
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/binding-root.html[Reference]
+<<reference/binding-root.html,Reference>>
 endif::[]

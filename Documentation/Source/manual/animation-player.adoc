@@ -7,5 +7,5 @@ Animation Player is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.htm
 See the _"Maze2"_ scene and the _"MazeJewel"_ <<instruction-graph,Instruction Graph>> in the Maze project for an example usage.
 
 ifdef::backend-multipage_html5[]
-link:reference/animation-player.html[Reference]
+<<reference/animation-player.html,Reference>>
 endif::[]

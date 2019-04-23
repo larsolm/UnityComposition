@@ -24,10 +24,6 @@ https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionar
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Track(<<reference/instruction.html,Instruction>> _instruction_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] _enumerator_)::
 
-### Constructors
-
-CompositionManager()::
-
 ### Public Properties
 
 <<reference/i-variable-store.html,IVariableStore>> _DefaultStore_ _(read only)_::

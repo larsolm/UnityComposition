@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.ValueDefinitionList : link:/projects/unity-utilities
 
 ### Description
 
-### Constructors
-
-ValueDefinitionList()::

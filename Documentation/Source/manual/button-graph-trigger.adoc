@@ -18,5 +18,5 @@ image:button-graph-trigger.png[]
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/button-graph-trigger.html[Reference]
+<<reference/button-graph-trigger.html,Reference>>
 endif::[]

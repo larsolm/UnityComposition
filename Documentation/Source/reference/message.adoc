@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.Message
 
 ### Description
 
-### Constructors
-
-Message()::
-
 ### Public Fields
 
 string _Text_::

@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.Menu : https://docs.unity3d.com/ScriptReference/Mono
 
 ### Description
 
-### Constructors
-
-Menu()::
-
 ### Public Fields
 
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemAdded_::

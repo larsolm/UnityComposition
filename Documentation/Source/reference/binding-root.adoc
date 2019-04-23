@@ -10,10 +10,6 @@ PiRhoSoft.CompositionEngine.BindingRoot : https://docs.unity3d.com/ScriptReferen
 
 <<reference/i-variable-store.html,IVariableStore>> FindParent(https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _obj_)::
 
-### Constructors
-
-BindingRoot()::
-
 ### Public Fields
 
 string _ValueName_::

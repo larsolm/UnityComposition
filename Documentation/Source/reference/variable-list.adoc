@@ -8,8 +8,6 @@ PiRhoSoft.CompositionEngine.VariableList : <<reference/i-variable-list.html,IVar
 
 ### Constructors
 
-VariableList()::
-
 VariableList(int _count_)::
 
 ### Public Properties

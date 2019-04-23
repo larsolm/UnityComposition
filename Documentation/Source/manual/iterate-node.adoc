@@ -14,5 +14,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/iterate-node.html[Reference]
+<<reference/iterate-node.html,Reference>>
 endif::[]

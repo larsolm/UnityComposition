@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/input-message.html[Reference]
+<<reference/input-message.html,Reference>>
 endif::[]

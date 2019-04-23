@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.TimelineVariableSource : <<reference/variable-source
 
 ### Description
 
-### Constructors
-
-TimelineVariableSource()::

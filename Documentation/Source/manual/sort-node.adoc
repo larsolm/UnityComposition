@@ -14,5 +14,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/sort-node.html[Reference]
+<<reference/sort-node.html,Reference>>
 endif::[]

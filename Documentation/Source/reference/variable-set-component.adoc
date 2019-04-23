@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariableSetComponent : https://docs.unity3d.com/Scri
 
 ### Description
 
-### Constructors
-
-VariableSetComponent()::
-
 ### Public Fields
 
 <<reference/variable-set.html,VariableSet>> _Variables_::

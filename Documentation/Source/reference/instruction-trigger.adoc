@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.InstructionTrigger : https://docs.unity3d.com/Script
 
 ### Description
 
-### Constructors
-
-InstructionTrigger()::
-
 ### Public Fields
 
 <<reference/instruction-caller.html,InstructionCaller>> _Graph_::

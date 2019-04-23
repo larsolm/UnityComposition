@@ -17,9 +17,3 @@ void ToString(StringBuilder _builder_) _(abstract)_::
 void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
 
 void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_, string _source_) _(virtual)_::
-
-string ToString() _(virtual)_::
-
-### Protected Constructors
-
-Operation()::

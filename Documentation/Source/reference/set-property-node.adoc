@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.SetPropertyNode : <<reference/instruction-graph-node
 
 ### Description
 
-### Constructors
-
-SetPropertyNode()::
-
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
@@ -29,9 +25,3 @@ Type _TargetType_::
 FieldInfo _Field_::
 
 PropertyInfo _Property_::
-
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
-
-### Public Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

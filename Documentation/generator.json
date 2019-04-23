@@ -42,7 +42,7 @@
                 "CategoryFile": ":imagesdir: {CategoryId}/\n\n{Types}",
                 "Type": "include::{TypeFilename}[]",
                 "TypeSeparator": "\n\n<<<\n\n",
-                "TypeFile": "[#{CategoryId}/{TypeId}]\n\n## {TypeNiceName}\n\n{Sections}\n\nifdef::backend-multipage_html5[]\nlink:reference/{TypeId}.html[Reference]\nendif::[]",
+                "TypeFile": "[#{CategoryId}/{TypeId}]\n\n## {TypeNiceName}\n\n{Sections}\n\nifdef::backend-multipage_html5[]\n<<reference/{TypeId}.html,Reference>>\nendif::[]",
                 "Generic": "__{Name}__",
                 "GenericOpener": "",
                 "GenericCloser": "",

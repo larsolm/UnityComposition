@@ -6,18 +6,6 @@ PiRhoSoft.CompositionEngine.StringVariableConstraint : <<reference/variable-cons
 
 ### Description
 
-### Constructors
-
-StringVariableConstraint()::
-
 ### Public Fields
 
 string[] _Values_::
-
-### Public Methods
-
-void Write(BinaryWriter _writer_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_) _(virtual)_::
-
-void Read(BinaryReader _reader_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_, Int16 _version_) _(virtual)_::
-
-bool IsValid(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::

@@ -5,5 +5,5 @@
 
 
 ifdef::backend-multipage_html5[]
-link:reference/selection-control.html[Reference]
+<<reference/selection-control.html,Reference>>
 endif::[]

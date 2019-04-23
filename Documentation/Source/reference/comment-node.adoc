@@ -6,14 +6,6 @@ PiRhoSoft.CompositionEngine.CommentNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
-### Constructors
-
-CommentNode()::
-
 ### Public Fields
 
 string _Comment_::
-
-### Public Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

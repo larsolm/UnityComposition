@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/mockup-graph.html[Reference]
+<<reference/mockup-graph.html,Reference>>
 endif::[]

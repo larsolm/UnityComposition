@@ -6,10 +6,3 @@ PiRhoSoft.CompositionEngine.SubtractAssignOperator : <<reference/assignment-oper
 
 ### Description
 
-### Constructors
-
-SubtractAssignOperator()::
-
-### Public Methods
-
-<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

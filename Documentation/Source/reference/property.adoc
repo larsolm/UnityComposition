@@ -26,10 +26,6 @@ string _Name_::
 
 <<reference/set-variable-result.html,SetVariableResult>> Set(Object _obj_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
 
-### Protected Constructors
-
-Property()::
-
 ### Protected Methods
 
 void SetupAsBool(FieldInfo _field_, bool _allowRead_, bool _allowWrite_) _(abstract)_::

@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.TransitionVariableSource : <<reference/variable-sour
 
 ### Description
 
-### Constructors
-
-TransitionVariableSource()::

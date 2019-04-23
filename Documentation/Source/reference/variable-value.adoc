@@ -156,8 +156,6 @@ bool HasEnumType(Type _type_)::
 
 bool HasReferenceType(Type _type_)::
 
-string ToString() _(virtual)_::
-
 Object GetBoxedValue()::
 
 bool TryGetBool(bool _value_ _(out)_)::

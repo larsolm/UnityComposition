@@ -6,20 +6,8 @@ PiRhoSoft.CompositionEngine.TimeScaleNode : <<reference/instruction-graph-node.h
 
 ### Description
 
-### Constructors
-
-TimeScaleNode()::
-
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
 <<reference/float-variable-source.html,FloatVariableSource>> _TimeScale_::
-
-### Public Properties
-
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
-
-### Public Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

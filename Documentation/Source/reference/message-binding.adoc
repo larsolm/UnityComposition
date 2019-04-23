@@ -6,14 +6,6 @@ PiRhoSoft.CompositionEngine.MessageBinding : <<reference/string-binding.html,Str
 
 ### Description
 
-### Constructors
-
-MessageBinding()::
-
 ### Public Fields
 
 <<reference/message.html,Message>> _Message_::
-
-### Protected Methods
-
-void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

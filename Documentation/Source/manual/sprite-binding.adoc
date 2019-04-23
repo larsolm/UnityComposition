@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/sprite-binding.html[Reference]
+<<reference/sprite-binding.html,Reference>>
 endif::[]

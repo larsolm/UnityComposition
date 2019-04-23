@@ -45,7 +45,6 @@ MonoBehaviour:
     - {fileID: 114620517716717954}
     - {fileID: 114866516215429464}
     - {fileID: 114728111643151580}
-    - {fileID: 114319477458661940}
     - {fileID: 114016649170688582}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114906063048417074}

@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.AxisInput : https://docs.unity3d.com/ScriptReference
 
 ### Description
 
-### Constructors
-
-AxisInput()::
-
 ### Public Fields
 
 string _AxisName_::

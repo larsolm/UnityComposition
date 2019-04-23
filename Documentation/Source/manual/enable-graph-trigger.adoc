@@ -5,5 +5,5 @@
 
 
 ifdef::backend-multipage_html5[]
-link:reference/enable-graph-trigger.html[Reference]
+<<reference/enable-graph-trigger.html,Reference>>
 endif::[]

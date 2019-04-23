@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.AnimationClipVariableSource : <<reference/variable-s
 
 ### Description
 
-### Constructors
-
-AnimationClipVariableSource()::

@@ -6,14 +6,3 @@ PiRhoSoft.CompositionEngine.LiteralOperation : <<reference/operation.html,Operat
 
 ### Description
 
-### Constructors
-
-LiteralOperation()::
-
-### Public Methods
-
-void Parse(<<reference/expression-parser.html,ExpressionParser>> _parser_, <<reference/expression-token.html,ExpressionToken>> _token_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::
-
-void ToString(StringBuilder _builder_) _(virtual)_::

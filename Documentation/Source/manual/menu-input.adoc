@@ -26,5 +26,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/menu-input.html[Reference]
+<<reference/menu-input.html,Reference>>
 endif::[]

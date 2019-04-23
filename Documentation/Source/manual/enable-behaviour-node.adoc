@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/enable-behaviour-node.html[Reference]
+<<reference/enable-behaviour-node.html,Reference>>
 endif::[]

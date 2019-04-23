@@ -6,14 +6,6 @@ PiRhoSoft.CompositionEngine.SimpleGraph : <<reference/instruction-graph.html,Ins
 
 ### Description
 
-### Constructors
-
-SimpleGraph()::
-
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Process_::
-
-### Protected Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(virtual)_::

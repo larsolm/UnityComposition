@@ -20,10 +20,6 @@ void AddPrefixOperator<OperatorType>(string _symbol_)::
 
 void AddInfixOperator<OperatorType>(string _symbol_, <<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
 
-### Constructors
-
-ExpressionParser()::
-
 ### Public Methods
 
 <<reference/operation.html,Operation>> ParseLeft(<<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::

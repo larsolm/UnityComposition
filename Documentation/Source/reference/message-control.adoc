@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.MessageControl : <<reference/interface-control.html,
 
 ### Description
 
-### Constructors
-
-MessageControl()::
-
 ### Public Fields
 
 TMP_Text _DisplayText_::
@@ -23,7 +19,5 @@ bool _IsRunning_ _(read only)_::
 void Show(string _text_)::
 
 ### Protected Methods
-
-void Teardown() _(virtual)_::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::

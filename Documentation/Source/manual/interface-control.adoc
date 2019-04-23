@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/interface-control.html[Reference]
+<<reference/interface-control.html,Reference>>
 endif::[]

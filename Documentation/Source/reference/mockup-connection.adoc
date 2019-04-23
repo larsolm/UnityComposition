@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.MockupConnection
 
 ### Description
 
-### Constructors
-
-MockupConnection()::
-
 ### Public Fields
 
 string _Name_::

@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.InterfaceControl : https://docs.unity3d.com/ScriptRe
 
 ### Description
 
-### Constructors
-
-InterfaceControl()::
-
 ### Public Fields
 
 <<reference/dependent-object-list.html,DependentObjectList>> _DependentObjects_::

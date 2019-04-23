@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.Expression
 
 ### Description
 
-### Constructors
-
-Expression()::
-
 ### Public Properties
 
 <<reference/expression-compilation-result.html,ExpressionCompilationResult>> _CompilationResult_ _(read only)_::

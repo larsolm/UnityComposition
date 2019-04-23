@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.BindingAnimationStatus
 
 ### Description
 
-### Constructors
-
-BindingAnimationStatus()::
-
 ### Public Methods
 
 void Reset()::

@@ -13,5 +13,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/reset-variables.html[Reference]
+<<reference/reset-variables.html,Reference>>
 endif::[]

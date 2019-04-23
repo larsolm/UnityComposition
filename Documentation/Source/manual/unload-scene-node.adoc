@@ -18,5 +18,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/unload-scene-node.html[Reference]
+<<reference/unload-scene-node.html,Reference>>
 endif::[]

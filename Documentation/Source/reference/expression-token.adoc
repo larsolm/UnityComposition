@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ExpressionToken
 
 ### Description
 
-### Constructors
-
-ExpressionToken()::
-
 ### Public Fields
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Type_::

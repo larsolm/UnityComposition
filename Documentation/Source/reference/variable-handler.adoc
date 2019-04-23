@@ -66,10 +66,6 @@ Nullable<int> Compare(<<reference/variable-value.html,VariableValue>> _left_, <<
 
 bool Test(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _test_)::
 
-### Protected Constructors
-
-VariableHandler()::
-
 ### Protected Methods
 
 <<reference/variable-constraint.html,VariableConstraint>> CreateConstraint() _(virtual)_::

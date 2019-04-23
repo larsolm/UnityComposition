@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.InstructionGraphNodeDictionary : link:/projects/unit
 
 ### Description
 
-### Constructors
-
-InstructionGraphNodeDictionary()::

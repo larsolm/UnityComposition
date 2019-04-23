@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariablePoolAsset : https://docs.unity3d.com/ScriptR
 
 ### Description
 
-### Constructors
-
-VariablePoolAsset()::
-
 ### Public Fields
 
 <<reference/variable-pool.html,VariablePool>> _Variables_::

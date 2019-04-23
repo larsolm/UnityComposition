@@ -6,16 +6,8 @@ PiRhoSoft.CompositionEngine.GraphTriggerBinding : <<reference/variable-binding.h
 
 ### Description
 
-### Constructors
-
-GraphTriggerBinding()::
-
 ### Public Fields
 
 <<reference/instruction-caller.html,InstructionCaller>> _Graph_::
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
-
-### Protected Methods
-
-void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

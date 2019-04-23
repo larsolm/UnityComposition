@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.MenuItemTemplate
 
 ### Description
 
-### Constructors
-
-MenuItemTemplate()::
-
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variables_::

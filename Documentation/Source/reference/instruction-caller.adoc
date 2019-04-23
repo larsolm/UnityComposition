@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.InstructionCaller
 
 ### Description
 
-### Constructors
-
-InstructionCaller()::
-
 ### Public Properties
 
 <<reference/instruction.html,Instruction>> _Instruction_::

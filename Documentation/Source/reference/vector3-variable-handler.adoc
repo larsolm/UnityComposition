@@ -6,32 +6,3 @@ PiRhoSoft.CompositionEngine.Vector3VariableHandler : <<reference/variable-handle
 
 ### Description
 
-### Constructors
-
-Vector3VariableHandler()::
-
-### Protected Methods
-
-<<reference/variable-value.html,VariableValue>> CreateDefault_(<<reference/variable-constraint.html,VariableConstraint>> _constraint_) _(virtual)_::
-
-void ToString_(<<reference/variable-value.html,VariableValue>> _value_, StringBuilder _builder_) _(virtual)_::
-
-void Write_(<<reference/variable-value.html,VariableValue>> _value_, BinaryWriter _writer_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Read_(BinaryReader _reader_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_, Int16 _version_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Add_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Subtract_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Multiply_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Divide_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Negate_(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Lookup_(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _lookup_) _(virtual)_::
-
-<<reference/set-variable-result.html,SetVariableResult>> Apply_(<<reference/variable-value&.html,VariableValue>> _owner_ _(ref)_, <<reference/variable-value.html,VariableValue>> _lookup_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
-
-Nullable<bool> IsEqual_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::

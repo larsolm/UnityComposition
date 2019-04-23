@@ -13,5 +13,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/create-scriptable-object-node.html[Reference]
+<<reference/create-scriptable-object-node.html,Reference>>
 endif::[]

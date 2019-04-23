@@ -6,16 +6,8 @@ PiRhoSoft.CompositionEngine.ListBinding : <<reference/variable-binding.html,Vari
 
 ### Description
 
-### Constructors
-
-ListBinding()::
-
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
 <<reference/binding-root.html,BindingRoot>> _Template_::
-
-### Protected Methods
-
-void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

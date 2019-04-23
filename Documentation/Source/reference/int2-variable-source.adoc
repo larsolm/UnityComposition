@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.Int2VariableSource : <<reference/variable-source-1.h
 
 ### Constructors
 
-Int2VariableSource()::
-
 Int2VariableSource(https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _defaultValue_)::

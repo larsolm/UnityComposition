@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ButtonGraphTrigger : <<reference/instruction-trigger
 
 ### Description
 
-### Constructors
-
-ButtonGraphTrigger()::
-
 ### Public Fields
 
 string _Button_::

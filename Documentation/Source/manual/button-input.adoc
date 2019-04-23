@@ -20,5 +20,5 @@ image:button-input.png[]
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/button-input.html[Reference]
+<<reference/button-input.html,Reference>>
 endif::[]

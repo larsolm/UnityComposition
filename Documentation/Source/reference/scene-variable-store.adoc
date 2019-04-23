@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.SceneVariableStore : <<reference/i-variable-store.ht
 
 ### Description
 
-### Constructors
-
-SceneVariableStore()::
-
 ### Public Methods
 
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::

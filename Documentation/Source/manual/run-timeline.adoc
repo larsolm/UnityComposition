@@ -15,5 +15,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/run-timeline.html[Reference]
+<<reference/run-timeline.html,Reference>>
 endif::[]

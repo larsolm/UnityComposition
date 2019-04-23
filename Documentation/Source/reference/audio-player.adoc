@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.AudioPlayer : https://docs.unity3d.com/ScriptReferen
 
 ### Description
 
-### Constructors
-
-AudioPlayer()::
-
 ### Public Properties
 
 bool _IsComplete_ _(read only)_ _(virtual)_::

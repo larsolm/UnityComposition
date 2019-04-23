@@ -13,5 +13,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/variable-set-asset.html[Reference]
+<<reference/variable-set-asset.html,Reference>>
 endif::[]

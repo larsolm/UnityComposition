@@ -6,22 +6,6 @@ PiRhoSoft.CompositionEngine.InputNode : <<reference/instruction-graph-node.html,
 
 ### Description
 
-### Constructors
-
-InputNode()::
-
 ### Public Fields
 
 <<reference/input-node-button-list.html,InputNodeButtonList>> _Buttons_::
-
-### Public Properties
-
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
-
-### Public Methods
-
-void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
-
-void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

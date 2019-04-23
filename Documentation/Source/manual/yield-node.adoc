@@ -5,5 +5,5 @@
 
 
 ifdef::backend-multipage_html5[]
-link:reference/yield-node.html[Reference]
+<<reference/yield-node.html,Reference>>
 endif::[]

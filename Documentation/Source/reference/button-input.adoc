@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ButtonInput : https://docs.unity3d.com/ScriptReferen
 
 ### Description
 
-### Constructors
-
-ButtonInput()::
-
 ### Public Fields
 
 string _ButtonName_::

@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.MockupConnectionList : link:/projects/unity-utilitie
 
 ### Description
 
-### Constructors
-
-MockupConnectionList()::

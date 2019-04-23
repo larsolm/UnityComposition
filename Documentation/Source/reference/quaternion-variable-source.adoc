@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.QuaternionVariableSource : <<reference/variable-sour
 
 ### Constructors
 
-QuaternionVariableSource()::
-
 QuaternionVariableSource(https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _defaultValue_)::

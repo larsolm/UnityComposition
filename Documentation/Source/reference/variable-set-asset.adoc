@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariableSetAsset : https://docs.unity3d.com/ScriptRe
 
 ### Description
 
-### Constructors
-
-VariableSetAsset()::
-
 ### Public Fields
 
 <<reference/variable-set.html,VariableSet>> _Variables_::

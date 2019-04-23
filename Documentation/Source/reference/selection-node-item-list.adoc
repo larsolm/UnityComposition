@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.SelectionNodeItemList : link:/projects/unity-utiliti
 
 ### Description
 
-### Constructors
-
-SelectionNodeItemList()::

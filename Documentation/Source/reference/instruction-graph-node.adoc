@@ -121,7 +121,3 @@ void UpdateName()::
 void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
 
 void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
-
-### Protected Constructors
-
-InstructionGraphNode()::

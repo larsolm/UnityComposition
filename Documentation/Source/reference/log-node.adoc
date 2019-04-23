@@ -6,16 +6,8 @@ PiRhoSoft.CompositionEngine.LogNode : <<reference/instruction-graph-node.html,In
 
 ### Description
 
-### Constructors
-
-LogNode()::
-
 ### Public Fields
 
 <<reference/message.html,Message>> _Message_::
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
-
-### Public Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

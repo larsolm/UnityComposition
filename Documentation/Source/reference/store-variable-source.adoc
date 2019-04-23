@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.StoreVariableSource : <<reference/variable-source-1.
 
 ### Description
 
-### Constructors
-
-StoreVariableSource()::

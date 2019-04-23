@@ -28,10 +28,6 @@ bool _SuppressErrors_::
 
 void UpdateBinding(string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_)::
 
-### Protected Constructors
-
-VariableBinding()::
-
 ### Protected Methods
 
 void Awake() _(virtual)_::

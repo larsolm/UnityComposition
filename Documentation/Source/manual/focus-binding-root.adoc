@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/focus-binding-root.html[Reference]
+<<reference/focus-binding-root.html,Reference>>
 endif::[]

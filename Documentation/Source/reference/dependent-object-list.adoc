@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.DependentObjectList : link:/projects/unity-utilities
 
 ### Description
 
-### Constructors
-
-DependentObjectList()::

@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.InstructionOutput
 
 ### Description
 
-### Constructors
-
-InstructionOutput()::
-
 ### Public Fields
 
 string _Name_::

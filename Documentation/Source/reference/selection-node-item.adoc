@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.SelectionNodeItem : <<reference/menu-item-template.h
 
 ### Description
 
-### Constructors
-
-SelectionNodeItem()::
-
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _OnSelected_::

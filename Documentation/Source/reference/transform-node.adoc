@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.TransformNode : <<reference/instruction-graph-node.h
 
 ### Description
 
-### Constructors
-
-TransformNode()::
-
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
@@ -39,13 +35,3 @@ bool _WaitForCompletion_::
 <<reference/float-variable-source.html,FloatVariableSource>> _RotationSpeed_::
 
 <<reference/float-variable-source.html,FloatVariableSource>> _ScaleSpeed_::
-
-### Public Properties
-
-https://docs.unity3d.com/ScriptReference/Color.html[Color^] _NodeColor_ _(read only)_ _(virtual)_::
-
-### Public Methods
-
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(virtual)_::

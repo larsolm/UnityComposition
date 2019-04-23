@@ -6,28 +6,14 @@ PiRhoSoft.CompositionEngine.VariablePool : <<reference/variable-store.html,Varia
 
 ### Description
 
-### Constructors
-
-VariablePool()::
-
 ### Public Fields
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/value-definition.html,ValueDefinition>>> _Definitions_::
 
 ### Public Methods
 
-void AddVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
-
-void Clear() _(virtual)_::
-
-void VariableMoved(int _from_, int _to_) _(virtual)_::
-
 void ChangeName(int _index_, string _name_)::
 
 void ChangeDefinition(int _index_, <<reference/value-definition.html,ValueDefinition>> _definition_)::
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(int _index_, <<reference/variable-value.html,VariableValue>> _value_)::
-
-### Protected Methods
-
-void RemoveVariable(string _name_, int _index_) _(virtual)_::

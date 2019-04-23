@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.TransitionManager : link:/projects/unity-utilities/d
 
 ### Description
 
-### Constructors
-
-TransitionManager()::
-
 ### Public Properties
 
 <<reference/transition.html,Transition>> _CurrentTransition_ _(read only)_::

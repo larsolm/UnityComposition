@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ComparisonOperator : <<reference/infix-operation.htm
 
 ### Description
 
-### Protected Constructors
-
-ComparisonOperator()::
-
 ### Protected Methods
 
 bool Equals(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::

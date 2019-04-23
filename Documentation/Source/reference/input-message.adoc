@@ -6,14 +6,6 @@ PiRhoSoft.CompositionEngine.InputMessage : <<reference/message-control.html,Mess
 
 ### Description
 
-### Constructors
-
-InputMessage()::
-
 ### Public Fields
 
 string _AcceptButton_::
-
-### Protected Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::

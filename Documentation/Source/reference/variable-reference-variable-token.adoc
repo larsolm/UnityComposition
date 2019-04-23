@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariableToken
 
 ### Description
 
-### Constructors
-
-VariableToken()::
-
 ### Public Fields
 
 <<reference/variable-reference-variable-token-type.html,VariableTokenType>> _Type_::

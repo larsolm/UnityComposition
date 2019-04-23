@@ -13,5 +13,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/wait-node.html[Reference]
+<<reference/wait-node.html,Reference>>
 endif::[]

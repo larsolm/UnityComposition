@@ -19,5 +19,5 @@ image:collision-graph-trigger.png[]
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/collision-graph-trigger.html[Reference]
+<<reference/collision-graph-trigger.html,Reference>>
 endif::[]

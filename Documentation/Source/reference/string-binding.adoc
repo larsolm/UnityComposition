@@ -14,10 +14,6 @@ bool _AutoSizeContainer_::
 
 TMP_Text _Text_ _(read only)_::
 
-### Protected Constructors
-
-StringBinding()::
-
 ### Protected Methods
 
 void SetText(string _text_, bool _enabled_)::

@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ImageColorBinding : <<reference/variable-binding.htm
 
 ### Description
 
-### Constructors
-
-ImageColorBinding()::
-
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
@@ -17,7 +13,3 @@ ImageColorBinding()::
 ### Public Properties
 
 https://docs.unity3d.com/ScriptReference/Image.html[Image^] _Sprite_ _(read only)_::
-
-### Protected Methods
-
-void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

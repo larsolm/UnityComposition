@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.AnimationPlayer : https://docs.unity3d.com/ScriptRef
 
 ### Description
 
-### Constructors
-
-AnimationPlayer()::
-
 ### Public Properties
 
 bool _IsComplete_ _(read only)_ _(virtual)_::

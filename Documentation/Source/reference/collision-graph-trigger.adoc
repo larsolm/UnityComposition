@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.CollisionGraphTrigger : https://docs.unity3d.com/Scr
 
 ### Description
 
-### Constructors
-
-CollisionGraphTrigger()::
-
 ### Public Fields
 
 <<reference/instruction-caller.html,InstructionCaller>> _EnterGraph_::

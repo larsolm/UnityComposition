@@ -12,10 +12,6 @@ string[] _TimeFormats_::
 
 string[] _NumberFormats_::
 
-### Constructors
-
-BindingFormatter()::
-
 ### Public Fields
 
 string _Format_::

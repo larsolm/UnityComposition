@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/text-color-binding.html[Reference]
+<<reference/text-color-binding.html,Reference>>
 endif::[]

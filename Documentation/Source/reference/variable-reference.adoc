@@ -16,10 +16,6 @@ Char _LookupOpen_::
 
 Char _LookupClose_::
 
-### Constructors
-
-VariableReference()::
-
 ### Public Properties
 
 bool _IsValid_ _(read only)_::
@@ -33,8 +29,6 @@ string _RootName_ _(read only)_::
 string _Variable_::
 
 ### Public Methods
-
-string ToString() _(virtual)_::
 
 <<reference/variable-value.html,VariableValue>> GetValue(<<reference/i-variable-store.html,IVariableStore>> _variables_)::
 

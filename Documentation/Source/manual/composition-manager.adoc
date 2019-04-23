@@ -5,5 +5,5 @@
 
 
 ifdef::backend-multipage_html5[]
-link:reference/composition-manager.html[Reference]
+<<reference/composition-manager.html,Reference>>
 endif::[]

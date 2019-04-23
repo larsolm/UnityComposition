@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.MenuInput : https://docs.unity3d.com/ScriptReference
 
 ### Description
 
-### Constructors
-
-MenuInput()::
-
 ### Public Fields
 
 string _HorizontalAxis_::

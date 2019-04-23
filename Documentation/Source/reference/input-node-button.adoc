@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.InputNodeButton
 
 ### Description
 
-### Constructors
-
-InputNodeButton()::
-
 ### Public Fields
 
 <<reference/input-node-button-button-type.html,ButtonType>> _Type_::

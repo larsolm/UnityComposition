@@ -5,5 +5,5 @@
 Clear Transition is an <<instruction-graph-node,Instruction Graph Node>> that is used to manually end the current <<transition,Transition>>. Generally ending a <<transition,Transition>> happens with the _AutoFinish_ property on a <<play-transition,Play Transition>> node however, in the case that a <<transition,Transition>> needs to be ended manually this node is available.
 
 ifdef::backend-multipage_html5[]
-link:reference/clear-transition.html[Reference]
+<<reference/clear-transition.html,Reference>>
 endif::[]

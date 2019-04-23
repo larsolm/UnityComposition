@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/variable-pool-component.html[Reference]
+<<reference/variable-pool-component.html,Reference>>
 endif::[]

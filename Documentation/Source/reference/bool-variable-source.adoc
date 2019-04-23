@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.BoolVariableSource : <<reference/variable-source-1.h
 
 ### Constructors
 
-BoolVariableSource()::
-
 BoolVariableSource(bool _defaultValue_)::

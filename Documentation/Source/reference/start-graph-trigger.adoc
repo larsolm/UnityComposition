@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.StartGraphTrigger : <<reference/instruction-trigger.
 
 ### Description
 
-### Constructors
-
-StartGraphTrigger()::

@@ -6,20 +6,6 @@ PiRhoSoft.CompositionEngine.Pixelate : <<reference/transition.html,Transition>>
 
 ### Description
 
-### Constructors
-
-Pixelate()::
-
 ### Public Fields
 
 int _MaxAmount_::
-
-### Public Methods
-
-void Begin(<<reference/transition-phase.html,TransitionPhase>> _phase_) _(virtual)_::
-
-void Process(float _time_, <<reference/transition-phase.html,TransitionPhase>> _phase_) _(virtual)_::
-
-### Protected Methods
-
-void Update() _(virtual)_::

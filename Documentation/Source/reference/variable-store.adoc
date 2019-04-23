@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariableStore : <<reference/i-variable-store.html,IV
 
 ### Description
 
-### Constructors
-
-VariableStore()::
-
 ### Public Properties
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<string> _Names_ _(read only)_::

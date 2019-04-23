@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.BoundsVariableSource : <<reference/variable-source-1
 
 ### Constructors
 
-BoundsVariableSource()::
-
 BoundsVariableSource(https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _defaultValue_)::

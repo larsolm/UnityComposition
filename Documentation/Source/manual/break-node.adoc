@@ -7,5 +7,5 @@ A Break Node is an <<instruction-graph-node,Instruction Graph Node>> that will f
 See the _"BoardLoop"_ <<instruction-graph,Instruction Graph>> in the BoardGame project for an example usage.
 
 ifdef::backend-multipage_html5[]
-link:reference/break-node.html[Reference]
+<<reference/break-node.html,Reference>>
 endif::[]

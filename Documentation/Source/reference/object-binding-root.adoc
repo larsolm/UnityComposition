@@ -6,14 +6,6 @@ PiRhoSoft.CompositionEngine.ObjectBindingRoot : <<reference/binding-root.html,Bi
 
 ### Description
 
-### Constructors
-
-ObjectBindingRoot()::
-
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_::
-
-### Public Properties
-
-<<reference/variable-value.html,VariableValue>> _Value_ _(read only)_ _(virtual)_::

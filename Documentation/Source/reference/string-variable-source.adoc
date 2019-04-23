@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.StringVariableSource : <<reference/variable-source-1
 
 ### Constructors
 
-StringVariableSource()::
-
 StringVariableSource(string _defaultValue_)::

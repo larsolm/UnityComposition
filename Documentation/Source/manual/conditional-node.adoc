@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/conditional-node.html[Reference]
+<<reference/conditional-node.html,Reference>>
 endif::[]

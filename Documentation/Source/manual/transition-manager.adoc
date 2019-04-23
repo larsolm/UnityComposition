@@ -5,5 +5,5 @@
 
 
 ifdef::backend-multipage_html5[]
-link:reference/transition-manager.html[Reference]
+<<reference/transition-manager.html,Reference>>
 endif::[]

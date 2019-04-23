@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ScopedGraph : <<reference/instruction-graph.html,Ins
 
 ### Description
 
-### Constructors
-
-ScopedGraph()::
-
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Enter_::
@@ -17,7 +13,3 @@ ScopedGraph()::
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Process_::
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Exit_::
-
-### Protected Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(virtual)_::

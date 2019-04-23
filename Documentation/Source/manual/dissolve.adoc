@@ -14,5 +14,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/dissolve.html[Reference]
+<<reference/dissolve.html,Reference>>
 endif::[]

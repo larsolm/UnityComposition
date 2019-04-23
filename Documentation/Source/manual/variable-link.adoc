@@ -12,5 +12,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/variable-link.html[Reference]
+<<reference/variable-link.html,Reference>>
 endif::[]

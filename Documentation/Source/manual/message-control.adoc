@@ -5,5 +5,5 @@
 
 
 ifdef::backend-multipage_html5[]
-link:reference/message-control.html[Reference]
+<<reference/message-control.html,Reference>>
 endif::[]

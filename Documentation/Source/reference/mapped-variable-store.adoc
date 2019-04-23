@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.MappedVariableStore : <<reference/i-variable-store.h
 
 ### Description
 
-### Constructors
-
-MappedVariableStore()::
-
 ### Public Properties
 
 int _VariableCount_ _(read only)_ _(virtual)_::

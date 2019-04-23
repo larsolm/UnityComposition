@@ -8,8 +8,6 @@ PiRhoSoft.CompositionEngine.MappedVariableAttribute : Attribute
 
 ### Constructors
 
-MappedVariableAttribute()::
-
 MappedVariableAttribute(bool _readable_, bool _writable_)::
 
 ### Public Fields

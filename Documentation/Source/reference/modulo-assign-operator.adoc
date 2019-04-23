@@ -6,10 +6,3 @@ PiRhoSoft.CompositionEngine.ModuloAssignOperator : <<reference/assignment-operat
 
 ### Description
 
-### Constructors
-
-ModuloAssignOperator()::
-
-### Public Methods
-
-<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

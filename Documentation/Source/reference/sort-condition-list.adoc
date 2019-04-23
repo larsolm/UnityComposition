@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.SortConditionList : link:/projects/unity-utilities/d
 
 ### Description
 
-### Constructors
-
-SortConditionList()::

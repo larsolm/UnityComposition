@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.IntVariableSource : <<reference/variable-source-1.ht
 
 ### Constructors
 
-IntVariableSource()::
-
 IntVariableSource(int _defaultValue_)::

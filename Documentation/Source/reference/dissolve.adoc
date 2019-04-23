@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.Dissolve : <<reference/cutoff.html,Cutoff>>
 
 ### Description
 
-### Constructors
-
-Dissolve()::
-
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
@@ -19,15 +15,3 @@ https://docs.unity3d.com/ScriptReference/Texture2D.html[Texture2D^] _Texture_::
 https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _TextureSize_::
 
 float _NoiseScale_::
-
-### Public Methods
-
-void Begin(<<reference/transition-phase.html,TransitionPhase>> _phase_) _(virtual)_::
-
-void End() _(virtual)_::
-
-void Process(float _time_, <<reference/transition-phase.html,TransitionPhase>> _phase_) _(virtual)_::
-
-### Protected Methods
-
-void Setup() _(virtual)_::

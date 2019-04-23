@@ -13,5 +13,5 @@
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/graph-trigger-binding.html[Reference]
+<<reference/graph-trigger-binding.html,Reference>>
 endif::[]

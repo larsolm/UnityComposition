@@ -6,20 +6,6 @@ PiRhoSoft.CompositionEngine.MockupGraph : <<reference/instruction-graph.html,Ins
 
 ### Description
 
-### Constructors
-
-MockupGraph()::
-
 ### Public Fields
 
 <<reference/mockup-connection-list.html,MockupConnectionList>> _EntryPoints_::
-
-### Public Methods
-
-void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
-
-void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
-
-### Protected Methods
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(virtual)_::

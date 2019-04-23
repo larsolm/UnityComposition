@@ -20,10 +20,6 @@ void End() _(virtual)_::
 
 void Render(https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _source_, https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _destination_) _(virtual)_::
 
-### Protected Constructors
-
-Transition()::
-
 ### Protected Properties
 
 https://docs.unity3d.com/ScriptReference/Material.html[Material^] _Material_ _(read only)_::

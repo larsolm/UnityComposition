@@ -18,5 +18,5 @@ image:call-method-node.png[]
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/call-method-node.html[Reference]
+<<reference/call-method-node.html,Reference>>
 endif::[]

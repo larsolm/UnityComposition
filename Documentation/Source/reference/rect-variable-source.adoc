@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.RectVariableSource : <<reference/variable-source-1.h
 
 ### Constructors
 
-RectVariableSource()::
-
 RectVariableSource(https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _defaultValue_)::

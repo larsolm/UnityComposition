@@ -6,10 +6,3 @@ PiRhoSoft.CompositionEngine.MemberOperator : <<reference/infix-operation.html,In
 
 ### Description
 
-### Public Methods
-
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
-
-### Protected Constructors
-
-MemberOperator()::

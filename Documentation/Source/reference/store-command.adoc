@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.StoreCommand : <<reference/i-command.html,ICommand>>
 
 ### Description
 
-### Constructors
-
-StoreCommand()::
-
 ### Public Methods
 
 <<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(virtual)_::

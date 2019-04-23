@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariableLink : https://docs.unity3d.com/ScriptRefere
 
 ### Description
 
-### Constructors
-
-VariableLink()::
-
 ### Public Fields
 
 <<reference/variable-pool.html,VariablePool>> _Variables_::

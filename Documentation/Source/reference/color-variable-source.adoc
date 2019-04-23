@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.ColorVariableSource : <<reference/variable-source-1.
 
 ### Constructors
 
-ColorVariableSource()::
-
 ColorVariableSource(https://docs.unity3d.com/ScriptReference/Color.html[Color^] _defaultValue_)::

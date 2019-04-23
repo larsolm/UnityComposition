@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.BarBinding : <<reference/variable-binding.html,Varia
 
 ### Description
 
-### Constructors
-
-BarBinding()::
-
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _AmountVariable_::
@@ -21,9 +17,3 @@ https://docs.unity3d.com/ScriptReference/Gradient.html[Gradient^] _FillColors_::
 float _Speed_::
 
 bool _UseScaledTime_::
-
-### Protected Methods
-
-void Awake() _(virtual)_::
-
-void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(virtual)_::

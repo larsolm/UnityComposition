@@ -6,10 +6,3 @@ PiRhoSoft.CompositionEngine.InvertOperator : <<reference/prefix-operation.html,P
 
 ### Description
 
-### Constructors
-
-InvertOperator()::
-
-### Public Methods
-
-<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_) _(virtual)_::

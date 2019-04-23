@@ -20,5 +20,5 @@ image:branch-node.png[]
 |===
 
 ifdef::backend-multipage_html5[]
-link:reference/branch-node.html[Reference]
+<<reference/branch-node.html,Reference>>
 endif::[]

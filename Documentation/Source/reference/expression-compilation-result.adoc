@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.ExpressionCompilationResult
 
 ### Description
 
-### Constructors
-
-ExpressionCompilationResult()::
-
 ### Public Fields
 
 bool _Success_::

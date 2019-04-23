@@ -10,18 +10,6 @@ PiRhoSoft.CompositionEngine.InfixOperation : <<reference/operation.html,Operatio
 
 <<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(abstract)_::
 
-### Public Methods
-
-void Parse(<<reference/expression-parser.html,ExpressionParser>> _parser_, <<reference/expression-token.html,ExpressionToken>> _token_) _(virtual)_::
-
-void ToString(StringBuilder _builder_) _(virtual)_::
-
-void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_, string _source_) _(virtual)_::
-
-### Protected Constructors
-
-InfixOperation()::
-
 ### Protected Fields
 
 <<reference/operation.html,Operation>> _Left_::

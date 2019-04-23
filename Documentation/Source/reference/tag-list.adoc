@@ -6,6 +6,3 @@ PiRhoSoft.CompositionEngine.TagList : link:/projects/unity-utilities/documentati
 
 ### Description
 
-### Constructors
-
-TagList()::

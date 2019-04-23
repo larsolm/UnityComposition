@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.VariableSchema : https://docs.unity3d.com/ScriptRefe
 
 ### Description
 
-### Constructors
-
-VariableSchema()::
-
 ### Public Fields
 
 <<reference/variable-initializer-type.html,VariableInitializerType>> _InitializerType_::

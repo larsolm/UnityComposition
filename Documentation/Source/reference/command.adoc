@@ -6,10 +6,6 @@ PiRhoSoft.CompositionEngine.Command : https://docs.unity3d.com/ScriptReference/S
 
 ### Description
 
-### Constructors
-
-Command()::
-
 ### Public Fields
 
 string _Name_::

@@ -8,6 +8,4 @@ PiRhoSoft.CompositionEngine.Vector3VariableSource : <<reference/variable-source-
 
 ### Constructors
 
-Vector3VariableSource()::
-
 Vector3VariableSource(https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _defaultValue_)::
