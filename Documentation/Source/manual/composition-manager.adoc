@@ -2,7 +2,7 @@
 
 ## Composition Manager
 
-
+The Composition Manager is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that acts as the object that manages the entire composition system. It is a singleton class and is created automatically the first time it is accessed so it does not need to be added to any objects in a scene. If manually running an <<instruction-graph,Instruction Graph>> from script, do it through the `Run()` method on the Composition Manager
 
 ifdef::backend-multipage_html5[]
 <<reference/composition-manager.html,Reference>>
