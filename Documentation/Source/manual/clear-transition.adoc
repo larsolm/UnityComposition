@@ -2,7 +2,7 @@
 
 ## Clear Transition
 
-Clear Transition is an <<instruction-graph-node,Instruction Graph Node>> that is used to manually end the current <<transition,Transition>>. Generally ending a <<transition,Transition>> happens with the _AutoFinish_ property on a <<play-transition,Play Transition>> node however, in the case that a <<transition,Transition>> needs to be ended manually this node is available.
+Clear Transition is an <<instruction-graph-node,Instruction Graph Node>> that is used to manually end the current <<transition,Transition>>. Generally ending a <<transition,Transition>> happens with the _AutoFinish_ property on a <<play-transition,Play Transition>> node however, in the case that a <<transition,Transition>> needs to be ended manually this node is available. Create a Clear Transition Node in the menu:Create[Scripted Sequence > Clear Transition] menu of the Instruction Graph Window.
 
 ifdef::backend-multipage_html5[]
 link:reference/clear-transition.html[Reference]

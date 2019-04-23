@@ -2,7 +2,9 @@
 
 ## Collision Notifier
 
-Collision Notifier is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] used to trigger events on during collisions.
+A Collision Notifier is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] used to trigger events during collisions. It works in conjunction with an link:reference/i-collision-trigger[ICollisionTrigger] which can be implemented to receive an `Enter()` and an `Exit()` call when this object starts and stops colliding with the trigger. The <<collision-graph-trigger,Collision Graph Trigger>> is an example implementation of an link:reference/i-collision-trigger[ICollisionTrigger] that can interact with a Collision Notifier.
+
+See the _"Player" script and the "Maze1"_ scene in the Maze project for an example usage.
 
 ifdef::backend-multipage_html5[]
 link:reference/collision-notifier.html[Reference]

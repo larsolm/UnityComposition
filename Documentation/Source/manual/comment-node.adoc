@@ -2,13 +2,15 @@
 
 ## Comment Node
 
+A Comment Node is an <<instruction-graph-node,Instruction Graph Node>> that is used for debugging purposes. It is inert during runtime and is purely used to display custom info about how a graph is functioning. Create a Comment Node in the menu:Create[Debug > Comment] menu of the Instruction Graph Window.
+
 ### Fields
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Comment	| 
+| Comment	| The string value of the comment
 |===
 
 ifdef::backend-multipage_html5[]

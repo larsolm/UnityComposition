@@ -2,7 +2,7 @@
 
 ## Call Method Node
 
-A Call Method Node is an <<instruction-graph-node,Instruction Graph Node>> can call any method on any https://docs.unity3d.com/ScriptReference/Object.html[UnityObject^] provided that the parameters of the method can be stored in a VariableValue.
+A Call Method Node is an <<instruction-graph-node,Instruction Graph Node>> can call any method on any https://docs.unity3d.com/ScriptReference/Object.html[UnityObject^] provided that the parameters of the method can be stored in a VariableValue. Create a Call Method Node in the menu:Create[Composition > Call Method] menu of the Instruction Graph Window.
 
 ### Fields
 

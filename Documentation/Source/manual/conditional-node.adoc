@@ -2,13 +2,15 @@
 
 ## Conditional Node
 
+A Conditional Node is an <<instruction-graph-node,Instruction Graph Node>> that branches the progression of an <<instruction-graph,Instruction Graph>> based on the `true` or `false` evaluation of an link:reference/expression.html[Expression]. Create a Conditional Node in the menu:Create[Control Flow > Conditional] menu of the Instruction Graph Window.
+
 ### Fields
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Condition	| 
+| Condition	| The link:reference/expression.html[Expression] to evaluate to determine the progression of the graph
 |===
 
 ifdef::backend-multipage_html5[]

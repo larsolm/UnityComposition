@@ -2,7 +2,7 @@
 
 ## Break Node
 
-A Break Node is an <<instruction-graph-node,Instruction Graph Node>> that will force the most recent link:reference/i-loop-node[ILoopNode] to stop running. link:reference/i-loop-node[ILoopNode] is implemented by <<loop-node,Loop Node>> and <<iterate-node,Iterate Node>>.
+A Break Node is an <<instruction-graph-node,Instruction Graph Node>> that will force the most recent link:reference/i-loop-node.html[ILoopNode] to stop running. link:reference/i-loop-node.html[ILoopNode] is implemented by <<loop-node,Loop Node>> and <<iterate-node,Iterate Node>>. Create a Break Node in the menu:Create[Control Flow > Break] menu of the Instruction Graph Window.
 
 See the _"BoardLoop"_ <<instruction-graph,Instruction Graph>> in the BoardGame project for an example usage.
 
