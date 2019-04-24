@@ -26,7 +26,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578509660368998042}
   m_LocalRotation: {x: -0, y: -0, z: -0.99794, w: 0.0641548}
-  m_LocalPosition: {x: 0.0625, y: -0.4375, z: 0}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 578509661807874278}
@@ -93,7 +93,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoAdvance: 1
-  Progress: 15.983251
+  Progress: 6.6900444
   UseScaledTime: 1
   Duration: 2
 --- !u!1 &578509660382030431
@@ -122,7 +122,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578509660382030431}
   m_LocalRotation: {x: -0, y: -0, z: -0.25785434, w: 0.96618384}
-  m_LocalPosition: {x: -0.125, y: 0.375, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 578509661807874278}
@@ -189,7 +189,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoAdvance: 1
-  Progress: 15.983251
+  Progress: 6.6900444
   UseScaledTime: 1
   Duration: 2
 --- !u!1 &578509661807874277
@@ -272,7 +272,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Graph:
-    _instruction: {fileID: 11400000, guid: 017a702821ff949498bf9c49a5177943, type: 2}
+    _instruction: {fileID: 0}
     _inputs: []
     _outputs: []
 --- !u!1 &578509662114042350
@@ -301,7 +301,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 578509662114042350}
   m_LocalRotation: {x: -0, y: -0, z: 0.92114085, w: -0.3892295}
-  m_LocalPosition: {x: 0.125, y: 0.25, z: 0}
+  m_LocalPosition: {x: 0, y: 0.25, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 578509661807874278}
@@ -368,6 +368,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   AutoAdvance: 1
-  Progress: 15.983251
+  Progress: 6.340017
   UseScaledTime: 1
   Duration: 2

@@ -181,7 +181,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
-  m_Name: Iterate Pieces(Clone)(Clone)
+  m_Name: Iterate Pieces
   m_EditorClassIdentifier: 
   Name: Iterate Pieces
   GraphPosition: {x: 2188.8, y: -25.6}

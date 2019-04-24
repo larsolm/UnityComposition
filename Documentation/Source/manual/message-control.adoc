@@ -2,7 +2,20 @@
 
 ## Message Control
 
+A Message Control is an <<manual/interface-control.html,Interface Control>> that shows a string of text on a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component when promted to. A Message Control usually is activated, shown, and deactivated by a <<manual/message-node.html,Message Node>>.
 
+See the _"Message"_ object in _"Board"_ scene of the BoardGame project for an example usage.
+
+### Fields
+
+image:message-control.png[]
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Display Text	| The http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component to display the <<reference/message.html,Message>> on
+|===
 
 ifdef::backend-multipage_html5[]
 <<reference/message-control.html,Reference>>

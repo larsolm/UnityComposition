@@ -20,14 +20,14 @@ namespace PiRhoSoft.CompositionEngine
 		public float Progress = 0.0f;
 
 		[Tooltip("Progress is affected by Time.timeScale")]
-		[ConditionalDisplaySelf(nameof(AutoAdvance), Invert = true)]
+		[ConditionalDisplaySelf(nameof(AutoAdvance))]
 		public bool UseScaledTime = true;
 
 		[Tooltip("The duration of the animation (in seconds)")]
 		[ConditionalDisplaySelf(nameof(AutoAdvance))]
 		public float Duration = 2.0f;
 
-		public bool IsComplete => AutoAdvance ? Progress >= 1.0f : Progress >= Duration;
+		public bool IsComplete => AutoAdvance ? Progress >= Duration : Progress >= 1.0f; 
 
 		private Renderer _renderer;
 		private MaterialPropertyBlock _propertyBlock;
@@ -52,7 +52,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (AutoAdvance)
 				Progress += UseScaledTime ? Time.deltaTime : Time.unscaledDeltaTime;
 
-			var progress = AutoAdvance ? Mathf.Clamp01(Progress) : Mathf.Clamp01(Progress / Duration);
+			var progress = AutoAdvance ? Mathf.Clamp01(Progress / Duration) : Mathf.Clamp01(Progress);
 
 			_renderer.GetPropertyBlock(_propertyBlock);
 			_propertyBlock.SetFloat(_progressId, progress);

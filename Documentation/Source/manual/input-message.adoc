@@ -2,7 +2,7 @@
 
 ## Input Message
 
-Input Message is an implementation of <<manual/message-control,Message Control>> that waits for an input before finishing.
+Input Message is an implementation of <<manual/message-control.html,Message Control>> that waits for an input before finishing.
 
 See the _"MazeUI"_ scene in the Maze project for an example usage.
 

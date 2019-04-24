@@ -27,8 +27,17 @@ namespace PiRhoSoft.CompositionEngine
 			StartCoroutine(Run_());
 		}
 
+		protected override void Setup()
+		{
+			if (DisplayText)
+				DisplayText.enabled = true;
+		}
+
 		protected override void Teardown()
 		{
+			if (DisplayText)
+				DisplayText.enabled = false;
+
 			StopAllCoroutines();
 		}
 

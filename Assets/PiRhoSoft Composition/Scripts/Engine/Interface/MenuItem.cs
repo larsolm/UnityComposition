@@ -116,7 +116,7 @@ namespace PiRhoSoft.CompositionEngine
 			public string Label;
 			public bool Focused;
 
-			private static List<string> _variableNames = new List<string> { nameof(Index), nameof(Label), nameof(Focused) };
+			private static List<string> _variableNames = new List<string> { nameof(Index), nameof(Column), nameof(Row), nameof(Label), nameof(Focused) };
 
 			public IList<string> GetVariableNames()
 			{
