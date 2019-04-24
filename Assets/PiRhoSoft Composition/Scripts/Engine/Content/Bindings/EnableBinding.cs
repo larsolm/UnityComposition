@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _failedCommandWarning = "(CEBFC) unable to bind enabled state for binding {0}: the Command '{1}' failed with error {2}";
 		private const string _invalidObjectWarning = "(CEBIO) unable to bind enabled state for binding {0): the object '{1}' is not a GameObject, Behaviour, or Renderer";
 
-		[Tooltip("The GameObject, Behaviour, or Renderer to enable or disable based on Expression")]
+		[Tooltip("The GameObject, Behaviour, or Renderer to enable or disable based on Condition")]
 		public Object Object;
 
 		[Tooltip("The expression to run to determine if the refereneced component should be enabled")]

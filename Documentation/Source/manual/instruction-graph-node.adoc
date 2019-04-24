@@ -2,15 +2,15 @@
 
 ## Instruction Graph Node
 
+An abstract https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Asset^] that is the main component of an <<manual/instruction-graph.html,Instruction Graph>>. This base class has no functionality itself appart from helper methods that may be called from derived classes (see <<reference/instruction-graph-node.html,Reference>>). To implement custom functionality for a node, simply derive and implement the `Run()` method.
+
 ### Fields
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Name	| 
-| Graph Position	| 
-| Is Breakpoint	| 
+| Name	| A friendly name used to identify this node
 |===
 
 ifdef::backend-multipage_html5[]

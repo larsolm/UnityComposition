@@ -2,15 +2,7 @@
 
 ## Instruction Graph
 
-### Fields
-
-[cols="1,2"]
-|===
-| Name	| Description
-
-| _nodes	| 
-| Start Position	| 
-|===
+An abstract https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Asset^] that is the main component of the composition system. Built in Instruction Graph types are the <<manual/simple-graph,Simple Graph>>, <<manual/scoped-graph,Scoped Graph>>, and the <<manual/mockup-graph,Mockup Graph>> (used for prototyping).
 
 ifdef::backend-multipage_html5[]
 <<reference/instruction-graph.html,Reference>>

@@ -2,9 +2,9 @@
 
 ## Break Node
 
-A Break Node is an <<instruction-graph-node,Instruction Graph Node>> that will force the most recent link:reference/i-loop-node.html[ILoopNode] to stop running. link:reference/i-loop-node.html[ILoopNode] is implemented by <<loop-node,Loop Node>> and <<iterate-node,Iterate Node>>. Create a Break Node in the menu:Create[Control Flow > Break] menu of the Instruction Graph Window.
+A Break Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will force the most recent <<reference/i-loop-node.html,ILoopNode>> to stop running. <<reference/i-loop-node.html,ILoopNode>> is implemented by <<manual/loop-node.html,Loop Node>> and <<manual/iterate-node.html,Iterate Node>>. Create a Break Node in the menu:Create[Control Flow > Break] menu of the Instruction Graph Window.
 
-See the _"BoardLoop"_ <<instruction-graph,Instruction Graph>> in the BoardGame project for an example usage.
+See the _"BoardLoop"_ <<manual/instruction-graph.html,Instruction Graph>> in the BoardGame project for an example usage.
 
 ifdef::backend-multipage_html5[]
 <<reference/break-node.html,Reference>>

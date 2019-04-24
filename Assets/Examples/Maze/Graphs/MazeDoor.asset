@@ -75,9 +75,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
-  m_Name: Disable Behaviour
+  m_Name: Disable Door
   m_EditorClassIdentifier: 
-  Name: Disable Behaviour
+  Name: Disable Door
   GraphPosition: {x: 627.2, y: -140.8}
   IsBreakpoint: 0
   Next: {fileID: 114613405383245240}

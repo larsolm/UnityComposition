@@ -2,7 +2,9 @@
 
 ## Cutoff
 
+Cutoff is a abstract implementation of a <<manual/transition.html,Transition>> that provides a custom https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] with an interface to fade, distort, and dissolve the screen image over time using an input texture. Each RGB color component of the input texture is sampled by the https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] and used to determine the output. The R and G values determine the direction of the distortion original image (distortion) as the x and y offset respectively. Values less than 128 will be negative offset and values greater than 128 will be positve offset. The B component of the image determines the dissolve of the of the image with higher values being cutoff later in the transition. The Color property determines the color to fade to as time goes on or when the B component is cutoff.
 
+See the <<manual/fade.html,Fade>> or <<manual/dissolve.html,Dissolve>> classes for example implementations of a Cutoff transition. 
 
 ifdef::backend-multipage_html5[]
 <<reference/cutoff.html,Reference>>

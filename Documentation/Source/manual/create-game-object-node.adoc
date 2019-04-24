@@ -2,9 +2,13 @@
 
 ## Create Game Object Node
 
-A Create Game Object Node is an <<instruction-graph-node,Instruction Graph Node>> that will spawn a Prefab at the given Name, Position, and Rotation. Create a Create Game Object Node in the menu:Create[Object Manipulation > Create Game Object] menu of the Instruction Graph Window.
+A Create Game Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will spawn a Prefab at the given Name, Position, and Rotation relative to the world, another object, or as a child object. The created object can optionally be stored in a given <<reference/variable-reference.html,VariableReference>>. Create a Create Game Object Node in the menu:Create[Object Manipulation > Create Game Object] menu of the Instruction Graph Window.
+
+See the "Create Highlight" node on the "BoardTakeTurn" <<manual/instruction-graph,Instruction Graph>> in the BoardGame project for an example usage.
 
 ### Fields
+
+image:create-game-object-node.png[]
 
 [cols="1,2"]
 |===
@@ -12,12 +16,12 @@ A Create Game Object Node is an <<instruction-graph-node,Instruction Graph Node>
 
 | Prefab	| The prefab to create
 | Object Name	| The name of the new object.
-| Object Variable	| 
-| Positioning	| 
-| Object	| 
-| Parent	| 
-| Position	| 
-| Rotation	| 
+| Object Variable	| The <<reference/variable-reference.html,VariableReference>> to store the created object in
+| Positioning	| The <<reference/create-game-object-node-object-positioning,ObjectPositioning>> to create the object at
+| Object	| If _Positioning_ is `Relative`, the object to position the created object relative to
+| Parent	| If _Positioning_ is `Child`, the object to make the parent of the created object
+| Position	| The position of the new object - can be a https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] value or a <<reference/variable-reference.html,VariableReference>>
+| Rotation	| The rotation of the new object - can be a https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] value or a <<reference/variable-reference.html,VariableReference>>, stored as euler angles
 |===
 
 ifdef::backend-multipage_html5[]

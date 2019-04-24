@@ -2,13 +2,17 @@
 
 ## Disable Game Object Node
 
+A Disable Game Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will deactivate a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. Create a Disable Game Object Node in the menu:Create[Object Manipulation > Deactivate Game Object] menu of the Instruction Graph Window.
+
 ### Fields
+
+image:disable-game-object-node.png[]
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Target	| 
+| Target	| The <<reference/variable-reference.html,VariableReference>> to the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to deactivate
 |===
 
 ifdef::backend-multipage_html5[]

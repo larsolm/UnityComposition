@@ -2,14 +2,20 @@
 
 ## Graph Trigger Binding
 
+Graph Trigger Binding is a <<manual/variable-binding.html,Variable Binding>> that runs an <<manual/instruction-graph.html,Instruction Graph>> when a given <<reference/variable-reference.html,VariablesReference>> changes. _Graph_ will always run the first time `UpdateBindings()` is called and it will not run again if it is already running.
+
+See the _"Maze3"_ scene in the Maze project for an example usage.
+
 ### Fields
+
+image:graph-trigger-binding.png[]
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Graph	| 
-| Variable	| 
+| Graph	| The <<manual/instruction-graph.html,Instruction Graph>> to run when _Variable_ changes
+| Variable	| The <<reference/variable-reference.html,VariablesReference>> to watch for changes in
 |===
 
 ifdef::backend-multipage_html5[]
