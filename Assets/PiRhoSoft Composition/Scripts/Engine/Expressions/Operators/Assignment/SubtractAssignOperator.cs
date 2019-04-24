@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class SubtractAssignOperator : AssignmentOperator
+	internal class SubtractAssignOperator : AssignmentOperator
 	{
 		private const string _readOnlyRemoveException = "the list '{0}' is read only and cannot have values removed";
 		private const string _mismatchedRemoveException = "the list '{0}' cannot have values of type {1} removed";

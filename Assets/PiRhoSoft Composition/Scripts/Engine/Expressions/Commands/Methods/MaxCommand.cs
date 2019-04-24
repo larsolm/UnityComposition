@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class MaxCommand : ICommand
+	internal class MaxCommand : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

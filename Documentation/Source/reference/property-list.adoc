@@ -12,12 +12,12 @@ PropertyList(Object _owner_, <<reference/property-map.html,PropertyMap>> _map_):
 
 ### Public Properties
 
-int _VariableCount_ _(read only)_ _(virtual)_::
+int _VariableCount_ _(read only)_::
 
 ### Public Methods
 
-string GetVariableName(int _index_) _(virtual)_::
+string GetVariableName(int _index_)::
 
-<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_)::

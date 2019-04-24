@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.ClearTransition : <<reference/instruction-graph-node
 
 ### Description
 
+Ends the <<reference/transition.html,Transition>> currently running on the <<reference/transition-manager.html,TransitionManager>>
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The <<reference/instruction-graph-node.html,node>> to run after stopping the <<reference/transition.html,Transition>>.

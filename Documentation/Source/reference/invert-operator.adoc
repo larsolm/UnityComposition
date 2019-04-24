@@ -1,8 +1,0 @@
-[#reference/invert-operator]
-
-## InvertOperator
-
-PiRhoSoft.CompositionEngine.InvertOperator : <<reference/prefix-operation.html,PrefixOperation>>
-
-### Description
-

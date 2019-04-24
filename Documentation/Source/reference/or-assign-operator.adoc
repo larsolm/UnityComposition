@@ -1,8 +1,0 @@
-[#reference/or-assign-operator]
-
-## OrAssignOperator
-
-PiRhoSoft.CompositionEngine.OrAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
-
-### Description
-

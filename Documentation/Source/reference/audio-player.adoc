@@ -8,7 +8,7 @@ PiRhoSoft.CompositionEngine.AudioPlayer : https://docs.unity3d.com/ScriptReferen
 
 ### Public Properties
 
-bool _IsComplete_ _(read only)_ _(virtual)_::
+bool _IsComplete_ _(read only)_::
 
 ### Public Methods
 

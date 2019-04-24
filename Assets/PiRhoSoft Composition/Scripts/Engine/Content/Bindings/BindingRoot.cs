@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static List<BindingRoot> _roots = new List<BindingRoot>();
 
-		public static IVariableStore FindParent(GameObject obj)
+		internal static IVariableStore FindParent(GameObject obj)
 		{
 			_roots.Clear();
 			obj.GetComponentsInParent(true, _roots);

@@ -1,8 +1,0 @@
-[#reference/add-operator]
-
-## AddOperator
-
-PiRhoSoft.CompositionEngine.AddOperator : <<reference/infix-operation.html,InfixOperation>>
-
-### Description
-

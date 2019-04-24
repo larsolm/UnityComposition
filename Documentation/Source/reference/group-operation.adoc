@@ -1,8 +1,0 @@
-[#reference/group-operation]
-
-## GroupOperation
-
-PiRhoSoft.CompositionEngine.GroupOperation : <<reference/operation.html,Operation>>
-
-### Description
-

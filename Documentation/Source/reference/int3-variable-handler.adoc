@@ -1,8 +1,0 @@
-[#reference/int3-variable-handler]
-
-## Int3VariableHandler
-
-PiRhoSoft.CompositionEngine.Int3VariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

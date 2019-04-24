@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class StoreCommand : ICommand
+	internal class StoreCommand : ICommand
 	{
 		private const string _invalidSchemaWarning = "(CECSCIS) Failed to create constrained variable store with the schema '{0}': the schema could not be found. Make sure it is in a \"Resources\" folder and the correct path was specified.";
 

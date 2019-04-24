@@ -1,8 +1,0 @@
-[#reference/modulo-operator]
-
-## ModuloOperator
-
-PiRhoSoft.CompositionEngine.ModuloOperator : <<reference/infix-operation.html,InfixOperation>>
-
-### Description
-

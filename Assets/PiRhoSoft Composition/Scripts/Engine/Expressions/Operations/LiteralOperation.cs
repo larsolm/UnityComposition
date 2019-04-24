@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class LiteralOperation : Operation
+	internal class LiteralOperation : Operation
 	{
 		private const string _invalidLiteralException = "unable to parse '{0}' as a literal {1}";
 

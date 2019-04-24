@@ -6,12 +6,10 @@ PiRhoSoft.CompositionEngine.ButtonInput : https://docs.unity3d.com/ScriptReferen
 
 ### Description
 
+ButtonInput is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will set the state of a button when an object is clicked or released. See the <<manual/button-input.html,manual page>> for usage details.
+
 ### Public Fields
 
 string _ButtonName_::
 
-### Public Methods
-
-void OnPointerDown(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
-
-void OnPointerUp(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
+The name of the button whose state will be changed when this object is clicked or released.

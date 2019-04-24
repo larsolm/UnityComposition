@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class IntBoundsVariableHandler : VariableHandler
+	internal class IntBoundsVariableHandler : VariableHandler
 	{
-		protected override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(new BoundsInt());
-		protected override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.IntBounds);
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(new BoundsInt());
+		protected internal override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.IntBounds);
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.IntBounds.min.x);
 			writer.Write(value.IntBounds.min.y);
@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.IntBounds.size.z);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var x = reader.ReadInt32();
 			var y = reader.ReadInt32();
@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(new BoundsInt(new Vector3Int(x, y, z), new Vector3Int(w, h, d)));
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (lookup.Type == VariableType.String)
 			{
@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Empty;
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (value.TryGetInt(out var number))
 			{
@@ -99,7 +99,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetIntBounds(out var bounds))
 				return left.IntBounds == bounds;

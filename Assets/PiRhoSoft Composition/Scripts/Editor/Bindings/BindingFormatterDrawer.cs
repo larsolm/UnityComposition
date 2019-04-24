@@ -8,6 +8,9 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class BindingFormatterControl : ObjectControl<BindingFormatter>
 	{
+		public static readonly string[] TimeFormats = new string[(int)BindingFormatter.TimeFormatType.Custom] { @"s\.fff", @"m\:ss", @"m\:ss\.fff", @"h\:mm" };
+		public static readonly string[] NumberFormats = new string[(int)BindingFormatter.NumberFormatType.Custom] { "0.#%", "#,###,##0", "0", "0.00" };
+
 		private BindingFormatter _formatter;
 
 		private float _preview = Mathf.PI;
@@ -46,12 +49,12 @@ namespace PiRhoSoft.CompositionEditor
 				if (_formatter.Formatting == BindingFormatter.FormatType.Time)
 				{
 					_formatter.TimeFormatting = (BindingFormatter.TimeFormatType)EditorGUI.EnumPopup(formatRect, _timeFormattingLabel.Content, _formatter.TimeFormatting);
-					_formatter.ValueFormat = _formatter.TimeFormatting == BindingFormatter.TimeFormatType.Custom ? EditorGUI.TextField(valueFormatRect, _valueFormatLabel.Content, _formatter.ValueFormat) : BindingFormatter.TimeFormats[(int)_formatter.TimeFormatting];
+					_formatter.ValueFormat = _formatter.TimeFormatting == BindingFormatter.TimeFormatType.Custom ? EditorGUI.TextField(valueFormatRect, _valueFormatLabel.Content, _formatter.ValueFormat) : TimeFormats[(int)_formatter.TimeFormatting];
 				}
 				else if (_formatter.Formatting == BindingFormatter.FormatType.Number)
 				{
 					_formatter.NumberFormatting = (BindingFormatter.NumberFormatType)EditorGUI.EnumPopup(formatRect, _numberFormattingLabel.Content, _formatter.NumberFormatting);
-					_formatter.ValueFormat = _formatter.NumberFormatting == BindingFormatter.NumberFormatType.Custom ? EditorGUI.TextField(valueFormatRect, _valueFormatLabel.Content, _formatter.ValueFormat) : BindingFormatter.NumberFormats[(int)_formatter.NumberFormatting];
+					_formatter.ValueFormat = _formatter.NumberFormatting == BindingFormatter.NumberFormatType.Custom ? EditorGUI.TextField(valueFormatRect, _valueFormatLabel.Content, _formatter.ValueFormat) : NumberFormats[(int)_formatter.NumberFormatting];
 				}
 
 				if ((_formatter.Formatting == BindingFormatter.FormatType.Time && _formatter.TimeFormatting != BindingFormatter.TimeFormatType.Custom) || (_formatter.Formatting == BindingFormatter.FormatType.Number && _formatter.NumberFormatting != BindingFormatter.NumberFormatType.Custom))

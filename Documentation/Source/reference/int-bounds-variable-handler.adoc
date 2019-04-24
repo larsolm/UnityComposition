@@ -1,8 +1,0 @@
-[#reference/int-bounds-variable-handler]
-
-## IntBoundsVariableHandler
-
-PiRhoSoft.CompositionEngine.IntBoundsVariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

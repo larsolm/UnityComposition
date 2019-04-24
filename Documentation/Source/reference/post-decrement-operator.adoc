@@ -1,8 +1,0 @@
-[#reference/post-decrement-operator]
-
-## PostDecrementOperator
-
-PiRhoSoft.CompositionEngine.PostDecrementOperator : <<reference/assign-operator.html,AssignOperator>>
-
-### Description
-

@@ -5,12 +5,12 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class IntRectVariableHandler : VariableHandler
+	internal class IntRectVariableHandler : VariableHandler
 	{
-		protected override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(new RectInt());
-		protected override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.IntRect);
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(new RectInt());
+		protected internal override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.IntRect);
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.IntRect.x);
 			writer.Write(value.IntRect.y);
@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.IntRect.height);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var x = reader.ReadInt32();
 			var y = reader.ReadInt32();
@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(new RectInt(x, y, w, h));
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (lookup.Type == VariableType.String)
 			{
@@ -44,7 +44,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Empty;
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (value.TryGetInt(out var number))
 			{
@@ -83,7 +83,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetIntRect(out var rect))
 				return left.IntRect.x == rect.x && left.IntRect.y == rect.y && left.IntRect.width == rect.width && left.IntRect.height == rect.height;

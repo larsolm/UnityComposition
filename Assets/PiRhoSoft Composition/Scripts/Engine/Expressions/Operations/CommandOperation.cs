@@ -3,7 +3,7 @@ using System.Text;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class CommandOperation : Operation
+	internal class CommandOperation : Operation
 	{
 		private const string _missingCommandException = "a command named '{0}' does not exist";
 

@@ -1,8 +1,0 @@
-[#reference/increment-operator]
-
-## IncrementOperator
-
-PiRhoSoft.CompositionEngine.IncrementOperator : <<reference/prefix-operation.html,PrefixOperation>>
-
-### Description
-

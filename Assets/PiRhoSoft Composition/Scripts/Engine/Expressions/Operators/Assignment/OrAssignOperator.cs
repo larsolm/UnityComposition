@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class OrAssignOperator : AssignmentOperator
+	internal class OrAssignOperator : AssignmentOperator
 	{
 		public override VariableValue Evaluate(IVariableStore variables)
 		{

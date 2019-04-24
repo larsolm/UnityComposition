@@ -2,7 +2,7 @@
 
 ## Axis Input
 
-Axis Input is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will set a value on an input axis when the object is clicked on. This is useful for things like on screen buttons in a mobile game that move a character directionally or to trigger actions.
+Axis Input is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will set a value on an input axis when an object is clicked. This can be used in conjunction with the link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^] to create virtual axes for things like on screen buttons in a mobile game that move a character directionally or to trigger actions.
 
 See the _"MazeUI"_ scene in the Maze project for an example usage.
 

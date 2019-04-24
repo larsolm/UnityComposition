@@ -6,14 +6,14 @@ PiRhoSoft.CompositionEngine.CollisionGraphTrigger : https://docs.unity3d.com/Scr
 
 ### Description
 
+Runs a graph when a <<reference/collision-notifier.html,CollisionNotifier>> informs this object that it has collided.
+
 ### Public Fields
 
 <<reference/instruction-caller.html,InstructionCaller>> _EnterGraph_::
 
+The <<reference/instruction-graph.html,InstructionGraph>> to run when a <<reference/collision-notifier.html,CollisionNotifier>> begins colliding with this object.
+
 <<reference/instruction-caller.html,InstructionCaller>> _ExitGraph_::
 
-### Public Methods
-
-void Enter() _(virtual)_::
-
-void Exit() _(virtual)_::
+The <<reference/instruction-graph.html,InstructionGraph>> to run when a <<reference/collision-notifier.html,CollisionNotifier>> stops colliding with this object.

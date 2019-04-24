@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class OrOperator : InfixOperation
+	internal class OrOperator : InfixOperation
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Or;
 

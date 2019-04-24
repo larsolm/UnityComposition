@@ -1,33 +1,5 @@
 :imagesdir: reference/
 
-include::reference/abs-command.adoc[]
-
-<<<
-
-include::reference/access-operator.adoc[]
-
-<<<
-
-include::reference/acos-command.adoc[]
-
-<<<
-
-include::reference/add-assign-operator.adoc[]
-
-<<<
-
-include::reference/add-operator.adoc[]
-
-<<<
-
-include::reference/and-assign-operator.adoc[]
-
-<<<
-
-include::reference/and-operator.adoc[]
-
-<<<
-
 include::reference/animation-clip-variable-source.adoc[]
 
 <<<
@@ -40,19 +12,7 @@ include::reference/transform-node-animation-type.adoc[]
 
 <<<
 
-include::reference/asin-command.adoc[]
-
-<<<
-
 include::reference/assignment-operator.adoc[]
-
-<<<
-
-include::reference/assign-operator.adoc[]
-
-<<<
-
-include::reference/atan-command.adoc[]
 
 <<<
 
@@ -92,14 +52,6 @@ include::reference/bool-variable-source.adoc[]
 
 <<<
 
-include::reference/bounds-command.adoc[]
-
-<<<
-
-include::reference/bounds-int-command.adoc[]
-
-<<<
-
 include::reference/bounds-variable-handler.adoc[]
 
 <<<
@@ -132,18 +84,6 @@ include::reference/call-method-node.adoc[]
 
 <<<
 
-include::reference/cast-operator.adoc[]
-
-<<<
-
-include::reference/ceiling-command.adoc[]
-
-<<<
-
-include::reference/clamp-command.adoc[]
-
-<<<
-
 include::reference/clear-transition.adoc[]
 
 <<<
@@ -157,10 +97,6 @@ include::reference/collision-graph-trigger.adoc[]
 <<<
 
 include::reference/collision-notifier.adoc[]
-
-<<<
-
-include::reference/color-command.adoc[]
 
 <<<
 
@@ -181,10 +117,6 @@ include::reference/command.adoc[]
 <<<
 
 include::reference/command-evaluation-exception.adoc[]
-
-<<<
-
-include::reference/command-operation.adoc[]
 
 <<<
 
@@ -212,15 +144,7 @@ include::reference/instruction-graph-node-connection-data.adoc[]
 
 <<<
 
-include::reference/constant-operation.adoc[]
-
-<<<
-
 include::reference/constrained-store.adoc[]
-
-<<<
-
-include::reference/cos-command.adoc[]
 
 <<<
 
@@ -237,10 +161,6 @@ include::reference/create-scriptable-object-node.adoc[]
 <<<
 
 include::reference/cutoff.adoc[]
-
-<<<
-
-include::reference/decrement-operator.adoc[]
 
 <<<
 
@@ -261,14 +181,6 @@ include::reference/disable-game-object-node.adoc[]
 <<<
 
 include::reference/dissolve.adoc[]
-
-<<<
-
-include::reference/divide-assign-operator.adoc[]
-
-<<<
-
-include::reference/divide-operator.adoc[]
 
 <<<
 
@@ -297,18 +209,6 @@ include::reference/enum-variable-constraint.adoc[]
 <<<
 
 include::reference/enum-variable-handler.adoc[]
-
-<<<
-
-include::reference/equal-operator.adoc[]
-
-<<<
-
-include::reference/exponent-assign-operator.adoc[]
-
-<<<
-
-include::reference/exponent-operator.adoc[]
 
 <<<
 
@@ -372,10 +272,6 @@ include::reference/float-variable-source.adoc[]
 
 <<<
 
-include::reference/floor-command.adoc[]
-
-<<<
-
 include::reference/focus-binding-root.adoc[]
 
 <<<
@@ -393,18 +289,6 @@ include::reference/get-property-node.adoc[]
 <<<
 
 include::reference/graph-trigger-binding.adoc[]
-
-<<<
-
-include::reference/greater-operator.adoc[]
-
-<<<
-
-include::reference/greater-or-equal-operator.adoc[]
-
-<<<
-
-include::reference/group-operation.adoc[]
 
 <<<
 
@@ -428,10 +312,6 @@ include::reference/i-completion-notifier.adoc[]
 
 <<<
 
-include::reference/identifier-operation.adoc[]
-
-<<<
-
 include::reference/i-loop-node.adoc[]
 
 <<<
@@ -445,14 +325,6 @@ include::reference/image-color-binding.adoc[]
 <<<
 
 include::reference/i-mapped-variable-list.adoc[]
-
-<<<
-
-include::reference/increment-operator.adoc[]
-
-<<<
-
-include::reference/inequal-operator.adoc[]
 
 <<<
 
@@ -580,10 +452,6 @@ include::reference/int-variable-source.adoc[]
 
 <<<
 
-include::reference/invert-operator.adoc[]
-
-<<<
-
 include::reference/i-schema-owner.adoc[]
 
 <<<
@@ -612,23 +480,7 @@ include::reference/i-variable-store.adoc[]
 
 <<<
 
-include::reference/lerp-command.adoc[]
-
-<<<
-
-include::reference/less-operator.adoc[]
-
-<<<
-
-include::reference/less-or-equal-operator.adoc[]
-
-<<<
-
 include::reference/list-binding.adoc[]
-
-<<<
-
-include::reference/list-command.adoc[]
 
 <<<
 
@@ -644,23 +496,11 @@ include::reference/list-variable-source.adoc[]
 
 <<<
 
-include::reference/literal-operation.adoc[]
-
-<<<
-
 include::reference/load-scene-node.adoc[]
 
 <<<
 
-include::reference/log-command.adoc[]
-
-<<<
-
 include::reference/log-node.adoc[]
-
-<<<
-
-include::reference/lookup-operator.adoc[]
 
 <<<
 
@@ -677,10 +517,6 @@ include::reference/mapped-variable-store.adoc[]
 <<<
 
 include::reference/material-animation.adoc[]
-
-<<<
-
-include::reference/max-command.adoc[]
 
 <<<
 
@@ -724,10 +560,6 @@ include::reference/message-node.adoc[]
 
 <<<
 
-include::reference/min-command.adoc[]
-
-<<<
-
 include::reference/mockup-connection.adoc[]
 
 <<<
@@ -741,26 +573,6 @@ include::reference/mockup-graph.adoc[]
 <<<
 
 include::reference/mockup-node.adoc[]
-
-<<<
-
-include::reference/modulo-assign-operator.adoc[]
-
-<<<
-
-include::reference/modulo-operator.adoc[]
-
-<<<
-
-include::reference/multiply-assign-operator.adoc[]
-
-<<<
-
-include::reference/multiply-operator.adoc[]
-
-<<<
-
-include::reference/negate-operator.adoc[]
 
 <<<
 
@@ -812,14 +624,6 @@ include::reference/operator-precedence.adoc[]
 
 <<<
 
-include::reference/or-assign-operator.adoc[]
-
-<<<
-
-include::reference/or-operator.adoc[]
-
-<<<
-
 include::reference/command-parameter.adoc[]
 
 <<<
@@ -856,18 +660,6 @@ include::reference/play-transition.adoc[]
 
 <<<
 
-include::reference/post-decrement-operator.adoc[]
-
-<<<
-
-include::reference/post-increment-operator.adoc[]
-
-<<<
-
-include::reference/pow-command.adoc[]
-
-<<<
-
 include::reference/prefix-operation.adoc[]
 
 <<<
@@ -892,10 +684,6 @@ include::reference/property-map.adoc[]
 
 <<<
 
-include::reference/quaternion-command.adoc[]
-
-<<<
-
 include::reference/quaternion-variable-handler.adoc[]
 
 <<<
@@ -904,23 +692,7 @@ include::reference/quaternion-variable-source.adoc[]
 
 <<<
 
-include::reference/random-command.adoc[]
-
-<<<
-
 include::reference/read-only-store.adoc[]
-
-<<<
-
-include::reference/realtime-command.adoc[]
-
-<<<
-
-include::reference/rect-command.adoc[]
-
-<<<
-
-include::reference/rect-int-command.adoc[]
 
 <<<
 
@@ -941,10 +713,6 @@ include::reference/reset-variable-list.adoc[]
 <<<
 
 include::reference/reset-variables.adoc[]
-
-<<<
-
-include::reference/round-command.adoc[]
 
 <<<
 
@@ -1016,15 +784,7 @@ include::reference/shuffle-node.adoc[]
 
 <<<
 
-include::reference/sign-command.adoc[]
-
-<<<
-
 include::reference/simple-graph.adoc[]
-
-<<<
-
-include::reference/sin-command.adoc[]
 
 <<<
 
@@ -1044,15 +804,7 @@ include::reference/sprite-color-binding.adoc[]
 
 <<<
 
-include::reference/sqrt-command.adoc[]
-
-<<<
-
 include::reference/start-graph-trigger.adoc[]
-
-<<<
-
-include::reference/store-command.adoc[]
 
 <<<
 
@@ -1084,27 +836,7 @@ include::reference/string-variable-source.adoc[]
 
 <<<
 
-include::reference/subtract-assign-operator.adoc[]
-
-<<<
-
-include::reference/subtract-operator.adoc[]
-
-<<<
-
 include::reference/tag-list.adoc[]
-
-<<<
-
-include::reference/tan-command.adoc[]
-
-<<<
-
-include::reference/ternary-operator.adoc[]
-
-<<<
-
-include::reference/test-operator.adoc[]
 
 <<<
 
@@ -1117,10 +849,6 @@ include::reference/text-color-binding.adoc[]
 <<<
 
 include::reference/text-input-binding.adoc[]
-
-<<<
-
-include::reference/time-command.adoc[]
 
 <<<
 
@@ -1172,15 +900,7 @@ include::reference/transition-variable-source.adoc[]
 
 <<<
 
-include::reference/truncate-command.adoc[]
-
-<<<
-
 include::reference/unload-scene-node.adoc[]
-
-<<<
-
-include::reference/unscaled-time-command.adoc[]
 
 <<<
 
@@ -1312,14 +1032,6 @@ include::reference/variable-value-source.adoc[]
 
 <<<
 
-include::reference/vector2-command.adoc[]
-
-<<<
-
-include::reference/vector2-int-command.adoc[]
-
-<<<
-
 include::reference/vector2-variable-handler.adoc[]
 
 <<<
@@ -1328,23 +1040,11 @@ include::reference/vector2-variable-source.adoc[]
 
 <<<
 
-include::reference/vector3-command.adoc[]
-
-<<<
-
-include::reference/vector3-int-command.adoc[]
-
-<<<
-
 include::reference/vector3-variable-handler.adoc[]
 
 <<<
 
 include::reference/vector3-variable-source.adoc[]
-
-<<<
-
-include::reference/vector4-command.adoc[]
 
 <<<
 

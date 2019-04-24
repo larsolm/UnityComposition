@@ -6,20 +6,20 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ObjectVariableHandler : VariableHandler
+	internal class ObjectVariableHandler : VariableHandler
 	{
 		public const string NullText = "(null)";
 
 		private const string _gameObjectName = "GameObject";
 
-		protected override VariableConstraint CreateConstraint() => new ObjectVariableConstraint();
+		protected internal override VariableConstraint CreateConstraint() => new ObjectVariableConstraint();
 
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create((Object)null);
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			if (value.Object == null)
 				builder.Append(NullText);
@@ -27,19 +27,19 @@ namespace PiRhoSoft.CompositionEngine
 				builder.Append(value.Object.name);
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(objects.Count);
 			objects.Add(value.Object);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var index = reader.ReadInt32();
 			return VariableValue.Create(objects[index]);
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (owner.HasList)
 			{
@@ -58,7 +58,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Empty;
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (owner.HasList)
 			{
@@ -73,7 +73,7 @@ namespace PiRhoSoft.CompositionEngine
 			return SetVariableResult.ReadOnly;
 		}
 
-		protected override VariableValue Cast_(VariableValue owner, string type)
+		protected internal override VariableValue Cast_(VariableValue owner, string type)
 		{
 			if (type == _gameObjectName)
 			{
@@ -87,7 +87,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.IsEmpty)
 				return left.IsNull;

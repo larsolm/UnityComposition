@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class IdentifierOperation : Operation, IAssignableOperation
+	internal class IdentifierOperation : Operation, IAssignableOperation
 	{
 		private const string _invalidLookupException = "unable to find variable '{0}' on '{1}'";
 		private const string _invalidCastException = "unable to cast variable '{0}' to type '{1}'";

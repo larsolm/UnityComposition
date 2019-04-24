@@ -1,8 +1,0 @@
-[#reference/inequal-operator]
-
-## InequalOperator
-
-PiRhoSoft.CompositionEngine.InequalOperator : <<reference/equal-operator.html,EqualOperator>>
-
-### Description
-

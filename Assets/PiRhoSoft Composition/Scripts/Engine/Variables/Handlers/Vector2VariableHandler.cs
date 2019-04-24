@@ -5,25 +5,25 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class Vector2VariableHandler : VariableHandler
+	internal class Vector2VariableHandler : VariableHandler
 	{
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create(new Vector2());
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(value.Vector2);
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Vector2.x);
 			writer.Write(value.Vector2.y);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
@@ -31,7 +31,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(new Vector2(x, y));
 		}
 
-		protected override VariableValue Add_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetVector2(out var v2))
 				return VariableValue.Create(left.Vector2 + v2);
@@ -39,7 +39,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Subtract_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Subtract_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetVector2(out var v2))
 				return VariableValue.Create(left.Vector2 - v2);
@@ -47,7 +47,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Multiply_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Multiply_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var f))
 				return VariableValue.Create(left.Vector2 * f);
@@ -55,7 +55,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Divide_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Divide_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return VariableValue.Create(left.Vector2 / number);
@@ -63,12 +63,12 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Negate_(VariableValue value)
+		protected internal override VariableValue Negate_(VariableValue value)
 		{
 			return VariableValue.Create(new Vector2(-value.Vector2.x, -value.Vector2.y));
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (lookup.Type == VariableType.String)
 			{
@@ -79,7 +79,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Empty;
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (value.TryGetFloat(out var f))
 			{
@@ -105,7 +105,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetVector2(out var int2))
 				return left.Vector2 == int2;

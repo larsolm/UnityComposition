@@ -107,7 +107,6 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					_node.TargetType = type;
 					_node.Method = null;
-					_node.MethodName = null;
 					_node.ParameterTypes = null;
 					_node.Parameters.Clear();
 
@@ -143,7 +142,6 @@ namespace PiRhoSoft.CompositionEditor
 		private void SetMethod(MethodInfo method)
 		{
 			_node.Method = method;
-			_node.MethodName = method?.Name;
 
 			var parameters = _node.Method.GetParameters();
 

@@ -1,8 +1,0 @@
-[#reference/vector2-variable-handler]
-
-## Vector2VariableHandler
-
-PiRhoSoft.CompositionEngine.Vector2VariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

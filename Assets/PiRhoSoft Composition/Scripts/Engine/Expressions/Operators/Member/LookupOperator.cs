@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class LookupOperator : MemberOperator, IAssignableOperation
+	internal class LookupOperator : MemberOperator, IAssignableOperation
 	{
 		private const string _invalidLookupException = "unable to find '{0}' on '{1}'";
 		private const string _invalidAssignException = "unable to assign '{0}' to '{1}' on '{2}'";

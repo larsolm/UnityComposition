@@ -5,23 +5,23 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ListVariableHandler : VariableHandler
+	internal class ListVariableHandler : VariableHandler
 	{
 		public const string CountText = "Count";
 
-		protected override VariableConstraint CreateConstraint() => new ListVariableConstraint();
+		protected internal override VariableConstraint CreateConstraint() => new ListVariableConstraint();
 
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create(new VariableList());
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(value.List);
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			var list = value.List as VariableList;
 
@@ -38,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var count = reader.ReadInt32();
 			var list = new VariableList();
@@ -52,17 +52,17 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(list);
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			return LookupInList(owner, lookup);
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			return ApplyToList(ref owner, lookup, value);
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.HasReference)
 				return left.Reference == right.Reference;

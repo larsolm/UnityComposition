@@ -3,7 +3,7 @@ using System.Text;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class PostDecrementOperator : AssignOperator
+	internal class PostDecrementOperator : AssignOperator
 	{
 		private const string _missingRemoveException = "the list '{0}' is empty and cannot have values removed";
 		private const string _readOnlyRemoveException = "the list '{0}' is read only and cannot have values removed";

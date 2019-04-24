@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class NegateOperator : PrefixOperation
+	internal class NegateOperator : PrefixOperation
 	{
 		public override VariableValue Evaluate(IVariableStore variables)
 		{

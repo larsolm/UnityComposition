@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class AbsCommand : ICommand
+	internal class AbsCommand : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

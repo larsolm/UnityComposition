@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class GreaterOperator : ComparisonOperator
+	internal class GreaterOperator : ComparisonOperator
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Comparison;
 

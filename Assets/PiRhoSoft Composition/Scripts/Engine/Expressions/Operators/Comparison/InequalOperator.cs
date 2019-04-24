@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class InequalOperator : EqualOperator
+	internal class InequalOperator : EqualOperator
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Equality;
 

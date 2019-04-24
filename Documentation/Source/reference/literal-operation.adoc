@@ -1,8 +1,0 @@
-[#reference/literal-operation]
-
-## LiteralOperation
-
-PiRhoSoft.CompositionEngine.LiteralOperation : <<reference/operation.html,Operation>>
-
-### Description
-

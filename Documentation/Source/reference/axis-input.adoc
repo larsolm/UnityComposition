@@ -6,14 +6,14 @@ PiRhoSoft.CompositionEngine.AxisInput : https://docs.unity3d.com/ScriptReference
 
 ### Description
 
+AxisInput is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will set a value on an input axis when an object is clicked. See the <<manual/axis-input.html,manual page>> for usage details.
+
 ### Public Fields
 
 string _AxisName_::
 
+The name of the axis whose value is set when the object with this behaviour is clicked or touched.
+
 float _AxisValue_::
 
-### Public Methods
-
-void OnPointerDown(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
-
-void OnPointerUp(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
+The value to set the axis to when the object with this behaviour is clicked or touched.

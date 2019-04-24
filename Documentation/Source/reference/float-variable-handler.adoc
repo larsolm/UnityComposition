@@ -1,8 +1,0 @@
-[#reference/float-variable-handler]
-
-## FloatVariableHandler
-
-PiRhoSoft.CompositionEngine.FloatVariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

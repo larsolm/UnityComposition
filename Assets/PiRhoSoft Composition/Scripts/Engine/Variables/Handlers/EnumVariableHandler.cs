@@ -6,9 +6,9 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class EnumVariableHandler : VariableHandler
+	internal class EnumVariableHandler : VariableHandler
 	{
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			if (constraint is EnumVariableConstraint enumConstraint)
 				return VariableValue.Create((Enum)Enum.ToObject(enumConstraint.Type, 0));
@@ -16,12 +16,12 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(value.ToString());
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			// saving as a string is the simplest way of handling enums with non Int32 underlying type
 			// it also allows reordering/adding/removing of enum values without affecting saved data
@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Enum.ToString());
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var typeName = reader.ReadString();
 			var enumValue = reader.ReadString();
@@ -48,12 +48,12 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override VariableConstraint CreateConstraint()
+		protected internal override VariableConstraint CreateConstraint()
 		{
 			return new EnumVariableConstraint();
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.HasEnumType(left.EnumType))
 				return left.Enum == right.Enum;
@@ -61,7 +61,7 @@ namespace PiRhoSoft.CompositionEngine
 				return null;
 		}
 
-		protected override int? Compare_(VariableValue left, VariableValue right)
+		protected internal override int? Compare_(VariableValue left, VariableValue right)
 		{
 			if (right.HasEnumType(left.EnumType))
 				return left.Enum.CompareTo(right.Enum);

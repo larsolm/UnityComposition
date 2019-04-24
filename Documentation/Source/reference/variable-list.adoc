@@ -14,14 +14,14 @@ VariableList(int _count_)::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-value.html,VariableValue>>> _Values_ _(read only)_::
 
-int _Count_ _(read only)_ _(virtual)_::
+int _Count_ _(read only)_::
 
 ### Public Methods
 
-<<reference/variable-value.html,VariableValue>> GetVariable(int _index_) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(int _index_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> AddVariable(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> AddVariable(<<reference/variable-value.html,VariableValue>> _value_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> RemoveVariable(int _index_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> RemoveVariable(int _index_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> SetVariable(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(int _index_, <<reference/variable-value.html,VariableValue>> _value_)::

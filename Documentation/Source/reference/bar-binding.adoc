@@ -6,14 +6,26 @@ PiRhoSoft.CompositionEngine.BarBinding : <<reference/variable-binding.html,Varia
 
 ### Description
 
+Bar Binding is a <<reference/variable-binding.html,VariableBinding>> that will set the fill amount and blend color of a https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] based on bindings to two int or float variables. See the <<manual/variable-binding.html,manual page>> for usage details.
+
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _AmountVariable_::
 
+The variable to use to retrieve the value specifying the amount the bar should be filled.
+
 <<reference/variable-reference.html,VariableReference>> _TotalVariable_::
+
+The variable to use to retrieve the value representing the 'full' amount. The fill amount is a percentage calculated as the value of _AmountVariable_ / _TotalVariable_.
 
 https://docs.unity3d.com/ScriptReference/Gradient.html[Gradient^] _FillColors_::
 
+The color of the bar depending on the current fill amount.
+
 float _Speed_::
 
+If this is greater than 0, the fill amount will animate when it changes. The value specifies the speed of the animation in percent per second. So, for example, a value of 0.1 would cause the bar to change its fill at a rate of 10% every second.
+
 bool _UseScaledTime_::
+
+If this is set, _Speed_ will be based on https://docs.unity3d.com/ScriptReference/Time-time.html[scaled time^], otherwise it will be based on https://docs.unity3d.com/ScriptReference/Time-unscaledTime.html[real time^].

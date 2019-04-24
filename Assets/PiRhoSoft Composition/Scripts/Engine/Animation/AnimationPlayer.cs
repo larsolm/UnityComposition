@@ -79,7 +79,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			else
 			{
-				Debug.LogFormat(this, _infiniteLoopingWarning, name, animation.name);
+				Debug.LogWarningFormat(this, _infiniteLoopingWarning, name, animation.name);
 			}
 		}
 

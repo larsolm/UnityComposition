@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class TernaryOperator : InfixOperation
+	internal class TernaryOperator : InfixOperation
 	{
 		private const string _invalidTernaryTypeException = "the operator '{0}' was passed a value of type {1} but can only operate on values of type {2}";
 

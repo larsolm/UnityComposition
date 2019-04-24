@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class DivideOperator : InfixOperation
+	internal class DivideOperator : InfixOperation
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Multiplication;
 

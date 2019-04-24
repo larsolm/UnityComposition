@@ -1,8 +1,0 @@
-[#reference/post-increment-operator]
-
-## PostIncrementOperator
-
-PiRhoSoft.CompositionEngine.PostIncrementOperator : <<reference/assign-operator.html,AssignOperator>>
-
-### Description
-

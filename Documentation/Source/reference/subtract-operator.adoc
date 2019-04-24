@@ -1,8 +1,0 @@
-[#reference/subtract-operator]
-
-## SubtractOperator
-
-PiRhoSoft.CompositionEngine.SubtractOperator : <<reference/infix-operation.html,InfixOperation>>
-
-### Description
-

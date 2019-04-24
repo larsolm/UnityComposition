@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.ParameterList : link:/projects/unity-utilities/docum
 
 ### Description
 
+A link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^] for <<reference/command-parameter.html,CommandParameters>>

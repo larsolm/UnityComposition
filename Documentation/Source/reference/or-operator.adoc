@@ -1,8 +1,0 @@
-[#reference/or-operator]
-
-## OrOperator
-
-PiRhoSoft.CompositionEngine.OrOperator : <<reference/infix-operation.html,InfixOperation>>
-
-### Description
-

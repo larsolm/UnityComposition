@@ -1,8 +1,0 @@
-[#reference/command-operation]
-
-## CommandOperation
-
-PiRhoSoft.CompositionEngine.CommandOperation : <<reference/operation.html,Operation>>
-
-### Description
-

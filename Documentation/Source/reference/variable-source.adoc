@@ -6,12 +6,20 @@ PiRhoSoft.CompositionEngine.VariableSource
 
 ### Description
 
+A wrapper type for fields that allows a variable to be set in the editor to a specific value or set as a <<reference/variable-reference.html,VariableReference>>.
+
 ### Public Fields
 
 <<reference/variable-source-type.html,VariableSourceType>> _Type_::
 
+Whether this source has a value or <<reference/variable-reference.html,reference>>. If this is set to _Value_ the subclass (such as <<reference/variable-source-1.html,VariableSource<T>>>) will include the value field of the correct type.
+
 <<reference/variable-reference.html,VariableReference>> _Reference_::
+
+If _Type_ is set to _Reference_, this holds the <<reference/variable-reference.html,VariableReference>> where the <<reference/variable-value.html,VariableValue>> should be looked up.
 
 ### Public Methods
 
 void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(abstract)_::
+
+If _Type_ is set to _Reference_ and _Reference_ accesses the <<reference/instruction-store.html,input store>>, subclasses will add the definition for _Reference_ to the _inputs_ list.
