@@ -2,7 +2,7 @@
 
 ## Button Graph Trigger
 
-Button Graph Trigger is an <<instruction-trigger,Instruction Trigger>> that will run its <<instruction-graph,Instruction Graph>> when the the specified _Button_ is pressed.
+Button Graph Trigger is an <<manual/instruction-trigger.html,Instruction Trigger>> that will run its <<manual/instruction-graph.html,Instruction Graph>> when the the specified _Button_ is pressed.
 
 See the _"Loot Level"_ scene in the Loot project for an example usage.
 
@@ -14,7 +14,7 @@ image:button-graph-trigger.png[]
 |===
 | Name	| Description
 
-| Button	| The name of the button that will trigger the <<instruction-graph,Instruction Graph>>
+| Button	| The name of the button that will trigger the <<manual/instruction-graph.html,Instruction Graph>>
 |===
 
 ifdef::backend-multipage_html5[]

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5034933019026943588}
   - component: {fileID: 4471423890543489761}
   - component: {fileID: 4938778715564071080}
+  - component: {fileID: 7172638182215608987}
   m_Layer: 5
   m_Name: Icon
   m_TagString: Untagged
@@ -89,6 +90,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 0
+  SuppressErrors: 0
   Variable:
     _variable: item.Icon
     _tokens:
@@ -96,6 +98,28 @@ MonoBehaviour:
       Text: item
     - Type: 0
       Text: Icon
+--- !u!114 &7172638182215608987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2217845891065192086}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b348fb9365862b0429047217d121f501, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BindingGroup: 
+  AutoUpdate: 1
+  SuppressErrors: 0
+  Variable:
+    _variable: item.Color
+    _tokens:
+    - Type: 0
+      Text: item
+    - Type: 0
+      Text: Color
 --- !u!1 &4334275694274286662
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,6 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 4783115814922992325}
   Condition:
     _statement: menu.Focused

@@ -1142,6 +1142,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Graph:
     _instruction: {fileID: 11400000, guid: 6a559fb05b19cc746a530a574525a7b6, type: 2}
     _inputs: []
@@ -1445,6 +1446,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Graph:
     _instruction: {fileID: 11400000, guid: 6a559fb05b19cc746a530a574525a7b6, type: 2}
     _inputs: []
@@ -2166,6 +2168,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Graph:
     _instruction: {fileID: 11400000, guid: 6a559fb05b19cc746a530a574525a7b6, type: 2}
     _inputs: []

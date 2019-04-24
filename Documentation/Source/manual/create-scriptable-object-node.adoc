@@ -2,14 +2,18 @@
 
 ## Create Scriptable Object Node
 
+A Create Scriptable Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will create a new instnace of a https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] and store it in the given <<reference/variable-reference.html,VariableReference>>. Create a Create Scriptable Object Node in the menu:Create[Object Manipulation > Create Scriptable Object] menu of the Instruction Graph Window.
+
 ### Fields
+
+image:create-scriptable-object-node.png[]
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Scriptable Object Type	| 
-| Object Variable	| 
+| Scriptable Object Type	| The type of the https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] to create
+| Object Variable	| The <<reference/variable-reference.html,VariableReference>> to store the created object in
 |===
 
 ifdef::backend-multipage_html5[]

@@ -2,7 +2,7 @@
 
 ## Click Graph Trigger
 
-Click Graph Trigger is an <<instruction-trigger,Instruction Trigger>> that will run its <<instruction-graph,Instruction Graph>> when it is clicked on.
+Click Graph Trigger is an <<manual/instruction-trigger.html,Instruction Trigger>> that will run its <<instruction-graph.html,Instruction Graph>> when it is clicked on.
 
 See the _"Card"_ prefab in the CardGame project for an example usage.
 

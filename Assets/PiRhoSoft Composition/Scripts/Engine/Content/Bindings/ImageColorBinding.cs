@@ -4,7 +4,7 @@ using UnityEngine.UI;
 namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
-	[RequireComponent(typeof(SpriteRenderer))]
+	[RequireComponent(typeof(Image))]
 	[HelpURL(Composition.DocumentationUrl + "image-color-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Image Color Binding")]
 	public class ImageColorBinding : VariableBinding

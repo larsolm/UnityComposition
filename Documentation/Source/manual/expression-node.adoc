@@ -2,13 +2,19 @@
 
 ## Expression Node
 
+An Expression Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that runs an <<reference/expression.html,Expression>>. Create an Expression Node in the menu:Create[Composition > Expression] menu of the Instruction Graph Window.
+
+See the _"Apply Damage"_ node in "BattleScratch" <<instruction-graph.html,Instruction Graph>> in the Battle project for an example usage.
+
 ### Fields
+
+image:expression-node.png[]
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Expression	| 
+| Expression	| The <<reference/expression.html,Expression>> to run
 |===
 
 ifdef::backend-multipage_html5[]

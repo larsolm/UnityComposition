@@ -4,7 +4,7 @@
 
 Animation Player is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that utilizes Unity's Playables API to play simple https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClips^] on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. This is best used on objects that do not need the complexity and overhead of full fledged https://docs.unity3d.com/ScriptReference/https://docs.unity3d.com/ScriptReference/Animations.AnimatorController.html[AnimatorController^].
 
-See the _"Maze2"_ scene and the _"MazeJewel"_ <<instruction-graph,Instruction Graph>> in the Maze project for an example usage.
+See the _"Maze2"_ scene and the _"MazeJewel"_ <<manual/instruction-graph.html,Instruction Graph>> in the Maze project for an example usage.
 
 ifdef::backend-multipage_html5[]
 <<reference/animation-player.html,Reference>>

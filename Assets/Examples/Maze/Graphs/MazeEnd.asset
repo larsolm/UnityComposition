@@ -43,7 +43,7 @@ MonoBehaviour:
     - {fileID: 114186283410596920}
     - {fileID: 114951541933712660}
     - {fileID: 114539580467139412}
-    - {fileID: 114205645420715292}
+    - {fileID: 114365433200588876}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114565799762134696}
 --- !u!114 &114186283410596920
@@ -71,7 +71,7 @@ MonoBehaviour:
   Phase: 0
   AutoFinish: 0
   WaitForCompletion: 1
---- !u!114 &114205645420715292
+--- !u!114 &114365433200588876
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -80,14 +80,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ee8c57d2e8114e8488985fd8d4c221a0, type: 3}
-  m_Name: Disable Timer
+  m_Script: {fileID: 11500000, guid: 408dd5d67693c3545bbddb6cfc900c4a, type: 3}
+  m_Name: Hide Timer
   m_EditorClassIdentifier: 
-  Name: Disable Timer
+  Name: Hide Timer
   GraphPosition: {x: 320, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114539580467139412}
-  Target:
+  Control:
     _variable: scene.Timer
     _tokens:
     - Type: 0
@@ -161,7 +161,7 @@ MonoBehaviour:
   Name: Disable Player
   GraphPosition: {x: 320, y: -64}
   IsBreakpoint: 0
-  Next: {fileID: 114205645420715292}
+  Next: {fileID: 114365433200588876}
   Target:
     _variable: global.Player
     _tokens:

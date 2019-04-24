@@ -2,13 +2,19 @@
 
 ## Input Message
 
+Input Message is an implementation of <<manual/message-control,Message Control>> that waits for an input before finishing.
+
+See the _"MazeUI"_ scene in the Maze project for an example usage.
+
 ### Fields
+
+image:input-message.png[]
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Accept Button	| 
+| Accept Button	| The string name of the button to wait to be pressed
 |===
 
 ifdef::backend-multipage_html5[]
