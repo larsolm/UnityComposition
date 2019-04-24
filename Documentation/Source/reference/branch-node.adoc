@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.BranchNode : <<reference/instruction-graph-node.html
 
 ### Description
 
+An <<reference/instruction-graph-node.html,InstructionGraphNode>> that continues to another <<reference/instruction-graph-node.html,node>> based on the result of an <<reference/expression.html,Expression>>.
+
 ### Public Fields
 
 <<reference/expression.html,Expression>> _Switch_::
 
+The <<reference/expression.html,Expression>> to execute to determine which of the nodes in _Outputs_ to run.
+
 <<reference/instruction-graph-node-dictionary.html,InstructionGraphNodeDictionary>> _Outputs_::
 
+The set of possible <<reference/instruction-graph-node.html,nodes>> that could be run depending on the result of _Switch_.
+
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Default_::
+
+If the result of _Switch_ is not found in _Outputs_, this <<reference/instruction-graph-node.html,node>> will be run.

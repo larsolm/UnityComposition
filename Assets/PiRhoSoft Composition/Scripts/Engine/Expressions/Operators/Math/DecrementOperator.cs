@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class DecrementOperator : PrefixOperation
+	internal class DecrementOperator : PrefixOperation
 	{
 		private const string _invalidAssignmentException = "unable to decrement '{0}'";
 

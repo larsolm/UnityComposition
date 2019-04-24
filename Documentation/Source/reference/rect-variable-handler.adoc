@@ -1,8 +1,0 @@
-[#reference/rect-variable-handler]
-
-## RectVariableHandler
-
-PiRhoSoft.CompositionEngine.RectVariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

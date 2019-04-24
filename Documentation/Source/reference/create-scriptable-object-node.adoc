@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.CreateScriptableObjectNode : <<reference/instruction
 
 ### Description
 
+Creates a https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] of the specified type.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The node to run after the object is created.
+
 string _ScriptableObjectType_::
 
+The https://docs.microsoft.com/en-us/dotnet/api/system.type.assemblyqualifiedname?view=netframework-4.8[AssemblyQualifiedName^] of the type of object to create. This type should be a concrete type with a default constructor that is derived from https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^].
+
 <<reference/variable-reference.html,VariableReference>> _ObjectVariable_::
+
+The variable to assign the newly created object to.

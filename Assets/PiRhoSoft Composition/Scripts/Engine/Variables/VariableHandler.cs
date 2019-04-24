@@ -53,16 +53,16 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue CreateDefault(VariableType type, VariableConstraint constraint) => Get(type).CreateDefault_(constraint);
 		public static void ToString(VariableValue value, StringBuilder builder) => Get(value.Type).ToString_(value, builder);
 
-		protected virtual VariableConstraint CreateConstraint() => null;
-		protected abstract VariableValue CreateDefault_(VariableConstraint constraint);
-		protected abstract void ToString_(VariableValue value, StringBuilder builder);
+		protected internal virtual VariableConstraint CreateConstraint() => null;
+		protected internal abstract VariableValue CreateDefault_(VariableConstraint constraint);
+		protected internal abstract void ToString_(VariableValue value, StringBuilder builder);
 
 		#endregion
 
 		#region Serialization
 
-		protected abstract void Write_(VariableValue value, BinaryWriter writer, List<Object> objects);
-		protected abstract VariableValue Read_(BinaryReader reader, List<Object> objects, short version);
+		protected internal abstract void Write_(VariableValue value, BinaryWriter writer, List<Object> objects);
+		protected internal abstract VariableValue Read_(BinaryReader reader, List<Object> objects, short version);
 
 		// error reporting
 
@@ -303,13 +303,13 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public static void WriteConstraint(VariableType type, VariableConstraint constraint, BinaryWriter writer, IList<Object> objects)
+		internal static void WriteConstraint(VariableType type, VariableConstraint constraint, BinaryWriter writer, IList<Object> objects)
 		{
 			writer.Write((int)type);
 			constraint.Write(writer, objects);
 		}
 
-		public static VariableConstraint ReadConstraint(BinaryReader reader, IList<Object> objects, short version)
+		internal static VariableConstraint ReadConstraint(BinaryReader reader, IList<Object> objects, short version)
 		{
 			try
 			{
@@ -338,13 +338,13 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Exponent(VariableValue left, VariableValue right) => Get(left.Type).Exponent_(left, right);
 		public static VariableValue Negate(VariableValue value) => Get(value.Type).Negate_(value);
 
-		protected virtual VariableValue Add_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Subtract_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Multiply_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Divide_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Modulo_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Exponent_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Negate_(VariableValue value) => VariableValue.Empty;
+		protected internal virtual VariableValue Add_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Subtract_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Multiply_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Divide_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Modulo_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Exponent_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Negate_(VariableValue value) => VariableValue.Empty;
 
 		#endregion
 
@@ -354,9 +354,9 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Or(VariableValue left, VariableValue right) => Get(left.Type).Or_(left, right);
 		public static VariableValue Not(VariableValue value) => Get(value.Type).Not_(value);
 
-		protected virtual VariableValue And_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Or_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected virtual VariableValue Not_(VariableValue value) => VariableValue.Empty;
+		protected internal virtual VariableValue And_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Or_(VariableValue left, VariableValue right) => VariableValue.Empty;
+		protected internal virtual VariableValue Not_(VariableValue value) => VariableValue.Empty;
 
 		#endregion
 
@@ -369,8 +369,8 @@ namespace PiRhoSoft.CompositionEngine
 		public static bool? IsEqual(VariableValue left, VariableValue right) => Get(left.Type).IsEqual_(left, right);
 		public static int? Compare(VariableValue left, VariableValue right) => Get(left.Type).Compare_(left, right);
 
-		protected virtual bool? IsEqual_(VariableValue left, VariableValue right) => null;
-		protected virtual int? Compare_(VariableValue left, VariableValue right) => null;
+		protected internal virtual bool? IsEqual_(VariableValue left, VariableValue right) => null;
+		protected internal virtual int? Compare_(VariableValue left, VariableValue right) => null;
 
 		#endregion
 
@@ -381,10 +381,10 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Cast(VariableValue owner, string type) => Get(owner.Type).Cast_(owner, type);
 		public static bool Test(VariableValue owner, VariableValue test) => Get(owner.Type).Test_(owner, test);
 
-		protected virtual VariableValue Lookup_(VariableValue owner, VariableValue lookup) => VariableValue.Empty;
-		protected virtual SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value) => SetVariableResult.NotFound;
-		protected virtual VariableValue Cast_(VariableValue owner, string type) => VariableValue.Empty;
-		protected virtual bool Test_(VariableValue owner, VariableValue test) => false;
+		protected internal virtual VariableValue Lookup_(VariableValue owner, VariableValue lookup) => VariableValue.Empty;
+		protected internal virtual SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value) => SetVariableResult.NotFound;
+		protected internal virtual VariableValue Cast_(VariableValue owner, string type) => VariableValue.Empty;
+		protected internal virtual bool Test_(VariableValue owner, VariableValue test) => false;
 
 		#endregion
 	}

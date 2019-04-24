@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class TanCommand : ICommand
+	internal class TanCommand : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ConstantOperation : Operation
+	internal class ConstantOperation : Operation
 	{
 		private VariableValue _value;
 

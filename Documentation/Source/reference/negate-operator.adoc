@@ -1,8 +1,0 @@
-[#reference/negate-operator]
-
-## NegateOperator
-
-PiRhoSoft.CompositionEngine.NegateOperator : <<reference/prefix-operation.html,PrefixOperation>>
-
-### Description
-

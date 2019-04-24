@@ -3,7 +3,7 @@ using System.Text;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class GroupOperation : Operation
+	internal class GroupOperation : Operation
 	{
 		private Operation _group;
 

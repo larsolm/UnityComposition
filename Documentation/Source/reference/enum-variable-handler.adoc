@@ -1,8 +1,0 @@
-[#reference/enum-variable-handler]
-
-## EnumVariableHandler
-
-PiRhoSoft.CompositionEngine.EnumVariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

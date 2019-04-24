@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.VariableSource<__T__> : <<reference/variable-source.
 
 ### Description
 
+An implementation of <<reference/variable-source.html,VariableSource>> that exposes the value to use when _Type_ is set to _Value_. Because Unity cannot serialize fields of generic types this class is defined as abstract, therefore, concrete types for each value type must be implemented. These concrete types are included for <<reference/bool-variable-source.html,Bool>>, <<reference/int-variable-source.html,Int>>, <<reference/float-variable-source.html,Float>>, <<reference/int2-variable-source.html,Int2>>, <<reference/int3-variable-source.html,Int3>>, <<reference/int-rect-variable-source.html,IntRect>>, <<reference/int-bounds-variable-source.html,IntBounds>>, <<reference/vector2-variable-source.html,Vector2>>, <<reference/vector3-variable-source.html,Vector3>>, <<reference/vector4-variable-source.html,Vector4>>, <<reference/quaternion-variable-source.html,Quaternion>>, <<reference/rect-variable-source.html,Rect>>, <<reference/bounds-variable-source.html,Bounds>>, <<reference/color-variable-source.html,Color>>, <<reference/string-variable-source.html,String>>, <<reference/object-variable-source.html,Object>>, <<reference/game-object-variable-source.html,GameObject>>, <<reference/store-variable-source.html,Store>>, and <<reference/list-variable-source.html,List>>. Additionally, <<reference/variable-value-source.html,VariableValueSource>> allows selection of any value type.
+
 ### Public Fields
 
 T _Value_::
+
+If _Type_ is set to _Value_, this holds the value the owner should use for this variable.

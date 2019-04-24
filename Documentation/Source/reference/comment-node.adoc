@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.CommentNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
+A <<reference/instruction-graph-node.html,node>> that has no functionality but can be placed to visually add notes to a graph.
+
 ### Public Fields
 
 string _Comment_::
+
+The text of the comment that will be displayed directly in the graph window.

@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.CollisionNotifier : https://docs.unity3d.com/ScriptR
 
 ### Description
 
+Notifies an <<reference/i-collision-trigger.html,ICollisionTrigger>> when this object has started or stopped colliding with it.

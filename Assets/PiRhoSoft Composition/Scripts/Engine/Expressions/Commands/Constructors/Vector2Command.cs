@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class Vector2Command : ICommand
+	internal class Vector2Command : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

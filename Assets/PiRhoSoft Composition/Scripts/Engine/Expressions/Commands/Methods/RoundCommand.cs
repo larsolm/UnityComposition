@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class RoundCommand : ICommand
+	internal class RoundCommand : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

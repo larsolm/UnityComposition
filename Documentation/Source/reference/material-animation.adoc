@@ -18,7 +18,7 @@ float _Duration_::
 
 ### Public Properties
 
-bool _IsComplete_ _(read only)_ _(virtual)_::
+bool _IsComplete_ _(read only)_::
 
 ### Protected Methods
 

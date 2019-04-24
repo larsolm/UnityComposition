@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.BreakNode : <<reference/instruction-graph-node.html,
 
 ### Description
 
+When a <<reference/instruction-graph,graph>> encounters this node, execution will return to the closest <<reference/instruction-graph-node.html,node>> in the call stack that is an <<reference/i-loop-node.html,ILoopNode>>.

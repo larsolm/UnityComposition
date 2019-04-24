@@ -1,8 +1,0 @@
-[#reference/quaternion-variable-handler]
-
-## QuaternionVariableHandler
-
-PiRhoSoft.CompositionEngine.QuaternionVariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

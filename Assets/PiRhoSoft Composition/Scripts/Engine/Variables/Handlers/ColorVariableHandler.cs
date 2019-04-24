@@ -7,13 +7,13 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ColorVariableHandler : VariableHandler
+	internal class ColorVariableHandler : VariableHandler
 	{
 		public const char Symbol = '#';
 
-		protected override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(Color.black);
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(Color.black);
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(Symbol);
 
@@ -25,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 			builder.AppendFormat("{0:X2}{1:X2}{2:X2}{3:X2}", r, g, b, a);
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Color.r);
 			writer.Write(value.Color.g);
@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Color.a);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var r = reader.ReadSingle();
 			var g = reader.ReadSingle();
@@ -43,7 +43,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(new Color(r, g, b, a));
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (lookup.Type == VariableType.String)
 			{
@@ -56,7 +56,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Empty;
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (value.TryGetFloat(out var number))
 			{
@@ -92,7 +92,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetColor(out var color))
 				return left.Color == color;

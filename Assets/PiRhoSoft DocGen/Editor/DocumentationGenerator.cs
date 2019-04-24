@@ -135,7 +135,7 @@ namespace PiRhoSoft.DocGenEditor
 			var isBehavior = typeof(MonoBehaviour).IsAssignableFrom(type);
 			var isAsset = typeof(ScriptableObject).IsAssignableFrom(type);
 
-			if (!type.IsVisible || (type.IsAbstract && !includeAbstract) || (type.IsEnum && !includeEnums) || (!includeBehaviours && isBehavior) || (!includeAssets && isAsset))
+			if (!type.IsVisible || (!type.IsPublic && !type.IsNestedPublic && !type.IsNestedFamily) || (type.IsAbstract && !includeAbstract) || (type.IsEnum && !includeEnums) || (!includeBehaviours && isBehavior) || (!includeAssets && isAsset))
 				return false;
 
 			if (!includeClasses && !isBehavior && !isAsset && !type.IsEnum)

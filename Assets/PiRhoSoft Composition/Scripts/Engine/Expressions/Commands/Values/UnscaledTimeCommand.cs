@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class UnscaledTimeCommand : ICommand
+	internal class UnscaledTimeCommand : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

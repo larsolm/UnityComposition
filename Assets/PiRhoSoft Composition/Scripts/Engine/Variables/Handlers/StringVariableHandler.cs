@@ -5,13 +5,13 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class StringVariableHandler : VariableHandler
+	internal class StringVariableHandler : VariableHandler
 	{
 		public const char Symbol = '\"';
 
-		protected override VariableConstraint CreateConstraint() => new StringVariableConstraint();
+		protected internal override VariableConstraint CreateConstraint() => new StringVariableConstraint();
 
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			if (constraint is StringVariableConstraint stringConstraint)
 				return VariableValue.Create(stringConstraint.Values.Length > 0 ? stringConstraint.Values[0] : string.Empty);
@@ -19,23 +19,23 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Create(string.Empty);
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(value.String);
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.String);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var s = reader.ReadString();
 			return VariableValue.Create(s);
 		}
 
-		protected override VariableValue Add_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
 		{
 			switch (right.Type)
 			{
@@ -46,7 +46,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetString(out var str))
 				return left.String == str;
@@ -54,7 +54,7 @@ namespace PiRhoSoft.CompositionEngine
 				return null;
 		}
 
-		protected override int? Compare_(VariableValue left, VariableValue right)
+		protected internal override int? Compare_(VariableValue left, VariableValue right)
 		{
 			if (right.Type == VariableType.String)
 				return left.String.CompareTo(right.String);

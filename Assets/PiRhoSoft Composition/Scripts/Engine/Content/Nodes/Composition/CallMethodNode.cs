@@ -27,10 +27,9 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The values to pass as parameters to the method")]
 		public List<VariableValueSource> Parameters = new List<VariableValueSource>();
 
-		public string TargetTypeName;
-		public string MethodName;
-
-		public string[] ParameterTypeNames;
+		[SerializeField] private string _targetTypeName;
+		[SerializeField] private string _methodName;
+		[SerializeField] private string[] _parameterTypeNames;
 
 		public Type TargetType { get; set; }
 		public MethodInfo Method { get; set; }
@@ -58,7 +57,7 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else
 				{
-					Debug.LogWarningFormat(this, _invalidObjectTypeWarning, Name, Target, TargetTypeName);
+					Debug.LogWarningFormat(this, _invalidObjectTypeWarning, Name, Target, TargetType.Name);
 				}
 			}
 
@@ -80,18 +79,18 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnAfterDeserialize()
 		{
-			TargetType = Type.GetType(TargetTypeName);
-			ParameterTypes = ParameterTypeNames?.Select(name => Type.GetType(name)).ToArray();
-			Method = TargetType?.GetMethod(MethodName, ParameterTypes);
+			TargetType = Type.GetType(_targetTypeName);
+			ParameterTypes = _parameterTypeNames?.Select(name => Type.GetType(name)).ToArray();
+			Method = TargetType?.GetMethod(_methodName, ParameterTypes);
 
 			_parameters = new object[Parameters.Count];
 		}
 
 		public void OnBeforeSerialize()
 		{
-			TargetTypeName = TargetType?.AssemblyQualifiedName;
-			ParameterTypeNames = ParameterTypes?.Select(type => type.AssemblyQualifiedName).ToArray();
-			MethodName = Method?.Name;
+			_targetTypeName = TargetType?.AssemblyQualifiedName;
+			_parameterTypeNames = ParameterTypes?.Select(type => type.AssemblyQualifiedName).ToArray();
+			_methodName = Method?.Name;
 		}
 
 		#endregion

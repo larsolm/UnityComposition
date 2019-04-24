@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class CeilingCommand : ICommand
+	internal class CeilingCommand : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

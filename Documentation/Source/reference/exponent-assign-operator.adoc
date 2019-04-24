@@ -1,8 +1,0 @@
-[#reference/exponent-assign-operator]
-
-## ExponentAssignOperator
-
-PiRhoSoft.CompositionEngine.ExponentAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
-
-### Description
-

@@ -12,23 +12,23 @@ PiRhoSoft.CompositionEngine.VariableSetComponent : https://docs.unity3d.com/Scri
 
 ### Public Properties
 
-<<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_ _(virtual)_::
+<<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_::
 
 <<reference/mapped-variable-store.html,MappedVariableStore>> _Store_ _(read only)_::
 
 ### Public Methods
 
-void SetupSchema() _(virtual)_::
+void SetupSchema()::
 
-<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::
 
-void ResetTag(string _tag_) _(virtual)_::
+void ResetTag(string _tag_)::
 
-void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_) _(virtual)_::
+void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_)::
 
 ### Protected Methods
 

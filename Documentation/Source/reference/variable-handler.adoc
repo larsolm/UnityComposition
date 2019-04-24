@@ -6,106 +6,114 @@ PiRhoSoft.CompositionEngine.VariableHandler
 
 ### Description
 
+A utility class for working with <<reference/variable-value.html,VariableValues>> independent of their <<reference/variable-type.html,VariableType>>.
+
 ### Static Methods
 
 string ToString(<<reference/variable-value.html,VariableValue>> _value_)::
 
+Returns the string representation of _value_ depending on the <<reference/variable-type.html,VariableType>> it is holding.
+
 <<reference/variable-value.html,VariableValue>> CreateDefault(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_)::
+
+Creates and returns a variable with type _type_ whose value meets the requirements of _constraint_. If _constraint_ is null, the default value for type _type_ is returned.
 
 void ToString(<<reference/variable-value.html,VariableValue>> _value_, StringBuilder _builder_)::
 
+Appends the string representation of _value_ to _builder_.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<string> SaveVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable.html,Variable>>> _variables_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+Converts the <<reference/variable.html,Variables>> in _variables_ to a representation that can be serialized by Unity. The returned list of strings, as well as _objects_, should be assigned to serializable fields an an object.
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable.html,Variable>>> LoadVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
 
+Creates a set of variables from the serialized representation in _data_ and _objects_. _data_ and _objects_ will be cleared.
+
 string SaveVariable(<<reference/variable.html,Variable>> _variable_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+Converts _variable_ to a representation that can be serialized by Unity. The returned string and _objects_ should be assigned to serializable fields on an object.
 
 <<reference/variable.html,Variable>> LoadVariable(string _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
 
+Creates a variable from the serialized representation in _data_ and _objects_. _data_ and _objects_ will be cleared.
+
 string SaveValue(<<reference/variable-value.html,VariableValue>> _value_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+Converts _value_ to a representation that can be serialized by Unity. The returned string and _objects_ should be assigned to serializable fields on an object.
 
 <<reference/variable-value.html,VariableValue>> LoadValue(string _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
 
+Creates a value from the serialized representation in _data_ and _objects_. _data_ and _objects_ will be cleared.
+
 string SaveConstraint(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
+
+Saves _constraint_ with type _type_ to a representation that can be serialized by Unity. The returned string and _objects_ should be assigned to serializable fields on an object.
 
 <<reference/variable-constraint.html,VariableConstraint>> LoadConstraint(string _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
 
-void WriteConstraint(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_, BinaryWriter _writer_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_)::
-
-<<reference/variable-constraint.html,VariableConstraint>> ReadConstraint(BinaryReader _reader_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_, Int16 _version_)::
+Creates a constraint from the serialized representation in _data_ and _objects. _data_ and _objects_ will be cleared.
 
 <<reference/variable-value.html,VariableValue>> Add(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
 
+Returns the result of adding _left_ to _right_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
+
 <<reference/variable-value.html,VariableValue>> Subtract(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+Returns the result of subtracting _right_ from _left_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
 
 <<reference/variable-value.html,VariableValue>> Multiply(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
 
+Returns the result of multiplying _left_ and _right_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
+
 <<reference/variable-value.html,VariableValue>> Divide(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+Returns the result of dividing _left_ by _right_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
 
 <<reference/variable-value.html,VariableValue>> Modulo(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
 
+Returns the remainder of dividing _left_ by _right_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
+
 <<reference/variable-value.html,VariableValue>> Exponent(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+Returns the result of raising _left_ to the _right_ power. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
 
 <<reference/variable-value.html,VariableValue>> Negate(<<reference/variable-value.html,VariableValue>> _value_)::
 
+Returns the result of inverting _value_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
+
 <<reference/variable-value.html,VariableValue>> And(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+Returns the logical and of _left_ and _right_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
 
 <<reference/variable-value.html,VariableValue>> Or(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
 
+Returns the logical or of _left_ and _right_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
+
 <<reference/variable-value.html,VariableValue>> Not(<<reference/variable-value.html,VariableValue>> _value_)::
+
+Returns the inverse of _value_. If the result cannot be computed due to invalid or incompatible types, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
 
 Nullable<bool> IsEqual(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
 
+Returns true if _left_ and _right_ are equal, false if _left_ and _right_ can be legally compared but are not equal, and null if the types cannot be compared.
+
 Nullable<int> Compare(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
+
+Returns -1 if _left_ is less than _right_, 1 if _left_ is greater than _right_, 0 if _left_ is equal to _right_, and null if the types cannot be compared.
 
 <<reference/variable-value.html,VariableValue>> Lookup(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _lookup_)::
 
+Returns a value contained in _owner_ based on the value of _lookup_. If _lookup_ is not found, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
+
 <<reference/set-variable-result.html,SetVariableResult>> Apply(<<reference/variable-value&.html,VariableValue>> _owner_ _(ref)_, <<reference/variable-value.html,VariableValue>> _lookup_, <<reference/variable-value.html,VariableValue>> _value_)::
+
+Sets a value contained in _owner_ based on _lookup_ to _value_. _owner_ will be updated to the new value. If _owner_ is not holding a reference as determined by <<reference/variable-value.html,VariableValue.IsReference>> it must be reassigned to the container it is being held in. The return value indicates success or the reason for failure.
 
 <<reference/variable-value.html,VariableValue>> Cast(<<reference/variable-value.html,VariableValue>> _owner_, string _type_)::
 
+Returns the value of _owner_ converted to type _type_. For object values, this is used to lookup sibling components.
+
 bool Test(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _test_)::
 
-### Protected Methods
-
-<<reference/variable-constraint.html,VariableConstraint>> CreateConstraint() _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> CreateDefault_(<<reference/variable-constraint.html,VariableConstraint>> _constraint_) _(abstract)_::
-
-void ToString_(<<reference/variable-value.html,VariableValue>> _value_, StringBuilder _builder_) _(abstract)_::
-
-void Write_(<<reference/variable-value.html,VariableValue>> _value_, BinaryWriter _writer_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_) _(abstract)_::
-
-<<reference/variable-value.html,VariableValue>> Read_(BinaryReader _reader_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<https://docs.unity3d.com/ScriptReference/Object.html[Object^]> _objects_, Int16 _version_) _(abstract)_::
-
-<<reference/variable-value.html,VariableValue>> Add_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Subtract_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Multiply_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Divide_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Modulo_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Exponent_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Negate_(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> And_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Or_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Not_(<<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
-
-Nullable<bool> IsEqual_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-Nullable<int> Compare_(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Lookup_(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _lookup_) _(virtual)_::
-
-<<reference/set-variable-result.html,SetVariableResult>> Apply_(<<reference/variable-value&.html,VariableValue>> _owner_ _(ref)_, <<reference/variable-value.html,VariableValue>> _lookup_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
-
-<<reference/variable-value.html,VariableValue>> Cast_(<<reference/variable-value.html,VariableValue>> _owner_, string _type_) _(virtual)_::
-
-bool Test_(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _test_) _(virtual)_::
+Determines if _owner_ is holding the type indicated by _test_.

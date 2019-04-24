@@ -323,7 +323,7 @@ namespace PiRhoSoft.DocGenEditor
 		{
 			return method.IsAbstract
 				? _abstractDecorator
-				: (method.IsVirtual ? _virtualDecorator : string.Empty);
+				: (method.IsVirtual && !method.IsFinal ? _virtualDecorator : string.Empty);
 		}
 
 		private string GenerateDecorators(DocumentationCategory category, params string[] decorators)

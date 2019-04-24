@@ -3,7 +3,7 @@ using System.Text;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class AccessOperator : MemberOperator, IAssignableOperation
+	internal class AccessOperator : MemberOperator, IAssignableOperation
 	{
 		private const string _invalidMemberAccessException = "the operator '{0}' expected an identifer instead of '{1}'";
 		private const string _invalidMemberAssignException = "unable to assign '{0}' to '{1}'";

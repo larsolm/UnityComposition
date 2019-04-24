@@ -6,9 +6,9 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class FloatVariableHandler : VariableHandler
+	internal class FloatVariableHandler : VariableHandler
 	{
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			if (constraint is FloatVariableConstraint floatConstraint)
 				return VariableValue.Create(floatConstraint.Minimum);
@@ -16,28 +16,28 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Create(0.0f);
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(value.Float);
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Float);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var f = reader.ReadSingle();
 			return VariableValue.Create(f);
 		}
 
-		protected override VariableConstraint CreateConstraint()
+		protected internal override VariableConstraint CreateConstraint()
 		{
 			return new FloatVariableConstraint();
 		}
 
-		protected override VariableValue Add_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return VariableValue.Create(left.Float + number);
@@ -47,7 +47,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Subtract_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Subtract_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return VariableValue.Create(left.Float - number);
@@ -55,7 +55,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Multiply_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Multiply_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return VariableValue.Create(left.Float * number);
@@ -63,7 +63,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Divide_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Divide_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return VariableValue.Create(left.Float / number);
@@ -71,7 +71,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Modulo_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Modulo_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return VariableValue.Create(left.Float % number);
@@ -79,7 +79,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Exponent_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Exponent_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return VariableValue.Create((float)Math.Pow(left.Float, number));
@@ -87,12 +87,12 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Negate_(VariableValue value)
+		protected internal override VariableValue Negate_(VariableValue value)
 		{
 			return VariableValue.Create(-value.Float);
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return left.Float == number;
@@ -100,7 +100,7 @@ namespace PiRhoSoft.CompositionEngine
 				return null;
 		}
 
-		protected override int? Compare_(VariableValue left, VariableValue right)
+		protected internal override int? Compare_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))
 				return left.Float.CompareTo(number);

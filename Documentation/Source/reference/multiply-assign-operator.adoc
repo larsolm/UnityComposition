@@ -1,8 +1,0 @@
-[#reference/multiply-assign-operator]
-
-## MultiplyAssignOperator
-
-PiRhoSoft.CompositionEngine.MultiplyAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
-
-### Description
-

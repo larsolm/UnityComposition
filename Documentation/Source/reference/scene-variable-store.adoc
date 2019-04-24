@@ -8,8 +8,8 @@ PiRhoSoft.CompositionEngine.SceneVariableStore : <<reference/i-variable-store.ht
 
 ### Public Methods
 
-<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::

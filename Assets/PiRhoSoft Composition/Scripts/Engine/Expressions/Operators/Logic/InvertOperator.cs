@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class InvertOperator : PrefixOperation
+	internal class InvertOperator : PrefixOperation
 	{
 		public override VariableValue Evaluate(IVariableStore variables)
 		{

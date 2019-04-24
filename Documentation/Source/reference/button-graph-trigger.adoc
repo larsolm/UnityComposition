@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.ButtonGraphTrigger : <<reference/instruction-trigger
 
 ### Description
 
+Runs _Graph_ when a button is pressed.
+
 ### Public Fields
 
 string _Button_::
+
+The name of the button that is checked for presses. The name corresponds to those recognized by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^].

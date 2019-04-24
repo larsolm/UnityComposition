@@ -31,9 +31,6 @@ namespace PiRhoSoft.CompositionEngine
 			Custom
 		}
 
-		public static readonly string[] TimeFormats = new string[(int)TimeFormatType.Custom]{ @"s\.fff", @"m\:ss", @"m\:ss\.fff", @"h\:mm" };
-		public static readonly string[] NumberFormats = new string[(int)NumberFormatType.Custom] { "0.#%", "#,###,##0", "0", "0.00" };
-
 		[Tooltip("The format of the displayed string")]
 		public string Format = "{0}";
 

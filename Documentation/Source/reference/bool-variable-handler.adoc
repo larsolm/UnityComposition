@@ -1,8 +1,0 @@
-[#reference/bool-variable-handler]
-
-## BoolVariableHandler
-
-PiRhoSoft.CompositionEngine.BoolVariableHandler : <<reference/variable-handler.html,VariableHandler>>
-
-### Description
-

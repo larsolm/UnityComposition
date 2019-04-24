@@ -5,9 +5,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class StoreVariableHandler : VariableHandler
+	internal class StoreVariableHandler : VariableHandler
 	{
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			IVariableStore store;
 
@@ -19,17 +19,17 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(store);
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(value.Store);
 		}
 
-		protected override VariableConstraint CreateConstraint()
+		protected internal override VariableConstraint CreateConstraint()
 		{
 			return new StoreVariableConstraint();
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			var store = value.Store as VariableStore;
 
@@ -59,7 +59,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var index = reader.ReadInt32();
 			var schema = index >= 0 && index < objects.Count ? objects[index] as VariableSchema : null;
@@ -81,17 +81,17 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(store);
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			return LookupInStore(owner, lookup);
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			return ApplyToStore(ref owner, lookup, value);
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.HasReference)
 				return left.Reference == right.Reference;

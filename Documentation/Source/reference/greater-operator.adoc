@@ -1,8 +1,0 @@
-[#reference/greater-operator]
-
-## GreaterOperator
-
-PiRhoSoft.CompositionEngine.GreaterOperator : <<reference/comparison-operator.html,ComparisonOperator>>
-
-### Description
-

@@ -53,14 +53,9 @@ namespace PiRhoSoft.CompositionEngine
 			StartCoroutine(new JoinEnumerator(enumerator, instruction));
 		}
 
-		public void RunInstruction(InstructionCaller caller, VariableValue context)
-		{
-			RunInstruction(caller, DefaultStore, context);
-		}
-
 		public void RunInstruction(InstructionCaller caller, IVariableStore store, VariableValue context)
 		{
-			var enumerator = caller.Execute(store ?? DefaultStore, context);
+			var enumerator = caller.Execute(store, context);
 			StartCoroutine(new JoinEnumerator(enumerator, caller.Instruction));
 		}
 
@@ -198,7 +193,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static Dictionary<Instruction, TrackingData> TrackingState { get; } = new Dictionary<Instruction, TrackingData>();
 
-		public class TrackingEnumerator : IEnumerator
+		private class TrackingEnumerator : IEnumerator
 		{
 			private IEnumerator _trackee;
 			private TrackingData _data;
@@ -262,11 +257,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public static IEnumerator Track(Instruction instruction, IEnumerator enumerator) => new TrackingEnumerator(instruction, enumerator);
+		internal static IEnumerator Track(Instruction instruction, IEnumerator enumerator) => new TrackingEnumerator(instruction, enumerator);
 
 #else
 		
-		public static IEnumerator Track(Instruction instruction, IEnumerator enumerator) => enumerator;
+		internal static IEnumerator Track(Instruction instruction, IEnumerator enumerator) => enumerator;
 
 #endif
 
@@ -276,12 +271,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Bindings
 
-		public void AddBinding(VariableBinding binding)
+		internal void AddBinding(VariableBinding binding)
 		{
 			_bindings.Add(binding);
 		}
 
-		public void RemoveBinding(VariableBinding binding)
+		internal void RemoveBinding(VariableBinding binding)
 		{
 			_bindings.Remove(binding);
 		}

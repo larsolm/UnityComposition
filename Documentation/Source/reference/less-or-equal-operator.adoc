@@ -1,8 +1,0 @@
-[#reference/less-or-equal-operator]
-
-## LessOrEqualOperator
-
-PiRhoSoft.CompositionEngine.LessOrEqualOperator : <<reference/comparison-operator.html,ComparisonOperator>>
-
-### Description
-

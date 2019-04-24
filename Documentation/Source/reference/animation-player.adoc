@@ -6,22 +6,29 @@ PiRhoSoft.CompositionEngine.AnimationPlayer : https://docs.unity3d.com/ScriptRef
 
 ### Description
 
+Animation Player is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that utilizes https://docs.unity3d.com/Manual/Playables.html[Unity's Playables API^] to play simple https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClips^] on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. This is best used on objects that do not need the complexity and overhead of full fledged https://docs.unity3d.com/ScriptReference/Animations.AnimatorController.html[AnimatorControllers^].
+
 ### Public Properties
 
-bool _IsComplete_ _(read only)_ _(virtual)_::
+bool _IsComplete_ _(read only)_::
+
+This will return true as soon as the animation has completed. If the animation has not yet started, it is not considered complete, so this will return false. If the animation is set to loop, this will always return false.
 
 ### Public Methods
 
 void PlayAnimation(https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] _animation_)::
 
+Plays _animation_ and returns immediately.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] PlayAnimationAndWait(https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] _animation_)::
+
+Plays _animation_ and returns an enumerator so it can be run as or from a https://docs.unity3d.com/Manual/Coroutines.html[coroutine^]. The enumerator will yield until _animation_ has completed. If _animation_ is set to loop, the enumerator
+will break immediately and an error will be printed. Call _PlayAnimation_ instead to run looping animations.
 
 void Pause()::
 
+Pauses playback of the currently running animation.
+
 void Unpause()::
 
-### Protected Methods
-
-void Awake() _(virtual)_::
-
-void OnDestroy() _(virtual)_::
+Resumes playback of the currently running animation.

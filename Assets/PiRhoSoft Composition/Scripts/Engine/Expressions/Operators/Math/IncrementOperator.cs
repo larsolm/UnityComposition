@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class IncrementOperator : PrefixOperation
+	internal class IncrementOperator : PrefixOperation
 	{
 		private const string _invalidAssignmentException = "unable to increment '{0}'";
 

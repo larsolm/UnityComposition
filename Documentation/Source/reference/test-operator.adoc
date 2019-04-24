@@ -1,8 +1,0 @@
-[#reference/test-operator]
-
-## TestOperator
-
-PiRhoSoft.CompositionEngine.TestOperator : <<reference/member-operator.html,MemberOperator>>
-
-### Description
-

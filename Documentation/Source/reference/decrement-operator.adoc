@@ -1,8 +1,0 @@
-[#reference/decrement-operator]
-
-## DecrementOperator
-
-PiRhoSoft.CompositionEngine.DecrementOperator : <<reference/prefix-operation.html,PrefixOperation>>
-
-### Description
-

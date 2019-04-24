@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class MinCommand : ICommand
+	internal class MinCommand : ICommand
 	{
 		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{

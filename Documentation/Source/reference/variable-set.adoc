@@ -14,7 +14,7 @@ PiRhoSoft.CompositionEngine.VariableSet : <<reference/i-variable-reset.html,IVar
 
 bool _NeedsUpdate_ _(read only)_::
 
-int _VariableCount_ _(read only)_ _(virtual)_::
+int _VariableCount_ _(read only)_::
 
 ### Public Methods
 
@@ -30,12 +30,12 @@ void Reset(int _index_)::
 
 void Clear()::
 
-string GetVariableName(int _index_) _(virtual)_::
+string GetVariableName(int _index_)::
 
-<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_)::
 
-void ResetTag(string _tag_) _(virtual)_::
+void ResetTag(string _tag_)::
 
-void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_) _(virtual)_::
+void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_)::

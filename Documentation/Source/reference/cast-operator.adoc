@@ -1,8 +1,0 @@
-[#reference/cast-operator]
-
-## CastOperator
-
-PiRhoSoft.CompositionEngine.CastOperator : <<reference/member-operator.html,MemberOperator>>
-
-### Description
-

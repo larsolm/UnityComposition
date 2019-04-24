@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.ObjectPositioning
 
 ### Description
 
+Specifies the available settings for the _Positioning_ property of <<reference/create-game-object-node.html,CreateGameObjectNode>>.
+
 ### Values
 
 <<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Absolute_::
 
+The created object will be placed at the scene root and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode.Position>> in world space.
+
 <<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Relative_::
 
+The created object will be placed at the scene root and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode.Position>> relative to <<reference/create-game-object-node.html,CreateGameObjectNode.Object>>.
+
 <<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Child_::
+
+The created object will be placed as a child of <<reference/create-game-object-node.html,CreateGameObjectNode.Parent>> and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode.Position>> in <<reference/create-game-object-node.html,CreateGameObjectNode.Parent's>> coordinates.

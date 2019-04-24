@@ -6,14 +6,26 @@ PiRhoSoft.CompositionEngine.TimeFormatType
 
 ### Description
 
+Specifies the time formats available to set for the _TimeFormatting_ of a <<reference/binding-formatter,BindingFormatter>>.
+
 ### Values
 
 <<reference/binding-formatter-time-format-type.html,TimeFormatType>> _SecondsMilliseconds_::
 
+The number will be printed in seconds and milliseconds. Equivalent to setting the https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings[custom format string^] to "s\.fff".
+
 <<reference/binding-formatter-time-format-type.html,TimeFormatType>> _MinutesSeconds_::
+
+The number will be printed in minutes and seconds. Equivalent to setting the https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings[custom format string^] to "m\:ss".
 
 <<reference/binding-formatter-time-format-type.html,TimeFormatType>> _MinutesSecondsMilliseconds_::
 
+The number will be printed in minutes, seconds, and milliseconds. Equivalent to setting the https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings[custom format string^] to "m\:ss\.fff".
+
 <<reference/binding-formatter-time-format-type.html,TimeFormatType>> _HoursMinutes_::
 
+The number will be printed in hours and minutes. Equivalent to setting the https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings[custom format string^] to "h\:mm".
+
 <<reference/binding-formatter-time-format-type.html,TimeFormatType>> _Custom_::
+
+The format string will be read from the _ValueFormat_ property of the <<reference/binding-formatter,BindingFormatter>>.

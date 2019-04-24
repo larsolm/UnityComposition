@@ -36,11 +36,11 @@ void SelectItem(<<reference/menu-item.html,MenuItem>> _item_)::
 
 void Cancel()::
 
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(virtual)_::
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::
 
-<<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
 
-<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
 ### Protected Methods
 

@@ -1,8 +1,0 @@
-[#reference/exponent-operator]
-
-## ExponentOperator
-
-PiRhoSoft.CompositionEngine.ExponentOperator : <<reference/infix-operation.html,InfixOperation>>
-
-### Description
-

@@ -6,12 +6,10 @@ PiRhoSoft.CompositionEngine.CreateInstructionGraphNodeMenuAttribute : Attribute
 
 ### Description
 
+This attribute should be added to custom <<reference/instruction-graph-node.html,InstructionGraphNodes>> to add them to the create list in the graph editor.
+
 ### Constructors
 
 CreateInstructionGraphNodeMenuAttribute(string _menuName_, int _order_)::
 
-### Public Properties
-
-string _MenuName_ _(read only)_::
-
-int _Order_ _(read only)_::
+The name to use for this node in the menu. Submenus will be created for each section of _menuName_ that precedes a backslash. _order_ specifies the relative order of entries in the lowest submenu.

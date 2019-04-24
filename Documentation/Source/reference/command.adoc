@@ -6,17 +6,27 @@ PiRhoSoft.CompositionEngine.Command : https://docs.unity3d.com/ScriptReference/S
 
 ### Description
 
+A https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] type that is used to define an <<reference/expression.html,Expression>> that can be called from other <<reference/expression.html,Expressions>> as if it were a <<reference/i-command.html,ICommand>>.
+
 ### Public Fields
 
 string _Name_::
 
+The name of the command that is used to call it from <<reference/expression.html,Expressions>>
+
 <<reference/command-parameter-list.html,ParameterList>> _Parameters_::
+
+The list of <<reference/command-parameter.html,parameters>> that should be passed to the command.
 
 <<reference/expression.html,Expression>> _Expression_::
 
+The <<reference/expression.html,Expression>> that is evaluated when this command is called.
+
 ### Public Methods
 
-<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(virtual)_::
+<<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_)::
+
+Validates _parameters_ against the types defined in _Parameters_ and, if valid, executes _Expression_. The result of executing _Expression_ is returned.
 
 ### Protected Methods
 

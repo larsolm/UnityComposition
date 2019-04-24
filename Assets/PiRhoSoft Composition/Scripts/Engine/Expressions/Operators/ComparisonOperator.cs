@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public abstract class ComparisonOperator : InfixOperation
+	internal abstract class ComparisonOperator : InfixOperation
 	{
 		private const string _comparisonTypeMismatchException = "unable to compare types {0} and {1} with operator '{2}'";
 

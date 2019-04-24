@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class LessOperator : ComparisonOperator
+	internal class LessOperator : ComparisonOperator
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Comparison;
 

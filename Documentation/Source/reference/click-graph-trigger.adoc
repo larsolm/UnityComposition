@@ -6,8 +6,4 @@ PiRhoSoft.CompositionEngine.ClickGraphTrigger : <<reference/instruction-trigger.
 
 ### Description
 
-### Public Methods
-
-void OnPointerDown(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
-
-void OnPointerUp(https://docs.unity3d.com/ScriptReference/PointerEventData.html[PointerEventData^] _eventData_) _(virtual)_::
+Runs _Graph_ after the mouse is clicked and released over the object.

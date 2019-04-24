@@ -1,8 +1,0 @@
-[#reference/subtract-assign-operator]
-
-## SubtractAssignOperator
-
-PiRhoSoft.CompositionEngine.SubtractAssignOperator : <<reference/assignment-operator.html,AssignmentOperator>>
-
-### Description
-

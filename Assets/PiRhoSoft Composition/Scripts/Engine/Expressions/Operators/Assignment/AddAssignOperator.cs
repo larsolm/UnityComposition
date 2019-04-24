@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class AddAssignOperator : AssignmentOperator
+	internal class AddAssignOperator : AssignmentOperator
 	{
 		private const string _missingAddException = "the list '{0}' cannot have values added";
 		private const string _readOnlyAddException = "the list '{0}' is read only and cannot have values added";

@@ -5,19 +5,19 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class QuaternionVariableHandler : VariableHandler
+	internal class QuaternionVariableHandler : VariableHandler
 	{
-		protected override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create(Quaternion.identity);
 		}
 
-		protected override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(VariableValue value, StringBuilder builder)
 		{
 			builder.Append(value.Quaternion);
 		}
 
-		protected override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			writer.Write(value.Quaternion.x);
 			writer.Write(value.Quaternion.y);
@@ -25,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 			writer.Write(value.Quaternion.w);
 		}
 
-		protected override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
@@ -35,7 +35,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(new Quaternion(x, y, z, w));
 		}
 
-		protected override VariableValue Multiply_(VariableValue left, VariableValue right)
+		protected internal override VariableValue Multiply_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetQuaternion(out var q))
 				return VariableValue.Create(left.Quaternion * q);
@@ -43,7 +43,7 @@ namespace PiRhoSoft.CompositionEngine
 				return VariableValue.Empty;
 		}
 
-		protected override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (lookup.Type == VariableType.String)
 			{
@@ -56,7 +56,7 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Empty;
 		}
 
-		protected override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (value.TryGetFloat(out var f))
 			{
@@ -92,7 +92,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetQuaternion(out var q))
 				return left.Quaternion == q;

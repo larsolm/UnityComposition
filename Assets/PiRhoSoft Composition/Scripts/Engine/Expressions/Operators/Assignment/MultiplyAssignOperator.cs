@@ -1,6 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public class MultiplyAssignOperator : AssignmentOperator
+	internal class MultiplyAssignOperator : AssignmentOperator
 	{
 		public override VariableValue Evaluate(IVariableStore variables)
 		{

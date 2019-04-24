@@ -1,8 +1,0 @@
-[#reference/divide-operator]
-
-## DivideOperator
-
-PiRhoSoft.CompositionEngine.DivideOperator : <<reference/infix-operation.html,InfixOperation>>
-
-### Description
-

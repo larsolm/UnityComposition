@@ -6,6 +6,12 @@ PiRhoSoft.CompositionEngine.ICommand
 
 ### Description
 
+Implement this interface to create a custom command that can be added to the <<reference/expression-parser.html,ExpressionParser>> and ultimately called from <<reference/expression.html,Expressions>>.
+
 ### Public Methods
 
 <<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_) _(abstract)_::
+
+This method is called by an <<reference/expression.html,Expression>> when a command with the name this was registered with is encountered. _variables_ contains the <<reference/i-variable-store.html,IVariableStore>> that should be passed to each <<reference/operation.html,Operation>> in _parameters_ when evaluating them as well as to look up any custom variables. _name_ is the name that was used to call this command and _parameters_ is the parsed expressions that were passed to the command.
+
+<<reference/command-evaluation-exception.html,CommandEvaluationException>> should be used to indicate any errors in execution.

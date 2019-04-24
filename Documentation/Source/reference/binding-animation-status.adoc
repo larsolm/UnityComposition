@@ -6,12 +6,75 @@ PiRhoSoft.CompositionEngine.BindingAnimationStatus
 
 ### Description
 
+Used with <<reference/variable-binding.html,VariableBinding>> to provide feedback for binding updates that are animated or otherwise completed asynchronously. Callers, such as <<reference/update-binding-node.html,UpdateBindingNode>>, can pass an instance of this type to the <<reference/variable-binding.html,UpdateBinding>> method and query it to determine when the binding has completed.
+
+[source,cs]
+----
+using PiRhoSoft.CompositionEngine
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class UpdateBindingExample : MonoBehaviour
+	{
+		private BindingAnimationStatus _status = new BindingAnimationStatus();
+
+		public override IEnumerator Run()
+		{
+			_status.Reset();
+
+			VariableBinding.UpdateBinding(gameObject, string.Empty, _status);
+			
+			while (!_status.IsFinished())
+				yield return null;
+		}
+	}
+}
+----
+
+<<reference/variable-binding.html,Bindings>>, such as <<reference/bar-binding.html,BarBinding>>, use the _Increment_ and _Decrement_ methods to indicate when an animation has started and finished respectively.
+
+[source,cs]
+----
+using PiRhoSoft.CompositionEngine
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class ExampleBinding : VariableBinding
+	{
+		private WaitForSeconds _wait = new WaitForSeconds(1);
+
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		{
+			// update the binding
+			StartCoroutine(Animate(status));
+		}
+
+		private IEnumerator Animate(BindingAnimationStatus status)
+		{
+			status.Increment();
+			yield return _wait; // do animation stuff
+			status.Decrement();
+		}
+	}
+}
+----
+
 ### Public Methods
 
 void Reset()::
 
+Call this method before passing a BindingAnimationStatus instance to a binding method to re-initialize it.
+
 bool IsFinished()::
+
+Call this method to determine if all animations resulting from a bindings update have completed.
 
 void Increment()::
 
+Call this method from a <<reference/variable-binding.html,binding>> implementation to indicate the binding is starting an animation. This can be called multiple times if the binding is performing multiple animations. Each call to _Increment_ should have a corresponding call to _Decrement_ when the animation completes.
+
 void Decrement()::
+
+Call this method from a <<reference/variable-binding.html,binding>> implementation to indicate the binding has finished an animation. This should be called one time for each time _Increment_ is called.

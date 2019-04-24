@@ -3,7 +3,7 @@ using System.Text;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class PostIncrementOperator : AssignOperator
+	internal class PostIncrementOperator : AssignOperator
 	{
 		private const string _missingAddException = "the list '{0}' cannot have values added";
 		private const string _readOnlyAddException = "the list '{0}' is read only and cannot have values added";
