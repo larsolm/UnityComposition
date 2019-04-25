@@ -16,6 +16,7 @@ MonoBehaviour:
   ContextDefinition:
     _type: 0
     _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -243,12 +244,13 @@ MonoBehaviour:
     Definition:
       _type: 0
       _constraint: 
+      _objects: []
       _tag: 
       _initializer:
         _statement: 
       _isTypeLocked: 0
       _isConstraintLocked: 0
-    _data: AAAAAA==
+    _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
 --- !u!114 &114928084405713316
