@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.Fade : <<reference/cutoff.html,Cutoff>>
 
 ### Description
 
+Fade is an implementation of a <<reference/transition.html,Transition>> that automatically sets up a <<reference/cutoff.html,Cutoff>> to perform a fade in or out to a specified color.
+
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
+
+The color to fade in to or out from.

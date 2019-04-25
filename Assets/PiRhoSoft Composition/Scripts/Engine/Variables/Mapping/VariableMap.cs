@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class VariableMap
+	internal class VariableMap
 	{
 		private const string _duplicateVariableError = "(CVMDV) Failed to map variable '{0}': a variable with that name already exists in the map";
 

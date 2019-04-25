@@ -17,7 +17,7 @@ image:enable-binding.png[]
 | Name	| Description
 
 | Object	| The https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^], https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^], or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] to enable or disable based on _Condition_
-| Condition	| The <<reference/expression.html,Expression>> that determines whether the 
+| Condition	| The <<reference/expression.html,Expression>> that determines whether _Object_ will be enabled or disabled
 |===
 
 ifdef::backend-multipage_html5[]

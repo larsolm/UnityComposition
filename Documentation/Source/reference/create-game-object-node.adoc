@@ -32,11 +32,11 @@ The way the value of _Position_ and _Rotation_ should be interpreted.
 
 <<reference/variable-reference.html,VariableReference>> _Object_::
 
-When _Positioning_ is _Relative_, specifies the object the created object should be positioned relative to.
+When _Positioning_ is `Relative`, specifies the object the created object should be positioned relative to.
 
 <<reference/variable-reference.html,VariableReference>> _Parent_::
 
-When _Positioning_ is _Child_, specifies the object the created object should be added to as a child.
+When _Positioning_ is `Child`, specifies the object the created object should be added to as a child.
 
 <<reference/vector3-variable-source.html,Vector3VariableSource>> _Position_::
 

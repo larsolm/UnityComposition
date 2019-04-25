@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.DisableGameObjectNode : <<reference/instruction-grap
 
 ### Description
 
+Deactivates a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The node to run after the object is deactivated.
+
 <<reference/variable-reference.html,VariableReference>> _Target_::
+
+The reference to the variable holding the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] that is to be deactivated. If the object is already inactive there will be no effect.

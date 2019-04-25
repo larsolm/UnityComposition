@@ -9,13 +9,13 @@ namespace PiRhoSoft.CompositionEngine
 		public float Minimum;
 		public float Maximum;
 
-		public override void Write(BinaryWriter writer, IList<Object> objects)
+		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
 			writer.Write(Minimum);
 			writer.Write(Maximum);
 		}
 
-		public override void Read(BinaryReader reader, IList<Object> objects, short version)
+		protected internal override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
 			Minimum = reader.ReadSingle();
 			Maximum = reader.ReadSingle();

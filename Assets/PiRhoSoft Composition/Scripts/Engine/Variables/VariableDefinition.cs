@@ -24,8 +24,8 @@ namespace PiRhoSoft.CompositionEngine
 		[SerializeField] private VariableType _type;
 		[SerializeField] private string _constraint;
 		[SerializeField] private List<Object> _objects;
-		[SerializeField] public string _tag;
-		[SerializeField] public Expression _initializer;
+		[SerializeField] private string _tag;
+		[SerializeField] private Expression _initializer;
 
 		[SerializeField] private bool _isTypeLocked;
 		[SerializeField] private bool _isConstraintLocked;

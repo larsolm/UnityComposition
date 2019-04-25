@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.InputNode : <<reference/instruction-graph-node.html,
 
 ### Description
 
+An <<reference/instruction-graph.html,InstructionGraph>> <<reference/instruction-graph-node.html,node>> that waits for user input before advancing to another node.
+
 ### Public Fields
 
 <<reference/input-node-button-list.html,InputNodeButtonList>> _Buttons_::
+
+The list of <<reference/input-node.html,InputNodes>> that indicate a node to advance to when a particular input is triggered.

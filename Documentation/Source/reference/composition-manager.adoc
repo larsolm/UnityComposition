@@ -44,4 +44,8 @@ An <<reference/i-variable-store.html,IVariableStore>> implementation that allows
 
 void RunInstruction(<<reference/instruction.html,Instruction>> _instruction_, <<reference/variable-value.html,VariableValue>> _context_)::
 
+Runs an instruction, usually an <<reference/instruction-graph.html,InstructionGraph>> without setting any inputs other than _context_ or reading any outputs.
+
 void RunInstruction(<<reference/instruction-caller.html,InstructionCaller>> _caller_, <<reference/i-variable-store.html,IVariableStore>> _store_, <<reference/variable-value.html,VariableValue>> _context_)::
+
+Runs an instruction, usually an <<reference/instruction-graph.html,InstructionGraph>>, reading the inputs specified in _caller_ from _store_ to an <<reference/instruction-store.html,InstructionStore> that is passed to the instruction, and reading the outputs from that instruction store to _store_ when the instruction has completed.

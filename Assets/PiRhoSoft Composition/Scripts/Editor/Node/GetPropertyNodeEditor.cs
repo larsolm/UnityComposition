@@ -85,7 +85,6 @@ namespace PiRhoSoft.CompositionEditor
 				using (new UndoScope(_node, false))
 				{
 					_node.TargetType = type;
-					_node.PropertyName = null;
 					_node.Field = null;
 					_node.Property = null;
 
@@ -97,14 +96,14 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				using (new UndoScope(_node, false))
 				{
-					var property = Array.IndexOf(_propertyNames, _node.PropertyName);
+					var property = _node.Property != null ? Array.IndexOf(_propertyNames, _node.Property.Name) : -1;
 					var selectedProperty = EditorGUILayout.Popup(_propertyContent, property, _propertyDisplays);
 
 					if (selectedProperty != property)
 						SetProperty(_propertyNames[selectedProperty]);
 				}
 
-				if (!string.IsNullOrEmpty(_node.PropertyName))
+				if (_node.Property != null)
 				{
 					using (new UndoScope(serializedObject))
 						EditorGUILayout.PropertyField(_outputProperty);
@@ -114,7 +113,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void SetProperty(string name)
 		{
-			_node.PropertyName = name;
 			_node.Field = _node.TargetType.GetField(name);
 			_node.Property = _node.TargetType.GetProperty(name);
 		}

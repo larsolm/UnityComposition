@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.EnableGameObjectNode : <<reference/instruction-graph
 
 ### Description
 
+Activates a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The node to run after the object is activated.
+
 <<reference/variable-reference.html,VariableReference>> _Target_::
+
+The reference to the variable holding the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] that is to be activated. If the object is already active there will be no effect.

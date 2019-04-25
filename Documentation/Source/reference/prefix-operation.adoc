@@ -6,12 +6,20 @@ PiRhoSoft.CompositionEngine.PrefixOperation : <<reference/operation.html,Operati
 
 ### Description
 
+The base class for all <<reference/operation.html,Operations>> that have a right side.
+
 ### Public Fields
 
 string _Symbol_::
 
+The symbol for this operation.
+
 <<reference/operation.html,Operation>> _Right_::
+
+The operation that makes up the right hand side.
 
 ### Protected Methods
 
 <<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> TypeMismatch(<<reference/variable-type.html,VariableType>> _type_)::
+
+Creates an exception indicating the operation cannot operate on a value with type _type_.

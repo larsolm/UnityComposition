@@ -644,7 +644,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public virtual Color NodeColor => Colors.Default;
 
-		public void UpdateName()
+		private void UpdateName()
 		{
 			name = Name;
 		}

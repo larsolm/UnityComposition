@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.InputNodeButtonList : link:/projects/unity-utilities
 
 ### Description
 
+The serializable list of <<reference/input-node-button.html,InputNodeButtons>> in an <<reference/input-node.html,InputNode>>.

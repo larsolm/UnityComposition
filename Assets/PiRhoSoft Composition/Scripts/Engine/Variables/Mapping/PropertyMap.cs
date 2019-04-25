@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class PropertyMap
+	internal class PropertyMap
 	{
 		private const string _invalidFieldError = "(CPMIF) failed to map field '{0}' on type {1}: {2} is not a supported type";
 		private const string _invalidPropertyError = "(CPMIP) failed to map property '{0}' on type {1}: {2} is not a supported type";

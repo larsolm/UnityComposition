@@ -6,26 +6,50 @@ PiRhoSoft.CompositionEngine.VariableSchema : https://docs.unity3d.com/ScriptRefe
 
 ### Description
 
+A VariableSchema is used to define the variables that are available to a <<reference/i-variable-store.html,variable store>> object - usually a <<reference/variable-set-component.html,VariableSetComponent>> or <<reference/variable-set-asset.html,VariableSetAsset>>. This improves the editor experience for working with those object types along with enforcing constraints so typos or other mistaken accesses can be caught and reported at runtime.
+
 ### Public Fields
 
 <<reference/variable-initializer-type.html,VariableInitializerType>> _InitializerType_::
 
+Specifies how the initializer for each <<reference/value-definition.html,ValueDefinition>> will be displayed in the editor and ultimately how <<reference/variable-value.html,VariableValues>> created by this schema will be initialized.
+
 <<reference/tag-list.html,TagList>> _Tags_::
+
+Specifies the set of tags that can be selected in the editor for each <<reference/value-definition.html,ValueDefinition>> added to this schema.
 
 ### Public Properties
 
 int _Version_ _(read only)_::
 
+The current version of the schema. This is incremented every time any change is made to the schema so objects using it know to update themselves. These updates are automatically managed by <<reference/variable-set-component.html,VariableSetComponent>> and <<reference/variable-set-asset.html,VariableSetAsset>> and any class derived from them.
+
 int _Count_ _(read only)_::
 
-<<reference/variable-definition.html,VariableDefinition>> _Item_::
+The number of <<reference/variable-definition.html,VariableDefinitions>> that have been added to this schema.
+
+<<reference/variable-definition.html,VariableDefinition>> this[int _index_]::
+
+Sets or returns the <<reference/variable-definition.html,VariableDefinition>> at index _index_.
+
+NOTE: <<reference/variable-definition.html,VariableDefinition>> is a struct so any changes made to the returned <<reference/variable-definition.html,definition>> will not change the actual schema. Reassign the <<reference/variable-definition.html,definition>> using this indexer to apply the change.
 
 ### Public Methods
 
 int GetIndex(string _name_)::
 
+Returns the index of the <<reference/variable-definition.html,VariableDefinition>> with <<reference/variable-definition.html,_Name_>> _name_ or -1 if no <<reference/variable-definition.html,VariableDefinition>> has been added with that name.
+
+NOTE: Variable names are case sensitive.
+
 bool HasDefinition(string _name_)::
+
+Returns `true` if this schema has a <<reference/variable-definition.html,VariableDefinition>> with <<reference/variable-definition.html,_Name_>> _name_.
 
 bool AddDefinition(string _name_, <<reference/variable-type.html,VariableType>> _type_)::
 
+Adds a new <<reference/variable-definition.html,VariableDefinition>> to the schema with <<reference/variable-definition.html,_Name_>> _name_ and <<reference/value-definition.html,_Type_>> _type_. If a <<reference/variable-definition.html,definition>> with that name has already been added, nothing will happen and this method will return `false`. If the definition is successfully added this method will return `true`.
+
 void RemoveDefinition(int _index_)::
+
+Removes the <<reference/variable-definition.html,VariableDefinition>> at index _index_ from this schema.

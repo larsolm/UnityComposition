@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.DependentObjectList : link:/projects/unity-utilities
 
 ### Description
 
+Used by <<reference/interface-control.html,InterfaceControl>> to store a list of https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^].

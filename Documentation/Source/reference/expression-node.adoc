@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.ExpressionNode : <<reference/instruction-graph-node.
 
 ### Description
 
+Runs an expression.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The node to run after _Expression_ is executed.
+
 <<reference/expression.html,Expression>> _Expression_::
+
+The <<reference/expression.html,Expression>> to run when this node is processed. The result of the expression is ignored.

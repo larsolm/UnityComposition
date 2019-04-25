@@ -4,12 +4,17 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public interface IMappedVariableList
+	internal interface IMappedVariableList
 	{
 		int VariableCount { get; }
 		string GetVariableName(int index);
 		VariableValue GetVariableValue(int index);
 		SetVariableResult SetVariableValue(int index, VariableValue value);
+	}
+
+	public interface IVariableListener
+	{
+		void VariableChanged(int index, VariableValue value);
 	}
 
 	public class MappedVariableAttribute : Attribute
@@ -51,7 +56,9 @@ namespace PiRhoSoft.CompositionEngine
 			for (var i = 0; i < mapping.Properties.Count; i++)
 				lists[i] = new PropertyList(owner, mapping.Properties[i]);
 
-			Setup(mapping.Map, lists); // variable initializers may need the map set to access other variables
+			// variable initializers may need the map set to access other variables
+			_map = mapping.Map;
+			_lists = lists;
 
 			if (variables != null)
 			{
@@ -69,12 +76,6 @@ namespace PiRhoSoft.CompositionEngine
 					variables.Clear();
 				}
 			}
-		}
-
-		public void Setup(VariableMap map, params IMappedVariableList[] lists)
-		{
-			_map = map;
-			_lists = lists;
 		}
 
 		#region IVariableStore Implementation

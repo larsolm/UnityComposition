@@ -6,38 +6,74 @@ PiRhoSoft.CompositionEngine.Colors
 
 ### Description
 
+Defines several colors that can be used by <<reference/instruction-graph-node.html,InstructionGraphNode._NodeColor_>> derivations to indicate the color of the node in the graph editor. Using an appropriate color frome here can improve the consistency in the editor and make it easier to quickly identify the function of a node.
+
 ### Static Fields
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Start_::
 
+The color of the entry point node.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Default_::
+
+The color used for nodes that don't implement <<reference/instruction-graph-node.html,InstructionGraphNode._NodeColor_>>.
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _ExecutionLight_::
 
+The color used for nodes that defer execution to other systems.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _ExecutionDark_::
+
+The color used for nodes that perform a specific execution process.
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Animation_::
 
+The color used for nodes that interact with Unity's animation systems.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Sequence_::
+
+The color used for nodes that perform many actions in a sequence.
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Loop_::
 
+The color used for nodes that repeat an action many times.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Branch_::
+
+The color used for nodes that select an action to perform based on some input.
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Break_::
 
+The color used for nodes that alter the control flow of the graph.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Sequencing_::
+
+A color used for nodes that are used in making scripted sequences.
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _SequencingLight_::
 
+A color used for nodes that are used in making scripted sequences.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _SequencingDark_::
+
+A color used for nodes that are used in making scripted sequences.
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Interface_::
 
+A color used for nodes that interact with the user interface.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceLight_::
+
+A color used for nodes that interact with the user interface.
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceDark_::
 
+A color used for nodes that interact with the user interface.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceCyan_::
 
+A color used for nodes that interact with the user interface.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _InterfaceTeal_::
+
+A color used for nodes that interact with the user interface.

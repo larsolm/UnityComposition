@@ -6,12 +6,22 @@ PiRhoSoft.CompositionEngine.ExpressionDisplayAttribute : https://docs.unity3d.co
 
 ### Description
 
+This https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/[Attribute^] is applied to <<reference/expression.html,Expression>> fields to customize the way the editor displays the <<reference/expression.html,Expression>>. If an <<reference/expression.html,Expression>> is not given this attribute, it is interpreted as if all the following properties have been set to their default value.
+
 ### Public Fields
 
 bool _Foldout_::
 
+If this is `true` the expression will be expandable and collapsable with a foldout. The default is `false`.
+
 bool _FullWidth_::
+
+If this is `true` the text area for the <<reference/expression.html,Expression>> will appear beneath its label and expanded to the full width of the inspector. Otherwise it will appear to the right of its label. The default is `true`.
 
 int _MinimumLines_::
 
+This specifies the minimum number of lines that will be shown in the text area regardless of the length of the <<reference/expression.html,Expression>>. The default is 2.
+
 int _MaximumLines_::
+
+This specifies the number of lines the text area will grow to as the <<reference/expression.html,Expression>> gets longer before using a scroll bar. The default is 8.

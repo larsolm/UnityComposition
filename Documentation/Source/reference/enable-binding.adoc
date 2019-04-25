@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.EnableBinding : <<reference/variable-binding.html,Va
 
 ### Description
 
+EnableBinding is a <<reference/variable-binding.html,VariableBinding>> that will enable or disable an https://docs.unity3d.com/ScriptReference/Object.html[Object^] based on the evaluation of an <<reference/expression.html,Expression>>. See the <<manual/enable-binding.html,manual>> for more information.
+
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_::
 
+The https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^], https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^], or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] to enable or disable based on _Condition_.
+
 <<reference/expression.html,Expression>> _Condition_::
+
+The <<reference/expression.html,Expression>> to evaluate when updating the binding. If this evaluates to `true`, _Object_ will be enabled otherwise it will be disabled (if it is not already).

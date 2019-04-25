@@ -6,46 +6,78 @@ PiRhoSoft.CompositionEngine.ValueDefinition : ValueType
 
 ### Description
 
+Defines properties for how a <<reference/variable-value.html,VariableValue>> is initialized and can be used, usually as part of a <<reference/variable-schema.html,VariableSchema>>. The _Generate_ method can be used to create a <<reference/variable-value.html,VariableValue>> that satisfies the properties of the definition.
+
 ### Static Methods
 
 <<reference/value-definition.html,ValueDefinition>> Create(<<reference/variable-type.html,VariableType>> _type_)::
 
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> _type_ and no other constraints.
+
 <<reference/value-definition.html,ValueDefinition>> Create(int _minimum_, int _maximum_)::
+
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> `Int` and with a constraint restricting it to values between _minimum_ and _maximum_.
 
 <<reference/value-definition.html,ValueDefinition>> Create(float _minimum_, float _maximum_)::
 
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> `Float` and with a constraint restricting it to values between _minimum_ and _maximum_.
+
 <<reference/value-definition.html,ValueDefinition>> Create(string[] _values_)::
+
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> `String` and with a constraint restricting it to one of the values in _values_.
 
 <<reference/value-definition.html,ValueDefinition>> Create<T>()::
 
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> `Object` whose value can be set to any https://docs.unity3d.com/ScriptReference/Object.html[Object^] that is type _T_ or is derived from type _T_.
+
 <<reference/value-definition.html,ValueDefinition>> Create(Type _type_)::
+
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> determined by <<reference/variable-value.html,VariableValue.GetType>>.
 
 <<reference/value-definition.html,ValueDefinition>> Create(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_)::
 
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> _type_ and <<reference/variable-constraint.html,VariableConstraint>> constraint _constraint_.
+
+NOTE: The caller must ensure _constraint_ is a <<reference/variable-constraint.html,VariableConstraint>> of the appropriate type for _type_.
+
 <<reference/value-definition.html,ValueDefinition>> Create(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_, string _tag_, <<reference/expression.html,Expression>> _initializer_, bool _isTypeLocked_, bool _isConstraintLocked_)::
 
-### Public Fields
+Creates a definition with the given properties.
 
-string __tag_::
-
-<<reference/expression.html,Expression>> __initializer_::
+NOTE: The caller must ensure _constraint_ is a <<reference/variable-constraint.html,VariableConstraint>> of the appropriate type for _type_.
 
 ### Public Properties
 
 <<reference/variable-type.html,VariableType>> _Type_ _(read only)_::
 
+The <<reference/variable-type.html,VariableType>> to assign to <<reference/variable-value.html,VariableValues>> created by _Generate_ or to test against with _IsValid_. If this is `Empty`, the <<reference/variable-value.html,VariableValue>> can be any type.
+
 <<reference/variable-constraint.html,VariableConstraint>> _Constraint_ _(read only)_::
+
+The <<reference/variable-constraint.html,VariableConstraint>> laying out _Type_ dependent requirements for <<reference/variable-value.html,VariableValues>> using this definition. This can be null, and in that case, the only constraint for <<reference/variable-value.html,VariableValues>> will be _Type_.
 
 string _Tag_ _(read only)_::
 
+An arbitrary string that can be used to group different definitions in the same <<reference/variable-schema.html,VariableSchema>>. This has no impact on the validity of a <<reference/variable-value.html,VariableValue>> or how it is generated. It is most commonly used to indicate a set of variables that should be saved (for runtime saves) or group variables for resetting to their defaults (i.e by <<reference/variable-set-component.html,VariableSetComponent.ResetTag>>) or any other class that implements <<reference/i-variable-reset.html,IVariableReset.ResetTag>>).
+
 <<reference/expression.html,Expression>> _Initializer_ _(read only)_::
+
+The <<reference/expression.html,Expression>> to evaluate when calling _Generate_ to determine the initial value of the <<reference/variable-value.html,VariableValue>>. If the <<reference/expression.html,Expression>> is not set, a <<reference/variable-value.html,VariableValue>> with the default for _Type_ will be generated.
 
 bool _IsTypeLocked_ _(read only)_::
 
+Indicates to the editor that this definition cannot have _Type_ changed.
+
 bool _IsConstraintLocked_ _(read only)_::
+
+Indicates to the editor that this definition cannot have _Constraint_ changed. The properties of _Constraint_ can be changed, but the _Constraint_ itself cannot.
 
 ### Public Methods
 
 <<reference/variable-value.html,VariableValue>> Generate(<<reference/i-variable-store.html,IVariableStore>> _variables_)::
 
+Generates a <<reference/variable-value.html,VariableValue>> that satisfies the constraints laid out by this definition with initial value determined by _Initializer_.
+
 bool IsValid(<<reference/variable-value.html,VariableValue>> _value_)::
+
+Returns `true` if _value_ satisfies the runtime constraints specified by this definition.

@@ -6,36 +6,70 @@ PiRhoSoft.CompositionEngine.ExpressionTokenType
 
 ### Description
 
+Specifies the set of <<reference/expression-token.html,ExpressionTokens>> the <<reference/expression-lexer.html,ExpressionLexer>> and <<reference/expression-parser.html,ExpressionParser>> understand.
+
 ### Values
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Sentinel_::
 
+Seperates for two distinct statements. This is either `;` or a line break with multiple of these concatenated into a single token.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _Constant_::
+
+A <<reference/variable-value.html,VariableValue>> that has been added to the <<reference/expression-lexer.html,ExpressionLexer>> with _AddConstant_.
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Int_::
 
+A literal value that should be interpreted as an int. An int is any continuous sequence of digits.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _Float_::
+
+A literal value that should be interpreted as a float. A float is any continuous sequence of digits that includes a decimal point.
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _String_::
 
+A literal value that should be interpreted as a string. A string is a sequence of characters bounded by double quotes (`"`)
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _Color_::
+
+A literal value that should be interpreted as a color. A color is a sequence of 6 digits following a hash (`#`)
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Identifier_::
 
+A name that is used to look up variable values. Identifiers can be any sequence of letters, numbers, spaces, or underscores beginning with a letter or underscore.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _Command_::
+
+A name that is used to look up a <<reference/i-command.html,Command>> that has been registered with the <<reference/expression-parser.html,ExpressionParser>> using _AddCommand_. A command is an _Identifier_ that is followed by an opening paren (`(`).
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Operator_::
 
+An operator that is used to look up a <<reference/prefix-operation.html,PrefixOperation>> or <<reference/prefix-operation.html,InfixOperation>> that has been registered with the <<reference/expression-parser.html,ExpressionParser>> using _AddPrefixOperator_ or _AddInfixOperator_. Valid operator characters are any of `+-!^*/%<>=&|?.` in any sequence and any character sequence that has been registered with the <<reference/expression-lexer.html,ExpressionLexer>> using _AddKeyword_.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _StartLookup_::
+
+Indicates the following tokens should be interpreted as part of a <<reference/variable-handler.html,variable lookup>>. This is the `[` character.
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _EndLookup_::
 
+Indicates the following tokens are no longer part of a <<reference/variable-handler.html,variable lookup>>. This is the `]` character.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _StartGroup_::
+
+Indicates the following tokens should be isolated and evaluated as a group, just as would be done in a math expression. This is the `(` character.
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _EndGroup_::
 
+Ends a group that was started with a _StartGroup_ token or a command that was started with a _Command_ token. This is the `)` character.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _Separator_::
+
+Seperates parameters in a _Command_ token. This is the `,` character.
 
 <<reference/expression-token-type.html,ExpressionTokenType>> _Alternation_::
 
+This is the character used as the separator for the true and false statements of a ternary expression. This is the `:` character.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _Unknown_::
+
+Any token that does not meet the requirements for one of the preceding types will be given this type.

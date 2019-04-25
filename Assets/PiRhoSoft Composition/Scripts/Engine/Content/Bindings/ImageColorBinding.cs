@@ -17,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private Image _image;
 
-		public Image Sprite
+		public Image Image
 		{
 			get
 			{
@@ -34,8 +34,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			var value = Variable.GetValue(variables);
 
-			Sprite.enabled = value.Type == VariableType.Color;
-			Sprite.color = value.Color;
+			Image.enabled = value.Type == VariableType.Color;
+			Image.color = value.Color;
 
 			if (!SuppressErrors && value.Type != VariableType.Color)
 				Debug.LogWarningFormat(this, value.IsEmpty ? _missingVariableWarning : _invalidVariableWarning, name, Variable);

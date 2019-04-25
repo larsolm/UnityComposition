@@ -6,10 +6,27 @@ PiRhoSoft.CompositionEngine.IVariableStore
 
 ### Description
 
+Implement this interface on a class to allow the class to be stored with type `Store` in a <<reference/variable-value.html,VariableValue>>. Many built in implementations are provided for various use cases:
+
+* <<reference/variable-store.html,VariableStore>>
+* <<reference/constrained-store.html,ConstrainedStore>>
+* <<reference/read-only-store.html,ReadOnlyStore>>
+* <<reference/writable-store.html,WritableStore>>
+* <<reference/scene-variable-store.html,SceneVariableStore>>
+* <<reference/mapped-variable-store.html,MappedVariableStore>>
+
+NOTE: This interface is one of the most important pieces to the variable system. Read the <<topics/variables.html,variables topic>> for a complete description of this interface and how it interacts with the rest of the system.
+
 ### Public Methods
 
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_) _(abstract)_::
 
+Returns the value of the variable with name _name_.
+
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
 
+Sets the value of the variable with name _name_ to _value_
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(abstract)_::
+
+Returns the complete list of variable names that exist in this store.

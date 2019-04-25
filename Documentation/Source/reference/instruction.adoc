@@ -6,38 +6,68 @@ PiRhoSoft.CompositionEngine.Instruction : https://docs.unity3d.com/ScriptReferen
 
 ### Description
 
+Implements the core functionality for an <<reference/instruction-graph.html,InstructionGraph>> or any other asset to allow it to be run by the <<reference/composition-manager.html,CompositionManager>>.
+
 ### Public Fields
 
 string _ContextName_::
 
+The name to assign to the variable that is passed as _context_ to either of the <<reference/composition-manager.html,CompositionManager._Run_>> methods.
+
 <<reference/value-definition.html,ValueDefinition>> _ContextDefinition_::
+
+The definition to use to validate the variable passed as _context_ to either of the <<reference/composition-manager.html,CompositionManager._Run_>> methods. If the definition specifies a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] type and the _context_ value is not that behaviour type, it will be converted by attempting to look up a sibling behaviour.
 
 <<reference/variable-definition-list.html,VariableDefinitionList>> _Inputs_::
 
+The list of definitions for the input variables this instruction expects to be set when called from an <<reference/instruction-caller.html,InstructionCaller>>. This list will be automatically populated by the editor and each definition can optionally be set to constrain the corresponding input. If the definition is set, the input will be validated at runtime to ensure the correct data was passed, with a message being logged if it is not.
+
 <<reference/variable-definition-list.html,VariableDefinitionList>> _Outputs_::
+
+The list of definitions for the output variables indicating the values this instruction will set for an <<reference/instruction-caller.html,InstructionCaller>> when it has completed. The outputs are not validated because it is not required that they are set by the instruction, but setting these will improve the editor experience.
 
 ### Public Properties
 
 <<reference/i-variable-store.html,IVariableStore>> _Variables_ _(read only)_::
 
+The <<reference/instruction-store.html,InstructionStore>> that was passed to the _Execute_ method. This will be null if the instruction is not currently running.
+
 bool _IsRunning_ _(read only)_::
+
+This will return `true` while the _Execute_ coroutine is running.
 
 ### Public Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<reference/instruction-store.html,InstructionStore>> _variables_)::
 
+Executes the instruction. When inside an existing https://docs.unity3d.com/Manual/Coroutines.html[coroutine^] this can be called directly as part of a `yield return` statement. When outside a coroutine, the <<reference/composition-manager.html,CompositionManager._RunInstruction_>> methods should be used.
+
 void RefreshInputs()::
 
+Used by the editor to refresh the input list when necessary. This will happen automatically and can be ignored.
+
 void RefreshOutputs()::
+
+Used by the editor to refresh the input list when necessary. This will happen automatically and can be ignored.
 
 ### Protected Methods
 
 void OnEnable() _(virtual)_::
 
+Performs important setup for the instruction. If overridden make sure to call the base implementation.
+
 void OnDisable() _(virtual)_::
+
+Performs important teardown for the instruction. If overridden make sure to call the base implementation.
 
 void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
 
+Implement this in subclasses to populate the _inputs_ list with definitions for values the instruction expects to be available when called.
+
 void GetOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _outputs_) _(virtual)_::
 
+Implement this in subclasses to populate the _outputs_ list with definitions for values the instruction will set after it finishes running.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(abstract)_::
+
+Implement this in subclasses to perform the function of the instruction.

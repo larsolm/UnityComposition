@@ -6,12 +6,22 @@ PiRhoSoft.CompositionEngine.Dissolve : <<reference/cutoff.html,Cutoff>>
 
 ### Description
 
+Dissolve is an implementation of a <<reference/cutoff.html,Cutoff>> <<reference/transition.html,Transition>>. See the <<manual/dissolve.html,manual page>> for details.
+
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_::
 
+The https://docs.unity3d.com/ScriptReference/Color.html[Color^] to dissolve the screen to.
+
 https://docs.unity3d.com/ScriptReference/Texture2D.html[Texture2D^] _Texture_::
+
+The input https://docs.unity3d.com/ScriptReference/Texture.html[Texture^] that gives the pattern of the dissolve. If this is not specified, a texture filled with perlin noise will be generated and used.
 
 https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _TextureSize_::
 
+If _Texture_ is null, the size of the https://docs.unity3d.com/ScriptReference/Texture.html[Texture^] to generate.
+
 float _NoiseScale_::
+
+If _Texture_ is null, the scale value of the perlin noise generated as the https://docs.unity3d.com/ScriptReference/Texture.html[Texture^].

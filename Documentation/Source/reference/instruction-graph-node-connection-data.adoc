@@ -6,32 +6,4 @@ PiRhoSoft.CompositionEngine.ConnectionData
 
 ### Description
 
-### Constructors
-
-ConnectionData(string _field_, string _key_, int _index_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _from_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_, int _fromIndex_)::
-
-### Public Properties
-
-string _Field_ _(read only)_::
-
-string _FieldKey_ _(read only)_::
-
-int _FieldIndex_ _(read only)_::
-
-<<reference/instruction-graph-node.html,InstructionGraphNode>> _From_ _(read only)_::
-
-int _FromIndex_ _(read only)_::
-
-<<reference/instruction-graph-node.html,InstructionGraphNode>> _To_ _(read only)_::
-
-<<reference/instruction-graph-node-node-data.html,NodeData>> _Target_ _(read only)_::
-
-string _Name_ _(read only)_::
-
-### Public Methods
-
-void SetTarget(<<reference/instruction-graph-node-node-data.html,NodeData>> _target_)::
-
-void ChangeTarget(<<reference/instruction-graph-node-node-data.html,NodeData>> _target_)::
-
-void ApplyConnection(Object _obj_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_)::
+Stores data about a connection between two <<reference/instruction-graph-node.html,InstructionGraphNodes>>. This is managed automatically by the editor and does not need to be used in any way.

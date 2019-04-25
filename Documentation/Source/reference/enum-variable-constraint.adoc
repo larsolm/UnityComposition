@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.EnumVariableConstraint : <<reference/variable-constr
 
 ### Description
 
+Specifies the https://docs.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/enum[enum^] type for <<reference/variable-value.html,VariableValues>> using this constraint.
+
 ### Public Fields
 
 Type _Type_::
+
+The enum type.

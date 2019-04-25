@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public string[] Values;
 
-		public override void Write(BinaryWriter writer, IList<Object> objects)
+		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
 			writer.Write(Values.Length);
 
@@ -17,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 				writer.Write(value);
 		}
 
-		public override void Read(BinaryReader reader, IList<Object> objects, short version)
+		protected internal override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
 			var length = reader.ReadInt32();
 
