@@ -15,7 +15,6 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Object = new VariableReference();
 
 		[Tooltip("The Variable store to set the bindings to")]
-		[VariableConstraint(typeof(IVariableStore))]
 		public VariableReference Binding = new VariableReference();
 
 		public override Color NodeColor => Colors.Interface;
@@ -24,11 +23,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (ResolveObject(variables, Object, out BindingRoot root))
 			{
-				if (Resolve(variables, Binding, out IVariableStore binding))
-				{
-					root.Value = VariableValue.Create(binding);
-					VariableBinding.UpdateBinding(root.gameObject, null, null);
-				}
+				root.Value = Binding.GetValue(variables);
+				VariableBinding.UpdateBinding(root.gameObject, null, null);
 			}
 
 			graph.GoTo(Next, nameof(Next));

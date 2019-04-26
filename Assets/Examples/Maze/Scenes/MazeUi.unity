@@ -557,6 +557,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 1161540523}
   Condition:
     _statement: global.JewelsNeeded > 0;
@@ -574,6 +575,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Message:
     Text: 'Jewels: {global.Jewels} / {global.JewelsNeeded}'
 --- !u!114 &1161540523
@@ -889,6 +892,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Formatting:
     Format: 'Timer: {0}'
     Formatting: 1

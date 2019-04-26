@@ -2,7 +2,7 @@
 
 ## Hide Control Node
 
-A Hide Control Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will hide an <<manual/interface-control.html,Interface Control>>. Create a Hide Control Node in the menu:Create[Interface > Hide Control] menu of the Instruction Graph Window.
+A Hide Control Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will deactivate an <<manual/interface-control.html,Interface Control>>. Create a Hide Control Node in the menu:Create[Interface > Hide Control] menu of the Instruction Graph Window.
 
 See the "Hide Timer" node on the "MazeEnd" <<manual/instruction-graph,Instruction Graph>> in the Maze project for an example usage.
 

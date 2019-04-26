@@ -23,7 +23,17 @@ MonoBehaviour:
     _isTypeLocked: 0
     _isConstraintLocked: 0
   Inputs:
-    _items: []
+    _items:
+    - Name: MoveSpeed
+      Definition:
+        _type: 3
+        _constraint: 
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 1
+        _isConstraintLocked: 0
   Outputs:
     _items: []
   _nodes:
@@ -85,10 +95,14 @@ MonoBehaviour:
       _tokens: []
     Value: 1
   MoveSpeed:
-    Type: 0
+    Type: 1
     Reference:
-      _variable: 
-      _tokens: []
+      _variable: input.MoveSpeed
+      _tokens:
+      - Type: 0
+        Text: input
+      - Type: 0
+        Text: MoveSpeed
     Value: 5
   RotationSpeed:
     Type: 0

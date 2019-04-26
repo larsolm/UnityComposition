@@ -1145,7 +1145,14 @@ MonoBehaviour:
   SuppressErrors: 0
   Graph:
     _instruction: {fileID: 11400000, guid: 6a559fb05b19cc746a530a574525a7b6, type: 2}
-    _inputs: []
+    _inputs:
+    - Name: MoveSpeed
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQADAAAAAACgQA==
+      _valueObjects: []
     _outputs: []
   Variable:
     _variable: Gate.Open
@@ -1449,7 +1456,14 @@ MonoBehaviour:
   SuppressErrors: 0
   Graph:
     _instruction: {fileID: 11400000, guid: 6a559fb05b19cc746a530a574525a7b6, type: 2}
-    _inputs: []
+    _inputs:
+    - Name: MoveSpeed
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQADAAAAAACgQA==
+      _valueObjects: []
     _outputs: []
   Variable:
     _variable: Gate.Open
@@ -2171,7 +2185,14 @@ MonoBehaviour:
   SuppressErrors: 0
   Graph:
     _instruction: {fileID: 11400000, guid: 6a559fb05b19cc746a530a574525a7b6, type: 2}
-    _inputs: []
+    _inputs:
+    - Name: MoveSpeed
+      Type: 1
+      Reference:
+        _variable: 
+        _tokens: []
+      _valueData: AQADAAAAAACgQA==
+      _valueObjects: []
     _outputs: []
   Variable:
     _variable: Gate.Open

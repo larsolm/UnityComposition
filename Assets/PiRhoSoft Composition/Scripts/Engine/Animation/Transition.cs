@@ -42,7 +42,6 @@ namespace PiRhoSoft.CompositionEngine
 		public virtual void Process(float time, TransitionPhase phase) { }
 		public virtual void End() { }
 
-
 		public virtual void Render(RenderTexture source, RenderTexture destination)
 		{
 			Update();
