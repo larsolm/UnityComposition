@@ -2,7 +2,7 @@
 
 ## Composition Manager
 
-The Composition Manager is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that manages the entire composition system. Because Composition Manager is a link:/projects/unity-utilities/documentation/#/v10/reference/global-behaviour-1[GlobalBehaviour^], it is created automatically the first time it is accessed so it does not need to be added to any objects in a scene. If manually running an <<manual/instruction-graph.html,Instruction Graph>> from script, do it through the `Run()` method on the Composition Manager.
+The Composition Manager is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that manages the entire composition system. Because Composition Manager is a link:/projects/unity-utilities/documentation/#/v10/reference/global-behaviour-1[GlobalBehaviour^], it is created automatically the first time it is accessed so it does not need to be added to any objects in a scene. Composition Manager maintains a "global" <<reference/i-variable-store.html,IVariableStore>> that can be accessed from any <<manual/variable-binding.html,VariableReference>> or <<manual/expression.html,Expression>> using the `"global"` accessor. It also maintains the "scene" <<reference/i-variable-store.html,IVariableStore>>, which gives access to https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] in the scene by name using the `"scene"` accessor. <<manual/instruction-graph.html,Instruction Graphs>> can be manually run from script through the Composition Manager using the `Run()` method.
 
 ifdef::backend-multipage_html5[]
 <<reference/composition-manager.html,Reference>>
