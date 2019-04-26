@@ -9,17 +9,32 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d6f95977d1adbba4b9a826aff14f0418, type: 3}
+  m_Script: {fileID: 11500000, guid: 41002894b0a65c94aa4ee0f013c49178, type: 3}
   m_Name: Cards
   m_EditorClassIdentifier: 
-  _schema: {fileID: 11400000, guid: f703de78debd2b548937aa2e2622e5cc, type: 2}
   Variables:
-    _version: 28
     _variablesData:
-    - BVJhbmtzEwAAAA0AAAAPAAAAAUEPAAAAATIPAAAAATMPAAAAATQPAAAAATUPAAAAATYPAAAAATcPAAAAATgPAAAAATkPAAAAAjEwDwAAAAFKDwAAAAFRDwAAAAFL
-    - BVN1aXRzEwAAAAQAAAARAAAAAAAAABEAAAABAAAAEQAAAAIAAAARAAAAAwAAAA==
+    - AQAFUmFua3MTAAAADQAAAA8AAAABQQ8AAAABMg8AAAABMw8AAAABNA8AAAABNQ8AAAABNg8AAAABNw8AAAABOA8AAAABOQ8AAAACMTAPAAAAAUoPAAAAAVEPAAAAAUs=
+    - AQAFU3VpdHMTAAAABAAAABEAAAAAAAAAEQAAAAEAAAARAAAAAgAAABEAAAADAAAA
     _variablesObjects:
     - {fileID: 11400000, guid: 1832a55aac1a76e4789bed8aacf158e0, type: 2}
     - {fileID: 11400000, guid: bc4ec9d7df778c740ad6eaf9bd3b86d5, type: 2}
     - {fileID: 11400000, guid: 384dc4edd724dc949ace57728dfbd4ab, type: 2}
     - {fileID: 11400000, guid: 20e31cc0c7c65cf4e9478bdaca30d001, type: 2}
+    Definitions:
+    - _type: 19
+      _constraint: AQATAAAAAAAAAAA=
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 19
+      _constraint: AQATAAAAEQAAAAERAAAAdFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldEFzc2V0LCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxs
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0

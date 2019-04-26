@@ -123,6 +123,7 @@ GameObject:
   - component: {fileID: 112653797}
   - component: {fileID: 112653799}
   - component: {fileID: 112653798}
+  - component: {fileID: 112653800}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -272,6 +273,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 112653796}
   m_CullTransparentMesh: 0
+--- !u!114 &112653800
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 112653796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2854d5c100c2d14d98d17458e0eef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BindingGroup: 
+  AutoUpdate: 1
+  SuppressErrors: 0
+  Object: {fileID: 112653798}
+  Condition:
+    _statement: global.State.Shuffles > 0 && global.State.Processing == 0
 --- !u!1 &167390628
 GameObject:
   m_ObjectHideFlags: 0
@@ -423,7 +442,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 167390630}
+  SuppressErrors: 0
+  Object: {fileID: 167390632}
   Condition:
     _statement: global.State.Processing == 0
 --- !u!114 &167390635
@@ -440,7 +460,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 167390631}
+  SuppressErrors: 0
+  Object: {fileID: 167390631}
   Condition:
     _statement: global.State.Processing == 0
 --- !u!1 &322534975
@@ -525,7 +546,7 @@ MonoBehaviour:
     _variablesObjects:
     - {fileID: 1723087962}
     - {fileID: 500038794}
-    - {fileID: 11400000, guid: 4f706c0cf5be2c548aaabb17b2590955, type: 2}
+    - {fileID: 11400000, guid: a32dbb99f31b1f649bef9dcff7021e52, type: 2}
     Definitions:
     - _type: 17
       _constraint: 
@@ -544,7 +565,7 @@ MonoBehaviour:
       _isTypeLocked: 0
       _isConstraintLocked: 0
     - _type: 17
-      _constraint: 
+      _constraint: AQARAAAAdVBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVBvb2xBc3NldCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
       _objects: []
       _tag: 
       _initializer:
@@ -743,7 +764,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 562347066}
+  SuppressErrors: 0
+  Object: {fileID: 562347062}
   Condition:
     _statement: global.State.Shuffles > 0 && global.State.Processing == 0
 --- !u!114 &562347066
@@ -776,7 +798,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  Behaviour: {fileID: 562347062}
+  SuppressErrors: 0
+  Object: {fileID: 562347063}
   Condition:
     _statement: global.State.Shuffles > 0 && global.State.Processing == 0
 --- !u!1 &664597338
@@ -1119,6 +1142,7 @@ GameObject:
   - component: {fileID: 1464314232}
   - component: {fileID: 1464314231}
   - component: {fileID: 1464314230}
+  - component: {fileID: 1464314233}
   m_Layer: 5
   m_Name: TextMeshPro Text
   m_TagString: Untagged
@@ -1159,6 +1183,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Message:
     Text: Shuffle ({global.State.Shuffles} Left)
 --- !u!114 &1464314231
@@ -1284,6 +1310,24 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1464314228}
   m_CullTransparentMesh: 0
+--- !u!114 &1464314233
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1464314228}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2854d5c100c2d14d98d17458e0eef4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  BindingGroup: 
+  AutoUpdate: 1
+  SuppressErrors: 0
+  Object: {fileID: 1464314231}
+  Condition:
+    _statement: global.State.Shuffles > 0 && global.State.Processing == 0
 --- !u!1 &1599441243
 GameObject:
   m_ObjectHideFlags: 0
