@@ -6,16 +6,28 @@ PiRhoSoft.CompositionEngine.IVariableList
 
 ### Description
 
+Implement this interface on a class to allow the class to be stored with type `List` in a <<reference/variable-value.html,VariableValue>>. <<reference/variable-list.html,VariableList>> provides an implementation that is sufficient for most use cases.
+
 ### Public Properties
 
 int _Count_ _(read only)_ _(abstract)_::
+
+The number of items in the list.
 
 ### Public Methods
 
 <<reference/variable-value.html,VariableValue>> GetVariable(int _index_) _(abstract)_::
 
+Returns the value at the index _index_ in the list.
+
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(int _index_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
+
+Sets the value at index _index_ to _value_.
 
 <<reference/set-variable-result.html,SetVariableResult>> AddVariable(<<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
 
+Adds the value _value_ to the end of the list.
+
 <<reference/set-variable-result.html,SetVariableResult>> RemoveVariable(int _index_) _(abstract)_::
+
+Removes the value at index _index_ from the list.

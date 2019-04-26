@@ -6,18 +6,30 @@ PiRhoSoft.CompositionEngine.InfixOperation : <<reference/operation.html,Operatio
 
 ### Description
 
+The base class for all <<reference/operation.html,Operations>> that have a left and right side.
+
 ### Public Properties
 
 <<reference/operator-precedence.html,OperatorPrecedence>> _Precedence_ _(read only)_ _(abstract)_::
+
+The precedence of the operation relative to other operations.
 
 ### Protected Fields
 
 <<reference/operation.html,Operation>> _Left_::
 
+The operation that makes up the left hand side.
+
 string _Symbol_::
 
+The symbol for this operation.
+
 <<reference/operation.html,Operation>> _Right_::
+
+The operation that makes up the right hand side.
 
 ### Protected Methods
 
 <<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> TypeMismatch(<<reference/variable-type.html,VariableType>> _left_, <<reference/variable-type.html,VariableType>> _right_)::
+
+Creates an exception indicating the operation cannot operate on values with types _left_ and _right_.

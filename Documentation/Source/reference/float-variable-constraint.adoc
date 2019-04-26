@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.FloatVariableConstraint : <<reference/variable-const
 
 ### Description
 
+A <<reference/variable-constraint.html,VariableConstraint>> for `Float` <<reference/variable-values.html,VariableValues>> that restricts the value to a range.
+
 ### Public Fields
 
 float _Minimum_::
 
+The smallest value allowed for the value.
+
 float _Maximum_::
+
+The largest value allowed for the value.

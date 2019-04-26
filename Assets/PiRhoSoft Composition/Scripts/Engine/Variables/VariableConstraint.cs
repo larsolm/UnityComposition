@@ -37,8 +37,8 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class VariableConstraint
 	{
-		public abstract void Write(BinaryWriter writer, IList<Object> objects);
-		public abstract void Read(BinaryReader reader, IList<Object> objects, short version);
+		protected internal abstract void Write(BinaryWriter writer, IList<Object> objects);
+		protected internal abstract void Read(BinaryReader reader, IList<Object> objects, short version);
 
 		public abstract bool IsValid(VariableValue value);
 	}

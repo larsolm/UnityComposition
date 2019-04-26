@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.InstructionGraphNodeList : link:/projects/unity-util
 
 ### Description
 
+Use this class as a field on an <<reference/instruction-graph-node.html,InstructionGraphNode>> to store an editable list of nodes that are accessed by index.

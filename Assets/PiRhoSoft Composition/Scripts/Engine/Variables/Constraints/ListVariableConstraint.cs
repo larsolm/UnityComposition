@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableType ItemType;
 		public VariableConstraint ItemConstraint;
 
-		public override void Write(BinaryWriter writer, IList<Object> objects)
+		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
 			writer.Write((int)ItemType);
 			writer.Write(ItemConstraint != null);
@@ -18,7 +18,7 @@ namespace PiRhoSoft.CompositionEngine
 				VariableHandler.WriteConstraint(ItemType, ItemConstraint, writer, objects);
 		}
 
-		public override void Read(BinaryReader reader, IList<Object> objects, short version)
+		protected internal override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
 			ItemType = (VariableType)reader.ReadInt32();
 

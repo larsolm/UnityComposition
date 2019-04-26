@@ -6,18 +6,26 @@ PiRhoSoft.CompositionEngine.VariableConstraintAttribute : Attribute
 
 ### Description
 
+This https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/[Attribute^] is applied to <<reference/variable-reference.html,VariableReference>> or <<reference/variable-source.html,VariableSource>> fields to inform the editor of the type of <<reference/variable-value.html,VariableValue>> the code is expecting, thereby providing a more useful editor for the field.
+
 ### Constructors
 
 VariableConstraintAttribute(<<reference/variable-type.html,VariableType>> _type_)::
 
+Specifies the corresponding field should have <<reference/variable-type.html,VariableType>> _type_.
+
 VariableConstraintAttribute(int _minimum_, int _maximum_)::
+
+Specifies the corresponding field should have <<reference/variable-type.html,VariableType>> `Int` and value between _minimum_ and _maximum_.
 
 VariableConstraintAttribute(float _minimum_, float _maximum_)::
 
+Specifies the corresponding field should have <<reference/variable-type.html,VariableType>> `Float` and value between _minimum_ and _maximum_.
+
 VariableConstraintAttribute(string[] _values_)::
+
+Specifies the corresponding field should have <<reference/variable-type.html,VariableType>> `String` and value one of the options in _values_.
 
 VariableConstraintAttribute(Type _type_)::
 
-### Public Properties
-
-<<reference/value-definition.html,ValueDefinition>> _Definition_ _(read only)_::
+Specifies the corresponding field should have <<reference/variable-type.html,VariableType>> as determined by <<reference/variable-value.html,VariableValue._GetType_>>.

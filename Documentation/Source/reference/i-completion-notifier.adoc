@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.ICompletionNotifier
 
 ### Description
 
+Implement this interface in a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] subclass to add support for using the behaviour as an _Effect_ for a <<reference/play-effect.html,PlayEffect>> node in a <<reference/instruction-graph.html,graph>>.
+
 ### Public Properties
 
 bool _IsComplete_ _(read only)_ _(abstract)_::
+
+This property should return `true` when the effect has completed.

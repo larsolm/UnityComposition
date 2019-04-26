@@ -6,12 +6,22 @@ PiRhoSoft.CompositionEngine.PlaybackState
 
 ### Description
 
+Used internally be the editor to determine the current execution state of an <<reference/instruction-graph.html,InstructionGraph>>.
+
 ### Values
 
 <<reference/instruction-graph-playback-state.html,PlaybackState>> _Running_::
 
+The graph is running.
+
 <<reference/instruction-graph-playback-state.html,PlaybackState>> _Paused_::
+
+The graph has stopped at a breakpoint.
 
 <<reference/instruction-graph-playback-state.html,PlaybackState>> _Step_::
 
+The graph is running a single node before pausing again.
+
 <<reference/instruction-graph-playback-state.html,PlaybackState>> _Stopped_::
+
+The graph has been manually stopped.

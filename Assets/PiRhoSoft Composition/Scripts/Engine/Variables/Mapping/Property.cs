@@ -6,7 +6,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public abstract class Property
+	internal abstract class Property
 	{
 		public string Name;
 
@@ -176,7 +176,7 @@ namespace PiRhoSoft.CompositionEngine
 		#endregion
 	}
 
-	public class Property<OwnerType> : Property
+	internal class Property<OwnerType> : Property
 	{
 		public Func<OwnerType, VariableValue> Getter;
 		public Func<OwnerType, VariableValue, SetVariableResult> Setter;

@@ -6,42 +6,4 @@ PiRhoSoft.CompositionEngine.NodeData
 
 ### Description
 
-### Static Fields
-
-float _Width_::
-
-float _HeaderHeight_::
-
-float _LineHeight_::
-
-float _FooterHeight_::
-
-### Constructors
-
-NodeData(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_)::
-
-### Public Fields
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/instruction-graph-node-connection-data.html,ConnectionData>>> _Connections_::
-
-### Public Properties
-
-<<reference/instruction-graph-node.html,InstructionGraphNode>> _Node_ _(read only)_::
-
-https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _Bounds_ _(read only)_::
-
-https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Position_::
-
-float _InnerHeight_::
-
-### Public Methods
-
-void ClearConnections()::
-
-void AddConnections(Object _obj_)::
-
-void AddConnection(string _name_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_)::
-
-void AddConnection(string _name_, string _key_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_)::
-
-void AddConnection(string _name_, int _index_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _to_)::
+Stores data about an <<reference/instruction-graph-node.html,InstructionGraphNode>>. This is managed automatically by the editor and does not need to be used in any way.

@@ -5,26 +5,26 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public static class ExpressionLexer
 	{
-		public const string NullConstant = "null";
-		public const string TrueConstant = "true";
-		public const string FalseConstant = "false";
-		public const string PiConstant = "PI";
-		public const string Deg2RadConstant = "Deg2Rad";
-		public const string Rad2DegConstant = "Rad2Deg";
+		internal const string NullConstant = "null";
+		internal const string TrueConstant = "true";
+		internal const string FalseConstant = "false";
+		internal const string PiConstant = "PI";
+		internal const string Deg2RadConstant = "Deg2Rad";
+		internal const string Rad2DegConstant = "Rad2Deg";
 
-		public const string TernaryOperator = "?";
-		public const string CastOperator = VariableReference.Cast;
-		public const string TestOperator = "is";
+		internal const string TernaryOperator = "?";
+		internal const string CastOperator = VariableReference.Cast;
+		internal const string TestOperator = "is";
 
-		public const char StringSymbol = StringVariableHandler.Symbol;
-		public const char ColorSymbol = ColorVariableHandler.Symbol;
-		public const char MemberAccessSymbol = VariableReference.Separator;
-		public const char LookupOpenSymbol = VariableReference.LookupOpen;
-		public const char LookupCloseSymbol = VariableReference.LookupClose;
-		public const char GroupOpenSymbol = '(';
-		public const char GroupCloseSymbol = ')';
-		public const char SeparatorSymbol = ',';
-		public const char AlternationSymbol = ':';
+		internal const char StringSymbol = StringVariableHandler.Symbol;
+		internal const char ColorSymbol = ColorVariableHandler.Symbol;
+		internal const char MemberAccessSymbol = VariableReference.Separator;
+		internal const char LookupOpenSymbol = VariableReference.LookupOpen;
+		internal const char LookupCloseSymbol = VariableReference.LookupClose;
+		internal const char GroupOpenSymbol = '(';
+		internal const char GroupCloseSymbol = ')';
+		internal const char SeparatorSymbol = ',';
+		internal const char AlternationSymbol = ':';
 
 		private const string _sentinelCharacters = ";\n";
 		private const string _operatorCharacters = "+-!^*/%<=>&|?.";

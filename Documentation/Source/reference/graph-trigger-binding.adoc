@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.GraphTriggerBinding : <<reference/variable-binding.h
 
 ### Description
 
+A <<reference/variable-binding.html,VariableBinding>> that runs a <<reference/instruction-graph.html,graph>> when the variable changes. When _UpdateBindings_ is called, _Variable_ will be resolved and compared against its value the last time _UpdateBindings_ was called. If it has changed, _Graph_ will be run unless it is already running. The first time _UpdateBindings_ is called will always result in _Graph_ running.
+
 ### Public Fields
 
 <<reference/instruction-caller.html,InstructionCaller>> _Graph_::
 
+The <<reference/instruction-graph.html,graph>> to run when the value referenced by _Variable_ changes.
+
 <<reference/variable-reference.html,VariableReference>> _Variable_::
+
+The variable to watch for changes.

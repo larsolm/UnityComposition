@@ -8,13 +8,13 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public VariableSchema Schema;
 
-		public override void Write(BinaryWriter writer, IList<Object> objects)
+		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
 			writer.Write(objects.Count);
 			objects.Add(Schema);
 		}
 
-		public override void Read(BinaryReader reader, IList<Object> objects, short version)
+		protected internal override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
 			var index = reader.ReadInt32();
 			Schema = objects[index] as VariableSchema;

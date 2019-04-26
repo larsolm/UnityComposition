@@ -6,30 +6,58 @@ PiRhoSoft.CompositionEngine.ExpressionParser
 
 ### Description
 
+Converts a sequence of <<reference/expression-token.html,ExpressionTokens>> as interpreted by the <<reference/expression-lexer.html,ExpressionLexer>> into an executable <<reference/operation.html,Operation>>.
+
 ### Static Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> Parse(string _input_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/expression-token.html,ExpressionToken>>> _tokens_)::
 
+Performs the conversion. _input_ is the entire source text that was sent to the <<reference/expression-lexer.html,ExpressionLexer>> for use in printing friendly error messages. _tokens_ is the set of tokens interpreted by the <<reference/expression-lexer.html,ExpressionLexer>>. If the tokens cannot be parsed, an <<reference/expression-parse-exception.html,ExpressionParseException>> will be thrown.
+
 void AddCommand(string _name_, <<reference/i-command.html,ICommand>> _command_)::
+
+Associates the name _name_ with _command_. When this name is encountered in an <<reference/expression.html,Expression>> _command_ will be executed. If a <<reference/i-command.html,Command>> has already been added with name _name_ an error will be logged.
 
 void RemoveCommand(string _name_)::
 
+Removes the <<reference/i-command.html,Command>> registered with name _name_. If no <<reference/i-command.html,Command>> has been added with name _name_ an error will be logged.
+
 <<reference/i-command.html,ICommand>> GetCommand(string _name_)::
+
+Returns the <<reference/i-command.html,Command>> that was registered with name _name_, or null if no command has been registered with that name.
 
 void AddPrefixOperator<OperatorType>(string _symbol_)::
 
+Associates the string _symbol_ with the <<reference/prefix-operation.html,PrefixOperation>> _OperatorType_. If a <<reference/prefix-operation.html,PrefixOperation>> has already been registered with _symbol_ an error will be logged.
+
 void AddInfixOperator<OperatorType>(string _symbol_, <<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
+
+Associates the string _symbol_ with the <<reference/infix-operation.html,InfixOperation>> _OperatorType_. If an <<reference/infix-operation.html,PrefixOperation>> has already been registered with _symbol_ an error will be logged.
+
+NOTE: A <<reference/prefix-operation.html,PrefixOperation>> and <<reference/infix-operation.html,InfixOperation>> can be added with the same symbol.
 
 ### Public Methods
 
 <<reference/operation.html,Operation>> ParseLeft(<<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
 
+This should only be called from <<reference/operation.html,Operation.Parse>> implementations to parse the next sequence of tokens with the given _precedence_ using left associativity.
+
 <<reference/operation.html,Operation>> ParseRight(<<reference/operator-precedence.html,OperatorPrecedence>> _precedence_)::
+
+This should only be called from <<reference/operation.html,Operation.Parse>> implementations to parse the next sequence of tokens with the given _precedence_ using right associativity.
 
 string GetText(<<reference/expression-token.html,ExpressionToken>> _token_)::
 
+Gets the text that _token_ was parsed from.
+
 bool HasText(<<reference/expression-token.html,ExpressionToken>> _token_, string _text_)::
+
+Returns `true` if _token_ has the text _text_
 
 bool HasToken(<<reference/expression-token-type.html,ExpressionTokenType>> _type_)::
 
+Returns `true` if the next token in the current parse has type _type_.
+
 void SkipToken(<<reference/expression-token-type.html,ExpressionTokenType>> _type_, string _expected_)::
+
+Skips the next token in the current parse. If the next token does not have type _type_, an <<reference/expression-parse-exception.html,ExpressionParseException>> will be thrown. _expected_ is the text that was expected at the current location and is used to provide a friendlier error message.

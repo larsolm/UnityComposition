@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.VariableDefinition : ValueType
 
 ### Description
 
+Extends a <<reference/value-definition.html,ValueDefinition>> by associating it with a name. All of the heavy lifting for for constraining <<reference/variable-value,VariableValues>> is provided by <<reference/value-definition.html,ValueDefinition>>.
+
 ### Public Fields
 
 string _Name_::
 
+The name of _Definition_.
+
 <<reference/value-definition.html,ValueDefinition>> _Definition_::
+
+The <<reference/value-definition.html,ValueDefinition>> being given _Name_

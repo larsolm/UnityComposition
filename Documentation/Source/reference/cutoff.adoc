@@ -6,16 +6,30 @@ PiRhoSoft.CompositionEngine.Cutoff : <<reference/transition.html,Transition>>
 
 ### Description
 
+Cutoff is an abstract implementation of a <<manual/transition.html,Transition>> that provides a custom https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] with an interface to fade, distort, and dissolve the screen image over time using an input texture. See the <<manual/cutoff.html,manual>> for more information or <<reference/fade.html,Fade>>, <<reference/disolve.html,Dissolve>>, or <<reference/distort.html,Distort>> for an example implementation.
+
 ### Protected Methods
 
 void SetTexture(https://docs.unity3d.com/ScriptReference/Texture2D.html[Texture2D^] _texture_)::
 
+Sets the _TransitionTexture property of the material which is used to lookup the animation properties according to the description in the <<manual/cutoff.html,manual>>.
+
 void SetColor(https://docs.unity3d.com/ScriptReference/Color.html[Color^] _color_)::
+
+Sets the _Color property of the material.
 
 void SetCutoff(float _cutoff_)::
 
+Sets the _Cutoff property of the material which specifies the portion of the texture that is used as the mask based on the current elapsed time.
+
 void SetFade(float _fade_)::
+
+Sets the _Fade property of the material which specifies the interpolated position between the color from the input texture and the value set to _Color.
 
 void SetDistort(bool _distort_)::
 
+Sets the _Distort property which indicates whether or not the material should distort the input texture based on the R and G channels in _TransitionTexture.
+
 void Setup() _(virtual)_::
+
+Override this in subclasses to set additional material properties. The base implementation sets _TransitionTexture to https://docs.unity3d.com/ScriptReference/Texture2D-blackTexture.html[Texture2D.blackTexture], _color to black, and _Distort to false. _Cutoff and _Fade are set in <<reference/transition.html,_Process_>> to the percentage of <<reference/transition.html,_Duration_>> that has elapsed.

@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.InputMessage : <<reference/message-control.html,Mess
 
 ### Description
 
+A <<reference/message-control.html,MessageControl>> implementation that adds support for advancing the message when a button is pressed.
+
 ### Public Fields
 
 string _AcceptButton_::
+
+The name of the button, as used by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^], to advance the message.

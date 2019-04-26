@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.ExpressionEvaluationException : Exception
 
 ### Description
 
+The exception type that is thrown when the evaluation of an <<reference/expression.html,Expression>> fails.
+
 ### Constructors
 
 ExpressionEvaluationException(string _error_)::
 
+Specifies the message that gives more information about why evaluation failed.
+
 ExpressionEvaluationException(string _errorFormat_, Object[] _arguments_)::
+
+Specifies the message that gives more information about why evaluation failed by formatting _errorFormat_ with _arguments_.

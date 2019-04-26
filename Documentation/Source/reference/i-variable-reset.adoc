@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.IVariableReset
 
 ### Description
 
+Implement this interface to add support for the class to be resolved from _Object_ in a <<reference/reset-tag.html,ResetTag>> or <<reference/reset-variables.html,ResetVariables>> <<reference/instruction-graph-node.html,InstructionGraphNode>>. Although there is no restriction on how this interface can be used, it is intended as a way to reset <<reference/variable.html,Variables>> in a <<reference/variable-schema.html,VariableSchema>> based on the <<reference/value-definition.html,ValueDefinition._Tag_>> (with _ResetTag_) or <<reference/variable.html,Variable._Name_>> (with _ResetVariables_).
+
 ### Public Methods
 
 void ResetTag(string _tag_) _(abstract)_::
 
+Called from <<reference/reset-tag.html,ResetTag>> with _tag_ as the tag that should be reset.
+
 void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_) _(abstract)_::
+
+Called from <<reference/reset-variables.html,ResetVariables>> with _variables_ as the list of names that should be reset.

@@ -6,10 +6,16 @@ PiRhoSoft.CompositionEngine.ISchemaOwner
 
 ### Description
 
+Implement this interface on a class that also implements <<reference/i-variable-store.html,IVariableStore>> to indicate to other systems that this store is constrained by a <<reference/variable-schema.html,VariableSchema>>. This is used to improve the editing experience and enable runtime serialization of the store data. The built in classes <<reference/constrained-store.html,ConstrainedStore>>, <<reference/variable-set-component.html,VariableSetComponent>>, and <<reference/variable-set-asset.html,VariableSetAsset>> implement this and should be sufficient for most use cases.
+
 ### Public Properties
 
 <<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_ _(abstract)_::
 
+The <<reference/variable-schema.html,VariableSchema>> that is constraining this store.
+
 ### Public Methods
 
 void SetupSchema() _(abstract)_::
+
+This method should apply the schema to the store.

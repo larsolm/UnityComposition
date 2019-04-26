@@ -10,7 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
-		[Tooltip("The target Behaviour to enable")]
+		[Tooltip("The target Behaviour or Renderer to enable")]
 		[VariableConstraint(typeof(Behaviour))]
 		public VariableReference Target = new VariableReference();
 
@@ -20,6 +20,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (ResolveObject(variables, Target, out Behaviour behaviour))
 				behaviour.enabled = true;
+			else if (ResolveObject(variables, Target, out Renderer renderer))
+				renderer.enabled = true;
 
 			graph.GoTo(Next, nameof(Next));
 

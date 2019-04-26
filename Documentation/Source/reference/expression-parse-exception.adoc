@@ -6,12 +6,20 @@ PiRhoSoft.CompositionEngine.ExpressionParseException : Exception
 
 ### Description
 
+The exception type thrown by the <<reference/expression-parser.html,ExpressionParser>> or parsed <<reference/operation.html,Operations>> when encountering an error during parsing.
+
 ### Constructors
 
 ExpressionParseException(<<reference/expression-token.html,ExpressionToken>> _token_, string _error_)::
 
+Specifies _token_ as the token that caused the error and sets the exception message to _error_.
+
 ExpressionParseException(<<reference/expression-token.html,ExpressionToken>> _token_, string _errorFormat_, Object[] _arguments_)::
+
+Specifies _token_ as the token that caused the error and sets the exception message to _errorFormat_ formatted with _arguments_.
 
 ### Public Fields
 
 <<reference/expression-token.html,ExpressionToken>> _Token_::
+
+The token at which the error was encountered.

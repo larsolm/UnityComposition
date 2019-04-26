@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.ILoopNode
 
 ### Description
 
+Add this interface to a custom <<reference/instruction-graph-node.html,InstructionGraphNode>> to inform an <<reference/instruction-graph.html,InstructionGraph>> that the node should be run repeatedly. The graph will continue to run the node until the node does not call <<reference/instruction-graph.html,GoTo>> or a <<reference/break-node.html,BreakNode>> is encountered.

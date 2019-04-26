@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.EnableGraphTrigger : <<reference/instruction-trigger
 
 ### Description
 
+Enable Graph Trigger is an <<reference/instruction-trigger.html,InstructionTrigger>> that will run <<reference/instruction-trigger.html,_Graph_>> when this object becomes enabled.

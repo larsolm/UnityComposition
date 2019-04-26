@@ -6,12 +6,22 @@ PiRhoSoft.CompositionEngine.ExpressionCompilationResult
 
 ### Description
 
+Provides the information for the result of compiling an <<reference/expression.html,Expression>>.
+
 ### Public Fields
 
 bool _Success_::
 
+`true` if the <<reference/expression.html,Expression>> was compiled successfully.
+
 int _Location_::
+
+If compilation failed, the index in the source text where the error was encountered.
 
 string _Token_::
 
+If compilation failed, the text of the token in the source text where the error was encountered.
+
 string _Message_::
+
+If compilation failed, a message giving details about why it failed.

@@ -1,11 +1,6 @@
 ﻿namespace PiRhoSoft.CompositionEngine
 {
-	public interface IVariableListener
-	{
-		void VariableChanged(int index, VariableValue value);
-	}
-
-	public class VariableListener : IMappedVariableList
+	internal class VariableListener : IMappedVariableList
 	{
 		private IVariableListener _listener;
 		private IMappedVariableList _list;

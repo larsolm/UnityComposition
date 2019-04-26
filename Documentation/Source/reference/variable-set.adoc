@@ -2,7 +2,7 @@
 
 ## VariableSet
 
-PiRhoSoft.CompositionEngine.VariableSet : <<reference/i-variable-reset.html,IVariableReset>>, <<reference/i-mapped-variable-list.html,IMappedVariableList>>
+PiRhoSoft.CompositionEngine.VariableSet : <<reference/i-variable-reset.html,IVariableReset>>
 
 ### Description
 

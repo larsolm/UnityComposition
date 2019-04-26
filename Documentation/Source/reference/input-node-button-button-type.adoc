@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.ButtonType
 
 ### Description
 
+Defines the available input types for an <<reference/input-node-button.html,InputNodeButton>> in an <<reference/input-node.html,InputNode>>.
+
 ### Values
 
 <<reference/input-node-button-button-type.html,ButtonType>> _Axis_::
 
+The <<reference/input-node-button.html,InputNodeButton._Name_>> refers to the name of an axis.
+
 <<reference/input-node-button-button-type.html,ButtonType>> _Button_::
 
+The <<reference/input-node-button.html,InputNodeButton._Name_>> refers to the name of a button.
+
 <<reference/input-node-button-button-type.html,ButtonType>> _Key_::
+
+The <<reference/input-node-button.html,InputNodeButton._Key_>> is used instead of <<reference/input-node-button.html,InputNodeButton._Name_>>.

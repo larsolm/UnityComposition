@@ -6,50 +6,22 @@ PiRhoSoft.CompositionEngine.ExpressionLexer
 
 ### Description
 
-### Static Fields
-
-string _NullConstant_::
-
-string _TrueConstant_::
-
-string _FalseConstant_::
-
-string _PiConstant_::
-
-string _Deg2RadConstant_::
-
-string _Rad2DegConstant_::
-
-string _TernaryOperator_::
-
-string _CastOperator_::
-
-string _TestOperator_::
-
-Char _StringSymbol_::
-
-Char _ColorSymbol_::
-
-Char _MemberAccessSymbol_::
-
-Char _LookupOpenSymbol_::
-
-Char _LookupCloseSymbol_::
-
-Char _GroupOpenSymbol_::
-
-Char _GroupCloseSymbol_::
-
-Char _SeparatorSymbol_::
-
-Char _AlternationSymbol_::
+The ExpressionLexer converts <<reference/expression.html,Expression>> statements into a series of tokens for processing by the <<reference/expression-parser.html,ExpressionParser>>. <<reference/expression.html,Expression>> handles this process automatically.
 
 ### Static Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/expression-token.html,ExpressionToken>>> Tokenize(string _input_)::
 
+Converts _input_ into a list of <<reference/expression-token.html,tokens>> that can then be processed by the <<reference/expression-parser.html,ExpressionParser>>. This method will always succesfully convert _input_, with any unknown character sequences being given <<reference/expression-token-type.html,ExpressionTokenType>> `Unknown`. It is the responsibility of the <<reference/expression-parser.html,ExpressionParser>> to report these errors as well as errors for invalid token sequences.
+
 void AddConstant(string _text_, <<reference/variable-value.html,VariableValue>> _value_)::
+
+Adds the string _text_ as a sequence of characters the lexer should identify as a `Constant` <<reference/expression-token.html,token>> that is always <<reference/expression-parser.html,parser>> as <<reference/variable-value.html,VariableValue>> _value_.
 
 void AddKeyword(string _text_)::
 
+Adds the string _text_ as a sequence of characters the lexer should identify as an `Operator` <<reference/expression-token.html,token>>. The <<reference/expression-parser.html,parser>> should be given an operator with _symbol_ _text_ using <<reference/expression-parser.html,AddPrefixOperator>> or <<reference/expression-parser.html,AddInfixOperator>> to define the functionality for the keyword.
+
 <<reference/variable-value.html,VariableValue>> GetConstant(string _text_)::
+
+Returns the <<reference/variable-value.html,VariableValue>> that was assigned to _text_ using _AddConstant_.

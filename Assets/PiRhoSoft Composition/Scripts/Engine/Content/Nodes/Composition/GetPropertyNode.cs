@@ -23,8 +23,8 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The reference to store the retreived value in")]
 		public VariableReference Output = new VariableReference();
 
-		public string TargetTypeName;
-		public string PropertyName;
+		[SerializeField] private string TargetTypeName;
+		[SerializeField] private string PropertyName;
 
 		public Type TargetType { get; set; }
 		public FieldInfo Field { get; set; }
