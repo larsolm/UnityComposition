@@ -2,13 +2,15 @@
 
 ## Text Input Binding
 
+Text Input Binding is a <<manual/variable-binding.html,Variable Binding>> that will receive input on a sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshProInputField^] component assign the text to the <<reference/variable-reference.html,VariableReference>>, _Variable_. This is a two-way binding so if `UpdateBindings()` is called on this <<manual/variable-binding.html,Variable Binding>>, then the displayed text will also be updated.
+
 ### Fields
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Variable	| 
+| Variable	| The <<reference/variable-reference.html,VariableReference>> to retrieve/set the input field's text on
 |===
 
 ifdef::backend-multipage_html5[]

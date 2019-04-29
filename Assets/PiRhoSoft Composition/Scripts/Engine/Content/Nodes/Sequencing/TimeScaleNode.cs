@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Sequencing/TimeScale", 250)]
+	[CreateInstructionGraphNodeMenu("Sequencing/Time Scale", 250)]
 	[HelpURL(Composition.DocumentationUrl + "time-scale-node")]
 	public class TimeScaleNode : InstructionGraphNode
 	{

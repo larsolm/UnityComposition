@@ -69,6 +69,7 @@ MonoBehaviour:
     - {fileID: 114465621572967356}
     - {fileID: 114161050808359334}
     - {fileID: 114192279811104960}
+    - {fileID: 114083304737513370}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114016950435173752}
   Process: {fileID: 114364025646214274}
@@ -174,6 +175,33 @@ MonoBehaviour:
     - Type: 0
       Text: fighter
   Loop: {fileID: 114774129968821760}
+--- !u!114 &114083304737513370
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 91cbdf058e045254c97719e3ffd4d53b, type: 3}
+  m_Name: Play Animation State
+  m_EditorClassIdentifier: 
+  Name: Play Animation State
+  GraphPosition: {x: 1305.6, y: -256}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Animator:
+    _variable: player
+    _tokens:
+    - Type: 0
+      Text: player
+  State:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: Idle
 --- !u!114 &114090214110672374
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -337,9 +365,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Reset Sorted
+  m_Name: Reset Sorted Fighters
   m_EditorClassIdentifier: 
-  Name: Reset Sorted
+  Name: Reset Sorted Fighters
   GraphPosition: {x: 1497.6, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114465621572967356}
@@ -1113,9 +1141,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
-  m_Name: Turn Sequnece
+  m_Name: Turn Sequence
   m_EditorClassIdentifier: 
-  Name: Turn Sequnece
+  Name: Turn Sequence
   GraphPosition: {x: 1164.8, y: 38.4}
   IsBreakpoint: 0
   Sequence:
