@@ -6,18 +6,28 @@ PiRhoSoft.CompositionEngine.MessageControl : <<reference/interface-control.html,
 
 ### Description
 
+Displays text on a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component. Use this https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] directly to hide the control programmatically (or with a <<reference/message-node.html>>. To add support for dismissing this <<reference/interface-control.html,InterfaceControl>> with a button press, use <<reference/input-message.html,InputMessage>>.
+
 ### Public Fields
 
-TMP_Text _DisplayText_::
+http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] _DisplayText_::
+
+The http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component that the text will be displayed on. This component will be enabled and disabled along with this MessageControl.
 
 ### Public Properties
 
 bool _IsRunning_ _(read only)_::
 
+Returns `true` when this MessageControl is displaying text.
+
 ### Public Methods
 
 void Show(string _text_)::
 
+Activates the MessageControl if necessary, sets _text_ on _DisplayText_, and enables _DisplayText_. If this is called a second time before it is hidden, the text will simply be replaced and the control will continue to function as normal.
+
 ### Protected Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::
+
+Implement this method in a subclass to add support for custom input handling. This base implementation has no functionality.

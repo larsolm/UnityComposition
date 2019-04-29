@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.NumberBinding : <<reference/string-binding.html,Stri
 
 ### Description
 
+Sets the text of a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component to a formatted number.
+
 ### Public Fields
 
 <<reference/binding-formatter.html,BindingFormatter>> _Format_::
 
+Specifies how the number in _Variable_ should be interpreted and formatted when converting it to a string.
+
 <<reference/variable-reference.html,VariableReference>> _Variable_::
+
+The <<reference/variable-reference.html,VariableReference>> containing the `Int` or `Float` <<reference/variable-value.html,VariableValue>> that will be formatted and applied when the binding is updated.

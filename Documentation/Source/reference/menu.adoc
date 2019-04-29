@@ -6,54 +6,100 @@ PiRhoSoft.CompositionEngine.Menu : https://docs.unity3d.com/ScriptReference/Mono
 
 ### Description
 
+Implements the functionality for managing a list of <<reference/menu-item.html,MenuItems>>. Input is handled by adding a <<reference/menu-input.html,MenuInput>> behaviour as a sibling of this behaviour. <<reference/menu-item.html,MenuItems>> can be added directly as children in the editor or at runtime, or by using the <<reference/list-binding.html,ListBinding>>. Additionally, this can be used with a <<reference/selection-control.html,SelectionControl>> to automate the process of selecting from a menu in an <<reference/instruction-graph.html,InstructionGraph>>.
+
 ### Public Fields
 
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemAdded_::
 
+Subscribe to this callback to receive a notification any time a <<reference/menu-item.html,MenuItem>> is added to this menu.
+
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemRemoved_::
+
+Subscribe to this callback to receive a notification any time a <<reference/menu-item.html,MenuItem>> is removed from this menu.
 
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemMoved_::
 
+Subscribe to this callback to receive a notification any time a <<reference/menu-item.html,MenuItem>>'s position in the menu changes.
+
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemBlurred_::
+
+Subscribe to this callback to receive a notification any time a <<reference/menu-item.html,MenuItem>> loses focus.
 
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemFocused_::
 
+Subscribe to this callback to receive a notification any time a <<reference/menu-item.html,MenuItem>> gains focus.
+
 Action<<<reference/menu-item.html,MenuItem>>> _OnItemSelected_::
 
+Subscribe to this callback to receive a notification any time a <<reference/menu-item.html,MenuItem>> is selected.
+
 Action _OnCancelled_::
+
+Subscribe to this callback to receive a notification any time the menu is closed without a selection being made.
 
 ### Public Properties
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/menu-item.html,MenuItem>>> _Items_ _(read only)_::
 
+The items that are in the menu.
+
 <<reference/menu-item.html,MenuItem>> _FocusedItem_::
 
+The item that has focus.
+
 int _FocusedIndex_::
+
+The index of the item that has focus.
 
 ### Public Methods
 
 void SelectItem(<<reference/menu-item.html,MenuItem>> _item_)::
 
+Selects _item_. The result of an item being selected is only that _OnItemSelected_ will be triggered. Selection is most commonly used indirectly through a <<reference/selection-control.html,SelectionControl>>.
+
 void Cancel()::
+
+Triggers _OnCancelled_ with no other effect.
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::
 
+Returns the names of the <<reference/variables.html,Variables>> exposed by this <<reference/i-variable-store.html,IVariableStore>>. These are `"FocusedItem"` and `"FocusedIndex"`.
+
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
 
+Returns the variable with name _name_.
+
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
+
+Sets the value of the variable with _name_ to _value_.
 
 ### Protected Methods
 
 void ItemAdded(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 
+Called when a <<reference/menu-item.html,MenuItem>> (_item_) is added to the menu. The base implementation triggers _OnItemAdded_.
+
 void ItemRemoved(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
+
+Called when a <<reference/menu-item.html,MenuItem>> (_item_) is removed from the menu. The base implementation triggers _OnItemRemoved_.
 
 void ItemMoved(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 
+Called when a <<reference/menu-item.html,MenuItem>> (_item_)'s position ith menu changes. The base implementation triggers _OnItemMoved_.
+
 void ItemFocused(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
+
+Called when a <<reference/menu-item.html,MenuItem>> (_item_) gains focus. The base implementation triggers _OnItemFocused_.
 
 void ItemBlurred(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 
+Called when a <<reference/menu-item.html,MenuItem>> (_item_) loses focus. The base implementation triggers _OnItemBlurred_.
+
 void ItemSelected(<<reference/menu-item.html,MenuItem>> _item_) _(virtual)_::
 
+Called when a <<reference/menu-item.html,MenuItem>> (_item_) is selected. The base implementation triggers _OnItemSelected_.
+
 void Cancelled() _(virtual)_::
+
+Called when the menu is cancelled. The base implementation triggers _OnCancelled_.

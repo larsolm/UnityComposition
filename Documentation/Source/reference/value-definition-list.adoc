@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.ValueDefinitionList : link:/projects/unity-utilities
 
 ### Description
 
+A serializable list of <<reference/value-definition.html,ValueDefinitions>>.

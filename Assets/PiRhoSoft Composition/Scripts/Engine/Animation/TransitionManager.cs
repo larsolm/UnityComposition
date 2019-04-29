@@ -50,7 +50,7 @@ namespace PiRhoSoft.CompositionEngine
 			_target = null;
 		}
 
-		public void AddRenderer(TransitionRenderer renderer)
+		internal void AddRenderer(TransitionRenderer renderer)
 		{
 			if (!_renderers.Contains(renderer))
 				_renderers.Add(renderer);
@@ -58,7 +58,7 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarning(_invalidAddWarning, renderer);
 		}
 
-		public void RemoveRenderer(TransitionRenderer renderer)
+		internal void RemoveRenderer(TransitionRenderer renderer)
 		{
 			if (!_renderers.Remove(renderer))
 				Debug.LogWarning(_invalidRemoveWarning, renderer);

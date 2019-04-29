@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.SortConditionList : link:/projects/unity-utilities/d
 
 ### Description
 
+The list of <<reference/variable-reference.html,VariableReferences>> used as conditions for a <<reference/sort-node.html,SortNode>>.

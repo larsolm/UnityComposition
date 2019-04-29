@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.ObjectVariableConstraint : <<reference/variable-cons
 
 ### Description
 
+A <<reference/variable-constraint.html,VariableConstraint>> for `Object` <<reference/variable-values.html,VariableValues>> that restricts the value to a specific type.
+
 ### Public Fields
 
 Type _Type_::
+
+The type the object must be or be derived from.

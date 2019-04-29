@@ -6,50 +6,82 @@ PiRhoSoft.CompositionEngine.SelectionControl : <<reference/interface-control.htm
 
 ### Description
 
+A <<reference/interface-control.html,InterfaceControl>> used with a <<reference/menu.html,Menu>> to allow a <<reference/menu-item.html,MenuItem>> to be selected.
+
 ### Public Properties
 
 bool _IsRunning_ _(read only)_::
 
+This will be `true` when a selection is in progress.
+
 bool _IsSelectionRequired_ _(read only)_::
+
+This will be `true` if the current selection requires an item to be selected.
 
 bool _IsClosing_ _(read only)_::
 
+This will be `true` when the selection will be closed on the next frame.
+
 bool _HasFocusedItem_ _(read only)_::
+
+This will be `true` when the <<reference/menu.html,Menu>> has a focused <<reference/menu-item.html,MenuItem>>.
 
 bool _HasSelectedItem_ _(read only)_::
 
+This will be `true` when a selection has been made.
+
 <<reference/menu-item.html,MenuItem>> _FocusedItem_ _(read only)_::
+
+The <<reference/menu-item.html,MenuItem>> that currently has focus, or `null` if there is no focused item.
 
 int _FocusedIndex_ _(read only)_::
 
+The index of the <<reference/menu-item.html,MenuItem>> that currently has focus, or `-1` if there is no focused item.
+
 <<reference/variable-value.html,VariableValue>> _FocusedValue_ _(read only)_::
+
+The value associated with the <<reference/menu-item.html,MenuItem>> that currently has focus, or `VariableValue.Empty` if there is no focused item.
 
 <<reference/menu-item.html,MenuItem>> _SelectedItem_ _(read only)_::
 
+The <<reference/menu-item.html,MenuItem>> that has been selected, or `null` if no selection has been made.
+
 int _SelectedIndex_ _(read only)_::
 
+The index of the <<reference/menu-item.html,MenuItem>> that has been selected, or `-1` if no selection has been made.
+
 <<reference/variable-value.html,VariableValue>> _SelectedValue_ _(read only)_::
+
+The value associated with the <<reference/menu-item.html,MenuItem>> that has been selected, or `VariableValue.Empty` if no selection has been made.
 
 ### Public Methods
 
 void Show(<<reference/i-variable-store.html,IVariableStore>> _variables_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<<<reference/menu-item-template.html,MenuItemTemplate>>> _items_, bool _isSelectionRequired_, bool _resetIndex_)::
 
+Show _items_ on the sibling <<reference/menu.html,Menu>>. This will start a https://docs.unity3d.com/Manual/Coroutines.html[coroutine^] that waits for a selection to be made. If _isSelectionRequired_ is `true`, the <<reference/menu.html,Menu>> will be required to have a selection made. If _resetIndex_ is `true`, the <<reference/menu.html,Menu's>> focus will be set to the first item, otherwise the focus will not change. _variables_ is used with _items_ to resolve any <<reference/variable-reference.html,VariableReferences>>.
+
 void Select(<<reference/menu-item.html,MenuItem>> _item_)::
+
+Makes _item_ the selected item and closes the menu.
 
 void Close()::
 
-### Protected Fields
-
-<<reference/menu.html,Menu>> __menu_::
-
-<<reference/menu-item.html,MenuItem>> __selectedItem_::
+Closes the menu. If _IsSelectionRequired_ is `true`, this will only succeed if a selection has been made.
 
 ### Protected Methods
 
 https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] GetItemParent() _(virtual)_::
 
+Implement this in subclasses to specify the https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] that created items should be added to. By default this is the https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] of this object.
+
 void OnInitialize() _(virtual)_::
+
+Implement this in subclasses to perform setup when _Show_ is called after the items have been created and menu has been set up.
 
 void OnCreate() _(virtual)_::
 
+Implement this in subclasses to perform setup when _Show_ is called after the items have been created but before the menu has been set up.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::
+
+Implement this in subclasses to perform custom handling for waiting for a selection. The default implementation will do nothing but yield until the control closes.

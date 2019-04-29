@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.SetBindingNode : <<reference/instruction-graph-node.
 
 ### Description
 
+Changes the _Value_ for a <<reference/binding-root.html,BindingRoot>>.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
 <<reference/variable-reference.html,VariableReference>> _Object_::
 
+The <<reference/binding-root.html,BindingRoot>> to change _Value_ on.
+
 <<reference/variable-reference.html,VariableReference>> _Binding_::
+
+The <<reference/i-variable-store.html,IVariableStore>> to set as the _Value_ on _Object_.

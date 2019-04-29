@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.ShuffleNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
+Shuffles the <<reference/variable-value.html,VariableValues>> in an <<reference/i-variable-list.html,IVariableList>>.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
 <<reference/variable-reference.html,VariableReference>> _Variable_::
+
+The <<reference/i-variable-list.html,IVariableList>> to shuffle.

@@ -6,54 +6,100 @@ PiRhoSoft.CompositionEngine.InstructionStore : <<reference/i-variable-store.html
 
 ### Description
 
+The <<reference/i-variable-store.html,IVariableStore>> used with <<reference/instruction-graph.html,InstructionGraphs>> to provide a robust interface for accessing and isolating variables for use by <<reference/instruction-graph-node.html,nodes>>. When using an <<reference/instruction-caller.html,InstructionCaller>> all management of the store will be handled automatically including creation of the store, reading input variables, and writing output variables. 
+
 ### Static Fields
 
 string _InputStoreName_::
 
+The name used to access the _Input_ store from a <<reference/variable-reference.html,VariableReference>> or <<reference/expression.html,Expression>>. This is set to `"input"`.
+
 string _OutputStoreName_::
 
+The name used to access the _Output_ store from a <<reference/variable-reference.html,VariableReference>> or <<reference/expression.html,Expression>>. This is set to `"output"`.
+
 string _LocalStoreName_::
+
+The name used to access the _Local_ store from a <<reference/variable-reference.html,VariableReference>> or <<reference/expression.html,Expression>>. This is set to `"local"`.
 
 ### Static Methods
 
 bool IsInput(<<reference/variable-reference.html,VariableReference>> _variable_)::
 
+Determines if _variable_ reads from the _Input_ store. This can be used from overridden implementations of _GetInputs_ in rare cases where the default implementation isn't sufficient.
+
 bool IsOutput(<<reference/variable-reference.html,VariableReference>> _variable_)::
+
+Determines if _variable_ writes to the _Output_ store. This can be used from overridden implementations of _GetOutputs_ in rare cases where the default implementation isn't sufficient.
 
 bool IsInput(<<reference/instruction-input.html,InstructionInput>> _input_)::
 
+Determines if _input_ reads from the _Input_ store. This can be used from overridden implementations of _GetInputs_ in rare cases where the default implementation isn't sufficient.
+
 bool IsOutput(<<reference/instruction-output.html,InstructionOutput>> _output_)::
+
+Determines if _inputs_ writes to the _Output_ store. This can be used from overridden implementations of _GetOutputs_ in rare cases where the default implementation isn't sufficient.
 
 ### Constructors
 
 InstructionStore(<<reference/instruction.html,Instruction>> _instruction_, <<reference/variable-value.html,VariableValue>> _context_)::
 
+Creates an InstructionStore that will be used with _instruction_, validates _context_ with <<reference/instruction.html,_instruction_._ContextDefinition_>> and sets it to _Context_. _context_ is not required (it can be <<reference/varibale-value.html,VariableValue._Empty_>>) but usually holds the object that execution of _instruction_ is initiated from.
+
 ### Public Properties
 
 string _ContextName_ _(read only)_::
 
+The name used to access the _Context_ from a <<reference/variable-reference.html,VariableReference>> or <<reference/expression.html,Expression>>.
+
 <<reference/variable-value.html,VariableValue>> _Context_ _(read only)_::
+
+The value sent as _context_ in the InstructionStore constructor.
 
 <<reference/variable-store.html,VariableStore>> _Input_ _(read only)_::
 
+The variable store, accessed with _InputStoreName_, that holds variables passed from the <<reference/instruction-caller.html,caller>>. <<reference/variable.html,Variables>> in this store can be accessed and changed, but new <<reference/variable.html,variables>> cannot be added.
+
 <<reference/variable-store.html,VariableStore>> _Output_ _(read only)_::
+
+The variable store, accessed with _OutputStoreName_, that holds variables set by the instruction and returned to the <<reference/instruction-caller.html,caller>>. <<reference/variable.html,Variables>> in this store can be accessed and changed, but new <<reference/variable.html,variables>> cannot be added. The store will be pre-populated with variables specified as _Outputs_ on the <<reference/instruction-caller.html,caller>>.
 
 <<reference/variable-store.html,VariableStore>> _Local_ _(read only)_::
 
+The variable store, accessed with _LocalStoreName_, that holds variables that are isolated to the execution of the _instruction_ this store was created with. When execution begins, this store will be empty, but variables can be added or changed on this store at any time without affecting any other stores.
+
+NOTE: It is not required to use _LocalStoreName_ when accessing the local store but it can improve readability or resolve ambiguities in some cases.
+
 <<reference/variable-store.html,VariableStore>> _Global_ _(read only)_::
 
+The variable store, accessed with _GlobalStoreName_, that shares variables between all <<reference/instruction-graph.html,InstructionGraphs>>, <<reference/instruction-graph-node.html,InstructionGraphNodes>>, and <<reference/variable-binding.html,VariableBindings>>. Variables can be added or changed on this store at any time and those changes will be available to any other location that has access to the global store. From code, the global store is available at <<reference/composition-manager.html,CompositionManager.Instance._GlobalStore_>>.
+
 <<reference/scene-variable-store.html,SceneVariableStore>> _Scene_ _(read only)_::
+
+The variable store, accessed with _SceneStoreName_, that provides access to https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] in any currently loaded scene by name. From code, the scene store is available at <<reference/composition-manager.html,CompositionManager.Instance._SceneStore_>>.
 
 ### Public Methods
 
 void WriteInputs(<<reference/instruction-caller.html,InstructionCaller>> _instruction_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-input.html,InstructionInput>>> _inputs_, <<reference/i-variable-store.html,IVariableStore>> _caller_)::
 
+Takes each of the <<reference/instruction-input.html,InstructionInputs>> from _inputs_, resolves them using _caller_ if they are <<reference/variable-reference.html,VariableReferences>>, and adds them to the _Input_ store.
+
 void WriteOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _outputs_)::
+
+Takes each of the <<reference/instruction-output.html,InstructionOutputs>> from _outputs_ and adds them to the _Output_ store.
 
 void ReadOutputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _outputs_, <<reference/i-variable-store.html,IVariableStore>> _caller_)::
 
+Takes each of the <<reference/instruction-output.html,InstructionOutputs>> from _outputs_ and resolves them using this store if they are <<reference/variable-reference.html,VariableReferences>>, and adds them to _caller_.
+
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
+
+Returns the value of the variable with name _name_ on this store. If _name_ is not found, the _Local_ store will be searched.
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
+Each of the names exposed by this store are read only, but if _name_ is unrecognized, this will attempt to set _value_ on the _Local_ store.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::
+
+Returns the names of all variables exposed by this store. This is _InputStoreName_, _OutputStoreName_, _LocalStoreName_, CompositionManager._GlobalStoreName_, CompositionManager._SceneStoreName_, and _ContextName_.

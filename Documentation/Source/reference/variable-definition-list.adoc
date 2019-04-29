@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.VariableDefinitionList : link:/projects/unity-utilit
 
 ### Description
 
+A serializable list of <<reference/variable-definition.html,VariableDefinitions>>.

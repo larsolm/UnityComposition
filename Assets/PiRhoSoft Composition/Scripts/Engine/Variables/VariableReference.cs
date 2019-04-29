@@ -153,7 +153,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Parsing
 
-		public enum VariableTokenType
+		private enum VariableTokenType
 		{
 			Name,
 			Number,
@@ -161,7 +161,7 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 		[Serializable]
-		public class VariableToken
+		private class VariableToken
 		{
 			public VariableTokenType Type;
 			public string Text;

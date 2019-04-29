@@ -6,36 +6,68 @@ PiRhoSoft.CompositionEngine.VariableSet : <<reference/i-variable-reset.html,IVar
 
 ### Description
 
+Holds a serializable list of <<reference/variable.html,Variables>> that are defined by a <<reference/variable-schema.html,VariableSchema>>. This is most often used with a <<reference/mapped-variable-store.html,MappedVariableStore>>.
+
 ### Public Properties
 
 <<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_::
 
+The <<reference/variable-schema.html,VariableSchema>> that defines the <<reference/variable.html,Variables>> in the set.
+
 <<reference/i-variable-store.html,IVariableStore>> _Owner_ _(read only)_::
+
+The <<reference/i-variable-store.html,IVariableStore>> that this is a member of.
 
 bool _NeedsUpdate_ _(read only)_::
 
+This will be `true` if _Schema_ has changed since the last time this set was updated.
+
 int _VariableCount_ _(read only)_::
+
+The number of <<reference/variable.html,Variables>> in the set.
 
 ### Public Methods
 
 void LoadFrom(<<reference/variable-set.html,VariableSet>> _variables_, string _tag_)::
 
+Copy all the <<reference/variable.html,Variables>> in _variables_ with _Tag_ _tag_ into this set. This is for runtime persistence of game state.
+
 void SaveTo(<<reference/variable-set.html,VariableSet>> _variables_, string _tag_)::
+
+Copy all the <<reference/variable.html,Variables>> in this set with _Tag_ _tag_ into _variables_. This is for runtime persistence of game state.
 
 void Setup(<<reference/variable-schema.html,VariableSchema>> _schema_, <<reference/i-variable-store.html,IVariableStore>> _owner_)::
 
+Associate this set with _schema_ and _owner_. If _schema_ has changed since the last time this was called, the <<reference/variable.html,Variables>> will be updated.
+
 void Update()::
+
+This is an editor support function and can be ignored.
 
 void Reset(int _index_)::
 
+Resets the <<reference/variable.html,Variable>> at _index_ to its default value defined in _Schema_.
+
 void Clear()::
+
+Disassociates this set with _Schema_ and _Owner_ and removes all its <<reference/variable.html,Variables>>.
 
 string GetVariableName(int _index_)::
 
+Returns the name of the <<reference/variable.html,Variable>> at index _index_.
+
 <<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_)::
+
+Returns the <<reference/variable_value.html,VariableValue>> of the <<reference/variable.html,Variable>> at index _index_
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_)::
 
+Sets the <<reference/variable-value.html,VariableValue>> of the <<reference/variable.html,Variable>> at index _index_ to _value_.
+
 void ResetTag(string _tag_)::
 
+Resets all <<reference/variable.html,Variables>> with _Tag_ _tag_ to their default value defined in _Schema_.
+
 void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_)::
+
+Resets all <<reference/variable.html,Variables>> in _variables_ to their default value defined in _Schema_.

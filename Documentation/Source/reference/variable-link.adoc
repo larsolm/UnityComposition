@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.VariableLink : https://docs.unity3d.com/ScriptRefere
 
 ### Description
 
+Adds a custom set of <<reference/variable.html,Variables>> to <<reference/composition-manager.html,CompositionManager._Global_>>.
+
 ### Public Fields
 
 <<reference/variable-pool.html,VariablePool>> _Variables_::
+
+The <<reference/variable.html,Variables>> to add to <<reference/composition-manager.html,CompositionManager._Global_>> while this https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] is enabled.

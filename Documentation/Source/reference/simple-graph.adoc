@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.SimpleGraph : <<reference/instruction-graph.html,Ins
 
 ### Description
 
+A basic <<reference/instruction-graph.html,InstructionGraph>> with a single branch.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Process_::
+
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this graph runs.

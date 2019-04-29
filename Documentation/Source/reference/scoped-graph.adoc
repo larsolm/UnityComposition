@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.ScopedGraph : <<reference/instruction-graph.html,Ins
 
 ### Description
 
+An <<reference/instruction-graph.html,InstructionGraph>> with an entry branch, a main branch, and an exit branch. These branches will run in sequence but for organization purposes it is useful to think of _Enter_ as a setup branch and _Exit_ a cleanup branch that reverses any changes made in _Enter_.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Enter_::
 
+The branch that will run when the <<reference/instruction-graph.html,InstructionGraph>> is first run.
+
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Process_::
 
+The branch that will run after _Enter_ has completed.
+
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Exit_::
+
+The branch that will run after _Process_ has completed.

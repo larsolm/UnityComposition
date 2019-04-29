@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.ObjectVariableSource : <<reference/variable-source-1
 
 ### Description
 
+A <<reference/variable-source.html,VariableSource>> for `Object` <<reference/variable-values.html,VariableValues>>

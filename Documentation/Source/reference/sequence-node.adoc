@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.SequenceNode : <<reference/instruction-graph-node.ht
 
 ### Description
 
+Runs a set of <<reference/instruction-graph-node.html,InstructionGraphNodes>> one after the other.
+
 ### Public Fields
 
 <<reference/instruction-graph-node-list.html,InstructionGraphNodeList>> _Sequence_::
+
+The list of <<reference/instruction-graph-node.html,InstructionGraphNodes>> to run.

@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.TextBinding : <<reference/string-binding.html,String
 
 ### Description
 
+Sets the text of a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component to a string value.
+
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
+
+The <<reference/variable-reference.html,VariableReference>> containing the <<reference/variable-value.html,VariableValue>> that will be converted to a string and applied when the binding is updated. To perform custom formatting for `Int` or `Float` <<reference/variable-value.html,VariableValues>> use <<reference/number-binding.html,NumberBinding>>.

@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public abstract class InstructionGraph : Instruction
 	{
-		public const string _processFailedError = "(CCIGPF) Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator";
+		private const string _processFailedError = "(CCIGPF) Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator";
 
 		[Tooltip("The list of all nodes in this graph")]
 		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyText = "Use the Instruction Graph Window to add nodes to this graph")]
@@ -21,7 +21,6 @@ namespace PiRhoSoft.CompositionEngine
 		private bool _shouldBreak = false;
 
 		public InstructionGraphNodeList Nodes => _nodes; // _nodes is private with a getter so it isn't found by node data reflection
-		public InstructionStore Store => _rootStore;
 
 		protected override void GetInputs(IList<VariableDefinition> inputs)
 		{

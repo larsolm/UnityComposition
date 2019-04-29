@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.WritableStore : <<reference/variable-store.html,Vari
 
 ### Description
 
+An <<reference/i-variable-store.html,IVariableStore>> implementation that disallows contained <<reference/variable-value.html,VariableValues>> to be added. <<reference/variable.html,Variables>> that already exist in the store can have their value changed.

@@ -6,26 +6,44 @@ PiRhoSoft.CompositionEngine.Transition : https://docs.unity3d.com/ScriptReferenc
 
 ### Description
 
+The base class for assets that perform postprocessing of the rendered scene over a time period.
+
 ### Public Fields
 
 float _Duration_::
+
+The time in seconds the transition should last.
 
 ### Public Methods
 
 void Begin(<<reference/transition-phase.html,TransitionPhase>> _phase_) _(virtual)_::
 
+Implement this to setup properties when the transition is started.
+
 void Process(float _time_, <<reference/transition-phase.html,TransitionPhase>> _phase_) _(virtual)_::
+
+Implement this to animate properties of the transition as time advances.
 
 void End() _(virtual)_::
 
+Implement this to perform any clean up of the transition.
+
 void Render(https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _source_, https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _destination_) _(virtual)_::
+
+Renders the transition using _source_ as the input scene and _destination_ as the target. The https://docs.unity3d.com/ScriptReference/Graphics.Blit.html[Graphics._Blit_^] methods are used to copy the texture using _Material_. To fully customize rendering, this can be overridden, but for must situations updating properties of _Material_ in _Update_ is sufficient.
 
 ### Protected Properties
 
 https://docs.unity3d.com/ScriptReference/Material.html[Material^] _Material_ _(read only)_::
 
+The https://docs.unity3d.com/ScriptReference/Material.html[Material^] the effect will be rendered with. This is created with a call to _SetShader_.
+
 ### Protected Methods
 
 void SetShader(string _name_)::
 
+Creates the material using the specified shader. _name_ is the name set for the shader at the beginning of the shader script. This should be called from subclasses during initialization.
+
 void Update() _(virtual)_::
+
+Implement this to update the https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material properties^] of _Material_.

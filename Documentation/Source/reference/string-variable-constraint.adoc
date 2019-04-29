@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.StringVariableConstraint : <<reference/variable-cons
 
 ### Description
 
+A <<reference/variable-constraint.html,VariableConstraint>> for `String` <<reference/variable-values.html,VariableValues>> that restricts the value to one of a set of values.
+
 ### Public Fields
 
 string[] _Values_::
+
+The allowed values.

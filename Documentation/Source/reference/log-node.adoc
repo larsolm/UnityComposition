@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.LogNode : <<reference/instruction-graph-node.html,In
 
 ### Description
 
+A <<reference/instruction-graph-node.html,node>> that logs a message when it is run. Useful for debugging.
+
 ### Public Fields
 
 <<reference/message.html,Message>> _Message_::
 
+The message to log.
+
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The node to continue to after logging _Message_.

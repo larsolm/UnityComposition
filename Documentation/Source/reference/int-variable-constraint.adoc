@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.IntVariableConstraint : <<reference/variable-constra
 
 ### Description
 
+A <<reference/variable-constraint.html,VariableConstraint>> for `Int` <<reference/variable-values.html,VariableValues>> that restricts the value to a range.
+
 ### Public Fields
 
 int _Minimum_::
 
+The smallest value allowed for the value.
+
 int _Maximum_::
+
+The largest value allowed for the value.

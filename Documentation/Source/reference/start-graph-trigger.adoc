@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.StartGraphTrigger : <<reference/instruction-trigger.
 
 ### Description
 
+Runs an <<reference/instruction-graph.html,InstructionGraph>> when https://docs.unity3d.com/ScriptReference/MonoBehaviour.Start.html[_Start_^] is called.

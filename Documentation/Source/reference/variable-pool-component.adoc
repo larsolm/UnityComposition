@@ -6,14 +6,24 @@ PiRhoSoft.CompositionEngine.VariablePoolComponent : https://docs.unity3d.com/Scr
 
 ### Description
 
+A behaviour for storing an arbitrary set of <<reference/variable.html,Variables>> using a <<reference/variable-pool.html,VariablePool>>.
+
 ### Public Fields
 
 <<reference/variable-pool.html,VariablePool>> _Variables_::
+
+The <<reference/variable.html,Variables>> stored by this behaviour.
 
 ### Public Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::
 
+The names of all the <<reference/variable.html,Variables>> stored by this behaviour.
+
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
 
+Returns the <<reference/variable-value.html,VariableValue>> with name _name_.
+
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
+
+Sets the <<reference/variable-value.html,VariableValue>> with name _name_ to _value.

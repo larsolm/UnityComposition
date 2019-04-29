@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.Pixelate : <<reference/transition.html,Transition>>
 
 ### Description
 
+Dissolve is an implementation of a <<reference/transition.html,Transition>> that makes the image more and more pixelated over time. The https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material property^] `\_Amount` will be set to a number between 1 and _MaxAmount_, with the number incrementing (or decrementing if the <<reference/transition-phase.html,phase>> is `In`) every frame.
+
 ### Public Fields
 
 int _MaxAmount_::
+
+The number of pixels for the dimension of the pixelation when the <<reference/transition.html,Transition>> is at its extreme.

@@ -6,32 +6,58 @@ PiRhoSoft.CompositionEngine.VariableBinding : https://docs.unity3d.com/ScriptRef
 
 ### Description
 
+The base class for all https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviours^] that provide support for automatically updating properties of loaded https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] (for instance, user interface elements) based on <<reference/variable-value.html,VariableValues>> stored in the <<topics/variables.html,Variables System>>.
+
+Read the <<topics/bindings.html,Bindings Topic>> for a complete overview of how to use bindings and how to implement custom bindings.
+
 ### Static Methods
 
 void UpdateBinding(https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _obj_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_)::
 
+Triggers an update for bindings on _obj_ and its descendants. If _group_ is `null` or empty, all bindings will be updated, otherwise all bindings with _BindingGroup_ matching _group_ will be updated. Optionally pass a <<reference/binding-animation-status.html,BindingAnimationStatus>> instance as _status_ to access information about bindings that perform an animation or otherwise take multiple frames to complete.
+
 void UpdateBinding(https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _obj_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-binding.html,VariableBinding>>> _bindings_)::
+
+Performs the same function as the other _UpdateBinding_ method but uses _bindings_ as a location to store the <<reference/variable-binding.html,VariableBindings>> looked up on _obj_. It is not necessary to use this overload exception when called from the _UpdateBinding_ instance method of a <<reference/variable-binding.html,VariableBinding>> subclass.
 
 ### Public Fields
 
 string _BindingGroup_::
 
+An arbitrary string used to allow the binding to be targeted by calls to _UpdateBinding_. This has two common uses: for performance, if a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] has many bindings that don't all need to be updated at the same time, different bindings can be updated individually or as a group. And, if the value behind a binding is updated but that update shouldn't be indicated to the player until some point in the future, the update can be deferred until that time.
+
 bool _AutoUpdate_::
 
+If this is `true`, the binding will be updated every frame, thus always keeping it up to date with the <<reference/variable-value.html,VariableValues>> it is bound to.
+
 bool _SuppressErrors_::
+
+If this is `true`, failure to resolve <<reference/variable-reference.html,VariableReferences>> when updating the binding will be considered a valid condition and therefore not log error messages.
 
 ### Public Properties
 
 <<reference/i-variable-store.html,IVariableStore>> _Variables_ _(read only)_::
 
+Returns the <<reference/i-variable-store.html,IVariableStore>> to use to resolve <<reference/variable-reference.html,VariableReferences>> for this binding. The <<reference/i-variable-store.html,IVariableStore>> will be found using <<reference/binding-root.html,BindingRoot._FindParent_>>.
+
 ### Public Methods
 
 void UpdateBinding(string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_)::
+
+Use this method to update this specific binding when _group_ is either `null`, empty, or matches _BindingGroup_. To update all bindings on an https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^], use the static _UpdateBinding_ method instead. Optionally pass a <<reference/binding-animation-status.html,BindingAnimationStatus>> instance as _status_ to access information about bindings that perform an animation or otherwise take multiple frames to complete.
 
 ### Protected Methods
 
 void Awake() _(virtual)_::
 
+Performs necessary bookkeeping with the <<reference/composition-manager.html,CompositionManager>> so make sure to call this base implementation when overriding in a subclass.
+
 void OnDestroy() _(virtual)_::
 
+Performs necessary bookkeeping with the <<reference/composition-manager.html,CompositionManager>> so make sure to call this base implementation when overriding in a subclass.
+
 void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(abstract)_::
+
+Implement this in subclasses to perform the binding. _variables_ is the <<reference/i-variable-store.html,IVariableStore>> <<reference/variable-reference.html,VariableReferences>> should be looked up with. For bindings that take multiple frames to complete, _status_ should be updated to indicate when the binding has started and finished.
+
+NOTE: _status_ will always be a valid instance so does not need to be checked for `null`.

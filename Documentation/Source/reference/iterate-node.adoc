@@ -6,12 +6,22 @@ PiRhoSoft.CompositionEngine.IterateNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
+Executes one time for each <<reference/variable-value.html,VariableValue>> in a <<reference/i-variable-list.html,IVariableList>>.
+
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Container_::
 
+The variable for the <<reference/i-variable-list.html,IVariableList>> holding each of the <<reference/variable-value.html,VariableValue>> to iterate.
+
 <<reference/variable-reference.html,VariableReference>> _Index_::
+
+The variable to set to the current number of times the node has been repeated.
 
 <<reference/variable-reference.html,VariableReference>> _Value_::
 
+The variable to set to the current value being iterated.
+
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Loop_::
+
+The node to run for each <<reference/variable-value.html,VariableValue>> in _Container_.

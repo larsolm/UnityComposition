@@ -12,12 +12,12 @@ Specifies the available settings for the _Positioning_ property of <<reference/c
 
 <<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Absolute_::
 
-The created object will be placed at the scene root and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode.Position>> in world space.
+The created object will be placed at the scene root and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode._Position_>> in world space.
 
 <<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Relative_::
 
-The created object will be placed at the scene root and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode.Position>> relative to <<reference/create-game-object-node.html,CreateGameObjectNode.Object>>.
+The created object will be placed at the scene root and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode._Position_>> relative to <<reference/create-game-object-node.html,CreateGameObjectNode._Object_>>.
 
 <<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Child_::
 
-The created object will be placed as a child of <<reference/create-game-object-node.html,CreateGameObjectNode.Parent>> and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode.Position>> in <<reference/create-game-object-node.html,CreateGameObjectNode.Parent's>> coordinates.
+The created object will be placed as a child of <<reference/create-game-object-node.html,CreateGameObjectNode._Parent_>> and positioned at the value of <<reference/create-game-object-node.html,CreateGameObjectNode._Position_>> in <<reference/create-game-object-node.html,CreateGameObjectNode._Parent_'s>> coordinates.

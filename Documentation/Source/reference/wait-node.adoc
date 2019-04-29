@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.WaitNode : <<reference/instruction-graph-node.html,I
 
 ### Description
 
+Delays the <<reference/instruction-graph.html,InstructionGraph>> for a specified amount of time.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
 <<reference/float-variable-source.html,FloatVariableSource>> _Time_::
 
+The number of seconds to delay the <<reference/instruction-graph.html,InstructionGraph>>.
+
 bool _UseScaledTime_::
+
+If this is set, the delay will be based on https://docs.unity3d.com/ScriptReference/Time-time.html[scaled time^], otherwise it will be based on https://docs.unity3d.com/ScriptReference/Time-unscaledTime.html[real time^].

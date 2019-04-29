@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.TransitionList : link:/projects/unity-utilities/docu
 
 ### Description
 
+A serializable list of <<reference/transition.html,Transitions>>.

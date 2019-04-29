@@ -6,14 +6,24 @@ PiRhoSoft.CompositionEngine.VariablePoolAsset : https://docs.unity3d.com/ScriptR
 
 ### Description
 
+An asset for storing an arbitrary set of <<reference/variable.html,Variables>> using a <<reference/variable-pool.html,VariablePool>>.
+
 ### Public Fields
 
 <<reference/variable-pool.html,VariablePool>> _Variables_::
+
+The <<reference/variable.html,Variables>> stored by this asset.
 
 ### Public Methods
 
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
 
+The names of all the <<reference/variable.html,Variables>> stored by this asset.
+
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
+Returns the <<reference/variable-value.html,VariableValue>> with name _name_.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::
+
+Sets the <<reference/variable-value.html,VariableValue>> with name _name_ to _value.

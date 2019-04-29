@@ -1,8 +1,0 @@
-[#reference/member-operator]
-
-## MemberOperator
-
-PiRhoSoft.CompositionEngine.MemberOperator : <<reference/infix-operation.html,InfixOperation>>
-
-### Description
-

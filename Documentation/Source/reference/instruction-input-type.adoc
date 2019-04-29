@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.InstructionInputType
 
 ### Description
 
+Defines the available types for an <<reference/instruction-input.html,InstructionInput>>.
+
 ### Values
 
 <<reference/instruction-input-type.html,InstructionInputType>> _Reference_::
 
+The input is looked up using a <<reference/variable-reference.html,VariableReference>>.
+
 <<reference/instruction-input-type.html,InstructionInputType>> _Value_::
+
+The input <<reference/variable-value.html,VariableValue>> is set directly.

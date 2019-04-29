@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.AnimationType
 
 ### Description
 
+Defines the available options for the _AnimationMethod_ of a <<reference/transform-node.html,TransformNode>>.
+
 ### Values
 
 <<reference/transform-node-animation-type.html,AnimationType>> _None_::
 
+The https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] will be updated immediately without any animation.
+
 <<reference/transform-node-animation-type.html,AnimationType>> _Speed_::
 
+Position, rotation, and scale will each animate according to an individually set number of units per second.
+
 <<reference/transform-node-animation-type.html,AnimationType>> _Duration_::
+
+The animation will take a set amount of time with position, rotation, and scale advancing linearly to their target.

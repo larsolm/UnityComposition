@@ -10,16 +10,32 @@ PiRhoSoft.CompositionEngine.UnloadSceneNode : <<reference/instruction-graph-node
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
 <<reference/unload-scene-node-scene-source.html,SceneSource>> _Source_::
+
+Specifies how the scene to unload is retrieved.
 
 link:/projects/unity-utilities/documentation/#/v10/reference/scene-reference[SceneReference^] _Scene_::
 
+If _Source_ is `Value`, holds the scene to unload.
+
 <<reference/variable-reference.html,VariableReference>> _SceneVariable_::
+
+If _Source_ is `Variable`, references the scene to unload. If the resolved value is an `Int`, the scene will be uloaded by index. If it is a `String`, it will be unloaded by name.
 
 string _SceneName_::
 
+If _Source_ is `Name`, the name of the scene to unload.
+
 int _SceneIndex_::
+
+If _Source_ is `Index`, the build index of the scene to unload.
 
 bool _WaitForCompletion_::
 
+If this is `true`, this node will not complete until the scene has completed unloading. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+
 bool _CleanupAssets_::
+
+If this is `true` (the default), https://docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html[Resources.UnloadUnusedAssets^] will be called after the scene has been unloaded.

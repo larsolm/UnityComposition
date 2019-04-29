@@ -6,10 +6,16 @@ PiRhoSoft.CompositionEngine.SpriteColorBinding : <<reference/variable-binding.ht
 
 ### Description
 
+Sets the _color_ of a sibling https://docs.unity3d.com/ScriptReference/SpriteRenderer.html[SpriteRenderer^].
+
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
+The <<reference/variable-reference.html,VariableReference>> containing the `Color` <<reference/variable-value.html,VariableValue>> that will be applied when the binding is updated.
+
 ### Public Properties
 
 https://docs.unity3d.com/ScriptReference/SpriteRenderer.html[SpriteRenderer^] _Sprite_ _(read only)_::
+
+The component to set the color on.

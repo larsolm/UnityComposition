@@ -12,8 +12,8 @@ A <<reference/variable-constraint.html,VariableConstraint>> for `Float` <<refere
 
 float _Minimum_::
 
-The smallest value allowed for the value.
+The smallest value allowed.
 
 float _Maximum_::
 
-The largest value allowed for the value.
+The largest value allowed.

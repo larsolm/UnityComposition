@@ -6,18 +6,34 @@ PiRhoSoft.CompositionEngine.SelectionNode : <<reference/instruction-graph-node.h
 
 ### Description
 
+Shows a <<reference/selection-control.html,SelectionControl>> and retrieves a selection from it.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _OnCanceled_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when the selection is cancelled.
+
 <<reference/variable-reference.html,VariableReference>> _Control_::
+
+The <<reference/selection-control.html,SelectionControl>> to perform the selection with.
 
 <<reference/variable-reference.html,VariableReference>> _SelectedItem_::
 
+The variable to store the selected item in.
+
 <<reference/variable-reference.html,VariableReference>> _SelectedIndex_::
+
+The variable to store the index of the selected item in.
 
 bool _IsSelectionRequired_::
 
+If this is `true`, a selection must be made before the node will complete.
+
 bool _AutoHide_::
 
+If this is `true`, _Control_ will be hidden once a selection has been made.
+
 <<reference/selection-node-item-list.html,SelectionNodeItemList>> _Items_::
+
+The list of <<reference/selection-node-item.html,SelectionNodeItems>> available to be selected.

@@ -22,7 +22,7 @@ namespace PiRhoSoft.CompositionEngine
 				TransitionManager.Instance.RemoveRenderer(this);
 		}
 
-		public virtual void SetTarget(RenderTexture target)
+		internal void SetTarget(RenderTexture target)
 		{
 			_camera.targetTexture = target;
 		}

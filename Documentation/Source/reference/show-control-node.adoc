@@ -10,4 +10,8 @@ PiRhoSoft.CompositionEngine.ShowControlNode : <<reference/instruction-graph-node
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
 <<reference/variable-reference.html,VariableReference>> _Control_::
+
+The <<reference/interface-control.html,InterfaceControl>> to show.

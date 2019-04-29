@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public abstract class MemberOperator : InfixOperation
+	internal abstract class MemberOperator : InfixOperation
 	{
 		public override void GetInputs(IList<VariableDefinition> inputs, string source)
 		{

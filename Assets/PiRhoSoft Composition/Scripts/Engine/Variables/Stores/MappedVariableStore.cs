@@ -101,7 +101,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		#endregion
 
-		#region IVariableList Implementation
+		#region IMappedVariableList Implementation
 
 		public int VariableCount
 		{

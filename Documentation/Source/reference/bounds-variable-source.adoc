@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.BoundsVariableSource : <<reference/variable-source-1
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for bools
+A <<reference/variable-source.html,VariableSource>> for https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^]
 
 ### Constructors
 

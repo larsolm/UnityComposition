@@ -6,16 +6,30 @@ PiRhoSoft.CompositionEngine.MessageNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
+Displays a <<reference/message.html,Message>> on a <<reference/message-control.html,MessageControl>>.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> that will be run after this <<reference/instruction-graph-node.html,InstructionGraphNode>> has completed.
+
 <<reference/variable-reference.html,VariableReference>> _Control_::
+
+The <<reference/variable-reference.html,VariableReference>> to the <<reference/variable-value.html,VariableValue>> that holds the <<reference/message-control.html,MessageControl>> to display _Message_ on.
 
 bool _WaitForCompletion_::
 
+When `true`, this <<reference/instruction-graph-node.html,InstructionGraphNode>> will not complete until the <<reference/message-control.html,MessageControl>> has been dismissed.
+
 bool _AutoHide_::
+
+When `true`, the <<reference/message-control.html,MessageControl>> will be automatically dismissed after _WaitTime_ seconds.
 
 float _WaitTime_::
 
+When _AutoHide_ is `true`, the number of seconds to wait before dismissing the <<reference/message-control.html,MessageControl>>.
+
 <<reference/message.html,Message>> _Message_::
+
+The <<reference/message.html,Message>> to display on the <<reference/message-control.html,MessageControl>>

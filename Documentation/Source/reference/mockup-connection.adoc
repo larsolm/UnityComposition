@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.MockupConnection
 
 ### Description
 
+Holds data for a connection in a <<reference/mockup-node.html,MockupNode>>.
+
 ### Public Fields
 
 string _Name_::
 
+The name to display in the graph window for this connection.
+
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Node_::
+
+The node this connection is connected to.

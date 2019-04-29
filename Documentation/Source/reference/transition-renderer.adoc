@@ -6,12 +6,4 @@ PiRhoSoft.CompositionEngine.TransitionRenderer : https://docs.unity3d.com/Script
 
 ### Description
 
-### Public Methods
-
-void SetTarget(https://docs.unity3d.com/ScriptReference/RenderTexture.html[RenderTexture^] _target_) _(virtual)_::
-
-### Protected Methods
-
-void OnEnable() _(virtual)_::
-
-void OnDisable() _(virtual)_::
+Add this to a https://docs.unity3d.com/ScriptReference/Camera.html[Camera^] to have any running <<reference/transition.html,Transition>> include the cameras rendered output in post processing.

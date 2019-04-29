@@ -6,18 +6,28 @@ PiRhoSoft.CompositionEngine.TransitionManager : link:/projects/unity-utilities/d
 
 ### Description
 
+Manages the loaded <<reference/transition-renderer.html,TransitionRenderers>> for playback of <<reference/transition.html,Transitions>>.
+
 ### Public Properties
 
 <<reference/transition.html,Transition>> _CurrentTransition_ _(read only)_::
 
+The <<reference/transition.html,Transition>> that is currently running, or `null` if no <<reference/transition.html,Transition>> is running.
+
 ### Public Methods
-
-void AddRenderer(<<reference/transition-renderer.html,TransitionRenderer>> _renderer_)::
-
-void RemoveRenderer(<<reference/transition-renderer.html,TransitionRenderer>> _renderer_)::
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] RunTransition(<<reference/transition.html,Transition>> _transition_, <<reference/transition-phase.html,TransitionPhase>> _phase_)::
 
+Runs _transition_ in <<reference/transition-phase.html,TransitionPhase>> _phase_ and ends it when it has completed - _EndTransition_ will not need to be called.
+
+NOTE: If a <<reference/transition.html,Transition>> is already running, it will be ended.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] StartTransition(<<reference/transition.html,Transition>> _transition_, <<reference/transition-phase.html,TransitionPhase>> _phase_)::
 
+Runs _transition_ in <<reference/transition-phase.html,TransitionPhase>> _phase_. _EndTransition_ (or a subsequent call to _StartTransition_) should be called manually later.
+
+NOTE: If a <<reference/transition.html,Transition>> is already running, it will be ended.
+
 void EndTransition()::
+
+Ends the currently running <<reference/transition.html,Transition>> if a <<reference/transition.html,Transition>> is running.

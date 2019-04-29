@@ -6,30 +6,52 @@ PiRhoSoft.CompositionEngine.VariableSetAsset : https://docs.unity3d.com/ScriptRe
 
 ### Description
 
+An asset for storing <<reference/variable.html,Variables>> that are defined by a <<reference/variable-schema.html,VariableSchema>>. This can also be used as a base class for assets that need to expose variables defined in code to the variables system.
+
 ### Public Fields
 
 <<reference/variable-set.html,VariableSet>> _Variables_::
+
+The <<reference/variable.html,Variables>> stored by this asset that are defined in _Schema_.
 
 ### Public Properties
 
 <<reference/variable-schema.html,VariableSchema>> _Schema_ _(read only)_::
 
+The <<reference/variable-schema.html,VariableSchema>> used to define _Variables_.
+
 <<reference/mapped-variable-store.html,MappedVariableStore>> _Store_ _(read only)_::
+
+The store providing the mapping for all the <<reference/variable.html,Variables>> in this asset - both _Variables_ and those defined in code using <<reference/variable-mapping-attribute.html,VariableMapping>>.
 
 ### Public Methods
 
 void SetupSchema()::
 
+One time setup to initialize _Store_. This is managed automatically.
+
 <<reference/variable-value.html,VariableValue>> GetVariable(string _name_)::
+
+Returns the variable, defined by either _Schema_ or with <<reference/variable-mapping-attribute.html,VariableMappings>> with name _name_.
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
+Sets the variable, defined by either _Schema_ or with <<reference/variable-mapping-attribute.html,VariableMappings>>, with name _name_ to _value_.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames()::
+
+Returns the names of all the variables, defined by either _Schema_ or with <<reference/variable-mapping-attribute.html,VariableMappings>>.
 
 void ResetTag(string _tag_)::
 
+Resets all the variables defined in _Schema_ with with tag _tag_.
+
 void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> _variables_)::
+
+Resets all the variables in _variables_.
 
 ### Protected Methods
 
 void OnEnable() _(virtual)_::
+
+Provides necessary initialization. When overridden this base implementation must be called.

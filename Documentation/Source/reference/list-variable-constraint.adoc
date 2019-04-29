@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.ListVariableConstraint : <<reference/variable-constr
 
 ### Description
 
+A <<reference/variable-constraint.html,VariableConstraint>> for `List` <<reference/variable-values.html,VariableValues>> that specifies the <<reference/variable-type.html,VariableType>> of <<reference/variable-values.html,VariableValues>> that can be added to the list.
+
 ### Public Fields
 
 <<reference/variable-type.html,VariableType>> _ItemType_::
 
+The type of items in the list. If this is <<reference/variable-type.html,`Empty`>>, any value can be added.
+
 <<reference/variable-constraint.html,VariableConstraint>> _ItemConstraint_::
+
+The constraint to enforce for each item in the list.

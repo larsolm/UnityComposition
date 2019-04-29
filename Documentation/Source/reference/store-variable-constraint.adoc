@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.StoreVariableConstraint : <<reference/variable-const
 
 ### Description
 
+A <<reference/variable-constraint.html,VariableConstraint>> for `Store` <<reference/variable-values.html,VariableValues>> that specifies the <<reference/variable.html,Variables>> that are available in the store.
+
 ### Public Fields
 
 <<reference/variable-schema.html,VariableSchema>> _Schema_::
+
+The schema defining the <<reference/variable.html,Variables>> that are in the store.

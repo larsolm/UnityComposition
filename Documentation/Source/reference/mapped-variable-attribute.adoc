@@ -6,12 +6,20 @@ PiRhoSoft.CompositionEngine.MappedVariableAttribute : Attribute
 
 ### Description
 
+An https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/[attribute^] to apply to properties and fields to expose them to the <<topics/variables.html,variables>> system using <<reference/mapped-variable-store.html,MappedVariableStore>>.
+
 ### Constructors
 
 MappedVariableAttribute(bool _readable_, bool _writable_)::
+
+Sets the allowed access for the property or field the attribute is applied to. If the default constructor is used instead, _readable_ and _writable_ are both `true`.
 
 ### Public Fields
 
 bool _Readable_::
 
+Set this to `true` to allow the property or field value to be retrieved when accessed through a <<reference/mapped-variable-store.html,MappedVariableStore>>.
+
 bool _Writable_::
+
+Set this to `true` to allow the property or field value to be set when accessed through a <<reference/mapped-variable-store.html,MappedVariableStore>>.

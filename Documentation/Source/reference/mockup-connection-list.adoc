@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.MockupConnectionList : link:/projects/unity-utilitie
 
 ### Description
 
+The serializable list of <<reference/mockup-connection.html,MockupConnections>> for a <<reference/mockup-graph.html,MockupGraph>> or <<reference/mockup-node.html,MockupNode>>

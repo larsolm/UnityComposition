@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.TagList : link:/projects/unity-utilities/documentati
 
 ### Description
 
+The serializable list of tags in a <<reference/variable-schema.html,VariableSchema>>.

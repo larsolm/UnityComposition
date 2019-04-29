@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.QuaternionVariableSource : <<reference/variable-sour
 
 ### Description
 
+A <<reference/variable-source.html,VariableSource>> for `Quaternion` <<reference/variable-values.html,VariableValues>>
+
 ### Constructors
 
 QuaternionVariableSource(https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _defaultValue_)::
+
+Initializes the source to _Type_ `Value` with _Value_ _defaultValue.

@@ -6,44 +6,88 @@ PiRhoSoft.CompositionEngine.VariableType
 
 ### Description
 
+Defines the set of types a <<reference/variable-value.html,VariableValue>> can hold.
+
 ### Values
 
 <<reference/variable-type.html,VariableType>> _Empty_::
 
+The <<reference/variable-value.html,VariableValue>> has no value.
+
 <<reference/variable-type.html,VariableType>> _Bool_::
+
+The <<reference/variable-value.html,VariableValue>> is a bool.
 
 <<reference/variable-type.html,VariableType>> _Int_::
 
+The <<reference/variable-value.html,VariableValue>> is an int.
+
 <<reference/variable-type.html,VariableType>> _Float_::
+
+The <<reference/variable-value.html,VariableValue>> is a float.
 
 <<reference/variable-type.html,VariableType>> _Int2_::
 
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^].
+
 <<reference/variable-type.html,VariableType>> _Int3_::
+
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^].
 
 <<reference/variable-type.html,VariableType>> _IntRect_::
 
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^].
+
 <<reference/variable-type.html,VariableType>> _IntBounds_::
+
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^].
 
 <<reference/variable-type.html,VariableType>> _Vector2_::
 
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^].
+
 <<reference/variable-type.html,VariableType>> _Vector3_::
+
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^].
 
 <<reference/variable-type.html,VariableType>> _Vector4_::
 
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^].
+
 <<reference/variable-type.html,VariableType>> _Quaternion_::
+
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^].
 
 <<reference/variable-type.html,VariableType>> _Rect_::
 
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Rect.html[Rect^].
+
 <<reference/variable-type.html,VariableType>> _Bounds_::
+
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^].
 
 <<reference/variable-type.html,VariableType>> _Color_::
 
+The <<reference/variable-value.html,VariableValue>> is a https://docs.unity3d.com/ScriptReference/Color.html[Color^].
+
 <<reference/variable-type.html,VariableType>> _String_::
+
+The <<reference/variable-value.html,VariableValue>> is a string.
 
 <<reference/variable-type.html,VariableType>> _Enum_::
 
+The <<reference/variable-value.html,VariableValue>> is an enum. The type of enum is stored in _EnumType_ on <<reference/variable-value.html,VariableValue>>.
+
 <<reference/variable-type.html,VariableType>> _Object_::
+
+The <<reference/variable-value.html,VariableValue>> is an https://docs.unity3d.com/ScriptReference/Object.html[Object^]. If the type is constrained the base type is stored in _ReferenceType_ on <<reference/variable-value.html,VariableValue>>.
+
+NOTE: If a value is both an https://docs.unity3d.com/ScriptReference/Object.html[Object^] and <<reference/i-variable-store.html,IVariableStore>>, its _Type_ will be `Object`.
 
 <<reference/variable-type.html,VariableType>> _Store_::
 
+The <<reference/variable-value.html,VariableValue>> is an <<reference/i-variable-store.html,IVariableStore>>.
+
 <<reference/variable-type.html,VariableType>> _List_::
+
+The <<reference/variable-value.html,VariableValue>> is an <<reference/i-variable-list.html,IVariableList>>.

@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.InstructionOutputType
 
 ### Description
 
+Defines the available types for an <<reference/instruction-output.html,InstructionOutput>>.
+
 ### Values
 
 <<reference/instruction-output-type.html,InstructionOutputType>> _Ignore_::
 
+The output will be ignored.
+
 <<reference/instruction-output-type.html,InstructionOutputType>> _Reference_::
+
+The input is set using a <<reference/variable-reference.html,VariableReference>>.

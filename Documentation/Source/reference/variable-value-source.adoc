@@ -6,10 +6,16 @@ PiRhoSoft.CompositionEngine.VariableValueSource : <<reference/variable-source-1.
 
 ### Description
 
+A <<reference/variable-source.html,VariableSource>> for any <<reference/variable-values.html,VariableValue>>.
+
 ### Constructors
 
 VariableValueSource(<<reference/variable-type.html,VariableType>> _type_, <<reference/value-definition.html,ValueDefinition>> _definition_)::
 
+Initializes the source to _Type_ `Value` with _Value_ a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,VariableType>> _type_ and initialized with _definition_.
+
 ### Public Fields
 
 <<reference/value-definition.html,ValueDefinition>> _Definition_::
+
+The <<reference/value-definition.html,ValueDefinition>> the source was initialized with.

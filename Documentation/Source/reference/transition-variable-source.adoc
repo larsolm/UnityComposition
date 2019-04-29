@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.TransitionVariableSource : <<reference/variable-sour
 
 ### Description
 
+A <<reference/variable-source.html,VariableSource>> for `Object` <<reference/variable-values.html,VariableValues>> that must be <<reference/transition.html,Transitions>>

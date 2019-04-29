@@ -6,16 +6,26 @@ PiRhoSoft.CompositionEngine.Message
 
 ### Description
 
+Manages editing of formatted strings that are resolved at runtime using the <<topics/variables.html,Variables System>>.
+
 ### Public Fields
 
 string _Text_::
+
+The string that will be formatted at runtime. <<reference/variable-reference.html,VariableReferences>> to resolve can be inserted in the text by surrounding it with braces (`{` and `}`). Access the resolved text with the _GetText_ method.
 
 ### Public Properties
 
 bool _HasText_ _(read only)_::
 
+Indicates that _Text_ has been set and _GetText_ will return a non-empty string.
+
 ### Public Methods
 
 void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_)::
 
+Adds a definition for each <<reference/variable-reference.html,VariableReference>> in _Text_ to _inputs_ if the <<reference/variable-reference.html,VariableReference>> accesses <<reference/instruction-store.html,InstructionStore._Input_>>.
+
 string GetText(<<reference/i-variable-store.html,IVariableStore>> _variables_, bool _suppressErrors_)::
+
+Formats and returns _Text_, looking up any <<reference/variable-reference.html,VariableReferences>> on _variables_. If _suppressErrors_ is `false`, an error will be logged when a <<reference/variable-reference.html,VariableReference>> cannot be resolved.

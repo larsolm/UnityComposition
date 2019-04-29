@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.ResetVariableList : link:/projects/unity-utilities/d
 
 ### Description
 
+The list of variables for a <<reference/reset-variables.html,ResetVariables>>.

@@ -30,8 +30,8 @@ namespace PiRhoSoft.CompositionEngine
 		public int SelectedIndex => _selectedItem == null ? -1 : _selectedItem.Index;
 		public VariableValue SelectedValue => _selectedItem == null ? VariableValue.Empty : _selectedItem.Value;
 
-		protected Menu _menu;
-		protected MenuItem _selectedItem;
+		private Menu _menu;
+		private MenuItem _selectedItem;
 
 		protected override void Awake()
 		{

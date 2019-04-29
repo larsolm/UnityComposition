@@ -6,3 +6,4 @@ PiRhoSoft.CompositionEngine.SelectionNodeItemList : link:/projects/unity-utiliti
 
 ### Description
 
+A list of <<reference/selection-node-item.html,SelectionNodeItems>> used by <<reference/selection-node.html,SelectionNode>>.

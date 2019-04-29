@@ -6,12 +6,22 @@ PiRhoSoft.CompositionEngine.SceneSource
 
 ### Description
 
+Defines how the scene to unload is retrieved in an <<reference/unload-scene-node.html,UnloadSceneNode>>
+
 ### Values
 
 <<reference/unload-scene-node-scene-source.html,SceneSource>> _Value_::
 
+The scene is specified directly in <<reference/unload-scene-node.html,UnloadSceneNode._Scene_>>.
+
 <<reference/unload-scene-node-scene-source.html,SceneSource>> _Variable_::
+
+The scene is resolved from the <<reference/unload-scene-node.html,UnloadSceneNode._SceneVariable_>> <<reference/variable-reference.html,VariableReference>>.
 
 <<reference/unload-scene-node-scene-source.html,SceneSource>> _Name_::
 
+The scene is unloaded by name as specified by <<reference/unload-scene-node.html,UnloadSceneNode._SceneName_>>.
+
 <<reference/unload-scene-node-scene-source.html,SceneSource>> _Index_::
+
+The scene is unloaded by build index as specified by <<reference/unload-scene-node.html,UnloadSceneNode._SceneIndex_>>.

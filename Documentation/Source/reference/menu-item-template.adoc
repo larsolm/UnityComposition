@@ -6,20 +6,36 @@ PiRhoSoft.CompositionEngine.MenuItemTemplate
 
 ### Description
 
+Holds information about how a <<reference/menu-item.html,MenuItem>> should be setup in a <<reference/menu.html,Menu>>
+
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variables_::
 
+A reference to the variable that should be used as the <<reference/binding-root.html,BindingRoot>> _Value_ for the <<reference/menu-item.html,MenuItem>>
+
 <<reference/menu-item-template-object-source.html,ObjectSource>> _Source_::
+
+Specifies whether the <<reference/menu-item.html,MenuItem>> should be looked up in the scene using _Name_ (`Scene`) or created from a https://docs.unity3d.com/Manual/Prefabs.html[prefab^] using _Template_ (`Asset`).
 
 string _Name_::
 
+When _Source_ is `Name`, the name of the https://docs.unity3d.com/Manual/GameObject.html[GameObject^] containing the <<reference/menu-item.html,MenuItem>> in the loaded scenes.
+
 <<reference/menu-item.html,MenuItem>> _Template_::
+
+When _Source_ is `Asset`, the https://docs.unity3d.com/Manual/Prefabs.html[prefab^] to create the <<reference/menu-item.html,MenuItem>> from.
 
 string _Label_::
 
+When _Source_ is `Asset`, the label to assign to the <<reference/menu-item.html,MenuItem>>.
+
 bool _Expand_::
+
+When _Source_ is `Asset`, this is `true`, and _Variables_ references a <<reference/variable-type.html,List>>, a <<reference/menu-item.html,MenuItem>> will be created from _Template_ for each item in the <<reference/variable-type.html,List>>.
 
 ### Public Properties
 
 string _Id_ _(read only)_::
+
+The identifier used for the item when referenced by string. If _Source_ is `Scene` this will be _Name_. If _Source_ is `Asset` this will be _Label_.

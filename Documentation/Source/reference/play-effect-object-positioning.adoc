@@ -6,10 +6,18 @@ PiRhoSoft.CompositionEngine.ObjectPositioning
 
 ### Description
 
+Specifies the available settings for the _Positioning_ property of <<reference/play-effect.html,PlayEffect>>.
+
 ### Values
 
 <<reference/play-effect-object-positioning.html,ObjectPositioning>> _Absolute_::
 
+The created object will be placed at the scene root and positioned at the value of <<reference/play-effect.html,PlayEffect._Position_>> in world space.
+
 <<reference/play-effect-object-positioning.html,ObjectPositioning>> _Relative_::
 
+The created object will be placed at the scene root and positioned at the value of <<reference/play-effect.html,PlayEffect._Position_>> relative to <<reference/play-effect.html,PlayEffect._Object_>>.
+
 <<reference/play-effect-object-positioning.html,ObjectPositioning>> _Child_::
+
+The created object will be placed as a child of <<reference/play-effect.html,PlayEffect._Parent_>> and positioned at the value of <<reference/play-effect.html,PlayEffect._Position_>> in <<reference/play-effect.html,PlayEffect._Parent_'s>> coordinates.

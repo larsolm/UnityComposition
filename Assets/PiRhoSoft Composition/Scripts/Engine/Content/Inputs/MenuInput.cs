@@ -277,7 +277,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		private void MoveFocusLeft(int amount)
+		public void MoveFocusLeft(int amount)
 		{
 			if (_menu.FocusedItem == null)
 			{
@@ -297,7 +297,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		private void MoveFocusRight(int amount)
+		public void MoveFocusRight(int amount)
 		{
 			if (_menu.FocusedItem == null)
 			{

@@ -6,24 +6,40 @@ PiRhoSoft.CompositionEngine.InterfaceControl : https://docs.unity3d.com/ScriptRe
 
 ### Description
 
+Add this https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[behaviour^] to provide support for enabling and disabling the object from an <<reference/instruction-graph.html,InstructionGraph>> using the <<reference/show-control-node.html,ShowControlNode>> and <<reference/hide-control-node.html,ControlNode>>. An InterfaceControl will always start inactive.
+
 ### Public Fields
 
 <<reference/dependent-object-list.html,DependentObjectList>> _DependentObjects_::
+
+A list of https://docs.unity3d.com/ScriptReference/GameObjects.html[GameObjects^] whose enabled state should always match the enabled state of this object.
 
 ### Public Properties
 
 bool _IsActive_ _(read only)_::
 
+`true` if the control is currently enabled, `false` otherwise.
+
 ### Public Methods
 
 void Activate()::
 
+Enables the control (and _DependentObjects_) if it is not already enabled. _Setup_ will be called only if the control is not already enabled.
+
 void Deactivate()::
+
+Disables the control (and _DependentObjects_) regardless of how many times _Activate_ was called. _Teardown_ will be called only if the control is not already disabled.
 
 ### Protected Methods
 
 void Awake() _(virtual)_::
 
+Disables the control on load.
+
 void Setup() _(virtual)_::
 
+Implement this method in a subclass to perform setup when the object becomes enabled. The base implementation does nothing.
+
 void Teardown() _(virtual)_::
+
+Implement this method in a subclass to perform clean up when the object becomes disabled. The base implementation does nothing.

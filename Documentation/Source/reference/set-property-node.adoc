@@ -6,22 +6,32 @@ PiRhoSoft.CompositionEngine.SetPropertyNode : <<reference/instruction-graph-node
 
 ### Description
 
+Sets a property on an object using reflection.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
 <<reference/object-variable-source.html,ObjectVariableSource>> _Target_::
+
+The https://docs.unity3d.com/ScriptReference/Object.html[Object^] to set the property on.
 
 <<reference/variable-value-source.html,VariableValueSource>> _Value_::
 
-string _TargetTypeName_::
-
-string _PropertyName_::
+The <<reference/variable-value.html,VariableValue>> to set the property to.
 
 ### Public Properties
 
 Type _TargetType_::
 
+The type of the object that the property will be set on.
+
 FieldInfo _Field_::
 
+If setting a field, the field that will be set.
+
 PropertyInfo _Property_::
+
+If setting a property, the property that will be set.

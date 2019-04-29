@@ -6,64 +6,66 @@ PiRhoSoft.CompositionEngine.InstructionGraph : <<reference/instruction.html,Inst
 
 ### Description
 
-### Static Fields
+The main piece of the composition system, implementing all the functionality necessary to manage and execute a set of <<reference/instruction-graph-node.html,nodes>>. See the <<manual/instruction-graph.html,graph manual page>> and <<topics/graphs.html,graph topic>> for more information.
 
-string __processFailedError_::
+### Static Fields
 
 bool _IsDebugBreakEnabled_::
 
+Indicates the editor should pause graph execution when it encounters a breakpoint. This is on (`true`) by default but can be turned off in the graph editor window to disable all <<reference/instruction-graph-node.html,node>> breakpoints. The breakpoints are not removed, so when this setting is re-enabled, any previously set breakpoints will continue to function.
+
+NOTE: This setting is saved with https://docs.unity3d.com/ScriptReference/EditorPrefs.html[EditorPrefs^] so it will persist across Unity launches on the local machine for all projects.
+
 bool _IsDebugLoggingEnabled_::
 
-Action<<<reference/instruction-graph.html,InstructionGraph>>, <<reference/instruction-graph.html,InstructionGraph>>> _OnBreakpointHit_::
+Enable this setting to log execution events when running a graph. The events that will be logged are:
 
-### Public Fields
+* A branch has started
+* A branch has been manually stopped
+* Execution of a branch has completed
+* Execution has paused at a breakpoint or after a step
+* A connection has been followed to a new node
 
-https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _StartPosition_::
+The current frame number is printed with the log message to make it easy to determine how many frames a particular node has taken to complete (since they are run as coroutines). Additional profiling and debugging information can be enabled with <<reference/composition-manager.html,CompositionManager._LogTracking_>>.
 
-### Public Properties
-
-<<reference/instruction-graph-node-list.html,InstructionGraphNodeList>> _Nodes_ _(read only)_::
-
-<<reference/instruction-store.html,InstructionStore>> _Store_ _(read only)_::
-
-<<reference/instruction-graph-playback-state.html,PlaybackState>> _DebugState_ _(read only)_::
-
-bool _CanDebugPlay_ _(read only)_::
-
-bool _CanDebugPause_ _(read only)_::
-
-bool _CanDebugStep_ _(read only)_::
-
-bool _CanDebugStop_ _(read only)_::
+NOTE: This setting is saved with https://docs.unity3d.com/ScriptReference/EditorPrefs.html[EditorPrefs^] so it will persist across Unity launches on the local machine for all projects.
 
 ### Public Methods
 
 void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_)::
 
-void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_, int _index_)::
+Call this from a <<reference/instruction-graph-node.html,node>> to tell the graph to traverse to _node_. _name_ should be the name of the property the node was assigned to for use in log messages.
 
-void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_, string _key_)::
+The following two overloads perform the same task but can be used to provide more information in log messages when _node_ comes from a list (_index_ would be the index of _node_) or dictionary (_key_ would be the key of _node_).
+
+* void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_, int _index_)::
+* void GoTo(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _name_, string _key_)::
 
 void Break()::
 
-void DebugPlay()::
-
-void DebugPause()::
-
-void DebugStep()::
-
-void DebugStop()::
-
-int IsInCallStack(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_)::
-
-bool IsInCallStack(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _source_)::
-
-bool IsExecuting(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_)::
-
-void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
-
-void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
+Call this from a <<reference/instruction-graph-node.html,node>> to tell the graph to return to the closest <<reference/instruction-graph-node.html,node>> in the call stack that is an <<reference/i-loop-node.html,ILoopNode>>. The <<reference/break-node.html,BreakNode>> calls this.
 
 ### Protected Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _root_, string _source_)::
+### Editor Support
+
+The following properties and methods are exposed for use by the editor and only available in editor builds. They can be ignored.
+
+* Action<<<reference/instruction-graph.html,InstructionGraph>>, <<reference/instruction-graph.html,InstructionGraph>>> _OnBreakpointHit_::
+* https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _StartPosition_::
+* <<reference/instruction-graph-node-list.html,InstructionGraphNodeList>> _Nodes_ _(read only)_::
+* <<reference/instruction-graph-playback-state.html,PlaybackState>> _DebugState_ _(read only)_::
+* bool _CanDebugPlay_ _(read only)_::
+* bool _CanDebugPause_ _(read only)_::
+* bool _CanDebugStep_ _(read only)_::
+* bool _CanDebugStop_ _(read only)_::
+* void DebugPlay()::
+* void DebugPause()::
+* void DebugStep()::
+* void DebugStop()::
+* int IsInCallStack(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_)::
+* bool IsInCallStack(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_, string _source_)::
+* bool IsExecuting(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_)::
+* void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
+* void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::

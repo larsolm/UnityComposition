@@ -6,194 +6,386 @@ PiRhoSoft.CompositionEngine.VariableValue : ValueType
 
 ### Description
 
+Stores a value or object in a generic fashion without boxing value types (except enums). The possible types that can be stored are defined in <<reference/variable-type.html,VariableType>>.
+
 ### Static Properties
 
 <<reference/variable-value.html,VariableValue>> _Empty_ _(read only)_::
+
+Creates a value with <<reference/variable-type.html,VariableType>> `Empty`.
 
 ### Static Methods
 
 <<reference/variable-type.html,VariableType>> GetType(Type _type_)::
 
+Returns the <<reference/variable-type.html,VariableType>> that would be used to store a value of Type _type_. If _type_ is not supported, `Empty` will be returned.
+
 <<reference/variable-value.html,VariableValue>> Create(bool _value_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Bool` that holds _value_.
 
 <<reference/variable-value.html,VariableValue>> Create(int _value_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Int` that holds _value_.
+
 <<reference/variable-value.html,VariableValue>> Create(float _value_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Float` that holds _value_.
 
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _value_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Int2` that holds _value_.
+
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _value_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Int3` that holds _value_.
 
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _value_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `RectInt` that holds _value_.
+
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _value_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `BoundsInt` that holds _value_.
 
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _value_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Vector2` that holds _value_.
+
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _value_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Vector3` that holds _value_.
 
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _value_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Vector4` that holds _value_.
+
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _value_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Quaternion` that holds _value_.
 
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _value_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Rect` that holds _value_.
+
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _value_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Bounds` that holds _value_.
 
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Color.html[Color^] _value_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Color` that holds _value_.
+
 <<reference/variable-value.html,VariableValue>> Create(string _str_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `String` that holds _str_.
 
 <<reference/variable-value.html,VariableValue>> Create(Enum _e_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Enum` and _EnumType_ the type of _e_ that holds _e_.
+
 <<reference/variable-value.html,VariableValue>> Create(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _obj_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Object` that holds _obj_.
 
 <<reference/variable-value.html,VariableValue>> Create(<<reference/i-variable-store.html,IVariableStore>> _store_)::
 
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `Store` that holds _store_.
+
 <<reference/variable-value.html,VariableValue>> Create(<<reference/i-variable-list.html,IVariableList>> _list_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ `List` that holds _list_.
 
 <<reference/variable-value.html,VariableValue>> CreateValue<T>(T _value_)::
 
-<<reference/variable-value.html,VariableValue>> CreateReference(Object _reference_)::
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ determined from _T_ that holds _value_. This can be used for all <<reference/variable-type.html,VariableTypes>> except `Enum`, `Object`, `Store`, and `List`.
+
+<<reference/variable-value.html,VariableValue>> CreateReference(object _reference_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ determined from the type of _reference_ that holds _reference_. This can be used for the <<reference/variable-type.html,VariableTypes>> `Enum`, `Object`, `Store`, and `List`.
+
+NOTE: If _reference_ is both an <<reference/i-variable-store.html,IVariableStore>> and an https://docs.unity3d.com/ScriptReference/Object.html[Object^], the value will have type `Object`.
 
 ### Public Properties
 
 <<reference/variable-type.html,VariableType>> _Type_ _(read only)_::
 
+The <<reference/variable-type.html,VariableType>> of the value.
+
 bool _IsEmpty_ _(read only)_::
+
+Returns `true` if _Type_ is `Empty`.
 
 bool _IsNull_ _(read only)_::
 
+Returns `true` if _Type_ is `Object`, `Store`, or `List` and no value is stored.
+
 bool _HasValue_ _(read only)_::
+
+Returns `true` if _Type_ is a value type (i.e anything other than `String`, `Enum`, `Object`, `Store`, or `List`).
 
 bool _HasString_ _(read only)_::
 
+Returns `true` if _Type_ is `String`.
+
 bool _HasEnum_ _(read only)_::
+
+Returns `true` if _Type_ is `Enum`.
 
 bool _HasReference_ _(read only)_::
 
+Returns `true` if _Type_ is `Object`, `Store`, or `List`.
+
 bool _HasObject_ _(read only)_::
+
+Returns `true` if the stored object is an https://docs.unity3d.com/ScriptReference/Object.html[Object^] or derived from https://docs.unity3d.com/ScriptReference/Object.html[Object^].
 
 bool _HasStore_ _(read only)_::
 
+Returns `true` if the stored object is an <<reference/i-variable-store.html,IVariableStore>>.
+
+NOTE: Even if _Type_ is `Object`, this will still return `true` if the stored object is also an <<reference/i-variable-store.html,IVariableStore>>.
+
 bool _HasList_ _(read only)_::
+
+Returns `true` if the stored object is an <<reference/i-variable-list.html,IVariableList>>.
+
+NOTE: Even if _Type_ is `Object`, this will still return `true` if the stored object is also an <<reference/i-variable-List.html,IVariableList>>.
 
 bool _HasNumber_ _(read only)_::
 
+Returns `true` if _Type_ is `Int` or `Float`.
+
 bool _HasNumber2_ _(read only)_::
+
+Returns `true` if _Type_ is `Int2` or `Vector2`.
 
 bool _HasNumber3_ _(read only)_::
 
+Returns `true` if _Type_ is `Int3`, `Vector3`, `Int2`, or `Vector2`.
+
 bool _HasNumber4_ _(read only)_::
+
+Returns `true` if _Type_ is `Vector4`, `Int3`, `Vector3`, `Int2`, or `Vector2`.
 
 bool _HasRect_ _(read only)_::
 
+Returns `true` if _Type_ is `IntRect` or `Rect`.
+
 bool _HasBounds_ _(read only)_::
+
+Returns `true` if _Type_ is `IntBounds` or `Bounds`.
 
 bool _Bool_ _(read only)_::
 
+Returns the stored value if _Type_ is `Bool` or an undefined value if it is not.
+
 int _Int_ _(read only)_::
+
+Returns the stored value if _Type_ is `Int` or an undefined value if it is not.
 
 float _Float_ _(read only)_::
 
+Returns the stored value if _Type_ is `Float` or an undefined value if it is not.
+
 https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _Int2_ _(read only)_::
+
+Returns the stored value if _Type_ is `Int2` or an undefined value if it is not.
 
 https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _Int3_ _(read only)_::
 
+Returns the stored value if _Type_ is `Int3` or an undefined value if it is not.
+
 https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _IntRect_ _(read only)_::
+
+Returns the stored value if _Type_ is `IntRect` or an undefined value if it is not.
 
 https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _IntBounds_ _(read only)_::
 
+Returns the stored value if _Type_ is `IntBounds` or an undefined value if it is not.
+
 https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Vector2_ _(read only)_::
+
+Returns the stored value if _Type_ is `Vector2` or an undefined value if it is not.
 
 https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _Vector3_ _(read only)_::
 
+Returns the stored value if _Type_ is `Vector3` or an undefined value if it is not.
+
 https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _Vector4_ _(read only)_::
+
+Returns the stored value if _Type_ is `Vector4` or an undefined value if it is not.
 
 https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _Quaternion_ _(read only)_::
 
+Returns the stored value if _Type_ is `Quaternion` or an undefined value if it is not.
+
 https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _Rect_ _(read only)_::
+
+Returns the stored value if _Type_ is `Rect` or an undefined value if it is not.
 
 https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _Bounds_ _(read only)_::
 
+Returns the stored value if _Type_ is `Bounds` or an undefined value if it is not.
+
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _Color_ _(read only)_::
+
+Returns the stored value if _Type_ is `Color` or an undefined value if it is not.
 
 string _String_ _(read only)_::
 
+Returns the stored value if _Type_ is `String` or `null` if it is not.
+
 Enum _Enum_ _(read only)_::
+
+Returns the stored value if _Type_ is `Enum` or `null` if it is not.
 
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_ _(read only)_::
 
+Returns the stored object if _Type_ is `Object` or `null` if it is not.
+
 <<reference/i-variable-store.html,IVariableStore>> _Store_ _(read only)_::
+
+Returns the stored object if the object is an <<reference/i-variable-store.html,IVariableStore>> or `null` if it is not.
 
 <<reference/i-variable-list.html,IVariableList>> _List_ _(read only)_::
 
+Returns the stored object if the object is an <<reference/i-variable-list.html,IVariableList>> or `null` if it is not.
+
 float _Number_ _(read only)_::
+
+Returns the stored value if _Type_ is `Int` or `Float` or `0.0` if it is not.
 
 https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _Number2_ _(read only)_::
 
+Returns the stored value if _Type_ is `Int2` or `Vector2` or `(0.0, 0.0)` if it is not.
+
 https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _Number3_ _(read only)_::
+
+Returns the stored value if _Type_ is `Int3` or `Vector3`, _Number2_ with z = `0.0` if _Type_ is `Int2` or `Vector2`, or `(0.0, 0.0, 0.0)` otherwise.
 
 https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _Number4_ _(read only)_::
 
+Returns the stored value if _Type_ is `Vector4`, _Number3_ with w = `1.0` if _Type_ is `Int3`, `Vector3`, `Int2`, or `Vector2`, or `(0.0, 0.0, 0.0, 1.0)` otherwise.
+
 https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _NumberRect_ _(read only)_::
+
+Returns the stored value if _Type_ is `IntRect` or `Rect` or a 0 sized rect at `(0.0, 0.0)` if it is not.
 
 https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _NumberBounds_ _(read only)_::
 
+Returns the stored value if _Type_ is `IntBounds` or `Bounds` or a 0 sized bounds at `(0.0, 0.0, 0.0)` if it is not.
+
 Object _Reference_ _(read only)_::
+
+The stored reference value whether _Type_ is `Object`, `Store`, or `List`.
 
 Type _EnumType_ _(read only)_::
 
+The type of the stored _Enum_ if _Type_ is `Enum` or null if it is not.
+
 Type _ReferenceType_ _(read only)_::
+
+The type of the stored _Object_ if _Type_ is `Object` or null if it is not.
 
 ### Public Methods
 
 bool HasEnumType<Type>()::
 
+`true` if _Type_ is `Enum` and _EnumType_ is _Type_.
+
 bool HasReferenceType<Type>()::
+
+`true` if _Type_ is `Object` and _ReferenceType_ is _Type_ or is derived from _Type_.
 
 bool HasEnumType(Type _type_)::
 
+`true` if _Type_ is `Enum` and _EnumType_ is _type_.
+
 bool HasReferenceType(Type _type_)::
 
-Object GetBoxedValue()::
+`true` if _Type_ is `Object` and _ReferenceType_ is _type_ or is derived from _type_.
+
+object GetBoxedValue()::
+
+Returns the stored value, regardless of _Type_. Value types will be boxed.
 
 bool TryGetBool(bool _value_ _(out)_)::
 
+If _Type_ is `Bool`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `false` and returns `false`.
+
 bool TryGetInt(int _value_ _(out)_)::
+
+If _Type_ is `Int`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `0` and returns `false`.
 
 bool TryGetFloat(float _value_ _(out)_)::
 
+If _Type_ is `Float`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `0.0` and returns `false`.
+
 bool TryGetInt2(https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _value_ _(out)_)::
+
+If _Type_ is `Int2`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `(0, 0)` and returns `false`.
 
 bool TryGetInt3(https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _value_ _(out)_)::
 
+If _Type_ is `Int3`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `(0, 0, 0)` and returns `false`.
+
 bool TryGetIntRect(https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _value_ _(out)_)::
+
+If _Type_ is `IntRect`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to a 0 sized rect at `(0, 0)` and returns `false`.
 
 bool TryGetIntBounds(https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _value_ _(out)_)::
 
+If _Type_ is `IntBounds`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to a 0 sized bounds at `(0, 0, 0)` and returns `false`.
+
 bool TryGetVector2(https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _value_ _(out)_)::
+
+If _Type_ is `Vector2`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `(0.0, 0.0)` and returns `false`.
 
 bool TryGetVector3(https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _value_ _(out)_)::
 
+If _Type_ is `Vector3`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `(0.0, 0.0, 0.0)` and returns `false`.
+
 bool TryGetVector4(https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _value_ _(out)_)::
+
+If _Type_ is `Vector4`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `(0.0, 0.0, 0.0, 1.0)` and returns `false`.
 
 bool TryGetQuaternion(https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _value_ _(out)_)::
 
+If _Type_ is `Quaternion`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to https://docs.unity3d.com/ScriptReference/Quaternion-identity.html[Quaternion._identity_^] and returns `false`.
+
 bool TryGetRect(https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _value_ _(out)_)::
+
+If _Type_ is `Rect`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to a 0 sized rect at `(0.0, 0.0)` and returns `false`.
 
 bool TryGetBounds(https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _value_ _(out)_)::
 
+If _Type_ is `Bounds`, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to a 0 sized bounds at `(0.0, 0.0, 0.0)` and returns `false`.
+
 bool TryGetColor(https://docs.unity3d.com/ScriptReference/Color.html[Color^] _value_ _(out)_)::
+
+If _Type_ is `Color`, sets _value_ to the stored value and returns `true`. Otherwise sets _color_ to `white` and returns `false`.
 
 bool TryGetString(string _s_ _(out)_)::
 
+If _Type_ is `String`, sets _s_ to the stored value and returns `true`. Otherwise sets _s_ to an empty string and returns `false`.
+
 bool TryGetEnum<EnumType>(<<reference/enum-type&.html,EnumType>> _value_ _(out)_)::
+
+If _Type_ is `Enum` and _EnumType_ is _EnumType_, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `0` and returns `false`.
 
 bool TryGetObject(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _obj_ _(out)_)::
 
-bool TryGetStore(<<reference/i-variable-store&.html,IVariableStore>> _store_ _(out)_)::
+If _Type_ is `Object`, sets _obj_ to the stored object and returns `true`. Otherwise sets _obj_ to `null` and returns `false`.
 
-bool TryGetList(<<reference/i-variable-list&.html,IVariableList>> _list_ _(out)_)::
+bool TryGetStore(<<reference/i-variable-store.html,IVariableStore>> _store_ _(out)_)::
+
+If the stored object is an <<reference/i-variable-store.html,IVariableStore>>, sets _store_ to the stored object and returns `true`. Otherwise sets _store_ to `null` and returns `false`.
+
+bool TryGetList(<<reference/i-variable-list.html,IVariableList>> _list_ _(out)_)::
+
+If the stored object is an <<reference/i-variable-list.html,IVariableList>>, sets _list_ to the stored object and returns `true`. Otherwise sets _list_ to `null` and returns `false`.
 
 bool TryGetReference<T>(<<reference/t&.html,T>> _t_ _(out)_)::
+
+If _Type_ is `Object`, `Store`, or `List` and the stored object has type _T_ or is derived from type _T_, sets _t_ to the stored object and returns `true`. Otherwise sets _t_ to `null` and returns `false`.

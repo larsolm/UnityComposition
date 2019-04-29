@@ -6,6 +6,10 @@ PiRhoSoft.CompositionEngine.MessageBinding : <<reference/string-binding.html,Str
 
 ### Description
 
+Sets the text of a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component to the string retrieved from a <<reference/message.html,Message>>.
+
 ### Public Fields
 
 <<reference/message.html,Message>> _Message_::
+
+The <<reference/message.html,Message>> to resolve and apply to the http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component when the binding is updated.

@@ -6,12 +6,22 @@ PiRhoSoft.CompositionEngine.InstructionNode : <<reference/instruction-graph-node
 
 ### Description
 
+An <<reference/instruction-graph-node.html,InstructionGraphNode>> that runs an external <<reference/instruction-graph.html,InstructionGraph>>.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
+The node to run after this node has completed.
+
 <<reference/instruction-caller.html,InstructionCaller>> _Instruction_::
+
+The <<reference/instruction-graph.html,InstructionGraph>> to run when this node is entered. <<reference/instruction-store.html,InstructionStore._Local_>> variables available to this node are not transferred to this graph - to share variables use the <<reference/instruction-store.html,InstructionStore._Global_>> store, <<reference/instruction-store.html,InstructionStore._Input_>> store, or _Context_.
 
 <<reference/variable-value-source.html,VariableValueSource>> _Context_::
 
+The variable to use as the <<reference/instruction-store.html,InstructionStore._Context_>> for _Instruction_.
+
 bool _WaitForCompletion_::
+
+If `true`, _Next_ will not be run until execution of _Instruction_ is complete. If `false`, _Next_ will be run immediately and continue in parallel with _Instruction_.
