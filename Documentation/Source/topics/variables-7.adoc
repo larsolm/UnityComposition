@@ -1,0 +1,5 @@
+[#topics/variables-7]
+
+## Variables
+
+### Exposing Variables and Expressions in Code
