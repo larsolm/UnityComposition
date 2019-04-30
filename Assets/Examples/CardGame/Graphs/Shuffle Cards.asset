@@ -306,9 +306,8 @@ MonoBehaviour:
       _isConstraintLocked: 0
     _data: AQAJAAAAAAAAAAAAAAAAAAAA
     _objects: []
-  TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  PropertyName: position
+  _targetTypeName: 
+  _propertyName: 
 --- !u!114 &114828798773068104
 MonoBehaviour:
   m_ObjectHideFlags: 1

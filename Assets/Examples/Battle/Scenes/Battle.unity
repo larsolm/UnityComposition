@@ -164,6 +164,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: Status
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 51267653}
   Condition:
     _statement: Fighter.Poison
@@ -215,7 +216,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 52.6
+  m_fontSize: 55.35
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -342,6 +343,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: HP
   AutoUpdate: 0
+  SuppressErrors: 0
   AmountVariable:
     _variable: Fighter.CurrentHP
     _tokens:
@@ -510,7 +512,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 52.6
+  m_fontSize: 55.35
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -599,6 +601,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Variable:
     _variable: Fighter.Name
     _tokens:
@@ -813,6 +817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Variable:
     _variable: Fighter.Color
     _tokens:
@@ -975,6 +980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: HP
   AutoUpdate: 0
+  SuppressErrors: 0
   AmountVariable:
     _variable: Fighter.CurrentHP
     _tokens:
@@ -1072,6 +1078,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: Status
   AutoUpdate: 1
+  SuppressErrors: 0
   Object: {fileID: 698223272}
   Condition:
     _statement: Fighter.Poison
@@ -1123,7 +1130,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 57.25
+  m_fontSize: 63.35
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1343,6 +1350,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Variable:
     _variable: Fighter.Name
     _tokens:
@@ -1398,7 +1407,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 57.25
+  m_fontSize: 63.35
   m_fontSizeBase: 50
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -1636,7 +1645,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 67.4
+  m_fontSize: 70.15
   m_fontSizeBase: 64
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2183,6 +2192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
   Variable:
     _variable: Fighter.Color
     _tokens:
@@ -2362,7 +2372,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.35
+  m_fontSize: 30.55
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -2451,6 +2461,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Message:
     Text: 'HP: {Fighter.CurrentHP} / {Fighter.HP}'
 --- !u!1 &1701812052
@@ -2780,6 +2792,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
+  SuppressErrors: 0
+  AutoSizeContainer: 0
   Message:
     Text: 'HP: {Fighter.CurrentHP} / {Fighter.HP}'
 --- !u!114 &2021888292
@@ -2830,7 +2844,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 29.35
+  m_fontSize: 30.55
   m_fontSizeBase: 30
   m_fontWeight: 400
   m_enableAutoSizing: 1

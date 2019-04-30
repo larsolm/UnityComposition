@@ -20,12 +20,12 @@ Nodes that implement the <<reference/i-sequence-node.html,ISequenceNode>> interf
 
 image:sequence-example.png[]
 
-For example in the example above...
+For example in the example above each of the four branches of the sequence will run in order (from top to bottom) before the graph ends
 
 #### Loops
 
-Nodes that loop implement the <<reference/i-loop-node.html,ILoopNode>> interface. Looping causes the graph to continually return to this node until it is says that it is done. For example, the <<manual/loop-node.html,Loop Node>> will continue to run through each of its child nodes until a condition is met. To preemtively break out of a loop, use a <<manual/break-node.html,Break Node>>. This will tell the graph to return to stop running the most recently executed <<reference/i-loop-node.html,ILoopNode>>.
+Nodes that loop implement the <<reference/i-loop-node.html,ILoopNode>> interface. Looping causes the graph to continually return to this node until it is says that it is done. 
 
 image:loop-example.png[]
 
-In many cases once a loop has finish, it may be desired to continue to execute other nodes. Because they don't have a concept of what to continue to after they are finished executing, it is common to place a sequence node immediately prior to the loop (as shown in the example above) to continue execution.
+In this example, the <<manual/loop-node.html,Loop Node>> will continue to run through each of its child nodes until a condition is met. To preemptively break out of a loop, use a <<manual/break-node.html,Break Node>>. This will tell the graph to stop running the most recently executed <<reference/i-loop-node.html,ILoopNode>>. In many cases once a loop has finished, it may be desired to continue executing other nodes. Because loop nodes don't have a concept of where to continue after they are finished executing, it is common to place a sequence node immediately prior to the loop (as shown in the example above) to continue execution.
