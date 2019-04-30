@@ -1,0 +1,124 @@
+[#topics/variables-5]
+
+## Variables
+
+### Using Expressions
+
+Expressions have a wide application of uses but at their simplest are an extension of Variable References allowing math operations to be performed on variables. For example if a <<topics/graphs-3.html,Graph Node>> is expecting an attack value and a player exists with an attack stat, the damage from a critical hit could be given in the form of the expression `global.player.attack * 2`. The full suite of math operations is available:
+
+|===
+| Operator	| Description
+
+| `+`		| Adds two values
+| `-`		| Subtracts a value from another
+| `*`		| Multiplies two values
+| `/`		| Divides a value by another
+| `%`		| Computes the remainder of a division
+| `^`		| Raises a value to an exponent
+| `-`		| Negates a value
+|===
+
+These math operations are computed in the expected order based on the standard order of operations (exponents first, then multiplication and division, and last addition and subtraction). Additionaly, operations can be grouped with parentheses to force a certain execution order.
+
+Some expressions, for example _Condition_ on a <<manual/conditional-node.html,Conditional Node>>, expect the result to have type `Bool`. For this, a set of comparison and logic operators is available:
+
+|===
+| Operator	| Description
+
+| `==`		| Determines if two values are equal
+| `!=`		| Determines if two values are not equal
+| `<`		| Determines if a value is less than another value
+| `>`		| Determines if a value is greater than another value
+| `<=`		| Determines if a value is less than or equal to another value
+| `>=`		| Determines if a value is greater than or equal to another value
+| `&&`		| Determines if two values are both `true`
+| `||`		| Determines if either or both values `true`
+| `!`		| Inverts a value (i.e `true` becomes `false` and `false` becomes `true`)
+|===
+
+NOTE: Logic operations are executed before comparison operations, which are executed before math operations.
+
+To perform simple conditional checks inside an expression, use the ternary syntax of `condition ? statement if true : statement if false`. For example, to compute a damage value based on whether or not the attack is a critical hit, the expression could be `local.isCritical ? global.player.attack * 2 : global.player.attack` or alternatively and equally as valid `global.player.attack * (local.isCritical ? 2 : 1)`.
+
+To check if a variable exists, the `null` constant can be used: `local.somethingExists = local.something != null`
+
+In addition to accessing variables, expressions can set variables. This is done with the `=` operator. For example to store a computed damage value instead of returning it like the above example, write the expression `local.damage = global.player.attack * 2`. The damage value can be then later accessed by other Expressions and Variable References as `local.damage`. Each of the math and logic operations also exist as an assignment to more simply modify a value. These are: `+=`, `-=`, `*=`, `/=`, `^=`, `&=`, and `|=`. For example, the `player`'s `attack`, can be permanently buffed with the statement `global.player.attack *= 2`. Shortcuts for adding and subtracting one from a variable are available with the `++` and `--` operators. Place the operator before a value to include the increment or decrement in the result. For example, if `local.number` has the value `4`, the expression `local.result = ++local.number` will assign `5` to both `local.result` and `local.number` whereas the expression `local.result = local.number++` will assign `4` to `local.result` and `5` to `local.number`.
+
+Expressions can also use commands for getting the results of a more complex operation. The syntax for calling a command consists of the command name, followed by `'('` followed by any number of values (called parameters) to send to the command, followed by `')'`. A parameter can be a literal value, a variable reference, or an entire statement. The built in commands are:
+
+|===
+| Name		| Description									| Example
+
+| Abs		| Returns the absolute value of a number															| `local.speed = Abs(local.velocity)`
+| Acos		| Computes the angle whose cosine is the input														| `local.direction = Acos(local.x)`
+| Asin		| Computes the angle whose sine is the input														| `local.direction = Asin(local.y)`
+.2+| Atan	| Computes the angle whose tangent is the input														| `local.direction = Atan(local.y / local.x)`
+			| Computes the angle with correct sign whose tangent is the first parameter divided by the second	| `local.direction = Atan(local.y, local.x)`
+| Ceiling	| Rounds the input value up																			| `local.rounded = Ceiling(local.number)`
+| Clamp		| Clamps the input between two values																| `local.clamped = Clamp(local.number, 5, 10)`
+| Cos		| Computes the cosine of an angle (in radians)														| `local.x = Cos(local.direction)`
+| Floor		| Rounds the input value down																		| `local.rounded = Floor(local.number)`
+| Lerp		| https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html[Mathf.Lerp^]								| `local.interpolated = Lerp(5, 10, 0.3)`
+.2+| Log	| Computes the base 10 logarithm of the input														| `local.log = Log(5)`
+			| Computes the logarithm of the input using the given base											| `local.base2log = Log(8, 2)`
+| Max		| Returns the biggest of a list of values															| `local.biggest = Max(5, 8, -12, 2.5)`
+| Min		| Returns the Smallest of a list of values															| `local.biggest = Min(5, 8, -12, 2.5)`
+| Pow		| Computes the exponent of a value 																	| `local.cubed = Pow(5, 3)`
+.4+| Random	| Returns a random number between 0 and 1															| `local.random = Random()`
+			| Returns a random number between 0 and the input													| `local.random = Random(100)`
+			| Returns a random number between the two inputs													| `local.random = Random(-100, 100)`
+			| If the input is a list, returns a random item in the list											| `local.item = Random(local.list)`
+| Rounds	| Rounds the input to the closest integer															| `local.rounded = Round(local.number)`
+| Sign		| Returns -1 when the input is negative, 0 when the input is 0, and 1 when the input is positive	| `local.sign = Sign(local.number)`
+| Sin		| Computes the sine of an angle (in radians)														| `local.y = Sin(local.direction)`
+| Sqrt		| Computes the square root an input																	| `local.root = Sqrt(local.number)`
+| Tan		| Computes the tangent of an angle (in radians)														| `local.angle = Tan(local.number)`
+| Truncate	| Rounds the input toward 0																			| `local.truncated = Truncate(local.number)`
+| Time		| 
+| Realtime
+| UnscaledTimemand
+|===
+
+NOTE: Custom commands can be defined as described in the <<topics/variables-7.html,Creating Custom Commands>> section.
+
+Commands exist for creating values of each of the types that cannot be specified with a literal. These are:
+
+|===
+| Name			| Parameters
+
+| Vector2		| (x, y)
+| Vector2Int	| (x, y)
+| Vector3		| (x, y, z}
+| Vector3Int	| (x, y, z)
+| Vector4		| (x, y, z, w)
+| Quaternion	| (rotation about x, rotation about y, rotation about z)
+| Rect			| (y, y, width, height) or (position, size)
+| RectInt		| (y, y, width, height) or (position, size)
+| Bounds		| (position, size)
+| BoundsInt		| (y, y, z, width, height, depth) or (position, size)
+| Color			| (r, g, b) or (r, g, b, a)
+| List			| () or (count)
+| Store			| () or (schema name)
+|===
+
+NOTE: When using a schema for creating a `Store`, the schema must be in a `Resources` folder in the project.
+
+Several constant values are available as well and can be accessed directly by name:
+
+|===
+| Name		| Description
+
+| `PI`		| A variable of type `Float` containing the value of pi (`3.14`...)
+| `Deg2Rad`	| A variable of type `Float` containing the value for converting an angle in degrees to radians (`PI / 180`)
+| `Rad2Deg`	| A variable of type `Float` containing the value for converting an angle in radians to degrees (`180 / PI`)
+|===
+
+Expressions can consist of multiple statements with the final statement computing the expression's result. For example, a more complex damage calculation might look like this:
+
+....
+local.isCritical = Random() > 0.5
+local.strength =  global.player.strength / global.target.defense
+local.damage = global.player.weapon.attack * strength * (local.isCritical ? 2 : 1)
+....
+
+NOTE: If an expression is entered with incorrect syntax, the text box will be colored red indicating there is an error. This will not check if the expression actually executes correctly or returns a variable with the correct type. These runtime errors will be indicated by printing an error to the https://docs.unity3d.com/Manual/Console.html[console window^] and can be tracked down using the built in <<topics/graphs-6.html,debugging features>>.
