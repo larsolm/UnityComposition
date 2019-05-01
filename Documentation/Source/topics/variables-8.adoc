@@ -2,4 +2,4 @@
 
 ## Variables
 
-### Exposing Variables and Expressions in Code
+### Custom Variable Stores
