@@ -3314,6 +3314,21 @@ PrefabInstance:
       propertyPath: Variables.Definitions.Array.size
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277775, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Graph._outputs.Array.data[0].Name
+      value: Foo
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277775, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Graph._outputs.Array.data[0].Reference._tokens.Array.data[0].Text
+      value: g
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277775, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Graph._outputs.Array.data[0].Reference._tokens.Array.data[1].Text
+      value: B
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6f1753990295b7d43952ed76b4723a1d, type: 3}
 --- !u!1001 &7925844156028440680

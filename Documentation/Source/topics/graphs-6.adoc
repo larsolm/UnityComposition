@@ -6,7 +6,7 @@
 
 Running graphs from script is as simple as calling `CompositionManager.Instance.RunInstruction()`.
 
-IMPORTANT: When storing a graph that will be serialized on an object it is important to define it as a <<reference/instruction-caller.html,InstructionStore>> instead of a standard instruction. This will ensure that inputs and outputs on the referenced graph are read and written correctly.
+IMPORTANT: When storing a graph that will be serialized on an object it is important to define it as a <<reference/instruction-caller.html,InstructionColler>> instead of a standard instruction. This will ensure that inputs and outputs on the referenced graph are read and written correctly.
 
 The following example will run a graph when its object is loaded:
 [source,cs]
@@ -28,4 +28,3 @@ The following example will run a graph when its object is loaded:
 <3> Passes the <<manual/composition-manager.html,Composition Manager>>'s default store to use for references to inputs and outputs (second parameter) and `this` as the graph's context object (third parameter)
 
 See <<manual/instruction-trigger.html,Instruction Trigger>> and its derived classes for other examples of running graphs from script.
-
