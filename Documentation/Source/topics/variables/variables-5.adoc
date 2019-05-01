@@ -2,7 +2,7 @@
 
 ## Variables
 
-### Using Expressions
+### Writing Expressions
 
 Expressions have a wide application of uses but at their simplest are an extension of Variable References allowing math operations to be performed on variables. For example if a <<topics/graphs-3.html,Graph Node>> is expecting an attack value and a player exists with an attack stat, the damage from a critical hit could be given in the form of the expression `global.player.attack * 2`. The full suite of math operations is available:
 

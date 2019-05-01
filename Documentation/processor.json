@@ -1,7 +1,7 @@
 {
   "OutputFolder": "..\\..\\pirhosoft.github.io\\projects\\unity-composition\\documentation",
   "SinglePageHtmlFiles": [
-    "Source\\overview.adoc",
+    "Source\\introduction.adoc",
     "Source\\log-descriptions.adoc"
   ],
   "MultipageHtmlFiles": [
@@ -9,7 +9,9 @@
   ],
   "PdfFiles": [
     "Source\\manual-pdf.adoc",
-    "Source\\reference-pdf.adoc"
+    "Source\\reference-pdf.adoc",
+    "Source\\topics\\variables-pdf.adoc",
+    "Source\\topics\\graphs-pdf.adoc"
   ],
   "RawFiles": [
     "Source\\table-of-contents.html"

@@ -1,9 +1,0 @@
-[#topics/variables-1]
-
-## Variables
-
-### Overview
-
-The variables system provides dynamic creation and storage of Variable Values that can be manipulated and accessed at runtime. They are stored in Variable Stores and looked up, set, and modified using Variable References and Expressions. This is the core of the composition framework and enables editor based creation of logic using Instruction Graphs, and automatic user interface updates using Variable Bindings. This document will cover how to create objects that contain variables, how to access those variables, and how to extend the variables system with custom objects and commands.
-
-The sections in this topic are:

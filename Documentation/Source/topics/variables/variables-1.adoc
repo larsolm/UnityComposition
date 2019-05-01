@@ -1,0 +1,17 @@
+[#topics/variables-1]
+
+## Variables
+
+### Overview
+
+The variables system provides dynamic creation and storage of Variable Values that can be manipulated and accessed at runtime. They are stored in Variable Stores and looked up, set, and modified using Variable References and Expressions. This is the core of the composition framework and enables editor based creation of logic using <<topics/graphs-1.html,Instruction Graphs>>, and automatic user interface updates using <<topics/bindings-1.html,Variable Bindings>>. This document will cover how to create objects that contain variables, how to access those variables, and how to extend the variables system with custom objects and commands.
+
+The sections in this topic are:
+
+<<topics/variables-2.html,Creating Variables>>:: Creating objects that hold Variable Values
+<<topics/variables-3.html,Defining Variables>>:: Creating Variable Schemas to define a reusable set of Variable Definitions
+<<topics/variables-4.html,Accessing Variables>>:: Using Variable References to access variables
+<<topics/variables-5.html,Writing Expressions>>:: Writing Expressions to perform computations and assign values
+<<topics/variables-6.html,Writing Custom Commands>>:: Writing Commands that can be used by Expressions
+<<topics/variables-7.html,Exposing Variables>>:: Declaring and using Variable References and Expressions in user created scripts
+<<topics/variables-8.html,Custom Variable Stores>>:: Writing Objects in code that can be used as Variable Stores
