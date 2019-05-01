@@ -8,7 +8,7 @@ See the "Hide Timer" node on the "MazeEnd" <<manual/instruction-graph,Instructio
 
 ### Fields
 
-image:hide-control-node.png[]
+image::hide-control-node.png[Hide Control Node]
 
 [cols="1,2"]
 |===

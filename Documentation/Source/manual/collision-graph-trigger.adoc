@@ -8,7 +8,7 @@ See the _"Maze1"_ scene in the Maze project for an example usage.
 
 ### Fields
 
-image:collision-graph-trigger.png[]
+image::collision-graph-trigger.png[Collision Graph Trigger]
 
 [cols="1,2"]
 |===

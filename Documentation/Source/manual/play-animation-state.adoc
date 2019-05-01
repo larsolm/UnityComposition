@@ -6,7 +6,7 @@ Play Animation State Node is an <<manual/instruction-graph-node.html,Instruction
 
 ### Fields
 
-image:play-animation-state.png[]
+image::play-animation-state.png[Play Animation State]
 
 [cols="1,2"]
 |===

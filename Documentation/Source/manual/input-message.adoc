@@ -8,7 +8,7 @@ See the _"MazeUI"_ scene in the Maze project for an example usage.
 
 ### Fields
 
-image:input-message.png[]
+image::input-message.png[Input Message]
 
 [cols="1,2"]
 |===

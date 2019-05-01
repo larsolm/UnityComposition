@@ -8,7 +8,7 @@ See the _"Reset Stats"_ node on the _"Battle"_ <<manual/instruction-graph.html,I
 
 ### Fields
 
-image:reset-tag.png[]
+image::reset-tag.png[Reset Tag]
 
 [cols="1,2"]
 |===

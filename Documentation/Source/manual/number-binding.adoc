@@ -8,7 +8,7 @@ See the _"Amount"_ object in the _"Shop"_ scene of the Shop project for an examp
 
 ### Fields
 
-image:number-binding.png[]
+image::number-binding.png[Number Binding]
 
 [cols="1,2"]
 |===

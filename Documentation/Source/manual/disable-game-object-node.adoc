@@ -6,7 +6,7 @@ A Disable Game Object Node is an <<manual/instruction-graph-node.html,Instructio
 
 ### Fields
 
-image:disable-game-object-node.png[]
+image::disable-game-object-node.png[Disable Game Object Node]
 
 [cols="1,2"]
 |===

@@ -8,7 +8,7 @@ See the _"Move To Open"_ node on the _"MazeGateStart"_ <<manual/instruction-grap
 
 ### Fields
 
-image:set-property-node.png[]
+image::set-property-node.png[Set Property Node]
 
 [cols="1,2"]
 |===

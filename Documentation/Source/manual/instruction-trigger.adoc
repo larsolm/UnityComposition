@@ -8,7 +8,7 @@ See the _"Shop"_ scene and the _"Player"_ script in the Shop project for an exam
 
 ### Fields
 
-image:instruction-trigger.png[]
+image::instruction-trigger.png[Instruction Trigger]
 
 [cols="1,2"]
 |===

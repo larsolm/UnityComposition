@@ -9,7 +9,7 @@ See the _"Player"_ script in the Maze project for an example implementation that
 
 ### Fields
 
-image:variable-set-component.png[]
+image::variable-set-component.png[Variable Set Component]
 
 [cols="1,2"]
 |===

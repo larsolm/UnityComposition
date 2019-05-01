@@ -8,7 +8,7 @@ See the assets in the _"Moves"_ and _"Items"_ folders in the Battle project for 
 
 ### Fields
 
-image:variable-set-asset.png[]
+image::variable-set-asset.png[Variable Set Asset]
 
 [cols="1,2"]
 |===

@@ -8,7 +8,7 @@ See the _"Message"_ object in _"Board"_ scene of the BoardGame project for an ex
 
 ### Fields
 
-image:message-control.png[]
+image::message-control.png[Message Control]
 
 [cols="1,2"]
 |===

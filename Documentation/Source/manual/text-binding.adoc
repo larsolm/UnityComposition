@@ -8,7 +8,7 @@ See the _"Name"_ objects in the _"Battle"_ scene of the Battle project for an ex
 
 ### Fields
 
-image:text-binding.png[]
+image::text-binding.png[Text Binding]
 
 [cols="1,2"]
 |===

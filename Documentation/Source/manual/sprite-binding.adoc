@@ -8,7 +8,7 @@ See the _"Card"_ prefab in the CardGame project for an example usage.
 
 ### Fields
 
-image:sprite-binding.png[]
+image::sprite-binding.png[Sprite Binding]
 
 [cols="1,2"]
 |===

@@ -8,7 +8,7 @@ See the "Destroy Highlight" node on the "BoardTakeTurn" <<manual/instruction-gra
 
 ### Fields
 
-image:destroy-object-node.png[]
+image::destroy-object-node.png[Destroy Object Node]
 
 [cols="1,2"]
 |===

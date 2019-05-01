@@ -8,7 +8,7 @@ See the _"Set Card Binding"_ node on the _"Load Game"_ <<manual/instruction-grap
 
 ### Fields
 
-image:set-binding-node.png[]
+image::set-binding-node.png[Set Binding Node]
 
 [cols="1,2"]
 |===

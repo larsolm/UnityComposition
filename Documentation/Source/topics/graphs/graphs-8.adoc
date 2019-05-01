@@ -1,10 +1,8 @@
 [#topics/graphs-8]
 
-## Graphs
+## Creating Custom Nodes
 
-### Creating Custom Nodes
-
-To create custom nodes, derive from <<reference/instruciton-graph-node.html,InstructionGraphNode>> and implement the abstract method `Run(InstructionGraph graph, InstructionStore variables, int iteration)`
+To create custom nodes, derive from <<reference/instruction-graph-node.html,InstructionGraphNode>> and implement the abstract method `Run(InstructionGraph graph, InstructionStore variables, int iteration)`. The following is an example of a custom node that instantiates a game object from a prefab and stores it in a <<reference/variable-reference,variable reference>>.
 
 [source,cs]
 ----

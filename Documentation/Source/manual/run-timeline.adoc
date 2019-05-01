@@ -6,6 +6,8 @@ Run Timeline Node is an <<manual/instruction-graph-node.html,Instruction Graph N
 
 ### Fields
 
+image::run-timeline.png[Run Timeline]
+
 [cols="1,2"]
 |===
 | Name	| Description

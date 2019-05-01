@@ -8,7 +8,7 @@ See the _"Loot Item Display"_ prefab in the Loot project for an example usage.
 
 ### Fields
 
-image:menu-item.png[]
+image::menu-item.png[Menu Item]
 
 [cols="1,2"]
 |===

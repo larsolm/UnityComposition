@@ -8,7 +8,7 @@ See the _"TriangleDisplay"_ and _"HexagonDisplay"_ objects in the _"Battle"_ sce
 
 ### Fields
 
-image:object-binding-root.png[]
+image::object-binding-root.png[Object Binding Root]
 
 [cols="1,2"]
 |===

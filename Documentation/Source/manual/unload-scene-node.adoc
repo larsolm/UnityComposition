@@ -8,7 +8,7 @@ See the _"Unload Scene"_ node on the _"Hide Loot Inventory"_ <<manual/instructio
 
 ### Fields
 
-image:unload-scene-node.png[]
+image::unload-scene-node.png[Unload Scene Node]
 
 [cols="1,2"]
 |===

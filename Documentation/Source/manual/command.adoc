@@ -10,7 +10,7 @@ See the "Apply Damage" <<manual/expression-node.html,Expression Node>> of the "B
 
 ### Fields
 
-image:command.png[]
+image::command.png[Command]
 
 [cols="1,2"]
 |===

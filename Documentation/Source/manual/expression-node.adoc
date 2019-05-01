@@ -8,7 +8,7 @@ See the _"Apply Damage"_ node in "BattleScratch" <<instruction-graph.html,Instru
 
 ### Fields
 
-image:expression-node.png[]
+image::expression-node.png[Expression Node]
 
 [cols="1,2"]
 |===

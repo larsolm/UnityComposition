@@ -8,7 +8,7 @@ See the _"MazeUi"_ scene in the Maze project for an example usage.
 
 ### Fields
 
-image:expression-binding.png[]
+image::expression-binding.png[Expression Binding]
 
 [cols="1,2"]
 |===

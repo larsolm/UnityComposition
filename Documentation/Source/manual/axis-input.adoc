@@ -10,7 +10,7 @@ NOTE: Because this uses Unity's IPointerHandler interface the object must have e
 
 ### Fields
 
-image::axis-input.png[]
+image::axis-input.png[Axis Input]
 
 [cols="1,2"]
 |===

@@ -6,7 +6,7 @@ Image Color Binding is a <<manual/variable-binding.html,Variable Binding>> that 
 
 ### Fields
 
-image:image-color-binding.png[]
+image::image-color-binding.png[Image Color Binding]
 
 [cols="1,2"]
 |===

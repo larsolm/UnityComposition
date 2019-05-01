@@ -8,7 +8,7 @@ See the _"Loot Equipment Pickup"_ prefab in the Loot project for an example usag
 
 ### Fields
 
-image:variable-pool-asset.png[]
+image::variable-pool-asset.png[Variable Pool Asset]
 
 [cols="1,2"]
 |===

@@ -8,7 +8,7 @@ See the _"MazeStart"_ <<manual/instruction-graph.html,Instruction Graph>> in the
 
 ### Fields
 
-image:play-transition.png[]
+image::play-transition.png[Play Transition]
 
 [cols="1,2"]
 |===

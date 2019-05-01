@@ -8,7 +8,7 @@ See the node named _"Branch on Action_" on the _"Battle"_ <<manual/instruction-g
 
 ### Fields
 
-image:branch-node.png[]
+image::branch-node.png[Branch Node]
 
 [cols="1,2"]
 |===

@@ -1,8 +1,6 @@
 [#topics/graphs-7]
 
-## Graphs
-
-### Creating Custom Graphs
+## Creating Custom Graphs
 
 To create a custom graph, derive from <<reference/instruction-graph.html,InstructionGraph>> and implement the abstract method `Run(InstructionStore variables)`. The following is an example of a graph that has three different entry points and runs them sequentially:
 

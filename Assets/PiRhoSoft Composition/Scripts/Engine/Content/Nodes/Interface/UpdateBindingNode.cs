@@ -32,18 +32,18 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				if (obj is GameObject gameObject)
 				{
-					VariableBinding.UpdateBinding(gameObject, Group, _status);
+					VariableBinding.UpdateBinding(gameObject, Group, WaitForCompletion ? _status : null);
 				}
 				else if (obj is InterfaceControl control)
 				{
-					VariableBinding.UpdateBinding(control.gameObject, Group, _status);
+					VariableBinding.UpdateBinding(control.gameObject, Group, WaitForCompletion ? _status : null);
 
 					foreach (var dependency in control.DependentObjects)
-						VariableBinding.UpdateBinding(dependency, Group, _status);
+						VariableBinding.UpdateBinding(dependency, Group, WaitForCompletion ? _status : null);
 				}
 				else if (obj is Component component)
 				{
-					VariableBinding.UpdateBinding(component.gameObject, Group, _status);
+					VariableBinding.UpdateBinding(component.gameObject, Group, WaitForCompletion ? _status : null);
 				}
 			}
 

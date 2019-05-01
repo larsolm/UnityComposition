@@ -8,7 +8,7 @@ See the "Show Timer" node on the "MazeStart" <<manual/instruction-graph,Instruct
 
 ### Fields
 
-image:show-control-node.png[]
+image::show-control-node.png[Show Control Node]
 
 [cols="1,2"]
 |===
