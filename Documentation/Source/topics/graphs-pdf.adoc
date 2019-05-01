@@ -1,3 +1,7 @@
+# Unity Composition Graphs
+PiRho Soft
+:toc:
+:toc-title:
 :multipage-level: 1
 :icons: font
 :source-highlighter: highlightjs
@@ -6,8 +10,4 @@
 :figure-caption!:
 :table-caption!:
 
-include::topics.adoc[]
-
-include::manual.adoc[]
-
-include::reference.adoc[]
+include::graphs.adoc[]
