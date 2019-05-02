@@ -25,13 +25,19 @@ namespace PiRhoSoft.CompositionEngine
 		protected override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			foreach (var node in Nodes)
-				node.GetInputs(inputs);
+			{
+				if (node) // if a node type is deleted, the node will be null, and this might be called before the editor does a SyncNodes
+					node.GetInputs(inputs);
+			}
 		}
 
 		protected override void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			foreach (var node in Nodes)
-				node.GetOutputs(outputs);
+			{
+				if (node)
+					node.GetOutputs(outputs);
+			}
 		}
 
 		protected IEnumerator Run(InstructionStore variables, InstructionGraphNode root, string source)
