@@ -70,7 +70,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public VariableValue Test(VariableValue owner)
 		{
-			var result = VariableHandler.Test(owner, VariableValue.Create(Name));
+			var result = VariableHandler.Test(owner, Name);
 			return VariableValue.Create(result);
 		}
 	}

@@ -379,12 +379,12 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue Lookup(VariableValue owner, VariableValue lookup) => Get(owner.Type).Lookup_(owner, lookup);
 		public static SetVariableResult Apply(ref VariableValue owner, VariableValue lookup, VariableValue value) => Get(owner.Type).Apply_(ref owner, lookup, value);
 		public static VariableValue Cast(VariableValue owner, string type) => Get(owner.Type).Cast_(owner, type);
-		public static bool Test(VariableValue owner, VariableValue test) => Get(owner.Type).Test_(owner, test);
+		public static bool Test(VariableValue owner, string type) => Get(owner.Type).Test_(owner, type);
 
 		protected internal virtual VariableValue Lookup_(VariableValue owner, VariableValue lookup) => VariableValue.Empty;
 		protected internal virtual SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value) => SetVariableResult.NotFound;
 		protected internal virtual VariableValue Cast_(VariableValue owner, string type) => VariableValue.Empty;
-		protected internal virtual bool Test_(VariableValue owner, VariableValue test) => false;
+		protected internal virtual bool Test_(VariableValue owner, string type) => false;
 
 		#endregion
 	}

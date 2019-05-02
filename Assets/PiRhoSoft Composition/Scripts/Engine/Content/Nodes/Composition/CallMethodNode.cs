@@ -43,7 +43,8 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (ResolveObject(variables, Target, out var target))
 			{
-				var cast = ComponentHelper.GetAsObject(TargetType, target);
+				var cast = TargetType != null ? ComponentHelper.GetAsObject(TargetType, target) : null;
+
 				if (cast)
 				{
 					ResolveParameters(variables);
