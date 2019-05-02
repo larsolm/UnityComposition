@@ -69,11 +69,19 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnAfterDeserialize()
 		{
-			TargetType = Type.GetType(_targetTypeName);
-			Field = TargetType?.GetField(_propertyName);
-			Property = TargetType?.GetProperty(_propertyName);
+			if (!string.IsNullOrEmpty(_targetTypeName))
+			{
+				TargetType = Type.GetType(_targetTypeName);
 
-			_getter = Getter.Create(TargetType, Property);
+				if (TargetType != null && !string.IsNullOrEmpty(_propertyName))
+				{
+					Field = TargetType.GetField(_propertyName);
+					Property = TargetType.GetProperty(_propertyName);
+
+					if (Property != null)
+						_getter = Getter.Create(TargetType, Property);
+				}
+			}
 		}
 
 		public void OnBeforeSerialize()
