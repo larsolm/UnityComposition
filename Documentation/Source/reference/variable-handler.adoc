@@ -114,6 +114,6 @@ Sets a value contained in _owner_ based on _lookup_ to _value_. _owner_ will be 
 
 Returns the value of _owner_ converted to type _type_. For object values, this is used to lookup sibling components.
 
-bool Test(<<reference/variable-value.html,VariableValue>> _owner_, <<reference/variable-value.html,VariableValue>> _test_)::
+bool Test(<<reference/variable-value.html,VariableValue>> _owner_, string _type_)::
 
-Determines if _owner_ is holding the type indicated by _test_.
+Determines if a _Cast_ to _type_ would be successful.

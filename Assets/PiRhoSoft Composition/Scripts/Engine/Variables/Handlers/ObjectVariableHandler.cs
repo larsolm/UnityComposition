@@ -87,6 +87,20 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		protected internal override bool Test_(VariableValue owner, string type)
+		{
+			if (type == _gameObjectName)
+			{
+				var gameObject = ComponentHelper.GetAsGameObject(owner.Object);
+				return gameObject != null;
+			}
+			else
+			{
+				var component = ComponentHelper.GetAsComponent(owner.Object, type);
+				return component != null;
+			}
+		}
+
 		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.IsEmpty)

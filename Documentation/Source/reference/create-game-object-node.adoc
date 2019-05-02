@@ -12,19 +12,19 @@ Creates a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] 
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to run after the object is created.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/game-object-variable-source.html,GameObjectVariableSource>> _Prefab_::
 
-The prefab to use as a template for the game object that will be created. This can be specified as a reference to an object in the editor or a variable reference that has the value of an object.
+The https://docs.unity3d.com/Manual/Prefabs.html[prefab^] to use as a template for the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] that will be created.
 
 <<reference/string-variable-source.html,StringVariableSource>> _ObjectName_::
 
-The name to assign to the newly created object.
+The name to assign to the newly created https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
 
 <<reference/variable-reference.html,VariableReference>> _ObjectVariable_::
 
-The variable to assign the newly created object to.
+The variable to assign the newly created https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to.
 
 <<reference/create-game-object-node-object-positioning.html,ObjectPositioning>> _Positioning_::
 
@@ -32,16 +32,20 @@ The way the value of _Position_ and _Rotation_ should be interpreted.
 
 <<reference/variable-reference.html,VariableReference>> _Object_::
 
-When _Positioning_ is `Relative`, specifies the object the created object should be positioned relative to.
+When _Positioning_ is `Relative`, specifies the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] the created https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] should be positioned relative to.
 
 <<reference/variable-reference.html,VariableReference>> _Parent_::
 
-When _Positioning_ is `Child`, specifies the object the created object should be added to as a child.
+When _Positioning_ is `Child`, specifies the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] the created https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] should be added to as a child.
 
 <<reference/vector3-variable-source.html,Vector3VariableSource>> _Position_::
 
-The position at which to place the newly created object.
+The position at which to place the newly created https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
 
 <<reference/vector3-variable-source.html,Vector3VariableSource>> _Rotation_::
 
-The rotation to set the newly created object to.
+The rotation to set the newly created https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to.
+
+ifdef::backend-multipage_html5[]
+<<manual/create-game-object-node.html,Manual>>
+endif::[]

@@ -12,7 +12,7 @@ Creates a https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Scripta
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to run after the object is created.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 string _ScriptableObjectType_::
 
@@ -20,4 +20,8 @@ The https://docs.microsoft.com/en-us/dotnet/api/system.type.assemblyqualifiednam
 
 <<reference/variable-reference.html,VariableReference>> _ObjectVariable_::
 
-The variable to assign the newly created object to.
+The variable to assign the newly created https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] to.
+
+ifdef::backend-multipage_html5[]
+<<manual/create-scriptable-object-node.html,Manual>>
+endif::[]
