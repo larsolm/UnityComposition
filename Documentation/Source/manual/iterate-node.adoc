@@ -8,7 +8,7 @@ See the _"Iterate Ranks"_ node on the _"Load Game"_ <<manual/instruction-graph.h
 
 ### Fields
 
-image:iterate-node.png[]
+image::iterate-node.png[Iterate Node]
 
 [cols="1,2"]
 |===

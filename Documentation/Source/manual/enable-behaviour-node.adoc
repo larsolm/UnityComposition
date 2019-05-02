@@ -8,7 +8,7 @@ See the "Enable Player" node on the "MazeStart" <<manual/instruction-graph,Instr
 
 ### Fields
 
-image:enable-behaviour-node.png[]
+image::enable-behaviour-node.png[Enable Behaviour Node]
 
 [cols="1,2"]
 |===

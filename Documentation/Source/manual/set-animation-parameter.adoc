@@ -6,6 +6,8 @@ Set Animation Parameter Node is an <<manual/instruction-graph-node.html,Instruct
 
 ### Fields
 
+image::set-animation-parameter.png[Set Animation Parameter]
+
 [cols="1,2"]
 |===
 | Name	| Description

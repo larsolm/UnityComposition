@@ -8,7 +8,7 @@ See the _"Battle"_ <<manual/instruction-graph.html,Instruction Graph>> in the Ba
 
 ### Fields
 
-image:sequence-node.png[]
+image::sequence-node.png[Sequence Node]
 
 [cols="1,2"]
 |===

@@ -1,8 +1,6 @@
 [#topics/graphs-6]
 
-## Graphs
-
-### Running Graphs From Script
+## Running Graphs From Script
 
 Running graphs from script is as simple as calling `CompositionManager.Instance.RunInstruction()`.
 

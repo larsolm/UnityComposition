@@ -8,7 +8,7 @@ See the _"Level Message"_ node on the _"MazeStart"_ <<manual/instruction-graph.h
 
 ### Fields
 
-image:selection-node.png[]
+image::selection-node.png[Selection Node]
 
 [cols="1,2"]
 |===

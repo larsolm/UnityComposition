@@ -117,18 +117,16 @@ MonoBehaviour:
   m_Name: Set Card Binding
   m_EditorClassIdentifier: 
   Name: Set Card Binding
-  GraphPosition: {x: 1228.8, y: 51.2}
+  GraphPosition: {x: 1177.6, y: 115.200005}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Object:
-    _variable: local.card as BindingRoot
+    _variable: local.card
     _tokens:
     - Type: 0
       Text: local
     - Type: 0
       Text: card
-    - Type: 2
-      Text: BindingRoot
   Binding:
     _variable: local.card
     _tokens:
@@ -367,7 +365,7 @@ MonoBehaviour:
   m_Name: Create Card
   m_EditorClassIdentifier: 
   Name: Create Card
-  GraphPosition: {x: 1100.8, y: -76.8}
+  GraphPosition: {x: 1049.6, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114696056752831474}
   Prefab:
@@ -445,7 +443,7 @@ MonoBehaviour:
   m_Name: Set Card Data
   m_EditorClassIdentifier: 
   Name: Set Card Data
-  GraphPosition: {x: 1164.8, y: -12.8}
+  GraphPosition: {x: 1113.6, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114233220627467950}
   Expression:
@@ -474,7 +472,7 @@ MonoBehaviour:
   m_Name: Set Name
   m_EditorClassIdentifier: 
   Name: Set Name
-  GraphPosition: {x: 768, y: 89.6}
+  GraphPosition: {x: 998.4, y: -76.8}
   IsBreakpoint: 0
   Next: {fileID: 114675892718543162}
   Expression:

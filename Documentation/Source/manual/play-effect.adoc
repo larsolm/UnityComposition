@@ -8,7 +8,7 @@ See the _"Play Jewel Sparkle"_ node on the _"MazeJewel"_ <<manual/instruction-gr
 
 ### Fields
 
-image:play-effect.png[]
+image::play-effect.png[Play Effect]
 
 [cols="1,2"]
 |===

@@ -8,7 +8,7 @@ See the _"Description"_ object in the _"Shop"_ scene of the Shop project for an 
 
 ### Fields
 
-image:focus-binding-root.png[]
+image::focus-binding-root.png[Focus Binding Root]
 
 [cols="1,2"]
 |===

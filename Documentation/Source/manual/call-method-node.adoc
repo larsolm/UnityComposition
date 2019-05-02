@@ -6,7 +6,7 @@ A Call Method Node is an <<manual/instruction-graph-node.html,Instruction Graph 
 
 ### Fields
 
-image:call-method-node.png[]
+image::call-method-node.png[Call Method Node]
 
 [cols="1,2"]
 |===

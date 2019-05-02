@@ -6,7 +6,7 @@ A Mockup Node is an <<manua/instruction-graph-node.html,Instruction Graph Node>>
 
 ### Fields
 
-image:mockup-node.png[]
+image::mockup-node.png[Mockup Node]
 
 [cols="1,2"]
 |===

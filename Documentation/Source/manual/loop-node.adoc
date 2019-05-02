@@ -8,7 +8,7 @@ See the _"Loop Until Winner"_ node on the _"BoardLoop"_ <<manual/instruction-gra
 
 ### Fields
 
-image:loop-node.png[]
+image::loop-node.png[Loop Node]
 
 [cols="1,2"]
 |===

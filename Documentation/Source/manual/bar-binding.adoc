@@ -10,7 +10,7 @@ NOTE: Make sure the _Image Type_ property on https://docs.unity3d.com/ScriptRefe
 
 ### Fields
 
-image:bar-binding.png[]
+image::bar-binding.png[Bar Binding]
 
 [cols="1,2"]
 |===

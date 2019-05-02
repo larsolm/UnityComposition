@@ -10,7 +10,7 @@ See the "Move" node on the "MazeGate" <<manual/instruction-graph,Instruction Gra
 
 ### Fields
 
-image:transform-node.png[]
+image::transform-node.png[Transform Node]
 
 [cols="1,2"]
 |===

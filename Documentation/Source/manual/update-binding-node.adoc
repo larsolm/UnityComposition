@@ -2,13 +2,13 @@
 
 ## Update Binding Node
 
-Udpate Binding Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells the binding root <<manual/binding-root.html,Binding Root>>, _Object_ to update its <<manual/variable-binding.html,VariableBindings>>. If any of the bindings utilize animation (such as <<manual/bar-binding,Bar Binding>>) and _WaitForCompletion_ is set, then the graph will not move to the next node until the binding animation is finished. Use the _Group_ string to identify only the <<manual/variable-binding.html,VariableBindings>> with the cooresponding _BindingGroup_ to update. Create an Update Binding Node in the menu:Create[Interface > Update Binding] menu of the Instruction Graph Window.
+Udpate Binding Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells the binding root <<manual/binding-root.html,Binding Root>>, _Object_ to update its <<manual/variable-binding.html,VariableBindings>>. If _Object_ is an <<manual/interface-control.html,Interface Control>> then each of the control's _DependentObjects_ will also have its bindings updated. If any of the bindings utilize animation (such as <<manual/bar-binding,Bar Binding>>) and _WaitForCompletion_ is set, then the graph will not move to the next node until the binding animation is finished. Use the _Group_ string to identify only the <<manual/variable-binding.html,VariableBindings>> with the cooresponding _BindingGroup_ to update. Create an Update Binding Node in the menu:Create[Interface > Update Binding] menu of the Instruction Graph Window.
 
 See the _"Update Binding"_ node on the _"BattleScratch"_ <<manual/instruction-graph.html,Instruction Graph>> in the Battle project for an example usage.
 
 ### Fields
 
-image:update-binding-node.png[]
+image::update-binding-node.png[Update Binding Node]
 
 [cols="1,2"]
 |===

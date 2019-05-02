@@ -8,7 +8,7 @@ See the _"Calculator"_ <<manual/instruction-graph.html,Instruction Graph>> in th
 
 ### Fields
 
-image:input-node.png[]
+image::input-node.png[Input Node]
 
 [cols="1,2"]
 |===

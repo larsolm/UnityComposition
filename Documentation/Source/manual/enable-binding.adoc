@@ -10,7 +10,7 @@ See the _"MazeUi"_ scene in the Maze project for an example usage.
 
 ### Fields
 
-image:enable-binding.png[]
+image::enable-binding.png[Enable Binding]
 
 [cols="1,2"]
 |===

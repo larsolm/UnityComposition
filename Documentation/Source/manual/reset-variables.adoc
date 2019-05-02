@@ -6,6 +6,8 @@ Reset Variables Node is an <<manual/instruction-graph-node.html,Instruction Grap
 
 ### Fields
 
+image::reset-variables.png[Reset Variables]
+
 [cols="1,2"]
 |===
 | Name	| Description

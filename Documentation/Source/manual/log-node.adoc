@@ -6,7 +6,7 @@ A Log Node is an <<manua/instruction-graph-node.html,Instruction Graph Node>> th
 
 ### Fields
 
-image:log-node.png[]
+image::log-node.png[Log Node]
 
 [cols="1,2"]
 |===

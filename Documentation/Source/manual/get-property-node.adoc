@@ -8,7 +8,7 @@ See the _"Store Start Position"_ node on the _"BattleScratch"_ <<manual/instruct
 
 ### Fields
 
-image:get-property-node.png[]
+image::get-property-node.png[Get Property Node]
 
 [cols="1,2"]
 |===

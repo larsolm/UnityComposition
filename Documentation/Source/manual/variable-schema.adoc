@@ -6,7 +6,7 @@ A VariableSchema is an https://docs.unity3d.com/ScriptReference/ScriptableObject
 
 ### Fields
 
-image:variable-schema.png[]
+image::variable-schema.png[Variable Schema]
 
 [cols="1,2"]
 |===

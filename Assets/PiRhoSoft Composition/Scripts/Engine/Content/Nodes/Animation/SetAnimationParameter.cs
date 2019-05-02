@@ -12,6 +12,10 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
+		[Tooltip("The Animator to set the parameter on")]
+		[VariableConstraint(typeof(Animator))]
+		public VariableReference Animator;
+
 		[Tooltip("The name of the parameter to set")]
 		[ClassDisplay(ClassDisplayType.Propogated)]
 		public StringVariableSource Parameter = new StringVariableSource();
@@ -19,10 +23,6 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The type of the parameter to set")]
 		[EnumDisplay]
 		public AnimatorControllerParameterType Type;
-
-		[Tooltip("The Animator to set the parameter on")]
-		[VariableConstraint(typeof(Animator))]
-		public VariableReference Animator;
 
 		[Tooltip("The value to set the parameter to")]
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Bool)]

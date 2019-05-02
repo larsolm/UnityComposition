@@ -6,7 +6,7 @@ Fade is an implementation of a <<manual/cutoff.html,Cutoff>> <<manual/transition
 
 ### Fields
 
-image:fade.png[]
+image::fade.png[Fade]
 
 [cols="1,2"]
 |===

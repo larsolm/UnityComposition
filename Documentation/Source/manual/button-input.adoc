@@ -10,7 +10,7 @@ NOTE: Because this uses Unity's IPointerHandler interface the object must have e
 
 ### Fields
 
-image:button-input.png[]
+image::button-input.png[Button Input]
 
 [cols="1,2"]
 |===

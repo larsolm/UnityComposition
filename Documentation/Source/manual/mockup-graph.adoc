@@ -6,7 +6,7 @@ A Mockup Graph is an implementation of an <<manual/instruction-graph.html,Instru
 
 ### Fields
 
-image:mockup-graph.png[]
+image::mockup-graph.png[Mockup Graph]
 
 [cols="1,2"]
 |===

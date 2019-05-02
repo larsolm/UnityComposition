@@ -8,7 +8,7 @@ See the _"Maze3"_ scene in the Maze project for an example usage.
 
 ### Fields
 
-image:graph-trigger-binding.png[]
+image::graph-trigger-binding.png[Graph Trigger Binding]
 
 [cols="1,2"]
 |===

@@ -8,7 +8,7 @@ See the _"ItemsMenu"_ and _"EquipmentMenu"_ objects in the _"Loot Menu"_ scene o
 
 ### Fields
 
-image:list-binding.png[]
+image::list-binding.png[List Binding]
 
 [cols="1,2"]
 |===

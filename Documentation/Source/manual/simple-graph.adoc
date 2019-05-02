@@ -2,7 +2,7 @@
 
 ## Simple Graph
 
-
+A Simple Graph is the most basic implementation of an <<manual/instruction-graph.html,Instruction Graph>> and should be sufficient for most use cases. A Simple Graph has a single entry point _Process_ with no other special behaviour.
 
 ifdef::backend-multipage_html5[]
 <<reference/simple-graph.html,Reference>>

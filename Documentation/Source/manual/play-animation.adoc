@@ -8,7 +8,7 @@ See the _"Play Finish Animation"_ node on the _"MazeJewel"_ <<manual/instruction
 
 ### Fields
 
-image:play-animation.png[]
+image::play-animation.png[Play Animation]
 
 [cols="1,2"]
 |===

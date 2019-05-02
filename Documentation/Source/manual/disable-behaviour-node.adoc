@@ -8,7 +8,7 @@ See the "Disable Player" node on the "MazeStart" <<manual/instruction-graph,Inst
 
 ### Fields
 
-image:disable-behaviour-node.png[]
+image::disable-behaviour-node.png[Disable Behaviour Node]
 
 [cols="1,2"]
 |===

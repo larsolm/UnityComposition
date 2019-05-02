@@ -8,7 +8,7 @@ See the _"BoardTakeTurn"_ <<manual/instruction-graph.html,Instruction Graph>> in
 
 ### Fields
 
-image:wait-node.png[]
+image::wait-node.png[Wait Node]
 
 [cols="1,2"]
 |===

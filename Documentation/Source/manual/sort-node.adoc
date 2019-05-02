@@ -8,7 +8,7 @@ See the _"Sort Fighters"_ node on the _"Battle"_ <<manual/instruction-graph.html
 
 ### Fields
 
-image:sort-node.png[]
+image::sort-node.png[Sort Node]
 
 [cols="1,2"]
 |===

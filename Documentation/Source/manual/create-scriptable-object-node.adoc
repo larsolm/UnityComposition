@@ -6,7 +6,7 @@ A Create Scriptable Object Node is an <<manual/instruction-graph-node.html,Instr
 
 ### Fields
 
-image:create-scriptable-object-node.png[]
+image::create-scriptable-object-node.png[Create Scriptable Object Node]
 
 [cols="1,2"]
 |===

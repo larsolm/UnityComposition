@@ -10,7 +10,7 @@ See the _"Scratch"_ prefab in the Battle project for an example usage.
 
 ### Fields
 
-image:material-animation.png[]
+image::material-animation.png[Material Animation]
 
 [cols="1,2"]
 |===

@@ -6,7 +6,7 @@ An abstract https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Asset
 
 ### Fields
 
-image:instruction-graph.png[]
+image::instruction-graph.png[Instruction Graph]
 
 [cols="1,2"]
 |===

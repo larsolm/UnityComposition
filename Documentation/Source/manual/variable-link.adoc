@@ -8,7 +8,7 @@ See the _"Main Camera"_ object in the _"Battle"_ scene of the Battle project for
 
 ### Fields
 
-image:variable-link.png[]
+image::variable-link.png[Variable Link]
 
 [cols="1,2"]
 |===

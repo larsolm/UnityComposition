@@ -8,7 +8,7 @@ See the _"Loot Level"_ scene in the Loot project for an example usage.
 
 ### Fields
 
-image:button-graph-trigger.png[]
+image::button-graph-trigger.png[Button Graph Trigger]
 
 [cols="1,2"]
 |===

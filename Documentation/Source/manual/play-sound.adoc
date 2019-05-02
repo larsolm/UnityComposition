@@ -8,7 +8,7 @@ See the _"Play Pickup Sound"_ node on the _"MazeKey"_ <<manual/instruction-graph
 
 ### Fields
 
-image:play-sound.png[]
+image::play-sound.png[Play Sound]
 
 [cols="1,2"]
 |===

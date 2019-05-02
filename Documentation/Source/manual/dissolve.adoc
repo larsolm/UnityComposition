@@ -6,7 +6,7 @@ Dissolve is an implementation of a <<manual/cutoff.html,Cutoff>> <<manual/transi
 
 ### Fields
 
-image:dissolve.png[]
+image::dissolve.png[Dissolve]
 
 [cols="1,2"]
 |===
