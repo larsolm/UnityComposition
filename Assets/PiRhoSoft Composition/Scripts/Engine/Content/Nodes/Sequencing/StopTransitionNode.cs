@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Sequencing/Clear Transition", 1)]
-	[HelpURL(Composition.DocumentationUrl + "clear-transition")]
-	public class ClearTransition : InstructionGraphNode
+	[CreateInstructionGraphNodeMenu("Sequencing/Stop Transition", 1)]
+	[HelpURL(Composition.DocumentationUrl + "stop-transition-node")]
+	public class StopTransitionNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

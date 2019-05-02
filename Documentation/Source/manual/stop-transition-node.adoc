@@ -1,0 +1,11 @@
+[#manual/stop-transition-node]
+
+## Stop Transition Node
+
+A Stop Transition Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that is used to manually end the current <<manual/transition.html,Transition>>. Generally ending a <<manual/transition.html,Transition>> happens with the _AutoFinish_ property on a <<manual/play-transition-node.html,Play Transition Node>> however, in the case that a <<manual/transition.html,Transition>> needs to be ended manually this node is available. Create a Stop Transition Node in the menu:Create[Sequencing > Stop Transition] menu of the Instruction Graph Window.
+
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+
+ifdef::backend-multipage_html5[]
+<<reference/stop-transition-node.html,Reference>>
+endif::[]

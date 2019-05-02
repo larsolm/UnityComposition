@@ -1,8 +1,8 @@
-[#reference/set-animation-parameter]
+[#reference/set-animation-parameter-node]
 
-## SetAnimationParameter
+## SetAnimationParameterNode
 
-PiRhoSoft.CompositionEngine.SetAnimationParameter : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.SetAnimationParameterNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 

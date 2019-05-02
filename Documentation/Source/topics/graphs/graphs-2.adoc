@@ -9,7 +9,7 @@ Nodes make up the bulk of the functionality of a graph. They may control both th
 
 | <<manual/play-animation-node.html,Play Animation>> | Play an animation on a game object
 | <<manual/play-animation-state-node.html,Play Animation State>> | Play an animation state on an Animator
-| <<manual/set-animation-parameter- node.html,Set Animation Parameter>> | Set an animation parameter on an Animator
+| <<manual/set-animation-parameter-node.html,Set Animation Parameter>> | Set an animation parameter on an Animator
 | <<manual/play-effect-node.html,Play Effect>> | Create and play an effect Prefab
 | <<manual/play-sound-node.html,Play Sound>> | Play an AudioClip
 | <<manual/play-timeline-node.html,Play Timeline>> | Run a timeline
@@ -75,7 +75,7 @@ Nodes make up the bulk of the functionality of a graph. They may control both th
 | Sequencing |
 
 | <<manual/play-transition-node.html,Play Transition>> | Play a transition
-| <<manual/clear-transition-node.html,Clear Transition>> | Stop the current transition
+| <<manual/stop-transition-node.html,Stop Transition>> | Stop the current transition
 | <<manual/load-scene-node.html,Load Scene>> | Play a transition
 | <<manual/unload-scene-node.html,Unload Scene>> | Play a transition
 | <<manual/transform-node.html,Transform Object>> | Move or animate the transform of a game object

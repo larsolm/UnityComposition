@@ -1,8 +1,8 @@
-[#reference/play-animation-state]
+[#reference/play-animation-state-node]
 
-## PlayAnimationState
+## PlayAnimationStateNode
 
-PiRhoSoft.CompositionEngine.PlayAnimationState : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.PlayAnimationStateNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 

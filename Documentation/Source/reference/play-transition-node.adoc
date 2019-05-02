@@ -1,8 +1,8 @@
-[#reference/play-transition]
+[#reference/play-transition-node]
 
-## PlayTransition
+## PlayTransitionNode
 
-PiRhoSoft.CompositionEngine.PlayTransition : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.PlayTransitionNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 

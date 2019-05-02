@@ -1,8 +1,8 @@
-[#reference/clear-transition]
+[#reference/stop-transition-node]
 
-## ClearTransition
+## StopTransitionNode
 
-PiRhoSoft.CompositionEngine.ClearTransition : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.StopTransitionNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 

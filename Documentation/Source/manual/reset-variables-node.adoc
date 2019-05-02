@@ -1,6 +1,6 @@
-[#manual/reset-variables]
+[#manual/reset-variables-node]
 
-## Reset Variables
+## Reset Variables Node
 
 Reset Variables Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that calls `ResetVariables()` on an object that implements <<reference/i-variable-reset.html,IVariableReset>>. Usually this used to reinitialize specific variables on a <<manual/variable-set-component.html,VariableSetComponent>>. Create a Reset Variables Node in the menu:Create[Composition > Reset Variables] menu of the Instruction Graph Window.
 
@@ -9,7 +9,7 @@ See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. 
 
 ### Fields
 
-image::reset-variables.png[Reset Variables]
+image::reset-variables-node.png[Reset Variables Node]
 
 [cols="1,2"]
 |===
@@ -20,5 +20,5 @@ image::reset-variables.png[Reset Variables]
 |===
 
 ifdef::backend-multipage_html5[]
-<<reference/reset-variables.html,Reference>>
+<<reference/reset-variables-node.html,Reference>>
 endif::[]

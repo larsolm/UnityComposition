@@ -10,9 +10,9 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class TimelineVariableSource : VariableSource<TimelineAsset> { }
 
-	[CreateInstructionGraphNodeMenu("Animation/Run Timeline", 200)]
-	[HelpURL(Composition.DocumentationUrl + "run-timeline")]
-	public class RunTimeline : InstructionGraphNode
+	[CreateInstructionGraphNodeMenu("Animation/Play Timeline", 200)]
+	[HelpURL(Composition.DocumentationUrl + "play-timeline-node")]
+	public class PlayTimelineNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

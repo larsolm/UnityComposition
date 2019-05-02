@@ -1,8 +1,8 @@
-[#reference/run-timeline]
+[#reference/play-timeline-node]
 
-## RunTimeline
+## PlayTimelineNode
 
-PiRhoSoft.CompositionEngine.RunTimeline : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.PlayTimelineNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 

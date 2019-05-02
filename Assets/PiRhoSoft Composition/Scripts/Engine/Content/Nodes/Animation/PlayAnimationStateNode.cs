@@ -5,8 +5,8 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Animation/Play Animation State", 1)]
-	[HelpURL(Composition.DocumentationUrl + "play-animation-state")]
-	public class PlayAnimationState : InstructionGraphNode
+	[HelpURL(Composition.DocumentationUrl + "play-animation-state-node")]
+	public class PlayAnimationStateNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

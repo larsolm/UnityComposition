@@ -1,14 +1,14 @@
-[#manual/run-timeline]
+[#manual/play-timeline-node]
 
-## Run Timeline
+## Play Timeline Node
 
-Run Timeline Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells a https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html[PlayableDirector^] to https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.Play.html[Play()^] a https://docs.unity3d.com/2018.3/Documentation/ScriptReference/Timeline.TimelineAsset.html[Timeline^]. Create a Run Timeline Node in the menu:Create[Animation > Run Timeline] menu of the Instruction Graph Window.
+Play Timeline Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells a https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html[PlayableDirector^] to https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.Play.html[Play()^] a https://docs.unity3d.com/2018.3/Documentation/ScriptReference/Timeline.TimelineAsset.html[Timeline^]. Create a Play Timeline Node in the menu:Create[Animation > Play Timeline] menu of the Instruction Graph Window.
 
 See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 
 ### Fields
 
-image::run-timeline.png[Run Timeline]
+image::play-timeline-node.png[Play Timeline Node]
 
 [cols="1,2"]
 |===
@@ -21,5 +21,5 @@ image::run-timeline.png[Run Timeline]
 |===
 
 ifdef::backend-multipage_html5[]
-<<reference/run-timeline.html,Reference>>
+<<reference/play-timeline-node.html,Reference>>
 endif::[]

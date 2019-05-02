@@ -1,12 +1,12 @@
-[#reference/reset-variables]
+[#reference/reset-variables-node]
 
-## ResetVariables
+## ResetVariablesNode
 
-PiRhoSoft.CompositionEngine.ResetVariables : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.ResetVariablesNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
-Resets a specific set of <<reference/variable.html,Variables>> on an object implementing <<reference/i-variable-reset.html,IVariableReset>>. To reset <<reference/variable.html,Variables>> by tag use <<reference/reset-tag.html,ResetTag>>.
+Resets a specific set of <<reference/variable.html,Variables>> on an object implementing <<reference/i-variable-reset.html,IVariableReset>>. To reset <<reference/variable.html,Variables>> by tag use <<reference/reset-tag-node.html,ResetTagNode>>.
 
 ### Public Fields
 

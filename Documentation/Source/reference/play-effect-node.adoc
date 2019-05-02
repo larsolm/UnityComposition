@@ -1,8 +1,8 @@
-[#reference/play-effect]
+[#reference/play-effect-node]
 
 ## PlayEffect
 
-PiRhoSoft.CompositionEngine.PlayEffect : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.PlayEffectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
@@ -26,7 +26,7 @@ The name to assign to the instantiated https://docs.unity3d.com/Manual/Prefabs.h
 
 The variable to assign the instantiated https://docs.unity3d.com/Manual/Prefabs.html[prefab^] to.
 
-<<reference/play-effect-object-positioning.html,ObjectPositioning>> _Positioning_::
+<<reference/play-effect-node-object-positioning.html,ObjectPositioning>> _Positioning_::
 
 The way the value of _Position_ and _Rotation_ should be interpreted.
 

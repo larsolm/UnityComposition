@@ -1,6 +1,6 @@
-[#manual/reset-tag]
+[#manual/reset-tag-node]
 
-## Reset Tag
+## Reset Tag Node
 
 Reset Tag Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that calls `ResetTag()` on an object that implements <<reference/i-variable-reset.html,IVariableReset>>. Usually this used to reinitialize variables on a <<manual/variable-set-component.html,VariableSetComponent>>. Create a Reset Tag Node in the menu:Create[Composition > Reset Tag] menu of the Instruction Graph Window.
 
@@ -10,7 +10,7 @@ See the _"Reset Stats"_ node on the _"Battle"_ <<manual/instruction-graph.html,I
 
 ### Fields
 
-image::reset-tag.png[Reset Tag]
+image::reset-tag-node.png[Reset Tag Node]
 
 [cols="1,2"]
 |===
@@ -21,5 +21,5 @@ image::reset-tag.png[Reset Tag]
 |===
 
 ifdef::backend-multipage_html5[]
-<<reference/reset-tag.html,Reference>>
+<<reference/reset-tag-node.html,Reference>>
 endif::[]

@@ -4,8 +4,8 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Composition/Reset Tag", 31)]
-	[HelpURL(Composition.DocumentationUrl + "reset-tag")]
-	public class ResetTag : InstructionGraphNode
+	[HelpURL(Composition.DocumentationUrl + "reset-tag-node")]
+	public class ResetTagNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

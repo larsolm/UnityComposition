@@ -1,0 +1,23 @@
+[#reference/reset-tag-node]
+
+## ResetTagNode
+
+PiRhoSoft.CompositionEngine.ResetTagNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+Resets all <<reference/variable.html,Variables>> on an object implementing <<reference/i-variable-reset.html,IVariableReset>> with a given tag. To reset a specific set of <<reference/variable.html,Variables>> use <<reference/reset-variables-node.html,ResetVariablesNode>>
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
+<<reference/variable-reference.html,VariableReference>> _Object_::
+
+The <<reference/i-variable-reset.html,IVariableReset>> to call _ResetTag_ on.
+
+string _Tag_::
+
+The tag to reset on _Object_.

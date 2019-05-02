@@ -1,8 +1,8 @@
-[#reference/play-sound]
+[#reference/play-sound-node]
 
-## PlaySound
+## PlaySoundNode
 
-PiRhoSoft.CompositionEngine.PlaySound : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.PlaySoundNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 

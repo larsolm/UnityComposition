@@ -5,8 +5,8 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Sequencing/Play Transition", 0)]
-	[HelpURL(Composition.DocumentationUrl + "play-transition")]
-	public class PlayTransition : InstructionGraphNode
+	[HelpURL(Composition.DocumentationUrl + "play-transition-node")]
+	public class PlayTransitionNode : InstructionGraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

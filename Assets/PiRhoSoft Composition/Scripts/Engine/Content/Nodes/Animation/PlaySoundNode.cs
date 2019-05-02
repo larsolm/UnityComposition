@@ -9,8 +9,8 @@ namespace PiRhoSoft.CompositionEngine
 	public class AudioClipVariableSource : VariableSource<AudioClip> { }
 
 	[CreateInstructionGraphNodeMenu("Animation/Play Sound", 101)]
-	[HelpURL(Composition.DocumentationUrl + "play-sound")]
-	public class PlaySound : InstructionGraphNode
+	[HelpURL(Composition.DocumentationUrl + "play-sound-node")]
+	public class PlaySoundNode : InstructionGraphNode
 	{
 		private const string _soundNotFoundWarning = "(CAPSSNF) Unable to play sound for {0}: the audio clip could not be found";
 		private const string _invalidVolumeWarning = "(CAPSIV) Unable to set volume for {0}: the volume could not be found - defaulting to 1";
