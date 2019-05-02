@@ -2,7 +2,7 @@
 
 ## InstructionGraphNodeDictionary
 
-PiRhoSoft.CompositionEngine.InstructionGraphNodeDictionary : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-dictionary-2[SerializedDictionary^]<string, string>
+PiRhoSoft.CompositionEngine.InstructionGraphNodeDictionary : <<reference/serialized-dictionary-2,SerializedDictionary>><string, string>
 
 ### Description
 

@@ -1,0 +1,39 @@
+[#reference/serialized-list-1]
+
+## SerializedList
+
+PiRhoSoft.UtilityEngine.SerializedList<__T__> : https://docs.microsoft.com/en-us/dotnet/api/System.Collections.ICollection[ICollection^], https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerable[IEnumerable^], https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IReadOnlyCollection-1[IReadOnlyCollection^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IReadOnlyList-1[IReadOnlyList^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IList[IList^], https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.ICollection-1[ICollection^]<T>
+
+### Description
+
+### Public Properties
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<T> _List_ _(read only)_::
+
+int _Count_ _(read only)_::
+
+T _Item_::
+
+### Public Methods
+
+void Add(T _item_)::
+
+bool Remove(T _item_)::
+
+void Clear()::
+
+bool Contains(T _item_)::
+
+void CopyTo(T[] _array_, int _arrayIndex_)::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerator-1[IEnumerator^]<T> GetEnumerator()::
+
+int IndexOf(T _item_)::
+
+void Insert(int _index_, T _item_)::
+
+void RemoveAt(int _index_)::
+
+### Protected Fields
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<T> __items_::

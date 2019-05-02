@@ -2,7 +2,7 @@
 
 ## SortConditionList
 
-PiRhoSoft.CompositionEngine.SortConditionList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/variable-reference.html,VariableReference>>>
+PiRhoSoft.CompositionEngine.SortConditionList : <<reference/serialized-list-1.html,SerializedList>><<<reference/variable-reference.html,VariableReference>>>
 
 ### Description
 

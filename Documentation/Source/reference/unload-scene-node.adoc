@@ -16,7 +16,7 @@ The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when t
 
 Specifies how the scene to unload is retrieved.
 
-link:/projects/unity-utilities/documentation/#/v10/reference/scene-reference[SceneReference^] _Scene_::
+<<reference/scene-reference.html,SceneReference>> _Scene_::
 
 If _Source_ is `Value`, holds the scene to unload.
 

@@ -2,7 +2,7 @@
 
 ## TagList
 
-PiRhoSoft.CompositionEngine.TagList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<string>
+PiRhoSoft.CompositionEngine.TagList : <<reference/serialized-list-1.html,SerializedList>><string>
 
 ### Description
 

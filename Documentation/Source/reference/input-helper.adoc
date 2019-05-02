@@ -1,0 +1,63 @@
+[#reference/input-helper]
+
+## InputHelper
+
+PiRhoSoft.UtilityEngine.InputHelper
+
+### Description
+
+### Static Methods
+
+void LateUpdate()::
+
+void SetButton(string _button_, bool _down_)::
+
+void RemoveButton(string _button_)::
+
+void SetAxis(string _axis_, float _value_)::
+
+void RemoveAxis(string _axis_)::
+
+<<reference/button-state.html,ButtonState>> GetKeyState(https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _key_)::
+
+bool GetKeyDown(https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _key_)::
+
+bool GetWasKeyPressed(https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _key_)::
+
+bool GetWasKeyReleased(https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _key_)::
+
+bool GetIsPointerDown()::
+
+bool GetWasPointerPressed()::
+
+bool GetWasPointerReleased()::
+
+<<reference/button-state.html,ButtonState>> GetTouchState(int _touch_)::
+
+Nullable<https://docs.unity3d.com/ScriptReference/TouchPhase.html[TouchPhase^]> GetTouchPhase(int _touch_)::
+
+bool GetIsTouching(int _touch_)::
+
+bool GetTouchStarted(int _touch_)::
+
+bool GetTouchEnded(int _touch_)::
+
+bool IsButtonAvailable(string _button_)::
+
+<<reference/button-state.html,ButtonState>> GetButtonState(string _button_)::
+
+bool GetButtonDown(string _button_)::
+
+bool GetWasButtonPressed(string _button_)::
+
+bool GetWasButtonReleased(string _button_)::
+
+float GetAxis(string _axis_)::
+
+<<reference/button-state.html,ButtonState>> GetAxisState(string _axis_, float _magnitude_)::
+
+bool GetAxisDown(string _axis_, float _magnitude_)::
+
+bool GetWasAxisPressed(string _axis_, float _magnitude_)::
+
+bool GetWasAxisReleased(string _axis_, float _magnitude_)::

@@ -2,7 +2,7 @@
 
 ## InstructionGraphNodeList
 
-PiRhoSoft.CompositionEngine.InstructionGraphNodeList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/instruction-graph-node.html,InstructionGraphNode>>>
+PiRhoSoft.CompositionEngine.InstructionGraphNodeList : <<reference/serialized-list-1.html,SerializedList>><<<reference/instruction-graph-node.html,InstructionGraphNode>>>
 
 ### Description
 

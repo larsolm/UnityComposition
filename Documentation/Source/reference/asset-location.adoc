@@ -1,0 +1,15 @@
+[#reference/asset-location]
+
+## AssetLocation
+
+PiRhoSoft.UtilityEngine.AssetLocation
+
+### Description
+
+### Values
+
+<<reference/asset-location.html,AssetLocation>> _None_::
+
+<<reference/asset-location.html,AssetLocation>> _AssetRoot_::
+
+<<reference/asset-location.html,AssetLocation>> _Selectable_::
