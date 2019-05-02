@@ -4,6 +4,7 @@
 
 Sprite Color Binding is a <<manual/variable-binding.html,Variable Binding>> that will set the blend color of a sibling https://docs.unity3d.com/ScriptReference/SpriteRenderer.html[SpriteRenderer^] based on the given <<reference/variable-reference.html,VariableReference>>. If _Variable_ is invalid, then the renderer will be disabled.
 
+See <<topics/bindings-3.html,Variable Bindings>> for more information. +
 See the _"Card"_ prefab in the CardGame project for an example usage.
 
 ### Fields

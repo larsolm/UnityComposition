@@ -4,6 +4,7 @@
 
 Button Graph Trigger is an <<manual/instruction-trigger.html,Instruction Trigger>> that will run its <<manual/instruction-graph.html,Instruction Graph>> when the the specified _Button_ is pressed.
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 See the _"Loot Level"_ scene in the Loot project for an example usage.
 
 ### Fields

@@ -4,6 +4,7 @@
 
 Text Color Binding is a <<manual/variable-binding.html,Variable Binding>> that will set the color of a sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component based on the given <<reference/variable-reference.html,VariableReference>>. If _Variable_ is invalid, then the text will be disabled.
 
+See <<topics/bindings-3.html,Variable Bindings>> for more information. +
 See the _"Card"_ prefab in the CardGame project for an example usage.
 
 ### Fields

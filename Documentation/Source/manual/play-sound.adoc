@@ -4,6 +4,7 @@
 
 Play Sound Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells an <<manual/audio-player.html,Audio Player>> to play an https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^]. Create a Play Sound Node in the menu:Create[Animation > Play Sound] menu of the Instruction Graph Window.
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 See the _"Play Pickup Sound"_ node on the _"MazeKey"_ <<manual/instruction-graph.html,Instruction Graph>> of the Maze project for an example usage.
 
 ### Fields
