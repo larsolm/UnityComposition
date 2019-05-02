@@ -2,9 +2,9 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Fade", fileName = nameof(Fade), order = 109)]
-	[HelpURL(Composition.DocumentationUrl + "fade")]
-	public class Fade : Cutoff
+	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Fade", fileName = nameof(FadeTransition), order = 109)]
+	[HelpURL(Composition.DocumentationUrl + "fade-transition")]
+	public class FadeTransition : CutoffTransition
 	{
 		[Tooltip("The color to fade to")]
 		public Color Color;

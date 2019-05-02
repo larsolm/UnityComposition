@@ -2,8 +2,8 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[HelpURL(Composition.DocumentationUrl + "cutoff")]
-	public abstract class Cutoff : Transition
+	[HelpURL(Composition.DocumentationUrl + "cutoff-transition")]
+	public abstract class CutoffTransition : Transition
 	{
 		private static readonly int _textureID = Shader.PropertyToID("_TransitionTexture");
 		private static readonly int _distortId = Shader.PropertyToID("_Distort");

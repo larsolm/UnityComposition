@@ -2,9 +2,9 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Pixelate", fileName = nameof(Pixelate), order = 111)]
+	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Pixelate", fileName = nameof(PixelateTransition), order = 111)]
 	[HelpURL(Composition.DocumentationUrl + "pixelate")]
-	public class Pixelate : Transition
+	public class PixelateTransition : Transition
 	{
 		private static readonly int _amountId = Shader.PropertyToID("_Amount");
 
