@@ -84,7 +84,7 @@ include::reference/call-method-node.adoc[]
 
 <<<
 
-include::reference/clear-transition.adoc[]
+include::reference/stop-transition-node.adoc[]
 
 <<<
 
@@ -392,10 +392,6 @@ include::reference/instruction-output-type.adoc[]
 
 <<<
 
-include::reference/instruction-reference-node.adoc[]
-
-<<<
-
 include::reference/instruction-store.adoc[]
 
 <<<
@@ -592,7 +588,7 @@ include::reference/object-binding-root.adoc[]
 
 <<<
 
-include::reference/play-effect-object-positioning.adoc[]
+include::reference/play-effect-node-object-positioning.adoc[]
 
 <<<
 
@@ -636,11 +632,11 @@ include::reference/pixelate.adoc[]
 
 <<<
 
-include::reference/play-animation.adoc[]
+include::reference/play-animation-node.adoc[]
 
 <<<
 
-include::reference/play-animation-state.adoc[]
+include::reference/play-animation-state-node.adoc[]
 
 <<<
 
@@ -648,15 +644,15 @@ include::reference/instruction-graph-playback-state.adoc[]
 
 <<<
 
-include::reference/play-effect.adoc[]
+include::reference/play-effect-node.adoc[]
 
 <<<
 
-include::reference/play-sound.adoc[]
+include::reference/play-sound-node.adoc[]
 
 <<<
 
-include::reference/play-transition.adoc[]
+include::reference/play-transition-node.adoc[]
 
 <<<
 
@@ -704,7 +700,7 @@ include::reference/rect-variable-source.adoc[]
 
 <<<
 
-include::reference/reset-tag.adoc[]
+include::reference/reset-tag-node.adoc[]
 
 <<<
 
@@ -712,11 +708,11 @@ include::reference/reset-variable-list.adoc[]
 
 <<<
 
-include::reference/reset-variables.adoc[]
+include::reference/reset-variables-node.adoc[]
 
 <<<
 
-include::reference/run-timeline.adoc[]
+include::reference/play-timeline-node.adoc[]
 
 <<<
 
@@ -756,7 +752,7 @@ include::reference/sequence-node.adoc[]
 
 <<<
 
-include::reference/set-animation-parameter.adoc[]
+include::reference/set-animation-parameter-node.adoc[]
 
 <<<
 

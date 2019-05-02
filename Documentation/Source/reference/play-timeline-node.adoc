@@ -1,0 +1,31 @@
+[#reference/play-timeline-node]
+
+## PlayTimelineNode
+
+PiRhoSoft.CompositionEngine.PlayTimelineNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+Plays a https://docs.unity3d.com/2018.3/Documentation/ScriptReference/Timeline.TimelineAsset.html[TimelineAsset^] on a https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html[PlayableDirector^].
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
+<<reference/variable-reference.html,VariableReference>> _Director_::
+
+The https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html[PlayableDirector^] to play _Timeline_ on.
+
+<<reference/timeline-variable-source.html,TimelineVariableSource>> _Timeline_::
+
+The https://docs.unity3d.com/2018.3/Documentation/ScriptReference/Timeline.TimelineAsset.html[TimelineAsset^] to play.
+
+https://docs.unity3d.com/ScriptReference/Playables.DirectorWrapMode.html[DirectorWrapMode^] _Mode_::
+
+The https://docs.unity3d.com/ScriptReference/Playables.DirectorWrapMode.html[DirectorWrapMode^] to play _Timeline_ with.
+
+bool _WaitForCompletion_::
+
+If this is `true`, this node will not complete until _Timeline_ has completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.

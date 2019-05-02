@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MaterialAnimation : https://docs.unity3d.com/ScriptR
 
 ### Description
 
-A https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] for use with the <<reference/play-effect.html,PlayEffect>> <<reference/instruction-graph-node.html,InstructionGraphNode>> that animates a `_Progress` https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material property^].
+A https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] for use with the <<reference/play-effect-node.html,PlayEffectNode>> <<reference/instruction-graph-node.html,InstructionGraphNode>> that animates a `_Progress` https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material property^].
 
 ### Public Fields
 

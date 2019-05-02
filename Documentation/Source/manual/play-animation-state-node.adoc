@@ -1,0 +1,23 @@
+[#manual/play-animation-state-node]
+
+## Play Animation State Node
+
+Play Animation State Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells an https://docs.unity3d.com/ScriptReference/Animator.html[Animator^] to https://docs.unity3d.com/ScriptReference/Animator.Play.html[Play()^] a state. Create a Play Animation State Node in the menu:Create[Animation > Play Animation State] menu of the Instruction Graph Window.
+
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+
+### Fields
+
+image::play-animation-state-node.png[Play Animation State Node]
+
+[cols="1,2"]
+|===
+| Name	| Description
+
+| Animator	| A <<reference/variable-reference.html,VariableReference>> to the https://docs.unity3d.com/ScriptReference/Animator.html[Animator^] to play the state on
+| State	| A <<reference/string-variable-source.html,StringVariableSource>> to the name of the state to play
+|===
+
+ifdef::backend-multipage_html5[]
+<<reference/play-animation-state-node.html,Reference>>
+endif::[]

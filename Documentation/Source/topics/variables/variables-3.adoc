@@ -16,7 +16,7 @@ A Variable Schema holds a set of Variable Definitions which describe the type an
 | Expression	| The variable is set to the result of an Expression (described in <<topics/variables-5.html,Writing Expressions>>)
 |===
 
-The schema can also define a list of _Tags_. Each definition in the schema can then select one of these tags as a grouping mechanism to be used for <<manual/reset-tag.html,resetting the values>>.
+The schema can also define a list of _Tags_. Each definition in the schema can then select one of these tags as a grouping mechanism to be used for <<manual/reset-tag-node.html,resetting the values>>.
 
 The definitions themselves are added to the _Definitions_ list.
 

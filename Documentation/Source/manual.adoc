@@ -40,7 +40,7 @@ include::manual/call-method-node.adoc[]
 
 <<<
 
-include::manual/clear-transition.adoc[]
+include::manual/stop-transition-node.adoc[]
 
 <<<
 
@@ -176,10 +176,6 @@ include::manual/instruction-node.adoc[]
 
 <<<
 
-include::manual/instruction-reference-node.adoc[]
-
-<<<
-
 include::manual/instruction-trigger.adoc[]
 
 <<<
@@ -256,35 +252,35 @@ include::manual/pixelate.adoc[]
 
 <<<
 
-include::manual/play-animation.adoc[]
+include::manual/play-animation-node.adoc[]
 
 <<<
 
-include::manual/play-animation-state.adoc[]
+include::manual/play-animation-state-node.adoc[]
 
 <<<
 
-include::manual/play-effect.adoc[]
+include::manual/play-effect-node.adoc[]
 
 <<<
 
-include::manual/play-sound.adoc[]
+include::manual/play-sound-node.adoc[]
 
 <<<
 
-include::manual/play-transition.adoc[]
+include::manual/play-transition-node.adoc[]
 
 <<<
 
-include::manual/reset-tag.adoc[]
+include::manual/reset-tag-node.adoc[]
 
 <<<
 
-include::manual/reset-variables.adoc[]
+include::manual/reset-variables-node.adoc[]
 
 <<<
 
-include::manual/run-timeline.adoc[]
+include::manual/play-timeline-node.adoc[]
 
 <<<
 
@@ -304,7 +300,7 @@ include::manual/sequence-node.adoc[]
 
 <<<
 
-include::manual/set-animation-parameter.adoc[]
+include::manual/set-animation-parameter-node.adoc[]
 
 <<<
 

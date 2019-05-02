@@ -1,0 +1,55 @@
+[#reference/play-effect-node]
+
+## PlayEffect
+
+PiRhoSoft.CompositionEngine.PlayEffectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+Instantiates a https://docs.unity3d.com/Manual/Prefabs.html[prefab^] containing one or more https://docs.unity3d.com/ScriptReference/ParticleSystem.html[ParticleSystems^] or <<reference/i-completion-notifier.html,ICompletionNotifiers>>.
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
+<<reference/game-object-variable-source.html,GameObjectVariableSource>> _Effect_::
+
+The https://docs.unity3d.com/Manual/Prefabs.html[prefab^] to instantiate.
+
+<<reference/string-variable-source.html,StringVariableSource>> _EffectName_::
+
+The name to assign to the instantiated https://docs.unity3d.com/Manual/Prefabs.html[prefab^].
+
+<<reference/variable-reference.html,VariableReference>> _EffectVariable_::
+
+The variable to assign the instantiated https://docs.unity3d.com/Manual/Prefabs.html[prefab^] to.
+
+<<reference/play-effect-node-object-positioning.html,ObjectPositioning>> _Positioning_::
+
+The way the value of _Position_ and _Rotation_ should be interpreted.
+
+<<reference/variable-reference.html,VariableReference>> _Object_::
+
+When _Positioning_ is `Relative`, specifies the object the created object should be positioned relative to.
+
+<<reference/variable-reference.html,VariableReference>> _Parent_::
+
+When _Positioning_ is `Child`, specifies the object the created object should be added to as a child.
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _Position_::
+
+The position at which to place the newly created object.
+
+<<reference/vector3-variable-source.html,Vector3VariableSource>> _Rotation_::
+
+The rotation to set the newly created object to.
+
+bool _WaitForCompletion_::
+
+If this is `true`, this node will not complete until all https://docs.unity3d.com/ScriptReference/ParticleSystem.html[ParticleSystems^] and <<reference/i-completion-notifier.html,ICompletionNotifiers>> in _Effect_ have completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+
+bool _DestroyOnComplete_::
+
+If this is `true`, the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] created from _Effect_ will be destroyed when it finishes playing.

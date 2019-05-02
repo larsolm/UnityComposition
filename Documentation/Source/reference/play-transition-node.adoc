@@ -1,0 +1,31 @@
+[#reference/play-transition-node]
+
+## PlayTransitionNode
+
+PiRhoSoft.CompositionEngine.PlayTransitionNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+Plays a <<reference/transition.html,Transition>> on the <<reference/transition-manager.html,TransitionManager>>.
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
+<<reference/transition-variable-source.html,TransitionVariableSource>> _Transition_::
+
+The <<reference/transition.html,Transition>> to play.
+
+<<reference/transition-phase.html,TransitionPhase>> _Phase_::
+
+The <<reference/transition-phase.html,TransitionPhase>> to play the <<reference/transition.html,Transition>> in.
+
+bool _AutoFinish_::
+
+If this is `true`, the <<reference/transition.html,Transition>> will be ended as soon as it has completed. If this is `false`, the <<reference/transition.html,Transition>> will persist in its final state until another <<reference/transition.html,Transition>> (perhaps the same one with a different <<reference/transition-phase.html,TransitionPhase>>) is started.
+
+bool _WaitForCompletion_::
+
+If this is `true`, this node will not complete until _Transition_ has completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.

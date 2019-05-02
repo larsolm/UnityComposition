@@ -1,0 +1,37 @@
+[#reference/set-animation-parameter-node]
+
+## SetAnimationParameterNode
+
+PiRhoSoft.CompositionEngine.SetAnimationParameterNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
+<<reference/string-variable-source.html,StringVariableSource>> _Parameter_::
+
+The name of the parameter to set.
+
+https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.html[AnimatorControllerParameterType^] _Type_::
+
+The type of parameter to set.
+
+<<reference/variable-reference.html,VariableReference>> _Animator_::
+
+The https://docs.unity3d.com/ScriptReference/Animator.html[Animator^] to set the parameter on.
+
+<<reference/bool-variable-source.html,BoolVariableSource>> _BoolValue_::
+
+If _Type_ is https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.Bool.html[`Bool`^], the value to set using https://docs.unity3d.com/ScriptReference/Animator.SetBool.html[_SetBool_^]
+
+<<reference/int-variable-source.html,IntVariableSource>> _IntValue_::
+
+If _Type_ is https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.Int.html[`Bool`^], the value to set using https://docs.unity3d.com/ScriptReference/Animator.SetInteger.html[_SetInteger_^]
+
+<<reference/float-variable-source.html,FloatVariableSource>> _FloatValue_::
+
+If _Type_ is https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.Float.html[`Float`^], the value to set using https://docs.unity3d.com/ScriptReference/Animator.SetFloat.html[_SetFloat_^]

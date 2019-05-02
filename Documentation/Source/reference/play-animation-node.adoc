@@ -1,0 +1,27 @@
+[#reference/play-animation-node]
+
+## PlayAnimationNode
+
+PiRhoSoft.CompositionEngine.PlayAnimationNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+Plays an https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] on an <<reference/animation-player.html,AnimationPlayer>>.
+
+### Public Fields
+
+<<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
+
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+
+<<reference/variable-reference.html,VariableReference>> _AnimationPlayer_::
+
+The <<reference/animation-player.html,AnimationPlayer>> to play _Animation_ on.
+
+<<reference/animation-clip-variable-source.html,AnimationClipVariableSource>> _Animation_::
+
+The https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] to play on _AnimationPlayer_.
+
+bool _WaitForCompletion_::
+
+If this is `true`, this node will not complete until _Animation_ has completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
