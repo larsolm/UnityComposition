@@ -1,8 +1,6 @@
 [#topics/variables-6]
 
-## Variables
-
-### Writing Custom Commands
+## Writing Custom Commands
 
 Calculations can be defined in a Command as a way to share expressions among different objects or keep complex calculations isolated from the places they are used. This can improve organization and make it easier to manage different pieces of game logic. Commands are created in the https://docs.unity3d.com/Manual/ProjectView.html[project window^] using the _Create_ menu and found under menu:PiRho Soft[Command]. A Command should always be placed in a _Resources_ folder so it can be https://docs.unity3d.com/Manual/LoadingResourcesatRuntime.html[loaded at runtime^] by the <<manual/composition-manager.html,CompositionManager>> (this will happen automatically).
 

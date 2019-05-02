@@ -1,11 +1,9 @@
 [#topics/variables-7]
 
-## Variables
-
-### Exposing Variables
+## Exposing Variables
 
 Variable References and Expressions can be used when writing <<topics/graphs-8.html,graph nodes>>, https://docs.unity3d.com/Manual/CreatingComponents.html[components^], or https://docs.unity3d.com/Manual/class-ScriptableObject.html[assets^] to interface custom code with the variables system.
 
-#### Variable References
+### Variable References
 
 The <<reference/variable-reference.html,VariableReference>> class provides the functionality for both looking up variables and assigning values to variables. To use a VariableReference, simply add one as a public field to your object. Use the _GetValue_ method to look up a <<reference/variable-value.html,VariableValue>> and the _SetValue_ method to assign. Both of these methods take an <<reference/i-variable-store.html,IVariableStore>> as a parameter. While this can be any object that implements the <<reference/i-variable-store.html,IVariableStore>> interface, in most cases the <<reference/composition-manager.html,CompositionManager._DefaultStore_>> should be used which gives access to the <<topics/variables-4.html,global and scene stores>>. When implementing an <<topics/graphs-8.html,InstructionGraphNode>> or <<topics/bindings-5.html,VariableBinding>> the calling code will be given an <<reference/i-variable-store.html,IVariableStore>> which can then be passed to _SetValue_ or _GetValue_.

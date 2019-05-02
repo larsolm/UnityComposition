@@ -1,8 +1,6 @@
 [#topics/variables-4]
 
-## Variables
-
-### Accessing Variables
+## Accessing Variables
 
 Once a set of variables has been defined and created in stores, they can now be accessed and used by other objects. Objects that use variables to control their functionality will have Variable References and Expressions exposed as a way to specify the variable they should access. Variable References, which refer to a variable directly, are covered here. Expressions, which can use multiple variables to compute a value, are covered in the <<topics/variables-4.html,next section>>.
 
@@ -88,7 +86,7 @@ The following table contains a complete breakdown of the Variable Reference synt
 
 NOTE: If a variable reference is entered with incorrect syntax, the text box will be colored red indicating there is an error. This will not check if the referenced variable actually exists or is the correct type as that can only be known at runtime. These runtime errors will be indicated by printing an error to the https://docs.unity3d.com/Manual/Console.html[console window^] and can be tracked down using the built in <<topics/graphs-5.html,debugging features>>.
 
-#### The Global Store
+### The Global Store
 
 Variables in the global store are available to every Variable Reference and Expression and can be added and changed at any time. To add variables during editing, use the Variable Link Component. This component can be added to any object and any number of them can be used. When a Variable Link Component is loaded and enabled, the variables it defines will be added to the global store. When it is unloaded or disabled, the variables will be removed.
 
@@ -96,7 +94,7 @@ image::variables-4-link.png[Variable Link Component]
 
 Variables are defined and added in the same way as for <<topics/variables-2.html,Variable Pool Components>>.
 
-#### The Scene Store
+### The Scene Store
 
 The scene store provides access to all loaded objects by name. The contained objects are always a reflection of the currently loaded scenes and do not need to be added or removed manually. To access an object in a scene that has been assigned the name `Player`, it can be referenced using `scene.Player`.
 

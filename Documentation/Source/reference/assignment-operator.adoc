@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.AssignmentOperator : <<reference/infix-operation.htm
 
 ### Description
 
-An expression operator to use as a base class for other operators that manages the complexity of assigning variable values.
+A base class for <<reference/infix-operation.html,InfixOperations>> that perform assignment of <<reference/variable-value.html,VariableValues>>.
 
 ### Protected Methods
 

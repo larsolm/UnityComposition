@@ -1,8 +1,6 @@
 [#topics/variables-2]
 
-## Variables
-
-### Creating Variables
+## Creating Variables
 
 All variables exist in a Variable Store, often referred to as just _store_. Four Unity objects are included that can be used as stores:
 

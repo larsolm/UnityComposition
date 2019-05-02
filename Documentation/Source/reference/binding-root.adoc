@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.BindingRoot : https://docs.unity3d.com/ScriptReferen
 
 ### Description
 
-A https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that exposes a <<reference/variable-value.html,VariableValue>> by name to any <<reference/variable-binding.html,VariableBindings>> added as children of the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to insert a <<reference/variable-value.html,VariableValue>> into the scene hierarchy that can be accessed by sibling or child <<reference/variable-binding.html,VariableBindings>>.
 
 ### Public Fields
 
 string _ValueName_::
 
-The name for callers to use to look up _Value_.
+The name for <<reference/variable-binding.html,VariableBindings>> to use to look up _Value_.
 
 ### Public Properties
 
@@ -33,3 +33,7 @@ If _name_ is _ValueName_, returns _Value_, otherwise calls _GetVariable_ on the 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(virtual)_::
 
 If _name_ is _ValueName_, returns ReadOnly, otherwise calls _SetVariable_ on the next BindingRoot up in the object hierarchy. If this is the highest BindingRoot, _DefaultStore_ on <<reference/composition-manager.html,CompositionManager>> is used instead.
+
+ifdef::backend-multipage_html5[]
+<<manual/binding-root.html,Manual>>
+endif::[]

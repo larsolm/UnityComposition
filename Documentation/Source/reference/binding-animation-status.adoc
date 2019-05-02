@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionExample
 }
 ----
 
-<<reference/variable-binding.html,Bindings>>, such as <<reference/bar-binding.html,BarBinding>>, use the _Increment_ and _Decrement_ methods to indicate when an animation has started and finished respectively.
+<<reference/variable-binding.html,VariableBindings>>, such as <<reference/bar-binding.html,BarBinding>>, use the _Increment_ and _Decrement_ methods to indicate when an animation has started and finished respectively.
 
 [source,cs]
 ----
@@ -73,8 +73,8 @@ Call this method to determine if all animations resulting from a bindings update
 
 void Increment()::
 
-Call this method from a <<reference/variable-binding.html,binding>> implementation to indicate the binding is starting an animation. This can be called multiple times if the binding is performing multiple animations. Each call to _Increment_ should have a corresponding call to _Decrement_ when the animation completes.
+Call this method from a <<reference/variable-binding.html,VariableBinding>> implementation to indicate the binding is starting an animation. This can be called multiple times if the binding is performing multiple animations. Each call to _Increment_ should have a corresponding call to _Decrement_ when the animation completes.
 
 void Decrement()::
 
-Call this method from a <<reference/variable-binding.html,binding>> implementation to indicate the binding has finished an animation. This should be called one time for each time _Increment_ is called.
+Call this method from a <<reference/variable-binding.html,VariableBinding>> implementation to indicate the binding has finished an animation. This should be called one time for each time _Increment_ is called.
