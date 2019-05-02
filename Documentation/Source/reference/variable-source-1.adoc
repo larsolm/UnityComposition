@@ -31,6 +31,7 @@ An implementation of <<reference/variable-source.html,VariableSource>> that expo
 | <<reference/store-variable-source.html,StoreVariableSource>>,				| <<reference/i-variable-store.html,IVariableStore>>
 | <<reference/list-variable-source.html,ListVariableSource>>,				| <<reference/i-variable-list.html,IVariableList>>
 | <<reference/variable-value-source.html,VariableValueSource>>,				| <<reference/variable-value.html,VariableValue>>
+|===
 
 Variable sources for additional types can be added by deriving from this class.
 

@@ -1,13 +1,12 @@
-:imagesdir: topics/
-
+:imagesdir: topics/graphs
 include::topics/graphs.adoc[]
 
 <<<
 
 :imagesdir: topics/variables
-
 include::topics/variables.adoc[]
 
 <<<
 
+:imagesdir: topics/bindings
 include::topics/bindings.adoc[]

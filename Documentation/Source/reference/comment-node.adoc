@@ -6,10 +6,14 @@ PiRhoSoft.CompositionEngine.CommentNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
-A <<reference/instruction-graph-node.html,node>> that has no functionality but can be placed to visually add notes to a graph.
+Provides no function at runtime but can be placed in an <<reference/instruction-graph.html,InstructionGraph>> to visually add notes.
 
 ### Public Fields
 
 string _Comment_::
 
-The text of the comment that will be displayed directly in the graph window.
+The text of the comment that will be displayed directly in the <<topics/graphs-1.html,graph window>>.
+
+ifdef::backend-multipage_html5[]
+<<manual/comment-node.html,Manual>>
+endif::[]

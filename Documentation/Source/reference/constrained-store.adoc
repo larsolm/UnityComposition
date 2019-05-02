@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ConstrainedStore : <<reference/writable-store.html,W
 
 ### Description
 
-An <<reference/i-variable-store.html,IVariableStore>> implementation that contains a set of variables as declared by a <<reference/variable-schema.html,schema>>.
+Holds a set of <<reference/variable.html,Variables>> that are defined in a <<reference/variable-schema.html,VariableSchema>>.
 
 ### Constructors
 

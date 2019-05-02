@@ -11,7 +11,8 @@
     "Source\\manual-pdf.adoc",
     "Source\\reference-pdf.adoc",
     "Source\\topics\\variables-pdf.adoc",
-    "Source\\topics\\graphs-pdf.adoc"
+    "Source\\topics\\graphs-pdf.adoc",
+    "Source\\topics\\bindings-pdf.adoc"
   ],
   "RawFiles": [
     "Source\\table-of-contents.html"

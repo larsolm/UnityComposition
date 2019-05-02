@@ -31,5 +31,5 @@ bool _UseScaledTime_::
 If this is set, _Speed_ will be based on https://docs.unity3d.com/ScriptReference/Time-time.html[scaled time^], otherwise it will be based on https://docs.unity3d.com/ScriptReference/Time-unscaledTime.html[real time^].
 
 ifdef::backend-multipage_html5[]
-<<manual/bar-binding.html,manual>>
+<<manual/bar-binding.html,Manual>>
 endif::[]

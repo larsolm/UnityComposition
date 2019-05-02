@@ -6,21 +6,21 @@ PiRhoSoft.CompositionEngine.CallMethodNode : <<reference/instruction-graph-node.
 
 ### Description
 
-An <<reference/instruction-graph-node.html,InstructionGraphNode>> that calls a method on an object using reflection.
+Calls a method on an object using reflection.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to run after calling the method.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/object-variable-source.html,ObjectVariableSource>> _Target_::
 
-The object to call the method on.
+The object to call _Method_ on.
 
 <<reference/variable-reference.html,VariableReference>> _Output_::
 
-The variable to store the value returned from the method in.
+The location to store the value returned from the method in.
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-value-source.html,VariableValueSource>>> _Parameters_::
 
@@ -34,8 +34,12 @@ The type of the object to find _Method_ on.
 
 MethodInfo _Method_::
 
-The method to call when encountering this node.
+The method to call when this node is run.
 
 Type[] _ParameterTypes_::
 
 The types of the parameters for _Method_.
+
+ifdef::backend-multipage_html5[]
+<<manual/call-method-node.html,Manual>>
+endif::[]

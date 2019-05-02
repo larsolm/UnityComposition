@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.BoolVariableSource : <<reference/variable-source-1.h
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for bools
+A <<reference/variable-source.html,VariableSource>> for bools.
 
 ### Constructors
 

@@ -1,4 +1,4 @@
-# Unity Composition Graphs
+# Unity Composition Bindings
 PiRho Soft
 :toc:
 :toc-title:
@@ -9,6 +9,6 @@ PiRho Soft
 :example-caption!:
 :figure-caption!:
 :table-caption!:
-:imagesdir: graphs
+:imagesdir: bindings
 
-include::graphs.adoc[]
+include::bindings.adoc[]

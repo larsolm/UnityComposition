@@ -6,17 +6,19 @@ PiRhoSoft.CompositionEngine.Command : https://docs.unity3d.com/ScriptReference/S
 
 ### Description
 
-A https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] type that is used to define an <<reference/expression.html,Expression>> that can be called from other <<reference/expression.html,Expressions>> as if it were a <<reference/i-command.html,ICommand>>.
+Defines an <<reference/expression.html,Expression>> that can be called from other <<reference/expression.html,Expressions>>.
+
+See the <<topics/variables-6.html,_Writing Custom Commands_>> topic for more information.
 
 ### Public Fields
 
 string _Name_::
 
-The name of the command that is used to call it from <<reference/expression.html,Expressions>>
+The name to use in an <<reference/expression.html,Expression>> to run this command.
 
 <<reference/command-parameter-list.html,ParameterList>> _Parameters_::
 
-The list of <<reference/command-parameter.html,parameters>> that should be passed to the command.
+The list of <<reference/command-parameter.html,CommandParameters>> that should be passed to the command.
 
 <<reference/expression.html,Expression>> _Expression_::
 
@@ -26,12 +28,8 @@ The <<reference/expression.html,Expression>> that is evaluated when this command
 
 <<reference/variable-value.html,VariableValue>> Evaluate(<<reference/i-variable-store.html,IVariableStore>> _variables_, string _name_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/operation.html,Operation>>> _parameters_)::
 
-Validates _parameters_ against the types defined in _Parameters_ and, if valid, executes _Expression_. The result of executing _Expression_ is returned.
+Validates _parameters_ against the types defined in _Parameters_ and, if valid, evaluates _Expression_. The result of executing _Expression_ is returned. If the _parameters_ are not valid, a <<reference/command-evaluation-exception.html,CommandEvaluationException>> will be thrown. If execution of _Expression_ fails, an <<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> will be thrown.
 
-### Protected Methods
-
-<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>> _expected_)::
-
-<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>> _expected1_, <<reference/variable-type.html,VariableType>> _expected2_)::
-
-<<reference/command-evaluation-exception.html,CommandEvaluationException>> WrongParameterType(int _index_, <<reference/variable-type.html,VariableType>> _got_, <<reference/variable-type.html,VariableType>>[] _expected_)::
+ifdef::backend-multipage_html5[]
+<<manual/command.html,Manual>>
+endif::[]

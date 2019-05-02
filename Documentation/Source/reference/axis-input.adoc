@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.AxisInput : https://docs.unity3d.com/ScriptReference
 
 ### Description
 
-Add this to a https://docs.unity3d.com/ScriptReference/UI.Graphic.html[Graphic^] or https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] to set the value of an axis on the <<reference/input-helper,InputHelper>> when the object is clicked or touched.
+Add this to a https://docs.unity3d.com/ScriptReference/UI.Graphic.html[Graphic^] or https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] to set the value of an axis on the <<reference/input-helper.html,InputHelper>> when the object is clicked or touched.
 
 ### Public Fields
 
@@ -19,5 +19,5 @@ float _AxisValue_::
 The value to set _AxisName_ to when the object is clicked or touched.
 
 ifdef::backend-multipage_html5[]
-<<manual/axis-input.html,manual>>
+<<manual/axis-input.html,Manual>>
 endif::[]

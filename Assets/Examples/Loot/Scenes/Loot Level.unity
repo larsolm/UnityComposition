@@ -979,13 +979,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 1097333434}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08ac88b8f693cea4ba3170a47ced16e1, type: 3}
+  m_Script: {fileID: 11500000, guid: d264bfadf51340c4d9dab818a83aae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DependentObjects:
     _items: []
   DisplayText: {fileID: 1097333437}
-  AcceptButton: Submit
 --- !u!114 &1097333437
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -13,6 +13,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool IsRunning { get; private set; } = false;
 
+		protected bool IsAdvancing { get; private set; } = false;
+
 		public void Show(string text)
 		{
 			Activate();
@@ -27,6 +29,11 @@ namespace PiRhoSoft.CompositionEngine
 			StartCoroutine(Run_());
 		}
 
+		public void Advance()
+		{
+			IsAdvancing = true;
+		}
+
 		protected override void Setup()
 		{
 			if (DisplayText)
@@ -39,6 +46,9 @@ namespace PiRhoSoft.CompositionEngine
 				DisplayText.enabled = false;
 
 			StopAllCoroutines();
+
+			IsRunning = false;
+			IsAdvancing = false;
 		}
 
 		private IEnumerator Run_()
@@ -52,7 +62,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected virtual IEnumerator Run()
 		{
-			yield break;
+			yield return null; // always wait one frame to skip any previous inputs
+
+			while (!IsAdvancing)
+				yield return null;
+
+			IsAdvancing = false;
 		}
 	}
 }

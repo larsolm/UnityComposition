@@ -6,14 +6,14 @@ PiRhoSoft.CompositionEngine.Parameter
 
 ### Description
 
-Holds the name and <<reference/variable-type.html,type>> of a parameter passed to a <<reference/command.html,Command>>.
+Holds the name and <<reference/variable-type.html,VariableType>> of a parameter passed to a <<reference/command.html,Command>>.
 
 ### Public Fields
 
 string _Name_::
 
-The name the <<reference/command.html,Command>> uses to reference the parameter in its <<reference/expression.html,Expression>>
+The name the <<reference/command.html,Command>> uses to reference the parameter in its <<reference/expression.html,Expression>>.
 
 <<reference/variable-type.html,VariableType>> _Type_::
 
-The type the <<reference/command.html,Command>> is expecting for the parameter.
+The <<reference/variable-type.html,VariableType>> the <<reference/command.html,Command>> is expecting for the parameter.
