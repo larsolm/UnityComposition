@@ -5,7 +5,7 @@
 A Shuffle Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will shuffle an <<reference/i-variable-list.html,IVariableList>>. Create a Shuffle Node in the menu:Create[Composition > Shuffle] menu of the Instruction Graph Window.
 
 See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
-See the _"Shuffle Cards"_ node on the _"Shuffle Cards"_ <<manual/instruction-graph.html,Instruction Graph>> in the CardGame project for an example usage.
+See the _"Shuffle Cards"_ node on the _"CardShuffle"_ <<manual/instruction-graph.html,Instruction Graph>> in the CardGame project for an example usage.
 
 ### Fields
 

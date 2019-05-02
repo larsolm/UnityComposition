@@ -23,8 +23,8 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The target value to set the property to")]
 		public VariableValueSource Value = new VariableValueSource();
 
-		[SerializeField] private string _targetTypeName;
-		[SerializeField] private string _propertyName;
+		[SerializeField] private string _targetTypeName = string.Empty;
+		[SerializeField] private string _propertyName = string.Empty;
 
 		public Type TargetType { get; set; }
 		public FieldInfo Field { get; set; }

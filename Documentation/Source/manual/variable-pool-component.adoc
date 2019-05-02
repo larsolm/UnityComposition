@@ -5,7 +5,7 @@
 A Variable Pool Component is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that adds a <<reference/variable-pool.html,Variable Pool>> to the object. This allows it to have a list of <<reference/variable-value.html,Variables>> without being constrained by a <<manual/variable-schema.html,Variable Schema>>.
 
 See <<topics/variables-1.html,Variables>> for more information. +
-See the _"Loot Equipment Pickup"_ prefab in the Loot project for an example usage.
+See the _"LootEquipmentPickup"_ prefab in the Loot project for an example usage.
 
 ### Fields
 

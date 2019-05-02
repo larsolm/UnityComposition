@@ -1,0 +1,172 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: CardIsMovable
+  m_EditorClassIdentifier: 
+  ContextName: 
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items:
+    - Name: card
+      Definition:
+        _type: 17
+        _constraint: AQARAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
+    - Name: ace
+      Definition:
+        _type: 17
+        _constraint: AQARAAAAeFBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVNldENvbXBvbmVudCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
+  Outputs:
+    _items:
+    - Name: movable
+      Definition:
+        _type: 0
+        _constraint: 
+        _objects: []
+        _tag: 
+        _initializer:
+          _statement: 
+        _isTypeLocked: 0
+        _isConstraintLocked: 0
+  _nodes:
+    _items:
+    - {fileID: 114314403795803868}
+    - {fileID: 114457480805367608}
+    - {fileID: 114894803618125250}
+    - {fileID: 114245761533034482}
+    - {fileID: 114376349029503948}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 114314403795803868}
+--- !u!114 &114245761533034482
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Nope
+  m_EditorClassIdentifier: 
+  Name: Nope
+  GraphPosition: {x: 960, y: -12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: output.movable = false
+--- !u!114 &114314403795803868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299c4f4ec492e74ebc48ccf20f59272, type: 3}
+  m_Name: Rank Branch
+  m_EditorClassIdentifier: 
+  Name: Rank Branch
+  GraphPosition: {x: 320, y: -12.8}
+  IsBreakpoint: 0
+  Switch:
+    _statement: input.card.Rank
+  Outputs:
+    _keys:
+    - A
+    - 2
+    _values:
+    - {fileID: 114245761533034482}
+    - {fileID: 114457480805367608}
+  Default: {fileID: 114894803618125250}
+--- !u!114 &114376349029503948
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Yep
+  m_EditorClassIdentifier: 
+  Name: Yep
+  GraphPosition: {x: 960, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: output.movable = true
+--- !u!114 &114457480805367608
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Movable Test for 2(Clone)
+  m_EditorClassIdentifier: 
+  Name: Movable Test for 2
+  GraphPosition: {x: 640, y: 38.4}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114376349029503948}
+  OnFalse: {fileID: 114245761533034482}
+  Condition:
+    _statement: input.ace.Column == 0 && !input.card.Complete
+--- !u!114 &114894803618125250
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Movable Test(Clone)
+  m_EditorClassIdentifier: 
+  Name: Movable Test
+  GraphPosition: {x: 640, y: 128}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114376349029503948}
+  OnFalse: {fileID: 114245761533034482}
+  Condition:
+    _statement: 'local.deckSuit = global.Deck[input.card.Suit.Name]
+
+      local.previous = local.deckSuit[input.card.Index - 1]
+
+
+      local.previous.Row == input.ace.Row && local.previous.Column == input.ace.Column
+      - 1'

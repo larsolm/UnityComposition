@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f95977d1adbba4b9a826aff14f0418, type: 3}
+  m_Name: LootAxeWeapon
+  m_EditorClassIdentifier: 
+  _schema: {fileID: 11400000, guid: c20b573a839a564469079addfb9dd185, type: 2}
+  Variables:
+    _version: 27
+    _variablesData:
+    - AQAETmFtZQ8AAAADQXhl
+    - AQAMTWluaW11bVNwZWVkAwAAAI/C1T8=
+    - AQAMTWF4aW11bVNwZWVkAwAAAAAAIEA=
+    - AQAPTWluaW11bVN0cmVuZ3RoAgAAACgAAAA=
+    - AQAPTWF4aW11bVN0cmVuZ3RoAgAAADwAAAA=
+    - AQAESWNvbhEAAAAAAAAA
+    _variablesObjects:
+    - {fileID: 21300000, guid: c7b72acaeb2f9914e8330292c559a749, type: 3}
