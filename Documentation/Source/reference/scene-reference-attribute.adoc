@@ -1,0 +1,15 @@
+[#reference/scene-reference-attribute]
+
+## SceneReferenceAttribute
+
+PiRhoSoft.UtilityEngine.SceneReferenceAttribute : Attribute
+
+### Description
+
+### Public Fields
+
+<<reference/asset-location.html,AssetLocation>> _SaveLocation_::
+
+string _DefaultName_::
+
+string _Creator_::

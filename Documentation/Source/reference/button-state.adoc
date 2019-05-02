@@ -1,0 +1,25 @@
+[#reference/button-state]
+
+## ButtonState
+
+PiRhoSoft.UtilityEngine.ButtonState : ValueType
+
+### Description
+
+### Constructors
+
+ButtonState(bool _pressed_, bool _held_, bool _released_)::
+
+ButtonState(string _button_)::
+
+ButtonState(https://docs.unity3d.com/ScriptReference/KeyCode.html[KeyCode^] _key_)::
+
+ButtonState(int _touch_)::
+
+### Public Fields
+
+bool _Pressed_::
+
+bool _Held_::
+
+bool _Released_::

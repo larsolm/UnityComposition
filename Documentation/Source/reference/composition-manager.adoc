@@ -2,7 +2,7 @@
 
 ## CompositionManager
 
-PiRhoSoft.CompositionEngine.CompositionManager : link:/projects/unity-utilities/documentation/#/v10/reference/global-behaviour-1[GlobalBehaviour^]<<<reference/composition-manager.html,CompositionManager>>>
+PiRhoSoft.CompositionEngine.CompositionManager : <<reference/global-behaviour-1.html,GlobalBehaviour>><<<reference/composition-manager.html,CompositionManager>>>
 
 ### Description
 

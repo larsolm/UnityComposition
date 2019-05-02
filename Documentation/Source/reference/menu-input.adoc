@@ -12,19 +12,19 @@ Provides input handling for a <<reference/menu.html,Menu>>.
 
 string _HorizontalAxis_::
 
-The name of the axis, as used by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^], that moves focus left and right through the <<reference/menu.html,Menu>>.
+The name of the axis, as used by <<reference/input-helper.html,InputHelper>>, that moves focus left and right through the <<reference/menu.html,Menu>>.
 
 string _VerticalAxis_::
 
-The name of the axis, as used by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^], that moves focus up and down through the <<reference/menu.html,Menu>>.
+The name of the axis, as used by <<reference/input-helper.html,InputHelper>>, that moves focus up and down through the <<reference/menu.html,Menu>>.
 
 string _SelectButton_::
 
-The name of the button, as used by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^], that will select the focused item on the <<reference/menu.html,Menu>>.
+The name of the button, as used by <<reference/input-helper.html,InputHelper>>, that will select the focused item on the <<reference/menu.html,Menu>>.
 
 string _CancelButton_::
 
-The name of the button, as used by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^], that will cancel the menu.
+The name of the button, as used by <<reference/input-helper.html,InputHelper>>, that will cancel the menu.
 
 <<reference/menu-input-pointer-action.html,MenuInputPointerAction>> _HoverAction_::
 

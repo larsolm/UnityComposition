@@ -1,0 +1,31 @@
+[#reference/scene-reference]
+
+## SceneReference
+
+PiRhoSoft.UtilityEngine.SceneReference
+
+### Description
+
+### Static Fields
+
+Action<string, string> _SceneMoved_::
+
+### Public Fields
+
+string _Path_::
+
+### Public Properties
+
+bool _IsAssigned_ _(read only)_::
+
+bool _IsLoaded_ _(read only)_::
+
+https://docs.unity3d.com/ScriptReference/Scene.html[Scene^] _Scene_ _(read only)_::
+
+int _Index_ _(read only)_::
+
+### Public Methods
+
+void Setup(https://docs.unity3d.com/ScriptReference/Object.html[Object^] _owner_)::
+
+void Teardown()::

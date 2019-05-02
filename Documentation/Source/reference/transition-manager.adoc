@@ -2,7 +2,7 @@
 
 ## TransitionManager
 
-PiRhoSoft.CompositionEngine.TransitionManager : link:/projects/unity-utilities/documentation/#/v10/reference/global-behaviour-1[GlobalBehaviour^]<<<reference/transition-manager.html,TransitionManager>>>
+PiRhoSoft.CompositionEngine.TransitionManager : <<reference/global-behaviour-1.html,GlobalBehaviour>><<<reference/transition-manager.html,TransitionManager>>>
 
 ### Description
 

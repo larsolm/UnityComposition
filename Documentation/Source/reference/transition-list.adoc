@@ -2,7 +2,7 @@
 
 ## TransitionList
 
-PiRhoSoft.CompositionEngine.TransitionList : link:/projects/unity-utilities/documentation/#/v10/reference/serialized-list-1[SerializedList^]<<<reference/transition.html,Transition>>>
+PiRhoSoft.CompositionEngine.TransitionList : <<reference/serialized-list-1.html,SerializedList>><<<reference/transition.html,Transition>>>
 
 ### Description
 

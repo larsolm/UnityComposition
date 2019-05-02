@@ -1,0 +1,19 @@
+[#reference/serialized-dictionary-2]
+
+## SerializedDictionary
+
+PiRhoSoft.UtilityEngine.SerializedDictionary<__KeyType__, __KeyType__> : https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2[Dictionary^]<KeyType, KeyType>, <<reference/i-editable-dictionary.html,IEditableDictionary>>
+
+### Description
+
+### Public Methods
+
+void PrepareForEdit()::
+
+void ApplyEdits()::
+
+### Protected Fields
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<KeyType> __keys_::
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<ValueType> __values_::

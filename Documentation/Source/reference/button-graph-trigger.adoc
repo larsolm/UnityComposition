@@ -12,7 +12,7 @@ Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObj
 
 string _Button_::
 
-The name of the button that is checked for presses. The name corresponds to those recognized by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^].
+The name of the button that is checked for presses. The name corresponds to those recognized by <<reference/input-helper.html,InputHelper>>.
 
 ifdef::backend-multipage_html5[]
 <<manual/button-graph-trigger.html,Manual>>

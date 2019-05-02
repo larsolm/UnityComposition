@@ -2,7 +2,7 @@
 
 ## Load Scene Node
 
-A Load Scene Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will load a new https://docs.unity3d.com/ScriptReference/SceneManagement.Scene.html[Scene^]. The scene to be loaded can based on a link:/projects/unity-utilities/documentation/#/v10/reference/scene-reference[SceneReference^], string name, build index, or a <<reference/variable-reference.html,VariableReference>> to a string name or build index. If _WaitForCompletion_ is specified, the graph will not move to the next node until the scene has fully completed loading. Create a Load Scene Node in the menu:Create[Sequencing > Load Scene] menu of the Instruction Graph Window.
+A Load Scene Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will load a new https://docs.unity3d.com/ScriptReference/SceneManagement.Scene.html[Scene^]. The scene to be loaded can based on a <<reference/scene-reference.html,SceneReference>>, string name, build index, or a <<reference/variable-reference.html,VariableReference>> to a string name or build index. If _WaitForCompletion_ is specified, the graph will not move to the next node until the scene has fully completed loading. Create a Load Scene Node in the menu:Create[Sequencing > Load Scene] menu of the Instruction Graph Window.
 
 See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 See the _"Load UI"_ node on the _"MazeStart"_ <<manual/instruction-graph.html,Instruction Graph>> in the Maze project for an example usage.
@@ -16,7 +16,7 @@ image::load-scene-node.png[Load Scene Node]
 | Name	| Description
 
 | Source	| The <<referenece/load-scene-node-scene-source,SourceType>> to load the scene based off of
-| Scene	| If `Value`, the link:/projects/unity-utilities/documentation/#/v10/reference/scene-reference[SceneReference^] to load
+| Scene	| If `Value`, the <<reference/scene-reference.html,SceneReference>> to load
 | Scene Variable	| If `Variable`, the <<reference/variable-reference.html,VariableReference>> to a string name or build index of the sceen to load
 | Scene Name	| If `Name`, the string name of the scene to load
 | Scene Index	| If `Index`, the build index of the scene to load

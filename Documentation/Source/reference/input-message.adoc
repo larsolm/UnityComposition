@@ -12,4 +12,4 @@ A <<reference/message-control.html,MessageControl>> implementation that adds sup
 
 string _AcceptButton_::
 
-The name of the button, as used by link:/projects/unity-utilities/documentation/#/v10/reference/input-helper.html[InputHelper^], to advance the message.
+The name of the button, as used by <<reference/input-helper.html,InputHelper>>, to advance the message.
