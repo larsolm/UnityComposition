@@ -1,5 +1,3 @@
 [#topics/variables-8]
 
-## Variables
-
-### Custom Variable Stores
+## Custom Variable Stores

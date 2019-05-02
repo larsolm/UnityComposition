@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.CompositionManager : link:/projects/unity-utilities/
 
 ### Description
 
-An automatically created https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that manages execution of <<reference/instruction.html,Instructions>>. Use the static _Instance_ property to access and use the CompositionManager.
+Globally manages execution of <<reference/instruction.html,Instructions>>. A single instance of this https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] will be created automatically and can be accessed from the static _Instance_ property.
 
 ### Static Fields
 
@@ -20,11 +20,11 @@ The name to use to access _SceneStore_ from _DefaultStore_ or any <<reference/in
 
 string _CommandFolder_::
 
-The name of the folder that any custom <<reference/command.html,commands>> are placed in. By default this is "Commands". All folders with this name that are inside a folder called "Resources" will be loaded when the CompositionManager is created.
+The name of the folder that any custom <<reference/command.html,Commands>> are placed in. By default this is "Commands". All folders with this name that are inside a folder called "Resources" will be loaded when the CompositionManager is created.
 
 bool _LogTracking_::
 
-When this is true, information gathered in editor builds about the execution of instructions will be logged to the console. This information is the number of enumerator iterations, the number of frames, and the amount of time it took to complete execution of the instruction. The Watch Window in the editor exposes this variable as a toggle.
+When this is true, information gathered in editor builds about the execution of <<reference/instruction.html,Instructions>> will be logged to the https://docs.unity3d.com/Manual/Console.html[console^]. This will include the number of enumerator iterations, the number of frames, and the amount of time it took to complete execution of each <<reference/instruction.html,Instruction>>. The <<topics/graphs-5.html,Watch Window> in the editor exposes this variable as a toggle.
 
 ### Public Properties
 
@@ -44,8 +44,14 @@ An <<reference/i-variable-store.html,IVariableStore>> implementation that allows
 
 void RunInstruction(<<reference/instruction.html,Instruction>> _instruction_, <<reference/variable-value.html,VariableValue>> _context_)::
 
-Runs an instruction, usually an <<reference/instruction-graph.html,InstructionGraph>> without setting any inputs other than _context_ or reading any outputs.
+Runs an <<reference/instruction.html,Instruction>>, usually an <<reference/instruction-graph.html,InstructionGraph>> without setting any inputs other than _context_ or reading any outputs.
 
 void RunInstruction(<<reference/instruction-caller.html,InstructionCaller>> _caller_, <<reference/i-variable-store.html,IVariableStore>> _store_, <<reference/variable-value.html,VariableValue>> _context_)::
 
-Runs an instruction, usually an <<reference/instruction-graph.html,InstructionGraph>>, reading the inputs specified in _caller_ from _store_ to an <<reference/instruction-store.html,InstructionStore> that is passed to the instruction, and reading the outputs from that instruction store to _store_ when the instruction has completed.
+Runs an <<reference/instruction.html,Instruction>>, usually an <<reference/instruction-graph.html,InstructionGraph>>, reading the inputs specified in _caller_ from _store_ to an <<reference/instruction-store.html,InstructionStore>> that is passed to the instruction, and reading the outputs from that <<reference/instruction-store.html,InstructionStore>> to _store_ when _caller_ has completed.
+
+Read more about <<reference/instruction.html,Instruction>> inputs and outputs in the <<topics/graphs-4.html,Instruction Store>> topic.
+
+ifdef::backend-multipage_html5[]
+<<manual/composition-manager.html,Manual>>
+endif::[]

@@ -22,7 +22,16 @@ namespace PiRhoSoft.CompositionEngine
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Reference)]
 		public VariableReference Reference = new VariableReference();
 
-		public abstract void GetInputs(IList<VariableDefinition> inputs);
+		public void GetInputs(IList<VariableDefinition> inputs)
+		{
+			if (Type == VariableSourceType.Reference && InstructionStore.IsInput(Reference))
+			{
+				var definition = new VariableDefinition { Name = Reference.RootName, Definition = GetInputDefinition() };
+				inputs.Add(definition);
+			}
+		}
+
+		protected abstract ValueDefinition GetInputDefinition();
 	}
 
 	public abstract class VariableSource<T> : VariableSource
@@ -31,13 +40,10 @@ namespace PiRhoSoft.CompositionEngine
 		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Value)]
 		public T Value;
 
-		public override void GetInputs(IList<VariableDefinition> inputs)
+		protected override ValueDefinition GetInputDefinition()
 		{
-			if (Type == VariableSourceType.Reference && InstructionStore.IsInput(Reference))
-			{
-				var type = VariableValue.GetType(typeof(T));
-				inputs.Add(new VariableDefinition { Name = Reference.RootName, Definition = ValueDefinition.Create(type) });
-			}
+			var type = VariableValue.GetType(typeof(T));
+			return ValueDefinition.Create(type);
 		}
 	}
 

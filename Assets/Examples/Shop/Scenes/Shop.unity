@@ -125,6 +125,7 @@ GameObject:
   - component: {fileID: 92609184}
   - component: {fileID: 92609186}
   - component: {fileID: 92609187}
+  - component: {fileID: 92609188}
   m_Layer: 5
   m_Name: Message
   m_TagString: Untagged
@@ -198,14 +199,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 92609182}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08ac88b8f693cea4ba3170a47ced16e1, type: 3}
+  m_Script: {fileID: 11500000, guid: d264bfadf51340c4d9dab818a83aae8f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   DependentObjects:
     _items:
     - {fileID: 1421869730}
   DisplayText: {fileID: 621823148}
-  AcceptButton: Submit
 --- !u!114 &92609187
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -219,6 +219,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonName: Submit
+--- !u!114 &92609188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 92609182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08ac88b8f693cea4ba3170a47ced16e1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  AcceptButton: Submit
 --- !u!1 &128260285
 GameObject:
   m_ObjectHideFlags: 0

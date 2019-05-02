@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.CollisionGraphTrigger : https://docs.unity3d.com/Scr
 
 ### Description
 
-Runs a graph when a <<reference/collision-notifier.html,CollisionNotifier>> informs this object that it has collided.
+Add this to a https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] to to run an <<reference/instruction-graph.html,InstructionGrap>> when a <<reference/collision-notifier.html,CollisionNotifier>> informs this object that it has collided.
 
 ### Public Fields
 
@@ -17,3 +17,7 @@ The <<reference/instruction-graph.html,InstructionGraph>> to run when a <<refere
 <<reference/instruction-caller.html,InstructionCaller>> _ExitGraph_::
 
 The <<reference/instruction-graph.html,InstructionGraph>> to run when a <<reference/collision-notifier.html,CollisionNotifier>> stops colliding with this object.
+
+ifdef::backend-multipage_html5[]
+<<manual/collision-graph-trigger.html,Manual>>
+endif::[]

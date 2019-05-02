@@ -1,8 +1,6 @@
 [#topics/variables-3]
 
-## Variables
-
-### Defining Variables
+## Defining Variables
 
 Variables are defined using a Variable Schema, often referred to as just _schema_. A schema is created in the https://docs.unity3d.com/Manual/ProjectView.html[project window^] using the _Create_ menu and found under menu:PiRho Soft[Variable Schema].
 

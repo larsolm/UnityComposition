@@ -6,10 +6,14 @@ PiRhoSoft.CompositionEngine.ButtonInput : https://docs.unity3d.com/ScriptReferen
 
 ### Description
 
-ButtonInput is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will set the state of a button when an object is clicked or released. See the <<manual/button-input.html,manual page>> for usage details.
+Add this to a https://docs.unity3d.com/ScriptReference/UI.Graphic.html[Graphic^] or https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] to set the pressed state of a button on the <<reference/input-helper.html,InputHelper>> when the object is clicked or touched.
 
 ### Public Fields
 
 string _ButtonName_::
 
 The name of the button whose state will be changed when this object is clicked or released.
+
+ifdef::backend-multipage_html5[]
+<<manual/button-input.html,Manual>>
+endif::[]

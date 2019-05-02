@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ConditionalNode : <<reference/instruction-graph-node
 
 ### Description
 
-An <<reference/instruction-graph-node.html,InstructionGraphNode>> that continues to another <<reference/instruction-graph-node.html,node>> based on the result of a conditional <<reference/expression.html,Expression>>.
+Runs an <<reference/instruction-graph-node.html,InstructionGraphNode>> based on the result of a conditional <<reference/expression.html,Expression>>.
 
 ### Public Fields
 
@@ -21,3 +21,7 @@ If _Condition_ evaluates to false, this node will run.
 <<reference/expression.html,Expression>> _Condition_::
 
 The expression to execute to determine which node should be run. The expression should return a bool, otherwise an error will be logged.
+
+ifdef::backend-multipage_html5[]
+<<manual/conditional-node.html,Manual>>
+endif::[]

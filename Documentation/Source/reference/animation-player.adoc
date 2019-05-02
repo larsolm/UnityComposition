@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.AnimationPlayer : https://docs.unity3d.com/ScriptRef
 
 ### Description
 
-Animation Player is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that utilizes https://docs.unity3d.com/Manual/Playables.html[Unity's Playables API^] to play simple https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClips^] on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. This is best used on objects that do not need the complexity and overhead of full fledged https://docs.unity3d.com/ScriptReference/Animations.AnimatorController.html[AnimatorControllers^].
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to provide an interface for playing https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClips^].
 
 ### Public Properties
 
@@ -32,3 +32,7 @@ Pauses playback of the currently running animation.
 void Unpause()::
 
 Resumes playback of the currently running animation.
+
+ifdef::backend-multipage_html5[]
+<<manual/animation-player.html,Manual>>
+endif::[]

@@ -6,16 +6,25 @@ PiRhoSoft.CompositionEngine.AudioPlayer : https://docs.unity3d.com/ScriptReferen
 
 ### Description
 
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to provide an interface for playing https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClips^].
+
 ### Public Properties
 
 bool _IsComplete_ _(read only)_::
+
+This will return true as soon as the sound has completed. If the sound has not yet started, it is not considered complete, so this will return false. If the sound is set to loop, this will always return false.
 
 ### Public Methods
 
 void PlaySound(https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^] _sound_, float _volume_)::
 
+Plays _sound_ at _volume_ and returns immediately.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] PlaySoundAndWait(https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^] _sound_, float _volume_)::
 
-### Protected Methods
+Plays _sound_ at _volume_ and returns an enumerator so it can be run as or from a https://docs.unity3d.com/Manual/Coroutines.html[coroutine^]. The enumerator will yield until _sound_ has completed. If _sound_ is set to loop, the enumerator
+will break immediately and an error will be printed. Call _PlaySound_ instead to run looping sounds.
 
-void Awake() _(virtual)_::
+ifdef::backend-multipage_html5[]
+<<manual/audio-player.html,Manual>>
+endif::[]

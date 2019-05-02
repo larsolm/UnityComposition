@@ -167,10 +167,6 @@ namespace PiRhoSoft.CompositionEngine
 			return result;
 		}
 
-		protected CommandEvaluationException WrongParameterType(int index, VariableType got, VariableType expected) => CommandEvaluationException.WrongParameterType(Name, index, got, expected);
-		protected CommandEvaluationException WrongParameterType(int index, VariableType got, VariableType expected1, VariableType expected2) => CommandEvaluationException.WrongParameterType(Name, index, got, expected1, expected2);
-		protected CommandEvaluationException WrongParameterType(int index, VariableType got, params VariableType[] expected) => CommandEvaluationException.WrongParameterType(Name, index, got, expected);
-
 		#region Parameters
 
 		private const int _initialStoreCount = 5; // multiple because commands can call other commands

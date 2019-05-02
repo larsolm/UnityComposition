@@ -6,4 +6,8 @@ PiRhoSoft.CompositionEngine.ClickGraphTrigger : <<reference/instruction-trigger.
 
 ### Description
 
-Runs _Graph_ after the mouse is clicked and released over the object.
+Add this to a https://docs.unity3d.com/ScriptReference/UI.Graphic.html[Graphic^] or https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] to to run _Graph_ (declared on <<reference/instruction-trigger.html,InstructionTrigger>>) when the object is clicked or touched.
+
+ifdef::backend-multipage_html5[]
+<<manual/click-graph-trigger.html,Manual>>
+endif::[]
