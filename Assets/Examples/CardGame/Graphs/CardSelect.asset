@@ -100,6 +100,7 @@ MonoBehaviour:
   GraphPosition: {x: 768, y: -128}
   IsBreakpoint: 0
   Next: {fileID: 114087237884415354}
+  Source: 0
   Instruction:
     _instruction: {fileID: 11400000, guid: a232be99990832a49a8a87a42662616c, type: 2}
     _inputs:
@@ -135,6 +136,9 @@ MonoBehaviour:
           Text: local
         - Type: 0
           Text: movable
+  Reference:
+    _variable: 
+    _tokens: []
   Context:
     Type: 0
     Reference:
@@ -170,6 +174,7 @@ MonoBehaviour:
   GraphPosition: {x: 1728, y: 76.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
+  Source: 0
   Instruction:
     _instruction: {fileID: 11400000, guid: a232be99990832a49a8a87a42662616c, type: 2}
     _inputs:
@@ -207,6 +212,9 @@ MonoBehaviour:
           Text: ace
         - Type: 0
           Text: Active
+  Reference:
+    _variable: 
+    _tokens: []
   Context:
     Type: 0
     Reference:
@@ -362,8 +370,9 @@ MonoBehaviour:
       _isConstraintLocked: 0
     _data: AQAJAAAAAAAAAAAAAAAAAAAA
     _objects: []
-  _targetTypeName: 
-  _propertyName: 
+  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  _propertyName: position
 --- !u!114 &114696120759720692
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -408,8 +417,9 @@ MonoBehaviour:
       _isConstraintLocked: 0
     _data: AQAJAAAAAAAAAAAAAAAAAAAA
     _objects: []
-  _targetTypeName: 
-  _propertyName: 
+  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+    Culture=neutral, PublicKeyToken=null
+  _propertyName: position
 --- !u!114 &114798996279171400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -480,10 +490,14 @@ MonoBehaviour:
   GraphPosition: {x: 2176, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 114979908025208874}
+  Source: 0
   Instruction:
     _instruction: {fileID: 11400000, guid: 2856362fb37151f4ba58f690e759d477, type: 2}
     _inputs: []
     _outputs: []
+  Reference:
+    _variable: 
+    _tokens: []
   Context:
     Type: 0
     Reference:
@@ -581,10 +595,14 @@ MonoBehaviour:
   GraphPosition: {x: 2112, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 114944409301683160}
+  Source: 0
   Instruction:
     _instruction: {fileID: 11400000, guid: 813ba8867a65fb149aff0667ff4d5dcc, type: 2}
     _inputs: []
     _outputs: []
+  Reference:
+    _variable: 
+    _tokens: []
   Context:
     Type: 1
     Reference:

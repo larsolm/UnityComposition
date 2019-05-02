@@ -392,10 +392,6 @@ include::reference/instruction-output-type.adoc[]
 
 <<<
 
-include::reference/instruction-reference-node.adoc[]
-
-<<<
-
 include::reference/instruction-store.adoc[]
 
 <<<

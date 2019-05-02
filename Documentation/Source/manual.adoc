@@ -176,10 +176,6 @@ include::manual/instruction-node.adoc[]
 
 <<<
 
-include::manual/instruction-reference-node.adoc[]
-
-<<<
-
 include::manual/instruction-trigger.adoc[]
 
 <<<

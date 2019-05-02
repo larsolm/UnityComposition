@@ -278,9 +278,9 @@ MonoBehaviour:
     _tokens:
     - Type: 0
       Text: finishPosition
-  TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
-  PropertyName: position
+  _propertyName: position
 --- !u!114 &114576425354111774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -442,9 +442,9 @@ MonoBehaviour:
     _tokens:
     - Type: 0
       Text: playerPosition
-  TargetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
+  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
     Culture=neutral, PublicKeyToken=null
-  PropertyName: position
+  _propertyName: position
 --- !u!114 &114797155301925872
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,8 +23,8 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The reference to store the retreived value in")]
 		public VariableReference Output = new VariableReference();
 
-		[SerializeField] private string TargetTypeName;
-		[SerializeField] private string PropertyName;
+		[SerializeField] private string _targetTypeName;
+		[SerializeField] private string _propertyName;
 
 		public Type TargetType { get; set; }
 		public FieldInfo Field { get; set; }
@@ -56,7 +56,7 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				else
 				{
-					Debug.LogWarningFormat(this, _invalidObjectTypeWarning, Name, Target, TargetTypeName);
+					Debug.LogWarningFormat(this, _invalidObjectTypeWarning, Name, Target, _targetTypeName);
 				}
 			}
 
@@ -69,17 +69,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		public void OnAfterDeserialize()
 		{
-			TargetType = Type.GetType(TargetTypeName);
-			Field = TargetType?.GetField(PropertyName);
-			Property = TargetType?.GetProperty(PropertyName);
+			TargetType = Type.GetType(_targetTypeName);
+			Field = TargetType?.GetField(_propertyName);
+			Property = TargetType?.GetProperty(_propertyName);
 
 			_getter = Getter.Create(TargetType, Property);
 		}
 
 		public void OnBeforeSerialize()
 		{
-			TargetTypeName = TargetType?.AssemblyQualifiedName;
-			PropertyName = (Field?.Name) ?? (Property?.Name);
+			_targetTypeName = TargetType?.AssemblyQualifiedName;
+			_propertyName = (Field?.Name) ?? (Property?.Name);
 		}
 
 		#endregion
