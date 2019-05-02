@@ -4,6 +4,8 @@
 
 An Enable Game Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will activate a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. Create an Enable Game Object Node in the menu:Create[Object Manipulation > Activate Game Object] menu of the Instruction Graph Window.
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+
 ### Fields
 
 image::enable-game-object-node.png[Enable Game Object Node]

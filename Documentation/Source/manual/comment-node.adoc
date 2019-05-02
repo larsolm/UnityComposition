@@ -4,6 +4,8 @@
 
 A Comment Node is an <<manua/instruction-graph-node.html,Instruction Graph Node>> that is used for debugging purposes. It is inert during runtime and is purely used to display custom info about how a graph is functioning. Create a Comment Node in the menu:Create[Debug > Comment] menu of the Instruction Graph Window.
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+
 ### Fields
 
 image::comment-node.png[Comment Node]

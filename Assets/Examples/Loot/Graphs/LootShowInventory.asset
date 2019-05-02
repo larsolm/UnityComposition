@@ -1,0 +1,138 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: LootShowInventory
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114246963856547910}
+    - {fileID: 0}
+    - {fileID: 114862197161052028}
+    - {fileID: 114896560128958474}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: 0}
+--- !u!114 &114246963856547910
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Scene
+  m_EditorClassIdentifier: 
+  Name: Load Scene
+  GraphPosition: {x: 640, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114862197161052028}
+  Source: 0
+  Scene:
+    Path: Assets/Examples/Loot/Scenes/LootMenu.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 1
+  CleanupAssets: 1
+  Additive: 1
+--- !u!114 &114440959625079054
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Player
+  m_EditorClassIdentifier: 
+  Name: Disable Player
+  GraphPosition: {x: 320, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114246963856547910}
+  Target:
+    _variable: global.Player as Player
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Player
+    - Type: 2
+      Text: Player
+--- !u!114 &114862197161052028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Equipment
+  m_EditorClassIdentifier: 
+  Name: Update Equipment
+  GraphPosition: {x: 960, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114896560128958474}
+  Object:
+    _variable: scene.EquipmentMenu
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: EquipmentMenu
+  Group: 
+  WaitForCompletion: 0
+--- !u!114 &114896560128958474
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09dd1a866ef51fe4d9cdf511c8e0ec9b, type: 3}
+  m_Name: Update Items
+  m_EditorClassIdentifier: 
+  Name: Update Items
+  GraphPosition: {x: 1024, y: 38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: scene.ItemsMenu
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: ItemsMenu
+  Group: 
+  WaitForCompletion: 0

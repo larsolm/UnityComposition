@@ -4,6 +4,7 @@
 
 An Instruction Reference Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that executes a different <<manual/instruction-graph.html,Instruction Graph>> based on a <<reference/variable-reference.html,VariableReference>>. Intruction Reference Nodes can pass in a new _Context_ object to _Instruction_ and optionally _WaitForCompletion_ of the called <<manual/instruction-graph.html,Instruction Graph>> before moving on to the next node. Create an Instruction Node in the menu:Create[Composition > Instruction - Reference] menu of the Instruction Graph Window.
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 See the _"Execute Move"_ node on the "Battle" <<instruction-graph.html,Instruction Graph>> in the Battle project for an example usage.
 
 ### Fields

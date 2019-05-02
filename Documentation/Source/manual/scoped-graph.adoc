@@ -4,6 +4,7 @@
 
 A Scoped Graph is an implementation of <<manual/instruction-graph.html,Instruction Graph>> with three sequential entry points for <<manual/instruction-graph-node,Nodes>>, _"Enter"_, _"Process"_, and _"Exit"_. This is useful for organization of nodes that should have parity of actions when they are starting and finishing (such as disabling and reenabling objects).
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 See the _"MazeStart"_ <<manual/instruction-graph.html,Instruction Graph>> in the Maze project for an example usage.
 
 ifdef::backend-multipage_html5[]

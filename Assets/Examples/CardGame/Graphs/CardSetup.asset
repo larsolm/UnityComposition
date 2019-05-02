@@ -1,0 +1,307 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 847bc6b77a88dcc40b42539ad4f85e07, type: 3}
+  m_Name: CardSetup
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: 114453830272232166}
+    - {fileID: 114936137521299786}
+    - {fileID: 114861526200370258}
+    - {fileID: 114534255571413984}
+    - {fileID: 114887996478865902}
+    - {fileID: 114122231132940762}
+    - {fileID: 114458235486340204}
+    - {fileID: 114232474002644628}
+    - {fileID: 114789499897121068}
+    - {fileID: 114928084405713316}
+    - {fileID: 114403376651189868}
+  StartPosition: {x: 0, y: 0}
+  Enter: {fileID: 114458235486340204}
+  Process: {fileID: 114789499897121068}
+  Exit: {fileID: 114887996478865902}
+--- !u!114 &114122231132940762
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e81db09edfc25024b94b5b1d2295f584, type: 3}
+  m_Name: Reset Setup
+  m_EditorClassIdentifier: 
+  Name: Reset Setup
+  GraphPosition: {x: 192, y: -166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Object:
+    _variable: global.State
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: State
+  Tag: Setup
+--- !u!114 &114232474002644628
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Clear Processing
+  m_EditorClassIdentifier: 
+  Name: Clear Processing
+  GraphPosition: {x: 192, y: 204.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: global.State.Processing -= 1
+--- !u!114 &114403376651189868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Add Ace
+  m_EditorClassIdentifier: 
+  Name: Add Ace
+  GraphPosition: {x: 1024, y: 153.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: global.State.Aces += local.card
+--- !u!114 &114453830272232166
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Suits
+  m_EditorClassIdentifier: 
+  Name: Iterate Suits
+  GraphPosition: {x: 704, y: -192}
+  IsBreakpoint: 0
+  Container:
+    _variable: global.Cards.Suits
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: Cards
+    - Type: 0
+      Text: Suits
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: local.suit
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: suit
+  Loop: {fileID: 114861526200370258}
+--- !u!114 &114458235486340204
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Processing
+  m_EditorClassIdentifier: 
+  Name: Set Processing
+  GraphPosition: {x: 128, y: -89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114122231132940762}
+  Expression:
+    _statement: global.State.Processing += 1
+--- !u!114 &114534255571413984
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Add Card
+  m_EditorClassIdentifier: 
+  Name: Add Card
+  GraphPosition: {x: 896, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 114928084405713316}
+  Expression:
+    _statement: global.State.Cards += local.card
+--- !u!114 &114789499897121068
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Initialize Rows
+  m_EditorClassIdentifier: 
+  Name: Initialize Rows
+  GraphPosition: {x: 320, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 114453830272232166}
+  Expression:
+    _statement: 'global.State.Rows += ""
+
+      global.State.Rows += ""
+
+      global.State.Rows += ""
+
+      global.State.Rows += ""'
+--- !u!114 &114861526200370258
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Suit
+  m_EditorClassIdentifier: 
+  Name: Set Suit
+  GraphPosition: {x: 768, y: -128}
+  IsBreakpoint: 0
+  Next: {fileID: 114936137521299786}
+  Expression:
+    _statement: local.suitList = global.Deck[local.suit.Name]
+--- !u!114 &114887996478865902
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Shuffle
+  m_EditorClassIdentifier: 
+  Name: Shuffle
+  GraphPosition: {x: 128, y: 128}
+  IsBreakpoint: 0
+  Next: {fileID: 114232474002644628}
+  Instruction:
+    _instruction: {fileID: 11400000, guid: 99f12e2c846ae7544894f2b8049e0b17, type: 2}
+    _inputs: []
+    _outputs: []
+  Context:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Definition:
+      _type: 0
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AQAAAAAA
+    _objects: []
+  WaitForCompletion: 1
+--- !u!114 &114928084405713316
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: Is Ace
+  m_EditorClassIdentifier: 
+  Name: Is Ace
+  GraphPosition: {x: 960, y: 64}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 114403376651189868}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: local.card.Rank == "A"
+--- !u!114 &114936137521299786
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Cards
+  m_EditorClassIdentifier: 
+  Name: Iterate Cards
+  GraphPosition: {x: 832, y: -64}
+  IsBreakpoint: 0
+  Container:
+    _variable: local.suitList
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: suitList
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: local.card
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: card
+  Loop: {fileID: 114534255571413984}

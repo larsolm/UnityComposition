@@ -4,6 +4,8 @@
 
 Instruction is the base https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Asset^] from which all <<manual/instruction-graph.html,Instruction Graph>>'s derive. The Instruction class defines the <<reference/variable-definition.html,VariableDefinitions>> of the Context and Inputs and Outputs used inside the <<manual/instruction-graph.html,Instruction Graph>>.
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+
 ifdef::backend-multipage_html5[]
 <<reference/instruction.html,Reference>>
 endif::[]

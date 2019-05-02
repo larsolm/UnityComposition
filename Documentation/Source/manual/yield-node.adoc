@@ -4,6 +4,7 @@
 
 A Yield Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that yield for one frame before continuing on to the next node. This is useful for long running processes whose execution needs to happen across frames or for idling a graph until a certain condition is met in a <<manual/loop-node.html,Loop Node>>. Create a Yield Node in the menu:Create[Control Flow > Yield] menu of the Instruction Graph Window.
 
+See <<topics/graphs-3.html,Control Flow>> for more information. +
 See the _"BoardTakeTurn"_ <<manual/instruction-graph.html,Instruction Graph>> in the BoardGame project for an example usage.
 
 ifdef::backend-multipage_html5[]

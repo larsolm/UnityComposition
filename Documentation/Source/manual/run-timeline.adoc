@@ -4,6 +4,8 @@
 
 Run Timeline Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells a https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.html[PlayableDirector^] to https://docs.unity3d.com/ScriptReference/Playables.PlayableDirector.Play.html[Play()^] a https://docs.unity3d.com/2018.3/Documentation/ScriptReference/Timeline.TimelineAsset.html[Timeline^]. Create a Run Timeline Node in the menu:Create[Animation > Run Timeline] menu of the Instruction Graph Window.
 
+See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+
 ### Fields
 
 image::run-timeline.png[Run Timeline]
