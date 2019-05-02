@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Object Manipulation/Disable Behaviour", 21)]
-	[HelpURL(Composition.DocumentationUrl + "disable-behaviour-node")]
+	[CreateInstructionGraphNodeMenu("Object Manipulation/Disable Object", 21)]
+	[HelpURL(Composition.DocumentationUrl + "disable-object-node")]
 	public class DisableObjectNode : InstructionGraphNode
 	{
 		private const string _invalidObjectWarning = "(CDONIO) unable to disable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";

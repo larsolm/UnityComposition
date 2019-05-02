@@ -40,10 +40,6 @@ include::manual/call-method-node.adoc[]
 
 <<<
 
-include::manual/stop-transition-node.adoc[]
-
-<<<
-
 include::manual/click-graph-trigger.adoc[]
 
 <<<
@@ -80,7 +76,7 @@ include::manual/create-scriptable-object-node.adoc[]
 
 <<<
 
-include::manual/cutoff.adoc[]
+include::manual/cutoff-transition.adoc[]
 
 <<<
 
@@ -88,19 +84,11 @@ include::manual/destroy-object-node.adoc[]
 
 <<<
 
-include::manual/disable-behaviour-node.adoc[]
+include::manual/disable-object-node.adoc[]
 
 <<<
 
-include::manual/disable-game-object-node.adoc[]
-
-<<<
-
-include::manual/dissolve.adoc[]
-
-<<<
-
-include::manual/enable-behaviour-node.adoc[]
+include::manual/dissolve-transition.adoc[]
 
 <<<
 
@@ -108,11 +96,11 @@ include::manual/enable-binding.adoc[]
 
 <<<
 
-include::manual/enable-game-object-node.adoc[]
+include::manual/enable-graph-trigger.adoc[]
 
 <<<
 
-include::manual/enable-graph-trigger.adoc[]
+include::manual/enable-object-node.adoc[]
 
 <<<
 
@@ -124,7 +112,7 @@ include::manual/expression-node.adoc[]
 
 <<<
 
-include::manual/fade.adoc[]
+include::manual/fade-transition.adoc[]
 
 <<<
 
@@ -149,10 +137,6 @@ include::manual/image-binding.adoc[]
 <<<
 
 include::manual/image-color-binding.adoc[]
-
-<<<
-
-include::manual/input-message.adoc[]
 
 <<<
 
@@ -228,6 +212,10 @@ include::manual/message-control.adoc[]
 
 <<<
 
+include::manual/message-input.adoc[]
+
+<<<
+
 include::manual/message-node.adoc[]
 
 <<<
@@ -248,7 +236,7 @@ include::manual/object-binding-root.adoc[]
 
 <<<
 
-include::manual/pixelate.adoc[]
+include::manual/pixelate-transition.adoc[]
 
 <<<
 
@@ -268,6 +256,10 @@ include::manual/play-sound-node.adoc[]
 
 <<<
 
+include::manual/play-timeline-node.adoc[]
+
+<<<
+
 include::manual/play-transition-node.adoc[]
 
 <<<
@@ -277,10 +269,6 @@ include::manual/reset-tag-node.adoc[]
 <<<
 
 include::manual/reset-variables-node.adoc[]
-
-<<<
-
-include::manual/play-timeline-node.adoc[]
 
 <<<
 
@@ -312,10 +300,6 @@ include::manual/set-property-node.adoc[]
 
 <<<
 
-include::manual/set-variable-node.adoc[]
-
-<<<
-
 include::manual/show-control-node.adoc[]
 
 <<<
@@ -341,6 +325,10 @@ include::manual/sprite-color-binding.adoc[]
 <<<
 
 include::manual/start-graph-trigger.adoc[]
+
+<<<
+
+include::manual/stop-transition-node.adoc[]
 
 <<<
 

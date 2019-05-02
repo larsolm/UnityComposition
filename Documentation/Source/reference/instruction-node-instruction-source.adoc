@@ -1,0 +1,13 @@
+[#reference/instruction-node-instruction-source]
+
+## InstructionSource
+
+PiRhoSoft.CompositionEngine.InstructionSource
+
+### Description
+
+### Values
+
+<<reference/instruction-node-instruction-source.html,InstructionSource>> _Value_::
+
+<<reference/instruction-node-instruction-source.html,InstructionSource>> _Reference_::

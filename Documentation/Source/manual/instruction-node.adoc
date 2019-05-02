@@ -15,7 +15,9 @@ image::instruction-node.png[Instruction Node]
 |===
 | Name	| Description
 
+| Source	| 
 | Instruction	| The <<manual/instruction-graph,Instruction Graph>> to execute
+| Reference	| 
 | Context	| A <<reference/variable-value-source.html,VariableValueSource>> to the context object to be passed to _Instruction_
 | Wait For Completion	| Whether to wait until _Instruction_ is finished running before moving on to the next node
 |===

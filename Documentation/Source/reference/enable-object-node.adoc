@@ -1,8 +1,8 @@
-[#reference/enable-game-object-node]
+[#reference/enable-object-node]
 
-## EnableGameObjectNode
+## EnableObjectNode
 
-PiRhoSoft.CompositionEngine.EnableGameObjectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.EnableObjectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 

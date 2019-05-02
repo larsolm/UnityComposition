@@ -107,6 +107,10 @@ CBTIBVNF:: Unable to bind text to variable on {0}: the variable '{1}' could not 
 --
 --
 
+CDONIO:: unable to disable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer
+--
+--
+
 CEBFC:: unable to bind enabled state for binding {0}: the Command '{1}' failed with error {2}
 --
 --
@@ -128,6 +132,10 @@ CEBMV:: unable to bind enabled state for binding {0}: the expression is empty
 --
 
 CEIR:: The Expression '{0}' was expected to return type {1} but instead returned type {2}
+--
+--
+
+CEONIO:: unable to enable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer
 --
 --
 
@@ -327,14 +335,6 @@ CMVSIP:: failed to map property '{0}' of type '{1}': Only bool, int, float, stri
 --
 --
 
-CPMIF:: failed to map field '{0}' on type {1}: {2} is not a supported type
---
---
-
-CPMIP:: failed to map property '{0}' on type {1}: {2} is not a supported type
---
---
-
 CSCII:: Failed to create item {0}: the variable '{1}' is not an IVariableStore or IVariableList
 --
 --
@@ -356,10 +356,6 @@ CTMS:: Failed to load Transition: shader {0} not found
 --
 
 CVDII:: Failed to initialize variable: the definition specifies type {0} but the initializer returned type {1}
---
---
-
-CVMDV:: Failed to map variable '{0}': a variable with that name already exists in the map
 --
 --
 

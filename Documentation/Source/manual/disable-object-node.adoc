@@ -1,6 +1,6 @@
-[#manual/disable-behaviour-node]
+[#manual/disable-object-node]
 
-## Disable Behaviour Node
+## Disable Object Node
 
 A Disable Behaviour Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will disable a https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^] on the given https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. Create a Disable Behaviour Node in the menu:Create[Object Manipulation > Disable Behaviour] menu of the Instruction Graph Window.
 
@@ -19,5 +19,5 @@ image::disable-behaviour-node.png[Disable Behaviour Node]
 |===
 
 ifdef::backend-multipage_html5[]
-<<reference/disable-behaviour-node.html,Reference>>
+<<reference/disable-object-node.html,Reference>>
 endif::[]

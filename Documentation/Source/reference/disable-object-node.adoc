@@ -1,8 +1,8 @@
-[#reference/disable-game-object-node]
+[#reference/disable-object-node]
 
-## DisableGameObjectNode
+## DisableObjectNode
 
-PiRhoSoft.CompositionEngine.DisableGameObjectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+PiRhoSoft.CompositionEngine.DisableObjectNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
 
 ### Description
 
