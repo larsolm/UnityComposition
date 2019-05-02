@@ -44,15 +44,7 @@ include::reference/binding-root.adoc[]
 
 <<<
 
-include::reference/bool-variable-handler.adoc[]
-
-<<<
-
 include::reference/bool-variable-source.adoc[]
-
-<<<
-
-include::reference/bounds-variable-handler.adoc[]
 
 <<<
 
@@ -84,10 +76,6 @@ include::reference/call-method-node.adoc[]
 
 <<<
 
-include::reference/stop-transition-node.adoc[]
-
-<<<
-
 include::reference/click-graph-trigger.adoc[]
 
 <<<
@@ -104,10 +92,6 @@ include::reference/instruction-graph-node-colors.adoc[]
 
 <<<
 
-include::reference/color-variable-handler.adoc[]
-
-<<<
-
 include::reference/color-variable-source.adoc[]
 
 <<<
@@ -121,10 +105,6 @@ include::reference/command-evaluation-exception.adoc[]
 <<<
 
 include::reference/comment-node.adoc[]
-
-<<<
-
-include::reference/comparison-operator.adoc[]
 
 <<<
 
@@ -160,7 +140,7 @@ include::reference/create-scriptable-object-node.adoc[]
 
 <<<
 
-include::reference/cutoff.adoc[]
+include::reference/cutoff-transition.adoc[]
 
 <<<
 
@@ -172,23 +152,11 @@ include::reference/destroy-object-node.adoc[]
 
 <<<
 
-include::reference/disable-behaviour-node.adoc[]
+include::reference/disable-object-node.adoc[]
 
 <<<
 
-include::reference/disable-game-object-node.adoc[]
-
-<<<
-
-include::reference/dissolve.adoc[]
-
-<<<
-
-include::reference/empty-variable-handler.adoc[]
-
-<<<
-
-include::reference/enable-behaviour-node.adoc[]
+include::reference/dissolve-transition.adoc[]
 
 <<<
 
@@ -196,19 +164,15 @@ include::reference/enable-binding.adoc[]
 
 <<<
 
-include::reference/enable-game-object-node.adoc[]
-
-<<<
-
 include::reference/enable-graph-trigger.adoc[]
 
 <<<
 
-include::reference/enum-variable-constraint.adoc[]
+include::reference/enable-object-node.adoc[]
 
 <<<
 
-include::reference/enum-variable-handler.adoc[]
+include::reference/enum-variable-constraint.adoc[]
 
 <<<
 
@@ -256,15 +220,11 @@ include::reference/expression-token-type.adoc[]
 
 <<<
 
-include::reference/fade.adoc[]
+include::reference/fade-transition.adoc[]
 
 <<<
 
 include::reference/float-variable-constraint.adoc[]
-
-<<<
-
-include::reference/float-variable-handler.adoc[]
 
 <<<
 
@@ -324,15 +284,7 @@ include::reference/image-color-binding.adoc[]
 
 <<<
 
-include::reference/i-mapped-variable-list.adoc[]
-
-<<<
-
 include::reference/infix-operation.adoc[]
-
-<<<
-
-include::reference/input-message.adoc[]
 
 <<<
 
@@ -392,6 +344,10 @@ include::reference/instruction-output-type.adoc[]
 
 <<<
 
+include::reference/instruction-node-instruction-source.adoc[]
+
+<<<
+
 include::reference/instruction-store.adoc[]
 
 <<<
@@ -400,23 +356,11 @@ include::reference/instruction-trigger.adoc[]
 
 <<<
 
-include::reference/int2-variable-handler.adoc[]
-
-<<<
-
 include::reference/int2-variable-source.adoc[]
 
 <<<
 
-include::reference/int3-variable-handler.adoc[]
-
-<<<
-
 include::reference/int3-variable-source.adoc[]
-
-<<<
-
-include::reference/int-bounds-variable-handler.adoc[]
 
 <<<
 
@@ -428,19 +372,11 @@ include::reference/interface-control.adoc[]
 
 <<<
 
-include::reference/int-rect-variable-handler.adoc[]
-
-<<<
-
 include::reference/int-rect-variable-source.adoc[]
 
 <<<
 
 include::reference/int-variable-constraint.adoc[]
-
-<<<
-
-include::reference/int-variable-handler.adoc[]
 
 <<<
 
@@ -484,10 +420,6 @@ include::reference/list-variable-constraint.adoc[]
 
 <<<
 
-include::reference/list-variable-handler.adoc[]
-
-<<<
-
 include::reference/list-variable-source.adoc[]
 
 <<<
@@ -513,10 +445,6 @@ include::reference/mapped-variable-store.adoc[]
 <<<
 
 include::reference/material-animation.adoc[]
-
-<<<
-
-include::reference/member-operator.adoc[]
 
 <<<
 
@@ -549,6 +477,10 @@ include::reference/message-binding.adoc[]
 <<<
 
 include::reference/message-control.adoc[]
+
+<<<
+
+include::reference/message-input.adoc[]
 
 <<<
 
@@ -604,10 +536,6 @@ include::reference/object-variable-constraint.adoc[]
 
 <<<
 
-include::reference/object-variable-handler.adoc[]
-
-<<<
-
 include::reference/object-variable-source.adoc[]
 
 <<<
@@ -628,7 +556,7 @@ include::reference/command-parameter-list.adoc[]
 
 <<<
 
-include::reference/pixelate.adoc[]
+include::reference/pixelate-transition.adoc[]
 
 <<<
 
@@ -652,6 +580,10 @@ include::reference/play-sound-node.adoc[]
 
 <<<
 
+include::reference/play-timeline-node.adoc[]
+
+<<<
+
 include::reference/play-transition-node.adoc[]
 
 <<<
@@ -664,35 +596,11 @@ include::reference/primary-axis.adoc[]
 
 <<<
 
-include::reference/property.adoc[]
-
-<<<
-
-include::reference/property-1.adoc[]
-
-<<<
-
-include::reference/property-list.adoc[]
-
-<<<
-
-include::reference/property-map.adoc[]
-
-<<<
-
-include::reference/quaternion-variable-handler.adoc[]
-
-<<<
-
 include::reference/quaternion-variable-source.adoc[]
 
 <<<
 
 include::reference/read-only-store.adoc[]
-
-<<<
-
-include::reference/rect-variable-handler.adoc[]
 
 <<<
 
@@ -709,10 +617,6 @@ include::reference/reset-variable-list.adoc[]
 <<<
 
 include::reference/reset-variables-node.adoc[]
-
-<<<
-
-include::reference/play-timeline-node.adoc[]
 
 <<<
 
@@ -764,10 +668,6 @@ include::reference/set-property-node.adoc[]
 
 <<<
 
-include::reference/set-variable-node.adoc[]
-
-<<<
-
 include::reference/set-variable-result.adoc[]
 
 <<<
@@ -804,11 +704,11 @@ include::reference/start-graph-trigger.adoc[]
 
 <<<
 
-include::reference/store-variable-constraint.adoc[]
+include::reference/stop-transition-node.adoc[]
 
 <<<
 
-include::reference/store-variable-handler.adoc[]
+include::reference/store-variable-constraint.adoc[]
 
 <<<
 
@@ -821,10 +721,6 @@ include::reference/string-binding.adoc[]
 <<<
 
 include::reference/string-variable-constraint.adoc[]
-
-<<<
-
-include::reference/string-variable-handler.adoc[]
 
 <<<
 
@@ -861,10 +757,6 @@ include::reference/time-scale-node.adoc[]
 <<<
 
 include::reference/composition-manager-tracking-data.adoc[]
-
-<<<
-
-include::reference/composition-manager-tracking-enumerator.adoc[]
 
 <<<
 
@@ -952,14 +844,6 @@ include::reference/variable-list.adoc[]
 
 <<<
 
-include::reference/variable-listener.adoc[]
-
-<<<
-
-include::reference/variable-map.adoc[]
-
-<<<
-
 include::reference/variable-pool.adoc[]
 
 <<<
@@ -1008,14 +892,6 @@ include::reference/variable-store.adoc[]
 
 <<<
 
-include::reference/variable-reference-variable-token.adoc[]
-
-<<<
-
-include::reference/variable-reference-variable-token-type.adoc[]
-
-<<<
-
 include::reference/variable-type.adoc[]
 
 <<<
@@ -1028,23 +904,11 @@ include::reference/variable-value-source.adoc[]
 
 <<<
 
-include::reference/vector2-variable-handler.adoc[]
-
-<<<
-
 include::reference/vector2-variable-source.adoc[]
 
 <<<
 
-include::reference/vector3-variable-handler.adoc[]
-
-<<<
-
 include::reference/vector3-variable-source.adoc[]
-
-<<<
-
-include::reference/vector4-variable-handler.adoc[]
 
 <<<
 

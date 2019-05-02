@@ -3,8 +3,8 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateInstructionGraphNodeMenu("Object Manipulation/Enable Behaviour", 20)]
-	[HelpURL(Composition.DocumentationUrl + "enable-behaviour-node")]
+	[CreateInstructionGraphNodeMenu("Object Manipulation/Enable Object", 20)]
+	[HelpURL(Composition.DocumentationUrl + "enable-object-node")]
 	public class EnableObjectNode : InstructionGraphNode
 	{
 		private const string _invalidObjectWarning = "(CEONIO) unable to enable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";

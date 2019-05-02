@@ -1,0 +1,11 @@
+[#reference/message-input]
+
+## MessageInput
+
+PiRhoSoft.CompositionEngine.MessageInput : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
+
+### Description
+
+### Public Fields
+
+string _AcceptButton_::

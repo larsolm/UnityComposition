@@ -31,8 +31,6 @@ namespace PiRhoSoft.UtilityEditor
 				Debug.LogWarningFormat(_missingObjectWarning, property.propertyPath);
 			else if (_method == null)
 				Debug.LogWarningFormat(_missingMethodWarning, property.propertyPath, callback);
-
-			Undo.undoRedoPerformed += OnUndo;
 		}
 
 		public override float GetHeight(SerializedProperty property, GUIContent label)

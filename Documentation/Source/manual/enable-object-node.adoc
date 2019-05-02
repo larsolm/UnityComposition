@@ -1,6 +1,6 @@
-[#manual/enable-behaviour-node]
+[#manual/enable-object-node]
 
-## Enable Behaviour Node
+## Enable Object Node
 
 An Enable Behaviour Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will enable a https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^] on the given https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. Create an Enable Behaviour Node in the menu:Create[Object Manipulation > Enable Behaviour] menu of the Instruction Graph Window.
 
@@ -19,5 +19,5 @@ image::enable-behaviour-node.png[Enable Behaviour Node]
 |===
 
 ifdef::backend-multipage_html5[]
-<<reference/enable-behaviour-node.html,Reference>>
+<<reference/enable-object-node.html,Reference>>
 endif::[]
