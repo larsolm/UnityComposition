@@ -2,6 +2,8 @@
 
 ## Writing Expressions
 
+### Math
+
 Expressions have a wide application of uses but at their simplest are an extension of Variable References allowing math operations to be performed on variables. For example if a <<topics/graphs-3.html,Graph Node>> is expecting an attack value and a player exists with an attack stat, the damage from a critical hit could be given in the form of the expression `global.player.attack * 2`. The full suite of math operations is available:
 
 |===
@@ -17,6 +19,8 @@ Expressions have a wide application of uses but at their simplest are an extensi
 |===
 
 These math operations are computed in the expected order based on the standard order of operations (exponents first, then multiplication and division, and last addition and subtraction). Additionaly, operations can be grouped with parentheses to force a certain execution order.
+
+### Logic
 
 Some expressions, for example _Condition_ on a <<manual/conditional-node.html,Conditional Node>>, expect the result to have type `Bool`. For this, a set of comparison and logic operators is available:
 
@@ -36,11 +40,19 @@ Some expressions, for example _Condition_ on a <<manual/conditional-node.html,Co
 
 NOTE: Logic operations are executed before comparison operations, which are executed before math operations.
 
+### Conditionals
+
 To perform simple conditional checks inside an expression, use the ternary syntax of `condition ? statement if true : statement if false`. For example, to compute a damage value based on whether or not the attack is a critical hit, the expression could be `local.isCritical ? global.player.attack * 2 : global.player.attack` or alternatively and equally as valid `global.player.attack * (local.isCritical ? 2 : 1)`.
+
+### Existence Test
 
 To check if a variable exists, the `null` constant can be used: `local.somethingExists = local.something != null`
 
+### Asssignment
+
 In addition to accessing variables, expressions can set variables. This is done with the `=` operator. For example to store a computed damage value instead of returning it like the above example, write the expression `local.damage = global.player.attack * 2`. The damage value can be then later accessed by other Expressions and Variable References as `local.damage`. Each of the math and logic operations also exist as an assignment to more simply modify a value. These are: `+=`, `-=`, `*=`, `/=`, `^=`, `&=`, and `|=`. For example, the `player`'s `attack`, can be permanently buffed with the statement `global.player.attack *= 2`. Shortcuts for adding and subtracting one from a variable are available with the `++` and `--` operators. Place the operator before a value to include the increment or decrement in the result. For example, if `local.number` has the value `4`, the expression `local.result = ++local.number` will assign `5` to both `local.result` and `local.number` whereas the expression `local.result = local.number++` will assign `4` to `local.result` and `5` to `local.number`.
+
+### Commands
 
 Expressions can also use commands for getting the results of a more complex operation. The syntax for calling a command consists of the command name, followed by `'('` followed by any number of values (called parameters) to send to the command, followed by `')'`. A parameter can be a literal value, a variable reference, or an entire statement. The built in commands are:
 
@@ -101,6 +113,8 @@ Commands exist for creating values of each of the types that cannot be specified
 
 NOTE: When using a schema for creating a `Store`, the schema must be in a `Resources` folder in the project.
 
+### Constants
+
 Several constant values are available as well and can be accessed directly by name:
 
 |===
@@ -111,6 +125,8 @@ Several constant values are available as well and can be accessed directly by na
 | `Rad2Deg`	| A variable of type `Float` containing the value for converting an angle in radians to degrees (`180 / PI`)
 |===
 
+### Multiple Statements
+
 Expressions can consist of multiple statements with the final statement computing the expression's result. For example, a more complex damage calculation might look like this:
 
 ....
@@ -120,3 +136,16 @@ local.damage = global.player.weapon.attack * strength * (local.isCritical ? 2 : 
 ....
 
 NOTE: If an expression is entered with incorrect syntax, the text box will be colored red indicating there is an error. This will not check if the expression actually executes correctly or returns a variable with the correct type. These runtime errors will be indicated by printing an error to the https://docs.unity3d.com/Manual/Console.html[console window^] and can be tracked down using the built in <<topics/graphs-6.html,debugging features>>.
+
+### List Management
+
+Several operators have special handling for `List` variables. These are:
+
+|===
+| Operator	| Description
+
+| `+=`		| Adds the item to the right if the operator to the end of the list.
+| `-=`		| Removes the item to the right of the operator from the list.
+| `++`		| Adds an empty item to the end of the list
+| `--`		| Removes the item at the end of the list
+|===
