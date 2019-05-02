@@ -53,9 +53,12 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly Label _unlockButton = new Label(Icon.BuiltIn("AssemblyLock"), "", "Unlock this window so it can be used to show other graphs");
 		private static readonly Label _openWatchButton = new Label(Icon.BuiltIn("UnityEditor.LookDevView"), "", "Open the watch window");
 
+		private static readonly GUIContent _createNodeContent = new GUIContent("Create", "Create a new node");
+
 		private const float _knobRadius = 6.0f;
 		private const float _toolbarHeight = 17.0f;
 		private const float _toolbarButtonWidth = 60.0f;
+		private const float _toolbarPadding = 5.0f;
 		private const float _dragTolerance = 4.0f;
 
 		private const float _gridSize = 64.0f / 5.0f;
@@ -90,6 +93,8 @@ namespace PiRhoSoft.CompositionEditor
 		private Vector2 _createPosition;
 		private InstructionGraphNode.NodeData _toRemove = null;
 		private int _showContextMenu = 0;
+		private int _showNodeId = -1;
+		private bool _showCreateNode = false;
 
 		private bool _isLocked = false;
 
@@ -516,9 +521,7 @@ namespace PiRhoSoft.CompositionEditor
 				var defaultsRect = RectHelper.TakeLine(ref rect);
 
 				if (GUI.Button(defaultsRect, _defaultsContent))
-				{
 					_snapAmount.Value = 1;
-				}
 			}
 		}
 
@@ -562,41 +565,14 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void CreateNodeMenu(ref GenericMenu menu)
 		{
-			var prefix = "Create/";
-
 			if (menu == null)
 				menu = new GenericMenu();
 
-			var types = TypeHelper.ListDerivedTypes<InstructionGraphNode>(false)
-				.Select(type =>
-				{
-					var attribute = TypeHelper.GetAttribute<CreateInstructionGraphNodeMenuAttribute>(type);
-					var menuName = prefix + (attribute == null ? ObjectNames.NicifyVariableName(type.Name) : attribute.MenuName);
-					var last = menuName.LastIndexOf("/");
-
-					return new
-					{
-						Type = type,
-						Order = attribute == null ? 0 : attribute.Order,
-						Menu = menuName.Substring(0, last + 1),
-						Name = menuName.Substring(last + 1)
-					};
-				})
-				.OrderBy(type => type.Menu)
-				.ThenBy(type => type.Order);
-
-			var previousOrder = 0;
-			var previousMenu = string.Empty;
-
-			foreach (var type in types)
+			menu.AddItem(new GUIContent("Create _SPACE"), false, () =>
 			{
-				if (type.Menu == previousMenu && type.Order - previousOrder >= 5)
-					menu.AddSeparator(type.Menu);
-
-				previousOrder = type.Order;
-				previousMenu = type.Menu;
-				menu.AddItem(new GUIContent(type.Menu + type.Name), false, () => CreateNode(type.Type, type.Name, _createPosition));
-			}
+				var createRect = new Rect(ViewportToWindow(_createPosition), Vector2.zero);
+				ShowCreateNode(createRect);
+			});
 		}
 
 		private void CreateEditMenu(ref GenericMenu menu)
@@ -617,11 +593,18 @@ namespace PiRhoSoft.CompositionEditor
 			var menu = new GenericMenu();
 
 			CreateNodeMenu(ref menu);
+			menu.AddSeparator(string.Empty);
 			CreateViewMenu(ref menu, "View/");
 			menu.AddSeparator(string.Empty);
 			CreateEditMenu(ref menu);
 
 			return menu;
+		}
+
+		private void ShowCreateNode(Rect rect)
+		{
+			_showNodeId = GUIUtility.GetControlID(FocusType.Passive);
+			SelectionPopup.Show(_showNodeId, rect, new SelectionState { Index = -1 }, _nodeTree);
 		}
 
 		#endregion
@@ -786,6 +769,25 @@ namespace PiRhoSoft.CompositionEditor
 				_contextMenu.ShowAsContext();
 				_showContextMenu = 0;
 			}
+
+			if (_showCreateNode)
+			{
+				ShowCreateNode(new Rect(_toolbarPadding, 0, _toolbarButtonWidth, _toolbarHeight));
+				_showCreateNode = false;
+			}
+
+			if (_showNodeId > 0 && SelectionPopup.HasSelection(_showNodeId))
+			{
+				_showNodeId = -1;
+				GUI.changed = true;
+				var createSelection = SelectionPopup.TakeSelection();
+
+				if (createSelection.Index >= 0 && createSelection.Index < _nodeList.Types.Count)
+				{
+					var type = _nodeList.Types[createSelection.Index];
+					CreateNode(type, type.Name, _createPosition);
+				}
+			}
 		}
 
 		private void DrawToolbar(Rect rect)
@@ -795,8 +797,8 @@ namespace PiRhoSoft.CompositionEditor
 
 			GUI.Box(toolbarRect, GUIContent.none, EditorStyles.toolbar);
 
-			RectHelper.TakeWidth(ref toolbarRect, 5);
-			RectHelper.TakeTrailingWidth(ref toolbarRect, 5);
+			RectHelper.TakeWidth(ref toolbarRect, _toolbarPadding);
+			RectHelper.TakeTrailingWidth(ref toolbarRect, _toolbarPadding);
 
 			var createRect = RectHelper.TakeWidth(ref toolbarRect, _toolbarButtonWidth);
 			var viewRect = RectHelper.TakeWidth(ref toolbarRect, _toolbarButtonWidth);
@@ -818,11 +820,14 @@ namespace PiRhoSoft.CompositionEditor
 
 			using (new EditorGUI.DisabledGroupScope(_graph == null))
 			{
-				var createSelection = SelectionPopup.Draw(createRect, new GUIContent("Create", "Create a new Node"), EditorStyles.toolbarDropDown, new SelectionState { Index = -1 }, _nodeTree);
-				if (createSelection.Index >= 0 && createSelection.Index < _nodeList.Types.Count)
+				var id = GUIUtility.GetControlID(FocusType.Passive);
+
+				if (GUI.Button(createRect, _createNodeContent, EditorStyles.toolbarDropDown))
 				{
-					var type = _nodeList.Types[createSelection.Index];
-					CreateNode(type, type.Name, ViewArea.center);
+					_showNodeId = id;
+					_createPosition = ViewArea.center;
+
+					SelectionPopup.Show(_showNodeId, createRect, new SelectionState { Index = -1 }, _nodeTree);
 				}
 
 				if (GUI.Button(viewRect, "View", EditorStyles.toolbarDropDown))
@@ -1296,6 +1301,10 @@ namespace PiRhoSoft.CompositionEditor
 			input.Create<InputManager.KeyboardTrigger>()
 				.SetEvent(EventType.KeyDown, KeyCode.D, control: true)
 				.AddAction(() => { _createPosition = ViewArea.center; DuplicateNodes(); });
+
+			input.Create<InputManager.KeyboardTrigger>()
+				.SetEvent(EventType.KeyDown, KeyCode.Space)
+				.AddAction(() => { _createPosition = ViewArea.center; _showCreateNode = true; });
 		}
 
 		private void SetupContextMenu(InputManager input)
