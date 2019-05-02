@@ -1,12 +1,12 @@
-[#reference/dissolve]
+[#reference/dissolve-transition]
 
-## Dissolve
+## DissolveTransition
 
-PiRhoSoft.CompositionEngine.Dissolve : <<reference/cutoff.html,Cutoff>>
+PiRhoSoft.CompositionEngine.DissolveTransition : <<reference/cutoff-transition.html,Cutoff>>
 
 ### Description
 
-Dissolve is an implementation of a <<reference/cutoff.html,Cutoff>> <<reference/transition.html,Transition>>. See the <<manual/dissolve.html,manual page>> for details.
+Dissolve Transition is an implementation of a <<reference/cutoff-transition.html,Cutoff>> <<reference/transition.html,Transition>>. See the <<manual/dissolve-transition.html,manual page>> for details.
 
 ### Public Fields
 

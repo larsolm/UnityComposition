@@ -1,12 +1,12 @@
-[#reference/cutoff]
+[#reference/cutoff-transition]
 
-## Cutoff
+## CutoffTransition
 
-PiRhoSoft.CompositionEngine.Cutoff : <<reference/transition.html,Transition>>
+PiRhoSoft.CompositionEngine.CutoffTransition : <<reference/transition.html,Transition>>
 
 ### Description
 
-Cutoff is an abstract implementation of a <<manual/transition.html,Transition>> that provides a custom https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] with an interface to fade, distort, and dissolve the screen image over time using an input texture. See the <<manual/cutoff.html,manual>> for more information or <<reference/fade.html,Fade>>, <<reference/disolve.html,Dissolve>>, or <<reference/distort.html,Distort>> for an example implementation.
+Cutoff is an abstract implementation of a <<manual/transition.html,Transition>> that provides a custom https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] with an interface to fade, distort, and dissolve the screen image over time using an input texture. See the <<manual/cutoff-transition.html,manual>> for more information or <<reference/fade-transition.html,Fade>>, <<reference/disolve-transition.html,Dissolve>>, or <<reference/distort-transition.html,Distort>> for an example implementation.
 
 ### Protected Methods
 

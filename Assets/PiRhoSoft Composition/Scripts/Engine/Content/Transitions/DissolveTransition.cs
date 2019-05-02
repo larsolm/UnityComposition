@@ -3,9 +3,9 @@ using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Dissolve", fileName = nameof(Dissolve), order = 110)]
-	[HelpURL(Composition.DocumentationUrl + "dissolve")]
-	public class Dissolve : Cutoff
+	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Dissolve", fileName = nameof(DissolveTransition), order = 110)]
+	[HelpURL(Composition.DocumentationUrl + "dissolve-transition")]
+	public class DissolveTransition : CutoffTransition
 	{
 		[Tooltip("The color to dissolve the screen to")]
 		public Color Color = Color.black;

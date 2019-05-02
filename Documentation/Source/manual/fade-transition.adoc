@@ -1,12 +1,12 @@
-[#manual/fade]
+[#manual/fade-transition]
 
-## Fade
+## Fade Transition
 
 Fade is an implementation of a <<manual/cutoff.html,Cutoff>> <<manual/transition.html,Transition>> that will fade the screen to a static https://docs.unity3d.com/ScriptReference/Color.html[Color^] over the duration of the <<manual/transition.html,Transition>>. Create a Fade through the menu:Create[PiRho Soft > Transitions > Fade] menu in the project view.
 
 ### Fields
 
-image::fade.png[Fade]
+image::fade-transition.png[Fade]
 
 [cols="1,2"]
 |===
@@ -16,5 +16,5 @@ image::fade.png[Fade]
 |===
 
 ifdef::backend-multipage_html5[]
-<<reference/fade.html,Reference>>
+<<reference/fade-transition.html,Reference>>
 endif::[]
