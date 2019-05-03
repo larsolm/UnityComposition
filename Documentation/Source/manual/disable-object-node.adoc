@@ -2,20 +2,22 @@
 
 ## Disable Object Node
 
-A Disable Behaviour Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will disable a https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^] on the given https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]. Create a Disable Behaviour Node in the menu:Create[Object Manipulation > Disable Behaviour] menu of the Instruction Graph Window.
+A Disable Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will disable the given https://docs.unity3d.com/ScriptReference/Object.html[Object^], _Target_. Create a Disable Objects Node in the menu:Create[Object Manipulation > Disable Object] menu of the Instruction Graph Window.
+
+NOTE: _Target_ must be a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^], https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^], or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] as these are the only https://docs.unity3d.com/ScriptReference/Object.html[Object^], types that Unity allows to be enabled and disabled.
 
 See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 See the "Disable Player" node on the "MazeStart" <<manual/instruction-graph,Instruction Graph>> in the Maze project for an example usage.
 
 ### Fields
 
-image::disable-behaviour-node.png[Disable Behaviour Node]
+image::disable-object-node.png[Disable Object Node]
 
 [cols="1,2"]
 |===
 | Name	| Description
 
-| Target	| The <<reference/variable-reference.html,VariableReference>> to the https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^] to disable
+| Target	| A <<reference/variable-reference.html,VariableReference>> to the https://docs.unity3d.com/ScriptReference/Object.html[Object^] to disable
 |===
 
 ifdef::backend-multipage_html5[]

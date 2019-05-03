@@ -236,7 +236,7 @@ namespace PiRhoSoft.UtilityEditor
 		private void SetState(SelectionState state)
 		{
 			_currentTab = state.Tab;
-			_currentBranch = _currentLeaves[state.Index >= 0 ? state.Index : 0].Parent;
+			_currentBranch = state.Index >= 0 ? _currentLeaves[state.Index].Parent : _roots[_currentTab >= 0 ? _currentTab : 0];
 		}
 
 		private void RebuildSearch()
