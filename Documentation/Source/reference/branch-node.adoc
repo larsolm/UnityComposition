@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.BranchNode : <<reference/instruction-graph-node.html
 
 ### Description
 
-Selects an <<reference/instruction-graph-node.html,InstructionGraphNode>> to run based on the result of an <<reference/expression.html,Expression>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to run an <<reference/instruction-graph-node.html,InstructionGraphNode>> based on the result of an <<reference/expression.html,Expression>>.
 
 ### Public Fields
 

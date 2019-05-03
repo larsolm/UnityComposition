@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.StringVariableSource : <<reference/variable-source-1
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for `String` <<reference/variable-values.html,VariableValues>>
+A <<reference/variable-source.html,VariableSource>> for `String` <<reference/variable-values.html,VariableValues>>.
 
 ### Constructors
 

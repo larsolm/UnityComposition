@@ -12,7 +12,7 @@ Sorts the <<reference/variable-value.html,VariableValues>> in an <<reference/var
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _List_::
 
@@ -25,3 +25,7 @@ If this is `true`, _SortConditions_ is used to sort the <<reference/variable-val
 <<reference/sort-condition-list.html,SortConditionList>> _SortConditions_::
 
 The <<reference/variable.html,Variables>> on each item in _List_ to sort by. When sorting by more than one property, the result will be fully sorted by the last property with equal values sorted by each previous property.
+
+ifdef::backend-multipage_html5[]
+<<manual/sort-node.html,Manual>>
+endif::[]

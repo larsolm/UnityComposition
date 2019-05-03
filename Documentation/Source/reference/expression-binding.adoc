@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ExpressionBinding : <<reference/string-binding.html,
 
 ### Description
 
-Sets the text of a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component to the result of the evaluation of an <<reference/expression.html,Expression>>.
+Add this to a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] to set the text to the result of an <<reference/expression.html,Expression>>.
 
 ### Public Fields
 
@@ -16,4 +16,8 @@ Specifies how the result of _Expression_ should be formatted. This is only relev
 
 <<reference/expression.html,Expression>> _Expression_::
 
-The _Expression_ to evaluate when the binding is updated.
+The _Expression_ to evaluate when the binding is updated. The result will be applied to the sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component. If the result is an `Int` or `Float` it will be formatted according to _Formatting_. If it is a `string`, it will be used directly. If it is any other type, ToString() will be used.
+
+ifdef::backend-multipage_html5[]
+<<manual/expression-binding.html,Manual>>
+endif::[]

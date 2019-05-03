@@ -6,14 +6,18 @@ PiRhoSoft.CompositionEngine.TimeScaleNode : <<reference/instruction-graph-node.h
 
 ### Description
 
-Sets https://docs.unity3d.com/ScriptReference/Time-timeScale.html[_timeScale_^].
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to set https://docs.unity3d.com/ScriptReference/Time-timeScale.html[_timeScale_^].
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/float-variable-source.html,FloatVariableSource>> _TimeScale_::
 
 The value to set https://docs.unity3d.com/ScriptReference/Time-timeScale.html[_timeScale_^] to.
+
+ifdef::backend-multipage_html5[]
+<<manual/time-scale-node.html,Manual>>
+endif::[]

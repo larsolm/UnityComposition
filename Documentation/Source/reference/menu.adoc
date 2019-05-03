@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.Menu : https://docs.unity3d.com/ScriptReference/Mono
 
 ### Description
 
-Implements the functionality for managing a list of <<reference/menu-item.html,MenuItems>>. Input is handled by adding a <<reference/menu-input.html,MenuInput>> behaviour as a sibling of this behaviour. <<reference/menu-item.html,MenuItems>> can be added directly as children in the editor or at runtime, or by using the <<reference/list-binding.html,ListBinding>>. Additionally, this can be used with a <<reference/selection-control.html,SelectionControl>> to automate the process of selecting from a menu in an <<reference/instruction-graph.html,InstructionGraph>>.
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to manage a list of child <<reference/menu-item.html,MenuItems>>. Additionally add a <<reference/menu-input.html,MenuInput>> to manage input. <<reference/menu-item.html,MenuItems>> can be added directly as children in the editor or at runtime, or by using <<reference/list-binding.html,ListBinding>>. Additionally, this can be used with a <<reference/selection-control.html,SelectionControl>> to automate the process of selecting from a menu in an <<reference/instruction-graph.html,InstructionGraph>>.
 
 ### Public Fields
 
@@ -42,15 +42,15 @@ Subscribe to this callback to receive a notification any time the menu is closed
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/menu-item.html,MenuItem>>> _Items_ _(read only)_::
 
-The items that are in the menu.
+The <<reference/menu-item.html,MenuItems>> in this menu. This is automatically updated to reflect the current set of <<reference/menu-item.html,MenuItems>> that are children of this object.
 
 <<reference/menu-item.html,MenuItem>> _FocusedItem_::
 
-The item that has focus.
+The <<reference/menu-item.html,MenuItem>> that has focus.
 
 int _FocusedIndex_::
 
-The index of the item that has focus.
+The index of the <<reference/menu-item.html,MenuItem>> that has focus.
 
 ### Public Methods
 
@@ -103,3 +103,7 @@ Called when a <<reference/menu-item.html,MenuItem>> (_item_) is selected. The ba
 void Cancelled() _(virtual)_::
 
 Called when the menu is cancelled. The base implementation triggers _OnCancelled_.
+
+ifdef::backend-multipage_html5[]
+<<manual/menu.html,Manual>>
+endif::[]

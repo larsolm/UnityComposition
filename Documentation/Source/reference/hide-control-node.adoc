@@ -6,14 +6,18 @@ PiRhoSoft.CompositionEngine.HideControlNode : <<reference/instruction-graph-node
 
 ### Description
 
-Hides an <<reference/interface-control.html,InterfaceControl>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to hide an <<reference/interface-control.html,InterfaceControl>>.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to run after _Control_ is hidden.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _Control_::
 
-The _Control_ to hide.
+The <<reference/InterfaceControl,InterfaceControl>> to hide.
+
+ifdef::backend-multipage_html5[]
+<<manual/hide-control-node.html,Manual>>
+endif::[]

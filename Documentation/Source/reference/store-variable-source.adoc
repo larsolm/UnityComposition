@@ -6,4 +6,4 @@ PiRhoSoft.CompositionEngine.StoreVariableSource : <<reference/variable-source-1.
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for <<reference/i-variable-store.html,IVariableStores>>
+A <<reference/variable-source.html,VariableSource>> for <<reference/i-variable-store.html,IVariableStores>>.

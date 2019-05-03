@@ -16,4 +16,4 @@ The name of _Definition_.
 
 <<reference/value-definition.html,ValueDefinition>> _Definition_::
 
-The <<reference/value-definition.html,ValueDefinition>> being given _Name_
+The <<reference/value-definition.html,ValueDefinition>> being given _Name_.

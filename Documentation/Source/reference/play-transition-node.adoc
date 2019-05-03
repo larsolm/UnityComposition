@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.PlayTransitionNode : <<reference/instruction-graph-n
 
 ### Description
 
-Plays a <<reference/transition.html,Transition>> on the <<reference/transition-manager.html,TransitionManager>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to start a <<reference/transition.html,Transition>> on the <<reference/transition-manager.html,TransitionManager>>.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/transition-variable-source.html,TransitionVariableSource>> _Transition_::
 
@@ -28,4 +28,8 @@ If this is `true`, the <<reference/transition.html,Transition>> will be ended as
 
 bool _WaitForCompletion_::
 
-If this is `true`, this node will not complete until _Transition_ has completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+If this is `true`, this node will not complete until _Transition_ has completed. Otherwise, this node will complete immediately.
+
+ifdef::backend-multipage_html5[]
+<<manual/play-transition-node.html,Manual>>
+endif::[]

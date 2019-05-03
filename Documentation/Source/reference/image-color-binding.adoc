@@ -6,16 +6,20 @@ PiRhoSoft.CompositionEngine.ImageColorBinding : <<reference/variable-binding.htm
 
 ### Description
 
-Sets _color_ on a sibling https://docs.unity3d.com/ScriptReference/Image.html[Image^].
+Add this to an https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] to bind _color_ to a variable.
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
-The reference to the variable holding the color that should be set on _Image_
+The https://docs.unity3d.com/ScriptReference/Color.html[Color^] that should be set on _Image_.
 
 ### Public Properties
 
 https://docs.unity3d.com/ScriptReference/Image.html[Image^] _Image_ _(read only)_::
 
-The image that will be updated.
+The https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] that will be updated.
+
+ifdef::backend-multipage_html5[]
+<<manual/image-color-binding.html,Manual>>
+endif::[]

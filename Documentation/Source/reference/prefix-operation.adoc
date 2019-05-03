@@ -22,4 +22,4 @@ The operation that makes up the right hand side.
 
 <<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> TypeMismatch(<<reference/variable-type.html,VariableType>> _type_)::
 
-Creates an exception indicating the operation cannot operate on a value with type _type_.
+Creates an exception to be thrown by the caller indicating the operation cannot operate on a value with type _type_.

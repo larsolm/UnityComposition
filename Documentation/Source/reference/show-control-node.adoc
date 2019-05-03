@@ -6,12 +6,18 @@ PiRhoSoft.CompositionEngine.ShowControlNode : <<reference/instruction-graph-node
 
 ### Description
 
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to show an <<reference/interface-control.html,InterfaceControl>>.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _Control_::
 
 The <<reference/interface-control.html,InterfaceControl>> to show.
+
+ifdef::backend-multipage_html5[]
+<<manual/show-control-node.html,Manual>>
+endif::[]

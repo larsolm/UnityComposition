@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.LoopNode : <<reference/instruction-graph-node.html,I
 
 ### Description
 
-Executes repeatedly until a condition <<reference/expression.html,Expression>> evaluates to `false`.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to executes an <<reference/instruction-graph-node.html,InstructionGraphNode>> repeatedly until a condition <<reference/expression.html,Expression>> evaluates to `false`.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Loop_::
 
-The node to run repeatedly while _Condition_ is `true`.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run repeatedly while _Condition_ is `true`.
 
 <<reference/variable-reference.html,VariableReference>> _Index_::
 
@@ -21,3 +21,7 @@ The variable to set to the current number of times the node has been repeated.
 <<reference/expression.html,Expression>> _Condition_::
 
 The <<reference/expression.html,Expression>> to evaluate to determine if the node should continue to repeat.
+
+ifdef::backend-multipage_html5[]
+<<manual/loop-node.html,Manual>>
+endif::[]

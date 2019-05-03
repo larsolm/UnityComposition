@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.FormatType
 
 ### Description
 
-Specifies the types available to set for the _Format_ of a <<reference/binding-formatter,BindingFormatter>>.
+Defines the types available to set for the _Format_ of a <<reference/binding-formatter,BindingFormatter>>.
 
 ### Values
 

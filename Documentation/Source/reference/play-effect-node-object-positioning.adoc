@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ObjectPositioning
 
 ### Description
 
-Specifies the available settings for the _Positioning_ property of <<reference/play-effect-node.html,PlayEffectNode>>.
+Defines the available settings for the _Positioning_ property of <<reference/play-effect-node.html,PlayEffectNode>>.
 
 ### Values
 

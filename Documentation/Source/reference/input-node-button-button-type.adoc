@@ -12,11 +12,11 @@ Defines the available input types for an <<reference/input-node-button.html,Inpu
 
 <<reference/input-node-button-button-type.html,ButtonType>> _Axis_::
 
-The <<reference/input-node-button.html,InputNodeButton._Name_>> refers to the name of an axis.
+The <<reference/input-node-button.html,InputNodeButton._Name_>> refers to the name of an axis on the <<reference/input-helper.html,InputHelper>>.
 
 <<reference/input-node-button-button-type.html,ButtonType>> _Button_::
 
-The <<reference/input-node-button.html,InputNodeButton._Name_>> refers to the name of a button.
+The <<reference/input-node-button.html,InputNodeButton._Name_>> refers to the name of a button on the <<reference/input-helper.html,InputHelper>>.
 
 <<reference/input-node-button-button-type.html,ButtonType>> _Key_::
 

@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MockupNode : <<reference/instruction-graph-node.html
 
 ### Description
 
-A <<reference/instruction-graph-node.html,node>> that performs no function but can have arbitrary connections added for quickly making blueprints of graphs.
+Add this to a <<reference/mockup-graph.html,MockupGraph>> to quickly make an <<reference/instruction-graph.html,InstructionGraph>> blueprint.
 
 ### Public Fields
 
@@ -17,3 +17,7 @@ The connections that have been added to this node.
 https://docs.unity3d.com/ScriptReference/Color.html[Color^] _DisplayColor_::
 
 The color of the node in the graph editor window.
+
+ifdef::backend-multipage_html5[]
+<<manual/mockup-node.html,Manual>>
+endif::[]

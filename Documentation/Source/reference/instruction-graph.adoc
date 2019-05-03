@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InstructionGraph : <<reference/instruction.html,Inst
 
 ### Description
 
-The main piece of the composition system, implementing all the functionality necessary to manage and execute a set of <<reference/instruction-graph-node.html,nodes>>. See the <<manual/instruction-graph.html,graph manual page>> and <<topics/graphs.html,graph topic>> for more information.
+The main piece of the composition system, implementing all the functionality necessary to manage and execute a set of <<reference/instruction-graph-node.html,InstructionGraphNodes>>. Read the <<topics/graphs-1.html,graph topic>> for a more thorough breakdown of creating and using graphs.
 
 ### Static Fields
 
@@ -69,3 +69,7 @@ The following properties and methods are exposed for use by the editor and only 
 * bool IsExecuting(<<reference/instruction-graph-node.html,InstructionGraphNode>> _node_)::
 * void GetConnections(<<reference/instruction-graph-node-node-data.html,NodeData>> _data_) _(virtual)_::
 * void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
+
+ifdef::backend-multipage_html5[]
+<<manual/instruction-graph.html,Manual>>
+endif::[]

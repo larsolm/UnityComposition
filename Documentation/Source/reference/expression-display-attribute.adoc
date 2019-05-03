@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ExpressionDisplayAttribute : https://docs.unity3d.co
 
 ### Description
 
-This https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/[Attribute^] is applied to <<reference/expression.html,Expression>> fields to customize the way the editor displays the <<reference/expression.html,Expression>>. If an <<reference/expression.html,Expression>> is not given this attribute, it is interpreted as if all the following properties have been set to their default value.
+Apply this to an <<reference/expression.html,Expression>> field to customize the way the editor displays the <<reference/expression.html,Expression>>. If an <<reference/expression.html,Expression>> is not given this attribute, it is interpreted as if all the following properties have been set to their default value.
 
 ### Public Fields
 

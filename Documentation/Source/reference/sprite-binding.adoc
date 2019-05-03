@@ -6,16 +6,20 @@ PiRhoSoft.CompositionEngine.SpriteBinding : <<reference/variable-binding.html,Va
 
 ### Description
 
-Sets the _sprite_ of a sibling https://docs.unity3d.com/ScriptReference/SpriteRenderer.html[SpriteRenderer^].
+Add this to a https://docs.unity3d.com/ScriptReference/SpriteRenderer.html[SpriteRenderer^] to bind _sprite_ to a variable.
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
-The <<reference/variable-reference.html,VariableReference>> containing the https://docs.unity3d.com/ScriptReference/Sprite.html[Sprite^] <<reference/variable-value.html,VariableValue>> that will be applied when the binding is updated.
+The https://docs.unity3d.com/ScriptReference/Sprite.html[Sprite^] that will be applied when the binding is updated.
 
 ### Public Properties
 
 https://docs.unity3d.com/ScriptReference/SpriteRenderer.html[SpriteRenderer^] _Sprite_ _(read only)_::
 
 The component to set the sprite on.
+
+ifdef::backend-multipage_html5[]
+<<manual/sprite-binding.html,Manual>>
+endif::[]

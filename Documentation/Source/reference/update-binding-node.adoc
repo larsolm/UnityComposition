@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.UpdateBindingNode : <<reference/instruction-graph-no
 
 ### Description
 
-Updates the <<reference/variable-binding.html,VariableBindings>> on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] and its descendants.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to update the <<reference/variable-binding.html,VariableBindings>> on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] and its descendants.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _Object_::
 
@@ -24,4 +24,8 @@ The _BindingGroup_ of <<reference/variable-binding.html,VariableBindings>> to up
 
 bool _WaitForCompletion_::
 
-If this is `true`, this node will not complete until any animated bindings have finished animating. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+If this is `true`, this node will not complete until any animated bindings have finished animating. Otherwise, this node will complete immediately.
+
+ifdef::backend-multipage_html5[]
+<<manual/update-binding-node.html,Manual>>
+endif::[]

@@ -2,18 +2,18 @@
 
 ## SerializedDictionary
 
-PiRhoSoft.UtilityEngine.SerializedDictionary<__KeyType__, __KeyType__> : https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2[Dictionary^]<KeyType, KeyType>, <<reference/i-editable-dictionary.html,IEditableDictionary>>
+PiRhoSoft.UtilityEngine.SerializedDictionary<__KeyType__, __KeyType__> : https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2[Dictionary^]<KeyType, KeyType>
 
 ### Description
+
+Adds serialization and editor support to the built in https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2[Dictionary^] class.
 
 ### Public Methods
 
 void PrepareForEdit()::
 
+This is an editor support function and can be ignored.
+
 void ApplyEdits()::
 
-### Protected Fields
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<KeyType> __keys_::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<ValueType> __values_::
+This is an editor support function and can be ignored.

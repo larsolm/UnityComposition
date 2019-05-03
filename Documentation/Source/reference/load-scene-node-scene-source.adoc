@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.SceneSource
 
 ### Description
 
-Defines how the scene to load is retrieved in a <<reference/load-scene-node.html,LoadSceneNode>>
+Defines how the scene to load is retrieved in a <<reference/load-scene-node.html,LoadSceneNode>>.
 
 ### Values
 

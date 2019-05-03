@@ -6,14 +6,18 @@ PiRhoSoft.CompositionEngine.DestroyObjectNode : <<reference/instruction-graph-no
 
 ### Description
 
-Destroys an object.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to destroy a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to run after the object is destroyed.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _Target_::
 
-The reference to the variable holding the object that is to be destroyed. The object can be any https://docs.unity3d.com/ScriptReference/Object.html[Object^]. If it is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], the owning https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] will be destroyed.
+The object to destroy. The object can be any https://docs.unity3d.com/ScriptReference/Object.html[Object^]. If it is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], the owning https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] will be destroyed.
+
+ifdef::backend-multipage_html5[]
+<<manual/destroy-object-node.html,Manual>>
+endif::[]

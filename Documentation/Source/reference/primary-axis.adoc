@@ -12,8 +12,8 @@ Defines the options available for the _PrimaryAxis_ property of <<reference/menu
 
 <<reference/primary-axis.html,PrimaryAxis>> _Column_::
 
-<<reference/menu-item.html,MenuItems>> are laid out in column order, meaning each <<reference/menu-item.html,MenuItem>> is visually below its predecessor before, optionally, wrapping to new columns.
+<<reference/menu-item.html,MenuItems>> are laid out in column order, meaning each <<reference/menu-item.html,MenuItem>> is visually below its predecessor before optionally wrapping to new columns.
 
 <<reference/primary-axis.html,PrimaryAxis>> _Row_::
 
-<<reference/menu-item.html,MenuItems>> are laid out in row order, meaning each <<reference/menu-item.html,MenuItem>> is visually to the right of its predecessor before, optionally, wrapping to new rows.
+<<reference/menu-item.html,MenuItems>> are laid out in row order, meaning each <<reference/menu-item.html,MenuItem>> is visually to the right of its predecessor before optionally wrapping to new rows.

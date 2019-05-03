@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.VariableReference
 
 ### Description
 
-Specifies the name and location of a <<reference/variable-value.html,VariableValue>> for lookup or assignment.
+Specifies the name and location of a <<reference/variable-value.html,VariableValue>> for lookup or assignment. Read the <<topics/variables-4.html, Accessing Variables topic>> for more information.
 
 ### Static Fields
 

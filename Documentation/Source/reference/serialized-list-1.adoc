@@ -6,34 +6,4 @@ PiRhoSoft.UtilityEngine.SerializedList<__T__> : https://docs.microsoft.com/en-us
 
 ### Description
 
-### Public Properties
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<T> _List_ _(read only)_::
-
-int _Count_ _(read only)_::
-
-T _Item_::
-
-### Public Methods
-
-void Add(T _item_)::
-
-bool Remove(T _item_)::
-
-void Clear()::
-
-bool Contains(T _item_)::
-
-void CopyTo(T[] _array_, int _arrayIndex_)::
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerator-1[IEnumerator^]<T> GetEnumerator()::
-
-int IndexOf(T _item_)::
-
-void Insert(int _index_, T _item_)::
-
-void RemoveAt(int _index_)::
-
-### Protected Fields
-
-https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<T> __items_::
+Adds improved editor support to the built in https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^] class.

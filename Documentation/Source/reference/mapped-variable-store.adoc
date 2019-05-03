@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MappedVariableStore : <<reference/i-variable-store.h
 
 ### Description
 
-An <<reference/i-variable-store.html,IVariableStore>> implementation that provides an <<reference/mapped-variable-attribute.html,attribute>> based interface for exposing properties and fields defined in code to the <<topics/variables.html,variables>> system.
+An <<reference/i-variable-store.html,IVariableStore>> implementation that provides an <<reference/mapped-variable-attribute.html,attribute>> based interface for exposing properties and fields defined in code to the <<topics/variables-1.html,variables>> system. This is used by <<reference/variable-set-component.html,VariableSetComponent>> and <<reference/variable-set-asset.html,VariableSetAsset>>.
 
 ### Public Properties
 

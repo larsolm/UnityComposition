@@ -6,4 +6,4 @@ PiRhoSoft.CompositionEngine.ConnectionData
 
 ### Description
 
-Stores data about a connection between two <<reference/instruction-graph-node.html,InstructionGraphNodes>>. This is managed automatically by the editor and does not need to be used in any way.
+Stores data about a connection between two <<reference/instruction-graph-node.html,InstructionGraphNodes>>. This is managed automatically by the editor and can be ignored.

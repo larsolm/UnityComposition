@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.VariablePoolComponent : https://docs.unity3d.com/Scr
 
 ### Description
 
-A behaviour for storing an arbitrary set of <<reference/variable.html,Variables>> using a <<reference/variable-pool.html,VariablePool>>.
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to define an arbitrary set of <<reference/variable.html,Variables>> using a <<reference/variable-pool.html,VariablePool>>.
 
 ### Public Fields
 
@@ -27,3 +27,7 @@ Returns the <<reference/variable-value.html,VariableValue>> with name _name_.
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
 Sets the <<reference/variable-value.html,VariableValue>> with name _name_ to _value.
+
+ifdef::backend-multipage_html5[]
+<<manual/variable-pool-component.html,Manual>>
+endif::[]

@@ -6,4 +6,8 @@ PiRhoSoft.CompositionEngine.TransitionRenderer : https://docs.unity3d.com/Script
 
 ### Description
 
-Add this to a https://docs.unity3d.com/ScriptReference/Camera.html[Camera^] to have any running <<reference/transition.html,Transition>> include the cameras rendered output in post processing.
+Add this to a https://docs.unity3d.com/ScriptReference/Camera.html[Camera^] to have any running <<reference/transition.html,Transition>> include the cameras rendered output in its post processing.
+
+ifdef::backend-multipage_html5[]
+<<manual/transition-renderer.html,Manual>>
+endif::[]

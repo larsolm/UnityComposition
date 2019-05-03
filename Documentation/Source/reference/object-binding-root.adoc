@@ -6,6 +6,14 @@ PiRhoSoft.CompositionEngine.ObjectBindingRoot : <<reference/binding-root.html,Bi
 
 ### Description
 
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to add a specified object to the <<reference/binding-root.html,BindingRoot>> hierarchy.
+
 ### Public Fields
 
 https://docs.unity3d.com/ScriptReference/Object.html[Object^] _Object_::
+
+The https://docs.unity3d.com/ScriptReference/Object.html[Object^] to return in _Value_ for this <<reference/binding-root.html,BindingRoot>>.
+
+ifdef::backend-multipage_html5[]
+<<manual/object-binding-root.html,Manual>>
+endif::[]

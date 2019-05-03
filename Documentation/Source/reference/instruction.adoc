@@ -71,3 +71,7 @@ Implement this in subclasses to populate the _outputs_ list with definitions for
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_) _(abstract)_::
 
 Implement this in subclasses to perform the function of the instruction.
+
+ifdef::backend-multipage_html5[]
+<<manual/instruction.html,Manual>>
+endif::[]

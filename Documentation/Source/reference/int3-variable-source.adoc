@@ -6,10 +6,10 @@ PiRhoSoft.CompositionEngine.Int3VariableSource : <<reference/variable-source-1.h
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^]
+A <<reference/variable-source.html,VariableSource>> for https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^].
 
 ### Constructors
 
 Int3VariableSource(https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _defaultValue_)::
 
-Initializes _Value_ to _defaultValue_
+Initializes _Value_ to _defaultValue_.

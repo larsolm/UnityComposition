@@ -6,14 +6,22 @@ PiRhoSoft.CompositionEngine.DisableObjectNode : <<reference/instruction-graph-no
 
 ### Description
 
-Deactivates a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to deactivate a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] or disable a https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^] or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^].
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to run after the object is deactivated.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _Target_::
 
-The reference to the variable holding the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] that is to be deactivated. If the object is already inactive there will be no effect.
+The object to deactivate. If the object is a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] it will be deactivated, if it is a https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^] it will be disabled, and if it is a https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] it will be disabled (effectively made invisible).
+
+NOTE: To deactivate a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] from a https://docs.unity3d.com/ScriptReference/Component.html[Component^] reference use `as GameObject` (see the <<topics/variables-4.html,Accessing Variables>> topic).
+
+NOTE: If the object is already inactive or disabled there will be no effect.
+
+ifdef::backend-multipage_html5[]
+<<manual/disable-object-node.html,Manual>>
+endif::[]

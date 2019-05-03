@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ExpressionLexer
 
 ### Description
 
-The ExpressionLexer converts <<reference/expression.html,Expression>> statements into a series of tokens for processing by the <<reference/expression-parser.html,ExpressionParser>>. <<reference/expression.html,Expression>> handles this process automatically.
+Converts <<reference/expression.html,Expression>> statements into a series of tokens for processing by the <<reference/expression-parser.html,ExpressionParser>>. <<reference/expression.html,Expression>> handles this process automatically.
 
 ### Static Methods
 

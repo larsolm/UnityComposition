@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.VariableConstraintAttribute : Attribute
 
 ### Description
 
-This https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/[Attribute^] is applied to <<reference/variable-reference.html,VariableReference>> or <<reference/variable-source.html,VariableSource>> fields to inform the editor of the type of <<reference/variable-value.html,VariableValue>> the code is expecting, thereby providing a more useful editor for the field.
+Add this to a <<reference/variable-reference.html,VariableReference>> or <<reference/variable-source.html,VariableSource>> field to inform the editor of the type of <<reference/variable-value.html,VariableValue>> the code is expecting, thereby providing a more useful editor for the field.
 
 ### Constructors
 

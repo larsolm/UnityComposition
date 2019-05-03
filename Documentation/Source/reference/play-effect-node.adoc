@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.PlayEffectNode : <<reference/instruction-graph-node.
 
 ### Description
 
-Instantiates a https://docs.unity3d.com/Manual/Prefabs.html[prefab^] containing one or more https://docs.unity3d.com/ScriptReference/ParticleSystem.html[ParticleSystems^] or <<reference/i-completion-notifier.html,ICompletionNotifiers>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to instantiate a https://docs.unity3d.com/Manual/Prefabs.html[prefab^] containing one or more https://docs.unity3d.com/ScriptReference/ParticleSystem.html[ParticleSystems^] or <<reference/i-completion-notifier.html,ICompletionNotifiers>>.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/game-object-variable-source.html,GameObjectVariableSource>> _Effect_::
 
@@ -48,8 +48,12 @@ The rotation to set the newly created object to.
 
 bool _WaitForCompletion_::
 
-If this is `true`, this node will not complete until all https://docs.unity3d.com/ScriptReference/ParticleSystem.html[ParticleSystems^] and <<reference/i-completion-notifier.html,ICompletionNotifiers>> in _Effect_ have completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+If this is `true`, this node will not complete until all https://docs.unity3d.com/ScriptReference/ParticleSystem.html[ParticleSystems^] and <<reference/i-completion-notifier.html,ICompletionNotifiers>> in _Effect_ have completed. Otherwise, this node will complete immediately.
 
 bool _DestroyOnComplete_::
 
 If this is `true`, the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] created from _Effect_ will be destroyed when it finishes playing.
+
+ifdef::backend-multipage_html5[]
+<<manual/play-effect-node.html,Manual>>
+endif::[]

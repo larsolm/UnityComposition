@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InstructionStore : <<reference/i-variable-store.html
 
 ### Description
 
-The <<reference/i-variable-store.html,IVariableStore>> used with <<reference/instruction-graph.html,InstructionGraphs>> to provide a robust interface for accessing and isolating variables for use by <<reference/instruction-graph-node.html,nodes>>. When using an <<reference/instruction-caller.html,InstructionCaller>> all management of the store will be handled automatically including creation of the store, reading input variables, and writing output variables. 
+The <<reference/i-variable-store.html,IVariableStore>> used with <<reference/instruction-graph.html,InstructionGraphs>> to provide a robust interface for accessing and isolating variables for use by <<reference/instruction-graph-node.html,InstructionGraphNodes>>. When using an <<reference/instruction-caller.html,InstructionCaller>> all management of the store will be handled automatically including creation of the store, reading input variables, and writing output variables. 
 
 ### Static Fields
 

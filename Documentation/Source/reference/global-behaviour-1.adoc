@@ -6,12 +6,22 @@ PiRhoSoft.UtilityEngine.GlobalBehaviour<__T__> : https://docs.unity3d.com/Script
 
 ### Description
 
+Derive from this class to ensure only a single instance of the derived class will be created. The instance will be created on demand (when _Instance_ is first accessed) and should not be added to a scene.
+
+Pass the derived class itself as _T_: `public class CompositionManager : GlobalBehaviour<CompositionManager> {}`
+
 ### Static Properties
 
 bool _Exists_ _(read only)_::
 
+Checks if the instance has been created.
+
 T _Instance_ _(read only)_::
+
+The instance of the class. This will create the instance if it hasn't been already.
 
 ### Static Methods
 
 void Destroy()::
+
+Destroys the created instance.

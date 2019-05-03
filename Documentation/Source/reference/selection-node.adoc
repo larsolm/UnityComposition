@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.SelectionNode : <<reference/instruction-graph-node.h
 
 ### Description
 
-Shows a <<reference/selection-control.html,SelectionControl>> and retrieves a selection from it.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to show a <<reference/selection-control.html,SelectionControl>> and retrieve a selection from it.
 
 ### Public Fields
 
@@ -37,3 +37,7 @@ If this is `true`, _Control_ will be hidden once a selection has been made.
 <<reference/selection-node-item-list.html,SelectionNodeItemList>> _Items_::
 
 The list of <<reference/selection-node-item.html,SelectionNodeItems>> available to be selected.
+
+ifdef::backend-multipage_html5[]
+<<manual/selection-node.html,Manual>>
+endif::[]

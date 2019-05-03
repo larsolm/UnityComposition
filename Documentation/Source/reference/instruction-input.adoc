@@ -24,4 +24,4 @@ If _Type_ is `Reference`, holds the <<reference/variable-reference.html,Variable
 
 <<reference/variable-value.html,VariableValue>> _Value_::
 
-If _Type_ is `Value`, holds value directly.
+If _Type_ is `Value`, holds the value directly.

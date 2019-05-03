@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.CallMethodNode : <<reference/instruction-graph-node.
 
 ### Description
 
-Calls a method on an object using reflection.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to call a method on an object using reflection.
 
 ### Public Fields
 

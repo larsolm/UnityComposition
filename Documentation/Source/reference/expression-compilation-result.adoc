@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ExpressionCompilationResult
 
 ### Description
 
-Provides the information for the result of compiling an <<reference/expression.html,Expression>>.
+Stores the results of compiling an <<reference/expression.html,Expression>>.
 
 ### Public Fields
 

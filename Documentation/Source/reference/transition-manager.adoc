@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.TransitionManager : <<reference/global-behaviour-1.h
 
 ### Description
 
-Manages the loaded <<reference/transition-renderer.html,TransitionRenderers>> for playback of <<reference/transition.html,Transitions>>.
+Manages the loaded <<reference/transition-renderer.html,TransitionRenderers>> for playback of <<reference/transition.html,Transitions>>. This is created on demand and should not be added to a scene.
 
 ### Public Properties
 
@@ -30,4 +30,8 @@ NOTE: If a <<reference/transition.html,Transition>> is already running, it will 
 
 void EndTransition()::
 
-Ends the currently running <<reference/transition.html,Transition>> if a <<reference/transition.html,Transition>> is running.
+Ends the currently running <<reference/transition.html,Transition>> if one is running.
+
+ifdef::backend-multipage_html5[]
+<<manual/transition-manager.html,Manual>>
+endif::[]
