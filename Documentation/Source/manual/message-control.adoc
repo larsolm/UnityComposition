@@ -2,7 +2,7 @@
 
 ## Message Control
 
-A Message Control is an <<manual/interface-control.html,Interface Control>> that shows a string of text on a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component when promted to. A Message Control usually is activated, shown, and deactivated by a <<manual/message-node.html,Message Node>>.
+A Message Control is an <<manual/interface-control.html,Interface Control>> that shows a string of text on a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component when promted to. A Message Control usually is activated, shown, and deactivated by a <<manual/message-node.html,Message Node>>. Use a <<manual/message-input.html,Message Input>> behaviour to manually advance the text.
 
 See the _"Message"_ object in _"Board"_ scene of the BoardGame project for an example usage.
 
