@@ -6,14 +6,18 @@ PiRhoSoft.CompositionEngine.ListBinding : <<reference/variable-binding.html,Vari
 
 ### Description
 
-A <<reference/variable-binding.html,VariableBinding>> that instantiates a https://docs.unity3d.com/Manual/Prefabs.html[prefab^] for each item in a <<reference/i-variable-list.html,IVariableList>>.
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to add child objects instantiated from a https://docs.unity3d.com/Manual/Prefabs.html[prefab^] for each item in an <<reference/i-variable-list.html,IVariableList>>.
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
-A reference to the variable containing the <<reference/i-variable-list.html,IVariableList>> to bind to.
+The <<reference/i-variable-list.html,IVariableList>> to bind to.
 
 <<reference/binding-root.html,BindingRoot>> _Template_::
 
 The https://docs.unity3d.com/Manual/Prefabs.html[prefab^] that will be instantiated as a child of this object for each item in the <<reference/i-variable-list.html,list>> referenced by _Variable_.
+
+ifdef::backend-multipage_html5[]
+<<manual/list-binding.html,Manual>>
+endif::[]

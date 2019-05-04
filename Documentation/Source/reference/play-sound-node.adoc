@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.PlaySoundNode : <<reference/instruction-graph-node.h
 
 ### Description
 
-Plays an https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^] on an <<reference/audio-player.html,AudioPlayer>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to play an https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^] on an <<reference/audio-player.html,AudioPlayer>>.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _AudioPlayer_::
 
@@ -28,4 +28,8 @@ The volume to set on _AudioPlayer_ when playing _Sound_.
 
 bool _WaitForCompletion_::
 
-If this is `true`, this node will not complete until _Sound_ has completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+If this is `true`, this node will not complete until _Sound_ has completed. Otherwise, this node will complete immediately.
+
+ifdef::backend-multipage_html5[]
+<<manual/play-sound-node.html,Manual>>
+endif::[]

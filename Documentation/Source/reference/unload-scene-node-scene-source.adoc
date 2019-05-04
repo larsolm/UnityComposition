@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.SceneSource
 
 ### Description
 
-Defines how the scene to unload is retrieved in an <<reference/unload-scene-node.html,UnloadSceneNode>>
+Defines how the scene to unload is retrieved in an <<reference/unload-scene-node.html,UnloadSceneNode>>.
 
 ### Values
 

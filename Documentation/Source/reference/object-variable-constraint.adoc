@@ -12,4 +12,4 @@ A <<reference/variable-constraint.html,VariableConstraint>> for `Object` <<refer
 
 Type _Type_::
 
-The type the object must be or be derived from.
+The type the object must be or be derived from..

@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.CreateScriptableObjectNode : <<reference/instruction
 
 ### Description
 
-Creates a https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] of the specified type.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to create a https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] of the specified type.
 
 ### Public Fields
 

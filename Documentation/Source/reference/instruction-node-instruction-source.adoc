@@ -6,8 +6,14 @@ PiRhoSoft.CompositionEngine.InstructionSource
 
 ### Description
 
+Defines the options for the _Source_ of a <<reference/instruction-graph.html,InstructionGraph>> in an <<reference/instruction-node.html,InstructionNode>>.
+
 ### Values
 
 <<reference/instruction-node-instruction-source.html,InstructionSource>> _Value_::
 
+The <<reference/instruction-graph.html,InstructionGraph>> is specified directly in _Instruction_.
+
 <<reference/instruction-node-instruction-source.html,InstructionSource>> _Reference_::
+
+The <<reference/instruction-graph.html,InstructionGraph>> is resolved from the <<reference/variable-reference.html,VariableReference>> _Reference_.

@@ -6,10 +6,14 @@ PiRhoSoft.CompositionEngine.FocusBindingRoot : <<reference/binding-root.html,Bin
 
 ### Description
 
-See the <<manual/focus-binding-root.html,manual entry>> for a complete description.
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to add the focused item of a <<reference/menu.html,Menu>> to the <<reference/binding-root.html,BindingRoot>> hierarchy.
 
 ### Public Fields
 
 <<reference/menu.html,Menu>> _Menu_::
 
-The <<reference/menu.html,Menu>> to query for the currently focused item, which will then be used as _Value_ for this binding root.
+The <<reference/menu.html,Menu>> to query for the currently focused item, which will then be used as _Value_ for this <<reference/binding-root.html,BindingRoot>>.
+
+ifdef::backend-multipage_html5[]
+<<manual/focus-binding-root.html,Manual>>
+endif::[]

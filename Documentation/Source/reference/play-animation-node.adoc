@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.PlayAnimationNode : <<reference/instruction-graph-no
 
 ### Description
 
-Plays an https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] on an <<reference/animation-player.html,AnimationPlayer>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to play an https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] on an <<reference/animation-player.html,AnimationPlayer>>.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _AnimationPlayer_::
 
@@ -24,4 +24,8 @@ The https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] 
 
 bool _WaitForCompletion_::
 
-If this is `true`, this node will not complete until _Animation_ has completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+If this is `true`, this node will not complete until _Animation_ has completed. Otherwise, this node will complete immediately.
+
+ifdef::backend-multipage_html5[]
+<<manual/play-animation-node.html,Manual>>
+endif::[]

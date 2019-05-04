@@ -6,10 +6,18 @@ PiRhoSoft.UtilityEngine.AssetLocation
 
 ### Description
 
+Defines the settings available to _SaveLocation_ on <<reference/scene-reference-attribute.html,SceneReferenceAttribute>>.
+
 ### Values
 
 <<reference/asset-location.html,AssetLocation>> _None_::
 
+A scene cannot be created via the <<reference/scene-reference.html,SceneReference>>.
+
 <<reference/asset-location.html,AssetLocation>> _AssetRoot_::
 
+A scene created via the <<reference/scene-reference.html,SceneReference>> will be placed at the root of the `"Assets"` directory.
+
 <<reference/asset-location.html,AssetLocation>> _Selectable_::
+
+The location for a scene created via the <<reference/scene-reference.html,SceneReference>> will be user specified with a "Save As" dialog.

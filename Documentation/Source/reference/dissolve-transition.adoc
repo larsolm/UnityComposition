@@ -2,11 +2,11 @@
 
 ## DissolveTransition
 
-PiRhoSoft.CompositionEngine.DissolveTransition : <<reference/cutoff-transition.html,Cutoff>>
+PiRhoSoft.CompositionEngine.DissolveTransition : <<reference/cutoff-transition.html,CutoffTransition>>
 
 ### Description
 
-Dissolve Transition is an implementation of a <<reference/cutoff-transition.html,Cutoff>> <<reference/transition.html,Transition>>. See the <<manual/dissolve-transition.html,manual page>> for details.
+Performs a dissolve effect to or from a solid color from or to the rendered scene using a custom texture or perlin noise.
 
 ### Public Fields
 
@@ -16,12 +16,16 @@ The https://docs.unity3d.com/ScriptReference/Color.html[Color^] to dissolve the 
 
 https://docs.unity3d.com/ScriptReference/Texture2D.html[Texture2D^] _Texture_::
 
-The input https://docs.unity3d.com/ScriptReference/Texture.html[Texture^] that gives the pattern of the dissolve. If this is not specified, a texture filled with perlin noise will be generated and used.
+The input https://docs.unity3d.com/ScriptReference/Texture.html[Texture^] that gives the dissolve pattern. If this is `null`, a texture filled with perlin noise will be generated and used.
 
 https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _TextureSize_::
 
-If _Texture_ is null, the size of the https://docs.unity3d.com/ScriptReference/Texture.html[Texture^] to generate.
+If _Texture_ is `null`, the size of the https://docs.unity3d.com/ScriptReference/Texture.html[Texture^] to generate.
 
 float _NoiseScale_::
 
-If _Texture_ is null, the scale value of the perlin noise generated as the https://docs.unity3d.com/ScriptReference/Texture.html[Texture^].
+If _Texture_ is `null`, the scale value of the perlin noise generated as the https://docs.unity3d.com/ScriptReference/Texture.html[Texture^].
+
+ifdef::backend-multipage_html5[]
+<<manual/dissolve-transition.html,Manual>>
+endif::[]

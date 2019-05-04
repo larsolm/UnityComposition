@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InstructionCaller
 
 ### Description
 
-InstructionCaller is used as a field in https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviours^] and https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObjects^] to serve as a bridge between code and an <<reference/instruction-graph.html,InstructionGraph>>. This class will automatically manage configuring and applying input and output values to the <<reference/instruction-graph.html,InstructionGraph>> and enable full editor support.
+Add this as a field on a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] or https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] to serve as a bridge between code and an <<reference/instruction-graph.html,InstructionGraph>>. This class will automatically manage configuring and applying input and output values to the <<reference/instruction-graph.html,InstructionGraph>> and enable full editor support. Read the <<topics/graphs-6.html,Running Graphs From Script>> topic for more information.
 
 ### Public Properties
 
@@ -16,11 +16,11 @@ The instruction, usually an <<reference/instruction-graph.html,InstructionGraph>
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-input.html,InstructionInput>>> _Inputs_ _(read only)_::
 
-The list of <<reference/instruction-input.html,inputs>> to add to the <<reference/instruction-store.html,InstructionStore>> when running _Instruction_.
+The list of <<reference/instruction-input.html,InstructionInputs>> to add to the <<reference/instruction-store.html,InstructionStore>> when running _Instruction_.
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/instruction-output.html,InstructionOutput>>> _Outputs_ _(read only)_::
 
-The list of <<reference/instruction-output.html,outputs>> to read from the <<reference/instruction-store.html,InstructionStore>> after running _Instruction_.
+The list of <<reference/instruction-output.html,InstructionOutputs>> to read from the <<reference/instruction-store.html,InstructionStore>> after running _Instruction_.
 
 bool _IsRunning_ _(read only)_::
 

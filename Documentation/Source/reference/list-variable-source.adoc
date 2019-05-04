@@ -6,4 +6,4 @@ PiRhoSoft.CompositionEngine.ListVariableSource : <<reference/variable-source-1.h
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for <<reference/i-variable-list.html,IVariableLists>>
+A <<reference/variable-source.html,VariableSource>> for <<reference/i-variable-list.html,IVariableLists>>.

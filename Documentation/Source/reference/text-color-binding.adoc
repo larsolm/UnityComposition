@@ -6,16 +6,20 @@ PiRhoSoft.CompositionEngine.TextColorBinding : <<reference/variable-binding.html
 
 ### Description
 
-Sets the color of a sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component.
+Add this to a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] to bind the text color to a variable.
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
-The <<reference/variable-reference.html,VariableReference>> containing the `Color` <<reference/variable-value.html,VariableValue>> that will be applied when the binding is updated.
+The `Color` <<reference/variable-value.html,VariableValue>> that will be applied when the binding is updated.
 
 ### Public Properties
 
 http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] _Text_ _(read only)_::
 
 The component to set the color on.
+
+ifdef::backend-multipage_html5[]
+<<manual/text-color-binding.html,Manual>>
+endif::[]

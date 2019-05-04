@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.LogNode : <<reference/instruction-graph-node.html,In
 
 ### Description
 
-A <<reference/instruction-graph-node.html,node>> that logs a message when it is run. Useful for debugging.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to log a message to the https://docs.unity3d.com/Manual/Console.html[console^] to aid in debugging.
 
 ### Public Fields
 
@@ -16,4 +16,8 @@ The message to log.
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to continue to after logging _Message_.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
+
+ifdef::backend-multipage_html5[]
+<<manual/log-node.html,Manual>>
+endif::[]

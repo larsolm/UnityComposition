@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.VariableSetComponent : https://docs.unity3d.com/Scri
 
 ### Description
 
-A behaviour for storing <<reference/variable.html,Variables>> that are defined by a <<reference/variable-schema.html,VariableSchema>>. This can also be used as a base class for behaviours that need to expose variables defined in code to the variables system.
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to store <<reference/variable.html,Variables>> that are defined by a <<reference/variable-schema.html,VariableSchema>>. This can also be used as a base class for behaviours that need to expose variables defined in code to the variables system.
 
 ### Public Fields
 
@@ -50,8 +50,6 @@ void ResetVariables(https://docs.microsoft.com/en-us/dotnet/api/System.Collectio
 
 Resets all the variables in _variables_.
 
-### Protected Methods
-
-void OnEnable() _(virtual)_::
-
-Provides necessary initialization. When overridden this base implementation must be called.
+ifdef::backend-multipage_html5[]
+<<manual/variable-set-component.html,Manual>>
+endif::[]

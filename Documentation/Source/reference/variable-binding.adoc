@@ -6,9 +6,9 @@ PiRhoSoft.CompositionEngine.VariableBinding : https://docs.unity3d.com/ScriptRef
 
 ### Description
 
-The base class for all https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviours^] that provide support for automatically updating properties of loaded https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] (for instance, user interface elements) based on <<reference/variable-value.html,VariableValues>> stored in the <<topics/variables.html,Variables System>>.
+Derived from this class to provide support for automatically updating properties of loaded https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] (for instance, user interface elements) based on <<reference/variable-value.html,VariableValues>> stored in the <<topics/variables-1.html,Variables System>>.
 
-Read the <<topics/bindings.html,Bindings Topic>> for a complete overview of how to use bindings and how to implement custom bindings.
+Read the <<topics/bindings-1.html,Bindings Topic>> for a complete overview of how to use bindings and how to implement custom bindings.
 
 ### Static Methods
 
@@ -48,16 +48,12 @@ Use this method to update this specific binding when _group_ is either `null`, e
 
 ### Protected Methods
 
-void Awake() _(virtual)_::
-
-Performs necessary bookkeeping with the <<reference/composition-manager.html,CompositionManager>> so make sure to call this base implementation when overriding in a subclass.
-
-void OnDestroy() _(virtual)_::
-
-Performs necessary bookkeeping with the <<reference/composition-manager.html,CompositionManager>> so make sure to call this base implementation when overriding in a subclass.
-
 void UpdateBinding(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_) _(abstract)_::
 
 Implement this in subclasses to perform the binding. _variables_ is the <<reference/i-variable-store.html,IVariableStore>> <<reference/variable-reference.html,VariableReferences>> should be looked up with. For bindings that take multiple frames to complete, _status_ should be updated to indicate when the binding has started and finished.
 
 NOTE: _status_ will always be a valid instance so does not need to be checked for `null`.
+
+ifdef::backend-multipage_html5[]
+<<manual/variable-binding.html,Manual>>
+endif::[]

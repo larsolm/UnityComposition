@@ -47,3 +47,7 @@ Creates the material using the specified shader. _name_ is the name set for the 
 void Update() _(virtual)_::
 
 Implement this to update the https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material properties^] of _Material_.
+
+ifdef::backend-multipage_html5[]
+<<manual/transition.html,Manual>>
+endif::[]

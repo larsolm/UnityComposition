@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.TimeFormatType
 
 ### Description
 
-Specifies the time formats available to set for the _TimeFormatting_ of a <<reference/binding-formatter,BindingFormatter>>.
+Defines the time formats available to set for the _TimeFormatting_ of a <<reference/binding-formatter,BindingFormatter>>.
 
 ### Values
 

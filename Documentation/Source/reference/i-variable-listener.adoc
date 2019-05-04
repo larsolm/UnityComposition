@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.IVariableListener
 
 ### Description
 
-Implement this on a class that uses a <<reference/mapped-variable-store.html,MappedVariableStore>> to receive notifications whenever a variable in the store changes.
+Implement this in a class that uses a <<reference/mapped-variable-store.html,MappedVariableStore>> to receive notifications whenever a variable in the store changes.
 
 ### Public Methods
 

@@ -6,11 +6,13 @@ PiRhoSoft.CompositionEngine.LoadSceneNode : <<reference/instruction-graph-node.h
 
 ### Description
 
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to load a scene.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/load-scene-node-scene-source.html,SceneSource>> _Source_::
 
@@ -22,7 +24,7 @@ If _Source_ is `Value`, holds the scene to load.
 
 <<reference/variable-reference.html,VariableReference>> _SceneVariable_::
 
-If _Source_ is `Variable`, references the scene to load. If the resolved value is an `Int`, the scene will be loaded by index. If it is a `String`, it will be loaded by name.
+If _Source_ is `Variable`, references the scene to load. If the resolved value is an `Int`, the scene will be loaded by build index. If it is a `String`, it will be loaded by name.
 
 string _SceneName_::
 
@@ -43,3 +45,7 @@ If this is `true` (the default), https://docs.unity3d.com/ScriptReference/Resour
 bool _Additive_::
 
 If this is `true` (the default), the scene will be loaded in additive mode, meaning all other loaded scenes will remain loaded. If this is `false`, all currently loaded scenes will be unloaded first.
+
+ifdef::backend-multipage_html5[]
+<<manual/load-scene-node.html,Manual>>
+endif::[]

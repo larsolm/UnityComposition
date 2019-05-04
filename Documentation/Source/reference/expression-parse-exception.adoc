@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ExpressionParseException : Exception
 
 ### Description
 
-The exception type thrown by the <<reference/expression-parser.html,ExpressionParser>> or parsed <<reference/operation.html,Operations>> when encountering an error during parsing.
+The exception type thrown by the <<reference/expression-parser.html,ExpressionParser>> or <<reference/operation.html,Operations>> when encountering an error during parsing.
 
 ### Constructors
 

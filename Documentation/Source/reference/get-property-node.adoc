@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.GetPropertyNode : <<reference/instruction-graph-node
 
 ### Description
 
-<<manual/get-property-node.html,Manual>>
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to get the value of a property using reflection.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The node to run after the property has been set.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/object-variable-source.html,ObjectVariableSource>> _Target_::
 
@@ -26,12 +26,16 @@ The variable to assign the value of the property to.
 
 Type _TargetType_::
 
-The Type of object the property will be set on.
+The Type of object the property will be retrieved from.
 
 FieldInfo _Field_::
 
-The field to set.
+The field to get.
 
 PropertyInfo _Property_::
 
-The property to set.
+The property to get.
+
+ifdef::backend-multipage_html5[]
+<<manual/get-property-node.html,Manual>>
+endif::[]

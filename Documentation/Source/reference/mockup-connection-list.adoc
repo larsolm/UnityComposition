@@ -6,4 +6,4 @@ PiRhoSoft.CompositionEngine.MockupConnectionList : <<reference/serialized-list-1
 
 ### Description
 
-The serializable list of <<reference/mockup-connection.html,MockupConnections>> for a <<reference/mockup-graph.html,MockupGraph>> or <<reference/mockup-node.html,MockupNode>>
+The serializable list of <<reference/mockup-connection.html,MockupConnections>> for a <<reference/mockup-graph.html,MockupGraph>> or <<reference/mockup-node.html,MockupNode>>.

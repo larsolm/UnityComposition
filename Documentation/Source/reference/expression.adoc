@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.Expression
 
 ### Description
 
-Expression fields are added to objects to provide an interface for specifying simple, repeatable operations in the editor. The full expression syntax and a guide on writing and using expressions can be found in the <<topics/expressions.html,Expressions topic>>.
+Add this as a field on a class to provide an interface for specifying simple, repeatable operations in the editor. The full expression syntax and a guide on writing and using expressions can be found in the <<topics/expressions.html,Expressions topic>>.
 
 ### Public Properties
 
@@ -16,7 +16,7 @@ This will hold the result of the most recent expression compilation. If _HasErro
 
 <<reference/operation.html,Operation>> _LastOperation_ _(read only)_::
 
-The last <<reference/operation.html,Operation>> that was evaluated when evaluating the expression. If an <<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> is thrown, this will be the <<reference/operation.html,Operation>> that was being evaluated when the error was encountered. If the evaluation is successful this will hold the last <<reference/operation.html,Operation>> in the expression.
+The last <<reference/operation.html,Operation>> that was evaluated when evaluating the expression. If an <<reference/expression-evaluation-exception.html,ExpressionEvaluationException>> is thrown, this will be the <<reference/operation.html,Operation>> that was being evaluated when the error occurred. If the evaluation is successful this will hold the last <<reference/operation.html,Operation>> in the expression.
 
 bool _IsValid_ _(read only)_::
 

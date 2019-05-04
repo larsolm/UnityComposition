@@ -6,17 +6,17 @@ PiRhoSoft.CompositionEngine.MessageNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
-Displays a <<reference/message.html,Message>> on a <<reference/message-control.html,MessageControl>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to display a <<reference/message.html,Message>> on a <<reference/message-control.html,MessageControl>>.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> that will be run after this <<reference/instruction-graph-node.html,InstructionGraphNode>> has completed.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _Control_::
 
-The <<reference/variable-reference.html,VariableReference>> to the <<reference/variable-value.html,VariableValue>> that holds the <<reference/message-control.html,MessageControl>> to display _Message_ on.
+The <<reference/message-control.html,MessageControl>> to display _Message_ on.
 
 bool _WaitForCompletion_::
 
@@ -32,4 +32,8 @@ When _AutoHide_ is `true`, the number of seconds to wait before dismissing the <
 
 <<reference/message.html,Message>> _Message_::
 
-The <<reference/message.html,Message>> to display on the <<reference/message-control.html,MessageControl>>
+The <<reference/message.html,Message>> to display on the <<reference/message-control.html,MessageControl>>.
+
+ifdef::backend-multipage_html5[]
+<<manual/message-node.html,Manual>>
+endif::[]

@@ -6,6 +6,14 @@ PiRhoSoft.CompositionEngine.MessageInput : https://docs.unity3d.com/ScriptRefere
 
 ### Description
 
+Add this to a <<reference/message-control.html,MessageControl>> to add support for advancing the text when a button is pressed.
+
 ### Public Fields
 
 string _AcceptButton_::
+
+The name of the button that advances the <<reference/message-control.html,MessageControl>> as defined in <<reference/input-helper.html,InputHelper>>.
+
+ifdef::backend-multipage_html5[]
+<<manual/message-input.html,Manual>>
+endif::[]

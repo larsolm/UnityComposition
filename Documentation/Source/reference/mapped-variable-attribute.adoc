@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MappedVariableAttribute : Attribute
 
 ### Description
 
-An https://docs.microsoft.com/en-us/dotnet/csharp/programming-guide/concepts/attributes/[attribute^] to apply to properties and fields to expose them to the <<topics/variables.html,variables>> system using <<reference/mapped-variable-store.html,MappedVariableStore>>.
+Add this to a property or field on a <<reference/variable-set-component.html,VariableSetComponent>> or <<reference/variable-set-asset.html,VariableSetAsset>> to expose it to the <<topics/variables-1.html,variables>> system.
 
 ### Constructors
 

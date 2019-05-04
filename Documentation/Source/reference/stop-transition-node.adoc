@@ -6,10 +6,14 @@ PiRhoSoft.CompositionEngine.StopTransitionNode : <<reference/instruction-graph-n
 
 ### Description
 
-Ends the <<reference/transition.html,Transition>> currently running on the <<reference/transition-manager.html,TransitionManager>>. If there is no <<reference/transition.html,Transition>> running this has no effect.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to end the <<reference/transition.html,Transition>> currently running on the <<reference/transition-manager.html,TransitionManager>>. If there is no <<reference/transition.html,Transition>> running this has no effect.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
 The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
+
+ifdef::backend-multipage_html5[]
+<<manual/stop-transition-node.html,Manual>>
+endif::[]

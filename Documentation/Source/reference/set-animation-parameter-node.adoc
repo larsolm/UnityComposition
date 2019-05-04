@@ -6,11 +6,13 @@ PiRhoSoft.CompositionEngine.SetAnimationParameterNode : <<reference/instruction-
 
 ### Description
 
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to set a parameter on an https://docs.unity3d.com/ScriptReference/Animator.html[Animator^].
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/string-variable-source.html,StringVariableSource>> _Parameter_::
 
@@ -35,3 +37,7 @@ If _Type_ is https://docs.unity3d.com/ScriptReference/AnimatorControllerParamete
 <<reference/float-variable-source.html,FloatVariableSource>> _FloatValue_::
 
 If _Type_ is https://docs.unity3d.com/ScriptReference/AnimatorControllerParameterType.Float.html[`Float`^], the value to set using https://docs.unity3d.com/ScriptReference/Animator.SetFloat.html[_SetFloat_^]
+
+ifdef::backend-multipage_html5[]
+<<manual/set-animation-parameter-node.html,Manual>>
+endif::[]

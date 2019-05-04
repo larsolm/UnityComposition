@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.MenuItemTemplate
 
 ### Description
 
-Holds information about how a <<reference/menu-item.html,MenuItem>> should be setup in a <<reference/menu.html,Menu>>
+Holds information about how a <<reference/menu-item.html,MenuItem>> should be setup in a <<reference/menu.html,Menu>>.
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variables_::
 
-A reference to the variable that should be used as the <<reference/binding-root.html,BindingRoot>> _Value_ for the <<reference/menu-item.html,MenuItem>>
+The variable that should be used as the <<reference/binding-root.html,BindingRoot>> _Value_ for the <<reference/menu-item.html,MenuItem>>.
 
 <<reference/menu-item-template-object-source.html,ObjectSource>> _Source_::
 

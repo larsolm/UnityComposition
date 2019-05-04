@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MenuItem : <<reference/binding-root.html,BindingRoot
 
 ### Description
 
-This https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] is used by <<reference/menu.html,Menu>> to identify child https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^].
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] that is a child of a <<reference/menu.html,Menu>> to indicate the object should be managed by the <<reference/menu.html,Menu>>.
 
 ### Public Fields
 
@@ -54,8 +54,6 @@ void Move(int _index_)::
 
 Moves the item in its <<reference/menu.html,Menu>>.
 
-### Protected Methods
-
-void OnDestroy() _(virtual)_::
-
-Informs the owning <<reference/menu.html,Menu>> that this item is being removed.
+ifdef::backend-multipage_html5[]
+<<manual/menu-item.html,Manual>>
+endif::[]

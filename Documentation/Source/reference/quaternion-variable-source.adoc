@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.QuaternionVariableSource : <<reference/variable-sour
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for `Quaternion` <<reference/variable-values.html,VariableValues>>
+A <<reference/variable-source.html,VariableSource>> for `Quaternion` <<reference/variable-values.html,VariableValues>>.
 
 ### Constructors
 

@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.TransformNode : <<reference/instruction-graph-node.h
 
 ### Description
 
-Animates the https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] of a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to animate the https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] of a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^].
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to run an <<reference/expression.html,Expression>>.
 
 <<reference/variable-reference.html,VariableReference>> _Transform_::
 
@@ -48,7 +48,7 @@ Specifies the advancement method of the animation.
 
 bool _WaitForCompletion_::
 
-If this is `true`, this node will not complete until the animation has completed. Otherwise, this node will complete immediately and the <<reference/instruction-graph.html,InstructionGraph>> will continue.
+If this is `true`, this node will not complete until the animation has completed. Otherwise, this node will complete immediately.
 
 <<reference/float-variable-source.html,FloatVariableSource>> _Duration_::
 
@@ -65,3 +65,7 @@ If _AnimationMethod_ is `Speed`, the number of radians per second to rotate the 
 <<reference/float-variable-source.html,FloatVariableSource>> _ScaleSpeed_::
 
 If _AnimationMethod_ is `Speed`, the number of units per second to scale the https://docs.unity3d.com/ScriptReference/Transform.html[Transform^].
+
+ifdef::backend-multipage_html5[]
+<<manual/transform-node.html,Manual>>
+endif::[]

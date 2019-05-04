@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.CreateGameObjectNode : <<reference/instruction-graph
 
 ### Description
 
-Creates a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] from a https://docs.unity3d.com/Manual/Prefabs.html[prefab^].
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to create a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] from a https://docs.unity3d.com/Manual/Prefabs.html[prefab^].
 
 ### Public Fields
 

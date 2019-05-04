@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.NumberFormatType
 
 ### Description
 
-Specifies the number formats available to set for the _NumberFormatting_ of a <<reference/binding-formatter,BindingFormatter>>.
+Defines the number formats available to set for the _NumberFormatting_ of a <<reference/binding-formatter,BindingFormatter>>.
 
 ### Values
 

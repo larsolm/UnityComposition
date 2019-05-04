@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.PlayAnimationStateNode : <<reference/instruction-gra
 
 ### Description
 
-Activates a trigger using https://docs.unity3d.com/ScriptReference/Animator.SetTrigger.html[_SetTrigger_^] on an https://docs.unity3d.com/ScriptReference/Animator.html[Animator^].
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to activate a trigger using https://docs.unity3d.com/ScriptReference/Animator.SetTrigger.html[_SetTrigger_^] on an https://docs.unity3d.com/ScriptReference/Animator.html[Animator^].
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/variable-reference.html,VariableReference>> _Animator_::
 
@@ -21,3 +21,7 @@ The https://docs.unity3d.com/ScriptReference/Animator.html[Animator^] to set _St
 <<reference/string-variable-source.html,StringVariableSource>> _State_::
 
 The name of the trigger to set on _Animator_ using https://docs.unity3d.com/ScriptReference/Animator.SetTrigger.html[_SetTrigger_^]
+
+ifdef::backend-multipage_html5[]
+<<manual/play-animation-state-node.html,Manual>>
+endif::[]

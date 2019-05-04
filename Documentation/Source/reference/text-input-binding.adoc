@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.TextInputBinding : <<reference/variable-binding.html
 
 ### Description
 
-Sets the text from a sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component and applies it to a variable.
+Add this to a http://digitalnativestudios.com/textmeshpro/docs/[TMP_InputField^] to apply entered text to a variable.
 
 ### Public Fields
 
@@ -19,3 +19,7 @@ The variable to apply the text to when it changes.
 http://digitalnativestudios.com/textmeshpro/docs/[TMP_InputField^] _Text_ _(read only)_::
 
 The component to get the text from.
+
+ifdef::backend-multipage_html5[]
+<<manual/text-input-binding.html,Manual>>
+endif::[]

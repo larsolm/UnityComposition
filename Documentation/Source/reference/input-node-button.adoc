@@ -16,7 +16,7 @@ The type of input to use for this button.
 
 string _Name_::
 
-The name of the button if _Type_ is `Button` or the name of the axis if _Type_ is `Axis`.
+The name of the button if _Type_ is `Button` or the name of the axis if _Type_ is `Axis` as defined by the <<reference/input-helper.html,InputHelper>>.
 
 float _Value_::
 
@@ -28,4 +28,4 @@ If _Type_ is `Key`, the keyboard key for the button.
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _OnSelected_::
 
-The node to go to when this input is triggered.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to go to when this input is triggered.

@@ -6,10 +6,10 @@ PiRhoSoft.CompositionEngine.IntRectVariableSource : <<reference/variable-source-
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^]
+A <<reference/variable-source.html,VariableSource>> for https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^].
 
 ### Constructors
 
 IntRectVariableSource(https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _defaultValue_)::
 
-Initializes _Value_ to _defaultValue_
+Initializes _Value_ to _defaultValue_.

@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.SetPropertyNode : <<reference/instruction-graph-node
 
 ### Description
 
-Sets a property on an object using reflection.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to set a property on an object using reflection.
 
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/object-variable-source.html,ObjectVariableSource>> _Target_::
 
@@ -35,3 +35,7 @@ If setting a field, the field that will be set.
 PropertyInfo _Property_::
 
 If setting a property, the property that will be set.
+
+ifdef::backend-multipage_html5[]
+<<manual/set-property-node.html,Manual>>
+endif::[]

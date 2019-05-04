@@ -6,11 +6,13 @@ PiRhoSoft.CompositionEngine.UnloadSceneNode : <<reference/instruction-graph-node
 
 ### Description
 
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to unload a scene.
+
 ### Public Fields
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Next_::
 
-The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node completes.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when this node finishes.
 
 <<reference/unload-scene-node-scene-source.html,SceneSource>> _Source_::
 
@@ -39,3 +41,7 @@ If this is `true`, this node will not complete until the scene has completed unl
 bool _CleanupAssets_::
 
 If this is `true` (the default), https://docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html[Resources.UnloadUnusedAssets^] will be called after the scene has been unloaded.
+
+ifdef::backend-multipage_html5[]
+<<manual/unload-scene-node.html,Manual>>
+endif::[]

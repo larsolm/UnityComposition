@@ -12,4 +12,8 @@ Performs no function but can have an arbitrary number of entry points for quickl
 
 <<reference/mockup-connection-list.html,MockupConnectionList>> _EntryPoints_::
 
-The list of <<reference/mockup-connection.html,MockupConnections>> to show as entry points in the start node of the graph editor window when editing this <<reference/instruction-graph.html,InstructionGraph>>.
+The list of <<reference/mockup-connection.html,MockupConnections>> to show as entry points in the start node of the graph editor window.
+
+ifdef::backend-multipage_html5[]
+<<manual/mockup-graph.html,Manual>>
+endif::[]

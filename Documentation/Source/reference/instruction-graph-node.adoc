@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InstructionGraphNode : https://docs.unity3d.com/Scri
 
 ### Description
 
-The base class for all nodes in an <<reference/instruction-graph.html,InstructionGraph>>. 
+Derive from this class to implement a custom node for use in an <<reference/instruction-graph.html,InstructionGraph>>. 
 
 ### Public Fields
 
@@ -32,7 +32,7 @@ The color the node should be displayed with in the graph editor. By default this
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-graph.html,InstructionGraph>> _graph_, <<reference/instruction-store.html,InstructionStore>> _variables_, int _iteration_) _(abstract)_::
 
-Implement this method in derived classes to perform the execution of the node. Read the <<topics/graphs.html,graphs topic>> for a complete overview of writing and using custom nodes.
+Implement this method in derived classes to perform the execution of the node. Read the <<topics/graphs-8.html,graphs topic>> for a complete overview of writing and using custom nodes.
 
 #### Resolve
 
@@ -102,3 +102,7 @@ Implement this method to specify the nodes this node has connections to. This ra
 void SetConnection(<<reference/instruction-graph-node-connection-data.html,ConnectionData>> _connection_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _target_) _(virtual)_::
 
 Used by the editor to update a connection. This only needs to be overridden if _GetConnections_ is overridden.
+
+ifdef::backend-multipage_html5[]
+<<manual/instruction-graph-node.html,Manual>>
+endif::[]

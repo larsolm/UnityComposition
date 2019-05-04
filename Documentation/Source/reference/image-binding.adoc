@@ -6,16 +6,20 @@ PiRhoSoft.CompositionEngine.ImageBinding : <<reference/variable-binding.html,Var
 
 ### Description
 
-Sets _sprite_ on a sibling https://docs.unity3d.com/ScriptReference/Image.html[Image^].
+Add this to an https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] to bind _sprite_ to a variable.
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Variable_::
 
-The reference to the variable holding the https://docs.unity3d.com/ScriptReference/Sprite.html[Sprite^] that should be set on _Image_
+The https://docs.unity3d.com/ScriptReference/Sprite.html[Sprite^] that should be set on _Image_.
 
 ### Public Properties
 
 https://docs.unity3d.com/ScriptReference/Image.html[Image^] _Image_ _(read only)_::
 
-The image that will be updated.
+The https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] that will be updated.
+
+ifdef::backend-multipage_html5[]
+<<manual/image-binding.html,Manual>>
+endif::[]

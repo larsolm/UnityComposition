@@ -6,10 +6,18 @@ PiRhoSoft.UtilityEngine.SceneReferenceAttribute : Attribute
 
 ### Description
 
+Apply this to a <<reference/scene-reference.html,SceneReference>> to indicate to the editor how scene creation should be handled. If this attribute is not applied to a <<reference/scene-reference.html,SceneReference>> field, it will act as if _SaveLocation_ is `None`.
+
 ### Public Fields
 
 <<reference/asset-location.html,AssetLocation>> _SaveLocation_::
 
+The folder to save the newly created scene in. Set this to `None` to disable scene creation.
+
 string _DefaultName_::
 
+The name to assign to new scenes by default. If _SaveLocation_ is `Selectable`, the name can be set when picking the save location. If _SaveLocation_ is `AssetRoot`, this name will automatically have a number appended if a scene with the same name already exists.
+
 string _Creator_::
+
+The name of a method on the owning object that can add objects to the newly created scene. The method should be static, return void, and take no parameters. The created scene will be the active scene so any objects created in this method will be added to the new scene. If this is not specified, an empty scene will be created.

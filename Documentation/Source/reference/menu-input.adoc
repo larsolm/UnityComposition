@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MenuInput : https://docs.unity3d.com/ScriptReference
 
 ### Description
 
-Provides input handling for a <<reference/menu.html,Menu>>.
+Add this to a <<reference/menu.html,Menu>> to provide navigation and selection of <<reference/menu-item.html,MenuItems>>.
 
 ### Public Fields
 
@@ -127,3 +127,7 @@ Returns the <<reference/menu-item.html,MenuItem>> at position _screenPoint_. _sc
 void ScrollToItem(<<reference/menu-item.html,MenuItem>> _item_)::
 
 When inside a https://docs.unity3d.com/Manual/script-ScrollRect.html, ensures _item_ is visible with _ScrollPadding_ space around it on all sides.
+
+ifdef::backend-multipage_html5[]
+<<manual/menu-input.html,Manual>>
+endif::[]

@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.SelectionControl : <<reference/interface-control.htm
 
 ### Description
 
-A <<reference/interface-control.html,InterfaceControl>> used with a <<reference/menu.html,Menu>> to allow a <<reference/menu-item.html,MenuItem>> to be selected.
+Add this to a <<reference/menu.html,Menu>> with a <<reference/menu-input.html,MenuInput>> to allow a <<reference/menu-item.html,MenuItem>> to be selected.
 
 ### Public Properties
 
@@ -85,3 +85,7 @@ Implement this in subclasses to perform setup when _Show_ is called after the it
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run() _(virtual)_::
 
 Implement this in subclasses to perform custom handling for waiting for a selection. The default implementation will do nothing but yield until the control closes.
+
+ifdef::backend-multipage_html5[]
+<<manual/selection-control.html,Manual>>
+endif::[]

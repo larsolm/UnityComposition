@@ -6,13 +6,13 @@ PiRhoSoft.CompositionEngine.IterateNode : <<reference/instruction-graph-node.htm
 
 ### Description
 
-Executes one time for each <<reference/variable-value.html,VariableValue>> in a <<reference/i-variable-list.html,IVariableList>>.
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to execute an <<reference/instruction-graph-node.html,InstructionGraphNode>> repeatedly for each <<reference/variable-value.html,VariableValue>> in an <<reference/i-variable-list.html,IVariableList>>.
 
 ### Public Fields
 
 <<reference/variable-reference.html,VariableReference>> _Container_::
 
-The variable for the <<reference/i-variable-list.html,IVariableList>> holding each of the <<reference/variable-value.html,VariableValue>> to iterate.
+The <<reference/i-variable-list.html,IVariableList>> holding each of the <<reference/variable-value.html,VariableValues>> to iterate.
 
 <<reference/variable-reference.html,VariableReference>> _Index_::
 
@@ -24,4 +24,8 @@ The variable to set to the current value being iterated.
 
 <<reference/instruction-graph-node.html,InstructionGraphNode>> _Loop_::
 
-The node to run for each <<reference/variable-value.html,VariableValue>> in _Container_.
+The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run for each <<reference/variable-value.html,VariableValue>> in _Container_.
+
+ifdef::backend-multipage_html5[]
+<<manual/iterate-node.html,Manual>>
+endif::[]

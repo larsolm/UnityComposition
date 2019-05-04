@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MaterialAnimation : https://docs.unity3d.com/ScriptR
 
 ### Description
 
-A https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] for use with the <<reference/play-effect-node.html,PlayEffectNode>> <<reference/instruction-graph-node.html,InstructionGraphNode>> that animates a `_Progress` https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material property^].
+Add this to a https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] to animate a `_Progress` https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material property^]. This can be used standalone but is most useful when used with the <<reference/play-effect-node.html,PlayEffectNode>>.
 
 ### Public Fields
 
@@ -37,3 +37,7 @@ Returns `true` as soon as the animation has completed. When _AutoAdvance_ is `tr
 void LateUpdate() _(virtual)_::
 
 Performs the update of the `_Progress` https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html[material property^].
+
+ifdef::backend-multipage_html5[]
+<<manual/material-animation.html,Manual>>
+endif::[]

@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.RectVariableSource : <<reference/variable-source-1.h
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for `Rect` <<reference/variable-values.html,VariableValues>>
+A <<reference/variable-source.html,VariableSource>> for `Rect` <<reference/variable-values.html,VariableValues>>.
 
 ### Constructors
 

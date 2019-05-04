@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.ObjectPositioning
 
 ### Description
 
-Specifies the available settings for the _Positioning_ property of <<reference/create-game-object-node.html,CreateGameObjectNode>>.
+Defines the available settings for the _Positioning_ property of <<reference/create-game-object-node.html,CreateGameObjectNode>>.
 
 ### Values
 

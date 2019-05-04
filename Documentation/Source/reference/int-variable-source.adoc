@@ -6,10 +6,10 @@ PiRhoSoft.CompositionEngine.IntVariableSource : <<reference/variable-source-1.ht
 
 ### Description
 
-A <<reference/variable-source.html,VariableSource>> for ints
+A <<reference/variable-source.html,VariableSource>> for ints.
 
 ### Constructors
 
 IntVariableSource(int _defaultValue_)::
 
-Initializes _Value_ to _defaultValue_
+Initializes _Value_ to _defaultValue_.
