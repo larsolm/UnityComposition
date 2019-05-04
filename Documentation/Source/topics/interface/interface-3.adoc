@@ -1,0 +1,13 @@
+[#topics/interface-3]
+
+## Message Controls
+
+Message Controls are an <<manual/interface-control.html,Interface Control>> used to show a <<reference/message.html,message,>> on a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component. Use a <<manual/message-node.html,Message Node>> to activate a message control and  a <<manual/message-input.html,Message Input>> behaviour to advance the text with input. When shown a message controls starts a https://docs.unity3d.com/ScriptReference/Coroutine.html[Coroutines^]
+
+### Message Node
+
+
+
+### Message
+
+### Input
