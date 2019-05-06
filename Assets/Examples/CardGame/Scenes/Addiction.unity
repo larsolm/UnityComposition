@@ -295,7 +295,7 @@ MonoBehaviour:
   SuppressErrors: 0
   Object: {fileID: 112653798}
   Condition:
-    _statement: global.State.Shuffles > 0 && global.State.Processing == 0
+    _statement: global.State.Processing == 0
 --- !u!1 &167390628
 GameObject:
   m_ObjectHideFlags: 0

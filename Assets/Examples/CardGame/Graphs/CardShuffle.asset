@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8578647492234368899
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 802f6208c5d734e4c96b38cb30f96e71, type: 3}
+  m_Name: Iterate Cards
+  m_EditorClassIdentifier: 
+  Name: Iterate Cards
+  GraphPosition: {x: 640, y: 64}
+  IsBreakpoint: 0
+  Container:
+    _variable: global.State.Cards
+    _tokens:
+    - Type: 0
+      Text: global
+    - Type: 0
+      Text: State
+    - Type: 0
+      Text: Cards
+  Index:
+    _variable: 
+    _tokens: []
+  Value:
+    _variable: card
+    _tokens:
+    - Type: 0
+      Text: card
+  Loop: {fileID: 114828798773068104}
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -40,9 +73,11 @@ MonoBehaviour:
     - {fileID: 114749951981520494}
     - {fileID: 114905633981755912}
     - {fileID: 114613535626573654}
+    - {fileID: 2280417903215654415}
+    - {fileID: -8578647492234368899}
   StartPosition: {x: -0, y: 0}
   Enter: {fileID: 114065889936685652}
-  Process: {fileID: 114295758739278524}
+  Process: {fileID: 2280417903215654415}
   Exit: {fileID: 114613535626573654}
 --- !u!114 &114065889936685652
 MonoBehaviour:
@@ -75,7 +110,7 @@ MonoBehaviour:
   m_Name: Yield
   m_EditorClassIdentifier: 
   Name: Yield
-  GraphPosition: {x: 2240, y: 25.6}
+  GraphPosition: {x: 2240, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114749951981520494}
 --- !u!114 &114295758739278524
@@ -91,7 +126,7 @@ MonoBehaviour:
   m_Name: Shuffle Cards
   m_EditorClassIdentifier: 
   Name: Shuffle Cards
-  GraphPosition: {x: 320, y: 25.6}
+  GraphPosition: {x: 640, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114438301544111286}
   Variable:
@@ -116,7 +151,7 @@ MonoBehaviour:
   m_Name: Update Position
   m_EditorClassIdentifier: 
   Name: Update Position
-  GraphPosition: {x: 1280, y: 25.6}
+  GraphPosition: {x: 1600, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114800223129982834}
   Expression:
@@ -136,7 +171,7 @@ MonoBehaviour:
   m_Name: Set Iterator
   m_EditorClassIdentifier: 
   Name: Set Iterator
-  GraphPosition: {x: 640, y: 25.6}
+  GraphPosition: {x: 960, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114713345150838420}
   Expression:
@@ -199,7 +234,7 @@ MonoBehaviour:
   m_Name: Iterate Cards
   m_EditorClassIdentifier: 
   Name: Iterate Cards
-  GraphPosition: {x: 960, y: 25.6}
+  GraphPosition: {x: 1280, y: -12.8}
   IsBreakpoint: 0
   Container:
     _variable: global.State.Cards
@@ -232,7 +267,7 @@ MonoBehaviour:
   m_Name: Check Column
   m_EditorClassIdentifier: 
   Name: Check Column
-  GraphPosition: {x: 2560, y: 12.8}
+  GraphPosition: {x: 2560, y: -25.6}
   IsBreakpoint: 0
   OnTrue: {fileID: 114905633981755912}
   OnFalse: {fileID: 0}
@@ -271,9 +306,9 @@ MonoBehaviour:
   m_Name: Set Property
   m_EditorClassIdentifier: 
   Name: Set Property
-  GraphPosition: {x: 1600, y: 25.6}
+  GraphPosition: {x: 1920, y: -12.8}
   IsBreakpoint: 0
-  Next: {fileID: 114828798773068104}
+  Next: {fileID: 114117616305717732}
   Target:
     Type: 1
     Reference:
@@ -318,9 +353,9 @@ MonoBehaviour:
   m_Name: Check Card
   m_EditorClassIdentifier: 
   Name: Check Card
-  GraphPosition: {x: 1920, y: 25.6}
+  GraphPosition: {x: 947.2, y: 64}
   IsBreakpoint: 0
-  Next: {fileID: 114117616305717732}
+  Next: {fileID: 0}
   Source: 0
   Instruction:
     _instruction: {fileID: 11400000, guid: 813ba8867a65fb149aff0667ff4d5dcc, type: 2}
@@ -363,7 +398,7 @@ MonoBehaviour:
   m_Name: Next Row
   m_EditorClassIdentifier: 
   Name: Next Row
-  GraphPosition: {x: 2880, y: 25.6}
+  GraphPosition: {x: 2880, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -372,3 +407,22 @@ MonoBehaviour:
       local.rowSuit = global.State.Rows[local.row]
 
       local.column = local.rowSuit == "" ? 0 : global.State[local.rowSuit].Count'
+--- !u!114 &2280417903215654415
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
+  m_Name: SequenceNode
+  m_EditorClassIdentifier: 
+  Name: SequenceNode
+  GraphPosition: {x: 320, y: 12.8}
+  IsBreakpoint: 0
+  Sequence:
+    _items:
+    - {fileID: 114295758739278524}
+    - {fileID: -8578647492234368899}
