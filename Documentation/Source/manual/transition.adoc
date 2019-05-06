@@ -2,7 +2,7 @@
 
 ## Transition
 
-A Transition is an https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Asset^] used to create post processing effects on a https://docs.unity3d.com/ScriptReference/Camera.html[Camera^], usually used during scene changes to hide, obscure, then reshow the screen. Transition itself is an abstract class that should be derived from to achieve the desired effects. Transitions operate using https://docs.unity3d.com/ScriptReference/Shader.html[Shaders^], set by derived classes using the `SetShader()` method. Transitions have three <<reference/transition-phase,Phases>>, `Out`, `Obscure`, `In`, with each one being initiated separately, usually by a <<manual/play-transition-node.html,Play Transition Node>>. For example implementations of a Transition see the <<manual/fade.html,Fade>>, <<manual/dissolve.html,Dissolve>>, and <<manual/pixelate.html,Pixelate>> Transitions.
+A Transition is an https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Asset^] used to create post processing effects on a https://docs.unity3d.com/ScriptReference/Camera.html[Camera^], usually used during scene changes to hide, obscure, then reshow the screen. Transition itself is an abstract class that should be derived from to achieve the desired effects. Transitions operate using https://docs.unity3d.com/ScriptReference/Shader.html[Shaders^], which are set in the editor with the _Shader_ field. Transitions have three <<reference/transition-phase,Phases>>, `Out`, `Obscure`, `In`, with each one being initiated separately, usually by a <<manual/play-transition-node.html,Play Transition Node>>. For example implementations of a Transition see the <<manual/fade.html,Fade>>, <<manual/dissolve.html,Dissolve>>, and <<manual/pixelate.html,Pixelate>> Transitions.
 
 ### Fields
 
@@ -10,6 +10,7 @@ A Transition is an https://docs.unity3d.com/ScriptReference/ScriptableObject.htm
 |===
 | Name	| Description
 
+| Shader	| The https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] that this Transition will use to display its effect
 | Duration	| The amount of time this Transition will take to complete.
 |===
 

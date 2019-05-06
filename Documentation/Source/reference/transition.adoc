@@ -10,6 +10,10 @@ The base class for assets that perform postprocessing of the rendered scene over
 
 ### Public Fields
 
+https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] _Shader_::
+
+The https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] that the transition will use to display its effect
+
 float _Duration_::
 
 The time in seconds the transition should last.
