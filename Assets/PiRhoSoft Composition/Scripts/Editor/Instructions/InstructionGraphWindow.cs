@@ -568,11 +568,7 @@ namespace PiRhoSoft.CompositionEditor
 			if (menu == null)
 				menu = new GenericMenu();
 
-			menu.AddItem(new GUIContent("Create _SPACE"), false, () =>
-			{
-				var createRect = new Rect(ViewportToWindow(_createPosition), Vector2.zero);
-				ShowCreateNode(createRect);
-			});
+			menu.AddItem(new GUIContent("Create _SPACE"), false, () => _showCreateNode = true);
 		}
 
 		private void CreateEditMenu(ref GenericMenu menu)
