@@ -540,27 +540,10 @@ MonoBehaviour:
 
       local.column = card.Column
 
-      card.Row = global.SelectedCard.Row
 
-      card.Column = global.SelectedCard.Column
+      local.cardPosition = MoveCard(card, global.SelectedCard.Row, global.SelectedCard.Column)
 
-      global.SelectedCard.Row = local.row
-
-      global.SelectedCard.Column = local.column
-
-
-      local.rootx = card.Column * 2.5 - 16.25
-
-      local.rooty = card.Row * 3.5 - 6
-
-      local.rootPosition = Vector3(local.rootx, local.rooty, 0)
-
-
-      local.cardx = global.SelectedCard.Column * 2.5 - 16.25
-
-      local.cardy = global.SelectedCard.Row * 3.5 - 6
-
-      local.cardPosition = Vector3(local.cardx, local.cardy, 0)'
+      local.rootPosition = MoveCard(global.SelectedCard, local.row, local.column)'
 --- !u!114 &114979908025208874
 MonoBehaviour:
   m_ObjectHideFlags: 1

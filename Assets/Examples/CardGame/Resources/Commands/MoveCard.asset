@@ -1,0 +1,33 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 85fe587d520831147b347d0bb61b984d, type: 3}
+  m_Name: MoveCard
+  m_EditorClassIdentifier: 
+  Name: MoveCard
+  Parameters:
+    _items:
+    - Name: card
+      Type: 17
+    - Name: row
+      Type: 2
+    - Name: column
+      Type: 2
+  Expression:
+    _statement: 'card.Column = column
+
+      card.Row = row
+
+      cardx = column * global.cardXAdvance + global.cardXOffset
+
+      cardy = row * global.cardYAdvance + global.cardYOffset
+
+      Vector3(cardx, cardy, 0)'
