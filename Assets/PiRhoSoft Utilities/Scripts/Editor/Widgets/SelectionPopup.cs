@@ -72,7 +72,7 @@ namespace PiRhoSoft.UtilityEditor
 			}
 		}
 
-		private static readonly Style _headerStyle = new Style(() => new GUIStyle("In BigTitle") { font = EditorStyles.boldLabel.font });
+		private static readonly Style _headerStyle = new Style(() => new GUIStyle("In BigTitle") { font = EditorStyles.boldLabel.font, fontSize = EditorStyles.boldLabel.fontSize });
 		private static readonly Style _itemButtonStyle = new Style(() => new GUIStyle("PR Label") { alignment = TextAnchor.MiddleLeft, fixedHeight = _itemHeight });
 		private static readonly Style _backgroundStyle = new Style(() => new GUIStyle("grey_border"));
 		private static readonly Style _childArrowStyle = new Style(() => new GUIStyle("AC RightArrow"));
@@ -156,7 +156,8 @@ namespace PiRhoSoft.UtilityEditor
 
 			_instance = CreateInstance<SelectionPopup>();
 			_instance.Setup(state, tree);
-			_instance.ShowAsDropDown(new Rect(GUIUtility.GUIToScreenPoint(new Vector2(position.x, position.yMax)), Vector2.zero), new Vector2(Mathf.Max(_minimumWidth, position.width), _windowHeight));
+			_instance.ShowAsDropDown(position, new Vector2(Mathf.Max(_minimumWidth, position.width), _windowHeight));
+			_instance.position = new Rect(GUIUtility.GUIToScreenPoint(new Vector2(position.x, position.yMax)), position.size);
 		}
 
 		void OnDestroy()

@@ -29,7 +29,7 @@ MonoBehaviour:
   _nodes:
     _items:
     - {fileID: 114569040724117588}
-    - {fileID: 0}
+    - {fileID: 114318430747636952}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114569040724117588}
 --- !u!114 &114318430747636952
@@ -72,7 +72,7 @@ MonoBehaviour:
   Name: Unload Scene
   GraphPosition: {x: 320, y: 0}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 114318430747636952}
   Source: 0
   Scene:
     Path: Assets/Examples/Loot/Scenes/LootMenu.unity
