@@ -46,6 +46,7 @@ MonoBehaviour:
     - {fileID: 114016649170688582}
     - {fileID: 114906063048417074}
     - {fileID: 114325057445265208}
+    - {fileID: 114319477458661940}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114906063048417074}
   Process: {fileID: 114866516215429464}
@@ -82,7 +83,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
   m_Name: Comment
   m_EditorClassIdentifier: 
   Name: Comment

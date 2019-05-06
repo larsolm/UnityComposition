@@ -51,6 +51,8 @@ MonoBehaviour:
     - {fileID: 114297131327371340}
     - {fileID: 114275367290712044}
     - {fileID: 114633494972163274}
+    - {fileID: 114268554473494930}
+    - {fileID: 114477289048704104}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114098421550622078}
   Process: {fileID: 114849375679229266}
@@ -162,7 +164,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
   m_Name: Prevent reset of the selection(Clone)
   m_EditorClassIdentifier: 
   Name: Prevent reset of the selection
@@ -418,7 +420,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9ecc8826b4348048bde030ae1b6fbf5, type: 3}
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
   m_Name: Prevent reset of the selection(Clone)
   m_EditorClassIdentifier: 
   Name: Prevent reset of the selection
