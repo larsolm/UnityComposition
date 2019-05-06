@@ -10,7 +10,7 @@
 #if UNITY_EDITOR
 			get => UnityEditor.EditorApplication.isPlayingOrWillChangePlaymode;
 #else
-			get => return true;
+			get => true;
 #endif
 		}
 	}

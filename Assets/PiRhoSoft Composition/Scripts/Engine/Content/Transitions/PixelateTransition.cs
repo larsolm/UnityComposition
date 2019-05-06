@@ -14,9 +14,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		private int _amount = 1;
 
-		void OnEnable()
+		protected override void OnEnable()
 		{
-			SetShader("PiRhoSoft/Composition/Shaders/Pixelate");
+			if (Shader == null)
+				Shader = Shader.Find("PiRhoSoft/Composition/Shaders/Pixelate");
+
+			base.OnEnable();
 		}
 
 		public override void Begin(TransitionPhase phase)

@@ -6,11 +6,15 @@ namespace PiRhoSoft.UtilityEngine
 	{
 		public const string _invalidPathWarning = "(URIP) Invalid Resource location: the {0} at path {1} should be beneath a folder called 'Resources' so it can be loaded at runtime";
 
+#pragma warning disable CS0414
+
 		private static string ResourcesFolder = "Resources/";
 		private static int FolderLength = "Resources/".Length;
 		private static int ExtensionLength = ".asset".Length;
 
-		[SerializeField] [DisableInInspector] private string _path;
+#pragma warning restore CS0414
+
+		[SerializeField] [DisableInInspector] private string _path = "";
 
 		public string Path => _path;
 

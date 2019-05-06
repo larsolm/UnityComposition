@@ -11,13 +11,11 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Interface/Menu")]
 	public class Menu : MonoBehaviour, IVariableStore
 	{
-		public Action<MenuItem> OnItemAdded;
-		public Action<MenuItem> OnItemRemoved;
-		public Action<MenuItem> OnItemMoved;
 		public Action<MenuItem> OnItemBlurred;
 		public Action<MenuItem> OnItemFocused;
 		public Action<MenuItem> OnItemSelected;
 		public Action OnCancelled;
+		public Action OnItemsChanged;
 
 		public List<MenuItem> Items { get; } = new List<MenuItem>();
 
@@ -77,14 +75,12 @@ namespace PiRhoSoft.CompositionEngine
 		internal void AddItem(MenuItem item)
 		{
 			Items.Add(item);
-			ItemAdded(item);
 			SetItemsDirty();
 		}
 
 		internal void RemoveItem(MenuItem item)
 		{
 			Items.Remove(item);
-			ItemRemoved(item);
 			SetItemsDirty();
 
 			if (item.Focused)
@@ -93,7 +89,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		internal void MoveItem(MenuItem item)
 		{
-			ItemMoved(item);
 			SetItemsDirty();
 		}
 
@@ -115,6 +110,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			_itemsDirty = false;
+			OnItemsChanged?.Invoke();
 		}
 
 		private void SetItemsDirty()
@@ -130,21 +126,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Virtual Interface
 
-		protected virtual void ItemAdded(MenuItem item)
-		{
-			OnItemAdded?.Invoke(item);
-		}
-
-		protected virtual void ItemRemoved(MenuItem item)
-		{
-			OnItemRemoved?.Invoke(item);
-		}
-
-		protected virtual void ItemMoved(MenuItem item)
-		{
-			OnItemMoved?.Invoke(item);
-		}
-		
 		protected virtual void ItemFocused(MenuItem item)
 		{
 			OnItemFocused?.Invoke(item);

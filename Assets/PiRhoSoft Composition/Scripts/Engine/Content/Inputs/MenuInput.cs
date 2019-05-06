@@ -81,9 +81,7 @@ namespace PiRhoSoft.CompositionEngine
 		void Awake()
 		{
 			_menu = GetComponent<Menu>();
-			_menu.OnItemAdded += OnItemAdded;
-			_menu.OnItemRemoved += OnItemRemoved;
-			_menu.OnItemMoved += OnItemMoved;
+			_menu.OnItemsChanged += RefreshLayout;
 
 			_shouldFocus = FocusOnLoad;
 		}
@@ -93,25 +91,6 @@ namespace PiRhoSoft.CompositionEngine
 			HandleButtons();
 			HandlePointer();
 		}
-
-		#region Items
-
-		private void OnItemAdded(MenuItem item)
-		{
-			RefreshLayout();
-		}
-
-		private void OnItemRemoved(MenuItem item)
-		{
-			RefreshLayout();
-		}
-
-		private void OnItemMoved(MenuItem item)
-		{
-			RefreshLayout();
-		}
-
-		#endregion
 
 		#region Input
 

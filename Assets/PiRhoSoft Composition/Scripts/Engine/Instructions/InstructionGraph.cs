@@ -212,10 +212,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private IEnumerator ProcessFrame(NodeFrame frame)
 		{
-			if (IsImmediate(frame.Node))
-				RunEnumerator(frame.Node, frame.Node.Run(this, _rootStore, frame.Iteration));
-			else
-				yield return frame.Node.Run(this, _rootStore, frame.Iteration);
+			yield return frame.Node.Run(this, _rootStore, frame.Iteration);
 		}
 
 #endif
