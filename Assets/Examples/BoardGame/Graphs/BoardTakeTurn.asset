@@ -462,7 +462,7 @@ MonoBehaviour:
       Text: scene
     - Type: 0
       Text: Message
-  WaitForCompletion: 1
+  WaitForCompletion: 0
   AutoHide: 0
   WaitTime: 0
   Message:
@@ -620,7 +620,7 @@ MonoBehaviour:
       Text: scene
     - Type: 0
       Text: Message
-  WaitForCompletion: 1
+  WaitForCompletion: 0
   AutoHide: 0
   WaitTime: 0
   Message:
@@ -648,7 +648,7 @@ MonoBehaviour:
       Text: scene
     - Type: 0
       Text: Message
-  WaitForCompletion: 1
+  WaitForCompletion: 0
   AutoHide: 0
   WaitTime: 0
   Message:
@@ -707,7 +707,7 @@ MonoBehaviour:
       Text: scene
     - Type: 0
       Text: Message
-  WaitForCompletion: 1
+  WaitForCompletion: 0
   AutoHide: 0
   WaitTime: 0
   Message:

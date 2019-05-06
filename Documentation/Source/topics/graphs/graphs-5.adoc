@@ -2,7 +2,7 @@
 
 ## Debugging
 
-Robust runtime debugging tools are provided to help find errors, profile performance, and inspect values of graphs while they are running. Place breakpoints on individual nodes using the red button on the left side of the Instruction Graph Window's toolbar. Execution will pause when a node with a break point is reached. Playback of the graph can then be controlled using the play, pause, step, and stop buttons image:playback-buttons.png[Playback Buttons]. Use the logging button image:logging-button.png[] to track flow of the graph in the console.
+Robust runtime debugging tools are provided to help find errors, profile performance, and inspect values of graphs while they are running. Place breakpoints on individual nodes using the red button on the left side of the Instruction Graph Window's toolbar. Execution will pause when a node with a break point is reached. Playback of the graph can then be controlled using the play, pause, step, and stop buttons image:playback-buttons.png[Playback Buttons]. Use the logging button image:logging-button.png[] to track flow of the graph in the console. Node connections and properties can all be edited at runtime.
 
 image::debugging.png[Debugging]
 
