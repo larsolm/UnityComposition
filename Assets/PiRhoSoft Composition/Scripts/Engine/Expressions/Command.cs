@@ -162,6 +162,9 @@ namespace PiRhoSoft.CompositionEngine
 				store.AddVariable(Parameters[i].Name, value);
 			}
 
+			store.AddVariable(CompositionManager.GlobalStoreName, VariableValue.Create(CompositionManager.Instance.GlobalStore));
+			store.AddVariable(CompositionManager.SceneStoreName, VariableValue.Create(CompositionManager.Instance.SceneStore));
+
 			var result = Expression.Evaluate(store);
 			ReleaseStore(store);
 			return result;

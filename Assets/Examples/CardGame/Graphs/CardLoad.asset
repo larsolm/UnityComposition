@@ -1,5 +1,125 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7208375029598702868
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: Set Card Size
+  m_EditorClassIdentifier: 
+  Name: Set Card Size
+  GraphPosition: {x: 1600, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114696056752831474}
+  Transform:
+    _variable: local.createdCard
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: createdCard
+  UseRelativePosition: 0
+  UseRelativeRotation: 0
+  UseRelativeScale: 0
+  TargetPosition:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 1
+    Reference:
+      _variable: global.cardSize
+      _tokens:
+      - Type: 0
+        Text: global
+      - Type: 0
+        Text: cardSize
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 0
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+--- !u!114 &-6407850337588172350
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Compute Size
+  m_EditorClassIdentifier: 
+  Name: Compute Size
+  GraphPosition: {x: 768, y: 89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 114309927829230756}
+  Expression:
+    _statement: 'local.availableHeight = (local.cameraHeight - 1) * 0.5
+
+      local.availableWidth = local.cameraHeight * local.cameraAspect / 6.5
+
+      local.useWidth = local.availableWidth * 1.5 < local.availableHeight
+
+
+      local.height = (local.useWidth ? local.availableWidth * 1.5 : local.availableHeight)
+      * 4
+
+      local.width = (local.useWidth ? local.availableWidth : local.availableHeight
+      * 2 / 3) * 13
+
+
+      global.cardXAdvance = local.width / 13.0
+
+      local.spacing = global.cardXAdvance * 0.2
+
+      local.cardWidth = global.cardXAdvance - local.spacing
+
+      local.cardHeight = local.cardWidth * 1.5
+
+      global.cardSize = Vector3(local.cardWidth, local.cardHeight, 0)
+
+      global.cardXOffset = (local.cardWidth - local.width + local.spacing) * 0.5
+
+      global.cardYOffset = (local.cardHeight - local.height + local.spacing) * 0.5
+
+      global.cardYAdvance = local.cardHeight + local.spacing'
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -43,6 +163,10 @@ MonoBehaviour:
     - {fileID: 114560535190961996}
     - {fileID: 114673358792983352}
     - {fileID: 114764902459509120}
+    - {fileID: -6407850337588172350}
+    - {fileID: 4952891770008714630}
+    - {fileID: 4656647237025211028}
+    - {fileID: -7208375029598702868}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114169463803128364}
   Process: {fileID: 114902517910671770}
@@ -117,7 +241,7 @@ MonoBehaviour:
   m_Name: Set Card Binding
   m_EditorClassIdentifier: 
   Name: Set Card Binding
-  GraphPosition: {x: 1177.6, y: 115.200005}
+  GraphPosition: {x: 1728, y: 153.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Object:
@@ -165,7 +289,7 @@ MonoBehaviour:
   m_Name: Iterate Suits
   m_EditorClassIdentifier: 
   Name: Iterate Suits
-  GraphPosition: {x: 640, y: -38.4}
+  GraphPosition: {x: 1088, y: -12.8}
   IsBreakpoint: 0
   Container:
     _variable: global.Cards.Suits
@@ -204,7 +328,7 @@ MonoBehaviour:
   m_Name: Iterate Ranks
   m_EditorClassIdentifier: 
   Name: Iterate Ranks
-  GraphPosition: {x: 704, y: 25.6}
+  GraphPosition: {x: 1152, y: 51.2}
   IsBreakpoint: 0
   Container:
     _variable: global.Cards.Ranks
@@ -365,9 +489,9 @@ MonoBehaviour:
   m_Name: Create Card
   m_EditorClassIdentifier: 
   Name: Create Card
-  GraphPosition: {x: 1049.6, y: -12.8}
+  GraphPosition: {x: 1536, y: -38.4}
   IsBreakpoint: 0
-  Next: {fileID: 114696056752831474}
+  Next: {fileID: -7208375029598702868}
   Prefab:
     Type: 0
     Reference:
@@ -443,7 +567,7 @@ MonoBehaviour:
   m_Name: Set Card Data
   m_EditorClassIdentifier: 
   Name: Set Card Data
-  GraphPosition: {x: 1113.6, y: 51.2}
+  GraphPosition: {x: 1664, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 114233220627467950}
   Expression:
@@ -472,7 +596,7 @@ MonoBehaviour:
   m_Name: Set Name
   m_EditorClassIdentifier: 
   Name: Set Name
-  GraphPosition: {x: 998.4, y: -76.8}
+  GraphPosition: {x: 1472, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114675892718543162}
   Expression:
@@ -531,7 +655,7 @@ MonoBehaviour:
   Name: Reset Load
   GraphPosition: {x: 320, y: 25.6}
   IsBreakpoint: 0
-  Next: {fileID: 114309927829230756}
+  Next: {fileID: 4656647237025211028}
   Object:
     _variable: global.Deck
     _tokens:
@@ -540,3 +664,75 @@ MonoBehaviour:
     - Type: 0
       Text: Deck
   Tag: Load
+--- !u!114 &4656647237025211028
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
+  m_Name: Get Camera Height
+  m_EditorClassIdentifier: 
+  Name: Get Camera Height
+  GraphPosition: {x: 640, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 4952891770008714630}
+  Target:
+    Type: 1
+    Reference:
+      _variable: scene.Main Camera
+      _tokens:
+      - Type: 0
+        Text: scene
+      - Type: 0
+        Text: Main Camera
+    Value: {fileID: 0}
+  Output:
+    _variable: local.cameraHeight
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: cameraHeight
+  _targetTypeName: UnityEngine.Camera, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  _propertyName: orthographicSize
+--- !u!114 &4952891770008714630
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
+  m_Name: Get Aspect Ratio
+  m_EditorClassIdentifier: 
+  Name: Get Aspect Ratio
+  GraphPosition: {x: 704, y: 25.6}
+  IsBreakpoint: 0
+  Next: {fileID: -6407850337588172350}
+  Target:
+    Type: 1
+    Reference:
+      _variable: scene.Main Camera
+      _tokens:
+      - Type: 0
+        Text: scene
+      - Type: 0
+        Text: Main Camera
+    Value: {fileID: 0}
+  Output:
+    _variable: local.cameraAspect
+    _tokens:
+    - Type: 0
+      Text: local
+    - Type: 0
+      Text: cameraAspect
+  _targetTypeName: UnityEngine.Camera, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  _propertyName: aspect
