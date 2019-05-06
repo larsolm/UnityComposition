@@ -16,23 +16,22 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class Transition : ScriptableObject
 	{
-		private const string _missingShaderError = "(CTMS) Failed to load Transition: shader {0} not found";
+		private const string _missingShaderError = "(CTMS) Failed to load Transition {0}: the shader has not been set";
 
+		[Tooltip("The shader to use to render the transition")] public Shader Shader;
 		[Tooltip("The duration of the transition")] public float Duration = 1.0f;
 
 		protected Material Material { get; private set; }
 
-		protected void SetShader(string name)
+		protected virtual void OnEnable()
 		{
-			var shader = Shader.Find(name);
-
-			if (shader != null)
-				Material = new Material(shader);
+			if (Shader)
+				Material = new Material(Shader);
 			else if (ApplicationHelper.IsPlaying)
 				Debug.LogErrorFormat(this, _missingShaderError, name);
 		}
 
-		void OnDisable()
+		protected virtual void OnDisable()
 		{
 			if (Material != null)
 				DestroyImmediate(Material);

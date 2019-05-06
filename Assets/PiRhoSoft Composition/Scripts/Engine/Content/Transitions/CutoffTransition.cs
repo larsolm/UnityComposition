@@ -26,9 +26,12 @@ namespace PiRhoSoft.CompositionEngine
 		private bool _distort = true;
 		private bool _updateDistort = true;
 
-		void OnEnable()
+		protected override void OnEnable()
 		{
-			SetShader("PiRhoSoft/Composition/Shaders/Cutoff");
+			if (Shader == null)
+				Shader = Shader.Find("PiRhoSoft/Composition/Shaders/Cutoff");
+
+			base.OnEnable();
 			Setup();
 		}
 
@@ -93,11 +96,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override sealed void Update()
 		{
-			if (_updateTexture) Material.SetTexture(_textureID, _texture);
-			if (_updateDistort) Material.SetInt(_distortId, _distort ? 1 : 0);
-			if (_updateColor) Material.SetColor(_colorId, _color);
-			if (_updateCutoff) Material.SetFloat(_cutoffId, _cutoff);
-			if (_updateFade) Material.SetFloat(_fadeId, _fade);
+			if (Material != null)
+			{
+				if (_updateTexture) Material.SetTexture(_textureID, _texture);
+				if (_updateDistort) Material.SetInt(_distortId, _distort ? 1 : 0);
+				if (_updateColor) Material.SetColor(_colorId, _color);
+				if (_updateCutoff) Material.SetFloat(_cutoffId, _cutoff);
+				if (_updateFade) Material.SetFloat(_fadeId, _fade);
+			}
 
 			_updateTexture = false;
 			_updateDistort = false;
