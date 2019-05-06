@@ -43,6 +43,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			Activate();
 			StopAllCoroutines();
+			CleanupItems();
 			CreateItems(variables, items);
 			Initialize(isSelectionRequired, resetIndex);
 			StartCoroutine(Run_());
@@ -92,9 +93,13 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Item Management
 
-		protected virtual Transform GetItemParent()
+		private void CleanupItems()
 		{
-			return transform;
+			foreach (var item in _menu.Items)
+			{
+				if (item.Generated)
+					Destroy(item.gameObject);
+			}
 		}
 
 		private void CreateItems(IVariableStore variables, IEnumerable<MenuItemTemplate> items)
@@ -204,6 +209,11 @@ namespace PiRhoSoft.CompositionEngine
 		{
 		}
 
+		protected virtual Transform GetItemParent()
+		{
+			return transform;
+		}
+
 		protected virtual IEnumerator Run()
 		{
 			while (!IsClosing)
@@ -212,11 +222,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void Teardown()
 		{
-			foreach (var item in _menu.Items)
-			{
-				if (item.Generated)
-					Destroy(item.gameObject);
-			}
+			CleanupItems();
 		}
 
 		#endregion

@@ -29,11 +29,11 @@ MonoBehaviour:
   _nodes:
     _items:
     - {fileID: 114246963856547910}
-    - {fileID: 0}
     - {fileID: 114862197161052028}
     - {fileID: 114896560128958474}
+    - {fileID: 114440959625079054}
   StartPosition: {x: 0, y: 0}
-  Process: {fileID: 0}
+  Process: {fileID: 114440959625079054}
 --- !u!114 &114246963856547910
 MonoBehaviour:
   m_ObjectHideFlags: 1
