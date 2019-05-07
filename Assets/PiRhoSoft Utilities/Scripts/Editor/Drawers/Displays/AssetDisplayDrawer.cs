@@ -105,7 +105,7 @@ namespace PiRhoSoft.UtilityEditor
 			{
 				var obj = DragAndDrop.objectReferences[0];
 
-				if (assetType.IsAssignableFrom(obj.GetType()))
+				if (obj != null && assetType.IsAssignableFrom(obj.GetType()))
 				{
 					if (Event.current.type == EventType.DragUpdated)
 					{

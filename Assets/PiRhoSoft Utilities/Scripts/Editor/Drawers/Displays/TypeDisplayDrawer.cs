@@ -79,20 +79,24 @@ namespace PiRhoSoft.UtilityEditor
 
 			if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
 			{
-				var drag = DragAndDrop.objectReferences[0].GetType();
-
-				if (rootType.IsAssignableFrom(drag))
+				var obj = DragAndDrop.objectReferences[0];
+				if (obj != null)
 				{
-					if (Event.current.type == EventType.DragUpdated)
-					{
-						DragAndDrop.visualMode = DragAndDropVisualMode.Link;
-						Event.current.Use();
-					}
+					var drag = DragAndDrop.objectReferences[0].GetType();
 
-					if (Event.current.type == EventType.DragPerform)
+					if (rootType.IsAssignableFrom(drag))
 					{
-						DragAndDrop.AcceptDrag();
-						return drag;
+						if (Event.current.type == EventType.DragUpdated)
+						{
+							DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+							Event.current.Use();
+						}
+
+						if (Event.current.type == EventType.DragPerform)
+						{
+							DragAndDrop.AcceptDrag();
+							return drag;
+						}
 					}
 				}
 			}

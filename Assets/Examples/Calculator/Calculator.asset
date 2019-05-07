@@ -1,5 +1,20 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4263988743012485935
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbf36d44c8307646ae6b4c67ca8b89d, type: 3}
+  m_Name: Break
+  m_EditorClassIdentifier: 
+  Name: Break
+  GraphPosition: {x: 1228.8, y: 460.80002}
+  IsBreakpoint: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -51,7 +66,7 @@ MonoBehaviour:
     - {fileID: 114268825771250320}
     - {fileID: 114817616350442620}
     - {fileID: 114986298978509238}
-    - {fileID: 114478230851987404}
+    - {fileID: -4263988743012485935}
   StartPosition: {x: 512, y: 384}
   Process: {fileID: 114878619638461498}
 --- !u!114 &114003219145756106
@@ -71,11 +86,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 7;
+      global.Display += 7;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114074590478759008
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -93,7 +108,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114986298978509238}
   Expression:
-    _statement: 'Display = Memory + Display;
+    _statement: 'global.Display = global.Memory + global.Display;
 
 '
 --- !u!114 &114160120226984220
@@ -134,11 +149,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 3;
+      global.Display += 3;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114268825771250320
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -156,7 +171,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114986298978509238}
   Expression:
-    _statement: 'Display = Memory / Display;
+    _statement: 'global.Display = global.Memory / global.Display;
 
 '
 --- !u!114 &114273391068712920
@@ -176,11 +191,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 6;
+      global.Display += 6;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114423297059122700
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -198,11 +213,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 5;
+      global.Display += 5;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114471882883978834
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -220,39 +235,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 9;
+      global.Display += 9;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
---- !u!114 &114478230851987404
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3530830e117b2949a9ed9bb41115c88, type: 3}
-  m_Name: Set Bindings
-  m_EditorClassIdentifier: 
-  Name: Set Bindings
-  GraphPosition: {x: 793.60004, y: 243.2}
-  IsBreakpoint: 0
-  Next: {fileID: 114160120226984220}
-  Object:
-    _variable: scene.Calculator
-    _tokens:
-    - Type: 0
-      Text: scene
-    - Type: 0
-      Text: Calculator
-  Binding:
-    _variable: local
-    _tokens:
-    - Type: 0
-      Text: local
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114504027795530736
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -270,13 +257,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
+    _statement: 'global.Memory = global.Operation == "Equals" ? global.Answer : global.Display;
 
-      Display = 0;
+      global.Display = 0;
 
-      Answer = 0;
+      global.Answer = 0;
 
-      Operation = "Multiply";'
+      global.Operation = "Multiply";'
 --- !u!114 &114574101557959856
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -294,11 +281,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 1;
+      global.Display += 1;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114706579226399194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -316,13 +303,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
+    _statement: 'global.Memory = global.Operation == "Equals" ? global.Answer : global.Display;
 
-      Display = 0;
+      global.Display = 0;
 
-      Answer = 0;
+      global.Answer = 0;
 
-      Operation = "Minus";'
+      global.Operation = "Minus";'
 --- !u!114 &114706923481939690
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -340,7 +327,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114986298978509238}
   Expression:
-    _statement: 'Display = Memory - Display;
+    _statement: 'global.Display = global.Memory - global.Display;
 
 '
 --- !u!114 &114749435555622604
@@ -359,7 +346,7 @@ MonoBehaviour:
   GraphPosition: {x: 1689.6, y: 614.4}
   IsBreakpoint: 0
   Switch:
-    _statement: Operation
+    _statement: global.Operation
   Outputs:
     _keys:
     - Plus
@@ -389,11 +376,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 2;
+      global.Display += 2;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114817616350442620
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -411,7 +398,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 114986298978509238}
   Expression:
-    _statement: Display = Display * Memory;
+    _statement: global.Display = global.Display * global.Memory;
 --- !u!114 &114848006768581354
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -429,9 +416,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114860816399287706
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -449,13 +436,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
+    _statement: 'global.Memory = global.Operation == "Equals" ? global.Answer : global.Display;
 
-      Display = 0;
+      global.Display = 0;
 
-      Answer = 0;
+      global.Answer = 0;
 
-      Operation = "Divide";'
+      global.Operation = "Divide";'
 --- !u!114 &114878619638461498
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -469,17 +456,17 @@ MonoBehaviour:
   m_Name: Initialize
   m_EditorClassIdentifier: 
   Name: Initialize
-  GraphPosition: {x: 819.2, y: 384}
+  GraphPosition: {x: 832, y: 358.4}
   IsBreakpoint: 0
-  Next: {fileID: 114478230851987404}
+  Next: {fileID: 114160120226984220}
   Expression:
-    _statement: 'Display = 0;
+    _statement: 'global.Display = 0;
 
-      Memory = 0;
+      global.Memory = 0;
 
-      Answer = 0;
+      global.Answer = 0;
 
-      Operation = "";'
+      global.Operation = "";'
 --- !u!114 &114880064803500324
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -497,11 +484,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 4;
+      global.Display += 4;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114886018136812124
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -599,6 +586,11 @@ MonoBehaviour:
       Value: 0
       Key: 0
       OnSelected: {fileID: 114878619638461498}
+    - Type: 1
+      Name: Jump
+      Value: 0
+      Key: 0
+      OnSelected: {fileID: -4263988743012485935}
 --- !u!114 &114955808036074194
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -616,11 +608,11 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Display *= 10;
+    _statement: 'global.Display *= 10;
 
-      Display += 8;
+      global.Display += 8;
 
-      Operation = Operation == "Equals" ? "" : Operation;'
+      global.Operation = global.Operation == "Equals" ? "" : global.Operation;'
 --- !u!114 &114964897600493096
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -638,13 +630,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Memory = Operation == "Equals" ? Answer : Display;
+    _statement: 'global.Memory = global.Operation == "Equals" ? global.Answer : global.Display;
 
-      Display = 0;
+      global.Display = 0;
 
-      Answer = 0;
+      global.Answer = 0;
 
-      Operation = "Plus";'
+      global.Operation = "Plus";'
 --- !u!114 &114986298978509238
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -662,10 +654,10 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
-    _statement: 'Memory = Display;
+    _statement: 'global.Memory = global.Display;
 
-      Answer = Display;
+      global.Answer = global.Display;
 
-      Display = 0;
+      global.Display = 0;
 
-      Operation = "Equals";'
+      global.Operation = "Equals";'

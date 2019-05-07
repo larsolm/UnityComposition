@@ -45,6 +45,10 @@ void Break()::
 
 Call this from a <<reference/instruction-graph-node.html,node>> to tell the graph to return to the closest <<reference/instruction-graph-node.html,node>> in the call stack that is an <<reference/i-loop-node.html,ILoopNode>>. The <<reference/break-node.html,BreakNode>> calls this.
 
+void BreakAll()::
+
+Call this from a <<reference/instruction-graph-node.html,node>> to tell the graph to stop running is current branch.
+
 ### Protected Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _root_, string _source_)::

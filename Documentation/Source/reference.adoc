@@ -176,6 +176,10 @@ include::reference/enum-variable-constraint.adoc[]
 
 <<<
 
+include::reference/exit-node.adoc[]
+
+<<<
+
 include::reference/expression.adoc[]
 
 <<<

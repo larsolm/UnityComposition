@@ -1,0 +1,13 @@
+[#reference/exit-node]
+
+## ExitNode
+
+PiRhoSoft.CompositionEngine.ExitNode : <<reference/instruction-graph-node.html,InstructionGraphNode>>
+
+### Description
+
+Add this to an <<reference/instruction-graph.html,InstructionGraph>> to force the currently running branch of the graph to exit and stop running.
+
+ifdef::backend-multipage_html5[]
+<<manual/exit-node.html,Manual>>
+endif::[]

@@ -6,8 +6,6 @@ Message Controls are an <<manual/interface-control.html,Interface Control>> used
 
 ### Message Node
 
-
-
 ### Message
 
 ### Input
