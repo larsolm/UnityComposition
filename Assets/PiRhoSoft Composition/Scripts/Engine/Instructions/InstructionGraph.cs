@@ -19,6 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 		private InstructionStore _rootStore;
 		private NodeFrame _nextNode;
 		private bool _shouldBreak = false;
+		private bool _shouldExit = false;
 
 		public InstructionGraphNodeList Nodes => _nodes; // _nodes is private with a getter so it isn't found by node data reflection
 
@@ -64,6 +65,12 @@ namespace PiRhoSoft.CompositionEngine
 					HandleBreak();
 					_shouldBreak = false;
 				}
+
+				if (_shouldExit)
+				{
+					_shouldExit = false;
+					break;
+				}
 			}
 
 			_callstack.Clear();
@@ -100,6 +107,11 @@ namespace PiRhoSoft.CompositionEngine
 		public void Break()
 		{
 			_shouldBreak = true;
+		}
+
+		public void BreakAll()
+		{
+			_shouldExit = true;
 		}
 
 		#endregion

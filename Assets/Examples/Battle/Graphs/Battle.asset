@@ -1,5 +1,63 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3143270852829160621
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6e22a1cb544f534ab3d5863df979746, type: 3}
+  m_Name: Load Menu
+  m_EditorClassIdentifier: 
+  Name: Load Menu
+  GraphPosition: {x: 192, y: 204.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Instruction:
+    _instruction: {fileID: 11400000, guid: a2c649dc4e71f1c48945160205dcada5, type: 2}
+    _inputs: []
+    _outputs: []
+  Reference:
+    _variable: 
+    _tokens: []
+  Context:
+    Type: 1
+    Reference:
+      _variable: context
+      _tokens:
+      - Type: 0
+        Text: context
+    Definition:
+      _type: 0
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    _data: AQAAAAAA
+    _objects: []
+  WaitForCompletion: 0
+--- !u!114 &-2730367599166077760
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6913aafcbf119034c86fa29c7be61eb6, type: 3}
+  m_Name: ExitNode
+  m_EditorClassIdentifier: 
+  Name: ExitNode
+  GraphPosition: {x: 2624, y: -89.6}
+  IsBreakpoint: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -70,6 +128,8 @@ MonoBehaviour:
     - {fileID: 114684752671933816}
     - {fileID: 114729464376258626}
     - {fileID: 114389460248260116}
+    - {fileID: -3143270852829160621}
+    - {fileID: -2730367599166077760}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114016950435173752}
   Process: {fileID: 114364025646214274}
@@ -399,6 +459,16 @@ MonoBehaviour:
       Label: Items
       Expand: 0
       OnSelected: {fileID: 114112693297798952}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 1
+      Name: 
+      Template: {fileID: 6679602720640942256, guid: 90db91e797312cd42825ad07049ff63c,
+        type: 3}
+      Label: Exit
+      Expand: 0
+      OnSelected: {fileID: -2730367599166077760}
 --- !u!114 &114192279811104960
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1093,7 +1163,7 @@ MonoBehaviour:
   Name: Fade Out
   GraphPosition: {x: 128, y: 140.8}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: -3143270852829160621}
   Transition:
     Type: 0
     Reference:

@@ -53,6 +53,8 @@ MonoBehaviour:
     - {fileID: 114633494972163274}
     - {fileID: 114268554473494930}
     - {fileID: 114477289048704104}
+    - {fileID: 6335642870118734751}
+    - {fileID: 8570242512394174742}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114098421550622078}
   Process: {fileID: 114849375679229266}
@@ -100,7 +102,7 @@ MonoBehaviour:
   Name: Disable Player
   GraphPosition: {x: 153.6, y: -89.6}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 6335642870118734751}
   Target:
     _variable: global.Player
     _tokens:
@@ -722,7 +724,7 @@ MonoBehaviour:
   Name: Enable Player
   GraphPosition: {x: 153.6, y: 115.200005}
   IsBreakpoint: 0
-  Next: {fileID: 0}
+  Next: {fileID: 8570242512394174742}
   Target:
     _variable: global.Player
     _tokens:
@@ -839,3 +841,49 @@ MonoBehaviour:
   WaitTime: 0
   Message:
     Text: 1 {selectedItem.Name}, that will cost ${selectedItem.Cost}. Are you sure?
+--- !u!114 &6335642870118734751
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f47672ed283bf894eb389c89116b6283, type: 3}
+  m_Name: Disable Menu
+  m_EditorClassIdentifier: 
+  Name: Disable Menu
+  GraphPosition: {x: 307.2, y: -166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: scene.Menu
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Menu
+--- !u!114 &8570242512394174742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fc0bdfc658e80a40a86aea427f171b1, type: 3}
+  m_Name: Enable Menu
+  m_EditorClassIdentifier: 
+  Name: Enable Menu
+  GraphPosition: {x: 307.2, y: 192}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: scene.Menu
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Menu
