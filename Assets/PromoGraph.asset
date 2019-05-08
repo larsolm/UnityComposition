@@ -1,0 +1,117 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3380511837906188353
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dcf98feb000c3499c4001be6664dc3, type: 3}
+  m_Name: Make Connections
+  m_EditorClassIdentifier: 
+  Name: Make Connections
+  GraphPosition: {x: 396.80002, y: 38.4}
+  IsBreakpoint: 0
+  Connections:
+    _items:
+    - Name: 
+      Node: {fileID: -342174240845245717}
+  DisplayColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+--- !u!114 &-2636075477468583659
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dcf98feb000c3499c4001be6664dc3, type: 3}
+  m_Name: Make Graph
+  m_EditorClassIdentifier: 
+  Name: Make Graph
+  GraphPosition: {x: 217.6, y: -115.200005}
+  IsBreakpoint: 0
+  Connections:
+    _items:
+    - Name: 
+      Node: {fileID: 4035959915429119235}
+  DisplayColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+--- !u!114 &-342174240845245717
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dcf98feb000c3499c4001be6664dc3, type: 3}
+  m_Name: Have Game
+  m_EditorClassIdentifier: 
+  Name: Have Game
+  GraphPosition: {x: 627.2, y: -128}
+  IsBreakpoint: 0
+  Connections:
+    _items: []
+  DisplayColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ab0e347895644c2418802cf655ca9c98, type: 3}
+  m_Name: MockupGraph
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: -2636075477468583659}
+    - {fileID: 4035959915429119235}
+    - {fileID: -3380511837906188353}
+    - {fileID: -342174240845245717}
+  StartPosition: {x: 12.8, y: -12.8}
+  EntryPoints:
+    _items:
+    - Name: Start
+      Node: {fileID: -2636075477468583659}
+--- !u!114 &4035959915429119235
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73dcf98feb000c3499c4001be6664dc3, type: 3}
+  m_Name: Make Nodes
+  m_EditorClassIdentifier: 
+  Name: Make Nodes
+  GraphPosition: {x: 332.80002, y: -38.4}
+  IsBreakpoint: 0
+  Connections:
+    _items:
+    - Name: 
+      Node: {fileID: -3380511837906188353}
+  DisplayColor: {r: 0.35, g: 0.35, b: 0.35, a: 1}

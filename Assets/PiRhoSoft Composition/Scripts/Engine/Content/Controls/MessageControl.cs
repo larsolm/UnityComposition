@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public bool IsRunning { get; private set; } = false;
 
-		protected bool IsAdvancing { get; private set; } = false;
+		protected bool IsAdvancing { get; set; } = false;
 
 		public void Show(string text)
 		{
