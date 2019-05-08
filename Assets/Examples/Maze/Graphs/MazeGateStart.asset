@@ -38,112 +38,11 @@ MonoBehaviour:
     _items: []
   _nodes:
     _items:
-    - {fileID: 114079667091725808}
-    - {fileID: 114620740042104694}
     - {fileID: 114844542458262784}
-    - {fileID: 114721906016128466}
+    - {fileID: 4496683696549136755}
+    - {fileID: 6424861838356257627}
   StartPosition: {x: 0, y: 0}
-  Process: {fileID: 114079667091725808}
---- !u!114 &114079667091725808
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Store Close Position
-  m_EditorClassIdentifier: 
-  Name: Store Close Position
-  GraphPosition: {x: 307.2, y: -64}
-  IsBreakpoint: 0
-  Next: {fileID: 114620740042104694}
-  Target:
-    Type: 1
-    Reference:
-      _variable: gate
-      _tokens:
-      - Type: 0
-        Text: gate
-    Value: {fileID: 0}
-  Output:
-    _variable: gate.ClosePosition
-    _tokens:
-    - Type: 0
-      Text: gate
-    - Type: 0
-      Text: ClosePosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
---- !u!114 &114620740042104694
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Store Open Position
-  m_EditorClassIdentifier: 
-  Name: Store Open Position
-  GraphPosition: {x: 307.2, y: 25.6}
-  IsBreakpoint: 0
-  Next: {fileID: 114844542458262784}
-  Expression:
-    _statement: 'gate.OpenPosition = Vector3(gate.ClosePosition.x + 5 * (input.left
-      ? -1 : 1), gate.ClosePosition.y, gate.ClosePosition.z);'
---- !u!114 &114721906016128466
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19fe84203620ae1459b63160dacc8610, type: 3}
-  m_Name: Move To Open
-  m_EditorClassIdentifier: 
-  Name: Move To Open
-  GraphPosition: {x: 947.2, y: -12.8}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Target:
-    Type: 1
-    Reference:
-      _variable: gate
-      _tokens:
-      - Type: 0
-        Text: gate
-    Value: {fileID: 0}
-  Value:
-    Type: 1
-    Reference:
-      _variable: gate.OpenPosition
-      _tokens:
-      - Type: 0
-        Text: gate
-      - Type: 0
-        Text: OpenPosition
-    Definition:
-      _type: 9
-      _constraint: 
-      _objects: []
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 1
-      _isConstraintLocked: 0
-    _data: AQAJAAAAAAAAAAAAAAAAAAAA
-    _objects: []
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
+  Process: {fileID: 6424861838356257627}
 --- !u!114 &114844542458262784
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -157,9 +56,48 @@ MonoBehaviour:
   m_Name: Is Open
   m_EditorClassIdentifier: 
   Name: Is Open
-  GraphPosition: {x: 627.2, y: -25.6}
+  GraphPosition: {x: 640, y: -12.8}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114721906016128466}
+  OnTrue: {fileID: 4496683696549136755}
   OnFalse: {fileID: 0}
   Condition:
     _statement: gate.Open
+--- !u!114 &4496683696549136755
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Set Position
+  m_EditorClassIdentifier: 
+  Name: Set Position
+  GraphPosition: {x: 947.2, y: 0}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: gate as Transform.position = gate.OpenPosition
+--- !u!114 &6424861838356257627
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Get Positions
+  m_EditorClassIdentifier: 
+  Name: Get Positions
+  GraphPosition: {x: 320, y: -0}
+  IsBreakpoint: 0
+  Next: {fileID: 114844542458262784}
+  Expression:
+    _statement: 'gate.ClosePosition = gate as Transform.position
+
+      gate.OpenPosition = Vector3(gate.ClosePosition.x + 5 * (input.left ? -1 : 1),
+      gate.ClosePosition.y, gate.ClosePosition.z);'

@@ -32,8 +32,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		private Getter _getter;
-
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (ResolveObject(variables, Target, out var target))
@@ -42,14 +40,15 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (cast && TargetType.IsAssignableFrom(cast.GetType()))
 				{
-					if (_getter != null)
+					if (Property != null)
 					{
-						var value = _getter.Get(cast);
+						var obj = Property.GetValue(cast);
+						var value = VariableValue.CreateValue(obj);
 						Assign(variables, Output, value);
 					}
 					else if (Field != null)
 					{
-						var obj = Field?.GetValue(cast);
+						var obj = Field.GetValue(cast);
 						var value = VariableValue.CreateValue(obj);
 						Assign(variables, Output, value);
 					}
@@ -77,9 +76,6 @@ namespace PiRhoSoft.CompositionEngine
 				{
 					Field = TargetType.GetField(_propertyName);
 					Property = TargetType.GetProperty(_propertyName);
-
-					if (Property != null)
-						_getter = Getter.Create(TargetType, Property);
 				}
 			}
 		}

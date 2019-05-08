@@ -63,7 +63,6 @@ MonoBehaviour:
     _items:
     - {fileID: 114295758739278524}
     - {fileID: 114713345150838420}
-    - {fileID: 114800223129982834}
     - {fileID: 114432394057212114}
     - {fileID: 114438301544111286}
     - {fileID: 114117616305717732}
@@ -110,7 +109,7 @@ MonoBehaviour:
   m_Name: Yield
   m_EditorClassIdentifier: 
   Name: Yield
-  GraphPosition: {x: 2240, y: -12.8}
+  GraphPosition: {x: 1920, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 114749951981520494}
 --- !u!114 &114295758739278524
@@ -153,7 +152,7 @@ MonoBehaviour:
   Name: Update Position
   GraphPosition: {x: 1600, y: -12.8}
   IsBreakpoint: 0
-  Next: {fileID: 114800223129982834}
+  Next: {fileID: 114117616305717732}
   Expression:
     _statement: 'local.cardPosition = MoveCard(local.card, local.row, local.column)
 
@@ -267,7 +266,7 @@ MonoBehaviour:
   m_Name: Check Column
   m_EditorClassIdentifier: 
   Name: Check Column
-  GraphPosition: {x: 2560, y: -25.6}
+  GraphPosition: {x: 2240, y: -25.6}
   IsBreakpoint: 0
   OnTrue: {fileID: 114905633981755912}
   OnFalse: {fileID: 0}
@@ -293,53 +292,6 @@ MonoBehaviour:
     _statement: 'global.State.Processing -= 1
 
       global.State.Shuffles -= 1'
---- !u!114 &114800223129982834
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19fe84203620ae1459b63160dacc8610, type: 3}
-  m_Name: Set Property
-  m_EditorClassIdentifier: 
-  Name: Set Property
-  GraphPosition: {x: 1920, y: -12.8}
-  IsBreakpoint: 0
-  Next: {fileID: 114117616305717732}
-  Target:
-    Type: 1
-    Reference:
-      _variable: card
-      _tokens:
-      - Type: 0
-        Text: card
-    Value: {fileID: 0}
-  Value:
-    Type: 1
-    Reference:
-      _variable: local.cardPosition
-      _tokens:
-      - Type: 0
-        Text: local
-      - Type: 0
-        Text: cardPosition
-    Definition:
-      _type: 9
-      _constraint: 
-      _objects: []
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 1
-      _isConstraintLocked: 0
-    _data: AQAJAAAAAAAAAAAAAAAAAAAA
-    _objects: []
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114828798773068104
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -398,7 +350,7 @@ MonoBehaviour:
   m_Name: Next Row
   m_EditorClassIdentifier: 
   Name: Next Row
-  GraphPosition: {x: 2880, y: -12.8}
+  GraphPosition: {x: 2560, y: -12.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:

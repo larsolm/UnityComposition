@@ -1,5 +1,25 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7958041883700741539
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Get Positions
+  m_EditorClassIdentifier: 
+  Name: Get Positions
+  GraphPosition: {x: 640, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114333688614890142}
+  Expression:
+    _statement: 'startPosition = fighter as Transform.position
+
+      targetPosition = fighter.Pool.Target as Transform.position'
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -30,14 +50,13 @@ MonoBehaviour:
     _items:
     - {fileID: 114843694311622104}
     - {fileID: 114333688614890142}
-    - {fileID: 114853674139064338}
     - {fileID: 114394662788877812}
     - {fileID: 114852501960501228}
     - {fileID: 114696895779975292}
     - {fileID: 114068179680205262}
-    - {fileID: 114182749721879712}
     - {fileID: 114430784282294890}
     - {fileID: 114786529422199906}
+    - {fileID: -7958041883700741539}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114843694311622104}
 --- !u!114 &114068179680205262
@@ -68,38 +87,6 @@ MonoBehaviour:
   WaitTime: 0
   Message:
     Text: '{damage} damage!'
---- !u!114 &114182749721879712
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Store Start Position
-  m_EditorClassIdentifier: 
-  Name: Store Start Position
-  GraphPosition: {x: 652.8, y: -102.4}
-  IsBreakpoint: 0
-  Next: {fileID: 114853674139064338}
-  Target:
-    Type: 1
-    Reference:
-      _variable: fighter
-      _tokens:
-      - Type: 0
-        Text: fighter
-    Value: {fileID: 0}
-  Output:
-    _variable: startPosition
-    _tokens:
-    - Type: 0
-      Text: startPosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114333688614890142
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -113,7 +100,7 @@ MonoBehaviour:
   m_Name: Move to Target
   m_EditorClassIdentifier: 
   Name: Move to Target
-  GraphPosition: {x: 652.8, y: 51.2}
+  GraphPosition: {x: 640, y: 38.4}
   IsBreakpoint: 0
   Next: {fileID: 114394662788877812}
   Transform:
@@ -364,7 +351,7 @@ MonoBehaviour:
   Name: Scratch Message
   GraphPosition: {x: 320, y: 0}
   IsBreakpoint: 0
-  Next: {fileID: 114182749721879712}
+  Next: {fileID: -7958041883700741539}
   Control:
     _variable: scene.Message
     _tokens:
@@ -406,39 +393,3 @@ MonoBehaviour:
       Text: Display
   Group: HP
   WaitForCompletion: 1
---- !u!114 &114853674139064338
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Store Target Position
-  m_EditorClassIdentifier: 
-  Name: Store Target Position
-  GraphPosition: {x: 652.8, y: -25.6}
-  IsBreakpoint: 0
-  Next: {fileID: 114333688614890142}
-  Target:
-    Type: 1
-    Reference:
-      _variable: fighter.Pool.Target
-      _tokens:
-      - Type: 0
-        Text: fighter
-      - Type: 0
-        Text: Pool
-      - Type: 0
-        Text: Target
-    Value: {fileID: 0}
-  Output:
-    _variable: targetPosition
-    _tokens:
-    - Type: 0
-      Text: targetPosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
