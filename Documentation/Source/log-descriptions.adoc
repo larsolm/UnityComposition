@@ -183,18 +183,6 @@ CIMMV:: Unable to set text on message '{0}': the variable '{1}' could not be fou
 --
 --
 
-CNCCMNIOT:: Unable to call method for {0}: the Target '{1}' was not of type '{2}'
---
---
-
-CNCGPNIOT:: Unable to get property for {0}: the Target '{1}' was not of type '{2}'
---
---
-
-CNCSPNIOT:: Unable to set property for {0}: the Target '{1}' was not of type '{2}'
---
---
-
 CNSLS:: Unable to load scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
 --
 --
@@ -351,7 +339,7 @@ CSQIS:: Unable to run sequence for {0}: index {1} has no connection
 --
 --
 
-CTMS:: Failed to load Transition: shader {0} not found
+CTMS:: Failed to load Transition {0}: the shader has not been set
 --
 --
 

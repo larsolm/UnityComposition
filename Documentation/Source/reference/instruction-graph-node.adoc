@@ -38,8 +38,8 @@ Implement this method in derived classes to perform the execution of the node. R
 
 This collection of methods will lookup the value referenced by a <<reference/variable-reference.html,VariableReference>> or <<reference/variable-source.html,VariableSource>>. The resolved value is set to the ouput parameter _result_ and the return value will indicate whether the value was resolved successfully. The _variables_ parameter should be the _variables_ parameter passed to the _Run_ method.
 
-* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-value-source.html,VariableValueSource>> _source_, <<reference/variable-value&.html,VariableValue>> _result_ _(out)_)
-* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/variable-value&.html,VariableValue>> _result_ _(out)_)
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-value-source.html,VariableValueSource>> _source_, <<reference/variable-value.html,VariableValue>> _result_ _(out)_)
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/variable-value.html,VariableValue>> _result_ _(out)_)
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/bool-variable-source.html,BoolVariableSource>> _source_, bool _result_ _(out)_)
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, bool _result_ _(out)_)::
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/int-variable-source.html,IntVariableSource>> _source_, int _result_ _(out)_)::
@@ -70,17 +70,17 @@ This collection of methods will lookup the value referenced by a <<reference/var
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Color.html[Color^] _result_ _(out)_)::
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/string-variable-source.html,StringVariableSource>> _source_, string _result_ _(out)_)::
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, string _result_ _(out)_)::
-* bool Resolve<EnumType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-source-1.html,VariableSource>><EnumType> _source_, <<reference/enum-type&.html,EnumType>> _result_ _(out)_)::
-* bool Resolve<EnumType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/enum-type&.html,EnumType>> _result_ _(out)_)::
-* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/store-variable-source.html,StoreVariableSource>> _source_, <<reference/i-variable-store&.html,IVariableStore>> _result_ _(out)_)::
-* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/i-variable-store&.html,IVariableStore>> _result_ _(out)_)::
-* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/list-variable-source.html,ListVariableSource>> _source_, <<reference/i-variable-list&.html,IVariableList>> _result_ _(out)_)::
-* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/i-variable-list&.html,IVariableList>> _result_ _(out)_)::
-* bool ResolveObject<ObjectType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-source-1.html,VariableSource>><ObjectType> _source_, <<reference/object-type&.html,ObjectType>> _result_ _(out)_)::
-* bool ResolveObject<ObjectType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/object-type&.html,ObjectType>> _result_ _(out)_)::
-* bool ResolveStore<StoreType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/store-type&.html,StoreType>> _result_ _(out)_)::
-* bool ResolveList<ListType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/list-type&.html,ListType>> _result_ _(out)_)::
-* bool ResolveInterface<InterfaceType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/interface-type&.html,InterfaceType>> _result_ _(out)_)::
+* bool Resolve<EnumType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-source-1.html,VariableSource>><EnumType> _source_, <<reference/enum-type.html,EnumType>> _result_ _(out)_)::
+* bool Resolve<EnumType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/enum-type.html,EnumType>> _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/store-variable-source.html,StoreVariableSource>> _source_, <<reference/i-variable-store.html,IVariableStore>> _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/i-variable-store.html,IVariableStore>> _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/list-variable-source.html,ListVariableSource>> _source_, <<reference/i-variable-list.html,IVariableList>> _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/i-variable-list.html,IVariableList>> _result_ _(out)_)::
+* bool ResolveObject<ObjectType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-source-1.html,VariableSource>><ObjectType> _source_, <<reference/object-type.html,ObjectType>> _result_ _(out)_)::
+* bool ResolveObject<ObjectType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/object-type.html,ObjectType>> _result_ _(out)_)::
+* bool ResolveStore<StoreType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/store-type.html,StoreType>> _result_ _(out)_)::
+* bool ResolveList<ListType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/list-type.html,ListType>> _result_ _(out)_)::
+* bool ResolveInterface<InterfaceType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/interface-type.html,InterfaceType>> _result_ _(out)_)::
 * bool ResolveReference(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, Object _result_ _(out)_)::
 
 void Assign(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/variable-value.html,VariableValue>> _value_)::

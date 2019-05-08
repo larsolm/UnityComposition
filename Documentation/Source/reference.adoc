@@ -72,7 +72,11 @@ include::reference/input-node-button-button-type.adoc[]
 
 <<<
 
-include::reference/call-method-node.adoc[]
+include::reference/class-map.adoc[]
+
+<<<
+
+include::reference/class-map-1.adoc[]
 
 <<<
 
@@ -248,10 +252,6 @@ include::reference/game-object-variable-source.adoc[]
 
 <<<
 
-include::reference/get-property-node.adoc[]
-
-<<<
-
 include::reference/graph-trigger-binding.adoc[]
 
 <<<
@@ -261,6 +261,10 @@ include::reference/hide-control-node.adoc[]
 <<<
 
 include::reference/i-assignable-operation.adoc[]
+
+<<<
+
+include::reference/i-class-map.adoc[]
 
 <<<
 
@@ -665,10 +669,6 @@ include::reference/set-animation-parameter-node.adoc[]
 <<<
 
 include::reference/set-binding-node.adoc[]
-
-<<<
-
-include::reference/set-property-node.adoc[]
 
 <<<
 

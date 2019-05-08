@@ -370,7 +370,7 @@ bool TryGetString(string _s_ _(out)_)::
 
 If _Type_ is `String`, sets _s_ to the stored value and returns `true`. Otherwise sets _s_ to an empty string and returns `false`.
 
-bool TryGetEnum<EnumType>(<<reference/enum-type&.html,EnumType>> _value_ _(out)_)::
+bool TryGetEnum<EnumType>(<<reference/enum-type.html,EnumType>> _value_ _(out)_)::
 
 If _Type_ is `Enum` and _EnumType_ is _EnumType_, sets _value_ to the stored value and returns `true`. Otherwise sets _value_ to `0` and returns `false`.
 
@@ -386,6 +386,6 @@ bool TryGetList(<<reference/i-variable-list.html,IVariableList>> _list_ _(out)_)
 
 If the stored object is an <<reference/i-variable-list.html,IVariableList>>, sets _list_ to the stored object and returns `true`. Otherwise sets _list_ to `null` and returns `false`.
 
-bool TryGetReference<T>(<<reference/t&.html,T>> _t_ _(out)_)::
+bool TryGetReference<T>(<<reference/t.html,T>> _t_ _(out)_)::
 
 If _Type_ is `Object`, `Store`, or `List` and the stored object has type _T_ or is derived from type _T_, sets _t_ to the stored object and returns `true`. Otherwise sets _t_ to `null` and returns `false`.

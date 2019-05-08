@@ -1,0 +1,23 @@
+[#reference/class-map-1]
+
+## ClassMap
+
+PiRhoSoft.CompositionEngine.ClassMap<__T__> : <<reference/i-class-map.html,IClassMap>>
+
+### Description
+
+Derive from this class to implement an <<reference/i-class-map.html,IClassMap>> for type _T_. The derived class should be registered with <<reference/class-map.html,ClassMap.Add>> in a static constructor or a https://docs.unity3d.com/ScriptReference/RuntimeInitializeOnLoadMethodAttribute.html[RuntimeInitializeOnLoadMethod^].
+
+### Public Methods
+
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<string> GetVariableNames() _(abstract)_::
+
+This method should return the list of variable names that are accessible in _GetVariable_.
+
+<<reference/variable-value.html,VariableValue>> GetVariable(T _obj_, string _name_) _(abstract)_::
+
+This method should return a <<reference/variable-value.html,VariableValue>> containing the value of the property _name_ on _obj_.
+
+<<reference/set-variable-result.html,SetVariableResult>> SetVariable(T _obj_, string _name_, <<reference/variable-value.html,VariableValue>> _value_) _(abstract)_::
+
+This method should set the property _name_ on _obj_ to _value_.

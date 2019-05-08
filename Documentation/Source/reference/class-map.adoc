@@ -1,0 +1,19 @@
+[#reference/class-map]
+
+## ClassMap
+
+PiRhoSoft.CompositionEngine.ClassMap
+
+### Description
+
+Manages registration of <<reference/i-class-map.html,IClassMaps>>.
+
+### Static Methods
+
+void Add<T>(<<reference/class-map-1.html,ClassMap>><T> _map_)::
+
+Adds _map_ as the <<reference/i-class-map.html,IClassMap>> for the type _T_.
+
+bool Get(Type _type_, <<reference/i-class-map.html,IClassMap>> _map_ _(out)_)::
+
+If the Type _type_ has an <<reference/i-class-map.html,IClassMap>> registered, sets _map_ to that <<reference/i-class-map.html,IClassMap>> and returns `true`. Otherwise, returns `false`.

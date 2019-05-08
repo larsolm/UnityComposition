@@ -103,3 +103,64 @@ namespace PiRhoSoft.CompositionExample
 ----
 
 Items in the Player`s inventory can now be accessed with `global.Player.Inventory`. Getting the `Count` of the first item would be done using `global.Player.Inventory[0].Count`. Note that _Inventory_ is marked as not writable meaning the statement `global.Player.Inventory = somethingElse` would fail, however items can still be added and removed. The `Class` of `Player` is exposed as a property allowing the code to perform any necessary updates when it is changed.
+
+### Exposing Third Party Classes
+
+In situations where an https://docs.unity3d.com/ScriptReference/Object.html[Object^] class cannot be changed to implement <<reference/i-variable-store.html,IVariableStore>>, like for a third party or built in https://docs.unity3d.com/ScriptReference/Component.html[Component^], the <<reference/class-map-1.html,ClassMap>> class is provided. By deriving from this class and registering an instance with <<reference/class-map.html,ClassMap>> properties can be exposed to the variables system, making them available in <<topics/variables-4.html,VariableReferences and Expressions>>. The following is an example of the `InventoryXtem` class defined using a <<reference/class-map.html,ClassMap>> instead of with <<reference/i-variable-store.html,IVariableStore>>.
+
+[source,cs]
+----
+using PiRhoSoft.CompositionEngine
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class InventoryItem
+	{
+		public Item Item;
+		public int Count;
+
+		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
+		private static void RegisterMap()
+		{
+			ClassMap.Add(new InventoryItemMap());
+		}
+	}
+
+	public class InventoryItemMap : ClassMap<InventoryItem>
+	{
+		private static List<string> _names = new List<string>
+		{
+			nameof(InventoryItem.Item),
+			nameof(InventoryItem.Count)
+		};
+
+		public override IList<string> GetVariableNames()
+		{
+			return _names;
+		}
+
+		public override VariableValue GetVariable(InventoryItem obj, string name)
+		{
+			switch (name)
+			{
+				case nameof(InventoryItem.Item): return VariableValue.Create(obj.Item);
+				case nameof(InventoryItem.Count): return VariableValue.Create(obj.Count);
+			}
+
+			return VariableValue.Empty;
+		}
+
+		public override SetVariableResult SetVariable(InventoryItem obj, string name, VariableValue value)
+		{
+			switch (name)
+			{
+				case nameof(InventoryItem.Item): if (value.TryGetReference<Item>(out var item)) { obj.Item = item; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
+				case nameof(InventoryItem.Count): if (value.TryGetInt(out var count)) { obj.Count = count; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
+			}
+
+			return SetVariableResult.NotFound;
+		}
+	}
+}
+----
