@@ -19,26 +19,23 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class MappedVariableAttribute : Attribute
 	{
-		public bool Readable;
-		public bool Writable;
+		public bool ReadOnly { get; private set; }
 
 		public MappedVariableAttribute()
 		{
-			Readable = true;
-			Writable = true;
+			ReadOnly = false;
 		}
 
-		public MappedVariableAttribute(bool readable, bool writable)
+		public MappedVariableAttribute(bool readOnly)
 		{
-			Readable = readable;
-			Writable = writable;
+			ReadOnly = readOnly;
 		}
 	}
 
 	public class MappedVariableStore : IVariableStore, IMappedVariableList
 	{
-		private const string _invalidFieldError = "(CMVSIF) failed to map field '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived field types can be mapped";
-		private const string _invalidPropertyError = "(CMVSIP) failed to map property '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived property types can be mapped";
+		private const string _invalidFieldError = "(CMVSIF) failed to map field '{0}' of type '{1}': Only VariableValue types can be mapped";
+		private const string _invalidPropertyError = "(CMVSIP) failed to map property '{0}' of type '{1}': Only VariableValue types can be mapped";
 
 		private VariableMap _map;
 		private IMappedVariableList[] _lists;

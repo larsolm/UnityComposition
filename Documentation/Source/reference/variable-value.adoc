@@ -106,6 +106,10 @@ Creates a <<reference/variable-value.html,VariableValue>> with _Type_ determined
 
 NOTE: If _reference_ is both an <<reference/i-variable-store.html,IVariableStore>> and an https://docs.unity3d.com/ScriptReference/Object.html[Object^], the value will have type `Object`.
 
+<<reference/variable-value.html,VariableValue>> CreateAny(object _obj_)::
+
+Creates a <<reference/variable-value.html,VariableValue>> with _Type_ determined from the type of _obj_. This can be used for any <<reference/variable-type.html,VariableType>> when it is unknown whether _obj_ is a value or reference type.
+
 ### Public Properties
 
 <<reference/variable-type.html,VariableType>> _Type_ _(read only)_::

@@ -1,0 +1,15 @@
+[#reference/list-adapter]
+
+## ListAdapter
+
+PiRhoSoft.CompositionEngine.ListAdapter : <<reference/i-variable-list.html,IVariableList>>
+
+### Description
+
+This serves as a base class for several internal classes that wrap specific https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IList[IList^] types so they can be accessed as a <<reference/variable-value.html,VariableValue>> with _Type_ `List`. To use a ListAdapter call the static _Create_ method.
+
+### Static Methods
+
+<<reference/i-variable-list.html,IVariableList>> Create(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IList[IList^] _list_)::
+
+Creates an <<reference/i-variable-list.html,IVariableList>> that wraps and modifies _list_ when it is accessed.

@@ -10,16 +10,12 @@ Add this to a property or field on a <<reference/variable-set-component.html,Var
 
 ### Constructors
 
-MappedVariableAttribute(bool _readable_, bool _writable_)::
+MappedVariableAttribute(bool _readOnly_)::
 
-Sets the allowed access for the property or field the attribute is applied to. If the default constructor is used instead, _readable_ and _writable_ are both `true`.
+Pass `true` as _readOnly_ to indicate the property or field cannot be set by the variables system. If the default constructor is used the variable is allowed to be set.
 
-### Public Fields
+### Public Properties
 
-bool _Readable_::
+bool _ReadOnly_ _(read only)_::
 
-Set this to `true` to allow the property or field value to be retrieved when accessed through a <<reference/mapped-variable-store.html,MappedVariableStore>>.
-
-bool _Writable_::
-
-Set this to `true` to allow the property or field value to be set when accessed through a <<reference/mapped-variable-store.html,MappedVariableStore>>.
+If this is `true`, the property or field cannot be set through a <<reference/mapped-variable-store.html,MappedVariableStore>>.

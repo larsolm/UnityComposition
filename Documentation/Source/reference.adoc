@@ -420,6 +420,10 @@ include::reference/i-variable-store.adoc[]
 
 <<<
 
+include::reference/list-adapter.adoc[]
+
+<<<
+
 include::reference/list-binding.adoc[]
 
 <<<
