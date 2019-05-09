@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Sequencing/Load Scene", 100)]
 	[HelpURL(Composition.DocumentationUrl + "load-scene-node")]
-	public class LoadSceneNode : InstructionGraphNode
+	public sealed class LoadSceneNode : InstructionGraphNode
 	{
 		private const string _invalidSceneWarning = "(CNSLS) Unable to load scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string";
 

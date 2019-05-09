@@ -78,7 +78,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private Menu _menu;
 
-		void Awake()
+		protected virtual void Awake()
 		{
 			_menu = GetComponent<Menu>();
 			_menu.OnItemsChanged += RefreshLayout;
@@ -86,7 +86,7 @@ namespace PiRhoSoft.CompositionEngine
 			_shouldFocus = FocusOnLoad;
 		}
 
-		void Update()
+		protected virtual void Update()
 		{
 			HandleButtons();
 			HandlePointer();

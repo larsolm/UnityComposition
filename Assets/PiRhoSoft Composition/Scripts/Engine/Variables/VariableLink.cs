@@ -4,7 +4,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "variable-link")]
 	[AddComponentMenu("PiRho Soft/Composition/Variable Link")]
-	public class VariableLink : MonoBehaviour
+	public sealed class VariableLink : MonoBehaviour
 	{
 		[Tooltip("The variables to add to the global variable store")]
 		public VariablePool Variables = new VariablePool();

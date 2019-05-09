@@ -11,17 +11,17 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The input button to use to advance the message")]
 		public string AcceptButton = "Submit";
 
-		private MessageControl _message;
+		protected MessageControl Message { get; private set; }
 
-		void Awake()
+		protected virtual void Awake()
 		{
-			_message = GetComponent<MessageControl>();
+			Message = GetComponent<MessageControl>();
 		}
 
-		void Update()
+		protected virtual void Update()
 		{
 			if (InputHelper.GetWasButtonPressed(AcceptButton))
-				_message.Advance();
+				Message.Advance();
 		}
 	}
 }

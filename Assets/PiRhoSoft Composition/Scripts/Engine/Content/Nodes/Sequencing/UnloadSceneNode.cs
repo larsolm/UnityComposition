@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[CreateInstructionGraphNodeMenu("Sequencing/Unload Scene", 101)]
 	[HelpURL(Composition.DocumentationUrl + "unload-scene-node")]
-	public class UnloadSceneNode : InstructionGraphNode
+	public sealed class UnloadSceneNode : InstructionGraphNode
 	{
 		private const string _invalidSceneWarning = "(CNSUS) Unable to unload scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string";
 

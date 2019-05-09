@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
-	public class CompositionManager : GlobalBehaviour<CompositionManager>
+	public sealed class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
 		private class DefaultGlobalStore : IVariableStore
 		{

@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 		private Renderer _renderer;
 		private MaterialPropertyBlock _propertyBlock;
 
-		void OnEnable()
+		protected virtual void OnEnable()
 		{
 			if (AutoAdvance)
 				Progress = 0.0f;
@@ -41,7 +41,7 @@ namespace PiRhoSoft.CompositionEngine
 			_propertyBlock = new MaterialPropertyBlock();
 		}
 
-		void OnDisable()
+		protected virtual void OnDisable()
 		{
 			_renderer = null;
 			_propertyBlock = null;

@@ -5,7 +5,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	[HelpURL(Composition.DocumentationUrl + "button-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Button Graph Trigger")]
-	public class ButtonGraphTrigger : InstructionTrigger
+	public sealed class ButtonGraphTrigger : InstructionTrigger
 	{
 		[Tooltip("The name of the Input Button that will trigger the InstructionGraph")]
 		public string Button;

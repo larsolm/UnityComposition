@@ -14,6 +14,12 @@ string _AcceptButton_::
 
 The name of the button that advances the <<reference/message-control.html,MessageControl>> as defined in <<reference/input-helper.html,InputHelper>>.
 
+### Protected Properties
+
+<<reference/message-control.html,MessageControl>> _Message_ _(read only)_::
+
+The <<reference/message-control.html,MessageControl>> attached as a sibling to this component.
+
 ifdef::backend-multipage_html5[]
 <<manual/message-input.html,Manual>>
 endif::[]
