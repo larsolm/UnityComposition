@@ -38,9 +38,7 @@ MonoBehaviour:
     - {fileID: 114010021192242288}
     - {fileID: 114019920891345730}
     - {fileID: 114252435143868472}
-    - {fileID: 114463101045428796}
     - {fileID: 114576425354111774}
-    - {fileID: 114785281357858918}
     - {fileID: 114850041673953740}
     - {fileID: 114892266929209000}
     - {fileID: 114594473411085898}
@@ -248,40 +246,6 @@ MonoBehaviour:
       Text: global
     - Type: 0
       Text: Player
---- !u!114 &114463101045428796
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Get Finish Position
-  m_EditorClassIdentifier: 
-  Name: Get Finish Position
-  GraphPosition: {x: 1587.2001, y: -102.4}
-  IsBreakpoint: 0
-  Next: {fileID: 114892266929209000}
-  Target:
-    Type: 1
-    Reference:
-      _variable: scene.FinishDoor
-      _tokens:
-      - Type: 0
-        Text: scene
-      - Type: 0
-        Text: FinishDoor
-    Value: {fileID: 0}
-  Output:
-    _variable: finishPosition
-    _tokens:
-    - Type: 0
-      Text: finishPosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114576425354111774
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -295,7 +259,7 @@ MonoBehaviour:
   m_Name: Move Camera
   m_EditorClassIdentifier: 
   Name: Move Camera
-  GraphPosition: {x: 2227.2, y: -102.4}
+  GraphPosition: {x: 1907.2001, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Transform:
@@ -364,14 +328,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Cuttoff Z
+  m_Name: Get Player Position
   m_EditorClassIdentifier: 
-  Name: Cuttoff Z
-  GraphPosition: {x: 1907.2001, y: 89.6}
+  Name: Get Player Position
+  GraphPosition: {x: 1587.2001, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 114850041673953740}
   Expression:
-    _statement: playerPosition = Vector3(playerPosition.x, playerPosition.y, -10);
+    _statement: 'playerPosition = global.Player as Transform.position
+
+      playerPosition = Vector3(playerPosition.x, playerPosition.y, -10)'
 --- !u!114 &114679176875131434
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -407,45 +373,11 @@ MonoBehaviour:
   Sequence:
     _items:
     - {fileID: 114417380751933736}
-    - {fileID: 114463101045428796}
+    - {fileID: 114892266929209000}
     - {fileID: 114797155301925872}
     - {fileID: 114010021192242288}
-    - {fileID: 114785281357858918}
+    - {fileID: 114594473411085898}
     - {fileID: 114375116766900952}
---- !u!114 &114785281357858918
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Get Player Position
-  m_EditorClassIdentifier: 
-  Name: Get Player Position
-  GraphPosition: {x: 1587.2001, y: 89.6}
-  IsBreakpoint: 0
-  Next: {fileID: 114594473411085898}
-  Target:
-    Type: 1
-    Reference:
-      _variable: global.Player
-      _tokens:
-      - Type: 0
-        Text: global
-      - Type: 0
-        Text: Player
-    Value: {fileID: 0}
-  Output:
-    _variable: playerPosition
-    _tokens:
-    - Type: 0
-      Text: playerPosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114797155301925872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -489,7 +421,7 @@ MonoBehaviour:
   m_Name: Move Camera
   m_EditorClassIdentifier: 
   Name: Move Camera
-  GraphPosition: {x: 2227.2, y: 89.6}
+  GraphPosition: {x: 1907.2001, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Transform:
@@ -558,11 +490,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Cuttoff Z
+  m_Name: Get Finish Position
   m_EditorClassIdentifier: 
-  Name: Cuttoff Z
-  GraphPosition: {x: 1907.2001, y: -102.4}
+  Name: Get Finish Position
+  GraphPosition: {x: 1587.2001, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114576425354111774}
   Expression:
-    _statement: finishPosition = Vector3(finishPosition.x, finishPosition.y, -10);
+    _statement: 'finishPosition = scene.FinishDoor as Transform.position
+
+      finishPosition = Vector3(finishPosition.x, finishPosition.y, -10)'

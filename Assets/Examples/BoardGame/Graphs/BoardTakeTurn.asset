@@ -51,7 +51,6 @@ MonoBehaviour:
     - {fileID: 114941350798319070}
     - {fileID: 114299101603332070}
     - {fileID: 114583877898817900}
-    - {fileID: 114971039841928306}
     - {fileID: 114720587560010244}
     - {fileID: 114601505796252814}
     - {fileID: 114433092151972732}
@@ -970,7 +969,7 @@ MonoBehaviour:
   Name: Get Current Space
   GraphPosition: {x: 3072, y: 691.2}
   IsBreakpoint: 0
-  Next: {fileID: 114971039841928306}
+  Next: {fileID: 114881147754536536}
   Expression:
     _statement: currentSpace = global.Spaces[player.SelectedPiece.CurrentSpace];
 --- !u!114 &114767383999022486
@@ -1049,14 +1048,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: Cutoff Z
+  m_Name: Get Target Position
   m_EditorClassIdentifier: 
-  Name: Cutoff Z
-  GraphPosition: {x: 3392, y: 729.60004}
+  Name: Get Target Position
+  GraphPosition: {x: 3392, y: 665.60004}
   IsBreakpoint: 0
   Next: {fileID: 114668657672623782}
   Expression:
-    _statement: targetPosition = Vector3(targetPosition.x, targetPosition.y, 0.0);
+    _statement: 'targetPosition = currentSpace as Transform.position
+
+      targetPosition = Vector3(targetPosition.x, targetPosition.y, 0.0);'
 --- !u!114 &114890588813715902
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1246,38 +1247,6 @@ MonoBehaviour:
       Text: piece
     - Type: 0
       Text: Highlight
---- !u!114 &114971039841928306
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Get Target Position
-  m_EditorClassIdentifier: 
-  Name: Get Target Position
-  GraphPosition: {x: 3392, y: 640}
-  IsBreakpoint: 0
-  Next: {fileID: 114881147754536536}
-  Target:
-    Type: 1
-    Reference:
-      _variable: currentSpace
-      _tokens:
-      - Type: 0
-        Text: currentSpace
-    Value: {fileID: 0}
-  Output:
-    _variable: targetPosition
-    _tokens:
-    - Type: 0
-      Text: targetPosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114978121118815360
 MonoBehaviour:
   m_ObjectHideFlags: 1

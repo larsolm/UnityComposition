@@ -1,4 +1,5 @@
-[#manual/log-descriptions]
+[#overview/log-descriptions]
+
 ## Log Descriptions
 
 ### Warnings
@@ -183,18 +184,6 @@ CIMMV:: Unable to set text on message '{0}': the variable '{1}' could not be fou
 --
 --
 
-CNCCMNIOT:: Unable to call method for {0}: the Target '{1}' was not of type '{2}'
---
---
-
-CNCGPNIOT:: Unable to get property for {0}: the Target '{1}' was not of type '{2}'
---
---
-
-CNCSPNIOT:: Unable to set property for {0}: the Target '{1}' was not of type '{2}'
---
---
-
 CNSLS:: Unable to load scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
 --
 --
@@ -327,11 +316,11 @@ CISROO:: failed to store output {0}: the variable '{1}' is read only
 --
 --
 
-CMVSIF:: failed to map field '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived field types can be mapped
+CMVSIF:: failed to map field '{0}' of type '{1}': Only VariableValue types can be mapped
 --
 --
 
-CMVSIP:: failed to map property '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived property types can be mapped
+CMVSIP:: failed to map property '{0}' of type '{1}': Only VariableValue types can be mapped
 --
 --
 
@@ -351,7 +340,7 @@ CSQIS:: Unable to run sequence for {0}: index {1} has no connection
 --
 --
 
-CTMS:: Failed to load Transition: shader {0} not found
+CTMS:: Failed to load Transition {0}: the shader has not been set
 --
 --
 

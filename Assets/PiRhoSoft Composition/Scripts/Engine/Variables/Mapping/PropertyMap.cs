@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (mapping != null)
 				{
-					var property = Property.Create(ownerType, info, mapping.Readable, mapping.Writable);
+					var property = Property.Create(info, !mapping.ReadOnly);
 
 					if (property != null)
 						Properties.Add(property);
@@ -38,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (mapping != null)
 				{
-					var property = Property.Create(ownerType, info, mapping.Readable, mapping.Writable);
+					var property = Property.Create(info, !mapping.ReadOnly);
 
 					if (property != null)
 						Properties.Add(property);

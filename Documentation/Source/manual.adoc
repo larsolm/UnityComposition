@@ -36,10 +36,6 @@ include::manual/button-input.adoc[]
 
 <<<
 
-include::manual/call-method-node.adoc[]
-
-<<<
-
 include::manual/click-graph-trigger.adoc[]
 
 <<<
@@ -121,10 +117,6 @@ include::manual/fade-transition.adoc[]
 <<<
 
 include::manual/focus-binding-root.adoc[]
-
-<<<
-
-include::manual/get-property-node.adoc[]
 
 <<<
 
@@ -297,10 +289,6 @@ include::manual/set-animation-parameter-node.adoc[]
 <<<
 
 include::manual/set-binding-node.adoc[]
-
-<<<
-
-include::manual/set-property-node.adoc[]
 
 <<<
 

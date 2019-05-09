@@ -20,9 +20,9 @@ bool _IsRunning_ _(read only)_::
 
 Returns `true` when this MessageControl is displaying text.
 
-bool _IsAdvancing_ _(read only)_::
+bool _IsAdvancing_::
 
-Returns `true` when this MessageControl should have its text advanced.
+Returns `true` when this MessageControl should have its text advanced. This can be set from subclasses to reset the flag after it has been consumed.
 
 ### Public Methods
 

@@ -30,18 +30,17 @@ MonoBehaviour:
     _items:
     - {fileID: 114232945736125484}
     - {fileID: 114531949902930302}
-    - {fileID: 114983396039377012}
     - {fileID: 114232764692765722}
     - {fileID: 114580898461610352}
     - {fileID: 114825411958646812}
     - {fileID: 114711448032534652}
-    - {fileID: 114279173415776722}
     - {fileID: 114081490847643118}
     - {fileID: 114279101270522892}
     - {fileID: 114702339389740078}
     - {fileID: 114687242891515022}
     - {fileID: 114318626462138392}
     - {fileID: 114984453898130342}
+    - {fileID: 398352373967216045}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114232945736125484}
 --- !u!114 &114081490847643118
@@ -183,7 +182,7 @@ MonoBehaviour:
   Name: Charge Message
   GraphPosition: {x: 320, y: 0}
   IsBreakpoint: 0
-  Next: {fileID: 114279173415776722}
+  Next: {fileID: 398352373967216045}
   Control:
     _variable: scene.Message
     _tokens:
@@ -209,7 +208,7 @@ MonoBehaviour:
   m_Name: Wait
   m_EditorClassIdentifier: 
   Name: Wait
-  GraphPosition: {x: 652.8, y: 64}
+  GraphPosition: {x: 652.8, y: 38.4}
   IsBreakpoint: 0
   Next: {fileID: 114702339389740078}
   Time:
@@ -219,38 +218,6 @@ MonoBehaviour:
       _tokens: []
     Value: 0.5
   UseScaledTime: 1
---- !u!114 &114279173415776722
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Store Start Position(Clone)
-  m_EditorClassIdentifier: 
-  Name: Store Start Position
-  GraphPosition: {x: 652.8, y: -76.8}
-  IsBreakpoint: 0
-  Next: {fileID: 114983396039377012}
-  Target:
-    Type: 1
-    Reference:
-      _variable: fighter
-      _tokens:
-      - Type: 0
-        Text: fighter
-    Value: {fileID: 0}
-  Output:
-    _variable: startPosition
-    _tokens:
-    - Type: 0
-      Text: startPosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114318626462138392
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -510,42 +477,6 @@ MonoBehaviour:
       target.CurrentHP -= damage;
 
       target.CurrentHP = Max(0, target.CurrentHP);'
---- !u!114 &114983396039377012
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Store Target Position(Clone)
-  m_EditorClassIdentifier: 
-  Name: Store Target Position
-  GraphPosition: {x: 652.8, y: 0}
-  IsBreakpoint: 0
-  Next: {fileID: 114279101270522892}
-  Target:
-    Type: 1
-    Reference:
-      _variable: fighter.Pool.Target
-      _tokens:
-      - Type: 0
-        Text: fighter
-      - Type: 0
-        Text: Pool
-      - Type: 0
-        Text: Target
-    Value: {fileID: 0}
-  Output:
-    _variable: targetPosition
-    _tokens:
-    - Type: 0
-      Text: targetPosition
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114984453898130342
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -574,3 +505,23 @@ MonoBehaviour:
   WaitTime: 0
   Message:
     Text: The attack missed...
+--- !u!114 &398352373967216045
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Get Positions
+  m_EditorClassIdentifier: 
+  Name: Get Positions
+  GraphPosition: {x: 652.8, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 114279101270522892}
+  Expression:
+    _statement: 'startPosition = fighter as Transform.position
+
+      targetPosition = fighter.Pool.Target as Transform.position'

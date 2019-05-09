@@ -42,18 +42,15 @@ namespace PiRhoSoft.CompositionEngine
 		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
 		{
 			if (owner.HasList)
-			{
-				var value = ListVariableHandler.LookupInList(owner, lookup);
-				if (!value.IsEmpty)
-					return value;
-			}
+				return ListVariableHandler.LookupInList(owner, lookup);
 
 			if (owner.HasStore)
-			{
-				var value = StoreVariableHandler.LookupInStore(owner, lookup);
-				if (!value.IsEmpty)
-					return value;
-			}
+				return StoreVariableHandler.LookupInStore(owner, lookup);
+
+			if (lookup.HasString && ClassMap.Get(owner.ReferenceType, out var map))
+				return map.GetVariable(owner.Reference, lookup.String);
+
+			// could fall back to reflection here and in Apply_
 
 			return VariableValue.Empty;
 		}
@@ -61,16 +58,15 @@ namespace PiRhoSoft.CompositionEngine
 		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
 		{
 			if (owner.HasList)
-			{
-				var result = ListVariableHandler.ApplyToList(ref owner, lookup, value);
-				if (result == SetVariableResult.Success)
-					return result;
-			}
+				return ListVariableHandler.ApplyToList(ref owner, lookup, value);
 
 			if (owner.HasStore)
 				return StoreVariableHandler.ApplyToStore(ref owner, lookup, value);
 
-			return SetVariableResult.ReadOnly;
+			if (lookup.HasString && ClassMap.Get(owner.ReferenceType, out var map))
+				return map.SetVariable(owner.Reference, lookup.String, value);
+
+			return SetVariableResult.NotFound;
 		}
 
 		protected internal override VariableValue Cast_(VariableValue owner, string type)

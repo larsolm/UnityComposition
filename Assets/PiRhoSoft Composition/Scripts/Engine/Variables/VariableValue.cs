@@ -170,6 +170,12 @@ namespace PiRhoSoft.CompositionEngine
 			else return Empty;
 		}
 
+		public static VariableValue CreateAny(object obj)
+		{
+			var value = CreateValue(obj);
+			return value.IsEmpty ? CreateReference(obj) : value;
+		}
+
 		private static VariableValue CreateValue(VariableType type, ValueData value)
 		{
 			return new VariableValue

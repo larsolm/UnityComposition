@@ -33,8 +33,6 @@ MonoBehaviour:
     - {fileID: 114175580021619848}
     - {fileID: 114926637185106858}
     - {fileID: 114948380721648204}
-    - {fileID: 114606885731722130}
-    - {fileID: 114696120759720692}
     - {fileID: 114979908025208874}
     - {fileID: 114980614166743252}
     - {fileID: 114944409301683160}
@@ -247,7 +245,7 @@ MonoBehaviour:
   m_Name: Ace Iteration(Clone)(Clone)(Clone)(Clone)
   m_EditorClassIdentifier: 
   Name: Ace Iteration
-  GraphPosition: {x: 2560, y: -140.8}
+  GraphPosition: {x: 2176, y: -140.8}
   IsBreakpoint: 0
   Container:
     _variable: global.State.Aces
@@ -319,107 +317,11 @@ MonoBehaviour:
   m_Name: Clear Active
   m_EditorClassIdentifier: 
   Name: Clear Active
-  GraphPosition: {x: 2624, y: -64}
+  GraphPosition: {x: 2240, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
     _statement: local.ace.Active = false
---- !u!114 &114606885731722130
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19fe84203620ae1459b63160dacc8610, type: 3}
-  m_Name: Set Card
-  m_EditorClassIdentifier: 
-  Name: Set Card
-  GraphPosition: {x: 1792, y: -89.6}
-  IsBreakpoint: 0
-  Next: {fileID: 114980614166743252}
-  Target:
-    Type: 1
-    Reference:
-      _variable: global.SelectedCard
-      _tokens:
-      - Type: 0
-        Text: global
-      - Type: 0
-        Text: SelectedCard
-    Value: {fileID: 0}
-  Value:
-    Type: 1
-    Reference:
-      _variable: local.cardPosition
-      _tokens:
-      - Type: 0
-        Text: local
-      - Type: 0
-        Text: cardPosition
-    Definition:
-      _type: 9
-      _constraint: 
-      _objects: []
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 1
-      _isConstraintLocked: 0
-    _data: AQAJAAAAAAAAAAAAAAAAAAAA
-    _objects: []
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
---- !u!114 &114696120759720692
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 19fe84203620ae1459b63160dacc8610, type: 3}
-  m_Name: Set Ace
-  m_EditorClassIdentifier: 
-  Name: Set Ace
-  GraphPosition: {x: 1728, y: -166.40001}
-  IsBreakpoint: 0
-  Next: {fileID: 114606885731722130}
-  Target:
-    Type: 1
-    Reference:
-      _variable: card
-      _tokens:
-      - Type: 0
-        Text: card
-    Value: {fileID: 0}
-  Value:
-    Type: 1
-    Reference:
-      _variable: local.rootPosition
-      _tokens:
-      - Type: 0
-        Text: local
-      - Type: 0
-        Text: rootPosition
-    Definition:
-      _type: 9
-      _constraint: 
-      _objects: []
-      _tag: 
-      _initializer:
-        _statement: 
-      _isTypeLocked: 1
-      _isConstraintLocked: 0
-    _data: AQAJAAAAAAAAAAAAAAAAAAAA
-    _objects: []
-  _targetTypeName: UnityEngine.Transform, UnityEngine.CoreModule, Version=0.0.0.0,
-    Culture=neutral, PublicKeyToken=null
-  _propertyName: position
 --- !u!114 &114798996279171400
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -487,7 +389,7 @@ MonoBehaviour:
   m_Name: Update Moves
   m_EditorClassIdentifier: 
   Name: Update Moves
-  GraphPosition: {x: 2176, y: -89.6}
+  GraphPosition: {x: 1792, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 114979908025208874}
   Source: 0
@@ -534,16 +436,16 @@ MonoBehaviour:
   Name: Move Card
   GraphPosition: {x: 1408, y: -128}
   IsBreakpoint: 0
-  Next: {fileID: 114696120759720692}
+  Next: {fileID: 114980614166743252}
   Expression:
     _statement: 'local.row = card.Row
 
       local.column = card.Column
 
 
-      local.cardPosition = MoveCard(card, global.SelectedCard.Row, global.SelectedCard.Column)
+      MoveCard(card, global.SelectedCard.Row, global.SelectedCard.Column)
 
-      local.rootPosition = MoveCard(global.SelectedCard, local.row, local.column)'
+      MoveCard(global.SelectedCard, local.row, local.column)'
 --- !u!114 &114979908025208874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -557,7 +459,7 @@ MonoBehaviour:
   m_Name: Clear Selection
   m_EditorClassIdentifier: 
   Name: Clear Selection
-  GraphPosition: {x: 2496, y: -217.6}
+  GraphPosition: {x: 2112, y: -217.6}
   IsBreakpoint: 0
   Next: {fileID: 114446061808747656}
   Expression:
@@ -575,7 +477,7 @@ MonoBehaviour:
   m_Name: Check Card
   m_EditorClassIdentifier: 
   Name: Check Card
-  GraphPosition: {x: 2112, y: -166.40001}
+  GraphPosition: {x: 1728, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 114944409301683160}
   Source: 0

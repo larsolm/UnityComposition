@@ -30,4 +30,4 @@ MonoBehaviour:
 
       cardy = row * global.cardYAdvance + global.cardYOffset
 
-      Vector3(cardx, cardy, 0)'
+      card as Transform.position = Vector3(cardx, cardy, 0)'

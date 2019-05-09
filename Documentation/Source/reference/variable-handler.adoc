@@ -106,7 +106,7 @@ Returns -1 if _left_ is less than _right_, 1 if _left_ is greater than _right_, 
 
 Returns a value contained in _owner_ based on the value of _lookup_. If _lookup_ is not found, <<reference/variable-value.html,VariableValue.Empty>> will be returned.
 
-<<reference/set-variable-result.html,SetVariableResult>> Apply(<<reference/variable-value&.html,VariableValue>> _owner_ _(ref)_, <<reference/variable-value.html,VariableValue>> _lookup_, <<reference/variable-value.html,VariableValue>> _value_)::
+<<reference/set-variable-result.html,SetVariableResult>> Apply(<<reference/variable-value.html,VariableValue>> _owner_ _(ref)_, <<reference/variable-value.html,VariableValue>> _lookup_, <<reference/variable-value.html,VariableValue>> _value_)::
 
 Sets a value contained in _owner_ based on _lookup_ to _value_. _owner_ will be updated to the new value. If _owner_ is not holding a reference as determined by <<reference/variable-value.html,VariableValue.IsReference>> it must be reassigned to the container it is being held in. The return value indicates success or the reason for failure.
 

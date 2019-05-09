@@ -12,9 +12,9 @@ namespace PiRhoSoft.CompositionEngine
 
 	public interface IVariableStore
 	{
+		IList<string> GetVariableNames();
 		VariableValue GetVariable(string name);
 		SetVariableResult SetVariable(string name, VariableValue value);
-		IList<string> GetVariableNames();
 	}
 
 	public class VariableStore : IVariableStore

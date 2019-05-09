@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Set Card Size
   m_EditorClassIdentifier: 
   Name: Set Card Size
-  GraphPosition: {x: 1600, y: 25.6}
+  GraphPosition: {x: 1472, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 114696056752831474}
   Transform:
@@ -87,11 +87,15 @@ MonoBehaviour:
   m_Name: Compute Size
   m_EditorClassIdentifier: 
   Name: Compute Size
-  GraphPosition: {x: 768, y: 89.6}
+  GraphPosition: {x: 640, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 114309927829230756}
   Expression:
-    _statement: 'local.availableHeight = (local.cameraHeight - 1) * 0.5
+    _statement: 'local.cameraAspect = scene.Main Camera as Camera.aspect
+
+      local.cameraHeight = scene.Main Camera as Camera.orthographicSize
+
+      local.availableHeight = (local.cameraHeight - 1) * 0.5
 
       local.availableWidth = local.cameraHeight * local.cameraAspect / 6.5
 
@@ -164,8 +168,6 @@ MonoBehaviour:
     - {fileID: 114673358792983352}
     - {fileID: 114764902459509120}
     - {fileID: -6407850337588172350}
-    - {fileID: 4952891770008714630}
-    - {fileID: 4656647237025211028}
     - {fileID: -7208375029598702868}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114169463803128364}
@@ -241,7 +243,7 @@ MonoBehaviour:
   m_Name: Set Card Binding
   m_EditorClassIdentifier: 
   Name: Set Card Binding
-  GraphPosition: {x: 1728, y: 153.6}
+  GraphPosition: {x: 1600, y: 153.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Object:
@@ -289,7 +291,7 @@ MonoBehaviour:
   m_Name: Iterate Suits
   m_EditorClassIdentifier: 
   Name: Iterate Suits
-  GraphPosition: {x: 1088, y: -12.8}
+  GraphPosition: {x: 960, y: -12.8}
   IsBreakpoint: 0
   Container:
     _variable: global.Cards.Suits
@@ -328,7 +330,7 @@ MonoBehaviour:
   m_Name: Iterate Ranks
   m_EditorClassIdentifier: 
   Name: Iterate Ranks
-  GraphPosition: {x: 1152, y: 51.2}
+  GraphPosition: {x: 1024, y: 51.2}
   IsBreakpoint: 0
   Container:
     _variable: global.Cards.Ranks
@@ -489,7 +491,7 @@ MonoBehaviour:
   m_Name: Create Card
   m_EditorClassIdentifier: 
   Name: Create Card
-  GraphPosition: {x: 1536, y: -38.4}
+  GraphPosition: {x: 1408, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: -7208375029598702868}
   Prefab:
@@ -567,7 +569,7 @@ MonoBehaviour:
   m_Name: Set Card Data
   m_EditorClassIdentifier: 
   Name: Set Card Data
-  GraphPosition: {x: 1664, y: 89.6}
+  GraphPosition: {x: 1536, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 114233220627467950}
   Expression:
@@ -596,7 +598,7 @@ MonoBehaviour:
   m_Name: Set Name
   m_EditorClassIdentifier: 
   Name: Set Name
-  GraphPosition: {x: 1472, y: -102.4}
+  GraphPosition: {x: 1344, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114675892718543162}
   Expression:
@@ -655,7 +657,7 @@ MonoBehaviour:
   Name: Reset Load
   GraphPosition: {x: 320, y: 25.6}
   IsBreakpoint: 0
-  Next: {fileID: 4656647237025211028}
+  Next: {fileID: -6407850337588172350}
   Object:
     _variable: global.Deck
     _tokens:
@@ -664,75 +666,3 @@ MonoBehaviour:
     - Type: 0
       Text: Deck
   Tag: Load
---- !u!114 &4656647237025211028
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Get Camera Height
-  m_EditorClassIdentifier: 
-  Name: Get Camera Height
-  GraphPosition: {x: 640, y: -38.4}
-  IsBreakpoint: 0
-  Next: {fileID: 4952891770008714630}
-  Target:
-    Type: 1
-    Reference:
-      _variable: scene.Main Camera
-      _tokens:
-      - Type: 0
-        Text: scene
-      - Type: 0
-        Text: Main Camera
-    Value: {fileID: 0}
-  Output:
-    _variable: local.cameraHeight
-    _tokens:
-    - Type: 0
-      Text: local
-    - Type: 0
-      Text: cameraHeight
-  _targetTypeName: UnityEngine.Camera, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  _propertyName: orthographicSize
---- !u!114 &4952891770008714630
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f143eb439654d478dc185a0d397b74, type: 3}
-  m_Name: Get Aspect Ratio
-  m_EditorClassIdentifier: 
-  Name: Get Aspect Ratio
-  GraphPosition: {x: 704, y: 25.6}
-  IsBreakpoint: 0
-  Next: {fileID: -6407850337588172350}
-  Target:
-    Type: 1
-    Reference:
-      _variable: scene.Main Camera
-      _tokens:
-      - Type: 0
-        Text: scene
-      - Type: 0
-        Text: Main Camera
-    Value: {fileID: 0}
-  Output:
-    _variable: local.cameraAspect
-    _tokens:
-    - Type: 0
-      Text: local
-    - Type: 0
-      Text: cameraAspect
-  _targetTypeName: UnityEngine.Camera, UnityEngine.CoreModule, Version=0.0.0.0, Culture=neutral,
-    PublicKeyToken=null
-  _propertyName: aspect

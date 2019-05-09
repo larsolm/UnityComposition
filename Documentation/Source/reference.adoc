@@ -72,7 +72,11 @@ include::reference/input-node-button-button-type.adoc[]
 
 <<<
 
-include::reference/call-method-node.adoc[]
+include::reference/class-map.adoc[]
+
+<<<
+
+include::reference/class-map-1.adoc[]
 
 <<<
 
@@ -105,10 +109,6 @@ include::reference/command-evaluation-exception.adoc[]
 <<<
 
 include::reference/comment-node.adoc[]
-
-<<<
-
-include::reference/composition.adoc[]
 
 <<<
 
@@ -248,10 +248,6 @@ include::reference/game-object-variable-source.adoc[]
 
 <<<
 
-include::reference/get-property-node.adoc[]
-
-<<<
-
 include::reference/graph-trigger-binding.adoc[]
 
 <<<
@@ -261,6 +257,10 @@ include::reference/hide-control-node.adoc[]
 <<<
 
 include::reference/i-assignable-operation.adoc[]
+
+<<<
+
+include::reference/i-class-map.adoc[]
 
 <<<
 
@@ -413,6 +413,10 @@ include::reference/i-variable-reset.adoc[]
 <<<
 
 include::reference/i-variable-store.adoc[]
+
+<<<
+
+include::reference/list-adapter.adoc[]
 
 <<<
 
@@ -668,10 +672,6 @@ include::reference/set-binding-node.adoc[]
 
 <<<
 
-include::reference/set-property-node.adoc[]
-
-<<<
-
 include::reference/set-variable-result.adoc[]
 
 <<<
@@ -757,10 +757,6 @@ include::reference/timeline-variable-source.adoc[]
 <<<
 
 include::reference/time-scale-node.adoc[]
-
-<<<
-
-include::reference/composition-manager-tracking-data.adoc[]
 
 <<<
 
