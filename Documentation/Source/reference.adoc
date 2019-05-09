@@ -112,10 +112,6 @@ include::reference/comment-node.adoc[]
 
 <<<
 
-include::reference/composition.adoc[]
-
-<<<
-
 include::reference/composition-manager.adoc[]
 
 <<<
@@ -761,10 +757,6 @@ include::reference/timeline-variable-source.adoc[]
 <<<
 
 include::reference/time-scale-node.adoc[]
-
-<<<
-
-include::reference/composition-manager-tracking-data.adoc[]
 
 <<<
 

@@ -2,6 +2,6 @@
 {
 	public static class Composition
 	{
-		public const string DocumentationUrl = "http://localhost:3000/#/v10/manual/";
+		public const string DocumentationUrl = "http://pirhosoft.com/projects/unity-composition/documentation/#/v10/manual/";
 	}
 }

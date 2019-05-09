@@ -1,4 +1,5 @@
-[#manual/log-descriptions]
+[#overview/log-descriptions]
+
 ## Log Descriptions
 
 ### Warnings
@@ -315,11 +316,11 @@ CISROO:: failed to store output {0}: the variable '{1}' is read only
 --
 --
 
-CMVSIF:: failed to map field '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived field types can be mapped
+CMVSIF:: failed to map field '{0}' of type '{1}': Only VariableValue types can be mapped
 --
 --
 
-CMVSIP:: failed to map property '{0}' of type '{1}': Only bool, int, float, string, Object derived, or IVariableStore derived property types can be mapped
+CMVSIP:: failed to map property '{0}' of type '{1}': Only VariableValue types can be mapped
 --
 --
 

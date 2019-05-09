@@ -210,12 +210,12 @@
         "Templates": {
             "File": "<ul>\n{Categories}</ul>",
             "Category": "\t<li>\n\t\t<span class='menu-header'>{CategoryName}</span>\n\t\t<ul>\n{Sections}\t\t</ul>\n\t</li>\n",
-            "Section": "\t\t\t<li>\n\t\t\t\t<a class='menu-section' data-section='{CategoryId}-{SectionId}' href>{SectionName}</a>\n\t\t\t\t<ul class='submenu'>\n{Types}\t\t\t\t</ul>\n\t\t\t</li>\n",
+            "Section": "\t\t\t<li class='search-root'>\n\t\t\t\t<a class='menu-section' data-section='{CategoryId}-{SectionId}' href>{SectionName}</a>\n\t\t\t\t<ul class='submenu'>\n{Types}\t\t\t\t</ul>\n\t\t\t</li>\n",
             "Type": "\t\t\t\t\t<li><a class='menu-link' href='{CategoryId}/{TypeId}.html'>{TypeName}</a></li>\n"
         }
     },
     "LogDescriptions": {
-        "OutputFile": "log-descriptions.adoc",
+        "OutputFile": "overview/log-descriptions.adoc",
         "IncludedTypes": -1,
         "IncludedNamespaces": {
             "_items": [
@@ -223,11 +223,11 @@
                 "PiRhoSoft.CompositionEditor"
             ]
         },
-        "DocumentTemplate": "[#manual/log-descriptions]\r\n## Log Descriptions\r\n\r\n### Warnings\r\n{Warnings}\r\n### Errors\r\n{Errors}",
+        "DocumentTemplate": "[#overview/log-descriptions]\r\n\n## Log Descriptions\r\n\r\n### Warnings\r\n{Warnings}\r\n### Errors\r\n{Errors}",
         "MessageTemplate": "\r\n{Id}:: {Message}\r\n--\r\n--\r\n"
     },
     "HelpUrls": {
-        "UrlRoot": "http://localhost:3000/#/v10/manual/",
+        "UrlRoot": "http://pirhosoft.com/projects/unity-composition/documentation/#/v10/manual/",
         "IncludedNamespaces": {
             "_items": [
                 "PiRhoSoft.CompositionEngine"
