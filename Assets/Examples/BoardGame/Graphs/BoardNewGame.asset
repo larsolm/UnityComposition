@@ -16,6 +16,7 @@ MonoBehaviour:
   ContextDefinition:
     _type: 0
     _constraint: 
+    _objects: []
     _tag: 
     _initializer:
       _statement: 
@@ -34,6 +35,7 @@ MonoBehaviour:
     - {fileID: 114985672940832184}
     - {fileID: 114351045605106056}
     - {fileID: 114230166674494026}
+    - {fileID: 2453179549209600544}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114822524818316652}
 --- !u!114 &114230166674494026
@@ -264,3 +266,19 @@ MonoBehaviour:
     - Type: 0
       Text: piece
   Loop: {fileID: 114230166674494026}
+--- !u!114 &2453179549209600544
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Creat a New Game
+  m_EditorClassIdentifier: 
+  Name: Creat a New Game
+  GraphPosition: {x: 0, y: -64}
+  IsBreakpoint: 0
+  Comment: Rest variables, and positions, of all players and their pieces.

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Get Positions
   m_EditorClassIdentifier: 
   Name: Get Positions
-  GraphPosition: {x: 640, y: -38.4}
+  GraphPosition: {x: 371.2, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114333688614890142}
   Expression:
@@ -57,6 +57,7 @@ MonoBehaviour:
     - {fileID: 114430784282294890}
     - {fileID: 114786529422199906}
     - {fileID: -7958041883700741539}
+    - {fileID: 8245883561186698128}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114843694311622104}
 --- !u!114 &114068179680205262
@@ -72,7 +73,7 @@ MonoBehaviour:
   m_Name: Damage Message
   m_EditorClassIdentifier: 
   Name: Damage Message
-  GraphPosition: {x: 1420.8, y: -25.6}
+  GraphPosition: {x: 1126.4, y: -115.200005}
   IsBreakpoint: 0
   Next: {fileID: 114852501960501228}
   Control:
@@ -100,7 +101,7 @@ MonoBehaviour:
   m_Name: Move to Target
   m_EditorClassIdentifier: 
   Name: Move to Target
-  GraphPosition: {x: 640, y: 38.4}
+  GraphPosition: {x: 435.2, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114394662788877812}
   Transform:
@@ -170,7 +171,7 @@ MonoBehaviour:
   m_Name: Scratch Effect
   m_EditorClassIdentifier: 
   Name: Scratch Effect
-  GraphPosition: {x: 985.60004, y: -64}
+  GraphPosition: {x: 678.4, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114786529422199906}
   Effect:
@@ -226,7 +227,7 @@ MonoBehaviour:
   m_Name: Move to Start
   m_EditorClassIdentifier: 
   Name: Move to Start
-  GraphPosition: {x: 1779.2001, y: -25.6}
+  GraphPosition: {x: 1331.2001, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Transform:
@@ -296,13 +297,13 @@ MonoBehaviour:
   m_Name: Apply Damage
   m_EditorClassIdentifier: 
   Name: Apply Damage
-  GraphPosition: {x: 1356.8, y: -102.4}
+  GraphPosition: {x: 908.8, y: 51.2}
   IsBreakpoint: 0
   Next: {fileID: 114068179680205262}
   Expression:
     _statement: 'target = fighter.Pool.Target;
 
-      damage = Damage(Random(45, 55), fighter.Attack, fighter.AttackMod, target.Defense,
+      damage = Damage(Random(30, 40), fighter.Attack, fighter.AttackMod, target.Defense,
       target.DefenseMod);
 
       target.CurrentHP -= damage;
@@ -321,7 +322,7 @@ MonoBehaviour:
   m_Name: Play Animation
   m_EditorClassIdentifier: 
   Name: Play Animation
-  GraphPosition: {x: 1036.8, y: 12.8}
+  GraphPosition: {x: 793.60004, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114696895779975292}
   AnimationPlayer:
@@ -349,7 +350,7 @@ MonoBehaviour:
   m_Name: Scratch Message
   m_EditorClassIdentifier: 
   Name: Scratch Message
-  GraphPosition: {x: 320, y: 0}
+  GraphPosition: {x: 307.2, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: -7958041883700741539}
   Control:
@@ -377,7 +378,7 @@ MonoBehaviour:
   m_Name: Update Binding
   m_EditorClassIdentifier: 
   Name: Update Binding
-  GraphPosition: {x: 1536, y: 51.2}
+  GraphPosition: {x: 1216, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: 114430784282294890}
   Object:
@@ -393,3 +394,19 @@ MonoBehaviour:
       Text: Display
   Group: HP
   WaitForCompletion: 1
+--- !u!114 &8245883561186698128
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Use Scratch
+  m_EditorClassIdentifier: 
+  Name: Use Scratch
+  GraphPosition: {x: 0, y: -64}
+  IsBreakpoint: 0
+  Comment: Display a message, play an animation, and apply damage with an expression.

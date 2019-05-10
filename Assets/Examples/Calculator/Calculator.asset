@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6558346343345955386
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Calculator
+  m_EditorClassIdentifier: 
+  Name: Calculator
+  GraphPosition: {x: 512, y: 307.2}
+  IsBreakpoint: 0
+  Comment: A primitive calculator that demonstrates basic expressions, branching,
+    and data binding.
 --- !u!114 &-4263988743012485935
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -15,6 +32,23 @@ MonoBehaviour:
   Name: Break
   GraphPosition: {x: 1228.8, y: 460.80002}
   IsBreakpoint: 0
+--- !u!114 &-2012380274698707704
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Input Buttons
+  m_EditorClassIdentifier: 
+  Name: Input Buttons
+  GraphPosition: {x: 1075.2001, y: -153.6}
+  IsBreakpoint: 0
+  Comment: None of these buttons actually exist in the input settings of the project
+    however, they are maintained by the InputHelper and set by buttons in the scene.
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +101,8 @@ MonoBehaviour:
     - {fileID: 114817616350442620}
     - {fileID: 114986298978509238}
     - {fileID: -4263988743012485935}
+    - {fileID: -2012380274698707704}
+    - {fileID: -6558346343345955386}
   StartPosition: {x: 512, y: 384}
   Process: {fileID: 114878619638461498}
 --- !u!114 &114003219145756106

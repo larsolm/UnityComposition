@@ -30,6 +30,7 @@ MonoBehaviour:
     _items:
     - {fileID: 114965222403114964}
     - {fileID: 114471685298128452}
+    - {fileID: 7125183999061698613}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114965222403114964}
 --- !u!114 &114471685298128452
@@ -45,7 +46,7 @@ MonoBehaviour:
   m_Name: Death Message
   m_EditorClassIdentifier: 
   Name: Death Message
-  GraphPosition: {x: 640, y: 0}
+  GraphPosition: {x: 384, y: 38.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -73,7 +74,7 @@ MonoBehaviour:
   m_Name: Move Death
   m_EditorClassIdentifier: 
   Name: Move Death
-  GraphPosition: {x: 320, y: 0}
+  GraphPosition: {x: 307.2, y: -51.2}
   IsBreakpoint: 0
   Next: {fileID: 114471685298128452}
   Transform:
@@ -128,3 +129,19 @@ MonoBehaviour:
       _variable: 
       _tokens: []
     Value: 1
+--- !u!114 &7125183999061698613
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Fighter Died
+  m_EditorClassIdentifier: 
+  Name: Fighter Died
+  GraphPosition: {x: 0, y: -64}
+  IsBreakpoint: 0
+  Comment: Animated the fighter downward and display a message

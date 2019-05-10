@@ -34,6 +34,7 @@ MonoBehaviour:
     - {fileID: 114778227458156200}
     - {fileID: 114583920142565304}
     - {fileID: 114266749056173128}
+    - {fileID: 8969950336140679604}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114511827222632378}
 --- !u!114 &114038718947476258
@@ -49,7 +50,7 @@ MonoBehaviour:
   m_Name: Is Poisoned
   m_EditorClassIdentifier: 
   Name: Is Poisoned
-  GraphPosition: {x: 1280, y: -12.8}
+  GraphPosition: {x: 704, y: -38.4}
   IsBreakpoint: 0
   OnTrue: {fileID: 114583920142565304}
   OnFalse: {fileID: 114778227458156200}
@@ -68,7 +69,7 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   Name: Heal
-  GraphPosition: {x: 960, y: -0}
+  GraphPosition: {x: 371.2, y: 76.8}
   IsBreakpoint: 0
   Next: {fileID: 114038718947476258}
   Expression:
@@ -86,7 +87,7 @@ MonoBehaviour:
   m_Name: Antidote Effect
   m_EditorClassIdentifier: 
   Name: Antidote Effect
-  GraphPosition: {x: 640, y: -0}
+  GraphPosition: {x: 332.80002, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114266749056173128}
   Effect:
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_Name: Use Message
   m_EditorClassIdentifier: 
   Name: Use Message
-  GraphPosition: {x: 320, y: -0}
+  GraphPosition: {x: 307.2, y: -115.200005}
   IsBreakpoint: 0
   Next: {fileID: 114368647590418722}
   Control:
@@ -168,7 +169,7 @@ MonoBehaviour:
   m_Name: Healed Message
   m_EditorClassIdentifier: 
   Name: Healed Message
-  GraphPosition: {x: 1600, y: -38.4}
+  GraphPosition: {x: 1024, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -196,7 +197,7 @@ MonoBehaviour:
   m_Name: No Effect Message
   m_EditorClassIdentifier: 
   Name: No Effect Message
-  GraphPosition: {x: 1600, y: 64}
+  GraphPosition: {x: 1024, y: 38.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -211,3 +212,19 @@ MonoBehaviour:
   WaitTime: 0
   Message:
     Text: It had no effect...
+--- !u!114 &8969950336140679604
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Use an Antidote
+  m_EditorClassIdentifier: 
+  Name: Use an Antidote
+  GraphPosition: {x: -0, y: -64}
+  IsBreakpoint: 0
+  Comment: Display a messages, play an animation, heal the fighter with an expression.

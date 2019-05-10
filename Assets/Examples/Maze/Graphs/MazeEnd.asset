@@ -183,7 +183,7 @@ MonoBehaviour:
   m_Name: Comment
   m_EditorClassIdentifier: 
   Name: Comment
-  GraphPosition: {x: -0, y: -128}
+  GraphPosition: {x: 0, y: -89.6}
   IsBreakpoint: 0
   Comment: End the level by disabling the Player's input, showing a message, fading
     out and then loading the next scene

@@ -41,6 +41,7 @@ MonoBehaviour:
     - {fileID: 114844542458262784}
     - {fileID: 4496683696549136755}
     - {fileID: 6424861838356257627}
+    - {fileID: 4407584310311653300}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 6424861838356257627}
 --- !u!114 &114844542458262784
@@ -56,12 +57,29 @@ MonoBehaviour:
   m_Name: Is Open
   m_EditorClassIdentifier: 
   Name: Is Open
-  GraphPosition: {x: 640, y: -12.8}
+  GraphPosition: {x: 409.6, y: -12.8}
   IsBreakpoint: 0
   OnTrue: {fileID: 4496683696549136755}
   OnFalse: {fileID: 0}
   Condition:
     _statement: gate.Open
+--- !u!114 &4407584310311653300
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Initialize Gate
+  m_EditorClassIdentifier: 
+  Name: Initialize Gate
+  GraphPosition: {x: 0, y: -89.6}
+  IsBreakpoint: 0
+  Comment: Get and set the appropriate starting position for the gate based on if
+    it is open or closed.
 --- !u!114 &4496683696549136755
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -75,7 +93,7 @@ MonoBehaviour:
   m_Name: Set Position
   m_EditorClassIdentifier: 
   Name: Set Position
-  GraphPosition: {x: 947.2, y: 0}
+  GraphPosition: {x: 550.4, y: 89.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -93,7 +111,7 @@ MonoBehaviour:
   m_Name: Get Positions
   m_EditorClassIdentifier: 
   Name: Get Positions
-  GraphPosition: {x: 320, y: -0}
+  GraphPosition: {x: 307.2, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 114844542458262784}
   Expression:
