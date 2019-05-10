@@ -1,5 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4255336057702288397
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Function
+  m_EditorClassIdentifier: 
+  Name: Function
+  GraphPosition: {x: -512, y: 64}
+  IsBreakpoint: 0
+  Comment: Determines which cards are movable based on the current location of the
+    aces.
+--- !u!114 &-2629659999664203923
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 1408, y: 51.2}
+  IsBreakpoint: 0
+  Comment: Once a valid location is found, it is unnecessary to see if there is another
+    one
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -34,6 +68,8 @@ MonoBehaviour:
     - {fileID: 114072053865888632}
     - {fileID: 114645094158174062}
     - {fileID: 114344252803231214}
+    - {fileID: -4255336057702288397}
+    - {fileID: -2629659999664203923}
   StartPosition: {x: -512, y: -0}
   Process: {fileID: 114928373657034508}
 --- !u!114 &114072053865888632
@@ -120,6 +156,7 @@ MonoBehaviour:
   GraphPosition: {x: 768, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 114645094158174062}
+  Source: 0
   Instruction:
     _instruction: {fileID: 11400000, guid: a232be99990832a49a8a87a42662616c, type: 2}
     _inputs:
@@ -159,6 +196,9 @@ MonoBehaviour:
           Text: card
         - Type: 0
           Text: Movable
+  Reference:
+    _variable: 
+    _tokens: []
   Context:
     Type: 0
     Reference:

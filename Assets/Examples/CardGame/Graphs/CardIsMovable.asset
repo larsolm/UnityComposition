@@ -63,6 +63,8 @@ MonoBehaviour:
     - {fileID: 114894803618125250}
     - {fileID: 114245761533034482}
     - {fileID: 114376349029503948}
+    - {fileID: 8262193562969631108}
+    - {fileID: 7589526586016163492}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114314403795803868}
 --- !u!114 &114245761533034482
@@ -170,3 +172,37 @@ MonoBehaviour:
 
       local.previous.Row == input.ace.Row && local.previous.Column == input.ace.Column
       - 1'
+--- !u!114 &7589526586016163492
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 320, y: 89.6}
+  IsBreakpoint: 0
+  Comment: Aces can never be moved, 2s can be moved if the ace is in the first column,
+    and others can be moved if the card to the left of the ace is the previous ranked
+    card of the same suit
+--- !u!114 &8262193562969631108
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Function
+  m_EditorClassIdentifier: 
+  Name: Function
+  GraphPosition: {x: -0, y: 89.6}
+  IsBreakpoint: 0
+  Comment: Determines if a card can be selected and moved to the location of an ace

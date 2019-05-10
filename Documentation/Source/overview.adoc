@@ -8,8 +8,4 @@ include::overview/roadmap.adoc[]
 
 <<<
 
-include::overview/known-issues.adoc[]
-
-<<<
-
 include::overview/log-descriptions.adoc[]

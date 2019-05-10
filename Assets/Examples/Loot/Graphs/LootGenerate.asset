@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-3875152213272582318
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Equipment Type
+  m_EditorClassIdentifier: 
+  Name: Equipment Type
+  GraphPosition: {x: 2432, y: 371.2}
+  IsBreakpoint: 0
+  Comment: Currently there is only one equipment type (Weapon) but this is set up
+    to handle more (Shield, Helmet, etc).
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,6 +108,7 @@ MonoBehaviour:
     - {fileID: 114927454209653946}
     - {fileID: 114359033018892398}
     - {fileID: 114910943218646728}
+    - {fileID: -3875152213272582318}
   StartPosition: {x: 320, y: 0}
   Process: {fileID: 114536436813133052}
 --- !u!114 &114133470515214848
