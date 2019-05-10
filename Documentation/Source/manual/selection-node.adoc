@@ -2,10 +2,11 @@
 
 ## Selection Node
 
-A Message Node is an <<manua/instruction-graph-node.html,Instruction Graph Node>> that will tell a <<manual/message-control.html,Message Control>> to shop a <<reference/message.html,Message>>. Showing a <<reference/message.html,Message>> will automatically activate the <<manual/message-control.html,Message Control>> and will hide it when the <<reference/message.html,Message>> is complete if _AutoHide_ is `true`. If _AutoHide_ is `false` then a <<manual/hide-control-node.html,Hide Control Node>> must be used to deactivate it. Create a Message Node in the menu:Create[Interface > Message] menu of the Instruction Graph Window.
+A Selection Node is an <<manua/instruction-graph-node.html,Instruction Graph Node>> that will tell a <<manual/selection-control.html,Selection Control>> to show a list of selections created via <<reference/menu-item-template.html,MenuItemTemplates>>. Showing a selection will automatically activate the <<manual/selection-control.html,Selection Control>> and will hide it once a selection has been made if _AutoHide_ is `true`. If _AutoHide_ is `false` then a <<manual/hide-control-node.html,Hide Control Node>> must be used to deactivate it. When a selection is made the selected item and index will be assigned to <<reference/variables-referenece.html,variables>> specified by _SelectedItem_ and _SelectedIndex_. The graph will then branch to the corresponding node of the <<reference/selection-node-item.html,selected item>>. Create a Selection Node in the menu:Create[Interface > Selection] menu of the Instruction Graph Window.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
-See the _"Level Message"_ node on the _"MazeStart"_ <<manual/instruction-graph.html,Instruction Graph>> in the Maze project for an example usage.
+See the <<topics/interface-4,Menus and Selections>> for more information on selections. +
+See the <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See the _"Shop"_ <<manual/instruction-graph.html,Instruction Graph>> in the Shop project for an example usage.
 
 ### Fields
 

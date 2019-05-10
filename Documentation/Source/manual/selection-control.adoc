@@ -4,6 +4,7 @@
 
 A Selection Control is an <<manual/interface-control.html,Interface Control>> that creates and shows a list of child <<manual/menu-item.html,Menu Items>> on a sibling <<manual/menu.html,Menu>> to be selected from when promted. A Selection Control usually is activated, shown, and deactivated by a <<manual/selection-node.html,Selection Node>>. A Selection Control works with a <<manual/menu-input.html,Menu Input>> which will respond to input for changing focus and selecting an item.
 
+See the <<topics/interface-4,Menus and Selections>> topic for more information on selections. +
 See the _"Selection"_ object in _"Shop"_ scene of the Shop project for an example usage.
 
 ifdef::backend-multipage_html5[]

@@ -14,7 +14,7 @@ And the scene it references which has a <<manual/message-control.html,Message>> 
 
 image::interface-example-scene.png[Interface Example Scene]
 
-See the _"Shop"_ scene in the shop projects to view this example.
+See the _"Shop"_ scene in the Shop project to view this example.
 
 ### Topics
 
