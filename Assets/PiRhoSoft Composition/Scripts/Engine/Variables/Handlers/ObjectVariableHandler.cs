@@ -47,7 +47,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (owner.HasStore)
 				return StoreVariableHandler.LookupInStore(owner, lookup);
 
-			if (lookup.HasString && ClassMap.Get(owner.ReferenceType, out var map))
+			if (lookup.HasString && owner.ReferenceType != null && ClassMap.Get(owner.ReferenceType, out var map))
 				return map.GetVariable(owner.Reference, lookup.String);
 
 			// could fall back to reflection here and in Apply_
@@ -63,7 +63,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (owner.HasStore)
 				return StoreVariableHandler.ApplyToStore(ref owner, lookup, value);
 
-			if (lookup.HasString && ClassMap.Get(owner.ReferenceType, out var map))
+			if (lookup.HasString && owner.ReferenceType != null && ClassMap.Get(owner.ReferenceType, out var map))
 				return map.SetVariable(owner.Reference, lookup.String, value);
 
 			return SetVariableResult.NotFound;

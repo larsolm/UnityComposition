@@ -2,29 +2,52 @@
 
 ## Custom Variable Stores
 
-When writing https://docs.unity3d.com/Manual/CreatingComponents.html[custom components^] it is often useful to expose the object and its properties to the variables system. This can be done by implementing the <<reference/i-variable-store.html,IVariableStore>> interface. This interface is fairly straight forward and is perfect for small helper classes that expose a few properties. For example, consider an inventory item that consists of an object and count:
+When writing https://docs.unity3d.com/Manual/CreatingComponents.html[Components^] or https://docs.unity3d.com/Manual/class-ScriptableObject.html[ScriptableObjects^] it is often useful to expose the object and its properties to the variables system. This can be done by implementing the <<reference/i-variable-store.html,IVariableStore>> interface. This interface consists of three easy to implement methods that provide all the necessary functionality for fully exposing the object and its properties.
+
+### IVariableStore
+
+As an example, consider the `LootWeapon` <<manual/variable-schema.html,Variable Schema>> and various weapons that use it in the `Loot` example. The same setup could be accomplished in code by defining a `LootWeapon` https://docs.unity3d.com/Manual/class-ScriptableObject.html[ScriptableObject^] that implements <<reference/i-variable-store.html,IVariableStore>>.
 
 [source,cs]
 ----
-using PiRhoSoft.CompositionEngine
+using System.Collections.Generic;
+using PiRhoSoft.CompositionEngine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
 {
-	public class InventoryItem : IVariableStore
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeapon : ScriptableObject, IVariableStore
 	{
-		public Item Item;
-		public int Count;
-		
-		private static readonly string[] _names = new string[] { nameof(Item), nameof(Count) };
+		public string Name;
+		public float MinimumSpeed;
+		public float MaximumSpeed;
+		public int MinimumStrength;
+		public int MaximumStrength;
 
-		public IList<string> GetVariableNames() => _names;
+		private static List<string> _names = new List<string>
+		{
+			nameof(Name),
+			nameof(MinimumSpeed),
+			nameof(MaximumSpeed),
+			nameof(MinimumStrength),
+			nameof(MaximumStrength)
+		};
+
+		public IList<string> GetVariableNames()
+		{
+			return _names;
+		}
+
 		public VariableValue GetVariable(string name)
 		{
 			switch (name)
 			{
-				case nameof(Item): return VariableValue.Create(Item);
-				case nameof(Count): return VariableValue.Create(Count);
+				case nameof(Name): return VariableValue.Create(Name);
+				case nameof(MinimumSpeed): return VariableValue.Create(MinimumSpeed);
+				case nameof(MaximumSpeed): return VariableValue.Create(MaximumSpeed);
+				case nameof(MinimumStrength): return VariableValue.Create(MinimumStrength);
+				case nameof(MaximumStrength): return VariableValue.Create(MaximumStrength);
 				default: return VariableValue.Empty;
 			}
 		}
@@ -33,17 +56,11 @@ namespace PiRhoSoft.CompositionExample
 		{
 			switch (name)
 			{
-				case nameof(Item): return SetVariableResult.ReadOnly;
-				case nameof(Count):
-					if (value.TryGetInt(out int count))
-					{
-						Count = count;
-						return SetVariableResult.Success;
-					}
-					else
-					{
-						return SetVariableResult.TypeMismatch;
-					}
+				case nameof(Name): return value.TryGetString(out Name) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MinimumSpeed): return value.TryGetFloat(out MinimumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MaximumSpeed): return value.TryGetFloat(out MaximumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MinimumStrength): return value.TryGetInt(out MinimumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MaximumStrength): return value.TryGetInt(out MaximumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
 				default: return SetVariableResult.NotFound;
 			}
 		}
@@ -51,74 +68,69 @@ namespace PiRhoSoft.CompositionExample
 }
 ----
 
+Each of the weapon assets would then be created as instances of `LootWeapon` instead of <<manual/variable-set-asset.html,Variable Set Asset>>.
+
+### Mapped Variables
+
 For more complex classes with many properties, or classes that want a mix of code defined and editor defined properties, it is much simpler and more flexible to use the <<reference,mapped-variable-store,MappedVariableStore>> class. This can be used directly or by deriving from the <<reference/variable-set-component.html,VariableSetComponent>> (for https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviours^]) or <<reference/variable-set-asset.html,VariableSetAsset>> (for https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObjects^]). These classes can also be used directly without subclassing as described in <<topics/variables-3.html,Defining Variables>> but become more powerful when extended. Deriving automatically adds <<reference/variable-schema.html,VariableSchema>> support, <<reference/i-variable-store.html,IVariableStore>> access for all schema and code defined properties, variable resetting with <<reference/i-variable-reset.html,IVariableReset>>, and full editor and <<topics/graphs-5.html,watch window>> integration.
 
-To expose code defined fields and properties to the variables system, the <<reference/mapped-variable-attribute,MappedVariableAttribute>> is used. This is as simple as adding the attribute to a field or property on a class derived from <<reference/variable-set-component.html,VariableSetComponent>> or <<reference/variable-set-asset.html,VariableSetAsset>>. The <<reference/mapped-variable-attribute,MappedVariableAttribute>> can optionally be passed a parameter indicating whether the variable is allowed to be set by the variables system. A property without a setter will automatically be read only.
+To expose code defined fields and properties to the variables system, the <<reference/mapped-variable-attribute,MappedVariableAttribute>> is used. This is as simple as adding the attribute to a field or property on a class derived from <<reference/variable-set-component.html,VariableSetComponent>> or <<reference/variable-set-asset.html,VariableSetAsset>>. Following is an example of the same `LootWeapon` class defined as a <<reference/variable-set-asset.html,VariableSetAsset>> instead of an <<reference/i-variable-store.html,IVariableStore>>. This has the same functionality as the above example but can also be extended in the editor with a <<reference/variable-schema.html,VariableSchema>>.
 
 [source,cs]
 ----
-using PiRhoSoft.CompositionEngine
+using PiRhoSoft.CompositionEngine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
 {
-	public class Player : VariableSetComponent
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeapon : VariableSetAsset
 	{
 		[MappedVariable] public string Name;
+		[MappedVariable] public float MinimumSpeed;
+		[MappedVariable] public float MaximumSpeed;
+		[MappedVariable] public int MinimumStrength;
+		[MappedVariable] public int MaximumStrength;
 	}
 }
 ----
 
-If this player is placed on the global store (possibly using <<reference/variable-link.html,VariableLink>>) with the name `"Player"`, _Name_ could then be accessed with a <<reference/variable-reference.html,VariableReference>> set to `global.Player.Name`.
+The <<reference/mapped-variable-attribute,MappedVariableAttribute>> can optionally be passed a parameter indicating whether the variable is allowed to be set by the variables system. The attribute can also be added to properties. A property without a setter will automatically be read only.
 
-All <<reference/variable-type.html,VariableTypes>> are supported with <<reference/mapped-variable-attribute,MappedVariableAttribute>> including https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1?view=netframework-4.8[IList<T>^] implementors when _T_ is itself a valid <<reference/variable-type.html,VariableType>>. Here is a slightly expanded example of Player using the InventoryItem class defined above.
+All <<reference/variable-type.html,VariableTypes>> are supported with <<reference/mapped-variable-attribute,MappedVariableAttribute>> including https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1?view=netframework-4.8[IList<T>^] implementors when _T_ is itself a valid <<reference/variable-type.html,VariableType>>.
+
+### Class Maps
+
+In situations where an https://docs.unity3d.com/ScriptReference/Object.html[Object^] class cannot be changed to implement <<reference/i-variable-store.html,IVariableStore>>, like for a third party or built in https://docs.unity3d.com/ScriptReference/Component.html[Component^], the <<reference/class-map-1.html,ClassMap>> class is provided. The following is an example of the `LootWeapon` class exposed to the variables system using a <<reference/class-map-1.html,ClassMap>> instead of with <<reference/i-variable-store.html,IVariableStore>> or <<reference/variable-set-asset.html,VariableSetAsset>>.
 
 [source,cs]
 ----
-using PiRhoSoft.CompositionEngine
+using PiRhoSoft.CompositionEngine;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
 {
-	public class Player : VariableSetComponent
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeapon : ScriptableObject
 	{
-		[MappedVariable] public string Name;
-		[MappedVariable] public List<InventoryItem> Inventory = new List<InventoryItem>();
-	}
-}
-----
-
-Items in the Player`s inventory can now be accessed with `global.Player.Inventory`. Getting the `Count` of the first item would be done using `global.Player.Inventory[0].Count`.
-
-### Exposing Third Party Classes
-
-In situations where an https://docs.unity3d.com/ScriptReference/Object.html[Object^] class cannot be changed to implement <<reference/i-variable-store.html,IVariableStore>>, like for a third party or built in https://docs.unity3d.com/ScriptReference/Component.html[Component^], the <<reference/class-map-1.html,ClassMap>> class is provided. By deriving from this class and registering an instance with <<reference/class-map.html,ClassMap>> properties can be exposed to the variables system, making them available in <<topics/variables-4.html,VariableReferences and Expressions>>. The following is an example of the `InventoryItem` class defined using a <<reference/class-map.html,ClassMap>> instead of with <<reference/i-variable-store.html,IVariableStore>>.
-
-[source,cs]
-----
-using PiRhoSoft.CompositionEngine
-using UnityEngine;
-
-namespace PiRhoSoft.CompositionExample
-{
-	public class InventoryItem
-	{
-		public Item Item;
-		public int Count;
-
-		[RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
-		private static void RegisterMap()
-		{
-			ClassMap.Add(new InventoryItemMap());
-		}
+		public string Name;
+		public float MinimumSpeed;
+		public float MaximumSpeed;
+		public int MinimumStrength;
+		public int MaximumStrength;
 	}
 
-	public class InventoryItemMap : ClassMap<InventoryItem>
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeaponMap : ClassMap<LootWeapon>
 	{
 		private static List<string> _names = new List<string>
 		{
-			nameof(InventoryItem.Item),
-			nameof(InventoryItem.Count)
+			nameof(LootWeapon.Name),
+			nameof(LootWeapon.MinimumSpeed),
+			nameof(LootWeapon.MaximumSpeed),
+			nameof(LootWeapon.MinimumStrength),
+			nameof(LootWeapon.MaximumStrength)
 		};
 
 		public override IList<string> GetVariableNames()
@@ -126,26 +138,30 @@ namespace PiRhoSoft.CompositionExample
 			return _names;
 		}
 
-		public override VariableValue GetVariable(InventoryItem obj, string name)
+		public override VariableValue GetVariable(LootWeapon weapon, string name)
 		{
 			switch (name)
 			{
-				case nameof(InventoryItem.Item): return VariableValue.Create(obj.Item);
-				case nameof(InventoryItem.Count): return VariableValue.Create(obj.Count);
+				case nameof(LootWeapon.Name): return VariableValue.Create(weapon.Name);
+				case nameof(LootWeapon.MinimumSpeed): return VariableValue.Create(weapon.MinimumSpeed);
+				case nameof(LootWeapon.MaximumSpeed): return VariableValue.Create(weapon.MaximumSpeed);
+				case nameof(LootWeapon.MinimumStrength): return VariableValue.Create(weapon.MinimumStrength);
+				case nameof(LootWeapon.MaximumStrength): return VariableValue.Create(weapon.MaximumStrength);
+				default: return VariableValue.Empty;
 			}
-
-			return VariableValue.Empty;
 		}
 
-		public override SetVariableResult SetVariable(InventoryItem obj, string name, VariableValue value)
+		public override SetVariableResult SetVariable(LootWeapon weapon, string name, VariableValue value)
 		{
 			switch (name)
 			{
-				case nameof(InventoryItem.Item): if (value.TryGetReference<Item>(out var item)) { obj.Item = item; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
-				case nameof(InventoryItem.Count): if (value.TryGetInt(out var count)) { obj.Count = count; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.Name): return value.TryGetString(out weapon.Name) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MinimumSpeed): return value.TryGetFloat(out weapon.MinimumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MaximumSpeed): return value.TryGetFloat(out weapon.MaximumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MinimumStrength): return value.TryGetInt(out weapon.MinimumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MaximumStrength): return value.TryGetInt(out weapon.MaximumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				default: return SetVariableResult.NotFound;
 			}
-
-			return SetVariableResult.NotFound;
 		}
 	}
 }

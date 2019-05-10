@@ -2,14 +2,26 @@
 
 ## Log Descriptions
 
+The following lists all the warning and error messages that may be printed to the https://docs.unity3d.com/Manual/Console.html[Console^] during development. Each message has an associated id that corresponds to an entry in this list for easy searchability. For example the following image shows an error with id `CEEE`. Searching this page will take you to the entry which will explain in more detail what the message means and potential ways to fix it.
+
+image::error.png[Console Error]
+
 ### Warnings
 
 CAANPIL:: Unable to wait on animation for {0}: the clip '{1}' was set to loop and would have never finished
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/animation-player.html,AnimationPlayer>> that triggered the warning.
+* {1} The name of the https://docs.unity3d.com/Manual/AnimationClips.html[AnimationClip^] that 
+
+When using an <<manual/animation-player.html,AnimationPlayer>>, possibly through a <<manual/play-animation-node.html,PlayAnimationNode>>, continuation (of the graph or caller) can be delayed until the animation completes. This is incompatible with an https://docs.unity3d.com/Manual/AnimationClips.html[AnimationClip^] that is set to loop since a looping animation will never complete.
 --
 
 CAAUPIL:: Unable to wait on sound for {0}: the clip '{1}' was set to loop and would have never finished
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/audio-player.html,AudioPlayer>> that triggered the warning.
+* {1} The name of the https://docs.unity3d.com/Manual/class-AudioClip.html.html[AudioClip^] that 
+
+When using an <<manual/audio-player.html,AudioPlayer>>, possibly through a <<manual/play-sound-node.html,PlaySoundNode>>, continuation (of the graph or caller) can be delayed until the sound completes. This is incompatible with an https://docs.unity3d.com/Manual/class-AudioClip.html.html[AudioClip^] that is set to loop since a looping sound will never complete.
 --
 
 CAPSIP:: Unable to play sound for {0}: the given variables must me an AudioPlayer
