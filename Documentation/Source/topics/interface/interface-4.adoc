@@ -1,3 +1,24 @@
 [#topics/interface-4]
 
 ## Menus
+
+Menus are https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviours^] that provide an interface for adding, removing, selecting, and focusing of child https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^]. On their own, Menus are simply a container for child <<manual/menu-item.html,Menu Items>> which are created externally. The can be created manually in the editor or populated automatically using a <<manual/list-binding.html,List Binding>> or in conjunction with a <<manual/selection-control.html,Selection Control>> and a <<manual/selection-node.html,Selection Node>>.
+
+### Selection Controls
+
+Selection Controls are <<manual/interface-control.html,Interface Controls>> used to dynamically populate a menu with items to be selected from when promted. Selection Controls activated with the `Show()` method which takes a list of <<reference/menu-item-template.html,MenuItemTemplates>>. Each template contains the info needed to create items in the menu: a name, the <<topics/variables-1,variables>> to assign to the item, the prefab to instantiate, etc. Selection controls can optionally require a selection to made so they cannot be cancelled, and they can optionally maintain their focused index in case the selection is being returned to from a subsequent menu.
+
+### Menu Items
+
+A Menu Item must be attached to each object in a menu, whether it be a prefab to be instantiated or an existing item in the scene. They are a <<topics/bindings-2,binding root>> which exposes an _ItemName_ field which gives access to the data of the Menu Item itself. Variables that can be accessed by child <<topics/bindings-3.html,bindings>> through _ItemName_ are: _Index_, _Column_, _Row_, _Label_, and _Focused_. The _ValueName_ field on a menu item expossed the variables specified by the <<reference/menu-item-template.html,MenuItemTemplate>> used to create the menu item.
+
+### Selection Node
+
+
+### Focus Binding
+
+Focus Binding Root is a <<manual/binding-root.html,Binding Root>> that references a <<manual/menu.html,Menu>> in the scene and uses that <<manual/menu.html,Menu's>> currently focused <<manual/menu-item.html,Menu Item>> as the binding variables for the child <<manual/variable-binding.html,Variable Bindings>>.
+
+### Input
+
+Menu Input is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that should be attached as a sibling of a <<manual/menu.html,Menu>> to handle the behaviour of input, focusing, selecting, and scrolling, through <<manual/menu-item.html,Menu Items>>.
