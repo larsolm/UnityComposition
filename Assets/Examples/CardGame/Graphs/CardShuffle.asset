@@ -33,6 +33,38 @@ MonoBehaviour:
     - Type: 0
       Text: card
   Loop: {fileID: 114828798773068104}
+--- !u!114 &-4810744638204813811
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Function
+  m_EditorClassIdentifier: 
+  Name: Function
+  GraphPosition: {x: -281.6, y: 0}
+  IsBreakpoint: 0
+  Comment: Shuffles all cards that are not in their completed position.
+--- !u!114 &-3829289393067468548
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Comment
+  m_EditorClassIdentifier: 
+  Name: Comment
+  GraphPosition: {x: 960, y: 128}
+  IsBreakpoint: 0
+  Comment: A card could have been shuffled into its completed position
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -74,6 +106,8 @@ MonoBehaviour:
     - {fileID: 114613535626573654}
     - {fileID: 2280417903215654415}
     - {fileID: -8578647492234368899}
+    - {fileID: -4810744638204813811}
+    - {fileID: -3829289393067468548}
   StartPosition: {x: -0, y: 0}
   Enter: {fileID: 114065889936685652}
   Process: {fileID: 2280417903215654415}
@@ -305,7 +339,7 @@ MonoBehaviour:
   m_Name: Check Card
   m_EditorClassIdentifier: 
   Name: Check Card
-  GraphPosition: {x: 947.2, y: 64}
+  GraphPosition: {x: 960, y: 64}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Source: 0

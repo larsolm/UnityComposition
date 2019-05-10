@@ -26,14 +26,27 @@ When using an <<manual/audio-player.html,AudioPlayer>>, possibly through a <<man
 
 CBBBWT:: Bar Binding '{0}' has an Image component with a type that is not 'Filled'
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
+
+<<manual/bar-binding.html,BarBindings>> can only operate successfully on https://docs.unity3d.com/ScriptReference/UI.Image.html[Images^] with _fillMethod_ `Filled`.
 --
 
 CBBIV:: unable to bind {0} for binding {1}: variable '{2}' is not an int or float
 --
+* {0} Either `AmountVariable` or `TotalVariable` indicating the property with the invalid type
+* {1} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
+* {2} The <<reference/variable-reference.html,VariableReference>> containing the value with the invalid type
+
+<<manual/bar-binding.html,BarBindings>> can bind to int and float variables only.
 --
 
 CBBMV:: unable to bind {0} for binding {1}: variable '{2}' could not be found
 --
+* {0} Either `AmountVariable` or `TotalVariable` indicating the property that could not be resolved
+* {1} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
+* {2} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+
+Lookup of a <<reference/variable-reference.html,VariableReference>> on a <<manual/bar-binding.html,BarBinding>> failed.
 --
 
 CBGTBMV:: Unable to run graph for graph trigger binding '{0}': the variable '{1}' could not be found

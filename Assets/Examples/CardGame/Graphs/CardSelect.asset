@@ -42,6 +42,7 @@ MonoBehaviour:
     - {fileID: 114246320320649072}
     - {fileID: 114446061808747656}
     - {fileID: 114545779784818382}
+    - {fileID: 8689428427266913212}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114481829014540738}
 --- !u!114 &114087237884415354
@@ -509,3 +510,20 @@ MonoBehaviour:
     _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
+--- !u!114 &8689428427266913212
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Function
+  m_EditorClassIdentifier: 
+  Name: Function
+  GraphPosition: {x: 0, y: 64}
+  IsBreakpoint: 0
+  Comment: Selects the card passed as the context. If that card is an ace, moves the
+    previously selected card instead.
