@@ -12,10 +12,6 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "play-sound-node")]
 	public class PlaySoundNode : InstructionGraphNode
 	{
-		private const string _soundNotFoundWarning = "(CAPSSNF) Unable to play sound for {0}: the audio clip could not be found";
-		private const string _invalidVolumeWarning = "(CAPSIV) Unable to set volume for {0}: the volume could not be found - defaulting to 1";
-		private const string _invalidPlayerWarning = "(CAPSIP) Unable to play sound for {0}: the given variables must me an AudioPlayer";
-
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;
 
@@ -43,10 +39,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (ResolveObject(variables, Sound, out var sound))
 				{
 					if (!Resolve(variables, Volume, out var volume))
-					{
 						volume = 1.0f;
-						Debug.LogWarningFormat(this, _invalidVolumeWarning, Name);
-					}
 
 					if (WaitForCompletion)
 						yield return player.PlaySoundAndWait(sound, volume);

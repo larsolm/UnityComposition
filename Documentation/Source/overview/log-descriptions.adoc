@@ -24,18 +24,6 @@ CAAUPIL:: Unable to wait on sound for {0}: the clip '{1}' was set to loop and wo
 When using an <<manual/audio-player.html,AudioPlayer>>, possibly through a <<manual/play-sound-node.html,PlaySoundNode>>, continuation (of the graph or caller) can be delayed until the sound completes. This is incompatible with an https://docs.unity3d.com/Manual/class-AudioClip.html.html[AudioClip^] that is set to loop since a looping sound will never complete.
 --
 
-CAPSIP:: Unable to play sound for {0}: the given variables must me an AudioPlayer
---
---
-
-CAPSIV:: Unable to set volume for {0}: the volume could not be found - defaulting to 1
---
---
-
-CAPSSNF:: Unable to play sound for {0}: the audio clip could not be found
---
---
-
 CBBBWT:: Bar Binding '{0}' has an Image component with a type that is not 'Filled'
 --
 --
