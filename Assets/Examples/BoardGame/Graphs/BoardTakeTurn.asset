@@ -1,5 +1,39 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8698452548488772657
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Pause the Graph
+  m_EditorClassIdentifier: 
+  Name: Pause the Graph
+  GraphPosition: {x: 2664.6653, y: 265.0784}
+  IsBreakpoint: 0
+  Comment: This will essentially pause the graph until a selected piece is set externally
+    (in this case by the "BoardSetSelectedPiece" graph.
+--- !u!114 &-1910979219466359834
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Wait
+  m_EditorClassIdentifier: 
+  Name: Wait
+  GraphPosition: {x: 1472, y: -76.8}
+  IsBreakpoint: 0
+  Comment: Use the wait node here to delay the execution of the graph. Without it
+    we would get an infinite loop from the "Rool Loop" because no time would pass.
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -73,6 +107,9 @@ MonoBehaviour:
     - {fileID: 114890588813715902}
     - {fileID: 114978121118815360}
     - {fileID: 114771119900408706}
+    - {fileID: -8698452548488772657}
+    - {fileID: -1910979219466359834}
+    - {fileID: 1412097212174785742}
   StartPosition: {x: 12.8, y: 0}
   Enter: {fileID: 114646063541107878}
   Process: {fileID: 114090938575764022}
@@ -111,7 +148,7 @@ MonoBehaviour:
   m_Name: Reset Piece
   m_EditorClassIdentifier: 
   Name: Reset Piece
-  GraphPosition: {x: 4595.2, y: 550.4}
+  GraphPosition: {x: 4134.4, y: 448}
   IsBreakpoint: 0
   Next: {fileID: 114348498317395866}
   Object:
@@ -135,7 +172,7 @@ MonoBehaviour:
   m_Name: Check for Occupier
   m_EditorClassIdentifier: 
   Name: Check for Occupier
-  GraphPosition: {x: 4032, y: 640}
+  GraphPosition: {x: 3712, y: 563.2}
   IsBreakpoint: 0
   OnTrue: {fileID: 114530582379309674}
   OnFalse: {fileID: 114348498317395866}
@@ -338,7 +375,7 @@ MonoBehaviour:
   m_Name: Set New Occupier
   m_EditorClassIdentifier: 
   Name: Set New Occupier
-  GraphPosition: {x: 4454.4, y: 665.60004}
+  GraphPosition: {x: 4134.4, y: 601.60004}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -356,7 +393,7 @@ MonoBehaviour:
   m_Name: Return to Start
   m_EditorClassIdentifier: 
   Name: Return to Start
-  GraphPosition: {x: 4390.4, y: 460.80002}
+  GraphPosition: {x: 3929.6, y: 358.4}
   IsBreakpoint: 0
   Next: {fileID: 114114799702549004}
   Transform:
@@ -572,7 +609,7 @@ MonoBehaviour:
   m_Name: Pieces Available
   m_EditorClassIdentifier: 
   Name: Pieces Available
-  GraphPosition: {x: 704, y: 320}
+  GraphPosition: {x: 691.2, y: 230.40001}
   IsBreakpoint: 0
   OnTrue: {fileID: 114601505796252814}
   OnFalse: {fileID: 114503757033569924}
@@ -609,7 +646,7 @@ MonoBehaviour:
   m_Name: Can't Move Message
   m_EditorClassIdentifier: 
   Name: Can't Move Message
-  GraphPosition: {x: 832, y: 422.4}
+  GraphPosition: {x: 806.4, y: 358.4}
   IsBreakpoint: 0
   Next: {fileID: 114955431750335060}
   Control:
@@ -696,7 +733,7 @@ MonoBehaviour:
   m_Name: Boom!
   m_EditorClassIdentifier: 
   Name: Boom!
-  GraphPosition: {x: 4224, y: 550.4}
+  GraphPosition: {x: 3763.2, y: 448}
   IsBreakpoint: 0
   Next: {fileID: 114380065659813780}
   Control:
@@ -842,7 +879,7 @@ MonoBehaviour:
   m_Name: Move To Space
   m_EditorClassIdentifier: 
   Name: Move To Space
-  GraphPosition: {x: 3712, y: 640}
+  GraphPosition: {x: 3558.4001, y: 729.60004}
   IsBreakpoint: 0
   Next: {fileID: 114134270896229670}
   Transform:
@@ -1051,7 +1088,7 @@ MonoBehaviour:
   m_Name: Get Target Position
   m_EditorClassIdentifier: 
   Name: Get Target Position
-  GraphPosition: {x: 3392, y: 665.60004}
+  GraphPosition: {x: 3392, y: 627.2}
   IsBreakpoint: 0
   Next: {fileID: 114668657672623782}
   Expression:
@@ -1133,7 +1170,7 @@ MonoBehaviour:
   m_Name: Next Turn Message
   m_EditorClassIdentifier: 
   Name: Next Turn Message
-  GraphPosition: {x: 832, y: 499.2}
+  GraphPosition: {x: 908.8, y: 435.2}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -1271,3 +1308,20 @@ MonoBehaviour:
   Variables:
     _items:
     - SelectedPiece
+--- !u!114 &1412097212174785742
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Take a Turn
+  m_EditorClassIdentifier: 
+  Name: Take a Turn
+  GraphPosition: {x: 12.8, y: -76.8}
+  IsBreakpoint: 0
+  Comment: 'The actions for each turn of a player with various node types: messages,
+    loops, expressions, animations, etc.'

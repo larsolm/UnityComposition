@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6940474327920758699
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Battle Sting
+  m_EditorClassIdentifier: 
+  Name: Battle Sting
+  GraphPosition: {x: 0, y: -102.4}
+  IsBreakpoint: 0
+  Comment: Display a message, create an effect with a rotation based on which fighter
+    is using the attack, then apply poison with an expression.
 --- !u!114 &-2508613651202906667
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -13,7 +30,7 @@ MonoBehaviour:
   m_Name: Get Position
   m_EditorClassIdentifier: 
   Name: Get Position
-  GraphPosition: {x: 652.8, y: 25.6}
+  GraphPosition: {x: 729.60004, y: -115.200005}
   IsBreakpoint: 0
   Next: {fileID: 114935585411761918}
   Expression:
@@ -54,6 +71,7 @@ MonoBehaviour:
     - {fileID: 114417349051196134}
     - {fileID: 114023022173439066}
     - {fileID: -2508613651202906667}
+    - {fileID: -6940474327920758699}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114072452998471064}
 --- !u!114 &114023022173439066
@@ -69,7 +87,7 @@ MonoBehaviour:
   m_Name: Destroy Effect
   m_EditorClassIdentifier: 
   Name: Destroy Effect
-  GraphPosition: {x: 1011.2, y: -89.6}
+  GraphPosition: {x: 908.8, y: 64}
   IsBreakpoint: 0
   Next: {fileID: 114862257652215422}
   Target:
@@ -90,7 +108,7 @@ MonoBehaviour:
   m_Name: Sting Message
   m_EditorClassIdentifier: 
   Name: Sting Message
-  GraphPosition: {x: 320, y: 0}
+  GraphPosition: {x: 281.6, y: -102.4}
   IsBreakpoint: 0
   Next: {fileID: 114417349051196134}
   Control:
@@ -118,7 +136,7 @@ MonoBehaviour:
   m_Name: Create Effect
   m_EditorClassIdentifier: 
   Name: Create Effect
-  GraphPosition: {x: 652.8, y: -51.2}
+  GraphPosition: {x: 499.2, y: 64}
   IsBreakpoint: 0
   Next: {fileID: -2508613651202906667}
   Prefab:
@@ -174,7 +192,7 @@ MonoBehaviour:
   m_Name: Effect Rotation
   m_EditorClassIdentifier: 
   Name: Effect Rotation
-  GraphPosition: {x: 652.8, y: -128}
+  GraphPosition: {x: 409.6, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114309490965616434}
   Expression:
@@ -192,7 +210,7 @@ MonoBehaviour:
   m_Name: Poison Message
   m_EditorClassIdentifier: 
   Name: Poison Message
-  GraphPosition: {x: 1139.2001, y: 64}
+  GraphPosition: {x: 1254.4, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -220,7 +238,7 @@ MonoBehaviour:
   m_Name: Apply Poison
   m_EditorClassIdentifier: 
   Name: Apply Poison
-  GraphPosition: {x: 1062.4, y: -12.8}
+  GraphPosition: {x: 1126.4, y: -115.200005}
   IsBreakpoint: 0
   Next: {fileID: 114832450634291630}
   Expression:
@@ -238,7 +256,7 @@ MonoBehaviour:
   m_Name: Move to Target
   m_EditorClassIdentifier: 
   Name: Move to Target
-  GraphPosition: {x: 652.8, y: 102.4}
+  GraphPosition: {x: 832, y: -25.6}
   IsBreakpoint: 0
   Next: {fileID: 114023022173439066}
   Transform:

@@ -354,7 +354,8 @@ MonoBehaviour:
   GraphPosition: {x: 0, y: -128}
   IsBreakpoint: 0
   Comment: Play an effect and destroy the jewel that was picked up then check if enough
-    keys are needed to open the finish door and open it if so
+    keys are needed to open the finish door and open with an animation sequence if
+    so
 --- !u!114 &114754646623374914
 MonoBehaviour:
   m_ObjectHideFlags: 1

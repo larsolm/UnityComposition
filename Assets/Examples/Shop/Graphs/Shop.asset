@@ -1,5 +1,22 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9176524808422297690
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Shop
+  m_EditorClassIdentifier: 
+  Name: Shop
+  GraphPosition: {x: 0, y: -89.6}
+  IsBreakpoint: 0
+  Comment: A basic shop with buying and selling of items. A great example of a dialog
+    tree with messages, selections, and expressions.
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -55,6 +72,7 @@ MonoBehaviour:
     - {fileID: 114477289048704104}
     - {fileID: 6335642870118734751}
     - {fileID: 8570242512394174742}
+    - {fileID: -9176524808422297690}
   StartPosition: {x: 0, y: 0}
   Enter: {fileID: 114098421550622078}
   Process: {fileID: 114849375679229266}
@@ -100,7 +118,7 @@ MonoBehaviour:
   m_Name: Disable Player(Clone)(Clone)
   m_EditorClassIdentifier: 
   Name: Disable Player
-  GraphPosition: {x: 153.6, y: -89.6}
+  GraphPosition: {x: 268.80002, y: -89.6}
   IsBreakpoint: 0
   Next: {fileID: 6335642870118734751}
   Target:
@@ -722,7 +740,7 @@ MonoBehaviour:
   m_Name: Enable Player(Clone)(Clone)
   m_EditorClassIdentifier: 
   Name: Enable Player
-  GraphPosition: {x: 153.6, y: 115.200005}
+  GraphPosition: {x: 268.80002, y: 115.200005}
   IsBreakpoint: 0
   Next: {fileID: 8570242512394174742}
   Target:
@@ -854,7 +872,7 @@ MonoBehaviour:
   m_Name: Disable Menu
   m_EditorClassIdentifier: 
   Name: Disable Menu
-  GraphPosition: {x: 307.2, y: -166.40001}
+  GraphPosition: {x: 422.4, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
@@ -877,7 +895,7 @@ MonoBehaviour:
   m_Name: Enable Menu
   m_EditorClassIdentifier: 
   Name: Enable Menu
-  GraphPosition: {x: 307.2, y: 192}
+  GraphPosition: {x: 422.4, y: 192}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:

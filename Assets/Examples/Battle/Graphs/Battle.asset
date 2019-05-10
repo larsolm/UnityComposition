@@ -1,5 +1,41 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8174040224109327134
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Battle
+  m_EditorClassIdentifier: 
+  Name: Battle
+  GraphPosition: {x: -115.200005, y: -102.4}
+  IsBreakpoint: 0
+  Comment: 'Visualize the true power of the composition with this turn based battle
+    system with numerous node types: animations, messages, selections, loops, sequences,
+    expressions, and more.'
+--- !u!114 &-5841180396025510445
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Sort Fighters
+  m_EditorClassIdentifier: 
+  Name: Sort Fighters
+  GraphPosition: {x: 1715.2001, y: 89.6}
+  IsBreakpoint: 0
+  Comment: 'Copy the list of fighters so that it doesn''t change the original.
+
+    Sort them first by their selected action, then by their speed.'
 --- !u!114 &-3143270852829160621
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -69,11 +105,29 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6913aafcbf119034c86fa29c7be61eb6, type: 3}
-  m_Name: ExitNode
+  m_Name: Exit Node
   m_EditorClassIdentifier: 
-  Name: ExitNode
-  GraphPosition: {x: 2624, y: -89.6}
+  Name: Exit Node
+  GraphPosition: {x: 2291.2, y: 25.6}
   IsBreakpoint: 0
+--- !u!114 &-2511433878369721087
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Return To Menu
+  m_EditorClassIdentifier: 
+  Name: Return To Menu
+  GraphPosition: {x: -89.6, y: 230.40001}
+  IsBreakpoint: 0
+  Comment: 'Fade out the scene and return to the main menu.
+
+    Don''t clear the transition until the new scene hase been loaded.'
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,7 +201,11 @@ MonoBehaviour:
     - {fileID: -3143270852829160621}
     - {fileID: -2730367599166077760}
     - {fileID: -3122047632563338016}
-  StartPosition: {x: 0, y: 0}
+    - {fileID: -2511433878369721087}
+    - {fileID: -5841180396025510445}
+    - {fileID: 2609748366576611859}
+    - {fileID: -8174040224109327134}
+  StartPosition: {x: -115.200005, y: -0}
   Enter: {fileID: 114016950435173752}
   Process: {fileID: 114364025646214274}
   Exit: {fileID: 114776698254722046}
@@ -213,7 +271,7 @@ MonoBehaviour:
   m_Name: Is Poisoned
   m_EditorClassIdentifier: 
   Name: Is Poisoned
-  GraphPosition: {x: 2188.8, y: 345.6}
+  GraphPosition: {x: 1574.4, y: 588.8}
   IsBreakpoint: 0
   OnTrue: {fileID: 114864074634680384}
   OnFalse: {fileID: 0}
@@ -265,7 +323,7 @@ MonoBehaviour:
   m_Name: Is Target Dead
   m_EditorClassIdentifier: 
   Name: Is Target Dead
-  GraphPosition: {x: 3200, y: 102.4}
+  GraphPosition: {x: 2432, y: 332.80002}
   IsBreakpoint: 0
   OnTrue: {fileID: 114994863791174408}
   OnFalse: {fileID: 0}
@@ -284,7 +342,7 @@ MonoBehaviour:
   m_Name: Update Binding
   m_EditorClassIdentifier: 
   Name: Update Binding
-  GraphPosition: {x: 2880, y: 435.2}
+  GraphPosition: {x: 2035.2001, y: 640}
   IsBreakpoint: 0
   Next: {fileID: 114249794967731700}
   Object:
@@ -309,7 +367,7 @@ MonoBehaviour:
   m_Name: Remove Item
   m_EditorClassIdentifier: 
   Name: Remove Item
-  GraphPosition: {x: 2880, y: 294.4}
+  GraphPosition: {x: 2099.2, y: 550.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -327,7 +385,7 @@ MonoBehaviour:
   m_Name: Item Message
   m_EditorClassIdentifier: 
   Name: Item Message
-  GraphPosition: {x: 2291.2, y: -38.4}
+  GraphPosition: {x: 2099.2, y: 76.8}
   IsBreakpoint: 0
   Next: {fileID: 114441288586741344}
   Control:
@@ -352,10 +410,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
-  m_Name: Show Selection
+  m_Name: Show Moves
   m_EditorClassIdentifier: 
-  Name: Show Selection
-  GraphPosition: {x: 2585.6, y: -320}
+  Name: Show Moves
+  GraphPosition: {x: 2393.6, y: -217.6}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114192279811104960}
   Control:
@@ -418,7 +476,7 @@ MonoBehaviour:
   m_Name: Reset Sorted Fighters
   m_EditorClassIdentifier: 
   Name: Reset Sorted Fighters
-  GraphPosition: {x: 1497.6, y: 51.2}
+  GraphPosition: {x: 1344, y: 115.200005}
   IsBreakpoint: 0
   Next: {fileID: 114465621572967356}
   Expression:
@@ -433,10 +491,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
-  m_Name: Show Selection
+  m_Name: Show Actions
   m_EditorClassIdentifier: 
-  Name: Show Selection
-  GraphPosition: {x: 2176, y: -166.40001}
+  Name: Show Actions
+  GraphPosition: {x: 1984, y: -64}
   IsBreakpoint: 0
   OnCanceled: {fileID: 0}
   Control:
@@ -499,7 +557,7 @@ MonoBehaviour:
   m_Name: Action Message
   m_EditorClassIdentifier: 
   Name: Action Message
-  GraphPosition: {x: 2547.2, y: -153.6}
+  GraphPosition: {x: 2585.6, y: -64}
   IsBreakpoint: 0
   Next: {fileID: 114181512053963512}
   Control:
@@ -554,7 +612,7 @@ MonoBehaviour:
   m_Name: Set Winner
   m_EditorClassIdentifier: 
   Name: Set Winner
-  GraphPosition: {x: 3840, y: 115.200005}
+  GraphPosition: {x: 2816, y: 358.4}
   IsBreakpoint: 0
   Next: {fileID: 114783432147138550}
   Expression:
@@ -572,7 +630,7 @@ MonoBehaviour:
   m_Name: Poison Damage Message
   m_EditorClassIdentifier: 
   Name: Poison Damage Message
-  GraphPosition: {x: 2969.6, y: 524.8}
+  GraphPosition: {x: 2227.2, y: 729.60004}
   IsBreakpoint: 0
   Next: {fileID: 114337536328452838}
   Control:
@@ -600,7 +658,7 @@ MonoBehaviour:
   m_Name: Move Message
   m_EditorClassIdentifier: 
   Name: Move Message
-  GraphPosition: {x: 2291.2, y: -268.80002}
+  GraphPosition: {x: 2099.2, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 114131616769279628}
   Control:
@@ -628,7 +686,7 @@ MonoBehaviour:
   m_Name: Action Message
   m_EditorClassIdentifier: 
   Name: Action Message
-  GraphPosition: {x: 1856, y: -140.8}
+  GraphPosition: {x: 1664, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: 114181512053963512}
   Control:
@@ -658,7 +716,7 @@ MonoBehaviour:
   m_Name: Set Move
   m_EditorClassIdentifier: 
   Name: Set Move
-  GraphPosition: {x: 2918.4001, y: -320}
+  GraphPosition: {x: 2726.4001, y: -217.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -678,7 +736,7 @@ MonoBehaviour:
   m_Name: Is User Dead
   m_EditorClassIdentifier: 
   Name: Is User Dead
-  GraphPosition: {x: 3200, y: 192}
+  GraphPosition: {x: 2444.8, y: 550.4}
   IsBreakpoint: 0
   OnTrue: {fileID: 114479347403044168}
   OnFalse: {fileID: 0}
@@ -697,7 +755,7 @@ MonoBehaviour:
   m_Name: Execute Action
   m_EditorClassIdentifier: 
   Name: Execute Action
-  GraphPosition: {x: 1497.6, y: 192}
+  GraphPosition: {x: 1305.6, y: 294.4}
   IsBreakpoint: 0
   Container:
     _variable: global.Fighters
@@ -747,13 +805,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
-  m_Name: Comment
+  m_Name: Selection Index Reseting
   m_EditorClassIdentifier: 
-  Name: Comment
-  GraphPosition: {x: 2854.4001, y: -179.2}
+  Name: Selection Index Reseting
+  GraphPosition: {x: 2880, y: -89.6}
   IsBreakpoint: 0
-  Comment: Have the cancel options go "forward" to an identical message so that the
-    selection index isn't reset.
+  Comment: Have the cancel options of each selection go "forward" to an identical
+    message node so that the selection index isn't reset. This would happen if we
+    return to the "Action Message" that is run before "Show Actions" node
 --- !u!114 &114441288586741344
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -764,10 +823,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
-  m_Name: Show Selection
+  m_Name: Show Items
   m_EditorClassIdentifier: 
-  Name: Show Selection
-  GraphPosition: {x: 2585.6, y: -12.8}
+  Name: Show Items
+  GraphPosition: {x: 2393.6, y: 102.4}
   IsBreakpoint: 0
   OnCanceled: {fileID: 114192279811104960}
   Control:
@@ -830,7 +889,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   Name: Sequence
-  GraphPosition: {x: 2880, y: 128}
+  GraphPosition: {x: 2099.2, y: 384}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -849,7 +908,7 @@ MonoBehaviour:
   m_Name: Sort Fighters
   m_EditorClassIdentifier: 
   Name: Sort Fighters
-  GraphPosition: {x: 1804.8, y: 51.2}
+  GraphPosition: {x: 1523.2001, y: 204.8}
   IsBreakpoint: 0
   Next: {fileID: 0}
   List:
@@ -885,7 +944,7 @@ MonoBehaviour:
   m_Name: User Died
   m_EditorClassIdentifier: 
   Name: User Died
-  GraphPosition: {x: 3520, y: 192}
+  GraphPosition: {x: 2636.8, y: 665.60004}
   IsBreakpoint: 0
   Next: {fileID: 114833082563927494}
   Source: 0
@@ -928,7 +987,7 @@ MonoBehaviour:
   m_Name: Set Item
   m_EditorClassIdentifier: 
   Name: Set Item
-  GraphPosition: {x: 2918.4001, y: -12.8}
+  GraphPosition: {x: 2726.4001, y: 102.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Expression:
@@ -948,7 +1007,7 @@ MonoBehaviour:
   m_Name: Branch on Action
   m_EditorClassIdentifier: 
   Name: Branch on Action
-  GraphPosition: {x: 2188.8, y: 179.2}
+  GraphPosition: {x: 1408, y: 435.2}
   IsBreakpoint: 0
   Switch:
     _statement: fighter.Pool.Action
@@ -973,7 +1032,7 @@ MonoBehaviour:
   m_Name: Choose Action
   m_EditorClassIdentifier: 
   Name: Choose Action
-  GraphPosition: {x: 1497.6, y: -76.8}
+  GraphPosition: {x: 1305.6, y: 25.6}
   IsBreakpoint: 0
   Container:
     _variable: global.Fighters
@@ -1006,7 +1065,7 @@ MonoBehaviour:
   m_Name: Execute Move
   m_EditorClassIdentifier: 
   Name: Execute Move
-  GraphPosition: {x: 2560, y: 153.6}
+  GraphPosition: {x: 1779.2001, y: 409.6}
   IsBreakpoint: 0
   Next: {fileID: 114459983394791818}
   Source: 1
@@ -1057,7 +1116,7 @@ MonoBehaviour:
   m_Name: Use Item
   m_EditorClassIdentifier: 
   Name: Use Item
-  GraphPosition: {x: 2560, y: 243.2}
+  GraphPosition: {x: 1779.2001, y: 499.2}
   IsBreakpoint: 0
   Next: {fileID: 114100410672664356}
   Source: 1
@@ -1108,7 +1167,7 @@ MonoBehaviour:
   m_Name: Actions
   m_EditorClassIdentifier: 
   Name: Actions
-  GraphPosition: {x: 1843.2001, y: 243.2}
+  GraphPosition: {x: 1062.4, y: 499.2}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -1203,7 +1262,7 @@ MonoBehaviour:
   m_Name: Break
   m_EditorClassIdentifier: 
   Name: Break
-  GraphPosition: {x: 4160, y: 166.40001}
+  GraphPosition: {x: 3033.6, y: 460.80002}
   IsBreakpoint: 0
 --- !u!114 &114824544855869636
 MonoBehaviour:
@@ -1218,7 +1277,7 @@ MonoBehaviour:
   m_Name: Turn Sequence
   m_EditorClassIdentifier: 
   Name: Turn Sequence
-  GraphPosition: {x: 1164.8, y: 38.4}
+  GraphPosition: {x: 972.8, y: 140.8}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -1238,7 +1297,7 @@ MonoBehaviour:
   m_Name: Set Winner(Clone)
   m_EditorClassIdentifier: 
   Name: Set Winner
-  GraphPosition: {x: 3840, y: 192}
+  GraphPosition: {x: 2816, y: 537.60004}
   IsBreakpoint: 0
   Next: {fileID: 114783432147138550}
   Expression:
@@ -1256,7 +1315,7 @@ MonoBehaviour:
   m_Name: Poison Damage
   m_EditorClassIdentifier: 
   Name: Poison Damage
-  GraphPosition: {x: 2560, y: 499.2}
+  GraphPosition: {x: 1702.4, y: 716.8}
   IsBreakpoint: 0
   Next: {fileID: 114093961000405166}
   Expression:
@@ -1277,9 +1336,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c2641b6832ae40b46afef24dadde8072, type: 3}
-  m_Name: Turn Loop
+  m_Name: Loop Until Winner
   m_EditorClassIdentifier: 
-  Name: Turn Loop
+  Name: Loop Until Winner
   GraphPosition: {x: 832, y: 38.4}
   IsBreakpoint: 0
   Loop: {fileID: 114824544855869636}
@@ -1329,7 +1388,7 @@ MonoBehaviour:
   m_Name: Target Died
   m_EditorClassIdentifier: 
   Name: Target Died
-  GraphPosition: {x: 3520, y: 115.200005}
+  GraphPosition: {x: 2649.6, y: 243.2}
   IsBreakpoint: 0
   Next: {fileID: 114247473089136118}
   Source: 0
@@ -1363,3 +1422,20 @@ MonoBehaviour:
     _data: AQAAAAAA
     _objects: []
   WaitForCompletion: 1
+--- !u!114 &2609748366576611859
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: 'Run Nodes '
+  m_EditorClassIdentifier: 
+  Name: 'Run Nodes '
+  GraphPosition: {x: 2496, y: 435.2}
+  IsBreakpoint: 0
+  Comment: Check if either creature has died after using a move OR applying poison
+    damage. Nodes can be run from multiple different branches

@@ -20,9 +20,6 @@ Nodes make up the bulk of the functionality of a graph. They may control both th
 
 | <<manual/expression-node.html,Expression>> | Run an expression
 | <<manual/instruction-node.html,Instruction>> | Run an instruction
-| <<manual/get-property-node.html,Get Property>> | Retreive and store a property on any Object
-| <<manual/set-property-node.html,Set Property>> | Set a property on any Object
-| <<manual/call-method-node.html,Call Method>> | Call a method on any Object
 | <<manual/shuffle-node.html,Shuffle>> | Shuffle a variable list
 | <<manual/sort-node.html,Sort>> | Sort a variable list
 | <<manual/reset-tag-node.html,Reset Tag>> | Reset variables by tag
@@ -39,6 +36,7 @@ Nodes make up the bulk of the functionality of a graph. They may control both th
 | <<manual/iterate-node.html,Iterate>> | Iterate the items in a variable list
 | <<manual/break-node.html,Break>> | Break out of a loop
 | <<manual/yield-node.html,Yield>> | Yield for a single frame
+| <<manual/exit-node.html,Yield>> | Break out of all loops
 |===
 
 |===

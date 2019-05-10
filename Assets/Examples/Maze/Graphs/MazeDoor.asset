@@ -63,6 +63,7 @@ MonoBehaviour:
     - {fileID: 114137955550642130}
     - {fileID: 114368051375255452}
     - {fileID: 114031907044163494}
+    - {fileID: 5269368980671295968}
   StartPosition: {x: -0, y: 0}
   Process: {fileID: 114370956569731158}
 --- !u!114 &114031907044163494
@@ -221,3 +222,20 @@ MonoBehaviour:
       _variable: 
       _tokens: []
     Value: 1
+--- !u!114 &5269368980671295968
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: Open Door
+  m_EditorClassIdentifier: 
+  Name: Open Door
+  GraphPosition: {x: -0, y: -76.8}
+  IsBreakpoint: 0
+  Comment: Check if the player has the correct key for this door and open it. Show
+    a message if not.
