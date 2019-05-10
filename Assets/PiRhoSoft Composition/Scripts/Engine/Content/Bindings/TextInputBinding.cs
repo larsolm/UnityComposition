@@ -9,9 +9,6 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Text Input Binding")]
 	public class TextInputBinding : VariableBinding
 	{
-		private const string _variableNotFoundWarning = "(CBTIBVNF) Unable to bind text to variable on {0}: the variable '{1}' could not be found";
-		private const string _readOnlyWarning = "(CBTIBRO) Unable to bind text to variable on {0}: the variable '{1}' is read only";
-
 		[Tooltip("The variable holding the value to set basedo on the text in this object")]
 		public VariableReference Variable = new VariableReference();
 
@@ -47,17 +44,7 @@ namespace PiRhoSoft.CompositionEngine
 		private void TextChanged(string text)
 		{
 			if (_variables != null)
-			{
-				var result = Variable.SetValue(_variables, VariableValue.Create(Text.textComponent.text));
-
-				if (!SuppressErrors)
-				{
-					if (result == SetVariableResult.NotFound)
-						Debug.LogWarningFormat(this, _variableNotFoundWarning, name, Variable);
-					else if (result == SetVariableResult.ReadOnly)
-						Debug.LogWarningFormat(this, _readOnlyWarning, name, Variable);
-				}
-			}
+				Assign(_variables, Variable, VariableValue.Create(Text.textComponent.text));
 		}
 	}
 }

@@ -54,6 +54,39 @@ Implement this in subclasses to perform the binding. _variables_ is the <<refere
 
 NOTE: _status_ will always be a valid instance so does not need to be checked for `null`.
 
+#### Resolve
+
+This collection of methods will lookup the value referenced by a <<reference/variable-reference.html,VariableReference>>. The resolved value is set to the ouput parameter _result_ and the return value will indicate whether the value was resolved successfully. The _variables_ parameter should be the _variables_ parameter passed to the _UpdateBinding_ method. If the resolution fails, either due to the variable not being found or it being an invalid type, a warning will be printed to the https://docs.unity3d.com/Manual/Console.html[Console^].
+
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/variable-value.html,VariableValue>> _result_ _(out)_)
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, bool _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, int _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, float _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Vector2Int.html[Vector2Int^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Vector3Int.html[Vector3Int^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/RectInt.html[RectInt^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/BoundsInt.html[BoundsInt^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Vector3.html[Vector3^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Vector4.html[Vector4^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Quaternion.html[Quaternion^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Rect.html[Rect^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Bounds.html[Bounds^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, https://docs.unity3d.com/ScriptReference/Color.html[Color^] _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, string _result_ _(out)_)::
+* bool Resolve<EnumType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/enum-type.html,EnumType>> _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/i-variable-store.html,IVariableStore>> _result_ _(out)_)::
+* bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/i-variable-list.html,IVariableList>> _result_ _(out)_)::
+* bool ResolveObject<ObjectType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/object-type.html,ObjectType>> _result_ _(out)_)::
+* bool ResolveStore<StoreType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/store-type.html,StoreType>> _result_ _(out)_)::
+* bool ResolveList<ListType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/list-type.html,ListType>> _result_ _(out)_)::
+* bool ResolveInterface<InterfaceType>(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/interface-type.html,InterfaceType>> _result_ _(out)_)::
+* bool ResolveReference(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, Object _result_ _(out)_)::
+
+void Assign(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/variable-value.html,VariableValue>> _value_)::
+
+Assigns _value_ to the variable referenced by _reference_. The _variables_ parameter should be the _variables_ parameter passed to the _UpdateBinding_ method. If the assignment fails, a warning will be logged.
+
 ifdef::backend-multipage_html5[]
 <<manual/variable-binding.html,Manual>>
 endif::[]

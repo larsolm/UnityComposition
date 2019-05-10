@@ -10,3 +10,8 @@ include::topics/variables.adoc[]
 
 :imagesdir: topics/bindings
 include::topics/bindings.adoc[]
+
+<<<
+
+:imagesdir: topics/interface
+include::topics/interface.adoc[]

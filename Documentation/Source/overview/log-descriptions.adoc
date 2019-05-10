@@ -31,7 +31,7 @@ CBBBWT:: Bar Binding '{0}' has an Image component with a type that is not 'Fille
 <<manual/bar-binding.html,BarBindings>> can only operate successfully on https://docs.unity3d.com/ScriptReference/UI.Image.html[Images^] with _fillMethod_ `Filled`.
 --
 
-CBBIV:: unable to bind {0} for binding {1}: variable '{2}' is not an int or float
+CBBIV:: unable to bind {0} for bar binding {1}: variable '{2}' is not an int or float
 --
 * {0} Either `AmountVariable` or `TotalVariable` indicating the property with the invalid type
 * {1} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
@@ -40,7 +40,7 @@ CBBIV:: unable to bind {0} for binding {1}: variable '{2}' is not an int or floa
 <<manual/bar-binding.html,BarBindings>> can bind to int and float variables only.
 --
 
-CBBMV:: unable to bind {0} for binding {1}: variable '{2}' could not be found
+CBBMV:: unable to bind {0} for bar binding {1}: variable '{2}' could not be found
 --
 * {0} Either `AmountVariable` or `TotalVariable` indicating the property that could not be resolved
 * {1} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
@@ -51,6 +51,10 @@ Lookup of a <<reference/variable-reference.html,VariableReference>> on a <<manua
 
 CBGTBMV:: Unable to run graph for graph trigger binding '{0}': the variable '{1}' could not be found
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/graph-trigger-binding.html,GraphTriggerBinding>> that triggered the warning.
+* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+
+Lookup of a <<reference/variable-reference.html,VariableReference>> on a <<manual/graph-trigger-binding.html,GraphTriggerBinding>> failed.
 --
 
 CBIBIV:: Unable to bind image for image binding '{0}': the variable '{1}' is not a sprite
@@ -59,6 +63,10 @@ CBIBIV:: Unable to bind image for image binding '{0}': the variable '{1}' is not
 
 CBIBMV:: Unable to bind image for image binding '{0}': the variable '{1}' could not be found
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/image-binding.html,ImageBinding>> that triggered the warning.
+* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+
+Lookup of a <<reference/variable-reference.html,VariableReference>> on an <<manual/image-binding.html,ImageBinding>> failed.
 --
 
 CBICBIV:: Unable to bind color for image color binding '{0}': the variable '{1}' is not a color
@@ -67,6 +75,10 @@ CBICBIV:: Unable to bind color for image color binding '{0}': the variable '{1}'
 
 CBICBMV:: Unable to bind color for image color binding '{0}': the variable '{1}' could not be found
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/image-color-binding.html,ImageColorBinding>> that triggered the warning.
+* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+
+Lookup of a <<reference/variable-reference.html,VariableReference>> on an <<manual/image-color-binding.html,ImageColorBinding>> failed.
 --
 
 CBLBIV:: Unable to create list for list binding '{0}': the variable '{1}' is not a color
@@ -79,6 +91,10 @@ CBLBMT:: Unable to create list for list binding '{0}': the object template was n
 
 CBLBMV:: Unable to create list for list binding '{0}': the variable '{1}' could not be found
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/list-binding.html,ListBinding>> that triggered the warning.
+* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+
+Lookup of a <<reference/variable-reference.html,VariableReference>> on a <<manual/list-binding.html,ListBinding>> failed.
 --
 
 CBMBMV:: Unable to bind text for text binding '{0}': the variable '{1}' could not be found
@@ -91,6 +107,10 @@ CBNBIV:: Unable to bind text for number binding '{0}': the variable '{1}' is not
 
 CBNBMV:: Unable to bind text for number binding '{0}': the variable '{1}' could not be found
 --
+* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/Number-binding.html,NumberBinding>> that triggered the warning.
+* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+
+Lookup of a <<reference/variable-reference.html,VariableReference>> on an <<manual/number-binding.html,NumberBinding>> failed.
 --
 
 CBSCBIV:: Unable to bind color for sprite color binding '{0}': the variable '{1}' is not a color

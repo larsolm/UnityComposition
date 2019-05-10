@@ -59,9 +59,9 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidEnumWarning = "(CIGNIE) failed to resolve variable '{0}' on node '{1}': the variable has enum type {2} and should have enum type {3}";
 		private const string _invalidObjectWarning = "(CIGNIO) failed to resolve variable '{0}' on node '{1}': the object is a {2} and cannot be converted to a {3}";
 
-		private const string _missingAssignmentWarning = "(CIGNMA) failed to assign to variable '{0}': the variable could not be found";
-		private const string _readOnlyAssignmentWarning = "(CIGNROA) failed to assign to variable '{0}': the variable is read only";
-		private const string _invalidAssignmentWarning = "(CIGNIA) failed to assign to variable '{0}': the variable has an incompatible type";
+		private const string _missingAssignmentWarning = "(CIGNMA) failed to assign to variable '{0}' from node '{1}': the variable could not be found";
+		private const string _readOnlyAssignmentWarning = "(CIGNROA) failed to assign to variable '{0}' from node '{1}': the variable is read only";
+		private const string _invalidAssignmentWarning = "(CIGNIA) failed to assign to variable '{0}' from node '{1}': the variable has an incompatible type";
 
 		[Tooltip("The name of the node")]
 		[ChangeTrigger(nameof(UpdateName))]
@@ -557,9 +557,9 @@ namespace PiRhoSoft.CompositionEngine
 
 				switch (result)
 				{
-					case SetVariableResult.NotFound: Debug.LogWarningFormat(this, _missingAssignmentWarning, reference); break;
-					case SetVariableResult.ReadOnly: Debug.LogWarningFormat(this, _readOnlyAssignmentWarning, reference); break;
-					case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(this, _invalidAssignmentWarning, reference); break;
+					case SetVariableResult.NotFound: Debug.LogWarningFormat(this, _missingAssignmentWarning, reference, name); break;
+					case SetVariableResult.ReadOnly: Debug.LogWarningFormat(this, _readOnlyAssignmentWarning, reference, name); break;
+					case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(this, _invalidAssignmentWarning, reference, name); break;
 				}
 			}
 		}

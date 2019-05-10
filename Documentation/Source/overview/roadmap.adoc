@@ -19,7 +19,7 @@ The following is a list of planned features for future releases. This will be pe
 * More logging and debugging info, including a visualizer for bindings and expressions
 * Live display of graph execution information (iterations, frame count, elapsed time)
 * Various visual enhancements of the graph window, including better connection drawing and animated view changes
-* More built in nodes
+* More built in node and binding types
 * More transition effects
 * Support for number formatting and expression evaluation in messages
 * `Other` type for VariableValue so non Object derived types can be stored using a ClassMap
@@ -33,6 +33,7 @@ The following is a list of planned features for future releases. This will be pe
 * Store VariableValue enums as int so they don't box (i.e allocate)
 * Expose access restrictions for set, add, and remove to MappedVariable for lists
 * Context sensitive mouse cursors in graph window (disabled due to odd AddCursorRect behaviour with zoom)
+* Improve custom binding interface with a generic base class that looks up the sibling component the binding is acting on
 
 ### Bug Fixes
 

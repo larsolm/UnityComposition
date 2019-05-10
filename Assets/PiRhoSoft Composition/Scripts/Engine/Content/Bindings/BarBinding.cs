@@ -10,8 +10,8 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Bar Binding")]
 	public class BarBinding : VariableBinding
 	{
-		private const string _missingVariableWarning = "(CBBMV) unable to bind {0} for binding {1}: variable '{2}' could not be found";
-		private const string _invalidVariableWarning = "(CBBIV) unable to bind {0} for binding {1}: variable '{2}' is not an int or float";
+		private const string _missingVariableWarning = "(CBBMV) unable to bind {0} for bar binding {1}: variable '{2}' could not be found";
+		private const string _invalidVariableWarning = "(CBBIV) unable to bind {0} for bar binding {1}: variable '{2}' is not an int or float";
 		private const string _wrongTypeWarning = "(CBBBWT) Bar Binding '{0}' has an Image component with a type that is not 'Filled'";
 
 		[Tooltip("The variable holding the amount (numerator) the image should be filled")]
@@ -43,14 +43,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			var amountValue = AmountVariable.GetValue(variables);
-			var totalValue = TotalVariable.GetValue(variables);
+			var hasAmount = Resolve(variables, AmountVariable, out float amount);
+			var hasTotal = Resolve(variables, TotalVariable, out float total);
 
-			_image.enabled = amountValue.HasNumber && totalValue.HasNumber;
+			_image.enabled = hasAmount && hasTotal;
 
 			if (_image.enabled)
 			{
-				var fill = amountValue.Number / totalValue.Number;
+				var fill = amount / total;
 
 				if (Speed <= 0.0f)
 				{
@@ -61,18 +61,6 @@ namespace PiRhoSoft.CompositionEngine
 					StopAllCoroutines();
 					StartCoroutine(AnimateFill(fill, status));
 				}
-			}
-			else if (!SuppressErrors)
-			{
-				if (amountValue.IsEmpty)
-					Debug.LogWarningFormat(this, _missingVariableWarning, nameof(AmountVariable), this, AmountVariable);
-				else if (!amountValue.HasNumber)
-					Debug.LogWarningFormat(this, _invalidVariableWarning, nameof(AmountVariable), this, AmountVariable);
-
-				if (totalValue.IsEmpty)
-					Debug.LogWarningFormat(this, _missingVariableWarning, nameof(TotalVariable), this, TotalVariable);
-				else if (!totalValue.HasNumber)
-					Debug.LogWarningFormat(this, _invalidVariableWarning, nameof(TotalVariable), this, TotalVariable);
 			}
 		}
 
