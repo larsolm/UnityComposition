@@ -6,22 +6,21 @@ Message Controls are an <<manual/interface-control.html,Interface Control>> used
 
 ### Message Node
 
-Create a Message Node in a <<topics/graphs-1.html,graph>> using the menu:Create[Interface > Message] menu of the Instruction Graph Window. A Message Node is an will activate a message control, which enables the referenced http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component and set its text to a resolved <<reference/message.html,Message>>. The node can automacally deactivate message control when it is finished is complete if _AutoHide_ is `true`. If _AutoHide_ is `false` then a <<manual/hide-control-node.html,Hide Control Node>> must be used to deactivate it. Message nodes can also delay the amount of time to wait before they deactivate the message control with the _WaitTime_ field.
+Create a Message Node in a <<topics/graphs-1.html,graph>> using the menu:Create[Interface > Message] menu of the Instruction Graph Window. A Message Node will activate a message control, which enables the referenced http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component and set its text to a resolved <<reference/message.html,Message>>. The node can automacally deactivate message control when it is finished is complete if _AutoHide_ is `true`. If _AutoHide_ is `false` then a <<manual/hide-control-node.html,Hide Control Node>> must be used to deactivate it. Message nodes can also delay the amount of time to wait before they deactivate the message control with the _WaitTime_ field.
+
+image::message-node-example.png[]
 
 ### Message
 
 A <<reference/message.html,message>> is the string that will be displayed and can be dynamically formatted using <<topics/variables-1.html,variables>>. To add formatted variables insert a variable reference between braces (`{}`). For example in following message:
 
-[source,css]
-----
-Hi, {global.Player.Name}! My name is {local.Npc.Name}.
-----
+image::message-example.png[]
 
 The variables `global.Player.Name` and `local.Npc.Name` will be resolved at runtime with the <<topics/graphs-4.html,instruction store>> on the message node, and the message control will display the text accordingly (provided those variables exist). Variables that are not strings will have `.ToString()` called on them so numbers can be displayed as well.
 
 ### Input
 
-In order to maintain modularity of behaviours, responding to input in message controls should be done with separate components. Use a <<manual/message-input.html,Message Input>> component to wait for a specified button to be pressed to finish a message.
+In order to maintain modularity of behaviours, responding to input in message controls should be done with separate components. Use a <<manual/message-input.html,Message Input>> component to wait for the specified button, _AcceptButton_ to be pressed to finish a message.
 
 ### Custom Message Nodes
 

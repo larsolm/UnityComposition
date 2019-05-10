@@ -4,7 +4,8 @@
 
 List Binding is a <<manual/variable-binding.html,Variable Binding>> that will create child https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] based on _Template_ for each <<manual/variable-value.html,Value>> in the <<manual/variable-reference.html,VariableReference>>, _Variable_. _Variable_ must store either an <<reference/i-variable-store.html,IVariableStore>>, or an <<reference/i-variable-list.html,IVariableList>>. Each _Template_ item is instantiated as a <<manual/binding-root.html,Binding Root>> with its _Value_ set to the corresponding item in the store or list. A List Binding is best used in conjunction with a <<manual/menu.html,Menu>> to populate it with <<manual/menu-item.html,Menu Items>>.
 
-See <<topics/bindings-3.html,Variable Bindings>> for more information. +
+See the <<topics/bindings-3.html,Variable Bindings>> topic for more information. +
+See the <<topics/interface-4,Menus and Selections>> topic for more information. +
 See the _"ItemsMenu"_ and _"EquipmentMenu"_ objects in the _"LootMenu"_ scene of the Loot project for an example usage.
 
 ### Fields

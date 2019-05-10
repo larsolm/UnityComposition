@@ -4,6 +4,7 @@
 
 Interface Control is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] to be attached to UI objects so that they can be manually shown and hidden with the <<manual/show-control-node.html,Show Control Node>> and the <<manual/hide-control-node.html,Hide Control Node>>. When loaded an Interface Control always starts inactive until `Activate()` is called. In addition, an Interface Control can maintain a list of https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] that are activated and deactivated along with this control.
 
+See the <<topics/interface-2,Interface Controls>> topic for more information. +
 See the _"Timer"_ object in the _"MazeUI"_ scene in the Maze project for an example usage.
 
 ### Fields

@@ -4,6 +4,7 @@
 
 Message Input is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that should be attached as a sibling of a <<manual/message-control.html,Message Control>> to allow the user to advance the text with a <<reference/input-helper.html,button>> press.
 
+See the <<topics/interface-3,Messages>> topic for more information. +
 See the _"MazeUi"_ scene of the Maze project for an example usage.
 
 ### Fields
