@@ -192,7 +192,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BindingGroup: 
   AutoUpdate: 1
-  SuppressErrors: 1
+  SuppressErrors: 0
   Object: {fileID: 2006859865152935716}
   Condition:
     _statement: global.SelectedCard == Card || Card.Active

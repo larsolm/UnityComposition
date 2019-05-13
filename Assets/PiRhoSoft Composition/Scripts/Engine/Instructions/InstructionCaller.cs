@@ -27,12 +27,14 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Instruction)
 			{
-				var localStore = new InstructionStore(Instruction, context);
+				var localStore = InstructionStore.Reserve(Instruction, context);
 
 				localStore.WriteInputs(this, _inputs, store);
 				localStore.WriteOutputs(_outputs);
 				yield return Instruction.Execute(localStore);
 				localStore.ReadOutputs(_outputs, store);
+
+				InstructionStore.Release(localStore);
 			}
 		}
 

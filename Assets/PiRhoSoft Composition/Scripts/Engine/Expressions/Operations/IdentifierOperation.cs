@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	internal class IdentifierOperation : Operation, IAssignableOperation
+	internal class IdentifierOperation : Operation, ILookupOperation, IAssignableOperation
 	{
 		private const string _invalidLookupException = "unable to find variable '{0}' on '{1}'";
 		private const string _invalidCastException = "unable to cast variable '{0}' to type '{1}'";
@@ -20,13 +20,12 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override VariableValue Evaluate(IVariableStore variables)
 		{
-			return GetValue(VariableValue.Create(variables));
-		}
+			var value = GetValue(variables, VariableValue.Create(variables));
 
-		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
-		{
-			var owner = VariableValue.Create(variables);
-			return SetValue(ref owner, value);
+			if (value.IsEmpty)
+				throw new ExpressionEvaluationException(_invalidLookupException, Name, variables);
+
+			return value;
 		}
 
 		public override void ToString(StringBuilder builder)
@@ -34,14 +33,15 @@ namespace PiRhoSoft.CompositionEngine
 			builder.Append(Name);
 		}
 
-		public VariableValue GetValue(VariableValue owner)
+		public VariableValue GetValue(IVariableStore variables, VariableValue owner)
 		{
-			var value = VariableHandler.Lookup(owner, VariableValue.Create(Name));
+			return VariableHandler.Lookup(owner, VariableValue.Create(Name));
+		}
 
-			if (value.IsEmpty)
-				throw new ExpressionEvaluationException(_invalidLookupException, Name, owner);
-
-			return value;
+		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
+		{
+			var owner = VariableValue.Create(variables);
+			return SetValue(ref owner, value);
 		}
 
 		public SetVariableResult SetValue(ref VariableValue owner, VariableValue value)
@@ -56,22 +56,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			return result;
-		}
-
-		public VariableValue Cast(VariableValue owner)
-		{
-			var cast = VariableHandler.Cast(owner, Name);
-
-			if (cast.IsEmpty)
-				throw new ExpressionEvaluationException(_invalidCastException, owner, Name);
-
-			return cast;
-		}
-
-		public VariableValue Test(VariableValue owner)
-		{
-			var result = VariableHandler.Test(owner, Name);
-			return VariableValue.Create(result);
 		}
 	}
 }

@@ -21,21 +21,6 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(b);
 		}
 
-		protected internal override VariableValue And_(VariableValue left, VariableValue right)
-		{
-			return right.Type == VariableType.Bool ? VariableValue.Create(left.Bool && right.Bool) : VariableValue.Empty;
-		}
-
-		protected internal override VariableValue Or_(VariableValue left, VariableValue right)
-		{
-			return right.Type == VariableType.Bool ? VariableValue.Create(left.Bool || right.Bool) : VariableValue.Empty;
-		}
-
-		protected internal override VariableValue Not_(VariableValue value)
-		{
-			return VariableValue.Create(!value.Bool);
-		}
-
 		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.Type == VariableType.Bool)

@@ -348,18 +348,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		#endregion
 
-		#region Logic
-
-		public static VariableValue And(VariableValue left, VariableValue right) => Get(left.Type).And_(left, right);
-		public static VariableValue Or(VariableValue left, VariableValue right) => Get(left.Type).Or_(left, right);
-		public static VariableValue Not(VariableValue value) => Get(value.Type).Not_(value);
-
-		protected internal virtual VariableValue And_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected internal virtual VariableValue Or_(VariableValue left, VariableValue right) => VariableValue.Empty;
-		protected internal virtual VariableValue Not_(VariableValue value) => VariableValue.Empty;
-
-		#endregion
-
 		#region Comparison
 
 		// Valid comparisons follow the same casting rules as laid out in the Casting region of the VariableValue

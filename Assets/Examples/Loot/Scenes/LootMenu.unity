@@ -1706,7 +1706,7 @@ MonoBehaviour:
   SuppressErrors: 0
   Object: {fileID: 1653464401}
   Condition:
-    _statement: focus.item != null
+    _statement: focus.item is Object
 --- !u!114 &784845104
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1724,7 +1724,7 @@ MonoBehaviour:
   SuppressErrors: 0
   Object: {fileID: 215756017}
   Condition:
-    _statement: focus.item != null
+    _statement: focus.item is Object
 --- !u!4 &784845105
 Transform:
   m_ObjectHideFlags: 0
@@ -1756,7 +1756,7 @@ MonoBehaviour:
   SuppressErrors: 0
   Object: {fileID: 308230888}
   Condition:
-    _statement: focus.item != null
+    _statement: focus.item is Object
 --- !u!1 &822880096
 GameObject:
   m_ObjectHideFlags: 0
