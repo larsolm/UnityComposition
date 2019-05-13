@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/List Binding")]
 	public class ListBinding : VariableBinding
 	{
-		private const string _missingTemplateWarning = "(CBLBMT) Unable to create item for list binding '{0}': the object template is null";
+		private const string _missingTemplateWarning = "(CBLBMT) Unable to create item for List Binding '{0}': the Template is null";
 
 		[Tooltip("The variable holding the list of items to show on this object")]
 		public VariableReference Variable = new VariableReference();

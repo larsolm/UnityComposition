@@ -6,11 +6,11 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Enable Binding")]
 	public class EnableBinding : VariableBinding
 	{
-		private const string _missingExpressionWarning = "(CEBMV) unable to bind enabled state for binding {0}: the expression is empty";
-		private const string _invalidExpressionWarning = "(CEBIV) unable to bind enabled state for binding {0}: the expression '{1}' did not evaluate to a bool";
-		private const string _failedExpressionWarning = "(CEBFE) unable to bind enabled state for binding {0}: the expression '{1}' failed with error {2}";
-		private const string _failedCommandWarning = "(CEBFC) unable to bind enabled state for binding {0}: the Command '{1}' failed with error {2}";
-		private const string _invalidObjectWarning = "(CEBIO) unable to bind enabled state for binding {0): the object '{1}' is not a GameObject, Behaviour, or Renderer";
+		private const string _missingExpressionWarning = "(CEBMV) Unable to bind enabled state for binding '{0}': the expression is empty";
+		private const string _invalidExpressionWarning = "(CEBIV) Unable to bind enabled state for binding '{0}': the expression '{1}' did not evaluate to a bool";
+		private const string _failedExpressionWarning = "(CEBFE) Unable to bind enabled state for binding '{0}': the expression '{1}' failed with error '{2}'";
+		private const string _failedCommandWarning = "(CEBFC) Unable to bind enabled state for binding '{0}': the Command '{1}' failed with error '{2}'";
+		private const string _invalidObjectWarning = "(CEBIO) Unable to bind enabled state for binding '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";
 
 		[Tooltip("The GameObject, Behaviour, or Renderer to enable or disable based on Condition")]
 		public Object Object;

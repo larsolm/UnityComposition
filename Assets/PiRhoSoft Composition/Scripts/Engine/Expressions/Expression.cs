@@ -28,7 +28,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _expressionParseError = "(CEPE) Failed to parse Expression at location {1} ({2}): {3}\nExpression: {0}";
 		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}' on '{1}': {2}";
 		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}' on '{1}': {2}";
-		private const string _invalidResultWarning = "(CEIR) The Expression '{0}' was expected to return type {1} but instead returned type {2}";
+		private const string _invalidResultWarning = "(CEIR) '{0}' expected the Expression '{1}' to return type '{2}' but it instead returned type '{3}'";
 
 		[SerializeField] private string _statement;
 		[NonSerialized] private List<Operation> _operations;
@@ -89,7 +89,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (result.Type != expectedType)
 			{
 				var statement = _operations != null && _operations.Count > 0 ? _operations[_operations.Count - 1].ToString() : string.Empty;
-				Debug.LogWarningFormat(context, _invalidResultWarning, statement, expectedType, result.Type);
+				Debug.LogWarningFormat(context, _invalidResultWarning, context, statement, expectedType, result.Type);
 			}
 
 			return result;

@@ -10,9 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Bar Binding")]
 	public class BarBinding : VariableBinding
 	{
-		private const string _missingVariableWarning = "(CBBMV) unable to bind {0} for bar binding {1}: variable '{2}' could not be found";
-		private const string _invalidVariableWarning = "(CBBIV) unable to bind {0} for bar binding {1}: variable '{2}' is not an int or float";
-		private const string _wrongTypeWarning = "(CBBBWT) Bar Binding '{0}' has an Image component with a type that is not 'Filled'";
+		private const string _wrongTypeWarning = "(CBBBWT) Bar Binding '{0}' has an Image with a type that is not 'Filled'";
 
 		[Tooltip("The variable holding the amount (numerator) the image should be filled")]
 		public VariableReference AmountVariable = new VariableReference();
@@ -38,7 +36,10 @@ namespace PiRhoSoft.CompositionEngine
 			_image = GetComponent<Image>();
 
 			if (_image.type != Image.Type.Filled)
+			{
 				Debug.LogFormat(this, _wrongTypeWarning, name);
+				_image.type = Image.Type.Filled;
+			}
 		}
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)

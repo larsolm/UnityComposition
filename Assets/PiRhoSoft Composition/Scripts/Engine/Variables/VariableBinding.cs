@@ -23,9 +23,9 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidEnumWarning = "(CVBIE) failed to resolve variable '{0}' on binding '{1}': the variable has enum type {2} and should have enum type {3}";
 		private const string _invalidObjectWarning = "(CVBIO) failed to resolve variable '{0}' on binding '{1}': the object is a {2} and cannot be converted to a {3}";
 
-		private const string _missingAssignmentWarning = "(CIGNMA) failed to assign to variable '{0}' from binding '{1}': the variable could not be found";
-		private const string _readOnlyAssignmentWarning = "(CIGNROA) failed to assign to variable '{0}' from binding '{1}': the variable is read only";
-		private const string _invalidAssignmentWarning = "(CIGNIA) failed to assign to variable '{0}' from binding '{1}': the variable has an incompatible type";
+		private const string _missingAssignmentWarning = "(CVBMA) failed to assign to variable '{0}' from binding '{1}': the variable could not be found";
+		private const string _readOnlyAssignmentWarning = "(CVBROA) failed to assign to variable '{0}' from binding '{1}': the variable is read only";
+		private const string _invalidAssignmentWarning = "(CVBIA) failed to assign to variable '{0}' from binding '{1}': the variable has an incompatible type";
 
 		[Tooltip("The group to which this binding belongs (empty means it will update with all groups)")]
 		public string BindingGroup = string.Empty;

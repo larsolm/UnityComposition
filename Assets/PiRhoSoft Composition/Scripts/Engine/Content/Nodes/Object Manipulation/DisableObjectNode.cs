@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "disable-object-node")]
 	public class DisableObjectNode : InstructionGraphNode
 	{
-		private const string _invalidObjectWarning = "(CDONIO) unable to disable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";
+		private const string _invalidObjectWarning = "(CDONIO) Unable to disable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

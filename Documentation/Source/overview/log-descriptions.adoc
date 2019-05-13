@@ -2,389 +2,967 @@
 
 ## Log Descriptions
 
-The following lists all the warning and error messages that may be printed to the https://docs.unity3d.com/Manual/Console.html[Console^] during development. Each message has an associated id that corresponds to an entry in this list for easy searchability. For example the following image shows an error with id `CEEE`. Searching this page will take you to the entry which will explain in more detail what the message means and potential ways to fix it.
+The following lists all the warning and error messages that may be printed to the https://docs.unity3d.com/Manual/Console.html[Console^] by the Composition Framework. Each message has an associated id that corresponds to an entry in this list for easy searchability. For example the following image shows an error with id `CEEE`. Searching this page for an id will take you to the entry which will explain in more detail what the message means, the effect on execution, and potential ways to fix it.
 
 image::error.png[Console Error]
 
+### General Tips
+
+When dealing with <<topics/variables-4.html,VariableReference>> errors, the <<topics/graphs-5.html,Watch Window>> can be extremely useful. Global variables can be investigated at any time and variables on a specific <<topics/graphs-1.html,InstructionGraph>> can be investigated by <<topics/graphs-5.html,setting a breakpoint>> on a node.
+
+<<topics/variables-5.html,Expression>> errors can be harder to track down. If the text box containing the <<topics/variables-5.html,Expression>> is red, the issue is with the actual structure of the <<topics/variables-5.html,Expression>> and details will be displayed. In this case the error state will update as the <<topics/variables-5.html,Expression>> is modified so it is easy to see when the issue has been resolved. If the <<topics/variables-5.html,Expression>> is valid and an error is printed at runtime, the issue is usually related to a <<topics/variables-4.html,VariableReference>> and the above tip for using the <<topics/graphs-5.html,Watch Window>> applies.
+
 ### Warnings
 
-CAANPIL:: Unable to wait on animation for {0}: the clip '{1}' was set to loop and would have never finished
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/animation-player.html,AnimationPlayer>> that triggered the warning.
-* {1} The name of the https://docs.unity3d.com/Manual/AnimationClips.html[AnimationClip^] that 
+#### CAANPIL
 
-When using an <<manual/animation-player.html,AnimationPlayer>>, possibly through a <<manual/play-animation-node.html,PlayAnimationNode>>, continuation (of the graph or caller) can be delayed until the animation completes. This is incompatible with an https://docs.unity3d.com/Manual/AnimationClips.html[AnimationClip^] that is set to loop since a looping animation will never complete.
---
+Unable to wait on Animation Player '{0}': the Animation Clip '{1}' was set to loop and would have never finished
 
-CAAUPIL:: Unable to wait on sound for {0}: the clip '{1}' was set to loop and would have never finished
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/audio-player.html,AudioPlayer>> that triggered the warning.
-* {1} The name of the https://docs.unity3d.com/Manual/class-AudioClip.html.html[AudioClip^] that 
+[cols="1,8"]
+|===
+| {0} | The https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/animation-player.html,AnimationPlayer>> that triggered the warning.
+| {1} | The https://docs.unity3d.com/Manual/AnimationClips.html[AnimationClip^] that is being played.
+|===
 
-When using an <<manual/audio-player.html,AudioPlayer>>, possibly through a <<manual/play-sound-node.html,PlaySoundNode>>, continuation (of the graph or caller) can be delayed until the sound completes. This is incompatible with an https://docs.unity3d.com/Manual/class-AudioClip.html.html[AudioClip^] that is set to loop since a looping sound will never complete.
---
+Effect:: The https://docs.unity3d.com/Manual/AnimationClips.html[AnimationClip^] will still play successfully but the wait setting will be ignored.
 
-CBBBWT:: Bar Binding '{0}' has an Image component with a type that is not 'Filled'
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
+Resolution:: Either tell the <<manual/animation-player.html,AnimationPlayer>> to play the animation without looping (i.e call _PlayAnimation_ instead of _PlayAnimationAndWait_ or clear the _WaitForCompletion_ flag if using a <<manual/play-animation-node.html,PlayAnimationNode>>) or change the https://docs.unity3d.com/Manual/AnimationClips.html[AnimationClip^] to one that doesn't loop.
 
-<<manual/bar-binding.html,BarBindings>> can only operate successfully on https://docs.unity3d.com/ScriptReference/UI.Image.html[Images^] with _fillMethod_ `Filled`.
---
+#### CAAUPIL
 
-CBBIV:: unable to bind {0} for bar binding {1}: variable '{2}' is not an int or float
---
-* {0} Either `AmountVariable` or `TotalVariable` indicating the property with the invalid type
-* {1} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
-* {2} The <<reference/variable-reference.html,VariableReference>> containing the value with the invalid type
+Unable to wait on Audio Player '{0}': the Audio Clip '{1}' was set to loop and would have never finished
 
-<<manual/bar-binding.html,BarBindings>> can bind to int and float variables only.
---
+[cols="1,8"]
+|===
+| {0} | The https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/audio-player.html,AudioPlayer>> that triggered the warning.
+| {1} | The https://docs.unity3d.com/Manual/class-AudioClip.html.html[AudioClip^] that is being played.
+|===
 
-CBBMV:: unable to bind {0} for bar binding {1}: variable '{2}' could not be found
---
-* {0} Either `AmountVariable` or `TotalVariable` indicating the property that could not be resolved
-* {1} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
-* {2} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+Effect:: The https://docs.unity3d.com/Manual/AudioClips.html[AudioClip^] will still play successfully but the wait setting will be ignored.
 
-Lookup of a <<reference/variable-reference.html,VariableReference>> on a <<manual/bar-binding.html,BarBinding>> failed.
---
+Resolution:: Either tell the <<manual/audio-player.html,AudioPlayer>> to play the sound without looping (call _PlaySound_ instead of _PlaySoundAndWait_ or clear the _WaitForCompletion_ flag if using a <<manual/play-sound-node.html,PlaySoundNode>>) or change the https://docs.unity3d.com/Manual/AudioClips.html[AudioClip^] to one that doesn't loop.
 
-CBGTBMV:: Unable to run graph for graph trigger binding '{0}': the variable '{1}' could not be found
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/graph-trigger-binding.html,GraphTriggerBinding>> that triggered the warning.
-* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+#### CBBBWT
 
-Lookup of a <<reference/variable-reference.html,VariableReference>> on a <<manual/graph-trigger-binding.html,GraphTriggerBinding>> failed.
---
+Bar Binding '{0}' has an Image with a type that is not 'Filled'
 
-CBIBIV:: Unable to bind image for image binding '{0}': the variable '{1}' is not a sprite
---
---
+[cols="1,8"]
+|===
+| {0} | The https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/bar-binding.html,BarBinding>> that triggered the warning.
+|===
 
-CBIBMV:: Unable to bind image for image binding '{0}': the variable '{1}' could not be found
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/image-binding.html,ImageBinding>> that triggered the warning.
-* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+Effect:: The https://docs.unity3d.com/Manual/script-Image.html[Image^] will have its _type_ set to `Filled` with default values for the other fill related properties.
 
-Lookup of a <<reference/variable-reference.html,VariableReference>> on an <<manual/image-binding.html,ImageBinding>> failed.
---
+Resolution:: Change the `Image Type` of the https://docs.unity3d.com/Manual/script-Image.html[Image^] to `Filled`.
 
-CBICBIV:: Unable to bind color for image color binding '{0}': the variable '{1}' is not a color
---
---
+#### CBLBMT
 
-CBICBMV:: Unable to bind color for image color binding '{0}': the variable '{1}' could not be found
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/image-color-binding.html,ImageColorBinding>> that triggered the warning.
-* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+Unable to create item for List Binding '{0}': the Template is null
 
-Lookup of a <<reference/variable-reference.html,VariableReference>> on an <<manual/image-color-binding.html,ImageColorBinding>> failed.
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/list-binding.html,ListBinding>> that triggered the warning.
+|===
 
-CBLBIV:: Unable to create list for list binding '{0}': the variable '{1}' is not a color
---
---
+Effect:: The <<manual/list-binding.html,ListBinding>> will do nothing.
 
-CBLBMT:: Unable to create list for list binding '{0}': the object template was null
---
---
+Resolution:: Set the _Template_ property of the <<manual/list-binding.html,ListBinding>>.
 
-CBLBMV:: Unable to create list for list binding '{0}': the variable '{1}' could not be found
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/list-binding.html,ListBinding>> that triggered the warning.
-* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+#### CDONIO
 
-Lookup of a <<reference/variable-reference.html,VariableReference>> on a <<manual/list-binding.html,ListBinding>> failed.
---
+Unable to disable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer
 
-CBMBMV:: Unable to bind text for text binding '{0}': the variable '{1}' could not be found
---
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/disable-object-node.html,DisableObjectNode>> that triggered the warning.
+| {1} | The <<topics/variables-4.html,VariableReference>> assigned to _Target_ that resolved to an invalid type.
+|===
 
-CBNBIV:: Unable to bind text for number binding '{0}': the variable '{1}' is not an int or a float
---
---
+Effect:: The <<manual/disable-object-node.html,InstructionGraphNode>> will do nothing.
 
-CBNBMV:: Unable to bind text for number binding '{0}': the variable '{1}' could not be found
---
-* {0} The name of the https://docs.unity3d.com/Manual/GameObjects.html[GameObject^] containing the <<manual/Number-binding.html,NumberBinding>> that triggered the warning.
-* {1} The <<reference/variable-reference.html,VariableReference>> that could not be resolved
+Resolution:: Change _Target_ so it resolves to either a https://docs.unity3d.com/Manual/GameObjects.html[GameObject^], https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^], or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^].
 
-Lookup of a <<reference/variable-reference.html,VariableReference>> on an <<manual/number-binding.html,NumberBinding>> failed.
---
+#### CEBFC
 
-CBSCBIV:: Unable to bind color for sprite color binding '{0}': the variable '{1}' is not a color
---
---
+Unable to bind enabled state for binding '{0}': the Command '{1}' failed with error '{2}'
 
-CBSCBMV:: Unable to bind color for sprite color binding '{0}': the variable '{1}' could not be found
---
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/enable-binding.html,EnableBinding>> that triggered the warning.
+| {1} | The name of the command that failed.
+| {2} | The error message reported by the command.
+|===
 
-CBTBMV:: Unable to bind text for text binding '{0}': the variable '{1}' could not be found
---
---
+Effect:: The enabled state of _Object_ will not be changed.
 
-CBTCBIV:: Unable to bind color for text color binding '{0}': the variable '{1}' is not a color
---
---
+Resolution:: If the reported error ({2}) indicates a parameter is invalid, the _Condition_ <<topics/variables-5.html,Expression>> is calling the command incorrectly. Otherwise, the command itself has an error and needs to be edited directly. The message should provide details on how to go about fixing the issue.
 
-CBTCBMV:: Unable to bind color for text color binding '{0}': the variable '{1}' could not be found
---
---
+#### CEBFE
 
-CBTIBRO:: Unable to bind text to variable on {0}: the variable '{1}' is read only
---
---
+Unable to bind enabled state for binding '{0}': the expression '{1}' failed with error '{2}'
 
-CBTIBVNF:: Unable to bind text to variable on {0}: the variable '{1}' could not be found
---
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/enable-binding.html,EnableBinding>> that triggered the warning.
+| {1} | The statement in the _Condition_ <<topics/variables-5.html,Expression>> that failed.
+| {2} | The error message reported by the expression.
+|===
 
-CDONIO:: unable to disable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer
---
---
+Effect:: The enabled state of _Object_ will not be changed.
 
-CEBFC:: unable to bind enabled state for binding {0}: the Command '{1}' failed with error {2}
---
---
+Resolution:: The reported error ({2}) should provide details on how to go about fixing the _Condition_ <<topics/variables-5.html,Expression>>.
 
-CEBFE:: unable to bind enabled state for binding {0}: the expression '{1}' failed with error {2}
---
---
+#### CEBIO
 
-CEBIO:: unable to bind enabled state for binding {0): the object '{1}' is not a GameObject, Behaviour, or Renderer
---
---
+Unable to bind enabled state for binding '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer
 
-CEBIV:: unable to bind enabled state for binding {0}: the expression '{1}' did not evaluate to a bool
---
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/enable-binding.html,EnableBinding>> that triggered the warning.
+| {1} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] assigned to _Object_.
+|===
 
-CEBMV:: unable to bind enabled state for binding {0}: the expression is empty
---
---
+Effect:: The enabled state of _Object_ will not be changed.
 
-CEIR:: The Expression '{0}' was expected to return type {1} but instead returned type {2}
---
---
+Resolution:: Change _Object_ to either a https://docs.unity3d.com/Manual/GameObjects.html[GameObject^], https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^], or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^].
 
-CEONIO:: unable to enable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer
---
---
+#### CEBIV
 
-CEXBFC:: unable to bind text for binding {0}: the Command '{1}' failed with error {2}
---
---
+Unable to bind enabled state for binding '{0}': the expression '{1}' did not evaluate to a bool
 
-CEXBFE:: unable to bind text for binding {0}: the expression '{1}' failed with error {2}
---
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/enable-binding.html,EnableBinding>> that triggered the warning.
+| {1} | The final statement in the _Condition_ <<topics/variables-5.html,Expression>>.
+|===
 
-CEXBMV:: unable to bind text for binding {0}: the expression is empty
---
---
+Effect:: The enabled state of _Object_ will not be changed.
 
-CIGNIA:: failed to assign to variable '{0}': the variable has an incompatible type
---
---
+Resolution:: Change _Condition_ so that the final statement results in a bool value, potentially by using a comparison operation.
 
-CIGNIE:: failed to resolve variable '{0}' on node '{1}': the variable has enum type {2} and should have enum type {3}
---
---
+#### CEBMV
 
-CIGNIO:: failed to resolve variable '{0}' on node '{1}': the object is a {2} and cannot be converted to a {3}
---
---
+Unable to bind enabled state for binding '{0}': the expression is empty
 
-CIGNIV:: failed to resolve variable '{0}' on node '{1}': the variable has type {2} and should have type {3}
---
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/enable-binding.html,EnableBinding>> that triggered the warning.
+|===
 
-CIGNMA:: failed to assign to variable '{0}': the variable could not be found
---
---
+Effect:: The enabled state of _Object_ will not be changed.
 
-CIGNMV:: failed to resolve variable '{0}' on node '{1}': the variable could not be found
---
---
+Resolution:: Set the _Condition_ <<topics/variables-5.html,Expression>>.
 
-CIGNROA:: failed to assign to variable '{0}': the variable is read only
---
---
+#### CEIR
 
-CIMMV:: Unable to set text on message '{0}': the variable '{1}' could not be found
---
---
+'{0}' expected the Expression '{1}' to return type '{2}' but it instead returned type '{3}'
 
-CNSLS:: Unable to load scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
---
---
+[cols="1,8"]
+|===
+| {0} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that executed the <<topics/variables-5.html,Expression>>.
+| {1} | The final statement of the <<topics/variables-5.html,Expression>> that was expected to result in a specific type.
+| {2} | The <<topics/variables-2.html,VariableType>> the caller expected from the result of the expression.
+| {3} | The actual <<topics/variables-2.html,VariableType>> of the result of the expression.
+|===
 
-CNSUS:: Unable to unload scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
---
---
+Effect:: The caller ({0}) will still be returned the result and how that result is used is dependent on the specific scenario.
 
-CSBIV:: unable to bind sprite for binding {0}: variable '{1}' is not a Sprite
---
---
+Resolution:: Change the expression defined on the caller ({0}) so that the final statement results in the expected type ({3}).
 
-CSBMV:: unable to bind sprite for binding {0}: variable '{1}' could not be found
---
---
+#### CEONIO
 
-CSCIE:: Failed to expand item {0}: the variable '{1}' is not an IVariableList
---
---
+Unable to enable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer
 
-CTMIA:: this TransitionRenderer has already been added
---
---
+[cols="1,8"]
+|===
+| {0} | The <<manual/enable-object-node.html,EnableObjectNode>> that triggered the warning.
+| {1} | The <<topics/variables-4.html,VariableReference>> assigned to _Target_ that resolved to an invalid type.
+|===
 
-CTMIR:: this TransitionRenderer has not been added
---
---
+Effect:: The <<manual/enable-object-node.html,EnableObjectNode>> will do nothing.
 
-CWWIW:: unable to watch variable {0} of type {1} - only variable stores can be watched
---
---
+Resolution:: Change _Target_ so it resolves to either a https://docs.unity3d.com/Manual/GameObjects.html[GameObject^], https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^], or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^].
 
-CWWMW:: unable to find variable {0} to watch
---
---
+#### CEXBFC
+
+Unable to bind text for binding '{0}': the Command '{1}' failed with error '{2}'
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/expression-binding.html,ExpressionBinding>> that triggered the warning.
+| {1} | The name of the command that failed.
+| {2} | The error message reported by the command.
+|===
+
+Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
+
+Resolution:: If the reported error ({2}) indicates a parameter is invalid, the _Expression_ <<topics/variables-5.html,Expression>> is calling the command incorrectly. Otherwise, the command itself has an error and needs to be edited directly. The message should provide details on how to go about fixing the issue.
+
+#### CEXBFE
+
+Unable to bind text for binding '{0}': the expression '{1}' failed with error '{2}'
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/expression-binding.html,ExpressionBinding>> that triggered the warning.
+| {1} | The statement in the _Expression_ <<topics/variables-5.html,Expression>> that failed.
+| {2} | The error message reported by the expression.
+|===
+
+Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
+
+Resolution:: The reported error ({2}) should provide details on how to go about fixing the _Expression_ <<topics/variables-5.html,Expression>>.
+
+#### CEXBMV
+
+Unable to bind text for binding '{0}': the expression is empty
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/expression-binding.html,ExpressionBinding>> that triggered the warning.
+|===
+
+Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
+
+Resolution:: Set the _Expression_ <<topics/variables-5.html,Expression>>.
+
+#### CIGNIA
+
+Failed to assign to variable '{0}' from node '{1}': the variable has an incompatible type
+
+[cols="1,8"]
+|===
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to assign to the variable.
+|===
+
+Effect:: The assignment will not be performed.
+
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it either resolves to a variable with the correct type or resolves to a variable that can be assigned any type.
+
+#### CIGNIE
+
+Failed to resolve variable '{0}' on node '{1}': the variable has enum type '{2}' and should have enum type '{3}'
+
+[cols="1,8"]
+|===
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid enum type.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
+|===
+
+Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
+
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct enum type.
+
+#### CIGNIO
+
+Failed to resolve variable '{0}' on node '{1}': the object '{2}' is a '{3}' and cannot be converted to a '{4}'
+
+[cols="1,8"]
+|===
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid object type.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
+| {2} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that was resolved but is not the correct type.
+| {3} | The type of the resolved https://docs.unity3d.com/ScriptReference/Object.html[Object^].
+| {4} | The type the <<manual/instruction-graph-node.html,InstructionGraphNode>> expected.
+|===
+
+Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
+
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct object type.
+
+#### CIGNIO
+
+Failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot be converted to a '{3}'
+
+[cols="1,8"]
+|===
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid object type.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
+| {2} | The type of the resolved value.
+| {3} | The type the <<manual/instruction-graph-node.html,InstructionGraphNode>> expected.
+|===
+
+Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
+
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct type.
+
+#### CIGNIV
+
+Failed to resolve variable '{0}' on node '{1}': the variable has type '{2}' and should have type '{3}'
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CIGNMA
+
+Failed to assign to variable '{0}' from node '{1}': the variable could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CIGNMV
+
+Failed to resolve variable '{0}' on node '{1}': the variable could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CIGNROA
+
+Failed to assign to variable '{0}' from node '{1}': the variable is read only
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CIMMV
+
+Unable to set text on message '{0}': the variable '{1}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CNSLS
+
+Unable to load scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CNSUS
+
+Unable to unload scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CSCIE
+
+Failed to expand item {0}: the variable '{1}' is not an IVariableList
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CTMIA
+
+this TransitionRenderer has already been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CTMIR
+
+this TransitionRenderer has not been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVBIA
+
+failed to assign to variable '{0}' from binding '{1}': the variable has an incompatible type
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVBIE
+
+failed to resolve variable '{0}' on binding '{1}': the variable has enum type {2} and should have enum type {3}
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVBIO
+
+failed to resolve variable '{0}' on binding '{1}': the object is a {2} and cannot be converted to a {3}
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVBIV
+
+failed to resolve variable '{0}' on binding '{1}': the variable has type {2} and should have type {3}
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVBMA
+
+failed to assign to variable '{0}' from binding '{1}': the variable could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVBMV
+
+failed to resolve variable '{0}' on binding '{1}': the variable could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVBROA
+
+failed to assign to variable '{0}' from binding '{1}': the variable is read only
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CWWIW
+
+unable to watch variable {0} of type {1} - only variable stores can be watched
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CWWMW
+
+unable to find variable {0} to watch
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
 
 ### Errors
 
-CCEE:: Failed to execute Command '{0}' on '{1}': {2}
---
---
+#### CCEE
 
-CCIGPF:: Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator
---
---
+Failed to execute Command '{0}' on '{1}': {2}
 
-CCNMF:: failed to set target: unable to find field {0} for instruction graph node {1}
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-CCNMI:: failed to set target: index {0} is out of range for instruction graph node {1}
---
---
+Effect:: 
 
-CCNMK:: failed to set target: unable to find key {0} for instruction graph node {1}
---
---
+Resolution:: 
 
-CCSONIO:: failed to create object for {0}: an object of type '{1}' could not be instantiated
---
---
+#### CCIGPF
 
-CCSONIT:: failed to create object for {0}: the type '{1}' could not be found
---
---
+Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator
 
-CEEE:: Failed to execute Expression '{0}' on '{1}': {2}
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-CELDK:: Failed to add keyword '{0}': a keyword with the same text has already been added
---
---
+Effect:: 
 
-CELDL:: Failed to add constant '{0}': a constant with the same text has already been added
---
---
+Resolution:: 
 
-CEPDC:: Failed to add Command '{0}': a Command with the same name has already been added
---
---
+#### CCNMF
 
-CEPDIO:: Failed to add infix operator '{0}': an infix operator with the same symbol has already been added
---
---
+failed to set target: unable to find field {0} for instruction graph node {1}
 
-CEPDPO:: Failed to add prefix operator '{0}': a prefix operator with the same symbol has already been added
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-CEPE:: Failed to parse Expression at location {1} ({2}): {3}
+Effect:: 
+
+Resolution:: 
+
+#### CCNMI
+
+failed to set target: index {0} is out of range for instruction graph node {1}
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CCNMK
+
+failed to set target: unable to find key {0} for instruction graph node {1}
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CCSONIO
+
+failed to create object for {0}: an object of type '{1}' could not be instantiated
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CCSONIT
+
+failed to create object for {0}: the type '{1}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CEEE
+
+Failed to execute Expression '{0}' on '{1}': {2}
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CELDK
+
+Failed to add keyword '{0}': a keyword with the same text has already been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CELDL
+
+Failed to add constant '{0}': a constant with the same text has already been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CEPDC
+
+Failed to add Command '{0}': a Command with the same name has already been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CEPDIO
+
+Failed to add infix operator '{0}': an infix operator with the same symbol has already been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CEPDPO
+
+Failed to add prefix operator '{0}': a prefix operator with the same symbol has already been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CEPE
+
+Failed to parse Expression at location {1} ({2}): {3}
 Expression: {0}
---
---
 
-CEPMC:: Failed to remove Command '{0}': a Command with the same name has not been added
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-CETE:: Failed to parse Expression at location {1}: {2}
+Effect:: 
+
+Resolution:: 
+
+#### CEPMC
+
+Failed to remove Command '{0}': a Command with the same name has not been added
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CETE
+
+Failed to parse Expression at location {1}: {2}
 Expression: {0}
---
---
 
-CIAR:: Failed to run Instruction '{0}': the Instruction is already running
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-CISIC:: failed to create context for {0}: the variable '{1}' does not satisfy the constraint
---
---
+Effect:: 
 
-CISII:: failed to create input for {0}: the variable '{1}' does not satisfy the constraint
---
---
+Resolution:: 
 
-CISIOT:: failed to store output {0}: the variable '{1}' has an incompatible type
---
---
+#### CIAR
 
-CISMI:: failed to read input {0}: the variable '{1}' could not be found
---
---
+Failed to run Instruction '{0}': the Instruction is already running
 
-CISMO:: failed to store output {0}: the variable '{1}' could not be found
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-CISROO:: failed to store output {0}: the variable '{1}' is read only
---
---
+Effect:: 
 
-CMVSIF:: failed to map field '{0}' of type '{1}': Only VariableValue types can be mapped
---
---
+Resolution:: 
 
-CMVSIP:: failed to map property '{0}' of type '{1}': Only VariableValue types can be mapped
---
---
+#### CISIC
 
-CSCII:: Failed to create item {0}: the variable '{1}' is not an IVariableStore or IVariableList
---
---
+failed to create context for {0}: the variable '{1}' does not satisfy the constraint
 
-CSCMB:: Failed to initialize item {0}: the template '{1}' does not have a Binding Root
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-CSCMI:: Failed to create item {0}: the variable '{1}' could not be found
---
---
+Effect:: 
 
-CSQIS:: Unable to run sequence for {0}: index {1} has no connection
---
---
+Resolution:: 
 
-CTMS:: Failed to load Transition {0}: the shader has not been set
---
---
+#### CISII
 
-CVDII:: Failed to initialize variable: the definition specifies type {0} but the initializer returned type {1}
---
---
+failed to create input for {0}: the variable '{1}' does not satisfy the constraint
 
-ISCMC:: Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name
---
---
+[cols="1,8"]
+|===
+| {0} | 
+|===
 
-ISCMT:: Failed to create item {0}: the object template has not been assigned
---
---
+Effect:: 
+
+Resolution:: 
+
+#### CISIOT
+
+failed to store output {0}: the variable '{1}' has an incompatible type
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CISMI
+
+failed to read input {0}: the variable '{1}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CISMO
+
+failed to store output {0}: the variable '{1}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CISROO
+
+failed to store output {0}: the variable '{1}' is read only
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CMVSIF
+
+failed to map field '{0}' of type '{1}': Only VariableValue types can be mapped
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CMVSIP
+
+failed to map property '{0}' of type '{1}': Only VariableValue types can be mapped
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CSCII
+
+Failed to create item {0}: the variable '{1}' is not an IVariableStore or IVariableList
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CSCMB
+
+Failed to initialize item {0}: the template '{1}' does not have a Binding Root
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CSCMI
+
+Failed to create item {0}: the variable '{1}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CSQIS
+
+Unable to run sequence for {0}: index {1} has no connection
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CTMS
+
+Failed to load Transition {0}: the shader has not been set
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CVDII
+
+Failed to initialize variable: the definition specifies type {0} but the initializer returned type {1}
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### ISCMC
+
+Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### ISCMT
+
+Failed to create item {0}: the object template has not been assigned
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 

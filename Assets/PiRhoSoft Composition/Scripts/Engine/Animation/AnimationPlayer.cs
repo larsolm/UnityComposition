@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Animation/Animation Player")]
 	public class AnimationPlayer : MonoBehaviour, ICompletionNotifier
 	{
-		private const string _infiniteLoopingWarning = "(CAANPIL) Unable to wait on animation for {0}: the clip '{1}' was set to loop and would have never finished";
+		private const string _infiniteLoopingWarning = "(CAANPIL) Unable to wait on Animation Player '{0}': the Animation Clip '{1}' was set to loop and would have never finished";
 
 		private Animator _animator;
 		private PlayableGraph _graph;

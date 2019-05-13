@@ -54,14 +54,15 @@ namespace PiRhoSoft.CompositionEngine
 			public static readonly Color InterfaceTeal = new Color(0.0f, 0.5f, 0.3f);
 		}
 
-		private const string _missingVariableWarning = "(CIGNMV) failed to resolve variable '{0}' on node '{1}': the variable could not be found";
-		private const string _invalidVariableWarning = "(CIGNIV) failed to resolve variable '{0}' on node '{1}': the variable has type {2} and should have type {3}";
-		private const string _invalidEnumWarning = "(CIGNIE) failed to resolve variable '{0}' on node '{1}': the variable has enum type {2} and should have enum type {3}";
-		private const string _invalidObjectWarning = "(CIGNIO) failed to resolve variable '{0}' on node '{1}': the object is a {2} and cannot be converted to a {3}";
+		private const string _missingVariableWarning = "(CIGNMV) Failed to resolve variable '{0}' on node '{1}': the variable could not be found";
+		private const string _invalidVariableWarning = "(CIGNIV) Failed to resolve variable '{0}' on node '{1}': the variable has type '{2}' and should have type '{3}'";
+		private const string _invalidEnumWarning = "(CIGNIE) Failed to resolve variable '{0}' on node '{1}': the variable has enum type '{2}' and should have enum type '{3}'";
+		private const string _invalidObjectWarning = "(CIGNIO) Failed to resolve variable '{0}' on node '{1}': the object '{2}' is a '{3}' and cannot be converted to a '{4}'";
+		private const string _invalidTypeWarning = "(CIGNIT) Failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot be converted to a '{3}'";
 
-		private const string _missingAssignmentWarning = "(CIGNMA) failed to assign to variable '{0}' from node '{1}': the variable could not be found";
-		private const string _readOnlyAssignmentWarning = "(CIGNROA) failed to assign to variable '{0}' from node '{1}': the variable is read only";
-		private const string _invalidAssignmentWarning = "(CIGNIA) failed to assign to variable '{0}' from node '{1}': the variable has an incompatible type";
+		private const string _missingAssignmentWarning = "(CIGNMA) Failed to assign to variable '{0}' from node '{1}': the variable could not be found";
+		private const string _readOnlyAssignmentWarning = "(CIGNROA) Failed to assign to variable '{0}' from node '{1}': the variable is read only";
+		private const string _invalidAssignmentWarning = "(CIGNIA) Failed to assign to variable '{0}' from node '{1}': the variable has an incompatible type";
 
 		[Tooltip("The name of the node")]
 		[ChangeTrigger(nameof(UpdateName))]
@@ -539,8 +540,10 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogWarningFormat(this, _missingVariableWarning, reference, name);
 			else if (value.Type == VariableType.Enum && resolveType != null)
 				Debug.LogWarningFormat(this, _invalidEnumWarning, reference, name, value.EnumType.Name, resolveType.Name);
+			else if (value.Type == VariableType.Object && resolveType != null)
+				Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, value.Object.name, value.ReferenceType.Name, resolveType.Name);
 			else if (value.HasReference && resolveType != null)
-				Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, value.ReferenceType.Name, resolveType.Name);
+				Debug.LogWarningFormat(this, _invalidTypeWarning, reference, name, value.ReferenceType.Name, resolveType.Name);
 			else
 				Debug.LogWarningFormat(this, _invalidVariableWarning, reference, name, value.Type, expectedType);
 		}

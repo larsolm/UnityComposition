@@ -6,9 +6,9 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Expression Binding")]
 	public class ExpressionBinding : StringBinding
 	{
-		private const string _missingExpressionWarning = "(CEXBMV) unable to bind text for binding {0}: the expression is empty";
-		private const string _failedExpressionWarning = "(CEXBFE) unable to bind text for binding {0}: the expression '{1}' failed with error {2}";
-		private const string _failedCommandWarning = "(CEXBFC) unable to bind text for binding {0}: the Command '{1}' failed with error {2}";
+		private const string _missingExpressionWarning = "(CEXBMV) Unable to bind text for binding '{0}': the expression is empty";
+		private const string _failedExpressionWarning = "(CEXBFE) Unable to bind text for binding '{0}': the expression '{1}' failed with error '{2}'";
+		private const string _failedCommandWarning = "(CEXBFC) Unable to bind text for binding '{0}': the Command '{1}' failed with error '{2}'";
 
 		public BindingFormatter Formatting;
 
