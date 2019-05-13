@@ -38,6 +38,10 @@ This will return `true` while the _Execute_ coroutine is running.
 
 ### Public Methods
 
+https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<reference/variable-value.html,VariableValue>> _context_)::
+
+Executes the instruction. When inside an existing https://docs.unity3d.com/Manual/Coroutines.html[coroutine^] this can be called directly as part of a `yield return` statement. When outside a coroutine, the <<reference/composition-manager.html,CompositionManager._RunInstruction_>> methods should be used.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Execute(<<reference/instruction-store.html,InstructionStore>> _variables_)::
 
 Executes the instruction. When inside an existing https://docs.unity3d.com/Manual/Coroutines.html[coroutine^] this can be called directly as part of a `yield return` statement. When outside a coroutine, the <<reference/composition-manager.html,CompositionManager._RunInstruction_>> methods should be used.

@@ -34,6 +34,8 @@ bool _SuppressErrors_::
 
 If this is `true`, failure to resolve <<reference/variable-reference.html,VariableReferences>> when updating the binding will be considered a valid condition and therefore not log error messages.
 
+NOTE: Errors when executing <<reference/expression.html,Expressions>> will not be suppressed. This is because <<reference/expression.html,Expressions>> handle errors with exceptions which result in allocations.
+
 ### Public Properties
 
 <<reference/i-variable-store.html,IVariableStore>> _Variables_ _(read only)_::

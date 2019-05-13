@@ -42,13 +42,11 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				catch (ExpressionEvaluationException exception)
 				{
-					if (!SuppressErrors)
-						Debug.LogWarningFormat(this, _failedExpressionWarning, this, Condition.LastOperation, exception.Message);
+					Debug.LogWarningFormat(this, _failedExpressionWarning, this, Condition.LastOperation, exception.Message);
 				}
 				catch (CommandEvaluationException exception)
 				{
-					if (!SuppressErrors)
-						Debug.LogWarningFormat(this, _failedCommandWarning, this, exception.Command, exception.Message);
+					Debug.LogWarningFormat(this, _failedCommandWarning, this, exception.Command, exception.Message);
 				}
 
 				if (Object is GameObject gameObject)

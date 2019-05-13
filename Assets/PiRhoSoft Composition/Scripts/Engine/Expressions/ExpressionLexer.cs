@@ -108,7 +108,7 @@ namespace PiRhoSoft.CompositionEngine
 			return _constants.TryGetValue(text, out var value) ? value : VariableValue.Empty;
 		}
 
-		public static VariableType GetType(string text)
+		internal static VariableType GetType(string text)
 		{
 			return _types.TryGetValue(text, out var value) ? value : VariableType.Empty;
 		}

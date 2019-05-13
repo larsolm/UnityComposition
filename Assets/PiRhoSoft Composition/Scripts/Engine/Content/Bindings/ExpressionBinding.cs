@@ -43,13 +43,11 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			catch (ExpressionEvaluationException exception)
 			{
-				if (!SuppressErrors)
-					Debug.LogWarningFormat(this, _failedExpressionWarning, this, Expression.LastOperation, exception.Message);
+				Debug.LogWarningFormat(this, _failedExpressionWarning, this, Expression.LastOperation, exception.Message);
 			}
 			catch (CommandEvaluationException exception)
 			{
-				if (!SuppressErrors)
-					Debug.LogWarningFormat(this, _failedCommandWarning, this, exception.Command, exception.Message);
+				Debug.LogWarningFormat(this, _failedCommandWarning, this, exception.Command, exception.Message);
 			}
 
 			SetText(text, enabled);

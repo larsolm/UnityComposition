@@ -40,12 +40,6 @@ bool IsOutput(<<reference/instruction-output.html,InstructionOutput>> _output_):
 
 Determines if _inputs_ writes to the _Output_ store. This can be used from overridden implementations of _GetOutputs_ in rare cases where the default implementation isn't sufficient.
 
-### Constructors
-
-InstructionStore(<<reference/instruction.html,Instruction>> _instruction_, <<reference/variable-value.html,VariableValue>> _context_)::
-
-Creates an InstructionStore that will be used with _instruction_, validates _context_ with <<reference/instruction.html,_instruction_._ContextDefinition_>> and sets it to _Context_. _context_ is not required (it can be <<reference/varibale-value.html,VariableValue._Empty_>>) but usually holds the object that execution of _instruction_ is initiated from.
-
 ### Public Properties
 
 string _ContextName_ _(read only)_::
@@ -69,14 +63,6 @@ The variable store, accessed with _OutputStoreName_, that holds variables set by
 The variable store, accessed with _LocalStoreName_, that holds variables that are isolated to the execution of the _instruction_ this store was created with. When execution begins, this store will be empty, but variables can be added or changed on this store at any time without affecting any other stores.
 
 NOTE: It is not required to use _LocalStoreName_ when accessing the local store but it can improve readability or resolve ambiguities in some cases.
-
-<<reference/variable-store.html,VariableStore>> _Global_ _(read only)_::
-
-The variable store, accessed with _GlobalStoreName_, that shares variables between all <<reference/instruction-graph.html,InstructionGraphs>>, <<reference/instruction-graph-node.html,InstructionGraphNodes>>, and <<reference/variable-binding.html,VariableBindings>>. Variables can be added or changed on this store at any time and those changes will be available to any other location that has access to the global store. From code, the global store is available at <<reference/composition-manager.html,CompositionManager.Instance._GlobalStore_>>.
-
-<<reference/scene-variable-store.html,SceneVariableStore>> _Scene_ _(read only)_::
-
-The variable store, accessed with _SceneStoreName_, that provides access to https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] in any currently loaded scene by name. From code, the scene store is available at <<reference/composition-manager.html,CompositionManager.Instance._SceneStore_>>.
 
 ### Public Methods
 

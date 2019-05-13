@@ -14,7 +14,7 @@ See <<topics/bindings-3.html,Variable Bindings>> for more information. +
 
 | Binding Group	| The string name of the group this binding belongs to 
 | Auto Update	| Whether to automatically update this binding every frame
-| Suppress Errors	| Whether to hide errors reported from invalid variable accsess
+| Suppress Errors	| Whether to hide errors reported from invalid variable access
 |===
 
 ifdef::backend-multipage_html5[]
