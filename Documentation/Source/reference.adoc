@@ -88,10 +88,6 @@ include::reference/collision-graph-trigger.adoc[]
 
 <<<
 
-include::reference/collision-notifier.adoc[]
-
-<<<
-
 include::reference/instruction-graph-node-colors.adoc[]
 
 <<<
@@ -261,10 +257,6 @@ include::reference/i-assignable-operation.adoc[]
 <<<
 
 include::reference/i-class-map.adoc[]
-
-<<<
-
-include::reference/i-collision-trigger.adoc[]
 
 <<<
 

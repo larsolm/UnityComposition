@@ -2,7 +2,7 @@
 
 ## Collision Graph Trigger
 
-Collision Graph Trigger is an <<manual/instruction-trigger.html,Instruction Trigger>> that will run its <<manual/instruction-graph.html,Instruction Graph>> on collisions. Collision Graph Trigger works in conjunction with a <<manual/collision-notifier.html,Collision Notifier>> which will call the respective Enter and Exit functions on the Collision Graph Trigger.
+Collision Graph Trigger is an <<manual/instruction-trigger.html,Instruction Trigger>> that will run an <<manual/instruction-graph.html,Instruction Graph>> on collisions. Collision Graph Trigger works with all (2D and 3D) of Unity's enter and exit https://docs.unity3d.com/ScriptReference/Collider.html[collision messages^] which will run the respective _EnterGraph_ and _ExitGraph_ when they are called.
 
 See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 See the _"Maze1"_ scene in the Maze project for an example usage.

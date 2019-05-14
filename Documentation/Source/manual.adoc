@@ -44,10 +44,6 @@ include::manual/collision-graph-trigger.adoc[]
 
 <<<
 
-include::manual/collision-notifier.adoc[]
-
-<<<
-
 include::manual/command.adoc[]
 
 <<<

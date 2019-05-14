@@ -16,7 +16,6 @@ GameObject:
   - component: {fileID: 2643244533930277761}
   - component: {fileID: 2643244533930277764}
   - component: {fileID: 2643244533930277775}
-  - component: {fileID: 4980581016010646345}
   - component: {fileID: 1749428514748622999}
   m_Layer: 0
   m_Name: MazePlayer
@@ -274,18 +273,6 @@ MonoBehaviour:
       _valueData: AQAPAAAAB0xldmVsIDE=
       _valueObjects: []
     _outputs: []
---- !u!114 &4980581016010646345
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2643244533930277767}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e26cf2f98de8c074eb7eb04e1ae985ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1749428514748622999
 MonoBehaviour:
   m_ObjectHideFlags: 0
