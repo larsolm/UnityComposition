@@ -8,12 +8,11 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(Menu))]
 	public class SelectionControl : InterfaceControl
 	{
-		private const string _invalidExpandWarning = "(CSCIE) Failed to expand item {0}: the variable '{1}' is not an IVariableList";
-		private const string _missingItemError = "(CSCMI) Failed to create item {0}: the variable '{1}' could not be found";
-		private const string _invalidItemError = "(CSCII) Failed to create item {0}: the variable '{1}' is not an IVariableStore or IVariableList";
-		private const string _missingTemplateError = "(ISCMT) Failed to create item {0}: the object template has not been assigned";
-		private const string _missingChildError = "(ISCMC) Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name";
-		private const string _missingBindingError = "(CSCMB) Failed to initialize item {0}: the template '{1}' does not have a Binding Root";
+		private const string _invalidExpandError = "(CSCIE) Failed to expand item '{0}' on SelectionControl '{1}': the variable '{2}' is not an IVariableList";
+		private const string _missingItemError = "(CSCMI) Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' could not be found";
+		private const string _invalidItemError = "(CSCII) Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' is not an IVariableStore or IVariableList";
+		private const string _missingTemplateError = "(CSCMT) Failed to create item '{0}' on SelectionControl '{1}': the template has not been assigned";
+		private const string _missingChildError = "(CSCMC) Failed to create item '{0}' on SelectionControl '{1}': the control does not have a child with the specified name";
 
 		public bool IsRunning { get; private set; } = false;
 		public bool IsSelectionRequired { get; private set; } = false;
@@ -117,9 +116,9 @@ namespace PiRhoSoft.CompositionEngine
 					else if (value.HasStore)
 						CreateStoreItem(item, value, ref index);
 					else if (value.IsEmpty)
-						Debug.LogErrorFormat(this, _missingItemError, item.Id, item.Variables);
+						Debug.LogErrorFormat(this, _missingItemError, item.Id, name, item.Variables);
 					else
-						Debug.LogErrorFormat(this, _invalidItemError, item.Id, item.Variables);
+						Debug.LogErrorFormat(this, _invalidItemError, item.Id, name, item.Variables);
 				}
 				else
 				{
@@ -135,9 +134,9 @@ namespace PiRhoSoft.CompositionEngine
 			if (item.Source == MenuItemTemplate.ObjectSource.Asset)
 			{
 				if (item.Template == null)
-					Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
+					Debug.LogErrorFormat(this, _missingTemplateError, item.Label, name);
 				else if (item.Expand)
-					Debug.LogWarningFormat(this, _invalidExpandWarning, item.Label, item.Variables);
+					Debug.LogErrorFormat(this, _invalidExpandError, item.Label, name, item.Variables);
 				else
 					AddItem(item, null, value, index++);
 			}
@@ -152,7 +151,7 @@ namespace PiRhoSoft.CompositionEngine
 			if (item.Source == MenuItemTemplate.ObjectSource.Asset)
 			{
 				if (item.Template == null)
-					Debug.LogErrorFormat(this, _missingTemplateError, item.Label);
+					Debug.LogErrorFormat(this, _missingTemplateError, item.Label, name);
 				else if (item.Expand)
 					CreateExpandedItems(item, value, ref index);
 				else

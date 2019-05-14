@@ -271,13 +271,13 @@ Effect:: The effect depends on the <<manual/instruction-graph-node.html,Instruct
 
 Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct object type.
 
-#### CIGNIO
+#### CIGNIT
 
 Failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot be converted to a '{3}'
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid object type.
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid type.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
 | {2} | The type of the resolved value.
 | {3} | The type the <<manual/instruction-graph-node.html,InstructionGraphNode>> expected.
@@ -293,12 +293,15 @@ Failed to resolve variable '{0}' on node '{1}': the variable has type '{2}' and 
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
+| {2} | The <<topics/variables-2.html,VariableType>> of the resolved value.
+| {3} | The <<topics/variables-2.html,VariableType>> the <<manual/instruction-graph-node.html,InstructionGraphNode>> expected.
 |===
 
-Effect:: 
+Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
 
-Resolution:: 
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct type.
 
 #### CIGNMA
 
@@ -306,12 +309,13 @@ Failed to assign to variable '{0}' from node '{1}': the variable could not be fo
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The <<topics/variables-4.html,VariableReference>> that could not be resolved.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to assign to the variable.
 |===
 
-Effect:: 
+Effect:: The assignment will not be performed.
 
-Resolution:: 
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a valid variable.
 
 #### CIGNMV
 
@@ -319,12 +323,13 @@ Failed to resolve variable '{0}' on node '{1}': the variable could not be found
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The <<topics/variables-4.html,VariableReference>> that could not be resolved.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
 |===
 
-Effect:: 
+Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
 
-Resolution:: 
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a valid variable.
 
 #### CIGNROA
 
@@ -332,12 +337,13 @@ Failed to assign to variable '{0}' from node '{1}': the variable is read only
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to a read only variable.
+| {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to assign to the variable.
 |===
 
-Effect:: 
+Effect:: The assignment will not be performed.
 
-Resolution:: 
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a writable variable.
 
 #### CIMMV
 
@@ -345,64 +351,56 @@ Unable to get text from Message '{0}': the Variable '{1}' could not be found
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The format of the <<topics/interface-3.html,Message>> that is being resolved.
+| {1} | The <<topics/variables-4.html,VariableReference>> that could not be found.
 |===
 
-Effect:: 
+Effect:: The text of the message will have the failed section omitted.
 
-Resolution:: 
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> in the <<topics/interface-3.html,Message>> to a valid variable.
 
 #### CNBIV
 
-Failed to resolve variable '{0}' on binding '{1}': the variable has type {2} and should have type 'Int' or 'Float'
+Failed to resolve variable '{0}' on binding '{1}': the variable has type '{2}' and should have type 'Int' or 'Float'
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {1} | The <<manual/number-binding.html,NumberBinding>> that attempted to resolve the variable.
+| {2} | The <<topics/variables-2.html,VariableType>> of the resolved value.
 |===
 
-Effect:: 
+Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
 
-Resolution:: 
+Resolution:: If the effect of disabling the http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] is desired, set _Suppress Errors_ on the <<manual/number-binding.html,NumberBinding>>. Otherwise, change the <<topics/variables-4.html,VariableReference>> to a valid variable.
 
 #### CNSLS
 
-Unable to load scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
+Unable to load scene on node '{0}': the variable '{1}' could not be found
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The <<manual/load-scene-node.html,LoadSceneNode>> that attempted to resolve the variable.
+| {1} | The <<topics/variables-4.html,VariableReference>> that could not be found.
 |===
 
-Effect:: 
+Effect:: No scenes will be loaded or unloaded and the <<manual/load-scene-node.html,LoadSceneNode>> will complete immediately.
 
-Resolution:: 
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
 
 #### CNSUS
 
-Unable to unload scene for {0}: the scene '{1}' could not be found. Make sure this variable refers to an int or a string
+Unable to unload scene for node '{0}': the scene '{1}' could not be found
 
 [cols="1,8"]
 |===
-| {0} | 
+| {0} | The <<manual/unload-scene-node.html,UnloadSceneNode>> that attempted to resolve the variable.
+| {1} | The <<topics/variables-4.html,VariableReference>> that could not be found.
 |===
 
-Effect:: 
+Effect:: No scenes will be unloaded and the <<manual/unload-scene-node.html,UnloadSceneNode>> will complete immediately.
 
-Resolution:: 
-
-#### CSCIE
-
-Failed to expand item {0}: the variable '{1}' is not an IVariableList
-
-[cols="1,8"]
-|===
-| {0} | 
-|===
-
-Effect:: 
-
-Resolution:: 
+Resolution:: Change the <<topics/variables-4.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
 
 #### CTMIA
 
@@ -876,9 +874,9 @@ Effect::
 
 Resolution:: 
 
-#### CSCII
+#### CSCIE
 
-Failed to create item {0}: the variable '{1}' is not an IVariableStore or IVariableList
+Failed to expand item '{0}' on SelectionControl '{1}': the variable '{2}' is not an IVariableList
 
 [cols="1,8"]
 |===
@@ -889,9 +887,22 @@ Effect::
 
 Resolution:: 
 
-#### CSCMB
+#### CSCII
 
-Failed to initialize item {0}: the template '{1}' does not have a Binding Root
+Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' is not an IVariableStore or IVariableList
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CSCMC
+
+Failed to create item '{0}' on SelectionControl '{1}': the control does not have a child with the specified name
 
 [cols="1,8"]
 |===
@@ -904,7 +915,20 @@ Resolution::
 
 #### CSCMI
 
-Failed to create item {0}: the variable '{1}' could not be found
+Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CSCMT
+
+Failed to create item '{0}' on SelectionControl '{1}': the template has not been assigned
 
 [cols="1,8"]
 |===
@@ -944,32 +968,6 @@ Resolution::
 #### CVDII
 
 Failed to initialize variable: the definition specifies type {0} but the initializer returned type {1}
-
-[cols="1,8"]
-|===
-| {0} | 
-|===
-
-Effect:: 
-
-Resolution:: 
-
-#### ISCMC
-
-Failed to create item {0}: SelectionControl '{1}' does not have a child with the specified name
-
-[cols="1,8"]
-|===
-| {0} | 
-|===
-
-Effect:: 
-
-Resolution:: 
-
-#### ISCMT
-
-Failed to create item {0}: the object template has not been assigned
 
 [cols="1,8"]
 |===

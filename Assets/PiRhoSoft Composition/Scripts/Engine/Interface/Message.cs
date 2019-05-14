@@ -17,6 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private List<MessageToken> _tokens = new List<MessageToken>();
 		private string _result = string.Empty;
+		private bool _dirty = true;
 
 		public void GetInputs(IList<VariableDefinition> inputs)
 		{
@@ -35,7 +36,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public string GetText(IVariableStore variables, bool suppressErrors)
 		{
-			var changed = false;
+			var changed = _dirty;
 
 			foreach (var token in _tokens)
 			{
@@ -66,6 +67,7 @@ namespace PiRhoSoft.CompositionEngine
 					_temporaryBuilder.Append(token.Text);
 
 				_result = _temporaryBuilder.ToString();
+				_dirty = false;
 			}
 
 			return _result;
@@ -85,6 +87,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_tokens.Clear();
 			_result = string.Empty;
+			_dirty = true;
 
 			var start = 0;
 
