@@ -6,54 +6,86 @@ using UnityEngine;
 namespace PiRhoSoft.CompositionEngine
 {
 	[Serializable]
-	public class Message
+	public class Message : ISerializationCallbackReceiver
 	{
-		private const string _missingVariableWarning = "(CIMMV) Unable to set text on message '{0}': the variable '{1}' could not be found";
-		private static VariableReference _temporaryReference = new VariableReference();
+		private const string _missingVariableWarning = "(CIMMV) Unable to get text from Message '{0}': the Variable '{1}' could not be found";
 		private static StringBuilder _temporaryBuilder = new StringBuilder();
 
 		[TextArea(3, 8)]
 		public string Text = string.Empty;
 		public bool HasText => !string.IsNullOrEmpty(Text);
 
+		private List<MessageToken> _tokens = new List<MessageToken>();
+		private string _result = string.Empty;
+
 		public void GetInputs(IList<VariableDefinition> inputs)
 		{
-			var start = 0;
+#if UNITY_EDITOR
+			// the editor calls this method, and may also edit the text after serialization. The simplest way to make sure it
+			// is correct is to just re Parse.
+			Parse(Text);
+#endif
 
-			while (start < Text.Length)
+			foreach (var token in _tokens)
 			{
-				var open = Text.IndexOf('{', start);
-				var close = Text.IndexOf('}', open + 1);
-
-				if (open > start && Text[open - 1] == '\\')
-				{
-					start = open + 1;
-				}
-				else if (open < 0 || close < 0)
-				{
-					break;
-				}
-				else
-				{
-					_temporaryReference.Variable = Text.Substring(open + 1, close - open - 1);
-
-					if (InstructionStore.IsInput(_temporaryReference))
-						inputs.Add(new VariableDefinition { Name = _temporaryReference.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
-
-					start = close + 1;
-				}
+				if (token.Reference != null && InstructionStore.IsInput(token.Reference))
+					inputs.Add(new VariableDefinition { Name = token.Reference.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
 			}
 		}
 
 		public string GetText(IVariableStore variables, bool suppressErrors)
 		{
-			_temporaryBuilder.Clear();
-			Append(variables, Text, _temporaryBuilder, suppressErrors);
-			return _temporaryBuilder.ToString();
+			var changed = false;
+
+			foreach (var token in _tokens)
+			{
+				if (token.Reference != null)
+				{
+					var value = token.Reference.GetValue(variables);
+					var equal = VariableHandler.IsEqual(value, token.Value);
+
+					if (value.IsEmpty)
+					{
+						if (!suppressErrors)
+							Debug.LogWarningFormat(_missingVariableWarning, Text, token.Reference.Variable);
+					}
+					else if (!equal.HasValue || !equal.Value)
+					{
+						token.Value = value;
+						token.Text = value.ToString();
+						changed = true;
+					}
+				}
+			}
+
+			if (changed)
+			{
+				_temporaryBuilder.Clear();
+
+				foreach (var token in _tokens)
+					_temporaryBuilder.Append(token.Text);
+
+				_result = _temporaryBuilder.ToString();
+			}
+
+			return _result;
 		}
 
-		private void Append(IVariableStore variables, string input, StringBuilder output, bool suppressErrors)
+		#region Parsing
+
+		private class MessageToken
 		{
+			public VariableReference Reference;
+			public VariableValue Value;
+			public string Text;
+			//public List<MessageToken> Tokens; // this will eventually be used to support VariableReferences that themselves contain a string with format parameters
+		}
+
+		private void Parse(string input)
+		{
+			_tokens.Clear();
+			_result = string.Empty;
+
 			var start = 0;
 
 			while (start < input.Length)
@@ -63,30 +95,43 @@ namespace PiRhoSoft.CompositionEngine
 
 				if (open > start && input[open - 1] == '\\')
 				{
-					output.Append(input, start, open - start - 1);
-					output.Append('{');
+					var text = input.Substring(start, open - start - 1) + '{';
+					_tokens.Add(new MessageToken { Text = text });
 					start = open + 1;
 				}
 				else if (open < 0 || close < 0)
 				{
-					output.Append(input, start, input.Length - start);
-					break;
+					var text = input.Substring(start, input.Length - start);
+					_tokens.Add(new MessageToken { Text = text });
+					start = input.Length;
 				}
 				else
 				{
-					output.Append(input, start, open - start);
+					var text = input.Substring(start, open - start);
+					_tokens.Add(new MessageToken { Text = text });
 
-					_temporaryReference.Variable = input.Substring(open + 1, close - open - 1);
+					var token = new MessageToken { Reference = new VariableReference() };
+					token.Reference.Variable = input.Substring(open + 1, close - open - 1);
+					_tokens.Add(token);
 
-					var value = _temporaryReference.GetValue(variables);
-
-					if (!suppressErrors && value.IsEmpty)
-						Debug.LogWarningFormat(_missingVariableWarning, input, _temporaryReference.Variable);
-
-					Append(variables, value.ToString(), output, suppressErrors);
 					start = close + 1;
 				}
 			}
 		}
+
+		#endregion
+
+		#region ISerializationCallbackReceiver Implementation
+
+		public void OnBeforeSerialize()
+		{
+		}
+
+		public void OnAfterDeserialize()
+		{
+			Parse(Text);
+		}
+
+		#endregion
 	}
 }

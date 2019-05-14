@@ -1346,7 +1346,7 @@ MonoBehaviour:
     _variable: 
     _tokens: []
   Condition:
-    _statement: winner == null
+    _statement: winner is Empty
 --- !u!114 &114956810405518286
 MonoBehaviour:
   m_ObjectHideFlags: 1

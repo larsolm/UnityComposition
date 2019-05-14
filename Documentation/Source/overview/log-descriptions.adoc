@@ -341,7 +341,20 @@ Resolution::
 
 #### CIMMV
 
-Unable to set text on message '{0}': the variable '{1}' could not be found
+Unable to get text from Message '{0}': the Variable '{1}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | 
+|===
+
+Effect:: 
+
+Resolution:: 
+
+#### CNBIV
+
+Failed to resolve variable '{0}' on binding '{1}': the variable has type {2} and should have type 'Int' or 'Float'
 
 [cols="1,8"]
 |===

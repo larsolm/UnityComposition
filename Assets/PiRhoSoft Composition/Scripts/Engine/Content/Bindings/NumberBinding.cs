@@ -6,28 +6,46 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Number Binding")]
 	public class NumberBinding : StringBinding
 	{
+		private const string _invalidVariableWarning = "(CNBIV) failed to resolve variable '{0}' on binding '{1}': the variable has type {2} and should have type 'Int' or 'Float'";
+
 		public BindingFormatter Format;
 
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
 
+		private VariableValue _previousValue = VariableValue.Empty;
+
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			var enabled = false;
-			var text = string.Empty;
-
-			if (Resolve(variables, Variable, out int i))
+			if (Resolve(variables, Variable, out VariableValue value))
 			{
-				enabled = true;
-				text = Format.GetFormattedString(i);
-			}
-			else if (Resolve(variables, Variable, out float f))
-			{
-				enabled = true;
-				text = Format.GetFormattedString(f);
-			}
+				var equal = VariableHandler.IsEqual(value, _previousValue);
 
-			SetText(text, enabled);
+				if (!equal.HasValue || !equal.Value)
+				{
+					if (value.TryGetInt(out int i))
+					{
+						var text = Format.GetFormattedString(i);
+						SetText(text, true);
+					}
+					else if (value.TryGetFloat(out float f))
+					{
+						var text = Format.GetFormattedString(f);
+						SetText(text, true);
+					}
+					else
+					{
+						if (!SuppressErrors)
+							Debug.LogWarningFormat(this, _invalidVariableWarning, Variable, name, value.Type);
+
+						SetText(string.Empty, false);
+					}
+				}
+			}
+			else
+			{
+				SetText(string.Empty, false);
+			}
 		}
 	}
 }

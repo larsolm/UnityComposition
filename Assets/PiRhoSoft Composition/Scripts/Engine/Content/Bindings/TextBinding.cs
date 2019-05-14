@@ -9,10 +9,24 @@ namespace PiRhoSoft.CompositionEngine
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
 
+		private VariableValue _previousValue = VariableValue.Empty;
+
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			var resolved = Resolve(variables, Variable, out VariableValue value);
-			SetText(value.ToString(), resolved && value.Type != VariableType.Empty);
+			if (Resolve(variables, Variable, out VariableValue value))
+			{
+				var equal = VariableHandler.IsEqual(value, _previousValue);
+
+				if (!equal.HasValue || !equal.Value)
+				{
+					SetText(value.ToString(), true);
+					_previousValue = value;
+				}
+			}
+			else
+			{
+				SetText(string.Empty, false);
+			}
 		}
 	}
 }
