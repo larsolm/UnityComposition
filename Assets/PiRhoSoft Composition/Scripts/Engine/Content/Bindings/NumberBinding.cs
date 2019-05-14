@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Number Binding")]
 	public class NumberBinding : StringBinding
 	{
-		private const string _invalidVariableWarning = "(CNBIV) failed to resolve variable '{0}' on binding '{1}': the variable has type {2} and should have type 'Int' or 'Float'";
+		private const string _invalidVariableWarning = "(CNBIV) Failed to resolve variable '{0}' on binding '{1}': the variable has type {2} and should have type 'Int' or 'Float'";
 
 		public BindingFormatter Format;
 
