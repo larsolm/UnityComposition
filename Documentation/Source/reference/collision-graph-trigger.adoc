@@ -2,21 +2,21 @@
 
 ## CollisionGraphTrigger
 
-PiRhoSoft.CompositionEngine.CollisionGraphTrigger : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^], <<reference/i-collision-trigger.html,ICollisionTrigger>>
+PiRhoSoft.CompositionEngine.CollisionGraphTrigger : https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^]
 
 ### Description
 
-Add this to a https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] to to run an <<reference/instruction-graph.html,InstructionGrap>> when a <<reference/collision-notifier.html,CollisionNotifier>> informs this object that it has collided.
+Add this to a https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] to to run an <<reference/instruction-graph.html,InstructionGraph>> when this object starts or stops colliding.
 
 ### Public Fields
 
 <<reference/instruction-caller.html,InstructionCaller>> _EnterGraph_::
 
-The <<reference/instruction-graph.html,InstructionGraph>> to run when a <<reference/collision-notifier.html,CollisionNotifier>> begins colliding with this object.
+The <<reference/instruction-graph.html,InstructionGraph>> to run when this object begins colliding.
 
 <<reference/instruction-caller.html,InstructionCaller>> _ExitGraph_::
 
-The <<reference/instruction-graph.html,InstructionGraph>> to run when a <<reference/collision-notifier.html,CollisionNotifier>> stops colliding with this object.
+The <<reference/instruction-graph.html,InstructionGraph>> to run when this stops colliding.
 
 ifdef::backend-multipage_html5[]
 <<manual/collision-graph-trigger.html,Manual>>
