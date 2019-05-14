@@ -55,7 +55,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Reference = new VariableReference();
 	}
 
-	public class InstructionStore : IVariableStore
+	public class InstructionStore : IVariableStore, IPoolable
 	{
 		private const string _invalidContextError = "(CISIC) failed to create context for {0}: the variable '{1}' does not satisfy the constraint";
 		private const string _invalidInputError = "(CISII) failed to create input for {0}: the variable '{1}' does not satisfy the constraint";
@@ -74,8 +74,6 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableStore Input { get; } = new WritableStore();
 		public VariableStore Output { get; } = new WritableStore();
 		public VariableStore Local { get; } = new VariableStore();
-		public VariableStore Global { get; } = CompositionManager.Instance.GlobalStore;
-		public SceneVariableStore Scene { get; } = CompositionManager.Instance.SceneStore;
 
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName == InputStoreName;
 		public static bool IsOutput(VariableReference variable) => variable.IsAssigned && variable.StoreName == OutputStoreName;
@@ -84,13 +82,35 @@ namespace PiRhoSoft.CompositionEngine
 
 		private readonly string[] _variableNames = new string[] { InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName, CompositionManager.SceneStoreName, string.Empty };
 
-		public InstructionStore(Instruction instruction, VariableValue context)
-		{
-			ContextName = instruction.ContextName;
-			Context = ResolveValue(instruction.ContextDefinition, context, instruction, _invalidContextError, ContextName);
+		#region Pooling
 
-			_variableNames[_variableNames.Length - 1] = ContextName;
+		private class PoolInfo : IPoolInfo
+		{
+			public int Size => 10;
+			public int Growth => 5;
 		}
+
+		private static ClassPool<InstructionStore, PoolInfo> _pool = new ClassPool<InstructionStore, PoolInfo>();
+
+		internal static InstructionStore Reserve(Instruction instruction, VariableValue context)
+		{
+			var store = _pool.Reserve();
+
+			store.ContextName = instruction.ContextName;
+			store.Context = ResolveValue(instruction.ContextDefinition, context, instruction, _invalidContextError, store.ContextName);
+			store._variableNames[store._variableNames.Length - 1] = store.ContextName;
+
+			return store;
+		}
+
+		internal static void Release(InstructionStore store)
+		{
+			_pool.Release(store);
+		}
+
+		#endregion
+
+		#region Inputs and Outputs
 
 		public void WriteInputs(InstructionCaller instruction, IList<InstructionInput> inputs, IVariableStore caller)
 		{
@@ -145,6 +165,29 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		private static VariableValue ResolveValue(ValueDefinition definition, VariableValue value, Object errorContext, string invalidError, string variableName)
+		{
+			if (definition.Type == VariableType.Object && definition.Constraint is ObjectVariableConstraint constraint && value.TryGetObject(out var obj))
+			{
+				var resolved = ComponentHelper.GetAsObject(constraint.Type, obj);
+				value = VariableValue.Create(resolved);
+			}
+
+			if (definition.Type != VariableType.Empty && !definition.IsValid(value))
+				Debug.LogWarningFormat(invalidError, variableName, value);
+
+			return value;
+		}
+
+		#endregion
+
+		#region IVariableStore Implementation
+
+		public IList<string> GetVariableNames()
+		{
+			return _variableNames;
+		}
+
 		public VariableValue GetVariable(string name)
 		{
 			if (ContextName == name)
@@ -155,8 +198,8 @@ namespace PiRhoSoft.CompositionEngine
 				case InputStoreName: return VariableValue.Create(Input);
 				case OutputStoreName: return VariableValue.Create(Output);
 				case LocalStoreName: return VariableValue.Create(Local);
-				case CompositionManager.GlobalStoreName: return VariableValue.Create(Global);
-				case CompositionManager.SceneStoreName: return VariableValue.Create(Scene);
+				case CompositionManager.GlobalStoreName: return VariableValue.Create(CompositionManager.Instance.GlobalStore);
+				case CompositionManager.SceneStoreName: return VariableValue.Create(CompositionManager.Instance.SceneStore);
 				default: return Local.GetVariable(name);
 			}
 		}
@@ -177,23 +220,17 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		public IList<string> GetVariableNames()
+		#endregion
+
+		#region IPoolable Implementation
+
+		public void Reset()
 		{
-			return _variableNames;
+			Input.Clear();
+			Output.Clear();
+			Local.Clear();
 		}
 
-		private VariableValue ResolveValue(ValueDefinition definition, VariableValue value, Object errorContext, string invalidError, string variableName)
-		{
-			if (definition.Type == VariableType.Object && definition.Constraint is ObjectVariableConstraint constraint && value.TryGetObject(out var obj))
-			{
-				var resolved = ComponentHelper.GetAsObject(constraint.Type, obj);
-				value = VariableValue.Create(resolved);
-			}
-
-			if (definition.Type != VariableType.Empty && !definition.IsValid(value))
-				Debug.LogWarningFormat(invalidError, variableName, value);
-
-			return value;
-		}
+		#endregion
 	}
 }

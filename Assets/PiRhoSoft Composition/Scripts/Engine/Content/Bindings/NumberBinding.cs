@@ -6,28 +6,46 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Number Binding")]
 	public class NumberBinding : StringBinding
 	{
-		private const string _missingVariableWarning = "(CBNBMV) Unable to bind text for number binding '{0}': the variable '{1}' could not be found";
-		private const string _invalidVariableWarning = "(CBNBIV) Unable to bind text for number binding '{0}': the variable '{1}' is not an int or a float";
+		private const string _invalidVariableWarning = "(CNBIV) failed to resolve variable '{0}' on binding '{1}': the variable has type {2} and should have type 'Int' or 'Float'";
 
 		public BindingFormatter Format;
 
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
 
+		private VariableValue _previousValue = VariableValue.Empty;
+
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			var value = Variable.GetValue(variables);
-			var enabled = value.HasNumber;
-			var text = string.Empty;
+			if (Resolve(variables, Variable, out VariableValue value))
+			{
+				var equal = VariableHandler.IsEqual(value, _previousValue);
 
-			if (value.TryGetInt(out var intValue))
-				text = Format.GetFormattedString(value.Int);
-			else if (value.TryGetFloat(out var floatValue))
-				text = Format.GetFormattedString(value.Float);
-			else if (!SuppressErrors)
-				Debug.LogWarningFormat(this, value.IsEmpty ? _missingVariableWarning : _invalidVariableWarning, name, Variable);
+				if (!equal.HasValue || !equal.Value)
+				{
+					if (value.TryGetInt(out int i))
+					{
+						var text = Format.GetFormattedString(i);
+						SetText(text, true);
+					}
+					else if (value.TryGetFloat(out float f))
+					{
+						var text = Format.GetFormattedString(f);
+						SetText(text, true);
+					}
+					else
+					{
+						if (!SuppressErrors)
+							Debug.LogWarningFormat(this, _invalidVariableWarning, Variable, name, value.Type);
 
-			SetText(text, enabled);
+						SetText(string.Empty, false);
+					}
+				}
+			}
+			else
+			{
+				SetText(string.Empty, false);
+			}
 		}
 	}
 }

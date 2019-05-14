@@ -85,7 +85,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (ResolveObject(variables, Reference, out Instruction instruction))
 				{
 					if (WaitForCompletion)
-						yield return instruction.Execute(variables);
+						yield return instruction.Execute(context);
 					else
 						CompositionManager.Instance.RunInstruction(instruction, context);
 				}

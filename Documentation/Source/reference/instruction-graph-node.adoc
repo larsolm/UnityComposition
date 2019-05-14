@@ -36,7 +36,7 @@ Implement this method in derived classes to perform the execution of the node. R
 
 #### Resolve
 
-This collection of methods will lookup the value referenced by a <<reference/variable-reference.html,VariableReference>> or <<reference/variable-source.html,VariableSource>>. The resolved value is set to the ouput parameter _result_ and the return value will indicate whether the value was resolved successfully. The _variables_ parameter should be the _variables_ parameter passed to the _Run_ method.
+This collection of methods will lookup the value referenced by a <<reference/variable-reference.html,VariableReference>> or <<reference/variable-source.html,VariableSource>>. The resolved value is set to the ouput parameter _result_ and the return value will indicate whether the value was resolved successfully. The _variables_ parameter should be the _variables_ parameter passed to the _Run_ method. If the resolution fails, either due to the variable not being found or it being an invalid type, a warning will be printed to the https://docs.unity3d.com/Manual/Console.html[Console^].
 
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-value-source.html,VariableValueSource>> _source_, <<reference/variable-value.html,VariableValue>> _result_ _(out)_)
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/variable-value.html,VariableValue>> _result_ _(out)_)

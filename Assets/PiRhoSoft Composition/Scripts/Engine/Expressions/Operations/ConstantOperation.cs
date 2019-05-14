@@ -5,11 +5,11 @@ namespace PiRhoSoft.CompositionEngine
 {
 	internal class ConstantOperation : Operation
 	{
-		private VariableValue _value;
+		public VariableValue Value { get; private set; }
 
 		public ConstantOperation(VariableValue value)
 		{
-			_value = value;
+			Value = value;
 		}
 
 		public override void Parse(ExpressionParser parser, ExpressionToken token)
@@ -18,25 +18,25 @@ namespace PiRhoSoft.CompositionEngine
 
 		public override VariableValue Evaluate(IVariableStore variables)
 		{
-			return _value;
+			return Value;
 		}
 
 		public override void ToString(StringBuilder builder)
 		{
-			switch (_value.Type)
+			switch (Value.Type)
 			{
 				case VariableType.Object:
 				{
-					if (_value.IsNull)
+					if (Value.IsNull)
 						builder.Append(ExpressionLexer.NullConstant);
 					else
-						VariableHandler.ToString(_value, builder);
+						VariableHandler.ToString(Value, builder);
 
 					break;
 				}
 				case VariableType.Bool:
 				{
-					if (_value.Bool)
+					if (Value.Bool)
 						builder.Append(ExpressionLexer.TrueConstant);
 					else
 						builder.Append(ExpressionLexer.FalseConstant);
@@ -45,20 +45,20 @@ namespace PiRhoSoft.CompositionEngine
 				}
 				case VariableType.Float:
 				{
-					if (_value.Float == Mathf.PI)
+					if (Value.Float == Mathf.PI)
 						builder.Append(ExpressionLexer.PiConstant);
-					else if (_value.Float == Mathf.Deg2Rad)
+					else if (Value.Float == Mathf.Deg2Rad)
 						builder.Append(ExpressionLexer.Deg2RadConstant);
-					else if (_value.Float == Mathf.Rad2Deg)
+					else if (Value.Float == Mathf.Rad2Deg)
 						builder.Append(ExpressionLexer.Rad2DegConstant);
 					else
-						VariableHandler.ToString(_value, builder);
+						VariableHandler.ToString(Value, builder);
 
 					break;
 				}
 				default:
 				{
-					VariableHandler.ToString(_value, builder);
+					VariableHandler.ToString(Value, builder);
 					break;
 				}
 			}

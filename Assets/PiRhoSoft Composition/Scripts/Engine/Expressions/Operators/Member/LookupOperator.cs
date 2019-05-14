@@ -2,18 +2,31 @@
 
 namespace PiRhoSoft.CompositionEngine
 {
-	internal class LookupOperator : MemberOperator, IAssignableOperation
+	internal interface ILookupOperation
 	{
+		VariableValue GetValue(IVariableStore variables, VariableValue owner);
+	}
+
+	internal class LookupOperator : MemberOperator, ILookupOperation, IAssignableOperation
+	{
+		private const string _invalidLeftException = "the operator '{0}' expected a variable reference instead of '{1}'";
 		private const string _invalidLookupException = "unable to find '{0}' on '{1}'";
 		private const string _invalidAssignException = "unable to assign '{0}' to '{1}' on '{2}'";
 		private const string _missingAssignmentException = "unable to assign '{0}' to '{1}' on '{2}'";
 		private const string _readOnlyAssignmentException = "unable to assign '{0}' to '{1}' on read only '{2}'";
 		private const string _mismatchedAssignmentException = "unable to assign '{0}' of type {1} to '{2}' on '{3}'";
 
+		private ILookupOperation _leftLookup;
+
 		public override OperatorPrecedence Precedence => OperatorPrecedence.MemberAccess;
 
 		public override void Parse(ExpressionParser parser, ExpressionToken token)
 		{
+			_leftLookup = Left as ILookupOperation;
+
+			if (_leftLookup == null)
+				throw new ExpressionParseException(token, _invalidLeftException, Symbol, Left);
+
 			Right = parser.ParseLeft(OperatorPrecedence.Default);
 			parser.SkipToken(ExpressionTokenType.EndLookup, ExpressionLexer.LookupCloseSymbol.ToString());
 		}
@@ -29,6 +42,19 @@ namespace PiRhoSoft.CompositionEngine
 				throw new ExpressionEvaluationException(_invalidLookupException, right, left);
 
 			return value;
+		}
+
+		public VariableValue GetValue(IVariableStore variables, VariableValue owner)
+		{
+			var left = _leftLookup.GetValue(variables, owner);
+
+			if (!left.IsEmpty)
+			{
+				var right = Right.Evaluate(variables);
+				return VariableHandler.Lookup(left, right);
+			}
+
+			return left;
 		}
 
 		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)

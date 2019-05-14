@@ -224,7 +224,7 @@
             ]
         },
         "DocumentTemplate": "[#overview/log-descriptions]\r\n\n## Log Descriptions\r\n\r\n### Warnings\r\n{Warnings}\r\n### Errors\r\n{Errors}",
-        "MessageTemplate": "\r\n{Id}:: {Message}\r\n--\r\n--\r\n"
+        "MessageTemplate": "\r\n#### {Id}\n\n{Message}\r\n\r\n[cols=\"1,8\"]\r\n|===\r\n| {0} | \n|===\r\n\nEffect:: \n\r\nResolution:: \n"
     },
     "HelpUrls": {
         "UrlRoot": "http://pirhosoft.com/projects/unity-composition/documentation/#/v10/manual/",

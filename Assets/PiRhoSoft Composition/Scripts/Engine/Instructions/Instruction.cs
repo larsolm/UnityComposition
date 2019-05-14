@@ -32,6 +32,13 @@ namespace PiRhoSoft.CompositionEngine
 			IsRunning = false;
 		}
 
+		public IEnumerator Execute(VariableValue context)
+		{
+			var store = InstructionStore.Reserve(this, context);
+			yield return Execute(store);
+			InstructionStore.Release(store);
+		}
+
 		public IEnumerator Execute(InstructionStore variables)
 		{
 			if (IsRunning)

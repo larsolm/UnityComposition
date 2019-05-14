@@ -10,7 +10,8 @@
     "Source\\topics\\variables-pdf.adoc",
     "Source\\topics\\graphs-pdf.adoc",
     "Source\\topics\\bindings-pdf.adoc",
-    "Source\\overview-pdf.adoc"
+    "Source\\overview-pdf.adoc",
+    "Source\\topics\\interface-pdf.adoc"
   ],
   "RawFiles": [
     "Source\\table-of-contents.html"

@@ -7,14 +7,19 @@
 		public override VariableValue Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
+
+			if (left.Type != VariableType.Bool)
+				throw TypeMismatch(left.Type, VariableType.Bool);
+
+			if (left.Bool)
+				return VariableValue.Create(true);
+
 			var right = Right.Evaluate(variables);
 
-			var value = VariableHandler.Or(left, right);
+			if (right.Type != VariableType.Bool)
+				throw TypeMismatch(VariableType.Bool, right.Type);
 
-			if (value.IsEmpty)
-				throw TypeMismatch(left.Type, right.Type);
-
-			return value;
+			return VariableValue.Create(right.Bool);
 		}
 	}
 }

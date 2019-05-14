@@ -16,8 +16,7 @@ To create custom variable bindings, derive from <<reference/variable-binding.htm
 		{
 			if (GameObject)
 			{
-				var value = Variable.GetValue(variables);
-				value.TryGetBool(out bool active);
+				Resolve(variables, Variable, out bool active);
 				GameObject.SetActive(active);
 			}
 		}
@@ -42,9 +41,7 @@ The next example utilizes animation to increment displayed text based on an int 
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			var value = Variable.GetValue(variables);
-
-			if (value.TryGetInt(out var target))
+			if (Resolve(variables, Variable, out int target))
 			{
 				StopAllCoroutines();
 				StartCoroutine(AnimateText(target, status));

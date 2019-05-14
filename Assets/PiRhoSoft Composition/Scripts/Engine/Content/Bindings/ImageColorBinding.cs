@@ -9,9 +9,6 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Bindings/Image Color Binding")]
 	public class ImageColorBinding : VariableBinding
 	{
-		private const string _missingVariableWarning = "(CBICBMV) Unable to bind color for image color binding '{0}': the variable '{1}' could not be found";
-		private const string _invalidVariableWarning = "(CBICBIV) Unable to bind color for image color binding '{0}': the variable '{1}' is not a color";
-
 		[Tooltip("The variable holding the image to show on this object")]
 		public VariableReference Variable = new VariableReference();
 
@@ -32,13 +29,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			var value = Variable.GetValue(variables);
-
-			Image.enabled = value.Type == VariableType.Color;
-			Image.color = value.Color;
-
-			if (!SuppressErrors && value.Type != VariableType.Color)
-				Debug.LogWarningFormat(this, value.IsEmpty ? _missingVariableWarning : _invalidVariableWarning, name, Variable);
+			Image.enabled = Resolve(variables, Variable, out Color color);
+			Image.color = color;
 		}
 	}
 }

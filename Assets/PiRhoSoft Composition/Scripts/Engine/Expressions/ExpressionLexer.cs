@@ -1,5 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
@@ -62,12 +65,16 @@ namespace PiRhoSoft.CompositionEngine
 		}
 
 		#region Reserved Words
-
-		private static Dictionary<string, VariableValue> _constants = new Dictionary<string, VariableValue>();
+		
 		private static HashSet<string> _keywords = new HashSet<string>();
+		private static Dictionary<string, VariableValue> _constants = new Dictionary<string, VariableValue>();
+		private static Dictionary<string, VariableType> _types = new Dictionary<string, VariableType>();
 
 		static ExpressionLexer()
 		{
+			AddKeyword(CastOperator);
+			AddKeyword(TestOperator);
+
 			AddConstant(NullConstant, VariableValue.Create((Object)null));
 			AddConstant(TrueConstant, VariableValue.Create(true));
 			AddConstant(FalseConstant, VariableValue.Create(false));
@@ -75,16 +82,9 @@ namespace PiRhoSoft.CompositionEngine
 			AddConstant(Deg2RadConstant, VariableValue.Create(Mathf.Deg2Rad));
 			AddConstant(Rad2DegConstant, VariableValue.Create(Mathf.Rad2Deg));
 
-			AddKeyword(CastOperator);
-			AddKeyword(TestOperator);
-		}
-
-		public static void AddConstant(string text, VariableValue value)
-		{
-			if (!_constants.ContainsKey(text))
-				_constants.Add(text, value);
-			else
-				Debug.LogErrorFormat(_duplicateConstantError, text);
+			_types = Enum.GetValues(typeof(VariableType))
+				.Cast<VariableType>()
+				.ToDictionary(e => e.ToString(), e => e);
 		}
 
 		public static void AddKeyword(string text)
@@ -95,9 +95,22 @@ namespace PiRhoSoft.CompositionEngine
 				Debug.LogErrorFormat(_duplicateKeywordError, text);
 		}
 
+		public static void AddConstant(string text, VariableValue value)
+		{
+			if (!_constants.ContainsKey(text))
+				_constants.Add(text, value);
+			else
+				Debug.LogErrorFormat(_duplicateConstantError, text);
+		}
+
 		public static VariableValue GetConstant(string text)
 		{
 			return _constants.TryGetValue(text, out var value) ? value : VariableValue.Empty;
+		}
+
+		internal static VariableType GetType(string text)
+		{
+			return _types.TryGetValue(text, out var value) ? value : VariableType.Empty;
 		}
 
 		#endregion
@@ -142,7 +155,7 @@ namespace PiRhoSoft.CompositionEngine
 			var text = input.Substring(start, end - start);
 			var type = GetIdentifierType(text);
 
-			if (type == ExpressionTokenType.Identifier)
+			if (type == ExpressionTokenType.Identifier || type == ExpressionTokenType.Type)
 			{
 				if (end < input.Length && input[end] == GroupOpenSymbol)
 					AddMergeableToken(tokens, ExpressionTokenType.Command, start, end++);
@@ -161,6 +174,8 @@ namespace PiRhoSoft.CompositionEngine
 				return ExpressionTokenType.Operator;
 			else if (_constants.ContainsKey(text))
 				return ExpressionTokenType.Constant;
+			else if (_types.ContainsKey(text))
+				return ExpressionTokenType.Type;
 			else
 				return ExpressionTokenType.Identifier;
 		}
@@ -283,7 +298,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private static bool IsMergeable(ExpressionTokenType type)
 		{
-			return type == ExpressionTokenType.Int || type == ExpressionTokenType.Float || type == ExpressionTokenType.Identifier;
+			return type == ExpressionTokenType.Int || type == ExpressionTokenType.Float || type == ExpressionTokenType.Identifier || type == ExpressionTokenType.Type;
 		}
 
 		private static void AddMergeableToken(List<ExpressionToken> tokens, ExpressionTokenType type, int start, int end)

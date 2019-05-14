@@ -18,6 +18,10 @@ Seperates for two distinct statements. This is either `;` or a line break with m
 
 A <<reference/variable-value.html,VariableValue>> that has been added to the <<reference/expression-lexer.html,ExpressionLexer>> with _AddConstant_.
 
+<<reference/expression-token-type.html,ExpressionTokenType>> _Type_::
+
+A <<reference/variable-type.html,VariableType>> for use with testing the type of values.
+
 <<reference/expression-token-type.html,ExpressionTokenType>> _Int_::
 
 A literal value that should be interpreted as an int. An int is any continuous sequence of digits.

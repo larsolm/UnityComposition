@@ -4,6 +4,7 @@
 	{
 		Sentinel,
 		Constant,
+		Type,
 		Int,
 		Float,
 		String,

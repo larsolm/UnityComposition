@@ -708,10 +708,12 @@ MonoBehaviour:
     - AQAERGVjaxEAAAAAAAAA
     - AQAFU3RhdGURAAAAAQAAAA==
     - AQAFQ2FyZHMRAAAAAgAAAA==
+    - AQAMU2VsZWN0ZWRDYXJkEQAAAAMAAAA=
     _variablesObjects:
     - {fileID: 1723087962}
     - {fileID: 500038794}
     - {fileID: 11400000, guid: a32dbb99f31b1f649bef9dcff7021e52, type: 2}
+    - {fileID: 0}
     Definitions:
     - _type: 17
       _constraint: 
@@ -731,6 +733,14 @@ MonoBehaviour:
       _isConstraintLocked: 0
     - _type: 17
       _constraint: AQARAAAAdVBpUmhvU29mdC5Db21wb3NpdGlvbkVuZ2luZS5WYXJpYWJsZVBvb2xBc3NldCwgQXNzZW1ibHktQ1NoYXJwLCBWZXJzaW9uPTAuMC4wLjAsIEN1bHR1cmU9bmV1dHJhbCwgUHVibGljS2V5VG9rZW49bnVsbA==
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 17
+      _constraint: 
       _objects: []
       _tag: 
       _initializer:

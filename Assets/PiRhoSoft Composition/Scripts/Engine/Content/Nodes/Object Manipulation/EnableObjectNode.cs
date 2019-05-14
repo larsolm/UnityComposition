@@ -7,7 +7,7 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "enable-object-node")]
 	public class EnableObjectNode : InstructionGraphNode
 	{
-		private const string _invalidObjectWarning = "(CEONIO) unable to enable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";
+		private const string _invalidObjectWarning = "(CEONIO) Unable to enable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

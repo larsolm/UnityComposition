@@ -6,12 +6,10 @@
 		{
 			var result = Right.Evaluate(variables);
 
-			var value = VariableHandler.Not(result);
-
-			if (value.IsEmpty)
+			if (result.Type != VariableType.Bool)
 				throw TypeMismatch(result.Type);
 
-			return value;
+			return VariableValue.Create(!result.Bool);
 		}
 	}
 }

@@ -157,6 +157,7 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				case ExpressionTokenType.Sentinel: return int.MinValue;
 				case ExpressionTokenType.Constant: return int.MaxValue - 1;
+				case ExpressionTokenType.Type: return int.MaxValue - 1;
 				case ExpressionTokenType.Int: return int.MaxValue - 1;
 				case ExpressionTokenType.Float: return int.MaxValue - 1;
 				case ExpressionTokenType.String: return int.MaxValue - 1;
@@ -202,6 +203,7 @@ namespace PiRhoSoft.CompositionEngine
 			switch (token.Type)
 			{
 				case ExpressionTokenType.Constant: return CreateConstantOperation(token);
+				case ExpressionTokenType.Type: return CreateTypeOperation(token);
 				case ExpressionTokenType.Int: return new LiteralOperation();
 				case ExpressionTokenType.Float: return new LiteralOperation();
 				case ExpressionTokenType.String: return new LiteralOperation();
@@ -234,6 +236,14 @@ namespace PiRhoSoft.CompositionEngine
 				throw new ExpressionParseException(token, _invalidConstantException, text);
 
 			return new ConstantOperation(value);
+		}
+
+		private TypeOperation CreateTypeOperation(ExpressionToken token)
+		{
+			var text = GetText(token);
+			var type = ExpressionLexer.GetType(GetText(token));
+
+			return new TypeOperation(type);
 		}
 
 		#endregion
