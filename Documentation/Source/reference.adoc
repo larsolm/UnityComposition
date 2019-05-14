@@ -12,6 +12,10 @@ include::reference/transform-node-animation-type.adoc[]
 
 <<<
 
+include::reference/asset-location.adoc[]
+
+<<<
+
 include::reference/assignment-operator.adoc[]
 
 <<<
@@ -65,6 +69,10 @@ include::reference/button-graph-trigger.adoc[]
 <<<
 
 include::reference/button-input.adoc[]
+
+<<<
+
+include::reference/button-state.adoc[]
 
 <<<
 
@@ -244,6 +252,10 @@ include::reference/game-object-variable-source.adoc[]
 
 <<<
 
+include::reference/global-behaviour-1.adoc[]
+
+<<<
+
 include::reference/graph-trigger-binding.adoc[]
 
 <<<
@@ -281,6 +293,10 @@ include::reference/image-color-binding.adoc[]
 <<<
 
 include::reference/infix-operation.adoc[]
+
+<<<
+
+include::reference/input-helper.adoc[]
 
 <<<
 
@@ -620,6 +636,14 @@ include::reference/reset-variables-node.adoc[]
 
 <<<
 
+include::reference/scene-reference.adoc[]
+
+<<<
+
+include::reference/scene-reference-attribute.adoc[]
+
+<<<
+
 include::reference/load-scene-node-scene-source.adoc[]
 
 <<<
@@ -653,6 +677,14 @@ include::reference/selection-node-item-list.adoc[]
 <<<
 
 include::reference/sequence-node.adoc[]
+
+<<<
+
+include::reference/serialized-dictionary-2.adoc[]
+
+<<<
+
+include::reference/serialized-list-1.adoc[]
 
 <<<
 
