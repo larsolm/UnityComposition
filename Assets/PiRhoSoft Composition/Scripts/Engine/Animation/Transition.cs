@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class Transition : ScriptableObject
 	{
-		private const string _missingShaderError = "(CTMS) Failed to load Transition {0}: the shader has not been set";
+		private const string _missingShaderError = "(CTMS) Failed to load Transition '{0}': the shader has not been set";
 
 		[Tooltip("The shader to use to render the transition")] public Shader Shader;
 		[Tooltip("The duration of the transition")] public float Duration = 1.0f;

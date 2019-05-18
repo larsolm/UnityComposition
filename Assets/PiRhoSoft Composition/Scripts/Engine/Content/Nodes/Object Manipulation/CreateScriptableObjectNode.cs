@@ -10,8 +10,8 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "create-scriptable-object-node")]
 	public class CreateScriptableObjectNode : InstructionGraphNode
 	{
-		private const string _invalidTypeError = "(CCSONIT) failed to create object for {0}: the type '{1}' could not be found";
-		private const string _invalidObjectError = "(CCSONIO) failed to create object for {0}: an object of type '{1}' could not be instantiated";
+		private const string _invalidTypeError = "(CCSONIT) Failed to create object in node '{0}': the type '{1}' could not be found";
+		private const string _invalidObjectError = "(CCSONIO) Failed to create object in node '{0}': an object of type '{1}' could not be instantiated";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public InstructionGraphNode Next = null;

@@ -8,8 +8,6 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public abstract class InstructionGraph : Instruction
 	{
-		private const string _processFailedError = "(CCIGPF) Failed to process Node '{0}': the Node yielded a value other than null or IEnumerator";
-
 		[Tooltip("The list of all nodes in this graph")]
 		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyText = "Use the Instruction Graph Window to add nodes to this graph")]
 		[SerializeField] [HideInInspector] // editor draws this manually so it shows up at the bottom for derived classes

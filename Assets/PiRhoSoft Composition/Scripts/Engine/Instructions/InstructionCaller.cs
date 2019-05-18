@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEngine
 				localStore.WriteInputs(this, _inputs, store);
 				localStore.WriteOutputs(_outputs);
 				yield return Instruction.Execute(localStore);
-				localStore.ReadOutputs(_outputs, store);
+				localStore.ReadOutputs(this, _outputs, store);
 
 				InstructionStore.Release(localStore);
 			}

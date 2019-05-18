@@ -24,7 +24,6 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public class Expression : ISerializationCallbackReceiver
 	{
-		private const string _expressionTokenizeError = "(CETE) Failed to parse Expression at location {1}: {2}\nExpression: {0}";
 		private const string _expressionParseError = "(CEPE) Failed to parse Expression at location {1} ({2}): {3}\nExpression: {0}";
 		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}' on '{1}': {2}";
 		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}' on '{1}': {2}";

@@ -57,12 +57,12 @@ namespace PiRhoSoft.CompositionEngine
 
 	public class InstructionStore : IVariableStore, IPoolable
 	{
-		private const string _invalidContextError = "(CISIC) failed to create context for {0}: the variable '{1}' does not satisfy the constraint";
-		private const string _invalidInputError = "(CISII) failed to create input for {0}: the variable '{1}' does not satisfy the constraint";
-		private const string _missingInputError = "(CISMI) failed to read input {0}: the variable '{1}' could not be found";
-		private const string _missingOutputError = "(CISMO) failed to store output {0}: the variable '{1}' could not be found";
-		private const string _readOnlyOutputError = "(CISROO) failed to store output {0}: the variable '{1}' is read only";
-		private const string _invalidOutputError = "(CISIOT) failed to store output {0}: the variable '{1}' has an incompatible type";
+		private const string _invalidContextError = "(CISIC) Failed to create context '{0}' for instruction '{1}': the value '{2}' does not satisfy the constraint";
+		private const string _invalidInputError = "(CISII) Failed to create input '{0}' for instruction '{1}': the value '{2}' does not satisfy the constraint";
+		private const string _missingInputError = "(CISMI) Failed to read input '{0}' for instruction '{1}': the variable '{2}' could not be found";
+		private const string _missingOutputError = "(CISMO) Failed to store output '{0}' for instruction '{1}': the variable '{2}' could not be found";
+		private const string _readOnlyOutputError = "(CISROO) Failed to store output '{0}' for instruction '{1}': the variable '{2}' is read only";
+		private const string _invalidOutputError = "(CISIOT) Failed to store output '{0}' for instruction '{1}': the variable '{2}' has an incompatible type";
 
 		public const string InputStoreName = "input";
 		public const string OutputStoreName = "output";
@@ -126,7 +126,7 @@ namespace PiRhoSoft.CompositionEngine
 					if (value.Type != VariableType.Empty)
 						Input.AddVariable(input.Name, value);
 					else
-						Debug.LogWarningFormat(_missingInputError, input.Name, input.Reference);
+						Debug.LogWarningFormat(_missingInputError, input.Name, instruction.Instruction, input.Reference);
 				}
 				else if (input.Type == InstructionInputType.Value)
 				{
@@ -141,7 +141,7 @@ namespace PiRhoSoft.CompositionEngine
 				Output.AddVariable(output.Name, VariableValue.Empty);
 		}
 
-		public void ReadOutputs(IList<InstructionOutput> outputs, IVariableStore caller)
+		public void ReadOutputs(InstructionCaller instruction, IList<InstructionOutput> outputs, IVariableStore caller)
 		{
 			foreach (var output in outputs)
 			{
@@ -156,9 +156,9 @@ namespace PiRhoSoft.CompositionEngine
 						switch (result)
 						{
 							case SetVariableResult.Success: break;
-							case SetVariableResult.NotFound: Debug.LogWarningFormat(_missingOutputError, output.Name, output.Reference); break;
-							case SetVariableResult.ReadOnly: Debug.LogWarningFormat(_readOnlyOutputError, output.Name, output.Reference); break;
-							case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(_invalidOutputError, output.Name, output.Reference); break;
+							case SetVariableResult.NotFound: Debug.LogWarningFormat(_missingOutputError, output.Name, instruction.Instruction, output.Reference); break;
+							case SetVariableResult.ReadOnly: Debug.LogWarningFormat(_readOnlyOutputError, output.Name, instruction.Instruction, output.Reference); break;
+							case SetVariableResult.TypeMismatch: Debug.LogWarningFormat(_invalidOutputError, output.Name, instruction.Instruction, output.Reference); break;
 						}
 					}
 				}
@@ -174,7 +174,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			if (definition.Type != VariableType.Empty && !definition.IsValid(value))
-				Debug.LogWarningFormat(invalidError, variableName, value);
+				Debug.LogWarningFormat(invalidError, variableName, errorContext, value);
 
 			return value;
 		}

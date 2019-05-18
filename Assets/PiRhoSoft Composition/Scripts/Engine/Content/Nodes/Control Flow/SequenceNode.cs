@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "sequence-node")]
 	public class SequenceNode : InstructionGraphNode, ISequenceNode
 	{
-		private const string _invalidSequenceError = "(CSQIS) Unable to run sequence for {0}: index {1} has no connection";
+		private const string _invalidSequenceError = "(CSQIS) Unable to run sequence for node '{0}': index '{1}' has no connection";
 
 		[Tooltip("The nodes to visit in order")]
 		[ListDisplay(AllowCollapse = false)]

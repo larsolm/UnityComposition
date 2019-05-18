@@ -638,9 +638,9 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Editor Interface
 
-		private const string _missingKeyError = "(CCNMK) failed to set target: unable to find key {0} for instruction graph node {1}";
-		private const string _missingIndexError = "(CCNMI) failed to set target: index {0} is out of range for instruction graph node {1}";
-		private const string _missingFieldError = "(CCNMF) failed to set target: unable to find field {0} for instruction graph node {1}";
+		private const string _missingKeyError = "(CCNMK) Failed to set target: unable to find key {0} for instruction graph node {1}";
+		private const string _missingIndexError = "(CCNMI) Failed to set target: index {0} is out of range for instruction graph node {1}";
+		private const string _missingFieldError = "(CCNMF) Failed to set target: unable to find field {0} for instruction graph node {1}";
 
 		[HideInInspector] public Vector2 GraphPosition;
 		[HideInInspector] public bool IsBreakpoint = false;

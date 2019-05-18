@@ -8,9 +8,9 @@ namespace PiRhoSoft.CompositionEngine
 	[RequireComponent(typeof(Menu))]
 	public class SelectionControl : InterfaceControl
 	{
-		private const string _invalidExpandError = "(CSCIE) Failed to expand item '{0}' on SelectionControl '{1}': the variable '{2}' is not an IVariableList";
+		private const string _invalidExpandError = "(CSCIE) Failed to expand item '{0}' on SelectionControl '{1}': the variable '{2}' is not a List";
 		private const string _missingItemError = "(CSCMI) Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' could not be found";
-		private const string _invalidItemError = "(CSCII) Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' is not an IVariableStore or IVariableList";
+		private const string _invalidItemError = "(CSCII) Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' is not a Store or List";
 		private const string _missingTemplateError = "(CSCMT) Failed to create item '{0}' on SelectionControl '{1}': the template has not been assigned";
 		private const string _missingChildError = "(CSCMC) Failed to create item '{0}' on SelectionControl '{1}': the control does not have a child with the specified name";
 

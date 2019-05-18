@@ -17,8 +17,8 @@ namespace PiRhoSoft.CompositionEditor
 		private const float _watchButtonWidth = 60.0f;
 
 		private const string _expressionResultLog = "{0}: ({1}) {2}";
-		private const string _missingWatchWarning = "(CWWMW) unable to find variable {0} to watch";
-		private const string _invalidWatchWarning = "(CWWIW) unable to watch variable {0} of type {1} - only variable stores can be watched";
+		private const string _missingWatchWarning = "(CWWMW) Unable to find variable '{0}' to watch";
+		private const string _invalidWatchWarning = "(CWWIW) Unable to watch variable '{0}' of type '{1}' - only variable stores can be watched";
 
 		private static BoolPreference _logInstructionsEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogInstructionsEnabled", false);
 		private static readonly Label _windowLabel = new Label(Icon.BuiltIn("UnityEditor.LookDevView"), label: "Watch Window");

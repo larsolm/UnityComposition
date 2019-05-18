@@ -15,7 +15,6 @@ namespace PiRhoSoft.CompositionEngine
 	public class ExpressionParser
 	{
 		private const string _duplicateCommandError = "(CEPDC) Failed to add Command '{0}': a Command with the same name has already been added";
-		private const string _missingCommandError = "(CEPMC) Failed to remove Command '{0}': a Command with the same name has not been added";
 		private const string _duplicatePrefixOperatorError = "(CEPDPO) Failed to add prefix operator '{0}': a prefix operator with the same symbol has already been added";
 		private const string _duplicateInfixOperatorError = "(CEPDIO) Failed to add infix operator '{0}': an infix operator with the same symbol has already been added";
 
@@ -63,8 +62,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public static void RemoveCommand(string name)
 		{
-			if (!_commands.Remove(name))
-				Debug.LogErrorFormat(_missingCommandError, name);
+			_commands.Remove(name);
 		}
 
 		public static ICommand GetCommand(string name)

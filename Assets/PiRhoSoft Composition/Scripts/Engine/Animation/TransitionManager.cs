@@ -12,9 +12,6 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		// implementation based on this post from the Unity forums: https://forum.unity.com/threads/postprocessing-issues-with-several-cameras.313903/#post-2040534
 
-		private const string _invalidAddWarning = "(CTMIA) Failed to add TransitionRenderer '{0}': it has already been added";
-		private const string _invalidRemoveWarning = "(CTMIR) Failed to remove TransitionRenderer '{0}': it has not been added";
-
 		private RenderTexture _target;
 		private List<TransitionRenderer> _renderers = new List<TransitionRenderer>();
 
@@ -54,14 +51,11 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (!_renderers.Contains(renderer))
 				_renderers.Add(renderer);
-			else
-				Debug.LogWarning(_invalidAddWarning, renderer);
 		}
 
 		internal void RemoveRenderer(TransitionRenderer renderer)
 		{
-			if (!_renderers.Remove(renderer))
-				Debug.LogWarning(_invalidRemoveWarning, renderer);
+			_renderers.Remove(renderer);
 		}
 
 		public IEnumerator RunTransition(Transition transition, TransitionPhase phase)

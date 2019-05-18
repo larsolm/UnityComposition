@@ -19,7 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 	[Serializable]
 	public struct ValueDefinition : ISerializationCallbackReceiver
 	{
-		private const string _invalidInitializerError = "(CVDII) Failed to initialize variable: the definition specifies type {0} but the initializer returned type {1}";
+		private const string _invalidInitializerError = "(CVDII) Failed to initialize variable on '{0}': the definition specifies type '{1}' but the initializer returned type '{2}'";
 
 		[SerializeField] private VariableType _type;
 		[SerializeField] private string _constraint;
@@ -48,7 +48,7 @@ namespace PiRhoSoft.CompositionEngine
 				if (value.Type == Type)
 					return value;
 
-				Debug.LogErrorFormat(_invalidInitializerError, Type, value.Type);
+				Debug.LogErrorFormat(_invalidInitializerError, variables, Type, value.Type);
 			}
 
 			return VariableHandler.CreateDefault(Type, Constraint);
