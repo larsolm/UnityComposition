@@ -93,7 +93,7 @@ namespace PiRhoSoft.CompositionEngine
 
 					if (!next)
 						Pop();
-					else if (enumerator.Current is IEnumerator child)
+					else if (enumerator.Current is IEnumerator child && !(child is CustomYieldInstruction)) // CustomYieldInstruction implements IEnumerator
 						Push(child);
 					else
 						break;
