@@ -1,0 +1,310 @@
+article
+{
+	font-size: 16px;
+	font-family: 'Roboto', sans-serif;
+	color: #222;
+}
+
+article .sect1
+{
+	margin: 50px;
+	border: 1px solid #ddd;
+	background-color: #f8f8f8;
+	padding: 0 40px;
+}
+
+article p,
+article ul,
+article ol,
+article dl,
+article pre,
+article table
+{
+	line-height: 1.5;
+	margin: 1em 0;
+	width: 100%;
+}
+
+article pre,
+article code
+{
+	font-size: 0.95em;
+	font-family: 'Roboto Mono', monospace;
+}
+
+article table
+{
+	border-collapse: collapse;
+}
+
+article img
+{
+	max-width: 100%;
+}
+
+article a
+{
+	color: #2984a9;
+	text-decoration: underline;
+}
+
+article a:hover, article a:focus
+{
+	color: #00A2EF;
+}
+
+article hr
+{
+	border: solid #ddd;
+	border-width: 1px 0 0;
+	clear: both;
+	margin: 1.25em 0 1.25em;
+	height: 0;
+}
+
+article h2,
+article h3,
+article h4,
+article h5,
+article .title
+{
+	font-family: 'Roboto Slab', 'Roboto', sans-serif;
+	color: #555;
+	margin-top: 1.25em;
+	margin-bottom: 0.5em;
+}
+
+article h2 { font-size: 1.675em; }
+article h3 { font-size: 1.5em; }
+article h4 { font-size: 1.125em; font-weight: normal; margin-bottom: 0; }
+
+article .sidebarblock .title { text-align: center; }
+article .quoteblock .title { margin-top: 0.5em; }
+article .admonitionblock .title { margin-top: 0.5em; }
+
+article .imageblock .title
+{
+	margin: 0;
+	line-height: 1.4;
+	font-size: 0.9em;
+	font-style: italic;
+}
+
+article table.tableblock caption.title
+{
+	text-align: left;
+	margin: 0;
+	font-size: 0.9em;
+	color: #3c3c3c;
+	font-style: italic;
+}
+
+article table.tableblock,
+article .admonitionblock table,
+article .sidebarblock,
+article .exampleblock .paragraph,
+article .quoteblock
+{
+	background: #eee;
+	border: 1px solid #ccc;
+}
+
+article .sidebarblock,
+article .admonitionblock,
+article .quoteblock
+{
+	margin: 0 40px 0 20px;
+}
+
+article .sidebarblock,
+article .admonitionblock table,
+article .quoteblock
+{
+	border-radius: 5px;
+}
+
+article .sidebarblock,
+article .exampleblock .paragraph,
+article .quoteblock
+{
+	padding: 0 15px;
+}
+
+article .literalblock pre,
+article .sidebarblock .paragraph,
+article .exampleblock .paragraph,
+article .quoteblock blockquote,
+article .admonitionblock table td.content
+{
+	color: #606060;
+}
+
+article table.tableblock thead,
+article table.tableblock tfoot
+{
+	background: #dfdfdf;
+	font-weight: bold;
+}
+
+article table.tableblock th,
+article table.tableblock td
+{
+	border: 1px solid #ccc;
+}
+
+article table.tableblock th p,
+article table.tableblock td p
+{
+	margin: 0;
+}
+
+article table.tableblock tr:nth-of-type(even)
+{
+	background: #dfdfdf;
+}
+
+article table.tableblock thead tr th,
+article table.tableblock thead tr td,
+article table.tableblock tfoot tr th,
+article table.tableblock tfoot tr td
+{
+	padding: 0.5em 0.625em 0.625em;
+}
+
+article table.tableblock tr th,
+article table.tableblock tr td
+{
+	padding: 0.5625em 0.625em;
+	color: #222222;
+}
+
+article th.tableblock.halign-left, article td.tableblock.halign-left { text-align: left; }
+article th.tableblock.halign-right, article td.tableblock.halign-right { text-align: right; }
+article th.tableblock.halign-center, article td.tableblock.halign-center { text-align: center; }
+article th.tableblock.valign-top, article td.tableblock.valign-top { vertical-align: top; }
+article th.tableblock.valign-bottom, article td.tableblock.valign-bottom { vertical-align: bottom; }
+article th.tableblock.valign-middle, article td.tableblock.valign-middle { vertical-align: middle; }
+
+article ul, article ol { padding-left: 30px; }
+article li ul, article li ol { margin: 0; }
+article dl dt { margin-bottom: 0.25em; font-weight: bold; }
+article dl dd { margin-bottom: 0.75em; margin-left: 20px; }
+article li p, article dd p { margin: 0; }
+article .qlist ol li { margin-bottom: 0.75em; }
+article ul.checklist, article dl { list-style-type: none; padding-left: 10px; }
+article ul.checklist .fa-square-o:before { content: '\f0c8'; font-weight: 300; }
+article ul.checklist .fa-check-square-o:before { content: '\f14a'; font-weight: 300; }
+
+article .literalblock pre,
+article .listingblock code
+{
+	overflow: auto;
+	background: #eee;
+	border: 1px solid #ccc;
+	padding: 0.5em;
+}
+
+article .conum
+{
+	display: inline-block;
+	color: white;
+	background-color: #515151;
+	font-size: 0.75em;
+	width: 1.5em;
+	height: 1.5em;
+	border-radius: 50%;
+	text-align: center;
+	font-weight: bold;
+	font-style: normal;
+	position: relative; top: -2px;
+}
+
+article .colist td { padding-left: 10px; }
+article .colist td:first-child { vertical-align: top; }
+article .conum + b { display: none; }
+article .conum:after { content: attr(data-value); }
+
+article .imageblock
+{
+	margin-bottom: 0.75em;
+}
+
+article span.image:not(.left):not(.right) img
+{
+	max-height: 1em;
+	width: auto;
+}
+
+article .imageblock.left,
+article span.image.left
+{
+	float: left;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-right: 0.75em;
+}
+
+article .imageblock.right,
+article span.image.right
+{
+	float: right;
+	margin-top: 0.5em;
+	margin-bottom: 0.5em;
+	margin-left: 0.75em;
+}
+
+article .imageblock.text-left { text-align: left; }
+article .imageblock.text-right { text-align: right; }
+article .imageblock.text-center { text-align: center; }
+article .imageblock.text-justify { text-align: justify; }
+
+article .quoteblock
+{
+	text-align: center;
+	padding-bottom: 15px;
+}
+
+article .quoteblock:before
+{
+	content: "\f10d";
+	font-family: "Font Awesome 5 Free";
+	font-weight: 900;
+	font-size: 2.5em;
+	padding: 15px 45px 0 0;
+	float: left;
+}
+
+article .quoteblock .attribution
+{
+	text-align: right;
+	color: #888;
+}
+
+article .admonitionblock table
+{
+	width: 100%;
+	border-collapse: separate;
+}
+
+article .admonitionblock table td.icon
+{
+	text-align: center; width: 50px; padding: 15px;
+}
+
+article .admonitionblock table td.content
+{
+	padding-left: 1.25em; padding-right: 1.25em; border-left: 1px solid #dddddd;
+}
+
+article .admonitionblock td.icon i:before
+{
+	font-size: 2.5em;
+	text-shadow: 0 0 8px white, 1px 1px 2px rgba(0, 0, 0, 0.5);
+	cursor: default;
+}
+
+article .admonitionblock td.icon .icon-note:before { content: "\f05a"; color: #2984a9; color: #1f637f; }
+article .admonitionblock td.icon .icon-tip:before { content: "\f0eb"; font-weight: 400; text-shadow: 1px 1px 2px rgba(155, 155, 0, 0.8); color: #111; }
+article .admonitionblock td.icon .icon-warning:before { content: "\f071"; color: #bf6900; }
+article .admonitionblock td.icon .icon-caution:before { content: "\f06d"; color: #bf3400; }
+article .admonitionblock td.icon .icon-important:before { content: "\f06a"; color: #bf0000; }

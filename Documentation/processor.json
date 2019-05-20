@@ -4,19 +4,14 @@
   "MultipageHtmlFiles": [
     "Source\\all.adoc"
   ],
-  "PdfFiles": [
-    "Source\\manual-pdf.adoc",
-    "Source\\reference-pdf.adoc",
-    "Source\\topics\\variables-pdf.adoc",
-    "Source\\topics\\graphs-pdf.adoc",
-    "Source\\topics\\bindings-pdf.adoc",
-    "Source\\overview-pdf.adoc",
-    "Source\\topics\\interface-pdf.adoc"
-  ],
+  "PdfFiles": [],
   "RawFiles": [
     "Source\\table-of-contents.html"
   ],
   "Version": "v10",
+  "GenerateOffline": true,
+  "OfflineFolder": "..\\Assets\\Documentation",
+  "OfflineTemplate": "Template.html",
   "GenerateSearch": true,
   "CopyImages": true
 }

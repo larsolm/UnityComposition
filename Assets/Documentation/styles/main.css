@@ -1,0 +1,516 @@
+html
+{
+	background-color: #EEE;
+	color: #000;
+	font-family: 'Roboto', sans-serif;
+}
+
+html, body
+{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+
+nav
+{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: -280px;
+	width: 280px;
+	z-index: 3;
+	background-color: #F8F8F8;
+	transition: left 0.2s;
+	display: flex;
+	flex-direction: column;
+}
+
+.menu-open nav
+{
+	left: 0;
+}
+
+nav .logo
+{
+	display: block;
+}
+
+nav a
+{
+	color: #333;
+	text-decoration: none;
+}
+
+nav a.active
+{
+	font-weight: bold;
+}
+
+nav .version
+{
+	margin: 12px;
+}
+
+nav .version select
+{
+	width: 100%;
+}
+
+nav .search
+{
+	margin: 0 12px 12px 12px;
+}
+
+nav .search input
+{
+	width: 100%;
+}
+
+nav #table-of-contents
+{
+	margin-top: -6px;
+	overflow-y: auto;
+}
+
+nav #table-of-contents > ul > li
+{
+	margin-bottom: 10px;
+}
+
+nav ul
+{
+	padding: 0;
+}
+
+nav li
+{
+	list-style: none;
+}
+
+.menu-header
+{
+	display: block;
+	padding: 10px 20px;
+	cursor: default;
+	font-size: 20px;
+}
+
+.menu-header.menu-intro
+{
+	cursor: pointer;
+}
+
+nav a.menu-section, nav .menu-root-link
+{
+	display: block;
+	padding: 6px 30px;
+}
+
+nav a.menu-section:hover
+{
+	background-color: #E0E0E0;
+}
+
+nav .searching a.menu-section:after
+{
+	content: "(" attr(data-search-count) ")";
+	margin-left: 6px;
+}
+
+nav .submenu
+{
+	/* height is set via js */
+	overflow: hidden;
+	transition: height 0.2s;
+}
+
+nav .submenu
+{
+	padding-left: 50px;
+}
+
+nav .submenu li
+{
+	padding: 4px 0 6px 0;
+}
+
+nav .submenu a:hover, nav .menu-root-link a:hover
+{
+	text-decoration: underline;
+}
+
+nav .searching .not-found
+{
+	display: none;
+}
+
+header
+{
+	box-sizing: border-box;
+	position: fixed;
+	top: 0;
+	height: 124px;
+	left: 0;
+	right: 0;
+	z-index: 1;
+	transition: left 0.2s;
+
+	background-color: #2A2A2A;
+	color: white;
+
+	display: flex;
+	align-items: center;
+}
+
+header .title
+{
+	display: inline-block;
+	margin-left: 20px;
+}
+
+header .title a
+{
+	padding: 5px 9px;
+	margin-right: 20px;
+}
+
+header .title a, header #title-text
+{
+	color: #EEE;
+	text-decoration: none;
+	font-size: 26px;
+	font-weight: bold;
+}
+
+header #title-text
+{
+	cursor: default;
+}
+
+header #title-text.loading
+{
+	display: none;
+}
+
+header #title-text i
+{
+	margin: 0 10px;
+}
+
+header .title a:hover
+{
+	background-color: #666;
+	border-radius: 50%;
+}
+
+header .spacer
+{
+	flex: 100%;
+	min-width: 10px;
+}
+
+header .links
+{
+	display: inline-block;
+	white-space: nowrap;
+	margin-top: 20px;
+	margin-right: 20px;
+	align-self: flex-start;
+}
+
+header .links a
+{
+	position: relative;
+	display: inline-block;
+	color: white;
+	text-decoration: none;
+	font-size: 16px;
+}
+
+header .links a:hover
+{
+	text-decoration: underline;
+}
+
+header .links a:not(:last-child)
+{
+	margin-right: 16px;
+}
+
+/* Usage: <span class="tooltip"><span class="tooltip-text">This is a tooltip</span></span> */
+header .tooltip
+{
+	position: absolute;
+	top: 175%;
+	left: 50%;
+}
+
+header .links a .tooltip-text
+{
+	position: relative;
+	visibility: hidden;
+	z-index: 2;
+
+	background-color: black;
+	color: #fff;
+	padding: 5px;
+	border-radius: 6px;
+	left: -50%;
+}
+
+header .links a .tooltip-text::after
+{
+	content: " ";
+	position: absolute;
+	bottom: 100%;
+	left: 50%;
+	margin-left: -5px;
+	border-width: 5px;
+	border-style: solid;
+	border-color: transparent transparent black transparent;
+}
+
+header .links a:hover .tooltip-text
+{
+	visibility: visible;
+}
+
+header .links a.disabled
+{
+	display: none;
+}
+
+header .links i
+{
+	margin-right: 6px;
+}
+
+article
+{
+	box-sizing: border-box;
+	max-width: 1140px;
+	min-height: 100%;
+	padding-top: 100px;
+	transition: margin-left 0.2s;
+}
+
+article.loading
+{
+	visibility: hidden;
+}
+
+article a#next-button
+{
+	text-align: right;
+	display: block;
+	margin-right: 60px;
+	font-size: 1.3em;
+	margin-top: -30px;
+	margin-bottom: 20px;
+	text-decoration: none;
+}
+
+article a#next-button:hover, article a#next-button:hover i
+{
+	text-decoration: underline;
+}
+
+article a#next-button.disabled
+{
+	display: none;
+}
+
+footer
+{
+	box-sizing: border-box;
+	text-align: center;
+	background-color: #2A2A2A;
+	color: #DDD;
+	padding: 20px;
+	font-size: 12px;
+	transition: margin-left 0.2s;
+}
+
+footer .logo
+{
+	display: inline-block;
+	height: 40px;
+	margin-top: -8px;
+}
+
+footer .logo img
+{
+	height: 100%;
+}
+
+footer .copyright
+{
+	display: inline-block;
+	vertical-align: 16px;
+	white-space: nowrap;
+	cursor: default;
+}
+
+footer .links
+{
+	display: inline-block;
+	vertical-align: 12px;
+	cursor: default;
+	max-width: 160px;
+}
+
+footer .links a
+{
+	color: #DDD;
+	text-decoration: none;
+}
+
+footer .links a:hover
+{
+	text-decoration: underline;
+}
+
+#menu-overlay, #trademark-popup
+{
+	position: fixed;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	z-index: 2;
+	background-color: black;
+	visibility: hidden;
+	opacity: 0;
+	transition: visibility 0.2s, opacity 0.2s;
+}
+
+#trademark-popup
+{
+	z-index: 5;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+
+#trademark-popup.visible
+{
+	visibility: visible;
+	opacity: 1;
+}
+
+#trademark-popup i
+{
+	position: absolute;
+	right: 0px;
+	top: 0;
+	font-size: 40px;
+	margin-right: -10px;
+	margin-top: -10px;
+}
+
+#trademark-popup div
+{
+	position: fixed;
+	cursor: default;
+	top: 50%;
+	left: 50%;
+	width: 400px;
+	margin-left: -240px;
+	background-color: white;
+	padding: 40px;
+	box-shadow: 0 8px 8px 0 rgba(0, 0, 0, 0.16), 0 0 8px 0 rgba(0, 0, 0, 0.12);
+	font-size: 16px;
+	text-align: center;
+}
+
+@media (min-width: 1440px)
+{
+	header .title
+	{
+		white-space: nowrap;
+	}
+
+	article
+	{
+		padding-bottom: 60px;
+		margin-bottom: -60px;
+	}
+
+	footer
+	{
+		height: 60px;
+	}
+	
+	footer .copyright
+	{
+		margin: 0 160px;
+	}
+}
+
+@media (max-width: 1439px)
+{
+	header
+	{
+		flex-direction: column;
+		padding: 20px;
+	}
+
+	header .title
+	{
+		margin: 0;
+	}
+
+	header .links
+	{
+		align-self: unset;
+		margin: 0;
+	}
+
+	article
+	{
+		padding-bottom: 140px;
+		margin-bottom: -140px;
+	}
+
+	footer
+	{
+		height: 140px;
+	}
+
+	footer .copyright
+	{
+		display: block !important;
+		padding: 10px 0 20px 0;
+	}
+
+	footer .links
+	{
+		max-width: unset;
+	}
+}
+
+@media (min-width: 1024px)
+{
+	.menu-open header
+	{
+		left: 280px;
+	}
+
+	.menu-open article
+	{
+		margin-left: 280px;
+	}
+
+	.menu-open footer
+	{
+		margin-left: 280px;
+	}
+}
+
+@media (max-width: 1023px)
+{
+	.menu-open #menu-overlay
+	{
+		visibility: visible;
+		opacity: 0.5;
+	}
+}

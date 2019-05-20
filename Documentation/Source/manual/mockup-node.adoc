@@ -2,7 +2,7 @@
 
 ## Mockup Node
 
-A Mockup Node is an <<manua/instruction-graph-node.html,Instruction Graph Node>> usually used in conjunction with a <<manual/mockup-graph.html,Mockup Graph>> for the purpose of storyboarding and prototyping. A Mockup Node and have any number of output _Connections_ to other nodes. Create a Mockup Node in the menu:Create[Debug > Mockup] menu of the Instruction Graph Window.
+A Mockup Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> usually used in conjunction with a <<manual/mockup-graph.html,Mockup Graph>> for the purpose of storyboarding and prototyping. A Mockup Node and have any number of output _Connections_ to other nodes. Create a Mockup Node in the menu:Create[Debug > Mockup] menu of the Instruction Graph Window.
 
 See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
 

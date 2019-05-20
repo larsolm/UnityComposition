@@ -27,15 +27,15 @@ Some expressions, for example _Condition_ on a <<manual/conditional-node.html,Co
 |===
 | Operator	| Description
 
-| `==`		| Determines if two values are equal
-| `!=`		| Determines if two values are not equal
-| `<`		| Determines if a value is less than another value
-| `>`		| Determines if a value is greater than another value
-| `<=`		| Determines if a value is less than or equal to another value
-| `>=`		| Determines if a value is greater than or equal to another value
-| `&&`		| Determines if two values are both `true`
-| `||`		| Determines if either or both values `true`
-| `!`		| Inverts a value (i.e `true` becomes `false` and `false` becomes `true`)
+| `==`				| Determines if two values are equal
+| `!=`				| Determines if two values are not equal
+| `<`				| Determines if a value is less than another value
+| `>`				| Determines if a value is greater than another value
+| `<=`				| Determines if a value is less than or equal to another value
+| `>=`				| Determines if a value is greater than or equal to another value
+| `&&`				| Determines if two values are both `true`
+| `&vert;&vert;`	| Determines if either or both values are `true`
+| `!`				| Inverts a value (i.e `true` becomes `false` and `false` becomes `true`)
 |===
 
 NOTE: Logic operations are executed before comparison operations, which are executed before math operations.
@@ -52,7 +52,7 @@ The type of a variable can be tested using the `is` statement. For example, to t
 
 ### Asssignment
 
-In addition to accessing variables, expressions can set variables. This is done with the `=` operator. For example to store a computed damage value instead of returning it like the above example, write the expression `local.damage = global.player.attack * 2`. The damage value can be then later accessed by other Expressions and Variable References as `local.damage`. Each of the math and logic operations also exist as an assignment to more simply modify a value. These are: `+=`, `-=`, `*=`, `/=`, `^=`, `&=`, and `|=`. For example, the `player`'s `attack`, can be permanently buffed with the statement `global.player.attack *= 2`. Shortcuts for adding and subtracting one from a variable are available with the `++` and `--` operators. Place the operator before a value to include the increment or decrement in the result. For example, if `local.number` has the value `4`, the expression `local.result = ++local.number` will assign `5` to both `local.result` and `local.number` whereas the expression `local.result = local.number++` will assign `4` to `local.result` and `5` to `local.number`.
+In addition to accessing variables, expressions can set variables. This is done with the `=` operator. For example to store a computed damage value instead of returning it like the above example, write the expression `local.damage = global.player.attack * 2`. The damage value can be then later accessed by other Expressions and Variable References as `local.damage`. Each of the math and logic operations also exist as an assignment to more simply modify a value. These are: `+=`, `-=`, `*=`, `/=`, `^=`, `&=`, and `|=`. For example, the player's `attack`, can be permanently buffed with the statement `global.player.attack *= 2`. Shortcuts for adding and subtracting one from a variable are available with the `\++` and `--` operators. Place the operator before a value to include the increment or decrement in the result. For example, if `local.number` has the value `4`, the expression `local.result = ++local.number` will assign `5` to both `local.result` and `local.number` whereas the expression `local.result = local.number++` will assign `4` to `local.result` and `5` to `local.number`.
 
 ### Commands
 

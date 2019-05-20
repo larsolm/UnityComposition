@@ -102,6 +102,6 @@ image::variables-4-scene.png[Scene Store]
 
 ### Accessing Built in Properties
 
-The properties of https://docs.unity3d.com/ScriptReference/Object.html[Objects^] that are not variable stores can be accessed if the https://docs.unity3d.com/ScriptReference/Object.html[Object`s^] class has a ClassMap defined. ClassMaps for https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] and https://docs.unity3d.com/ScriptReference/Camera.html[Camera^] are built in and custom class maps can be defined as described <<topics/variables-8.doc,here>>.
+The properties of https://docs.unity3d.com/ScriptReference/Object.html[Objects^] that are not variable stores can be accessed if the https://docs.unity3d.com/ScriptReference/Object.html[Object's^] class has a ClassMap defined. ClassMaps for https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] and https://docs.unity3d.com/ScriptReference/Camera.html[Camera^] are built in and custom class maps can be defined as described <<topics/variables-8.doc,here>>.
 
 The exposed properties can be accessed just like any variable in a store. For example, the position of a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] named `Player` could be retrieved with the <<topics/variables-4.html,VariableReference>> `scene.Player as Transform.position`.

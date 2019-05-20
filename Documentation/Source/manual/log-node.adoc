@@ -2,7 +2,7 @@
 
 ## Log Node
 
-A Log Node is an <<manua/instruction-graph-node.html,Instruction Graph Node>> that is used for debugging purposes. It logs a <<reference/message.html,Message>> when the node is executed. Create a Log Node in the menu:Create[Debug > Log] menu of the Instruction Graph Window.
+A Log Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that is used for debugging purposes. It logs a <<reference/message.html,Message>> when the node is executed. Create a Log Node in the menu:Create[Debug > Log] menu of the Instruction Graph Window.
 
 ### Fields
 
