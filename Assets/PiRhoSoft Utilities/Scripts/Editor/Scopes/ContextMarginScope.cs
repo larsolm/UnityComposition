@@ -14,7 +14,9 @@ namespace PiRhoSoft.UtilityEditor
 
 		protected override void CloseScope()
 		{
-			RectHelper.ContextMargin = _margin;
+			// This should be resetting to _margin, but because there are situations where a GUI Scope does not get
+			// disposed (like when an object picker is double clicked) ContextMargin can become permanently enabled
+			RectHelper.ContextMargin = 0;
 		}
 	}
 }

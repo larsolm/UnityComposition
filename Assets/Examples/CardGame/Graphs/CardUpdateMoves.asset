@@ -252,7 +252,7 @@ MonoBehaviour:
   m_Name: Card Iteration
   m_EditorClassIdentifier: 
   Name: Card Iteration
-  GraphPosition: {x: -192, y: -0}
+  GraphPosition: {x: -192, y: 0}
   IsBreakpoint: 0
   Container:
     _variable: global.State.Cards
