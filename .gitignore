@@ -6,6 +6,7 @@
 Assets/AssetStoreTools*
 Documentation/Generated
 Assets/Documentation/v*/
+Assets/Documentation/v*.meta
 
 # Visual Studio cache directory
 .vs/
