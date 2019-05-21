@@ -48,14 +48,12 @@ document.addEventListener("DOMContentLoaded", function(event)
 	var _articleContent = document.getElementById("article-content");
 	var _menuSections = document.getElementsByClassName("menu-section");
 	var _searchRoots = document.getElementsByClassName("search-root");
-	var _menuRootLinks = document.getElementsByClassName("menu-root-link");
 	var _menuLinks = document.getElementsByClassName("menu-link");
 
 	var _titleSeparator = "<i class='fas fa-chevron-right'></i>"
 
 	var _currentVersion = "v10";
 	var _currentArticle = "";
-	var _currentSection = "";
 	
 	var _searchIndex = null;
 	var _searchTimeout = null;
@@ -111,11 +109,6 @@ document.addEventListener("DOMContentLoaded", function(event)
 		var article = articleStart < hash.length ? (hash.substring(articleStart) + ".html") : _defaultArticle;
 
 		return { version: version, article: article };
-	}
-
-	function GetArticleSection(article)
-	{
-		return article.substring(0, article.indexOf('/'));
 	}
 
 	function GetSectionMenu(section)
@@ -405,7 +398,6 @@ document.addEventListener("DOMContentLoaded", function(event)
 	function LoadArticle(article, pushState)
 	{
 		_currentArticle = article;
-		_currentSection = GetArticleSection(article);
 
 		AddClass(_titleText, _loadingClass);
 		AddClass(_articleContent, _loadingClass);
