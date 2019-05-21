@@ -47,4 +47,3 @@ The following is a list of planned features for future releases. This will be pe
 * switching focused menus with MenuInput is based on item index without accounting for scrolling - it should be based on the item position instead
 * key events are not repeated when holding down a key
 * GetVariableNames in BindingRoot does not include names from _parent
-* Enum Buttons occasionally draw without taking up the full width - cause unknown
