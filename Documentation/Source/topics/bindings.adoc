@@ -1,17 +1,17 @@
-include::bindings/bindings-1.adoc[]
+include::bindings/1 overview.adoc[]
 
 <<<
 
-include::bindings/bindings-2.adoc[]
+include::bindings/2 binding-roots.adoc[]
 
 <<<
 
-include::bindings/bindings-3.adoc[]
+include::bindings/3 variable-bindings.adoc[]
 
 <<<
 
-include::bindings/bindings-4.adoc[]
+include::bindings/4 custom-binding-roots.adoc[]
 
 <<<
 
-include::bindings/bindings-5.adoc[]
+include::bindings/5 custom-variable-bindings.adoc[]

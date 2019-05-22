@@ -4,7 +4,7 @@
 
 String Binding is an abstract <<manual/variable-binding.html,Variable Binding>> that should be derived from in order to bind string data for display on a sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component. The http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] container can be optionally set to fit the size of the bound text. Example implementations of a String Binding are <<manual/expression-binding.html,Expression Binding>>, <<manual/message-binding.html,Message Binding>>, <<manual/number-binding.html,Number Binding>>, and <<manual/text-binding.html,Text Binding>>.
 
-See <<topics/bindings-3.html,Variable Bindings>> for more information. +
+See <<topics/bindings/variable-bindings.html,Variable Bindings>> for more information. +
 
 ### Fields
 

@@ -8,7 +8,7 @@ PiRhoSoft.CompositionEngine.Command : https://docs.unity3d.com/ScriptReference/S
 
 Defines an <<reference/expression.html,Expression>> that can be called from other <<reference/expression.html,Expressions>>.
 
-See the <<topics/variables-6.html,_Writing Custom Commands_>> topic for more information.
+See the <<topics/variables/custom-commands.html,_Writing Custom Commands_>> topic for more information.
 
 ### Public Fields
 

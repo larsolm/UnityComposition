@@ -12,7 +12,7 @@ Add this as a field of a class to provide an editable text field that can be for
 
 string _Text_::
 
-The string that will be formatted at runtime. <<reference/variable-reference.html,VariableReferences>> to resolve can be inserted in the text by surrounding it with braces (`{` and `}`). Access the resolved text with the _GetText_ method. An example message is shown in the <<topics/interface-3.html,Messages>> topic.
+The string that will be formatted at runtime. <<reference/variable-reference.html,VariableReferences>> to resolve can be inserted in the text by surrounding it with braces (`{` and `}`). Access the resolved text with the _GetText_ method. An example message is shown in the <<topics/interface/messages.html,Messages>> topic.
 
 ### Public Properties
 

@@ -8,7 +8,7 @@ PiRhoSoft.CompositionEngine.BindingRoot : https://docs.unity3d.com/ScriptReferen
 
 Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to insert a <<reference/variable-value.html,VariableValue>> into the scene hierarchy that can be accessed by sibling or child <<reference/variable-binding.html,VariableBindings>>.
 
-See the <<topics/bindings-2.html,_Binding Roots_>> section in the <<topics/bindings-1.html,_Bindings_>> topic for more information.
+See the <<topics/bindings/binding-roots.html,_Binding Roots_>> section in the <<topics/bindings/overview.html,_Bindings_>> topic for more information.
 
 ### Public Fields
 

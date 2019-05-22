@@ -4,8 +4,8 @@
 
 Set Binding Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that sets the <<reference/variable-value.html,Value>> of a <<manual/binding-root.html,Binding Root>> to the resolved <<reference/variable-reference.html,VariableReference>>, _Binding_. Create a Set Binding Node in the menu:Create[Interface > Set Binding] menu of the Instruction Graph Window.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
-See <<topics/bindings-3.html,Variable Bindings>> for more information on variable bindings. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
+See <<topics/bindings/variable-bindings.html,Variable Bindings>> for more information on variable bindings. +
 See the _"Set Card Binding"_ node on the _"CardLoad"_ <<manual/instruction-graph.html,Instruction Graph>> in the CardGame project for an example usage.
 
 ### Fields

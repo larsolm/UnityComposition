@@ -1,0 +1,7 @@
+[#topics/interface/controls]
+
+## Interface Controls
+
+<<manual/interface-control.html,Interface Controls>> are a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that acts as the base class for all controls in the interface system. They should be attached to objects in a UI scene that are to be shown and hidden by the composition system (like dialog boxes, and menus). When loaded an Interface Control always starts inactive until the `Activate()` method is called. This usually happens from a <<manual/show-control-node.html,Show Control Node>> on a <<topics/graphs/overview.html,graph>>. Interface Controls also maintain a list of other https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] in a scene that should be activated and deactivate along with this control. To deactivate a control use a <<manual/hide-control-node.html,Hide Control Node>> or manually call the `Deactivate()` method from script.
+
+Usually, an interface control is derived from to implement custom behaviour, such as a a Message Control a Selection Control, detailed in the next sections.

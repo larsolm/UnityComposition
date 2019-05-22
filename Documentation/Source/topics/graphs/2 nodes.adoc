@@ -1,0 +1,84 @@
+[#topics/graphs/nodes]
+
+## Nodes
+
+Nodes make up the bulk of the functionality of a graph. They may control both the flow of the graph and/or the behaviour that should be performed. For example, a <<manual/conditional-node.html,Conditional Node>> branches the graph based on the `true` or `false` value of an <<reference/expression.html,expression>> and has no effect on the game world, while a <<manual/message-node.html,Message Node>> physically displays a message in the game. The following is a list of built-in nodes by category:
+
+|===
+| Animation |
+
+| <<manual/play-animation-node.html,Play Animation>> | Play an animation on a game object
+| <<manual/play-animation-state-node.html,Play Animation State>> | Play an animation state on an Animator
+| <<manual/set-animation-parameter-node.html,Set Animation Parameter>> | Set an animation parameter on an Animator
+| <<manual/play-effect-node.html,Play Effect>> | Create and play an effect Prefab
+| <<manual/play-sound-node.html,Play Sound>> | Play an AudioClip
+| <<manual/play-timeline-node.html,Play Timeline>> | Run a timeline
+|===
+
+|===
+| Composition |
+
+| <<manual/expression-node.html,Expression>> | Run an expression
+| <<manual/instruction-node.html,Instruction>> | Run an instruction
+| <<manual/shuffle-node.html,Shuffle>> | Shuffle a variable list
+| <<manual/sort-node.html,Sort>> | Sort a variable list
+| <<manual/reset-tag-node.html,Reset Tag>> | Reset variables by tag
+| <<manual/reset-variables-node.html,Reset Variables>> | Reset variables by name
+|===
+
+|===
+| Control Flow |
+
+| <<manual/conditional-node.html,Conditional>> | Fork the graph based on a condition
+| <<manual/branch-node.html,Branch>> | Run a single branch based on a string value
+| <<manual/sequence-node.html,Sequence>> | Run a list of nodes in order
+| <<manual/loop-node.html,Loop>> | Loop until a condition is met
+| <<manual/iterate-node.html,Iterate>> | Iterate the items in a variable list
+| <<manual/break-node.html,Break>> | Break out of a loop
+| <<manual/yield-node.html,Yield>> | Yield for a single frame
+| <<manual/exit-node.html,Yield>> | Break out of all loops
+|===
+
+|===
+| Debug |
+
+| <<manual/comment-node.html,Comment>> | Keep notes in the graph
+| <<manual/log-node.html,Log>> | Log a message in the console
+| <<manual/mockup-node.html,Mockup>> | For visual prototyping
+|===
+
+|===
+| Interface |
+
+| <<manual/message-node,Show Message>> | Show a message
+| <<manual/selection-node,Show Selection>> | Show and wait for a selection
+| <<manual/input-node,Input>> | Wait until a button is pressed
+| <<manual/show-control-node,Show Control>> | Activate an interface control
+| <<manual/hide-control-node,Hide Control>> | Hide an interface control
+| <<manual/set-binding-node,Set Binding>> | Set the binding value for a binding root
+| <<manual/update-binding-node,Update Binding>> | Tell a binding root to update its bindings
+|===
+
+|===
+| Object Manipulation |
+
+| <<manual/create-game-object-node.html,Create Game Object>> | Create a game object from a prefab
+| <<manual/create-scriptable-object-node.html,Create Scriptable Object>> | Create a scriptable object
+| <<manual/destroy-object-node.html,Destroy Object>> | Destroy an object
+| <<manual/enable-object-node.html,Enable Object>> |
+| <<manual/disable-object-node.html,Disable Object>> |
+|===
+
+|===
+| Sequencing |
+
+| <<manual/play-transition-node.html,Play Transition>> | Play a transition
+| <<manual/stop-transition-node.html,Stop Transition>> | Stop the current transition
+| <<manual/load-scene-node.html,Load Scene>> | Play a transition
+| <<manual/unload-scene-node.html,Unload Scene>> | Play a transition
+| <<manual/transform-node.html,Transform Object>> | Move or animate the transform of a game object
+| <<manual/time-scale-node.html,Time Scale>> | Set the time scale value
+| <<manual/wait-node.html,Wait>> | Wait for an amount of time
+|===
+
+In addition, custom nodes can be created (see <<topics/graphs/custom-nodes.html,Creating Custom Nodes>>).

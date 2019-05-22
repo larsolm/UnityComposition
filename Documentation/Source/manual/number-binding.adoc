@@ -4,7 +4,7 @@
 
 Number Binding is a <<manual/string-binding.html,String Binding>> that will bind text based on a <<reference/variable-reference.html,VariableReference>> to an int or float with customized <<reference/binding-formatter.html,Formatting>> applied. If _Variable_ is invalid or does not return an int or float, then the text component will be disabled.
 
-See <<topics/bindings-3.html,Variable Bindings>> for more information. +
+See <<topics/bindings/variable-bindings.html,Variable Bindings>> for more information. +
 See the _"Amount"_ object in the _"Shop"_ scene of the Shop project for an example usage.
 
 ### Fields

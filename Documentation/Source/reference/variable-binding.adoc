@@ -6,9 +6,9 @@ PiRhoSoft.CompositionEngine.VariableBinding : https://docs.unity3d.com/ScriptRef
 
 ### Description
 
-Derived from this class to provide support for automatically updating properties of loaded https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] (for instance, user interface elements) based on <<reference/variable-value.html,VariableValues>> stored in the <<topics/variables-1.html,Variables System>>.
+Derived from this class to provide support for automatically updating properties of loaded https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] (for instance, user interface elements) based on <<reference/variable-value.html,VariableValues>> stored in the <<topics/variables/overview.html,Variables System>>.
 
-Read the <<topics/bindings-1.html,Bindings Topic>> for a complete overview of how to use bindings and how to implement custom bindings.
+Read the <<topics/bindings/overview.html,Bindings Topic>> for a complete overview of how to use bindings and how to implement custom bindings.
 
 ### Static Methods
 

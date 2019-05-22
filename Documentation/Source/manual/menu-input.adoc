@@ -4,7 +4,7 @@
 
 Menu Input is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that should be attached as a sibling of a <<manual/menu.html,Menu>> to handle the behaviour of input, focusing, selecting, and scrolling, through <<manual/menu-item.html,Menu Items>>.
 
-See the <<topics/interface-4,Menus and Selections>> topic for more information. +
+See the <<topics/interface/menus-and-selections,Menus and Selections>> topic for more information. +
 See the _"EquimentMenu"_ and _"ItemsMenu"_ objects in the _"LootMenu"_ scene of the Loot project for an example usage.
 
 ### Fields

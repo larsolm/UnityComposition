@@ -12,7 +12,7 @@ Add this to an <<reference/instruction-graph.html,InstructionGraph>> to add note
 
 string _Comment_::
 
-The text of the comment that will be displayed directly in the <<topics/graphs-1.html,graph window>>.
+The text of the comment that will be displayed directly in the <<topics/graphs/overview.html,graph window>>.
 
 ifdef::backend-multipage_html5[]
 <<manual/comment-node.html,Manual>>

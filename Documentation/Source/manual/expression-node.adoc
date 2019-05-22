@@ -4,8 +4,8 @@
 
 An Expression Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that runs an <<reference/expression.html,Expression>>. Create an Expression Node in the menu:Create[Composition > Expression] menu of the Instruction Graph Window.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
-See <<topics/variables-5.html,Expressions>> for more information. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
+See <<topics/variables/writing-expressions.html,Expressions>> for more information. +
 See the _"Apply Damage"_ node in "BattleScratch" <<instruction-graph.html,Instruction Graph>> in the Battle project for an example usage.
 
 ### Fields

@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InstructionCaller
 
 ### Description
 
-Add this as a field on a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] or https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] to serve as a bridge between code and an <<reference/instruction-graph.html,InstructionGraph>>. This class will automatically manage configuring and applying input and output values to the <<reference/instruction-graph.html,InstructionGraph>> and enable full editor support. Read the <<topics/graphs-6.html,Running Graphs From Script>> topic for more information.
+Add this as a field on a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] or https://docs.unity3d.com/ScriptReference/ScriptableObject.html[ScriptableObject^] to serve as a bridge between code and an <<reference/instruction-graph.html,InstructionGraph>>. This class will automatically manage configuring and applying input and output values to the <<reference/instruction-graph.html,InstructionGraph>> and enable full editor support. Read the <<topics/graphs/running-from-script.html,Running Graphs From Script>> topic for more information.
 
 ### Public Properties
 

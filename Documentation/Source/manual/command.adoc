@@ -6,7 +6,7 @@ A Command is a https://docs.unity3d.com/ScriptReference/ScriptableObject.html[As
 
 IMPORTANT: Because a Command is a "Resource" it must be placed in a folder called "Commands" as a direct subfolder of a "Resources" folder so that it can be loaded and accessed on demand.
 
-See <<topics/variables-6.html,Commands>> for more information. +
+See <<topics/variables/custom-commands.html,Commands>> for more information. +
 See the "Apply Damage" <<manual/expression-node.html,Expression Node>> of the "BattleScratch" <<manual/instruction-graph.html,Instruction Graph>> in the Battle project for an example usage.
 
 ### Fields

@@ -1,17 +1,17 @@
-include::getting-started/getting-started-1.adoc[]
+include::getting-started/1 setup.adoc[]
 
 <<<
 
-include::getting-started/getting-started-2.adoc[]
+include::getting-started/2 game-logic.adoc[]
 
 <<<
 
-include::getting-started/getting-started-3.adoc[]
+include::getting-started/3 interfaces.adoc[]
 
 <<<
 
-include::getting-started/getting-started-4.adoc[]
+include::getting-started/4 transitions.adoc[]
 
 <<<
 
-include::getting-started/getting-started-5.adoc[]
+include::getting-started/5 data-binding.adoc[]

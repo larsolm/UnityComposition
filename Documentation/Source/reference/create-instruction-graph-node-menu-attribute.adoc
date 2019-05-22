@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.CreateInstructionGraphNodeMenuAttribute : Attribute
 
 ### Description
 
-This attribute should be added to custom <<reference/instruction-graph-node.html,InstructionGraphNodes>> to add them to the create list in the <<topics/graphs-1.html,graph editor window>>.
+This attribute should be added to custom <<reference/instruction-graph-node.html,InstructionGraphNodes>> to add them to the create list in the <<topics/graphs/overview.html,graph editor window>>.
 
 ### Constructors
 

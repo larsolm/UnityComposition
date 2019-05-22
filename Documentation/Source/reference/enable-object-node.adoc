@@ -18,7 +18,7 @@ The <<reference/instruction-graph-node.html,InstructionGraphNode>> to run when t
 
 The object to activate. If the object is a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] it will be activated, if it is a https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^] it will be enabled, and if it is a https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] it will be enabled (effectively made visible).
 
-NOTE: To activate a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] from a https://docs.unity3d.com/ScriptReference/Component.html[Component^] reference use `as GameObject` (see the <<topics/variables-4.html,Accessing Variables>> topic).
+NOTE: To activate a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] from a https://docs.unity3d.com/ScriptReference/Component.html[Component^] reference use `as GameObject` (see the <<topics/variables/accessing-variables.html,Accessing Variables>> topic).
 
 NOTE: If the object is already active or enabled there will be no effect.
 

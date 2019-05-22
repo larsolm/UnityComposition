@@ -1,0 +1,42 @@
+[#topics/bindings/variable-bindings]
+
+## Variable Bindings
+
+A Variable Binding itself is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] designed to be inherited from to either visually change or perform actions based on <<topics/variables/overview.html,variables>>. As outlined in <<topics/bindings/binding-roots.html,Binding Roots>>, by default variable bindings have access to the <<manual/composition-manager.html,Composition Manager>>'s `"global"` and `"scene"` <<reference/i-variable-store.html,IVariableStores>>, in addition to any binding roots in its hierarchy. Generally, bindings are used to display data in a user interface, such as timers, scores, health bars, etc. However, bindings may also perform any desired action, such as the <<manual/graph-trigger-binding.html,Graph Trigger Binding>>, which runs an <<topics/graphs/overview.html,instruction graph>> when the variable it is bound to changes.
+
+### Updating Bindings
+
+Bindings have an _AutoUpdate_ flag which if set, means that the binding will receive an update call automatically every frame. If _AutoUpdate_ is false then bindings will need to be prompted to update manually, usually via an <<manual/update-binding-node,Update Binding Node>>. Use this cautiously as too many update calls per frame may have performance implications.
+
+### Binding Groups
+
+Variable Bindings can also be categorized into groups with the _BindingGroup_ property so that only certain bindings will update when they are prompted. When updating bindings, if `null` is passed to the `VariableBinding.UpdateBindings()` method as the group parameter, then all bindings, regardless of their group will be updated, otherwise only those with a _BindingGroup_ that matches the passed string will be updated.
+
+### Animation
+
+Bindings optionally support animation through a <<reference/binding-animation-status.html,BindingAnimationStatus>> object passed to the `UpdateBindings()` method. If a binding utilizes animation (such as the <<manual/bar-binding.html,Bar Binding>> gradually changing its fill value over time), then the `Increment()` method should be called on the status object when the animation begins and the `Decrement()` method when the animation is finished. Now the `IsFinished()` on the status object can be checked and waited on if desired. For example, an <<manual/update-binding-node,Update Binding Node>> uses this to wait to move on to the next node until all bindings have finished animating.
+
+The following is a list of built-in bindings.
+
+|===
+| Name | Description
+
+| <<manual/bar-binding.html,Bar Binding>> | Bind the fill value of an image to the ratio of two values
+| <<manual/enable-binding.html,Enable Binding>> | Enable/disable an object based on a condition
+| <<manual/expression-binding.html,Expression Binding>> | Bind text to the value of an expression
+| <<manual/graph-trigger-binding.html,Graph Trigger Binding>> | Run a graph when a value changes
+| <<manual/image-binding.html,Image Binding>> | Bind an image to a value
+| <<manual/image-color-binding.html,Image Color Binding>> | Bind an image's blend color to a value
+| <<manual/list-binding.html,List Binding>> | Create objects based on the values in a list
+| <<manual/message-binding.html,Message Binding>> | Bind text based on a message
+| <<manual/number-binding.html,Number Binding>> | Bind text to a number
+| <<manual/sprite-binding.html,Sprite Binding>> | Bind a sprite to a value
+| <<manual/sprite-color-binding.html,Sprite Color Binding>> | Bind a sprites blend color to a value
+| <<manual/text-binding.html,Text Binding>> | Bind text to a value
+| <<manual/text-color-binding.html,Text Color Binding>> | Bind the color of text to a value
+| <<manual/text-input-binding.html,Text Input Binding>> | Bind a variable a text's user input
+|===
+
+### Errors
+
+Most Variable Bindings will disable their corresponding visual element if they fail to retreive their data and report the error. Sometimes this may be intended behaviour so if set, _SuppressErrors_ will hide those errors. This behaviour is up to each individual binding class to implement so check the specific manual page to clarify behaviour.

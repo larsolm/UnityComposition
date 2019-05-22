@@ -4,7 +4,7 @@
 
 Set Animation Parameter Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that sets the value of an https://docs.unity3d.com/ScriptReference/AnimatorControllerParameter.html[AnimationParameter^] on an https://docs.unity3d.com/ScriptReference/Animator.html[Animator^]. Create a Set Animation Parameter Node in the menu:Create[Animation > Set Animation Parameter] menu of the Instruction Graph Window.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 
 ### Fields
 
