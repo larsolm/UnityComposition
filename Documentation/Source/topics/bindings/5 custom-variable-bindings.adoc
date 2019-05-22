@@ -1,0 +1,66 @@
+[#topics/bindings/custom-variable-bindings]
+
+## Creating Custom Variable Bindings
+
+To create custom variable bindings, derive from <<reference/variable-binding.html,VariableBinding>> and implement the abstract method `UpdateBinding(IVariableStore variables, BindingAnimationStatus status)`. The following is an example of a custom binding that activates or deactivates a GameObject based on a bool <<reference/variable-reference,variable reference>>.
+
+[source,cs]
+----
+	public class ActivateBinding : VariableBinding
+	{
+		public GameObject GameObject;
+
+		public VariableReference Variable = new VariableReference();
+
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		{
+			if (GameObject)
+			{
+				Resolve(variables, Variable, out bool active);
+				GameObject.SetActive(active);
+			}
+		}
+	}
+----
+
+The next example utilizes animation to increment displayed text based on an int <<reference/variable-reference,variable reference>>.
+
+[source,cs]
+----
+	public class AnimatedIntBinding : VariableBinding
+	{
+		public VariableReference Variable = new VariableReference();
+
+		private TMP_Text _text;
+		private int _previous = 0;
+
+		private void Start()
+		{
+			_text = GetComponent<TMP_Text>();
+		}
+
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		{
+			if (Resolve(variables, Variable, out int target))
+			{
+				StopAllCoroutines();
+				StartCoroutine(AnimateText(target, status));
+			}
+		}
+
+		private IEnumerator AnimateText(int target, BindingAnimationStatus status)
+		{
+			status.Increment();
+
+			while (_previous != target)
+			{
+				_previous = target > _previous ? _previous - 1 : _previous + 1;
+				_text.text = _previous.ToString();
+
+				yield return null;
+			}
+
+			status.Decrement();
+		}
+	}
+----

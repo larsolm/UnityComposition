@@ -4,7 +4,7 @@
 
 Play Animation State Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that tells an https://docs.unity3d.com/ScriptReference/Animator.html[Animator^] to https://docs.unity3d.com/ScriptReference/Animator.Play.html[Play()^] a state. Create a Play Animation State Node in the menu:Create[Animation > Play Animation State] menu of the Instruction Graph Window.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 
 ### Fields
 

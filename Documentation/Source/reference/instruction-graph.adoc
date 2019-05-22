@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InstructionGraph : <<reference/instruction.html,Inst
 
 ### Description
 
-The main piece of the composition system, implementing all the functionality necessary to manage and execute a set of <<reference/instruction-graph-node.html,InstructionGraphNodes>>. Read the <<topics/graphs-1.html,graph topic>> for a more thorough breakdown of creating and using graphs.
+The main piece of the composition system, implementing all the functionality necessary to manage and execute a set of <<reference/instruction-graph-node.html,InstructionGraphNodes>>. Read the <<topics/graphs/overview.html,graph topic>> for a more thorough breakdown of creating and using graphs.
 
 ### Static Fields
 

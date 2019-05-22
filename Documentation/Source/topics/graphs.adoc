@@ -1,29 +1,29 @@
-include::graphs/graphs-1.adoc[]
+include::graphs/1 overview.adoc[]
 
 <<<
 
-include::graphs/graphs-2.adoc[]
+include::graphs/2 nodes.adoc[]
 
 <<<
 
-include::graphs/graphs-3.adoc[]
+include::graphs/3 control-flow.adoc[]
 
 <<<
 
-include::graphs/graphs-4.adoc[]
+include::graphs/4 instruction-store.adoc[]
 
 <<<
 
-include::graphs/graphs-5.adoc[]
+include::graphs/5 debugging.adoc[]
 
 <<<
 
-include::graphs/graphs-6.adoc[]
+include::graphs/6 running-from-script.adoc[]
 
 <<<
 
-include::graphs/graphs-7.adoc[]
+include::graphs/7 custom-graphs.adoc[]
 
 <<<
 
-include::graphs/graphs-8.adoc[]
+include::graphs/8 custom-nodes.adoc[]

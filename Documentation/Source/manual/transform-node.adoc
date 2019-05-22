@@ -6,7 +6,7 @@ Transform Node is an <<manual/instruction-graph-node.html,Intruction Graph Node>
 
 CAUTION: If the _Transform_ cannot reach its destination (due to collisions or other circumstances) then the node will never cease its execution
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 See the "Move" node on the "MazeGate" <<manual/instruction-graph,Instruction Graph>> in the Maze project for an example usage.
 
 ### Fields

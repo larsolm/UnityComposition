@@ -1,0 +1,7 @@
+[#tutorials/getting-started/game-logic]
+
+## Title
+
+video::hfwxXAbk[youtube]
+
+The description

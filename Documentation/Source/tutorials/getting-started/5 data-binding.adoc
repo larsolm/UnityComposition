@@ -1,0 +1,7 @@
+[#tutorials/getting-started/data-binding]
+
+## Title
+
+video::hfwxXAbk[youtube]
+
+The description

@@ -4,7 +4,7 @@
 
 A Time Scale Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that is used to set Unity's https://docs.unity3d.com/ScriptReference/Time-timeScale.html[TimeScale^]. This can be useful for pausing. Create a Time Scale Node in the menu:Create[Sequencing > Time Scale] menu of the Instruction Graph Window.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 
 ### Fields
 

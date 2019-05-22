@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.MappedVariableAttribute : Attribute
 
 ### Description
 
-Add this to a property or field on a <<reference/variable-set-component.html,VariableSetComponent>> or <<reference/variable-set-asset.html,VariableSetAsset>> to expose it to the <<topics/variables-1.html,variables>> system.
+Add this to a property or field on a <<reference/variable-set-component.html,VariableSetComponent>> or <<reference/variable-set-asset.html,VariableSetAsset>> to expose it to the <<topics/variables/overview.html,variables>> system.
 
 ### Constructors
 

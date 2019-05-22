@@ -4,7 +4,7 @@
 
 A VariableSchema is an https://docs.unity3d.com/ScriptReference/ScriptableObject.html[Asset^] used to define the variables that are available to an <<reference/i-variable-store.html,IVariableStore>> object, usually a <<manual/variable-set-component.html,Variable Set Component>> or <<reference/variable-set-asset.html,Variable Set Asset>>. This improves the editor experience for working with those object types along with enforcing constraints so typos or other mistaken accesses can be caught and reported at runtime. Create a Variable Schema through the menu:Create[PiRho Soft > Variable Schema] menu in the project view.
 
-See <<topics/variables-1.html,Variables>> for more information. +
+See <<topics/variables/overview.html,Variables>> for more information. +
 
 ### Fields
 

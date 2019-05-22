@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InterfaceControl : https://docs.unity3d.com/ScriptRe
 
 ### Description
 
-Add this to any https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] to provide support for enabling and disabling the object from an <<reference/instruction-graph.html,InstructionGraph>> using <<reference/show-control-node.html,ShowControlNode>> and <<reference/hide-control-node.html,HideControlNode>>. Read the <<topics/interface-2.html,Interface Control topic>> for more information on how and when to use InterfaceControls.
+Add this to any https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] to provide support for enabling and disabling the object from an <<reference/instruction-graph.html,InstructionGraph>> using <<reference/show-control-node.html,ShowControlNode>> and <<reference/hide-control-node.html,HideControlNode>>. Read the <<topics/interface/controls.html,Interface Control topic>> for more information on how and when to use InterfaceControls.
 
 NOTE: An InterfaceControl will always start inactive.
 

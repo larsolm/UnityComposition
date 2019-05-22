@@ -8,9 +8,9 @@ image::error.png[Console Error]
 
 ### General Tips
 
-When dealing with <<topics/variables-4.html,VariableReference>> errors, the <<topics/graphs-5.html,Watch Window>> can be extremely useful. Global variables can be investigated at any time and variables on a specific <<topics/graphs-1.html,InstructionGraph>> can be investigated by <<topics/graphs-5.html,setting a breakpoint>> on a node.
+When dealing with <<topics/variables/accessing-variables.html,VariableReference>> errors, the <<topics/graphs/debugging.html,Watch Window>> can be extremely useful. Global variables can be investigated at any time and variables on a specific <<topics/graphs/overview.html,InstructionGraph>> can be investigated by <<topics/graphs/debugging.html,setting a breakpoint>> on a node.
 
-<<topics/variables-5.html,Expression>> errors can be harder to track down. If the text box containing the <<topics/variables-5.html,Expression>> is red, the issue is with the actual structure of the <<topics/variables-5.html,Expression>> and details will be displayed. In this case the error state will update as the <<topics/variables-5.html,Expression>> is modified so it is easy to see when the issue has been resolved. If the <<topics/variables-5.html,Expression>> is valid and an error is printed at runtime, the issue is usually related to a <<topics/variables-4.html,VariableReference>> and the above tip for using the <<topics/graphs-5.html,Watch Window>> applies.
+<<topics/variables/writing-expressions.html,Expression>> errors can be harder to track down. If the text box containing the <<topics/variables/writing-expressions.html,Expression>> is red, the issue is with the actual structure of the <<topics/variables/writing-expressions.html,Expression>> and details will be displayed. In this case the error state will update as the <<topics/variables/writing-expressions.html,Expression>> is modified so it is easy to see when the issue has been resolved. If the <<topics/variables/writing-expressions.html,Expression>> is valid and an error is printed at runtime, the issue is usually related to a <<topics/variables/accessing-variables.html,VariableReference>> and the above tip for using the <<topics/graphs/debugging.html,Watch Window>> applies.
 
 ### Warnings
 
@@ -75,7 +75,7 @@ Unable to disable object for node '{0)': the object '{1}' is not a GameObject, B
 [cols="1,8"]
 |===
 | {0} | The <<manual/disable-object-node.html,DisableObjectNode>> that triggered the warning.
-| {1} | The <<topics/variables-4.html,VariableReference>> assigned to _Target_ that resolved to an invalid type.
+| {1} | The <<topics/variables/accessing-variables.html,VariableReference>> assigned to _Target_ that resolved to an invalid type.
 |===
 
 Effect:: The <<manual/disable-object-node.html,InstructionGraphNode>> will do nothing.
@@ -95,7 +95,7 @@ Unable to bind enabled state for binding '{0}': the Command '{1}' failed with er
 
 Effect:: The enabled state of _Object_ will not be changed.
 
-Resolution:: If the reported error ({2}) indicates a parameter is invalid, the _Condition_ <<topics/variables-5.html,Expression>> is calling the command incorrectly. Otherwise, the command itself has an error and needs to be edited directly. The message should provide details on how to go about fixing the issue.
+Resolution:: If the reported error ({2}) indicates a parameter is invalid, the _Condition_ <<topics/variables/writing-expressions.html,Expression>> is calling the command incorrectly. Otherwise, the command itself has an error and needs to be edited directly. The message should provide details on how to go about fixing the issue.
 
 #### CEBFE
 
@@ -104,13 +104,13 @@ Unable to bind enabled state for binding '{0}': the expression '{1}' failed with
 [cols="1,8"]
 |===
 | {0} | The <<manual/enable-binding.html,EnableBinding>> that triggered the warning.
-| {1} | The statement in the _Condition_ <<topics/variables-5.html,Expression>> that failed.
+| {1} | The statement in the _Condition_ <<topics/variables/writing-expressions.html,Expression>> that failed.
 | {2} | The error message reported by the expression.
 |===
 
 Effect:: The enabled state of _Object_ will not be changed.
 
-Resolution:: The reported error ({2}) should provide details on how to go about fixing the _Condition_ <<topics/variables-5.html,Expression>>.
+Resolution:: The reported error ({2}) should provide details on how to go about fixing the _Condition_ <<topics/variables/writing-expressions.html,Expression>>.
 
 #### CEBIO
 
@@ -133,7 +133,7 @@ Unable to bind enabled state for binding '{0}': the expression '{1}' did not eva
 [cols="1,8"]
 |===
 | {0} | The <<manual/enable-binding.html,EnableBinding>> that triggered the warning.
-| {1} | The final statement in the _Condition_ <<topics/variables-5.html,Expression>>.
+| {1} | The final statement in the _Condition_ <<topics/variables/writing-expressions.html,Expression>>.
 |===
 
 Effect:: The enabled state of _Object_ will not be changed.
@@ -151,7 +151,7 @@ Unable to bind enabled state for binding '{0}': the expression is empty
 
 Effect:: The enabled state of _Object_ will not be changed.
 
-Resolution:: Set the _Condition_ <<topics/variables-5.html,Expression>>.
+Resolution:: Set the _Condition_ <<topics/variables/writing-expressions.html,Expression>>.
 
 #### CEIR
 
@@ -159,10 +159,10 @@ Resolution:: Set the _Condition_ <<topics/variables-5.html,Expression>>.
 
 [cols="1,8"]
 |===
-| {0} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that executed the <<topics/variables-5.html,Expression>>.
-| {1} | The final statement of the <<topics/variables-5.html,Expression>> that was expected to result in a specific type.
-| {2} | The <<topics/variables-2.html,VariableType>> the caller expected from the result of the expression.
-| {3} | The actual <<topics/variables-2.html,VariableType>> of the result of the expression.
+| {0} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that executed the <<topics/variables/writing-expressions.html,Expression>>.
+| {1} | The final statement of the <<topics/variables/writing-expressions.html,Expression>> that was expected to result in a specific type.
+| {2} | The <<topics/variables/creating-variables.html,VariableType>> the caller expected from the result of the expression.
+| {3} | The actual <<topics/variables/creating-variables.html,VariableType>> of the result of the expression.
 |===
 
 Effect:: The caller ({0}) will still be returned the result and how that result is used is dependent on the specific scenario.
@@ -176,7 +176,7 @@ Unable to enable object for node '{0)': the object '{1}' is not a GameObject, Be
 [cols="1,8"]
 |===
 | {0} | The <<manual/enable-object-node.html,EnableObjectNode>> that triggered the warning.
-| {1} | The <<topics/variables-4.html,VariableReference>> assigned to _Target_ that resolved to an invalid type.
+| {1} | The <<topics/variables/accessing-variables.html,VariableReference>> assigned to _Target_ that resolved to an invalid type.
 |===
 
 Effect:: The <<manual/enable-object-node.html,EnableObjectNode>> will do nothing.
@@ -196,7 +196,7 @@ Unable to bind text for binding '{0}': the Command '{1}' failed with error '{2}'
 
 Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
 
-Resolution:: If the reported error ({2}) indicates a parameter is invalid, the _Expression_ <<topics/variables-5.html,Expression>> is calling the command incorrectly. Otherwise, the command itself has an error and needs to be edited directly. The message should provide details on how to go about fixing the issue.
+Resolution:: If the reported error ({2}) indicates a parameter is invalid, the _Expression_ <<topics/variables/writing-expressions.html,Expression>> is calling the command incorrectly. Otherwise, the command itself has an error and needs to be edited directly. The message should provide details on how to go about fixing the issue.
 
 #### CEXBFE
 
@@ -205,13 +205,13 @@ Unable to bind text for binding '{0}': the expression '{1}' failed with error '{
 [cols="1,8"]
 |===
 | {0} | The <<manual/expression-binding.html,ExpressionBinding>> that triggered the warning.
-| {1} | The statement in the _Expression_ <<topics/variables-5.html,Expression>> that failed.
+| {1} | The statement in the _Expression_ <<topics/variables/writing-expressions.html,Expression>> that failed.
 | {2} | The error message reported by the expression.
 |===
 
 Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
 
-Resolution:: The reported error ({2}) should provide details on how to go about fixing the _Expression_ <<topics/variables-5.html,Expression>>.
+Resolution:: The reported error ({2}) should provide details on how to go about fixing the _Expression_ <<topics/variables/writing-expressions.html,Expression>>.
 
 #### CEXBMV
 
@@ -224,7 +224,7 @@ Unable to bind text for binding '{0}': the expression is empty
 
 Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
 
-Resolution:: Set the _Expression_ <<topics/variables-5.html,Expression>>.
+Resolution:: Set the _Expression_ <<topics/variables/writing-expressions.html,Expression>>.
 
 #### CIGNIA
 
@@ -232,13 +232,13 @@ Failed to assign to variable '{0}' from node '{1}': the variable has an incompat
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid <<topics/variables/creating-variables.html,VariableType>>.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to assign to the variable.
 |===
 
 Effect:: The assignment will not be performed.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it either resolves to a variable with the correct type or resolves to a variable that can be assigned any type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it either resolves to a variable with the correct type or resolves to a variable that can be assigned any type.
 
 #### CIGNIE
 
@@ -246,13 +246,13 @@ Failed to resolve variable '{0}' on node '{1}': the variable has enum type '{2}'
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid enum type.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid enum type.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
 |===
 
 Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct enum type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct enum type.
 
 #### CIGNIO
 
@@ -260,7 +260,7 @@ Failed to resolve variable '{0}' on node '{1}': the object '{2}' is a '{3}' and 
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid object type.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid object type.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
 | {2} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that was resolved but is not the correct type.
 | {3} | The type of the resolved https://docs.unity3d.com/ScriptReference/Object.html[Object^].
@@ -269,7 +269,7 @@ Failed to resolve variable '{0}' on node '{1}': the object '{2}' is a '{3}' and 
 
 Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct object type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct object type.
 
 #### CIGNIT
 
@@ -277,7 +277,7 @@ Failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot 
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid type.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid type.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
 | {2} | The type of the resolved value.
 | {3} | The type the <<manual/instruction-graph-node.html,InstructionGraphNode>> expected.
@@ -285,7 +285,7 @@ Failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot 
 
 Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct type.
 
 #### CIGNIV
 
@@ -293,15 +293,15 @@ Failed to resolve variable '{0}' on node '{1}': the variable has type '{2}' and 
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid <<topics/variables/creating-variables.html,VariableType>>.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
-| {2} | The <<topics/variables-2.html,VariableType>> of the resolved value.
-| {3} | The <<topics/variables-2.html,VariableType>> the <<manual/instruction-graph-node.html,InstructionGraphNode>> expected.
+| {2} | The <<topics/variables/creating-variables.html,VariableType>> of the resolved value.
+| {3} | The <<topics/variables/creating-variables.html,VariableType>> the <<manual/instruction-graph-node.html,InstructionGraphNode>> expected.
 |===
 
 Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a variable with the correct type.
 
 #### CIGNMA
 
@@ -309,13 +309,13 @@ Failed to assign to variable '{0}' from node '{1}': the variable could not be fo
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that could not be resolved.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be resolved.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to assign to the variable.
 |===
 
 Effect:: The assignment will not be performed.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a valid variable.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a valid variable.
 
 #### CIGNMV
 
@@ -323,13 +323,13 @@ Failed to resolve variable '{0}' on node '{1}': the variable could not be found
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that could not be resolved.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be resolved.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to resolve the variable.
 |===
 
 Effect:: The effect depends on the <<manual/instruction-graph-node.html,InstructionGraphNode>>. Usually it will skip performing its action but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a valid variable.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a valid variable.
 
 #### CIGNROA
 
@@ -337,13 +337,13 @@ Failed to assign to variable '{0}' from node '{1}': the variable is read only
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to a read only variable.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to a read only variable.
 | {1} | The <<manual/instruction-graph-node.html,InstructionGraphNode>> that attempted to assign to the variable.
 |===
 
 Effect:: The assignment will not be performed.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a writable variable.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/instruction-graph-node.html,InstructionGraphNode>> so it resolves to a writable variable.
 
 #### CIMMV
 
@@ -351,13 +351,13 @@ Unable to get text from Message '{0}': the Variable '{1}' could not be found
 
 [cols="1,8"]
 |===
-| {0} | The format of the <<topics/interface-3.html,Message>> that is being resolved.
-| {1} | The <<topics/variables-4.html,VariableReference>> that could not be found.
+| {0} | The format of the <<topics/interface/messages.html,Message>> that is being resolved.
+| {1} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be found.
 |===
 
 Effect:: The text of the message will have the failed section omitted.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> in the <<topics/interface-3.html,Message>> to a valid variable.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> in the <<topics/interface/messages.html,Message>> to a valid variable.
 
 #### CNBIV
 
@@ -365,14 +365,14 @@ Failed to resolve variable '{0}' on binding '{1}': the variable has type '{2}' a
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid <<topics/variables/creating-variables.html,VariableType>>.
 | {1} | The <<manual/number-binding.html,NumberBinding>> that attempted to resolve the variable.
-| {2} | The <<topics/variables-2.html,VariableType>> of the resolved value.
+| {2} | The <<topics/variables/creating-variables.html,VariableType>> of the resolved value.
 |===
 
 Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will be hidden and cleared.
 
-Resolution:: If the effect of disabling the http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] is desired, set _Suppress Errors_ on the <<manual/number-binding.html,NumberBinding>>. Otherwise, change the <<topics/variables-4.html,VariableReference>> to a valid variable.
+Resolution:: If the effect of disabling the http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] is desired, set _Suppress Errors_ on the <<manual/number-binding.html,NumberBinding>>. Otherwise, change the <<topics/variables/accessing-variables.html,VariableReference>> to a valid variable.
 
 #### CNSLS
 
@@ -381,12 +381,12 @@ Unable to load scene on node '{0}': the variable '{1}' could not be found
 [cols="1,8"]
 |===
 | {0} | The <<manual/load-scene-node.html,LoadSceneNode>> that attempted to resolve the variable.
-| {1} | The <<topics/variables-4.html,VariableReference>> that could not be found.
+| {1} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be found.
 |===
 
 Effect:: No scenes will be loaded or unloaded and the <<manual/load-scene-node.html,LoadSceneNode>> will complete immediately.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
 
 #### CNSUS
 
@@ -395,12 +395,12 @@ Unable to unload scene for node '{0}': the scene '{1}' could not be found
 [cols="1,8"]
 |===
 | {0} | The <<manual/unload-scene-node.html,UnloadSceneNode>> that attempted to resolve the variable.
-| {1} | The <<topics/variables-4.html,VariableReference>> that could not be found.
+| {1} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be found.
 |===
 
 Effect:: No scenes will be unloaded and the <<manual/unload-scene-node.html,UnloadSceneNode>> will complete immediately.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
 
 #### CVBIA
 
@@ -408,13 +408,13 @@ Failed to assign to variable '{0}' from binding '{1}': the variable has an incom
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid <<topics/variables/creating-variables.html,VariableType>>.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to assign to the variable.
 |===
 
 Effect:: The assignment will not be performed.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it either resolves to a variable with the correct type or resolves to a variable that can be assigned any type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it either resolves to a variable with the correct type or resolves to a variable that can be assigned any type.
 
 #### CVBIE
 
@@ -422,13 +422,13 @@ Failed to resolve variable '{0}' on binding '{1}': the variable has enum type '{
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid enum type.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid enum type.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to resolve the variable.
 |===
 
 Effect:: The effect depends on the <<manual/variable-binding.html,VariableBinding>>. Usually it will hide the associated object but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct enum type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct enum type.
 
 #### CVBIO
 
@@ -436,7 +436,7 @@ Failed to resolve variable '{0}' on node '{1}': the object '{2}' is a '{3}' and 
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid object type.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid object type.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to resolve the variable.
 | {2} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that was resolved but is not the correct type.
 | {3} | The type of the resolved https://docs.unity3d.com/ScriptReference/Object.html[Object^].
@@ -445,7 +445,7 @@ Failed to resolve variable '{0}' on node '{1}': the object '{2}' is a '{3}' and 
 
 Effect:: The effect depends on the <<manual/variable-binding.html,VariableBinding>>. Usually it will hide the associated object but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct object type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct object type.
 
 #### CVBIT
 
@@ -453,7 +453,7 @@ Failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot 
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid type.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid type.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to resolve the variable.
 | {2} | The type of the resolved value.
 | {3} | The type the <<manual/variable-binding.html,VariableBinding>> expected.
@@ -461,7 +461,7 @@ Failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot 
 
 Effect:: The effect depends on the <<manual/variable-binding.html,VariableBinding>>. Usually it will hide the associated object but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct type.
 
 #### CVBIV
 
@@ -469,15 +469,15 @@ Failed to resolve variable '{0}' on binding '{1}': the variable has type '{2}' a
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to an invalid <<topics/variables-2.html,VariableType>>.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to an invalid <<topics/variables/creating-variables.html,VariableType>>.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to resolve the variable.
-| {2} | The <<topics/variables-2.html,VariableType>> of the resolved value.
-| {3} | The <<topics/variables-2.html,VariableType>> the <<manual/variable-binding.html,VariableBinding>> expected.
+| {2} | The <<topics/variables/creating-variables.html,VariableType>> of the resolved value.
+| {3} | The <<topics/variables/creating-variables.html,VariableType>> the <<manual/variable-binding.html,VariableBinding>> expected.
 |===
 
 Effect:: The effect depends on the <<manual/variable-binding.html,VariableBinding>>. Usually it will hide the associated object but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct type.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a variable with the correct type.
 
 #### CVBMA
 
@@ -485,13 +485,13 @@ Failed to assign to variable '{0}' from binding '{1}': the variable could not be
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that could not be resolved.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be resolved.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to assign to the variable.
 |===
 
 Effect:: The assignment will not be performed.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a valid variable.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a valid variable.
 
 #### CVBMV
 
@@ -499,13 +499,13 @@ Failed to resolve variable '{0}' on binding '{1}': the variable could not be fou
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that could not be resolved.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be resolved.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to resolve the variable.
 |===
 
 Effect:: The effect depends on the <<manual/variable-binding.html,VariableBinding>>. Usually it will hide the associated object but it may use a default value instead.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a valid variable.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a valid variable.
 
 #### CVBROA
 
@@ -513,13 +513,13 @@ Failed to assign to variable '{0}' from binding '{1}': the variable is read only
 
 [cols="1,8"]
 |===
-| {0} | The <<topics/variables-4.html,VariableReference>> that resolved to a read only variable.
+| {0} | The <<topics/variables/accessing-variables.html,VariableReference>> that resolved to a read only variable.
 | {1} | The <<manual/variable-binding.html,VariableBinding>> that attempted to assign to the variable.
 |===
 
 Effect:: The assignment will not be performed.
 
-Resolution:: Change the <<topics/variables-4.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a writable variable.
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> on the <<manual/variable-binding.html,VariableBinding>> so it resolves to a writable variable.
 
 #### CWWIW
 
@@ -527,13 +527,13 @@ Unable to watch variable '{0}' of type '{1}' - only variable stores can be watch
 
 [cols="1,8"]
 |===
-| {0} | The variable that was entered in the <<topics/graphs-5.html,watch window>>.
-| {1} | The <<topics/variables-2.html,VariableType>> of the variable that was entered.
+| {0} | The variable that was entered in the <<topics/graphs/debugging.html,watch window>>.
+| {1} | The <<topics/variables/creating-variables.html,VariableType>> of the variable that was entered.
 |===
 
 Effect:: The variable will not be added to the watch window.
 
-Resolution:: This only happens in the editor as a result of entering an invalid variable in the manual entry of the <<topics/graphs-5.html,watch window>>.
+Resolution:: This only happens in the editor as a result of entering an invalid variable in the manual entry of the <<topics/graphs/debugging.html,watch window>>.
 
 #### CWWMW
 
@@ -541,12 +541,12 @@ Unable to find variable '{0}' to watch
 
 [cols="1,8"]
 |===
-| {0} | The variable that was entered in the <<topics/graphs-5.html,watch window>>.
+| {0} | The variable that was entered in the <<topics/graphs/debugging.html,watch window>>.
 |===
 
 Effect:: The variable will not be added to the watch window.
 
-Resolution:: This only happens in the editor as a result of entering an invalid variable in the manual entry of the <<topics/graphs-5.html,watch window>>.
+Resolution:: This only happens in the editor as a result of entering an invalid variable in the manual entry of the <<topics/graphs/debugging.html,watch window>>.
 
 ### Errors
 
@@ -556,12 +556,12 @@ Failed to execute Command '{0}' on '{1}': {2}
 
 [cols="1,8"]
 |===
-| {0} | The command called from an <<topics/variables-5.html,Expression>> that failed.
-| {1} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that initiated execution of the <<topics/variables-5.html,Expression>>.
+| {0} | The command called from an <<topics/variables/writing-expressions.html,Expression>> that failed.
+| {1} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that initiated execution of the <<topics/variables/writing-expressions.html,Expression>>.
 | {2} | The error message from the failed command.
 |===
 
-Effect:: Execution of the <<topics/variables-5.html,Expression>> that called the command will stop and result in an empty variable.
+Effect:: Execution of the <<topics/variables/writing-expressions.html,Expression>> that called the command will stop and result in an empty variable.
 
 Resolution:: Fixing the error means fixing the command. The content of the error message should help explain what needs to be fixed but the most common errors are either giving the command an invalid number of parameters or a parameter with an invalid type. The documentation for the command will detail the required number and type of parameters.
 
@@ -599,14 +599,14 @@ Failed to execute Expression '{0}' on '{1}': {2}
 
 [cols="1,8"]
 |===
-| {0} | The statement in the <<topics/variables-5.html,Expression>> that failed.
-| {1} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that initiated execution of the <<topics/variables-5.html,Expression>>.
-| {2} | The error message from the failed comman<<topics/variables-5.html,Expression>>.
+| {0} | The statement in the <<topics/variables/writing-expressions.html,Expression>> that failed.
+| {1} | The https://docs.unity3d.com/ScriptReference/Object.html[Object^] that initiated execution of the <<topics/variables/writing-expressions.html,Expression>>.
+| {2} | The error message from the failed comman<<topics/variables/writing-expressions.html,Expression>>.
 |===
 
-Effect:: Execution of the <<topics/variables-5.html,Expression>> will stop and result in an empty variable.
+Effect:: Execution of the <<topics/variables/writing-expressions.html,Expression>> will stop and result in an empty variable.
 
-Resolution:: The content of the error message should help explain what needs to be fixed in the <<topics/variables-5.html,Expression>>.
+Resolution:: The content of the error message should help explain what needs to be fixed in the <<topics/variables/writing-expressions.html,Expression>>.
 
 #### CELDK
 
@@ -614,7 +614,7 @@ Failed to add keyword '{0}': a keyword with the same text has already been added
 
 [cols="1,8"]
 |===
-| {0} | The keyword that was attempted to be added to the <<topics/variables-5.html,Expression>> system.
+| {0} | The keyword that was attempted to be added to the <<topics/variables/writing-expressions.html,Expression>> system.
 |===
 
 Effect:: The new keyword won't be added leaving the existing one with the same name in place.
@@ -627,7 +627,7 @@ Failed to add constant '{0}': a constant with the same text has already been add
 
 [cols="1,8"]
 |===
-| {0} | The constant that was attempted to be added to the <<topics/variables-5.html,Expression>> system.
+| {0} | The constant that was attempted to be added to the <<topics/variables/writing-expressions.html,Expression>> system.
 |===
 
 Effect:: The new constant won't be added leaving the existing one with the same name in place.
@@ -640,7 +640,7 @@ Failed to add Command '{0}': a Command with the same name has already been added
 
 [cols="1,8"]
 |===
-| {0} | The command that was attempted to be added to the <<topics/variables-5.html,Expression>> system.
+| {0} | The command that was attempted to be added to the <<topics/variables/writing-expressions.html,Expression>> system.
 |===
 
 Effect:: The new command won't be added leaving the existing one with the same name in place.
@@ -653,7 +653,7 @@ Failed to add infix operator '{0}': an infix operator with the same symbol has a
 
 [cols="1,8"]
 |===
-| {0} | The symbol for the operator that was attempted to be added to the <<topics/variables-5.html,Expression>> system.
+| {0} | The symbol for the operator that was attempted to be added to the <<topics/variables/writing-expressions.html,Expression>> system.
 |===
 
 Effect:: The new operator won't be added leaving the existing one with the same name in place.
@@ -666,7 +666,7 @@ Failed to add prefix operator '{0}': a prefix operator with the same symbol has 
 
 [cols="1,8"]
 |===
-| {0} | The symbol for the operator that was attempted to be added to the <<topics/variables-5.html,Expression>> system.
+| {0} | The symbol for the operator that was attempted to be added to the <<topics/variables/writing-expressions.html,Expression>> system.
 |===
 
 Effect:: The new operator won't be added leaving the existing one with the same name in place.
@@ -680,15 +680,15 @@ Expression: {0}
 
 [cols="1,8"]
 |===
-| {0} | The full text of the <<topics/variables-5.html,Expression>> that could not be parsed.
-| {1} | The character index in the <<topics/variables-5.html,Expression>> text where the error happened.
-| {2} | The token in the <<topics/variables-5.html,Expression>> text where the error happened.
+| {0} | The full text of the <<topics/variables/writing-expressions.html,Expression>> that could not be parsed.
+| {1} | The character index in the <<topics/variables/writing-expressions.html,Expression>> text where the error happened.
+| {2} | The token in the <<topics/variables/writing-expressions.html,Expression>> text where the error happened.
 | {3} | Details about the error.
 |===
 
-Effect:: The <<topics/variables-5.html,Expression>> will not be executable.
+Effect:: The <<topics/variables/writing-expressions.html,Expression>> will not be executable.
 
-Resolution:: Fix the structure of the <<topics/variables-5.html,Expression>> based on the details given in the error message.
+Resolution:: Fix the structure of the <<topics/variables/writing-expressions.html,Expression>> based on the details given in the error message.
 
 #### CIAR
 
@@ -711,7 +711,7 @@ Failed to create context '{0}' for instruction '{1}': the value '{2}' does not s
 |===
 | {0} | The name of the context variable as set on the <<manual/instruction.html,Instruction>>.
 | {1} | The <<manual/instruction.html,Instruction>> that failed to create the context.
-| {2} | The value that was sent to the <<manual/instruction.html,Instruction>> as the context but didn't match the <<topics/variables-2.html,constraint>>.
+| {2} | The value that was sent to the <<manual/instruction.html,Instruction>> as the context but didn't match the <<topics/variables/creating-variables.html,constraint>>.
 |===
 
 Effect:: The <<manual/instruction.html,Instruction>> will still run, but the context will be empty.
@@ -726,7 +726,7 @@ Failed to create input '{0}' for instruction '{1}': the value '{2}' does not sat
 |===
 | {0} | The name of the input variable that failed as set on the <<manual/instruction.html,Instruction>>.
 | {1} | The <<manual/instruction.html,Instruction>> that failed to create the input.
-| {2} | The value that was sent to the <<manual/instruction.html,Instruction>> for the input but didn't match the <<topics/variables-2.html,constraint>>.
+| {2} | The value that was sent to the <<manual/instruction.html,Instruction>> for the input but didn't match the <<topics/variables/creating-variables.html,constraint>>.
 |===
 
 Effect:: The <<manual/instruction.html,Instruction>> will still run, but the input will be empty.
@@ -741,12 +741,12 @@ Failed to store output '{0}' for instruction '{1}': the variable '{2}' has an in
 |===
 | {0} | The name of the output variable that failed as set on the <<manual/instruction.html,Instruction>>.
 | {1} | The <<manual/instruction.html,Instruction>> that failed to store the output.
-| {2} | The <<topics/variables-2.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to assign the output to.
+| {2} | The <<topics/variables/creating-variables.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to assign the output to.
 |===
 
 Effect:: The output will not be assigned.
 
-Resolution:: Either change the <<topics/variables-2.html,variable>> the output is assigned to to one with a compatible type or one that can be set to any value, or set the output to be ignored.
+Resolution:: Either change the <<topics/variables/creating-variables.html,variable>> the output is assigned to to one with a compatible type or one that can be set to any value, or set the output to be ignored.
 
 #### CISMI
 
@@ -756,12 +756,12 @@ Failed to read input '{0}' for instruction '{1}': the variable '{2}' could not b
 |===
 | {0} | The name of the input variable that failed as set on the <<manual/instruction.html,Instruction>>.
 | {1} | The <<manual/instruction.html,Instruction>> that failed to store the output.
-| {2} | The <<topics/variables-2.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to read the input from.
+| {2} | The <<topics/variables/creating-variables.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to read the input from.
 |===
 
 Effect:: The <<manual/instruction.html,Instruction>> will still run, but the input will be empty.
 
-Resolution:: Either change the <<topics/variables-2.html,variable>> the input is read from or change the input to a specific value.
+Resolution:: Either change the <<topics/variables/creating-variables.html,variable>> the input is read from or change the input to a specific value.
 
 #### CISMO
 
@@ -771,12 +771,12 @@ Failed to store output '{0}' for instruction '{1}': the variable '{2}' could not
 |===
 | {0} | The name of the output variable that failed as set on the <<manual/instruction.html,Instruction>>.
 | {1} | The <<manual/instruction.html,Instruction>> that failed to store the output.
-| {2} | The <<topics/variables-2.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to assign the output to.
+| {2} | The <<topics/variables/creating-variables.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to assign the output to.
 |===
 
 Effect:: The output will not be assigned.
 
-Resolution:: Either change the <<topics/variables-2.html,variable>> the output is assigned to to one with a compatible type or one that can be set to any value, or set the output to be ignored.
+Resolution:: Either change the <<topics/variables/creating-variables.html,variable>> the output is assigned to to one with a compatible type or one that can be set to any value, or set the output to be ignored.
 
 #### CISROO
 
@@ -786,12 +786,12 @@ Failed to store output '{0}' for instruction '{1}': the variable '{2}' is read o
 |===
 | {0} | The name of the output variable that failed as set on the <<manual/instruction.html,Instruction>>.
 | {1} | The <<manual/instruction.html,Instruction>> that failed to store the output.
-| {2} | The <<topics/variables-2.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to assign the output to.
+| {2} | The <<topics/variables/creating-variables.html,variable>> that the <<manual/instruction.html,Instruction>> attempted to assign the output to.
 |===
 
 Effect:: The output will not be assigned.
 
-Resolution:: Either change the <<topics/variables-2.html,variable>> the output is assigned to to one with a compatible type or one that can be set to any value, or set the output to be ignored.
+Resolution:: Either change the <<topics/variables/creating-variables.html,variable>> the output is assigned to to one with a compatible type or one that can be set to any value, or set the output to be ignored.
 
 #### CSCIE
 
@@ -801,12 +801,12 @@ Failed to expand item '{0}' on SelectionControl '{1}': the variable '{2}' is not
 |===
 | {0} | The name of the item sent to the <<manual/selection-control.html,SelectionControl>> that could not be expanded.
 | {1} | The name of the <<manual/selection-control.html,SelectionControl>>.
-| {2} | The <<topics/variables-2.html,variable>> specified on the item that is not a `List`.
+| {2} | The <<topics/variables/creating-variables.html,variable>> specified on the item that is not a `List`.
 |===
 
-Effect:: The item will not be added to the <<topics/interface-4.html,menu>>.
+Effect:: The item will not be added to the <<topics/interface/menus-and-selections.html,menu>>.
 
-Resolution:: Either change _Variables_ on the <<topics/interface-4.html,menu item>> so it refers to a `List` value or disable _Expand_ on the <<topics/interface-4.html,menu item>>
+Resolution:: Either change _Variables_ on the <<topics/interface/menus-and-selections.html,menu item>> so it refers to a `List` value or disable _Expand_ on the <<topics/interface/menus-and-selections.html,menu item>>
 
 #### CSCII
 
@@ -816,12 +816,12 @@ Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' is not
 |===
 | {0} | The name of the item sent to the <<manual/selection-control.html,SelectionControl>> that could not be created.
 | {1} | The name of the <<manual/selection-control.html,SelectionControl>>.
-| {2} | The <<topics/variables-2.html,variable>> specified on the item that is not a `Store` or `List`.
+| {2} | The <<topics/variables/creating-variables.html,variable>> specified on the item that is not a `Store` or `List`.
 |===
 
-Effect:: The item will not be added to the <<topics/interface-4.html,menu>>.
+Effect:: The item will not be added to the <<topics/interface/menus-and-selections.html,menu>>.
 
-Resolution:: Change _Variables_ on the <<topics/interface-4.html,menu item>> so it refers to a `Store` or `List`.
+Resolution:: Change _Variables_ on the <<topics/interface/menus-and-selections.html,menu item>> so it refers to a `Store` or `List`.
 
 #### CSCMC
 
@@ -833,7 +833,7 @@ Failed to create item '{0}' on SelectionControl '{1}': the control does not have
 | {1} | The name of the <<manual/selection-control.html,SelectionControl>>.
 |===
 
-Effect:: The item will not be added to the <<topics/interface-4.html,menu>>.
+Effect:: The item will not be added to the <<topics/interface/menus-and-selections.html,menu>>.
 
 Resolution:: Change the item's _Name_ so it matches the name of a <<manual/menu-item.html,MenuItem>> inside the <<manual/selection-control.html,SelectionControl>>.
 
@@ -845,12 +845,12 @@ Failed to create item '{0}' on SelectionControl '{1}': the variable '{2}' could 
 |===
 | {0} | The name of the item sent to the <<manual/selection-control.html,SelectionControl>> that could not be expanded.
 | {1} | The name of the <<manual/selection-control.html,SelectionControl>>.
-| {2} | The <<topics/variables-2.html,variable>> specified on the item that could not be resolved.
+| {2} | The <<topics/variables/creating-variables.html,variable>> specified on the item that could not be resolved.
 |===
 
-Effect:: The item will not be added to the <<topics/interface-4.html,menu>>.
+Effect:: The item will not be added to the <<topics/interface/menus-and-selections.html,menu>>.
 
-Resolution:: Change _Variables_ on the <<topics/interface-4.html,menu item>> so it refers to a `Store` or `List`.
+Resolution:: Change _Variables_ on the <<topics/interface/menus-and-selections.html,menu item>> so it refers to a `Store` or `List`.
 
 #### CSCMT
 
@@ -862,9 +862,9 @@ Failed to create item '{0}' on SelectionControl '{1}': the template has not been
 | {1} | The name of the <<manual/selection-control.html,SelectionControl>>.
 |===
 
-Effect:: The item will not be added to the <<topics/interface-4.html,menu>>.
+Effect:: The item will not be added to the <<topics/interface/menus-and-selections.html,menu>>.
 
-Resolution:: Assign _Template_ on the <<topics/interface-4.html,menu item>>.
+Resolution:: Assign _Template_ on the <<topics/interface/menus-and-selections.html,menu item>>.
 
 #### CSQIS
 
@@ -900,8 +900,8 @@ Failed to initialize variable on '{0}': the definition specifies type '{1}' but 
 [cols="1,8"]
 |===
 | {0} | The name of the object with the variable that could not be initialized.
-| {1} | The <<topics/variables-2.html,type>> the definition was given.
-| {2} | The <<topics/variables-2.html,type>> the definition's initializer evaluated to.
+| {1} | The <<topics/variables/creating-variables.html,type>> the definition was given.
+| {2} | The <<topics/variables/creating-variables.html,type>> the definition's initializer evaluated to.
 |===
 
 Effect:: The variable will be initialized with a default value.

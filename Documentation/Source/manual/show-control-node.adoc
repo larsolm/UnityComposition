@@ -4,8 +4,8 @@
 
 A Show Control Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will activate an <<manual/interface-control.html,Interface Control>>. Create a Show Control Node in the menu:Create[Interface > Show Control] menu of the Instruction Graph Window.
 
-See the <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
-See the <<topics/interface-2,Controls>> topic for more information on interface controls. +
+See the <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
+See the <<topics/interface/controls,Controls>> topic for more information on interface controls. +
 See the "Show Timer" node on the "MazeStart" <<manual/instruction-graph,Instruction Graph>> in the Maze project for an example usage.
 
 ### Fields

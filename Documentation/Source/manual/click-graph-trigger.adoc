@@ -4,7 +4,7 @@
 
 Click Graph Trigger is an <<manual/instruction-trigger.html,Instruction Trigger>> that will run its <<instruction-graph.html,Instruction Graph>> when it is clicked on.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 See the _"Card"_ prefab in the CardGame project for an example usage.
 
 NOTE: Because this uses Unity's IPointerHandler interface the object must have either a https://docs.unity3d.com/ScriptReference/UI.Graphic.html[Graphic^] or a https://docs.unity3d.com/ScriptReference/Collider.html[Collider^] and the https://docs.unity3d.com/ScriptReference/Canvas.html[Canvas^] or https://docs.unity3d.com/ScriptReference/Camera.html[Camera^] must have a https://docs.unity3d.com/ScriptReference/UI.GraphicRaycaster.html[GraphicRaycaster^] or https://docs.unity3d.com/ScriptReference/EventSystems.PhysicsRaycaster.html[PhysicsRaycaster^] respectively.

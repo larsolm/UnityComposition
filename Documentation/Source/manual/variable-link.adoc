@@ -4,7 +4,7 @@
 
 A Variable Link is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] used to add <<reference/variable-value.html,Variables>> to the <<manual/composition-manager.html,Composition Manager>>'s `global` <<reference/variable-store.html,Variable Store>>.
 
-See <<topics/variables-1.html,Variables>> for more information. +
+See <<topics/variables/overview.html,Variables>> for more information. +
 See the _"Main Camera"_ object in the _"Battle"_ scene of the Battle project for an example usage.
 
 ### Fields

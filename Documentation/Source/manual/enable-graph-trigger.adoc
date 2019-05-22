@@ -4,7 +4,7 @@
 
 Enable Graph Trigger is an <<manual/instruction-trigger.html,Instruction Trigger>> that will run its <<manual/instruction-graph.html,Instruction Graph>> when this object becomes enabled (in its `OnEnable()` message).
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 See the "Gate" objects in the _"Maze3"_ scene of the Maze project for an example usage.
 
 ifdef::backend-multipage_html5[]

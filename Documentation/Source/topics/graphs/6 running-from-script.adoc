@@ -1,0 +1,28 @@
+[#topics/graphs/running-from-script]
+
+## Running Graphs From Script
+
+Running graphs from script is as simple as calling `CompositionManager.Instance.RunInstruction()`.
+
+IMPORTANT: When storing a graph that will be serialized on an object it is important to define it as a <<reference/instruction-caller.html,InstructionColler>> instead of a standard instruction. This will ensure that inputs and outputs on the referenced graph are read and written correctly.
+
+The following example will run a graph when its object is loaded:
+[source,cs]
+----
+	public class RunGraph : MonoBehaviour
+	{
+		public InstructionCaller Graph = new InstructionCaller(); <1>
+
+		void Start()
+		{
+			if (Graph.Instruction && !Graph.IsRunning) <2>
+				CompositionManager.Instance.RunInstruction(Graph, CompositionManager.Instance.DefaultStore, VariableValue.Create(this)); <3>
+		}
+	}
+----
+
+<1> The graph to run - notice this is an <<reference/instruction-caller.html,InstructionCaller>>
+<2> Make sure to check if the caller's instruction is set and not already running from another process
+<3> Passes the <<manual/composition-manager.html,Composition Manager>>'s default store to use for references to inputs and outputs (second parameter) and `this` as the graph's context object (third parameter)
+
+See <<manual/instruction-trigger.html,Instruction Trigger>> and its derived classes for other examples of running graphs from script.

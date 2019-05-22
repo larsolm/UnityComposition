@@ -4,7 +4,7 @@
 
 A Branch Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will branch to any number of different nodes based on the the string evaluation of an <<reference/expression.html,Expression>>. This can be thought of similar to a switch statement in C#. Create a Branch Node in the menu:Create[Control Flow > Branch] menu of the Instruction Graph Window.
 
-See <<topics/graphs-3.html,Control Flow>> for more information. +
+See <<topics/graphs/control-flow.html,Control Flow>> for more information. +
 See the node named _"Branch on Action_" on the _"Battle"_ <<manual/instruction-graph.html,Instruction Graph>> in the Battle project for an example usage.
 
 ### Fields

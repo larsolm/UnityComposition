@@ -4,7 +4,7 @@
 
 Object Binding Root is a <<manual/binding-root.html,Binding Root>> that references a specific https://docs.unity3d.com/ScriptReference/Object.html[Object^] and uses it as the binding variables for the child <<manual/variable-binding.html,Variable Bindings>>.
 
-See <<topics/bindings-2.html,Binding Roots>> for more information on binding roots. +
+See <<topics/bindings/binding-roots.html,Binding Roots>> for more information on binding roots. +
 See the _"TriangleDisplay"_ and _"HexagonDisplay"_ objects in the _"Battle"_ scene of the Battle project for an example usage.
 
 ### Fields

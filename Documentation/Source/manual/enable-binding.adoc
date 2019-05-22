@@ -6,7 +6,7 @@ Enable Binding is a <<manual/variable-binding.html,Variable Binding>> that will 
 
 NOTE: If _Object_ is set to this binding or the https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] that has this binding, then the _AutoUpdate_ flag will not function as this binding will not receive `UpdateBinding()` calls from the <<manual/composition-manager.html,Composition Manager>>
 
-See <<topics/bindings-3.html,Variable Bindings>> for more information. +
+See <<topics/bindings/variable-bindings.html,Variable Bindings>> for more information. +
 See the _"MazeUi"_ scene in the Maze project for an example usage.
 
 ### Fields

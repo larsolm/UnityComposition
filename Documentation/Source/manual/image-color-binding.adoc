@@ -4,7 +4,7 @@
 
 Image Color Binding is a <<manual/variable-binding.html,Variable Binding>> that will set the blend color of a sibling https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] based on the given <<reference/variable-reference.html,VariableReference>>. If _Variable_ is invalid, then the image will be disabled.
 
-See <<topics/bindings-3.html,Variable Bindings>> for more information. +
+See <<topics/bindings/variable-bindings.html,Variable Bindings>> for more information. +
 
 ### Fields
 

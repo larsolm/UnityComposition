@@ -4,7 +4,7 @@
 
 A Create Game Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will spawn a Prefab at the given Name, Position, and Rotation relative to the world, another object, or as a child object. The created object can optionally be stored in a given <<reference/variable-reference.html,VariableReference>> so that it can be accessed later. Create a Create Game Object Node in the menu:Create[Object Manipulation > Create Game Object] menu of the Instruction Graph Window.
 
-See <<topics/graphs-1.html,Graphs>> for more information on instruction graphs. +
+See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 See the "Create Highlight" node on the "BoardTakeTurn" <<manual/instruction-graph.html,Instruction Graph>> in the BoardGame project for an example usage.
 
 ### Fields

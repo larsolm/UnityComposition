@@ -1,0 +1,23 @@
+[#topics/bindings/custom-binding-roots]
+
+## Creating Custom Binding Roots
+
+To create custom binding roots, derive from <<reference/binding-root.html,BindingRoot>> and override the _Value_ property. The following is an example of a custom binding root uses an Object that is set in the editor as the value for child variable bindings to look up data on.
+
+[source,cs]
+----
+	public class ObjectBindingRoot : BindingRoot
+	{
+		public Object Object;
+
+		public override VariableValue Value
+		{
+			get
+			{
+				return Object ? VariableValue.Create(Object) : VariableValue.Empty;
+			}
+		}
+	}
+----
+
+Other examples of custom binding roots are the <<manual/focus-binding-root.html,Focus Binding Root>> and the <<manual/menu-item.html,Menu Item>>.
