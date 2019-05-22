@@ -1,7 +1,7 @@
 [#tutorials/getting-started/transitions]
 
-## Title
+## Data Bindings
 
 video::hfwxXAbk[youtube]
 
-The description
+Automatically bind and display variables in your UI

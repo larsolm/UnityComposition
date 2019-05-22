@@ -1,7 +1,7 @@
 [#tutorials/getting-started/game-logic]
 
-## Title
+## Game Logic
 
-video::hfwxXAbk[youtube]
+video::f8SyQScEFG8[youtube]
 
-The description
+Learn about expressions, variables, and create some basic game logic.

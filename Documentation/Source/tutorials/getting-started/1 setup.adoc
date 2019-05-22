@@ -1,7 +1,7 @@
 [#tutorials/getting-started/setup]
 
-## Title
+## Setup
 
-video::4xOs599U6OQ[youtube]
+video::WT98-JwWO1s[youtube]
 
-The description
+Create your first instruction graph!

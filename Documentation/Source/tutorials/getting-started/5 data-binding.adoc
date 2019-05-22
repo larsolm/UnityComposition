@@ -1,7 +1,7 @@
 [#tutorials/getting-started/data-binding]
 
-## Title
+## Data Binding
 
 video::hfwxXAbk[youtube]
 
-The description
+Automatically bind and display variables in your UI
