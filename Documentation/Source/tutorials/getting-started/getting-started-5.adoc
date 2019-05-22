@@ -1,7 +1,0 @@
-[#tutorials/getting-started-5]
-
-## Title
-
-video::hfwxXAbk[youtube]
-
-The description
