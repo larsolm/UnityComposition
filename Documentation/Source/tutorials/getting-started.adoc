@@ -1,0 +1,17 @@
+include::getting-started/getting-started-1.adoc[]
+
+<<<
+
+include::getting-started/getting-started-2.adoc[]
+
+<<<
+
+include::getting-started/getting-started-3.adoc[]
+
+<<<
+
+include::getting-started/getting-started-4.adoc[]
+
+<<<
+
+include::getting-started/getting-started-5.adoc[]

@@ -2,7 +2,7 @@
 
 ## Log Descriptions
 
-The following lists all the warning and error messages that may be printed to the https://docs.unity3d.com/Manual/Console.html[Console^] by the Composition Framework. Each message has an associated id that corresponds to an entry in this list for easy searchability. For example the following image shows an error with id `CEEE`. Searching this page for an id will take you to the entry which will explain in more detail what the message means, the effect on execution, and potential ways to fix it.
+The following is a comprehensive list of the warning and error messages that may be printed to the https://docs.unity3d.com/Manual/Console.html[Console^] by the Composition Framework. Each message has an associated id that corresponds to an entry in this list for easy searchability. For example the following image shows an error with id `CEEE`. Searching this page for an id will take you to the entry which will explain in more detail what the message means, the effect on execution, and potential ways to fix it.
 
 image::error.png[Console Error]
 

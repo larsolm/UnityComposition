@@ -1,0 +1,7 @@
+[#tutorials/walkthrough-battle]
+
+## Title
+
+video::4xOs599U6OQ[youtube]
+
+The description
