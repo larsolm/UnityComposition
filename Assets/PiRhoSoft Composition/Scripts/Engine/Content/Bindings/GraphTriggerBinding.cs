@@ -33,7 +33,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			_value = value;
 
-			CompositionManager.Instance.RunInstruction(Graph, Variables, VariableValue.Create(this));
+			CompositionManager.Instance.RunInstruction(Graph, Variables, VariableValue.Create(gameObject));
 
 			while (Graph.IsRunning)
 				yield return null;
