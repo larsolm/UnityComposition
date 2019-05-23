@@ -123,7 +123,9 @@ namespace PiRhoSoft.DocGenEditor
 					return false;
 			}
 
-			var expression = new Regex(@"(class|struct|enum|interface)\s" + type.Name + @"[<\s]");
+			var typeName = Regex.Replace(type.Name, "`.*", "");
+
+			var expression = new Regex(@"(class|struct|enum|interface)\s" + typeName + @"[<\s]");
 			return expression.IsMatch(contents);
 		}
 
@@ -185,6 +187,8 @@ namespace PiRhoSoft.DocGenEditor
 
 		private string GenerateType(Category category, Section section, DocumentationType type)
 		{
+			var name = type.Type.IsGenericTypeDefinition ? type.Name + "&lt;&gt;" : type.Name;
+
 			return Templates.Type
 				.Replace(DocumentationGenerator.CategoryNameTag, category.Name)
 				.Replace(DocumentationGenerator.CategoryNiceNameTag, category.NiceName)
@@ -192,7 +196,7 @@ namespace PiRhoSoft.DocGenEditor
 				.Replace(DocumentationGenerator.SectionNameTag, section.Name)
 				.Replace(DocumentationGenerator.SectionNiceNameTag, section.NiceName)
 				.Replace(DocumentationGenerator.SectionIdTag, section.Id)
-				.Replace(DocumentationGenerator.TypeNameTag, type.Name)
+				.Replace(DocumentationGenerator.TypeNameTag, name)
 				.Replace(DocumentationGenerator.TypeNiceNameTag, type.NiceName)
 				.Replace(DocumentationGenerator.TypeIdTag, type.Id)
 				.Replace(DocumentationGenerator.TypeFilenameTag, type.Filename);

@@ -129,10 +129,7 @@ namespace PiRhoSoft.DocGenEditor
 
 		private bool IsTypeIncluded(Type type)
 		{
-			if (type.IsGenericTypeDefinition)
-				return DocumentationGenerator.IsTypeIncluded(type, IncludedTypes, IncludedNamespaces);
-			else
-				return DocumentationGenerator.IsTypeIncluded(type, IncludedTypes, IncludedNamespaces);
+			return DocumentationGenerator.IsTypeIncluded(type, IncludedTypes, IncludedNamespaces);
 		}
 
 		public string GetLink(Type type)
