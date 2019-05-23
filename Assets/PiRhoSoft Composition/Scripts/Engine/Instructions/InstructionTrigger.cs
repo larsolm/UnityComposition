@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public void Run()
 		{
 			if (Graph.Instruction && !Graph.IsRunning)
-				CompositionManager.Instance.RunInstruction(Graph, CompositionManager.Instance.DefaultStore, VariableValue.Create(this));
+				CompositionManager.Instance.RunInstruction(Graph, CompositionManager.Instance.DefaultStore, VariableValue.Create(gameObject));
 		}
 	}
 }
