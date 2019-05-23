@@ -8,7 +8,6 @@ namespace PiRhoSoft.CompositionExample
 	[AddComponentMenu("PiRho Soft/Examples/Player")]
 	public class Player : VariableSetComponent
 	{
-		[MappedVariable] public Camera Camera;
 		[MappedVariable] public float Acceleration = 1.0f;
 
 		private Rigidbody2D _body;
@@ -21,9 +20,6 @@ namespace PiRhoSoft.CompositionExample
 
 		void Update()
 		{
-			if (Camera)
-				Camera.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.transform.position.z);
-
 			if (InputHelper.GetWasButtonPressed("Submit"))
 			{
 				var count = Physics2D.OverlapCircle(_body.position, 1.0f, new ContactFilter2D { useTriggers = true }, _colliders);
@@ -45,12 +41,6 @@ namespace PiRhoSoft.CompositionExample
 			var vertical = InputHelper.GetAxis("Vertical");
 
 			_body.AddForce(new Vector2(horizontal * Acceleration, vertical * Acceleration), ForceMode2D.Impulse);
-		}
-
-		void LateUpdate()
-		{
-			if (Camera)
-				Camera.transform.position = new Vector3(transform.position.x, transform.position.y, Camera.transform.position.z);
 		}
 	}
 }
