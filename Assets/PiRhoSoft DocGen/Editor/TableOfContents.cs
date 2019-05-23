@@ -123,7 +123,7 @@ namespace PiRhoSoft.DocGenEditor
 					return false;
 			}
 
-			var expression = new Regex(@"(class|enum)\s" + type.Name + @"\s");
+			var expression = new Regex(@"(class|struct|enum|interface)\s" + type.Name + @"[<\s]");
 			return expression.IsMatch(contents);
 		}
 
@@ -132,6 +132,9 @@ namespace PiRhoSoft.DocGenEditor
 			var info = new FileInfo(file);
 			var directory = info.Directory;
 			var name = directory.Name;
+
+			if (info.Name == "CompositionManager.cs")
+				return "Instructions";
 
 			while (directory != null && directory.Name != "Engine" && directory.Name != "Editor" && directory.Name != "Scripts" && directory.Name != "Assets")
 			{

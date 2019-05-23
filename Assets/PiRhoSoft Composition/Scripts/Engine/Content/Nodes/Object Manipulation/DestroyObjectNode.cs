@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -20,7 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
 		{
 			if (ResolveObject(variables, Target, out Object target))
-				Destroy(ComponentHelper.GetAsBaseObject(target));
+				Destroy(target);
 
 			graph.GoTo(Next, nameof(Next));
 
