@@ -55,9 +55,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: Destory Door
+  m_Name: Destroy Door
   m_EditorClassIdentifier: 
-  Name: Destory Door
+  Name: Destroy Door
   GraphPosition: {x: 1587.2001, y: 25.6}
   IsBreakpoint: 0
   Next: {fileID: 0}
@@ -263,12 +263,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Transform:
-    _variable: scene.Main Camera
+    _variable: scene.Camera
     _tokens:
     - Type: 0
       Text: scene
     - Type: 0
-      Text: Main Camera
+      Text: Camera
   UseRelativePosition: 0
   UseRelativeRotation: 1
   UseRelativeScale: 1
@@ -426,12 +426,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Transform:
-    _variable: scene.Main Camera
+    _variable: scene.Camera
     _tokens:
     - Type: 0
       Text: scene
     - Type: 0
-      Text: Main Camera
+      Text: Camera
   UseRelativePosition: 0
   UseRelativeRotation: 1
   UseRelativeScale: 1

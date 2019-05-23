@@ -19,11 +19,10 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			if (Graph.Instruction && !Graph.IsRunning)
 			{
-				if (Resolve(variables, Variable, out VariableValue value))
-				{
-					if (!VariableHandler.IsEqual(_value, value).GetValueOrDefault(false))
-						StartCoroutine(VariableChanged(value, status));
-				}
+				Resolve(variables, Variable, out VariableValue value);
+
+				if (!VariableHandler.IsEqual(_value, value).GetValueOrDefault(false))
+					StartCoroutine(VariableChanged(value, status));
 			}
 		}
 

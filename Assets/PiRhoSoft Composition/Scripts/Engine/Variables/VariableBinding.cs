@@ -106,7 +106,7 @@ namespace PiRhoSoft.CompositionEngine
 		public bool Resolve(IVariableStore variables, VariableReference reference, out VariableValue result)
 		{
 			result = reference.GetValue(variables);
-			return true;
+			return !result.IsEmpty;
 		}
 
 		public bool Resolve(IVariableStore variables, VariableReference reference, out bool result)

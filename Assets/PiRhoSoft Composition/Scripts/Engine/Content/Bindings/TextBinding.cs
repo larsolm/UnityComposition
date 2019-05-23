@@ -25,6 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 			}
 			else
 			{
+				_previousValue = VariableValue.Empty;
 				SetText(string.Empty, false);
 			}
 		}
