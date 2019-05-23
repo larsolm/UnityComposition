@@ -177,7 +177,7 @@ MonoBehaviour:
   OnTrue: {fileID: 114530582379309674}
   OnFalse: {fileID: 114348498317395866}
   Condition:
-    _statement: currentSpace.CurrentPiece != null
+    _statement: '!(currentSpace.CurrentPiece is Empty)'
 --- !u!114 &114161564551485726
 MonoBehaviour:
   m_ObjectHideFlags: 1

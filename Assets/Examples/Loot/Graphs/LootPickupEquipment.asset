@@ -106,7 +106,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable: equipment
+    _variable: equipment as GameObject
     _tokens:
     - Type: 0
       Text: equipment
+    - Type: 2
+      Text: GameObject
