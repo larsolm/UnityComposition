@@ -96,7 +96,9 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable: gold
+    _variable: gold as GameObject
     _tokens:
     - Type: 0
       Text: gold
+    - Type: 2
+      Text: GameObject

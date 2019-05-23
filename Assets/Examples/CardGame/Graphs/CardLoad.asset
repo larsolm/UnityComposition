@@ -374,12 +374,14 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable: local.card
+    _variable: local.card as GameObject
     _tokens:
     - Type: 0
       Text: local
     - Type: 0
       Text: card
+    - Type: 2
+      Text: GameObject
 --- !u!114 &114495678880178976
 MonoBehaviour:
   m_ObjectHideFlags: 1

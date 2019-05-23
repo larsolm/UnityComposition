@@ -50,10 +50,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Target:
-    _variable: item
+    _variable: item as GameObject
     _tokens:
     - Type: 0
       Text: item
+    - Type: 2
+      Text: GameObject
 --- !u!114 &114205480592497070
 MonoBehaviour:
   m_ObjectHideFlags: 1

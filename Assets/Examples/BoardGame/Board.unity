@@ -3544,6 +3544,49 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 180}
+--- !u!1 &898653920
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 898653922}
+  - component: {fileID: 898653921}
+  m_Layer: 0
+  m_Name: CompositionManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &898653921
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898653920}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1c3f7831992e3aa4dae6e7dc1474acfe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &898653922
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 898653920}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 27
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &913692880
 GameObject:
   m_ObjectHideFlags: 0
@@ -6737,6 +6780,7 @@ MonoBehaviour:
     _variablesData:
     - AQAHUGxheWVycxMAAAAEAAAAEQAAAAAAAAARAAAAAQAAABEAAAACAAAAEQAAAAMAAAA=
     - AQAGU3BhY2VzEwAAACQAAAARAAAABAAAABEAAAAFAAAAEQAAAAYAAAARAAAABwAAABEAAAAIAAAAEQAAAAkAAAARAAAACgAAABEAAAALAAAAEQAAAAwAAAARAAAADQAAABEAAAAOAAAAEQAAAA8AAAARAAAAEAAAABEAAAARAAAAEQAAABIAAAARAAAAEwAAABEAAAAUAAAAEQAAABUAAAARAAAAFgAAABEAAAAXAAAAEQAAABgAAAARAAAAGQAAABEAAAAaAAAAEQAAABsAAAARAAAAHAAAABEAAAAdAAAAEQAAAB4AAAARAAAAHwAAABEAAAAgAAAAEQAAACEAAAARAAAAIgAAABEAAAAjAAAAEQAAACQAAAARAAAAJQAAABEAAAAmAAAAEQAAACcAAAA=
+    - AQAEUm9sbAIAAAAGAAAA
     _variablesObjects:
     - {fileID: 1315274200}
     - {fileID: 1746312865}
@@ -6788,6 +6832,14 @@ MonoBehaviour:
       _isTypeLocked: 0
       _isConstraintLocked: 0
     - _type: 19
+      _constraint: 
+      _objects: []
+      _tag: 
+      _initializer:
+        _statement: 
+      _isTypeLocked: 0
+      _isConstraintLocked: 0
+    - _type: 2
       _constraint: 
       _objects: []
       _tag: 
