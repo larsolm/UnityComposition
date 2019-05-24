@@ -27,11 +27,13 @@ namespace PiRhoSoft.CompositionEngine
 					{
 						var text = Format.GetFormattedString(i);
 						SetText(text, true);
+						_previousValue = value;
 					}
 					else if (value.TryGetFloat(out float f))
 					{
 						var text = Format.GetFormattedString(f);
 						SetText(text, true);
+						_previousValue = value;
 					}
 					else
 					{
@@ -39,6 +41,7 @@ namespace PiRhoSoft.CompositionEngine
 							Debug.LogWarningFormat(this, _invalidVariableWarning, Variable, name, value.Type);
 
 						SetText(string.Empty, false);
+						_previousValue = VariableValue.Empty;
 					}
 				}
 			}
