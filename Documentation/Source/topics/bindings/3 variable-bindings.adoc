@@ -6,7 +6,7 @@ A Variable Binding itself is a https://docs.unity3d.com/ScriptReference/MonoBeha
 
 ### Updating Bindings
 
-Bindings have an _AutoUpdate_ flag which if set, means that the binding will receive an update call automatically every frame. If _AutoUpdate_ is false then bindings will need to be prompted to update manually, usually via an <<manual/update-binding-node,Update Binding Node>>. Use this cautiously as too many update calls per frame may have performance implications.
+Bindings have an _AutoUpdate_ flag which if set, means that the binding will receive an update call automatically every frame. If _AutoUpdate_ is false then bindings will need to be prompted to update manually, usually via an <<manual/update-binding-node,Update Binding Node>>.
 
 ### Binding Groups
 

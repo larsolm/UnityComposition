@@ -2,7 +2,7 @@
 
 ## Roadmap
 
-This roadmap contains a list of features we have planned future releases. This will be periodically updated with more features, additions, and fixes and more specific information (like release dates) as our plans develop. If there is something you would like to see that isn't listed here, or something that is listed that you would like to voice your support for (and potentially increase its priority), https://discord.gg/E3ccdfy[let us know^]!
+This roadmap contains a list of features we have planned for future releases. This will be periodically updated with more features, additions, and fixes and more specific information (like release dates) as our plans develop. If there is something you would like to see that isn't listed here, or something that is listed that you would like to voice your support for (and potentially increase its priority), https://discord.gg/E3ccdfy[let us know^]!
 
 ### Features
 
@@ -47,4 +47,3 @@ This roadmap contains a list of features we have planned future releases. This w
 * switching focused menus with MenuInput is based on item index without accounting for scrolling - it should be based on the item position instead
 * key events are not repeated when holding down a key
 * GetVariableNames in BindingRoot does not include names from _parent
-* Enum Buttons occasionally draw without taking up the full width - cause unknown

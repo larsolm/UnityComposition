@@ -2,11 +2,11 @@
 
 ## Message Controls
 
-Message Controls are an <<manual/interface-control.html,Interface Control>> used to show a <<reference/message.html,message>>, on a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component. Use a <<manual/message-node.html,Message Node>> to activate a message control and  a <<manual/message-input.html,Message Input>> behaviour to advance the text with input. When shown a message controls starts a https://docs.unity3d.com/ScriptReference/Coroutine.html[Coroutine^] that will run until the message is finished. Utilizing this coroutine, custom messages can be implemented to show certain pages that advance with input, scrolling, letter by letter typewniting, etc. A <<manual/message-node.html,Message Node>> may also optionally wait for the message to complete before moving on to subsequent nodes. A message control's _IsRunning_ flag will be set from when it is shown to when it is finished.
+Message Controls are an <<manual/interface-control.html,Interface Control>> used to show a <<reference/message.html,message>> on a http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component. Use a <<manual/message-node.html,Message Node>> to activate a message control and a <<manual/message-input.html,Message Input>> behaviour to advance the text with input. When shown a message controls starts a https://docs.unity3d.com/ScriptReference/Coroutine.html[Coroutine^] that will run until the message is finished. Utilizing this coroutine, custom messages can be implemented to show certain pages that advance with input, scrolling, letter by letter typewriting, etc. A <<manual/message-node.html,Message Node>> may also optionally wait for the message to complete before moving on to subsequent nodes. A message control's _IsRunning_ flag will be set from when it is shown to when it is finished.
 
 ### Message Node
 
-Create a Message Node in a <<topics/graphs/overview.html,graph>> using the menu:Create[Interface > Message] menu of the Instruction Graph Window. A Message Node will activate a message control, which enables the referenced http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component and set its text to a resolved <<reference/message.html,Message>>. The node can automacally deactivate message control when it is finished is complete if _AutoHide_ is `true`. If _AutoHide_ is `false` then a <<manual/hide-control-node.html,Hide Control Node>> must be used to deactivate it. Message nodes can also delay the amount of time to wait before they deactivate the message control with the _WaitTime_ field.
+Create a Message Node in a <<topics/graphs/overview.html,graph>> using the menu:Create[Interface > Message] menu of the Instruction Graph Window. A Message Node will activate a message control, which enables the referenced http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component and set its text to a resolved <<reference/message.html,Message>>. The node can automacally deactivate the message control when it is finished if _AutoHide_ is `true`. If _AutoHide_ is `false` then a <<manual/hide-control-node.html,Hide Control Node>> must be used to deactivate it. Message nodes can also delay the amount of time to wait before they deactivate the message control with the _WaitTime_ field.
 
 image::message-node-example.png[]
 
@@ -20,14 +20,21 @@ The variables `global.Player.Name` and `local.Npc.Name` will be resolved at runt
 
 ### Input
 
-In order to maintain modularity of behaviours, responding to input in message controls should be done with separate components. Use a <<manual/message-input.html,Message Input>> component to wait for the specified button, _AcceptButton_ to be pressed to finish a message.
+In order to maintain modularity of behaviours, responding to input in message controls should be done with separate components. Use a <<manual/message-input.html,Message Input>> component to wait for a specified button to be pressed to finish a message.
 
 ### Custom Message Nodes
 
-The Message Control provides basic functionality for displaying text, however, most games display messages with much more custom behaviour. Message controls are designed to be extensible desired behaviour can be achieved with little difficulty. The following example shows how to derive from <<manual/message-control.html,Message Control>> to create a paged, typewriter-like effect that responds to two button presses - to fast forward, and to advance:
+The Message Control provides basic functionality for displaying text, however, most games display messages with much more custom behaviour. Message controls are designed with this in mind. The following example shows how to derive from <<manual/message-control.html,Message Control>> to create a paged, typewriter-like effect that responds to two button presses - to fast forward, and to advance:
 
 [source,css]
 ----
+using System.Collections.Generic;
+using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.UtilityEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
 	public class TypewriterControl : MessageControl
 	{
 		public float CharactersPerSecond = 25.0f;
@@ -110,6 +117,7 @@ The Message Control provides basic functionality for displaying text, however, m
 				_typewriter.Advance();
 		}
 	}
+}
 ----
 
 Simply override the `Run()` method and implement your custom behaviour. Notice how `Run()` returns an https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerator?view=netframework-4.80[IEnumerator^]. As mentioned before, this is because message controls are implemented as a https://docs.unity3d.com/ScriptReference/Coroutine.html[Coroutine^]. When the method ends _IsRunning_ will be set to `false`.

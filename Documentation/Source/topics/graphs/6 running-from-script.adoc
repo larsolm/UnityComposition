@@ -4,11 +4,16 @@
 
 Running graphs from script is as simple as calling `CompositionManager.Instance.RunInstruction()`.
 
-IMPORTANT: When storing a graph that will be serialized on an object it is important to define it as a <<reference/instruction-caller.html,InstructionColler>> instead of a standard instruction. This will ensure that inputs and outputs on the referenced graph are read and written correctly.
+IMPORTANT: When storing a graph that will be serialized on an object it is important to define it as an <<reference/instruction-caller.html,InstructionCaller>>. This will ensure that inputs and outputs on the referenced graph are read and written correctly.
 
 The following example will run a graph when its object is loaded:
 [source,cs]
 ----
+using PiRhoSoft.CompositionEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
 	public class RunGraph : MonoBehaviour
 	{
 		public InstructionCaller Graph = new InstructionCaller(); <1>
@@ -19,6 +24,7 @@ The following example will run a graph when its object is loaded:
 				CompositionManager.Instance.RunInstruction(Graph, CompositionManager.Instance.DefaultStore, VariableValue.Create(this)); <3>
 		}
 	}
+}
 ----
 
 <1> The graph to run - notice this is an <<reference/instruction-caller.html,InstructionCaller>>
