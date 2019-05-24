@@ -17,7 +17,7 @@ image::load-scene-node.png[Load Scene Node]
 
 | Source	| The <<referenece/load-scene-node-scene-source,SourceType>> to load the scene based off of
 | Scene	| If `Value`, the <<reference/scene-reference.html,SceneReference>> to load
-| Scene Variable	| If `Variable`, the <<reference/variable-reference.html,VariableReference>> to a string name or build index of the sceen to load
+| Scene Variable	| If `Variable`, the <<reference/variable-reference.html,VariableReference>> to a string name or build index of the scene to load
 | Scene Name	| If `Name`, the string name of the scene to load
 | Scene Index	| If `Index`, the build index of the scene to load
 | Wait For Completion	| Whether to wait until the scene has completed loading before moving to the next node

@@ -16,7 +16,7 @@ image::collision-graph-trigger.png[Collision Graph Trigger]
 | Name	| Description
 
 | Enter Graph	| The <<manual/instruction-graph.html,Instruction Graph>> to run when this object is collided with.
-| Exit Graph	| The <<manual/instruction-graph.html,Instruction Graph>> to run when this object is exited.
+| Exit Graph	| The <<manual/instruction-graph.html,Instruction Graph>> to run when this object stops colliding.
 |===
 
 ifdef::backend-multipage_html5[]

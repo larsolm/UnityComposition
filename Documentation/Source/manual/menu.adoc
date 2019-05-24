@@ -3,7 +3,6 @@
 ## Menu
 
 A Menu is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that provides an interface for adding, removing, selecting, and focusing child <<manual/menu-item.html,Menu Items>>. On its own a Menu is mostly just a container for its child <<manual/menu-item.html,MenuItems>> and requires either a <<manual/list-binding.html,List Binding>> or a <<manual/selection-control.html,Selection Control>> to populate it, and a <<manual/menu-input.html,Menu Input>> to control selection, and focusing.
-See the _"MazeUi"_ scene in the Maze project for an example usage.
 
 See the <<topics/interface/menus-and-selections,Menus and Selections>> topic for more information. +
 See the _"EquimentMenu"_ and _"ItemsMenu"_ objects in the _"LootMenu"_ scene of the Loot project for an example usage.

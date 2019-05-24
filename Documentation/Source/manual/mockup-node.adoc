@@ -2,7 +2,7 @@
 
 ## Mockup Node
 
-A Mockup Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> usually used in conjunction with a <<manual/mockup-graph.html,Mockup Graph>> for the purpose of storyboarding and prototyping. A Mockup Node and have any number of output _Connections_ to other nodes. Create a Mockup Node in the menu:Create[Debug > Mockup] menu of the Instruction Graph Window.
+A Mockup Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> usually used in conjunction with a <<manual/mockup-graph.html,Mockup Graph>> for the purpose of storyboarding and prototyping. A Mockup Node can have any number of output _Connections_ to other nodes. Create a Mockup Node in the menu:Create[Debug > Mockup] menu of the Instruction Graph Window.
 
 See <<topics/graphs/overview.html,Graphs>> for more information on instruction graphs. +
 
@@ -14,7 +14,7 @@ image::mockup-node.png[Mockup Node]
 |===
 | Name	| Description
 
-| Connections	| The list out outputs to other nodes that this node has
+| Connections	| The list of outputs to other nodes
 | Display Color	| The https://docs.unity3d.com/ScriptReference/Color.html[Color^] to display this node as in the Instruction Graph Window
 |===
 

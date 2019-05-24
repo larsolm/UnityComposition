@@ -2,7 +2,7 @@
 
 ## Conditional Node
 
-A Conditional Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that branches the progression of an <<manual/instruction-graph.html,Instruction Graph>> based on the `true` or `false` evaluation of the <<reference/expression.html,Expression>>, _Condition_. Create a Conditional Node in the menu:Create[Control Flow > Conditional] menu of the Instruction Graph Window.
+A Conditional Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that branches the progression of an <<manual/instruction-graph.html,Instruction Graph>> based on the `true` or `false` evaluation of the <<reference/expression.html,Expression>> _Condition_. Create a Conditional Node in the menu:Create[Control Flow > Conditional] menu of the Instruction Graph Window.
 
 See <<topics/graphs/control-flow.html,Control Flow>> for more information. +
 See the _"HasKey"_ node in "MazeDoor" <<instruction-graph,Instruction Graph>> in the Maze project for an example usage.

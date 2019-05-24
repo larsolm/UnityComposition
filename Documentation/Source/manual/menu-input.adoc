@@ -29,7 +29,7 @@ image::menu-input.png[Menu Input]
 | Next Up	| The menu to transfer input to when moving past the top of this menu
 | Next Down	| The menu to transfer input to when moving past the bottom of this menu
 | Focus On Load	| Whether to enable input for this menu when it first loads
-| Scroll Padding	| The distance between the edge of the scroll viewport and the <<manual/menu-item,Menu Item>> when focusing on a new a new item
+| Scroll Padding	| The distance between the edge of the scroll viewport and the <<manual/menu-item,Menu Item>> when focusing on a new item
 |===
 
 ifdef::backend-multipage_html5[]

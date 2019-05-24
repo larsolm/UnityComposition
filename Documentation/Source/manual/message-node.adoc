@@ -20,7 +20,7 @@ image::message-node.png[Message Node]
 | Wait For Completion	| Whether to wait for _Message_ to finish being displayed before moving on to the next node
 | Auto Hide	| Whether to deactivate _Control_ when _Message_ is finished being displayed
 | Wait Time	| If _AutoHide_ is `true`, the amount of time (in seconds) to wait before deactivating _Control_
-| Message	| The <<reference/message.html,Message>> to display>>
+| Message	| The <<reference/message.html,Message>> to display
 |===
 
 ifdef::backend-multipage_html5[]
