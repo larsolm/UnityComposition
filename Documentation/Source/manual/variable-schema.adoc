@@ -14,7 +14,7 @@ image::variable-schema.png[Variable Schema]
 |===
 | Name	| Description
 
-| Initializer Type	| Whether to initialize the variables in that use this schema with an <<reference/expression.html,Expression>> or a default value
+| Initializer Type	| Whether to initialize the variables that use this schema with an <<reference/expression.html,Expression>> or a default value
 | Tags	| A list of strings than can be used to categorize each variable in the schema - usually so that they can be reinitialized or saved later 
 |===
 

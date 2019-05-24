@@ -2,7 +2,7 @@
 
 ## Bar Binding
 
-Bar Binding is a <<manual/variable-binding.html,Variable Binding>> that will set the fill amount and blend color of a sibling https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] based on bindings to two int or float variables. If _AmountVariable_ or _TotalVariable_ is invalid or does not return an int or float, then the image will be disabled. If speed is greater than 0.0f then changes will be animated to between values. Custom color gradients can also be set depending on the fill amount. Bar Bindings are useful for things like health and progress bars.
+Bar Binding is a <<manual/variable-binding.html,Variable Binding>> that will set the fill amount and blend color of a sibling https://docs.unity3d.com/ScriptReference/UI.Image.html[Image^] based on bindings to two int or float variables. If _AmountVariable_ or _TotalVariable_ is invalid or does not return an int or float, then the image will be disabled. If speed is greater than 0.0f then changes will be animated. Custom color gradients can also be set depending on the fill amount. Bar Bindings are useful for things like health and progress bars.
 
 See <<topics/bindings/variable-bindings.html,Variable Bindings>> for more information. +
 See the _"Battle"_ scene in the Battle project for an example usage.

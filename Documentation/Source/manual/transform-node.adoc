@@ -18,18 +18,18 @@ image::transform-node.png[Transform Node]
 | Name	| Description
 
 | Transform	| The <<reference/variable-reference.html,VariableReference>> to the https://docs.unity3d.com/ScriptReference/Transform.html[Transform^] to enable
-| Use Relative Position	| If set _TargetPosition_ will specified relative to the initial _Transform_
-| Use Relative Rotation	| If set _TargetRotation_ will specified relative to the initial _Transform_
-| Use Relative Scale	| If set _TargetScale_ will specified relative to the initial _Transform_
+| Use Relative Position	| If set _TargetPosition_ will specify a position relative to the initial _Transform_
+| Use Relative Rotation	| If set _TargetRotation_ will specify a rotation relative to the initial _Transform_
+| Use Relative Scale	| If set _TargetScale_ will specify as scale relative to the initial _Transform_
 | Target Position	| The <<reference/vector3-variable-source.html,Vector3VariableSource>> to the target position of _Transform_
 | Target Rotation	| The <<reference/vector3-variable-source.html,Vector3VariableSource>> to the target rotation (in euler angles) of _Transform_
-| Target Scale	| The <<reference/vector3-variable-source.html,Vector3VariableSource>> to the target position of _Transform_
+| Target Scale	| The <<reference/vector3-variable-source.html,Vector3VariableSource>> to the target scale of _Transform_
 | Animation Method	| The <<reference/transform-node-animation-type,Type>> of animation to use
 | Wait For Completion	| Whether to wait until _Transfrom_ reaches the destination before moving on to the next node
 | Duration	| If _AnimationMethod_ is `Duration`, a <<reference/float-variable-source.html,FloatVariableSource>> to the amount of time (in seconds) it takes to reach the destination
-| Move Speed	| If _AnimationMethod_ is `Speed`, <<reference/float-variable-source.html,FloatVariableSource>> to the speed the _Transform_ will move
-| Rotation Speed	|  If _AnimationMethod_ is `Speed`, <<reference/float-variable-source.html,FloatVariableSource>> to the speed the _Transform_ will rotate
-| Scale Speed	|  If _AnimationMethod_ is `Speed`, <<reference/float-variable-source.html,FloatVariableSource>> to the speed the _Transform_ will change size
+| Move Speed	| If _AnimationMethod_ is `Speed`, a <<reference/float-variable-source.html,FloatVariableSource>> to the speed the _Transform_ will move
+| Rotation Speed	|  If _AnimationMethod_ is `Speed`, a <<reference/float-variable-source.html,FloatVariableSource>> to the speed the _Transform_ will rotate
+| Scale Speed	|  If _AnimationMethod_ is `Speed`, a <<reference/float-variable-source.html,FloatVariableSource>> to the speed the _Transform_ will change size
 |===
 
 ifdef::backend-multipage_html5[]

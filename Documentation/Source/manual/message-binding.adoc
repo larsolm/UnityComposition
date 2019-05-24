@@ -2,7 +2,7 @@
 
 ## Message Binding
 
-Message Binding is a <<manual/string-binding.html,String Binding>> that binding will display a <<reference/message.html,Message>> on a sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component, using the this binding's <<manual/binding-root.html,Binding Root>> as the variables to resolve the <<reference/message.html,Message>>.
+Message Binding is a <<manual/string-binding.html,String Binding>> that will display a <<reference/message.html,Message>> on a sibling http://digitalnativestudios.com/textmeshpro/docs/[TextMeshPro^] component using the binding's <<manual/binding-root.html,Binding Root>> as the variables to resolve the <<reference/message.html,Message>>.
 
 See the <<topics/bindings/variable-bindings.html,Variable Bindings>> topic for more information. +
 See the <<topics/interface/messages,Messages>> topic for more information. +

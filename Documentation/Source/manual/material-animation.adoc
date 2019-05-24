@@ -2,7 +2,7 @@
 
 ## Material Animation
 
-Material Animation is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will animate a float property named _"_Progress"_ on the https://docs.unity3d.com/ScriptReference/Material.html[Material^] of a sibling https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] from 0 to 1. If _AutoAdvance_ is set then when the behaviour is enabled, the _"_Progress"_ property of the https://docs.unity3d.com/ScriptReference/Material.html[Material^] will increment every frame over the time, _Duration_. If _AutoAdvance_ is not set then _Progress_ can manually be set either from script or through an https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] and the https://docs.unity3d.com/ScriptReference/Material.html[Material^] will automatically be updated.
+Material Animation is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will animate a float property named _"_Progress"_ on the https://docs.unity3d.com/ScriptReference/Material.html[Material^] of a sibling https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] from 0 to 1. If _AutoAdvance_ is set then when the behaviour is enabled, the _"_Progress"_ property of the https://docs.unity3d.com/ScriptReference/Material.html[Material^] will increment every frame over the time _Duration_. If _AutoAdvance_ is not set then _Progress_ can manually be set either from script or through an https://docs.unity3d.com/ScriptReference/AnimationClip.html[AnimationClip^] and the https://docs.unity3d.com/ScriptReference/Material.html[Material^] will automatically be updated.
 
 NOTE: The https://docs.unity3d.com/ScriptReference/Shader.html[Shader^] must have a float property named _"_Progress"_
 

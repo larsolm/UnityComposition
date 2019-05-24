@@ -2,7 +2,7 @@
 
 ## Button Input
 
-Button Input is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will set an input button to be pressed the object is clicked on. This is useful for things like on screen buttons in a mobile game to trigger actions.
+Button Input is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] that will set an input button as pressed when the object is clicked on. This is useful for things like on screen buttons in a mobile game to trigger actions.
 
 See the _"Calculator"_ scene in the Calculator project for an example usage.
 

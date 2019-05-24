@@ -12,7 +12,7 @@ See <<topics/graphs/overview.html,Graphs>> for more information on instruction g
 |===
 | Name	| Description
 
-| Name	| A friendly name used to identify this node
+| Name	| A friendly name used to identify this node in the editor
 |===
 
 ifdef::backend-multipage_html5[]

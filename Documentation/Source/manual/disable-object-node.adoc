@@ -2,7 +2,7 @@
 
 ## Disable Object Node
 
-A Disable Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will disable the given https://docs.unity3d.com/ScriptReference/Object.html[Object^], _Target_. Create a Disable Objects Node in the menu:Create[Object Manipulation > Disable Object] menu of the Instruction Graph Window.
+A Disable Object Node is an <<manual/instruction-graph-node.html,Instruction Graph Node>> that will disable the given https://docs.unity3d.com/ScriptReference/Object.html[Object^], _Target_. Create a Disable Object Node in the menu:Create[Object Manipulation > Disable Object] menu of the Instruction Graph Window.
 
 NOTE: _Target_ must be a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^], https://docs.unity3d.com/ScriptReference/Behaviour.html[Behaviour^], or https://docs.unity3d.com/ScriptReference/Renderer.html[Renderer^] as these are the only https://docs.unity3d.com/ScriptReference/Object.html[Object^], types that Unity allows to be enabled and disabled.
 
