@@ -6,6 +6,11 @@ To create custom variable bindings, derive from <<reference/variable-binding.htm
 
 [source,cs]
 ----
+using PiRhoSoft.CompositionEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
 	public class ActivateBinding : VariableBinding
 	{
 		public GameObject GameObject;
@@ -21,12 +26,19 @@ To create custom variable bindings, derive from <<reference/variable-binding.htm
 			}
 		}
 	}
+}
 ----
 
 The next example utilizes animation to increment displayed text based on an int <<reference/variable-reference,variable reference>>.
 
 [source,cs]
 ----
+using System.Collections.Generic;
+using TMPro;
+using PiRhoSoft.CompositionEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
 	public class AnimatedIntBinding : VariableBinding
 	{
 		public VariableReference Variable = new VariableReference();
@@ -63,4 +75,5 @@ The next example utilizes animation to increment displayed text based on an int 
 			status.Decrement();
 		}
 	}
+}
 ----

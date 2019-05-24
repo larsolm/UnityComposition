@@ -2,7 +2,7 @@
 
 ## Nodes
 
-Nodes make up the bulk of the functionality of a graph. They may control both the flow of the graph and/or the behaviour that should be performed. For example, a <<manual/conditional-node.html,Conditional Node>> branches the graph based on the `true` or `false` value of an <<reference/expression.html,expression>> and has no effect on the game world, while a <<manual/message-node.html,Message Node>> physically displays a message in the game. The following is a list of built-in nodes by category:
+Nodes make up the bulk of the functionality of a graph. They control both the flow of the graph and the behavior that should be performed. For example, a <<manual/conditional-node.html,Conditional Node>> branches the graph based on the result of an <<reference/expression.html,expression>> and has no effect on the game world, while a <<manual/message-node.html,Message Node>> physically displays a message in the game. The following is a list of built-in nodes by category:
 
 |===
 | Animation |

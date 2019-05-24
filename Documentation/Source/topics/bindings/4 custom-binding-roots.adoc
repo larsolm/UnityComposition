@@ -2,10 +2,15 @@
 
 ## Creating Custom Binding Roots
 
-To create custom binding roots, derive from <<reference/binding-root.html,BindingRoot>> and override the _Value_ property. The following is an example of a custom binding root uses an Object that is set in the editor as the value for child variable bindings to look up data on.
+To create custom binding roots, derive from <<reference/binding-root.html,BindingRoot>> and override the _Value_ property. The following is an example of a custom binding root that uses an Object set in the editor as its value.
 
 [source,cs]
 ----
+using PiRhoSoft.CompositionEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
 	public class ObjectBindingRoot : BindingRoot
 	{
 		public Object Object;
@@ -18,6 +23,7 @@ To create custom binding roots, derive from <<reference/binding-root.html,Bindin
 			}
 		}
 	}
+}
 ----
 
 Other examples of custom binding roots are the <<manual/focus-binding-root.html,Focus Binding Root>> and the <<manual/menu-item.html,Menu Item>>.
