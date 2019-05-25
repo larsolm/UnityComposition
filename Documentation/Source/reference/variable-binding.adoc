@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.VariableBinding : https://docs.unity3d.com/ScriptRef
 
 ### Description
 
-Derived from this class to provide support for automatically updating properties of loaded https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] (for instance, user interface elements) based on <<reference/variable-value.html,VariableValues>> stored in the <<topics/variables/overview.html,Variables System>>.
+Derive from this class to provide support for automatically updating properties of loaded https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^] (for instance, user interface elements) based on <<reference/variable-value.html,VariableValues>> stored in the <<topics/variables/overview.html,Variables System>>.
 
 Read the <<topics/bindings/overview.html,Bindings Topic>> for a complete overview of how to use bindings and how to implement custom bindings.
 
@@ -18,7 +18,7 @@ Triggers an update for bindings on _obj_ and its descendants. If _group_ is `nul
 
 void UpdateBinding(https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] _obj_, string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/variable-binding.html,VariableBinding>>> _bindings_)::
 
-Performs the same function as the other _UpdateBinding_ method but uses _bindings_ as a location to store the <<reference/variable-binding.html,VariableBindings>> looked up on _obj_. It is not necessary to use this overload exception when called from the _UpdateBinding_ instance method of a <<reference/variable-binding.html,VariableBinding>> subclass.
+Performs the same function as the other _UpdateBinding_ method but uses _bindings_ as a location to store the <<reference/variable-binding.html,VariableBindings>> looked up on _obj_. It is not necessary to use this overload except when called from the _UpdateBinding_ instance method of a <<reference/variable-binding.html,VariableBinding>> subclass.
 
 ### Public Fields
 
@@ -46,7 +46,7 @@ Returns the <<reference/i-variable-store.html,IVariableStore>> to use to resolve
 
 void UpdateBinding(string _group_, <<reference/binding-animation-status.html,BindingAnimationStatus>> _status_)::
 
-Use this method to update this specific binding when _group_ is either `null`, empty, or matches _BindingGroup_. To update all bindings on an https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^], use the static _UpdateBinding_ method instead. Optionally pass a <<reference/binding-animation-status.html,BindingAnimationStatus>> instance as _status_ to access information about bindings that perform an animation or otherwise take multiple frames to complete.
+Use this method to update this specific binding when _group_ is either `null`, empty, or matches _BindingGroup_. To update all bindings on a https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^], use the static _UpdateBinding_ method instead. Optionally pass a <<reference/binding-animation-status.html,BindingAnimationStatus>> instance as _status_ to access information about bindings that perform an animation or otherwise take multiple frames to complete.
 
 ### Protected Methods
 
@@ -58,7 +58,7 @@ NOTE: _status_ will always be a valid instance so does not need to be checked fo
 
 #### Resolve
 
-This collection of methods will lookup the value referenced by a <<reference/variable-reference.html,VariableReference>>. The resolved value is set to the ouput parameter _result_ and the return value will indicate whether the value was resolved successfully. The _variables_ parameter should be the _variables_ parameter passed to the _UpdateBinding_ method. If the resolution fails, either due to the variable not being found or it being an invalid type, a warning will be printed to the https://docs.unity3d.com/Manual/Console.html[Console^].
+This collection of methods will lookup the value referenced by a <<reference/variable-reference.html,VariableReference>>. The resolved value is set to the ouput parameter _result_ and the return value will indicate whether the value was resolved successfully. The _variables_ parameter should be the _variables_ parameter passed to the _UpdateBinding_ method. If the resolution fails, either due to the variable not being found or it being an invalid type, a warning will be printed to the https://docs.unity3d.com/Manual/Console.html[Console^] (unless _SuppressErrors_ is `true`).
 
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, <<reference/variable-value.html,VariableValue>> _result_ _(out)_)
 * bool Resolve(<<reference/i-variable-store.html,IVariableStore>> _variables_, <<reference/variable-reference.html,VariableReference>> _reference_, bool _result_ _(out)_)::

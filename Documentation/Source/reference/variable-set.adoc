@@ -58,7 +58,7 @@ Returns the name of the <<reference/variable.html,Variable>> at index _index_.
 
 <<reference/variable-value.html,VariableValue>> GetVariableValue(int _index_)::
 
-Returns the <<reference/variable_value.html,VariableValue>> of the <<reference/variable.html,Variable>> at index _index_
+Returns the <<reference/variable_value.html,VariableValue>> of the <<reference/variable.html,Variable>> at index _index_.
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariableValue(int _index_, <<reference/variable-value.html,VariableValue>> _value_)::
 

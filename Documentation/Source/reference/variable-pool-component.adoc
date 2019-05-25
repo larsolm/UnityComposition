@@ -26,7 +26,7 @@ Returns the <<reference/variable-value.html,VariableValue>> with name _name_.
 
 <<reference/set-variable-result.html,SetVariableResult>> SetVariable(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
-Sets the <<reference/variable-value.html,VariableValue>> with name _name_ to _value.
+Sets the <<reference/variable-value.html,VariableValue>> with name _name_ to _value_.
 
 ifdef::backend-multipage_html5[]
 <<manual/variable-pool-component.html,Manual>>

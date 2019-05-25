@@ -12,4 +12,4 @@ A <<reference/variable-source.html,VariableSource>> for `Vector2` <<reference/va
 
 Vector2VariableSource(https://docs.unity3d.com/ScriptReference/Vector2.html[Vector2^] _defaultValue_)::
 
-Initializes the source to _Type_ `Value` with _Value_ _defaultValue.
+Initializes the source to _Type_ `Value` with _Value_ _defaultValue_.

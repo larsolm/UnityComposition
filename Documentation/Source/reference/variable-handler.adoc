@@ -52,7 +52,7 @@ Saves _constraint_ with type _type_ to a representation that can be serialized b
 
 <<reference/variable-constraint.html,VariableConstraint>> LoadConstraint(string _data_ _(ref)_, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&[List^] _objects_ _(ref)_)::
 
-Creates a constraint from the serialized representation in _data_ and _objects. _data_ and _objects_ will be cleared.
+Creates a constraint from the serialized representation in _data_ and _objects_. _data_ and _objects_ will be cleared.
 
 <<reference/variable-value.html,VariableValue>> Add(<<reference/variable-value.html,VariableValue>> _left_, <<reference/variable-value.html,VariableValue>> _right_)::
 

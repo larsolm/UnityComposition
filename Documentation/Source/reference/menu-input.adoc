@@ -68,7 +68,7 @@ Set this to `true` to have the first <<reference/menu-item.html,MenuItem>> gain 
 
 float _ScrollPadding_::
 
-When inside a https://docs.unity3d.com/Manual/script-ScrollRect.html, indicates the amount of padding to maintain around the focused item when menu navigation causes the menu to scroll.
+When inside a https://docs.unity3d.com/Manual/script-ScrollRect.html[ScrollRect^], indicates the amount of padding to maintain around the focused item when menu navigation causes the menu to scroll.
 
 ### Public Methods
 
@@ -126,7 +126,7 @@ Returns the <<reference/menu-item.html,MenuItem>> at position _screenPoint_. _sc
 
 void ScrollToItem(<<reference/menu-item.html,MenuItem>> _item_)::
 
-When inside a https://docs.unity3d.com/Manual/script-ScrollRect.html, ensures _item_ is visible with _ScrollPadding_ space around it on all sides.
+When inside a https://docs.unity3d.com/Manual/script-ScrollRect.html[ScrollRect^], ensures _item_ is visible with _ScrollPadding_ space around it on all sides.
 
 ifdef::backend-multipage_html5[]
 <<manual/menu-input.html,Manual>>

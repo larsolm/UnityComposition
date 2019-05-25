@@ -16,7 +16,7 @@ This should be the precedence passed to <<reference/expression-parser.html,Expre
 
 <<reference/operator-precedence.html,OperatorPrecedence>> _Assignment_::
 
-The precedence for all assignment operations. This is right associative so assignments can be chained..
+The precedence for all assignment operations. This is right associative so assignments can be chained.
 
 <<reference/operator-precedence.html,OperatorPrecedence>> _Ternary_::
 

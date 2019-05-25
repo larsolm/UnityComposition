@@ -16,7 +16,7 @@ The number will be formatted as a percentage. Equivalent to setting the https://
 
 <<reference/binding-formatter-number-format-type.html,NumberFormatType>> _Commas_::
 
-The number will be formatted as a number with commas separating every 3 digits. Equivalent to setting the https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings[custom format string^] to "#,###,##0".
+The number will be formatted as a number with commas separating every 3 digits. Equivalent to setting the https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings[custom format string^] to "\#,\##\#,##0".
 
 <<reference/binding-formatter-number-format-type.html,NumberFormatType>> _Rounded_::
 

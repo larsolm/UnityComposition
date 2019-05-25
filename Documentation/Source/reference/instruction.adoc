@@ -56,14 +56,6 @@ Used by the editor to refresh the input list when necessary. This will happen au
 
 ### Protected Methods
 
-void OnEnable() _(virtual)_::
-
-Performs important setup for the instruction. If overridden make sure to call the base implementation.
-
-void OnDisable() _(virtual)_::
-
-Performs important teardown for the instruction. If overridden make sure to call the base implementation.
-
 void GetInputs(https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<<<reference/variable-definition.html,VariableDefinition>>> _inputs_) _(virtual)_::
 
 Implement this in subclasses to populate the _inputs_ list with definitions for values the instruction expects to be available when called.

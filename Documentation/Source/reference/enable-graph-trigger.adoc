@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.EnableGraphTrigger : <<reference/instruction-trigger
 
 ### Description
 
-Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to to run an <<reference/instruction-graph.html,InstructionGrap>> when the object is enabled.
+Add this to any https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^] to to run an <<reference/instruction-graph.html,InstructionGraph>> when the object is enabled.
 
 ifdef::backend-multipage_html5[]
 <<manual/enable-binding.html,Manual>>

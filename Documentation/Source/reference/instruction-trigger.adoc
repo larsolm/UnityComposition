@@ -13,7 +13,7 @@ Add this to an object to provide an interface for specifying an <<reference/inst
 * <<reference/enable-graph-trigger.html,EnableGraphTrigger>>
 * <<reference/start-graph-trigger.html,StartGraphTrigger>>
 
-Additionally, <<reference/instruction-graph-trigger.html,InstructionGraphTrigger>> and <<reference/collision-graph-trigger.html,CollisionGraphTrigger>> are included that, while not deriving from this class, perform a similar function.
+Additionally, <<reference/collision-graph-trigger.html,CollisionGraphTrigger>> is included that, while not deriving from this class, performs a similar function.
 
 ### Public Fields
 
@@ -25,7 +25,7 @@ The <<reference/instruction-graph.html,InstructionGraph>> to execute when _Run_ 
 
 void Run()::
 
-Runs _Graph_ using the <<reference/composition-manager.html,CompositionManager>>. <<reference/composition-manager.html,CompositionManager._DefaultStore_>> is used to read input variables from and `this` is used as the <<reference/instruction-store.html,_Context_>>
+Runs _Graph_ using the <<reference/composition-manager.html,CompositionManager>>. <<reference/composition-manager.html,CompositionManager._DefaultStore_>> is used to read input variables from and `this` is used as the <<reference/instruction-store.html,_Context_>>.
 
 ifdef::backend-multipage_html5[]
 <<manual/instruction-trigger.html,Manual>>

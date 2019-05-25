@@ -6,7 +6,7 @@ PiRhoSoft.CompositionEngine.InfixOperation : <<reference/operation.html,Operatio
 
 ### Description
 
-Derive from this class to implement an <<reference/operation.html,Operations>> that has a left and right side.
+Derive from this class to implement an <<reference/operation.html,Operation>> that has a left and right side.
 
 ### Public Properties
 

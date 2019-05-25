@@ -24,7 +24,7 @@ The name of the folder that any custom <<reference/command.html,Commands>> are p
 
 bool _LogTracking_::
 
-When this is true, information gathered in editor builds about the execution of <<reference/instruction.html,Instructions>> will be logged to the https://docs.unity3d.com/Manual/Console.html[console^]. This will include the number of enumerator iterations, the number of frames, and the amount of time it took to complete execution of each <<reference/instruction.html,Instruction>>. The <<topics/graphs/debugging.html,Watch Window> in the editor exposes this variable as a toggle.
+When this is true, information gathered in editor builds about the execution of <<reference/instruction.html,Instructions>> will be logged to the https://docs.unity3d.com/Manual/Console.html[console^]. This will include the number of enumerator iterations, the number of frames, and the amount of time it took to complete execution of each <<reference/instruction.html,Instruction>>. The <<topics/graphs/debugging.html,Watch Window>> in the editor exposes this variable as a toggle.
 
 ### Public Properties
 
@@ -44,7 +44,7 @@ An <<reference/i-variable-store.html,IVariableStore>> implementation that allows
 
 void RunInstruction(<<reference/instruction.html,Instruction>> _instruction_, <<reference/variable-value.html,VariableValue>> _context_)::
 
-Runs an <<reference/instruction.html,Instruction>>, usually an <<reference/instruction-graph.html,InstructionGraph>> without setting any inputs other than _context_ or reading any outputs.
+Runs an <<reference/instruction.html,Instruction>>, usually an <<reference/instruction-graph.html,InstructionGraph>>, without setting any inputs other than _context_ or reading any outputs.
 
 void RunInstruction(<<reference/instruction-caller.html,InstructionCaller>> _caller_, <<reference/i-variable-store.html,IVariableStore>> _store_, <<reference/variable-value.html,VariableValue>> _context_)::
 

@@ -36,7 +36,7 @@ Creates a definition for a <<reference/variable-value.html,VariableValue>> with 
 
 <<reference/value-definition.html,ValueDefinition>> Create(<<reference/variable-type.html,VariableType>> _type_, <<reference/variable-constraint.html,VariableConstraint>> _constraint_)::
 
-Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> _type_ and <<reference/variable-constraint.html,VariableConstraint>> constraint _constraint_.
+Creates a definition for a <<reference/variable-value.html,VariableValue>> with <<reference/variable-type.html,type>> _type_ and <<reference/variable-constraint.html,VariableConstraint>> _constraint_.
 
 NOTE: The caller must ensure _constraint_ is a <<reference/variable-constraint.html,VariableConstraint>> of the appropriate type for _type_.
 
@@ -58,7 +58,7 @@ The <<reference/variable-constraint.html,VariableConstraint>> laying out _Type_ 
 
 string _Tag_ _(read only)_::
 
-An arbitrary string that can be used to group different definitions in the same <<reference/variable-schema.html,VariableSchema>>. This has no impact on the validity of a <<reference/variable-value.html,VariableValue>> or how it is generated. It is most commonly used to indicate a set of variables that should be saved (for runtime saves) or group variables for resetting to their defaults (i.e by <<reference/variable-set-component.html,VariableSetComponent.ResetTag>>) or any other class that implements <<reference/i-variable-reset.html,IVariableReset.ResetTag>>).
+An arbitrary string that can be used to group different definitions in the same <<reference/variable-schema.html,VariableSchema>>. This has no impact on the validity of a <<reference/variable-value.html,VariableValue>> or how it is generated. It is most commonly used to indicate a set of variables that should be saved (for runtime saves) or group variables for resetting to their defaults (i.e by <<reference/variable-set-component.html,VariableSetComponent.ResetTag>>).
 
 <<reference/expression.html,Expression>> _Initializer_ _(read only)_::
 

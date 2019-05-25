@@ -52,6 +52,9 @@ Call this from a <<reference/instruction-graph-node.html,node>> to tell the grap
 ### Protected Methods
 
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator[IEnumerator^] Run(<<reference/instruction-store.html,InstructionStore>> _variables_, <<reference/instruction-graph-node.html,InstructionGraphNode>> _root_, string _source_)::
+
+Call this from a subclass to start running the branch _root_. Pass the <<reference/instruction-store.html,InstructionStore>> given to the _Run_ method as _variables_. _name_ should be the name of the property the branch was assigned to for use in log messages.
+
 ### Editor Support
 
 The following properties and methods are exposed for use by the editor and only available in editor builds. They can be ignored.

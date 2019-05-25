@@ -18,7 +18,7 @@ A <<reference/variable.html,Variable>> with an empty _Name_ and _Value_ with <<r
 
 <<reference/variable.html,Variable>> Create(string _name_, <<reference/variable-value.html,VariableValue>> _value_)::
 
-Creates a <<reference/variable.html,Variable>> with _Name_ _name and _Value_ _value_.
+Creates a <<reference/variable.html,Variable>> with _Name_ _name_ and _Value_ _value_.
 
 ### Public Properties
 

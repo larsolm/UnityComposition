@@ -12,7 +12,7 @@ An implementation of <<reference/i-variable-list.html,IVariableList>> that has n
 
 VariableList(int _count_)::
 
-Adds _count_ <<reference/variable-type.html,`Empty`>> <<reference/variable-value.html,ValueValues>> to the list.
+Adds _count_ <<reference/variable-type.html,`Empty`>> <<reference/variable-value.html,VariableValues>> to the list.
 
 ### Public Properties
 
