@@ -2,6 +2,8 @@
 
 ## Data Binding
 
-video::hfwxXAbk[youtube]
+video::bLsuMYuIRPA[youtube]
 
-Automatically bind and display variables in your UI
+Automatically bind and display variables in your UI.
+
+Ask us questions on https://discord.gg/aRznrUb[Discord] or download the project files https://pirhosoft.com/downloads/composition-framework/v10/5-data-binding.unitypackage[here].
