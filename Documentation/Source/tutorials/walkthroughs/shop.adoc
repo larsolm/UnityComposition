@@ -1,7 +1,0 @@
-[#tutorials/walkthroughs/shop]
-
-## Title
-
-video::4xOs599U6OQ[youtube]
-
-The description

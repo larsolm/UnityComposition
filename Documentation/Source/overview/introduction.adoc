@@ -8,7 +8,7 @@ At the top right of any page you can find a link to our https://discord.gg/3tDcm
 
 We have a <<overview/roadmap.html,Roadmap>> in the navigation menu that we will be keeping up to date as our development plans evolve. This includes a bugs section that contains a list of the currently known issues. Below that is the <<overview/log-descriptions.html,Log Descriptions>> section. This is a complete glossary for all the messages the framework can print to the https://docs.unity3d.com/Manual/Console.html[console^] with more information about what they mean and how to deal with them. If you encounter an error message that is not covered or any other problems, please https://discord.gg/HcXCFnM[let us know^] and we will fix it as quickly as we can!
 
-For beginners, your best bet is to start with the <<tutorials/getting-started/setup.html,Getting Started Tutorial>>. This will walk you through creating a basic game using graphs, variables, and bindings. Also in the tutorials section are several walkthrough videos which will explain the implementation of each of the example projects.
+For beginners, your best bet is to start with the <<tutorials/getting-started/setup.html,Getting Started Tutorial>>. This will walk you through creating a basic game using graphs, variables, and bindings.
 
 The topics section includes documents that provide more detailed information about specific systems, such as <<topics/graphs/debugging.html,tips for debugging graphs>>, how to <<topics/graphs/custom-nodes.html,implement your own nodes>>, and how to <<topics/variables/defining-variables.html,define objects in the editor>>.
 
