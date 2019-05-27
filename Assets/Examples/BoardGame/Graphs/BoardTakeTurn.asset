@@ -148,7 +148,7 @@ MonoBehaviour:
   m_Name: Reset Piece
   m_EditorClassIdentifier: 
   Name: Reset Piece
-  GraphPosition: {x: 4134.4, y: 448}
+  GraphPosition: {x: 4121.6, y: 460.80002}
   IsBreakpoint: 0
   Next: {fileID: 114348498317395866}
   Object:
@@ -177,7 +177,8 @@ MonoBehaviour:
   OnTrue: {fileID: 114530582379309674}
   OnFalse: {fileID: 114348498317395866}
   Condition:
-    _statement: '!(currentSpace.CurrentPiece is Empty)'
+    _statement: '!(currentSpace.CurrentPiece is Empty) && currentSpace.CurrentPiece
+      != null'
 --- !u!114 &114161564551485726
 MonoBehaviour:
   m_ObjectHideFlags: 1

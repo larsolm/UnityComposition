@@ -381,8 +381,8 @@ Canvas:
   m_GameObject: {fileID: 467527302}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 0
-  m_Camera: {fileID: 0}
+  m_RenderMode: 1
+  m_Camera: {fileID: 661504290}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -564,7 +564,7 @@ Camera:
   field of view: 60
   orthographic: 1
   orthographic size: 5
-  m_Depth: -1
+  m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
     m_Bits: 32
@@ -627,7 +627,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 5, y: -12.82499}
+  m_AnchoredPosition: {x: 5, y: -12.824989}
   m_SizeDelta: {x: 100, y: 22.35}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1066283333
@@ -893,7 +893,7 @@ MonoBehaviour:
   BindingGroup: 
   AutoUpdate: 1
   SuppressErrors: 0
-  Object: {fileID: 1161540523}
+  Object: {fileID: 1161540517}
   Condition:
     _statement: global.JewelsNeeded > 0;
 --- !u!114 &1161540521
