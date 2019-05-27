@@ -1,0 +1,49 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/i-variable-list">IVariableList</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.IVariableList</p>
+</div>
+<div class="sect2">
+<h3 id="_description_103">Description</h3>
+<div class="paragraph">
+<p>Implement this interface on a class to allow the class to be stored with type <code>List</code> in a <a href="#reference/variable-value.html">VariableValue</a>. <a href="#reference/variable-list.html">VariableList</a> provides an implementation that is sufficient for most use cases.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_17">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">int <em>Count</em> <em>(read only)</em> <em>(abstract)</em></dt>
+<dd>
+<p>The number of items in the list.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_22">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(int <em>index</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Returns the value at the index <em>index</em> in the list.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(int <em>index</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Sets the value at index <em>index</em> to <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> AddVariable(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Adds the value <em>value</em> to the end of the list.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> RemoveVariable(int <em>index</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Removes the value at index <em>index</em> from the list.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

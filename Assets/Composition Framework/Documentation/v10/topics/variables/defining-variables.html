@@ -1,0 +1,68 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/variables/defining-variables">Defining Variables</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Variables are defined using a Variable Schema, often referred to as just <em>schema</em>. A schema is created in the <a href="https://docs.unity3d.com/Manual/ProjectView.html" target="_blank" rel="noopener">project window</a> using the <em>Create</em> menu and found under <span class="menuseq"><b class="menu">PiRho Soft</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Variable Schema</b></span>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/variables/variables-3-create-schema.png" alt="Create Variable Schema">
+</div>
+</div>
+<div class="paragraph">
+<p>A Variable Schema holds a set of Variable Definitions which describe the type and constraint for values in stores that use the schema. In addition, an <em>Initializer Type</em> can be specified for each definition that will set the value of a variable when it is first created or reset. The possible settings for <em>Initializer Type</em> are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">None</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The variable is set to the default value for its type</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Default Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The variable is set to an exact value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The variable is set to the result of an Expression (described in <a href="#topics/variables/writing-expressions.html">Writing Expressions</a>)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The schema can also define a list of <em>Tags</em>. Each definition in the schema can then select one of these tags as a grouping mechanism to be used for <a href="#manual/reset-tag-node.html">resetting the values</a>.</p>
+</div>
+<div class="paragraph">
+<p>The definitions themselves are added to the <em>Definitions</em> list.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/variables/variables-3-schema-add.png" alt="Edit Variable Schema">
+</div>
+</div>
+<div class="paragraph">
+<p>The + button will open a popup where the name, type, and constraint of the definition is specified. Once a definition is added, the <em>Initializer</em> or <em>Default</em> (depending on the schema&#8217;s <em>Initializer Type</em> setting) can be specified as well as the <em>Tag</em> (if the schema has defined any in <em>Tags</em>). The definitions can be reordered using the <span class="image"><img src="v10/images/topics/variables/variables-2-move-icon.png" alt="="></span> handle or removed using the <span class="image"><img src="v10/images/topics/variables/variables-2-remove-icon.png" alt="-"></span> button.</p>
+</div>
+<div class="paragraph">
+<p>Once a schema has been created, it can be used as a constraint for variables defined with type <code>Store</code>, or with Variable Set Component and Variable Set Asset. These are similar to the corresponding <a href="#topics/variables/creating-variables.html">Variable Pool Component and Variable Pool Asset</a> except instead of adding the variables directly to the object, they are automatically added by selecting a schema.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/variables/variables-3-set.png" alt="Variable Set">
+</div>
+</div>
+<div class="paragraph">
+<p>Editing a Variable Set is very straight forward. Select the <em>Schema</em> to use, which will then populate the <em>Variables</em> list. The value of each variable can then be edited dependending on the type and constraint defined by the schema. If the schema is edited, the <em>Variables</em> list will be updated to reflect any changes, preserving any values that have already been set. If the selected <em>Schema</em> changes, the <em>Variables</em> list will be repopulated.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

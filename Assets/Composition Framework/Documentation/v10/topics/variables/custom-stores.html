@@ -1,0 +1,182 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/variables/custom-stores">Custom Variable Stores</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>When writing <a href="https://docs.unity3d.com/Manual/CreatingComponents.html" target="_blank" rel="noopener">Components</a> or <a href="https://docs.unity3d.com/Manual/class-ScriptableObject.html" target="_blank" rel="noopener">ScriptableObjects</a> it is often useful to expose the object and its properties to the variables system. This can be done by implementing the <a href="#reference/i-variable-store.html">IVariableStore</a> interface. This interface consists of three easy to implement methods that provide all the necessary functionality for fully exposing the object and its properties.</p>
+</div>
+<div class="sect2">
+<h3 id="_ivariablestore">IVariableStore</h3>
+<div class="paragraph">
+<p>As an example, consider the <code>LootWeapon</code> <a href="#manual/variable-schema.html">Variable Schema</a> and various weapons that use it in the <code>Loot</code> example. The same setup could be accomplished in code by defining a <code>LootWeapon</code> <a href="https://docs.unity3d.com/Manual/class-ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a> that implements <a href="#reference/i-variable-store.html">IVariableStore</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using System.Collections.Generic;
+using PiRhoSoft.CompositionEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeapon : ScriptableObject, IVariableStore
+	{
+		public string Name;
+		public float MinimumSpeed;
+		public float MaximumSpeed;
+		public int MinimumStrength;
+		public int MaximumStrength;
+
+		private static List&lt;string&gt; _names = new List&lt;string&gt;
+		{
+			nameof(Name),
+			nameof(MinimumSpeed),
+			nameof(MaximumSpeed),
+			nameof(MinimumStrength),
+			nameof(MaximumStrength)
+		};
+
+		public IList&lt;string&gt; GetVariableNames()
+		{
+			return _names;
+		}
+
+		public VariableValue GetVariable(string name)
+		{
+			switch (name)
+			{
+				case nameof(Name): return VariableValue.Create(Name);
+				case nameof(MinimumSpeed): return VariableValue.Create(MinimumSpeed);
+				case nameof(MaximumSpeed): return VariableValue.Create(MaximumSpeed);
+				case nameof(MinimumStrength): return VariableValue.Create(MinimumStrength);
+				case nameof(MaximumStrength): return VariableValue.Create(MaximumStrength);
+				default: return VariableValue.Empty;
+			}
+		}
+
+		public SetVariableResult SetVariable(string name, VariableValue value)
+		{
+			switch (name)
+			{
+				case nameof(Name): return value.TryGetString(out Name) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MinimumSpeed): return value.TryGetFloat(out MinimumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MaximumSpeed): return value.TryGetFloat(out MaximumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MinimumStrength): return value.TryGetInt(out MinimumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(MaximumStrength): return value.TryGetInt(out MaximumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				default: return SetVariableResult.NotFound;
+			}
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Each of the weapon assets would then be created as instances of <code>LootWeapon</code> instead of <a href="#manual/variable-set-asset.html">Variable Set Asset</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_mapped_variables">Mapped Variables</h3>
+<div class="paragraph">
+<p>For more complex classes with many properties, or classes that want a mix of code defined and editor defined properties, it is much simpler and more flexible to use the <a href="reference/mapped-variable-store.html">MappedVariableStore</a> class. This can be used directly or by deriving from the <a href="#reference/variable-set-component.html">VariableSetComponent</a> (for <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviours</a>) or <a href="#reference/variable-set-asset.html">VariableSetAsset</a> (for <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObjects</a>). These classes can also be used directly without subclassing as described in <a href="#topics/variables/defining-variables.html">Defining Variables</a> but become more powerful when extended. Deriving automatically adds <a href="#reference/variable-schema.html">VariableSchema</a> support, <a href="#reference/i-variable-store.html">IVariableStore</a> access for all schema and code defined properties, variable resetting with <a href="#reference/i-variable-reset.html">IVariableReset</a>, and full editor and <a href="#topics/graphs/debugging.html">watch window</a> integration.</p>
+</div>
+<div class="paragraph">
+<p>To expose code defined fields and properties to the variables system, the <a href="reference/mapped-variable-attribute.html">MappedVariableAttribute</a> is used. This is as simple as adding the attribute to a field or property on a class derived from <a href="#reference/variable-set-component.html">VariableSetComponent</a> or <a href="#reference/variable-set-asset.html">VariableSetAsset</a>. Following is an example of the same <code>LootWeapon</code> class defined as a <a href="#reference/variable-set-asset.html">VariableSetAsset</a> instead of an <a href="#reference/i-variable-store.html">IVariableStore</a>. This has the same functionality as the above example but can also be extended in the editor with a <a href="#reference/variable-schema.html">VariableSchema</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using PiRhoSoft.CompositionEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeapon : VariableSetAsset
+	{
+		[MappedVariable] public string Name;
+		[MappedVariable] public float MinimumSpeed;
+		[MappedVariable] public float MaximumSpeed;
+		[MappedVariable] public int MinimumStrength;
+		[MappedVariable] public int MaximumStrength;
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The <a href="reference/mapped-variable-attribute.html">MappedVariableAttribute</a> can optionally be passed a parameter indicating whether the variable is allowed to be set by the variables system. The attribute can also be added to properties. A property without a setter will automatically be read only.</p>
+</div>
+<div class="paragraph">
+<p>All <a href="#reference/variable-type.html">VariableTypes</a> are supported with <a href="reference/mapped-variable-attribute.html">MappedVariableAttribute</a> including <a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.generic.ilist-1?view=netframework-4.8" target="_blank" rel="noopener">IList&lt;T&gt;</a> implementors when <em>T</em> is itself a valid <a href="#reference/variable-type.html">VariableType</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_class_maps">Class Maps</h3>
+<div class="paragraph">
+<p>In situations where an <a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> class cannot be changed to implement <a href="#reference/i-variable-store.html">IVariableStore</a>, like for a third party or built in <a href="https://docs.unity3d.com/ScriptReference/Component.html" target="_blank" rel="noopener">Component</a>, the <a href="#reference/class-map-1.html">ClassMap</a> class is provided. The following is an example of the <code>LootWeapon</code> class exposed to the variables system using a <a href="#reference/class-map-1.html">ClassMap</a> instead of with <a href="#reference/i-variable-store.html">IVariableStore</a> or <a href="#reference/variable-set-asset.html">VariableSetAsset</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using PiRhoSoft.CompositionEngine;
+using System.Collections.Generic;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeapon : ScriptableObject
+	{
+		public string Name;
+		public float MinimumSpeed;
+		public float MaximumSpeed;
+		public int MinimumStrength;
+		public int MaximumStrength;
+	}
+
+	[AddComponentMenu("PiRho Soft/Examples/Loot Weapon")]
+	public class LootWeaponMap : ClassMap&lt;LootWeapon&gt;
+	{
+		private static List&lt;string&gt; _names = new List&lt;string&gt;
+		{
+			nameof(LootWeapon.Name),
+			nameof(LootWeapon.MinimumSpeed),
+			nameof(LootWeapon.MaximumSpeed),
+			nameof(LootWeapon.MinimumStrength),
+			nameof(LootWeapon.MaximumStrength)
+		};
+
+		public override IList&lt;string&gt; GetVariableNames()
+		{
+			return _names;
+		}
+
+		public override VariableValue GetVariable(LootWeapon weapon, string name)
+		{
+			switch (name)
+			{
+				case nameof(LootWeapon.Name): return VariableValue.Create(weapon.Name);
+				case nameof(LootWeapon.MinimumSpeed): return VariableValue.Create(weapon.MinimumSpeed);
+				case nameof(LootWeapon.MaximumSpeed): return VariableValue.Create(weapon.MaximumSpeed);
+				case nameof(LootWeapon.MinimumStrength): return VariableValue.Create(weapon.MinimumStrength);
+				case nameof(LootWeapon.MaximumStrength): return VariableValue.Create(weapon.MaximumStrength);
+				default: return VariableValue.Empty;
+			}
+		}
+
+		public override SetVariableResult SetVariable(LootWeapon weapon, string name, VariableValue value)
+		{
+			switch (name)
+			{
+				case nameof(LootWeapon.Name): return value.TryGetString(out weapon.Name) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MinimumSpeed): return value.TryGetFloat(out weapon.MinimumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MaximumSpeed): return value.TryGetFloat(out weapon.MaximumSpeed) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MinimumStrength): return value.TryGetInt(out weapon.MinimumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				case nameof(LootWeapon.MaximumStrength): return value.TryGetInt(out weapon.MaximumStrength) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
+				default: return SetVariableResult.NotFound;
+			}
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

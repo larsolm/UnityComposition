@@ -1,0 +1,278 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/graphs/nodes">Nodes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Nodes make up the bulk of the functionality of a graph. They control both the flow of the graph and the behavior that should be performed. For example, a <a href="#manual/conditional-node.html">Conditional Node</a> branches the graph based on the result of an <a href="#reference/expression.html">expression</a> and has no effect on the game world, while a <a href="#manual/message-node.html">Message Node</a> physically displays a message in the game. The following is a list of built-in nodes by category:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Animation</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/play-animation-node.html">Play Animation</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Play an animation on a game object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/play-animation-state-node.html">Play Animation State</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Play an animation state on an Animator</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/set-animation-parameter-node.html">Set Animation Parameter</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set an animation parameter on an Animator</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/play-effect-node.html">Play Effect</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create and play an effect Prefab</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/play-sound-node.html">Play Sound</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Play an AudioClip</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/play-timeline-node.html">Play Timeline</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a timeline</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Composition</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/expression-node.html">Expression</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run an expression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/instruction-node.html">Instruction</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run an instruction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/shuffle-node.html">Shuffle</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shuffle a variable list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/sort-node.html">Sort</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort a variable list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/reset-tag-node.html">Reset Tag</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reset variables by tag</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/reset-variables-node.html">Reset Variables</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Reset variables by name</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Control Flow</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/conditional-node.html">Conditional</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fork the graph based on a condition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/branch-node.html">Branch</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a single branch based on a string value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/sequence-node.html">Sequence</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a list of nodes in order</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/loop-node.html">Loop</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Loop until a condition is met</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/iterate-node.html">Iterate</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Iterate the items in a variable list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/break-node.html">Break</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Break out of a loop</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/yield-node.html">Yield</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Yield for a single frame</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/exit-node.html">Yield</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Break out of all loops</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Debug</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/comment-node.html">Comment</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Keep notes in the graph</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/log-node.html">Log</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Log a message in the console</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/mockup-node.html">Mockup</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">For visual prototyping</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Interface</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="manual/message-node.html">Show Message</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Show a message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="manual/selection-node.html">Show Selection</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Show and wait for a selection</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="manual/input-node.html">Input</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait until a button is pressed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="manual/show-control-node.html">Show Control</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Activate an interface control</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="manual/hide-control-node.html">Hide Control</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hide an interface control</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="manual/set-binding-node.html">Set Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the binding value for a binding root</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="manual/update-binding-node.html">Update Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tell a binding root to update its bindings</p></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Object Manipulation</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/create-game-object-node.html">Create Game Object</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a game object from a prefab</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/create-scriptable-object-node.html">Create Scriptable Object</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create a scriptable object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/destroy-object-node.html">Destroy Object</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destroy an object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/enable-object-node.html">Enable Object</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/disable-object-node.html">Disable Object</a></p></td>
+<td class="tableblock halign-left valign-top"></td>
+</tr>
+</tbody>
+</table>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Sequencing</th>
+<th class="tableblock halign-left valign-top"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/play-transition-node.html">Play Transition</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Play a transition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/stop-transition-node.html">Stop Transition</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Stop the current transition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/load-scene-node.html">Load Scene</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Play a transition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/unload-scene-node.html">Unload Scene</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Play a transition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/transform-node.html">Transform Object</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Move or animate the transform of a game object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/time-scale-node.html">Time Scale</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Set the time scale value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/wait-node.html">Wait</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait for an amount of time</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>In addition, custom nodes can be created (see <a href="#topics/graphs/custom-nodes.html">Creating Custom Nodes</a>).</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

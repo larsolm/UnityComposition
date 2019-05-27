@@ -1,0 +1,82 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/interface-control">InterfaceControl</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.InterfaceControl : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_96">Description</h3>
+<div class="paragraph">
+<p>Add this to any <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> to provide support for enabling and disabling the object from an <a href="#reference/instruction-graph.html">InstructionGraph</a> using <a href="#reference/show-control-node.html">ShowControlNode</a> and <a href="#reference/hide-control-node.html">HideControlNode</a>. Read the <a href="#topics/interface/controls.html">Interface Control topic</a> for more information on how and when to use InterfaceControls.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+An InterfaceControl will always start inactive.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_43">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/dependent-object-list.html">DependentObjectList</a> <em>DependentObjects</em></dt>
+<dd>
+<p>A list of <a href="https://docs.unity3d.com/ScriptReference/GameObjects.html" target="_blank" rel="noopener">GameObjects</a> whose enabled state should always match the enabled state of this object.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_15">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsActive</em> <em>(read only)</em></dt>
+<dd>
+<p><code>true</code> if the control is currently enabled, <code>false</code> otherwise.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_20">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Activate()</dt>
+<dd>
+<p>Enables the control (and <em>DependentObjects</em>) if it is not already enabled. <em>Setup</em> will be called only if the control is not already enabled.</p>
+</dd>
+<dt class="hdlist1">void Deactivate()</dt>
+<dd>
+<p>Disables the control (and <em>DependentObjects</em>) regardless of how many times <em>Activate</em> was called. <em>Teardown</em> will be called only if the control is not already disabled.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_6">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Setup() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this method in a subclass to perform setup when the object becomes enabled. The base implementation does nothing.</p>
+</dd>
+<dt class="hdlist1">void Teardown() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this method in a subclass to perform clean up when the object becomes disabled. The base implementation does nothing.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/interface-control.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

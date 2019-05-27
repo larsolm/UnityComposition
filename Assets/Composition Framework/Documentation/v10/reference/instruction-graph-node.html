@@ -1,0 +1,225 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/instruction-graph-node">InstructionGraphNode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.InstructionGraphNode : <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_82">Description</h3>
+<div class="paragraph">
+<p>Derive from this class to implement a custom node for use in an <a href="#reference/instruction-graph.html">InstructionGraph</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_38">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>Name</em></dt>
+<dd>
+<p>The name of the node. This is used to display the node in the graph editor and in log messages to identify the node the message is related to.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>GraphPosition</em></dt>
+<dd>
+<p>Used by the editor to store the location of the node in the graph editor.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsBreakpoint</em></dt>
+<dd>
+<p>Used by the editor to indicate whether this node has been marked as a breakpoint in the graph editor for debugging.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_13">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>NodeColor</em> <em>(read only)</em> <em>(virtual)</em></dt>
+<dd>
+<p>The color the node should be displayed with in the graph editor. By default this will use <a href="#reference/instruction-graph-node-colors.html">InstructionGraphNode.Colors.<em>Default</em></a> but can be customized as a way to visually differentiate nodes in the graph editor.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_17">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Run(<a href="#reference/instruction-graph.html">InstructionGraph</a> <em>graph</em>, <a href="#reference/instruction-store.html">InstructionStore</a> <em>variables</em>, int <em>iteration</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Implement this method in derived classes to perform the execution of the node. Read the <a href="#topics/graphs/custom-nodes.html">graphs topic</a> for a complete overview of writing and using custom nodes.</p>
+</dd>
+</dl>
+</div>
+<div class="sect3">
+<h4 id="_resolve">Resolve</h4>
+<div class="paragraph">
+<p>This collection of methods will lookup the value referenced by a <a href="#reference/variable-reference.html">VariableReference</a> or <a href="#reference/variable-source.html">VariableSource</a>. The resolved value is set to the ouput parameter <em>result</em> and the return value will indicate whether the value was resolved successfully. The <em>variables</em> parameter should be the <em>variables</em> parameter passed to the <em>Run</em> method. If the resolution fails, either due to the variable not being found or it being an invalid type, a warning will be printed to the <a href="https://docs.unity3d.com/Manual/Console.html" target="_blank" rel="noopener">Console</a>.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-value-source.html">VariableValueSource</a> <em>source</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>result</em> <em>(out)</em>)</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>result</em> <em>(out)</em>)</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/bool-variable-source.html">BoolVariableSource</a> <em>source</em>, bool <em>result</em> <em>(out)</em>)</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, bool <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/int-variable-source.html">IntVariableSource</a> <em>source</em>, int <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, int <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/float-variable-source.html">FloatVariableSource</a> <em>source</em>, float <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, float <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/int2-variable-source.html">Int2VariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/int3-variable-source.html">Int3VariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/int-rect-variable-source.html">IntRectVariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/int-bounds-variable-source.html">IntBoundsVariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/vector2-variable-source.html">Vector2VariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/vector3-variable-source.html">Vector3VariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/vector4-variable-source.html">Vector4VariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/quaternion-variable-source.html">QuaternionVariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/rect-variable-source.html">RectVariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/bounds-variable-source.html">BoundsVariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/color-variable-source.html">ColorVariableSource</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/string-variable-source.html">StringVariableSource</a> <em>source</em>, string <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, string <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve&lt;EnumType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-source-1.html">VariableSource</a>&lt;EnumType&gt; <em>source</em>, <a href="#reference/enum-type.html">EnumType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve&lt;EnumType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/enum-type.html">EnumType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/store-variable-source.html">StoreVariableSource</a> <em>source</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/list-variable-source.html">ListVariableSource</a> <em>source</em>, <a href="#reference/i-variable-list.html">IVariableList</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/i-variable-list.html">IVariableList</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveObject&lt;ObjectType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-source-1.html">VariableSource</a>&lt;ObjectType&gt; <em>source</em>, <a href="#reference/object-type.html">ObjectType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveObject&lt;ObjectType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/object-type.html">ObjectType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveStore&lt;StoreType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/store-type.html">StoreType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveList&lt;ListType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/list-type.html">ListType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveInterface&lt;InterfaceType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/interface-type.html">InterfaceType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveReference(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, Object <em>result</em> <em>(out)</em>)::</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Assign(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Assigns <em>value</em> to the variable referenced by <em>reference</em>. The <em>variables</em> parameter should be the <em>variables</em> parameter passed to the <em>Run</em> method. If the assignment fails, a warning will be logged.</p>
+</dd>
+<dt class="hdlist1">void GetInputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>inputs</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this method to customize the set of variables the node expects to have available as inputs on the <a href="#reference/instruction-store.html">InstructionStore</a> when it is run. This rarely needs to be implemented as the base implementation should be sufficient most of the time. The base implementation will automatically find all <a href="#reference/variable-reference.html">VariableReferences</a>, <a href="#reference/variable-source.html">VariableSources</a>, and <a href="#reference/expression.html">Expressions</a>.</p>
+</dd>
+<dt class="hdlist1">void GetOutputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>outputs</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this method to customize the set of variables this node will set as outputs on the <a href="#reference/instruction-store.html">InstructionStore</a> when it is run. This rarely needs to be implemented as the base implementation should be sufficient most of the time. The base implementation will automatically find all <a href="#reference/variable-reference.html">VariableReferences</a> and <a href="#reference/expression.html">Expressions</a>.</p>
+</dd>
+<dt class="hdlist1">void GetConnections(<a href="#reference/instruction-graph-node-node-data.html">NodeData</a> <em>data</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this method to specify the nodes this node has connections to. This rarely needs to be implemented as the base implementation should be sufficient most of the time.</p>
+</dd>
+<dt class="hdlist1">void SetConnection(<a href="#reference/instruction-graph-node-connection-data.html">ConnectionData</a> <em>connection</em>, <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>target</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Used by the editor to update a connection. This only needs to be overridden if <em>GetConnections</em> is overridden.</p>
+</dd>
+</dl>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#manual/instruction-graph-node.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>`);

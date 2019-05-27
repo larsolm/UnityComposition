@@ -1,0 +1,61 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/instruction-caller">InstructionCaller</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.InstructionCaller</p>
+</div>
+<div class="sect2">
+<h3 id="_description_80">Description</h3>
+<div class="paragraph">
+<p>Add this as a field on a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> or <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a> to serve as a bridge between code and an <a href="#reference/instruction-graph.html">InstructionGraph</a>. This class will automatically manage configuring and applying input and output values to the <a href="#reference/instruction-graph.html">InstructionGraph</a> and enable full editor support. Read the <a href="#topics/graphs/running-from-script.html">Running Graphs From Script</a> topic for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_12">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/instruction.html">Instruction</a> <em>Instruction</em></dt>
+<dd>
+<p>The instruction, usually an <a href="#reference/instruction-graph.html">InstructionGraph</a>, to run when this caller is executed.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/instruction-input.html">InstructionInput</a>&gt; <em>Inputs</em> <em>(read only)</em></dt>
+<dd>
+<p>The list of <a href="#reference/instruction-input.html">InstructionInputs</a> to add to the <a href="#reference/instruction-store.html">InstructionStore</a> when running <em>Instruction</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/instruction-output.html">InstructionOutput</a>&gt; <em>Outputs</em> <em>(read only)</em></dt>
+<dd>
+<p>The list of <a href="#reference/instruction-output.html">InstructionOutputs</a> to read from the <a href="#reference/instruction-store.html">InstructionStore</a> after running <em>Instruction</em>.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsRunning</em> <em>(read only)</em></dt>
+<dd>
+<p>This will return true when <em>Instruction</em> is being executed. <a href="#reference/instruction.html">Instructions</a> that are already running cannot be run again until they have completed.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_15">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Execute(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>store</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>context</em>)</dt>
+<dd>
+<p>Call this as a <a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank" rel="noopener">Coroutine</a> or from another coroutine to run <em>Instruction</em>.</p>
+</dd>
+<dt class="hdlist1">void UpdateVariables()</dt>
+<dd>
+<p>This is an editor support function.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-definition.html">VariableDefinition</a> GetInputDefinition(<a href="#reference/instruction-input.html">InstructionInput</a> <em>input</em>)</dt>
+<dd>
+<p>This is an editor support function.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-definition.html">VariableDefinition</a> GetOutputDefinition(<a href="#reference/instruction-output.html">InstructionOutput</a> <em>output</em>)</dt>
+<dd>
+<p>This is an editor support function.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

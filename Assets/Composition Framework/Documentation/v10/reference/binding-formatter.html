@@ -1,0 +1,57 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/binding-formatter">BindingFormatter</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.BindingFormatter</p>
+</div>
+<div class="sect2">
+<h3 id="_description_11">Description</h3>
+<div class="paragraph">
+<p>A type to use for fields on text <a href="#reference/variable-binding.html">VariableBindings</a> to provide number formatting support.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_3">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>Format</em></dt>
+<dd>
+<p>The format of the resulting string. Use "{0}" to indicate the location in the string to insert the formatted number.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/binding-formatter-format-type.html">FormatType</a> <em>Formatting</em></dt>
+<dd>
+<p>Whether to format the number as a time or number, or skip formatting altogether.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/binding-formatter-time-format-type.html">TimeFormatType</a> <em>TimeFormatting</em></dt>
+<dd>
+<p>If <em>Formatting</em> is set to <em>Time</em>, specifies the format to use for the number.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/binding-formatter-number-format-type.html">NumberFormatType</a> <em>NumberFormatting</em></dt>
+<dd>
+<p>If <em>Formatting</em> is set to <em>Number</em>, specifies the format to use for the number.</p>
+</dd>
+<dt class="hdlist1">string <em>ValueFormat</em></dt>
+<dd>
+<p>If <em>Formatting</em> is set to <em>Time</em> and <em>TimeFormatting</em> is set to <em>Custom</em> or <em>Formatting</em> is set to <em>Number</em> and <em>NumberFormatting</em> is set to <em>Custom</em>, specifies the custom format to use. The syntax is the same as the .net <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-date-and-time-format-strings" target="_blank" rel="noopener">DateTime format strings</a> for <em>Formatting</em> <em>Time</em> and <a href="https://docs.microsoft.com/en-us/dotnet/standard/base-types/custom-numeric-format-strings" target="_blank" rel="noopener">numeric format strings</a> for <em>Formatting</em> <em>Number</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_4">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string GetFormattedString(float <em>number</em>)</dt>
+<dd>
+<p>Returns <em>number</em> as a string based on the configured properties. For <em>Formatting</em> <em>Time</em> <em>number</em> is interpreted as a number of seconds.</p>
+</dd>
+<dt class="hdlist1">string GetFormattedString(int <em>number</em>)</dt>
+<dd>
+<p>Returns <em>number</em> as a string based on the configured properties. For <em>Formatting</em> <em>Time</em> <em>number</em> is interpreted as a number of seconds.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

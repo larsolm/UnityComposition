@@ -1,0 +1,73 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/expression">Expression</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.Expression</p>
+</div>
+<div class="sect2">
+<h3 id="_description_47">Description</h3>
+<div class="paragraph">
+<p>Add this as a field on a class to provide an interface for specifying simple, repeatable operations in the editor. The full expression syntax and a guide on writing and using expressions can be found in the <a href="#topics/expressions.html">Expressions topic</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_6">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/expression-compilation-result.html">ExpressionCompilationResult</a> <em>CompilationResult</em> <em>(read only)</em></dt>
+<dd>
+<p>This will hold the result of the most recent expression compilation. If <em>HasError</em> is true, this can be queried to retrieve more information about the error. That same information will be visible in the editor when viewing the expression, and any expressions that are loaded with an invalid statement will have this information logged.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operation.html">Operation</a> <em>LastOperation</em> <em>(read only)</em></dt>
+<dd>
+<p>The last <a href="#reference/operation.html">Operation</a> that was evaluated when evaluating the expression. If an <a href="#reference/expression-evaluation-exception.html">ExpressionEvaluationException</a> is thrown, this will be the <a href="#reference/operation.html">Operation</a> that was being evaluated when the error occurred. If the evaluation is successful this will hold the last <a href="#reference/operation.html">Operation</a> in the expression.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsValid</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> if <em>Statement</em> has been set and was parsed successfully.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasError</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> if <em>Statement</em> has been set but failed to parse correctly.</p>
+</dd>
+<dt class="hdlist1">string <em>Statement</em> <em>(read only)</em></dt>
+<dd>
+<p>The statement containing the text of the expression.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_9">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/expression-compilation-result.html">ExpressionCompilationResult</a> SetStatement(string <em>statement</em>)</dt>
+<dd>
+<p>Sets <em>Statement</em> to <em>statement</em> and attempts to parse it. The parse result is returned.</p>
+</dd>
+<dt class="hdlist1">void GetInputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>inputs</em>, string <em>source</em>)</dt>
+<dd>
+<p>Analyzes the expression to determine the variables that are being accessed on the variable store identified with name <em>source</em> and adds them to <em>inputs</em>.</p>
+</dd>
+<dt class="hdlist1">void GetOutputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>outputs</em>, string <em>source</em>)</dt>
+<dd>
+<p>Analyzes the expression to determine the variables that are being set on the variable store identified with name <em>source</em> and adds them to <em>outputs</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Execute(<a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> <em>context</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>)</dt>
+<dd>
+<p>Evaluates the expression using <em>Evaluate</em> and catches any <a href="#reference/expression-evaluation-exception.html">ExpressionEvaluation</a> or <a href="#reference/command-evaluation-exception.html">CommandEvaluation</a> exceptions that are thrown and logs them. <em>context</em> should be the object that owns the expression and is passed along to the log.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Execute(<a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> <em>context</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-type.html">VariableType</a> <em>expectedType</em>)</dt>
+<dd>
+<p>Evaluates the expression using <em>Evaluate</em> and catches any <a href="#reference/expression-evaluation-exception.html">ExpressionEvaluation</a> or <a href="#reference/command-evaluation-exception.html">CommandEvaluation</a> exceptions that are thrown and logs them. Additionally, the result is checked to ensure it has the <a href="#reference/variable-type.html">VariableType</a> <em>expectedType</em> and an error is logged if it does not. <em>context</em> should be the object that owns the expression and is passed along to the log.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Evaluate(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>)</dt>
+<dd>
+<p>Evaluates the expression using <em>variables</em> as the root store for resolving <a href="#reference/variable-reference.html">VariableReferences</a>. The return value is the result of the last statement in the expression. If an error is encountered an <a href="#reference/expression-evaluation-exception.html">ExpressionEvaluation</a> or <a href="#reference/command-evaluation-exception.html">CommandEvaluation</a> exception will be thrown.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

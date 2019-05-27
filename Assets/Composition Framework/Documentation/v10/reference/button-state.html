@@ -1,0 +1,57 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/button-state">ButtonState</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.UtilityEngine.ButtonState : ValueType</p>
+</div>
+<div class="sect2">
+<h3 id="_description_19">Description</h3>
+<div class="paragraph">
+<p>Describes the current state of an input on the <a href="#reference/input-helper.html">InputHelper</a>. This could be a virtual button press, mouse button, touch, key, controller button, or controller axis. The properties on this class are set when the state is queried from the <a href="#reference/input-helper.html">InputHelper</a> rather than updating automatically, so the state needs to be looked up every frame to get up to date results.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_constructors_3">Constructors</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">ButtonState(bool <em>pressed</em>, bool <em>held</em>, bool <em>released</em>)</dt>
+<dd>
+<p>Initializes the state to specific values.</p>
+</dd>
+<dt class="hdlist1">ButtonState(string <em>button</em>)</dt>
+<dd>
+<p>Initializes the state to the current state of <em>button</em> where <em>button</em> is a virtual button defined in the <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a>.</p>
+</dd>
+<dt class="hdlist1">ButtonState(<a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">KeyCode</a> <em>key</em>)</dt>
+<dd>
+<p>Initializes the state to the current state of <em>key</em>.</p>
+</dd>
+<dt class="hdlist1">ButtonState(int <em>touch</em>)</dt>
+<dd>
+<p>Initializes the state to the current state of the touch with index <em>touch</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_8">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>Pressed</em></dt>
+<dd>
+<p>If this is <code>true</code>, the queried input was not pressed on the previous frame and is on the current frame.</p>
+</dd>
+<dt class="hdlist1">bool <em>Held</em></dt>
+<dd>
+<p>If this is <code>true</code>, the queried input is currently pressed. This will be <code>true</code> on the first frame (i.e when <em>Pressed</em> is <code>true</code>).</p>
+</dd>
+<dt class="hdlist1">bool <em>Released</em></dt>
+<dd>
+<p>If this is <code>true</code>, the queried input is no longer pressed but it was pressed on the previous frame.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,45 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/variable-schema">Variable Schema</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A VariableSchema is an <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">Asset</a> used to define the variables that are available to an <a href="#reference/i-variable-store.html">IVariableStore</a> object, usually a <a href="#manual/variable-set-component.html">Variable Set Component</a> or <a href="#reference/variable-set-asset.html">Variable Set Asset</a>. This improves the editor experience for working with those object types along with enforcing constraints so typos or other mistaken accesses can be caught and reported at runtime. Create a Variable Schema through the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">PiRho Soft</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Variable Schema</b></span> menu in the project view.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/variables/overview.html">Variables</a> for more information.<br></p>
+</div>
+<div class="sect2">
+<h3 id="_fields_79">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/variable-schema.png" alt="Variable Schema">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Initializer Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to initialize the variables that use this schema with an <a href="#reference/expression.html">Expression</a> or a default value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tags</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A list of strings than can be used to categorize each variable in the schema - usually so that they can be reinitialized or saved later</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/variable-schema.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

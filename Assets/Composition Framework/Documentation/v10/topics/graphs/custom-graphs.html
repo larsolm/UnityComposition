@@ -1,0 +1,49 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/graphs/custom-graphs">Creating Custom Graphs</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create a custom graph, derive from <a href="#reference/instruction-graph.html">InstructionGraph</a> and implement the abstract method <code>Run(InstructionStore variables)</code>. The following is an example of a graph that has three different entry points and runs them sequentially:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using System.Collections;
+using PiRhoSoft.CompositionEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class ScopedGraph : InstructionGraph
+	{
+		<i class="conum" data-value="1"></i><b>(1)</b>
+		public InstructionGraphNode Enter = null;
+		public InstructionGraphNode Process = null;
+		public InstructionGraphNode Exit = null;
+
+		protected override IEnumerator Run(InstructionStore variables)
+		{
+			<i class="conum" data-value="2"></i><b>(2)</b>
+			yield return Run(variables, Enter, nameof(Enter));
+			yield return Run(variables, Process, nameof(Process));
+			yield return Run(variables, Exit, nameof(Exit));
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><a href="#reference/intruction-graph-node.html">InstructionGraphNode</a> fields on a graph will automatically be added as output options visually for a graph in the Instruction Graph Window.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Internally, graphs operate as a <a href="https://docs.unity3d.com/ScriptReference/Coroutine.html" target="_blank" rel="noopener">Coroutine</a> which gives fine control of timing behaviour. Because of this, it is important to <code>yield</code> the execution of each entry node that this graph will run. The third parameter is simply a label used in debugging for tracking the flow of execution in the Instruction Graph Window.</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Ultimately, graphs are just an <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">Asset</a> so they can store data and implement any functionality desired. Execution will end when the <code>Run()</code> function finishes.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

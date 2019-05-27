@@ -1,0 +1,42 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/sequence-node">Sequence Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Sequence Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that implements <a href="#reference/i-loop-node.html">ISequenceNode</a>. It will run each of its child nodes in sequential order. This is useful for organizational purposes or to continue the execution of a graph after a node that does not have an end connection (like an <a href="#manual/iterate-node.html">Iterate Node</a>). Create a Sequence Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Control Flow</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Sequence</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/control-flow.html">Control Flow</a> for more information.<br>
+See the <em>"Battle"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Battle project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_58">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/sequence-node.png" alt="Sequence Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sequence</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of <a href="#manual/instruction-graph-node.html">Nodes</a> to execute in sequential order</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/sequence-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

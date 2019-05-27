@@ -1,0 +1,68 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-constraint">VariableConstraint</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableConstraint</p>
+</div>
+<div class="sect2">
+<h3 id="_description_210">Description</h3>
+<div class="paragraph">
+<p>VariableConstraint is the base class for constraints applied to <a href="#reference/value-definition.html">ValueDefinitions</a>. For each relevent <a href="#reference/variable-type.html">VariableType</a> an implementation of this class is provided. These are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Constraint</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Enum</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/enum-variable-constraint.html">EnumVariableConstraint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Float</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/float-variable-constraint.html">FloatVariableConstraint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Int</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/int-variable-constraint.html">IntVariableConstraint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>List</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/list-variable-constraint.html">ListVariableConstraint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Object</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/object-variable-constraint.html">ObjectVariableConstraint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Store</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/store-variable-constraint.html">StoreVariableConstraint</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>String</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/string-variable-constraint.html">StringVariableConstraint</a></p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_41">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool IsValid(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Returns true if <em>value</em> satisfies the rules of this constraint.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

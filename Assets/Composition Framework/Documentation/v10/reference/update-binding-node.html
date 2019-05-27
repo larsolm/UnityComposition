@@ -1,0 +1,41 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/update-binding-node">UpdateBindingNode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.UpdateBindingNode : <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_205">Description</h3>
+<div class="paragraph">
+<p>Add this to an <a href="#reference/instruction-graph.html">InstructionGraph</a> to update the <a href="#reference/variable-binding.html">VariableBindings</a> on a <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> and its descendants.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_103">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Next</em></dt>
+<dd>
+<p>The <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> to run when this node finishes.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>Object</em></dt>
+<dd>
+<p>The <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> containing the <a href="#reference/variable-binding.html">VariableBindings</a> to update.</p>
+</dd>
+<dt class="hdlist1">string <em>Group</em></dt>
+<dd>
+<p>The <em>BindingGroup</em> of <a href="#reference/variable-binding.html">VariableBindings</a> to update. If this is empty, all <a href="#reference/variable-binding.html">VariableBindings</a> in <em>Object</em> will be updated.</p>
+</dd>
+<dt class="hdlist1">bool <em>WaitForCompletion</em></dt>
+<dd>
+<p>If this is <code>true</code>, this node will not complete until any animated bindings have finished animating. Otherwise, this node will complete immediately.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/update-binding-node.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

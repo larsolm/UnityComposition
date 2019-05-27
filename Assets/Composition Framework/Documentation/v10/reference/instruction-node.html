@@ -1,0 +1,49 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/instruction-node">InstructionNode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.InstructionNode : <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_87">Description</h3>
+<div class="paragraph">
+<p>Add this to an <a href="#reference/instruction-graph.html">InstructionGraph</a> to run an external <a href="#reference/instruction-graph.html">InstructionGraph</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_40">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Next</em></dt>
+<dd>
+<p>The <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> to run when this node finishes.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/instruction-node-instruction-source.html">InstructionSource</a> <em>Source</em></dt>
+<dd>
+<p>Indicates how the <a href="#reference/instruction-graph.html">InstructionGraph</a> to run is specified.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/instruction-caller.html">InstructionCaller</a> <em>Instruction</em></dt>
+<dd>
+<p>If <em>Source</em> is <code>Value</code>, the <a href="#reference/instruction-graph.html">InstructionGraph</a> to run when this node is entered. <a href="#reference/instruction-store.html">InstructionStore.<em>Local</em></a> variables available to this node are not transferred to this graph - to share variables use the <a href="#reference/instruction-store.html">InstructionStore.<em>Global</em></a> store, <a href="#reference/instruction-store.html">InstructionStore.<em>Input</em></a> store, or <em>Context</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>Reference</em></dt>
+<dd>
+<p>If <em>Source</em> is <code>Reference</code>, the reference to the <a href="#reference/instruction-graph.html">InstructionGraph</a> to run when this node is entered. <a href="#reference/instruction-store.html">InstructionStore.<em>Local</em></a> variables available to this node are not transferred to this graph - to share variables use the <a href="#reference/instruction-store.html">InstructionStore.<em>Global</em></a> store, <a href="#reference/instruction-store.html">InstructionStore.<em>Input</em></a> store, or <em>Context</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value-source.html">VariableValueSource</a> <em>Context</em></dt>
+<dd>
+<p>The variable to use as the <a href="#reference/instruction-store.html">InstructionStore.<em>Context</em></a> for <em>Instruction</em>.</p>
+</dd>
+<dt class="hdlist1">bool <em>WaitForCompletion</em></dt>
+<dd>
+<p>If <code>true</code>, <em>Next</em> will not be run until execution of <em>Instruction</em> is complete. If <code>false</code>, <em>Next</em> will be run immediately and continue in parallel with <em>Instruction</em>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/instruction-node.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

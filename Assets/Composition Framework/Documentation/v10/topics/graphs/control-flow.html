@@ -1,0 +1,51 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/graphs/control-flow">Control Flow</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>While most nodes simply perform an action and then move on to another node, some nodes alter the control flow of the graph, branching to different outputs, looping through its child nodes multiple times, or running a list of nodes in order.</p>
+</div>
+<div class="sect2">
+<h3 id="_branching">Branching</h3>
+<div class="paragraph">
+<p>Nodes that branch can have multiple output connections but will only traverse through a single connection. Through branching, graphs can have dynamic behavior in different executions of a graph.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/graphs/branch-example.png" alt="Branch Example">
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above, imagine we run a graph for when player is attempting to open a locked door. If the player has the key we can branch to nodes that run the open animation, load the next scene, etc. If the player doesn&#8217;t have the key we can branch to a different set of nodes that displays a message that says the door is locked.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_sequences">Sequences</h3>
+<div class="paragraph">
+<p>Nodes that implement the <a href="#reference/i-sequence-node.html">ISequenceNode</a> interface act as sequences. As a sequence, the graph will continually return to the node until it does not have another node to run. That is, when the first branch reaches the end of its execution (when it has no connections) the graph will revert back to the sequence and then run the next branch until all of branches have been run. The <a href="#manual/sequence-node.html">Sequence Node</a> is the most basic and common of these.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/graphs/sequence-example.png" alt="Sequence Example">
+</div>
+</div>
+<div class="paragraph">
+<p>In the example above each of the four branches of the sequence will run in order (from top to bottom) before the graph ends.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_loops">Loops</h3>
+<div class="paragraph">
+<p>Nodes that loop implement the <a href="#reference/i-loop-node.html">ILoopNode</a> interface. Looping causes the graph to continually return to this node until it says that it is done.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/graphs/loop-example.png" alt="Loop Example">
+</div>
+</div>
+<div class="paragraph">
+<p>In this example, the <a href="#manual/loop-node.html">Loop Node</a> <em>Loop Until Winner</em> will continue to run through each of its child nodes until a condition is met. To preemptively break out of a loop, use a <a href="#manual/break-node.html">Break Node</a>. This will tell the graph to stop running the most recently executed <a href="#reference/i-loop-node.html">ILoopNode</a>. In many cases once a loop has finished, it may be desired to continue executing other nodes. Because loop nodes don&#8217;t have a concept of where to continue after they are finished executing, it is common to place a sequence node immediately prior to the loop (as shown in the example above) to continue execution. Additionally an <a href="#manual/exit-node.html">Exit Node</a> may be used to break out of all loops and sequences.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

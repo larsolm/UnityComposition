@@ -1,0 +1,52 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/message">Message</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.Message</p>
+</div>
+<div class="sect2">
+<h3 id="_description_122">Description</h3>
+<div class="paragraph">
+<p>Add this as a field of a class to provide an editable text field that can be formatted with <a href="#reference/variable-reference.html">VariableReferences</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_56">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>Text</em></dt>
+<dd>
+<p>The string that will be formatted at runtime. <a href="#reference/variable-reference.html">VariableReferences</a> to resolve can be inserted in the text by surrounding it with braces (<code>{</code> and <code>}</code>). Access the resolved text with the <em>GetText</em> method. An example message is shown in the <a href="#topics/interface/messages.html">Messages</a> topic.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_24">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>HasText</em> <em>(read only)</em></dt>
+<dd>
+<p>Indicates that <em>Text</em> has been set and <em>GetText</em> will return a non-empty string.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_30">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void GetInputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>inputs</em>)</dt>
+<dd>
+<p>Adds a definition for each <a href="#reference/variable-reference.html">VariableReference</a> in <em>Text</em> to <em>inputs</em> if the <a href="#reference/variable-reference.html">VariableReference</a> accesses <a href="#reference/instruction-store.html">InstructionStore.<em>Input</em></a>.</p>
+</dd>
+<dt class="hdlist1">string GetText(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, bool <em>suppressErrors</em>)</dt>
+<dd>
+<p>Formats and returns <em>Text</em>, looking up any <a href="#reference/variable-reference.html">VariableReferences</a> on <em>variables</em>. If <em>suppressErrors</em> is <code>false</code>, an error will be logged when a <a href="#reference/variable-reference.html">VariableReference</a> cannot be resolved.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

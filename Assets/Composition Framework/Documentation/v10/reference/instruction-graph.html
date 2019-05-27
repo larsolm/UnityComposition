@@ -1,0 +1,191 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/instruction-graph">InstructionGraph</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.InstructionGraph : <a href="#reference/instruction.html">Instruction</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_81">Description</h3>
+<div class="paragraph">
+<p>The main piece of the composition system, implementing all the functionality necessary to manage and execute a set of <a href="#reference/instruction-graph-node.html">InstructionGraphNodes</a>. Read the <a href="#topics/graphs/overview.html">graph topic</a> for a more thorough breakdown of creating and using graphs.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_fields_3">Static Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsDebugBreakEnabled</em></dt>
+<dd>
+<p>Indicates the editor should pause graph execution when it encounters a breakpoint. This is on (<code>true</code>) by default but can be turned off in the graph editor window to disable all <a href="#reference/instruction-graph-node.html">node</a> breakpoints. The breakpoints are not removed, so when this setting is re-enabled, any previously set breakpoints will continue to function.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This setting is saved with <a href="https://docs.unity3d.com/ScriptReference/EditorPrefs.html" target="_blank" rel="noopener">EditorPrefs</a> so it will persist across Unity launches on the local machine for all projects.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsDebugLoggingEnabled</em></dt>
+<dd>
+<p>Enable this setting to log execution events when running a graph. The events that will be logged are:</p>
+<div class="ulist">
+<ul>
+<li>
+<p>A branch has started</p>
+</li>
+<li>
+<p>A branch has been manually stopped</p>
+</li>
+<li>
+<p>Execution of a branch has completed</p>
+</li>
+<li>
+<p>Execution has paused at a breakpoint or after a step</p>
+</li>
+<li>
+<p>A connection has been followed to a new node</p>
+</li>
+</ul>
+</div>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The current frame number is printed with the log message to make it easy to determine how many frames a particular node has taken to complete (since they are run as coroutines). Additional profiling and debugging information can be enabled with <a href="#reference/composition-manager.html">CompositionManager.<em>LogTracking</em></a>.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+This setting is saved with <a href="https://docs.unity3d.com/ScriptReference/EditorPrefs.html" target="_blank" rel="noopener">EditorPrefs</a> so it will persist across Unity launches on the local machine for all projects.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_16">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void GoTo(<a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>node</em>, string <em>name</em>)</dt>
+<dd>
+<p>Call this from a <a href="#reference/instruction-graph-node.html">node</a> to tell the graph to traverse to <em>node</em>. <em>name</em> should be the name of the property the node was assigned to for use in log messages.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>The following two overloads perform the same task but can be used to provide more information in log messages when <em>node</em> comes from a list (<em>index</em> would be the index of <em>node</em>) or dictionary (<em>key</em> would be the key of <em>node</em>).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>void GoTo(<a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>node</em>, string <em>name</em>, int <em>index</em>)::</p>
+</li>
+<li>
+<p>void GoTo(<a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>node</em>, string <em>name</em>, string <em>key</em>)::</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Break()</dt>
+<dd>
+<p>Call this from a <a href="#reference/instruction-graph-node.html">node</a> to tell the graph to return to the closest <a href="#reference/instruction-graph-node.html">node</a> in the call stack that is an <a href="#reference/i-loop-node.html">ILoopNode</a>. The <a href="#reference/break-node.html">BreakNode</a> calls this.</p>
+</dd>
+<dt class="hdlist1">void BreakAll()</dt>
+<dd>
+<p>Call this from a <a href="#reference/instruction-graph-node.html">node</a> to tell the graph to stop running is current branch.</p>
+</dd>
+</dl>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_5">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Run(<a href="#reference/instruction-store.html">InstructionStore</a> <em>variables</em>, <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>root</em>, string <em>source</em>)</dt>
+<dd>
+<p>Call this from a subclass to start running the branch <em>root</em>. Pass the <a href="#reference/instruction-store.html">InstructionStore</a> given to the <em>Run</em> method as <em>variables</em>. <em>name</em> should be the name of the property the branch was assigned to for use in log messages.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_editor_support">Editor Support</h3>
+<div class="paragraph">
+<p>The following properties and methods are exposed for use by the editor and only available in editor builds. They can be ignored.</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>Action&lt;<a href="#reference/instruction-graph.html">InstructionGraph</a>, <a href="#reference/instruction-graph.html">InstructionGraph</a>&gt; <em>OnBreakpointHit</em>::</p>
+</li>
+<li>
+<p><a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>StartPosition</em>::</p>
+</li>
+<li>
+<p><a href="#reference/instruction-graph-node-list.html">InstructionGraphNodeList</a> <em>Nodes</em> <em>(read only)</em>::</p>
+</li>
+<li>
+<p><a href="#reference/instruction-graph-playback-state.html">PlaybackState</a> <em>DebugState</em> <em>(read only)</em>::</p>
+</li>
+<li>
+<p>bool <em>CanDebugPlay</em> <em>(read only)</em>::</p>
+</li>
+<li>
+<p>bool <em>CanDebugPause</em> <em>(read only)</em>::</p>
+</li>
+<li>
+<p>bool <em>CanDebugStep</em> <em>(read only)</em>::</p>
+</li>
+<li>
+<p>bool <em>CanDebugStop</em> <em>(read only)</em>::</p>
+</li>
+<li>
+<p>void DebugPlay()::</p>
+</li>
+<li>
+<p>void DebugPause()::</p>
+</li>
+<li>
+<p>void DebugStep()::</p>
+</li>
+<li>
+<p>void DebugStop()::</p>
+</li>
+<li>
+<p>int IsInCallStack(<a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>node</em>)::</p>
+</li>
+<li>
+<p>bool IsInCallStack(<a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>node</em>, string <em>source</em>)::</p>
+</li>
+<li>
+<p>bool IsExecuting(<a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>node</em>)::</p>
+</li>
+<li>
+<p>void GetConnections(<a href="#reference/instruction-graph-node-node-data.html">NodeData</a> <em>data</em>) <em>(virtual)</em>::</p>
+</li>
+<li>
+<p>void SetConnection(<a href="#reference/instruction-graph-node-connection-data.html">ConnectionData</a> <em>connection</em>, <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>target</em>) <em>(virtual)</em>::</p>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#manual/instruction-graph.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

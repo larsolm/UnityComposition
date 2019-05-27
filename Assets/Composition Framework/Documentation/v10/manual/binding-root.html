@@ -1,0 +1,42 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/binding-root">Binding Root</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Binding Root is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> that acts as a root object for all child <a href="#manual/variable-binding.html">Variable Bindings</a>. Binding Roots have a <em>Value</em> property that child bindings access via the <em>Value Name</em> property. <em>Value</em> can be set from a derived class such as <a href="#manual/object-binding-root.html">Object Binding Root</a> or through a <a href="#manual/set-binding-node.html">Set Binding Node</a>. When accessing variables on a Binding Root, the search will cascade upward to the next Binding Root in the scene hierarchy with the the default variable store on the <a href="#manual/composition-manager.html">Composition Manager</a> as the base. <a href="#manual/selection-control.html">Selection Controls</a> and <a href="#manual/menu.html">Menus</a> use Binding Roots on each of their child <a href="#manual/menu-item.html">Menu Items</a> to group each item&#8217;s data.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/bindings/binding-roots.html">Binding Roots</a> for more information on binding roots.<br>
+See the "Card" prefab in the CardGame project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_3">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/binding-root.png" alt="Binding Root">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the variable that child <a href="#manual/variable-binding.html">Variable Bindings</a> can use in order to access this Binding Root&#8217;s <em>Value</em>.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/binding-root.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

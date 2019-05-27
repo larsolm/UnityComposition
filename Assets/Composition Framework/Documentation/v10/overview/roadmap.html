@@ -1,0 +1,138 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="overview/roadmap">Roadmap</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>This roadmap contains a list of features we have planned for future releases. This will be periodically updated with more features, additions, and fixes and more specific information (like release dates) as our plans develop. If there is something you would like to see that isn&#8217;t listed here, or something that is listed that you would like to voice your support for (and potentially increase its priority), <a href="https://discord.gg/E3ccdfy" target="_blank" rel="noopener">let us know</a>!</p>
+</div>
+<div class="sect2">
+<h3 id="_features">Features</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>First class integration with <a href="https://unity.com/dots" target="_blank" rel="noopener">DOTS</a></p>
+</li>
+<li>
+<p>Update custom editors to support <a href="https://blogs.unity3d.com/2019/04/23/whats-new-with-uielements-in-2019-1/" target="_blank" rel="noopener">UIElements</a></p>
+</li>
+<li>
+<p>Support for the new <a href="https://github.com/Unity-Technologies/InputSystem" target="_blank" rel="noopener">InputSystem</a></p>
+</li>
+<li>
+<p>Intellisense/auto complete in VariableReference and Expression editing</p>
+</li>
+<li>
+<p>Broader support for exposing, editing, and animating properties using graphs</p>
+</li>
+<li>
+<p>Precompilation of entire graphs and objects for enhanced performance (competitive with hand written code)</p>
+</li>
+<li>
+<p>Graph analysis and display for inspecting how variables and bindings are being used</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_additions">Additions</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>More logging and debugging info, including a visualizer for bindings and expressions</p>
+</li>
+<li>
+<p>Live display of graph execution information (iterations, frame count, elapsed time)</p>
+</li>
+<li>
+<p>Various visual enhancements of the graph window, including better connection drawing and animated view changes</p>
+</li>
+<li>
+<p>More built in node and binding types</p>
+</li>
+<li>
+<p>More transition effects</p>
+</li>
+<li>
+<p>Support for number formatting and expression evaluation in messages</p>
+</li>
+<li>
+<p><code>Other</code> type for VariableValue so non Object derived types can be stored using a ClassMap</p>
+</li>
+<li>
+<p>Reflection fallback for <code>Object/Other</code> VariableValues that aren&#8217;t IVariableStores and don&#8217;t have a ClassMap</p>
+</li>
+<li>
+<p>DictionaryAdapter and ObjectAdapter (using ClassMaps) for use with MappedVariable or IVariableStore implementations</p>
+</li>
+<li>
+<p>More example projects, including ones using these types that don&#8217;t have an example: TimeScaleNode, TextInputBinding, SetAnimationParameterNode, PlayAnimationStateNode, PlayTimelineNode, ImageColorBinding, CutoffTransition Distort, PixelateTransition, CreateScriptableObjectNode, and ResetVariableNode</p>
+</li>
+<li>
+<p>MenuBinding that works like ListBinding but uses MenuItemTemplates</p>
+</li>
+<li>
+<p>Potentially add commands or operators for testing enum flags in expressions</p>
+</li>
+<li>
+<p>Break on error option in graph execution</p>
+</li>
+<li>
+<p>Simplified and documented interface for extending expressions with custom keywords and operators</p>
+</li>
+<li>
+<p>Store VariableValue enums as int so they don&#8217;t box (i.e allocate)</p>
+</li>
+<li>
+<p>Expose access restrictions for set, add, and remove to MappedVariable for lists</p>
+</li>
+<li>
+<p>Context sensitive mouse cursors in graph window (disabled due to odd AddCursorRect behaviour with zoom)</p>
+</li>
+<li>
+<p>Improve custom binding interface with a generic base class that looks up the sibling component the binding is acting on</p>
+</li>
+</ul>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_bug_fixes">Bug Fixes</h3>
+<div class="ulist">
+<ul>
+<li>
+<p>the outputs in the connection lists for MockupGraph and MockupNode must have unique names but this is not enforced by the editor</p>
+</li>
+<li>
+<p>pasting a node in a graph, then undoing, then redoing will not maintain connections</p>
+</li>
+<li>
+<p>right clicking in the graph window then right clicking again in a different place sometimes pans the view</p>
+</li>
+<li>
+<p>when zoomed tooltips in the graph window don&#8217;t show up in the correct place</p>
+</li>
+<li>
+<p>the VariablePool inspector doesn&#8217;t repaint when changing the constraint from a SelectionControl until mouse over</p>
+</li>
+<li>
+<p>lists in a VariableStore are not assigned a definition so statically typed lists (i.e ListAdapters) cannot have items added</p>
+</li>
+<li>
+<p>auto scrolling in MenuInput doesn&#8217;t take into account different anchors</p>
+</li>
+<li>
+<p>switching focused menus with MenuInput is based on item index without accounting for scrolling - it should be based on the item position instead</p>
+</li>
+<li>
+<p>key events are not repeated when holding down a key</p>
+</li>
+<li>
+<p>GetVariableNames in BindingRoot does not include names from _parent</p>
+</li>
+<li>
+<p>Graphs will not be marked as changed when edited during play mode even though the edits will persist.</p>
+</li>
+</ul>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

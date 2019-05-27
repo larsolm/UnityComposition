@@ -1,0 +1,123 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-source-1">VariableSource</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableSource&lt;<em>T</em>&gt; : <a href="#reference/variable-source.html">VariableSource</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_227">Description</h3>
+<div class="paragraph">
+<p>An implementation of <a href="#reference/variable-source.html">VariableSource</a> that exposes the value to use when <em>Type</em> is set to <em>Value</em>. Because Unity cannot serialize fields of generic types this class is defined as abstract. Therefore, concrete types for each value type must be implemented. The following built in variable sources are included:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Type</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/bool-variable-source.html">BoolVariableSource</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">bool</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/int-variable-source.html">IntVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">int</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/float-variable-source.html">FloatVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">float</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/int2-variable-source.html">Int2VariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/int3-variable-source.html">Int3VariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/int-rect-variable-source.html">IntRectVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/int-bounds-variable-source.html">IntBoundsVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/vector2-variable-source.html">Vector2VariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/vector3-variable-source.html">Vector3VariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/vector4-variable-source.html">Vector4VariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/quaternion-variable-source.html">QuaternionVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/rect-variable-source.html">RectVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/bounds-variable-source.html">BoundsVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/color-variable-source.html">ColorVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/string-variable-source.html">StringVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/object-variable-source.html">ObjectVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/game-object-variable-source.html">GameObjectVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/store-variable-source.html">StoreVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/i-variable-store.html">IVariableStore</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/list-variable-source.html">ListVariableSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/i-variable-list.html">IVariableList</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/variable-value-source.html">VariableValueSource</a>,</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#reference/variable-value.html">VariableValue</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Variable sources for additional types can be added by deriving from this class.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_114">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">T <em>Value</em></dt>
+<dd>
+<p>If <em>Type</em> is set to <em>Value</em>, this holds the value the owner should use for this variable.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

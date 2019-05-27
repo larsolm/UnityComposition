@@ -1,0 +1,45 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/play-transition-node">PlayTransitionNode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.PlayTransitionNode : <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_151">Description</h3>
+<div class="paragraph">
+<p>Add this to an <a href="#reference/instruction-graph.html">InstructionGraph</a> to start a <a href="#reference/transition.html">Transition</a> on the <a href="#reference/transition-manager.html">TransitionManager</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_74">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Next</em></dt>
+<dd>
+<p>The <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> to run when this node finishes.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/transition-variable-source.html">TransitionVariableSource</a> <em>Transition</em></dt>
+<dd>
+<p>The <a href="#reference/transition.html">Transition</a> to play.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/transition-phase.html">TransitionPhase</a> <em>Phase</em></dt>
+<dd>
+<p>The <a href="#reference/transition-phase.html">TransitionPhase</a> to play the <a href="#reference/transition.html">Transition</a> in.</p>
+</dd>
+<dt class="hdlist1">bool <em>AutoFinish</em></dt>
+<dd>
+<p>If this is <code>true</code>, the <a href="#reference/transition.html">Transition</a> will be ended as soon as it has completed. If this is <code>false</code>, the <a href="#reference/transition.html">Transition</a> will persist in its final state until another <a href="#reference/transition.html">Transition</a> (perhaps the same one with a different <a href="#reference/transition-phase.html">TransitionPhase</a>) is started.</p>
+</dd>
+<dt class="hdlist1">bool <em>WaitForCompletion</em></dt>
+<dd>
+<p>If this is <code>true</code>, this node will not complete until <em>Transition</em> has completed. Otherwise, this node will complete immediately.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/play-transition-node.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

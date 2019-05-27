@@ -1,0 +1,38 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/expression-lexer">ExpressionLexer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ExpressionLexer</p>
+</div>
+<div class="sect2">
+<h3 id="_description_52">Description</h3>
+<div class="paragraph">
+<p>Converts <a href="#reference/expression.html">Expression</a> statements into a series of tokens for processing by the <a href="#reference/expression-parser.html">ExpressionParser</a>. <a href="#reference/expression.html">Expression</a> handles this process automatically.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_3">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/expression-token.html">ExpressionToken</a>&gt; Tokenize(string <em>input</em>)</dt>
+<dd>
+<p>Converts <em>input</em> into a list of <a href="#reference/expression-token.html">tokens</a> that can then be processed by the <a href="#reference/expression-parser.html">ExpressionParser</a>. This method will always succesfully convert <em>input</em>, with any unknown character sequences being given <a href="#reference/expression-token-type.html">ExpressionTokenType</a> <code>Unknown</code>. It is the responsibility of the <a href="#reference/expression-parser.html">ExpressionParser</a> to report these errors as well as errors for invalid token sequences.</p>
+</dd>
+<dt class="hdlist1">void AddConstant(string <em>text</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Adds the string <em>text</em> as a sequence of characters the lexer should identify as a <code>Constant</code> <a href="#reference/expression-token.html">token</a> that is always <a href="#reference/expression-parser.html">parser</a> as <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>.</p>
+</dd>
+<dt class="hdlist1">void AddKeyword(string <em>text</em>)</dt>
+<dd>
+<p>Adds the string <em>text</em> as a sequence of characters the lexer should identify as an <code>Operator</code> <a href="#reference/expression-token.html">token</a>. The <a href="#reference/expression-parser.html">parser</a> should be given an operator with <em>symbol</em> <em>text</em> using <a href="#reference/expression-parser.html">AddPrefixOperator</a> or <a href="#reference/expression-parser.html">AddInfixOperator</a> to define the functionality for the keyword.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetConstant(string <em>text</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/variable-value.html">VariableValue</a> that was assigned to <em>text</em> using <em>AddConstant</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

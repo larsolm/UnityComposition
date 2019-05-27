@@ -1,0 +1,59 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/message-node">Message Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Message Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that will tell a <a href="#manual/message-control.html">Message Control</a> to show a <a href="#reference/message.html">Message</a>. Showing a <a href="#reference/message.html">Message</a> will automatically activate the <a href="#manual/message-control.html">Message Control</a> and will hide it when the <a href="#reference/message.html">Message</a> is complete if <em>AutoHide</em> is <code>true</code>. If <em>AutoHide</em> is <code>false</code> then a <a href="#manual/hide-control-node.html">Hide Control Node</a> must be used to deactivate it. Create a Message Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Interface</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Message</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="#topics/graphs/overview.html">Graphs</a> topic for more information on instruction graphs.<br>
+See the <a href="topics/interface/messages.html">Messages</a> topic for more information on messages.<br>
+See the <em>"Shop"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Shop project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_43">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/message-node.png" alt="Message Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Control</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <a href="#reference/variable-reference.html">VariableReference</a> to the <a href="#manual/message-control.html">Message Control</a> that should display <em>Message</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait For Completion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to wait for <em>Message</em> to finish being displayed before moving on to the next node</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto Hide</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to deactivate <em>Control</em> when <em>Message</em> is finished being displayed</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <em>AutoHide</em> is <code>true</code>, the amount of time (in seconds) to wait before deactivating <em>Control</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Message</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/message.html">Message</a> to display</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/message-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

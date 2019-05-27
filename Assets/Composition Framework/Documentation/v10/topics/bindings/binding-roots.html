@@ -1,0 +1,53 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/bindings/binding-roots">Binding Roots</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Binding Root is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> that acts as a variable root for all child objects with a Variable Binding. Each binding root contains the <a href="#topics/variables/overview.html">variable</a> <em>Value</em> that child bindings access via the <em>ValueName</em> property. Binding roots are hierachical and variable bindings have access to every binding root in its hierarchy as long as each root has a differet <em>ValueName</em>. In addition variables can be looked up on the <a href="#manual/composition-manager.html">Composition Manager</a>'s <code>"global"</code> and <code>"scene"</code> <a href="#reference/i-variable-store.html">IVariableStores</a> (detailed in <a href="#topics/variables/accessing-variables.html">Accessing Variables</a>). A binding root&#8217;s <em>Value</em> can be set in two ways: from a derived class such as <a href="#manual/object-binding-root.html">Object Binding Root</a> (detailed in <a href="#topics/bindings/custom-binding-roots.html">Creating Custom Binding Roots</a>) or through a <a href="#manual/set-binding-node.html">Set Binding Node</a>. Take the following example of the Card prefab from the CardGame example:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/bindings/binding-root-card.png" alt="Binding Root Card">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/bindings/binding-root.png" alt="Binding Root">
+</div>
+</div>
+<div class="paragraph">
+<p>The base object of the prefab has the above binding root behaviour attached. Notice that <em>Value Name</em> is set to <code>"Card"</code>. This means that all child variable binding behaviours can access the variables of this binding root, through the variable <code>"Card"</code>. The variables available on this binding root are set up through the following set of nodes, ending with a <a href="#manual/set-binding-node.html">Set Binding Node</a>.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/bindings/binding-root-card-graph.png" alt="Binding Root Graph">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/bindings/binding-root-card-data.png" alt="Binding Root Card Data">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/bindings/binding-root-set-binding.png" alt="Binding Root Set Binding">
+</div>
+</div>
+<div class="paragraph">
+<p>There are two child objects in the prefab, "Suit" and "Rank", each with multiple variable bindings behaviours attached. These use the variables set up in the graph above to set visual elements in the scene.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/bindings/binding-root-suit.png" alt="Binding Root Suit">
+</div>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/bindings/binding-root-rank.png" alt="Binding Root Rank">
+</div>
+</div>
+<div class="paragraph">
+<p>Notice that each binding uses <code>"Card"</code> to access the binding root&#8217;s variables.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

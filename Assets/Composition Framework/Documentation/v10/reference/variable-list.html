@@ -1,0 +1,64 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-list">VariableList</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableList : <a href="#reference/i-variable-list.html">IVariableList</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_217">Description</h3>
+<div class="paragraph">
+<p>An implementation of <a href="#reference/i-variable-list.html">IVariableList</a> that has no constraints on the <a href="#reference/variable-value.html">ValueValues</a> it can hold.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_constructors_21">Constructors</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">VariableList(int <em>count</em>)</dt>
+<dd>
+<p>Adds <em>count</em> <a href="#reference/variable-type.html"><code>Empty</code></a> <a href="#reference/variable-value.html">VariableValues</a> to the list.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_38">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/variable-value.html">VariableValue</a>&gt; <em>Values</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-value.html">VariableValues</a> in the list.</p>
+</dd>
+<dt class="hdlist1">int <em>Count</em> <em>(read only)</em></dt>
+<dd>
+<p>The number of <a href="#reference/variable-value.html">VariableValues</a> in the list.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_42">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(int <em>index</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/variable-value.html">VariableValue</a> at index <em>index</em> in the list. If <em>index</em> is not between 0 and <em>Count</em>, <a href="#reference/variable-value.html">VariableValue.<em>Empty</em></a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> AddVariable(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Adds <em>value</em> to the list. This will always succeed and return <a href="#reference/set-variable-result.html"><code>Success</code></a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> RemoveVariable(int <em>index</em>)</dt>
+<dd>
+<p>Removes the <a href="#reference/variable-value.html">VariableValue</a> at index <em>index</em> from the list.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(int <em>index</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Changes the <a href="#reference/variable-value.html">VariableValue</a> at index <em>index</em> to <em>value</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

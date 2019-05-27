@@ -1,0 +1,45 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/bar-binding">BarBinding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.BarBinding : <a href="#reference/variable-binding.html">VariableBinding</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_9">Description</h3>
+<div class="paragraph">
+<p>Add this to an <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html" target="_blank" rel="noopener">Image</a> to set the <em>fillAmount</em> and <em>color</em> based on two bound values.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_2">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>AmountVariable</em></dt>
+<dd>
+<p>The int or float variable indicating the amount the bar should be filled.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>TotalVariable</em></dt>
+<dd>
+<p>The int or float variable indicating the 'full' amount. <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html" target="_blank" rel="noopener">Image.<em>fillAmount</em></a> is set to the result of <em>AmountVariable</em> / <em>TotalVariable</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Gradient.html" target="_blank" rel="noopener">Gradient</a> <em>FillColors</em></dt>
+<dd>
+<p>The color to set <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html" target="_blank" rel="noopener">Image.<em>color</em></a> to depending on the current fill amount.</p>
+</dd>
+<dt class="hdlist1">float <em>Speed</em></dt>
+<dd>
+<p>If this is greater than 0, the fill amount will animate when it changes. The value specifies the speed of the animation in percent per second. So, for example, a value of 0.1 would cause the bar to change its fill at a rate of 10% every second.</p>
+</dd>
+<dt class="hdlist1">bool <em>UseScaledTime</em></dt>
+<dd>
+<p>If this is set, <em>Speed</em> will be based on <a href="https://docs.unity3d.com/ScriptReference/Time-time.html" target="_blank" rel="noopener">scaled time</a>, otherwise it will be based on <a href="https://docs.unity3d.com/ScriptReference/Time-unscaledTime.html" target="_blank" rel="noopener">real time</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/bar-binding.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

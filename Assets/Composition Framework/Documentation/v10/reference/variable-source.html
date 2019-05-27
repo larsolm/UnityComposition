@@ -1,0 +1,52 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-source">VariableSource</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableSource</p>
+</div>
+<div class="sect2">
+<h3 id="_description_226">Description</h3>
+<div class="paragraph">
+<p>A wrapper type for fields that allows a value to be set directly or set to a <a href="#reference/variable-reference.html">VariableReference</a>. <a href="#reference/variable-source-1.html">VariableSource&lt;_T_</a>&gt; provides a generic implementation that is sufficient for all use cases.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_113">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-source-type.html">VariableSourceType</a> <em>Type</em></dt>
+<dd>
+<p>Whether this source has a value or <a href="#reference/variable-reference.html">VariableReference</a>. If this is set to <em>Value</em> the subclass will include the value field of the correct type.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>Reference</em></dt>
+<dd>
+<p>If <em>Type</em> is set to <em>Reference</em>, this holds the <a href="#reference/variable-reference.html">VariableReference</a> where the <a href="#reference/variable-value.html">VariableValue</a> should be looked up.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_51">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void GetInputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>inputs</em>)</dt>
+<dd>
+<p>If <em>Type</em> is set to <em>Reference</em> and <em>Reference</em> accesses <a href="#reference/instruction-store.html">InstructionStore.<em>Inputs</em></a>, adds the definition for <em>Reference</em> to <em>inputs</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_15">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> GetInputDefinition() <em>(abstract)</em></dt>
+<dd>
+<p>Implement this in a subclass to return a definiton for the represented type.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

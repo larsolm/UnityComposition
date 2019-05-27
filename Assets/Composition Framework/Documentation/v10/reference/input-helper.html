@@ -1,0 +1,130 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/input-helper">InputHelper</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.UtilityEngine.InputHelper</p>
+</div>
+<div class="sect2">
+<h3 id="_description_75">Description</h3>
+<div class="paragraph">
+<p>Provides a static interface for accessing user input in a consistent manner independent of how the input was set up.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_6">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void LateUpdate()</dt>
+<dd>
+<p>This is called by the <a href="#reference/composition-manager.html">CompositionManager</a> to update the input state and can be ignored.</p>
+</dd>
+<dt class="hdlist1">void SetButton(string <em>button</em>, bool <em>down</em>)</dt>
+<dd>
+<p>Performs a virtual press (<em>down</em> = <code>true</code>) or release (<em>down</em> = <code>false</code>) of a button named <em>button</em>. <em>button</em> can be any string, including those defined in <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a>. This is used by <a href="#reference/button-input.html">ButtonInput</a> to provide on screen control support.</p>
+</dd>
+<dt class="hdlist1">void RemoveButton(string <em>button</em>)</dt>
+<dd>
+<p>Removes the tracking data for the virtual button named <em>button</em>.</p>
+</dd>
+<dt class="hdlist1">void SetAxis(string <em>axis</em>, float <em>value</em>)</dt>
+<dd>
+<p>Sets the value of a virtual access named <em>axis</em> to <em>value</em>. <em>axis</em> can be any string, including those defined in <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a>. This is used by <a href="#reference/button-input.html">AxisInput</a> to provide on screen control support.</p>
+</dd>
+<dt class="hdlist1">void RemoveAxis(string <em>axis</em>)</dt>
+<dd>
+<p>Removes the tracking data for the virtual axis named <em>axis</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/button-state.html">ButtonState</a> GetKeyState(<a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">KeyCode</a> <em>key</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/button-state.html">ButtonState</a> for the keyboard key <em>key</em>.</p>
+</dd>
+<dt class="hdlist1">bool GetKeyDown(<a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">KeyCode</a> <em>key</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the keyboard key <em>key</em> is currently pressed.</p>
+</dd>
+<dt class="hdlist1">bool GetWasKeyPressed(<a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">KeyCode</a> <em>key</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the keyboard key <em>key</em> is currently pressed and was not pressed on the previous frame.</p>
+</dd>
+<dt class="hdlist1">bool GetWasKeyReleased(<a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">KeyCode</a> <em>key</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the keyboard key <em>key</em> is not currently pressed and was pressed on the previous frame.</p>
+</dd>
+<dt class="hdlist1">bool GetIsPointerDown()</dt>
+<dd>
+<p>Returns <code>true</code> if the left mouse button is currently pressed or touch with index 0 is touching the screen</p>
+</dd>
+<dt class="hdlist1">bool GetWasPointerPressed()</dt>
+<dd>
+<p>Returns <code>true</code> if the left mouse button is currently pressed or touch with index 0 is currently touching the screen but neither was happening on the previous frame.</p>
+</dd>
+<dt class="hdlist1">bool GetWasPointerReleased()</dt>
+<dd>
+<p>Returns <code>true</code> if the left mouse button or touch with index 0 is not currently pressed and was pressed on the previous frame.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/button-state.html">ButtonState</a> GetTouchState(int <em>touch</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/button-state.html">ButtonState</a> for the touch with index <em>touch</em>.</p>
+</dd>
+<dt class="hdlist1">Nullable&lt;<a href="https://docs.unity3d.com/ScriptReference/TouchPhase.html" target="_blank" rel="noopener">TouchPhase</a>&gt; GetTouchPhase(int <em>touch</em>)</dt>
+<dd>
+<p>Returns the <a href="https://docs.unity3d.com/ScriptReference/TouchPhase.html" target="_blank" rel="noopener">TouchPhase</a> for the touch with index <em>touch</em>. If the touch is not currently tracked, <code>null</code> will be returned.</p>
+</dd>
+<dt class="hdlist1">bool GetIsTouching(int <em>touch</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the touch with index <em>touch</em> is currently touching the screen.</p>
+</dd>
+<dt class="hdlist1">bool GetTouchStarted(int <em>touch</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the touch with index <em>touch</em> is currently touching the screen but was not on the previous frame.</p>
+</dd>
+<dt class="hdlist1">bool GetTouchEnded(int <em>touch</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the touch with index <em>touch</em> is not currently touching the screen but was on the previous frame.</p>
+</dd>
+<dt class="hdlist1">bool IsButtonAvailable(string <em>button</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if <em>button</em> exists either as a virtual button created with <em>SetButton</em> or in the <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/button-state.html">ButtonState</a> GetButtonState(string <em>button</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/button-state.html">ButtonState</a> of the virtual button or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>button</em>. If <em>button</em> is defined as both, the virtual button state will be used.</p>
+</dd>
+<dt class="hdlist1">bool GetButtonDown(string <em>button</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the virtual button or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>button</em> is pressed.</p>
+</dd>
+<dt class="hdlist1">bool GetWasButtonPressed(string <em>button</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the virtual button or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>button</em> was pressed this frame.</p>
+</dd>
+<dt class="hdlist1">bool GetWasButtonReleased(string <em>button</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the virtual button or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>button</em> was released this frame.</p>
+</dd>
+<dt class="hdlist1">float GetAxis(string <em>axis</em>)</dt>
+<dd>
+<p>Returns the value of the virtual axis or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>axis</em>. If <em>axis</em> is defined in both places, the value with the greater magnitude will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/button-state.html">ButtonState</a> GetAxisState(string <em>axis</em>, float <em>magnitude</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/button-state.html">ButtonState</a> of the virtual axis or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>axis</em> according to the same rules defined in the following 3 methods.</p>
+</dd>
+<dt class="hdlist1">bool GetAxisDown(string <em>axis</em>, float <em>magnitude</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the value of the virtual axis or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>axis</em> matches the sign of and is farther from 0 than <em>magnitude</em>. If <em>axis</em> is defined in both places, the value with the greater magnitude will be used.</p>
+</dd>
+<dt class="hdlist1">bool GetWasAxisPressed(string <em>axis</em>, float <em>magnitude</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the value of the virtual axis or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>axis</em> matches the sign of and is farther from 0 than <em>magnitude</em> and wasn&#8217;t the previous frame. If <em>axis</em> is defined in both places, the value with the greater magnitude will be used.</p>
+</dd>
+<dt class="hdlist1">bool GetWasAxisReleased(string <em>axis</em>, float <em>magnitude</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the value of the virtual axis or <a href="https://docs.unity3d.com/Manual/class-InputManager.html" target="_blank" rel="noopener">InputManager</a> axis named <em>axis</em> matched the sign of and was farther from 0 than <em>magnitude</em> on the previous frame and isn&#8217;t this frame. If <em>axis</em> is defined in both places, the value with the greater magnitude will be used.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

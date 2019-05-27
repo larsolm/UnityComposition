@@ -1,0 +1,80 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/transition-manager">TransitionManager</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.TransitionManager : <a href="#reference/global-behaviour-1.html">GlobalBehaviour</a>&lt;<a href="#reference/transition-manager.html">TransitionManager</a>&gt;</p>
+</div>
+<div class="sect2">
+<h3 id="_description_200">Description</h3>
+<div class="paragraph">
+<p>Manages the loaded <a href="#reference/transition-renderer.html">TransitionRenderers</a> for playback of <a href="#reference/transition.html">Transitions</a>. This is created on demand and should not be added to a scene.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_34">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/transition.html">Transition</a> <em>CurrentTransition</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/transition.html">Transition</a> that is currently running, or <code>null</code> if no <a href="#reference/transition.html">Transition</a> is running.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_38">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> RunTransition(<a href="#reference/transition.html">Transition</a> <em>transition</em>, <a href="#reference/transition-phase.html">TransitionPhase</a> <em>phase</em>)</dt>
+<dd>
+<p>Runs <em>transition</em> in <a href="#reference/transition-phase.html">TransitionPhase</a> <em>phase</em> and ends it when it has completed - <em>EndTransition</em> will not need to be called.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a <a href="#reference/transition.html">Transition</a> is already running, it will be ended.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> StartTransition(<a href="#reference/transition.html">Transition</a> <em>transition</em>, <a href="#reference/transition-phase.html">TransitionPhase</a> <em>phase</em>)</dt>
+<dd>
+<p>Runs <em>transition</em> in <a href="#reference/transition-phase.html">TransitionPhase</a> <em>phase</em>. <em>EndTransition</em> (or a subsequent call to <em>StartTransition</em>) should be called manually later.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If a <a href="#reference/transition.html">Transition</a> is already running, it will be ended.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void EndTransition()</dt>
+<dd>
+<p>Ends the currently running <a href="#reference/transition.html">Transition</a> if one is running.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/transition-manager.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

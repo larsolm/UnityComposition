@@ -1,0 +1,92 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/binding-animation-status">BindingAnimationStatus</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.BindingAnimationStatus</p>
+</div>
+<div class="sect2">
+<h3 id="_description_10">Description</h3>
+<div class="paragraph">
+<p>Used with <a href="#reference/variable-binding.html">VariableBinding</a> to provide feedback for binding updates that are animated or otherwise completed asynchronously. Callers, such as <a href="#reference/update-binding-node.html">UpdateBindingNode</a>, can pass an instance of this type to the <a href="#reference/variable-binding.html">UpdateBinding</a> method and query it to determine when the binding has completed.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using PiRhoSoft.CompositionEngine
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class UpdateBindingExample : MonoBehaviour
+	{
+		private BindingAnimationStatus _status = new BindingAnimationStatus();
+
+		public override IEnumerator Run()
+		{
+			_status.Reset();
+
+			VariableBinding.UpdateBinding(gameObject, string.Empty, _status);
+
+			while (!_status.IsFinished())
+				yield return null;
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p><a href="#reference/variable-binding.html">VariableBindings</a>, such as <a href="#reference/bar-binding.html">BarBinding</a>, use the <em>Increment</em> and <em>Decrement</em> methods to indicate when an animation has started and finished respectively.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using PiRhoSoft.CompositionEngine
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class ExampleBinding : VariableBinding
+	{
+		private WaitForSeconds _wait = new WaitForSeconds(1);
+
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		{
+			// update the binding
+			StartCoroutine(Animate(status));
+		}
+
+		private IEnumerator Animate(BindingAnimationStatus status)
+		{
+			status.Increment();
+			yield return _wait; // do animation stuff
+			status.Decrement();
+		}
+	}
+}</code></pre>
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_3">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Reset()</dt>
+<dd>
+<p>Call this method before passing a BindingAnimationStatus instance to a binding method to re-initialize it.</p>
+</dd>
+<dt class="hdlist1">bool IsFinished()</dt>
+<dd>
+<p>Call this method to determine if all animations resulting from a bindings update have completed.</p>
+</dd>
+<dt class="hdlist1">void Increment()</dt>
+<dd>
+<p>Call this method from a <a href="#reference/variable-binding.html">VariableBinding</a> implementation to indicate the binding is starting an animation. This can be called multiple times if the binding is performing multiple animations. Each call to <em>Increment</em> should have a corresponding call to <em>Decrement</em> when the animation completes.</p>
+</dd>
+<dt class="hdlist1">void Decrement()</dt>
+<dd>
+<p>Call this method from a <a href="#reference/variable-binding.html">VariableBinding</a> implementation to indicate the binding has finished an animation. This should be called one time for each time <em>Increment</em> is called.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

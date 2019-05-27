@@ -1,0 +1,42 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/operation">Operation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.Operation</p>
+</div>
+<div class="sect2">
+<h3 id="_description_140">Description</h3>
+<div class="paragraph">
+<p>The base class for all operations in an <a href="#reference/expression.html">Expression</a>. Custom operations should derive from either <a href="#reference/prefix-operation.html">PrefixOperation</a> or <a href="#reference/infix-operation.html">InfixOperation</a> rather than deriving from this class directly.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_32">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Parse(<a href="#reference/expression-parser.html">ExpressionParser</a> <em>parser</em>, <a href="#reference/expression-token.html">ExpressionToken</a> <em>token</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Implement this in a subclass to initialize the operation by reading <a href="#reference/expression-token.html">ExpressionTokens</a> from <em>parser</em>. <em>token</em> is the <a href="#reference/expression-token.html">ExpressionToken</a> that led to the creation of this operation.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Evaluate(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Implement this in a subclass to perform the execution of the operation. Any <a href="#reference/variable-reference.html">VariableReferences</a> should use <em>variables</em> for lookups and assignments.</p>
+</dd>
+<dt class="hdlist1">void ToString(StringBuilder <em>builder</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Writes a reversible representation of this operation to <em>builder</em>.</p>
+</dd>
+<dt class="hdlist1">void GetInputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>inputs</em>, string <em>source</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in a subclass to add <a href="#reference/variable-definition.html">VariableDefinitions</a> to <em>inputs</em> that access an <a href="#reference/i-variable-store.html">IVariableStore</a> named <em>source</em>.</p>
+</dd>
+<dt class="hdlist1">void GetOutputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>outputs</em>, string <em>source</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in a subclass to add <a href="#reference/variable-definition.html">VariableDefinitions</a> to <em>outputs</em> that write <a href="#reference/variable-value.html">VariableValues</a> to an <a href="#reference/i-variable-store.html">IVariableStore</a> named <em>source</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

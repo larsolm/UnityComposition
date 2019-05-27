@@ -1,0 +1,98 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/menu-input">Menu Input</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Menu Input is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> that should be attached as a sibling of a <a href="#manual/menu.html">Menu</a> to handle the behaviour of input, focusing, selecting, and scrolling, through <a href="#manual/menu-item.html">Menu Items</a>.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="topics/interface/menus-and-selections.html">Menus and Selections</a> topic for more information.<br>
+See the <em>"EquimentMenu"</em> and <em>"ItemsMenu"</em> objects in the <em>"LootMenu"</em> scene of the Loot project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_38">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/menu-input.png" alt="Menu Input">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Horizontal Axis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the <a href="#reference/input-helper.html">input axis</a> to use for horizontal movement</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vertical Axis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the <a href="#reference/input-helper.html">input axis</a> to use for vertical movement</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Select Button</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/input-helper.html">input button</a> to use to select the currently focused <a href="#manual/menu-item.hmtl">Menu Item</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cancel Button</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/input-helper.html">input button</a> to use to cancel the <a href="#manual/menu.html">Menu</a> or <a href="#manual/selection-control.html">Selection</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Hover Action</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/menu-input-pointer-action.html">Action</a> to take when a <a href="#manual/menu-item.html">Menu Item</a> is hovered over</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Click Action</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/menu-input-pointer-action.html">Action</a> to take when a <a href="#manual/menu-item.html">Menu Item</a> is clicked on</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Primary Axis</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether the <a href="#manual/menu-item.html">Menu Items</a> are arranged by <code>Row</code> or by <code>Column</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Row Count</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of rows in the menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Column Count</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number of columns in the menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Left</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The menu to transfer input to when moving past the left side of this menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Right</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The menu to transfer input to when moving past the right side of this menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The menu to transfer input to when moving past the top of this menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Next Down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The menu to transfer input to when moving past the bottom of this menu</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Focus On Load</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to enable input for this menu when it first loads</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scroll Padding</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The distance between the edge of the scroll viewport and the <a href="manual/menu-item.html">Menu Item</a> when focusing on a new item</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/menu-input.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

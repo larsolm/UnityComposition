@@ -1,0 +1,78 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/composition-manager">CompositionManager</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.CompositionManager : <a href="#reference/global-behaviour-1.html">GlobalBehaviour</a>&lt;<a href="#reference/composition-manager.html">CompositionManager</a>&gt;</p>
+</div>
+<div class="sect2">
+<h3 id="_description_30">Description</h3>
+<div class="paragraph">
+<p>Globally manages execution of <a href="#reference/instruction.html">Instructions</a>. A single instance of this <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> will be created automatically and can be accessed from the static <em>Instance</em> property.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_fields_2">Static Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>GlobalStoreName</em></dt>
+<dd>
+<p>The name to use to access <em>GlobalStore</em> from <em>DefaultStore</em> or any <a href="#reference/instruction-store.html">InstructionStore</a>.</p>
+</dd>
+<dt class="hdlist1">string <em>SceneStoreName</em></dt>
+<dd>
+<p>The name to use to access <em>SceneStore</em> from <em>DefaultStore</em> or any <a href="#reference/instruction-store.html">InstructionStore</a>.</p>
+</dd>
+<dt class="hdlist1">string <em>CommandFolder</em></dt>
+<dd>
+<p>The name of the folder that any custom <a href="#reference/command.html">Commands</a> are placed in. By default this is "Commands". All folders with this name that are inside a folder called "Resources" will be loaded when the CompositionManager is created.</p>
+</dd>
+<dt class="hdlist1">bool <em>LogTracking</em></dt>
+<dd>
+<p>When this is true, information gathered in editor builds about the execution of <a href="#reference/instruction.html">Instructions</a> will be logged to the <a href="https://docs.unity3d.com/Manual/Console.html" target="_blank" rel="noopener">console</a>. This will include the number of enumerator iterations, the number of frames, and the amount of time it took to complete execution of each <a href="#reference/instruction.html">Instruction</a>. The <a href="#topics/graphs/debugging.html">Watch Window</a> in the editor exposes this variable as a toggle.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_4">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/i-variable-store.html">IVariableStore</a> <em>DefaultStore</em> <em>(read only)</em></dt>
+<dd>
+<p>An <a href="#reference/i-variable-store.html">IVariableStore</a> that exposes <em>GlobalStore</em> under the name <em>GlobalStoreName</em> and <em>SceneStore</em> under the name <em>SceneStoreName</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-store.html">VariableStore</a> <em>GlobalStore</em> <em>(read only)</em></dt>
+<dd>
+<p>An <a href="#reference/i-variable-store.html">IVariableStore</a> that stores user defined values which can be arbitrarily added, changed, and removed.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/scene-variable-store.html">SceneVariableStore</a> <em>SceneStore</em> <em>(read only)</em></dt>
+<dd>
+<p>An <a href="#reference/i-variable-store.html">IVariableStore</a> implementation that allows scene objects to be looked up by name.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_8">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void RunInstruction(<a href="#reference/instruction.html">Instruction</a> <em>instruction</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>context</em>)</dt>
+<dd>
+<p>Runs an <a href="#reference/instruction.html">Instruction</a>, usually an <a href="#reference/instruction-graph.html">InstructionGraph</a>, without setting any inputs other than <em>context</em> or reading any outputs.</p>
+</dd>
+<dt class="hdlist1">void RunInstruction(<a href="#reference/instruction-caller.html">InstructionCaller</a> <em>caller</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>store</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>context</em>)</dt>
+<dd>
+<p>Runs an <a href="#reference/instruction.html">Instruction</a>, usually an <a href="#reference/instruction-graph.html">InstructionGraph</a>, reading the inputs specified in <em>caller</em> from <em>store</em> to an <a href="#reference/instruction-store.html">InstructionStore</a> that is passed to the instruction, and reading the outputs from that <a href="#reference/instruction-store.html">InstructionStore</a> to <em>store</em> when <em>caller</em> has completed.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Read more about <a href="#reference/instruction.html">Instruction</a> inputs and outputs in the <a href="#topics/graphs/instruction-store.html">Instruction Store</a> topic.</p>
+</div>
+<div class="paragraph">
+<p><a href="#manual/composition-manager.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

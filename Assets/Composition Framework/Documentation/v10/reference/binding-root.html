@@ -1,0 +1,62 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/binding-root">BindingRoot</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.BindingRoot : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a>, <a href="#reference/i-variable-store.html">IVariableStore</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_12">Description</h3>
+<div class="paragraph">
+<p>Add this to any <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> to insert a <a href="#reference/variable-value.html">VariableValue</a> into the scene hierarchy that can be accessed by sibling or child <a href="#reference/variable-binding.html">VariableBindings</a>.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="#topics/bindings/binding-roots.html"><em>Binding Roots</em></a> section in the <a href="#topics/bindings/overview.html"><em>Bindings</em></a> topic for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_4">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>ValueName</em></dt>
+<dd>
+<p>The name for <a href="#reference/variable-binding.html">VariableBindings</a> to use to look up <em>Value</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_3">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> <em>Value</em> <em>(virtual)</em></dt>
+<dd>
+<p>The value to return when <em>ValueName</em> is looked up.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_5">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames() <em>(virtual)</em></dt>
+<dd>
+<p>Returns a list with <em>ValueName</em> as its only item.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(string <em>name</em>) <em>(virtual)</em></dt>
+<dd>
+<p>If <em>name</em> is <em>ValueName</em>, returns <em>Value</em>, otherwise calls <em>GetVariable</em> on the next BindingRoot up in the object hierarchy. If this is the highest BindingRoot, <em>DefaultStore</em> on <a href="#reference/composition-manager.html">CompositionManager</a> is used instead.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(virtual)</em></dt>
+<dd>
+<p>If <em>name</em> is <em>ValueName</em>, returns ReadOnly, otherwise calls <em>SetVariable</em> on the next BindingRoot up in the object hierarchy. If this is the highest BindingRoot, <em>DefaultStore</em> on <a href="#reference/composition-manager.html">CompositionManager</a> is used instead.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/binding-root.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

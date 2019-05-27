@@ -1,0 +1,329 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-9167517715921665327
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: db008769965f9c741a3e4fe1b5b243f1, type: 3}
+  m_Name: SelectionNode
+  m_EditorClassIdentifier: 
+  Name: SelectionNode
+  GraphPosition: {x: 345.6, y: 0}
+  IsBreakpoint: 0
+  OnCanceled: {fileID: 0}
+  Control:
+    _variable: scene.Menu
+    _tokens:
+    - Type: 0
+      Text: scene
+    - Type: 0
+      Text: Menu
+  SelectedItem:
+    _variable: selectedItem
+    _tokens:
+    - Type: 0
+      Text: selectedItem
+  SelectedIndex:
+    _variable: selectedIndex
+    _tokens:
+    - Type: 0
+      Text: selectedIndex
+  IsSelectionRequired: 1
+  AutoHide: 1
+  Items:
+    _items:
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 0
+      Name: Battle
+      Template: {fileID: 0}
+      Label: 
+      Expand: 0
+      OnSelected: {fileID: -987917910265176739}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 0
+      Name: BoardGame
+      Template: {fileID: 0}
+      Label: 
+      Expand: 0
+      OnSelected: {fileID: 5766558497039942403}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 0
+      Name: Calculator
+      Template: {fileID: 0}
+      Label: 
+      Expand: 0
+      OnSelected: {fileID: -6276196703707782331}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 0
+      Name: CardGame
+      Template: {fileID: 0}
+      Label: 
+      Expand: 0
+      OnSelected: {fileID: -6941111409709080442}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 0
+      Name: Loot
+      Template: {fileID: 0}
+      Label: 
+      Expand: 0
+      OnSelected: {fileID: -4540747234427750553}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 0
+      Name: Maze
+      Template: {fileID: 0}
+      Label: 
+      Expand: 0
+      OnSelected: {fileID: -8091872737757227219}
+    - Variables:
+        _variable: 
+        _tokens: []
+      Source: 0
+      Name: Shop
+      Template: {fileID: 0}
+      Label: 
+      Expand: 0
+      OnSelected: {fileID: 3932944655968253186}
+--- !u!114 &-8091872737757227219
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Maze
+  m_EditorClassIdentifier: 
+  Name: Load Maze
+  GraphPosition: {x: 729.60004, y: 166.40001}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Scene:
+    Path: Assets/Composition Framework/Examples/Maze/Scenes/Maze1.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1
+  Additive: 0
+--- !u!114 &-6941111409709080442
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Card
+  m_EditorClassIdentifier: 
+  Name: Load Card
+  GraphPosition: {x: 729.60004, y: 64}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Scene:
+    Path: Assets/Composition Framework/Examples/CardGame/Scenes/Addiction.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1
+  Additive: 0
+--- !u!114 &-6276196703707782331
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Calculator
+  m_EditorClassIdentifier: 
+  Name: Load Calculator
+  GraphPosition: {x: 729.60004, y: 12.8}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Scene:
+    Path: Assets/Composition Framework/Examples/Calculator/Calculator.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1
+  Additive: 0
+--- !u!114 &-4540747234427750553
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Loot
+  m_EditorClassIdentifier: 
+  Name: Load Loot
+  GraphPosition: {x: 729.60004, y: 115.200005}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Scene:
+    Path: Assets/Composition Framework/Examples/Loot/Scenes/LootLevel.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1
+  Additive: 0
+--- !u!114 &-987917910265176739
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Battle
+  m_EditorClassIdentifier: 
+  Name: Load Battle
+  GraphPosition: {x: 729.60004, y: -89.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Scene:
+    Path: Assets/Composition Framework/Examples/Battle/Scenes/Battle.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1
+  Additive: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: Loader
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: -9167517715921665327}
+    - {fileID: -6276196703707782331}
+    - {fileID: -6941111409709080442}
+    - {fileID: 5766558497039942403}
+    - {fileID: -987917910265176739}
+    - {fileID: -4540747234427750553}
+    - {fileID: -8091872737757227219}
+    - {fileID: 3932944655968253186}
+  StartPosition: {x: 0, y: 0}
+  Process: {fileID: -9167517715921665327}
+--- !u!114 &3932944655968253186
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Shop
+  m_EditorClassIdentifier: 
+  Name: Load Shop
+  GraphPosition: {x: 729.60004, y: 217.6}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Scene:
+    Path: Assets/Composition Framework/Examples/Shop/Scenes/Shop.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1
+  Additive: 0
+--- !u!114 &5766558497039942403
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Board
+  m_EditorClassIdentifier: 
+  Name: Load Board
+  GraphPosition: {x: 729.60004, y: -38.4}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Source: 0
+  Scene:
+    Path: Assets/Composition Framework/Examples/BoardGame/Board.unity
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 0
+  CleanupAssets: 1
+  Additive: 0

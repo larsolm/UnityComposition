@@ -1,0 +1,138 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/menu">Menu</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.Menu : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a>, <a href="#reference/i-variable-store.html">IVariableStore</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_117">Description</h3>
+<div class="paragraph">
+<p>Add this to any <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> to manage a list of child <a href="#reference/menu-item.html">MenuItems</a>. Additionally add a <a href="#reference/menu-input.html">MenuInput</a> to manage input. <a href="#reference/menu-item.html">MenuItems</a> can be added directly as children in the editor or at runtime, or by using <a href="#reference/list-binding.html">ListBinding</a>. Additionally, this can be used with a <a href="#reference/selection-control.html">SelectionControl</a> to automate the process of selecting from a menu in an <a href="#reference/instruction-graph.html">InstructionGraph</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_52">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Action&lt;<a href="#reference/menu-item.html">MenuItem</a>&gt; <em>OnItemAdded</em></dt>
+<dd>
+<p>Subscribe to this callback to receive a notification any time a <a href="#reference/menu-item.html">MenuItem</a> is added to this menu.</p>
+</dd>
+<dt class="hdlist1">Action&lt;<a href="#reference/menu-item.html">MenuItem</a>&gt; <em>OnItemRemoved</em></dt>
+<dd>
+<p>Subscribe to this callback to receive a notification any time a <a href="#reference/menu-item.html">MenuItem</a> is removed from this menu.</p>
+</dd>
+<dt class="hdlist1">Action&lt;<a href="#reference/menu-item.html">MenuItem</a>&gt; <em>OnItemMoved</em></dt>
+<dd>
+<p>Subscribe to this callback to receive a notification any time a <a href="#reference/menu-item.html">MenuItem</a>'s position in the menu changes.</p>
+</dd>
+<dt class="hdlist1">Action&lt;<a href="#reference/menu-item.html">MenuItem</a>&gt; <em>OnItemBlurred</em></dt>
+<dd>
+<p>Subscribe to this callback to receive a notification any time a <a href="#reference/menu-item.html">MenuItem</a> loses focus.</p>
+</dd>
+<dt class="hdlist1">Action&lt;<a href="#reference/menu-item.html">MenuItem</a>&gt; <em>OnItemFocused</em></dt>
+<dd>
+<p>Subscribe to this callback to receive a notification any time a <a href="#reference/menu-item.html">MenuItem</a> gains focus.</p>
+</dd>
+<dt class="hdlist1">Action&lt;<a href="#reference/menu-item.html">MenuItem</a>&gt; <em>OnItemSelected</em></dt>
+<dd>
+<p>Subscribe to this callback to receive a notification any time a <a href="#reference/menu-item.html">MenuItem</a> is selected.</p>
+</dd>
+<dt class="hdlist1">Action <em>OnCancelled</em></dt>
+<dd>
+<p>Subscribe to this callback to receive a notification any time the menu is closed without a selection being made.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_21">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>AcceptsInput</em></dt>
+<dd>
+<p>Specifies whether or not a sibling <a href="#reference/menu-input.html">MenuInput</a> can control this Menu. <a href="#reference/selection-control.html">SelectionControl</a> will disable this while it is not active.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/menu-item.html">MenuItem</a>&gt; <em>Items</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/menu-item.html">MenuItems</a> in this menu. This is automatically updated to reflect the current set of <a href="#reference/menu-item.html">MenuItems</a> that are children of this object.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-item.html">MenuItem</a> <em>FocusedItem</em></dt>
+<dd>
+<p>The <a href="#reference/menu-item.html">MenuItem</a> that has focus.</p>
+</dd>
+<dt class="hdlist1">int <em>FocusedIndex</em></dt>
+<dd>
+<p>The index of the <a href="#reference/menu-item.html">MenuItem</a> that has focus.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_27">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void SelectItem(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>)</dt>
+<dd>
+<p>Selects <em>item</em>. The result of an item being selected is only that <em>OnItemSelected</em> will be triggered. Selection is most commonly used indirectly through a <a href="#reference/selection-control.html">SelectionControl</a>.</p>
+</dd>
+<dt class="hdlist1">void Cancel()</dt>
+<dd>
+<p>Triggers <em>OnCancelled</em> with no other effect.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames()</dt>
+<dd>
+<p>Returns the names of the <a href="#reference/variables.html">Variables</a> exposed by this <a href="#reference/i-variable-store.html">IVariableStore</a>. These are <code>"FocusedItem"</code> and <code>"FocusedIndex"</code>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(string <em>name</em>)</dt>
+<dd>
+<p>Returns the variable with name <em>name</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Sets the value of the variable with <em>name</em> to <em>value</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_8">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void ItemAdded(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Called when a <a href="#reference/menu-item.html">MenuItem</a> (<em>item</em>) is added to the menu. The base implementation triggers <em>OnItemAdded</em>.</p>
+</dd>
+<dt class="hdlist1">void ItemRemoved(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Called when a <a href="#reference/menu-item.html">MenuItem</a> (<em>item</em>) is removed from the menu. The base implementation triggers <em>OnItemRemoved</em>.</p>
+</dd>
+<dt class="hdlist1">void ItemMoved(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Called when a <a href="#reference/menu-item.html">MenuItem</a> (<em>item</em>)'s position ith menu changes. The base implementation triggers <em>OnItemMoved</em>.</p>
+</dd>
+<dt class="hdlist1">void ItemFocused(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Called when a <a href="#reference/menu-item.html">MenuItem</a> (<em>item</em>) gains focus. The base implementation triggers <em>OnItemFocused</em>.</p>
+</dd>
+<dt class="hdlist1">void ItemBlurred(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Called when a <a href="#reference/menu-item.html">MenuItem</a> (<em>item</em>) loses focus. The base implementation triggers <em>OnItemBlurred</em>.</p>
+</dd>
+<dt class="hdlist1">void ItemSelected(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Called when a <a href="#reference/menu-item.html">MenuItem</a> (<em>item</em>) is selected. The base implementation triggers <em>OnItemSelected</em>.</p>
+</dd>
+<dt class="hdlist1">void Cancelled() <em>(virtual)</em></dt>
+<dd>
+<p>Called when the menu is cancelled. The base implementation triggers <em>OnCancelled</em>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/menu.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

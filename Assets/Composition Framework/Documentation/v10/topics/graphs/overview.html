@@ -1,0 +1,59 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/graphs/overview">Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Intruction Graphs are the main feature of the composition system. Graphs work similarly to a flow chart. When run, they traverse a tree of nodes which each execute their own logic. Graphs can branch and loop based on variables, expressions, input, or any other custom logic. The power of graphs comes in the way they allow timing and sequencing of game logic to occur. Whereas waiting on actions and events in script can be difficult to manage, graphs provide a simple to use visual interface for interacting with your game world to create things like, cutscenes, dialog trees, menus, scene transitions and even entire game systems, without the need to write lengthy scripts. The benefit of graphs is that they can work dynamically based on variables in your game world (see <a href="#topics/variables/overview.html">Variables</a>), with each graph able to perform different actions based on the object that is executing the graph and the inputs provided to it. Robust debugging is possible with breakpoints, runtime variable editing, and extensive error logging. In addition to supporting most of Unity&#8217;s built in systems, graphs are also easily extensible to your own game logic by simply creating custom nodes which can then provide any desired functionality.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/graphs/simple-graph.png" alt="Simple Graph Example">
+</div>
+</div>
+<div class="paragraph">
+<p><em>An example of a simple graph that opens a door with a key</em></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/graphs/complex-graph.png" alt="Complex Graph Example">
+</div>
+</div>
+<div class="paragraph">
+<p><em>An example of a more complex graph that runs an entire turn based battle system</em></p>
+</div>
+<div class="sect2">
+<h3 id="_workflow">Workflow</h3>
+<div class="paragraph">
+<p>Create a new graph in the Project window (<span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">PiRho Soft</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Graphs</b></span>) Open the Instruction Graph Window by double clicking on a graph in the Project window or through the <span class="menuseq"><b class="menu">Window</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">PiRho Soft</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Instruction Graph</b></span> menu. Every graph starts with a single <em>"Start"</em> node where execution of the graph begins. Selecting the start node will show the graph itself in the inspector where its properties can be edited (see <a href="#topics/graphs/instruction-store.html">Context/Inputs/Outputs</a>). Create new nodes from the drop down in the top left of the window, by right clicking anywhere on the graph, or by pressing space. When a node is selected its properties can be edited in the Inspector. In the graph view, each node will show its list of outputs that it can branch to. Create connections from these branches by clicking on the output knob and then the node you would like it to connect to. Many different connections can connect to the same node however, outputs can only connect to a single new node. When a graph reaches an output to a branch that has no connection the graph will end. Keep in mind, flow of a graph is unidirectional and can be visualized as inputs on the left and outputs on the right.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_topics">Topics</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="#topics/graphs/nodes.html">Nodes</a></p>
+</li>
+<li>
+<p><a href="#topics/graphs/control-flow.html">Control Flow</a></p>
+</li>
+<li>
+<p><a href="#topics/graphs/instruction-store.html">Instruction Store</a></p>
+</li>
+<li>
+<p><a href="#topics/graphs/debugging.html">Debugging</a></p>
+</li>
+<li>
+<p><a href="#topics/graphs/running-from-script.html">Running Graphs from Script</a></p>
+</li>
+<li>
+<p><a href="#topics/graphs/custom-graphs.html">Creating Custom Graphs</a></p>
+</li>
+<li>
+<p><a href="#topics/graphs/custom-nodes.html">Creating Custom Nodes</a></p>
+</li>
+</ol>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

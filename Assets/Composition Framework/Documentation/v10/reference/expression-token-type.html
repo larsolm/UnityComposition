@@ -1,0 +1,90 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/expression-token-type">ExpressionTokenType</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ExpressionTokenType</p>
+</div>
+<div class="sect2">
+<h3 id="_description_57">Description</h3>
+<div class="paragraph">
+<p>Specifies the set of <a href="#reference/expression-token.html">ExpressionTokens</a> the <a href="#reference/expression-lexer.html">ExpressionLexer</a> and <a href="#reference/expression-parser.html">ExpressionParser</a> understand.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_values_4">Values</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Sentinel</em></dt>
+<dd>
+<p>Seperates for two distinct statements. This is either <code>;</code> or a line break with multiple of these concatenated into a single token.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Constant</em></dt>
+<dd>
+<p>A <a href="#reference/variable-value.html">VariableValue</a> that has been added to the <a href="#reference/expression-lexer.html">ExpressionLexer</a> with <em>AddConstant</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Type</em></dt>
+<dd>
+<p>A <a href="#reference/variable-type.html">VariableType</a> for use with testing the type of values.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Int</em></dt>
+<dd>
+<p>A literal value that should be interpreted as an int. An int is any continuous sequence of digits.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Float</em></dt>
+<dd>
+<p>A literal value that should be interpreted as a float. A float is any continuous sequence of digits that includes a decimal point.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>String</em></dt>
+<dd>
+<p>A literal value that should be interpreted as a string. A string is a sequence of characters bounded by double quotes (<code>"</code>)</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Color</em></dt>
+<dd>
+<p>A literal value that should be interpreted as a color. A color is a sequence of 6 digits following a hash (<code>#</code>)</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Identifier</em></dt>
+<dd>
+<p>A name that is used to look up variable values. Identifiers can be any sequence of letters, numbers, spaces, or underscores beginning with a letter or underscore.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Command</em></dt>
+<dd>
+<p>A name that is used to look up a <a href="#reference/i-command.html">Command</a> that has been registered with the <a href="#reference/expression-parser.html">ExpressionParser</a> using <em>AddCommand</em>. A command is an <em>Identifier</em> that is followed by an opening paren (<code>(</code>).</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Operator</em></dt>
+<dd>
+<p>An operator that is used to look up a <a href="#reference/prefix-operation.html">PrefixOperation</a> or <a href="#reference/prefix-operation.html">InfixOperation</a> that has been registered with the <a href="#reference/expression-parser.html">ExpressionParser</a> using <em>AddPrefixOperator</em> or <em>AddInfixOperator</em>. Valid operator characters are any of <code>+-!^*/%&lt;&gt;=&amp;|?.</code> in any sequence and any character sequence that has been registered with the <a href="#reference/expression-lexer.html">ExpressionLexer</a> using <em>AddKeyword</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>StartLookup</em></dt>
+<dd>
+<p>Indicates the following tokens should be interpreted as part of a <a href="#reference/variable-handler.html">variable lookup</a>. This is the <code>[</code> character.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>EndLookup</em></dt>
+<dd>
+<p>Indicates the following tokens are no longer part of a <a href="#reference/variable-handler.html">variable lookup</a>. This is the <code>]</code> character.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>StartGroup</em></dt>
+<dd>
+<p>Indicates the following tokens should be isolated and evaluated as a group, just as would be done in a math expression. This is the <code>(</code> character.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>EndGroup</em></dt>
+<dd>
+<p>Ends a group that was started with a <em>StartGroup</em> token or a command that was started with a <em>Command</em> token. This is the <code>)</code> character.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Separator</em></dt>
+<dd>
+<p>Seperates parameters in a <em>Command</em> token. This is the <code>,</code> character.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Alternation</em></dt>
+<dd>
+<p>This is the character used as the separator for the true and false statements of a ternary expression. This is the <code>:</code> character.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Unknown</em></dt>
+<dd>
+<p>Any token that does not meet the requirements for one of the preceding types will be given this type.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

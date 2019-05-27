@@ -1,0 +1,100 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-schema">VariableSchema</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableSchema : <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_222">Description</h3>
+<div class="paragraph">
+<p>A VariableSchema is used to define the variables that are available to a <a href="#reference/i-variable-store.html">variable store</a> object - usually a <a href="#reference/variable-set-component.html">VariableSetComponent</a> or <a href="#reference/variable-set-asset.html">VariableSetAsset</a>. This improves the editor experience for working with those object types along with enforcing constraints so typos or other mistaken accesses can be caught and reported at runtime.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_110">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-initializer-type.html">VariableInitializerType</a> <em>InitializerType</em></dt>
+<dd>
+<p>Specifies how the initializer for each <a href="#reference/value-definition.html">ValueDefinition</a> will be displayed in the editor and ultimately how <a href="#reference/variable-value.html">VariableValues</a> created by this schema will be initialized.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/tag-list.html">TagList</a> <em>Tags</em></dt>
+<dd>
+<p>Specifies the set of tags that can be selected in the editor for each <a href="#reference/value-definition.html">ValueDefinition</a> added to this schema.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_40">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">int <em>Version</em> <em>(read only)</em></dt>
+<dd>
+<p>The current version of the schema. This is incremented every time any change is made to the schema so objects using it know to update themselves. These updates are automatically managed by <a href="#reference/variable-set-component.html">VariableSetComponent</a> and <a href="#reference/variable-set-asset.html">VariableSetAsset</a> and any class derived from them.</p>
+</dd>
+<dt class="hdlist1">int <em>Count</em> <em>(read only)</em></dt>
+<dd>
+<p>The number of <a href="#reference/variable-definition.html">VariableDefinitions</a> that have been added to this schema.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-definition.html">VariableDefinition</a> this[int <em>index</em>]</dt>
+<dd>
+<p>Sets or returns the <a href="#reference/variable-definition.html">VariableDefinition</a> at index <em>index</em>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<a href="#reference/variable-definition.html">VariableDefinition</a> is a struct so any changes made to the returned <a href="#reference/variable-definition.html">definition</a> will not change the actual schema. Reassign the <a href="#reference/variable-definition.html">definition</a> using this indexer to apply the change.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_47">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">int GetIndex(string <em>name</em>)</dt>
+<dd>
+<p>Returns the index of the <a href="#reference/variable-definition.html">VariableDefinition</a> with <a href="#reference/variable-definition.html"><em>Name</em></a> <em>name</em> or -1 if no <a href="#reference/variable-definition.html">VariableDefinition</a> has been added with that name.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Variable names are case sensitive.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool HasDefinition(string <em>name</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if this schema has a <a href="#reference/variable-definition.html">VariableDefinition</a> with <a href="#reference/variable-definition.html"><em>Name</em></a> <em>name</em>.</p>
+</dd>
+<dt class="hdlist1">bool AddDefinition(string <em>name</em>, <a href="#reference/variable-type.html">VariableType</a> <em>type</em>)</dt>
+<dd>
+<p>Adds a new <a href="#reference/variable-definition.html">VariableDefinition</a> to the schema with <a href="#reference/variable-definition.html"><em>Name</em></a> <em>name</em> and <a href="#reference/value-definition.html"><em>Type</em></a> <em>type</em>. If a <a href="#reference/variable-definition.html">definition</a> with that name has already been added, nothing will happen and this method will return <code>false</code>. If the definition is successfully added this method will return <code>true</code>.</p>
+</dd>
+<dt class="hdlist1">void RemoveDefinition(int <em>index</em>)</dt>
+<dd>
+<p>Removes the <a href="#reference/variable-definition.html">VariableDefinition</a> at index <em>index</em> from this schema.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

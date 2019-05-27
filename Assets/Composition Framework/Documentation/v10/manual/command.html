@@ -1,0 +1,62 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/command">Command</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Command is an <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">Asset</a> that can be created to give access to custom <a href="#reference/expression.html">Expression</a> logic that can be reused and called from other <a href="#reference/expression.html">Expressions</a>. This is useful when you have more complex logic that will be calculated in multiple locations. Commands can unify that logic so that it doesn&#8217;t have to be written multiple times and changing it once changes it for all instances that use it. Create a Command through the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">PiRho Soft</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Command</b></span> menu in the project view.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+Because a Command is a "Resource" it must be placed in a folder called "Commands" as a direct subfolder of a "Resources" folder so that it can be loaded and accessed at runtime.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/variables/custom-commands.html">Commands</a> for more information.<br>
+See the "Apply Damage" <a href="#manual/expression-node.html">Expression Node</a> of the "BattleScratch" <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Battle project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_8">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/command.png" alt="Command">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The string name of the Command that is used in an <a href="#reference/expression.html">Expression</a> to call this command</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parameters</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of <a href="#reference/variable.html">Variables</a> that should be passed to this Command - these can be accessed by name in <em>Expression</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expression</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/expression.html">Expression</a> that this command will run when it is called</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/command.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

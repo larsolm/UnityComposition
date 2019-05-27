@@ -1,0 +1,148 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/menu-input">MenuInput</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.MenuInput : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_118">Description</h3>
+<div class="paragraph">
+<p>Add this to a <a href="#reference/menu.html">Menu</a> to provide navigation and selection of <a href="#reference/menu-item.html">MenuItems</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_53">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>HorizontalAxis</em></dt>
+<dd>
+<p>The name of the axis, as used by <a href="#reference/input-helper.html">InputHelper</a>, that moves focus left and right through the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">string <em>VerticalAxis</em></dt>
+<dd>
+<p>The name of the axis, as used by <a href="#reference/input-helper.html">InputHelper</a>, that moves focus up and down through the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">string <em>SelectButton</em></dt>
+<dd>
+<p>The name of the button, as used by <a href="#reference/input-helper.html">InputHelper</a>, that will select the focused item on the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">string <em>CancelButton</em></dt>
+<dd>
+<p>The name of the button, as used by <a href="#reference/input-helper.html">InputHelper</a>, that will cancel the menu.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-input-pointer-action.html">MenuInputPointerAction</a> <em>HoverAction</em></dt>
+<dd>
+<p>The action to perform when the mouse moves over an item in the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-input-pointer-action.html">MenuInputPointerAction</a> <em>ClickAction</em></dt>
+<dd>
+<p>The action to perform when the mouse is clicked while over an item in the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/primary-axis.html">PrimaryAxis</a> <em>PrimaryAxis</em></dt>
+<dd>
+<p>Specifies how <a href="#reference/menu-item.html">MenuItems</a> are laid out in the <a href="#reference/menu.html">Menu</a> relative to their child index in the object. If items are laid out top to bottom (potentially with multiple columns), use <code>Column</code>. If items are laid out left to right (potentially with multiple rows), use <code>Row</code>.</p>
+</dd>
+<dt class="hdlist1">int <em>RowCount</em></dt>
+<dd>
+<p>If <em>PrimaryAxis</em> is <code>Row</code>, specifies the number of rows of <a href="#reference/menu-item.html">MenuItems</a> in the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">int <em>ColumnCount</em></dt>
+<dd>
+<p>If <em>PrimaryAxis</em> is <code>Column</code>, specifies the number of columns of <a href="#reference/menu-item.html">MenuItems</a> in the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-input.html">MenuInput</a> <em>NextLeft</em></dt>
+<dd>
+<p>Specifies the menu to transfer focus to when moving past the left most <a href="#reference/menu-item.html">MenuItem</a> in the <a href="#reference/menu.html">Menu</a>. This can be set to this menu input to cause focus to wrap back to the right. If this is not set, focus will be clamped to the left most column.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-input.html">MenuInput</a> <em>NextRight</em></dt>
+<dd>
+<p>Specifies the menu to transfer focus to when moving past the right most <a href="#reference/menu-item.html">MenuItem</a> in the <a href="#reference/menu.html">Menu</a>. This can be set to this menu input to cause focus to wrap back to the left. If this is not set, focus will be clamped to the right most column.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-input.html">MenuInput</a> <em>NextUp</em></dt>
+<dd>
+<p>Specifies the menu to transfer focus to when moving past the top most <a href="#reference/menu-item.html">MenuItem</a> in the <a href="#reference/menu.html">Menu</a>. This can be set to this menu input to cause focus to wrap back to the bottom. If this is not set, focus will be clamped to the top most row.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-input.html">MenuInput</a> <em>NextDown</em></dt>
+<dd>
+<p>Specifies the menu to transfer focus to when moving past the bottom most <a href="#reference/menu-item.html">MenuItem</a> in the <a href="#reference/menu.html">Menu</a>. This can be set to this menu input to cause focus to wrap back to the top. If this is not set, focus will be clamped to the bottom most row.</p>
+</dd>
+<dt class="hdlist1">bool <em>FocusOnLoad</em></dt>
+<dd>
+<p>Set this to <code>true</code> to have the first <a href="#reference/menu-item.html">MenuItem</a> gain focus when this behaviour is loaded.</p>
+</dd>
+<dt class="hdlist1">float <em>ScrollPadding</em></dt>
+<dd>
+<p>When inside a <a href="https://docs.unity3d.com/Manual/script-ScrollRect.html" target="_blank" rel="noopener">ScrollRect</a>, indicates the amount of padding to maintain around the focused item when menu navigation causes the menu to scroll.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_28">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void EnterFromBeginning()</dt>
+<dd>
+<p>Focuses the first <a href="#reference/menu-item.html">MenuItem</a>.</p>
+</dd>
+<dt class="hdlist1">void EnterFromEnd()</dt>
+<dd>
+<p>Focuses the last <a href="#reference/menu-item.html">MenuItem</a>.</p>
+</dd>
+<dt class="hdlist1">void EnterFromLeft(int <em>fromRow</em>)</dt>
+<dd>
+<p>Focuses the left most <a href="#reference/menu-item.html">MenuItem</a> in row <em>fromRow</em>.</p>
+</dd>
+<dt class="hdlist1">void EnterFromRight(int <em>fromRow</em>)</dt>
+<dd>
+<p>Focuses the right most <a href="#reference/menu-item.html">MenuItem</a> in row <em>fromRow</em>.</p>
+</dd>
+<dt class="hdlist1">void EnterFromTop(int <em>fromColumn</em>)</dt>
+<dd>
+<p>Focuses the top most <a href="#reference/menu-item.html">MenuItem</a> in column <em>fromColumn</em>.</p>
+</dd>
+<dt class="hdlist1">void EnterFromBottom(int <em>fromColumn</em>)</dt>
+<dd>
+<p>Focuses the bottom most <a href="#reference/menu-item.html">MenuItem</a> in column <em>fromColumn</em>.</p>
+</dd>
+<dt class="hdlist1">void Leave()</dt>
+<dd>
+<p>Clear focus so no <a href="#reference/menu-item.html">MenuItem</a> has focus.</p>
+</dd>
+<dt class="hdlist1">void MoveFocusUp(int <em>amount</em>)</dt>
+<dd>
+<p>Focus the <a href="#reference/menu-item.html">MenuItem</a> <em>amount</em> rows above the current focused item.</p>
+</dd>
+<dt class="hdlist1">void MoveFocusDown(int <em>amount</em>)</dt>
+<dd>
+<p>Focus the <a href="#reference/menu-item.html">MenuItem</a> <em>amount</em> rows below the current focused item.</p>
+</dd>
+<dt class="hdlist1">void MoveFocusLeft(int <em>amount</em>)</dt>
+<dd>
+<p>Focus the <a href="#reference/menu-item.html">MenuItem</a> <em>amount</em> columns to the left of the current focused item.</p>
+</dd>
+<dt class="hdlist1">void MoveFocusRight(int <em>amount</em>)</dt>
+<dd>
+<p>Focus the <a href="#reference/menu-item.html">MenuItem</a> <em>amount</em> columns to the right of the current focused item.</p>
+</dd>
+<dt class="hdlist1">void RefreshLayout()</dt>
+<dd>
+<p>Re-layout the <a href="#reference/menu-item.html">MenuItems</a>. Layout is maintained automatically when <a href="#reference/menu-item.html">MenuItems</a> are added, moved, or removed, but if <em>PrimaryAxis</em>, <em>ColumnCount</em>, or <em>RowCount</em> changes without altering the <a href="#reference/menu-item.html">MenuItems</a>, this should be called.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-item.html">MenuItem</a> GetItem(<a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>screenPoint</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/menu-item.html">MenuItem</a> at position <em>screenPoint</em>. <em>screenPoint</em> is in the same coordinate system as <a href="https://docs.unity3d.com/ScriptReference/Input-mousePosition.html" target="_blank" rel="noopener">Input.mousePosition</a>.</p>
+</dd>
+<dt class="hdlist1">void ScrollToItem(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>)</dt>
+<dd>
+<p>When inside a <a href="https://docs.unity3d.com/Manual/script-ScrollRect.html" target="_blank" rel="noopener">ScrollRect</a>, ensures <em>item</em> is visible with <em>ScrollPadding</em> space around it on all sides.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/menu-input.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

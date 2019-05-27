@@ -1,0 +1,106 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/bindings/variable-bindings">Variable Bindings</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Variable Binding itself is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> designed to be inherited from to either visually change or perform actions based on <a href="#topics/variables/overview.html">variables</a>. As outlined in <a href="#topics/bindings/binding-roots.html">Binding Roots</a>, by default variable bindings have access to the <a href="#manual/composition-manager.html">Composition Manager</a>'s <code>"global"</code> and <code>"scene"</code> <a href="#reference/i-variable-store.html">IVariableStores</a>, in addition to any binding roots in its hierarchy. Generally, bindings are used to display data in a user interface, such as timers, scores, health bars, etc. However, bindings may also perform any desired action, such as the <a href="#manual/graph-trigger-binding.html">Graph Trigger Binding</a>, which runs an <a href="#topics/graphs/overview.html">instruction graph</a> when the variable it is bound to changes.</p>
+</div>
+<div class="sect2">
+<h3 id="_updating_bindings">Updating Bindings</h3>
+<div class="paragraph">
+<p>Bindings have an <em>AutoUpdate</em> flag which if set, means that the binding will receive an update call automatically every frame. If <em>AutoUpdate</em> is false then bindings will need to be prompted to update manually, usually via an <a href="manual/update-binding-node.html">Update Binding Node</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_binding_groups">Binding Groups</h3>
+<div class="paragraph">
+<p>Variable Bindings can also be categorized into groups with the <em>BindingGroup</em> property so that only certain bindings will update when they are prompted. When updating bindings, if <code>null</code> is passed to the <code>VariableBinding.UpdateBindings()</code> method as the group parameter, then all bindings, regardless of their group will be updated, otherwise only those with a <em>BindingGroup</em> that matches the passed string will be updated.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_animation">Animation</h3>
+<div class="paragraph">
+<p>Bindings optionally support animation through a <a href="#reference/binding-animation-status.html">BindingAnimationStatus</a> object passed to the <code>UpdateBindings()</code> method. If a binding utilizes animation (such as the <a href="#manual/bar-binding.html">Bar Binding</a> gradually changing its fill value over time), then the <code>Increment()</code> method should be called on the status object when the animation begins and the <code>Decrement()</code> method when the animation is finished. Now the <code>IsFinished()</code> on the status object can be checked and waited on if desired. For example, an <a href="manual/update-binding-node.html">Update Binding Node</a> uses this to wait to move on to the next node until all bindings have finished animating.</p>
+</div>
+<div class="paragraph">
+<p>The following is a list of built-in bindings.</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/bar-binding.html">Bar Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind the fill value of an image to the ratio of two values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/enable-binding.html">Enable Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enable/disable an object based on a condition</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/expression-binding.html">Expression Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind text to the value of an expression</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/graph-trigger-binding.html">Graph Trigger Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Run a graph when a value changes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/image-binding.html">Image Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind an image to a value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/image-color-binding.html">Image Color Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind an image&#8217;s blend color to a value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/list-binding.html">List Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Create objects based on the values in a list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/message-binding.html">Message Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind text based on a message</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/number-binding.html">Number Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind text to a number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/sprite-binding.html">Sprite Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind a sprite to a value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/sprite-color-binding.html">Sprite Color Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind a sprites blend color to a value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/text-binding.html">Text Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind text to a value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/text-color-binding.html">Text Color Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind the color of text to a value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="#manual/text-input-binding.html">Text Input Binding</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bind a variable a text&#8217;s user input</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_errors_2">Errors</h3>
+<div class="paragraph">
+<p>Most Variable Bindings will disable their corresponding visual element if they fail to retreive their data and report the error. Sometimes this may be intended behaviour so if set, <em>SuppressErrors</em> will hide those errors. This behaviour is up to each individual binding class to implement so check the specific manual page to clarify behaviour.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

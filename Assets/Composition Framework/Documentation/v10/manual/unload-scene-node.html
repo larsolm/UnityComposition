@@ -1,0 +1,66 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/unload-scene-node">Unload Scene Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An Unload Scene Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that will unload a <a href="https://docs.unity3d.com/ScriptReference/SceneManagement.Scene.html" target="_blank" rel="noopener">Scene</a>. The scene to be unloaded can be a <a href="#reference/scene-reference.html">SceneReference</a>, string name, build index, or a <a href="#reference/variable-reference.html">VariableReference</a> to a string name or build index. If <em>WaitForCompletion</em> is specified, the graph will not move to the next node until the scene has fully completed unloading. Create an Unload Scene Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Sequencing</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Unload Scene</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/overview.html">Graphs</a> for more information on instruction graphs.<br>
+See the <em>"Unload Scene"</em> node on the <em>"LootHideInventory"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Loot project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_73">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/unload-scene-node.png" alt="Unload Scene Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#referenece/unload-scene-node-scene-source">SourceType</a> indicating how the scene to unload is specified</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Value</code>, the <a href="#reference/scene-reference.html">SceneReference</a> to unload</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene Variable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Variable</code>, the <a href="#reference/variable-reference.html">VariableReference</a> to a string name or build index of the scene to unload</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Name</code>, the string name of the scene to unload</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene Index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Index</code>, the build index of the scene to unload</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait For Completion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to wait until the scene has completed unloading before moving to the next node</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cleanup Assets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to call <a href="https://docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html" target="_blank" rel="noopener">UnloadUnusedAssets()</a> after the scene is unloaded</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/unload-scene-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,80 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/command-evaluation-exception">CommandEvaluationException</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.CommandEvaluationException : <a href="https://docs.microsoft.com/en-us/dotnet/api/system.exception?view=netframework-4.8" target="_blank" rel="noopener">Exception</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_28">Description</h3>
+<div class="paragraph">
+<p>The <a href="https://docs.microsoft.com/en-us/dotnet/api/system.exception?view=netframework-4.8" target="_blank" rel="noopener">Exception</a> type that is thrown during execution of <a href="#reference/i-command.html">Commands</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_2">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> WrongParameterCount(string <em>commandName</em>, int <em>got</em>, int <em>expected</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed an incorrect number of parameters (<em>got</em>) when an exact amount (<em>expected</em>) is expected.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> WrongParameterCount(string <em>commandName</em>, int <em>got</em>, int <em>expected1</em>, int <em>expected2</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed an incorrect number of parameters (<em>got</em>) when one of two amounts (<em>expected1</em> or <em>expected2</em>) were expected.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> WrongParameterRange(string <em>commandName</em>, int <em>got</em>, int <em>expectedMinimum</em>, int <em>expectedMaximum</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed a number of parameters (<em>got</em>) outside of an expected range (<em>expectedMinimum</em> and <em>expectedMaximum</em>)</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> TooFewParameters(string <em>commandName</em>, int <em>got</em>, int <em>expected</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed fewer parameters (<em>got</em>) than expected (<em>expected</em>).</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> TooManyParameters(string <em>commandName</em>, int <em>got</em>, int <em>expected</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed more parameters (<em>got</em>) than expected (<em>expected</em>).</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> WrongParameterType(string <em>commandName</em>, int <em>index</em>, <a href="#reference/variable-type.html">VariableType</a> <em>got</em>, <a href="#reference/variable-type.html">VariableType</a> <em>expected</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed a parameter at index <em>index</em> with the type <em>got</em> instead of the type <em>expected</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> WrongParameterType(string <em>commandName</em>, int <em>index</em>, <a href="#reference/variable-type.html">VariableType</a> <em>got</em>, <a href="#reference/variable-type.html">VariableType</a> <em>expected1</em>, <a href="#reference/variable-type.html">VariableType</a> <em>expected2</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed a parameter at index <em>index</em> with type <em>got</em> instead of either of the types <em>expected1</em> or <em>expected2</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> WrongParameterType(string <em>commandName</em>, int <em>index</em>, <a href="#reference/variable-type.html">VariableType</a> <em>got</em>, <a href="#reference/variable-type.html">VariableType</a>[] <em>expected</em>)</dt>
+<dd>
+<p>Returns an exception that can be thrown to indicate the command <em>commandName</em> was passed a parameter at index <em>index</em> with type <em>got</em> instead of any of the types in <em>expected</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_constructors_5">Constructors</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">CommandEvaluationException(string <em>command</em>, string <em>error</em>)</dt>
+<dd>
+<p>Creates an exception indicating the command <em>command</em> failed with error <em>error</em>.</p>
+</dd>
+<dt class="hdlist1">CommandEvaluationException(string <em>command</em>, string <em>errorFormat</em>, Object[] <em>arguments</em>)</dt>
+<dd>
+<p>Creates an exception indicating the command <em>command</em> failed with error built from <em>errorFormat</em> formatted with <em>arguments</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_11">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>Command</em></dt>
+<dd>
+<p>The name of the <a href="#reference/i-command.html">Command</a> that threw this exception.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

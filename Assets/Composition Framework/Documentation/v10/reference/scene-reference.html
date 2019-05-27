@@ -1,0 +1,75 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/scene-reference">SceneReference</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.UtilityEngine.SceneReference</p>
+</div>
+<div class="sect2">
+<h3 id="_description_160">Description</h3>
+<div class="paragraph">
+<p>Add this as a field on a class to expose an editor selectable scene.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_fields_6">Static Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Action&lt;string, string&gt; <em>SceneMoved</em></dt>
+<dd>
+<p>This is exposed for editor support and should be ignored.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_78">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>Path</em></dt>
+<dd>
+<p>The path to the scene in the <code>"Assets"</code> directory.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_27">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsAssigned</em> <em>(read only)</em></dt>
+<dd>
+<p><code>true</code> if the scene has been assigned.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsLoaded</em> <em>(read only)</em></dt>
+<dd>
+<p><code>true</code> if the scene is currently loaded.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Scene.html" target="_blank" rel="noopener">Scene</a> <em>Scene</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="https://docs.unity3d.com/ScriptReference/Scene.html" target="_blank" rel="noopener">Scene</a> at <em>Path</em>.</p>
+</dd>
+<dt class="hdlist1">int <em>Index</em> <em>(read only)</em></dt>
+<dd>
+<p>The build index of the <a href="https://docs.unity3d.com/ScriptReference/Scene.html" target="_blank" rel="noopener">Scene</a> at <em>Path</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_33">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Setup(<a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> <em>owner</em>)</dt>
+<dd>
+<p>This should be called in the setup method of the class this is a field on (for example <code>OnEnable</code> if it is a <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a>). This is necessary for the editor to update the scene when it is moved, renamed, or deleted.</p>
+</dd>
+<dt class="hdlist1">void Teardown()</dt>
+<dd>
+<p>This should be called in the destroy method of the class this is a field on (for example <code>OnDisable</code> if it is a <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a>). This is necessary for the editor to update the scene when it is moved, renamed, or deleted.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

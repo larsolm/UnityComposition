@@ -1,0 +1,70 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/bar-binding">Bar Binding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Bar Binding is a <a href="#manual/variable-binding.html">Variable Binding</a> that will set the fill amount and blend color of a sibling <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html" target="_blank" rel="noopener">Image</a> based on bindings to two int or float variables. If <em>AmountVariable</em> or <em>TotalVariable</em> is invalid or does not return an int or float, then the image will be disabled. If speed is greater than 0.0f then changes will be animated. Custom color gradients can also be set depending on the fill amount. Bar Bindings are useful for things like health and progress bars.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/bindings/variable-bindings.html">Variable Bindings</a> for more information.<br>
+See the <em>"Battle"</em> scene in the Battle project for an example usage.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Make sure the <em>Image Type</em> property on <a href="https://docs.unity3d.com/ScriptReference/UI.Image.html" target="_blank" rel="noopener">Image</a> is set to <em>Filled</em> for the Bar Binding to work properly.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_fields_2">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/bar-binding.png" alt="Bar Binding">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Amount Variable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/variable-reference.html">VariableReference</a> that represents the fractional amount of the fill</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Total Variable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/variable-reference.html">VariableReference</a> that represents the total amount of the fill</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Fill Colors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="https://docs.unity3d.com/ScriptReference/Gradient.html" target="_blank" rel="noopener">Gradient</a> to base the blend color on</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Speed</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The speed at which to animate changes (in percentage of the total per second)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use Scaled Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to base the speed off of scaled time or real time</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/bar-binding.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

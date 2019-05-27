@@ -1,0 +1,70 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/message-control">MessageControl</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.MessageControl : <a href="#reference/interface-control.html">InterfaceControl</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_124">Description</h3>
+<div class="paragraph">
+<p>Add this to a <a href="http://digitalnativestudios.com/textmeshpro/docs/" target="_blank" rel="noopener">TextMeshPro</a> to display messages from a <a href="#reference/message-node.html">MessageNode</a>. Add a <a href="#reference/message-input.html">MessageInput</a> to support dismissing the control with a button press.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_58">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="http://digitalnativestudios.com/textmeshpro/docs/" target="_blank" rel="noopener">TMP_Text</a> <em>DisplayText</em></dt>
+<dd>
+<p>The <a href="http://digitalnativestudios.com/textmeshpro/docs/" target="_blank" rel="noopener">TextMeshPro</a> that the text will be displayed on. This component will be enabled and disabled along with this MessageControl.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_25">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsRunning</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> when this MessageControl is displaying text.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsAdvancing</em></dt>
+<dd>
+<p>Returns <code>true</code> when this MessageControl should have its text advanced. This can be set from subclasses to reset the flag after it has been consumed.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_31">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Show(string <em>text</em>)</dt>
+<dd>
+<p>Activates the MessageControl if necessary, sets <em>text</em> on <em>DisplayText</em>, and enables <em>DisplayText</em>. If this is called a second time before it is hidden, the text will simply be replaced and the control will continue to function as normal.</p>
+</dd>
+<dt class="hdlist1">void Advance()</dt>
+<dd>
+<p>Sets the <em>IsAdvancing</em> flag so the text will advance on the next frame.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_9">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Run() <em>(virtual)</em></dt>
+<dd>
+<p>This method can be overridden to perform custom handling of advancement. By default, the control will be dismissed when <em>Advance</em> is called, but this could be changed to add support for, for example, paging.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/message-control.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

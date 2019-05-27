@@ -1,0 +1,127 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/instruction-store">InstructionStore</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.InstructionStore : <a href="#reference/i-variable-store.html">IVariableStore</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_91">Description</h3>
+<div class="paragraph">
+<p>The <a href="#reference/i-variable-store.html">IVariableStore</a> used with <a href="#reference/instruction-graph.html">InstructionGraphs</a> to provide a robust interface for accessing and isolating variables for use by <a href="#reference/instruction-graph-node.html">InstructionGraphNodes</a>. When using an <a href="#reference/instruction-caller.html">InstructionCaller</a> all management of the store will be handled automatically including creation of the store, reading input variables, and writing output variables.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_fields_4">Static Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>InputStoreName</em></dt>
+<dd>
+<p>The name used to access the <em>Input</em> store from a <a href="#reference/variable-reference.html">VariableReference</a> or <a href="#reference/expression.html">Expression</a>. This is set to <code>"input"</code>.</p>
+</dd>
+<dt class="hdlist1">string <em>OutputStoreName</em></dt>
+<dd>
+<p>The name used to access the <em>Output</em> store from a <a href="#reference/variable-reference.html">VariableReference</a> or <a href="#reference/expression.html">Expression</a>. This is set to <code>"output"</code>.</p>
+</dd>
+<dt class="hdlist1">string <em>LocalStoreName</em></dt>
+<dd>
+<p>The name used to access the <em>Local</em> store from a <a href="#reference/variable-reference.html">VariableReference</a> or <a href="#reference/expression.html">Expression</a>. This is set to <code>"local"</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_7">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool IsInput(<a href="#reference/variable-reference.html">VariableReference</a> <em>variable</em>)</dt>
+<dd>
+<p>Determines if <em>variable</em> reads from the <em>Input</em> store. This can be used from overridden implementations of <em>GetInputs</em> in rare cases where the default implementation isn&#8217;t sufficient.</p>
+</dd>
+<dt class="hdlist1">bool IsOutput(<a href="#reference/variable-reference.html">VariableReference</a> <em>variable</em>)</dt>
+<dd>
+<p>Determines if <em>variable</em> writes to the <em>Output</em> store. This can be used from overridden implementations of <em>GetOutputs</em> in rare cases where the default implementation isn&#8217;t sufficient.</p>
+</dd>
+<dt class="hdlist1">bool IsInput(<a href="#reference/instruction-input.html">InstructionInput</a> <em>input</em>)</dt>
+<dd>
+<p>Determines if <em>input</em> reads from the <em>Input</em> store. This can be used from overridden implementations of <em>GetInputs</em> in rare cases where the default implementation isn&#8217;t sufficient.</p>
+</dd>
+<dt class="hdlist1">bool IsOutput(<a href="#reference/instruction-output.html">InstructionOutput</a> <em>output</em>)</dt>
+<dd>
+<p>Determines if <em>inputs</em> writes to the <em>Output</em> store. This can be used from overridden implementations of <em>GetOutputs</em> in rare cases where the default implementation isn&#8217;t sufficient.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_14">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>ContextName</em> <em>(read only)</em></dt>
+<dd>
+<p>The name used to access the <em>Context</em> from a <a href="#reference/variable-reference.html">VariableReference</a> or <a href="#reference/expression.html">Expression</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> <em>Context</em> <em>(read only)</em></dt>
+<dd>
+<p>The value sent as <em>context</em> in the InstructionStore constructor.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-store.html">VariableStore</a> <em>Input</em> <em>(read only)</em></dt>
+<dd>
+<p>The variable store, accessed with <em>InputStoreName</em>, that holds variables passed from the <a href="#reference/instruction-caller.html">caller</a>. <a href="#reference/variable.html">Variables</a> in this store can be accessed and changed, but new <a href="#reference/variable.html">variables</a> cannot be added.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-store.html">VariableStore</a> <em>Output</em> <em>(read only)</em></dt>
+<dd>
+<p>The variable store, accessed with <em>OutputStoreName</em>, that holds variables set by the instruction and returned to the <a href="#reference/instruction-caller.html">caller</a>. <a href="#reference/variable.html">Variables</a> in this store can be accessed and changed, but new <a href="#reference/variable.html">variables</a> cannot be added. The store will be pre-populated with variables specified as <em>Outputs</em> on the <a href="#reference/instruction-caller.html">caller</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-store.html">VariableStore</a> <em>Local</em> <em>(read only)</em></dt>
+<dd>
+<p>The variable store, accessed with <em>LocalStoreName</em>, that holds variables that are isolated to the execution of the <em>instruction</em> this store was created with. When execution begins, this store will be empty, but variables can be added or changed on this store at any time without affecting any other stores.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+It is not required to use <em>LocalStoreName</em> when accessing the local store but it can improve readability or resolve ambiguities in some cases.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_18">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void WriteInputs(<a href="#reference/instruction-caller.html">InstructionCaller</a> <em>instruction</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/instruction-input.html">InstructionInput</a>&gt; <em>inputs</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>caller</em>)</dt>
+<dd>
+<p>Takes each of the <a href="#reference/instruction-input.html">InstructionInputs</a> from <em>inputs</em>, resolves them using <em>caller</em> if they are <a href="#reference/variable-reference.html">VariableReferences</a>, and adds them to the <em>Input</em> store.</p>
+</dd>
+<dt class="hdlist1">void WriteOutputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/instruction-output.html">InstructionOutput</a>&gt; <em>outputs</em>)</dt>
+<dd>
+<p>Takes each of the <a href="#reference/instruction-output.html">InstructionOutputs</a> from <em>outputs</em> and adds them to the <em>Output</em> store.</p>
+</dd>
+<dt class="hdlist1">void ReadOutputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/instruction-output.html">InstructionOutput</a>&gt; <em>outputs</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>caller</em>)</dt>
+<dd>
+<p>Takes each of the <a href="#reference/instruction-output.html">InstructionOutputs</a> from <em>outputs</em> and resolves them using this store if they are <a href="#reference/variable-reference.html">VariableReferences</a>, and adds them to <em>caller</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(string <em>name</em>)</dt>
+<dd>
+<p>Returns the value of the variable with name <em>name</em> on this store. If <em>name</em> is not found, the <em>Local</em> store will be searched.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Each of the names exposed by this store are read only, but if <em>name</em> is unrecognized, this will attempt to set <em>value</em> on the <em>Local</em> store.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames()</dt>
+<dd>
+<p>Returns the names of all variables exposed by this store. This is <em>InputStoreName</em>, <em>OutputStoreName</em>, <em>LocalStoreName</em>, CompositionManager.<em>GlobalStoreName</em>, CompositionManager.<em>SceneStoreName</em>, and <em>ContextName</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

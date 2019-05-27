@@ -1,0 +1,29 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/i-command">ICommand</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ICommand</p>
+</div>
+<div class="sect2">
+<h3 id="_description_69">Description</h3>
+<div class="paragraph">
+<p>Implement this interface to create a custom command that can be added to the <a href="#reference/expression-parser.html">ExpressionParser</a> and ultimately called from <a href="#reference/expression.html">Expressions</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_13">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Evaluate(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, string <em>name</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/operation.html">Operation</a>&gt; <em>parameters</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Implement this method to perform the command&#8217;s function. <em>variables</em> contains the <a href="#reference/i-variable-store.html">IVariableStore</a> that should be passed to each <a href="#reference/operation.html">Operation</a> in <em>parameters</em> when evaluating them as well as to look up any custom variables. <em>name</em> is the name that was used to call this command and <em>parameters</em> is the parsed expressions that were passed to the command.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p>Throw a <a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> to indicate any errors in execution.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,98 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/instruction">Instruction</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.Instruction : <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_79">Description</h3>
+<div class="paragraph">
+<p>Implements the core functionality for an <a href="#reference/instruction-graph.html">InstructionGraph</a> or any other asset to allow it to be run by the <a href="#reference/composition-manager.html">CompositionManager</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_37">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>ContextName</em></dt>
+<dd>
+<p>The name to assign to the variable that is passed as <em>context</em> to either of the <a href="#reference/composition-manager.html">CompositionManager.<em>Run</em></a> methods.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> <em>ContextDefinition</em></dt>
+<dd>
+<p>The definition to use to validate the variable passed as <em>context</em> to either of the <a href="#reference/composition-manager.html">CompositionManager.<em>Run</em></a> methods. If the definition specifies a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> type and the <em>context</em> value is not that behaviour type, it will be converted by attempting to look up a sibling behaviour.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-definition-list.html">VariableDefinitionList</a> <em>Inputs</em></dt>
+<dd>
+<p>The list of definitions for the input variables this instruction expects to be set when called from an <a href="#reference/instruction-caller.html">InstructionCaller</a>. This list will be automatically populated by the editor and each definition can optionally be set to constrain the corresponding input. If the definition is set, the input will be validated at runtime to ensure the correct data was passed, with a message being logged if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-definition-list.html">VariableDefinitionList</a> <em>Outputs</em></dt>
+<dd>
+<p>The list of definitions for the output variables indicating the values this instruction will set for an <a href="#reference/instruction-caller.html">InstructionCaller</a> when it has completed. The outputs are not validated because it is not required that they are set by the instruction, but setting these will improve the editor experience.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_11">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/i-variable-store.html">IVariableStore</a> <em>Variables</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/instruction-store.html">InstructionStore</a> that was passed to the <em>Execute</em> method. This will be null if the instruction is not currently running.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsRunning</em> <em>(read only)</em></dt>
+<dd>
+<p>This will return <code>true</code> while the <em>Execute</em> coroutine is running.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_14">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Execute(<a href="#reference/variable-value.html">VariableValue</a> <em>context</em>)</dt>
+<dd>
+<p>Executes the instruction. When inside an existing <a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank" rel="noopener">coroutine</a> this can be called directly as part of a <code>yield return</code> statement. When outside a coroutine, the <a href="#reference/composition-manager.html">CompositionManager.<em>RunInstruction</em></a> methods should be used.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Execute(<a href="#reference/instruction-store.html">InstructionStore</a> <em>variables</em>)</dt>
+<dd>
+<p>Executes the instruction. When inside an existing <a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank" rel="noopener">coroutine</a> this can be called directly as part of a <code>yield return</code> statement. When outside a coroutine, the <a href="#reference/composition-manager.html">CompositionManager.<em>RunInstruction</em></a> methods should be used.</p>
+</dd>
+<dt class="hdlist1">void RefreshInputs()</dt>
+<dd>
+<p>Used by the editor to refresh the input list when necessary. This will happen automatically and can be ignored.</p>
+</dd>
+<dt class="hdlist1">void RefreshOutputs()</dt>
+<dd>
+<p>Used by the editor to refresh the input list when necessary. This will happen automatically and can be ignored.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_4">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void GetInputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>inputs</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in subclasses to populate the <em>inputs</em> list with definitions for values the instruction expects to be available when called.</p>
+</dd>
+<dt class="hdlist1">void GetOutputs(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable-definition.html">VariableDefinition</a>&gt; <em>outputs</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in subclasses to populate the <em>outputs</em> list with definitions for values the instruction will set after it finishes running.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Run(<a href="#reference/instruction-store.html">InstructionStore</a> <em>variables</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Implement this in subclasses to perform the function of the instruction.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/instruction.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

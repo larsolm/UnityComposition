@@ -1,0 +1,61 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/load-scene-node">LoadSceneNode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.LoadSceneNode : <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_111">Description</h3>
+<div class="paragraph">
+<p>Add this to an <a href="#reference/instruction-graph.html">InstructionGraph</a> to load a scene.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_48">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Next</em></dt>
+<dd>
+<p>The <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> to run when this node finishes.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/load-scene-node-scene-source.html">SceneSource</a> <em>Source</em></dt>
+<dd>
+<p>Specifies how the scene to load is retrieved.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/scene-reference.html">SceneReference</a> <em>Scene</em></dt>
+<dd>
+<p>If <em>Source</em> is <code>Value</code>, holds the scene to load.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>SceneVariable</em></dt>
+<dd>
+<p>If <em>Source</em> is <code>Variable</code>, references the scene to load. If the resolved value is an <code>Int</code>, the scene will be loaded by build index. If it is a <code>String</code>, it will be loaded by name.</p>
+</dd>
+<dt class="hdlist1">string <em>SceneName</em></dt>
+<dd>
+<p>If <em>Source</em> is <code>Name</code>, the name of the scene to load.</p>
+</dd>
+<dt class="hdlist1">int <em>SceneIndex</em></dt>
+<dd>
+<p>If <em>Source</em> is <code>Index</code>, the build index of the scene to load.</p>
+</dd>
+<dt class="hdlist1">bool <em>WaitForCompletion</em></dt>
+<dd>
+<p>If this is <code>true</code> (the default), the node will block until the scene has been loaded. Otherwise the scene will be loaded and the graph will continue in parallel.</p>
+</dd>
+<dt class="hdlist1">bool <em>CleanupAssets</em></dt>
+<dd>
+<p>If this is <code>true</code> (the default), <a href="https://docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html" target="_blank" rel="noopener">Resources.UnloadUnusedAssets</a> will be called after the scene has been loaded.</p>
+</dd>
+<dt class="hdlist1">bool <em>Additive</em></dt>
+<dd>
+<p>If this is <code>true</code> (the default), the scene will be loaded in additive mode, meaning all other loaded scenes will remain loaded. If this is <code>false</code>, all currently loaded scenes will be unloaded first.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/load-scene-node.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,41 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/sort-node">SortNode</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.SortNode : <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_180">Description</h3>
+<div class="paragraph">
+<p>Sorts the <a href="#reference/variable-value.html">VariableValues</a> in an <a href="#reference/variable-list.html">VariableList</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_89">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Next</em></dt>
+<dd>
+<p>The <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> to run when this node finishes.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>List</em></dt>
+<dd>
+<p>The <a href="#reference/variable-list.html">VariableList</a> to sort.</p>
+</dd>
+<dt class="hdlist1">bool <em>SortByProperty</em></dt>
+<dd>
+<p>If this is <code>true</code>, <em>SortConditions</em> is used to sort the <a href="#reference/variable-value.html">VariableValues</a> by properties on each value. Otherwise the <a href="#reference/variable-value.html">VariableValues</a> are sorted directly.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/sort-condition-list.html">SortConditionList</a> <em>SortConditions</em></dt>
+<dd>
+<p>The <a href="#reference/variable.html">Variables</a> on each item in <em>List</em> to sort by. When sorting by more than one property, the result will be fully sorted by the last property with equal values sorted by each previous property.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/sort-node.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

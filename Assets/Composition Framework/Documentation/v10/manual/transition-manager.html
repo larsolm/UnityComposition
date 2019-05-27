@@ -1,0 +1,12 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/transition-manager">Transition Manager</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Transition Manager is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> that manages the transition post-processing system. Because Transition Manager is a <a href="#reference/global-behaviour-1.html">GlobalBehaviour</a>, it is created automatically the first time it is accessed so it does not need to be added to any objects in a scene. The Transition Manager works in conjunction with <a href="#manual/transition-renderer.html">Transition Renderers</a> attached to <a href="https://docs.unity3d.com/ScriptReference/Camera.html" target="_blank" rel="noopener">Cameras</a> to render post processing effects onto the screen. Generally, <a href="#manual/transition.html">Transitions</a> are started by a <a href="#manual/play-transition-node.html">Play Transition Node</a>, however, they can be run from script using the <code>RunTransition()</code> or <code>StartTransition()</code> method. The methods are both <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerators</a> and should be called using the <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.StartCoroutine.html" target="_blank" rel="noopener">MonoBehaviour.StartCoroutine()</a> method. <code>RunTransition()</code> will fully run the given <a href="reference/transition-phase.html">Phase</a> of the <a href="#manual/transition.html">Transition</a>, ending it once it has finished, while <code>StartTransition()</code> will run the <a href="#manual/transition.html">Transition</a> until the end without clearing, maintaining its final state until <code>EndTransition()</code> is called or a new <a href="#manual/transition.html">Transition</a> is started. Only a single <a href="#manual/transition.html">Transition</a> can be running at a time.</p>
+</div>
+<div class="paragraph">
+<p><a href="#reference/transition-manager.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

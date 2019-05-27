@@ -1,0 +1,47 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/interface/overview">Overview</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The interface system is used in conjunction with <a href="https://docs.unity3d.com/Manual/UISystem.html" target="_blank" rel="noopener">Unity&#8217;s UI</a> system make creating and interacting with common UI elements in a game much simpler. Interfaces work with <a href="#manual/graphs-1.html">graphs</a> for sequencing things like dialogs, selections, menus, etc, without the need for scripting. The main components of the interface system are Interface Controls. These are activated and deactivated from graphs and control the behaviour of UI elements in the scene. Messages and Selections are the two built in controls provided. Interface controls are designed with extensibility in mind; each can be customized for desired behaviour and other custom controls can be created.</p>
+</div>
+<div class="sect2">
+<h3 id="_workflow_2">Workflow</h3>
+<div class="paragraph">
+<p>The following is an example of a <a href="#topics/graphs/overview.html">graph</a> the defines a dialog sequence constructed almost entirely of <a href="#manual/message-node.html">Message Nodes</a> and <a href="#manual/selection-node.html">Selection Nodes</a> to create a shop.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/interface/interface-example.png" alt="Interface Example Graph">
+</div>
+</div>
+<div class="paragraph">
+<p>And the scene it references which has a <a href="#manual/message-control.html">Message</a> controlling the text at the bottom, and <a href="#manual/selection-control.html">Selection Controls</a> controlling the selection boxes on the sides.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/interface/interface-example-scene.png" alt="Interface Example Scene">
+</div>
+</div>
+<div class="paragraph">
+<p>See the <em>"Shop"</em> scene in the Shop project to view this example.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_topics_4">Topics</h3>
+<div class="olist arabic">
+<ol class="arabic">
+<li>
+<p><a href="topics/interface/controls.html">Controls</a></p>
+</li>
+<li>
+<p><a href="topics/interface/messages.html">Messages</a></p>
+</li>
+<li>
+<p><a href="topics/interface/menus-and-selections.html">Menus and Selections</a></p>
+</li>
+</ol>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

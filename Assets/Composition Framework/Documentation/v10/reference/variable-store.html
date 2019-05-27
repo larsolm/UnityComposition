@@ -1,0 +1,88 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-store">VariableStore</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableStore : <a href="#reference/i-variable-store.html">IVariableStore</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_229">Description</h3>
+<div class="paragraph">
+<p>An <a href="#reference/i-variable-store.html">IVariableStore</a> that allows an arbitrary set of <a href="#reference/variable-value.html">VariableValues</a> to be added.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_44">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;string&gt; <em>Names</em> <em>(read only)</em></dt>
+<dd>
+<p>The names of the <a href="#reference/variable-value.html">VariableValues</a> in the store.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/variable-value.html">VariableValue</a>&gt; <em>Variables</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-value.html">VariableValues</a> in the store.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.Dictionary-2" target="_blank" rel="noopener">Dictionary</a>&lt;string, string&gt; <em>Map</em> <em>(read only)</em></dt>
+<dd>
+<p>The dictionary that maps names to indexes of the <a href="#reference/variable-value.html">VariableValues</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_52">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void AddVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Adds <em>value</em> to the store and assigns it the name <em>name</em>.</p>
+</dd>
+<dt class="hdlist1">bool RemoveVariable(string <em>name</em>)</dt>
+<dd>
+<p>Removes the <a href="#reference/variable-value.html">VariableValue</a> with name <em>name</em> from the store. If <em>name</em> does not exist, <code>false</code> is returned.</p>
+</dd>
+<dt class="hdlist1">void RemoveVariable(int <em>index</em>)</dt>
+<dd>
+<p>Removes the <a href="#reference/variable-value.html">VariableValue</a> at index <em>index</em> from the store.</p>
+</dd>
+<dt class="hdlist1">void VariableMoved(int <em>from</em>, int <em>to</em>) <em>(virtual)</em></dt>
+<dd>
+<p>This is an editor support function that can be ignored.</p>
+</dd>
+<dt class="hdlist1">void Clear() <em>(virtual)</em></dt>
+<dd>
+<p>Removes all <a href="#reference/variable-value.html">VariableValues</a> from the store.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames() <em>(virtual)</em></dt>
+<dd>
+<p>Returns <em>Names</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(string <em>name</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Returns the <a href="#reference/variable-value.html">VariableValue</a> with name <em>name</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Sets the <a href="#reference/variable-value.html">VariableValue</a> with <em>name</em> name to <em>value</em>. If <em>name</em> does not exist, it will be added.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_16">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void RemoveVariable(string <em>name</em>, int <em>index</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Removes the variable with <em>name</em> name and index <em>index</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>, bool <em>allowAdd</em>)</dt>
+<dd>
+<p>Sets the <a href="#reference/variable-value.html">VariableValue</a> with <em>name</em> name to <em>value</em>. If <em>name</em> does not exist, it will be added only if <em>allowAdd</em> is <code>true</code>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

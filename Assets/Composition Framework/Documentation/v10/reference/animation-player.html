@@ -1,0 +1,53 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/animation-player">AnimationPlayer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.AnimationPlayer : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a>, <a href="#reference/i-completion-notifier.html">ICompletionNotifier</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_2">Description</h3>
+<div class="paragraph">
+<p>Add this to any <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> to provide an interface for playing <a href="https://docs.unity3d.com/ScriptReference/AnimationClip.html" target="_blank" rel="noopener">AnimationClips</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsComplete</em> <em>(read only)</em></dt>
+<dd>
+<p>This will return true as soon as the animation has completed. If the animation has not yet started, it is not considered complete, so this will return false. If the animation is set to loop, this will always return false.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void PlayAnimation(<a href="https://docs.unity3d.com/ScriptReference/AnimationClip.html" target="_blank" rel="noopener">AnimationClip</a> <em>animation</em>)</dt>
+<dd>
+<p>Plays <em>animation</em> and returns immediately.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> PlayAnimationAndWait(<a href="https://docs.unity3d.com/ScriptReference/AnimationClip.html" target="_blank" rel="noopener">AnimationClip</a> <em>animation</em>)</dt>
+<dd>
+<p>Plays <em>animation</em> and returns an enumerator so it can be run as or from a <a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank" rel="noopener">coroutine</a>. The enumerator will yield until <em>animation</em> has completed. If <em>animation</em> is set to loop, the enumerator
+will break immediately and an error will be printed. Call <em>PlayAnimation</em> instead to run looping animations.</p>
+</dd>
+<dt class="hdlist1">void Pause()</dt>
+<dd>
+<p>Pauses playback of the currently running animation.</p>
+</dd>
+<dt class="hdlist1">void Unpause()</dt>
+<dd>
+<p>Resumes playback of the currently running animation.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/animation-player.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

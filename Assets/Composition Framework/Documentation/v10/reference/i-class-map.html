@@ -1,0 +1,34 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/i-class-map">IClassMap</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.IClassMap</p>
+</div>
+<div class="sect2">
+<h3 id="_description_68">Description</h3>
+<div class="paragraph">
+<p>Implement this interface to expose properties as <a href="#reference/variable.html">Variables</a> in a class that is not an <a href="#reference/i-variable-store.html">IVariableStore</a>. Generally deriving from <a href="#reference/class-map-1.html">ClassMap</a> is a better option than implementing this interface directly.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_12">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames() <em>(abstract)</em></dt>
+<dd>
+<p>This method should return the list of variable names that are accessible in <em>GetVariable</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(object <em>obj</em>, string <em>name</em>) <em>(abstract)</em></dt>
+<dd>
+<p>This method should return a <a href="#reference/variable-value.html">VariableValue</a> containing the value of the property <em>name</em> on <em>obj</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(Object <em>obj</em>, string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(abstract)</em></dt>
+<dd>
+<p>This method should set the property <em>name</em> on <em>obj</em> to <em>value</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

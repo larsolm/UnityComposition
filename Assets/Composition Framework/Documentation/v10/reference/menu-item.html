@@ -1,0 +1,79 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/menu-item">MenuItem</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.MenuItem : <a href="#reference/binding-root.html">BindingRoot</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_120">Description</h3>
+<div class="paragraph">
+<p>Add this to any <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> that is a child of a <a href="#reference/menu.html">Menu</a> to indicate the object should be managed by the <a href="#reference/menu.html">Menu</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_54">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>ItemName</em></dt>
+<dd>
+<p>The name to use to access the this item from child <a href="#reference/variable-binding.html">VariableBindings</a>. Available variables are <code>Index</code>, <code>Column</code>, <code>Row</code>, <code>Label</code>, and <code>Focused</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_22">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">int <em>Index</em> <em>(read only)</em></dt>
+<dd>
+<p>The index of the item in the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">int <em>Column</em> <em>(read only)</em></dt>
+<dd>
+<p>The index of the column the item is in in the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">int <em>Row</em> <em>(read only)</em></dt>
+<dd>
+<p>The index of the row the item is in in the <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">string <em>Label</em> <em>(read only)</em></dt>
+<dd>
+<p>The label assigned to the item by a <a href="#reference/selection-control.html">SelectionControl</a>.</p>
+</dd>
+<dt class="hdlist1">bool <em>Focused</em> <em>(read only)</em></dt>
+<dd>
+<p><code>true</code> when this item is the focused item in its <a href="#reference/menu.html">Menu</a></p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-item-template.html">MenuItemTemplate</a> <em>Template</em> <em>(read only)</em></dt>
+<dd>
+<p>The template this item was generated from or initialized with.</p>
+</dd>
+<dt class="hdlist1">bool <em>Generated</em> <em>(read only)</em></dt>
+<dd>
+<p><code>true</code> if this item was generated from a prefab set by a <a href="#reference/menu-item-template.html">MenuItemTemplate</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_29">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Setup(<a href="#reference/menu-item-template.html">MenuItemTemplate</a> <em>template</em>, bool <em>generated</em>)</dt>
+<dd>
+<p>Initializes <em>Template</em> and <em>Generated</em> after the item has been associated with a <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+<dt class="hdlist1">void Move(int <em>index</em>)</dt>
+<dd>
+<p>Moves the item in its <a href="#reference/menu.html">Menu</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/menu-item.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

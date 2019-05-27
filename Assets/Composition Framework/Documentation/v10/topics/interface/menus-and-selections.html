@@ -1,0 +1,90 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/interface/menus-and-selections">Menus</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Menus are <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviours</a> that provide an interface for adding, removing, selecting, and focusing of child <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObjects</a>. On their own, Menus are simply a container for child <a href="#manual/menu-item.html">Menu Items</a> which are created externally. They can be created manually in the editor, populated automatically using a <a href="#manual/list-binding.html">List Binding</a>, or in conjunction with a <a href="#manual/selection-control.html">Selection Control</a> and a <a href="#manual/selection-node.html">Selection Node</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_selection_controls">Selection Controls</h3>
+<div class="paragraph">
+<p>Selection Controls are <a href="#manual/interface-control.html">Interface Controls</a> used to dynamically populate a menu with items to be selected from when prompted. Selection Controls are activated with the <code>Show()</code> method which takes a list of <a href="#reference/menu-item-template.html">MenuItemTemplates</a>. Each template contains the info needed to create items in the menu: a name, the <a href="topics/variables/overview.html">variables</a> to assign to the item, the prefab to instantiate, etc. Selection controls can optionally require a selection to be made so they cannot be cancelled, and they can optionally maintain their focused index in case the selection is being returned to from a subsequent menu.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_menu_items">Menu Items</h3>
+<div class="paragraph">
+<p>A Menu Item component must be attached to each object in a menu, whether it be a prefab to be instantiated or an existing item in the scene. They are a <a href="topics/bindings/binding-roots.html">binding root</a> which exposes an <em>ItemName</em> field which gives access to the data of the Menu Item itself. Variables that can be accessed by child <a href="#topics/bindings/variable-bindings.html">bindings</a> through <em>ItemName</em> are: <em>Index</em>, <em>Column</em>, <em>Row</em>, <em>Label</em>, and <em>Focused</em>. The <em>ValueName</em> field on a menu item exposes the variables specified by the menu item template used to create the menu item.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_selection_nodes">Selection Nodes</h3>
+<div class="paragraph">
+<p>Create a Selection Node in a <a href="#topics/graphs/overview.html">graph</a> using the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Interface</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Selection</b></span> menu of the Instruction Graph Window. A Selection Node will activate a selection control and give it a list of <a href="#reference/menu-item-template.html">MenuItemTemplates</a> to create. A Selection Node will deactivate the control once a selection has been made if <em>AutoHide</em> is <code>true</code>. If <em>AutoHide</em> is <code>false</code> then a <a href="#manual/hide-control-node.html">Hide Control Node</a> must be used to deactivate it. When a selection is made the selected item and index will be assigned to <a href="#reference/variables-referenece.html">variables</a> specified by <em>SelectedItem</em> and <em>SelectedIndex</em>. The graph will then branch to the corresponding node of the <a href="#reference/selection-node-item.html">selected item</a>. Selection Nodes tell the selection control via the <em>IsSelectionRequired</em> flag whether it can be cancelled or not. If this is the first iteration of the selection node then it will also tell the selection control to reset its focus.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_menu_item_templates">Menu Item Templates</h3>
+<div class="paragraph">
+<p>Each item will be created from a Menu Item Template which has the following properties:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/interface/menu-item-template.png" alt="menu item template">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The variable that should be used as the <a href="#manual/binding-root.html">Binding Root</a> <em>Value</em> for the menu item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Specifies whether the menu item should be looked up in the scene using <em>Name</em> (<code>Scene</code>) or created from a <a href="https://docs.unity3d.com/Manual/Prefabs.html" target="_blank" rel="noopener">prefab</a> using <em>Template</em> (<code>Asset</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When <em>Source</em> is <code>Name</code>, the name of the <a href="https://docs.unity3d.com/Manual/GameObject.html" target="_blank" rel="noopener">GameObject</a> containing the menu item in the loaded scenes</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Template</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When <em>Source</em> is <code>Asset</code>, the <a href="https://docs.unity3d.com/Manual/Prefabs.html" target="_blank" rel="noopener">prefab</a> to create the menu item from</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Label</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When <em>Source</em> is <code>Asset</code>, the label to assign to the menu item</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Expand</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">When <em>Source</em> is <code>Asset</code>, this is <code>true</code>, and <em>Variables</em> references a <a href="#reference/variable-type.html">List</a>, a menu item will be created from <em>Template</em> for each item in the list</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_other_helpful_behaviours">Other Helpful Behaviours</h3>
+<div class="sect3">
+<h4 id="_menu_input">Menu Input</h4>
+<div class="paragraph">
+<p>In order to maintain modularity of behaviours, responding to input in menus should be done with separate components. Use a <a href="#manual/menu-input.html">Menu Input</a> component to handle the behaviour of input, focusing, selecting, and scrolling, through menu items.</p>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_focus_binding_root">Focus Binding Root</h4>
+<div class="paragraph">
+<p>Use a Focus Binding Root to bind data to the currently focused menu item in a menu. This can be useful for displaying information like a description of an item in separate UI objects that are not actually part of the selection. See the <em>"Shop"</em> scene for an example.</p>
+</div>
+</div>
+</div>
+</div>
+</div>`);

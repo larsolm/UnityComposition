@@ -1,0 +1,498 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/variables/writing-expressions">Writing Expressions</h2>
+<div class="sectionbody">
+<div class="sect2">
+<h3 id="_math">Math</h3>
+<div class="paragraph">
+<p>Expressions have a wide application of uses but at their simplest are an extension of Variable References allowing math operations to be performed on variables. For example if a <a href="#topics/graphs/control-flow.html">Graph Node</a> is expecting an attack value and a player exists with an attack stat, the damage from a critical hit could be given in the form of the expression <code>global.player.attack * 2</code>. The full suite of math operations is available:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operator</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds two values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Subtracts a value from another</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>*</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Multiplies two values</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>/</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Divides a value by another</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>%</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the remainder of a division</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>^</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Raises a value to an exponent</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Negates a value</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>These math operations are computed in the expected order based on the standard order of operations (exponents first, then multiplication and division, and last addition and subtraction). Additionaly, operations can be grouped with parentheses to force a certain execution order.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_logic">Logic</h3>
+<div class="paragraph">
+<p>Some expressions, for example <em>Condition</em> on a <a href="#manual/conditional-node.html">Conditional Node</a>, expect the result to have type <code>Bool</code>. For this, a set of comparison and logic operators is available:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operator</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>==</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if two values are equal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>!=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if two values are not equal</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&lt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if a value is less than another value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if a value is greater than another value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&#8656;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if a value is less than or equal to another value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&gt;=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if a value is greater than or equal to another value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&amp;&amp;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if two values are both <code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>&vert;&vert;</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Determines if either or both values are <code>true</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>!</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inverts a value (i.e <code>true</code> becomes <code>false</code> and <code>false</code> becomes <code>true</code>)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Logic operations are executed before comparison operations, which are executed before math operations.
+</td>
+</tr>
+</table>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<code>&amp;&amp;</code> and <code>||</code> perform short circuiting, meaning if the result can be determined from the left hand side, the right hand side will not be executed. This can be useful in conjunction with the Type Testing feature listed below.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_conditionals">Conditionals</h3>
+<div class="paragraph">
+<p>To perform simple conditional checks inside an expression, use the ternary syntax of <code>condition ? statement if true : statement if false</code>. For example, to compute a damage value based on whether or not the attack is a critical hit, the expression could be <code>local.isCritical ? global.player.attack * 2 : global.player.attack</code> or alternatively and equally as valid <code>global.player.attack * (local.isCritical ? 2 : 1)</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_type_testing">Type Testing</h3>
+<div class="paragraph">
+<p>The type of a variable can be tested using the <code>is</code> statement. For example, to test if the variable <code>local.isCritical</code> is a <code>Bool</code> use <code>local.isCritical is Bool</code>. A variable can also be checked for existence using the <code>Empty</code> type. The full list of types can be seen <a href="#topics/variables/creating-variables.html">here</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_assignment">Assignment</h3>
+<div class="paragraph">
+<p>In addition to accessing variables, expressions can set variables. This is done with the <code>=</code> operator. For example to store a computed damage value instead of returning it like the above example, write the expression <code>local.damage = global.player.attack * 2</code>. The damage value can be then later accessed by other Expressions and Variable References as <code>local.damage</code>. Each of the math and logic operations also exist as an assignment to more simply modify a value. These are: <code>+=</code>, <code>-=</code>, <code>*=</code>, <code>/=</code>, <code>^=</code>, <code>&amp;=</code>, and <code>|=</code>. For example, the player&#8217;s <code>attack</code>, can be permanently buffed with the statement <code>global.player.attack *= 2</code>. Shortcuts for adding and subtracting one from a variable are available with the <code>++</code> and <code>--</code> operators. Place the operator before a value to include the increment or decrement in the result. For example, if <code>local.number</code> has the value <code>4</code>, the expression <code>local.result = ++local.number</code> will assign <code>5</code> to both <code>local.result</code> and <code>local.number</code> whereas the expression <code>local.result = local.number++</code> will assign <code>4</code> to <code>local.result</code> and <code>5</code> to <code>local.number</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_commands">Commands</h3>
+<div class="paragraph">
+<p>Expressions can also use commands for getting the results of a more complex operation. The syntax for calling a command consists of the command name, followed by <code>'('</code> followed by any number of values (called parameters) to send to the command, followed by <code>')'</code>. A parameter can be a literal value, a variable reference, or an entire statement. The built in commands are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+<th class="tableblock halign-left valign-top">Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Abs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the absolute value of a number</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.speed = Abs(local.velocity)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Acos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the angle whose cosine is the input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.direction = Acos(local.x)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Asin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the angle whose sine is the input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.direction = Asin(local.y)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">Atan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the angle whose tangent is the input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.direction = Atan(local.y / local.x)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the angle with correct sign whose tangent is the first parameter divided by the second</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.direction = Atan(local.y, local.x)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Ceiling</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rounds the input value up</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.rounded = Ceiling(local.number)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clamp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Clamps the input between two values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.clamped = Clamp(local.number, 5, 10)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cos</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the cosine of an angle (in radians)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.x = Cos(local.direction)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Floor</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rounds the input value down</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.rounded = Floor(local.number)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Lerp</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/Mathf.Lerp.html" target="_blank" rel="noopener">Mathf.Lerp</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.interpolated = Lerp(5, 10, 0.3)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="2"><p class="tableblock">Log</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the base 10 logarithm of the input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.log = Log(5)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the logarithm of the input using the given base</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.base2log = Log(8, 2)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Max</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the biggest of a list of values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.biggest = Max(5, 8, -12, 2.5)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Min</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns the Smallest of a list of values</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.biggest = Min(5, 8, -12, 2.5)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Pow</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the exponent of a value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.cubed = Pow(5, 3)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top" rowspan="4"><p class="tableblock">Random</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a random number between 0 and 1</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.random = Random()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a random number between 0 and the input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.random = Random(100)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns a random number between the two inputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.random = Random(-100, 100)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If the input is a list, returns a random item in the list</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.item = Random(local.list)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rounds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rounds the input to the closest integer</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.rounded = Round(local.number)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sign</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Returns -1 when the input is negative, 0 when the input is 0, and 1 when the input is positive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.sign = Sign(local.number)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sin</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the sine of an angle (in radians)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.y = Sin(local.direction)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sqrt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the square root an input</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.root = Sqrt(local.number)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Tan</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Computes the tangent of an angle (in radians)</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.angle = Tan(local.number)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Truncate</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rounds the input toward 0</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.truncated = Truncate(local.number)</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gets the value of <a href="https://docs.unity3d.com/ScriptReference/Time-time.html" target="_blank" rel="noopener">Time.time</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.time = Time()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Realtime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gets the value of <a href="https://docs.unity3d.com/ScriptReference/Time-realtimeSinceStartup.html" target="_blank" rel="noopener">Time.realtimeSinceStartup</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.time = Realtime()</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">UnscaledTime</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Gets the value of <a href="https://docs.unity3d.com/ScriptReference/Time-unscaledTime.html" target="_blank" rel="noopener">Time.unscaledTime</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>local.time = UnscaledTime()</code></p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Custom commands can be defined as described in the <a href="#topics/variables/exposing-variables.html">Creating Custom Commands</a> section.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>Commands exist for creating values of each of the types that cannot be specified with a literal. These are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Parameters</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(x, y)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector2Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(x, y)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(x, y, z}</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector3Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(x, y, z)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(x, y, z, w)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quaternion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(rotation about x, rotation about y, rotation about z)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(y, y, width, height) or (position, size)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">RectInt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(y, y, width, height) or (position, size)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bounds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(position, size)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">BoundsInt</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(y, y, z, width, height, depth) or (position, size)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">(r, g, b) or (r, g, b, a)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">() or (count)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">() or (schema name)</p></td>
+</tr>
+</tbody>
+</table>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+When using a schema for creating a <code>Store</code>, the schema must be in a <code>Resources</code> folder in the project.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_constants">Constants</h3>
+<div class="paragraph">
+<p>Several constant values are available as well and can be accessed directly by name:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>PI</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A variable of type <code>Float</code> containing the value of pi (<code>3.14</code>&#8230;&#8203;)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Deg2Rad</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A variable of type <code>Float</code> containing the value for converting an angle in degrees to radians (<code>PI / 180</code>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>Rad2Deg</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A variable of type <code>Float</code> containing the value for converting an angle in radians to degrees (<code>180 / PI</code>)</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_multiple_statements">Multiple Statements</h3>
+<div class="paragraph">
+<p>Expressions can consist of multiple statements with the final statement computing the expression&#8217;s result. For example, a more complex damage calculation might look like this:</p>
+</div>
+<div class="literalblock">
+<div class="content">
+<pre>local.isCritical = Random() &gt; 0.5
+local.strength =  global.player.strength / global.target.defense
+local.damage = global.player.weapon.attack * strength * (local.isCritical ? 2 : 1)</pre>
+</div>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If an expression is entered with incorrect syntax, the text box will be colored red indicating there is an error. This will not check if the expression actually executes correctly or returns a variable with the correct type. These runtime errors will be indicated by printing an error to the <a href="https://docs.unity3d.com/Manual/Console.html" target="_blank" rel="noopener">console window</a> and can be tracked down using the built in <a href="#topics/graphs/running-from-script.html">debugging features</a>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_list_management">List Management</h3>
+<div class="paragraph">
+<p>Several operators have special handling for <code>List</code> variables. These are:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Operator</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>+=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds the item to the right if the operator to the end of the list.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>-=</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Removes the item to the right of the operator from the list.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>++</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Adds an empty item to the end of the list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><code>--</code></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Removes the item at the end of the list</p></td>
+</tr>
+</tbody>
+</table>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

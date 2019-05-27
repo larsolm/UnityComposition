@@ -1,0 +1,70 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/load-scene-node">Load Scene Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Load Scene Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that will load a new <a href="https://docs.unity3d.com/ScriptReference/SceneManagement.Scene.html" target="_blank" rel="noopener">Scene</a>. The scene to be loaded can based on a <a href="#reference/scene-reference.html">SceneReference</a>, string name, build index, or a <a href="#reference/variable-reference.html">VariableReference</a> to a string name or build index. If <em>WaitForCompletion</em> is specified, the graph will not move to the next node until the scene has fully completed loading. Create a Load Scene Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Sequencing</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Load Scene</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/overview.html">Graphs</a> for more information on instruction graphs.<br>
+See the <em>"Load UI"</em> node on the <em>"MazeStart"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Maze project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_34">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/load-scene-node.png" alt="Load Scene Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Source</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#referenece/load-scene-node-scene-source">SourceType</a> to load the scene based off of</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Value</code>, the <a href="#reference/scene-reference.html">SceneReference</a> to load</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene Variable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Variable</code>, the <a href="#reference/variable-reference.html">VariableReference</a> to a string name or build index of the scene to load</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Name</code>, the string name of the scene to load</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Scene Index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Index</code>, the build index of the scene to load</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait For Completion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to wait until the scene has completed loading before moving to the next node</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Cleanup Assets</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to call <a href="https://docs.unity3d.com/ScriptReference/Resources.UnloadUnusedAssets.html" target="_blank" rel="noopener">UnloadUnusedAssets()</a> after the new scene is loaded</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Additive</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to load the scene as <a href="https://docs.unity3d.com/ScriptReference/SceneManagement.LoadSceneMode.Additive.html" target="_blank" rel="noopener">Additive</a> or <a href="https://docs.unity3d.com/ScriptReference/SceneManagement.LoadSceneMode.Single.html">Single</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/load-scene-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

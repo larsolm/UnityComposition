@@ -1,0 +1,34 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/class-map-1">ClassMap</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ClassMap&lt;<em>T</em>&gt; : <a href="#reference/i-class-map.html">IClassMap</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_22">Description</h3>
+<div class="paragraph">
+<p>Derive from this class to implement an <a href="#reference/i-class-map.html">IClassMap</a> for type <em>T</em>. The derived class should be registered with <a href="#reference/class-map.html">ClassMap.Add</a> in a static constructor or a <a href="https://docs.unity3d.com/ScriptReference/RuntimeInitializeOnLoadMethodAttribute.html" target="_blank" rel="noopener">RuntimeInitializeOnLoadMethod</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_6">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames() <em>(abstract)</em></dt>
+<dd>
+<p>This method should return the list of variable names that are accessible in <em>GetVariable</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(T <em>obj</em>, string <em>name</em>) <em>(abstract)</em></dt>
+<dd>
+<p>This method should return a <a href="#reference/variable-value.html">VariableValue</a> containing the value of the property <em>name</em> on <em>obj</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(T <em>obj</em>, string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>) <em>(abstract)</em></dt>
+<dd>
+<p>This method should set the property <em>name</em> on <em>obj</em> to <em>value</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

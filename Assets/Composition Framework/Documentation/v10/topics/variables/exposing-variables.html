@@ -1,0 +1,15 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/variables/exposing-variables">Exposing Variables</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Variable References and Expressions can be used when writing <a href="#topics/graphs/custom-nodes.html">graph nodes</a>, <a href="https://docs.unity3d.com/Manual/CreatingComponents.html" target="_blank" rel="noopener">components</a>, or <a href="https://docs.unity3d.com/Manual/class-ScriptableObject.html" target="_blank" rel="noopener">assets</a> to interface custom code with the variables system.</p>
+</div>
+<div class="sect2">
+<h3 id="_variable_references">Variable References</h3>
+<div class="paragraph">
+<p>The <a href="#reference/variable-reference.html">VariableReference</a> class provides the functionality for both looking up variables and assigning values to variables. To use a VariableReference, simply add one as a public field to your object. Use the <em>GetValue</em> method to look up a <a href="#reference/variable-value.html">VariableValue</a> and the <em>SetValue</em> method to assign. Both of these methods take an <a href="#reference/i-variable-store.html">IVariableStore</a> as a parameter. While this can be any object that implements the <a href="#reference/i-variable-store.html">IVariableStore</a> interface, in most cases the <a href="#reference/composition-manager.html">CompositionManager.<em>DefaultStore</em></a> should be used which gives access to the <a href="#topics/variables/accessing-variables.html">global and scene stores</a>. When implementing an <a href="#topics/graphs/custom-nodes.html">InstructionGraphNode</a> or <a href="#topics/bindings/custom-variable-bindings.html">VariableBinding</a> the calling code will be given an <a href="#reference/i-variable-store.html">IVariableStore</a> which can then be passed to <em>SetValue</em> or <em>GetValue</em>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,104 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/operator-precedence">OperatorPrecedence</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.OperatorPrecedence : ValueType</p>
+</div>
+<div class="sect2">
+<h3 id="_description_141">Description</h3>
+<div class="paragraph">
+<p>Specifies the necessary information to determine the evaluation order for different <a href="#reference/operation.html">Operations</a>. Lower values will have lower precedence, meaning they will be evaluated first. The static values defined on this class follow the same precedence rules as math and other programming languages and are listed here in order of lowest precedence to highest.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_fields_5">Static Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Default</em></dt>
+<dd>
+<p>This should be the precedence passed to <a href="#reference/expression-parser.html">ExpressionParser.<em>ParseLeft</em></a> when parsing a new statement or sub-statement.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Assignment</em></dt>
+<dd>
+<p>The precedence for all assignment operations. This is right associative so assignments can be chained.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Ternary</em></dt>
+<dd>
+<p>The precedence for a ternary (<code>condition ? trueStatement : falseStatement</code>) statement.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Or</em></dt>
+<dd>
+<p>The precedence for a logical or.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>And</em></dt>
+<dd>
+<p>The precedence for a logical and.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Equality</em></dt>
+<dd>
+<p>The precedence for an equality or inequality check.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Comparison</em></dt>
+<dd>
+<p>The precedence for comparisons.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Addition</em></dt>
+<dd>
+<p>The precedence for addition and subtraction.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Multiplication</em></dt>
+<dd>
+<p>The precedence for multiplication and division.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Exponentiation</em></dt>
+<dd>
+<p>The precedence for exponents.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Prefix</em></dt>
+<dd>
+<p>The precedence for all prefix operations.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>Postfix</em></dt>
+<dd>
+<p>The precedence for all postfix operations.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>MemberAccess</em></dt>
+<dd>
+<p>The precedence for all member access operations.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_9">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> LeftAssociative(int <em>value</em>)</dt>
+<dd>
+<p>Creates a precedence with left associativity meaning operations with the same precedence will be evaluated left to right.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operator-precedence.html">OperatorPrecedence</a> RightAssociative(int <em>value</em>)</dt>
+<dd>
+<p>Creates a precedence with right associativity meaning operations with the same precedence will be evaluated right to left.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_26">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">int <em>Value</em> <em>(read only)</em></dt>
+<dd>
+<p>The precedence value when parsed standalone or as the left hand side of an <a href="#reference/infix-operation.html">InfixOperation</a>.</p>
+</dd>
+<dt class="hdlist1">int <em>AssociativeValue</em> <em>(read only)</em></dt>
+<dd>
+<p>The precedence value when parsed as the right hand side of an <a href="#reference/infix-operation.html">InfixOperation</a>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

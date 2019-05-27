@@ -1,0 +1,128 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/value-definition">ValueDefinition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ValueDefinition : ValueType</p>
+</div>
+<div class="sect2">
+<h3 id="_description_206">Description</h3>
+<div class="paragraph">
+<p>Defines properties for how a <a href="#reference/variable-value.html">VariableValue</a> is initialized and can be used, usually as part of a <a href="#reference/variable-schema.html">VariableSchema</a>. The <em>Generate</em> method can be used to create a <a href="#reference/variable-value.html">VariableValue</a> that satisfies the properties of the definition.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_10">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create(<a href="#reference/variable-type.html">VariableType</a> <em>type</em>)</dt>
+<dd>
+<p>Creates a definition for a <a href="#reference/variable-value.html">VariableValue</a> with <a href="#reference/variable-type.html">type</a> <em>type</em> and no other constraints.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create(int <em>minimum</em>, int <em>maximum</em>)</dt>
+<dd>
+<p>Creates a definition for a <a href="#reference/variable-value.html">VariableValue</a> with <a href="#reference/variable-type.html">type</a> <code>Int</code> and with a constraint restricting it to values between <em>minimum</em> and <em>maximum</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create(float <em>minimum</em>, float <em>maximum</em>)</dt>
+<dd>
+<p>Creates a definition for a <a href="#reference/variable-value.html">VariableValue</a> with <a href="#reference/variable-type.html">type</a> <code>Float</code> and with a constraint restricting it to values between <em>minimum</em> and <em>maximum</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create(string[] <em>values</em>)</dt>
+<dd>
+<p>Creates a definition for a <a href="#reference/variable-value.html">VariableValue</a> with <a href="#reference/variable-type.html">type</a> <code>String</code> and with a constraint restricting it to one of the values in <em>values</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create&lt;T&gt;()</dt>
+<dd>
+<p>Creates a definition for a <a href="#reference/variable-value.html">VariableValue</a> with <a href="#reference/variable-type.html">type</a> <code>Object</code> whose value can be set to any <a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> that is type <em>T</em> or is derived from type <em>T</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create(Type <em>type</em>)</dt>
+<dd>
+<p>Creates a definition for a <a href="#reference/variable-value.html">VariableValue</a> with <a href="#reference/variable-type.html">type</a> determined by <a href="#reference/variable-value.html">VariableValue.GetType</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create(<a href="#reference/variable-type.html">VariableType</a> <em>type</em>, <a href="#reference/variable-constraint.html">VariableConstraint</a> <em>constraint</em>)</dt>
+<dd>
+<p>Creates a definition for a <a href="#reference/variable-value.html">VariableValue</a> with <a href="#reference/variable-type.html">type</a> <em>type</em> and <a href="#reference/variable-constraint.html">VariableConstraint</a> <em>constraint</em>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The caller must ensure <em>constraint</em> is a <a href="#reference/variable-constraint.html">VariableConstraint</a> of the appropriate type for <em>type</em>.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/value-definition.html">ValueDefinition</a> Create(<a href="#reference/variable-type.html">VariableType</a> <em>type</em>, <a href="#reference/variable-constraint.html">VariableConstraint</a> <em>constraint</em>, string <em>tag</em>, <a href="#reference/expression.html">Expression</a> <em>initializer</em>, bool <em>isTypeLocked</em>, bool <em>isConstraintLocked</em>)</dt>
+<dd>
+<p>Creates a definition with the given properties.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+The caller must ensure <em>constraint</em> is a <a href="#reference/variable-constraint.html">VariableConstraint</a> of the appropriate type for <em>type</em>.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_35">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-type.html">VariableType</a> <em>Type</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-type.html">VariableType</a> to assign to <a href="#reference/variable-value.html">VariableValues</a> created by <em>Generate</em> or to test against with <em>IsValid</em>. If this is <code>Empty</code>, the <a href="#reference/variable-value.html">VariableValue</a> can be any type.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-constraint.html">VariableConstraint</a> <em>Constraint</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-constraint.html">VariableConstraint</a> laying out <em>Type</em> dependent requirements for <a href="#reference/variable-value.html">VariableValues</a> using this definition. This can be null, and in that case, the only constraint for <a href="#reference/variable-value.html">VariableValues</a> will be <em>Type</em>.</p>
+</dd>
+<dt class="hdlist1">string <em>Tag</em> <em>(read only)</em></dt>
+<dd>
+<p>An arbitrary string that can be used to group different definitions in the same <a href="#reference/variable-schema.html">VariableSchema</a>. This has no impact on the validity of a <a href="#reference/variable-value.html">VariableValue</a> or how it is generated. It is most commonly used to indicate a set of variables that should be saved (for runtime saves) or group variables for resetting to their defaults (i.e by <a href="#reference/variable-set-component.html">VariableSetComponent.ResetTag</a>).</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression.html">Expression</a> <em>Initializer</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/expression.html">Expression</a> to evaluate when calling <em>Generate</em> to determine the initial value of the <a href="#reference/variable-value.html">VariableValue</a>. If the <a href="#reference/expression.html">Expression</a> is not set, a <a href="#reference/variable-value.html">VariableValue</a> with the default for <em>Type</em> will be generated.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsTypeLocked</em> <em>(read only)</em></dt>
+<dd>
+<p>Indicates to the editor that this definition cannot have <em>Type</em> changed.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsConstraintLocked</em> <em>(read only)</em></dt>
+<dd>
+<p>Indicates to the editor that this definition cannot have <em>Constraint</em> changed. The properties of <em>Constraint</em> can be changed, but the <em>Constraint</em> itself cannot.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_39">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Generate(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>)</dt>
+<dd>
+<p>Generates a <a href="#reference/variable-value.html">VariableValue</a> that satisfies the constraints laid out by this definition with initial value determined by <em>Initializer</em>.</p>
+</dd>
+<dt class="hdlist1">bool IsValid(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if <em>value</em> satisfies the runtime constraints specified by this definition.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,57 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/menu-item-template">MenuItemTemplate</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.MenuItemTemplate</p>
+</div>
+<div class="sect2">
+<h3 id="_description_121">Description</h3>
+<div class="paragraph">
+<p>Holds information about how a <a href="#reference/menu-item.html">MenuItem</a> should be setup in a <a href="#reference/menu.html">Menu</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_55">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-reference.html">VariableReference</a> <em>Variables</em></dt>
+<dd>
+<p>The variable that should be used as the <a href="#reference/binding-root.html">BindingRoot</a> <em>Value</em> for the <a href="#reference/menu-item.html">MenuItem</a>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-item-template-object-source.html">ObjectSource</a> <em>Source</em></dt>
+<dd>
+<p>Specifies whether the <a href="#reference/menu-item.html">MenuItem</a> should be looked up in the scene using <em>Name</em> (<code>Scene</code>) or created from a <a href="https://docs.unity3d.com/Manual/Prefabs.html" target="_blank" rel="noopener">prefab</a> using <em>Template</em> (<code>Asset</code>).</p>
+</dd>
+<dt class="hdlist1">string <em>Name</em></dt>
+<dd>
+<p>When <em>Source</em> is <code>Name</code>, the name of the <a href="https://docs.unity3d.com/Manual/GameObject.html" target="_blank" rel="noopener">GameObject</a> containing the <a href="#reference/menu-item.html">MenuItem</a> in the loaded scenes.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-item.html">MenuItem</a> <em>Template</em></dt>
+<dd>
+<p>When <em>Source</em> is <code>Asset</code>, the <a href="https://docs.unity3d.com/Manual/Prefabs.html" target="_blank" rel="noopener">prefab</a> to create the <a href="#reference/menu-item.html">MenuItem</a> from.</p>
+</dd>
+<dt class="hdlist1">string <em>Label</em></dt>
+<dd>
+<p>When <em>Source</em> is <code>Asset</code>, the label to assign to the <a href="#reference/menu-item.html">MenuItem</a>.</p>
+</dd>
+<dt class="hdlist1">bool <em>Expand</em></dt>
+<dd>
+<p>When <em>Source</em> is <code>Asset</code>, this is <code>true</code>, and <em>Variables</em> references a <a href="#reference/variable-type.html">List</a>, a <a href="#reference/menu-item.html">MenuItem</a> will be created from <em>Template</em> for each item in the <a href="#reference/variable-type.html">List</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_23">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>Id</em> <em>(read only)</em></dt>
+<dd>
+<p>The identifier used for the item when referenced by string. If <em>Source</em> is <code>Scene</code> this will be <em>Name</em>. If <em>Source</em> is <code>Asset</code> this will be <em>Label</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,111 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/selection-control">SelectionControl</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.SelectionControl : <a href="#reference/interface-control.html">InterfaceControl</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_166">Description</h3>
+<div class="paragraph">
+<p>Add this to a <a href="#reference/menu.html">Menu</a> with a <a href="#reference/menu-input.html">MenuInput</a> to allow a <a href="#reference/menu-item.html">MenuItem</a> to be selected.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_28">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsRunning</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> when a selection is in progress.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsSelectionRequired</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> if the current selection requires an item to be selected.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsClosing</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> when the selection will be closed on the next frame.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasFocusedItem</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> when the <a href="#reference/menu.html">Menu</a> has a focused <a href="#reference/menu-item.html">MenuItem</a>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasSelectedItem</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> when a selection has been made.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-item.html">MenuItem</a> <em>FocusedItem</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/menu-item.html">MenuItem</a> that currently has focus, or <code>null</code> if there is no focused item.</p>
+</dd>
+<dt class="hdlist1">int <em>FocusedIndex</em> <em>(read only)</em></dt>
+<dd>
+<p>The index of the <a href="#reference/menu-item.html">MenuItem</a> that currently has focus, or <code>-1</code> if there is no focused item.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> <em>FocusedValue</em> <em>(read only)</em></dt>
+<dd>
+<p>The value associated with the <a href="#reference/menu-item.html">MenuItem</a> that currently has focus, or <code>VariableValue.Empty</code> if there is no focused item.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/menu-item.html">MenuItem</a> <em>SelectedItem</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/menu-item.html">MenuItem</a> that has been selected, or <code>null</code> if no selection has been made.</p>
+</dd>
+<dt class="hdlist1">int <em>SelectedIndex</em> <em>(read only)</em></dt>
+<dd>
+<p>The index of the <a href="#reference/menu-item.html">MenuItem</a> that has been selected, or <code>-1</code> if no selection has been made.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> <em>SelectedValue</em> <em>(read only)</em></dt>
+<dd>
+<p>The value associated with the <a href="#reference/menu-item.html">MenuItem</a> that has been selected, or <code>VariableValue.Empty</code> if no selection has been made.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_35">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Show(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1" target="_blank" rel="noopener">IEnumerable</a>&lt;<a href="#reference/menu-item-template.html">MenuItemTemplate</a>&gt; <em>items</em>, bool <em>isSelectionRequired</em>, bool <em>resetIndex</em>)</dt>
+<dd>
+<p>Show <em>items</em> on the sibling <a href="#reference/menu.html">Menu</a>. This will start a <a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank" rel="noopener">coroutine</a> that waits for a selection to be made. If <em>isSelectionRequired</em> is <code>true</code>, the <a href="#reference/menu.html">Menu</a> will be required to have a selection made. If <em>resetIndex</em> is <code>true</code>, the <a href="#reference/menu.html">Menu&#8217;s</a> focus will be set to the first item, otherwise the focus will not change. <em>variables</em> is used with <em>items</em> to resolve any <a href="#reference/variable-reference.html">VariableReferences</a>.</p>
+</dd>
+<dt class="hdlist1">void Select(<a href="#reference/menu-item.html">MenuItem</a> <em>item</em>)</dt>
+<dd>
+<p>Makes <em>item</em> the selected item and closes the menu.</p>
+</dd>
+<dt class="hdlist1">void Close()</dt>
+<dd>
+<p>Closes the menu. If <em>IsSelectionRequired</em> is <code>true</code>, this will only succeed if a selection has been made.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_11">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Transform.html" target="_blank" rel="noopener">Transform</a> GetItemParent() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in subclasses to specify the <a href="https://docs.unity3d.com/ScriptReference/Transform.html" target="_blank" rel="noopener">Transform</a> that created items should be added to. By default this is the <a href="https://docs.unity3d.com/ScriptReference/Transform.html" target="_blank" rel="noopener">Transform</a> of this object.</p>
+</dd>
+<dt class="hdlist1">void OnInitialize() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in subclasses to perform setup when <em>Show</em> is called after the items have been created and menu has been set up.</p>
+</dd>
+<dt class="hdlist1">void OnCreate() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in subclasses to perform setup when <em>Show</em> is called after the items have been created but before the menu has been set up.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> Run() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this in subclasses to perform custom handling for waiting for a selection. The default implementation will do nothing but yield until the control closes.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/selection-control.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

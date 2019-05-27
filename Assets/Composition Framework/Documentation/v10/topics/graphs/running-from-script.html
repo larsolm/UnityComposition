@@ -1,0 +1,63 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/graphs/running-from-script">Running Graphs From Script</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Running graphs from script is as simple as calling <code>CompositionManager.Instance.RunInstruction()</code>.</p>
+</div>
+<div class="admonitionblock important">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-important" title="Important"></i>
+</td>
+<td class="content">
+When storing a graph that will be serialized on an object it is important to define it as an <a href="#reference/instruction-caller.html">InstructionCaller</a>. This will ensure that inputs and outputs on the referenced graph are read and written correctly.
+</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>The following example will run a graph when its object is loaded:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using PiRhoSoft.CompositionEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class RunGraph : MonoBehaviour
+	{
+		public InstructionCaller Graph = new InstructionCaller(); <i class="conum" data-value="1"></i><b>(1)</b>
+
+		void Start()
+		{
+			if (Graph.Instruction &amp;&amp; !Graph.IsRunning) <i class="conum" data-value="2"></i><b>(2)</b>
+				CompositionManager.Instance.RunInstruction(Graph, CompositionManager.Instance.DefaultStore, VariableValue.Create(this)); <i class="conum" data-value="3"></i><b>(3)</b>
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td>The graph to run - notice this is an <a href="#reference/instruction-caller.html">InstructionCaller</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>Make sure to check if the caller&#8217;s instruction is set and not already running from another process</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Passes the <a href="#manual/composition-manager.html">Composition Manager</a>'s default store to use for references to inputs and outputs (second parameter) and <code>this</code> as the graph&#8217;s context object (third parameter)</td>
+</tr>
+</table>
+</div>
+<div class="paragraph">
+<p>See <a href="#manual/instruction-trigger.html">Instruction Trigger</a> and its derived classes for other examples of running graphs from script.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

@@ -1,0 +1,118 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-handler">VariableHandler</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableHandler</p>
+</div>
+<div class="sect2">
+<h3 id="_description_214">Description</h3>
+<div class="paragraph">
+<p>A utility class for working with <a href="#reference/variable-value.html">VariableValues</a> independent of their <a href="#reference/variable-type.html">VariableType</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_13">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string ToString(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Returns the string representation of <em>value</em> depending on the <a href="#reference/variable-type.html">VariableType</a> it is holding.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> CreateDefault(<a href="#reference/variable-type.html">VariableType</a> <em>type</em>, <a href="#reference/variable-constraint.html">VariableConstraint</a> <em>constraint</em>)</dt>
+<dd>
+<p>Creates and returns a variable with type <em>type</em> whose value meets the requirements of <em>constraint</em>. If <em>constraint</em> is null, the default value for type <em>type</em> is returned.</p>
+</dd>
+<dt class="hdlist1">void ToString(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>, StringBuilder <em>builder</em>)</dt>
+<dd>
+<p>Appends the string representation of <em>value</em> to <em>builder</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;string&gt; SaveVariables(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;<a href="#reference/variable.html">Variable</a>&gt; <em>variables</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Converts the <a href="#reference/variable.html">Variables</a> in <em>variables</em> to a representation that can be serialized by Unity. The returned list of strings, as well as <em>objects</em>, should be assigned to serializable fields an an object.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/variable.html">Variable</a>&gt; LoadVariables(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>data</em> <em>(ref)</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Creates a set of variables from the serialized representation in <em>data</em> and <em>objects</em>. <em>data</em> and <em>objects</em> will be cleared.</p>
+</dd>
+<dt class="hdlist1">string SaveVariable(<a href="#reference/variable.html">Variable</a> <em>variable</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Converts <em>variable</em> to a representation that can be serialized by Unity. The returned string and <em>objects</em> should be assigned to serializable fields on an object.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable.html">Variable</a> LoadVariable(string <em>data</em> <em>(ref)</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Creates a variable from the serialized representation in <em>data</em> and <em>objects</em>. <em>data</em> and <em>objects</em> will be cleared.</p>
+</dd>
+<dt class="hdlist1">string SaveValue(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Converts <em>value</em> to a representation that can be serialized by Unity. The returned string and <em>objects</em> should be assigned to serializable fields on an object.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> LoadValue(string <em>data</em> <em>(ref)</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Creates a value from the serialized representation in <em>data</em> and <em>objects</em>. <em>data</em> and <em>objects</em> will be cleared.</p>
+</dd>
+<dt class="hdlist1">string SaveConstraint(<a href="#reference/variable-type.html">VariableType</a> <em>type</em>, <a href="#reference/variable-constraint.html">VariableConstraint</a> <em>constraint</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Saves <em>constraint</em> with type <em>type</em> to a representation that can be serialized by Unity. The returned string and <em>objects</em> should be assigned to serializable fields on an object.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-constraint.html">VariableConstraint</a> LoadConstraint(string <em>data</em> <em>(ref)</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1&amp;" target="_blank" rel="noopener">List</a> <em>objects</em> <em>(ref)</em>)</dt>
+<dd>
+<p>Creates a constraint from the serialized representation in <em>data</em> and <em>objects</em>. <em>data</em> and <em>objects</em> will be cleared.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Add(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns the result of adding <em>left</em> to <em>right</em>. If the result cannot be computed due to invalid or incompatible types, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Subtract(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns the result of subtracting <em>right</em> from <em>left</em>. If the result cannot be computed due to invalid or incompatible types, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Multiply(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns the result of multiplying <em>left</em> and <em>right</em>. If the result cannot be computed due to invalid or incompatible types, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Divide(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns the result of dividing <em>left</em> by <em>right</em>. If the result cannot be computed due to invalid or incompatible types, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Modulo(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns the remainder of dividing <em>left</em> by <em>right</em>. If the result cannot be computed due to invalid or incompatible types, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Exponent(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns the result of raising <em>left</em> to the <em>right</em> power. If the result cannot be computed due to invalid or incompatible types, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Negate(<a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Returns the result of inverting <em>value</em>. If the result cannot be computed due to invalid or incompatible types, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1">Nullable&lt;bool&gt; IsEqual(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns true if <em>left</em> and <em>right</em> are equal, false if <em>left</em> and <em>right</em> can be legally compared but are not equal, and null if the types cannot be compared.</p>
+</dd>
+<dt class="hdlist1">Nullable&lt;int&gt; Compare(<a href="#reference/variable-value.html">VariableValue</a> <em>left</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>right</em>)</dt>
+<dd>
+<p>Returns -1 if <em>left</em> is less than <em>right</em>, 1 if <em>left</em> is greater than <em>right</em>, 0 if <em>left</em> is equal to <em>right</em>, and null if the types cannot be compared.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Lookup(<a href="#reference/variable-value.html">VariableValue</a> <em>owner</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>lookup</em>)</dt>
+<dd>
+<p>Returns a value contained in <em>owner</em> based on the value of <em>lookup</em>. If <em>lookup</em> is not found, <a href="#reference/variable-value.html">VariableValue.Empty</a> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> Apply(<a href="#reference/variable-value.html">VariableValue</a> <em>owner</em> <em>(ref)</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>lookup</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Sets a value contained in <em>owner</em> based on <em>lookup</em> to <em>value</em>. <em>owner</em> will be updated to the new value. If <em>owner</em> is not holding a reference as determined by <a href="#reference/variable-value.html">VariableValue.IsReference</a> it must be reassigned to the container it is being held in. The return value indicates success or the reason for failure.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Cast(<a href="#reference/variable-value.html">VariableValue</a> <em>owner</em>, string <em>type</em>)</dt>
+<dd>
+<p>Returns the value of <em>owner</em> converted to type <em>type</em>. For object values, this is used to lookup sibling components.</p>
+</dd>
+<dt class="hdlist1">bool Test(<a href="#reference/variable-value.html">VariableValue</a> <em>owner</em>, string <em>type</em>)</dt>
+<dd>
+<p>Determines if a <em>Cast</em> to <em>type</em> would be successful.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

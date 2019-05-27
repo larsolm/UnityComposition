@@ -1,0 +1,50 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/sort-node">Sort Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Sort Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that will sort the given <a href="#reference/variable-list.html">VariableList</a>, <em>List</em>. If each  <a href="#reference/variable-value.html">Value</a> in <em>List</em> is an <a href="#reference/i-variable-stores.html">IVariableStore</a>, then they can be sorted by <a href="reference/variable-value.html">Values</a> on that <a href="#reference/i-variable-stores.html">IVariableStore</a> (similar to <em>System.Linq</em>'s <code>SortBy().ThenBy()</code> methods). Create a Sort Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Composition</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Sort</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/overview.html">Graphs</a> for more information on instruction graphs.<br>
+See the <em>"Sort Fighters"</em> node on the <em>"Battle"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Battle project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_63">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/sort-node.png" alt="Sort Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <a href="#reference/variable-reference.html">VariableReference</a> to the <a href="#reference/variable-list.html">VariableList</a> to sort</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort By Property</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to sort each <a href="#reference/variable-value.html">Value</a> in <em>List</em> by itself or by properties on it (if it is an <a href="#reference/i-variable-stores.html">IVariableStore</a>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Sort Conditions</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <em>SortByProperty</em> is <code>true</code>, then a list of <a href="#reference/variable-reference.html">VariableReferences</a> on each item in <em>List</em> to sort by sequentially</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/sort-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

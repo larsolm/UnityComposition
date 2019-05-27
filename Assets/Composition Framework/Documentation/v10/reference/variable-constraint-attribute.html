@@ -1,0 +1,42 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-constraint-attribute">VariableConstraintAttribute</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableConstraintAttribute : Attribute</p>
+</div>
+<div class="sect2">
+<h3 id="_description_211">Description</h3>
+<div class="paragraph">
+<p>Add this to a <a href="#reference/variable-reference.html">VariableReference</a> or <a href="#reference/variable-source.html">VariableSource</a> field to inform the editor of the type of <a href="#reference/variable-value.html">VariableValue</a> the code is expecting, thereby providing a more useful editor for the field.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_constructors_20">Constructors</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">VariableConstraintAttribute(<a href="#reference/variable-type.html">VariableType</a> <em>type</em>)</dt>
+<dd>
+<p>Specifies the corresponding field should have <a href="#reference/variable-type.html">VariableType</a> <em>type</em>.</p>
+</dd>
+<dt class="hdlist1">VariableConstraintAttribute(int <em>minimum</em>, int <em>maximum</em>)</dt>
+<dd>
+<p>Specifies the corresponding field should have <a href="#reference/variable-type.html">VariableType</a> <code>Int</code> and value between <em>minimum</em> and <em>maximum</em>.</p>
+</dd>
+<dt class="hdlist1">VariableConstraintAttribute(float <em>minimum</em>, float <em>maximum</em>)</dt>
+<dd>
+<p>Specifies the corresponding field should have <a href="#reference/variable-type.html">VariableType</a> <code>Float</code> and value between <em>minimum</em> and <em>maximum</em>.</p>
+</dd>
+<dt class="hdlist1">VariableConstraintAttribute(string[] <em>values</em>)</dt>
+<dd>
+<p>Specifies the corresponding field should have <a href="#reference/variable-type.html">VariableType</a> <code>String</code> and value one of the options in <em>values</em>.</p>
+</dd>
+<dt class="hdlist1">VariableConstraintAttribute(Type <em>type</em>)</dt>
+<dd>
+<p>Specifies the corresponding field should have <a href="#reference/variable-type.html">VariableType</a> as determined by <a href="#reference/variable-value.html">VariableValue.<em>GetType</em></a>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,202 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-binding">VariableBinding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableBinding : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_209">Description</h3>
+<div class="paragraph">
+<p>Derive from this class to provide support for automatically updating properties of loaded <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObjects</a> (for instance, user interface elements) based on <a href="#reference/variable-value.html">VariableValues</a> stored in the <a href="#topics/variables/overview.html">Variables System</a>.</p>
+</div>
+<div class="paragraph">
+<p>Read the <a href="#topics/bindings/overview.html">Bindings Topic</a> for a complete overview of how to use bindings and how to implement custom bindings.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_12">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void UpdateBinding(<a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> <em>obj</em>, string <em>group</em>, <a href="#reference/binding-animation-status.html">BindingAnimationStatus</a> <em>status</em>)</dt>
+<dd>
+<p>Triggers an update for bindings on <em>obj</em> and its descendants. If <em>group</em> is <code>null</code> or empty, all bindings will be updated, otherwise all bindings with <em>BindingGroup</em> matching <em>group</em> will be updated. Optionally pass a <a href="#reference/binding-animation-status.html">BindingAnimationStatus</a> instance as <em>status</em> to access information about bindings that perform an animation or otherwise take multiple frames to complete.</p>
+</dd>
+<dt class="hdlist1">void UpdateBinding(<a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> <em>obj</em>, string <em>group</em>, <a href="#reference/binding-animation-status.html">BindingAnimationStatus</a> <em>status</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/variable-binding.html">VariableBinding</a>&gt; <em>bindings</em>)</dt>
+<dd>
+<p>Performs the same function as the other <em>UpdateBinding</em> method but uses <em>bindings</em> as a location to store the <a href="#reference/variable-binding.html">VariableBindings</a> looked up on <em>obj</em>. It is not necessary to use this overload except when called from the <em>UpdateBinding</em> instance method of a <a href="#reference/variable-binding.html">VariableBinding</a> subclass.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_104">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>BindingGroup</em></dt>
+<dd>
+<p>An arbitrary string used to allow the binding to be targeted by calls to <em>UpdateBinding</em>. This has two common uses: for performance, if a <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> has many bindings that don&#8217;t all need to be updated at the same time, different bindings can be updated individually or as a group. And, if the value behind a binding is updated but that update shouldn&#8217;t be indicated to the player until some point in the future, the update can be deferred until that time.</p>
+</dd>
+<dt class="hdlist1">bool <em>AutoUpdate</em></dt>
+<dd>
+<p>If this is <code>true</code>, the binding will be updated every frame, thus always keeping it up to date with the <a href="#reference/variable-value.html">VariableValues</a> it is bound to.</p>
+</dd>
+<dt class="hdlist1">bool <em>SuppressErrors</em></dt>
+<dd>
+<p>If this is <code>true</code>, failure to resolve <a href="#reference/variable-reference.html">VariableReferences</a> when updating the binding will be considered a valid condition and therefore not log error messages.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Errors when executing <a href="#reference/expression.html">Expressions</a> will not be suppressed. This is because <a href="#reference/expression.html">Expressions</a> handle errors with exceptions which result in allocations.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_37">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/i-variable-store.html">IVariableStore</a> <em>Variables</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the <a href="#reference/i-variable-store.html">IVariableStore</a> to use to resolve <a href="#reference/variable-reference.html">VariableReferences</a> for this binding. The <a href="#reference/i-variable-store.html">IVariableStore</a> will be found using <a href="#reference/binding-root.html">BindingRoot.<em>FindParent</em></a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_40">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void UpdateBinding(string <em>group</em>, <a href="#reference/binding-animation-status.html">BindingAnimationStatus</a> <em>status</em>)</dt>
+<dd>
+<p>Use this method to update this specific binding when <em>group</em> is either <code>null</code>, empty, or matches <em>BindingGroup</em>. To update all bindings on a <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a>, use the static <em>UpdateBinding</em> method instead. Optionally pass a <a href="#reference/binding-animation-status.html">BindingAnimationStatus</a> instance as <em>status</em> to access information about bindings that perform an animation or otherwise take multiple frames to complete.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_14">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void UpdateBinding(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/binding-animation-status.html">BindingAnimationStatus</a> <em>status</em>) <em>(abstract)</em></dt>
+<dd>
+<p>Implement this in subclasses to perform the binding. <em>variables</em> is the <a href="#reference/i-variable-store.html">IVariableStore</a> <a href="#reference/variable-reference.html">VariableReferences</a> should be looked up with. For bindings that take multiple frames to complete, <em>status</em> should be updated to indicate when the binding has started and finished.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+<em>status</em> will always be a valid instance so does not need to be checked for <code>null</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect3">
+<h4 id="_resolve_2">Resolve</h4>
+<div class="paragraph">
+<p>This collection of methods will lookup the value referenced by a <a href="#reference/variable-reference.html">VariableReference</a>. The resolved value is set to the ouput parameter <em>result</em> and the return value will indicate whether the value was resolved successfully. The <em>variables</em> parameter should be the <em>variables</em> parameter passed to the <em>UpdateBinding</em> method. If the resolution fails, either due to the variable not being found or it being an invalid type, a warning will be printed to the <a href="https://docs.unity3d.com/Manual/Console.html" target="_blank" rel="noopener">Console</a> (unless <em>SuppressErrors</em> is <code>true</code>).</p>
+</div>
+<div class="ulist">
+<ul>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>result</em> <em>(out)</em>)</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, bool <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, int <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, float <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, string <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve&lt;EnumType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/enum-type.html">EnumType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool Resolve(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/i-variable-list.html">IVariableList</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveObject&lt;ObjectType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/object-type.html">ObjectType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveStore&lt;StoreType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/store-type.html">StoreType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveList&lt;ListType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/list-type.html">ListType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveInterface&lt;InterfaceType&gt;(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/interface-type.html">InterfaceType</a> <em>result</em> <em>(out)</em>)::</p>
+</li>
+<li>
+<p>bool ResolveReference(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, Object <em>result</em> <em>(out)</em>)::</p>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Assign(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, <a href="#reference/variable-reference.html">VariableReference</a> <em>reference</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Assigns <em>value</em> to the variable referenced by <em>reference</em>. The <em>variables</em> parameter should be the <em>variables</em> parameter passed to the <em>UpdateBinding</em> method. If the assignment fails, a warning will be logged.</p>
+</dd>
+</dl>
+</div>
+</li>
+</ul>
+</div>
+<div class="paragraph">
+<p><a href="#manual/variable-binding.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>
+</div>`);

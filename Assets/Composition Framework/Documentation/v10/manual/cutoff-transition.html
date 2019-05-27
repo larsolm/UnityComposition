@@ -1,0 +1,15 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/cutoff-transition">Cutoff Transition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Cutoff Transition is an abstract implementation of a <a href="#manual/transition.html">Transition</a> that provides a custom <a href="https://docs.unity3d.com/ScriptReference/Shader.html" target="_blank" rel="noopener">Shader</a> with an interface to fade, distort, and dissolve the screen image over time using an input texture. Each RGB color component of the input texture is sampled by the <a href="https://docs.unity3d.com/ScriptReference/Shader.html" target="_blank" rel="noopener">Shader</a> and used to determine the output. The R and G channels determine the direction of the distortion of the original image as the x and y offset respectively. Values less than 128 will be negative offset and values greater than 128 will be positive offset. The B component of the image determines the dissolve of the image with higher values being cutoff later in the transition. The Color property determines the color to fade to as time goes on or when the B component is cutoff.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="#manual/fade-transition.html">Fade Transition</a> or <a href="#manual/dissolve-transition.html">Dissolve Transition</a> classes for example implementations of a Cutoff transition.</p>
+</div>
+<div class="paragraph">
+<p><a href="#reference/cutoff-transition.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

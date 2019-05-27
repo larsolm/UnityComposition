@@ -1,0 +1,89 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-set">VariableSet</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableSet : <a href="#reference/i-variable-reset.html">IVariableReset</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_223">Description</h3>
+<div class="paragraph">
+<p>Holds a serializable list of <a href="#reference/variable.html">Variables</a> that are defined by a <a href="#reference/variable-schema.html">VariableSchema</a>. This is most often used with a <a href="#reference/mapped-variable-store.html">MappedVariableStore</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_41">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-schema.html">VariableSchema</a> <em>Schema</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-schema.html">VariableSchema</a> that defines the <a href="#reference/variable.html">Variables</a> in the set.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/i-variable-store.html">IVariableStore</a> <em>Owner</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/i-variable-store.html">IVariableStore</a> that this is a member of.</p>
+</dd>
+<dt class="hdlist1">bool <em>NeedsUpdate</em> <em>(read only)</em></dt>
+<dd>
+<p>This will be <code>true</code> if <em>Schema</em> has changed since the last time this set was updated.</p>
+</dd>
+<dt class="hdlist1">int <em>VariableCount</em> <em>(read only)</em></dt>
+<dd>
+<p>The number of <a href="#reference/variable.html">Variables</a> in the set.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_48">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void LoadFrom(<a href="#reference/variable-set.html">VariableSet</a> <em>variables</em>, string <em>tag</em>)</dt>
+<dd>
+<p>Copy all the <a href="#reference/variable.html">Variables</a> in <em>variables</em> with <em>Tag</em> <em>tag</em> into this set. This is for runtime persistence of game state.</p>
+</dd>
+<dt class="hdlist1">void SaveTo(<a href="#reference/variable-set.html">VariableSet</a> <em>variables</em>, string <em>tag</em>)</dt>
+<dd>
+<p>Copy all the <a href="#reference/variable.html">Variables</a> in this set with <em>Tag</em> <em>tag</em> into <em>variables</em>. This is for runtime persistence of game state.</p>
+</dd>
+<dt class="hdlist1">void Setup(<a href="#reference/variable-schema.html">VariableSchema</a> <em>schema</em>, <a href="#reference/i-variable-store.html">IVariableStore</a> <em>owner</em>)</dt>
+<dd>
+<p>Associate this set with <em>schema</em> and <em>owner</em>. If <em>schema</em> has changed since the last time this was called, the <a href="#reference/variable.html">Variables</a> will be updated.</p>
+</dd>
+<dt class="hdlist1">void Update()</dt>
+<dd>
+<p>This is an editor support function and can be ignored.</p>
+</dd>
+<dt class="hdlist1">void Reset(int <em>index</em>)</dt>
+<dd>
+<p>Resets the <a href="#reference/variable.html">Variable</a> at <em>index</em> to its default value defined in <em>Schema</em>.</p>
+</dd>
+<dt class="hdlist1">void Clear()</dt>
+<dd>
+<p>Disassociates this set with <em>Schema</em> and <em>Owner</em> and removes all its <a href="#reference/variable.html">Variables</a>.</p>
+</dd>
+<dt class="hdlist1">string GetVariableName(int <em>index</em>)</dt>
+<dd>
+<p>Returns the name of the <a href="#reference/variable.html">Variable</a> at index <em>index</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariableValue(int <em>index</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/variable_value.html">VariableValue</a> of the <a href="#reference/variable.html">Variable</a> at index <em>index</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariableValue(int <em>index</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Sets the <a href="#reference/variable-value.html">VariableValue</a> of the <a href="#reference/variable.html">Variable</a> at index <em>index</em> to <em>value</em>.</p>
+</dd>
+<dt class="hdlist1">void ResetTag(string <em>tag</em>)</dt>
+<dd>
+<p>Resets all <a href="#reference/variable.html">Variables</a> with <em>Tag</em> <em>tag</em> to their default value defined in <em>Schema</em>.</p>
+</dd>
+<dt class="hdlist1">void ResetVariables(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; <em>variables</em>)</dt>
+<dd>
+<p>Resets all <a href="#reference/variable.html">Variables</a> in <em>variables</em> to their default value defined in <em>Schema</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

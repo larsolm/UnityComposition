@@ -1,0 +1,46 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/wait-node">Wait Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Wait Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that waits for an amount of time (scaled or realtime) before continuing on to the next node. Create a Wait Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Sequencing</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Wait</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/overview.html">Graphs</a> for more information on instruction graphs.<br>
+See the <em>"BoardTakeTurn"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the BoardGame project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_82">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/wait-node.png" alt="Wait Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <a href="#reference/float-variable-source.html">FloatVariableSource</a> to the value of the amount of time to wait</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Use Scaled Time</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>true</code>, use <a href="https://docs.unity3d.com/ScriptReference/WaitForSeconds.html" target="_blank" rel="noopener">WaitForSeconds()</a> - if <code>false</code>, <a href="https://docs.unity3d.com/ScriptReference/WaitForSecondsRealtime.html" target="_blank" rel="noopener">WaitForSecondsRealtime()</a></p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/wait-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

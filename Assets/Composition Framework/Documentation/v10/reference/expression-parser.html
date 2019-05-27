@@ -1,0 +1,89 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/expression-parser">ExpressionParser</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ExpressionParser</p>
+</div>
+<div class="sect2">
+<h3 id="_description_55">Description</h3>
+<div class="paragraph">
+<p>Converts a sequence of <a href="#reference/expression-token.html">ExpressionTokens</a> as interpreted by the <a href="#reference/expression-lexer.html">ExpressionLexer</a> into an executable <a href="#reference/operation.html">Operation</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_4">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/operation.html">Operation</a>&gt; Parse(string <em>input</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/expression-token.html">ExpressionToken</a>&gt; <em>tokens</em>)</dt>
+<dd>
+<p>Performs the conversion. <em>input</em> is the entire source text that was sent to the <a href="#reference/expression-lexer.html">ExpressionLexer</a> for use in printing friendly error messages. <em>tokens</em> is the set of tokens interpreted by the <a href="#reference/expression-lexer.html">ExpressionLexer</a>. If the tokens cannot be parsed, an <a href="#reference/expression-parse-exception.html">ExpressionParseException</a> will be thrown.</p>
+</dd>
+<dt class="hdlist1">void AddCommand(string <em>name</em>, <a href="#reference/i-command.html">ICommand</a> <em>command</em>)</dt>
+<dd>
+<p>Associates the name <em>name</em> with <em>command</em>. When this name is encountered in an <a href="#reference/expression.html">Expression</a> <em>command</em> will be executed. If a <a href="#reference/i-command.html">Command</a> has already been added with name <em>name</em> an error will be logged.</p>
+</dd>
+<dt class="hdlist1">void RemoveCommand(string <em>name</em>)</dt>
+<dd>
+<p>Removes the <a href="#reference/i-command.html">Command</a> registered with name <em>name</em>. If no <a href="#reference/i-command.html">Command</a> has been added with name <em>name</em> an error will be logged.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/i-command.html">ICommand</a> GetCommand(string <em>name</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/i-command.html">Command</a> that was registered with name <em>name</em>, or null if no command has been registered with that name.</p>
+</dd>
+<dt class="hdlist1">void AddPrefixOperator&lt;OperatorType&gt;(string <em>symbol</em>)</dt>
+<dd>
+<p>Associates the string <em>symbol</em> with the <a href="#reference/prefix-operation.html">PrefixOperation</a> <em>OperatorType</em>. If a <a href="#reference/prefix-operation.html">PrefixOperation</a> has already been registered with <em>symbol</em> an error will be logged.</p>
+</dd>
+<dt class="hdlist1">void AddInfixOperator&lt;OperatorType&gt;(string <em>symbol</em>, <a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>precedence</em>)</dt>
+<dd>
+<p>Associates the string <em>symbol</em> with the <a href="#reference/infix-operation.html">InfixOperation</a> <em>OperatorType</em>. If an <a href="#reference/infix-operation.html">PrefixOperation</a> has already been registered with <em>symbol</em> an error will be logged.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+A <a href="#reference/prefix-operation.html">PrefixOperation</a> and <a href="#reference/infix-operation.html">InfixOperation</a> can be added with the same symbol.
+</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_10">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/operation.html">Operation</a> ParseLeft(<a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>precedence</em>)</dt>
+<dd>
+<p>This should only be called from <a href="#reference/operation.html">Operation.Parse</a> implementations to parse the next sequence of tokens with the given <em>precedence</em> using left associativity.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/operation.html">Operation</a> ParseRight(<a href="#reference/operator-precedence.html">OperatorPrecedence</a> <em>precedence</em>)</dt>
+<dd>
+<p>This should only be called from <a href="#reference/operation.html">Operation.Parse</a> implementations to parse the next sequence of tokens with the given <em>precedence</em> using right associativity.</p>
+</dd>
+<dt class="hdlist1">string GetText(<a href="#reference/expression-token.html">ExpressionToken</a> <em>token</em>)</dt>
+<dd>
+<p>Gets the text that <em>token</em> was parsed from.</p>
+</dd>
+<dt class="hdlist1">bool HasText(<a href="#reference/expression-token.html">ExpressionToken</a> <em>token</em>, string <em>text</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if <em>token</em> has the text <em>text</em></p>
+</dd>
+<dt class="hdlist1">bool HasToken(<a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>type</em>)</dt>
+<dd>
+<p>Returns <code>true</code> if the next token in the current parse has type <em>type</em>.</p>
+</dd>
+<dt class="hdlist1">void SkipToken(<a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>type</em>, string <em>expected</em>)</dt>
+<dd>
+<p>Skips the next token in the current parse. If the next token does not have type <em>type</em>, an <a href="#reference/expression-parse-exception.html">ExpressionParseException</a> will be thrown. <em>expected</em> is the text that was expected at the current location and is used to provide a friendlier error message.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

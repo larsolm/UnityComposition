@@ -1,0 +1,34 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/scoped-graph">ScopedGraph</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ScopedGraph : <a href="#reference/instruction-graph.html">InstructionGraph</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_165">Description</h3>
+<div class="paragraph">
+<p>An <a href="#reference/instruction-graph.html">InstructionGraph</a> with an entry branch, a main branch, and an exit branch. These branches will run in sequence but for organization purposes it is useful to think of <em>Enter</em> as a setup branch and <em>Exit</em> a cleanup branch that reverses any changes made in <em>Enter</em>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_80">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Enter</em></dt>
+<dd>
+<p>The branch that will run when the <a href="#reference/instruction-graph.html">InstructionGraph</a> is first run.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Process</em></dt>
+<dd>
+<p>The branch that will run after <em>Enter</em> has completed.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>Exit</em></dt>
+<dd>
+<p>The branch that will run after <em>Process</em> has completed.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

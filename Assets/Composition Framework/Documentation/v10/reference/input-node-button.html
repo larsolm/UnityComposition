@@ -1,0 +1,42 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/input-node-button">InputNodeButton</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.InputNodeButton</p>
+</div>
+<div class="sect2">
+<h3 id="_description_77">Description</h3>
+<div class="paragraph">
+<p>Holds data for a button or key in an <a href="#reference/input-node.html">InputNode</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_36">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/input-node-button-button-type.html">ButtonType</a> <em>Type</em></dt>
+<dd>
+<p>The type of input to use for this button.</p>
+</dd>
+<dt class="hdlist1">string <em>Name</em></dt>
+<dd>
+<p>The name of the button if <em>Type</em> is <code>Button</code> or the name of the axis if <em>Type</em> is <code>Axis</code> as defined by the <a href="#reference/input-helper.html">InputHelper</a>.</p>
+</dd>
+<dt class="hdlist1">float <em>Value</em></dt>
+<dd>
+<p>If <em>Type</em> is <code>Axis</code>, the minimum amount of the axis value for it to be considered pressed. If this value is negative, the axis value must be more negative than this value.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">KeyCode</a> <em>Key</em></dt>
+<dd>
+<p>If <em>Type</em> is <code>Key</code>, the keyboard key for the button.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> <em>OnSelected</em></dt>
+<dd>
+<p>The <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> to go to when this input is triggered.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

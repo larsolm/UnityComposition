@@ -1,0 +1,58 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/input-node">Input Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An Input Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that will wait to continue to the next node until an input is received. Any number of buttons, keys, or axes can be added to listen for input from, each specifying their own node to branch to. Each input specifies whether it is an <code>Axis</code>, <code>Button</code>, or <code>Key</code>. An <code>Axis</code> specifies the value the input axis must reach before it will be triggered. Create a Branch Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Interface</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Input</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/overview.html">Graphs</a> for more information on instruction graphs.<br>
+See the <em>"Calculator"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Calculator project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_26">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/input-node.png" alt="Input Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Buttons</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of button infos to listen for</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Type</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/input-node-button-type.html">ButtonType</a> to listen for - <code>Axis</code>, <code>Button</code>, or <code>Key</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Axis</code> or <code>Button</code>, the name of the corresponding input to listen for</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Axis</code>, the magnitude the axis must reach before being triggered</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Key</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <code>Key</code>, the <a href="https://docs.unity3d.com/ScriptReference/KeyCode.html" target="_blank" rel="noopener">KeyCode</a> to listen for</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/input-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

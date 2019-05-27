@@ -1,0 +1,34 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/scene-reference-attribute">SceneReferenceAttribute</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.UtilityEngine.SceneReferenceAttribute : Attribute</p>
+</div>
+<div class="sect2">
+<h3 id="_description_161">Description</h3>
+<div class="paragraph">
+<p>Apply this to a <a href="#reference/scene-reference.html">SceneReference</a> to indicate to the editor how scene creation should be handled. If this attribute is not applied to a <a href="#reference/scene-reference.html">SceneReference</a> field, it will act as if <em>SaveLocation</em> is <code>None</code>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_79">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/asset-location.html">AssetLocation</a> <em>SaveLocation</em></dt>
+<dd>
+<p>The folder to save the newly created scene in. Set this to <code>None</code> to disable scene creation.</p>
+</dd>
+<dt class="hdlist1">string <em>DefaultName</em></dt>
+<dd>
+<p>The name to assign to new scenes by default. If <em>SaveLocation</em> is <code>Selectable</code>, the name can be set when picking the save location. If <em>SaveLocation</em> is <code>AssetRoot</code>, this name will automatically have a number appended if a scene with the same name already exists.</p>
+</dd>
+<dt class="hdlist1">string <em>Creator</em></dt>
+<dd>
+<p>The name of a method on the owning object that can add objects to the newly created scene. The method should be static, return void, and take no parameters. The created scene will be the active scene so any objects created in this method will be added to the new scene. If this is not specified, an empty scene will be created.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

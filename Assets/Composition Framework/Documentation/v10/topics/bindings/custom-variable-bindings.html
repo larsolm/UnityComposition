@@ -1,0 +1,84 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/bindings/custom-variable-bindings">Creating Custom Variable Bindings</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create custom variable bindings, derive from <a href="#reference/variable-binding.html">VariableBinding</a> and implement the abstract method <code>UpdateBinding(IVariableStore variables, BindingAnimationStatus status)</code>. The following is an example of a custom binding that activates or deactivates a GameObject based on a bool <a href="reference/variable-reference.html">variable reference</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using PiRhoSoft.CompositionEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class ActivateBinding : VariableBinding
+	{
+		public GameObject GameObject;
+
+		public VariableReference Variable = new VariableReference();
+
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		{
+			if (GameObject)
+			{
+				Resolve(variables, Variable, out bool active);
+				GameObject.SetActive(active);
+			}
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>The next example utilizes animation to increment displayed text based on an int <a href="reference/variable-reference.html">variable reference</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using System.Collections.Generic;
+using TMPro;
+using PiRhoSoft.CompositionEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class AnimatedIntBinding : VariableBinding
+	{
+		public VariableReference Variable = new VariableReference();
+
+		private TMP_Text _text;
+		private int _previous = 0;
+
+		private void Start()
+		{
+			_text = GetComponent&lt;TMP_Text&gt;();
+		}
+
+		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		{
+			if (Resolve(variables, Variable, out int target))
+			{
+				StopAllCoroutines();
+				StartCoroutine(AnimateText(target, status));
+			}
+		}
+
+		private IEnumerator AnimateText(int target, BindingAnimationStatus status)
+		{
+			status.Increment();
+
+			while (_previous != target)
+			{
+				_previous = target &gt; _previous ? _previous - 1 : _previous + 1;
+				_text.text = _previous.ToString();
+
+				yield return null;
+			}
+
+			status.Decrement();
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

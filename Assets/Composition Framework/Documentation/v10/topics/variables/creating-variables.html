@@ -1,0 +1,216 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/variables/creating-variables">Creating Variables</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>All variables exist in a Variable Store, often referred to as just <em>store</em>. Four Unity objects are included that can be used as stores:</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 33.3333%;">
+<col style="width: 33.3334%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Type</th>
+<th class="tableblock halign-left valign-top">Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable Pool Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">Mono Behaviour</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables are defined and edited directly in the <a href="https://docs.unity3d.com/Manual/UsingTheInspector.html" target="_blank" rel="noopener">inspector</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable Pool Asset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">Scriptable Object</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables are defined and edited directly in the <a href="https://docs.unity3d.com/Manual/UsingTheInspector.html" target="_blank" rel="noopener">inspector</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable Set Component</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">Mono Behaviour</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables are edited in the <a href="https://docs.unity3d.com/Manual/UsingTheInspector.html" target="_blank" rel="noopener">inspector</a> and defined by a Variable Schema</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variable Set Asset</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock"><a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">Scriptable Object</a></p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables are edited in the <a href="https://docs.unity3d.com/Manual/UsingTheInspector.html" target="_blank" rel="noopener">inspector</a> and defined by a Variable Schema</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>The simplest of these is the Variable Pool Component.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/variables/variables-2-create.png" alt="Create Variable Pool Component">
+</div>
+</div>
+<div class="paragraph">
+<p>This is created like any other <a href="https://docs.unity3d.com/Manual/UsingComponents.html" target="_blank" rel="noopener">Component</a> and can be found in the <em>Add Component</em> menu under <span class="menuseq"><b class="menu">PiRho Soft</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Composition</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Variable Pool Component</b></span>. Variables are added to the component with the <span class="image"><img src="v10/images/topics/variables/variables-2-add-icon.png" alt="+"></span> button in the upper right of the <em>Variables</em> list. Clicking the button will open a popup where the name of the variable is entered. After clicking <em>Create</em>, the variable will be added to the store where it can be edited. Before setting a value for the variable, the type must be specified by selecting a type from the drop down list. The available types are:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/variables/variables-2-edit.png" alt="Edit Variable Pool Component">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Empty</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">No value has been set</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bool</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value can be either <code>true</code> or <code>false</code></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is an integer number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a decimal number</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IntRect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">IntBounds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector2</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector3</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Vector4</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Quaternion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Bounds</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Color</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a <a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a text string</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is an enum of a type defined in code (Enum values must be constrained)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is an <a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a Variable Store (this cannot be set in the inspector however Variable Stores can be assigned as Objects)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is a list of other values</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>Variables can be reordered by clicking and dragging the <span class="image"><img src="v10/images/topics/variables/variables-2-move-icon.png" alt="="></span> to the left of each, removed by clicking the <span class="image"><img src="v10/images/topics/variables/variables-2-remove-icon.png" alt="-"></span> to the right, or have their type changed using the <span class="image"><img src="v10/images/topics/variables/variables-2-edit-icon.png" alt="*"></span> menu. Also in the <span class="image"><img src="v10/images/topics/variables/variables-2-edit-icon.png" alt="+"></span> menu, some types can have a constraint specified to restrict the value the variable can hold. The types that can be constrained are:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/variables/variables-2-constraint.png" alt="Constrain Variable Pool Component">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 50%;">
+<col style="width: 50%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top"></th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Int</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number must be between a minimum and maximum value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Float</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The number must be between a minimum and maximum value</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">String</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is selected from a list</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Enum</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value is from a specific enum type defined in code (Enum values must be constrained)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The object must be a specific object ype</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Store</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The store holds values defined in a Variable Schema (described in the <a href="#topics/variables/defining-variables.html">next section</a>)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">List</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list holds values of a specific type</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p>A Variable Pool Asset is edited and used the same as a Variable Pool Component, however it is created as an asset using the <a href="https://docs.unity3d.com/Manual/ProjectView.html" target="_blank" rel="noopener">project window</a> rather than being added to a Game Object as a Component. It is located in the <em>Create</em> menu under <span class="menuseq"><b class="menu">PiRho Soft</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Variable Pool</b></span></p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/variables/variables-2-asset.png" alt="Create Variable Pool Asset">
+</div>
+</div>
+<div class="paragraph">
+<p>If a set of variables is reused across many objects Variable Set Component should be used instead of Variable Pool Component and Variable Set Asset should be used instead of Variable Pool Asset. These objects use a Variable Schema to define the variables they contain thus eliminating the need to define them individually on each object or update every object to add or remove a variable. These are explained in the <a href="#topics/variables/defining-variables.html">next section</a>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

@@ -1,0 +1,63 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/material-animation">MaterialAnimation</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.MaterialAnimation : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a>, <a href="#reference/i-completion-notifier.html">ICompletionNotifier</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_116">Description</h3>
+<div class="paragraph">
+<p>Add this to a <a href="https://docs.unity3d.com/ScriptReference/Renderer.html" target="_blank" rel="noopener">Renderer</a> to animate a <code>_Progress</code> <a href="https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html" target="_blank" rel="noopener">material property</a>. This can be used standalone but is most useful when used with the <a href="#reference/play-effect-node.html">PlayEffectNode</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_51">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>AutoAdvance</em></dt>
+<dd>
+<p>If this is <code>true</code> (the default), <em>Progress</em> will be automatically updated every frame according to the values set for <em>UseScaledTime</em> and <em>Duration</em>.</p>
+</dd>
+<dt class="hdlist1">float <em>Progress</em></dt>
+<dd>
+<p>The value that is set on the <code>_Progress</code> <a href="https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html" target="_blank" rel="noopener">material property</a> for a sibling <a href="https://docs.unity3d.com/ScriptReference/Renderer.html" target="_blank" rel="noopener">Renderer</a>.</p>
+</dd>
+<dt class="hdlist1">bool <em>UseScaledTime</em></dt>
+<dd>
+<p>If <em>AutoAdvance</em> is <code>true</code>, specifies how <em>Progress</em> will be updated when <a href="https://docs.unity3d.com/ScriptReference/Time-timeScale.html" target="_blank" rel="noopener">Time.timeScale</a> is changed. When <code>true</code>, <a href="https://docs.unity3d.com/ScriptReference/Time-deltaTime.html" target="_blank" rel="noopener">Time.deltaTime</a> is used, otherwise <a href="https://docs.unity3d.com/ScriptReference/Time-unscaledDeltaTime.html" target="_blank" rel="noopener">Time.unscaledDeltaTime</a> is used.</p>
+</dd>
+<dt class="hdlist1">float <em>Duration</em></dt>
+<dd>
+<p>If <em>AutoAdvance</em> is <code>true</code>, specifies the total duration of the animation. The <code>_Progress</code> <a href="https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html" target="_blank" rel="noopener">material property</a> will be set to _Progress_ / _Duration.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_20">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsComplete</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> as soon as the animation has completed. When <em>AutoAdvance</em> is <code>true</code>, the animation is complete when <em>Progress</em> &gt;= <em>Duration</em>. When <em>AutoAdvance</em> is <code>false</code>, the animation is complete when <em>Progress</em> &gt;= 1.0</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_7">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void LateUpdate() <em>(virtual)</em></dt>
+<dd>
+<p>Performs the update of the <code>_Progress</code> <a href="https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html" target="_blank" rel="noopener">material property</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/material-animation.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

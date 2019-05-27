@@ -1,0 +1,82 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/transition">Transition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.Transition : <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_198">Description</h3>
+<div class="paragraph">
+<p>The base class for assets that perform postprocessing of the rendered scene over a time period.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_101">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Shader.html" target="_blank" rel="noopener">Shader</a> <em>Shader</em></dt>
+<dd>
+<p>The <a href="https://docs.unity3d.com/ScriptReference/Shader.html" target="_blank" rel="noopener">Shader</a> that the transition will use to display its effect</p>
+</dd>
+<dt class="hdlist1">float <em>Duration</em></dt>
+<dd>
+<p>The time in seconds the transition should last.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_37">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Begin(<a href="#reference/transition-phase.html">TransitionPhase</a> <em>phase</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this to setup properties when the transition is started.</p>
+</dd>
+<dt class="hdlist1">void Process(float <em>time</em>, <a href="#reference/transition-phase.html">TransitionPhase</a> <em>phase</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Implement this to animate properties of the transition as time advances.</p>
+</dd>
+<dt class="hdlist1">void End() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this to perform any clean up of the transition.</p>
+</dd>
+<dt class="hdlist1">void Render(<a href="https://docs.unity3d.com/ScriptReference/RenderTexture.html" target="_blank" rel="noopener">RenderTexture</a> <em>source</em>, <a href="https://docs.unity3d.com/ScriptReference/RenderTexture.html" target="_blank" rel="noopener">RenderTexture</a> <em>destination</em>) <em>(virtual)</em></dt>
+<dd>
+<p>Renders the transition using <em>source</em> as the input scene and <em>destination</em> as the target. The <a href="https://docs.unity3d.com/ScriptReference/Graphics.Blit.html" target="_blank" rel="noopener">Graphics.<em>Blit</em></a> methods are used to copy the texture using <em>Material</em>. To fully customize rendering, this can be overridden, but for must situations updating properties of <em>Material</em> in <em>Update</em> is sufficient.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_properties_2">Protected Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Material.html" target="_blank" rel="noopener">Material</a> <em>Material</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="https://docs.unity3d.com/ScriptReference/Material.html" target="_blank" rel="noopener">Material</a> the effect will be rendered with. This is created with a call to <em>SetShader</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_13">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void SetShader(string <em>name</em>)</dt>
+<dd>
+<p>Creates the material using the specified shader. <em>name</em> is the name set for the shader at the beginning of the shader script. This should be called from subclasses during initialization.</p>
+</dd>
+<dt class="hdlist1">void Update() <em>(virtual)</em></dt>
+<dd>
+<p>Implement this to update the <a href="https://docs.unity3d.com/Manual/MaterialsAccessingViaScript.html" target="_blank" rel="noopener">material properties</a> of <em>Material</em>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/transition.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

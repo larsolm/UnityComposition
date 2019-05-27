@@ -1,0 +1,51 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/string-binding">StringBinding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.StringBinding : <a href="#reference/variable-binding.html">VariableBinding</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_187">Description</h3>
+<div class="paragraph">
+<p>Derive from this class to implement a <a href="#reference/variable-binding.html">VariableBinding</a> that sets the text on a <a href="http://digitalnativestudios.com/textmeshpro/docs/" target="_blank" rel="noopener">TextMeshPro</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_94">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>AutoSizeContainer</em></dt>
+<dd>
+<p>Set this to <code>true</code> to set <em>autoSizeTextContainer</em> on <em>Text</em>. This property is otherwise not exposed to the editor, but is necessary in some situations to ensure an <a href="https://docs.unity3d.com/Manual/comp-UIAutoLayout.html" target="_blank" rel="noopener">Auto Layout</a> ui is sized correctly.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_31">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="http://digitalnativestudios.com/textmeshpro/docs/" target="_blank" rel="noopener">TMP_Text</a> <em>Text</em> <em>(read only)</em></dt>
+<dd>
+<p>The component to set the text on.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_12">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void SetText(string <em>text</em>, bool <em>enabled</em>)</dt>
+<dd>
+<p>Call this from subclasses to set <em>Text</em>'s text to <em>text</em>. <em>Text</em> will also be enabled or disabled according to the <em>enabled</em> parameter.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/string-binding.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

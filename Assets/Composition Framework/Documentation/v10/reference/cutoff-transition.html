@@ -1,0 +1,49 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/cutoff-transition">CutoffTransition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.CutoffTransition : <a href="#reference/transition.html">Transition</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_37">Description</h3>
+<div class="paragraph">
+<p>Provides a custom <a href="https://docs.unity3d.com/ScriptReference/Shader.html" target="_blank" rel="noopener">Shader</a> with an interface to fade, distort, and dissolve the screen image over time using an input texture. <a href="#reference/fade-transition.html">FadeTransition</a>, <a href="#reference/disolv-transitione.html">DissolveTransition</a>, and <a href="#reference/distort-transition.html">DistortTransition</a> derive from this class to provide specific <a href="#reference/transition.html">Transition</a> functionality.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_protected_methods_2">Protected Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void SetTexture(<a href="https://docs.unity3d.com/ScriptReference/Texture2D.html" target="_blank" rel="noopener">Texture2D</a> <em>texture</em>)</dt>
+<dd>
+<p>Sets the <em>TransitionTexture</em> property of the material which is used to lookup the animation properties according to the description in the <a href="#manual/cutoff-transition.html">manual</a>.</p>
+</dd>
+<dt class="hdlist1">void SetColor(<a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>color</em>)</dt>
+<dd>
+<p>Sets the _Color property of the material.</p>
+</dd>
+<dt class="hdlist1">void SetCutoff(float <em>cutoff</em>)</dt>
+<dd>
+<p>Sets the _Cutoff property of the material which specifies the portion of the texture that is used as the mask based on the current elapsed time.</p>
+</dd>
+<dt class="hdlist1">void SetFade(float <em>fade</em>)</dt>
+<dd>
+<p>Sets the _Fade property of the material which specifies the interpolated position between the color from the input texture and the value set to _Color.</p>
+</dd>
+<dt class="hdlist1">void SetDistort(bool <em>distort</em>)</dt>
+<dd>
+<p>Sets the _Distort property which indicates whether or not the material should distort the input texture based on the R and G channels in _TransitionTexture.</p>
+</dd>
+<dt class="hdlist1">void Setup() <em>(virtual)</em></dt>
+<dd>
+<p>Override this in subclasses to set additional material properties. The base implementation sets <em>TransitionTexture</em> to <a href="https://docs.unity3d.com/ScriptReference/Texture2D-blackTexture.html">Texture2D.blackTexture</a>, <em>color</em> to black, and <em>Distort</em> to false. <em>Cutoff</em> and <em>Fade</em> are set in <a href="#reference/transition.html"><em>Process</em></a> to the percentage of <a href="#reference/transition.html"><em>Duration</em></a> that has elapsed.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/cutoff-transition.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,463 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-value">VariableValue</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableValue : ValueType</p>
+</div>
+<div class="sect2">
+<h3 id="_description_231">Description</h3>
+<div class="paragraph">
+<p>Stores a value or object in a generic fashion without boxing value types (except enums). The possible types that can be stored are defined in <a href="#reference/variable-type.html">VariableType</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_properties_3">Static Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> <em>Empty</em> <em>(read only)</em></dt>
+<dd>
+<p>Creates a value with <a href="#reference/variable-type.html">VariableType</a> <code>Empty</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_14">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-type.html">VariableType</a> GetType(Type <em>type</em>)</dt>
+<dd>
+<p>Returns the <a href="#reference/variable-type.html">VariableType</a> that would be used to store a value of Type <em>type</em>. If <em>type</em> is not supported, <code>Empty</code> will be returned.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(bool <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Bool</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(int <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Int</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(float <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Float</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Int2</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Int3</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>RectInt</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>BoundsInt</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Vector2</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Vector3</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Vector4</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Quaternion</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Rect</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Bounds</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Color</code> that holds <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(string <em>str</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>String</code> that holds <em>str</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(Enum <em>e</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Enum</code> and <em>EnumType</em> the type of <em>e</em> that holds <em>e</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> <em>obj</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Object</code> that holds <em>obj</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>store</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>Store</code> that holds <em>store</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Create(<a href="#reference/i-variable-list.html">IVariableList</a> <em>list</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> <code>List</code> that holds <em>list</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> CreateValue&lt;T&gt;(T <em>value</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> determined from <em>T</em> that holds <em>value</em>. This can be used for all <a href="#reference/variable-type.html">VariableTypes</a> except <code>Enum</code>, <code>Object</code>, <code>Store</code>, and <code>List</code>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> CreateReference(object <em>reference</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> determined from the type of <em>reference</em> that holds <em>reference</em>. This can be used for the <a href="#reference/variable-type.html">VariableTypes</a> <code>Enum</code>, <code>Object</code>, <code>Store</code>, and <code>List</code>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+If <em>reference</em> is both an <a href="#reference/i-variable-store.html">IVariableStore</a> and an <a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a>, the value will have type <code>Object</code>.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> CreateAny(object <em>obj</em>)</dt>
+<dd>
+<p>Creates a <a href="#reference/variable-value.html">VariableValue</a> with <em>Type</em> determined from the type of <em>obj</em>. This can be used for any <a href="#reference/variable-type.html">VariableType</a> when it is unknown whether <em>obj</em> is a value or reference type.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_45">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-type.html">VariableType</a> <em>Type</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-type.html">VariableType</a> of the value.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsEmpty</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Empty</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>IsNull</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Object</code>, <code>Store</code>, or <code>List</code> and no value is stored.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasValue</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is a value type (i.e anything other than <code>String</code>, <code>Enum</code>, <code>Object</code>, <code>Store</code>, or <code>List</code>).</p>
+</dd>
+<dt class="hdlist1">bool <em>HasString</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>String</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasEnum</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Enum</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasReference</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Object</code>, <code>Store</code>, or <code>List</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasObject</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if the stored object is an <a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> or derived from <a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasStore</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if the stored object is an <a href="#reference/i-variable-store.html">IVariableStore</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Even if <em>Type</em> is <code>Object</code>, this will still return <code>true</code> if the stored object is also an <a href="#reference/i-variable-store.html">IVariableStore</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>HasList</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if the stored object is an <a href="#reference/i-variable-list.html">IVariableList</a>.</p>
+</dd>
+</dl>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Even if <em>Type</em> is <code>Object</code>, this will still return <code>true</code> if the stored object is also an <a href="#reference/i-variable-List.html">IVariableList</a>.
+</td>
+</tr>
+</table>
+</div>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>HasNumber</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Int</code> or <code>Float</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasNumber2</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Int2</code> or <code>Vector2</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasNumber3</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Int3</code>, <code>Vector3</code>, <code>Int2</code>, or <code>Vector2</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasNumber4</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>Vector4</code>, <code>Int3</code>, <code>Vector3</code>, <code>Int2</code>, or <code>Vector2</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasRect</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>IntRect</code> or <code>Rect</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>HasBounds</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns <code>true</code> if <em>Type</em> is <code>IntBounds</code> or <code>Bounds</code>.</p>
+</dd>
+<dt class="hdlist1">bool <em>Bool</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Bool</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1">int <em>Int</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Int</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1">float <em>Float</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Float</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a> <em>Int2</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Int2</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a> <em>Int3</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Int3</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a> <em>IntRect</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>IntRect</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a> <em>IntBounds</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>IntBounds</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>Vector2</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Vector2</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> <em>Vector3</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Vector3</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a> <em>Vector4</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Vector4</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a> <em>Quaternion</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Quaternion</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a> <em>Rect</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Rect</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a> <em>Bounds</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Bounds</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>Color</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Color</code> or an undefined value if it is not.</p>
+</dd>
+<dt class="hdlist1">string <em>String</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>String</code> or <code>null</code> if it is not.</p>
+</dd>
+<dt class="hdlist1">Enum <em>Enum</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Enum</code> or <code>null</code> if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> <em>Object</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored object if <em>Type</em> is <code>Object</code> or <code>null</code> if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/i-variable-store.html">IVariableStore</a> <em>Store</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored object if the object is an <a href="#reference/i-variable-store.html">IVariableStore</a> or <code>null</code> if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/i-variable-list.html">IVariableList</a> <em>List</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored object if the object is an <a href="#reference/i-variable-list.html">IVariableList</a> or <code>null</code> if it is not.</p>
+</dd>
+<dt class="hdlist1">float <em>Number</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Int</code> or <code>Float</code> or <code>0.0</code> if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>Number2</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Int2</code> or <code>Vector2</code> or <code>(0.0, 0.0)</code> if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> <em>Number3</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Int3</code> or <code>Vector3</code>, <em>Number2</em> with z = <code>0.0</code> if <em>Type</em> is <code>Int2</code> or <code>Vector2</code>, or <code>(0.0, 0.0, 0.0)</code> otherwise.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a> <em>Number4</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>Vector4</code>, <em>Number3</em> with w = <code>1.0</code> if <em>Type</em> is <code>Int3</code>, <code>Vector3</code>, <code>Int2</code>, or <code>Vector2</code>, or <code>(0.0, 0.0, 0.0, 1.0)</code> otherwise.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a> <em>NumberRect</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>IntRect</code> or <code>Rect</code> or a 0 sized rect at <code>(0.0, 0.0)</code> if it is not.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a> <em>NumberBounds</em> <em>(read only)</em></dt>
+<dd>
+<p>Returns the stored value if <em>Type</em> is <code>IntBounds</code> or <code>Bounds</code> or a 0 sized bounds at <code>(0.0, 0.0, 0.0)</code> if it is not.</p>
+</dd>
+<dt class="hdlist1">Object <em>Reference</em> <em>(read only)</em></dt>
+<dd>
+<p>The stored reference value whether <em>Type</em> is <code>Object</code>, <code>Store</code>, or <code>List</code>.</p>
+</dd>
+<dt class="hdlist1">Type <em>EnumType</em> <em>(read only)</em></dt>
+<dd>
+<p>The type of the stored <em>Enum</em> if <em>Type</em> is <code>Enum</code> or null if it is not.</p>
+</dd>
+<dt class="hdlist1">Type <em>ReferenceType</em> <em>(read only)</em></dt>
+<dd>
+<p>The type of the stored <em>Object</em> if <em>Type</em> is <code>Object</code> or null if it is not.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_53">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool HasEnumType&lt;Type&gt;()</dt>
+<dd>
+<p><code>true</code> if <em>Type</em> is <code>Enum</code> and <em>EnumType</em> is <em>Type</em>.</p>
+</dd>
+<dt class="hdlist1">bool HasReferenceType&lt;Type&gt;()</dt>
+<dd>
+<p><code>true</code> if <em>Type</em> is <code>Object</code> and <em>ReferenceType</em> is <em>Type</em> or is derived from <em>Type</em>.</p>
+</dd>
+<dt class="hdlist1">bool HasEnumType(Type <em>type</em>)</dt>
+<dd>
+<p><code>true</code> if <em>Type</em> is <code>Enum</code> and <em>EnumType</em> is <em>type</em>.</p>
+</dd>
+<dt class="hdlist1">bool HasReferenceType(Type <em>type</em>)</dt>
+<dd>
+<p><code>true</code> if <em>Type</em> is <code>Object</code> and <em>ReferenceType</em> is <em>type</em> or is derived from <em>type</em>.</p>
+</dd>
+<dt class="hdlist1">object GetBoxedValue()</dt>
+<dd>
+<p>Returns the stored value, regardless of <em>Type</em>. Value types will be boxed.</p>
+</dd>
+<dt class="hdlist1">bool TryGetBool(bool <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Bool</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>false</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetInt(int <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Int</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>0</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetFloat(float <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Float</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>0.0</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetInt2(<a href="https://docs.unity3d.com/ScriptReference/Vector2Int.html" target="_blank" rel="noopener">Vector2Int</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Int2</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>(0, 0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetInt3(<a href="https://docs.unity3d.com/ScriptReference/Vector3Int.html" target="_blank" rel="noopener">Vector3Int</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Int3</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>(0, 0, 0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetIntRect(<a href="https://docs.unity3d.com/ScriptReference/RectInt.html" target="_blank" rel="noopener">RectInt</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>IntRect</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to a 0 sized rect at <code>(0, 0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetIntBounds(<a href="https://docs.unity3d.com/ScriptReference/BoundsInt.html" target="_blank" rel="noopener">BoundsInt</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>IntBounds</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to a 0 sized bounds at <code>(0, 0, 0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetVector2(<a href="https://docs.unity3d.com/ScriptReference/Vector2.html" target="_blank" rel="noopener">Vector2</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Vector2</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>(0.0, 0.0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetVector3(<a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Vector3</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>(0.0, 0.0, 0.0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetVector4(<a href="https://docs.unity3d.com/ScriptReference/Vector4.html" target="_blank" rel="noopener">Vector4</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Vector4</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>(0.0, 0.0, 0.0, 1.0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetQuaternion(<a href="https://docs.unity3d.com/ScriptReference/Quaternion.html" target="_blank" rel="noopener">Quaternion</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Quaternion</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <a href="https://docs.unity3d.com/ScriptReference/Quaternion-identity.html" target="_blank" rel="noopener">Quaternion.<em>identity</em></a> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetRect(<a href="https://docs.unity3d.com/ScriptReference/Rect.html" target="_blank" rel="noopener">Rect</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Rect</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to a 0 sized rect at <code>(0.0, 0.0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetBounds(<a href="https://docs.unity3d.com/ScriptReference/Bounds.html" target="_blank" rel="noopener">Bounds</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Bounds</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to a 0 sized bounds at <code>(0.0, 0.0, 0.0)</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetColor(<a href="https://docs.unity3d.com/ScriptReference/Color.html" target="_blank" rel="noopener">Color</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Color</code>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>color</em> to <code>white</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetString(string <em>s</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>String</code>, sets <em>s</em> to the stored value and returns <code>true</code>. Otherwise sets <em>s</em> to an empty string and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetEnum&lt;EnumType&gt;(<a href="#reference/enum-type.html">EnumType</a> <em>value</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Enum</code> and <em>EnumType</em> is <em>EnumType</em>, sets <em>value</em> to the stored value and returns <code>true</code>. Otherwise sets <em>value</em> to <code>0</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetObject(<a href="https://docs.unity3d.com/ScriptReference/Object.html" target="_blank" rel="noopener">Object</a> <em>obj</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Object</code>, sets <em>obj</em> to the stored object and returns <code>true</code>. Otherwise sets <em>obj</em> to <code>null</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetStore(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>store</em> <em>(out)</em>)</dt>
+<dd>
+<p>If the stored object is an <a href="#reference/i-variable-store.html">IVariableStore</a>, sets <em>store</em> to the stored object and returns <code>true</code>. Otherwise sets <em>store</em> to <code>null</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetList(<a href="#reference/i-variable-list.html">IVariableList</a> <em>list</em> <em>(out)</em>)</dt>
+<dd>
+<p>If the stored object is an <a href="#reference/i-variable-list.html">IVariableList</a>, sets <em>list</em> to the stored object and returns <code>true</code>. Otherwise sets <em>list</em> to <code>null</code> and returns <code>false</code>.</p>
+</dd>
+<dt class="hdlist1">bool TryGetReference&lt;T&gt;(<a href="#reference/t.html">T</a> <em>t</em> <em>(out)</em>)</dt>
+<dd>
+<p>If <em>Type</em> is <code>Object</code>, <code>Store</code>, or <code>List</code> and the stored object has type <em>T</em> or is derived from type <em>T</em>, sets <em>t</em> to the stored object and returns <code>true</code>. Otherwise sets <em>t</em> to <code>null</code> and returns <code>false</code>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

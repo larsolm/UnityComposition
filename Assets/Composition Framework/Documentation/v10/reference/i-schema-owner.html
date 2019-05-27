@@ -1,0 +1,37 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/i-schema-owner">ISchemaOwner</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ISchemaOwner</p>
+</div>
+<div class="sect2">
+<h3 id="_description_100">Description</h3>
+<div class="paragraph">
+<p>Implement this interface on a class that also implements <a href="#reference/i-variable-store.html">IVariableStore</a> to indicate to other systems that this store is constrained by a <a href="#reference/variable-schema.html">VariableSchema</a>. This is used to improve the editing experience and enable runtime serialization of the store data. The built in classes <a href="#reference/constrained-store.html">ConstrainedStore</a>, <a href="#reference/variable-set-component.html">VariableSetComponent</a>, and <a href="#reference/variable-set-asset.html">VariableSetAsset</a> implement this and should be sufficient for most use cases.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_16">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-schema.html">VariableSchema</a> <em>Schema</em> <em>(read only)</em> <em>(abstract)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-schema.html">VariableSchema</a> that is constraining this store.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_21">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void SetupSchema() <em>(abstract)</em></dt>
+<dd>
+<p>This method should apply the schema to the store.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

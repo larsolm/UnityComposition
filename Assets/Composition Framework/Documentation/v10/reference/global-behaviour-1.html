@@ -1,0 +1,44 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/global-behaviour-1">GlobalBehaviour</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.UtilityEngine.GlobalBehaviour&lt;<em>T</em>&gt; : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_64">Description</h3>
+<div class="paragraph">
+<p>Derive from this class to ensure only a single instance of the derived class will be created. The instance will be created on demand (when <em>Instance</em> is first accessed) and should not be added to a scene.</p>
+</div>
+<div class="paragraph">
+<p>Pass the derived class itself as <em>T</em>: <code>public class CompositionManager : GlobalBehaviour&lt;CompositionManager&gt; {}</code></p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_properties">Static Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>Exists</em> <em>(read only)</em></dt>
+<dd>
+<p>Checks if the instance has been created.</p>
+</dd>
+<dt class="hdlist1">T <em>Instance</em> <em>(read only)</em></dt>
+<dd>
+<p>The instance of the class. This will create the instance if it hasn&#8217;t been already.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_static_methods_5">Static Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Destroy()</dt>
+<dd>
+<p>Destroys the created instance.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

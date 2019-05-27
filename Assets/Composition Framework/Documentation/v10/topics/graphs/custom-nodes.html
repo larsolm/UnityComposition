@@ -1,0 +1,63 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/graphs/custom-nodes">Creating Custom Nodes</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>To create custom nodes, derive from <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> and implement the abstract method <code>Run(InstructionGraph graph, InstructionStore variables, int iteration)</code>. The following is an example of a custom node that instantiates a game object from a prefab and stores it in a <a href="reference/variable-reference.html">variable reference</a>.</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-cs hljs" data-lang="cs">using System.Collections;
+using PiRhoSoft.CompositionEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class SpawnObjectNode : InstructionGraphNode
+	{
+		public InstructionGraphNode Next = null; <i class="conum" data-value="1"></i><b>(1)</b>
+		public GameObjectVariableSource Prefab = new GameObjectVariableSource();
+		public VariableReference ObjectVariable = new VariableReference();
+
+		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration) <i class="conum" data-value="2"></i><b>(2)</b>
+		{
+			if (ResolveObject(variables, Prefab, out GameObject prefab)) <i class="conum" data-value="3"></i><b>(3)</b>
+			{
+				var spawned = Instantiate(prefab);
+
+				Assign(variables, ObjectVariable, VariableValue.Create(spawned)); <i class="conum" data-value="4"></i><b>(4)</b>
+			}
+
+			graph.GoTo(Next, nameof(Next)); <i class="conum" data-value="5"></i><b>(5)</b>
+
+			yield break;
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="colist arabic">
+<table>
+<tr>
+<td><i class="conum" data-value="1"></i><b>1</b></td>
+<td><a href="#reference/intruction-graph-node.html">InstructionGraphNode</a> fields on a node will automatically be added as branch options for that node in the Instruction Graph Window.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="2"></i><b>2</b></td>
+<td>The third parameter <em>iteration</em> will increment if this node is an <a href="#reference/i-sequence-node.html">ISequenceNode</a> or an <a href="#reference/i-loop-node.html">ILoopNode</a> every time this node is repeated.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="3"></i><b>3</b></td>
+<td>Numerous <code>Resolve()</code> helper methods are provided on the base <a href="#reference/instruction-graph-node.html">InstructionGraphNode</a> class to simplify retrieving typed objects from <a href="#reference/variable-reference.html">variable references</a> and <a href="reference/variable-source.html">variable sources</a>.</td>
+</tr>
+<tr>
+<td><i class="conum" data-value="4"></i><b>4</b></td>
+<td>The <code>Assign()</code> helper method is also provided for setting <a href="reference/variable-value.html">values</a> to <a href="reference/variable-reference.html">references</a></td>
+</tr>
+<tr>
+<td><i class="conum" data-value="5"></i><b>5</b></td>
+<td>Call <code>graph.GoTo()</code> to tell the graph that this node has finished performing its actions. If the passed node is <code>null</code>, or if <code>graph.GoTo()</code> is not called before the run method finishes, then the graph will finish. The second parameter is simply a label used in debugging for tracking the flow execution in the Instruction Graph Window</td>
+</tr>
+</table>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

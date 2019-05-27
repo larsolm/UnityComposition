@@ -1,0 +1,63 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/selection-node">Selection Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Selection Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that will tell a <a href="#manual/selection-control.html">Selection Control</a> to show a list of selections created via <a href="#reference/menu-item-template.html">MenuItemTemplates</a>. Showing a selection will automatically activate the <a href="#manual/selection-control.html">Selection Control</a> and will hide it once a selection has been made if <em>AutoHide</em> is <code>true</code>. If <em>AutoHide</em> is <code>false</code> then a <a href="#manual/hide-control-node.html">Hide Control Node</a> must be used to deactivate it. When a selection is made the selected item and index will be assigned to <a href="#reference/variables-referenece.html">variables</a> specified by <em>SelectedItem</em> and <em>SelectedIndex</em>. The graph will then branch to the corresponding node of the <a href="#reference/selection-node-item.html">selected item</a>. Create a Selection Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Interface</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Selection</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="topics/interface/menus-and-selections.html">Menus and Selections</a> for more information on selections.<br>
+See the <a href="#topics/graphs/overview.html">Graphs</a> for more information on instruction graphs.<br>
+See the <em>"Shop"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Shop project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_57">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/selection-node.png" alt="Selection Node">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Control</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <a href="#reference/variable-reference.html">VariableReference</a> to the <a href="#manual/selection-control.html">Selection Control</a> that should display <em>Items</em></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected Item</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <a href="#reference/variable-reference.html">VariableReference</a> to store the <a href="#reference/variable-value.html">Value</a> of the selected item in</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Selected Index</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">A <a href="#reference/variable-reference.html">VariableReference</a> to store the index of the selected item in</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Is Selection Required</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether or not the selection can be canceled (no item is selected)</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto Hide</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to deactivate the <em>Control</em> once the selection has been made</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Items</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of <a href="reference/selection-node-item.html">Selection Items</a> that will appear in the selection</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/selection-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

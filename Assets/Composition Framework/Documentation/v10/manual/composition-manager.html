@@ -1,0 +1,12 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/composition-manager">Composition Manager</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>The Composition Manager is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> that manages the entire composition system. Because Composition Manager is a <a href="#reference/global-behaviour-1.html">GlobalBehaviour</a>, it is created automatically the first time it is accessed so it does not need to be added to any objects in a scene. Composition Manager maintains a "global" <a href="#reference/i-variable-store.html">IVariableStore</a> that can be accessed from any <a href="#manual/variable-binding.html">VariableReference</a> or <a href="#manual/expression.html">Expression</a> using the <code>"global"</code> accessor. It also maintains the "scene" <a href="#reference/i-variable-store.html">IVariableStore</a>, which gives access to <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObjects</a> in the scene by name using the <code>"scene"</code> accessor. <a href="#manual/instruction-graph.html">Instruction Graphs</a> can be manually run from script through the Composition Manager using the <code>Run()</code> method.</p>
+</div>
+<div class="paragraph">
+<p><a href="#reference/composition-manager.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>`);

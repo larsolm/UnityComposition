@@ -1,0 +1,143 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="topics/interface/messages">Message Controls</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Message Controls are an <a href="#manual/interface-control.html">Interface Control</a> used to show a <a href="#reference/message.html">message</a> on a <a href="http://digitalnativestudios.com/textmeshpro/docs/" target="_blank" rel="noopener">TextMeshPro</a> component. Use a <a href="#manual/message-node.html">Message Node</a> to activate a message control and a <a href="#manual/message-input.html">Message Input</a> behaviour to advance the text with input. When shown a message controls starts a <a href="https://docs.unity3d.com/ScriptReference/Coroutine.html" target="_blank" rel="noopener">Coroutine</a> that will run until the message is finished. Utilizing this coroutine, custom messages can be implemented to show certain pages that advance with input, scrolling, letter by letter typewriting, etc. A <a href="#manual/message-node.html">Message Node</a> may also optionally wait for the message to complete before moving on to subsequent nodes. A message control&#8217;s <em>IsRunning</em> flag will be set from when it is shown to when it is finished.</p>
+</div>
+<div class="sect2">
+<h3 id="_message_node">Message Node</h3>
+<div class="paragraph">
+<p>Create a Message Node in a <a href="#topics/graphs/overview.html">graph</a> using the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Interface</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Message</b></span> menu of the Instruction Graph Window. A Message Node will activate a message control, which enables the referenced <a href="http://digitalnativestudios.com/textmeshpro/docs/" target="_blank" rel="noopener">TextMeshPro</a> component and set its text to a resolved <a href="#reference/message.html">Message</a>. The node can automacally deactivate the message control when it is finished if <em>AutoHide</em> is <code>true</code>. If <em>AutoHide</em> is <code>false</code> then a <a href="#manual/hide-control-node.html">Hide Control Node</a> must be used to deactivate it. Message nodes can also delay the amount of time to wait before they deactivate the message control with the <em>WaitTime</em> field.</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/interface/message-node-example.png" alt="message node example">
+</div>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_message">Message</h3>
+<div class="paragraph">
+<p>A <a href="#reference/message.html">message</a> is the string that will be displayed and can be dynamically formatted using <a href="#topics/variables/overview.html">variables</a>. To add formatted variables insert a variable reference between braces (<code>{}</code>). For example in following message:</p>
+</div>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/topics/interface/message-example.png" alt="message example">
+</div>
+</div>
+<div class="paragraph">
+<p>The variables <code>global.Player.Name</code> and <code>local.Npc.Name</code> will be resolved at runtime with the <a href="#topics/graphs/instruction-store.html">instruction store</a> on the message node, and the message control will display the text accordingly (provided those variables exist). Variables that are not strings will have <code>.ToString()</code> called on them so numbers can be displayed as well.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_input">Input</h3>
+<div class="paragraph">
+<p>In order to maintain modularity of behaviours, responding to input in message controls should be done with separate components. Use a <a href="#manual/message-input.html">Message Input</a> component to wait for a specified button to be pressed to finish a message.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_custom_message_nodes">Custom Message Nodes</h3>
+<div class="paragraph">
+<p>The Message Control provides basic functionality for displaying text, however, most games display messages with much more custom behaviour. Message controls are designed with this in mind. The following example shows how to derive from <a href="#manual/message-control.html">Message Control</a> to create a paged, typewriter-like effect that responds to two button presses - to fast forward, and to advance:</p>
+</div>
+<div class="listingblock">
+<div class="content">
+<pre class="highlightjs highlight"><code class="language-css hljs" data-lang="css">using System.Collections.Generic;
+using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.UtilityEngine;
+using UnityEngine;
+
+namespace PiRhoSoft.CompositionExample
+{
+	public class TypewriterControl : MessageControl
+	{
+		public float CharactersPerSecond = 25.0f;
+
+		[NonSerialized]
+		public bool FastForward = false;
+
+		protected override IEnumerator Run()
+		{
+			DisplayText.maxVisibleCharacters = 0;
+
+			yield return null; // consume the press that opened the message
+
+			for (var page = 0; page &lt; DisplayText.textInfo.pageCount; page++)
+			{
+				yield return ShowPage(page);
+
+				IsAdvancing = false;
+
+				while (!IsAdvancing)
+					yield return null;
+			}
+
+			yield return null;
+		}
+
+		private IEnumerator ShowPage(int index)
+		{
+			var page = DisplayText.textInfo.pageInfo[index];
+			var characterCount = page.lastCharacterIndex - page.firstCharacterIndex + 1;
+			var characterDelay = CharactersPerSecond &lt;= 0.0f ? 0.0f : 1.0f / CharactersPerSecond;
+			var delay = characterDelay;
+
+			DisplayText.maxVisibleCharacters = page.firstCharacterIndex;
+			DisplayText.pageToDisplay = index + 1;
+
+			while (DisplayText.maxVisibleCharacters &lt; characterCount)
+			{
+				if (FastForward)
+				{
+					// fast forward to the end of the text (one character per frame)
+					characterDelay = 0.0f;
+					delay = 0.0f;
+				}
+				else if (IsAdvancing)
+				{
+					// skip to the end of the page
+					DisplayText.maxVisibleCharacters = characterCount;
+				}
+				else if (delay &lt;= 0.0f)
+				{
+					delay += characterDelay;
+					DisplayText.maxVisibleCharacters++;
+				}
+
+				delay -= Time.deltaTime;
+
+				yield return null;
+			}
+		}
+	}
+
+	public class TypewriterInput : MonoBehaviour
+	{
+		public string FastForwardButton = "Cancel";
+		public string NextButton = "Submit";
+
+		private TypewriterControl _typewriter;
+
+		void Awake()
+		{
+			_typewriter = GetComponent&lt;TypewriterControl&gt;();
+		}
+
+		void Update()
+		{
+			_typewriter.FastForward = InputHelper.GetButtonDown(FastForwardButton);
+
+			if (InputHelper.GetWasButtonPressed(NextButton))
+				_typewriter.Advance();
+		}
+	}
+}</code></pre>
+</div>
+</div>
+<div class="paragraph">
+<p>Simply override the <code>Run()</code> method and implement your custom behaviour. Notice how <code>Run()</code> returns an <a href="https://docs.microsoft.com/en-us/dotnet/api/system.collections.ienumerator?view=netframework-4.80" target="_blank" rel="noopener">IEnumerator</a>. As mentioned before, this is because message controls are implemented as a <a href="https://docs.unity3d.com/ScriptReference/Coroutine.html" target="_blank" rel="noopener">Coroutine</a>. When the method ends <em>IsRunning</em> will be set to <code>false</code>.</p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

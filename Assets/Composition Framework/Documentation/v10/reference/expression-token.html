@@ -1,0 +1,38 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/expression-token">ExpressionToken</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.ExpressionToken</p>
+</div>
+<div class="sect2">
+<h3 id="_description_56">Description</h3>
+<div class="paragraph">
+<p>Stores the data for a sequence of characters as identified by the <a href="#reference/expression-lexer.html">ExpressionLexer</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_27">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/expression-token-type.html">ExpressionTokenType</a> <em>Type</em></dt>
+<dd>
+<p>Specifies how the <a href="#reference/expression-parser.html">ExpressionParser</a> should interpret this token.</p>
+</dd>
+<dt class="hdlist1">int <em>Location</em></dt>
+<dd>
+<p>The index in the source text that identifies the beginning of this token.</p>
+</dd>
+<dt class="hdlist1">int <em>Start</em></dt>
+<dd>
+<p>The index in the source text that identifies the beginning of the relevant text of this token. As opposed to <em>Location</em> this will not include any introductory characters and instead identifies the index relevant to the <a href="#reference/expression-parser.html">ExpressionParser</a>.</p>
+</dd>
+<dt class="hdlist1">int <em>End</em></dt>
+<dd>
+<p>The index in the source text that identifies the beginning of the relevant text of this token. Similarly to <em>Start</em>, this will not include any trailing characters in the token that are not relevant to the <a href="#reference/expression-parser.html">ExpressionParser</a>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

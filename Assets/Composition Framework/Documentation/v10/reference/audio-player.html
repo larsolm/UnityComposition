@@ -1,0 +1,45 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/audio-player">AudioPlayer</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.AudioPlayer : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a>, <a href="#reference/i-completion-notifier.html">ICompletionNotifier</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_7">Description</h3>
+<div class="paragraph">
+<p>Add this to any <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> to provide an interface for playing <a href="https://docs.unity3d.com/ScriptReference/AudioClip.html" target="_blank" rel="noopener">AudioClips</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_2">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">bool <em>IsComplete</em> <em>(read only)</em></dt>
+<dd>
+<p>This will return true as soon as the sound has completed. If the sound has not yet started, it is not considered complete, so this will return false. If the sound is set to loop, this will always return false.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_2">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void PlaySound(<a href="https://docs.unity3d.com/ScriptReference/AudioClip.html" target="_blank" rel="noopener">AudioClip</a> <em>sound</em>, float <em>volume</em>)</dt>
+<dd>
+<p>Plays <em>sound</em> at <em>volume</em> and returns immediately.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerator" target="_blank" rel="noopener">IEnumerator</a> PlaySoundAndWait(<a href="https://docs.unity3d.com/ScriptReference/AudioClip.html" target="_blank" rel="noopener">AudioClip</a> <em>sound</em>, float <em>volume</em>)</dt>
+<dd>
+<p>Plays <em>sound</em> at <em>volume</em> and returns an enumerator so it can be run as or from a <a href="https://docs.unity3d.com/Manual/Coroutines.html" target="_blank" rel="noopener">coroutine</a>. The enumerator will yield until <em>sound</em> has completed. If <em>sound</em> is set to loop, the enumerator
+will break immediately and an error will be printed. Call <em>PlaySound</em> instead to run looping sounds.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/audio-player.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

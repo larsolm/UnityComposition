@@ -1,0 +1,57 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/axis-input">Axis Input</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>Axis Input is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> that will set a value on an input axis when an object is clicked. This can be used in conjunction with the <a href="#reference/input-helper.html">InputHelper</a> to create virtual axes for things like on screen buttons in a mobile game that move a character directionally or to trigger actions.</p>
+</div>
+<div class="paragraph">
+<p>See the <em>"MazeUI"</em> scene in the Maze project for an example usage.</p>
+</div>
+<div class="admonitionblock note">
+<table>
+<tr>
+<td class="icon">
+<i class="fa icon-note" title="Note"></i>
+</td>
+<td class="content">
+Because this uses Unity&#8217;s IPointerHandler interface the object must have either a <a href="https://docs.unity3d.com/ScriptReference/UI.Graphic.html" target="_blank" rel="noopener">Graphic</a> or a <a href="https://docs.unity3d.com/ScriptReference/Collider.html" target="_blank" rel="noopener">Collider</a> and the <a href="https://docs.unity3d.com/ScriptReference/Canvas.html" target="_blank" rel="noopener">Canvas</a> or <a href="https://docs.unity3d.com/ScriptReference/Camera.html" target="_blank" rel="noopener">Camera</a> must have a <a href="https://docs.unity3d.com/ScriptReference/UI.GraphicRaycaster.html" target="_blank" rel="noopener">GraphicRaycaster</a> or <a href="https://docs.unity3d.com/ScriptReference/EventSystems.PhysicsRaycaster.html" target="_blank" rel="noopener">PhysicsRaycaster</a> respectively.
+</td>
+</tr>
+</table>
+</div>
+<div class="sect2">
+<h3 id="_fields">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/axis-input.png" alt="Axis Input">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Axis Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the input axis to set when clicked</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Axis Value</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The value to set the input axis to when clicked</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/axis-input.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

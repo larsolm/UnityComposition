@@ -1,0 +1,78 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/play-effect-node">Play Effect Node</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Play Effect Node is an <a href="#manual/instruction-graph-node.html">Instruction Graph Node</a> that will spawn a prefab at the given Name, Position, and Rotation relative to the world, another object, or as a child object. The created effect can optionally be stored in a given <a href="#reference/variable-reference.html">VariableReference</a> so that it can be accessed later. This differs from a standard <a href="#manual/create-game-object-node.html">Create Game Object Node</a> in that a Play Effect Node can <em>WaitForCompletion</em> of the effect and destroy it when it is finished. The created effect object is queried for <a href="https://docs.unity3d.com/ScriptReference/ParticleSystem.html" target="_blank" rel="noopener">ParticleSystems</a> and other components that implement <a href="#reference/i-completion-notifier.html">ICompletionNotifier</a> to determine when the effect is finished. Create a Play Effect Node in the <span class="menuseq"><b class="menu">Create</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="submenu">Animation</b>&#160;<i class="fa fa-angle-right caret"></i> <b class="menuitem">Play Effect</b></span> menu of the Instruction Graph Window.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/overview.html">Graphs</a> for more information on instruction graphs.<br>
+See the <em>"Play Jewel Sparkle"</em> node on the <em>"MazeJewel"</em> <a href="#manual/instruction-graph.html">Instruction Graph</a> in the Maze project for an example usage.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_51">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/play-effect-node.png" alt="Play Effect">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Effect</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The prefab of the effect object to create</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Effect Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the new object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Effect Variable</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/variable-reference.html">VariableReference</a> to store the created object in</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Positioning</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/create-game-object-node-object-position.html">ObjectPositioning</a> to create the object at</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Object</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <em>Positioning</em> is <code>Relative</code>, the object to position the created object relative to</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Parent</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">If <em>Positioning</em> is <code>Child</code>, the object to make the parent of the created object</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Position</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The position of the effect - can be a <a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> value or a <a href="#reference/variable-reference.html">VariableReference</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Rotation</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The rotation of the effect - can be a <a href="https://docs.unity3d.com/ScriptReference/Vector3.html" target="_blank" rel="noopener">Vector3</a> value or a <a href="#reference/variable-reference.html">VariableReference</a>, stored as euler angles</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Wait For Completion</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to wait until the effect has finished playing before moving on to the next node</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Destroy On Complete</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to destroy the created effect when it has finished playing</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/play-effect-node.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,37 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/transition">Transition</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Transition is an <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">Asset</a> used to create post processing effects on a <a href="https://docs.unity3d.com/ScriptReference/Camera.html" target="_blank" rel="noopener">Camera</a>, usually used during scene changes to hide, obscure, then reshow the screen. Transition itself is an abstract class that should be derived from to achieve the desired effects. Transitions operate using <a href="https://docs.unity3d.com/ScriptReference/Shader.html" target="_blank" rel="noopener">Shaders</a>, which are set in the editor with the <em>Shader</em> field. Transitions have three <a href="reference/transition-phase.html">Phases</a>, <code>Out</code>, <code>Obscure</code>, <code>In</code>, with each one being initiated separately, usually by a <a href="#manual/play-transition-node.html">Play Transition Node</a>. For example implementations of a Transition see the <a href="#manual/fade.html">Fade</a>, <a href="#manual/dissolve.html">Dissolve</a>, and <a href="#manual/pixelate.html">Pixelate</a> Transitions.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_72">Fields</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Shader</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="https://docs.unity3d.com/ScriptReference/Shader.html" target="_blank" rel="noopener">Shader</a> that this Transition will use to display its effect</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Duration</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The amount of time this Transition will take to complete.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/transition.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

@@ -1,0 +1,75 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/variable-set-component">VariableSetComponent</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.VariableSetComponent : <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a>, <a href="#reference/i-schema-owner.html">ISchemaOwner</a>, <a href="#reference/i-variable-reset.html">IVariableReset</a>, <a href="#reference/i-variable-store.html">IVariableStore</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_225">Description</h3>
+<div class="paragraph">
+<p>Add this to any <a href="https://docs.unity3d.com/ScriptReference/GameObject.html" target="_blank" rel="noopener">GameObject</a> to store <a href="#reference/variable.html">Variables</a> that are defined by a <a href="#reference/variable-schema.html">VariableSchema</a>. This can also be used as a base class for behaviours that need to expose variables defined in code to the variables system.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_112">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-set.html">VariableSet</a> <em>Variables</em></dt>
+<dd>
+<p>The <a href="#reference/variable.html">Variables</a> stored by this asset that are defined in <em>Schema</em>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_43">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-schema.html">VariableSchema</a> <em>Schema</em> <em>(read only)</em></dt>
+<dd>
+<p>The <a href="#reference/variable-schema.html">VariableSchema</a> used to define <em>Variables</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/mapped-variable-store.html">MappedVariableStore</a> <em>Store</em> <em>(read only)</em></dt>
+<dd>
+<p>The store providing the mapping for all the <a href="#reference/variable.html">Variables</a> in this asset - both <em>Variables</em> and those defined in code using <a href="#reference/variable-mapping-attribute.html">VariableMapping</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_50">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void SetupSchema()</dt>
+<dd>
+<p>One time setup to initialize <em>Store</em>. This is managed automatically.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(string <em>name</em>)</dt>
+<dd>
+<p>Returns the variable, defined by either <em>Schema</em> or with <a href="#reference/variable-mapping-attribute.html">VariableMappings</a> with name <em>name</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Sets the variable, defined by either <em>Schema</em> or with <a href="#reference/variable-mapping-attribute.html">VariableMappings</a>, with name <em>name</em> to <em>value</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames()</dt>
+<dd>
+<p>Returns the names of all the variables, defined by either <em>Schema</em> or with <a href="#reference/variable-mapping-attribute.html">VariableMappings</a>.</p>
+</dd>
+<dt class="hdlist1">void ResetTag(string <em>tag</em>)</dt>
+<dd>
+<p>Resets all the variables defined in <em>Schema</em> with with tag <em>tag</em>.</p>
+</dd>
+<dt class="hdlist1">void ResetVariables(<a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; <em>variables</em>)</dt>
+<dd>
+<p>Resets all the variables in <em>variables</em>.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/variable-set-component.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

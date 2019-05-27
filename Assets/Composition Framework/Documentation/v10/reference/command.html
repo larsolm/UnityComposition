@@ -1,0 +1,51 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/command">Command</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.Command : <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">ScriptableObject</a>, <a href="#reference/i-command.html">ICommand</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_27">Description</h3>
+<div class="paragraph">
+<p>Defines an <a href="#reference/expression.html">Expression</a> that can be called from other <a href="#reference/expression.html">Expressions</a>.</p>
+</div>
+<div class="paragraph">
+<p>See the <a href="#topics/variables/custom-commands.html"><em>Writing Custom Commands</em></a> topic for more information.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_fields_10">Public Fields</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">string <em>Name</em></dt>
+<dd>
+<p>The name to use in an <a href="#reference/expression.html">Expression</a> to run this command.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/command-parameter-list.html">ParameterList</a> <em>Parameters</em></dt>
+<dd>
+<p>The list of <a href="#reference/command-parameter.html">CommandParameters</a> that should be passed to the command.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/expression.html">Expression</a> <em>Expression</em></dt>
+<dd>
+<p>The <a href="#reference/expression.html">Expression</a> that is evaluated when this command is called.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_7">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> Evaluate(<a href="#reference/i-variable-store.html">IVariableStore</a> <em>variables</em>, string <em>name</em>, <a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1" target="_blank" rel="noopener">List</a>&lt;<a href="#reference/operation.html">Operation</a>&gt; <em>parameters</em>)</dt>
+<dd>
+<p>Validates <em>parameters</em> against the types defined in <em>Parameters</em> and, if valid, evaluates <em>Expression</em>. The result of executing <em>Expression</em> is returned. If the <em>parameters</em> are not valid, a <a href="#reference/command-evaluation-exception.html">CommandEvaluationException</a> will be thrown. If execution of <em>Expression</em> fails, an <a href="#reference/expression-evaluation-exception.html">ExpressionEvaluationException</a> will be thrown.</p>
+</dd>
+</dl>
+</div>
+<div class="paragraph">
+<p><a href="#manual/command.html">Manual</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

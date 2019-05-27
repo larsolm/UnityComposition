@@ -1,0 +1,47 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/variable-set-component">Variable Set Component</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Variable Set Component is a <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> that adds a <a href="#reference/variable-pool.html">Variable Set</a> to the object. This allows it to have a list of <a href="#reference/variable-value.html">Variables</a> that are defined by a reference to a <a href="#manual/variable-schema.html">Variable Schema</a>. A derived class of Variable Set Component can use the <a href="#reference/mapped-variable-attribute.html">MappedVariableAttribute</a> to add its fields and properties to the <em>Variables</em> list in addition to those defined by <em>Schema</em>.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/variables/overview.html">Variables</a> for more information.<br>
+See the <em>"Triangle"</em> and <em>"Hexagon"</em> objects in the <em>"Battle"</em> scene of the Battle project for an example usage.<br>
+See the <em>"Player"</em> script in the Maze project for an example implementation that uses <a href="#reference/mapped-variable-attribute.html">mapped variables</a>.</p>
+</div>
+<div class="sect2">
+<h3 id="_fields_81">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/variable-set-component.png" alt="Variable Set Component">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Schema</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/variable-schema.html">Variable Schema</a> to use for this <a href="#reference/variable-set.html">Variable Set</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Variables</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of <a href="#manual/variable-value">Variables</a> mapped from <em>Schema</em> and derived script classes</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/variable-set-component.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

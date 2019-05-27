@@ -1,0 +1,61 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="reference/mapped-variable-store">MappedVariableStore</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>PiRhoSoft.CompositionEngine.MappedVariableStore : <a href="#reference/i-variable-store.html">IVariableStore</a></p>
+</div>
+<div class="sect2">
+<h3 id="_description_115">Description</h3>
+<div class="paragraph">
+<p>An <a href="#reference/i-variable-store.html">IVariableStore</a> implementation that provides an <a href="#reference/mapped-variable-attribute.html">attribute</a> based interface for exposing properties and fields defined in code to the <a href="#topics/variables/overview.html">variables</a> system. This is used by <a href="#reference/variable-set-component.html">VariableSetComponent</a> and <a href="#reference/variable-set-asset.html">VariableSetAsset</a>.</p>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_properties_19">Public Properties</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">int <em>VariableCount</em> <em>(read only)</em></dt>
+<dd>
+<p>The total number of variables in the store.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect2">
+<h3 id="_public_methods_26">Public Methods</h3>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">void Setup(Object <em>owner</em>, <a href="#reference/variable-schema.html">VariableSchema</a> <em>schema</em>, <a href="#reference/variable-set.html">VariableSet</a> <em>variables</em>)</dt>
+<dd>
+<p>Initializes the store with <a href="#reference/mapped-variable-attribute.html">MappedVariables</a> from <em>owner</em> and <a href="#reference/variables.html">Variables</a> defined by <em>schema</em>. <em>variables</em> is initialized with <em>schema</em> as well.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariable(string <em>name</em>)</dt>
+<dd>
+<p>Returns the value of the variable with name <em>name</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariable(string <em>name</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Sets the value of the variable with name <em>name</em> to _value.</p>
+</dd>
+<dt class="hdlist1"><a href="https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1" target="_blank" rel="noopener">IList</a>&lt;string&gt; GetVariableNames()</dt>
+<dd>
+<p>Returns a list of the names of all the variables in this store.</p>
+</dd>
+<dt class="hdlist1">string GetVariableName(int <em>index</em>)</dt>
+<dd>
+<p>Returns the name of the variable at index <em>index</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/variable-value.html">VariableValue</a> GetVariableValue(int <em>index</em>)</dt>
+<dd>
+<p>Returns the value of the variable at index <em>index</em>.</p>
+</dd>
+<dt class="hdlist1"><a href="#reference/set-variable-result.html">SetVariableResult</a> SetVariableValue(int <em>index</em>, <a href="#reference/variable-value.html">VariableValue</a> <em>value</em>)</dt>
+<dd>
+<p>Sets the value of the variable at index <em>index</em> to <em>value</em>.</p>
+</dd>
+</dl>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

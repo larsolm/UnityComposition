@@ -1,0 +1,56 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/instruction-graph">Instruction Graph</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>An abstract <a href="https://docs.unity3d.com/ScriptReference/ScriptableObject.html" target="_blank" rel="noopener">Asset</a> that is the main component of the composition system. Create graphs and use the Instruction Graph Window to build <a href="#manual/instruction-graph-node.html">Nodes</a> that execute actions, and create connections to traverse through each node sequentially, similar to a flow chart. An Instruction Graph can have Input <a href="#reference/variable-value.html">Values</a> that are passed in from the calling object and Output <a href="#reference/variable-value.html">Values</a> that it returns to the calling object. All graphs have a <em>Context</em> <a href="#reference/variable-value.html">Value</a> which is usually set to the object that originally ran the graph. Edit the <a href="#reference/variable-definition.html">Definitions</a> for the <em>Context</em>, <em>Inputs</em>, and <em>Outputs</em> in the inspector for an Instruction Graph, and each of them will automatically be cast to the correct type in script. Built in Instruction Graph types are the <a href="manual/simple-graph.html">Simple Graph</a>, <a href="manual/scoped-graph.html">Scoped Graph</a>, and the <a href="manual/mockup-graph.html">Mockup Graph</a> (used for prototyping).</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/graphs/overview.html">Graphs</a> for more information.<br></p>
+</div>
+<div class="sect2">
+<h3 id="_fields_27">Fields</h3>
+<div class="imageblock">
+<div class="content">
+<img src="v10/images/manual/instruction-graph.png" alt="Instruction Graph">
+</div>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Context Name</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The string name of the context <a href="#reference/variable-value.html">Value</a> to be accessed in <a href="#reference/expression.html">Expressions</a> and <a href="#reference/variable-reference.html">VariableReferences</a></p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Context Definition</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#reference/variable-definition.html">VariableDefinition</a> to cast the context <a href="#reference/variable-value.html">Value</a> to when the Instruction is run</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Inputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of <a href="#reference/variable-definition.html">VariableDefinitions</a> that describes the inputs into the Instruction</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Outputs</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The list of <a href="#reference/variable-definition.html">VariableDefinitions</a> that describes the outputs from the Instruction</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><span class="image"><img src="v10/images/manual/instruction-graph-window.png" alt="instruction graph window"></span></p>
+</div>
+<div class="paragraph">
+<p><a href="#reference/instruction-graph.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);

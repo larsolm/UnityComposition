@@ -1,0 +1,44 @@
+PageLoader.response(`<div class="sect1">
+<h2 id="manual/variable-binding">Variable Binding</h2>
+<div class="sectionbody">
+<div class="paragraph">
+<p>A Variable Binding is an abstract <a href="https://docs.unity3d.com/ScriptReference/MonoBehaviour.html" target="_blank" rel="noopener">MonoBehaviour</a> used to bind data from the composition system, usually via <a href="#reference/variable-reference.html">VariableReferences</a>, to visual elements in the scene. By default a Variable Binding has access to the <a href="#manual/composition-manager.html">Composition Manager</a>'s "global" and "scene" <a href="#reference/i-variable-store.html">IVariableStores</a>. If a Variable Binding has a parent or parents with a <a href="#manual/binding-root.html">Binding Root</a> they can access the <em>Value</em> property on those <a href="#manual/binding-root.html">Binding Roots</a> via their <em>ValueName</em> property. Variable Bindings can be categorized into groups with the <em>BindingGroup</em> property so that only certain bindings will update when they are prompted (usually by an <a href="manual/update-binding-node.html">Update Binding Node</a>. If <em>AutoUpdate</em> is set then Variable Bindings will update automatically every frame. Most Variable Bindings will disable their corresponding visual element if they fail to retreive their data and report the error, however, sometimes this may be intended behaviour so if set, <em>SuppressErrors</em> will hide those errors. Some example implementations of a Variable Binding are <a href="#manual/enable-binding.html">Enable Binding</a>, <a href="#manual/image-binding.html">Image Binding</a>, and <a href="#manual/string-binding.html">String Binding</a>.</p>
+</div>
+<div class="paragraph">
+<p>See <a href="#topics/bindings/variable-bindings.html">Variable Bindings</a> for more information.<br></p>
+</div>
+<div class="sect2">
+<h3 id="_fields_75">Fields</h3>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 33.3333%;">
+<col style="width: 66.6667%;">
+</colgroup>
+<thead>
+<tr>
+<th class="tableblock halign-left valign-top">Name</th>
+<th class="tableblock halign-left valign-top">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Binding Group</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The string name of the group this binding belongs to</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Auto Update</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to automatically update this binding every frame</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Suppress Errors</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">Whether to hide errors reported from invalid variable access</p></td>
+</tr>
+</tbody>
+</table>
+<div class="paragraph">
+<p><a href="#reference/variable-binding.html">Reference</a></p>
+</div>
+<div style="page-break-after: always;"></div>
+</div>
+</div>
+</div>`);
