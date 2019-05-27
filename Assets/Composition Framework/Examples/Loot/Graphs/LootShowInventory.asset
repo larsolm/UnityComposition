@@ -52,7 +52,7 @@ MonoBehaviour:
   Next: {fileID: 114862197161052028}
   Source: 0
   Scene:
-    Path: Assets/Examples/Loot/Scenes/LootMenu.unity
+    Path: Assets/Composition Framework/Examples/Loot/Scenes/LootMenu.unity
   SceneVariable:
     _variable: 
     _tokens: []
