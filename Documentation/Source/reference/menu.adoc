@@ -40,6 +40,10 @@ Subscribe to this callback to receive a notification any time the menu is closed
 
 ### Public Properties
 
+bool _AcceptsInput_::
+
+Specifies whether or not a sibling <<reference/menu-input.html,MenuInput>> can control this Menu. <<reference/selection-control.html,SelectionControl>> will disable this while it is not active.
+
 https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^]<<<reference/menu-item.html,MenuItem>>> _Items_ _(read only)_::
 
 The <<reference/menu-item.html,MenuItems>> in this menu. This is automatically updated to reflect the current set of <<reference/menu-item.html,MenuItems>> that are children of this object.

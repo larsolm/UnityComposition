@@ -24,6 +24,7 @@ namespace PiRhoSoft.CompositionEngine
 		private int _removedFocus = -1;
 		private bool _itemsDirty = false;
 
+		public bool AcceptsInput { get; set; } = true;
 		public MenuItem FocusedItem { get => _focusedItem; set => SetFocusedItem(value); }
 		public int FocusedIndex { get => _focusedItem != null ? _focusedItem.Index : -1; set => SetFocusedIndex(value); }
 

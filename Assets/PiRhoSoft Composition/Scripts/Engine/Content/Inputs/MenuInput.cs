@@ -82,14 +82,18 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			_menu = GetComponent<Menu>();
 			_menu.OnItemsChanged += RefreshLayout;
+			_menu.OnItemFocused += FocusChanged;
 
 			_shouldFocus = FocusOnLoad;
 		}
 
 		protected virtual void Update()
 		{
-			HandleButtons();
-			HandlePointer();
+			if (_menu.AcceptsInput)
+			{
+				HandleButtons();
+				HandlePointer();
+			}
 		}
 
 		#region Input
@@ -337,11 +341,15 @@ namespace PiRhoSoft.CompositionEngine
 			if (item != null && item.enabled)
 			{
 				_menu.FocusedItem = item;
-				ScrollToItem(item);
 				return true;
 			}
 
 			return false;
+		}
+
+		private void FocusChanged(MenuItem item)
+		{
+			ScrollToItem(item);
 		}
 
 		#endregion

@@ -36,6 +36,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			base.Awake();
 			_menu = GetComponent<Menu>();
+			_menu.AcceptsInput = false;
 		}
 
 		public void Show(IVariableStore variables, IEnumerable<MenuItemTemplate> items, bool isSelectionRequired, bool resetIndex)
@@ -52,6 +53,7 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			IsRunning = true;
 
+			_menu.AcceptsInput = true;
 			_menu.OnItemSelected += Select;
 			_menu.OnCancelled += Close;
 
@@ -59,6 +61,7 @@ namespace PiRhoSoft.CompositionEngine
 
 			_menu.OnItemSelected -= Select;
 			_menu.OnCancelled -= Close;
+			_menu.AcceptsInput = false;
 
 			IsRunning = false;
 		}
