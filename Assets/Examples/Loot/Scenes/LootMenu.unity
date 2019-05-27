@@ -3485,7 +3485,8 @@ MonoBehaviour:
     NumberFormatting: 3
     ValueFormat: 0.00
   Expression:
-    _statement: focus.equipment.Strength * focus.equipment.Speed / 100.0
+    _statement: 'focus.equipment is Store ? focus.equipment.Strength * focus.equipment.Speed
+      / 100.0 : 0'
 --- !u!114 &1691054027
 MonoBehaviour:
   m_ObjectHideFlags: 0
