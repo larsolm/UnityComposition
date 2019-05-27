@@ -62,27 +62,31 @@ document.addEventListener("DOMContentLoaded", function(event)
 
 	var _nextArticle =
 	{
-		"topics/graphs-1.html": "topics/graphs-2.html",
-		"topics/graphs-2.html": "topics/graphs-3.html",
-		"topics/graphs-3.html": "topics/graphs-4.html",
-		"topics/graphs-4.html": "topics/graphs-5.html",
-		"topics/graphs-5.html": "topics/graphs-6.html",
-		"topics/graphs-6.html": "topics/graphs-7.html",
-		"topics/graphs-7.html": "topics/graphs-8.html",
-		"topics/variables-1.html": "topics/variables-2.html",
-		"topics/variables-2.html": "topics/variables-3.html",
-		"topics/variables-3.html": "topics/variables-4.html",
-		"topics/variables-4.html": "topics/variables-5.html",
-		"topics/variables-5.html": "topics/variables-6.html",
-		"topics/variables-6.html": "topics/variables-7.html",
-		"topics/variables-7.html": "topics/variables-8.html",
-		"topics/bindings-1.html": "topics/bindings-2.html",
-		"topics/bindings-2.html": "topics/bindings-3.html",
-		"topics/bindings-3.html": "topics/bindings-4.html",
-		"topics/bindings-4.html": "topics/bindings-5.html",
-		"topics/interface-1.html": "topics/interface-2.html",
-		"topics/interface-2.html": "topics/interface-3.html",
-		"topics/interface-3.html": "topics/interface-4.html"
+		"tutorials/getting-started/setup.html": "tutorials/getting-started/game-logic.html",
+		"tutorials/getting-started/game-logic.html": "tutorials/getting-started/interfaces.html",
+		"tutorials/getting-started/interfaces.html": "tutorials/getting-started/transitions.html",
+		"tutorials/getting-started/transitions.html": "tutorials/getting-started/data-binding.html",
+		"topics/graphs/overview.html": "topics/graphs/nodes.html",
+		"topics/graphs/nodes.html": "topics/graphs/control-flow.html",
+		"topics/graphs/control-flow.html": "topics/graphs/instruction-store.html",
+		"topics/graphs/instruction-store.html": "topics/graphs/debugging.html",
+		"topics/graphs/debugging.html": "topics/graphs/running-from-script.html",
+		"topics/graphs/running-from-script.html": "topics/graphs/custom-graphs.html",
+		"topics/graphs/custom-graphs.html": "topics/graphs/custom-nodes.html",
+		"topics/variables/overview.html": "topics/variables/creating-variables.html",
+		"topics/variables/creating-variables.html": "topics/variables/defining-variables.html",
+		"topics/variables/defining-variables.html": "topics/variables/accessing-variables.html",
+		"topics/variables/accessing-variables.html": "topics/variables/writing-expressions.html",
+		"topics/variables/writing-expressions.html": "topics/variables/custom-commands.html",
+		"topics/variables/custom-commands.html": "topics/variables/exposing-variables.html",
+		"topics/variables/exposing-variables.html": "topics/variables/custom-stores.html",
+		"topics/bindings/overview.html": "topics/bindings/binding-roots.html",
+		"topics/bindings/binding-roots.html": "topics/bindings/variable-bindings.html",
+		"topics/bindings/variable-bindings.html": "topics/bindings/custom-binding-roots.html",
+		"topics/bindings/custom-binding-roots.html": "topics/bindings/custom-variable-bindings.html",
+		"topics/interface/overview.html": "topics/interface/controls.html",
+		"topics/interface/controls.html": "topics/interface/messages.html",
+		"topics/interface/messages.html": "topics/interface/menus-and-selections.html"
 	}
 
 	function IsSmallScreen()
@@ -404,10 +408,19 @@ document.addEventListener("DOMContentLoaded", function(event)
 
 		var hash = GetHash(_currentVersion, _currentArticle);
 
-		Load(_currentVersion + "/" + _currentArticle, SetArticleContent, function()
-		{
-			LoadArticle(_defaultArticle, false);
-		});
+		Load(_currentVersion + "/" + _currentArticle,
+			function(content)
+			{
+				if (pushState)
+					window.scrollTo(0, 0);
+
+				SetArticleContent(content);
+			},
+			function()
+			{
+				LoadArticle(_defaultArticle, false);
+			}
+		);
 
 		if (pushState)
 			window.history.pushState({ version: _currentVersion, article: _currentArticle }, "", hash);

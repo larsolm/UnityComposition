@@ -179,7 +179,6 @@ header .title a, header #title-text
 {
 	color: #EEE;
 	text-decoration: none;
-	font-size: 26px;
 	font-weight: bold;
 }
 
@@ -291,8 +290,9 @@ article
 	box-sizing: border-box;
 	max-width: 1140px;
 	min-height: 100%;
-	padding-top: 100px;
+	padding-top: 124px;
 	transition: margin-left 0.2s;
+	word-break: break-word;
 }
 
 article.loading
@@ -304,11 +304,28 @@ article a#next-button
 {
 	text-align: right;
 	display: block;
-	margin-right: 60px;
-	font-size: 1.3em;
-	margin-top: -30px;
-	margin-bottom: 20px;
 	text-decoration: none;
+}
+
+@media (min-width: 1024px)
+{
+	article a#next-button
+	{
+		margin-top: -30px;
+		margin-right: 60px;
+		margin-bottom: 20px;
+		font-size: 1.3em;
+	}
+}
+
+@media (max-width: 1023px)
+{
+	article a#next-button
+	{
+		padding: 20px;
+		margin-right: 20px;
+		margin-bottom: 0;
+	}
 }
 
 article a#next-button:hover, article a#next-button:hover i
@@ -429,6 +446,11 @@ footer .links a:hover
 		white-space: nowrap;
 	}
 
+	header .title a, header #title-text
+	{
+		font-size: 26px;
+	}
+	
 	article
 	{
 		padding-bottom: 60px;
@@ -465,6 +487,12 @@ footer .links a:hover
 		margin: 0;
 	}
 
+	header .title a, header #title-text
+	{
+		font-size: 20px;
+		line-height: 1.4em;
+	}
+	
 	article
 	{
 		padding-bottom: 140px;
