@@ -30,12 +30,12 @@ MonoBehaviour:
     _items:
     - {fileID: 114822524818316652}
     - {fileID: 114273874678444446}
-    - {fileID: 114456419000300960}
     - {fileID: 114447587388730026}
     - {fileID: 114985672940832184}
     - {fileID: 114351045605106056}
     - {fileID: 114230166674494026}
     - {fileID: 2453179549209600544}
+    - {fileID: 7307144075567427773}
   StartPosition: {x: 0, y: 0}
   Process: {fileID: 114822524818316652}
 --- !u!114 &114230166674494026
@@ -90,7 +90,7 @@ MonoBehaviour:
     _tokens:
     - Type: 0
       Text: space
-  Loop: {fileID: 114456419000300960}
+  Loop: {fileID: 7307144075567427773}
 --- !u!114 &114351045605106056
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -194,28 +194,6 @@ MonoBehaviour:
     - Type: 0
       Text: player
   Loop: {fileID: 114985672940832184}
---- !u!114 &114456419000300960
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e81db09edfc25024b94b5b1d2295f584, type: 3}
-  m_Name: Reset Space(Clone)
-  m_EditorClassIdentifier: 
-  Name: Reset Space
-  GraphPosition: {x: 947.2, y: -51.2}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Object:
-    _variable: space
-    _tokens:
-    - Type: 0
-      Text: space
-  Tag: NewGame
 --- !u!114 &114822524818316652
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -281,4 +259,22 @@ MonoBehaviour:
   Name: Creat a New Game
   GraphPosition: {x: 0, y: -64}
   IsBreakpoint: 0
-  Comment: Rest variables, and positions, of all players and their pieces.
+  Comment: Reset variables, and positions, of all players and their pieces.
+--- !u!114 &7307144075567427773
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: Reset Space
+  m_EditorClassIdentifier: 
+  Name: Reset Space
+  GraphPosition: {x: 947.2, y: -51.2}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: space.CurrentPiece = null
