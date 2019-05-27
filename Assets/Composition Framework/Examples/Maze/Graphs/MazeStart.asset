@@ -160,7 +160,7 @@ MonoBehaviour:
   Next: {fileID: 114874321698637932}
   Source: 0
   Scene:
-    Path: Assets/Examples/Maze/Scenes/MazeUi.unity
+    Path: Assets/Composition Framework/Examples/Maze/Scenes/MazeUi.unity
   SceneVariable:
     _variable: 
     _tokens: []
