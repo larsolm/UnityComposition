@@ -50,9 +50,9 @@ MonoBehaviour:
   m_Name: Is Poisoned
   m_EditorClassIdentifier: 
   Name: Is Poisoned
-  GraphPosition: {x: 704, y: -38.4}
+  GraphPosition: {x: 640, y: -38.4}
   IsBreakpoint: 0
-  OnTrue: {fileID: 114583920142565304}
+  OnTrue: {fileID: 114266749056173128}
   OnFalse: {fileID: 114778227458156200}
   Condition:
     _statement: fighter.Poison
@@ -69,9 +69,9 @@ MonoBehaviour:
   m_Name: Heal
   m_EditorClassIdentifier: 
   Name: Heal
-  GraphPosition: {x: 371.2, y: 76.8}
+  GraphPosition: {x: 960, y: -128}
   IsBreakpoint: 0
-  Next: {fileID: 114038718947476258}
+  Next: {fileID: 114583920142565304}
   Expression:
     _statement: fighter.Poison = false
 --- !u!114 &114368647590418722
@@ -89,7 +89,7 @@ MonoBehaviour:
   Name: Antidote Effect
   GraphPosition: {x: 332.80002, y: -25.6}
   IsBreakpoint: 0
-  Next: {fileID: 114266749056173128}
+  Next: {fileID: 114038718947476258}
   Effect:
     Type: 0
     Reference:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_Name: Healed Message
   m_EditorClassIdentifier: 
   Name: Healed Message
-  GraphPosition: {x: 1024, y: -64}
+  GraphPosition: {x: 1088, y: -38.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:
@@ -197,7 +197,7 @@ MonoBehaviour:
   m_Name: No Effect Message
   m_EditorClassIdentifier: 
   Name: No Effect Message
-  GraphPosition: {x: 1024, y: 38.4}
+  GraphPosition: {x: 960, y: 64}
   IsBreakpoint: 0
   Next: {fileID: 0}
   Control:

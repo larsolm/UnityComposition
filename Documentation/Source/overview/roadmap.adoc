@@ -47,3 +47,4 @@ This roadmap contains a list of features we have planned for future releases. Th
 * switching focused menus with MenuInput is based on item index without accounting for scrolling - it should be based on the item position instead
 * key events are not repeated when holding down a key
 * GetVariableNames in BindingRoot does not include names from _parent
+* Graphs will not be marked as changed when edited during play mode even though the edits will persist.
