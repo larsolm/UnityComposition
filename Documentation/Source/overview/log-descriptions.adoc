@@ -374,21 +374,7 @@ Effect:: The http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] will b
 
 Resolution:: If the effect of disabling the http://digitalnativestudios.com/textmeshpro/docs/[TMP_Text^] is desired, set _Suppress Errors_ on the <<manual/number-binding.html,NumberBinding>>. Otherwise, change the <<topics/variables/accessing-variables.html,VariableReference>> to a valid variable.
 
-#### CNSLS
-
-Unable to load scene on node '{0}': the variable '{1}' could not be found
-
-[cols="1,8"]
-|===
-| {0} | The <<manual/load-scene-node.html,LoadSceneNode>> that attempted to resolve the variable.
-| {1} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be found.
-|===
-
-Effect:: No scenes will be loaded or unloaded and the <<manual/load-scene-node.html,LoadSceneNode>> will complete immediately.
-
-Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
-
-#### CNSUS
+#### CUSNIS
 
 Unable to unload scene for node '{0}': the scene '{1}' could not be found
 
@@ -401,6 +387,34 @@ Unable to unload scene for node '{0}': the scene '{1}' could not be found
 Effect:: No scenes will be unloaded and the <<manual/unload-scene-node.html,UnloadSceneNode>> will complete immediately.
 
 Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
+
+#### CUSNLS
+
+Unable to unload scene on node '{0}': the scene '{1}' is the only loaded scene
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/unload-scene-node.html,UnloadSceneNode>> that attempted to unload the scene.
+| {1} | The name or build index of the scene that is the only loaded scene and could therefore not be unloaded.
+|===
+
+Effect:: No scenes will be unloaded and the <<manual/unload-scene-node.html,UnloadSceneNode>> will complete immediately.
+
+Resolution:: Load a different scene in non additive mode rather than unloading the scene.
+
+#### CUSNUI
+
+Unable to unload scene on node '{0}': the scene with index '{1}' is not loaded
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/unload-scene-node.html,UnloadSceneNode>> that attempted to unload the scene.
+| {1} | The build index of the scene that is not loaded and could therefore not be unloaded.
+|===
+
+Effect:: No scenes will be unloaded and the <<manual/unload-scene-node.html,UnloadSceneNode>> will complete immediately.
+
+Resolution:: Change the scene index to a scene that is currently loaded.
 
 #### CVBIA
 
@@ -793,6 +807,48 @@ Effect:: The output will not be assigned.
 
 Resolution:: Either change the <<topics/variables/creating-variables.html,variable>> the output is assigned to to one with a compatible type or one that can be set to any value, or set the output to be ignored.
 
+#### CLSNII
+
+Unable to load scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/load-scene-node.html,LoadSceneNode>> that attempted to load the scene.
+| {1} | The build index of the scene that could not be found.
+|===
+
+Effect:: No scenes will be loaded or unloaded and the <<manual/load-scene-node.html,LoadSceneNode>> will complete immediately.
+
+Resolution:: Change the build index to a valid scene that has been added to the project's build settings.
+
+#### CLSNIN
+
+Unable to load scene on node '{0}': the name '{1}' is not a valid scene - make sure the scene exists and has been added to the build settings";
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/load-scene-node.html,LoadSceneNode>> that attempted to load the scene.
+| {1} | The name of the scene that could not be found.
+|===
+
+Effect:: No scenes will be loaded or unloaded and the <<manual/load-scene-node.html,LoadSceneNode>> will complete immediately.
+
+Resolution:: Make sure the scene name is a valid scene that has been added to the project's build settings.
+
+#### CLSNIS
+
+Unable to load scene on node '{0}': the variable '{1}' could not be found
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/load-scene-node.html,LoadSceneNode>> that attempted to resolve the variable.
+| {1} | The <<topics/variables/accessing-variables.html,VariableReference>> that could not be found.
+|===
+
+Effect:: No scenes will be loaded or unloaded and the <<manual/load-scene-node.html,LoadSceneNode>> will complete immediately.
+
+Resolution:: Change the <<topics/variables/accessing-variables.html,VariableReference>> to a variable that resolves to either an `Int` or `String`.
+
 #### CSCIE
 
 Failed to expand item '{0}' on SelectionControl '{1}': the variable '{2}' is not a List
@@ -892,6 +948,34 @@ Failed to load Transition '{0}': the shader has not been set
 Effect:: The <<manual/transition.html,Transition>> will do nothing.
 
 Resolution:: Assign _Shader_ on the <<manual/transition.html,Transition>>.
+
+#### CUSNII
+
+Unable to unload scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/unload-scene-node.html,UnloadSceneNode>> that attempted to unload the scene.
+| {1} | The build index of the scene that could not be found.
+|===
+
+Effect:: No scenes will be unloaded and the <<manual/unload-scene-node.html,UnloadSceneNode>> will complete immediately.
+
+Resolution:: Change the build index to a valid scene or add the specified scene to the project's build settings.
+
+#### CUSNIN
+
+Unable to unload scene on node '{0}': a scene with name '{1}' is not loaded - make sure the scene exists and has been added to the build settings";
+
+[cols="1,8"]
+|===
+| {0} | The <<manual/unload-scene-node.html,UnloadSceneNode>> that attempted to unload the scene.
+| {1} | The name of the scene that could not be found in the set of loaded scenes.
+|===
+
+Effect:: No scenes will be unloaded and the <<manual/unload-scene-node.html,UnloadSceneNode>> will complete immediately.
+
+Resolution:: Make sure the scene name is a valid scene that is loaded and has been added to the project's build settings.
 
 #### CVDII
 
