@@ -79,7 +79,7 @@ MonoBehaviour:
   SceneVariable:
     _variable: 
     _tokens: []
-  SceneName: 
-  SceneIndex: 0
+  SceneName: LootMenu
+  SceneIndex: 6
   WaitForCompletion: 0
   CleanupAssets: 1

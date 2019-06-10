@@ -9,7 +9,9 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "load-scene-node")]
 	public sealed class LoadSceneNode : InstructionGraphNode
 	{
-		private const string _invalidSceneWarning = "(CNSLS) Unable to load scene on node '{0}': the variable '{1}' could not be found";
+		private const string _invalidIndexError = "(CLSNII) Unable to load scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";
+		private const string _invalidNameError = "(CLSNIN) Unable to load scene on node '{0}': the name '{1}' is not a valid scene - make sure the scene exists and has been added to the build settings";
+		private const string _invalidSceneWarning = "(CLSNIS) Unable to load scene on node '{0}': the variable '{1}' could not be found";
 
 		public enum SceneSource
 		{
@@ -83,20 +85,22 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
+		#region Scene Loading
+
 		private AsyncOperation Load(InstructionStore variables)
 		{
 			var mode = Additive ? LoadSceneMode.Additive : LoadSceneMode.Single;
 
 			switch (Source)
 			{
-				case SceneSource.Value: return SceneManager.LoadSceneAsync(Scene.Index, mode);
-				case SceneSource.Name: return SceneManager.LoadSceneAsync(SceneName, mode);
-				case SceneSource.Index: return SceneManager.LoadSceneAsync(SceneIndex, mode);
+				case SceneSource.Value: return Load(Scene.Index, mode);
+				case SceneSource.Name: return Load(SceneName, mode);
+				case SceneSource.Index: return Load(SceneIndex, mode);
 				case SceneSource.Variable:
 				{
 					var value = SceneVariable.GetValue(variables);
-					if (value.TryGetInt(out var index)) return SceneManager.LoadSceneAsync(index, mode);
-					else if (value.TryGetString(out var name)) return SceneManager.LoadSceneAsync(name, mode);
+					if (value.TryGetInt(out var index)) return Load(index, mode);
+					else if (value.TryGetString(out var name)) return Load(name, mode);
 					else Debug.LogWarningFormat(this, _invalidSceneWarning, Name, SceneVariable);
 					break;
 				}
@@ -104,6 +108,38 @@ namespace PiRhoSoft.CompositionEngine
 
 			return null;
 		}
+
+		private AsyncOperation Load(int buildIndex, LoadSceneMode mode)
+		{
+			var path = SceneUtility.GetScenePathByBuildIndex(buildIndex);
+
+			if (!string.IsNullOrEmpty(path))
+			{
+				return SceneManager.LoadSceneAsync(buildIndex, mode);
+			}
+			else
+			{
+				Debug.LogErrorFormat(this, _invalidIndexError, Name, buildIndex);
+				return null;
+			}
+		}
+
+		private AsyncOperation Load(string sceneName, LoadSceneMode mode)
+		{
+			var index = SceneUtility.GetBuildIndexByScenePath(sceneName);
+
+			if (index >= 0 && index < SceneManager.sceneCountInBuildSettings)
+			{
+				return SceneManager.LoadSceneAsync(index, mode);
+			}
+			else
+			{
+				Debug.LogErrorFormat(this, _invalidNameError, Name, sceneName);
+				return null;
+			}
+		}
+
+		#endregion
 
 		#region SceneReference Maintenance
 

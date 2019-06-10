@@ -9,7 +9,11 @@ namespace PiRhoSoft.CompositionEngine
 	[HelpURL(Composition.DocumentationUrl + "unload-scene-node")]
 	public sealed class UnloadSceneNode : InstructionGraphNode
 	{
-		private const string _invalidSceneWarning = "(CNSUS) Unable to unload scene for node '{0}': the scene '{1}' could not be found";
+		private const string _invalidIndexError = "(CUSNII) Unable to unload scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";
+		private const string _invalidNameError = "(CUSNIN) Unable to unload scene on node '{0}': a scene with name '{1}' is not loaded - make sure the scene exists and has been added to the build settings";
+		private const string _invalidSceneWarning = "(CUSNIS) Unable to unload scene for node '{0}': the scene '{1}' could not be found";
+		private const string _unloadedIndexWarning = "(CUSNUI) Unable to unload scene on node '{0}': the scene with index '{1}' is not loaded";
+		private const string _lastSceneWarning = "(CUSNLS) Unable to unload scene for node '{0}': the scene '{1}' is the only loaded scene";
 
 		public enum SceneSource
 		{
@@ -84,17 +88,68 @@ namespace PiRhoSoft.CompositionEngine
 		{
 			switch (Source)
 			{
-				case SceneSource.Value: return SceneManager.UnloadSceneAsync(Scene.Index, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-				case SceneSource.Name: return SceneManager.UnloadSceneAsync(SceneName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-				case SceneSource.Index: return SceneManager.UnloadSceneAsync(SceneIndex, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+				case SceneSource.Value: return Unload(Scene.Index);
+				case SceneSource.Name: return Unload(SceneName);
+				case SceneSource.Index: return Unload(SceneIndex);
 				case SceneSource.Variable:
 				{
 					var value = SceneVariable.GetValue(variables);
-					if (value.TryGetInt(out var index)) return SceneManager.UnloadSceneAsync(index, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
-					else if (value.TryGetString(out var name)) return SceneManager.UnloadSceneAsync(name, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+					if (value.TryGetInt(out var index)) return Unload(index);
+					else if (value.TryGetString(out var name)) return Unload(name);
 					else Debug.LogWarningFormat(this, _invalidSceneWarning, Name, SceneVariable);
 					break;
 				}
+			}
+
+			return null;
+		}
+
+		private AsyncOperation Unload(int buildIndex)
+		{
+			Scene scene;
+
+			try
+			{
+				scene = SceneManager.GetSceneByBuildIndex(buildIndex);
+			}
+			catch
+			{
+				// exception is thrown when the scene is not in the build
+				Debug.LogErrorFormat(this, _invalidIndexError, Name, buildIndex);
+				return null;
+			}
+
+			if (scene.IsValid())
+			{
+				if (SceneManager.sceneCount > 1)
+					return SceneManager.UnloadSceneAsync(buildIndex, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+				else
+					Debug.LogWarningFormat(this, _lastSceneWarning, Name, buildIndex);
+			}
+			else
+			{
+				// invalid scene is returned when the scene is not loaded
+				Debug.LogErrorFormat(this, _unloadedIndexWarning, Name, buildIndex);
+			}
+
+			return null;
+		}
+
+		private AsyncOperation Unload(string sceneName)
+		{
+			var scene = SceneManager.GetSceneByName(sceneName);
+
+			if (scene.IsValid())
+			{
+				if (SceneManager.sceneCount > 1)
+					return SceneManager.UnloadSceneAsync(sceneName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
+				else
+					Debug.LogWarningFormat(this, _lastSceneWarning, Name, sceneName);
+			}
+			else
+			{
+				// GetSceneByName does not differentiate between not loaded and not in build
+				Debug.LogErrorFormat(this, _invalidNameError, Name, sceneName);
 			}
 
 			return null;
