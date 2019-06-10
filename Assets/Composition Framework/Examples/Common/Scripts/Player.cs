@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.UtilityEngine;
+using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
@@ -42,5 +43,30 @@ namespace PiRhoSoft.CompositionExample
 
 			_body.AddForce(new Vector2(horizontal * Acceleration, vertical * Acceleration), ForceMode2D.Impulse);
 		}
+
+#if UNITY_EDITOR
+		[UnityEditor.MenuItem("Tools/Add Examples to Build")]
+		static void AddExamplesToBuild()
+		{
+			var scenes = new string[]
+			{
+				"Assets/Composition Framework/Examples/Loader/Loader.unity",
+				"Assets/Composition Framework/Examples/Battle/Scenes/Battle.unity",
+				"Assets/Composition Framework/Examples/BoardGame/Board.unity",
+				"Assets/Composition Framework/Examples/Calculator/Calculator.unity",
+				"Assets/Composition Framework/Examples/CardGame/Scenes/Addiction.unity",
+				"Assets/Composition Framework/Examples/Loot/Scenes/LootLevel.unity",
+				"Assets/Composition Framework/Examples/Loot/Scenes/LootMenu.unity",
+				"Assets/Composition Framework/Examples/Maze/Scenes/Maze1.unity",
+				"Assets/Composition Framework/Examples/Maze/Scenes/Maze2.unity",
+				"Assets/Composition Framework/Examples/Maze/Scenes/Maze3.unity",
+				"Assets/Composition Framework/Examples/Maze/Scenes/MazeUi.unity",
+				"Assets/Composition Framework/Examples/Shop/Scenes/Shop.unity"
+			};
+
+			var newScenes = scenes.Where(path => !UnityEditor.EditorBuildSettings.scenes.Select(scene => scene.path).Contains(path)).Select(path => new UnityEditor.EditorBuildSettingsScene(path, true));
+			UnityEditor.EditorBuildSettings.scenes = UnityEditor.EditorBuildSettings.scenes.Concat(newScenes).ToArray();
+		}
+#endif
 	}
 }
