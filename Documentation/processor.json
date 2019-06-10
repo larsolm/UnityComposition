@@ -10,7 +10,7 @@
   ],
   "Version": "v10",
   "GenerateOffline": true,
-  "OfflineFolder": "..\\Assets\\Documentation",
+  "OfflineFolder": "..\\Assets\\Composition%20Framework\\Documentation",
   "OfflineTemplate": "Template.html",
   "GenerateSearch": true,
   "CopyImages": true
