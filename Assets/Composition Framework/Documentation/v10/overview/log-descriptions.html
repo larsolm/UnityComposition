@@ -911,41 +911,7 @@ PageLoader.response(`<div class="sect1">
 </div>
 </div>
 <div class="sect3">
-<h4 id="_cnsls">CNSLS</h4>
-<div class="paragraph">
-<p>Unable to load scene on node '{0}': the variable '{1}' could not be found</p>
-</div>
-<table class="tableblock frame-all grid-all stretch">
-<colgroup>
-<col style="width: 11.1111%;">
-<col style="width: 88.8889%;">
-</colgroup>
-<tbody>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/load-scene-node.html">LoadSceneNode</a> that attempted to resolve the variable.</p></td>
-</tr>
-<tr>
-<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
-<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#topics/variables/accessing-variables.html">VariableReference</a> that could not be found.</p></td>
-</tr>
-</tbody>
-</table>
-<div class="dlist">
-<dl>
-<dt class="hdlist1">Effect</dt>
-<dd>
-<p>No scenes will be loaded or unloaded and the <a href="#manual/load-scene-node.html">LoadSceneNode</a> will complete immediately.</p>
-</dd>
-<dt class="hdlist1">Resolution</dt>
-<dd>
-<p>Change the <a href="#topics/variables/accessing-variables.html">VariableReference</a> to a variable that resolves to either an <code>Int</code> or <code>String</code>.</p>
-</dd>
-</dl>
-</div>
-</div>
-<div class="sect3">
-<h4 id="_cnsus">CNSUS</h4>
+<h4 id="_cusnis">CUSNIS</h4>
 <div class="paragraph">
 <p>Unable to unload scene for node '{0}': the scene '{1}' could not be found</p>
 </div>
@@ -974,6 +940,74 @@ PageLoader.response(`<div class="sect1">
 <dt class="hdlist1">Resolution</dt>
 <dd>
 <p>Change the <a href="#topics/variables/accessing-variables.html">VariableReference</a> to a variable that resolves to either an <code>Int</code> or <code>String</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cusnls">CUSNLS</h4>
+<div class="paragraph">
+<p>Unable to unload scene on node '{0}': the scene '{1}' is the only loaded scene</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> that attempted to unload the scene.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name or build index of the scene that is the only loaded scene and could therefore not be unloaded.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Effect</dt>
+<dd>
+<p>No scenes will be unloaded and the <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> will complete immediately.</p>
+</dd>
+<dt class="hdlist1">Resolution</dt>
+<dd>
+<p>Load a different scene in non additive mode rather than unloading the scene.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cusnui">CUSNUI</h4>
+<div class="paragraph">
+<p>Unable to unload scene on node '{0}': the scene with index '{1}' is not loaded</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> that attempted to unload the scene.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The build index of the scene that is not loaded and could therefore not be unloaded.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Effect</dt>
+<dd>
+<p>No scenes will be unloaded and the <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> will complete immediately.</p>
+</dd>
+<dt class="hdlist1">Resolution</dt>
+<dd>
+<p>Change the scene index to a scene that is currently loaded.</p>
 </dd>
 </dl>
 </div>
@@ -1941,6 +1975,108 @@ Expression: {0}</p>
 </div>
 </div>
 <div class="sect3">
+<h4 id="_clsnii">CLSNII</h4>
+<div class="paragraph">
+<p>Unable to load scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/load-scene-node.html">LoadSceneNode</a> that attempted to load the scene.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The build index of the scene that could not be found.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Effect</dt>
+<dd>
+<p>No scenes will be loaded or unloaded and the <a href="#manual/load-scene-node.html">LoadSceneNode</a> will complete immediately.</p>
+</dd>
+<dt class="hdlist1">Resolution</dt>
+<dd>
+<p>Change the build index to a valid scene that has been added to the project&#8217;s build settings.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clsnin">CLSNIN</h4>
+<div class="paragraph">
+<p>Unable to load scene on node '{0}': the name '{1}' is not a valid scene - make sure the scene exists and has been added to the build settings";</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/load-scene-node.html">LoadSceneNode</a> that attempted to load the scene.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the scene that could not be found.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Effect</dt>
+<dd>
+<p>No scenes will be loaded or unloaded and the <a href="#manual/load-scene-node.html">LoadSceneNode</a> will complete immediately.</p>
+</dd>
+<dt class="hdlist1">Resolution</dt>
+<dd>
+<p>Make sure the scene name is a valid scene that has been added to the project&#8217;s build settings.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_clsnis">CLSNIS</h4>
+<div class="paragraph">
+<p>Unable to load scene on node '{0}': the variable '{1}' could not be found</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/load-scene-node.html">LoadSceneNode</a> that attempted to resolve the variable.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#topics/variables/accessing-variables.html">VariableReference</a> that could not be found.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Effect</dt>
+<dd>
+<p>No scenes will be loaded or unloaded and the <a href="#manual/load-scene-node.html">LoadSceneNode</a> will complete immediately.</p>
+</dd>
+<dt class="hdlist1">Resolution</dt>
+<dd>
+<p>Change the <a href="#topics/variables/accessing-variables.html">VariableReference</a> to a variable that resolves to either an <code>Int</code> or <code>String</code>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
 <h4 id="_cscie">CSCIE</h4>
 <div class="paragraph">
 <p>Failed to expand item '{0}' on SelectionControl '{1}': the variable '{2}' is not a List</p>
@@ -2182,6 +2318,74 @@ Expression: {0}</p>
 <dt class="hdlist1">Resolution</dt>
 <dd>
 <p>Assign <em>Shader</em> on the <a href="#manual/transition.html">Transition</a>.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cusnii">CUSNII</h4>
+<div class="paragraph">
+<p>Unable to unload scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> that attempted to unload the scene.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The build index of the scene that could not be found.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Effect</dt>
+<dd>
+<p>No scenes will be unloaded and the <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> will complete immediately.</p>
+</dd>
+<dt class="hdlist1">Resolution</dt>
+<dd>
+<p>Change the build index to a valid scene or add the specified scene to the project&#8217;s build settings.</p>
+</dd>
+</dl>
+</div>
+</div>
+<div class="sect3">
+<h4 id="_cusnin">CUSNIN</h4>
+<div class="paragraph">
+<p>Unable to unload scene on node '{0}': a scene with name '{1}' is not loaded - make sure the scene exists and has been added to the build settings";</p>
+</div>
+<table class="tableblock frame-all grid-all stretch">
+<colgroup>
+<col style="width: 11.1111%;">
+<col style="width: 88.8889%;">
+</colgroup>
+<tbody>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{0}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> that attempted to unload the scene.</p></td>
+</tr>
+<tr>
+<td class="tableblock halign-left valign-top"><p class="tableblock">{1}</p></td>
+<td class="tableblock halign-left valign-top"><p class="tableblock">The name of the scene that could not be found in the set of loaded scenes.</p></td>
+</tr>
+</tbody>
+</table>
+<div class="dlist">
+<dl>
+<dt class="hdlist1">Effect</dt>
+<dd>
+<p>No scenes will be unloaded and the <a href="#manual/unload-scene-node.html">UnloadSceneNode</a> will complete immediately.</p>
+</dd>
+<dt class="hdlist1">Resolution</dt>
+<dd>
+<p>Make sure the scene name is a valid scene that is loaded and has been added to the project&#8217;s build settings.</p>
 </dd>
 </dl>
 </div>

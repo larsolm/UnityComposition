@@ -175,7 +175,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		private IEnumerator DoMove(Transform transform, Rigidbody2D body2d, Rigidbody body3d, Vector3 targetPosition, Quaternion targetRotation, Vector3 targetScale, float moveSpeed, float rotationSpeed, float scaleSpeed)
 		{
-			while (transform.position != targetPosition || transform.rotation != targetRotation || transform.localScale != targetScale)
+			while (transform && (transform.position != targetPosition || transform.rotation != targetRotation || transform.localScale != targetScale))
 			{
 				var position = moveSpeed > 0.0f ? Vector3.MoveTowards(transform.position, targetPosition, moveSpeed) : targetPosition;
 				var rotation = rotationSpeed > 0.0f ? Quaternion.RotateTowards(transform.rotation, targetRotation, rotationSpeed) : targetRotation;
