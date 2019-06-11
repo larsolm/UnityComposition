@@ -6,9 +6,9 @@ Composition Framework Version 1.0
 
 Getting Started:
 ----------------
-o To run the examples you MUST add all scenes to the build settings. To do this automatically, click on the menu item "Tools/Add Examples to Build"
-o Open the "Loader" scene located in the "Assets/Composition Framework/Loader" folder.
-o When prompted, choose to import the default TextMesh Pro resources.
+o Import the TextMeshPro Essentials by going opening the "Edit/Project Settings" window. Find the "TextMesh Pro" section on the left and click on the "Import TMP Essentials" button.
+o To run the examples you MUST add all the scenes to the build settings. To do this automatically, click on the menu item "Tools/Add Examples to Build"
+o Open the "Loader" scene located in the "Assets/Composition Framework/Examples/Loader" folder.
 o Play the Loader scene and choose which example you want to run from the menu.
 o Examples can be played using a mouse, controller, or keyboard (Board Game, Calculator, and Card Game are mouse only).
 o Each example can be played directly by loading the corresponding scene in the editor (LootMenu and MazeUi cannot be run directly - use LootLevel or Maze1/2/3 instead).

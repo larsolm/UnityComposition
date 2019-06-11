@@ -2830,6 +2830,7 @@ GameObject:
   - component: {fileID: 1000106192}
   - component: {fileID: 1000106191}
   - component: {fileID: 1000106190}
+  - component: {fileID: 1000106189}
   - component: {fileID: 1000106193}
   - component: {fileID: 1000106188}
   m_Layer: 5
@@ -2875,6 +2876,22 @@ MonoBehaviour:
     _inputs: []
     _outputs: []
   Button: Jump
+--- !u!114 &1000106189
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1000106186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5669426905e76c64290400a5749602c4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graph:
+    _instruction: {fileID: 11400000, guid: a2c649dc4e71f1c48945160205dcada5, type: 2}
+    _inputs: []
+    _outputs: []
 --- !u!114 &1000106190
 MonoBehaviour:
   m_ObjectHideFlags: 0
