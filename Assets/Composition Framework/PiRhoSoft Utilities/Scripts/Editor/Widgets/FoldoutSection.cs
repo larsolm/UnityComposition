@@ -1,12 +1,13 @@
-﻿using UnityEditor;
+﻿using PiRhoSoft.PargonUtilities.Editor;
+using UnityEditor;
 using UnityEngine;
 
 namespace PiRhoSoft.UtilityEditor
 {
 	public class FoldoutSection
 	{
-		private static readonly Label _collapseButton = new Label(Icon.BuiltIn(Icon.Expanded), string.Empty, "Collapse");
-		private static readonly Label _expandButton = new Label(Icon.BuiltIn(Icon.Collapsed), string.Empty, "Expand");
+		private static readonly Label _collapseButton = new Label(Icon.Expanded, string.Empty, "Collapse");
+		private static readonly Label _expandButton = new Label(Icon.Collapsed, string.Empty, "Expand");
 
 		public static bool Draw(Rect position, GUIContent label, bool isExpanded)
 		{

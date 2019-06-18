@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
 using System.Collections.Generic;
 using UnityEditor;
@@ -13,8 +14,8 @@ namespace PiRhoSoft.CompositionEditor
 
 		public const string EmptyText = "(empty)";
 
-		public static Label EditButton = new Label(Icon.BuiltIn(Icon.Edit), "", "View this object in the Inspector");
-		public static Label CloseButton = new Label(Icon.BuiltIn(Icon.Close), "", "Close this view");
+		public static Label EditButton = new Label(Icon.Inspect, "", "View this object in the Inspector");
+		public static Label CloseButton = new Label(Icon.Close, "", "Close this view");
 		public static Label ViewButton = new Label(Icon.Base64(_viewIcon), "", "View the contents of this store");
 		private const float _labelWidth = 100.0f;
 
@@ -117,7 +118,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		#region Proxy
 
-		private abstract class ValuesProxy : ListProxy
+		private abstract class ValuesProxy : UtilityEditor.ListProxy
 		{
 			public abstract string GetName(int index);
 

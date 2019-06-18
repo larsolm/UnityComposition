@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,21 +22,21 @@ namespace PiRhoSoft.CompositionEngine
 		public StringVariableSource Parameter = new StringVariableSource();
 
 		[Tooltip("The type of the parameter to set")]
-		[EnumDisplay]
+		[EnumButtons]
 		public AnimatorControllerParameterType Type;
 
 		[Tooltip("The value to set the parameter to")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Bool)]
+		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Bool)]
 		[ClassDisplay(ClassDisplayType.Propogated)]
 		public BoolVariableSource BoolValue = new BoolVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Int)]
+		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Int)]
 		[ClassDisplay(ClassDisplayType.Propogated)]
 		public IntVariableSource IntValue = new IntVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)AnimatorControllerParameterType.Float)]
+		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Float)]
 		[ClassDisplay(ClassDisplayType.Propogated)]
 		public FloatVariableSource FloatValue = new FloatVariableSource();
 

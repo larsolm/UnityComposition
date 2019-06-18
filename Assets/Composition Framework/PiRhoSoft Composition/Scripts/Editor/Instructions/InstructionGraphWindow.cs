@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.SnippetsEditor;
 using PiRhoSoft.UtilityEditor;
 using PiRhoSoft.UtilityEngine;
@@ -279,7 +280,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void CreateGraph(Type type)
 		{
-			var graph = AssetHelper.Create(type, AssetLocation.Selectable, type.Name) as InstructionGraph;
+			var graph = AssetHelper.Create(type) as InstructionGraph;
 			if (graph)
 				SetGraph(graph);
 		}
@@ -884,22 +885,17 @@ namespace PiRhoSoft.CompositionEditor
 			if (GUI.Button(settingsRect, "Settings", EditorStyles.toolbarDropDown))
 				PopupWindow.Show(new Rect(settingsRect.x, settingsRect.yMax, 0f, 0f), _settingsMenu);
 
-			var graphList = AssetHelper.GetAssetList<InstructionGraph>(false, true);
-			var graphIndex = graphList.GetIndex(_graph);
-			var graphSelection = SelectionPopup.Draw(graphRect, new GUIContent(_graph ? _graph.name : "No Graph Selected", "Select or create a new Instruction Graph"), EditorStyles.toolbarDropDown, new SelectionState { Index = graphIndex, Tab = 0 }, graphList.Tree);
+			var graphList = AssetHelper.GetAssetList<InstructionGraph>();
+			var graphIndex = graphList.Assets.IndexOf(_graph);
+			var graphSelection = SelectionPopup.Draw(graphRect, new GUIContent(_graph ? _graph.name : "No Graph Selected", "Select or create a new Instruction Graph"), EditorStyles.toolbarDropDown, new SelectionState { Index = graphIndex, Tab = 0 }, null);
 
 			if (graphSelection.Tab == 0)
 			{
 				if (graphSelection.Index != graphIndex)
 				{
-					var graph = graphList.GetAsset(graphSelection.Index) as InstructionGraph;
+					var graph = graphList.Assets[graphSelection.Index] as InstructionGraph;
 					SetGraph(graph);
 				}
-			}
-			else if (graphSelection.Tab == 1)
-			{
-				var type = graphList.GetType(graphSelection.Index);
-				CreateGraph(type);
 			}
 
 			_isLocked = GUI.Toggle(lockRect, _isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);

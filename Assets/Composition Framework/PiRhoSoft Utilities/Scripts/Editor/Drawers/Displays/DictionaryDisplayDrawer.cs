@@ -1,4 +1,6 @@
 ﻿using System.Reflection;
+using PiRhoSoft.PargonUtilities.Editor;
+using PiRhoSoft.PargonUtilities.Engine;
 using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
@@ -9,8 +11,8 @@ namespace PiRhoSoft.UtilityEditor
 	{
 		private const string _invalidTypeWarning = "(UDDCIT) Invalid type for DictionaryDisplay on field {0}: DictionaryDisplay can only be applied to IEditableDictionary fields";
 
-		private static Label _addButton = new Label(Icon.BuiltIn(Icon.CustomAdd), string.Empty, "Add an item to this dictionary");
-		private static Label _removeButton = new Label(Icon.BuiltIn(Icon.Remove), string.Empty, "Remove this item from the dictionary");
+		private static Label _addButton = new Label(Icon.CustomAdd, string.Empty, "Add an item to this dictionary");
+		private static Label _removeButton = new Label(Icon.Remove, string.Empty, "Remove this item from the dictionary");
 
 		private IEditableDictionary _dictionary;
 		private GUIContent _label;

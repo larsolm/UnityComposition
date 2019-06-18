@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -19,16 +19,16 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The source of the instruction to run")]
-		[EnumDisplay]
+		[EnumButtons]
 		public InstructionSource Source = InstructionSource.Value;
 
 		[Tooltip("The instruction to run when this node is reached")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)InstructionSource.Value)]
+		[Conditional(nameof(Source), (int)InstructionSource.Value)]
 		public InstructionCaller Instruction = new InstructionCaller();
 
 		[Tooltip("The instruction to run when this node is reached")]
 		[VariableConstraint(typeof(Instruction))]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)InstructionSource.Reference)]
+		[Conditional(nameof(Source), (int)InstructionSource.Reference)]
 		public VariableReference Reference = new VariableReference();
 
 		[Tooltip("The object to use as the root for Instruction")]

@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,7 +109,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Serializable] public class ParameterList : SerializedList<Parameter> { }
 
-		[ChangeTrigger(nameof(OnNameChanged))][Delayed] public string Name;
+		[ChangeTrigger(nameof(OnNameChanged))] [Delayed] public string Name;
 		[ListDisplay] [ClassDisplay(ClassDisplayType.Inline)] public ParameterList Parameters = new ParameterList();
 		[ExpressionDisplay(MinimumLines = 5, MaximumLines = 20)] public Expression Expression = new Expression();
 

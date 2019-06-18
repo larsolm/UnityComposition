@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -14,11 +14,11 @@ namespace PiRhoSoft.CompositionEngine
 		public Texture2D Texture;
 
 		[Tooltip("The size of the texture to generate")]
-		[ConditionalDisplaySelf(nameof(Texture), Invert = true)]
+		[Conditional(nameof(Texture), false)]
 		public Vector2Int TextureSize = new Vector2Int(256, 256);
 
 		[Tooltip("The scale to use for generating the perlin noise based texture")]
-		[ConditionalDisplaySelf(nameof(Texture), Invert = true)]
+		[Conditional(nameof(Texture), false)]
 		public float NoiseScale = 2.0f;
 		
 		private bool UseRandom => Texture == null;

@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,7 +25,7 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly Label _windowLabel = new Label(Icon.BuiltIn("UnityEditor.LookDevView"), label: "Watch Window");
 		private static readonly Label _enableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Enable logging of instruction execution");
 		private static readonly Label _disableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Disable logging of instruction execution");
-		private static readonly Label _executeButton = new Label(Icon.BuiltIn(Icon.Add), "", "Execute the expression");
+		private static readonly Label _executeButton = new Label(Icon.Add, "", "Execute the expression");
 
 		private Vector2 _scrollPosition;
 		private WatchMenu _watchMenu;
@@ -211,7 +212,7 @@ namespace PiRhoSoft.CompositionEditor
 			private string _variable = string.Empty;
 			private bool _valid = true;
 
-			private static readonly Label _addButton = new Label(Icon.BuiltIn(Icon.Add), "", "Add the variable to the watch window");
+			private static readonly Label _addButton = new Label(Icon.Add, "", "Add the variable to the watch window");
 
 			public override Vector2 GetWindowSize()
 			{

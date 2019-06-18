@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -16,15 +16,15 @@ namespace PiRhoSoft.CompositionEngine
 		public bool AutoAdvance = true;
 
 		[Tooltip("The progress of the animation (from 0 to 1)")]
-		[ConditionalDisplaySelf(nameof(AutoAdvance), Invert = true)]
+		[Conditional(nameof(AutoAdvance), false)]
 		public float Progress = 0.0f;
 
 		[Tooltip("Progress is affected by Time.timeScale")]
-		[ConditionalDisplaySelf(nameof(AutoAdvance))]
+		[Conditional(nameof(AutoAdvance), true)]
 		public bool UseScaledTime = true;
 
 		[Tooltip("The duration of the animation (in seconds)")]
-		[ConditionalDisplaySelf(nameof(AutoAdvance))]
+		[Conditional(nameof(AutoAdvance), true)]
 		public float Duration = 2.0f;
 
 		public bool IsComplete => AutoAdvance ? Progress >= Duration : Progress >= 1.0f; 

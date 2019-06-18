@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
@@ -12,7 +13,7 @@ namespace PiRhoSoft.UtilityEditor
 	{
 		private const string _invalidTypeWarning = "(UASDDIT) Invalid type for AssetDisplay of field {0}: AssetDisplay can only be used with Object derived fields";
 
-		private static readonly Label _editButton = new Label(Icon.BuiltIn(Icon.Edit), string.Empty, "Show this asset in the inspector");
+		private static readonly Label _editButton = new Label(Icon.Inspect, string.Empty, "Show this asset in the inspector");
 
 		#region Static Property Interface
 
@@ -83,22 +84,17 @@ namespace PiRhoSoft.UtilityEditor
 
 			var rect = EditorGUI.PrefixLabel(position, label);
 			var creatable = saveLocation != AssetLocation.None && typeof(ScriptableObject).IsAssignableFrom(assetType);
-			var list = AssetHelper.GetAssetList(assetType, showNoneOption, creatable);
-			var index = list.GetIndex(asset);
+			var list = AssetHelper.GetAssetList(assetType);
+			var index = list.Assets.IndexOf(asset);
 			var thumbnail = asset != null ? AssetPreview.GetMiniThumbnail(asset) ?? AssetPreview.GetMiniTypeThumbnail(asset.GetType()) : null;
 			var popupLabel = asset ? new GUIContent(asset.name, thumbnail) : new GUIContent("None");
 
-			var selection = SelectionPopup.Draw(rect, popupLabel, new SelectionState { Tab = 0, Index = index }, list.Tree);
+			var selection = SelectionPopup.Draw(rect, popupLabel, new SelectionState { Tab = 0, Index = index }, null);
 
 			if (selection.Tab == 0)
 			{
 				if (selection.Index != index)
-					return list.GetAsset(selection.Index);
-			}
-			else if (selection.Tab == 1)
-			{
-				var type = list.GetType(selection.Index);
-				return AssetHelper.Create(type, saveLocation, defaultName);
+					return list.Assets[selection.Index];
 			}
 
 			if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))

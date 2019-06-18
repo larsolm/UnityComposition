@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -31,15 +32,15 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference EffectVariable = new VariableReference();
 
 		[Tooltip("How to create and position the effect, with an exact position, relative to another object, or as a child of another object")]
-		[EnumDisplay]
+		[EnumButtons]
 		public ObjectPositioning Positioning = ObjectPositioning.Absolute;
 
 		[Tooltip("The object to position the effect relative to")]
-		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Relative)]
+		[Conditional(nameof(Positioning), (int)ObjectPositioning.Relative)]
 		public VariableReference Object = new VariableReference();
 
 		[Tooltip("The parent object to make the effect a child of")]
-		[ConditionalDisplaySelf(nameof(Positioning), EnumValue = (int)ObjectPositioning.Child)]
+		[Conditional(nameof(Positioning), (int)ObjectPositioning.Child)]
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at")]

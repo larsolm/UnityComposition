@@ -107,6 +107,17 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			return TypeCache.GetTypesWithAttribute(attributeType).ToList();
 		}
 
+		public static IEnumerable<Type> FindTypes(Func<Type, bool> predicate)
+		{
+			// There are a lot of assemblies so it might make sense to filter the list a bit. There isn't a specific
+			// way to do that, but something like this would work: https://stackoverflow.com/questions/5160051/c-sharp-how-to-get-non-system-assemblies
+
+			return AppDomain.CurrentDomain.GetAssemblies()
+				.Where(assembly => !assembly.IsDynamic) // GetExportedTypes throws an exception when called on dynamic assemblies
+				.SelectMany(t => t.GetExportedTypes())
+				.Where(predicate);
+		}
+
 		public static TypeList GetTypeList<T>(bool includeAbstract)
 		{
 			return GetTypeList(typeof(T), includeAbstract);

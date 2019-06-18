@@ -1,4 +1,6 @@
-﻿using PiRhoSoft.UtilityEditor;
+﻿using PiRhoSoft.PargonUtilities.Editor;
+using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEditor;
 using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
@@ -42,9 +44,9 @@ namespace PiRhoSoft.DocGenEditor
 
 		public string Name = string.Empty;
 
-		[EnumDisplay(MinimumWidth = 80)] public DeclarationType IncludedDeclarations = DeclarationType.Instance;
-		[EnumDisplay(MinimumWidth = 80)] public AccessLevel IncludedAccessLevels = AccessLevel.Public | AccessLevel.Protected;
-		[EnumDisplay(MinimumWidth = 80)] public MemberType IncludedMemberTypes = MemberType.Field;
+		[EnumButtons] public DeclarationType IncludedDeclarations = DeclarationType.Instance;
+		[EnumButtons] public AccessLevel IncludedAccessLevels = AccessLevel.Public | AccessLevel.Protected;
+		[EnumButtons] public MemberType IncludedMemberTypes = MemberType.Field;
 
 		private const string _membersTag = "{Members}";
 

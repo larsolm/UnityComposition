@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using UnityEngine;
 
@@ -16,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 		public TransitionVariableSource Transition = new TransitionVariableSource();
 
 		[Tooltip("The phase of the transition to run")]
-		[EnumDisplay]
+		[EnumButtons]
 		public TransitionPhase Phase = TransitionPhase.Out;
 
 		[Tooltip("Whether the Transition should automatically end after its specified duration or remain running")]

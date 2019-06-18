@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -15,11 +16,11 @@ namespace PiRhoSoft.CompositionEngine
 	public abstract class VariableSource
 	{
 		[Tooltip("Whether the source points to a variable reference or an actual value")]
-		[EnumDisplay]
+		[EnumButtons]
 		public VariableSourceType Type = VariableSourceType.Value;
 
 		[Tooltip("The variable reference to lookup the value from")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Reference)]
+		[Conditional(nameof(Type), (int)VariableSourceType.Reference)]
 		public VariableReference Reference = new VariableReference();
 
 		public void GetInputs(IList<VariableDefinition> inputs)
@@ -37,7 +38,7 @@ namespace PiRhoSoft.CompositionEngine
 	public abstract class VariableSource<T> : VariableSource
 	{
 		[Tooltip("The specific value of the source")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)VariableSourceType.Value)]
+		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public T Value;
 
 		protected override ValueDefinition GetInputDefinition()

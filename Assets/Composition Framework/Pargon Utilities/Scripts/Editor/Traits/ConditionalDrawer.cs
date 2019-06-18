@@ -76,12 +76,12 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			switch (property.propertyType)
 			{
-				case SerializedPropertyType.Integer: return conditional.Invert ? property.intValue != conditional.IntValue : property.intValue == conditional.IntValue;
-				case SerializedPropertyType.Boolean: return conditional.Invert ? !property.boolValue : property.boolValue;
-				case SerializedPropertyType.Float: return conditional.Invert ? property.floatValue != conditional.FloatValue : property.floatValue == conditional.FloatValue;
-				case SerializedPropertyType.String: return conditional.Invert ? property.stringValue != conditional.StringValue : property.stringValue == conditional.StringValue;
-				case SerializedPropertyType.ObjectReference: return conditional.Invert ? property.objectReferenceValue == null : property.objectReferenceValue != null;
-				case SerializedPropertyType.Enum: return conditional.Invert ? property.intValue != conditional.IntValue : property.intValue == conditional.IntValue;
+				case SerializedPropertyType.Integer: return conditional.BoolValue ? property.intValue == conditional.IntValue : property.intValue != conditional.IntValue;
+				case SerializedPropertyType.Boolean: return conditional.BoolValue ? property.boolValue : !property.boolValue;
+				case SerializedPropertyType.Float: return conditional.BoolValue ? property.floatValue == conditional.FloatValue : property.floatValue != conditional.FloatValue;
+				case SerializedPropertyType.String: return conditional.BoolValue ? property.stringValue == conditional.StringValue : property.stringValue != conditional.StringValue;
+				case SerializedPropertyType.ObjectReference: return conditional.BoolValue ? property.objectReferenceValue != null : property.objectReferenceValue == null;
+				case SerializedPropertyType.Enum: return conditional.BoolValue ? property.intValue == conditional.IntValue : property.intValue != conditional.IntValue;
 				default: Debug.LogWarningFormat(_invalidTypeWarning, fieldInfo.Name, property.propertyPath); break;
 			}
 
@@ -89,4 +89,3 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		}
 	}
 }
-

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.PargonUtilities.Editor
@@ -31,88 +32,79 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		#region Creation
 
-		//public static ObjectType Create<ObjectType>(AssetLocation location, string defaultName) where ObjectType : ScriptableObject
-		//{
-		//	return (ObjectType)Create(typeof(ObjectType), location, defaultName);
-		//}
-		//
-		//public static Object Create(Type createType, AssetLocation location, string defaultName)
-		//{
-		//	var title = string.Format("Create a new {0}", createType.Name);
-		//	var name = string.IsNullOrEmpty(defaultName) ? createType.Name : defaultName;
-		//
-		//	if (location == AssetLocation.Selectable)
-		//	{
-		//		var path = EditorUtility.SaveFilePanel(title, "Assets", name + ".asset", "asset");
-		//
-		//		if (!string.IsNullOrEmpty(path))
-		//		{
-		//			var asset = CreateAssetAtPath(path, createType);
-		//
-		//			if (asset == null)
-		//				Debug.LogErrorFormat(_invalidPathError, path);
-		//
-		//			return asset;
-		//		}
-		//	}
-		//	else if (location == AssetLocation.AssetRoot)
-		//	{
-		//		return CreateAsset(name, createType);
-		//	}
-		//
-		//	return null;
-		//}
-		//
-		//public static AssetType CreateAsset<AssetType>(string name) where AssetType : ScriptableObject
-		//{
-		//	return CreateAsset(name, typeof(AssetType)) as AssetType;
-		//}
-		//
-		//public static AssetType GetOrCreateAsset<AssetType>(string name) where AssetType : ScriptableObject
-		//{
-		//	var asset = GetAsset<AssetType>();
-		//
-		//	if (asset == null)
-		//		asset = CreateAsset<AssetType>(name);
-		//
-		//	return asset;
-		//}
-		//
-		//public static ScriptableObject CreateAsset(string name, Type type)
-		//{
-		//	var asset = ScriptableObject.CreateInstance(type);
-		//	var path = AssetDatabase.GenerateUniqueAssetPath("Assets/" + name + ".asset");
-		//
-		//	AssetDatabase.CreateAsset(asset, path);
-		//	AssetDatabase.SaveAssets();
-		//
-		//	return asset;
-		//}
-		//
-		//public static ScriptableObject GetOrCreateAsset(string name, Type type)
-		//{
-		//	var asset = GetAsset(type) as ScriptableObject;
-		//
-		//	if (asset == null)
-		//		asset = CreateAsset(name, type);
-		//
-		//	return asset;
-		//}
-		//
-		//public static ScriptableObject CreateAssetAtPath(string path, Type type)
-		//{
-		//	if (!path.StartsWith(Application.dataPath))
-		//		return null;
-		//
-		//	path = path.Substring(Application.dataPath.Length - 6); // keep 'Assets' as the root folder
-		//
-		//	var asset = ScriptableObject.CreateInstance(type);
-		//
-		//	AssetDatabase.CreateAsset(asset, path);
-		//	AssetDatabase.SaveAssets();
-		//
-		//	return asset;
-		//}
+		public static ObjectType Create<ObjectType>() where ObjectType : ScriptableObject
+		{
+			return (ObjectType)Create(typeof(ObjectType));
+		}
+		
+		public static Object Create(Type createType)
+		{
+			var title = $"Create a new {createType.Name}";
+			var path = EditorUtility.SaveFilePanel(title, "Assets", $"{createType.Name}.asset", "asset");
+		
+			if (!string.IsNullOrEmpty(path))
+			{
+				var asset = CreateAssetAtPath(path, createType);
+		
+				if (asset == null)
+					Debug.LogErrorFormat(_invalidPathError, path);
+		
+				return asset;
+			}
+		
+			return null;
+		}
+		
+		public static AssetType CreateAsset<AssetType>(string name) where AssetType : ScriptableObject
+		{
+			return CreateAsset(name, typeof(AssetType)) as AssetType;
+		}
+		
+		public static AssetType GetOrCreateAsset<AssetType>(string name) where AssetType : ScriptableObject
+		{
+			var asset = GetAsset<AssetType>();
+		
+			if (asset == null)
+				asset = CreateAsset<AssetType>(name);
+		
+			return asset;
+		}
+		
+		public static ScriptableObject CreateAsset(string name, Type type)
+		{
+			var asset = ScriptableObject.CreateInstance(type);
+			var path = AssetDatabase.GenerateUniqueAssetPath("Assets/" + name + ".asset");
+		
+			AssetDatabase.CreateAsset(asset, path);
+			AssetDatabase.SaveAssets();
+		
+			return asset;
+		}
+		
+		public static ScriptableObject GetOrCreateAsset(string name, Type type)
+		{
+			var asset = GetAsset(type) as ScriptableObject;
+		
+			if (asset == null)
+				asset = CreateAsset(name, type);
+		
+			return asset;
+		}
+		
+		public static ScriptableObject CreateAssetAtPath(string path, Type type)
+		{
+			if (!path.StartsWith(Application.dataPath))
+				return null;
+		
+			path = path.Substring(Application.dataPath.Length - 6); // keep 'Assets' as the root folder
+		
+			var asset = ScriptableObject.CreateInstance(type);
+		
+			AssetDatabase.CreateAsset(asset, path);
+			AssetDatabase.SaveAssets();
+		
+			return asset;
+		}
 
 		#endregion
 

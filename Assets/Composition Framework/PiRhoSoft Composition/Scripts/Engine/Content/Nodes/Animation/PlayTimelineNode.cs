@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -29,7 +30,7 @@ namespace PiRhoSoft.CompositionEngine
 		public DirectorWrapMode Mode;
 
 		[Tooltip("Whether to wait for the timeline to finish before moving on to Next")]
-		[ConditionalDisplaySelf(nameof(Mode), EnumValue = (int)DirectorWrapMode.Loop, Invert = true)]
+		[Conditional(nameof(Mode), (int)DirectorWrapMode.Loop, false)]
 		public bool WaitForCompletion = false;
 
 		public override Color NodeColor => Colors.Animation;

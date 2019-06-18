@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 		public bool AutoHide = false;
 
 		[Tooltip("How long to wait after message is complete before hiding")]
-		[ConditionalDisplaySelf(nameof(AutoHide))]
+		[Conditional(nameof(AutoHide), true)]
 		public float WaitTime = 0.0f;
 
 		[Tooltip("The message to display when this node is traversed")]

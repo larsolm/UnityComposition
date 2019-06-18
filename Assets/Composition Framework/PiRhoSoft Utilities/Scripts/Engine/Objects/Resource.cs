@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using UnityEngine;
 
 namespace PiRhoSoft.UtilityEngine
 {
@@ -14,7 +15,7 @@ namespace PiRhoSoft.UtilityEngine
 
 #pragma warning restore CS0414
 
-		[SerializeField] [DisableInInspector] private string _path = "";
+		[SerializeField] [ReadOnly] private string _path = "";
 
 		public string Path => _path;
 

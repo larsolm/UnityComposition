@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
 using System.Collections;
 using System.Reflection;
@@ -9,8 +10,8 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariablePoolControl : ObjectControl<VariablePool>
 	{
-		private static Label _addButton = new Label(Icon.BuiltIn(Icon.CustomAdd), string.Empty, "Add a variable");
-		private static Label _removeButton = new Label(Icon.BuiltIn(Icon.Remove), string.Empty, "Remove this variable");
+		private static Label _addButton = new Label(Icon.CustomAdd, string.Empty, "Add a variable");
+		private static Label _removeButton = new Label(Icon.Remove, string.Empty, "Remove this variable");
 		private static Label _editButton = new Label(Icon.BuiltIn("_Popup"), string.Empty, "Modify this variable");
 		private const float _labelWidth = 100.0f;
 

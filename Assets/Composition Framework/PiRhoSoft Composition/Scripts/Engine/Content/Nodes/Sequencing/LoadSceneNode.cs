@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -25,24 +25,24 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The source of the scene to load")]
-		[EnumDisplay]
+		[EnumButtons]
 		public SceneSource Source = SceneSource.Value;
 
 		[Tooltip("The Scene to load")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)SceneSource.Value)]
-		[SceneReference(SaveLocation = AssetLocation.Selectable, DefaultName = "New Scene", Creator = "SetupScene")]
+		[Conditional(nameof(Source), (int)SceneSource.Value)]
+		[ScenePicker(nameof(SetupScene))]
 		public SceneReference Scene = new SceneReference();
 
 		[Tooltip("The variable reference that stores the scene to load (can be an index or a name")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)SceneSource.Variable)]
+		[Conditional(nameof(Source), (int)SceneSource.Variable)]
 		public VariableReference SceneVariable = new VariableReference();
 
 		[Tooltip("The name of the scene to load")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)SceneSource.Name)]
+		[Conditional(nameof(Source), (int)SceneSource.Name)]
 		public string SceneName;
 
 		[Tooltip("The index of the scene to load")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)SceneSource.Index)]
+		[Conditional(nameof(Source), (int)SceneSource.Index)]
 		public int SceneIndex;
 
 		[Tooltip("Whether to wait for Scene to finish loading before moving to Next")]

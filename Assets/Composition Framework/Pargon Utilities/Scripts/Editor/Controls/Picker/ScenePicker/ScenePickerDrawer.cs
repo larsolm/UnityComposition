@@ -38,6 +38,26 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
 			}
 
+			//if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
+			//{
+			//	var obj = DragAndDrop.objectReferences[0];
+			//
+			//	if (obj is SceneAsset asset)
+			//	{
+			//		if (Event.current.type == EventType.DragUpdated)
+			//		{
+			//			DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+			//			Event.current.Use();
+			//		}
+			//
+			//		if (Event.current.type == EventType.DragPerform)
+			//		{
+			//			scene.Path = AssetDatabase.GetAssetPath(asset);
+			//			DragAndDrop.AcceptDrag();
+			//		}
+			//	}
+			//}
+
 			return container;
 		}
 	}

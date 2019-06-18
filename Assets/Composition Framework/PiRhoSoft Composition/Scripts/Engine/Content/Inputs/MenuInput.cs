@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
@@ -45,12 +46,12 @@ namespace PiRhoSoft.CompositionEngine
 		public PrimaryAxis PrimaryAxis = PrimaryAxis.Column;
 
 		[Tooltip("How many rows are in this selection")]
-		[ConditionalDisplaySelf(nameof(PrimaryAxis), EnumValue = (int)PrimaryAxis.Row)]
+		[Conditional(nameof(PrimaryAxis), (int)PrimaryAxis.Row)]
 		[Minimum(1)]
 		public int RowCount = 1;
 
 		[Tooltip("How many columns are in this selection")]
-		[ConditionalDisplaySelf(nameof(PrimaryAxis), EnumValue = (int)PrimaryAxis.Column)]
+		[Conditional(nameof(PrimaryAxis), (int)PrimaryAxis.Column)]
 		[Minimum(1)]
 		public int ColumnCount = 1;
 

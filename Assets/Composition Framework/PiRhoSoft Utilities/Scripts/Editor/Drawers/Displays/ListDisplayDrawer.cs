@@ -1,4 +1,5 @@
 ﻿using System.Reflection;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
@@ -9,8 +10,8 @@ namespace PiRhoSoft.UtilityEditor
 	{
 		private const string _invalidTypeWarning = "(ULDCIT) Invalid type for ListDisplay on field {0}: ListDisplay can only be applied to SerializedList or SerializedArray fields";
 
-		private static Label _addButton = new Label(Icon.BuiltIn(Icon.Add), string.Empty, "Add an item to this list");
-		private static Label _removeButton = new Label(Icon.BuiltIn(Icon.Remove), string.Empty, "Remove this item from the list");
+		private static Label _addButton = new Label(Icon.Add, string.Empty, "Add an item to this list");
+		private static Label _removeButton = new Label(Icon.Remove, string.Empty, "Remove this item from the list");
 
 		private SerializedProperty _property;
 		private GUIContent _label;

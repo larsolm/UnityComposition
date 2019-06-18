@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,19 +22,19 @@ namespace PiRhoSoft.CompositionEngine
 		public ObjectSource Source;
 
 		[Tooltip("The name of the object in the scene to associate with this Item")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Scene)]
+		[Conditional(nameof(Source), (int)ObjectSource.Scene)]
 		public string Name;
 
 		[Tooltip("The prefab to instantiate when showing this item on a SelectionControl")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		[Conditional(nameof(Source), (int)ObjectSource.Asset)]
 		public MenuItem Template;
 
 		[Tooltip("The label used to identify the item")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		[Conditional(nameof(Source), (int)ObjectSource.Asset)]
 		public string Label;
 
 		[Tooltip("If Variables is a List and this is set, this selection will be duplicated for each of the items in the list")]
-		[ConditionalDisplaySelf(nameof(Source), EnumValue = (int)ObjectSource.Asset)]
+		[Conditional(nameof(Source), (int)ObjectSource.Asset)]
 		public bool Expand = false;
 
 		public string Id => Source == ObjectSource.Scene ? Name : Label;

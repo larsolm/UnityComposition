@@ -36,7 +36,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public static VisualElement CreatePropertyContainer(string label)
 		{
 			var container = new VisualElement();
-			container.AddToClassList(BaseField<EnumButtons>.ussClassName);
+			container.AddToClassList(BaseField<string>.ussClassName);
 
 			if (!string.IsNullOrEmpty(label))
 				container.Add(CreatePropertyLabel(label));
@@ -56,7 +56,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public static VisualElement GetPropertyContainer(SerializedProperty property, string label, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			var drawer = PropertyHelper.GetNextDrawer(fieldInfo, attribute);
-			return drawer == null ? new BindablePropertyElement(property, label) : drawer.CreatePropertyGUI(property);
+			return drawer == null ? new BindablePropertyElement(property, label) : drawer.CreatePropertyGUI(property) ?? CreateFallbackContainer(property);
 		}
 
 		public static VisualElement CreateDefaultElement(SerializedProperty property, string label)
@@ -111,6 +111,14 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public static void SetVisible(VisualElement element, bool visible)
 		{
 			element.style.display = new StyleEnum<DisplayStyle>(visible ? DisplayStyle.Flex: DisplayStyle.None);
+		}
+
+		public static VisualElement CreateFallbackContainer(SerializedProperty property)
+		{
+			return new IMGUIContainer(() =>
+			{
+				EditorGUILayout.PropertyField(property);
+			});
 		}
 	}
 }

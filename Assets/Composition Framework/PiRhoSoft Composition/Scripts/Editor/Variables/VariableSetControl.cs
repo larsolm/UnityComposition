@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
 using System.Collections;
 using System.Reflection;
@@ -9,7 +10,7 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariableSetControl : ObjectControl<VariableSet>
 	{
-		private readonly static Label _refreshButton = new Label(Icon.BuiltIn(Icon.Refresh), "", "Re-compute this variable based on the schema initializer");
+		private readonly static Label _refreshButton = new Label(Icon.Refresh, "", "Re-compute this variable based on the schema initializer");
 		private readonly static GUIContent _emptyLabel = new GUIContent("Add definitions to the corresponding Schema to populate this list");
 
 		private SerializedProperty _property;
@@ -94,7 +95,7 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private class VariablesProxy : ListProxy
+		private class VariablesProxy : UtilityEditor.ListProxy
 		{
 			public VariableSet List;
 

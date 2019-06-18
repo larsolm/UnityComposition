@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -19,15 +20,15 @@ namespace PiRhoSoft.CompositionEngine
 		public ButtonType Type = ButtonType.Axis;
 
 		[Tooltip("The input axis that is triggers this branch")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)ButtonType.Key, Invert = true)]
+		[Conditional(nameof(Type), (int)ButtonType.Key, false)]
 		public string Name;
 
 		[Tooltip("The value needed for the axis in order to be triggered")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)ButtonType.Axis)]
+		[Conditional(nameof(Type), (int)ButtonType.Axis)]
 		public float Value;
 
 		[Tooltip("The key tha was pressed")]
-		[ConditionalDisplaySelf(nameof(Type), EnumValue = (int)ButtonType.Key)]
+		[Conditional(nameof(Type), (int)ButtonType.Key)]
 		public KeyCode Key;
 
 		[Tooltip("The node to go to when this item is selected")]

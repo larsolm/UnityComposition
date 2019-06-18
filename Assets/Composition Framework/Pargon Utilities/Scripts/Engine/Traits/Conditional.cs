@@ -8,27 +8,27 @@
 		public string StringValue { get; private set; }
 		public int IntValue { get; private set; }
 		public float FloatValue { get; private set; }
-		public bool Invert { get; private set; }
+		public bool BoolValue { get; private set; }
 
-		public ConditionalAttribute(string property, string value, bool invert) : this(property, invert)
+		public ConditionalAttribute(string property, string value, bool whenEqual = true) : this(property, whenEqual)
 		{
 			StringValue = value;
 		}
 
-		public ConditionalAttribute(string property, int value, bool invert) : this(property, invert)
+		public ConditionalAttribute(string property, int value, bool whenEqual = true) : this(property, whenEqual)
 		{
 			IntValue = value;
 		}
 
-		public ConditionalAttribute(string property, float value, bool invert) : this(property, invert)
+		public ConditionalAttribute(string property, float value, bool whenEqual = true) : this(property, whenEqual)
 		{
 			FloatValue = value;
 		}
 
-		public ConditionalAttribute(string property, bool invert) : base(int.MaxValue)
+		public ConditionalAttribute(string property, bool value) : base(int.MaxValue)
 		{
 			Property = property;
-			Invert = invert;
+			BoolValue = value;
 		}
 
 		public ConditionalAttribute(string method) : base(int.MaxValue)

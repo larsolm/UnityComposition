@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
 using PiRhoSoft.UtilityEngine;
 using System;
@@ -10,10 +11,10 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariableValueDrawer
 	{
-		private static readonly Label _addStoreButton = new Label(Icon.BuiltIn(Icon.CustomAdd), "", "Add an item to the store");
-		private static readonly Label _addListButton = new Label(Icon.BuiltIn(Icon.Add), "", "Add an item to the list");
-		private static readonly Label _removeStoreButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this item from the store");
-		private static readonly Label _removeListButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this item from the list");
+		private static readonly Label _addStoreButton = new Label(Icon.CustomAdd, "", "Add an item to the store");
+		private static readonly Label _addListButton = new Label(Icon.Add, "", "Add an item to the list");
+		private static readonly Label _removeStoreButton = new Label(Icon.Remove, "", "Remove this item from the store");
+		private static readonly Label _removeListButton = new Label(Icon.Remove, "", "Remove this item from the list");
 		private const float _storeLabelWidth = 100.0f;
 
 		public static float GetHeight(VariableValue value, ValueDefinition definition, bool drawStores)

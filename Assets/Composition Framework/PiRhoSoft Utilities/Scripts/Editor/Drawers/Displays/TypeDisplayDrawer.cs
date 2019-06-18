@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Editor;
+using PiRhoSoft.UtilityEngine;
 using System;
 using UnityEditor;
 using UnityEngine;
@@ -70,12 +71,12 @@ namespace PiRhoSoft.UtilityEditor
 		public static Type Draw(Rect position, GUIContent label, Type type, Type rootType, bool showNoneOption, bool showAbstractOptions)
 		{
 			var rect = EditorGUI.PrefixLabel(position, label);
-			var list = TypeHelper.GetTypeList(rootType, showNoneOption, showAbstractOptions);
-			var index = list.GetIndex(type);
+			var list = TypeHelper.GetTypeList(rootType, showAbstractOptions);
+			var index = list.Types.IndexOf(type);
 			var thumbnail = type != null ? (AssetPreview.GetMiniTypeThumbnail(type) ?? _defaultTypeIcon.Content) : null;
 			var popupLabel = type != null ? new GUIContent(type.Name, thumbnail) : new GUIContent("None");
 
-			var selection = SelectionPopup.Draw(rect, popupLabel, new SelectionState { Tab = 0, Index = index }, list.Tree);
+			var selection = SelectionPopup.Draw(rect, popupLabel, new SelectionState { Tab = 0, Index = index }, null);
 
 			if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
 			{
@@ -101,7 +102,7 @@ namespace PiRhoSoft.UtilityEditor
 				}
 			}
 
-			return list.GetType(selection.Index);
+			return list.Types[selection.Index];
 		}
 
 		#endregion

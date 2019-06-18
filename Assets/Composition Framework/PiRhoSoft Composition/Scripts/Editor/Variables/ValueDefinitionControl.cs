@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
 using PiRhoSoft.UtilityEngine;
 using UnityEditor;
@@ -27,8 +28,8 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly static GUIContent _minimumConstraintLabel = new GUIContent("Between");
 		private readonly static GUIContent _maximumConstraintLabel = new GUIContent("and");
 
-		private static readonly Label _addButton = new Label(Icon.BuiltIn(Icon.Add), "", "Add a string to this constraint");
-		private static readonly Label _removeButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this string constraint");
+		private static readonly Label _addButton = new Label(Icon.Add, "", "Add a string to this constraint");
+		private static readonly Label _removeButton = new Label(Icon.Remove, "", "Remove this string constraint");
 
 		private static Expression _expression = new Expression();
 

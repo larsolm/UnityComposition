@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class VariableSetComponent : MonoBehaviour, IVariableStore, IVariableReset, ISchemaOwner
 	{
 		[ChangeTrigger(nameof(SetupSchema))]
-		[AssetDisplay(SaveLocation = AssetLocation.Selectable)]
+		[ObjectPicker]
 		[SerializeField]
 		private VariableSchema _schema = null;
 

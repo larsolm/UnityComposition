@@ -1,4 +1,5 @@
-﻿using System;
+﻿using PiRhoSoft.PargonUtilities.Editor;
+using System;
 using UnityEditor;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace PiRhoSoft.UtilityEditor
 	{
 		public const float DefaultWidth = 200.0f;
 		
-		private static readonly Label _createButton = new Label(Icon.BuiltIn(Icon.Add), "Create", "Create this item");
+		private static readonly Label _createButton = new Label(Icon.Add, "Create", "Create this item");
 
 		private GUIContent _label;
 		private Action _creator;

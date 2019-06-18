@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.UtilityEditor;
+﻿using PiRhoSoft.PargonUtilities.Editor;
+using PiRhoSoft.PargonUtilities.Engine;
 using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace PiRhoSoft.DocGenEditor
 	{
 		public string OutputFile = "log.txt";
 
-		[EnumDisplay] public DocumentationTypeCategory IncludedTypes = DocumentationTypeCategory.All;
+		[EnumButtons] public DocumentationTypeCategory IncludedTypes = DocumentationTypeCategory.All;
 		[ListDisplay] public DocumentationNamespaceList IncludedNamespaces = new DocumentationNamespaceList();
 
 		[TextArea(2, 8)] public string DocumentTemplate = "{Warnings}\n\n{Errors}";

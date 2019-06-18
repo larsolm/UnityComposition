@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
 using UnityEditor;
 using UnityEngine;
@@ -10,8 +11,8 @@ namespace PiRhoSoft.CompositionEditor
 	public class VariableSchemaEditor : Editor
 	{
 		private readonly static GUIContent _label = new GUIContent("Definitions", "The variables available to objects using this schema");
-		private readonly static Label _addDefinitionButton = new Label(Icon.BuiltIn(Icon.CustomAdd), "", "Add a Definition to the Schema");
-		private readonly static Label _removeDefinitionButton = new Label(Icon.BuiltIn(Icon.Remove), "", "Remove this Definition from the Schema");
+		private readonly static Label _addDefinitionButton = new Label(Icon.CustomAdd, "", "Add a Definition to the Schema");
+		private readonly static Label _removeDefinitionButton = new Label(Icon.Remove, "", "Remove this Definition from the Schema");
 		private readonly static GUIContent _addDefinitionLabel = new GUIContent("Add Definition");
 		private readonly static GUIContent _emptyLabel = new GUIContent("This Schema is empty");
 
@@ -94,7 +95,7 @@ namespace PiRhoSoft.CompositionEditor
 			return _createPopup.IsNameValid && _createPopup.IsTypeValid;
 		}
 
-		private class DefinitionsProxy : ListProxy
+		private class DefinitionsProxy : UtilityEditor.ListProxy
 		{
 			public VariableSchema Schema;
 
