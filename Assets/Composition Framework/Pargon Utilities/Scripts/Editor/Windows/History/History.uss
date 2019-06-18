@@ -1,0 +1,36 @@
+.horizontal-row
+{
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.header-button
+{
+	margin: 5px;
+	width: 100px;
+	flex-shrink: 1;
+}
+
+.selection-list
+{
+	flex-grow: 1;
+	flex-shrink: 0;
+	flex-basis: 0;
+}
+
+.selection-item
+{
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+.selection-label
+{
+	padding-left: 6px;
+	align-self:center;
+}
+
+.selection-label.current
+{
+	-unity-font-style: bold;
+}

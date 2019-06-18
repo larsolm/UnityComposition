@@ -1,0 +1,17 @@
+﻿EnumButtons
+{
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex-grow: 1;
+}
+
+EnumButtons > Button
+{
+	flex-grow: 1;
+	margin: 0;
+}
+
+EnumButtons > Button.active
+{
+	background-color: #6B6B6B
+}

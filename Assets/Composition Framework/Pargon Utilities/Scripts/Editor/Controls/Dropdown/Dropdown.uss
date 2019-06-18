@@ -1,0 +1,10 @@
+﻿.base-dropdown
+{
+	flex-grow: 1;
+}
+
+.base-dropdown > PopupField
+{
+	margin-left: 0;
+	margin-right: 0;
+}

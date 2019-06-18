@@ -1,0 +1,61 @@
+﻿EnumButtons
+{
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex-grow: 1;
+}
+
+EnumButtons > Button
+{
+	flex-grow: 1;
+	margin: 0;
+}
+
+EnumButtons > Button.active
+{
+	background-color: #6B6B6B
+}
+
+ListElement
+{
+}
+
+ListElement .pargon-list-header
+{
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+ListElement .pargon-list-label
+{
+	flex-grow: 1;
+}
+
+ListElement .pargon-list-add-button
+{
+}
+
+ListElement .pargon-list-container
+{
+}
+
+ListElement .pargon-list-item
+{
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+ListElement .pargon-list-item-container
+{
+	flex-grow: 1;
+}
+
+ListElement .pargon-list-item-drag
+{
+	background-color: #000;
+}
+
+ListElement .pargon-list-drag-handle
+{
+	cursor: move-arrow;
+}

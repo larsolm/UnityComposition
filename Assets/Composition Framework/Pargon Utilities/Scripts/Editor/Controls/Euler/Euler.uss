@@ -1,0 +1,12 @@
+﻿Euler
+{
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+Euler > Vector3Field
+{
+	flex-grow: 1;
+	margin-left: 0;
+	margin-right: 0;
+}

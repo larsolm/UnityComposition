@@ -1,0 +1,18 @@
+﻿.placeholder
+{
+	flex-grow: 1;
+}
+
+.placeholder .input
+{
+	flex-grow: 1;
+	margin-left: 0;
+	margin-right: 0;
+}
+
+.placeholder .text
+{
+	position: absolute;
+	padding: 2px 3px 3px 3px;
+	opacity: 0.5;
+}
