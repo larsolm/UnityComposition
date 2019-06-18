@@ -6,5 +6,6 @@
 	xsi:noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd"
 >
 	<engine:VisualElement class="pargon-autocomplete-popup">
+		<engine:ScrollView name="pargon-autocomplete-container" />
 	</engine:VisualElement>
 </engine:UXML>

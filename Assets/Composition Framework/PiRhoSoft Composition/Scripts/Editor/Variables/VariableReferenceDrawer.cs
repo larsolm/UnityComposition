@@ -1,8 +1,11 @@
 ﻿using System.Reflection;
 using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
+using PiRhoSoft.PargonUtilities.Engine;
 using PiRhoSoft.UtilityEditor;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -51,8 +54,43 @@ namespace PiRhoSoft.CompositionEditor
 		}
 	}
 
-	[CustomPropertyDrawer(typeof(VariableReference))]
-	public class VariableReferenceDrawer : PropertyDrawer<VariableReferenceControl>
+	public class VariableReferenceElement : TextField
 	{
+		private Object _owner;
+		private VariableReference _reference;
+		private AutocompleteSource _source;
+
+		public void Setup(SerializedProperty property, AutocompleteSource source)
+		{
+			var reference = PargonUtilities.Editor.PropertyHelper.GetObject<VariableReference>(property);
+			Setup(property.serializedObject.targetObject, reference, source);
+		}
+
+		public void Setup(Object owner, VariableReference reference, AutocompleteSource source)
+		{
+			_owner = owner;
+			_reference = reference;
+			_source = source;
+
+			EditHelper.Bind(this, _owner, () => text, () => _reference.Variable, value => SetValueWithoutNotify(value), value => _reference.Variable = value);
+
+			style.flexGrow = 1;
+		}
+	}
+
+	[CustomPropertyDrawer(typeof(VariableReference))]
+	public class VariableReferenceDrawer : PropertyDrawer
+	{
+		public override VisualElement CreatePropertyGUI(SerializedProperty property)
+		{
+			var source = property.serializedObject.targetObject as IAutocompleteSource;
+			var container = ElementHelper.CreatePropertyContainer(property.displayName);
+			var element = new VariableReferenceElement();
+
+			element.Setup(property, source.AutocompleteSource);
+			container.Add(element);
+
+			return container;
+		}
 	}
 }

@@ -32,8 +32,13 @@ namespace PiRhoSoft.CompositionEngine
 	{
 	}
 
-	public abstract class InstructionGraphNode : ScriptableObject
+	public abstract class InstructionGraphNode : ScriptableObject, PargonUtilities.Engine.IAutocompleteSource
 	{
+		public class InstructionGraphNodeAutocompleteSource : PargonUtilities.Engine.AutocompleteSource
+		{
+			public override List<PargonUtilities.Engine.AutocompleteItem> Items => new List<PargonUtilities.Engine.AutocompleteItem>();
+		}
+
 		public static class Colors
 		{
 			public static readonly Color Start = new Color(0.1f, 0.1f, 0.1f);
@@ -647,6 +652,8 @@ namespace PiRhoSoft.CompositionEngine
 		[HideInInspector] public bool IsBreakpoint = false;
 
 		public virtual Color NodeColor => Colors.Default;
+
+		public PargonUtilities.Engine.AutocompleteSource AutocompleteSource => new InstructionGraphNodeAutocompleteSource();
 
 		private void UpdateName()
 		{

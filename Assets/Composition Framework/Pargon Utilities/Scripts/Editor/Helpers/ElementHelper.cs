@@ -108,9 +108,37 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			}
 		}
 
+		public static void ToggleClass(VisualElement element, string className, bool isValid)
+		{
+			if (isValid && !element.ClassListContains(className))
+				element.AddToClassList(className);
+			else if (!isValid && element.ClassListContains(className))
+				element.RemoveFromClassList(className);
+		}
+
+		public static void AlternateClass(VisualElement element, string validClass, string invalidClass, bool isValid)
+		{
+			if (isValid)
+			{
+				if (!element.ClassListContains(validClass))
+					element.AddToClassList(validClass);
+
+				if (element.ClassListContains(invalidClass))
+					element.RemoveFromClassList(invalidClass);
+			}
+			else
+			{
+				if (!element.ClassListContains(invalidClass))
+					element.AddToClassList(invalidClass);
+
+				if (element.ClassListContains(validClass))
+					element.RemoveFromClassList(validClass);
+			}
+		}
+
 		public static void SetVisible(VisualElement element, bool visible)
 		{
-			element.style.display = new StyleEnum<DisplayStyle>(visible ? DisplayStyle.Flex: DisplayStyle.None);
+			element.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
 		}
 
 		public static VisualElement CreateFallbackContainer(SerializedProperty property)
