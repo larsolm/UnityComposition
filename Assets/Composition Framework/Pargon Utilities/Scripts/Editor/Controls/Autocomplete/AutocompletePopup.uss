@@ -1,0 +1,10 @@
+﻿.pargon-autocomplete-item-active
+{
+	background-color: #5555ff;
+	color: #DDDDDD;
+}
+
+.pargon-autocomplete-item-invalid
+{
+	color: #555555;
+}
