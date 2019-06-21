@@ -4,22 +4,36 @@ using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.PargonInspector.Editor
 {
-	public class AutocompleteElement : BindableValueElement<string>
+	public class AutocompleteElement : VisualElement, IBindableProperty<string>, IBindableObject<string>
 	{
-		private const string _styleSheetPath = "Assets/PargonInspector/Scripts/Editor/Controls/Autocomplete/Autocomplete.uss";
-
-		protected override string GetValueFromProperty(SerializedProperty property) => property.stringValue;
-		protected override void SetValueToProperty(SerializedProperty property, string value) => property.stringValue = value;
+		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Autocomplete/Autocomplete.uss";
 
 		private AutocompleteSource _source;
 		private TextField _text;
 		private AutocompletePopup _popup;
 		private bool _isOpen;
 
-		public void Setup(SerializedProperty property, AutocompleteSource source)
+		private Func<string> _getValue;
+		private Action<string> _setValue;
+
+		public AutocompleteElement(SerializedProperty property)
+		{
+			ElementHelper.Bind(this, this, property);
+		}
+
+		public AutocompleteElement(Object owner, Func<string> getValue, Action<string> setValue)
+		{
+			ElementHelper.Bind(this, this, owner);
+
+			_getValue = getValue;
+			_setValue = setValue;
+		}
+
+		public void Setup(AutocompleteSource source)
 		{
 			_source = source;
 			_text = new TextField();
@@ -28,16 +42,28 @@ namespace PiRhoSoft.PargonInspector.Editor
 			SetupEvents(_text);
 
 			Add(_text);
-			BindToProperty(property);
+
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
 			_popup.Setup(source);
 		}
 
-		protected override void Refresh()
+		#region Bindings
+
+		public string GetValueFromElement(VisualElement element) => _text.value;
+		public string GetValueFromProperty(SerializedProperty property) => property.stringValue;
+		public string GetValueFromObject(Object owner) => _getValue();
+		public void UpdateElement(string value, VisualElement element, SerializedProperty property) => UpdateElement(value);
+		public void UpdateElement(string value, VisualElement element, Object owner) => UpdateElement(value);
+		public void UpdateProperty(string value, VisualElement element, SerializedProperty property) => property.stringValue = value;
+		public void UpdateObject(string value, VisualElement element, Object owner) => _setValue(value);
+
+		private void UpdateElement(string value)
 		{
 			if (_isOpen)
 				Filter(value);
 		}
+
+		#endregion
 
 		private void SetupEvents(TextField field)
 		{
@@ -66,7 +92,7 @@ namespace PiRhoSoft.PargonInspector.Editor
 
 		private void OnValueChanged(ChangeEvent<string> e)
 		{
-			value = e.newValue;
+			//value = e.newValue;
 
 			if (string.IsNullOrEmpty(e.previousValue) && !_isOpen)
 				Open();
@@ -76,7 +102,7 @@ namespace PiRhoSoft.PargonInspector.Editor
 		{
 			_isOpen = true;
 			var window = EditorWindow.focusedWindow;
-			_popup.Show(worldBound, value);
+			//_popup.Show(worldBound, value);
 			window.Focus();
 			schedule.Execute(() =>
 			{

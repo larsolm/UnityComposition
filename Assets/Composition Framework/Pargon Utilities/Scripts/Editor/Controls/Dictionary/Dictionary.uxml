@@ -5,9 +5,9 @@
 	xmlns:editor="UnityEditor.UIElements"
 	xsi:noNamespaceSchemaLocation="../../../../../../UIElementsSchema/UIElements.xsd"
 >
-	<engine:VisualElement class="pargon-list-header">
-		<engine:Label name="list-label" class="pargon-list-label" />
-		<engine:Image name="list-add-button" text="+" class="pargon-list-add-button" />
+	<engine:VisualElement class="pargon-dictionary-header">
+		<engine:Label name="dictionary-label" class="pargon-dictionary-label" />
+		<engine:Image name="dictionary-add-button" class="pargon-dictionary-add-button" />
 	</engine:VisualElement>
-	<engine:VisualElement name="list-container" class="pargon-list-container" />
+	<engine:VisualElement name="dictionary-container" class="pargon-dictionary-container" />
 </engine:UXML>

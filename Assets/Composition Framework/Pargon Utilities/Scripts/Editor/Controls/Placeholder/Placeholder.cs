@@ -5,34 +5,40 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class Placeholder<T> : VisualElement
 	{
-		private const string _invalidChildrenWarning = "(PICPIC) Unable to find child text input field Placeholder";
+		private const string _invalidChildrenWarning = "(PUCPIC) Unable to find child text input field Placeholder";
 
-		private const string _styleSheetPath = "Assets/PargonUtilities/Scripts/Editor/Controls/Placeholder/Placeholder.uss";
-
-		public string Text { get; private set; }
+		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Placeholder/Placeholder.uss";
+		private const string _ussPlaceholder = "placeholder";
+		private const string _ussInput = "input";
+		private const string _ussText = "text";
 
 		private TextInputBaseField<T> _input;
 		private Label _placeholder;
 
-		public void Setup(string text, SerializedProperty property)
+		public Placeholder(string text, SerializedProperty property)
 		{
-			Add(new BindablePropertyElement(property, null));
+			Add(new ElementHelper.BindablePropertyElement(property, null, null));
 			Setup(text);
 		}
 
-		public void Setup(string text)
+		public Placeholder(string text, TextInputBaseField<T> input)
+		{
+			Add(input);
+			Setup(text);
+		}
+
+		private void Setup(string text)
 		{
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
 
-			Text = text;
+			AddToClassList(_ussPlaceholder);
 
-			AddToClassList("placeholder");
-
-			_input = this.Query<TextInputBaseField<T>>();
+			_input = this.Q<TextInputBaseField<T>>();
 			_input.RegisterValueChangedCallback(e => TextChanged());
-			_input.AddToClassList("input");
+			_input.AddToClassList(_ussInput);
+
 			_placeholder = new Label(text);
-			_placeholder.AddToClassList("text");
+			_placeholder.AddToClassList(_ussText);
 
 			_input.Add(_placeholder);
 

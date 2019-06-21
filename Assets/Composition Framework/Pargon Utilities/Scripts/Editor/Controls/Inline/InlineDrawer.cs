@@ -11,7 +11,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
 			var inline = attribute as InlineAttribute;
-			var container = ElementHelper.CreatePropertyContainer(inline.ShowMemberLabels ? null : property.displayName);
+			var label = inline.ShowMemberLabels ? null : property.displayName;
+			var tooltip = inline.ShowMemberLabels ? null : ElementHelper.GetTooltip(fieldInfo);
+			var container = ElementHelper.CreatePropertyContainer(label, tooltip);
 			var end = property.GetEndProperty();
 
 			property.NextVisible(true);

@@ -1,4 +1,4 @@
-﻿.base-button
+﻿.picker-button
 {
 	flex-wrap: wrap;
 	justify-content: center;

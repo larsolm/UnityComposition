@@ -12,13 +12,12 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName);
+			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
 
 			if (property.propertyType == SerializedPropertyType.Quaternion)
 			{
-				var euler = new Euler();
-
-				euler.Setup(property);
+				var euler = new Euler(property);
+				euler.Setup(property.quaternionValue);
 				container.Add(euler);
 			}
 			else

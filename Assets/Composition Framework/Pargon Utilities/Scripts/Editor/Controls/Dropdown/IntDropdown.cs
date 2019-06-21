@@ -1,15 +1,21 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
+using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class IntDropdown : Dropdown<int>
 	{
-		protected override int GetValueFromProperty(SerializedProperty property)
+		public IntDropdown(SerializedProperty property) : base(property) { }
+		public IntDropdown(Object owner, Func<int> getValue, Action<int> setValue) : base(owner, getValue, setValue) { }
+
+		public override int GetValueFromProperty(SerializedProperty property)
 		{
 			return property.intValue;
 		}
 
-		protected override void SetValueToProperty(SerializedProperty property, int value)
+		public override void UpdateProperty(int value, VisualElement element, SerializedProperty property)
 		{
 			property.intValue = value;
 		}

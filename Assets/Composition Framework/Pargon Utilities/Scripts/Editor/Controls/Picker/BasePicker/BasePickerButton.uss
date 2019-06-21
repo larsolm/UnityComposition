@@ -1,4 +1,4 @@
-﻿.base-button
+﻿.picker-button
 {
 	flex-grow: 1;
 	flex-direction: row;
@@ -6,7 +6,7 @@
 	align-items: center;
 }
 
-.base-button > Button
+.picker-button > Button
 {
 	flex-direction: row;
 	justify-content: center;
@@ -14,18 +14,18 @@
 	margin: 0;
 }
 
-.base-button > Button > Image
+.picker-button > Button > Image
 {
 	width: 16px;
 	height: 16px;
 }
 
-.base-button > Button > Label
+.picker-button > Button > Label
 {
 	margin-left: 5px;
 }
 
-.base-button > Image
+.picker-button > Image
 {
 	width: 16px;
 	height: 16px;

@@ -27,7 +27,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 					Debug.LogWarningFormat(_invalidReturnWarning, property.propertyPath, change.Method);
 				else if (method.GetParameters().Length > 0)
 					Debug.LogWarningFormat(_invalidParametersWarning, property.propertyPath, change.Method);
-				else if (!ElementHelper.RegisterChangeEvent(container, () => method.Invoke(obj, null)))
+				else if (!ElementHelper.RegisterChangeEvent(container, () => method.Invoke(obj, null))) // This won't always work since not everything is an INotificationThing
 					Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
 			}
 			else

@@ -9,8 +9,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public abstract class BasePicker<T> : VisualElement where T : class
 	{
-		private const string _styleSheetPath = "Assets/PargonUtilities/Scripts/Editor/Controls/Picker/BasePicker/BasePicker.uss";
-		private const string _uxmlPath = "Assets/PargonUtilities/Scripts/Editor/Controls/Picker/BasePicker/BasePicker.uxml";
+		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Picker/BasePicker/BasePicker.uss";
+		private const string _uxmlPath = Utilities.AssetPath + "Controls/Picker/BasePicker/BasePicker.uxml";
 
 		private static readonly Icon _folderIcon = Icon.BuiltIn("FolderEmpty Icon");
 		private static readonly Icon _defaultTypeIcon = Icon.BuiltIn("cs Script Icon");

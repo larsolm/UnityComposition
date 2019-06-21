@@ -1,40 +1,74 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
+using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.PargonUtilities.Editor
 {
-	public abstract class Dropdown<T> : BindableValueElement<T>
+	public abstract class Dropdown<T> : VisualElement, IBindableProperty<T>, IBindableObject<T>
 	{
-		private const string _styleSheetPath = "Assets/PargonUtilities/Scripts/Editor/Controls/Dropdown/Dropdown.uss";
+		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Dropdown/Dropdown.uss";
+		private const string _ussBase = "dropdown";
 
 		private PopupField<T> _popup;
-		protected List<string> _options;
-		protected List<T> _values;
+		private List<string> _options;
+		private List<T> _values;
+		private Func<T> _getValue;
+		private Action<T> _setValue;
 
-		public void Setup(List<string> options, List<T> values, SerializedProperty property)
+		public abstract T GetValueFromProperty(SerializedProperty property);
+		public abstract void UpdateProperty(T value, VisualElement element, SerializedProperty property);
+
+		public Dropdown(SerializedProperty property)
 		{
-			Setup(options, values, GetValueFromProperty(property));
-			BindToProperty(property);
+			ElementHelper.Bind(this, this, property);
 		}
 
-		public void Setup(List<string> options, List<T> values, T initialValue)
+		public Dropdown(Object owner, Func<T> getValue, Action<T> setValue)
+		{
+			ElementHelper.Bind(this, this, owner);
+
+			_getValue = getValue;
+			_setValue = setValue;
+		}
+
+		public void Setup(List<string> options, List<T> values, T value)
 		{
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
 
 			_options = options;
 			_values = values;
-			_popup = new PopupField<T>(values, initialValue, GetName, GetName);
+			_popup = new PopupField<T>(values, value, GetName, GetName);
 
-			AddToClassList("base-dropdown");
+			AddToClassList(_ussBase);
 			Add(_popup);
-
-			SetValueWithoutNotify(initialValue);
 		}
 
-		protected override void Refresh()
+		public T GetValueFromElement(VisualElement element)
 		{
-			_popup.value = value;
+			return _popup.value;
+		}
+
+		public T GetValueFromObject(Object owner)
+		{
+			return _getValue();
+		}
+
+		public void UpdateElement(T value, VisualElement element, SerializedProperty property)
+		{
+			_popup.SetValueWithoutNotify(value);
+		}
+
+		public void UpdateElement(T value, VisualElement element, Object owner)
+		{
+			_popup.SetValueWithoutNotify(value);
+		}
+
+		public void UpdateObject(T value, VisualElement element, Object owner)
+		{
+			_setValue(value);
 		}
 
 		private string GetName(T value)

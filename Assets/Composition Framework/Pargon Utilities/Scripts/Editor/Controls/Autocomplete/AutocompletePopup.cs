@@ -16,8 +16,8 @@ namespace PiRhoSoft.PargonInspector.Editor
 		private string _itemValidClass = "pargon-autocomplete-item-valid";
 		private string _itemInvalidClass = "pargon-autocomplete-item-invalid";
 
-		private const string _uxmlPath = "Assets/PargonInspector/Scripts/Editor/Controls/Autocomplete/AutocompletePopup.uxml";
-		private const string _styleSheetPath = "Assets/PargonInspector/Scripts/Editor/Controls/Autocomplete/AutocompletePopup.uss";
+		private const string _uxmlPath = Utilities.AssetPath + "Controls/Autocomplete/AutocompletePopup.uxml";
+		private const string _styleSheetPath = Utilities.AssetPath + "Autocomplete/AutocompletePopup.uss";
 
 		private List<string> _items;
 		private VisualElement _container;

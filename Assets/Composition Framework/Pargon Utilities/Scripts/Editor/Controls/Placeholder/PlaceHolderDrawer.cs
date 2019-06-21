@@ -12,31 +12,17 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName);
+			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
 			var place = attribute as PlaceholderAttribute;
 
 			if (property.propertyType == SerializedPropertyType.String)
-			{
-				var placeholder = new Placeholder<string>();
-				placeholder.Setup(place.Placeholder, property);
-				container.Add(placeholder);
-			}
+				container.Add(new Placeholder<string>(place.Placeholder, property));
 			else if (property.propertyType == SerializedPropertyType.Integer)
-			{
-				var placeholder = new Placeholder<int>();
-				placeholder.Setup(place.Placeholder, property);
-				container.Add(placeholder);
-			}
+				container.Add(new Placeholder<int>(place.Placeholder, property));
 			else if (property.propertyType == SerializedPropertyType.Float)
-			{
-				var placeholder = new Placeholder<float>();
-				placeholder.Setup(place.Placeholder, property);
-				container.Add(placeholder);
-			}
+				container.Add(new Placeholder<float>(place.Placeholder, property));
 			else
-			{
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
-			}
 
 			return container;
 		}

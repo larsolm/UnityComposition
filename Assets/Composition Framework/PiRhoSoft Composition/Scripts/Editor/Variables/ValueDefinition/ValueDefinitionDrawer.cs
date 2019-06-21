@@ -8,6 +8,7 @@ using PiRhoSoft.UtilityEditor;
 using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
@@ -515,7 +516,27 @@ namespace PiRhoSoft.CompositionEditor
 	}
 
 	[CustomPropertyDrawer(typeof(ValueDefinition))]
-	public class ValueDefinitionDrawer : PropertyDrawer<ValueDefinitionControl>
+	public class ValueDefinitionDrawer : PropertyDrawer
 	{
+		public override VisualElement CreatePropertyGUI(SerializedProperty property)
+		{
+			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
+
+			var typeProperty = property.FindPropertyRelative("_type");
+			var constraintProperty = property.FindPropertyRelative("_constraint");
+			var objectsProperty = property.FindPropertyRelative("_objects");
+			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
+			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
+
+			var data = constraintProperty.stringValue;
+			var objects = new List<Object>();
+
+			for (var i = 0; i < objectsProperty.arraySize; i++)
+				objects.Add(objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
+
+			var constraint = VariableHandler.LoadConstraint(ref data, ref objects);
+
+			return container;
+		}
 	}
 }

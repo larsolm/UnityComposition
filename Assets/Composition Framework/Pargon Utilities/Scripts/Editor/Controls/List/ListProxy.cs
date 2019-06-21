@@ -37,7 +37,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override void AddItem()
 		{
-			Property.arraySize += 1;
+			Property.arraySize++;
 
 			// The newly added item will be a copy of the previous last item so reset it
 			PropertyHelper.SetToDefault(Property.GetArrayElementAtIndex(Property.arraySize - 1));
@@ -65,18 +65,18 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		}
 	}
 
-	public class IListListProxy<T> : ListProxy
+	public class ListProxy<T> : ListProxy
 	{
 		private IList<T> _list;
-		private Func<T, VisualElement> _creator;
+		private readonly Func<T, VisualElement> _creator;
 
-		public IListListProxy(IList<T> list, Func<T, VisualElement> creator)
+		public override int Count => _list.Count;
+
+		public ListProxy(IList<T> list, Func<T, VisualElement> creator)
 		{
 			_list = list;
 			_creator = creator;
 		}
-
-		public override int Count { get; }
 
 		public override VisualElement CreateElement(int index)
 		{
@@ -104,9 +104,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	public class ArrayListProxy<T> : ListProxy
 	{
 		private T[] _array;
-		private Func<T, VisualElement> _creator;
+		private readonly Func<T, int, VisualElement> _creator;
 
-		public ArrayListProxy(T[] array, Func<T, VisualElement> creator)
+		public ArrayListProxy(T[] array, Func<T, int, VisualElement> creator)
 		{
 			_array = array;
 			_creator = creator;
@@ -116,15 +116,17 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreateElement(int index)
 		{
-			return _creator(_array[index]);
+			return _creator(_array[index], index);
 		}
 
 		public override void AddItem()
 		{
+			ArrayUtility.Add(ref _array, default);
 		}
 
 		public override void RemoveItem(int index)
 		{
+			ArrayUtility.RemoveAt(ref _array, index);
 		}
 
 		public override void MoveItem(int from, int to)

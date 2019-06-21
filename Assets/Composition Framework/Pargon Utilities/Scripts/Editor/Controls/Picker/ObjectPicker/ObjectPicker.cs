@@ -7,16 +7,118 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.PargonUtilities.Editor
 {
-	public class ObjectPicker : BasePicker<Object>
+	public class ObjectPicker : BasePickerButton<Object>
 	{
-		private const string _invalidTypeWarning = "(PITPIT) Invalid type for TypePicker: the type '{0}' could not be found";
+		private class Picker : BasePicker<Object>
+		{
+			public void Setup(Type type, Object value)
+			{
+				if (typeof(Component).IsAssignableFrom(type) || typeof(GameObject) == type)
+				{
+					// TODO: build hierarchy
+				}
+				else
+				{
+					var assets = AssetHelper.GetAssetList(type);
+					CreateTree(assets.Type.Name, assets.Paths, assets.Assets, value, asset =>
+					{
+						var icon = AssetPreview.GetMiniThumbnail(asset);
+						return icon == null && asset ? AssetPreview.GetMiniTypeThumbnail(asset.GetType()) : icon;
+					});
+				}
+			}
+		}
 
-		private class Factory : UxmlFactory<TypePicker, Traits> { }
+		private const string _invalidTypeWarning = "(PUCOPIT) Invalid type for ObjectPicker: the type '{0}' must be derived from UnityEngine.Object";
 
-		public class Traits : UxmlTraits
+		public Type Type { get; private set; }
+
+		private Image _inspect;
+
+		public ObjectPicker() { }
+		public ObjectPicker(SerializedProperty property) : base(property) { }
+		public ObjectPicker(Object owner, Func<Object> getValue, Action<Object> setValue) : base(owner, getValue, setValue) { }
+
+		public void Setup(Type type, string assetPath)
+		{
+			Setup(type, AssetDatabase.LoadAssetAtPath<Object>(assetPath));
+		}
+
+		public void Setup(Type type, Object value)
+		{
+			if (type == null || !(typeof(Object).IsAssignableFrom(type)))
+			{
+				Debug.LogWarningFormat(_invalidTypeWarning, type);
+				return;
+			}
+
+			Type = type;
+
+			var picker = new Picker();
+			picker.Setup(Type, value);
+			picker.OnSelected += selectedObject =>
+			{
+				Value = selectedObject;
+				ElementHelper.SendChangeEvent(this, value, Value);
+			};
+
+			_inspect = new Image { image = Icon.Inspect.Content };
+			_inspect.AddManipulator(new Clickable(Inspect));
+
+			Setup(picker, value);
+
+			Add(_inspect);
+		}
+
+		private void Inspect()
+		{
+			if (Value)
+				Selection.activeObject = Value;
+		}
+
+		#region BindableValueElement Implementation
+
+		public override Object GetValueFromProperty(SerializedProperty property)
+		{
+			if (property.propertyType == SerializedPropertyType.ObjectReference)
+				return property.objectReferenceValue;
+			else if (property.propertyType == SerializedPropertyType.String)
+				return AssetDatabase.LoadAssetAtPath<Object>(property.stringValue);
+			else
+				return null;
+		}
+
+		public override void UpdateProperty(Object value, VisualElement element, SerializedProperty property)
+		{
+			if (property.propertyType == SerializedPropertyType.ObjectReference)
+				property.objectReferenceValue = value;
+			else if (property.propertyType == SerializedPropertyType.String)
+				property.stringValue = AssetDatabase.GetAssetPath(value);
+		}
+
+		protected override void UpdateElement(Object value)
+		{
+			var text = value == null ? $"None ({Type.Name})" : value.name;
+			var icon = AssetPreview.GetMiniThumbnail(value);
+
+			if (icon == null && value)
+				icon = AssetPreview.GetMiniTypeThumbnail(value.GetType());
+
+			SetLabel(icon, text);
+
+			_inspect.SetEnabled(value);
+		}
+
+		#endregion
+
+		#region UXML
+
+		private class Factory : UxmlFactory<ObjectPicker, Traits> { }
+
+		private class Traits : UxmlTraits
 		{
 			private UxmlStringAttributeDescription _type = new UxmlStringAttributeDescription { name = "type", use = UxmlAttributeDescription.Use.Required };
-			private UxmlBoolAttributeDescription _showAbstract = new UxmlBoolAttributeDescription { name = "show-abstract", defaultValue = true };
+			private UxmlStringAttributeDescription _path = new UxmlStringAttributeDescription { name = "asset-path" };
 
 			public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
 			{
@@ -27,37 +129,15 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				base.Init(ve, bag, cc);
 
-				var typePicker = ve as TypePicker;
+				var button = ve as ObjectPicker;
 				var typeName = _type.GetValueFromBag(bag, cc);
+				var path = _path.GetValueFromBag(bag, cc);
 				var type = Type.GetType(typeName);
-				var showAbstract = _showAbstract.GetValueFromBag(bag, cc);
 
-				if (type != null)
-					typePicker.Setup(type, showAbstract, null);
-				else
-					Debug.LogWarningFormat(_invalidTypeWarning, typeName);
+				button.Setup(type, path);
 			}
 		}
 
-		public Type Type { get; private set; }
-
-		public void Setup(Type type, Object initialValue)
-		{
-			Type = type;
-
-			if (Type != null)
-			{
-				var assets = AssetHelper.GetAssetList(Type);
-				CreateTree(assets.Type.Name, assets.Paths, assets.Assets, initialValue, asset =>
-				{
-					var icon = AssetPreview.GetMiniThumbnail(asset);
-					return icon == null && asset ? AssetPreview.GetMiniTypeThumbnail(asset.GetType()) : icon;
-				});
-			}
-			else
-			{
-				Debug.LogWarningFormat(_invalidTypeWarning, Type);
-			}
-		}
+		#endregion
 	}
 }

@@ -1,45 +1,62 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
 	public class InstructionCallerElement : VisualElement
 	{
+		private Object _owner;
 		private InstructionCaller _caller;
 
 		private ListElement _inputs;
 		private ListElement _outputs;
 
-		public void Setup(SerializedProperty property)
+		public InstructionCallerElement(SerializedProperty property)
 		{
-			var caller = PropertyHelper.GetObject<InstructionCaller>(property);
-		}
+			_owner = property.serializedObject.targetObject;
+			_caller = PropertyHelper.GetObject<InstructionCaller>(property);
 
-		public void Setup(InstructionCaller caller)
-		{
-			_caller = caller;
-			_caller.UpdateVariables();
-
-			var picker = new ObjectPickerButton();
+			var picker = new ObjectPicker(property.FindPropertyRelative(nameof(InstructionCaller.Instruction)));
 			picker.Setup(typeof(Instruction), _caller.Instruction);
-
-			_inputs = new ListElement { AllowAdd = false, AllowRemove = false, AllowMove = false };
-			_inputs.Setup("Inputs", new IListListProxy<InstructionInput>(_caller.Inputs, CreateInput));
-
-			_outputs = new ListElement() { AllowAdd = false, AllowRemove = false, AllowMove = false };
-			_outputs.Setup("Outputs", new IListListProxy<InstructionOutput>(_caller.Outputs, CreateOutput));
+			picker.RegisterCallback<ChangeEvent<Object>>(e => UpdateVariables());
 
 			Add(picker);
-			Add(_inputs);
-			Add(_outputs);
 
-			if (_caller.Inputs.Count == 0)
-				ElementHelper.SetVisible(_inputs, false);
+			UpdateVariables();
+		}
+
+		private void UpdateVariables()
+		{
+			_caller.UpdateVariables();
+
+			if (_inputs != null)
+			{
+				Remove(_inputs);
+				_inputs = null;
+			}
+
+			if (_outputs != null)
+			{
+				Remove(_outputs);
+				_outputs = null;
+			}
+
+			if (_caller.Inputs.Count > 0)
+			{
+				var proxy = new ListProxy<InstructionInput>(_caller.Inputs, CreateInput);
+				_inputs = new ListElement(proxy, "Inputs", ElementHelper.GetTooltip(typeof(InstructionCaller), "_inputs")) { AllowAdd = false, AllowRemove = false, AllowMove = false };
+				Add(_inputs);
+			}
 
 			if (_caller.Outputs.Count == 0)
-				ElementHelper.SetVisible(_outputs, false);
+			{
+				var proxy = new ListProxy<InstructionOutput>(_caller.Outputs, CreateOutput);
+				_outputs = new ListElement(proxy, "Outputs", ElementHelper.GetTooltip(typeof(InstructionCaller), "_outputs")) { AllowAdd = false, AllowRemove = false, AllowMove = false };
+				Add(_outputs);
+			}
 		}
 
 		private VisualElement CreateInput(InstructionInput input)
@@ -48,15 +65,27 @@ namespace PiRhoSoft.CompositionEditor
 			var container = new VisualElement();
 			var label = new Label(definition.Name);
 
-			//input.Type = (InstructionInputType)EditorGUI.EnumPopup(typeRect, input.Type);
+			var typeElement = new EnumDropdown(_owner, () => (int)input.Type, value => input.Type = (InstructionInputType)value);
+			typeElement.Setup(input.Type);
 
-			//switch (input.Type)
-			//{
-			//	case InstructionInputType.Reference: VariableReferenceControl.Draw(rect, input.Reference, GUIContent.none); break;
-			//	case InstructionInputType.Value: input.Value = VariableValueDrawer.Draw(rect, GUIContent.none, input.Value, definition.Definition, true); break;
-			//}
+			var referenceElement = new VariableReferenceElement();
+			referenceElement.Setup(_owner, input.Reference, null); // TODO: Add an autocompletesource
 
+			var valueElement = new VariableValueElement(_owner, input.Name, () => input.Value, value => input.Value = value, () => _caller.GetInputDefinition(input).Definition );
+			valueElement.Setup(input.Value, definition.Definition);
+
+			typeElement.RegisterCallback<ChangeEvent<int>>(e =>
+			{
+				var t = (InstructionInputType)e.newValue;
+
+				ElementHelper.SetVisible(referenceElement, t == InstructionInputType.Reference);
+				ElementHelper.SetVisible(valueElement, t == InstructionInputType.Value);
+			});
+			
 			container.Add(label);
+			container.Add(typeElement);
+			container.Add(referenceElement);
+			container.Add(valueElement);
 
 			return container;
 		}
@@ -67,15 +96,17 @@ namespace PiRhoSoft.CompositionEditor
 			var container = new VisualElement();
 			var label = new Label(definition.Name);
 
-			//output.Type = (InstructionOutputType)EditorGUI.EnumPopup(typeRect, output.Type);
-			//
-			//switch (output.Type)
-			//{
-			//	case InstructionOutputType.Ignore: break;
-			//	case InstructionOutputType.Reference: VariableReferenceControl.Draw(rect, output.Reference, GUIContent.none); break;
-			//}
+			var type = new EnumDropdown(_owner, () => (int)output.Type, value => output.Type = (InstructionOutputType)value);
+			type.Setup(output.Type);
+
+			var reference = new VariableReferenceElement();
+			reference.Setup(_owner, output.Reference, null); // TODO: Add an autocompletesource
+
+			type.RegisterCallback<ChangeEvent<int>>(e => ElementHelper.SetVisible(reference, (InstructionOutputType)e.newValue == InstructionOutputType.Reference));
 
 			container.Add(label);
+			container.Add(type);
+			container.Add(reference);
 
 			return container;
 		}

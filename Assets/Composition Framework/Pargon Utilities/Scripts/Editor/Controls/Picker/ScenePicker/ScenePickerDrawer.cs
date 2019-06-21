@@ -13,50 +13,49 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName);
+			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
 
 			if (property.propertyType == SerializedPropertyType.Integer || property.propertyType == SerializedPropertyType.String || fieldInfo.FieldType == typeof(SceneReference))
 			{
-				var picker = new ScenePickerButton();
+				var picker = new ScenePicker(property);
+				var scenePicker = attribute as ScenePickerAttribute;
+				
+				var method = fieldInfo.DeclaringType.GetMethod(scenePicker.CreateMethod, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+				void onCreate() => method?.Invoke(method.IsStatic ? null : property.serializedObject.targetObject, null);
 
-				if (attribute is ScenePickerAttribute pickerAttribute)
-				{
-					var method = fieldInfo.DeclaringType.GetMethod(pickerAttribute.CreateMethod, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-					void onCreate() => method?.Invoke(method.IsStatic ? null : property.serializedObject.targetObject, null);
-
-					picker.Setup(property, onCreate);
-				}
-				else
-				{
-					picker.Setup(property, null);
-				}
+				if (property.propertyType == SerializedPropertyType.String)
+					picker.Setup(property.stringValue, onCreate);
+				else if (property.propertyType == SerializedPropertyType.Integer)
+					picker.Setup(property.intValue, onCreate);
+				else // SceneReference
+					picker.Setup(property.FindPropertyRelative(nameof(SceneReference.Path)).stringValue, onCreate);
 
 				container.Add(picker);
+
+				//if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
+				//{
+				//	var obj = DragAndDrop.objectReferences[0];
+				//
+				//	if (obj is SceneAsset asset)
+				//	{
+				//		if (Event.current.type == EventType.DragUpdated)
+				//		{
+				//			DragAndDrop.visualMode = DragAndDropVisualMode.Link;
+				//			Event.current.Use();
+				//		}
+				//
+				//		if (Event.current.type == EventType.DragPerform)
+				//		{
+				//			scene.Path = AssetDatabase.GetAssetPath(asset);
+				//			DragAndDrop.AcceptDrag();
+				//		}
+				//	}
+				//}
 			}
 			else
 			{
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
 			}
-
-			//if (DragAndDrop.objectReferences.Length > 0 && rect.Contains(Event.current.mousePosition))
-			//{
-			//	var obj = DragAndDrop.objectReferences[0];
-			//
-			//	if (obj is SceneAsset asset)
-			//	{
-			//		if (Event.current.type == EventType.DragUpdated)
-			//		{
-			//			DragAndDrop.visualMode = DragAndDropVisualMode.Link;
-			//			Event.current.Use();
-			//		}
-			//
-			//		if (Event.current.type == EventType.DragPerform)
-			//		{
-			//			scene.Path = AssetDatabase.GetAssetPath(asset);
-			//			DragAndDrop.AcceptDrag();
-			//		}
-			//	}
-			//}
 
 			return container;
 		}

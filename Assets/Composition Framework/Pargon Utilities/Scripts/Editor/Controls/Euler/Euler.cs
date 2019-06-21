@@ -1,14 +1,85 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.PargonUtilities.Editor
 {
-	public class Euler : BindableValueElement<Quaternion>
+	public class Euler : VisualElement, IBindableProperty<Quaternion>, IBindableObject<Quaternion>
 	{
-		private const string _styleSheetPath = "Assets/PargonUtilities/Scripts/Editor/Controls/Euler/Euler.uss";
+		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Euler/Euler.uss";
+
+		private Vector3Field _field;
+		private Func<Quaternion> _getValue;
+		private Action<Quaternion> _setValue;
+
+		public Euler()
+		{
+		}
+
+		public Euler(SerializedProperty property)
+		{
+			ElementHelper.Bind(this, this, property);
+		}
+
+		public Euler(Object owner, Func<Quaternion> getValue, Action<Quaternion> setValue)
+		{
+			ElementHelper.Bind(this, this, owner);
+		}
+
+		public void Setup(Quaternion value)
+		{
+			ElementHelper.AddStyleSheet(this, _styleSheetPath);
+
+			_field = new Vector3Field() { value = value.eulerAngles };
+
+			Add(_field);
+		}
+
+		public Quaternion GetValueFromElement(VisualElement element)
+		{
+			return Quaternion.Euler(_field.value);
+		}
+
+		public Quaternion GetValueFromProperty(SerializedProperty property)
+		{
+			return property.quaternionValue;
+		}
+
+		public Quaternion GetValueFromObject(Object owner)
+		{
+			return _getValue();
+		}
+
+		public void UpdateElement(Quaternion value, VisualElement element, SerializedProperty property)
+		{
+			UpdateElement(value);
+		}
+
+		public void UpdateElement(Quaternion value, VisualElement element, Object owner)
+		{
+			UpdateElement(value);
+		}
+
+		public void UpdateProperty(Quaternion value, VisualElement element, SerializedProperty property)
+		{
+			property.quaternionValue = value;
+		}
+
+		public void UpdateObject(Quaternion value, VisualElement element, Object owner)
+		{
+			_setValue(value);
+		}
+
+		private void UpdateElement(Quaternion value)
+		{
+			_field.SetValueWithoutNotify(value.eulerAngles);
+		}
+
+		#region UXML
 
 		public class Factory : UxmlFactory<Euler, Traits> { }
 
@@ -36,39 +107,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			}
 		}
 
-		private Vector3Field _field;
-
-		public void Setup(SerializedProperty property)
-		{
-			Setup(property.quaternionValue);
-			BindToProperty(property);
-		}
-
-		public void Setup(Quaternion initialValue)
-		{
-			ElementHelper.AddStyleSheet(this, _styleSheetPath);
-
-			_field = new Vector3Field() { value = initialValue.eulerAngles };
-			_field.RegisterValueChangedCallback(e => value = Quaternion.Euler(e.newValue));
-
-			Add(_field);
-
-			SetValueWithoutNotify(initialValue);
-		}
-
-		protected override void Refresh()
-		{
-			_field.SetValueWithoutNotify(value.eulerAngles);
-		}
-
-		protected override void SetValueToProperty(SerializedProperty property, Quaternion value)
-		{
-			property.quaternionValue = value;
-		}
-
-		protected override Quaternion GetValueFromProperty(SerializedProperty property)
-		{
-			return property.quaternionValue;
-		}
+		#endregion
 	}
 }

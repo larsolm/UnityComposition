@@ -12,13 +12,13 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName);
+			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
 
 			if (property.propertyType == SerializedPropertyType.String)
 			{
 				var typeAttribute = attribute as TypePickerAttribute;
-				var picker = new TypePickerButton();
-				picker.Setup(typeAttribute.BaseType, typeAttribute.ShowAbstract, property);
+				var picker = new TypePicker(property);
+				picker.Setup(typeAttribute.BaseType, typeAttribute.ShowAbstract, property.stringValue);
 
 				container.Add(picker);
 			}

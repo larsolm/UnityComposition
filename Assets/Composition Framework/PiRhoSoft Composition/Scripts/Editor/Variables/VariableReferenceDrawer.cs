@@ -72,7 +72,7 @@ namespace PiRhoSoft.CompositionEditor
 			_reference = reference;
 			_source = source;
 
-			EditHelper.Bind(this, _owner, () => text, () => _reference.Variable, value => SetValueWithoutNotify(value), value => _reference.Variable = value);
+			//ChangeHelper.Bind(this, _owner, () => text, () => _reference.Variable, value => SetValueWithoutNotify(value), value => _reference.Variable = value);
 
 			style.flexGrow = 1;
 		}
@@ -84,7 +84,7 @@ namespace PiRhoSoft.CompositionEditor
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
 			var source = property.serializedObject.targetObject as IAutocompleteSource;
-			var container = ElementHelper.CreatePropertyContainer(property.displayName);
+			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
 			var element = new VariableReferenceElement();
 
 			element.Setup(property, source.AutocompleteSource);

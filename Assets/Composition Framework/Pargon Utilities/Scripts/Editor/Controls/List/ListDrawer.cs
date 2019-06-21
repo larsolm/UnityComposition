@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
 using UnityEditor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.PargonUtilities.Editor
@@ -7,19 +8,23 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	[CustomPropertyDrawer(typeof(ListAttribute))]
 	class ListDrawer : PropertyDrawer
 	{
+		private const string _invalidTypeWarning = "(PUCLDIT) Invalid type for ListAttribute on field '{0}': List can only be applied to SerializedList or Array fields";
+
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var list = new ListElement();
+			if (property.propertyType == SerializedPropertyType.Generic) // This might be wrong. Remember to check.
+			{
+				var items = property.FindPropertyRelative("_items");
+				var itemDrawer = PropertyHelper.GetNextDrawer(fieldInfo, attribute);
+				var proxy = itemDrawer != null ? new PropertyDrawerListProxy(items, itemDrawer) : new PropertyListProxy(items);
 
-			// rebuild when property changes externally
-
-			var items = property.FindPropertyRelative("Items");
-			var itemDrawer = PropertyHelper.GetNextDrawer(fieldInfo, attribute);
-			var proxy = itemDrawer != null ? new PropertyDrawerListProxy(items, itemDrawer) : new PropertyListProxy(items);
-
-			list.Setup(property.displayName, proxy);
-
-			return list;
+				return new ListElement(proxy, property.displayName, ElementHelper.GetTooltip(fieldInfo));
+			}
+			else
+			{
+				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
+				return new VisualElement();
+			}
 		}
 
 		private class PropertyDrawerListProxy : PropertyListProxy

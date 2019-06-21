@@ -1,32 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.PargonUtilities.Editor
 {
-	// USE CASES
-	// as a uxml element (lookup by id, bind to property, value, or callbacks)
-	// as a uxml element with binding path (bind to property)
-	// as a property drawer (bind to property)
-	// an an instance in another element or editor (bind to property, value, or callbacks)
-
 	public class ListElement : VisualElement
 	{
-		private const string _uxmlPath = "Assets/PargonUtilities/Scripts/Editor/Controls/List/List.uxml";
-		private const string _ussPath = "Assets/PargonUtilities/Scripts/Editor/Controls/List/List.uss";
+		private const string _uxmlPath = Utilities.AssetPath + "Controls/List/List.uxml";
+		private const string _ussPath = Utilities.AssetPath + "Controls/List/List.uss";
 
-		private const string _labelName = "list-label";
-		private const string _addButtonName = "list-add-button";
-		private const string _containerName = "list-container";
+		private const string _ussLabelName = "list-label";
+		private const string _ussAddButtonName = "list-add-button";
+		private const string _ussContainerName = "list-container";
 
-		private const string _itemClass = "pargon-list-item";
-		private const string _itemOddClass = "pargon-list-item-odd";
-		private const string _itemEvenClass = "pargon-list-item-even";
-		private const string _itemDragClass = "pargon-list-item-drag";
-		private const string _itemContainerClass = "pargon-list-item-container";
-		private const string _dragHandleClass = "pargon-list-drag-handle";
-		private const string _removeButtonClass = "pargon-list-remove-item";
+		private const string _ussItemClass = "pargon-list-item";
+		private const string _ussItemOddClass = "pargon-list-item-odd";
+		private const string _ussItemEvenClass = "pargon-list-item-even";
+		private const string _ussItemDragClass = "pargon-list-item-drag";
+		private const string _ussItemContainerClass = "pargon-list-item-container";
+		private const string _ussDragHandleClass = "pargon-list-drag-handle";
+		private const string _ussRemoveButtonClass = "pargon-list-remove-item";
 
 		private const int _dragUpdateTime = 0;
 
@@ -45,39 +38,26 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public ListProxy Proxy { get; private set; }
 		protected VisualElement ItemContainer { get; private set; }
 
-		public void Setup(string label, ListProxy proxy)
+		public ListElement(ListProxy proxy, string label, string tooltip)
 		{
 			ElementHelper.AddVisualTree(this, _uxmlPath);
 			ElementHelper.AddStyleSheet(this, _ussPath);
 
 			Proxy = proxy;
-			ItemContainer = this.Q(_containerName);
+			ItemContainer = this.Q(_ussContainerName);
 
-			var text = this.Q<TextElement>(_labelName);
+			var text = this.Q<TextElement>(_ussLabelName);
 			text.text = label;
+			text.tooltip = tooltip;
 
-			var addButton = this.Q<Button>(_addButtonName);
-			addButton.clickable.clicked += () => AddItem();
+			var addButton = this.Q<Image>(_ussAddButtonName);
+			addButton.image = Icon.Add.Content;
+			addButton.AddManipulator(new Clickable(AddItem));
 
 			RegisterCallback<MouseMoveEvent>(UpdateDrag);
 			RegisterCallback<MouseUpEvent>(StopDrag);
 
 			Rebuild();
-		}
-
-		public void Setup(SerializedProperty property)
-		{
-			Setup(property.displayName, new PropertyListProxy(property));
-		}
-
-		public void Setup<T>(IList<T> list)
-		{
-		}
-
-		public void Setup<T>(T[] array)
-		{
-			AllowAdd = false;
-			AllowRemove = false;
 		}
 
 		public void Rebuild()
@@ -88,21 +68,21 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				var index = i;
 				var item = new VisualElement();
-				item.AddToClassList(_itemClass);
-				item.AddToClassList(i % 2 == 0 ? _itemEvenClass : _itemOddClass);
+				item.AddToClassList(_ussItemClass);
+				item.AddToClassList(i % 2 == 0 ? _ussItemEvenClass : _ussItemOddClass);
 
 				var container = new VisualElement();
-				container.AddToClassList(_itemContainerClass);
+				container.AddToClassList(_ussItemContainerClass);
 
 				var element = Proxy.CreateElement(i);
 
 				var dragHandle = new TextElement();
-				dragHandle.AddToClassList(_dragHandleClass);
+				dragHandle.AddToClassList(_ussDragHandleClass);
 				dragHandle.text = "=";
 				dragHandle.RegisterCallback((MouseDownEvent e) => StartDrag(e, index));
 
 				var removeButton = new Button();
-				removeButton.AddToClassList(_removeButtonClass);
+				removeButton.AddToClassList(_ussRemoveButtonClass);
 				removeButton.text = "-";
 				removeButton.clickable.clicked += () => RemoveItem(index);
 
@@ -120,7 +100,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_dragToIndex = index;
 			_dragElement = ItemContainer.ElementAt(index);
 
-			_dragElement.AddToClassList(_itemDragClass);
+			_dragElement.AddToClassList(_ussItemDragClass);
 			this.CaptureMouse();
 		}
 
@@ -164,7 +144,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			this.ReleaseMouse();
 
 			if (_dragElement != null)
-				_dragElement.RemoveFromClassList(_itemDragClass);
+				_dragElement.RemoveFromClassList(_ussItemDragClass);
 
 			if (_dragFromIndex != _dragToIndex)
 				MoveItem(_dragFromIndex, _dragToIndex);
