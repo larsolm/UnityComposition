@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public Expression Switch = new Expression();
 
 		[Tooltip("The node to follow depending on the result of Switch")]
-		[DictionaryDisplay(EmptyText = "No outputs")]
+		[Dictionary]
 		public InstructionGraphNodeDictionary Outputs = new InstructionGraphNodeDictionary();
 
 		[Tooltip("The node to follow if the result of Switch is not in Outputs")]

@@ -27,23 +27,30 @@ namespace PiRhoSoft.CompositionEditor
 		private ValueDefinition _definition;
 		private VariableInitializerType _initializer;
 		private TagList _tags;
+		
+		private SerializedProperty _typeProperty;
+		private SerializedProperty _tagProperty;
+		private SerializedProperty _initializerProperty;
+		private SerializedProperty _constraintProperty;
+		private SerializedProperty _objectsProperty;
+		private SerializedProperty _isTypeLockedProperty;
+		private SerializedProperty _isConstraintLockedProperty;
+		private List<Object> _objects;
 
 		public ValueDefinitionElement(SerializedProperty property)
 		{
 			_owner = property.serializedObject.targetObject;
-			var typeProperty = property.FindPropertyRelative("_type");
-			var constraintProperty = property.FindPropertyRelative("_constraint");
-			var objectsProperty = property.FindPropertyRelative("_objects");
-			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
-			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
+			_typeProperty = property.FindPropertyRelative("_type");
+			_tagProperty = property.FindPropertyRelative("_tag");
+			_initializerProperty = property.FindPropertyRelative("_initializer._statement");
+			_constraintProperty = property.FindPropertyRelative("_constraint");
+			_objectsProperty = property.FindPropertyRelative("_objects");
+			_isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
+			_isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
 
-			var data = constraintProperty.stringValue;
-			var objects = new List<Object>();
+			var definition = GetValueFromProperty(property);
 
-			for (var i = 0; i < objectsProperty.arraySize; i++)
-				objects.Add(objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
-
-			var constraint = VariableHandler.LoadConstraint(ref data, ref objects);
+			Setup(definition, VariableInitializerType.None, null);
 
 			ElementHelper.Bind(this, this, property);
 		}
@@ -69,6 +76,8 @@ namespace PiRhoSoft.CompositionEditor
 					SetupTag(tags);
 			}).Every(0);
 
+			Setup(_getValue(), _getInitializerType(), _getTags());
+
 			ElementHelper.Bind(this, this, _owner);
 		}
 
@@ -82,53 +91,42 @@ namespace PiRhoSoft.CompositionEditor
 
 		public ValueDefinition GetValueFromProperty(SerializedProperty property)
 		{
-			var typeProperty = property.FindPropertyRelative("_type");
-			var tagProperty = property.FindPropertyRelative("_tag");
-			var initializerProperty = property.FindPropertyRelative("_initializer._statement");
-			var constraintProperty = property.FindPropertyRelative("_constraint");
-			var objectsProperty = property.FindPropertyRelative("_objects");
-			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
-			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
-
-			var data = constraintProperty.stringValue;
+			var data = _constraintProperty.stringValue;
 			var objects = new List<Object>();
 
-			for (var i = 0; i < objectsProperty.arraySize; i++)
-				objects.Add(objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
+			for (var i = 0; i < _objectsProperty.arraySize; i++)
+				objects.Add(_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
 
 			var constraint = VariableHandler.LoadConstraint(ref data, ref objects);
 
 			var initializer = new Expression();
-			initializer.SetStatement(initializerProperty.stringValue);
+			initializer.SetStatement(_initializerProperty.stringValue);
 
-			return ValueDefinition.Create((VariableType)typeProperty.enumValueIndex, constraint, tagProperty.stringValue, initializer, isTypeLockedProperty.boolValue, isConstraintLockedProperty.boolValue);
+			return ValueDefinition.Create((VariableType)_typeProperty.enumValueIndex, constraint, _tagProperty.stringValue, initializer, _isTypeLockedProperty.boolValue, _isConstraintLockedProperty.boolValue);
 		}
 
 		public void UpdateProperty(ValueDefinition value, VisualElement element, SerializedProperty property)
 		{
-			var typeProperty = property.FindPropertyRelative("_type");
-			var tagProperty = property.FindPropertyRelative("_tag");
-			var initializerProperty = property.FindPropertyRelative("_initializer._statement");
-			var constraintProperty = property.FindPropertyRelative("_constraint");
-			var objectsProperty = property.FindPropertyRelative("_objects");
-			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
-			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
-
-			typeProperty.enumValueIndex = (int)value.Type;
 			var constraint = value.Constraint;
-			constraintProperty.stringValue = constraint != null ? VariableHandler.SaveConstraint(value.Type, constraint, ref _objects) : string.Empty;
 
-			//if (_objects != null)
-			//{
-			//	_objectsProperty.arraySize = _objects.Count;
-			//
-			//	for (var i = 0; i < _objects.Count; i++)
-			//		_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = _objects[i];
-			//}
-			//else
-			//{
-			//	_objectsProperty.arraySize = 0;
-			//}
+			_typeProperty.enumValueIndex = (int)value.Type;
+			_tagProperty.stringValue = value.Tag;
+			_initializerProperty.stringValue = value.Initializer.Statement;
+			_isTypeLockedProperty.boolValue = value.IsTypeLocked;
+			_isConstraintLockedProperty.boolValue = value.IsConstraintLocked;
+			_constraintProperty.stringValue = constraint != null ? VariableHandler.SaveConstraint(value.Type, constraint, ref _objects) : string.Empty;
+
+			if (_objects != null)
+			{
+				_objectsProperty.arraySize = _objects.Count;
+			
+				for (var i = 0; i < _objects.Count; i++)
+					_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = _objects[i];
+			}
+			else
+			{
+				_objectsProperty.arraySize = 0;
+			}
 		}
 
 		#endregion

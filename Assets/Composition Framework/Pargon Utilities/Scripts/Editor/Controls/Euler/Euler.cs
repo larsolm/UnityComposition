@@ -12,9 +12,11 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	{
 		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Euler/Euler.uss";
 
+		private readonly Object _owner;
+		private readonly Func<Quaternion> _getValue;
+		private readonly Action<Quaternion> _setValue;
+
 		private Vector3Field _field;
-		private Func<Quaternion> _getValue;
-		private Action<Quaternion> _setValue;
 
 		public Euler()
 		{
@@ -27,6 +29,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public Euler(Object owner, Func<Quaternion> getValue, Action<Quaternion> setValue)
 		{
+			_getValue = getValue;
+			_setValue = setValue;
+
 			ElementHelper.Bind(this, this, owner);
 		}
 
