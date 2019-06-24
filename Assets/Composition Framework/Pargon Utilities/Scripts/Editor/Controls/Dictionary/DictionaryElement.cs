@@ -101,31 +101,5 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			Rebuild();
 			OnItemRemoved?.Invoke(index);
 		}
-
-		#region UXML
-
-		private new class UxmlFactory : UxmlFactory<DictionaryElement, UxmlTraits> { }
-
-		private new class UxmlTraits : VisualElement.UxmlTraits
-		{
-			private UxmlBoolAttributeDescription _allowAdd = new UxmlBoolAttributeDescription { name = "allow-add", defaultValue = true };
-			private UxmlBoolAttributeDescription _allowRemove = new UxmlBoolAttributeDescription { name = "allow-remove", defaultValue = true };
-
-			public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
-			{
-				get { yield break; }
-			}
-
-			public override void Init(VisualElement element, IUxmlAttributes bag, CreationContext context)
-			{
-				base.Init(element, bag, context);
-
-				var dictionary = element as DictionaryElement;
-				dictionary.AllowAdd = _allowAdd.GetValueFromBag(bag, context);
-				dictionary.AllowRemove = _allowRemove.GetValueFromBag(bag, context);
-			}
-		}
-
-		#endregion
 	}
 }

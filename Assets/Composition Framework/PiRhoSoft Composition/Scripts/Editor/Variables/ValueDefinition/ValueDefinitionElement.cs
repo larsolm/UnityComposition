@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
 using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -9,7 +10,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
-	public class ValueDefinitionElement : VisualElement, IBindableObject<ValueDefinition>
+	public class ValueDefinitionElement : VisualElement, IBindableProperty<ValueDefinition>, IBindableObject<ValueDefinition>
 	{
 		private VisualElement _typeContainer;
 		private VisualElement _constraintContainer;
@@ -26,6 +27,26 @@ namespace PiRhoSoft.CompositionEditor
 		private ValueDefinition _definition;
 		private VariableInitializerType _initializer;
 		private TagList _tags;
+
+		public ValueDefinitionElement(SerializedProperty property)
+		{
+			_owner = property.serializedObject.targetObject;
+			var typeProperty = property.FindPropertyRelative("_type");
+			var constraintProperty = property.FindPropertyRelative("_constraint");
+			var objectsProperty = property.FindPropertyRelative("_objects");
+			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
+			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
+
+			var data = constraintProperty.stringValue;
+			var objects = new List<Object>();
+
+			for (var i = 0; i < objectsProperty.arraySize; i++)
+				objects.Add(objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
+
+			var constraint = VariableHandler.LoadConstraint(ref data, ref objects);
+
+			ElementHelper.Bind(this, this, property);
+		}
 
 		public ValueDefinitionElement(Object owner, Func<ValueDefinition> getValue, Action<ValueDefinition> setValue, Func<VariableInitializerType> getInitializerType, Func<TagList> getTags, bool showConstraintLabel)
 		{
@@ -51,22 +72,66 @@ namespace PiRhoSoft.CompositionEditor
 			ElementHelper.Bind(this, this, _owner);
 		}
 
+		#region IBindable Property
+
 		public ValueDefinition GetValueFromElement(VisualElement element) => _definition;
 		public ValueDefinition GetValueFromObject(Object owner) => _getValue();
 		public void UpdateElement(ValueDefinition value, VisualElement element, Object owner) => Setup(value, _initializer, _tags);
+		public void UpdateElement(ValueDefinition value, VisualElement element, SerializedProperty property) => Setup(value, _initializer, _tags);
 		public void UpdateObject(ValueDefinition value, VisualElement element, Object owner) => _setValue(value);
 
-		public void Setup(ValueDefinition definition, VariableInitializerType initializerType, TagList tags)
+		public ValueDefinition GetValueFromProperty(SerializedProperty property)
 		{
-			Clear();
+			var typeProperty = property.FindPropertyRelative("_type");
+			var tagProperty = property.FindPropertyRelative("_tag");
+			var initializerProperty = property.FindPropertyRelative("_initializer._statement");
+			var constraintProperty = property.FindPropertyRelative("_constraint");
+			var objectsProperty = property.FindPropertyRelative("_objects");
+			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
+			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
 
-			_definition = definition;
+			var data = constraintProperty.stringValue;
+			var objects = new List<Object>();
 
-			SetupType();
-			SetupConstraint();
-			SetupInitializer(initializerType);
-			SetupTag(tags);
+			for (var i = 0; i < objectsProperty.arraySize; i++)
+				objects.Add(objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
+
+			var constraint = VariableHandler.LoadConstraint(ref data, ref objects);
+
+			var initializer = new Expression();
+			initializer.SetStatement(initializerProperty.stringValue);
+
+			return ValueDefinition.Create((VariableType)typeProperty.enumValueIndex, constraint, tagProperty.stringValue, initializer, isTypeLockedProperty.boolValue, isConstraintLockedProperty.boolValue);
 		}
+
+		public void UpdateProperty(ValueDefinition value, VisualElement element, SerializedProperty property)
+		{
+			var typeProperty = property.FindPropertyRelative("_type");
+			var tagProperty = property.FindPropertyRelative("_tag");
+			var initializerProperty = property.FindPropertyRelative("_initializer._statement");
+			var constraintProperty = property.FindPropertyRelative("_constraint");
+			var objectsProperty = property.FindPropertyRelative("_objects");
+			var isTypeLockedProperty = property.FindPropertyRelative("_isTypeLocked");
+			var isConstraintLockedProperty = property.FindPropertyRelative("_isConstraintLocked");
+
+			typeProperty.enumValueIndex = (int)value.Type;
+			var constraint = value.Constraint;
+			constraintProperty.stringValue = constraint != null ? VariableHandler.SaveConstraint(value.Type, constraint, ref _objects) : string.Empty;
+
+			//if (_objects != null)
+			//{
+			//	_objectsProperty.arraySize = _objects.Count;
+			//
+			//	for (var i = 0; i < _objects.Count; i++)
+			//		_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = _objects[i];
+			//}
+			//else
+			//{
+			//	_objectsProperty.arraySize = 0;
+			//}
+		}
+
+		#endregion
 
 		#region Flags
 
@@ -124,6 +189,18 @@ namespace PiRhoSoft.CompositionEditor
 		}
 
 		#endregion
+
+		public void Setup(ValueDefinition definition, VariableInitializerType initializerType, TagList tags)
+		{
+			Clear();
+
+			_definition = definition;
+
+			SetupType();
+			SetupConstraint();
+			SetupInitializer(initializerType);
+			SetupTag(tags);
+		}
 
 		private void ReplaceElement(ref VisualElement oldElement, VisualElement newElement)
 		{
@@ -260,10 +337,15 @@ namespace PiRhoSoft.CompositionEditor
 			switch (type)
 			{
 				case VariableType.Int:
+				{
+					label.tooltip = "The range of values allowed for the variable";
+					container.Add(SetupIntConstraint(ref constraint));
+					break;
+				}
 				case VariableType.Float:
 				{
 					label.tooltip = "The range of values allowed for the variable";
-					container.Add(SetupNumberConstraint(ref constraint));
+					container.Add(SetupFloatConstraint(ref constraint));
 					break;
 				}
 				case VariableType.String:
@@ -299,28 +381,24 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private VisualElement SetupNumberConstraint(ref VariableConstraint constraint)
+		private VisualElement SetupIntConstraint(ref VariableConstraint constraint)
 		{
-			var container = new VisualElement();
-			var toggle = new Toggle() { value = _definition.Constraint != null };
-			var intContainer = new VisualElement();
-			var floatContainer = new VisualElement();
-			var intMin = new IntegerField();
-			var intMax = new IntegerField();
-			var floatMin = new FloatField();
-			var floatMax = new FloatField();
-
-			ElementHelper.Bind(this, toggle, _owner, () => _definition.Constraint != null, hasConstraint =>
+			if (!(constraint is IntVariableConstraint intConstraint))
 			{
-				if (!hasConstraint)
-					_definition = ValueDefinition.Create(_definition.Type, null, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-				else if (_definition.Type == VariableType.Int)
-					_definition = ValueDefinition.Create(_definition.Type, new IntVariableConstraint { Minimum = 0, Maximum = 100 }, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-				else if (_definition.Type == VariableType.Float)
-					_definition = ValueDefinition.Create(_definition.Type, new FloatVariableConstraint { Minimum = 0, Maximum = 100 }, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+				intConstraint = new IntVariableConstraint { HasRange = false, Minimum = 0, Maximum = 100 };
+				constraint = intConstraint;
+			}
 
-				ElementHelper.SetVisible(intContainer, hasConstraint && _definition.Constraint is IntVariableConstraint);
-				ElementHelper.SetVisible(intContainer, hasConstraint && _definition.Constraint is FloatVariableConstraint);
+			var container = new VisualElement();
+			var toggle = new Toggle() { value = intConstraint.HasRange };
+			var intContainer = new VisualElement();
+			var intMin = new IntegerField() { value = intConstraint.Minimum };
+			var intMax = new IntegerField() { value = intConstraint.Maximum };
+
+			ElementHelper.Bind(this, toggle, _owner, () => intConstraint.HasRange, hasConstraint =>
+			{
+				intConstraint.HasRange = hasConstraint;
+				ElementHelper.SetVisible(intContainer, hasConstraint);
 			});
 
 			intContainer.Add(new Label("Between"));
@@ -328,37 +406,44 @@ namespace PiRhoSoft.CompositionEditor
 			intContainer.Add(new Label("and"));
 			intContainer.Add(intMax);
 
+			ElementHelper.Bind(this, intMin, _owner, () => intConstraint.Minimum, minimum => intConstraint.Minimum = minimum);
+			ElementHelper.Bind(this, intMax, _owner, () => intConstraint.Maximum, maximum => intConstraint.Maximum = maximum);
+
+			container.Add(toggle);
+			container.Add(intContainer);
+
+			return container;
+		}
+
+		private VisualElement SetupFloatConstraint(ref VariableConstraint constraint)
+		{
+			if (!(constraint is FloatVariableConstraint floatConstraint))
+			{
+				floatConstraint = new FloatVariableConstraint { HasRange = false, Minimum = 0, Maximum = 100 };
+				constraint = floatConstraint;
+			}
+
+			var container = new VisualElement();
+			var toggle = new Toggle() { value = floatConstraint.HasRange };
+			var floatContainer = new VisualElement();
+			var floatMin = new FloatField() { value = floatConstraint.Minimum };
+			var floatMax = new FloatField() { value = floatConstraint.Maximum };
+
+			ElementHelper.Bind(this, toggle, _owner, () => floatConstraint.HasRange, hasConstraint =>
+			{
+				floatConstraint.HasRange = hasConstraint;
+				ElementHelper.SetVisible(floatContainer, hasConstraint);
+			});
+
 			floatContainer.Add(new Label("Between"));
 			floatContainer.Add(floatMin);
 			floatContainer.Add(new Label("and"));
 			floatContainer.Add(floatMax);
 
-			ElementHelper.Bind(this, intMin, _owner, () => _definition.Constraint is IntVariableConstraint intConstraint ? intConstraint.Minimum : 0, minimum =>
-			{
-				if (_definition.Constraint is IntVariableConstraint intConstraint)
-					intConstraint.Minimum = minimum;
-			});
-
-			ElementHelper.Bind(this, intMax, _owner, () => _definition.Constraint is IntVariableConstraint intConstraint ? intConstraint.Maximum : 100, maximum =>
-			{
-				if (_definition.Constraint is IntVariableConstraint intConstraint)
-					intConstraint.Maximum = maximum;
-			});
-
-			ElementHelper.Bind(this, floatMin, _owner, () => _definition.Constraint is FloatVariableConstraint floatConstraint ? floatConstraint.Minimum : 0, minimum =>
-			{
-				if (_definition.Constraint is FloatVariableConstraint floatConstraint)
-					floatConstraint.Minimum = minimum;
-			});
-
-			ElementHelper.Bind(this, floatMax, _owner, () => _definition.Constraint is FloatVariableConstraint floatConstraint ? floatConstraint.Maximum : 100, maximum =>
-			{
-				if (_definition.Constraint is FloatVariableConstraint floatConstraint)
-					floatConstraint.Maximum = maximum;
-			});
+			ElementHelper.Bind(this, floatMin, _owner, () => floatConstraint.Minimum, minimum => floatConstraint.Minimum = minimum);
+			ElementHelper.Bind(this, floatMax, _owner, () => floatConstraint.Maximum, maximum => floatConstraint.Maximum = maximum);
 
 			container.Add(toggle);
-			container.Add(intContainer);
 			container.Add(floatContainer);
 
 			return container;
@@ -366,13 +451,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement SetupStringConstraint(ref VariableConstraint constraint)
 		{
+			if (!(constraint is StringVariableConstraint stringConstraint))
+			{
+				stringConstraint = new StringVariableConstraint { Values = new string[] { } };
+				constraint = stringConstraint;
+			}
+
 			var container = new VisualElement();
-
-			if (_definition.Constraint == null)
-				_definition = ValueDefinition.Create(_definition.Type, new StringVariableConstraint { Values = new string[] { } }, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-
-			var stringConstraint = _definition.Constraint as StringVariableConstraint;
-
 			var proxy = new ArrayListProxy<string>(stringConstraint.Values, (value, index) =>
 			{
 				var field = new TextField() { value = value };
@@ -387,12 +472,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement SetupObjectConstraint(ref VariableConstraint constraint)
 		{
+			if (!(constraint is ObjectVariableConstraint objectConstraint))
+			{
+				objectConstraint = new ObjectVariableConstraint { Type = typeof(Object) };
+				constraint = objectConstraint;
+			}
+
 			var container = new VisualElement();
-
-			if (_definition.Constraint == null)
-				_definition = ValueDefinition.Create(_definition.Type, new ObjectVariableConstraint { Type = typeof(Object) }, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-
-			var objectConstraint = _definition.Constraint as ObjectVariableConstraint;
 			var picker = new TypePicker(_owner, () => objectConstraint.Type.AssemblyQualifiedName, type => objectConstraint.Type = Type.GetType(type));
 			picker.Setup(typeof(Object), true, objectConstraint.Type?.AssemblyQualifiedName);
 
@@ -403,13 +489,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement SetupEnumConstraint(ref VariableConstraint constraint)
 		{
+			if (!(constraint is EnumVariableConstraint enumConstraint))
+			{
+				enumConstraint = new EnumVariableConstraint { Type = null };
+				constraint = enumConstraint;
+			}
+
 			var container = new VisualElement();
-
-			if (_definition.Constraint == null)
-				_definition = ValueDefinition.Create(_definition.Type, new EnumVariableConstraint { Type = null }, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-
-			var enumConstraint = _definition.Constraint as EnumVariableConstraint;
-
 			var picker = new TypePicker(_owner, () => enumConstraint.Type.AssemblyQualifiedName, type => enumConstraint.Type = Type.GetType(type));
 			picker.Setup(typeof(Enum), false, enumConstraint.Type?.AssemblyQualifiedName);
 
@@ -420,13 +506,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement SetupStoreConstraint(ref VariableConstraint constraint)
 		{
+			if (!(constraint is StoreVariableConstraint storeConstraint))
+			{
+				storeConstraint = new StoreVariableConstraint { Schema = null };
+				constraint = storeConstraint;
+			}
+			
 			var container = new VisualElement();
-
-			if (_definition.Constraint == null)
-				_definition = ValueDefinition.Create(_definition.Type, new StoreVariableConstraint { Schema = null }, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-
-			var storeConstraint = _definition.Constraint as StoreVariableConstraint;
-
 			var picker = new ObjectPicker(_owner, () => storeConstraint.Schema, schema => storeConstraint.Schema = schema as VariableSchema);
 			picker.Setup(typeof(VariableSchema), storeConstraint.Schema);
 
@@ -437,13 +523,13 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement SetupListConstraint(ref VariableConstraint constraint)
 		{
-			var container = new VisualElement();
+			if (!(constraint is ListVariableConstraint listConstraint))
+			{
+				listConstraint = new ListVariableConstraint { ItemType = VariableType.Empty, ItemConstraint = null };
+				constraint = listConstraint;
+			}
 			
-			if (_definition.Constraint == null)
-				_definition = ValueDefinition.Create(_definition.Type, new ListVariableConstraint { ItemType = VariableType.Empty, ItemConstraint = null }, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-
-			var listConstraint = _definition.Constraint as ListVariableConstraint;
-
+			var container = new VisualElement();
 			var dropdown = new EnumDropdown(_owner, () => (int)listConstraint.ItemType, type => listConstraint.ItemType = (VariableType)type);
 			dropdown.Setup(typeof(VariableType), (int)listConstraint.ItemType);
 
