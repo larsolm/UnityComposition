@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using System.Collections;
 using PiRhoSoft.UtilityEngine;
 using UnityEngine;
 
@@ -9,7 +10,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class MockupGraph : InstructionGraph
 	{
 		[Tooltip("The root nodes")]
-		[ListDisplay]
+		[List]
 		[ClassDisplay(ClassDisplayType.Inline)]
 		public MockupConnectionList EntryPoints = new MockupConnectionList();
 

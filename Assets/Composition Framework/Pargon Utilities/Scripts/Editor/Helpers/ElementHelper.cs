@@ -109,8 +109,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public static VisualElement CreatePropertyLabel(string text, string tooltip)
 		{
 			var label = new Label(text) { tooltip = tooltip };
-			label.AddToClassList(BaseField<string>.labelUssClassName); // This can be any generic type string just made sense as a default
 			label.AddToClassList(PropertyField.labelUssClassName);
+			label.AddToClassList(BaseField<string>.labelUssClassName); // This can be any generic type string just made sense as a default
 
 			return label;
 		}
@@ -119,6 +119,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			var button = new Image { image = image, tooltip = tooltip };
 			button.AddManipulator(new Clickable(action));
+			button.style.width = new StyleLength(image.width);
+			button.style.height = new StyleLength(image.height);
+			button.style.alignSelf = new StyleEnum<Align>(Align.Center);
 			return button;
 		}
 
@@ -320,6 +323,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			public BindablePropertyElement(SerializedProperty property, string label, string tooltip)
 			{
+				AddToClassList(BaseField<string>.ussClassName);
+
 				if (!string.IsNullOrEmpty(label))
 					Add(CreatePropertyLabel(label, tooltip));
 

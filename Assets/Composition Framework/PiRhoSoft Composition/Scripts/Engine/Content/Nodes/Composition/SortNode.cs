@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -24,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The variables that will determine the order of the list")]
 		[Conditional(nameof(SortByProperty), true)]
-		[ListDisplay(EmptyText = "Add variables to sort by", AllowCollapse = false)]
+		[List(EmptyLabel = "Add variables to sort by")]
 		public SortConditionList SortConditions = new SortConditionList();
 
 		public override Color NodeColor => Colors.ExecutionDark;

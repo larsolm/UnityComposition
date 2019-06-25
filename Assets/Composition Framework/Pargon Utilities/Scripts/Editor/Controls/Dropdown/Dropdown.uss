@@ -1,9 +1,9 @@
-﻿.dropdown
+﻿.pargon-dropdown
 {
 	flex-grow: 1;
 }
 
-.dropdown > PopupField
+.pargon-dropdown > PopupField
 {
 	margin-left: 0;
 	margin-right: 0;

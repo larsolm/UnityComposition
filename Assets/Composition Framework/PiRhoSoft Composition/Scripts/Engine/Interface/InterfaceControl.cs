@@ -14,7 +14,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class InterfaceControl : MonoBehaviour
 	{
 		[Tooltip("GameObjects in the scene that should be activated and deactivated with this control")]
-		[ListDisplay(AllowCollapse = false, EmptyText = "Add items that need to be enabled along with this control")]
+		[List(EmptyLabel = "Add items that need to be enabled along with this control")]
 		public DependentObjectList DependentObjects = new DependentObjectList();
 
 		public bool IsActive { get; private set; } = false;

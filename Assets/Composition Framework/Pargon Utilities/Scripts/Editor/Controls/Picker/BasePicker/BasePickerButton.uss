@@ -1,4 +1,4 @@
-﻿.picker-button
+﻿.pargon-picker-button
 {
 	flex-grow: 1;
 	flex-direction: row;
@@ -6,7 +6,7 @@
 	align-items: center;
 }
 
-.picker-button > Button
+.pargon-picker-button > Button
 {
 	flex-direction: row;
 	justify-content: center;
@@ -14,18 +14,18 @@
 	margin: 0;
 }
 
-.picker-button > Button > Image
+.pargon-picker-button > Button > Image
 {
 	width: 16px;
 	height: 16px;
 }
 
-.picker-button > Button > Label
+.pargon-picker-button > Button > Label
 {
 	margin-left: 5px;
 }
 
-.picker-button > Image
+.pargon-picker-button > Image
 {
 	width: 16px;
 	height: 16px;

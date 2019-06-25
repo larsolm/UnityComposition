@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEditor;
 using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
@@ -66,9 +65,9 @@ namespace PiRhoSoft.DocGenEditor
 		public bool IncludeInTableOfContents = true;
 
 		[EnumButtons] public DocumentationTypeCategory IncludedTypes = DocumentationTypeCategory.All;
-		[ListDisplay] public DocumentationNamespaceList IncludedNamespaces = new DocumentationNamespaceList();
-		[ListDisplay] [ClassDisplay(ClassDisplayType.Inline)] public ExternalNamespaceList ExternalNamespaces = new ExternalNamespaceList();
-		[ListDisplay] [ClassDisplay(ClassDisplayType.Inline)] public DocumentationSectionList Sections = new DocumentationSectionList();
+		[List] public DocumentationNamespaceList IncludedNamespaces = new DocumentationNamespaceList();
+		[List] [ClassDisplay(ClassDisplayType.Inline)] public ExternalNamespaceList ExternalNamespaces = new ExternalNamespaceList();
+		[List] [ClassDisplay(ClassDisplayType.Inline)] public DocumentationSectionList Sections = new DocumentationSectionList();
 
 		public TemplateSet Templates = new TemplateSet();
 

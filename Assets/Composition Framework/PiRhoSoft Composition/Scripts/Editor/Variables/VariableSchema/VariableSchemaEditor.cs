@@ -1,7 +1,6 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor

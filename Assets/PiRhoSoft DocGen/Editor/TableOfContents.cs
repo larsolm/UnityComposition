@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -27,7 +26,7 @@ namespace PiRhoSoft.DocGenEditor
 		public string OutputFile = "toc.txt";
 		public string CodePath = "Scripts";
 
-		[ListDisplay] public SectionList Sections = new SectionList();
+		[List] public SectionList Sections = new SectionList();
 
 		public TemplateSet Templates = new TemplateSet();
 

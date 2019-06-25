@@ -5,57 +5,36 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
 	[CustomEditor(typeof(InstructionGraph), true)]
 	public class InstructionGraphEditor : Editor
 	{
-		private static readonly Label _editButton = new Label(Icon.Inspect, "", "Edit this node");
-		private static readonly Icon _previewIcon = Icon.Base64("iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAABGdBTUEAALGPC/xhBQAAACBjSFJNAAB6JgAAgIQAAPoAAACA6AAAdTAAAOpgAAA6mAAAF3CculE8AAAACXBIWXMAABJ0AAASdAHeZh94AAAAB3RJTUUH4wEOBR4Wp+XVagAAABh0RVh0U29mdHdhcmUAcGFpbnQubmV0IDQuMS41ZEdYUgAAATdJREFUOE+lkUtuglAYhWnnfQwITUdEQF6CPFRimBqcdKCzdl3GCZg0cS8O3IeJ2NA90HNSBsqlsYkkPx+H++VcbpDqur5pfm+SdJem6UOSJI/Xhh79i4LRaPQ0Ho8PmNNkMqnAsqGQMQf6FwVBEDzj5ck0zfcwDD/7/f4badv2x3nmOj36QkEcx5XneVs878FNQyHToy8URFFUYsdsOByuDcOYksjzVs7odRZg+AU5xJ3v+ysSuWjlnF5nAYQSZ1wOBoMCnDUUMr3OAuxSOY6zhbgHNw2FTE8oUFWVBWWv18sgrZGnJM4+P89cp0dfKMD5+AW567o7cNWwaOWcXmcBFktd1xeWZRWaps1I5GUrL+j9VXDEb/oCv8FTw658FApw3SuK8iLL8uu1oUf/ouCW6Xz5/6mlH0LCqCZdcm2YAAAAAElFTkSuQmCC");
-
-		private SerializedProperty _nodesProperty;
-
-		protected InstructionGraph _graph { get; private set; }
-
-		public static void SelectNode(InstructionGraphNode node)
+		public override VisualElement CreateInspectorGUI()
 		{
-			Selection.activeObject = node;
+			var graph = target as InstructionGraph;
+			graph.RefreshInputs();
+			graph.RefreshOutputs();
+
+			SyncNodes(graph);
+
+			var container = new VisualElement();
+
+			container.Add(new Button(() => InstructionGraphWindow.ShowWindowForGraph(graph)) { text = "Open Graph Window" });
+			container.Add(new PropertyField(serializedObject.FindProperty(nameof(Instruction.ContextName))));
+			container.Add(new PropertyField(serializedObject.FindProperty(nameof(Instruction.ContextDefinition))));
+			container.Add(new PropertyField(serializedObject.FindProperty(nameof(Instruction.Inputs))));
+			container.Add(new PropertyField(serializedObject.FindProperty(nameof(Instruction.Outputs))));
+			container.Add(new PropertyField(serializedObject.FindProperty("_nodes")));
+
+			return container;
 		}
 
-		void OnEnable()
-		{
-			_graph = target as InstructionGraph;
-			_nodesProperty = serializedObject.FindProperty("_nodes");
-
-			_graph.RefreshInputs();
-			_graph.RefreshOutputs();
-
-			SyncNodes(_graph);
-			SetupNodes(_nodesProperty);
-		}
-
-		public override void OnInspectorGUI()
-		{
-			if (GUILayout.Button("Open Editor"))
-				InstructionGraphWindow.ShowWindowForGraph(_graph);
-
-			using (new UndoScope(serializedObject))
-			{
-				DrawPropertiesExcluding(serializedObject, "m_Script", "_nodes");
-				DrawNodes(_nodesProperty);
-			}
-		}
-
-		protected virtual void SetupNodes(SerializedProperty nodes)
-		{
-		}
-
-		protected virtual void DrawNodes(SerializedProperty nodes)
-		{
-			EditorGUILayout.PropertyField(_nodesProperty);
-		}
+		#region Graph Modification
 
 		public static void SyncNodes(InstructionGraph graph)
 		{
@@ -86,7 +65,10 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		#region Graph Modification
+		public static void SelectNode(InstructionGraphNode node)
+		{
+			Selection.activeObject = node;
+		}
 
 		public static InstructionGraphNode CreateNode(InstructionGraph graph, Type type, string name, Vector2 position)
 		{

@@ -12,6 +12,20 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Picker/BasePicker/BasePicker.uss";
 		private const string _uxmlPath = Utilities.AssetPath + "Controls/Picker/BasePicker/BasePicker.uxml";
 
+		private const string _ussBaseContainerName = "base-container";
+		private const string _ussActiveContainerName = "active-container";
+		private const string _ussAnimatedContainerName = "animated-container";
+		private const string _ussActiveItemsName = "active-items";
+		private const string _ussAnimatedItemsName = "animated-items";
+		private const string _ussHiddenClass = "hidden";
+
+		private const string _ussBaseClass = "pargon-base-picker";
+		private const string _ussIconClass = "icon";
+		private const string _ussLabelClass = "label";
+		private const string _ussArrowClass = "arrow";
+		private const string _ussItemClass = "item";
+		private const string _ussContainerClass = "container";
+
 		private static readonly Icon _folderIcon = Icon.BuiltIn("FolderEmpty Icon");
 		private static readonly Icon _defaultTypeIcon = Icon.BuiltIn("cs Script Icon");
 
@@ -98,26 +112,27 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			focusable = true;
 
-			AddToClassList("base-picker");
-			_baseContainer = this.Query(className: "base-container");
-			_activeContainer = _baseContainer.Query(name: "active-container");
-			_animatedContainer = _baseContainer.Query(name: "animated-container");
-			_activeHeaderIcon = _activeContainer.Query<Image>(className: "icon");
-			_activeHeaderLabel = _activeContainer.Query<Label>(className: "label");
-			_animatedHeaderIcon = _animatedContainer.Query<Image>(className: "icon");
-			_animatedHeaderLabel = _animatedContainer.Query<Label>(className: "label");
-			_activeParentButton = _activeContainer.Query<Image>(className: "arrow");
+			AddToClassList(_ussBaseClass);
+
+			_baseContainer = this.Q(_ussBaseContainerName);
+			_activeContainer = _baseContainer.Q(_ussActiveContainerName);
+			_animatedContainer = _baseContainer.Q(_ussAnimatedContainerName);
+			_activeHeaderIcon = _activeContainer.Q<Image>(className: _ussIconClass);
+			_activeHeaderLabel = _activeContainer.Q<Label>(className: _ussLabelClass);
+			_animatedHeaderIcon = _animatedContainer.Q<Image>(className: _ussIconClass);
+			_animatedHeaderLabel = _animatedContainer.Q<Label>(className: _ussLabelClass);
+			_activeParentButton = _activeContainer.Q<Image>(className: _ussArrowClass);
 			_activeParentButton.image = Icon.LeftArrow.Content;
 			_activeParentButton.AddManipulator(new Clickable(GoToParent));
-			_animatedParentButton = _animatedContainer.Query<Image>(className: "arrow");
+			_animatedParentButton = _animatedContainer.Q<Image>(className: _ussArrowClass);
 			_animatedParentButton.image = Icon.LeftArrow.Content;
-			_activeView = _activeContainer.Query<ScrollView>(name: "active-items");
+			_activeView = _activeContainer.Q<ScrollView>(_ussActiveItemsName);
 			_activeView.verticalScroller.slider.focusable = false;
-			_animatedView = _animatedContainer.Query<ScrollView>(name: "animated-items");
-			_search = this.Query<ToolbarSearchField>();
+			_animatedView = _animatedContainer.Q<ScrollView>(_ussAnimatedItemsName);
+			_search = this.Q<ToolbarSearchField>();
 			_search.RegisterValueChangedCallback(e => RebuildSearch(e.newValue));
 			_search.RegisterCallback<KeyDownEvent>(e => HandleKeyboard(e, true), TrickleDown.TrickleDown);
-			_searchText = _search.Query<TextField>().First().Children().First();
+			_searchText = _search.Q<TextField>().Children().First();
 		}
 
 		public void FocusSearch()
@@ -192,10 +207,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private void RebuildBranch(Image parentButton, Label header, Image headerIcon, ScrollView container, TreeItem parent)
 		{
-			if (parent.Parent != null)
-				parentButton.RemoveFromClassList("hidden");
-			else
-				parentButton.AddToClassList("hidden");
+			ElementHelper.ToggleClass(parentButton, _ussHiddenClass, parent == null);
 
 			header.text = parent.Label;
 			headerIcon.image = parent.Icon;
@@ -208,25 +220,25 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				child.BranchIndex = i;
 				child.Button = new Button { userData = child };
 				child.Button.clickable.clicked += () => SelectChild(child.Button.userData as TreeItem);
-				child.Button.AddToClassList("item");
+				child.Button.AddToClassList(_ussItemClass);
 				child.Button.RegisterCallback<MouseMoveEvent>(e => ButtonFocused(child.Button));
 
 				var labelContainer = new VisualElement();
-				labelContainer.AddToClassList("container");
+				labelContainer.AddToClassList(_ussContainerClass);
 				child.Button.Add(labelContainer);
 
 				var icon = new Image { image = child.Icon };
-				icon.AddToClassList("icon");
+				icon.AddToClassList(_ussIconClass);
 				labelContainer.Add(icon);
 
 				var label = new Label(child.Label);
-				label.AddToClassList("label");
+				label.AddToClassList(_ussIconClass);
 				labelContainer.Add(label);
 
 				if (child.IsBranch)
 				{
 					var arrow = new Image { image = Icon.RightArrow.Content };
-					arrow.AddToClassList("arrow");
+					arrow.AddToClassList(_ussArrowClass);
 					child.Button.Add(arrow);
 				}
 
@@ -382,7 +394,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				RebuildBranch(_animatedParentButton, _animatedHeaderLabel, _animatedHeaderIcon, _animatedView, _animatedBranch);
 				SetSelectedIndex(_activeBranch.SelectedIndex);
 
-				_animatedContainer.RemoveFromClassList("hidden");
+				_animatedContainer.RemoveFromClassList(_ussHiddenClass);
 
 				var progress = 0.0f;
 
@@ -401,7 +413,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 					if (progress == direction)
 					{
-						_animatedContainer.AddToClassList("hidden");
+						_animatedContainer.AddToClassList(_ussHiddenClass);
 						_isAnimating = false;
 					}
 

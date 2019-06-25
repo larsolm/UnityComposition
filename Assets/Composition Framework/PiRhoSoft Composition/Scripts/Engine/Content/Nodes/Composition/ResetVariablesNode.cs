@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -20,7 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Object;
 
 		[Tooltip("The list of variables to reset")]
-		[ListDisplay(AllowCollapse = false, EmptyText = "No variables will be reset")]
+		[List(EmptyLabel = "No variables will be reset")]
 		public ResetVariableList Variables = new ResetVariableList();
 
 		public override Color NodeColor => Colors.ExecutionDark;

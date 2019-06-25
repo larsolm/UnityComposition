@@ -14,11 +14,12 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			if (property.propertyType == SerializedPropertyType.Generic) // This might be wrong. Remember to check.
 			{
+				var listAttribute = attribute as ListAttribute;
 				var items = property.FindPropertyRelative("_items");
 				var itemDrawer = PropertyHelper.GetNextDrawer(fieldInfo, attribute);
 				var proxy = itemDrawer != null ? new PropertyDrawerListProxy(items, itemDrawer) : new PropertyListProxy(items);
 
-				return new ListElement(proxy, property.displayName, ElementHelper.GetTooltip(fieldInfo));
+				return new ListElement(proxy, property.displayName, ElementHelper.GetTooltip(fieldInfo), listAttribute.AllowAdd, listAttribute.AllowRemove, listAttribute.AllowReorder, listAttribute.EmptyLabel);
 			}
 			else
 			{

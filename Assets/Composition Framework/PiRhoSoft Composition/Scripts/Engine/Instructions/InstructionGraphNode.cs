@@ -1,9 +1,9 @@
-﻿using System;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using PiRhoSoft.UtilityEngine;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
-using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -32,11 +32,11 @@ namespace PiRhoSoft.CompositionEngine
 	{
 	}
 
-	public abstract class InstructionGraphNode : ScriptableObject, PargonUtilities.Engine.IAutocompleteSource
+	public abstract class InstructionGraphNode : ScriptableObject, IAutocompleteSource
 	{
-		public class InstructionGraphNodeAutocompleteSource : PargonUtilities.Engine.AutocompleteSource
+		public class InstructionGraphNodeAutocompleteSource : AutocompleteSource
 		{
-			public override List<PargonUtilities.Engine.AutocompleteItem> Items => new List<PargonUtilities.Engine.AutocompleteItem>();
+			public override List<AutocompleteItem> Items => new List<AutocompleteItem>();
 		}
 
 		public static class Colors
@@ -653,7 +653,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		public virtual Color NodeColor => Colors.Default;
 
-		public PargonUtilities.Engine.AutocompleteSource AutocompleteSource => new InstructionGraphNodeAutocompleteSource();
+		public AutocompleteSource AutocompleteSource => new InstructionGraphNodeAutocompleteSource();
 
 		private void UpdateName()
 		{

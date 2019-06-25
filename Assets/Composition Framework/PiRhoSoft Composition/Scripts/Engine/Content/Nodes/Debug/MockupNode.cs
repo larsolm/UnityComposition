@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class MockupNode : InstructionGraphNode
 	{
 		[Tooltip("The connections from this node")]
-		[ListDisplay]
+		[List]
 		[ClassDisplay(ClassDisplayType.Inline)]
 		public MockupConnectionList Connections = new MockupConnectionList();
 

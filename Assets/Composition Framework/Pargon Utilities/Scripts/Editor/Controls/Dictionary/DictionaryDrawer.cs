@@ -14,9 +14,10 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			if (property.propertyType == SerializedPropertyType.Generic) // This might be wrong. Remember to check.
 			{
+				var dictionaryAttribute = attribute as DictionaryAttribute;
 				var itemDrawer = PropertyHelper.GetNextDrawer(fieldInfo, attribute);
 				var proxy = itemDrawer != null ? new PropertyDrawerDictionaryProxy(property, itemDrawer) : new PropertyDictionaryProxy(property);
-				return new DictionaryElement(proxy, property.displayName, ElementHelper.GetTooltip(fieldInfo));
+				return new DictionaryElement(proxy, property.displayName, ElementHelper.GetTooltip(fieldInfo), dictionaryAttribute.AllowAdd, dictionaryAttribute.AllowRemove, dictionaryAttribute.EmptyText);
 			}
 			else
 			{

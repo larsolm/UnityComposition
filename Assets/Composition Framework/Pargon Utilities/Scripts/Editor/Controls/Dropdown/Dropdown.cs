@@ -10,7 +10,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	public abstract class Dropdown<T> : VisualElement, IBindableProperty<T>, IBindableObject<T>
 	{
 		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Dropdown/Dropdown.uss";
-		private const string _ussBase = "dropdown";
+		private const string _ussBase = "pargon-dropdown";
 
 		private PopupField<T> _popup;
 		private List<string> _options;

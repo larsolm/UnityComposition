@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -17,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The ScriptableObject type to create an instance of")]
-		[TypeDisplay(typeof(ScriptableObject), ShowAbstractOptions = false)]
+		[TypePicker(typeof(ScriptableObject), false)]
 		public string ScriptableObjectType;
 
 		[Tooltip("A variable reference to assign the created object to so that it can be referenced later")]

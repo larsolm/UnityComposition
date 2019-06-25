@@ -1,5 +1,5 @@
-﻿using System.Collections;
-using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -11,7 +11,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidSequenceError = "(CSQIS) Unable to run sequence for node '{0}': index '{1}' has no connection";
 
 		[Tooltip("The nodes to visit in order")]
-		[ListDisplay(AllowCollapse = false)]
+		[List]
 		public InstructionGraphNodeList Sequence = new InstructionGraphNodeList();
 
 		public override Color NodeColor => Colors.Sequence;

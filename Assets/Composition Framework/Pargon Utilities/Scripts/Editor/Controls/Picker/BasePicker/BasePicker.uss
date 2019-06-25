@@ -1,34 +1,34 @@
-﻿.base-picker
+﻿.pargon-base-picker
 {
 	background-color: #A5A5A5;
 	flex-grow: 1;
 }
 
-Label
+.pargon-base-picker Label
 {
 	color: #000000;
 }
 
-.search-container
+.pargon-base-picker .search-container
 {
 	height: 32px;
 	padding: 5px 6px 6px 6px;
 	min-height: 32px;
 }
 
-.search-field
+.pargon-base-picker .search-field
 {
 	width: auto;
 	flex-grow: 1;
 	min-height: 21px;
 }
 
-.search-field TextField
+.pargon-base-picker .search-field TextField
 {
 	margin: 2px;
 }
 
-.search-field TextInput
+.pargon-base-picker .search-field TextInput
 {
 	border-radius: 7px;
 	border-width: 1px;
@@ -36,19 +36,19 @@ Label
 	padding: 1px 22px;
 }
 
-.search-field Button
+.pargon-base-picker .search-field Button
 {
 	align-self: center;
 	margin: 0 4px;
 }
 
-.base-container
+.pargon-base-picker .base-container
 {
 	flex-direction: row;
 	flex-grow: 1;
 }
 
-.item-container
+.pargon-base-picker .item-container
 {
 	position: absolute;
 	left: 0;
@@ -57,7 +57,7 @@ Label
 	bottom: 0;
 }
 
-.header
+.pargon-base-picker .header
 {
 	background-color: #DDDDDD;
 	height: 24px;
@@ -69,7 +69,7 @@ Label
 	-unity-font-style: bold;
 }
 
-.header > Button
+.pargon-base-picker .header > Button
 {
 	position: absolute;
 	background-color: #DDDDDD;
@@ -79,29 +79,29 @@ Label
 	left: 10px;
 }
 
-.header .container
+.pargon-base-picker .header .container
 {
 	flex-direction: row;
 	align-items: center;
 }
 
-.header .icon
+.pargon-base-picker .header .icon
 {
 	width: 16px;
 	height: 16px;
 }
 
-.header .label
+.pargon-base-picker .header .label
 {
 	margin-left: 5px;
 }
 
-.hidden
+.pargon-base-picker .hidden
 {
 	display: none;
 }
 
-.item
+.pargon-base-picker .item
 {
 	flex-direction: row;
 	justify-content: space-between;
@@ -114,39 +114,39 @@ Label
 	height: 20px;
 }
 
-.item.focused
+.pargon-base-picker .item.focused
 {
 	background-color: #3D80DF;
 }
 
-.item.focused .label
+.pargon-base-picker .item.focused .label
 {
 	color: #FFFFFF;
 }
 
-.item .container
+.pargon-base-picker .item .container
 {
 	flex-direction: row;
 }
 
-.item .label
+.pargon-base-picker .item .label
 {
 	margin-left: 5px;
 }
 
-.item .icon
+.pargon-base-picker .item .icon
 {
 	width: 16px;
 	height: 16px;
 }
 
-.arrow
+.pargon-base-picker .arrow
 {
 	width: 16px;
 	height: 16px;
 }
 
-.header .arrow
+.pargon-base-picker .header .arrow
 {
 	position: absolute;
 	left: 5px;

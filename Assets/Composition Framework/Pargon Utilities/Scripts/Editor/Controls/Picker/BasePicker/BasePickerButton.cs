@@ -9,7 +9,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	public abstract class BasePickerButton<ValueType> : VisualElement, IBindableProperty<ValueType>, IBindableObject<ValueType>
 	{
 		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Picker/BasePicker/BasePickerButton.uss";
-		private const string _ussBaseButton = "picker-button";
+		private const string _ussBaseButton = "pargon-picker-button";
 		
 		public ValueType Value { get; protected set; }
 

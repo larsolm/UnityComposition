@@ -1,61 +1,76 @@
-﻿EnumButtons
+﻿.pargon-dictionary
+{
+	border-color: #555555;
+	border-width: 2px;
+	border-radius: 2px;
+	margin-bottom: 5px;
+}
+
+	.pargon-dictionary .header
+	{
+		background-color: #999999;
+		padding: 5px;
+		flex-direction: row;
+		flex-grow: 1;
+	}
+
+.pargon-dictionary .label
+{
+	flex-grow: 1;
+}
+
+.pargon-dictionary .add-button
+{
+	width: 16px;
+	height: 16px;
+	align-self: center;
+}
+
+.pargon-dictionary .remove-button
+{
+	width: 16px;
+	height: 16px;
+	align-self: center;
+}
+
+.pargon-dictionary .container
+{
+}
+
+.pargon-dictionary .empty-label
+{
+	margin: 5px;
+}
+
+.pargon-dictionary .item
 {
 	flex-direction: row;
-	flex-wrap: wrap;
 	flex-grow: 1;
+	align-items: center;
+	padding: 1px 5px;
 }
 
-EnumButtons > Button
+.pargon-dictionary .item.odd
 {
-	flex-grow: 1;
-	margin: 0;
+	background-color: #AAA;
 }
 
-EnumButtons > Button.active
+.pargon-dictionary .item.even
 {
-	background-color: #6B6B6B
+	background-color: #DDD;
 }
 
-ListElement
-{
-}
-
-ListElement .pargon-list-header
-{
-	flex-direction: row;
-	flex-grow: 1;
-}
-
-ListElement .pargon-list-label
+.pargon-dictionary .item-container
 {
 	flex-grow: 1;
 }
 
-ListElement .pargon-list-add-button
-{
-}
-
-ListElement .pargon-list-container
-{
-}
-
-ListElement .pargon-list-item
-{
-	flex-direction: row;
-	flex-grow: 1;
-}
-
-ListElement .pargon-list-item-container
-{
-	flex-grow: 1;
-}
-
-ListElement .pargon-list-item-drag
+.pargon-dictionary .item-drag
 {
 	background-color: #000;
 }
 
-ListElement .pargon-list-drag-handle
+.pargon-dictionary .invalid-key
 {
-	cursor: move-arrow;
+	background-color: #C22;
 }

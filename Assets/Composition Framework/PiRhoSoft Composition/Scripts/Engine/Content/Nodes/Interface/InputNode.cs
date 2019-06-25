@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 	public class InputNode : InstructionGraphNode
 	{
 		[Tooltip("The buttons that can trigger selections")]
-		[ListDisplay(EmptyText = "Add items to create input options")]
+		[List(EmptyLabel = "Add items to create input options")]
 		[ClassDisplay(ClassDisplayType.Inline)]
 		public InputNodeButtonList Buttons = new InputNodeButtonList();
 

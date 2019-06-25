@@ -7,7 +7,7 @@
 		<editor:ToolbarSearchField class="search-field">
 		</editor:ToolbarSearchField>
 	</engine:VisualElement>
-	<engine:VisualElement class ="base-container">
+	<engine:VisualElement name="base-container" class ="base-container">
 		<engine:VisualElement name="active-container" class="item-container">
 			<engine:VisualElement class="header">
 				<engine:Image class="arrow"/>

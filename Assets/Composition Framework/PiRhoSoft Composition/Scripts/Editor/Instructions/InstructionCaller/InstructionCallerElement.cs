@@ -47,14 +47,14 @@ namespace PiRhoSoft.CompositionEditor
 			if (_caller.Inputs.Count > 0)
 			{
 				var proxy = new ListProxy<InstructionInput>(_caller.Inputs, CreateInput);
-				_inputs = new ListElement(proxy, "Inputs", ElementHelper.GetTooltip(typeof(InstructionCaller), "_inputs")) { AllowAdd = false, AllowRemove = false, AllowMove = false };
+				_inputs = new ListElement(proxy, "Inputs", ElementHelper.GetTooltip(typeof(InstructionCaller), "_inputs"), false, false, false);
 				Add(_inputs);
 			}
 
 			if (_caller.Outputs.Count == 0)
 			{
 				var proxy = new ListProxy<InstructionOutput>(_caller.Outputs, CreateOutput);
-				_outputs = new ListElement(proxy, "Outputs", ElementHelper.GetTooltip(typeof(InstructionCaller), "_outputs")) { AllowAdd = false, AllowRemove = false, AllowMove = false };
+				_outputs = new ListElement(proxy, "Outputs", ElementHelper.GetTooltip(typeof(InstructionCaller), "_outputs"), false, false, false);
 				Add(_outputs);
 			}
 		}

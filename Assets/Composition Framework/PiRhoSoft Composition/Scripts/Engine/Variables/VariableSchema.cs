@@ -27,7 +27,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public VariableInitializerType InitializerType = VariableInitializerType.DefaultValue;
 
-		[ListDisplay(EmptyText = "Add tags to categorize variables (usually for resetting and persistance)", AllowCollapse = false)]
+		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistance)")]
 		public TagList Tags = new TagList();
 
 		[HideInInspector] [SerializeField] private VariableDefinitionList _definitions = new VariableDefinitionList();

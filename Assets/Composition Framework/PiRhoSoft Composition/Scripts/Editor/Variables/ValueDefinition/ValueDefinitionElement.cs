@@ -28,13 +28,13 @@ namespace PiRhoSoft.CompositionEditor
 		private VariableInitializerType _initializer;
 		private TagList _tags;
 		
-		private SerializedProperty _typeProperty;
-		private SerializedProperty _tagProperty;
-		private SerializedProperty _initializerProperty;
-		private SerializedProperty _constraintProperty;
-		private SerializedProperty _objectsProperty;
-		private SerializedProperty _isTypeLockedProperty;
-		private SerializedProperty _isConstraintLockedProperty;
+		private readonly SerializedProperty _typeProperty;
+		private readonly SerializedProperty _tagProperty;
+		private readonly SerializedProperty _initializerProperty;
+		private readonly SerializedProperty _constraintProperty;
+		private readonly SerializedProperty _objectsProperty;
+		private readonly SerializedProperty _isTypeLockedProperty;
+		private readonly SerializedProperty _isConstraintLockedProperty;
 		private List<Object> _objects;
 
 		public ValueDefinitionElement(SerializedProperty property)
@@ -205,7 +205,7 @@ namespace PiRhoSoft.CompositionEditor
 			if (oldElement != null)
 			{
 				var index = IndexOf(oldElement);
-				oldElement.RemoveFromHierarchy();
+				RemoveAt(index);
 				Insert(index, newElement);
 			}
 			else
@@ -317,7 +317,7 @@ namespace PiRhoSoft.CompositionEditor
 			var constraint = _definition.Constraint;
 
 			if (HasConstraint(_definition.IsConstraintLocked, constraint, _definition.Type))
-				SetupConstraint(container, _definition.IsConstraintLocked, ref constraint, _definition.Type, true);
+				SetupConstraint(container, _definition.IsConstraintLocked, ref constraint, _definition.Type, _showConstrantLabel);
 
 			ReplaceElement(ref _constraintContainer, container);
 		}

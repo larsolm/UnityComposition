@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +9,19 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		private const string _alreadyRunningError = "(CIAR) Failed to run Instruction '{0}': the Instruction is already running";
 
+		[Tooltip("The name used to access the context object from nodes in this graph")]
 		public string ContextName = "context";
+
+		[Tooltip("The variable definition for the context object that runs this graph")]
 		public ValueDefinition ContextDefinition = ValueDefinition.Create(VariableType.Empty);
 
-		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false)] public VariableDefinitionList Inputs = new VariableDefinitionList();
-		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false)] public VariableDefinitionList Outputs = new VariableDefinitionList();
+		[Tooltip("The variables definitions used as inputs for this graph")]
+		[List(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyLabel = "Inputs defined in nodes will appear here")]
+		public VariableDefinitionList Inputs = new VariableDefinitionList();
+
+		[Tooltip("The variables definitions used as outputs for this graph")]
+		[List(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyLabel = "Outputs defined in nodes will appear here")]
+		public VariableDefinitionList Outputs = new VariableDefinitionList();
 
 		public IVariableStore Variables { get; private set; }
 		public bool IsRunning { get; private set; }

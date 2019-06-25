@@ -5,10 +5,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class Placeholder<T> : VisualElement
 	{
-		private const string _invalidChildrenWarning = "(PUCPIC) Unable to find child text input field Placeholder";
-
 		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Placeholder/Placeholder.uss";
-		private const string _ussPlaceholder = "placeholder";
+		private const string _ussPlaceholder = "pargon-placeholder";
 		private const string _ussInput = "input";
 		private const string _ussText = "text";
 

@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.PargonUtilities.Editor;
-using PiRhoSoft.UtilityEditor;
-using PiRhoSoft.UtilityEngine;
+using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace PiRhoSoft.DocGenEditor
 		private const string _invalidHelpUrlWarning = "(UHUVIHU) {0}'s HelpURL attribute is {1} and should be {2}";
 
 		public string UrlRoot; // TODO: expose this as a regex or tag format or something
-		[ListDisplay] public DocumentationNamespaceList IncludedNamespaces = new DocumentationNamespaceList();
+		[List] public DocumentationNamespaceList IncludedNamespaces = new DocumentationNamespaceList();
 		
 		public void Validate()
 		{

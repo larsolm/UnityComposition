@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -9,7 +9,7 @@ namespace PiRhoSoft.CompositionEngine
 	public abstract class InstructionGraph : Instruction
 	{
 		[Tooltip("The list of all nodes in this graph")]
-		[ListDisplay(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyText = "Use the Instruction Graph Window to add nodes to this graph")]
+		[List(AllowAdd = false, AllowRemove = false, AllowReorder = false)]
 		[SerializeField] [HideInInspector] // editor draws this manually so it shows up at the bottom for derived classes
 		private InstructionGraphNodeList _nodes = new InstructionGraphNodeList();
 
