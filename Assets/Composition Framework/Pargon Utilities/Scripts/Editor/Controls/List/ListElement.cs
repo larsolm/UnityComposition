@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.PargonUtilities.Editor
@@ -21,8 +21,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private const string _ussDragHandleClass = "pargon-list-drag-handle";
 		private const string _ussRemoveButtonClass = "pargon-list-remove-item";
 
-		private const int _dragUpdateTime = 0;
-
 		public bool AllowAdd = true;
 		public bool AllowRemove = true;
 		public bool AllowMove = true;
@@ -31,6 +29,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public event Action<int> OnItemRemoved;
 		public event Action<int, int> OnItemMoved;
 
+		private int _addButtonIndex;
 		private int _dragFromIndex = -1;
 		private int _dragToIndex = -1;
 		private VisualElement _dragElement;
@@ -54,10 +53,19 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			addButton.image = Icon.Add.Content;
 			addButton.AddManipulator(new Clickable(AddItem));
 
+			_addButtonIndex = IndexOf(addButton);
+
 			RegisterCallback<MouseMoveEvent>(UpdateDrag);
 			RegisterCallback<MouseUpEvent>(StopDrag);
 
 			Rebuild();
+		}
+
+		public VisualElement AddHeaderButton(Texture image, string tooltip, Action action)
+		{
+			var button = ElementHelper.CreateIconButton(image, tooltip, action);
+			Insert(_addButtonIndex, button);
+			return button;
 		}
 
 		public void Rebuild()

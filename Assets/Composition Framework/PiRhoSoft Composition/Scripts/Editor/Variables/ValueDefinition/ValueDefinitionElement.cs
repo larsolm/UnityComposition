@@ -253,7 +253,7 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					container.tooltip = "The default value to use for the variable";
 					container.Add(new Label("Default"));
-					container.Add(new VariableValueElement(_owner, null, () =>
+					container.Add(new VariableValueElement(_owner, () =>
 					{
 						var value = _definition.Initializer.Execute(null, null); // context isn't necessary since the object that would be the context is currently drawing
 					if (value.IsEmpty) // If the initializer hasn't been set, use the default value.

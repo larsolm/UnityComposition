@@ -3,7 +3,6 @@ using PiRhoSoft.PargonUtilities.Editor;
 using System;
 using System.Linq;
 using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -15,18 +14,16 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly Func<VariableValue> _getValue;
 		private readonly Action<VariableValue> _setValue;
 		private readonly Func<ValueDefinition> _getDefinition;
-		private readonly Label _label;
 
 		private VariableValue _value;
 		private ValueDefinition _definition;
 
-		public VariableValueElement(Object owner, string text, Func<VariableValue> getValue, Action<VariableValue> setValue, Func<ValueDefinition> getDefinition)
+		public VariableValueElement(Object owner, Func<VariableValue> getValue, Action<VariableValue> setValue, Func<ValueDefinition> getDefinition)
 		{
 			_owner = owner;
 			_getValue = getValue;
 			_setValue = setValue;
 			_getDefinition = getDefinition;
-			_label = new Label(text);
 
 			schedule.Execute(() =>
 			{
@@ -36,6 +33,9 @@ namespace PiRhoSoft.CompositionEditor
 			}).Every(0);
 
 			ElementHelper.Bind(this, this, _owner);
+
+
+			Setup(_getValue(), _getDefinition());
 		}
 
 		public VariableValue GetValueFromElement(VisualElement element) => _value;
@@ -43,7 +43,7 @@ namespace PiRhoSoft.CompositionEditor
 		public void UpdateElement(VariableValue value, VisualElement element, Object owner) => Setup(value, _definition);
 		public void UpdateObject(VariableValue value, VisualElement element, Object owner) => _setValue(value);
 
-		public void Setup(VariableValue value, ValueDefinition definition)
+		private void Setup(VariableValue value, ValueDefinition definition)
 		{
 			Clear();
 
@@ -52,7 +52,6 @@ namespace PiRhoSoft.CompositionEditor
 
 			var element = CreateElement();
 
-			Add(_label);
 			Add(element);
 		}
 
@@ -250,40 +249,31 @@ namespace PiRhoSoft.CompositionEditor
 		private VisualElement CreateStore()
 		{
 			var container = new VisualElement();
-
-			//var names = value.Store.GetVariableNames();
+			//
+			//var names = _value.Store.GetVariableNames();
 			//var remove = string.Empty;
-			//var first = true;
-			//var empty = ValueDefinition.Create(VariableType.Empty);
+			//
+			//var storeConstraint = _definition.Constraint as StoreVariableConstraint;
 			//
 			//foreach (var name in names)
-			//{
-			//	if (!first)
-			//		RectHelper.TakeVerticalSpace(ref rect);
+			//{			
+			//	var index = storeConstraint?.Schema != null ? storeConstraint.Schema.GetIndex(name) : -1;
+			//	var definition = index >= 0 ? storeConstraint.Schema[index].Definition : ValueDefinition.Empty);
 			//
-			//	var index = constraint?.Schema != null ? constraint.Schema.GetIndex(name) : -1;
-			//	var definition = index >= 0 ? constraint.Schema[index].Definition : empty;
+			//	var item = _value.Store.GetVariable(name);
+			//	
+			//	container.Add(new Label(name));
 			//
-			//	var item = value.Store.GetVariable(name);
-			//	var height = GetHeight(item, definition, true);
-			//	var itemRect = RectHelper.TakeHeight(ref rect, height);
-			//	var labelRect = RectHelper.TakeWidth(ref itemRect, _storeLabelWidth);
-			//	labelRect = RectHelper.TakeLine(ref labelRect);
-			//
-			//	EditorGUI.LabelField(labelRect, name);
-			//
-			//	if (constraint?.Schema == null && value.Store is VariableStore)
+			//	if (storeConstraint?.Schema == null && _value.Store is VariableStore store)
 			//	{
-			//		var removeRect = RectHelper.TakeTrailingIcon(ref itemRect);
+			//		container.Add(ElementHelper.CreateIconButton(Icon.Remove.Content, "Remove this value from the variable store", () =>
+			//		{
 			//
-			//		if (GUI.Button(removeRect, _removeStoreButton.Content, GUIStyle.none))
-			//			remove = name;
+			//		}));
 			//	}
 			//
 			//	item = Draw(itemRect, GUIContent.none, item, definition, true);
 			//	value.Store.SetVariable(name, item);
-			//
-			//	first = false;
 			//}
 			//
 			//if (constraint?.Schema == null && value.Store is VariableStore store)
@@ -300,7 +290,7 @@ namespace PiRhoSoft.CompositionEditor
 			//	if (!string.IsNullOrEmpty(remove))
 			//		(value.Store as VariableStore).RemoveVariable(remove);
 			//}
-
+			//
 			return container;
 		}
 

@@ -1,28 +1,15 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.UtilityEditor;
-using PiRhoSoft.UtilityEngine;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
 	[CustomPropertyDrawer(typeof(VariableValueSource))]
 	public class VariableValueSourceDrawer : PropertyDrawer
 	{
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-		{
-			var target = PropertyHelper.GetObject<VariableValueSource>(property);
-			var height = RectHelper.LineHeight;
-
-			if (target.Type == VariableSourceType.Value)
-				height += VariableValueDrawer.GetHeight(target.Value, target.Definition, true);
-			else
-				height += RectHelper.LineHeight;
-
-			return height;
-		}
-
 		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
 		{
 			var target = PropertyHelper.GetObject<VariableValueSource>(property);
@@ -51,7 +38,7 @@ namespace PiRhoSoft.CompositionEditor
 							}
 						}
 
-						target.Value = VariableValueDrawer.Draw(position, GUIContent.none, target.Value, target.Definition, true);
+						//target.Value = VariableValueDrawer.Draw(position, GUIContent.none, target.Value, target.Definition, true);
 					}
 					else if (target.Type == VariableSourceType.Reference)
 					{
@@ -59,6 +46,12 @@ namespace PiRhoSoft.CompositionEditor
 					}
 				}
 			}
+		}
+
+		public override VisualElement CreatePropertyGUI(SerializedProperty property)
+		{
+			var container = new VisualElement();
+			return container;
 		}
 	}
 }

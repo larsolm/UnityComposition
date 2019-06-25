@@ -7,7 +7,7 @@
 >
 	<engine:VisualElement class="pargon-list-header">
 		<engine:Label name="list-label" class="pargon-list-label" />
-		<engine:Image name="list-add-button" text="+" class="pargon-list-add-button" />
+		<engine:Image name="list-add-button" class="pargon-list-add-button" />
 	</engine:VisualElement>
 	<engine:VisualElement name="list-container" class="pargon-list-container" />
 </engine:UXML>

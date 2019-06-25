@@ -63,7 +63,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var definition = _caller.GetInputDefinition(input);
 			var container = new VisualElement();
-			var label = new Label(definition.Name);
+			var label = new Label(input.Name);
 
 			var typeElement = new EnumDropdown(_owner, () => (int)input.Type, value => input.Type = (InstructionInputType)value);
 			typeElement.Setup(input.Type);
@@ -71,8 +71,7 @@ namespace PiRhoSoft.CompositionEditor
 			var referenceElement = new VariableReferenceElement();
 			referenceElement.Setup(_owner, input.Reference, null); // TODO: Add an autocompletesource
 
-			var valueElement = new VariableValueElement(_owner, input.Name, () => input.Value, value => input.Value = value, () => _caller.GetInputDefinition(input).Definition );
-			valueElement.Setup(input.Value, definition.Definition);
+			var valueElement = new VariableValueElement(_owner, () => input.Value, value => input.Value = value, () => _caller.GetInputDefinition(input).Definition );
 
 			typeElement.RegisterCallback<ChangeEvent<int>>(e =>
 			{

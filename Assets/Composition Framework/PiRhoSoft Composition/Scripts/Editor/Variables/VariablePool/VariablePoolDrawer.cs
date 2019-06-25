@@ -4,12 +4,12 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
-	[CustomPropertyDrawer(typeof(VariableSet))]
-	public class VariableSetDrawer : PropertyDrawer
+	[CustomPropertyDrawer(typeof(VariablePool))]
+	public class VariablePoolDrawer : PropertyDrawer
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			return new VariableSetElement(property);
+			return new VariablePoolElement(property);
 		}
 	}
 }

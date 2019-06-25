@@ -61,6 +61,8 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Creation
 
+		public static ValueDefinition Empty => Create(VariableType.Empty);
+
 		public static ValueDefinition Create(VariableType type)
 		{
 			return new ValueDefinition

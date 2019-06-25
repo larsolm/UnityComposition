@@ -900,8 +900,8 @@ namespace PiRhoSoft.CompositionEditor
 
 			_isLocked = GUI.Toggle(lockRect, _isLocked, _isLocked ? _unlockButton.Content : _lockButton.Content, EditorStyles.toolbarButton);
 
-			if (GUI.Button(watchRect, _openWatchButton.Content, EditorStyles.toolbarButton))
-				WatchWindow.ShowWindow();
+			//if (GUI.Button(watchRect, _openWatchButton.Content, EditorStyles.toolbarButton))
+			//	WatchWindow.ShowWindow();
 		}
 		
 

@@ -115,6 +115,13 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			return label;
 		}
 
+		public static VisualElement CreateIconButton(Texture image, string tooltip, Action action)
+		{
+			var button = new Image { image = image, tooltip = tooltip };
+			button.AddManipulator(new Clickable(action));
+			return button;
+		}
+
 		public static VisualElement GetPropertyContainer(SerializedProperty property, string label, FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			var drawer = PropertyHelper.GetNextDrawer(fieldInfo, attribute);

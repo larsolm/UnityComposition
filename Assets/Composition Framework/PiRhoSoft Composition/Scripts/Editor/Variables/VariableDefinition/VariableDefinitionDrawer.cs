@@ -1,27 +1,22 @@
 ﻿using PiRhoSoft.CompositionEngine;
+using PiRhoSoft.PargonUtilities.Editor;
 using UnityEditor;
-using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
 	[CustomPropertyDrawer(typeof(VariableDefinition))]
 	public class VariableDefinitionDrawer : PropertyDrawer
 	{
-		private const float _labelWidth = 120.0f;
-		private const float _labelIndent = 12.0f;
-
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
-		{
-			var definitionProperty = property.FindPropertyRelative(nameof(VariableDefinition.Definition));
-			return EditorGUI.GetPropertyHeight(definitionProperty);
-		}
-
-		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
+		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
 			var nameProperty = property.FindPropertyRelative(nameof(VariableDefinition.Name));
 			var definitionProperty = property.FindPropertyRelative(nameof(VariableDefinition.Definition));
+			var container = ElementHelper.CreatePropertyContainer(nameProperty.stringValue);
 
-			EditorGUI.PropertyField(position, definitionProperty, new GUIContent(nameProperty.stringValue));
+			container.Add(new ValueDefinitionElement(definitionProperty));
+
+			return container;
 		}
 	}
 }
