@@ -18,8 +18,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				var required = attribute as RequiredAttribute;
 				var column = new VisualElement();
-				var message = new MessageBox();
-				message.Setup(required.Type, required.Message);
+				var message = new MessageBox(required.Type, required.Message);
 
 				column.Add(container);
 				column.Add(message);

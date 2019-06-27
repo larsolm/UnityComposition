@@ -7,29 +7,40 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class StringVariableConstraint : VariableConstraint
 	{
-		public string[] Values;
+		public List<string> Values = new List<string>();
 
 		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
-			writer.Write(Values.Length);
+			writer.Write(Values.Count);
 
 			foreach (var value in Values)
-				writer.Write(value);
+				writer.Write(value ?? string.Empty);
 		}
 
 		protected internal override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
 			var length = reader.ReadInt32();
 
-			Values = new string[length];
+			Values.Clear();
 
-			for (var i = 0; i < Values.Length; i++)
-				Values[i] = reader.ReadString();
+			for (var i = 0; i < length; i++)
+				Values.Add(reader.ReadString());
 		}
 
 		public override bool IsValid(VariableValue value)
 		{
-			return Values.Length == 0 || Values.Contains(value.String);
+			return Values.Count == 0 || Values.Contains(value.String);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is StringVariableConstraint other
+				&& Values.SequenceEqual(other.Values);
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
 		}
 	}
 }

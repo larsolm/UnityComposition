@@ -1,12 +1,11 @@
-﻿using PiRhoSoft.PargonUtilities.Editor;
-using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.PargonInspector.Editor
+namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class AutocompleteElement : VisualElement, IBindableProperty<string>, IBindableObject<string>
 	{

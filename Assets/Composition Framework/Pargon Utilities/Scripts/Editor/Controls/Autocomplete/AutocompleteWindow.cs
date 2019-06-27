@@ -1,6 +1,6 @@
 ﻿using UnityEditor;
 
-namespace PiRhoSoft.PargonInspector.Editor
+namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class AutocompleteWindow : EditorWindow
 	{

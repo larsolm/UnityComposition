@@ -6,13 +6,13 @@
 	margin-bottom: 5px;
 }
 
-	.pargon-dictionary .header
-	{
-		background-color: #999999;
-		padding: 5px;
-		flex-direction: row;
-		flex-grow: 1;
-	}
+.pargon-dictionary .header
+{
+	background-color: #999999;
+	padding: 5px;
+	flex-direction: row;
+	flex-grow: 1;
+}
 
 .pargon-dictionary .label
 {

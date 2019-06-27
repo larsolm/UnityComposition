@@ -48,11 +48,6 @@ namespace PiRhoSoft.CompositionEngine
 			}
 		}
 
-		protected internal override VariableConstraint CreateConstraint()
-		{
-			return new EnumVariableConstraint();
-		}
-
 		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
 		{
 			if (right.HasEnumType(left.EnumType))

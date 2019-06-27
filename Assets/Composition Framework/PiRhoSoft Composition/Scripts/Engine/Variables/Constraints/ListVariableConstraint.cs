@@ -6,8 +6,8 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class ListVariableConstraint : VariableConstraint
 	{
-		public VariableType ItemType;
-		public VariableConstraint ItemConstraint;
+		public VariableType ItemType = VariableType.Empty;
+		public VariableConstraint ItemConstraint = null;
 
 		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
@@ -47,6 +47,18 @@ namespace PiRhoSoft.CompositionEngine
 			}
 
 			return true;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is ListVariableConstraint other
+				&& ItemType == other.ItemType
+				&& ((ItemConstraint == null && other.ItemConstraint == null) || (ItemConstraint != null && ItemConstraint.Equals(other.ItemConstraint)));
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
 		}
 	}
 }

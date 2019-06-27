@@ -12,8 +12,6 @@ namespace PiRhoSoft.CompositionEngine
 
 		private const string _gameObjectName = "GameObject";
 
-		protected internal override VariableConstraint CreateConstraint() => new ObjectVariableConstraint();
-
 		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create((Object)null);

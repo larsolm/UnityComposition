@@ -1,0 +1,29 @@
+﻿.pargon-search-base
+{
+	flex-direction: row;
+}
+
+.pargon-search-base .left
+{
+	flex-grow: 1;
+	-unity-slice-left: 16;
+}
+
+.pargen-search-base .right
+{
+}
+
+.pargon-search-base .text
+{
+	flex-grow: 1;
+	margin: 1px 5px;
+}
+
+.pargon-search-base .text > TextInput
+{
+	flex-grow: 1;
+	background-image: none;
+	padding: 0 0 0 0;
+	color: #FFF;
+	--unity-cursor-color: #FFF;
+}

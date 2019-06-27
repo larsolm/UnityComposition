@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -18,7 +19,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				var typeAttribute = attribute as TypePickerAttribute;
 				var picker = new TypePicker(property);
-				picker.Setup(typeAttribute.BaseType, typeAttribute.ShowAbstract, property.stringValue);
+				picker.Setup(typeAttribute.BaseType, typeAttribute.ShowAbstract, Type.GetType(property.stringValue ?? string.Empty));
 
 				container.Add(picker);
 			}

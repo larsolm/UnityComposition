@@ -23,6 +23,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public static readonly Icon Error = BuiltIn("console.erroricon");
 		public static readonly Icon Settings = BuiltIn("_Popup");
 		public static readonly Icon View = BuiltIn("UnityEditor.LookDevView");
+		public static readonly Icon SearchBarLeft = BuiltIn("toolbarsearch");
+		public static readonly Icon SearchBarRightCancel = BuiltIn("toolbarsearchCancelButton");
+		public static readonly Icon SearchBarRight = BuiltIn("toolbarsearchCancelButtonOff");
 
 		private const string _invalidIconError = "(PIIII) failed to create icon content: the built in icon {0} could not be loaded";
 		private const string _invalidDataError = "(PIIID) failed to create icon content: the supplied data is not a valid base 64 string";

@@ -24,11 +24,6 @@ namespace PiRhoSoft.CompositionEngine
 			builder.Append(value.Store);
 		}
 
-		protected internal override VariableConstraint CreateConstraint()
-		{
-			return new StoreVariableConstraint();
-		}
-
 		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
 		{
 			var store = value.Store as VariableStore;

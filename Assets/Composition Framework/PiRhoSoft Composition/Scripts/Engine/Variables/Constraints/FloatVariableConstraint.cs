@@ -6,9 +6,9 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class FloatVariableConstraint : VariableConstraint
 	{
-		public bool HasRange;
-		public float Minimum;
-		public float Maximum;
+		public bool HasRange = false;
+		public float Minimum = 0;
+		public float Maximum = 100;
 
 		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
@@ -27,6 +27,19 @@ namespace PiRhoSoft.CompositionEngine
 		public override bool IsValid(VariableValue value)
 		{
 			return !HasRange || (value.Float >= Minimum && value.Float <= Maximum);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is FloatVariableConstraint other
+				&& HasRange == other.HasRange
+				&& Minimum == other.Minimum
+				&& Maximum == other.Maximum;
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
 		}
 	}
 }

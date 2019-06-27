@@ -21,20 +21,24 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public abstract T GetValueFromProperty(SerializedProperty property);
 		public abstract void UpdateProperty(T value, VisualElement element, SerializedProperty property);
 
-		public Dropdown(SerializedProperty property)
+		public Dropdown(List<string> options, List<T> values, T value, SerializedProperty property)
 		{
+			Setup(options, values, value);
+
 			ElementHelper.Bind(this, this, property);
 		}
 
-		public Dropdown(Object owner, Func<T> getValue, Action<T> setValue)
+		public Dropdown(List<string> options, List<T> values, T value, Object owner, Func<T> getValue, Action<T> setValue)
 		{
+			Setup(options, values, value);
+
 			ElementHelper.Bind(this, this, owner);
 
 			_getValue = getValue;
 			_setValue = setValue;
 		}
 
-		public void Setup(List<string> options, List<T> values, T value)
+		private void Setup(List<string> options, List<T> values, T value)
 		{
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
 

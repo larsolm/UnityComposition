@@ -32,11 +32,6 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(i);
 		}
 
-		protected internal override VariableConstraint CreateConstraint()
-		{
-			return new IntVariableConstraint();
-		}
-
 		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetInt(out var i))

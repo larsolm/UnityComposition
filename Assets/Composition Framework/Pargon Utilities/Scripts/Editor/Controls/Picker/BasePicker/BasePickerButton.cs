@@ -19,10 +19,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private Func<ValueType> _getValue;
 		private Action<ValueType> _setValue;
 
-		public BasePickerButton()
-		{
-		}
-
 		public BasePickerButton(SerializedProperty property)
 		{
 			ElementHelper.Bind(this, this, property);
@@ -53,6 +49,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			button.Add(_label);
 
 			Add(button);
+
+			UpdateElement(value);
 		}
 
 		public abstract ValueType GetValueFromProperty(SerializedProperty property);
@@ -88,6 +86,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			_icon.image = icon;
 			_label.text = text;
+
+			ElementHelper.SetVisible(_icon, icon != null);
 		}
 	}
 }

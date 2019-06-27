@@ -32,11 +32,6 @@ namespace PiRhoSoft.CompositionEngine
 			return VariableValue.Create(f);
 		}
 
-		protected internal override VariableConstraint CreateConstraint()
-		{
-			return new FloatVariableConstraint();
-		}
-
 		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
 		{
 			if (right.TryGetFloat(out var number))

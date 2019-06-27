@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
@@ -7,8 +8,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class IntDropdown : Dropdown<int>
 	{
-		public IntDropdown(SerializedProperty property) : base(property) { }
-		public IntDropdown(Object owner, Func<int> getValue, Action<int> setValue) : base(owner, getValue, setValue) { }
+		public IntDropdown(List<string> options, List<int> values, int value, SerializedProperty property) : base(options, values, value, property) { }
+		public IntDropdown(List<string> options, List<int> values, int value, Object owner, Func<int> getValue, Action<int> setValue) : base(options, values, value, owner, getValue, setValue) { }
 
 		public override int GetValueFromProperty(SerializedProperty property)
 		{

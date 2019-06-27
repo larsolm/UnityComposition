@@ -9,10 +9,5 @@ namespace PiRhoSoft.PargonUtilities.Engine
 
 		public string AddLabel = null;
 		public string EmptyText = "Dictionary is Empty";
-
-		public DictionaryAttribute()
-		{
-			order = int.MaxValue - 100;
-		}
 	}
 }

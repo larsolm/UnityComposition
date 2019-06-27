@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -35,7 +34,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private Image _inspect;
 
-		public ObjectPicker() { }
 		public ObjectPicker(SerializedProperty property) : base(property) { }
 		public ObjectPicker(Object owner, Func<Object> getValue, Action<Object> setValue) : base(owner, getValue, setValue) { }
 
@@ -59,11 +57,11 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			picker.OnSelected += selectedObject =>
 			{
 				Value = selectedObject;
+				UpdateElement(Value);
 				ElementHelper.SendChangeEvent(this, value, Value);
 			};
 
-			_inspect = new Image { image = Icon.Inspect.Content };
-			_inspect.AddManipulator(new Clickable(Inspect));
+			_inspect = ElementHelper.CreateIconButton(Icon.Inspect.Content, "View this object in the inspector", Inspect);
 
 			Setup(picker, value);
 
@@ -107,35 +105,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			SetLabel(icon, text);
 
 			_inspect.SetEnabled(value);
-		}
-
-		#endregion
-
-		#region UXML
-
-		private class Factory : UxmlFactory<ObjectPicker, Traits> { }
-
-		private class Traits : UxmlTraits
-		{
-			private UxmlStringAttributeDescription _type = new UxmlStringAttributeDescription { name = "type", use = UxmlAttributeDescription.Use.Required };
-			private UxmlStringAttributeDescription _path = new UxmlStringAttributeDescription { name = "asset-path" };
-
-			public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
-			{
-				get { yield break; }
-			}
-
-			public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
-			{
-				base.Init(ve, bag, cc);
-
-				var button = ve as ObjectPicker;
-				var typeName = _type.GetValueFromBag(bag, cc);
-				var path = _path.GetValueFromBag(bag, cc);
-				var type = Type.GetType(typeName);
-
-				button.Setup(type, path);
-			}
 		}
 
 		#endregion

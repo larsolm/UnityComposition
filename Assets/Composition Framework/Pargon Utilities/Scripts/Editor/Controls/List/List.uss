@@ -31,6 +31,7 @@
 	width: 16px;
 	height: 16px;
 	align-self: center;
+	margin-left: 5px;
 }
 
 .pargon-list .container
@@ -40,6 +41,7 @@
 .pargon-list .empty-label
 {
 	margin: 5px;
+	white-space: normal;
 }
 
 .pargon-list .item
@@ -73,4 +75,5 @@
 .pargon-list .drag-handle
 {
 	cursor: move-arrow;
+	margin-right: 5px;
 }

@@ -115,10 +115,12 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			return label;
 		}
 
-		public static VisualElement CreateIconButton(Texture image, string tooltip, Action action)
+		public static Image CreateIconButton(Texture image, string tooltip, Action action)
 		{
 			var button = new Image { image = image, tooltip = tooltip };
 			button.AddManipulator(new Clickable(action));
+			button.style.minWidth = new StyleLength(image.width);
+			button.style.minHeight = new StyleLength(image.height);
 			button.style.width = new StyleLength(image.width);
 			button.style.height = new StyleLength(image.height);
 			button.style.alignSelf = new StyleEnum<Align>(Align.Center);
@@ -275,7 +277,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				var fromElement = bindable.GetValueFromElement(element);
 				var fromProperty = bindable.GetValueFromProperty(property);
 
-				if (!fromElement.Equals(fromProperty))
+				if ((fromElement == null && fromProperty != null) || (fromElement != null && !fromElement.Equals(fromProperty)))
 					bindable.UpdateElement(fromProperty, element, property);
 
 			}).Every(0);
@@ -294,7 +296,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				var fromElement = bindable.GetValueFromElement(element);
 				var fromObject = bindable.GetValueFromObject(owner);
 
-				if (!fromElement.Equals(fromObject))
+				if ((fromElement == null && fromObject != null) || (fromElement != null && !fromElement.Equals(fromObject)))
 					bindable.UpdateElement(fromObject, element, owner);
 
 			}).Every(0);
@@ -311,7 +313,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			element.schedule.Execute(() =>
 			{
 				var value = getValue();
-				if (!value.Equals(field.value))
+				if ((value == null && field.value != null) || (value != null && !value.Equals(field.value)))
 					field.SetValueWithoutNotify(value);
 
 			}).Every(0);

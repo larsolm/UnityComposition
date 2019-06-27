@@ -9,8 +9,6 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public const string CountText = "Count";
 
-		protected internal override VariableConstraint CreateConstraint() => new ListVariableConstraint();
-
 		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			return VariableValue.Create(new VariableList());

@@ -13,7 +13,7 @@ namespace PiRhoSoft.CompositionEngine
 		public string ContextName = "context";
 
 		[Tooltip("The variable definition for the context object that runs this graph")]
-		public ValueDefinition ContextDefinition = ValueDefinition.Create(VariableType.Empty);
+		public ValueDefinition ContextDefinition = ValueDefinition.Empty;
 
 		[Tooltip("The variables definitions used as inputs for this graph")]
 		[List(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyLabel = "Inputs defined in nodes will appear here")]

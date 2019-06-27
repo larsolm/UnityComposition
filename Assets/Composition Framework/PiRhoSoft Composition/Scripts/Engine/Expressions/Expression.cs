@@ -39,6 +39,17 @@ namespace PiRhoSoft.CompositionEngine
 		public bool HasError => !string.IsNullOrEmpty(_statement) && _operations == null;
 		public string Statement => _statement;
 
+		public override bool Equals(object obj)
+		{
+			return obj is Expression other
+				&& ((string.IsNullOrEmpty(_statement) && string.IsNullOrEmpty(other.Statement)) || (_statement != null && _statement.Equals(other._statement)));
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+
 		public ExpressionCompilationResult SetStatement(string statement)
 		{
 			_statement = statement;

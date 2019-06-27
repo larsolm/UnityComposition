@@ -1,6 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -8,8 +8,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class FloatDropdown : Dropdown<float>
 	{
-		public FloatDropdown(SerializedProperty property) : base(property) { }
-		public FloatDropdown(Object owner, Func<float> getValue, Action<float> setValue) : base(owner, getValue, setValue) { }
+		public FloatDropdown(List<string> options, List<float> values, float value, SerializedProperty property) : base(options, values, value, property) { }
+		public FloatDropdown(List<string> options, List<float> values, float value, Object owner, Func<float> getValue, Action<float> setValue) : base(options, values, value, owner, getValue, setValue) { }
 
 		public override float GetValueFromProperty(SerializedProperty property)
 		{

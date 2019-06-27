@@ -15,7 +15,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			var position = GUIUtility.GUIToScreenPoint(rect.position);
 
 			_instance = CreateInstance<BasePickerWindow>();
-			_instance.ShowAsDropDown(new Rect(position, rect.size), new Vector2(rect.width, 330));
+			_instance.ShowAsDropDown(new Rect(position, rect.size), new Vector2(Mathf.Max(rect.width, 200), 330));
 			_instance.rootVisualElement.Add(picker);
 
 			picker.OnSelected += selectedItem => _instance.Close();

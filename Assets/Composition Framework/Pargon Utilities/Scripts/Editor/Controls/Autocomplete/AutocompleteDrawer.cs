@@ -1,10 +1,9 @@
-﻿using PiRhoSoft.PargonUtilities.Editor;
-using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonInspector.Editor
+namespace PiRhoSoft.PargonUtilities.Editor
 {
 	[CustomPropertyDrawer(typeof(AutocompleteAttribute))]
 	class AutocompleteDrawer : PropertyDrawer

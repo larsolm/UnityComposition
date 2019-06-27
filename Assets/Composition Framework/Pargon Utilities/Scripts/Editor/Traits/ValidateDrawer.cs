@@ -33,8 +33,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				{
 					var obj = PropertyHelper.GetParent<Object>(property);
 					var column = new VisualElement();
-					var message = new MessageBox();
-					message.Setup(validate.Type, validate.Message);
+					var message = new MessageBox(validate.Type, validate.Message);
 
 					column.Add(container);
 					column.Add(message);

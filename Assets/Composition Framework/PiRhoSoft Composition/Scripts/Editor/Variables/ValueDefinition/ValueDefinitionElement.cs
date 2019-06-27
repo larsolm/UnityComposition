@@ -12,6 +12,13 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class ValueDefinitionElement : VisualElement, IBindableProperty<ValueDefinition>, IBindableObject<ValueDefinition>
 	{
+		private const string _styleSheetPath = Composition.StylePath + "Variables/ValueDefinition/ValueDefinitionElement.uss";
+		private const string _ussBaseClass = "pargon-value-definition";
+		private const string _ussRowClass = "row";
+		private const string _ussConstraintClass = "constraint";
+		private const string _ussConstraintInputClass = "input";
+		private const string _ussNumberConstraintClass = "number-constraint";
+
 		private VisualElement _typeContainer;
 		private VisualElement _constraintContainer;
 		private VisualElement _initializerContainer;
@@ -35,7 +42,6 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly SerializedProperty _objectsProperty;
 		private readonly SerializedProperty _isTypeLockedProperty;
 		private readonly SerializedProperty _isConstraintLockedProperty;
-		private List<Object> _objects;
 
 		public ValueDefinitionElement(SerializedProperty property)
 		{
@@ -50,6 +56,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			var definition = GetValueFromProperty(property);
 
+			SetupStyle();
 			Setup(definition, VariableInitializerType.None, null);
 
 			ElementHelper.Bind(this, this, property);
@@ -76,6 +83,7 @@ namespace PiRhoSoft.CompositionEditor
 					SetupTag(tags);
 			}).Every(0);
 
+			SetupStyle();
 			Setup(_getValue(), _getInitializerType(), _getTags());
 
 			ElementHelper.Bind(this, this, _owner);
@@ -107,26 +115,16 @@ namespace PiRhoSoft.CompositionEditor
 
 		public void UpdateProperty(ValueDefinition value, VisualElement element, SerializedProperty property)
 		{
-			var constraint = value.Constraint;
-
 			_typeProperty.enumValueIndex = (int)value.Type;
 			_tagProperty.stringValue = value.Tag;
 			_initializerProperty.stringValue = value.Initializer.Statement;
 			_isTypeLockedProperty.boolValue = value.IsTypeLocked;
 			_isConstraintLockedProperty.boolValue = value.IsConstraintLocked;
-			_constraintProperty.stringValue = constraint != null ? VariableHandler.SaveConstraint(value.Type, constraint, ref _objects) : string.Empty;
-
-			if (_objects != null)
-			{
-				_objectsProperty.arraySize = _objects.Count;
+			_constraintProperty.stringValue = VariableHandler.SaveConstraint(value.Type, value.Constraint, out var objects);
+			_objectsProperty.arraySize = objects?.Count ?? 0;
 			
-				for (var i = 0; i < _objects.Count; i++)
-					_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = _objects[i];
-			}
-			else
-			{
-				_objectsProperty.arraySize = 0;
-			}
+			for (var i = 0; i < (objects?.Count ?? 0); i++)
+				_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = objects[i];
 		}
 
 		#endregion
@@ -188,16 +186,32 @@ namespace PiRhoSoft.CompositionEditor
 
 		#endregion
 
-		public void Setup(ValueDefinition definition, VariableInitializerType initializerType, TagList tags)
+		private void SetupStyle()
 		{
-			Clear();
+			ElementHelper.AddStyleSheet(this, _styleSheetPath);
+			AddToClassList(_ussBaseClass);
+		}
 
+		private void Setup(ValueDefinition definition, VariableInitializerType initializerType, TagList tags)
+		{
+			Reset();
+			
 			_definition = definition;
 
 			SetupType();
 			SetupConstraint();
 			SetupInitializer(initializerType);
 			SetupTag(tags);
+		}
+
+		private void Reset()
+		{
+			Clear();
+
+			_typeContainer = null;
+			_constraintContainer = null;
+			_initializerContainer = null;
+			_tagContainer = null;
 		}
 
 		private void ReplaceElement(ref VisualElement oldElement, VisualElement newElement)
@@ -216,6 +230,12 @@ namespace PiRhoSoft.CompositionEditor
 			oldElement = newElement;
 		}
 
+		private void SetDefinition(ValueDefinition definition)
+		{
+			ElementHelper.SendChangeEvent(this, _definition, definition);
+			Setup(definition, _initializer, _tags);
+		}
+
 		private void SetupType()
 		{
 			var container = new VisualElement() { tooltip = "The type of variable this defines" };
@@ -223,13 +243,16 @@ namespace PiRhoSoft.CompositionEditor
 			if (_definition.IsTypeLocked)
 				container.SetEnabled(false);
 
-			var dropdown = new EnumDropdown(_owner, () => (int)_definition.Type, type =>
+			var dropdown = new EnumDropdown<VariableType>(_definition.Type, _owner, () => (int)_definition.Type, type =>
 			{
 				var variableType = (VariableType)type;
-				var definition = ValueDefinition.Create(variableType);
+				var constraint = VariableConstraint.Create(variableType);
+				var definition = ValueDefinition.Create(variableType, constraint, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
 
-				Setup(definition, _initializer, _tags);
+				SetDefinition(definition);
 			});
+
+			container.Add(dropdown);
 
 			ReplaceElement(ref _typeContainer, container);
 		}
@@ -256,32 +279,34 @@ namespace PiRhoSoft.CompositionEditor
 					container.Add(new VariableValueElement(_owner, () =>
 					{
 						var value = _definition.Initializer.Execute(null, null); // context isn't necessary since the object that would be the context is currently drawing
-					if (value.IsEmpty) // If the initializer hasn't been set, use the default value.
-						value = VariableHandler.CreateDefault(_definition.Type, _definition.Constraint);
+						if (value.IsEmpty) // If the initializer hasn't been set, use the default value.
+							value = VariableHandler.CreateDefault(_definition.Type, _definition.Constraint);
 
 						return value;
-
 					},
 					value =>
 					{
-						switch (_definition.Type)
+						var definition = _definition;
+						switch (definition.Type)
 						{
-							case VariableType.Bool: _definition.Initializer.SetStatement(value.Bool ? "true" : "false"); break;
-							case VariableType.Float: _definition.Initializer.SetStatement(value.Float.ToString()); break;
-							case VariableType.Int: _definition.Initializer.SetStatement(value.Int.ToString()); break;
-							case VariableType.Int2: _definition.Initializer.SetStatement(string.Format("Vector2Int({0}, {1})", value.Int2.x, value.Int2.y)); break;
-							case VariableType.Int3: _definition.Initializer.SetStatement(string.Format("Vector3Int({0}, {1}, {2})", value.Int3.x, value.Int3.y, value.Int3.z)); break;
-							case VariableType.IntRect: _definition.Initializer.SetStatement(string.Format("RectInt({0}, {1}, {2}, {3})", value.IntRect.x, value.IntRect.y, value.IntRect.width, value.IntRect.height)); break;
-							case VariableType.IntBounds: _definition.Initializer.SetStatement(string.Format("BoundsInt({0}, {1}, {2}, {3}, {4}, {5})", value.IntBounds.x, value.IntBounds.y, value.IntBounds.z, value.IntBounds.size.x, value.IntBounds.size.y, value.IntBounds.size.z)); break;
-							case VariableType.Vector2: _definition.Initializer.SetStatement(string.Format("Vector2({0}, {1})", value.Vector2.x, value.Vector2.y)); break;
-							case VariableType.Vector3: _definition.Initializer.SetStatement(string.Format("Vector3({0}, {1}, {2})", value.Vector3.x, value.Vector3.y, value.Vector3.z)); break;
-							case VariableType.Vector4: _definition.Initializer.SetStatement(string.Format("Vector4({0}, {1}, {2}, {3})", value.Vector4.x, value.Vector4.y, value.Vector4.z, value.Vector4.w)); break;
-							case VariableType.Quaternion: var euler = value.Quaternion.eulerAngles; _definition.Initializer.SetStatement(string.Format("Quaternion({0}, {1}, {2})", euler.x, euler.y, euler.z)); break;
-							case VariableType.Rect: _definition.Initializer.SetStatement(string.Format("Rect({0}, {1}, {2}, {3})", value.Rect.x, value.Rect.y, value.Rect.width, value.Rect.height)); break;
-							case VariableType.Bounds: _definition.Initializer.SetStatement(string.Format("Bounds({0}, {1})", value.Bounds.center, value.Bounds.extents)); break;
-							case VariableType.Color: _definition.Initializer.SetStatement(string.Format("#{0:X2}{1:X2}{2:X2}{3:X2}", Mathf.RoundToInt(value.Color.r * 255), Mathf.RoundToInt(value.Color.g * 255), Mathf.RoundToInt(value.Color.b * 255), Mathf.RoundToInt(value.Color.a * 255))); break;
-							case VariableType.String: _definition.Initializer.SetStatement("\"" + value.String + "\""); break;
+							case VariableType.Bool: definition.Initializer.SetStatement(value.Bool ? "true" : "false"); break;
+							case VariableType.Float: definition.Initializer.SetStatement(value.Float.ToString()); break;
+							case VariableType.Int: definition.Initializer.SetStatement(value.Int.ToString()); break;
+							case VariableType.Int2: definition.Initializer.SetStatement(string.Format("Vector2Int({0}, {1})", value.Int2.x, value.Int2.y)); break;
+							case VariableType.Int3: definition.Initializer.SetStatement(string.Format("Vector3Int({0}, {1}, {2})", value.Int3.x, value.Int3.y, value.Int3.z)); break;
+							case VariableType.IntRect: definition.Initializer.SetStatement(string.Format("RectInt({0}, {1}, {2}, {3})", value.IntRect.x, value.IntRect.y, value.IntRect.width, value.IntRect.height)); break;
+							case VariableType.IntBounds: definition.Initializer.SetStatement(string.Format("BoundsInt({0}, {1}, {2}, {3}, {4}, {5})", value.IntBounds.x, value.IntBounds.y, value.IntBounds.z, value.IntBounds.size.x, value.IntBounds.size.y, value.IntBounds.size.z)); break;
+							case VariableType.Vector2: definition.Initializer.SetStatement(string.Format("Vector2({0}, {1})", value.Vector2.x, value.Vector2.y)); break;
+							case VariableType.Vector3: definition.Initializer.SetStatement(string.Format("Vector3({0}, {1}, {2})", value.Vector3.x, value.Vector3.y, value.Vector3.z)); break;
+							case VariableType.Vector4: definition.Initializer.SetStatement(string.Format("Vector4({0}, {1}, {2}, {3})", value.Vector4.x, value.Vector4.y, value.Vector4.z, value.Vector4.w)); break;
+							case VariableType.Quaternion: var euler = value.Quaternion.eulerAngles; definition.Initializer.SetStatement(string.Format("Quaternion({0}, {1}, {2})", euler.x, euler.y, euler.z)); break;
+							case VariableType.Rect: definition.Initializer.SetStatement(string.Format("Rect({0}, {1}, {2}, {3})", value.Rect.x, value.Rect.y, value.Rect.width, value.Rect.height)); break;
+							case VariableType.Bounds: definition.Initializer.SetStatement(string.Format("Bounds({0}, {1})", value.Bounds.center, value.Bounds.extents)); break;
+							case VariableType.Color: definition.Initializer.SetStatement(string.Format("#{0:X2}{1:X2}{2:X2}{3:X2}", Mathf.RoundToInt(value.Color.r * 255), Mathf.RoundToInt(value.Color.g * 255), Mathf.RoundToInt(value.Color.b * 255), Mathf.RoundToInt(value.Color.a * 255))); break;
+							case VariableType.String: definition.Initializer.SetStatement("\"" + value.String + "\""); break;
 						}
+
+						SetDefinition(definition);
 					},
 					() => _definition));
 				}
@@ -300,8 +325,11 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				container.Add(new Label("Tag") { tooltip = "An identifier that can be used to reset or persist this variable" });
 
-				var dropdown = new StringDropdown(_owner, () => _definition.Tag, tag => _definition = ValueDefinition.Create(_definition.Type, _definition.Constraint, tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked));
-				dropdown.Setup(tags.List, tags.List, _definition.Tag);
+				var dropdown = new StringDropdown(tags.List, tags.List, _definition.Tag, _owner, () => _definition.Tag, tag =>
+				{
+					var definition = ValueDefinition.Create(_definition.Type, _definition.Constraint, tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+					SetDefinition(definition);
+				});
 
 				container.Add(dropdown);
 			}
@@ -314,15 +342,14 @@ namespace PiRhoSoft.CompositionEditor
 		private void SetupConstraint()
 		{
 			var container = new VisualElement();
-			var constraint = _definition.Constraint;
 
-			if (HasConstraint(_definition.IsConstraintLocked, constraint, _definition.Type))
-				SetupConstraint(container, _definition.IsConstraintLocked, ref constraint, _definition.Type, _showConstrantLabel);
+			if (HasConstraint(_definition.IsConstraintLocked, _definition.Constraint, _definition.Type))
+				SetupConstraint(container, _definition.IsConstraintLocked, _definition.Constraint, _definition.Type, _showConstrantLabel);
 
 			ReplaceElement(ref _constraintContainer, container);
 		}
 
-		private void SetupConstraint(VisualElement container, bool isLocked, ref VariableConstraint constraint, VariableType type, bool showLabel)
+		private void SetupConstraint(VisualElement container, bool isLocked, VariableConstraint constraint, VariableType type, bool showLabel)
 		{
 			var label = new Label("Constraint");
 
@@ -337,206 +364,239 @@ namespace PiRhoSoft.CompositionEditor
 				case VariableType.Int:
 				{
 					label.tooltip = "The range of values allowed for the variable";
-					container.Add(SetupIntConstraint(ref constraint));
+					container.Add(SetupIntConstraint(constraint as IntVariableConstraint));
 					break;
 				}
 				case VariableType.Float:
 				{
 					label.tooltip = "The range of values allowed for the variable";
-					container.Add(SetupFloatConstraint(ref constraint));
+					container.Add(SetupFloatConstraint(constraint as FloatVariableConstraint));
 					break;
 				}
 				case VariableType.String:
 				{
 					label.tooltip = "The list of valid string values for the variable";
-					container.Add(SetupStringConstraint(ref constraint));
+					container.Add(SetupStringConstraint(constraint as StringVariableConstraint));
 					break;
 				}
 				case VariableType.Object:
 				{
 					label.tooltip = "The Object type that the assigned object must be derived from or have an instance of";
-					container.Add(SetupObjectConstraint(ref constraint));
+					container.Add(SetupObjectConstraint(constraint as ObjectVariableConstraint));
 					break;
 				}
 				case VariableType.Enum:
 				{
 					label.tooltip = "The enum type of values added to the list";
-					container.Add(SetupEnumConstraint(ref constraint));
+					container.Add(SetupEnumConstraint(constraint as EnumVariableConstraint));
 					break;
 				}
 				case VariableType.Store:
 				{
 					label.tooltip = "The schema the store must use";
-					container.Add(SetupStoreConstraint(ref constraint));
+					container.Add(SetupStoreConstraint(constraint as StoreVariableConstraint));
 					break;
 				}
 				case VariableType.List:
 				{
 					label.tooltip = "The variable type of values added to the list";
-					container.Add(SetupListConstraint(ref constraint));
+					container.Add(SetupListConstraint(constraint as ListVariableConstraint));
 					break;
 				}
 			}
 		}
 
-		private VisualElement SetupIntConstraint(ref VariableConstraint constraint)
+		private VisualElement SetupIntConstraint(IntVariableConstraint constraint)
 		{
-			if (!(constraint is IntVariableConstraint intConstraint))
-			{
-				intConstraint = new IntVariableConstraint { HasRange = false, Minimum = 0, Maximum = 100 };
-				constraint = intConstraint;
-			}
-
 			var container = new VisualElement();
-			var toggle = new Toggle() { value = intConstraint.HasRange };
+			var toggle = new Toggle() { value = constraint.HasRange };
 			var intContainer = new VisualElement();
-			var intMin = new IntegerField() { value = intConstraint.Minimum };
-			var intMax = new IntegerField() { value = intConstraint.Maximum };
+			var intMin = new IntegerField() { value = constraint.Minimum };
+			var intMax = new IntegerField() { value = constraint.Maximum };
 
-			ElementHelper.Bind(this, toggle, _owner, () => intConstraint.HasRange, hasConstraint =>
-			{
-				intConstraint.HasRange = hasConstraint;
-				ElementHelper.SetVisible(intContainer, hasConstraint);
-			});
+			container.AddToClassList(_ussRowClass);
+			container.AddToClassList(_ussConstraintClass);
+			intContainer.AddToClassList(_ussRowClass);
+			intContainer.AddToClassList(_ussNumberConstraintClass);
+			intMin.AddToClassList(_ussConstraintInputClass);
+			intMax.AddToClassList(_ussConstraintInputClass);
 
 			intContainer.Add(new Label("Between"));
 			intContainer.Add(intMin);
 			intContainer.Add(new Label("and"));
 			intContainer.Add(intMax);
 
-			ElementHelper.Bind(this, intMin, _owner, () => intConstraint.Minimum, minimum => intConstraint.Minimum = minimum);
-			ElementHelper.Bind(this, intMax, _owner, () => intConstraint.Maximum, maximum => intConstraint.Maximum = maximum);
-
 			container.Add(toggle);
 			container.Add(intContainer);
+
+			ElementHelper.SetVisible(intContainer, constraint.HasRange);
+
+			ElementHelper.Bind(this, toggle, _owner, () => constraint.HasRange, hasConstraint =>
+			{
+				constraint.HasRange = hasConstraint;
+				ElementHelper.SetVisible(intContainer, hasConstraint);
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
+			ElementHelper.Bind(this, intMin, _owner, () => constraint.Minimum, minimum =>
+			{
+				constraint.Minimum = minimum;
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
+			ElementHelper.Bind(this, intMax, _owner, () => constraint.Maximum, maximum =>
+			{
+				constraint.Maximum = maximum;
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
 
 			return container;
 		}
 
-		private VisualElement SetupFloatConstraint(ref VariableConstraint constraint)
+		private VisualElement SetupFloatConstraint(FloatVariableConstraint constraint)
 		{
-			if (!(constraint is FloatVariableConstraint floatConstraint))
-			{
-				floatConstraint = new FloatVariableConstraint { HasRange = false, Minimum = 0, Maximum = 100 };
-				constraint = floatConstraint;
-			}
-
 			var container = new VisualElement();
-			var toggle = new Toggle() { value = floatConstraint.HasRange };
+			var toggle = new Toggle() { value = constraint.HasRange };
 			var floatContainer = new VisualElement();
-			var floatMin = new FloatField() { value = floatConstraint.Minimum };
-			var floatMax = new FloatField() { value = floatConstraint.Maximum };
+			var floatMin = new FloatField() { value = constraint.Minimum };
+			var floatMax = new FloatField() { value = constraint.Maximum };
 
-			ElementHelper.Bind(this, toggle, _owner, () => floatConstraint.HasRange, hasConstraint =>
-			{
-				floatConstraint.HasRange = hasConstraint;
-				ElementHelper.SetVisible(floatContainer, hasConstraint);
-			});
+			container.AddToClassList(_ussRowClass);
+			container.AddToClassList(_ussConstraintClass);
+			floatContainer.AddToClassList(_ussRowClass);
+			floatContainer.AddToClassList(_ussNumberConstraintClass);
+			floatMin.AddToClassList(_ussConstraintInputClass);
+			floatMax.AddToClassList(_ussConstraintInputClass);
 
 			floatContainer.Add(new Label("Between"));
 			floatContainer.Add(floatMin);
 			floatContainer.Add(new Label("and"));
 			floatContainer.Add(floatMax);
 
-			ElementHelper.Bind(this, floatMin, _owner, () => floatConstraint.Minimum, minimum => floatConstraint.Minimum = minimum);
-			ElementHelper.Bind(this, floatMax, _owner, () => floatConstraint.Maximum, maximum => floatConstraint.Maximum = maximum);
-
 			container.Add(toggle);
 			container.Add(floatContainer);
 
+			ElementHelper.SetVisible(floatContainer, constraint.HasRange);
+
+			ElementHelper.Bind(this, toggle, _owner, () => constraint.HasRange, hasConstraint =>
+			{
+				constraint.HasRange = hasConstraint;
+				ElementHelper.SetVisible(floatContainer, hasConstraint);
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
+			ElementHelper.Bind(this, floatMin, _owner, () => constraint.Minimum, minimum =>
+			{
+				constraint.Minimum = minimum;
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
+			ElementHelper.Bind(this, floatMax, _owner, () => constraint.Maximum, maximum =>
+			{
+				constraint.Maximum = maximum;
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
 			return container;
 		}
 
-		private VisualElement SetupStringConstraint(ref VariableConstraint constraint)
+		private VisualElement SetupStringConstraint(StringVariableConstraint constraint)
 		{
-			if (!(constraint is StringVariableConstraint stringConstraint))
-			{
-				stringConstraint = new StringVariableConstraint { Values = new string[] { } };
-				constraint = stringConstraint;
-			}
-
 			var container = new VisualElement();
-			var proxy = new ArrayListProxy<string>(stringConstraint.Values, (value, index) =>
+			var proxy = new ListProxy<string>(constraint.Values, (value, index) =>
 			{
 				var field = new TextField() { value = value };
-				ElementHelper.Bind(field, field, _owner, () => stringConstraint.Values[index], text => stringConstraint.Values[index] = text);
+
+				ElementHelper.Bind(field, field, _owner, () =>
+				{
+					return constraint.Values[index];
+				},
+				text =>
+				{
+					constraint.Values[index] = text;
+					ElementHelper.SendChangeEvent(this, _definition, _definition);
+				});
+
 				return field;
 			});
 
-			container.Add(new ListElement(proxy, "Valid Strings", "The list of valid string values for the variable"));
+			var list = new ListElement(proxy, "Valid Strings", "The list of valid string values for the variable");
+			list.OnItemAdded += () => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			list.OnItemRemoved += index => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			list.OnItemMoved += (from, to) => ElementHelper.SendChangeEvent(this, _definition, _definition);
+
+			container.Add(list);
 
 			return container;
 		}
 
-		private VisualElement SetupObjectConstraint(ref VariableConstraint constraint)
+		private VisualElement SetupObjectConstraint(ObjectVariableConstraint constraint)
 		{
-			if (!(constraint is ObjectVariableConstraint objectConstraint))
-			{
-				objectConstraint = new ObjectVariableConstraint { Type = typeof(Object) };
-				constraint = objectConstraint;
-			}
-
 			var container = new VisualElement();
-			var picker = new TypePicker(_owner, () => objectConstraint.Type.AssemblyQualifiedName, type => objectConstraint.Type = Type.GetType(type));
-			picker.Setup(typeof(Object), true, objectConstraint.Type?.AssemblyQualifiedName);
+			var picker = new TypePicker(_owner, () => constraint.Type?.AssemblyQualifiedName, type =>
+			{
+				constraint.Type = Type.GetType(type ?? string.Empty);
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
+			picker.Setup(typeof(Object), true, constraint.Type);
 
 			container.Add(picker);
 
 			return container;
 		}
 
-		private VisualElement SetupEnumConstraint(ref VariableConstraint constraint)
+		private VisualElement SetupEnumConstraint(EnumVariableConstraint constraint)
 		{
-			if (!(constraint is EnumVariableConstraint enumConstraint))
-			{
-				enumConstraint = new EnumVariableConstraint { Type = null };
-				constraint = enumConstraint;
-			}
-
 			var container = new VisualElement();
-			var picker = new TypePicker(_owner, () => enumConstraint.Type.AssemblyQualifiedName, type => enumConstraint.Type = Type.GetType(type));
-			picker.Setup(typeof(Enum), false, enumConstraint.Type?.AssemblyQualifiedName);
+			var picker = new TypePicker(_owner, () => constraint.Type?.AssemblyQualifiedName ?? string.Empty, type =>
+			{
+				constraint.Type = Type.GetType(type ?? string.Empty);
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
+			picker.Setup(typeof(Enum), true, constraint.Type);
 
 			container.Add(picker);
 
 			return container;
 		}
 
-		private VisualElement SetupStoreConstraint(ref VariableConstraint constraint)
-		{
-			if (!(constraint is StoreVariableConstraint storeConstraint))
-			{
-				storeConstraint = new StoreVariableConstraint { Schema = null };
-				constraint = storeConstraint;
-			}
-			
+		private VisualElement SetupStoreConstraint(StoreVariableConstraint constraint)
+		{			
 			var container = new VisualElement();
-			var picker = new ObjectPicker(_owner, () => storeConstraint.Schema, schema => storeConstraint.Schema = schema as VariableSchema);
-			picker.Setup(typeof(VariableSchema), storeConstraint.Schema);
+			var picker = new ObjectPicker(_owner, () => constraint.Schema, schema =>
+			{
+				constraint.Schema = schema as VariableSchema;
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
+
+			picker.Setup(typeof(VariableSchema), constraint.Schema);
 
 			container.Add(picker);
 
 			return container;
 		}
 
-		private VisualElement SetupListConstraint(ref VariableConstraint constraint)
+		private VisualElement SetupListConstraint(ListVariableConstraint constraint)
 		{
-			if (!(constraint is ListVariableConstraint listConstraint))
-			{
-				listConstraint = new ListVariableConstraint { ItemType = VariableType.Empty, ItemConstraint = null };
-				constraint = listConstraint;
-			}
-			
 			var container = new VisualElement();
-			var dropdown = new EnumDropdown(_owner, () => (int)listConstraint.ItemType, type => listConstraint.ItemType = (VariableType)type);
-			dropdown.Setup(typeof(VariableType), (int)listConstraint.ItemType);
+			var dropdown = new EnumDropdown<VariableType>(constraint.ItemType, _owner, () => (int)constraint.ItemType, type =>
+			{
+				var variableType = (VariableType)type;
+
+				constraint.ItemType = variableType;
+				constraint.ItemConstraint = VariableConstraint.Create(variableType);
+
+				ElementHelper.SendChangeEvent(this, _definition, _definition);
+			});
 
 			container.Add(dropdown);
 
-			if (HasConstraint(false, listConstraint.ItemConstraint, listConstraint.ItemType))
+			if (HasConstraint(false, constraint.ItemConstraint, constraint.ItemType))
 			{
 				var constraintElement = new VisualElement();
-				SetupConstraint(container, false, ref listConstraint.ItemConstraint, listConstraint.ItemType, false);
+				SetupConstraint(container, false, constraint.ItemConstraint, constraint.ItemType, false);
 				container.Add(constraintElement);
 			}
 

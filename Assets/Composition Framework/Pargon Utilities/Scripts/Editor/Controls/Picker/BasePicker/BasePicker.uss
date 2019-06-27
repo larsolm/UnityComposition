@@ -11,35 +11,7 @@
 
 .pargon-base-picker .search-container
 {
-	height: 32px;
-	padding: 5px 6px 6px 6px;
-	min-height: 32px;
-}
-
-.pargon-base-picker .search-field
-{
-	width: auto;
-	flex-grow: 1;
-	min-height: 21px;
-}
-
-.pargon-base-picker .search-field TextField
-{
-	margin: 2px;
-}
-
-.pargon-base-picker .search-field TextInput
-{
-	border-radius: 7px;
-	border-width: 1px;
-	margin-right: -22px;
-	padding: 1px 22px;
-}
-
-.pargon-base-picker .search-field Button
-{
-	align-self: center;
-	margin: 0 4px;
+	padding: 6px;
 }
 
 .pargon-base-picker .base-container
@@ -87,18 +59,15 @@
 
 .pargon-base-picker .header .icon
 {
-	width: 16px;
-	height: 16px;
+	min-width: 16px;
+	min-height: 16px;
+	max-width: 16px;
+	max-height: 16px;
 }
 
 .pargon-base-picker .header .label
 {
-	margin-left: 5px;
-}
-
-.pargon-base-picker .hidden
-{
-	display: none;
+	margin: 0 0 0 5px;
 }
 
 .pargon-base-picker .item
@@ -136,8 +105,10 @@
 
 .pargon-base-picker .item .icon
 {
-	width: 16px;
-	height: 16px;
+	min-width: 16px;
+	min-height: 16px;
+	max-width: 16px;
+	max-height: 16px;
 }
 
 .pargon-base-picker .arrow

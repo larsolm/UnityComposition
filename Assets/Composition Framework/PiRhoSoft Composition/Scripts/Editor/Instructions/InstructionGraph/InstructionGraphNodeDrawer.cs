@@ -15,6 +15,8 @@ namespace PiRhoSoft.CompositionEditor
 			
 			var label = new Label(node == null ? "Unconnected" : node.Name);
 			label.style.flexGrow = new StyleFloat(1);
+			label.style.flexShrink = new StyleFloat(1);
+			label.style.overflow = new StyleEnum<Overflow>(Overflow.Hidden);
 
 			var icon = ElementHelper.CreateIconButton(Icon.Inspect.Content, "Select and edit this node", () => InstructionGraphEditor.SelectNode(node));
 

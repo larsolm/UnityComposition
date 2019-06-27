@@ -99,22 +99,23 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				for (var i = 0; i < _proxy.Count; i++)
 				{
+					var index = i; // Need for capturing in lambdas
 					var item = new VisualElement();
 					item.AddToClassList(_ussItemClass);
-					item.AddToClassList(i % 2 == 0 ? _ussItemEvenClass : _ussItemOddClass);
+					item.AddToClassList(index % 2 == 0 ? _ussItemEvenClass : _ussItemOddClass);
 
 					var container = new VisualElement();
 					container.AddToClassList(_ussItemContainerClass);
 
-					var element = _proxy.CreateElement(i);
+					var element = _proxy.CreateElement(index);
 
 					var dragHandle = new Image { image = _dragIcon.Content };
 					dragHandle.AddToClassList(_ussDragHandleClass);
-					dragHandle.RegisterCallback((MouseDownEvent e) => StartDrag(e, i));
+					dragHandle.RegisterCallback((MouseDownEvent e) => StartDrag(e, index));
 
 					ElementHelper.SetVisible(dragHandle, _allowMove);
 
-					var removeButton = ElementHelper.CreateIconButton(Icon.Remove.Content, "Remove this item from the list", () => RemoveItem(i));
+					var removeButton = ElementHelper.CreateIconButton(Icon.Remove.Content, "Remove this item from the list", () => RemoveItem(index));
 					removeButton.AddToClassList(_ussRemoveButtonClass);
 
 					ElementHelper.SetVisible(removeButton, _allowRemove);

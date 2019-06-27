@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonInspector.Editor
+namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class AutocompletePopup : VisualElement
 	{

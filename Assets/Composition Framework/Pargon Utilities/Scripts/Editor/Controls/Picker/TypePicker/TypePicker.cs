@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -22,11 +21,10 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private Type _type;
 
-		public TypePicker() { }
 		public TypePicker(SerializedProperty property) : base(property) { }
 		public TypePicker(Object owner, Func<string> getValue, Action<string> setValue) : base(owner, getValue, setValue) { }
 
-		public void Setup(Type type, bool showAbstract, string value)
+		public void Setup(Type type, bool showAbstract, Type value)
 		{
 			if (type == null)
 			{
@@ -36,16 +34,18 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			_type = type;
 
-			var initialType = Type.GetType(value);
+			var valueName = value?.AssemblyQualifiedName;
+			var initialType = Type.GetType(valueName ?? string.Empty);
 			var picker = new Picker();
 			picker.Setup(_type, showAbstract, initialType);
 			picker.OnSelected += selectedValue =>
 			{
-				Value = selectedValue.AssemblyQualifiedName;
-				ElementHelper.SendChangeEvent(this, value, Value);
+				Value = selectedValue?.AssemblyQualifiedName;
+				UpdateElement(Value);
+				ElementHelper.SendChangeEvent(this, valueName, Value);
 			};
 
-			Setup(picker, value);
+			Setup(picker, valueName);
 		}
 
 		public override string GetValueFromProperty(SerializedProperty property)
@@ -60,46 +60,11 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		protected override void UpdateElement(string value)
 		{
-			var type = Type.GetType(value);
+			var type = Type.GetType(value ?? string.Empty);
 			var text = type == null ? $"None ({_type.Name})" : type.Name;
 			var icon = AssetPreview.GetMiniTypeThumbnail(type);
 
 			SetLabel(icon, text);
 		}
-
-		#region UXML
-
-		private class Factory : UxmlFactory<Editor.TypePicker, Traits> { }
-
-		private class Traits : UxmlTraits
-		{
-
-			private UxmlStringAttributeDescription _type = new UxmlStringAttributeDescription { name = "type", use = UxmlAttributeDescription.Use.Required };
-			private UxmlStringAttributeDescription _value = new UxmlStringAttributeDescription { name = "value" };
-			private UxmlBoolAttributeDescription _showAbstract = new UxmlBoolAttributeDescription { name = "show-abstract", defaultValue = true };
-
-			public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
-			{
-				get { yield break; }
-			}
-
-			public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
-			{
-				base.Init(ve, bag, cc);
-
-				var button = ve as Editor.TypePicker;
-				var typeName = _type.GetValueFromBag(bag, cc);
-				var type = Type.GetType(typeName);
-				var showAbstract = _showAbstract.GetValueFromBag(bag, cc);
-				var value = _value.GetValueFromBag(bag, cc);
-
-				if (type != null)
-					button.Setup(type, showAbstract, value);
-				else
-					Debug.LogWarningFormat(_invalidTypeWarning, typeName);
-			}
-		}
-
-		#endregion
 	}
 }

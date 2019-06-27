@@ -115,15 +115,15 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private void AddItem()
 		{
 			_proxy.AddItem();
-			Rebuild();
 			OnItemAdded?.Invoke();
+			Rebuild();
 		}
 
 		private void RemoveItem(int index)
 		{
 			_proxy.RemoveItem(index);
-			Rebuild();
 			OnItemRemoved?.Invoke(index);
+			Rebuild();
 		}
 	}
 }

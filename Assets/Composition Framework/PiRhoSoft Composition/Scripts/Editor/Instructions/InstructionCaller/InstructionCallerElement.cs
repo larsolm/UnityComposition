@@ -59,14 +59,13 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		private VisualElement CreateInput(InstructionInput input)
+		private VisualElement CreateInput(InstructionInput input, int index)
 		{
 			var definition = _caller.GetInputDefinition(input);
 			var container = new VisualElement();
 			var label = new Label(input.Name);
 
-			var typeElement = new EnumDropdown(_owner, () => (int)input.Type, value => input.Type = (InstructionInputType)value);
-			typeElement.Setup(input.Type);
+			var typeElement = new EnumDropdown<InstructionInputType>(input.Type, _owner, () => (int)input.Type, value => input.Type = (InstructionInputType)value);
 
 			var referenceElement = new VariableReferenceElement();
 			referenceElement.Setup(_owner, input.Reference, null); // TODO: Add an autocompletesource
@@ -89,14 +88,13 @@ namespace PiRhoSoft.CompositionEditor
 			return container;
 		}
 
-		private VisualElement CreateOutput(InstructionOutput output)
+		private VisualElement CreateOutput(InstructionOutput output, int index)
 		{
 			var definition = _caller.GetOutputDefinition(output);
 			var container = new VisualElement();
 			var label = new Label(definition.Name);
 
-			var type = new EnumDropdown(_owner, () => (int)output.Type, value => output.Type = (InstructionOutputType)value);
-			type.Setup(output.Type);
+			var type = new EnumDropdown<InstructionOutputType>(output.Type, _owner, () => (int)output.Type, value => output.Type = (InstructionOutputType)value);
 
 			var reference = new VariableReferenceElement();
 			reference.Setup(_owner, output.Reference, null); // TODO: Add an autocompletesource

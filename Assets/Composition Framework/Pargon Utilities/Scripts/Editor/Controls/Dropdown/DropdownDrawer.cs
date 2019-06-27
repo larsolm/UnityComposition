@@ -16,37 +16,15 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
 
 			if (property.propertyType == SerializedPropertyType.String)
-			{
-				var dropdown = new StringDropdown(property);
-				dropdown.Setup(drop.Options, drop.Options, property.stringValue);
-
-				container.Add(dropdown);
-			}
+				container.Add(new StringDropdown(drop.Options, drop.Options, property.stringValue, property));
 			else if (property.propertyType == SerializedPropertyType.Integer)
-			{
-				var dropdown = new IntDropdown(property);
-				dropdown.Setup(drop.Options, drop.IntValues, property.intValue);
-
-				container.Add(dropdown);
-			}
+				container.Add(new IntDropdown(drop.Options, drop.IntValues, property.intValue, property));
 			else if (property.propertyType == SerializedPropertyType.Float)
-			{
-				var dropdown = new FloatDropdown(property);
-				dropdown.Setup(drop.Options, drop.FloatValues, property.floatValue);
-
-				container.Add(dropdown);
-			}
+				container.Add(new FloatDropdown(drop.Options, drop.FloatValues, property.floatValue, property));
 			else if (property.propertyType == SerializedPropertyType.Enum)
-			{
-				var dropdown = new EnumDropdown(property);
-				dropdown.Setup(fieldInfo.FieldType, property.intValue);
-
-				container.Add(dropdown);
-			}
+				container.Add(new EnumDropdown(fieldInfo.FieldType, property.intValue, property));
 			else
-			{
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
-			}
 
 			return container;
 		}

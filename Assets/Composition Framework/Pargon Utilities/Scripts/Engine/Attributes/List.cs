@@ -9,10 +9,5 @@ namespace PiRhoSoft.PargonUtilities.Engine
 		public bool AllowReorder = true;
 
 		public string EmptyLabel = "List is empty";
-
-		public ListAttribute()
-		{
-			order = int.MaxValue - 100;
-		}
 	}
 }

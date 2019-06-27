@@ -62,7 +62,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		public void Setup(SerializedProperty property, AutocompleteSource source)
 		{
-			var reference = PargonUtilities.Editor.PropertyHelper.GetObject<VariableReference>(property);
+			var reference = PropertyHelper.GetObject<VariableReference>(property);
 			Setup(property.serializedObject.targetObject, reference, source);
 		}
 

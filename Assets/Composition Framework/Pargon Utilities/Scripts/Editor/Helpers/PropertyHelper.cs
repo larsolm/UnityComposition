@@ -157,8 +157,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				_drawerLookup = new Dictionary<Type, Type>();
 
 				var assembly = Assembly.GetAssembly(typeof(UnityEditor.Editor));
-				var internalType = assembly.GetType("UnityEditor.ScriptAttributeUtility", false);
-				var drawerType = assembly.GetType("UnityEditor.ScriptAttributeUtility+DrawerKeySet", false);
+				var internalType = assembly.GetType("UnityEditor.ScriptAttributeUtility");
+				var drawerType = assembly.GetType("UnityEditor.ScriptAttributeUtility+DrawerKeySet");
 				var dictionaryField = internalType.GetField("s_DrawerTypeForType", BindingFlags.Static | BindingFlags.NonPublic);
 				var drawerField = drawerType.GetField("drawer", BindingFlags.Public | BindingFlags.Instance);
 				var typeField = drawerType.GetField("type", BindingFlags.Public | BindingFlags.Instance);
@@ -174,7 +174,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 						_drawerLookup.Add(type, drawer);
 				}
 
-				var propertyType = assembly.GetType("UnityEditor.PropertyDrawer", false);
+				var propertyType = assembly.GetType("UnityEditor.PropertyDrawer");
 				_fieldInfoField = propertyType.GetField("m_FieldInfo", BindingFlags.NonPublic | BindingFlags.Instance);
 				_attributeField = propertyType.GetField("m_Attribute", BindingFlags.NonPublic | BindingFlags.Instance);
 			}

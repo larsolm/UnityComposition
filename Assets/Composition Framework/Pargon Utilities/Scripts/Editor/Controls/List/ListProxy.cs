@@ -68,11 +68,11 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	public class ListProxy<T> : ListProxy
 	{
 		private IList<T> _list;
-		private readonly Func<T, VisualElement> _creator;
+		private readonly Func<T, int, VisualElement> _creator;
 
 		public override int Count => _list.Count;
 
-		public ListProxy(IList<T> list, Func<T, VisualElement> creator)
+		public ListProxy(IList<T> list, Func<T, int, VisualElement> creator)
 		{
 			_list = list;
 			_creator = creator;
@@ -80,7 +80,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreateElement(int index)
 		{
-			return _creator(_list[index]);
+			return _creator(_list[index], index);
 		}
 
 		public override void AddItem()

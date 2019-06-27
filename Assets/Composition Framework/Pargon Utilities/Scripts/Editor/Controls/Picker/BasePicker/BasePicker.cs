@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -17,7 +18,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private const string _ussAnimatedContainerName = "animated-container";
 		private const string _ussActiveItemsName = "active-items";
 		private const string _ussAnimatedItemsName = "animated-items";
-		private const string _ussHiddenClass = "hidden";
 
 		private const string _ussBaseClass = "pargon-base-picker";
 		private const string _ussIconClass = "icon";
@@ -44,7 +44,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			public TreeItem Parent;
 			public List<TreeItem> Children;
 
-			public Button Button;
+			public VisualElement Button;
 			public int SelectedIndex = -1;
 
 			public bool IsBranch => Children != null;
@@ -79,21 +79,20 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public Action<T> OnSelected;
 
-		private VisualElement _baseContainer;
-		private VisualElement _activeContainer;
-		private VisualElement _animatedContainer;
-		private Image _activeHeaderIcon;
-		private Label _activeHeaderLabel;
-		private Image _animatedHeaderIcon;
-		private Label _animatedHeaderLabel;
-		private Image _activeParentButton;
-		private Image _animatedParentButton;
-		private ScrollView _activeView;
-		private ScrollView _animatedView;
-		private ToolbarSearchField _search;
-		private VisualElement _searchText;
+		private readonly VisualElement _baseContainer;
+		private readonly VisualElement _activeContainer;
+		private readonly VisualElement _animatedContainer;
+		private readonly Image _activeHeaderIcon;
+		private readonly Label _activeHeaderLabel;
+		private readonly Image _animatedHeaderIcon;
+		private readonly Label _animatedHeaderLabel;
+		private readonly Image _activeParentButton;
+		private readonly Image _animatedParentButton;
+		private readonly ScrollView _activeView;
+		private readonly ScrollView _animatedView;
+		private readonly SearchBar _search;
 
-		private Button _currentItem;
+		private VisualElement _currentItem;
 
 		private TreeItem _activeBranch;
 		private TreeItem _animatedBranch;
@@ -101,7 +100,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private bool _isAnimating = false;
 
-		private TreeItem _currentBranch => string.IsNullOrEmpty(_search.value) ? _activeBranch : _searchBranch;
+		private TreeItem _currentBranch => string.IsNullOrEmpty(_search.Text) ? _activeBranch : _searchBranch;
 		private TreeItem _root;
 		private List<TreeItem> _searchList = new List<TreeItem>();
 
@@ -129,15 +128,18 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_activeView = _activeContainer.Q<ScrollView>(_ussActiveItemsName);
 			_activeView.verticalScroller.slider.focusable = false;
 			_animatedView = _animatedContainer.Q<ScrollView>(_ussAnimatedItemsName);
-			_search = this.Q<ToolbarSearchField>();
-			_search.RegisterValueChangedCallback(e => RebuildSearch(e.newValue));
+			_search = this.Q<SearchBar>();
+			_search.RegisterCallback<ChangeEvent<string>>(evt => RebuildSearch(evt.newValue));
 			_search.RegisterCallback<KeyDownEvent>(e => HandleKeyboard(e, true), TrickleDown.TrickleDown);
-			_searchText = _search.Q<TextField>().Children().First();
+
+			ElementHelper.SetVisible(_animatedContainer, false);
+
+			FocusSearch();
 		}
 
 		public void FocusSearch()
 		{
-			_searchText.Focus();
+			_search.FocusText();
 		}
 
 		#region Initializiation
@@ -183,7 +185,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 					selectedIndex = index;
 			}
 
-			RebuildSearch(_search.value);
+			RebuildSearch(_search.Text);
 			SetSelectedIndex(selectedIndex);
 		}
 
@@ -207,7 +209,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private void RebuildBranch(Image parentButton, Label header, Image headerIcon, ScrollView container, TreeItem parent)
 		{
-			ElementHelper.ToggleClass(parentButton, _ussHiddenClass, parent == null);
+			ElementHelper.SetVisible(parentButton, parent.Parent != null);
 
 			header.text = parent.Label;
 			headerIcon.image = parent.Icon;
@@ -218,26 +220,26 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				var child = parent.Children[i];
 				child.BranchIndex = i;
-				child.Button = new Button { userData = child };
-				child.Button.clickable.clicked += () => SelectChild(child.Button.userData as TreeItem);
+				child.Button = new VisualElement { userData = child };
+				child.Button.AddManipulator(new Clickable(() => SelectChild(child.Button.userData as TreeItem)));
 				child.Button.AddToClassList(_ussItemClass);
-				child.Button.RegisterCallback<MouseMoveEvent>(e => ButtonFocused(child.Button));
+				child.Button.RegisterCallback<MouseMoveEvent>(e => ItemFocused(child.Button));
 
-				var labelContainer = new VisualElement();
+				var labelContainer = new VisualElement { pickingMode = PickingMode.Ignore };
 				labelContainer.AddToClassList(_ussContainerClass);
 				child.Button.Add(labelContainer);
 
-				var icon = new Image { image = child.Icon };
+				var icon = new Image { image = child.Icon, pickingMode = PickingMode.Ignore };
 				icon.AddToClassList(_ussIconClass);
 				labelContainer.Add(icon);
 
-				var label = new Label(child.Label);
-				label.AddToClassList(_ussIconClass);
+				var label = new Label(child.Label) { pickingMode = PickingMode.Ignore };
+				label.AddToClassList(_ussLabelClass);
 				labelContainer.Add(label);
 
 				if (child.IsBranch)
 				{
-					var arrow = new Image { image = Icon.RightArrow.Content };
+					var arrow = new Image { image = Icon.RightArrow.Content, pickingMode = PickingMode.Ignore };
 					arrow.AddToClassList(_ussArrowClass);
 					child.Button.Add(arrow);
 				}
@@ -332,23 +334,23 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_currentBranch.SelectedIndex = Mathf.Clamp(index, 0, _currentBranch.Children.Count - 1);
 
 			if (_currentBranch.SelectedItem != null)
-				ButtonFocused(_currentBranch.SelectedItem.Button);
+				ItemFocused(_currentBranch.SelectedItem.Button);
 		}
 
-		private void ButtonFocused(Button button)
+		private void ItemFocused(VisualElement element)
 		{
 			if (_currentItem != null)
 				_currentItem.RemoveFromClassList("focused");
 
-			button.AddToClassList("focused");
+			element.AddToClassList("focused");
 
-			_currentItem = button;
+			_currentItem = element;
 
-			var item = button.userData as TreeItem;
+			var item = element.userData as TreeItem;
 			_currentBranch.SelectedIndex = item.BranchIndex;
 
-			if (_activeView.contentContainer.Children().Contains(button))
-				_activeView.ScrollTo(button);
+			if (_activeView.contentContainer.Children().Contains(element))
+				_activeView.ScrollTo(element);
 		}
 
 		#endregion
@@ -384,7 +386,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private void StartAnimation(TreeItem target, float direction)
 		{
-			if (!_isAnimating && string.IsNullOrEmpty(_search.value))
+			if (!_isAnimating && string.IsNullOrEmpty(_search.Text))
 			{
 				_isAnimating = true;
 				_animatedBranch = _activeBranch;
@@ -394,7 +396,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				RebuildBranch(_animatedParentButton, _animatedHeaderLabel, _animatedHeaderIcon, _animatedView, _animatedBranch);
 				SetSelectedIndex(_activeBranch.SelectedIndex);
 
-				_animatedContainer.RemoveFromClassList(_ussHiddenClass);
+				ElementHelper.SetVisible(_animatedContainer, true);
 
 				var progress = 0.0f;
 
@@ -413,7 +415,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 					if (progress == direction)
 					{
-						_animatedContainer.AddToClassList(_ussHiddenClass);
+						ElementHelper.SetVisible(_animatedContainer, false);
 						_isAnimating = false;
 					}
 

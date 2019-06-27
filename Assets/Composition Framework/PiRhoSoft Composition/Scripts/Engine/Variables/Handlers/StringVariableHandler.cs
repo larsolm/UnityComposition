@@ -9,12 +9,10 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		public const char Symbol = '\"';
 
-		protected internal override VariableConstraint CreateConstraint() => new StringVariableConstraint();
-
 		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
 		{
 			if (constraint is StringVariableConstraint stringConstraint)
-				return VariableValue.Create(stringConstraint.Values.Length > 0 ? stringConstraint.Values[0] : string.Empty);
+				return VariableValue.Create(stringConstraint.Values.Count > 0 ? stringConstraint.Values[0] : string.Empty);
 			else
 				return VariableValue.Create(string.Empty);
 		}

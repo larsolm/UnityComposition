@@ -53,7 +53,6 @@ namespace PiRhoSoft.CompositionEngine
 		public static VariableValue CreateDefault(VariableType type, VariableConstraint constraint) => Get(type).CreateDefault_(constraint);
 		public static void ToString(VariableValue value, StringBuilder builder) => Get(value.Type).ToString_(value, builder);
 
-		protected internal virtual VariableConstraint CreateConstraint() => null;
 		protected internal abstract VariableValue CreateDefault_(VariableConstraint constraint);
 		protected internal abstract void ToString_(VariableValue value, StringBuilder builder);
 
@@ -256,8 +255,14 @@ namespace PiRhoSoft.CompositionEngine
 
 		#region Constraints
 
-		public static string SaveConstraint(VariableType type, VariableConstraint constraint, ref List<Object> objects)
+		public static string SaveConstraint(VariableType type, VariableConstraint constraint, out List<Object> objects)
 		{
+			if (constraint == null)
+			{
+				objects = null;
+				return string.Empty;
+			}
+
 			objects = new List<Object>();
 			return WriteConstraint(type, constraint, objects);
 		}
@@ -311,17 +316,10 @@ namespace PiRhoSoft.CompositionEngine
 
 		internal static VariableConstraint ReadConstraint(BinaryReader reader, IList<Object> objects, short version)
 		{
-			try
-			{
-				var type = (VariableType)reader.ReadInt32();
-				var constraint = Get(type).CreateConstraint();
-				constraint.Read(reader, objects, version);
-				return constraint;
-			}
-			catch
-			{
-				return null;
-			}
+			var type = (VariableType)reader.ReadInt32();
+			var constraint = VariableConstraint.Create(type);
+			constraint?.Read(reader, objects, version);
+			return constraint;
 		}
 
 		#endregion

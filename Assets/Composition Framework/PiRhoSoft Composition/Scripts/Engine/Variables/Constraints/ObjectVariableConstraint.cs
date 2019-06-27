@@ -7,22 +7,33 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class ObjectVariableConstraint : VariableConstraint
 	{
-		public Type Type;
+		public Type Type = typeof(Object);
 
 		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
-			writer.Write(Type != null ? Type.AssemblyQualifiedName : string.Empty);
+			writer.Write(Type?.AssemblyQualifiedName ?? string.Empty);
 		}
 
 		protected internal override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
 			var type = reader.ReadString();
-			Type = Type.GetType(type, true);
+			Type = Type.GetType(type) ?? typeof(Object);
 		}
 
 		public override bool IsValid(VariableValue value)
 		{
 			return Type != null && (value.IsNull || Type.IsAssignableFrom(value.ReferenceType));
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is ObjectVariableConstraint other
+				&& Type == other.Type;
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
 		}
 	}
 }

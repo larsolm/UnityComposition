@@ -6,7 +6,7 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class StoreVariableConstraint : VariableConstraint
 	{
-		public VariableSchema Schema;
+		public VariableSchema Schema = null;
 
 		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
@@ -26,6 +26,17 @@ namespace PiRhoSoft.CompositionEngine
 				return owner.Schema == Schema;
 			else
 				return false;
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is StoreVariableConstraint other
+				&& Schema == other.Schema;
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
 		}
 	}
 }

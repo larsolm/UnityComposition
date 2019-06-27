@@ -30,7 +30,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private class PropertyDrawerListProxy : PropertyListProxy
 		{
-			private PropertyDrawer _drawer;
+			private readonly PropertyDrawer _drawer;
 
 			public PropertyDrawerListProxy(SerializedProperty property, PropertyDrawer drawer) : base(property)
 			{

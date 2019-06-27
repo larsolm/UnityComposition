@@ -28,7 +28,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Picker/ScenePicker/ScenePicker.uss";
 
-		public ScenePicker() { }
 		public ScenePicker(SerializedProperty property) : base(property) { }
 		public ScenePicker(Object owner, Func<SceneAsset> getValue, Action<SceneAsset> setValue) : base(owner, getValue, setValue) { }
 
@@ -58,6 +57,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			picker.OnSelected += selectedObject =>
 			{
 				Value = selectedObject as SceneAsset;
+				UpdateElement(Value);
 				ElementHelper.SendChangeEvent(this, value, Value);
 			};
 
@@ -67,8 +67,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_create = new Image { image = Icon.Add.Content };
 			_create.AddManipulator(new Clickable(() => Create(onCreate)));
 
-			_buildWarning = new MessageBox();
-			_buildWarning.Setup(MessageBoxType.Info, "This scene is not in the build settings. Add it now?");
+			_buildWarning = new MessageBox(MessageBoxType.Info, "This scene is not in the build settings. Add it now?");
 			_buildWarning.Add(new Button(AddToBuild) { text = "Add" });
 
 			Setup(picker, value);
@@ -171,31 +170,5 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			var path = SceneUtility.GetScenePathByBuildIndex(index);
 			return GetSceneFromPath(path);
 		}
-
-		#region UXML
-
-		private class Factory : UxmlFactory<ScenePicker, Traits> { }
-
-		private class Traits : UxmlTraits
-		{
-			private UxmlStringAttributeDescription _path = new UxmlStringAttributeDescription { name = "scene-path" };
-
-			public override IEnumerable<UxmlChildElementDescription> uxmlChildElementsDescription
-			{
-				get { yield break; }
-			}
-
-			public override void Init(VisualElement ve, IUxmlAttributes bag, CreationContext cc)
-			{
-				base.Init(ve, bag, cc);
-
-				var button = ve as ScenePicker;
-				var path = _path.GetValueFromBag(bag, cc);
-
-				button.Setup(path, null);
-			}
-		}
-
-		#endregion
 	}
 }

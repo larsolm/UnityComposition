@@ -24,7 +24,7 @@ namespace PiRhoSoft.CompositionEngine
 			Definition = ValueDefinition.Create(minimum, maximum);
 		}
 
-		public VariableConstraintAttribute(string[] values)
+		public VariableConstraintAttribute(List<string> values)
 		{
 			Definition = ValueDefinition.Create(values);
 		}
@@ -37,6 +37,21 @@ namespace PiRhoSoft.CompositionEngine
 
 	public abstract class VariableConstraint
 	{
+		public static VariableConstraint Create(VariableType type)
+		{
+			switch (type)
+			{
+				case VariableType.Int: return new IntVariableConstraint();
+				case VariableType.Float: return new FloatVariableConstraint();
+				case VariableType.String: return new StringVariableConstraint();
+				case VariableType.Enum: return new EnumVariableConstraint();
+				case VariableType.Object: return new ObjectVariableConstraint();
+				case VariableType.Store: return new StoreVariableConstraint();
+				case VariableType.List: return new ListVariableConstraint();
+				default: return null;
+			}
+		}
+
 		protected internal abstract void Write(BinaryWriter writer, IList<Object> objects);
 		protected internal abstract void Read(BinaryReader reader, IList<Object> objects, short version);
 

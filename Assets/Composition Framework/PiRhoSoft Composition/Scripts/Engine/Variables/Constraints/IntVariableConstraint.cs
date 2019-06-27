@@ -6,9 +6,9 @@ namespace PiRhoSoft.CompositionEngine
 {
 	public class IntVariableConstraint : VariableConstraint
 	{
-		public bool HasRange;
-		public int Minimum;
-		public int Maximum;
+		public bool HasRange = false;
+		public int Minimum = 0;
+		public int Maximum = 100;
 
 		protected internal override void Write(BinaryWriter writer, IList<Object> objects)
 		{
@@ -27,6 +27,19 @@ namespace PiRhoSoft.CompositionEngine
 		public override bool IsValid(VariableValue value)
 		{
 			return !HasRange || (value.Int >= Minimum && value.Int <= Maximum);
+		}
+
+		public override bool Equals(object obj)
+		{
+			return obj is IntVariableConstraint other
+				&& HasRange == other.HasRange
+				&& Minimum == other.Minimum
+				&& Maximum == other.Maximum;
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
 		}
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -59,6 +60,23 @@ namespace PiRhoSoft.CompositionEngine
 			return _type == value.Type && (Constraint == null || Constraint.IsValid(value));
 		}
 
+		public override bool Equals(object obj)
+		{
+			return obj is ValueDefinition other
+				&& _type == other._type
+				&& ((_objects == null && other._objects == null) || (_objects != null && _objects.SequenceEqual(other._objects)))
+				&& ((string.IsNullOrEmpty(_tag) && string.IsNullOrEmpty(_tag)) || (_tag != null && _tag.Equals(other._tag)))
+				&& ((_initializer == null && other._initializer == null) || (_initializer != null && _initializer.Equals(other._initializer)))
+				&& ((Constraint == null && other.Constraint == null) || (Constraint != null && Constraint.Equals(other.Constraint)))
+				&& _isTypeLocked == other._isTypeLocked
+				&& _isConstraintLocked == other.IsConstraintLocked;
+		}
+
+		public override int GetHashCode()
+		{
+			return base.GetHashCode();
+		}
+
 		#region Creation
 
 		public static ValueDefinition Empty => Create(VariableType.Empty);
@@ -69,7 +87,8 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				_type = type,
 				_isTypeLocked = type != VariableType.Empty,
-				_isConstraintLocked = false
+				_isConstraintLocked = false,
+				Constraint = VariableConstraint.Create(type)
 			};
 		}
 
@@ -79,7 +98,8 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				_type = VariableType.Int,
 				_isTypeLocked = true,
-				_isConstraintLocked = true
+				_isConstraintLocked = true,
+				Constraint = new IntVariableConstraint { HasRange = true, Minimum = minimum, Maximum = maximum }
 			};
 		}
 
@@ -89,17 +109,19 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				_type = VariableType.Float,
 				_isTypeLocked = true,
-				_isConstraintLocked = true
+				_isConstraintLocked = true,
+				Constraint = new FloatVariableConstraint { HasRange = true, Minimum = minimum, Maximum = maximum }
 			};
 		}
 
-		public static ValueDefinition Create(string[] values)
+		public static ValueDefinition Create(List<string> values)
 		{
 			return new ValueDefinition
 			{
 				_type = VariableType.String,
 				_isTypeLocked = true,
-				_isConstraintLocked = true
+				_isConstraintLocked = true,
+				Constraint = new StringVariableConstraint { Values = values }
 			};
 		}
 
@@ -114,7 +136,8 @@ namespace PiRhoSoft.CompositionEngine
 			{
 				_type = VariableValue.GetType(type),
 				_isTypeLocked = true,
-				_isConstraintLocked = true
+				_isConstraintLocked = true,
+				Constraint = VariableConstraint.Create(VariableValue.GetType(type))
 			};
 		}
 
@@ -155,7 +178,7 @@ namespace PiRhoSoft.CompositionEngine
 		public void OnBeforeSerialize()
 		{
 			if (Constraint != null)
-				_constraint = VariableHandler.SaveConstraint(Type, Constraint, ref _objects);
+				_constraint = VariableHandler.SaveConstraint(Type, Constraint, out _objects);
 		}
 
 		#endregion
