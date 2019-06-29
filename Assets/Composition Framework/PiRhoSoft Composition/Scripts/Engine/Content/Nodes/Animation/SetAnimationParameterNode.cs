@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,7 +17,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Animator;
 
 		[Tooltip("The name of the parameter to set")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public StringVariableSource Parameter = new StringVariableSource();
 
 		[Tooltip("The type of the parameter to set")]
@@ -27,17 +26,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The value to set the parameter to")]
 		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Bool)]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public BoolVariableSource BoolValue = new BoolVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Int)]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public IntVariableSource IntValue = new IntVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Float)]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public FloatVariableSource FloatValue = new FloatVariableSource();
 
 		public override Color NodeColor => Colors.Animation;

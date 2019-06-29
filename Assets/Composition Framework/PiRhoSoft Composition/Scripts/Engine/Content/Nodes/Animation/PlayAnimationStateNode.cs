@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections;
 using UnityEngine;
 
@@ -16,7 +16,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Animator;
 
 		[Tooltip("The name of the animation state to play")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public StringVariableSource State = new StringVariableSource();
 
 		public override Color NodeColor => Colors.Animation;

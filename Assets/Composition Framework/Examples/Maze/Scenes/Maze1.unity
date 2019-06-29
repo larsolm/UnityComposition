@@ -94,8 +94,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaDirect: 0.5
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
-    m_ShowResolutionOverlay: 1
     m_ExportTrainingData: 0
+    m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
   m_UseShadowmask: 1
 --- !u!196 &4
@@ -203,6 +203,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -309,6 +310,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -470,6 +472,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -576,6 +579,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -730,6 +734,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -836,6 +841,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -996,6 +1002,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1102,6 +1109,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1183,6 +1191,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1362,6 +1371,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1468,6 +1478,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1574,6 +1585,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1680,6 +1692,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1786,6 +1799,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -1899,6 +1913,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2053,6 +2068,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2207,6 +2223,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2360,6 +2377,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2466,6 +2484,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2573,6 +2592,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2726,6 +2746,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2832,6 +2853,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -2986,6 +3008,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -3092,6 +3115,7 @@ SpriteRenderer:
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
   m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
@@ -3122,15 +3146,15 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 7609972514530137793, guid: 6f1753990295b7d43952ed76b4723a1d,
-        type: 3}
-      propertyPath: m_Name
-      value: Camera
-      objectReference: {fileID: 0}
     - target: {fileID: 2643244533930277767, guid: 6f1753990295b7d43952ed76b4723a1d,
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 7609972514530137793, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_Name
+      value: Camera
       objectReference: {fileID: 0}
     - target: {fileID: 2643244533930277762, guid: 6f1753990295b7d43952ed76b4723a1d,
         type: 3}
@@ -3207,6 +3231,11 @@ PrefabInstance:
       propertyPath: Graph._outputs.Array.data[0].Reference._tokens.Array.data[1].Text
       value: B
       objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277775, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Graph._inputs.Array.data[0].Type
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2643244533930277774, guid: 6f1753990295b7d43952ed76b4723a1d,
         type: 3}
       propertyPath: Variables._variablesData.Array.size
@@ -3252,6 +3281,76 @@ PrefabInstance:
         type: 3}
       propertyPath: Variables.Definitions.Array.size
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.size
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[7]
+      value: AQAEZXVpYQMAAAAAAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[6]
+      value: AQAMSmV3ZWxzTmVlZGVkAgAAAAAAAAA=
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[7]._type
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[1]
+      value: AQAGUmVkS2V5AgAAAAAAAAA=
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[1]._type
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[1]._constraint
+      value: AQACAAAAAAAAAABkAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[2]._constraint
+      value: AQACAAAAAAAAAABkAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[3]._constraint
+      value: AQACAAAAAAAAAABkAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[4]._constraint
+      value: AQACAAAAAAAAAABkAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[5]._constraint
+      value: AQACAAAAAAAAAABkAAAA
+      objectReference: {fileID: 0}
+    - target: {fileID: 1749428514748622999, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables.Definitions.Array.data[6]._constraint
+      value: AQACAAAAAAAAAABkAAAA
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4980581016010646345, guid: 6f1753990295b7d43952ed76b4723a1d, type: 3}

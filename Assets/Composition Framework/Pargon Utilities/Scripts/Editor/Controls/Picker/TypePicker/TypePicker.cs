@@ -38,12 +38,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			var initialType = Type.GetType(valueName ?? string.Empty);
 			var picker = new Picker();
 			picker.Setup(_type, showAbstract, initialType);
-			picker.OnSelected += selectedValue =>
-			{
-				Value = selectedValue?.AssemblyQualifiedName;
-				UpdateElement(Value);
-				ElementHelper.SendChangeEvent(this, valueName, Value);
-			};
+			picker.OnSelected += selectedValue => ElementHelper.SendChangeEvent(this, valueName, selectedValue?.AssemblyQualifiedName);
 
 			Setup(picker, valueName);
 		}
@@ -58,9 +53,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			property.stringValue = value;
 		}
 
-		protected override void UpdateElement(string value)
+		protected override void Refresh()
 		{
-			var type = Type.GetType(value ?? string.Empty);
+			var type = Type.GetType(Value ?? string.Empty);
 			var text = type == null ? $"None ({_type.Name})" : type.Name;
 			var icon = AssetPreview.GetMiniTypeThumbnail(type);
 

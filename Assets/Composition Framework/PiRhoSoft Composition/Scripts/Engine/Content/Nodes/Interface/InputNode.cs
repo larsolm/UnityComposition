@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -43,7 +42,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The buttons that can trigger selections")]
 		[List(EmptyLabel = "Add items to create input options")]
-		[ClassDisplay(ClassDisplayType.Inline)]
+		[Inline]
 		public InputNodeButtonList Buttons = new InputNodeButtonList();
 
 		public override Color NodeColor => Colors.InterfaceTeal;

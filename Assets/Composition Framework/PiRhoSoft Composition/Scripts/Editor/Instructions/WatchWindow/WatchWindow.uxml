@@ -5,4 +5,12 @@
     xmlns:editor="UnityEditor.UIElements"
     xsi:noNamespaceSchemaLocation="../../../../../../../UIElementsSchema/UIElements.xsd"
 >
+  <engine:ScrollView>
+    <engine:VisualElement name="global-container">    
+    </engine:VisualElement>
+    <engine:VisualElement name="store-container">    
+    </engine:VisualElement>
+    <engine:VisualElement name="watch-container">    
+    </engine:VisualElement>
+  </engine:ScrollView>
 </engine:UXML>

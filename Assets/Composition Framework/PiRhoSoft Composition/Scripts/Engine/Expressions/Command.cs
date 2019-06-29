@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -114,10 +113,9 @@ namespace PiRhoSoft.CompositionEngine
 		public string Name;
 
 		[List]
-		[ClassDisplay(ClassDisplayType.Inline)]
+		[Inline]
 		public ParameterList Parameters = new ParameterList();
-
-		[ExpressionDisplay(MinimumLines = 5, MaximumLines = 20)]
+		
 		public Expression Expression = new Expression();
 
 		private string _registeredName;

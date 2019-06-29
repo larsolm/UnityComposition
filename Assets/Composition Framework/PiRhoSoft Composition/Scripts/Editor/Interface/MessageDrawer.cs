@@ -1,24 +1,23 @@
 ﻿using PiRhoSoft.CompositionEngine;
-using PiRhoSoft.UtilityEditor;
+using PiRhoSoft.PargonUtilities.Editor;
 using UnityEditor;
-using UnityEngine;
+using UnityEditor.UIElements;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
 	[CustomPropertyDrawer(typeof(Message))]
 	public class MessageDrawer : PropertyDrawer
 	{
-		public override float GetPropertyHeight(SerializedProperty property, GUIContent label)
+		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var text = property.FindPropertyRelative(nameof(Message.Text));
-			return EditorGUI.GetPropertyHeight(text);
-		}
+			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
+			var textProperty = property.FindPropertyRelative(nameof(Message.Text));
+			var text = new PropertyField(textProperty) { label = null };
 
-		public override void OnGUI(Rect position, SerializedProperty property, GUIContent label)
-		{
-			label.tooltip = Label.GetTooltip(fieldInfo);
-			var text = property.FindPropertyRelative(nameof(Message.Text));
-			EditorGUI.PropertyField(position, text, label);
+			container.Add(text);
+
+			return container;
 		}
 	}
 }

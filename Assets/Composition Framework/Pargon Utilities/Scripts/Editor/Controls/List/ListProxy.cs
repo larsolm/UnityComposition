@@ -29,9 +29,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreateElement(int index)
 		{
-			var field = new PropertyField(Property.GetArrayElementAtIndex(index));
+			var field = new PropertyField(Property.GetArrayElementAtIndex(index)) { label = null };
 			field.Bind(Property.serializedObject);
-			field.label = " "; // no way to not show a label
 			return field;
 		}
 

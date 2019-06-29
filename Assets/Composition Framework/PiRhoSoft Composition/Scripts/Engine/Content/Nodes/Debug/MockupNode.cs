@@ -1,7 +1,6 @@
-﻿using System;
+﻿using PiRhoSoft.PargonUtilities.Engine;
+using System;
 using System.Collections;
-using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionEngine
@@ -24,7 +23,7 @@ namespace PiRhoSoft.CompositionEngine
 	{
 		[Tooltip("The connections from this node")]
 		[List]
-		[ClassDisplay(ClassDisplayType.Inline)]
+		[Inline]
 		public MockupConnectionList Connections = new MockupConnectionList();
 
 		[Tooltip("The display color of the node")]

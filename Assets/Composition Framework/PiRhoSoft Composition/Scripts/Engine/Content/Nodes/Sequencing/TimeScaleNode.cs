@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The value to set the TimeScale to")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		[VariableConstraint(0.0f, 100.0f)]
 		public FloatVariableSource TimeScale = new FloatVariableSource(1.0f);
 

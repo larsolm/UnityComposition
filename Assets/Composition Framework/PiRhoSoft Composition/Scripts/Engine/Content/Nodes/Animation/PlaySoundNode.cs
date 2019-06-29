@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -20,11 +20,11 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference AudioPlayer;
 
 		[Tooltip("The Audio Clip to play")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public AudioClipVariableSource Sound = new AudioClipVariableSource();
 
 		[Tooltip("The volume to play the sound at")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public FloatVariableSource Volume = new FloatVariableSource(1.0f);
 
 		[Tooltip("Whether to wait for the sound to finish before moving to Next")]

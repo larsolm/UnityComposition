@@ -133,8 +133,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_search.RegisterCallback<KeyDownEvent>(e => HandleKeyboard(e, true), TrickleDown.TrickleDown);
 
 			ElementHelper.SetVisible(_animatedContainer, false);
-
-			FocusSearch();
 		}
 
 		public void FocusSearch()

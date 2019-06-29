@@ -121,8 +121,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			button.AddManipulator(new Clickable(action));
 			button.style.minWidth = new StyleLength(image.width);
 			button.style.minHeight = new StyleLength(image.height);
-			button.style.width = new StyleLength(image.width);
-			button.style.height = new StyleLength(image.height);
+			button.style.maxWidth = new StyleLength(image.width);
+			button.style.maxHeight = new StyleLength(image.height);
 			button.style.alignSelf = new StyleEnum<Align>(Align.Center);
 			return button;
 		}
@@ -264,6 +264,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		#region Bindings
 
+		private const long _bindingUpdateRate = 100;
+
 		public static void Bind<T>(VisualElement element, IBindableProperty<T> bindable, SerializedProperty property)
 		{
 			element.RegisterCallback<ChangeEvent<T>>(evt =>
@@ -280,7 +282,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				if ((fromElement == null && fromProperty != null) || (fromElement != null && !fromElement.Equals(fromProperty)))
 					bindable.UpdateElement(fromProperty, element, property);
 
-			}).Every(0);
+			}).Every(_bindingUpdateRate);
 		}
 
 		public static void Bind<T>(VisualElement element, IBindableObject<T> bindable, Object owner)
@@ -299,7 +301,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				if ((fromElement == null && fromObject != null) || (fromElement != null && !fromElement.Equals(fromObject)))
 					bindable.UpdateElement(fromObject, element, owner);
 
-			}).Every(0);
+			}).Every(_bindingUpdateRate);
 		}
 
 		public static void Bind<T>(VisualElement element, INotifyValueChanged<T> field, Object owner, Func<T> getValue, Action<T> setValue)
@@ -316,7 +318,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				if ((value == null && field.value != null) || (value != null && !value.Equals(field.value)))
 					field.SetValueWithoutNotify(value);
 
-			}).Every(0);
+			}).Every(_bindingUpdateRate);
 		}
 
 		public class BindablePropertyElement : BindableElement

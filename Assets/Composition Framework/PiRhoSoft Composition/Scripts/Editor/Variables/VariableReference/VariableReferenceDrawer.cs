@@ -1,59 +1,12 @@
-﻿using System.Reflection;
-using PiRhoSoft.CompositionEngine;
+﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
 using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEditor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.CompositionEditor
 {
-	public class VariableReferenceControl : ObjectControl<VariableReference>
-	{
-		private VariableReference _variableReference;
-
-		public static float GetHeight()
-		{
-			return EditorGUIUtility.singleLineHeight;
-		}
-
-		public static void Draw(GUIContent label, VariableReference reference)
-		{
-			var rect = EditorGUILayout.GetControlRect(false);
-			Draw(rect, reference, label);
-		}
-
-		public static void Draw(Rect position, VariableReference reference, GUIContent label)
-		{
-			using (new InvalidScope(reference.IsValid))
-			{
-				using (var changes = new EditorGUI.ChangeCheckScope())
-				{
-					var variable = EditorGUI.TextField(position, label, reference.Variable);
-
-					if (changes.changed)
-						reference.Variable = variable;
-				}
-			}
-		}
-
-		public override void Setup(VariableReference target, SerializedProperty property, FieldInfo fieldInfo, PropertyAttribute attribute)
-		{
-			_variableReference = target;
-		}
-
-		public override float GetHeight(GUIContent label)
-		{
-			return EditorGUIUtility.singleLineHeight;
-		}
-
-		public override void Draw(Rect position, GUIContent label)
-		{
-			Draw(position, _variableReference, label);
-		}
-	}
-
 	public class VariableReferenceElement : TextField
 	{
 		private Object _owner;

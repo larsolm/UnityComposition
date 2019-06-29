@@ -63,8 +63,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ContextName: context
   ContextDefinition:
-    _type: 16
-    _constraint: AQAQAAAAAA==
+    _type: 0
+    _constraint: 
     _objects: []
     _tag: 
     _initializer:

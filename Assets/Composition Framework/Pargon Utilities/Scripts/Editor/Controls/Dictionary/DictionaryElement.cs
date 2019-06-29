@@ -1,4 +1,5 @@
 ﻿using System;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.PargonUtilities.Editor
@@ -8,9 +9,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private const string _uxmlPath = Utilities.AssetPath + "Controls/Dictionary/Dictionary.uxml";
 		private const string _ussPath = Utilities.AssetPath + "Controls/Dictionary/Dictionary.uss";
 
-		private const string _ussLabelName = "dictionary-label";
-		private const string _ussAddButtonName = "dictionary-add-button";
-		private const string _ussContainerName = "dictionary-container";
+		private const string _ussLabelName = "label";
+		private const string _ussAddButtonName = "add-button";
+		private const string _ussContainerName = "container";
 
 		private const string _ussBaseClass = "pargon-dictionary";
 		private const string _ussEmptyClass = "empty-label";
@@ -61,11 +62,20 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			ElementHelper.SetVisible(addButton, _allowAdd);
 
+			_addButtonIndex = IndexOf(addButton);
+
 			var keyElement = _proxy.CreateAddElement();
 			keyElement.AddToClassList(_ussAddKeyClass);
-			Insert(IndexOf(addButton), keyElement);
+			Insert(_addButtonIndex, keyElement);
 
 			Rebuild();
+		}
+
+		public VisualElement AddHeaderButton(Texture image, string tooltip, Action action)
+		{
+			var button = ElementHelper.CreateIconButton(image, tooltip, action);
+			Insert(_addButtonIndex, button);
+			return button;
 		}
 
 		public void Rebuild()

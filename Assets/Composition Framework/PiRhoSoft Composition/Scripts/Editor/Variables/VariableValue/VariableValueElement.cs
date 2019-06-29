@@ -1,8 +1,8 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
 using System;
-using System.Linq;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEditor
 				var definition = _getDefinition();
 				if (definition.Constraint != _definition.Constraint)
 					Setup(_value, definition);
-			}).Every(0);
+			}).Every(100);
 
 			ElementHelper.Bind(this, this, _owner);
 
@@ -42,7 +42,7 @@ namespace PiRhoSoft.CompositionEditor
 		public void UpdateElement(VariableValue value, VisualElement element, Object owner) => Setup(value, _definition);
 		public void UpdateObject(VariableValue value, VisualElement element, Object owner) => _setValue(value);
 
-		private void Setup(VariableValue value, ValueDefinition definition)
+		public void Setup(VariableValue value, ValueDefinition definition)
 		{
 			Clear();
 
@@ -52,6 +52,12 @@ namespace PiRhoSoft.CompositionEditor
 			var element = CreateElement();
 
 			Add(element);
+		}
+
+		private void SetValue(VariableValue value)
+		{
+			ElementHelper.SendChangeEvent(this, _value, value);
+			_value = value;
 		}
 
 		private VisualElement CreateElement()
@@ -87,125 +93,149 @@ namespace PiRhoSoft.CompositionEditor
 			var dropdown = new EnumDropdown<VariableType>(VariableType.Empty, _owner, () => (int)VariableType.Empty, type =>
 			{
 				var variableType = (VariableType)type;
-				var value = VariableHandler.CreateDefault(variableType, null);
+				var constraint = VariableConstraint.Create(variableType);
+				var value = VariableHandler.CreateDefault((VariableType)type, constraint);
+				var definition = ValueDefinition.Create(variableType, constraint, null, null, false, false);
 
-				Setup(value, _definition);
+				SetValue(value);
+				Setup(value, definition);
 			});
-
 			return dropdown;
 		}
 
 		public VisualElement CreateBool()
 		{
 			var toggle = new Toggle() { value = _value.Bool };
-			ElementHelper.Bind(this, toggle, _owner, () => _value.Bool, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, toggle, _owner, () => _value.Bool, value => SetValue(VariableValue.Create(value)));
 			return toggle;
 		}
 
 		public VisualElement CreateInt()
 		{
+			var container = new VisualElement();
+
 			if (_definition.Constraint is IntVariableConstraint constraint)
 			{
-				var slider = new SliderInt(constraint.Minimum, constraint.Maximum) { value = _value.Int };
-				ElementHelper.Bind(this, slider, _owner, () => _value.Int, value => _value = VariableValue.Create(value));
-				return slider;
+				var field = new IntegerField() { value = _value.Int, isDelayed = true };
+				container.Add(field);
+
+				ElementHelper.Bind(this, field, _owner, () => _value.Int, value =>
+				{
+					var clamped = constraint.HasRange ? Mathf.Clamp(value, constraint.Minimum, constraint.Maximum) : value;
+					SetValue(VariableValue.Create(clamped));
+				});
+
+				if (constraint.HasRange)
+				{
+					var slider = new SliderInt(constraint.Minimum, constraint.Maximum) { value = _value.Int };
+					container.Add(slider);
+
+					ElementHelper.Bind(this, slider, _owner, () => _value.Int, value => SetValue(VariableValue.Create(value)));
+				}
 			}
-			else
-			{
-				var field = new IntegerField() { value = _value.Int };
-				ElementHelper.Bind(this, field, _owner, () => _value.Int, value => _value = VariableValue.Create(value));
-				return field;
-			}
+
+			return container;
 		}
 
 		private VisualElement CreateFloat()
 		{
+			var container = new VisualElement();
+
 			if (_definition.Constraint is FloatVariableConstraint constraint)
 			{
-				var slider = new Slider(constraint.Minimum, constraint.Maximum) { value = _value.Float };
-				ElementHelper.Bind(this, slider, _owner, () => _value.Float, value => _value = VariableValue.Create(value));
-				return slider;
+				var field = new FloatField() { value = _value.Float, isDelayed = true };
+				container.Add(field);
+
+				ElementHelper.Bind(this, field, _owner, () => _value.Float, value =>
+				{
+					var clamped = constraint.HasRange ? Mathf.Clamp(value, constraint.Minimum, constraint.Maximum) : value;
+					SetValue(VariableValue.Create(clamped));
+				});
+
+				if (constraint.HasRange)
+				{
+					var slider = new Slider(constraint.Minimum, constraint.Maximum) { value = _value.Float };
+					container.Add(slider);
+
+					ElementHelper.Bind(this, slider, _owner, () => _value.Float, value => SetValue(VariableValue.Create(value)));
+				}
 			}
-			else
-			{
-				var field = new FloatField() { value = _value.Float };
-				ElementHelper.Bind(this, field, _owner, () => _value.Float, value => _value = VariableValue.Create(value));
-				return field;
-			}
+
+			return container;
 		}
 
 		private VisualElement CreateInt2()
 		{
 			var field = new Vector2IntField() { value = _value.Int2 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Int2, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Int2, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateInt3()
 		{
 			var field = new Vector3IntField() { value = _value.Int3 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Int3, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Int3, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateIntRect()
 		{
 			var field = new RectIntField() { value = _value.IntRect };
-			ElementHelper.Bind(this, field, _owner, () => _value.IntRect, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.IntRect, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateIntBounds()
 		{
 			var field = new BoundsIntField() { value = _value.IntBounds };
-			ElementHelper.Bind(this, field, _owner, () => _value.IntBounds, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.IntBounds, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateVector2()
 		{
 			var field = new Vector2Field() { value = _value.Vector2 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Vector2, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Vector2, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateVector3()
 		{
 			var field = new Vector3Field() { value = _value.Vector3 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Vector3, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Vector3, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateVector4()
 		{
 			var field = new Vector4Field() { value = _value.Vector4 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Vector4, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Vector4, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateQuaternion()
 		{
-			return new Euler(_owner, () => _value.Quaternion, value => _value = VariableValue.Create(value));
+			return new Euler(_owner, () => _value.Quaternion, value => SetValue(VariableValue.Create(value)));
 		}
 
 		private VisualElement CreateRect()
 		{
 			var field = new RectField() { value = _value.Rect };
-			ElementHelper.Bind(this, field, _owner, () => _value.Rect, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Rect, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateBounds()
 		{
 			var field = new BoundsField() { value = _value.Bounds };
-			ElementHelper.Bind(this, field, _owner, () => _value.Bounds, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Bounds, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateColor()
 		{
 			var field = new ColorField() { value = _value.Color };
-			ElementHelper.Bind(this, field, _owner, () => _value.Color, value => _value = VariableValue.Create(value));
+			ElementHelper.Bind(this, field, _owner, () => _value.Color, value => SetValue(VariableValue.Create(value)));
 			return field;
 		}
 
@@ -213,20 +243,20 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (_definition.Constraint is StringVariableConstraint constraint && constraint.Values.Count > 0)
 			{
-				var dropdown = new StringDropdown(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => _value = VariableValue.Create(value));
+				var dropdown = new StringDropdown(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
 				return dropdown;
 			}
 			else
 			{
-				var field = new TextField() { value = _value.String };
-				ElementHelper.Bind(this, field, _owner, () => _value.String, value => _value = VariableValue.Create(value));
+				var field = new TextField() { value = _value.String, isDelayed = true };
+				ElementHelper.Bind(this, field, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
 				return field;
 			}
 		}
 
 		private VisualElement CreateEnum()
 		{
-			var buttons = new EnumButtons(_owner, () => _value.Enum, value => _value = VariableValue.Create(value));
+			var buttons = new EnumButtons(_owner, () => _value.Enum, value => SetValue(VariableValue.Create(value)));
 			buttons.Setup(_value.EnumType, false, _value.Enum);
 			return buttons;
 		}
@@ -235,7 +265,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var objectType = (_definition.Constraint as ObjectVariableConstraint)?.Type ?? _value.ReferenceType ?? typeof(Object);
 
-			var picker = new ObjectPicker(_owner, () => _value.Object, value => _value = VariableValue.CreateReference(value));
+			var picker = new ObjectPicker(_owner, () => _value.Object, value => SetValue(VariableValue.CreateReference(value)));
 			picker.Setup(objectType, _value.Object);
 			return picker;
 		}

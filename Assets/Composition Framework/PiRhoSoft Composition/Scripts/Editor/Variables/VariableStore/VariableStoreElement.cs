@@ -9,21 +9,23 @@ namespace PiRhoSoft.CompositionEditor
 {
 	public class VariableStoreElement : VisualElement
 	{
-		public IVariableStore Selected { get; private set; }
-		public string SelectedName { get; private set; }
+		public IVariableStore Store { get; private set; }
+
 		public bool ShouldClose { get; private set; }
 
 		public VariableStoreElement(Object owner, string label, IVariableStore variables, bool isStatic, bool isClosable)
 		{
+			Store = variables;
+
 			var proxy = isStatic ? (ValuesProxy)new StaticValuesProxy(owner, variables) : new DynamicValuesProxy(owner, variables);
 
-			var list = new ListElement(proxy, label, "The variables contained in this variable store");
+			var list = new ListElement(proxy, label, "The variables contained in this variable store", false , false, false);
 
 			if (variables is Object obj)
 				list.AddHeaderButton(Icon.Inspect.Content, "View this object in the inspector", () => Selection.activeObject = obj);
 
 			if (isClosable)
-				list.AddHeaderButton(Icon.Close.Content, "Close this store", () => ShouldClose = true);
+				list.AddHeaderButton(Icon.Close.Content, "Close this store", RemoveFromHierarchy);
 
 			Add(list);
 		}
@@ -63,8 +65,11 @@ namespace PiRhoSoft.CompositionEditor
 					{
 						container.Add(ElementHelper.CreateIconButton(Icon.View.Content, "View the contents of the store", () =>
 						{
-							//Selected = value.Store;
-							//SelectedName = name;
+							using (var evt = WatchWindow.WatchEvent.GetPooled(_owner, _variables, name))
+							{
+								evt.target = container;
+								container.SendEvent(evt);
+							}
 						}));
 					}
 

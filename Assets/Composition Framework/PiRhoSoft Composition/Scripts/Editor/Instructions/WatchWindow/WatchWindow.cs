@@ -1,17 +1,115 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
-using PiRhoSoft.UtilityEditor;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 using MenuItem = UnityEditor.MenuItem;
 
 namespace PiRhoSoft.CompositionEditor
 {
+	public class WatchWindowElement : VisualElement
+	{
+		private const string _uxmlPath = Composition.StylePath + "Instructions/WatchWindow/WatchWindow.uxml";
+		private const string _styleSheetPath = Composition.StylePath + "Instructions/WatchWindow/WatchWindow.uss";
+
+		private const string _ussGlobalName = "global-container";
+		private const string _ussStoreName = "store-container";
+		private const string _ussWatchName = "watch-container";
+
+		private const string _ussBaseClass = "pargon-watch-window";
+
+		private static readonly BoolPreference _logInstructionsEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogInstructionsEnabled", false);
+
+		private readonly VisualElement _globalContainer;
+		private readonly VisualElement _storeContainer;
+		private readonly VisualElement _watchedContainer;
+
+		private VariableStoreElement _globalStore;
+
+		public WatchWindowElement()
+		{
+			ElementHelper.AddVisualTree(this, _uxmlPath);
+			ElementHelper.AddStyleSheet(this, _styleSheetPath);
+
+			AddToClassList(_ussBaseClass);
+
+			_globalContainer = this.Q(_ussGlobalName);
+			_globalContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+
+			_storeContainer = this.Q(_ussStoreName);
+			_watchedContainer = this.Q(_ussWatchName);
+
+			// Make Watch Toolbar
+			CreateGlobalStore();
+			CreateStores();
+			// Make Expression Field
+
+			CompositionManager.LogTracking = _logInstructionsEnabled.Value;
+
+			EditorApplication.playModeStateChanged += PlayModeStateChanged;
+		}
+
+		private void PlayModeStateChanged(PlayModeStateChange state)
+		{
+			if (state == PlayModeStateChange.ExitingPlayMode)
+			{
+				_globalStore = null;
+				_storeContainer.Clear();
+				_watchedContainer.Clear();
+			}
+		}
+
+		private void CreateGlobalStore()
+		{
+			if (CompositionManager.Exists && (_globalStore == null || _globalStore.Store != CompositionManager.Instance.GlobalStore))
+			{
+				_globalStore = new VariableStoreElement(CompositionManager.Instance, CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false);
+				_globalContainer.Clear();
+				_globalContainer.Add(_globalStore);
+			}
+		}
+
+		private void CreateStores()
+		{
+			if (CompositionManager.Exists)
+			{
+				foreach (var instruction in CompositionManager.TrackingState)
+				{
+					var store = new VariableStoreElement(instruction.Key, instruction.Key.name, instruction.Key.Variables, true, false);
+					_storeContainer.Add(store);
+				}
+			}
+		}
+
+		private void AddWatch(Object owner, string name, IVariableStore store)
+		{
+			var element = new VariableStoreElement(owner, name, store, false, true);
+			_watchedContainer.Add(element);
+		}
+	}
+
 	public class WatchWindow : EditorWindow
 	{
-		//private const float _minimumWidth = 200.0f;
+		public class WatchEvent : EventBase<WatchEvent>
+		{
+			public Object Owner { get; private set; }
+			public IVariableStore Store { get; private set; }
+			public string Name { get; private set; }
+
+			public static WatchEvent GetPooled(Object owner, IVariableStore store, string name)
+			{
+				var pooled = GetPooled();
+				pooled.Owner = owner;
+				pooled.Store = store;
+				pooled.Name = name;
+				return pooled;
+			}
+		}
+
+		private const float _minimumWidth = 200.0f;
+
+		private static readonly Icon _windowIcon = Icon.BuiltIn("UnityEditor.LookDevView");
+
 		//private const float _toolbarHeight = 17.0f;
 		//private const float _toolbarPadding = 17.0f;
 		//private const float _promptHeight = 20.0f;
@@ -21,8 +119,7 @@ namespace PiRhoSoft.CompositionEditor
 		//private const string _missingWatchWarning = "(CWWMW) Unable to find variable '{0}' to watch";
 		//private const string _invalidWatchWarning = "(CWWIW) Unable to watch variable '{0}' of type '{1}' - only variable stores can be watched";
 		//
-		//private static BoolPreference _logInstructionsEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogInstructionsEnabled", false);
-		//private static readonly Label _windowLabel = new Label(Icon.BuiltIn("UnityEditor.LookDevView"), label: "Watch Window");
+
 		//private static readonly Label _enableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Enable logging of instruction execution");
 		//private static readonly Label _disableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Disable logging of instruction execution");
 		//private static readonly Label _executeButton = new Label(Icon.Add, "", "Execute the expression");
@@ -32,177 +129,18 @@ namespace PiRhoSoft.CompositionEditor
 		//
 		//private bool _promptValid = true;
 		//private string _promptText = string.Empty;
-		//
-		//private VariableStoreElement _globalStore;
-		//private List<VariableStoreElement> _instructionStores = new List<VariableStoreElement>();
-		//private List<VariableStoreElement> _watchedStores = new List<VariableStoreElement>();
-		//
-		//[MenuItem("Window/PiRho Soft/Watch Window")]
-		//public static void ShowWindow()
-		//{
-		//	var window = GetWindow<WatchWindow>("Watch Window");
-		//	window.Show();
-		//}
-		//
-		//void OnEnable()
-		//{
-		//	EditorApplication.playModeStateChanged += PlayModeStateChanged;
-		//	minSize = new Vector2(_minimumWidth, minSize.y);
-		//
-		//	CompositionManager.LogTracking = _logInstructionsEnabled.Value;
-		//	titleContent = _windowLabel.Content;
-		//
-		//	SetupToolbar();
-		//}
-		//
-		//void OnDisable()
-		//{
-		//	TeardownToolbar();
-		//
-		//	EditorApplication.playModeStateChanged -= PlayModeStateChanged;
-		//}
-		//
-		//private void PlayModeStateChanged(PlayModeStateChange state)
-		//{
-		//	if (state == PlayModeStateChange.ExitingPlayMode)
-		//	{
-		//		_globalStore = null;
-		//		_instructionStores.Clear();
-		//		_watchedStores.Clear();
-		//	}
-		//}
-		//
-		//void OnInspectorUpdate()
-		//{
-		//	if (Application.isPlaying)
-		//	{
-		//		UpdateGlobalStore();
-		//		UpdateInstructionStores();
-		//		Repaint();
-		//	}
-		//}
-		//
-		//void OnGUI()
-		//{
-		//	DrawToolbar();
-		//
-		//	using (var scroller = new EditorGUILayout.ScrollViewScope(_scrollPosition, GUILayout.Height(position.height - _toolbarHeight - _promptHeight)))
-		//	{
-		//		DrawGlobalStore();
-		//		DrawInstructionStores();
-		//		DrawWatchedStores();
-		//
-		//		_scrollPosition = scroller.scrollPosition;
-		//	}
-		//
-		//	DrawPrompt();
-		//}
-		//
-		//#region Global Store
-		//
-		//private void UpdateGlobalStore()
-		//{
-		//	if (CompositionManager.Exists && (_globalStore == null || _globalStore.Store != CompositionManager.Instance.GlobalStore))
-		//	{
-		//		_globalStore = new VariableStoreControl();
-		//		_globalStore.Setup(CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false);
-		//	}
-		//}
-		//
-		//private void DrawGlobalStore()
-		//{
-		//	if (_globalStore != null)
-		//	{
-		//		_globalStore.Draw();
-		//
-		//		if (_globalStore.Selected != null)
-		//			AddWatch(_globalStore.SelectedName, _globalStore.Selected);
-		//	}
-		//}
-		//
-		//#endregion
-		//
-		//#region Instruction Stores
-		//
-		//private void UpdateInstructionStores()
-		//{
-		//	if (CompositionManager.Exists)
-		//	{
-		//		for (var i = 0; i < _instructionStores.Count; i++)
-		//		{
-		//			if (!CompositionManager.TrackingState.Any(data => data.Key.Variables == _instructionStores[i].Store))
-		//				_instructionStores.RemoveAt(i--);
-		//		}
-		//
-		//		foreach (var instruction in CompositionManager.TrackingState)
-		//		{
-		//			if (!_instructionStores.Any(control => control.Store == instruction.Key.Variables))
-		//			{
-		//				var control = new VariableStoreControl();
-		//				control.Setup(instruction.Key.name, instruction.Key.Variables, true, false);
-		//				_instructionStores.Add(control);
-		//			}
-		//		}
-		//	}
-		//}
-		//
-		//private void DrawInstructionStores()
-		//{
-		//	foreach (var instruction in _instructionStores)
-		//	{
-		//		instruction.Draw();
-		//
-		//		if (instruction.Selected != null)
-		//			AddWatch(instruction.SelectedName, instruction.Selected);
-		//	}
-		//}
-		//
-		//#endregion
-		//
-		//#region Watched Stores
-		//
-		//private void AddWatch(string name, IVariableStore store)
-		//{
-		//	var control = new VariableStoreControl();
-		//	control.Setup(name, store, false, true);
-		//	_watchedStores.Add(control);
-		//}
-		//
-		//private void RemoveWatch(VariableStoreControl control)
-		//{
-		//	_watchedStores.RemoveAll(c => c == control);
-		//}
-		//
-		//private void DrawWatchedStores()
-		//{
-		//	var name = string.Empty;
-		//	IVariableStore add = null;
-		//	VariableStoreControl remove = null;
-		//
-		//	foreach (var watched in _watchedStores)
-		//	{
-		//		watched.Draw();
-		//
-		//		if (watched.Selected != null)
-		//		{
-		//			name = watched.SelectedName;
-		//			add = watched.Selected;
-		//		}
-		//
-		//		if (watched.ShouldClose)
-		//			remove = watched;
-		//	}
-		//
-		//	if (add != null)
-		//		AddWatch(name, add);
-		//
-		//	if (remove != null)
-		//		RemoveWatch(remove);
-		//}
-		//
-		//#endregion
-		//
-		//#region Toolbar
+
+		[MenuItem("Window/PiRho Soft/Watch Window")]
+		public static void ShowWindow()
+		{
+			var window = CreateWindow<WatchWindow>("Watch Window");
+			window.minSize = new Vector2(_minimumWidth, window.minSize.y);
+			window.titleContent.image = _windowIcon.Content;
+			window.rootVisualElement.Add(new WatchWindowElement());
+			window.Show();
+		}
+
+		#region Toolbar
 		//
 		//private class WatchMenu : PopupWindowContent
 		//{
@@ -300,7 +238,7 @@ namespace PiRhoSoft.CompositionEditor
 		//	return false;
 		//}
 		//
-		//private void SetupToolbar()
+		//private void CreateToolbar()
 		//{
 		//	_watchMenu = new WatchMenu { Window = this };
 		//}
@@ -327,9 +265,9 @@ namespace PiRhoSoft.CompositionEditor
 		//	}
 		//}
 		//
-		//#endregion
-		//
-		//#region Prompt
+		#endregion
+
+		#region Prompt
 		//
 		//private void DrawPrompt()
 		//{
@@ -389,6 +327,6 @@ namespace PiRhoSoft.CompositionEditor
 		//	}
 		//}
 		//
-		//#endregion
+		#endregion
 	}
 }

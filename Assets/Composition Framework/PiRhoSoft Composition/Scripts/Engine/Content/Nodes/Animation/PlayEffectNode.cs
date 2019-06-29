@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -21,11 +20,11 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The GameObject to spawn")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public GameObjectVariableSource Effect = new GameObjectVariableSource();
 
 		[Tooltip("The name of the spawned effect object")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public StringVariableSource EffectName = new StringVariableSource("Spawned Effect");
 
 		[Tooltip("A variable reference to assign the created effect to so that it can be referenced later")]
@@ -44,11 +43,11 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference Parent = new VariableReference();
 
 		[Tooltip("The position to spawn the object at")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public Vector3VariableSource Position = new Vector3VariableSource();
 
 		[Tooltip("The rotation to spawn the object at")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public Vector3VariableSource Rotation = new Vector3VariableSource();
 
 		[Tooltip("Whether to wait for the effect to finish before moving to Next")]

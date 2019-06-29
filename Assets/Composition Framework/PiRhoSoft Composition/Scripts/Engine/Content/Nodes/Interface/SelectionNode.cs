@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System;
 using System.Collections;
 using System.Text;
@@ -41,7 +40,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Tooltip("The items to show as part of the selection")]
 		[List(EmptyLabel = "Add items to create selection options")]
-		[ClassDisplay(ClassDisplayType.Foldout)]
+		[Inline]
 		public SelectionNodeItemList Items = new SelectionNodeItemList();
 
 		public override Color NodeColor => Colors.InterfaceTeal;

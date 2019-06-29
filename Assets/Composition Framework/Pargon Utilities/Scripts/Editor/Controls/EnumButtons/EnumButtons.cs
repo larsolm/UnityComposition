@@ -17,8 +17,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public Type Type { get; private set; }
 		public bool Flags { get; private set; }
 
-		private Func<Enum> _getValue;
-		private Action<Enum> _setValue;
+		private readonly Func<Enum> _getValue;
+		private readonly Action<Enum> _setValue;
 		private UQueryState<Button> _buttons;
 
 		public EnumButtons(SerializedProperty property)

@@ -14,7 +14,12 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				if (typeof(Component).IsAssignableFrom(type) || typeof(GameObject) == type)
 				{
-					// TODO: build hierarchy
+					// TODO: build hierarchy of game objects
+					//CreateTree(type.Name, null, null, value, obj =>
+					//{
+					//	var icon = AssetPreview.GetMiniThumbnail(obj);
+					//	return icon == null && obj ? AssetPreview.GetMiniTypeThumbnail(obj.GetType()) : icon;
+					//});
 				}
 				else
 				{
@@ -54,12 +59,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			var picker = new Picker();
 			picker.Setup(Type, value);
-			picker.OnSelected += selectedObject =>
-			{
-				Value = selectedObject;
-				UpdateElement(Value);
-				ElementHelper.SendChangeEvent(this, value, Value);
-			};
+			picker.OnSelected += selectedObject => ElementHelper.SendChangeEvent(this, value, selectedObject);
 
 			_inspect = ElementHelper.CreateIconButton(Icon.Inspect.Content, "View this object in the inspector", Inspect);
 
@@ -94,17 +94,17 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				property.stringValue = AssetDatabase.GetAssetPath(value);
 		}
 
-		protected override void UpdateElement(Object value)
+		protected override void Refresh()
 		{
-			var text = value == null ? $"None ({Type.Name})" : value.name;
-			var icon = AssetPreview.GetMiniThumbnail(value);
+			var text = Value == null ? $"None ({Type.Name})" : Value.name;
+			var icon = AssetPreview.GetMiniThumbnail(Value);
 
-			if (icon == null && value)
-				icon = AssetPreview.GetMiniTypeThumbnail(value.GetType());
+			if (icon == null && Value)
+				icon = AssetPreview.GetMiniTypeThumbnail(Value.GetType());
 
 			SetLabel(icon, text);
 
-			_inspect.SetEnabled(value);
+			_inspect.SetEnabled(Value);
 		}
 
 		#endregion

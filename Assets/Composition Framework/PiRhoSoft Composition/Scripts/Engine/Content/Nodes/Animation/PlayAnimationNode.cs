@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using System.Collections;
 using UnityEngine;
@@ -20,7 +20,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference AnimationPlayer;
 
 		[Tooltip("The Animation Clip to play")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public AnimationClipVariableSource Animation = new AnimationClipVariableSource();
 
 		[Tooltip("Whether to wait for the animation to finish")]

@@ -1,28 +1,30 @@
 ﻿.pargon-picker-button
 {
 	flex-grow: 1;
+	flex-shrink: 1;
 	flex-direction: row;
 	align-content: center;
 	align-items: center;
 }
 
-.pargon-picker-button > Button
+.pargon-picker-button > .button-base
 {
 	flex-direction: row;
 	justify-content: center;
 	flex-grow: 1;
+	flex-shrink: 1;
 	margin: 0;
-	padding: 2px 0;
+	padding: 2px 5px;
 }
 
-.pargon-picker-button > Button > Image
+.pargon-picker-button > .button-base > .button-icon
 {
 	width: 16px;
 	height: 16px;
 	margin: 2px 5px 2px 0;
 }
 
-.pargon-picker-button > Button > Label
+.pargon-picker-button > .button-base > .button-label
 {
 	margin: 1px 0 2px 0;
 	padding: 0;
@@ -32,5 +34,5 @@
 {
 	width: 16px;
 	height: 16px;
-	margin: 0px 2px;
+	margin: 0px 5px;
 }

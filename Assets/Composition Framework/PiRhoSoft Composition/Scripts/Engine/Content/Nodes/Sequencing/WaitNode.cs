@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.UtilityEngine;
+﻿using PiRhoSoft.PargonUtilities.Engine;
 using System.Collections;
 using UnityEngine;
 
@@ -12,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The amount of time (in seconds) to wait")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public FloatVariableSource Time = new FloatVariableSource(1.0f);
 
 		[Tooltip("Time is affected by Time.timeScale")]

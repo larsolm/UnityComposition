@@ -70,10 +70,12 @@
 .pargon-list .item-container
 {
 	flex-grow: 1;
+	flex-shrink: 1;
 }
 
 .pargon-list .drag-handle
 {
 	cursor: move-arrow;
 	margin-right: 5px;
+	flex-shrink: 0;
 }

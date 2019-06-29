@@ -10,9 +10,7 @@ namespace PiRhoSoft.CompositionEditor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
-			container.Add(new InstructionCallerElement(property));
-			return container;
+			return new InstructionCallerElement(property, ElementHelper.GetTooltip(fieldInfo));
 		}
 	}
 }

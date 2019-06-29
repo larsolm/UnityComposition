@@ -5,14 +5,6 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEngine
 {
-	public class ExpressionDisplayAttribute : PropertyAttribute
-	{
-		public bool Foldout = false;
-		public bool FullWidth = true;
-		public int MinimumLines = 2;
-		public int MaximumLines = 8;
-	}
-
 	public class ExpressionCompilationResult
 	{
 		public bool Success = true;

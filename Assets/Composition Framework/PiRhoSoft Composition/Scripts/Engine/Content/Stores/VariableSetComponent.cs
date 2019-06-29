@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[AddComponentMenu("PiRho Soft/Composition/Variable Set Component")]
 	public class VariableSetComponent : MonoBehaviour, IVariableStore, IVariableReset, ISchemaOwner
 	{
-		[ChangeTrigger(nameof(SetupSchema))]
+		//[ChangeTrigger(nameof(SetupSchema))]
 		[ObjectPicker]
 		[SerializeField]
 		private VariableSchema _schema = null;

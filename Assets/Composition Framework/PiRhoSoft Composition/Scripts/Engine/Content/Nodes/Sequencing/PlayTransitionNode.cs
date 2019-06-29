@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.UtilityEngine;
 using System.Collections;
 using UnityEngine;
 
@@ -13,7 +12,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The transition to play")]
-		[ClassDisplay(ClassDisplayType.Propogated)]
+		[Inline]
 		public TransitionVariableSource Transition = new TransitionVariableSource();
 
 		[Tooltip("The phase of the transition to run")]

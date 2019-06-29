@@ -109,15 +109,14 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 					var element = _proxy.CreateElement(index);
 
-					var dragHandle = new Image { image = _dragIcon.Content };
+					var dragHandle = new Image { image = _dragIcon.Content, tooltip = "Move this item" };
 					dragHandle.AddToClassList(_ussDragHandleClass);
 					dragHandle.RegisterCallback((MouseDownEvent e) => StartDrag(e, index));
-
-					ElementHelper.SetVisible(dragHandle, _allowMove);
 
 					var removeButton = ElementHelper.CreateIconButton(Icon.Remove.Content, "Remove this item from the list", () => RemoveItem(index));
 					removeButton.AddToClassList(_ussRemoveButtonClass);
 
+					ElementHelper.SetVisible(dragHandle, _allowMove);
 					ElementHelper.SetVisible(removeButton, _allowRemove);
 
 					container.Add(element);

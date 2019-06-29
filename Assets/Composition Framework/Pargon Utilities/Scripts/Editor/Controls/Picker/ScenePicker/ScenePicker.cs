@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -54,12 +53,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			var picker = new Picker();
 			picker.Setup(value);
-			picker.OnSelected += selectedObject =>
-			{
-				Value = selectedObject as SceneAsset;
-				UpdateElement(Value);
-				ElementHelper.SendChangeEvent(this, value, Value);
-			};
+			picker.OnSelected += selectedObject => ElementHelper.SendChangeEvent(this, value, selectedObject);
 
 			_load = new Image { image = Icon.Load.Content, tintColor = Color.black };
 			_load.AddManipulator(new Clickable(Load));
@@ -86,14 +80,14 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			else
 				EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(Value), OpenSceneMode.Additive);
 
-			UpdateElement(Value);
+			Refresh();
 		}
 
 		private void Create(Action onCreate)
 		{
 			var scene = SceneHelper.CreateScene(onCreate);
 			if (scene.IsValid())
-				Value = GetSceneFromPath(scene.path);
+				ElementHelper.SendChangeEvent(this, Value, GetSceneFromPath(scene.path));
 		}
 
 		private void AddToBuild()
@@ -101,7 +95,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			var scene = new EditorBuildSettingsScene(AssetDatabase.GetAssetPath(Value), true);
 			EditorBuildSettings.scenes = EditorBuildSettings.scenes.Append(scene).ToArray();
 
-			UpdateElement(Value);
+			Refresh();
 		}
 
 		public override SceneAsset GetValueFromProperty(SerializedProperty property)
@@ -133,16 +127,16 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			}
 		}
 
-		protected override void UpdateElement(SceneAsset value)
+		protected override void Refresh()
 		{
-			var text = value == null ? "None (Scene)" : value.name;
-			var icon = value == null ? null : AssetPreview.GetMiniTypeThumbnail(typeof(SceneAsset));
+			var text = Value == null ? "None (Scene)" : Value.name;
+			var icon = Value == null ? null : AssetPreview.GetMiniTypeThumbnail(typeof(SceneAsset));
 
 			SetLabel(icon, text);
 
-			if (value)
+			if (Value)
 			{
-				var path = AssetDatabase.GetAssetPath(value);
+				var path = AssetDatabase.GetAssetPath(Value);
 				var scene = SceneManager.GetSceneByPath(path);
 				var buildIndex = SceneUtility.GetBuildIndexByScenePath(path);
 

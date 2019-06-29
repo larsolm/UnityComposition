@@ -2,6 +2,7 @@
 using PiRhoSoft.PargonUtilities.Editor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
@@ -79,9 +80,9 @@ namespace PiRhoSoft.CompositionEditor
 				if (initializer != _initializer)
 					SetupInitializer(initializer);
 
-				if (tags != _tags) // TODO: pretty sure this needs to be a deep check
+				if ((tags == null && _tags != null) || (tags != null && !tags.SequenceEqual(_tags)))
 					SetupTag(tags);
-			}).Every(0);
+			}).Every(100);
 
 			SetupStyle();
 			Setup(_getValue(), _getInitializerType(), _getTags());
@@ -131,25 +132,19 @@ namespace PiRhoSoft.CompositionEditor
 
 		#region Flags
 
-		private bool HasConstraint(bool isLocked, VariableConstraint constraint, VariableType type)
+		// TODO: delete this when all things have been updated to not be null
+		private bool HasConstraint(VariableType type)
 		{
-			if (!isLocked)
+			switch (type)
 			{
-				switch (type)
-				{
-					case VariableType.Int:
-					case VariableType.Float:
-					case VariableType.String:
-					case VariableType.Enum:
-					case VariableType.Object:
-					case VariableType.Store:
-					case VariableType.List: return true;
-					default: return false;
-				}
-			}
-			else
-			{
-				return constraint != null;
+				case VariableType.Int:
+				case VariableType.Float:
+				case VariableType.String:
+				case VariableType.Enum:
+				case VariableType.Object:
+				case VariableType.Store:
+				case VariableType.List: return true;
+				default: return false;
 			}
 		}
 
@@ -194,6 +189,9 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void Setup(ValueDefinition definition, VariableInitializerType initializerType, TagList tags)
 		{
+			if (HasConstraint(definition.Type) && definition.Constraint == null)
+				definition = ValueDefinition.Create(definition.Type, VariableConstraint.Create(definition.Type), _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+
 			Reset();
 			
 			_definition = definition;
@@ -343,7 +341,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var container = new VisualElement();
 
-			if (HasConstraint(_definition.IsConstraintLocked, _definition.Constraint, _definition.Type))
+			if (_definition.Constraint != null)
 				SetupConstraint(container, _definition.IsConstraintLocked, _definition.Constraint, _definition.Type, _showConstrantLabel);
 
 			ReplaceElement(ref _constraintContainer, container);
@@ -411,8 +409,8 @@ namespace PiRhoSoft.CompositionEditor
 			var container = new VisualElement();
 			var toggle = new Toggle() { value = constraint.HasRange };
 			var intContainer = new VisualElement();
-			var intMin = new IntegerField() { value = constraint.Minimum };
-			var intMax = new IntegerField() { value = constraint.Maximum };
+			var intMin = new IntegerField() { value = constraint.Minimum, isDelayed = true };
+			var intMax = new IntegerField() { value = constraint.Maximum, isDelayed = true };
 
 			container.AddToClassList(_ussRowClass);
 			container.AddToClassList(_ussConstraintClass);
@@ -458,8 +456,8 @@ namespace PiRhoSoft.CompositionEditor
 			var container = new VisualElement();
 			var toggle = new Toggle() { value = constraint.HasRange };
 			var floatContainer = new VisualElement();
-			var floatMin = new FloatField() { value = constraint.Minimum };
-			var floatMax = new FloatField() { value = constraint.Maximum };
+			var floatMin = new FloatField() { value = constraint.Minimum, isDelayed = true };
+			var floatMax = new FloatField() { value = constraint.Maximum, isDelayed = true };
 
 			container.AddToClassList(_ussRowClass);
 			container.AddToClassList(_ussConstraintClass);
@@ -505,7 +503,7 @@ namespace PiRhoSoft.CompositionEditor
 			var container = new VisualElement();
 			var proxy = new ListProxy<string>(constraint.Values, (value, index) =>
 			{
-				var field = new TextField() { value = value };
+				var field = new TextField() { value = value, isDelayed = true };
 
 				ElementHelper.Bind(field, field, _owner, () =>
 				{
@@ -593,7 +591,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			container.Add(dropdown);
 
-			if (HasConstraint(false, constraint.ItemConstraint, constraint.ItemType))
+			if (constraint.ItemConstraint != null)
 			{
 				var constraintElement = new VisualElement();
 				SetupConstraint(container, false, constraint.ItemConstraint, constraint.ItemType, false);
