@@ -3213,9 +3213,34 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2643244533930277764, guid: 6f1753990295b7d43952ed76b4723a1d,
         type: 3}
+      propertyPath: Variables._variablesData.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277764, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
       propertyPath: Camera
       value: 
       objectReference: {fileID: 663784546}
+    - target: {fileID: 2643244533930277764, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: _schema
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277764, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._version
+      value: 33
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277764, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[0]
+      value: AQAJSW52ZW50b3J5EwAAAAAAAAA=
+      objectReference: {fileID: 0}
+    - target: {fileID: 2643244533930277764, guid: 6f1753990295b7d43952ed76b4723a1d,
+        type: 3}
+      propertyPath: Variables._variablesData.Array.data[1]
+      value: AQAFTW9uZXkCAAAAAAAAAA==
+      objectReference: {fileID: 0}
     - target: {fileID: 2643244533930277775, guid: 6f1753990295b7d43952ed76b4723a1d,
         type: 3}
       propertyPath: Graph._outputs.Array.data[0].Name

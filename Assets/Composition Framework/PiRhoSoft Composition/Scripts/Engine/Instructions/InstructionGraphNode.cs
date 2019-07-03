@@ -661,53 +661,17 @@ namespace PiRhoSoft.CompositionEngine
 
 		public class NodeData
 		{
-			public const float Width = 256.0f;
-			public const float HeaderHeight = 22.0f;
-			public const float LineHeight = 18.0f;
-			public const float FooterHeight = 2.0f;
-
-			private float _innerHeight = 0.0f;
-
 			public InstructionGraphNode Node { get; private set; }
-			public Rect Bounds { get; private set; }
 			public List<ConnectionData> Connections = new List<ConnectionData>();
-
-			public Vector2 Position
-			{
-				get
-				{
-					return Node.GraphPosition;
-				}
-				set
-				{
-					Node.GraphPosition = value;
-					UpdateBounds();
-				}
-			}
-
-			public float InnerHeight
-			{
-				get
-				{
-					return _innerHeight;
-				}
-				set
-				{
-					_innerHeight = value;
-					UpdateBounds();
-				}
-			}
 
 			public NodeData(InstructionGraphNode node)
 			{
 				Node = node;
-				UpdateBounds();
 			}
 
 			public void ClearConnections()
 			{
 				Connections.Clear();
-				UpdateBounds();
 			}
 
 			public void AddConnections(object obj)
@@ -741,24 +705,16 @@ namespace PiRhoSoft.CompositionEngine
 			public void AddConnection(string name, InstructionGraphNode to)
 			{
 				Connections.Add(new ConnectionData(name, null, -1, Node, to, Connections.Count));
-				UpdateBounds();
 			}
 
 			public void AddConnection(string name, string key, InstructionGraphNode to)
 			{
 				Connections.Add(new ConnectionData(name, key, -1, Node, to, Connections.Count));
-				UpdateBounds();
 			}
 
 			public void AddConnection(string name, int index, InstructionGraphNode to)
 			{
 				Connections.Add(new ConnectionData(name, null, index, Node, to, Connections.Count));
-				UpdateBounds();
-			}
-
-			private void UpdateBounds()
-			{
-				Bounds = new Rect(Position, new Vector2(Width, Connections.Count * LineHeight + HeaderHeight + FooterHeight + _innerHeight));
 			}
 		}
 
@@ -767,10 +723,11 @@ namespace PiRhoSoft.CompositionEngine
 			public string Field { get; private set; }
 			public string FieldKey { get; private set; }
 			public int FieldIndex { get; private set; }
+			public int FromIndex { get; private set; }
 
 			public InstructionGraphNode From { get; private set; }
-			public int FromIndex { get; private set; }
 			public InstructionGraphNode To { get; private set; }
+			public NodeData Source { get; private set; }
 			public NodeData Target { get; private set; }
 
 			public string Name { get; private set; }

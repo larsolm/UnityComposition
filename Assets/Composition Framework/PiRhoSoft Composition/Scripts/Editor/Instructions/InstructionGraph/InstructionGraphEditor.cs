@@ -72,7 +72,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		public static InstructionGraphNode CreateNode(InstructionGraph graph, Type type, string name, Vector2 position)
 		{
-			using (new UndoScope(graph, true))
+			using (new ChangeScope(graph))
 			{
 				var node = CreateInstance(type) as InstructionGraphNode;
 				node.hideFlags = HideFlags.HideInHierarchy;
@@ -82,7 +82,7 @@ namespace PiRhoSoft.CompositionEditor
 
 				graph.Nodes.Add(node);
 
-				Undo.RegisterCreatedObjectUndo(node, "Create Node");
+				Undo.RegisterCreatedObjectUndo(node, $"Create Node: {name}");
 				AssetDatabase.AddObjectToAsset(node, graph);
 				AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(graph));
 				return node;
@@ -99,18 +99,18 @@ namespace PiRhoSoft.CompositionEditor
 
 		public static void AddClonedNodes(InstructionGraph graph, IList<InstructionGraphNode.NodeData> nodes, Vector2 position)
 		{
-			var bounds = nodes[0].Bounds;
+			var minimum = position;
 
 			foreach (var node in nodes)
-				bounds = RectHelper.Union(bounds, node.Bounds);
+				minimum = Vector2.Min(minimum, node.Node.GraphPosition);
 
-			var offset = new Vector2(position.x - bounds.xMin, position.y - bounds.yMin);
+			var offset = position - minimum;
 
-			using (new UndoScope(graph, true))
+			using (new ChangeScope(graph))
 			{
 				foreach (var node in nodes)
 				{
-					node.Position += offset;
+					node.Node.GraphPosition += offset;
 					graph.Nodes.Add(node.Node);
 					Undo.RegisterCreatedObjectUndo(node.Node, "Paste Node");
 					AssetDatabase.AddObjectToAsset(node.Node, graph);
@@ -125,7 +125,7 @@ namespace PiRhoSoft.CompositionEditor
 			foreach (var connection in connections)
 				ChangeConnectionTarget(graph, connection, null, connection.From == start);
 
-			using (new UndoScope(graph, true))
+			using (new ChangeScope(graph))
 			{
 				graph.Nodes.Remove(node);
 				Undo.DestroyObjectImmediate(node);
@@ -133,23 +133,16 @@ namespace PiRhoSoft.CompositionEditor
 			}
 		}
 
-		public static void SetNodePosition(InstructionGraph graph, InstructionGraphNode.NodeData node, Vector2 position, bool isStart)
+		public static void SetNodePosition(InstructionGraphNode node, Vector2 position)
 		{
-			using (new UndoScope(isStart ? graph as ScriptableObject : node.Node, true))
-			{
-				node.Position = position;
-
-				if (isStart)
-					graph.StartPosition = position;
-			}
+			using (new ChangeScope(node))
+				node.GraphPosition = position;
 		}
 
 		public static void ChangeConnectionTarget(InstructionGraph graph, InstructionGraphNode.ConnectionData connection, InstructionGraphNode.NodeData target, bool isStart)
 		{
-			using (new UndoScope(isStart ? graph as ScriptableObject : connection.From, true)) // From is only node that changes in this method - the rest will be rebuild automatically
-			{
+			using (new ChangeScope(isStart ? graph as ScriptableObject : connection.From)) // From is only node that changes in this method - the rest will be rebuild automatically
 				connection.ChangeTarget(target);
-			}
 		}
 
 		#endregion

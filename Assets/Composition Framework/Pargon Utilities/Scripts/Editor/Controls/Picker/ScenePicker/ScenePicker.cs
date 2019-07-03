@@ -12,18 +12,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class ScenePicker : BasePickerButton<SceneAsset>
 	{
-		private class Picker : BasePicker<SceneAsset>
-		{
-			public void Setup(SceneAsset value)
-			{
-				var assets = AssetHelper.GetAssetList(typeof(SceneAsset));
-				CreateTree(assets.Type.Name, assets.Paths, assets.Assets.Cast<SceneAsset>().ToList(), value, asset =>
-				{
-					var icon = AssetPreview.GetMiniThumbnail(asset);
-					return icon == null && asset ? AssetPreview.GetMiniTypeThumbnail(asset.GetType()) : icon;
-				});
-			}
-		}
+		private class SceneProvider : PickerProvider<SceneAsset> { }
 
 		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Picker/ScenePicker/ScenePicker.uss";
 
@@ -51,10 +40,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
 
-			var picker = new Picker();
-			picker.Setup(value);
-			picker.OnSelected += selectedObject => ElementHelper.SendChangeEvent(this, value, selectedObject);
-
 			_load = new Image { image = Icon.Load.Content, tintColor = Color.black };
 			_load.AddManipulator(new Clickable(Load));
 
@@ -63,8 +48,17 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			_buildWarning = new MessageBox(MessageBoxType.Info, "This scene is not in the build settings. Add it now?");
 			_buildWarning.Add(new Button(AddToBuild) { text = "Add" });
+	
+			var assets = AssetHelper.GetAssetList(typeof(SceneAsset));
+			var provider = ScriptableObject.CreateInstance<SceneProvider>();
+			provider.Setup(assets.Type.Name, assets.Paths.Prepend("None").ToList(), assets.Assets.Prepend(null).Cast<SceneAsset>().ToList(), asset =>
+			{
+				var icon = AssetPreview.GetMiniThumbnail(asset);
+				return icon == null && asset ? AssetPreview.GetMiniTypeThumbnail(asset.GetType()) : icon;
+			},
+			selectedObject => ElementHelper.SendChangeEvent(this, value, selectedObject));
 
-			Setup(picker, value);
+			Setup(provider, value);
 
 			Add(_load);
 			Add(_create);

@@ -164,26 +164,12 @@ namespace PiRhoSoft.CompositionEditor
 			return window;
 		}
 
-		[MenuItem("Window/PiRho Soft/Instruction Graph")]
+		//[MenuItem("Window/PiRho Soft/Instruction Graph")]
 		public static InstructionGraphWindow ShowNewWindow()
 		{
 			var window = CreateInstance<InstructionGraphWindow>();
 			window.Show();
 			return window;
-		}
-
-		[OnOpenAsset]
-		static bool OpenAsset(int instanceID, int line)
-		{
-			var graph = EditorUtility.InstanceIDToObject(instanceID) as InstructionGraph;
-
-			if (graph != null)
-			{
-				ShowWindowForGraph(graph);
-				return true;
-			}
-
-			return false;
 		}
 
 		#endregion
@@ -263,8 +249,8 @@ namespace PiRhoSoft.CompositionEditor
 			public override Color NodeColor => Colors.Start;
 			public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration) { yield break; }
 
-			public override void GetConnections(NodeData data) => Graph.GetConnections(data);
-			public override void SetConnection(ConnectionData connection, InstructionGraphNode target) => Graph.SetConnection(connection, target);
+			//public override void GetConnections(NodeData data) => Graph.GetConnections(data);
+			//public override void SetConnection(ConnectionData connection, InstructionGraphNode target) => Graph.SetConnection(connection, target);
 		}
 
 		public void SetGraph(InstructionGraph graph)
@@ -297,7 +283,6 @@ namespace PiRhoSoft.CompositionEditor
 
 				_start = CreateInstance<StartNode>();
 				_start.Name = "Start";
-				_start.GraphPosition = _graph.StartPosition;
 				_start.Graph = _graph;
 
 				AddNode(_start);
@@ -371,12 +356,12 @@ namespace PiRhoSoft.CompositionEditor
 
 		private Rect TakeHeaderHeight(ref Rect rect)
 		{
-			return RectHelper.TakeHeight(ref rect, InstructionGraphNode.NodeData.HeaderHeight);
+			return RectHelper.TakeHeight(ref rect, 0);// InstructionGraphNode.NodeData.HeaderHeight);
 		}
 
 		private Rect GetInputBounds(InstructionGraphNode.NodeData node)
 		{
-			var rect = node.Bounds;
+			var rect = new Rect();
 			var header = TakeHeaderHeight(ref rect);
 			header.width = header.height;
 
@@ -386,21 +371,21 @@ namespace PiRhoSoft.CompositionEditor
 		private Rect GetOutputBounds(InstructionGraphNode.ConnectionData connection)
 		{
 			var node = GetNodeData(connection.From);
-			var rect = node.Bounds;
+			var rect = new Rect();
 
 			TakeHeaderHeight(ref rect);
 			
-			rect.x = rect.xMax - InstructionGraphNode.NodeData.LineHeight;
-			rect.y += connection.FromIndex * InstructionGraphNode.NodeData.LineHeight;
-			rect.width = InstructionGraphNode.NodeData.LineHeight;
-			rect.height = InstructionGraphNode.NodeData.LineHeight;
+			//rect.x = rect.xMax - InstructionGraphNode.NodeData.LineHeight;
+			//rect.y += connection.FromIndex * InstructionGraphNode.NodeData.LineHeight;
+			//rect.width = InstructionGraphNode.NodeData.LineHeight;
+			//rect.height = InstructionGraphNode.NodeData.LineHeight;
 
 			return rect;
 		}
 
 		private Rect GetInteractionBounds(InstructionGraphNode.NodeData node, int index)
 		{
-			var rect = node.Bounds;
+			var rect = new Rect();
 			var header = TakeHeaderHeight(ref rect);
 			var offset = (header.height * (index + 1));
 
@@ -624,9 +609,9 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (_graph != null)
 			{
-				var data = GetNodeData(node);
-				GoTo(data.Bounds.center, 1.0f); // go to zoom 1 first so ViewArea is the right size
-				Pan(new Vector2(0.0f, 0.0f));
+				//var data = GetNodeData(node);
+				//GoTo(data.Bounds.center, 1.0f); // go to zoom 1 first so ViewArea is the right size
+				//Pan(new Vector2(0.0f, 0.0f));
 			}
 		}
 
@@ -646,10 +631,10 @@ namespace PiRhoSoft.CompositionEditor
 
 				foreach (var node in nodes)
 				{
-					left = Math.Min(left, node.Bounds.xMin);
-					right = Math.Max(right, node.Bounds.xMax);
-					top = Math.Min(top, node.Bounds.yMin);
-					bottom = Math.Max(bottom, node.Bounds.yMax);
+					//left = Math.Min(left, node.Bounds.xMin);
+					//right = Math.Max(right, node.Bounds.xMax);
+					//top = Math.Min(top, node.Bounds.yMin);
+					//bottom = Math.Max(bottom, node.Bounds.yMax);
 				}
 
 				ShowAll(Rect.MinMaxRect(left, top, right, bottom), new RectOffset(10, 10, (int)_toolbarHeight + 10, 10));
@@ -664,8 +649,8 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					var node = _nodes[i];
 
-					if (node.Bounds.Contains(position))
-						return node;
+					//if (node.Bounds.Contains(position))
+					//	return node;
 				}
 			}
 
@@ -703,7 +688,7 @@ namespace PiRhoSoft.CompositionEditor
 			var style = new GUIStyle();
 			style.padding.left = 5;
 			style.clipping = TextClipping.Clip;
-			style.fixedWidth = InstructionGraphNode.NodeData.Width - 3 * RectHelper.IconWidth;
+			//style.fixedWidth = InstructionGraphNode.NodeData.Width - 3 * RectHelper.IconWidth;
 			style.alignment = TextAnchor.MiddleLeft;
 			style.normal.textColor = new Color(0.8f, 0.8f, 0.8f, 1.0f);
 			return style;
@@ -714,7 +699,7 @@ namespace PiRhoSoft.CompositionEditor
 			var style = new GUIStyle();
 			style.padding.left = 5;
 			style.clipping = TextClipping.Clip;
-			style.fixedWidth = InstructionGraphNode.NodeData.Width;
+			//style.fixedWidth = InstructionGraphNode.NodeData.Width;
 			style.alignment = TextAnchor.UpperLeft;
 			style.normal.textColor = new Color(0.7f, 0.7f, 0.7f, 1.0f);
 			style.wordWrap = true;
@@ -909,8 +894,8 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			foreach (var node in _nodes)
 			{
-				if (rect.Overlaps(node.Bounds))
-					DrawNode(node);
+				//if (rect.Overlaps(node.Bounds))
+				//	DrawNode(node);
 			}
 		}
 
@@ -931,10 +916,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var isComment = node.Node is CommentNode;
 
-			if (isComment)
-				node.InnerHeight = _commentStyle.Content.CalcHeight(new GUIContent((node.Node as CommentNode).Comment), InstructionGraphNode.NodeData.Width);
-
-			var rect = node.Bounds;
+			var rect = new Rect();
 
 			var outlineRect = rect;
 			var headerRect = TakeHeaderHeight(ref rect);
@@ -985,10 +967,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			if (isComment)
 			{
-				var commentRect = RectHelper.Inset(rect, 0.0f, 0.0f, 0.0f, InstructionGraphNode.NodeData.FooterHeight);
-				var commentNode = node.Node as CommentNode;
-
-				EditorGUI.LabelField(commentRect, commentNode.Comment, _commentStyle.Content);
+				//EditorGUI.LabelField(commentRect, commentNode.Comment, _commentStyle.Content);
 			}
 			else
 			{
@@ -996,12 +975,12 @@ namespace PiRhoSoft.CompositionEditor
 				{
 					var outputRect = GetOutputBounds(connection);
 					var outputIconRect = RectHelper.Adjust(outputRect, _outputButton.Content.image.width, _outputButton.Content.image.height, RectHorizontalAlignment.Center, RectVerticalAlignment.Middle);
-					var outputLabelRect = RectHelper.TakeHeight(ref rect, InstructionGraphNode.NodeData.LineHeight);
+					//var outputLabelRect = RectHelper.TakeHeight(ref rect, InstructionGraphNode.NodeData.LineHeight);
 
 					// tooltip positioning is pretty messed up with zoom so not showing them for now
 					var label = new GUIContent(ObjectNames.NicifyVariableName(connection.Name));//, Label.GetTooltip(connection.From.GetType(), connection.Field));
 
-					EditorGUI.LabelField(outputLabelRect, label, _connectionStyle.Content);
+					//EditorGUI.LabelField(outputLabelRect, label, _connectionStyle.Content);
 					EditorGUI.LabelField(outputIconRect, _outputButton.Content, GUIStyle.none);
 
 					if (connection == _hoveredOutput)
@@ -1263,22 +1242,6 @@ namespace PiRhoSoft.CompositionEditor
 				.AddAction(() => Zoom(-ScrollWheelZoomAmount, ViewArea.center));
 
 			input.Create<InputManager.KeyboardTrigger>()
-				.SetEvent(EventType.KeyDown, KeyCode.LeftArrow)
-				.AddAction(MoveLeft);
-
-			input.Create<InputManager.KeyboardTrigger>()
-				.SetEvent(EventType.KeyDown, KeyCode.RightArrow)
-				.AddAction(MoveRight);
-
-			input.Create<InputManager.KeyboardTrigger>()
-				.SetEvent(EventType.KeyDown, KeyCode.UpArrow)
-				.AddAction(MoveUp);
-
-			input.Create<InputManager.KeyboardTrigger>()
-				.SetEvent(EventType.KeyDown, KeyCode.DownArrow)
-				.AddAction(MoveDown);
-
-			input.Create<InputManager.KeyboardTrigger>()
 				.SetEvent(EventType.KeyDown, KeyCode.X, control: true)
 				.AddAction(CutNodes);
 
@@ -1470,9 +1433,6 @@ namespace PiRhoSoft.CompositionEditor
 					if (_hoveredNode != null && !_selectedNodes.Contains(_hoveredNode))
 						SetSelection(_hoveredNode);
 
-					if (_selectedNodes.Count > 0)
-						_mouseDragOffset = Event.current.mousePosition - _selectedNodes[0].Position;
-
 					break;
 				}
 				case MouseState.Connect:
@@ -1537,28 +1497,11 @@ namespace PiRhoSoft.CompositionEditor
 					_mouseDragBounds.Set(left, top, right - left, bottom - top);
 					_pendingNodes.Clear();
 
-					foreach (var node in _nodes)
-					{
-						if (_mouseDragBounds.Overlaps(node.Bounds))
-							_pendingNodes.Add(node);
-					}
 
 					break;
 				}
 				case MouseState.Move:
 				{
-					var origin = _selectedNodes[0].Position;
-					var offset = Event.current.mousePosition - _mouseDragOffset;
-
-					foreach (var node in _selectedNodes)
-					{
-						var position = (node.Position - origin) + offset;
-
-						position.x = _snapToGrid.Value ? MathHelper.Snap(position.x, _gridSize * _snapAmount.Value) : position.x;
-						position.y = _snapToGrid.Value ? MathHelper.Snap(position.y, _gridSize * _snapAmount.Value) : position.y;
-
-						InstructionGraphEditor.SetNodePosition(_graph, node, position, node.Node == _start);
-					}
 
 					break;
 				}
@@ -1683,53 +1626,6 @@ namespace PiRhoSoft.CompositionEditor
 				SetConnection(connection, null);
 
 			selected.Clear();
-			Repaint();
-		}
-
-		#endregion
-
-		#region Keyboard Movement
-
-		void MoveLeft()
-		{
-			if (_selectedNodes.Count > 0)
-				MoveSelectedNodes(new Vector2(-_snapAmount.Value, 0.0f));
-			else
-				Pan(new Vector2(-_gridSize * 5.0f, 0.0f));
-		}
-
-		void MoveRight()
-		{
-			if (_selectedNodes.Count > 0)
-				MoveSelectedNodes(new Vector2(_snapAmount.Value, 0.0f));
-			else
-				Pan(new Vector2(_gridSize * 5.0f, 0.0f));
-		}
-
-		void MoveUp()
-		{
-			if (_selectedNodes.Count > 0)
-				MoveSelectedNodes(new Vector2(0.0f, -_snapAmount.Value));
-			else
-				Pan(new Vector2(0.0f, -_gridSize * 5.0f));
-		}
-
-		void MoveDown()
-		{
-			if (_selectedNodes.Count > 0)
-				MoveSelectedNodes(new Vector2(0.0f, _snapAmount.Value));
-			else
-				Pan(new Vector2(0.0f, _gridSize * 5.0f));
-		}
-
-		void MoveSelectedNodes(Vector2 amount)
-		{
-			foreach (var node in _selectedNodes)
-			{
-				var position = node.Position + new Vector2(_gridSize * amount.x, _gridSize * amount.y);
-				InstructionGraphEditor.SetNodePosition(_graph, node, position, node.Node == _start);
-			}
-
 			Repaint();
 		}
 

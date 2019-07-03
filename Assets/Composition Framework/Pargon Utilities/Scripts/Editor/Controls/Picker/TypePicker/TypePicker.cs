@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,19 +9,15 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class TypePicker : BasePickerButton<string>
 	{
-		private class Picker : BasePicker<Type>
-		{
-			public void Setup(Type type, bool showAbstract, Type initialType)
-			{
-				var types = TypeHelper.GetTypeList(type, showAbstract);
-				CreateTree(types.BaseType.Name, types.Paths, types.Types, initialType, iconType => AssetPreview.GetMiniTypeThumbnail(iconType));
-			}
-		}
+		private class TypeProvider : PickerProvider<Type> { }
 
 		private const string _invalidTypeWarning = "(PUCTPIT) Invalid type for TypePicker: the type '{0}' could not be found";
 
+		private readonly Action<Type> _onSelected;
+
 		private Type _type;
 
+		public TypePicker(Action<Type> onSelected) { _onSelected = onSelected; }
 		public TypePicker(SerializedProperty property) : base(property) { }
 		public TypePicker(Object owner, Func<string> getValue, Action<string> setValue) : base(owner, getValue, setValue) { }
 
@@ -36,11 +33,16 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			var valueName = value?.AssemblyQualifiedName;
 			var initialType = Type.GetType(valueName ?? string.Empty);
-			var picker = new Picker();
-			picker.Setup(_type, showAbstract, initialType);
-			picker.OnSelected += selectedValue => ElementHelper.SendChangeEvent(this, valueName, selectedValue?.AssemblyQualifiedName);
 
-			Setup(picker, valueName);
+			var types = TypeHelper.GetTypeList(_type, showAbstract);
+			var provider = ScriptableObject.CreateInstance<TypeProvider>();
+			provider.Setup(types.BaseType.Name, types.Paths.Prepend("None").ToList(), types.Types.Prepend(null).ToList(), iconType => AssetPreview.GetMiniTypeThumbnail(iconType), selectedValue =>
+			{
+				_onSelected?.Invoke(selectedValue);
+				ElementHelper.SendChangeEvent(this, valueName, selectedValue?.AssemblyQualifiedName);
+			});
+
+			Setup(provider, valueName);
 		}
 
 		public override string GetValueFromProperty(SerializedProperty property)

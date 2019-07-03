@@ -380,21 +380,5 @@ namespace PiRhoSoft.CompositionEngine
 #endif
 
 		#endregion
-
-		#region Editor Interface
-
-		[HideInInspector] public Vector2 StartPosition;
-
-		public virtual void GetConnections(InstructionGraphNode.NodeData data)
-		{
-			data.AddConnections(this);
-		}
-
-		public virtual void SetConnection(InstructionGraphNode.ConnectionData connection, InstructionGraphNode target)
-		{
-			connection.ApplyConnection(this, target);
-		}
-
-		#endregion
 	}
 }

@@ -193,7 +193,6 @@ namespace PiRhoSoft.UtilityEditor
 					var node = items[index];
 					var fullPath = rootPath + node.text;
 					var submenus = fullPath.Split('/');
-
 					var path = rootPath;
 					var child = root;
 

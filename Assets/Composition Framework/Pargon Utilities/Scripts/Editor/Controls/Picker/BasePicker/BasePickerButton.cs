@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
@@ -14,13 +15,17 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private const string _ussIconClass = "button-icon";
 		private const string _ussLabelClass = "button-label";
 
+		private readonly Func<ValueType> _getValue;
+		private readonly Action<ValueType> _setValue;
+
 		public ValueType Value { get; private set; }
 
 		private Image _icon;
 		private Label _label;
-
-		private Func<ValueType> _getValue;
-		private Action<ValueType> _setValue;
+		
+		public BasePickerButton()
+		{
+		}
 
 		public BasePickerButton(SerializedProperty property)
 		{
@@ -35,7 +40,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_setValue = setValue;
 		}
 
-		protected void Setup<PickerType>(BasePicker<PickerType> picker, ValueType value) where PickerType : class
+		protected void Setup<PickerType>(PickerProvider<PickerType> provider, ValueType value) where PickerType : class
 		{
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
 			AddToClassList(_ussBaseClass);
@@ -44,7 +49,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			var button = new Button();
 			button.AddToClassList(_ussButtonClass);
-			button.clickable.clicked += () => BasePickerWindow.Show(button.worldBound, picker);
+			button.clickable.clicked += () => SearchWindow.Open(new SearchWindowContext(GUIUtility.GUIToScreenPoint(new Vector2(button.worldBound.center.x, button.worldBound.yMax)), button.worldBound.width), provider);
 
 			_icon = new Image();
 			_icon.AddToClassList(_ussIconClass);

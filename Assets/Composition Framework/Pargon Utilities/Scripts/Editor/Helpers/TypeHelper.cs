@@ -94,7 +94,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public static List<Type> ListDerivedTypes(Type baseType, bool includeAbstract)
 		{
-			return TypeCache.GetTypesDerivedFrom(baseType.BaseType).Where(type => includeAbstract ? baseType.IsAssignableFrom(type) : IsCreatableAs(baseType, type)).ToList();
+			return TypeCache.GetTypesDerivedFrom(baseType.BaseType).Where(type => includeAbstract ? baseType.IsAssignableFrom(type) : !type.IsNestedPrivate && IsCreatableAs(baseType, type)).ToList();
 		}
 
 		public static List<Type> ListTypesWithAttribute<AttributeType>() where AttributeType : Attribute

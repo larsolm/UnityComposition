@@ -19,9 +19,18 @@ namespace PiRhoSoft.CompositionEngine
 
 		protected internal override void Read(BinaryReader reader, IList<Object> objects, short version)
 		{
-			HasRange = reader.ReadBoolean();
-			Minimum = reader.ReadInt32();
-			Maximum = reader.ReadInt32();
+			try
+			{
+				HasRange = reader.ReadBoolean();
+				Minimum = reader.ReadInt32();
+				Maximum = reader.ReadInt32();
+			}
+			catch
+			{
+				HasRange = false;
+				Minimum = 0;
+				Maximum = 100;
+			}
 		}
 
 		public override bool IsValid(VariableValue value)

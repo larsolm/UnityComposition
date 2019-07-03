@@ -1,0 +1,165 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-7864618529130971187
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7fc26ad2350ac454caf9577c6255fa6e, type: 3}
+  m_Name: PlayAnimationNode
+  m_EditorClassIdentifier: 
+  Name: PlayAnimationNode
+  GraphPosition: {x: 294, y: 25}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  AnimationPlayer:
+    _variable: 
+    _tokens: []
+  Animation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 0}
+  WaitForCompletion: 0
+--- !u!114 &-3193359020670735486
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: ConditionalNode
+  m_EditorClassIdentifier: 
+  Name: ConditionalNode
+  GraphPosition: {x: 104, y: 159}
+  IsBreakpoint: 0
+  OnTrue: {fileID: -7864618529130971187}
+  OnFalse: {fileID: 7297841759836811632}
+  Condition:
+    _statement: 
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 864204cda72169a4a8d5e021c47bc66f, type: 3}
+  m_Name: TestGraph
+  m_EditorClassIdentifier: 
+  ContextName: context
+  ContextDefinition:
+    _type: 0
+    _constraint: 
+    _objects: []
+    _tag: 
+    _initializer:
+      _statement: 
+    _isTypeLocked: 0
+    _isConstraintLocked: 0
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  _nodes:
+    _items:
+    - {fileID: -3193359020670735486}
+    - {fileID: -7864618529130971187}
+    - {fileID: 4073369922094782879}
+    - {fileID: 7297841759836811632}
+  Process: {fileID: -3193359020670735486}
+--- !u!114 &4073369922094782879
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: DestroyObjectNode
+  m_EditorClassIdentifier: 
+  Name: DestroyObjectNode
+  GraphPosition: {x: 355, y: 122}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: 
+    _tokens: []
+--- !u!114 &7297841759836811632
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5835094cfd54a3047b368ae62481718b, type: 3}
+  m_Name: TransformNode
+  m_EditorClassIdentifier: 
+  Name: TransformNode
+  GraphPosition: {x: 291, y: 292}
+  IsBreakpoint: 0
+  Next: {fileID: 4073369922094782879}
+  Transform:
+    _variable: 
+    _tokens: []
+  UseRelativePosition: 1
+  UseRelativeRotation: 1
+  UseRelativeScale: 1
+  TargetPosition:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetRotation:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 0, y: 0, z: 0}
+  TargetScale:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {x: 1, y: 1, z: 1}
+  AnimationMethod: 0
+  WaitForCompletion: 1
+  Duration:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  MoveSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  RotationSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1
+  ScaleSpeed:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 1

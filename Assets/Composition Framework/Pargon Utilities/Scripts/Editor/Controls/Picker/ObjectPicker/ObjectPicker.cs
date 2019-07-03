@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,30 +9,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class ObjectPicker : BasePickerButton<Object>
 	{
-		private class Picker : BasePicker<Object>
-		{
-			public void Setup(Type type, Object value)
-			{
-				if (typeof(Component).IsAssignableFrom(type) || typeof(GameObject) == type)
-				{
-					// TODO: build hierarchy of game objects
-					//CreateTree(type.Name, null, null, value, obj =>
-					//{
-					//	var icon = AssetPreview.GetMiniThumbnail(obj);
-					//	return icon == null && obj ? AssetPreview.GetMiniTypeThumbnail(obj.GetType()) : icon;
-					//});
-				}
-				else
-				{
-					var assets = AssetHelper.GetAssetList(type);
-					CreateTree(assets.Type.Name, assets.Paths, assets.Assets, value, asset =>
-					{
-						var icon = AssetPreview.GetMiniThumbnail(asset);
-						return icon == null && asset ? AssetPreview.GetMiniTypeThumbnail(asset.GetType()) : icon;
-					});
-				}
-			}
-		}
+		private class ObjectProvider : PickerProvider<Object> { }
 
 		private const string _invalidTypeWarning = "(PUCOPIT) Invalid type for ObjectPicker: the type '{0}' must be derived from UnityEngine.Object";
 
@@ -57,13 +35,25 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 			Type = type;
 
-			var picker = new Picker();
-			picker.Setup(Type, value);
-			picker.OnSelected += selectedObject => ElementHelper.SendChangeEvent(this, value, selectedObject);
-
 			_inspect = ElementHelper.CreateIconButton(Icon.Inspect.Content, "View this object in the inspector", Inspect);
 
-			Setup(picker, value);
+			//if (typeof(Component).IsAssignableFrom(type) || typeof(GameObject) == type)
+			//{
+			//	TODO: build hierarchy of game objects
+			//}
+			//else
+			//{
+			var assets = AssetHelper.GetAssetList(type);
+			var provider = ScriptableObject.CreateInstance<ObjectProvider>();
+			provider.Setup(assets.Type.Name, assets.Paths.Prepend("None").ToList(), assets.Assets.Prepend(null).ToList(), asset =>
+			{
+				var icon = AssetPreview.GetMiniThumbnail(asset);
+				return icon == null && asset ? AssetPreview.GetMiniTypeThumbnail(asset.GetType()) : icon;
+			},
+			selectedObject => ElementHelper.SendChangeEvent(this, value, selectedObject));
+			//}
+
+			Setup(provider, value);
 
 			Add(_inspect);
 		}
