@@ -108,8 +108,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		private const float _minimumWidth = 200.0f;
 
-		private static readonly Icon _windowIcon = Icon.BuiltIn("UnityEditor.LookDevView");
-
 		//private const float _toolbarHeight = 17.0f;
 		//private const float _toolbarPadding = 17.0f;
 		//private const float _promptHeight = 20.0f;
@@ -118,8 +116,7 @@ namespace PiRhoSoft.CompositionEditor
 		//private const string _expressionResultLog = "{0}: ({1}) {2}";
 		//private const string _missingWatchWarning = "(CWWMW) Unable to find variable '{0}' to watch";
 		//private const string _invalidWatchWarning = "(CWWIW) Unable to watch variable '{0}' of type '{1}' - only variable stores can be watched";
-		//
-
+		
 		//private static readonly Label _enableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Enable logging of instruction execution");
 		//private static readonly Label _disableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Disable logging of instruction execution");
 		//private static readonly Label _executeButton = new Label(Icon.Add, "", "Execute the expression");
@@ -135,7 +132,7 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			var window = CreateWindow<WatchWindow>("Watch Window");
 			window.minSize = new Vector2(_minimumWidth, window.minSize.y);
-			window.titleContent.image = _windowIcon.Content;
+			window.titleContent.image = Icon.View.Content;
 			window.rootVisualElement.Add(new WatchWindowElement());
 			window.Show();
 		}

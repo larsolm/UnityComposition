@@ -13,7 +13,6 @@ namespace PiRhoSoft.CompositionEditor
 		private static readonly Icon _windowIcon = Icon.Base64(_windowIconData);
 
 		private InstructionGraphViewEditor _editor;
-		private bool _isLocked = false;
 
 		[UnityEditor.MenuItem("Window/PiRho Soft/Instruction Graph")]
 		public static InstructionGraphViewWindow ShowNewWindow()
@@ -44,7 +43,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			foreach (var window in windows)
 			{
-				if (!window._isLocked)
+				if (!window._editor.IsLocked)
 				{
 					window._editor.SetGraph(graph);
 					return window;

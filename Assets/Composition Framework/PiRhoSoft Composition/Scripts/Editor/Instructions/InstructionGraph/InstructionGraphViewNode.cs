@@ -11,6 +11,7 @@ namespace PiRhoSoft.CompositionEditor
 		private const string _ussDeleteClass = "delete-button";
 
 		private static readonly Icon _deleteIcon = Icon.BuiltIn("d_LookDevClose");
+		private static readonly Icon _breakIcon = Icon.BuiltIn("Animation.Record");
 
 		public InstructionGraphNode.NodeData Data { get; private set; }
 		public InstructionGraphViewInputPort Input { get; private set; }
@@ -52,9 +53,9 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void CreateInput(InstructionGraphViewConnector nodeConnector)
 		{
-			Input = new InstructionGraphViewInputPort(this, nodeConnector);
+			Input = new InstructionGraphViewInputPort(this, nodeConnector) { tooltip = "Drag an output to here to make a connection" };
 
-			var deleteButton = new Image { image = _deleteIcon.Content };
+			var deleteButton = new Image { image = _deleteIcon.Content, tooltip = "Delete this node" };
 			deleteButton.AddToClassList(_ussDeleteClass);
 			deleteButton.AddManipulator(new Clickable(DeleteNode));
 
@@ -65,7 +66,7 @@ namespace PiRhoSoft.CompositionEditor
 		private void CreateOutputs(InstructionGraphViewConnector nodeConnector)
 		{
 			foreach (var connection in Data.Connections)
-				outputContainer.Add(new InstructionGraphViewOutputPort(this, connection, nodeConnector) { portName = connection.Name });
+				outputContainer.Add(new InstructionGraphViewOutputPort(this, connection, nodeConnector) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" });
 		}
 
 		private void DeleteNode()

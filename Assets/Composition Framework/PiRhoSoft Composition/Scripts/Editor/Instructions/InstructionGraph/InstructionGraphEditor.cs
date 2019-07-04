@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
-using PiRhoSoft.UtilityEditor;
 using System;
 using System.Collections.Generic;
 using System.Linq;

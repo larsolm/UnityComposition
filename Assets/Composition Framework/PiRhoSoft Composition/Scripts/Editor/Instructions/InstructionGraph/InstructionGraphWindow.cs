@@ -517,19 +517,6 @@ namespace PiRhoSoft.CompositionEditor
 			public GUIContent[] Names;
 		}
 
-		private void CreateViewMenu(ref GenericMenu menu, string prefix)
-		{
-			if (menu == null)
-				menu = new GenericMenu();
-
-			menu.AddItem(new GUIContent(prefix + "Go To Start _HOME"), false, GoToStart);
-			menu.AddItem(new GUIContent(prefix + "Zoom To Selection _TAB"), false, GoToSelection);
-			menu.AddItem(new GUIContent(prefix + "Show All _END"), false, ShowAll);
-			menu.AddSeparator(prefix);
-			menu.AddItem(new GUIContent(prefix + "Zoom In _PGUP"), false, ShowAll);
-			menu.AddItem(new GUIContent(prefix + "Zoom Out _PGDN"), false, ShowAll);
-		}
-
 		private void CreateNodeTree(ref SelectionTree tree, ref NodeList nodes)
 		{
 			if (tree == null)
@@ -555,6 +542,20 @@ namespace PiRhoSoft.CompositionEditor
 				menu = new GenericMenu();
 
 			menu.AddItem(new GUIContent("Create _SPACE"), false, () => _showCreateNode = true);
+		}
+
+
+		private void CreateViewMenu(ref GenericMenu menu, string prefix)
+		{
+			if (menu == null)
+				menu = new GenericMenu();
+
+			menu.AddItem(new GUIContent(prefix + "Go To Start _HOME"), false, GoToStart);
+			menu.AddItem(new GUIContent(prefix + "Zoom To Selection _TAB"), false, GoToSelection);
+			menu.AddItem(new GUIContent(prefix + "Show All _END"), false, ShowAll);
+			menu.AddSeparator(prefix);
+			menu.AddItem(new GUIContent(prefix + "Zoom In _PGUP"), false, ShowAll);
+			menu.AddItem(new GUIContent(prefix + "Zoom Out _PGDN"), false, ShowAll);
 		}
 
 		private void CreateEditMenu(ref GenericMenu menu)

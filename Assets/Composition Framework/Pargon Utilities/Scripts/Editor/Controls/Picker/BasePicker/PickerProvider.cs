@@ -22,9 +22,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_emptyIcon.Apply();
 		}
 
-		private void OnDestroy()
+		private void OnDisable()
 		{
-			Destroy(_emptyIcon);
+			DestroyImmediate(_emptyIcon);
 		}
 
 		public void Setup(string title, List<string> paths, List<ValueType> items, Func<ValueType, Texture> getIcon, Action<ValueType> onSelected)
