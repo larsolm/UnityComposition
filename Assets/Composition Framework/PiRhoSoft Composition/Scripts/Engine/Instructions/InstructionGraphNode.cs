@@ -647,12 +647,13 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _missingIndexError = "(CCNMI) Failed to set target: index {0} is out of range for instruction graph node {1}";
 		private const string _missingFieldError = "(CCNMF) Failed to set target: unable to find field {0} for instruction graph node {1}";
 
+		[HideInInspector] public InstructionGraph Graph;
 		[HideInInspector] public Vector2 GraphPosition;
 		[HideInInspector] public bool IsBreakpoint = false;
 
 		public virtual Color NodeColor => Colors.Default;
 
-		public AutocompleteSource AutocompleteSource => new InstructionGraphNodeAutocompleteSource();
+		public PargonUtilities.Engine.AutocompleteSource AutocompleteSource => new InstructionAutocomplete(Graph); // TODO: make this a member
 
 		private void UpdateName()
 		{

@@ -244,8 +244,6 @@ namespace PiRhoSoft.CompositionEditor
 
 		private class StartNode : InstructionGraphNode
 		{
-			public InstructionGraph Graph;
-
 			public override Color NodeColor => Colors.Start;
 			public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration) { yield break; }
 

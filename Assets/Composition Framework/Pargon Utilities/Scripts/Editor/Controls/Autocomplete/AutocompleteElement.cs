@@ -13,7 +13,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private AutocompleteSource _source;
 		private TextField _text;
-		private AutocompletePopup _popup;
+		//private AutocompletePopup _popup;
 		private bool _isOpen;
 
 		private Func<string> _getValue;
@@ -36,14 +36,13 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			_source = source;
 			_text = new TextField();
-			_popup = new AutocompletePopup();
+			//_popup = new AutocompletePopup(source, () => value);
 
 			SetupEvents(_text);
 
 			Add(_text);
 
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
-			_popup.Setup(source);
 		}
 
 		#region Bindings
@@ -118,7 +117,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		private void Close()
 		{
 			_isOpen = false;
-			_popup.Hide();
+			//_popup.Hide();
 		}
 
 		private void Toggle()
@@ -131,24 +130,24 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private void Next()
 		{
-			_popup.Next();
+			//_popup.Next();
 		}
 
 		private void Previous()
 		{
-			_popup.Previous();
+			//_popup.Previous();
 		}
 
 		private void Filter(string value)
 		{
-			_popup.Filter(value);
+			//_popup.Filter(value);
 		}
 
 		private void Select()
 		{
 			if (_isOpen)
 			{
-				_text.value = _popup.Select();
+				//_text.value = _popup.Select();
 				MoveToEnd();
 				Close();
 			}

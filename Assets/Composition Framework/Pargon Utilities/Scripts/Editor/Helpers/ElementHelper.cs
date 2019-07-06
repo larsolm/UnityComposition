@@ -345,5 +345,32 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		}
 
 		#endregion
+		
+		public static VisualElement GetRoot(VisualElement element)
+		{
+			while (element.parent != null)
+				element = element.parent;
+
+			return element;
+		}
+
+		public static EditorWindow GetWindow(VisualElement element)
+		{
+			// I don't think there's a built in way to do this - Panel has ownerObject but it is internal and not
+			// exposed in IPanel
+
+			var elementRoot = GetRoot(element);
+			var windows = Resources.FindObjectsOfTypeAll<EditorWindow>();
+
+			foreach (var window in windows)
+			{
+				var windowRoot = GetRoot(window.rootVisualElement);
+
+				if (windowRoot == elementRoot)
+					return window;
+			}
+
+			return null;
+		}
 	}
 }
