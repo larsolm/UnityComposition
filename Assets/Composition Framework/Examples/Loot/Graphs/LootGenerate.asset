@@ -13,15 +13,14 @@ MonoBehaviour:
   m_Name: AutocompleteNode
   m_EditorClassIdentifier: 
   Name: AutocompleteNode
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2265.7239, y: -222.31862}
   IsBreakpoint: 0
   Variable:
-    _variable: local.something
+    _variable: aeust
     _tokens:
     - Type: 0
-      Text: local
-    - Type: 0
-      Text: something
+      Text: aeust
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,6 +128,7 @@ MonoBehaviour:
   m_Name: Get Equipment Position
   m_EditorClassIdentifier: 
   Name: Get Equipment Position
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1984, y: 204.8}
   IsBreakpoint: 0
   Next: {fileID: 114896142326948910}
@@ -147,6 +147,7 @@ MonoBehaviour:
   m_Name: Set Item
   m_EditorClassIdentifier: 
   Name: Set Item
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2048, y: 76.8}
   IsBreakpoint: 0
   Next: {fileID: 114910943218646728}
@@ -169,6 +170,7 @@ MonoBehaviour:
   m_Name: Determine Gold
   m_EditorClassIdentifier: 
   Name: Determine Gold
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 704, y: -243.2}
   IsBreakpoint: 0
   Next: {fileID: 114560157391118470}
@@ -187,6 +189,7 @@ MonoBehaviour:
   m_Name: Set Equipment
   m_EditorClassIdentifier: 
   Name: Set Equipment
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2112, y: 358.4}
   IsBreakpoint: 0
   Next: {fileID: 114836211941917824}
@@ -209,6 +212,7 @@ MonoBehaviour:
   m_Name: Do Equipment
   m_EditorClassIdentifier: 
   Name: Do Equipment
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1024, y: 217.6}
   IsBreakpoint: 0
   OnTrue: {fileID: 114338601728294602}
@@ -228,6 +232,7 @@ MonoBehaviour:
   m_Name: Get Item Position
   m_EditorClassIdentifier: 
   Name: Get Item Position
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1920, y: -76.8}
   IsBreakpoint: 0
   Next: {fileID: 114762631814685518}
@@ -246,6 +251,7 @@ MonoBehaviour:
   m_Name: Determine Equipment
   m_EditorClassIdentifier: 
   Name: Determine Equipment
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1344, y: 230.40001}
   IsBreakpoint: 0
   Next: {fileID: 114710828944794622}
@@ -276,6 +282,7 @@ MonoBehaviour:
   m_Name: Bind Equipment
   m_EditorClassIdentifier: 
   Name: Bind Equipment
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2560, y: 358.4}
   IsBreakpoint: 0
   Next: {fileID: 0}
@@ -306,6 +313,7 @@ MonoBehaviour:
   m_Name: Get Gold Position
   m_EditorClassIdentifier: 
   Name: Get Gold Position
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1344, y: -320}
   IsBreakpoint: 0
   Next: {fileID: 114636547086941846}
@@ -324,6 +332,7 @@ MonoBehaviour:
   m_Name: Has Item
   m_EditorClassIdentifier: 
   Name: Has Item
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1600, y: -12.8}
   IsBreakpoint: 0
   OnTrue: {fileID: 114297068670409640}
@@ -343,6 +352,7 @@ MonoBehaviour:
   m_Name: Do Item
   m_EditorClassIdentifier: 
   Name: Do Item
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 960, y: -12.8}
   IsBreakpoint: 0
   OnTrue: {fileID: 114852731693598762}
@@ -362,6 +372,7 @@ MonoBehaviour:
   m_Name: Sequence
   m_EditorClassIdentifier: 
   Name: Sequence
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 640, y: -12.8}
   IsBreakpoint: 0
   Sequence:
@@ -382,6 +393,7 @@ MonoBehaviour:
   m_Name: Do Gold
   m_EditorClassIdentifier: 
   Name: Do Gold
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1024, y: -256}
   IsBreakpoint: 0
   OnTrue: {fileID: 114440950479316254}
@@ -401,6 +413,7 @@ MonoBehaviour:
   m_Name: Create Gold
   m_EditorClassIdentifier: 
   Name: Create Gold
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1408, y: -243.2}
   IsBreakpoint: 0
   Next: {fileID: 114705325450561042}
@@ -463,6 +476,7 @@ MonoBehaviour:
   m_Name: Set Gold Amount
   m_EditorClassIdentifier: 
   Name: Set Gold Amount
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1472, y: -166.40001}
   IsBreakpoint: 0
   Next: {fileID: 0}
@@ -481,6 +495,7 @@ MonoBehaviour:
   m_Name: Conditional
   m_EditorClassIdentifier: 
   Name: Conditional
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1664, y: 217.6}
   IsBreakpoint: 0
   OnTrue: {fileID: 114133470515214848}
@@ -500,6 +515,7 @@ MonoBehaviour:
   m_Name: Determine Equipment
   m_EditorClassIdentifier: 
   Name: Determine Equipment
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 704, y: 230.40001}
   IsBreakpoint: 0
   Next: {fileID: 114262777640503146}
@@ -519,6 +535,7 @@ MonoBehaviour:
   m_Name: Create Item
   m_EditorClassIdentifier: 
   Name: Create Item
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1984, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114186036022638416}
@@ -581,6 +598,7 @@ MonoBehaviour:
   m_Name: Equipment Branch
   m_EditorClassIdentifier: 
   Name: Equipment Branch
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2432, y: 192}
   IsBreakpoint: 0
   Switch:
@@ -604,6 +622,7 @@ MonoBehaviour:
   m_Name: Determine Item
   m_EditorClassIdentifier: 
   Name: Determine Item
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 1280, y: 0}
   IsBreakpoint: 0
   Next: {fileID: 114442783407271386}
@@ -624,6 +643,7 @@ MonoBehaviour:
   m_Name: Create Equipment
   m_EditorClassIdentifier: 
   Name: Create Equipment
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2048, y: 281.6}
   IsBreakpoint: 0
   Next: {fileID: 114252577732586532}
@@ -686,6 +706,7 @@ MonoBehaviour:
   m_Name: Bind Item
   m_EditorClassIdentifier: 
   Name: Bind Item
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2368, y: -0}
   IsBreakpoint: 0
   Next: {fileID: 0}
@@ -720,6 +741,7 @@ MonoBehaviour:
   m_Name: Setup Weapon
   m_EditorClassIdentifier: 
   Name: Setup Weapon
+  Graph: {fileID: 11400000}
   GraphPosition: {x: 2496, y: 281.6}
   IsBreakpoint: 0
   Next: {fileID: 114359033018892398}

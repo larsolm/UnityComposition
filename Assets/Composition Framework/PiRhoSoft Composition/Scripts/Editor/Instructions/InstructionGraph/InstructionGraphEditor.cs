@@ -43,6 +43,16 @@ namespace PiRhoSoft.CompositionEditor
 				.Where(node => node != null)
 				.ToList();
 
+			foreach (var asset in assets)
+			{
+				if (asset is InstructionGraphNode node && !graph.Nodes.Contains(node))
+				{
+					graph.Nodes.Add(node);
+					Debug.LogWarningFormat(graph, "Syncing nodes for InstructionGraph {0}: added the node {1} that was an asset but was not contained in the list", graph.name, node.Name);
+					EditorUtility.SetDirty(graph);
+				}
+			}
+
 			for (var i = 0; i < graph.Nodes.Count; i++)
 			{
 				if (!assets.Contains(graph.Nodes[i]))
@@ -52,15 +62,10 @@ namespace PiRhoSoft.CompositionEditor
 					graph.Nodes.RemoveAt(i--);
 					EditorUtility.SetDirty(graph);
 				}
-			}
-
-			foreach (var asset in assets)
-			{
-				if (asset is InstructionGraphNode node && !graph.Nodes.Contains(node))
+				else
 				{
-					graph.Nodes.Add(node);
-					Debug.LogWarningFormat(graph, "Syncing nodes for InstructionGraph {0}: added the node {1} that was an asset but was not contained in the list", graph.name, node.Name);
-					EditorUtility.SetDirty(graph);
+					// temporary so all old nodes have Graph assigned
+					graph.Nodes[i].Graph = graph;
 				}
 			}
 		}
@@ -78,6 +83,7 @@ namespace PiRhoSoft.CompositionEditor
 				node.hideFlags = HideFlags.HideInHierarchy;
 				node.name = name;
 				node.Name = name;
+				node.Graph = graph;
 				node.GraphPosition = position;
 
 				graph.Nodes.Add(node);
@@ -110,6 +116,7 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				foreach (var node in nodes)
 				{
+					node.Node.Graph = graph;
 					node.Position += offset;
 					graph.Nodes.Add(node.Node);
 					Undo.RegisterCreatedObjectUndo(node.Node, "Paste Node");
