@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.CompositionEngine;
 using PiRhoSoft.PargonUtilities.Editor;
+using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -71,6 +72,20 @@ namespace PiRhoSoft.CompositionEditor
 
 		private void DeleteNode()
 		{
+		}
+
+		public override void OnSelected()
+		{
+			base.OnSelected();
+
+			Selection.activeObject = Data.Node;
+		}
+
+		public override void OnUnselected()
+		{
+			base.OnUnselected();
+
+			Selection.activeObject = null;
 		}
 	}
 }

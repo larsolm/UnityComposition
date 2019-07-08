@@ -8,6 +8,7 @@ using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.CompositionEditor
 {
@@ -65,8 +66,11 @@ namespace PiRhoSoft.CompositionEditor
 
 		#region Overrides
 
-		protected override bool canDeleteSelection => base.canDeleteSelection;
+		protected override bool canCutSelection => base.canCutSelection;
 		protected override bool canCopySelection => base.canCopySelection;
+		protected override bool canPaste => base.canPaste;
+		protected override bool canDuplicateSelection => base.canDuplicateSelection;
+		protected override bool canDeleteSelection => base.canDeleteSelection;
 
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
@@ -250,22 +254,17 @@ namespace PiRhoSoft.CompositionEditor
 
 		public void ShowAll()
 		{
+			FrameAll();
 		}
 
 		public void GoToStart()
 		{
+			FrameOrigin();
 		}
 
 		public void GoToSelection()
 		{
-		}
-
-		public void ZoomIn()
-		{
-		}
-
-		public void ZoomOut()
-		{
+			FrameSelection();
 		}
 
 		#endregion
@@ -317,9 +316,15 @@ namespace PiRhoSoft.CompositionEditor
 		private readonly InstructionGraphViewWindow _window;
 		private readonly InstructionGraphProvider _graphProvider;
 
+		private Label _graphButton;
+		private Image _breakButton;
+		private Image _loggingButton;
+
 		public InstructionGraph CurrentGraph => GraphView?.Graph;
 		public InstructionGraphView GraphView { get; private set; }
 		public bool IsLocked { get; private set; }
+
+		private string _currentGraphName => CurrentGraph == null ? "No Graph Selected" : CurrentGraph.name;
 
 		public InstructionGraphViewEditor(InstructionGraphViewWindow window)
 		{
@@ -328,6 +333,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			ElementHelper.AddStyleSheet(this, _styleSheetPath);
 			AddToClassList(_ussBaseClass);
+
 			CreateToolbar();
 
 			// this has to be here because Unity doesn't allow EditorPrefs access in a static constructor
@@ -345,6 +351,8 @@ namespace PiRhoSoft.CompositionEditor
 				GraphView = new InstructionGraphView(_window, graph);
 
 				Add(GraphView);
+
+				RefreshToolbar();
 			}
 		}
 
@@ -423,18 +431,18 @@ namespace PiRhoSoft.CompositionEditor
 			var gap = new VisualElement();
 			gap.style.flexGrow = 1;
 
-			var breakButton = new Image { image = _breakIcon.Content, tooltip = "Enable/Disable node breakpoints for all graphs" };
-			breakButton.AddToClassList(_ussSmallButtonClass);
-			breakButton.AddToClassList(_ussFirstClass);
-			breakButton.AddManipulator(new Clickable(ToggleBreakpointsEnabled));
+			_breakButton = new Image { image = _breakIcon.Content, tooltip = "Enable/Disable node breakpoints for all graphs" };
+			_breakButton.AddToClassList(_ussSmallButtonClass);
+			_breakButton.AddToClassList(_ussFirstClass);
+			_breakButton.AddManipulator(new Clickable(ToggleBreakpointsEnabled));
 
-			var loggingButton = new Image { image = _logIcon.Content, tooltip = "Enable/Disable logging of graph execution for all graphs" };
-			loggingButton.AddToClassList(_ussSmallButtonClass);
-			loggingButton.AddManipulator(new Clickable(ToggleLoggingEnabled));
+			_loggingButton = new Image { image = _logIcon.Content, tooltip = "Enable/Disable logging of graph execution for all graphs" };
+			_loggingButton.AddToClassList(_ussSmallButtonClass);
+			_loggingButton.AddManipulator(new Clickable(ToggleLoggingEnabled));
 
-			var graphButton = new Label(CurrentGraph == null ? "No Graph Selected" : CurrentGraph.name) { tooltip = "Select a graph to edit" };
-			graphButton.AddToClassList(_ussLargeButtonClass);
-			graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(graphButton.layout.position))));
+			_graphButton = new Label(_currentGraphName) { tooltip = "Select a graph to edit" };
+			_graphButton.AddToClassList(_ussLargeButtonClass);
+			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
 
 			var lockButton = new Image { image = Icon.Lock.Content, tooltip = "Lock/Unlock this window so it won't be used when other graphs are opened" };
 			lockButton.AddToClassList(_ussSmallButtonClass);
@@ -455,9 +463,9 @@ namespace PiRhoSoft.CompositionEditor
 			toolbar.Add(stepButton);
 			toolbar.Add(stopButton);
 			toolbar.Add(gap);
-			toolbar.Add(breakButton);
-			toolbar.Add(loggingButton);
-			toolbar.Add(graphButton);
+			toolbar.Add(_breakButton);
+			toolbar.Add(_loggingButton);
+			toolbar.Add(_graphButton);
 			toolbar.Add(watchButton);
 			toolbar.Add(lockButton);
 			toolbar.Add(settingsButton);
@@ -472,9 +480,6 @@ namespace PiRhoSoft.CompositionEditor
 			menu.AddItem(new GUIContent("Show All _END"), false, GraphView.ShowAll);
 			menu.AddItem(new GUIContent("Go To Start _HOME"), false, GraphView.GoToStart);
 			menu.AddItem(new GUIContent("Zoom To Selection _TAB"), false, GraphView.GoToSelection);
-			menu.AddSeparator(string.Empty);
-			menu.AddItem(new GUIContent("Zoom In _PGUP"), false, GraphView.ZoomIn);
-			menu.AddItem(new GUIContent("Zoom Out _PGDN"), false, GraphView.ZoomOut);
 
 			return menu;
 		}
@@ -491,6 +496,11 @@ namespace PiRhoSoft.CompositionEditor
 			menu.AddItem(new GUIContent("Delete _DELETE"), false, GraphView.Delete);
 
 			return menu;
+		}
+
+		private void RefreshToolbar()
+		{
+			_graphButton.text = _currentGraphName;
 		}
 
 		private void ShowGraphPicker(Vector2 position)
