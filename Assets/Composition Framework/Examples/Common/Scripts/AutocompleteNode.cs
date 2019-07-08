@@ -1,14 +1,14 @@
-﻿using PiRhoSoft.CompositionEngine;
+﻿using PiRhoSoft.Composition.Engine;
 using System.Collections;
 
 namespace PiRhoSoft.CompositionExample
 {
-	[CreateInstructionGraphNodeMenu("PiRho Soft/Examples/Autocomplete")]
-	public class AutocompleteNode : InstructionGraphNode
+	[CreateGraphNodeMenu("PiRho Soft/Examples/Autocomplete")]
+	public class AutocompleteNode : GraphNode
 	{
 		public VariableReference Variable = new VariableReference();
 
-		public override IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration)
+		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
 		{
 			yield break;
 		}

@@ -1,0 +1,29 @@
+﻿.pargon-graph-caller
+{
+	flex-grow: 1
+}
+
+.pargon-graph-caller .definition-item
+{
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+
+.pargon-graph-caller .definition-item .definition-label
+{
+}
+
+.pargon-graph-caller .definition-item .definition-type
+{
+	margin: 0 5px;
+}
+
+.pargon-graph-caller .definition-item .definition-reference
+{
+	flex-grow: 1;
+}
+
+.pargon-graph-caller .definition-item .definition-value
+{
+	flex-grow: 1;
+}
