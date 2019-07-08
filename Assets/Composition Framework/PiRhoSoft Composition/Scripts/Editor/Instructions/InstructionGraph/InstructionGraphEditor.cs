@@ -116,8 +116,11 @@ namespace PiRhoSoft.CompositionEditor
 				foreach (var node in nodes)
 				{
 <<<<<<< HEAD
+<<<<<<< HEAD
 					node.Node.GraphPosition += offset;
 =======
+=======
+>>>>>>> fe33a8dc09542dc84c0dfc6eda1b8d82a1efaf31
 					node.Node.Graph = graph;
 					node.Position += offset;
 >>>>>>> fe33a8d... autocomplete progress
