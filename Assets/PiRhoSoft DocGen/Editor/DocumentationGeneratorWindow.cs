@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.UtilityEditor;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,10 +12,10 @@ namespace PiRhoSoft.DocGenEditor
 	{
 		private static string _settingsFile;
 
-		private static readonly Label _newButton = new Label("New", "Create a new settings file");
-		private static readonly Label _openButton = new Label("Open", "Open an existing settings file");
-		private static readonly Label _generateButton = new Label("Generate", "Generate the categories, log descriptions, and table of contents and validate help url attributes");
-		private static readonly Label _saveButton = new Label("Save", "Save the changes made to the settings");
+		private static readonly GUIContent _newButton = new GUIContent("New", "Create a new settings file");
+		private static readonly GUIContent _openButton = new GUIContent("Open", "Open an existing settings file");
+		private static readonly GUIContent _generateButton = new GUIContent("Generate", "Generate the categories, log descriptions, and table of contents and validate help url attributes");
+		private static readonly GUIContent _saveButton = new GUIContent("Save", "Save the changes made to the settings");
 		private const string _templatesFolder = "Assets/PiRhoSoft DocGen/Templates";
 
 		private Dictionary<string, string> _templates;
@@ -72,10 +71,10 @@ namespace PiRhoSoft.DocGenEditor
 
 					var popupRect = GUILayoutUtility.GetRect(0.0f, 20.0f);
 
-					if (GUILayout.Button(_newButton.Content, GUILayout.MinWidth(20), GUILayout.MaxWidth(80.0f)))
+					if (GUILayout.Button(_newButton, GUILayout.MinWidth(20), GUILayout.MaxWidth(80.0f)))
 						_templateMenu.DropDown(popupRect);
 
-					if (GUILayout.Button(_openButton.Content, GUILayout.MinWidth(20), GUILayout.MaxWidth(80.0f)))
+					if (GUILayout.Button(_openButton, GUILayout.MinWidth(20), GUILayout.MaxWidth(80.0f)))
 						OpenSettings();
 				}
 
@@ -88,10 +87,10 @@ namespace PiRhoSoft.DocGenEditor
 					{
 						EditorGUILayout.SelectableLabel(_settingsFile);
 
-						if (GUILayout.Button(_generateButton.Content, GUILayout.MaxWidth(80.0f)))
+						if (GUILayout.Button(_generateButton, GUILayout.MaxWidth(80.0f)))
 							StartGeneration();
 
-						if (GUILayout.Button(_saveButton.Content, GUILayout.MaxWidth(80.0f)))
+						if (GUILayout.Button(_saveButton, GUILayout.MaxWidth(80.0f)))
 							SaveGenerator(_generator, _settingsFile);
 					}
 

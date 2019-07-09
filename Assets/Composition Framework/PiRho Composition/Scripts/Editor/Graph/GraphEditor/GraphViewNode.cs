@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.Composition.Engine;
 using PiRhoSoft.Utilities.Editor;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
@@ -24,6 +25,8 @@ namespace PiRhoSoft.Composition.Editor
 		private static readonly Icon _deleteIcon = Icon.BuiltIn("d_LookDevClose");
 
 		public GraphNode.NodeData Data { get; private set; }
+		public GraphViewInputPort Input { get; private set; }
+		public List<GraphViewOutputPort> Outputs { get; private set; }
 
 		public bool IsStartNode { get; private set; }
 		public override bool IsAscendable() => true;
@@ -34,7 +37,6 @@ namespace PiRhoSoft.Composition.Editor
 		public override bool IsSelectable() => true;
 		protected override void ToggleCollapse() { }
 
-		private GraphViewInputPort _input;
 		private VisualElement _breakpoint;
 
 		private readonly Graph _graph;
@@ -46,10 +48,16 @@ namespace PiRhoSoft.Composition.Editor
 			IsStartNode = isStart;
 			Data = new GraphNode.NodeData(node);
 			Data.Node.GetConnections(Data);
+			Outputs = new List<GraphViewOutputPort>(Data.Connections.Count);
 
 			title = node.Name;
 			titleContainer.style.backgroundColor = node.NodeColor;
 			titleContainer.style.unityFontStyleAndWeight = FontStyle.Bold;
+
+			//var iteration = GetNodeIteration(node);
+			//var nodeLabel = iteration > 0
+			//	? string.Format("{0} ({1})", node.Node.Name, iteration)
+			//	: node.Node.Name;
 
 			if (!IsStartNode)
 				CreateInput(nodeConnector);
@@ -67,7 +75,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateInput(GraphViewConnector nodeConnector)
 		{
-			_input = new GraphViewInputPort(this, nodeConnector) { tooltip = "Drag an output to here to make a connection" };
+			Input = new GraphViewInputPort(this, nodeConnector) { tooltip = "Drag an output to here to make a connection" };
 
 			var deleteButton = new Image { image = _deleteIcon.Content, tooltip = "Delete this node" };
 			deleteButton.AddToClassList(_ussDeleteClass);
@@ -84,16 +92,20 @@ namespace PiRhoSoft.Composition.Editor
 
 			UpdateBreakpoint();
 
-			_input.Add(container);
+			Input.Add(container);
 
-			titleContainer.Insert(0, _input);
+			titleContainer.Insert(0, Input);
 			titleButtonContainer.Add(deleteButton);
 		}
 
 		private void CreateOutputs(GraphViewConnector nodeConnector)
 		{
 			foreach (var connection in Data.Connections)
-				outputContainer.Add(new GraphViewOutputPort(this, connection, nodeConnector) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" });
+			{
+				var output = new GraphViewOutputPort(this, connection, nodeConnector) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" };
+				outputContainer.Add(output);
+				Outputs.Add(output);
+			}
 		}
 
 		public void UpdateColors()
@@ -101,16 +113,16 @@ namespace PiRhoSoft.Composition.Editor
 			var executing = _graph.IsExecuting(Data.Node);
 			var paused = _graph.DebugState == Graph.PlaybackState.Paused;
 			var nodeColor = executing ? (paused ? _breakColor : _activeColor) : _callstackColor;
-			var outputs = _input.connections.Select(edge => edge.output).OfType<GraphViewOutputPort>();
+			var outputs = Input.connections.Select(edge => edge.output).OfType<GraphViewOutputPort>();
 
-			_input.portColor = _edgeColor;
+			Input.portColor = _edgeColor;
 
 			foreach (var output in outputs)
 			{
 				if (_graph.IsInCallStack(Data.Node, output.Node.Data.Node.Name))
 				{
 					output.portColor = _callstackColor;
-					_input.portColor = _callstackColor;
+					Input.portColor = _callstackColor;
 				}
 				else
 				{
@@ -126,6 +138,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void DeleteNode()
 		{
+			var graph = GetFirstAncestorOfType<GraphView>();
+			graph.RemoveNode(this);
 		}
 
 		private void ToggleBreakpoint()
@@ -154,5 +168,18 @@ namespace PiRhoSoft.Composition.Editor
 			evt.menu.AppendAction("View Documentation", action => ViewDocumentation());
 			evt.menu.AppendSeparator();
 		}
+
+		//private int GetNodeIteration(GraphNode.NodeData node)
+		//{
+		//	if (Application.isPlaying && _graph != null && _graph.IsRunning)
+		//	{
+		//		if (node.Node == _start)
+		//			return 0;
+		//
+		//		return _graph.IsInCallStack(node.Node);
+		//	}
+		//
+		//	return -1;
+		//}
 	}
 }

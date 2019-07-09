@@ -118,11 +118,8 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
-		public static void DestroyNode(Graph graph, GraphNode node, IList<GraphNode.ConnectionData> connections, GraphNode start)
+		public static void DestroyNode(Graph graph, GraphNode node)
 		{
-			foreach (var connection in connections)
-				ChangeConnectionTarget(graph, connection, null, connection.From == start);
-
 			using (new ChangeScope(graph))
 			{
 				graph.Nodes.Remove(node);
