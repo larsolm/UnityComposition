@@ -256,9 +256,10 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement CreateEnum()
 		{
-			var buttons = new EnumButtons(_owner, () => _value.Enum, value => SetValue(VariableValue.Create(value)));
-			buttons.Setup(_value.EnumType, false, _value.Enum);
-			return buttons;
+			//var buttons = new EnumButtons(_owner, () => _value.Enum, value => SetValue(VariableValue.Create(value)));
+			//buttons.Setup(_value.EnumType, false, _value.Enum);
+			//return buttons;
+			return null;
 		}
 
 		private VisualElement CreateObject()

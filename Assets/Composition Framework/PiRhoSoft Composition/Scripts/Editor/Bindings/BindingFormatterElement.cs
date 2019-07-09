@@ -42,18 +42,18 @@ namespace PiRhoSoft.CompositionEditor
 			_value = ElementHelper.CreatePropertyContainer("Value Format", _valueFormatTooltip);
 			_preview = ElementHelper.CreatePropertyContainer("Preview", "A preview of what the the format will display");
 
-			formatContainer.Add(new EnumButtons(owner, () => _format.Formatting, value =>
-			{
-				_format.Formatting = (BindingFormatter.FormatType)value;
-
-				if (_format.Formatting == BindingFormatter.FormatType.Time && _format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
-
-				if (_format.Formatting == BindingFormatter.FormatType.Number && _format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
-
-				Refresh();
-			}));
+			//formatContainer.Add(new EnumButtons(owner, () => _format.Formatting, value =>
+			//{
+			//	_format.Formatting = (BindingFormatter.FormatType)value;
+			//
+			//	if (_format.Formatting == BindingFormatter.FormatType.Time && _format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
+			//
+			//	if (_format.Formatting == BindingFormatter.FormatType.Number && _format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
+			//
+			//	Refresh();
+			//}));
 
 			_time.Add(new EnumDropdown<BindingFormatter.TimeFormatType>(_format.TimeFormatting, owner, () => (int)_format.TimeFormatting, value =>
 			{

@@ -1,17 +1,17 @@
-﻿EnumButtons
+﻿.pirho-enum-buttons
 {
 	flex-direction: row;
 	flex-wrap: wrap;
 	flex-grow: 1;
 }
 
-EnumButtons > Button
+.pirho-enum-buttons__button
 {
 	flex-grow: 1;
 	margin: 0;
 }
 
-EnumButtons > Button.active
+.pirho-enum-buttons__button--active
 {
 	background-color: #6B6B6B
 }

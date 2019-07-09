@@ -93,7 +93,49 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		#endregion
 
+		#region Field Helpers
+
+		private const string _visualInputProperty = "visualInput";
+
+		public static VisualElement GetVisualInput<T>(this BaseField<T> field)
+		{
+			return GetVisualInputProperty<T>().GetValue(field) as VisualElement;
+		}
+
+		public static void SetVisualInput<T>(this BaseField<T> field, VisualElement element)
+		{
+			GetVisualInputProperty<T>().SetValue(field, element);
+		}
+
+		private static PropertyInfo GetVisualInputProperty<T>()
+		{
+			return typeof(BaseField<T>).GetProperty(_visualInputProperty, BindingFlags.Instance | BindingFlags.NonPublic);
+		}
+
+		#endregion
+
 		#region Element Helpers
+
+		public static VisualElement SetupPropertyField<T>(BaseField<T> field, string tooltip)
+		{
+			field.labelElement.tooltip = tooltip;
+			field.labelElement.AddToClassList(PropertyField.labelUssClassName);
+			field.GetVisualInput().AddToClassList(PropertyField.inputUssClassName);
+
+			return field;
+		}
+
+		public static VisualElement CreateEmptyPropertyField(string label)
+		{
+			var container = new VisualElement();
+			var labelElement = new Label(label);
+
+			labelElement.AddToClassList(PropertyField.labelUssClassName);
+			container.AddToClassList(BaseField<string>.ussClassName); // the static field is not dependent on the generic so any type will do
+			container.Add(labelElement);
+
+			return container;
+		}
 
 		public static VisualElement CreatePropertyContainer(string label = null, string tooltip = null)
 		{
