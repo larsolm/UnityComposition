@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace PiRhoSoft.PargonUtilities.Engine
+namespace PiRhoSoft.Utilities.Engine
 {
 	public class TypePickerAttribute : PropertyAttribute
 	{

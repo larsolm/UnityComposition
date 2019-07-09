@@ -1,5 +1,5 @@
 ﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.PargonUtilities.Editor;
+using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Editor
 	public class WatchWindowElement : VisualElement
 	{
 		private const string _uxmlPath = Engine.Composition.StylePath + "Graph/WatchWindow/WatchWindow.uxml";
-		private const string _styleSheetPath = Engine.Composition.StylePath + "Instructions/WatchWindow/WatchWindow.uss";
+		private const string _styleSheetPath = Engine.Composition.StylePath + "Graph/WatchWindow/WatchWindow.uss";
 
 		private const string _ussGlobalName = "global-container";
 		private const string _ussStoreName = "store-container";

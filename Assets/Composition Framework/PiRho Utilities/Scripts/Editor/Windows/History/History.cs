@@ -4,7 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	[InitializeOnLoad]
 	public class History : EditorWindow

@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Engine;
 using UnityEditor;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	[CustomPropertyDrawer(typeof(ReadOnlyAttribute))]
 	class ReadOnlyDrawer : PropertyDrawer

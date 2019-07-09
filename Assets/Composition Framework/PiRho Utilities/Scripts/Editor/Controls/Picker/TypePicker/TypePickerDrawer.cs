@@ -1,10 +1,10 @@
-﻿using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Engine;
 using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	[CustomPropertyDrawer(typeof(TypePickerAttribute))]
 	public class TypePickerDrawer : PropertyDrawer

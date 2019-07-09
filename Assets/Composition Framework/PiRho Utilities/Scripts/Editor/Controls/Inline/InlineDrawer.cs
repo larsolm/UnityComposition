@@ -1,9 +1,9 @@
-﻿using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Engine;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	[CustomPropertyDrawer(typeof(InlineAttribute))]
 	class InlineDrawer : PropertyDrawer

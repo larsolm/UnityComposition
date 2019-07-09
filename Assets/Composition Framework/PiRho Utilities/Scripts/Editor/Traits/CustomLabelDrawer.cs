@@ -1,11 +1,11 @@
-﻿using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Engine;
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	[CustomPropertyDrawer(typeof(CustomLabelAttribute))]
 	class CustomLabelDrawer : PropertyDrawer

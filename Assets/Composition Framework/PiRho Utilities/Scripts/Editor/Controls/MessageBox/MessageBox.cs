@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Engine;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	public class MessageBox : VisualElement
 	{

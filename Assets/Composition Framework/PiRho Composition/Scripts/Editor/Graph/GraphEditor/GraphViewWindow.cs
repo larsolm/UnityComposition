@@ -1,5 +1,5 @@
 ﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.PargonUtilities.Editor;
+using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -13,6 +13,11 @@ namespace PiRhoSoft.Composition.Editor
 		private static readonly Icon _windowIcon = Icon.Base64(_windowIconData);
 
 		private GraphViewEditor _editor;
+
+		static GraphViewWindow()
+		{
+			Graph.OnBreakpointHit += BreakpointHit;
+		}
 
 		[UnityEditor.MenuItem("Window/PiRho Soft/Composition Graph")]
 		public static GraphViewWindow ShowNewWindow()
@@ -31,19 +36,25 @@ namespace PiRhoSoft.Composition.Editor
 
 			foreach (var window in windows)
 			{
-				if (window._editor.CurrentGraph == graph)
+				if (window._editor == null)
+					window.Close();
+			}
+
+			foreach (var window in windows)
+			{
+				if (window._editor != null && window._editor.CurrentGraph == graph)
 					return window;
 			}
 
 			foreach (var window in windows)
 			{
-				if (window._editor.CurrentGraph == null)
+				if (window._editor != null && window._editor.CurrentGraph == null)
 					return window;
 			}
 
 			foreach (var window in windows)
 			{
-				if (!window._editor.IsLocked)
+				if (window._editor != null && !window._editor.IsLocked)
 				{
 					window._editor.SetGraph(graph);
 					return window;
@@ -79,6 +90,12 @@ namespace PiRhoSoft.Composition.Editor
 			}
 
 			return false;
+		}
+
+		public static void BreakpointHit(Graph graph, GraphNode node)
+		{
+			var window = ShowWindowForGraph(graph);
+			window._editor.GraphView.GoToNode(node);
 		}
 	}
 }

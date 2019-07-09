@@ -1,5 +1,5 @@
-﻿using PiRhoSoft.PargonUtilities.Editor;
-using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Editor;
+using PiRhoSoft.Utilities.Engine;
 using System;
 using UnityEngine;
 

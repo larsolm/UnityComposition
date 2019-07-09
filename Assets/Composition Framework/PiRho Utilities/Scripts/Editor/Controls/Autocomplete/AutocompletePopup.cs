@@ -1,12 +1,12 @@
-﻿using PiRhoSoft.PargonUtilities.Editor;
-using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Editor;
+using PiRhoSoft.Utilities.Engine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	public class AutocompletePopup : VisualElement
 	{

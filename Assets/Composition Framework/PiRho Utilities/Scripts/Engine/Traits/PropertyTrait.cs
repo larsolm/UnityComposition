@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.PargonUtilities.Engine
+namespace PiRhoSoft.Utilities.Engine
 {
 	public abstract class PropertyTraitAttribute : PropertyAttribute
 	{

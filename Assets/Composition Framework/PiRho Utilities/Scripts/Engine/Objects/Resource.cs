@@ -1,7 +1,7 @@
-﻿using PiRhoSoft.PargonUtilities.Engine;
+﻿using PiRhoSoft.Utilities.Engine;
 using UnityEngine;
 
-namespace PiRhoSoft.PargonUtilities.Engine
+namespace PiRhoSoft.Utilities.Engine
 {
 	public abstract class Resource : ScriptableObject, ISerializationCallbackReceiver
 	{

@@ -1,4 +1,4 @@
-﻿namespace PiRhoSoft.PargonUtilities.Editor
+﻿namespace PiRhoSoft.Utilities.Editor
 {
 	public static class Utilities
 	{

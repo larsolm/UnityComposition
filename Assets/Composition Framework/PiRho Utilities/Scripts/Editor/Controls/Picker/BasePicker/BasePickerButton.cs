@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	public abstract class BasePickerButton<ValueType> : VisualElement, IBindableProperty<ValueType>, IBindableObject<ValueType>
 	{

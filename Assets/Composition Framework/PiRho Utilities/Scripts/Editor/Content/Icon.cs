@@ -2,7 +2,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	public class Icon
 	{
@@ -26,7 +26,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public static readonly Icon SearchBarLeft = BuiltIn("toolbarsearch");
 		public static readonly Icon SearchBarRightCancel = BuiltIn("toolbarsearchCancelButton");
 		public static readonly Icon SearchBarRight = BuiltIn("toolbarsearchCancelButtonOff");
-		public static readonly Icon Lock = Icon.BuiltIn("AssemblyLock");
+		public static readonly Icon Locked = BuiltIn("LockIcon-On");
+		public static readonly Icon Unlocked = BuiltIn("LockIcon");
 
 		private const string _invalidIconError = "(PIIII) failed to create icon content: the built in icon {0} could not be loaded";
 		private const string _invalidDataError = "(PIIID) failed to create icon content: the supplied data is not a valid base 64 string";

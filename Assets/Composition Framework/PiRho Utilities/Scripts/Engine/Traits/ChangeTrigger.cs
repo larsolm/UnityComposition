@@ -1,4 +1,4 @@
-﻿namespace PiRhoSoft.PargonUtilities.Engine
+﻿namespace PiRhoSoft.Utilities.Engine
 {
 	public class ChangeTriggerAttribute : PropertyTraitAttribute
 	{

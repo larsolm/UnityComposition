@@ -3,7 +3,7 @@ using UnityEditor;
 using UnityEngine.UIElements;
 using UnityEditor.UIElements;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	[CustomEditor(typeof(Object), true, isFallback = true)]
 	public class DefaultEditor : UnityEditor.Editor

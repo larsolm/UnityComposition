@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.PargonUtilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;

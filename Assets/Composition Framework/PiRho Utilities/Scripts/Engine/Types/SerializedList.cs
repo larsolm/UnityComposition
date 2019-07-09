@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.PargonUtilities.Engine
+namespace PiRhoSoft.Utilities.Engine
 {
 	// This class is nothing more than a direct wrapper of the built in List class from the .net framework. Its purpose
 	// is to provide a base class for list types to derive from that can then be targeted by a ListDisplay.

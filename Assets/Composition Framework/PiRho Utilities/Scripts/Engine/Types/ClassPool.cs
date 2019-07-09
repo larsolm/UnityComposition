@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PiRhoSoft.PargonUtilities.Engine
+namespace PiRhoSoft.Utilities.Engine
 {
 	public interface IPoolable
 	{
