@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition.Engine
 				else if (target is Renderer renderer)
 					renderer.enabled = true;
 				else
-					Debug.LogWarningFormat(this, _invalidObjectWarning, Name, Target);
+					Debug.LogWarningFormat(this, _invalidObjectWarning, name, Target);
 			}
 
 			graph.GoTo(Next, nameof(Next));

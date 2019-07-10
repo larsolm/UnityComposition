@@ -57,7 +57,7 @@ namespace PiRhoSoft.Composition.Editor
 				if (asset is GraphNode node && !graph.Nodes.Contains(node))
 				{
 					graph.Nodes.Add(node);
-					Debug.LogWarningFormat(graph, "Syncing nodes for Graph {0}: added the node {1} that was an asset but was not contained in the list", graph.name, node.Name);
+					Debug.LogWarningFormat(graph, "Syncing nodes for Graph {0}: added the node {1} that was an asset but was not contained in the list", graph.name, node.name);
 					EditorUtility.SetDirty(graph);
 				}
 			}
@@ -75,7 +75,6 @@ namespace PiRhoSoft.Composition.Editor
 				var node = CreateInstance(type) as GraphNode;
 				node.hideFlags = HideFlags.HideInHierarchy;
 				node.name = name;
-				node.Name = name;
 				node.GraphPosition = position;
 
 				graph.Nodes.Add(node);
@@ -95,12 +94,12 @@ namespace PiRhoSoft.Composition.Editor
 			return clone;
 		}
 
-		public static void AddClonedNodes(Graph graph, IList<GraphNode.NodeData> nodes, Vector2 position)
+		public static void AddClonedNodes(Graph graph, List<GraphNode> nodes, Vector2 position)
 		{
 			var minimum = position;
 
 			foreach (var node in nodes)
-				minimum = Vector2.Min(minimum, node.Node.GraphPosition);
+				minimum = Vector2.Min(minimum, node.GraphPosition);
 
 			var offset = position - minimum;
 
@@ -108,10 +107,10 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				foreach (var node in nodes)
 				{
-					node.Node.GraphPosition += offset;
-					graph.Nodes.Add(node.Node);
-					Undo.RegisterCreatedObjectUndo(node.Node, "Paste Node");
-					AssetDatabase.AddObjectToAsset(node.Node, graph);
+					node.GraphPosition += offset;
+					graph.Nodes.Add(node);
+					Undo.RegisterCreatedObjectUndo(node, "Paste Node");
+					AssetDatabase.AddObjectToAsset(node, graph);
 				}
 
 				AssetDatabase.ImportAsset(AssetDatabase.GetAssetPath(graph));

@@ -69,10 +69,6 @@ namespace PiRhoSoft.Composition.Engine
 		private const string _readOnlyAssignmentWarning = "(CIGNROA) Failed to assign to variable '{0}' from node '{1}': the variable is read only";
 		private const string _invalidAssignmentWarning = "(CIGNIA) Failed to assign to variable '{0}' from node '{1}': the variable has an incompatible type";
 
-		[Tooltip("The name of the node")]
-		[ChangeTrigger(nameof(UpdateName))]
-		public string Name;
-
 		public abstract IEnumerator Run(Graph graph, GraphStore variables, int iteration);
 
 		#region Variable Lookup
@@ -654,11 +650,6 @@ namespace PiRhoSoft.Composition.Engine
 
 		public AutocompleteSource AutocompleteSource => new GraphNodeAutocompleteSource();
 
-		private void UpdateName()
-		{
-			name = Name;
-		}
-
 		public class NodeData
 		{
 			public GraphNode Node { get; private set; }
@@ -667,6 +658,7 @@ namespace PiRhoSoft.Composition.Engine
 			public NodeData(GraphNode node)
 			{
 				Node = node;
+				node.GetConnections(this);
 			}
 
 			public void ClearConnections()
@@ -704,17 +696,17 @@ namespace PiRhoSoft.Composition.Engine
 
 			public void AddConnection(string name, GraphNode to)
 			{
-				Connections.Add(new ConnectionData(name, null, -1, Node, to, Connections.Count));
+				Connections.Add(new ConnectionData(name, null, -1, this, to, Connections.Count));
 			}
 
 			public void AddConnection(string name, string key, GraphNode to)
 			{
-				Connections.Add(new ConnectionData(name, key, -1, Node, to, Connections.Count));
+				Connections.Add(new ConnectionData(name, key, -1, this, to, Connections.Count));
 			}
 
 			public void AddConnection(string name, int index, GraphNode to)
 			{
-				Connections.Add(new ConnectionData(name, null, index, Node, to, Connections.Count));
+				Connections.Add(new ConnectionData(name, null, index, this, to, Connections.Count));
 			}
 		}
 
@@ -732,48 +724,13 @@ namespace PiRhoSoft.Composition.Engine
 
 			public string Name { get; private set; }
 
-			public static bool operator ==(ConnectionData left, ConnectionData right)
-			{
-				// need to override since connections are rebuilt for the selected node causing reference comparison
-				// to return false
-
-				if (ReferenceEquals(left, null))
-					return ReferenceEquals(right, null);
-				else if (ReferenceEquals(right, null))
-					return false;
-				else
-					return left.From == right.From && left.FromIndex == right.FromIndex;
-			}
-
-			public static bool operator !=(ConnectionData left, ConnectionData right)
-			{
-				return !(left == right);
-			}
-
-			public override bool Equals(object obj)
-			{
-				if (obj is ConnectionData other)
-					return this == other;
-
-				return false;
-			}
-
-			public override int GetHashCode()
-			{
-				// not needed but Visual Studio warns without it
-
-				var hashCode = -2083501448;
-				hashCode = hashCode * -1521134295 + EqualityComparer<GraphNode>.Default.GetHashCode(From);
-				hashCode = hashCode * -1521134295 + FromIndex.GetHashCode();
-				return hashCode;
-			}
-
-			public ConnectionData(string field, string key, int index, GraphNode from, GraphNode to, int fromIndex)
+			public ConnectionData(string field, string key, int index, NodeData source, GraphNode to, int fromIndex)
 			{
 				Field = field;
 				FieldKey = key;
 				FieldIndex = index;
-				From = from;
+				Source = source;
+				From = source.Node;
 				FromIndex = fromIndex;
 				To = to;
 

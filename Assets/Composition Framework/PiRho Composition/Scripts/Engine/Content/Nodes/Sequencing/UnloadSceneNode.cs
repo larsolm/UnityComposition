@@ -96,7 +96,7 @@ namespace PiRhoSoft.Composition.Engine
 					var value = SceneVariable.GetValue(variables);
 					if (value.TryGetInt(out var index)) return Unload(index);
 					else if (value.TryGetString(out var name)) return Unload(name);
-					else Debug.LogWarningFormat(this, _invalidSceneWarning, Name, SceneVariable);
+					else Debug.LogWarningFormat(this, _invalidSceneWarning, name, SceneVariable);
 					break;
 				}
 			}
@@ -115,7 +115,7 @@ namespace PiRhoSoft.Composition.Engine
 			catch
 			{
 				// exception is thrown when the scene is not in the build
-				Debug.LogErrorFormat(this, _invalidIndexError, Name, buildIndex);
+				Debug.LogErrorFormat(this, _invalidIndexError, name, buildIndex);
 				return null;
 			}
 
@@ -124,12 +124,12 @@ namespace PiRhoSoft.Composition.Engine
 				if (SceneManager.sceneCount > 1)
 					return SceneManager.UnloadSceneAsync(buildIndex, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
 				else
-					Debug.LogWarningFormat(this, _lastSceneWarning, Name, buildIndex);
+					Debug.LogWarningFormat(this, _lastSceneWarning, name, buildIndex);
 			}
 			else
 			{
 				// invalid scene is returned when the scene is not loaded
-				Debug.LogErrorFormat(this, _unloadedIndexWarning, Name, buildIndex);
+				Debug.LogErrorFormat(this, _unloadedIndexWarning, name, buildIndex);
 			}
 
 			return null;
@@ -144,12 +144,12 @@ namespace PiRhoSoft.Composition.Engine
 				if (SceneManager.sceneCount > 1)
 					return SceneManager.UnloadSceneAsync(sceneName, UnloadSceneOptions.UnloadAllEmbeddedSceneObjects);
 				else
-					Debug.LogWarningFormat(this, _lastSceneWarning, Name, sceneName);
+					Debug.LogWarningFormat(this, _lastSceneWarning, name, sceneName);
 			}
 			else
 			{
 				// GetSceneByName does not differentiate between not loaded and not in build
-				Debug.LogErrorFormat(this, _invalidNameError, Name, sceneName);
+				Debug.LogErrorFormat(this, _invalidNameError, name, sceneName);
 			}
 
 			return null;

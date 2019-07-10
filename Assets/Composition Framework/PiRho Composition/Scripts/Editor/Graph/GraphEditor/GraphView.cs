@@ -18,7 +18,14 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		private const string _ussGraphClass = "graph";
 
+		private static readonly List<GraphNode> _copiedNodes = new List<GraphNode>();
+
 		public Graph Graph { get; private set; }
+		public bool CanCut => canCutSelection;
+		public bool CanCopy => canCopySelection;
+		public bool CanPaste => canPaste;
+		public bool CanDuplicate => canDuplicateSelection;
+		public bool CanDelete => canDeleteSelection;
 
 		private readonly GraphViewWindow _window;
 		private readonly GraphViewNodeProvider _nodeProvider;
@@ -47,11 +54,20 @@ namespace PiRhoSoft.Composition.Editor
 			nodeCreationRequest = OnShowCreateNode;
 			graphViewChanged = OnGraphChanged;
 			deleteSelection = OnDeleteSelection;
+			canPasteSerializedData = data => canPaste;
+			serializeGraphElements = OnCopy;
+			unserializeAndPaste = OnPaste;
 
 			this.AddManipulator(new ContentDragger());
 			this.AddManipulator(new SelectionDragger());
 			this.AddManipulator(new RectangleSelector());
 			this.AddManipulator(new ClickSelector());
+
+			Undo.undoRedoPerformed += Rebuild;
+			EditorApplication.playModeStateChanged += PlayStateChanged;
+
+			if (Application.isPlaying) // Make sure the callback still gets set if the window was opened during play mode
+				PlayStateChanged(PlayModeStateChange.EnteredPlayMode);
 		}
 
 		private void SetupNodeProvider()
@@ -66,11 +82,11 @@ namespace PiRhoSoft.Composition.Editor
 
 		#region Overrides
 
-		protected override bool canCutSelection => base.canCutSelection;
-		protected override bool canCopySelection => base.canCopySelection;
-		protected override bool canPaste => base.canPaste;
-		protected override bool canDuplicateSelection => base.canDuplicateSelection;
-		protected override bool canDeleteSelection => base.canDeleteSelection;
+		protected override bool canCutSelection => selection.OfType<GraphViewNode>().Where(node => !node.IsStartNode).Any();
+		protected override bool canCopySelection => canCutSelection;
+		protected override bool canPaste => _copiedNodes.Count > 0;
+		protected override bool canDuplicateSelection => canCopySelection;
+		protected override bool canDeleteSelection => canCutSelection;
 
 		public override List<Port> GetCompatiblePorts(Port start, NodeAdapter nodeAdapter)
 		{
@@ -88,6 +104,18 @@ namespace PiRhoSoft.Composition.Editor
 			}
 
 			return compatiblePorts;
+		}
+
+		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
+		{
+			base.BuildContextualMenu(evt);
+			_createPosition = evt.mousePosition;
+		}
+
+		private Vector2 MouseToGraphPosition(Vector2 position)
+		{
+			var windowPosition = _window.rootVisualElement.ChangeCoordinatesTo(_window.rootVisualElement.parent, position - _window.position.position);
+			return contentViewContainer.WorldToLocal(windowPosition);
 		}
 
 		#endregion
@@ -110,7 +138,7 @@ namespace PiRhoSoft.Composition.Editor
 			GraphEditor.SyncNodes(Graph);
 
 			_start = ScriptableObject.CreateInstance<StartNode>();
-			_start.Name = "Start";
+			_start.name = "Start";
 			_start.Graph = Graph;
 			_start.GraphPosition = Vector2.zero;
 
@@ -140,29 +168,31 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateNode(Type type)
 		{
-			var windowPosition = _window.rootVisualElement.ChangeCoordinatesTo(_window.rootVisualElement.parent, _createPosition - _window.position.position);
-			var graphPosition = contentViewContainer.WorldToLocal(windowPosition);
-			var node = GraphEditor.CreateNode(Graph, type, type.Name, graphPosition);
+			var position = MouseToGraphPosition(_createPosition);
+			var node = GraphEditor.CreateNode(Graph, type, type.Name, position);
 
 			AddNode(node);
 		}
 
-		private void AddNode(GraphNode node)
+		private GraphViewNode AddNode(GraphNode node)
 		{
-			var nodeElement = new GraphViewNode(Graph, node, _nodeConnector, node is StartNode);
-
+			var nodeElement = node is CommentNode ? (GraphViewNode)new CommentGraphViewNode(node) : new DefaultGraphViewNode(Graph, node, _nodeConnector, node is StartNode);
 			AddElement(nodeElement);
+			return nodeElement;
 		}
 
 		public void RemoveNode(GraphViewNode node)
 		{
-			foreach (var edge in node.Input.connections)
-				RemoveEdge(edge);
-
-			foreach (var output in node.Outputs)
+			if (node is IInputOutputNode ioNode)
 			{
-				foreach (var edge in output.connections)
+				foreach (var edge in ioNode.Input.connections.ToList()) // must use ToList() because internal enumerable is modified
 					RemoveEdge(edge);
+
+				foreach (var output in ioNode.Outputs)
+				{
+					foreach (var edge in output.connections.ToList()) // must use ToList() because internal enumerable is modified
+						RemoveEdge(edge);
+				}
 			}
 
 			GraphEditor.DestroyNode(Graph, node.Data.Node);
@@ -191,6 +221,7 @@ namespace PiRhoSoft.Composition.Editor
 
 				edge.output.Connect(edge);
 				edge.input.Connect(edge);
+				edge.capabilities &= ~Capabilities.Selectable;
 
 				AddElement(edge);
 			}
@@ -213,6 +244,30 @@ namespace PiRhoSoft.Composition.Editor
 
 		#region Callbacks
 
+		private void Rebuild()
+		{
+			DeleteElements(graphElements.ToList());
+			SetupNodes();
+			SetupConnections();
+		}
+
+		private void PlayStateChanged(PlayModeStateChange state)
+		{
+			if (state == PlayModeStateChange.EnteredPlayMode)
+				Graph.OnProcessFrame += FrameChanged;
+			else if (state == PlayModeStateChange.ExitingPlayMode)
+				Graph.OnProcessFrame -= FrameChanged;
+		}
+
+		private void FrameChanged(GraphNode graphNode, int iteration)
+		{
+			nodes.ForEach(node =>
+			{
+				if (node is IInputOutputNode ioNode)
+					ioNode.UpdateColors(ioNode.Data.Node == graphNode, iteration);
+			});
+		}
+
 		private void OnShowCreateNode(NodeCreationContext context)
 		{
 			_createPosition = context.screenMousePosition;
@@ -221,12 +276,23 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void OnDeleteSelection(string operationName, AskUser askUser)
 		{
-			var nodes = selection.OfType<GraphViewNode>().Where(node => !node.IsStartNode);
+			var nodes = selection.OfType<GraphViewNode>().Where(node => !node.IsStartNode).ToList(); // must use ToList() because internal enumerable is modified
 
 			foreach (var node in nodes)
 				RemoveNode(node);
 
-			selection.Clear();
+			ClearSelection();
+		}
+
+		private string OnCopy(IEnumerable<GraphElement> elements)
+		{
+			Copy();
+			return string.Empty;
+		}
+
+		private void OnPaste(string operationName, string data)
+		{
+			Paste();
 		}
 
 		private GraphViewChange OnGraphChanged(GraphViewChange graphViewChange)
@@ -268,6 +334,7 @@ namespace PiRhoSoft.Composition.Editor
 				ShowAll();
 		}
 
+
 		#endregion
 
 		#region View Menu
@@ -289,6 +356,13 @@ namespace PiRhoSoft.Composition.Editor
 
 		public void GoToNode(GraphNode node)
 		{
+			var target = nodes.ToList().OfType<GraphViewNode>().Where(graphNode => graphNode.Data.Node == node).FirstOrDefault();
+			if (target != null)
+			{
+				ClearSelection();
+				AddToSelection(target);
+				FrameSelection();
+			}
 		}
 
 		#endregion
@@ -297,85 +371,66 @@ namespace PiRhoSoft.Composition.Editor
 
 		public void Cut()
 		{
+			Copy();
+			Delete();
 		}
 
 		public void Copy()
 		{
+			_copiedNodes.Clear();
+
+			var sourceNodes = selection.OfType<GraphViewNode>().Where(node => !node.IsStartNode).Select(node => node.Data.Node).ToList();
+			var copiedData = new List<GraphNode.NodeData>();
+
+			foreach (var node in sourceNodes)
+			{
+				var copy = GraphEditor.CloneNode(node);
+				var data = new GraphNode.NodeData(copy);
+				copiedData.Add(data);
+				_copiedNodes.Add(copy);
+			}
+
+			foreach (var data in copiedData)
+			{
+				foreach (var connection in data.Connections)
+				{
+					var index = connection.To != null ? sourceNodes.IndexOf(connection.To) : -1;
+					connection.ChangeTarget(index >= 0 ? copiedData[index] : null);
+				}
+			}
 		}
 
 		public void Paste()
 		{
+			ClearSelection();
+			
+			foreach (var copy in _copiedNodes)
+			{
+				var node = AddNode(copy);
+				AddToSelection(node);
+
+				if (copy is IInputOutputNode ioNode)
+				{
+					foreach (var output in ioNode.Outputs)
+						SetupConnection(output);
+				}
+			}
+			
+			GraphEditor.AddClonedNodes(Graph, _copiedNodes, MouseToGraphPosition(_createPosition));
+
+			Copy(); // re-copy so the same set of nodes can be pasted twice
 		}
 
 		public void Duplicate()
 		{
+			Copy();
+			Paste();
 		}
 
 		public void Delete()
 		{
 			DeleteSelectionCallback(AskUser.DontAskUser);
 		}
-
-
-		//private static List<GraphNode.NodeData> _copiedNodes = new List<GraphNode.NodeData>();
-		//
-		//private void CutNodes()
-		//{
-		//	CopyNodes();
-		//	RemoveSelectedNodes();
-		//}
-		//
-		//private void CopyNodes()
-		//{
-		//	if (_graph != null && _selectedNodes.Count > 0)
-		//	{
-		//		_copiedNodes.Clear();
-		//
-		//		var sourceNodes = _selectedNodes.Select(node => node.Node).Where(node => node != _start).ToList();
-		//
-		//		foreach (var node in sourceNodes)
-		//		{
-		//			var copy = GraphEditor.CloneNode(node);
-		//			var data = new GraphNode.NodeData(copy);
-		//			copy.GetConnections(data);
-		//			_copiedNodes.Add(data);
-		//		}
-		//
-		//		foreach (var copy in _copiedNodes)
-		//		{
-		//			foreach (var connection in copy.Connections)
-		//			{
-		//				var index = connection.To != null ? sourceNodes.IndexOf(connection.To) : -1;
-		//				connection.ChangeTarget(index >= 0 ? _copiedNodes[index] : null);
-		//			}
-		//		}
-		//	}
-		//}
-		//
-		//private void PasteNodes()
-		//{
-		//	if (_graph != null && _copiedNodes.Count > 0)
-		//	{
-		//		var pastedNodes = new List<GraphNode.NodeData>();
-		//
-		//		foreach (var node in _copiedNodes)
-		//		{
-		//			_nodes.Add(node);
-		//			pastedNodes.Add(node);
-		//			SetupOutputConnections(node);
-		//		}
-		//
-		//		GraphEditor.AddClonedNodes(_graph, _copiedNodes, _createPosition);
-		//		TransferSelection(ref pastedNodes);
-		//		CopyNodes(); // re-copy so the same set of nodes can be pasted twice
-		//	}
-		//}
-		//
-		//private void DuplicateNodes()
-		//{
-		//	CopyNodes();
-		//	PasteNodes();
-		//}
 
 		#endregion
 	}
@@ -500,10 +555,6 @@ namespace PiRhoSoft.Composition.Editor
 			watchButton.AddToClassList(_ussSmallButtonClass);
 			watchButton.AddManipulator(new Clickable(WatchWindow.ShowWindow));
 
-			var settingsButton = new Image { image = Icon.Settings.Content, tooltip = "Edit the Instruction Graph Editor preferences" };
-			settingsButton.AddToClassList(_ussSmallButtonClass);
-			settingsButton.AddManipulator(new Clickable(() => { }));
-
 			RefreshToolbar();
 
 			toolbar.Add(editButton);
@@ -518,7 +569,6 @@ namespace PiRhoSoft.Composition.Editor
 			toolbar.Add(_graphButton);
 			toolbar.Add(watchButton);
 			toolbar.Add(_lockButton);
-			toolbar.Add(settingsButton);
 
 			Add(toolbar);
 		}
@@ -538,12 +588,32 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var menu = new GenericMenu();
 
-			menu.AddItem(new GUIContent("Cut %x"), false, GraphView.Cut);
-			menu.AddItem(new GUIContent("Copy %c"), false, GraphView.Copy);
-			menu.AddItem(new GUIContent("Paste %v"), false, GraphView.Paste);
-			menu.AddItem(new GUIContent("Duplicate %d"), false, GraphView.Duplicate);
+			if (GraphView.CanCut)
+				menu.AddItem(new GUIContent("Cut %x"), false, GraphView.Cut);
+			else
+				menu.AddDisabledItem(new GUIContent("Cut %x"));
+
+			if (GraphView.CanCopy)
+				menu.AddItem(new GUIContent("Copy %c"), false, GraphView.Copy);
+			else
+				menu.AddDisabledItem(new GUIContent("Copy %c"));
+
+			if (GraphView.CanPaste)
+				menu.AddItem(new GUIContent("Paste %v"), false, GraphView.Paste);
+			else
+				menu.AddDisabledItem(new GUIContent("Paste %v"));
+
+			if (GraphView.CanDuplicate)
+				menu.AddItem(new GUIContent("Duplicate %d"), false, GraphView.Duplicate);
+			else
+				menu.AddDisabledItem(new GUIContent("Duplicate %d"));
+
 			menu.AddSeparator(string.Empty);
-			menu.AddItem(new GUIContent("Delete _DELETE"), false, GraphView.Delete);
+
+			if (GraphView.CanDelete)
+				menu.AddItem(new GUIContent("Delete _DELETE"), false, GraphView.Delete);
+			else
+				menu.AddDisabledItem(new GUIContent("Delete _DELETE"));
 
 			return menu;
 		}

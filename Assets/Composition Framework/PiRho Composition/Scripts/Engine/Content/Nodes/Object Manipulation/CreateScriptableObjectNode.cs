@@ -59,12 +59,12 @@ namespace PiRhoSoft.Composition.Engine
 				}
 				else
 				{
-					Debug.LogErrorFormat(this, _invalidObjectError, Name, ScriptableObjectType);
+					Debug.LogErrorFormat(this, _invalidObjectError, name, ScriptableObjectType);
 				}
 			}
 			else
 			{
-				Debug.LogErrorFormat(this, _invalidTypeError, Name, ScriptableObjectType);
+				Debug.LogErrorFormat(this, _invalidTypeError, name, ScriptableObjectType);
 			}
 
 			graph.GoTo(Next, nameof(Next));

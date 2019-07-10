@@ -21,7 +21,7 @@ namespace PiRhoSoft.Composition.Engine
 			if (iteration < Sequence.Count)
 			{
 				if (Sequence[iteration] == null)
-					Debug.LogErrorFormat(this, _invalidSequenceError, Name, iteration);
+					Debug.LogErrorFormat(this, _invalidSequenceError, name, iteration);
 
 				graph.GoTo(Sequence[iteration], nameof(Sequence), iteration);
 			}

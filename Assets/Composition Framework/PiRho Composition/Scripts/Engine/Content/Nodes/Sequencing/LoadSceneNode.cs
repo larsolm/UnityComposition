@@ -101,7 +101,7 @@ namespace PiRhoSoft.Composition.Engine
 					var value = SceneVariable.GetValue(variables);
 					if (value.TryGetInt(out var index)) return Load(index, mode);
 					else if (value.TryGetString(out var name)) return Load(name, mode);
-					else Debug.LogWarningFormat(this, _invalidSceneWarning, Name, SceneVariable);
+					else Debug.LogWarningFormat(this, _invalidSceneWarning, name, SceneVariable);
 					break;
 				}
 			}
@@ -119,7 +119,7 @@ namespace PiRhoSoft.Composition.Engine
 			}
 			else
 			{
-				Debug.LogErrorFormat(this, _invalidIndexError, Name, buildIndex);
+				Debug.LogErrorFormat(this, _invalidIndexError, name, buildIndex);
 				return null;
 			}
 		}
@@ -134,7 +134,7 @@ namespace PiRhoSoft.Composition.Engine
 			}
 			else
 			{
-				Debug.LogErrorFormat(this, _invalidNameError, Name, sceneName);
+				Debug.LogErrorFormat(this, _invalidNameError, name, sceneName);
 				return null;
 			}
 		}

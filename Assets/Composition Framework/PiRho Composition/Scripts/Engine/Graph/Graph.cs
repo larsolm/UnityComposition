@@ -292,7 +292,7 @@ namespace PiRhoSoft.Composition.Engine
 			}
 
 			if (DebugState == PlaybackState.Paused && IsDebugLoggingEnabled)
-				Debug.LogFormat(this, "(Frame {0}) Graph {1}: pausing at node '{2}'", Time.frameCount, name, frame.Node.Name);
+				Debug.LogFormat(this, "(Frame {0}) Graph {1}: pausing at node '{2}'", Time.frameCount, name, frame.Node.name);
 
 			while (DebugState == PlaybackState.Paused)
 				yield return null;
@@ -303,10 +303,12 @@ namespace PiRhoSoft.Composition.Engine
 			if (IsDebugLoggingEnabled)
 			{
 				if (frame.Iteration > 0)
-					Debug.LogFormat(this, "(Frame {0}) Graph {1}: running iteration {2} of node '{3}' ", Time.frameCount, name, frame.Iteration + 1, frame.Node.Name);
+					Debug.LogFormat(this, "(Frame {0}) Graph {1}: running iteration {2} of node '{3}' ", Time.frameCount, name, frame.Iteration + 1, frame.Node.name);
 				else
-					Debug.LogFormat(this, "(Frame {0}) Graph {1}: following '{2}' to node '{3}'", Time.frameCount, name, frame.Source, frame.Node.Name);
+					Debug.LogFormat(this, "(Frame {0}) Graph {1}: following '{2}' to node '{3}'", Time.frameCount, name, frame.Source, frame.Node.name);
 			}
+
+			OnProcessFrame?.Invoke(frame.Node, frame.Iteration);
 
 			yield return frame.Node.Run(this, _rootStore, frame.Iteration);
 
@@ -415,6 +417,8 @@ namespace PiRhoSoft.Composition.Engine
 		public static bool IsDebugLoggingEnabled = false;
 		public static Action<Graph, GraphNode> OnBreakpointHit;
 
+		public Action<GraphNode, int> OnProcessFrame;
+
 		public bool CanDebugPlay => IsRunning && DebugState == PlaybackState.Paused;
 		public bool CanDebugPause => IsRunning && DebugState == PlaybackState.Running;
 		public bool CanDebugStep => IsRunning && DebugState == PlaybackState.Paused;
@@ -444,23 +448,18 @@ namespace PiRhoSoft.Composition.Engine
 				DebugState = PlaybackState.Stopped;
 		}
 
-		public int IsInCallStack(GraphNode node)
+		public bool IsInCallStack(GraphNode node)
 		{
 			if (_callstack.Count > 0)
 			{
 				foreach (var frame in _callstack)
 				{
 					if (frame.Node == node)
-					{
-						if (frame.Type != NodeType.Normal)
-							return frame.Iteration + 1;
-						else
-							return 0;
-					}
+						return true;
 				}
 			}
 
-			return -1;
+			return false;
 		}
 
 		public bool IsInCallStack(GraphNode node, string source)
@@ -475,11 +474,6 @@ namespace PiRhoSoft.Composition.Engine
 			}
 
 			return false;
-		}
-
-		public bool IsExecuting(GraphNode node)
-		{
-			return _callstack.Count > 0 && _callstack.Peek().Node == node;
 		}
 
 #endif

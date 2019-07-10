@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-5855003156187700197
+--- !u!114 &-1609825443108271025
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9,54 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: ConditionalNode
+  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
+  m_Name: CommentNode
   m_EditorClassIdentifier: 
-  Name: ConditionalNode
-  GraphPosition: {x: 98, y: 168}
+  GraphPosition: {x: 384, y: 261}
   IsBreakpoint: 0
-  OnTrue: {fileID: -5555301093275818833}
-  OnFalse: {fileID: 0}
-  Condition:
-    _statement: 
---- !u!114 &-5555301093275818833
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: ConditionalNode
-  m_EditorClassIdentifier: 
-  Name: ConditionalNode
-  GraphPosition: {x: 305, y: 37}
-  IsBreakpoint: 1
-  OnTrue: {fileID: 0}
-  OnFalse: {fileID: 0}
-  Condition:
-    _statement: 
---- !u!114 &-879600431650093304
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: DestroyObjectNode
-  m_EditorClassIdentifier: 
-  Name: DestroyObjectNode
-  GraphPosition: {x: 364, y: 182}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Target:
-    _variable: 
-    _tokens: []
+  Comment: 'ntsoehausntoaheusnthaoesnuthosanetuh
+
+    -
+
+    uoeuhoaeuibduixex'
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,8 +45,25 @@ MonoBehaviour:
     _items: []
   Outputs:
     _items: []
-  Process: {fileID: -5855003156187700197}
+  Process: {fileID: 4475358821447316573}
   Nodes:
-  - {fileID: -5855003156187700197}
-  - {fileID: -5555301093275818833}
-  - {fileID: -879600431650093304}
+  - {fileID: 4475358821447316573}
+  - {fileID: -1609825443108271025}
+--- !u!114 &4475358821447316573
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
+  m_Name: ConditionalNode
+  m_EditorClassIdentifier: 
+  GraphPosition: {x: 174, y: 44}
+  IsBreakpoint: 0
+  OnTrue: {fileID: 0}
+  OnFalse: {fileID: 0}
+  Condition:
+    _statement: 

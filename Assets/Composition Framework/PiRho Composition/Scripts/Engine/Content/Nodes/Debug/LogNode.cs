@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition.Engine
 {
 	[HelpURL(Composition.DocumentationUrl + "log-node")]
-	[CreateGraphNodeMenu("Debug/Log", 401)]
+	[CreateGraphNodeMenu("Debug/Log", 400)]
 	public class LogNode : GraphNode
 	{
 		[Tooltip("The message to log to the console when this node is traversed")]
