@@ -654,17 +654,18 @@ namespace PiRhoSoft.Composition.Engine
 		public class NodeData
 		{
 			public GraphNode Node { get; private set; }
-			public List<ConnectionData> Connections = new List<ConnectionData>();
+			public List<ConnectionData> Connections { get; private set; } = new List<ConnectionData>();
 
 			public NodeData(GraphNode node)
 			{
 				Node = node;
-				node.GetConnections(this);
+				RefreshConnections();
 			}
 
-			public void ClearConnections()
+			public void RefreshConnections()
 			{
 				Connections.Clear();
+				Node.GetConnections(this);
 			}
 
 			public void AddConnections(object obj)
