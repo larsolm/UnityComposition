@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition.Engine
 
 		[Tooltip("The graph to run when this node is reached")]
 		[Conditional(nameof(Source), (int)GraphSource.Value)]
-		public GraphCaller Graph = new GraphCaller();
+		public GraphCaller TargetGraph = new GraphCaller();
 
 		[Tooltip("The graph to run when this node is reached")]
 		[VariableConstraint(typeof(Graph))]
@@ -43,10 +43,10 @@ namespace PiRhoSoft.Composition.Engine
 		{
 			if (Source == GraphSource.Value)
 			{
-				foreach (var input in Graph.Inputs)
+				foreach (var input in TargetGraph.Inputs)
 				{
 					if (GraphStore.IsInput(input))
-						inputs.Add(Graph.GetInputDefinition(input));
+						inputs.Add(TargetGraph.GetInputDefinition(input));
 				}
 			}
 			else if (Source == GraphSource.Reference)
@@ -60,10 +60,10 @@ namespace PiRhoSoft.Composition.Engine
 		{
 			if (Source == GraphSource.Value)
 			{
-				foreach (var output in Graph.Outputs)
+				foreach (var output in TargetGraph.Outputs)
 				{
 					if (GraphStore.IsOutput(output))
-						outputs.Add(Graph.GetOutputDefinition(output));
+						outputs.Add(TargetGraph.GetOutputDefinition(output));
 				}
 			}
 		}
@@ -76,9 +76,9 @@ namespace PiRhoSoft.Composition.Engine
 			if (Source == GraphSource.Value)
 			{
 				if (WaitForCompletion)
-					yield return Graph.Execute(variables, context);
+					yield return TargetGraph.Execute(variables, context);
 				else
-					CompositionManager.Instance.RunGraph(Graph, variables, context);
+					CompositionManager.Instance.RunGraph(TargetGraph, variables, context);
 			}
 			else if (Source == GraphSource.Reference)
 			{

@@ -8,19 +8,25 @@ namespace PiRhoSoft.Utilities.Editor
 {
 	public class ChangeScope : IDisposable
 	{
+		private readonly SerializedObject _serializedObject;
+		private readonly Object _object;
+		private readonly int _group;
+
 		private bool _isDisposed;
-		private SerializedObject _serializedObject;
-		private Object _object;
 
 		public ChangeScope(Object objectToTrack)
 		{
 			_object = objectToTrack;
+			_group = Undo.GetCurrentGroup();
+
 			ChangeHelper.Start(_object);
 		}
 
 		public ChangeScope(SerializedObject serializedObject)
 		{
 			_serializedObject = serializedObject;
+			_group = Undo.GetCurrentGroup();
+
 			ChangeHelper.Start(_serializedObject);
 		}
 
@@ -34,6 +40,8 @@ namespace PiRhoSoft.Utilities.Editor
 					ChangeHelper.Finish(_object);
 				else if (_serializedObject != null)
 					ChangeHelper.Finish(_serializedObject);
+
+				Undo.CollapseUndoOperations(_group);
 			}
 		}
 	}

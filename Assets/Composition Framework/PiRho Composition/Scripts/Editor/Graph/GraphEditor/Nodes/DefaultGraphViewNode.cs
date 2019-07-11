@@ -33,15 +33,12 @@ namespace PiRhoSoft.Composition.Editor
 		public GraphViewInputPort Input { get; private set; }
 		public List<GraphViewOutputPort> Outputs { get; private set; }
 
-		private readonly Graph _graph;
 		private readonly VisualElement _breakpoint;
 		private readonly TextField _rename;
 		private readonly VisualElement _callstackBorder;
 
-		public DefaultGraphViewNode(Graph graph, GraphNode node, GraphViewConnector nodeConnector, bool isStart) : base(node, isStart)
+		public DefaultGraphViewNode(GraphNode node, GraphViewConnector nodeConnector, bool isStart) : base(node, isStart)
 		{
-			_graph = graph;
-
 			Outputs = new List<GraphViewOutputPort>(Data.Connections.Count);
 
 			if (!IsStartNode)
@@ -116,8 +113,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		public void UpdateColors(bool active, int iteration)
 		{
-			var inCallstack = _graph.IsInCallStack(Data.Node);
-			var paused = _graph.DebugState == Graph.PlaybackState.Paused;
+			var inCallstack = Data.Node.Graph.IsInCallStack(Data.Node);
+			var paused = Data.Node.Graph.DebugState == Graph.PlaybackState.Paused;
 			var outputs = Input.connections.Select(edge => edge.output).OfType<GraphViewOutputPort>();
 			var label = !IsStartNode && iteration > 0 ? string.Format("{0} ({1})", Data.Node.name, iteration) : Data.Node.name;
 			var borderColor = active ? (paused ? _breakColor : _activeColor) : _callstackColor;
@@ -127,7 +124,7 @@ namespace PiRhoSoft.Composition.Editor
 			Input.portColor = inCallstack ? _callstackColor : _edgeColor;
 
 			foreach (var output in outputs)
-				output.portColor = _graph.IsInCallStack(Data.Node, output.Node.Data.Node.name) ? _callstackColor : _edgeColor;
+				output.portColor = Data.Node.Graph.IsInCallStack(Data.Node, output.Node.Data.Node.name) ? _callstackColor : _edgeColor;
 
 			_callstackBorder.style.visibility = inCallstack ? Visibility.Visible : Visibility.Hidden;
 			_callstackBorder.style.borderColor = borderColor;

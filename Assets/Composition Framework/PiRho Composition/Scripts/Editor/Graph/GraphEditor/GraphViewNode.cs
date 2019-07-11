@@ -1,10 +1,12 @@
 ﻿using PiRhoSoft.Composition.Engine;
 using PiRhoSoft.Utilities.Editor;
 using System;
+using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
@@ -44,7 +46,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			base.OnSelected();
 
-			Selection.activeObject = Data.Node;
+			Selection.activeObject = IsStartNode ? (Object)Data.Node.Graph : Data.Node;
 		}
 
 		protected TextField CreateEditableLabel(Label container, Func<string> getValue, Action<string> setValue, bool multiline = false)
@@ -96,7 +98,7 @@ namespace PiRhoSoft.Composition.Editor
 		protected void DeleteNode()
 		{
 			var graph = GetFirstAncestorOfType<GraphView>();
-			graph.RemoveNode(this);
+			graph.RemoveNode(this, Enumerable.Empty<GraphViewNode>());
 		}
 
 		protected void ViewDocumentation()

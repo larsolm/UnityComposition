@@ -75,6 +75,7 @@ namespace PiRhoSoft.Composition.Editor
 				var node = CreateInstance(type) as GraphNode;
 				node.hideFlags = HideFlags.HideInHierarchy;
 				node.name = name;
+				node.Graph = graph;
 				node.GraphPosition = position;
 
 				graph.Nodes.Add(node);
@@ -96,7 +97,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public static void AddClonedNodes(Graph graph, List<GraphNode> nodes, Vector2 position)
 		{
-			var minimum = position;
+			var minimum = nodes.First().GraphPosition;
 
 			foreach (var node in nodes)
 				minimum = Vector2.Min(minimum, node.GraphPosition);
@@ -108,6 +109,7 @@ namespace PiRhoSoft.Composition.Editor
 				foreach (var node in nodes)
 				{
 					node.GraphPosition += offset;
+					node.Graph = graph;
 					graph.Nodes.Add(node);
 					Undo.RegisterCreatedObjectUndo(node, "Paste Node");
 					AssetDatabase.AddObjectToAsset(node, graph);
@@ -129,14 +131,14 @@ namespace PiRhoSoft.Composition.Editor
 
 		public static void SetNodePosition(GraphNode node, Vector2 position)
 		{
-			using (new ChangeScope(node))
+			using (new ChangeScope(node.Graph))
 				node.GraphPosition = position;
 		}
 
-		public static void ChangeConnectionTarget(Graph graph, GraphNode.ConnectionData connection, GraphNode.NodeData target, bool isStart)
+		public static void SetConnectionTarget(Graph graph, GraphNode.ConnectionData connection, GraphNode.NodeData target)
 		{
-			using (new ChangeScope(isStart ? graph as ScriptableObject : connection.From)) // From is only node that changes in this method - the rest will be rebuild automatically
-				connection.ChangeTarget(target);
+			using (new ChangeScope(graph))
+				connection.SetTarget(target);
 		}
 
 		#endregion

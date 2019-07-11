@@ -61,10 +61,10 @@ namespace PiRhoSoft.Composition.Editor
 			SetupNodes();
 			SetupConnections();
 			RegisterCallback<KeyDownEvent>(OnKeyDown);
+			RegisterCallback<GeometryChangedEvent>(evt => ShowAll()); // Use this event because the layout isn't build right away so ShowAll won't work immediately
 
 			nodeCreationRequest = OnShowCreateNode;
 			graphViewChanged = OnGraphChanged;
-			deleteSelection = OnDeleteSelection;
 			canPasteSerializedData = data => canPaste;
 			serializeGraphElements = OnCopy;
 			unserializeAndPaste = OnPaste;
@@ -79,8 +79,6 @@ namespace PiRhoSoft.Composition.Editor
 
 			if (Application.isPlaying) // Make sure the callback still gets set if the window was opened during play mode
 				PlayStateChanged(PlayModeStateChange.EnteredPlayMode);
-
-			schedule.Execute(ShowAll).StartingIn(10); // This has to be scheduled because it won't work until the layout is rebuilt (I think?)
 		}
 
 		private void SetupNodeProvider()
@@ -122,7 +120,7 @@ namespace PiRhoSoft.Composition.Editor
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
 			base.BuildContextualMenu(evt);
-			_createPosition = evt.mousePosition;
+			_createPosition = evt.mousePosition + _window.position.position;
 		}
 
 		private Vector2 MouseToGraphPosition(Vector2 position)
@@ -137,8 +135,6 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class StartNode : GraphNode
 		{
-			public Graph Graph;
-
 			public override Color NodeColor => Colors.Start;
 			public override IEnumerator Run(Graph graph, GraphStore variables, int iteration) { yield break; }
 
@@ -150,10 +146,13 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			GraphEditor.SyncNodes(Graph);
 
-			_start = ScriptableObject.CreateInstance<StartNode>();
-			_start.name = "Start";
-			_start.Graph = Graph;
-			_start.GraphPosition = Vector2.zero;
+			if (_start == null)
+			{
+				_start = ScriptableObject.CreateInstance<StartNode>();
+				_start.name = "Start";
+				_start.Graph = Graph;
+				_start.GraphPosition = Vector2.zero;
+			}
 
 			AddNode(_start);
 
@@ -195,25 +194,25 @@ namespace PiRhoSoft.Composition.Editor
 
 		private GraphViewNode AddNode(GraphNode node)
 		{
-			var nodeElement = node is CommentNode ? (GraphViewNode)new CommentGraphViewNode(node) : new DefaultGraphViewNode(Graph, node, _nodeConnector, node is StartNode);
+			var nodeElement = node is CommentNode ? (GraphViewNode)new CommentGraphViewNode(node) : new DefaultGraphViewNode(node, _nodeConnector, node is StartNode);
 			AddElement(nodeElement);
 			return nodeElement;
 		}
 
-		public void RemoveNode(GraphViewNode node)
+		public void RemoveNode(GraphViewNode node, IEnumerable<GraphViewNode> removedNodes)
 		{
 			if (node is IInputOutputNode ioNode)
 			{
 				foreach (var edge in ioNode.Input.connections.ToList()) // must use ToList() because internal enumerable is modified
-					RemoveEdge(edge);
+					RemoveEdge(edge, edge.output is GraphViewOutputPort output && !removedNodes.Contains(output.Node));
 
 				foreach (var output in ioNode.Outputs)
 				{
 					foreach (var edge in output.connections.ToList()) // must use ToList() because internal enumerable is modified
-						RemoveEdge(edge);
+						RemoveEdge(edge, false);
 				}
 			}
-
+	
 			GraphEditor.DestroyNode(Graph, node.Data.Node);
 
 			RemoveElement(node);
@@ -223,7 +222,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			if (edge.output is GraphViewOutputPort output && edge.input is GraphViewInputPort input)
 			{
-				GraphEditor.ChangeConnectionTarget(Graph, output.Connection, input.Node.Data, output.Node.IsStartNode);
+				GraphEditor.SetConnectionTarget(Graph, output.Connection, input.Node.Data);
 
 				edge.output.Connect(edge);
 				edge.input.Connect(edge);
@@ -233,11 +232,12 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
-		private void RemoveEdge(Edge edge)
+		private void RemoveEdge(Edge edge, bool removeConnection)
 		{
 			if (edge.output is GraphViewOutputPort output && edge.input is GraphViewInputPort input)
 			{
-				GraphEditor.ChangeConnectionTarget(Graph, output.Connection, null, output.Node.IsStartNode);
+				if (removeConnection) // We only want to remove connections that are external of all edges being removed
+					GraphEditor.SetConnectionTarget(Graph, output.Connection, null);
 
 				edge.output.Disconnect(edge);
 				edge.input.Disconnect(edge);
@@ -252,9 +252,13 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void Rebuild()
 		{
-			DeleteElements(graphElements.ToList());
+			var elements = graphElements.ToList(); // Can't use DeleteElements because it uses the graphChanged callback to actually delete stuff
+			foreach (var element in elements)
+				RemoveElement(element);
+
 			SetupNodes();
 			SetupConnections();
+			MarkDirtyRepaint();
 		}
 
 		private void PlayStateChanged(PlayModeStateChange state)
@@ -280,16 +284,6 @@ namespace PiRhoSoft.Composition.Editor
 			SearchWindow.Open(new SearchWindowContext(_createPosition), _nodeProvider);
 		}
 
-		private void OnDeleteSelection(string operationName, AskUser askUser)
-		{
-			var nodes = selection.OfType<GraphViewNode>().Where(node => !node.IsStartNode).ToList(); // must use ToList() because internal enumerable is modified
-
-			foreach (var node in nodes)
-				RemoveNode(node);
-
-			ClearSelection();
-		}
-
 		private string OnCopy(IEnumerable<GraphElement> elements)
 		{
 			Copy();
@@ -298,18 +292,29 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void OnPaste(string operationName, string data)
 		{
-			Paste();
+			Paste(_createPosition);
 		}
 
 		private GraphViewChange OnGraphChanged(GraphViewChange graphViewChange)
 		{
 			if (graphViewChange.elementsToRemove != null)
 			{
-				foreach (var element in graphViewChange.elementsToRemove)
-				{
-					if (element is Edge edge)
-						RemoveEdge(edge);
-				}
+				var nodes = graphViewChange.elementsToRemove.OfType<GraphViewNode>();
+				var edges = graphViewChange.elementsToRemove.OfType<Edge>();
+
+				foreach (var node in nodes)
+					RemoveNode(node, nodes);
+
+				foreach (var edge in edges)
+					RemoveEdge(edge, true);
+
+				//foreach (var element in graphViewChange.elementsToRemove)
+				//{
+				//	if (element is Edge edge)
+				//		RemoveEdge(edge);
+				//	else if (element is GraphViewNode node)
+				//		RemoveNode(node);
+				//}
 
 				graphViewChange.elementsToRemove.Clear();
 			}
@@ -406,14 +411,16 @@ namespace PiRhoSoft.Composition.Editor
 				foreach (var connection in data.Connections)
 				{
 					var index = connection.To != null ? sourceNodes.IndexOf(connection.To) : -1;
-					connection.ChangeTarget(index >= 0 ? copiedData[index] : null);
+					connection.SetTarget(index >= 0 ? copiedData[index] : null);
 				}
 			}
 		}
 
-		public void Paste()
+		public void Paste(Vector2 position)
 		{
 			ClearSelection();
+
+			GraphEditor.AddClonedNodes(Graph, _copiedNodes, MouseToGraphPosition(position));
 
 			foreach (var copy in _copiedNodes)
 			{
@@ -427,15 +434,13 @@ namespace PiRhoSoft.Composition.Editor
 					SetupConnection(output);
 			}
 
-			GraphEditor.AddClonedNodes(Graph, _copiedNodes, MouseToGraphPosition(_createPosition));
-
 			Copy(); // re-copy so the same set of nodes can be pasted twice
 		}
 
-		public void Duplicate()
+		public void Duplicate(Vector2 position)
 		{
 			Copy();
-			Paste();
+			Paste(position);
 		}
 
 		public void Delete()
@@ -455,6 +460,7 @@ namespace PiRhoSoft.Composition.Editor
 		private const string _ussToolbarClass = "toolbar";
 		private const string _ussLargeButtonClass = "large-button";
 		private const string _ussSmallButtonClass = "small-button";
+		private const string _ussLockButtonClass = "lock-button";
 		private const string _ussBreakDisabledClass = "break-disabled";
 		private const string _ussButtonEnabled = "enabled";
 		private const string _ussFirstClass = "first";
@@ -521,6 +527,10 @@ namespace PiRhoSoft.Composition.Editor
 			var toolbar = new Toolbar();
 			toolbar.AddToClassList(_ussToolbarClass);
 
+			var createButton = new Label() { tooltip = "Create" };
+			createButton.AddToClassList(_ussLargeButtonClass);
+			createButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
+
 			var editButton = CreateEditMenu();
 			var viewButton = CreateViewMenu();
 
@@ -556,6 +566,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			_lockButton = new Image { tintColor = Color.black, tooltip = "Lock/Unlock this window so it won't be used when other graphs are opened" };
 			_lockButton.AddToClassList(_ussSmallButtonClass);
+			_lockButton.AddToClassList(_ussLockButtonClass);
 			_lockButton.AddManipulator(new Clickable(ToggleLockingEnabled));
 
 			var watchButton = new Image { image = Icon.View.Content, tooltip = "Open the Watch Window" };
@@ -584,12 +595,14 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var menu = new ToolbarMenu { text = "Edit" };
 
+			menu.menu.AppendAction("Create Node _SPACE", evt => GraphView.nodeCreationRequest(new NodeCreationContext { screenMousePosition = _window.position.position }));
+			menu.menu.AppendSeparator();
 			menu.menu.AppendAction("Cut %x", evt => GraphView.Cut(), evt => GraphView.CanCut ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
 			menu.menu.AppendAction("Copy %c", evt => GraphView.Copy(), evt => GraphView.CanCopy ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
-			menu.menu.AppendAction("Paste %v", evt => GraphView.Paste(), evt => GraphView.CanPaste ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
-			menu.menu.AppendAction("Duplicate %d", evt => GraphView.Duplicate(), evt => GraphView.CanDuplicate ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
+			menu.menu.AppendAction("Paste %v", evt => GraphView.Paste(_window.position.center), evt => GraphView.CanPaste ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
+			menu.menu.AppendAction("Duplicate %d", evt => GraphView.Duplicate(_window.position.center), evt => GraphView.CanDuplicate ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
 			menu.menu.AppendSeparator();
-			menu.menu.AppendAction("Delete _DELETE", evt => GraphView.Delete(), evt => GraphView.CanDelete ? DropdownMenuAction.Status.None : DropdownMenuAction.Status.Disabled);
+			menu.menu.AppendAction("Delete _DELETE", evt => GraphView.Delete(), evt => GraphView.CanDelete ? DropdownMenuAction.Status.Normal : DropdownMenuAction.Status.Disabled);
 
 			return menu;
 		}

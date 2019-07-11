@@ -39,6 +39,12 @@
 			background-color: #D0D0D0
 		}
 
+			.pirho-graph-view .toolbar .small-button.lock-button
+			{
+				padding: 0 8px;
+				height: 11px;
+			}
+
 			.pirho-graph-view .toolbar .small-button:active
 			{
 				background-color: #C0C0C0

@@ -643,6 +643,7 @@ namespace PiRhoSoft.Composition.Engine
 		private const string _missingIndexError = "(CCNMI) Failed to set target: index {0} is out of range for graph node {1}";
 		private const string _missingFieldError = "(CCNMF) Failed to set target: unable to find field {0} for graph node {1}";
 
+		[HideInInspector] public Graph Graph;
 		[HideInInspector] public Vector2 GraphPosition;
 		[HideInInspector] public bool IsBreakpoint = false;
 
@@ -745,12 +746,7 @@ namespace PiRhoSoft.Composition.Engine
 			public void SetTarget(NodeData target)
 			{
 				Target = target;
-			}
-
-			public void ChangeTarget(NodeData target)
-			{
 				To = target?.Node;
-				Target = target;
 
 				From.SetConnection(this, To);
 			}
