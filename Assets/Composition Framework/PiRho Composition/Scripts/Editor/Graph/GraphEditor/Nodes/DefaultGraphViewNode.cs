@@ -21,6 +21,7 @@ namespace PiRhoSoft.Composition.Editor
 		private const string _ussBreakClass = "break-button";
 		private const string _ussBreakContainerClass = "break-container";
 		private const string _ussEnableClass = "enabled";
+		private const string _ussCallstackBorder = "callstack-border";
 
 		private static readonly Color _edgeColor = new Color(0.49f, 0.73f, 1.0f, 1.0f);
 		private static readonly Color _breakColor = new Color(1.0f, 0.2f, 0.2f, 1.0f);
@@ -35,6 +36,7 @@ namespace PiRhoSoft.Composition.Editor
 		private readonly Graph _graph;
 		private readonly VisualElement _breakpoint;
 		private readonly TextField _rename;
+		private readonly VisualElement _callstackBorder;
 
 		public DefaultGraphViewNode(Graph graph, GraphNode node, GraphViewConnector nodeConnector, bool isStart) : base(node, isStart)
 		{
@@ -49,6 +51,7 @@ namespace PiRhoSoft.Composition.Editor
 
 				_rename = CreateRename();
 				_breakpoint = CreateBreakpoint();
+				_callstackBorder = CreateCallstackBorder();
 			}
 
 			if (Data.Connections.Count == 0)
@@ -92,7 +95,7 @@ namespace PiRhoSoft.Composition.Editor
 			var breakpoint = new VisualElement();
 			breakpoint.AddToClassList(_ussBreakClass);
 
-			breakpointContainer.Add(_breakpoint);
+			breakpointContainer.Add(breakpoint);
 
 			ElementHelper.ToggleClass(breakpoint, _ussEnableClass, Data.Node.IsBreakpoint);
 
@@ -101,13 +104,23 @@ namespace PiRhoSoft.Composition.Editor
 			return breakpoint;
 		}
 
+		private VisualElement CreateCallstackBorder()
+		{
+			var border = new VisualElement();
+			border.AddToClassList(_ussCallstackBorder);
+
+			mainContainer.Add(border);
+
+			return border;
+		}
+
 		public void UpdateColors(bool active, int iteration)
 		{
 			var inCallstack = _graph.IsInCallStack(Data.Node);
 			var paused = _graph.DebugState == Graph.PlaybackState.Paused;
-			//var nodeColor = active ? (paused ? _breakColor : _activeColor) : inCallstack ? _callstackColor : _edgeColor;
 			var outputs = Input.connections.Select(edge => edge.output).OfType<GraphViewOutputPort>();
 			var label = !IsStartNode && iteration > 0 ? string.Format("{0} ({1})", Data.Node.name, iteration) : Data.Node.name;
+			var borderColor = active ? (paused ? _breakColor : _activeColor) : _callstackColor;
 
 			title = label;
 
@@ -115,6 +128,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			foreach (var output in outputs)
 				output.portColor = _graph.IsInCallStack(Data.Node, output.Node.Data.Node.name) ? _callstackColor : _edgeColor;
+
+			_callstackBorder.style.visibility = inCallstack ? Visibility.Visible : Visibility.Hidden;
+			_callstackBorder.style.borderColor = borderColor;
 		}
 
 		private void ToggleBreakpoint()

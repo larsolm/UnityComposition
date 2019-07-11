@@ -66,18 +66,19 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			edit.SetValueWithoutNotify(value);
 			edit.style.visibility = Visibility.Visible;
-			edit.Q(TextInputBaseField<string>.textInputUssName).Focus();
+			edit.Q(TextField.textInputUssName).Focus();
 			edit.SelectAll(); // this doesn't work for some reason
 		}
 
 		protected void HideEditableText(TextField edit)
 		{
-			edit.style.visibility = Visibility.Hidden;
+			if (edit != null) // this needs to be here for when it is called after node is destroyed
+				edit.style.visibility = Visibility.Hidden;
 		}
 
 		private void OnEditEvent(MouseDownEvent evt, TextField edit, string value)
 		{
-			if (evt.clickCount == 2 && evt.button == 0)
+			if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
 			{
 				ShowEditableText(edit, value);
 				evt.PreventDefault();

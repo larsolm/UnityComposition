@@ -65,6 +65,12 @@
 		background-color: #202020;
 	}
 
+	.pirho-graph-view .graph .node .callstack-outline
+	{
+		border-width: 2px;
+		border-radius: 8px; 
+	}
+
 	.pirho-graph-view .delete-button
 	{
 		width: 12px;

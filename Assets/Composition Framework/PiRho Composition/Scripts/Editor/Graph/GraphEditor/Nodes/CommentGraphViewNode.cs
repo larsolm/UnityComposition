@@ -20,6 +20,7 @@ namespace PiRhoSoft.Composition.Editor
 			_edit = CreateEditableLabel(_comment, () => _commentNode.Comment, CommentChanged);
 
 			extensionContainer.Add(_comment);
+			extensionContainer.style.backgroundColor = Data.Node.NodeColor * 0.8f;
 
 			RefreshExpandedState();
 		}
@@ -27,15 +28,13 @@ namespace PiRhoSoft.Composition.Editor
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
 			evt.menu.AppendAction("Edit Comment", action => ShowEditableText(_edit, _commentNode.Comment));
-			evt.StopPropagation();
+			evt.menu.AppendSeparator();
 		}
 
 		private void CommentChanged(string comment)
 		{
 			_comment.text = comment;
 			_commentNode.Comment = comment;
-
-			RefreshExpandedState();
 		}
 
 		public override void OnUnselected()
