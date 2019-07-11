@@ -12,10 +12,13 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class GraphViewNode : Node
 	{
+		public const string UssClassName = GraphViewEditor.UssClassName + "__node";
 		public const string UssNodeDeleteButtonClassName = GraphViewEditor.UssClassName + "__node-delete-button";
 		public const string UssNodeEditableLabelClassName = GraphViewEditor.UssClassName + "__node-editable-label";
 
 		private static readonly Icon _deleteIcon = Icon.BuiltIn("d_LookDevClose");
+
+		private static readonly CustomStyleProperty<Color> _nodeColorProperty = new CustomStyleProperty<Color>("--node-color");
 
 		public GraphNode.NodeData Data { get; private set; }
 		public bool IsStartNode { get; private set; }
@@ -30,6 +33,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		public GraphViewNode(GraphNode node, bool isStart)
 		{
+			AddToClassList(UssClassName);
+
 			IsStartNode = isStart;
 			Data = new GraphNode.NodeData(node);
 
@@ -106,6 +111,13 @@ namespace PiRhoSoft.Composition.Editor
 			var help = TypeHelper.GetAttribute<HelpURLAttribute>(IsStartNode ? typeof(Graph) : Data.Node.GetType());
 			if (help != null)
 				Application.OpenURL(help.URL);
+		}
+
+		protected override void OnCustomStyleResolved(ICustomStyle style)
+		{
+			base.OnCustomStyleResolved(style);
+
+			titleContainer.style.backgroundColor = style.TryGetValue(_nodeColorProperty, out var nodeColor) ? nodeColor : Data.Node.NodeColor;
 		}
 	}
 }

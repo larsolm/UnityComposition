@@ -5,6 +5,8 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class CommentGraphViewNode : GraphViewNode
 	{
+		public const string UssCommentName = UssClassName + "--comment";
+
 		private readonly Label _comment;
 		private readonly TextField _edit;
 
@@ -12,6 +14,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		public CommentGraphViewNode(GraphNode node) : base(node, false)
 		{
+			AddToClassList(UssCommentName);
+
 			title = "Comment";
 
 			CreateDeleteButton();

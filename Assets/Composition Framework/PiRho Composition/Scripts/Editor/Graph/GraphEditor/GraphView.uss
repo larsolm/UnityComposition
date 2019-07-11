@@ -61,6 +61,18 @@
 	background-color: #202020;
 }
 
+.pirho-graph-view__node.node
+{
+}
+
+.pirho-graph-view__node--default.node
+{
+}
+
+.pirho-graph-view__node--comment.node
+{
+}
+
 .pirho-graph-view__node-callstack-border
 {
 	border-width: 2px;
@@ -76,7 +88,7 @@
 	margin: 0 8px;
 }
 
-.pirho-graph-view .node:hover .pirho-graph-view__node-delete-button
+.pirho-graph-view__node:hover .pirho-graph-view__node-delete-button
 {
 	visibility: visible;
 }
@@ -151,4 +163,16 @@
 {
 	padding: 0;
 	margin: 0;
+}
+
+.pirho-graph-view__port.port
+{
+}
+
+.pirho-graph-view__port--input.port
+{
+}
+
+.pirho-graph-view__port--output.port
+{
 }

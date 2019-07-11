@@ -518,14 +518,6 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateToolbar()
 		{
-			var toolbar = new Toolbar();
-			toolbar.AddToClassList(UssToolbarClassName);
-
-			var createButton = new Label() { tooltip = "Create" };
-			createButton.AddToClassList(UssToolbarButtonClassName);
-			createButton.AddToClassList(UssToolbarButtonLargeClassName);
-			createButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
-
 			var editButton = CreateEditMenu();
 			var viewButton = CreateViewMenu();
 
@@ -579,6 +571,8 @@ namespace PiRhoSoft.Composition.Editor
 
 			RefreshToolbar();
 
+			var toolbar = new Toolbar();
+			toolbar.AddToClassList(UssToolbarClassName);
 			toolbar.Add(editButton);
 			toolbar.Add(viewButton);
 			toolbar.Add(_playButton);

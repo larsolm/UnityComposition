@@ -31,7 +31,6 @@ MonoBehaviour:
   - {fileID: 7810659668778417148}
   - {fileID: 4460749340407872534}
   - {fileID: 3071818736979048991}
-  - {fileID: 4289624168120034864}
 --- !u!114 &3071818736979048991
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -45,26 +44,7 @@ MonoBehaviour:
   m_Name: ConditionalNode
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 465, y: -58}
-  IsBreakpoint: 0
-  OnTrue: {fileID: 0}
-  OnFalse: {fileID: 0}
-  Condition:
-    _statement: 
---- !u!114 &4289624168120034864
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4b01c20495f7161488d070ded27f0651, type: 3}
-  m_Name: ConditionalNode
-  m_EditorClassIdentifier: 
-  Graph: {fileID: 11400000}
-  GraphPosition: {x: 409, y: 165}
+  GraphPosition: {x: 424, y: -107}
   IsBreakpoint: 0
   OnTrue: {fileID: 0}
   OnFalse: {fileID: 0}
@@ -83,10 +63,10 @@ MonoBehaviour:
   m_Name: ConditionalNode
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 191, y: 53}
+  GraphPosition: {x: 190, y: 59}
   IsBreakpoint: 0
   OnTrue: {fileID: 3071818736979048991}
-  OnFalse: {fileID: 4289624168120034864}
+  OnFalse: {fileID: 0}
   Condition:
     _statement: 
 --- !u!114 &7810659668778417148
