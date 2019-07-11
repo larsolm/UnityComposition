@@ -3,175 +3,152 @@
 	flex-grow: 1;
 }
 
-	.pirho-graph-view .toolbar
-	{
-		flex-grow: 1;
-		flex-direction: row;
-		max-height: 17px;
-		padding: 0 5px;
-		align-items: center;
-		font-size: 10px;
-	}
+.pirho-graph-view__toolbar
+{
+	flex-grow: 1;
+	flex-direction: row;
+	max-height: 17px;
+	padding: 0 5px;
+	align-items: center;
+	font-size: 10px;
+}
 
-		.pirho-graph-view .toolbar .large-button
-		{
-			min-width: 60px;
-			color: #000;
-			padding: 0 5px;
-			margin: 0 0 0 0;
-			border-color: #000;
-			border-right-width: 1px;
-			background-color: #D0D0D0
-		}
+.pirho-graph-view__toolbar-button
+{
+	border-color: #000;
+	border-right-width: 1px;
+	background-color: #D0D0D0
+}
 
-			.pirho-graph-view .toolbar .large-button:active
-			{
-				background-color: #C0C0C0
-			}
+.pirho-graph-view__toolbar-button:active
+{
+	background-color: #C0C0C0
+}
 
-		.pirho-graph-view .toolbar .small-button
-		{
-			width: 28px;
-			padding: 0 6px;
-			height: 14px;
-			border-color: #000;
-			border-right-width: 1px;
-			background-color: #D0D0D0
-		}
+.pirho-graph-view__toolbar-button--large
+{
+	min-width: 60px;
+	color: #000;
+	padding: 0 5px;
+	margin: 0 0 0 0;
+}
+.pirho-graph-view__toolbar-button--small
+{
+	width: 28px;
+	padding: 0 6px;
+	height: 14px;
+}
 
-			.pirho-graph-view .toolbar .small-button.lock-button
-			{
-				padding: 0 8px;
-				height: 11px;
-			}
+.pirho-graph-view__toolbar-button--lock
+{
+	padding: 0 8px;
+	height: 11px;
+}
 
-			.pirho-graph-view .toolbar .small-button:active
-			{
-				background-color: #C0C0C0
-			}
+.pirho-graph-view__toolbar-button--active
+{
+	background-color: #F6F6F6
+}
 
-			.pirho-graph-view .toolbar .small-button.enabled:active
-			{
-				background-color: #C0C0C0
-			}
+.pirho-graph-view__toolbar-button--first
+{
+	border-left-width: 1px;
+}
 
-			.pirho-graph-view .toolbar .small-button.enabled
-			{
-				background-color: #F6F6F6
-			}
+.pirho-graph-view__graph
+{
+	flex-grow: 1;
+	background-color: #202020;
+}
 
-		.pirho-graph-view .toolbar .first
-		{
-			border-left-width: 1px;
-		}
+.pirho-graph-view__node-callstack-border
+{
+	border-width: 2px;
+	border-radius: 8px; 
+}
 
-	.pirho-graph-view .graph
-	{
-		flex-grow: 1;
-		background-color: #202020;
-	}
+.pirho-graph-view__node-delete-button
+{
+	width: 12px;
+	height: 12px;
+	align-self: center;
+	visibility: hidden;
+	margin: 0 8px;
+}
 
-	.pirho-graph-view .graph .node .callstack-outline
-	{
-		border-width: 2px;
-		border-radius: 8px; 
-	}
+.pirho-graph-view .node:hover .pirho-graph-view__node-delete-button
+{
+	visibility: visible;
+}
 
-	.pirho-graph-view .delete-button
-	{
-		width: 12px;
-		height: 12px;
-		align-self: center;
-		visibility: hidden;
-		margin: 0 8px;
-	}
+.pirho-graph-view__node-delete-button:hover
+{
+	background-color: #2B2B2B;
+}
 
-	.pirho-graph-view .node:hover .delete-button
-	{
-		visibility: visible;
-	}
+.pirho-graph-view__node-breakpoint-container
+{
+	position: absolute;
+	width: 24px;
+	height: 24px;
+	padding: 5px;
+}
 
+.pirho-graph-view__node-breakpoint-button
+{
+	width: 14px;
+	height: 14px;
+	border-radius: 12px;
+	align-self: center;
+	opacity: 0.0;
+}
 
-	.pirho-graph-view .delete-button:hover
-	{
-		background-color: #2B2B2B;
-	}
+.pirho-graph-view__node-breakpoint-container:hover .pirho-graph-view__node-breakpoint-button
+{
+	background-color: #900;
+	opacity: 1.0;
+}
 
-	.pirho-graph-view .break-container
-	{
-		position: absolute;
-		width: 24px;
-		height: 24px;
-		padding: 5px;
-	}
+.pirho-graph-view__node-breakpoint-container:active .pirho-graph-view__node-breakpoint-button
+{
+	background-color: #700;
+	opacity: 1.0;
+}
 
-		.pirho-graph-view .break-container .break-button
-		{
-			width: 14px;
-			height: 14px;
-			border-radius: 12px;
-			align-self: center;
-			opacity: 0.0;
-		}
+.pirho-graph-view__node-breakpoint-button--active
+{
+	background-color: #F00;
+	opacity: 1.0;
+}
 
-		.pirho-graph-view .break-container:hover .break-button
-		{
-			background-color: #900;
-			opacity: 1.0;
-		}
+.pirho-graph-view--breakpoints-disabled .pirho-graph-view__node-breakpoint-container:hover .pirho-graph-view__node-breakpoint-button
+{
+	background-color: #755;
+	opacity: 1.0;
+}
 
-		.pirho-graph-view .break-container:active .break-button
-		{
-			background-color: #700;
-			opacity: 1.0;
-		}
+.pirho-graph-view--breakpoints-disabled .pirho-graph-view__node-breakpoint-container:active .pirho-graph-view__node-breakpoint-button
+{
+	background-color: #533;
+	opacity: 1.0;
+}
 
-		.pirho-graph-view .break-container .break-button.enabled
-		{
-			background-color: #F00;
-			opacity: 1.0;
-		}
+.pirho-graph-view--breakpoints-disabled .pirho-graph-view__node-breakpoint-button--active
+{
+	background-color: #A55;
+	opacity: 1.0;
+}
 
-		.pirho-graph-view .break-container:active .break-button.enabled
-		{
-			background-color: #700;
-			opacity: 1.0;
-		}
+.pirho-graph-view__node-editable-label
+{
+	flex-grow: 1;
+	padding: 0;
+	margin: 0;
+	background-color: #3D3D3D;
+}
 
-	.pirho-graph-view.break-disabled .break-container:hover .break-button
-	{
-		background-color: #755;
-		opacity: 1.0;
-	}
-
-	.pirho-graph-view.break-disabled .break-container:active .break-button
-	{
-		background-color: #533;
-		opacity: 1.0;
-	}
-
-	.pirho-graph-view.break-disabled .break-container .break-button.enabled
-	{
-		background-color: #A55;
-		opacity: 1.0;
-	}
-
-	.pirho-graph-view.break-disabled .break-container:active .break-button.enabled
-	{
-		background-color: #533;
-		opacity: 1.0;
-	}
-
-	.pirho-graph-view .editable
-	{
-		flex-grow: 1;
-		padding: 0;
-		margin: 0;
-		background-color: #3D3D3D;
-	}
-
-		.pirho-graph-view .editable > TextInput
-		{
-			padding: 0;
-			margin: 0;
-		}
+.pirho-graph-view__node-editable-label > TextInput
+{
+	padding: 0;
+	margin: 0;
+}

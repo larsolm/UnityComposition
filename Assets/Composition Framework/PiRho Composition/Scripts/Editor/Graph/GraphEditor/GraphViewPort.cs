@@ -43,5 +43,17 @@ namespace PiRhoSoft.Composition.Editor
 			style.justifyContent = Justify.SpaceBetween;
 			style.alignSelf = Align.Stretch;
 		}
+
+		public override void OnStartEdgeDragging()
+		{
+			base.OnStartEdgeDragging();
+
+			var output = m_EdgeConnector.edgeDragHelper.edgeCandidate?.output;
+			if (output == this)
+			{
+				var graph = GetFirstAncestorOfType<GraphView>();
+				graph.DeleteElements(connections);
+			}
+		}
 	}
 }

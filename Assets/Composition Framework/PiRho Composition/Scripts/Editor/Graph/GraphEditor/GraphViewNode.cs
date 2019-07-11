@@ -12,8 +12,8 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class GraphViewNode : Node
 	{
-		private const string _ussDeleteClass = "delete-button";
-		private const string _ussEditableClass = "editable";
+		public const string UssNodeDeleteButtonClassName = GraphViewEditor.UssClassName + "__node-delete-button";
+		public const string UssNodeEditableLabelClassName = GraphViewEditor.UssClassName + "__node-editable-label";
 
 		private static readonly Icon _deleteIcon = Icon.BuiltIn("d_LookDevClose");
 
@@ -52,7 +52,7 @@ namespace PiRhoSoft.Composition.Editor
 		protected TextField CreateEditableLabel(Label container, Func<string> getValue, Action<string> setValue, bool multiline = false)
 		{
 			var edit = new TextField() { value = getValue(), multiline = true };
-			edit.AddToClassList(_ussEditableClass);
+			edit.AddToClassList(UssNodeEditableLabelClassName);
 			edit.RegisterValueChangedCallback(evt => setValue(evt.newValue));
 			edit.Q(TextInputBaseField<string>.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
 
@@ -90,7 +90,7 @@ namespace PiRhoSoft.Composition.Editor
 		protected void CreateDeleteButton()
 		{
 			var deleteButton = new Image { image = _deleteIcon.Content, tooltip = "Delete this node" };
-			deleteButton.AddToClassList(_ussDeleteClass);
+			deleteButton.AddToClassList(UssNodeDeleteButtonClassName);
 			deleteButton.AddManipulator(new Clickable(DeleteNode));
 			titleButtonContainer.Add(deleteButton);
 		}

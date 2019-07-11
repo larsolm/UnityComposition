@@ -18,10 +18,10 @@ namespace PiRhoSoft.Composition.Editor
 
 	public class DefaultGraphViewNode : GraphViewNode, IInputOutputNode
 	{
-		private const string _ussBreakClass = "break-button";
-		private const string _ussBreakContainerClass = "break-container";
-		private const string _ussEnableClass = "enabled";
-		private const string _ussCallstackBorder = "callstack-border";
+		public const string UssCallstackBorderClassName = GraphViewEditor.UssClassName + "__node-callstack-border";
+		public const string UssBreakpointClassName = GraphViewEditor.UssClassName + "__node-breakpoint-button";
+		public const string UssBreakpointContainerClassName = GraphViewEditor.UssClassName + "__node-breakpoint-container";
+		public const string UssBreakpointActiveClassName = UssBreakpointClassName + "--active";
 
 		private static readonly Color _edgeColor = new Color(0.49f, 0.73f, 1.0f, 1.0f);
 		private static readonly Color _breakColor = new Color(1.0f, 0.2f, 0.2f, 1.0f);
@@ -86,15 +86,15 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateBreakpoint()
 		{
 			var breakpointContainer = new VisualElement { tooltip = "Toggle this node as a breakpoint" };
-			breakpointContainer.AddToClassList(_ussBreakContainerClass);
+			breakpointContainer.AddToClassList(UssBreakpointContainerClassName);
 			breakpointContainer.AddManipulator(new Clickable(ToggleBreakpoint));
 
 			var breakpoint = new VisualElement();
-			breakpoint.AddToClassList(_ussBreakClass);
+			breakpoint.AddToClassList(UssBreakpointClassName);
 
 			breakpointContainer.Add(breakpoint);
 
-			ElementHelper.ToggleClass(breakpoint, _ussEnableClass, Data.Node.IsBreakpoint);
+			ElementHelper.ToggleClass(breakpoint, UssBreakpointActiveClassName, Data.Node.IsBreakpoint);
 
 			Input.Add(breakpointContainer);
 
@@ -104,7 +104,7 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateCallstackBorder()
 		{
 			var border = new VisualElement();
-			border.AddToClassList(_ussCallstackBorder);
+			border.AddToClassList(UssCallstackBorderClassName);
 
 			mainContainer.Add(border);
 
@@ -133,7 +133,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void ToggleBreakpoint()
 		{
 			Data.Node.IsBreakpoint = !Data.Node.IsBreakpoint;
-			ElementHelper.ToggleClass(_breakpoint, _ussEnableClass, Data.Node.IsBreakpoint);
+			ElementHelper.ToggleClass(_breakpoint, UssBreakpointActiveClassName, Data.Node.IsBreakpoint);
 		}
 
 		public override void OnUnselected()
