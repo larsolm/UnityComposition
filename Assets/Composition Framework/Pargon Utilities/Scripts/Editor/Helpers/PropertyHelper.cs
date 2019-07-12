@@ -51,6 +51,31 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			}
 		}
 
+		public static void ResizeArray(SerializedProperty arrayProperty, int newSize)
+		{
+			var size = arrayProperty.arraySize;
+			arrayProperty.arraySize = newSize;
+
+			// new items will be a copy of the previous last item so this resets them to their default value
+			for (var i = size; i < newSize; i++)
+				SetToDefault(arrayProperty.GetArrayElementAtIndex(i));
+
+			arrayProperty.serializedObject.ApplyModifiedProperties();
+		}
+
+		public static void RemoveFromArray(SerializedProperty arrayProperty, int index)
+		{
+			// If an object is removed from an array of ObjectReference, DeleteArrayElementAtIndex will set the item
+			// to null instead of removing it. If the entry is already null it will be removed as expected.
+			var item = arrayProperty.GetArrayElementAtIndex(index);
+
+			if (item.propertyType == SerializedPropertyType.ObjectReference && item.objectReferenceValue != null)
+				item.objectReferenceValue = null;
+
+			arrayProperty.DeleteArrayElementAtIndex(index);
+			arrayProperty.serializedObject.ApplyModifiedProperties();
+		}
+
 		public static SerializedProperty GetSibling(SerializedProperty property, string siblingName)
 		{
 			var path = property.propertyPath;

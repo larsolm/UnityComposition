@@ -88,7 +88,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			_itemContainer.Clear();
 
-			if (_proxy.Count == 0)
+			if (_proxy.ItemCount == 0)
 			{
 				var empty = new Label(_emptyLabel);
 				empty.AddToClassList(_ussEmptyClass);
@@ -97,7 +97,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			}
 			else
 			{
-				for (var i = 0; i < _proxy.Count; i++)
+				for (var i = 0; i < _proxy.ItemCount; i++)
 				{
 					var index = i; // Need for capturing in lambdas
 					var item = new VisualElement();
@@ -107,7 +107,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 					var container = new VisualElement();
 					container.AddToClassList(_ussItemContainerClass);
 
-					var element = _proxy.CreateElement(index);
+					var element = _proxy.CreateItem(index);
 
 					var dragHandle = new Image { image = _dragIcon.Content, tooltip = "Move this item" };
 					dragHandle.AddToClassList(_ussDragHandleClass);
@@ -144,7 +144,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		private void MoveItem(int from, int to)
 		{
-			_proxy.MoveItem(from, to);
+			_proxy.ReorderItem(from, to);
 			OnItemMoved?.Invoke(from, to);
 			Rebuild();
 		}

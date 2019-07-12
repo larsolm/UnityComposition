@@ -8,24 +8,20 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	[CustomPropertyDrawer(typeof(EulerAttribute))]
 	class EulerDrawer : PropertyDrawer
 	{
-		private const string _invalidTypeWarning = "(PICED) Invalid type for EulerAttribute on field {0}: Euler can only be applied to quaternion fields";
+		private const string _invalidTypeWarning = "(PUEEDIT) invalid type for EulerAttribute on field '{0}': Euler can only be applied to Quaternion fields";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
-
 			if (property.propertyType == SerializedPropertyType.Quaternion)
 			{
-				var euler = new Euler(property);
-				euler.Setup(property.quaternionValue);
-				container.Add(euler);
+				var field = new EulerField(property, property.displayName);
+				return ElementHelper.SetupPropertyField(field, fieldInfo);
 			}
 			else
 			{
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
+				return ElementHelper.CreateEmptyPropertyField(property.displayName);
 			}
-
-			return container;
 		}
 	}
 }

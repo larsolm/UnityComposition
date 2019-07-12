@@ -8,38 +8,32 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	[CustomPropertyDrawer(typeof(ListAttribute))]
 	class ListDrawer : PropertyDrawer
 	{
-		private const string _invalidTypeWarning = "(PUCLDIT) Invalid type for ListAttribute on field '{0}': List can only be applied to SerializedList or Array fields";
+		private const string _invalidTypeWarning = "(PULDIT) invalid type for ListAttribute on field '{0}': List can only be applied to SerializedList or SerializedArray fields";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			if (property.propertyType == SerializedPropertyType.Generic) // This might be wrong. Remember to check.
+			var items = property.FindPropertyRelative("_items");
+
+			if (items != null && items.isArray)
 			{
 				var listAttribute = attribute as ListAttribute;
-				var items = property.FindPropertyRelative("_items");
 				var itemDrawer = PropertyHelper.GetNextDrawer(fieldInfo, attribute);
-				var proxy = itemDrawer != null ? new PropertyDrawerListProxy(items, itemDrawer) : new PropertyListProxy(items);
+				var tooltip = ElementHelper.GetTooltip(fieldInfo);
 
-				return new ListElement(proxy, property.displayName, ElementHelper.GetTooltip(fieldInfo), listAttribute.AllowAdd, listAttribute.AllowRemove, listAttribute.AllowReorder, listAttribute.EmptyLabel);
+				return new ListField(items, itemDrawer)
+				{
+					Label = property.displayName,
+					Tooltip = tooltip,
+					EmptyLabel = listAttribute.EmptyLabel,
+					AllowAdd = listAttribute.AllowAdd,
+					AllowRemove = listAttribute.AllowRemove,
+					AllowReorder = listAttribute.AllowReorder
+				};
 			}
 			else
 			{
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
-				return new VisualElement();
-			}
-		}
-
-		private class PropertyDrawerListProxy : PropertyListProxy
-		{
-			private readonly PropertyDrawer _drawer;
-
-			public PropertyDrawerListProxy(SerializedProperty property, PropertyDrawer drawer) : base(property)
-			{
-				_drawer = drawer;
-			}
-
-			public override VisualElement CreateElement(int index)
-			{
-				return _drawer.CreatePropertyGUI(Property.GetArrayElementAtIndex(index));
+				return ElementHelper.CreateEmptyPropertyField(property.displayName);
 			}
 		}
 	}

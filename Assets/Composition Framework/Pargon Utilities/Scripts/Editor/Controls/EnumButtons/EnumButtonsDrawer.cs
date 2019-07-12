@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,7 +8,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	[CustomPropertyDrawer(typeof(EnumButtonsAttribute))]
 	class EnumButtonsDrawer : PropertyDrawer
 	{
-		private const string _invalidTypeWarning = "(PUEBDIT) Invalid type for EnumButtonsDrawer on field '{0}': EnumButtons can only be applied to Enum fields";
+		private const string _invalidTypeWarning = "(PUEEBDIT) invalid type for EnumButtonsAttribute on field '{0}': EnumButtons can only be applied to Enum fields";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
@@ -17,15 +16,14 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			{
 				var type = fieldInfo.FieldType;
 				var flags = attribute is EnumButtonsAttribute enumButtons ? enumButtons.Flags : null;
-				var tooltip = ElementHelper.GetTooltip(fieldInfo);
-				var element = new EnumButtonsField(property, property.displayName, type, flags);
+				var field = new EnumButtonsField(property, property.displayName, type, flags);
 
-				return ElementHelper.SetupPropertyField(element, tooltip);
+				return ElementHelper.SetupPropertyField(field, fieldInfo);
 			}
 			else
 			{
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
-				return ElementHelper.CreatePropertyContainer(property.displayName);
+				return ElementHelper.CreateEmptyPropertyField(property.displayName);
 			}
 		}
 	}

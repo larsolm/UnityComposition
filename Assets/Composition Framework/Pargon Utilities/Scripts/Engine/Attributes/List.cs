@@ -7,7 +7,6 @@ namespace PiRhoSoft.PargonUtilities.Engine
 		public bool AllowAdd = true;
 		public bool AllowRemove = true;
 		public bool AllowReorder = true;
-
-		public string EmptyLabel = "List is empty";
+		public string EmptyLabel = null;
 	}
 }

@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
@@ -18,12 +19,26 @@ namespace PiRhoSoft.CompositionExample
 	{
 	}
 
+	[Serializable]
+	public class IntList : SerializedList<int> { }
+
 	[AddComponentMenu("PiRho Soft/Examples/Test")]
 	public class TestBehaviour : MonoBehaviour
 	{
 		[EnumButtons]
 		public TestEnum TestEnum = TestEnum.Two;
+
+		//[Euler]
 		public int TestInt = 5;
+
+		[Euler]
+		public Quaternion TestQuaternion = Quaternion.Euler(45, 0, 0);
+
+		[List]
+		public IntList TestList = new IntList { 0, 1, 2, 3, 4, 5 };
+		
+		[Euler]
+		public List<Quaternion> TestList2 = new List<Quaternion>();
 
 		private void Start()
 		{
@@ -32,14 +47,10 @@ namespace PiRhoSoft.CompositionExample
 
 		private IEnumerator Increment()
 		{
-			while (true)
+			while (TestList.Count > 1)
 			{
-				if ((int)TestEnum >= 15)
-					TestEnum = 0;
-				else
-					TestEnum++;
-
-				yield return new WaitForSeconds(1.0f);
+				yield return new WaitForSeconds(2.0f);
+				TestList.RemoveAt(1);
 			}
 		}
 	}

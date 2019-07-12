@@ -16,6 +16,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
+			// make a wrapper element that overrides HandleEvent for IChangeEvents
+
 			var change = attribute as ChangeTriggerAttribute;
 			var container = ElementHelper.GetPropertyContainer(property, property.displayName, fieldInfo, attribute);
 			var method = fieldInfo.DeclaringType.GetMethod(change.Method, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);

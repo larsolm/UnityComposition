@@ -1,5 +1,4 @@
 ﻿using System;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,9 +6,9 @@ namespace PiRhoSoft.PargonUtilities.Editor
 {
 	public class EnumButtonsControl : VisualElement
 	{
-		private const string _invalidTypeWarning = "(PUEBCIT) failed to set value on EnumButtonsControl: attempted to set a value with type '{0}' but the control is using type '{1}'";
+		private const string _invalidTypeWarning = "(PUEEBCIT) failed to set value on EnumButtonsControl: attempted to set a value with type '{0}' but the control is using type '{1}'";
 
-		private const string _stylesheet = Utilities.AssetPath + "Controls/EnumButtons/EnumButtons.uss";
+		private const string _stylesheet = Utilities.AssetPath + "Controls/EnumButtons/EnumButtonsControl.uss";
 
 		public static readonly string ussClassName = "pirho-enum-buttons";
 		public static readonly string buttonUssClassName = "pirho-enum-buttons__button";
@@ -79,11 +78,11 @@ namespace PiRhoSoft.PargonUtilities.Editor
 					var current = GetIntFromEnum(Type, Value);
 					var buttonValue = GetIntFromEnum(Type, button.userData as Enum);
 
-					ElementHelper.ToggleClass(button, activeButtonUssClassName, (buttonValue != 0 && (current & buttonValue) == buttonValue) || (current == 0 && buttonValue == 0));
+					button.EnableInClassList(activeButtonUssClassName, (buttonValue != 0 && (current & buttonValue) == buttonValue) || (current == 0 && buttonValue == 0));
 				}
 				else
 				{
-					ElementHelper.ToggleClass(button, activeButtonUssClassName, Value.Equals(button.userData as Enum));
+					button.EnableInClassList(activeButtonUssClassName, Value.Equals(button.userData as Enum));
 				}
 			});
 		}

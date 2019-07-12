@@ -34,7 +34,7 @@ namespace PiRhoSoft.CompositionEditor
 				_addText = new TextField();
 				_addText.RegisterValueChangedCallback(evt =>
 				{
-					ElementHelper.ToggleClass(_addText, DictionaryElement.UssInvalidKeyClass, !IsValidKey(evt.newValue));
+					_addText.EnableInClassList(DictionaryElement.UssInvalidKeyClass, !IsValidKey(evt.newValue));
 				});
 
 				return new Placeholder<string>("(new key)", _addText);

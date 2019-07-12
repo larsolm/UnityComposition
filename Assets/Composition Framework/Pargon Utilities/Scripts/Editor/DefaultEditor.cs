@@ -27,7 +27,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				while (iterator.NextVisible(false));
 			}
 
-			container.Bind(serializedObject); // this seems to happen automatically except when exiting play mode
+			// container.Bind(serializedObject); // this seems to happen automatically except when exiting play mode
 
 			return container;
 		}

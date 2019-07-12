@@ -215,7 +215,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement CreateQuaternion()
 		{
-			return new Euler(_owner, () => _value.Quaternion, value => SetValue(VariableValue.Create(value)));
+			return null;//new Euler(_owner, () => _value.Quaternion, value => SetValue(VariableValue.Create(value)));
 		}
 
 		private VisualElement CreateRect()

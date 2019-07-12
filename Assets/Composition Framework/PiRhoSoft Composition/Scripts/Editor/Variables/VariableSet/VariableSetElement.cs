@@ -32,7 +32,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			private readonly Object _owner;
 
-			public override int Count => Variables.VariableCount;
+			public override int ItemCount => Variables.VariableCount;
 
 			public VariablesProxy(Object owner, VariableSet variables)
 			{
@@ -40,7 +40,7 @@ namespace PiRhoSoft.CompositionEditor
 				Variables = variables;
 			}
 
-			public override VisualElement CreateElement(int index)
+			public override VisualElement CreateItem(int index)
 			{
 				var container = new VisualElement();
 
@@ -69,9 +69,14 @@ namespace PiRhoSoft.CompositionEditor
 				return container;
 			}
 
+			public override bool NeedsUpdate(VisualElement item, int index)
+			{
+				return true;
+			}
+
 			public override void AddItem() { }
 			public override void RemoveItem(int index) { }
-			public override void MoveItem(int from, int to) { }
+			public override void ReorderItem(int from, int to) { }
 		}
 	}
 }

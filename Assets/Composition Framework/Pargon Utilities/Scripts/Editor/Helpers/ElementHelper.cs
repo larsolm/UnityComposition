@@ -58,44 +58,18 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		#region Style Helpers
 
-		public static void ToggleClass(VisualElement element, string className, bool isValid)
-		{
-			if (isValid && !element.ClassListContains(className))
-				element.AddToClassList(className);
-			else if (!isValid && element.ClassListContains(className))
-				element.RemoveFromClassList(className);
-		}
-
-		public static void AlternateClass(VisualElement element, string validClass, string invalidClass, bool isValid)
-		{
-			if (isValid)
-			{
-				if (!element.ClassListContains(validClass))
-					element.AddToClassList(validClass);
-
-				if (element.ClassListContains(invalidClass))
-					element.RemoveFromClassList(invalidClass);
-			}
-			else
-			{
-				if (!element.ClassListContains(invalidClass))
-					element.AddToClassList(invalidClass);
-
-				if (element.ClassListContains(validClass))
-					element.RemoveFromClassList(validClass);
-			}
-		}
-
-		public static void SetVisible(VisualElement element, bool visible)
+		public static void SetVisible(this VisualElement element, bool visible)
 		{
 			element.style.display = visible ? DisplayStyle.Flex : DisplayStyle.None;
 		}
 
 		#endregion
 
-		#region Field Helpers
+		#region BaseField Extensions
 
 		private const string _visualInputProperty = "visualInput";
+
+		public static readonly string BaseFieldUssClassName = BaseField<int>.ussClassName;
 
 		public static VisualElement GetVisualInput<T>(this BaseField<T> field)
 		{
@@ -107,6 +81,14 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			GetVisualInputProperty<T>().SetValue(field, element);
 		}
 
+		public static void SetBaseFieldLabel(VisualElement baseField, string label)
+		{
+			// BaseField is generic without a non-generic base even though label is not dependent on the generic type
+			// so it has to be accessed through reflection. This is a public api, though, so it shouldn't change.
+
+			baseField.GetType().GetProperty("label")?.SetValue(baseField, label);
+		}
+
 		private static PropertyInfo GetVisualInputProperty<T>()
 		{
 			return typeof(BaseField<T>).GetProperty(_visualInputProperty, BindingFlags.Instance | BindingFlags.NonPublic);
@@ -114,11 +96,61 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 		#endregion
 
+		#region Event Helpers
+
+		private const string _serializedPropertyBindEventChangedError = "(PUEEHSPBEC) binding event internals have changed - custom editor bindings may not function correctly";
+		private const string _serializedPropertyBindEventTypeName = "UnityEditor.UIElements.SerializedPropertyBindEvent, UnityEditor";
+		private const string _serializedPropertyBindEventPropertyName = "bindProperty";
+
+		private static Type _serializedPropertyBindEventType = null;
+		private static PropertyInfo _serializedPropertyBindEventProperty = null;
+
+		public static Type SerializedPropertyBindEventType
+		{
+			get
+			{
+				if (_serializedPropertyBindEventType == null)
+					_serializedPropertyBindEventType = Type.GetType(_serializedPropertyBindEventTypeName);
+
+				if (_serializedPropertyBindEventType == null)
+					Debug.LogWarning(_serializedPropertyBindEventChangedError);
+
+				return _serializedPropertyBindEventType;
+			}
+		}
+
+		public static PropertyInfo SerializedPropertyBindEventProperty
+		{
+			get
+			{
+				if (_serializedPropertyBindEventProperty == null)
+					_serializedPropertyBindEventProperty = SerializedPropertyBindEventType?.GetProperty(_serializedPropertyBindEventPropertyName, typeof(SerializedProperty));
+
+				if (_serializedPropertyBindEventType != null && _serializedPropertyBindEventProperty == null)
+					Debug.LogWarning(_serializedPropertyBindEventChangedError);
+
+				return _serializedPropertyBindEventProperty;
+			}
+		}
+
+		public static bool IsSerializedPropertyBindEvent(EventBase evt, out SerializedProperty property)
+		{
+			property = evt.GetType() == SerializedPropertyBindEventType
+				? SerializedPropertyBindEventProperty?.GetValue(evt) as SerializedProperty
+				: null;
+
+			return property != null;
+		}
+
+		#endregion
+
 		#region Element Helpers
 
-		public static VisualElement SetupPropertyField<T>(BaseField<T> field, string tooltip)
+		public static VisualElement SetupPropertyField<T>(BaseField<T> field, FieldInfo fieldInfo)
 		{
-			field.labelElement.tooltip = tooltip;
+			// TODO: look for stretch attribute and set up accordingly
+
+			field.labelElement.tooltip = GetTooltip(fieldInfo);
 			field.labelElement.AddToClassList(PropertyField.labelUssClassName);
 			field.GetVisualInput().AddToClassList(PropertyField.inputUssClassName);
 
@@ -197,7 +229,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				case SerializedPropertyType.Vector2: return new Vector2Field();
 				case SerializedPropertyType.Vector3: return new Vector3Field();
 				case SerializedPropertyType.Vector4: return new Vector4Field();
-				case SerializedPropertyType.Quaternion: return new Euler();
+				case SerializedPropertyType.Quaternion: return new EulerField(property, property.displayName);
 				case SerializedPropertyType.Rect: return new RectField();
 				case SerializedPropertyType.Bounds: return new BoundsField();
 				case SerializedPropertyType.Vector2Int: return new Vector2IntField();
@@ -222,7 +254,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				case Vector2Field field: property.vector2Value = field.value; break;
 				case Vector3Field field: property.vector3Value = field.value; break;
 				case Vector4Field field: property.vector4Value = field.value; break;
-				case Euler field: property.quaternionValue = field.GetValueFromElement(element); break;
+				case EulerField field: property.quaternionValue = field.value; break;
 				case RectField field: property.rectValue = field.value; break;
 				case BoundsField field: property.boundsValue = field.value; break;
 				case Vector2IntField field: property.vector2IntValue = field.value; break;
@@ -270,7 +302,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				case INotifyValueChanged<RectInt> field: field.RegisterValueChangedCallback(e => action()); return true;
 				case INotifyValueChanged<BoundsInt> field: field.RegisterValueChangedCallback(e => action()); return true;
 				case EnumDropdown field: field.RegisterCallback<ChangeEvent<int>>(e => action()); return true;
-				case Euler field: field.RegisterCallback<ChangeEvent<Vector3>>(e => action()); return true;
 				default: return false;
 			}
 		}
@@ -379,7 +410,6 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				switch (Element)
 				{
 					case IBindable field: field.BindProperty(property); break;
-					case Euler field: Bind(field, field, property); break;
 				}
 
 				Add(Element);
@@ -387,5 +417,42 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		}
 
 		#endregion
+	}
+
+	public class SimpleBinding<T> : BindableElement, INotifyValueChanged<T>
+	{
+		private T _value;
+		private Action<T> _onChanged;
+
+		public T value
+		{
+			get => _value;
+			set
+			{
+				SetValueWithoutNotify(value);
+				_onChanged(value);
+			}
+		}
+
+		public SimpleBinding(T value, Action<T> onChanged)
+		{
+			_value = value;
+			_onChanged = onChanged;
+
+			style.display = DisplayStyle.None;
+		}
+
+		public void Reset(SerializedProperty property)
+		{
+			if (this.IsBound())
+				binding.Release();
+
+			this.BindProperty(property);
+		}
+
+		public void SetValueWithoutNotify(T newValue)
+		{
+			_value = newValue;
+		}
 	}
 }

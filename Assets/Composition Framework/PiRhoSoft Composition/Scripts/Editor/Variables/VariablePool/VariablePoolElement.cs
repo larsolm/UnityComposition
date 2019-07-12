@@ -41,7 +41,7 @@ namespace PiRhoSoft.CompositionEditor
 
 			private bool _definitionVisible = false;
 
-			public override int Count => Variables.Variables.Count;
+			public override int ItemCount => Variables.Variables.Count;
 			
 			public VariablesProxy(Object owner, VariablePool variables)
 			{
@@ -49,7 +49,7 @@ namespace PiRhoSoft.CompositionEditor
 				Variables = variables;
 			}
 
-			public override VisualElement CreateElement(int index)
+			public override VisualElement CreateItem(int index)
 			{
 				var label = new TextField() { value = Variables.Names[index], isDelayed = true };
 				label.AddToClassList(_ussLabelClass);
@@ -106,6 +106,11 @@ namespace PiRhoSoft.CompositionEditor
 				return container;
 			}
 
+			public override bool NeedsUpdate(VisualElement item, int index)
+			{
+				return true;
+			}
+
 			public override void AddItem()
 			{
 				// TODO: make sure this is viable
@@ -117,7 +122,7 @@ namespace PiRhoSoft.CompositionEditor
 				Variables.RemoveVariable(index);
 			}
 
-			public override void MoveItem(int from, int to)
+			public override void ReorderItem(int from, int to)
 			{
 				Variables.VariableMoved(from, to);
 			}

@@ -75,7 +75,8 @@ namespace PiRhoSoft.PargonUtilities.Editor
 					if (isValid && activeItem < 0)
 						activeItem = i;
 
-					ElementHelper.AlternateClass(element, _itemValidClass, _itemInvalidClass, isValid);
+					element.EnableInClassList(_itemValidClass, isValid);
+					element.EnableInClassList(_itemInvalidClass, !isValid);
 				}
 
 				_filter = value;
@@ -97,13 +98,13 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public void SetActive(int index)
 		{
 			if (_activeItem >= 0)
-				ElementHelper.ToggleClass(_container.ElementAt(_activeItem), _itemActiveClass, false);
+				_container.ElementAt(_activeItem).RemoveFromClassList(_itemActiveClass);
 
 			_activeItem = Mathf.Clamp(index, -1, _container.childCount - 1);
 
 			if (_activeItem >= 0)
 			{
-				ElementHelper.ToggleClass(_container.ElementAt(_activeItem), _itemActiveClass, true);
+				_container.ElementAt(_activeItem).AddToClassList(_itemActiveClass);
 				(_container as ScrollView).ScrollTo(_container.ElementAt(_activeItem));
 			}
 		}

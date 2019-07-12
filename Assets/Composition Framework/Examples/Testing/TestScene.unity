@@ -234,6 +234,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TestEnum: 2
   TestInt: 5
+  TestQuaternion: {x: 0.38268346, y: 0, z: 0, w: 0.9238795}
+  TestList:
+    _items: 0000000001000000020000000300000004000000050000000600000007000000
+  TestList2: []
 --- !u!4 &672034259
 Transform:
   m_ObjectHideFlags: 0

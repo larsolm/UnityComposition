@@ -501,29 +501,29 @@ namespace PiRhoSoft.CompositionEditor
 		private VisualElement SetupStringConstraint(StringVariableConstraint constraint)
 		{
 			var container = new VisualElement();
-			var proxy = new ListProxy<string>(constraint.Values, (value, index) =>
-			{
-				var field = new TextField() { value = value, isDelayed = true };
-
-				ElementHelper.Bind(field, field, _owner, () =>
-				{
-					return constraint.Values[index];
-				},
-				text =>
-				{
-					constraint.Values[index] = text;
-					ElementHelper.SendChangeEvent(this, _definition, _definition);
-				});
-
-				return field;
-			});
-
-			var list = new ListElement(proxy, "Valid Strings", "The list of valid string values for the variable");
-			list.OnItemAdded += () => ElementHelper.SendChangeEvent(this, _definition, _definition);
-			list.OnItemRemoved += index => ElementHelper.SendChangeEvent(this, _definition, _definition);
-			list.OnItemMoved += (from, to) => ElementHelper.SendChangeEvent(this, _definition, _definition);
-
-			container.Add(list);
+			//var proxy = new ListProxy<string>(constraint.Values, (value, index) =>
+			//{
+			//	var field = new TextField() { value = value, isDelayed = true };
+			//
+			//	ElementHelper.Bind(field, field, _owner, () =>
+			//	{
+			//		return constraint.Values[index];
+			//	},
+			//	text =>
+			//	{
+			//		constraint.Values[index] = text;
+			//		ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//	});
+			//
+			//	return field;
+			//});
+			//
+			//var list = new ListElement(proxy, "Valid Strings", "The list of valid string values for the variable");
+			//list.OnItemAdded += () => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//list.OnItemRemoved += index => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//list.OnItemMoved += (from, to) => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//
+			//container.Add(list);
 
 			return container;
 		}

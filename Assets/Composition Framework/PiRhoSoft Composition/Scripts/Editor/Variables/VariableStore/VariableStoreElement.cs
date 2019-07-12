@@ -45,7 +45,7 @@ namespace PiRhoSoft.CompositionEditor
 				_variables = variables;
 			}
 
-			public override VisualElement CreateElement(int index)
+			public override VisualElement CreateItem(int index)
 			{
 				var container = new VisualElement();
 
@@ -79,16 +79,21 @@ namespace PiRhoSoft.CompositionEditor
 				return container;
 			}
 
+			public override bool NeedsUpdate(VisualElement item, int index)
+			{
+				return true;
+			}
+
 			public override void AddItem() { }
 			public override void RemoveItem(int index) { }
-			public override void MoveItem(int from, int to) { }
+			public override void ReorderItem(int from, int to) { }
 		}
 
 		private class StaticValuesProxy : ValuesProxy
 		{
 			private readonly IList<string> _names;
 
-			public override int Count => _names.Count;
+			public override int ItemCount => _names.Count;
 			public override string GetName(int index) => _names[index];
 
 			public StaticValuesProxy(Object owner, IVariableStore variables) : base(owner, variables)
@@ -99,7 +104,7 @@ namespace PiRhoSoft.CompositionEditor
 
 		private class DynamicValuesProxy : ValuesProxy
 		{
-			public override int Count => _variables.GetVariableNames().Count;
+			public override int ItemCount => _variables.GetVariableNames().Count;
 			public override string GetName(int index) => _variables.GetVariableNames()[index];
 
 			public DynamicValuesProxy(Object owner, IVariableStore variables) : base(owner, variables)
