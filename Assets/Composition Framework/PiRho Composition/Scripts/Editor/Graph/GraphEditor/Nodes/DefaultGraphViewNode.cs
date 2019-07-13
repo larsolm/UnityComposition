@@ -108,7 +108,7 @@ namespace PiRhoSoft.Composition.Editor
 			breakpointContainer.AddManipulator(new Clickable(ToggleBreakpoint));
 			breakpointContainer.Add(breakpoint);
 
-			ElementHelper.ToggleClass(breakpoint, UssBreakpointActiveClassName, Data.Node.IsBreakpoint);
+			breakpoint.EnableInClassList(UssBreakpointActiveClassName, Data.Node.IsBreakpoint);
 
 			Input.Add(breakpointContainer);
 
@@ -150,7 +150,8 @@ namespace PiRhoSoft.Composition.Editor
 		private void ToggleBreakpoint()
 		{
 			Data.Node.IsBreakpoint = !Data.Node.IsBreakpoint;
-			ElementHelper.ToggleClass(_breakpoint, UssBreakpointActiveClassName, Data.Node.IsBreakpoint);
+
+			_breakpoint.EnableInClassList(UssBreakpointActiveClassName, Data.Node.IsBreakpoint);
 		}
 
 		public override void OnUnselected()

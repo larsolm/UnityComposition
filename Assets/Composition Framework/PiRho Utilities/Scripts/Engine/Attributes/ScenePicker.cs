@@ -6,7 +6,7 @@ namespace PiRhoSoft.Utilities.Engine
 	{
 		public string CreateMethod { get; private set; }
 
-		public ScenePickerAttribute(string createMethod)
+		public ScenePickerAttribute(string createMethod = null)
 		{
 			CreateMethod = createMethod;
 		}

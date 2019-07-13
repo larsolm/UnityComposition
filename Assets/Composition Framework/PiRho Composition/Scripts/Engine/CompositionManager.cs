@@ -51,6 +51,11 @@ namespace PiRhoSoft.Composition.Engine
 			StartCoroutine(new JoinEnumerator(enumerator));
 		}
 
+		public void RunGraph(GraphCaller caller, VariableValue context)
+		{
+			RunGraph(caller, DefaultStore, context);
+		}
+
 		public void RunGraph(GraphCaller caller, IVariableStore store, VariableValue context)
 		{
 			var enumerator = caller.Execute(store, context);

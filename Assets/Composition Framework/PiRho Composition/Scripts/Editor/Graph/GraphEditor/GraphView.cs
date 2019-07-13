@@ -635,14 +635,14 @@ namespace PiRhoSoft.Composition.Editor
 				_stopButton.SetEnabled(false);
 			}
 
-			ElementHelper.ToggleClass(_playButton, UssToolbarButtonActiveClassName, isEnabled && isPlaying);
-			ElementHelper.ToggleClass(_pauseButton, UssToolbarButtonActiveClassName, isEnabled && isPaused);
-			ElementHelper.ToggleClass(_stepButton, UssToolbarButtonActiveClassName, isEnabled && isStepping);
-			ElementHelper.ToggleClass(_stopButton, UssToolbarButtonActiveClassName, isEnabled && isStopping);
-			ElementHelper.ToggleClass(_breakButton, UssToolbarButtonActiveClassName, Graph.IsDebugBreakEnabled);
-			ElementHelper.ToggleClass(_loggingButton, UssToolbarButtonActiveClassName, Graph.IsDebugLoggingEnabled);
-			ElementHelper.ToggleClass(_lockButton, UssToolbarButtonActiveClassName, IsLocked);
-			ElementHelper.ToggleClass(this, UssBreakpointsDisabledClassName, !Graph.IsDebugBreakEnabled);
+			_playButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isPlaying);
+			_pauseButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isPaused);
+			_stepButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isStepping);
+			_stopButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isStopping);
+			_breakButton.EnableInClassList(UssToolbarButtonActiveClassName, Graph.IsDebugBreakEnabled);
+			_loggingButton.EnableInClassList(UssToolbarButtonActiveClassName, Graph.IsDebugLoggingEnabled);
+			_lockButton.EnableInClassList(UssToolbarButtonActiveClassName, IsLocked);
+			EnableInClassList(UssBreakpointsDisabledClassName, !Graph.IsDebugBreakEnabled);
 		}
 
 		private void ShowGraphPicker(Vector2 position)

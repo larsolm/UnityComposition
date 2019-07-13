@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.Utilities.Engine;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,7 +9,7 @@ namespace PiRhoSoft.Composition.Engine
 	[AddComponentMenu("PiRho Soft/Composition/Variable Set Component")]
 	public class VariableSetComponent : MonoBehaviour, IVariableStore, IVariableReset, ISchemaOwner
 	{
-		//[ChangeTrigger(nameof(SetupSchema))]
+		[ChangeTrigger(nameof(SetupSchema))]
 		[ObjectPicker]
 		[SerializeField]
 		private VariableSchema _schema = null;
@@ -43,4 +44,7 @@ namespace PiRhoSoft.Composition.Engine
 
 		#endregion
 	}
+
+	[Serializable]
+	public class VariableSetComponentSource : VariableSource<VariableSetComponent> { }
 }
