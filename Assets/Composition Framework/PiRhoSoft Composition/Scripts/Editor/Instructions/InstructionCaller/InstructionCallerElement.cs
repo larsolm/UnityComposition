@@ -19,8 +19,8 @@ namespace PiRhoSoft.CompositionEditor
 		private Object _owner;
 		private InstructionCaller _caller;
 
-		private ListElement _inputs;
-		private ListElement _outputs;
+		//private ListElement _inputs;
+		//private ListElement _outputs;
 
 		public InstructionCallerElement(SerializedProperty property, string tooltip)
 		{
@@ -46,17 +46,17 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			_caller.UpdateVariables();
 
-			if (_inputs != null)
-			{
-				Remove(_inputs);
-				_inputs = null;
-			}
-
-			if (_outputs != null)
-			{
-				Remove(_outputs);
-				_outputs = null;
-			}
+			//if (_inputs != null)
+			//{
+			//	Remove(_inputs);
+			//	_inputs = null;
+			//}
+			//
+			//if (_outputs != null)
+			//{
+			//	Remove(_outputs);
+			//	_outputs = null;
+			//}
 
 			if (_caller.Inputs.Count > 0)
 			{
@@ -85,15 +85,15 @@ namespace PiRhoSoft.CompositionEditor
 			var valueElement = new VariableValueElement(_owner, () => input.Value, value => input.Value = value, () => _caller.GetInputDefinition(input).Definition);
 			valueElement.AddToClassList(_ussValueClass);
 
-			var typeElement = new EnumDropdown<InstructionInputType>(input.Type, _owner, () => (int)input.Type, value => input.Type = (InstructionInputType)value);
-			typeElement.AddToClassList(_ussDropdownClass);
-			typeElement.RegisterCallback<ChangeEvent<int>>(e =>
-			{
-				var t = (InstructionInputType)e.newValue;
-
-				ElementHelper.SetVisible(referenceElement, t == InstructionInputType.Reference);
-				ElementHelper.SetVisible(valueElement, t == InstructionInputType.Value);
-			});
+			//var typeElement = new EnumDropdown<InstructionInputType>(input.Type, _owner, () => (int)input.Type, value => input.Type = (InstructionInputType)value);
+			//typeElement.AddToClassList(_ussDropdownClass);
+			//typeElement.RegisterCallback<ChangeEvent<int>>(e =>
+			//{
+			//	var t = (InstructionInputType)e.newValue;
+			//
+			//	ElementHelper.SetVisible(referenceElement, t == InstructionInputType.Reference);
+			//	ElementHelper.SetVisible(valueElement, t == InstructionInputType.Value);
+			//});
 
 			ElementHelper.SetVisible(referenceElement, input.Type == InstructionInputType.Reference);
 			ElementHelper.SetVisible(valueElement, input.Type == InstructionInputType.Value);
@@ -101,7 +101,7 @@ namespace PiRhoSoft.CompositionEditor
 			var container = new VisualElement();
 			container.AddToClassList(_ussItemClass);
 			container.Add(label);
-			container.Add(typeElement);
+			//container.Add(typeElement);
 			container.Add(referenceElement);
 			container.Add(valueElement);
 
@@ -117,16 +117,16 @@ namespace PiRhoSoft.CompositionEditor
 			reference.Setup(_owner, output.Reference, null); // TODO: Add an autocompletesource
 			reference.AddToClassList(_ussReferenceClass);
 
-			var type = new EnumDropdown<InstructionOutputType>(output.Type, _owner, () => (int)output.Type, value => output.Type = (InstructionOutputType)value);
-			type.AddToClassList(_ussDropdownClass);
-			type.RegisterCallback<ChangeEvent<int>>(e => ElementHelper.SetVisible(reference, (InstructionOutputType)e.newValue == InstructionOutputType.Reference));
+			//var type = new EnumDropdown<InstructionOutputType>(output.Type, _owner, () => (int)output.Type, value => output.Type = (InstructionOutputType)value);
+			//type.AddToClassList(_ussDropdownClass);
+			//type.RegisterCallback<ChangeEvent<int>>(e => ElementHelper.SetVisible(reference, (InstructionOutputType)e.newValue == InstructionOutputType.Reference));
 
 			ElementHelper.SetVisible(reference, output.Type == InstructionOutputType.Reference);
 
 			var container = new VisualElement();
 			container.AddToClassList(_ussItemClass);
 			container.Add(label);
-			container.Add(type);
+			//container.Add(type);
 			container.Add(reference);
 
 			return container;

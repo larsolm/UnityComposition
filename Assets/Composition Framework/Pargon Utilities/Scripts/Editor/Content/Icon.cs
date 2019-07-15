@@ -26,7 +26,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		public static readonly Icon SearchBarLeft = BuiltIn("toolbarsearch");
 		public static readonly Icon SearchBarRightCancel = BuiltIn("toolbarsearchCancelButton");
 		public static readonly Icon SearchBarRight = BuiltIn("toolbarsearchCancelButtonOff");
-		public static readonly Icon Lock = Icon.BuiltIn("AssemblyLock");
+		public static readonly Icon Lock = BuiltIn("AssemblyLock");
 
 		private const string _invalidIconError = "(PIIII) failed to create icon content: the built in icon {0} could not be loaded";
 		private const string _invalidDataError = "(PIIID) failed to create icon content: the supplied data is not a valid base 64 string";

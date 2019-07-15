@@ -241,16 +241,16 @@ namespace PiRhoSoft.CompositionEditor
 			if (_definition.IsTypeLocked)
 				container.SetEnabled(false);
 
-			var dropdown = new EnumDropdown<VariableType>(_definition.Type, _owner, () => (int)_definition.Type, type =>
-			{
-				var variableType = (VariableType)type;
-				var constraint = VariableConstraint.Create(variableType);
-				var definition = ValueDefinition.Create(variableType, constraint, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-
-				SetDefinition(definition);
-			});
-
-			container.Add(dropdown);
+			//var dropdown = new EnumDropdown<VariableType>(_definition.Type, _owner, () => (int)_definition.Type, type =>
+			//{
+			//	var variableType = (VariableType)type;
+			//	var constraint = VariableConstraint.Create(variableType);
+			//	var definition = ValueDefinition.Create(variableType, constraint, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+			//
+			//	SetDefinition(definition);
+			//});
+			//
+			//container.Add(dropdown);
 
 			ReplaceElement(ref _typeContainer, container);
 		}
@@ -323,13 +323,13 @@ namespace PiRhoSoft.CompositionEditor
 			{
 				container.Add(new Label("Tag") { tooltip = "An identifier that can be used to reset or persist this variable" });
 
-				var dropdown = new StringDropdown(tags.List, tags.List, _definition.Tag, _owner, () => _definition.Tag, tag =>
-				{
-					var definition = ValueDefinition.Create(_definition.Type, _definition.Constraint, tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-					SetDefinition(definition);
-				});
-
-				container.Add(dropdown);
+				//var dropdown = new StringDropdown(tags.List, tags.List, _definition.Tag, _owner, () => _definition.Tag, tag =>
+				//{
+				//	var definition = ValueDefinition.Create(_definition.Type, _definition.Constraint, tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+				//	SetDefinition(definition);
+				//});
+				//
+				//container.Add(dropdown);
 			}
 
 			ReplaceElement(ref _tagContainer, container);
@@ -579,17 +579,17 @@ namespace PiRhoSoft.CompositionEditor
 		private VisualElement SetupListConstraint(ListVariableConstraint constraint)
 		{
 			var container = new VisualElement();
-			var dropdown = new EnumDropdown<VariableType>(constraint.ItemType, _owner, () => (int)constraint.ItemType, type =>
-			{
-				var variableType = (VariableType)type;
-
-				constraint.ItemType = variableType;
-				constraint.ItemConstraint = VariableConstraint.Create(variableType);
-
-				ElementHelper.SendChangeEvent(this, _definition, _definition);
-			});
-
-			container.Add(dropdown);
+			//var dropdown = new EnumDropdown<VariableType>(constraint.ItemType, _owner, () => (int)constraint.ItemType, type =>
+			//{
+			//	var variableType = (VariableType)type;
+			//
+			//	constraint.ItemType = variableType;
+			//	constraint.ItemConstraint = VariableConstraint.Create(variableType);
+			//
+			//	ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//});
+			//
+			//container.Add(dropdown);
 
 			if (constraint.ItemConstraint != null)
 			{

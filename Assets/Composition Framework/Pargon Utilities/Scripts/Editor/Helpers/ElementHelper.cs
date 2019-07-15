@@ -163,7 +163,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			var labelElement = new Label(label);
 
 			labelElement.AddToClassList(PropertyField.labelUssClassName);
-			container.AddToClassList(BaseField<string>.ussClassName); // the static field is not dependent on the generic so any type will do
+			container.AddToClassList(BaseFieldUssClassName);
 			container.Add(labelElement);
 
 			return container;
@@ -211,7 +211,16 @@ namespace PiRhoSoft.PargonUtilities.Editor
 		{
 			return new IMGUIContainer(() =>
 			{
-				EditorGUILayout.PropertyField(property);
+				// this is a copy of the implementation from PropertyField.Reset without the wide mode handling since
+				// that is internal
+
+				EditorGUI.BeginChangeCheck();
+				property.serializedObject.Update();
+
+				EditorGUILayout.PropertyField(property, true);
+
+				property.serializedObject.ApplyModifiedProperties();
+				EditorGUI.EndChangeCheck();
 			});
 		}
 
@@ -301,7 +310,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 				case INotifyValueChanged<Vector3Int> field: field.RegisterValueChangedCallback(e => action()); return true;
 				case INotifyValueChanged<RectInt> field: field.RegisterValueChangedCallback(e => action()); return true;
 				case INotifyValueChanged<BoundsInt> field: field.RegisterValueChangedCallback(e => action()); return true;
-				case EnumDropdown field: field.RegisterCallback<ChangeEvent<int>>(e => action()); return true;
+				//case EnumDropdown field: field.RegisterCallback<ChangeEvent<int>>(e => action()); return true;
 				default: return false;
 			}
 		}

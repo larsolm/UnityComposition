@@ -30,7 +30,7 @@ namespace PiRhoSoft.CompositionEditor
 			if (owner is ISchemaOwner schemaOwner)
 				schemaOwner.SetupSchema();
 
-			Add(new ListElement(new VariablesProxy(owner, variables), "Variables", "The variables defined by this variable pool"));
+			//Add(new ListElement(new VariablesProxy(owner, variables), "Variables", "The variables defined by this variable pool"));
 		}
 
 		private class VariablesProxy : ListProxy

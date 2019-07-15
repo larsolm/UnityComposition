@@ -90,17 +90,18 @@ namespace PiRhoSoft.CompositionEditor
 
 		private VisualElement CreateEmpty()
 		{
-			var dropdown = new EnumDropdown<VariableType>(VariableType.Empty, _owner, () => (int)VariableType.Empty, type =>
-			{
-				var variableType = (VariableType)type;
-				var constraint = VariableConstraint.Create(variableType);
-				var value = VariableHandler.CreateDefault((VariableType)type, constraint);
-				var definition = ValueDefinition.Create(variableType, constraint, null, null, false, false);
-
-				SetValue(value);
-				Setup(value, definition);
-			});
-			return dropdown;
+			//var dropdown = new EnumDropdown<VariableType>(VariableType.Empty, _owner, () => (int)VariableType.Empty, type =>
+			//{
+			//	var variableType = (VariableType)type;
+			//	var constraint = VariableConstraint.Create(variableType);
+			//	var value = VariableHandler.CreateDefault((VariableType)type, constraint);
+			//	var definition = ValueDefinition.Create(variableType, constraint, null, null, false, false);
+			//
+			//	SetValue(value);
+			//	Setup(value, definition);
+			//});
+			//return dropdown;
+			return null;
 		}
 
 		public VisualElement CreateBool()
@@ -243,8 +244,9 @@ namespace PiRhoSoft.CompositionEditor
 		{
 			if (_definition.Constraint is StringVariableConstraint constraint && constraint.Values.Count > 0)
 			{
-				var dropdown = new StringDropdown(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
-				return dropdown;
+				//var dropdown = new StringDropdown(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
+				//return dropdown;
+				return null;
 			}
 			else
 			{

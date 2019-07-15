@@ -141,4 +141,5 @@
 .pirho-list__item__content
 {
 	flex-grow: 1;
+	flex-shrink: 1;
 }

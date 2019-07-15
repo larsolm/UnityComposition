@@ -132,6 +132,19 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			return null;
 		}
 
+		public static Type GetFieldType(FieldInfo fieldInfo)
+		{
+			if (fieldInfo.FieldType.IsArray)
+				return fieldInfo.FieldType.GetElementType();
+
+			var ilist = fieldInfo.FieldType.GetInterfaces().FirstOrDefault(type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>));
+
+			if (ilist != null)
+				return ilist.GetGenericArguments()[0];
+
+			return fieldInfo.FieldType;
+		}
+
 		public static PropertyDrawer GetNextDrawer(FieldInfo fieldInfo, PropertyAttribute attribute)
 		{
 			SetupDrawerDictionary();

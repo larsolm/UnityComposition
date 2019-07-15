@@ -8,5 +8,10 @@ namespace PiRhoSoft.PargonUtilities.Engine
 		public bool AllowRemove = true;
 		public bool AllowReorder = true;
 		public string EmptyLabel = null;
+
+		public ListAttribute()
+		{
+			order = int.MaxValue - 100;
+		}
 	}
 }

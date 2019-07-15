@@ -19,15 +19,15 @@ namespace PiRhoSoft.CompositionEditor
 
 			var proxy = isStatic ? (ValuesProxy)new StaticValuesProxy(owner, variables) : new DynamicValuesProxy(owner, variables);
 
-			var list = new ListElement(proxy, label, "The variables contained in this variable store", false , false, false);
-
-			if (variables is Object obj)
-				list.AddHeaderButton(Icon.Inspect.Content, "View this object in the inspector", () => Selection.activeObject = obj);
-
-			if (isClosable)
-				list.AddHeaderButton(Icon.Close.Content, "Close this store", RemoveFromHierarchy);
-
-			Add(list);
+			//var list = new ListElement(proxy, label, "The variables contained in this variable store", false , false, false);
+			//
+			//if (variables is Object obj)
+			//	list.AddHeaderButton(Icon.Inspect.Content, "View this object in the inspector", () => Selection.activeObject = obj);
+			//
+			//if (isClosable)
+			//	list.AddHeaderButton(Icon.Close.Content, "Close this store", RemoveFromHierarchy);
+			//
+			//Add(list);
 		}
 
 		#region Proxy

@@ -232,12 +232,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8533441d965a60340b4195bd168509d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TestEnum: 2
-  TestInt: 5
-  TestQuaternion: {x: 0.38268346, y: 0, z: 0, w: 0.9238795}
-  TestList:
-    _items: 0000000001000000020000000300000004000000050000000600000007000000
-  TestList2: []
+  TestString: Three
 --- !u!4 &672034259
 Transform:
   m_ObjectHideFlags: 0

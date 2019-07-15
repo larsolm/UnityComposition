@@ -1,0 +1,26 @@
+﻿.pirho-enum-buttons
+{
+	flex-direction: row;
+	flex-wrap: wrap;
+	flex-grow: 1;
+}
+
+.pirho-enum-buttons__button
+{
+	/* reset style from 2019.2 and earlier */
+	background-image: none;
+
+	/* apply style to match 2019.3 and later */
+	background-color: #E4E4E4;
+	border-color: #6B6B6B;
+	border-bottom-width: 1px;
+	padding: 2px 6px 3px 6px;
+
+	flex-grow: 1;
+	margin: 0;
+}
+
+.pirho-enum-buttons__button--active
+{
+	background-color: #6B6B6B;
+}

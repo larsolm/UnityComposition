@@ -23,7 +23,7 @@ namespace PiRhoSoft.CompositionEditor
 					variables.Update();
 			}
 
-			Add(new ListElement(new VariablesProxy(owner, variables), "Variables", "The list of variables defined by this variable set"));
+			//Add(new ListElement(new VariablesProxy(owner, variables), "Variables", "The list of variables defined by this variable set"));
 		}
 
 		private class VariablesProxy : ListProxy

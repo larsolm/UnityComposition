@@ -55,25 +55,25 @@ namespace PiRhoSoft.CompositionEditor
 			//	Refresh();
 			//}));
 
-			_time.Add(new EnumDropdown<BindingFormatter.TimeFormatType>(_format.TimeFormatting, owner, () => (int)_format.TimeFormatting, value =>
-			{
-				_format.TimeFormatting = (BindingFormatter.TimeFormatType)value;
-
-				if (_format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
-
-				Refresh();
-			}));
-
-			_number.Add(new EnumDropdown<BindingFormatter.NumberFormatType>(_format.NumberFormatting, owner, () => (int)_format.NumberFormatting, value =>
-			{
-				_format.NumberFormatting = (BindingFormatter.NumberFormatType)value;
-
-				if (_format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
-
-				Refresh();
-			}));
+			//_time.Add(new EnumDropdown<BindingFormatter.TimeFormatType>(_format.TimeFormatting, owner, () => (int)_format.TimeFormatting, value =>
+			//{
+			//	_format.TimeFormatting = (BindingFormatter.TimeFormatType)value;
+			//
+			//	if (_format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
+			//
+			//	Refresh();
+			//}));
+			//
+			//_number.Add(new EnumDropdown<BindingFormatter.NumberFormatType>(_format.NumberFormatting, owner, () => (int)_format.NumberFormatting, value =>
+			//{
+			//	_format.NumberFormatting = (BindingFormatter.NumberFormatType)value;
+			//
+			//	if (_format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
+			//
+			//	Refresh();
+			//}));
 
 			_valueText = new TextField() { value = _format.ValueFormat };
 
