@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Utilities.Editor
 {
-	public class ObjectPicker : BasePickerButton<Object>
+	public class ObjectPicker : BasePickerButton<Object>, IDragReceiver
 	{
 		private class ObjectProvider : PickerProvider<Object> { }
 
@@ -57,8 +57,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			Add(_inspect);
 
-			RegisterCallback<DragUpdatedEvent>(OnDragUpdated);
-			RegisterCallback<DragPerformEvent>(OnDragPerform);
+			DragHelper.MakeDragReceiver(this);
 		}
 
 		private void Inspect()
@@ -102,13 +101,13 @@ namespace PiRhoSoft.Utilities.Editor
 
 		#endregion
 
-		#region Drag and Drop
+		#region IDragReceiver Implementation
 
-		private bool IsDragValid()
+		public bool IsDragValid(Object[] objects, object data)
 		{
-			if (DragAndDrop.objectReferences.Length > 0)
+			if (objects.Length > 0)
 			{
-				var obj = DragAndDrop.objectReferences[0];
+				var obj = objects[0];
 				if (obj != null)
 				{
 					var drag = obj.GetType();
@@ -119,18 +118,9 @@ namespace PiRhoSoft.Utilities.Editor
 			return true;
 		}
 
-		private void OnDragUpdated(DragUpdatedEvent e)
+		public void AcceptDrag(Object[] objects, object data)
 		{
-			DragAndDrop.visualMode = IsDragValid() ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
-		}
-
-		private void OnDragPerform(DragPerformEvent e)
-		{
-			if (IsDragValid())
-			{
-				DragAndDrop.AcceptDrag();
-				ElementHelper.SendChangeEvent(this, Value, DragAndDrop.objectReferences[0]);
-			}
+			ElementHelper.SendChangeEvent(this, Value, objects[0]);
 		}
 
 		#endregion

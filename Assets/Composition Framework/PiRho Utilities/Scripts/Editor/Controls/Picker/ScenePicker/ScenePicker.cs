@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System;
+﻿using System;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
@@ -10,7 +9,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Utilities.Editor
 {
-	public class ScenePicker : BasePickerButton<SceneAsset>
+	public class ScenePicker : BasePickerButton<SceneAsset>, IDragReceiver
 	{
 		private class SceneProvider : PickerProvider<SceneAsset> { }
 
@@ -63,6 +62,8 @@ namespace PiRhoSoft.Utilities.Editor
 			Add(_load);
 			Add(_create);
 			Add(_buildWarning);
+
+			DragHelper.MakeDragReceiver(this);
 		}
 
 		private void Load()
@@ -158,5 +159,19 @@ namespace PiRhoSoft.Utilities.Editor
 			var path = SceneUtility.GetScenePathByBuildIndex(index);
 			return GetSceneFromPath(path);
 		}
+
+		#region IDragReceiver Implementation
+
+		public bool IsDragValid(Object[] objects, object data)
+		{
+			return objects.Length > 0 && objects[0] is SceneAsset;
+		}
+
+		public void AcceptDrag(Object[] objects, object data)
+		{
+			ElementHelper.SendChangeEvent(this, Value, objects[0]);
+		}
+
+		#endregion
 	}
 }

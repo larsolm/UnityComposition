@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Utilities.Editor
 {
-	public class TypePicker : BasePickerButton<string>
+	public class TypePicker : BasePickerButton<string>, IDragReceiver
 	{
 		private class TypeProvider : PickerProvider<Type> { }
 
@@ -43,6 +43,8 @@ namespace PiRhoSoft.Utilities.Editor
 			});
 
 			Setup(provider, valueName);
+
+			DragHelper.MakeDragReceiver(this);
 		}
 
 		public override string GetValueFromProperty(SerializedProperty property)
@@ -63,5 +65,29 @@ namespace PiRhoSoft.Utilities.Editor
 
 			SetLabel(icon, text);
 		}
+
+		#region Drag and Drop
+
+		public bool IsDragValid(Object[] objects, object data)
+		{
+			if (objects.Length > 0)
+			{
+				var obj = objects[0];
+				if (obj != null)
+				{
+					var drag = obj.GetType();
+					return _type.IsAssignableFrom(drag);
+				}
+			}
+
+			return true;
+		}
+
+		public void AcceptDrag(Object[] objects, object data)
+		{
+			ElementHelper.SendChangeEvent(this, Value, objects[0].GetType().AssemblyQualifiedName);
+		}
+
+		#endregion
 	}
 }
