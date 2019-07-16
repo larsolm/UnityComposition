@@ -116,13 +116,6 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private class DraggableHistory : Label, IDraggable
 		{
-			private enum State
-			{
-				Idle,
-				Ready,
-				Dragging
-			}
-
 			public int Index;
 
 			public DragState DragState { get; set; }
