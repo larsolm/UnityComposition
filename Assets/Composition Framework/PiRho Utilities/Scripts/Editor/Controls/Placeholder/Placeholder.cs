@@ -5,10 +5,10 @@ namespace PiRhoSoft.Utilities.Editor
 {
 	public class Placeholder<T> : VisualElement
 	{
-		private const string _styleSheetPath = Utilities.AssetPath + "Controls/Placeholder/Placeholder.uss";
-		private const string _ussPlaceholder = "pargon-placeholder";
-		private const string _ussInput = "input";
-		private const string _ussText = "text";
+		public const string StyleSheetPath = Utilities.AssetPath + "Controls/Placeholder/Placeholder.uss";
+		public const string UssClassName = "pirho-placeholder";
+		public const string UssInputClassName = UssClassName + "__input";
+		public const string UssTextClassName = UssClassName + "__text";
 
 		private TextInputBaseField<T> _input;
 		private Label _placeholder;
@@ -27,16 +27,16 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private void Setup(string text)
 		{
-			ElementHelper.AddStyleSheet(this, _styleSheetPath);
+			ElementHelper.AddStyleSheet(this, StyleSheetPath);
 
-			AddToClassList(_ussPlaceholder);
+			AddToClassList(UssClassName);
 
 			_input = this.Q<TextInputBaseField<T>>();
 			_input.RegisterValueChangedCallback(e => TextChanged());
-			_input.AddToClassList(_ussInput);
+			_input.AddToClassList(UssInputClassName);
 
 			_placeholder = new Label(text);
-			_placeholder.AddToClassList(_ussText);
+			_placeholder.AddToClassList(UssTextClassName);
 
 			_input.Add(_placeholder);
 

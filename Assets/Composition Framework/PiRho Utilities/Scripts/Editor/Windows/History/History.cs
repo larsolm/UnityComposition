@@ -95,7 +95,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private static class HistoryList
 		{
-			private const string _windowMenu = "Window/Pargon Utilities/History";
+			private const string _windowMenu = "Window/PiRho Soft/History";
 			private const string _moveBackMenu = "Edit/Navigation/Move Back &LEFT";
 			private const string _moveForwardMenu = "Edit/Navigation/Move Forward &RIGHT";
 			private const int _capacity = 100;

@@ -1,16 +1,16 @@
-﻿.pargon-placeholder
+﻿.pirho-placeholder
 {
 	flex-grow: 1;
 }
 
-.pargon-placeholder .input
+.pirho-placeholder__input
 {
 	flex-grow: 1;
 	margin-left: 0;
 	margin-right: 0;
 }
 
-.pargon-placeholder .text
+.pirho-placeholder__text
 {
 	position: absolute;
 	padding: 2px 3px 3px 3px;
