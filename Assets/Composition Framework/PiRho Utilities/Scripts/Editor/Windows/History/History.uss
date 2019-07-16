@@ -1,36 +1,35 @@
-.horizontal-row
+.pirho-history
 {
-	flex-direction: row;
-	justify-content: space-between;
 }
 
-.header-button
+.pirho-history__toolbar
 {
-	margin: 5px;
-	width: 100px;
-	flex-shrink: 1;
 }
 
-.selection-list
+.pirho-history__toolbar-button
+{
+}
+
+.pirho-history__list
 {
 	flex-grow: 1;
 	flex-shrink: 0;
 	flex-basis: 0;
 }
 
-.selection-item
+.pirho-history__list-item
 {
 	flex-direction: row;
 	flex-grow: 1;
 }
 
-.selection-label
+.pirho-history__list-item-label
 {
 	padding-left: 6px;
 	align-self:center;
 }
 
-.selection-label.current
+.pirho-history__list-item-label--current
 {
 	-unity-font-style: bold;
 }

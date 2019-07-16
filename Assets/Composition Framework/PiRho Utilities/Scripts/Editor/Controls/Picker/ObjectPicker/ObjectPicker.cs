@@ -56,6 +56,9 @@ namespace PiRhoSoft.Utilities.Editor
 			Setup(provider, value);
 
 			Add(_inspect);
+
+			RegisterCallback<DragUpdatedEvent>(OnDragUpdated);
+			RegisterCallback<DragPerformEvent>(OnDragPerform);
 		}
 
 		private void Inspect()
@@ -95,6 +98,39 @@ namespace PiRhoSoft.Utilities.Editor
 			SetLabel(icon, text);
 
 			_inspect.SetEnabled(Value);
+		}
+
+		#endregion
+
+		#region Drag and Drop
+
+		private bool IsDragValid()
+		{
+			if (DragAndDrop.objectReferences.Length > 0)
+			{
+				var obj = DragAndDrop.objectReferences[0];
+				if (obj != null)
+				{
+					var drag = obj.GetType();
+					return Type.IsAssignableFrom(drag);
+				}
+			}
+
+			return true;
+		}
+
+		private void OnDragUpdated(DragUpdatedEvent e)
+		{
+			DragAndDrop.visualMode = IsDragValid() ? DragAndDropVisualMode.Link : DragAndDropVisualMode.Rejected;
+		}
+
+		private void OnDragPerform(DragPerformEvent e)
+		{
+			if (IsDragValid())
+			{
+				DragAndDrop.AcceptDrag();
+				ElementHelper.SendChangeEvent(this, Value, DragAndDrop.objectReferences[0]);
+			}
 		}
 
 		#endregion

@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -9,37 +10,57 @@ namespace PiRhoSoft.Utilities.Editor
 	[InitializeOnLoad]
 	public class History : EditorWindow
 	{
-		private const string _styleSheetPath = Utilities.AssetPath + "Windows/History/History.uss";
-		private const string _uxmlPath = Utilities.AssetPath + "Windows/History/History.uxml";
+		public const string StyleSheetPath = Utilities.AssetPath + "Windows/History/History.uss";
+		public const string UssClassName = "pirho-history";
+		public const string UssToolbarClassName = UssClassName + "__toolbar";
+		public const string UssToolbarButtonClassName = UssClassName + "__toolbar-button";
+		public const string UssListClassName = UssClassName + "__list";
+		public const string UssListItemClassName = UssListClassName + "-item";
+		public const string UssListItemLabelClassName = UssListItemClassName + "-label";
+		public const string UssListItemLabelCurrentClassName = UssListItemLabelClassName + "--current";
 
 		private Button _back;
 		private Button _forward;
+		private Button _clear;
 		private ListView _listView;
 
 		void OnEnable()
 		{
-			var styleSheet = AssetDatabase.LoadAssetAtPath<StyleSheet>(_styleSheetPath);
-			var uxml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(_uxmlPath);
+			ElementHelper.AddStyleSheet(rootVisualElement, StyleSheetPath);
+			rootVisualElement.AddToClassList(UssClassName);
 
-			uxml.CloneTree(rootVisualElement);
-			rootVisualElement.styleSheets.Add(styleSheet);
+			var toolbar = new Toolbar();
+			toolbar.AddToClassList(UssToolbarClassName);
 
-			_back = rootVisualElement.Query<Button>("back");
-			_back.clickable.clicked += HistoryList.MoveBack;
+			_back = new ToolbarButton(HistoryList.MoveBack) { text = "Back" };
+			_back.AddToClassList(UssToolbarButtonClassName);
 			_back.SetEnabled(HistoryList.CanMoveBack());
 
-			_forward = rootVisualElement.Query<Button>("forward");
-			_forward.clickable.clicked += HistoryList.MoveForward;
+			_clear = new ToolbarButton(() => { HistoryList.Clear(); Refresh(); }) { text = "Clear" };
+			_clear.AddToClassList(UssToolbarButtonClassName);
+
+			_forward = new ToolbarButton(HistoryList.MoveForward) { text = "Forward" };
+			_forward.AddToClassList(UssToolbarButtonClassName);
 			_forward.SetEnabled(HistoryList.CanMoveForward());
 
-			_listView = rootVisualElement.Query<ListView>().First();
-			_listView.selectionType = SelectionType.Single;
+			_listView = new ListView();
 			_listView.itemsSource = HistoryList.History;
 			_listView.makeItem = MakeItem;
 			_listView.bindItem = BindItem;
+			_listView.selectionType = SelectionType.Single;
+			_listView.AddToClassList(UssListClassName);
 			_listView.onItemChosen += item => Select();
 			_listView.onSelectionChanged += selection => Highlight();
 
+			toolbar.Add(_back);
+			toolbar.Add(new ToolbarSpacer { flex = true });
+			toolbar.Add(_clear);
+			toolbar.Add(new ToolbarSpacer { flex = true });
+			toolbar.Add(_forward);
+
+			rootVisualElement.Add(toolbar);
+			rootVisualElement.Add(_listView);
+			
 			Selection.selectionChanged += Refresh;
 		}
 
@@ -53,15 +74,18 @@ namespace PiRhoSoft.Utilities.Editor
 			_back.SetEnabled(HistoryList.CanMoveBack());
 			_forward.SetEnabled(HistoryList.CanMoveForward());
 			_listView.Refresh();
+			_listView.ScrollToItem(HistoryList.Current); // This call has an internal bug that doesn't actually make the item fully visible
 		}
 
 		private VisualElement MakeItem()
 		{
 			var item = new VisualElement();
-			item.AddToClassList("selection-item");
+			item.AddToClassList(UssListItemClassName);
 
-			var label = new Label();
-			label.AddToClassList("selection-label");
+			var label = new DraggableHistory();
+			label.AddToClassList(UssListItemLabelClassName);
+
+			DragHelper.MakeDraggable(label);
 
 			item.Add(label);
 			return item;
@@ -69,13 +93,10 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private void BindItem(VisualElement container, int index)
 		{
-			var label = container.ElementAt(0) as Label;
+			var label = container.ElementAt(0) as DraggableHistory;
+			label.Index = HistoryList.Current;
 			label.text = HistoryList.GetName(index);
-
-			if (index == HistoryList.Current)
-				label.AddToClassList("current");
-			else
-				label.RemoveFromClassList("current");
+			label.EnableInClassList(UssListItemLabelCurrentClassName, index == HistoryList.Current);
 		}
 
 		private void Select()
@@ -93,12 +114,30 @@ namespace PiRhoSoft.Utilities.Editor
 				EditorGUIUtility.PingObject(obj[0]);
 		}
 
+		private class DraggableHistory : Label, IDraggable
+		{
+			private enum State
+			{
+				Idle,
+				Ready,
+				Dragging
+			}
+
+			public int Index;
+
+			public DragState DragState { get; set; }
+			public string DragText => HistoryList.GetName(Index);
+			public Object[] DragObjects => HistoryList.History[Index];
+		}
+
 		private static class HistoryList
 		{
 			private const string _windowMenu = "Window/PiRho Soft/History";
 			private const string _moveBackMenu = "Edit/Navigation/Move Back &LEFT";
 			private const string _moveForwardMenu = "Edit/Navigation/Move Forward &RIGHT";
 			private const int _capacity = 100;
+
+			private static readonly Icon _historyIcon = Icon.BuiltIn("Clipboard");
 
 			private static bool _skipNextSelection = false;
 
@@ -108,14 +147,14 @@ namespace PiRhoSoft.Utilities.Editor
 			static HistoryList()
 			{
 				Selection.selectionChanged += SelectionChanged;
-				EditorApplication.playModeStateChanged += OnPlayModeChanged;
+				EditorApplication.playModeStateChanged += state => Clear();
 			}
 
 			[MenuItem(_windowMenu)]
 			private static void Open()
 			{
 				var window = GetWindow<History>();
-				window.titleContent = new GUIContent("History");
+				window.titleContent = new GUIContent("History", _historyIcon.Content);
 				window.Show();
 			}
 
@@ -172,7 +211,7 @@ namespace PiRhoSoft.Utilities.Editor
 				return obj.name;
 			}
 
-			private static void Clear()
+			public static void Clear()
 			{
 				Current = 0;
 				History.Clear();
@@ -202,15 +241,6 @@ namespace PiRhoSoft.Utilities.Editor
 				else
 				{
 					_skipNextSelection = false;
-				}
-			}
-
-			private static void OnPlayModeChanged(PlayModeStateChange state)
-			{
-				switch (state)
-				{
-					case PlayModeStateChange.ExitingEditMode: Clear(); break;
-					case PlayModeStateChange.EnteredEditMode: Clear(); break;
 				}
 			}
 		}
