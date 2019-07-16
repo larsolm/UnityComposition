@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Shuffle", 20)]
 	[HelpURL(Composition.DocumentationUrl + "shuffle-node")]

@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "axis-input")]
 	[AddComponentMenu("PiRho Soft/Interface/Axis Input")]

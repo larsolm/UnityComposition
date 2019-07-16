@@ -1,11 +1,11 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Composition;
+using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[Serializable]
 	public class MoveSaveData

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Utilities.Engine
+namespace PiRhoSoft.Utilities
 {
 	public abstract class SingletonBehaviour<T> : MonoBehaviour where T : SingletonBehaviour<T>
 	{

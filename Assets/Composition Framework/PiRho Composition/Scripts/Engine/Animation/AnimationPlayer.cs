@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.Animations;
 using UnityEngine.Playables;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Animator))]

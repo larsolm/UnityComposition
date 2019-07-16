@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[Serializable]
 	public class GraphCaller

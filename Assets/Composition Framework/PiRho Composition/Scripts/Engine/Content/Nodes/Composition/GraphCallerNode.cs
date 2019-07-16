@@ -1,9 +1,9 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Graph Caller", 1)]
 	[HelpURL(Composition.DocumentationUrl + "graph-caller-node")]

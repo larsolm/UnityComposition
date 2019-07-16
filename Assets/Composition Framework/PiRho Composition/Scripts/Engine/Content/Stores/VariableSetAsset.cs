@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "variable-set-asset")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Set", fileName = nameof(VariableSetAsset), order = 113)]

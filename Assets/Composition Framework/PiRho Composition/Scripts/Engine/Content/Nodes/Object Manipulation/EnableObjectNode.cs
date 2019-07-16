@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Enable Object", 20)]
 	[HelpURL(Composition.DocumentationUrl + "enable-object-node")]

@@ -1,7 +1,5 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -9,7 +7,7 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariablePoolElement : VisualElement
 	{
-		private const string _styleSheetPath = Engine.Composition.StylePath + "Variables/VariablePool/VariablePoolElement.uss";
+		private const string _styleSheetPath = Composition.StylePath + "Variables/VariablePool/VariablePoolElement.uss";
 		private const string _ussBaseClass = "pargon-variable-pool";
 		private const string _ussItemClass = "definition-item";
 		private const string _ussEditClass = "definition-edit";

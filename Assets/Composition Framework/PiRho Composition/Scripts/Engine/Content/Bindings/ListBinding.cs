@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "list-binding")]

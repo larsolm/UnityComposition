@@ -2,7 +2,7 @@
 using UnityEngine.SceneManagement;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.Utilities.Engine
+namespace PiRhoSoft.Utilities
 {
 	[Serializable]
 	public class SceneReference

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace PiRhoSoft.Utilities.Engine
+namespace PiRhoSoft.Utilities
 {
 	public static class InternalHelper
 	{

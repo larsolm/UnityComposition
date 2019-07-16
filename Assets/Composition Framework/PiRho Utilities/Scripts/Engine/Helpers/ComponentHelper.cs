@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.Utilities.Engine
+namespace PiRhoSoft.Utilities
 {
 	public static class ComponentHelper
 	{

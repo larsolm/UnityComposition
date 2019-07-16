@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Destroy Object", 2)]
 	[HelpURL(Composition.DocumentationUrl + "destroy-object-node")]

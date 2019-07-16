@@ -1,9 +1,9 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Transform Object", 200)]
 	[HelpURL(Composition.DocumentationUrl + "transform-node")]

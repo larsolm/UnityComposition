@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Animation/Play Animation State", 1)]
 	[HelpURL(Composition.DocumentationUrl + "play-animation-state-node")]

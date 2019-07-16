@@ -1,9 +1,9 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "composition-manager")]

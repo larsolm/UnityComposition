@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "focus-binding-root")]
 	[AddComponentMenu("PiRho Soft/Bindings/Focus Binding Root")]

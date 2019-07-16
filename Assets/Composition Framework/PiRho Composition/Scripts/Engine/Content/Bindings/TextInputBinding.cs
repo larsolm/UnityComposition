@@ -1,7 +1,7 @@
 ﻿using TMPro;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(TMP_InputField))]

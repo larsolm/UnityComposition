@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.Composition.Engine;
+﻿using PiRhoSoft.Composition;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[CreateGraphNodeMenu("Sequencing/Face Mover", 11)]
 	public class FaceMover : GraphNode

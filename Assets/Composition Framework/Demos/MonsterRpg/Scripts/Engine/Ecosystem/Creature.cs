@@ -1,5 +1,5 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Composition;
+using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -7,7 +7,7 @@ using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[Serializable]
 	public class CreatureSaveData
@@ -26,7 +26,7 @@ namespace PiRhoSoft.MonsterRpg.Engine
 
 		public Creature Creature;
 		public Species Species;
-		public GraphCaller GenerateGraph;
+		public GraphCaller GenerateGraph = new GraphCaller();
 
 		public void Setup()
 		{
@@ -44,7 +44,7 @@ namespace PiRhoSoft.MonsterRpg.Engine
 			{
 				var creature = Species.CreateCreature(trainer);
 
-				if (GenerateGraph != null && GenerateGraph.Graph)
+				if (GenerateGraph.Graph)
 					CompositionManager.Instance.RunGraph(GenerateGraph, VariableValue.CreateReference(Creature));
 
 				return creature;

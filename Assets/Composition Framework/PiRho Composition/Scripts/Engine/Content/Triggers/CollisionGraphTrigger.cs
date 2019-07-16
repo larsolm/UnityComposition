@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "collision-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Collision Graph Trigger")]

@@ -1,11 +1,11 @@
-﻿using PiRhoSoft.Composition.Engine;
+﻿using PiRhoSoft.Composition;
 using UnityEngine;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[HelpURL(MonsterRpg.DocumentationUrl + "world")]
 	[CreateAssetMenu(fileName = nameof(World), menuName = "PiRho Soft/World", order = 300)]
-	public class World : ScriptableObject
+	public class World : ScriptableObject, ISerializationCallbackReceiver
 	{
 		[Tooltip("The graph to run to load the world")]
 		public GraphCaller LoadGraph = new GraphCaller();
@@ -33,6 +33,15 @@ namespace PiRhoSoft.MonsterRpg.Engine
 			}
 
 			return null;
+		}
+
+		public void OnBeforeSerialize()
+		{
+			Zones.List.RemoveAll(zone => !zone);
+		}
+
+		public void OnAfterDeserialize()
+		{
 		}
 	}
 }

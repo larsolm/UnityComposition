@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "graph-trigger-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Graph Trigger Binding")]

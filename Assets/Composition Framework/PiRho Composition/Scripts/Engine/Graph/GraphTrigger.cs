@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Graph Trigger")]
@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition.Engine
 		public void Run()
 		{
 			if (Graph.Graph && !Graph.IsRunning)
-				CompositionManager.Instance.RunGraph(Graph, CompositionManager.Instance.DefaultStore, VariableValue.Create(gameObject));
+				CompositionManager.Instance.RunGraph(Graph, VariableValue.Create(gameObject));
 		}
 	}
 }

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "cutoff-transition")]
 	public abstract class CutoffTransition : Transition

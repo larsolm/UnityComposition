@@ -1,7 +1,6 @@
-﻿using PiRhoSoft.MonsterRpg.Engine;
-using PiRhoSoft.Composition.Engine;
+﻿using PiRhoSoft.Composition;
+using PiRhoSoft.Utilities;
 using PiRhoSoft.Utilities.Editor;
-using PiRhoSoft.Utilities.Engine;
 using System;
 using System.IO;
 using UnityEditor;

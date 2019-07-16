@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Pixelate", fileName = nameof(PixelateTransition), order = 311)]
 	[HelpURL(Composition.DocumentationUrl + "pixelate-transition")]

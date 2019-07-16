@@ -1,11 +1,11 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition> { }
 	[Serializable] public class ValueDefinitionList : SerializedList<ValueDefinition> { }

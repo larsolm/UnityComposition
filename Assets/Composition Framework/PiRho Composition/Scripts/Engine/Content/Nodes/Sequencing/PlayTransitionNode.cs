@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Play Transition", 0)]
 	[HelpURL(Composition.DocumentationUrl + "play-transition-node")]

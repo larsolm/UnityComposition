@@ -1,6 +1,6 @@
 ﻿using System.Text;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	internal class TypeOperation : Operation
 	{

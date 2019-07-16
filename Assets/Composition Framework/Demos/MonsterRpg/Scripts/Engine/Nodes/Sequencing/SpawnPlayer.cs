@@ -1,8 +1,8 @@
-﻿using PiRhoSoft.Composition.Engine;
+﻿using PiRhoSoft.Composition;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[CreateGraphNodeMenu("Sequencing/Spawn Player", 21)]
 	public class SpawnPlayer : GraphNode
@@ -19,7 +19,7 @@ namespace PiRhoSoft.MonsterRpg.Engine
 		{
 			Resolve(variables, SpawnPoint, out var spawn);
 
-			var spawnPoint = WorldManager.Instance.CurrentZone.GetSpawnPoint(spawn);
+			var spawnPoint = WorldManager.Instance.GetSpawnPoint(spawn);
 			Player.Instance.Mover.WarpToPosition(spawnPoint.Position, spawnPoint.Direction, spawnPoint.Layer);
 
 			graph.GoTo(Next, nameof(Next));

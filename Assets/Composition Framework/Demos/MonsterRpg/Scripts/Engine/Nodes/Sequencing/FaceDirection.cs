@@ -1,9 +1,9 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Composition;
+using PiRhoSoft.Utilities;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[CreateGraphNodeMenu("Sequencing/Face Direction", 10)]
 	public class FaceDirection : GraphNode

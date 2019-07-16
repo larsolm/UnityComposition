@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Fade", fileName = nameof(FadeTransition), order = 309)]
 	[HelpURL(Composition.DocumentationUrl + "fade-transition")]

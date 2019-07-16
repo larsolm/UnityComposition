@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +12,7 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class ValueDefinitionElement : VisualElement, IBindableProperty<ValueDefinition>, IBindableObject<ValueDefinition>
 	{
-		private const string _styleSheetPath = Engine.Composition.StylePath + "Variables/ValueDefinition/ValueDefinitionElement.uss";
+		private const string _styleSheetPath = Composition.StylePath + "Variables/ValueDefinition/ValueDefinitionElement.uss";
 		private const string _ussBaseClass = "pargon-value-definition";
 		private const string _ussRowClass = "row";
 		private const string _ussConstraintClass = "constraint";

@@ -4,7 +4,7 @@ using System.IO;
 using System.Text;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	internal class IntVariableHandler : VariableHandler
 	{

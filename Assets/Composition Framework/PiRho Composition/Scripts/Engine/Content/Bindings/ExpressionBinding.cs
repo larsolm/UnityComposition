@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "expression-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Expression Binding")]

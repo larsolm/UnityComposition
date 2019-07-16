@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Yield", 23)]
 	[HelpURL(Composition.DocumentationUrl + "yield-node")]

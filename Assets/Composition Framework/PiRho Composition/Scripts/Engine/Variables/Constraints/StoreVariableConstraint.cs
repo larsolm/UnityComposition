@@ -2,7 +2,7 @@
 using System.IO;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	public class StoreVariableConstraint : VariableConstraint
 	{

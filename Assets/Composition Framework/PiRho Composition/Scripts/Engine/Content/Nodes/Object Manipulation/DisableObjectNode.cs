@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Disable Object", 21)]
 	[HelpURL(Composition.DocumentationUrl + "disable-object-node")]

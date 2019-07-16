@@ -1,4 +1,4 @@
-﻿namespace PiRhoSoft.Utilities.Engine
+﻿namespace PiRhoSoft.Utilities
 {
 	public class ConditionalAttribute : PropertyTraitAttribute
 	{

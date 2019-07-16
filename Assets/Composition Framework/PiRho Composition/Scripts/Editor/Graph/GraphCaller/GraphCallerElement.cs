@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,7 +7,7 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class GraphCallerElement : VisualElement
 	{
-		private const string _styleSheetPath = Engine.Composition.StylePath + "Graph/GraphCaller/GraphCallerElement.uss";
+		private const string _styleSheetPath = Composition.StylePath + "Graph/GraphCaller/GraphCallerElement.uss";
 		private const string _ussBaseClass = "pargon-graph-caller";
 		private const string _ussItemClass = "definition-item";
 		private const string _ussLabelClass = "definition-label";

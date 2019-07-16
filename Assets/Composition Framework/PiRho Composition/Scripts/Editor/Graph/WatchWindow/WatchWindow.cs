@@ -1,16 +1,14 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using MenuItem = UnityEditor.MenuItem;
 
 namespace PiRhoSoft.Composition.Editor
 {
 	public class WatchWindowElement : VisualElement
 	{
-		private const string _uxmlPath = Engine.Composition.StylePath + "Graph/WatchWindow/WatchWindow.uxml";
-		private const string _styleSheetPath = Engine.Composition.StylePath + "Graph/WatchWindow/WatchWindow.uss";
+		private const string _uxmlPath = Composition.StylePath + "Graph/WatchWindow/WatchWindow.uxml";
+		private const string _styleSheetPath = Composition.StylePath + "Graph/WatchWindow/WatchWindow.uss";
 
 		private const string _ussGlobalName = "global-container";
 		private const string _ussStoreName = "store-container";
@@ -127,7 +125,7 @@ namespace PiRhoSoft.Composition.Editor
 		//private bool _promptValid = true;
 		//private string _promptText = string.Empty;
 
-		[MenuItem("Window/PiRho Soft/Watch Window")]
+		[UnityEditor.MenuItem("Window/PiRho Soft/Watch Window")]
 		public static void ShowWindow()
 		{
 			var window = CreateWindow<WatchWindow>("Watch Window");

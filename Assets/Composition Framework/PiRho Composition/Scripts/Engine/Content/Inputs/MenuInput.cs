@@ -1,9 +1,9 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	public enum PrimaryAxis
 	{

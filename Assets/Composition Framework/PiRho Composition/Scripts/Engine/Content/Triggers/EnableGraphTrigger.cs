@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "enable-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Enable Graph Trigger")]

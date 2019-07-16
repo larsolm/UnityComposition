@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Utilities.Engine
+namespace PiRhoSoft.Utilities
 {
 	public static class MathHelper
 	{

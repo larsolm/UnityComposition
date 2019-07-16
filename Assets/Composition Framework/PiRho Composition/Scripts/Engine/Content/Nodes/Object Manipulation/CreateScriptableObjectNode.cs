@@ -1,10 +1,10 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Create Scriptable Object", 1)]
 	[HelpURL(Composition.DocumentationUrl + "create-scriptable-object-node")]

@@ -1,7 +1,7 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "button-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Button Graph Trigger")]

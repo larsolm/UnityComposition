@@ -1,10 +1,10 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Composition;
+using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	public enum AbilityUseLocation
 	{

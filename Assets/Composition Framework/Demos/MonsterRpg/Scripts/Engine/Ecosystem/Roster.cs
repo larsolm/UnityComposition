@@ -1,10 +1,10 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Composition;
+using PiRhoSoft.Utilities;
 using System;
 using System.Collections.Generic;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[Serializable]
 	public class Roster : SerializedList<CreatureReference>, IVariableReset, IVariableList

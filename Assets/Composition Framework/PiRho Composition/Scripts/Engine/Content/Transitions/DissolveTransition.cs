@@ -1,7 +1,7 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Dissolve", fileName = nameof(DissolveTransition), order = 310)]
 	[HelpURL(Composition.DocumentationUrl + "dissolve-transition")]

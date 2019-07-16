@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[Serializable]
 	public class BindingFormatter

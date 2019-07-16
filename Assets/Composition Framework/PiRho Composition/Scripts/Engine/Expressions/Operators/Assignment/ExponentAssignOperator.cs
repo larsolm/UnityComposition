@@ -1,4 +1,4 @@
-﻿namespace PiRhoSoft.Composition.Engine
+﻿namespace PiRhoSoft.Composition
 {
 	internal class ExponentAssignOperator : AssignmentOperator
 	{

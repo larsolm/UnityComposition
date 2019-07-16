@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	internal class MaxCommand : ICommand
 	{

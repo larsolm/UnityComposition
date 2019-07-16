@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.Composition.Engine;
+﻿using PiRhoSoft.Composition;
 using System.Collections;
 
 namespace PiRhoSoft.CompositionExample

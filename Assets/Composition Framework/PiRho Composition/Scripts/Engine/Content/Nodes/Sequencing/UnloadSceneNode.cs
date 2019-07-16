@@ -1,9 +1,9 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Unload Scene", 101)]
 	[HelpURL(Composition.DocumentationUrl + "unload-scene-node")]

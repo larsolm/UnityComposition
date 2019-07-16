@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Reset Tag", 31)]
 	[HelpURL(Composition.DocumentationUrl + "reset-tag-node")]

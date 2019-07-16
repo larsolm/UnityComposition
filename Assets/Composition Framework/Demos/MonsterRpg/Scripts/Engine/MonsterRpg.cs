@@ -1,4 +1,4 @@
-﻿namespace PiRhoSoft.MonsterRpg.Engine
+﻿namespace PiRhoSoft.MonsterRpg
 {
 	public static class MonsterRpg
 	{

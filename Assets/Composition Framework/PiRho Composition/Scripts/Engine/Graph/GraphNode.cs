@@ -1,4 +1,4 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,7 +6,7 @@ using System.Reflection;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[Serializable] public class GraphNodeList : SerializedList<GraphNode> { }
 	[Serializable] public class GraphNodeDictionary : SerializedDictionary<string, GraphNode> { }

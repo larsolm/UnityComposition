@@ -2,7 +2,7 @@
 using System.IO;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	public class ListVariableConstraint : VariableConstraint
 	{

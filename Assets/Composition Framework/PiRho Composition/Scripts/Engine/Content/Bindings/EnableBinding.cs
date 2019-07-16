@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "enable-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Enable Binding")]

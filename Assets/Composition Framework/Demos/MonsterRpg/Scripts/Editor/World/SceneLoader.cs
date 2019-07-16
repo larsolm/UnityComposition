@@ -1,5 +1,5 @@
-﻿using PiRhoSoft.Composition.Engine;
-using PiRhoSoft.MonsterRpg.Engine;
+﻿using PiRhoSoft.Composition;
+using PiRhoSoft.MonsterRpg;
 using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;

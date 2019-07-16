@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Stop Transition", 1)]
 	[HelpURL(Composition.DocumentationUrl + "stop-transition-node")]

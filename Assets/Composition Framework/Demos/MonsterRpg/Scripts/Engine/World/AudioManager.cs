@@ -1,10 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using PiRhoSoft.Utilities.Engine;
+using PiRhoSoft.Utilities;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace PiRhoSoft.MonsterRpg.Engine
+namespace PiRhoSoft.MonsterRpg
 {
 	[HelpURL(MonsterRpg.DocumentationUrl + "audio-manager")]
 	[AddComponentMenu("Monster RPG/Managers/Audio Manager")]

@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "object-binding-root")]
 	[AddComponentMenu("PiRho Soft/Bindings/Object Binding Root")]

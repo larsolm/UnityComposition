@@ -1,10 +1,10 @@
-﻿using PiRhoSoft.Utilities.Engine;
+﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition.Engine
+namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "graph")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Graph", fileName = nameof(Graph), order = 100)]
