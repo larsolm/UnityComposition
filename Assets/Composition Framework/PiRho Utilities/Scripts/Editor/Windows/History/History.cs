@@ -128,6 +128,7 @@ namespace PiRhoSoft.Utilities.Editor
 			public DragState DragState { get; set; }
 			public string DragText => HistoryList.GetName(Index);
 			public Object[] DragObjects => HistoryList.History[Index];
+			public object DragData => DragObjects;
 		}
 
 		private static class HistoryList
