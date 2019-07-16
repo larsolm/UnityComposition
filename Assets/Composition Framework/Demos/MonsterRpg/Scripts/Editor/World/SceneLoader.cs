@@ -25,13 +25,13 @@ namespace PiRhoSoft.MonsterRpg.Editor
 	[InitializeOnLoad]
 	static class SceneLoader
 	{
-		public static readonly JsonPreference<SceneLoaderState> StatePreference = new JsonPreference<SceneLoaderState>("OoT2D.SceneLoader.State");
-		public static readonly StringPreference MainScenePreference = new StringPreference("OoT2D.SceneLoader.MainScene", "Main");
-		public static readonly StringPreference LoadGraphPreference = new StringPreference("OoT2D.SceneLoader.LoadGraph", "LoadGraph");
-		public static readonly StringPreference FilePreference = new StringPreference("OoT2D.SceneLoader.File", "");
-		public static readonly StringPreference ZonePreference = new StringPreference("OoT2D.SceneLoader.Zone", "");
-		public static readonly StringPreference SpawnPreference = new StringPreference("OoT2D.SceneLoader.Spawn", "");
-		public static readonly IntPreference ZoneTypePreference = new IntPreference("OoT2D.SceneLoader.ZoneType", 0);
+		public static readonly JsonPreference<SceneLoaderState> StatePreference = new JsonPreference<SceneLoaderState>("MonsterRpg.SceneLoader.State");
+		public static readonly StringPreference MainScenePreference = new StringPreference("MonsterRpg.SceneLoader.MainScene", "Main");
+		public static readonly StringPreference LoadGraphPreference = new StringPreference("MonsterRpg.SceneLoader.LoadGraph", "LoadGraph");
+		public static readonly StringPreference FilePreference = new StringPreference("MonsterRpg.SceneLoader.File", "");
+		public static readonly StringPreference ZonePreference = new StringPreference("MonsterRpg.SceneLoader.Zone", "");
+		public static readonly StringPreference SpawnPreference = new StringPreference("MonsterRpg.SceneLoader.Spawn", "");
+		public static readonly IntPreference ZoneTypePreference = new IntPreference("MonsterRpg.SceneLoader.ZoneType", 0);
 
 		public const int LoadActiveZone = 0;
 		public const int LoadSavedZone = 1;
