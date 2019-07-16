@@ -35,7 +35,7 @@ namespace PiRhoSoft.MonsterRpg
 		[Tooltip("The condition that must be met in order for a Creature to learn this Skill")]
 		public Expression Condition = new Expression();
 
-		[Tooltip("The instruction to run when teaching this Skill")]
+		[Tooltip("The graph to run when teaching this Skill")]
 		public GraphCaller Graph = new GraphCaller();
 	}
 }

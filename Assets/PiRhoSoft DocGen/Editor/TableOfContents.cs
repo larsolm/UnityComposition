@@ -136,7 +136,7 @@ namespace PiRhoSoft.DocGenEditor
 			var name = directory.Name;
 
 			if (info.Name == "CompositionManager.cs")
-				return "Instructions";
+				return "Graph";
 
 			while (directory != null && directory.Name != "Engine" && directory.Name != "Editor" && directory.Name != "Scripts" && directory.Name != "Assets")
 			{

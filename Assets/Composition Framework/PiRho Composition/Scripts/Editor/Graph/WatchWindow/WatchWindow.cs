@@ -1,5 +1,7 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using System.Linq;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,42 +9,60 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class WatchWindowElement : VisualElement
 	{
-		private const string _uxmlPath = Composition.StylePath + "Graph/WatchWindow/WatchWindow.uxml";
-		private const string _styleSheetPath = Composition.StylePath + "Graph/WatchWindow/WatchWindow.uss";
+		private const string _missingWatchWarning = "(CWWMW) Unable to find variable '{0}' to watch";
+		private const string _invalidWatchWarning = "(CWWIW) Unable to watch variable '{0}' of type '{1}' - only variable stores can be watched";
+		private const string _expressionResultLog = "{0}: ({1}) {2}";
 
-		private const string _ussGlobalName = "global-container";
-		private const string _ussStoreName = "store-container";
-		private const string _ussWatchName = "watch-container";
+		public const string StylePath = Composition.StylePath + "Graph/WatchWindow/WatchWindow.uss";
+		public const string UssClassName = "pirho-watch-window";
 
-		private const string _ussBaseClass = "pargon-watch-window";
+		public const string UssToolbarClassName = UssClassName + "__toolbar";
+		public const string UssWatchClassName = UssClassName + "__watch";
+		public const string UssWatchInvalidClassName = UssWatchClassName + "--invalid";
+		public const string UssLoggingClassName = UssClassName + "__logging";
+		public const string UssLoggingActiveClassName = UssLoggingClassName + "--active";
+		public const string UssContainerClassName = UssClassName + "__main-container";
+		public const string UssGlobalClassName = UssClassName + "__global-container";
+		public const string UssStoreClassName = UssClassName + "__store-container";
+		public const string UssWatchedClassName = UssClassName + "__watched-container";
+		public const string UssFooterClassName = UssClassName + "__footer";
+		public const string UssExpressionClassName = UssClassName + "__expression";
+		public const string UssExpressionInvalidClassName = UssExpressionClassName + "--invalid";
 
-		private static readonly BoolPreference _logInstructionsEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogInstructionsEnabled", false);
+		private static readonly Icon _logIcon = Icon.BuiltIn("UnityEditor.ConsoleWindow");
+		private static readonly BoolPreference _logGraphEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogGraphEnabled", false);
 
-		private readonly VisualElement _globalContainer;
-		private readonly VisualElement _storeContainer;
-		private readonly VisualElement _watchedContainer;
-
-		private VariableStoreElement _globalStore;
+		private VisualElement _globalContainer;
+		private VisualElement _storeContainer;
+		private VisualElement _watchedContainer;
+		private TextField _expressionText;
 
 		public WatchWindowElement()
 		{
-			ElementHelper.AddVisualTree(this, _uxmlPath);
-			ElementHelper.AddStyleSheet(this, _styleSheetPath);
+			ElementHelper.AddStyleSheet(this, StylePath);
 
-			AddToClassList(_ussBaseClass);
+			AddToClassList(UssClassName);
 
-			_globalContainer = this.Q(_ussGlobalName);
-			_globalContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+			var container = new VisualElement();
+			container.AddToClassList(UssContainerClassName);
 
-			_storeContainer = this.Q(_ussStoreName);
-			_watchedContainer = this.Q(_ussWatchName);
+			var toolbar = CreateToolbar();
+			_globalContainer = CreateGlobalContainer();
+			_storeContainer = CreateStoreContainer();
+			_watchedContainer = CreateWatchedContainer();
+			var footer = CreateFooter();
 
-			// Make Watch Toolbar
-			CreateGlobalStore();
-			CreateStores();
-			// Make Expression Field
+			container.Add(_globalContainer);
+			container.Add(_storeContainer);
+			container.Add(_watchedContainer);
 
-			CompositionManager.LogTracking = _logInstructionsEnabled.Value;
+			Add(toolbar);
+			Add(container);
+			Add(footer);
+
+			UpdateStores();
+
+			CompositionManager.LogTracking = _logGraphEnabled.Value;
 
 			EditorApplication.playModeStateChanged += PlayModeStateChanged;
 		}
@@ -50,39 +70,180 @@ namespace PiRhoSoft.Composition.Editor
 		private void PlayModeStateChanged(PlayModeStateChange state)
 		{
 			if (state == PlayModeStateChange.ExitingPlayMode)
-			{
-				_globalStore = null;
-				_storeContainer.Clear();
-				_watchedContainer.Clear();
-			}
+				ClearStores();
+			else if (state == PlayModeStateChange.EnteredPlayMode)
+				UpdateStores();
+
+			_expressionText.SetEnabled(state == PlayModeStateChange.EnteredPlayMode);
 		}
 
-		private void CreateGlobalStore()
+		private VisualElement CreateToolbar()
 		{
-			if (CompositionManager.Exists && (_globalStore == null || _globalStore.Store != CompositionManager.Instance.GlobalStore))
+			var watchField = new TextField { isDelayed = true, tooltip = "Type a VariableReference to watch" };
+			watchField.AddToClassList(UssWatchClassName);
+			watchField.RegisterValueChangedCallback(evt =>
 			{
-				_globalStore = new VariableStoreElement(CompositionManager.Instance, CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false);
-				_globalContainer.Clear();
-				_globalContainer.Add(_globalStore);
-			}
+				var valid = AddWatch(evt.newValue);
+				if (valid)
+					watchField.SetValueWithoutNotify(string.Empty);
+
+				watchField.EnableInClassList(UssWatchInvalidClassName, !valid);
+			});
+
+			var loggingButton = new Image { image = _logIcon.Content, tooltip = "Enable/Disable logging of graph statistics" };
+			loggingButton.AddToClassList(UssLoggingClassName);
+			loggingButton.AddManipulator(new Clickable(() =>
+			{
+				CompositionManager.LogTracking = !CompositionManager.LogTracking;
+				_logGraphEnabled.Value = CompositionManager.LogTracking;
+				loggingButton.EnableInClassList(UssLoggingActiveClassName, CompositionManager.LogTracking);
+			}));
+
+			var toolbar = new Toolbar();
+			toolbar.AddToClassList(UssToolbarClassName);
+			toolbar.Add(new Placeholder<string>("Add Watch", watchField));
+			toolbar.Add(loggingButton);
+
+			return toolbar;
 		}
 
-		private void CreateStores()
+		private VisualElement CreateGlobalContainer()
 		{
+			var globalContainer = new VisualElement();
+			globalContainer.AddToClassList(UssGlobalClassName);
+			globalContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+
+			return globalContainer;
+		}
+
+		private VisualElement CreateStoreContainer()
+		{
+			var storeContainer = new VisualElement();
+			storeContainer.AddToClassList(UssStoreClassName);
+			storeContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+
+			return storeContainer;
+		}
+
+		private VisualElement CreateWatchedContainer()
+		{
+			var watchedContainer = new VisualElement();
+			watchedContainer.AddToClassList(UssWatchedClassName);
+			watchedContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+
+			return watchedContainer;
+		}
+
+		private VisualElement CreateFooter()
+		{
+			_expressionText = new TextField { isDelayed = true, tooltip = "Type an Expression to execute" };
+			_expressionText.AddToClassList(UssExpressionClassName);
+			_expressionText.RegisterValueChangedCallback(evt =>
+			{
+				var valid = ExecuteExpression(evt.newValue);
+				if (valid)
+					_expressionText.SetValueWithoutNotify(string.Empty);
+
+				_expressionText.EnableInClassList(UssExpressionInvalidClassName, !valid);
+			});
+
+			var footer = new Toolbar();
+			footer.AddToClassList(UssFooterClassName);
+			footer.Add(new Placeholder<string>("Execute Expression", _expressionText));
+
+			return footer;
+		}
+
+		private void ClearStores()
+		{
+			_globalContainer.Clear();
+			_storeContainer.Clear();
+			_watchedContainer.Clear();
+		}
+
+		private void UpdateStores()
+		{
+			ClearStores();
+
 			if (CompositionManager.Exists)
 			{
+				_globalContainer.Add(new VariableStoreElement(CompositionManager.Instance, CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false));
+
 				foreach (var graph in CompositionManager.TrackingState)
+					_storeContainer.Add(new VariableStoreElement(graph.Key, graph.Key.name, graph.Key.Variables, true, false));
+			}
+		}
+
+		private bool AddWatch(string variable)
+		{
+			var reference = new VariableReference { Variable = variable };
+
+			foreach (var graph in CompositionManager.TrackingState)
+			{
+				var value = reference.GetValue(graph.Key.Variables);
+				if (!value.IsEmpty)
 				{
-					var store = new VariableStoreElement(graph.Key, graph.Key.name, graph.Key.Variables, true, false);
-					_storeContainer.Add(store);
+					if (value.HasStore)
+					{
+						AddWatch(graph.Key, variable, value.Store);
+						return true;
+					}
+					else
+					{
+						Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
+						return false;
+					}
 				}
 			}
+
+			if (CompositionManager.Exists)
+			{
+				var value = reference.GetValue(CompositionManager.Instance.DefaultStore);
+
+				if (value.HasStore)
+				{
+					AddWatch(CompositionManager.Instance, variable, value.Store);
+					return true;
+				}
+				else
+				{
+					Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
+					return false;
+				}
+			}
+
+			Debug.LogWarningFormat(_missingWatchWarning, variable);
+			return false;
 		}
 
 		private void AddWatch(Object owner, string name, IVariableStore store)
 		{
-			var element = new VariableStoreElement(owner, name, store, false, true);
-			_watchedContainer.Add(element);
+			_watchedContainer.Add(new VariableStoreElement(owner, name, store, false, true));
+		}
+
+		private bool ExecuteExpression(string text)
+		{
+			var expression = new Expression();
+			var compilation = expression.SetStatement(text);
+		
+			if (!compilation.Success)
+			{
+				Debug.LogError(compilation.Message);
+				return false;
+			}
+			else
+			{
+				var result = VariableValue.Empty;
+				var graph = CompositionManager.TrackingState.FirstOrDefault();
+		
+				if (graph.Key != null)
+					result = expression.Execute(graph.Value.Graph, graph.Key.Variables);
+				else
+					result = expression.Execute(null, CompositionManager.Instance.DefaultStore);
+		
+				Debug.LogFormat(_expressionResultLog, expression.Statement, result.Type, result);
+				return true;
+			}
 		}
 	}
 
@@ -104,224 +265,14 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
-		private const float _minimumWidth = 200.0f;
-
-		//private const float _toolbarHeight = 17.0f;
-		//private const float _toolbarPadding = 17.0f;
-		//private const float _promptHeight = 20.0f;
-		//private const float _watchButtonWidth = 60.0f;
-		//
-		//private const string _expressionResultLog = "{0}: ({1}) {2}";
-		//private const string _missingWatchWarning = "(CWWMW) Unable to find variable '{0}' to watch";
-		//private const string _invalidWatchWarning = "(CWWIW) Unable to watch variable '{0}' of type '{1}' - only variable stores can be watched";
-		
-		//private static readonly Label _enableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Enable logging of instruction execution");
-		//private static readonly Label _disableLogInstructionsButton = new Label(Icon.BuiltIn("UnityEditor.ConsoleWindow"), "", "Disable logging of instruction execution");
-		//private static readonly Label _executeButton = new Label(Icon.Add, "", "Execute the expression");
-		//
-		//private Vector2 _scrollPosition;
-		//private WatchMenu _watchMenu;
-		//
-		//private bool _promptValid = true;
-		//private string _promptText = string.Empty;
-
 		[UnityEditor.MenuItem("Window/PiRho Soft/Watch Window")]
 		public static void ShowWindow()
 		{
-			var window = CreateWindow<WatchWindow>("Watch Window");
-			window.minSize = new Vector2(_minimumWidth, window.minSize.y);
+			var window = GetWindow<WatchWindow>("Watch Window");
+			window.minSize = new Vector2(200.0f, window.minSize.y);
 			window.titleContent.image = Icon.View.Content;
 			window.rootVisualElement.Add(new WatchWindowElement());
 			window.Show();
 		}
-
-		#region Toolbar
-		//
-		//private class WatchMenu : PopupWindowContent
-		//{
-		//	public WatchWindow Window;
-		//
-		//	private const float _padding = 5.0f;
-		//	private string _variable = string.Empty;
-		//	private bool _valid = true;
-		//
-		//	private static readonly Label _addButton = new Label(Icon.Add, "", "Add the variable to the watch window");
-		//
-		//	public override Vector2 GetWindowSize()
-		//	{
-		//		return new Vector2(300, RectHelper.LineHeight + 2 * _padding);
-		//	}
-		//
-		//	public override void OnGUI(Rect rect)
-		//	{
-		//		rect = RectHelper.Inset(rect, _padding);
-		//
-		//		var add = false;
-		//		var addRect = RectHelper.TakeTrailingWidth(ref rect, 32.0f);
-		//		RectHelper.TakeTrailingWidth(ref rect, RectHelper.HorizontalSpace);
-		//
-		//		using (new InvalidScope(_valid))
-		//		{
-		//			using (var changes = new EditorGUI.ChangeCheckScope())
-		//			{
-		//				add = EnterField.DrawString("AddWatchVariable", rect, GUIContent.none, ref _variable);
-		//
-		//				if (changes.changed)
-		//					_valid = true;
-		//			}
-		//		}
-		//
-		//		if (GUI.Button(addRect, _addButton.Content))
-		//			add = true;
-		//
-		//		if (add)
-		//		{
-		//			_valid = Window.AddWatch(_variable);
-		//
-		//			if (_valid)
-		//			{
-		//				_variable = string.Empty;
-		//				editorWindow.Close();
-		//			}
-		//			else
-		//			{
-		//				editorWindow.Repaint();
-		//			}
-		//		}
-		//	}
-		//}
-		//
-		//private bool AddWatch(string variable)
-		//{
-		//	var reference = new VariableReference { Variable = variable };
-		//
-		//	foreach (var instruction in CompositionManager.TrackingState)
-		//	{
-		//		var value = reference.GetValue(instruction.Key.Variables);
-		//		if (!value.IsEmpty)
-		//		{
-		//			if (value.HasStore)
-		//			{
-		//				AddWatch(variable, value.Store);
-		//				return true;
-		//			}
-		//			else
-		//			{
-		//				Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
-		//				return false;
-		//			}
-		//		}
-		//	}
-		//
-		//	if (CompositionManager.Exists)
-		//	{
-		//		var value = reference.GetValue(CompositionManager.Instance.DefaultStore);
-		//
-		//		if (value.HasStore)
-		//		{
-		//			AddWatch(variable, value.Store);
-		//			return true;
-		//		}
-		//		else
-		//		{
-		//			Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
-		//			return false;
-		//		}
-		//	}
-		//
-		//	Debug.LogWarningFormat(_missingWatchWarning, variable);
-		//	return false;
-		//}
-		//
-		//private void CreateToolbar()
-		//{
-		//	_watchMenu = new WatchMenu { Window = this };
-		//}
-		//
-		//private void TeardownToolbar()
-		//{
-		//	_watchMenu = null;
-		//}
-		//
-		//private void DrawToolbar()
-		//{
-		//	using (new EditorGUILayout.HorizontalScope(EditorStyles.toolbar))
-		//	{
-		//		using (new EditorGUI.DisabledScope(!Application.isPlaying))
-		//		{
-		//			if (GUILayout.Button("Watch", EditorStyles.toolbarDropDown, GUILayout.Width(_watchButtonWidth)))
-		//				PopupWindow.Show(new Rect(_toolbarPadding, _toolbarHeight, 0.0f, 0.0f), _watchMenu);
-		//		}
-		//
-		//		GUILayout.FlexibleSpace();
-		//
-		//		CompositionManager.LogTracking = GUILayout.Toggle(CompositionManager.LogTracking, CompositionManager.LogTracking ? _disableLogInstructionsButton.Content : _enableLogInstructionsButton.Content, EditorStyles.toolbarButton);
-		//		_logInstructionsEnabled.Value = CompositionManager.LogTracking;
-		//	}
-		//}
-		//
-		#endregion
-
-		#region Prompt
-		//
-		//private void DrawPrompt()
-		//{
-		//	var rect = EditorGUILayout.GetControlRect(false, EditorGUIUtility.singleLineHeight, GUILayout.ExpandWidth(true));
-		//	var execute = false;
-		//	var executeRect = RectHelper.TakeTrailingWidth(ref rect, 32.0f);
-		//	RectHelper.TakeTrailingWidth(ref rect, RectHelper.HorizontalSpace);
-		//
-		//	using (new EditorGUI.DisabledScope(!Application.isPlaying))
-		//	{
-		//		using (new InvalidScope(_promptValid))
-		//		{
-		//			using (var changes = new EditorGUI.ChangeCheckScope())
-		//			{
-		//				execute = EnterField.DrawString("PromptEntry", rect, GUIContent.none, ref _promptText);
-		//
-		//				if (changes.changed)
-		//					_promptValid = true;
-		//			}
-		//		}
-		//
-		//		if (GUI.Button(executeRect, _executeButton.Content))
-		//			execute = true;
-		//
-		//		if (execute)
-		//		{
-		//			_promptValid = ExecuteExpression(_promptText);
-		//
-		//			if (_promptValid)
-		//				_promptText = string.Empty;
-		//		}
-		//	}
-		//}
-		//
-		//private bool ExecuteExpression(string text)
-		//{
-		//	var expression = new Expression();
-		//	var compilation = expression.SetStatement(text);
-		//
-		//	if (!compilation.Success)
-		//	{
-		//		Debug.LogError(compilation.Message);
-		//		return false;
-		//	}
-		//	else
-		//	{
-		//		var result = VariableValue.Empty;
-		//		var instruction = CompositionManager.TrackingState.FirstOrDefault();
-		//
-		//		if (instruction.Key != null)
-		//			result = expression.Execute(instruction.Value.Instruction, instruction.Key.Variables);
-		//		else
-		//			result = expression.Execute(null, CompositionManager.Instance.DefaultStore);
-		//
-		//		Debug.LogFormat(_expressionResultLog, expression.Statement, result.Type, result);
-		//		return !result.IsEmpty;
-		//	}
-		//}
-		//
-		#endregion
 	}
 }

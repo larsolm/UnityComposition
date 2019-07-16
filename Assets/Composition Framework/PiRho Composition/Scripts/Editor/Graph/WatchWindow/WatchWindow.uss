@@ -1,3 +1,71 @@
-﻿.pargon-watch-window
+﻿.pirho-watch-window
 {
+	flex-grow: 1;
+}
+
+.pirho-watch-window__toolbar
+{
+	align-items: center;
+	font-size: 10px;
+	padding: 0px 5px;
+}
+
+.pirho-watch-window__watch
+{
+	flex-grow: 1;
+}
+
+.pirho-watch-window__watch--invalid
+{
+}
+
+.pirho-watch-window__logging
+{
+	border-color: #000;
+	border-right-width: 1px;
+	border-left-width: 1px;
+	background-color: #D0D0D0;
+	width: 28px;
+	height: 14px;
+	padding: 0 6px;
+	margin-left: 5px;
+}
+
+.pirho-watch-window__logging:active
+{
+	background-color: #C0C0C0
+}
+
+.pirho-watch-window__logging--active
+{
+	background-color: #F6F6F6
+}
+
+.pirho-watch-window__main-container
+{
+	flex-grow: 1;
+}
+
+.pirho-watch-window__global-container
+{
+}
+
+.pirho-watch-window__store-container
+{
+}
+
+.pirho-watch-window__watched-container
+{
+}
+
+.pirho-watch-window__footer
+{
+	align-items: center;
+	font-size: 10px;
+	padding: 0px 5px;
+}
+
+.pirho-watch-window__expression
+{
+	flex-grow: 1;
 }

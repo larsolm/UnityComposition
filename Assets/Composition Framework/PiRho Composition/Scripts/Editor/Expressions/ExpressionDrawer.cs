@@ -1,6 +1,4 @@
-﻿using PiRhoSoft.Composition;
-using PiRhoSoft.Utilities.Editor;
-using PiRhoSoft.Utilities;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -11,21 +9,11 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
+			var container = new FieldContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
 			var expression = PropertyHelper.GetObject<Expression>(property);
-			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
-			var textField = new TextField() { multiline = true };
-			var messageBox = new MessageBox(MessageBoxType.Error, string.Empty);
+			var element = new ExpressionElement(property.serializedObject.targetObject, expression);
 
-			ElementHelper.SetVisible(messageBox, expression.HasError);
-			ElementHelper.Bind(textField, textField, property.serializedObject.context, () => expression.Statement,
-			value =>
-			{
-				expression.SetStatement(value);
-				ElementHelper.SetVisible(messageBox, expression.HasError);
-			});
-
-			container.Add(textField);
-			container.Add(messageBox);
+			container.Add(element);
 
 			return container;
 		}
