@@ -1,12 +1,9 @@
 ﻿using PiRhoSoft.Composition;
 using PiRhoSoft.Utilities.Editor;
-using System;
 using System.IO;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
-using MenuItem = UnityEditor.MenuItem;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.MonsterRpg.Editor
 {
@@ -14,64 +11,47 @@ namespace PiRhoSoft.MonsterRpg.Editor
 	{
 		private class StateWindowElement : VisualElement
 		{
-			private const string StylePath = Composition.Composition.StylePath;
-
-			private AssetList _zoneList;
-			private GUIContent[] _zoneNames;
-			private SceneAsset _mainScene;
-			private Graph _loadGraph;
-
-			private VisualElement _editingContainer;
-			private VisualElement _playingContainer;
-			
 			public StateWindowElement(Object owner)
 			{
-				EditorApplication.playModeStateChanged += PlayStateChanged;
-
-				_mainScene = AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneLoader.MainScenePreference.Value);
-				_loadGraph = AssetDatabase.LoadAssetAtPath<Graph>(SceneLoader.LoadGraphPreference.Value);
-
-				CreateScenePicker(owner);
-				CreateGraphPicker(owner);
-				CreateFilePicker();
-				CreateZonePicker();
-				CreateSpawnPicker();
+				CreateMainScenePicker(owner);
+				CreateLoadGraphPicker(owner);
+				CreateSaveFilePicker();
+				CreateSpawnZonePicker(owner);
 			}
 
-			private void CreateScenePicker(Object owner)
+			private void CreateMainScenePicker(Object owner)
 			{
-				var mainSceneContainer = ElementHelper.CreatePropertyContainer("Main Scene", "The main scene to load when the game starts up");
-
-				var mainScenePicker = new ScenePicker(owner, () => _mainScene, scene =>
+				var mainSceneContainer = new FieldContainer("Main Scene", "The main scene to load when the game starts up");
+				var mainScenePicker = new ScenePicker(owner, () => AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneLoader.MainScenePreference.Value), scene => SceneLoader.MainScenePreference.Value = AssetDatabase.GetAssetPath(scene));
+				mainScenePicker.Setup(SceneLoader.MainScenePreference.Value, () =>
 				{
-					_mainScene = scene;
-					SceneLoader.MainScenePreference.Value = AssetDatabase.GetAssetPath(_mainScene);
+					var gameObject = new GameObject("World Manager");
+					gameObject.AddComponent<WorldManager>();
+					gameObject.AddComponent<AudioManager>();
 				});
 
+				mainSceneContainer.Add(mainScenePicker);
 				Add(mainSceneContainer);
 			}
 
-			private void CreateGraphPicker(Object owner)
+			private void CreateLoadGraphPicker(Object owner)
 			{
-				var loadGraphContainer = ElementHelper.CreatePropertyContainer("Load Graph", "The graph to run when the game starts up");
+				var loadGraphContainer = new FieldContainer("Load Graph", "The graph to run when the game starts up");
+				var graphPicker = new ObjectPicker(owner, () => AssetDatabase.LoadAssetAtPath<Graph>(SceneLoader.LoadGraphPreference.Value), graph => SceneLoader.LoadGraphPreference.Value = AssetDatabase.GetAssetPath(graph));
+				graphPicker.Setup(typeof(Graph), SceneLoader.LoadGraphPreference.Value);
 
-				var graphPicker = new ObjectPicker(owner, () => _loadGraph, graph =>
-				{
-					_loadGraph = graph as Graph;
-					SceneLoader.LoadGraphPreference.Value = AssetDatabase.GetAssetPath(_loadGraph);
-				});
-
+				loadGraphContainer.Add(graphPicker);
 				Add(loadGraphContainer);
 			}
 
-			private void CreateFilePicker()
+			private void CreateSaveFilePicker()
 			{
-				var fileContaier = ElementHelper.CreatePropertyContainer("Save File", "The save file to load when testing the game");
+				var fileContaier = new FieldContainer("Save File", "The save file to load when testing the game");
 
-				_editingContainer = new VisualElement();
-				_playingContainer = new VisualElement();
+				var editingContainer = new VisualElement();
+				var playingContainer = new VisualElement();
 
-				_editingContainer.Add(new Button(() =>
+				editingContainer.Add(new Button(() =>
 				{
 					var path = EditorUtility.SaveFilePanel("Create Save File", Application.persistentDataPath, "Editor Save", "json");
 
@@ -79,9 +59,6 @@ namespace PiRhoSoft.MonsterRpg.Editor
 					{
 						File.WriteAllText(path, "{}");
 						SceneLoader.FilePreference.Value = path;
-
-						if (SceneLoader.ZoneTypePreference.Value == SceneLoader.LoadSavedZone)
-							SceneLoader.ZoneTypePreference.Value = SceneLoader.LoadActiveZone;
 					}
 				})
 				{
@@ -89,7 +66,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 					tooltip = "Create a new save file"
 				});
 
-				_editingContainer.Add(new Button(() =>
+				editingContainer.Add(new Button(() =>
 				{
 					var path = EditorUtility.OpenFilePanel("Open Save File", Application.persistentDataPath, "json");
 
@@ -101,12 +78,9 @@ namespace PiRhoSoft.MonsterRpg.Editor
 					tooltip = "Open an existing save file"
 				});
 
-				_editingContainer.Add(new Button(() =>
+				editingContainer.Add(new Button(() =>
 				{
 					SceneLoader.FilePreference.Value = "";
-
-					if (SceneLoader.ZoneTypePreference.Value == SceneLoader.LoadSavedZone)
-						SceneLoader.ZoneTypePreference.Value = SceneLoader.LoadActiveZone;
 				})
 				{
 					text = "Clear",
@@ -114,7 +88,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 				});
 
 
-				_playingContainer.Add(new Button(() =>
+				playingContainer.Add(new Button(() =>
 				{
 					WorldLoader.Instance.Save();
 				})
@@ -123,112 +97,66 @@ namespace PiRhoSoft.MonsterRpg.Editor
 					tooltip = "Save the game"
 				});
 
-				fileContaier.Add(_editingContainer);
-				fileContaier.Add(_playingContainer);
+				fileContaier.Add(editingContainer);
+				fileContaier.Add(playingContainer);
+
+				EditorApplication.playModeStateChanged += state =>
+				{
+					ElementHelper.SetVisible(editingContainer, state == PlayModeStateChange.EnteredEditMode || state == PlayModeStateChange.ExitingPlayMode);
+					ElementHelper.SetVisible(playingContainer, state == PlayModeStateChange.EnteredPlayMode || state == PlayModeStateChange.ExitingEditMode);
+				};
 			}
 
-			private void CreateZonePicker()
+			private void CreateSpawnZonePicker(Object owner)
 			{
-				var zonePicker = ElementHelper.CreatePropertyContainer("Starting Zone", "The zone to start in when testing");
-			}
-
-			private void CreateSpawnPicker()
-			{
-				//if (SceneLoader.ZoneTypePreference.Value != SceneLoader.LoadSavedZone)
-
-				var spawnPicker = ElementHelper.CreatePropertyContainer("Starting Spawn", "The spawn to spawn at when testing");
+				var spawnPicker = new FieldContainer("Starting Spawn", "The spawn to spawn at when testing");
 
 				var textField = new TextField { value = SceneLoader.SpawnPreference.Value };
+				textField.style.flexGrow = 1;
 				textField.RegisterValueChangedCallback(evt => SceneLoader.SpawnPreference.Value = evt.newValue);
 
-				spawnPicker.Add(textField);
-				Add(spawnPicker);
-			}
+				var zoneContainer = new FieldContainer("Starting Zone", "The zone to start in when testing");
 
-			private void PlayStateChanged(PlayModeStateChange state)
-			{
-				if (state == PlayModeStateChange.EnteredPlayMode)
+				var typeContainer = new VisualElement();
+				typeContainer.style.flexGrow = 1;
+
+				var zonePicker = new ObjectPicker(owner, () => AssetDatabase.LoadAssetAtPath<Zone>(SceneLoader.ZonePreference.Value), zone => SceneLoader.ZonePreference.Value = AssetDatabase.GetAssetPath(zone));
+				zonePicker.Setup(typeof(Zone), SceneLoader.ZonePreference.Value);
+
+				var buttons = new EnumButtons(owner, () => (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value, value =>
 				{
-					_editingContainer.style.display = DisplayStyle.None;
-					_playingContainer.style.display = DisplayStyle.Flex;
-				}
-				else if (state == PlayModeStateChange.ExitingPlayMode)
-				{
-					_editingContainer.style.display = DisplayStyle.Flex;
-					_playingContainer.style.display = DisplayStyle.None;
-				}
+					var type = (SceneLoader.ZoneLoadType)value;
+					SceneLoader.ZoneTypePreference.Value = (int)type;
+
+					ElementHelper.SetVisible(zonePicker, type == SceneLoader.ZoneLoadType.Specific);
+					ElementHelper.SetVisible(spawnPicker, type != SceneLoader.ZoneLoadType.Saved);
+				});
+
+				ElementHelper.SetVisible(zonePicker, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value == SceneLoader.ZoneLoadType.Specific);
+				ElementHelper.SetVisible(spawnPicker, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value != SceneLoader.ZoneLoadType.Saved);
+
+				buttons.Setup(typeof(SceneLoader.ZoneLoadType), false, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value);
+
+				zoneContainer.Add(typeContainer);
+				typeContainer.Add(buttons);
+				typeContainer.Add(zonePicker);
+
+				spawnPicker.Add(textField);
+				Add(zoneContainer);
+				Add(spawnPicker);
 			}
 		}
 
-		private static readonly GUIContent _activeZoneOptionContent = new GUIContent("Active Zone in Editor");
-		private static readonly GUIContent _savedZoneOptionContent = new GUIContent("Saved Zone");
-
-		[MenuItem("Window/OoT2D/State Manager")]
+		[UnityEditor.MenuItem("Window/Monster RPG/State Manager")]
 		public static void Open()
 		{
 			var window = GetWindow<StateWindow>("State Manager");
 			window.rootVisualElement.Add(new StateWindowElement(window));
+			window.rootVisualElement.style.paddingTop = 5;
+			window.rootVisualElement.style.paddingRight = 5;
+			window.rootVisualElement.style.paddingBottom = 5;
+			window.rootVisualElement.style.paddingLeft = 5;
 			window.Show();
-		}
-
-		private void BuildZoneList()
-		{
-			var zoneList = AssetHelper.GetAssetList<Zone>();
-
-			if (zoneList != _zoneList)
-			{
-				_zoneNames = new GUIContent[zoneList.Names.Length + 3];
-				_zoneList = zoneList;
-
-				Array.Copy(zoneList.Names, 0, _zoneNames, 3, zoneList.Names.Length);
-
-				_zoneNames[0] = _activeZoneOptionContent;
-				_zoneNames[1] = _savedZoneOptionContent;
-				_zoneNames[2] = new GUIContent(string.Empty);
-			}
-		}
-
-		private void DrawZonePicker()
-		{
-			BuildZoneList();
-
-			var index = 0;
-
-			if (SceneLoader.ZoneTypePreference.Value == SceneLoader.LoadActiveZone)
-			{
-				index = 0;
-			}
-			else if (SceneLoader.ZoneTypePreference.Value == SceneLoader.LoadSavedZone)
-			{
-				index = 1;
-			}
-			else
-			{
-				for (var i = 0; i < _zoneList.Assets.Count; i++)
-				{
-					if ((_zoneList.Assets[i] as Zone).Scene.Path == SceneLoader.ZonePreference.Value)
-					{
-						index = i + 3;
-						break;
-					}
-				}
-			}
-
-			index = EditorGUILayout.Popup(_startingZoneContent, index, _zoneNames);
-
-			if (index == 0)
-			{
-				SceneLoader.ZoneTypePreference.Value = SceneLoader.LoadActiveZone;
-			}
-			else if (index == 1)
-			{
-				SceneLoader.ZoneTypePreference.Value = SceneLoader.LoadSavedZone;
-			}
-			else
-			{
-				SceneLoader.ZoneTypePreference.Value = SceneLoader.LoadSpecificZone;
-				SceneLoader.ZonePreference.Value = (_zoneList.Assets[index - 3] as Zone).Scene.Path;
-			}
 		}
 	}
 }

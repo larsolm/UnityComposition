@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Composition;
-using PiRhoSoft.MonsterRpg;
 using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;
@@ -25,6 +24,13 @@ namespace PiRhoSoft.MonsterRpg.Editor
 	[InitializeOnLoad]
 	static class SceneLoader
 	{
+		public enum ZoneLoadType
+		{
+			Active,
+			Saved,
+			Specific
+		}
+
 		public static readonly JsonPreference<SceneLoaderState> StatePreference = new JsonPreference<SceneLoaderState>("MonsterRpg.SceneLoader.State");
 		public static readonly StringPreference MainScenePreference = new StringPreference("MonsterRpg.SceneLoader.MainScene", "Main");
 		public static readonly StringPreference LoadGraphPreference = new StringPreference("MonsterRpg.SceneLoader.LoadGraph", "LoadGraph");
@@ -32,10 +38,6 @@ namespace PiRhoSoft.MonsterRpg.Editor
 		public static readonly StringPreference ZonePreference = new StringPreference("MonsterRpg.SceneLoader.Zone", "");
 		public static readonly StringPreference SpawnPreference = new StringPreference("MonsterRpg.SceneLoader.Spawn", "");
 		public static readonly IntPreference ZoneTypePreference = new IntPreference("MonsterRpg.SceneLoader.ZoneType", 0);
-
-		public const int LoadActiveZone = 0;
-		public const int LoadSavedZone = 1;
-		public const int LoadSpecificZone = 2;
 
 		private const string _mainSceneNotSetError = "A Main Scene was not set";
 		private const string _noZonesError = "The World does not have any zones";
@@ -133,7 +135,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 				StartSpawn = SpawnPreference.Value,
 			};
 
-			if (ZoneTypePreference.Value == LoadActiveZone)
+			if (ZoneTypePreference.Value == (int)ZoneLoadType.Active)
 			{
 				var zone = FindZone();
 				if (zone == null)
@@ -150,7 +152,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 					state.StartZone = zone.name;
 				}
 			}
-			else if (ZoneTypePreference.Value == LoadSpecificZone)
+			else if (ZoneTypePreference.Value == (int)ZoneLoadType.Specific)
 			{
 				var zones = AssetHelper.ListAssets<Zone>();
 				var zone = GetZone(zones, ZonePreference.Value);
@@ -163,7 +165,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 			}
 			else
 			{
-				state.LoadWorld = ZoneTypePreference.Value == LoadSavedZone;
+				state.LoadWorld = ZoneTypePreference.Value == (int)ZoneLoadType.Saved;
 			}
 
 			return state;
