@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionEngine
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Set", fileName = nameof(VariableSetAsset), order = 130)]
 	public class VariableSetAsset : ScriptableObject, IVariableStore, IVariableReset, ISchemaOwner
 	{
-		[ChangeTrigger(nameof(SetupSchema))]
+		//[ChangeTrigger(nameof(SetupSchema))]
 		[ObjectPicker]
 		[SerializeField]
 		private VariableSchema _schema = null;

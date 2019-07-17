@@ -108,7 +108,7 @@ namespace PiRhoSoft.CompositionEngine
 
 		[Serializable] public class ParameterList : SerializedList<Parameter> { }
 
-		[ChangeTrigger(nameof(OnNameChanged))]
+		//[ChangeTrigger(nameof(OnNameChanged))]
 		[Delayed]
 		public string Name;
 
