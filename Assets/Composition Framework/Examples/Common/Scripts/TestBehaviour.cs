@@ -38,6 +38,16 @@ namespace PiRhoSoft.CompositionExample
 		[Stretch]
 		public int IntList;
 
+		[TypePicker(typeof(Component), false)]
+		public string TypeTest;
+
+		[ObjectPicker]
+		[Required(MessageBoxType.Error, "Required")]
+		public Texture ObjectTest;
+
+		[ScenePicker]
+		public SceneReference SceneText;
+
 		private void Start()
 		{
 			StartCoroutine(Increment());

@@ -9,6 +9,10 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public Label Label { get; private set; }
 
+		public FieldContainer(string label) : this(label, null)
+		{
+		}
+
 		public FieldContainer(string label, string tooltip)
 		{
 			if (label != null)

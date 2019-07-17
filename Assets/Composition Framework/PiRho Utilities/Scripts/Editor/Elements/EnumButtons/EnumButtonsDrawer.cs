@@ -24,7 +24,7 @@ namespace PiRhoSoft.Utilities.Editor
 			else
 			{
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
-				return new FieldContainer(property.displayName, "");
+				return new FieldContainer(property.displayName);
 			}
 		}
 	}

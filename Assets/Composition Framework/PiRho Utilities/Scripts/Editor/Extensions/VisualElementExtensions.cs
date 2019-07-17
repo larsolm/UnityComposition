@@ -112,5 +112,14 @@ namespace PiRhoSoft.Utilities.Editor
 		}
 
 		#endregion
+
+		#region Style
+
+		public static void SetDisplayed(this VisualElement element, bool displayed)
+		{
+			element.style.display = displayed ? DisplayStyle.Flex : DisplayStyle.None;
+		}
+
+		#endregion
 	}
 }

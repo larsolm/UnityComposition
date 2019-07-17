@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.Utilities;
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,7 +25,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The source of the scene to load")]
-		[EnumButtons]
+		//[EnumButtons]
 		public SceneSource Source = SceneSource.Value;
 
 		[Tooltip("The Scene to load")]

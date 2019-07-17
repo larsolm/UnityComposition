@@ -236,6 +236,11 @@ MonoBehaviour:
   EnumList:
     _items: 10000000
   IntList: 0
+  TypeTest: UnityEngine.CanvasRenderer, UnityEngine.UIModule, Version=0.0.0.0, Culture=neutral,
+    PublicKeyToken=null
+  ObjectTest: {fileID: 0}
+  SceneText:
+    Path: Assets/Composition Framework/Examples/Calculator/Calculator.unity
 --- !u!4 &672034259
 Transform:
   m_ObjectHideFlags: 0

@@ -4,7 +4,7 @@ using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace PiRhoSoft.PargonUtilities.Editor
+namespace PiRhoSoft.Utilities.Editor
 {
 	[Serializable]
 	public class SceneState
@@ -22,6 +22,17 @@ namespace PiRhoSoft.PargonUtilities.Editor
 
 	public static class SceneHelper
 	{
+		public static SceneAsset GetSceneFromPath(string path)
+		{
+			return AssetDatabase.LoadAssetAtPath<SceneAsset>(path);
+		}
+
+		public static SceneAsset GetSceneFromBuildIndex(int index)
+		{
+			var path = SceneUtility.GetScenePathByBuildIndex(index);
+			return GetSceneFromPath(path);
+		}
+
 		#region Creation
 
 		public static Scene CreateScene(Action create)
