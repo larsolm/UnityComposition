@@ -212,7 +212,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			return new IMGUIContainer(() =>
 			{
 				// this is a copy of the implementation from PropertyField.Reset without the wide mode handling since
-				// that is internal
+				// that is internal and seemingly unimportant
 
 				EditorGUI.BeginChangeCheck();
 				property.serializedObject.Update();

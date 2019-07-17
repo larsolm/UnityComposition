@@ -1,17 +1,22 @@
-﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.Utilities;
+﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
 {
+	[Flags]
 	public enum TestEnum
 	{
 		One = 0x1,
 		Two = 0x2,
 		Four = 0x4,
-		Eight = 0x8
+		Eight = 0x8,
+		Sixteen = 0x10,
+		ThirtyTwo = 0x20,
+		SixtyFour = 0x40,
+		OneTwentyEight = 0x80
 	}
 
 	[Serializable]
@@ -23,8 +28,15 @@ namespace PiRhoSoft.CompositionExample
 	[AddComponentMenu("PiRho Soft/Examples/Test")]
 	public class TestBehaviour : MonoBehaviour
 	{
+		[Stretch]
 		[EnumButtons]
-		public TestEnum TestEnum;
+		public TestEnum Enum;
+
+		[List] [Stretch] [EnumButtons]
+		public TestEnumList EnumList;
+
+		[Stretch]
+		public int IntList;
 
 		private void Start()
 		{
@@ -36,6 +48,7 @@ namespace PiRhoSoft.CompositionExample
 			while (true)
 			{
 				yield return new WaitForSeconds(1.0f);
+				Enum = TestEnum.OneTwentyEight;
 			}
 		}
 	}

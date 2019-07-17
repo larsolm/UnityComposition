@@ -6,7 +6,7 @@ namespace PiRhoSoft.Utilities
 	{
 		protected PropertyTraitAttribute(int drawOrder)
 		{
-			order = drawOrder;
+			order = int.MaxValue - drawOrder;
 		}
 	}
 }
