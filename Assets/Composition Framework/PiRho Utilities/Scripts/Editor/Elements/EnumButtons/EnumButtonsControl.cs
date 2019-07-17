@@ -89,6 +89,7 @@ namespace PiRhoSoft.Utilities.Editor
 		private void Toggle(int index)
 		{
 			var value = Value;
+			var previousValue = Value;
 			var selected = _values.GetValue(index) as Enum;
 
 			if (UseFlags)
@@ -116,12 +117,8 @@ namespace PiRhoSoft.Utilities.Editor
 				value = selected;
 			}
 
-			using (ChangeEvent<Enum> changeEvent = ChangeEvent<Enum>.GetPooled(Value, value))
-			{
-				changeEvent.target = this;
-				SetValueWithoutNotify(value);
-				SendEvent(changeEvent);
-			}
+			SetValueWithoutNotify(value);
+			this.SendChangeEvent(previousValue, value);
 		}
 
 		private Enum GetEnumFromInt(Type type, int value)

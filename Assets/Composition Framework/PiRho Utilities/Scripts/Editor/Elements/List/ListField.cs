@@ -55,7 +55,7 @@ namespace PiRhoSoft.Utilities.Editor
 			AddToClassList(UssClassName);
 		}
 
-		#region Array Resize
+		#region Binding
 
 		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
 		{

@@ -6,6 +6,19 @@ namespace PiRhoSoft.Utilities.Editor
 {
 	public static class VisualElementExtensions
 	{
+		#region Events
+
+		public static void SendChangeEvent<T>(this VisualElement element, T previous, T current)
+		{
+			using (var changeEvent = ChangeEvent<T>.GetPooled(previous, current))
+			{
+				changeEvent.target = element;
+				element.SendEvent(changeEvent);
+			}
+		}
+
+		#endregion
+
 		#region Stylesheets
 
 		private const string _missingUtilitiesPathError = "(PUEHMUP) failed to determine editor path";

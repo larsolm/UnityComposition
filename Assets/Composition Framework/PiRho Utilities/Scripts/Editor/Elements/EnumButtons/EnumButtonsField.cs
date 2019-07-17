@@ -30,6 +30,12 @@ namespace PiRhoSoft.Utilities.Editor
 			SetValueWithoutNotify(value);
 		}
 
+		public override void SetValueWithoutNotify(Enum newValue)
+		{
+			base.SetValueWithoutNotify(newValue);
+			_control.SetValueWithoutNotify(newValue);
+		}
+
 		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
 		{
 			base.ExecuteDefaultActionAtTarget(evt);
@@ -39,12 +45,6 @@ namespace PiRhoSoft.Utilities.Editor
 				BindingExtensions.DefaultEnumBind(this, property);
 				evt.StopPropagation();
 			}
-		}
-
-		public override void SetValueWithoutNotify(Enum newValue)
-		{
-			base.SetValueWithoutNotify(newValue);
-			_control.SetValueWithoutNotify(newValue);
 		}
 
 		#region UXML Support

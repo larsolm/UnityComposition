@@ -8,7 +8,7 @@ namespace PiRhoSoft.Utilities.Editor
 	[CustomPropertyDrawer(typeof(EnumButtonsAttribute))]
 	class EnumButtonsDrawer : PropertyDrawer
 	{
-		private const string _invalidTypeWarning = "(PUEEBDIT) invalid type for EnumButtonsAttribute on field '{0}': EnumButtons can only be applied to Enum fields";
+		private const string _invalidTypeWarning = "(PUEBDIT) invalid type for EnumButtonsAttribute on field '{0}': EnumButtons can only be applied to Enum fields";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{

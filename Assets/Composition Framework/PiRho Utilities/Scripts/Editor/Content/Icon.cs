@@ -28,9 +28,9 @@ namespace PiRhoSoft.Utilities.Editor
 		public static readonly Icon SearchBarRight = BuiltIn("toolbarsearchCancelButtonOff");
 		public static readonly Icon Lock = BuiltIn("AssemblyLock");
 
-		private const string _invalidIconError = "(PIIII) failed to create icon texture: the built in icon {0} could not be loaded";
-		private const string _invalidDataError = "(PIIID) failed to create icon texture: the supplied data is not a valid base 64 string";
-		private const string _invalidTextureError = "(PIIIT) failed to create icon texture: the supplied data is not a valid texture";
+		private const string _invalidIconError = "(PUIIII) failed to create icon texture: the built in icon {0} could not be loaded";
+		private const string _invalidDataError = "(PUIIID) failed to create icon texture: the supplied data is not a valid base 64 string";
+		private const string _invalidTextureError = "(PUIIIT) failed to create icon texture: the supplied data is not a valid texture";
 
 		public static Icon BuiltIn(string name) => new Icon { _name = name };
 		public static Icon Base64(string data) => new Icon { _data = data };
