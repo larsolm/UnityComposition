@@ -1,9 +1,51 @@
-﻿using UnityEditor;
+﻿using System.Reflection;
+using UnityEditor;
+using UnityEditor.UIElements;
+using UnityEngine;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Utilities.Editor
 {
 	public static class SerializedPropertyExtensions
 	{
+		#region Internal Lookups
+
+		private const string _changedInternalsError = "(PUPFECI) failed to setup SerializedProperty: Unity internals have changed";
+
+		private const string _createFieldFromPropertyName = "CreateFieldFromProperty";
+		private static MethodInfo _createFieldFromPropertyMethod;
+		private static object[] _createFieldFromPropertyParameters = new object[1];
+		private static PropertyField _createFieldFromPropertyInstance;
+
+		static SerializedPropertyExtensions()
+		{
+			var createFieldFromPropertyMethod = typeof(PropertyField).GetMethod(_createFieldFromPropertyName, BindingFlags.Instance | BindingFlags.NonPublic);
+			var createFieldFromPropertyParameters = createFieldFromPropertyMethod?.GetParameters();
+
+			if (createFieldFromPropertyMethod != null && createFieldFromPropertyMethod.HasSignature(typeof(VisualElement), typeof(SerializedProperty)))
+			{
+				_createFieldFromPropertyMethod = createFieldFromPropertyMethod;
+				_createFieldFromPropertyInstance = new PropertyField();
+			}
+
+			if (_createFieldFromPropertyMethod == null)
+				Debug.LogError(_changedInternalsError);
+		}
+
+		#endregion
+
+		#region Extension Methods
+
+		public static VisualElement CreateField(this SerializedProperty property)
+		{
+			// TODO: two situations where this doesn't work correctly
+			//  - for enums with a binding there seems to be an internal bug (at least in 2019.2)
+			//  - for arrays updates depend on state of the PropertyField
+
+			_createFieldFromPropertyParameters[0] = property;
+			return _createFieldFromPropertyMethod?.Invoke(_createFieldFromPropertyInstance, _createFieldFromPropertyParameters) as VisualElement;
+		}
+
 		public static void SetToDefault(this SerializedProperty property)
 		{
 			// TODO: struct
@@ -44,8 +86,6 @@ namespace PiRhoSoft.Utilities.Editor
 				}
 			}
 		}
-
-		#region Arrays
 
 		public static void ResizeArray(this SerializedProperty arrayProperty, int newSize)
 		{

@@ -23,7 +23,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			var field = _drawer != null
 				? _drawer.CreatePropertyGUI(property)
-				: PropertyFieldExtensions.CreateFieldFromProperty(property);
+				: property.CreateField();
 
 			field.userData = index;
 			field.Bind(_property.serializedObject);

@@ -19,7 +19,7 @@ namespace PiRhoSoft.Utilities.Editor
 				var flags = (attribute as EnumButtonsAttribute).Flags;
 				var field = new EnumButtonsField(property.displayName, value, flags);
 
-				return PropertyFieldExtensions.ConfigureField<EnumButtonsField, Enum>(field, property);
+				return field.ConfigureProperty(property);
 			}
 			else
 			{

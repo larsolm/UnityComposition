@@ -40,7 +40,7 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			base.ExecuteDefaultActionAtTarget(evt);
 
-			if (SerializedPropertyBindEventExtensions.Test(evt, out var property))
+			if (this.TryGetPropertyBindEvent(evt, out var property))
 			{
 				BindingExtensions.DefaultEnumBind(this, property);
 				evt.StopPropagation();

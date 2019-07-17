@@ -10,13 +10,15 @@ namespace PiRhoSoft.Utilities.Editor
 {
 	public static class PropertyDrawerExtensions
 	{
+		#region Internal Lookups
+
 		private const string _changedInternalsError = "(PUPDECI) failed to setup PropertyDrawer: Unity internals have changed";
-		private const string _scriptAttributeUtilityTypeName = "UnityEditor.ScriptAttributeUtility, UnityEditor";
 
 		private static FieldInfo m_FieldInfo;
 		private static FieldInfo m_Attribute;
 
-		private static MethodInfo _getDrawerTypeForType;
+		private const string _scriptAttributeUtilityTypeName = "UnityEditor.ScriptAttributeUtility, UnityEditor";
+		private static MethodInfo _getDrawerTypeForTypeMethod;
 		private static object[] _getDrawerTypeForTypeParameters = new object[1];
 
 		static PropertyDrawerExtensions()
@@ -25,22 +27,36 @@ namespace PiRhoSoft.Utilities.Editor
 			var fieldInfo = propertyDrawer.GetField(nameof(m_FieldInfo), BindingFlags.Instance | BindingFlags.NonPublic);
 			var attribute = propertyDrawer.GetField(nameof(m_Attribute), BindingFlags.Instance | BindingFlags.NonPublic);
 
-			var scriptAttributeUtility = Type.GetType(_scriptAttributeUtilityTypeName);
-			var getDrawerTypeForType = scriptAttributeUtility?.GetMethod(nameof(GetDrawerTypeForType), BindingFlags.Static | BindingFlags.NonPublic);
-			var getDrawerTypeForTypeParameters = getDrawerTypeForType?.GetParameters();
-
 			if (fieldInfo != null && fieldInfo.FieldType == typeof(FieldInfo))
 				m_FieldInfo = fieldInfo;
 
 			if (attribute != null && attribute.FieldType == typeof(PropertyAttribute))
 				m_Attribute = attribute;
 
-			if (scriptAttributeUtility != null && getDrawerTypeForType != null && getDrawerTypeForType.ReturnType == typeof(Type) && getDrawerTypeForTypeParameters.Length == 1 && getDrawerTypeForTypeParameters[0].ParameterType == typeof(Type))
-				_getDrawerTypeForType = getDrawerTypeForType;
+			var scriptAttributeUtilityType = Type.GetType(_scriptAttributeUtilityTypeName);
+			var getDrawerTypeForTypeMethod = scriptAttributeUtilityType?.GetMethod(nameof(GetDrawerTypeForType), BindingFlags.Static | BindingFlags.NonPublic);
+			var getDrawerTypeForTypeParameters = getDrawerTypeForTypeMethod?.GetParameters();
 
-			if (_getDrawerTypeForType == null || m_FieldInfo == null || m_Attribute == null)
+			if (getDrawerTypeForTypeMethod != null && getDrawerTypeForTypeMethod.HasSignature(typeof(Type), typeof(Type)))
+				_getDrawerTypeForTypeMethod = getDrawerTypeForTypeMethod;
+
+			if (_getDrawerTypeForTypeMethod == null || m_FieldInfo == null || m_Attribute == null)
 				Debug.LogError(_changedInternalsError);
 		}
+
+		#endregion
+
+		#region Helper Methods
+
+		public static Type GetDrawerTypeForType(Type type)
+		{
+			_getDrawerTypeForTypeParameters[0] = type;
+			return _getDrawerTypeForTypeMethod?.Invoke(null, _getDrawerTypeForTypeParameters) as Type;
+		}
+
+		#endregion
+
+		#region Extension Methods
 
 		public static void SetFieldInfo(this PropertyDrawer drawer, FieldInfo value)
 		{
@@ -70,8 +86,6 @@ namespace PiRhoSoft.Utilities.Editor
 			return drawer.fieldInfo.GetCustomAttribute<TooltipAttribute>()?.tooltip ?? string.Empty;
 		}
 
-		#region Trait Helpers
-
 		public static VisualElement CreateNextElement(this PropertyDrawer drawer, SerializedProperty property)
 		{
 			var nextDrawer = GetNextDrawer(drawer);
@@ -85,9 +99,7 @@ namespace PiRhoSoft.Utilities.Editor
 					: new ImGuiDrawer(property, nextDrawer);
 			}
 
-			// creating an actual PropertyField will result in infinitely redrawing drawer as well as add another
-			// wrapper element around the field
-			return PropertyFieldExtensions.CreateFieldFromProperty(property);
+			return property.CreateField();
 		}
 
 		public static PropertyDrawer GetNextDrawer(this PropertyDrawer drawer)
@@ -109,8 +121,8 @@ namespace PiRhoSoft.Utilities.Editor
 		public static PropertyAttribute GetNextAttribute(this PropertyDrawer drawer)
 		{
 			return drawer.fieldInfo.GetCustomAttributes<PropertyAttribute>()
-				.OrderByDescending(attribute => attribute.order) // stable sort so every execution will result in the same order
-				.ThenBy(attribute => attribute.GetType().FullName) // but GetCustomAttributes might return a different order so an additional sort is needed
+				.OrderByDescending(attribute => attribute.order)
+				.ThenBy(attribute => attribute.GetType().FullName) // GetCustomAttributes might return a different order so a secondary sort is needed even though it is a stable sort
 				.SkipWhile(attribute => attribute.GetType() != drawer.attribute.GetType())
 				.Where(attribute =>
 				{
@@ -118,12 +130,6 @@ namespace PiRhoSoft.Utilities.Editor
 					return drawerType != null && drawerType.IsCreatableAs<PropertyDrawer>();
 				})
 				.ElementAtOrDefault(1);
-		}
-
-		public static Type GetDrawerTypeForType(Type type)
-		{
-			_getDrawerTypeForTypeParameters[0] = type;
-			return _getDrawerTypeForType?.Invoke(null, _getDrawerTypeForTypeParameters) as Type;
 		}
 
 		#endregion
