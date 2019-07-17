@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Composition;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;

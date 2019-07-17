@@ -131,7 +131,7 @@ namespace PiRhoSoft.Utilities.Editor
 			private const string _moveForwardMenu = "Edit/Navigation/Move Forward &RIGHT";
 			private const int _capacity = 100;
 
-			private static readonly Icon _historyIcon = Icon.BuiltIn("Clipboard");
+			private static readonly Icon _historyIcon = Icon.BuiltIn("UnityEditor.AnimationWindow");
 
 			private static bool _skipNextSelection = false;
 
@@ -147,8 +147,8 @@ namespace PiRhoSoft.Utilities.Editor
 			[MenuItem(_windowMenu)]
 			private static void Open()
 			{
-				var window = GetWindow<History>();
-				window.titleContent = new GUIContent("History", _historyIcon.Content);
+				var window = GetWindow<History>("History");
+				window.titleContent.image = _historyIcon.Content;
 				window.Show();
 			}
 

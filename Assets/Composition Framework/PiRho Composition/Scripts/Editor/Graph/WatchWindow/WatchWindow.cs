@@ -271,8 +271,12 @@ namespace PiRhoSoft.Composition.Editor
 			var window = GetWindow<WatchWindow>("Watch Window");
 			window.minSize = new Vector2(200.0f, window.minSize.y);
 			window.titleContent.image = Icon.View.Content;
-			window.rootVisualElement.Add(new WatchWindowElement());
 			window.Show();
+		}
+
+		private void OnEnable()
+		{
+			rootVisualElement.Add(new WatchWindowElement());
 		}
 	}
 }

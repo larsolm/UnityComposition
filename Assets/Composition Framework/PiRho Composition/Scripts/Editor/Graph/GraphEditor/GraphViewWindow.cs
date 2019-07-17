@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Composition;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -13,9 +12,11 @@ namespace PiRhoSoft.Composition.Editor
 		private static readonly Icon _windowIcon = Icon.Base64(_windowIconData);
 
 		private GraphViewEditor _editor;
+		private Graph _graph;
 
 		static GraphViewWindow()
 		{
+			// This is in a static constructor so that a new window opens if one isn't already open
 			Graph.OnBreakpointHit += BreakpointHit;
 		}
 
@@ -24,8 +25,6 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var window = CreateWindow<GraphViewWindow>("Composition Graph");
 			window.titleContent.image = _windowIcon.Content;
-			window._editor = new GraphViewEditor(window);
-			window.rootVisualElement.Add(window._editor);
 			window.Show();
 			return window;
 		}
@@ -80,7 +79,7 @@ namespace PiRhoSoft.Composition.Editor
 		}
 
 		[OnOpenAsset]
-		static bool OpenAsset(int instanceID, int line)
+		public static bool OpenGraph(int instanceID, int line)
 		{
 			var graph = EditorUtility.InstanceIDToObject(instanceID) as Graph;
 			if (graph != null)
@@ -96,6 +95,24 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var window = ShowWindowForGraph(graph);
 			window._editor.GraphView.GoToNode(node);
+		}
+
+		private void OnEnable()
+		{
+			if (_editor == null)
+			{
+				_editor = new GraphViewEditor(this);
+				rootVisualElement.Add(_editor);
+
+				if (_graph != null)
+					_editor.SetGraph(_graph);
+			}
+		}
+
+		private void OnDisable()
+		{
+			_graph = _editor.CurrentGraph;
+			_editor = null;
 		}
 	}
 }

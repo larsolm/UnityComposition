@@ -147,16 +147,23 @@ namespace PiRhoSoft.MonsterRpg.Editor
 			}
 		}
 
+		private static readonly Icon _stateIcon = Icon.BuiltIn("SavePassive");
+
 		[UnityEditor.MenuItem("Window/Monster RPG/State Manager")]
 		public static void Open()
 		{
 			var window = GetWindow<StateWindow>("State Manager");
-			window.rootVisualElement.Add(new StateWindowElement(window));
-			window.rootVisualElement.style.paddingTop = 5;
-			window.rootVisualElement.style.paddingRight = 5;
-			window.rootVisualElement.style.paddingBottom = 5;
-			window.rootVisualElement.style.paddingLeft = 5;
+			window.titleContent.image = _stateIcon.Content;			
 			window.Show();
+		}
+
+		private void OnEnable()
+		{
+			rootVisualElement.Add(new StateWindowElement(this));
+			rootVisualElement.style.paddingTop = 5;
+			rootVisualElement.style.paddingRight = 5;
+			rootVisualElement.style.paddingBottom = 5;
+			rootVisualElement.style.paddingLeft = 5;
 		}
 	}
 }
