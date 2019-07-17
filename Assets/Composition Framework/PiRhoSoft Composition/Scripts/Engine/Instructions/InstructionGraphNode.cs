@@ -70,7 +70,7 @@ namespace PiRhoSoft.CompositionEngine
 		private const string _invalidAssignmentWarning = "(CIGNIA) Failed to assign to variable '{0}' from node '{1}': the variable has an incompatible type";
 
 		[Tooltip("The name of the node")]
-		[ChangeTrigger(nameof(UpdateName))]
+		//[ChangeTrigger(nameof(UpdateName))]
 		public string Name;
 
 		public abstract IEnumerator Run(InstructionGraph graph, InstructionStore variables, int iteration);

@@ -232,10 +232,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8533441d965a60340b4195bd168509d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Enum: 8
+  Enum: 24
   EnumList:
-    _items: 10000000
-  IntList: 0
+    _items: 12000000
 --- !u!4 &672034259
 Transform:
   m_ObjectHideFlags: 0

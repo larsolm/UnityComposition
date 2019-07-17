@@ -1,7 +1,6 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
@@ -29,14 +28,12 @@ namespace PiRhoSoft.CompositionExample
 	public class TestBehaviour : MonoBehaviour
 	{
 		[Stretch]
+		[ChangeTrigger(nameof(EnumChanged))]
 		[EnumButtons]
 		public TestEnum Enum;
 
-		[List] [Stretch] [EnumButtons]
+		[List] [Stretch] [ChangeTrigger(nameof(EnumChanged))] [EnumButtons]
 		public TestEnumList EnumList;
-
-		[Stretch]
-		public int IntList;
 
 		private void Start()
 		{
@@ -50,6 +47,11 @@ namespace PiRhoSoft.CompositionExample
 				yield return new WaitForSeconds(1.0f);
 				Enum = TestEnum.OneTwentyEight;
 			}
+		}
+
+		private static void EnumChanged(Enum oldValue, Enum newValue)
+		{
+			Debug.LogFormat("Enum changed from {0} to {1}", oldValue, newValue);
 		}
 	}
 }
