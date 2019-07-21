@@ -19,8 +19,9 @@ namespace PiRhoSoft.Utilities.Editor
 
 				if (fieldType.IsCreatableAs(baseType))
 				{
+					var tooltip = this.GetTooltip();
 					var field = new ObjectPickerField(property.displayName, property.objectReferenceValue, baseType);
-					return field.ConfigureProperty(property);
+					return field.ConfigureProperty(property, tooltip);
 				}
 				else
 				{

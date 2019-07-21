@@ -1,10 +1,12 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Reflection;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Utilities.Editor
 {
@@ -22,6 +24,10 @@ namespace PiRhoSoft.Utilities.Editor
 		private const string _gradientValueName = "gradientValue";
 		private static PropertyInfo _gradientValueProperty;
 
+		private const string _hasVisibleChildFieldsName = "HasVisibleChildFields";
+		private static MethodInfo _hasVisibleChildFieldsMethod;
+		private static object[] _hasVisibleChildFieldsParameters = new object[1];
+
 		static SerializedPropertyExtensions()
 		{
 			var createFieldFromPropertyMethod = typeof(PropertyField).GetMethod(_createFieldFromPropertyName, BindingFlags.Instance | BindingFlags.NonPublic);
@@ -38,7 +44,12 @@ namespace PiRhoSoft.Utilities.Editor
 			if (gradientValueProperty != null && gradientValueProperty.PropertyType == typeof(Gradient) && gradientValueProperty.CanRead && gradientValueProperty.CanWrite)
 				_gradientValueProperty = gradientValueProperty;
 
-			if (_createFieldFromPropertyMethod == null || _gradientValueProperty == null)
+			var hasVisibleChildFieldsMethod = typeof(EditorGUI).GetMethod(_hasVisibleChildFieldsName, BindingFlags.Static| BindingFlags.NonPublic);
+
+			if (hasVisibleChildFieldsMethod != null && hasVisibleChildFieldsMethod.HasSignature(typeof(bool), typeof(SerializedProperty)))
+				_hasVisibleChildFieldsMethod = hasVisibleChildFieldsMethod;
+
+			if (_createFieldFromPropertyMethod == null || _gradientValueProperty == null || _hasVisibleChildFieldsMethod == null)
 				Debug.LogError(_changedInternalsError);
 		}
 
@@ -46,18 +57,46 @@ namespace PiRhoSoft.Utilities.Editor
 
 		#region Extension Methods
 
+		public static IEnumerable<SerializedProperty> Children(this SerializedProperty property)
+		{
+			if (property.isArray)
+			{
+				for (int i = 0; i < property.arraySize; i++)
+					yield return property.GetArrayElementAtIndex(i);
+			}
+			else
+			{
+				// TODO: doesn't work right when property is the root
+
+				var iterator = property.Copy();
+				var end = iterator.GetEndProperty();
+				var valid = iterator.NextVisible(true);
+
+				while (valid && !SerializedProperty.EqualContents(iterator, end))
+				{
+					yield return iterator.Copy();
+					valid = iterator.NextVisible(false);
+				}
+			}
+		}
+
 		// this property is internal for some reason
 		public static Gradient GetGradientValue(this SerializedProperty property) => _gradientValueProperty?.GetValue(property) as Gradient;
 		public static void SetGradientValue(this SerializedProperty property, Gradient gradient) => _gradientValueProperty?.SetValue(property, gradient);
 
 		public static VisualElement CreateField(this SerializedProperty property)
 		{
-			// TODO: two situations where this doesn't work correctly
-			//  - for enums with a binding there seems to be an internal bug (at least in 2019.2)
-			//  - for arrays updates depend on state of the PropertyField
+			// ArraySize properties return true for HasVisibleChildFields rely on PropertyField state in
+			// CreateFieldFromProperty to maintain bindings. TODO: determine if this is relevant
 
 			_createFieldFromPropertyParameters[0] = property;
 			return _createFieldFromPropertyMethod?.Invoke(_createFieldFromPropertyInstance, _createFieldFromPropertyParameters) as VisualElement;
+		}
+
+		public static bool HasVisibleChildFields(this SerializedProperty property)
+		{
+			_hasVisibleChildFieldsParameters[0] = property;
+			return (bool)_hasVisibleChildFieldsMethod?.Invoke(null, _hasVisibleChildFieldsParameters);
 		}
 
 		public static void SetToDefault(this SerializedProperty property)
@@ -110,6 +149,35 @@ namespace PiRhoSoft.Utilities.Editor
 			}
 		}
 
+		public static T GetValue<T>(this SerializedProperty property)
+		{
+			// TODO: probably should validate the property is holding the expected type (i.e TryGetValue)
+			// this boxes for value types but I don't think there's a way around that without dynamic code generation
+
+			if (typeof(T) == typeof(int)) return (T)(object)property.intValue;
+			if (typeof(T) == typeof(bool)) return (T)(object)property.boolValue;
+			if (typeof(T) == typeof(float)) return (T)(object)property.floatValue;
+			if (typeof(T) == typeof(string)) return (T)(object)property.stringValue;
+			if (typeof(T) == typeof(Color)) return (T)(object)property.colorValue;
+			if (typeof(T) == typeof(LayerMask)) return (T)(object)property.intValue;
+			if (typeof(T) == typeof(Enum)) return (T)(object)property.enumValueIndex;
+			if (typeof(T) == typeof(Vector2)) return (T)(object)property.vector2Value;
+			if (typeof(T) == typeof(Vector3)) return (T)(object)property.vector3Value;
+			if (typeof(T) == typeof(Vector4)) return (T)(object)property.vector4Value;
+			if (typeof(T) == typeof(Rect)) return (T)(object)property.rectValue;
+			if (typeof(T) == typeof(AnimationCurve)) return (T)(object)property.animationCurveValue;
+			if (typeof(T) == typeof(Bounds)) return (T)(object)property.boundsValue;
+			if (typeof(T) == typeof(Gradient)) return (T)(object)property.GetGradientValue();
+			if (typeof(T) == typeof(Quaternion)) return (T)(object)property.quaternionValue;
+			if (typeof(T) == typeof(Vector2Int)) return (T)(object)property.vector2IntValue;
+			if (typeof(T) == typeof(Vector3Int)) return (T)(object)property.vector3IntValue;
+			if (typeof(T) == typeof(RectInt)) return (T)(object)property.rectIntValue;
+			if (typeof(T) == typeof(BoundsInt)) return (T)(object)property.boundsIntValue;
+			if (typeof(Object).IsAssignableFrom(typeof(T))) return (T)(object)property.objectReferenceValue;
+
+			return default(T);
+		}
+
 		public static void ResizeArray(this SerializedProperty arrayProperty, int newSize)
 		{
 			var size = arrayProperty.arraySize;
@@ -135,17 +203,38 @@ namespace PiRhoSoft.Utilities.Editor
 			arrayProperty.serializedObject.ApplyModifiedProperties();
 		}
 
+		public static SerializedProperty GetSibling(this SerializedProperty property, string siblingName)
+		{
+			var path = property.propertyPath;
+			var index = property.propertyPath.LastIndexOf('.');
+			var siblingPath = index > 0 ? path.Substring(0, index) + "." + siblingName : siblingName;
+
+			return property.serializedObject.FindProperty(siblingPath);
+		}
+
+		public static SerializedProperty GetParent(this SerializedProperty property)
+		{
+			var path = property.propertyPath;
+			var index = property.propertyPath.LastIndexOf('.');
+
+			if (index < 0)
+				return property.serializedObject.GetIterator();
+
+			var parentPath = path.Substring(0, index);
+			return property.serializedObject.FindProperty(parentPath);
+		}
+
 		public static T GetObject<T>(this SerializedProperty property) where T : class
 		{
-			return GetAncestor<T>(property, 0);
+			return GetAncestorObject<T>(property, 0);
 		}
 
-		public static T GetParent<T>(this SerializedProperty property) where T : class
+		public static T GetParentObject<T>(this SerializedProperty property) where T : class
 		{
-			return GetAncestor<T>(property, 1);
+			return GetAncestorObject<T>(property, 1);
 		}
 
-		public static T GetAncestor<T>(this SerializedProperty property, int generations) where T : class
+		public static T GetAncestorObject<T>(this SerializedProperty property, int generations) where T : class
 		{
 			var obj = (object)property.serializedObject.targetObject;
 			var elements = property.propertyPath.Replace("Array.data[", "[").Split('.');

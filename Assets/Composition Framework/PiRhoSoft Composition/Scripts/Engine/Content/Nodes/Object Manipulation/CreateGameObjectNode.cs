@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -32,7 +31,7 @@ namespace PiRhoSoft.CompositionEngine
 		public VariableReference ObjectVariable = new VariableReference();
 
 		[Tooltip("How to create and position the object, with an exact position, relative to another object, or as a child of another object")]
-		[EnumButtons]
+		//[EnumButtons]
 		public ObjectPositioning Positioning = ObjectPositioning.Absolute;
 
 		[Tooltip("The object to position the created object relative to")]

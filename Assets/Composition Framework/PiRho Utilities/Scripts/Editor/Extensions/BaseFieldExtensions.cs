@@ -81,8 +81,10 @@ namespace PiRhoSoft.Utilities.Editor
 			GetProperty<T>(_visualInputName, BindingFlags.Instance | BindingFlags.NonPublic)?.SetValue(field, element);
 		}
 
-		public static VisualElement ConfigureProperty<T>(this BaseField<T> field, SerializedProperty property)
+		public static VisualElement ConfigureProperty<T>(this BaseField<T> field, SerializedProperty property, string tooltip)
 		{
+			field.labelElement.tooltip = tooltip; // it seems like this should happen internally somewhere but it doesn't
+
 			// ConfigureField is effectively static, with one unimportant exception, so it can be called with a dummy
 			// instance. The exception is label, which will be null on the dummy instance resulting in the desired
 			// effect anyway (using the property name for the label).

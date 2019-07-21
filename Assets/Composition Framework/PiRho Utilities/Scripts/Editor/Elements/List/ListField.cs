@@ -68,10 +68,10 @@ namespace PiRhoSoft.Utilities.Editor
 					Setup(new PropertyListProxy(property, _drawer));
 
 					if (_sizeBinding == null)
-						_sizeBinding = new ChangeTriggerControl<int>(property.arraySize, (oldSize, size) => _control.Refresh());
+						_sizeBinding = new ChangeTriggerControl<int>(null, (oldSize, size) => _control.Refresh());
 
 					Add(_sizeBinding); // setup calls Clear so this always needs to be added
-					_sizeBinding.Reset(property.FindPropertyRelative("Array.size"));
+					_sizeBinding.Watch(property.FindPropertyRelative("Array.size"));
 				}
 				else
 				{

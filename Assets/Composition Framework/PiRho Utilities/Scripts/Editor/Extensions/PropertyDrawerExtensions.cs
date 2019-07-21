@@ -81,6 +81,19 @@ namespace PiRhoSoft.Utilities.Editor
 			return drawer.fieldInfo.FieldType;
 		}
 
+		public static Type GetFieldType(FieldInfo fieldInfo)
+		{
+			if (fieldInfo.FieldType.IsArray)
+				return fieldInfo.FieldType.GetElementType();
+
+			var ilist = fieldInfo.FieldType.GetInterfaces().FirstOrDefault(type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>));
+
+			if (ilist != null)
+				return ilist.GetGenericArguments()[0];
+
+			return fieldInfo.FieldType;
+		}
+
 		public static string GetTooltip(this PropertyDrawer drawer)
 		{
 			return drawer.fieldInfo.GetCustomAttribute<TooltipAttribute>()?.tooltip ?? string.Empty;
@@ -124,6 +137,52 @@ namespace PiRhoSoft.Utilities.Editor
 				.OrderByDescending(attribute => attribute.order)
 				.ThenBy(attribute => attribute.GetType().FullName) // GetCustomAttributes might return a different order so a secondary sort is needed even though it is a stable sort
 				.SkipWhile(attribute => attribute.GetType() != drawer.attribute.GetType())
+				.Where(attribute =>
+				{
+					var drawerType = GetDrawerTypeForType(attribute.GetType());
+					return drawerType != null && drawerType.IsCreatableAs<PropertyDrawer>();
+				})
+				.ElementAtOrDefault(1);
+		}
+
+		public static VisualElement CreateNextElement(FieldInfo field, Attribute attribute, SerializedProperty property)
+		{
+			var nextDrawer = GetNextDrawer(field, attribute);
+
+			if (nextDrawer != null)
+			{
+				var element = nextDrawer.CreatePropertyGUI(property);
+
+				return element != null
+					? element
+					: new ImGuiDrawer(property, nextDrawer);
+			}
+
+			return property.CreateField();
+		}
+
+		public static PropertyDrawer GetNextDrawer(FieldInfo field, Attribute attribute)
+		{
+			var nextAttribute = GetNextAttribute(field, attribute);
+			var drawerType = GetDrawerTypeForType(nextAttribute?.GetType() ?? GetFieldType(field));
+
+			if (drawerType != null)
+			{
+				var nextDrawer = drawerType.CreateInstance<PropertyDrawer>();
+				nextDrawer.SetFieldInfo(field);
+				nextDrawer.SetAttribute(nextAttribute);
+				return nextDrawer;
+			}
+
+			return null;
+		}
+
+		public static PropertyAttribute GetNextAttribute(FieldInfo field, Attribute thisAttribute)
+		{
+			return field.GetCustomAttributes<PropertyAttribute>()
+				.OrderByDescending(attribute => attribute.order)
+				.ThenBy(attribute => attribute.GetType().FullName) // GetCustomAttributes might return a different order so a secondary sort is needed even though it is a stable sort
+				.SkipWhile(attribute => attribute.GetType() != thisAttribute.GetType())
 				.Where(attribute =>
 				{
 					var drawerType = GetDrawerTypeForType(attribute.GetType());

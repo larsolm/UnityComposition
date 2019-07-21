@@ -15,11 +15,12 @@ namespace PiRhoSoft.Utilities.Editor
 			if (property.propertyType == SerializedPropertyType.Enum)
 			{
 				var type = this.GetFieldType();
+				var tooltip = this.GetTooltip();
 				var value = Enum.ToObject(type, property.intValue) as Enum;
 				var flags = (attribute as EnumButtonsAttribute).Flags;
 				var field = new EnumButtonsField(property.displayName, value, flags);
 
-				return field.ConfigureProperty(property);
+				return field.ConfigureProperty(property, tooltip);
 			}
 			else
 			{

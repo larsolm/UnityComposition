@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -20,7 +19,7 @@ namespace PiRhoSoft.CompositionEngine
 		public InstructionGraphNode Next = null;
 
 		[Tooltip("The source of the instruction to run")]
-		[EnumButtons]
+		//[EnumButtons]
 		public InstructionSource Source = InstructionSource.Value;
 
 		[Tooltip("The instruction to run when this node is reached")]

@@ -25,15 +25,12 @@ namespace PiRhoSoft.Utilities.Editor
 
 			if (method != null)
 			{
-				var owner = method.IsStatic ? null : property.GetParent<object>();
+				var owner = method.IsStatic ? null : property.GetParentObject<object>();
 				var type = this.GetFieldType();
 				var control = CreateControl(property, type, method, owner);
 
 				if (control != null)
-				{
-					control.Reset(property);
 					element.Add(control);
-				}
 			}
 			else
 			{
@@ -43,7 +40,7 @@ namespace PiRhoSoft.Utilities.Editor
 			return element;
 		}
 
-		private ChangeTriggerControl CreateControl(SerializedProperty property, Type type, MethodInfo method, object owner)
+		private PropertyWatcher CreateControl(SerializedProperty property, Type type, MethodInfo method, object owner)
 		{
 			switch (property.propertyType)
 			{
@@ -77,20 +74,20 @@ namespace PiRhoSoft.Utilities.Editor
 			return InvalidType(property);
 		}
 
-		private ChangeTriggerControl CreateControl<T>(SerializedProperty property, T value, MethodInfo method, object owner)
+		private PropertyWatcher CreateControl<T>(SerializedProperty property, T value, MethodInfo method, object owner)
 		{
 			if (method.HasSignature(null))
-				return new ChangeTriggerControl<T>(value, (oldValue, newValue) => OnChanged(method, owner));
+				return new ChangeTriggerControl<T>(property, (oldValue, newValue) => OnChanged(method, owner));
 			else if (method.HasSignature(null, typeof(T)))
-				return new ChangeTriggerControl<T>(value, (oldValue, newValue) => OnChanged(newValue, method, owner));
+				return new ChangeTriggerControl<T>(property, (oldValue, newValue) => OnChanged(newValue, method, owner));
 			else if (method.HasSignature(null, typeof(T), typeof(T)))
-				return new ChangeTriggerControl<T>(value, (oldValue, newValue) => OnChanged(oldValue, newValue, method, owner));
+				return new ChangeTriggerControl<T>(property, (oldValue, newValue) => OnChanged(oldValue, newValue, method, owner));
 
 			Debug.LogWarningFormat(_invalidMethodWarning, property.propertyPath, method.Name, typeof(T).Name);
 			return null;
 		}
 
-		private ChangeTriggerControl InvalidType(SerializedProperty property)
+		private PropertyWatcher InvalidType(SerializedProperty property)
 		{
 			Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath, this.GetFieldType().Name);
 			return null;

@@ -11,7 +11,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public const string UssClassName = "pirho-required";
 		public const string MessageBoxUssClassName = UssClassName + "__message-box";
 
-		private const string _invalidTypeWarning = "(PURDIT) Invalid type for RequiredAttribute on field {0}: Required can only be applied to string or Object fields";
+		private const string _invalidTypeWarning = "(PURDIT) invalid type for RequiredAttribute on field '{0}': Required can only be applied to string or Object fields";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
@@ -24,7 +24,7 @@ namespace PiRhoSoft.Utilities.Editor
 				required.AddToClassList(UssClassName);
 
 				var requiredAttribute = attribute as RequiredAttribute;
-				var message = new MessageBox(requiredAttribute.Type, requiredAttribute.Message);
+				var message = new MessageBox((MessageBoxType)(int)requiredAttribute.Type, requiredAttribute.Message);
 				message.AddToClassList(MessageBoxUssClassName);
 
 				required.Add(element);
@@ -32,16 +32,14 @@ namespace PiRhoSoft.Utilities.Editor
 
 				if (property.propertyType == SerializedPropertyType.String)
 				{
-					var change = new ChangeTriggerControl<string>(property.stringValue, (previous, current) => StringChanged(message, current));
-					change.Reset(property);
-					StringChanged(message, property.stringValue);
+					var change = new ChangeTriggerControl<string>(property, (previous, current) => UpdateString(message, current));
+					UpdateString(message, property.stringValue);
 					element.Add(change);
 				}
 				else if (property.propertyType == SerializedPropertyType.ObjectReference)
 				{
-					var change = new ChangeTriggerControl<Object>(property.objectReferenceValue, (previous, current) => ObjectChanged(message, current));
-					change.Reset(property);
-					ObjectChanged(message, property.objectReferenceValue);
+					var change = new ChangeTriggerControl<Object>(property, (previous, current) => UpdateObject(message, current));
+					UpdateObject(message, property.objectReferenceValue);
 					element.Add(change);
 				}
 
@@ -54,12 +52,12 @@ namespace PiRhoSoft.Utilities.Editor
 			}
 		}
 
-		private void StringChanged(MessageBox message, string value)
+		private void UpdateString(MessageBox message, string value)
 		{
 			message.SetDisplayed(string.IsNullOrEmpty(value));
 		}
 
-		private void ObjectChanged(MessageBox message, Object value)
+		private void UpdateObject(MessageBox message, Object value)
 		{
 			message.SetDisplayed(!value);
 		}

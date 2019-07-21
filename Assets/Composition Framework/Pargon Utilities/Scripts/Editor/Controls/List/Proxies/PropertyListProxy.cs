@@ -17,7 +17,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 			_drawer = drawer;
 		}
 
-		public override VisualElement CreateItem(int index)
+		public override VisualElement CreateField(int index)
 		{
 			var field = _drawer != null
 				? _drawer.CreatePropertyGUI(_property.GetArrayElementAtIndex(index))

@@ -8,7 +8,7 @@ namespace PiRhoSoft.PargonUtilities.Editor
 	[CustomPropertyDrawer(typeof(MaximumAttribute))]
 	class MaximumDrawer : PropertyDrawer
 	{
-		private const string _invalidTypeWarning = "(PITMADIT) Invalid type for MaximumAttribute on field {0}: Maximum can only be applied to int or float fields";
+		private const string _invalidTypeWarning = "(PUMXDIT) invalid type for MaximumAttribute on field {0}: Maximum can only be applied to int or float fields";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{

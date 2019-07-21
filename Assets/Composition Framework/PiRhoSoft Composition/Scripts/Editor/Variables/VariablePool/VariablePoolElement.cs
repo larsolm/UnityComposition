@@ -49,7 +49,7 @@ namespace PiRhoSoft.CompositionEditor
 				Variables = variables;
 			}
 
-			public override VisualElement CreateItem(int index)
+			public override VisualElement CreateField(int index)
 			{
 				var label = new TextField() { value = Variables.Names[index], isDelayed = true };
 				label.AddToClassList(_ussLabelClass);

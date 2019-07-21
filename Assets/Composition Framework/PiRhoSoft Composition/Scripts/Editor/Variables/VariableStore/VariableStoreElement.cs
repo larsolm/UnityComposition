@@ -45,7 +45,7 @@ namespace PiRhoSoft.CompositionEditor
 				_variables = variables;
 			}
 
-			public override VisualElement CreateItem(int index)
+			public override VisualElement CreateField(int index)
 			{
 				var container = new VisualElement();
 

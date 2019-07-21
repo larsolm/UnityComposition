@@ -185,7 +185,7 @@ namespace PiRhoSoft.Utilities.Editor
 			item.AddToClassList(index % 2 == 0 ? ItemEvenUssClassName : ItemOddUssClassName);
 			_itemsContainer.Add(item);
 
-			var dragHandle = new Image { image = _dragIcon.Texture, tooltip = "Move this item" };
+			var dragHandle = new Image { image = _dragIcon.Texture, tooltip = Proxy.ReorderTooltip };
 			dragHandle.AddToClassList(DragHandleUssClassName);
 			dragHandle.RegisterCallback((MouseDownEvent e) => StartDrag(e, GetItemIndex(item)));
 			item.Add(dragHandle);

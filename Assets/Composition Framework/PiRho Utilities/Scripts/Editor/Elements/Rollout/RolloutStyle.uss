@@ -1,0 +1,13 @@
+﻿.pirho-rollout
+{
+}
+
+.pirho-rollout__icon
+{
+	top: 2px;
+}
+
+.pirho-rollout--collapsed .pirho-frame__content
+{
+	display: none;
+}

@@ -16,8 +16,15 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static AttributeType GetAttribute<AttributeType>(this Type type) where AttributeType : Attribute
 		{
+			return TryGetAttribute<AttributeType>(type, out var attribute) ? attribute : null;
+		}
+
+		public static bool TryGetAttribute<AttributeType>(this Type type, out AttributeType attribute) where AttributeType : Attribute
+		{
 			var attributes = type.GetCustomAttributes(typeof(AttributeType), false);
-			return attributes != null && attributes.Length > 0 ? attributes[0] as AttributeType : null;
+			attribute = attributes != null && attributes.Length > 0 ? attributes[0] as AttributeType : null;
+
+			return attribute != null;
 		}
 
 		#endregion

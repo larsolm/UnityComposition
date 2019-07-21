@@ -2,7 +2,7 @@
 {
 	public class StretchAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 0;
+		public const int Order = 2;
 
 		public StretchAttribute() : base(Order)
 		{

@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.PargonUtilities.Engine;
-using PiRhoSoft.Utilities;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -22,7 +21,7 @@ namespace PiRhoSoft.CompositionEngine
 		public StringVariableSource Parameter = new StringVariableSource();
 
 		[Tooltip("The type of the parameter to set")]
-		[EnumButtons]
+		//[EnumButtons]
 		public AnimatorControllerParameterType Type;
 
 		[Tooltip("The value to set the parameter to")]

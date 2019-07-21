@@ -15,7 +15,9 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				var typeAttribute = attribute as TypePickerAttribute;
 				var picker = new TypePickerField(property.displayName, property.stringValue, typeAttribute.BaseType, typeAttribute.ShowAbstract);
-				return picker.ConfigureProperty(property);
+				var tooltip = this.GetTooltip();
+
+				return picker.ConfigureProperty(property, tooltip);
 			}
 			else
 			{
