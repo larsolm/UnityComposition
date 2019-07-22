@@ -1,9 +1,0 @@
-﻿AutocompleteElement
-{
-	flex-grow: 1;
-}
-
-TextField
-{
-	margin: 0;
-}

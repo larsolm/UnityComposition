@@ -29,65 +29,63 @@ namespace PiRhoSoft.Utilities.Editor
 		public static readonly Icon Locked = BuiltIn("LockIcon-On");
 		public static readonly Icon Unlocked = BuiltIn("LockIcon");
 
-		private const string _invalidIconError = "(PIIII) failed to create icon content: the built in icon {0} could not be loaded";
-		private const string _invalidDataError = "(PIIID) failed to create icon content: the supplied data is not a valid base 64 string";
-		private const string _invalidContentError = "(PIIIC) failed to create icon content: the supplied data could not be loaded";
+		private const string _invalidIconError = "(PUIIII) failed to create icon texture: the built in icon {0} could not be loaded";
+		private const string _invalidDataError = "(PUIIID) failed to create icon texture: the supplied data is not a valid base 64 string";
+		private const string _invalidTextureError = "(PUIIIT) failed to create icon texture: the supplied data is not a valid texture";
+
+		public static Icon BuiltIn(string name) => new Icon { _name = name };
+		public static Icon Base64(string data) => new Icon { _data = data };
 
 		private string _name;
 		private string _data;
 
-		private Texture _content;
+		private Texture _texture;
 
-		public Texture Content
+		public Texture Texture
 		{
 			get
 			{
-				if (_content == null)
-				{
-					_content = EditorGUIUtility.whiteTexture; // set to something so if loading fails it only fails once
+				if (_texture == null)
+					_texture = LoadTexture();
 
-					if (!string.IsNullOrEmpty(_name))
-					{
-						var content = EditorGUIUtility.IconContent(_name);
-
-						if (content != null)
-							_content = content.image;
-						else
-							Debug.LogErrorFormat(_invalidIconError, _name);
-					}
-					else if (!string.IsNullOrEmpty(_data))
-					{
-						var content = new Texture2D(1, 1);
-						var data = Convert.FromBase64String(_data);
-
-						content.hideFlags = HideFlags.HideAndDontSave;
-
-						if (data != null)
-						{
-							if (content.LoadImage(data))
-								_content = content;
-							else
-								Debug.LogError(_invalidContentError);
-						}
-						else
-						{
-							Debug.LogError(_invalidDataError);
-						}
-					}
-				}
-
-				return _content;
+				return _texture;
 			}
 		}
 
-		public static Icon BuiltIn(string name)
-		{
-			return new Icon { _name = name };
-		}
+		private Icon() { }
 
-		public static Icon Base64(string data)
+		private Texture LoadTexture()
 		{
-			return new Icon { _data = data };
+			if (!string.IsNullOrEmpty(_name))
+			{
+				var content = EditorGUIUtility.IconContent(_name);
+
+				if (content != null)
+					return content.image;
+				else
+					Debug.LogErrorFormat(_invalidIconError, _name);
+			}
+			else if (!string.IsNullOrEmpty(_data))
+			{
+				var content = new Texture2D(1, 1);
+				var data = Convert.FromBase64String(_data);
+
+				content.hideFlags = HideFlags.HideAndDontSave;
+
+				if (data != null)
+				{
+					if (content.LoadImage(data))
+						return content;
+					else
+						Debug.LogError(_invalidTextureError);
+				}
+				else
+				{
+					Debug.LogError(_invalidDataError);
+				}
+			}
+
+			return EditorGUIUtility.whiteTexture;
 		}
 	}
 }
