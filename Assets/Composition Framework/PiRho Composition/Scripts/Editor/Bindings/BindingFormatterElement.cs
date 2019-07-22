@@ -42,38 +42,38 @@ namespace PiRhoSoft.Composition.Editor
 			_value = ElementHelper.CreatePropertyContainer("Value Format", _valueFormatTooltip);
 			_preview = ElementHelper.CreatePropertyContainer("Preview", "A preview of what the the format will display");
 
-			formatContainer.Add(new EnumButtons(owner, () => _format.Formatting, value =>
-			{
-				_format.Formatting = (BindingFormatter.FormatType)value;
+			//formatContainer.Add(new EnumButtons(owner, () => _format.Formatting, value =>
+			//{
+			//	_format.Formatting = (BindingFormatter.FormatType)value;
+			//
+			//	if (_format.Formatting == BindingFormatter.FormatType.Time && _format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
+			//
+			//	if (_format.Formatting == BindingFormatter.FormatType.Number && _format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
+			//
+			//	Refresh();
+			//}));
 
-				if (_format.Formatting == BindingFormatter.FormatType.Time && _format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
+			//_time.Add(new EnumDropdown<BindingFormatter.TimeFormatType>(_format.TimeFormatting, owner, () => (int)_format.TimeFormatting, value =>
+			//{
+			//	_format.TimeFormatting = (BindingFormatter.TimeFormatType)value;
+			//
+			//	if (_format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
+			//
+			//	Refresh();
+			//}));
 
-				if (_format.Formatting == BindingFormatter.FormatType.Number && _format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
-
-				Refresh();
-			}));
-
-			_time.Add(new EnumDropdown<BindingFormatter.TimeFormatType>(_format.TimeFormatting, owner, () => (int)_format.TimeFormatting, value =>
-			{
-				_format.TimeFormatting = (BindingFormatter.TimeFormatType)value;
-
-				if (_format.TimeFormatting != BindingFormatter.TimeFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.TimeFormats[(int)_format.TimeFormatting];
-
-				Refresh();
-			}));
-
-			_number.Add(new EnumDropdown<BindingFormatter.NumberFormatType>(_format.NumberFormatting, owner, () => (int)_format.NumberFormatting, value =>
-			{
-				_format.NumberFormatting = (BindingFormatter.NumberFormatType)value;
-
-				if (_format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
-					_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
-
-				Refresh();
-			}));
+			//_number.Add(new EnumDropdown<BindingFormatter.NumberFormatType>(_format.NumberFormatting, owner, () => (int)_format.NumberFormatting, value =>
+			//{
+			//	_format.NumberFormatting = (BindingFormatter.NumberFormatType)value;
+			//
+			//	if (_format.NumberFormatting != BindingFormatter.NumberFormatType.Custom)
+			//		_format.ValueFormat = BindingFormatter.NumberFormats[(int)_format.NumberFormatting];
+			//
+			//	Refresh();
+			//}));
 
 			_valueText = new TextField() { value = _format.ValueFormat };
 

@@ -19,7 +19,7 @@ namespace PiRhoSoft.Composition
 		public ButtonType Type = ButtonType.Axis;
 
 		[Tooltip("The input axis that is triggers this branch")]
-		[Conditional(nameof(Type), (int)ButtonType.Key, false)]
+		[Conditional(nameof(Type), (int)ButtonType.Key, Test = ConditionalTest.Inequal)]
 		public string Name;
 
 		[Tooltip("The value needed for the axis in order to be triggered")]

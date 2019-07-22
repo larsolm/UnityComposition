@@ -12,7 +12,7 @@ namespace PiRhoSoft.MonsterRpg
 	public class AudioManager : SingletonBehaviour<AudioManager>
 	{
 		[Tooltip("The audio mixer that will control background music")]
-		[Required(MessageBoxType.Warning, "Music will not work unless a master mixer is assigned")]
+		[Required("Music will not work unless a master mixer is assigned")]
 		public AudioMixerGroup MasterMixer;
 
 		private readonly Stack<AudioClip> _clips = new Stack<AudioClip>();

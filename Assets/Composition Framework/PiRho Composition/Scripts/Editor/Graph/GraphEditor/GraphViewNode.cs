@@ -94,7 +94,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		protected void CreateDeleteButton()
 		{
-			var deleteButton = new Image { image = _deleteIcon.Content, tooltip = "Delete this node" };
+			var deleteButton = new Image { image = _deleteIcon.Texture, tooltip = "Delete this node" };
 			deleteButton.AddToClassList(UssNodeDeleteButtonClassName);
 			deleteButton.AddManipulator(new Clickable(DeleteNode));
 			titleButtonContainer.Add(deleteButton);

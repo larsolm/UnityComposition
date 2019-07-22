@@ -17,7 +17,7 @@ namespace PiRhoSoft.Utilities.Editor
 		bool AllowRemove { get; }
 		bool AllowReorder { get; }
 
-		VisualElement CreateItem(int index);
+		VisualElement CreateElement(int index);
 		bool NeedsUpdate(VisualElement item, int index);
 		void AddItem();
 		void RemoveItem(int index);
@@ -44,7 +44,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public virtual bool AllowRemove { get; set; } = true;
 		public virtual bool AllowReorder { get; set; } = true;
 
-		public abstract VisualElement CreateItem(int index);
+		public abstract VisualElement CreateElement(int index);
 		public abstract bool NeedsUpdate(VisualElement item, int index);
 		public abstract void AddItem();
 		public abstract void RemoveItem(int index);

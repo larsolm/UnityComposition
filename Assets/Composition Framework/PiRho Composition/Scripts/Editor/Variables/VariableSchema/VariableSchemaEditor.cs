@@ -11,13 +11,13 @@ namespace PiRhoSoft.Composition.Editor
 		public override VisualElement CreateInspectorGUI()
 		{
 			var schema = target as VariableSchema;
-			var proxy = new DefinitionsProxy(schema);
-			var dictionary = new DictionaryElement(proxy, "Definitions", "The variables available to objects using this schema");
+			//var proxy = new DefinitionsProxy(schema);
+			//var dictionary = new DictionaryElement(proxy, "Definitions", "The variables available to objects using this schema");
 
-			return dictionary;
+			return null;//dictionary;
 		}
 
-		private class DefinitionsProxy : DictionaryProxy
+		/*private class DefinitionsProxy : DictionaryProxy
 		{
 			private VariableSchema _schema;
 			private TextField _addText;
@@ -71,7 +71,7 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				return !string.IsNullOrEmpty(key) && !_schema.HasDefinition(key);
 			}
-		}
+		}*/
 	}
 }
 

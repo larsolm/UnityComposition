@@ -90,7 +90,7 @@ namespace PiRhoSoft.Composition.Editor
 				watchField.EnableInClassList(UssWatchInvalidClassName, !valid);
 			});
 
-			var loggingButton = new Image { image = _logIcon.Content, tooltip = "Enable/Disable logging of graph statistics" };
+			var loggingButton = new Image { image = _logIcon.Texture, tooltip = "Enable/Disable logging of graph statistics" };
 			loggingButton.AddToClassList(UssLoggingClassName);
 			loggingButton.AddManipulator(new Clickable(() =>
 			{
@@ -101,7 +101,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			var toolbar = new Toolbar();
 			toolbar.AddToClassList(UssToolbarClassName);
-			toolbar.Add(new Placeholder<string>("Add Watch", watchField));
+			//toolbar.Add(new Placeholder<string>("Add Watch", watchField));
 			toolbar.Add(loggingButton);
 
 			return toolbar;
@@ -149,7 +149,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			var footer = new Toolbar();
 			footer.AddToClassList(UssFooterClassName);
-			footer.Add(new Placeholder<string>("Execute Expression", _expressionText));
+			//footer.Add(new Placeholder<string>("Execute Expression", _expressionText));
 
 			return footer;
 		}
@@ -270,7 +270,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var window = GetWindow<WatchWindow>("Watch Window");
 			window.minSize = new Vector2(200.0f, window.minSize.y);
-			window.titleContent.image = Icon.View.Content;
+			window.titleContent.image = Icon.View.Texture;
 			window.Show();
 		}
 

@@ -47,7 +47,7 @@ namespace PiRhoSoft.Composition
 		public AnimationType AnimationMethod = AnimationType.None;
 
 		[Tooltip("Whether to wait for the effect to finish before moving to Next")]
-		[Conditional(nameof(AnimationMethod), (int)AnimationType.None, false)]
+		[Conditional(nameof(AnimationMethod), (int)AnimationType.None, Test = ConditionalTest.Inequal)]
 		public bool WaitForCompletion = true;
 
 		[Tooltip("The amount of time it takes to move to the target transform")]

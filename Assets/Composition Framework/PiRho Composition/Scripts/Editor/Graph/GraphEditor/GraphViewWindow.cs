@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition.Editor
 		public static GraphViewWindow ShowNewWindow()
 		{
 			var window = CreateWindow<GraphViewWindow>("Composition Graph");
-			window.titleContent.image = _windowIcon.Content;
+			window.titleContent.image = _windowIcon.Texture;
 			window.Show();
 			return window;
 		}

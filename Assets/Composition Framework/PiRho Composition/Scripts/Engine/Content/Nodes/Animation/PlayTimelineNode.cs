@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition
 		public DirectorWrapMode Mode;
 
 		[Tooltip("Whether to wait for the timeline to finish before moving on to Next")]
-		[Conditional(nameof(Mode), (int)DirectorWrapMode.Loop, false)]
+		[Conditional(nameof(Mode), (int)DirectorWrapMode.Loop, Test = ConditionalTest.Inequal)]
 		public bool WaitForCompletion = false;
 
 		public override Color NodeColor => Colors.Animation;

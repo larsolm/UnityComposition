@@ -18,8 +18,8 @@ namespace PiRhoSoft.Composition.Editor
 		private Object _owner;
 		private GraphCaller _caller;
 
-		private ListElement _inputs;
-		private ListElement _outputs;
+		private ListControl _inputs;
+		private ListControl _outputs;
 
 		public GraphCallerElement(SerializedProperty property, string tooltip)
 		{
@@ -31,12 +31,12 @@ namespace PiRhoSoft.Composition.Editor
 			_owner = property.serializedObject.targetObject;
 			_caller = PropertyHelper.GetObject<GraphCaller>(property);
 
-			var picker = new ObjectPicker(property.FindPropertyRelative("_graph"));
-			picker.Setup(typeof(Graph), _caller.Graph);
-			picker.RegisterCallback<ChangeEvent<Object>>(e => UpdateVariables());
+			//var picker = new ObjectPicker(property.FindPropertyRelative("_graph"));
+			//picker.Setup(typeof(Graph), _caller.Graph);
+			//picker.RegisterCallback<ChangeEvent<Object>>(e => UpdateVariables());
 
 			Add(container);
-			container.Add(picker);
+			//container.Add(picker);
 
 			UpdateVariables();
 		}
@@ -59,16 +59,16 @@ namespace PiRhoSoft.Composition.Editor
 
 			if (_caller.Inputs.Count > 0)
 			{
-				var proxy = new ListProxy<GraphInput>(_caller.Inputs, CreateInput);
-				_inputs = new ListElement(proxy, "Inputs", ElementHelper.GetTooltip(typeof(GraphCaller), "_inputs"), false, false, false);
-				Add(_inputs);
+				//var proxy = new ListProxy<GraphInput>(_caller.Inputs, CreateInput);
+				//_inputs = new ListElement(proxy, "Inputs", ElementHelper.GetTooltip(typeof(GraphCaller), "_inputs"), false, false, false);
+				//Add(_inputs);
 			}
 
 			if (_caller.Outputs.Count == 0)
 			{
-				var proxy = new ListProxy<GraphOutput>(_caller.Outputs, CreateOutput);
-				_outputs = new ListElement(proxy, "Outputs", ElementHelper.GetTooltip(typeof(GraphCaller), "_outputs"), false, false, false);
-				Add(_outputs);
+				//var proxy = new ListProxy<GraphOutput>(_caller.Outputs, CreateOutput);
+				//_outputs = new ListElement(proxy, "Outputs", ElementHelper.GetTooltip(typeof(GraphCaller), "_outputs"), false, false, false);
+				//Add(_outputs);
 			}
 		}
 
@@ -84,15 +84,15 @@ namespace PiRhoSoft.Composition.Editor
 			var valueElement = new VariableValueElement(_owner, () => input.Value, value => input.Value = value, () => _caller.GetInputDefinition(input).Definition);
 			valueElement.AddToClassList(_ussValueClass);
 
-			var typeElement = new EnumDropdown<GraphInputType>(input.Type, _owner, () => (int)input.Type, value => input.Type = (GraphInputType)value);
-			typeElement.AddToClassList(_ussDropdownClass);
-			typeElement.RegisterCallback<ChangeEvent<int>>(e =>
-			{
-				var t = (GraphInputType)e.newValue;
-
-				ElementHelper.SetVisible(referenceElement, t == GraphInputType.Reference);
-				ElementHelper.SetVisible(valueElement, t == GraphInputType.Value);
-			});
+			//var typeElement = new EnumDropdown<GraphInputType>(input.Type, _owner, () => (int)input.Type, value => input.Type = (GraphInputType)value);
+			//typeElement.AddToClassList(_ussDropdownClass);
+			//typeElement.RegisterCallback<ChangeEvent<int>>(e =>
+			//{
+			//	var t = (GraphInputType)e.newValue;
+			//
+			//	ElementHelper.SetVisible(referenceElement, t == GraphInputType.Reference);
+			//	ElementHelper.SetVisible(valueElement, t == GraphInputType.Value);
+			//});
 
 			ElementHelper.SetVisible(referenceElement, input.Type == GraphInputType.Reference);
 			ElementHelper.SetVisible(valueElement, input.Type == GraphInputType.Value);
@@ -100,7 +100,7 @@ namespace PiRhoSoft.Composition.Editor
 			var container = new VisualElement();
 			container.AddToClassList(_ussItemClass);
 			container.Add(label);
-			container.Add(typeElement);
+			//container.Add(typeElement);
 			container.Add(referenceElement);
 			container.Add(valueElement);
 
@@ -116,16 +116,16 @@ namespace PiRhoSoft.Composition.Editor
 			reference.Setup(_owner, output.Reference, null); // TODO: Add an autocompletesource
 			reference.AddToClassList(_ussReferenceClass);
 
-			var type = new EnumDropdown<GraphOutputType>(output.Type, _owner, () => (int)output.Type, value => output.Type = (GraphOutputType)value);
-			type.AddToClassList(_ussDropdownClass);
-			type.RegisterCallback<ChangeEvent<int>>(e => ElementHelper.SetVisible(reference, (GraphOutputType)e.newValue == GraphOutputType.Reference));
+			//var type = new EnumDropdown<GraphOutputType>(output.Type, _owner, () => (int)output.Type, value => output.Type = (GraphOutputType)value);
+			//type.AddToClassList(_ussDropdownClass);
+			//type.RegisterCallback<ChangeEvent<int>>(e => ElementHelper.SetVisible(reference, (GraphOutputType)e.newValue == GraphOutputType.Reference));
 
 			ElementHelper.SetVisible(reference, output.Type == GraphOutputType.Reference);
 
 			var container = new VisualElement();
 			container.AddToClassList(_ussItemClass);
 			container.Add(label);
-			container.Add(type);
+			//container.Add(type);
 			container.Add(reference);
 
 			return container;

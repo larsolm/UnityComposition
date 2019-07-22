@@ -37,7 +37,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		[Tooltip("The world asset that this manager will load zones and scenes from")]
 		[ObjectPicker]
-		[Required(MessageBoxType.Error, "A world asset is required")]
+		[Required("A world asset is required", TraitMessageType.Error)]
 		public World World;
 
 		[MappedVariable]

@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition.Editor
 					variables.Update();
 			}
 
-			Add(new ListElement(new VariablesProxy(owner, variables), "Variables", "The list of variables defined by this variable set"));
+			//Add(new ListControl(new VariablesProxy(owner, variables), "Variables", "The list of variables defined by this variable set"));
 		}
 
 		private class VariablesProxy : ListProxy
@@ -32,7 +32,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			private readonly Object _owner;
 
-			public override int Count => Variables.VariableCount;
+			public override int ItemCount => Variables.VariableCount;
 
 			public VariablesProxy(Object owner, VariableSet variables)
 			{
@@ -58,7 +58,7 @@ namespace PiRhoSoft.Composition.Editor
 					
 					if (Variables.Schema != null&& Variables.Owner != null)
 					{
-						container.Add(ElementHelper.CreateIconButton(Icon.Refresh.Content, "Re-compute this variable based on the schema initializer", () =>
+						container.Add(ElementHelper.CreateIconButton(Icon.Refresh.Texture, "Re-compute this variable based on the schema initializer", () =>
 						{
 							var value = Variables.Schema[index].Definition.Generate(Variables.Owner);
 							Variables.SetVariableValue(index, value);
@@ -69,9 +69,10 @@ namespace PiRhoSoft.Composition.Editor
 				return container;
 			}
 
+			public override bool NeedsUpdate(VisualElement item, int index) { return true; }
 			public override void AddItem() { }
 			public override void RemoveItem(int index) { }
-			public override void MoveItem(int from, int to) { }
+			public override void ReorderItem(int from, int to) { }
 		}
 	}
 }

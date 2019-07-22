@@ -19,15 +19,15 @@ namespace PiRhoSoft.Composition.Editor
 
 			var proxy = isStatic ? (ValuesProxy)new StaticValuesProxy(owner, variables) : new DynamicValuesProxy(owner, variables);
 
-			var list = new ListElement(proxy, label, "The variables contained in this variable store", false , false, false);
-
-			if (variables is Object obj)
-				list.AddHeaderButton(Icon.Inspect.Content, "View this object in the inspector", () => Selection.activeObject = obj);
-
-			if (isClosable)
-				list.AddHeaderButton(Icon.Close.Content, "Close this store", RemoveFromHierarchy);
-
-			Add(list);
+			//var list = new ListElement(proxy, label, "The variables contained in this variable store", false , false, false);
+			//
+			//if (variables is Object obj)
+			//	list.AddHeaderButton(Icon.Inspect.Content, "View this object in the inspector", () => Selection.activeObject = obj);
+			//
+			//if (isClosable)
+			//	list.AddHeaderButton(Icon.Close.Content, "Close this store", RemoveFromHierarchy);
+			//
+			//Add(list);
 		}
 
 		#region Proxy
@@ -63,7 +63,7 @@ namespace PiRhoSoft.Composition.Editor
 				{
 					if (variable.HasStore)
 					{
-						container.Add(ElementHelper.CreateIconButton(Icon.View.Content, "View the contents of the store", () =>
+						container.Add(ElementHelper.CreateIconButton(Icon.View.Texture, "View the contents of the store", () =>
 						{
 							using (var evt = WatchWindow.WatchEvent.GetPooled(_owner, _variables, name))
 							{
@@ -79,16 +79,17 @@ namespace PiRhoSoft.Composition.Editor
 				return container;
 			}
 
+			public override bool NeedsUpdate(VisualElement item, int index) { return true; }
 			public override void AddItem() { }
 			public override void RemoveItem(int index) { }
-			public override void MoveItem(int from, int to) { }
+			public override void ReorderItem(int from, int to) { }
 		}
 
 		private class StaticValuesProxy : ValuesProxy
 		{
 			private readonly IList<string> _names;
 
-			public override int Count => _names.Count;
+			public override int ItemCount => _names.Count;
 			public override string GetName(int index) => _names[index];
 
 			public StaticValuesProxy(Object owner, IVariableStore variables) : base(owner, variables)
@@ -99,7 +100,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class DynamicValuesProxy : ValuesProxy
 		{
-			public override int Count => _variables.GetVariableNames().Count;
+			public override int ItemCount => _variables.GetVariableNames().Count;
 			public override string GetName(int index) => _variables.GetVariableNames()[index];
 
 			public DynamicValuesProxy(Object owner, IVariableStore variables) : base(owner, variables)

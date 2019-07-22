@@ -520,34 +520,34 @@ namespace PiRhoSoft.Composition.Editor
 			var editButton = CreateEditMenu();
 			var viewButton = CreateViewMenu();
 
-			_playButton = new Image { image = _playIcon.Content, tooltip = "Resume execution of the graph" };
+			_playButton = new Image { image = _playIcon.Texture, tooltip = "Resume execution of the graph" };
 			_playButton.AddToClassList(UssToolbarButtonClassName);
 			_playButton.AddToClassList(UssToolbarButtonSmallClassName);
 			_playButton.AddToClassList(UssToolbarButtonFirstClassName);
 			_playButton.AddManipulator(new Clickable(() => CurrentGraph.DebugPlay()));
 
-			_pauseButton = new Image { image = _pauseIcon.Content, tooltip = "Pause the execution of the graph" };
+			_pauseButton = new Image { image = _pauseIcon.Texture, tooltip = "Pause the execution of the graph" };
 			_pauseButton.AddToClassList(UssToolbarButtonClassName);
 			_pauseButton.AddToClassList(UssToolbarButtonSmallClassName);
 			_pauseButton.AddManipulator(new Clickable(() => CurrentGraph.DebugPause()));
 
-			_stepButton = new Image { image = _stepIcon.Content, tooltip = "Step forward one node in the graph" };
+			_stepButton = new Image { image = _stepIcon.Texture, tooltip = "Step forward one node in the graph" };
 			_stepButton.AddToClassList(UssToolbarButtonClassName);
 			_stepButton.AddToClassList(UssToolbarButtonSmallClassName);
 			_stepButton.AddManipulator(new Clickable(() => CurrentGraph.DebugStep()));
 
-			_stopButton = new Image { image = _stopIcon.Content, tooltip = "Stop executing the graph", tintColor = Color.gray };
+			_stopButton = new Image { image = _stopIcon.Texture, tooltip = "Stop executing the graph", tintColor = Color.gray };
 			_stopButton.AddToClassList(UssToolbarButtonClassName);
 			_stopButton.AddToClassList(UssToolbarButtonSmallClassName);
 			_stopButton.AddManipulator(new Clickable(() => CurrentGraph.DebugStop()));
 
-			_breakButton = new Image { image = _breakIcon.Content, tooltip = "Enable/Disable node breakpoints for all graphs" };
+			_breakButton = new Image { image = _breakIcon.Texture, tooltip = "Enable/Disable node breakpoints for all graphs" };
 			_breakButton.AddToClassList(UssToolbarButtonClassName);
 			_breakButton.AddToClassList(UssToolbarButtonSmallClassName);
 			_breakButton.AddToClassList(UssToolbarButtonFirstClassName);
 			_breakButton.AddManipulator(new Clickable(ToggleBreakpointsEnabled));
 
-			_loggingButton = new Image { image = _logIcon.Content, tooltip = "Enable/Disable logging of graph execution for all graphs" };
+			_loggingButton = new Image { image = _logIcon.Texture, tooltip = "Enable/Disable logging of graph execution for all graphs" };
 			_loggingButton.AddToClassList(UssToolbarButtonClassName);
 			_loggingButton.AddToClassList(UssToolbarButtonSmallClassName);
 			_loggingButton.AddManipulator(new Clickable(ToggleLoggingEnabled));
@@ -563,7 +563,7 @@ namespace PiRhoSoft.Composition.Editor
 			_lockButton.AddToClassList(UssToolbarButtonLockClassName);
 			_lockButton.AddManipulator(new Clickable(ToggleLockingEnabled));
 
-			var watchButton = new Image { image = Icon.View.Content, tooltip = "Open the Watch Window" };
+			var watchButton = new Image { image = Icon.View.Texture, tooltip = "Open the Watch Window" };
 			watchButton.AddToClassList(UssToolbarButtonClassName);
 			watchButton.AddToClassList(UssToolbarButtonSmallClassName);
 			watchButton.AddManipulator(new Clickable(WatchWindow.ShowWindow));
@@ -624,7 +624,7 @@ namespace PiRhoSoft.Composition.Editor
 			var isStopping = isEnabled && CurrentGraph.DebugState == Graph.PlaybackState.Stopped;
 
 			_graphButton.text = CurrentGraph == null ? "No Graph Selected" : CurrentGraph.name;
-			_lockButton.image = IsLocked ? Icon.Locked.Content : Icon.Unlocked.Content;
+			_lockButton.image = IsLocked ? Icon.Locked.Texture : Icon.Unlocked.Texture;
 
 			if (!isEnabled)
 			{

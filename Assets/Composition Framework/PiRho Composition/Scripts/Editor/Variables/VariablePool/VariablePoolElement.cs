@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition.Editor
 			if (owner is ISchemaOwner schemaOwner)
 				schemaOwner.SetupSchema();
 
-			Add(new ListElement(new VariablesProxy(owner, variables), "Variables", "The variables defined by this variable pool"));
+			//Add(new ListElement(new VariablesProxy(owner, variables), "Variables", "The variables defined by this variable pool"));
 		}
 
 		private class VariablesProxy : ListProxy
@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			private bool _definitionVisible = false;
 
-			public override int Count => Variables.Variables.Count;
+			public override int ItemCount => Variables.Variables.Count;
 			
 			public VariablesProxy(Object owner, VariablePool variables)
 			{
@@ -76,7 +76,7 @@ namespace PiRhoSoft.Composition.Editor
 					valueElement.Setup(Variables.Variables[index], Variables.Definitions[index]);
 				}, () => VariableInitializerType.None, () => null, false);
 
-				var edit = new Image { image = Icon.Settings.Content, tooltip = "Show/hide the definition of this variable" };
+				var edit = new Image { image = Icon.Settings.Texture, tooltip = "Show/hide the definition of this variable" };
 				edit.AddToClassList(_ussEditClass);
 				edit.AddManipulator(new Clickable(() =>
 				{
@@ -104,6 +104,11 @@ namespace PiRhoSoft.Composition.Editor
 				return container;
 			}
 
+			public override bool NeedsUpdate(VisualElement item, int index)
+			{
+				return true;
+			}
+
 			public override void AddItem()
 			{
 				// TODO: make sure this is viable
@@ -115,7 +120,7 @@ namespace PiRhoSoft.Composition.Editor
 				Variables.RemoveVariable(index);
 			}
 
-			public override void MoveItem(int from, int to)
+			public override void ReorderItem(int from, int to)
 			{
 				Variables.VariableMoved(from, to);
 			}

@@ -155,7 +155,7 @@ namespace PiRhoSoft.Utilities.Editor
 				case SerializedPropertyType.Vector2: return new Vector2Field();
 				case SerializedPropertyType.Vector3: return new Vector3Field();
 				case SerializedPropertyType.Vector4: return new Vector4Field();
-				case SerializedPropertyType.Quaternion: return new Euler();
+				case SerializedPropertyType.Quaternion: return new EulerField();
 				case SerializedPropertyType.Rect: return new RectField();
 				case SerializedPropertyType.Bounds: return new BoundsField();
 				case SerializedPropertyType.Vector2Int: return new Vector2IntField();
@@ -180,7 +180,7 @@ namespace PiRhoSoft.Utilities.Editor
 				case Vector2Field field: property.vector2Value = field.value; break;
 				case Vector3Field field: property.vector3Value = field.value; break;
 				case Vector4Field field: property.vector4Value = field.value; break;
-				case Euler field: property.quaternionValue = field.GetValueFromElement(element); break;
+				case EulerField field: property.quaternionValue = field.value; break;
 				case RectField field: property.rectValue = field.value; break;
 				case BoundsField field: property.boundsValue = field.value; break;
 				case Vector2IntField field: property.vector2IntValue = field.value; break;
@@ -227,8 +227,8 @@ namespace PiRhoSoft.Utilities.Editor
 				case INotifyValueChanged<Vector3Int> field: field.RegisterValueChangedCallback(e => action()); return true;
 				case INotifyValueChanged<RectInt> field: field.RegisterValueChangedCallback(e => action()); return true;
 				case INotifyValueChanged<BoundsInt> field: field.RegisterValueChangedCallback(e => action()); return true;
-				case EnumDropdown field: field.RegisterCallback<ChangeEvent<int>>(e => action()); return true;
-				case Euler field: field.RegisterCallback<ChangeEvent<Vector3>>(e => action()); return true;
+				case PopupField<Enum> field: field.RegisterCallback<ChangeEvent<int>>(e => action()); return true;
+				case EulerField field: field.RegisterCallback<ChangeEvent<Vector3>>(e => action()); return true;
 				default: return false;
 			}
 		}
@@ -337,7 +337,6 @@ namespace PiRhoSoft.Utilities.Editor
 				switch (Element)
 				{
 					case IBindable field: field.BindProperty(property); break;
-					case Euler field: Bind(field, field, property); break;
 				}
 
 				Add(Element);

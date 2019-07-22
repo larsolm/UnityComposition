@@ -33,7 +33,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		[Tooltip("The map layer that this zone is on. Zones on the same layer will be enabled/disabled together")]
 		[SerializeField]
-		[Dropdown(new string[] { "Indoor", "Outdoor" })]
+		[Popup(new string[] { "Indoor", "Outdoor" })]
 		private string _mapLayer = "Indoor";
 
 		[MappedVariable]

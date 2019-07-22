@@ -22,13 +22,13 @@ namespace PiRhoSoft.MonsterRpg.Editor
 			private void CreateMainScenePicker(Object owner)
 			{
 				var mainSceneContainer = new FieldContainer("Main Scene", "The main scene to load when the game starts up");
-				var mainScenePicker = new ScenePicker(owner, () => AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneLoader.MainScenePreference.Value), scene => SceneLoader.MainScenePreference.Value = AssetDatabase.GetAssetPath(scene));
-				mainScenePicker.Setup(SceneLoader.MainScenePreference.Value, () =>
-				{
-					var gameObject = new GameObject("World Manager");
-					gameObject.AddComponent<WorldManager>();
-					gameObject.AddComponent<AudioManager>();
-				});
+				var mainScenePicker = new ScenePickerField();//(owner, () => AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneLoader.MainScenePreference.Value), scene => SceneLoader.MainScenePreference.Value = AssetDatabase.GetAssetPath(scene));
+				//mainScenePicker.Setup(SceneLoader.MainScenePreference.Value, () =>
+				//{
+				//	var gameObject = new GameObject("World Manager");
+				//	gameObject.AddComponent<WorldManager>();
+				//	gameObject.AddComponent<AudioManager>();
+				//});
 
 				mainSceneContainer.Add(mainScenePicker);
 				Add(mainSceneContainer);
@@ -37,8 +37,8 @@ namespace PiRhoSoft.MonsterRpg.Editor
 			private void CreateLoadGraphPicker(Object owner)
 			{
 				var loadGraphContainer = new FieldContainer("Load Graph", "The graph to run when the game starts up");
-				var graphPicker = new ObjectPicker(owner, () => AssetDatabase.LoadAssetAtPath<Graph>(SceneLoader.LoadGraphPreference.Value), graph => SceneLoader.LoadGraphPreference.Value = AssetDatabase.GetAssetPath(graph));
-				graphPicker.Setup(typeof(Graph), SceneLoader.LoadGraphPreference.Value);
+				var graphPicker = new ObjectPickerField();//(owner, () => AssetDatabase.LoadAssetAtPath<Graph>(SceneLoader.LoadGraphPreference.Value), graph => SceneLoader.LoadGraphPreference.Value = AssetDatabase.GetAssetPath(graph));
+				//graphPicker.Setup(typeof(Graph), SceneLoader.LoadGraphPreference.Value);
 
 				loadGraphContainer.Add(graphPicker);
 				Add(loadGraphContainer);
@@ -120,22 +120,22 @@ namespace PiRhoSoft.MonsterRpg.Editor
 				var typeContainer = new VisualElement();
 				typeContainer.style.flexGrow = 1;
 
-				var zonePicker = new ObjectPicker(owner, () => AssetDatabase.LoadAssetAtPath<Zone>(SceneLoader.ZonePreference.Value), zone => SceneLoader.ZonePreference.Value = AssetDatabase.GetAssetPath(zone));
-				zonePicker.Setup(typeof(Zone), SceneLoader.ZonePreference.Value);
+				var zonePicker = new ObjectPickerField();//(owner, () => AssetDatabase.LoadAssetAtPath<Zone>(SceneLoader.ZonePreference.Value), zone => SceneLoader.ZonePreference.Value = AssetDatabase.GetAssetPath(zone));
+				//zonePicker.Setup(typeof(Zone), SceneLoader.ZonePreference.Value);
 
-				var buttons = new EnumButtons(owner, () => (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value, value =>
-				{
-					var type = (SceneLoader.ZoneLoadType)value;
-					SceneLoader.ZoneTypePreference.Value = (int)type;
-
-					ElementHelper.SetVisible(zonePicker, type == SceneLoader.ZoneLoadType.Specific);
-					ElementHelper.SetVisible(spawnPicker, type != SceneLoader.ZoneLoadType.Saved);
-				});
+				var buttons = new EnumButtonsField();//(owner, () => (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value, value =>
+				//{
+				//	var type = (SceneLoader.ZoneLoadType)value;
+				//	SceneLoader.ZoneTypePreference.Value = (int)type;
+				//
+				//	ElementHelper.SetVisible(zonePicker, type == SceneLoader.ZoneLoadType.Specific);
+				//	ElementHelper.SetVisible(spawnPicker, type != SceneLoader.ZoneLoadType.Saved);
+				//});
 
 				ElementHelper.SetVisible(zonePicker, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value == SceneLoader.ZoneLoadType.Specific);
 				ElementHelper.SetVisible(spawnPicker, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value != SceneLoader.ZoneLoadType.Saved);
 
-				buttons.Setup(typeof(SceneLoader.ZoneLoadType), false, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value);
+				//buttons.Setup(typeof(SceneLoader.ZoneLoadType), false, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value);
 
 				zoneContainer.Add(typeContainer);
 				typeContainer.Add(buttons);
@@ -153,7 +153,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 		public static void Open()
 		{
 			var window = GetWindow<StateWindow>("State Manager");
-			window.titleContent.image = _stateIcon.Content;			
+			window.titleContent.image = _stateIcon.Texture;
 			window.Show();
 		}
 

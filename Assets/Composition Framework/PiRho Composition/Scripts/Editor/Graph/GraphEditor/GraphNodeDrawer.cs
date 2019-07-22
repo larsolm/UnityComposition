@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition.Editor
 			label.style.flexShrink = 1;
 			label.style.overflow = Overflow.Hidden;
 
-			var icon = ElementHelper.CreateIconButton(Icon.Inspect.Content, "Select and edit this node", () => GraphEditor.SelectNode(node));
+			var icon = ElementHelper.CreateIconButton(Icon.Inspect.Texture, "Select and edit this node", () => GraphEditor.SelectNode(node));
 
 			container.Add(label);
 			container.Add(icon);

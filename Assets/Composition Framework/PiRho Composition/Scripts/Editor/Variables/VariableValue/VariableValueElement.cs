@@ -90,17 +90,18 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VisualElement CreateEmpty()
 		{
-			var dropdown = new EnumDropdown<VariableType>(VariableType.Empty, _owner, () => (int)VariableType.Empty, type =>
-			{
-				var variableType = (VariableType)type;
-				var constraint = VariableConstraint.Create(variableType);
-				var value = VariableHandler.CreateDefault((VariableType)type, constraint);
-				var definition = ValueDefinition.Create(variableType, constraint, null, null, false, false);
-
-				SetValue(value);
-				Setup(value, definition);
-			});
-			return dropdown;
+			//var dropdown = new EnumField(VariableType.Empty, _owner, () => (int)VariableType.Empty, type =>
+			//{
+			//	var variableType = (VariableType)type;
+			//	var constraint = VariableConstraint.Create(variableType);
+			//	var value = VariableHandler.CreateDefault((VariableType)type, constraint);
+			//	var definition = ValueDefinition.Create(variableType, constraint, null, null, false, false);
+			//
+			//	SetValue(value);
+			//	Setup(value, definition);
+			//});
+			//return dropdown;
+			return null;
 		}
 
 		public VisualElement CreateBool()
@@ -215,7 +216,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VisualElement CreateQuaternion()
 		{
-			return new Euler(_owner, () => _value.Quaternion, value => SetValue(VariableValue.Create(value)));
+			return new EulerField();//_owner, () => _value.Quaternion, value => SetValue(VariableValue.Create(value)));
 		}
 
 		private VisualElement CreateRect()
@@ -243,7 +244,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			if (_definition.Constraint is StringVariableConstraint constraint && constraint.Values.Count > 0)
 			{
-				var dropdown = new StringDropdown(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
+				var dropdown = new PopupField<string>();//(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
 				return dropdown;
 			}
 			else
@@ -256,8 +257,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VisualElement CreateEnum()
 		{
-			var buttons = new EnumButtons(_owner, () => _value.Enum, value => SetValue(VariableValue.Create(value)));
-			buttons.Setup(_value.EnumType, false, _value.Enum);
+			var buttons = new EnumButtonsField();//_owner, () => _value.Enum, value => SetValue(VariableValue.Create(value)));
+			//buttons.Setup(_value.EnumType, false, _value.Enum);
 			return buttons;
 		}
 
@@ -265,8 +266,8 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var objectType = (_definition.Constraint as ObjectVariableConstraint)?.Type ?? _value.ReferenceType ?? typeof(Object);
 
-			var picker = new ObjectPicker(_owner, () => _value.Object, value => SetValue(VariableValue.CreateReference(value)));
-			picker.Setup(objectType, _value.Object);
+			var picker = new ObjectPickerField();//(_owner, () => _value.Object, value => SetValue(VariableValue.CreateReference(value)));
+			//picker.Setup(objectType, _value.Object);
 			return picker;
 		}
 

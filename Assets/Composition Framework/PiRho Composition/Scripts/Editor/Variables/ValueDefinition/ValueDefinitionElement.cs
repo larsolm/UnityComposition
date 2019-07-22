@@ -240,14 +240,14 @@ namespace PiRhoSoft.Composition.Editor
 			if (_definition.IsTypeLocked)
 				container.SetEnabled(false);
 
-			var dropdown = new EnumDropdown<VariableType>(_definition.Type, _owner, () => (int)_definition.Type, type =>
-			{
-				var variableType = (VariableType)type;
-				var constraint = VariableConstraint.Create(variableType);
-				var definition = ValueDefinition.Create(variableType, constraint, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-
-				SetDefinition(definition);
-			});
+			var dropdown = new EnumField(_definition.Type);//, _owner, () => (int)_definition.Type, type =>
+			//{
+			//	var variableType = (VariableType)type;
+			//	var constraint = VariableConstraint.Create(variableType);
+			//	var definition = ValueDefinition.Create(variableType, constraint, _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+			//
+			//	SetDefinition(definition);
+			//});
 
 			container.Add(dropdown);
 
@@ -322,11 +322,11 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				container.Add(new Label("Tag") { tooltip = "An identifier that can be used to reset or persist this variable" });
 
-				var dropdown = new StringDropdown(tags.List, tags.List, _definition.Tag, _owner, () => _definition.Tag, tag =>
-				{
-					var definition = ValueDefinition.Create(_definition.Type, _definition.Constraint, tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
-					SetDefinition(definition);
-				});
+				var dropdown = new PopupField<string>();//(tags.List, tags.List, _definition.Tag, _owner, () => _definition.Tag, tag =>
+				//{
+				//	var definition = ValueDefinition.Create(_definition.Type, _definition.Constraint, tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+				//	SetDefinition(definition);
+				//});
 
 				container.Add(dropdown);
 			}
@@ -500,29 +500,29 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement SetupStringConstraint(StringVariableConstraint constraint)
 		{
 			var container = new VisualElement();
-			var proxy = new ListProxy<string>(constraint.Values, (value, index) =>
-			{
-				var field = new TextField() { value = value, isDelayed = true };
-
-				ElementHelper.Bind(field, field, _owner, () =>
-				{
-					return constraint.Values[index];
-				},
-				text =>
-				{
-					constraint.Values[index] = text;
-					ElementHelper.SendChangeEvent(this, _definition, _definition);
-				});
-
-				return field;
-			});
-
-			var list = new ListElement(proxy, "Valid Strings", "The list of valid string values for the variable");
-			list.OnItemAdded += () => ElementHelper.SendChangeEvent(this, _definition, _definition);
-			list.OnItemRemoved += index => ElementHelper.SendChangeEvent(this, _definition, _definition);
-			list.OnItemMoved += (from, to) => ElementHelper.SendChangeEvent(this, _definition, _definition);
-
-			container.Add(list);
+			//var proxy = new ListProxy<string>(constraint.Values, (value, index) =>
+			//{
+			//	var field = new TextField() { value = value, isDelayed = true };
+			//
+			//	ElementHelper.Bind(field, field, _owner, () =>
+			//	{
+			//		return constraint.Values[index];
+			//	},
+			//	text =>
+			//	{
+			//		constraint.Values[index] = text;
+			//		ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//	});
+			//
+			//	return field;
+			//});
+			//
+			//var list = new ListElement(proxy, "Valid Strings", "The list of valid string values for the variable");
+			//list.OnItemAdded += () => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//list.OnItemRemoved += index => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//list.OnItemMoved += (from, to) => ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//
+			//container.Add(list);
 
 			return container;
 		}
@@ -530,15 +530,15 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement SetupObjectConstraint(ObjectVariableConstraint constraint)
 		{
 			var container = new VisualElement();
-			var picker = new TypePicker(_owner, () => constraint.Type?.AssemblyQualifiedName, type =>
-			{
-				constraint.Type = Type.GetType(type ?? string.Empty);
-				ElementHelper.SendChangeEvent(this, _definition, _definition);
-			});
-
-			picker.Setup(typeof(Object), true, constraint.Type);
-
-			container.Add(picker);
+			//var picker = new TypePicker(_owner, () => constraint.Type?.AssemblyQualifiedName, type =>
+			//{
+			//	constraint.Type = Type.GetType(type ?? string.Empty);
+			//	ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//});
+			//
+			//picker.Setup(typeof(Object), true, constraint.Type);
+			//
+			//container.Add(picker);
 
 			return container;
 		}
@@ -546,15 +546,15 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement SetupEnumConstraint(EnumVariableConstraint constraint)
 		{
 			var container = new VisualElement();
-			var picker = new TypePicker(_owner, () => constraint.Type?.AssemblyQualifiedName ?? string.Empty, type =>
-			{
-				constraint.Type = Type.GetType(type ?? string.Empty);
-				ElementHelper.SendChangeEvent(this, _definition, _definition);
-			});
-
-			picker.Setup(typeof(Enum), true, constraint.Type);
-
-			container.Add(picker);
+			//var picker = new TypePicker(_owner, () => constraint.Type?.AssemblyQualifiedName ?? string.Empty, type =>
+			//{
+			//	constraint.Type = Type.GetType(type ?? string.Empty);
+			//	ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//});
+			//
+			//picker.Setup(typeof(Enum), true, constraint.Type);
+			//
+			//container.Add(picker);
 
 			return container;
 		}
@@ -562,15 +562,15 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement SetupStoreConstraint(StoreVariableConstraint constraint)
 		{			
 			var container = new VisualElement();
-			var picker = new ObjectPicker(_owner, () => constraint.Schema, schema =>
-			{
-				constraint.Schema = schema as VariableSchema;
-				ElementHelper.SendChangeEvent(this, _definition, _definition);
-			});
-
-			picker.Setup(typeof(VariableSchema), constraint.Schema);
-
-			container.Add(picker);
+			//var picker = new ObjectPicker(_owner, () => constraint.Schema, schema =>
+			//{
+			//	constraint.Schema = schema as VariableSchema;
+			//	ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//});
+			//
+			//picker.Setup(typeof(VariableSchema), constraint.Schema);
+			//
+			//container.Add(picker);
 
 			return container;
 		}
@@ -578,17 +578,17 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement SetupListConstraint(ListVariableConstraint constraint)
 		{
 			var container = new VisualElement();
-			var dropdown = new EnumDropdown<VariableType>(constraint.ItemType, _owner, () => (int)constraint.ItemType, type =>
-			{
-				var variableType = (VariableType)type;
-
-				constraint.ItemType = variableType;
-				constraint.ItemConstraint = VariableConstraint.Create(variableType);
-
-				ElementHelper.SendChangeEvent(this, _definition, _definition);
-			});
-
-			container.Add(dropdown);
+			//var dropdown = new EnumDropdown<VariableType>(constraint.ItemType, _owner, () => (int)constraint.ItemType, type =>
+			//{
+			//	var variableType = (VariableType)type;
+			//
+			//	constraint.ItemType = variableType;
+			//	constraint.ItemConstraint = VariableConstraint.Create(variableType);
+			//
+			//	ElementHelper.SendChangeEvent(this, _definition, _definition);
+			//});
+			//
+			//container.Add(dropdown);
 
 			if (constraint.ItemConstraint != null)
 			{

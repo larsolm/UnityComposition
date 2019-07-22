@@ -23,7 +23,7 @@ namespace PiRhoSoft.MonsterRpg
 		[Tooltip("The icon for this species")] public Sprite Icon;
 		[Tooltip("The animations for this species")] public AnimatorOverrideController Animations;
 		[Tooltip("The skills available to Creatures of this Species")] [List(EmptyLabel = "The Species has no Skills")] public SkillList Skills = new SkillList();
-		[Tooltip("The mount point locations on the Species")] [Dictionary(EmptyText = "The Species has no mount points")] public MountPointDictionary MountPoints = new MountPointDictionary();
+		[Tooltip("The mount point locations on the Species")] [Dictionary(EmptyLabel = "The Species has no mount points")] public MountPointDictionary MountPoints = new MountPointDictionary();
 		
 		public virtual Creature CreateCreature(ITrainer trainer)
 		{

@@ -190,7 +190,7 @@ namespace PiRhoSoft.Utilities.Editor
 			dragHandle.RegisterCallback((MouseDownEvent e) => StartDrag(e, GetItemIndex(item)));
 			item.Add(dragHandle);
 
-			var content = Proxy.CreateItem(index);
+			var content = Proxy.CreateElement(index);
 			content.AddToClassList(ItemContentUssClassName);
 			item.Add(content);
 
@@ -210,7 +210,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			if (Proxy.NeedsUpdate(item, index))
 			{
-				var content = Proxy.CreateItem(index);
+				var content = Proxy.CreateElement(index);
 				content.AddToClassList(ItemContentUssClassName);
 				item.RemoveAt(1);
 				item.Insert(1, content);

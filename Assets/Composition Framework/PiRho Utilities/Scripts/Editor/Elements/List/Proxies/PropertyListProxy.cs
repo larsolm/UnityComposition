@@ -17,7 +17,7 @@ namespace PiRhoSoft.Utilities.Editor
 			_drawer = drawer;
 		}
 
-		public override VisualElement CreateItem(int index)
+		public override VisualElement CreateElement(int index)
 		{
 			var property = _property.GetArrayElementAtIndex(index);
 
