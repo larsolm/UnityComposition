@@ -1,34 +1,26 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
-using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class ListVariableHandler : VariableHandler
 	{
-		public const string CountText = "Count";
-
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			return VariableValue.Create(new VariableList());
+			builder.Append(variable.AsList);
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.List);
-		}
-
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			var list = value.List as VariableList;
+			var list = variable.AsList as VariableList;
 
 			if (list != null)
 			{
 				writer.Write(list.Count);
 
 				for (var i = 0; i < list.Count; i++)
-					WriteValue(list.GetVariable(i), writer, objects);
+					Save(variable, writer, data);
 			}
 			else
 			{
@@ -36,74 +28,36 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var count = reader.ReadInt32();
 			var list = new VariableList();
 
 			for (var i = 0; i < count; i++)
 			{
-				var item = ReadValue(reader, objects, version);
+				var item = Load(reader, data);
 				list.AddVariable(item);
 			}
 
-			return VariableValue.Create(list);
+			return Variable.List(list);
 		}
 
-		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override Variable Lookup_(Variable owner, Variable lookup)
 		{
-			return LookupInList(owner, lookup);
+			return Lookup(owner.AsList, lookup);
 		}
 
-		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
-			return ApplyToList(ref owner, lookup, value);
+			return Apply(owner.AsList, lookup, value);
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
-			if (right.HasReference)
-				return left.Reference == right.Reference;
+			if (right.TryGetList(out var list))
+				return left.AsList == list;
 			else
 				return null;
-		}
-
-		public static VariableValue LookupInList(VariableValue owner, VariableValue lookup)
-		{
-			if (lookup.Type == VariableType.String)
-			{
-				if (lookup.String == CountText)
-					return VariableValue.Create(owner.List.Count);
-			}
-			else if (lookup.Type == VariableType.Int)
-			{
-				if (lookup.Int >= 0 && lookup.Int < owner.List.Count)
-					return owner.List.GetVariable(lookup.Int);
-			}
-
-			return VariableValue.Empty;
-		}
-
-		public static SetVariableResult ApplyToList(ref VariableValue owner, VariableValue lookup, VariableValue value)
-		{
-			if (lookup.Type == VariableType.String)
-			{
-				if (lookup.String == CountText)
-					return SetVariableResult.ReadOnly;
-				else
-					return SetVariableResult.NotFound;
-			}
-			else if (lookup.Type == VariableType.Int)
-			{
-				if (lookup.Int >= 0 && lookup.Int < owner.List.Count)
-					return owner.List.SetVariable(lookup.Int, value);
-				else
-					return SetVariableResult.NotFound;
-			}
-			else
-			{
-				return SetVariableResult.TypeMismatch;
-			}
 		}
 	}
 }

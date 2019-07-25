@@ -15,9 +15,9 @@ namespace PiRhoSoft.Composition
 		{
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
-			return VariableValue.Create(Type);
+			return Variable.Create(Type);
 		}
 
 		public override void ToString(StringBuilder builder)

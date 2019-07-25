@@ -4,23 +4,23 @@ namespace PiRhoSoft.Composition
 {
 	internal class MaxCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count >= 2)
 			{
-				var biggestValue = VariableValue.Empty;
+				var biggestValue = Variable.Empty;
 				var biggestNumber = float.MinValue;
 
 				for (var i = 0; i < parameters.Count; i++)
 				{
 					var p = parameters[i].Evaluate(variables);
 
-					if (!p.HasNumber)
+					if (!p.IsFloat)
 						throw CommandEvaluationException.WrongParameterType(name, i, p.Type, VariableType.Int, VariableType.Float);
 
-					if (p.Number > biggestNumber)
+					if (p.AsFloat > biggestNumber)
 					{
-						biggestNumber = p.Number;
+						biggestNumber = p.AsFloat;
 						biggestValue = p;
 					}
 				}

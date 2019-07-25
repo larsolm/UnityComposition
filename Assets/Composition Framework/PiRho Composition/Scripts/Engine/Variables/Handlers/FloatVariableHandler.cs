@@ -1,104 +1,95 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
+using System;
 using System.IO;
 using System.Text;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
 	internal class FloatVariableHandler : VariableHandler
 	{
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			if (constraint is FloatVariableConstraint floatConstraint)
-				return VariableValue.Create(floatConstraint.Minimum);
-			else
-				return VariableValue.Create(0.0f);
+			builder.Append(variable.AsFloat);
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.Float);
+			writer.Write(variable.AsFloat);
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			writer.Write(value.Float);
-		}
-
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var f = reader.ReadSingle();
-			return VariableValue.Create(f);
+			return Variable.Float(f);
 		}
 
-		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
+		protected internal override Variable Add_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return VariableValue.Create(left.Float + number);
+				return Variable.Float(left.AsFloat + number);
 			else if (right.Type == VariableType.String)
-				return VariableValue.Create(left.Float + right.String);
+				return Variable.String(left.AsFloat + right.AsString);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Subtract_(VariableValue left, VariableValue right)
+		protected internal override Variable Subtract_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return VariableValue.Create(left.Float - number);
+				return Variable.Float(left.AsFloat - number);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Multiply_(VariableValue left, VariableValue right)
+		protected internal override Variable Multiply_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return VariableValue.Create(left.Float * number);
+				return Variable.Float(left.AsFloat * number);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Divide_(VariableValue left, VariableValue right)
+		protected internal override Variable Divide_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return VariableValue.Create(left.Float / number);
+				return Variable.Float(left.AsFloat / number);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Modulo_(VariableValue left, VariableValue right)
+		protected internal override Variable Modulo_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return VariableValue.Create(left.Float % number);
+				return Variable.Float(left.AsFloat % number);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Exponent_(VariableValue left, VariableValue right)
+		protected internal override Variable Exponent_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return VariableValue.Create((float)Math.Pow(left.Float, number));
+				return Variable.Float((float)Math.Pow(left.AsFloat, number));
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Negate_(VariableValue value)
+		protected internal override Variable Negate_(Variable value)
 		{
-			return VariableValue.Create(-value.Float);
+			return Variable.Float(-value.AsFloat);
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return left.Float == number;
+				return left.AsFloat == number;
 			else
 				return null;
 		}
 
-		protected internal override int? Compare_(VariableValue left, VariableValue right)
+		protected internal override int? Compare_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return left.Float.CompareTo(number);
+				return left.AsFloat.CompareTo(number);
 			else
 				return null;
 		}

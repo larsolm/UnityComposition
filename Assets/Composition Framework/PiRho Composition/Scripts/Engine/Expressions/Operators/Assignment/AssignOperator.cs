@@ -2,7 +2,7 @@
 {
 	internal class AssignOperator : AssignmentOperator
 	{
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var result = Right.Evaluate(variables);
 			return Assign(variables, result);

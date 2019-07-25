@@ -188,16 +188,16 @@ namespace PiRhoSoft.Composition.Editor
 				var value = reference.GetValue(graph.Variables);
 				if (!value.IsEmpty)
 				{
-					if (value.HasStore)
-					{
-						AddWatch(variable, value.Store);
-						return true;
-					}
-					else
-					{
-						Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
-						return false;
-					}
+					//if (value.HasStore)
+					//{
+					//	AddWatch(variable, value.Store);
+					//	return true;
+					//}
+					//else
+					//{
+					//	Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
+					//	return false;
+					//}
 				}
 			}
 
@@ -205,16 +205,16 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				var value = reference.GetValue(CompositionManager.Instance.DefaultStore);
 
-				if (value.HasStore)
-				{
-					AddWatch(variable, value.Store);
-					return true;
-				}
-				else
-				{
-					Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
-					return false;
-				}
+				//if (value.HasStore)
+				//{
+				//	AddWatch(variable, value.Store);
+				//	return true;
+				//}
+				//else
+				//{
+				//	Debug.LogWarningFormat(_invalidWatchWarning, variable, value.Type);
+				//	return false;
+				//}
 			}
 
 			Debug.LogWarningFormat(_missingWatchWarning, variable);
@@ -238,7 +238,7 @@ namespace PiRhoSoft.Composition.Editor
 			}
 			else
 			{
-				var result = VariableValue.Empty;
+				var result = Variable.Empty;
 				var graph = CompositionManager.TrackingState.FirstOrDefault();
 		
 				if (graph.Key != null)

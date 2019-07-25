@@ -27,7 +27,7 @@ namespace PiRhoSoft.Composition
 		public GraphCaller TargetGraph = new GraphCaller();
 
 		[Tooltip("The graph to run when this node is reached")]
-		[VariableConstraint(typeof(Graph))]
+		[VariableReference(typeof(Graph))]
 		[Conditional(nameof(Source), (int)GraphSource.Reference)]
 		public VariableReference Reference = new VariableReference();
 
@@ -52,7 +52,7 @@ namespace PiRhoSoft.Composition
 			else if (Source == GraphSource.Reference)
 			{
 				if (GraphStore.IsInput(Reference))
-					inputs.Add(new VariableDefinition { Name = Reference.RootName, Definition = ValueDefinition.Create<Graph>() });
+					inputs.Add(new VariableDefinition(Reference.RootName, new ObjectConstraint(typeof(Graph))));
 			}
 		}
 

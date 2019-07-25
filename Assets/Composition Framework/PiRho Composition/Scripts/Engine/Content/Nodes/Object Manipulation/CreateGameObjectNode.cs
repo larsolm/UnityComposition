@@ -60,16 +60,16 @@ namespace PiRhoSoft.Composition
 			Rotation.GetInputs(inputs);
 
 			if (Positioning == ObjectPositioning.Child && GraphStore.IsInput(Parent))
-				inputs.Add(new VariableDefinition { Name = Parent.RootName, Definition = ValueDefinition.Create<GameObject>() });
+				inputs.Add(new VariableDefinition(Parent.RootName, new ObjectConstraint(typeof(GameObject))));
 
 			if (Positioning == ObjectPositioning.Relative && GraphStore.IsInput(Object))
-				inputs.Add(new VariableDefinition { Name = Object.RootName, Definition = ValueDefinition.Create<GameObject>() });
+				inputs.Add(new VariableDefinition(Object.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
 		public override void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			if (GraphStore.IsOutput(ObjectVariable))
-				outputs.Add(new VariableDefinition { Name = ObjectVariable.RootName, Definition = ValueDefinition.Create<GameObject>() });
+				outputs.Add(new VariableDefinition(ObjectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
 		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
@@ -102,7 +102,7 @@ namespace PiRhoSoft.Composition
 						spawned.name = objectName;
 
 					if (ObjectVariable.IsAssigned)
-						Assign(variables, ObjectVariable, VariableValue.Create(spawned));
+						Assign(variables, ObjectVariable, Variable.Object(spawned));
 				}
 			}
 

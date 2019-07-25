@@ -66,27 +66,27 @@ namespace PiRhoSoft.Composition.Editor
 				}
 				else
 				{
-					if (variable.HasStore)
-					{
-						var view = new IconButton(Icon.View.Texture, "View the contents of the store", () =>
-						{
-							using (var evt = WatchWindow.WatchEvent.GetPooled(_variables, name))
-							{
-								evt.target = container;
-								container.SendEvent(evt);
-							}
-						});
-
-						container.Add(view);
-					}
-
-					var control = new VariableValueControl(_variables.GetVariable(name), ValueDefinition.Empty);
-					control.RegisterCallback<ChangeEvent<VariableValue>>(evt =>
-					{
-						_variables.SetVariable(name, evt.newValue);
-					});
-
-					container.Add(control);
+					//if (variable.HasStore)
+					//{
+					//	var view = new IconButton(Icon.View.Texture, "View the contents of the store", () =>
+					//	{
+					//		using (var evt = WatchWindow.WatchEvent.GetPooled(_variables, name))
+					//		{
+					//			evt.target = container;
+					//			container.SendEvent(evt);
+					//		}
+					//	});
+					//
+					//	container.Add(view);
+					//}
+					//
+					//var control = new VariableValueControl(_variables.GetVariable(name), ValueDefinition.Empty);
+					//control.RegisterCallback<ChangeEvent<VariableValue>>(evt =>
+					//{
+					//	_variables.SetVariable(name, evt.newValue);
+					//});
+					//
+					//container.Add(control);
 				}
 
 				return container;

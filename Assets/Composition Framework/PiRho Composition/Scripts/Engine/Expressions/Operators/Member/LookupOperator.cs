@@ -4,7 +4,7 @@ namespace PiRhoSoft.Composition
 {
 	internal interface ILookupOperation
 	{
-		VariableValue GetValue(IVariableStore variables, VariableValue owner);
+		Variable GetValue(IVariableStore variables, Variable owner);
 	}
 
 	internal class LookupOperator : MemberOperator, ILookupOperation, IAssignableOperation
@@ -31,7 +31,7 @@ namespace PiRhoSoft.Composition
 			parser.SkipToken(ExpressionTokenType.EndLookup, ExpressionLexer.LookupCloseSymbol.ToString());
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);
@@ -44,7 +44,7 @@ namespace PiRhoSoft.Composition
 			return value;
 		}
 
-		public VariableValue GetValue(IVariableStore variables, VariableValue owner)
+		public Variable GetValue(IVariableStore variables, Variable owner)
 		{
 			var left = _leftLookup.GetValue(variables, owner);
 
@@ -57,14 +57,14 @@ namespace PiRhoSoft.Composition
 			return left;
 		}
 
-		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
+		public SetVariableResult SetValue(IVariableStore variables, Variable value)
 		{
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);
 
 			var result = VariableHandler.Apply(ref left, right, value);
 
-			if (result == SetVariableResult.Success && !left.HasReference)
+			if (result == SetVariableResult.Success && left.IsValueType)
 			{
 				if (Left is IAssignableOperation assignable)
 					return assignable.SetValue(variables, value);

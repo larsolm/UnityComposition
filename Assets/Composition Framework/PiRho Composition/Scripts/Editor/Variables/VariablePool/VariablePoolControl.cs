@@ -75,19 +75,19 @@ namespace PiRhoSoft.Composition.Editor
 						label.SetValueWithoutNotify(evt.previousValue);
 				});
 
-				var valueControl = new VariableValueControl(value, definition);
-				valueControl.RegisterCallback<ChangeEvent<VariableValue>>(evt => Variables.SetVariable(index, evt.newValue));
-
-				var definitionControl = new ValueDefinitionControl(definition, VariableInitializerType.None, null, false);
-				definitionControl.RegisterCallback<ChangeEvent<ValueDefinition>>(evt =>
-				{
-					Variables.ChangeDefinition(index, evt.newValue);
-					valueControl.SetDefinition(evt.newValue, Variables.Variables[index]);
-				});
+				//var valueControl = new VariableValueControl(value, definition);
+				//valueControl.RegisterCallback<ChangeEvent<VariableValue>>(evt => Variables.SetVariable(index, evt.newValue));
+				//
+				//var definitionControl = new ValueDefinitionControl(definition, VariableInitializerType.None, null, false);
+				//definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt =>
+				//{
+				//	Variables.ChangeDefinition(index, evt.newValue);
+				//	valueControl.SetDefinition(evt.newValue, Variables.Variables[index]);
+				//});
 
 				rollout.Header.Add(label);
-				rollout.Header.Add(valueControl);
-				rollout.Content.Add(definitionControl);
+				//rollout.Header.Add(valueControl);
+				//rollout.Content.Add(definitionControl);
 
 				return rollout;
 			}
@@ -104,7 +104,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			public void AddItem(string key)
 			{
-				Variables.AddVariable(key, VariableValue.Empty);
+				//Variables.AddVariable(key, VariableValue.Empty);
 			}
 
 			public void RemoveItem(int index)

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
-using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
@@ -9,19 +8,23 @@ namespace PiRhoSoft.Composition
 	{
 		public const string EmptyText = "(empty)";
 
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Empty;
-		protected internal override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(EmptyText);
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects) { }
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version) => VariableValue.Empty;
-
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			if (right.IsEmpty)
-				return true;
-			else if (right.HasReference)
-				return right.IsNull;
-			else
-				return null;
+			builder.Append(EmptyText);
+		}
+
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		{
+		}
+
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		{
+			return Variable.Empty;
+		}
+
+		protected internal override bool? IsEqual_(Variable left, Variable right)
+		{
+			return right.IsEmpty || right.IsNullObject || right.IsNullOther;
 		}
 	}
 }

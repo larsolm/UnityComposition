@@ -18,21 +18,21 @@
 				throw new ExpressionParseException(token, _invalidRightException, Symbol, Right);
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
-			var left = (Left as ILookupOperation).GetValue(variables, VariableValue.Create(variables));
+			var left = (Left as ILookupOperation).GetValue(variables, Variable.Store(variables));
 
 			if (Right is IdentifierOperation identifier)
 			{
 				var result = VariableHandler.Test(left, identifier.Name);
-				return VariableValue.Create(result);
+				return Variable.Bool(result);
 			}
 			else if (Right is TypeOperation type)
 			{
-				return VariableValue.Create(left.Type == type.Type);
+				return Variable.Bool(left.Type == type.Type);
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 	}
 }

@@ -1,7 +1,8 @@
-﻿using System;
+﻿using PiRhoSoft.Utilities;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
@@ -11,16 +12,31 @@ namespace PiRhoSoft.Composition
 		void ResetVariables(IList<string> variables);
 	}
 
+	public struct NamedVariable
+	{
+		public string Name { get; private set; }
+		public Variable Variable { get; private set; }
+
+		public static NamedVariable Empty => Create(string.Empty, Variable.Empty);
+
+		public static NamedVariable Create(string name, Variable value)
+		{
+			return new NamedVariable
+			{
+				Name = name,
+				Variable = value
+			};
+		}
+	}
 	[Serializable]
-	public class VariableSet : IMappedVariableList, IVariableReset, ISerializationCallbackReceiver
+	public class VariableSet : IMappedVariableList, IVariableReset, ISerializableData, ISerializationCallbackReceiver
 	{
 		[NonSerialized] private VariableSchema _schema;
 		[NonSerialized] private IVariableStore _owner;
-		[NonSerialized] private List<Variable> _variables = new List<Variable>();
+		[NonSerialized] private List<NamedVariable> _variables = new List<NamedVariable>();
 
-		[SerializeField] private int _version = 0;
-		[SerializeField] private List<string> _variablesData;
-		[SerializeField] private List<Object> _variablesObjects;
+		[SerializeField] private int _schemaVersion = 1;
+		[SerializeField] private SerializedData _variablesData = new SerializedData();
 
 		public VariableSchema Schema => _schema;
 		public IVariableStore Owner => _owner;
@@ -29,39 +45,39 @@ namespace PiRhoSoft.Composition
 
 		public void LoadFrom(VariableSet variables, string tag)
 		{
-			foreach (Variable fromVariable in variables._variables)
+			foreach (NamedVariable fromVariable in variables._variables)
 			{
 				var index = _schema != null ? _schema.GetIndex(fromVariable.Name) : -1;
 
 				if (index >= 0)
 				{
-					if (tag == null || _schema[index].Definition.Tag == tag)
-						SetValue(index, fromVariable.Value);
+					if (tag == null || _schema[index].Tag == tag)
+						SetValue(index, fromVariable.Variable);
 				}
 			}
 		}
 
 		public void SaveTo(VariableSet variables, string tag)
 		{
-			foreach (Variable fromVariable in _variables)
+			foreach (NamedVariable fromVariable in _variables)
 			{
 				var index = _schema != null ? _schema.GetIndex(fromVariable.Name) : -1;
 
 				if (index >= 0)
 				{
-					if (tag == null || _schema[index].Definition.Tag == tag)
+					if (tag == null || _schema[index].Tag == tag)
 						variables._variables.Add(fromVariable);
 				}
 			}
 
-			variables._version = _version;
+			variables._schemaVersion = _schemaVersion;
 		}
 
 		#endregion
 
 		#region Schema Management
 
-		public bool NeedsUpdate => _schema != null && _version != _schema.Version;
+		public bool NeedsUpdate => _schema != null && _schemaVersion != _schema.Version;
 
 		public void Setup(VariableSchema schema, IVariableStore owner)
 		{
@@ -73,34 +89,34 @@ namespace PiRhoSoft.Composition
 
 		public void Update()
 		{
-			if (_schema != null && _version != _schema.Version)
+			if (_schema != null && _schemaVersion != _schema.Version)
 			{
-				var variables = new List<Variable>(_schema.Count);
+				var variables = new List<NamedVariable>(_schema.Count);
 
 				for (var i = 0; i < _schema.Count; i++)
 				{
-					var definition = _schema[i];
+					var definition = _schema[i].Definition;
 					var variable = GetVariable(definition.Name);
 
-					if (variable.Value.Type == definition.Definition.Type)
+					if (variable.Variable.Type == definition.Type)
 						variables.Add(variable);
 					else
-						variables.Add(Variable.Create(definition.Name, VariableValue.Empty));
+						variables.Add(NamedVariable.Create(definition.Name, Variable.Empty));
 				}
 
 				_variables = variables;
-				_version = _schema.Version;
+				_schemaVersion = _schema.Version;
 
 				for (var i = 0; i < _schema.Count; i++)
 				{
 					// The list must be updated completely first before any initializers are run in case the schema has
 					// any initializers that reference other variables on the same list.
 
-					if (_variables[i].Value.Type == VariableType.Empty)
+					if (_variables[i].Variable.Type == VariableType.Empty)
 					{
-						var definition = _schema[i];
-						var value = definition.Definition.Generate(_owner);
-						_variables[i] = Variable.Create(definition.Name, value);
+						var definition = _schema[i].Definition;
+						var value = Schema[i].GenerateValue(_owner);
+						_variables[i] = NamedVariable.Create(definition.Name, value);
 					}
 				}
 			}
@@ -110,21 +126,21 @@ namespace PiRhoSoft.Composition
 		{
 			if (_schema != null)
 			{
-				var definition = _schema[index];
-				var value = definition.Definition.Generate(_owner);
-				_variables[index] = Variable.Create(definition.Name, value);
+				var definition = _schema[index].Definition;
+				var value = _schema[index].GenerateValue(_owner);
+				_variables[index] = NamedVariable.Create(definition.Name, value);
 			}
 		}
 
 		public void Clear()
 		{
 			_variables.Clear();
-			_version = 0;
+			_schemaVersion = 0;
 			_schema = null;
 			_owner = null;
 		}
 
-		private Variable GetVariable(string name)
+		private NamedVariable GetVariable(string name)
 		{
 			for (var i = 0; i < _variables.Count; i++)
 			{
@@ -132,12 +148,12 @@ namespace PiRhoSoft.Composition
 					return _variables[i];
 			}
 
-			return Variable.Create(name, VariableValue.Empty);
+			return NamedVariable.Create(name, Variable.Empty);
 		}
 
-		private bool SetValue(int index, VariableValue value)
+		private bool SetValue(int index, Variable value)
 		{
-			var existing = _variables[index].Value;
+			var existing = _variables[index].Variable;
 
 			if (_schema != null)
 			{
@@ -146,11 +162,11 @@ namespace PiRhoSoft.Composition
 				if (definition.Type != VariableType.Empty && definition.Type != value.Type)
 					return false;
 
-				if (definition.Constraint != null && !definition.Constraint.IsValid(value))
+				if (definition != null && !definition.IsValid(value))
 					return false;
 			}
 
-			_variables[index] = Variable.Create(_variables[index].Name, value);
+			_variables[index] = NamedVariable.Create(_variables[index].Name, value);
 			return true;
 		}
 
@@ -168,12 +184,12 @@ namespace PiRhoSoft.Composition
 			return index >= 0 && index < _variables.Count ? _variables[index].Name : null;
 		}
 
-		public VariableValue GetVariableValue(int index)
+		public Variable GetVariableValue(int index)
 		{
-			return index >= 0 && index < _variables.Count ? _variables[index].Value : VariableValue.Empty;
+			return index >= 0 && index < _variables.Count ? _variables[index].Variable : Variable.Empty;
 		}
 
-		public SetVariableResult SetVariableValue(int index, VariableValue value)
+		public SetVariableResult SetVariableValue(int index, Variable value)
 		{
 			if (index >= 0 && index < _variables.Count)
 				return SetValue(index, value) ? SetVariableResult.Success : SetVariableResult.TypeMismatch;
@@ -191,7 +207,7 @@ namespace PiRhoSoft.Composition
 			{
 				for (var i = 0; i < _schema.Count; i++)
 				{
-					if (_schema[i].Definition.Tag == tag)
+					if (_schema[i].Tag == tag)
 						Reset(i);
 				}
 			}
@@ -203,7 +219,7 @@ namespace PiRhoSoft.Composition
 			{
 				for (var i = 0; i < _schema.Count; i++)
 				{
-					if (variables.Contains(_schema[i].Name))
+					if (variables.Contains(_schema[i].Definition.Name))
 						Reset(i);
 				}
 			}
@@ -215,12 +231,39 @@ namespace PiRhoSoft.Composition
 
 		public void OnBeforeSerialize()
 		{
-			_variablesData = VariableHandler.SaveVariables(_variables, ref _variablesObjects);
+			_variablesData.SaveInstance(this, 1);
 		}
 
 		public void OnAfterDeserialize()
 		{
-			_variables = VariableHandler.LoadVariables(ref _variablesData, ref _variablesObjects);
+			_variablesData.LoadInstance(this);
+		}
+
+		public void Save(BinaryWriter writer, SerializedData data)
+		{
+			writer.Write(_variables.Count);
+
+			for (var i = 0; i < _variables.Count; i++)
+			{
+				writer.Write(_variables[i].Name);
+				VariableHandler.Save(_variables[i].Variable, writer, data);
+			}
+		}
+
+		public void Load(BinaryReader reader, SerializedData data)
+		{
+			var count = reader.ReadInt32();
+
+			_variables.Clear();
+			_variables.Capacity = count;
+
+			for (var i = 0; i < count; i++)
+			{
+				var name = reader.ReadString();
+				var value = VariableHandler.Load(reader, data);
+
+				_variables.Add(NamedVariable.Create(name, value));
+			}
 		}
 
 		#endregion

@@ -7,6 +7,7 @@ namespace PiRhoSoft.Utilities
 	// This class is nothing more than a direct wrapper of the built in Array class from the .net framework. Its purpose
 	// is to provide a base class for array types to derive from that can then be targeted by an ArrayDisplay.
 
+	[Serializable]
 	public class SerializedArray<T> : ICloneable, IList, IStructuralComparable, IStructuralEquatable, ICollection, IEnumerable
 	{
 		[SerializeField] protected T[] _items; // this is protected so it can be found by the editor

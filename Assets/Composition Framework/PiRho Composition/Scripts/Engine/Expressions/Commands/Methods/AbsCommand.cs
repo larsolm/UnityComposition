@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class AbsCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 1)
 			{
@@ -13,8 +13,8 @@ namespace PiRhoSoft.Composition
 
 				switch (result.Type)
 				{
-					case VariableType.Int: return VariableValue.Create(Math.Abs(result.Int));
-					case VariableType.Float: return VariableValue.Create(Math.Abs(result.Float));
+					case VariableType.Int: return Variable.Int(Math.Abs(result.AsInt));
+					case VariableType.Float: return Variable.Float(Math.Abs(result.AsFloat));
 				}
 
 				throw CommandEvaluationException.WrongParameterType(name, 0, result.Type, VariableType.Int, VariableType.Float);

@@ -94,11 +94,11 @@ namespace PiRhoSoft.Composition.Editor
 
 				var referenceControl = new VariableReferenceControl(input.Reference, null); // TODO: Add an autocompletesource
 
-				var valueControl = new VariableValueControl(input.Value, Caller.GetInputDefinition(input).Definition);
-				valueControl.RegisterCallback<ChangeEvent<VariableValue>>(evt =>
-				{
-					input.Value = evt.newValue;
-				});
+				//var valueControl = new VariableValueControl(input.Value, Caller.GetInputDefinition(input).Definition);
+				//valueControl.RegisterCallback<ChangeEvent<VariableValue>>(evt =>
+				//{
+				//	input.Value = evt.newValue;
+				//});
 
 				var typeField = new EnumField(input.Type);
 				typeField.RegisterValueChangedCallback(evt => 
@@ -116,7 +116,7 @@ namespace PiRhoSoft.Composition.Editor
 				container.Add(label);
 				container.Add(typeField);
 				container.Add(referenceControl);
-				container.Add(valueControl);
+				//container.Add(valueControl);
 
 				return container;
 			}

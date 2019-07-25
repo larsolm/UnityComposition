@@ -81,11 +81,11 @@ namespace PiRhoSoft.MonsterRpg
 
 		#region IVariableList Implementation
 
-		public VariableValue GetVariable(int index) => index >= 0 && index < Creatures.Count ? VariableValue.CreateReference(Creatures[index]) : VariableValue.Empty;
-		public SetVariableResult SetVariable(int index, VariableValue value) => SetVariableResult.ReadOnly;
-		public SetVariableResult AddVariable(VariableValue value)
+		public Variable GetVariable(int index) => index >= 0 && index < Creatures.Count ? Variable.Object(Creatures[index]) : Variable.Empty;
+		public SetVariableResult SetVariable(int index, Variable value) => SetVariableResult.ReadOnly;
+		public SetVariableResult AddVariable(Variable value)
 		{
-			if (value.TryGetReference<Creature>(out var creature))
+			if (value.TryGetObject<Creature>(out var creature))
 			{
 				AddCreature(creature);
 				return SetVariableResult.Success;

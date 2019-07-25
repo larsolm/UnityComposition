@@ -12,7 +12,7 @@ namespace PiRhoSoft.MonsterRpg
 		public GraphNode Next = null;
 
 		[Tooltip("The mover to warp")]
-		[VariableConstraint(typeof(Mover))]
+		[VariableReference(typeof(Mover))]
 		public VariableReference Mover = new VariableReference();
 
 		[Tooltip("The position to warp the mover to")]

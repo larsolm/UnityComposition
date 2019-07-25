@@ -85,7 +85,7 @@ namespace PiRhoSoft.Composition
 
 		#region Access
 
-		public VariableValue Get(object obj)
+		public Variable Get(object obj)
 		{
 			try
 			{
@@ -94,23 +94,23 @@ namespace PiRhoSoft.Composition
 					: _property.GetValue(obj);
 
 				if (value is IList list)
-					return VariableValue.Create(ListAdapter.Create(list));
+					return Variable.List(ListAdapter.Create(list));
 				else
-					return VariableValue.CreateAny(value);
+					return Variable.Unbox(value);
 			}
 			catch
 			{
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		public SetVariableResult Set(object obj, VariableValue value)
+		public SetVariableResult Set(object obj, Variable value)
 		{
 			if (!_isWritable)
 				return SetVariableResult.ReadOnly;
 
-			var boxed = value.GetBoxedValue();
+			var boxed = value.Box();
 
 			try
 			{

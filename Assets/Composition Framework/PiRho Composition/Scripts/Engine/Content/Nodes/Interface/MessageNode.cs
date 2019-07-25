@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The MessageControl to show")]
-		[VariableConstraint(typeof(MessageControl))]
+		[VariableReference(typeof(MessageControl))]
 		public VariableReference Control = new VariableReference();
 
 		[Tooltip("Specifies whether to wait for the message to complete before moving on to Next")]

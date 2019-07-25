@@ -92,7 +92,7 @@ namespace PiRhoSoft.Composition
 
 	public interface ICommand
 	{
-		VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters);
+		Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters);
 	}
 
 	[HelpURL(Composition.DocumentationUrl + "command")]
@@ -150,7 +150,7 @@ namespace PiRhoSoft.Composition
 				ExpressionParser.RemoveCommand(_registeredName);
 		}
 
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			var store = ReserveStore();
 
@@ -168,8 +168,8 @@ namespace PiRhoSoft.Composition
 				store.AddVariable(Parameters[i].Name, value);
 			}
 
-			store.AddVariable(CompositionManager.GlobalStoreName, VariableValue.Create(CompositionManager.Instance.GlobalStore));
-			store.AddVariable(CompositionManager.SceneStoreName, VariableValue.Create(CompositionManager.Instance.SceneStore));
+			store.AddVariable(CompositionManager.GlobalStoreName, Variable.Store(CompositionManager.Instance.GlobalStore));
+			store.AddVariable(CompositionManager.SceneStoreName, Variable.Store(CompositionManager.Instance.SceneStore));
 
 			var result = Expression.Evaluate(store);
 			ReleaseStore(store);

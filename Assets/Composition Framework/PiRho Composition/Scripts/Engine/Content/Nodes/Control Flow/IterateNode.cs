@@ -49,10 +49,10 @@ namespace PiRhoSoft.Composition
 			yield break;
 		}
 
-		private void SetValues(Graph graph, GraphStore variables, int iteration, VariableValue item)
+		private void SetValues(Graph graph, GraphStore variables, int iteration, Variable item)
 		{
 			if (Index.IsAssigned)
-				Index.SetValue(variables, VariableValue.Create(iteration));
+				Index.SetValue(variables, Variable.Int(iteration));
 
 			if (Value.IsAssigned)
 				Value.SetValue(variables, item);

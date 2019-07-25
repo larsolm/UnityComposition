@@ -16,13 +16,13 @@ namespace PiRhoSoft.Composition
 			Symbol = parser.GetText(token);
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 
-			if (left.HasList)
+			if (left.IsList)
 			{
-				var result = left.List.AddVariable(VariableValue.Empty);
+				var result = left.AsList.AddVariable(Variable.Empty);
 
 				if (result != SetVariableResult.Success)
 				{
@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition
 			}
 			else
 			{
-				var value = VariableHandler.Add(left, VariableValue.Create(1));
+				var value = VariableHandler.Add(left, Variable.Int(1));
 
 				if (value.IsEmpty)
 					throw TypeMismatch(left.Type, VariableType.Int);

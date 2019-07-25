@@ -22,10 +22,10 @@ namespace PiRhoSoft.Composition
 		{
 			var condition = Condition.Execute(this, variables, VariableType.Bool);
 
-			if (condition.Bool && Loop != null)
+			if (condition.AsBool && Loop != null)
 			{
 				if (Index.IsAssigned)
-					Index.SetValue(variables, VariableValue.Create(iteration));
+					Index.SetValue(variables, Variable.Int(iteration));
 
 				graph.GoTo(Loop, nameof(Loop));
 			}

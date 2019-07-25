@@ -44,7 +44,7 @@ namespace PiRhoSoft.Composition
 		private void TextChanged(string text)
 		{
 			if (_variables != null)
-				Assign(_variables, Variable, VariableValue.Create(Text.textComponent.text));
+				Assign(_variables, Variable, PiRhoSoft.Composition.Variable.String(Text.textComponent.text));
 		}
 	}
 }

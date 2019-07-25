@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	[CustomPropertyDrawer(typeof(ValueDefinition))]
+	[CustomPropertyDrawer(typeof(VariableDefinition))]
 	public class ValueDefinitionDrawer : PropertyDrawer
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)

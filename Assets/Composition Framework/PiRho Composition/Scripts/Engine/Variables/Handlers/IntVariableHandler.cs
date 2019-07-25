@@ -1,114 +1,106 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
+using System;
 using System.IO;
 using System.Text;
-using Object = UnityEngine.Object;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class IntVariableHandler : VariableHandler
 	{
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			if (constraint is IntVariableConstraint intConstraint)
-				return VariableValue.Create(intConstraint.Minimum);
-			else
-				return VariableValue.Create(0);
+			builder.Append(variable.AsInt);
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.Int);
+			writer.Write(variable.AsInt);
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			writer.Write(value.Int);
-		}
-
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var i = reader.ReadInt32();
-			return VariableValue.Create(i);
+			return Variable.Int(i);
 		}
 
-		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
+		protected internal override Variable Add_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i))
-				return VariableValue.Create(left.Int + i);
+				return Variable.Int(left.AsInt + i);
 			else if (right.TryGetFloat(out var f))
-				return VariableValue.Create(left.Int + f);
+				return Variable.Float(left.AsInt + f);
 			else if (right.Type == VariableType.String)
-				return VariableValue.Create(left.Int + right.String);
+				return Variable.String(left.AsInt + right.AsString);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Subtract_(VariableValue left, VariableValue right)
+		protected internal override Variable Subtract_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i))
-				return VariableValue.Create(left.Int - i);
+				return Variable.Int(left.AsInt - i);
 			else if (right.TryGetFloat(out var f))
-				return VariableValue.Create(left.Int - f);
+				return Variable.Float(left.AsInt - f);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Multiply_(VariableValue left, VariableValue right)
+		protected internal override Variable Multiply_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i))
-				return VariableValue.Create(left.Int * i);
+				return Variable.Int(left.AsInt * i);
 			else if (right.TryGetFloat(out var f))
-				return VariableValue.Create(left.Int * f);
+				return Variable.Float(left.AsInt * f);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Divide_(VariableValue left, VariableValue right)
+		protected internal override Variable Divide_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i) && i != 0)
-				return VariableValue.Create(left.Int / i);
+				return Variable.Int(left.AsInt / i);
 			else if (right.TryGetFloat(out var f))
-				return VariableValue.Create(left.Int / f);
+				return Variable.Float(left.AsInt / f);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Modulo_(VariableValue left, VariableValue right)
+		protected internal override Variable Modulo_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i) && i != 0)
-				return VariableValue.Create(left.Int % i);
+				return Variable.Int(left.AsInt % i);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Exponent_(VariableValue left, VariableValue right)
+		protected internal override Variable Exponent_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i))
-				return VariableValue.Create((float)Math.Pow(left.Int, i));
+				return Variable.Int((int)Math.Pow(left.AsInt, i));
 			else if (right.TryGetFloat(out var f))
-				return VariableValue.Create((float)Math.Pow(left.Int, f));
+				return Variable.Float(Mathf.Pow(left.AsInt, f));
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Negate_(VariableValue value)
+		protected internal override Variable Negate_(Variable value)
 		{
-			return VariableValue.Create(-value.Int);
+			return Variable.Int(-value.AsInt);
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i))
-				return left.Int == i;
+				return left.AsInt == i;
 			else
 				return null;
 		}
 
-		protected internal override int? Compare_(VariableValue left, VariableValue right)
+		protected internal override int? Compare_(Variable left, Variable right)
 		{
 			if (right.TryGetInt(out var i))
-				return left.Int.CompareTo(i);
+				return left.AsInt.CompareTo(i);
 			else
 				return null;
 		}

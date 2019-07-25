@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Animator to set the parameter on")]
-		[VariableConstraint(typeof(Animator))]
+		[VariableReference(typeof(Animator))]
 		public VariableReference Animator;
 
 		[Tooltip("The name of the parameter to set")]
@@ -44,7 +44,7 @@ namespace PiRhoSoft.Composition
 		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			if (GraphStore.IsInput(Animator))
-				inputs.Add(new VariableDefinition { Name = Animator.RootName, Definition = ValueDefinition.Create<Animator>() });
+				inputs.Add(new VariableDefinition(Animator.RootName, new ObjectConstraint(typeof(Animator))));
 
 			Parameter.GetInputs(inputs);
 

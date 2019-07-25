@@ -1,9 +1,0 @@
-﻿.pirho-trait-button
-{
-	flex-direction: column;
-}
-
-.pirho-trait-button > Button
-{
-	margin-bottom: 2px;
-}

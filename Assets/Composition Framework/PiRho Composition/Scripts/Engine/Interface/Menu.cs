@@ -158,23 +158,23 @@ namespace PiRhoSoft.Composition
 			return _variableNames;
 		}
 
-		public VariableValue GetVariable(string name)
+		public Variable GetVariable(string name)
 		{
 			switch (name)
 			{
-				case nameof(FocusedItem): return VariableValue.Create((Object)FocusedItem);
-				case nameof(FocusedIndex): return VariableValue.Create(FocusedIndex);
-				default: return VariableValue.Empty;
+				case nameof(FocusedItem): return Variable.Object((Object)FocusedItem);
+				case nameof(FocusedIndex): return Variable.Int(FocusedIndex);
+				default: return Variable.Empty;
 			}
 		}
 
-		public SetVariableResult SetVariable(string name, VariableValue value)
+		public SetVariableResult SetVariable(string name, Variable value)
 		{
 			switch (name)
 			{
 				case nameof(FocusedItem):
 				{
-					if (value.TryGetReference(out MenuItem item))
+					if (value.TryGetObject(out MenuItem item))
 					{
 						FocusedItem = item;
 						return SetVariableResult.Success;

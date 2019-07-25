@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class ColorCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 3)
 			{
@@ -13,16 +13,16 @@ namespace PiRhoSoft.Composition
 				var gValue = parameters[1].Evaluate(variables);
 				var bValue = parameters[2].Evaluate(variables);
 
-				if (!rValue.HasNumber)
+				if (!rValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 0, rValue.Type, VariableType.Float);
 
-				if (!gValue.HasNumber)
+				if (!gValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 1, gValue.Type, VariableType.Float);
 
-				if (!bValue.HasNumber)
+				if (!bValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 2, bValue.Type, VariableType.Float);
 
-				return VariableValue.Create(new Color(rValue.Number, gValue.Number, bValue.Number));
+				return Variable.Color(new Color(rValue.AsFloat, gValue.AsFloat, bValue.AsFloat));
 			}
 			else if (parameters.Count == 4)
 			{
@@ -31,19 +31,19 @@ namespace PiRhoSoft.Composition
 				var bValue = parameters[2].Evaluate(variables);
 				var aValue = parameters[3].Evaluate(variables);
 
-				if (!rValue.HasNumber)
+				if (!rValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 0, rValue.Type, VariableType.Float);
 
-				if (!gValue.HasNumber)
+				if (!gValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 1, bValue.Type, VariableType.Float);
 
-				if (!bValue.HasNumber)
+				if (!bValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 2, gValue.Type, VariableType.Float);
 
-				if (!aValue.HasNumber)
+				if (!aValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 3, aValue.Type, VariableType.Float);
 
-				return VariableValue.Create(new Vector4(rValue.Number, gValue.Number, bValue.Number, aValue.Number));
+				return Variable.Color(new Color(rValue.AsFloat, gValue.AsFloat, bValue.AsFloat, aValue.AsFloat));
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 3, 4);

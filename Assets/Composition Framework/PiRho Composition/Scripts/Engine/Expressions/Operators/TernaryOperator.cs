@@ -27,14 +27,14 @@ namespace PiRhoSoft.Composition
 			_rightAlternative.ToString(builder);
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 			
 			if (left.Type != VariableType.Bool)
 				throw new ExpressionEvaluationException(_invalidTernaryTypeException, Symbol, left.Type, VariableType.Bool);
 
-			if (left.Bool)
+			if (left.AsBool)
 				return Right.Evaluate(variables);
 			else
 				return _rightAlternative.Evaluate(variables);

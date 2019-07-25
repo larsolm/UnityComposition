@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Object to update bindings for")]
-		[VariableConstraint(typeof(Object))]
+		[VariableReference(typeof(Object))]
 		public VariableReference Object = new VariableReference();
 
 		[Tooltip("The binding group to update (updates all if empty)")]

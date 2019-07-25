@@ -1,65 +1,39 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
 	internal class EnumVariableHandler : VariableHandler
 	{
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			if (constraint is EnumVariableConstraint enumConstraint)
-				return VariableValue.Create((Enum)Enum.ToObject(enumConstraint.Type, 0));
-			else
-				return VariableValue.Empty;
+			builder.Append(variable.AsEnum.ToString());
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.ToString());
+			data.SaveEnum(writer, variable.AsEnum);
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
-			// saving as a string is the simplest way of handling enums with non Int32 underlying type
-			// it also allows reordering/adding/removing of enum values without affecting saved data
-
-			writer.Write(value.EnumType.AssemblyQualifiedName);
-			writer.Write(value.Enum.ToString());
+			var e = data.LoadEnum(reader);
+			return Variable.Enum(e);
 		}
 
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
-			var typeName = reader.ReadString();
-			var enumValue = reader.ReadString();
-
-			var type = Type.GetType(typeName);
-
-			try
-			{
-				var result = (Enum)Enum.Parse(type, enumValue);
-				return VariableValue.Create(result);
-			}
-			catch
-			{
-				return VariableValue.Empty;
-			}
-		}
-
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
-		{
-			if (right.HasEnumType(left.EnumType))
-				return left.Enum == right.Enum;
+			if (right.TryGetEnum(left.EnumType, out var e))
+				return left.AsEnum == e;
 			else
 				return null;
 		}
 
-		protected internal override int? Compare_(VariableValue left, VariableValue right)
+		protected internal override int? Compare_(Variable left, Variable right)
 		{
-			if (right.HasEnumType(left.EnumType))
-				return left.Enum.CompareTo(right.Enum);
+			if (right.TryGetEnum(left.EnumType, out var e))
+				return left.AsEnum.CompareTo(e);
 			else
 				return null;
 		}

@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
-using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
@@ -9,53 +8,39 @@ namespace PiRhoSoft.Composition
 	{
 		public const char Symbol = '\"';
 
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			if (constraint is StringVariableConstraint stringConstraint)
-				return VariableValue.Create(stringConstraint.Values.Count > 0 ? stringConstraint.Values[0] : string.Empty);
-			else
-				return VariableValue.Create(string.Empty);
+			builder.Append(variable.AsString);
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.String);
+			writer.Write(variable.AsString);
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			writer.Write(value.String);
-		}
-
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var s = reader.ReadString();
-			return VariableValue.Create(s);
+			return Variable.String(s);
 		}
 
-		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
+		protected internal override Variable Add_(Variable left, Variable right)
 		{
-			switch (right.Type)
-			{
-				case VariableType.Int: return VariableValue.Create(left.String + right.Int);
-				case VariableType.Float: return VariableValue.Create(left.String + right.Float);
-				case VariableType.String: return VariableValue.Create(left.String + right.String);
-				default: return VariableValue.Empty;
-			}
+			return Variable.String(left.AsString + right.ToString());
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
 			if (right.TryGetString(out var str))
-				return left.String == str;
+				return left.AsString == str;
 			else
 				return null;
 		}
 
-		protected internal override int? Compare_(VariableValue left, VariableValue right)
+		protected internal override int? Compare_(Variable left, Variable right)
 		{
-			if (right.Type == VariableType.String)
-				return left.String.CompareTo(right.String);
+			if (right.TryGetString(out var s))
+				return left.AsString.CompareTo(s);
 			else
 				return null;
 		}

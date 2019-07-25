@@ -6,8 +6,8 @@ namespace PiRhoSoft.Composition
 	public interface IClassMap
 	{
 		IList<string> GetVariableNames();
-		VariableValue GetVariable(object obj, string name);
-		SetVariableResult SetVariable(object obj, string name, VariableValue value);
+		Variable GetVariable(object obj, string name);
+		SetVariableResult SetVariable(object obj, string name, Variable value);
 	}
 
 	public static class ClassMap
@@ -34,18 +34,18 @@ namespace PiRhoSoft.Composition
 	public abstract class ClassMap<T> : IClassMap
 	{
 		public abstract IList<string> GetVariableNames();
-		public abstract VariableValue GetVariable(T obj, string name);
-		public abstract SetVariableResult SetVariable(T obj, string name, VariableValue value);
+		public abstract Variable GetVariable(T obj, string name);
+		public abstract SetVariableResult SetVariable(T obj, string name, Variable value);
 
-		public VariableValue GetVariable(object obj, string name)
+		public Variable GetVariable(object obj, string name)
 		{
 			if (obj is T t)
 				return GetVariable(t, name);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		public SetVariableResult SetVariable(object obj, string name, VariableValue value)
+		public SetVariableResult SetVariable(object obj, string name, Variable value)
 		{
 			if (obj is T t)
 				return SetVariable(t, name, value);

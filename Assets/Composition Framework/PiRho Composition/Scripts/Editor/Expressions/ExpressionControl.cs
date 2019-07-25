@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			_text.SetValueWithoutNotify(Value.Statement);
 			_message.SetDisplayed(Value.HasError);
-			_message.Message = Value.CompilationResult.Message;
+			//_message.Message = Value.CompilationResult.Message;
 		}
 	}
 }

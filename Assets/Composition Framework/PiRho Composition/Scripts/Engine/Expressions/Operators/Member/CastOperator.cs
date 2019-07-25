@@ -19,7 +19,7 @@
 				throw new ExpressionParseException(token, _invalidCastException, Symbol, Right);
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 			var value = VariableHandler.Cast(left, _rightIdentifier.Name);
@@ -27,7 +27,7 @@
 			if (value.IsEmpty)
 				throw new ExpressionEvaluationException(_invalidCastException, left, _rightIdentifier.Name);
 
-			if (!value.IsEmpty && !left.HasReference)
+			if (!value.IsEmpty && left.IsValueType)
 			{
 				if (Left is IAssignableOperation assignable)
 				{
@@ -43,9 +43,9 @@
 			return value;
 		}
 
-		public VariableValue GetValue(IVariableStore variables, VariableValue owner)
+		public Variable GetValue(IVariableStore variables, Variable owner)
 		{
-			var left = Left is ILookupOperation lookup ? lookup.GetValue(variables, owner) : VariableValue.Empty;
+			var left = Left is ILookupOperation lookup ? lookup.GetValue(variables, owner) : Variable.Empty;
 			return left.IsEmpty ? left : VariableHandler.Cast(left, _rightIdentifier.Name);
 		}
 	}

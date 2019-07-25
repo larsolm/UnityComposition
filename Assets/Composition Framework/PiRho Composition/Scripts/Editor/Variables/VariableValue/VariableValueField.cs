@@ -11,12 +11,12 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariableValueControl _control;
 
-		public VariableValueField(string label, VariableValue value, ValueDefinition definition) : base(label, null)
+		public VariableValueField(string label, VariableValue value, VariableDefinition definition) : base(label, null)
 		{
 			Setup(value, definition);
 		}
 
-		private void Setup(VariableValue value, ValueDefinition definition)
+		private void Setup(VariableValue value, VariableDefinition definition)
 		{
 			_control = new VariableValueControl(value, definition);
 			_control.AddToClassList(InputUssClassName);

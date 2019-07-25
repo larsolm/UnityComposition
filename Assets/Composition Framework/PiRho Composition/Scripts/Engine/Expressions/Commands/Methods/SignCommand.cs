@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class SignCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 1)
 			{
@@ -13,8 +13,8 @@ namespace PiRhoSoft.Composition
 
 				switch (result.Type)
 				{
-					case VariableType.Int: return VariableValue.Create(result.Int < 0 ? -1 : 1);
-					case VariableType.Float: return VariableValue.Create(Mathf.Sign(result.Float));
+					case VariableType.Int: return Variable.Int(result.AsInt < 0 ? -1 : 1);
+					case VariableType.Float: return Variable.Float(Mathf.Sign(result.AsFloat));
 				}
 
 				throw CommandEvaluationException.WrongParameterType(name, 0, result.Type, VariableType.Int, VariableType.Float);

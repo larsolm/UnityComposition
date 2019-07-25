@@ -9,9 +9,9 @@ namespace PiRhoSoft.Composition.Editor
 	public class VariableValueControl : VisualElement
 	{
 		public VariableValue Value { get; private set; }
-		public ValueDefinition Definition { get; private set; }
+		public VariableDefinition Definition { get; private set; }
 
-		public VariableValueControl(VariableValue value, ValueDefinition definition)
+		public VariableValueControl(VariableValue value, VariableDefinition definition)
 		{
 			Value = value;
 			Definition = definition;
@@ -32,7 +32,7 @@ namespace PiRhoSoft.Composition.Editor
 			this.SendChangeEvent(previous, Value);
 		}
 
-		public void SetDefinition(ValueDefinition definition, VariableValue value)
+		public void SetDefinition(VariableDefinition definition, VariableValue value)
 		{
 			Definition = definition;
 			SetValueWithoutNotify(value);
@@ -41,255 +41,255 @@ namespace PiRhoSoft.Composition.Editor
 		private void Refresh()
 		{
 			Clear();
-			Add(CreateElement());
+			//Add(CreateElement());
 		}
 
-		private void RegisterChange<T>(BaseField<T> field)
-		{
-			field.RegisterValueChangedCallback(evt =>
-			{
-				var value = VariableValue.CreateValue(evt.newValue);
-				SetValue(value);
-			});
-		}
-
-		private VisualElement CreateElement()
-		{
-			switch (Value.Type)
-			{
-				case VariableType.Empty: return CreateEmpty();
-				case VariableType.Bool: return CreateBool();
-				case VariableType.Int: return CreateInt();
-				case VariableType.Float: return CreateFloat();
-				case VariableType.Int2: return CreateInt2();
-				case VariableType.Int3: return CreateInt3();
-				case VariableType.IntRect: return CreateIntRect();
-				case VariableType.IntBounds: return CreateIntBounds();
-				case VariableType.Vector2: return CreateVector2();
-				case VariableType.Vector3: return CreateVector3();
-				case VariableType.Vector4: return CreateVector4();
-				case VariableType.Quaternion: return CreateQuaternion();
-				case VariableType.Rect: return CreateRect();
-				case VariableType.Bounds: return CreateBounds();
-				case VariableType.Color: return CreateColor();
-				case VariableType.String: return CreateString();
-				case VariableType.Enum: return CreateEnum();
-				case VariableType.Object: return CreateObject();
-				case VariableType.Store: return CreateStore();
-				case VariableType.List: return CreateList();
-				default: return null;
-			}
-		}
-
-		private VisualElement CreateEmpty()
-		{
-			var dropdown = new EnumField(VariableType.Empty);
-			dropdown.RegisterValueChangedCallback(evt =>
-			{
-				var type = (VariableType)evt.newValue;
-				var constraint = VariableConstraint.Create(type);
-				var value = VariableHandler.CreateDefault(type, constraint);
-
-				Definition = ValueDefinition.Create(type, constraint, null, null, false, false);
-				SetValue(value);
-			});
-
-			return dropdown;
-		}
-
-		public VisualElement CreateBool()
-		{
-			var toggle = new Toggle() { value = Value.Bool };
-			toggle.RegisterValueChangedCallback(evt =>
-			{
-				var value = VariableValue.Create(evt.newValue);
-				SetValue(value);
-			});
-
-			return toggle;
-		}
-
-		public VisualElement CreateInt()
-		{
-			var container = new VisualElement();
-			container.style.flexDirection = FlexDirection.Row;
-
-			if (Definition.Constraint is IntVariableConstraint constraint)
-			{
-				var field = new IntegerField() { value = Value.Int, isDelayed = true };
-				field.RegisterValueChangedCallback(evt =>
-				{
-					var clamped = constraint.HasRange ? Mathf.Clamp(evt.newValue, constraint.Minimum, constraint.Maximum) : evt.newValue;
-					var value = VariableValue.Create(clamped);
-
-					SetValue(value);
-				});
-
-				container.Add(field);
-
-				if (constraint.HasRange)
-				{
-					var slider = new SliderInt(constraint.Minimum, constraint.Maximum) { value = Value.Int };
-					slider.RegisterValueChangedCallback(evt =>
-					{
-						var value = VariableValue.Create(evt.newValue);
-						SetValue(value);
-					});
-
-					container.Add(slider);
-				}
-			}
-
-			return container;
-		}
-
-		private VisualElement CreateFloat()
-		{
-			var container = new VisualElement();
-			container.style.flexDirection = FlexDirection.Row;
-
-			if (Definition.Constraint is FloatVariableConstraint constraint)
-			{
-				var field = new FloatField() { value = Value.Float, isDelayed = true };
-				field.RegisterValueChangedCallback(evt =>
-				{
-					var clamped = constraint.HasRange ? Mathf.Clamp(evt.newValue, constraint.Minimum, constraint.Maximum) : evt.newValue;
-					var value = VariableValue.Create(clamped);
-
-					SetValue(value);
-				});
-
-				container.Add(field);
-
-				if (constraint.HasRange)
-				{
-					var slider = new Slider(constraint.Minimum, constraint.Maximum) { value = Value.Float };
-					RegisterChange(slider);
-					container.Add(slider);
-				}
-			}
-
-			return container;
-		}
-
-		private VisualElement CreateInt2()
-		{
-			var field = new Vector2IntField() { value = Value.Int2 };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateInt3()
-		{
-			var field = new Vector3IntField() { value = Value.Int3 };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateIntRect()
-		{
-			var field = new RectIntField() { value = Value.IntRect };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateIntBounds()
-		{
-			var field = new BoundsIntField() { value = Value.IntBounds };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateVector2()
-		{
-			var field = new Vector2Field() { value = Value.Vector2 };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateVector3()
-		{
-			var field = new Vector3Field() { value = Value.Vector3 };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateVector4()
-		{
-			var field = new Vector4Field() { value = Value.Vector4 };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateQuaternion()
-		{
-			var field = new EulerControl(Value.Quaternion);
-			field.RegisterCallback<ChangeEvent<Quaternion>>(evt =>
-			{
-				var value = VariableValue.Create(evt.newValue);
-				SetValue(value);
-			});
-
-			return field;
-		}
-
-		private VisualElement CreateRect()
-		{
-			var field = new RectField() { value = Value.Rect };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateBounds()
-		{
-			var field = new BoundsField() { value = Value.Bounds };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateColor()
-		{
-			var field = new ColorField() { value = Value.Color };
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateString()
-		{
-			if (Definition.Constraint is StringVariableConstraint constraint && constraint.Values.Count > 0)
-			{
-				var popup = new PopupField<string>(constraint.Values, Value.String);
-				RegisterChange(popup);
-				return popup;
-			}
-			else
-			{
-				var field = new TextField() { value = Value.String, isDelayed = true };
-				RegisterChange(field);
-				return field;
-			}
-		}
-
-		private VisualElement CreateEnum()
-		{
-			var field = new EnumField(Value.Enum);
-			RegisterChange(field);
-			return field;
-		}
-
-		private VisualElement CreateObject()
-		{
-			var objectType = (Definition.Constraint as ObjectVariableConstraint)?.Type ?? Value.ReferenceType ?? typeof(Object);
-
-			var picker = new ObjectPickerControl(Value.Object, objectType);
-			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
-			{
-				var value = VariableValue.Create(evt.newValue);
-				SetValue(value);
-			});
-
-			return picker;
-		}
+		//private void RegisterChange<T>(BaseField<T> field)
+		//{
+		//	field.RegisterValueChangedCallback(evt =>
+		//	{
+		//		var value = VariableValue.CreateValue(evt.newValue);
+		//		SetValue(value);
+		//	});
+		//}
+		//
+		//private VisualElement CreateElement()
+		//{
+		//	switch (Value.Type)
+		//	{
+		//		case VariableType.Empty: return CreateEmpty();
+		//		case VariableType.Bool: return CreateBool();
+		//		case VariableType.Int: return CreateInt();
+		//		case VariableType.Float: return CreateFloat();
+		//		case VariableType.Vector2Int: return CreateInt2();
+		//		case VariableType.Vector3Int: return CreateInt3();
+		//		case VariableType.RectInt: return CreateIntRect();
+		//		case VariableType.BoundsInt: return CreateIntBounds();
+		//		case VariableType.Vector2: return CreateVector2();
+		//		case VariableType.Vector3: return CreateVector3();
+		//		case VariableType.Vector4: return CreateVector4();
+		//		case VariableType.Quaternion: return CreateQuaternion();
+		//		case VariableType.Rect: return CreateRect();
+		//		case VariableType.Bounds: return CreateBounds();
+		//		case VariableType.Color: return CreateColor();
+		//		case VariableType.String: return CreateString();
+		//		case VariableType.Enum: return CreateEnum();
+		//		case VariableType.Object: return CreateObject();
+		//		case VariableType.Store: return CreateStore();
+		//		case VariableType.List: return CreateList();
+		//		default: return null;
+		//	}
+		//}
+		//
+		//private VisualElement CreateEmpty()
+		//{
+		//	var dropdown = new EnumField(VariableType.Empty);
+		//	dropdown.RegisterValueChangedCallback(evt =>
+		//	{
+		//		var type = (VariableType)evt.newValue;
+		//		var constraint = VariableConstraint.Create(type);
+		//		var value = VariableHandler.CreateDefault(type, constraint);
+		//
+		//		Definition = VariableDefinition.Create(type, constraint, null, null, false, false);
+		//		SetValue(value);
+		//	});
+		//
+		//	return dropdown;
+		//}
+		//
+		//public VisualElement CreateBool()
+		//{
+		//	var toggle = new Toggle() { value = Value.Bool };
+		//	toggle.RegisterValueChangedCallback(evt =>
+		//	{
+		//		var value = VariableValue.Create(evt.newValue);
+		//		SetValue(value);
+		//	});
+		//
+		//	return toggle;
+		//}
+		//
+		//public VisualElement CreateInt()
+		//{
+		//	var container = new VisualElement();
+		//	container.style.flexDirection = FlexDirection.Row;
+		//
+		//	if (Definition.Constraint is IntVariableConstraint constraint)
+		//	{
+		//		var field = new IntegerField() { value = Value.Int, isDelayed = true };
+		//		field.RegisterValueChangedCallback(evt =>
+		//		{
+		//			var clamped = constraint.HasRange ? Mathf.Clamp(evt.newValue, constraint.Minimum, constraint.Maximum) : evt.newValue;
+		//			var value = VariableValue.Create(clamped);
+		//
+		//			SetValue(value);
+		//		});
+		//
+		//		container.Add(field);
+		//
+		//		if (constraint.HasRange)
+		//		{
+		//			var slider = new SliderInt(constraint.Minimum, constraint.Maximum) { value = Value.Int };
+		//			slider.RegisterValueChangedCallback(evt =>
+		//			{
+		//				var value = VariableValue.Create(evt.newValue);
+		//				SetValue(value);
+		//			});
+		//
+		//			container.Add(slider);
+		//		}
+		//	}
+		//
+		//	return container;
+		//}
+		//
+		//private VisualElement CreateFloat()
+		//{
+		//	var container = new VisualElement();
+		//	container.style.flexDirection = FlexDirection.Row;
+		//
+		//	if (Definition.Constraint is FloatVariableConstraint constraint)
+		//	{
+		//		var field = new FloatField() { value = Value.Float, isDelayed = true };
+		//		field.RegisterValueChangedCallback(evt =>
+		//		{
+		//			var clamped = constraint.HasRange ? Mathf.Clamp(evt.newValue, constraint.Minimum, constraint.Maximum) : evt.newValue;
+		//			var value = VariableValue.Create(clamped);
+		//
+		//			SetValue(value);
+		//		});
+		//
+		//		container.Add(field);
+		//
+		//		if (constraint.HasRange)
+		//		{
+		//			var slider = new Slider(constraint.Minimum, constraint.Maximum) { value = Value.Float };
+		//			RegisterChange(slider);
+		//			container.Add(slider);
+		//		}
+		//	}
+		//
+		//	return container;
+		//}
+		//
+		//private VisualElement CreateInt2()
+		//{
+		//	var field = new Vector2IntField() { value = Value.Int2 };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateInt3()
+		//{
+		//	var field = new Vector3IntField() { value = Value.Int3 };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateIntRect()
+		//{
+		//	var field = new RectIntField() { value = Value.IntRect };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateIntBounds()
+		//{
+		//	var field = new BoundsIntField() { value = Value.IntBounds };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateVector2()
+		//{
+		//	var field = new Vector2Field() { value = Value.Vector2 };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateVector3()
+		//{
+		//	var field = new Vector3Field() { value = Value.Vector3 };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateVector4()
+		//{
+		//	var field = new Vector4Field() { value = Value.Vector4 };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateQuaternion()
+		//{
+		//	var field = new EulerControl(Value.Quaternion);
+		//	field.RegisterCallback<ChangeEvent<Quaternion>>(evt =>
+		//	{
+		//		var value = VariableValue.Create(evt.newValue);
+		//		SetValue(value);
+		//	});
+		//
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateRect()
+		//{
+		//	var field = new RectField() { value = Value.Rect };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateBounds()
+		//{
+		//	var field = new BoundsField() { value = Value.Bounds };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateColor()
+		//{
+		//	var field = new ColorField() { value = Value.Color };
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateString()
+		//{
+		//	if (Definition.Constraint is StringVariableConstraint constraint && constraint.Values.Count > 0)
+		//	{
+		//		var popup = new PopupField<string>(constraint.Values, Value.String);
+		//		RegisterChange(popup);
+		//		return popup;
+		//	}
+		//	else
+		//	{
+		//		var field = new TextField() { value = Value.String, isDelayed = true };
+		//		RegisterChange(field);
+		//		return field;
+		//	}
+		//}
+		//
+		//private VisualElement CreateEnum()
+		//{
+		//	var field = new EnumField(Value.Enum);
+		//	RegisterChange(field);
+		//	return field;
+		//}
+		//
+		//private VisualElement CreateObject()
+		//{
+		//	var objectType = (Definition.Constraint as ObjectVariableConstraint)?.Type ?? Value.ReferenceType ?? typeof(Object);
+		//
+		//	var picker = new ObjectPickerControl(Value.Object, objectType);
+		//	picker.RegisterCallback<ChangeEvent<Object>>(evt =>
+		//	{
+		//		var value = VariableValue.Create(evt.newValue);
+		//		SetValue(value);
+		//	});
+		//
+		//	return picker;
+		//}
 
 		private VisualElement CreateStore()
 		{
@@ -303,7 +303,7 @@ namespace PiRhoSoft.Composition.Editor
 			//foreach (var name in names)
 			//{			
 			//	var index = storeConstraint?.Schema != null ? storeConstraint.Schema.GetIndex(name) : -1;
-			//	var definition = index >= 0 ? storeConstraint.Schema[index].Definition : ValueDefinition.Empty);
+			//	var definition = index >= 0 ? storeConstraint.Schema[index].Definition : VariableDefinition.Empty);
 			//
 			//	var item = _value.Store.GetVariable(name);
 			//	
@@ -382,8 +382,8 @@ namespace PiRhoSoft.Composition.Editor
 			var container = new VisualElement();
 
 			//var itemDefinition = constraint != null
-			//	? ValueDefinition.Create(constraint.ItemType, constraint.ItemConstraint)
-			//	: ValueDefinition.Create(VariableType.Empty);
+			//	? VariableDefinition.Create(constraint.ItemType, constraint.ItemConstraint)
+			//	: VariableDefinition.Create(VariableType.Empty);
 			//
 			//var remove = -1;
 			//

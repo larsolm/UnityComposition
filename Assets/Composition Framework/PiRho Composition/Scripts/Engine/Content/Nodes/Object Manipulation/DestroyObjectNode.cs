@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The target Object to destroy")]
-		[VariableConstraint(typeof(Object))]
+		[VariableReference(typeof(Object))]
 		public VariableReference Target = new VariableReference();
 
 		public override Color NodeColor => Colors.SequencingDark;

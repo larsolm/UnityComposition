@@ -14,8 +14,8 @@ namespace PiRhoSoft.Composition
 			private static readonly string[] _names = new string[] { GlobalStoreName, SceneStoreName };
 
 			public IList<string> GetVariableNames() => _names;
-			public VariableValue GetVariable(string name) => name == GlobalStoreName ? VariableValue.Create(Instance.GlobalStore) : (name == SceneStoreName ? VariableValue.Create(Instance.SceneStore) : VariableValue.Empty);
-			public SetVariableResult SetVariable(string name, VariableValue value) => (name == GlobalStoreName || name == SceneStoreName) ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
+			public Variable GetVariable(string name) => name == GlobalStoreName ? Variable.Store(Instance.GlobalStore) : (name == SceneStoreName ? Variable.Store(Instance.SceneStore) : Variable.Empty);
+			public SetVariableResult SetVariable(string name, Variable value) => (name == GlobalStoreName || name == SceneStoreName) ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
 		}
 
 		public const string GlobalStoreName = "global";
@@ -45,18 +45,18 @@ namespace PiRhoSoft.Composition
 
 		#region Graphs
 
-		public void RunGraph(Graph graph, VariableValue context)
+		public void RunGraph(Graph graph, Variable context)
 		{
 			var enumerator = graph.Execute(context);
 			StartCoroutine(new JoinEnumerator(enumerator));
 		}
 
-		public void RunGraph(GraphCaller caller, VariableValue context)
+		public void RunGraph(GraphCaller caller, Variable context)
 		{
 			RunGraph(caller, DefaultStore, context);
 		}
 
-		public void RunGraph(GraphCaller caller, IVariableStore store, VariableValue context)
+		public void RunGraph(GraphCaller caller, IVariableStore store, Variable context)
 		{
 			var enumerator = caller.Execute(store, context);
 			StartCoroutine(new JoinEnumerator(enumerator));

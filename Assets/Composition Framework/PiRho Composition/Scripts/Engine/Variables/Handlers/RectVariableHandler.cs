@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -7,69 +7,77 @@ namespace PiRhoSoft.Composition
 {
 	internal class RectVariableHandler : VariableHandler
 	{
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(new Rect());
-		protected internal override void ToString_(VariableValue value, StringBuilder builder) => builder.Append(value.Rect);
-
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void ToString_(Variable value, StringBuilder builder)
 		{
-			writer.Write(value.Rect.x);
-			writer.Write(value.Rect.y);
-			writer.Write(value.Rect.width);
-			writer.Write(value.Rect.height);
+			builder.Append(value.AsRect);
 		}
 
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override void Save_(Variable value, BinaryWriter writer, SerializedData data)
+		{
+			var rect = value.AsRect;
+
+			writer.Write(rect.x);
+			writer.Write(rect.y);
+			writer.Write(rect.width);
+			writer.Write(rect.height);
+		}
+
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
 			var w = reader.ReadSingle();
 			var h = reader.ReadSingle();
 
-			return VariableValue.Create(new Rect(x, y, w, h));
+			return Variable.Rect(new Rect(x, y, w, h));
 		}
 
-		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override Variable Lookup_(Variable owner, Variable lookup)
 		{
-			if (lookup.Type == VariableType.String)
+			if (lookup.TryGetString(out var s))
 			{
-				switch (lookup.String)
+				var rect = owner.AsRect;
+
+				switch (s)
 				{
-					case "x": return VariableValue.Create(owner.Rect.x);
-					case "y": return VariableValue.Create(owner.Rect.y);
-					case "w": return VariableValue.Create(owner.Rect.width);
-					case "h": return VariableValue.Create(owner.Rect.height);
+					case "x": return Variable.Float(rect.x);
+					case "y": return Variable.Float(rect.y);
+					case "w": return Variable.Float(rect.width);
+					case "h": return Variable.Float(rect.height);
 				}
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
-			if (value.TryGetFloat(out var number))
+			if (value.TryGetFloat(out var f))
 			{
-				if (lookup.Type == VariableType.String)
+				if (lookup.TryGetString(out var s))
 				{
-					switch (lookup.String)
+					var rect = owner.AsRect;
+
+					switch (s)
 					{
 						case "x":
 						{
-							owner = VariableValue.Create(new Rect(number, owner.Rect.y, owner.Rect.width, owner.Rect.height));
+							owner = Variable.Rect(new Rect(f, rect.y, rect.width, rect.height));
 							return SetVariableResult.Success;
 						}
 						case "y":
 						{
-							owner = VariableValue.Create(new Rect(owner.Rect.x, number, owner.Rect.width, owner.Rect.height));
+							owner = Variable.Rect(new Rect(rect.x, f, rect.width, rect.height));
 							return SetVariableResult.Success;
 						}
 						case "w":
 						{
-							owner = VariableValue.Create(new Rect(owner.Rect.x, owner.Rect.y, number, owner.Rect.height));
+							owner = Variable.Rect(new Rect(rect.x, rect.y, f, rect.height));
 							return SetVariableResult.Success;
 						}
 						case "h":
 						{
-							owner = VariableValue.Create(new Rect(owner.Rect.x, owner.Rect.y, owner.Rect.width, number));
+							owner = Variable.Rect(new Rect(rect.x, rect.y, rect.width, f));
 							return SetVariableResult.Success;
 						}
 					}
@@ -83,10 +91,10 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
 			if (right.TryGetRect(out var bounds))
-				return left.Rect == bounds;
+				return left.AsRect == bounds;
 			else
 				return null;
 		}

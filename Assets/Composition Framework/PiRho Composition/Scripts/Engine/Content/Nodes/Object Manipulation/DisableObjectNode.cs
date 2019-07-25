@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The target GameObject, Behaviour, or Renderer to disable")]
-		[VariableConstraint(typeof(Object))]
+		[VariableReference(typeof(Object))]
 		public VariableReference Target = new VariableReference();
 
 		public override Color NodeColor => Colors.SequencingDark;

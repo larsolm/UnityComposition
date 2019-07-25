@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Animator to set State on")]
-		[VariableConstraint(typeof(Animator))]
+		[VariableReference(typeof(Animator))]
 		public VariableReference Animator;
 
 		[Tooltip("The name of the animation state to play")]

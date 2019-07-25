@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 		public override void GetInputs(IList<VariableDefinition> inputs, string source)
 		{
 			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
-				inputs.Add(new VariableDefinition { Name = _rightIdentifier.Name, Definition = ValueDefinition.Create(VariableType.Empty) });
+				inputs.Add(new VariableDefinition(_rightIdentifier.Name, VariableType.Empty));
 			else
 				base.GetInputs(inputs, source);
 		}
@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition
 		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
 		{
 			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
-				outputs.Add(new VariableDefinition { Name = _rightIdentifier.Name, Definition = ValueDefinition.Create(VariableType.Empty) });
+				outputs.Add(new VariableDefinition(_rightIdentifier.Name, VariableType.Empty));
 		}
 
 		public override void Parse(ExpressionParser parser, ExpressionToken token)
@@ -51,7 +51,7 @@ namespace PiRhoSoft.Composition
 			Right.ToString(builder);
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 			var value = _rightIdentifier.GetValue(variables, left);
@@ -62,18 +62,18 @@ namespace PiRhoSoft.Composition
 			return value;
 		}
 
-		public VariableValue GetValue(IVariableStore variables, VariableValue owner)
+		public Variable GetValue(IVariableStore variables, Variable owner)
 		{
 			var left = _leftLookup.GetValue(variables, owner);
 			return left.IsEmpty ? left : _rightIdentifier.GetValue(variables, left);
 		}
 
-		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
+		public SetVariableResult SetValue(IVariableStore variables, Variable value)
 		{
 			var left = Left.Evaluate(variables);
 			var result = _rightIdentifier.SetValue(ref left, value);
 
-			if (result == SetVariableResult.Success && !left.HasReference)
+			if (result == SetVariableResult.Success && left.IsValueType)
 			{
 				if (Left is IAssignableOperation assignable)
 					return assignable.SetValue(variables, value);

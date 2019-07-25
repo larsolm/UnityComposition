@@ -2,7 +2,7 @@
 {
 	public class ReadOnlyStore : VariableStore
 	{
-		public override SetVariableResult SetVariable(string name, VariableValue value)
+		public override SetVariableResult SetVariable(string name, Variable value)
 		{
 			if (Map.TryGetValue(name, out int index))
 				return SetVariableResult.ReadOnly;

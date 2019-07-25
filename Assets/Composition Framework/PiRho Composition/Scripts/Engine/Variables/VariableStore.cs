@@ -13,21 +13,21 @@ namespace PiRhoSoft.Composition
 	public interface IVariableStore
 	{
 		IList<string> GetVariableNames();
-		VariableValue GetVariable(string name);
-		SetVariableResult SetVariable(string name, VariableValue value);
+		Variable GetVariable(string name);
+		SetVariableResult SetVariable(string name, Variable value);
 	}
 
 	public class VariableStore : IVariableStore
 	{
 		private List<string> _names = new List<string>();
-		private List<VariableValue> _variables = new List<VariableValue>();
+		private List<Variable> _variables = new List<Variable>();
 		private Dictionary<string, int> _map = new Dictionary<string, int>();
 
 		public List<string> Names => _names;
-		public List<VariableValue> Variables => _variables;
+		public List<Variable> Variables => _variables;
 		public Dictionary<string, int> Map => _map;
 
-		public virtual void AddVariable(string name, VariableValue value)
+		public virtual void AddVariable(string name, Variable value)
 		{
 			_map.Add(name, _variables.Count);
 			_variables.Add(value);
@@ -78,7 +78,7 @@ namespace PiRhoSoft.Composition
 			_map.Clear();
 		}
 
-		protected SetVariableResult SetVariable(string name, VariableValue value, bool allowAdd)
+		protected SetVariableResult SetVariable(string name, Variable value, bool allowAdd)
 		{
 			if (_map.TryGetValue(name, out int index))
 				_variables[index] = value;
@@ -97,12 +97,12 @@ namespace PiRhoSoft.Composition
 			return _names;
 		}
 
-		public virtual VariableValue GetVariable(string name)
+		public virtual Variable GetVariable(string name)
 		{
-			return _map.TryGetValue(name, out var index) ? _variables[index] : VariableValue.Empty;
+			return _map.TryGetValue(name, out var index) ? _variables[index] : Variable.Empty;
 		}
 
-		public virtual SetVariableResult SetVariable(string name, VariableValue value)
+		public virtual SetVariableResult SetVariable(string name, Variable value)
 		{
 			return SetVariable(name, value, true);
 		}

@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.Collections.Generic;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -12,95 +11,75 @@ namespace PiRhoSoft.Composition
 
 		private const string _gameObjectName = "GameObject";
 
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			return VariableValue.Create((Object)null);
-		}
-
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
-		{
-			if (value.Object == null)
+			if (variable.IsNullObject)
 				builder.Append(NullText);
 			else
-				builder.Append(value.Object.name);
+				builder.Append(variable.AsObject.name);
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Save_(Variable value, BinaryWriter writer, SerializedData data)
 		{
-			writer.Write(objects.Count);
-			objects.Add(value.Object);
+			data.SaveReference(writer, value.AsObject);
 		}
 
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
-			var index = reader.ReadInt32();
-			return VariableValue.Create(objects[index]);
+			var obj = data.LoadReference(reader);
+			return Variable.Object(obj);
 		}
 
-		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override Variable Lookup_(Variable owner, Variable lookup)
 		{
-			if (owner.HasList)
-				return ListVariableHandler.LookupInList(owner, lookup);
-
-			if (owner.HasStore)
-				return StoreVariableHandler.LookupInStore(owner, lookup);
-
-			if (lookup.HasString && owner.ReferenceType != null && ClassMap.Get(owner.ReferenceType, out var map))
-				return map.GetVariable(owner.Reference, lookup.String);
-
-			// could fall back to reflection here and in Apply_
-
-			return VariableValue.Empty;
+			if (owner.IsNullObject)
+				return Variable.Empty;
+			else
+				return Lookup(owner.AsObject, lookup);
 		}
 
-		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
-			if (owner.HasList)
-				return ListVariableHandler.ApplyToList(ref owner, lookup, value);
-
-			if (owner.HasStore)
-				return StoreVariableHandler.ApplyToStore(ref owner, lookup, value);
-
-			if (lookup.HasString && owner.ReferenceType != null && ClassMap.Get(owner.ReferenceType, out var map))
-				return map.SetVariable(owner.Reference, lookup.String, value);
-
-			return SetVariableResult.NotFound;
+			if (owner.IsNullObject)
+				return SetVariableResult.NotFound;
+			else
+				return Apply(owner.AsObject, lookup, value);
 		}
 
-		protected internal override VariableValue Cast_(VariableValue owner, string type)
+		protected internal override Variable Cast_(Variable owner, string type)
 		{
 			if (type == _gameObjectName)
 			{
-				var gameObject = ComponentHelper.GetAsGameObject(owner.Object);
-				return VariableValue.Create(gameObject);
+				var gameObject = ComponentHelper.GetAsGameObject(owner.AsObject);
+				return Variable.Object(gameObject);
 			}
 			else
 			{
-				var component = ComponentHelper.GetAsComponent(owner.Object, type);
-				return VariableValue.Create(component);
+				var component = ComponentHelper.GetAsComponent(owner.AsObject, type);
+				return Variable.Object(component);
 			}
 		}
 
-		protected internal override bool Test_(VariableValue owner, string type)
+		protected internal override bool Test_(Variable owner, string type)
 		{
 			if (type == _gameObjectName)
 			{
-				var gameObject = ComponentHelper.GetAsGameObject(owner.Object);
+				var gameObject = ComponentHelper.GetAsGameObject(owner.AsObject);
 				return gameObject != null;
 			}
 			else
 			{
-				var component = ComponentHelper.GetAsComponent(owner.Object, type);
+				var component = ComponentHelper.GetAsComponent(owner.AsObject, type);
 				return component != null;
 			}
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
-			if (right.IsEmpty)
-				return left.IsNull;
-			else if (right.HasReference)
-				return left.IsNull && right.IsNull || left.Reference == right.Reference;
+			if (right.IsEmpty || right.IsNullObject)
+				return left.IsNullObject;
+			else if (right.TryGetObject(out var obj))
+				return left.AsObject == obj;
 			else
 				return null;
 		}

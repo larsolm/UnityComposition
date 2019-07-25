@@ -4,10 +4,10 @@
 	{
 		private const string _invalidAssignmentException = "unable to decrement '{0}'";
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var result = Right.Evaluate(variables);
-			var value = VariableHandler.Add(result, VariableValue.Create(-1));
+			var value = VariableHandler.Add(result, Variable.Int(-1));
 
 			if (value.IsEmpty)
 				throw TypeMismatch(result.Type);

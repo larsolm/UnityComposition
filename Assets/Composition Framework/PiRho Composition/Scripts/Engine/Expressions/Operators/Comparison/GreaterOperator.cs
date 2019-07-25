@@ -4,12 +4,12 @@
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Comparison;
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);
 
-			return VariableValue.Create(Compare(left, right) > 0);
+			return Variable.Bool(Compare(left, right) > 0);
 		}
 	}
 }

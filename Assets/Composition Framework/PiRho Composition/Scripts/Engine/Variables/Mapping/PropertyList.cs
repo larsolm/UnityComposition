@@ -20,13 +20,13 @@
 			return index >= 0 && index < _map.Properties.Count ? _map.Properties[index].Name : string.Empty;
 		}
 
-		public VariableValue GetVariableValue(int index)
+		public Variable GetVariableValue(int index)
 		{
 			if (index >= 0 && index < _map.Properties.Count) return _map.Properties[index].Get(_owner);
-			else return VariableValue.Empty;
+			else return Variable.Empty;
 		}
 
-		public SetVariableResult SetVariableValue(int index, VariableValue value)
+		public SetVariableResult SetVariableValue(int index, Variable value)
 		{
 			if (index >= 0 && index < _map.Properties.Count) return _map.Properties[index].Set(_owner, value);
 			else return SetVariableResult.NotFound;

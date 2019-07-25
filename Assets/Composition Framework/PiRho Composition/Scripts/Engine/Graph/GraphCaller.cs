@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition
 		public IList<GraphOutput> Outputs => _outputs;
 		public bool IsRunning => Graph != null && Graph.IsRunning;
 
-		public IEnumerator Execute(IVariableStore store, VariableValue context)
+		public IEnumerator Execute(IVariableStore store, Variable context)
 		{
 			if (Graph)
 			{
@@ -57,7 +57,7 @@ namespace PiRhoSoft.Composition
 				}
 			}
 
-			return new VariableDefinition { Name = input.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
+			return new VariableDefinition(input.Name);
 		}
 
 		public VariableDefinition GetOutputDefinition(GraphOutput output)
@@ -71,7 +71,7 @@ namespace PiRhoSoft.Composition
 				}
 			}
 
-			return new VariableDefinition { Name = output.Name, Definition = ValueDefinition.Create(VariableType.Empty) };
+			return new VariableDefinition(output.Name);
 		}
 
 		private void UpdateInputs()
@@ -86,7 +86,7 @@ namespace PiRhoSoft.Composition
 				{
 					var existing = _inputs.Where(input => input.Name == definition.Name).FirstOrDefault();
 
-					if (existing != null && (existing.Type == GraphInputType.Reference || definition.Definition.IsValid(existing.Value)))
+					if (existing != null && (existing.Type == GraphInputType.Reference || definition.IsValid(existing.Value.Variable)))
 					{
 						if (!inputs.Any(input => input.Name == definition.Name))
 							inputs.Add(existing);
@@ -97,7 +97,7 @@ namespace PiRhoSoft.Composition
 						{
 							Name = definition.Name,
 							Type = GraphInputType.Value,
-							Value = definition.Definition.Generate(null)
+							Value = new VariableValue { Variable = definition.Generate() }
 						});
 					}
 				}

@@ -62,24 +62,24 @@ namespace PiRhoSoft.Composition.Editor
 				var container = new VisualElement();
 				var name = Variables.GetVariableName(index);
 				var value = Variables.GetVariableValue(index);
-				var definition = Variables.Schema != null && index < Variables.Schema.Count ? Variables.Schema[index].Definition : ValueDefinition.Create(VariableType.Empty);
+				//var definition = Variables.Schema != null && index < Variables.Schema.Count ? Variables.Schema[index].Definition : ValueDefinition.Create(VariableType.Empty);
 				
 				if (Variables.Owner != null)
 				{
-					var field = new VariableValueField(name, value, definition);
-					field.RegisterCallback<ChangeEvent<VariableValue>>(evt => {	Variables.SetVariableValue(index, value); });
-					container.Add(field);
-
-					if (Variables.Schema != null && Variables.Owner != null)
-					{
-						var refreshButton = new IconButton(Icon.Refresh.Texture, "Re-compute this variable based on the schema initializer", () =>
-						{
-							var newValue = Variables.Schema[index].Definition.Generate(Variables.Owner);
-							field.value = newValue;
-						});
-
-						container.Add(refreshButton);
-					}
+					//var field = new VariableValueField(name, value, definition);
+					//field.RegisterCallback<ChangeEvent<VariableValue>>(evt => {	Variables.SetVariableValue(index, value); });
+					//container.Add(field);
+					//
+					//if (Variables.Schema != null && Variables.Owner != null)
+					//{
+					//	var refreshButton = new IconButton(Icon.Refresh.Texture, "Re-compute this variable based on the schema initializer", () =>
+					//	{
+					//		var newValue = Variables.Schema[index].Definition.Generate(Variables.Owner);
+					//		field.value = newValue;
+					//	});
+					//
+					//	container.Add(refreshButton);
+					//}
 				}
 				
 				return container;
