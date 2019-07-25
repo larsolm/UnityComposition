@@ -4,6 +4,31 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
+	public class VariableReferenceAttribute : Attribute
+	{
+		public VariableType Type { get; private set; }
+		public VariableConstraint Constraint { get; private set; }
+
+		public VariableReferenceAttribute(VariableType type) => Type = type;
+		public VariableReferenceAttribute(int minimum, int maximum) { Type = VariableType.Int; Constraint = new IntConstraint(minimum, maximum); }
+		public VariableReferenceAttribute(bool noMinimum, int maximum) { Type = VariableType.Int; Constraint = new IntConstraint(null, maximum); }
+		public VariableReferenceAttribute(int minimum, bool noMaximum) { Type = VariableType.Int; Constraint = new IntConstraint(minimum, null); }
+		public VariableReferenceAttribute(float minimum, float maximum) { Type = VariableType.Float; Constraint = new FloatConstraint(minimum, maximum); }
+		public VariableReferenceAttribute(bool noMinimum, float maximum) { Type = VariableType.Float; Constraint = new FloatConstraint(null, maximum); }
+		public VariableReferenceAttribute(float minimum, bool noMaximum) { Type = VariableType.Float; Constraint = new FloatConstraint(minimum, null); }
+		public VariableReferenceAttribute(string[] values) { Type = VariableType.String; Constraint = new StringConstraint(new List<string>(values)); }
+
+		public VariableReferenceAttribute(Type type)
+		{
+			if (Variable.IsValidEnumType(type))
+				Constraint = new EnumConstraint(type);
+			else if (Variable.IsValidObjectType(type))
+				Constraint = new ObjectConstraint(type);
+			else
+				Constraint = new OtherConstraint(type);
+		}
+	}
+
 	[Serializable]
 	public class VariableReference
 	{
@@ -40,16 +65,16 @@ namespace PiRhoSoft.Composition
 
 		#region Lookup
 
-		public VariableValue GetValue(IVariableStore variables)
+		public Variable GetValue(IVariableStore variables)
 		{
-			var value = IsAssigned ? VariableValue.Create(variables) : VariableValue.Empty;
+			var value = IsAssigned ? PiRhoSoft.Composition.Variable.Store(variables) : PiRhoSoft.Composition.Variable.Empty;
 
 			foreach (var token in _tokens)
 			{
 				switch (token.Type)
 				{
-					case VariableTokenType.Name: value = VariableHandler.Lookup(value, VariableValue.Create(token.Text)); break;
-					case VariableTokenType.Number: value = VariableHandler.Lookup(value, VariableValue.Create(int.Parse(token.Text))); break;
+					case VariableTokenType.Name: value = VariableHandler.Lookup(value, PiRhoSoft.Composition.Variable.String(token.Text)); break;
+					case VariableTokenType.Number: value = VariableHandler.Lookup(value, PiRhoSoft.Composition.Variable.Int(int.Parse(token.Text))); break;
 					case VariableTokenType.Type: value = VariableHandler.Cast(value, token.Text); break;
 				}
 
@@ -64,11 +89,11 @@ namespace PiRhoSoft.Composition
 
 		#region Assignment
 
-		public SetVariableResult SetValue(IVariableStore variables, VariableValue value)
+		public SetVariableResult SetValue(IVariableStore variables, Variable value)
 		{
 			if (IsAssigned)
 			{
-				var owner = VariableValue.Create(variables);
+				var owner = PiRhoSoft.Composition.Variable.Store(variables);
 				return SetValue_(ref owner, value, 0);
 			}
 			else
@@ -77,7 +102,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private SetVariableResult SetValue_(ref VariableValue owner, VariableValue value, int index)
+		private SetVariableResult SetValue_(ref Variable owner, Variable value, int index)
 		{
 			var token = _tokens[index];
 
@@ -87,12 +112,12 @@ namespace PiRhoSoft.Composition
 				{
 					case VariableTokenType.Name:
 					{
-						return VariableHandler.Apply(ref owner, VariableValue.Create(token.Text), value);
+						return VariableHandler.Apply(ref owner, PiRhoSoft.Composition.Variable.String(token.Text), value);
 					}
 					case VariableTokenType.Number:
 					{
 						if (int.TryParse(token.Text, out var number))
-							return VariableHandler.Apply(ref owner, VariableValue.Create(number), value);
+							return VariableHandler.Apply(ref owner, PiRhoSoft.Composition.Variable.Int(number), value);
 
 						break;
 					}
@@ -104,14 +129,14 @@ namespace PiRhoSoft.Composition
 			}
 			else
 			{
-				var lookup = VariableValue.Empty;
-				var child = VariableValue.Empty;
+				var lookup = PiRhoSoft.Composition.Variable.Empty;
+				var child = PiRhoSoft.Composition.Variable.Empty;
 
 				switch (token.Type)
 				{
 					case VariableTokenType.Name:
 					{
-						lookup = VariableValue.Create(token.Text);
+						lookup = PiRhoSoft.Composition.Variable.String(token.Text);
 						child = VariableHandler.Lookup(owner, lookup);
 						break;
 					}
@@ -119,7 +144,7 @@ namespace PiRhoSoft.Composition
 					{
 						if (int.TryParse(token.Text, out var number))
 						{
-							lookup = VariableValue.Create(number);
+							lookup = PiRhoSoft.Composition.Variable.Int(number);
 							child = VariableHandler.Lookup(owner, lookup);
 						}
 
@@ -139,7 +164,7 @@ namespace PiRhoSoft.Composition
 
 					var result = SetValue_(ref child, value, index + 1);
 
-					if (result == SetVariableResult.Success && !child.HasReference)
+					if (result == SetVariableResult.Success && child.IsValueType)
 						result = VariableHandler.Apply(ref owner, lookup, child);
 
 					return result;

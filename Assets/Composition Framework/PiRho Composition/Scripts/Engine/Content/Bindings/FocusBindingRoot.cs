@@ -9,9 +9,9 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The Menu whose focused item to use for binding variables")]
 		public Menu Menu;
 
-		public override VariableValue Value
+		public override Variable Value
 		{
-			get => Menu ? VariableValue.Create((Object)Menu.FocusedItem) : VariableValue.Empty;
+			get => Menu ? Variable.Object((Object)Menu.FocusedItem) : Variable.Empty;
 		}
 	}
 }

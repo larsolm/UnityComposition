@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Audio Player to play the sound on")]
-		[VariableConstraint(typeof(AudioPlayer))]
+		[VariableReference(typeof(AudioPlayer))]
 		public VariableReference AudioPlayer;
 
 		[Tooltip("The Audio Clip to play")]

@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition
 	{
 		private static readonly string[] _emptyNames = new string[0];
 
-		public VariableValue GetVariable(string name)
+		public Variable GetVariable(string name)
 		{
 			var gameObject = GameObject.Find(name); // this won't find inactive objects but is fast (comparatively)
 
@@ -16,12 +16,12 @@ namespace PiRhoSoft.Composition
 				gameObject = ComponentHelper.FindObject(name); // this will find inactive objects
 
 			if (gameObject == null)
-				return VariableValue.Empty;
+				return Variable.Empty;
 
-			return VariableValue.Create(gameObject);
+			return Variable.Object(gameObject);
 		}
 
-		public SetVariableResult SetVariable(string name, VariableValue value)
+		public SetVariableResult SetVariable(string name, Variable value)
 		{
 			return SetVariableResult.ReadOnly;
 		}

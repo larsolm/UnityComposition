@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class ClampCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 3)
 			{
@@ -13,19 +13,19 @@ namespace PiRhoSoft.Composition
 				var min = parameters[1].Evaluate(variables);
 				var max = parameters[2].Evaluate(variables);
 
-				if (!value.HasNumber)
+				if (!value.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Int, VariableType.Float);
 
-				if (!min.HasNumber)
+				if (!min.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 1, min.Type, VariableType.Int, VariableType.Float);
 
-				if (!max.HasNumber)
+				if (!max.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 2, max.Type, VariableType.Int, VariableType.Float);
 
 				if (value.Type == VariableType.Int && min.Type == VariableType.Int && max.Type == VariableType.Int)
-					return VariableValue.Create(Mathf.Clamp(value.Int, min.Int, max.Int));
+					return Variable.Int(Mathf.Clamp(value.AsInt, min.AsInt, max.AsInt));
 				else
-					return VariableValue.Create(Mathf.Clamp(value.Number, min.Number, max.Number));
+					return Variable.Float(Mathf.Clamp(value.AsFloat, min.AsFloat, max.AsFloat));
 			}
 			else
 			{

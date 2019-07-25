@@ -4,7 +4,7 @@
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Exponentiation;
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);

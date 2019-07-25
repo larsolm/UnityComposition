@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class AtanCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			switch (parameters.Count)
 			{
@@ -14,9 +14,9 @@ namespace PiRhoSoft.Composition
 					var value = parameters[0].Evaluate(variables);
 
 					if (value.TryGetFloat(out var number))
-						return VariableValue.Create(Mathf.Atan(number));
+						return Variable.Float(Mathf.Atan(number));
 					else if (value.TryGetVector2(out var vector))
-						return VariableValue.Create(Mathf.Atan2(vector.y, vector.x));
+						return Variable.Float(Mathf.Atan2(vector.y, vector.x));
 					else
 						throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Float, VariableType.Vector2);
 				}
@@ -25,13 +25,13 @@ namespace PiRhoSoft.Composition
 					var y = parameters[0].Evaluate(variables);
 					var x = parameters[1].Evaluate(variables);
 
-					if (!y.HasNumber)
+					if (!y.IsFloat)
 						throw CommandEvaluationException.WrongParameterType(name, 0, y.Type, VariableType.Float);
 
-					if (!x.HasNumber)
+					if (!x.IsFloat)
 						throw CommandEvaluationException.WrongParameterType(name, 1, x.Type, VariableType.Float);
 
-					return VariableValue.Create(Mathf.Atan2(y.Number, x.Number));
+					return Variable.Float(Mathf.Atan2(y.AsFloat, x.AsFloat));
 				}
 				default:
 				{

@@ -26,12 +26,13 @@ namespace PiRhoSoft.Composition
 		{
 			if (Type == VariableSourceType.Reference && GraphStore.IsInput(Reference))
 			{
-				var definition = new VariableDefinition { Name = Reference.RootName, Definition = GetInputDefinition() };
+				var definition = GetInputDefinition();
+				definition.Name = Reference.RootName;
 				inputs.Add(definition);
 			}
 		}
 
-		protected abstract ValueDefinition GetInputDefinition();
+		protected abstract VariableDefinition GetInputDefinition();
 	}
 
 	public abstract class VariableSource<T> : VariableSource
@@ -40,10 +41,10 @@ namespace PiRhoSoft.Composition
 		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public T Value;
 
-		protected override ValueDefinition GetInputDefinition()
+		protected override VariableDefinition GetInputDefinition()
 		{
-			var type = VariableValue.GetType(typeof(T));
-			return ValueDefinition.Create(type);
+			var type = Variable.GetType(typeof(T));
+			return new VariableDefinition(string.Empty, type);
 		}
 	}
 
@@ -162,6 +163,8 @@ namespace PiRhoSoft.Composition
 	{
 	}
 
+	// TODO: these won't serialize
+
 	[Serializable]
 	public class StoreVariableSource : VariableSource<IVariableStore>
 	{
@@ -173,24 +176,17 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
-	public class VariableValueSource : VariableSource<VariableValue>, ISerializationCallbackReceiver
+	public class VariableValueSource : VariableSource
 	{
-		public ValueDefinition Definition;
+		public VariableDefinition Definition = new VariableDefinition();
 
-		[SerializeField] private string _data;
-		[SerializeField] private List<Object> _objects;
+		[Tooltip("The specific value of the source")]
+		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
+		public VariableValue Value = new VariableValue();
 
-		public VariableValueSource() { Value = VariableValue.Empty; Definition = ValueDefinition.Create(VariableType.Empty); }
-		public VariableValueSource(VariableType type, ValueDefinition definition) { Value = definition.Generate(null); Definition = definition; }
+		public VariableValueSource() { }
+		public VariableValueSource(VariableType type, VariableDefinition definition) { Definition = definition; Value.Variable = definition.Generate(); }
 
-		public void OnBeforeSerialize()
-		{
-			_data = VariableHandler.SaveValue(Value, ref _objects);
-		}
-
-		public void OnAfterDeserialize()
-		{
-			Value = VariableHandler.LoadValue(ref _data, ref _objects);
-		}
+		protected override VariableDefinition GetInputDefinition() => Definition;
 	}
 }

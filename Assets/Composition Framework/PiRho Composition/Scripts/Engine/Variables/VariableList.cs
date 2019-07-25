@@ -5,9 +5,9 @@ namespace PiRhoSoft.Composition
 	public interface IVariableList
 	{
 		int Count { get; }
-		VariableValue GetVariable(int index);
-		SetVariableResult SetVariable(int index, VariableValue value);
-		SetVariableResult AddVariable(VariableValue value);
+		Variable GetVariable(int index);
+		SetVariableResult SetVariable(int index, Variable value);
+		SetVariableResult AddVariable(Variable value);
 		SetVariableResult RemoveVariable(int index);
 	}
 
@@ -20,18 +20,18 @@ namespace PiRhoSoft.Composition
 		public VariableList(int count)
 		{
 			for (var i = 0; i < count; i++)
-				Values.Add(VariableValue.Empty);
+				Values.Add(Variable.Empty);
 		}
 
-		public List<VariableValue> Values { get; private set; } = new List<VariableValue>();
+		public List<Variable> Values { get; private set; } = new List<Variable>();
 		public int Count => Values.Count;
 
-		public VariableValue GetVariable(int index)
+		public Variable GetVariable(int index)
 		{
-			return index >= 0 && index < Values.Count ? Values[index] : VariableValue.Empty;
+			return index >= 0 && index < Values.Count ? Values[index] : Variable.Empty;
 		}
 
-		public SetVariableResult AddVariable(VariableValue value)
+		public SetVariableResult AddVariable(Variable value)
 		{
 			Values.Add(value);
 			return SetVariableResult.Success;
@@ -48,7 +48,7 @@ namespace PiRhoSoft.Composition
 			return SetVariableResult.NotFound;
 		}
 
-		public SetVariableResult SetVariable(int index, VariableValue value)
+		public SetVariableResult SetVariable(int index, Variable value)
 		{
 			if (index >= 0 && index < Values.Count)
 			{

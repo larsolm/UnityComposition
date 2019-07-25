@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The value to set the TimeScale to")]
 		[Inline]
-		[VariableConstraint(0.0f, 100.0f)]
+		[VariableReference(0.0f, 100.0f)]
 		public FloatVariableSource TimeScale = new FloatVariableSource(1.0f);
 
 		public override Color NodeColor => Colors.Sequencing;

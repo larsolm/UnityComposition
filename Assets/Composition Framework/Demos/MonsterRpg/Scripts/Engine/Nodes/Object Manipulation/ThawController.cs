@@ -11,7 +11,7 @@ namespace PiRhoSoft.MonsterRpg
 		public GraphNode Next = null;
 
 		[Tooltip("The controller to thaw")]
-		[VariableConstraint(typeof(Controller))]
+		[VariableReference(typeof(Controller))]
 		public VariableReference Controller = new VariableReference();
 
 		public override Color NodeColor => Colors.SequencingLight;

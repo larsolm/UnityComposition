@@ -67,7 +67,7 @@ namespace PiRhoSoft.Composition
 		#region Reserved Words
 		
 		private static HashSet<string> _keywords = new HashSet<string>();
-		private static Dictionary<string, VariableValue> _constants = new Dictionary<string, VariableValue>();
+		private static Dictionary<string, Variable> _constants = new Dictionary<string, Variable>();
 		private static Dictionary<string, VariableType> _types = new Dictionary<string, VariableType>();
 
 		static ExpressionLexer()
@@ -75,12 +75,12 @@ namespace PiRhoSoft.Composition
 			AddKeyword(CastOperator);
 			AddKeyword(TestOperator);
 
-			AddConstant(NullConstant, VariableValue.Create((Object)null));
-			AddConstant(TrueConstant, VariableValue.Create(true));
-			AddConstant(FalseConstant, VariableValue.Create(false));
-			AddConstant(PiConstant, VariableValue.Create(Mathf.PI));
-			AddConstant(Deg2RadConstant, VariableValue.Create(Mathf.Deg2Rad));
-			AddConstant(Rad2DegConstant, VariableValue.Create(Mathf.Rad2Deg));
+			AddConstant(NullConstant, Variable.Object((Object)null));
+			AddConstant(TrueConstant, Variable.Bool(true));
+			AddConstant(FalseConstant, Variable.Bool(false));
+			AddConstant(PiConstant, Variable.Float(Mathf.PI));
+			AddConstant(Deg2RadConstant, Variable.Float(Mathf.Deg2Rad));
+			AddConstant(Rad2DegConstant, Variable.Float(Mathf.Rad2Deg));
 
 			_types = Enum.GetValues(typeof(VariableType))
 				.Cast<VariableType>()
@@ -95,7 +95,7 @@ namespace PiRhoSoft.Composition
 				Debug.LogErrorFormat(_duplicateKeywordError, text);
 		}
 
-		public static void AddConstant(string text, VariableValue value)
+		public static void AddConstant(string text, Variable value)
 		{
 			if (!_constants.ContainsKey(text))
 				_constants.Add(text, value);
@@ -103,9 +103,9 @@ namespace PiRhoSoft.Composition
 				Debug.LogErrorFormat(_duplicateConstantError, text);
 		}
 
-		public static VariableValue GetConstant(string text)
+		public static Variable GetConstant(string text)
 		{
-			return _constants.TryGetValue(text, out var value) ? value : VariableValue.Empty;
+			return _constants.TryGetValue(text, out var value) ? value : Variable.Empty;
 		}
 
 		internal static VariableType GetType(string text)

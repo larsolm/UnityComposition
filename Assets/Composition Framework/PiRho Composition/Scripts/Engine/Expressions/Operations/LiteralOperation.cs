@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition
 	{
 		private const string _invalidLiteralException = "unable to parse '{0}' as a literal {1}";
 
-		private VariableValue _value;
+		private Variable _value;
 
 		public override void Parse(ExpressionParser parser, ExpressionToken token)
 		{
@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition
 				{
 					if (int.TryParse(text, out var i))
 					{
-						_value = VariableValue.Create(i);
+						_value = Variable.Int(i);
 						return;
 					}
 
@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition
 				{
 					if (float.TryParse(text, out var f))
 					{
-						_value = VariableValue.Create(f);
+						_value = Variable.Float(f);
 						return;
 					}
 
@@ -38,14 +38,14 @@ namespace PiRhoSoft.Composition
 				}
 				case ExpressionTokenType.String:
 				{
-					_value = VariableValue.Create(text);
+					_value = Variable.String(text);
 					return;
 				}
 				case ExpressionTokenType.Color:
 				{
 					if (TryParseColor(text, out var c))
 					{
-						_value = VariableValue.Create(c);
+						_value = Variable.Color(c);
 						return;
 					}
 
@@ -56,7 +56,7 @@ namespace PiRhoSoft.Composition
 			throw new ExpressionParseException(token, _invalidLiteralException, text, token.Type);
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			return _value;
 		}

@@ -25,7 +25,6 @@ namespace PiRhoSoft.Composition
 		[NonSerialized] private List<Operation> _operations;
 		[NonSerialized] private Operation _currentOperation;
 
-		public ExpressionCompilationResult CompilationResult { get; private set; } = new ExpressionCompilationResult();
 		public Operation LastOperation => _currentOperation;
 		public bool IsValid => _operations != null && _operations.Count > 0;
 		public bool HasError => !string.IsNullOrEmpty(_statement) && _operations == null;
@@ -66,7 +65,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public VariableValue Execute(Object context, IVariableStore variables)
+		public Variable Execute(Object context, IVariableStore variables)
 		{
 			try
 			{
@@ -81,10 +80,10 @@ namespace PiRhoSoft.Composition
 				Debug.LogErrorFormat(context, _commandEvaluationError, exception.Command, context.name, exception.Message);
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		public VariableValue Execute(Object context, IVariableStore variables, VariableType expectedType)
+		public Variable Execute(Object context, IVariableStore variables, VariableType expectedType)
 		{
 			var result = Execute(context, variables);
 
@@ -97,9 +96,9 @@ namespace PiRhoSoft.Composition
 			return result;
 		}
 
-		public VariableValue Evaluate(IVariableStore variables)
+		public Variable Evaluate(IVariableStore variables)
 		{
-			var result = VariableValue.Empty;
+			var result = Variable.Empty;
 
 			if (_operations != null)
 			{
@@ -116,6 +115,7 @@ namespace PiRhoSoft.Composition
 		private ExpressionCompilationResult Compile()
 		{
 			_operations = null;
+			var result = new ExpressionCompilationResult();
 
 			if (!string.IsNullOrEmpty(_statement))
 			{
@@ -123,22 +123,17 @@ namespace PiRhoSoft.Composition
 				{
 					var tokens = ExpressionLexer.Tokenize(_statement);
 					_operations = ExpressionParser.Parse(_statement, tokens);
-
-					CompilationResult.Success = true;
-					CompilationResult.Location = 0;
-					CompilationResult.Token = null;
-					CompilationResult.Message = null;
 				}
 				catch (ExpressionParseException exception)
 				{
-					CompilationResult.Success = false;
-					CompilationResult.Location = exception.Token.Location;
-					CompilationResult.Token = _statement.Substring(exception.Token.Start, exception.Token.End - exception.Token.Start);
-					CompilationResult.Message = exception.Message;
+					result.Success = false;
+					result.Location = exception.Token.Location;
+					result.Token = _statement.Substring(exception.Token.Start, exception.Token.End - exception.Token.Start);
+					result.Message = exception.Message;
 				}
 			}
 
-			return CompilationResult;
+			return result;
 		}
 
 		public void OnBeforeSerialize()

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -7,80 +7,87 @@ namespace PiRhoSoft.Composition
 {
 	internal class QuaternionVariableHandler : VariableHandler
 	{
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
-			return VariableValue.Create(Quaternion.identity);
+			builder.Append(variable.AsQuaternion);
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.Quaternion);
+			var quaternion = variable.AsQuaternion;
+
+			writer.Write(quaternion.x);
+			writer.Write(quaternion.y);
+			writer.Write(quaternion.z);
+			writer.Write(quaternion.w);
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			writer.Write(value.Quaternion.x);
-			writer.Write(value.Quaternion.y);
-			writer.Write(value.Quaternion.z);
-			writer.Write(value.Quaternion.w);
-		}
-
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
 			var z = reader.ReadSingle();
 			var w = reader.ReadSingle();
 
-			return VariableValue.Create(new Quaternion(x, y, z, w));
+			return Variable.Quaternion(new Quaternion(x, y, z, w));
 		}
 
-		protected internal override VariableValue Multiply_(VariableValue left, VariableValue right)
+		protected internal override Variable Multiply_(Variable left, Variable right)
 		{
 			if (right.TryGetQuaternion(out var q))
-				return VariableValue.Create(left.Quaternion * q);
+				return Variable.Quaternion(left.AsQuaternion * q);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override Variable Lookup_(Variable owner, Variable lookup)
 		{
-			if (lookup.Type == VariableType.String)
+			if (lookup.TryGetString(out var s))
 			{
-				if (lookup.String == "x") return VariableValue.Create(owner.Quaternion.x);
-				else if (lookup.String == "y") return VariableValue.Create(owner.Quaternion.y);
-				else if (lookup.String == "z") return VariableValue.Create(owner.Quaternion.z);
-				else if (lookup.String == "w") return VariableValue.Create(owner.Quaternion.w);
+				var quaternion = owner.AsQuaternion;
+
+				switch (s)
+				{
+					case "x": return Variable.Float(quaternion.x);
+					case "y": return Variable.Float(quaternion.y);
+					case "z": return Variable.Float(quaternion.z);
+					case "w": return Variable.Float(quaternion.w);
+				}
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
 			if (value.TryGetFloat(out var f))
 			{
-				if (lookup.Type == VariableType.String)
+				if (lookup.TryGetString(out var s))
 				{
-					if (lookup.String == "x")
+					var quaternion = owner.AsQuaternion;
+
+					switch (s)
 					{
-						owner = VariableValue.Create(new Quaternion(f, owner.Quaternion.y, owner.Quaternion.z, owner.Quaternion.w));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "y")
-					{
-						owner = VariableValue.Create(new Quaternion(owner.Quaternion.x, f, owner.Quaternion.z, owner.Quaternion.w));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "z")
-					{
-						owner = VariableValue.Create(new Quaternion(owner.Quaternion.x, owner.Quaternion.y, f, owner.Quaternion.w));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "w")
-					{
-						owner = VariableValue.Create(new Quaternion(owner.Quaternion.x, owner.Quaternion.y, owner.Quaternion.z, f));
-						return SetVariableResult.Success;
+						case "x":
+						{
+							owner = Variable.Quaternion(new Quaternion(f, quaternion.y, quaternion.z, quaternion.w));
+							return SetVariableResult.Success;
+						}
+							case "y":
+							{
+							owner = Variable.Quaternion(new Quaternion(quaternion.x, f, quaternion.z, quaternion.w));
+							return SetVariableResult.Success;
+						}
+							case "z":
+							{
+							owner = Variable.Quaternion(new Quaternion(quaternion.x, quaternion.y, f, quaternion.w));
+							return SetVariableResult.Success;
+						}
+							case "w":
+							{
+							owner = Variable.Quaternion(new Quaternion(quaternion.x, quaternion.y, quaternion.z, f));
+							return SetVariableResult.Success;
+						}
 					}
 				}
 
@@ -92,10 +99,10 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
 			if (right.TryGetQuaternion(out var q))
-				return left.Quaternion == q;
+				return left.AsQuaternion == q;
 			else
 				return null;
 		}

@@ -12,11 +12,8 @@ namespace PiRhoSoft.Composition
 	{
 		private const string _alreadyRunningError = "(CIAR) Failed to run Graph '{0}': the Graph is already running";
 
-		[Tooltip("The name used to access the context object from nodes in this graph")]
-		public string ContextName = "context";
-
-		[Tooltip("The variable definition for the context object that runs this graph")]
-		public ValueDefinition ContextDefinition = ValueDefinition.Empty;
+		[Tooltip("The definition for the context object that runs this graph")]
+		public VariableDefinition Context = new VariableDefinition("context");
 
 		[Tooltip("The variables definitions used as inputs for this graph")]
 		[List(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyLabel = "Inputs defined in nodes will appear here")]
@@ -106,11 +103,12 @@ namespace PiRhoSoft.Composition
 			{
 				if (definitions[i].Name == definition.Name)
 				{
-					if (!definitions[i].Definition.IsTypeLocked || (definitions[i].Definition.Type == definition.Definition.Type && !definitions[i].Definition.IsConstraintLocked))
-					{
+					// TODO
+					//if (!definitions[i].Definition.IsTypeLocked || (definitions[i].Definition.Type == definition.Definition.Type && !definitions[i].Definition.IsConstraintLocked))
+					//{
 						definitions[i] = definition;
 						return;
-					}
+					//}
 				}
 			}
 
@@ -162,7 +160,7 @@ namespace PiRhoSoft.Composition
 
 		#region Playback
 
-		public IEnumerator Execute(VariableValue context)
+		public IEnumerator Execute(Variable context)
 		{
 			var store = GraphStore.Reserve(this, context);
 			yield return Execute(store);
@@ -479,6 +477,5 @@ namespace PiRhoSoft.Composition
 #endif
 
 		#endregion
-
 	}
 }

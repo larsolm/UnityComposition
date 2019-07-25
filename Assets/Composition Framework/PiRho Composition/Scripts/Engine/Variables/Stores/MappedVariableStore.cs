@@ -8,13 +8,13 @@ namespace PiRhoSoft.Composition
 	{
 		int VariableCount { get; }
 		string GetVariableName(int index);
-		VariableValue GetVariableValue(int index);
-		SetVariableResult SetVariableValue(int index, VariableValue value);
+		Variable GetVariableValue(int index);
+		SetVariableResult SetVariableValue(int index, Variable value);
 	}
 
 	public interface IVariableListener
 	{
-		void VariableChanged(int index, VariableValue value);
+		void VariableChanged(int index, Variable value);
 	}
 
 	public class MappedVariableAttribute : Attribute
@@ -74,14 +74,14 @@ namespace PiRhoSoft.Composition
 
 		#region IVariableStore Implementation
 
-		public VariableValue GetVariable(string name)
+		public Variable GetVariable(string name)
 		{
 			return _map != null && _map.TryGetIndex(name, out int index)
 				? GetVariableValue(index)
-				: VariableValue.Empty;
+				: Variable.Empty;
 		}
 
-		public SetVariableResult SetVariable(string name, VariableValue value)
+		public SetVariableResult SetVariable(string name, Variable value)
 		{
 			return _map != null && _map.TryGetIndex(name, out int index)
 				? SetVariableValue(index, value)
@@ -120,7 +120,7 @@ namespace PiRhoSoft.Composition
 			return null;
 		}
 
-		public VariableValue GetVariableValue(int index)
+		public Variable GetVariableValue(int index)
 		{
 			if (_lists != null)
 			{
@@ -135,10 +135,10 @@ namespace PiRhoSoft.Composition
 				}
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		public SetVariableResult SetVariableValue(int index, VariableValue value)
+		public SetVariableResult SetVariableValue(int index, Variable value)
 		{
 			if (_lists != null)
 			{

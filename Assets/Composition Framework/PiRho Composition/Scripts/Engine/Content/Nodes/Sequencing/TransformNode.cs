@@ -77,7 +77,7 @@ namespace PiRhoSoft.Composition
 		public override void GetInputs(IList<VariableDefinition> inputs)
 		{
 			if (GraphStore.IsInput(Transform))
-				inputs.Add(new VariableDefinition { Name = Transform.RootName, Definition = ValueDefinition.Create<Transform>() });
+				inputs.Add(new VariableDefinition(Transform.RootName, new ObjectConstraint(typeof(Transform))));
 
 			TargetPosition.GetInputs(inputs);
 			TargetRotation.GetInputs(inputs);

@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
 using UnityEngine;
@@ -7,109 +7,117 @@ namespace PiRhoSoft.Composition
 {
 	internal class Vector4VariableHandler : VariableHandler
 	{
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable value, StringBuilder builder)
 		{
-			return VariableValue.Create(new Vector4());
+			builder.Append(value.AsVector4);
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.Vector4);
+			var vector = variable.AsVector4;
+
+			writer.Write(vector.x);
+			writer.Write(vector.y);
+			writer.Write(vector.z);
+			writer.Write(vector.w);
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			writer.Write(value.Vector4.x);
-			writer.Write(value.Vector4.y);
-			writer.Write(value.Vector4.z);
-			writer.Write(value.Vector4.w);
-		}
-
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var x = reader.ReadSingle();
 			var y = reader.ReadSingle();
 			var z = reader.ReadSingle();
 			var w = reader.ReadSingle();
 
-			return VariableValue.Create(new Vector4(x, y, z, w));
+			return Variable.Vector4(new Vector4(x, y, z, w));
 		}
 
-		protected internal override VariableValue Add_(VariableValue left, VariableValue right)
+		protected internal override Variable Add_(Variable left, Variable right)
 		{
-			if (right.TryGetVector4(out var v4))
-				return VariableValue.Create(left.Vector4 + v4);
+			if (right.TryGetVector4(out var vector))
+				return Variable.Vector4(left.AsVector4 + vector);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Subtract_(VariableValue left, VariableValue right)
+		protected internal override Variable Subtract_(Variable left, Variable right)
 		{
-			if (right.TryGetVector4(out var v4))
-				return VariableValue.Create(left.Vector4 - v4);
+			if (right.TryGetVector4(out var vector))
+				return Variable.Vector4(left.AsVector4 - vector);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Multiply_(VariableValue left, VariableValue right)
+		protected internal override Variable Multiply_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var f))
-				return VariableValue.Create(left.Vector4 * f);
+				return Variable.Vector4(left.AsVector4 * f);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Divide_(VariableValue left, VariableValue right)
+		protected internal override Variable Divide_(Variable left, Variable right)
 		{
 			if (right.TryGetFloat(out var number))
-				return VariableValue.Create(left.Vector4 / number);
+				return Variable.Vector4(left.AsVector4 / number);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		protected internal override VariableValue Negate_(VariableValue value)
+		protected internal override Variable Negate_(Variable value)
 		{
-			return VariableValue.Create(new Vector4(-value.Vector4.x, -value.Vector4.y, -value.Vector4.z, value.Vector4.w));
+			var vector = value.AsVector4;
+			return Variable.Vector4(new Vector4(-vector.x, -vector.y, -vector.z, vector.w));
 		}
 
-		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override Variable Lookup_(Variable owner, Variable lookup)
 		{
-			if (lookup.Type == VariableType.String)
+			if (lookup.TryGetString(out var s))
 			{
-				if (lookup.String == "x") return VariableValue.Create(owner.Vector4.x);
-				else if (lookup.String == "y") return VariableValue.Create(owner.Vector4.y);
-				else if (lookup.String == "z") return VariableValue.Create(owner.Vector4.z);
-				else if (lookup.String == "w") return VariableValue.Create(owner.Vector4.w);
+				var vector = owner.AsVector4;
+
+				switch (s)
+				{
+					case "x": return Variable.Float(vector.x);
+					case "y": return Variable.Float(vector.y);
+					case "z": return Variable.Float(vector.z);
+					case "w": return Variable.Float(vector.w);
+				}
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
 			if (value.TryGetFloat(out var f))
 			{
-				if (lookup.Type == VariableType.String)
+				if (lookup.TryGetString(out var s))
 				{
-					if (lookup.String == "x")
+					var vector = owner.AsVector4;
+
+					switch (s)
 					{
-						owner = VariableValue.Create(new Vector4(f, owner.Vector4.y, owner.Vector4.z, owner.Vector4.w));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "y")
-					{
-						owner = VariableValue.Create(new Vector4(owner.Vector4.x, f, owner.Vector4.z, owner.Vector4.w));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "z")
-					{
-						owner = VariableValue.Create(new Vector4(owner.Vector4.x, owner.Vector4.y, f, owner.Vector4.w));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "w")
-					{
-						owner = VariableValue.Create(new Vector4(owner.Vector4.x, owner.Vector4.y, owner.Vector4.z, f));
-						return SetVariableResult.Success;
+						case "x":
+						{
+							owner = Variable.Vector4(new Vector4(f, vector.y, vector.z, vector.w));
+							return SetVariableResult.Success;
+						}
+						case "y":
+						{
+							owner = Variable.Vector4(new Vector4(vector.x, f, vector.z, vector.w));
+							return SetVariableResult.Success;
+						}
+						case "z":
+						{
+							owner = Variable.Vector4(new Vector4(vector.x, vector.y, f, vector.w));
+							return SetVariableResult.Success;
+						}
+						case "w":
+						{
+							owner = Variable.Vector4(new Vector4(vector.x, vector.y, vector.z, f));
+							return SetVariableResult.Success;
+						}
 					}
 				}
 
@@ -121,10 +129,10 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
-			if (right.TryGetVector4(out var v4))
-				return left.Vector4 == v4;
+			if (right.TryGetVector4(out var vector))
+				return left.AsVector4 == vector;
 			else
 				return null;
 		}

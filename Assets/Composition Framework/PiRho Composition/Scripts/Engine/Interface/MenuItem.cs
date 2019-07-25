@@ -97,13 +97,13 @@ namespace PiRhoSoft.Composition
 			return _names;
 		}
 
-		public override VariableValue GetVariable(string name)
+		public override Variable GetVariable(string name)
 		{
-			if (name == ItemName) return VariableValue.Create(_data);
+			if (name == ItemName) return Variable.Store(_data);
 			else return base.GetVariable(name);
 		}
 
-		public override SetVariableResult SetVariable(string name, VariableValue value)
+		public override SetVariableResult SetVariable(string name, Variable value)
 		{
 			return SetVariableResult.ReadOnly;
 		}
@@ -123,20 +123,20 @@ namespace PiRhoSoft.Composition
 				return _variableNames;
 			}
 
-			public VariableValue GetVariable(string name)
+			public Variable GetVariable(string name)
 			{
 				switch (name)
 				{
-					case nameof(Index): return VariableValue.Create(Index);
-					case nameof(Column): return VariableValue.Create(Column);
-					case nameof(Row): return VariableValue.Create(Row);
-					case nameof(Label): return VariableValue.Create(Label);
-					case nameof(Focused): return VariableValue.Create(Focused);
-					default: return VariableValue.Empty;
+					case nameof(Index): return Variable.Int(Index);
+					case nameof(Column): return Variable.Int(Column);
+					case nameof(Row): return Variable.Int(Row);
+					case nameof(Label): return Variable.String(Label);
+					case nameof(Focused): return Variable.Bool(Focused);
+					default: return Variable.Empty;
 				}
 			}
 
-			public SetVariableResult SetVariable(string name, VariableValue value)
+			public SetVariableResult SetVariable(string name, Variable value)
 			{
 				return SetVariableResult.ReadOnly;
 			}

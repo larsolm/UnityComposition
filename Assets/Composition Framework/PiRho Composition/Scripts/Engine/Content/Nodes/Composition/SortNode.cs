@@ -38,8 +38,8 @@ namespace PiRhoSoft.Composition
 					{
 						foreach (var condition in SortConditions)
 						{
-							var leftValue = condition.GetValue(left.Store);
-							var rightValue = condition.GetValue(right.Store);
+							var leftValue = condition.GetValue(left.AsStore);
+							var rightValue = condition.GetValue(right.AsStore);
 
 							var compare = VariableHandler.Compare(leftValue, rightValue).GetValueOrDefault(0);
 							if (compare != 0)

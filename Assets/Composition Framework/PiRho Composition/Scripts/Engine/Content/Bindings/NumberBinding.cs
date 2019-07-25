@@ -13,11 +13,11 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The variable holding the value to display as text in this object")]
 		public VariableReference Variable = new VariableReference();
 
-		private VariableValue _previousValue = VariableValue.Empty;
+		private Variable _previousValue = PiRhoSoft.Composition.Variable.Empty;
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
-			if (Resolve(variables, Variable, out VariableValue value))
+			if (Resolve(variables, Variable, out Variable value))
 			{
 				var equal = VariableHandler.IsEqual(value, _previousValue);
 
@@ -41,13 +41,13 @@ namespace PiRhoSoft.Composition
 							Debug.LogWarningFormat(this, _invalidVariableWarning, Variable, name, value.Type);
 
 						SetText(string.Empty, false);
-						_previousValue = VariableValue.Empty;
+						_previousValue = PiRhoSoft.Composition.Variable.Empty;
 					}
 				}
 			}
 			else
 			{
-				_previousValue = VariableValue.Empty;
+				_previousValue = PiRhoSoft.Composition.Variable.Empty;
 				SetText(string.Empty, false);
 			}
 		}

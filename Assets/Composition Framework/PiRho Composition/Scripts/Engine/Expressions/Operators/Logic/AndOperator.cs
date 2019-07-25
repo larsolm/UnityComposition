@@ -4,22 +4,22 @@
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.And;
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			var left = Left.Evaluate(variables);
 
 			if (left.Type != VariableType.Bool)
 				throw TypeMismatch(left.Type, VariableType.Bool);
 
-			if (!left.Bool)
-				return VariableValue.Create(false);
+			if (!left.AsBool)
+				return Variable.Bool(false);
 
 			var right = Right.Evaluate(variables);
 
 			if (right.Type != VariableType.Bool)
 				throw TypeMismatch(VariableType.Bool, right.Type);
 
-			return VariableValue.Create(right.Bool);
+			return Variable.Bool(right.AsBool);
 		}
 	}
 }

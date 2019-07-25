@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The InterfaceControl to hide")]
-		[VariableConstraint(typeof(InterfaceControl))]
+		[VariableReference(typeof(InterfaceControl))]
 		public VariableReference Control = new VariableReference();
 
 		public override Color NodeColor => Colors.InterfaceDark;

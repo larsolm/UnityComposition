@@ -32,7 +32,7 @@ namespace PiRhoSoft.Composition
 		public override void GetOutputs(IList<VariableDefinition> outputs)
 		{
 			if (GraphStore.IsOutput(ObjectVariable))
-				outputs.Add(new VariableDefinition { Name = ObjectVariable.RootName, Definition = ValueDefinition.Create<GameObject>() });
+				outputs.Add(new VariableDefinition(ObjectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
 		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
@@ -55,7 +55,7 @@ namespace PiRhoSoft.Composition
 				if (obj != null)
 				{
 					if (ObjectVariable.IsAssigned)
-						Assign(variables, ObjectVariable, VariableValue.Create(obj));
+						Assign(variables, ObjectVariable, Variable.Object(obj));
 				}
 				else
 				{

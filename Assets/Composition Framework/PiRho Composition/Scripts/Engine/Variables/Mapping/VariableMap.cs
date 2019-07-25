@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition
 		public VariableMap Add(VariableSchema schema)
 		{
 			for (var i = 0; i < schema.Count; i++)
-				Add(schema[i].Name);
+				Add(schema[i].Definition.Name);
 
 			return this;
 		}

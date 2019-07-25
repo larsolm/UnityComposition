@@ -23,12 +23,12 @@
 			return _list.GetVariableName(index);
 		}
 
-		public VariableValue GetVariableValue(int index)
+		public Variable GetVariableValue(int index)
 		{
 			return _list.GetVariableValue(index);
 		}
 
-		public SetVariableResult SetVariableValue(int index, VariableValue value)
+		public SetVariableResult SetVariableValue(int index, Variable value)
 		{
 			var result = _list.SetVariableValue(index, value);
 			

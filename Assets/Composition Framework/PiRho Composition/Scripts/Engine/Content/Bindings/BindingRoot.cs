@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 
 		public string ValueName = "Value";
 
-		public virtual VariableValue Value { get; set; }
+		public virtual Variable Value { get; set; }
 
 		private IVariableStore _parent;
 
@@ -40,8 +40,8 @@ namespace PiRhoSoft.Composition
 		#region IVariableStore Implementation
 
 		public virtual IList<string> GetVariableNames() { _names[0] = ValueName; return _names; }
-		public virtual VariableValue GetVariable(string name) => name == ValueName ? Value : _parent.GetVariable(name);
-		public virtual SetVariableResult SetVariable(string name, VariableValue value) => name == ValueName ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
+		public virtual Variable GetVariable(string name) => name == ValueName ? Value : _parent.GetVariable(name);
+		public virtual SetVariableResult SetVariable(string name, Variable value) => name == ValueName ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
 
 		#endregion
 	}

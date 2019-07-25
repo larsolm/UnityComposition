@@ -1,21 +1,21 @@
-﻿using System;
+﻿using PiRhoSoft.Utilities;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class VariablePool : VariableStore, ISerializationCallbackReceiver
+	public class VariablePool : VariableStore, ISerializableData, ISerializationCallbackReceiver
 	{
-		[SerializeField] private List<string> _variablesData;
-		[SerializeField] private List<Object> _variablesObjects;
+		[SerializeField] private SerializedData _variablesData = new SerializedData();
 
-		public List<ValueDefinition> Definitions = new List<ValueDefinition>();
+		public List<VariableDefinition> Definitions = new List<VariableDefinition>();
 
-		public override void AddVariable(string name, VariableValue value)
+		public override void AddVariable(string name, Variable value)
 		{
-			Definitions.Add(ValueDefinition.Create(value.Type, null, null, null, false, false));
+			Definitions.Add(new VariableDefinition(name, value.Type));
 			base.AddVariable(name, value);
 		}
 
@@ -54,23 +54,23 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public void ChangeDefinition(int index, ValueDefinition definition)
+		public void ChangeDefinition(int index, VariableDefinition definition)
 		{
 			var variable = Variables[index];
 
 			if (!definition.IsValid(variable))
-				Variables[index] = definition.Generate(null);
+				Variables[index] = definition.Generate();
 
 			Definitions[index] = definition;
 		}
 
-		public SetVariableResult SetVariable(int index, VariableValue value)
+		public SetVariableResult SetVariable(int index, Variable value)
 		{
 			var name = Names[index];
 			var result = SetVariable(name, value);
 
 			if (result == SetVariableResult.Success && value.Type != Definitions[index].Type)
-				Definitions[index] = ValueDefinition.Create(value.Type, null, null, null, false, false);
+				Definitions[index] = new VariableDefinition(name, value.Type);
 
 			return result;
 		}
@@ -79,22 +79,38 @@ namespace PiRhoSoft.Composition
 
 		public void OnBeforeSerialize()
 		{
-			var variables = new List<Variable>();
-
-			for (var i = 0; i < Names.Count && i < Variables.Count; i++)
-				variables.Add(Variable.Create(Names[i], Variables[i]));
-
-			_variablesData = VariableHandler.SaveVariables(variables, ref _variablesObjects);
+			_variablesData.SaveInstance(this, 1);
 		}
 
 		public void OnAfterDeserialize()
 		{
-			var variables = VariableHandler.LoadVariables(ref _variablesData, ref _variablesObjects);
+			_variablesData.LoadInstance(this);
+		}
 
+		public void Save(BinaryWriter writer, SerializedData data)
+		{
+			var count = Math.Min(Names.Count, Variables.Count);
+			writer.Write(count);
+
+			for (var i = 0; i < count; i++)
+			{
+				writer.Write(Names[i]);
+				VariableHandler.Save(Variables[i], writer, data);
+			}
+		}
+
+		public void Load(BinaryReader reader, SerializedData data)
+		{
 			base.Clear();
+			var count = reader.ReadInt32();
 
-			foreach (var variable in variables)
-				base.AddVariable(variable.Name, variable.Value); // bypass the override so the definition isn't added
+			for (var i = 0; i < count; i++)
+			{
+				var name = reader.ReadString();
+				var variable = VariableHandler.Load(reader, data);
+
+				base.AddVariable(name, variable); // bypass the override so the definition isn't added
+			}
 		}
 
 		#endregion

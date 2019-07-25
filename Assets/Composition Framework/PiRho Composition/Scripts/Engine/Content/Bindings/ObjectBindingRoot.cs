@@ -9,11 +9,11 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The object that to be used a Binding Root to use for binding variables")]
 		public Object Object;
 
-		public override VariableValue Value
+		public override Variable Value
 		{
 			get
 			{
-				return Object ? VariableValue.Create(Object) : VariableValue.Empty;
+				return Object ? Variable.Object(Object) : Variable.Empty;
 			}
 		}
 	}

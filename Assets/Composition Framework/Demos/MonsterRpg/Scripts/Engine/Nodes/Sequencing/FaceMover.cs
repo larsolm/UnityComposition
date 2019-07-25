@@ -11,11 +11,11 @@ namespace PiRhoSoft.MonsterRpg
 		public GraphNode Next = null;
 
 		[Tooltip("The mover to make face")]
-		[VariableConstraint(typeof(Mover))]
+		[VariableReference(typeof(Mover))]
 		public VariableReference Mover = new VariableReference();
 
 		[Tooltip("The mover to face")]
-		[VariableConstraint(typeof(Mover))]
+		[VariableReference(typeof(Mover))]
 		public VariableReference Target = new VariableReference();
 
 		public override Color NodeColor => Colors.Sequencing;

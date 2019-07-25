@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class LogCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			switch (parameters.Count)
 			{
@@ -14,7 +14,7 @@ namespace PiRhoSoft.Composition
 					var value = parameters[0].Evaluate(variables);
 
 					if (value.TryGetFloat(out var number))
-						return VariableValue.Create(Mathf.Log(number, 10.0f));
+						return Variable.Float(Mathf.Log(number, 10.0f));
 					else
 						throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Float);
 				}
@@ -23,13 +23,13 @@ namespace PiRhoSoft.Composition
 					var value = parameters[0].Evaluate(variables);
 					var power = parameters[1].Evaluate(variables);
 
-					if (!value.HasNumber)
+					if (!value.IsFloat)
 						throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Float);
 
-					if (!power.HasNumber)
+					if (!power.IsFloat)
 						throw CommandEvaluationException.WrongParameterType(name, 1, power.Type, VariableType.Int, VariableType.Float);
 
-					return VariableValue.Create(Mathf.Log(value.Number, power.Number));
+					return Variable.Float(Mathf.Log(value.AsFloat, power.AsFloat));
 				}
 				default:
 				{

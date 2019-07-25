@@ -19,31 +19,12 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
-	public class GraphInput : ISerializationCallbackReceiver
+	public class GraphInput
 	{
 		public string Name;
 		public GraphInputType Type;
 		public VariableReference Reference = new VariableReference();
-		[NonSerialized] public VariableValue Value;
-
-		[SerializeField] private string _valueData;
-		[SerializeField] private List<Object> _valueObjects;
-
-		#region ISerializationCallbackReceiver Implementation
-
-		public void OnBeforeSerialize()
-		{
-			if (Type == GraphInputType.Value)
-				_valueData = VariableHandler.SaveValue(Value, ref _valueObjects);
-		}
-
-		public void OnAfterDeserialize()
-		{
-			if (Type == GraphInputType.Value)
-				Value = VariableHandler.LoadValue(ref _valueData, ref _valueObjects);
-		}
-
-		#endregion
+		public VariableValue Value = new VariableValue();
 	}
 
 	[Serializable]
@@ -68,7 +49,7 @@ namespace PiRhoSoft.Composition
 		public const string LocalStoreName = "local";
 
 		public string ContextName { get; private set; }
-		public VariableValue Context { get; private set; }
+		public Variable Context { get; private set; }
 
 		public VariableStore Input { get; } = new WritableStore();
 		public VariableStore Output { get; } = new WritableStore();
@@ -91,12 +72,12 @@ namespace PiRhoSoft.Composition
 
 		private static ClassPool<GraphStore, PoolInfo> _pool = new ClassPool<GraphStore, PoolInfo>();
 
-		internal static GraphStore Reserve(Graph graph, VariableValue context)
+		internal static GraphStore Reserve(Graph graph, Variable context)
 		{
 			var store = _pool.Reserve();
 
-			store.ContextName = graph.ContextName;
-			store.Context = ResolveValue(graph.ContextDefinition, context, graph, _invalidContextError, store.ContextName);
+			store.ContextName = graph.Context.Name;
+			store.Context = ResolveValue(graph.Context, context, graph, _invalidContextError, store.ContextName);
 			store._variableNames[store._variableNames.Length - 1] = store.ContextName;
 
 			return store;
@@ -120,7 +101,7 @@ namespace PiRhoSoft.Composition
 					var value = input.Reference.GetValue(caller);
 					var definition = graph.GetInputDefinition(input);
 
-					value = ResolveValue(definition.Definition, value, graph.Graph, _invalidInputError, definition.Name);
+					value = ResolveValue(definition, value, graph.Graph, _invalidInputError, definition.Name);
 
 					if (value.Type != VariableType.Empty)
 						Input.AddVariable(input.Name, value);
@@ -129,7 +110,7 @@ namespace PiRhoSoft.Composition
 				}
 				else if (input.Type == GraphInputType.Value)
 				{
-					Input.AddVariable(input.Name, input.Value);
+					Input.AddVariable(input.Name, input.Value.Variable);
 				}
 			}
 		}
@@ -137,7 +118,7 @@ namespace PiRhoSoft.Composition
 		public void WriteOutputs(IList<GraphOutput> outputs)
 		{
 			foreach (var output in outputs)
-				Output.AddVariable(output.Name, VariableValue.Empty);
+				Output.AddVariable(output.Name, Variable.Empty);
 		}
 
 		public void ReadOutputs(GraphCaller graph, IList<GraphOutput> outputs, IVariableStore caller)
@@ -164,12 +145,12 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private static VariableValue ResolveValue(ValueDefinition definition, VariableValue value, Object errorContext, string invalidError, string variableName)
+		private static Variable ResolveValue(VariableDefinition definition, Variable value, Object errorContext, string invalidError, string variableName)
 		{
-			if (definition.Type == VariableType.Object && definition.Constraint is ObjectVariableConstraint constraint && value.TryGetObject(out var obj))
+			if (definition.Type == VariableType.Object && definition.Constraint is ObjectConstraint constraint && value.TryGetObject(out var obj))
 			{
-				var resolved = ComponentHelper.GetAsObject(constraint.Type, obj);
-				value = VariableValue.Create(resolved);
+				var resolved = ComponentHelper.GetAsObject(constraint.ObjectType, obj);
+				value = Variable.Object(resolved);
 			}
 
 			if (definition.Type != VariableType.Empty && !definition.IsValid(value))
@@ -187,23 +168,23 @@ namespace PiRhoSoft.Composition
 			return _variableNames;
 		}
 
-		public VariableValue GetVariable(string name)
+		public Variable GetVariable(string name)
 		{
 			if (ContextName == name)
 				return Context;
 
 			switch (name)
 			{
-				case InputStoreName: return VariableValue.Create(Input);
-				case OutputStoreName: return VariableValue.Create(Output);
-				case LocalStoreName: return VariableValue.Create(Local);
-				case CompositionManager.GlobalStoreName: return VariableValue.Create(CompositionManager.Instance.GlobalStore);
-				case CompositionManager.SceneStoreName: return VariableValue.Create(CompositionManager.Instance.SceneStore);
+				case InputStoreName: return Variable.Store(Input);
+				case OutputStoreName: return Variable.Store(Output);
+				case LocalStoreName: return Variable.Store(Local);
+				case CompositionManager.GlobalStoreName: return Variable.Store(CompositionManager.Instance.GlobalStore);
+				case CompositionManager.SceneStoreName: return Variable.Store(CompositionManager.Instance.SceneStore);
 				default: return Local.GetVariable(name);
 			}
 		}
 
-		public SetVariableResult SetVariable(string name, VariableValue value)
+		public SetVariableResult SetVariable(string name, Variable value)
 		{
 			if (ContextName == name)
 				return SetVariableResult.ReadOnly;

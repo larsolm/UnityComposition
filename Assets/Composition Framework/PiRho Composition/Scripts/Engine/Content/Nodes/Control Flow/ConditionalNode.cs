@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
 		{
-			var condition = Condition.Execute(this, variables, VariableType.Bool).Bool;
+			var condition = Condition.Execute(this, variables, VariableType.Bool).AsBool;
 
 			if (condition)
 				graph.GoTo(OnTrue, nameof(OnTrue));

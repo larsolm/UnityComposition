@@ -60,7 +60,7 @@ namespace PiRhoSoft.Composition.Editor
 					{
 						container.Add(ElementHelper.CreateIconButton(Icon.Refresh.Texture, "Re-compute this variable based on the schema initializer", () =>
 						{
-							var value = Variables.Schema[index].Definition.Generate(Variables.Owner);
+							var value = Variables.Schema[index].Definition.GenerateValue(Variables.Owner);
 							Variables.SetVariableValue(index, value);
 						}));
 					}

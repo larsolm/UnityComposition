@@ -45,7 +45,7 @@ namespace PiRhoSoft.MonsterRpg
 				var creature = Species.CreateCreature(trainer);
 
 				if (GenerateGraph.Graph)
-					CompositionManager.Instance.RunGraph(GenerateGraph, VariableValue.CreateReference(Creature));
+					CompositionManager.Instance.RunGraph(GenerateGraph, Variable.Object(Creature));
 
 				return creature;
 			}
@@ -58,8 +58,8 @@ namespace PiRhoSoft.MonsterRpg
 
 		#region IVariableStore Implementation
 
-		public VariableValue GetVariable(string name) => Creature && Creature.Species ? Creature.GetVariable(name) : Species ? Species.GetVariable(name) : VariableValue.Empty;
-		public SetVariableResult SetVariable(string name, VariableValue value) => Creature && Creature.Species ? Creature.SetVariable(name, value) : Species ? Species.SetVariable(name, value) : SetVariableResult.NotFound;
+		public Variable GetVariable(string name) => Creature && Creature.Species ? Creature.GetVariable(name) : Species ? Species.GetVariable(name) : Variable.Empty;
+		public SetVariableResult SetVariable(string name, Variable value) => Creature && Creature.Species ? Creature.SetVariable(name, value) : Species ? Species.SetVariable(name, value) : SetVariableResult.NotFound;
 		public IList<string> GetVariableNames() => Creature && Creature.Species ? Creature.GetVariableNames() : Species ? Species.GetVariableNames() : new List<string>();
 
 		#endregion
@@ -108,7 +108,7 @@ namespace PiRhoSoft.MonsterRpg
 			foreach (var move in Moves)
 			{
 				var m = move.Clone(this);
-				creature.Moves.AddVariable(VariableValue.CreateReference(move));
+				creature.Moves.AddVariable(Variable.Object(move));
 			}
 
 			foreach (var skill in _skills)
@@ -174,12 +174,12 @@ namespace PiRhoSoft.MonsterRpg
 		public bool CanLearnSkill(Skill skill)
 		{
 			var learnCount = _skills.TryGetValue(skill.Name, out int count) ? count : 0;
-			return skill.LearnLimit <= 0 || learnCount < skill.LearnLimit ? skill.Condition.Execute(this, this, VariableType.Bool).Bool : false;
+			return skill.LearnLimit <= 0 || learnCount < skill.LearnLimit ? skill.Condition.Execute(this, this, VariableType.Bool).AsBool : false;
 		}
 
 		public void TeachSkill(Skill skill)
 		{
-			CompositionManager.Instance.RunGraph(skill.Graph, VariableValue.CreateReference(this));
+			CompositionManager.Instance.RunGraph(skill.Graph, Variable.Object(this));
 			SkillLearned(skill);
 		}
 
@@ -224,7 +224,7 @@ namespace PiRhoSoft.MonsterRpg
 				var move = Move.Create(this, moveData);
 
 				if (move != null)
-					Moves.AddVariable(VariableValue.CreateReference(move));
+					Moves.AddVariable(Variable.Object(move));
 				else
 					Debug.LogWarningFormat(this, _missingAbilityWarning, Name);
 			}

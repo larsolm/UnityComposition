@@ -103,7 +103,7 @@ namespace PiRhoSoft.Composition
 
 		#region Variable Lookup
 
-		public bool Resolve(IVariableStore variables, VariableReference reference, out VariableValue result)
+		public bool Resolve(IVariableStore variables, VariableReference reference, out Variable result)
 		{
 			result = reference.GetValue(variables);
 			return !result.IsEmpty;
@@ -146,10 +146,10 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.TryGetInt2(out result))
+			if (value.TryGetVector2Int(out result))
 				return true;
 
-			LogResolveWarning(value, reference, VariableType.Int2);
+			LogResolveWarning(value, reference, VariableType.Vector2Int);
 			return false;
 		}
 
@@ -157,10 +157,10 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.TryGetInt3(out result))
+			if (value.TryGetVector3Int(out result))
 				return true;
 
-			LogResolveWarning(value, reference, VariableType.Int3);
+			LogResolveWarning(value, reference, VariableType.Vector3Int);
 			return false;
 		}
 
@@ -168,10 +168,10 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.TryGetIntRect(out result))
+			if (value.TryGetRectInt(out result))
 				return true;
 
-			LogResolveWarning(value, reference, VariableType.IntRect);
+			LogResolveWarning(value, reference, VariableType.RectInt);
 			return false;
 		}
 
@@ -179,10 +179,10 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.TryGetIntBounds(out result))
+			if (value.TryGetBoundsInt(out result))
 				return true;
 
-			LogResolveWarning(value, reference, VariableType.IntBounds);
+			LogResolveWarning(value, reference, VariableType.BoundsInt);
 			return false;
 		}
 
@@ -274,7 +274,7 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public bool Resolve<EnumType>(IVariableStore variables, VariableReference reference, out EnumType result) where EnumType : Enum
+		public bool Resolve<EnumType>(IVariableStore variables, VariableReference reference, out EnumType result) where EnumType : struct, Enum
 		{
 			var value = reference.GetValue(variables);
 
@@ -311,9 +311,9 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.HasObject)
+			if (value.IsObject)
 			{
-				result = ComponentHelper.GetAsObject<ObjectType>(value.Object);
+				result = ComponentHelper.GetAsObject<ObjectType>(value.AsObject);
 
 				if (result != null)
 					return true;
@@ -328,7 +328,7 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.TryGetReference(out result))
+			if (value.TryGet(out result))
 				return true;
 
 			LogResolveWarning(value, reference, VariableType.Store, typeof(StoreType));
@@ -339,7 +339,7 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.TryGetReference(out result))
+			if (value.TryGet(out result))
 				return true;
 
 			LogResolveWarning(value, reference, VariableType.List, typeof(ListType));
@@ -350,23 +350,10 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.HasReference)
-			{
-				if (value.Reference is InterfaceType i)
-				{
-					result = i;
-					return true;
-				}
-				else
-				{
-					result = null;
-					LogResolveWarning(value, reference, VariableType.Object, typeof(InterfaceType));
-					return false;
-				}
-			}
+			if (value.TryGet(out result))
+				return true;
 
-			result = null;
-			LogResolveWarning(value, reference, VariableType.Object);
+			LogResolveWarning(value, reference, VariableType.Object, typeof(InterfaceType));
 			return false;
 		}
 
@@ -374,9 +361,9 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.HasReference)
+			if (value.IsOther)
 			{
-				result = value.Reference;
+				result = value.AsOther;
 				return true;
 			}
 
@@ -385,18 +372,18 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		private void LogResolveWarning(VariableValue value, VariableReference reference, VariableType expectedType, Type resolveType = null)
+		private void LogResolveWarning(Variable value, VariableReference reference, VariableType expectedType, Type resolveType = null)
 		{
 			if (!SuppressErrors)
 			{
-				if (value.IsEmpty || value.IsNull)
+				if (value.IsEmpty || value.IsNullObject || value.IsNullOther)
 					Debug.LogWarningFormat(this, _missingVariableWarning, reference, name);
 				else if (value.Type == VariableType.Enum && resolveType != null)
 					Debug.LogWarningFormat(this, _invalidEnumWarning, reference, name, value.EnumType.Name, resolveType.Name);
 				else if (value.Type == VariableType.Object && resolveType != null)
-					Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, value.Object.name, value.ReferenceType.Name, resolveType.Name);
-				else if (value.HasReference && resolveType != null)
-					Debug.LogWarningFormat(this, _invalidTypeWarning, reference, name, value.ReferenceType.Name, resolveType.Name);
+					Debug.LogWarningFormat(this, _invalidObjectWarning, reference, name, value.AsObject.name, value.ObjectType.Name, resolveType.Name);
+				else if (value.IsOther && resolveType != null)
+					Debug.LogWarningFormat(this, _invalidTypeWarning, reference, name, value.OtherType.Name, resolveType.Name);
 
 				else
 					Debug.LogWarningFormat(this, _invalidVariableWarning, reference, name, value.Type, expectedType);
@@ -407,7 +394,7 @@ namespace PiRhoSoft.Composition
 
 		#region Variable Assignment
 
-		public void Assign(IVariableStore variables, VariableReference reference, VariableValue value)
+		public void Assign(IVariableStore variables, VariableReference reference, Variable value)
 		{
 			if (reference.IsAssigned)
 			{

@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Animation Player to play the clip on")]
-		[VariableConstraint(typeof(AnimationPlayer))]
+		[VariableReference(typeof(AnimationPlayer))]
 		public VariableReference AnimationPlayer;
 
 		[Tooltip("The Animation Clip to play")]

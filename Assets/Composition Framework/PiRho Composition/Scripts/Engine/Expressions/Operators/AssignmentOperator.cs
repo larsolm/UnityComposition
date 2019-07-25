@@ -4,7 +4,7 @@ namespace PiRhoSoft.Composition
 {
 	public interface IAssignableOperation
 	{
-		SetVariableResult SetValue(IVariableStore variables, VariableValue value);
+		SetVariableResult SetValue(IVariableStore variables, Variable value);
 	}
 
 	public abstract class AssignmentOperator : InfixOperation
@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 			Left.GetOutputs(outputs, source);
 		}
 
-		protected VariableValue Assign(IVariableStore variables, VariableValue value)
+		protected Variable Assign(IVariableStore variables, Variable value)
 		{
 			if (Left is IAssignableOperation assignable)
 			{

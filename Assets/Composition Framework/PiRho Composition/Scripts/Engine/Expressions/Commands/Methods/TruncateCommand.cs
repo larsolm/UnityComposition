@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class TruncateCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 1)
 			{
@@ -14,15 +14,15 @@ namespace PiRhoSoft.Composition
 				switch (result.Type)
 				{
 					case VariableType.Int: return result;
-					case VariableType.Int2: return result;
-					case VariableType.Int3: return result;
-					case VariableType.IntRect: return result;
-					case VariableType.IntBounds: return result;
-					case VariableType.Float: return VariableValue.Create((int)result.Float);
-					case VariableType.Vector2: return VariableValue.Create(new Vector2Int((int)result.Vector2.x, (int)result.Vector2.y));
-					case VariableType.Vector3: return VariableValue.Create(new Vector3Int((int)result.Vector3.x, (int)result.Vector3.y, (int)result.Vector3.z));
-					case VariableType.Rect: return VariableValue.Create(new RectInt((int)result.Rect.x, (int)result.Rect.y, (int)result.Rect.width, (int)result.Rect.height));
-					case VariableType.Bounds: return VariableValue.Create(new BoundsInt((int)result.Bounds.min.x, (int)result.Bounds.min.y, (int)result.Bounds.min.z, (int)result.Bounds.size.x, (int)result.Bounds.size.y, (int)result.Bounds.size.z));
+					case VariableType.Vector2Int: return result;
+					case VariableType.Vector3Int: return result;
+					case VariableType.RectInt: return result;
+					case VariableType.BoundsInt: return result;
+					case VariableType.Float: return Variable.Int((int)result.AsFloat);
+					case VariableType.Vector2: return Variable.Vector2Int(new Vector2Int((int)result.AsVector2.x, (int)result.AsVector2.y));
+					case VariableType.Vector3: return Variable.Vector3Int(new Vector3Int((int)result.AsVector3.x, (int)result.AsVector3.y, (int)result.AsVector3.z));
+					case VariableType.Rect: return Variable.RectInt(new RectInt((int)result.AsRect.x, (int)result.AsRect.y, (int)result.AsRect.width, (int)result.AsRect.height));
+					case VariableType.Bounds: return Variable.BoundsInt(new BoundsInt((int)result.AsBounds.min.x, (int)result.AsBounds.min.y, (int)result.AsBounds.min.z, (int)result.AsBounds.size.x, (int)result.AsBounds.size.y, (int)result.AsBounds.size.z));
 				}
 
 				throw CommandEvaluationException.WrongParameterType(name, 0, result.Type, VariableType.Float, VariableType.Vector2, VariableType.Vector3, VariableType.Rect, VariableType.Bounds);

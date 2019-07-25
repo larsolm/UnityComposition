@@ -23,7 +23,7 @@ namespace PiRhoSoft.MonsterRpg
 		public StringVariableSource DefaultSpawn = new StringVariableSource();
 
 		[Tooltip("The variable to assign the loaded starting zone to")]
-		[VariableConstraint(typeof(Zone))]
+		[VariableReference(typeof(Zone))]
 		public VariableReference StartingZone = new VariableReference();
 
 		public override Color NodeColor => Colors.ExecutionLight;
@@ -38,7 +38,7 @@ namespace PiRhoSoft.MonsterRpg
 				while (info.State == LoadState.Loading)
 					yield return null;
 
-				Assign(variables, StartingZone, VariableValue.CreateReference(info.StartingZone));
+				Assign(variables, StartingZone, Variable.Object(info.StartingZone));
 			}
 
 			graph.GoTo(Next, nameof(Next));

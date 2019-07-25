@@ -14,8 +14,8 @@
 		{
 			for (var i = 0; i < Schema.Count; i++)
 			{
-				var definition = Schema[i];
-				var value = definition.Definition.Generate(null);
+				var definition = Schema[i].Definition;
+				var value = definition.Generate();
 
 				AddVariable(definition.Name, value);
 			}

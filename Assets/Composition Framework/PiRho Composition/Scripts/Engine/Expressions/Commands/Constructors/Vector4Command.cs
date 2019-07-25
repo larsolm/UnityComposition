@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class Vector4Command : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 3)
 			{
@@ -14,19 +14,19 @@ namespace PiRhoSoft.Composition
 				var zValue = parameters[2].Evaluate(variables);
 				var wValue = parameters[3].Evaluate(variables);
 
-				if (!xValue.HasNumber)
+				if (!xValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 0, xValue.Type, VariableType.Float);
 
-				if (!yValue.HasNumber)
+				if (!yValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 1, yValue.Type, VariableType.Float);
 
-				if (!zValue.HasNumber)
+				if (!zValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 2, zValue.Type, VariableType.Float);
 
-				if (!wValue.HasNumber)
+				if (!wValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 3, wValue.Type, VariableType.Float);
 
-				return VariableValue.Create(new Vector4(xValue.Number, yValue.Number, zValue.Number, wValue.Number));
+				return Variable.Vector4(new Vector4(xValue.AsFloat, yValue.AsFloat, zValue.AsFloat, wValue.AsFloat));
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 4);

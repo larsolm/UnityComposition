@@ -23,11 +23,11 @@ namespace PiRhoSoft.Composition
 
 		public MenuItem FocusedItem => _menu.FocusedItem;
 		public int FocusedIndex => _menu.FocusedIndex;
-		public VariableValue FocusedValue => _menu.FocusedItem == null ? VariableValue.Empty : _menu.FocusedItem.Value;
+		public Variable FocusedValue => _menu.FocusedItem == null ? Variable.Empty : _menu.FocusedItem.Value;
 
 		public MenuItem SelectedItem => _selectedItem;
 		public int SelectedIndex => _selectedItem == null ? -1 : _selectedItem.Index;
-		public VariableValue SelectedValue => _selectedItem == null ? VariableValue.Empty : _selectedItem.Value;
+		public Variable SelectedValue => _selectedItem == null ? Variable.Empty : _selectedItem.Value;
 
 		private Menu _menu;
 		private MenuItem _selectedItem;
@@ -114,9 +114,9 @@ namespace PiRhoSoft.Composition
 				{
 					var value = item.Variables.GetValue(variables);
 
-					if (value.HasList)
+					if (value.IsList)
 						CreateListItem(item, value, ref index);
-					else if (value.HasStore)
+					else if (value.IsStore)
 						CreateStoreItem(item, value, ref index);
 					else if (value.IsEmpty)
 						Debug.LogErrorFormat(this, _missingItemError, item.Id, name, item.Variables);
@@ -125,14 +125,14 @@ namespace PiRhoSoft.Composition
 				}
 				else
 				{
-					CreateStoreItem(item, VariableValue.Empty, ref index);
+					CreateStoreItem(item, Variable.Empty, ref index);
 				}
 			}
 
 			OnCreate();
 		}
 
-		private void CreateStoreItem(MenuItemTemplate item, VariableValue value, ref int index)
+		private void CreateStoreItem(MenuItemTemplate item, Variable value, ref int index)
 		{
 			if (item.Source == MenuItemTemplate.ObjectSource.Asset)
 			{
@@ -149,7 +149,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private void CreateListItem(MenuItemTemplate item, VariableValue value, ref int index)
+		private void CreateListItem(MenuItemTemplate item, Variable value, ref int index)
 		{
 			if (item.Source == MenuItemTemplate.ObjectSource.Asset)
 			{
@@ -166,15 +166,15 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private void CreateExpandedItems(MenuItemTemplate item, VariableValue value, ref int index)
+		private void CreateExpandedItems(MenuItemTemplate item, Variable value, ref int index)
 		{
-			var list = value.List;
+			var list = value.AsList;
 
 			for (var i = 0; i < list.Count; i++)
 				AddItem(item, null, list.GetVariable(i), index++);
 		}
 
-		private void CreateSceneItem(MenuItemTemplate item, VariableValue value, ref int index)
+		private void CreateSceneItem(MenuItemTemplate item, Variable value, ref int index)
 		{
 			var obj = transform.Find(item.Name);
 			var menu = obj != null ? obj.GetComponent<MenuItem>() : null;
@@ -185,7 +185,7 @@ namespace PiRhoSoft.Composition
 				Debug.LogErrorFormat(this, _missingChildError, item.Name, name);
 		}
 
-		private void AddItem(MenuItemTemplate item, MenuItem existing, VariableValue value, int index)
+		private void AddItem(MenuItemTemplate item, MenuItem existing, Variable value, int index)
 		{
 			var parent = GetItemParent();
 			var obj = existing == null ? Instantiate(item.Template, parent) : existing;

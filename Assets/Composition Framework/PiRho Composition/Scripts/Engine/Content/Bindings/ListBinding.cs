@@ -69,7 +69,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private void SetItem(int index, VariableValue item)
+		private void SetItem(int index, Variable item)
 		{
 			if (_items[index] != null)
 			{

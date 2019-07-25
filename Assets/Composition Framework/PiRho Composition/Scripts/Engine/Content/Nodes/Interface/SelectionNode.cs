@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode OnCanceled;
 
 		[Tooltip("The SelectionControl to show")]
-		[VariableConstraint(typeof(SelectionControl))]
+		[VariableReference(typeof(SelectionControl))]
 		public VariableReference Control = new VariableReference();
 
 		[Tooltip("The variable to store the selected item's variables in")]
@@ -82,7 +82,7 @@ namespace PiRhoSoft.Composition
 					yield return null;
 
 				Assign(variables, SelectedItem, control.SelectedValue);
-				Assign(variables, SelectedIndex, VariableValue.Create(control.SelectedIndex));
+				Assign(variables, SelectedIndex, Variable.Int(control.SelectedIndex));
 
 				if (control.SelectedItem?.Template is SelectionNodeItem selectedItem)
 					graph.GoTo(selectedItem.OnSelected, nameof(Items), selectedItem.Id);

@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition
 			foreach (var token in _tokens)
 			{
 				if (token.Reference != null && GraphStore.IsInput(token.Reference))
-					inputs.Add(new VariableDefinition { Name = token.Reference.RootName, Definition = ValueDefinition.Create(VariableType.Empty) });
+					inputs.Add(new VariableDefinition(token.Reference.RootName));
 			}
 		}
 
@@ -78,7 +78,7 @@ namespace PiRhoSoft.Composition
 		private class MessageToken
 		{
 			public VariableReference Reference;
-			public VariableValue Value;
+			public Variable Value;
 			public string Text;
 			//public List<MessageToken> Tokens; // this will eventually be used to support VariableReferences that themselves contain a string with format parameters
 		}

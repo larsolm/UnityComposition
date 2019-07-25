@@ -105,12 +105,12 @@ namespace PiRhoSoft.Composition.Editor
 			for (var i = 0; i < _objectsProperty.arraySize; i++)
 				objects.Add(_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue);
 
-			var constraint = VariableHandler.LoadConstraint(ref data, ref objects);
+			//var constraint = VariableHandler.LoadConstraint(ref data, ref objects);
 
 			var initializer = new Expression();
 			initializer.SetStatement(_initializerProperty.stringValue);
 
-			return ValueDefinition.Create((VariableType)_typeProperty.enumValueIndex, constraint, _tagProperty.stringValue, initializer, _isTypeLockedProperty.boolValue, _isConstraintLockedProperty.boolValue);
+			return ValueDefinition.Create((VariableType)_typeProperty.enumValueIndex);
 		}
 
 		public void UpdateProperty(ValueDefinition value, VisualElement element, SerializedProperty property)
@@ -118,13 +118,13 @@ namespace PiRhoSoft.Composition.Editor
 			_typeProperty.enumValueIndex = (int)value.Type;
 			_tagProperty.stringValue = value.Tag;
 			_initializerProperty.stringValue = value.Initializer.Statement;
-			_isTypeLockedProperty.boolValue = value.IsTypeLocked;
-			_isConstraintLockedProperty.boolValue = value.IsConstraintLocked;
-			_constraintProperty.stringValue = VariableHandler.SaveConstraint(value.Type, value.Constraint, out var objects);
-			_objectsProperty.arraySize = objects?.Count ?? 0;
+			//_isTypeLockedProperty.boolValue = value.IsTypeLocked;
+			//_isConstraintLockedProperty.boolValue = value.IsConstraintLocked;
+			//_constraintProperty.stringValue = VariableHandler.SaveConstraint(value.Type, value.Constraint, out var objects);
+			//_objectsProperty.arraySize = objects?.Count ?? 0;
 			
-			for (var i = 0; i < (objects?.Count ?? 0); i++)
-				_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = objects[i];
+			//for (var i = 0; i < (objects?.Count ?? 0); i++)
+			//	_objectsProperty.GetArrayElementAtIndex(i).objectReferenceValue = objects[i];
 		}
 
 		#endregion
@@ -157,10 +157,10 @@ namespace PiRhoSoft.Composition.Editor
 				case VariableType.Bool:
 				case VariableType.Float:
 				case VariableType.Int:
-				case VariableType.Int2:
-				case VariableType.Int3:
-				case VariableType.IntRect:
-				case VariableType.IntBounds:
+				case VariableType.Vector2Int:
+				case VariableType.Vector3Int:
+				case VariableType.RectInt:
+				case VariableType.BoundsInt:
 				case VariableType.Vector2:
 				case VariableType.Vector3:
 				case VariableType.Vector4:
@@ -188,8 +188,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void Setup(ValueDefinition definition, VariableInitializerType initializerType, TagList tags)
 		{
-			if (HasConstraint(definition.Type) && definition.Constraint == null)
-				definition = ValueDefinition.Create(definition.Type, VariableConstraint.Create(definition.Type), _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
+			if (HasConstraint(definition.Type))
+				definition = ValueDefinition.Create(definition.Type);//, ValueDefinition.Create(definition.Type), _definition.Tag, _definition.Initializer, _definition.IsTypeLocked, _definition.IsConstraintLocked);
 
 			Reset();
 			
@@ -237,8 +237,8 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var container = new VisualElement() { tooltip = "The type of variable this defines" };
 
-			if (_definition.IsTypeLocked)
-				container.SetEnabled(false);
+			//if (_definition.IsTypeLocked)
+			//	container.SetEnabled(false);
 
 			var dropdown = new EnumField(_definition.Type);//, _owner, () => (int)_definition.Type, type =>
 			//{
@@ -276,8 +276,8 @@ namespace PiRhoSoft.Composition.Editor
 					container.Add(new VariableValueElement(_owner, () =>
 					{
 						var value = _definition.Initializer.Execute(null, null); // context isn't necessary since the object that would be the context is currently drawing
-						if (value.IsEmpty) // If the initializer hasn't been set, use the default value.
-							value = VariableHandler.CreateDefault(_definition.Type, _definition.Constraint);
+						//if (value.IsEmpty) // If the initializer hasn't been set, use the default value.
+						//	value = VariableHandler.CreateDefault(_definition.Type, _definition.Constraint);
 
 						return value;
 					},
@@ -289,10 +289,10 @@ namespace PiRhoSoft.Composition.Editor
 							case VariableType.Bool: definition.Initializer.SetStatement(value.Bool ? "true" : "false"); break;
 							case VariableType.Float: definition.Initializer.SetStatement(value.Float.ToString()); break;
 							case VariableType.Int: definition.Initializer.SetStatement(value.Int.ToString()); break;
-							case VariableType.Int2: definition.Initializer.SetStatement(string.Format("Vector2Int({0}, {1})", value.Int2.x, value.Int2.y)); break;
-							case VariableType.Int3: definition.Initializer.SetStatement(string.Format("Vector3Int({0}, {1}, {2})", value.Int3.x, value.Int3.y, value.Int3.z)); break;
-							case VariableType.IntRect: definition.Initializer.SetStatement(string.Format("RectInt({0}, {1}, {2}, {3})", value.IntRect.x, value.IntRect.y, value.IntRect.width, value.IntRect.height)); break;
-							case VariableType.IntBounds: definition.Initializer.SetStatement(string.Format("BoundsInt({0}, {1}, {2}, {3}, {4}, {5})", value.IntBounds.x, value.IntBounds.y, value.IntBounds.z, value.IntBounds.size.x, value.IntBounds.size.y, value.IntBounds.size.z)); break;
+							case VariableType.Vector2Int: definition.Initializer.SetStatement(string.Format("Vector2Int({0}, {1})", value.Int2.x, value.Int2.y)); break;
+							case VariableType.Vector3Int: definition.Initializer.SetStatement(string.Format("Vector3Int({0}, {1}, {2})", value.Int3.x, value.Int3.y, value.Int3.z)); break;
+							case VariableType.RectInt: definition.Initializer.SetStatement(string.Format("RectInt({0}, {1}, {2}, {3})", value.IntRect.x, value.IntRect.y, value.IntRect.width, value.IntRect.height)); break;
+							case VariableType.BoundsInt: definition.Initializer.SetStatement(string.Format("BoundsInt({0}, {1}, {2}, {3}, {4}, {5})", value.IntBounds.x, value.IntBounds.y, value.IntBounds.z, value.IntBounds.size.x, value.IntBounds.size.y, value.IntBounds.size.z)); break;
 							case VariableType.Vector2: definition.Initializer.SetStatement(string.Format("Vector2({0}, {1})", value.Vector2.x, value.Vector2.y)); break;
 							case VariableType.Vector3: definition.Initializer.SetStatement(string.Format("Vector3({0}, {1}, {2})", value.Vector3.x, value.Vector3.y, value.Vector3.z)); break;
 							case VariableType.Vector4: definition.Initializer.SetStatement(string.Format("Vector4({0}, {1}, {2}, {3})", value.Vector4.x, value.Vector4.y, value.Vector4.z, value.Vector4.w)); break;
@@ -340,13 +340,13 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var container = new VisualElement();
 
-			if (_definition.Constraint != null)
-				SetupConstraint(container, _definition.IsConstraintLocked, _definition.Constraint, _definition.Type, _showConstrantLabel);
+			//if (_definition.Constraint != null)
+			//	SetupConstraint(container, _definition.IsConstraintLocked, _definition.Constraint, _definition.Type, _showConstrantLabel);
 
 			ReplaceElement(ref _constraintContainer, container);
 		}
 
-		private void SetupConstraint(VisualElement container, bool isLocked, VariableConstraint constraint, VariableType type, bool showLabel)
+		private void SetupConstraint(VisualElement container, bool isLocked, VariableDefinition definition, VariableType type, bool showLabel)
 		{
 			var label = new Label("Constraint");
 
@@ -361,48 +361,48 @@ namespace PiRhoSoft.Composition.Editor
 				case VariableType.Int:
 				{
 					label.tooltip = "The range of values allowed for the variable";
-					container.Add(SetupIntConstraint(constraint as IntVariableConstraint));
+					//container.Add(SetupIntConstraint(constraint as IntVariableConstraint));
 					break;
 				}
 				case VariableType.Float:
 				{
 					label.tooltip = "The range of values allowed for the variable";
-					container.Add(SetupFloatConstraint(constraint as FloatVariableConstraint));
+					//container.Add(SetupFloatConstraint(constraint as FloatVariableConstraint));
 					break;
 				}
 				case VariableType.String:
 				{
 					label.tooltip = "The list of valid string values for the variable";
-					container.Add(SetupStringConstraint(constraint as StringVariableConstraint));
+					//container.Add(SetupStringConstraint(constraint as StringVariableConstraint));
 					break;
 				}
 				case VariableType.Object:
 				{
 					label.tooltip = "The Object type that the assigned object must be derived from or have an instance of";
-					container.Add(SetupObjectConstraint(constraint as ObjectVariableConstraint));
+					//container.Add(SetupObjectConstraint(constraint as ObjectVariableConstraint));
 					break;
 				}
 				case VariableType.Enum:
 				{
 					label.tooltip = "The enum type of values added to the list";
-					container.Add(SetupEnumConstraint(constraint as EnumVariableConstraint));
+					//container.Add(SetupEnumConstraint(constraint as EnumVariableConstraint));
 					break;
 				}
 				case VariableType.Store:
 				{
 					label.tooltip = "The schema the store must use";
-					container.Add(SetupStoreConstraint(constraint as StoreVariableConstraint));
+					//container.Add(SetupStoreConstraint(constraint as StoreVariableConstraint));
 					break;
 				}
 				case VariableType.List:
 				{
 					label.tooltip = "The variable type of values added to the list";
-					container.Add(SetupListConstraint(constraint as ListVariableConstraint));
+					//container.Add(SetupListConstraint(constraint as ListVariableConstraint));
 					break;
 				}
 			}
 		}
-
+		/*
 		private VisualElement SetupIntConstraint(IntVariableConstraint constraint)
 		{
 			var container = new VisualElement();
@@ -599,7 +599,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			return container;
 		}
-
+		*/
 		#endregion
 	}
 }

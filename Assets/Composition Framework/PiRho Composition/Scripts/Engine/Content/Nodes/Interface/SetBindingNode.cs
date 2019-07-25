@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Binding Root to set bindings on")]
-		[VariableConstraint(typeof(BindingRoot))]
+		[VariableReference(typeof(BindingRoot))]
 		public VariableReference Object = new VariableReference();
 
 		[Tooltip("The Variable store to set the bindings to")]

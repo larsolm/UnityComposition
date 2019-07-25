@@ -8,17 +8,17 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariableValueElement : VisualElement, IBindableObject<VariableValue>
+	public class VariableValueElement : VisualElement, IBindableObject<Variable>
 	{
 		private readonly Object _owner;
-		private readonly Func<VariableValue> _getValue;
-		private readonly Action<VariableValue> _setValue;
+		private readonly Func<Variable> _getValue;
+		private readonly Action<Variable> _setValue;
 		private readonly Func<ValueDefinition> _getDefinition;
 
-		private VariableValue _value;
+		private Variable _value;
 		private ValueDefinition _definition;
 
-		public VariableValueElement(Object owner, Func<VariableValue> getValue, Action<VariableValue> setValue, Func<ValueDefinition> getDefinition)
+		public VariableValueElement(Object owner, Func<Variable> getValue, Action<Variable> setValue, Func<ValueDefinition> getDefinition)
 		{
 			_owner = owner;
 			_getValue = getValue;
@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition.Editor
 			schedule.Execute(() =>
 			{
 				var definition = _getDefinition();
-				if (definition.Constraint != _definition.Constraint)
+				if (definition != _definition)
 					Setup(_value, definition);
 			}).Every(100);
 
@@ -37,12 +37,12 @@ namespace PiRhoSoft.Composition.Editor
 			Setup(_getValue(), _getDefinition());
 		}
 
-		public VariableValue GetValueFromElement(VisualElement element) => _value;
-		public VariableValue GetValueFromObject(Object owner) => _getValue();
-		public void UpdateElement(VariableValue value, VisualElement element, Object owner) => Setup(value, _definition);
-		public void UpdateObject(VariableValue value, VisualElement element, Object owner) => _setValue(value);
+		public Variable GetValueFromElement(VisualElement element) => _value;
+		public Variable GetValueFromObject(Object owner) => _getValue();
+		public void UpdateElement(Variable value, VisualElement element, Object owner) => Setup(value, _definition);
+		public void UpdateObject(Variable value, VisualElement element, Object owner) => _setValue(value);
 
-		public void Setup(VariableValue value, ValueDefinition definition)
+		public void Setup(Variable value, ValueDefinition definition)
 		{
 			Clear();
 
@@ -54,7 +54,7 @@ namespace PiRhoSoft.Composition.Editor
 			Add(element);
 		}
 
-		private void SetValue(VariableValue value)
+		private void SetValue(Variable value)
 		{
 			ElementHelper.SendChangeEvent(this, _value, value);
 			_value = value;
@@ -68,10 +68,10 @@ namespace PiRhoSoft.Composition.Editor
 				case VariableType.Bool: return CreateBool();
 				case VariableType.Int: return CreateInt();
 				case VariableType.Float: return CreateFloat();
-				case VariableType.Int2: return CreateInt2();
-				case VariableType.Int3: return CreateInt3();
-				case VariableType.IntRect: return CreateIntRect();
-				case VariableType.IntBounds: return CreateIntBounds();
+				case VariableType.Vector2Int: return CreateInt2();
+				case VariableType.Vector3Int: return CreateInt3();
+				case VariableType.RectInt: return CreateIntRect();
+				case VariableType.BoundsInt: return CreateIntBounds();
 				case VariableType.Vector2: return CreateVector2();
 				case VariableType.Vector3: return CreateVector3();
 				case VariableType.Vector4: return CreateVector4();
@@ -107,7 +107,7 @@ namespace PiRhoSoft.Composition.Editor
 		public VisualElement CreateBool()
 		{
 			var toggle = new Toggle() { value = _value.Bool };
-			ElementHelper.Bind(this, toggle, _owner, () => _value.Bool, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, toggle, _owner, () => _value.Bool, value => SetValue(Variable.Create(value)));
 			return toggle;
 		}
 
@@ -115,24 +115,24 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var container = new VisualElement();
 
-			if (_definition.Constraint is IntVariableConstraint constraint)
+			if (_definition is IntValueDefinition constraint)
 			{
 				var field = new IntegerField() { value = _value.Int, isDelayed = true };
 				container.Add(field);
 
 				ElementHelper.Bind(this, field, _owner, () => _value.Int, value =>
 				{
-					var clamped = constraint.HasRange ? Mathf.Clamp(value, constraint.Minimum, constraint.Maximum) : value;
-					SetValue(VariableValue.Create(clamped));
+					var clamped = constraint.Minimum.HasValue && constraint.Maximum.HasValue ? Mathf.Clamp(value, constraint.Minimum.Value, constraint.Maximum.Value) : value;
+					SetValue(Variable.Create(clamped));
 				});
 
-				if (constraint.HasRange)
-				{
-					var slider = new SliderInt(constraint.Minimum, constraint.Maximum) { value = _value.Int };
-					container.Add(slider);
-
-					ElementHelper.Bind(this, slider, _owner, () => _value.Int, value => SetValue(VariableValue.Create(value)));
-				}
+				//if (constraint.HasRange)
+				//{
+				//	var slider = new SliderInt(constraint.Minimum, constraint.Maximum) { value = _value.Int };
+				//	container.Add(slider);
+				//
+				//	ElementHelper.Bind(this, slider, _owner, () => _value.Int, value => SetValue(VariableValue.Create(value)));
+				//}
 			}
 
 			return container;
@@ -142,24 +142,24 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var container = new VisualElement();
 
-			if (_definition.Constraint is FloatVariableConstraint constraint)
+			if (_definition is FloatValueDefinition constraint)
 			{
 				var field = new FloatField() { value = _value.Float, isDelayed = true };
 				container.Add(field);
 
 				ElementHelper.Bind(this, field, _owner, () => _value.Float, value =>
 				{
-					var clamped = constraint.HasRange ? Mathf.Clamp(value, constraint.Minimum, constraint.Maximum) : value;
-					SetValue(VariableValue.Create(clamped));
+					var clamped = constraint.Minimum.HasValue && constraint.Maximum.HasValue ? Mathf.Clamp(value, constraint.Minimum.Value, constraint.Maximum.Value) : value;
+					SetValue(Variable.Create(clamped));
 				});
 
-				if (constraint.HasRange)
-				{
-					var slider = new Slider(constraint.Minimum, constraint.Maximum) { value = _value.Float };
-					container.Add(slider);
-
-					ElementHelper.Bind(this, slider, _owner, () => _value.Float, value => SetValue(VariableValue.Create(value)));
-				}
+				//if (constraint.HasRange)
+				//{
+				//	var slider = new Slider(constraint.Minimum, constraint.Maximum) { value = _value.Float };
+				//	container.Add(slider);
+				//
+				//	ElementHelper.Bind(this, slider, _owner, () => _value.Float, value => SetValue(VariableValue.Create(value)));
+				//}
 			}
 
 			return container;
@@ -168,49 +168,49 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateInt2()
 		{
 			var field = new Vector2IntField() { value = _value.Int2 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Int2, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Int2, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateInt3()
 		{
 			var field = new Vector3IntField() { value = _value.Int3 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Int3, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Int3, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateIntRect()
 		{
 			var field = new RectIntField() { value = _value.IntRect };
-			ElementHelper.Bind(this, field, _owner, () => _value.IntRect, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.IntRect, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateIntBounds()
 		{
 			var field = new BoundsIntField() { value = _value.IntBounds };
-			ElementHelper.Bind(this, field, _owner, () => _value.IntBounds, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.IntBounds, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateVector2()
 		{
 			var field = new Vector2Field() { value = _value.Vector2 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Vector2, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Vector2, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateVector3()
 		{
 			var field = new Vector3Field() { value = _value.Vector3 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Vector3, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Vector3, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateVector4()
 		{
 			var field = new Vector4Field() { value = _value.Vector4 };
-			ElementHelper.Bind(this, field, _owner, () => _value.Vector4, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Vector4, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
@@ -222,35 +222,35 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateRect()
 		{
 			var field = new RectField() { value = _value.Rect };
-			ElementHelper.Bind(this, field, _owner, () => _value.Rect, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Rect, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateBounds()
 		{
 			var field = new BoundsField() { value = _value.Bounds };
-			ElementHelper.Bind(this, field, _owner, () => _value.Bounds, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Bounds, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateColor()
 		{
 			var field = new ColorField() { value = _value.Color };
-			ElementHelper.Bind(this, field, _owner, () => _value.Color, value => SetValue(VariableValue.Create(value)));
+			ElementHelper.Bind(this, field, _owner, () => _value.Color, value => SetValue(Variable.Create(value)));
 			return field;
 		}
 
 		private VisualElement CreateString()
 		{
-			if (_definition.Constraint is StringVariableConstraint constraint && constraint.Values.Count > 0)
-			{
-				var dropdown = new PopupField<string>();//(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
-				return dropdown;
-			}
-			else
+			//if (_definition.Constraint is StringVariableConstraint constraint && constraint.Values.Count > 0)
+			//{
+			//	var dropdown = new PopupField<string>();//(constraint.Values, constraint.Values, _value.String, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
+			//	return dropdown;
+			//}
+			//else
 			{
 				var field = new TextField() { value = _value.String, isDelayed = true };
-				ElementHelper.Bind(this, field, _owner, () => _value.String, value => SetValue(VariableValue.Create(value)));
+				ElementHelper.Bind(this, field, _owner, () => _value.String, value => SetValue(Variable.Create(value)));
 				return field;
 			}
 		}
@@ -264,7 +264,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VisualElement CreateObject()
 		{
-			var objectType = (_definition.Constraint as ObjectVariableConstraint)?.Type ?? _value.ReferenceType ?? typeof(Object);
+			//var objectType = (_definition.Constraint as ObjectVariableConstraint)?.Type ?? _value.ReferenceType ?? typeof(Object);
 
 			var picker = new ObjectPickerField();//(_owner, () => _value.Object, value => SetValue(VariableValue.CreateReference(value)));
 			//picker.Setup(objectType, _value.Object);

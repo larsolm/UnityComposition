@@ -5,14 +5,14 @@ namespace PiRhoSoft.Composition
 {
 	internal class TanCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 1)
 			{
 				var result = parameters[0].Evaluate(variables);
 
 				if (result.TryGetFloat(out var number))
-					return VariableValue.Create(Mathf.Tan(number));
+					return Variable.Float(Mathf.Tan(number));
 				else
 					throw CommandEvaluationException.WrongParameterType(name, 0, result.Type, VariableType.Float);
 			}

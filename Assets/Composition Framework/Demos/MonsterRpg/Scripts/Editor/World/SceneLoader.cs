@@ -104,7 +104,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 
 					var result = WorldLoader.Instance.Load(new VariableSet(), state.StartZone, state.StartSpawn, FilePreference.Value);
 
-					CompositionManager.Instance.RunGraph(graph, VariableValue.CreateReference(zone));
+					CompositionManager.Instance.RunGraph(graph, Variable.CreateReference(zone));
 
 					result.OnError = PlayModeFailed;
 				}

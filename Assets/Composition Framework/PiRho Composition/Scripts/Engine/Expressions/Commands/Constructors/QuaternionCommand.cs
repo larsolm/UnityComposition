@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class QuaternionCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 3)
 			{
@@ -13,16 +13,16 @@ namespace PiRhoSoft.Composition
 				var yValue = parameters[1].Evaluate(variables);
 				var zValue = parameters[2].Evaluate(variables);
 
-				if (!xValue.HasNumber)
+				if (!xValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 0, xValue.Type, VariableType.Float);
 
-				if (!yValue.HasNumber)
+				if (!yValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 1, yValue.Type, VariableType.Float);
 
-				if (!zValue.HasNumber)
+				if (!zValue.IsFloat)
 					throw CommandEvaluationException.WrongParameterType(name, 2, zValue.Type, VariableType.Float);
 
-				return VariableValue.Create(Quaternion.Euler(xValue.Number, yValue.Number, zValue.Number));
+				return Variable.Quaternion(Quaternion.Euler(xValue.AsFloat, yValue.AsFloat, zValue.AsFloat));
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 3);

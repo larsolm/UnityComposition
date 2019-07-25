@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
+using System;
 using System.IO;
 using System.Text;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
@@ -11,76 +10,87 @@ namespace PiRhoSoft.Composition
 	{
 		public const char Symbol = '#';
 
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint) => VariableValue.Create(Color.black);
-
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void ToString_(Variable variable, StringBuilder builder)
 		{
+			var color = variable.AsColor;
 			builder.Append(Symbol);
 
-			var r = Math.Round(value.Color.r * 255);
-			var g = Math.Round(value.Color.g * 255);
-			var b = Math.Round(value.Color.b * 255);
-			var a = Math.Round(value.Color.a * 255);
+			var r = Math.Round(color.r * 255);
+			var g = Math.Round(color.g * 255);
+			var b = Math.Round(color.b * 255);
+			var a = Math.Round(color.a * 255);
 
-			builder.AppendFormat("{0:X2}{1:X2}{2:X2}{3:X2}", r, g, b, a);
+			builder.Append($"{r:X2}{g:X2}{b:X2}{a:X2}");
 		}
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			writer.Write(value.Color.r);
-			writer.Write(value.Color.g);
-			writer.Write(value.Color.b);
-			writer.Write(value.Color.a);
+			var color = variable.AsColor;
+
+			writer.Write(color.r);
+			writer.Write(color.g);
+			writer.Write(color.b);
+			writer.Write(color.a);
 		}
 
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
 			var r = reader.ReadSingle();
 			var g = reader.ReadSingle();
 			var b = reader.ReadSingle();
 			var a = reader.ReadSingle();
 
-			return VariableValue.Create(new Color(r, g, b, a));
+			return Variable.Color(new Color(r, g, b, a));
 		}
 
-		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override Variable Lookup_(Variable owner, Variable lookup)
 		{
-			if (lookup.Type == VariableType.String)
+			if (lookup.TryGetString(out var s))
 			{
-				if (lookup.String == "r") return VariableValue.Create(owner.Color.r);
-				else if (lookup.String == "g") return VariableValue.Create(owner.Color.g);
-				else if (lookup.String == "b") return VariableValue.Create(owner.Color.b);
-				else if (lookup.String == "a") return VariableValue.Create(owner.Color.a);
+				var color = owner.AsColor;
+
+				switch (s)
+				{
+					case "r": return Variable.Float(color.r);
+					case "g": return Variable.Float(color.g);
+					case "b": return Variable.Float(color.b);
+					case "a": return Variable.Float(color.a);
+				}
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
 			if (value.TryGetFloat(out var number))
 			{
-				if (lookup.Type == VariableType.String)
+				if (lookup.TryGetString(out var s))
 				{
-					if (lookup.String == "r")
+					var color = owner.AsColor;
+
+					switch (s)
 					{
-						owner = VariableValue.Create(new Color(number, owner.Color.g, owner.Color.b, owner.Color.a));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "g")
-					{
-						owner = VariableValue.Create(new Color(owner.Color.r, number, owner.Color.b, owner.Color.a));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "b")
-					{
-						owner = VariableValue.Create(new Color(owner.Color.r, owner.Color.g, number, owner.Color.a));
-						return SetVariableResult.Success;
-					}
-					else if (lookup.String == "a")
-					{
-						owner = VariableValue.Create(new Color(owner.Color.r, owner.Color.g, owner.Color.b, number));
-						return SetVariableResult.Success;
+						case "r":
+						{
+							owner = Variable.Color(new Color(number, color.g, color.b, color.a));
+							return SetVariableResult.Success;
+						}
+						case "g":
+						{
+							owner = Variable.Color(new Color(color.r, number, color.b, color.a));
+							return SetVariableResult.Success;
+						}
+						case "b":
+						{
+							owner = Variable.Color(new Color(color.r, color.g, number, color.a));
+							return SetVariableResult.Success;
+						}
+						case "a":
+						{
+							owner = Variable.Color(new Color(color.r, color.g, color.b, number));
+							return SetVariableResult.Success;
+						}
 					}
 				}
 
@@ -92,10 +102,10 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
 			if (right.TryGetColor(out var color))
-				return left.Color == color;
+				return left.AsColor == color;
 			else
 				return null;
 		}

@@ -4,7 +4,7 @@
 	{
 		private const string _comparisonTypeMismatchException = "unable to compare types {0} and {1} with operator '{2}'";
 
-		protected bool Equals(VariableValue left, VariableValue right)
+		protected bool Equals(Variable left, Variable right)
 		{
 			var result = VariableHandler.IsEqual(left, right);
 
@@ -14,7 +14,7 @@
 				throw ComparisonMismatch(left.Type, right.Type);
 		}
 
-		protected int Compare(VariableValue left, VariableValue right)
+		protected int Compare(Variable left, Variable right)
 		{
 			var comparison = VariableHandler.Compare(left, right);
 

@@ -13,26 +13,26 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The variable holding the value to watch for changes")]
 		public VariableReference Variable = new VariableReference();
 
-		private VariableValue _value = VariableValue.Empty;
+		private Variable _value = PiRhoSoft.Composition.Variable.Empty;
 
 		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
 		{
 			if (Graph.Graph && !Graph.IsRunning)
 			{
-				Resolve(variables, Variable, out VariableValue value);
+				Resolve(variables, Variable, out Variable value);
 
 				if (!VariableHandler.IsEqual(_value, value).GetValueOrDefault(false))
 					StartCoroutine(VariableChanged(value, status));
 			}
 		}
 
-		private IEnumerator VariableChanged(VariableValue value, BindingAnimationStatus status)
+		private IEnumerator VariableChanged(Variable value, BindingAnimationStatus status)
 		{
 			status.Increment();
 
 			_value = value;
 
-			CompositionManager.Instance.RunGraph(Graph, Variables, VariableValue.Create(gameObject));
+			CompositionManager.Instance.RunGraph(Graph, Variables, PiRhoSoft.Composition.Variable.Object(gameObject));
 
 			while (Graph.IsRunning)
 				yield return null;

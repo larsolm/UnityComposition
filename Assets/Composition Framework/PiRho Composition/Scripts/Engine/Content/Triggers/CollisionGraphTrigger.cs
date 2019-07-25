@@ -65,7 +65,7 @@ namespace PiRhoSoft.Composition
 		private void Run(GraphCaller graph)
 		{
 			if (graph.Graph && !graph.IsRunning)
-				CompositionManager.Instance.RunGraph(graph, CompositionManager.Instance.DefaultStore, VariableValue.Create(gameObject));
+				CompositionManager.Instance.RunGraph(graph, CompositionManager.Instance.DefaultStore, Variable.Object(gameObject));
 		}
 	}
 }

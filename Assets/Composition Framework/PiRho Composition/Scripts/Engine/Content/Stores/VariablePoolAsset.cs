@@ -11,8 +11,8 @@ namespace PiRhoSoft.Composition
 
 		#region IVariableStore Implementation
 
-		public VariableValue GetVariable(string name) => Variables.GetVariable(name);
-		public SetVariableResult SetVariable(string name, VariableValue value) => Variables.SetVariable(name, value);
+		public Variable GetVariable(string name) => Variables.GetVariable(name);
+		public SetVariableResult SetVariable(string name, Variable value) => Variables.SetVariable(name, value);
 		public IList<string> GetVariableNames() => Variables.GetVariableNames();
 
 		#endregion

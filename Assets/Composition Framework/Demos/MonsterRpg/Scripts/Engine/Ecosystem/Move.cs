@@ -22,7 +22,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			foreach (var value in Values)
 			{
-				if (value.TryGetReference<Move>(out var move))
+				if (value.TryGetObject<Move>(out var move))
 					move.Setup(creature);
 			}
 		}
@@ -31,7 +31,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			foreach (var value in Values)
 			{
-				if (value.TryGetReference<Move>(out var move))
+				if (value.TryGetObject<Move>(out var move))
 					move.ResetTag(tag);
 			}
 		}
@@ -40,7 +40,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			foreach (var value in Values)
 			{
-				if (value.TryGetReference<Move>(out var move))
+				if (value.TryGetObject<Move>(out var move))
 					move.ResetVariables(traits);
 			}
 		}
@@ -48,13 +48,13 @@ namespace PiRhoSoft.MonsterRpg
 		IEnumerator<Move> IEnumerable<Move>.GetEnumerator()
 		{
 			for (var i = 0; i < Count; i++)
-				yield return Values[i].Reference as Move;
+				yield return Values[i].AsObject as Move;
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
 			for (var i = 0; i < Count; i++)
-				yield return Values[i].Reference;
+				yield return Values[i].AsObject;
 		}
 	}
 

@@ -1,43 +1,32 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
 using System.IO;
 using System.Text;
-using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class StoreVariableHandler : VariableHandler
 	{
-		protected internal override VariableValue CreateDefault_(VariableConstraint constraint)
+		protected internal override void ToString_(Variable value, StringBuilder builder)
 		{
-			IVariableStore store;
-
-			if (constraint is StoreVariableConstraint storeConstraint && storeConstraint.Schema != null)
-				store = new ConstrainedStore(storeConstraint.Schema);
-			else
-				store = new VariableStore();
-
-			return VariableValue.Create(store);
+			builder.Append(value.AsStore);
 		}
 
-		protected internal override void ToString_(VariableValue value, StringBuilder builder)
+		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
-			builder.Append(value.Store);
-		}
+			var store = variable.AsStore as VariableStore;
 
-		protected internal override void Write_(VariableValue value, BinaryWriter writer, List<Object> objects)
-		{
-			var store = value.Store as VariableStore;
+			writer.Write(store != null);
 
 			if (store != null)
 			{
 				if (store is ISchemaOwner schemaOwner)
 				{
-					writer.Write(objects.Count);
-					objects.Add(schemaOwner.Schema);
+					writer.Write(true);
+					data.SaveReference(writer, schemaOwner.Schema);
 				}
 				else
 				{
-					writer.Write(-1);
+					writer.Write(false);
 				}
 
 				writer.Write(store.Variables.Count);
@@ -45,83 +34,51 @@ namespace PiRhoSoft.Composition
 				for (var i = 0; i < store.Names.Count && i < store.Variables.Count; i++)
 				{
 					writer.Write(store.Names[i]);
-					WriteValue(store.Variables[i], writer, objects);
+					Save(store.Variables[i], writer, data);
 				}
-			}
-			else
-			{
-				writer.Write(-1);
 			}
 		}
 
-		protected internal override VariableValue Read_(BinaryReader reader, List<Object> objects, short version)
+		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
 		{
-			var index = reader.ReadInt32();
-			var schema = index >= 0 && index < objects.Count ? objects[index] as VariableSchema : null;
-			var store = schema != null ? new ConstrainedStore(schema) : new VariableStore();
+			var isValid = reader.ReadBoolean();
 
+			var hasSchema = isValid && reader.ReadBoolean();
+			var schema = hasSchema ? data.LoadReference(reader) as VariableSchema : null;
+
+			var store = schema != null ? new ConstrainedStore(schema) : new VariableStore();
 			var count = reader.ReadInt32();
 
 			for (var i = 0; i < count; i++)
 			{
 				var name = reader.ReadString();
-				var item = ReadValue(reader, objects, version);
+				var variable = Load(reader, data);
 
 				if (schema != null)
-					store.SetVariable(name, item);
+					store.SetVariable(name, variable);
 				else
-					store.AddVariable(name, item);
+					store.AddVariable(name, variable);
 			}
 
-			return VariableValue.Create(store);
+			return Variable.Store(store);
 		}
 
-		protected internal override VariableValue Lookup_(VariableValue owner, VariableValue lookup)
+		protected internal override Variable Lookup_(Variable owner, Variable lookup)
 		{
-			return LookupInStore(owner, lookup);
+			return Lookup(owner.AsStore, lookup);
 		}
 
-		protected internal override SetVariableResult Apply_(ref VariableValue owner, VariableValue lookup, VariableValue value)
+		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
-			return ApplyToStore(ref owner, lookup, value);
+			return Apply(owner.AsStore, lookup, value);
 		}
 
-		protected internal override bool? IsEqual_(VariableValue left, VariableValue right)
+		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
-			if (right.HasReference)
-				return left.Reference == right.Reference;
+			if (right.TryGetStore(out var store))
+				return left.AsStore == store;
 			else
 				return null;
-		}
-
-		public static VariableValue LookupInStore(VariableValue owner, VariableValue lookup)
-		{
-			if (owner.HasList)
-			{
-				var value = ListVariableHandler.LookupInList(owner, lookup);
-				if (!value.IsEmpty)
-					return value;
-			}
-
-			if (lookup.Type == VariableType.String)
-				return owner.Store.GetVariable(lookup.String);
-
-			return VariableValue.Empty;
-		}
-
-		public static SetVariableResult ApplyToStore(ref VariableValue owner, VariableValue lookup, VariableValue value)
-		{
-			if (owner.HasList)
-			{
-				var result = ListVariableHandler.ApplyToList(ref owner, lookup, value);
-				if (result == SetVariableResult.Success)
-					return result;
-			}
-
-			if (lookup.Type == VariableType.String)
-				return owner.Store.SetVariable(lookup.String, value);
-			else
-				return SetVariableResult.TypeMismatch;
 		}
 	}
 }

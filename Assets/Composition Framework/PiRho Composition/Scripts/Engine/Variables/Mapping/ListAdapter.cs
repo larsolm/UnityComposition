@@ -50,15 +50,15 @@ namespace PiRhoSoft.Composition
 			_allowRemove = allowRemove;
 		}
 
-		public VariableValue GetVariable(int index)
+		public Variable GetVariable(int index)
 		{
 			if (index >= 0 && index <= Count)
 				return Get(index);
 			else
-				return VariableValue.Empty;
+				return Variable.Empty;
 		}
 
-		public SetVariableResult SetVariable(int index, VariableValue value)
+		public SetVariableResult SetVariable(int index, Variable value)
 		{
 			if (!_allowSet)
 			{
@@ -75,7 +75,7 @@ namespace PiRhoSoft.Composition
 			return SetVariableResult.NotFound;
 		}
 
-		public SetVariableResult AddVariable(VariableValue value)
+		public SetVariableResult AddVariable(Variable value)
 		{
 			if (!_allowAdd)
 				return SetVariableResult.ReadOnly;
@@ -100,9 +100,9 @@ namespace PiRhoSoft.Composition
 			return SetVariableResult.NotFound;
 		}
 
-		protected abstract VariableValue Get(int index);
-		protected abstract bool Set(int index, VariableValue value);
-		protected abstract bool Add(VariableValue value);
+		protected abstract Variable Get(int index);
+		protected abstract bool Set(int index, Variable value);
+		protected abstract bool Add(Variable value);
 		protected abstract void Remove(int index);
 	}
 
@@ -140,107 +140,107 @@ namespace PiRhoSoft.Composition
 
 	internal class BoolListAdapter : ValueListAdapter<bool>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetBool(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetBool(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Bool(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetBool(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetBool(out var v) && Add(v);
 	}
 
 	internal class IntListAdapter : ValueListAdapter<int>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetInt(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetInt(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Int(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetInt(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetInt(out var v) && Add(v);
 	}
 
 	internal class FloatListAdapter : ValueListAdapter<float>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetFloat(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetFloat(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Float(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetFloat(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetFloat(out var v) && Add(v);
 	}
 
 	internal class Int2ListAdapter : ValueListAdapter<Vector2Int>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetInt2(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetInt2(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Vector2Int(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetVector2Int(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetVector2Int(out var v) && Add(v);
 	}
 
 	internal class Int3ListAdapter : ValueListAdapter<Vector3Int>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetInt3(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetInt3(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Vector3Int(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetVector3Int(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetVector3Int(out var v) && Add(v);
 	}
 
 	internal class IntRectListAdapter : ValueListAdapter<RectInt>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetIntRect(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetIntRect(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.RectInt(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetRectInt(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetRectInt(out var v) && Add(v);
 	}
 
 	internal class IntBoundsListAdapter : ValueListAdapter<BoundsInt>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetIntBounds(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetIntBounds(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.BoundsInt(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetBoundsInt(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetBoundsInt(out var v) && Add(v);
 	}
 
 	internal class Vector2ListAdapter : ValueListAdapter<Vector2>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetVector2(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetVector2(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Vector2(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetVector2(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetVector2(out var v) && Add(v);
 	}
 
 	internal class Vector3ListAdapter : ValueListAdapter<Vector3>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetVector3(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetVector3(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Vector3(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetVector3(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetVector3(out var v) && Add(v);
 	}
 
 	internal class Vector4ListAdapter : ValueListAdapter<Vector4>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetVector4(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetVector4(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Vector4(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetVector4(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetVector4(out var v) && Add(v);
 	}
 
 	internal class QuaternionListAdapter : ValueListAdapter<Quaternion>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetQuaternion(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetQuaternion(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Quaternion(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetQuaternion(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetQuaternion(out var v) && Add(v);
 	}
 
 	internal class RectListAdapter : ValueListAdapter<Rect>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetRect(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetRect(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Rect(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetRect(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetRect(out var v) && Add(v);
 	}
 
 	internal class BoundsListAdapter : ValueListAdapter<Bounds>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetBounds(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetBounds(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Bounds(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetBounds(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetBounds(out var v) && Add(v);
 	}
 
 	internal class ColorListAdapter : ValueListAdapter<Color>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetColor(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetColor(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.Color(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetColor(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetColor(out var v) && Add(v);
 	}
 
 	internal class StringListAdapter : ValueListAdapter<string>
 	{
-		protected override VariableValue Get(int index) => VariableValue.Create(_list[index]);
-		protected override bool Set(int index, VariableValue value) => value.TryGetString(out var v) && Set(index, v);
-		protected override bool Add(VariableValue value) => value.TryGetString(out var v) && Add(v);
+		protected override Variable Get(int index) => Variable.String(_list[index]);
+		protected override bool Set(int index, Variable value) => value.TryGetString(out var v) && Set(index, v);
+		protected override bool Add(Variable value) => value.TryGetString(out var v) && Add(v);
 	}
 
 	#endregion
@@ -261,9 +261,9 @@ namespace PiRhoSoft.Composition
 			Setup(allowSet, allowAdd, allowRemove);
 		}
 
-		protected override VariableValue Get(int index)
+		protected override Variable Get(int index)
 		{
-			return VariableValue.CreateReference(_list[index]);
+			return Variable.Unbox(_list[index]);
 		}
 
 		protected override void Remove(int index)
@@ -274,22 +274,22 @@ namespace PiRhoSoft.Composition
 
 	internal class EnumListAdapter : ReferenceListAdapter
 	{
-		protected override bool Set(int index, VariableValue value)
+		protected override bool Set(int index, Variable value)
 		{
 			if (value.EnumType == _itemType)
 			{
-				_list[index] = value.Enum;
+				_list[index] = value.AsEnum;
 				return true;
 			}
 
 			return false;
 		}
 
-		protected override bool Add(VariableValue value)
+		protected override bool Add(Variable value)
 		{
 			if (value.EnumType == _itemType)
 			{
-				_list.Add(value.Enum);
+				_list.Add(value.AsEnum);
 				return true;
 			}
 
@@ -299,22 +299,22 @@ namespace PiRhoSoft.Composition
 
 	internal class ObjectListAdapter : ReferenceListAdapter
 	{
-		protected override bool Set(int index, VariableValue value)
+		protected override bool Set(int index, Variable value)
 		{
-			if (_itemType.IsAssignableFrom(value.ReferenceType))
+			if (_itemType.IsAssignableFrom(value.ObjectType))
 			{
-				_list[index] = value.Reference;
+				_list[index] = value.AsObject;
 				return true;
 			}
 
 			return false;
 		}
 
-		protected override bool Add(VariableValue value)
+		protected override bool Add(Variable value)
 		{
-			if (_itemType.IsAssignableFrom(value.ReferenceType))
+			if (_itemType.IsAssignableFrom(value.ObjectType))
 			{
-				_list.Add(value.Reference);
+				_list.Add(value.AsObject);
 				return true;
 			}
 

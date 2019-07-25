@@ -4,23 +4,23 @@ namespace PiRhoSoft.Composition
 {
 	internal class MinCommand : ICommand
 	{
-		public VariableValue Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count >= 2)
 			{
-				var smallestValue = VariableValue.Empty;
+				var smallestValue = Variable.Empty;
 				var smallestNumber = float.MaxValue;
 
 				for (var i = 0; i < parameters.Count; i++)
 				{
 					var p = parameters[i].Evaluate(variables);
 
-					if (!p.HasNumber)
+					if (!p.IsFloat)
 						throw CommandEvaluationException.WrongParameterType(name, i, p.Type, VariableType.Int, VariableType.Float);
 
-					if (p.Number < smallestNumber)
+					if (p.AsFloat < smallestNumber)
 					{
-						smallestNumber = p.Number;
+						smallestNumber = p.AsFloat;
 						smallestValue = p;
 					}
 				}

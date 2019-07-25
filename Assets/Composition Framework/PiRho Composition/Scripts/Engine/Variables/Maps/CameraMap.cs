@@ -63,64 +63,64 @@ namespace PiRhoSoft.Composition
 			return _names;
 		}
 
-		public override VariableValue GetVariable(Camera obj, string name)
+		public override Variable GetVariable(Camera obj, string name)
 		{
 			switch (name)
 			{
-				case nameof(Camera.activeTexture): return VariableValue.Create(obj.activeTexture);
-				case nameof(Camera.actualRenderingPath): return VariableValue.Create(obj.actualRenderingPath);
-				case nameof(Camera.allowDynamicResolution): return VariableValue.Create(obj.allowDynamicResolution);
-				case nameof(Camera.allowHDR): return VariableValue.Create(obj.allowHDR);
-				case nameof(Camera.allowMSAA): return VariableValue.Create(obj.allowMSAA);
-				case nameof(Camera.areVRStereoViewMatricesWithinSingleCullTolerance): return VariableValue.Create(obj.areVRStereoViewMatricesWithinSingleCullTolerance);
-				case nameof(Camera.aspect): return VariableValue.Create(obj.aspect);
-				case nameof(Camera.backgroundColor): return VariableValue.Create(obj.backgroundColor);
-				case nameof(Camera.cameraType): return VariableValue.Create(obj.cameraType);
-				case nameof(Camera.clearFlags): return VariableValue.Create(obj.clearFlags);
-				case nameof(Camera.clearStencilAfterLightingPass): return VariableValue.Create(obj.clearStencilAfterLightingPass);
-				case nameof(Camera.commandBufferCount): return VariableValue.Create(obj.commandBufferCount);
-				case nameof(Camera.cullingMask): return VariableValue.Create(obj.cullingMask);
-				case nameof(Camera.depth): return VariableValue.Create(obj.depth);
-				case nameof(Camera.depthTextureMode): return VariableValue.Create(obj.depthTextureMode);
-				case nameof(Camera.eventMask): return VariableValue.Create(obj.eventMask);
-				case nameof(Camera.farClipPlane): return VariableValue.Create(obj.farClipPlane);
-				case nameof(Camera.fieldOfView): return VariableValue.Create(obj.fieldOfView);
-				case nameof(Camera.focalLength): return VariableValue.Create(obj.focalLength);
-				case nameof(Camera.forceIntoRenderTexture): return VariableValue.Create(obj.forceIntoRenderTexture);
-				case nameof(Camera.gateFit): return VariableValue.Create(obj.gateFit);
-				case nameof(Camera.lensShift): return VariableValue.Create(obj.lensShift);
-				case nameof(Camera.nearClipPlane): return VariableValue.Create(obj.nearClipPlane);
-				case nameof(Camera.opaqueSortMode): return VariableValue.Create(obj.opaqueSortMode);
-				case nameof(Camera.orthographic): return VariableValue.Create(obj.orthographic);
-				case nameof(Camera.orthographicSize): return VariableValue.Create(obj.orthographicSize);
-				case nameof(Camera.overrideSceneCullingMask): return VariableValue.Create(obj.overrideSceneCullingMask);
-				case nameof(Camera.pixelHeight): return VariableValue.Create(obj.pixelHeight);
-				case nameof(Camera.pixelRect): return VariableValue.Create(obj.pixelRect);
-				case nameof(Camera.pixelWidth): return VariableValue.Create(obj.pixelWidth);
-				case nameof(Camera.rect): return VariableValue.Create(obj.rect);
-				case nameof(Camera.renderingPath): return VariableValue.Create(obj.renderingPath);
-				case nameof(Camera.scaledPixelHeight): return VariableValue.Create(obj.scaledPixelHeight);
-				case nameof(Camera.scaledPixelWidth): return VariableValue.Create(obj.scaledPixelWidth);
-				case nameof(Camera.sensorSize): return VariableValue.Create(obj.sensorSize);
-				case nameof(Camera.stereoActiveEye): return VariableValue.Create(obj.stereoActiveEye);
-				case nameof(Camera.stereoConvergence): return VariableValue.Create(obj.stereoConvergence);
-				case nameof(Camera.stereoEnabled): return VariableValue.Create(obj.stereoEnabled);
-				case nameof(Camera.stereoSeparation): return VariableValue.Create(obj.stereoSeparation);
-				case nameof(Camera.stereoTargetEye): return VariableValue.Create(obj.stereoTargetEye);
-				case nameof(Camera.targetDisplay): return VariableValue.Create(obj.targetDisplay);
-				case nameof(Camera.targetTexture): return VariableValue.Create(obj.targetTexture);
-				case nameof(Camera.transparencySortAxis): return VariableValue.Create(obj.transparencySortAxis);
-				case nameof(Camera.transparencySortMode): return VariableValue.Create(obj.transparencySortMode);
-				case nameof(Camera.useJitteredProjectionMatrixForTransparentRendering): return VariableValue.Create(obj.useJitteredProjectionMatrixForTransparentRendering);
-				case nameof(Camera.useOcclusionCulling): return VariableValue.Create(obj.useOcclusionCulling);
-				case nameof(Camera.usePhysicalProperties): return VariableValue.Create(obj.usePhysicalProperties);
-				case nameof(Camera.velocity): return VariableValue.Create(obj.velocity);
+				case nameof(Camera.activeTexture): return Variable.Object(obj.activeTexture);
+				case nameof(Camera.actualRenderingPath): return Variable.Enum(obj.actualRenderingPath);
+				case nameof(Camera.allowDynamicResolution): return Variable.Bool(obj.allowDynamicResolution);
+				case nameof(Camera.allowHDR): return Variable.Bool(obj.allowHDR);
+				case nameof(Camera.allowMSAA): return Variable.Bool(obj.allowMSAA);
+				case nameof(Camera.areVRStereoViewMatricesWithinSingleCullTolerance): return Variable.Bool(obj.areVRStereoViewMatricesWithinSingleCullTolerance);
+				case nameof(Camera.aspect): return Variable.Float(obj.aspect);
+				case nameof(Camera.backgroundColor): return Variable.Color(obj.backgroundColor);
+				case nameof(Camera.cameraType): return Variable.Enum(obj.cameraType);
+				case nameof(Camera.clearFlags): return Variable.Enum(obj.clearFlags);
+				case nameof(Camera.clearStencilAfterLightingPass): return Variable.Bool(obj.clearStencilAfterLightingPass);
+				case nameof(Camera.commandBufferCount): return Variable.Int(obj.commandBufferCount);
+				case nameof(Camera.cullingMask): return Variable.Int(obj.cullingMask);
+				case nameof(Camera.depth): return Variable.Float(obj.depth);
+				case nameof(Camera.depthTextureMode): return Variable.Enum(obj.depthTextureMode);
+				case nameof(Camera.eventMask): return Variable.Int(obj.eventMask);
+				case nameof(Camera.farClipPlane): return Variable.Float(obj.farClipPlane);
+				case nameof(Camera.fieldOfView): return Variable.Float(obj.fieldOfView);
+				case nameof(Camera.focalLength): return Variable.Float(obj.focalLength);
+				case nameof(Camera.forceIntoRenderTexture): return Variable.Bool(obj.forceIntoRenderTexture);
+				case nameof(Camera.gateFit): return Variable.Enum(obj.gateFit);
+				case nameof(Camera.lensShift): return Variable.Vector2(obj.lensShift);
+				case nameof(Camera.nearClipPlane): return Variable.Float(obj.nearClipPlane);
+				case nameof(Camera.opaqueSortMode): return Variable.Enum(obj.opaqueSortMode);
+				case nameof(Camera.orthographic): return Variable.Bool(obj.orthographic);
+				case nameof(Camera.orthographicSize): return Variable.Float(obj.orthographicSize);
+				case nameof(Camera.overrideSceneCullingMask): return Variable.Other(obj.overrideSceneCullingMask);
+				case nameof(Camera.pixelHeight): return Variable.Int(obj.pixelHeight);
+				case nameof(Camera.pixelRect): return Variable.Rect(obj.pixelRect);
+				case nameof(Camera.pixelWidth): return Variable.Int(obj.pixelWidth);
+				case nameof(Camera.rect): return Variable.Rect(obj.rect);
+				case nameof(Camera.renderingPath): return Variable.Enum(obj.renderingPath);
+				case nameof(Camera.scaledPixelHeight): return Variable.Int(obj.scaledPixelHeight);
+				case nameof(Camera.scaledPixelWidth): return Variable.Int(obj.scaledPixelWidth);
+				case nameof(Camera.sensorSize): return Variable.Vector2(obj.sensorSize);
+				case nameof(Camera.stereoActiveEye): return Variable.Enum(obj.stereoActiveEye);
+				case nameof(Camera.stereoConvergence): return Variable.Float(obj.stereoConvergence);
+				case nameof(Camera.stereoEnabled): return Variable.Bool(obj.stereoEnabled);
+				case nameof(Camera.stereoSeparation): return Variable.Float(obj.stereoSeparation);
+				case nameof(Camera.stereoTargetEye): return Variable.Enum(obj.stereoTargetEye);
+				case nameof(Camera.targetDisplay): return Variable.Int(obj.targetDisplay);
+				case nameof(Camera.targetTexture): return Variable.Object(obj.targetTexture);
+				case nameof(Camera.transparencySortAxis): return Variable.Vector3(obj.transparencySortAxis);
+				case nameof(Camera.transparencySortMode): return Variable.Enum(obj.transparencySortMode);
+				case nameof(Camera.useJitteredProjectionMatrixForTransparentRendering): return Variable.Bool(obj.useJitteredProjectionMatrixForTransparentRendering);
+				case nameof(Camera.useOcclusionCulling): return Variable.Bool(obj.useOcclusionCulling);
+				case nameof(Camera.usePhysicalProperties): return Variable.Bool(obj.usePhysicalProperties);
+				case nameof(Camera.velocity): return Variable.Vector3(obj.velocity);
 			}
 
-			return VariableValue.Empty;
+			return Variable.Empty;
 		}
 
-		public override SetVariableResult SetVariable(Camera obj, string name, VariableValue value)
+		public override SetVariableResult SetVariable(Camera obj, string name, Variable value)
 		{
 			switch (name)
 			{
@@ -165,7 +165,7 @@ namespace PiRhoSoft.Composition
 				case nameof(Camera.stereoSeparation): if (value.TryGetFloat(out var stereoSeparation)) { obj.stereoSeparation = stereoSeparation; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
 				case nameof(Camera.stereoTargetEye): if (value.TryGetEnum<StereoTargetEyeMask>(out var stereoTargetEye)) { obj.stereoTargetEye = stereoTargetEye; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
 				case nameof(Camera.targetDisplay): if (value.TryGetInt(out var targetDisplay)) { obj.targetDisplay = targetDisplay; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
-				case nameof(Camera.targetTexture): if (value.TryGetReference<RenderTexture>(out var targetTexture)) { obj.targetTexture = targetTexture; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
+				case nameof(Camera.targetTexture): if (value.TryGetObject<RenderTexture>(out var targetTexture)) { obj.targetTexture = targetTexture; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
 				case nameof(Camera.transparencySortAxis): if (value.TryGetVector3(out var transparencySortAxis)) { obj.transparencySortAxis = transparencySortAxis; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
 				case nameof(Camera.transparencySortMode): if (value.TryGetEnum<TransparencySortMode>(out var transparencySortMode)) { obj.transparencySortMode = transparencySortMode; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;
 				case nameof(Camera.useJitteredProjectionMatrixForTransparentRendering): if (value.TryGetBool(out var useJitteredProjectionMatrixForTransparentRendering)) { obj.useJitteredProjectionMatrixForTransparentRendering = useJitteredProjectionMatrixForTransparentRendering; return SetVariableResult.Success; } return SetVariableResult.TypeMismatch;

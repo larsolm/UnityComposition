@@ -233,7 +233,7 @@ namespace PiRhoSoft.Composition.Editor
 			}
 			else
 			{
-				var result = VariableValue.Empty;
+				var result = Variable.Empty;
 				var graph = CompositionManager.TrackingState.FirstOrDefault();
 		
 				if (graph.Key != null)

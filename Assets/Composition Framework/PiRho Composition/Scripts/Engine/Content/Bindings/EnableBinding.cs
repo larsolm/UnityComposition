@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition
 
 					if (value.Type == VariableType.Bool)
 					{
-						enabled = value.Bool;
+						enabled = value.AsBool;
 					}
 					else if (!SuppressErrors)
 					{

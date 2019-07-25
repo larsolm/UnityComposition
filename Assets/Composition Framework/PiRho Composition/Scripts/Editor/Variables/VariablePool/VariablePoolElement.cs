@@ -112,7 +112,7 @@ namespace PiRhoSoft.Composition.Editor
 			public override void AddItem()
 			{
 				// TODO: make sure this is viable
-				Variables.AddVariable("NewVariable", VariableValue.Empty);
+				Variables.AddVariable("NewVariable", Variable.Empty);
 			}
 
 			public override void RemoveItem(int index)

@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
@@ -24,12 +25,38 @@ namespace PiRhoSoft.Composition
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
 	public class VariableSchema : ScriptableObject
 	{
+		public class Entry
+		{
+			private const string _invalidInitializerError = "(PCVDII) failed to initialize variable '{0}' using store '{1}': the generated value of type '{2}' does not match the definition";
+
+			public string Tag;
+			public Expression Initializer;
+			public VariableDefinition Definition;
+
+			public Variable GenerateValue(IVariableStore variables)
+			{
+				if (Initializer != null && Initializer.IsValid)
+				{
+					var value = Initializer.Execute(variables as Object, variables);
+
+					if (!Definition.IsValid(value))
+						return value;
+
+					Debug.LogErrorFormat(_invalidInitializerError, Definition.Name, variables, value.Type);
+				}
+
+				return Definition.Generate();
+			}
+		}
+
+		[Serializable] public class EntryList : SerializedList<Entry> { }
+
 		public VariableInitializerType InitializerType = VariableInitializerType.DefaultValue;
 
 		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistance)")]
 		public TagList Tags = new TagList();
 
-		[HideInInspector] [SerializeField] private VariableDefinitionList _definitions = new VariableDefinitionList();
+		[HideInInspector] [SerializeField] private EntryList _entries = new EntryList();
 		[HideInInspector] [SerializeField] private int _version = 0;
 
 		public int Version
@@ -39,20 +66,20 @@ namespace PiRhoSoft.Composition
 
 		public int Count
 		{
-			get { return _definitions.Count; }
+			get { return _entries.Count; }
 		}
 
-		public VariableDefinition this[int index]
+		public Entry this[int index]
 		{
-			get { return _definitions[index]; }
-			set { _definitions[index] = value; IncrementVersion(); }
+			get { return _entries[index]; }
+			set { _entries[index] = value; IncrementVersion(); }
 		}
 
 		public int GetIndex(string name)
 		{
-			for (var i = 0; i < _definitions.Count; i++)
+			for (var i = 0; i < _entries.Count; i++)
 			{
-				if (_definitions[i].Name == name)
+				if (_entries[i].Definition.Name == name)
 					return i;
 			}
 
@@ -69,14 +96,14 @@ namespace PiRhoSoft.Composition
 			if (string.IsNullOrEmpty(name) || HasDefinition(name))
 				return false;
 
-			_definitions.Add(new VariableDefinition { Name = name, Definition = ValueDefinition.Create(type, null) });
+			_entries.Add(new Entry() { Definition = new VariableDefinition(name, type) });
 			IncrementVersion();
 			return true;
 		}
 
 		public void RemoveDefinition(int index)
 		{
-			_definitions.RemoveAt(index);
+			_entries.RemoveAt(index);
 			IncrementVersion();
 		}
 

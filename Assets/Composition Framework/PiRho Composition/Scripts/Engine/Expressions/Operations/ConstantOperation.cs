@@ -5,9 +5,9 @@ namespace PiRhoSoft.Composition
 {
 	internal class ConstantOperation : Operation
 	{
-		public VariableValue Value { get; private set; }
+		public Variable Value { get; private set; }
 
-		public ConstantOperation(VariableValue value)
+		public ConstantOperation(Variable value)
 		{
 			Value = value;
 		}
@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 		{
 		}
 
-		public override VariableValue Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableStore variables)
 		{
 			return Value;
 		}
@@ -27,7 +27,7 @@ namespace PiRhoSoft.Composition
 			{
 				case VariableType.Object:
 				{
-					if (Value.IsNull)
+					if (Value.IsNullObject)
 						builder.Append(ExpressionLexer.NullConstant);
 					else
 						VariableHandler.ToString(Value, builder);
@@ -36,7 +36,7 @@ namespace PiRhoSoft.Composition
 				}
 				case VariableType.Bool:
 				{
-					if (Value.Bool)
+					if (Value.AsBool)
 						builder.Append(ExpressionLexer.TrueConstant);
 					else
 						builder.Append(ExpressionLexer.FalseConstant);
@@ -45,11 +45,11 @@ namespace PiRhoSoft.Composition
 				}
 				case VariableType.Float:
 				{
-					if (Value.Float == Mathf.PI)
+					if (Value.AsFloat == Mathf.PI)
 						builder.Append(ExpressionLexer.PiConstant);
-					else if (Value.Float == Mathf.Deg2Rad)
+					else if (Value.AsFloat == Mathf.Deg2Rad)
 						builder.Append(ExpressionLexer.Deg2RadConstant);
-					else if (Value.Float == Mathf.Rad2Deg)
+					else if (Value.AsFloat == Mathf.Rad2Deg)
 						builder.Append(ExpressionLexer.Rad2DegConstant);
 					else
 						VariableHandler.ToString(Value, builder);

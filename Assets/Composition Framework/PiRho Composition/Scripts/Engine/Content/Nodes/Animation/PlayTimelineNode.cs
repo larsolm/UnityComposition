@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Playable Director to run the timeline on")]
-		[VariableConstraint(typeof(PlayableDirector))]
+		[VariableReference(typeof(PlayableDirector))]
 		public VariableReference Director;
 
 		[Tooltip("The timeline to run")]
