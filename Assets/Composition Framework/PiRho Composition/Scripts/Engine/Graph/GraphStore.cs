@@ -180,7 +180,7 @@ namespace PiRhoSoft.Composition
 				case LocalStoreName: return Variable.Store(Local);
 				case CompositionManager.GlobalStoreName: return Variable.Store(CompositionManager.Instance.GlobalStore);
 				case CompositionManager.SceneStoreName: return Variable.Store(CompositionManager.Instance.SceneStore);
-				default: return Local.GetVariable(name);
+				default: return Variable.Empty;
 			}
 		}
 
@@ -196,7 +196,7 @@ namespace PiRhoSoft.Composition
 				case LocalStoreName: return SetVariableResult.ReadOnly;
 				case CompositionManager.GlobalStoreName: return SetVariableResult.ReadOnly;
 				case CompositionManager.SceneStoreName: return SetVariableResult.ReadOnly;
-				default: return Local.SetVariable(name, value);
+				default: return SetVariableResult.NotFound;
 			}
 		}
 
