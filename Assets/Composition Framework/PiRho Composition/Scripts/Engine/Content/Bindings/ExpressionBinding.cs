@@ -32,7 +32,7 @@ namespace PiRhoSoft.Composition
 
 			try
 			{
-				var result = Expression.Evaluate(variables);
+				var result = Expression.Evaluate(variables, true);
 				var equal = VariableHandler.IsEqual(result, _resultValue);
 
 				if (_resultState != ResultState.Value || !equal.HasValue || !equal.Value)
