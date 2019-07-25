@@ -81,7 +81,7 @@ namespace PiRhoSoft.Composition.Editor
 					//}
 					//
 					//var control = new VariableValueControl(_variables.GetVariable(name), ValueDefinition.Empty);
-					//control.RegisterCallback<ChangeEvent<VariableValue>>(evt =>
+					//control.RegisterCallback<ChangeEvent<Variable>>(evt =>
 					//{
 					//	_variables.SetVariable(name, evt.newValue);
 					//});

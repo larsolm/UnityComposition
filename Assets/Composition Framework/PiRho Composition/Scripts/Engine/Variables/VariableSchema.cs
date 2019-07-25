@@ -5,13 +5,6 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
-	public enum VariableInitializerType
-	{
-		Expression,
-		DefaultValue,
-		None
-	}
-
 	[Serializable]
 	public class TagList : SerializedList<string> { }
 
@@ -25,6 +18,7 @@ namespace PiRhoSoft.Composition
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
 	public class VariableSchema : ScriptableObject
 	{
+		[Serializable]
 		public class Entry
 		{
 			private const string _invalidInitializerError = "(PCVDII) failed to initialize variable '{0}' using store '{1}': the generated value of type '{2}' does not match the definition";
@@ -50,9 +44,7 @@ namespace PiRhoSoft.Composition
 		}
 
 		[Serializable] public class EntryList : SerializedList<Entry> { }
-
-		public VariableInitializerType InitializerType = VariableInitializerType.DefaultValue;
-
+		
 		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistance)")]
 		public TagList Tags = new TagList();
 

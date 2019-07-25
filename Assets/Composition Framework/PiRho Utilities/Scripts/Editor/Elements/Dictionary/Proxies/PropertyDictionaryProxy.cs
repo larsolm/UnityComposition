@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System.Collections.Generic;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
@@ -10,7 +11,7 @@ namespace PiRhoSoft.Utilities.Editor
 		private SerializedProperty _valuesProperty;
 		private PropertyDrawer _drawer;
 
-		public override int ItemCount => _keysProperty.arraySize;
+		public override int KeyCount => _keysProperty.arraySize;
 
 		public PropertyDictionaryProxy(SerializedProperty keys, SerializedProperty values, PropertyDrawer drawer)
 		{
@@ -37,7 +38,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public override bool IsKeyValid(string key)
 		{
-			for (var i = 0; i < ItemCount; i++)
+			for (var i = 0; i < KeyCount; i++)
 			{
 				var name = _keysProperty.GetArrayElementAtIndex(i);
 				if (name.stringValue == key)
@@ -59,7 +60,7 @@ namespace PiRhoSoft.Utilities.Editor
 			var newItem = _keysProperty.GetArrayElementAtIndex(_keysProperty.arraySize - 1);
 			newItem.stringValue = key;
 
-			_valuesProperty.ResizeArray(ItemCount);
+			_valuesProperty.ResizeArray(KeyCount);
 		}
 
 		public override void RemoveItem(int index)

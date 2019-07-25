@@ -73,7 +73,11 @@ namespace PiRhoSoft.Composition.Editor
 				Caller = caller;
 			}
 
-			public override bool NeedsUpdate(VisualElement item, int index) => true;
+			public override bool NeedsUpdate(VisualElement item, int index)
+			{
+				return !(item.userData is int i) || i != index;
+			}
+
 			public override void AddItem() { }
 			public override void RemoveItem(int index) { }
 			public override void ReorderItem(int from, int to) { }
@@ -94,11 +98,11 @@ namespace PiRhoSoft.Composition.Editor
 
 				var referenceControl = new VariableReferenceControl(input.Reference, null); // TODO: Add an autocompletesource
 
-				//var valueControl = new VariableValueControl(input.Value, Caller.GetInputDefinition(input).Definition);
-				//valueControl.RegisterCallback<ChangeEvent<VariableValue>>(evt =>
-				//{
-				//	input.Value = evt.newValue;
-				//});
+				var variableControl = new VariableControl(input.Value.Variable, Caller.GetInputDefinition(input));
+				variableControl.RegisterCallback<ChangeEvent<Variable>>(evt =>
+				{
+					input.Value.Variable = evt.newValue;
+				});
 
 				var typeField = new EnumField(input.Type);
 				typeField.RegisterValueChangedCallback(evt => 
@@ -112,11 +116,11 @@ namespace PiRhoSoft.Composition.Editor
 				referenceControl.SetDisplayed(input.Type == GraphInputType.Reference);
 				referenceControl.SetDisplayed(input.Type == GraphInputType.Value);
 
-				var container = new VisualElement();
+				var container = new VisualElement() { userData = index };
 				container.Add(label);
 				container.Add(typeField);
 				container.Add(referenceControl);
-				//container.Add(valueControl);
+				container.Add(variableControl);
 
 				return container;
 			}
@@ -146,7 +150,7 @@ namespace PiRhoSoft.Composition.Editor
 
 				referenceControl.SetDisplayed(output.Type == GraphOutputType.Reference);
 
-				var container = new VisualElement();
+				var container = new VisualElement() { userData = index };
 				container.Add(label);
 				container.Add(typeField);
 				container.Add(referenceControl);

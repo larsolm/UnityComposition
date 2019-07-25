@@ -58,46 +58,13 @@ namespace PiRhoSoft.Composition
 		private void SetType(VariableType type)
 		{
 			_type = type;
-			_constraint = GetConstraint(type);
+			_constraint = VariableConstraint.Create(type);
 		}
 
 		private void SetConstraint(VariableConstraint constraint)
 		{
-			_type = GetType(constraint);
+			_type = constraint?.Type ?? VariableType.Empty;
 			_constraint = constraint;
-		}
-
-		private VariableConstraint GetConstraint(VariableType type)
-		{
-			switch (type)
-			{
-				case VariableType.Enum: return new EnumConstraint();
-				case VariableType.Float: return new FloatConstraint();
-				case VariableType.Int: return new IntConstraint();
-				case VariableType.List: return new ListConstraint();
-				case VariableType.Object: return new ObjectConstraint();
-				case VariableType.Other: return new OtherConstraint();
-				case VariableType.Store: return new StoreConstraint();
-				case VariableType.String: return new StringConstraint();
-				default: return null;
-			}
-		}
-
-		private VariableType GetType(VariableConstraint constraint)
-		{
-			switch (constraint)
-			{
-				case EnumConstraint e: return VariableType.Enum;
-				case FloatConstraint f: return VariableType.Float;
-				case IntConstraint i: return VariableType.Int;
-				case ListConstraint l: return VariableType.List;
-				case ObjectConstraint o: return VariableType.Object;
-				case OtherConstraint o: return VariableType.Other;
-				case StoreConstraint s: return VariableType.Store;
-				case StringConstraint s: return VariableType.String;
-			}
-
-			return VariableType.Empty;
 		}
 
 		public void OnBeforeSerialize() => _constraintData.Save(_constraint, 1);

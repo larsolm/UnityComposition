@@ -56,16 +56,16 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public void Refresh()
 		{
-			while (_itemsContainer.childCount > Proxy.ItemCount)
+			while (_itemsContainer.childCount > Proxy.KeyCount)
 				_itemsContainer.RemoveAt(_itemsContainer.childCount - 1);
 
 			for (var i = 0; i < _itemsContainer.childCount; i++)
 				UpdateItem(i);
 
-			for (var i = _itemsContainer.childCount; i < Proxy.ItemCount; i++)
+			for (var i = _itemsContainer.childCount; i < Proxy.KeyCount; i++)
 				CreateItem(i);
 
-			EnableInClassList(EmptyUssClassName, Proxy.ItemCount == 0);
+			EnableInClassList(EmptyUssClassName, Proxy.KeyCount == 0);
 			EnableInClassList(AddDisabledUssClassName, !Proxy.AllowAdd);
 			EnableInClassList(RemoveDisabledUssClassName, !Proxy.AllowRemove);
 		}
@@ -164,7 +164,7 @@ namespace PiRhoSoft.Utilities.Editor
 				_keyField.value = string.Empty;
 				Refresh();
 
-				using (var e = ItemAddedEvent.GetPooled(Proxy.ItemCount - 1))
+				using (var e = ItemAddedEvent.GetPooled(Proxy.KeyCount - 1))
 				{
 					e.target = this;
 					SendEvent(e);

@@ -1,17 +1,20 @@
 ﻿using PiRhoSoft.Utilities;
 using System.Collections.Generic;
 using System.IO;
-using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	public class StringConstraint : VariableConstraint
 	{
-		public List<string> Values;
-		
+		public override VariableType Type => VariableType.String;
+
+		public List<string> Values { get => _values; set => SetValues(value); }
+
+		private List<string> _values;
+
 		public StringConstraint()
 		{
-			Values = null;
+			Values = new List<string>();
 		}
 
 		public StringConstraint(List<string> values)
@@ -21,45 +24,37 @@ namespace PiRhoSoft.Composition
 
 		public override Variable Generate()
 		{
-			return Values != null && Values.Count > 0
+			return Values.Count > 0
 				? Variable.String(Values[0])
 				: Variable.String(string.Empty);
 		}
 
 		public override bool IsValid(Variable value)
 		{
-			return value.IsString && (Values == null || Values.Count == 0 || Values.Contains(value.AsString));
+			return value.IsString && (Values.Count == 0 || Values.Contains(value.AsString));
 		}
 
 		public override void Save(BinaryWriter writer, SerializedData data)
 		{
-			writer.Write(Values != null ? Values.Count : 0);
+			writer.Write(Values.Count);
 
-			if (Values != null)
-			{
-				foreach (var value in Values)
-					writer.Write(value ?? string.Empty);
-			}
+			foreach (var value in Values)
+				writer.Write(value ?? string.Empty);
 		}
 
 		public override void Load(BinaryReader reader, SerializedData data)
 		{
+			Values.Clear();
+
 			var length = reader.ReadInt32();
 
-			if (length == 0)
-			{
-				Values = null;
-			}
-			else
-			{
-				if (Values == null)
-					Values = new List<string>(length);
-				else
-					Values.Clear();
+			for (var i = 0; i < length; i++)
+				Values.Add(reader.ReadString());
+		}
 
-				for (var i = 0; i < length; i++)
-					Values.Add(reader.ReadString());
-			}
+		private void SetValues(List<string> values)
+		{
+			_values = values ?? new List<string>();
 		}
 	}
 }

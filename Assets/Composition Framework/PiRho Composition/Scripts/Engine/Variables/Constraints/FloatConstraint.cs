@@ -6,6 +6,8 @@ namespace PiRhoSoft.Composition
 {
 	public class FloatConstraint : VariableConstraint
 	{
+		public override VariableType Type => VariableType.Float;
+
 		public float? Minimum = null;
 		public float? Maximum = null;
 
@@ -21,8 +23,8 @@ namespace PiRhoSoft.Composition
 
 		public override Variable Generate()
 		{
-			var minimum = Minimum.HasValue ? Minimum.Value : 0.0f;
-			var maximum = Maximum.HasValue ? Maximum.Value : 0.0f;
+			var minimum = Minimum ?? 0.0f;
+			var maximum = Maximum ?? 0.0f;
 			var value = Mathf.Clamp(0.0f, minimum, maximum);
 
 			return Variable.Float(value);

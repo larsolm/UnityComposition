@@ -3,24 +3,24 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariableValueField : BaseField<VariableValue>
+	public class VariableField : BaseField<Variable>
 	{
-		public static readonly string UssClassName = "pirho-enum-buttons-field";
+		public static readonly string UssClassName = "pirho-variable-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
 		public static readonly string InputUssClassName = UssClassName + "__input";
 
-		private VariableValueControl _control;
+		private VariableControl _control;
 
-		public VariableValueField(string label, VariableValue value, VariableDefinition definition) : base(label, null)
+		public VariableField(string label, Variable value, VariableDefinition definition) : base(label, null)
 		{
 			Setup(value, definition);
 		}
 
-		private void Setup(VariableValue value, VariableDefinition definition)
+		private void Setup(Variable value, VariableDefinition definition)
 		{
-			_control = new VariableValueControl(value, definition);
+			_control = new VariableControl(value, definition);
 			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<VariableValue>>(evt => base.value = evt.newValue);
+			_control.RegisterCallback<ChangeEvent<Variable>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition.Editor
 			SetValueWithoutNotify(value);
 		}
 
-		public override void SetValueWithoutNotify(VariableValue newValue)
+		public override void SetValueWithoutNotify(Variable newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
 			_control.SetValueWithoutNotify(newValue);

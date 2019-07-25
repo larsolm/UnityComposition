@@ -1,4 +1,6 @@
-﻿using UnityEngine.UIElements;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Utilities.Editor
 {
@@ -49,5 +51,50 @@ namespace PiRhoSoft.Utilities.Editor
 		public abstract void AddItem();
 		public abstract void RemoveItem(int index);
 		public abstract void ReorderItem(int from, int to);
+	}
+
+	public class ListProxy<T> : ListProxy
+	{
+		public List<T> Items;
+
+		public override int ItemCount => Items.Count;
+
+		private readonly Func<int, VisualElement> _createElement;
+
+		public ListProxy(List<T> items, Func<int, VisualElement> createElement)
+		{
+			Items = items;
+
+			_createElement = createElement;
+		}
+
+		public override VisualElement CreateElement(int index)
+		{
+			var element = _createElement?.Invoke(index) ?? new VisualElement();
+			element.userData = index;
+			return element;
+		}
+
+		public override bool NeedsUpdate(VisualElement item, int index)
+		{
+			return !(item.userData is int i) || i != index;
+		}
+
+		public override void AddItem()
+		{
+			Items.Add(default);
+		}
+
+		public override void RemoveItem(int index)
+		{
+			Items.RemoveAt(index);
+		}
+
+		public override void ReorderItem(int from, int to)
+		{
+			var previous = Items[to];
+			Items[to] = Items[from];
+			Items[from] = previous;
+		}
 	}
 }

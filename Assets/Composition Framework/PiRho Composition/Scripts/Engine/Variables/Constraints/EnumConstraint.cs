@@ -9,6 +9,8 @@ namespace PiRhoSoft.Composition
 
 	public class EnumConstraint : VariableConstraint
 	{
+		public override VariableType Type => VariableType.Enum;
+
 		private Type _enumType;
 
 		public Type EnumType

@@ -5,6 +5,8 @@ namespace PiRhoSoft.Composition
 {
 	public class StoreConstraint : VariableConstraint
 	{
+		public override VariableType Type => VariableType.Store;
+
 		public VariableSchema Schema;
 
 		public StoreConstraint()

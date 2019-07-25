@@ -5,11 +5,22 @@ namespace PiRhoSoft.Composition
 {
 	public class ListConstraint : VariableConstraint
 	{
-		public VariableType ItemType;
-		public VariableConstraint ItemConstraint;
+		public override VariableType Type => VariableType.List;
+
+		public VariableType ItemType { get => _itemType; set => SetType(value); }
+		public VariableConstraint ItemConstraint { get => _itemConstraint; set => SetConstraint(value); }
+
+		private VariableType _itemType;
+		private VariableConstraint _itemConstraint;
 
 		public ListConstraint()
 		{
+			ItemType = VariableType.Empty;
+		}
+
+		public ListConstraint(VariableType type)
+		{
+			ItemType = type;
 		}
 
 		public ListConstraint(VariableConstraint itemConstraint)
@@ -58,6 +69,18 @@ namespace PiRhoSoft.Composition
 		{
 			ItemType = (VariableType)reader.ReadInt32();
 			ItemConstraint = data.LoadObject<VariableConstraint>(reader);
+		}
+
+		private void SetType(VariableType type)
+		{
+			_itemType = type;
+			_itemConstraint = Create(type);
+		}
+
+		private void SetConstraint(VariableConstraint constraint)
+		{
+			_itemType = constraint?.Type ?? VariableType.Empty;
+			_itemConstraint = constraint;
 		}
 	}
 }

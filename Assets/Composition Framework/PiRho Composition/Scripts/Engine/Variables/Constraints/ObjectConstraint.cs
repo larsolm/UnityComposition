@@ -7,6 +7,8 @@ namespace PiRhoSoft.Composition
 {
 	public class ObjectConstraint : VariableConstraint
 	{
+		public override VariableType Type => VariableType.Object;
+
 		private Type _objectType;
 
 		public Type ObjectType

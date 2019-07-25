@@ -48,7 +48,7 @@ namespace PiRhoSoft.Composition.Editor
 			public string RemoveTooltip => "Remove this variable from the pool";
 			public string ReorderTooltip => "Move this variable in the pool";
 
-			public int ItemCount => Variables.Variables.Count;
+			public int KeyCount => Variables.Variables.Count;
 			public bool AllowAdd => true;
 			public bool AllowRemove => true;
 			public bool AllowReorder => true;
@@ -64,7 +64,7 @@ namespace PiRhoSoft.Composition.Editor
 				var value = Variables.Variables[index];
 				var definition = Variables.Definitions[index];
 
-				var rollout = new RolloutControl(false);
+				var rollout = new RolloutControl(false) { userData = index };
 
 				var label = new TextField() { value = name, isDelayed = true };
 				label.RegisterValueChangedCallback(evt =>
@@ -75,19 +75,19 @@ namespace PiRhoSoft.Composition.Editor
 						label.SetValueWithoutNotify(evt.previousValue);
 				});
 
-				//var valueControl = new VariableValueControl(value, definition);
-				//valueControl.RegisterCallback<ChangeEvent<VariableValue>>(evt => Variables.SetVariable(index, evt.newValue));
-				//
-				//var definitionControl = new ValueDefinitionControl(definition, VariableInitializerType.None, null, false);
-				//definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt =>
-				//{
-				//	Variables.ChangeDefinition(index, evt.newValue);
-				//	valueControl.SetDefinition(evt.newValue, Variables.Variables[index]);
-				//});
+				var variableControl = new VariableControl(value, definition);
+				variableControl.RegisterCallback<ChangeEvent<Variable>>(evt => Variables.SetVariable(index, evt.newValue));
+				
+				var definitionControl = new VariableDefinitionControl(definition);
+				definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt =>
+				{
+					Variables.ChangeDefinition(index, evt.newValue);
+					variableControl.SetDefinition(evt.newValue);
+				});
 
 				rollout.Header.Add(label);
-				//rollout.Header.Add(valueControl);
-				//rollout.Content.Add(definitionControl);
+				rollout.Header.Add(variableControl);
+				rollout.Content.Add(definitionControl);
 
 				return rollout;
 			}
@@ -99,12 +99,12 @@ namespace PiRhoSoft.Composition.Editor
 
 			public bool NeedsUpdate(VisualElement item, int index)
 			{
-				return true;
+				return !(item.userData is int i) || i != index;
 			}
 
 			public void AddItem(string key)
 			{
-				//Variables.AddVariable(key, VariableValue.Empty);
+				Variables.AddVariable(key, Variable.Empty);
 			}
 
 			public void RemoveItem(int index)

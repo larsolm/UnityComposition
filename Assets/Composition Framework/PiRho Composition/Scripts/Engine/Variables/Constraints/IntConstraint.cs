@@ -6,6 +6,8 @@ namespace PiRhoSoft.Composition
 {
 	public class IntConstraint : VariableConstraint
 	{
+		public override VariableType Type => VariableType.Int;
+
 		public int? Minimum = null;
 		public int? Maximum = null;
 
@@ -21,8 +23,8 @@ namespace PiRhoSoft.Composition
 
 		public override Variable Generate()
 		{
-			var minimum = Minimum.HasValue ? Minimum.Value : 0;
-			var maximum = Maximum.HasValue ? Maximum.Value : 0;
+			var minimum = Minimum ?? 0;
+			var maximum = Maximum ?? 0;
 			var value = Mathf.Clamp(0, minimum, maximum);
 
 			return Variable.Int(value);

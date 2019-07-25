@@ -6,6 +6,8 @@ namespace PiRhoSoft.Composition
 {
 	public class OtherConstraint : VariableConstraint
 	{
+		public override VariableType Type => VariableType.Other;
+
 		private Type _otherType;
 
 		public Type OtherType

@@ -11,14 +11,14 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariableDefinitionControl _control;
 
-		public VariableDefinitionField(string label, VariableDefinition value, VariableInitializerType initializer, TagList tags, bool showConstraintLabel) : base(label, null)
+		public VariableDefinitionField(string label, VariableDefinition value) : base(label, null)
 		{
-			Setup(value, initializer, tags, showConstraintLabel);
+			Setup(value);
 		}
 
-		private void Setup(VariableDefinition value, VariableInitializerType initializer, TagList tags, bool showConstraintLabel)
+		private void Setup(VariableDefinition value)
 		{
-			_control = new VariableDefinitionControl(value, initializer, tags, showConstraintLabel);
+			_control = new VariableDefinitionControl(value);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<VariableDefinition>>(evt => base.value = evt.newValue);
 

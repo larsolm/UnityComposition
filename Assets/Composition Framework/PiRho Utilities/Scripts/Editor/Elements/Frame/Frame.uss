@@ -3,7 +3,7 @@
 	border-color: #555555;
 	border-width: 1px;
 	border-radius: 2px;
-	margin-bottom: 5px;
+	margin-top: 5px;
 }
 
 .pirho-frame__header

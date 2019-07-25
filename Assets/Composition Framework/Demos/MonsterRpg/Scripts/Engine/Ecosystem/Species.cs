@@ -19,7 +19,6 @@ namespace PiRhoSoft.MonsterRpg
 	[CreateAssetMenu(menuName = "PiRho Soft/Species", fileName = nameof(Species), order = 201)]
 	public class Species : VariableSetAsset, IResource
 	{
-		[Tooltip("The name of this species")] public string Name;
 		[Tooltip("The icon for this species")] public Sprite Icon;
 		[Tooltip("The animations for this species")] public AnimatorOverrideController Animations;
 		[Tooltip("The skills available to Creatures of this Species")] [List(EmptyLabel = "The Species has no Skills")] public SkillList Skills = new SkillList();
@@ -30,7 +29,6 @@ namespace PiRhoSoft.MonsterRpg
 			var creature = CreateInstance<Creature>();
 			creature.Species = this;
 			creature.name = name;
-			creature.Name = Name;
 			creature.Setup(trainer);
 			return creature;
 		}
