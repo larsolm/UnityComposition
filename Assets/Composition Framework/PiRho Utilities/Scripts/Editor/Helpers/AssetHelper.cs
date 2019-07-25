@@ -163,7 +163,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static IEnumerable<Object> FindAssets(Type assetType)
 		{
-			return AssetDatabase.FindAssets($"t:{assetType.Name}").Select(id => GetAssetWithId(id, assetType));
+			return AssetDatabase.FindAssets($"t:{assetType.Name}").Select(id => GetAssetWithId(id, assetType)).Where(asset => asset);
 		}
 
 		public static AssetList GetAssetList<AssetType>() where AssetType : Object

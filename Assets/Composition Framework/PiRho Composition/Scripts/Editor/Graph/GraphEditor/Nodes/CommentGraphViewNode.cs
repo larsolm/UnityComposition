@@ -1,11 +1,10 @@
-﻿using PiRhoSoft.Composition;
-using UnityEngine.UIElements;
+﻿using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
 	public class CommentGraphViewNode : GraphViewNode
 	{
-		public const string UssCommentName = UssClassName + "--comment";
+		public const string CommentUssClassName = UssClassName + "--comment";
 
 		private readonly Label _comment;
 		private readonly TextField _edit;
@@ -14,7 +13,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public CommentGraphViewNode(GraphNode node) : base(node, false)
 		{
-			AddToClassList(UssCommentName);
+			AddToClassList(CommentUssClassName);
 
 			title = "Comment";
 

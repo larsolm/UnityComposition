@@ -120,6 +120,26 @@ namespace PiRhoSoft.Utilities.Editor
 			element.style.display = displayed ? DisplayStyle.Flex : DisplayStyle.None;
 		}
 
+		public static void AlternateClass(this VisualElement element, string validClass, string invalidClass, bool isValid)
+		{
+			if (isValid)
+			{
+				if (!element.ClassListContains(validClass))
+					element.AddToClassList(validClass);
+
+				if (element.ClassListContains(invalidClass))
+					element.RemoveFromClassList(invalidClass);
+			}
+			else
+			{
+				if (!element.ClassListContains(invalidClass))
+					element.AddToClassList(invalidClass);
+
+				if (element.ClassListContains(validClass))
+					element.RemoveFromClassList(validClass);
+			}
+		}
+
 		#endregion
 	}
 }

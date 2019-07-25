@@ -447,16 +447,16 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		#region Members
 
-		public const string StyleSheetPath = Composition.StylePath + "Graph/GraphEditor/GraphView.uss";
+		public const string StyleSheetPath = Composition.StylePath + "Graph/GraphEditor/GraphViewStyle.uss";
 		public const string UssClassName = "pirho-graph-view";
-		public const string UssToolbarClassName = UssClassName + "__toolbar";
-		public const string UssToolbarButtonClassName = UssClassName + "__toolbar-button";
-		public const string UssToolbarButtonLargeClassName = UssToolbarButtonClassName + "--large";
-		public const string UssToolbarButtonSmallClassName = UssToolbarButtonClassName + "--small";
-		public const string UssToolbarButtonLockClassName = UssToolbarButtonClassName + "--lock";
-		public const string UssToolbarButtonActiveClassName = UssToolbarButtonClassName + "--active";
-		public const string UssToolbarButtonFirstClassName = UssToolbarButtonClassName + "--first";
-		public const string UssBreakpointsDisabledClassName = UssClassName + "--breakpoints-disabled";
+		public const string ToolbarUssClassName = UssClassName + "__toolbar";
+		public const string ToolbarButtonUssClassName = ToolbarUssClassName + "__button";
+		public const string ToolbarButtonLargeUssClassName = ToolbarButtonUssClassName + "--large";
+		public const string ToolbarButtonSmallUssClassName = ToolbarButtonUssClassName + "--small";
+		public const string ToolbarButtonLockUssClassName = ToolbarButtonUssClassName + "--lock";
+		public const string ToolbarButtonActiveUssClassName = ToolbarButtonUssClassName + "--active";
+		public const string ToolbarButtonFirstUssClassName = ToolbarButtonUssClassName + "--first";
+		public const string BreakpointsDisabledUssClassName = UssClassName + "--breakpoints-disabled";
 
 		private static readonly Icon _playIcon = Icon.BuiltIn("Animation.Play");
 		private static readonly Icon _pauseIcon = Icon.BuiltIn("PauseButton");
@@ -491,7 +491,7 @@ namespace PiRhoSoft.Composition.Editor
 			_window = window;
 			_graphProvider = ScriptableObject.CreateInstance<GraphProvider>();
 
-			ElementHelper.AddStyleSheet(this, StyleSheetPath);
+			styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(StyleSheetPath));
 			AddToClassList(UssClassName);
 
 			CreateToolbar();
@@ -508,6 +508,9 @@ namespace PiRhoSoft.Composition.Editor
 				if (GraphView != null)
 					GraphView.RemoveFromHierarchy();
 
+				var serializedObject = new SerializedObject(graph);
+				this.Bind(serializedObject);
+
 				GraphView = new GraphView(_window, graph);
 
 				Add(GraphView);
@@ -521,57 +524,57 @@ namespace PiRhoSoft.Composition.Editor
 			var viewButton = CreateViewMenu();
 
 			_playButton = new Image { image = _playIcon.Texture, tooltip = "Resume execution of the graph" };
-			_playButton.AddToClassList(UssToolbarButtonClassName);
-			_playButton.AddToClassList(UssToolbarButtonSmallClassName);
-			_playButton.AddToClassList(UssToolbarButtonFirstClassName);
+			_playButton.AddToClassList(ToolbarButtonUssClassName);
+			_playButton.AddToClassList(ToolbarButtonSmallUssClassName);
+			_playButton.AddToClassList(ToolbarButtonFirstUssClassName);
 			_playButton.AddManipulator(new Clickable(() => CurrentGraph.DebugPlay()));
 
 			_pauseButton = new Image { image = _pauseIcon.Texture, tooltip = "Pause the execution of the graph" };
-			_pauseButton.AddToClassList(UssToolbarButtonClassName);
-			_pauseButton.AddToClassList(UssToolbarButtonSmallClassName);
+			_pauseButton.AddToClassList(ToolbarButtonUssClassName);
+			_pauseButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_pauseButton.AddManipulator(new Clickable(() => CurrentGraph.DebugPause()));
 
 			_stepButton = new Image { image = _stepIcon.Texture, tooltip = "Step forward one node in the graph" };
-			_stepButton.AddToClassList(UssToolbarButtonClassName);
-			_stepButton.AddToClassList(UssToolbarButtonSmallClassName);
+			_stepButton.AddToClassList(ToolbarButtonUssClassName);
+			_stepButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_stepButton.AddManipulator(new Clickable(() => CurrentGraph.DebugStep()));
 
 			_stopButton = new Image { image = _stopIcon.Texture, tooltip = "Stop executing the graph", tintColor = Color.gray };
-			_stopButton.AddToClassList(UssToolbarButtonClassName);
-			_stopButton.AddToClassList(UssToolbarButtonSmallClassName);
+			_stopButton.AddToClassList(ToolbarButtonUssClassName);
+			_stopButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_stopButton.AddManipulator(new Clickable(() => CurrentGraph.DebugStop()));
 
 			_breakButton = new Image { image = _breakIcon.Texture, tooltip = "Enable/Disable node breakpoints for all graphs" };
-			_breakButton.AddToClassList(UssToolbarButtonClassName);
-			_breakButton.AddToClassList(UssToolbarButtonSmallClassName);
-			_breakButton.AddToClassList(UssToolbarButtonFirstClassName);
+			_breakButton.AddToClassList(ToolbarButtonUssClassName);
+			_breakButton.AddToClassList(ToolbarButtonSmallUssClassName);
+			_breakButton.AddToClassList(ToolbarButtonFirstUssClassName);
 			_breakButton.AddManipulator(new Clickable(ToggleBreakpointsEnabled));
 
 			_loggingButton = new Image { image = _logIcon.Texture, tooltip = "Enable/Disable logging of graph execution for all graphs" };
-			_loggingButton.AddToClassList(UssToolbarButtonClassName);
-			_loggingButton.AddToClassList(UssToolbarButtonSmallClassName);
+			_loggingButton.AddToClassList(ToolbarButtonUssClassName);
+			_loggingButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_loggingButton.AddManipulator(new Clickable(ToggleLoggingEnabled));
 
 			_graphButton = new Label() { tooltip = "Select a graph to edit" };
-			_graphButton.AddToClassList(UssToolbarButtonClassName);
-			_graphButton.AddToClassList(UssToolbarButtonLargeClassName);
+			_graphButton.AddToClassList(ToolbarButtonUssClassName);
+			_graphButton.AddToClassList(ToolbarButtonLargeUssClassName);
 			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
 
 			_lockButton = new Image { tintColor = Color.black, tooltip = "Lock/Unlock this window so it won't be used when other graphs are opened" };
-			_lockButton.AddToClassList(UssToolbarButtonClassName);
-			_lockButton.AddToClassList(UssToolbarButtonSmallClassName);
-			_lockButton.AddToClassList(UssToolbarButtonLockClassName);
+			_lockButton.AddToClassList(ToolbarButtonUssClassName);
+			_lockButton.AddToClassList(ToolbarButtonSmallUssClassName);
+			_lockButton.AddToClassList(ToolbarButtonLockUssClassName);
 			_lockButton.AddManipulator(new Clickable(ToggleLockingEnabled));
 
 			var watchButton = new Image { image = Icon.View.Texture, tooltip = "Open the Watch Window" };
-			watchButton.AddToClassList(UssToolbarButtonClassName);
-			watchButton.AddToClassList(UssToolbarButtonSmallClassName);
+			watchButton.AddToClassList(ToolbarButtonUssClassName);
+			watchButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			watchButton.AddManipulator(new Clickable(WatchWindow.ShowWindow));
 
 			RefreshToolbar();
 
 			var toolbar = new Toolbar();
-			toolbar.AddToClassList(UssToolbarClassName);
+			toolbar.AddToClassList(ToolbarUssClassName);
 			toolbar.Add(editButton);
 			toolbar.Add(viewButton);
 			toolbar.Add(_playButton);
@@ -626,22 +629,19 @@ namespace PiRhoSoft.Composition.Editor
 			_graphButton.text = CurrentGraph == null ? "No Graph Selected" : CurrentGraph.name;
 			_lockButton.image = IsLocked ? Icon.Locked.Texture : Icon.Unlocked.Texture;
 
-			if (!isEnabled)
-			{
-				_playButton.SetEnabled(false);
-				_pauseButton.SetEnabled(false);
-				_stepButton.SetEnabled(false);
-				_stopButton.SetEnabled(false);
-			}
+			_playButton.SetEnabled(isEnabled);
+			_pauseButton.SetEnabled(isEnabled);
+			_stepButton.SetEnabled(isEnabled);
+			_stopButton.SetEnabled(isEnabled);
 
-			_playButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isPlaying);
-			_pauseButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isPaused);
-			_stepButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isStepping);
-			_stopButton.EnableInClassList(UssToolbarButtonActiveClassName, isEnabled && isStopping);
-			_breakButton.EnableInClassList(UssToolbarButtonActiveClassName, Graph.IsDebugBreakEnabled);
-			_loggingButton.EnableInClassList(UssToolbarButtonActiveClassName, Graph.IsDebugLoggingEnabled);
-			_lockButton.EnableInClassList(UssToolbarButtonActiveClassName, IsLocked);
-			EnableInClassList(UssBreakpointsDisabledClassName, !Graph.IsDebugBreakEnabled);
+			_playButton.EnableInClassList(ToolbarButtonActiveUssClassName, isEnabled && isPlaying);
+			_pauseButton.EnableInClassList(ToolbarButtonActiveUssClassName, isEnabled && isPaused);
+			_stepButton.EnableInClassList(ToolbarButtonActiveUssClassName, isEnabled && isStepping);
+			_stopButton.EnableInClassList(ToolbarButtonActiveUssClassName, isEnabled && isStopping);
+			_breakButton.EnableInClassList(ToolbarButtonActiveUssClassName, Graph.IsDebugBreakEnabled);
+			_loggingButton.EnableInClassList(ToolbarButtonActiveUssClassName, Graph.IsDebugLoggingEnabled);
+			_lockButton.EnableInClassList(ToolbarButtonActiveUssClassName, IsLocked);
+			EnableInClassList(BreakpointsDisabledUssClassName, !Graph.IsDebugBreakEnabled);
 		}
 
 		private void ShowGraphPicker(Vector2 position)

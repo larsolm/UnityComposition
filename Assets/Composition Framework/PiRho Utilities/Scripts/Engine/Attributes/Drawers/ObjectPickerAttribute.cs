@@ -1,18 +1,16 @@
 ﻿using System;
-using UnityEngine;
 
 namespace PiRhoSoft.Utilities
 {
-	public class ObjectPickerAttribute : PropertyAttribute
+	public class ObjectPickerAttribute : PropertyTraitAttribute
 	{
 		public Type BaseType { get; private set; }
 
-		public ObjectPickerAttribute()
+		public ObjectPickerAttribute() : this(null)
 		{
-			BaseType = null;
 		}
 
-		public ObjectPickerAttribute(Type baseType)
+		public ObjectPickerAttribute(Type baseType) : base(FieldPhase, 0)
 		{
 			BaseType = baseType; 
 		}

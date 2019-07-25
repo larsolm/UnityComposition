@@ -1,38 +1,27 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Utilities.Editor
 {
-	public class DictionaryControl : VisualElement
+	public class DictionaryControl : Frame
 	{
 		private const string _stylesheet = "Dictionary/DictionaryStyle.uss";
 
 		#region Class Names
 
-		public static readonly string UssClassName = "pirho-list";
+		public new static readonly string UssClassName = "pirho-dictionary";
 		public static readonly string EmptyUssClassName = UssClassName + "--empty";
 		public static readonly string AddDisabledUssClassName = UssClassName + "--add-disabled";
 		public static readonly string RemoveDisabledUssClassName = UssClassName + "--remove-disabled";
+		public static readonly string AddKeyInvalidUssClassName = UssClassName + "--add-key-invalid";
 		public static readonly string EmptyLabelUssClassName = UssClassName + "__empty-label";
-		public static readonly string HeaderUssClassName = UssClassName + "__header";
-		public static readonly string LabelUssClassName = UssClassName + "__label";
-		public static readonly string ContentUssClassName = UssClassName + "__content";
-		public static readonly string FooterUssClassName = UssClassName + "__footer";
 		public static readonly string ItemsUssClassName = UssClassName + "__items";
-		public static readonly string HeaderKeyTextUssClassName = HeaderUssClassName + "__key-text";
-		public static readonly string HeaderButtonsUssClassName = HeaderUssClassName + "__buttons";
-		public static readonly string FooterButtonsUssClassName = FooterUssClassName + "__buttons";
-		public static readonly string HeaderButtonUssClassName = HeaderUssClassName + "__button";
-		public static readonly string FooterButtonUssClassName = FooterUssClassName + "__button";
+		public static readonly string HeaderKeyTextUssClassName = UssClassName + "__key-text";
 		public static readonly string AddButtonUssClassName = UssClassName + "__add-button";
 		public static readonly string RemoveButtonUssClassName = UssClassName + "__remove-button";
 		public static readonly string ItemUssClassName = UssClassName + "__item";
 		public static readonly string ItemEvenUssClassName = ItemUssClassName + "--even";
 		public static readonly string ItemOddUssClassName = ItemUssClassName + "--odd";
-		public static readonly string ItemButtonsUssClassName = ItemUssClassName + "__buttons";
-		public static readonly string ItemButtonUssClassName = ItemUssClassName + "__button";
 		public static readonly string ItemContentUssClassName = ItemUssClassName + "__content";
 
 		#endregion
@@ -46,22 +35,19 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public IDictionaryProxy Proxy { get; private set; }
 
-		private VisualElement _headerButtonsContainer;
-		private VisualElement _footerButtonsContainer;
 		private VisualElement _itemsContainer;
 		private TextField _keyField;
-		private UQueryState<VisualElement> _itemContentQuery;
-		private UQueryState<VisualElement> _itemButtonsQuery;
-
-		private List<ItemButton> _itemButtons = new List<ItemButton>();
+		private IconButton _addButton;
 
 		public DictionaryControl(IDictionaryProxy proxy)
 		{
 			Proxy = proxy;
 
 			CreateFrame();
-			AddHeaderButton(_addIcon.Texture, proxy.AddTooltip, AddButtonUssClassName, AddItem);
-			AddItemButton(_removeIcon.Texture, proxy.RemoveTooltip, RemoveButtonUssClassName, RemoveItem);
+
+			_addButton = AddHeaderButton(_addIcon.Texture, proxy.AddTooltip, AddButtonUssClassName, AddItem);
+			_addButton.SetEnabled(false);
+
 			Refresh();
 
 			AddToClassList(UssClassName);
@@ -80,96 +66,34 @@ namespace PiRhoSoft.Utilities.Editor
 				CreateItem(i);
 
 			EnableInClassList(EmptyUssClassName, Proxy.ItemCount == 0);
-			EnableInClassList(AddDisabledUssClassName, Proxy.AllowAdd);
-			EnableInClassList(RemoveDisabledUssClassName, Proxy.AllowRemove);
+			EnableInClassList(AddDisabledUssClassName, !Proxy.AllowAdd);
+			EnableInClassList(RemoveDisabledUssClassName, !Proxy.AllowRemove);
 		}
 
 		#region Element Creation
 
-		public void AddHeaderButton(Texture icon, string tooltip, string ussClassName, Action action)
-		{
-			var button = new IconButton(icon, tooltip, action);
-			button.AddToClassList(HeaderButtonUssClassName);
-
-			if (!string.IsNullOrEmpty(ussClassName))
-				button.AddToClassList(ussClassName);
-
-			_headerButtonsContainer.Add(button);
-		}
-
-		public void AddFooterButton(Texture icon, string tooltip, string ussClassName, Action action)
-		{
-			var button = new IconButton(icon, tooltip, action);
-			button.AddToClassList(FooterButtonUssClassName);
-
-			if (!string.IsNullOrEmpty(ussClassName))
-				button.AddToClassList(ussClassName);
-
-			_footerButtonsContainer.Add(button);
-		}
-
-		private struct ItemButton
-		{
-			public Texture Icon;
-			public string Tooltip;
-			public string UssClassName;
-			public Action<int> Action;
-		}
-
-		public void AddItemButton(Texture icon, string tooltip, string ussClassName, Action<int> action)
-		{
-			var button = new ItemButton
-			{
-				Icon = icon,
-				Tooltip = tooltip,
-				UssClassName = ussClassName,
-				Action = action
-			};
-
-			_itemButtons.Add(button);
-			_itemButtonsQuery.ForEach(buttons => CreateItemButton(buttons, button));
-		}
-
 		private void CreateFrame()
 		{
-			var header = new VisualElement();
-			header.AddToClassList(HeaderUssClassName);
-			Add(header);
-
-			var label = new Label(Proxy.Label) { tooltip = Proxy.Tooltip };
-			label.AddToClassList(LabelUssClassName);
-			header.Add(label);
+			SetLabel(Proxy.Label, Proxy.Tooltip);
 
 			_keyField = new TextField();
 			_keyField.AddToClassList(HeaderKeyTextUssClassName);
-			header.Add(_keyField);
+			_keyField.RegisterValueChangedCallback(evt => AddKeyChanged(evt.newValue));
+			_keyField.Q(TextField.textInputUssName).RegisterCallback<KeyDownEvent>(evt => KeyPressed(evt));
 
-			_headerButtonsContainer = new VisualElement();
-			_headerButtonsContainer.AddToClassList(HeaderButtonsUssClassName);
-			header.Add(_headerButtonsContainer);
-			
-			var content = new VisualElement();
-			content.AddToClassList(ContentUssClassName);
-			Add(content);
+			var keyPlaceholder = new PlaceholderControl(Proxy.AddPlaceholder);
+			keyPlaceholder.AddToField(_keyField);
+
+			Header.Add(_keyField);
+			_keyField.PlaceInFront(Label);
 
 			var empty = new Label(Proxy.EmptyLabel) { tooltip = Proxy.EmptyTooltip };
 			empty.AddToClassList(EmptyLabelUssClassName);
-			content.Add(empty);
+			Content.Add(empty);
 
 			_itemsContainer = new VisualElement();
 			_itemsContainer.AddToClassList(ItemsUssClassName);
-			content.Add(_itemsContainer);
-
-			var footer = new VisualElement();
-			footer.AddToClassList(FooterUssClassName);
-			Add(footer);
-
-			_footerButtonsContainer = new VisualElement();
-			_footerButtonsContainer.AddToClassList(FooterButtonsUssClassName);
-			footer.Add(_footerButtonsContainer);
-
-			_itemContentQuery = this.Query(null, ItemContentUssClassName).Build();
-			_itemButtonsQuery = this.Query(null, ItemButtonsUssClassName).Build();
+			Content.Add(_itemsContainer);
 		}
 
 		private void CreateItem(int index)
@@ -183,12 +107,9 @@ namespace PiRhoSoft.Utilities.Editor
 			content.AddToClassList(ItemContentUssClassName);
 			item.Add(content);
 
-			var buttons = new VisualElement();
-			buttons.AddToClassList(ItemButtonsUssClassName);
-			item.Add(buttons);
-
-			foreach (var itemButton in _itemButtons)
-				CreateItemButton(buttons, itemButton);
+			var remove = new IconButton(_removeIcon.Texture, Proxy.RemoveTooltip, () => RemoveItem(index));
+			remove.AddToClassList(RemoveButtonUssClassName);
+			item.Add(remove);
 		}
 
 		private void UpdateItem(int index)
@@ -201,26 +122,32 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				var content = Proxy.CreateField(index);
 				content.AddToClassList(ItemContentUssClassName);
-				item.RemoveAt(1);
-				item.Insert(1, content);
+				item.RemoveAt(0);
+				item.Insert(0, content);
 			}
 		}
 
-		private void CreateItemButton(VisualElement container, ItemButton itemButton)
+		private void KeyPressed(KeyDownEvent evt)
 		{
-			var button = new IconButton(itemButton.Icon, itemButton.Tooltip, () => itemButton.Action(GetItemIndex(container.parent)));
-
-			button.AddToClassList(ItemButtonUssClassName);
-
-			if (!string.IsNullOrEmpty(itemButton.UssClassName))
-				button.AddToClassList(itemButton.UssClassName);
-
-			container.Add(button);
+			if (evt.keyCode == KeyCode.KeypadEnter || evt.keyCode == KeyCode.Return)
+			{
+				AddItem();
+				evt.StopPropagation();
+				evt.PreventDefault();
+			}
 		}
 
-		private int GetItemIndex(VisualElement item)
+		private void AddKeyChanged(string newValue)
 		{
-			return item.parent.IndexOf(item);
+			// Separately check for empty because we don't want empty to be addable but we also don't want it be show as invalid
+			var valid = IsKeyValid(newValue) || string.IsNullOrEmpty(newValue);
+			EnableInClassList(AddKeyInvalidUssClassName, !valid);
+			_addButton.SetEnabled(valid && !string.IsNullOrEmpty(newValue));
+		}
+
+		private bool IsKeyValid(string key)
+		{
+			return !string.IsNullOrEmpty(key) && Proxy.IsKeyValid(key);
 		}
 
 		#endregion
@@ -231,9 +158,10 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			var key = _keyField.text;
 
-			if (Proxy.AllowAdd && !string.IsNullOrEmpty(key)) // && isn't a duplicate
+			if (Proxy.AllowAdd && IsKeyValid(key))
 			{
 				Proxy.AddItem(key);
+				_keyField.value = string.Empty;
 				Refresh();
 
 				using (var e = ItemAddedEvent.GetPooled(Proxy.ItemCount - 1))

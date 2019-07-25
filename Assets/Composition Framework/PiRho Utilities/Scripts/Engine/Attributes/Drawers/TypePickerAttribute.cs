@@ -1,14 +1,13 @@
 ﻿using System;
-using UnityEngine;
 
 namespace PiRhoSoft.Utilities
 {
-	public class TypePickerAttribute : PropertyAttribute
+	public class TypePickerAttribute : PropertyTraitAttribute
 	{
 		public Type BaseType { get; private set; }
 		public bool ShowAbstract { get; private set; }
 
-		public TypePickerAttribute(Type baseType, bool showAbstract)
+		public TypePickerAttribute(Type baseType, bool showAbstract) : base(FieldPhase, 0)
 		{
 			BaseType = baseType;
 			ShowAbstract = showAbstract;

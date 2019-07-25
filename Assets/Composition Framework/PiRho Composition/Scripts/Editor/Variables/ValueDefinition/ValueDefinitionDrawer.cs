@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Composition;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -10,9 +9,9 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
-			container.Add(new ValueDefinitionElement(property));
-			return container;
+			//var field = new ValueDefinitionField(property.displayName, property.GetObject<ValueDefinition>(), VariableInitializerType.None, null, false);
+			//return field.ConfigureProperty(property, this.GetTooltip());
+			return new VisualElement();
 		}
 	}
 }

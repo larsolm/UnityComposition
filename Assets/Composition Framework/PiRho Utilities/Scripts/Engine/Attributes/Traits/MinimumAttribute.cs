@@ -2,16 +2,16 @@
 {
 	public class MinimumAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 130;
+		public const int Order = 0;
 
 		public float Minimum { get; private set; }
 
-		public MinimumAttribute(float minimum) : base(Order)
+		public MinimumAttribute(float minimum) : base(ValidatePhase, Order)
 		{
 			Minimum = minimum;
 		}
 
-		public MinimumAttribute(int minimum) : base(Order)
+		public MinimumAttribute(int minimum) : base(ValidatePhase, Order)
 		{
 			Minimum = minimum;
 		}

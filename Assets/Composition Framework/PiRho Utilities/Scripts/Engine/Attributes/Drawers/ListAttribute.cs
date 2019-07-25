@@ -1,19 +1,14 @@
-﻿using UnityEngine;
-
-namespace PiRhoSoft.Utilities
+﻿namespace PiRhoSoft.Utilities
 {
-	public class ListAttribute : PropertyAttribute
+	public class ListAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 100;
-
 		public bool AllowAdd = true;
 		public bool AllowRemove = true;
 		public bool AllowReorder = true;
 		public string EmptyLabel = null;
 
-		public ListAttribute()
+		public ListAttribute() : base(ContainerPhase, 0)
 		{
-			order = int.MaxValue - Order;
 		}
 	}
 }

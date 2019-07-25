@@ -8,6 +8,7 @@ namespace PiRhoSoft.Utilities.Editor
 		string Tooltip { get; }
 		string EmptyLabel { get; }
 		string EmptyTooltip { get; }
+		string AddPlaceholder { get; }
 		string AddTooltip { get; }
 		string RemoveTooltip { get; }
 
@@ -17,6 +18,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		VisualElement CreateField(int index);
 		bool NeedsUpdate(VisualElement item, int index);
+		bool IsKeyValid(string key);
 		void AddItem(string key);
 		void RemoveItem(int index);
 	}
@@ -24,6 +26,7 @@ namespace PiRhoSoft.Utilities.Editor
 	public abstract class DictionaryProxy : IDictionaryProxy
 	{
 		public const string DefaultEmptyLabel = "The dictionary is empty";
+		public const string DefaultAddPlaceholder = "New key";
 		public const string DefaultAddTooltip = "Add an item to this dictionary";
 		public const string DefaultRemoveTooltip = "Remove this item from the dictionary";
 
@@ -31,6 +34,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public string Tooltip { get; set; }
 		public string EmptyLabel { get; set; } = DefaultEmptyLabel;
 		public string EmptyTooltip { get; set; }
+		public string AddPlaceholder { get; set; } = DefaultAddPlaceholder;
 		public string AddTooltip { get; set; } = DefaultAddTooltip;
 		public string RemoveTooltip { get; set; } = DefaultRemoveTooltip;
 
@@ -40,6 +44,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public abstract VisualElement CreateField(int index);
 		public abstract bool NeedsUpdate(VisualElement item, int index);
+		public abstract bool IsKeyValid(string key);
 		public abstract void AddItem(string key);
 		public abstract void RemoveItem(int index);
 	}

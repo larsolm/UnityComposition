@@ -1,9 +1,5 @@
 ﻿.pirho-dictionary
 {
-	border-color: #555555;
-	border-width: 1px;
-	border-radius: 2px;
-	margin-bottom: 5px;
 }
 
 .pirho-dictionary--empty
@@ -18,41 +14,20 @@
 {
 }
 
-.pirho-dictionary--move-disabled
+.pirho-dictionary--add-key-invalid
 {
 }
 
 .pirho-dictionary__empty-label
 {
+	display: none;
 	margin: 5px;
 	white-space: normal;
-	display: none;
 }
 
 .pirho-dictionary--empty .pirho-dictionary__empty-label
 {
 	display: flex;
-}
-
-.pirho-dictionary__header
-{
-	background-color: #AAA;
-	padding: 5px;
-	flex-direction: row;
-	flex-grow: 1;
-}
-
-.pirho-dictionary__label
-{
-	flex-grow: 1;
-}
-
-.pirho-dictionary__content
-{
-}
-
-.pirho-dictionary__footer
-{
 }
 
 .pirho-dictionary__items
@@ -61,52 +36,46 @@
 	flex-shrink: 1;
 }
 
-.pirho-dictionary__header__key-text
+.pirho-dictionary__key-text
 {
+	display: flex;
+	flex-grow: 1;
+	background-color: #99FF99;
 }
 
-.pirho-dictionary__header__buttons
+.pirho-dictionary--add-disabled .pirho-dictionary__key-text
 {
+	display: none;
 }
 
-.pirho-dictionary__footer__buttons
+.pirho-dictionary--add-key-invalid .pirho-dictionary__key-text
 {
-}
-
-.pirho-dictionary__header__button
-{
-	width: 16px;
-	height: 16px;
-	align-self: center;
-}
-
-.pirho-dictionary__footer__button
-{
+	background-color: #FF5555;
 }
 
 .pirho-dictionary__add-button
 {
+	display: flex;
+}
+
+.pirho-dictionary--add-disabled .pirho-dictionary__add-button
+{
+	display: none;
 }
 
 .pirho-dictionary__remove-button
 {
+	display: flex;
 	margin-top: 2px;
-}
-
-.pirho-dictionary__drag-handle
-{
-	cursor: move-arrow;
-	margin-right: 5px;
-	flex-shrink: 0;
+	margin-left: 5px;
+	width: 16px;
+	height: 16px;
 	align-self: flex-start;
-	padding-top: 5px;
 }
 
-.pirho-dictionary__drag-placeholder
+.pirho-dictionary--remove-disabled .pirho-dictionary__remove-button
 {
-	flex-grow: 1;
-	background-color: #000;
-	height: 10px;
+	display: none;
 }
 
 .pirho-dictionary__item
@@ -117,12 +86,6 @@
 	padding: 3px 5px 1px 5px;
 }
 
-.pirho-dictionary__item--dragging
-{
-	position: absolute;
-	background-color: #000;
-}
-
 .pirho-dictionary__item--even
 {
 	background-color: #DDD;
@@ -131,19 +94,6 @@
 .pirho-dictionary__item--odd
 {
 	background-color: #CCC;
-}
-
-.pirho-dictionary__item__buttons
-{
-	align-self: flex-start;
-}
-
-.pirho-dictionary__item__button
-{
-	width: 16px;
-	height: 16px;
-	align-self: center;
-	margin-left: 5px;
 }
 
 .pirho-dictionary__item__content

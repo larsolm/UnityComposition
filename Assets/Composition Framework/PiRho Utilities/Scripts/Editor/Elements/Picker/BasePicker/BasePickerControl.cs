@@ -9,8 +9,8 @@ namespace PiRhoSoft.Utilities.Editor
 		public const string Stylesheet = "Picker/BasePicker/BasePickerStyle.uss";
 		public const string UssClassName = "pirho-base-picker";
 		public const string ButtonUssClassName = UssClassName + "__button";
-		public const string IconUssClassName = ButtonUssClassName + "-icon";
-		public const string LabelUssClassName = ButtonUssClassName + "-label";
+		public const string IconUssClassName = ButtonUssClassName + "__icon";
+		public const string LabelUssClassName = ButtonUssClassName + "__label";
 
 		public ValueType Value { get; private set; }
 

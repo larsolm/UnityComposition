@@ -17,7 +17,7 @@
 	padding: 2px 5px;
 }
 
-.pirho-base-picker__button-icon
+.pirho-base-picker__button__icon
 {
 	min-height: 14px;
 	max-height: 14px;
@@ -26,7 +26,7 @@
 	margin: 2px 5px 2px 0;
 }
 
-.pirho-base-picker__button-label
+.pirho-base-picker__button__label
 {
 	margin: 1px 0 2px 0;
 	padding: 0;

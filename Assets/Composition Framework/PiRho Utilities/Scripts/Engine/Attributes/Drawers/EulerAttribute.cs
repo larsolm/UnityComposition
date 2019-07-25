@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-
-namespace PiRhoSoft.Utilities
+﻿namespace PiRhoSoft.Utilities
 {
-	public class EulerAttribute : PropertyAttribute
+	public class EulerAttribute : PropertyTraitAttribute
 	{
+		public EulerAttribute() : base(FieldPhase, 0)
+		{
+		}
 	}
 }

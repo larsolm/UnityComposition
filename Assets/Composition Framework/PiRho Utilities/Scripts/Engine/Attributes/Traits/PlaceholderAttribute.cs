@@ -2,11 +2,9 @@
 {
 	public class PlaceholderAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 1000;
-
 		public string Text { get; private set; }
 
-		public PlaceholderAttribute(string text) : base(Order)
+		public PlaceholderAttribute(string text) : base(FieldPhase, 0)
 		{
 			Text = text;
 		}

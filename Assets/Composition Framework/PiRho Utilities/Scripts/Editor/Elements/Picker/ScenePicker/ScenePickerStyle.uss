@@ -8,10 +8,10 @@
 	max-width: 17px;
 	min-height: 15px;
 	max-height: 15px;
-	margin: 0px 5px;
+	margin-left: 2px;
 }
 
 .pirho-scene-picker__create
 {
-	margin: 0px 5px;
+	margin-left: 2px;
 }

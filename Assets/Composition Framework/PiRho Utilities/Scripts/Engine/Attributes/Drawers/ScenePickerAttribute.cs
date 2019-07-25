@@ -1,17 +1,14 @@
-﻿using UnityEngine;
-
-namespace PiRhoSoft.Utilities
+﻿namespace PiRhoSoft.Utilities
 {
-	public class ScenePickerAttribute : PropertyAttribute
+	public class ScenePickerAttribute : PropertyTraitAttribute
 	{
 		public string CreateMethod { get; private set; }
 
-		public ScenePickerAttribute()
+		public ScenePickerAttribute() : this(string.Empty)
 		{
-			CreateMethod = string.Empty;
 		}
 
-		public ScenePickerAttribute(string createMethod)
+		public ScenePickerAttribute(string createMethod) : base(FieldPhase, 0)
 		{
 			CreateMethod = createMethod;
 		}

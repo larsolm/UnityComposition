@@ -2,7 +2,8 @@
 {
 	public class ButtonAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 1;
+		public const int Phase = PerContainerPhase;
+		public const int Order = 0;
 
 		public string Method { get; private set; }
 
@@ -10,7 +11,7 @@
 		public string Tooltip { get; set; }
 		public TraitLocation Location { get; set; }
 
-		public ButtonAttribute(string method) : base(Order)
+		public ButtonAttribute(string method) : base(PerContainerPhase, 0)
 		{
 			Method = method;
 		}

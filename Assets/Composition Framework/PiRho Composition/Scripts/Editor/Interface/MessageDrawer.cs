@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var container = ElementHelper.CreatePropertyContainer(property.displayName, ElementHelper.GetTooltip(fieldInfo));
+			var container = new FieldContainer(property.displayName, this.GetTooltip());
 			var textProperty = property.FindPropertyRelative(nameof(Message.Text));
 			var text = new PropertyField(textProperty) { label = null };
 

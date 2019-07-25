@@ -1,12 +1,10 @@
-﻿using UnityEngine;
-
-namespace PiRhoSoft.Utilities
+﻿namespace PiRhoSoft.Utilities
 {
-	public class EnumButtonsAttribute : PropertyAttribute
+	public class EnumButtonsAttribute : PropertyTraitAttribute
 	{
 		public bool? Flags { get; private set; }
 
-		public EnumButtonsAttribute() => Flags = null;
-		public EnumButtonsAttribute(bool flags) => Flags = flags;
+		public EnumButtonsAttribute() : base(FieldPhase, 0) => Flags = null;
+		public EnumButtonsAttribute(bool flags) : base(FieldPhase, 0) => Flags = flags;
 	}
 }

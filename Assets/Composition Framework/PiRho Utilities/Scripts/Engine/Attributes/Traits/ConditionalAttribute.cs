@@ -31,25 +31,25 @@
 		public ConditionalSource Source { get; set; }
 		public ConditionalTest Test { get; set; }
 
-		public ConditionalAttribute(string source, bool boolValue) : base(Order)
+		public ConditionalAttribute(string source, bool boolValue) : base(TestPhase, Order)
 		{
 			SourceName = source;
 			BoolValue = boolValue;
 		}
 
-		public ConditionalAttribute(string source, int intValue) : base(Order)
+		public ConditionalAttribute(string source, int intValue) : base(TestPhase, Order)
 		{
 			SourceName = source;
 			IntValue = intValue;
 		}
 
-		public ConditionalAttribute(string source, float floatValue) : base(Order)
+		public ConditionalAttribute(string source, float floatValue) : base(TestPhase, Order)
 		{
 			SourceName = source;
 			FloatValue = floatValue;
 		}
 
-		public ConditionalAttribute(string source, string stringValue) : base(Order)
+		public ConditionalAttribute(string source, string stringValue) : base(TestPhase, Order)
 		{
 			SourceName = source;
 			StringValue = stringValue;

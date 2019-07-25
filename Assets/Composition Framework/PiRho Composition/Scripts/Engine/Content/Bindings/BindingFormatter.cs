@@ -34,19 +34,10 @@ namespace PiRhoSoft.Composition
 			Custom
 		}
 
-		[Tooltip("The format of the displayed string")]
 		public string Format = "{0}";
-
-		[Tooltip("The method to format the number by")]
 		public FormatType Formatting = FormatType.None;
-
-		[Tooltip("The way to format the time")]
 		public TimeFormatType TimeFormatting = TimeFormatType.Custom;
-
-		[Tooltip("The way to format the number")]
 		public NumberFormatType NumberFormatting = NumberFormatType.Custom;
-
-		[Tooltip("The format string to be used to format the number")]
 		public string ValueFormat;
 
 		public string GetFormattedString(float number)

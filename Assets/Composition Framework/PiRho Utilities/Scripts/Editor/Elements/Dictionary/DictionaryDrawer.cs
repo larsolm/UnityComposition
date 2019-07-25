@@ -14,13 +14,13 @@ namespace PiRhoSoft.Utilities.Editor
 			var keys = property.FindPropertyRelative("_keys");
 			var values = property.FindPropertyRelative("_values");
 
-			if (keys != null && keys.isArray && values != null && values.isArray)
+			if (keys != null && keys.isArray && values != null && values.isArray && keys.arrayElementType == "string")
 			{
 				var dictionaryAttribute = attribute as DictionaryAttribute;
 				var itemDrawer = this.GetNextDrawer();
 				var tooltip = this.GetTooltip();
 
-				return new DictionaryField(keys, itemDrawer)
+				return new DictionaryField(keys, values, itemDrawer)
 				{
 					Label = property.displayName,
 					Tooltip = tooltip,

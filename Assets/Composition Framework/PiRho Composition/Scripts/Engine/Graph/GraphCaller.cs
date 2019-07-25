@@ -9,9 +9,9 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class GraphCaller
 	{
-		[Tooltip("The Graph to execute when this is called")] [SerializeField] private Graph _graph;
-		[Tooltip("The input values to set for the Graph")] [SerializeField] private List<GraphInput> _inputs = new List<GraphInput>();
-		[Tooltip("The output values from the Graph to store")] [SerializeField] private List<GraphOutput> _outputs = new List<GraphOutput>();
+		[SerializeField] private Graph _graph;
+		[SerializeField] private List<GraphInput> _inputs = new List<GraphInput>();
+		[SerializeField] private List<GraphOutput> _outputs = new List<GraphOutput>();
 
 		public Graph Graph
 		{

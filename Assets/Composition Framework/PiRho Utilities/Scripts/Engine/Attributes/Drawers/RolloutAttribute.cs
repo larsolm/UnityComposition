@@ -1,8 +1,9 @@
-﻿using UnityEngine;
-
-namespace PiRhoSoft.Utilities
+﻿namespace PiRhoSoft.Utilities
 {
-	public class RolloutAttribute : PropertyAttribute
+	public class RolloutAttribute : PropertyTraitAttribute
 	{
+		public RolloutAttribute() : base(FieldPhase, 0)
+		{
+		}
 	}
 }

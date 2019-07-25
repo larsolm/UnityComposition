@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Composition;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Linq;
 using UnityEditor;
@@ -13,8 +12,8 @@ namespace PiRhoSoft.Composition.Editor
 	public class GraphViewNode : Node
 	{
 		public const string UssClassName = GraphViewEditor.UssClassName + "__node";
-		public const string UssNodeDeleteButtonClassName = GraphViewEditor.UssClassName + "__node-delete-button";
-		public const string UssNodeEditableLabelClassName = GraphViewEditor.UssClassName + "__node-editable-label";
+		public const string NodeDeleteButtonUssClassName = UssClassName + "__delete-button";
+		public const string NodeEditableLabelUssClassName = UssClassName + "__editable-label";
 
 		private static readonly Icon _deleteIcon = Icon.BuiltIn("d_LookDevClose");
 
@@ -42,7 +41,7 @@ namespace PiRhoSoft.Composition.Editor
 			titleContainer.style.backgroundColor = node.NodeColor;
 			titleContainer.style.unityFontStyleAndWeight = FontStyle.Bold;
 
-			ElementHelper.SetVisible(m_CollapseButton, false);
+			m_CollapseButton.SetDisplayed(false);
 
 			SetPosition(new Rect(node.GraphPosition, Vector2.zero));
 		}
@@ -56,10 +55,11 @@ namespace PiRhoSoft.Composition.Editor
 
 		protected TextField CreateEditableLabel(Label container, Func<string> getValue, Action<string> setValue, bool multiline = false)
 		{
-			var edit = new TextField() { value = getValue(), multiline = true };
-			edit.AddToClassList(UssNodeEditableLabelClassName);
+			var edit = new TextField() { value = getValue() };
+			edit.multiline = multiline;
+			edit.AddToClassList(NodeEditableLabelUssClassName);
 			edit.RegisterValueChangedCallback(evt => setValue(evt.newValue));
-			edit.Q(TextInputBaseField<string>.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
+			edit.Q(TextField.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
 
 			container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit, getValue()));
 			container.Add(edit);
@@ -74,7 +74,7 @@ namespace PiRhoSoft.Composition.Editor
 			edit.SetValueWithoutNotify(value);
 			edit.style.visibility = Visibility.Visible;
 			edit.Q(TextField.textInputUssName).Focus();
-			edit.SelectAll(); // this doesn't work for some reason
+			edit.SelectAll(); // TODO: figure out why this doesn't work
 		}
 
 		protected void HideEditableText(TextField edit)
@@ -95,7 +95,7 @@ namespace PiRhoSoft.Composition.Editor
 		protected void CreateDeleteButton()
 		{
 			var deleteButton = new Image { image = _deleteIcon.Texture, tooltip = "Delete this node" };
-			deleteButton.AddToClassList(UssNodeDeleteButtonClassName);
+			deleteButton.AddToClassList(NodeDeleteButtonUssClassName);
 			deleteButton.AddManipulator(new Clickable(DeleteNode));
 			titleButtonContainer.Add(deleteButton);
 		}

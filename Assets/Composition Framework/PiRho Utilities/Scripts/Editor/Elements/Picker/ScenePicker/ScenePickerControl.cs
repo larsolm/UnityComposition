@@ -26,7 +26,10 @@ namespace PiRhoSoft.Utilities.Editor
 		public ScenePickerControl(string path, Action onCreate)
 		{
 			_load = new IconButton(Icon.Load.Texture, "Load this scene", Load) { tintColor = Color.black };
+			_load.AddToClassList(LoadUssClassName);
+
 			_create = new IconButton(Icon.Add.Texture, "Create a new scene", () => Create(onCreate));
+			_create.AddToClassList(CreateUssClassName);
 
 			_buildWarning = new MessageBox(MessageBoxType.Info, "This scene is not in the build settings. Add it now?");
 			_buildWarning.Add(new Button(AddToBuild) { text = "Add" });

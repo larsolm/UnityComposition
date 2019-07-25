@@ -27,4 +27,20 @@ MonoBehaviour:
   Outputs:
     _items: []
   Process: {fileID: 0}
-  Nodes: []
+  Nodes:
+  - {fileID: 8360444590051035758}
+--- !u!114 &8360444590051035758
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcbf36d44c8307646ae6b4c67ca8b89d, type: 3}
+  m_Name: BreakNode
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 129.00002, y: -86.99997}
+  IsBreakpoint: 0

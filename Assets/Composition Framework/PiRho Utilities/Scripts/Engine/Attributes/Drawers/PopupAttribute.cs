@@ -1,27 +1,26 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using UnityEngine;
 
 namespace PiRhoSoft.Utilities
 {
-	public class PopupAttribute : PropertyAttribute
+	public class PopupAttribute : PropertyTraitAttribute
 	{
 		public List<int> IntValues { get; private set; }
 		public List<float> FloatValues { get; private set; }
 		public List<string> Options { get; private set; }
 
-		public PopupAttribute(string[] options)
+		public PopupAttribute(string[] options) : base(FieldPhase, 0)
 		{
 			Options = options.ToList();
 		}
 
-		public PopupAttribute(int[] values, string[] options = null)
+		public PopupAttribute(int[] values, string[] options = null) : base(FieldPhase, 0)
 		{
 			IntValues = values.ToList();
 			Options = options?.ToList();
 		}
 
-		public PopupAttribute(float[] values, string[] options = null)
+		public PopupAttribute(float[] values, string[] options = null) : base(FieldPhase, 0)
 		{
 			FloatValues = values.ToList();
 			Options = options?.ToList();

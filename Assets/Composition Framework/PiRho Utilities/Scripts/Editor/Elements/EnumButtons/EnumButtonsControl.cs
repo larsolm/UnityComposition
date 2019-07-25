@@ -25,7 +25,7 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			Value = value;
 			Type = value.GetType();
-			UseFlags = useFlags.HasValue ? useFlags.Value : Type.HasAttribute<FlagsAttribute>();
+			UseFlags = useFlags ?? Type.HasAttribute<FlagsAttribute>();
 
 			_names = Enum.GetNames(Type);
 			_values = Enum.GetValues(Type);

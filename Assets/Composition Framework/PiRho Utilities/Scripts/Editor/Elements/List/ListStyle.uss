@@ -1,9 +1,5 @@
 ﻿.pirho-list
 {
-	border-color: #555555;
-	border-width: 1px;
-	border-radius: 2px;
-	margin-bottom: 5px;
 }
 
 .pirho-list--empty
@@ -24,35 +20,14 @@
 
 .pirho-list__empty-label
 {
+	display: none;
 	margin: 5px;
 	white-space: normal;
-	display: none;
 }
 
 .pirho-list--empty .pirho-list__empty-label
 {
 	display: flex;
-}
-
-.pirho-list__header
-{
-	background-color: #AAA;
-	padding: 5px;
-	flex-direction: row;
-	flex-grow: 1;
-}
-
-.pirho-list__label
-{
-	flex-grow: 1;
-}
-
-.pirho-list__content
-{
-}
-
-.pirho-list__footer
-{
 }
 
 .pirho-list__items
@@ -61,36 +36,34 @@
 	flex-shrink: 1;
 }
 
-.pirho-list__header__buttons
+.pirho-list__add-button
 {
+	display: flex;
 }
 
-.pirho-list__footer__buttons
+.pirho-list--add-disabled .pirho-list__add-button
 {
+	display: none;
 }
 
-.pirho-list__header__button
+.pirho-list__remove-button
 {
+	display: flex;
+	margin-top: 2px;
+	margin-left: 5px;
 	width: 16px;
 	height: 16px;
 	align-self: center;
 }
 
-.pirho-list__footer__button
+.pirho-list--remove-disabled .pirho-list__remove-button
 {
-}
-
-.pirho-list__add-button
-{
-}
-
-.pirho-list__remove-button
-{
-	margin-top: 2px;
+	display: none;
 }
 
 .pirho-list__drag-handle
 {
+	display: flex;
 	cursor: move-arrow;
 	margin-right: 5px;
 	flex-shrink: 0;
@@ -98,11 +71,17 @@
 	padding-top: 5px;
 }
 
+.pirho-list--move-disabled .pirho-list__drag-handle
+{
+	display: none;
+}
+
 .pirho-list__drag-placeholder
 {
 	flex-grow: 1;
-	background-color: #000;
-	height: 10px;
+	background-color: #3E7DE7;
+	height: 4px;
+	border-radius: 2px;
 }
 
 .pirho-list__item
@@ -127,19 +106,6 @@
 .pirho-list__item--odd
 {
 	background-color: #CCC;
-}
-
-.pirho-list__item__buttons
-{
-	align-self: flex-start;
-}
-
-.pirho-list__item__button
-{
-	width: 16px;
-	height: 16px;
-	align-self: center;
-	margin-left: 5px;
 }
 
 .pirho-list__item__content

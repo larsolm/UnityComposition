@@ -8,44 +8,46 @@ namespace PiRhoSoft.Utilities.Editor
 	{
 		private const string _invalidBindingError = "(PUEBEIB) invalid binding '{0}' for DictionaryField: property '{1}' is type '{2}' but should be an array";
 
-		public static readonly string UssClassName = "pirho-list-field";
+		public static readonly string UssClassName = "pirho-dictionary-field";
 
 		public string Label { get; set; }
 		public string Tooltip { get; set; }
 		public string EmptyLabel { get; set; }
 		public string EmptyTooltip { get; set; }
-		public string AddTooltip { get; set; } = DictionaryProxy.DefaultAddTooltip;
-		public string RemoveTooltip { get; set; } = DictionaryProxy.DefaultRemoveTooltip;
+		public string AddPlaceholder { get; set; }
+		public string AddTooltip { get; set; }
+		public string RemoveTooltip { get; set; }
 
 		public bool AllowAdd { get; set; } = true;
 		public bool AllowRemove { get; set; } = true;
 
-		private PropertyDrawer _drawer;
+		private PropertyDictionaryProxy _proxy;
 		private DictionaryControl _control;
 		private ChangeTriggerControl<int> _sizeBinding;
 
-		public DictionaryField(SerializedProperty keysProperty, PropertyDrawer drawer)
+		public DictionaryField(SerializedProperty keysProperty, SerializedProperty valuesProperty, PropertyDrawer drawer)
 		{
-			_drawer = drawer;
+			_proxy = new PropertyDictionaryProxy(keysProperty, valuesProperty, drawer);
 			bindingPath = keysProperty.propertyPath;
 		}
 
-		private void Setup(DictionaryProxy proxy)
+		private void Setup()
 		{
 			Clear();
 
-			proxy.Label = Label;
-			proxy.Tooltip = Tooltip;
+			_proxy.Label = Label;
+			_proxy.Tooltip = Tooltip;
 
-			if (EmptyLabel != null) proxy.EmptyLabel = EmptyLabel;
-			if (EmptyTooltip != null) proxy.EmptyTooltip = EmptyTooltip;
-			if (AddTooltip != null) proxy.AddTooltip = AddTooltip;
-			if (RemoveTooltip != null) proxy.RemoveTooltip = RemoveTooltip;
+			if (EmptyLabel != null) _proxy.EmptyLabel = EmptyLabel;
+			if (EmptyTooltip != null) _proxy.EmptyTooltip = EmptyTooltip;
+			if (AddPlaceholder != null) _proxy.AddPlaceholder = AddPlaceholder;
+			if (AddTooltip != null) _proxy.AddTooltip = AddTooltip;
+			if (RemoveTooltip != null) _proxy.RemoveTooltip = RemoveTooltip;
 
-			proxy.AllowAdd = AllowAdd;
-			proxy.AllowRemove = AllowRemove;
+			_proxy.AllowAdd = AllowAdd;
+			_proxy.AllowRemove = AllowRemove;
 
-			_control = new DictionaryControl(proxy);
+			_control = new DictionaryControl(_proxy);
 
 			Add(_control);
 			AddToClassList(UssClassName);
@@ -61,7 +63,7 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				if (property.isArray)
 				{
-					Setup(new PropertyDictionaryProxy(property, _drawer));
+					Setup();
 
 					if (_sizeBinding == null)
 						_sizeBinding = new ChangeTriggerControl<int>(null, (oldSize, size) => _control.Refresh());

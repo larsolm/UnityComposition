@@ -14,9 +14,9 @@ namespace PiRhoSoft.Utilities.Editor
 		public string Tooltip { get; set; }
 		public string EmptyLabel { get; set; }
 		public string EmptyTooltip { get; set; }
-		public string AddTooltip { get; set; } = ListProxy.DefaultAddTooltip;
-		public string RemoveTooltip { get; set; } = ListProxy.DefaultRemoveTooltip;
-		public string ReorderTooltip { get; set; } = ListProxy.DefaultReorderTooltip;
+		public string AddTooltip { get; set; }
+		public string RemoveTooltip { get; set; }
+		public string ReorderTooltip { get; set; }
 
 		public bool AllowAdd { get; set; } = true;
 		public bool AllowRemove { get; set; } = true;

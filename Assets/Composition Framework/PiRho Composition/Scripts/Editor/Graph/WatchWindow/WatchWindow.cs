@@ -39,8 +39,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public WatchWindowElement()
 		{
-			ElementHelper.AddStyleSheet(this, StylePath);
-
+			styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(StylePath));
 			AddToClassList(UssClassName);
 
 			var container = new VisualElement();
@@ -90,6 +89,9 @@ namespace PiRhoSoft.Composition.Editor
 				watchField.EnableInClassList(UssWatchInvalidClassName, !valid);
 			});
 
+			var placeholder = new PlaceholderControl("Add watch");
+			placeholder.AddToField(watchField);
+
 			var loggingButton = new Image { image = _logIcon.Texture, tooltip = "Enable/Disable logging of graph statistics" };
 			loggingButton.AddToClassList(UssLoggingClassName);
 			loggingButton.AddManipulator(new Clickable(() =>
@@ -101,7 +103,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			var toolbar = new Toolbar();
 			toolbar.AddToClassList(UssToolbarClassName);
-			//toolbar.Add(new Placeholder<string>("Add Watch", watchField));
+			toolbar.Add(watchField);
 			toolbar.Add(loggingButton);
 
 			return toolbar;
@@ -111,7 +113,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var globalContainer = new VisualElement();
 			globalContainer.AddToClassList(UssGlobalClassName);
-			globalContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+			globalContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Store));
 
 			return globalContainer;
 		}
@@ -120,7 +122,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var storeContainer = new VisualElement();
 			storeContainer.AddToClassList(UssStoreClassName);
-			storeContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+			storeContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Store));
 
 			return storeContainer;
 		}
@@ -129,7 +131,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var watchedContainer = new VisualElement();
 			watchedContainer.AddToClassList(UssWatchedClassName);
-			watchedContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Owner, evt.Name, evt.Store));
+			watchedContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Store));
 
 			return watchedContainer;
 		}
@@ -147,9 +149,12 @@ namespace PiRhoSoft.Composition.Editor
 				_expressionText.EnableInClassList(UssExpressionInvalidClassName, !valid);
 			});
 
+			var placeholder = new PlaceholderControl("Execute Expression");
+			placeholder.AddToField(_expressionText);
+
 			var footer = new Toolbar();
 			footer.AddToClassList(UssFooterClassName);
-			//footer.Add(new Placeholder<string>("Execute Expression", _expressionText));
+			footer.Add(_expressionText);
 
 			return footer;
 		}
@@ -167,10 +172,10 @@ namespace PiRhoSoft.Composition.Editor
 
 			if (CompositionManager.Exists)
 			{
-				_globalContainer.Add(new VariableStoreElement(CompositionManager.Instance, CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false));
+				_globalContainer.Add(new VariableStoreControl(CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false));
 
-				foreach (var graph in CompositionManager.TrackingState)
-					_storeContainer.Add(new VariableStoreElement(graph.Key, graph.Key.name, graph.Key.Variables, true, false));
+				foreach (var graph in CompositionManager.TrackingState.Keys)
+					_storeContainer.Add(new VariableStoreControl(graph.name, graph.Variables, true, false));
 			}
 		}
 
@@ -178,14 +183,14 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var reference = new VariableReference { Variable = variable };
 
-			foreach (var graph in CompositionManager.TrackingState)
+			foreach (var graph in CompositionManager.TrackingState.Keys)
 			{
-				var value = reference.GetValue(graph.Key.Variables);
+				var value = reference.GetValue(graph.Variables);
 				if (!value.IsEmpty)
 				{
 					if (value.HasStore)
 					{
-						AddWatch(graph.Key, variable, value.Store);
+						AddWatch(variable, value.Store);
 						return true;
 					}
 					else
@@ -202,7 +207,7 @@ namespace PiRhoSoft.Composition.Editor
 
 				if (value.HasStore)
 				{
-					AddWatch(CompositionManager.Instance, variable, value.Store);
+					AddWatch(variable, value.Store);
 					return true;
 				}
 				else
@@ -216,9 +221,9 @@ namespace PiRhoSoft.Composition.Editor
 			return false;
 		}
 
-		private void AddWatch(Object owner, string name, IVariableStore store)
+		private void AddWatch(string name, IVariableStore store)
 		{
-			_watchedContainer.Add(new VariableStoreElement(owner, name, store, false, true));
+			_watchedContainer.Add(new VariableStoreControl(name, store, false, true));
 		}
 
 		private bool ExecuteExpression(string text)
@@ -251,14 +256,12 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public class WatchEvent : EventBase<WatchEvent>
 		{
-			public Object Owner { get; private set; }
 			public IVariableStore Store { get; private set; }
 			public string Name { get; private set; }
 
-			public static WatchEvent GetPooled(Object owner, IVariableStore store, string name)
+			public static WatchEvent GetPooled(IVariableStore store, string name)
 			{
 				var pooled = GetPooled();
-				pooled.Owner = owner;
 				pooled.Store = store;
 				pooled.Name = name;
 				return pooled;

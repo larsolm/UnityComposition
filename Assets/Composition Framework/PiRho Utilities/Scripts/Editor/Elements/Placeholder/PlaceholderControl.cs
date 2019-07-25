@@ -7,16 +7,24 @@ namespace PiRhoSoft.Utilities.Editor
 		public const string Stylesheet = "Placeholder/PlaceholderStyle.uss";
 		public static readonly string UssClassName = "pirho-placeholder";
 
-		public PlaceholderControl(string text, TextField field)
+		public PlaceholderControl(string text)
 		{
-			void UpdateDisplayed() => this.SetDisplayed(string.IsNullOrEmpty(field.text));
-
 			this.text = text;
 			AddToClassList(UssClassName);
 			this.AddStyleSheet(Stylesheet);
+		}
+
+		public void AddToField(TextField textField)
+		{
+			void UpdateDisplayed() => this.SetDisplayed(string.IsNullOrEmpty(textField.text));
+
+			// Add this specifically to the input field in case the TextField has a label
+			var input = textField.Q(className: TextField.inputUssClassName);
+			input.Add(this);
+
 			UpdateDisplayed();
 
-			field.RegisterCallback<ChangeEvent<string>>(evt => UpdateDisplayed());
+			textField.RegisterCallback<ChangeEvent<string>>(evt => UpdateDisplayed());
 		}
 	}
 }

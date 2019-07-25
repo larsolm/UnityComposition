@@ -9,12 +9,10 @@ namespace PiRhoSoft.Utilities.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			// TODO: style
-
 			var group = attribute as GroupAttribute;
 			var parent = property.GetParent();
 
-			RolloutControl rollout = null;
+			Frame frame = null;
 
 			var sibling = parent.Copy();
 			var next = sibling.NextVisible(true);
@@ -25,19 +23,19 @@ namespace PiRhoSoft.Utilities.Editor
 
 				if (field != null && field.TryGetAttribute<GroupAttribute>(out var groupAttribute) && groupAttribute.Name == group.Name)
 				{
-					if (rollout != null)
+					if (frame != null)
 					{
 						var element = PropertyDrawerExtensions.CreateNextElement(field, groupAttribute, sibling);
-						rollout.Content.Add(element);
+						frame.Content.Add(element);
 					}
 					else if (SerializedProperty.EqualContents(property, sibling))
 					{
 						// this property is first and is responsible for drawing
-						rollout = new RolloutControl(true);
-						rollout.Label.text = group.Name;
+						frame = group.Style == GroupStyle.Frame ? new Frame() : new RolloutControl(true);
+						frame.Label.text = group.Name;
 
 						var element = this.CreateNextElement(sibling);
-						rollout.Content.Add(element);
+						frame.Content.Add(element);
 					}
 					else
 					{
@@ -49,7 +47,7 @@ namespace PiRhoSoft.Utilities.Editor
 				next = sibling.NextVisible(false);
 			}
 
-			return rollout ?? new VisualElement();
+			return frame ?? new VisualElement();
 		}
 	}
 }

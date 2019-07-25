@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Composition;
-using UnityEditor.Experimental.GraphView;
+﻿using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -7,10 +6,10 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class GraphViewPort : Port
 	{
-		public const string UssClassName = GraphViewEditor.UssClassName + "__port";
+		public const string UssClassName = GraphViewNode.UssClassName + "__port";
+		public const string InCallstackUssClassName = UssClassName + "--in-callstack";
 
 		public GraphViewNode Node { get; private set; }
-		public Color? DefaultColor { get; private set; }
 
 		public GraphViewPort(GraphViewNode node, GraphViewConnector edgeListener, bool isInput) : base(Orientation.Horizontal, isInput ? Direction.Input : Direction.Output, isInput ? Capacity.Multi : Capacity.Single, null)
 		{
@@ -18,14 +17,6 @@ namespace PiRhoSoft.Composition.Editor
 			Node = node;
 			m_EdgeConnector = new EdgeConnector<Edge>(edgeListener);
 			this.AddManipulator(m_EdgeConnector);
-		}
-
-		protected override void OnCustomStyleResolved(ICustomStyle styles)
-		{
-			base.OnCustomStyleResolved(styles);
-
-			if (!DefaultColor.HasValue)
-				DefaultColor = portColor;
 		}
 	}
 
@@ -41,6 +32,11 @@ namespace PiRhoSoft.Composition.Editor
 			m_ConnectorText.style.marginRight = 0;
 
 			style.alignSelf = Align.Center;
+		}
+
+		public void UpdateColor(bool inCallstack)
+		{
+			EnableInClassList(InCallstackUssClassName, inCallstack);
 		}
 	}
 
@@ -74,6 +70,12 @@ namespace PiRhoSoft.Composition.Editor
 				var graph = GetFirstAncestorOfType<GraphView>();
 				graph.DeleteElements(connections);
 			}
+		}
+
+		public void UpdateColor()
+		{
+			var inCallstack = Connection.From.Graph.IsInCallStack(Connection.To, Connection.From.name);
+			EnableInClassList(InCallstackUssClassName, inCallstack);
 		}
 	}
 }

@@ -17,8 +17,8 @@ namespace PiRhoSoft.Utilities
 		[TypePicker(typeof(MonoBehaviour), false)]
 		public string Type;
 
-		//[ObjectPicker]
-		//public Object Object;
+		[ObjectPicker]
+		public Object Object;
 
 		[ScenePicker]
 		public string Scene;
@@ -36,6 +36,9 @@ namespace PiRhoSoft.Utilities
 		public Quaternion Euler;
 
 		[EnumButtons]
-		public TestEnum Enum;
+		public TestEnum Buttons;
+
+		[EnumButtons(true)]
+		public TestEnum Flags;
 	}
 }

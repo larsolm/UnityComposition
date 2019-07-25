@@ -2,11 +2,9 @@
 {
 	public class MaximumLengthAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 120;
-
 		public int Length { get; private set; }
 
-		public MaximumLengthAttribute(int length) : base(Order)
+		public MaximumLengthAttribute(int length) : base(ValidatePhase, 0)
 		{
 			Length = length;
 		}

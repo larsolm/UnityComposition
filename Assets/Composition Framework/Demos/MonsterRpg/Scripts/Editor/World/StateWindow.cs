@@ -22,14 +22,14 @@ namespace PiRhoSoft.MonsterRpg.Editor
 			private void CreateMainScenePicker(Object owner)
 			{
 				var mainSceneContainer = new FieldContainer("Main Scene", "The main scene to load when the game starts up");
-				var mainScenePicker = new ScenePickerField();//(owner, () => AssetDatabase.LoadAssetAtPath<SceneAsset>(SceneLoader.MainScenePreference.Value), scene => SceneLoader.MainScenePreference.Value = AssetDatabase.GetAssetPath(scene));
-				//mainScenePicker.Setup(SceneLoader.MainScenePreference.Value, () =>
-				//{
-				//	var gameObject = new GameObject("World Manager");
-				//	gameObject.AddComponent<WorldManager>();
-				//	gameObject.AddComponent<AudioManager>();
-				//});
+				var mainScenePicker = new ScenePickerControl(SceneLoader.MainScenePreference.Value, () =>
+				{
+					var gameObject = new GameObject("World Manager");
+					gameObject.AddComponent<WorldManager>();
+					gameObject.AddComponent<AudioManager>();
+				});
 
+				mainScenePicker.RegisterCallback<ChangeEvent<string>>(evt => SceneLoader.MainScenePreference.Value = evt.newValue);
 				mainSceneContainer.Add(mainScenePicker);
 				Add(mainSceneContainer);
 			}
@@ -37,8 +37,11 @@ namespace PiRhoSoft.MonsterRpg.Editor
 			private void CreateLoadGraphPicker(Object owner)
 			{
 				var loadGraphContainer = new FieldContainer("Load Graph", "The graph to run when the game starts up");
-				var graphPicker = new ObjectPickerField();//(owner, () => AssetDatabase.LoadAssetAtPath<Graph>(SceneLoader.LoadGraphPreference.Value), graph => SceneLoader.LoadGraphPreference.Value = AssetDatabase.GetAssetPath(graph));
-				//graphPicker.Setup(typeof(Graph), SceneLoader.LoadGraphPreference.Value);
+				var graphPicker = new ObjectPickerControl(AssetDatabase.LoadAssetAtPath<Graph>(SceneLoader.LoadGraphPreference.Value), typeof(Graph));
+				graphPicker.RegisterCallback<ChangeEvent<Object>>(evt =>
+				{
+					SceneLoader.LoadGraphPreference.Value = AssetDatabase.GetAssetPath(evt.newValue);
+				});
 
 				loadGraphContainer.Add(graphPicker);
 				Add(loadGraphContainer);
@@ -102,8 +105,8 @@ namespace PiRhoSoft.MonsterRpg.Editor
 
 				EditorApplication.playModeStateChanged += state =>
 				{
-					ElementHelper.SetVisible(editingContainer, state == PlayModeStateChange.EnteredEditMode || state == PlayModeStateChange.ExitingPlayMode);
-					ElementHelper.SetVisible(playingContainer, state == PlayModeStateChange.EnteredPlayMode || state == PlayModeStateChange.ExitingEditMode);
+					editingContainer.SetDisplayed(state == PlayModeStateChange.EnteredEditMode || state == PlayModeStateChange.ExitingPlayMode);
+					playingContainer.SetDisplayed(state == PlayModeStateChange.EnteredPlayMode || state == PlayModeStateChange.ExitingEditMode);
 				};
 			}
 
@@ -132,8 +135,8 @@ namespace PiRhoSoft.MonsterRpg.Editor
 				//	ElementHelper.SetVisible(spawnPicker, type != SceneLoader.ZoneLoadType.Saved);
 				//});
 
-				ElementHelper.SetVisible(zonePicker, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value == SceneLoader.ZoneLoadType.Specific);
-				ElementHelper.SetVisible(spawnPicker, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value != SceneLoader.ZoneLoadType.Saved);
+				zonePicker.SetDisplayed((SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value == SceneLoader.ZoneLoadType.Specific);
+				spawnPicker.SetDisplayed((SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value != SceneLoader.ZoneLoadType.Saved);
 
 				//buttons.Setup(typeof(SceneLoader.ZoneLoadType), false, (SceneLoader.ZoneLoadType)SceneLoader.ZoneTypePreference.Value);
 

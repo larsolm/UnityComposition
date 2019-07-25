@@ -1,22 +1,17 @@
-﻿using UnityEngine;
-
-namespace PiRhoSoft.Utilities
+﻿namespace PiRhoSoft.Utilities
 {
 	public enum GroupStyle
 	{
 		Frame,
-		Rollout,
-		Foldout,
+		Rollout
 	}
 
 	public class GroupAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 0;
-
 		public string Name { get; private set; }
 		public GroupStyle Style { get; set; }
 
-		public GroupAttribute(string name) : base(Order)
+		public GroupAttribute(string name) : base(ContainerPhase, 0)
 		{
 			Name = name;
 		}

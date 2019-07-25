@@ -9,7 +9,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public string Label { get; set; }
 		public string Tooltip { get; set; }
 
-		public RolloutControl Control;
+		public RolloutControl Control { get; private set; }
 
 		public RolloutField()
 		{
