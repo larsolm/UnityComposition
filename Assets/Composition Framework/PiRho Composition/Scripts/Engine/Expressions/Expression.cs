@@ -69,7 +69,7 @@ namespace PiRhoSoft.Composition
 		{
 			try
 			{
-				return Evaluate(variables);
+				return Evaluate(variables, true);
 			}
 			catch (ExpressionEvaluationException exception)
 			{
@@ -96,12 +96,15 @@ namespace PiRhoSoft.Composition
 			return result;
 		}
 
-		public Variable Evaluate(IVariableStore variables)
+		public Variable Evaluate(IVariableStore variables, bool isolateVariables)
 		{
 			var result = Variable.Empty;
 
 			if (_operations != null)
 			{
+				if (isolateVariables)
+					variables = new IsolatedStore(variables); // TODO: pool these
+
 				foreach (var operation in _operations)
 				{
 					_currentOperation = operation;

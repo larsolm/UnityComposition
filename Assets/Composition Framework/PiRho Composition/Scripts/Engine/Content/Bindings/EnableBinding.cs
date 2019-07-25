@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition
 
 				try
 				{
-					var value = Condition.Evaluate(variables);
+					var value = Condition.Evaluate(variables, true);
 
 					if (value.Type == VariableType.Bool)
 					{

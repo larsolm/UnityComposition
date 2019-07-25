@@ -171,7 +171,7 @@ namespace PiRhoSoft.Composition
 			store.AddVariable(CompositionManager.GlobalStoreName, Variable.Store(CompositionManager.Instance.GlobalStore));
 			store.AddVariable(CompositionManager.SceneStoreName, Variable.Store(CompositionManager.Instance.SceneStore));
 
-			var result = Expression.Evaluate(store);
+			var result = Expression.Evaluate(store, false);
 			ReleaseStore(store);
 			return result;
 		}
