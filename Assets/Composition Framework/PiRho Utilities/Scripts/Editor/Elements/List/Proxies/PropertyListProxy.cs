@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
@@ -6,6 +7,10 @@ namespace PiRhoSoft.Utilities.Editor
 {
 	public class PropertyListProxy : ListProxy
 	{
+		public Action AddCallback;
+		public Action<int> RemoveCallback;
+		public Action<int, int> ReorderCallback;
+
 		private SerializedProperty _property;
 		private PropertyDrawer _drawer;
 
@@ -40,10 +45,12 @@ namespace PiRhoSoft.Utilities.Editor
 		public override void AddItem()
 		{
 			_property.ResizeArray(_property.arraySize + 1);
+			AddCallback?.Invoke();
 		}
 
 		public override void RemoveItem(int index)
 		{
+			RemoveCallback?.Invoke(index);
 			_property.RemoveFromArray(index);
 		}
 
@@ -51,6 +58,7 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			_property.MoveArrayElement(from, to);
 			_property.serializedObject.ApplyModifiedProperties();
+			ReorderCallback?.Invoke(from, to);
 		}
 	}
 }

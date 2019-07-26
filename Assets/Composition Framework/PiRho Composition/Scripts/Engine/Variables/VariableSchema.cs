@@ -1,13 +1,11 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
-	[Serializable]
-	public class TagList : SerializedList<string> { }
-
 	public interface ISchemaOwner
 	{
 		VariableSchema Schema { get; }
@@ -23,8 +21,8 @@ namespace PiRhoSoft.Composition
 		{
 			private const string _invalidInitializerError = "(PCVDII) failed to initialize variable '{0}' using store '{1}': the generated value of type '{2}' does not match the definition";
 
-			public string Tag;
-			public Expression Initializer;
+			public string Tag = string.Empty;
+			public Expression Initializer = new Expression();
 			public VariableDefinition Definition;
 
 			public Variable GenerateValue(IVariableStore variables)
@@ -43,13 +41,16 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
+		[Serializable] public class TagList : SerializedList<string> { }
 		[Serializable] public class EntryList : SerializedList<Entry> { }
-		
-		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistance)")]
+
+		[Tooltip("The tags available to variables with this variable schema")]
+		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistance)", AddCallback = nameof(ValidateTags), RemoveCallback = nameof(ValidateTags))]
+		[ChangeTrigger(nameof(ValidateTags))]
 		public TagList Tags = new TagList();
 
-		[HideInInspector] [SerializeField] private EntryList _entries = new EntryList();
-		[HideInInspector] [SerializeField] private int _version = 0;
+		[SerializeField] private EntryList _entries = new EntryList();
+		[SerializeField] private int _version = 0;
 
 		public int Version
 		{
@@ -97,6 +98,15 @@ namespace PiRhoSoft.Composition
 		{
 			_entries.RemoveAt(index);
 			IncrementVersion();
+		}
+
+		private void ValidateTags()
+		{
+			foreach (var entry in _entries)
+			{
+				if (!Tags.Contains(entry.Tag))
+					entry.Tag = Tags.Count > 0 ? Tags[0] : string.Empty;
+			}
 		}
 
 		private void IncrementVersion()

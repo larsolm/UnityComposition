@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -22,6 +23,10 @@ namespace PiRhoSoft.Utilities.Editor
 		public bool AllowRemove { get; set; } = true;
 		public bool AllowReorder { get; set; } = true;
 
+		public Action AddCallback;
+		public Action<int> RemoveCallback;
+		public Action<int, int> ReorderCallback;
+
 		private PropertyDrawer _drawer;
 		private ListControl _control;
 		private ChangeTriggerControl<int> _sizeBinding;
@@ -32,7 +37,7 @@ namespace PiRhoSoft.Utilities.Editor
 			bindingPath = property.propertyPath;
 		}
 
-		private void Setup(ListProxy proxy)
+		private void Setup(PropertyListProxy proxy)
 		{
 			Clear();
 
@@ -48,6 +53,9 @@ namespace PiRhoSoft.Utilities.Editor
 			proxy.AllowAdd = AllowAdd;
 			proxy.AllowRemove = AllowRemove;
 			proxy.AllowReorder = AllowReorder;
+			proxy.AddCallback = AddCallback;
+			proxy.RemoveCallback = RemoveCallback;
+			proxy.ReorderCallback = ReorderCallback;
 
 			_control = new ListControl(proxy);
 

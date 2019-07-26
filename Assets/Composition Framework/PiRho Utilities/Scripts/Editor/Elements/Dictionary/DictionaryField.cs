@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using System;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -17,9 +18,15 @@ namespace PiRhoSoft.Utilities.Editor
 		public string AddPlaceholder { get; set; }
 		public string AddTooltip { get; set; }
 		public string RemoveTooltip { get; set; }
+		public string ReorderTooltip { get; set; }
 
 		public bool AllowAdd { get; set; } = true;
 		public bool AllowRemove { get; set; } = true;
+		public bool AllowReorder { get; set; } = false;
+
+		public Action<string> AddCallback;
+		public Action<string> RemoveCallback;
+		public Action<string> ReorderCallback;
 
 		private PropertyDictionaryProxy _proxy;
 		private DictionaryControl _control;
@@ -46,6 +53,9 @@ namespace PiRhoSoft.Utilities.Editor
 
 			_proxy.AllowAdd = AllowAdd;
 			_proxy.AllowRemove = AllowRemove;
+			_proxy.AddCallback = AddCallback;
+			_proxy.RemoveCallback = RemoveCallback;
+			_proxy.ReorderCallback = ReorderCallback;
 
 			_control = new DictionaryControl(_proxy);
 

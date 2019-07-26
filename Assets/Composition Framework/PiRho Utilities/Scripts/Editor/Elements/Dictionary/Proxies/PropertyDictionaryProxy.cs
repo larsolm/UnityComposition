@@ -1,4 +1,4 @@
-﻿using System.Collections.Generic;
+﻿using System;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -7,6 +7,10 @@ namespace PiRhoSoft.Utilities.Editor
 {
 	public class PropertyDictionaryProxy : DictionaryProxy
 	{
+		public Action<string> AddCallback;
+		public Action<string> RemoveCallback;
+		public Action<string> ReorderCallback;
+
 		private SerializedProperty _keysProperty;
 		private SerializedProperty _valuesProperty;
 		private PropertyDrawer _drawer;
@@ -55,18 +59,37 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public override void AddItem(string key)
 		{
-			_keysProperty.arraySize++;
+			// TODO: Make sure ApplyModifyProperties doesn't trigger a serialization cycle and desync our SerializedDictionary
+
+			_keysProperty.ResizeArray(KeyCount + 1);
 
 			var newItem = _keysProperty.GetArrayElementAtIndex(_keysProperty.arraySize - 1);
 			newItem.stringValue = key;
 
 			_valuesProperty.ResizeArray(KeyCount);
+
+			AddCallback?.Invoke(key);
 		}
 
 		public override void RemoveItem(int index)
 		{
+			var property = _keysProperty.GetArrayElementAtIndex(index);
+			RemoveCallback?.Invoke(property.stringValue);
+
 			_keysProperty.RemoveFromArray(index);
 			_valuesProperty.RemoveFromArray(index);
+		}
+
+		public override void ReorderItem(int from, int to)
+		{
+			_keysProperty.MoveArrayElement(from, to);
+			_valuesProperty.MoveArrayElement(from, to);
+
+			_keysProperty.serializedObject.ApplyModifiedProperties();
+			_valuesProperty.serializedObject.ApplyModifiedProperties();
+
+			var property = _keysProperty.GetArrayElementAtIndex(to);
+			ReorderCallback?.Invoke(property.stringValue);
 		}
 	}
 }

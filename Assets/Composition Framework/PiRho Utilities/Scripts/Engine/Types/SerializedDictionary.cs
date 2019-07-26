@@ -4,21 +4,8 @@ using UnityEngine;
 
 namespace PiRhoSoft.Utilities
 {
-	public interface IEditableDictionary<KeyType, ValueType>
-	{
-		void PrepareForEdit();
-		void ApplyEdits();
-
-		int Count { get; }
-
-		KeyType GetKey(int index);
-		ValueType GetValue(int index);
-
-		void Add(KeyType key, ValueType value);
-		bool Remove(KeyType key);
-	}
 	[Serializable]
-	public class SerializedDictionary<KeyType, ValueType> : Dictionary<KeyType, ValueType>, ISerializationCallbackReceiver, IEditableDictionary<KeyType, ValueType>
+	public class SerializedDictionary<KeyType, ValueType> : Dictionary<KeyType, ValueType>, ISerializationCallbackReceiver
 	{
 		// These are protected so they can be found by the editor.
 		[SerializeField] protected List<KeyType> _keys = new List<KeyType>();
@@ -35,16 +22,6 @@ namespace PiRhoSoft.Utilities
 
 			_keys.Clear();
 			_values.Clear();
-		}
-
-		public void PrepareForEdit()
-		{
-			ConvertToLists();
-		}
-
-		public void ApplyEdits()
-		{
-			ConvertFromLists();
 		}
 
 		private void ConvertToLists()
@@ -67,16 +44,6 @@ namespace PiRhoSoft.Utilities
 
 			for (var i = 0; i < count; i++)
 				Add(_keys[i], _values[i]);
-		}
-
-		public KeyType GetKey(int index)
-		{
-			return _keys[index];
-		}
-
-		public ValueType GetValue(int index)
-		{
-			return _values[index];
 		}
 	}
 }

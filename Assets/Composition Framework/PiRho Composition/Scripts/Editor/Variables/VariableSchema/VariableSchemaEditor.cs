@@ -27,25 +27,25 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class DefinitionsProxy : DictionaryProxy
 		{
-			public VariableSchema Schema;
+			private VariableSchema _schema;
 
-			public override int KeyCount => Schema.Count;
+			public override int KeyCount => _schema.Count;
 
 			public DefinitionsProxy(VariableSchema schema)
 			{
-				Schema = schema;
+				_schema = schema;
 			}
 
 			public override VisualElement CreateField(int index)
 			{
-				var entry = Schema[index];
-				var control = new VariableSchemaEntryControl(Schema.Tags, entry) { userData = index };
+				var entry = _schema[index];
+				var control = new VariableSchemaEntryControl(_schema.Tags.List, entry) { userData = index };
 				return control;
 			}
 
 			public override bool IsKeyValid(string key)
 			{
-				return !Schema.HasDefinition(key);
+				return !_schema.HasDefinition(key);
 			}
 
 			public override bool NeedsUpdate(VisualElement item, int index)
@@ -55,12 +55,12 @@ namespace PiRhoSoft.Composition.Editor
 
 			public override void AddItem(string key)
 			{
-				Schema.AddDefinition(key, VariableType.Empty);
+				_schema.AddDefinition(key, VariableType.Empty);
 			}
 
 			public override void RemoveItem(int index)
 			{
-				Schema.RemoveDefinition(index);
+				_schema.RemoveDefinition(index);
 			}
 		}
 	}

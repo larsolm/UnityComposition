@@ -14,6 +14,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Tags:
     _items:
-    - Constant
-    - Saved
-  _version: 0
+    - 
+  _entries:
+    _items:
+    - Tag: 
+      Initializer:
+        _statement: 
+      Definition:
+        Name: Name
+        _type: 0
+        _constraintData:
+          Version: 1
+          Data: 
+          References: []
+  _version: 2

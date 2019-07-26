@@ -13,8 +13,8 @@ namespace PiRhoSoft.Utilities.Editor
 		private const string _missingMethodWarning = "(PUCTDMM) invalid method for ChangeTriggerAttribute on field '{0}': the method '{1}' could not be found on type '{2}'";
 		private const string _invalidMethodWarning = "(PUCTDIM) invalid method for ChangeTriggerAttribute on field '{0}': the method '{1}' should take 0, 1, or 2 parameters of type '{2}'";
 
-		private static object[] _oneParameter = new object[1];
-		private static object[] _twoParameters = new object[2];
+		private static readonly object[] _oneParameter = new object[1];
+		private static readonly object[] _twoParameters = new object[2];
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
