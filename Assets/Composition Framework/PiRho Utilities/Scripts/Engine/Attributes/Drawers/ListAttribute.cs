@@ -2,9 +2,12 @@
 {
 	public class ListAttribute : PropertyTraitAttribute
 	{
-		public bool AllowAdd = true;
-		public bool AllowRemove = true;
-		public bool AllowReorder = true;
+		public const string Always = "";
+		public const string Never = null;
+
+		public string AllowAdd = Always;
+		public string AllowRemove = Always;
+		public string AllowReorder = Always;
 		public string EmptyLabel = null;
 
 		public string AddCallback = null;

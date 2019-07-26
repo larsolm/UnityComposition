@@ -78,12 +78,41 @@
 	display: none;
 }
 
+.pirho-dictionary__drag-handle
+{
+	display: flex;
+	cursor: move-arrow;
+	margin-right: 5px;
+	flex-shrink: 0;
+	align-self: flex-start;
+	padding-top: 5px;
+}
+
+.pirho-dictionary--move-disabled .pirho-dictionary__drag-handle
+{
+	display: none;
+}
+
+.pirho-dictionary__drag-placeholder
+{
+	flex-grow: 1;
+	background-color: #3E7DE7;
+	height: 4px;
+	border-radius: 2px;
+}
+
 .pirho-dictionary__item
 {
 	flex-direction: row;
 	flex-grow: 1;
 	align-items: center;
 	padding: 3px 5px 1px 5px;
+}
+
+.pirho-dictionary__item--dragging
+{
+	position: absolute;
+	background-color: #000;
 }
 
 .pirho-dictionary__item--even

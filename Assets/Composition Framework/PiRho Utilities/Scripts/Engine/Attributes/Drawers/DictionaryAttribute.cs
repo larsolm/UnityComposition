@@ -2,9 +2,12 @@
 {
 	public class DictionaryAttribute : PropertyTraitAttribute
 	{
-		public bool AllowAdd = true;
-		public bool AllowRemove = true;
-		public bool AllowReorder = false;
+		public const string Always = "";
+		public const string Never = null;
+
+		public string AllowAdd = Always;
+		public string AllowRemove = Always;
+		public string AllowReorder = Never;
 		public string EmptyLabel = null;
 
 		public string AddCallback = null;

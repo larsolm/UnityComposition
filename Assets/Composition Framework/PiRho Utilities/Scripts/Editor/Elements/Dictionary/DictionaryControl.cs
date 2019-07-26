@@ -42,6 +42,7 @@ namespace PiRhoSoft.Utilities.Editor
 		private VisualElement _itemsContainer;
 		private TextField _keyField;
 		private IconButton _addButton;
+		private UQueryState<IconButton> _removeButtons;
 
 		private int _dragFromIndex = -1;
 		private int _dragToIndex = -1;
@@ -53,10 +54,7 @@ namespace PiRhoSoft.Utilities.Editor
 			Proxy = proxy;
 
 			CreateFrame();
-
-			_addButton = AddHeaderButton(_addIcon.Texture, proxy.AddTooltip, AddButtonUssClassName, AddItem);
-			_addButton.SetEnabled(false);
-
+			SetupDragging();
 			Refresh();
 
 			AddToClassList(UssClassName);
@@ -77,6 +75,14 @@ namespace PiRhoSoft.Utilities.Editor
 			EnableInClassList(EmptyUssClassName, Proxy.KeyCount == 0);
 			EnableInClassList(AddDisabledUssClassName, !Proxy.AllowAdd);
 			EnableInClassList(RemoveDisabledUssClassName, !Proxy.AllowRemove);
+			
+			_removeButtons.ForEach(button =>
+			{
+				var index = GetItemIndex(button.parent);
+				var removable = Proxy.CanRemove(index);
+
+				button.SetEnabled(removable);
+			});
 		}
 
 		#region Element Creation
@@ -84,6 +90,11 @@ namespace PiRhoSoft.Utilities.Editor
 		private void CreateFrame()
 		{
 			SetLabel(Proxy.Label, Proxy.Tooltip);
+
+			_addButton = AddHeaderButton(_addIcon.Texture, Proxy.AddTooltip, AddButtonUssClassName, AddItem);
+			_addButton.SetEnabled(false);
+
+			_removeButtons = _itemsContainer.Query<IconButton>(className: RemoveButtonUssClassName).Build();
 
 			_keyField = new TextField();
 			_keyField.AddToClassList(HeaderKeyTextUssClassName);
@@ -111,6 +122,11 @@ namespace PiRhoSoft.Utilities.Editor
 			item.AddToClassList(ItemUssClassName);
 			item.AddToClassList(index % 2 == 0 ? ItemEvenUssClassName : ItemOddUssClassName);
 			_itemsContainer.Add(item);
+
+			var dragHandle = new Image { image = _dragIcon.Texture, tooltip = Proxy.ReorderTooltip };
+			dragHandle.AddToClassList(DragHandleUssClassName);
+			dragHandle.RegisterCallback((MouseDownEvent e) => StartDrag(e, GetItemIndex(item)));
+			item.Add(dragHandle);
 
 			var content = Proxy.CreateField(index);
 			content.AddToClassList(ItemContentUssClassName);
@@ -151,7 +167,7 @@ namespace PiRhoSoft.Utilities.Editor
 			// Separately check for empty because we don't want empty to be addable but we also don't want it be show as invalid
 			var valid = IsKeyValid(newValue) || string.IsNullOrEmpty(newValue);
 			EnableInClassList(AddKeyInvalidUssClassName, !valid);
-			_addButton.SetEnabled(valid && !string.IsNullOrEmpty(newValue));
+			_addButton.SetEnabled(valid && !string.IsNullOrEmpty(newValue) && Proxy.CanAdd(newValue));
 		}
 
 		private bool IsKeyValid(string key)
@@ -167,38 +183,26 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			var key = _keyField.text;
 
-			if (Proxy.AllowAdd && IsKeyValid(key))
+			if (Proxy.AllowAdd && IsKeyValid(key) && Proxy.CanAdd(key))
 			{
 				Proxy.AddItem(key);
 				_keyField.value = string.Empty;
 				Refresh();
-
-				using (var e = ItemAddedEvent.GetPooled(Proxy.KeyCount - 1))
-				{
-					e.target = this;
-					SendEvent(e);
-				}
 			}
 		}
 
 		private void RemoveItem(int index)
 		{
-			if (Proxy.AllowRemove)
+			if (Proxy.AllowRemove && Proxy.CanRemove(index))
 			{
 				Proxy.RemoveItem(index);
 				Refresh();
-
-				using (var e = ItemRemovedEvent.GetPooled(index))
-				{
-					e.target = this;
-					SendEvent(e);
-				}
 			}
 		}
 
 		private void ReorderItem(int from, int to)
 		{
-			if (Proxy.AllowReorder)
+			if (Proxy.AllowReorder && Proxy.CanReorder(from, to))
 			{
 				var item = _itemsContainer.ElementAt(from);
 				_itemsContainer.RemoveAt(from);
@@ -206,18 +210,16 @@ namespace PiRhoSoft.Utilities.Editor
 
 				Proxy.ReorderItem(from, to);
 				Refresh();
-
-				using (var e = ItemMovedEvent.GetPooled(from, to))
-				{
-					e.target = this;
-					SendEvent(e);
-				}
 			}
 		}
-
 		#endregion
 
 		#region Dragging
+
+		private int GetItemIndex(VisualElement item)
+		{
+			return item.parent.IndexOf(item);
+		}
 
 		private void SetupDragging()
 		{

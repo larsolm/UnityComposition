@@ -5,26 +5,45 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Utilities.Editor
 {
-	public class PropertyDictionaryProxy : DictionaryProxy
+	public class PropertyDictionaryProxy : IDictionaryProxy
 	{
+		public Func<string, bool> CanAddCallback;
+		public Func<string, bool> CanRemoveCallback;
+		public Func<string, bool> CanReorderCallback;
+
 		public Action<string> AddCallback;
 		public Action<string> RemoveCallback;
 		public Action<string> ReorderCallback;
 
+		private SerializedProperty _property;
 		private SerializedProperty _keysProperty;
 		private SerializedProperty _valuesProperty;
 		private PropertyDrawer _drawer;
 
-		public override int KeyCount => _keysProperty.arraySize;
+		public int KeyCount => _keysProperty.arraySize;
 
-		public PropertyDictionaryProxy(SerializedProperty keys, SerializedProperty values, PropertyDrawer drawer)
+		public string Label => _property.displayName;
+		public string Tooltip { get; set; }
+		public string EmptyLabel { get; set; } = DictionaryProxy.DefaultEmptyLabel;
+		public string EmptyTooltip { get; set; } = DictionaryProxy.DefaultEmptyTooltip;
+		public string AddPlaceholder { get; set; } = DictionaryProxy.DefaultAddPlaceholder;
+		public string AddTooltip { get; set; } = DictionaryProxy.DefaultAddTooltip;
+		public string RemoveTooltip { get; set; } = DictionaryProxy.DefaultRemoveTooltip;
+		public string ReorderTooltip { get; set; } = DictionaryProxy.DefaultReorderTooltip;
+
+		public bool AllowAdd { get; set; } = true;
+		public bool AllowRemove { get; set; } = true;
+		public bool AllowReorder { get; set; } = false;
+
+		public PropertyDictionaryProxy(SerializedProperty property, SerializedProperty keys, SerializedProperty values, PropertyDrawer drawer)
 		{
+			_property = property;
 			_keysProperty = keys;
 			_valuesProperty = values;
 			_drawer = drawer;
 		}
 
-		public override VisualElement CreateField(int index)
+		public VisualElement CreateField(int index)
 		{
 			var key = _keysProperty.GetArrayElementAtIndex(index);
 			var value = _valuesProperty.GetArrayElementAtIndex(index);
@@ -40,53 +59,71 @@ namespace PiRhoSoft.Utilities.Editor
 			return field;
 		}
 
-		public override bool IsKeyValid(string key)
+		public bool IsKeyValid(string key)
 		{
 			for (var i = 0; i < KeyCount; i++)
 			{
-				var name = _keysProperty.GetArrayElementAtIndex(i);
-				if (name.stringValue == key)
+				var property = _keysProperty.GetArrayElementAtIndex(i);
+				if (property.stringValue == key)
 					return false;
 			}
 
 			return true;
 		}
 
-		public override bool NeedsUpdate(VisualElement item, int index)
+		public bool NeedsUpdate(VisualElement item, int index)
 		{
 			return !(item.userData is int i) || i != index;
 		}
 
-		public override void AddItem(string key)
+
+		public bool CanAdd(string key)
+		{
+			return CanAddCallback?.Invoke(key) ?? AllowAdd;
+		}
+
+		public bool CanRemove(int index)
+		{
+			var property = _keysProperty.GetArrayElementAtIndex(index);
+			return CanRemoveCallback?.Invoke(property.stringValue) ?? AllowRemove;
+		}
+
+		public bool CanReorder(int from, int to)
+		{
+			var property = _keysProperty.GetArrayElementAtIndex(from);
+			return CanReorderCallback?.Invoke(property.stringValue) ?? AllowReorder;
+		}
+
+		public void AddItem(string key)
 		{
 			// TODO: Make sure ApplyModifyProperties doesn't trigger a serialization cycle and desync our SerializedDictionary
 
-			_keysProperty.ResizeArray(KeyCount + 1);
+			_keysProperty.arraySize++;
+			_valuesProperty.ResizeArray(KeyCount);
 
-			var newItem = _keysProperty.GetArrayElementAtIndex(_keysProperty.arraySize - 1);
+			var newItem = _keysProperty.GetArrayElementAtIndex(KeyCount - 1);
 			newItem.stringValue = key;
 
-			_valuesProperty.ResizeArray(KeyCount);
+			_property.serializedObject.ApplyModifiedProperties();
 
 			AddCallback?.Invoke(key);
 		}
 
-		public override void RemoveItem(int index)
+		public void RemoveItem(int index)
 		{
 			var property = _keysProperty.GetArrayElementAtIndex(index);
 			RemoveCallback?.Invoke(property.stringValue);
 
 			_keysProperty.RemoveFromArray(index);
 			_valuesProperty.RemoveFromArray(index);
+			_property.serializedObject.ApplyModifiedProperties();
 		}
 
-		public override void ReorderItem(int from, int to)
+		public void ReorderItem(int from, int to)
 		{
 			_keysProperty.MoveArrayElement(from, to);
 			_valuesProperty.MoveArrayElement(from, to);
-
-			_keysProperty.serializedObject.ApplyModifiedProperties();
-			_valuesProperty.serializedObject.ApplyModifiedProperties();
+			_property.serializedObject.ApplyModifiedProperties();
 
 			var property = _keysProperty.GetArrayElementAtIndex(to);
 			ReorderCallback?.Invoke(property.stringValue);

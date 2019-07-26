@@ -186,8 +186,6 @@ namespace PiRhoSoft.Utilities.Editor
 			// new items will be a copy of the previous last item so this resets them to their default value
 			for (var i = size; i < newSize; i++)
 				SetToDefault(arrayProperty.GetArrayElementAtIndex(i));
-
-			arrayProperty.serializedObject.ApplyModifiedProperties();
 		}
 
 		public static void RemoveFromArray(this SerializedProperty arrayProperty, int index)
@@ -200,7 +198,6 @@ namespace PiRhoSoft.Utilities.Editor
 				item.objectReferenceValue = null;
 
 			arrayProperty.DeleteArrayElementAtIndex(index);
-			arrayProperty.serializedObject.ApplyModifiedProperties();
 		}
 
 		public static SerializedProperty GetSibling(this SerializedProperty property, string siblingName)

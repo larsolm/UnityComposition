@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -9,12 +10,20 @@ namespace PiRhoSoft.Utilities.Editor
 	class ListDrawer : PropertyDrawer
 	{
 		private const string _invalidTypeWarning = "(PULDIT) invalid type for ListAttribute on field '{0}': List can only be applied to SerializedList or SerializedArray fields";
+
+		private const string _missingAllowAddMethodWarning = "(PULDMAAM) invalid method for AllowAdd on field '{0}': the method '{1}' could not be found on type '{2}'";
+		private const string _missingAllowRemoveMethodWarning = "(PULDMARM) invalid method for AllowRemove on field '{0}': the method '{1}' could not be found on type '{2}'";
+		private const string _missingAllowReorderMethodWarning = "(PULDMAROM) invalid method for AllowReorder on field '{0}': the method '{1}' could not be found on type '{2}'";
+		private const string _invalidAllowAddMethodWarning = "(PULDIAAM) invalid method for AllowAdd on field '{0}': the method '{1}' should take no parameters";
+		private const string _invalidAllowRemoveMethodWarning = "(PULDIARM) invalid method for AllowRemove on field '{0}': the method '{1}' should take an 0 or 1 int parameters";
+		private const string _invalidAllowReorderMethodWarning = "(PULDIAROM) invalid method for AllowReorder on field '{0}': the method '{1}' should take 0, 1, or 2 int parameters";
+
 		private const string _missingAddMethodWarning = "(PULDMAM) invalid method for AddCallback on field '{0}': the method '{1}' could not be found on type '{2}'";
 		private const string _missingRemoveMethodWarning = "(PULDMRM) invalid method for RemoveCallback on field '{0}': the method '{1}' could not be found on type '{2}'";
 		private const string _missingReorderMethodWarning = "(PULDMROM) invalid method for ReorderCallback on field '{0}': the method '{1}' could not be found on type '{2}'";
 		private const string _invalidAddMethodWarning = "(PULDIAM) invalid method for AddCallback on field '{0}': the method '{1}' should take no parameters";
 		private const string _invalidRemoveMethodWarning = "(PULDIRM) invalid method for RemoveCallback on field '{0}': the method '{1}' should take an 0 or 1 int parameters";
-		private const string _invalidReorderMethodWarning = "(PULDIROM) invalid method for ReorderCallback on field '{0}': the method '{1}' should take 0 or 2 int parameters";
+		private const string _invalidReorderMethodWarning = "(PULDIROM) invalid method for ReorderCallback on field '{0}': the method '{1}' should take 0, 1, or 2 int parameters";
 
 		private static readonly object[] _oneParameter = new object[1];
 		private static readonly object[] _twoParameters = new object[2];
@@ -28,93 +37,75 @@ namespace PiRhoSoft.Utilities.Editor
 				var listAttribute = attribute as ListAttribute;
 				var itemDrawer = this.GetNextDrawer();
 				var tooltip = this.GetTooltip();
+				var parent = property.GetParentObject<object>();
 
 				var field = new ListField(items, itemDrawer)
 				{
-					Label = property.displayName,
 					Tooltip = tooltip,
 					EmptyLabel = listAttribute.EmptyLabel,
-					AllowAdd = listAttribute.AllowAdd,
-					AllowRemove = listAttribute.AllowRemove,
-					AllowReorder = listAttribute.AllowReorder
+					AllowAdd = listAttribute.AllowAdd != null,
+					AllowRemove = listAttribute.AllowRemove != null,
+					AllowReorder = listAttribute.AllowReorder != null
 				};
 
-				if (!string.IsNullOrEmpty(listAttribute.AddCallback))
+				if (TryGetMethod(listAttribute.AllowAdd, _missingAllowAddMethodWarning, property.propertyPath, out var allowAddMethod))
 				{
-					var method = fieldInfo.DeclaringType.GetMethod(listAttribute.AddCallback, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-					if (method != null)
-					{
-						if (method.HasSignature(null))
-						{
-							var owner = method.IsStatic ? null : property.GetParentObject<object>();
-							field.AddCallback += () => NoneCallback(method, owner);
-						}
-						else
-						{
-							Debug.LogWarningFormat(_invalidAddMethodWarning, property.propertyPath, method.Name);
-						}
-					}
-					else
-					{
-						Debug.LogWarningFormat(_missingAddMethodWarning, property.propertyPath, method.Name, fieldInfo.DeclaringType.Name);
-					}
+					var owner = allowAddMethod.IsStatic ? null : parent;
+					var count = CheckSignature(allowAddMethod, typeof(bool), false, false, _invalidAllowAddMethodWarning, property.propertyPath);
+					if (count == 0)
+						field.CanAdd += () => NoneConditional(allowAddMethod, owner);
 				}
 
-				if (!string.IsNullOrEmpty(listAttribute.RemoveCallback))
+				if (TryGetMethod(listAttribute.AllowRemove, _missingAllowRemoveMethodWarning, property.propertyPath, out var allowRemoveMethod))
 				{
-					var method = fieldInfo.DeclaringType.GetMethod(listAttribute.RemoveCallback, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-					if (method != null)
-					{
-						if (method.HasSignature(null))
-						{
-							var owner = method.IsStatic ? null : property.GetParentObject<object>();
-							field.RemoveCallback += index => NoneCallback(method, owner);
-						}
-						else if (method.HasSignature(null, typeof(int)))
-						{
-							var owner = method.IsStatic ? null : property.GetParentObject<object>();
-							field.RemoveCallback += index => OneCallback(index, method, owner);
-						}
-						else
-						{
-							Debug.LogWarningFormat(_invalidRemoveMethodWarning, property.propertyPath, method.Name);
-						}
-					}
-					else
-					{
-						Debug.LogWarningFormat(_missingRemoveMethodWarning, property.propertyPath, method.Name, fieldInfo.DeclaringType.Name);
-					}
+					var owner = allowRemoveMethod.IsStatic ? null : parent;
+					var count = CheckSignature(allowRemoveMethod, typeof(bool), true, false, _invalidAllowRemoveMethodWarning, property.propertyPath);
+					if (count == 0)
+						field.CanRemove += index => NoneConditional(allowRemoveMethod, owner);
+					else if (count == 1)
+						field.CanRemove += index => OneConditional(index, allowRemoveMethod, owner);
 				}
 
-				if (!string.IsNullOrEmpty(listAttribute.ReorderCallback))
+				if (TryGetMethod(listAttribute.AllowReorder, _missingAllowReorderMethodWarning, property.propertyPath, out var allowReorderMethod))
 				{
-					var method = fieldInfo.DeclaringType.GetMethod(listAttribute.ReorderCallback, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
-					if (method != null)
-					{
-						if (method.HasSignature(null))
-						{
-							var owner = method.IsStatic ? null : property.GetParentObject<object>();
-							field.ReorderCallback += (from, to) => NoneCallback(method, owner);
-						}
-						else if (method.HasSignature(null, typeof(int)))
-						{
-							var owner = method.IsStatic ? null : property.GetParentObject<object>();
-							field.ReorderCallback += (from, to) => OneCallback(to, method, owner);
-						}
-						else if (method.HasSignature(null, typeof(int), typeof(int)))
-						{
-							var owner = method.IsStatic ? null : property.GetParentObject<object>();
-							field.ReorderCallback += (from, to) => TwoCallback(from, to, method, owner);
-						}
-						else
-						{
-							Debug.LogWarningFormat(_invalidReorderMethodWarning, property.propertyPath, method.Name);
-						}
-					}
-					else
-					{
-						Debug.LogWarningFormat(_missingReorderMethodWarning, property.propertyPath, method.Name, fieldInfo.DeclaringType.Name);
-					}
+					var owner = allowReorderMethod.IsStatic ? null : parent;
+					var count = CheckSignature(allowReorderMethod, typeof(bool), true, true, _invalidAllowReorderMethodWarning, property.propertyPath);
+					if (count == 0)
+						field.CanReorder += (from, to) => NoneConditional(allowReorderMethod, owner);
+					else if (count == 1)
+						field.CanReorder += (from, to) => OneConditional(to, allowReorderMethod, owner);
+					else if (count == 2)
+						field.CanReorder += (from, to) => TwoConditional(from, to, allowReorderMethod, owner);
+				}
+
+				if (TryGetMethod(listAttribute.AddCallback, _missingAddMethodWarning, property.propertyPath, out var addMethod))
+				{
+					var owner = addMethod.IsStatic ? null : parent;
+					var count = CheckSignature(addMethod, null, false, false, _invalidAddMethodWarning, property.propertyPath);
+					if (count == 0)
+						field.AddCallback += () => NoneCallback(addMethod, owner);
+				}
+
+				if (TryGetMethod(listAttribute.RemoveCallback, _missingRemoveMethodWarning, property.propertyPath, out var removeMethod))
+				{
+					var owner = removeMethod.IsStatic ? null : parent;
+					var count = CheckSignature(removeMethod, null, true, false, _invalidRemoveMethodWarning, property.propertyPath);
+					if (count == 0)
+						field.RemoveCallback += index => NoneCallback(removeMethod, owner);
+					else if (count == 1)
+						field.RemoveCallback += index => OneCallback(index, removeMethod, owner);
+				}
+
+				if (TryGetMethod(listAttribute.ReorderCallback, _missingReorderMethodWarning, property.propertyPath, out var reorderMethod))
+				{
+					var owner = reorderMethod.IsStatic ? null : parent;
+					var count = CheckSignature(reorderMethod, null, true, true, _invalidReorderMethodWarning, property.propertyPath);
+					if (count == 0)
+						field.ReorderCallback += (from, to) => NoneCallback(reorderMethod, owner);
+					else if (count == 1)
+						field.ReorderCallback += (from, to) => OneCallback(to, reorderMethod, owner);
+					else if (count == 2)
+						field.ReorderCallback += (from, to) => TwoCallback(from, to, reorderMethod, owner);
 				}
 
 				return field;
@@ -124,6 +115,33 @@ namespace PiRhoSoft.Utilities.Editor
 				Debug.LogWarningFormat(_invalidTypeWarning, property.propertyPath);
 				return new FieldContainer(property.displayName, "");
 			}
+		}
+
+		private bool TryGetMethod(string name, string warning, string propertyPath, out MethodInfo method)
+		{
+			method = null;
+
+			if (!string.IsNullOrEmpty(name))
+			{
+				method = fieldInfo.DeclaringType.GetMethod(name, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+				if (method == null)
+					Debug.LogWarningFormat(warning, propertyPath, name, fieldInfo.DeclaringType.Name);
+			}
+
+			return method != null;
+		}
+
+		private int CheckSignature(MethodInfo method, Type returnType, bool one, bool two, string warning, string propertyPath)
+		{
+			if (method.HasSignature(returnType))
+				return 0;
+			else if (one && method.HasSignature(returnType, typeof(int)))
+				return 1;
+			else if (two && method.HasSignature(returnType, typeof(int), typeof(int)))
+				return 2;
+
+			Debug.LogWarningFormat(warning, propertyPath, method.Name);
+			return -1;
 		}
 
 		private void NoneCallback(MethodInfo method, object owner)
@@ -149,6 +167,24 @@ namespace PiRhoSoft.Utilities.Editor
 				_twoParameters[1] = to;
 				method.Invoke(owner, _twoParameters);
 			}
+		}
+
+		private bool NoneConditional(MethodInfo method, object owner)
+		{
+			return (bool)method.Invoke(owner, null);
+		}
+
+		private bool OneConditional(int index, MethodInfo method, object owner)
+		{
+			_oneParameter[0] = index;
+			return (bool)method.Invoke(owner, _oneParameter);
+		}
+
+		private bool TwoConditional(int from, int to, MethodInfo method, object owner)
+		{
+			_twoParameters[0] = from;
+			_twoParameters[1] = to;
+			return (bool)method.Invoke(owner, _twoParameters);
 		}
 	}
 }

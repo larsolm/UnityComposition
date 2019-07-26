@@ -38,6 +38,8 @@ namespace PiRhoSoft.Utilities.Editor
 		public IListProxy Proxy { get; private set; }
 
 		private VisualElement _itemsContainer;
+		private IconButton _addButton;
+		private UQueryState<IconButton> _removeButtons;
 
 		private int _dragFromIndex = -1;
 		private int _dragToIndex = -1;
@@ -49,7 +51,6 @@ namespace PiRhoSoft.Utilities.Editor
 			Proxy = proxy;
 
 			CreateFrame();
-			AddHeaderButton(_addIcon.Texture, proxy.AddTooltip, AddButtonUssClassName, AddItem);
 			SetupDragging();
 			Refresh();
 
@@ -72,6 +73,16 @@ namespace PiRhoSoft.Utilities.Editor
 			EnableInClassList(AddDisabledUssClassName, !Proxy.AllowAdd);
 			EnableInClassList(RemoveDisabledUssClassName, !Proxy.AllowRemove);
 			EnableInClassList(MoveDisabledUssClassName, !Proxy.AllowReorder);
+
+			_addButton.SetEnabled(Proxy.CanAdd());
+
+			_removeButtons.ForEach(button =>
+			{
+				var index = GetItemIndex(button.parent);
+				var removable = Proxy.CanRemove(index);
+
+				button.SetEnabled(removable);
+			});
 		}
 
 		#region Element Creation
@@ -80,12 +91,16 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			SetLabel(Proxy.Label, Proxy.Tooltip);
 
+			_addButton = AddHeaderButton(_addIcon.Texture, Proxy.AddTooltip, AddButtonUssClassName, AddItem);
+			_removeButtons = _itemsContainer.Query<IconButton>(className: RemoveButtonUssClassName).Build();
+
 			var empty = new Label(Proxy.EmptyLabel) { tooltip = Proxy.EmptyTooltip };
 			empty.AddToClassList(EmptyLabelUssClassName);
-			Content.Add(empty);
 
 			_itemsContainer = new VisualElement();
 			_itemsContainer.AddToClassList(ItemsUssClassName);
+
+			Content.Add(empty);
 			Content.Add(_itemsContainer);
 		}
 
@@ -125,48 +140,31 @@ namespace PiRhoSoft.Utilities.Editor
 			}
 		}
 
-		private int GetItemIndex(VisualElement item)
-		{
-			return item.parent.IndexOf(item);
-		}
-
 		#endregion
 
 		#region Item Management
 
 		private void AddItem()
 		{
-			if (Proxy.AllowAdd)
+			if (Proxy.AllowAdd && Proxy.CanAdd())
 			{
 				Proxy.AddItem();
 				Refresh();
-
-				using (var e = ItemAddedEvent.GetPooled(Proxy.ItemCount - 1))
-				{
-					e.target = this;
-					SendEvent(e);
-				}
 			}
 		}
 
 		private void RemoveItem(int index)
 		{
-			if (Proxy.AllowRemove)
+			if (Proxy.AllowRemove && Proxy.CanRemove(index))
 			{
 				Proxy.RemoveItem(index);
 				Refresh();
-
-				using (var e = ItemRemovedEvent.GetPooled(index))
-				{
-					e.target = this;
-					SendEvent(e);
-				}
 			}
 		}
 
 		private void ReorderItem(int from, int to)
 		{
-			if (Proxy.AllowReorder)
+			if (Proxy.AllowReorder && Proxy.CanReorder(from, to))
 			{
 				var item = _itemsContainer.ElementAt(from);
 				_itemsContainer.RemoveAt(from);
@@ -174,18 +172,17 @@ namespace PiRhoSoft.Utilities.Editor
 
 				Proxy.ReorderItem(from, to);
 				Refresh();
-
-				using (var e = ItemMovedEvent.GetPooled(from, to))
-				{
-					e.target = this;
-					SendEvent(e);
-				}
 			}
 		}
 
 		#endregion
 
 		#region Dragging
+
+		private int GetItemIndex(VisualElement item)
+		{
+			return item.parent.IndexOf(item);
+		}
 
 		private void SetupDragging()
 		{
@@ -282,65 +279,4 @@ namespace PiRhoSoft.Utilities.Editor
 
 		#endregion
 	}
-
-	#region Events
-
-	public class ItemAddedEvent : EventBase<ItemAddedEvent>
-	{
-		public int Index { get; protected set; }
-
-		public static ItemAddedEvent GetPooled(int index)
-		{
-			var e = GetPooled();
-			e.Index = index;
-			return e;
-		}
-
-		protected override void Init()
-		{
-			base.Init();
-			Index = -1;
-		}
-	}
-
-	public class ItemRemovedEvent : EventBase<ItemRemovedEvent>
-	{
-		public int Index { get; protected set; }
-
-		public static ItemRemovedEvent GetPooled(int index)
-		{
-			var e = GetPooled();
-			e.Index = index;
-			return e;
-		}
-
-		protected override void Init()
-		{
-			base.Init();
-			Index = -1;
-		}
-	}
-
-	public class ItemMovedEvent : EventBase<ItemMovedEvent>
-	{
-		public int FromIndex { get; protected set; }
-		public int ToIndex { get; protected set; }
-
-		public static ItemMovedEvent GetPooled(int fromIndex, int toIndex)
-		{
-			var e = GetPooled();
-			e.FromIndex = fromIndex;
-			e.ToIndex = toIndex;
-			return e;
-		}
-
-		protected override void Init()
-		{
-			base.Init();
-			FromIndex = -1;
-			ToIndex = -1;
-		}
-	}
-
-	#endregion
 }

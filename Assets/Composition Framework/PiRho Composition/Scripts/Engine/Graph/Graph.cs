@@ -16,11 +16,11 @@ namespace PiRhoSoft.Composition
 		public VariableDefinition Context = new VariableDefinition("context");
 
 		[Tooltip("The variables definitions used as inputs for this graph")]
-		[List(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyLabel = "Inputs defined in nodes will appear here")]
+		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Inputs defined in nodes will appear here")]
 		public VariableDefinitionList Inputs = new VariableDefinitionList();
 
 		[Tooltip("The variables definitions used as outputs for this graph")]
-		[List(AllowAdd = false, AllowRemove = false, AllowReorder = false, EmptyLabel = "Outputs defined in nodes will appear here")]
+		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Outputs defined in nodes will appear here")]
 		public VariableDefinitionList Outputs = new VariableDefinitionList();
 
 		public GraphNode Process = null;
