@@ -14,7 +14,7 @@ namespace PiRhoSoft.Composition
 		public Type ObjectType
 		{
 			get => _objectType;
-			set => _objectType = Variable.IsValidObjectType(value) ? value : typeof(Object);
+			set => _objectType = value ?? typeof(Object);
 		}
 
 		public ObjectConstraint()

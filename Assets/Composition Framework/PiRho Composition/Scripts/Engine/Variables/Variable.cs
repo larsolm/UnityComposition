@@ -22,17 +22,11 @@ namespace PiRhoSoft.Composition
 		Rect,
 		Bounds,
 		Color,
-		String,
 		Enum,
-		Object,
-		Store,
+		String,
 		List,
-		Other
-	}
-
-	public enum InvalidEnumVariable
-	{
-		Invalid
+		Dictionary,
+		Object
 	}
 
 	public struct Variable
@@ -97,12 +91,11 @@ namespace PiRhoSoft.Composition
 					case VariableType.Rect: return true;
 					case VariableType.Bounds: return true;
 					case VariableType.Color: return true;
-					case VariableType.String: return false;
 					case VariableType.Enum: return false;
-					case VariableType.Object: return false;
-					case VariableType.Store: return false;
+					case VariableType.String: return false;
 					case VariableType.List: return false;
-					case VariableType.Other: return false;
+					case VariableType.Dictionary: return false;
+					case VariableType.Object: return false;
 					default: return false;
 				}
 			}
@@ -130,12 +123,11 @@ namespace PiRhoSoft.Composition
 				case Rect r: return Rect(r);
 				case Bounds b: return Bounds(b);
 				case Color c: return Color(c);
-				case string s: return String(s);
 				case Enum e: return Enum(e);
-				case Object o: return Object(o);
-				case IVariableStore s: return Store(s);
+				case string s: return String(s);
 				case IVariableList l: return List(l);
-				default: return Other(obj);
+				case IVariableDictionary d: return Dictionary(d);
+				default: return Object(obj);
 			}
 		}
 
@@ -158,12 +150,11 @@ namespace PiRhoSoft.Composition
 				case VariableType.Rect: return AsRect;
 				case VariableType.Bounds: return AsBounds;
 				case VariableType.Color: return AsColor;
-				case VariableType.String: return AsString;
 				case VariableType.Enum: return AsEnum;
-				case VariableType.Object: return AsObject;
-				case VariableType.Store: return AsStore;
+				case VariableType.String: return AsString;
 				case VariableType.List: return AsList;
-				case VariableType.Other: return AsOther;
+				case VariableType.Dictionary: return AsDictionary;
+				case VariableType.Object: return AsObject;
 				default: return null;
 			}
 		}
@@ -200,12 +191,11 @@ namespace PiRhoSoft.Composition
 				case VariableType.Rect: return Rect(new Rect());
 				case VariableType.Bounds: return Bounds(new Bounds());
 				case VariableType.Color: return Color(UnityEngine.Color.black);
-				case VariableType.String: return String(string.Empty);
-				case VariableType.Enum: return Enum(InvalidEnumVariable.Invalid);
-				case VariableType.Object: return Object(null);
-				case VariableType.Store: return Store(null);
+				case VariableType.Enum: return Enum(null);
+				case VariableType.String: return String(null);
 				case VariableType.List: return List(null);
-				case VariableType.Other: return Other(null);
+				case VariableType.Dictionary: return Dictionary(null);
+				case VariableType.Object: return Object(null);
 				default: return Empty;
 			}
 		}
@@ -229,12 +219,11 @@ namespace PiRhoSoft.Composition
 				case VariableType.Rect: return IsRect;
 				case VariableType.Bounds: return IsBounds;
 				case VariableType.Color: return IsColor;
-				case VariableType.String: return IsString;
 				case VariableType.Enum: return IsEnum;
-				case VariableType.Object: return IsObject;
-				case VariableType.Store: return IsStore;
+				case VariableType.String: return IsString;
 				case VariableType.List: return IsList;
-				case VariableType.Other: return IsOther;
+				case VariableType.Dictionary: return IsDictionary;
+				case VariableType.Object: return IsObject;
 				default: return false;
 			}
 		}
@@ -261,12 +250,11 @@ namespace PiRhoSoft.Composition
 		//		case Rect r: return Rect(r);
 		//		case Bounds b: return Bounds(b);
 		//		case Color c: return Color(c);
-		//		case string s: return String(s);
 		//		case Enum e: return Enum(e);
-		//		case Object o: return Object(o);
-		//		case IVariableStore s: return Store(s);
+		//		case string s: return String(s);
 		//		case IVariableList l: return List(l);
-		//		default: return Other(value);
+		//		case IVariableDictionary s: return Dictionary(s);
+		//		default: return Object(value);
 		//	}
 		//}
 
@@ -286,12 +274,11 @@ namespace PiRhoSoft.Composition
 			else if (type == typeof(Rect)) return VariableType.Rect;
 			else if (type == typeof(Bounds)) return VariableType.Bounds;
 			else if (type == typeof(Color)) return VariableType.Color;
-			else if (type == typeof(string)) return VariableType.String;
 			else if (type.IsEnum) return VariableType.Enum;
-			else if (typeof(Object).IsAssignableFrom(type)) return VariableType.Object;
-			else if (typeof(IVariableStore).IsAssignableFrom(type)) return VariableType.Store;
+			else if (type == typeof(string)) return VariableType.String;
 			else if (typeof(IVariableList).IsAssignableFrom(type)) return VariableType.List;
-			else return VariableType.Other;
+			else if (typeof(IVariableDictionary).IsAssignableFrom(type)) return VariableType.Dictionary;
+			else return VariableType.Object;
 		}
 
 		public bool Is<T>()
@@ -312,17 +299,11 @@ namespace PiRhoSoft.Composition
 			else if (type == typeof(Rect)) return IsRect;
 			else if (type == typeof(Bounds)) return IsBounds;
 			else if (type == typeof(Color)) return IsColor;
+			else if (type.IsEnum) return HasEnum(type);
 			else if (type == typeof(string)) return IsString;
-
-			if (_reference == null)
-			{
-				if (Type == VariableType.Object && typeof(Object).IsAssignableFrom(type))
-					return true;
-
-				return Type == VariableType.Other;
-			}
-
-			return _reference is T;
+			else if (typeof(IVariableList).IsAssignableFrom(type)) return IsList;
+			else if (typeof(IVariableDictionary).IsAssignableFrom(type)) return IsDictionary;
+			else return _reference is T;
 		}
 
 		public T As<T>()
@@ -481,23 +462,19 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
-		#region String
-
-		public static Variable String(string value) => CreateReference(VariableType.String, value ?? string.Empty);
-		public bool IsString => Type == VariableType.String;
-		public string AsString => _reference as string;
-		public bool TryGetString(out string value) { value = AsString; return value != null; }
-
-		#endregion
-
 		#region Enum
+
+		public enum InvalidEnum
+		{
+			Invalid
+		}
 
 		// without using Reflection Emit there is no way to cast a generic Enum to/from int without boxing so enums
 		// are stored as reference types until Emit becomes available in Unity for all platforms
 
 		public static bool IsValidEnumType(Type type) => type != null && type.IsEnum && System.Enum.GetValues(type).Length > 0;
 
-		public static Variable Enum(Enum value) => CreateReference(VariableType.Enum, value ?? InvalidEnumVariable.Invalid);
+		public static Variable Enum(Enum value) => CreateReference(VariableType.Enum, value ?? InvalidEnum.Invalid);
 		public bool IsEnum => Type == VariableType.Enum;
 		public Enum AsEnum => _reference as Enum;
 		public bool TryGetEnum(out Enum value) { value = AsEnum; return value != null; }
@@ -529,46 +506,12 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
-		#region Object
+		#region String
 
-		public static bool IsValidObjectType(Type type) => type != null && typeof(Object).IsAssignableFrom(type);
-
-		public static Variable Object(Object value) => CreateObject(value);
-		public bool IsObject => _reference is Object;
-		public Object AsObject => _reference as Object;
-		public bool TryGetObject(out Object value) { value = AsObject; return value != null; }
-		public bool IsNullObject => Type == VariableType.Object && _reference == null;
-
-		public bool HasObject<ObjectType>() where ObjectType : Object => _reference is ObjectType;
-		public ObjectType GetObject<ObjectType>() where ObjectType : Object => _reference as ObjectType;
-		public bool TryGetObject<ObjectType>(out ObjectType value) where ObjectType : Object { value = GetObject<ObjectType>(); return value != null; }
-
-		public bool HasObject(Type objectType) => IsObject ? ObjectType.IsAssignableFrom(_reference.GetType()) : false;
-		public Object GetObject(Type objectType) => HasObject(objectType) ? _reference as Object : null;
-		public bool TryGetObject(Type objectType, out Object value) { value = GetObject(objectType); return value != null; }
-		public Type ObjectType => IsObject ? (_reference != null ? _reference.GetType() : typeof(Object)) : null;
-
-		private static Variable CreateObject(Object reference)
-		{
-			// Make sure fake null unity objects are stored as real null. When loading, the fake null check will throw
-			// an exception for fake nulls (but not for valid objects) since it is happening on a background thread.
-
-			Object fixedReference;
-
-			try { fixedReference = reference == null ? null : reference; }
-			catch { fixedReference = null; }
-
-			return CreateReference(VariableType.Object, fixedReference);
-		}
-
-		#endregion
-
-		#region Store
-
-		public static Variable Store(IVariableStore value) => CreateReference(VariableType.Store, value ?? new VariableStore());
-		public bool IsStore => _reference is IVariableStore;
-		public IVariableStore AsStore => _reference as IVariableStore;
-		public bool TryGetStore(out IVariableStore value) { value = AsStore; return value != null; }
+		public static Variable String(string value) => CreateReference(VariableType.String, value ?? string.Empty);
+		public bool IsString => Type == VariableType.String;
+		public string AsString => _reference as string;
+		public bool TryGetString(out string value) { value = AsString; return value != null; }
 
 		#endregion
 
@@ -581,21 +524,50 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
-		#region Other
+		#region Dictionary
 
-		public static Variable Other(object value) => CreateReference(VariableType.Other, value);
-		public bool IsOther => _reference != null;
-		public object AsOther => _reference;
-		public bool IsNullOther => _reference == null && !OtherType.IsValueType;
+		public static Variable Dictionary(IVariableDictionary value) => CreateReference(VariableType.Dictionary, value ?? new VariableDictionary());
+		public bool IsDictionary => _reference is IVariableDictionary;
+		public IVariableDictionary AsDictionary => _reference as IVariableDictionary;
+		public bool TryGetDictionary(out IVariableDictionary value) { value = AsDictionary; return value != null; }
 
-		public bool HasOther<T>() => _reference is T;
-		public T GetOther<T>() => _reference is T ? (T)_reference : default;
-		public bool TryGetOther<T>(out T value) { value = GetOther<T>(); return HasOther<T>(); }
+		#endregion
 
-		public bool HasOther(Type type) => OtherType.IsAssignableFrom(_reference.GetType());
-		public object GetOther(Type type) => HasOther(type) ? _reference : null;
-		public bool TryGetOther(Type type, out object value) { value = GetOther(type); return value != null; }
-		public Type OtherType => _reference != null ? _reference.GetType() : typeof(object);
+		#region Object
+
+		public static Variable Object(object value) => CreateObject(value);
+		public bool IsObject => Type == VariableType.Object;
+		public object AsObject => IsObject ? _reference : null;
+		public bool TryGetObject(out object value) { value = AsObject; return IsObject; }
+		public bool IsNullObject => Type == VariableType.Object && _reference == null;
+
+		public bool HasObject<ObjectType>() => IsObject && _reference is ObjectType;
+		public ObjectType GetObject<ObjectType>() => IsObject && _reference is ObjectType obj ? obj : default;
+		public bool TryGetObject<ObjectType>(out ObjectType value) { value = GetObject<ObjectType>(); return value != null; }
+
+		public bool HasObject(Type objectType) => IsObject ? ObjectType.IsAssignableFrom(_reference.GetType()) : false;
+		public Object GetObject(Type objectType) => HasObject(objectType) ? _reference as Object : null;
+		public bool TryGetObject(Type objectType, out Object value) { value = GetObject(objectType); return value != null; }
+		public Type ObjectType => IsObject ? (_reference != null ? _reference.GetType() : typeof(object)) : null;
+
+		private static Variable CreateObject(object reference)
+		{
+			// make sure fake null unity objects are stored as real null
+
+			try
+			{
+				// during loading (or any background thread) the fake null check will throw for fake nulls
+
+				if (reference is Object obj && obj == null)
+					reference = null;
+			}
+			catch
+			{
+				reference = null;
+			}
+
+			return CreateReference(VariableType.Object, reference);
+		}
 
 		#endregion
 	}

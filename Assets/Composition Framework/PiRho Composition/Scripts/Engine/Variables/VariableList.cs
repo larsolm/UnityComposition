@@ -2,11 +2,8 @@
 
 namespace PiRhoSoft.Composition
 {
-	public interface IVariableList
+	public interface IVariableList : IVariableIndex
 	{
-		int Count { get; }
-		Variable GetVariable(int index);
-		SetVariableResult SetVariable(int index, Variable value);
 		SetVariableResult AddVariable(Variable value);
 		SetVariableResult RemoveVariable(int index);
 	}
@@ -24,7 +21,7 @@ namespace PiRhoSoft.Composition
 		}
 
 		public List<Variable> Values { get; private set; } = new List<Variable>();
-		public int Count => Values.Count;
+		public int VariableCount => Values.Count;
 
 		public Variable GetVariable(int index)
 		{

@@ -2,111 +2,101 @@
 
 namespace PiRhoSoft.Composition
 {
-	public enum SetVariableResult
+	public interface IVariableIndex
 	{
-		Success,
-		NotFound,
-		ReadOnly,
-		TypeMismatch
+		int VariableCount { get; }
+		Variable GetVariable(int index);
+		SetVariableResult SetVariable(int index, Variable value);
 	}
 
-	public interface IVariableStore
+	public interface IVariableMap
 	{
-		IList<string> GetVariableNames();
+		IReadOnlyList<string> VariableNames { get; }
 		Variable GetVariable(string name);
 		SetVariableResult SetVariable(string name, Variable value);
 	}
 
-	public class VariableStore : IVariableStore
+	public interface IVariableReset
+	{
+		void ResetAll();
+		void ResetTag(string tag);
+		void ResetVariables(IList<string> variables);
+	}
+
+	public class VariableStore : IVariableIndex, IVariableMap
 	{
 		private List<string> _names = new List<string>();
 		private List<Variable> _variables = new List<Variable>();
 		private Dictionary<string, int> _map = new Dictionary<string, int>();
 
-		public List<string> Names => _names;
-		public List<Variable> Variables => _variables;
-		public Dictionary<string, int> Map => _map;
-
-		public virtual void AddVariable(string name, Variable value)
+		public int VariableCount
 		{
-			_map.Add(name, _variables.Count);
-			_variables.Add(value);
-			_names.Add(name);
+			get => _variables.Count;
 		}
 
-		public bool RemoveVariable(string name)
+		public Variable GetVariable(int index)
 		{
-			if (_map.TryGetValue(name, out var index))
-			{
-				RemoveVariable(name, index);
-				return true;
-			}
-			else
-			{
-				return false;
-			}
+			return index >= 0 && index < _variables.Count
+				? _variables[index]
+				: Variable.Empty;
 		}
 
-		public void RemoveVariable(int index)
+		public SetVariableResult SetVariable(int index, Variable value)
 		{
-			var name = _names[index];
-			RemoveVariable(name, index);
-		}
-
-		protected virtual void RemoveVariable(string name, int index)
-		{
-			_map.Remove(name);
-			_variables.RemoveAt(index);
-			_names.RemoveAt(index);
-
-			for (var i = index; i < _names.Count; i++)
-				_map[_names[i]] = i;
-		}
-
-		public virtual void VariableMoved(int from, int to)
-		{
-			_map.Clear();
-
-			for (var i = 0; i < _names.Count; i++)
-				_map.Add(_names[i], i);
-		}
-
-		public virtual void Clear()
-		{
-			_variables.Clear();
-			_names.Clear();
-			_map.Clear();
-		}
-
-		protected SetVariableResult SetVariable(string name, Variable value, bool allowAdd)
-		{
-			if (_map.TryGetValue(name, out int index))
+			if (value.IsEmpty)
+				RemoveVariable(index);
+			else if (index >= 0 && index < _variables.Count)
 				_variables[index] = value;
-			else if (allowAdd)
-				AddVariable(name, value);
 			else
 				return SetVariableResult.NotFound;
 
 			return SetVariableResult.Success;
 		}
 
-		#region IVariableStore Implementation
-
-		public virtual IList<string> GetVariableNames()
+		public IReadOnlyList<string> VariableNames
 		{
-			return _names;
+			get => _names;
 		}
 
-		public virtual Variable GetVariable(string name)
+		public Variable GetVariable(string name)
 		{
-			return _map.TryGetValue(name, out var index) ? _variables[index] : Variable.Empty;
+			return _map.TryGetValue(name, out var index)
+				? _variables[index]
+				: Variable.Empty;
 		}
 
-		public virtual SetVariableResult SetVariable(string name, Variable value)
+		public SetVariableResult SetVariable(string name, Variable value)
 		{
-			return SetVariable(name, value, true);
+			if (_map.TryGetValue(name, out int index))
+			{
+				if (value.IsEmpty)
+					RemoveVariable(index);
+				else
+					_variables[index] = value;
+			}
+			else
+			{
+				AddVariable(name, value);
+			}
+
+			return SetVariableResult.Success;
 		}
 
-		#endregion
+		private void AddVariable(string name, Variable value)
+		{
+			_map.Add(name, _variables.Count);
+			_variables.Add(value);
+			_names.Add(name);
+		}
+
+		private void RemoveVariable(int index)
+		{
+			_map.Remove(_names[index]);
+			_variables.RemoveAt(index);
+			_names.RemoveAt(index);
+
+			for (var i = index; i < _names.Count; i++)
+				_map[_names[i]] = i;
+		}
 	}
 }

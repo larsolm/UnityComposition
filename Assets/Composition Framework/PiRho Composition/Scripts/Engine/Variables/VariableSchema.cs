@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -62,26 +63,35 @@ namespace PiRhoSoft.Composition
 			get { return _entries.Count; }
 		}
 
+		public IReadOnlyList<string> Names
+		{
+			get => _entries.Select(e => e.Definition.Name).ToList(); // TODO: cache
+		}
+
 		public Entry this[int index]
 		{
 			get { return _entries[index]; }
 			set { _entries[index] = value; IncrementVersion(); }
 		}
 
-		public int GetIndex(string name)
+		public bool TryGetIndex(string name, out int index)
 		{
 			for (var i = 0; i < _entries.Count; i++)
 			{
 				if (_entries[i].Definition.Name == name)
-					return i;
+				{
+					index = i;
+					return true;
+				}
 			}
 
-			return -1;
+			index = -1;
+			return false;
 		}
 
 		public bool HasDefinition(string name)
 		{
-			return GetIndex(name) >= 0;
+			return TryGetIndex(name, out _);
 		}
 
 		public bool AddDefinition(string name, VariableType type)

@@ -15,14 +15,13 @@ namespace PiRhoSoft.Composition
 		{
 			switch (type)
 			{
-				case VariableType.Enum: return new EnumConstraint();
-				case VariableType.Float: return new FloatConstraint();
 				case VariableType.Int: return new IntConstraint();
-				case VariableType.List: return new ListConstraint();
-				case VariableType.Object: return new ObjectConstraint();
-				case VariableType.Other: return new OtherConstraint();
-				case VariableType.Store: return new StoreConstraint();
+				case VariableType.Float: return new FloatConstraint();
+				case VariableType.Enum: return new EnumConstraint();
 				case VariableType.String: return new StringConstraint();
+				case VariableType.List: return new ListConstraint();
+				case VariableType.Dictionary: return new DictionaryConstraint();
+				case VariableType.Object: return new ObjectConstraint();
 				default: return null;
 			}
 		}
