@@ -43,7 +43,7 @@ namespace PiRhoSoft.Composition.Editor
 				return control;
 			}
 
-			public override bool IsKeyValid(string key)
+			public override bool CanAdd(string key)
 			{
 				return !_schema.HasDefinition(key);
 			}

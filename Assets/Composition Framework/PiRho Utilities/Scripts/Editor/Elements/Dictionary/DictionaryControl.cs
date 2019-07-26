@@ -167,12 +167,12 @@ namespace PiRhoSoft.Utilities.Editor
 			// Separately check for empty because we don't want empty to be addable but we also don't want it be show as invalid
 			var valid = IsKeyValid(newValue) || string.IsNullOrEmpty(newValue);
 			EnableInClassList(AddKeyInvalidUssClassName, !valid);
-			_addButton.SetEnabled(valid && !string.IsNullOrEmpty(newValue) && Proxy.CanAdd(newValue));
+			_addButton.SetEnabled(valid && !string.IsNullOrEmpty(newValue));
 		}
 
 		private bool IsKeyValid(string key)
 		{
-			return !string.IsNullOrEmpty(key) && Proxy.IsKeyValid(key);
+			return !string.IsNullOrEmpty(key) && Proxy.CanAdd(key);
 		}
 
 		#endregion
@@ -183,7 +183,7 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			var key = _keyField.text;
 
-			if (Proxy.AllowAdd && IsKeyValid(key) && Proxy.CanAdd(key))
+			if (Proxy.AllowAdd && IsKeyValid(key))
 			{
 				Proxy.AddItem(key);
 				_keyField.value = string.Empty;

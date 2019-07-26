@@ -24,7 +24,6 @@ namespace PiRhoSoft.Utilities.Editor
 		VisualElement CreateField(int index);
 
 		bool NeedsUpdate(VisualElement item, int index);
-		bool IsKeyValid(string key);
 
 		bool CanAdd(string key);
 		bool CanRemove(int index);
@@ -61,7 +60,6 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public abstract VisualElement CreateField(int index);
 		public abstract bool NeedsUpdate(VisualElement item, int index);
-		public abstract bool IsKeyValid(string key);
 
 		public abstract void AddItem(string key);
 		public abstract void RemoveItem(int index);
@@ -103,9 +101,9 @@ namespace PiRhoSoft.Utilities.Editor
 			return !(item.userData is string k) || k != key;
 		}
 
-		public override bool IsKeyValid(string key)
+		public override bool CanAdd(string key)
 		{
-			return !Items.ContainsKey(key);
+			return AllowAdd && !Items.ContainsKey(key);
 		}
 
 		public override void AddItem(string key)

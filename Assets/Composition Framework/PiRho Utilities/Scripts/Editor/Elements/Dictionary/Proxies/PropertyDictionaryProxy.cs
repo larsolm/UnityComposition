@@ -59,27 +59,14 @@ namespace PiRhoSoft.Utilities.Editor
 			return field;
 		}
 
-		public bool IsKeyValid(string key)
-		{
-			for (var i = 0; i < KeyCount; i++)
-			{
-				var property = _keysProperty.GetArrayElementAtIndex(i);
-				if (property.stringValue == key)
-					return false;
-			}
-
-			return true;
-		}
-
 		public bool NeedsUpdate(VisualElement item, int index)
 		{
 			return !(item.userData is int i) || i != index;
 		}
 
-
 		public bool CanAdd(string key)
 		{
-			return CanAddCallback?.Invoke(key) ?? AllowAdd;
+			return (CanAddCallback?.Invoke(key) ?? AllowAdd) && !ContainsKey(key);
 		}
 
 		public bool CanRemove(int index)
@@ -127,6 +114,18 @@ namespace PiRhoSoft.Utilities.Editor
 
 			var property = _keysProperty.GetArrayElementAtIndex(to);
 			ReorderCallback?.Invoke(property.stringValue);
+		}
+
+		private bool ContainsKey(string key)
+		{
+			for (var i = 0; i < KeyCount; i++)
+			{
+				var property = _keysProperty.GetArrayElementAtIndex(i);
+				if (property.stringValue == key)
+					return false;
+			}
+
+			return true;
 		}
 	}
 }
