@@ -31,7 +31,7 @@ namespace PiRhoSoft.Composition
 			else
 			{
 				writer.Write(false);
-				data.SaveObject(writer, value.AsObject);
+				data.SaveInstance(writer, value.AsObject);
 			}
 		}
 
@@ -46,7 +46,7 @@ namespace PiRhoSoft.Composition
 			}
 			else
 			{
-				var obj = data.LoadObject<object>(reader);
+				var obj = data.LoadInstance<object>(reader);
 				return Variable.Object(obj);
 			}
 		}

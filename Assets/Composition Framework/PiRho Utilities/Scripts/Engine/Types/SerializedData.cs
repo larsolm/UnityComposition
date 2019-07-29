@@ -19,53 +19,7 @@ namespace PiRhoSoft.Utilities
 		public string Data;
 		public List<Object> References;
 
-		public void Save(ISerializableData data, int version)
-		{
-			Reset(version);
-
-			if (data != null)
-			{
-				using (var stream = new MemoryStream())
-				{
-					using (var writer = new BinaryWriter(stream))
-					{
-						writer.Write(Version);
-						SaveObject(writer, data);
-					}
-
-					Data = GetString(stream.ToArray());
-				}
-			}
-			else
-			{
-				Data = string.Empty;
-			}
-		}
-
-		public void Load<T>(out T data) where T : class, ISerializableData
-		{
-			var bytes = GetBytes(Data);
-
-			if (bytes != null)
-			{
-				using (var stream = new MemoryStream(bytes))
-				{
-					using (var reader = new BinaryReader(stream))
-					{
-						Version = reader.ReadInt32();
-						data = LoadObject<T>(reader);
-					}
-				}
-			}
-			else
-			{
-				data = null;
-			}
-
-			Reset(-1);
-		}
-
-		public void SaveInstance(ISerializableData data, int version)
+		public void SaveData(ISerializableData data, int version)
 		{
 			Reset(version);
 
@@ -77,15 +31,15 @@ namespace PiRhoSoft.Utilities
 					data.Save(writer, this);
 				}
 
-				Data = GetString(stream.ToArray());
+				Data = Convert.ToBase64String(stream.ToArray());
 			}
 		}
 
-		public void LoadInstance(ISerializableData data)
+		public void LoadData(ISerializableData data)
 		{
-			var bytes = GetBytes(Data);
+			var bytes = Convert.FromBase64String(Data);
 
-			if (bytes != null)
+			if (bytes != null && bytes.Length > 0)
 			{
 				using (var stream = new MemoryStream(bytes))
 				{
@@ -95,6 +49,52 @@ namespace PiRhoSoft.Utilities
 						data.Load(reader, this);
 					}
 				}
+			}
+
+			Reset(-1);
+		}
+
+		public void SaveClass(ISerializableData data, int version)
+		{
+			Reset(version);
+
+			if (data != null)
+			{
+				using (var stream = new MemoryStream())
+				{
+					using (var writer = new BinaryWriter(stream))
+					{
+						writer.Write(Version);
+						SaveInstance(writer, data);
+					}
+
+					Data = Convert.ToBase64String(stream.ToArray());
+				}
+			}
+			else
+			{
+				Data = string.Empty;
+			}
+		}
+
+		public void LoadClass<T>(out T data) where T : class, ISerializableData
+		{
+			var bytes = Convert.FromBase64String(Data);
+
+			if (bytes != null && bytes.Length > 0)
+			{
+				using (var stream = new MemoryStream(bytes))
+				{
+					using (var reader = new BinaryReader(stream))
+					{
+						Version = reader.ReadInt32();
+						data = LoadInstance<T>(reader);
+					}
+				}
+			}
+			else
+			{
+				data = null;
 			}
 
 			Reset(-1);
@@ -115,7 +115,7 @@ namespace PiRhoSoft.Utilities
 			return References != null && index < References.Count ? References[index] : null;
 		}
 
-		public void SaveObject<T>(BinaryWriter writer, T obj)
+		public void SaveInstance<T>(BinaryWriter writer, T obj)
 		{
 			writer.Write(obj != null);
 			writer.Write(obj is ISerializableData);
@@ -136,7 +136,7 @@ namespace PiRhoSoft.Utilities
 			}
 		}
 
-		public T LoadObject<T>(BinaryReader reader)
+		public T LoadInstance<T>(BinaryReader reader)
 		{
 			var isValid = reader.ReadBoolean();
 			var isData = reader.ReadBoolean();
@@ -212,17 +212,6 @@ namespace PiRhoSoft.Utilities
 			Version = version;
 			Data = null;
 			References = null;
-		}
-
-		private static byte[] GetBytes(string data)
-		{
-			try { return Convert.FromBase64String(data); }
-			catch (FormatException) { return null; }
-		}
-
-		private static string GetString(byte[] bytes)
-		{
-			return Convert.ToBase64String(bytes);
 		}
 	}
 }

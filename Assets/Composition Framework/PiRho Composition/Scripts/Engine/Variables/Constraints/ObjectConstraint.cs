@@ -27,6 +27,11 @@ namespace PiRhoSoft.Composition
 			ObjectType = type;
 		}
 
+		public override string ToString()
+		{
+			return _objectType.Name;
+		}
+
 		public override Variable Generate()
 		{
 			return Variable.Object(null);

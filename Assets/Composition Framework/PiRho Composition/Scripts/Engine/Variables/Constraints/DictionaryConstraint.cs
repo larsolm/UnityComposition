@@ -18,6 +18,11 @@ namespace PiRhoSoft.Composition
 			Schema = schema;
 		}
 
+		public override string ToString()
+		{
+			return Schema?.name ?? string.Empty;
+		}
+
 		public override Variable Generate()
 		{
 			return Variable.Dictionary(new VariableDictionary(Schema));

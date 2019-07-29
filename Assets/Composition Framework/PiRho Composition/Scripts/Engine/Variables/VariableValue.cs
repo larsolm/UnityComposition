@@ -23,12 +23,12 @@ namespace PiRhoSoft.Composition
 
 		public void OnBeforeSerialize()
 		{
-			_variableData.SaveInstance(this, 1);
+			_variableData.SaveData(this, 1);
 		}
 
 		public void OnAfterDeserialize()
 		{
-			_variableData.LoadInstance(this);
+			_variableData.LoadData(this);
 		}
 	}
 }

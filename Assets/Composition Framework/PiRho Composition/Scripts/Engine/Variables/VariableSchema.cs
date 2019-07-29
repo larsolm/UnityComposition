@@ -11,55 +11,53 @@ namespace PiRhoSoft.Composition
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
 	public class VariableSchema : ScriptableObject
 	{
-		[Serializable]
-		public class Entry
-		{
-			private const string _invalidInitializerError = "(PCVDII) failed to initialize variable '{0}' using store '{1}': the generated value of type '{2}' does not match the definition";
-
-			public string Tag = string.Empty;
-			public Expression Initializer = new Expression();
-			public VariableDefinition Definition;
-
-			public Variable GenerateValue(IVariableCollection variables)
-			{
-				if (Initializer != null && Initializer.IsValid)
-				{
-					var value = Initializer.Execute(variables as Object, variables);
-
-					if (!Definition.IsValid(value))
-						return value;
-
-					Debug.LogErrorFormat(_invalidInitializerError, Definition.Name, variables, value.Type);
-				}
-
-				return Definition.Generate();
-			}
-		}
+		public const string TagsField = nameof(_tags);
+		public const string EntriesField = nameof(_entries);
 
 		[Serializable] public class TagList : SerializedList<string> { }
-		[Serializable] public class EntryList : SerializedList<Entry> { }
+		[Serializable] public class EntryList : SerializedList<VariableSchemaEntry> { }
 
-		[Tooltip("The tags available to variables with this variable schema")]
-		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistance)", AddCallback = nameof(ValidateTags), RemoveCallback = nameof(ValidateTags))]
-		[ChangeTrigger(nameof(ValidateTags))]
-		public TagList Tags = new TagList();
+		[Tooltip("The tags available to definitions in this schema")]
+		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistence)", AddCallback = nameof(TagsChanged), RemoveCallback = nameof(TagsChanged))]
+		[ChangeTrigger(nameof(TagsChanged))]
+		[SerializeField]
+		private TagList _tags = new TagList();
 
 		[SerializeField] private EntryList _entries = new EntryList();
+		[SerializeField] private List<string> _names = new List<string>();
 		[SerializeField] private int _version = 0;
 
-		public int Version
+		public List<string> Tags => _tags.List;
+		public IReadOnlyList<string> Names => _names;
+		public int Version => _version;
+
+		public int EntryCount => _entries.Count;
+		public bool HasEntry(string name) => TryGetEntry(name, out _);
+		public VariableSchemaEntry GetEntry(string name) => TryGetEntry(name, out var entry) ? entry : null;
+		public VariableSchemaEntry GetEntry(int index) => TryGetEntry(index, out var entry) ? entry : null;
+
+		public bool TryGetEntry(string name, out VariableSchemaEntry entry)
 		{
-			get { return _version; }
+			if (TryGetIndex(name, out var index))
+			{
+				entry = _entries[index];
+				return true;
+			}
+
+			entry = null;
+			return false;
 		}
 
-		public int Count
+		public bool TryGetEntry(int index, out VariableSchemaEntry entry)
 		{
-			get { return _entries.Count; }
-		}
+			if (index >= 0 && index < _entries.Count)
+			{
+				entry = _entries[index];
+				return true;
+			}
 
-		public IReadOnlyList<string> Names
-		{
-			get => _entries.Select(e => e.Definition.Name).ToList(); // TODO: cache
+			entry = null;
+			return false;
 		}
 
 		public bool TryGetIndex(string name, out int index)
@@ -77,81 +75,94 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public Entry GetEntry(int index)
+		public bool AddEntry(string name)
 		{
-			return index >= 0 && index < _entries.Count
-				? _entries[index]
-				: null;
+			if (!string.IsNullOrEmpty(name) && !HasEntry(name))
+			{
+				_entries.Add(new VariableSchemaEntry()
+				{
+					Tag = _tags.Count > 0 ? _tags[0] : string.Empty,
+					Initializer = new Expression(),
+					Definition = new VariableDefinition(name, VariableType.Empty)
+				});
+
+				EntriesChanged();
+				return true;
+			}
+
+			return false;
 		}
 
-		public string GetName(int index)
+		public bool RemoveEntry(int index)
 		{
-			return index >= 0 && index < _entries.Count
-				? _entries[index].Definition.Name
-				: string.Empty;
+			if (index >= 0 && index < _entries.Count)
+			{
+				_entries.RemoveAt(index);
+				EntriesChanged();
+				return true;
+			}
+
+			return false;
 		}
 
-		public string GetTag(int index)
+		public bool MoveEntry(int from, int to)
 		{
-			return index >= 0 && index < _entries.Count
-				? _entries[index].Tag
-				: string.Empty;
+			if (from >= 0 && from < _entries.Count && to >= 0 && to < _entries.Count)
+			{
+				var entry = _entries[from];
+				_entries.RemoveAt(from);
+				_entries.Insert(from < to ? to - 1 : to, entry);
+
+				EntriesChanged();
+				return true;
+			}
+
+			return false;
 		}
 
-		public VariableDefinition GetDefinition(int index)
+		public void EntryChanged(int index)
 		{
-			return index >= 0 && index < _entries.Count
-				? _entries[index].Definition
-				: null;
+			EntriesChanged();
 		}
 
-		public Variable Generate(IVariableCollection store, int index)
+		private void EntriesChanged()
 		{
-			return index >= 0 && index < _entries.Count
-				? _entries[index].GenerateValue(store)
-				: Variable.Empty;
+			_names = _entries.Select(entry => entry.Definition.Name).ToList();
+			_version++;
 		}
 
-		public bool IsValid(int index, Variable value)
-		{
-			return index >= 0 && index < _entries.Count
-				? _entries[index].Definition.IsValid(value)
-				: false;
-		}
-
-		public bool HasDefinition(string name)
-		{
-			return TryGetIndex(name, out _);
-		}
-
-		public bool AddDefinition(string name, VariableType type)
-		{
-			if (string.IsNullOrEmpty(name) || HasDefinition(name))
-				return false;
-
-			_entries.Add(new Entry() { Definition = new VariableDefinition(name, type) });
-			IncrementVersion();
-			return true;
-		}
-
-		public void RemoveDefinition(int index)
-		{
-			_entries.RemoveAt(index);
-			IncrementVersion();
-		}
-
-		private void ValidateTags()
+		private void TagsChanged()
 		{
 			foreach (var entry in _entries)
 			{
-				if (!Tags.Contains(entry.Tag))
-					entry.Tag = Tags.Count > 0 ? Tags[0] : string.Empty;
+				if (!_tags.Contains(entry.Tag))
+					entry.Tag = _tags.Count > 0 ? _tags[0] : string.Empty;
 			}
 		}
+	}
 
-		private void IncrementVersion()
+	[Serializable]
+	public class VariableSchemaEntry
+	{
+		private const string _invalidInitializerError = "(PCVSEII) failed to initialize variable '{0}' using collection '{1}': the generated variable is type '{2}' and does not match the definition '{3}'";
+
+		public string Tag;
+		public Expression Initializer;
+		public VariableDefinition Definition;
+
+		public Variable GenerateVariable(IVariableCollection variables)
 		{
-			_version++;
+			if (Initializer != null && Initializer.IsValid)
+			{
+				var value = Initializer.Execute(variables as Object, variables);
+
+				if (!Definition.IsValid(value))
+					return value;
+
+				Debug.LogErrorFormat(_invalidInitializerError, Definition.Name, variables, value.Type, Definition.Description);
+			}
+
+			return Definition.Generate();
 		}
 	}
 }

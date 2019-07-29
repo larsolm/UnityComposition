@@ -159,12 +159,12 @@ namespace PiRhoSoft.Composition
 
 		void ISerializationCallbackReceiver.OnBeforeSerialize()
 		{
-			_variablesData.SaveInstance(this, 1);
+			_variablesData.SaveData(this, 1);
 		}
 
 		void ISerializationCallbackReceiver.OnAfterDeserialize()
 		{
-			_variablesData.LoadInstance(this);
+			_variablesData.LoadData(this);
 		}
 
 		void ISerializableData.Save(BinaryWriter writer, SerializedData data)

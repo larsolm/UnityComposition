@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition.Editor
 		private static readonly Icon _simpleIcon = Icon.BuiltIn("d_CustomSorting");
 		private static readonly Icon _advancedIcon = Icon.BuiltIn("CustomSorting");
 
-		public VariableSchema.Entry Value;
+		public VariableSchemaEntry Value;
 		public List<string> Tags;
 
 		private VariableDefinitionControl _definitionControl;
@@ -21,7 +21,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private bool _advancedMode = false;
 
-		public VariableSchemaEntryControl(List<string> tags, VariableSchema.Entry value)
+		public VariableSchemaEntryControl(List<string> tags, VariableSchemaEntry value)
 		{
 			Value = value;
 			Tags = tags;

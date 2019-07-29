@@ -29,6 +29,11 @@ namespace PiRhoSoft.Composition
 			EnumType = type;
 		}
 
+		public override string ToString()
+		{
+			return _enumType.Name;
+		}
+
 		public override Variable Generate()
 		{
 			var values = EnumType.GetEnumValues();

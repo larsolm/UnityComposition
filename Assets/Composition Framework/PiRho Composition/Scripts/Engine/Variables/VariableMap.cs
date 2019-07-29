@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Reflection;
 
@@ -166,6 +167,152 @@ namespace PiRhoSoft.Composition
 			for (var i = 0; i < map._properties.Count; i++)
 				AddProperty(map._names[i], map._properties[i]);
 		}
+
+		#region Adapters
+
+		private class ListAdapter : IVariableList
+		{
+			private IList _list;
+
+			private bool _allowSet;
+			private bool _allowAdd;
+			private bool _allowRemove;
+
+			public ListAdapter(IList list)
+			{
+				_list = list;
+
+				_allowSet = !list.IsReadOnly;
+				_allowAdd = !list.IsReadOnly && !list.IsFixedSize;
+				_allowRemove = !list.IsReadOnly && !list.IsFixedSize;
+			}
+
+			public int VariableCount => _list.Count;
+
+			public Variable GetVariable(int index)
+			{
+				if (index >= 0 && index <= VariableCount)
+					return Get(index);
+				else
+					return Variable.Empty;
+			}
+
+			public SetVariableResult SetVariable(int index, Variable value)
+			{
+				if (!_allowSet)
+				{
+					return SetVariableResult.ReadOnly;
+				}
+				else if (index >= 0 && index <= VariableCount)
+				{
+					try
+					{
+						Set(index, value);
+						return SetVariableResult.Success;
+					}
+					catch
+					{
+						return SetVariableResult.TypeMismatch;
+					}
+				}
+
+				return SetVariableResult.NotFound;
+			}
+
+			public SetVariableResult AddVariable(Variable value)
+			{
+				if (!_allowAdd)
+					return SetVariableResult.ReadOnly;
+
+				try
+				{
+					if (Add(value))
+						return SetVariableResult.Success;
+				}
+				catch
+				{
+				}
+
+				return SetVariableResult.TypeMismatch;
+			}
+
+			public SetVariableResult RemoveVariable(int index)
+			{
+				if (!_allowRemove)
+					return SetVariableResult.ReadOnly;
+
+				if (index >= 0 && index <= VariableCount)
+				{
+					Remove(index);
+					return SetVariableResult.Success;
+				}
+
+				return SetVariableResult.NotFound;
+			}
+
+			protected Variable Get(int index) => Variable.Unbox(_list[index]);
+			protected void Set(int index, Variable value) => _list[index] = value.Box();
+			protected bool Add(Variable value) => _list.Add(value.Box()) >= 0;
+			protected void Remove(int index) => _list.RemoveAt(index);
+		}
+
+		private class DictionaryAdapter : IVariableDictionary
+		{
+			private IDictionary _dictionary;
+
+			private bool _allowSet;
+			private bool _allowAdd;
+			private bool _allowRemove;
+
+			public DictionaryAdapter(IDictionary dictionary)
+			{
+				_dictionary = dictionary;
+
+				_allowSet = !dictionary.IsReadOnly;
+				_allowAdd = !dictionary.IsReadOnly && !dictionary.IsFixedSize;
+				_allowRemove = !dictionary.IsReadOnly && !dictionary.IsFixedSize;
+			}
+
+			public VariableSchema Schema => null;
+			public IReadOnlyList<string> VariableNames => (IReadOnlyList<string>)_dictionary.Keys;
+
+			public Variable GetVariable(string name)
+			{
+				if (_dictionary.Contains(name))
+					return Get(name);
+				else
+					return Variable.Empty;
+			}
+
+			public SetVariableResult SetVariable(string name, Variable value)
+			{
+				if (!_allowSet)
+				{
+					return SetVariableResult.ReadOnly;
+				}
+				else if (_dictionary.Contains(name))
+				{
+					try
+					{
+						Set(name, value);
+						return SetVariableResult.Success;
+					}
+					catch
+					{
+						return SetVariableResult.TypeMismatch;
+					}
+				}
+
+				return SetVariableResult.NotFound;
+			}
+
+			protected Variable Get(string key) => Variable.Unbox(_dictionary[key]);
+			protected void Set(string key, Variable value) => _dictionary[key] = value.Box();
+			protected void Add(string key, Variable value) => _dictionary.Add(key, value.Box());
+			protected void Remove(string key) => _dictionary.Remove(key);
+		}
+
+		#endregion
 	}
 
 	public abstract class VariableMap<T> : VariableMap

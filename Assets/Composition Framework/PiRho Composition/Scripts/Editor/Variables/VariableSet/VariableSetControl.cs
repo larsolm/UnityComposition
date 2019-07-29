@@ -60,19 +60,18 @@ namespace PiRhoSoft.Composition.Editor
 			public VisualElement CreateElement(int index)
 			{
 				var container = new VisualElement();
-				var name = Variables.Schema.GetName(index);
+				var entry = Variables.Schema.GetEntry(index);
 				var value = Variables.GetVariable(index);
-				var entry = Variables.Schema != null && index < Variables.Schema.Count ? Variables.Schema.GetDefinition(index) : null;
 				
 				if (entry != null && Variables.Owner != null)
 				{
-					var field = new VariableField(name, value, entry);
+					var field = new VariableField(entry.Definition.Name, value, entry.Definition);
 					field.RegisterCallback<ChangeEvent<Variable>>(evt => {	Variables.SetVariable(index, value); });
 					container.Add(field);
 					
 					var refreshButton = new IconButton(Icon.Refresh.Texture, "Re-compute this variable based on the schema initializer", () =>
 					{
-						var newValue = Variables.Schema.Generate(Variables.Owner, index);
+						var newValue = entry.GenerateVariable(Variables.Owner);
 						field.value = newValue;
 					});
 					

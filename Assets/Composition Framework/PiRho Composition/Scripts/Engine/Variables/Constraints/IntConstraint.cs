@@ -21,6 +21,11 @@ namespace PiRhoSoft.Composition
 			Maximum = maximum;
 		}
 
+		public override string ToString()
+		{
+			return string.Format($"{Minimum?.ToString() ?? string.Empty},{Maximum?.ToString() ?? string.Empty}");
+		}
+
 		public override Variable Generate()
 		{
 			var minimum = Minimum ?? 0;

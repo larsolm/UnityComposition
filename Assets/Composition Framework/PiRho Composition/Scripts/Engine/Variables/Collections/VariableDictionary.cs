@@ -78,12 +78,12 @@ namespace PiRhoSoft.Composition
 
 			if (Schema != null)
 			{
-				for (var i = 0; i < Schema.Count; i++)
+				for (var i = 0; i < Schema.EntryCount; i++)
 				{
-					var name = Schema.GetName(i);
-					var value = Schema.Generate(null, i);
+					var entry = Schema.GetEntry(i);
+					var value = entry.GenerateVariable(null);
 
-					AddVariable(name, i, value);
+					AddVariable(entry.Definition.Name, i, value);
 				}
 			}
 		}

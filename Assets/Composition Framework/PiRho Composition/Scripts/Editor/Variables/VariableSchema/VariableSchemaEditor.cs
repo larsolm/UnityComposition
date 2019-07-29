@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreateInspectorGUI()
 		{
-			var tagsProperty = serializedObject.FindProperty(nameof(VariableSchema.Tags));
+			var tagsProperty = serializedObject.FindProperty(VariableSchema.TagsField);
 			var tagsControl = new PropertyField(tagsProperty, tagsProperty.displayName);
 
 			var schema = target as VariableSchema;
@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			private VariableSchema _schema;
 
-			public override int KeyCount => _schema.Count;
+			public override int KeyCount => _schema.EntryCount;
 
 			public DefinitionsProxy(VariableSchema schema)
 			{
@@ -39,13 +39,13 @@ namespace PiRhoSoft.Composition.Editor
 			public override VisualElement CreateField(int index)
 			{
 				var entry = _schema.GetEntry(index);
-				var control = new VariableSchemaEntryControl(_schema.Tags.List, entry) { userData = index };
+				var control = new VariableSchemaEntryControl(_schema.Tags, entry) { userData = index };
 				return control;
 			}
 
 			public override bool IsKeyValid(string key)
 			{
-				return !_schema.HasDefinition(key);
+				return !_schema.HasEntry(key);
 			}
 
 			public override bool NeedsUpdate(VisualElement item, int index)
@@ -55,12 +55,12 @@ namespace PiRhoSoft.Composition.Editor
 
 			public override void AddItem(string key)
 			{
-				_schema.AddDefinition(key, VariableType.Empty);
+				_schema.AddEntry(key);
 			}
 
 			public override void RemoveItem(int index)
 			{
-				_schema.RemoveDefinition(index);
+				_schema.RemoveEntry(index);
 			}
 		}
 	}

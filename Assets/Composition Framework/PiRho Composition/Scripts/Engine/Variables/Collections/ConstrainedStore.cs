@@ -68,7 +68,9 @@ namespace PiRhoSoft.Composition
 
 		private SetVariableResult UpdateVariable(int index, Variable value)
 		{
-			if (Schema.IsValid(index, value))
+			var entry = Schema.GetEntry(index);
+
+			if (entry.Definition.IsValid(value))
 			{
 				_variables[index] = value;
 				return SetVariableResult.Success;
@@ -85,11 +87,8 @@ namespace PiRhoSoft.Composition
 			{
 				for (var i = 0; i < _variables.Count; i++)
 				{
-					if (Schema.GetTag(i) == tag)
-					{
-						var name = Schema.GetName(i);
-						variables.SetVariable(name, _variables[i]);
-					}
+					if (Schema.TryGetEntry(i, out var entry) && entry.Tag == tag)
+						variables.SetVariable(entry.Definition.Name, _variables[i]);
 				}
 			}
 		}
@@ -100,12 +99,11 @@ namespace PiRhoSoft.Composition
 			{
 				for (var i = 0; i < _variables.Count; i++)
 				{
-					if (Schema.GetTag(i) == tag)
+					if (Schema.TryGetEntry(i, out var entry) && entry.Tag == tag)
 					{
-						var name = Schema.GetName(i);
-						var variable = variables.GetVariable(name);
+						var variable = variables.GetVariable(entry.Definition.Name);
 
-						if (Schema.IsValid(i, variable))
+						if (entry.Definition.IsValid(variable))
 							_variables[i] = variable;
 					}
 				}
@@ -130,12 +128,12 @@ namespace PiRhoSoft.Composition
 		{
 			if (NeedsUpdate)
 			{
-				var variables = new List<Variable>(Schema.Count);
+				var variables = new List<Variable>(Schema.EntryCount);
 
-				for (var i = 0; i < Schema.Count; i++)
+				for (var i = 0; i < Schema.EntryCount; i++)
 				{
-					var name = Schema.GetName(i);
-					var variable = GetVariable(name);
+					var entry = Schema.GetEntry(i);
+					var variable = GetVariable(entry.Definition.Name);
 
 					variables.Add(variable);
 				}
@@ -143,21 +141,23 @@ namespace PiRhoSoft.Composition
 				_variables = variables;
 				_schemaVersion = Schema.Version;
 
-				for (var i = 0; i < Schema.Count; i++)
+				for (var i = 0; i < Schema.EntryCount; i++)
 				{
+					var entry = Schema.GetEntry(i);
+
 					// the list must be updated completely first before any initializers are run in case the schema has
 					// any initializers that reference other variables on the same list.
 
-					if (!Schema.IsValid(i, _variables[i]))
-						_variables[i] = Schema.Generate(Owner, i);
+					if (!entry.Definition.IsValid(_variables[i]))
+						_variables[i] = entry.GenerateVariable(Owner);
 				}
 			}
 		}
 
 		private void ResetVariable(int index)
 		{
-			if (Schema != null)
-				_variables[index] = Schema.Generate(Owner, index);
+			if (Schema != null && Schema.TryGetEntry(index, out var entry))
+				_variables[index] = entry.GenerateVariable(Owner);
 		}
 
 		public void Clear()
@@ -176,7 +176,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (Schema != null)
 			{
-				for (var i = 0; i < Schema.Count; i++)
+				for (var i = 0; i < Schema.EntryCount; i++)
 					ResetVariable(i);
 			}
 		}
@@ -185,9 +185,11 @@ namespace PiRhoSoft.Composition
 		{
 			if (Schema != null)
 			{
-				for (var i = 0; i < Schema.Count; i++)
+				for (var i = 0; i < Schema.EntryCount; i++)
 				{
-					if (Schema.GetTag(i) == tag)
+					var entry = Schema.GetEntry(i);
+
+					if (entry.Tag == tag)
 						ResetVariable(i);
 				}
 			}
@@ -197,9 +199,11 @@ namespace PiRhoSoft.Composition
 		{
 			if (Schema != null)
 			{
-				for (var i = 0; i < Schema.Count; i++)
+				for (var i = 0; i < Schema.EntryCount; i++)
 				{
-					if (variables.Contains(Schema.GetName(i)))
+					var entry = Schema.GetEntry(i);
+
+					if (variables.Contains(entry.Definition.Name))
 						ResetVariable(i);
 				}
 			}
@@ -211,12 +215,12 @@ namespace PiRhoSoft.Composition
 
 		void ISerializationCallbackReceiver.OnBeforeSerialize()
 		{
-			_variablesData.SaveInstance(this, 1);
+			_variablesData.SaveData(this, 1);
 		}
 
 		void ISerializationCallbackReceiver.OnAfterDeserialize()
 		{
-			_variablesData.LoadInstance(this);
+			_variablesData.LoadData(this);
 		}
 
 		void ISerializableData.Save(BinaryWriter writer, SerializedData data)
