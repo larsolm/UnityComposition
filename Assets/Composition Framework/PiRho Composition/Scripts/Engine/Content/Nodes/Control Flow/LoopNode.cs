@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Loop", 20)]
-	[HelpURL(Composition.DocumentationUrl + "loop-node")]
+	[HelpURL(Configuration.DocumentationUrl + "loop-node")]
 	public class LoopNode : GraphNode, ILoopNode
 	{
 		[Tooltip("The node to repeatedly go to while Condition evaluates to true")]

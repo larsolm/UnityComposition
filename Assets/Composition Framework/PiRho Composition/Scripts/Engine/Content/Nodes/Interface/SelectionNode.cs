@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 
 	[Serializable] public class SelectionNodeItemList : SerializedList<SelectionNodeItem> { }
 
-	[HelpURL(Composition.DocumentationUrl + "selection-node")]
+	[HelpURL(Configuration.DocumentationUrl + "selection-node")]
 	[CreateGraphNodeMenu("Interface/Show Selection", 2)]
 	public class SelectionNode : GraphNode
 	{

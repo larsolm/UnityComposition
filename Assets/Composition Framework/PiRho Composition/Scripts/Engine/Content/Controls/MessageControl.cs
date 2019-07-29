@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "message-control")]
+	[HelpURL(Configuration.DocumentationUrl + "message-control")]
 	[AddComponentMenu("PiRho Soft/Interface/Message Control")]
 	public class MessageControl : InterfaceControl
 	{

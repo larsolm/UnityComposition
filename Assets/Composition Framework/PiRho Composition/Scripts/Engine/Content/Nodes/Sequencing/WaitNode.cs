@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Wait", 300)]
-	[HelpURL(Composition.DocumentationUrl + "wait-node")]
+	[HelpURL(Configuration.DocumentationUrl + "wait-node")]
 	public class WaitNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

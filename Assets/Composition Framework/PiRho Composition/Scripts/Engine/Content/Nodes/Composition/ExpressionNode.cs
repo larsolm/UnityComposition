@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Expression", 0)]
-	[HelpURL(Composition.DocumentationUrl + "expression-node")]
+	[HelpURL(Configuration.DocumentationUrl + "expression-node")]
 	public class ExpressionNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

@@ -36,7 +36,7 @@ namespace PiRhoSoft.Composition
 
 	[Serializable] public class InputNodeButtonList : SerializedList<InputNodeButton> { }
 
-	[HelpURL(Composition.DocumentationUrl + "input-node")]
+	[HelpURL(Configuration.DocumentationUrl + "input-node")]
 	[CreateGraphNodeMenu("Interface/Input", 3)]
 	public class InputNode : GraphNode
 	{

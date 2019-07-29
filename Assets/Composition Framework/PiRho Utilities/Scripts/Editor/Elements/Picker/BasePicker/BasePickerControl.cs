@@ -36,7 +36,7 @@ namespace PiRhoSoft.Utilities.Editor
 			Add(button);
 			SetValueWithoutNotify(value);
 
-			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
+			this.AddStyleSheet(Configuration.ElementsPath, Stylesheet);
 			AddToClassList(UssClassName);
 		}
 

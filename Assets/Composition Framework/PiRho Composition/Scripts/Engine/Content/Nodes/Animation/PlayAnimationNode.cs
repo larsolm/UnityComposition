@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 	public class AnimationClipVariableSource : VariableSource<AnimationClip> { }
 
 	[CreateGraphNodeMenu("Animation/Play Animation", 0)]
-	[HelpURL(Composition.DocumentationUrl + "play-animation-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-animation-node")]
 	public class PlayAnimationNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

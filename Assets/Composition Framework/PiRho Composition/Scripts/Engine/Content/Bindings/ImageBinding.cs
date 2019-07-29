@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Image))]
-	[HelpURL(Composition.DocumentationUrl + "image-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "image-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Image Binding")]
 	public class ImageBinding : VariableBinding
 	{

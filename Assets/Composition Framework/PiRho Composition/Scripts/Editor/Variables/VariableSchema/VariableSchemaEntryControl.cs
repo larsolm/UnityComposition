@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public VariableSchemaEntryControl(List<string> tags, VariableSchemaEntry value)
 		{
-			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			Value = value;

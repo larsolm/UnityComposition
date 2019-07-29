@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Branch", 1)]
-	[HelpURL(Composition.DocumentationUrl + "branch-node")]
+	[HelpURL(Configuration.DocumentationUrl + "branch-node")]
 	public class BranchNode : GraphNode
 	{
 		[Tooltip("The expression to evaluate to determine which node to follow")]

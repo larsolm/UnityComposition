@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Destroy Object", 2)]
-	[HelpURL(Composition.DocumentationUrl + "destroy-object-node")]
+	[HelpURL(Configuration.DocumentationUrl + "destroy-object-node")]
 	public class DestroyObjectNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

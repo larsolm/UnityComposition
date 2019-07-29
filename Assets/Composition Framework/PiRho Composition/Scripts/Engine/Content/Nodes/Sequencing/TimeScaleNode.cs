@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Time Scale", 250)]
-	[HelpURL(Composition.DocumentationUrl + "time-scale-node")]
+	[HelpURL(Configuration.DocumentationUrl + "time-scale-node")]
 	public class TimeScaleNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

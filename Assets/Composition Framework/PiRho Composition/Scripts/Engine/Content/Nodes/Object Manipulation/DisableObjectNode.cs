@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Disable Object", 21)]
-	[HelpURL(Composition.DocumentationUrl + "disable-object-node")]
+	[HelpURL(Configuration.DocumentationUrl + "disable-object-node")]
 	public class DisableObjectNode : GraphNode
 	{
 		private const string _invalidObjectWarning = "(CDONIO) Unable to disable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";

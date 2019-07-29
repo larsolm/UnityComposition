@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "hide-control-node")]
+	[HelpURL(Configuration.DocumentationUrl + "hide-control-node")]
 	[CreateGraphNodeMenu("Interface/Hide Control", 102)]
 	public class HideControlNode : GraphNode
 	{

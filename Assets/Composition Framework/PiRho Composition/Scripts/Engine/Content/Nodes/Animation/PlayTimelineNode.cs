@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 	public class TimelineVariableSource : VariableSource<TimelineAsset> { }
 
 	[CreateGraphNodeMenu("Animation/Play Timeline", 200)]
-	[HelpURL(Composition.DocumentationUrl + "play-timeline-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-timeline-node")]
 	public class PlayTimelineNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

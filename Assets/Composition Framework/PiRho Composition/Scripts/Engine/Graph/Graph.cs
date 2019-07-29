@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "graph")]
+	[HelpURL(Configuration.DocumentationUrl + "graph")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Graph", fileName = nameof(Graph), order = 100)]
 	public class Graph : ScriptableObject
 	{

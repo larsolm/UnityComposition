@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "button-input")]
+	[HelpURL(Configuration.DocumentationUrl + "button-input")]
 	[AddComponentMenu("PiRho Soft/Interface/Button Input")]
 	public class ButtonInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	{

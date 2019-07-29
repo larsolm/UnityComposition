@@ -3,7 +3,7 @@
 namespace PiRhoSoft.Composition
 {
 	[CreateAssetMenu(menuName = "PiRho Soft/Transitions/Fade", fileName = nameof(FadeTransition), order = 309)]
-	[HelpURL(Composition.DocumentationUrl + "fade-transition")]
+	[HelpURL(Configuration.DocumentationUrl + "fade-transition")]
 	public class FadeTransition : CutoffTransition
 	{
 		[Tooltip("The color to fade to")]

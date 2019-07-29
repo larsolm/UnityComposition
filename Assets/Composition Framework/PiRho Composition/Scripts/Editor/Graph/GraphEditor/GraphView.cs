@@ -491,7 +491,7 @@ namespace PiRhoSoft.Composition.Editor
 			_window = window;
 			_graphProvider = ScriptableObject.CreateInstance<GraphProvider>();
 
-			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			CreateToolbar();

@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "start-graph-trigger")]
+	[HelpURL(Configuration.DocumentationUrl + "start-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Start Graph Trigger")]
 	public sealed class StartGraphTrigger : GraphTrigger
 	{

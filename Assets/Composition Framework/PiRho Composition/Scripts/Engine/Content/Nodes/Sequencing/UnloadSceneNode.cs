@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Unload Scene", 101)]
-	[HelpURL(Composition.DocumentationUrl + "unload-scene-node")]
+	[HelpURL(Configuration.DocumentationUrl + "unload-scene-node")]
 	public sealed class UnloadSceneNode : GraphNode
 	{
 		private const string _invalidIndexError = "(CUSNII) Unable to unload scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Iterate", 21)]
-	[HelpURL(Composition.DocumentationUrl + "iterate-node")]
+	[HelpURL(Configuration.DocumentationUrl + "iterate-node")]
 	public class IterateNode : GraphNode, ILoopNode
 	{
 		[Tooltip("The variable list containing the objects to iterate")]

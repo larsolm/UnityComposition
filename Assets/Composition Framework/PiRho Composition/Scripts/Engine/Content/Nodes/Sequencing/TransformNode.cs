@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Transform Object", 200)]
-	[HelpURL(Composition.DocumentationUrl + "transform-node")]
+	[HelpURL(Configuration.DocumentationUrl + "transform-node")]
 	public class TransformNode : GraphNode
 	{
 		public enum AnimationType

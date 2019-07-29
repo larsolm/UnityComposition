@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 	public class SortConditionList : SerializedList<VariableReference> { }
 
 	[CreateGraphNodeMenu("Composition/Sort", 21)]
-	[HelpURL(Composition.DocumentationUrl + "sort-node")]
+	[HelpURL(Configuration.DocumentationUrl + "sort-node")]
 	public class SortNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

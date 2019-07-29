@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Load Scene", 100)]
-	[HelpURL(Composition.DocumentationUrl + "load-scene-node")]
+	[HelpURL(Configuration.DocumentationUrl + "load-scene-node")]
 	public sealed class LoadSceneNode : GraphNode
 	{
 		private const string _invalidIndexError = "(CLSNII) Unable to load scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";

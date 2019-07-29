@@ -20,7 +20,7 @@ namespace PiRhoSoft.Utilities.Editor
 			if (property.propertyType == SerializedPropertyType.String || property.propertyType == SerializedPropertyType.ObjectReference)
 			{
 				var required = new VisualElement();
-				required.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
+				required.AddStyleSheet(Configuration.ElementsPath, Stylesheet);
 				required.AddToClassList(UssClassName);
 
 				var requiredAttribute = attribute as RequiredAttribute;

@@ -6,7 +6,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Image))]
-	[HelpURL(Composition.DocumentationUrl + "bar-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "bar-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Bar Binding")]
 	public class BarBinding : VariableBinding
 	{

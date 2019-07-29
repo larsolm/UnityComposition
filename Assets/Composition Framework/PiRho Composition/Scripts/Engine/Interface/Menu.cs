@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "menu")]
+	[HelpURL(Configuration.DocumentationUrl + "menu")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu")]
 	public class Menu : MonoBehaviour, IVariableCollection
 	{

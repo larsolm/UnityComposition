@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Sequence", 10)]
-	[HelpURL(Composition.DocumentationUrl + "sequence-node")]
+	[HelpURL(Configuration.DocumentationUrl + "sequence-node")]
 	public class SequenceNode : GraphNode, ISequenceNode
 	{
 		private const string _invalidSequenceError = "(CSQIS) Unable to run sequence for node '{0}': index '{1}' has no connection";

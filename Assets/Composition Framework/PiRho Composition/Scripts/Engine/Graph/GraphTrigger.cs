@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "graph-trigger")]
+	[HelpURL(Configuration.DocumentationUrl + "graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Graph Trigger")]
 	public class GraphTrigger : MonoBehaviour
 	{

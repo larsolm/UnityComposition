@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "variable-pool-asset")]
+	[HelpURL(Configuration.DocumentationUrl + "variable-pool-asset")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Pool", fileName = nameof(VariablePoolAsset), order = 114)]
 	public class VariablePoolAsset : ScriptableObject, IVariableCollection
 	{

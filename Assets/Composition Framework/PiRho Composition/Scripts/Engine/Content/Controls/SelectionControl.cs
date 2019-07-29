@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "selection-control")]
+	[HelpURL(Configuration.DocumentationUrl + "selection-control")]
 	[RequireComponent(typeof(Menu))]
 	public class SelectionControl : InterfaceControl
 	{

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Yield", 23)]
-	[HelpURL(Composition.DocumentationUrl + "yield-node")]
+	[HelpURL(Configuration.DocumentationUrl + "yield-node")]
 	public class YieldNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

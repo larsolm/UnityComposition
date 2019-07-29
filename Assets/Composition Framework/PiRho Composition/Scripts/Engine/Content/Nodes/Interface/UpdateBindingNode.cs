@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "update-binding-node")]
+	[HelpURL(Configuration.DocumentationUrl + "update-binding-node")]
 	[CreateGraphNodeMenu("Interface/Update Binding", 301)]
 	public class UpdateBindingNode : GraphNode
 	{

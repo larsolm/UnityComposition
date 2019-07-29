@@ -20,6 +20,24 @@ namespace PiRhoSoft.Composition
 		}
 	}
 
+	public class MappedCollectionAttribute : MappedVariableAttribute
+	{
+		public bool AllowAdd { get; private set; }
+		public bool AllowRemove { get; private set; }
+
+		MappedCollectionAttribute() : base(true)
+		{
+			AllowAdd = true;
+			AllowRemove = true;
+		}
+
+		MappedCollectionAttribute(bool allowAdd, bool allowRemove) : base(true)
+		{
+			AllowAdd = allowAdd;
+			AllowRemove = allowRemove;
+		}
+	}
+
 	public abstract class VariableMap
 	{
 		private static Dictionary<Type, VariableMap> _maps = new Dictionary<Type, VariableMap>();
@@ -40,7 +58,7 @@ namespace PiRhoSoft.Composition
 
 		public static VariableMap Get(Type type)
 		{
-			if (!_maps.TryGetValue(type, out VariableMap map))
+			if (!_maps.TryGetValue(type, out VariableMap map) && Configuration.AutoCreateVariableMaps)
 			{
 				map = new ReflectedMap(type);
 				_maps.Add(type, map);

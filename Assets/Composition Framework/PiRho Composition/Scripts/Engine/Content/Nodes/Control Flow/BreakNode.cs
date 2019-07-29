@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Break", 22)]
-	[HelpURL(Composition.DocumentationUrl + "break-node")]
+	[HelpURL(Configuration.DocumentationUrl + "break-node")]
 	public class BreakNode : GraphNode
 	{
 		public override Color NodeColor => Colors.Break;

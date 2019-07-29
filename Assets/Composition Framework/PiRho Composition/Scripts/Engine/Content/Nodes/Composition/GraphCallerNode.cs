@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Graph Caller", 1)]
-	[HelpURL(Composition.DocumentationUrl + "graph-caller-node")]
+	[HelpURL(Configuration.DocumentationUrl + "graph-caller-node")]
 	public class GraphCallerNode : GraphNode
 	{
 		public enum GraphSource

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "comment-node")]
+	[HelpURL(Configuration.DocumentationUrl + "comment-node")]
 	[CreateGraphNodeMenu("Debug/Comment", 400)]
 	public class CommentNode : GraphNode
 	{

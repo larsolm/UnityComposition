@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "enable-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "enable-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Enable Binding")]
 	public class EnableBinding : VariableBinding
 	{

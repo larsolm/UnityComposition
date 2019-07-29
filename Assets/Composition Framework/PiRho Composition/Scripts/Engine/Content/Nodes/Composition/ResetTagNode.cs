@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Reset Tag", 31)]
-	[HelpURL(Composition.DocumentationUrl + "reset-tag-node")]
+	[HelpURL(Configuration.DocumentationUrl + "reset-tag-node")]
 	public class ResetTagNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

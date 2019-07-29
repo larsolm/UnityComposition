@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public WatchWindowElement()
 		{
-			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			var container = new VisualElement();

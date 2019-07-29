@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "variable-pool-component")]
+	[HelpURL(Configuration.DocumentationUrl + "variable-pool-component")]
 	[AddComponentMenu("PiRho Soft/Composition/Variable Pool Component")]
 	public class VariablePoolComponent : MonoBehaviour, IVariableCollection
 	{

@@ -95,7 +95,7 @@ namespace PiRhoSoft.Composition
 		Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters);
 	}
 
-	[HelpURL(Composition.DocumentationUrl + "command")]
+	[HelpURL(Configuration.DocumentationUrl + "command")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Command", fileName = nameof(Command), order = 125)]
 	public sealed class Command : ScriptableObject, ICommand
 	{

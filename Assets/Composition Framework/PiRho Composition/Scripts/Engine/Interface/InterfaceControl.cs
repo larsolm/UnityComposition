@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition
 	public class DependentObjectList : SerializedList<GameObject> { }
 
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "interface-control")]
+	[HelpURL(Configuration.DocumentationUrl + "interface-control")]
 	[AddComponentMenu("PiRho Soft/Interface/Interface Control")]
 	public class InterfaceControl : MonoBehaviour
 	{

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
+	[HelpURL(Configuration.DocumentationUrl + "composition-manager")]
 	public sealed class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
 		private class DefaultGlobalStore : IVariableCollection

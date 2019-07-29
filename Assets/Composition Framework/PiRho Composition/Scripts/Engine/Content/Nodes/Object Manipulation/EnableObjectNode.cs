@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Enable Object", 20)]
-	[HelpURL(Composition.DocumentationUrl + "enable-object-node")]
+	[HelpURL(Configuration.DocumentationUrl + "enable-object-node")]
 	public class EnableObjectNode : GraphNode
 	{
 		private const string _invalidObjectWarning = "(CEONIO) Unable to enable object for node '{0)': the object '{1}' is not a GameObject, Behaviour, or Renderer";

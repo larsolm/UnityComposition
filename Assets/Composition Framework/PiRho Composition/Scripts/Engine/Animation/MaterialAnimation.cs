@@ -6,7 +6,7 @@ namespace PiRhoSoft.Composition
 	[ExecuteInEditMode]
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Renderer))]
-	[HelpURL(Composition.DocumentationUrl + "material-animation")]
+	[HelpURL(Configuration.DocumentationUrl + "material-animation")]
 	[AddComponentMenu("PiRho Soft/Animation/Material Animation")]
 	public class MaterialAnimation : MonoBehaviour, ICompletionNotifier
 	{

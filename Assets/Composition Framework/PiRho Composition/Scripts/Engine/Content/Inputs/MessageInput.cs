@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "message-input")]
+	[HelpURL(Configuration.DocumentationUrl + "message-input")]
 	[AddComponentMenu("PiRho Soft/Interface/Message Input")]
 	[RequireComponent(typeof(MessageControl))]
 	public class MessageInput : MonoBehaviour

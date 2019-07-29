@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "log-node")]
+	[HelpURL(Configuration.DocumentationUrl + "log-node")]
 	[CreateGraphNodeMenu("Debug/Log", 400)]
 	public class LogNode : GraphNode
 	{

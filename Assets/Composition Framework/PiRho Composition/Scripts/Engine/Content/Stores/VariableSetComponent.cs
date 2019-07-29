@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "variable-set-component")]
+	[HelpURL(Configuration.DocumentationUrl + "variable-set-component")]
 	[AddComponentMenu("PiRho Soft/Composition/Variable Set Component")]
 	public class VariableSetComponent : MonoBehaviour, IVariableCollection, IResettableVariables
 	{

@@ -16,7 +16,7 @@ namespace PiRhoSoft.Utilities.Editor
 			this.AddManipulator(new Clickable(action));
 
 			AddToClassList(UssClassName);
-			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
+			this.AddStyleSheet(Configuration.ElementsPath, Stylesheet);
 		}
 	}
 }

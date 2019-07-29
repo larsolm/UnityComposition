@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Image))]
-	[HelpURL(Composition.DocumentationUrl + "image-color-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "image-color-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Image Color Binding")]
 	public class ImageColorBinding : VariableBinding
 	{

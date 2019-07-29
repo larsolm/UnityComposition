@@ -34,7 +34,7 @@ namespace PiRhoSoft.Utilities.Editor
 			Rebuild();
 
 			AddToClassList(UssClassName);
-			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
+			this.AddStyleSheet(Configuration.ElementsPath, Stylesheet);
 		}
 
 		public void SetValueWithoutNotify(Enum value)

@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 	public class AudioClipVariableSource : VariableSource<AudioClip> { }
 
 	[CreateGraphNodeMenu("Animation/Play Sound", 101)]
-	[HelpURL(Composition.DocumentationUrl + "play-sound-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-sound-node")]
 	public class PlaySoundNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

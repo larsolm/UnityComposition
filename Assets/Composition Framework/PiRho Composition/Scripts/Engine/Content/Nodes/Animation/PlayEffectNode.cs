@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Animation/Play Effect", 100)]
-	[HelpURL(Composition.DocumentationUrl + "play-effect-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-effect-node")]
 	public class PlayEffectNode : GraphNode
 	{
 		public enum ObjectPositioning

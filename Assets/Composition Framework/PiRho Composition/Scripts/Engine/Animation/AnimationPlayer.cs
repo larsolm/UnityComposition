@@ -7,7 +7,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Animator))]
-	[HelpURL(Composition.DocumentationUrl + "animation-player")]
+	[HelpURL(Configuration.DocumentationUrl + "animation-player")]
 	[AddComponentMenu("PiRho Soft/Animation/Animation Player")]
 	public class AnimationPlayer : MonoBehaviour, ICompletionNotifier
 	{

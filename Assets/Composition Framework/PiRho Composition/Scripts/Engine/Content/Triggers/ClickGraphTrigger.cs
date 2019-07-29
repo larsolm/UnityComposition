@@ -3,7 +3,7 @@ using UnityEngine.EventSystems;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "click-graph-trigger")]
+	[HelpURL(Configuration.DocumentationUrl + "click-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Click Graph Trigger")]
 	public class ClickGraphTrigger : GraphTrigger, IPointerDownHandler, IPointerUpHandler
 	{

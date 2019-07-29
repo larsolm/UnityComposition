@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "focus-binding-root")]
+	[HelpURL(Configuration.DocumentationUrl + "focus-binding-root")]
 	[AddComponentMenu("PiRho Soft/Bindings/Focus Binding Root")]
 	public class FocusBindingRoot : BindingRoot
 	{
