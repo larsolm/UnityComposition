@@ -7,7 +7,7 @@ namespace PiRhoSoft.Composition
 	[AddComponentMenu("PiRho Soft/Composition/Variable Pool Component")]
 	public class VariablePoolComponent : MonoBehaviour, IVariableCollection
 	{
-		public OpenStore Variables = new OpenStore();
+		public CustomVariableCollection Variables = new CustomVariableCollection();
 
 		#region IVariableStore Implementation
 

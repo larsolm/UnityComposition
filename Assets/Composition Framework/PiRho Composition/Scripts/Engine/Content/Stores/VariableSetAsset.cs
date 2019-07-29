@@ -13,10 +13,10 @@ namespace PiRhoSoft.Composition
 		[SerializeField]
 		private VariableSchema _schema = null;
 
-		public ConstrainedStore Variables;
+		public SchemaVariableCollection Variables;
 		public VariableSchema Schema => _schema;
 
-		private MultiStore _store;
+		private CombinedVariableCollection _store;
 
 		protected virtual void OnEnable()
 		{
@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition
 		public void SetupSchema()
 		{
 			Variables.Setup(Schema, this);
-			_store = new MultiStore(new ClassStore(this), Variables);
+			_store = new CombinedVariableCollection(new MappedVariableCollection(this), Variables);
 		}
 
 		#region IVariableStore Implementation

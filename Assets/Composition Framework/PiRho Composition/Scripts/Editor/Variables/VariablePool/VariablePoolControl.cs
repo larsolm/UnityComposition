@@ -5,12 +5,12 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariablePoolControl : VisualElement
 	{
-		public OpenStore Value { get; private set; }
+		public CustomVariableCollection Value { get; private set; }
 
 		private VariablesProxy _proxy;
 		private DictionaryControl _dictionary;
 
-		public VariablePoolControl(OpenStore value)
+		public VariablePoolControl(CustomVariableCollection value)
 		{
 			Value = value;
 
@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition.Editor
 			Add(_dictionary);
 		}
 
-		public void SetValueWithoutNotify(OpenStore value)
+		public void SetValueWithoutNotify(CustomVariableCollection value)
 		{
 			Value = value;
 			_proxy.Variables = Value;
@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class VariablesProxy : IDictionaryProxy
 		{
-			public OpenStore Variables;
+			public CustomVariableCollection Variables;
 			
 			public string Label => "Variables";
 			public string Tooltip => "The variables defined by this variable pool";
@@ -57,7 +57,7 @@ namespace PiRhoSoft.Composition.Editor
 			public bool CanRemove(int index) => true;
 			public bool CanReorder(int from, int to) => true;
 
-			public VariablesProxy(OpenStore variables)
+			public VariablesProxy(CustomVariableCollection variables)
 			{
 				Variables = variables;
 			}

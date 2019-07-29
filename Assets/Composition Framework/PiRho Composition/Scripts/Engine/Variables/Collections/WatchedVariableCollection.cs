@@ -7,12 +7,12 @@ namespace PiRhoSoft.Composition
 		void VariableChanged(string name, Variable value);
 	}
 
-	public class ListenerStore : IVariableCollection
+	public class WatchedVariableCollection : IVariableCollection
 	{
 		private IVariableListener _listener;
 		private IVariableCollection _store;
 
-		public ListenerStore(IVariableListener listener, IVariableCollection store)
+		public WatchedVariableCollection(IVariableListener listener, IVariableCollection store)
 		{
 			_listener = listener;
 			_store = store;

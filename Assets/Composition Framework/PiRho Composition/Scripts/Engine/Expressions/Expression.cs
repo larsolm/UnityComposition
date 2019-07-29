@@ -103,7 +103,7 @@ namespace PiRhoSoft.Composition
 			if (_operations != null)
 			{
 				if (isolateVariables)
-					variables = new IsolatedStore(variables); // TODO: pool these
+					variables = new IsolatedVariableCollection(variables); // TODO: pool these
 
 				foreach (var operation in _operations)
 				{

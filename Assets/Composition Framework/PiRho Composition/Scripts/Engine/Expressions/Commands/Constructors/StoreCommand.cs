@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition
 				if (!schema)
 					Debug.LogWarningFormat(_invalidSchemaWarning, schemaName.AsString);
 
-				return Variable.Object(schema ? (IVariableCollection)new ConstrainedStore(schema) : new VariableStore());
+				return Variable.Object(schema ? (IVariableCollection)new SchemaVariableCollection(schema) : new VariableStore());
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 0, 1);

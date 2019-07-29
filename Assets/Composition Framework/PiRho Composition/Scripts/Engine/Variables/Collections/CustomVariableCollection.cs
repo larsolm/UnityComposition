@@ -8,7 +8,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class OpenStore : IVariableArray, IVariableCollection, IResettableVariables, ISerializableData, ISerializationCallbackReceiver
+	public class CustomVariableCollection : IVariableArray, IVariableCollection, IResettableVariables, ISerializableData, ISerializationCallbackReceiver
 	{
 		[SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
 		private List<Variable> _variables = new List<Variable>();

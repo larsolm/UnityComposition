@@ -7,7 +7,7 @@ namespace PiRhoSoft.Composition
 	public sealed class VariableLink : MonoBehaviour
 	{
 		[Tooltip("The variables to add to the global variable store")]
-		public OpenStore Variables = new OpenStore();
+		public CustomVariableCollection Variables = new CustomVariableCollection();
 
 		void OnEnable()
 		{

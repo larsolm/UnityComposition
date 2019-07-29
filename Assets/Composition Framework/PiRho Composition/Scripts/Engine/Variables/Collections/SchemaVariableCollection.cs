@@ -1,14 +1,13 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class ConstrainedStore : IVariableArray, IVariableCollection, IResettableVariables, ISerializableData, ISerializationCallbackReceiver
+	public class SchemaVariableCollection : IVariableArray, IVariableCollection, IResettableVariables, ISerializableData, ISerializationCallbackReceiver
 	{
 		public VariableSchema Schema { get; private set; }
 		public IVariableCollection Owner { get; private set; }
@@ -17,11 +16,11 @@ namespace PiRhoSoft.Composition
 		[SerializeField] private int _schemaVersion = 1;
 		[SerializeField] private SerializedData _variablesData = new SerializedData();
 
-		public ConstrainedStore()
+		public SchemaVariableCollection()
 		{
 		}
 
-		public ConstrainedStore(VariableSchema schema)
+		public SchemaVariableCollection(VariableSchema schema)
 		{
 			Setup(schema, null);
 		}

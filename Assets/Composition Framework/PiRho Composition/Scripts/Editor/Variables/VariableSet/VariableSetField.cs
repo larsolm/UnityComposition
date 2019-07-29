@@ -4,7 +4,7 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariableSetField : BaseField<ConstrainedStore>
+	public class VariableSetField : BaseField<SchemaVariableCollection>
 	{
 		public static readonly string UssClassName = "pirho-variable-set-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
@@ -12,12 +12,12 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariableSetControl _control;
 
-		public VariableSetField(string label, ConstrainedStore value, Object owner) : base(label, null)
+		public VariableSetField(string label, SchemaVariableCollection value, Object owner) : base(label, null)
 		{
 			Setup(value, owner);
 		}
 
-		private void Setup(ConstrainedStore value, Object owner)
+		private void Setup(SchemaVariableCollection value, Object owner)
 		{
 			// TODO: Should this stuff be on control?
 			//if (owner is ISchemaOwner schemaOwner)
@@ -31,7 +31,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			_control = new VariableSetControl(value);
 			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<ConstrainedStore>>(evt => base.value = evt.newValue);
+			_control.RegisterCallback<ChangeEvent<SchemaVariableCollection>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
@@ -40,7 +40,7 @@ namespace PiRhoSoft.Composition.Editor
 			SetValueWithoutNotify(value);
 		}
 
-		public override void SetValueWithoutNotify(ConstrainedStore newValue)
+		public override void SetValueWithoutNotify(SchemaVariableCollection newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
 			_control.SetValueWithoutNotify(newValue);

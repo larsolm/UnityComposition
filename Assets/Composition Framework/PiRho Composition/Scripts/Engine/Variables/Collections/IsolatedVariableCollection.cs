@@ -2,12 +2,12 @@
 
 namespace PiRhoSoft.Composition
 {
-	public class IsolatedStore : IVariableCollection
+	public class IsolatedVariableCollection : IVariableCollection
 	{
 		private IVariableCollection _parent;
 		private VariableStore _self = new VariableStore();
 
-		public IsolatedStore(IVariableCollection parent)
+		public IsolatedVariableCollection(IVariableCollection parent)
 		{
 			_parent = parent;
 		}

@@ -115,7 +115,7 @@ namespace PiRhoSoft.MonsterRpg
 		private const string _missingWorldAssetError = "(MWWLMWA) Failed to load world: the WorldManager in main scene does not have a World set";
 		private const string _missingWorldManagerError = "(MMWWLMWA) Failed to load world: the main scene does not contain a WorldManager";
 
-		public LoadStatus LoadHeader(string filename, ConstrainedStore header)
+		public LoadStatus LoadHeader(string filename, SchemaVariableCollection header)
 		{
 			var info = new LoadStatus();
 			var data = new VariableStore();
@@ -124,7 +124,7 @@ namespace PiRhoSoft.MonsterRpg
 			return info;
 		}
 
-		public SaveStatus SaveHeader(string filename, ConstrainedStore header)
+		public SaveStatus SaveHeader(string filename, SchemaVariableCollection header)
 		{
 			var info = new SaveStatus();
 			var data = new VariableStore();

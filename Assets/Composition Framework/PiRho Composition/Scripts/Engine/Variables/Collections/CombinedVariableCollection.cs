@@ -2,11 +2,11 @@
 
 namespace PiRhoSoft.Composition
 {
-	public class MultiStore : IVariableCollection
+	public class CombinedVariableCollection : IVariableCollection
 	{
 		private IVariableCollection[] _stores;
 
-		public MultiStore(params IVariableCollection[] stores)
+		public CombinedVariableCollection(params IVariableCollection[] stores)
 		{
 			_stores = stores;
 		}

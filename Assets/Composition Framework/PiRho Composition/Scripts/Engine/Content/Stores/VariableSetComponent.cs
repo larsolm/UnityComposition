@@ -14,17 +14,17 @@ namespace PiRhoSoft.Composition
 		[SerializeField]
 		private VariableSchema _schema = null;
 
-		public ConstrainedStore SchemaVariables;
-		public ClassStore ClassVariables;
-		public MultiStore Variables;
+		public SchemaVariableCollection SchemaVariables;
+		public MappedVariableCollection ClassVariables;
+		public CombinedVariableCollection Variables;
 
 		public VariableSchema Schema => _schema;
 
 		public VariableSetComponent()
 		{
-			SchemaVariables = new ConstrainedStore();
-			ClassVariables = new ClassStore(this);
-			Variables = new MultiStore(SchemaVariables, ClassVariables);
+			SchemaVariables = new SchemaVariableCollection();
+			ClassVariables = new MappedVariableCollection(this);
+			Variables = new CombinedVariableCollection(SchemaVariables, ClassVariables);
 		}
 
 		protected virtual void OnEnable()

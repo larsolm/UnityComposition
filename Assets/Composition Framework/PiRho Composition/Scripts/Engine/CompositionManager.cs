@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition
 
 		public IVariableCollection DefaultStore { get; private set; } = new DefaultGlobalStore();
 		public VariableStore GlobalStore { get; private set; } = new VariableStore();
-		public SceneVariableStore SceneStore { get; private set; } = new SceneVariableStore();
+		public SceneVariableCollection SceneStore { get; private set; } = new SceneVariableCollection();
 
 		private List<VariableBinding> _bindings = new List<VariableBinding>();
 

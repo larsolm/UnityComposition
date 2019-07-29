@@ -2,12 +2,12 @@
 
 namespace PiRhoSoft.Composition
 {
-	public class ClassStore : IVariableCollection, IVariableArray
+	public class MappedVariableCollection : IVariableCollection, IVariableArray
 	{
 		private object _owner;
 		private VariableMap _map;
 
-		public ClassStore(object owner)
+		public MappedVariableCollection(object owner)
 		{
 			_owner = owner;
 			_map = VariableMap.Get(owner.GetType());

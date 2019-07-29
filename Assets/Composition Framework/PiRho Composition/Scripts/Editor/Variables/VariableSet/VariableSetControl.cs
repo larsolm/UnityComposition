@@ -5,12 +5,12 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableSetControl : VisualElement
 	{
-		public ConstrainedStore Value { get; private set; }
+		public SchemaVariableCollection Value { get; private set; }
 
 		private VariablesProxy _proxy;
 		private ListControl _list;
 
-		public VariableSetControl(ConstrainedStore value)
+		public VariableSetControl(SchemaVariableCollection value)
 		{
 			Value = value;
 
@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition.Editor
 			Add(_list);
 		}
 
-		public void SetValueWithoutNotify(ConstrainedStore value)
+		public void SetValueWithoutNotify(SchemaVariableCollection value)
 		{
 			Value = value;
 			_proxy.Variables = Value;
@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class VariablesProxy : IListProxy
 		{
-			public ConstrainedStore Variables;
+			public SchemaVariableCollection Variables;
 
 			public string Label => "Variables";
 			public string Tooltip => "The list of variables defined by this variable set";
@@ -57,7 +57,7 @@ namespace PiRhoSoft.Composition.Editor
 			public bool CanRemove(int index) => false;
 			public bool CanReorder(int from, int to) => false;
 
-			public VariablesProxy(ConstrainedStore variables)
+			public VariablesProxy(SchemaVariableCollection variables)
 			{
 				Variables = variables;
 			}
