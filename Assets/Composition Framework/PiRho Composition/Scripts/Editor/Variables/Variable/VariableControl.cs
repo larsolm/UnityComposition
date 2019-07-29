@@ -120,7 +120,7 @@ namespace PiRhoSoft.Composition.Editor
 				case VariableType.Enum: RefreshEnum();  break;
 				case VariableType.String: RefreshString(); break;
 				case VariableType.List: RefreshList(); break;
-				case VariableType.Store: RefreshDictionary();  break;
+				case VariableType.Dictionary: RefreshDictionary();  break;
 				case VariableType.Object: RefreshObject(); break;
 			}
 
@@ -142,7 +142,7 @@ namespace PiRhoSoft.Composition.Editor
 			_enumField.SetDisplayed(Value.Type == VariableType.Enum);
 			_stringContainer.SetDisplayed(Value.Type == VariableType.String);
 			_listControl.SetDisplayed(Value.Type == VariableType.List);
-			_dictionaryContainer.SetDisplayed(Value.Type == VariableType.Store);
+			_dictionaryContainer.SetDisplayed(Value.Type == VariableType.Dictionary);
 			_objectContainer.SetDisplayed(Value.Type == VariableType.Object);
 		}
 
@@ -583,7 +583,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			var objectType = (Definition.Constraint as ObjectConstraint)?.ObjectType ?? typeof(Object);
 
-			var objectPicker = new ObjectPickerControl(Value.AsObject, objectType);
+			var objectPicker = new ObjectPickerControl(Value.GetObject<Object>(), objectType);
 			objectPicker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{
 				var value = Variable.Object(evt.newValue);
@@ -598,7 +598,7 @@ namespace PiRhoSoft.Composition.Editor
 			public IVariableList Variables;
 			public VariableDefinition Definition;
 
-			public override int ItemCount => Variables?.Count ?? 0;
+			public override int ItemCount => Variables?.VariableCount ?? 0;
 
 			public VariableListProxy(IVariableList variables, VariableDefinition definition)
 			{

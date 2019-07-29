@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			private VariableSchema _schema;
 
-			public int KeyCount => _schema.Count;
+			public int KeyCount => _schema.EntryCount;
 
 			public string Label => "Definitions";
 			public string Tooltip => "The variables available to objects using this schema";
@@ -42,8 +42,8 @@ namespace PiRhoSoft.Composition.Editor
 
 			public VisualElement CreateField(int index)
 			{
-				var entry = _schema[index];
-				var control = new VariableSchemaEntryControl(_schema.Tags.List, entry) { userData = index };
+				var entry = _schema.GetEntry(index);
+				var control = new VariableSchemaEntryControl(_schema.Tags, entry) { userData = index };
 				return control;
 			}
 
@@ -54,7 +54,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			public bool CanAdd(string key)
 			{
-				return !_schema.HasDefinition(key);
+				return !_schema.HasEntry(key);
 			}
 
 			public bool CanRemove(int index)
@@ -69,16 +69,17 @@ namespace PiRhoSoft.Composition.Editor
 
 			public void AddItem(string key)
 			{
-				_schema.AddDefinition(key, VariableType.Empty);
+				_schema.AddEntry(key);
 			}
 
 			public void RemoveItem(int index)
 			{
-				_schema.RemoveDefinition(index);
+				_schema.RemoveEntry(index);
 			}
 
 			public void ReorderItem(int from, int to)
 			{
+				_schema.MoveEntry(from, to);
 			}
 		}
 	}
