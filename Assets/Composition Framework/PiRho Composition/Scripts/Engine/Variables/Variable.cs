@@ -329,6 +329,18 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
+		#region Collection
+
+		public bool IsCollection => Type == VariableType.Object || Type == VariableType.Dictionary;
+		public ObjectVariableCollection AsCollection => new ObjectVariableCollection(_reference);
+		public bool TryGetCollection(out ObjectVariableCollection collection) { collection = AsCollection; return collection.IsValid; }
+
+		public bool IsArray => _reference is IVariableArray;
+		public IVariableArray AsArray => _reference as IVariableArray;
+		public bool TryGetArray(out IVariableArray array) { array = AsArray; return array != null; }
+
+		#endregion
+
 		#region Empty
 
 		public static readonly Variable Empty = CreateValue(VariableType.Empty, new ValueData());
