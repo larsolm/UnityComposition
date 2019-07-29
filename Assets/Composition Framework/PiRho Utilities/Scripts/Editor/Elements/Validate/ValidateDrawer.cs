@@ -21,7 +21,7 @@ namespace PiRhoSoft.Utilities.Editor
 			var element = this.CreateNextElement(property);
 
 			var validate = new VisualElement();
-			validate.AddStyleSheet(Stylesheet);
+			validate.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
 			validate.AddToClassList(UssClassName);
 
 			var validateAttribute = attribute as ValidateAttribute;

@@ -8,18 +8,47 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableDefinitionControl : VisualElement
 	{
+		#region Style Strings
+
+		public const string Stylesheet = "Variables/VariableDefinition/VariableDefinitionStyle.uss";
+		public const string UssClassName = "pirho-variable-definition";
+		public const string TypeUssClassName = UssClassName + "__type";
+		public const string ConstraintUssClassName = UssClassName + "__constraint";
+		public const string NumberConstraintUssClassName = ConstraintUssClassName + "__number";
+		public const string NumberConstraintLabelUssClassName = NumberConstraintUssClassName + "__label";
+		public const string NumberConstraintToggleUssClassName = NumberConstraintUssClassName + "__toggle";
+		public const string NumberConstraintMinToggleUssClassName = NumberConstraintToggleUssClassName + "--min";
+		public const string NumberConstraintMaxToggleUssClassName = NumberConstraintToggleUssClassName + "--max";
+		public const string NumberConstraintFieldUssClassName = NumberConstraintUssClassName + "__field";
+		public const string NumberConstraintHasValueUssClassName = NumberConstraintFieldUssClassName + "--has-value";
+		public const string NumberConstraintMinUssClassName = NumberConstraintFieldUssClassName + "--min";
+		public const string NumberConstraintMaxUssClassName = NumberConstraintFieldUssClassName + "--max";
+		public const string StringConstraintUssClassName = ConstraintUssClassName + "__string";
+		public const string ObjectConstraintUssClassName = ConstraintUssClassName + "__object";
+		public const string EnumConstraintUssClassName = ConstraintUssClassName + "__enum";
+		public const string SchemaConstraintUssClassName = ConstraintUssClassName + "__schema";
+		public const string ListConstraintUssClassName = ConstraintUssClassName + "__list";
+
+		#endregion
+
 		public VariableDefinition Value { get; private set; }
 
-		private VisualElement _typeContainer;
+		private EnumField _typeDropdown;
 		private VisualElement _constraintContainer;
 
 		public VariableDefinitionControl(VariableDefinition value)
 		{
+			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			AddToClassList(UssClassName);
+
 			Value = value;
 
-			_typeContainer = new VisualElement { tooltip = "The type of variable this definition defines" };
-			_constraintContainer = new VisualElement();
+			if (!string.IsNullOrEmpty(Value.Name))
+				Add(new Label(Value.Name));
 
+			CreateType();
+			CreateConstraint();
+			
 			Refresh();
 		}
 
@@ -31,22 +60,30 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void Refresh()
 		{
-			_typeContainer.Clear();
-			_constraintContainer.Clear();
-
-			SetupType();
-			SetupConstraint(_constraintContainer, Value.Constraint);
+			RefreshType();
+			RefreshConstraint(_constraintContainer, Value.Constraint);
 		}
 
-		private void SetupType()
+		private void CreateType()
 		{
-			var dropdown = new EnumField(Value.Type);
-			dropdown.RegisterValueChangedCallback(evt =>
+			_typeDropdown = new EnumField(Value.Type) { tooltip = "The type of variable this definition defines" };
+			_typeDropdown.AddToClassList(TypeUssClassName);
+			_typeDropdown.RegisterValueChangedCallback(evt =>
 			{
 				Value.Type = (VariableType)evt.newValue;
+
+				_constraintContainer.Clear();
+				CreateConstraint(_constraintContainer, Value.Constraint);
+
+				SendChangeEvent();
 			});
 
-			_typeContainer.Add(dropdown);
+			Add(_typeDropdown);
+		}
+
+		private void RefreshType()
+		{
+			_typeDropdown.SetValueWithoutNotify(Value.Type);
 		}
 
 		private void SendChangeEvent()
@@ -56,61 +93,46 @@ namespace PiRhoSoft.Composition.Editor
 
 		#region Constraints
 
-		private void SetupConstraint(VisualElement container, VariableConstraint constraint)
+		private void CreateConstraint()
+		{
+			_constraintContainer = new VisualElement();
+			_constraintContainer.AddToClassList(ConstraintUssClassName);
+
+			CreateConstraint(_constraintContainer, Value.Constraint);
+
+			Add(_constraintContainer);
+		}
+
+		private void CreateConstraint(VisualElement container, VariableConstraint constraint)
 		{
 			if (constraint != null)
 			{
-				var constraintContainer = CreateConstraint(constraint, out var tooltip);
-				var label = new Label("Constraint") { tooltip = tooltip };
-
-				container.Add(label);
-				container.Add(constraintContainer);
+				switch (constraint)
+				{
+					case IntConstraint intConstraint: container.Add(CreateIntConstraint(intConstraint)); break;
+					case FloatConstraint floatConstraint: container.Add(CreateFloatConstraint(floatConstraint)); break;
+					case StringConstraint stringConstraint: container.Add(CreateStringConstraint(stringConstraint)); break;
+					case ObjectConstraint objectConstraint: container.Add(CreateObjectConstraint(objectConstraint)); break;
+					case EnumConstraint enumConstraint: container.Add(CreateEnumConstraint(enumConstraint)); break;
+					case StoreConstraint storeConstraint: container.Add(CreateStoreConstraint(storeConstraint)); break;
+					case ListConstraint listConstraint: container.Add(CreateListConstraint(listConstraint)); break;
+				}
 			}
 		}
 
-		private VisualElement CreateConstraint(VariableConstraint constraint, out string tooltip)
+		private void RefreshConstraint(VisualElement container, VariableConstraint constraint)
 		{
-			switch (constraint)
+			if (constraint != null)
 			{
-				case IntConstraint intConstraint:
+				switch (constraint)
 				{
-					tooltip = "The range of values allowed for the variable";
-					return CreateIntConstraint(intConstraint);
-				}
-				case FloatConstraint floatConstraint:
-				{
-					tooltip = "The range of values allowed for the variable";
-					return CreateFloatConstraint(floatConstraint);
-				}
-				case StringConstraint stringConstraint:
-				{
-					tooltip = "The list of valid string values for the variable";
-					return CreateStringConstraint(stringConstraint);
-				}
-				case ObjectConstraint objectConstraint:
-				{
-					tooltip = "The Object type that the assigned object must be derived from or have an instance of";
-					return CreateObjectConstraint(objectConstraint);
-				}
-				case EnumConstraint enumConstraint:
-				{
-					tooltip = "The enum type of values added to the list";
-					return CreateEnumConstraint(enumConstraint);
-				}
-				case StoreConstraint storeConstraint:
-				{
-					tooltip = "The schema the store must use";
-					return CreateStoreConstraint(storeConstraint);
-				}
-				case ListConstraint listConstraint:
-				{
-					tooltip = "The variable type of values added to the list";
-					return CreateListConstraint(listConstraint);
-				}
-				default:
-				{
-					tooltip = null;
-					return null;
+					case IntConstraint intConstraint: RefreshIntConstraint(container, intConstraint); break;
+					case FloatConstraint floatConstraint: RefreshFloatConstraint(container, floatConstraint); break;
+					case StringConstraint stringConstraint: RefreshStringConstraint(container, stringConstraint); break;
+					case ObjectConstraint objectConstraint: RefreshObjectConstraint(container, objectConstraint); break;
+					case EnumConstraint enumConstraint: RefreshEnumConstraint(container, enumConstraint); break;
+					case StoreConstraint storeConstraint: RefreshStoreConstraint(container, storeConstraint); break;
+					case ListConstraint listConstraint: RefreshListConstraint(container, listConstraint); break;
 				}
 			}
 		}
@@ -118,39 +140,49 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateIntConstraint(IntConstraint constraint)
 		{
 			var container = new VisualElement();
-			var hasMin = new Toggle("Minimum:") { value = constraint.Minimum.HasValue };
-			var hasMax = new Toggle("Maximum:") { value = constraint.Maximum.HasValue };
+			var minLabel = new Label("Minimum:");
+			var maxLabel = new Label("Maximum:");
+			var minToggle = new Toggle();
+			var maxToggle = new Toggle();
+			var min = new IntegerField();
+			var max = new IntegerField();
 
-			var min = new IntegerField() { value = constraint.Minimum.GetValueOrDefault(0), isDelayed = true };
-			var max = new IntegerField() { value = constraint.Maximum.GetValueOrDefault(100), isDelayed = true };
-		
-			container.Add(hasMin);
+			container.AddToClassList(NumberConstraintUssClassName);
+			minLabel.AddToClassList(NumberConstraintLabelUssClassName);
+			maxLabel.AddToClassList(NumberConstraintLabelUssClassName);
+			minToggle.AddToClassList(NumberConstraintToggleUssClassName);
+			minToggle.AddToClassList(NumberConstraintMinToggleUssClassName);
+			maxToggle.AddToClassList(NumberConstraintToggleUssClassName);
+			maxToggle.AddToClassList(NumberConstraintMaxToggleUssClassName);
+			min.AddToClassList(NumberConstraintFieldUssClassName);
+			min.AddToClassList(NumberConstraintMinUssClassName);
+			max.AddToClassList(NumberConstraintFieldUssClassName);
+			max.AddToClassList(NumberConstraintMaxUssClassName);
+
+			container.Add(minLabel);
+			container.Add(minToggle);
 			container.Add(min);
-			container.Add(hasMax);
+			container.Add(maxLabel);
+			container.Add(maxToggle);
 			container.Add(max);
-		
-			hasMin.SetDisplayed(constraint.Minimum.HasValue);
-			hasMax.SetDisplayed(constraint.Maximum.HasValue);
 
-			hasMin.RegisterValueChangedCallback(evt =>
+			minToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
 					constraint.Minimum = 0;
 				else
 					constraint.Minimum = null;
 
-				min.SetDisplayed(constraint.Minimum.HasValue);
 				SendChangeEvent();
 			});
 
-			hasMax.RegisterValueChangedCallback(evt =>
+			maxToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
-					constraint.Maximum = 0;
+					constraint.Maximum = 10;
 				else
 					constraint.Maximum = null;
 
-				min.SetDisplayed(constraint.Maximum.HasValue);
 				SendChangeEvent();
 			});
 
@@ -165,46 +197,72 @@ namespace PiRhoSoft.Composition.Editor
 				constraint.Maximum = evt.newValue;
 				SendChangeEvent();
 			});
-		
+
 			return container;
 		}
-		
+
+		private void RefreshIntConstraint(VisualElement container, IntConstraint constraint)
+		{
+			var minToggle = container.Q<Toggle>(className: NumberConstraintMinToggleUssClassName);
+			var maxToggle = container.Q<Toggle>(className: NumberConstraintMaxToggleUssClassName);
+			var min = container.Q<IntegerField>(className: NumberConstraintMinUssClassName);
+			var max = container.Q<IntegerField>(className: NumberConstraintMaxUssClassName);
+
+			minToggle.SetValueWithoutNotify(constraint.Minimum.HasValue);
+			maxToggle.SetValueWithoutNotify(constraint.Maximum.HasValue);
+			min.SetValueWithoutNotify(constraint.Minimum ?? 0);
+			max.SetValueWithoutNotify(constraint.Maximum ?? 10);
+
+			min.EnableInClassList(NumberConstraintHasValueUssClassName, constraint.Minimum.HasValue);
+			max.EnableInClassList(NumberConstraintHasValueUssClassName, constraint.Maximum.HasValue);
+		}
+
 		private VisualElement CreateFloatConstraint(FloatConstraint constraint)
 		{
 			var container = new VisualElement();
-			var hasMin = new Toggle("Minimum:") { value = constraint.Minimum.HasValue };
-			var hasMax = new Toggle("Maximum:") { value = constraint.Maximum.HasValue };
+			var minLabel = new Label("Minimum:");
+			var maxLabel = new Label("Maximum:");
+			var minToggle = new Toggle();
+			var maxToggle = new Toggle();
+			var min = new FloatField();
+			var max = new FloatField();
 
-			var min = new FloatField() { value = constraint.Minimum.GetValueOrDefault(0.0f), isDelayed = true };
-			var max = new FloatField() { value = constraint.Maximum.GetValueOrDefault(1.0f), isDelayed = true };
+			container.AddToClassList(NumberConstraintUssClassName);
+			minLabel.AddToClassList(NumberConstraintLabelUssClassName);
+			maxLabel.AddToClassList(NumberConstraintLabelUssClassName);
+			minToggle.AddToClassList(NumberConstraintToggleUssClassName);
+			minToggle.AddToClassList(NumberConstraintMinToggleUssClassName);
+			maxToggle.AddToClassList(NumberConstraintToggleUssClassName);
+			maxToggle.AddToClassList(NumberConstraintMaxToggleUssClassName);
+			min.AddToClassList(NumberConstraintFieldUssClassName);
+			min.AddToClassList(NumberConstraintMinUssClassName);
+			max.AddToClassList(NumberConstraintFieldUssClassName);
+			max.AddToClassList(NumberConstraintMaxUssClassName);
 
-			container.Add(hasMin);
+			container.Add(minLabel);
+			container.Add(minToggle);
 			container.Add(min);
-			container.Add(hasMax);
+			container.Add(maxLabel);
+			container.Add(maxToggle);
 			container.Add(max);
 
-			hasMin.SetDisplayed(constraint.Minimum.HasValue);
-			hasMax.SetDisplayed(constraint.Maximum.HasValue);
-
-			hasMin.RegisterValueChangedCallback(evt =>
+			minToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
 					constraint.Minimum = 0;
 				else
 					constraint.Minimum = null;
 
-				min.SetDisplayed(constraint.Minimum.HasValue);
 				SendChangeEvent();
 			});
 
-			hasMax.RegisterValueChangedCallback(evt =>
+			maxToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
-					constraint.Maximum = 0;
+					constraint.Maximum = 10;
 				else
 					constraint.Maximum = null;
 
-				min.SetDisplayed(constraint.Maximum.HasValue);
 				SendChangeEvent();
 			});
 
@@ -222,7 +280,23 @@ namespace PiRhoSoft.Composition.Editor
 
 			return container;
 		}
-		
+
+		private void RefreshFloatConstraint(VisualElement container, FloatConstraint constraint)
+		{
+			var minToggle = container.Q<Toggle>(className: NumberConstraintMinToggleUssClassName);
+			var maxToggle = container.Q<Toggle>(className: NumberConstraintMaxToggleUssClassName);
+			var min = container.Q<FloatField>(className: NumberConstraintMinUssClassName);
+			var max = container.Q<FloatField>(className: NumberConstraintMaxUssClassName);
+
+			minToggle.SetValueWithoutNotify(constraint.Minimum.HasValue);
+			maxToggle.SetValueWithoutNotify(constraint.Maximum.HasValue);
+			min.SetValueWithoutNotify(constraint.Minimum ?? 0.0f);
+			max.SetValueWithoutNotify(constraint.Maximum ?? 10.0f);
+
+			min.EnableInClassList(NumberConstraintHasValueUssClassName, constraint.Minimum.HasValue);
+			max.EnableInClassList(NumberConstraintHasValueUssClassName, constraint.Maximum.HasValue);
+		}
+
 		private VisualElement CreateStringConstraint(StringConstraint constraint)
 		{
 			var proxy = new ListProxy<string>(constraint.Values, index =>
@@ -241,12 +315,24 @@ namespace PiRhoSoft.Composition.Editor
 				Tooltip = "A list of valid strings that this variable can contain"
 			};
 
-			return new ListControl(proxy);
+			var list = new ListControl(proxy);
+			list.AddToClassList(StringConstraintUssClassName);
+
+			return list;
 		}
-		
+
+		private void RefreshStringConstraint(VisualElement container, StringConstraint constraint)
+		{
+			var list = container.Q<ListControl>(className: StringConstraintUssClassName);
+			var proxy = list.Proxy as ListProxy<string>;
+			proxy.Items = constraint.Values;
+			list.Refresh();
+		}
+
 		private VisualElement CreateObjectConstraint(ObjectConstraint constraint)
 		{
 			var picker = new TypePickerControl(constraint.ObjectType.AssemblyQualifiedName, typeof(Object), true);
+			picker.AddToClassList(ObjectConstraintUssClassName);
 			picker.RegisterCallback<ChangeEvent<string>>(evt =>
 			{
 				constraint.ObjectType = Type.GetType(evt.newValue ?? string.Empty);
@@ -255,10 +341,17 @@ namespace PiRhoSoft.Composition.Editor
 			
 			return picker;
 		}
+
+		private void RefreshObjectConstraint(VisualElement container, ObjectConstraint constraint)
+		{
+			var picker = container.Q<TypePickerControl>(className: ObjectConstraintUssClassName);
+			picker.SetValueWithoutNotify(constraint.ObjectType.AssemblyQualifiedName);
+		}
 		
 		private VisualElement CreateEnumConstraint(EnumConstraint constraint)
 		{
 			var picker = new TypePickerControl(constraint.EnumType.AssemblyQualifiedName, typeof(Enum), true);
+			picker.AddToClassList(EnumConstraintUssClassName);
 			picker.RegisterCallback<ChangeEvent<string>>(evt =>
 			{
 				constraint.EnumType = Type.GetType(evt.newValue ?? string.Empty);
@@ -267,10 +360,17 @@ namespace PiRhoSoft.Composition.Editor
 		
 			return picker;
 		}
+
+		private void RefreshEnumConstraint(VisualElement container, EnumConstraint constraint)
+		{
+			var picker = container.Q<TypePickerControl>(className: EnumConstraintUssClassName);
+			picker.SetValueWithoutNotify(constraint.EnumType.AssemblyQualifiedName);
+		}
 		
 		private VisualElement CreateStoreConstraint(StoreConstraint constraint)
 		{
 			var picker = new ObjectPickerControl(constraint.Schema, typeof(VariableSchema));
+			picker.AddToClassList(SchemaConstraintUssClassName);
 			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{
 				constraint.Schema = evt.newValue as VariableSchema;
@@ -278,6 +378,12 @@ namespace PiRhoSoft.Composition.Editor
 			});
 		
 			return picker;
+		}
+
+		private void RefreshStoreConstraint(VisualElement container, StoreConstraint constraint)
+		{
+			var picker = container.Q<ObjectPickerControl>(className: SchemaConstraintUssClassName);
+			picker.SetValueWithoutNotify(constraint.Schema);
 		}
 		
 		private VisualElement CreateListConstraint(ListConstraint constraint)
@@ -295,11 +401,18 @@ namespace PiRhoSoft.Composition.Editor
 			if (constraint.ItemConstraint != null)
 			{
 				var constraintElement = new VisualElement();
-				SetupConstraint(container, constraint.ItemConstraint);
+				constraintElement.AddToClassList(ListConstraintUssClassName);
+				CreateConstraint(constraintElement, constraint.ItemConstraint);
 				container.Add(constraintElement);
 			}
 		
 			return container;
+		}
+
+		private void RefreshListConstraint(VisualElement container, ListConstraint constraint)
+		{
+			var constraintElement = container.Q<VisualElement>(className: ListConstraintUssClassName);
+			RefreshConstraint(constraintElement, constraint.ItemConstraint);
 		}
 
 		#endregion

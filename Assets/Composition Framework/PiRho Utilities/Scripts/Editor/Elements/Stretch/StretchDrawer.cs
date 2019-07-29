@@ -14,7 +14,7 @@ namespace PiRhoSoft.Utilities.Editor
 			var element = this.CreateNextElement(property);
 
 			element.AddToClassList(UssClassName);
-			element.AddStyleSheet(Stylesheet);
+			element.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
 
 			return element;
 		}

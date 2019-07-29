@@ -15,12 +15,15 @@ namespace PiRhoSoft.Composition.Editor
 			Value = value;
 
 			_text = new TextField() { multiline = true };
+			_text.style.flexGrow = 1;
 			_text.RegisterValueChangedCallback(evt => Value.SetStatement(evt.newValue));
 
 			_message = new MessageBox(MessageBoxType.Error, string.Empty);
 
 			Add(_text);
 			Add(_message);
+
+			style.flexGrow = 1;
 
 			Refresh();
 		}

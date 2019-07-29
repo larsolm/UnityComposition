@@ -53,7 +53,7 @@ namespace PiRhoSoft.Utilities.Editor
 				: value.CreateField();
 
 			field.userData = index;
-			field.Bind(_valuesProperty.serializedObject);
+			field.Bind(_property.serializedObject);
 			BaseFieldExtensions.SetLabel(field, key.stringValue);
 
 			return field;

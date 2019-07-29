@@ -49,8 +49,12 @@ namespace PiRhoSoft.Composition
 		[ChangeTrigger(nameof(ValidateTags))]
 		public TagList Tags = new TagList();
 
-		[SerializeField] private EntryList _entries = new EntryList();
-		[SerializeField] private int _version = 0;
+		[SerializeField]
+		private EntryList _entries = new EntryList();
+
+		[HideInInspector]
+		[SerializeField]
+		private int _version = 0;
 
 		public int Version
 		{

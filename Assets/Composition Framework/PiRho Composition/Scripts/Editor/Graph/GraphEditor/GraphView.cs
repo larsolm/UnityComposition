@@ -447,7 +447,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		#region Members
 
-		public const string StyleSheetPath = Composition.StylePath + "Graph/GraphEditor/GraphViewStyle.uss";
+		public const string Stylesheet = "Graph/GraphEditor/GraphViewStyle.uss";
 		public const string UssClassName = "pirho-graph-view";
 		public const string ToolbarUssClassName = UssClassName + "__toolbar";
 		public const string ToolbarButtonUssClassName = ToolbarUssClassName + "__button";
@@ -491,7 +491,7 @@ namespace PiRhoSoft.Composition.Editor
 			_window = window;
 			_graphProvider = ScriptableObject.CreateInstance<GraphProvider>();
 
-			styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(StyleSheetPath));
+			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			CreateToolbar();

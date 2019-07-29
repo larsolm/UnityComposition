@@ -34,7 +34,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			Setup(provider, value);
 
-			this.AddStyleSheet(Stylesheet);
+			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
 			AddToClassList(UssClassName);
 		}
 

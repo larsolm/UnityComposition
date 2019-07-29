@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 				if (!xValue.IsInt)
 					throw CommandEvaluationException.WrongParameterType(name, 0, xValue.Type, VariableType.Int);
 
-				if (@yValue.IsInt)
+				if (!yValue.IsInt)
 					throw CommandEvaluationException.WrongParameterType(name, 1, yValue.Type, VariableType.Int);
 
 				if (!zValue.IsInt)

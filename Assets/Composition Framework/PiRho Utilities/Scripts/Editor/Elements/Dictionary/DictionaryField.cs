@@ -42,6 +42,11 @@ namespace PiRhoSoft.Utilities.Editor
 			bindingPath = keysProperty.propertyPath;
 		}
 
+		public DictionaryField(SerializedProperty property, DictionaryProxy proxy)
+		{
+			bindingPath = property.propertyPath;
+		}
+
 		private void Setup()
 		{
 			Clear();

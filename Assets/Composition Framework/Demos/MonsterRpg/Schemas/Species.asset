@@ -13,18 +13,17 @@ MonoBehaviour:
   m_Name: Species
   m_EditorClassIdentifier: 
   Tags:
-    _items:
-    - 
+    _items: []
   _entries:
     _items:
     - Tag: 
       Initializer:
         _statement: 
       Definition:
-        Name: Name
-        _type: 0
+        Name: Def
+        _type: 2
         _constraintData:
           Version: 1
-          Data: 
+          Data: AQAAAAEBa1BpUmhvU29mdC5Db21wb3NpdGlvbi5JbnRDb25zdHJhaW50LCBBc3NlbWJseS1DU2hhcnAsIFZlcnNpb249MC4wLjAuMCwgQ3VsdHVyZT1uZXV0cmFsLCBQdWJsaWNLZXlUb2tlbj1udWxsAAA=
           References: []
-  _version: 2
+  _version: 6

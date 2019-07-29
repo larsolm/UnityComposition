@@ -29,7 +29,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public Frame()
 		{
 			AddToClassList(UssClassName);
-			this.AddStyleSheet(Stylesheet);
+			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
 
 			Setup();
 		}

@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition.Editor
 		private const string _invalidWatchWarning = "(CWWIW) Unable to watch variable '{0}' of type '{1}' - only variable stores can be watched";
 		private const string _expressionResultLog = "{0}: ({1}) {2}";
 
-		public const string StylePath = Composition.StylePath + "Graph/WatchWindow/WatchWindow.uss";
+		public const string Stylesheet = "Graph/WatchWindow/WatchWindow.uss";
 		public const string UssClassName = "pirho-watch-window";
 
 		public const string UssToolbarClassName = UssClassName + "__toolbar";
@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public WatchWindowElement()
 		{
-			styleSheets.Add(AssetDatabase.LoadAssetAtPath<StyleSheet>(StylePath));
+			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			var container = new VisualElement();

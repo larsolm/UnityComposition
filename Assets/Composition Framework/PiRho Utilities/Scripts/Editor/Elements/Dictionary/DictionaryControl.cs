@@ -5,7 +5,7 @@ namespace PiRhoSoft.Utilities.Editor
 {
 	public class DictionaryControl : Frame
 	{
-		private const string _stylesheet = "Dictionary/DictionaryStyle.uss";
+		public const string Stylesheet = "Dictionary/DictionaryStyle.uss";
 
 		#region Class Names
 
@@ -58,7 +58,7 @@ namespace PiRhoSoft.Utilities.Editor
 			Refresh();
 
 			AddToClassList(UssClassName);
-			this.AddStyleSheet(_stylesheet);
+			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
 		}
 
 		public void Refresh()
@@ -93,8 +93,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			_addButton = AddHeaderButton(_addIcon.Texture, Proxy.AddTooltip, AddButtonUssClassName, AddItem);
 			_addButton.SetEnabled(false);
-
-			_removeButtons = _itemsContainer.Query<IconButton>(className: RemoveButtonUssClassName).Build();
+			_removeButtons = Content.Query<IconButton>(className: RemoveButtonUssClassName).Build();
 
 			_keyField = new TextField();
 			_keyField.AddToClassList(HeaderKeyTextUssClassName);
@@ -109,10 +108,12 @@ namespace PiRhoSoft.Utilities.Editor
 
 			var empty = new Label(Proxy.EmptyLabel) { tooltip = Proxy.EmptyTooltip };
 			empty.AddToClassList(EmptyLabelUssClassName);
+
 			Content.Add(empty);
 
 			_itemsContainer = new VisualElement();
 			_itemsContainer.AddToClassList(ItemsUssClassName);
+
 			Content.Add(_itemsContainer);
 		}
 
