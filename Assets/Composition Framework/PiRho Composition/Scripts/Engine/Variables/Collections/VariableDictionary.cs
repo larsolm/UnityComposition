@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	public interface IVariableDictionary : IVariableStore, IVariableReset
+	public interface IVariableDictionary : IVariableCollection
 	{
 		VariableSchema Schema { get; }
 	}
@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition
 		public VariableDictionary(VariableSchema schema)
 		{
 			Schema = schema;
-			ResetAll();
+			Reset();
 		}
 
 		public void AddVariable(string name, Variable value)
@@ -48,9 +48,9 @@ namespace PiRhoSoft.Composition
 			}
 		}
 		
-		public IList<string> GetVariableNames()
+		public IReadOnlyList<string> VariableNames
 		{
-			return _names;
+			get => _names;
 		}
 
 		public SetVariableResult SetVariable(string name, Variable value)
@@ -70,28 +70,7 @@ namespace PiRhoSoft.Composition
 			return _map.TryGetValue(name, out var index) ? _variables[index] : Variable.Empty;
 		}
 
-		public void ResetTag(string tag)
-		{
-			if (Schema != null)
-			{
-				for (var i = 0; i < Schema.Count; i++)
-				{
-					if (Schema[i].Tag == tag)
-						ResetVariable(i);
-				}
-			}
-		}
-
-		public void ResetVariables(IList<string> variables)
-		{
-			foreach (var name in variables)
-			{
-				if (_map.TryGetValue(name, out var index))
-					ResetVariable(index);
-			}
-		}
-
-		public void ResetAll()
+		public void Reset()
 		{
 			_variables.Clear();
 			_names.Clear();
@@ -101,10 +80,10 @@ namespace PiRhoSoft.Composition
 			{
 				for (var i = 0; i < Schema.Count; i++)
 				{
-					var definition = Schema[i].Definition;
-					var value = definition.Generate();
+					var name = Schema.GetName(i);
+					var value = Schema.Generate(null, i);
 
-					AddVariable(definition.Name, i, value);
+					AddVariable(name, i, value);
 				}
 			}
 		}
@@ -124,20 +103,6 @@ namespace PiRhoSoft.Composition
 
 			for (var i = index; i < _names.Count; i++)
 				_map[_names[i]] = i;
-		}
-
-		private void ResetVariable(int index)
-		{
-			if (Schema != null)
-			{
-				var definition = Schema[index].Definition;
-				_variables[index] = definition.Generate();
-			}
-			else
-			{
-				var type = _variables[index].Type;
-				_variables[index] = Variable.Create(type);
-			}
 		}
 	}
 }

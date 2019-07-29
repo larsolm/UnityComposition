@@ -14,7 +14,7 @@ namespace PiRhoSoft.Composition
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
 		{
 			var dictionary = variable.AsDictionary;
-			var names = dictionary.GetVariableNames();
+			var names = dictionary.VariableNames;
 
 			data.SaveReference(writer, dictionary.Schema);
 			writer.Write(names.Count);

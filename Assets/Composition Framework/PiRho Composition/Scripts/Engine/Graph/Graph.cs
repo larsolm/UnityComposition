@@ -33,7 +33,7 @@ namespace PiRhoSoft.Composition
 		private bool _shouldBreak = false;
 		private bool _shouldExit = false;
 
-		public IVariableStore Variables { get; private set; }
+		public IVariableCollection Variables { get; private set; }
 		public bool IsRunning { get; private set; }
 
 		void OnEnable()

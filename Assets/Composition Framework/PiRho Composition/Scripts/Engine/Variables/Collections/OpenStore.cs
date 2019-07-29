@@ -8,7 +8,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class OpenStore : IVariableIndex, IVariableMap, IVariableReset, ISerializableData, ISerializationCallbackReceiver
+	public class OpenStore : IVariableArray, IVariableCollection, IResettableVariables, ISerializableData, ISerializationCallbackReceiver
 	{
 		[SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
 		private List<Variable> _variables = new List<Variable>();
@@ -195,6 +195,7 @@ namespace PiRhoSoft.Composition
 
 		public List<VariableDefinition> Definitions => _definitions;
 		public List<Variable> Variables => _variables;
+		public Dictionary<string, int> Map => _map;
 
 		public void ChangeName(int index, string name)
 		{

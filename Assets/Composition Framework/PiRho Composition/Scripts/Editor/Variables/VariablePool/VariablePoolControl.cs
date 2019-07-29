@@ -5,12 +5,12 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariablePoolControl : VisualElement
 	{
-		public VariablePool Value { get; private set; }
+		public OpenStore Value { get; private set; }
 
 		private VariablesProxy _proxy;
 		private DictionaryControl _dictionary;
 
-		public VariablePoolControl(VariablePool value)
+		public VariablePoolControl(OpenStore value)
 		{
 			Value = value;
 
@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition.Editor
 			Add(_dictionary);
 		}
 
-		public void SetValueWithoutNotify(VariablePool value)
+		public void SetValueWithoutNotify(OpenStore value)
 		{
 			Value = value;
 			_proxy.Variables = Value;
@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class VariablesProxy : IDictionaryProxy
 		{
-			public VariablePool Variables;
+			public OpenStore Variables;
 			
 			public string Label => "Variables";
 			public string Tooltip => "The variables defined by this variable pool";
@@ -53,14 +53,14 @@ namespace PiRhoSoft.Composition.Editor
 			public bool AllowRemove => true;
 			public bool AllowReorder => true;
 
-			public VariablesProxy(VariablePool variables)
+			public VariablesProxy(OpenStore variables)
 			{
 				Variables = variables;
 			}
 
 			public VisualElement CreateField(int index)
 			{
-				var name = Variables.Names[index];
+				var name = Variables.VariableNames[index];
 				var value = Variables.Variables[index];
 				var definition = Variables.Definitions[index];
 
@@ -81,7 +81,7 @@ namespace PiRhoSoft.Composition.Editor
 				var definitionControl = new VariableDefinitionControl(definition);
 				definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt =>
 				{
-					Variables.ChangeDefinition(index, evt.newValue);
+					//Variables.ChangeDefinition(index, evt.newValue);
 					variableControl.SetDefinition(evt.newValue);
 				});
 
@@ -109,12 +109,12 @@ namespace PiRhoSoft.Composition.Editor
 
 			public void RemoveItem(int index)
 			{
-				Variables.RemoveVariable(index);
+				//Variables.RemoveVariable(index);
 			}
 
 			public void ReorderItem(int from, int to)
 			{
-				Variables.VariableMoved(from, to);
+				Variables.ChangeOrder(from, to);
 			}
 		}
 	}

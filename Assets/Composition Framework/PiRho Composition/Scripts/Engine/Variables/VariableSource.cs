@@ -14,12 +14,7 @@ namespace PiRhoSoft.Composition
 
 	public abstract class VariableSource
 	{
-		[Tooltip("Whether the source points to a variable reference or an actual value")]
-		[EnumButtons]
 		public VariableSourceType Type = VariableSourceType.Value;
-
-		[Tooltip("The variable reference to lookup the value from")]
-		[Conditional(nameof(Type), (int)VariableSourceType.Reference)]
 		public VariableReference Reference = new VariableReference();
 
 		public void GetInputs(IList<VariableDefinition> inputs)
@@ -37,8 +32,6 @@ namespace PiRhoSoft.Composition
 
 	public abstract class VariableSource<T> : VariableSource
 	{
-		[Tooltip("The specific value of the source")]
-		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public T Value;
 
 		protected override VariableDefinition GetInputDefinition()
@@ -70,31 +63,31 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
-	public class Int2VariableSource : VariableSource<Vector2Int>
+	public class Vector2IntVariableSource : VariableSource<Vector2Int>
 	{
-		public Int2VariableSource() => Value = Vector2Int.zero;
-		public Int2VariableSource(Vector2Int defaultValue) => Value = defaultValue;
+		public Vector2IntVariableSource() => Value = Vector2Int.zero;
+		public Vector2IntVariableSource(Vector2Int defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
-	public class Int3VariableSource : VariableSource<Vector3Int>
+	public class Vector3IntVariableSource : VariableSource<Vector3Int>
 	{
-		public Int3VariableSource() => Value = Vector3Int.zero;
-		public Int3VariableSource(Vector3Int defaultValue) => Value = defaultValue;
+		public Vector3IntVariableSource() => Value = Vector3Int.zero;
+		public Vector3IntVariableSource(Vector3Int defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
-	public class IntRectVariableSource : VariableSource<RectInt>
+	public class RectIntVariableSource : VariableSource<RectInt>
 	{
-		public IntRectVariableSource() => Value = new RectInt(Vector2Int.zero, Vector2Int.one);
-		public IntRectVariableSource(RectInt defaultValue) => Value = defaultValue;
+		public RectIntVariableSource() => Value = new RectInt(Vector2Int.zero, Vector2Int.one);
+		public RectIntVariableSource(RectInt defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
-	public class IntBoundsVariableSource : VariableSource<BoundsInt>
+	public class BoundsIntVariableSource : VariableSource<BoundsInt>
 	{
-		public IntBoundsVariableSource() => Value = new BoundsInt(Vector3Int.zero, Vector3Int.one);
-		public IntBoundsVariableSource(BoundsInt defaultValue) => Value = defaultValue;
+		public BoundsIntVariableSource() => Value = new BoundsInt(Vector3Int.zero, Vector3Int.one);
+		public BoundsIntVariableSource(BoundsInt defaultValue) => Value = defaultValue;
 	}
 
 	[Serializable]
@@ -154,24 +147,24 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
+	public class ListVariableSource : VariableSource<VariableList>
+	{
+		public ListVariableSource() => Value = new VariableList();
+	}
+
+	[Serializable]
+	public class DictionaryVariableSource : VariableSource<VariableDictionary>
+	{
+		public DictionaryVariableSource() => Value = new VariableDictionary();
+	}
+
+	[Serializable]
 	public class ObjectVariableSource : VariableSource<Object>
 	{
 	}
 
 	[Serializable]
 	public class GameObjectVariableSource : VariableSource<GameObject>
-	{
-	}
-
-	// TODO: these won't serialize
-
-	[Serializable]
-	public class StoreVariableSource : VariableSource<IVariableStore>
-	{
-	}
-
-	[Serializable]
-	public class ListVariableSource : VariableSource<IVariableList>
 	{
 	}
 

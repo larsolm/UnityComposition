@@ -55,26 +55,28 @@ namespace PiRhoSoft.Composition
 		{
 			if (owner.IsNullObject)
 				return Variable.Empty;
-			// TODO: try index
-			else if (owner.TryGetObject<IVariableStore>(out var store))
+			else if (owner.TryGetObject<IVariableArray>(out var index))
+				return LookupInIndex(index, lookup);
+			else if (owner.TryGetObject<IVariableCollection>(out var store))
 				return LookupInStore(store, lookup);
-			else if (ClassMap.Get(owner.ObjectType, out var map))
+			else if (VariableMap.TryGet(owner.ObjectType, out var map))
 				return LookupWithMap(owner.AsObject, map, lookup);
 			else
-				return LookupWithReflection(owner.AsObject, lookup);
+				return Variable.Empty;
 		}
 
 		protected internal override SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value)
 		{
 			if (owner.IsNullObject)
 				return SetVariableResult.NotFound;
-			// TODO: try index
-			else if (owner.TryGetObject<IVariableStore>(out var store))
+			else if (owner.TryGetObject<IVariableArray>(out var index))
+				return ApplyToIndex(index, lookup, value);
+			else if (owner.TryGetObject<IVariableCollection>(out var store))
 				return ApplyToStore(store, lookup, value);
-			else if (ClassMap.Get(owner.ObjectType, out var map))
+			else if (VariableMap.TryGet(owner.ObjectType, out var map))
 				return ApplyWithMap(owner.AsObject, map, lookup, value);
 			else
-				return ApplyWithReflection(owner.AsObject, lookup, value);
+				return SetVariableResult.NotFound;
 		}
 
 		protected internal override Variable Cast_(Variable owner, string type)
@@ -125,7 +127,23 @@ namespace PiRhoSoft.Composition
 				return null;
 		}
 
-		private static Variable LookupInStore(IVariableStore store, Variable lookup)
+		private static Variable LookupInIndex(IVariableArray index, Variable lookup)
+		{
+			if (lookup.TryGetInt(out var i))
+				return index.GetVariable(i);
+
+			return Variable.Empty;
+		}
+
+		private static SetVariableResult ApplyToIndex(IVariableArray index, Variable lookup, Variable value)
+		{
+			if (lookup.TryGetInt(out var i))
+				return index.SetVariable(i, value);
+			else
+				return SetVariableResult.TypeMismatch;
+		}
+
+		private static Variable LookupInStore(IVariableCollection store, Variable lookup)
 		{
 			if (lookup.TryGetString(out var s))
 				return store.GetVariable(s);
@@ -133,7 +151,7 @@ namespace PiRhoSoft.Composition
 			return Variable.Empty;
 		}
 
-		private static SetVariableResult ApplyToStore(IVariableStore store, Variable lookup, Variable value)
+		private static SetVariableResult ApplyToStore(IVariableCollection store, Variable lookup, Variable value)
 		{
 			if (lookup.TryGetString(out var s))
 				return store.SetVariable(s, value);
@@ -141,86 +159,18 @@ namespace PiRhoSoft.Composition
 				return SetVariableResult.TypeMismatch;
 		}
 
-		private static Variable LookupWithMap(object obj, IClassMap map, Variable lookup)
+		private static Variable LookupWithMap(object obj, VariableMap map, Variable lookup)
 		{
-			// TODO: maybe IClassIndex as well as IClassMap?
-
 			if (lookup.TryGetString(out var s))
 				return map.GetVariable(obj, s);
 
 			return Variable.Empty;
 		}
 
-		private static SetVariableResult ApplyWithMap(object obj, IClassMap map, Variable lookup, Variable value)
+		private static SetVariableResult ApplyWithMap(object obj, VariableMap map, Variable lookup, Variable value)
 		{
 			if (lookup.TryGetString(out var s))
 				return map.SetVariable(obj, s, value);
-
-			return SetVariableResult.NotFound;
-		}
-
-		private static Variable LookupWithReflection(object obj, Variable lookup)
-		{
-			if (lookup.TryGetString(out var s))
-			{
-				var field = obj.GetType().GetField(s, BindingFlags.Instance | BindingFlags.Public);
-				if (field != null)
-				{
-					try { return Variable.Unbox(field.GetValue(obj)); }
-					catch { return Variable.Empty; }
-				}
-
-				var property = obj.GetType().GetProperty(s, BindingFlags.Instance | BindingFlags.Public);
-				if (property != null)
-				{
-					try { return Variable.Unbox(property.GetValue(obj)); }
-					catch { return Variable.Empty; }
-				}
-			}
-
-			return Variable.Empty;
-		}
-
-		private static SetVariableResult ApplyWithReflection(object obj, Variable lookup, Variable value)
-		{
-			if (lookup.TryGetString(out var s))
-			{
-				var field = obj.GetType().GetField(s, BindingFlags.Instance | BindingFlags.Public);
-				if (field != null)
-				{
-					try
-					{
-						field.SetValue(obj, value.Box());
-						return SetVariableResult.Success;
-					}
-					catch (FieldAccessException)
-					{
-						return SetVariableResult.ReadOnly;
-					}
-					catch (ArgumentException)
-					{
-						return SetVariableResult.TypeMismatch;
-					}
-				}
-
-				var property = obj.GetType().GetProperty(s, BindingFlags.Instance | BindingFlags.Public);
-				if (property != null)
-				{
-					try
-					{
-						property.SetValue(obj, value.Box());
-						return SetVariableResult.Success;
-					}
-					catch (FieldAccessException)
-					{
-						return SetVariableResult.ReadOnly;
-					}
-					catch (ArgumentException)
-					{
-						return SetVariableResult.TypeMismatch;
-					}
-				}
-			}
 
 			return SetVariableResult.NotFound;
 		}

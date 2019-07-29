@@ -38,7 +38,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			public override VisualElement CreateField(int index)
 			{
-				var entry = _schema[index];
+				var entry = _schema.GetEntry(index);
 				var control = new VariableSchemaEntryControl(_schema.Tags.List, entry) { userData = index };
 				return control;
 			}

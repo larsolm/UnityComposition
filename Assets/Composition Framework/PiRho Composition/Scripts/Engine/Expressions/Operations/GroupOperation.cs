@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 			parser.SkipToken(ExpressionTokenType.EndGroup, ExpressionLexer.GroupCloseSymbol.ToString());
 		}
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			return _group.Evaluate(variables);
 		}

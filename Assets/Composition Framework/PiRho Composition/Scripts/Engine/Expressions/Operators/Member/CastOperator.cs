@@ -19,7 +19,7 @@
 				throw new ExpressionParseException(token, _invalidCastException, Symbol, Right);
 		}
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var left = Left.Evaluate(variables);
 			var value = VariableHandler.Cast(left, _rightIdentifier.Name);
@@ -43,7 +43,7 @@
 			return value;
 		}
 
-		public Variable GetValue(IVariableStore variables, Variable owner)
+		public Variable GetValue(IVariableCollection variables, Variable owner)
 		{
 			var left = Left is ILookupOperation lookup ? lookup.GetValue(variables, owner) : Variable.Empty;
 			return left.IsEmpty ? left : VariableHandler.Cast(left, _rightIdentifier.Name);

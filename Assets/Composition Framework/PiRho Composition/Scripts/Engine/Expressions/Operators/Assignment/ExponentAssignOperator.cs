@@ -2,7 +2,7 @@
 {
 	internal class ExponentAssignOperator : AssignmentOperator
 	{
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);

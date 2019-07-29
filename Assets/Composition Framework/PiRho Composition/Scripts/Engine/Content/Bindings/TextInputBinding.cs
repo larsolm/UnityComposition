@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The variable holding the value to set basedo on the text in this object")]
 		public VariableReference Variable = new VariableReference();
 
-		private IVariableStore _variables;
+		private IVariableCollection _variables;
 		private TMP_InputField _text;
 
 		public TMP_InputField Text
@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition
 			Text.onValueChanged.AddListener(TextChanged);
 		}
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			_variables = variables;
 			Text.textComponent.text = Variable.GetValue(_variables).ToString();

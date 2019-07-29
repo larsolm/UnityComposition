@@ -34,7 +34,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public string GetText(IVariableStore variables, bool suppressErrors)
+		public string GetText(IVariableCollection variables, bool suppressErrors)
 		{
 			var changed = _dirty;
 

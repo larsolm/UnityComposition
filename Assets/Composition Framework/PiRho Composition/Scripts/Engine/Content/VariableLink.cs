@@ -7,20 +7,20 @@ namespace PiRhoSoft.Composition
 	public sealed class VariableLink : MonoBehaviour
 	{
 		[Tooltip("The variables to add to the global variable store")]
-		public VariablePool Variables = new VariablePool();
+		public OpenStore Variables = new OpenStore();
 
 		void OnEnable()
 		{
-			for (var i = 0; i < Variables.Names.Count && i < Variables.Variables.Count; i++)
-				CompositionManager.Instance.GlobalStore.SetVariable(Variables.Names[i], Variables.Variables[i]);
+			for (var i = 0; i < Variables.VariableNames.Count && i < Variables.Variables.Count; i++)
+				CompositionManager.Instance.GlobalStore.SetVariable(Variables.VariableNames[i], Variables.Variables[i]);
 		}
 
 		void OnDisable()
 		{
 			if (CompositionManager.Exists)
 			{
-				foreach (var name in Variables.Names)
-					CompositionManager.Instance.GlobalStore.RemoveVariable(name);
+				foreach (var name in Variables.VariableNames)
+					CompositionManager.Instance.GlobalStore.SetVariable(name, Variable.Empty);
 			}
 		}
 	}

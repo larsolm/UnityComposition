@@ -12,11 +12,11 @@ namespace PiRhoSoft.MonsterRpg
 	{
 		public string AbilityPath = string.Empty;
 		public string Name = string.Empty;
-		public VariableSet Variables = new VariableSet();
+		public VariableStore Variables = new VariableStore();
 	}
 
 	[Serializable]
-	public class MoveList : VariableList, IVariableReset, IEnumerable<Move>
+	public class MoveList : VariableList, IResettableVariables, IEnumerable<Move>
 	{
 		public void Setup(Creature creature)
 		{
@@ -45,15 +45,24 @@ namespace PiRhoSoft.MonsterRpg
 			}
 		}
 
+		public void ResetAll()
+		{
+			foreach (var value in Values)
+			{
+				if (value.TryGetObject<Move>(out var move))
+					move.ResetAll();
+			}
+		}
+
 		IEnumerator<Move> IEnumerable<Move>.GetEnumerator()
 		{
-			for (var i = 0; i < Count; i++)
+			for (var i = 0; i < VariableCount; i++)
 				yield return Values[i].AsObject as Move;
 		}
 
 		IEnumerator IEnumerable.GetEnumerator()
 		{
-			for (var i = 0; i < Count; i++)
+			for (var i = 0; i < VariableCount; i++)
 				yield return Values[i].AsObject;
 		}
 	}
@@ -79,7 +88,7 @@ namespace PiRhoSoft.MonsterRpg
 		public Move Clone(Creature creature)
 		{
 			var move = Ability.CreateMove(creature);
-			move.Variables.LoadFrom(Variables, null);
+			move.Variables.CopyFrom(Variables, null);
 			return move;
 		}
 
@@ -108,12 +117,12 @@ namespace PiRhoSoft.MonsterRpg
 
 		public void Load(MoveSaveData data)
 		{
-			Variables.LoadFrom(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyFrom(data.Variables, WorldLoader.SavedVariables);
 		}
 
 		public void Save(MoveSaveData data)
 		{
-			Variables.SaveTo(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyTo(data.Variables, WorldLoader.SavedVariables);
 		}
 
 		#endregion

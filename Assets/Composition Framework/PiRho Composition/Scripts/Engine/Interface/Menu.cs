@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 	[DisallowMultipleComponent]
 	[HelpURL(Composition.DocumentationUrl + "menu")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu")]
-	public class Menu : MonoBehaviour, IVariableStore
+	public class Menu : MonoBehaviour, IVariableCollection
 	{
 		public Action<MenuItem> OnItemBlurred;
 		public Action<MenuItem> OnItemFocused;
@@ -153,9 +153,9 @@ namespace PiRhoSoft.Composition
 
 		private static string[] _variableNames = new string[] { nameof(FocusedItem), nameof(FocusedIndex) };
 
-		public IList<string> GetVariableNames()
+		public IReadOnlyList<string> VariableNames
 		{
-			return _variableNames;
+			get => _variableNames;
 		}
 
 		public Variable GetVariable(string name)

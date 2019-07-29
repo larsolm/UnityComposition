@@ -14,13 +14,13 @@ namespace PiRhoSoft.MonsterRpg
 	{
 		public string SpeciesPath = string.Empty;
 		public string Name = string.Empty;
-		public VariableSet Variables = new VariableSet();
+		public VariableStore Variables = new VariableStore();
 		public SkillsDictionary Skills = new SkillsDictionary();
 		public List<MoveSaveData> Moves = new List<MoveSaveData>();
 	}
 
 	[Serializable]
-	public class CreatureReference : IVariableStore
+	public class CreatureReference : IVariableCollection
 	{
 		private const string _missingSpeciesWarning = "(ECRMS) A CreatureReference on '{0}' has not been assigned a Species";
 
@@ -60,7 +60,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public Variable GetVariable(string name) => Creature && Creature.Species ? Creature.GetVariable(name) : Species ? Species.GetVariable(name) : Variable.Empty;
 		public SetVariableResult SetVariable(string name, Variable value) => Creature && Creature.Species ? Creature.SetVariable(name, value) : Species ? Species.SetVariable(name, value) : SetVariableResult.NotFound;
-		public IList<string> GetVariableNames() => Creature && Creature.Species ? Creature.GetVariableNames() : Species ? Species.GetVariableNames() : new List<string>();
+		public IReadOnlyList<string> VariableNames => Creature && Creature.Species ? Creature.VariableNames : Species ? Species.VariableNames : VariableStore.EmptyNames;
 
 		#endregion
 	}
@@ -103,7 +103,7 @@ namespace PiRhoSoft.MonsterRpg
 			var creature = Species.CreateCreature(trainer);
 
 			creature.Name = Name;
-			creature.Variables.LoadFrom(Variables, null);
+			creature.Variables.CopyFrom(Variables, null);
 
 			foreach (var move in Moves)
 			{
@@ -217,7 +217,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			Name = data.Name;
 			_skills = data.Skills;
-			Variables.LoadFrom(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyFrom(data.Variables, WorldLoader.SavedVariables);
 
 			foreach (var moveData in data.Moves)
 			{
@@ -234,7 +234,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			data.Name = Name;
 			data.Skills = _skills;
-			Variables.SaveTo(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyTo(data.Variables, WorldLoader.SavedVariables);
 
 			foreach (var move in Moves)
 				data.Moves.Add(Move.Save(move));

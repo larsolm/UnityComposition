@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	public interface ITrainer : IVariableStore
+	public interface ITrainer : IVariableCollection
 	{
 		string Name { get; }
 		Roster Roster { get; }

@@ -27,7 +27,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			Text.enabled = Resolve(variables, Variable, out Color color);
 			Text.color = color;

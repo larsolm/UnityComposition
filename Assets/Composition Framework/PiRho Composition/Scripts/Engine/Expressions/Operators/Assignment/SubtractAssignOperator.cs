@@ -5,7 +5,7 @@
 		private const string _readOnlyRemoveException = "the list '{0}' is read only and cannot have values removed";
 		private const string _mismatchedRemoveException = "the list '{0}' cannot have values of type {1} removed";
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);
@@ -15,7 +15,7 @@
 				var list = left.AsList;
 				var removeIndex = -1;
 
-				for (var i = 0; i < list.Count; i++)
+				for (var i = 0; i < list.VariableCount; i++)
 				{
 					var item = list.GetVariable(i);
 					var comparison = VariableHandler.IsEqual(item, right);

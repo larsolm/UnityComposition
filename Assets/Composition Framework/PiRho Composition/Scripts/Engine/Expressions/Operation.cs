@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 	public abstract class Operation
 	{
 		public abstract void Parse(ExpressionParser parser, ExpressionToken token);
-		public abstract Variable Evaluate(IVariableStore variables);
+		public abstract Variable Evaluate(IVariableCollection variables);
 		public abstract void ToString(StringBuilder builder);
 
 		public virtual void GetInputs(IList<VariableDefinition> inputs, string source) { }

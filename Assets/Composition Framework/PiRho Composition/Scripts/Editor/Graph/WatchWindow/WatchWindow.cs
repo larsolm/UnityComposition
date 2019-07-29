@@ -221,7 +221,7 @@ namespace PiRhoSoft.Composition.Editor
 			return false;
 		}
 
-		private void AddWatch(string name, IVariableStore store)
+		private void AddWatch(string name, IVariableCollection store)
 		{
 			_watchedContainer.Add(new VariableStoreControl(name, store, false, true));
 		}
@@ -256,10 +256,10 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public class WatchEvent : EventBase<WatchEvent>
 		{
-			public IVariableStore Store { get; private set; }
+			public IVariableCollection Store { get; private set; }
 			public string Name { get; private set; }
 
-			public static WatchEvent GetPooled(IVariableStore store, string name)
+			public static WatchEvent GetPooled(IVariableCollection store, string name)
 			{
 				var pooled = GetPooled();
 				pooled.Store = store;

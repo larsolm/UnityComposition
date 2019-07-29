@@ -19,23 +19,23 @@ namespace PiRhoSoft.Composition
 		private List<VariableBinding> _bindings = new List<VariableBinding>();
 		private List<BindingRoot> _items = new List<BindingRoot>();
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			if (Template != null)
 			{
 				if (Resolve(variables, Variable, out IVariableList list))
 				{
-					SyncItems(list.Count);
+					SyncItems(list.VariableCount);
 
-					for (var i = 0; i < list.Count; i++)
+					for (var i = 0; i < list.VariableCount; i++)
 					{
 						var item = list.GetVariable(i);
 						SetItem(i, item);
 					}
 				}
-				else if (Resolve(variables, Variable, out IVariableStore store))
+				else if (Resolve(variables, Variable, out IVariableDictionary store))
 				{
-					var names = store.GetVariableNames();
+					var names = store.VariableNames;
 
 					SyncItems(names.Count);
 

@@ -22,10 +22,8 @@ namespace PiRhoSoft.Composition
 		{
 			if (Variable.IsValidEnumType(type))
 				Constraint = new EnumConstraint(type);
-			else if (Variable.IsValidObjectType(type))
-				Constraint = new ObjectConstraint(type);
 			else
-				Constraint = new OtherConstraint(type);
+				Constraint = new ObjectConstraint(type);
 		}
 	}
 
@@ -65,9 +63,9 @@ namespace PiRhoSoft.Composition
 
 		#region Lookup
 
-		public Variable GetValue(IVariableStore variables)
+		public Variable GetValue(IVariableCollection variables)
 		{
-			var value = IsAssigned ? PiRhoSoft.Composition.Variable.Store(variables) : PiRhoSoft.Composition.Variable.Empty;
+			var value = IsAssigned ? PiRhoSoft.Composition.Variable.Object(variables) : PiRhoSoft.Composition.Variable.Empty;
 
 			foreach (var token in _tokens)
 			{
@@ -89,11 +87,11 @@ namespace PiRhoSoft.Composition
 
 		#region Assignment
 
-		public SetVariableResult SetValue(IVariableStore variables, Variable value)
+		public SetVariableResult SetValue(IVariableCollection variables, Variable value)
 		{
 			if (IsAssigned)
 			{
-				var owner = PiRhoSoft.Composition.Variable.Store(variables);
+				var owner = PiRhoSoft.Composition.Variable.Object(variables);
 				return SetValue_(ref owner, value, 0);
 			}
 			else

@@ -11,7 +11,7 @@ namespace PiRhoSoft.MonsterRpg
 	[Serializable]
 	public class WorldSaveData
 	{
-		public VariableSet Variables = new VariableSet();
+		public VariableStore Variables = new VariableStore();
 		public List<ZoneSaveData> Zones = new List<ZoneSaveData>();
 	}
 
@@ -318,10 +318,10 @@ namespace PiRhoSoft.MonsterRpg
 
 		#region Persistence
 
-		public void Load(string filename, VariableSet header, WorldSaveData saveData)
+		public void Load(string filename, IVariableCollection header, WorldSaveData saveData)
 		{
-			Variables.LoadFrom(header, WorldLoader.HeaderVariables);
-			Variables.LoadFrom(saveData.Variables, WorldLoader.SavedVariables);
+			SchemaVariables.CopyFrom(header, WorldLoader.HeaderVariables);
+			SchemaVariables.CopyFrom(saveData.Variables, WorldLoader.SavedVariables);
 
 			foreach (var zoneData in saveData.Zones)
 			{
@@ -334,10 +334,10 @@ namespace PiRhoSoft.MonsterRpg
 			SaveFilename = filename;
 		}
 
-		public string Save(VariableSet header, WorldSaveData saveData)
+		public string Save(IVariableCollection header, WorldSaveData saveData)
 		{
-			Variables.SaveTo(header, WorldLoader.HeaderVariables);
-			Variables.SaveTo(saveData.Variables, WorldLoader.SavedVariables);
+			SchemaVariables.CopyTo(header, WorldLoader.HeaderVariables);
+			SchemaVariables.CopyTo(saveData.Variables, WorldLoader.SavedVariables);
 
 			foreach (var zone in World.Zones)
 			{

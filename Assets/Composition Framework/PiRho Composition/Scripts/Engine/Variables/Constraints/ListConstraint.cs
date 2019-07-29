@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (variable.TryGetList(out var list))
 			{
-				for (var i = 0; i < list.Count; i++)
+				for (var i = 0; i < list.VariableCount; i++)
 				{
 					var item = list.GetVariable(i);
 

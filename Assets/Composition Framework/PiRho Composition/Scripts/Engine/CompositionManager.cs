@@ -9,12 +9,12 @@ namespace PiRhoSoft.Composition
 	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
 	public sealed class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
-		private class DefaultGlobalStore : IVariableStore
+		private class DefaultGlobalStore : IVariableCollection
 		{
 			private static readonly string[] _names = new string[] { GlobalStoreName, SceneStoreName };
 
-			public IList<string> GetVariableNames() => _names;
-			public Variable GetVariable(string name) => name == GlobalStoreName ? Variable.Store(Instance.GlobalStore) : (name == SceneStoreName ? Variable.Store(Instance.SceneStore) : Variable.Empty);
+			public IReadOnlyList<string> VariableNames => _names;
+			public Variable GetVariable(string name) => name == GlobalStoreName ? Variable.Object(Instance.GlobalStore) : (name == SceneStoreName ? Variable.Object(Instance.SceneStore) : Variable.Empty);
 			public SetVariableResult SetVariable(string name, Variable value) => (name == GlobalStoreName || name == SceneStoreName) ? SetVariableResult.ReadOnly : SetVariableResult.NotFound;
 		}
 
@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition
 		public const string SceneStoreName = "scene";
 		public static string CommandFolder = "Commands";
 
-		public IVariableStore DefaultStore { get; private set; } = new DefaultGlobalStore();
+		public IVariableCollection DefaultStore { get; private set; } = new DefaultGlobalStore();
 		public VariableStore GlobalStore { get; private set; } = new VariableStore();
 		public SceneVariableStore SceneStore { get; private set; } = new SceneVariableStore();
 
@@ -56,7 +56,7 @@ namespace PiRhoSoft.Composition
 			RunGraph(caller, DefaultStore, context);
 		}
 
-		public void RunGraph(GraphCaller caller, IVariableStore store, Variable context)
+		public void RunGraph(GraphCaller caller, IVariableCollection store, Variable context)
 		{
 			var enumerator = caller.Execute(store, context);
 			StartCoroutine(new JoinEnumerator(enumerator));

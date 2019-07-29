@@ -97,10 +97,10 @@ namespace PiRhoSoft.Composition.Editor
 					tooltip = "The enum type of values added to the list";
 					return CreateEnumConstraint(enumConstraint);
 				}
-				case StoreConstraint storeConstraint:
+				case DictionaryConstraint dictionaryConstraint:
 				{
 					tooltip = "The schema the store must use";
-					return CreateStoreConstraint(storeConstraint);
+					return CreateDictionaryConstraint(dictionaryConstraint);
 				}
 				case ListConstraint listConstraint:
 				{
@@ -268,7 +268,7 @@ namespace PiRhoSoft.Composition.Editor
 			return picker;
 		}
 		
-		private VisualElement CreateStoreConstraint(StoreConstraint constraint)
+		private VisualElement CreateDictionaryConstraint(DictionaryConstraint constraint)
 		{
 			var picker = new ObjectPickerControl(constraint.Schema, typeof(VariableSchema));
 			picker.RegisterCallback<ChangeEvent<Object>>(evt =>

@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	public interface IVariableList : IVariableIndex
+	public interface IVariableList : IVariableArray
 	{
 		SetVariableResult AddVariable(Variable value);
 		SetVariableResult RemoveVariable(int index);

@@ -4,7 +4,7 @@
 	{
 		private const string _invalidAssignmentException = "unable to decrement '{0}'";
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var result = Right.Evaluate(variables);
 			var value = VariableHandler.Add(result, Variable.Int(-1));

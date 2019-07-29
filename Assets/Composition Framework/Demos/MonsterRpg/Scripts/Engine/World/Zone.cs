@@ -9,7 +9,7 @@ namespace PiRhoSoft.MonsterRpg
 	public class ZoneSaveData
 	{
 		public string Name = string.Empty;
-		public VariableSet Variables = new VariableSet();
+		public VariableStore Variables = new VariableStore();
 		public MapSaveData Map = new MapSaveData();
 	}
 
@@ -46,12 +46,12 @@ namespace PiRhoSoft.MonsterRpg
 
 		public void Load(ZoneSaveData saveData)
 		{
-			Variables.LoadFrom(saveData.Variables, WorldLoader.SavedVariables);
+			Variables.CopyFrom(saveData.Variables, WorldLoader.SavedVariables);
 		}
 
 		public void Save(ZoneSaveData saveData)
 		{
-			Variables.SaveTo(saveData.Variables, WorldLoader.SavedVariables);
+			Variables.CopyTo(saveData.Variables, WorldLoader.SavedVariables);
 		}
 
 		#endregion

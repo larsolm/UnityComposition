@@ -16,13 +16,13 @@ namespace PiRhoSoft.Composition
 			Symbol = parser.GetText(token);
 		}
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var left = Left.Evaluate(variables);
 
 			if (left.IsList)
 			{
-				var result = left.AsList.Count > 0 ? left.AsList.RemoveVariable(left.AsList.Count - 1) : SetVariableResult.NotFound;
+				var result = left.AsList.VariableCount > 0 ? left.AsList.RemoveVariable(left.AsList.VariableCount - 1) : SetVariableResult.NotFound;
 
 				if (result != SetVariableResult.Success)
 				{

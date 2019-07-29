@@ -8,14 +8,14 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableStoreControl : VisualElement
 	{
-		public IVariableStore Value { get; private set; }
+		public IVariableCollection Value { get; private set; }
 
 		public bool ShouldClose { get; private set; }
 
 		private ValuesProxy _proxy;
 		private ListControl _list;
 
-		public VariableStoreControl(string label, IVariableStore value, bool isStatic, bool isClosable)
+		public VariableStoreControl(string label, IVariableCollection value, bool isStatic, bool isClosable)
 		{
 			Value = value;
 
@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private abstract class ValuesProxy : ListProxy
 		{
-			protected readonly IVariableStore _variables;
+			protected readonly IVariableCollection _variables;
 
 			public override bool AllowAdd => false;
 			public override bool AllowRemove => false;
@@ -45,7 +45,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			public abstract string GetName(int index);
 
-			public ValuesProxy(IVariableStore variables)
+			public ValuesProxy(IVariableCollection variables)
 			{
 				_variables = variables;
 			}
@@ -100,23 +100,23 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class StaticValuesProxy : ValuesProxy
 		{
-			private readonly IList<string> _names;
+			private readonly IReadOnlyList<string> _names;
 
 			public override int ItemCount => _names.Count;
 			public override string GetName(int index) => _names[index];
 
-			public StaticValuesProxy(IVariableStore variables) : base(variables)
+			public StaticValuesProxy(IVariableCollection variables) : base(variables)
 			{
-				_names = variables.GetVariableNames();
+				_names = variables.VariableNames;
 			}
 		}
 
 		private class DynamicValuesProxy : ValuesProxy
 		{
-			public override int ItemCount => _variables.GetVariableNames().Count;
-			public override string GetName(int index) => _variables.GetVariableNames()[index];
+			public override int ItemCount => _variables.VariableNames.Count;
+			public override string GetName(int index) => _variables.VariableNames[index];
 
-			public DynamicValuesProxy(IVariableStore variables) : base(variables)
+			public DynamicValuesProxy(IVariableCollection variables) : base(variables)
 			{
 			}
 		}

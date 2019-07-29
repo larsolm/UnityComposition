@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	public class SceneVariableStore : IVariableStore
+	public class SceneVariableStore : IVariableCollection
 	{
 		private static readonly string[] _emptyNames = new string[0];
 
@@ -26,9 +26,9 @@ namespace PiRhoSoft.Composition
 			return SetVariableResult.ReadOnly;
 		}
 
-		public IList<string> GetVariableNames()
+		public IReadOnlyList<string> VariableNames
 		{
-			return _emptyNames;
+			get => _emptyNames;
 		}
 	}
 }

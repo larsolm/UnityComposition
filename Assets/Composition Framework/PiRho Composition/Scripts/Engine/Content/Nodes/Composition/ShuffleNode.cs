@@ -19,9 +19,9 @@ namespace PiRhoSoft.Composition
 		{
 			if (Resolve(variables, Variable, out IVariableList list))
 			{
-				for (var i = 0; i < list.Count - 2; i++)
+				for (var i = 0; i < list.VariableCount - 2; i++)
 				{
-					var j = Random.Range(i, list.Count);
+					var j = Random.Range(i, list.VariableCount);
 					var iValue = list.GetVariable(i);
 					var jValue = list.GetVariable(j);
 

@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 		public Type EnumType
 		{
 			get => _enumType;
-			set => _enumType = Variable.IsValidEnumType(value) ? value : typeof(InvalidEnumVariable);
+			set => _enumType = Variable.IsValidEnumType(value) ? value : typeof(Variable.InvalidEnum);
 		}
 
 		public EnumConstraint()

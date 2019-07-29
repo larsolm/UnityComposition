@@ -103,10 +103,6 @@ namespace PiRhoSoft.Composition
 
 		#region Comparison
 
-		// Valid comparisons follow the same casting rules as laid out in the Casting region of the VariableValue
-		// definition with the addition that VariableType Empty compares equal to null objects. Comparison results
-		// follow the same rules as the .net CompareTo method.
-
 		public static bool? IsEqual(Variable left, Variable right) => Get(left.Type).IsEqual_(left, right);
 		public static int? Compare(Variable left, Variable right) => Get(left.Type).Compare_(left, right);
 

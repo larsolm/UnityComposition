@@ -2,7 +2,7 @@
 {
 	internal class NegateOperator : PrefixOperation
 	{
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var result = Right.Evaluate(variables);
 			var value = VariableHandler.Negate(result);

@@ -69,7 +69,7 @@ namespace PiRhoSoft.Composition.Editor
 				case VariableType.Enum: return CreateEnum();
 				case VariableType.String: return CreateString();
 				case VariableType.List: return CreateList();
-				case VariableType.Store: return CreateDictionary();
+				case VariableType.Dictionary: return CreateDictionary();
 				case VariableType.Object: return CreateObject();
 				default: return null;
 			}
@@ -367,7 +367,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var objectType = (Definition.Constraint as ObjectConstraint)?.ObjectType ?? typeof(Object);
 
-			var picker = new ObjectPickerControl(Value.AsObject, objectType);
+			var picker = new ObjectPickerControl(Value.GetObject<Object>(), objectType);
 			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{
 				var value = Variable.Object(evt.newValue);
@@ -382,7 +382,7 @@ namespace PiRhoSoft.Composition.Editor
 			public IVariableList Variables;
 			public VariableDefinition Definition;
 
-			public override int ItemCount => Variables.Count;
+			public override int ItemCount => Variables.VariableCount;
 
 			public VariableListProxy(IVariableList variables, VariableDefinition definition)
 			{

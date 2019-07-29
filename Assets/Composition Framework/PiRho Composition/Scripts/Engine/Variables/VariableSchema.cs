@@ -7,12 +7,6 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
-	public interface ISchemaOwner
-	{
-		VariableSchema Schema { get; }
-		void SetupSchema();
-	}
-
 	[HelpURL(Composition.DocumentationUrl + "variable-schema")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
 	public class VariableSchema : ScriptableObject
@@ -26,7 +20,7 @@ namespace PiRhoSoft.Composition
 			public Expression Initializer = new Expression();
 			public VariableDefinition Definition;
 
-			public Variable GenerateValue(IVariableStore variables)
+			public Variable GenerateValue(IVariableCollection variables)
 			{
 				if (Initializer != null && Initializer.IsValid)
 				{
@@ -68,12 +62,6 @@ namespace PiRhoSoft.Composition
 			get => _entries.Select(e => e.Definition.Name).ToList(); // TODO: cache
 		}
 
-		public Entry this[int index]
-		{
-			get { return _entries[index]; }
-			set { _entries[index] = value; IncrementVersion(); }
-		}
-
 		public bool TryGetIndex(string name, out int index)
 		{
 			for (var i = 0; i < _entries.Count; i++)
@@ -87,6 +75,48 @@ namespace PiRhoSoft.Composition
 
 			index = -1;
 			return false;
+		}
+
+		public Entry GetEntry(int index)
+		{
+			return index >= 0 && index < _entries.Count
+				? _entries[index]
+				: null;
+		}
+
+		public string GetName(int index)
+		{
+			return index >= 0 && index < _entries.Count
+				? _entries[index].Definition.Name
+				: string.Empty;
+		}
+
+		public string GetTag(int index)
+		{
+			return index >= 0 && index < _entries.Count
+				? _entries[index].Tag
+				: string.Empty;
+		}
+
+		public VariableDefinition GetDefinition(int index)
+		{
+			return index >= 0 && index < _entries.Count
+				? _entries[index].Definition
+				: null;
+		}
+
+		public Variable Generate(IVariableCollection store, int index)
+		{
+			return index >= 0 && index < _entries.Count
+				? _entries[index].GenerateValue(store)
+				: Variable.Empty;
+		}
+
+		public bool IsValid(int index, Variable value)
+		{
+			return index >= 0 && index < _entries.Count
+				? _entries[index].Definition.IsValid(value)
+				: false;
 		}
 
 		public bool HasDefinition(string name)

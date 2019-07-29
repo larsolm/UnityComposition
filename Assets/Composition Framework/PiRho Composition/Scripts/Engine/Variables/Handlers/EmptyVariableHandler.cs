@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition
 
 		protected internal override bool? IsEqual_(Variable left, Variable right)
 		{
-			return right.IsEmpty || right.IsNullObject || right.IsNullOther;
+			return right.IsEmpty || right.IsNullObject;
 		}
 	}
 }

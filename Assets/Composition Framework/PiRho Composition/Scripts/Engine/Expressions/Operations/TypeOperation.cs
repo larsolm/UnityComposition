@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 		{
 		}
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			return Variable.Create(Type);
 		}

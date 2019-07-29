@@ -22,7 +22,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			if (Resolve(variables, Filename, out var filename) && ResolveObject(variables, Header, out var header))
 			{
-				var info = WorldLoader.Instance.SaveHeader(filename, header.Variables);
+				var info = WorldLoader.Instance.SaveHeader(filename, header.SchemaVariables);
 				info.OnError += error => Debug.LogError(error, this);
 
 				while (info.State == SaveState.Saving)

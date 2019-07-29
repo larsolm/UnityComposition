@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class RandomCommand : ICommand
 	{
-		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
 		{
 			switch (parameters.Count)
 			{
@@ -21,7 +21,7 @@ namespace PiRhoSoft.Composition
 					{
 						case VariableType.Int: return Variable.Int(Random.Range(0, value.AsInt));
 						case VariableType.Float: return Variable.Float(Random.Range(0.0f, value.AsFloat));
-						case VariableType.List: return value.AsList.GetVariable(Random.Range(0, value.AsList.Count));
+						case VariableType.List: return value.AsList.GetVariable(Random.Range(0, value.AsList.VariableCount));
 						default: throw CommandEvaluationException.WrongParameterType(name, 0, value.Type, VariableType.Int, VariableType.Float, VariableType.List);
 					}
 				}

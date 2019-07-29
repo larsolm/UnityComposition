@@ -4,7 +4,7 @@
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Equality;
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var equal = base.Evaluate(variables);
 			return Variable.Bool(!equal.AsBool);

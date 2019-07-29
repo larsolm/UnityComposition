@@ -232,31 +232,31 @@ namespace PiRhoSoft.Composition
 
 		#region Generic
 
-		//public static Variable Create<T>(T value)
-		//{
-		//	switch (value)
-		//	{
-		//		case bool b: return Bool(b);
-		//		case int i: return Int(i);
-		//		case float f: return Float(f);
-		//		case Vector2Int v: return Vector2Int(v);
-		//		case Vector3Int v: return Vector3Int(v);
-		//		case RectInt r: return RectInt(r);
-		//		case BoundsInt b: return BoundsInt(b);
-		//		case Vector2 v: return Vector2(v);
-		//		case Vector3 v: return Vector3(v);
-		//		case Vector4 v: return Vector4(v);
-		//		case Quaternion q: return Quaternion(q);
-		//		case Rect r: return Rect(r);
-		//		case Bounds b: return Bounds(b);
-		//		case Color c: return Color(c);
-		//		case Enum e: return Enum(e);
-		//		case string s: return String(s);
-		//		case IVariableList l: return List(l);
-		//		case IVariableDictionary s: return Dictionary(s);
-		//		default: return Object(value);
-		//	}
-		//}
+		public static Variable Create<T>(T value)
+		{
+			switch (value)
+			{
+				case bool b: return Bool(b);
+				case int i: return Int(i);
+				case float f: return Float(f);
+				case Vector2Int v: return Vector2Int(v);
+				case Vector3Int v: return Vector3Int(v);
+				case RectInt r: return RectInt(r);
+				case BoundsInt b: return BoundsInt(b);
+				case Vector2 v: return Vector2(v);
+				case Vector3 v: return Vector3(v);
+				case Vector4 v: return Vector4(v);
+				case Quaternion q: return Quaternion(q);
+				case Rect r: return Rect(r);
+				case Bounds b: return Bounds(b);
+				case Color c: return Color(c);
+				case Enum e: return Enum(e);
+				case string s: return String(s);
+				case IVariableList l: return List(l);
+				case IVariableDictionary s: return Dictionary(s);
+				default: return Object(value);
+			}
+		}
 
 		public static VariableType GetType(Type type)
 		{

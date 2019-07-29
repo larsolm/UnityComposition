@@ -7,6 +7,8 @@ namespace PiRhoSoft.Composition
 	{
 		public VariableSchema Schema;
 
+		public override VariableType Type => VariableType.Dictionary;
+
 		public DictionaryConstraint()
 		{
 		}
