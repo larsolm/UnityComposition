@@ -3,14 +3,14 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariableSetControl : VisualElement
+	public class SchemaVariableCollectionControl : VisualElement
 	{
 		public SchemaVariableCollection Value { get; private set; }
 
 		private VariablesProxy _proxy;
 		private ListControl _list;
 
-		public VariableSetControl(SchemaVariableCollection value)
+		public SchemaVariableCollectionControl(SchemaVariableCollection value)
 		{
 			Value = value;
 
@@ -64,7 +64,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			public VisualElement CreateElement(int index)
 			{
-				var container = new VisualElement();
+				var container = new VisualElement { userData = index };
 				var entry = Variables.Schema.GetEntry(index);
 				var value = Variables.GetVariable(index);
 				
@@ -86,7 +86,11 @@ namespace PiRhoSoft.Composition.Editor
 				return container;
 			}
 
-			public bool NeedsUpdate(VisualElement item, int index) => true;
+			public bool NeedsUpdate(VisualElement item, int index)
+			{
+				return !(item.userData is int i) || i != index;
+			}
+
 			public void AddItem() { }
 			public void RemoveItem(int index) { }
 			public void ReorderItem(int from, int to) { }

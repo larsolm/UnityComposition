@@ -3,14 +3,14 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariablePoolControl : VisualElement
+	public class CustomVariableCollectionControl : VisualElement
 	{
 		public CustomVariableCollection Value { get; private set; }
 
 		private VariablesProxy _proxy;
 		private DictionaryControl _dictionary;
 
-		public VariablePoolControl(CustomVariableCollection value)
+		public CustomVariableCollectionControl(CustomVariableCollection value)
 		{
 			Value = value;
 
@@ -85,7 +85,6 @@ namespace PiRhoSoft.Composition.Editor
 				var definitionControl = new VariableDefinitionControl(definition);
 				definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt =>
 				{
-					//Variables.ChangeDefinition(index, evt.newValue);
 					variableControl.SetDefinition(evt.newValue);
 				});
 
@@ -113,7 +112,8 @@ namespace PiRhoSoft.Composition.Editor
 
 			public void RemoveItem(int index)
 			{
-				//Variables.RemoveVariable(index);
+				var name = Variables.VariableNames[index];
+				Variables.RemoveVariable(name);
 			}
 
 			public void ReorderItem(int from, int to)

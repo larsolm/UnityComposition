@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities.Editor;
+using System.Collections.Generic;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -14,7 +15,8 @@ namespace PiRhoSoft.Composition.Editor
 
 	public class DefaultGraphViewNode : GraphViewNode, IInputOutputNode
 	{
-		public const string DefaultUssClaseName = UssClassName + "--default";
+		public const string DefaultUssClassName = UssClassName + "--default";
+		public const string RenameButtonUssClassName = UssClassName + "__rename-button";
 		public const string BreakpointUssClassName = UssClassName + "__breakpoint-button";
 		public const string BreakpointUssContainerClassName = UssClassName + "__breakpoint-container";
 		public const string BreakpointActiveUssClassName = BreakpointUssClassName + "--active";
@@ -22,6 +24,8 @@ namespace PiRhoSoft.Composition.Editor
 		public const string BreakUssClassName = CallstackBorderUssClassName + "--break";
 		public const string InCallstackUssClassName = CallstackBorderUssClassName + "--in-callstack";
 		public const string ActiveInCallstackUssClassName = CallstackBorderUssClassName + "--active-in-callstack";
+
+		private static readonly Icon _renameIcon = Icon.BuiltIn("editicon.sml");
 
 		public GraphViewInputPort Input { get; private set; }
 		public List<GraphViewOutputPort> Outputs { get; private set; }
@@ -32,7 +36,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public DefaultGraphViewNode(GraphNode node, GraphViewConnector nodeConnector, bool isStart) : base(node, isStart)
 		{
-			AddToClassList(DefaultUssClaseName);
+			AddToClassList(DefaultUssClassName);
 
 			if (!IsStartNode)
 			{
@@ -72,6 +76,10 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var label = titleContainer.Q<Label>("title-label");
 			label.tooltip = "Double click to rename this node";
+
+			var renameIcon = new IconButton(_renameIcon.Texture, "Rename this node", () => ShowEditableText(_rename, Data.Node.name));
+			renameIcon.AddToClassList(RenameButtonUssClassName);
+			titleButtonContainer.Insert(0, renameIcon);
 
 			return CreateEditableLabel(label, () => Data.Node.name, OnNameChanged);
 		}
