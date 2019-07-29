@@ -7,11 +7,11 @@ namespace PiRhoSoft.Composition
 	{
 		private const string _invalidSchemaWarning = "(CECSCIS) Failed to create constrained variable store with the schema '{0}': the schema could not be found. Make sure it is in a \"Resources\" folder and the correct path was specified.";
 
-		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 0)
 			{
-				return Variable.Store(new VariableStore());
+				return Variable.Object(new VariableStore());
 			}
 			else if (parameters.Count == 1)
 			{
@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition
 				if (!schema)
 					Debug.LogWarningFormat(_invalidSchemaWarning, schemaName.AsString);
 
-				return Variable.Store(schema ? new ConstrainedStore(schema) : new VariableStore());
+				return Variable.Object(schema ? (IVariableCollection)new ConstrainedStore(schema) : new VariableStore());
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 0, 1);

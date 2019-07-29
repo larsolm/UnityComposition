@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition
 			_menu.AcceptsInput = false;
 		}
 
-		public void Show(IVariableStore variables, IEnumerable<MenuItemTemplate> items, bool isSelectionRequired, bool resetIndex)
+		public void Show(IVariableCollection variables, IEnumerable<MenuItemTemplate> items, bool isSelectionRequired, bool resetIndex)
 		{
 			Activate();
 			StopAllCoroutines();
@@ -104,7 +104,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private void CreateItems(IVariableStore variables, IEnumerable<MenuItemTemplate> items)
+		private void CreateItems(IVariableCollection variables, IEnumerable<MenuItemTemplate> items)
 		{
 			var index = 0;
 
@@ -116,7 +116,7 @@ namespace PiRhoSoft.Composition
 
 					if (value.IsList)
 						CreateListItem(item, value, ref index);
-					else if (value.IsStore)
+					else if (value.IsDictionary)
 						CreateStoreItem(item, value, ref index);
 					else if (value.IsEmpty)
 						Debug.LogErrorFormat(this, _missingItemError, item.Id, name, item.Variables);
@@ -170,7 +170,7 @@ namespace PiRhoSoft.Composition
 		{
 			var list = value.AsList;
 
-			for (var i = 0; i < list.Count; i++)
+			for (var i = 0; i < list.VariableCount; i++)
 				AddItem(item, null, list.GetVariable(i), index++);
 		}
 

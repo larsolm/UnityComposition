@@ -27,7 +27,7 @@ namespace PiRhoSoft.Composition
 			parser.SkipToken(ExpressionTokenType.EndGroup, ExpressionLexer.GroupCloseSymbol.ToString());
 		}
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var command = ExpressionParser.GetCommand(_name);
 

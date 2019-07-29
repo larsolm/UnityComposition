@@ -6,7 +6,7 @@ namespace PiRhoSoft.Composition
 	[HelpURL(Composition.DocumentationUrl + "binding-root")]
 	[AddComponentMenu("PiRho Soft/Bindings/Binding Root")]
 	[DisallowMultipleComponent]
-	public class BindingRoot : MonoBehaviour, IVariableStore
+	public class BindingRoot : MonoBehaviour, IVariableCollection
 	{
 		private readonly string[] _names = new string[] { string.Empty };
 
@@ -14,7 +14,7 @@ namespace PiRhoSoft.Composition
 
 		public virtual Variable Value { get; set; }
 
-		private IVariableStore _parent;
+		private IVariableCollection _parent;
 
 		protected virtual void Awake()
 		{
@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition
 
 		private static List<BindingRoot> _roots = new List<BindingRoot>();
 
-		internal static IVariableStore FindParent(GameObject obj)
+		internal static IVariableCollection FindParent(GameObject obj)
 		{
 			_roots.Clear();
 			obj.GetComponentsInParent(true, _roots);
@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition
 
 		#region IVariableStore Implementation
 
-		public virtual IList<string> GetVariableNames() { _names[0] = ValueName; return _names; }
+		public virtual IReadOnlyList<string> VariableNames { get { _names[0] = ValueName; return _names; } }
 		public virtual Variable GetVariable(string name) => name == ValueName ? Value : _parent.GetVariable(name);
 		public virtual SetVariableResult SetVariable(string name, Variable value) => name == ValueName ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
 

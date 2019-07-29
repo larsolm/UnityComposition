@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class LogCommand : ICommand
 	{
-		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
 		{
 			switch (parameters.Count)
 			{

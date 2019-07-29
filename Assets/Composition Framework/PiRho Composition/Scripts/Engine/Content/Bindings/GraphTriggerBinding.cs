@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 
 		private Variable _value = PiRhoSoft.Composition.Variable.Empty;
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			if (Graph.Graph && !Graph.IsRunning)
 			{

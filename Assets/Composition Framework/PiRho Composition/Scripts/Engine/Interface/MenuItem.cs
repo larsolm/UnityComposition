@@ -90,16 +90,19 @@ namespace PiRhoSoft.Composition
 				_parent.MoveItem(this);
 		}
 
-		public override IList<string> GetVariableNames()
+		public override IReadOnlyList<string> VariableNames
 		{
-			_names[0] = ValueName;
-			_names[1] = ItemName;
-			return _names;
+			get
+			{
+				_names[0] = ValueName;
+				_names[1] = ItemName;
+				return _names;
+			}
 		}
 
 		public override Variable GetVariable(string name)
 		{
-			if (name == ItemName) return Variable.Store(_data);
+			if (name == ItemName) return Variable.Object(_data);
 			else return base.GetVariable(name);
 		}
 
@@ -108,7 +111,7 @@ namespace PiRhoSoft.Composition
 			return SetVariableResult.ReadOnly;
 		}
 
-		private class Data : IVariableStore
+		private class Data : IVariableCollection
 		{
 			public int Index;
 			public int Column;
@@ -118,9 +121,9 @@ namespace PiRhoSoft.Composition
 
 			private static List<string> _variableNames = new List<string> { nameof(Index), nameof(Column), nameof(Row), nameof(Label), nameof(Focused) };
 
-			public IList<string> GetVariableNames()
+			public IReadOnlyList<string> VariableNames
 			{
-				return _variableNames;
+				get => _variableNames;
 			}
 
 			public Variable GetVariable(string name)

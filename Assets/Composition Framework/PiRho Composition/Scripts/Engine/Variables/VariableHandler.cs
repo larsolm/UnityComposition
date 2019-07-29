@@ -1,11 +1,17 @@
 ﻿using PiRhoSoft.Utilities;
-using System;
 using System.IO;
-using System.Reflection;
 using System.Text;
 
 namespace PiRhoSoft.Composition
 {
+	public enum SetVariableResult
+	{
+		Success,
+		NotFound,
+		ReadOnly,
+		TypeMismatch
+	}
+
 	public abstract class VariableHandler
 	{
 		public const string ListCountName = "Count";
@@ -14,7 +20,7 @@ namespace PiRhoSoft.Composition
 
 		static VariableHandler()
 		{
-			_handlers = new VariableHandler[(int)(VariableType.Other + 1)];
+			_handlers = new VariableHandler[(int)(VariableType.Object + 1)];
 			_handlers[(int)VariableType.Empty] = new EmptyVariableHandler();
 			_handlers[(int)VariableType.Bool] = new BoolVariableHandler();
 			_handlers[(int)VariableType.Int] = new IntVariableHandler();
@@ -30,12 +36,11 @@ namespace PiRhoSoft.Composition
 			_handlers[(int)VariableType.Rect] = new RectVariableHandler();
 			_handlers[(int)VariableType.Bounds] = new BoundsVariableHandler();
 			_handlers[(int)VariableType.Color] = new ColorVariableHandler();
-			_handlers[(int)VariableType.String] = new StringVariableHandler();
 			_handlers[(int)VariableType.Enum] = new EnumVariableHandler();
-			_handlers[(int)VariableType.Object] = new ObjectVariableHandler();
-			_handlers[(int)VariableType.Store] = new StoreVariableHandler();
+			_handlers[(int)VariableType.String] = new StringVariableHandler();
 			_handlers[(int)VariableType.List] = new ListVariableHandler();
-			_handlers[(int)VariableType.Other] = new OtherVariableHandler();
+			_handlers[(int)VariableType.Dictionary] = new DictionaryVariableHandler();
+			_handlers[(int)VariableType.Object] = new ObjectVariableHandler();
 		}
 
 		private static VariableHandler Get(VariableType type)
@@ -98,10 +103,6 @@ namespace PiRhoSoft.Composition
 
 		#region Comparison
 
-		// Valid comparisons follow the same casting rules as laid out in the Casting region of the VariableValue
-		// definition with the addition that VariableType Empty compares equal to null objects. Comparison results
-		// follow the same rules as the .net CompareTo method.
-
 		public static bool? IsEqual(Variable left, Variable right) => Get(left.Type).IsEqual_(left, right);
 		public static int? Compare(Variable left, Variable right) => Get(left.Type).Compare_(left, right);
 
@@ -121,170 +122,6 @@ namespace PiRhoSoft.Composition
 		protected internal virtual SetVariableResult Apply_(ref Variable owner, Variable lookup, Variable value) => SetVariableResult.NotFound;
 		protected internal virtual Variable Cast_(Variable owner, string type) => Variable.Empty;
 		protected internal virtual bool Test_(Variable owner, string type) => false;
-
-		protected static Variable Lookup(object obj, Variable lookup)
-		{
-			if (obj is IVariableStore store)
-				return LookupInStore(store, lookup);
-
-			if (obj is IVariableList list)
-				return LookupInList(list, lookup);
-
-			if (ClassMap.Get(obj.GetType(), out var map))
-				return LookupWithMap(obj, map, lookup);
-
-			return LookupWithReflection(obj, lookup);
-		}
-
-		protected static SetVariableResult Apply(object obj, Variable lookup, Variable value)
-		{
-			if (obj is IVariableStore store)
-				return ApplyToStore(store, lookup, value);
-
-			if (obj is IVariableList list)
-				return ApplyToList(list, lookup, value);
-
-			if (ClassMap.Get(obj.GetType(), out var map))
-				return ApplyWithMap(obj, map, lookup, value);
-
-			return ApplyWithReflection(obj, lookup, value);
-		}
-
-		private static Variable LookupInStore(IVariableStore store, Variable lookup)
-		{
-			if (lookup.TryGetString(out var s))
-				return store.GetVariable(s);
-
-			return Variable.Empty;
-		}
-
-		private static SetVariableResult ApplyToStore(IVariableStore store, Variable lookup, Variable value)
-		{
-			if (lookup.TryGetString(out var s))
-				return store.SetVariable(s, value);
-			else
-				return SetVariableResult.TypeMismatch;
-		}
-
-		private static Variable LookupInList(IVariableList list, Variable lookup)
-		{
-			if (lookup.TryGetString(out var s))
-			{
-				if (s == ListCountName)
-					return Variable.Int(list.Count);
-			}
-			else if (lookup.TryGetInt(out var i))
-			{
-				if (i >= 0 && i < list.Count)
-					return list.GetVariable(i);
-			}
-
-			return Variable.Empty;
-		}
-
-		private static SetVariableResult ApplyToList(IVariableList list, Variable lookup, Variable value)
-		{
-			if (lookup.TryGetString(out var s))
-			{
-				if (s == ListCountName)
-					return SetVariableResult.ReadOnly;
-				else
-					return SetVariableResult.NotFound;
-			}
-			else if (lookup.TryGetInt(out var i))
-			{
-				if (i >= 0 && i < list.Count)
-					return list.SetVariable(i, value);
-				else
-					return SetVariableResult.NotFound;
-			}
-			else
-			{
-				return SetVariableResult.TypeMismatch;
-			}
-		}
-
-		private static Variable LookupWithMap(object obj, IClassMap map, Variable lookup)
-		{
-			if (lookup.TryGetString(out var s))
-				return map.GetVariable(obj, s);
-
-			return Variable.Empty;
-		}
-
-		private static SetVariableResult ApplyWithMap(object obj, IClassMap map, Variable lookup, Variable value)
-		{
-			if (lookup.TryGetString(out var s))
-				return map.SetVariable(obj, s, value);
-
-			return SetVariableResult.NotFound;
-		}
-
-		private static Variable LookupWithReflection(object obj, Variable lookup)
-		{
-			if (lookup.TryGetString(out var s))
-			{
-				var field = obj.GetType().GetField(s, BindingFlags.Instance | BindingFlags.Public);
-				if (field != null)
-				{
-					try { return Variable.Unbox(field.GetValue(obj)); }
-					catch { return Variable.Empty; }
-				}
-
-				var property = obj.GetType().GetProperty(s, BindingFlags.Instance | BindingFlags.Public);
-				if (property != null)
-				{
-					try { return Variable.Unbox(property.GetValue(obj)); }
-					catch { return Variable.Empty; }
-				}
-			}
-
-			return Variable.Empty;
-		}
-
-		private static SetVariableResult ApplyWithReflection(object obj, Variable lookup, Variable value)
-		{
-			if (lookup.TryGetString(out var s))
-			{
-				var field = obj.GetType().GetField(s, BindingFlags.Instance | BindingFlags.Public);
-				if (field != null)
-				{
-					try
-					{
-						field.SetValue(obj, value.Box());
-						return SetVariableResult.Success;
-					}
-					catch (FieldAccessException)
-					{
-						return SetVariableResult.ReadOnly;
-					}
-					catch (ArgumentException)
-					{
-						return SetVariableResult.TypeMismatch;
-					}
-				}
-
-				var property = obj.GetType().GetProperty(s, BindingFlags.Instance | BindingFlags.Public);
-				if (property != null)
-				{
-					try
-					{
-						property.SetValue(obj, value.Box());
-						return SetVariableResult.Success;
-					}
-					catch (FieldAccessException)
-					{
-						return SetVariableResult.ReadOnly;
-					}
-					catch (ArgumentException)
-					{
-						return SetVariableResult.TypeMismatch;
-					}
-				}
-			}
-
-			return SetVariableResult.NotFound;
-		}
 
 		#endregion
 	}

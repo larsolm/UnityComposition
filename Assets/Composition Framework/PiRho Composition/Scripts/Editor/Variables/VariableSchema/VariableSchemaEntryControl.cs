@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private static readonly Icon _modeIcon = Icon.BuiltIn("d_CustomSorting");
 
-		public VariableSchema.Entry Value;
+		public VariableSchemaEntry Value;
 		public List<string> Tags;
 
 		private VariableDefinitionControl _definitionControl;
@@ -33,7 +33,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private bool _advancedMode = false;
 
-		public VariableSchemaEntryControl(List<string> tags, VariableSchema.Entry value)
+		public VariableSchemaEntryControl(List<string> tags, VariableSchemaEntry value)
 		{
 			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);

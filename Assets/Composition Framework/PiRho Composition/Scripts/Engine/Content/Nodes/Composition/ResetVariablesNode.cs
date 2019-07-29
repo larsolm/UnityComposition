@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
 		{
-			if (ResolveInterface(variables, Object, out IVariableReset reset))
+			if (ResolveInterface(variables, Object, out IResettableVariables reset))
 				reset.ResetVariables(Variables);
 
 			graph.GoTo(Next, nameof(Next));

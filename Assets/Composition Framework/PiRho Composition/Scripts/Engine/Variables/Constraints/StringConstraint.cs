@@ -22,6 +22,11 @@ namespace PiRhoSoft.Composition
 			Values = values;
 		}
 
+		public override string ToString()
+		{
+			return string.Join(",", Values);
+		}
+
 		public override Variable Generate()
 		{
 			return Values.Count > 0

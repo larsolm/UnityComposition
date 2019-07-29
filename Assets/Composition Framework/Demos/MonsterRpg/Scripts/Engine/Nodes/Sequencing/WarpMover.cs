@@ -16,7 +16,7 @@ namespace PiRhoSoft.MonsterRpg
 		public VariableReference Mover = new VariableReference();
 
 		[Tooltip("The position to warp the mover to")]
-		public Int2VariableSource Position = new Int2VariableSource();
+		public Vector2IntVariableSource Position = new Vector2IntVariableSource();
 
 		[Tooltip("The direction for the mover to face")]
 		[EnumButtons]

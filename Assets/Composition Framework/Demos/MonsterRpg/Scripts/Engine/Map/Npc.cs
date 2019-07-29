@@ -12,8 +12,8 @@ namespace PiRhoSoft.MonsterRpg
 		public MovementDirection Direction;
 		public CollisionLayer Layer;
 		public string ControllerData;
-		public VariableSet NpcVariables = new VariableSet();
-		public VariableSet TrainerVariables = new VariableSet();
+		public VariableStore NpcVariables = new VariableStore();
+		public VariableStore TrainerVariables = new VariableStore();
 	}
 
 	[DisallowMultipleComponent]
@@ -46,7 +46,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			if (saveData != null)
 			{
-				Variables.LoadFrom(saveData.NpcVariables, WorldLoader.SavedVariables);
+				SchemaVariables.CopyFrom(saveData.NpcVariables, WorldLoader.SavedVariables);
 
 				if (Controller)
 				{
@@ -55,13 +55,13 @@ namespace PiRhoSoft.MonsterRpg
 				}
 
 				if (Trainer)
-					Trainer.Variables.LoadFrom(saveData.TrainerVariables, WorldLoader.SavedVariables);
+					Trainer.SchemaVariables.CopyFrom(saveData.TrainerVariables, WorldLoader.SavedVariables);
 			}
 		}
 
 		public void Save(NpcSaveData saveData)
 		{
-			Variables.SaveTo(saveData.NpcVariables, WorldLoader.SavedVariables);
+			SchemaVariables.CopyTo(saveData.NpcVariables, WorldLoader.SavedVariables);
 
 			if (Controller)
 			{
@@ -71,7 +71,7 @@ namespace PiRhoSoft.MonsterRpg
 			}
 
 			if (Trainer)
-				Trainer.Variables.SaveTo(saveData.TrainerVariables, WorldLoader.SavedVariables);
+				Trainer.SchemaVariables.CopyTo(saveData.TrainerVariables, WorldLoader.SavedVariables);
 		}
 
 		#endregion

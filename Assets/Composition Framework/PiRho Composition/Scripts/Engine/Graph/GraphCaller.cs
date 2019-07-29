@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition
 		public IList<GraphOutput> Outputs => _outputs;
 		public bool IsRunning => Graph != null && Graph.IsRunning;
 
-		public IEnumerator Execute(IVariableStore store, Variable context)
+		public IEnumerator Execute(IVariableCollection store, Variable context)
 		{
 			if (Graph)
 			{

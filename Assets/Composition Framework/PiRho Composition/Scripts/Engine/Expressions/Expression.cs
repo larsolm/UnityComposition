@@ -65,7 +65,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public Variable Execute(Object context, IVariableStore variables)
+		public Variable Execute(Object context, IVariableCollection variables)
 		{
 			try
 			{
@@ -83,7 +83,7 @@ namespace PiRhoSoft.Composition
 			return Variable.Empty;
 		}
 
-		public Variable Execute(Object context, IVariableStore variables, VariableType expectedType)
+		public Variable Execute(Object context, IVariableCollection variables, VariableType expectedType)
 		{
 			var result = Execute(context, variables);
 
@@ -96,7 +96,7 @@ namespace PiRhoSoft.Composition
 			return result;
 		}
 
-		public Variable Evaluate(IVariableStore variables, bool isolateVariables)
+		public Variable Evaluate(IVariableCollection variables, bool isolateVariables)
 		{
 			var result = Variable.Empty;
 

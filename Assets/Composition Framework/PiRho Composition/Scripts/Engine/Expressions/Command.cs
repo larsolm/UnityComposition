@@ -92,7 +92,7 @@ namespace PiRhoSoft.Composition
 
 	public interface ICommand
 	{
-		Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters);
+		Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters);
 	}
 
 	[HelpURL(Composition.DocumentationUrl + "command")]
@@ -150,7 +150,7 @@ namespace PiRhoSoft.Composition
 				ExpressionParser.RemoveCommand(_registeredName);
 		}
 
-		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
 		{
 			var store = ReserveStore();
 
@@ -165,11 +165,11 @@ namespace PiRhoSoft.Composition
 				if (parameter.Type != VariableType.Empty && parameter.Type != value.Type)
 					throw CommandEvaluationException.WrongParameterType(name, i, value.Type, parameter.Type);
 
-				store.AddVariable(Parameters[i].Name, value);
+				store.SetVariable(Parameters[i].Name, value);
 			}
 
-			store.AddVariable(CompositionManager.GlobalStoreName, Variable.Store(CompositionManager.Instance.GlobalStore));
-			store.AddVariable(CompositionManager.SceneStoreName, Variable.Store(CompositionManager.Instance.SceneStore));
+			store.SetVariable(CompositionManager.GlobalStoreName, Variable.Object(CompositionManager.Instance.GlobalStore));
+			store.SetVariable(CompositionManager.SceneStoreName, Variable.Object(CompositionManager.Instance.SceneStore));
 
 			var result = Expression.Evaluate(store, false);
 			ReleaseStore(store);

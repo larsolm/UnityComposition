@@ -2,7 +2,7 @@
 {
 	internal class OrAssignOperator : AssignmentOperator
 	{
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var left = Left.Evaluate(variables);
 

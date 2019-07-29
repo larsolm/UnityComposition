@@ -18,9 +18,9 @@
 				throw new ExpressionParseException(token, _invalidRightException, Symbol, Right);
 		}
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
-			var left = (Left as ILookupOperation).GetValue(variables, Variable.Store(variables));
+			var left = (Left as ILookupOperation).GetValue(variables, Variable.Object(variables));
 
 			if (Right is IdentifierOperation identifier)
 			{

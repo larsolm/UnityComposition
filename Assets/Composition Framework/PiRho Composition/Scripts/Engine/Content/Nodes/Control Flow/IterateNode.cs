@@ -27,19 +27,19 @@ namespace PiRhoSoft.Composition
 			{
 				if (Resolve(variables, Container, out IVariableList list))
 				{
-					if (iteration < list.Count)
+					if (iteration < list.VariableCount)
 					{
 						var item = list.GetVariable(iteration);
 						SetValues(graph, variables, iteration, item);
 					}
 				}
-				else if (Resolve(variables, Container, out IVariableStore store))
+				else if (Resolve(variables, Container, out IVariableDictionary dictionary))
 				{
-					var names = store.GetVariableNames();
+					var names = dictionary.VariableNames;
 					if (iteration < names.Count)
 					{
 						var name = names[iteration];
-						var item = store.GetVariable(name);
+						var item = dictionary.GetVariable(name);
 
 						SetValues(graph, variables, iteration, item);
 					}

@@ -5,12 +5,12 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableSetControl : VisualElement
 	{
-		public VariableSet Value { get; private set; }
+		public ConstrainedStore Value { get; private set; }
 
 		private VariablesProxy _proxy;
 		private ListControl _list;
 
-		public VariableSetControl(VariableSet value)
+		public VariableSetControl(ConstrainedStore value)
 		{
 			Value = value;
 
@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition.Editor
 			Add(_list);
 		}
 
-		public void SetValueWithoutNotify(VariableSet value)
+		public void SetValueWithoutNotify(ConstrainedStore value)
 		{
 			Value = value;
 			_proxy.Variables = Value;
@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class VariablesProxy : IListProxy
 		{
-			public VariableSet Variables;
+			public ConstrainedStore Variables;
 
 			public string Label => "Variables";
 			public string Tooltip => "The list of variables defined by this variable set";
@@ -57,7 +57,7 @@ namespace PiRhoSoft.Composition.Editor
 			public bool CanRemove(int index) => false;
 			public bool CanReorder(int from, int to) => false;
 
-			public VariablesProxy(VariableSet variables)
+			public VariablesProxy(ConstrainedStore variables)
 			{
 				Variables = variables;
 			}
@@ -65,19 +65,18 @@ namespace PiRhoSoft.Composition.Editor
 			public VisualElement CreateElement(int index)
 			{
 				var container = new VisualElement();
-				var name = Variables.GetVariableName(index);
-				var value = Variables.GetVariableValue(index);
-				var entry = Variables.Schema != null && index < Variables.Schema.Count ? Variables.Schema[index] : null;
+				var entry = Variables.Schema.GetEntry(index);
+				var value = Variables.GetVariable(index);
 				
 				if (entry != null && Variables.Owner != null)
 				{
-					var field = new VariableField(name, value, entry.Definition);
-					field.RegisterCallback<ChangeEvent<Variable>>(evt => {	Variables.SetVariableValue(index, value); });
+					var field = new VariableField(entry.Definition.Name, value, entry.Definition);
+					field.RegisterCallback<ChangeEvent<Variable>>(evt => {	Variables.SetVariable(index, value); });
 					container.Add(field);
 					
 					var refreshButton = new IconButton(Icon.Refresh.Texture, "Re-compute this variable based on the schema initializer", () =>
 					{
-						var newValue = entry.GenerateValue(Variables.Owner);
+						var newValue = entry.GenerateVariable(Variables.Owner);
 						field.value = newValue;
 					});
 					

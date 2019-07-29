@@ -115,25 +115,25 @@ namespace PiRhoSoft.MonsterRpg
 		private const string _missingWorldAssetError = "(MWWLMWA) Failed to load world: the WorldManager in main scene does not have a World set";
 		private const string _missingWorldManagerError = "(MMWWLMWA) Failed to load world: the main scene does not contain a WorldManager";
 
-		public LoadStatus LoadHeader(string filename, VariableSet header)
+		public LoadStatus LoadHeader(string filename, ConstrainedStore header)
 		{
 			var info = new LoadStatus();
-			var data = new VariableSet();
+			var data = new VariableStore();
 			Read(info, filename + HeaderVariables, data);
-			header.LoadFrom(data, HeaderVariables);
+			header.CopyFrom(data, HeaderVariables);
 			return info;
 		}
 
-		public SaveStatus SaveHeader(string filename, VariableSet header)
+		public SaveStatus SaveHeader(string filename, ConstrainedStore header)
 		{
 			var info = new SaveStatus();
-			var data = new VariableSet();
-			header.SaveTo(data, HeaderVariables);
+			var data = new VariableStore();
+			header.CopyTo(data, HeaderVariables);
 			Write(info, filename + HeaderVariables, data);
 			return info;
 		}
 
-		public LoadStatus Load(VariableSet header, string defaultZone, string defaultSpawn, string filename)
+		public LoadStatus Load(IVariableCollection header, string defaultZone, string defaultSpawn, string filename)
 		{
 			var info = new LoadStatus();
 			StartCoroutine(Load(info, header, defaultZone, defaultSpawn, filename));
@@ -147,7 +147,7 @@ namespace PiRhoSoft.MonsterRpg
 			return info;
 		}
 
-		private IEnumerator Load(LoadStatus info, VariableSet header, string defaultZone, string defaultSpawn, string filename)
+		private IEnumerator Load(LoadStatus info, IVariableCollection header, string defaultZone, string defaultSpawn, string filename)
 		{
 			var data = new SaveData();
 
@@ -196,7 +196,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		private IEnumerator Save(SaveStatus info)
 		{
-			var header = new VariableSet();
+			var header = new VariableStore();
 			var data = new SaveData { Game = new GameSaveData(), World = new WorldSaveData(), Player = new PlayerSaveData() };
 			data.Game.StartingZone = WorldManager.Instance.CurrentZone.name;
 			data.Game.PlayerSpawn.Direction = Player.Instance.Mover.MovementDirection;

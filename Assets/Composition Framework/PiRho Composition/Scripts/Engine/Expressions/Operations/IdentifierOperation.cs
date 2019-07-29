@@ -18,9 +18,9 @@ namespace PiRhoSoft.Composition
 			Name = parser.GetText(token);
 		}
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
-			var value = GetValue(variables, Variable.Store(variables));
+			var value = GetValue(variables, Variable.Object(variables));
 
 			if (value.IsEmpty)
 				throw new ExpressionEvaluationException(_invalidLookupException, Name, variables);
@@ -33,14 +33,14 @@ namespace PiRhoSoft.Composition
 			builder.Append(Name);
 		}
 
-		public Variable GetValue(IVariableStore variables, Variable owner)
+		public Variable GetValue(IVariableCollection variables, Variable owner)
 		{
 			return VariableHandler.Lookup(owner, Variable.String(Name));
 		}
 
-		public SetVariableResult SetValue(IVariableStore variables, Variable value)
+		public SetVariableResult SetValue(IVariableCollection variables, Variable value)
 		{
-			var owner = Variable.Store(variables);
+			var owner = Variable.Object(variables);
 			return SetValue(ref owner, value);
 		}
 

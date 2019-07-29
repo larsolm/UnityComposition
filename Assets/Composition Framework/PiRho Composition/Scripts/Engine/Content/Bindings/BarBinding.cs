@@ -42,7 +42,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			var hasAmount = Resolve(variables, AmountVariable, out float amount);
 			var hasTotal = Resolve(variables, TotalVariable, out float total);

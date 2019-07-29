@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The message to resolve and display as text in this object")]
 		public Message Message;
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			var text = Message.GetText(variables, SuppressErrors);
 			SetText(text, true);

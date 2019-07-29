@@ -1,22 +1,13 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
+using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition> { }
-
 	[Serializable]
 	public class VariableDefinition : ISerializationCallbackReceiver
 	{
-		public string Name;
-		public VariableType Type { get => _type; set => SetType(value); }
-		public VariableConstraint Constraint { get => _constraint; set => SetConstraint(value); }
-
-		[SerializeField] private VariableType _type;
-		private VariableConstraint _constraint;
-		[SerializeField] private SerializedData _constraintData = new SerializedData();
-
 		public VariableDefinition()
 		{
 			Name = string.Empty;
@@ -41,6 +32,41 @@ namespace PiRhoSoft.Composition
 			Constraint = constraint;
 		}
 
+		public string Name;
+		[SerializeField] private VariableType _type;
+		private VariableConstraint _constraint;
+
+		public string Description
+		{
+			get
+			{
+				if (Constraint == null)
+					return Type.ToString();
+				else
+					return string.Format($"{Type}({Constraint})");
+			}
+		}
+
+		public VariableType Type
+		{
+			get => _type;
+			set
+			{
+				_type = value;
+				_constraint = VariableConstraint.Create(value);
+			}
+		}
+
+		public VariableConstraint Constraint
+		{
+			get => _constraint;
+			set
+			{
+				_type = value?.Type ?? VariableType.Empty;
+				_constraint = value;
+			}
+		}
+
 		public Variable Generate()
 		{
 			return _constraint != null
@@ -55,19 +81,34 @@ namespace PiRhoSoft.Composition
 				: variable.Is(Type);
 		}
 
-		private void SetType(VariableType type)
-		{
-			_type = type;
-			_constraint = VariableConstraint.Create(type);
-		}
+		[SerializeField] private SerializedData _constraintData = new SerializedData();
+		void ISerializationCallbackReceiver.OnBeforeSerialize() => _constraintData.SaveClass(_constraint, 1);
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => _constraintData.LoadClass(out _constraint);
+	}
 
-		private void SetConstraint(VariableConstraint constraint)
-		{
-			_type = constraint?.Type ?? VariableType.Empty;
-			_constraint = constraint;
-		}
+	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition> { }
 
-		public void OnBeforeSerialize() => _constraintData.Save(_constraint, 1);
-		public void OnAfterDeserialize() => _constraintData.Load(out _constraint);
+	public abstract class VariableConstraint : ISerializableData
+	{
+		public abstract VariableType Type { get; }
+		public abstract Variable Generate();
+		public abstract bool IsValid(Variable value);
+		public abstract void Save(BinaryWriter writer, SerializedData data);
+		public abstract void Load(BinaryReader reader, SerializedData data);
+
+		public static VariableConstraint Create(VariableType type)
+		{
+			switch (type)
+			{
+				case VariableType.Int: return new IntConstraint();
+				case VariableType.Float: return new FloatConstraint();
+				case VariableType.Enum: return new EnumConstraint();
+				case VariableType.String: return new StringConstraint();
+				case VariableType.List: return new ListConstraint();
+				case VariableType.Dictionary: return new DictionaryConstraint();
+				case VariableType.Object: return new ObjectConstraint();
+				default: return null;
+			}
+		}
 	}
 }

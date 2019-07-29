@@ -6,17 +6,17 @@ namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "variable-set-asset")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Set", fileName = nameof(VariableSetAsset), order = 113)]
-	public class VariableSetAsset : ScriptableObject, IVariableStore, IVariableReset, ISchemaOwner
+	public class VariableSetAsset : ScriptableObject, IVariableCollection, IResettableVariables
 	{
 		[ChangeTrigger(nameof(SetupSchema))]
 		[ObjectPicker]
 		[SerializeField]
 		private VariableSchema _schema = null;
 
-		public VariableSet Variables;
-
+		public ConstrainedStore Variables;
 		public VariableSchema Schema => _schema;
-		public MappedVariableStore Store { get; private set; } = new MappedVariableStore();
+
+		private MultiStore _store;
 
 		protected virtual void OnEnable()
 		{
@@ -25,14 +25,15 @@ namespace PiRhoSoft.Composition
 
 		public void SetupSchema()
 		{
-			Store.Setup(this, _schema, Variables);
+			Variables.Setup(Schema, this);
+			_store = new MultiStore(new ClassStore(this), Variables);
 		}
 
 		#region IVariableStore Implementation
 
-		public Variable GetVariable(string name) => Store.GetVariable(name);
-		public SetVariableResult SetVariable(string name, Variable value) => Store.SetVariable(name, value);
-		public IList<string> GetVariableNames() => Store.GetVariableNames();
+		public IReadOnlyList<string> VariableNames => _store.VariableNames;
+		public Variable GetVariable(string name) => _store.GetVariable(name);
+		public SetVariableResult SetVariable(string name, Variable value) => _store.SetVariable(name, value);
 
 		#endregion
 
@@ -40,6 +41,7 @@ namespace PiRhoSoft.Composition
 
 		public void ResetTag(string tag) => Variables.ResetTag(tag);
 		public void ResetVariables(IList<string> variables) => Variables.ResetVariables(variables);
+		public void ResetAll() => Variables.ResetAll();
 
 		#endregion
 	}

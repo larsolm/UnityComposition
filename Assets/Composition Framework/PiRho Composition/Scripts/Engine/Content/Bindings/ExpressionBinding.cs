@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition
 		private ResultState _resultState = ResultState.New;
 		private Variable _resultValue = Variable.Empty;
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			var enabled = false;
 			var text = string.Empty;

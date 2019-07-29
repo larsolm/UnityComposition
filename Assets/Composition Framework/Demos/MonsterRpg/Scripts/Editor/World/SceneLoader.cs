@@ -102,7 +102,7 @@ namespace PiRhoSoft.MonsterRpg.Editor
 					var graph = AssetDatabase.LoadAssetAtPath<Graph>(state.LoadGraph);
 					var zone = AssetDatabase.LoadAssetAtPath<Zone>(state.StartZone);
 
-					var result = WorldLoader.Instance.Load(new VariableSet(), state.StartZone, state.StartSpawn, FilePreference.Value);
+					var result = WorldLoader.Instance.Load(new ConstrainedStore(), state.StartZone, state.StartSpawn, FilePreference.Value);
 
 					CompositionManager.Instance.RunGraph(graph, Variable.Object(zone));
 

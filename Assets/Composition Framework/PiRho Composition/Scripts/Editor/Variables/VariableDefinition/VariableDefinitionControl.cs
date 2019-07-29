@@ -114,7 +114,7 @@ namespace PiRhoSoft.Composition.Editor
 					case StringConstraint stringConstraint: container.Add(CreateStringConstraint(stringConstraint)); break;
 					case ObjectConstraint objectConstraint: container.Add(CreateObjectConstraint(objectConstraint)); break;
 					case EnumConstraint enumConstraint: container.Add(CreateEnumConstraint(enumConstraint)); break;
-					case StoreConstraint storeConstraint: container.Add(CreateStoreConstraint(storeConstraint)); break;
+					case DictionaryConstraint dictionaryConstraint: container.Add(CreateDictionaryConstraint(dictionaryConstraint)); break;
 					case ListConstraint listConstraint: container.Add(CreateListConstraint(listConstraint)); break;
 				}
 			}
@@ -131,7 +131,7 @@ namespace PiRhoSoft.Composition.Editor
 					case StringConstraint stringConstraint: RefreshStringConstraint(container, stringConstraint); break;
 					case ObjectConstraint objectConstraint: RefreshObjectConstraint(container, objectConstraint); break;
 					case EnumConstraint enumConstraint: RefreshEnumConstraint(container, enumConstraint); break;
-					case StoreConstraint storeConstraint: RefreshStoreConstraint(container, storeConstraint); break;
+					case DictionaryConstraint dictionaryConstraint: RefreshDictionaryConstraint(container, dictionaryConstraint); break;
 					case ListConstraint listConstraint: RefreshListConstraint(container, listConstraint); break;
 				}
 			}
@@ -367,7 +367,7 @@ namespace PiRhoSoft.Composition.Editor
 			picker.SetValueWithoutNotify(constraint.EnumType.AssemblyQualifiedName);
 		}
 
-		private VisualElement CreateStoreConstraint(StoreConstraint constraint)
+		private VisualElement CreateDictionaryConstraint(DictionaryConstraint constraint)
 		{
 			var picker = new ObjectPickerControl(constraint.Schema, typeof(VariableSchema));
 			picker.AddToClassList(SchemaConstraintUssClassName);
@@ -380,7 +380,7 @@ namespace PiRhoSoft.Composition.Editor
 			return picker;
 		}
 
-		private void RefreshStoreConstraint(VisualElement container, StoreConstraint constraint)
+		private void RefreshDictionaryConstraint(VisualElement container, DictionaryConstraint constraint)
 		{
 			var picker = container.Q<ObjectPickerControl>(className: SchemaConstraintUssClassName);
 			picker.SetValueWithoutNotify(constraint.Schema);

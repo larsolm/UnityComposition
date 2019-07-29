@@ -4,7 +4,7 @@
 	{
 		public override OperatorPrecedence Precedence => OperatorPrecedence.And;
 
-		public override Variable Evaluate(IVariableStore variables)
+		public override Variable Evaluate(IVariableCollection variables)
 		{
 			var left = Left.Evaluate(variables);
 

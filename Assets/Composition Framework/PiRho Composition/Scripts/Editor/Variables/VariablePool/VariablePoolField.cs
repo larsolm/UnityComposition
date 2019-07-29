@@ -4,7 +4,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariablePoolField : BaseField<VariablePool>
+	public class VariablePoolField : BaseField<OpenStore>
 	{
 		public static readonly string UssClassName = "pirho-variable-pool-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
@@ -12,20 +12,20 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariablePoolControl _control;
 
-		public VariablePoolField(string label, VariablePool value, Object owner) : base(label, null)
+		public VariablePoolField(string label, OpenStore value, Object owner) : base(label, null)
 		{
 			Setup(value, owner);
 		}
 
-		private void Setup(VariablePool value, Object owner)
+		private void Setup(OpenStore value, Object owner)
 		{
 			// TODO: should this be on control?
-			if (owner is ISchemaOwner schemaOwner)
-				schemaOwner.SetupSchema();
+			//if (owner is ISchemaOwner schemaOwner)
+			//	schemaOwner.SetupSchema();
 
 			_control = new VariablePoolControl(value);
 			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<VariablePool>>(evt => base.value = evt.newValue);
+			_control.RegisterCallback<ChangeEvent<OpenStore>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
@@ -34,7 +34,7 @@ namespace PiRhoSoft.Composition.Editor
 			SetValueWithoutNotify(value);
 		}
 
-		public override void SetValueWithoutNotify(VariablePool newValue)
+		public override void SetValueWithoutNotify(OpenStore newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
 			_control.SetValueWithoutNotify(newValue);

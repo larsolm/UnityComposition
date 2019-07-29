@@ -67,7 +67,7 @@ namespace PiRhoSoft.Composition
 			yield break;
 		}
 
-		private void Trigger(IVariableStore variables, Animator animator)
+		private void Trigger(IVariableCollection variables, Animator animator)
 		{
 			if (Resolve(variables, Parameter, out var parameter))
 			{

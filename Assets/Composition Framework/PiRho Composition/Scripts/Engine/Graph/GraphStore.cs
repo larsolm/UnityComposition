@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition
 		public VariableReference Reference = new VariableReference();
 	}
 
-	public class GraphStore : IVariableStore, IPoolable
+	public class GraphStore : IVariableCollection, IPoolable
 	{
 		private const string _invalidContextError = "(CISIC) Failed to create context '{0}' for graph '{1}': the value '{2}' does not satisfy the constraint";
 		private const string _invalidInputError = "(CISII) Failed to create input '{0}' for graph '{1}': the value '{2}' does not satisfy the constraint";
@@ -51,8 +51,8 @@ namespace PiRhoSoft.Composition
 		public string ContextName { get; private set; }
 		public Variable Context { get; private set; }
 
-		public VariableStore Input { get; } = new WritableStore();
-		public VariableStore Output { get; } = new WritableStore();
+		public VariableStore Input { get; } = new VariableStore();
+		public VariableStore Output { get; } = new VariableStore();
 		public VariableStore Local { get; } = new VariableStore();
 
 		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName == InputStoreName;
@@ -92,8 +92,10 @@ namespace PiRhoSoft.Composition
 
 		#region Inputs and Outputs
 
-		public void WriteInputs(GraphCaller graph, IList<GraphInput> inputs, IVariableStore caller)
+		public void WriteInputs(GraphCaller graph, IList<GraphInput> inputs, IVariableCollection caller)
 		{
+			Input.Locked = false;
+
 			foreach (var input in inputs)
 			{
 				if (input.Type == GraphInputType.Reference)
@@ -104,24 +106,30 @@ namespace PiRhoSoft.Composition
 					value = ResolveValue(definition, value, graph.Graph, _invalidInputError, definition.Name);
 
 					if (value.Type != VariableType.Empty)
-						Input.AddVariable(input.Name, value);
+						Input.SetVariable(input.Name, value);
 					else
 						Debug.LogWarningFormat(_missingInputError, input.Name, graph.Graph, input.Reference);
 				}
 				else if (input.Type == GraphInputType.Value)
 				{
-					Input.AddVariable(input.Name, input.Value.Variable);
+					Input.SetVariable(input.Name, input.Value.Variable);
 				}
 			}
+
+			Input.Locked = true;
 		}
 
 		public void WriteOutputs(IList<GraphOutput> outputs)
 		{
+			Output.Locked = false;
+
 			foreach (var output in outputs)
-				Output.AddVariable(output.Name, Variable.Empty);
+				Output.SetVariable(output.Name, Variable.Empty);
+
+			Output.Locked = true;
 		}
 
-		public void ReadOutputs(GraphCaller graph, IList<GraphOutput> outputs, IVariableStore caller)
+		public void ReadOutputs(GraphCaller graph, IList<GraphOutput> outputs, IVariableCollection caller)
 		{
 			foreach (var output in outputs)
 			{
@@ -147,7 +155,7 @@ namespace PiRhoSoft.Composition
 
 		private static Variable ResolveValue(VariableDefinition definition, Variable value, Object errorContext, string invalidError, string variableName)
 		{
-			if (definition.Type == VariableType.Object && definition.Constraint is ObjectConstraint constraint && value.TryGetObject(out var obj))
+			if (definition.Type == VariableType.Object && definition.Constraint is ObjectConstraint constraint && value.TryGetObject<Object>(out var obj))
 			{
 				var resolved = ComponentHelper.GetAsObject(constraint.ObjectType, obj);
 				value = Variable.Object(resolved);
@@ -163,9 +171,9 @@ namespace PiRhoSoft.Composition
 
 		#region IVariableStore Implementation
 
-		public IList<string> GetVariableNames()
+		public IReadOnlyList<string> VariableNames
 		{
-			return _variableNames;
+			get => _variableNames;
 		}
 
 		public Variable GetVariable(string name)
@@ -175,11 +183,11 @@ namespace PiRhoSoft.Composition
 
 			switch (name)
 			{
-				case InputStoreName: return Variable.Store(Input);
-				case OutputStoreName: return Variable.Store(Output);
-				case LocalStoreName: return Variable.Store(Local);
-				case CompositionManager.GlobalStoreName: return Variable.Store(CompositionManager.Instance.GlobalStore);
-				case CompositionManager.SceneStoreName: return Variable.Store(CompositionManager.Instance.SceneStore);
+				case InputStoreName: return Variable.Object(Input);
+				case OutputStoreName: return Variable.Object(Output);
+				case LocalStoreName: return Variable.Object(Local);
+				case CompositionManager.GlobalStoreName: return Variable.Object(CompositionManager.Instance.GlobalStore);
+				case CompositionManager.SceneStoreName: return Variable.Object(CompositionManager.Instance.SceneStore);
 				default: return Variable.Empty;
 			}
 		}

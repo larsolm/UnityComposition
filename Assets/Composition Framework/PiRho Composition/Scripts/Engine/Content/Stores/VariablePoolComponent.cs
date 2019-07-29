@@ -5,13 +5,13 @@ namespace PiRhoSoft.Composition
 {
 	[HelpURL(Composition.DocumentationUrl + "variable-pool-component")]
 	[AddComponentMenu("PiRho Soft/Composition/Variable Pool Component")]
-	public class VariablePoolComponent : MonoBehaviour, IVariableStore
+	public class VariablePoolComponent : MonoBehaviour, IVariableCollection
 	{
-		public VariablePool Variables = new VariablePool();
+		public OpenStore Variables = new OpenStore();
 
 		#region IVariableStore Implementation
 
-		public IList<string> GetVariableNames() => Variables.GetVariableNames();
+		public IReadOnlyList<string> VariableNames => Variables.VariableNames;
 		public Variable GetVariable(string name) => Variables.GetVariable(name);
 		public SetVariableResult SetVariable(string name, Variable value) => Variables.SetVariable(name, value);
 

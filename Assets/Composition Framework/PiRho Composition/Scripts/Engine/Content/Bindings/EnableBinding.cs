@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The expression to run to determine if the refereneced component should be enabled")]
 		public Expression Condition = new Expression();
 
-		protected override void UpdateBinding(IVariableStore variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
 			if (Object)
 			{

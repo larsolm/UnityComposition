@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 namespace PiRhoSoft.MonsterRpg
 {
 	[Serializable]
-	public class Roster : SerializedList<CreatureReference>, IVariableReset, IVariableList
+	public class Roster : SerializedList<CreatureReference>, IResettableVariables, IVariableArray
 	{
 		public List<Creature> Creatures { get; private set; }
 
@@ -77,12 +77,20 @@ namespace PiRhoSoft.MonsterRpg
 				creature.ResetVariables(traits);
 		}
 
+		public void ResetAll()
+		{
+			foreach (var creature in Creatures)
+				creature.ResetAll();
+		}
+
 		#endregion
 
 		#region IVariableList Implementation
 
+		public int VariableCount => Creatures.Count;
 		public Variable GetVariable(int index) => index >= 0 && index < Creatures.Count ? Variable.Object(Creatures[index]) : Variable.Empty;
 		public SetVariableResult SetVariable(int index, Variable value) => SetVariableResult.ReadOnly;
+
 		public SetVariableResult AddVariable(Variable value)
 		{
 			if (value.TryGetObject<Creature>(out var creature))

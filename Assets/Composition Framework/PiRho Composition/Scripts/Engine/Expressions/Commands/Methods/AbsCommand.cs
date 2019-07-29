@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class AbsCommand : ICommand
 	{
-		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 1)
 			{

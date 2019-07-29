@@ -28,6 +28,14 @@ namespace PiRhoSoft.Composition
 			ItemConstraint = itemConstraint;
 		}
 
+		public override string ToString()
+		{
+			if (ItemConstraint == null)
+				return Type.ToString();
+			else
+				return string.Format($"{ItemType}({ItemConstraint})");
+		}
+
 		public override Variable Generate()
 		{
 			return Variable.List(new VariableList());
@@ -37,7 +45,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (variable.TryGetList(out var list))
 			{
-				for (var i = 0; i < list.Count; i++)
+				for (var i = 0; i < list.VariableCount; i++)
 				{
 					var item = list.GetVariable(i);
 
@@ -62,13 +70,13 @@ namespace PiRhoSoft.Composition
 		public override void Save(BinaryWriter writer, SerializedData data)
 		{
 			writer.Write((int)ItemType);
-			data.SaveObject(writer, ItemConstraint);
+			data.SaveInstance(writer, ItemConstraint);
 		}
 
 		public override void Load(BinaryReader reader, SerializedData data)
 		{
 			ItemType = (VariableType)reader.ReadInt32();
-			ItemConstraint = data.LoadObject<VariableConstraint>(reader);
+			ItemConstraint = data.LoadInstance<VariableConstraint>(reader);
 		}
 
 		private void SetType(VariableType type)
