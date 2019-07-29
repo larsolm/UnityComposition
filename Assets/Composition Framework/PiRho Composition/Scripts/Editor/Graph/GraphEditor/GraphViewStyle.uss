@@ -98,6 +98,25 @@
 	border-color: #00E600;
 }
 
+.pirho-graph-view__node__rename-button
+{
+	width: 16px;
+	height: 16px;
+	align-self: center;
+	visibility: hidden;
+	margin-left: 8px;
+}
+
+.pirho-graph-view__node__rename-button:hover
+{
+	background-color: #2B2B2B;
+}
+
+.pirho-graph-view__node:hover .pirho-graph-view__node__rename-button
+{
+	visibility: visible;
+}
+
 .pirho-graph-view__node__delete-button
 {
 	width: 12px;

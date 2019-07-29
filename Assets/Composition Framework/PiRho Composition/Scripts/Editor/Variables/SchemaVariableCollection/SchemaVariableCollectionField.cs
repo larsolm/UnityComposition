@@ -4,15 +4,15 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariableSetField : BaseField<SchemaVariableCollection>
+	public class SchemaVariableCollectionField : BaseField<SchemaVariableCollection>
 	{
-		public static readonly string UssClassName = "pirho-variable-set-field";
+		public static readonly string UssClassName = "pirho-schema-variable-collection-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
 		public static readonly string InputUssClassName = UssClassName + "__input";
 
-		private VariableSetControl _control;
+		private SchemaVariableCollectionControl _control;
 
-		public VariableSetField(string label, SchemaVariableCollection value, Object owner) : base(label, null)
+		public SchemaVariableCollectionField(string label, SchemaVariableCollection value, Object owner) : base(label, null)
 		{
 			Setup(value, owner);
 		}
@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition.Editor
 					value.Update();
 			}
 
-			_control = new VariableSetControl(value);
+			_control = new SchemaVariableCollectionControl(value);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<SchemaVariableCollection>>(evt => base.value = evt.newValue);
 

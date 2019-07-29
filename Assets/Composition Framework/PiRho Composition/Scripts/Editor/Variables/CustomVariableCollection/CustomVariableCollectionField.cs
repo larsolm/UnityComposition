@@ -4,15 +4,15 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariablePoolField : BaseField<CustomVariableCollection>
+	public class CustomVariableCollectionField : BaseField<CustomVariableCollection>
 	{
-		public static readonly string UssClassName = "pirho-variable-pool-field";
+		public static readonly string UssClassName = "pirho-custom-variable-collection-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
 		public static readonly string InputUssClassName = UssClassName + "__input";
 
-		private VariablePoolControl _control;
+		private CustomVariableCollectionControl _control;
 
-		public VariablePoolField(string label, CustomVariableCollection value, Object owner) : base(label, null)
+		public CustomVariableCollectionField(string label, CustomVariableCollection value, Object owner) : base(label, null)
 		{
 			Setup(value, owner);
 		}
@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition.Editor
 			//if (owner is ISchemaOwner schemaOwner)
 			//	schemaOwner.SetupSchema();
 
-			_control = new VariablePoolControl(value);
+			_control = new CustomVariableCollectionControl(value);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<CustomVariableCollection>>(evt => base.value = evt.newValue);
 
