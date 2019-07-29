@@ -1,0 +1,33 @@
+﻿.pirho-variable
+{
+	flex-grow: 1;
+}
+
+.pirho-variable__number
+{
+	flex-direction: row;
+}
+
+.pirho-variable__number__slider
+{
+	flex-grow: 1;
+	margin-left: 5px;
+	display: none;
+}
+
+.pirho-variable__number--has-range .pirho-variable__number__slider
+{
+	display: flex;
+}
+
+.pirho-variable__number__field
+{
+	min-width: 50px;
+	margin-left: 5px;
+	flex-grow: 1;
+}
+
+.pirho-variable__number--has-range .pirho-variable__number__field
+{
+	flex-grow: 0;
+}

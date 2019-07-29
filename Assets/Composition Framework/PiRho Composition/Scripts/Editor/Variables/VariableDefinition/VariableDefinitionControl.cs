@@ -169,7 +169,7 @@ namespace PiRhoSoft.Composition.Editor
 			minToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
-					constraint.Minimum = 0;
+					constraint.Minimum = IntConstraint.DefaultMinimum;
 				else
 					constraint.Minimum = null;
 
@@ -179,7 +179,7 @@ namespace PiRhoSoft.Composition.Editor
 			maxToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
-					constraint.Maximum = 10;
+					constraint.Maximum = IntConstraint.DefaultMaximum;
 				else
 					constraint.Maximum = null;
 
@@ -249,7 +249,7 @@ namespace PiRhoSoft.Composition.Editor
 			minToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
-					constraint.Minimum = 0;
+					constraint.Minimum = FloatConstraint.DefaultMinimum;
 				else
 					constraint.Minimum = null;
 
@@ -259,7 +259,7 @@ namespace PiRhoSoft.Composition.Editor
 			maxToggle.RegisterValueChangedCallback(evt =>
 			{
 				if (evt.newValue)
-					constraint.Maximum = 10;
+					constraint.Maximum = FloatConstraint.DefaultMaximum;
 				else
 					constraint.Maximum = null;
 

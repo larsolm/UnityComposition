@@ -7,7 +7,7 @@ namespace PiRhoSoft.Composition
 	{
 		public Variable Evaluate(IVariableStore variables, string name, List<Operation> parameters)
 		{
-			if (parameters.Count == 3)
+			if (parameters.Count == 4)
 			{
 				var xValue = parameters[0].Evaluate(variables);
 				var yValue = parameters[1].Evaluate(variables);

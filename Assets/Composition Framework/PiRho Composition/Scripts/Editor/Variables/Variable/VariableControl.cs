@@ -8,6 +8,13 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableControl : VisualElement
 	{
+		public const string Stylesheet = "Variables/Variable/VariableStyle.uss";
+		public const string UssClassName = "pirho-variable";
+		public const string NumberUssClassName = UssClassName + "__number";
+		public const string NumberHasRangeUssClassName = NumberUssClassName + "--has-range";
+		public const string NumberSliderUssClassName = NumberUssClassName + "__slider";
+		public const string NumberFieldUssClassName = NumberUssClassName + "__field";
+
 		public Variable Value { get; private set; }
 		public VariableDefinition Definition { get; private set; }
 
@@ -42,7 +49,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		public VariableControl(Variable value, VariableDefinition definition)
 		{
-			style.flexGrow = 1;
+			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			AddToClassList(UssClassName);
 
 			Value = value;
 			Definition = definition;
@@ -186,8 +194,10 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateInt()
 		{
 			_intContainer = new VisualElement();
+			_intContainer.AddToClassList(NumberUssClassName);
 			
 			_intSlider = new SliderInt();
+			_intSlider.AddToClassList(NumberSliderUssClassName);
 			_intSlider.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Int(evt.newValue);
@@ -195,6 +205,7 @@ namespace PiRhoSoft.Composition.Editor
 			});
 
 			_intField = new IntegerField();
+			_intField.AddToClassList(NumberFieldUssClassName);
 			_intField.RegisterValueChangedCallback(evt =>
 			{
 				if (Definition.Constraint is IntConstraint constraint)
@@ -206,14 +217,6 @@ namespace PiRhoSoft.Composition.Editor
 				}
 			});
 
-			_intContainer.style.flexDirection = FlexDirection.Row;
-
-			_intSlider.style.flexGrow = 1;
-			_intSlider.style.paddingLeft = 5;
-
-			_intField.style.minWidth = 50;
-			_intField.style.paddingLeft = 5;
-
 			_intContainer.Add(_intSlider);
 			_intContainer.Add(_intField);
 
@@ -224,23 +227,21 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			if (Definition.Constraint is IntConstraint constraint)
 			{
-				var hasRange = constraint.Minimum.HasValue && constraint.Maximum.HasValue;
-
-				_intSlider.SetDisplayed(hasRange);
+				_intContainer.EnableInClassList(NumberHasRangeUssClassName, constraint.Minimum.HasValue && constraint.Maximum.HasValue);
 				_intSlider.SetValueWithoutNotify(Value.AsInt);
-				_intSlider.lowValue = constraint.Minimum ?? 0;
-				_intSlider.highValue = constraint.Maximum ?? 10;
-
+				_intSlider.lowValue = constraint.Minimum ?? IntConstraint.DefaultMinimum;
+				_intSlider.highValue = constraint.Maximum ?? IntConstraint.DefaultMaximum;
 				_intField.SetValueWithoutNotify(Value.AsInt);
-				_intField.style.flexGrow = hasRange ? 0 : 1;
 			}
 		}
 
 		private void CreateFloat()
 		{
 			_floatContainer = new VisualElement();
+			_floatContainer.AddToClassList(NumberUssClassName);
 
 			_floatSlider = new Slider();
+			_floatSlider.AddToClassList(NumberSliderUssClassName);
 			_floatSlider.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Float(evt.newValue);
@@ -248,6 +249,7 @@ namespace PiRhoSoft.Composition.Editor
 			});
 
 			_floatField = new FloatField();
+			_floatField.AddToClassList(NumberFieldUssClassName);
 			_floatField.RegisterValueChangedCallback(evt =>
 			{
 				if (Definition.Constraint is FloatConstraint constraint)
@@ -259,14 +261,6 @@ namespace PiRhoSoft.Composition.Editor
 				}
 			});
 
-			_floatContainer.style.flexDirection = FlexDirection.Row;
-
-			_floatSlider.style.flexGrow = 1;
-			_floatSlider.style.paddingLeft = 5;
-
-			_floatField.style.minWidth = 50;
-			_floatField.style.paddingLeft = 5;
-
 			_floatContainer.Add(_floatSlider);
 			_floatContainer.Add(_floatField);
 
@@ -277,15 +271,11 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			if (Definition.Constraint is FloatConstraint constraint)
 			{
-				var hasRange = constraint.Minimum.HasValue && constraint.Maximum.HasValue;
-
-				_floatSlider.SetDisplayed(hasRange);
+				_floatContainer.EnableInClassList(NumberHasRangeUssClassName, constraint.Minimum.HasValue && constraint.Maximum.HasValue);
 				_floatSlider.SetValueWithoutNotify(Value.AsFloat);
 				_floatSlider.lowValue = constraint.Minimum ?? 0;
 				_floatSlider.highValue = constraint.Maximum ?? 10;
-
 				_floatField.SetValueWithoutNotify(Value.AsFloat);
-				_floatField.style.flexGrow = hasRange ? 0 : 1;
 			}
 		}
 
