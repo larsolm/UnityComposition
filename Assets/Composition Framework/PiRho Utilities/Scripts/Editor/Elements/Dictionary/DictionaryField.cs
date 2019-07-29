@@ -24,6 +24,10 @@ namespace PiRhoSoft.Utilities.Editor
 		public bool AllowRemove { get; set; } = true;
 		public bool AllowReorder { get; set; } = false;
 
+		public Func<string, bool> CanAdd;
+		public Func<string, bool> CanRemove;
+		public Func<string, bool> CanReorder;
+
 		public Action<string> AddCallback;
 		public Action<string> RemoveCallback;
 		public Action<string> ReorderCallback;
@@ -32,18 +36,20 @@ namespace PiRhoSoft.Utilities.Editor
 		private DictionaryControl _control;
 		private ChangeTriggerControl<int> _sizeBinding;
 
-		public DictionaryField(SerializedProperty keysProperty, SerializedProperty valuesProperty, PropertyDrawer drawer)
+		public DictionaryField(SerializedProperty property, SerializedProperty keysProperty, SerializedProperty valuesProperty, PropertyDrawer drawer)
 		{
-			_proxy = new PropertyDictionaryProxy(keysProperty, valuesProperty, drawer);
+			_proxy = new PropertyDictionaryProxy(property, keysProperty, valuesProperty, drawer);
 			bindingPath = keysProperty.propertyPath;
+		}
+
+		public DictionaryField(SerializedProperty property, DictionaryProxy proxy)
+		{
+			bindingPath = property.propertyPath;
 		}
 
 		private void Setup()
 		{
 			Clear();
-
-			_proxy.Label = Label;
-			_proxy.Tooltip = Tooltip;
 
 			if (EmptyLabel != null) _proxy.EmptyLabel = EmptyLabel;
 			if (EmptyTooltip != null) _proxy.EmptyTooltip = EmptyTooltip;
@@ -51,11 +57,16 @@ namespace PiRhoSoft.Utilities.Editor
 			if (AddTooltip != null) _proxy.AddTooltip = AddTooltip;
 			if (RemoveTooltip != null) _proxy.RemoveTooltip = RemoveTooltip;
 
+			_proxy.Tooltip = Tooltip;
 			_proxy.AllowAdd = AllowAdd;
 			_proxy.AllowRemove = AllowRemove;
+			_proxy.AllowReorder = AllowReorder;
 			_proxy.AddCallback = AddCallback;
 			_proxy.RemoveCallback = RemoveCallback;
 			_proxy.ReorderCallback = ReorderCallback;
+			_proxy.CanAddCallback = CanAdd;
+			_proxy.CanRemoveCallback = CanRemove;
+			_proxy.CanReorderCallback = CanReorder;
 
 			_control = new DictionaryControl(_proxy);
 

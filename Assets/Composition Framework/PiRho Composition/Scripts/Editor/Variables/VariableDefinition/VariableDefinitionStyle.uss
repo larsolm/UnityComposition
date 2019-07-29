@@ -1,0 +1,53 @@
+﻿.pirho-variable-definition
+{
+}
+
+.pirho-variable-definition__name
+{
+}
+
+.pirho-variable-definition__type
+{
+}
+
+.pirho-variable-definition__constraint
+{
+}
+
+.pirho-variable-definition__constraint__number
+{
+	flex-direction: row;
+}
+
+.pirho-variable-definition__constraint__number__label
+{
+	margin-top: 1px;
+	margin-bottom: 0px;
+}
+
+.pirho-variable-definition__constraint__number__toggle
+{
+	margin-bottom: 1px;
+	margin-left: 5px;
+	margin-right: 5px;
+}
+
+.pirho-variable-definition__constraint__number__field
+{
+	visibility: hidden;
+	flex-grow: 1;
+}
+
+.pirho-variable-definition__constraint__number__field--has-value
+{
+	visibility: visible;
+}
+
+.pirho-variable-definition__constraint__number__field--min
+{
+	margin-right: 5px;
+}
+
+.pirho-variable-definition__constraint__number__field--max
+{
+}

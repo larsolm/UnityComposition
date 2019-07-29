@@ -48,9 +48,14 @@ namespace PiRhoSoft.Composition.Editor
 			public string ReorderTooltip => "Not allowed for variable sets";
 
 			public int ItemCount => Variables.VariableCount;
+
 			public bool AllowAdd => false;
 			public bool AllowRemove => false;
 			public bool AllowReorder => false;
+
+			public bool CanAdd() => false;
+			public bool CanRemove(int index) => false;
+			public bool CanReorder(int from, int to) => false;
 
 			public VariablesProxy(ConstrainedStore variables)
 			{

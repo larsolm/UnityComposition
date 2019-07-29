@@ -24,8 +24,8 @@ namespace PiRhoSoft.Composition
 		private TagList _tags = new TagList();
 
 		[SerializeField] private EntryList _entries = new EntryList();
-		[SerializeField] private List<string> _names = new List<string>();
-		[SerializeField] private int _version = 0;
+		[HideInInspector] [SerializeField] private List<string> _names = new List<string>();
+		[HideInInspector] [SerializeField] private int _version = 0;
 
 		public List<string> Tags => _tags.List;
 		public IReadOnlyList<string> Names => _names;

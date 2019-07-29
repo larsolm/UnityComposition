@@ -22,8 +22,13 @@ namespace PiRhoSoft.Utilities.Editor
 		bool AllowReorder { get; }
 
 		VisualElement CreateField(int index);
+
 		bool NeedsUpdate(VisualElement item, int index);
-		bool IsKeyValid(string key);
+
+		bool CanAdd(string key);
+		bool CanRemove(int index);
+		bool CanReorder(int from, int to);
+
 		void AddItem(string key);
 		void RemoveItem(int index);
 		void ReorderItem(int from, int to);
@@ -32,6 +37,7 @@ namespace PiRhoSoft.Utilities.Editor
 	public abstract class DictionaryProxy : IDictionaryProxy
 	{
 		public const string DefaultEmptyLabel = "The dictionary is empty";
+		public const string DefaultEmptyTooltip = "There are no items in this dictionary";
 		public const string DefaultAddPlaceholder = "New key";
 		public const string DefaultAddTooltip = "Add an item to this dictionary";
 		public const string DefaultRemoveTooltip = "Remove this item from the dictionary";
@@ -47,16 +53,21 @@ namespace PiRhoSoft.Utilities.Editor
 		public string ReorderTooltip { get; set; } = DefaultReorderTooltip;
 
 		public abstract int KeyCount { get; }
+
 		public virtual bool AllowAdd { get; set; } = true;
 		public virtual bool AllowRemove { get; set; } = true;
 		public virtual bool AllowReorder { get; set; } = false;
 
 		public abstract VisualElement CreateField(int index);
 		public abstract bool NeedsUpdate(VisualElement item, int index);
-		public abstract bool IsKeyValid(string key);
+
 		public abstract void AddItem(string key);
 		public abstract void RemoveItem(int index);
 		public virtual void ReorderItem(int from, int to) { }
+
+		public virtual bool CanAdd(string key) => AllowAdd;
+		public virtual bool CanRemove(int index) => AllowRemove;
+		public virtual bool CanReorder(int from, int to) => AllowReorder;
 	}
 
 	public class DictionaryProxy<T> : DictionaryProxy
@@ -90,9 +101,9 @@ namespace PiRhoSoft.Utilities.Editor
 			return !(item.userData is string k) || k != key;
 		}
 
-		public override bool IsKeyValid(string key)
+		public override bool CanAdd(string key)
 		{
-			return !Items.ContainsKey(key);
+			return AllowAdd && !Items.ContainsKey(key);
 		}
 
 		public override void AddItem(string key)

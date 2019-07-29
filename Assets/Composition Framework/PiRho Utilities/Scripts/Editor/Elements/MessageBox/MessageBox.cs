@@ -53,7 +53,7 @@ namespace PiRhoSoft.Utilities.Editor
 			Add(_image);
 			Add(_label);
 
-			this.AddStyleSheet(Stylesheet);
+			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
 			AddToClassList(UssClassName);
 		}
 

@@ -1,0 +1,69 @@
+﻿.pirho-variable-schema-entry
+{
+}
+
+.pirho-variable-schema-entry__initializer
+{
+	flex-direction: row;
+}
+
+.pirho-variable-schema-entry__initializer__label
+{
+	margin: 0 5px;
+	align-self: center;
+}
+
+.pirho-variable-schema-entry__initializer__mode
+{
+	background-color: #DDD;
+	border-color: #777;
+	border-radius: 5px;
+	border-width: 1px;
+	min-width: 21px;
+	max-width: 21px;
+	min-height: 21px;
+	max-height: 21px;
+	align-self: center;
+	padding: 3px 0px;
+}
+
+.pirho-variable-schema-entry__initializer--advanced .pirho-variable-schema-entry__initializer__mode
+{
+	background-color: #555;
+}
+
+.pirho-variable-schema-entry__initializer__mode:active
+{
+	background-color: #333;
+}
+
+.pirho-variable-schema-entry__initializer--advanced .pirho-variable-schema-entry__initializer__mode:active
+{
+	background-color: #333;
+}
+
+.pirho-variable-schema-entry__initializer__simple
+{
+	display: flex;
+	align-self: center;
+}
+
+.pirho-variable-schema-entry__initializer__advanced
+{
+	display: none;
+	align-self: center;
+}
+
+.pirho-variable-schema-entry__initializer--advanced .pirho-variable-schema-entry__initializer__simple
+{
+	display: none;
+}
+
+.pirho-variable-schema-entry__initializer--advanced .pirho-variable-schema-entry__initializer__advanced
+{
+	display: flex;
+}
+
+.pirho-variable-schema-entry__tag
+{
+}

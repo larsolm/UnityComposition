@@ -53,6 +53,10 @@ namespace PiRhoSoft.Composition.Editor
 			public bool AllowRemove => true;
 			public bool AllowReorder => true;
 
+			public bool CanAdd(string key) => true;
+			public bool CanRemove(int index) => true;
+			public bool CanReorder(int from, int to) => true;
+
 			public VariablesProxy(OpenStore variables)
 			{
 				Variables = variables;

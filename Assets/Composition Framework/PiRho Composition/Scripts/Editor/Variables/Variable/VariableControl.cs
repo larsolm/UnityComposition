@@ -11,10 +11,43 @@ namespace PiRhoSoft.Composition.Editor
 		public Variable Value { get; private set; }
 		public VariableDefinition Definition { get; private set; }
 
+		private EnumField _emptyField;
+		private Toggle _boolToggle;
+		private VisualElement _intContainer;
+		private VisualElement _floatContainer;
+		private Vector2IntField _vector2IntField;
+		private Vector3IntField _vector3IntField;
+		private RectIntField _rectIntField;
+		private BoundsIntField _boundsIntField;
+		private Vector2Field _vector2Field;
+		private Vector3Field _vector3Field;
+		private Vector4Field _vector4Field;
+		private EulerControl _quaternionContainer;
+		private RectField _rectField;
+		private BoundsField _boundsField;
+		private ColorField _colorField;
+		private EnumField _enumField;
+		private VisualElement _stringContainer;
+		private ListControl _listControl;
+		private VisualElement _dictionaryContainer;
+		private VisualElement _objectContainer;
+
+		private IntegerField _intField;
+		private SliderInt _intSlider;
+		private FloatField _floatField;
+		private Slider _floatSlider;
+		private PopupField<string> _stringPopup;
+		private TextField _stringField;
+		private VariableListProxy _listProxy;
+
 		public VariableControl(Variable value, VariableDefinition definition)
 		{
+			style.flexGrow = 1;
+
 			Value = value;
 			Definition = definition;
+
+			CreateElements();
 			Refresh();
 		}
 
@@ -41,44 +74,82 @@ namespace PiRhoSoft.Composition.Editor
 				Refresh();
 		}
 
-		private void Refresh()
+		private void CreateElements()
 		{
-			Clear();
-			Add(CreateElement());
+			CreateEmpty();
+			CreateBool();
+			CreateInt();
+			CreateFloat();
+			CreateVector2Int();
+			CreateVector3Int();
+			CreateRectInt();
+			CreateBoundsInt();
+			CreateVector2();
+			CreateVector3();
+			CreateVector4();
+			CreateQuaternion();
+			CreateRect();
+			CreateBounds();
+			CreateColor();
+			CreateEnum();
+			CreateString();
+			CreateList();
+			CreateDictionary();
+			CreateObject();
 		}
 
-		private VisualElement CreateElement()
+		public void Refresh()
 		{
 			switch (Value.Type)
 			{
-				case VariableType.Empty: return CreateEmpty();
-				case VariableType.Bool: return CreateBool();
-				case VariableType.Int: return CreateInt();
-				case VariableType.Float: return CreateFloat();
-				case VariableType.Vector2Int: return CreateVector2Int();
-				case VariableType.Vector3Int: return CreateVector3Int();
-				case VariableType.RectInt: return CreateRectInt();
-				case VariableType.BoundsInt: return CreateBoundsInt();
-				case VariableType.Vector2: return CreateVector2();
-				case VariableType.Vector3: return CreateVector3();
-				case VariableType.Vector4: return CreateVector4();
-				case VariableType.Quaternion: return CreateQuaternion();
-				case VariableType.Rect: return CreateRect();
-				case VariableType.Bounds: return CreateBounds();
-				case VariableType.Color: return CreateColor();
-				case VariableType.Enum: return CreateEnum();
-				case VariableType.String: return CreateString();
-				case VariableType.List: return CreateList();
-				case VariableType.Dictionary: return CreateDictionary();
-				case VariableType.Object: return CreateObject();
-				default: return null;
+				case VariableType.Empty: RefreshEmpty(); break;
+				case VariableType.Bool: RefreshBool(); break;
+				case VariableType.Int: RefreshInt();  break;
+				case VariableType.Float: RefreshFloat(); break;
+				case VariableType.Vector2Int: RefreshVector2Int();  break;
+				case VariableType.Vector3Int: RefreshVector3Int();  break;
+				case VariableType.RectInt: RefreshRectInt();  break;
+				case VariableType.BoundsInt: RefreshBoundsInt();  break;
+				case VariableType.Vector2: RefreshVector2(); break;
+				case VariableType.Vector3: RefreshVector3();  break;
+				case VariableType.Vector4: RefreshVector3();  break;
+				case VariableType.Quaternion: RefreshQuaternion();  break;
+				case VariableType.Rect: RefreshRect();  break;
+				case VariableType.Bounds: RefreshBounds();  break;
+				case VariableType.Color: RefreshColor();  break;
+				case VariableType.Enum: RefreshEnum();  break;
+				case VariableType.String: RefreshString(); break;
+				case VariableType.List: RefreshList(); break;
+				case VariableType.Store: RefreshDictionary();  break;
+				case VariableType.Object: RefreshObject(); break;
 			}
+
+			_emptyField.SetDisplayed(Value.Type == VariableType.Empty);
+			_boolToggle.SetDisplayed(Value.Type == VariableType.Bool);
+			_intContainer.SetDisplayed(Value.Type == VariableType.Int);
+			_floatContainer.SetDisplayed(Value.Type == VariableType.Float);
+			_vector2IntField.SetDisplayed(Value.Type == VariableType.Vector2Int);
+			_vector3IntField.SetDisplayed(Value.Type == VariableType.Vector3Int);
+			_rectIntField.SetDisplayed(Value.Type == VariableType.RectInt);
+			_boundsIntField.SetDisplayed(Value.Type == VariableType.BoundsInt);
+			_vector2Field.SetDisplayed(Value.Type == VariableType.Vector2);
+			_vector3Field.SetDisplayed(Value.Type == VariableType.Vector3);
+			_vector4Field.SetDisplayed(Value.Type == VariableType.Vector4);
+			_quaternionContainer.SetDisplayed(Value.Type == VariableType.Quaternion);
+			_rectField.SetDisplayed(Value.Type == VariableType.Rect);
+			_boundsField.SetDisplayed(Value.Type == VariableType.Bounds);
+			_colorField.SetDisplayed(Value.Type == VariableType.Color);
+			_enumField.SetDisplayed(Value.Type == VariableType.Enum);
+			_stringContainer.SetDisplayed(Value.Type == VariableType.String);
+			_listControl.SetDisplayed(Value.Type == VariableType.List);
+			_dictionaryContainer.SetDisplayed(Value.Type == VariableType.Store);
+			_objectContainer.SetDisplayed(Value.Type == VariableType.Object);
 		}
 
-		private VisualElement CreateEmpty()
+		private void CreateEmpty()
 		{
-			var dropdown = new EnumField(VariableType.Empty);
-			dropdown.RegisterValueChangedCallback(evt =>
+			_emptyField = new EnumField(VariableType.Empty);
+			_emptyField.RegisterValueChangedCallback(evt =>
 			{
 				var type = (VariableType)evt.newValue;
 				var value = Variable.Create(type);
@@ -87,265 +158,386 @@ namespace PiRhoSoft.Composition.Editor
 				SetValue(value);
 			});
 
-			return dropdown;
+			Add(_emptyField);
 		}
 
-		public VisualElement CreateBool()
+		private void RefreshEmpty()
 		{
-			var toggle = new Toggle() { value = Value.AsBool };
-			toggle.RegisterValueChangedCallback(evt =>
+			_emptyField.SetValueWithoutNotify(VariableType.Empty);
+		}
+
+		private void CreateBool()
+		{
+			_boolToggle = new Toggle();
+			_boolToggle.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Bool(evt.newValue);
 				SetValue(value);
 			});
 
-			return toggle;
+			Add(_boolToggle);
 		}
 
-		public VisualElement CreateInt()
+		private void RefreshBool()
 		{
-			var container = new VisualElement();
-			container.style.flexDirection = FlexDirection.Row;
+			_boolToggle.SetValueWithoutNotify(Value.AsBool);
+		}
 
-			if (Definition.Constraint is IntConstraint constraint)
+		private void CreateInt()
+		{
+			_intContainer = new VisualElement();
+			
+			_intSlider = new SliderInt();
+			_intSlider.RegisterValueChangedCallback(evt =>
 			{
-				var field = new IntegerField() { value = Value.AsInt, isDelayed = true };
-				field.RegisterValueChangedCallback(evt =>
+				var value = Variable.Int(evt.newValue);
+				SetValue(value);
+			});
+
+			_intField = new IntegerField();
+			_intField.RegisterValueChangedCallback(evt =>
+			{
+				if (Definition.Constraint is IntConstraint constraint)
 				{
 					var clamped = Mathf.Clamp(evt.newValue, constraint.Minimum ?? evt.newValue, constraint.Maximum ?? evt.newValue);
 					var value = Variable.Int(clamped);
 
 					SetValue(value);
-				});
-
-				container.Add(field);
-
-				if (constraint.Minimum.HasValue && constraint.Maximum.HasValue)
-				{
-					var slider = new SliderInt(constraint.Minimum.Value, constraint.Maximum.Value) { value = Value.AsInt };
-					slider.RegisterValueChangedCallback(evt =>
-					{
-						var value = Variable.Int(evt.newValue);
-						SetValue(value);
-					});
-
-					container.Add(slider);
 				}
-			}
+			});
 
-			return container;
+			_intContainer.style.flexDirection = FlexDirection.Row;
+
+			_intSlider.style.flexGrow = 1;
+			_intSlider.style.paddingLeft = 5;
+
+			_intField.style.minWidth = 50;
+			_intField.style.paddingLeft = 5;
+
+			_intContainer.Add(_intSlider);
+			_intContainer.Add(_intField);
+
+			Add(_intContainer);
 		}
 
-		private VisualElement CreateFloat()
+		private void RefreshInt()
 		{
-			var container = new VisualElement();
-			container.style.flexDirection = FlexDirection.Row;
-
-			if (Definition.Constraint is FloatConstraint constraint)
+			if (Definition.Constraint is IntConstraint constraint)
 			{
-				var field = new FloatField() { value = Value.AsFloat, isDelayed = true };
-				field.RegisterValueChangedCallback(evt =>
+				var hasRange = constraint.Minimum.HasValue && constraint.Maximum.HasValue;
+
+				_intSlider.SetDisplayed(hasRange);
+				_intSlider.SetValueWithoutNotify(Value.AsInt);
+				_intSlider.lowValue = constraint.Minimum ?? 0;
+				_intSlider.highValue = constraint.Maximum ?? 10;
+
+				_intField.SetValueWithoutNotify(Value.AsInt);
+				_intField.style.flexGrow = hasRange ? 0 : 1;
+			}
+		}
+
+		private void CreateFloat()
+		{
+			_floatContainer = new VisualElement();
+
+			_floatSlider = new Slider();
+			_floatSlider.RegisterValueChangedCallback(evt =>
+			{
+				var value = Variable.Float(evt.newValue);
+				SetValue(value);
+			});
+
+			_floatField = new FloatField();
+			_floatField.RegisterValueChangedCallback(evt =>
+			{
+				if (Definition.Constraint is FloatConstraint constraint)
 				{
 					var clamped = Mathf.Clamp(evt.newValue, constraint.Minimum ?? evt.newValue, constraint.Maximum ?? evt.newValue);
 					var value = Variable.Float(clamped);
 
 					SetValue(value);
-				});
-
-				container.Add(field);
-
-				if (constraint.Minimum.HasValue && constraint.Maximum.HasValue)
-				{
-					var slider = new Slider(constraint.Minimum.Value, constraint.Maximum.Value) { value = Value.AsFloat };
-					slider.RegisterValueChangedCallback(evt =>
-					{
-						var value = Variable.Float(evt.newValue);
-						SetValue(value);
-					});
-
-					container.Add(slider);
 				}
-			}
+			});
 
-			return container;
+			_floatContainer.style.flexDirection = FlexDirection.Row;
+
+			_floatSlider.style.flexGrow = 1;
+			_floatSlider.style.paddingLeft = 5;
+
+			_floatField.style.minWidth = 50;
+			_floatField.style.paddingLeft = 5;
+
+			_floatContainer.Add(_floatSlider);
+			_floatContainer.Add(_floatField);
+
+			Add(_floatContainer);
 		}
 
-		private VisualElement CreateVector2Int()
+		private void RefreshFloat()
 		{
-			var field = new Vector2IntField() { value = Value.AsVector2Int };
-			field.RegisterValueChangedCallback(evt =>
+			if (Definition.Constraint is FloatConstraint constraint)
+			{
+				var hasRange = constraint.Minimum.HasValue && constraint.Maximum.HasValue;
+
+				_floatSlider.SetDisplayed(hasRange);
+				_floatSlider.SetValueWithoutNotify(Value.AsFloat);
+				_floatSlider.lowValue = constraint.Minimum ?? 0;
+				_floatSlider.highValue = constraint.Maximum ?? 10;
+
+				_floatField.SetValueWithoutNotify(Value.AsFloat);
+				_floatField.style.flexGrow = hasRange ? 0 : 1;
+			}
+		}
+
+		private void CreateVector2Int()
+		{
+			_vector2IntField = new Vector2IntField();
+			_vector2IntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector2Int(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_vector2IntField);
 		}
 
-		private VisualElement CreateVector3Int()
+		private void RefreshVector2Int()
 		{
-			var field = new Vector3IntField() { value = Value.AsVector3Int };
-			field.RegisterValueChangedCallback(evt =>
+			_vector2IntField.SetValueWithoutNotify(Value.AsVector2Int);
+		}
+
+		private void CreateVector3Int()
+		{
+			_vector3IntField = new Vector3IntField();
+			_vector3IntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector3Int(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_vector3IntField);
 		}
 
-		private VisualElement CreateRectInt()
+		private void RefreshVector3Int()
 		{
-			var field = new RectIntField() { value = Value.AsRectInt };
-			field.RegisterValueChangedCallback(evt =>
+			_vector3IntField.SetValueWithoutNotify(Value.AsVector3Int);
+		}
+
+		private void CreateRectInt()
+		{
+			_rectIntField = new RectIntField();
+			_rectIntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.RectInt(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_rectIntField);
 		}
 
-		private VisualElement CreateBoundsInt()
+		private void RefreshRectInt()
 		{
-			var field = new BoundsIntField() { value = Value.AsBoundsInt };
-			field.RegisterValueChangedCallback(evt =>
+			_rectIntField.SetValueWithoutNotify(Value.AsRectInt);
+		}
+
+		private void CreateBoundsInt()
+		{
+			_boundsIntField = new BoundsIntField();
+			_boundsIntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.BoundsInt(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_boundsIntField);
 		}
 
-		private VisualElement CreateVector2()
+		private void RefreshBoundsInt()
 		{
-			var field = new Vector2Field() { value = Value.AsVector2 };
-			field.RegisterValueChangedCallback(evt =>
+			_boundsIntField.SetValueWithoutNotify(Value.AsBoundsInt);
+		}
+
+		private void CreateVector2()
+		{
+			_vector2Field = new Vector2Field();
+			_vector2Field.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector2(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_vector2Field);
 		}
 
-		private VisualElement CreateVector3()
+		private void RefreshVector2()
 		{
-			var field = new Vector3Field() { value = Value.AsVector3 };
-			field.RegisterValueChangedCallback(evt =>
+			_vector2Field.SetValueWithoutNotify(Value.AsVector2);
+		}
+
+		private void CreateVector3()
+		{
+			_vector3Field = new Vector3Field();
+			_vector3Field.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector3(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_vector3Field);
 		}
 
-		private VisualElement CreateVector4()
+		private void RefreshVector3()
 		{
-			var field = new Vector4Field() { value = Value.AsVector4 };
-			field.RegisterValueChangedCallback(evt =>
+			_vector3Field.SetValueWithoutNotify(Value.AsVector3);
+		}
+
+		private void CreateVector4()
+		{
+			_vector4Field = new Vector4Field();
+			_vector4Field.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector4(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_vector4Field);
 		}
 
-		private VisualElement CreateQuaternion()
+		private void RefreshVector4()
 		{
-			var field = new EulerControl(Value.AsQuaternion);
-			field.RegisterCallback<ChangeEvent<Quaternion>>(evt =>
+			_vector4Field.SetValueWithoutNotify(Value.AsVector4);
+		}
+
+		private void CreateQuaternion()
+		{
+			_quaternionContainer = new EulerControl(Quaternion.identity);
+			_quaternionContainer.RegisterCallback<ChangeEvent<Quaternion>>(evt =>
 			{
 				var value = Variable.Quaternion(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_quaternionContainer);
 		}
 
-		private VisualElement CreateRect()
+		private void RefreshQuaternion()
 		{
-			var field = new RectField() { value = Value.AsRect };
-			field.RegisterValueChangedCallback(evt =>
+			_quaternionContainer.SetValueWithoutNotify(Value.AsQuaternion);
+		}
+
+		private void CreateRect()
+		{
+			_rectField = new RectField();
+			_rectField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Rect(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_rectField);
 		}
 
-		private VisualElement CreateBounds()
+		private void RefreshRect()
 		{
-			var field = new BoundsField() { value = Value.AsBounds };
-			field.RegisterValueChangedCallback(evt =>
+			_rectField.SetValueWithoutNotify(Value.AsRect);
+		}
+
+		private void CreateBounds()
+		{
+			_boundsField = new BoundsField();
+			_boundsField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Bounds(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_boundsField);
 		}
 
-		private VisualElement CreateColor()
+		private void RefreshBounds()
 		{
-			var field = new ColorField() { value = Value.AsColor };
-			field.RegisterValueChangedCallback(evt =>
+			_boundsField.SetValueWithoutNotify(Value.AsBounds);
+		}
+
+		private void CreateColor()
+		{
+			_colorField = new ColorField();
+			_colorField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Color(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_colorField);
 		}
 
-		private VisualElement CreateEnum()
+		private void RefreshColor()
 		{
-			var field = new EnumField(Value.AsEnum);
-			field.RegisterValueChangedCallback(evt =>
+			_colorField.SetValueWithoutNotify(Value.AsColor);
+		}
+
+		private void CreateEnum()
+		{
+			_enumField = new EnumField();
+			_enumField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Enum(evt.newValue);
 				SetValue(value);
 			});
 
-			return field;
+			Add(_enumField);
 		}
 
-		private VisualElement CreateString()
+		private void RefreshEnum()
+		{
+			_enumField.Init(Value.AsEnum);
+		}
+
+		private void CreateString()
+		{
+			_stringContainer = new VisualElement();
+
+			_stringField = new TextField { isDelayed = true };
+			_stringField.RegisterValueChangedCallback(evt =>
+			{
+				var value = Variable.String(evt.newValue);
+				SetValue(value);
+			});
+
+			_stringContainer.Add(_stringField);
+
+			Add(_stringContainer);
+		}
+
+		private void RefreshString()
 		{
 			if (Definition.Constraint is StringConstraint constraint && constraint.Values.Count > 0)
 			{
-				var popup = new PopupField<string>(constraint.Values, Value.AsString);
-				popup.RegisterValueChangedCallback(evt =>
+				if (_stringPopup != null)
+					_stringPopup.RemoveFromHierarchy();
+
+				// This has to be recreated because PopupField must be initialized with it's options
+				_stringPopup = new PopupField<string>(constraint.Values, Value.AsString);
+				_stringPopup.RegisterValueChangedCallback(evt =>
 				{
 					var value = Variable.String(evt.newValue);
 					SetValue(value);
 				});
 
-				return popup;
+				_stringField.SetDisplayed(false);
+				_stringContainer.Add(_stringPopup);
 			}
 			else
 			{
-				var field = new TextField() { value = Value.AsString, isDelayed = true };
-				field.RegisterValueChangedCallback(evt =>
-				{
-					var value = Variable.String(evt.newValue);
-					SetValue(value);
-				});
-
-				return field;
+				_stringPopup?.SetDisplayed(false);
+				_stringField.SetDisplayed(true);
+				_stringField.SetValueWithoutNotify(Value.AsString);
 			}
 		}
 
-		private VisualElement CreateList()
+		private void CreateList()
 		{
-			var list = Value.AsList;
-			var constraint = (Definition.Constraint as ListConstraint).ItemConstraint;
-			var definition = new VariableDefinition(string.Empty, constraint);
-			var proxy = new VariableListProxy(list, definition)
+			_listProxy = new VariableListProxy(null, null)
 			{
 				Label = "Variables",
 				EmptyLabel = "This List has no Variables",
@@ -353,28 +545,52 @@ namespace PiRhoSoft.Composition.Editor
 				RemoveTooltip = "Remove this Variables"
 			};
 
-			var control = new ListControl(proxy);
+			_listControl = new ListControl(_listProxy);
 
-			return control;
+			Add(_listControl);
 		}
 
-		private VisualElement CreateDictionary()
+		private void RefreshList()
 		{
-			return new VisualElement();
+			var constraint = (Definition.Constraint as ListConstraint).ItemConstraint;
+
+			_listProxy.Definition = new VariableDefinition(string.Empty, constraint);
+			_listProxy.Variables = Value.AsList;
+			_listControl.Refresh();
 		}
 
-		private VisualElement CreateObject()
+		private void CreateDictionary()
 		{
+			_dictionaryContainer = new VisualElement();
+
+			Add(_dictionaryContainer);
+		}
+
+		private void RefreshDictionary()
+		{
+		}
+
+		private void CreateObject()
+		{
+			_objectContainer = new VisualElement();
+
+			Add(_objectContainer);
+		}
+
+		private void RefreshObject()
+		{
+			_objectContainer.Clear();
+
 			var objectType = (Definition.Constraint as ObjectConstraint)?.ObjectType ?? typeof(Object);
 
-			var picker = new ObjectPickerControl(Value.GetObject<Object>(), objectType);
-			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
+			var objectPicker = new ObjectPickerControl(Value.AsObject, objectType);
+			objectPicker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{
 				var value = Variable.Object(evt.newValue);
 				SetValue(value);
 			});
 
-			return picker;
+			_objectContainer.Add(objectPicker);
 		}
 
 		private class VariableListProxy : ListProxy
@@ -382,7 +598,7 @@ namespace PiRhoSoft.Composition.Editor
 			public IVariableList Variables;
 			public VariableDefinition Definition;
 
-			public override int ItemCount => Variables.VariableCount;
+			public override int ItemCount => Variables?.Count ?? 0;
 
 			public VariableListProxy(IVariableList variables, VariableDefinition definition)
 			{

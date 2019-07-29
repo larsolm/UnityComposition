@@ -11,7 +11,7 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			this.text = text;
 			AddToClassList(UssClassName);
-			this.AddStyleSheet(Stylesheet);
+			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
 		}
 
 		public void AddToField(TextField textField)
