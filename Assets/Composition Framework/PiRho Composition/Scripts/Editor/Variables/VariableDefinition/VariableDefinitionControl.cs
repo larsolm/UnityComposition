@@ -48,7 +48,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			CreateType();
 			CreateConstraint();
-			
+
 			Refresh();
 		}
 
@@ -191,7 +191,7 @@ namespace PiRhoSoft.Composition.Editor
 				constraint.Minimum = evt.newValue;
 				SendChangeEvent();
 			});
-		
+
 			max.RegisterValueChangedCallback(evt =>
 			{
 				constraint.Maximum = evt.newValue;
@@ -302,7 +302,7 @@ namespace PiRhoSoft.Composition.Editor
 			var proxy = new ListProxy<string>(constraint.Values, index =>
 			{
 				var field = new TextField() { value = constraint.Values[index], isDelayed = true };
-				field.RegisterValueChangedCallback(evt => 
+				field.RegisterValueChangedCallback(evt =>
 				{
 					constraint.Values[index] = evt.newValue;
 					SendChangeEvent();
@@ -338,7 +338,7 @@ namespace PiRhoSoft.Composition.Editor
 				constraint.ObjectType = Type.GetType(evt.newValue ?? string.Empty);
 				SendChangeEvent();
 			});
-			
+
 			return picker;
 		}
 
@@ -347,7 +347,7 @@ namespace PiRhoSoft.Composition.Editor
 			var picker = container.Q<TypePickerControl>(className: ObjectConstraintUssClassName);
 			picker.SetValueWithoutNotify(constraint.ObjectType.AssemblyQualifiedName);
 		}
-		
+
 		private VisualElement CreateEnumConstraint(EnumConstraint constraint)
 		{
 			var picker = new TypePickerControl(constraint.EnumType.AssemblyQualifiedName, typeof(Enum), true);
@@ -357,7 +357,7 @@ namespace PiRhoSoft.Composition.Editor
 				constraint.EnumType = Type.GetType(evt.newValue ?? string.Empty);
 				SendChangeEvent();
 			});
-		
+
 			return picker;
 		}
 
@@ -366,7 +366,7 @@ namespace PiRhoSoft.Composition.Editor
 			var picker = container.Q<TypePickerControl>(className: EnumConstraintUssClassName);
 			picker.SetValueWithoutNotify(constraint.EnumType.AssemblyQualifiedName);
 		}
-		
+
 		private VisualElement CreateStoreConstraint(StoreConstraint constraint)
 		{
 			var picker = new ObjectPickerControl(constraint.Schema, typeof(VariableSchema));
@@ -376,7 +376,7 @@ namespace PiRhoSoft.Composition.Editor
 				constraint.Schema = evt.newValue as VariableSchema;
 				SendChangeEvent();
 			});
-		
+
 			return picker;
 		}
 
@@ -385,28 +385,38 @@ namespace PiRhoSoft.Composition.Editor
 			var picker = container.Q<ObjectPickerControl>(className: SchemaConstraintUssClassName);
 			picker.SetValueWithoutNotify(constraint.Schema);
 		}
-		
+
 		private VisualElement CreateListConstraint(ListConstraint constraint)
 		{
 			var container = new VisualElement();
+			var listContainer = new VisualElement();
+
 			var dropdown = new EnumField(constraint.ItemType);
 			dropdown.RegisterValueChangedCallback(evt =>
 			{
 				constraint.ItemType = (VariableType)evt.newValue;
+
+				listContainer.Clear();
+				CreateListConstraint(listContainer, constraint);
+
 				SendChangeEvent();
 			});
-			
+
 			container.Add(dropdown);
-		
+			container.Add(listContainer);
+
 			if (constraint.ItemConstraint != null)
-			{
-				var constraintElement = new VisualElement();
-				constraintElement.AddToClassList(ListConstraintUssClassName);
-				CreateConstraint(constraintElement, constraint.ItemConstraint);
-				container.Add(constraintElement);
-			}
-		
+				CreateListConstraint(listContainer, constraint);
+
 			return container;
+		}
+
+		private void CreateListConstraint(VisualElement container, ListConstraint constraint)
+		{
+			var constraintElement = new VisualElement();
+			constraintElement.AddToClassList(ListConstraintUssClassName);
+			CreateConstraint(constraintElement, constraint.ItemConstraint);
+			container.Add(constraintElement);
 		}
 
 		private void RefreshListConstraint(VisualElement container, ListConstraint constraint)
