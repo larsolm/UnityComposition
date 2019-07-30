@@ -6,49 +6,57 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
+	public interface IGraphRunner
+	{
+		void GoTo(GraphNode node, string source);
+		IEnumerator Run(GraphNode node, IVariableCollection variables, string source);
+	}
+
 	[HelpURL(Configuration.DocumentationUrl + "graph")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Graph", fileName = nameof(Graph), order = 100)]
 	public class Graph : ScriptableObject
 	{
-		private const string _alreadyRunningError = "(CIAR) Failed to run Graph '{0}': the Graph is already running";
+		// TODO: need to ensure a node isn't run by two different runners at the same time
 
-		[Tooltip("The definition for the context object that runs this graph")]
-		public VariableDefinition Context = new VariableDefinition("context");
+		private const string _graphAlreadyRunningError = "(PCGGAR) Failed to run graph '{0}': the graph is already running";
+		private const string _nodeAlreadyRunningError = "(PCGNAR) Failed to run GraphNode '{0}' on Graph '{1}': the node is already running";
 
-		[Tooltip("The variables definitions used as inputs for this graph")]
-		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Inputs defined in nodes will appear here")]
+		[Tooltip("The definition for the object that runs this graph")]
+        public VariableDefinition Context = new VariableDefinition("context");
+
+		[Tooltip("The definitions for input variables used in this graph")]
+		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Input variables defined in nodes will appear here")]
 		public VariableDefinitionList Inputs = new VariableDefinitionList();
 
-		[Tooltip("The variables definitions used as outputs for this graph")]
-		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Outputs defined in nodes will appear here")]
+		[Tooltip("The definitions for output variables used in this graph")]
+		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Output variables defined in nodes will appear here")]
 		public VariableDefinitionList Outputs = new VariableDefinitionList();
 
-		public GraphNode Process = null;
-
+		public GraphNode StartNode = null;
 		public List<GraphNode> Nodes = new List<GraphNode>();
 
-		private Stack<NodeFrame> _callstack = new Stack<NodeFrame>();
-		private GraphStore _rootStore;
-		private NodeFrame _nextNode;
-		private bool _shouldBreak = false;
-		private bool _shouldExit = false;
-
-		public IVariableCollection Variables { get; private set; }
 		public bool IsRunning { get; private set; }
+		public IVariableCollection Variables { get; private set; }
+		private List<GraphRunner> _runners = new List<GraphRunner>();
 
-		void OnEnable()
+		#region Reset
+
+		void OnEnable() => Reset();
+		void OnDisable() => Reset();
+
+		private void Reset()
 		{
 			// in case the editor exits play mode while the graph is running
 			Variables = null;
 			IsRunning = false;
+
+			foreach (var runner in _runners)
+				_graphRunnerPool.Release(runner as GraphRunner);
+
+			_runners.Clear();
 		}
 
-		void OnDisable()
-		{
-			// not really necessary but might as well
-			Variables = null;
-			IsRunning = false;
-		}
+		#endregion
 
 		#region Input and Output Schemas
 
@@ -99,61 +107,20 @@ namespace PiRhoSoft.Composition
 
 		private void UpdateDefinition(VariableDefinitionList definitions, VariableDefinition definition, bool add)
 		{
+			// TODO: handle conflicting definitions with the same name (i.e log warning) and proper application of
+			// existing definitions (i.e only update type/constraint if the generated one is empty/null)
+
 			for (var i = 0; i < definitions.Count; i++)
 			{
 				if (definitions[i].Name == definition.Name)
 				{
-					// TODO
-					//if (!definitions[i].Definition.IsTypeLocked || (definitions[i].Definition.Type == definition.Definition.Type && !definitions[i].Definition.IsConstraintLocked))
-					//{
-						definitions[i] = definition;
-						return;
-					//}
+					definitions[i] = definition;
+					return;
 				}
 			}
 
 			if (add)
 				definitions.Add(definition);
-		}
-
-		#endregion
-
-
-		#region Traversal
-
-		public void GoTo(GraphNode node, string name)
-		{
-			switch (node)
-			{
-				case ILoopNode loop: _nextNode.Type = NodeType.Loop; break;
-				case ISequenceNode sequence: _nextNode.Type = NodeType.Sequence; break;
-				default: _nextNode.Type = NodeType.Normal; break;
-			}
-
-			_nextNode.Node = node;
-			_nextNode.Source = name;
-		}
-
-		public void GoTo(GraphNode node, string name, int index)
-		{
-			var source = string.Format("{0} {1}", name, index);
-			GoTo(node, source);
-		}
-
-		public void GoTo(GraphNode node, string name, string key)
-		{
-			var source = string.Format("{0} {1}", name, key);
-			GoTo(node, source);
-		}
-
-		public void Break()
-		{
-			_shouldBreak = true;
-		}
-
-		public void BreakAll()
-		{
-			_shouldExit = true;
 		}
 
 		#endregion
@@ -171,228 +138,37 @@ namespace PiRhoSoft.Composition
 		{
 			if (IsRunning)
 			{
-				Debug.LogErrorFormat(this, _alreadyRunningError, name);
+				Debug.LogErrorFormat(this, _graphAlreadyRunningError, name);
 			}
 			else
 			{
 				Variables = variables;
 				IsRunning = true;
-				yield return CompositionManager.Track(this, Run(variables, Process, nameof(Process)));
+
+				yield return CompositionManager.Track(this, Run(StartNode, Variables, nameof(NodeStarting)));
+
 				IsRunning = false;
 				Variables = null;
 			}
 		}
 
-		private IEnumerator Run(GraphStore variables, GraphNode root, string source)
+		private IEnumerator Run(GraphNode node, IVariableCollection variables, string source)
 		{
-			_rootStore = variables;
-
-			StartRunning(root, source);
-			GoTo(root, source);
-
-			while (ShouldContinue())
-			{
-				var frame = SetupFrame(_nextNode);
-				_nextNode.Reset();
-
-				if (frame.Node != null)
-				{
-					_callstack.Push(frame);
-
-					yield return ProcessFrame(frame);
-				}
-
-				if (_shouldBreak)
-				{
-					HandleBreak();
-					_shouldBreak = false;
-				}
-
-				if (_shouldExit)
-				{
-					_shouldExit = false;
-					break;
-				}
-			}
-
-			_callstack.Clear();
-			_nextNode.Reset();
-		}
-
-		private enum NodeType
-		{
-			Normal,
-			Sequence,
-			Loop
-		}
-
-		private struct NodeFrame
-		{
-			public NodeType Type;
-			public int Iteration;
-			public GraphNode Node;
-			public string Source;
-
-			public NodeFrame Increment()
-			{
-				var frame = this;
-				frame.Iteration++;
-				return frame;
-			}
-
-			public NodeFrame Break()
-			{
-				var frame = this;
-				frame.Type = NodeType.Normal;
-				return frame;
-			}
-
-			public void Reset()
-			{
-				Iteration = 0;
-				Node = null;
-			}
-		}
+			var runner = _graphRunnerPool.Reserve();
+			_runners.Add(runner);
 
 #if UNITY_EDITOR
-
-		private string _currentBranch;
-
-		private void StartRunning(GraphNode root, string source)
-		{
-			_currentBranch = source;
-
-			DebugState = PlaybackState.Running;
-
-			if (IsDebugLoggingEnabled)
-				Debug.LogFormat(this, "(Frame {0}) Graph {1}: running branch '{2}'", Time.frameCount, name, source);
-		}
-
-		private bool ShouldContinue()
-		{
-			if (IsDebugLoggingEnabled)
-			{
-				if (DebugState == PlaybackState.Stopped)
-					Debug.LogFormat(this, "(Frame {0}) Graph {1}: halting branch '{2}'", Time.frameCount, name, _currentBranch);
-				else if (_callstack.Count == 0 && _nextNode.Node == null)
-					Debug.LogFormat(this, "(Frame {0}) Graph {1}: finished running branch '{2}'", Time.frameCount, name, _currentBranch);
-			}
-
-			return DebugState != PlaybackState.Stopped && (_callstack.Count > 0 || _nextNode.Node != null);
-		}
-
-		private IEnumerator ProcessFrame(NodeFrame frame)
-		{
-			if (frame.Node.IsBreakpoint && IsDebugBreakEnabled)
-			{
-				DebugState = PlaybackState.Paused;
-				OnBreakpointHit?.Invoke(this, frame.Node);
-			}
-
-			if (DebugState == PlaybackState.Paused && IsDebugLoggingEnabled)
-				Debug.LogFormat(this, "(Frame {0}) Graph {1}: pausing at node '{2}'", Time.frameCount, name, frame.Node.name);
-
-			while (DebugState == PlaybackState.Paused)
-				yield return null;
-
-			if (DebugState == PlaybackState.Stopped)
-				yield break;
-
-			if (IsDebugLoggingEnabled)
-			{
-				if (frame.Iteration > 0)
-					Debug.LogFormat(this, "(Frame {0}) Graph {1}: running iteration {2} of node '{3}' ", Time.frameCount, name, frame.Iteration + 1, frame.Node.name);
-				else
-					Debug.LogFormat(this, "(Frame {0}) Graph {1}: following '{2}' to node '{3}'", Time.frameCount, name, frame.Source, frame.Node.name);
-			}
-
-			OnProcessFrame?.Invoke(frame.Node, frame.Iteration);
-
-			yield return frame.Node.Run(this, _rootStore, frame.Iteration);
-
-			if (DebugState == PlaybackState.Step)
-				DebugState = PlaybackState.Paused;
-		}
-
-#else
-
-		private void StartRunning(GraphNode root, string source)
-		{
-		}
-
-		private bool ShouldContinue()
-		{
-			return _callstack.Count > 0 || _nextNode.Node != null;
-		}
-
-		private IEnumerator ProcessFrame(NodeFrame frame)
-		{
-			yield return frame.Node.Run(this, _rootStore, frame.Iteration);
-		}
-
+			NodeStarting(source);
 #endif
 
-		private NodeFrame SetupFrame(NodeFrame node)
-		{
-			if (node.Node == null)
-			{
-				// the current frame should never continue if there is no next
+			yield return runner.Run(this, node, variables, source);
 
-				if (_callstack.Count > 0)
-					_callstack.Pop();
+#if UNITY_EDITOR
+			NodeFinished(source);
+#endif
 
-				// check if there is a sequence or loop node in the call stack to iterate
-
-				while (_callstack.Count > 0)
-				{
-					var frame = _callstack.Pop();
-
-					if (frame.Type != NodeType.Normal)
-						return frame.Increment();
-				}
-			}
-			else if (IsNodeInStack(node.Node))
-			{
-				// the node is already in the call stack, so retreat to the existing entry rather than adding a new one
-				// and re-use its original variables - any loop or sequence nodes on the way are bypassed which is
-				// probably the intended behavior
-
-				while (_callstack.Count > 0)
-				{
-					var frame = _callstack.Pop();
-
-					if (frame.Node == node.Node)
-						return frame.Increment();
-				}
-			}
-
-			return node;
-		}
-
-		private bool IsNodeInStack(GraphNode node)
-		{
-			foreach (var frame in _callstack)
-			{
-				if (frame.Node == node)
-					return true;
-			}
-
-			return false;
-		}
-
-		private void HandleBreak()
-		{
-			while (_callstack.Count > 0)
-			{
-				var frame = _callstack.Pop();
-
-				if (frame.Type == NodeType.Loop)
-				{
-					_callstack.Push(frame.Break());
-					GoTo(null, string.Empty);
-					break;
-				}
-			}
+			_runners.Remove(runner);
+			_graphRunnerPool.Release(runner);
 		}
 
 		#endregion
@@ -415,7 +191,7 @@ namespace PiRhoSoft.Composition
 		public static bool IsDebugLoggingEnabled = false;
 		public static Action<Graph, GraphNode> OnBreakpointHit;
 
-		public Action<GraphNode, int> OnProcessFrame;
+		public Action<GraphNode> OnProcessFrame;
 
 		public bool CanDebugPlay => IsRunning && DebugState == PlaybackState.Paused;
 		public bool CanDebugPause => IsRunning && DebugState == PlaybackState.Running;
@@ -448,34 +224,172 @@ namespace PiRhoSoft.Composition
 
 		public bool IsInCallStack(GraphNode node)
 		{
-			if (_callstack.Count > 0)
+			foreach (var runner in _runners)
+			{
+				if (runner.IsInCallStack(node))
+					return true;
+			}
+
+			return false;
+		}
+
+		public bool IsInCallStack(GraphNode.ConnectionData connection)
+		{
+			foreach (var runner in _runners)
+			{
+				if (runner.IsInCallStack(connection))
+					return true;
+			}
+
+			return false;
+		}
+
+		private void NodeStarting(string source)
+		{
+			if (IsDebugLoggingEnabled)
+				Debug.Log($"(Frame {Time.frameCount}) Graph {name}: running '{source}'", this);
+		}
+
+		private IEnumerator ProcessNode(IGraphRunner runner, GraphNode node, IVariableCollection variables, string source)
+		{
+			if (node.IsBreakpoint && IsDebugBreakEnabled)
+			{
+				DebugPause();
+				OnBreakpointHit?.Invoke(this, node);
+			}
+
+			if (DebugState == PlaybackState.Paused && IsDebugLoggingEnabled)
+				Debug.Log($"(Frame {Time.frameCount}) Graph {name}: pausing at node '{node.name}'");
+
+			while (DebugState == PlaybackState.Paused)
+				yield return null;
+
+			if (DebugState == PlaybackState.Stopped)
+				yield break;
+
+			if (IsDebugLoggingEnabled)
+				Debug.Log($"(Frame {Time.frameCount}) Graph {name}: following '{source}' to node '{node.name}'");
+
+			OnProcessFrame?.Invoke(node);
+
+			yield return node.Run(runner, variables);
+
+			if (DebugState == PlaybackState.Step)
+				DebugPause();
+		}
+
+		private void NodeFinished(string source)
+		{
+			if (IsDebugLoggingEnabled)
+			{
+				if (DebugState == PlaybackState.Stopped)
+					Debug.Log($"(Frame {Time.frameCount}) Graph {name}: halting '{source}'", this);
+				else
+					Debug.Log($"(Frame {Time.frameCount}) Graph {name}: finished '{source}'", this);
+			}
+		}
+
+#endif
+
+		#endregion
+
+		#region GraphRunner
+
+		private class GraphRunnerPoolInfo : IPoolInfo { public int Size => 10; public int Growth => 5; }
+		private static ClassPool<GraphRunner, GraphRunnerPoolInfo> _graphRunnerPool = new ClassPool<GraphRunner, GraphRunnerPoolInfo>();
+
+		private class GraphRunner : IGraphRunner, IPoolable
+		{
+			private struct NodeFrame
+			{
+				public GraphNode Node;
+				public string Source;
+			}
+
+			private Graph _graph;
+			private NodeFrame _nextNode;
+
+			public void GoTo(GraphNode node, string source)
+			{
+				_nextNode.Node = node;
+				_nextNode.Source = source;
+			}
+
+			public IEnumerator Run(GraphNode node, IVariableCollection variables, string source)
+			{
+				yield return CompositionManager.Instance.GetEnumerator(_graph.Run(node, variables, source));
+			}
+
+			public IEnumerator Run(Graph graph, GraphNode root, IVariableCollection variables, string source)
+			{
+				_graph = graph;
+				GoTo(root, source);
+
+#if UNITY_EDITOR
+				while (Iterate())
+#else
+				while(_nextNode.Node != null)
+#endif
+				{
+					var node = _nextNode;
+					_nextNode.Node = null;
+
+#if UNITY_EDITOR
+					yield return _graph.ProcessNode(this, node.Node, variables, node.Source);
+#else
+					yield return node.Node.Run(this, variables);
+#endif
+				}
+			}
+
+			public void Reset()
+			{
+				_graph = null;
+				_nextNode = new NodeFrame();
+
+#if UNITY_EDITOR
+				_callstack.Clear();
+#endif
+			}
+
+#if UNITY_EDITOR
+			private Stack<NodeFrame> _callstack = new Stack<NodeFrame>();
+
+			private bool Iterate()
+			{
+				if (_graph.DebugState != PlaybackState.Stopped && _nextNode.Node != null)
+				{
+					_callstack.Push(_nextNode);
+					return true;
+				}
+
+				return false;
+			}
+
+			public bool IsInCallStack(GraphNode node)
 			{
 				foreach (var frame in _callstack)
 				{
 					if (frame.Node == node)
 						return true;
 				}
+
+				return false;
 			}
 
-			return false;
-		}
-
-		public bool IsInCallStack(GraphNode node, string source)
-		{
-			if (_callstack.Count > 0)
+			public bool IsInCallStack(GraphNode.ConnectionData connection)
 			{
 				foreach (var frame in _callstack)
 				{
-					if (frame.Node == node && frame.Source == source)
+					if (frame.Node == connection.To && frame.Source == connection.From.name)
 						return true;
 				}
-			}
 
-			return false;
+				return false;
+			}
+#endif
 		}
 
-#endif
-
-		#endregion
+#endregion
 	}
 }

@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveInterface(variables, Object, out IResettableVariables reset))
 				reset.ResetVariables(Variables);

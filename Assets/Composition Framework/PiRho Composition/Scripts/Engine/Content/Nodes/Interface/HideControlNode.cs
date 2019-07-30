@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.InterfaceDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Control, out InterfaceControl control))
 				control.Deactivate();

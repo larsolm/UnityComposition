@@ -74,7 +74,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public void UpdateColor()
 		{
-			var inCallstack = Connection.From.Graph.IsInCallStack(Connection.To, Connection.From.name);
+			var inCallstack = Connection.From.Graph.IsInCallStack(Connection);
 			EnableInClassList(InCallstackUssClassName, inCallstack);
 		}
 	}

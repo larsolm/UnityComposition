@@ -20,14 +20,14 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Branch;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			var value = Switch.Execute(this, variables, VariableType.String);
 
 			if (value.TryGetString(out var name))
 			{
 				if (Outputs.TryGetValue(name, out var output))
-					graph.GoTo(output, nameof(Outputs), name);
+					graph.GoTo(output, GetConnectionName(nameof(Outputs), name));
 				else
 					graph.GoTo(Default, nameof(Default));
 			}

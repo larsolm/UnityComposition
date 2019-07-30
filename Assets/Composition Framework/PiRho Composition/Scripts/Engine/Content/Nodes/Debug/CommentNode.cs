@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 		[TextArea(3, 8)]
 		public string Comment;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			yield break;
 		}

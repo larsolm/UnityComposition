@@ -68,10 +68,10 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (!Resolve(variables, Context, out var context))
-				context = variables.Context;
+			if (!Resolve(variables, Context, out var context) && variables is GraphStore store)
+				context = store.Context;
 
 			if (Source == GraphSource.Value)
 			{

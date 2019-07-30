@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Branch;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			var condition = Condition.Execute(this, variables, VariableType.Bool).AsBool;
 

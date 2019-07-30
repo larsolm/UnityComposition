@@ -23,14 +23,6 @@ namespace PiRhoSoft.Composition
 		}
 	}
 
-	public interface ISequenceNode
-	{
-	}
-
-	public interface ILoopNode
-	{
-	}
-
 	public abstract class GraphNode : ScriptableObject, IAutocompleteSource
 	{
 		public class GraphNodeAutocompleteSource : AutocompleteSource
@@ -69,7 +61,7 @@ namespace PiRhoSoft.Composition
 		private const string _readOnlyAssignmentWarning = "(CIGNROA) Failed to assign to variable '{0}' from node '{1}': the variable is read only";
 		private const string _invalidAssignmentWarning = "(CIGNIA) Failed to assign to variable '{0}' from node '{1}': the variable has an incompatible type";
 
-		public abstract IEnumerator Run(Graph graph, GraphStore variables, int iteration);
+		public abstract IEnumerator Run(IGraphRunner graph, IVariableCollection variables);
 
 		#region Variable Lookup
 
@@ -631,6 +623,16 @@ namespace PiRhoSoft.Composition
 
 		public AutocompleteSource AutocompleteSource => new GraphNodeAutocompleteSource();
 
+#if UNITY_EDITOR
+		protected static string GetConnectionName(string node) => node;
+		protected static string GetConnectionName(string node, int index) => $"{node} {index}";
+		protected static string GetConnectionName(string node, string key) => $"{node} {key}";
+#else
+		protected static string GetConnectionName(string node) => string.Empty;
+		protected static string GetConnectionName(string node, int index) => string.Empty;
+		protected static string GetConnectionName(string node, string key) => string.Empty;
+#endif
+
 		public class NodeData
 		{
 			public GraphNode Node { get; private set; }
@@ -717,11 +719,11 @@ namespace PiRhoSoft.Composition
 				To = to;
 
 				if (index >= 0)
-					Name = string.Format("{0} {1}", field, index);
+					Name = GetConnectionName(field, index);
 				else if (!string.IsNullOrEmpty(key))
-					Name = string.Format("{0} {1}", field, key);
+					Name = GetConnectionName(field, key);
 				else
-					Name = field;
+					Name = Name = GetConnectionName(field);
 			}
 
 			public void SetTarget(NodeData target)
@@ -782,6 +784,6 @@ namespace PiRhoSoft.Composition
 			connection.ApplyConnection(this, target);
 		}
 
-		#endregion
+#endregion
 	}
 }

@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Editor
 		GraphViewInputPort Input { get; }
 		List<GraphViewOutputPort> Outputs { get; }
 
-		void UpdateColors(bool active, int iteration);
+		void UpdateColors(bool active);
 	}
 
 	public class DefaultGraphViewNode : GraphViewNode, IInputOutputNode
@@ -111,10 +111,11 @@ namespace PiRhoSoft.Composition.Editor
 			return border;
 		}
 
-		public void UpdateColors(bool active, int iteration)
+		public void UpdateColors(bool active)
 		{
 			if (!IsStartNode)
 			{
+				var iteration = 0; // TODO: maybe get title from the node just like color?
 				var label = iteration > 0 ? string.Format("{0} ({1})", Data.Node.name, iteration) : Data.Node.name;
 				var inCallstack = Data.Node.Graph.IsInCallStack(Data.Node);
 				var paused = Data.Node.Graph.DebugState == Graph.PlaybackState.Paused;

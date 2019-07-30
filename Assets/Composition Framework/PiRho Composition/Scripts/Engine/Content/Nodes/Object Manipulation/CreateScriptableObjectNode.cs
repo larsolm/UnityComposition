@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition
 				outputs.Add(new VariableDefinition(ObjectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			Type type;
 

@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition
 
 		private BindingAnimationStatus _status = new BindingAnimationStatus();
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			_status.Reset();
 

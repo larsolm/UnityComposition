@@ -74,7 +74,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			while (true)
 			{
@@ -88,7 +88,7 @@ namespace PiRhoSoft.Composition
 						{
 							if (InputHelper.GetWasAxisPressed(button.Name, button.Value))
 							{
-								graph.GoTo(button.OnSelected, nameof(Buttons), button.Name);
+								graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Name));
 								yield break;
 							}
 
@@ -98,7 +98,7 @@ namespace PiRhoSoft.Composition
 						{
 							if (InputHelper.GetWasButtonPressed(button.Name))
 							{
-								graph.GoTo(button.OnSelected, nameof(Buttons), button.Name);
+								graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Name));
 								yield break;
 							}
 
@@ -108,7 +108,7 @@ namespace PiRhoSoft.Composition
 						{
 							if (InputHelper.GetWasKeyPressed(button.Key))
 							{
-								graph.GoTo(button.OnSelected, nameof(Buttons), button.Key.ToString());
+								graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Key.ToString()));
 								yield break;
 							}
 

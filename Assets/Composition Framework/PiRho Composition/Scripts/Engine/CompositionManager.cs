@@ -62,6 +62,11 @@ namespace PiRhoSoft.Composition
 			StartCoroutine(new JoinEnumerator(enumerator));
 		}
 
+		public IEnumerator GetEnumerator(IEnumerator enumerator)
+		{
+			return new JoinEnumerator(enumerator);
+		}
+
 		#region Enumerator
 
 		private class JoinEnumerator : IEnumerator

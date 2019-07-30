@@ -28,7 +28,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (Resolve(variables, Filename, out var filename) && ResolveObject(variables, Header, out var header) && ResolveObject(variables, DefaultZone, out var zone) && Resolve(variables, DefaultSpawn, out var spawn))
 			{

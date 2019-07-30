@@ -80,7 +80,7 @@ namespace PiRhoSoft.Composition
 				outputs.Add(new VariableDefinition(EffectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Effect, out var effect))
 			{

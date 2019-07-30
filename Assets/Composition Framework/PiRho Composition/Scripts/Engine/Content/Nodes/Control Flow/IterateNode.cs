@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Iterate", 21)]
 	[HelpURL(Configuration.DocumentationUrl + "iterate-node")]
-	public class IterateNode : GraphNode, ILoopNode
+	public class IterateNode : GraphNode
 	{
 		[Tooltip("The variable list containing the objects to iterate")]
 		public VariableReference Container = new VariableReference();
@@ -21,27 +21,27 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Loop;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (Loop != null)
 			{
 				if (Resolve(variables, Container, out IVariableList list))
 				{
-					if (iteration < list.VariableCount)
+					for (var i = 0; i < list.VariableCount; i++)
 					{
-						var item = list.GetVariable(iteration);
-						SetValues(graph, variables, iteration, item);
+						var item = list.GetVariable(i);
+						yield return SetValues(graph, variables, i, item);
 					}
 				}
 				else if (Resolve(variables, Container, out IVariableDictionary dictionary))
 				{
 					var names = dictionary.VariableNames;
-					if (iteration < names.Count)
+					for (var i = 0; i < names.Count; i++)
 					{
-						var name = names[iteration];
+						var name = names[i];
 						var item = dictionary.GetVariable(name);
 
-						SetValues(graph, variables, iteration, item);
+						yield return SetValues(graph, variables, i, item);
 					}
 				}
 			}
@@ -49,7 +49,7 @@ namespace PiRhoSoft.Composition
 			yield break;
 		}
 
-		private void SetValues(Graph graph, GraphStore variables, int iteration, Variable item)
+		private IEnumerator SetValues(IGraphRunner graph, IVariableCollection variables, int iteration, Variable item)
 		{
 			if (Index.IsAssigned)
 				Index.SetValue(variables, Variable.Int(iteration));
@@ -57,7 +57,7 @@ namespace PiRhoSoft.Composition
 			if (Value.IsAssigned)
 				Value.SetValue(variables, item);
 
-			graph.GoTo(Loop, nameof(Loop));
+			yield return graph.Run(Loop, variables, nameof(Loop));
 		}
 	}
 }

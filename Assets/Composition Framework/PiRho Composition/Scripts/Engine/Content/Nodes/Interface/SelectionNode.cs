@@ -72,11 +72,11 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Control, out SelectionControl control))
 			{
-				control.Show(variables, Items, IsSelectionRequired, iteration == 0);
+				control.Show(variables, Items, IsSelectionRequired, true); // TODO: don't have iteration anymore - this should be handled better anyway
 
 				while (control.IsRunning)
 					yield return null;
@@ -85,7 +85,7 @@ namespace PiRhoSoft.Composition
 				Assign(variables, SelectedIndex, Variable.Int(control.SelectedIndex));
 
 				if (control.SelectedItem?.Template is SelectionNodeItem selectedItem)
-					graph.GoTo(selectedItem.OnSelected, nameof(Items), selectedItem.Id);
+					graph.GoTo(selectedItem.OnSelected, GetConnectionName(nameof(Items), selectedItem.Id));
 				else
 					graph.GoTo(OnCanceled, nameof(OnCanceled));
 

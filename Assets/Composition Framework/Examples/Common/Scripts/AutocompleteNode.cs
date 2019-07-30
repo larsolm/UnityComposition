@@ -8,7 +8,7 @@ namespace PiRhoSoft.CompositionExample
 	{
 		public VariableReference Variable = new VariableReference();
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			yield break;
 		}

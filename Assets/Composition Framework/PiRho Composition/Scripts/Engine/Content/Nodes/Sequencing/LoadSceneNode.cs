@@ -56,7 +56,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (WaitForCompletion)
 				yield return LoadScene(variables);
@@ -66,7 +66,7 @@ namespace PiRhoSoft.Composition
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator LoadScene(GraphStore variables)
+		private IEnumerator LoadScene(IVariableCollection variables)
 		{
 			var loadStatus = Load(variables);
 
@@ -87,7 +87,7 @@ namespace PiRhoSoft.Composition
 
 		#region Scene Loading
 
-		private AsyncOperation Load(GraphStore variables)
+		private AsyncOperation Load(IVariableCollection variables)
 		{
 			var mode = Additive ? LoadSceneMode.Additive : LoadSceneMode.Single;
 

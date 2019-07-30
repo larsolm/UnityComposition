@@ -13,7 +13,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public GraphNode Next;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			AudioManager.Instance.Pop(FadeOut, FadeIn, Crossfade);
 

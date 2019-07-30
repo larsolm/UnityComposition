@@ -55,7 +55,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (WaitForCompletion)
 				yield return UnloadScene(variables);
@@ -65,7 +65,7 @@ namespace PiRhoSoft.Composition
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator UnloadScene(GraphStore variables)
+		private IEnumerator UnloadScene(IVariableCollection variables)
 		{
 			var loadStatus = Unload(variables);
 
@@ -84,7 +84,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private AsyncOperation Unload(GraphStore variables)
+		private AsyncOperation Unload(IVariableCollection variables)
 		{
 			switch (Source)
 			{
