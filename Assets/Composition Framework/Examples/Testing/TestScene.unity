@@ -233,8 +233,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Test:
-    Int: 0
-    Float: 0
+    Int: 3
+    Float: 2
 --- !u!4 &2117580973
 Transform:
   m_ObjectHideFlags: 0

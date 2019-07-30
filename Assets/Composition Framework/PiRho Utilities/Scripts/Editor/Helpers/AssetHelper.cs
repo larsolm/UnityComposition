@@ -236,7 +236,7 @@ namespace PiRhoSoft.Utilities.Editor
 			return prefix;
 		}
 
-		public static string FindEditorPath(string typename, string editorFolder, string subFolder)
+		public static string FindEditorPath(string typename, string editorFolder)
 		{
 			// Packages might be added as a subfolder of a different project so this determines the
 			// actual path to the editor scripts by finding the asset representing the desired script file
@@ -249,7 +249,7 @@ namespace PiRhoSoft.Utilities.Editor
 				var index = path.IndexOf(editorFolder);
 
 				if (index >= 0)
-					return path.Substring(0, index) + editorFolder + subFolder;
+					return path.Substring(0, index) + editorFolder;
 			}
 
 			Debug.LogErrorFormat(_missingEditorPathError, typename, editorFolder);

@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition.Editor
 			get
 			{
 				if (_editorPath == null)
-					_editorPath = AssetHelper.FindEditorPath(nameof(Configuration), _editorFolder, string.Empty);
+					_editorPath = AssetHelper.FindEditorPath(nameof(Configuration), _editorFolder);
 
 				return _editorPath;
 			}

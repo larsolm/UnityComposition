@@ -11,7 +11,7 @@
 			get
 			{
 				if (_elementsPath == null)
-					_elementsPath = AssetHelper.FindEditorPath(nameof(Configuration), _editorFolder, _elementsFolder);
+					_elementsPath = AssetHelper.FindEditorPath(nameof(Configuration), _editorFolder) + _elementsFolder;
 
 				return _elementsPath;
 			}
