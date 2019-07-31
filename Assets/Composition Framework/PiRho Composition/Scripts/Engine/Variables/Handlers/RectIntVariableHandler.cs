@@ -100,6 +100,14 @@ namespace PiRhoSoft.Composition
 				return null;
 		}
 
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetRectInt(out var t))
+				return Vector2.Distance(from.AsRectInt.size, t.size);
+			else
+				return 0.0f;
+		}
+
 		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
 		{
 			if (to.TryGetRectInt(out var t))

@@ -45,6 +45,14 @@ namespace PiRhoSoft.Composition
 				return null;
 		}
 
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetString(out var t))
+				return Mathf.Max(from.AsString.Length, t.Length);
+			else
+				return 0.0f;
+		}
+
 		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
 		{
 			if (to.TryGetString(out var t))

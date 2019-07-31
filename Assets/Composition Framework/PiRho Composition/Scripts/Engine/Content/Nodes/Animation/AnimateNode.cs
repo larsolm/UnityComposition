@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.Utilities;
+using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -7,6 +8,12 @@ namespace PiRhoSoft.Composition
 	[HelpURL(Configuration.DocumentationUrl + "play-animation-node")]
 	public class AnimateNode : GraphNode
 	{
+		public enum AdvanceType
+		{
+			Duration,
+			Speed
+		}
+
 		private const string _invalidAnimateWarning = "(PCANIA) failed to animate in node '{0}': the types '{1}' and '{2}' cannot be animated";
 
 		[Tooltip("The node to move to when this node is finished")]
@@ -21,8 +28,19 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The variable to apply the animation to")]
 		public VariableReference Target = new VariableReference();
 
+		[Tooltip("Whether to advance the animation using Duration or Speed")]
+		public AdvanceType Advance = AdvanceType.Duration;
+
+		[Tooltip("Whether to respect the global timeScale (unchecked) or not (checked)")]
+		public bool UseUnscaledTime = false;
+
 		[Tooltip("The duration of the animation (in seconds)")]
+		[Conditional(nameof(Advance), (int)AdvanceType.Duration)]
 		public float Duration = 1.0f;
+
+		[Tooltip("The speed of the animation (in units of corresponding type per second)")]
+		[Conditional(nameof(Advance), (int)AdvanceType.Speed)]
+		public float Speed = 1.0f;
 
 		[Tooltip("The curve of the animation")]
 		public AnimationCurve Animation = new AnimationCurve();
@@ -35,11 +53,18 @@ namespace PiRhoSoft.Composition
 			{
 				if (Resolve(variables, To, out var to))
 				{
-					var elapsed = 0.0f;
+					var location = 0.0f;
+					var end = Advance == AdvanceType.Speed
+						? VariableHandler.Distance(from, to)
+						: Duration;
 
-					while (elapsed < Duration)
+					while (location < end)
 					{
-						var time = Animation.Evaluate(elapsed / Duration);
+						var elapsed = UseUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
+						var increment = Advance == AdvanceType.Duration ? elapsed : Speed * elapsed;
+						var time = Animation.Evaluate(location / end);
+
+						location += increment;
 
 						if (Assign(variables, from, to, time))
 							yield return null;

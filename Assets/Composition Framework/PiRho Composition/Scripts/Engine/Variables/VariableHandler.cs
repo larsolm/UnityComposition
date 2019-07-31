@@ -1,7 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
-using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
@@ -109,11 +107,10 @@ namespace PiRhoSoft.Composition
 
 		#region Animation
 
-		public static Variable Interpolate(Variable from, Variable to, float time)
-		{
-			return Get(from.Type).Interpolate_(from, to, time);
-		}
+		public static float Distance(Variable from, Variable to) => Get(from.Type).Distance_(from, to);
+		public static Variable Interpolate(Variable from, Variable to, float time) => Get(from.Type).Interpolate_(from, to, time);
 
+		protected internal virtual float Distance_(Variable from, Variable to) => 0.0f;
 		protected internal virtual Variable Interpolate_(Variable from, Variable to, float time) => Variable.Empty;
 
 		#endregion

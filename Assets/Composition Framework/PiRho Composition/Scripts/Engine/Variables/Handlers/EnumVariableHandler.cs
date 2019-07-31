@@ -39,6 +39,21 @@ namespace PiRhoSoft.Composition
 				return null;
 		}
 
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetEnum(from.EnumType, out var t))
+			{
+				var fInt = (int)Enum.Parse(from.EnumType, from.AsEnum.ToString());
+				var tInt = (int)Enum.Parse(to.EnumType, t.ToString());
+
+				return tInt = fInt;
+			}
+			else
+			{
+				return 0.0f;
+			}
+		}
+
 		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
 		{
 			if (to.TryGetEnum(from.EnumType, out var t))
