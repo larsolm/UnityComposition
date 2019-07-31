@@ -1,14 +1,13 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 
 namespace PiRhoSoft.Composition
 {
 	internal class BoolVariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(variable.AsBool);
+			return variable.AsBool.ToString();
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
@@ -28,6 +27,14 @@ namespace PiRhoSoft.Composition
 				return left.AsBool == b;
 			else
 				return null;
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetBool(out var t))
+				return Variable.Bool(time < 0.5f ? from.AsBool : t);
+			else
+				return Variable.Empty;
 		}
 	}
 }

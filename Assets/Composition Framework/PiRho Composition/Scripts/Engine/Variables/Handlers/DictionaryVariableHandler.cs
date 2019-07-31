@@ -1,14 +1,15 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 
 namespace PiRhoSoft.Composition
 {
 	internal class DictionaryVariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable value, StringBuilder builder)
+		private const string DictionaryString = "(Dictionary)";
+
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(value.AsDictionary);
+			return DictionaryString;
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)

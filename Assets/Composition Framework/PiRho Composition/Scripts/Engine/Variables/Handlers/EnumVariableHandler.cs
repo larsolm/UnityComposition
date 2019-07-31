@@ -1,14 +1,15 @@
 ﻿using PiRhoSoft.Utilities;
+using System;
 using System.IO;
-using System.Text;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class EnumVariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(variable.AsEnum.ToString());
+			return variable.AsEnum.ToString();
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
@@ -36,6 +37,22 @@ namespace PiRhoSoft.Composition
 				return left.AsEnum.CompareTo(e);
 			else
 				return null;
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetEnum(from.EnumType, out var t))
+			{
+				var fInt = (int)Enum.Parse(from.EnumType, from.AsEnum.ToString());
+				var tInt = (int)Enum.Parse(to.EnumType, t.ToString());
+				var value = Mathf.Lerp(fInt, tInt, time);
+
+				return Variable.Int((int)value);
+			}
+			else
+			{
+				return Variable.Empty;
+			}
 		}
 	}
 }

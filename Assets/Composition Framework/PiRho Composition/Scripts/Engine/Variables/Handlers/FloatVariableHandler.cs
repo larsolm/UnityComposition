@@ -1,15 +1,15 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
 using System.IO;
-using System.Text;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class FloatVariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(variable.AsFloat);
+			return variable.AsFloat.ToString();
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
@@ -92,6 +92,19 @@ namespace PiRhoSoft.Composition
 				return left.AsFloat.CompareTo(number);
 			else
 				return null;
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetFloat(out var t))
+			{
+				var value = Mathf.Lerp(from.AsFloat, t, time);
+				return Variable.Float(value);
+			}
+			else
+			{
+				return Variable.Empty;
+			}
 		}
 	}
 }

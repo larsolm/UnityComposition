@@ -11,9 +11,8 @@ namespace PiRhoSoft.CompositionExample
 	}
 
 	[AddComponentMenu("PiRho Soft/Examples/Test")]
-	[ExecuteAlways]
 	public class TestComponent : MonoBehaviour
 	{
-		public TestClass Test = new TestClass();
+		public AnimationCurve Curve = new AnimationCurve();
 	}
 }

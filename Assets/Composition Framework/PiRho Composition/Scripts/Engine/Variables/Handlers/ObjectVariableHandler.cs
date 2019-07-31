@@ -1,24 +1,20 @@
 ﻿using PiRhoSoft.Utilities;
-using System;
 using System.IO;
-using System.Reflection;
-using System.Text;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
 	internal class ObjectVariableHandler : VariableHandler
 	{
-		public const string NullText = "(null)";
+		private const string NullString = "(null)";
+		private const string GameObjectName = "GameObject";
 
-		private const string _gameObjectName = "GameObject";
-
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
 			if (variable.IsNullObject)
-				builder.Append(NullText);
+				return NullString;
 			else
-				builder.Append(variable.AsObject);
+				return variable.AsObject.ToString();
 		}
 
 		protected internal override void Save_(Variable value, BinaryWriter writer, SerializedData data)
@@ -79,7 +75,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (owner.TryGetObject<Object>(out var obj))
 			{
-				if (type == _gameObjectName)
+				if (type == GameObjectName)
 				{
 					var gameObject = ComponentHelper.GetAsGameObject(obj);
 					return Variable.Object(gameObject);
@@ -98,7 +94,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (owner.TryGetObject<Object>(out var obj))
 			{
-				if (type == _gameObjectName)
+				if (type == GameObjectName)
 				{
 					var gameObject = ComponentHelper.GetAsGameObject(obj);
 					return gameObject != null;

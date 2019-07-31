@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 
 namespace PiRhoSoft.Composition
 {
@@ -8,9 +7,9 @@ namespace PiRhoSoft.Composition
 	{
 		public const string EmptyText = "(empty)";
 
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(EmptyText);
+			return EmptyText;
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
