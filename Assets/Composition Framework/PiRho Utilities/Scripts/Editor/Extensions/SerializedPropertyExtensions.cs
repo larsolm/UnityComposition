@@ -160,7 +160,7 @@ namespace PiRhoSoft.Utilities.Editor
 			if (typeof(T) == typeof(string)) return (T)(object)property.stringValue;
 			if (typeof(T) == typeof(Color)) return (T)(object)property.colorValue;
 			if (typeof(T) == typeof(LayerMask)) return (T)(object)property.intValue;
-			if (typeof(T) == typeof(Enum)) return (T)(object)property.enumValueIndex;
+			// if (typeof(T) == typeof(Enum)) return (T)(object)property.intValue; TODO: doesn't work without enum type
 			if (typeof(T) == typeof(Vector2)) return (T)(object)property.vector2Value;
 			if (typeof(T) == typeof(Vector3)) return (T)(object)property.vector3Value;
 			if (typeof(T) == typeof(Vector4)) return (T)(object)property.vector4Value;
@@ -175,7 +175,7 @@ namespace PiRhoSoft.Utilities.Editor
 			if (typeof(T) == typeof(BoundsInt)) return (T)(object)property.boundsIntValue;
 			if (typeof(Object).IsAssignableFrom(typeof(T))) return (T)(object)property.objectReferenceValue;
 
-			return default(T);
+			return default;
 		}
 
 		public static void ResizeArray(this SerializedProperty arrayProperty, int newSize)

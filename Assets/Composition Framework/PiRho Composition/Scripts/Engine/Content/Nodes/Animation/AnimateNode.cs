@@ -8,13 +8,11 @@ namespace PiRhoSoft.Composition
 	[HelpURL(Configuration.DocumentationUrl + "play-animation-node")]
 	public class AnimateNode : GraphNode
 	{
-		public enum AdvanceType
-		{
-			Duration,
-			Speed
-		}
-
-		private const string _invalidAnimateWarning = "(PCANIA) failed to animate in node '{0}': the types '{1}' and '{2}' cannot be animated";
+		private const string _invalidInputsWarning = "(PCANIA) failed to animate in node '{0}': the types '{1}' and '{2}' cannot be animated";
+		private const string _unassignedOutputWarning = "(PCANIA) failed to animate in node '{0}': the variable to animate has not been set";
+		private const string _missingOutputWarning = "(PCANIA) failed to animate in node '{0}': the variable '{1}' cannot be found";
+		private const string _readOnlyOutputWarning = "(PCANIA) failed to animate in node '{0}': the variable '{1}' is read only";
+		private const string _invalidOutputWarning = "(PCANIA) failed to animate in node '{0}': the variable '{1}' could not be set";
 
 		[Tooltip("The node to move to when this node is finished")]
 		public GraphNode Next = null;
@@ -25,74 +23,28 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The value to animate to")]
 		public VariableValueSource To = new VariableValueSource();
 
-		[Tooltip("The variable to apply the animation to")]
-		public VariableReference Target = new VariableReference();
-
-		[Tooltip("Whether to advance the animation using Duration or Speed")]
-		public AdvanceType Advance = AdvanceType.Duration;
-
-		[Tooltip("Whether to respect the global timeScale (unchecked) or not (checked)")]
-		public bool UseUnscaledTime = false;
-
-		[Tooltip("The duration of the animation (in seconds)")]
-		[Conditional(nameof(Advance), (int)AdvanceType.Duration)]
-		public float Duration = 1.0f;
-
-		[Tooltip("The speed of the animation (in units of corresponding type per second)")]
-		[Conditional(nameof(Advance), (int)AdvanceType.Speed)]
-		public float Speed = 1.0f;
-
-		[Tooltip("The curve of the animation")]
-		public AnimationCurve Animation = new AnimationCurve();
+		[Inline]
+		public AnimatedVariable Animation = new AnimatedVariable();
 
 		public override Color NodeColor => Colors.Animation;
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, From, out var from) || Resolve(variables, Target, out from))
+			if (Resolve(variables, From, out var from) && Resolve(variables, To, out var to))
 			{
-				if (Resolve(variables, To, out var to))
+				yield return Animation.Animate(variables, from, to);
+
+				switch (Animation.Result)
 				{
-					var location = 0.0f;
-					var end = Advance == AdvanceType.Speed
-						? VariableHandler.Distance(from, to)
-						: Duration;
-
-					while (location < end)
-					{
-						var elapsed = UseUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
-						var increment = Advance == AdvanceType.Duration ? elapsed : Speed * elapsed;
-						var time = Animation.Evaluate(location / end);
-
-						location += increment;
-
-						if (Assign(variables, from, to, time))
-							yield return null;
-						else
-							yield break;
-					}
-
-					Assign(variables, from, to, 1.0f);
+					case AnimatedVariableResult.InvalidInputs: Debug.LogWarningFormat(this, _invalidInputsWarning, name, from.Type, to.Type); break;
+					case AnimatedVariableResult.UnassignedOutput: Debug.LogWarningFormat(this, _unassignedOutputWarning, name, from.Type, to.Type); break;
+					case AnimatedVariableResult.MissingOutput: Debug.LogWarningFormat(this, _missingOutputWarning, name, Animation.Target); break;
+					case AnimatedVariableResult.ReadOnlyOutput: Debug.LogWarningFormat(this, _readOnlyOutputWarning, name, Animation.Target); break;
+					case AnimatedVariableResult.InvalidOutput: Debug.LogWarningFormat(this, _invalidOutputWarning, name, Animation.Target); break;
 				}
 			}
 
 			graph.GoTo(Next, nameof(Next));
-		}
-
-		private bool Assign(IVariableCollection variables, Variable from, Variable to, float time)
-		{
-			var result = VariableHandler.Interpolate(from, to, time);
-
-			if (result.IsEmpty)
-			{
-				Debug.LogFormat(this, _invalidAnimateWarning, name, from.Type, to.Type);
-				return false;
-			}
-			else
-			{
-				Assign(variables, Target, result);
-				return true;
-			}
 		}
 	}
 }
