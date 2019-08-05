@@ -21,7 +21,8 @@
 .pirho-message-box__label
 {
 	-unity-text-align: middle-center;
-	margin: 0 5px;
+	margin-left: 5px;
+	margin-right: 5px;
 	flex-shrink: 1;
 	white-space: normal;
 }

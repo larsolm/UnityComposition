@@ -44,7 +44,7 @@ namespace PiRhoSoft.Composition.Editor
 			Value = value;
 
 			if (!string.IsNullOrEmpty(Value.Name))
-				Add(new Label(Value.Name));
+				Add(new TextElement { text = Value.Name });
 
 			CreateType();
 			CreateConstraint();
@@ -140,8 +140,8 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateIntConstraint(IntConstraint constraint)
 		{
 			var container = new VisualElement();
-			var minLabel = new Label("Minimum:");
-			var maxLabel = new Label("Maximum:");
+			var minLabel = new TextElement { text = "Minimum:" };
+			var maxLabel = new TextElement { text = "Maximum:" };
 			var minToggle = new Toggle();
 			var maxToggle = new Toggle();
 			var min = new IntegerField();
@@ -220,8 +220,8 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateFloatConstraint(FloatConstraint constraint)
 		{
 			var container = new VisualElement();
-			var minLabel = new Label("Minimum:");
-			var maxLabel = new Label("Maximum:");
+			var minLabel = new TextElement { text = "Minimum:" };
+			var maxLabel = new TextElement { text = "Maximum:" };
 			var minToggle = new Toggle();
 			var maxToggle = new Toggle();
 			var min = new FloatField();

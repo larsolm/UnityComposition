@@ -6,7 +6,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public const string CommentUssClassName = UssClassName + "--comment";
 
-		private readonly Label _comment;
+		private readonly TextElement _comment;
 		private readonly TextField _edit;
 
 		private CommentNode _commentNode => Data.Node as CommentNode;
@@ -19,7 +19,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			CreateDeleteButton();
 
-			_comment = new Label(_commentNode.Comment) { tooltip = "Double click to edit this comment" };
+			_comment = new TextElement { text = _commentNode.Comment, tooltip = "Double click to edit this comment" };
 			_edit = CreateEditableLabel(_comment, () => _commentNode.Comment, CommentChanged);
 
 			extensionContainer.Add(_comment);

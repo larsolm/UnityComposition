@@ -53,7 +53,7 @@ namespace PiRhoSoft.Composition.Editor
 			Selection.activeObject = IsStartNode ? (Object)Data.Node.Graph : Data.Node;
 		}
 
-		protected TextField CreateEditableLabel(Label container, Func<string> getValue, Action<string> setValue, bool multiline = false)
+		protected TextField CreateEditableLabel(TextElement container, Func<string> getValue, Action<string> setValue, bool multiline = false)
 		{
 			var edit = new TextField() { value = getValue() };
 			edit.multiline = multiline;

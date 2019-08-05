@@ -94,7 +94,7 @@ namespace PiRhoSoft.Utilities.Editor
 			_addButton = AddHeaderButton(_addIcon.Texture, Proxy.AddTooltip, AddButtonUssClassName, AddItem);
 			_removeButtons = Content.Query<IconButton>(className: RemoveButtonUssClassName).Build();
 
-			var empty = new Label(Proxy.EmptyLabel) { tooltip = Proxy.EmptyTooltip };
+			var empty = new TextElement { text = Proxy.EmptyLabel, tooltip = Proxy.EmptyTooltip };
 			empty.AddToClassList(EmptyLabelUssClassName);
 
 			_itemsContainer = new VisualElement();

@@ -56,13 +56,13 @@ namespace PiRhoSoft.Composition.Editor
 
 				var name = GetName(index);
 
-				container.Add(new Label(name));
+				container.Add(new TextElement { text = name });
 
 				var variable = _variables.GetVariable(name);
 
 				if (variable.IsEmpty)
 				{
-					container.Add(new Label("(empty)"));
+					container.Add(new TextElement { text = "(empty)" });
 				}
 				else
 				{

@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition.Editor
 			var node = property.objectReferenceValue as GraphNode;
 			var container = new FieldContainer(property.displayName, this.GetTooltip());
 			
-			var label = new Label(node == null ? "Unconnected" : node.name);
+			var label = new TextElement { text = node == null ? "Unconnected" : node.name };
 			label.style.flexGrow = 1;
 			label.style.flexShrink = 1;
 			label.style.overflow = Overflow.Hidden;

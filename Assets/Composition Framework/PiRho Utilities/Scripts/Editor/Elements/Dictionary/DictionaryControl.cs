@@ -106,7 +106,7 @@ namespace PiRhoSoft.Utilities.Editor
 			Header.Add(_keyField);
 			_keyField.PlaceInFront(Label);
 
-			var empty = new Label(Proxy.EmptyLabel) { tooltip = Proxy.EmptyTooltip };
+			var empty = new TextElement { text = Proxy.EmptyLabel, tooltip = Proxy.EmptyTooltip };
 			empty.AddToClassList(EmptyLabelUssClassName);
 
 			Content.Add(empty);

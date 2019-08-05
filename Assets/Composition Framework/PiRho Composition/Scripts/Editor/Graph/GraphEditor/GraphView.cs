@@ -473,7 +473,7 @@ namespace PiRhoSoft.Composition.Editor
 		private readonly GraphViewWindow _window;
 		private readonly GraphProvider _graphProvider;
 
-		private Label _graphButton;
+		private TextElement _graphButton;
 		private Image _breakButton;
 		private Image _loggingButton;
 		private Image _lockButton;
@@ -557,7 +557,7 @@ namespace PiRhoSoft.Composition.Editor
 			_loggingButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_loggingButton.AddManipulator(new Clickable(ToggleLoggingEnabled));
 
-			_graphButton = new Label() { tooltip = "Select a graph to edit" };
+			_graphButton = new TextElement() { tooltip = "Select a graph to edit" };
 			_graphButton.AddToClassList(ToolbarButtonUssClassName);
 			_graphButton.AddToClassList(ToolbarButtonLargeUssClassName);
 			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));

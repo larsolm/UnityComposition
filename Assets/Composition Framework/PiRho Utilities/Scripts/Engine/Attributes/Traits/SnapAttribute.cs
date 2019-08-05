@@ -20,49 +20,44 @@ namespace PiRhoSoft.Utilities
 			Number = snap;
 		}
 
-		public SnapAttribute(Vector2 snap) : base(FieldPhase, Order)
+		public SnapAttribute(float x, float y) : base(FieldPhase, Order)
 		{
-			Vector = snap;
+			Vector = new Vector2(x, y);
 		}
 
-		public SnapAttribute(Vector2Int snap) : base(FieldPhase, Order)
+		public SnapAttribute(int x, int y) : base(FieldPhase, Order)
 		{
-			Vector = (Vector2)snap;
+			Vector = new Vector2(x, y);
 		}
 
-		public SnapAttribute(Vector3 snap) : base(FieldPhase, Order)
+		public SnapAttribute(float x, float y, float z) : base(FieldPhase, Order)
 		{
-			Vector = snap;
+			Vector = new Vector3(x, y, z);
 		}
 
-		public SnapAttribute(Vector3Int snap) : base(FieldPhase, Order)
+		public SnapAttribute(int x, int y, int z) : base(FieldPhase, Order)
 		{
-			Vector = (Vector3)snap;
+			Vector = new Vector3(x, y, z);
 		}
 
-		public SnapAttribute(Vector4 snap) : base(FieldPhase, Order)
+		public SnapAttribute(float x, float y, float z, float w) : base(FieldPhase, Order)
 		{
-			Vector = snap;
+			Vector = new Vector4(x, y, z, w);
 		}
 
-		public SnapAttribute(Rect snap) : base(FieldPhase, Order)
+		public SnapAttribute(int x, int y, int width, int height) : base(FieldPhase, Order)
 		{
-			Vector = new Vector4(snap.x, snap.y, snap.width, snap.height);
+			Vector = new Vector4(x, y, width, height);
 		}
 
-		public SnapAttribute(RectInt snap) : base(FieldPhase, Order)
+		public SnapAttribute(float x, float y, float z, float width, float height, float depth) : base(FieldPhase, Order)
 		{
-			Vector = new Vector4(snap.x, snap.y, snap.width, snap.height);
+			Bounds = new Bounds(new Vector3(x, y, z), new Vector3(width, height, depth));
 		}
 
-		public SnapAttribute(Bounds snap) : base(FieldPhase, Order)
+		public SnapAttribute(int x, int y, int z, int width, int height, int depth) : base(FieldPhase, Order)
 		{
-			Bounds = snap;
-		}
-
-		public SnapAttribute(BoundsInt snap) : base(FieldPhase, Order)
-		{
-			Bounds = new Bounds(snap.center, snap.size);
+			Bounds = new Bounds(new Vector3(x, y, z), new Vector3(width, height, depth));
 		}
 	}
 }

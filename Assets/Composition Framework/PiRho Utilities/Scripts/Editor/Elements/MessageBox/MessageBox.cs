@@ -37,14 +37,14 @@ namespace PiRhoSoft.Utilities.Editor
 		}
 
 		private Image _image;
-		private Label _label;
+		private TextElement _label;
 		private MessageBoxType _type;
 
 		public MessageBox(MessageBoxType type, string message)
 		{
 			_image = new Image();
 			_image.AddToClassList(ImageUssClassName);
-			_label = new Label();
+			_label = new TextElement();
 			_label.AddToClassList(LabelUssClassName);
 
 			Type = type;

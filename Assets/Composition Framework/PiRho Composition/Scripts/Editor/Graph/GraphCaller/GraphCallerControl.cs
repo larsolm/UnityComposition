@@ -94,7 +94,7 @@ namespace PiRhoSoft.Composition.Editor
 			public override VisualElement CreateElement(int index)
 			{
 				var input = Caller.Inputs[index];
-				var label = new Label(input.Name);
+				var label = new TextElement { text = input.Name };
 
 				var referenceControl = new VariableReferenceControl(input.Reference, null); // TODO: Add an autocompletesource
 
@@ -137,7 +137,7 @@ namespace PiRhoSoft.Composition.Editor
 			public override VisualElement CreateElement(int index)
 			{
 				var output = Caller.Outputs[index];
-				var label = new Label(output.Name);
+				var label = new TextElement { text = output.Name };
 
 				var referenceControl = new VariableReferenceControl(output.Reference, null); // TODO: Add an autocompletesource
 

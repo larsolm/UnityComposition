@@ -97,7 +97,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			_modeToggle.AddToClassList(InitializerModeUssClassName);
 
-			var label = new Label("Initializer:");
+			var label = new TextElement { text = "Initializer:" };
 			label.AddToClassList(InitializerLabelUssClassName);
 
 			// TODO: Are these the correct things to pass in the editor? null doesn't work with new isolate scopes

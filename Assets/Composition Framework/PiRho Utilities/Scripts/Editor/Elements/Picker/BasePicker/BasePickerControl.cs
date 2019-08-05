@@ -15,7 +15,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public ValueType Value { get; private set; }
 
 		private Image _icon;
-		private Label _label;
+		private TextElement _label;
 
 		protected void Setup<PickerType>(PickerProvider<PickerType> provider, ValueType value) where PickerType : class
 		{
@@ -27,7 +27,7 @@ namespace PiRhoSoft.Utilities.Editor
 			_icon = new Image();
 			_icon.AddToClassList(IconUssClassName);
 
-			_label = new Label();
+			_label = new TextElement();
 			_label.AddToClassList(LabelUssClassName);
 
 			button.Add(_icon);
