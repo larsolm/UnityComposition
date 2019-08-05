@@ -35,6 +35,7 @@ namespace PiRhoSoft.Composition
 	{
 		public class GraphNodeAutocompleteSource : AutocompleteSource
 		{
+			public override bool SupportsCustom => false;
 			public override List<AutocompleteItem> Items => new List<AutocompleteItem>();
 		}
 

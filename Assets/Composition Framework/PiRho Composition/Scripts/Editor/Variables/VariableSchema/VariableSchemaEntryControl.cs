@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableSchemaEntryControl : VisualElement
 	{
-		public const string Stylesheet = "Variables/VariableSchema/VariableSchemaEntry.uss";
+		public const string Stylesheet = "Variables/VariableSchema/VariableSchemaEntryStyle.uss";
 		public const string UssClassName = "pirho-variable-schema-entry";
 		public const string InitializerUssClassName = UssClassName + "__initializer";
 		public const string InitializerModeAdvancedUssClassName = InitializerUssClassName + "--advanced";

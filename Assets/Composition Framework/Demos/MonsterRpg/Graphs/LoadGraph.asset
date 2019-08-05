@@ -12,16 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 37fc6f8ca9decf2499c2de065b8a84d4, type: 3}
   m_Name: LoadGraph
   m_EditorClassIdentifier: 
-  ContextName: context
-  ContextDefinition:
+  Context:
+    Name: context
     _type: 0
-    _constraint: 
-    _objects: []
-    _tag: 
-    _initializer:
-      _statement: 
-    _isTypeLocked: 0
-    _isConstraintLocked: 0
+    _constraintData:
+      Version: 1
+      Data: 
+      References: []
   Inputs:
     _items: []
   Outputs:
@@ -29,6 +26,7 @@ MonoBehaviour:
   Process: {fileID: 0}
   Nodes:
   - {fileID: 8360444590051035758}
+  - {fileID: 8482443941764121844}
 --- !u!114 &8360444590051035758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,5 +40,24 @@ MonoBehaviour:
   m_Name: BreakNode
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 129.00002, y: -86.99997}
+  GraphPosition: {x: 104.000015, y: -119.99997}
   IsBreakpoint: 0
+--- !u!114 &8482443941764121844
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
+  m_Name: DestroyObjectNode
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 327, y: -128}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Target:
+    _variable: 
+    _tokens: []

@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using System.Collections.Generic;
 
 namespace PiRhoSoft.Utilities
 {
@@ -12,18 +10,25 @@ namespace PiRhoSoft.Utilities
 	public class AutocompleteItem
 	{
 		public string Name;
+		public bool IsArray;
+		public bool SupportsCasting;
 		public AutocompleteSource Source;
 	}
 
 	public abstract class AutocompleteSource
 	{
+		public abstract bool SupportsCustom { get; }
 		public abstract List<AutocompleteItem> Items { get; }
-	}
 
-	public class AutocompleteAttribute : PropertyAttribute
-	{
-		public Type SourceType { get; private set; }
+		public AutocompleteItem GetItem(string name)
+		{
+			foreach (var item in Items)
+			{
+				if (item.Name == name)
+					return item;
+			}
 
-		public AutocompleteAttribute(Type sourceType) => SourceType = sourceType;
+			return null;
+		}
 	}
 }

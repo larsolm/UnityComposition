@@ -43,6 +43,19 @@ namespace PiRhoSoft.Composition
 		public string StoreName => IsAssigned ? (_tokens.Count > 1 ? _tokens[0].Text : string.Empty) : string.Empty;
 		public string RootName => IsAssigned ? (_tokens.Count > 1 ? _tokens[1].Text : _tokens[0].Text) : string.Empty;
 
+		public List<VariableToken> Tokens
+		{
+			get
+			{
+				return _tokens;
+			}
+			set
+			{
+				_tokens = value;
+				_variable = Format(value);
+			}
+		}
+
 		public string Variable
 		{
 			get
@@ -58,7 +71,7 @@ namespace PiRhoSoft.Composition
 
 		public override string ToString()
 		{
-			return _variable;
+			return Format(_tokens);
 		}
 
 		#region Lookup
@@ -176,7 +189,7 @@ namespace PiRhoSoft.Composition
 
 		#region Parsing
 
-		private enum VariableTokenType
+		public enum VariableTokenType
 		{
 			Name,
 			Number,
@@ -184,13 +197,41 @@ namespace PiRhoSoft.Composition
 		}
 
 		[Serializable]
-		private class VariableToken
+		public class VariableToken
 		{
 			public VariableTokenType Type;
 			public string Text;
 		}
 
-		private static List<VariableToken> Parse(string variable)
+		public static string Format(List<VariableToken> tokens)
+		{
+			var text = string.Empty;
+
+			for (var i = 0; i < tokens.Count; i++)
+			{
+				var token = tokens[i];
+				text += token.Text;
+
+				if (token.Type == VariableTokenType.Number)
+					text += LookupClose;
+
+				if (i < tokens.Count - 1)
+				{
+					var nextToken = tokens[i + 1];
+
+					switch (nextToken.Type)
+					{
+						case VariableTokenType.Name: text += Separator; break;
+						case VariableTokenType.Number: text += LookupOpen; break;
+						case VariableTokenType.Type: text += $" {Cast} "; break;
+					}
+				}
+			}
+
+			return text;
+		}
+
+		public static List<VariableToken> Parse(string variable)
 		{
 			var parsed = new List<VariableToken>();
 			var tokens = ExpressionLexer.Tokenize(variable);

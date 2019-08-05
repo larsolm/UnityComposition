@@ -73,8 +73,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			edit.SetValueWithoutNotify(value);
 			edit.style.visibility = Visibility.Visible;
-			edit.Q(TextField.textInputUssName).Focus();
-			edit.SelectAll(); // TODO: figure out why this doesn't work
+			edit.Focus();
 		}
 
 		protected void HideEditableText(TextField edit)

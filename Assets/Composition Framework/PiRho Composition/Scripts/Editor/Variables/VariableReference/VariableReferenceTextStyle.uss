@@ -1,0 +1,43 @@
+﻿.pirho-variable-reference-text
+{
+	flex-grow: 1;
+	display: none;
+	position: absolute;
+}
+
+.pirho-variable-reference-text--open
+{
+	display: flex;
+}
+
+.pirho-variable-reference-text__scroll-view
+{
+	flex-grow: 1;
+}
+
+.pirho-variable-reference-text__item
+{
+	display: none;
+	background-color: #FFF;
+}
+
+.pirho-variable-reference-text__item--active
+{
+	background-color: #CCF;
+}
+
+.pirho-variable-reference-text__item--valid
+{
+	display: flex;
+}
+
+.pirho-variable-reference-text__item--none
+{
+	display: none;
+}
+
+.pirho-variable-reference-text--none-valid .pirho-autocomplete-text__item--none
+{
+	display: flex;
+	background-color: #FFF;
+}

@@ -32,6 +32,9 @@ namespace PiRhoSoft.Utilities
 		[Popup(new string[] { "", "Hello", "Hola", "Bonjour" })]
 		public string StringPopup;
 
+		[ComboBox(new string[] { "One Fish", "Two Fish", "Red Fish", "Blue Fish" })]
+		public string ComboBox;
+
 		[Euler]
 		public Quaternion Euler;
 
