@@ -40,7 +40,7 @@ namespace PiRhoSoft.Composition
 	}
 
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "menu-item")]
+	[HelpURL(Configuration.DocumentationUrl + "menu-item")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu Item")]
 	public class MenuItem : BindingRoot
 	{

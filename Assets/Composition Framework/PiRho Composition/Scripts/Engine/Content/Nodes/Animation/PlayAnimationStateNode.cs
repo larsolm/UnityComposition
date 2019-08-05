@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Animation/Play Animation State", 1)]
-	[HelpURL(Composition.DocumentationUrl + "play-animation-state-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-animation-state-node")]
 	public class PlayAnimationStateNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -21,7 +21,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject<Animator>(variables, Animator, out var animator))
 			{

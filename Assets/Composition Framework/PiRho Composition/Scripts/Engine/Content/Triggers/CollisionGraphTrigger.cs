@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "collision-graph-trigger")]
+	[HelpURL(Configuration.DocumentationUrl + "collision-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Collision Graph Trigger")]
 	public class CollisionGraphTrigger : MonoBehaviour
 	{

@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Expression", 0)]
-	[HelpURL(Composition.DocumentationUrl + "expression-node")]
+	[HelpURL(Configuration.DocumentationUrl + "expression-node")]
 	public class ExpressionNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			Expression.Execute(this, variables);
 			graph.GoTo(Next, nameof(Next));

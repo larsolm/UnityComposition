@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Conditional", 0)]
-	[HelpURL(Composition.DocumentationUrl + "conditional-node")]
+	[HelpURL(Configuration.DocumentationUrl + "conditional-node")]
 	public class ConditionalNode : GraphNode
 	{
 		[Tooltip("The node to follow if Condition is true")]
@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Branch;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			var condition = Condition.Execute(this, variables, VariableType.Bool).AsBool;
 

@@ -20,7 +20,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override Color NodeColor => Colors.Sequencing;
 		
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Mover, out Mover mover) && ResolveObject(variables, Target, out Mover target))
 			{

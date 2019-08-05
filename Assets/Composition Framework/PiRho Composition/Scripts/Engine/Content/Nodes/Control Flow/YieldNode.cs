@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Yield", 23)]
-	[HelpURL(Composition.DocumentationUrl + "yield-node")]
+	[HelpURL(Configuration.DocumentationUrl + "yield-node")]
 	public class YieldNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Break;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			yield return null;
 			graph.GoTo(Next, nameof(Next));

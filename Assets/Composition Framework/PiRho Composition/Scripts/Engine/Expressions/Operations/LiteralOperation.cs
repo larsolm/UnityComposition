@@ -63,7 +63,7 @@ namespace PiRhoSoft.Composition
 
 		public override void ToString(StringBuilder builder)
 		{
-			VariableHandler.ToString(_value, builder);
+			builder.Append(VariableHandler.ToString(_value));
 		}
 
 		private bool TryParseColor(string text, out Color color)

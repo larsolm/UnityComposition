@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(AudioSource))]
-	[HelpURL(Composition.DocumentationUrl + "audio-player")]
+	[HelpURL(Configuration.DocumentationUrl + "audio-player")]
 	[AddComponentMenu("PiRho Soft/Animation/Audio Player")]
 	public class AudioPlayer : MonoBehaviour, ICompletionNotifier
 	{

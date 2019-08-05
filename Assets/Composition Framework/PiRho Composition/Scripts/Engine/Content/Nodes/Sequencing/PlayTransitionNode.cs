@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Play Transition", 0)]
-	[HelpURL(Composition.DocumentationUrl + "play-transition-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-transition-node")]
 	public class PlayTransitionNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Transition, out var transition))
 			{

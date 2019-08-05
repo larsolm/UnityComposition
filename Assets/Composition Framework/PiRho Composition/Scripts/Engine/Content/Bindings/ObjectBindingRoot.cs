@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "object-binding-root")]
+	[HelpURL(Configuration.DocumentationUrl + "object-binding-root")]
 	[AddComponentMenu("PiRho Soft/Bindings/Object Binding Root")]
 	public class ObjectBindingRoot : BindingRoot
 	{

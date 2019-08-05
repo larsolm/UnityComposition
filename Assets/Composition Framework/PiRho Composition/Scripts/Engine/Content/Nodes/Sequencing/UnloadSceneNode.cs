@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Unload Scene", 101)]
-	[HelpURL(Composition.DocumentationUrl + "unload-scene-node")]
+	[HelpURL(Configuration.DocumentationUrl + "unload-scene-node")]
 	public sealed class UnloadSceneNode : GraphNode
 	{
 		private const string _invalidIndexError = "(CUSNII) Unable to unload scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";
@@ -55,7 +55,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (WaitForCompletion)
 				yield return UnloadScene(variables);
@@ -65,7 +65,7 @@ namespace PiRhoSoft.Composition
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator UnloadScene(GraphStore variables)
+		private IEnumerator UnloadScene(IVariableCollection variables)
 		{
 			var loadStatus = Unload(variables);
 
@@ -84,7 +84,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private AsyncOperation Unload(GraphStore variables)
+		private AsyncOperation Unload(IVariableCollection variables)
 		{
 			switch (Source)
 			{

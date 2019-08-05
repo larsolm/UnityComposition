@@ -53,7 +53,7 @@ namespace PiRhoSoft.Composition.Editor
 			Add(_simpleControl);
 			Add(_advancedControl);
 
-			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			Refresh();

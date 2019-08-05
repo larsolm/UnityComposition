@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "graph-trigger-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "graph-trigger-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Graph Trigger Binding")]
 	public class GraphTriggerBinding : VariableBinding
 	{

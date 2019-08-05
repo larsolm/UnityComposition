@@ -1,15 +1,14 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class RectIntVariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable value, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(value.AsRectInt);
+			return variable.AsRectInt.ToString();
 		}
 
 		protected internal override void Save_(Variable value, BinaryWriter writer, SerializedData data)
@@ -99,6 +98,30 @@ namespace PiRhoSoft.Composition
 				return leftRect.x == rightRect.x && leftRect.y == rightRect.y && leftRect.width == rightRect.width && leftRect.height == rightRect.height;
 			else
 				return null;
+		}
+
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetRectInt(out var t))
+				return Vector2.Distance(from.AsRectInt.size, t.size);
+			else
+				return 0.0f;
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetRectInt(out var t))
+			{
+				var f = from.AsRectInt;
+				var min = Vector2.Lerp(f.min, t.min, time);
+				var size = Vector2.Lerp(f.size, t.size, time);
+
+				return Variable.RectInt(new RectInt((int)min.x, (int)min.y, (int)size.x, (int)size.y));
+			}
+			else
+			{
+				return Variable.Empty;
+			}
 		}
 	}
 }

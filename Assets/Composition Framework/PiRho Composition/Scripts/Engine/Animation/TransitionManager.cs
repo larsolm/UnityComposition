@@ -7,7 +7,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Camera))]
-	[HelpURL(Composition.DocumentationUrl + "transition-manager")]
+	[HelpURL(Configuration.DocumentationUrl + "transition-manager")]
 	public sealed class TransitionManager : GlobalBehaviour<TransitionManager>
 	{
 		// implementation based on this post from the Unity forums: https://forum.unity.com/threads/postprocessing-issues-with-several-cameras.313903/#post-2040534

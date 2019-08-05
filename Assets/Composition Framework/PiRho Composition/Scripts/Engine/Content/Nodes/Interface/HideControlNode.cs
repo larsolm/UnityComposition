@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "hide-control-node")]
+	[HelpURL(Configuration.DocumentationUrl + "hide-control-node")]
 	[CreateGraphNodeMenu("Interface/Hide Control", 102)]
 	public class HideControlNode : GraphNode
 	{
@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.InterfaceDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Control, out InterfaceControl control))
 				control.Deactivate();

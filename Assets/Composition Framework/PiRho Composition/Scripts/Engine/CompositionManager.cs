@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "composition-manager")]
+	[HelpURL(Configuration.DocumentationUrl + "composition-manager")]
 	public sealed class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
 		private class DefaultGlobalStore : IVariableCollection
@@ -60,6 +60,11 @@ namespace PiRhoSoft.Composition
 		{
 			var enumerator = caller.Execute(store, context);
 			StartCoroutine(new JoinEnumerator(enumerator));
+		}
+
+		public IEnumerator GetEnumerator(IEnumerator enumerator)
+		{
+			return new JoinEnumerator(enumerator);
 		}
 
 		#region Enumerator

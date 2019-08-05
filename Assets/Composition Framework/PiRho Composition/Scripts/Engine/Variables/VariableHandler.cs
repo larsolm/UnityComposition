@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 
 namespace PiRhoSoft.Composition
 {
@@ -14,8 +13,6 @@ namespace PiRhoSoft.Composition
 
 	public abstract class VariableHandler
 	{
-		public const string ListCountName = "Count";
-
 		private static VariableHandler[] _handlers;
 
 		static VariableHandler()
@@ -52,13 +49,10 @@ namespace PiRhoSoft.Composition
 
 		public static string ToString(Variable value)
 		{
-			var builder = new StringBuilder();
-			ToString(value, builder);
-			return builder.ToString();
+			return Get(value.Type).ToString_(value);
 		}
 
-		public static void ToString(Variable value, StringBuilder builder) => Get(value.Type).ToString_(value, builder);
-		protected internal abstract void ToString_(Variable value, StringBuilder builder);
+		protected internal abstract string ToString_(Variable value);
 
 		#endregion
 
@@ -108,6 +102,16 @@ namespace PiRhoSoft.Composition
 
 		protected internal virtual bool? IsEqual_(Variable left, Variable right) => null;
 		protected internal virtual int? Compare_(Variable left, Variable right) => null;
+
+		#endregion
+
+		#region Animation
+
+		public static float Distance(Variable from, Variable to) => Get(from.Type).Distance_(from, to);
+		public static Variable Interpolate(Variable from, Variable to, float time) => Get(from.Type).Interpolate_(from, to, time);
+
+		protected internal virtual float Distance_(Variable from, Variable to) => 0.0f;
+		protected internal virtual Variable Interpolate_(Variable from, Variable to, float time) => Variable.Empty;
 
 		#endregion
 

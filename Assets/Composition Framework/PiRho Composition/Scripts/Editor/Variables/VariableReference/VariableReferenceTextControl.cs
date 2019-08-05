@@ -220,7 +220,7 @@ namespace PiRhoSoft.Composition.Editor
 
 				Add(_scrollView);
 
-				this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+				this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 				AddToClassList(UssClassName);
 			}
 

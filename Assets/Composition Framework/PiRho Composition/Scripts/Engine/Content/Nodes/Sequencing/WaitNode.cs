@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Wait", 300)]
-	[HelpURL(Composition.DocumentationUrl + "wait-node")]
+	[HelpURL(Configuration.DocumentationUrl + "wait-node")]
 	public class WaitNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Sequencing;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (Resolve(variables, Time, out var time))
 			{

@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "variable-link")]
+	[HelpURL(Configuration.DocumentationUrl + "variable-link")]
 	[AddComponentMenu("PiRho Soft/Composition/Variable Link")]
 	public sealed class VariableLink : MonoBehaviour
 	{

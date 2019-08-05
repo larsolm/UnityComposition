@@ -4,8 +4,8 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Loop", 20)]
-	[HelpURL(Composition.DocumentationUrl + "loop-node")]
-	public class LoopNode : GraphNode, ILoopNode
+	[HelpURL(Configuration.DocumentationUrl + "loop-node")]
+	public class LoopNode : GraphNode
 	{
 		[Tooltip("The node to repeatedly go to while Condition evaluates to true")]
 		public GraphNode Loop = null;
@@ -18,19 +18,22 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Loop;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			var condition = Condition.Execute(this, variables, VariableType.Bool);
+			var index = 0;
 
-			if (condition.AsBool && Loop != null)
+			while (true)
 			{
+				var condition = Condition.Execute(this, variables, VariableType.Bool);
+
+				if (!condition.AsBool || Loop == null)
+					break;
+
 				if (Index.IsAssigned)
-					Index.SetValue(variables, Variable.Int(iteration));
+					Index.SetValue(variables, Variable.Int(index));
 
-				graph.GoTo(Loop, nameof(Loop));
+				yield return graph.Run(Loop, variables, nameof(Loop));
 			}
-
-			yield break;
 		}
 	}
 }

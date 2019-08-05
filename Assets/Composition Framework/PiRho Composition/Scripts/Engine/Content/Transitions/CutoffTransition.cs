@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "cutoff-transition")]
+	[HelpURL(Configuration.DocumentationUrl + "cutoff-transition")]
 	public abstract class CutoffTransition : Transition
 	{
 		private static readonly int _textureID = Shader.PropertyToID("_TransitionTexture");

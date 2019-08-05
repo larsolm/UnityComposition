@@ -4,7 +4,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Camera))]
-	[HelpURL(Composition.DocumentationUrl + "transition-renderer")]
+	[HelpURL(Configuration.DocumentationUrl + "transition-renderer")]
 	[AddComponentMenu("PiRho Soft/Animation/Transition Renderer")]
 	public class TransitionRenderer : MonoBehaviour
 	{

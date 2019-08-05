@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 	public class AnimationClipVariableSource : VariableSource<AnimationClip> { }
 
 	[CreateGraphNodeMenu("Animation/Play Animation", 0)]
-	[HelpURL(Composition.DocumentationUrl + "play-animation-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-animation-node")]
 	public class PlayAnimationNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject<AnimationPlayer>(variables, AnimationPlayer, out var player))
 			{

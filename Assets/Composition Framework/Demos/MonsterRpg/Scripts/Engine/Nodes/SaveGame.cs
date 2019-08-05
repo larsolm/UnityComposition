@@ -12,7 +12,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			var info = WorldLoader.Instance.Save();
 			info.OnError += error => Debug.LogError(error, this);

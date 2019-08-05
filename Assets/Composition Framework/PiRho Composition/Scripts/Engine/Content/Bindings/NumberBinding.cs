@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "number-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "number-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Number Binding")]
 	public class NumberBinding : StringBinding
 	{

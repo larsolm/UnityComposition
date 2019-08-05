@@ -20,7 +20,7 @@ namespace PiRhoSoft.Utilities.Editor
 			Field.RegisterCallback<ChangeEvent<Vector3>>(evt => this.SendChangeEvent(Quaternion.Euler(evt.previousValue), Quaternion.Euler(evt.newValue)));
 
 			AddToClassList(UssClassName);
-			this.AddStyleSheet(Utilities.ElementsPath, Stylesheet);
+			this.AddStyleSheet(Configuration.ElementsPath, Stylesheet);
 		}
 
 		public void SetValueWithoutNotify(Quaternion value)

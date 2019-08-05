@@ -7,7 +7,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Create Scriptable Object", 1)]
-	[HelpURL(Composition.DocumentationUrl + "create-scriptable-object-node")]
+	[HelpURL(Configuration.DocumentationUrl + "create-scriptable-object-node")]
 	public class CreateScriptableObjectNode : GraphNode
 	{
 		private const string _invalidTypeError = "(CCSONIT) Failed to create object in node '{0}': the type '{1}' could not be found";
@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition
 				outputs.Add(new VariableDefinition(ObjectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			Type type;
 

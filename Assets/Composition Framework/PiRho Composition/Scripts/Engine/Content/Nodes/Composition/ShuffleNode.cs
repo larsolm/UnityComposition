@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Shuffle", 20)]
-	[HelpURL(Composition.DocumentationUrl + "shuffle-node")]
+	[HelpURL(Configuration.DocumentationUrl + "shuffle-node")]
 	public class ShuffleNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (Resolve(variables, Variable, out IVariableList list))
 			{

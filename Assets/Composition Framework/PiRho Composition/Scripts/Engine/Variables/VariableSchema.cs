@@ -7,7 +7,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "variable-schema")]
+	[HelpURL(Configuration.DocumentationUrl + "variable-schema")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
 	public class VariableSchema : ScriptableObject
 	{

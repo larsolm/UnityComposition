@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "text-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "text-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Text Binding")]
 	public class TextBinding : StringBinding
 	{

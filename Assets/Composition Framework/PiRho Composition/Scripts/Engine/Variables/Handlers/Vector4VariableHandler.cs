@@ -1,15 +1,14 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class Vector4VariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable value, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(value.AsVector4);
+			return variable.AsVector4.ToString();
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
@@ -135,6 +134,27 @@ namespace PiRhoSoft.Composition
 				return left.AsVector4 == vector;
 			else
 				return null;
+		}
+
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetVector4(out var t))
+				return Vector4.Distance(from.AsVector4, t);
+			else
+				return 0.0f;
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetVector4(out var t))
+			{
+				var lerped = Vector4.Lerp(from.AsVector4, t, time);
+				return Variable.Vector4(lerped);
+			}
+			else
+			{
+				return Variable.Empty;
+			}
 		}
 	}
 }

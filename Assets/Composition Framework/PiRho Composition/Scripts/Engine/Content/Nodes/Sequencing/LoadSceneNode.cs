@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Load Scene", 100)]
-	[HelpURL(Composition.DocumentationUrl + "load-scene-node")]
+	[HelpURL(Configuration.DocumentationUrl + "load-scene-node")]
 	public sealed class LoadSceneNode : GraphNode
 	{
 		private const string _invalidIndexError = "(CLSNII) Unable to load scene on node '{0}': the index '{1}' is not a valid scene - make sure the scene has been added to the build settings";
@@ -56,7 +56,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (WaitForCompletion)
 				yield return LoadScene(variables);
@@ -66,7 +66,7 @@ namespace PiRhoSoft.Composition
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator LoadScene(GraphStore variables)
+		private IEnumerator LoadScene(IVariableCollection variables)
 		{
 			var loadStatus = Load(variables);
 
@@ -87,7 +87,7 @@ namespace PiRhoSoft.Composition
 
 		#region Scene Loading
 
-		private AsyncOperation Load(GraphStore variables)
+		private AsyncOperation Load(IVariableCollection variables)
 		{
 			var mode = Additive ? LoadSceneMode.Additive : LoadSceneMode.Single;
 

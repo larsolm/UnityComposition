@@ -38,7 +38,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public VariableDefinitionControl(VariableDefinition value)
 		{
-			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			Value = value;

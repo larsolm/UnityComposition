@@ -1,17 +1,17 @@
 ﻿namespace PiRhoSoft.Utilities.Editor
 {
-	public static class Utilities
+	public static class Configuration
 	{
 		private static string _elementsPath = null;
 		private const string _elementsFolder = "Elements/";
 		private const string _editorFolder = "PiRho Utilities/Scripts/Editor/";
 
-		public static string ElementsPath
+		internal static string ElementsPath
 		{
 			get
 			{
 				if (_elementsPath == null)
-					_elementsPath = AssetHelper.FindEditorPath(nameof(Utilities), _editorFolder, _elementsFolder);
+					_elementsPath = AssetHelper.FindEditorPath(nameof(Configuration), _editorFolder) + _elementsFolder;
 
 				return _elementsPath;
 			}

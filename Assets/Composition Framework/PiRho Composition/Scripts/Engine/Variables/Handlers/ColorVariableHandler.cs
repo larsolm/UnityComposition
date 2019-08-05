@@ -1,7 +1,6 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
 using System.IO;
-using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -10,17 +9,16 @@ namespace PiRhoSoft.Composition
 	{
 		public const char Symbol = '#';
 
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
 			var color = variable.AsColor;
-			builder.Append(Symbol);
 
 			var r = Math.Round(color.r * 255);
 			var g = Math.Round(color.g * 255);
 			var b = Math.Round(color.b * 255);
 			var a = Math.Round(color.a * 255);
 
-			builder.Append($"{r:X2}{g:X2}{b:X2}{a:X2}");
+			return $"{Symbol}{r:X2}{g:X2}{b:X2}{a:X2}";
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
@@ -108,6 +106,27 @@ namespace PiRhoSoft.Composition
 				return left.AsColor == color;
 			else
 				return null;
+		}
+
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetColor(out var t))
+			{
+				var f = from.AsColor;
+				return Vector3.Distance(new Vector3(f.r, f.g, f.b), new Vector3(t.r, t.g, t.b));
+			}
+			else
+			{
+				return 0.0f;
+			}
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetColor(out var t))
+				return Variable.Color(Color.Lerp(from.AsColor, t, time));
+			else
+				return Variable.Empty;
 		}
 	}
 }

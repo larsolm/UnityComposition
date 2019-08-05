@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "expression-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "expression-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Expression Binding")]
 	public class ExpressionBinding : StringBinding
 	{

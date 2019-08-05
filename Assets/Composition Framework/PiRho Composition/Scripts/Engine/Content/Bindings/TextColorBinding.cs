@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(TMP_Text))]
-	[HelpURL(Composition.DocumentationUrl + "text-color-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "text-color-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Text Color Binding")]
 	public class TextColorBinding : VariableBinding
 	{

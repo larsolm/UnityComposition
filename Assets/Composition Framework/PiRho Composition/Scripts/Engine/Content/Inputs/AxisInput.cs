@@ -4,7 +4,7 @@ using UnityEngine.EventSystems;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "axis-input")]
+	[HelpURL(Configuration.DocumentationUrl + "axis-input")]
 	[AddComponentMenu("PiRho Soft/Interface/Axis Input")]
 	public class AxisInput : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 	{

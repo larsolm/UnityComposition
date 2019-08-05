@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(TMP_InputField))]
-	[HelpURL(Composition.DocumentationUrl + "text-input-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "text-input-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Text Input Binding")]
 	public class TextInputBinding : VariableBinding
 	{

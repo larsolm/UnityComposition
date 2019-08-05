@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition
 					if (Value.IsNullObject)
 						builder.Append(ExpressionLexer.NullConstant);
 					else
-						VariableHandler.ToString(Value, builder);
+						builder.Append(VariableHandler.ToString(Value));
 
 					break;
 				}
@@ -52,13 +52,13 @@ namespace PiRhoSoft.Composition
 					else if (Value.AsFloat == Mathf.Rad2Deg)
 						builder.Append(ExpressionLexer.Rad2DegConstant);
 					else
-						VariableHandler.ToString(Value, builder);
+						builder.Append(VariableHandler.ToString(Value));
 
 					break;
 				}
 				default:
 				{
-					VariableHandler.ToString(Value, builder);
+					builder.Append(VariableHandler.ToString(Value));
 					break;
 				}
 			}

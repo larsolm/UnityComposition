@@ -2,7 +2,7 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "message-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "message-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Message Binding")]
 	public class MessageBinding : StringBinding
 	{

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "set-binding-node")]
+	[HelpURL(Configuration.DocumentationUrl + "set-binding-node")]
 	[CreateGraphNodeMenu("Interface/Set Binding", 300)]
 	public class SetBindingNode : GraphNode
 	{
@@ -19,7 +19,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Interface;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Object, out BindingRoot root))
 			{

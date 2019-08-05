@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Time Scale", 250)]
-	[HelpURL(Composition.DocumentationUrl + "time-scale-node")]
+	[HelpURL(Configuration.DocumentationUrl + "time-scale-node")]
 	public class TimeScaleNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Sequencing;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (Resolve(variables, TimeScale, out var time))
 				Time.timeScale = time;

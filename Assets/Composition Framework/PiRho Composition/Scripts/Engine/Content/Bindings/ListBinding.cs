@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
-	[HelpURL(Composition.DocumentationUrl + "list-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "list-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/List Binding")]
 	public class ListBinding : VariableBinding
 	{

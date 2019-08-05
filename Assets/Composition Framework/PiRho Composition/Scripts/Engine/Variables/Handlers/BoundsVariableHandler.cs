@@ -1,15 +1,14 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	internal class BoundsVariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(variable.AsBounds);
+			return variable.AsBounds.ToString();
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
@@ -113,6 +112,30 @@ namespace PiRhoSoft.Composition
 				return left.AsBounds == bounds;
 			else
 				return null;
+		}
+
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetBounds(out var t))
+				return Vector3.Distance(from.AsBounds.size, t.size);
+			else
+				return 0.0f;
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetBounds(out var t))
+			{
+				var f = from.AsBounds;
+				var center = Vector3.Lerp(f.center, t.center, time);
+				var size = Vector3.Lerp(f.size, t.size, time);
+
+				return Variable.Bounds(new Bounds(center, size));
+			}
+			else
+			{
+				return Variable.Empty;
+			}
 		}
 	}
 }

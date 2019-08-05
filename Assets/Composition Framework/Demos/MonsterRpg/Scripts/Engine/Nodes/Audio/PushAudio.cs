@@ -15,7 +15,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public GraphNode Next;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, AudioClip, out var clip))
 				AudioManager.Instance.Push(clip, FadeIn, FadeOut, Crossfade);

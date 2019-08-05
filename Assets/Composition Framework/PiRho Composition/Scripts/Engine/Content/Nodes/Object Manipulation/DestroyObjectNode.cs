@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Destroy Object", 2)]
-	[HelpURL(Composition.DocumentationUrl + "destroy-object-node")]
+	[HelpURL(Configuration.DocumentationUrl + "destroy-object-node")]
 	public class DestroyObjectNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.SequencingDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Target, out Object target))
 				Destroy(target);

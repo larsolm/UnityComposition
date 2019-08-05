@@ -4,7 +4,7 @@ namespace PiRhoSoft.Composition
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(SpriteRenderer))]
-	[HelpURL(Composition.DocumentationUrl + "sprite-binding")]
+	[HelpURL(Configuration.DocumentationUrl + "sprite-binding")]
 	[AddComponentMenu("PiRho Soft/Bindings/Sprite Binding")]
 	public class SpriteBinding : VariableBinding
 	{

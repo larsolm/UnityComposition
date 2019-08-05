@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Transform Object", 200)]
-	[HelpURL(Composition.DocumentationUrl + "transform-node")]
+	[HelpURL(Configuration.DocumentationUrl + "transform-node")]
 	public class TransformNode : GraphNode
 	{
 		public enum AnimationType
@@ -95,7 +95,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject<Transform>(variables, Transform, out var transform))
 				yield return Move(transform, variables);
@@ -103,7 +103,7 @@ namespace PiRhoSoft.Composition
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator Move(Transform transform, GraphStore variables)
+		private IEnumerator Move(Transform transform, IVariableCollection variables)
 		{
 			var body2d = transform.GetComponent<Rigidbody2D>();
 			var body3d = transform.GetComponent<Rigidbody>();

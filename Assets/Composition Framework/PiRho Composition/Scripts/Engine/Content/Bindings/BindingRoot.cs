@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "binding-root")]
+	[HelpURL(Configuration.DocumentationUrl + "binding-root")]
 	[AddComponentMenu("PiRho Soft/Bindings/Binding Root")]
 	[DisallowMultipleComponent]
 	public class BindingRoot : MonoBehaviour, IVariableCollection

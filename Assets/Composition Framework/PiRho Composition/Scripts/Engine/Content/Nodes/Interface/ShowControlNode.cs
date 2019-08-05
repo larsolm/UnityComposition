@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "show-control-node")]
+	[HelpURL(Configuration.DocumentationUrl + "show-control-node")]
 	[CreateGraphNodeMenu("Interface/Show Control", 101)]
 	public class ShowControlNode : GraphNode
 	{
@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.InterfaceLight;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Control, out InterfaceControl control))
 				control.Activate();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "comment-node")]
+	[HelpURL(Configuration.DocumentationUrl + "comment-node")]
 	[CreateGraphNodeMenu("Debug/Comment", 400)]
 	public class CommentNode : GraphNode
 	{
@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 		[TextArea(3, 8)]
 		public string Comment;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			yield break;
 		}

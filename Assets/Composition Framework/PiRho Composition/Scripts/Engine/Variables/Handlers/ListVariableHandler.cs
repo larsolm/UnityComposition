@@ -1,14 +1,16 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
 
 namespace PiRhoSoft.Composition
 {
 	internal class ListVariableHandler : VariableHandler
 	{
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		private const string ListCountName = "Count";
+		private const string ListString = "(List)";
+
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(variable.AsList);
+			return ListString;
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)

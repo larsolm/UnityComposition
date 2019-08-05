@@ -49,7 +49,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public VariableControl(Variable value, VariableDefinition definition)
 		{
-			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			Value = value;

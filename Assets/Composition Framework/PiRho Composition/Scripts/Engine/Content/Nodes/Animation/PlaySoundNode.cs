@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 	public class AudioClipVariableSource : VariableSource<AudioClip> { }
 
 	[CreateGraphNodeMenu("Animation/Play Sound", 101)]
-	[HelpURL(Composition.DocumentationUrl + "play-sound-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-sound-node")]
 	public class PlaySoundNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -32,7 +32,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, AudioPlayer, out AudioPlayer player))
 			{

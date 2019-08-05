@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Sequencing/Stop Transition", 1)]
-	[HelpURL(Composition.DocumentationUrl + "stop-transition-node")]
+	[HelpURL(Configuration.DocumentationUrl + "stop-transition-node")]
 	public class StopTransitionNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.SequencingDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			TransitionManager.Instance.EndTransition();
 

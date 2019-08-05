@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "variable-set-asset")]
+	[HelpURL(Configuration.DocumentationUrl + "variable-set-asset")]
 	[CreateAssetMenu(menuName = "PiRho Soft/Variable Set", fileName = nameof(VariableSetAsset), order = 113)]
 	public class VariableSetAsset : ScriptableObject, IVariableCollection, IResettableVariables
 	{

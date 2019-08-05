@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Composition/Reset Tag", 31)]
-	[HelpURL(Composition.DocumentationUrl + "reset-tag-node")]
+	[HelpURL(Configuration.DocumentationUrl + "reset-tag-node")]
 	public class ResetTagNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveInterface(variables, Object, out IResettableVariables reset))
 				reset.ResetTag(Tag);

@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Animation/Play Effect", 100)]
-	[HelpURL(Composition.DocumentationUrl + "play-effect-node")]
+	[HelpURL(Configuration.DocumentationUrl + "play-effect-node")]
 	public class PlayEffectNode : GraphNode
 	{
 		public enum ObjectPositioning
@@ -80,7 +80,7 @@ namespace PiRhoSoft.Composition
 				outputs.Add(new VariableDefinition(EffectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Effect, out var effect))
 			{

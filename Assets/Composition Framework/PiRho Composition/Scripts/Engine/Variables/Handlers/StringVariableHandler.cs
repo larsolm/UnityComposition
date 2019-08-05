@@ -1,6 +1,6 @@
 ﻿using PiRhoSoft.Utilities;
 using System.IO;
-using System.Text;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
@@ -8,9 +8,9 @@ namespace PiRhoSoft.Composition
 	{
 		public const char Symbol = '\"';
 
-		protected internal override void ToString_(Variable variable, StringBuilder builder)
+		protected internal override string ToString_(Variable variable)
 		{
-			builder.Append(variable.AsString);
+			return variable.AsString;
 		}
 
 		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
@@ -43,6 +43,36 @@ namespace PiRhoSoft.Composition
 				return left.AsString.CompareTo(s);
 			else
 				return null;
+		}
+
+		protected internal override float Distance_(Variable from, Variable to)
+		{
+			if (to.TryGetString(out var t))
+				return Mathf.Max(from.AsString.Length, t.Length);
+			else
+				return 0.0f;
+		}
+
+		protected internal override Variable Interpolate_(Variable from, Variable to, float time)
+		{
+			if (to.TryGetString(out var t))
+			{
+				var f = from.AsString;
+				var total = Mathf.Max(f.Length, t.Length);
+				var length = (int)Mathf.Lerp(0, total, time);
+
+				if (f.Length < length) f = f.PadRight(length);
+				if (t.Length < length) t = t.PadRight(length);
+
+				var start = f.Substring(0, length);
+				var end = t.Substring(length);
+
+				return Variable.String(start + end);
+			}
+			else
+			{
+				return Variable.Empty;
+			}
 		}
 	}
 }

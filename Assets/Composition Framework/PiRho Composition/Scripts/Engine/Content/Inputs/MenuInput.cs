@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 		Select
 	}
 
-	[HelpURL(Composition.DocumentationUrl + "menu-input")]
+	[HelpURL(Configuration.DocumentationUrl + "menu-input")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu Input")]
 	[RequireComponent(typeof(Menu))]
 	public class MenuInput : MonoBehaviour

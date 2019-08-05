@@ -5,28 +5,24 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Control Flow/Sequence", 10)]
-	[HelpURL(Composition.DocumentationUrl + "sequence-node")]
-	public class SequenceNode : GraphNode, ISequenceNode
+	[HelpURL(Configuration.DocumentationUrl + "sequence-node")]
+	public class SequenceNode : GraphNode
 	{
-		private const string _invalidSequenceError = "(CSQIS) Unable to run sequence for node '{0}': index '{1}' has no connection";
-
 		[Tooltip("The nodes to visit in order")]
 		[List]
 		public GraphNodeList Sequence = new GraphNodeList();
 
 		public override Color NodeColor => Colors.Sequence;
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (iteration < Sequence.Count)
+			for (var i = 0; i < Sequence.Count; i++)
 			{
-				if (Sequence[iteration] == null)
-					Debug.LogErrorFormat(this, _invalidSequenceError, name, iteration);
+				var node = Sequence[i];
 
-				graph.GoTo(Sequence[iteration], nameof(Sequence), iteration);
+				if (node != null)
+					yield return graph.Run(node, variables, GetConnectionName(nameof(Sequence), i));
 			}
-
-			yield break;
 		}
 	}
 }

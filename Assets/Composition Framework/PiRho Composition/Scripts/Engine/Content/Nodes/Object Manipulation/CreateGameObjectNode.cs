@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Create Game Object", 0)]
-	[HelpURL(Composition.DocumentationUrl + "create-game-object-node")]
+	[HelpURL(Configuration.DocumentationUrl + "create-game-object-node")]
 	public class CreateGameObjectNode : GraphNode
 	{
 		public enum ObjectPositioning
@@ -72,7 +72,7 @@ namespace PiRhoSoft.Composition
 				outputs.Add(new VariableDefinition(ObjectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Prefab, out GameObject prefab))
 			{

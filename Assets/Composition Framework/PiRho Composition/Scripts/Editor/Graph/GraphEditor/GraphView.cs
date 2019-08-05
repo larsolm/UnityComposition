@@ -136,7 +136,7 @@ namespace PiRhoSoft.Composition.Editor
 		private class StartNode : GraphNode
 		{
 			public override Color NodeColor => Colors.Start;
-			public override IEnumerator Run(Graph graph, GraphStore variables, int iteration) { yield break; }
+			public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables) { yield break; }
 
 			public override void GetConnections(NodeData data) => data.AddConnections(Graph);
 			public override void SetConnection(ConnectionData connection, GraphNode target) => connection.ApplyConnection(Graph, target);
@@ -263,18 +263,20 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void PlayStateChanged(PlayModeStateChange state)
 		{
+			// TODO: need to account for graph changing during play mode
+
 			if (state == PlayModeStateChange.EnteredPlayMode)
 				Graph.OnProcessFrame += FrameChanged;
 			else if (state == PlayModeStateChange.ExitingPlayMode)
 				Graph.OnProcessFrame -= FrameChanged;
 		}
 
-		private void FrameChanged(GraphNode graphNode, int iteration)
+		private void FrameChanged(GraphNode graphNode)
 		{
 			nodes.ForEach(node =>
 			{
 				if (node is IInputOutputNode ioNode)
-					ioNode.UpdateColors(ioNode.Data.Node == graphNode, iteration);
+					ioNode.UpdateColors(ioNode.Data.Node == graphNode);
 			});
 		}
 
@@ -491,7 +493,7 @@ namespace PiRhoSoft.Composition.Editor
 			_window = window;
 			_graphProvider = ScriptableObject.CreateInstance<GraphProvider>();
 
-			this.AddStyleSheet(CompositionEditor.EditorPath, Stylesheet);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 
 			CreateToolbar();

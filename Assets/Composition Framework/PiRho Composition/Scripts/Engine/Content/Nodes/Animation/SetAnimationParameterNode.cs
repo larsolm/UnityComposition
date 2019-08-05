@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Animation/Set Animation Parameter", 2)]
-	[HelpURL(Composition.DocumentationUrl + "set-animation-parameter-node")]
+	[HelpURL(Configuration.DocumentationUrl + "set-animation-parameter-node")]
 	public class SetAnimationParameterNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -57,7 +57,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public override IEnumerator Run(Graph graph, GraphStore variables, int iteration)
+		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
 			if (ResolveObject(variables, Animator, out Animator animator))
 				Trigger(variables, animator);

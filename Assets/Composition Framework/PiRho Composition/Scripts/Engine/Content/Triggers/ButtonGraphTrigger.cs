@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Composition.DocumentationUrl + "button-graph-trigger")]
+	[HelpURL(Configuration.DocumentationUrl + "button-graph-trigger")]
 	[AddComponentMenu("PiRho Soft/Composition/Button Graph Trigger")]
 	public sealed class ButtonGraphTrigger : GraphTrigger
 	{
