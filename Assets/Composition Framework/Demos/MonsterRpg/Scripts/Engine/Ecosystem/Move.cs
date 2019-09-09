@@ -94,35 +94,35 @@ namespace PiRhoSoft.MonsterRpg
 
 		#region Persistence
 
-		public static Move Create(Creature creature, MoveSaveData data)
+		public static Move Create(Creature creature, MoveSaveData data, string tag)
 		{
 			var ability = Resources.Load<Ability>(data.AbilityPath);
 
 			if (ability != null)
 			{
 				var move = ability.CreateMove(creature);
-				move.Load(data);
+				move.Load(data, tag);
 				return move;
 			}
 
 			return null;
 		}
 
-		public static MoveSaveData Save(Move move)
+		public static MoveSaveData Save(Move move, string tag)
 		{
 			var data = new MoveSaveData { AbilityPath = move.Ability ? move.Ability.Path : string.Empty };
-			move.Save(data);
+			move.Save(data, tag);
 			return data;
 		}
 
-		public void Load(MoveSaveData data)
+		public void Load(MoveSaveData data, string tag)
 		{
-			Variables.CopyFrom(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyFrom(data.Variables, tag);
 		}
 
-		public void Save(MoveSaveData data)
+		public void Save(MoveSaveData data, string tag)
 		{
-			Variables.CopyTo(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyTo(data.Variables, tag);
 		}
 
 		#endregion

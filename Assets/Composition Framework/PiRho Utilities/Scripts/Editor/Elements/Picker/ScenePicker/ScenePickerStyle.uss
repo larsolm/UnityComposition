@@ -14,4 +14,5 @@
 .pirho-scene-picker__create
 {
 	margin-left: 2px;
+	margin-bottom: 2px;
 }

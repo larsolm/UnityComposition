@@ -35,7 +35,7 @@ namespace PiRhoSoft.Utilities.Editor
 			}
 			else
 			{
-				var owner = method.IsStatic ? null : property.GetParentObject<object>();
+				var owner = method.IsStatic ? null : property.GetOwner<object>();
 				var text = string.IsNullOrEmpty(buttonAttribute.Label) ? buttonAttribute.Method : buttonAttribute.Label;
 				var button = new Button(() => method.Invoke(owner, null))
 				{

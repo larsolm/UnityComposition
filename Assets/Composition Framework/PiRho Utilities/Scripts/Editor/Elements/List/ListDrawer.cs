@@ -37,10 +37,11 @@ namespace PiRhoSoft.Utilities.Editor
 				var listAttribute = attribute as ListAttribute;
 				var itemDrawer = this.GetNextDrawer();
 				var tooltip = this.GetTooltip();
-				var parent = property.GetParentObject<object>();
+				var parent = property.GetOwner<object>();
 
 				var field = new ListField(items, itemDrawer)
 				{
+					Label = property.displayName,
 					Tooltip = tooltip,
 					EmptyLabel = listAttribute.EmptyLabel,
 					AllowAdd = listAttribute.AllowAdd != null,

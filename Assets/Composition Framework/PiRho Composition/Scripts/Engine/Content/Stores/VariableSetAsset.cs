@@ -9,6 +9,7 @@ namespace PiRhoSoft.Composition
 	public class VariableSetAsset : ScriptableObject, IVariableCollection, IResettableVariables
 	{
 		[ChangeTrigger(nameof(SetupSchema))]
+		[InspectTrigger(nameof(SetupSchema))]
 		[ObjectPicker]
 		[SerializeField]
 		private VariableSchema _schema = null;
@@ -25,7 +26,8 @@ namespace PiRhoSoft.Composition
 
 		public void SetupSchema()
 		{
-			Variables.Setup(Schema, this);
+			// TODO: what if there is no schema
+			Variables.Setup(_schema, this);
 			_store = new CombinedVariableCollection(new MappedVariableCollection(this), Variables);
 		}
 

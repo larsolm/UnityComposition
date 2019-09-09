@@ -9,4 +9,5 @@
 	min-height: 14px;
 	max-height: 14px;
 	margin-left: 2px;
+	margin-bottom: 2px;
 }

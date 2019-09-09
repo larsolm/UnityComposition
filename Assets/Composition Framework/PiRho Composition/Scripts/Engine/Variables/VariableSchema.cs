@@ -18,8 +18,8 @@ namespace PiRhoSoft.Composition
 		[Serializable] public class EntryList : SerializedList<VariableSchemaEntry> { }
 
 		[Tooltip("The tags available to definitions in this schema")]
-		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistence)", AddCallback = nameof(TagsChanged), RemoveCallback = nameof(TagsChanged))]
-		[ChangeTrigger(nameof(TagsChanged))]
+		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistence)", AddCallback = nameof(ValidateTags), RemoveCallback = nameof(ValidateTags))]
+		[ChangeTrigger(nameof(ValidateTags))]
 		[SerializeField]
 		private TagList _tags = new TagList();
 
@@ -82,8 +82,10 @@ namespace PiRhoSoft.Composition
 				_entries.Add(new VariableSchemaEntry()
 				{
 					Tag = _tags.Count > 0 ? _tags[0] : string.Empty,
+					Type = VariableSchemaInitializerType.Default,
+					Default = Variable.Empty,
 					Initializer = new Expression(),
-					Definition = new VariableDefinition(name, VariableType.Empty)
+					Definition = new VariableDefinition(name, VariableType.Empty),
 				});
 
 				EntriesChanged();
@@ -131,7 +133,7 @@ namespace PiRhoSoft.Composition
 			_version++;
 		}
 
-		private void TagsChanged()
+		private void ValidateTags()
 		{
 			foreach (var entry in _entries)
 			{
@@ -141,22 +143,33 @@ namespace PiRhoSoft.Composition
 		}
 	}
 
+	public enum VariableSchemaInitializerType
+	{
+		Default,
+		Initializer
+	}
+
 	[Serializable]
 	public class VariableSchemaEntry
 	{
 		private const string _invalidInitializerError = "(PCVSEII) failed to initialize variable '{0}' using collection '{1}': the generated variable is type '{2}' and does not match the definition '{3}'";
 
 		public string Tag;
+		public VariableSchemaInitializerType Type;
 		public Expression Initializer;
+		public Variable Default;
 		public VariableDefinition Definition;
 
 		public Variable GenerateVariable(IVariableCollection variables)
 		{
+			if (Type == VariableSchemaInitializerType.Default)
+				return Default;
+
 			if (Initializer != null && Initializer.IsValid)
 			{
 				var value = Initializer.Execute(variables as Object, variables);
 
-				if (!Definition.IsValid(value))
+				if (Definition.IsValid(value))
 					return value;
 
 				Debug.LogErrorFormat(_invalidInitializerError, Definition.Name, variables, value.Type, Definition.Description);

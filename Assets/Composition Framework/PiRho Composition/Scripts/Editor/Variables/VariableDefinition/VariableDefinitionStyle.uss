@@ -4,6 +4,9 @@
 
 .pirho-variable-definition__name
 {
+	margin-top: 1px;
+	margin-bottom: 2px;
+	-unity-font-style: bold;
 }
 
 .pirho-variable-definition__type

@@ -1,7 +1,6 @@
 ﻿using PiRhoSoft.Composition;
 using PiRhoSoft.Utilities;
 using System;
-using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
@@ -16,11 +15,9 @@ namespace PiRhoSoft.MonsterRpg
 	public class AbilityVariableSource : VariableSource<Ability> { }
 
 	[HelpURL(MonsterRpg.DocumentationUrl + "ability")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Ability", fileName = nameof(Ability), order = 202)]
+	[CreateAssetMenu(menuName = "Monster RPG/Ability", fileName = nameof(Ability), order = 202)]
 	public class Ability : VariableSetAsset, IResource
 	{
-		private const string _missingEcosystemWarning = "(EAME) The Ability '{0}' has not been assigned an Ecosystem";
-
 		[Tooltip("The display name for this ability")] public string Name;
 
 		#region Moves

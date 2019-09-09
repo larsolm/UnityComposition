@@ -20,7 +20,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public int ItemCount => _property.arraySize;
 
-		public string Label => _property.displayName;
+		public string Label { get; set; }
 		public string Tooltip { get; set; }
 		public string EmptyLabel { get; set; } = ListProxy.DefaultEmptyLabel;
 		public string EmptyTooltip { get; set; } = ListProxy.DefaultEmptyTooltip;

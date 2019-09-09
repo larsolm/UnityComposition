@@ -199,29 +199,29 @@ namespace PiRhoSoft.MonsterRpg
 			if (species != null)
 			{
 				var creature = species.CreateCreature(trainer);
-				creature.Load(data);
+				creature.Load(data, null);
 				return creature;
 			}
 
 			return null;
 		}
 
-		public static CreatureSaveData Save(Creature creature)
+		public static CreatureSaveData Save(Creature creature, string tag)
 		{
 			var data = new CreatureSaveData { SpeciesPath = creature.Species ? creature.Species.Path : string.Empty };
-			creature.Save(data);
+			creature.Save(data, tag);
 			return data;
 		}
 
-		private void Load(CreatureSaveData data)
+		private void Load(CreatureSaveData data, string tag)
 		{
 			Name = data.Name;
 			_skills = data.Skills;
-			Variables.CopyFrom(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyFrom(data.Variables, tag);
 
 			foreach (var moveData in data.Moves)
 			{
-				var move = Move.Create(this, moveData);
+				var move = Move.Create(this, moveData, tag);
 
 				if (move != null)
 					Moves.AddVariable(Variable.Object(move));
@@ -230,14 +230,14 @@ namespace PiRhoSoft.MonsterRpg
 			}
 		}
 
-		private void Save(CreatureSaveData data)
+		private void Save(CreatureSaveData data, string tag)
 		{
 			data.Name = Name;
 			data.Skills = _skills;
-			Variables.CopyTo(data.Variables, WorldLoader.SavedVariables);
+			Variables.CopyTo(data.Variables, tag);
 
 			foreach (var move in Moves)
-				data.Moves.Add(Move.Save(move));
+				data.Moves.Add(Move.Save(move, tag));
 		}
 
 		#endregion

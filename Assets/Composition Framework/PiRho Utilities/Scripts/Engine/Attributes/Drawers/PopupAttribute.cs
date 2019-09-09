@@ -9,18 +9,18 @@ namespace PiRhoSoft.Utilities
 		public List<float> FloatValues { get; private set; }
 		public List<string> Options { get; private set; }
 
-		public PopupAttribute(string[] options) : base(FieldPhase, 0)
+		public PopupAttribute(string[] options) : base(ContainerPhase, 0)
 		{
 			Options = options.ToList();
 		}
 
-		public PopupAttribute(int[] values, string[] options = null) : base(FieldPhase, 0)
+		public PopupAttribute(int[] values, string[] options = null) : base(ContainerPhase, 0)
 		{
 			IntValues = values.ToList();
 			Options = options?.ToList();
 		}
 
-		public PopupAttribute(float[] values, string[] options = null) : base(FieldPhase, 0)
+		public PopupAttribute(float[] values, string[] options = null) : base(ContainerPhase, 0)
 		{
 			FloatValues = values.ToList();
 			Options = options?.ToList();

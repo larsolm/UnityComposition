@@ -2,7 +2,7 @@
 {
 	public class MaximumAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 0;
+		public const int Order = 1;
 
 		public float Maximum { get; private set; }
 

@@ -83,8 +83,6 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public void AddItem(string key)
 		{
-			// TODO: Make sure ApplyModifyProperties doesn't trigger a serialization cycle and desync our SerializedDictionary
-
 			_keysProperty.arraySize++;
 			_valuesProperty.ResizeArray(KeyCount);
 

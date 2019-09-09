@@ -10,13 +10,14 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public const string Stylesheet = "Variables/VariableSchema/VariableSchemaEntryStyle.uss";
 		public const string UssClassName = "pirho-variable-schema-entry";
-		public const string InitializerUssClassName = UssClassName + "__initializer";
-		public const string InitializerModeAdvancedUssClassName = InitializerUssClassName + "--advanced";
-		public const string InitializerLabelUssClassName = InitializerUssClassName + "__label";
-		public const string InitializerModeUssClassName = InitializerUssClassName + "__mode";
-		public const string InitializerSimpleUssClassName = InitializerUssClassName + "__simple";
-		public const string InitializerAdvancedUssClassName = InitializerUssClassName + "__advanced";
 		public const string TagUssClassName = UssClassName + "__tag";
+		public const string DefaultUssClassName = UssClassName + "--default";
+		public const string ExpressionUssClassName = UssClassName + "--expression";
+		public const string InitializerUssClassName = UssClassName + "__initializer";
+		public const string InitializerTypeUssClassName = InitializerUssClassName + "__type";
+		public const string DefaultTypeUssClassName = InitializerUssClassName + "__default";
+		public const string ExpressionTypeUssClassName = InitializerUssClassName + "__expression";
+		public const string InitializerLabelUssClassName = InitializerUssClassName + "__label";
 
 		private static readonly Icon _modeIcon = Icon.BuiltIn("d_CustomSorting");
 
@@ -26,12 +27,11 @@ namespace PiRhoSoft.Composition.Editor
 		private VariableDefinitionControl _definitionControl;
 		private VisualElement _tag;
 		private VisualElement _initializer;
+		private TextElement _initializerLabel;
 
-		private IconButton _modeToggle;
-		private VariableControl _simpleControl;
-		private ExpressionControl _advancedControl;
-
-		private bool _advancedMode = false;
+		private IconButton _typeToggle;
+		private VariableControl _defaultControl;
+		private ExpressionControl _expressionControl;
 
 		public VariableSchemaEntryControl(List<string> tags, VariableSchemaEntry value)
 		{
@@ -75,50 +75,45 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void RefreshInitializer()
 		{
-			_simpleControl.SetDefinition(Value.Definition);
+			_defaultControl.SetDefinition(Value.Definition);
+			_initializerLabel.text = Value.Type == VariableSchemaInitializerType.Default ? "Default:" : "Initializer";
 
-			EnableInClassList(InitializerModeAdvancedUssClassName, _advancedMode);
+			this.AlternateClass(DefaultUssClassName, ExpressionUssClassName, Value.Type == VariableSchemaInitializerType.Default);
 		}
 
 		private void CreateTag()
 		{
-			var popup = new PopupField<string>("Tag:", Tags, Value.Tag);
+			if (!Tags.Contains(Value.Tag))
+				Value.Tag = Tags[0];
 
+			var popup = new PopupField<string>("Tag:", Tags, Value.Tag);
 			_tag.Add(popup);
 		}
 
 		private void CreateInitializer()
 		{
-			_modeToggle = new IconButton(_modeIcon.Texture, "Toggle editing by default value (simple) vs expression (advanced)", () =>
+			_typeToggle = new IconButton(_modeIcon.Texture, "Toggle initilazing by a default value or an expression", () =>
 			{
-				_advancedMode = !_advancedMode;
+				Value.Type = Value.Type == VariableSchemaInitializerType.Default ? VariableSchemaInitializerType.Initializer : VariableSchemaInitializerType.Default;
 				RefreshInitializer();
 			});
 
-			_modeToggle.AddToClassList(InitializerModeUssClassName);
+			_typeToggle.AddToClassList(InitializerTypeUssClassName);
 
-			var label = new TextElement { text = "Initializer:" };
-			label.AddToClassList(InitializerLabelUssClassName);
+			_initializerLabel = new TextElement();
+			_initializerLabel.AddToClassList(InitializerLabelUssClassName);
 
-			// TODO: Are these the correct things to pass in the editor? null doesn't work with new isolate scopes
-			var defaultValue = Value.Initializer.Execute(CompositionManager.Instance, CompositionManager.Instance.DefaultStore);
-			if (!Value.Definition.IsValid(defaultValue))
-			{
-				defaultValue = Value.Definition.Generate();
-				SetInitializer(defaultValue);
-			}
+			_defaultControl = new VariableControl(Value.Default, Value.Definition) { tooltip = "The default value to assign when initializing, resetting, or updating the variable" };
+			_defaultControl.AddToClassList(DefaultTypeUssClassName);
+			_defaultControl.RegisterCallback<ChangeEvent<Variable>>(evt => Value.Default = evt.newValue);
 
-			_simpleControl = new VariableControl(defaultValue, Value.Definition);
-			_simpleControl.AddToClassList(InitializerSimpleUssClassName);
-			_simpleControl.RegisterCallback<ChangeEvent<Variable>>(evt => SetInitializer(evt.newValue));
+			_expressionControl = new ExpressionControl(Value.Initializer) { tooltip = "The expression to execute and assign when initializing, resetting, or updating the variable" };
+			_expressionControl.AddToClassList(ExpressionTypeUssClassName);
 
-			_advancedControl = new ExpressionControl(Value.Initializer) { tooltip = "The Expression to execute and assign when initializing, resetting, or updating the variable" };
-			_advancedControl.AddToClassList(InitializerAdvancedUssClassName);
-
-			_initializer.Add(_modeToggle);
-			_initializer.Add(label);
-			_initializer.Add(_simpleControl);
-			_initializer.Add(_advancedControl);
+			_initializer.Add(_typeToggle);
+			_initializer.Add(_initializerLabel);
+			_initializer.Add(_defaultControl);
+			_initializer.Add(_expressionControl);
 		}
 
 		private bool HasInitializer()
@@ -141,28 +136,6 @@ namespace PiRhoSoft.Composition.Editor
 				case VariableType.Color:
 				case VariableType.String: return true;
 				default: return false;
-			}
-		}
-
-		private void SetInitializer(Variable variable)
-		{
-			switch (variable.Type)
-			{
-				case VariableType.Bool: Value.Initializer.SetStatement(variable.AsBool ? "true" : "false"); break;
-				case VariableType.Float: Value.Initializer.SetStatement(variable.AsFloat.ToString()); break;
-				case VariableType.Int: Value.Initializer.SetStatement(variable.AsInt.ToString()); break;
-				case VariableType.Vector2Int: Value.Initializer.SetStatement($"Vector2Int({variable.AsVector2Int.x}, {variable.AsVector2Int.y})"); break;
-				case VariableType.Vector3Int: Value.Initializer.SetStatement($"Vector3Int({variable.AsVector3Int.x}, {variable.AsVector3Int.y}, {variable.AsVector3Int.z})"); break;
-				case VariableType.RectInt: Value.Initializer.SetStatement($"RectInt({variable.AsRectInt.x}, {variable.AsRectInt.y}, {variable.AsRectInt.width}, {variable.AsRectInt.height})"); break;
-				case VariableType.BoundsInt: Value.Initializer.SetStatement($"BoundsInt({variable.AsBoundsInt.x}, {variable.AsBoundsInt.y}, {variable.AsBoundsInt.z}, {variable.AsBoundsInt.size.x}, {variable.AsBoundsInt.size.y}, {variable.AsBoundsInt.size.z})"); break;
-				case VariableType.Vector2: Value.Initializer.SetStatement($"Vector2({variable.AsVector2.x}, {variable.AsVector2.y})"); break;
-				case VariableType.Vector3: Value.Initializer.SetStatement($"Vector3({variable.AsVector3.x}, {variable.AsVector3.y}, {variable.AsVector3.z})"); break;
-				case VariableType.Vector4: Value.Initializer.SetStatement($"Vector4({variable.AsVector4.x}, {variable.AsVector4.y}, {variable.AsVector4.z}, {variable.AsVector4.w})"); break;
-				case VariableType.Quaternion: var euler = variable.AsQuaternion.eulerAngles; Value.Initializer.SetStatement($"Quaternion({euler.x}, {euler.y}, {euler.z})"); break;
-				case VariableType.Rect: Value.Initializer.SetStatement($"Rect({variable.AsRect.x}, {variable.AsRect.y}, {variable.AsRect.width}, {variable.AsRect.height})"); break;
-				case VariableType.Bounds: Value.Initializer.SetStatement($"Bounds({variable.AsBounds.center}, {variable.AsBounds.extents})"); break;
-				case VariableType.Color: Value.Initializer.SetStatement(string.Format("#{0:X2}{1:X2}{2:X2}{3:X2}", Mathf.RoundToInt(variable.AsColor.r * 255), Mathf.RoundToInt(variable.AsColor.g * 255), Mathf.RoundToInt(variable.AsColor.b * 255), Mathf.RoundToInt(variable.AsColor.a * 255))); break;
-				case VariableType.String: Value.Initializer.SetStatement("\"" + variable.AsString + "\""); break;
 			}
 		}
 	}

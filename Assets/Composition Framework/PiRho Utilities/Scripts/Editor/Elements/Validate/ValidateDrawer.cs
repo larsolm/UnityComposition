@@ -35,7 +35,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			if (method != null)
 			{
-				var owner = method.IsStatic ? null : property.GetParentObject<object>();
+				var owner = method.IsStatic ? null : property.GetOwner<object>();
 				var change = ChangeTriggerControl.Create(property, () => Update(message, method, owner));
 				Update(message, method, owner);
 				element.Add(change);

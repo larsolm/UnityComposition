@@ -22,6 +22,7 @@ namespace PiRhoSoft.Utilities
 		public const int ContainerPhase = 3;
 		public const int FieldPhase = 4;
 		public const int ValidatePhase = 5;
+		public const int ControlPhase = 6;
 
 		protected PropertyTraitAttribute(int drawPhase, int drawOrder)
 		{

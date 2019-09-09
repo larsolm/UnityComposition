@@ -11,6 +11,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static readonly string UssClassName = "pirho-list-field";
 
+		public string Label { get; set; }
 		public string Tooltip { get; set; }
 		public string EmptyLabel { get; set; }
 		public string EmptyTooltip { get; set; }
@@ -44,6 +45,7 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			Clear();
 
+			if (Label != null) proxy.Label = Label;
 			if (EmptyLabel != null) proxy.EmptyLabel = EmptyLabel;
 			if (EmptyTooltip != null) proxy.EmptyTooltip = EmptyTooltip;
 			if (AddTooltip != null) proxy.AddTooltip = AddTooltip;

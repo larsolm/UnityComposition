@@ -37,7 +37,7 @@ namespace PiRhoSoft.Utilities.Editor
 				var dictionaryAttribute = attribute as DictionaryAttribute;
 				var itemDrawer = this.GetNextDrawer();
 				var tooltip = this.GetTooltip();
-				var parent = property.GetParentObject<object>();
+				var parent = property.GetOwner<object>();
 				var path = property.propertyPath;
 
 				var field = new DictionaryField(property, keys, values, itemDrawer)

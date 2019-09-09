@@ -2,7 +2,7 @@
 {
 	public class EulerAttribute : PropertyTraitAttribute
 	{
-		public EulerAttribute() : base(FieldPhase, 0)
+		public EulerAttribute() : base(ControlPhase, 0)
 		{
 		}
 	}

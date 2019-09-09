@@ -8,7 +8,6 @@ namespace PiRhoSoft.MonsterRpg
 	[Serializable]
 	public class PlayerSaveData
 	{
-		public string Name = string.Empty;
 		public VariableStore PlayerVariables = new VariableStore();
 		public VariableStore TrainerVariables = new VariableStore();
 		public List<CreatureSaveData> Creatures = new List<CreatureSaveData>();
@@ -27,9 +26,6 @@ namespace PiRhoSoft.MonsterRpg
 		private const string _missingSpeciesWarning = "(WPMS) The Species at the path {0} for the Player's Creature could not be found";
 
 		public static Player Instance { get; private set; }
-
-		[Tooltip("The name of the player")]
-		public string Name = "Player";
 
 		public Mover Mover { get; private set; }
 		public Trainer Trainer { get; private set; }
@@ -120,19 +116,17 @@ namespace PiRhoSoft.MonsterRpg
 
 		#region Persistence
 
-		public void Load(IVariableCollection header, PlayerSaveData saveData)
+		public void Load(PlayerSaveData saveData, string tag)
 		{
-			SchemaVariables.CopyFrom(header, WorldLoader.HeaderVariables);
-			SchemaVariables.CopyFrom(saveData.PlayerVariables, WorldLoader.SavedVariables);
+			SchemaVariables.CopyFrom(saveData.PlayerVariables, tag);
 
 			// If the save data has creatures or items, anything set on the actual Player needs to be cleared so it
 			// isn't duplicated on every save. This means if a new creature or item is added to the Player in the
 			// editor existing saves will not include it.
 
 			if (saveData.Creatures.Count > 0) Trainer.Roster.Clear();
-			if (!string.IsNullOrEmpty(saveData.Name)) Name = saveData.Name;
 			
-			Trainer.SchemaVariables.CopyFrom(saveData.TrainerVariables, WorldLoader.SavedVariables);
+			Trainer.SchemaVariables.CopyFrom(saveData.TrainerVariables, tag);
 			
 			foreach (var creatureData in saveData.Creatures)
 			{
@@ -145,16 +139,14 @@ namespace PiRhoSoft.MonsterRpg
 			}
 		}
 
-		public void Save(VariableStore header, PlayerSaveData saveData)
+		public void Save(PlayerSaveData saveData, string tag)
 		{
-			SchemaVariables.CopyTo(header, WorldLoader.HeaderVariables);
-			SchemaVariables.CopyTo(saveData.PlayerVariables, WorldLoader.SavedVariables);
+			SchemaVariables.CopyTo(saveData.PlayerVariables, tag);
 
-			saveData.Name = Name;
-			Trainer.SchemaVariables.CopyTo(saveData.TrainerVariables, WorldLoader.SavedVariables);
+			Trainer.SchemaVariables.CopyTo(saveData.TrainerVariables, tag);
 			
 			foreach (var creature in Trainer.Roster.Creatures)
-				saveData.Creatures.Add(Creature.Save(creature));
+				saveData.Creatures.Add(Creature.Save(creature, tag));
 		}
 
 		#endregion

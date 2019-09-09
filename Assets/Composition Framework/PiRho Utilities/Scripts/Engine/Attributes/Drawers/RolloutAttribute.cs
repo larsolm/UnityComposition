@@ -2,7 +2,7 @@
 {
 	public class RolloutAttribute : PropertyTraitAttribute
 	{
-		public RolloutAttribute() : base(FieldPhase, 0)
+		public RolloutAttribute() : base(ContainerPhase, 0)
 		{
 		}
 	}

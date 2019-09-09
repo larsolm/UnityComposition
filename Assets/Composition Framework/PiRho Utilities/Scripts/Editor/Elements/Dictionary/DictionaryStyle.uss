@@ -41,6 +41,7 @@
 	display: flex;
 	flex-grow: 1;
 	background-color: #99FF99;
+	margin: 0px;
 }
 
 .pirho-dictionary--add-disabled .pirho-dictionary__key-text
@@ -55,6 +56,7 @@
 
 .pirho-dictionary__add-button
 {
+	margin-left: 5px;
 	display: flex;
 }
 
@@ -66,7 +68,6 @@
 .pirho-dictionary__remove-button
 {
 	display: flex;
-	margin-top: 2px;
 	margin-left: 5px;
 	width: 16px;
 	height: 16px;
@@ -82,10 +83,10 @@
 {
 	display: flex;
 	cursor: move-arrow;
+	margin-top: 5px;
 	margin-right: 5px;
 	flex-shrink: 0;
 	align-self: flex-start;
-	padding-top: 5px;
 }
 
 .pirho-dictionary--move-disabled .pirho-dictionary__drag-handle
@@ -106,7 +107,7 @@
 	flex-direction: row;
 	flex-grow: 1;
 	align-items: center;
-	padding: 3px 5px 1px 5px;
+	padding: 3px 5px;
 }
 
 .pirho-dictionary__item--dragging

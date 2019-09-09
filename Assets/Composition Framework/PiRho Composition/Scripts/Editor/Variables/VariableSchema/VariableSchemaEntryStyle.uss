@@ -2,6 +2,10 @@
 {
 }
 
+.pirho-variable-schema-entry__tag
+{
+}
+
 .pirho-variable-schema-entry__initializer
 {
 	flex-direction: row;
@@ -13,9 +17,8 @@
 	align-self: center;
 }
 
-.pirho-variable-schema-entry__initializer__mode
+.pirho-variable-schema-entry__initializer__type
 {
-	background-color: #DDD;
 	border-color: #555;
 	border-radius: 5px;
 	border-width: 1px;
@@ -27,7 +30,12 @@
 	padding: 3px 1px;
 }
 
-.pirho-variable-schema-entry__initializer--advanced .pirho-variable-schema-entry__initializer__mode
+.pirho-variable-schema-entry--default .pirho-variable-schema-entry__initializer__type
+{
+	background-color: #DDD;
+}
+
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__initializer__type
 {
 	background-color: #555;
 }
@@ -37,28 +45,24 @@
 	background-color: #333;
 }
 
-.pirho-variable-schema-entry__initializer__simple
+.pirho-variable-schema-entry__initializer__default
 {
 	display: flex;
 	align-self: center;
 }
 
-.pirho-variable-schema-entry__initializer__advanced
+.pirho-variable-schema-entry__initializer__expression
 {
-	display: none;
+	display: flex;
 	align-self: center;
 }
 
-.pirho-variable-schema-entry__initializer--advanced .pirho-variable-schema-entry__initializer__simple
+.pirho-variable-schema-entry--default .pirho-variable-schema-entry__initializer__expression
 {
 	display: none;
 }
 
-.pirho-variable-schema-entry__initializer--advanced .pirho-variable-schema-entry__initializer__advanced
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__initializer__default
 {
-	display: flex;
-}
-
-.pirho-variable-schema-entry__tag
-{
+	display: none
 }

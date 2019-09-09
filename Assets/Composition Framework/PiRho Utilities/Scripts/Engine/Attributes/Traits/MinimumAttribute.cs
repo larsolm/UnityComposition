@@ -2,7 +2,7 @@
 {
 	public class MinimumAttribute : PropertyTraitAttribute
 	{
-		public const int Order = 0;
+		public const int Order = 1;
 
 		public float Minimum { get; private set; }
 

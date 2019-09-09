@@ -11,7 +11,7 @@ namespace PiRhoSoft.MonsterRpg
 	{
 		private static readonly int _horizontal = Animator.StringToHash("Horizontal");
 		private static readonly int _vertical = Animator.StringToHash("Vertical");
-		private static readonly int _speed = Animator.StringToHash("Speed");
+		private static readonly int _moving = Animator.StringToHash("Moving");
 
 		private Animator _animator;
 		private Mover _mover;
@@ -28,7 +28,7 @@ namespace PiRhoSoft.MonsterRpg
 
 			_animator.SetFloat(_horizontal, Mathf.Clamp(direction.x, -1, 1));
 			_animator.SetFloat(_vertical, Mathf.Clamp(direction.y, -1, 1));
-			_animator.SetFloat(_speed, Mathf.Clamp01(_mover.Speed));
+			_animator.SetBool(_moving, _mover.Speed > 0);
 		}
 	}
 }

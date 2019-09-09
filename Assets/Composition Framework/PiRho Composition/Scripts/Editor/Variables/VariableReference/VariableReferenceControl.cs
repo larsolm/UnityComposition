@@ -14,8 +14,8 @@ namespace PiRhoSoft.Composition.Editor
 		public const string SimpleUssClassName = UssClassName + "__simple";
 		public const string AdvancedUssClassName = UssClassName + "__advanced";
 
-		private static string _validTooltip = "Toggle editing as dropdown(simple) vs text(advanced)";
-		private static string _invalidTooltip = "Must fix syntax errors before toggling to dropdown mode";
+		private static readonly string _validTooltip = "Toggle editing as dropdown (simple) vs text (advanced)";
+		private static readonly string _invalidTooltip = "Must fix syntax errors before toggling to dropdown mode";
 
 		private static readonly Icon _modeIcon = Icon.BuiltIn("d_CustomSorting");
 
@@ -33,7 +33,7 @@ namespace PiRhoSoft.Composition.Editor
 			Value = value;
 			Source = new TreeAutocomplete();
 
-			_modeToggle = new IconButton(_modeIcon.Texture, "Toggle editing as dropdowns (simple) vs text (advanced)", () =>
+			_modeToggle = new IconButton(_modeIcon.Texture, _validTooltip, () =>
 			{
 				_advancedMode = !_advancedMode;
 				Refresh();

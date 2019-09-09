@@ -10,6 +10,7 @@ namespace PiRhoSoft.Composition
 	public class VariableSetComponent : MonoBehaviour, IVariableCollection, IResettableVariables
 	{
 		[ChangeTrigger(nameof(SetupSchema))]
+		[InspectTrigger(nameof(SetupSchema))]
 		[ObjectPicker]
 		[SerializeField]
 		private VariableSchema _schema = null;

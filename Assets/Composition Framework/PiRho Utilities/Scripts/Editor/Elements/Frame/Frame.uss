@@ -17,6 +17,7 @@
 .pirho-frame__label
 {
 	flex-grow: 1;
+	-unity-font-style: bold;
 }
 
 .pirho-frame__header-buttons

@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -14,13 +15,11 @@ namespace PiRhoSoft.Utilities.Editor
 		public static readonly string TextUssClassName = UssClassName + "__text";
 		public static readonly string ButtonUssClassName = UssClassName + "__button";
 
-		private static readonly Icon _dropdownIcon = Icon.BuiltIn("icon dropdown");
-
 		public string Value { get; private set; }
 		public List<string> Options { get; private set; }
 		public TextField TextField { get; private set; } // Public so delayed can be set
 
-		private IconButton _dropdownButton;
+		private VisualElement _dropdownButton;
 		private GenericMenu _menu;
 
 		public ComboBoxControl(string value, List<string> options)
@@ -50,8 +49,10 @@ namespace PiRhoSoft.Utilities.Editor
 			TextField.AddToClassList(TextUssClassName);
 			TextField.RegisterValueChangedCallback(evt => Value = evt.newValue);
 
-			_dropdownButton = new IconButton(_dropdownIcon.Texture, "Show the combo box options", OpenDropdown);
+			_dropdownButton = new VisualElement { tooltip = "Show the combo box options" };
+			_dropdownButton.AddToClassList(BasePopupField<string, string>.inputUssClassName);
 			_dropdownButton.AddToClassList(ButtonUssClassName);
+			_dropdownButton.AddManipulator(new Clickable(OpenDropdown));
 
 			_menu = new GenericMenu();
 

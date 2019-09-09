@@ -16,7 +16,7 @@ namespace PiRhoSoft.MonsterRpg
 	[Serializable] public class MountPointDictionary : SerializedDictionary<string, MountPoint> { }
 
 	[HelpURL(MonsterRpg.DocumentationUrl + "species")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Species", fileName = nameof(Species), order = 201)]
+	[CreateAssetMenu(menuName = "Monster RPG/Species", fileName = nameof(Species), order = 201)]
 	public class Species : VariableSetAsset, IResource
 	{
 		[Tooltip("The icon for this species")] public Sprite Icon;

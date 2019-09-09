@@ -1,5 +1,58 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-2113145965619732750
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c00ab66333b8d4549922108b69460c4b, type: 3}
+  m_Name: Load Variables
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 188.75006, y: 21.300114}
+  IsBreakpoint: 0
+  Next: {fileID: 8426389869785260599}
+  Filename:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 
+  Tag:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 
+--- !u!114 &-1368940103165137033
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e363ecb254d60d74083ea98660e5b34f, type: 3}
+  m_Name: SpawnPlayer
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 448, y: 62.00003}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Map:
+    _variable: 
+    _tokens: []
+  SpawnPoint:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: 
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -23,10 +76,39 @@ MonoBehaviour:
     _items: []
   Outputs:
     _items: []
-  Process: {fileID: 0}
+  StartNode: {fileID: 3772295249113841190}
   Nodes:
-  - {fileID: 8360444590051035758}
-  - {fileID: 8482443941764121844}
+  - {fileID: 3772295249113841190}
+  - {fileID: -2113145965619732750}
+  - {fileID: -1368940103165137033}
+  - {fileID: 8426389869785260599}
+--- !u!114 &3772295249113841190
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: Load Main Scene
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 120.000015, y: -102.999954}
+  IsBreakpoint: 0
+  Next: {fileID: -2113145965619732750}
+  Source: 0
+  Scene:
+    Path: 
+  SceneVariable:
+    _variable: 
+    _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 1
+  CleanupAssets: 1
+  Additive: 1
 --- !u!114 &8360444590051035758
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -42,7 +124,7 @@ MonoBehaviour:
   Graph: {fileID: 11400000}
   GraphPosition: {x: 104.000015, y: -119.99997}
   IsBreakpoint: 0
---- !u!114 &8482443941764121844
+--- !u!114 &8426389869785260599
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
@@ -51,13 +133,21 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5c6e5303f5a52b74bb7856ce4274293d, type: 3}
-  m_Name: DestroyObjectNode
+  m_Script: {fileID: 11500000, guid: c91e554be491c15489facbf182695c15, type: 3}
+  m_Name: LoadSceneNode
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 327, y: -128}
+  GraphPosition: {x: 375, y: -91.99997}
   IsBreakpoint: 0
-  Next: {fileID: 0}
-  Target:
+  Next: {fileID: -1368940103165137033}
+  Source: 0
+  Scene:
+    Path: 
+  SceneVariable:
     _variable: 
     _tokens: []
+  SceneName: 
+  SceneIndex: 0
+  WaitForCompletion: 1
+  CleanupAssets: 1
+  Additive: 1

@@ -44,7 +44,7 @@ namespace PiRhoSoft.Utilities.Editor
 			if (gradientValueProperty != null && gradientValueProperty.PropertyType == typeof(Gradient) && gradientValueProperty.CanRead && gradientValueProperty.CanWrite)
 				_gradientValueProperty = gradientValueProperty;
 
-			var hasVisibleChildFieldsMethod = typeof(EditorGUI).GetMethod(_hasVisibleChildFieldsName, BindingFlags.Static| BindingFlags.NonPublic);
+			var hasVisibleChildFieldsMethod = typeof(EditorGUI).GetMethod(_hasVisibleChildFieldsName, BindingFlags.Static | BindingFlags.NonPublic);
 
 			if (hasVisibleChildFieldsMethod != null && hasVisibleChildFieldsMethod.HasSignature(typeof(bool), typeof(SerializedProperty)))
 				_hasVisibleChildFieldsMethod = hasVisibleChildFieldsMethod;
@@ -160,7 +160,7 @@ namespace PiRhoSoft.Utilities.Editor
 			if (typeof(T) == typeof(string)) return (T)(object)property.stringValue;
 			if (typeof(T) == typeof(Color)) return (T)(object)property.colorValue;
 			if (typeof(T) == typeof(LayerMask)) return (T)(object)property.intValue;
-			// if (typeof(T) == typeof(Enum)) return (T)(object)property.intValue; TODO: doesn't work without enum type
+			//if (typeof(T) == typeof(Enum)) return (T)(object)property.intValue; TODO: doesn't work without enum type
 			if (typeof(T) == typeof(Vector2)) return (T)(object)property.vector2Value;
 			if (typeof(T) == typeof(Vector3)) return (T)(object)property.vector3Value;
 			if (typeof(T) == typeof(Vector4)) return (T)(object)property.vector4Value;
@@ -221,14 +221,24 @@ namespace PiRhoSoft.Utilities.Editor
 			return property.serializedObject.FindProperty(parentPath);
 		}
 
+		public static T GetOwner<T>(this SerializedProperty property) where T : class
+		{
+			var index = 1;
+			var obj = property.GetAncestorObject<object>(index);
+			while (obj is IList || obj is IDictionary)
+				obj = property.GetAncestorObject<object>(++index);
+
+			return obj as T;
+		}
+
 		public static T GetObject<T>(this SerializedProperty property) where T : class
 		{
-			return GetAncestorObject<T>(property, 0);
+			return property.GetAncestorObject<T>(0);
 		}
 
 		public static T GetParentObject<T>(this SerializedProperty property) where T : class
 		{
-			return GetAncestorObject<T>(property, 1);
+			return property.GetAncestorObject<T>(1);
 		}
 
 		public static T GetAncestorObject<T>(this SerializedProperty property, int generations) where T : class

@@ -104,9 +104,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			if (field != null)
 			{
-				var owner = field.IsStatic
-					? null
-					: property.GetParentObject<object>();
+				var owner = field.IsStatic ? null : property.GetOwner<object>();
 
 				if (field.FieldType == typeof(bool))
 					element.schedule.Execute(() => UpdateVisibility(element, (bool)field.GetValue(owner), conditionalAttribute.BoolValue, conditionalAttribute.Test)).Every(100);
@@ -132,9 +130,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			if (propertyInfo != null)
 			{
-				var owner = propertyInfo.GetGetMethod().IsStatic
-					? null
-					: property.GetParentObject<object>();
+				var owner = propertyInfo.GetGetMethod().IsStatic ? null : property.GetOwner<object>();
 
 				if (propertyInfo.PropertyType == typeof(bool))
 					element.schedule.Execute(() => UpdateVisibility(element, (bool)propertyInfo.GetValue(owner), conditionalAttribute.BoolValue, conditionalAttribute.Test)).Every(100);
@@ -162,9 +158,7 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				if (methodInfo.HasSignature(null))
 				{
-					var owner = methodInfo.IsStatic
-						? null
-						: property.GetParentObject<object>();
+					var owner = methodInfo.IsStatic ? null : property.GetOwner<object>();
 
 					if (methodInfo.ReturnType == typeof(bool))
 						element.schedule.Execute(() => UpdateVisibility(element, (bool)methodInfo.Invoke(owner, null), conditionalAttribute.BoolValue, conditionalAttribute.Test)).Every(100);

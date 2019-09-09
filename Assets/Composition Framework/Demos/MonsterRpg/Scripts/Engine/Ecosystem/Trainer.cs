@@ -10,12 +10,13 @@ namespace PiRhoSoft.MonsterRpg
 		Roster Roster { get; }
 	}
 
-	[ExecuteInEditMode] // for OnEnable initialization of Roster, and Inventory
+	[ExecuteInEditMode] // for OnEnable initialization of Roster
 	[DisallowMultipleComponent]
 	[HelpURL(MonsterRpg.DocumentationUrl + "trainer")]
 	[AddComponentMenu("PiRho Soft/Ecosystem/Trainer")]
 	public class Trainer : VariableSetComponent, ITrainer
 	{
+		[Tooltip("The name of this trainer")] [SerializeField] public string _name = string.Empty;
 		[Tooltip("The creatures this trainer has")] [SerializeField] public Roster _roster = new Roster();
 
 		protected override void OnEnable()
@@ -35,22 +36,7 @@ namespace PiRhoSoft.MonsterRpg
 		#region ITrainer Implementation
 		
 		public Roster Roster => _roster;
-
-		public string Name
-		{
-			get
-			{
-				var player = GetComponent<Player>();
-				if (player)
-					return player.Name;
-
-				var npc = GetComponent<Npc>();
-				if (npc)
-					return npc.Name;
-
-				return string.Empty;
-			}
-		}
+		public string Name => _name;
 
 		#endregion
 	}

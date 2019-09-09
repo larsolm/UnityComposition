@@ -12,6 +12,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		public const string Stylesheet = "Variables/VariableDefinition/VariableDefinitionStyle.uss";
 		public const string UssClassName = "pirho-variable-definition";
+		public const string NameUssClassName = UssClassName + "__name";
 		public const string TypeUssClassName = UssClassName + "__type";
 		public const string ConstraintUssClassName = UssClassName + "__constraint";
 		public const string NumberConstraintUssClassName = ConstraintUssClassName + "__number";
@@ -44,7 +45,11 @@ namespace PiRhoSoft.Composition.Editor
 			Value = value;
 
 			if (!string.IsNullOrEmpty(Value.Name))
-				Add(new TextElement { text = Value.Name });
+			{
+				var label = new TextElement { text = Value.Name };
+				label.AddToClassList(NameUssClassName);
+				Add(label);
+			}
 
 			CreateType();
 			CreateConstraint();
@@ -140,8 +145,8 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateIntConstraint(IntConstraint constraint)
 		{
 			var container = new VisualElement();
-			var minLabel = new TextElement { text = "Minimum:" };
-			var maxLabel = new TextElement { text = "Maximum:" };
+			var minLabel = new TextElement { text = "Minimum:", tooltip = "Whether to constrain this int to a minimum value" };
+			var maxLabel = new TextElement { text = "Maximum:", tooltip = "Whether to constrain this int to a maximum value" };
 			var minToggle = new Toggle();
 			var maxToggle = new Toggle();
 			var min = new IntegerField();
@@ -220,8 +225,8 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateFloatConstraint(FloatConstraint constraint)
 		{
 			var container = new VisualElement();
-			var minLabel = new TextElement { text = "Minimum:" };
-			var maxLabel = new TextElement { text = "Maximum:" };
+			var minLabel = new TextElement { text = "Minimum:", tooltip = "Whether to constrain this int to a minimum value" };
+			var maxLabel = new TextElement { text = "Maximum:", tooltip = "Whether to constrain this int to a maximum value" };
 			var minToggle = new Toggle();
 			var maxToggle = new Toggle();
 			var min = new FloatField();

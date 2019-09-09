@@ -9,18 +9,24 @@ namespace PiRhoSoft.MonsterRpg
 	{
 		[Tooltip("The node to move to when this node is finished")]
 		public GraphNode Next = null;
-		
-		[Tooltip("The spawn point to spawn the player at")]
+
+		[Tooltip("The map with the spawn point to spawn the player at")]
+		public VariableReference Map = new VariableReference();
+
+		[Tooltip("The name of the spawn point to spawn the player at")]
 		public StringVariableSource SpawnPoint = new StringVariableSource();
 		
 		public override Color NodeColor => Colors.Sequencing;
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			Resolve(variables, SpawnPoint, out var spawn);
+			if (ResolveObject<Map>(variables, Map, out var map))
+			{
+				Resolve(variables, SpawnPoint, out var spawn);
 
-			var spawnPoint = WorldManager.Instance.GetSpawnPoint(spawn);
-			Player.Instance.Mover.WarpToPosition(spawnPoint.Position, spawnPoint.Direction, spawnPoint.Layer);
+				var spawnPoint = map.GetSpawnPoint(spawn);
+				Player.Instance.Mover.WarpToPosition(spawnPoint.Position, spawnPoint.Direction, spawnPoint.Layer);
+			}
 
 			graph.GoTo(Next, nameof(Next));
 

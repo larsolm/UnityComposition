@@ -5,26 +5,22 @@
 
 .pirho-variable-reference__mode
 {
-	background-color: #DDD;
-	border-color: #555;
-	border-radius: 5px;
-	border-width: 1px;
 	min-width: 23px;
 	max-width: 23px;
-	min-height: 21px;
-	max-height: 21px;
+	min-height: 17px;
+	max-height: 17px;
 	align-self: center;
-	padding: 3px 1px;
+	padding: 2px;
 }
 
 .pirho-variable-reference--advanced .pirho-variable-reference__mode
 {
-	background-color: #555;
+	background-color: #6B6B6B;
 }
 
-.pirho-variable-reference__mode:active
+.pirho-variable-reference--advanced .pirho-variable-reference__mode:hover
 {
-	background-color: #333;
+	background-color: #6B6B6B;
 }
 
 .pirho-variable-reference__simple
@@ -33,7 +29,6 @@
 	align-self: center;
 	flex-grow: 1;
 	flex-direction: row;
-	padding-left: 5px;
 }
 
 .pirho-variable-reference__advanced
@@ -41,7 +36,6 @@
 	display: none;
 	align-self: center;
 	flex-grow: 1;
-	padding-left: 5px;
 }
 
 .pirho-variable-reference--advanced .pirho-variable-reference__simple
@@ -59,6 +53,7 @@
 	flex-grow: 1;
 	flex-direction: row;
 	min-width: 60px;
+	margin-left: 5px;
 }
 
 .pirho-variable-reference__simple__item--empty
@@ -81,6 +76,7 @@
 .pirho-variable-reference__simple__item__popup
 {
 	flex-grow: 1;
+	margin: 1px 0px 0px 0px;
 }
 
 .pirho-variable-reference__simple__item--empty .pirho-variable-reference__simple__item__popup PopupTextElement
@@ -91,4 +87,10 @@
 .pirho-variable-reference__simple__item__array-index
 {
 	min-width: 25px;
+	margin: 0px 0px 1px 0px;
+}
+
+.pirho-variable-reference__advanced__text
+{
+	margin: 0px;
 }

@@ -9,6 +9,8 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableReferenceTextControl : VisualElement
 	{
+		public const string TextUssClassName = VariableReferenceControl.AdvancedUssClassName + "__text";
+
 		private static readonly List<KeyCode> _selectKeys = new List<KeyCode> { KeyCode.Tab, KeyCode.KeypadEnter, KeyCode.Return, KeyCode.Period, KeyCode.KeypadPeriod };
 		private static readonly List<KeyCode> _openKeys = new List<KeyCode> { KeyCode.Escape, KeyCode.Tab };
 		private static readonly List<KeyCode> _closeKeys = new List<KeyCode> { KeyCode.Escape };
@@ -33,6 +35,7 @@ namespace PiRhoSoft.Composition.Editor
 			RegisterCallback<AttachToPanelEvent>(evt => evt.destinationPanel.visualTree.Q<TemplateContainer>().Add(_autocomplete));
 			RegisterCallback<DetachFromPanelEvent>(evt => _autocomplete.RemoveFromHierarchy());
 
+			_textField.AddToClassList(TextUssClassName);
 			_textField.Q<VisualElement>(className: TextField.inputUssClassName).RegisterCallback<KeyDownEvent>(OnKeyDown);
 			_textField.RegisterValueChangedCallback(evt => TextChanged());
 			_textField.RegisterCallback<FocusEvent>(evt => _autocomplete.Show());

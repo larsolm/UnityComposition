@@ -34,7 +34,7 @@ namespace PiRhoSoft.Utilities.Editor
 				{
 					var owner = method.IsStatic
 						? null
-						: property.GetParentObject<object>();
+						: property.GetOwner<object>();
 
 					if (method.ReturnType != typeof(string))
 						Debug.LogWarningFormat(_invalidMethodReturnWarning, property.propertyPath, labelAttribute.Method);

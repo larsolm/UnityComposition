@@ -14,8 +14,6 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			Value = value;
 
-			Refresh();
-
 			_proxy = new VariablesProxy(value);
 			_list = new ListControl(_proxy);
 

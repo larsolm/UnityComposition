@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 	public abstract class VariableSource
 	{
 		public VariableSourceType Type = VariableSourceType.Value;
-		public VariableReference Reference = new VariableReference();
+		[Conditional(nameof(Type), (int)VariableSourceType.Value)] public VariableReference Reference = new VariableReference();
 
 		public void GetInputs(IList<VariableDefinition> inputs)
 		{

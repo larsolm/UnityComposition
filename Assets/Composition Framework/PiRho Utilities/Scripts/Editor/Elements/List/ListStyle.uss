@@ -49,7 +49,6 @@
 .pirho-list__remove-button
 {
 	display: flex;
-	margin-top: 2px;
 	margin-left: 5px;
 	width: 16px;
 	height: 16px;
@@ -65,10 +64,10 @@
 {
 	display: flex;
 	cursor: move-arrow;
+	margin-top: 5px;
 	margin-right: 5px;
 	flex-shrink: 0;
 	align-self: flex-start;
-	padding-top: 5px;
 }
 
 .pirho-list--move-disabled .pirho-list__drag-handle
@@ -89,7 +88,7 @@
 	flex-direction: row;
 	flex-grow: 1;
 	align-items: center;
-	padding: 3px 5px 1px 5px;
+	padding: 3px 5px;
 }
 
 .pirho-list__item--dragging

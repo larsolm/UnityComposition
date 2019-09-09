@@ -97,3 +97,13 @@ Update Mode: updateDependencies
 
 The following packages were removed:
   com.unity.package-manager-ui@2.2.0
+
+=== Mon Sep  9 09:41:05 2019
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.2d.pixel-perfect from version 1.0.1-preview to 2.0.2
+  com.unity.ide.rider from version 1.0.8 to 1.1.0
+  com.unity.test-framework from version 1.0.16 to 1.0.17

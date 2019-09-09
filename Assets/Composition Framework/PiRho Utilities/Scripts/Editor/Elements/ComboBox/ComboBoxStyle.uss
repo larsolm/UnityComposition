@@ -7,19 +7,17 @@
 .pirho-combo-box__text
 {
 	flex-grow: 1;
+	margin: 0px 0px 1px 0px;
 }
 
 .pirho-combo-box__button
 {
-	width: 17px;
-	height: 17px;
+	min-width: 18px;
+	max-width: 18px;
+	height: 18px;
 	align-self: center;
 	padding: 5px 3px;
-	background-color: #CCC;
-	border-color: #777;
-	border-width: 1px;
-	margin-bottom: 2px;
-	margin-left: -1px;
+	margin: 0px;
 }
 
 .pirho-combo-box__button:hover

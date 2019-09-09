@@ -14,16 +14,17 @@ namespace PiRhoSoft.Utilities.Editor
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
 			var element = this.CreateNextElement(property);
-
-			var change = attribute as InspectTriggerAttribute;
-			var method = fieldInfo.DeclaringType.GetMethod(change.Method, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
+			var inspect = attribute as InspectTriggerAttribute;
+			var method = fieldInfo.DeclaringType.GetMethod(inspect.Method, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
 			if (method != null)
 			{
 				if (method.HasSignature(null))
 				{
-					var owner = method.IsStatic ? null : property.GetParentObject<object>();
-					method.Invoke(owner, null);
+					var owner = method.IsStatic ? null : property.GetOwner<object>();
+
+					if (!EditorApplication.isPlaying)
+						method.Invoke(owner, null);
 				}
 				else
 				{
@@ -32,16 +33,10 @@ namespace PiRhoSoft.Utilities.Editor
 			}
 			else
 			{
-				Debug.LogWarningFormat(_missingMethodWarning, property.propertyPath, change.Method, fieldInfo.DeclaringType.Name);
+				Debug.LogWarningFormat(_missingMethodWarning, property.propertyPath, inspect.Method, fieldInfo.DeclaringType.Name);
 			}
 
 			return element;
-		}
-
-		private static void OnChanged(MethodInfo method, object owner)
-		{
-			if (!EditorApplication.isPlaying)
-				method.Invoke(owner, null);
 		}
 	}
 }

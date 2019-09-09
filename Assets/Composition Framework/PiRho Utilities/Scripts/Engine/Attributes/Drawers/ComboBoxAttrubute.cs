@@ -7,7 +7,7 @@ namespace PiRhoSoft.Utilities
 	{
 		public List<string> Options { get; private set; }
 
-		public ComboBoxAttribute(string[] options) : base(FieldPhase, 0)
+		public ComboBoxAttribute(string[] options) : base(ControlPhase, 0)
 		{
 			Options = options.ToList();
 		}

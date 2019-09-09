@@ -1,12 +1,11 @@
-﻿pirho-euler
+﻿.pirho-euler
 {
 	flex-direction: row;
 	flex-grow: 1;
 }
 
-pirho-euler > Vector3Field
+.pirho-euler__vector-3
 {
 	flex-grow: 1;
-	margin-left: 0;
-	margin-right: 0;
+	margin: 0px;
 }
