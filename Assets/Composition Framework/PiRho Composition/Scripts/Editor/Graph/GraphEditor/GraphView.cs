@@ -458,13 +458,13 @@ namespace PiRhoSoft.Composition.Editor
 		public const string ToolbarButtonLockUssClassName = ToolbarButtonUssClassName + "--lock";
 		public const string ToolbarButtonActiveUssClassName = ToolbarButtonUssClassName + "--active";
 		public const string ToolbarButtonFirstUssClassName = ToolbarButtonUssClassName + "--first";
+		public const string ToolbarButtonBreakpointUssClassName = ToolbarButtonUssClassName + "__breakpoint";
 		public const string BreakpointsDisabledUssClassName = UssClassName + "--breakpoints-disabled";
 
 		private static readonly Icon _playIcon = Icon.BuiltIn("Animation.Play");
 		private static readonly Icon _pauseIcon = Icon.BuiltIn("PauseButton");
 		private static readonly Icon _stopIcon = Icon.BuiltIn("PreMatQuad");
 		private static readonly Icon _stepIcon = Icon.BuiltIn("Animation.NextKey");
-		private static readonly Icon _breakIcon = Icon.BuiltIn("Animation.Record");
 		private static readonly Icon _logIcon = Icon.BuiltIn("UnityEditor.ConsoleWindow");
 
 		private static BoolPreference _breakpointsEnabled = new BoolPreference("PiRhoSoft.Composition.Graph.BreakpointsEnabled", true);
@@ -474,7 +474,7 @@ namespace PiRhoSoft.Composition.Editor
 		private readonly GraphProvider _graphProvider;
 
 		private TextElement _graphButton;
-		private Image _breakButton;
+		private VisualElement _breakButton;
 		private Image _loggingButton;
 		private Image _lockButton;
 		private Image _playButton;
@@ -528,7 +528,6 @@ namespace PiRhoSoft.Composition.Editor
 			_playButton = new Image { image = _playIcon.Texture, tooltip = "Resume execution of the graph" };
 			_playButton.AddToClassList(ToolbarButtonUssClassName);
 			_playButton.AddToClassList(ToolbarButtonSmallUssClassName);
-			_playButton.AddToClassList(ToolbarButtonFirstUssClassName);
 			_playButton.AddManipulator(new Clickable(() => CurrentGraph.DebugPlay()));
 
 			_pauseButton = new Image { image = _pauseIcon.Texture, tooltip = "Pause the execution of the graph" };
@@ -546,11 +545,16 @@ namespace PiRhoSoft.Composition.Editor
 			_stopButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_stopButton.AddManipulator(new Clickable(() => CurrentGraph.DebugStop()));
 
-			_breakButton = new Image { image = _breakIcon.Texture, tooltip = "Enable/Disable node breakpoints for all graphs" };
+			_breakButton = new VisualElement { tooltip = "Enable/Disable node breakpoints for all graphs" };
 			_breakButton.AddToClassList(ToolbarButtonUssClassName);
 			_breakButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_breakButton.AddToClassList(ToolbarButtonFirstUssClassName);
 			_breakButton.AddManipulator(new Clickable(ToggleBreakpointsEnabled));
+
+			var breakButton = new VisualElement();
+			breakButton.AddToClassList(ToolbarButtonBreakpointUssClassName);
+
+			_breakButton.Add(breakButton);
 
 			_loggingButton = new Image { image = _logIcon.Texture, tooltip = "Enable/Disable logging of graph execution for all graphs" };
 			_loggingButton.AddToClassList(ToolbarButtonUssClassName);
@@ -616,6 +620,7 @@ namespace PiRhoSoft.Composition.Editor
 			menu.menu.AppendAction("Show All _END", evt => GraphView.ShowAll());
 			menu.menu.AppendAction("Go To Start _HOME", evt => GraphView.GoToStart());
 			menu.menu.AppendAction("Zoom To Selection _TAB", evt => GraphView.GoToSelection());
+			menu.style.marginLeft = -1;
 
 			return menu;
 		}

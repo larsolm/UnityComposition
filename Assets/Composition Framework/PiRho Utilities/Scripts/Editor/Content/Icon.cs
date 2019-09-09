@@ -15,14 +15,14 @@ namespace PiRhoSoft.Utilities.Editor
 		public static readonly Icon Refresh = BuiltIn("d_preAudioLoopOff");
 		public static readonly Icon Load = BuiltIn("SceneLoadIn");
 		public static readonly Icon Unload = BuiltIn("SceneLoadOut");
-		public static readonly Icon Close = BuiltIn("LookDevClose");
+		public static readonly Icon Close = BuiltIn("winbtn_win_close");
 		public static readonly Icon LeftArrow = BuiltIn("tab_prev");
 		public static readonly Icon RightArrow = BuiltIn("tab_next");
 		public static readonly Icon Info = BuiltIn("console.infoicon");
 		public static readonly Icon Warning = BuiltIn("console.warnicon");
 		public static readonly Icon Error = BuiltIn("console.erroricon");
 		public static readonly Icon Settings = BuiltIn("_Popup");
-		public static readonly Icon View = BuiltIn("UnityEditor.LookDevView");
+		public static readonly Icon View = BuiltIn("ViewToolOrbit");
 		public static readonly Icon SearchBarLeft = BuiltIn("toolbarsearch");
 		public static readonly Icon SearchBarRightCancel = BuiltIn("toolbarsearchCancelButton");
 		public static readonly Icon SearchBarRight = BuiltIn("toolbarsearchCancelButtonOff");

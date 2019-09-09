@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Load Variables
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 188.75006, y: 21.300114}
+  GraphPosition: {x: 188.75006, y: 23.300114}
   IsBreakpoint: 0
   Next: {fileID: 8426389869785260599}
   Filename:
@@ -98,12 +98,20 @@ MonoBehaviour:
   GraphPosition: {x: 120.000015, y: -102.999954}
   IsBreakpoint: 0
   Next: {fileID: -2113145965619732750}
-  Source: 0
+  Source: 1
   Scene:
     Path: 
   SceneVariable:
-    _variable: 
-    _tokens: []
+    _variable: One.One Fish.Two[0]
+    _tokens:
+    - Type: 0
+      Text: One
+    - Type: 0
+      Text: One Fish
+    - Type: 0
+      Text: Two
+    - Type: 1
+      Text: 0
   SceneName: 
   SceneIndex: 0
   WaitForCompletion: 1

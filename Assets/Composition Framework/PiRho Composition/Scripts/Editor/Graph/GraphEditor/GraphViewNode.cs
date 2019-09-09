@@ -15,8 +15,6 @@ namespace PiRhoSoft.Composition.Editor
 		public const string NodeDeleteButtonUssClassName = UssClassName + "__delete-button";
 		public const string NodeEditableLabelUssClassName = UssClassName + "__editable-label";
 
-		private static readonly Icon _deleteIcon = Icon.BuiltIn("d_LookDevClose");
-
 		private static readonly CustomStyleProperty<Color> _nodeColorProperty = new CustomStyleProperty<Color>("--node-color");
 
 		public GraphNode.NodeData Data { get; private set; }
@@ -93,9 +91,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		protected void CreateDeleteButton()
 		{
-			var deleteButton = new Image { image = _deleteIcon.Texture, tooltip = "Delete this node" };
+			var deleteButton = new IconButton(Icon.Close.Texture, "Delete this node", DeleteNode);
 			deleteButton.AddToClassList(NodeDeleteButtonUssClassName);
-			deleteButton.AddManipulator(new Clickable(DeleteNode));
 			titleButtonContainer.Add(deleteButton);
 		}
 

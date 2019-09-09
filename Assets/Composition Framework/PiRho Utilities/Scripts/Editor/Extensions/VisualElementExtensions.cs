@@ -60,6 +60,7 @@ namespace PiRhoSoft.Utilities.Editor
 		#region Style
 
 		private const string _missingStylesheetError = "(PUEHMS) failed to load stylesheet: the asset '{0}' could not be found";
+		private const string _missingUxmlError = "(PUEHMU) failed to load uxml: the asset '{0}' could not be found";
 
 		public static void AddStyleSheet(this VisualElement element, string editorPath, string path)
 		{
@@ -70,6 +71,17 @@ namespace PiRhoSoft.Utilities.Editor
 				element.styleSheets.Add(stylesheet);
 			else
 				Debug.LogErrorFormat(_missingStylesheetError, fullPath);
+		}
+
+		public static void AddUxml(this VisualElement element, string editorPath, string path)
+		{
+			var fullPath = Path.Combine(editorPath, path);
+			var uxml = AssetDatabase.LoadAssetAtPath<VisualTreeAsset>(fullPath);
+
+			if (uxml != null)
+				uxml.CloneTree(element);
+			else
+				Debug.LogErrorFormat(_missingUxmlError, fullPath);
 		}
 
 		public static void SetDisplayed(this VisualElement element, bool displayed)

@@ -1116,7 +1116,7 @@ MonoBehaviour:
   IntPopup: 0
   FloatPopup: 0
   StringPopup: 
-  ComboBox: Red Fish
+  ComboBox: One Fish
   Euler: {x: 0, y: 0, z: 0, w: 0}
   Buttons: 1
   Flags: 0
