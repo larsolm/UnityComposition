@@ -54,8 +54,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static void DefaultEnumBind(INotifyValueChanged<Enum> field, SerializedProperty property)
 		{
-			// 2019.2 and earlier don't support flags in enum bindings (since they use enumValueIndex) and 2019.3 only
-			// supports flags on EnumFlagsField specifically
+			// 2019.3 only supports flags on EnumFlagsField specifically
 
 			var type = field.value.GetType();
 			var wrapper = Activator.CreateInstance(_serializedObjectUpdateWrapperType, property.serializedObject);

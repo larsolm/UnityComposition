@@ -44,7 +44,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 	public class ChangeTriggerControl<T> : PropertyWatcher<T>
 	{
-		private Action<T, T> _onChanged;
+		private readonly Action<T, T> _onChanged;
 
 		public ChangeTriggerControl(SerializedProperty property, Action<T, T> onChanged) : base(null)
 		{
