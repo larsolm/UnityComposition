@@ -81,9 +81,8 @@ namespace PiRhoSoft.Utilities.Editor
 					}
 					case SerializedPropertyType.Enum:
 					{
-						//UpdateVisibility(element, sibling.intValue, conditionalAttribute.IntValue, conditionalAttribute.Test);
-						//return new ChangeTriggerControl<Enum>(sibling, (oldValue, newValue) => UpdateVisibility(element, sibling.intValue, conditionalAttribute.IntValue, conditionalAttribute.Test));
-						break; // TODO: doesn't work without knowing the enum type
+						UpdateVisibility(element, sibling.intValue, conditionalAttribute.IntValue, conditionalAttribute.Test);
+						return new ChangeTriggerControl<Enum>(sibling, (oldValue, newValue) => UpdateVisibility(element, sibling.intValue, conditionalAttribute.IntValue, conditionalAttribute.Test));
 					}
 				}
 

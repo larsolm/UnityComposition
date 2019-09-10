@@ -49,7 +49,9 @@ namespace PiRhoSoft.Utilities.Editor
 
 			field.userData = index;
 			field.Bind(_property.serializedObject);
-			BaseFieldExtensions.SetLabel(field, null);
+
+			if (field.GetType().InheritsGeneric(typeof(BaseField<>)))
+				BaseFieldExtensions.SetLabel(field, null);
 
 			return field;
 		}

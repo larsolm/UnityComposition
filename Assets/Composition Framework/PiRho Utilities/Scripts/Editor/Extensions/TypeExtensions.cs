@@ -49,6 +49,21 @@ namespace PiRhoSoft.Utilities.Editor
 			return baseType.IsAssignableFrom(type) && type.GetConstructor(Type.EmptyTypes) != null;
 		}
 
+		public static bool InheritsGeneric(this Type type, Type genericType)
+		{
+			var baseType = type.BaseType;
+
+			while (baseType != null)
+			{
+				if (baseType.IsGenericType && baseType.GetGenericTypeDefinition() == genericType)
+					return true;
+
+				baseType = baseType.BaseType;
+			}
+
+			return false;
+		}
+
 		#endregion
 
 		#region Serialization
