@@ -63,13 +63,15 @@ namespace PiRhoSoft.Composition.Editor
 			this.Bind(serializedObject);
 		}
 
-		protected void CreateOutputs(List<GraphViewOutputPort> outputs, GraphViewConnector nodeConnector)
+		protected void CreateOutputs(List<GraphViewOutputPort> outputs, GraphViewConnector nodeConnector, SerializedProperty renameableProperty)
 		{
 			Data.RefreshConnections();
 
-			foreach (var connection in Data.Connections)
+			for (var i = 0; i < Data.Connections.Count; i++)
 			{
-				var output = new GraphViewOutputPort(this, connection, nodeConnector) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" };
+				var connection = Data.Connections[i];
+				var nameProperty = renameableProperty?.FindPropertyRelative(i.ToString());
+				var output = new GraphViewOutputPort(this, connection, nodeConnector, nameProperty) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" };
 				outputContainer.Add(output);
 				outputs.Add(output);
 			}

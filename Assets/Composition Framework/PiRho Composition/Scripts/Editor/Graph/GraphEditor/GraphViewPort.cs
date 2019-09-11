@@ -1,4 +1,5 @@
-﻿using UnityEditor.Experimental.GraphView;
+﻿using UnityEditor;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -16,8 +17,28 @@ namespace PiRhoSoft.Composition.Editor
 			AddToClassList(UssClassName);
 			Node = node;
 			m_EdgeConnector = new EdgeConnector<Edge>(edgeListener);
-			//m_ConnectorText.bindingPath = "";
 			this.AddManipulator(m_EdgeConnector);
+		}
+
+		protected void ShowEditableText(TextField edit)
+		{
+			edit.style.visibility = Visibility.Visible;
+			edit.Focus();
+		}
+
+		protected void HideEditableText(TextField edit)
+		{
+			if (edit != null) // this needs to be here for when it is called after node is destroyed
+				edit.style.visibility = Visibility.Hidden;
+		}
+
+		private void OnEditEvent(MouseDownEvent evt, TextField edit)
+		{
+			if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
+			{
+				ShowEditableText(edit);
+				evt.PreventDefault();
+			}
 		}
 	}
 
@@ -47,18 +68,21 @@ namespace PiRhoSoft.Composition.Editor
 
 		public GraphNode.ConnectionData Connection { get; private set; }
 
-		public GraphViewOutputPort(GraphViewNode node, GraphNode.ConnectionData connection, GraphViewConnector edgeListener) : base(node, edgeListener, false)
+		public GraphViewOutputPort(GraphViewNode node, GraphNode.ConnectionData connection, GraphViewConnector edgeListener, SerializedProperty nameProperty) : base(node, edgeListener, false)
 		{
 			AddToClassList(UssOutputClassName);
 
 			Connection = connection;
 
-			m_ConnectorText.style.flexGrow = 1;
-			m_ConnectorText.style.unityTextAlign = TextAnchor.MiddleLeft;
-
 			style.flexDirection = FlexDirection.RowReverse;
 			style.justifyContent = Justify.SpaceBetween;
 			style.alignSelf = Align.Stretch;
+
+			m_ConnectorText.style.flexGrow = 1;
+			m_ConnectorText.style.unityTextAlign = TextAnchor.MiddleLeft;
+
+			if (nameProperty != null)
+				m_ConnectorText.bindingPath = nameProperty.propertyPath;
 		}
 
 		public override void OnStartEdgeDragging()
@@ -78,5 +102,42 @@ namespace PiRhoSoft.Composition.Editor
 			var inCallstack = Connection.From.Graph.IsInCallStack(Connection);
 			EnableInClassList(InCallstackUssClassName, inCallstack);
 		}
+
+
+		//protected TextField CreateEditableLabel(TextElement container, string bindingPath, bool multiline = false)
+		//{
+		//	var edit = new TextField { bindingPath = bindingPath, multiline = multiline };
+		//	edit.AddToClassList(NodeEditableLabelUssClassName);
+		//	edit.Q(TextField.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
+		//
+		//	container.bindingPath = bindingPath;
+		//	container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit));
+		//	container.Add(edit);
+		//
+		//	HideEditableText(edit);
+		//
+		//	return edit;
+		//}
+		//
+		//protected void ShowEditableText(TextField edit)
+		//{
+		//	edit.style.visibility = Visibility.Visible;
+		//	edit.Focus();
+		//}
+		//
+		//protected void HideEditableText(TextField edit)
+		//{
+		//	if (edit != null) // this needs to be here for when it is called after node is destroyed
+		//		edit.style.visibility = Visibility.Hidden;
+		//}
+		//
+		//private void OnEditEvent(MouseDownEvent evt, TextField edit)
+		//{
+		//	if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
+		//	{
+		//		ShowEditableText(edit);
+		//		evt.PreventDefault();
+		//	}
+		//}
 	}
 }

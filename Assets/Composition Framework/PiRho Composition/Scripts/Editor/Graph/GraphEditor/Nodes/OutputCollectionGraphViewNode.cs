@@ -26,26 +26,36 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				var property = serializedObject.FindProperty($"{_attribute.PropertyName}._keys.Array.size");
 				if (property != null)
-					Add(ChangeTriggerControl.Create(property, RefreshOutputs));
+				{
+					Add(ChangeTriggerControl.Create(property, () => RefreshOutputs(property)));
+					RefreshOutputs(property);
+				}
 				else
+				{
 					Debug.LogWarningFormat(Data.Node, _invalidListWarning, _attribute.PropertyName);
+				}
 			}
 			else
 			{
 				var property = serializedObject.FindProperty($"{_attribute.PropertyName}._items.Array.size");
 				if (property != null)
-					Add(ChangeTriggerControl.Create(property, RefreshOutputs));
+				{
+					Add(ChangeTriggerControl.Create(property, () => RefreshOutputs(property)));
+					RefreshOutputs(property);
+				}
 				else
+				{
 					Debug.LogWarningFormat(Data.Node, _invalidListWarning, _attribute.PropertyName);
+				}
 			}
 
 			base.BindNode(serializedObject);
 		}
 
-		private void RefreshOutputs()
+		private void RefreshOutputs(SerializedProperty property)
 		{
 			ClearOutputs();
-			CreateOutputs(Outputs, _nodeConnector);
+			CreateOutputs(Outputs, _nodeConnector, _attribute.Renameable ? property : null);
 		}
 
 		private void ClearOutputs()

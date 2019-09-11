@@ -40,7 +40,7 @@ namespace PiRhoSoft.Composition.Editor
 			_nodeConnector = nodeConnector;
 
 			Outputs = new List<GraphViewOutputPort>(Data.Connections.Count);
-			CreateOutputs(Outputs, nodeConnector);
+			CreateOutputs(Outputs, nodeConnector, null);
 		}
 
 		private void CreateInput(GraphViewConnector nodeConnector)

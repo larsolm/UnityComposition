@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition.Editor
 			title = "Start";
 
 			Outputs = new List<GraphViewOutputPort>(Data.Connections.Count);
-			CreateOutputs(Outputs, nodeConnector);
+			CreateOutputs(Outputs, nodeConnector, null);
 			RefreshPorts();
 		}
 
