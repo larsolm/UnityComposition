@@ -23,6 +23,28 @@ namespace PiRhoSoft.Composition
 		}
 	}
 
+	public abstract class OutputCollectionNodeAttribute : Attribute
+	{
+		public string PropertyName { get; private set; }
+		public bool Renameable { get; private set; }
+
+		protected OutputCollectionNodeAttribute(string propertyName, bool renamable)
+		{
+			PropertyName = propertyName;
+			Renameable = renamable;
+		}
+	}
+
+	public class OutputListNodeAttribute : OutputCollectionNodeAttribute
+	{
+		public OutputListNodeAttribute(string propertyName) : base(propertyName, false)	{ }
+	}
+
+	public class OutputDictionaryNodeAttribute : OutputCollectionNodeAttribute
+	{
+		public OutputDictionaryNodeAttribute(string propertyName) : base(propertyName, true) { }
+	}
+
 	public abstract class GraphNode : ScriptableObject, IAutocompleteSource
 	{
 		public class GraphNodeAutocompleteSource : AutocompleteSource

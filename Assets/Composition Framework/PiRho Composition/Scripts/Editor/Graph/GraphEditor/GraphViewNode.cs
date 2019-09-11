@@ -1,14 +1,31 @@
 ﻿using PiRhoSoft.Utilities.Editor;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEditor.Experimental.GraphView;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
+	public interface IInputNode
+	{
+		GraphNode.NodeData Data { get; }
+		GraphViewInputPort Input { get; }
+
+		void UpdateColors(bool active);
+	}
+
+	public interface IOutputNode
+	{
+		GraphNode.NodeData Data { get; }
+		List<GraphViewOutputPort> Outputs { get; }
+
+		void UpdateColors(bool active);
+	}
+
 	public class GraphViewNode : Node
 	{
 		public const string UssClassName = GraphViewEditor.UssClassName + "__node";
@@ -18,24 +35,21 @@ namespace PiRhoSoft.Composition.Editor
 		private static readonly CustomStyleProperty<Color> _nodeColorProperty = new CustomStyleProperty<Color>("--node-color");
 
 		public GraphNode.NodeData Data { get; private set; }
-		public bool IsStartNode { get; private set; }
 
 		public override bool IsAscendable() => true;
 		public override bool IsDroppable() => false;
-		public override bool IsMovable() => !IsStartNode;
+		public override bool IsMovable() => true;
 		public override bool IsResizable() => false;
 		public override bool IsSelectable() => true;
 
 		protected override sealed void ToggleCollapse() { }
 
-		public GraphViewNode(GraphNode node, bool isStart)
+		public GraphViewNode(GraphNode node)
 		{
 			AddToClassList(UssClassName);
 
-			IsStartNode = isStart;
 			Data = new GraphNode.NodeData(node);
 
-			title = node.name;
 			titleContainer.style.backgroundColor = node.NodeColor;
 			titleContainer.style.unityFontStyleAndWeight = FontStyle.Bold;
 
@@ -44,22 +58,35 @@ namespace PiRhoSoft.Composition.Editor
 			SetPosition(new Rect(node.GraphPosition, Vector2.zero));
 		}
 
-		public override void OnSelected()
+		public virtual void BindNode(SerializedObject serializedObject)
 		{
-			base.OnSelected();
-
-			Selection.activeObject = IsStartNode ? (Object)Data.Node.Graph : Data.Node;
+			this.Bind(serializedObject);
 		}
 
-		protected TextField CreateEditableLabel(TextElement container, Func<string> getValue, Action<string> setValue, bool multiline = false)
+		protected void CreateOutputs(List<GraphViewOutputPort> outputs, GraphViewConnector nodeConnector)
 		{
-			var edit = new TextField() { value = getValue() };
-			edit.multiline = multiline;
+			Data.RefreshConnections();
+
+			foreach (var connection in Data.Connections)
+			{
+				var output = new GraphViewOutputPort(this, connection, nodeConnector) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" };
+				outputContainer.Add(output);
+				outputs.Add(output);
+			}
+
+			expanded = Data.Connections.Count > 0;
+
+			RefreshPorts();
+		}
+
+		protected TextField CreateEditableLabel(TextElement container, string bindingPath, bool multiline = false)
+		{
+			var edit = new TextField { bindingPath = bindingPath, multiline = multiline };
 			edit.AddToClassList(NodeEditableLabelUssClassName);
-			edit.RegisterValueChangedCallback(evt => setValue(evt.newValue));
 			edit.Q(TextField.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
 
-			container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit, getValue()));
+			container.bindingPath = bindingPath;
+			container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit));
 			container.Add(edit);
 
 			HideEditableText(edit);
@@ -67,9 +94,8 @@ namespace PiRhoSoft.Composition.Editor
 			return edit;
 		}
 
-		protected void ShowEditableText(TextField edit, string value)
+		protected void ShowEditableText(TextField edit)
 		{
-			edit.SetValueWithoutNotify(value);
 			edit.style.visibility = Visibility.Visible;
 			edit.Focus();
 		}
@@ -80,11 +106,11 @@ namespace PiRhoSoft.Composition.Editor
 				edit.style.visibility = Visibility.Hidden;
 		}
 
-		private void OnEditEvent(MouseDownEvent evt, TextField edit, string value)
+		private void OnEditEvent(MouseDownEvent evt, TextField edit)
 		{
 			if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
 			{
-				ShowEditableText(edit, value);
+				ShowEditableText(edit);
 				evt.PreventDefault();
 			}
 		}
@@ -102,9 +128,9 @@ namespace PiRhoSoft.Composition.Editor
 			graph.RemoveNode(this, Enumerable.Empty<GraphViewNode>());
 		}
 
-		protected void ViewDocumentation()
+		protected void ViewDocumentation(Type type)
 		{
-			var help = TypeHelper.GetAttribute<HelpURLAttribute>(IsStartNode ? typeof(Graph) : Data.Node.GetType());
+			var help = TypeHelper.GetAttribute<HelpURLAttribute>(type);
 			if (help != null)
 				Application.OpenURL(help.URL);
 		}

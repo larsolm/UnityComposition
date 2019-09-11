@@ -29,6 +29,7 @@
 	align-self: center;
 	flex-grow: 1;
 	flex-direction: row;
+	margin-left: 5px;
 }
 
 .pirho-variable-reference__advanced
@@ -36,6 +37,7 @@
 	display: none;
 	align-self: center;
 	flex-grow: 1;
+	margin-left: 5px;
 }
 
 .pirho-variable-reference--advanced .pirho-variable-reference__simple
@@ -53,7 +55,6 @@
 	flex-grow: 1;
 	flex-direction: row;
 	min-width: 60px;
-	margin-left: 5px;
 }
 
 .pirho-variable-reference__simple__item--empty
@@ -92,5 +93,5 @@
 
 .pirho-variable-reference__advanced__text
 {
-	margin: 0px;
+	margin: 0px 0px 1px 0px;
 }

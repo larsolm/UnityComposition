@@ -38,11 +38,6 @@ namespace PiRhoSoft.Composition
 			UpdateBindings();
 		}
 
-		void LateUpdate()
-		{
-			InputHelper.LateUpdate();
-		}
-
 		#region Graphs
 
 		public void RunGraph(Graph graph, Variable context)

@@ -1,26 +1,29 @@
-﻿using UnityEngine.UIElements;
+﻿using UnityEditor;
+using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
 	public class CommentGraphViewNode : GraphViewNode
 	{
 		public const string CommentUssClassName = UssClassName + "--comment";
+		public const string CommentLabelUssClassName = CommentUssClassName + "__label";
 
 		private readonly TextElement _comment;
 		private readonly TextField _edit;
 
 		private CommentNode _commentNode => Data.Node as CommentNode;
 
-		public CommentGraphViewNode(GraphNode node) : base(node, false)
+		public CommentGraphViewNode(GraphNode node) : base(node)
 		{
 			AddToClassList(CommentUssClassName);
 
-			title = "Comment";
-
 			CreateDeleteButton();
 
-			_comment = new TextElement { text = _commentNode.Comment, tooltip = "Double click to edit this comment" };
-			_edit = CreateEditableLabel(_comment, () => _commentNode.Comment, CommentChanged);
+			title = "Comment";
+
+			_comment = new TextElement { tooltip = "Double click to edit this comment" };
+			_comment.AddToClassList(CommentLabelUssClassName);
+			_edit = CreateEditableLabel(_comment, nameof(_commentNode.Comment), true);
 
 			extensionContainer.Add(_comment);
 			extensionContainer.style.backgroundColor = Data.Node.NodeColor * 0.8f;
@@ -30,14 +33,15 @@ namespace PiRhoSoft.Composition.Editor
 
 		public override void BuildContextualMenu(ContextualMenuPopulateEvent evt)
 		{
-			evt.menu.AppendAction("Edit Comment", action => ShowEditableText(_edit, _commentNode.Comment));
+			evt.menu.AppendAction("Edit Comment", action => ShowEditableText(_edit));
 			evt.menu.AppendSeparator();
 		}
 
-		private void CommentChanged(string comment)
+		public override void OnSelected()
 		{
-			_comment.text = comment;
-			_commentNode.Comment = comment;
+			base.OnSelected();
+
+			Selection.activeObject = Data.Node;
 		}
 
 		public override void OnUnselected()

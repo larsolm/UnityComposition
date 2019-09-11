@@ -82,39 +82,39 @@ namespace PiRhoSoft.Composition
 
 				foreach (var button in Buttons)
 				{
-					switch (button.Type)
-					{
-						case InputNodeButton.ButtonType.Axis:
-						{
-							if (InputHelper.GetWasAxisPressed(button.Name, button.Value))
-							{
-								graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Name));
-								yield break;
-							}
-
-							break;
-						}
-						case InputNodeButton.ButtonType.Button:
-						{
-							if (InputHelper.GetWasButtonPressed(button.Name))
-							{
-								graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Name));
-								yield break;
-							}
-
-							break;
-						}
-						case InputNodeButton.ButtonType.Key:
-						{
-							if (InputHelper.GetWasKeyPressed(button.Key))
-							{
-								graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Key.ToString()));
-								yield break;
-							}
-
-							break;
-						}
-					}
+					//switch (button.Type)
+					//{
+					//	case InputNodeButton.ButtonType.Axis:
+					//	{
+					//		if (InputHelper.GetWasAxisPressed(button.Name, button.Value))
+					//		{
+					//			graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Name));
+					//			yield break;
+					//		}
+					//
+					//		break;
+					//	}
+					//	case InputNodeButton.ButtonType.Button:
+					//	{
+					//		if (InputHelper.GetWasButtonPressed(button.Name))
+					//		{
+					//			graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Name));
+					//			yield break;
+					//		}
+					//
+					//		break;
+					//	}
+					//	case InputNodeButton.ButtonType.Key:
+					//	{
+					//		if (InputHelper.GetWasKeyPressed(button.Key))
+					//		{
+					//			graph.GoTo(button.OnSelected, GetConnectionName(nameof(Buttons), button.Key.ToString()));
+					//			yield break;
+					//		}
+					//
+					//		break;
+					//	}
+					//}
 				}
 			}
 		}

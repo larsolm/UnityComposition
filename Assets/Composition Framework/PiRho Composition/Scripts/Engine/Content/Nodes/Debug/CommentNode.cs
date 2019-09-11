@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The text of the comment")]
 		[TextArea(3, 8)]
-		public string Comment;
+		public string Comment = "Double click to insert comment";
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{

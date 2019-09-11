@@ -16,6 +16,7 @@ namespace PiRhoSoft.Composition.Editor
 			AddToClassList(UssClassName);
 			Node = node;
 			m_EdgeConnector = new EdgeConnector<Edge>(edgeListener);
+			//m_ConnectorText.bindingPath = "";
 			this.AddManipulator(m_EdgeConnector);
 		}
 	}

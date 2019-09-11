@@ -79,8 +79,21 @@
 {
 }
 
+.pirho-graph-view__node--start.node
+{
+}
+
 .pirho-graph-view__node--comment.node
 {
+}
+
+.pirho-graph-view__node--connection.node
+{
+}
+
+.pirho-graph-view__node--comment__label
+{
+	margin: 5px;
 }
 
 .pirho-graph-view__node__callstack-border
@@ -115,11 +128,13 @@
 	align-self: center;
 	visibility: hidden;
 	margin-left: 8px;
+	--unity-image-tint-color: #AAAAAA;
 }
 
-.pirho-graph-view__node__rename-button:hover
+.pirho-graph-view__node:hover .pirho-graph-view__node__rename-button:hover
 {
-	background-color: #2B2B2B;
+	background-color: transparent;
+	--unity-image-tint-color: #FFFFFF;
 }
 
 .pirho-graph-view__node:hover .pirho-graph-view__node__rename-button
@@ -134,6 +149,8 @@
 	align-self: center;
 	visibility: hidden;
 	margin: 0 8px;
+	background-color: #AAAAAA;
+	border-radius: 10px;
 	--unity-image-tint-color: #999999;
 }
 

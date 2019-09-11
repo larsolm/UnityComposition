@@ -34,9 +34,6 @@ namespace PiRhoSoft.MonsterRpg
 
 		private void UpdateInput()
 		{
-			_horizontal = InputHelper.GetAxis(HorizontalAxis);
-			_vertical = InputHelper.GetAxis(VerticalAxis);
-			_interact = _interact || InputHelper.GetWasButtonPressed(InteractButton); // _interact should stay true until the first FixedUpdate after the button is pressed
 		}
 
 		private void ClearInput()

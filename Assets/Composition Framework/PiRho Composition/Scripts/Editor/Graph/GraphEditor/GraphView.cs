@@ -93,7 +93,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		#region Overrides
 
-		protected override bool canCutSelection => selection.OfType<GraphViewNode>().Where(node => !node.IsStartNode).Any();
+		protected override bool canCutSelection => selection.OfType<GraphViewNode>().Where(node => !(node is StartGraphViewNode)).Any();
 		protected override bool canCopySelection => canCutSelection;
 		protected override bool canPaste => _copiedNodes.Count > 0;
 		protected override bool canDuplicateSelection => canCopySelection;
@@ -192,21 +192,42 @@ namespace PiRhoSoft.Composition.Editor
 			AddNode(node);
 		}
 
+		private GraphViewNode CreateNodeView(GraphNode node)
+		{
+			if (node.GetType().TryGetAttribute<OutputCollectionNodeAttribute>(out var outputCollection))
+			{
+				return new OutputCollectionGraphViewNode(node, _nodeConnector, outputCollection);
+			}
+			else
+			{
+				switch (node)
+				{
+					case StartNode start: return new StartGraphViewNode(node, _nodeConnector);
+					case CommentNode comment: return new CommentGraphViewNode(node);
+					default: return new DefaultGraphViewNode(node, _nodeConnector);
+				}
+			}
+		}
+
 		private GraphViewNode AddNode(GraphNode node)
 		{
-			var nodeElement = node is CommentNode ? (GraphViewNode)new CommentGraphViewNode(node) : new DefaultGraphViewNode(node, _nodeConnector, node is StartNode);
+			var nodeElement = CreateNodeView(node);
+			nodeElement.BindNode(new SerializedObject(node));
 			AddElement(nodeElement);
 			return nodeElement;
 		}
 
 		public void RemoveNode(GraphViewNode node, IEnumerable<GraphViewNode> removedNodes)
 		{
-			if (node is IInputOutputNode ioNode)
+			if (node is IInputNode inputNode)
 			{
-				foreach (var edge in ioNode.Input.connections.ToList()) // must use ToList() because internal enumerable is modified
+				foreach (var edge in inputNode.Input.connections.ToList()) // must use ToList() because internal enumerable is modified
 					RemoveEdge(edge, edge.output is GraphViewOutputPort output && !removedNodes.Contains(output.Node));
+			}
 
-				foreach (var output in ioNode.Outputs)
+			if (node is IOutputNode outputNode)
+			{
+				foreach (var output in outputNode.Outputs)
 				{
 					foreach (var edge in output.connections.ToList()) // must use ToList() because internal enumerable is modified
 						RemoveEdge(edge, false);
@@ -275,8 +296,10 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			nodes.ForEach(node =>
 			{
-				if (node is IInputOutputNode ioNode)
-					ioNode.UpdateColors(ioNode.Data.Node == graphNode);
+				if (node is IOutputNode outputNode)
+					outputNode.UpdateColors(outputNode.Data.Node == graphNode);
+				else if (node is IInputNode inputNode)
+					inputNode.UpdateColors(inputNode.Data.Node == graphNode);
 			});
 		}
 
@@ -325,7 +348,7 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				foreach (var element in graphViewChange.movedElements)
 				{
-					if (element is GraphViewNode node && !node.IsStartNode)
+					if (element is GraphViewNode node && node.IsMovable())
 						GraphEditor.SetNodePosition(node.Data.Node, node.Data.Node.GraphPosition + graphViewChange.moveDelta);
 				}
 
@@ -389,7 +412,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			_copiedNodes.Clear();
 
-			var sourceNodes = selection.OfType<GraphViewNode>().Where(node => !node.IsStartNode).Select(node => node.Data.Node).ToList();
+			var sourceNodes = selection.OfType<GraphViewNode>().Where(node => !(node is StartGraphViewNode)).Select(node => node.Data.Node).ToList();
 			var copiedData = new List<GraphNode.NodeData>();
 
 			foreach (var node in sourceNodes)
@@ -422,7 +445,7 @@ namespace PiRhoSoft.Composition.Editor
 				AddToSelection(node);
 			}
 
-			foreach (var node in selection.OfType<IInputOutputNode>())
+			foreach (var node in selection.OfType<IOutputNode>())
 			{
 				foreach (var output in node.Outputs)
 					SetupConnection(output);
