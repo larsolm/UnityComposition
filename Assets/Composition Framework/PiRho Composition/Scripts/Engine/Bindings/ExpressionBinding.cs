@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition
 		private const string _failedExpressionWarning = "(CEXBFE) Unable to bind text for binding '{0}': the expression '{1}' failed with error '{2}'";
 		private const string _failedCommandWarning = "(CEXBFC) Unable to bind text for binding '{0}': the Command '{1}' failed with error '{2}'";
 
-		public BindingFormatter Formatting;
+		//public BindingFormatter Formatting;
 
 		[Tooltip("The expression to evaluate and display as text in this object")]
 		public Expression Expression;
@@ -46,11 +46,11 @@ namespace PiRhoSoft.Composition
 					{
 						enabled = true;
 
-						if (result.TryGetInt(out var intValue))
-							text = Formatting.GetFormattedString(intValue);
-						if (result.TryGetFloat(out var floatValue))
-							text = Formatting.GetFormattedString(floatValue);
-						else
+						//if (result.TryGetInt(out var intValue))
+						//	text = Formatting.GetFormattedString(intValue);
+						//if (result.TryGetFloat(out var floatValue))
+						//	text = Formatting.GetFormattedString(floatValue);
+						//else
 							text = result.ToString();
 					}
 				}
