@@ -103,6 +103,7 @@ namespace PiRhoSoft.Composition.Editor
 			CreateString();
 			CreateList();
 			CreateDictionary();
+			CreateAsset();
 			CreateObject();
 		}
 
@@ -129,6 +130,7 @@ namespace PiRhoSoft.Composition.Editor
 				case VariableType.String: RefreshString(); break;
 				case VariableType.List: RefreshList(); break;
 				case VariableType.Dictionary: RefreshDictionary();  break;
+				case VariableType.Asset: RefreshAsset(); break;
 				case VariableType.Object: RefreshObject(); break;
 			}
 
@@ -151,6 +153,7 @@ namespace PiRhoSoft.Composition.Editor
 			_stringContainer.SetDisplayed(Value.Type == VariableType.String);
 			_listControl.SetDisplayed(Value.Type == VariableType.List);
 			_dictionaryContainer.SetDisplayed(Value.Type == VariableType.Dictionary);
+			// TODO for Asset
 			_objectContainer.SetDisplayed(Value.Type == VariableType.Object);
 		}
 
@@ -558,6 +561,16 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void RefreshDictionary()
 		{
+		}
+
+		private void CreateAsset()
+		{
+			// TODO
+		}
+
+		private void RefreshAsset()
+		{
+			// TODO
 		}
 
 		private void CreateObject()

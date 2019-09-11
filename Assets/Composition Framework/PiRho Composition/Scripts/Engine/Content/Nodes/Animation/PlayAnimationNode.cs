@@ -30,9 +30,9 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject<AnimationPlayer>(variables, AnimationPlayer, out var player))
+			if (variables.ResolveObject<AnimationPlayer>(this, AnimationPlayer, out var player))
 			{
-				if (ResolveObject(variables, Animation, out var animation))
+				if (variables.ResolveObject(this, Animation, out var animation))
 				{
 					if (WaitForCompletion)
 						yield return player.PlayAnimationAndWait(animation);

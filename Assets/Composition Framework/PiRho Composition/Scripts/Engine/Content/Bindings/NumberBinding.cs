@@ -17,7 +17,7 @@ namespace PiRhoSoft.Composition
 
 		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
-			if (Resolve(variables, Variable, out Variable value))
+			if (variables.Resolve(this, Variable, out Variable value))
 			{
 				var equal = VariableHandler.IsEqual(value, _previousValue);
 

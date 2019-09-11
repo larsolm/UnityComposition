@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
@@ -156,6 +157,12 @@ namespace PiRhoSoft.Composition
 	public class DictionaryVariableSource : VariableSource<VariableDictionary>
 	{
 		public DictionaryVariableSource() => Value = new VariableDictionary();
+	}
+
+	[Serializable]
+	public class AssetVariableSource : VariableSource<AssetReference>
+	{
+		public AssetVariableSource() => Value = new AssetReference();
 	}
 
 	[Serializable]

@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, TimeScale, out var time))
+			if (variables.Resolve(this, TimeScale, out var time))
 				Time.timeScale = time;
 
 			graph.GoTo(Next, nameof(Next));

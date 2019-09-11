@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveInterface(variables, Object, out IResettableVariables reset))
+			if (variables.ResolveInterface(this, Object, out IResettableVariables reset))
 				reset.ResetTag(Tag);
 
 			graph.GoTo(Next, nameof(Next));

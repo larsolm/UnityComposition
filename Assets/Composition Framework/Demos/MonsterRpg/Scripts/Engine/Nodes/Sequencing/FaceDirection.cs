@@ -23,7 +23,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Mover, out Mover mover))
+			if (variables.ResolveObject(this, Mover, out Mover mover))
 				mover.FaceDirection(Direction);
 			
 			graph.GoTo(Next, nameof(Next));

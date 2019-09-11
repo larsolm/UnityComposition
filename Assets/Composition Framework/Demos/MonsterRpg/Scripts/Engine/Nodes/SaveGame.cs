@@ -21,7 +21,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, Tag, out var tag))
+			if (variables.Resolve(this, Tag, out var tag))
 			{
 				var data = new SaveData { Game = new GameSaveData(), World = new WorldSaveData(), Player = new PlayerSaveData() };
 				data.Game.PlayerSpawn.Direction = Player.Instance.Mover.MovementDirection;

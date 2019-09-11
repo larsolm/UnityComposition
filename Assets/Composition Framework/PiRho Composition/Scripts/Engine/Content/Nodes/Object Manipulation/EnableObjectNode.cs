@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Target, out Object target))
+			if (variables.ResolveObject(this, Target, out Object target))
 			{
 				if (target is GameObject gameObject)
 					gameObject.SetActive(true);

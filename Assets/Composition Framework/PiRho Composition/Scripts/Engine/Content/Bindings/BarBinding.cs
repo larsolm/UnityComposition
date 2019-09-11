@@ -44,8 +44,8 @@ namespace PiRhoSoft.Composition
 
 		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
-			var hasAmount = Resolve(variables, AmountVariable, out float amount);
-			var hasTotal = Resolve(variables, TotalVariable, out float total);
+			var hasAmount = variables.Resolve(this, AmountVariable, out float amount);
+			var hasTotal = variables.Resolve(this, TotalVariable, out float total);
 
 			_image.enabled = hasAmount && hasTotal;
 

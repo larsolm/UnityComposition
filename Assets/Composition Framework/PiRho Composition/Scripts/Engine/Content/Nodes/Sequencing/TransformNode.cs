@@ -97,7 +97,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject<Transform>(variables, Transform, out var transform))
+			if (variables.ResolveObject<Transform>(this, Transform, out var transform))
 				yield return Move(transform, variables);
 
 			graph.GoTo(Next, nameof(Next));
@@ -108,9 +108,9 @@ namespace PiRhoSoft.Composition
 			var body2d = transform.GetComponent<Rigidbody2D>();
 			var body3d = transform.GetComponent<Rigidbody>();
 
-			Resolve(variables, TargetPosition, out var targetPosition);
-			Resolve(variables, TargetRotation, out var targetAngles);
-			Resolve(variables, TargetScale, out var targetScale);
+			variables.Resolve(this, TargetPosition, out var targetPosition);
+			variables.Resolve(this, TargetRotation, out var targetAngles);
+			variables.Resolve(this, TargetScale, out var targetScale);
 
 			if (UseRelativePosition)
 				targetPosition += transform.position;
@@ -133,7 +133,7 @@ namespace PiRhoSoft.Composition
 
 				if (AnimationMethod == AnimationType.Duration)
 				{
-					Resolve(variables, Duration, out var duration);
+					variables.Resolve(this, Duration, out var duration);
 
 					var step = duration > 0.0f ? Time.deltaTime / duration : 0.0f;
 					var moveDistance = (targetPosition - transform.position).magnitude;
@@ -146,9 +146,9 @@ namespace PiRhoSoft.Composition
 				}
 				else if (AnimationMethod == AnimationType.Speed)
 				{
-					Resolve(variables, MoveSpeed, out moveSpeed);
-					Resolve(variables, RotationSpeed, out rotationSpeed);
-					Resolve(variables, ScaleSpeed, out scaleSpeed);
+					variables.Resolve(this, MoveSpeed, out moveSpeed);
+					variables.Resolve(this, RotationSpeed, out rotationSpeed);
+					variables.Resolve(this, ScaleSpeed, out scaleSpeed);
 
 					moveSpeed *= Time.deltaTime;
 					rotationSpeed *= Time.deltaTime;

@@ -74,12 +74,12 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Prefab, out GameObject prefab))
+			if (variables.ResolveObject(this, Prefab, out GameObject prefab))
 			{
 				GameObject spawned = null;
 
-				Resolve(variables, Position, out var position);
-				Resolve(variables, Rotation, out var rotation);
+				variables.Resolve(this, Position, out var position);
+				variables.Resolve(this, Rotation, out var rotation);
 
 				if (Positioning == ObjectPositioning.Absolute)
 				{
@@ -87,22 +87,22 @@ namespace PiRhoSoft.Composition
 				}
 				else if (Positioning == ObjectPositioning.Relative)
 				{
-					if (ResolveObject(variables, Object, out GameObject obj))
+					if (variables.ResolveObject(this, Object, out GameObject obj))
 						spawned = Instantiate(prefab, obj.transform.position + position, Quaternion.Euler(rotation));
 				}
 				else if (Positioning == ObjectPositioning.Child)
 				{
-					if (ResolveObject(variables, Parent, out GameObject parent))
+					if (variables.ResolveObject(this, Parent, out GameObject parent))
 						spawned = Instantiate(prefab, parent.transform.position + position, Quaternion.Euler(rotation), parent.transform);
 				}
 
 				if (spawned)
 				{
-					if (Resolve(variables, ObjectName, out var objectName) && !string.IsNullOrEmpty(objectName))
+					if (variables.Resolve(this, ObjectName, out var objectName) && !string.IsNullOrEmpty(objectName))
 						spawned.name = objectName;
 
 					if (ObjectVariable.IsAssigned)
-						Assign(variables, ObjectVariable, Variable.Object(spawned));
+						variables.Assign(this, ObjectVariable, Variable.Object(spawned));
 				}
 			}
 

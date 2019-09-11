@@ -34,7 +34,7 @@ namespace PiRhoSoft.Composition
 		{
 			var text = Message.GetText(variables, false);
 
-			if (ResolveObject(variables, Control, out MessageControl message))
+			if (variables.ResolveObject(this, Control, out MessageControl message))
 				yield return Show(message, text);
 
 			graph.GoTo(Next, nameof(Next));

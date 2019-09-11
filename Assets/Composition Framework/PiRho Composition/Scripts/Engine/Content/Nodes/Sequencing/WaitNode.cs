@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, Time, out var time))
+			if (variables.Resolve(this, Time, out var time))
 			{
 				if (UseScaledTime)
 					yield return new WaitForSeconds(time);

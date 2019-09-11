@@ -21,7 +21,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Object, out BindingRoot root))
+			if (variables.ResolveObject(this, Object, out BindingRoot root))
 			{
 				root.Value = Binding.GetValue(variables);
 				VariableBinding.UpdateBinding(root.gameObject, null, null);

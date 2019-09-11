@@ -20,9 +20,9 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject<Map>(variables, Map, out var map))
+			if (variables.ResolveObject<Map>(this, Map, out var map))
 			{
-				Resolve(variables, SpawnPoint, out var spawn);
+				variables.Resolve(this, SpawnPoint, out var spawn);
 
 				var spawnPoint = map.GetSpawnPoint(spawn);
 				Player.Instance.Mover.WarpToPosition(spawnPoint.Position, spawnPoint.Direction, spawnPoint.Layer);

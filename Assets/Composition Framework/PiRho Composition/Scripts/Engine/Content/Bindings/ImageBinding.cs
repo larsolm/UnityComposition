@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition
 
 		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
-			Image.enabled = ResolveObject(variables, Variable, out Sprite sprite);
+			Image.enabled = variables.ResolveObject(this, Variable, out Sprite sprite);
 			Image.sprite = sprite;
 		}
 	}

@@ -19,7 +19,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (Graph.Graph && !Graph.IsRunning)
 			{
-				Resolve(variables, Variable, out Variable value);
+				variables.Resolve(this, Variable, out Variable value);
 
 				if (!VariableHandler.IsEqual(_value, value).GetValueOrDefault(false))
 					StartCoroutine(VariableChanged(value, status));

@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition
 		{
 			_status.Reset();
 
-			if (ResolveObject(variables, Object, out Object obj))
+			if (variables.ResolveObject(this, Object, out Object obj))
 			{
 				if (obj is GameObject gameObject)
 				{

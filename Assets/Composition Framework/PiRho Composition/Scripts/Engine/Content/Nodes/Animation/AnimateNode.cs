@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, From, out var from) && Resolve(variables, To, out var to))
+			if (variables.Resolve(this, From, out var from) && variables.Resolve(this, To, out var to))
 			{
 				yield return Animation.Animate(variables, from, to);
 
