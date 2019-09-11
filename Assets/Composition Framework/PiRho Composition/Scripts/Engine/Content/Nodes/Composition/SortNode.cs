@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, List, out IVariableList variableList) && variableList is VariableList list)
+			if (variables.Resolve(this, List, out IVariableList variableList) && variableList is VariableList list)
 			{
 				if (SortByProperty)
 				{

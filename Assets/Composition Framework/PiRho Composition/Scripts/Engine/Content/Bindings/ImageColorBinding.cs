@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition
 
 		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
-			Image.enabled = Resolve(variables, Variable, out Color color);
+			Image.enabled = variables.Resolve(this, Variable, out Color color);
 			Image.color = color;
 		}
 	}

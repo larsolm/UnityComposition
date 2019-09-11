@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition
 
 		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{
-			Sprite.enabled = Resolve(variables, Variable, out Color color);
+			Sprite.enabled = variables.Resolve(this, Variable, out Color color);
 			Sprite.color = color;
 		}
 	}

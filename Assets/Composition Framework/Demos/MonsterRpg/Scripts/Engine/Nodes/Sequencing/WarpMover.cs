@@ -29,9 +29,9 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Mover, out Mover mover))
+			if (variables.ResolveObject(this, Mover, out Mover mover))
 			{
-				Resolve(variables, Position, out var position);
+				variables.Resolve(this, Position, out var position);
 				mover.WarpToPosition(position, Direction, Layer);
 			}
 

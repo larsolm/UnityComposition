@@ -17,7 +17,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, Variable, out IVariableList list))
+			if (variables.Resolve(this, Variable, out IVariableList list))
 			{
 				for (var i = 0; i < list.VariableCount - 2; i++)
 				{

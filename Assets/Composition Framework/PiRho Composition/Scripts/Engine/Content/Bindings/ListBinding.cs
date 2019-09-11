@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (Template != null)
 			{
-				if (Resolve(variables, Variable, out IVariableList list))
+				if (variables.Resolve(this, Variable, out IVariableList list))
 				{
 					SyncItems(list.VariableCount);
 
@@ -33,7 +33,7 @@ namespace PiRhoSoft.Composition
 						SetItem(i, item);
 					}
 				}
-				else if (Resolve(variables, Variable, out IVariableDictionary store))
+				else if (variables.Resolve(this, Variable, out IVariableDictionary store))
 				{
 					var names = store.VariableNames;
 

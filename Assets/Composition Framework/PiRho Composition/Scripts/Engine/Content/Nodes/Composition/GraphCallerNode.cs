@@ -70,7 +70,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (!Resolve(variables, Context, out var context) && variables is GraphStore store)
+			if (!variables.Resolve(this, Context, out var context) && variables is GraphStore store)
 				context = store.Context;
 
 			if (Source == GraphSource.Value)
@@ -82,7 +82,7 @@ namespace PiRhoSoft.Composition
 			}
 			else if (Source == GraphSource.Reference)
 			{
-				if (ResolveObject(variables, Reference, out Graph caller))
+				if (variables.ResolveObject(this, Reference, out Graph caller))
 				{
 					if (WaitForCompletion)
 						yield return caller.Execute(context);

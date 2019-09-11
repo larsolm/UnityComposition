@@ -82,12 +82,12 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Effect, out var effect))
+			if (variables.ResolveObject(this, Effect, out var effect))
 			{
 				GameObject spawned = null;
 
-				Resolve(variables, Position, out var position);
-				Resolve(variables, Rotation, out var rotation);
+				variables.Resolve(this, Position, out var position);
+				variables.Resolve(this, Rotation, out var rotation);
 
 				if (Positioning == ObjectPositioning.Absolute)
 				{
@@ -95,22 +95,22 @@ namespace PiRhoSoft.Composition
 				}
 				else if (Positioning == ObjectPositioning.Relative)
 				{
-					if (ResolveObject(variables, Object, out GameObject obj))
+					if (variables.ResolveObject(this, Object, out GameObject obj))
 						spawned = Instantiate(effect, obj.transform.position + position, Quaternion.Euler(rotation));
 				}
 				else if (Positioning == ObjectPositioning.Child)
 				{
-					if (ResolveObject(variables, Parent, out GameObject parent))
+					if (variables.ResolveObject(this, Parent, out GameObject parent))
 						spawned = Instantiate(effect, parent.transform.position + position, Quaternion.Euler(rotation), parent.transform);
 				}
 
 				if (spawned)
 				{
-					if (Resolve(variables, EffectName, out var effectName) && !string.IsNullOrEmpty(effectName))
+					if (variables.Resolve(this, EffectName, out var effectName) && !string.IsNullOrEmpty(effectName))
 						spawned.name = effectName;
 
 					if (EffectVariable.IsAssigned)
-						Assign(variables, EffectVariable, Variable.Object(spawned));
+						variables.Assign(this, EffectVariable, Variable.Object(spawned));
 				}
 
 				if (WaitForCompletion)

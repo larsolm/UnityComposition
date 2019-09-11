@@ -55,7 +55,7 @@ namespace PiRhoSoft.Composition
 				if (obj != null)
 				{
 					if (ObjectVariable.IsAssigned)
-						Assign(variables, ObjectVariable, Variable.Object(obj));
+						variables.Assign(this, ObjectVariable, Variable.Object(obj));
 				}
 				else
 				{

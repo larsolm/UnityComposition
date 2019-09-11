@@ -23,9 +23,9 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject<Animator>(variables, Animator, out var animator))
+			if (variables.ResolveObject<Animator>(this, Animator, out var animator))
 			{
-				if (Resolve(variables, State, out var state))
+				if (variables.Resolve(this, State, out var state))
 					animator.Play(state);
 			}
 

@@ -22,7 +22,7 @@ namespace PiRhoSoft.MonsterRpg
 		
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Mover, out Mover mover) && ResolveObject(variables, Target, out Mover target))
+			if (variables.ResolveObject(this, Mover, out Mover mover) && variables.ResolveObject(this, Target, out Mover target))
 			{
 				var dir = target.transform.position - mover.transform.position;
 				var direction = Direction.GetDirection(dir);

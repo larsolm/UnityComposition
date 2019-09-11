@@ -37,6 +37,7 @@ namespace PiRhoSoft.Composition
 			_handlers[(int)VariableType.String] = new StringVariableHandler();
 			_handlers[(int)VariableType.List] = new ListVariableHandler();
 			_handlers[(int)VariableType.Dictionary] = new DictionaryVariableHandler();
+			_handlers[(int)VariableType.Asset] = new AssetVariableHandler();
 			_handlers[(int)VariableType.Object] = new ObjectVariableHandler();
 		}
 

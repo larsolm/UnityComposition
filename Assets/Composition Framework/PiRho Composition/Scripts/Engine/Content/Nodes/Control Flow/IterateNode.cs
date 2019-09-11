@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (Loop != null)
 			{
-				if (Resolve(variables, Container, out IVariableList list))
+				if (variables.Resolve(this, Container, out IVariableList list))
 				{
 					for (var i = 0; i < list.VariableCount; i++)
 					{
@@ -33,7 +33,7 @@ namespace PiRhoSoft.Composition
 						yield return SetValues(graph, variables, i, item);
 					}
 				}
-				else if (Resolve(variables, Container, out IVariableDictionary dictionary))
+				else if (variables.Resolve(this, Container, out IVariableDictionary dictionary))
 				{
 					var names = dictionary.VariableNames;
 					for (var i = 0; i < names.Count; i++)

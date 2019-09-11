@@ -18,7 +18,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject<Controller>(variables, Controller, out var controller))
+			if (variables.ResolveObject<Controller>(this, Controller, out var controller))
 				controller.Thaw();
 
 			graph.GoTo(Next, nameof(Next));

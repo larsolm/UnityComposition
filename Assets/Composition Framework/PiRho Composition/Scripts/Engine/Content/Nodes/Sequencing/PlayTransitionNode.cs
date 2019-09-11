@@ -41,7 +41,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Transition, out var transition))
+			if (variables.ResolveObject(this, Transition, out var transition))
 			{
 				if (WaitForCompletion)
 					yield return AutoFinish ? TransitionManager.Instance.RunTransition(transition, Phase) : TransitionManager.Instance.StartTransition(transition, Phase);

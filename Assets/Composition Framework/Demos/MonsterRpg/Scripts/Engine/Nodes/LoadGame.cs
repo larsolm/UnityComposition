@@ -24,7 +24,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (Resolve(variables, Filename, out var filename) && Resolve(variables, Tag, out var tag))
+			if (variables.Resolve(this, Filename, out var filename) && variables.Resolve(this, Tag, out var tag))
 			{
 				var data = new SaveData();
 

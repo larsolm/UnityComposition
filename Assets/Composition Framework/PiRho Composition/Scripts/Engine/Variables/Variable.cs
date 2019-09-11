@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Runtime.InteropServices;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
@@ -26,6 +27,7 @@ namespace PiRhoSoft.Composition
 		String,
 		List,
 		Dictionary,
+		Asset,
 		Object
 	}
 
@@ -95,6 +97,7 @@ namespace PiRhoSoft.Composition
 					case VariableType.String: return false;
 					case VariableType.List: return false;
 					case VariableType.Dictionary: return false;
+					case VariableType.Asset: return false;
 					case VariableType.Object: return false;
 					default: return false;
 				}
@@ -127,6 +130,7 @@ namespace PiRhoSoft.Composition
 				case string s: return String(s);
 				case IVariableList l: return List(l);
 				case IVariableDictionary d: return Dictionary(d);
+				case AssetReference r: return Asset(r);
 				default: return Object(obj);
 			}
 		}
@@ -154,6 +158,7 @@ namespace PiRhoSoft.Composition
 				case VariableType.String: return AsString;
 				case VariableType.List: return AsList;
 				case VariableType.Dictionary: return AsDictionary;
+				case VariableType.Asset: return AsAsset;
 				case VariableType.Object: return AsObject;
 				default: return null;
 			}
@@ -195,6 +200,7 @@ namespace PiRhoSoft.Composition
 				case VariableType.String: return String(null);
 				case VariableType.List: return List(null);
 				case VariableType.Dictionary: return Dictionary(null);
+				case VariableType.Asset: return Asset(null);
 				case VariableType.Object: return Object(null);
 				default: return Empty;
 			}
@@ -223,6 +229,7 @@ namespace PiRhoSoft.Composition
 				case VariableType.String: return IsString;
 				case VariableType.List: return IsList;
 				case VariableType.Dictionary: return IsDictionary;
+				case VariableType.Asset: return IsAsset;
 				case VariableType.Object: return IsObject;
 				default: return false;
 			}
@@ -254,6 +261,7 @@ namespace PiRhoSoft.Composition
 				case string s: return String(s);
 				case IVariableList l: return List(l);
 				case IVariableDictionary s: return Dictionary(s);
+				case AssetReference a: return Asset(a);
 				default: return Object(value);
 			}
 		}
@@ -278,6 +286,7 @@ namespace PiRhoSoft.Composition
 			else if (type == typeof(string)) return VariableType.String;
 			else if (typeof(IVariableList).IsAssignableFrom(type)) return VariableType.List;
 			else if (typeof(IVariableDictionary).IsAssignableFrom(type)) return VariableType.Dictionary;
+			else if (typeof(AssetReference).IsAssignableFrom(type)) return VariableType.Asset;
 			else return VariableType.Object;
 		}
 
@@ -303,6 +312,7 @@ namespace PiRhoSoft.Composition
 			else if (type == typeof(string)) return IsString;
 			else if (typeof(IVariableList).IsAssignableFrom(type)) return IsList;
 			else if (typeof(IVariableDictionary).IsAssignableFrom(type)) return IsDictionary;
+			else if (typeof(AssetReference).IsAssignableFrom(type)) return IsAsset;
 			else return _reference is T;
 		}
 
@@ -542,6 +552,15 @@ namespace PiRhoSoft.Composition
 		public bool IsDictionary => _reference is IVariableDictionary;
 		public IVariableDictionary AsDictionary => _reference as IVariableDictionary;
 		public bool TryGetDictionary(out IVariableDictionary value) { value = AsDictionary; return value != null; }
+
+		#endregion
+
+		#region Reference
+
+		public static Variable Asset(AssetReference value) => CreateReference(VariableType.Asset, value ?? new AssetReference());
+		public bool IsAsset => _reference is AssetReference;
+		public AssetReference AsAsset => _reference as AssetReference;
+		public bool TryGetAsset(out AssetReference value) { value = AsAsset; return value != null; }
 
 		#endregion
 

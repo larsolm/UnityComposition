@@ -36,9 +36,9 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Director, out PlayableDirector director))
+			if (variables.ResolveObject(this, Director, out PlayableDirector director))
 			{
-				if (ResolveObject(variables, Timeline, out var timeline))
+				if (variables.ResolveObject(this, Timeline, out var timeline))
 				{
 					director.Play(timeline, Mode);
 

@@ -59,7 +59,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Animator, out Animator animator))
+			if (variables.ResolveObject(this, Animator, out Animator animator))
 				Trigger(variables, animator);
 
 			graph.GoTo(Next, nameof(Next));
@@ -69,27 +69,27 @@ namespace PiRhoSoft.Composition
 
 		private void Trigger(IVariableCollection variables, Animator animator)
 		{
-			if (Resolve(variables, Parameter, out var parameter))
+			if (variables.Resolve(this, Parameter, out var parameter))
 			{
 				switch (Type)
 				{
 					case AnimatorControllerParameterType.Bool:
 					{
-						if (Resolve(variables, BoolValue, out var value))
+						if (variables.Resolve(this, BoolValue, out var value))
 							animator.SetBool(parameter, value);
 
 						break;
 					}
 					case AnimatorControllerParameterType.Int:
 					{
-						if (Resolve(variables, IntValue, out var value))
+						if (variables.Resolve(this, IntValue, out var value))
 							animator.SetInteger(parameter, value);
 
 						break;
 					}
 					case AnimatorControllerParameterType.Float:
 					{
-						if (Resolve(variables, FloatValue, out var value))
+						if (variables.Resolve(this, FloatValue, out var value))
 							animator.SetFloat(parameter, value);
 
 						break;

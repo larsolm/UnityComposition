@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, Control, out InterfaceControl control))
+			if (variables.ResolveObject(this, Control, out InterfaceControl control))
 				control.Deactivate();
 
 			graph.GoTo(Next, nameof(Next));

@@ -106,6 +106,7 @@ namespace PiRhoSoft.Composition
 				case VariableType.String: return new StringConstraint();
 				case VariableType.List: return new ListConstraint();
 				case VariableType.Dictionary: return new DictionaryConstraint();
+				case VariableType.Asset: return new AssetConstraint();
 				case VariableType.Object: return new ObjectConstraint();
 				default: return null;
 			}

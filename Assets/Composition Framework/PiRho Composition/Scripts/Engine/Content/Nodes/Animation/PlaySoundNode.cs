@@ -34,11 +34,11 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (ResolveObject(variables, AudioPlayer, out AudioPlayer player))
+			if (variables.ResolveObject(this, AudioPlayer, out AudioPlayer player))
 			{
-				if (ResolveObject(variables, Sound, out var sound))
+				if (variables.ResolveObject(this, Sound, out var sound))
 				{
-					if (!Resolve(variables, Volume, out var volume))
+					if (!variables.Resolve(this, Volume, out var volume))
 						volume = 1.0f;
 
 					if (WaitForCompletion)
