@@ -71,7 +71,7 @@ namespace PiRhoSoft.Composition.Editor
 			public VisualElement CreateElement(int index)
 			{
 				var container = new VisualElement { userData = index };
-				var entry = Variables.Schema.GetEntry(index);
+				var entry = Variables.Schema?.GetEntry(index);
 				var value = Variables.GetVariable(index);
 				
 				if (entry != null && Variables.Owner != null)

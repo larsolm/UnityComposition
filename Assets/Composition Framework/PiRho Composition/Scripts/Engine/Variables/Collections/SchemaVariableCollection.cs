@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition
 
 		public SetVariableResult SetVariable(int index, Variable value)
 		{
-			if (index >= 0 && index < _variables.Count)
+			if (Schema!= null && index >= 0 && index < _variables.Count)
 				return UpdateVariable(index, value);
 			else
 				return SetVariableResult.NotFound;
