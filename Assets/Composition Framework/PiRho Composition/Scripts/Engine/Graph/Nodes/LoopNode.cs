@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition
 					break;
 
 				if (Index.IsAssigned)
-					Index.SetValue(variables, Variable.Int(index));
+					Index.SetValue(variables, Variable.Int(index++));
 
 				yield return graph.Run(Loop, variables, nameof(Loop));
 			}

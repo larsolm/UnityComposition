@@ -41,7 +41,7 @@ namespace PiRhoSoft.Composition.Editor
 			Value = value;
 			Tags = tags;
 
-			_definitionControl = new VariableDefinitionControl(Value.Definition);
+			_definitionControl = new VariableDefinitionControl(Value.Definition, null);
 			_definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt => Refresh());
 
 			_tag = new VisualElement();
@@ -103,7 +103,7 @@ namespace PiRhoSoft.Composition.Editor
 			_initializerLabel = new TextElement();
 			_initializerLabel.AddToClassList(InitializerLabelUssClassName);
 
-			_defaultControl = new VariableControl(Value.Default, Value.Definition) { tooltip = "The default value to assign when initializing, resetting, or updating the variable" };
+			_defaultControl = new VariableControl(Value.Default, Value.Definition, null) { tooltip = "The default value to assign when initializing, resetting, or updating the variable" };
 			_defaultControl.AddToClassList(DefaultTypeUssClassName);
 			_defaultControl.RegisterCallback<ChangeEvent<Variable>>(evt => Value.Default = evt.newValue);
 

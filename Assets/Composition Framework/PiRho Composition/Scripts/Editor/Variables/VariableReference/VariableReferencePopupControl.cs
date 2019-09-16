@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities;
+using PiRhoSoft.Utilities.Editor;
 using System.Linq;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -33,9 +34,10 @@ namespace PiRhoSoft.Composition.Editor
 
 			var tokens = _control.Value.Tokens;
 			var source = _control.Source;
+			var previousItem = (AutocompleteItem)null;
 			var index = 0;
 
-			while (source != null)
+			while (source != null) // TODO add casting if previous item supports it and item is a cast token
 			{
 				var token = index < tokens.Count ? tokens[index] : null;
 				var itemIndex = index++; // save this for capturing
@@ -46,6 +48,9 @@ namespace PiRhoSoft.Composition.Editor
 				container.AddToClassList(ItemUssClassName);
 
 				Add(container);
+
+				if (previousItem != null && previousItem.SupportsCasting)
+					items = items.Prepend(VariableReference.Cast);
 
 				if (source.SupportsCustom)
 				{
@@ -58,7 +63,7 @@ namespace PiRhoSoft.Composition.Editor
 				}
 				else
 				{
-					if (item == null)
+					if (item == null && token?.Type != VariableReference.VariableTokenType.Type)
 					{
 						container.AddToClassList(EmptyUssClassName);
 
@@ -66,7 +71,8 @@ namespace PiRhoSoft.Composition.Editor
 						{ } // Log that schema has changed
 					}
 
-					var popup = new PopupField<string>(items.Prepend(_emptyText).ToList(), item?.Name ?? _emptyText);
+					var name = token?.Type == VariableReference.VariableTokenType.Type ? VariableReference.Cast : item?.Name ?? _emptyText;
+					var popup = new PopupField<string>(items.Prepend(_emptyText).ToList(), name);
 					popup.AddToClassList(PopupUssClassName);
 					popup.RegisterValueChangedCallback(evt => SelectItem(evt.newValue, itemIndex));
 
@@ -84,6 +90,7 @@ namespace PiRhoSoft.Composition.Editor
 				}
 
 				source = item?.Source;
+				previousItem = item;
 			}
 		}
 
@@ -93,7 +100,9 @@ namespace PiRhoSoft.Composition.Editor
 			var tokens = _control.Value.Tokens.GetRange(0, itemIndex).ToList();
 			var selectedText = selectedItem == _emptyText ? string.Empty : selectedItem;
 
-			if (selectedItem != _emptyText)
+			if (selectedItem == VariableReference.Cast)
+				tokens.Add(new VariableReference.VariableToken { Text = VariableReference.Cast, Type = VariableReference.VariableTokenType.Type });
+			else if (selectedItem != _emptyText)
 				tokens.Add(new VariableReference.VariableToken { Text = selectedItem, Type = VariableReference.VariableTokenType.Name });
 
 			for (var i = 0; i < tokens.Count && source != null; i++)

@@ -4,12 +4,12 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	[CustomPropertyDrawer(typeof(GraphCaller))]
-	public class GraphCallerDrawer : PropertyDrawer
+	[CustomPropertyDrawer(typeof(VariableValue))]
+	public class VariableValueDrawer : PropertyDrawer
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var field = new GraphCallerField(property.displayName, property.GetObject<GraphCaller>(), property.serializedObject.targetObject);
+			var field = new VariableValueField(property.displayName, property.GetObject<VariableValue>(), property.serializedObject.targetObject);
 			return field.ConfigureProperty(property, this.GetTooltip());
 		}
 	}

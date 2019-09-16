@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System;
 using System.IO;
 
 namespace PiRhoSoft.Composition

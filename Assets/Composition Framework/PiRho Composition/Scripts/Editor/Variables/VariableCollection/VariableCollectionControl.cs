@@ -6,7 +6,7 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class VariableStoreControl : VisualElement
+	public class VariableCollectionControl : VisualElement
 	{
 		public IVariableCollection Value { get; private set; }
 
@@ -15,20 +15,20 @@ namespace PiRhoSoft.Composition.Editor
 		private ValuesProxy _proxy;
 		private ListControl _list;
 
-		public VariableStoreControl(string label, IVariableCollection value, bool isStatic, bool isClosable)
+		public VariableCollectionControl(string label, IVariableCollection value, bool isStatic, bool isClosable)
 		{
 			Value = value;
 
 			_proxy = isStatic ? (ValuesProxy)new StaticValuesProxy(value) : new DynamicValuesProxy(value);
 			_proxy.Label = label;
-			_proxy.Tooltip = "The variables contained in this variable store";
+			_proxy.Tooltip = "The variables contained in this variable collection";
 			_list = new ListControl(_proxy);
 			
 			if (value is Object obj)
 				_list.AddHeaderButton(Icon.Inspect.Texture, "View this object in the inspector", null, () => Selection.activeObject = obj);
 			
 			if (isClosable)
-				_list.AddHeaderButton(Icon.Close.Texture, "Close this store", null, RemoveFromHierarchy);
+				_list.AddHeaderButton(Icon.Close.Texture, "Close this collection", null, RemoveFromHierarchy);
 			
 			Add(_list);
 		}
@@ -66,27 +66,27 @@ namespace PiRhoSoft.Composition.Editor
 				}
 				else
 				{
-					//if (variable.HasStore)
-					//{
-					//	var view = new IconButton(Icon.View.Texture, "View the contents of the store", () =>
-					//	{
-					//		using (var evt = WatchWindow.WatchEvent.GetPooled(_variables, name))
-					//		{
-					//			evt.target = container;
-					//			container.SendEvent(evt);
-					//		}
-					//	});
-					//
-					//	container.Add(view);
-					//}
-					//
-					//var control = new VariableValueControl(_variables.GetVariable(name), ValueDefinition.Empty);
-					//control.RegisterCallback<ChangeEvent<Variable>>(evt =>
-					//{
-					//	_variables.SetVariable(name, evt.newValue);
-					//});
-					//
-					//container.Add(control);
+					if (variable.TryGetDictionary(out var collection))
+					{
+						var view = new IconButton(Icon.View.Texture, "View the contents of the collection", () =>
+						{
+							using (var evt = WatchWindow.WatchEvent.GetPooled(_variables, name))
+							{
+								evt.target = container;
+								container.SendEvent(evt);
+							}
+						});
+					
+						container.Add(view);
+					}
+					
+					var control = new VariableControl(_variables.GetVariable(name), new VariableDefinition(name), null);
+					control.RegisterCallback<ChangeEvent<Variable>>(evt =>
+					{
+						_variables.SetVariable(name, evt.newValue);
+					});
+					
+					container.Add(control);
 				}
 
 				return container;

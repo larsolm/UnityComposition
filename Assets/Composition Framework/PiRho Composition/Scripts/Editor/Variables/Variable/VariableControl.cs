@@ -1,6 +1,9 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using System.Linq;
+using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -17,6 +20,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		public Variable Value { get; private set; }
 		public VariableDefinition Definition { get; private set; }
+
+		private readonly Object _owner;
 
 		private EnumField _emptyField;
 		private Toggle _boolToggle;
@@ -36,7 +41,8 @@ namespace PiRhoSoft.Composition.Editor
 		private EnumField _enumField;
 		private VisualElement _stringContainer;
 		private ListControl _listControl;
-		private VisualElement _dictionaryContainer;
+		private DictionaryControl _dictionaryControl;
+		private VisualElement _assetContainer;
 		private VisualElement _objectContainer;
 
 		private IntegerField _intField;
@@ -46,11 +52,14 @@ namespace PiRhoSoft.Composition.Editor
 		private PopupField<string> _stringPopup;
 		private TextField _stringField;
 		private VariableListProxy _listProxy;
+		private VariableDictionaryProxy _dictionaryProxy;
 
-		public VariableControl(Variable value, VariableDefinition definition)
+		public VariableControl(Variable value, VariableDefinition definition, Object owner)
 		{
 			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
+
+			_owner = owner;
 
 			Value = value;
 			Definition = definition;
@@ -152,8 +161,8 @@ namespace PiRhoSoft.Composition.Editor
 			_enumField.SetDisplayed(Value.Type == VariableType.Enum);
 			_stringContainer.SetDisplayed(Value.Type == VariableType.String);
 			_listControl.SetDisplayed(Value.Type == VariableType.List);
-			_dictionaryContainer.SetDisplayed(Value.Type == VariableType.Dictionary);
-			// TODO for Asset
+			_dictionaryControl.SetDisplayed(Value.Type == VariableType.Dictionary);
+			_assetContainer.SetDisplayed(Value.Type == VariableType.Asset);
 			_objectContainer.SetDisplayed(Value.Type == VariableType.Object);
 		}
 
@@ -530,12 +539,12 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateList()
 		{
-			_listProxy = new VariableListProxy(null, null)
+			_listProxy = new VariableListProxy(null, null, _owner)
 			{
 				Label = "Variables",
 				EmptyLabel = "This List has no Variables",
 				AddTooltip = "Add a Variable to this List",
-				RemoveTooltip = "Remove this Variables"
+				RemoveTooltip = "Remove this Variable"
 			};
 
 			_listControl = new ListControl(_listProxy);
@@ -554,23 +563,37 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateDictionary()
 		{
-			_dictionaryContainer = new VisualElement();
+			_dictionaryProxy = new VariableDictionaryProxy(null, _owner);
+			_dictionaryControl = new DictionaryControl(_dictionaryProxy);
 
-			Add(_dictionaryContainer);
+			Add(_dictionaryControl);
 		}
 
 		private void RefreshDictionary()
 		{
+			_dictionaryProxy.Variables = Value.AsDictionary;
+			_dictionaryControl.Refresh();
 		}
 
 		private void CreateAsset()
 		{
-			// TODO
+			_assetContainer = new VisualElement();
+
+			Add(_objectContainer);
 		}
 
 		private void RefreshAsset()
 		{
-			// TODO
+			_assetContainer.Clear();
+
+			var assetPicker = new ObjectPickerControl(Value.GetObject<Object>(), null, typeof(ScriptableObject));
+			assetPicker.RegisterCallback<ChangeEvent<Object>>(evt =>
+			{
+				var value = Variable.Asset(new AssetReference(AssetDatabase.AssetPathToGUID(AssetDatabase.GetAssetPath(evt.newValue))));
+				SetValue(value);
+			});
+
+			_objectContainer.Add(assetPicker);
 		}
 
 		private void CreateObject()
@@ -586,7 +609,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			var objectType = (Definition.Constraint as ObjectConstraint)?.ObjectType ?? typeof(Object);
 
-			var objectPicker = new ObjectPickerControl(Value.GetObject<Object>(), objectType);
+			var objectPicker = new ObjectPickerControl(Value.GetObject<Object>(), _owner, objectType);
 			objectPicker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{
 				var value = Variable.Object(evt.newValue);
@@ -601,18 +624,22 @@ namespace PiRhoSoft.Composition.Editor
 			public IVariableList Variables;
 			public VariableDefinition Definition;
 
+			private readonly Object _owner;
+
 			public override int ItemCount => Variables?.VariableCount ?? 0;
 
-			public VariableListProxy(IVariableList variables, VariableDefinition definition)
+			public VariableListProxy(IVariableList variables, VariableDefinition definition, Object owner)
 			{
 				Variables = variables;
 				Definition = definition;
+
+				_owner = owner;
 			}
 
 			public override VisualElement CreateElement(int index)
 			{
 				var value = Variables.GetVariable(index);
-				var control = new VariableControl(value, Definition) { userData = index };
+				var control = new VariableControl(value, Definition, _owner) { userData = index };
 				return control;
 			}
 
@@ -636,6 +663,96 @@ namespace PiRhoSoft.Composition.Editor
 				var previous = Variables.GetVariable(to);
 				Variables.SetVariable(to, Variables.GetVariable(from));
 				Variables.SetVariable(from, previous);
+			}
+		}
+
+		private class VariableDictionaryProxy : IDictionaryProxy
+		{
+			public IVariableDictionary Variables;
+
+			public int KeyCount => Variables?.VariableNames.Count ?? 0;
+
+			public string Label => "Variables";
+			public string Tooltip => "The Variables in this dictionary";
+			public string EmptyLabel => "This Dictionary has no Variables";
+			public string EmptyTooltip => "There are no Variables in this dictionary";
+			public string AddPlaceholder => "New Variable";
+			public string AddTooltip => "Add a Variable to this dictionary";
+			public string RemoveTooltip => "Remove this Variable";
+			public string ReorderTooltip => "Move this Variable";
+
+			public bool AllowAdd => Variables.Schema == null;
+			public bool AllowRemove => Variables.Schema == null;
+			public bool AllowReorder => Variables.Schema == null;
+
+			private readonly Object _owner;
+
+			public VariableDictionaryProxy(IVariableDictionary variables, Object owner)
+			{
+				Variables = variables;
+
+				_owner = owner;
+			}
+
+			public VisualElement CreateField(int index)
+			{
+				var name = GetName(index);
+				var value = Variables.GetVariable(name);
+				var definition = GetDefinition(name);
+				var control = new VariableControl(value, definition, _owner) { userData = index };
+				return control;
+			}
+
+			public bool NeedsUpdate(VisualElement item, int index)
+			{
+				return !(item.userData is int i) || i != index;
+			}
+
+			public bool CanAdd(string key)
+			{
+				return !Variables.VariableNames.Contains(key);
+			}
+
+			public bool CanRemove(int index)
+			{
+				return AllowRemove;
+			}
+
+			public bool CanReorder(int from, int to)
+			{
+				return AllowReorder;
+			}
+
+			public void AddItem(string key)
+			{
+				var definition = GetDefinition(key);
+				Variables.SetVariable(key, definition.Generate());
+			}
+
+			public void RemoveItem(int index)
+			{
+				var name = GetName(index);
+				Variables.SetVariable(name, Variable.Empty);
+			}
+
+			public void ReorderItem(int from, int to)
+			{
+				var fromName = GetName(from);
+				var toName = GetName(to);
+				var previous = Variables.GetVariable(toName);
+				var current = Variables.GetVariable(fromName);
+				Variables.SetVariable(toName, current);
+				Variables.SetVariable(fromName, previous);
+			}
+
+			private string GetName(int index)
+			{
+				return Variables.VariableNames[index];
+			}
+
+			private VariableDefinition GetDefinition(string name)
+			{
+				return Variables.Schema?.GetEntry(name).Definition ?? new VariableDefinition(name);
 			}
 		}
 	}

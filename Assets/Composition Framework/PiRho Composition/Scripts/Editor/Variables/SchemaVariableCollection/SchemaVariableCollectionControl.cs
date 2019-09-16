@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -10,11 +11,11 @@ namespace PiRhoSoft.Composition.Editor
 		private VariablesProxy _proxy;
 		private ListControl _list;
 
-		public SchemaVariableCollectionControl(SchemaVariableCollection value)
+		public SchemaVariableCollectionControl(SchemaVariableCollection value, Object owner)
 		{
 			Value = value;
 
-			_proxy = new VariablesProxy(value);
+			_proxy = new VariablesProxy(value, owner);
 			_list = new ListControl(_proxy);
 
 			Add(_list);
@@ -55,9 +56,16 @@ namespace PiRhoSoft.Composition.Editor
 			public bool CanRemove(int index) => false;
 			public bool CanReorder(int from, int to) => false;
 
-			public VariablesProxy(SchemaVariableCollection variables)
+			public void AddItem() { }
+			public void RemoveItem(int index) { }
+			public void ReorderItem(int from, int to) { }
+
+			private readonly Object _owner;
+
+			public VariablesProxy(SchemaVariableCollection variables, Object owner)
 			{
 				Variables = variables;
+				_owner = owner;
 			}
 
 			public VisualElement CreateElement(int index)
@@ -68,7 +76,7 @@ namespace PiRhoSoft.Composition.Editor
 				
 				if (entry != null && Variables.Owner != null)
 				{
-					var field = new VariableField(entry.Definition.Name, value, entry.Definition);
+					var field = new VariableField(entry.Definition.Name, value, entry.Definition, _owner);
 					field.RegisterCallback<ChangeEvent<Variable>>(evt => {	Variables.SetVariable(index, value); });
 					container.Add(field);
 					
@@ -88,10 +96,6 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				return !(item.userData is int i) || i != index;
 			}
-
-			public void AddItem() { }
-			public void RemoveItem(int index) { }
-			public void ReorderItem(int from, int to) { }
 		}
 	}
 }

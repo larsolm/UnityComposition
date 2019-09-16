@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var field = new VariableDefinitionField(property.displayName, property.GetObject<VariableDefinition>());
+			var field = new VariableDefinitionField(property.displayName, property.GetObject<VariableDefinition>(), property.serializedObject.targetObject);
 			return field.ConfigureProperty(property, this.GetTooltip());
 		}
 	}

@@ -4,12 +4,12 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class StartGraphViewNode : GraphViewNode, IOutputNode
+	public class StartGraphViewNode : GraphViewNode
 	{
 		public const string StartUssClassName = UssClassName + "--start";
+		public const string StartOutputUssClassName = GraphViewOutputPort.UssOutputClassName + "-start";
 
-		public GraphViewInputPort Input { get; private set; }
-		public List<GraphViewOutputPort> Outputs { get; private set; }
+		public GraphViewOutputPort Output { get; private set; }
 
 		public override bool IsMovable() => false;
 
@@ -18,16 +18,23 @@ namespace PiRhoSoft.Composition.Editor
 			AddToClassList(StartUssClassName);
 
 			title = "Start";
+			expanded = false;
 
-			Outputs = new List<GraphViewOutputPort>(Data.Connections.Count);
-			CreateOutputs(Outputs, nodeConnector, null);
-			RefreshPorts();
+			CreateOutput(nodeConnector);
 		}
 
-		public void UpdateColors(bool active)
+		private void CreateOutput(GraphViewConnector nodeConnector)
 		{
-			foreach (var output in Outputs)
-				output.UpdateColor();
+			Data.RefreshConnections();
+
+			var connection = Data.Connections[0];
+
+			Output = new GraphViewOutputPort(this, Data.Connections[0], nodeConnector, null) { tooltip = "Click and drag to make a connection from this output" };
+			Output.AddToClassList(StartOutputUssClassName);
+
+			titleButtonContainer.Add(Output);
+
+			RefreshPorts();
 		}
 
 		public override void OnSelected()

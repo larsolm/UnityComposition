@@ -14,14 +14,14 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private ObjectPickerControl _control;
 
-		public ObjectPickerField(string label, Object value, Type type) : base(label, null)
+		public ObjectPickerField(string label, Object value, Object owner, Type type) : base(label, null)
 		{
-			Setup(value, type);
+			Setup(value, owner, type);
 		}
 
-		private void Setup(Object value, Type type)
+		private void Setup(Object value, Object owner, Type type)
 		{
-			_control = new ObjectPickerControl(value, type);
+			_control = new ObjectPickerControl(value, owner, type);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<Object>>(evt => base.value = evt.newValue);
 
@@ -69,7 +69,7 @@ namespace PiRhoSoft.Utilities.Editor
 					var valueName = _value.GetValueFromBag(bag, cc);
 					var value = AssetDatabase.LoadAssetAtPath(valueName, type);
 
-					field.Setup(value, type);
+					field.Setup(value, null, type);
 				}
 			}
 		}

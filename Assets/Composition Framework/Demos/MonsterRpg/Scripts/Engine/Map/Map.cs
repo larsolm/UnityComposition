@@ -96,7 +96,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public void OnBeforeSerialize()
 		{
-			ComponentHelper.GetComponentsInScene(gameObject.scene.buildIndex, _spawns, true);
+			_spawns = ObjectHelper.GetComponentsInScene<Spawn>(gameObject.scene.buildIndex, true);
 		}
 
 		public void OnAfterDeserialize()

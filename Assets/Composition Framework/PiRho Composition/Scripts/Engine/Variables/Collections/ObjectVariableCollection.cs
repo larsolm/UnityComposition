@@ -13,7 +13,6 @@ namespace PiRhoSoft.Composition
 			_owner = owner;
 			_collection = owner as IVariableCollection;
 			_map = _collection == null && _owner != null ? VariableMap.Get(_owner.GetType()) : null;
-
 		}
 
 		public bool IsValid => _collection != null || _map != null;

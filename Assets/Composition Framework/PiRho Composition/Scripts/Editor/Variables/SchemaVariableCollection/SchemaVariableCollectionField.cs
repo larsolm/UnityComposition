@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition.Editor
 					value.Update();
 			}
 
-			_control = new SchemaVariableCollectionControl(value);
+			_control = new SchemaVariableCollectionControl(value, owner);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<SchemaVariableCollection>>(evt => base.value = evt.newValue);
 

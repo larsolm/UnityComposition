@@ -63,24 +63,6 @@ namespace PiRhoSoft.Composition.Editor
 			this.Bind(serializedObject);
 		}
 
-		protected void CreateOutputs(List<GraphViewOutputPort> outputs, GraphViewConnector nodeConnector, SerializedProperty renameableProperty)
-		{
-			Data.RefreshConnections();
-
-			for (var i = 0; i < Data.Connections.Count; i++)
-			{
-				var connection = Data.Connections[i];
-				var nameProperty = renameableProperty?.FindPropertyRelative(i.ToString());
-				var output = new GraphViewOutputPort(this, connection, nodeConnector, nameProperty) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" };
-				outputContainer.Add(output);
-				outputs.Add(output);
-			}
-
-			expanded = Data.Connections.Count > 0;
-
-			RefreshPorts();
-		}
-
 		protected TextField CreateEditableLabel(TextElement container, string bindingPath, bool multiline = false)
 		{
 			var edit = new TextField { bindingPath = bindingPath, multiline = multiline };
@@ -104,7 +86,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		protected void HideEditableText(TextField edit)
 		{
-			if (edit != null) // this needs to be here for when it is called after node is destroyed
+			if (edit != null) // this needs to be here for when it is stupidly called after node is destroyed
 				edit.style.visibility = Visibility.Hidden;
 		}
 

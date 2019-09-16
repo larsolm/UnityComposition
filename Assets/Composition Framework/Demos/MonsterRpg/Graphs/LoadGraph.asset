@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: SequenceNode
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 414, y: -257.99997}
+  GraphPosition: {x: 414, y: -256.99997}
   IsBreakpoint: 0
   Sequence:
     _items:
@@ -61,7 +61,7 @@ MonoBehaviour:
   m_Name: BranchNode
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 671, y: -116.99997}
+  GraphPosition: {x: 678, y: -276.99997}
   IsBreakpoint: 0
   Switch:
     _statement: 
@@ -84,7 +84,7 @@ MonoBehaviour:
   Graph: {fileID: 11400000}
   GraphPosition: {x: -64, y: -224.99997}
   IsBreakpoint: 0
-  Comment: Double click to insert comment
+  Comment: This does work
 --- !u!114 &-1368940103165137033
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,13 +102,17 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Map:
-    _variable: 
-    _tokens: []
+    _variable: One
+    _tokens:
+    - Type: 0
+      Text: One
   SpawnPoint:
-    Type: 0
+    Type: 1
     Reference:
-      _variable: 
-      _tokens: []
+      _variable: One
+      _tokens:
+      - Type: 0
+        Text: One
     Value: 
 --- !u!114 &11400000
 MonoBehaviour:

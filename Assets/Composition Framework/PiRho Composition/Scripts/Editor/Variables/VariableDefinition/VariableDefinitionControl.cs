@@ -34,13 +34,17 @@ namespace PiRhoSoft.Composition.Editor
 
 		public VariableDefinition Value { get; private set; }
 
+		private readonly Object _owner;
+
 		private EnumField _typeDropdown;
 		private VisualElement _constraintContainer;
 
-		public VariableDefinitionControl(VariableDefinition value)
+		public VariableDefinitionControl(VariableDefinition value, Object owner)
 		{
 			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
+
+			_owner = owner;
 
 			Value = value;
 
@@ -374,7 +378,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VisualElement CreateDictionaryConstraint(DictionaryConstraint constraint)
 		{
-			var picker = new ObjectPickerControl(constraint.Schema, typeof(VariableSchema));
+			var picker = new ObjectPickerControl(constraint.Schema, _owner, typeof(VariableSchema));
 			picker.AddToClassList(SchemaConstraintUssClassName);
 			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{

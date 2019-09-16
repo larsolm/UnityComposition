@@ -15,8 +15,13 @@ namespace PiRhoSoft.Composition
 
 	public abstract class VariableSource
 	{
+		[Tooltip("Whether to use a value based on a VariableReference or a specific value")]
+		[EnumButtons]
 		public VariableSourceType Type = VariableSourceType.Value;
-		[Conditional(nameof(Type), (int)VariableSourceType.Value)] public VariableReference Reference = new VariableReference();
+
+		[Tooltip("A reference to the variable")]
+		[Conditional(nameof(Type), (int)VariableSourceType.Reference)]
+		public VariableReference Reference = new VariableReference();
 
 		public void GetInputs(IList<VariableDefinition> inputs)
 		{
@@ -33,6 +38,8 @@ namespace PiRhoSoft.Composition
 
 	public abstract class VariableSource<T> : VariableSource
 	{
+		[Tooltip("The value of the variable")]
+		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public T Value;
 
 		protected override VariableDefinition GetInputDefinition()
@@ -176,17 +183,9 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
-	public class VariableValueSource : VariableSource
+	public class VariableValueSource : VariableSource<VariableValue>
 	{
-		public VariableDefinition Definition = new VariableDefinition();
-
-		[Tooltip("The specific value of the source")]
-		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
-		public VariableValue Value = new VariableValue();
-
-		public VariableValueSource() { }
-		public VariableValueSource(VariableType type, VariableDefinition definition) { Definition = definition; Value.Variable = definition.Generate(); }
-
-		protected override VariableDefinition GetInputDefinition() => Definition;
+		public VariableValueSource() => Value = new VariableValue();
+		protected override VariableDefinition GetInputDefinition() => new VariableDefinition();
 	}
 }

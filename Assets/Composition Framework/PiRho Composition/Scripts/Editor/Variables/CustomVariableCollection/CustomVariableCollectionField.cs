@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition.Editor
 			//if (owner is ISchemaOwner schemaOwner)
 			//	schemaOwner.SetupSchema();
 
-			_control = new CustomVariableCollectionControl(value);
+			_control = new CustomVariableCollectionControl(value, owner);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<CustomVariableCollection>>(evt => base.value = evt.newValue);
 
