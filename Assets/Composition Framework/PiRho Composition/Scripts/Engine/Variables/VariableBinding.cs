@@ -13,26 +13,26 @@ namespace PiRhoSoft.Composition
 		public void Decrement() => _count--;
 	}
 
+	public enum BindingErrorType
+	{
+		Log,
+		Suppress,
+		HideObject
+	}
+
 	public abstract class VariableBinding : MonoBehaviour
 	{
-		private const string _missingVariableWarning = "(PCVBMV) failed to resolve variable '{0}' on binding '{1}': the variable could not be found";
-		private const string _invalidVariableWarning = "(PCVBIV) failed to resolve variable '{0}' on binding '{1}': the variable has type '{2}' and should have type '{3}'";
-		private const string _invalidEnumWarning = "(PCVBIE) failed to resolve variable '{0}' on binding '{1}': the variable has enum type '{2}' and should have enum type '{3}'";
-		private const string _invalidObjectWarning = "(PCVBIO) failed to resolve variable '{0}' on node '{1}': the object '{2}' is a '{3}' and cannot be converted to a '{4}'";
-		private const string _invalidTypeWarning = "(PCVBIT) failed to resolve variable '{0}' on node '{1}': the value is a '{2}' and cannot be converted to a '{3}'";
-
-		private const string _missingAssignmentWarning = "(PCVBMA) failed to assign to variable '{0}' from binding '{1}': the variable could not be found";
-		private const string _readOnlyAssignmentWarning = "(PCVBROA) failed to assign to variable '{0}' from binding '{1}': the variable is read only";
-		private const string _invalidAssignmentWarning = "(PCVBIA) failed to assign to variable '{0}' from binding '{1}': the variable has an incompatible type";
-
 		[Tooltip("The group to which this binding belongs (empty means it will update with all groups)")]
 		public string BindingGroup = string.Empty;
 
 		[Tooltip("When set, the binding will update automatically when the variable changes")]
 		public bool AutoUpdate = true;
 
-		[Tooltip("When set, errors in resolving the binding will be treated as a valid condition that hides or disables corresponding components")]
-		public bool SuppressErrors = false;
+		[Tooltip("Specifies how errors in resolving the binding are treated")]
+		public BindingErrorType ErrorType = BindingErrorType.Log;
+
+		[Tooltip("The variable to assign the bound value to")]
+		public VariableAssignmentReference Target = new VariableAssignmentReference();
 
 		private IVariableCollection _variables;
 
@@ -40,10 +40,8 @@ namespace PiRhoSoft.Composition
 		{
 			get
 			{
-				// can't look up in awake because it's possible to update bindings before the component is enabled
-
 				if (_variables == null)
-					_variables = BindingRoot.FindParent(gameObject);
+					_variables = new ThisWrapper(gameObject);
 
 				return _variables;
 			}
@@ -66,7 +64,44 @@ namespace PiRhoSoft.Composition
 				UpdateBinding(Variables, status ?? _ignoredStatus);
 		}
 
+		protected void SetBinding(Variable value, bool didSucceed)
+		{
+			if (didSucceed)
+				Target.SetValue(Variables, value);
+			
+			if (ErrorType == BindingErrorType.HideObject)
+				gameObject.SetActive(didSucceed);
+		}
+
 		protected abstract void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status);
+
+		#region This Access
+
+		private class ThisWrapper : IVariableCollection
+		{
+			private readonly string[] _names = new string[] { string.Empty };
+
+			public static string ThisName = "this";
+
+			private GameObject _this;
+			private IVariableCollection _parent;
+
+			public ThisWrapper(GameObject obj)
+			{
+				_this = obj;
+				_parent = BindingRoot.FindParent(obj);
+			}
+
+			#region IVariableStore Implementation
+
+			public virtual IReadOnlyList<string> VariableNames { get { _names[0] = ThisName; return _names; } }
+			public virtual Variable GetVariable(string name) => name == ThisName ? Variable.Object(_this) : _parent.GetVariable(name);
+			public virtual SetVariableResult SetVariable(string name, Variable value) => name == ThisName ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
+
+			#endregion
+		}
+
+		#endregion
 
 		#region Static Helpers
 
