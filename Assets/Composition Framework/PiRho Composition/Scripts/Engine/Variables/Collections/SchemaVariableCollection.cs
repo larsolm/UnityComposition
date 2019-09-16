@@ -86,7 +86,7 @@ namespace PiRhoSoft.Composition
 			{
 				for (var i = 0; i < _variables.Count; i++)
 				{
-					if (Schema.TryGetEntry(i, out var entry) && entry.Tag == tag)
+					if (Schema.TryGetEntry(i, out var entry) && (string.IsNullOrEmpty(tag) || entry.Tag == tag))
 						variables.SetVariable(entry.Definition.Name, _variables[i]);
 				}
 			}
@@ -98,7 +98,7 @@ namespace PiRhoSoft.Composition
 			{
 				for (var i = 0; i < _variables.Count; i++)
 				{
-					if (Schema.TryGetEntry(i, out var entry) && entry.Tag == tag)
+					if (Schema.TryGetEntry(i, out var entry) && (string.IsNullOrEmpty(tag) || entry.Tag == tag))
 					{
 						var variable = variables.GetVariable(entry.Definition.Name);
 

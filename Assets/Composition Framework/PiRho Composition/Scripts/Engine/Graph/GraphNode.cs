@@ -67,6 +67,8 @@ namespace PiRhoSoft.Composition
 			public static readonly Color InterfaceTeal = new Color(0.0f, 0.5f, 0.3f, 0.8f);
 		}
 
+		public bool IsRunning { get; internal set; }
+
 		public abstract IEnumerator Run(IGraphRunner graph, IVariableCollection variables);
 
 		#region Inputs and Outputs

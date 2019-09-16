@@ -334,11 +334,18 @@ namespace PiRhoSoft.Composition
 					var node = _nextNode;
 					_nextNode.Node = null;
 
+					while (node.Node.IsRunning)
+						yield return null;
+
+					node.Node.IsRunning = true;
+
 #if UNITY_EDITOR
 					yield return _graph.ProcessNode(this, node.Node, variables, node.Source);
 #else
 					yield return node.Node.Run(this, variables);
 #endif
+
+					node.Node.IsRunning = false;
 				}
 			}
 
