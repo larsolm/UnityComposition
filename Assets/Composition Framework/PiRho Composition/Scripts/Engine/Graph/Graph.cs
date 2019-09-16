@@ -8,6 +8,7 @@ namespace PiRhoSoft.Composition
 {
 	public interface IGraphRunner
 	{
+		void Exit();
 		void GoTo(GraphNode node, string source);
 		IEnumerator Run(GraphNode node, IVariableCollection variables, string source);
 	}
@@ -36,6 +37,7 @@ namespace PiRhoSoft.Composition
 		public List<GraphNode> Nodes = new List<GraphNode>();
 
 		public bool IsRunning { get; private set; }
+		public bool IsExiting { get; private set; }
 		public IVariableCollection Variables { get; private set; }
 		private List<GraphRunner> _runners = new List<GraphRunner>();
 
@@ -311,18 +313,23 @@ namespace PiRhoSoft.Composition
 
 			public void GoTo(GraphNode node, string source)
 			{
-				_nextNode.Node = node;
-				_nextNode.Source = source;
+				if (!_graph.IsExiting)
+				{
+					_nextNode.Node = node;
+					_nextNode.Source = source;
+				}
 			}
 
 			public IEnumerator Run(GraphNode node, IVariableCollection variables, string source)
 			{
-				yield return CompositionManager.Instance.GetEnumerator(_graph.Run(node, variables, source));
+				if (!_graph.IsExiting)
+					yield return CompositionManager.Instance.GetEnumerator(_graph.Run(node, variables, source));
 			}
 
 			public IEnumerator Run(Graph graph, GraphNode root, IVariableCollection variables, string source)
 			{
 				_graph = graph;
+				_graph.IsExiting = false;
 				GoTo(root, source);
 
 #if UNITY_EDITOR
@@ -357,6 +364,12 @@ namespace PiRhoSoft.Composition
 #if UNITY_EDITOR
 				_callstack.Clear();
 #endif
+			}
+
+			public void Exit()
+			{
+				GoTo(null, string.Empty);
+				_graph.IsExiting = true;
 			}
 
 #if UNITY_EDITOR

@@ -54,12 +54,18 @@ namespace PiRhoSoft.Composition
 		public void RunGraph(GraphCaller caller, IVariableCollection store, Variable context)
 		{
 			var enumerator = caller.Execute(store, context);
-			StartCoroutine(new JoinEnumerator(enumerator));
+			RunEnumerator(enumerator);
 		}
 
 		public IEnumerator GetEnumerator(IEnumerator enumerator)
 		{
 			return new JoinEnumerator(enumerator);
+		}
+
+		public Coroutine RunEnumerator(IEnumerator enumerator)
+		{
+			var joined = new JoinEnumerator(enumerator);
+			return StartCoroutine(joined);
 		}
 
 		#region Enumerator
@@ -77,6 +83,8 @@ namespace PiRhoSoft.Composition
 			{
 				get { return _enumerators.Peek().Current; }
 			}
+
+			public bool IsComplete => _enumerators.Count == 0;
 
 			public JoinEnumerator(IEnumerator coroutine)
 			{

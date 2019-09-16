@@ -11,9 +11,7 @@ namespace PiRhoSoft.Composition
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			// graph.Exit(); TODO: need to do something like execute GraphRunners on the CompositionManager, store
-			// each of the resulting coroutines on the graph, then cancel them all and make sure they clean up
-			// correctly
+			graph.Exit();
 			yield break;
 		}
 	}
