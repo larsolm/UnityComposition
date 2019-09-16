@@ -13,10 +13,10 @@ namespace PiRhoSoft.Composition
 		private const string _invalidOutputWarning = "(PCANIA) failed to animate in binding '{0}': the variable '{1}' could not be set";
 
 		[Tooltip("The value the animation starts at (empty to start at the current value)")]
-		public VariableReference From = new VariableReference();
+		public VariableLookupReference From = new VariableLookupReference();
 
 		[Tooltip("The value to animate to")]
-		public VariableReference To = new VariableReference();
+		public VariableLookupReference To = new VariableLookupReference();
 
 		[Inline]
 		public AnimatedVariable Animation = new AnimatedVariable();

@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Tranform to modify")]
-		public VariableReference Transform = new VariableReference();
+		public VariableLookupReference Transform = new VariableLookupReference();
 
 		[Tooltip("Whether to use a relative position from the original or an absolute position")]
 		public bool UseRelativePosition = true;
@@ -73,27 +73,6 @@ namespace PiRhoSoft.Composition
 		public override Color NodeColor => Colors.Sequencing;
 
 		private static Dictionary<int, Coroutine> _currentlyRunning = new Dictionary<int, Coroutine>();
-
-		public override void GetInputs(IList<VariableDefinition> inputs)
-		{
-			if (GraphStore.IsInput(Transform))
-				inputs.Add(new VariableDefinition(Transform.RootName, new ObjectConstraint(typeof(Transform))));
-
-			TargetPosition.GetInputs(inputs);
-			TargetRotation.GetInputs(inputs);
-			TargetScale.GetInputs(inputs);
-
-			if (AnimationMethod == AnimationType.Duration)
-			{
-				Duration.GetInputs(inputs);
-			}
-			else if (AnimationMethod == AnimationType.Speed)
-			{
-				MoveSpeed.GetInputs(inputs);
-				RotationSpeed.GetInputs(inputs);
-				ScaleSpeed.GetInputs(inputs);
-			}
-		}
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{

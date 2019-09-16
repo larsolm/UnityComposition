@@ -19,7 +19,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The Playable Director to run the timeline on")]
 		[VariableReference(typeof(PlayableDirector))]
-		public VariableReference Director;
+		public VariableLookupReference Director = new VariableLookupReference();
 
 		[Tooltip("The timeline to run")]
 		[Inline]

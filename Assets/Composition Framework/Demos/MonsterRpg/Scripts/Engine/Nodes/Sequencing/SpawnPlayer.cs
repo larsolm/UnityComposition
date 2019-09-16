@@ -11,7 +11,7 @@ namespace PiRhoSoft.MonsterRpg
 		public GraphNode Next = null;
 
 		[Tooltip("The map with the spawn point to spawn the player at")]
-		public VariableReference Map = new VariableReference();
+		public VariableLookupReference Map = new VariableLookupReference();
 
 		[Tooltip("The name of the spawn point to spawn the player at")]
 		public StringVariableSource SpawnPoint = new StringVariableSource();

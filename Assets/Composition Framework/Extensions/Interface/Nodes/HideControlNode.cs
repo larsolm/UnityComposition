@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The InterfaceControl to hide")]
 		[VariableReference(typeof(InterfaceControl))]
-		public VariableReference Control = new VariableReference();
+		public VariableLookupReference Control = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.InterfaceDark;
 

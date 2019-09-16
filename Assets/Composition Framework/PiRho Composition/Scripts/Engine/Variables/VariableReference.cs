@@ -25,10 +25,17 @@ namespace PiRhoSoft.Composition
 			else
 				Constraint = new ObjectConstraint(type);
 		}
+
+		public VariableDefinition GetDefinition(string name)
+		{
+			if (Constraint != null)
+				return new VariableDefinition(name, Constraint);
+			else
+				return new VariableDefinition(name, Type);
+		}
 	}
 
-	[Serializable]
-	public class VariableReference
+	public abstract class VariableReference
 	{
 		public const string Cast = "as";
 		public const char Separator = '.';
@@ -42,6 +49,7 @@ namespace PiRhoSoft.Composition
 		public bool IsAssigned => _tokens.Count > 0;
 		public string StoreName => IsAssigned ? (_tokens.Count > 1 ? _tokens[0].Text : string.Empty) : string.Empty;
 		public string RootName => IsAssigned ? (_tokens.Count > 1 ? _tokens[1].Text : _tokens[0].Text) : string.Empty;
+		public bool UsesStore(string storeName) => IsAssigned && StoreName == storeName;
 
 		public List<VariableToken> Tokens
 		{
@@ -74,118 +82,7 @@ namespace PiRhoSoft.Composition
 			return Format(_tokens);
 		}
 
-		#region Lookup
-
-		public Variable GetValue(IVariableCollection variables)
-		{
-			var value = IsAssigned ? PiRhoSoft.Composition.Variable.Object(variables) : PiRhoSoft.Composition.Variable.Empty;
-
-			foreach (var token in _tokens)
-			{
-				switch (token.Type)
-				{
-					case VariableTokenType.Name: value = VariableHandler.Lookup(value, PiRhoSoft.Composition.Variable.String(token.Text)); break;
-					case VariableTokenType.Number: value = VariableHandler.Lookup(value, PiRhoSoft.Composition.Variable.Int(int.Parse(token.Text))); break;
-					case VariableTokenType.Type: value = VariableHandler.Cast(value, token.Text); break;
-				}
-
-				if (value.IsEmpty)
-					break;
-			}
-
-			return value;
-		}
-
-		#endregion
-
-		#region Assignment
-
-		public SetVariableResult SetValue(IVariableCollection variables, Variable value)
-		{
-			if (IsAssigned)
-			{
-				var owner = PiRhoSoft.Composition.Variable.Object(variables);
-				return SetValue_(ref owner, value, 0);
-			}
-			else
-			{
-				return SetVariableResult.NotFound;
-			}
-		}
-
-		private SetVariableResult SetValue_(ref Variable owner, Variable value, int index)
-		{
-			var token = _tokens[index];
-
-			if (index == _tokens.Count - 1)
-			{
-				switch (token.Type)
-				{
-					case VariableTokenType.Name:
-					{
-						return VariableHandler.Apply(ref owner, PiRhoSoft.Composition.Variable.String(token.Text), value);
-					}
-					case VariableTokenType.Number:
-					{
-						if (int.TryParse(token.Text, out var number))
-							return VariableHandler.Apply(ref owner, PiRhoSoft.Composition.Variable.Int(number), value);
-
-						break;
-					}
-					case VariableTokenType.Type:
-					{
-						return SetVariableResult.ReadOnly;
-					}
-				}
-			}
-			else
-			{
-				var lookup = PiRhoSoft.Composition.Variable.Empty;
-				var child = PiRhoSoft.Composition.Variable.Empty;
-
-				switch (token.Type)
-				{
-					case VariableTokenType.Name:
-					{
-						lookup = PiRhoSoft.Composition.Variable.String(token.Text);
-						child = VariableHandler.Lookup(owner, lookup);
-						break;
-					}
-					case VariableTokenType.Number:
-					{
-						if (int.TryParse(token.Text, out var number))
-						{
-							lookup = PiRhoSoft.Composition.Variable.Int(number);
-							child = VariableHandler.Lookup(owner, lookup);
-						}
-
-						break;
-					}
-					case VariableTokenType.Type:
-					{
-						child = VariableHandler.Cast(owner, token.Text);
-						break;
-					}
-				}
-
-				if (!child.IsEmpty)
-				{
-					// if a value is set on a struct (Vector3.x for instance), the variable value needs to be
-					// reassigned to its owner
-
-					var result = SetValue_(ref child, value, index + 1);
-
-					if (result == SetVariableResult.Success && child.IsValueType)
-						result = VariableHandler.Apply(ref owner, lookup, child);
-
-					return result;
-				}
-			}
-
-			return SetVariableResult.NotFound;
-		}
-
-		#endregion
+		public VariableDefinition GetDefinition() => new VariableDefinition(RootName);
 
 		#region Parsing
 
@@ -303,5 +200,118 @@ namespace PiRhoSoft.Composition
 		}
 
 		#endregion
+	}
+
+	[Serializable]
+	public class VariableLookupReference : VariableReference
+	{
+		public Variable GetValue(IVariableCollection variables)
+		{
+			var value = IsAssigned ? Composition.Variable.Object(variables) : Composition.Variable.Empty;
+
+			foreach (var token in Tokens)
+			{
+				switch (token.Type)
+				{
+					case VariableTokenType.Name: value = VariableHandler.Lookup(value, Composition.Variable.String(token.Text)); break;
+					case VariableTokenType.Number: value = VariableHandler.Lookup(value, Composition.Variable.Int(int.Parse(token.Text))); break;
+					case VariableTokenType.Type: value = VariableHandler.Cast(value, token.Text); break;
+				}
+
+				if (value.IsEmpty)
+					break;
+			}
+
+			return value;
+		}
+	}
+
+	[Serializable]
+	public class VariableAssignmentReference : VariableReference
+	{
+		public SetVariableResult SetValue(IVariableCollection variables, Variable value)
+		{
+			if (IsAssigned)
+			{
+				var owner = Composition.Variable.Object(variables);
+				return SetValue_(ref owner, value, 0);
+			}
+			else
+			{
+				return SetVariableResult.NotFound;
+			}
+		}
+
+		private SetVariableResult SetValue_(ref Variable owner, Variable value, int index)
+		{
+			var token = Tokens[index];
+
+			if (index == Tokens.Count - 1)
+			{
+				switch (token.Type)
+				{
+					case VariableTokenType.Name:
+					{
+						return VariableHandler.Apply(ref owner, Composition.Variable.String(token.Text), value);
+					}
+					case VariableTokenType.Number:
+					{
+						if (int.TryParse(token.Text, out var number))
+							return VariableHandler.Apply(ref owner, Composition.Variable.Int(number), value);
+
+						break;
+					}
+					case VariableTokenType.Type:
+					{
+						return SetVariableResult.ReadOnly;
+					}
+				}
+			}
+			else
+			{
+				var lookup = Composition.Variable.Empty;
+				var child = Composition.Variable.Empty;
+
+				switch (token.Type)
+				{
+					case VariableTokenType.Name:
+					{
+						lookup = Composition.Variable.String(token.Text);
+						child = VariableHandler.Lookup(owner, lookup);
+						break;
+					}
+					case VariableTokenType.Number:
+					{
+						if (int.TryParse(token.Text, out var number))
+						{
+							lookup = Composition.Variable.Int(number);
+							child = VariableHandler.Lookup(owner, lookup);
+						}
+
+						break;
+					}
+					case VariableTokenType.Type:
+					{
+						child = VariableHandler.Cast(owner, token.Text);
+						break;
+					}
+				}
+
+				if (!child.IsEmpty)
+				{
+					// if a value is set on a struct (Vector3.x for instance), the variable value needs to be
+					// reassigned to its owner
+
+					var result = SetValue_(ref child, value, index + 1);
+
+					if (result == SetVariableResult.Success && child.IsValueType)
+						result = VariableHandler.Apply(ref owner, lookup, child);
+
+					return result;
+				}
+			}
+
+			return SetVariableResult.NotFound;
+		}
 	}
 }

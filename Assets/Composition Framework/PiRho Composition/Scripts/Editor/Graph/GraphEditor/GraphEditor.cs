@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities;
+using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,6 +7,7 @@ using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
@@ -30,6 +32,26 @@ namespace PiRhoSoft.Composition.Editor
 
 			return container;
 		}
+
+		#region Autocomplete
+
+		private static Object _autocompleteContext;
+		private static GraphCaller _autocompleteCaller;
+		public static WeakEvent AutocompleteChanged = new WeakEvent();
+
+		public static Object AutocompleteContext
+		{
+			get { return _autocompleteContext; }
+			set { _autocompleteContext = value; AutocompleteChanged.Trigger(); }
+		}
+
+		public static GraphCaller AutocompleteCaller
+		{
+			get { return _autocompleteCaller; }
+			set { _autocompleteCaller = value; AutocompleteChanged.Trigger(); }
+		}
+
+		#endregion
 
 		#region Graph Modification
 

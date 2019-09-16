@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition
 		private const string _nodeAlreadyRunningError = "(PCGNAR) Failed to run GraphNode '{0}' on Graph '{1}': the node is already running";
 
 		[Tooltip("The definition for the object that runs this graph")]
-        public VariableDefinition Context = new VariableDefinition("context");
+		public VariableDefinition Context = new VariableDefinition("context");
 
 		[Tooltip("The definitions for input variables used in this graph")]
 		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Input variables defined in nodes will appear here")]
@@ -60,35 +60,35 @@ namespace PiRhoSoft.Composition
 
 		#region Input and Output Schemas
 
-		private void GetInputs(IList<VariableDefinition> inputs)
+		public void GetInputs(IList<VariableDefinition> inputs, string storeName)
 		{
 			foreach (var node in Nodes)
 			{
 				if (node) // if a node type is deleted, the node will be null, and this might be called before the editor does a SyncNodes
-					node.GetInputs(inputs);
+					node.GetInputs(inputs, storeName);
 			}
 		}
 
-		private void GetOutputs(IList<VariableDefinition> outputs)
+		public void GetOutputs(IList<VariableDefinition> outputs, string storeName)
 		{
 			foreach (var node in Nodes)
 			{
 				if (node)
-					node.GetOutputs(outputs);
+					node.GetOutputs(outputs, storeName);
 			}
 		}
 
 		public void RefreshInputs()
 		{
 			var inputs = new VariableDefinitionList();
-			GetInputs(inputs);
+			GetInputs(inputs, GraphStore.InputStoreName);
 			Inputs = RefreshDefinitions(inputs);
 		}
 
 		public void RefreshOutputs()
 		{
 			var outputs = new VariableDefinitionList();
-			GetOutputs(outputs);
+			GetOutputs(outputs, GraphStore.OutputStoreName);
 			Outputs = RefreshDefinitions(outputs);
 		}
 
@@ -390,6 +390,6 @@ namespace PiRhoSoft.Composition
 #endif
 		}
 
-#endregion
+		#endregion
 	}
 }

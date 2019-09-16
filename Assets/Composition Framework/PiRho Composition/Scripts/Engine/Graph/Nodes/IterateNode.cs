@@ -8,13 +8,13 @@ namespace PiRhoSoft.Composition
 	public class IterateNode : GraphNode
 	{
 		[Tooltip("The variable list containing the objects to iterate")]
-		public VariableReference Container = new VariableReference();
+		public VariableLookupReference Container = new VariableLookupReference();
 
 		[Tooltip("The variable that will hold the number of times the iteration has run")]
-		public VariableReference Index = new VariableReference();
+		public VariableAssignmentReference Index = new VariableAssignmentReference();
 
 		[Tooltip("The variable to assign the value of each iteration")]
-		public VariableReference Value = new VariableReference();
+		public VariableAssignmentReference Value = new VariableAssignmentReference();
 
 		[Tooltip("The node to go to for each value in the iteration")]
 		public GraphNode Loop = null;

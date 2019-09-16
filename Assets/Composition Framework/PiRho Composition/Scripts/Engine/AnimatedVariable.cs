@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition
 	public class AnimatedVariable
 	{
 		[Tooltip("The variable to update as the animation plays")]
-		public VariableReference Target = new VariableReference();
+		public VariableAssignmentReference Target = new VariableAssignmentReference();
 
 		[Tooltip("Whether to advance the animation using Duration or Speed")]
 		public AnimatedVariableType Advance = AnimatedVariableType.Duration;
@@ -48,8 +48,8 @@ namespace PiRhoSoft.Composition
 
 		public IEnumerator Animate(IVariableCollection variables, Variable from, Variable to)
 		{
-			if (from.IsEmpty)
-				from = Target.GetValue(variables);
+			//if (from.IsEmpty)
+			//	from = Target.GetValue(variables);
 
 			var location = 0.0f;
 			var end = Advance == AnimatedVariableType.Speed

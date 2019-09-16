@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 		}
 
 		[Tooltip("The variable representing the store to use for bindings")]
-		public VariableReference Variables = new VariableReference();
+		public VariableLookupReference Variables = new VariableLookupReference();
 
 		[Tooltip("The location to retrieve the object from")]
 		public ObjectSource Source;

@@ -44,14 +44,8 @@ namespace PiRhoSoft.Composition
 		public OutputDictionaryNodeAttribute(string propertyName) : base(propertyName, true) { }
 	}
 
-	public abstract class GraphNode : ScriptableObject, IAutocompleteSource
+	public abstract class GraphNode : ScriptableObject
 	{
-		public class GraphNodeAutocompleteSource : AutocompleteSource
-		{
-			public override bool SupportsCustom => false;
-			public override List<AutocompleteItem> Items => new List<AutocompleteItem>();
-		}
-
 		public static class Colors
 		{
 			public static readonly Color Start = new Color(0.25f, 0.25f, 0.25f, 0.8f);
@@ -77,64 +71,74 @@ namespace PiRhoSoft.Composition
 
 		#region Inputs and Outputs
 
-		public virtual void GetInputs(IList<VariableDefinition> inputs)
+		public virtual void GetInputs(IList<VariableDefinition> inputs, string storeName)
 		{
 			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
 
 			foreach (var field in fields)
 			{
-				if (field.FieldType == typeof(VariableReference))
+				if (field.FieldType == typeof(VariableLookupReference))
 				{
-					var value = field.GetValue(this) as VariableReference;
-					var constraint = field.GetCustomAttribute<VariableReferenceAttribute>()?.Constraint;
+					var value = field.GetValue(this) as VariableLookupReference;
+					var attribute = field.GetCustomAttribute<VariableReferenceAttribute>();
 
-					if (GraphStore.IsInput(value))
-						inputs.Add(new VariableDefinition(value.RootName, constraint));
+					if (value.UsesStore(storeName))
+					{
+						if (attribute != null)
+							inputs.Add(attribute.GetDefinition(value.RootName));
+						else
+							inputs.Add(value.GetDefinition());
+					}
 				}
 				else if (field.FieldType == typeof(Expression))
 				{
 					var value = field.GetValue(this) as Expression;
-					value.GetInputs(inputs, GraphStore.InputStoreName);
+					value.GetInputs(inputs, storeName);
 				}
 				else if (field.FieldType == typeof(Message))
 				{
 					var value = field.GetValue(this) as Message;
-					value.GetInputs(inputs);
+					value.GetInputs(inputs, storeName);
 				}
 				else if (typeof(VariableSource).IsAssignableFrom(field.FieldType))
 				{
 					var value = field.GetValue(this) as VariableSource;
+					var attribute = field.GetCustomAttribute<VariableReferenceAttribute>();
 
-					var constraint = field.GetCustomAttribute<VariableReferenceAttribute>()?.Constraint;
-					if (constraint != null)
+					if (value.UsesStore(storeName))
 					{
-						if (value.Type == VariableSourceType.Reference && GraphStore.IsInput(value.Reference))
-							inputs.Add(new VariableDefinition(value.Reference.RootName, constraint));
-					}
-					else
-					{
-						value.GetInputs(inputs);
+						if (attribute != null)
+							inputs.Add(attribute.GetDefinition(value.Reference.RootName));
+						else
+							inputs.Add(value.GetDefinition());
 					}
 				}
 			}
 		}
 
-		public virtual void GetOutputs(IList<VariableDefinition> outputs)
+		public virtual void GetOutputs(IList<VariableDefinition> outputs, string storeName)
 		{
 			var fields = GetType().GetFields(BindingFlags.Instance | BindingFlags.Public);
 
 			foreach (var field in fields)
 			{
-				if (field.FieldType == typeof(VariableReference))
+				if (field.FieldType == typeof(VariableAssignmentReference))
 				{
-					var value = field.GetValue(this) as VariableReference;
-					if (GraphStore.IsOutput(value))
-						outputs.Add(new VariableDefinition(value.RootName));
+					var value = field.GetValue(this) as VariableAssignmentReference;
+					var attribute = field.GetCustomAttribute<VariableReferenceAttribute>();
+
+					if (value.UsesStore(storeName))
+					{
+						if (attribute != null)
+							outputs.Add(attribute.GetDefinition(value.RootName));
+						else
+							outputs.Add(value.GetDefinition());
+					}
 				}
 				else if (field.FieldType == typeof(Expression))
 				{
 					var value = field.GetValue(this) as Expression;
-					value.GetOutputs(outputs, GraphStore.OutputStoreName);
+					value.GetOutputs(outputs, storeName);
 				}
 			}
 		}
@@ -152,8 +156,6 @@ namespace PiRhoSoft.Composition
 		[HideInInspector] public bool IsBreakpoint = false;
 
 		public virtual Color NodeColor => Colors.Default;
-
-		public AutocompleteSource AutocompleteSource => new GraphNodeAutocompleteSource();
 
 #if UNITY_EDITOR
 		protected static string GetConnectionName(string node) => node;

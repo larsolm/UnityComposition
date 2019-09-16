@@ -12,14 +12,14 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariableReferenceControl _control;
 
-		public VariableReferenceField(string label, VariableReference value, AutocompleteSource source) : base(label, null)
+		public VariableReferenceField(string label, VariableReference value, IAutocompleteItem autocomplete) : base(label, null)
 		{
-			Setup(value, source);
+			Setup(value, autocomplete);
 		}
 
-		private void Setup(VariableReference value, AutocompleteSource source)
+		private void Setup(VariableReference value, IAutocompleteItem autocomplete)
 		{
-			_control = new VariableReferenceControl(value, source);
+			_control = new VariableReferenceControl(value, autocomplete);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<VariableReference>>(evt => base.value = evt.newValue);
 

@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -14,7 +13,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The Animator to set the parameter on")]
 		[VariableReference(typeof(Animator))]
-		public VariableReference Animator;
+		public VariableLookupReference Animator = new VariableLookupReference();
 
 		[Tooltip("The name of the parameter to set")]
 		[Inline]
@@ -40,22 +39,6 @@ namespace PiRhoSoft.Composition
 		public FloatVariableSource FloatValue = new FloatVariableSource();
 
 		public override Color NodeColor => Colors.Animation;
-
-		public override void GetInputs(IList<VariableDefinition> inputs)
-		{
-			if (GraphStore.IsInput(Animator))
-				inputs.Add(new VariableDefinition(Animator.RootName, new ObjectConstraint(typeof(Animator))));
-
-			Parameter.GetInputs(inputs);
-
-			switch (Type)
-			{
-				case AnimatorControllerParameterType.Float: FloatValue.GetInputs(inputs); break;
-				case AnimatorControllerParameterType.Int: IntValue.GetInputs(inputs); break;
-				case AnimatorControllerParameterType.Bool: BoolValue.GetInputs(inputs); break;
-				case AnimatorControllerParameterType.Trigger: break;
-			}
-		}
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{

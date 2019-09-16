@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The Object to update bindings for")]
 		[VariableReference(typeof(Object))]
-		public VariableReference Object = new VariableReference();
+		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The binding group to update (updates all if empty)")]
 		public string Group;

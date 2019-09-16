@@ -2,6 +2,7 @@
 using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -46,10 +47,10 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			_textField.SetValueWithoutNotify(_control.Value.Variable);
 
-			var source = GetCurrentSource();
+			var autocomplete = GetCurrentAutocomplete();
 			var filter = GetFilter();
 
-			_autocomplete.SetSource(source);
+			_autocomplete.SetAutocomplete(autocomplete);
 			_autocomplete.UpdateFilter(filter);
 		}
 
@@ -59,9 +60,9 @@ namespace PiRhoSoft.Composition.Editor
 				_autocomplete.Show();
 		}
 
-		private AutocompleteSource GetCurrentSource()
+		private IAutocompleteItem GetCurrentAutocomplete()
 		{
-			var source = _control.Source;
+			var autocomplete = _control.Autocomplete;
 			var index = _textField.text.LastIndexOfAny(_separators, Math.Max(0, _textField.cursorIndex - 1));
 			if (index >= 0)
 			{
@@ -70,26 +71,15 @@ namespace PiRhoSoft.Composition.Editor
 
 				foreach (var name in names)
 				{
-					var nextSource = GetNextSource(source, name);
-					if (nextSource == null)
+					var nextAutocomplete = autocomplete.GetField(name);
+					if (nextAutocomplete == null)
 						break;
 
-					source = nextSource;
+					autocomplete = nextAutocomplete;
 				}
 			}
 
-			return source;
-		}
-
-		private AutocompleteSource GetNextSource(AutocompleteSource source, string name)
-		{
-			foreach (var item in source.Items)
-			{
-				if (item.Name == name)
-					return item.Source;
-			}
-
-			return null;
+			return autocomplete;
 		}
 
 		private int GetLastSeparatorIndex()
@@ -194,10 +184,10 @@ namespace PiRhoSoft.Composition.Editor
 			public const string NoneUssClassName = ItemUssClassName + "--none";
 
 			public bool IsOpen { get; private set; }
-			public AutocompleteItem ActiveItem => _activeItem?.Item;
+			public IAutocompleteItem ActiveItem => _activeItem?.Item;
 
 			private VariableReferenceTextControl _control;
-			private AutocompleteSource _source;
+			private IAutocompleteItem _autocomplete;
 			private ScrollView _scrollView;
 			private ItemElement _activeItem;
 			private string _filter = null;
@@ -227,16 +217,16 @@ namespace PiRhoSoft.Composition.Editor
 				AddToClassList(UssClassName);
 			}
 
-			public void SetSource(AutocompleteSource source)
+			public void SetAutocomplete(IAutocompleteItem autocomplete)
 			{
-				_source = source;
+				_autocomplete = autocomplete;
 				_scrollView.contentContainer.Clear();
 				_scrollView.contentContainer.Add(_noneValidItem);
 
-				foreach (var item in _source.Items)
+				foreach (var field in autocomplete.GetFields())
 				{
 					// TODO: add clicking and hovering to select these
-					var element = new ItemElement(item);
+					var element = new ItemElement(field);
 					element.AddToClassList(ItemUssClassName);
 
 					_scrollView.contentContainer.Add(element);
@@ -326,10 +316,10 @@ namespace PiRhoSoft.Composition.Editor
 
 			private class ItemElement : TextElement
 			{
-				public AutocompleteItem Item;
+				public IAutocompleteItem Item;
 				public int ValidIndex = -1;
 
-				public ItemElement(AutocompleteItem item)
+				public ItemElement(IAutocompleteItem item)
 				{
 					Item = item;
 					text = item.Name;

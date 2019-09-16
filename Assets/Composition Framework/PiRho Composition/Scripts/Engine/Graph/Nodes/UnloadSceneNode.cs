@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The variable reference that stores the scene to unload (can be an index or a name")]
 		[Conditional(nameof(Source), (int)SceneSource.Variable)]
-		public VariableReference SceneVariable = new VariableReference();
+		public VariableLookupReference SceneVariable = new VariableLookupReference();
 
 		[Tooltip("The name of the scene to unload")]
 		[Conditional(nameof(Source), (int)SceneSource.Name)]

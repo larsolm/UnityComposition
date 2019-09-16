@@ -21,19 +21,9 @@ namespace PiRhoSoft.Composition
 		public string ScriptableObjectType;
 
 		[Tooltip("A variable reference to assign the created object to so that it can be referenced later")]
-		public VariableReference ObjectVariable = new VariableReference();
+		public VariableAssignmentReference ObjectVariable = new VariableAssignmentReference();
 
 		public override Color NodeColor => Colors.SequencingLight;
-
-		public override void GetInputs(IList<VariableDefinition> inputs)
-		{
-		}
-
-		public override void GetOutputs(IList<VariableDefinition> outputs)
-		{
-			if (GraphStore.IsOutput(ObjectVariable))
-				outputs.Add(new VariableDefinition(ObjectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
-		}
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{

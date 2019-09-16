@@ -12,7 +12,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		[Tooltip("The controller to thaw")]
 		[VariableReference(typeof(Controller))]
-		public VariableReference Controller = new VariableReference();
+		public VariableLookupReference Controller = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.SequencingDark;
 

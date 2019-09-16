@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -28,7 +27,7 @@ namespace PiRhoSoft.Composition
 		public StringVariableSource ObjectName = new StringVariableSource("Spawned Object");
 
 		[Tooltip("A variable reference to assign the created object to so that it can be referenced later")]
-		public VariableReference ObjectVariable = new VariableReference();
+		public VariableAssignmentReference ObjectVariable = new VariableAssignmentReference();
 
 		[Tooltip("How to create and position the object, with an exact position, relative to another object, or as a child of another object")]
 		[EnumButtons]
@@ -36,11 +35,11 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The object to position the created object relative to")]
 		[Conditional(nameof(Positioning), (int)ObjectPositioning.Relative)]
-		public VariableReference Object = new VariableReference();
+		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The parent object to make the created object a child of")]
 		[Conditional(nameof(Positioning), (int)ObjectPositioning.Child)]
-		public VariableReference Parent = new VariableReference();
+		public VariableLookupReference Parent = new VariableLookupReference();
 
 		[Tooltip("The position to spawn the object at")]
 		[Inline]
@@ -51,26 +50,6 @@ namespace PiRhoSoft.Composition
 		public Vector3VariableSource Rotation = new Vector3VariableSource();
 
 		public override Color NodeColor => Colors.SequencingLight;
-
-		public override void GetInputs(IList<VariableDefinition> inputs)
-		{
-			Prefab.GetInputs(inputs);
-			ObjectName.GetInputs(inputs);
-			Position.GetInputs(inputs);
-			Rotation.GetInputs(inputs);
-
-			if (Positioning == ObjectPositioning.Child && GraphStore.IsInput(Parent))
-				inputs.Add(new VariableDefinition(Parent.RootName, new ObjectConstraint(typeof(GameObject))));
-
-			if (Positioning == ObjectPositioning.Relative && GraphStore.IsInput(Object))
-				inputs.Add(new VariableDefinition(Object.RootName, new ObjectConstraint(typeof(GameObject))));
-		}
-
-		public override void GetOutputs(IList<VariableDefinition> outputs)
-		{
-			if (GraphStore.IsOutput(ObjectVariable))
-				outputs.Add(new VariableDefinition(ObjectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
-		}
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{

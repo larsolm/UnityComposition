@@ -2,8 +2,8 @@
 {
 	public class GeneralBinding : VariableBinding
 	{
-		public VariableReference Target = new VariableReference();
-		public VariableReference Binding = new VariableReference();
+		public VariableAssignmentReference Target = new VariableAssignmentReference();
+		public VariableLookupReference Binding = new VariableLookupReference();
 
 		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
 		{

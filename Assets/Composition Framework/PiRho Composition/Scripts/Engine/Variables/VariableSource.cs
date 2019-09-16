@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
@@ -16,29 +15,22 @@ namespace PiRhoSoft.Composition
 	public abstract class VariableSource
 	{
 		public VariableSourceType Type = VariableSourceType.Value;
-		[Conditional(nameof(Type), (int)VariableSourceType.Value)] public VariableReference Reference = new VariableReference();
+		[Conditional(nameof(Type), (int)VariableSourceType.Value)] public VariableLookupReference Reference = new VariableLookupReference();
 
-		public void GetInputs(IList<VariableDefinition> inputs)
-		{
-			if (Type == VariableSourceType.Reference && GraphStore.IsInput(Reference))
-			{
-				var definition = GetInputDefinition();
-				definition.Name = Reference.RootName;
-				inputs.Add(definition);
-			}
-		}
-
-		protected abstract VariableDefinition GetInputDefinition();
+		public bool UsesStore(string storeName) => Type == VariableSourceType.Reference && Reference.UsesStore(storeName);
+		public abstract VariableDefinition GetDefinition();
 	}
 
 	public abstract class VariableSource<T> : VariableSource
 	{
 		public T Value;
 
-		protected override VariableDefinition GetInputDefinition()
+		public override VariableDefinition GetDefinition()
 		{
+			var name = Type == VariableSourceType.Reference ? Reference.RootName : string.Empty;
 			var type = Variable.GetType(typeof(T));
-			return new VariableDefinition(string.Empty, type);
+
+			return new VariableDefinition(name, type);
 		}
 	}
 
@@ -178,15 +170,10 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class VariableValueSource : VariableSource
 	{
-		public VariableDefinition Definition = new VariableDefinition();
-
 		[Tooltip("The specific value of the source")]
 		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public VariableValue Value = new VariableValue();
 
-		public VariableValueSource() { }
-		public VariableValueSource(VariableType type, VariableDefinition definition) { Definition = definition; Value.Variable = definition.Generate(); }
-
-		protected override VariableDefinition GetInputDefinition() => Definition;
+		public override VariableDefinition GetDefinition() => new VariableDefinition(Type == VariableSourceType.Reference ? Reference.RootName : string.Empty);
 	}
 }
