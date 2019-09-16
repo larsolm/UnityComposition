@@ -9,8 +9,9 @@
 	max-width: 23px;
 	min-height: 17px;
 	max-height: 17px;
-	align-self: center;
+	align-self: flex-start;
 	padding: 2px;
+	margin-top: 2px;
 }
 
 .pirho-variable-reference--advanced .pirho-variable-reference__mode
@@ -27,9 +28,7 @@
 {
 	display: flex;
 	align-self: center;
-	flex-grow: 1;
 	flex-direction: row;
-	margin-left: 5px;
 }
 
 .pirho-variable-reference__advanced
@@ -52,14 +51,12 @@
 
 .pirho-variable-reference__simple__item
 {
-	flex-grow: 1;
 	flex-direction: row;
-	min-width: 60px;
+	margin-left: 5px;
 }
 
 .pirho-variable-reference__simple__item--empty
 {
-	flex-grow: 0;
 	min-width: 20px;
 }
 
@@ -71,24 +68,23 @@
 
 .pirho-variable-reference__simple__item__combo-box
 {
-	flex-grow: 1;
 }
 
 .pirho-variable-reference__simple__item__popup
 {
 	flex-grow: 1;
-	margin: 1px 0px 0px 0px;
+	margin: 1px 0px;
 }
 
 .pirho-variable-reference__simple__item--empty .pirho-variable-reference__simple__item__popup PopupTextElement
 {
-	display: none;
+	visibility: hidden;
 }
 
 .pirho-variable-reference__simple__item__array-index
 {
 	min-width: 25px;
-	margin: 0px 0px 1px 0px;
+	margin: 0px 0px 2px 0px;
 }
 
 .pirho-variable-reference__advanced__text

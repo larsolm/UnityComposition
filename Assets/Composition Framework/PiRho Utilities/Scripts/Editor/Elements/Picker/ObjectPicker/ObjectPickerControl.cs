@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
@@ -20,7 +21,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private IconButton _inspect;
 
-		public ObjectPickerControl(Object value, Type type)
+		public ObjectPickerControl(Object value, Object owner, Type type)
 		{
 			if (type == null || !(typeof(Object).IsAssignableFrom(type)))
 			{
@@ -33,16 +34,33 @@ namespace PiRhoSoft.Utilities.Editor
 			_inspect = new IconButton(Icon.Inspect.Texture, "View this object in the inspector", Inspect);
 			_inspect.AddToClassList(InspectUssClassName);
 
-			//if (typeof(Component).IsAssignableFrom(type) || typeof(GameObject) == type)
-			//{
-			//	TODO: build hierarchy of game objects
-			//}
-			//else
-			//{
-			var assets = AssetHelper.GetAssetList(type);
 			var provider = ScriptableObject.CreateInstance<ObjectProvider>();
-			provider.Setup(assets.Type.Name, assets.Paths.Prepend("None").ToList(), assets.Assets.Prepend(null).ToList(), GetIcon, OnSelected);
-			//}
+
+			if (typeof(Component).IsAssignableFrom(type) || typeof(GameObject) == type)
+			{
+				var objects = ObjectHelper.GetObjectList(type, true);
+				provider.Setup(type.Name, objects.Paths.Prepend("None").ToList(), objects.Objects.Prepend(null).ToList(), GetIcon, OnSelected);
+			}
+			else
+			{
+				var databaseAssets = AssetHelper.GetAssetList(type);
+
+				var paths = databaseAssets.Paths.Prepend("None");
+				var assets = databaseAssets.Assets.Prepend(null);
+
+				if (owner)
+				{
+					var sceneObject = owner.GetAsGameObject();
+					if (sceneObject)
+					{
+						var sceneAssets = ObjectHelper.GetObjectList(type, false); // Don't include disabled because this will look at all resources 
+						paths = paths.Concat(sceneAssets.Paths);
+						assets = assets.Concat(sceneAssets.Objects);
+					}
+				}
+
+				provider.Setup(type.Name, paths.ToList(), assets.ToList(), GetIcon, OnSelected);
+			}
 
 			Setup(provider, value);
 			Add(_inspect);

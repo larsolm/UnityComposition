@@ -14,8 +14,13 @@ namespace PiRhoSoft.Composition
 
 	public abstract class VariableSource
 	{
+		[Tooltip("Whether to use a value based on a VariableReference or a specific value")]
+		[EnumButtons]
 		public VariableSourceType Type = VariableSourceType.Value;
-		[Conditional(nameof(Type), (int)VariableSourceType.Value)] public VariableLookupReference Reference = new VariableLookupReference();
+
+		[Tooltip("A reference to the variable")]
+		[Conditional(nameof(Type), (int)VariableSourceType.Reference)]
+		public VariableLookupReference Reference = new VariableLookupReference();
 
 		public bool UsesStore(string storeName) => Type == VariableSourceType.Reference && Reference.UsesStore(storeName);
 		public abstract VariableDefinition GetDefinition();
@@ -23,6 +28,8 @@ namespace PiRhoSoft.Composition
 
 	public abstract class VariableSource<T> : VariableSource
 	{
+		[Tooltip("The value of the variable")]
+		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public T Value;
 
 		public override VariableDefinition GetDefinition()
@@ -168,11 +175,9 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
-	public class VariableValueSource : VariableSource
+	public class VariableValueSource : VariableSource<VariableValue>
 	{
-		[Tooltip("The specific value of the source")]
-		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
-		public VariableValue Value = new VariableValue();
+		public VariableValueSource() => Value = new VariableValue();
 
 		public override VariableDefinition GetDefinition() => new VariableDefinition(Type == VariableSourceType.Reference ? Reference.RootName : string.Empty);
 	}

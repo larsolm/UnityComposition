@@ -147,19 +147,9 @@ namespace PiRhoSoft.Utilities.Editor
 
 		#region Listing
 
-		public static List<AssetType> ListAssets<AssetType>() where AssetType : Object
-		{
-			return FindAssets<AssetType>().ToList();
-		}
-
 		public static IEnumerable<AssetType> FindAssets<AssetType>() where AssetType : Object
 		{
 			return FindAssets(typeof(AssetType)).Select(asset => asset as AssetType);
-		}
-
-		public static List<Object> ListAssets(Type assetType)
-		{
-			return FindAssets(assetType).ToList();
 		}
 
 		public static IEnumerable<Object> FindAssets(Type assetType)
@@ -179,21 +169,19 @@ namespace PiRhoSoft.Utilities.Editor
 			if (!_assetLists.TryGetValue(listName, out var list))
 			{
 				list = new AssetList(assetType);
-				_assetLists.Add(listName, list);
-			}
 
-			if (list.Assets == null)
-			{
-				list.Assets = ListAssets(assetType);
-
-				var paths = list.Assets.Select(asset => GetPath(asset));
+				var assets = FindAssets(assetType);
+				var paths = assets.Select(asset => GetPath(asset));
 				var prefix = FindCommonPath(paths);
 
-				list.Paths = list.Assets.Select(asset =>
+				list.Assets = assets.ToList();
+				list.Paths = assets.Select(asset =>
 				{
 					var path = GetPath(asset).Substring(prefix.Length);
 					return path.Length > 0 ? path + asset.name : asset.name;
 				}).ToList();
+
+				_assetLists.Add(listName, list);
 			}
 
 			return list;

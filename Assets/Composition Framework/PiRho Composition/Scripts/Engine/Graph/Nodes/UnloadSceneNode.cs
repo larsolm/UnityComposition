@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 
 namespace PiRhoSoft.Composition
 {
-	[CreateGraphNodeMenu("Sequencing/Unload Scene", 101)]
+	[CreateGraphNodeMenu("Object Manipulation/Unload Scene", 101)]
 	[HelpURL(Configuration.DocumentationUrl + "unload-scene-node")]
 	public sealed class UnloadSceneNode : GraphNode
 	{

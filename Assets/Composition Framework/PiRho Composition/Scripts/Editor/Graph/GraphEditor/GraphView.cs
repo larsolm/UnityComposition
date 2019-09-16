@@ -284,8 +284,6 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void PlayStateChanged(PlayModeStateChange state)
 		{
-			// TODO: need to account for graph changing during play mode
-
 			if (state == PlayModeStateChange.EnteredPlayMode)
 				Graph.OnProcessFrame += FrameChanged;
 			else if (state == PlayModeStateChange.ExitingPlayMode)
@@ -300,6 +298,8 @@ namespace PiRhoSoft.Composition.Editor
 					outputNode.UpdateColors(outputNode.Data.Node == graphNode);
 				else if (node is IInputNode inputNode)
 					inputNode.UpdateColors(inputNode.Data.Node == graphNode);
+				else if (node is StartGraphViewNode startNode)
+					startNode.Output.UpdateColor();
 			});
 		}
 
@@ -475,6 +475,7 @@ namespace PiRhoSoft.Composition.Editor
 		public const string Stylesheet = "Graph/GraphEditor/GraphViewStyle.uss";
 		public const string UssClassName = "pirho-graph-view";
 		public const string ToolbarUssClassName = UssClassName + "__toolbar";
+		public const string ToolbarMenuUssClassName = ToolbarUssClassName + "__menu";
 		public const string ToolbarButtonUssClassName = ToolbarUssClassName + "__button";
 		public const string ToolbarButtonLargeUssClassName = ToolbarButtonUssClassName + "--large";
 		public const string ToolbarButtonSmallUssClassName = ToolbarButtonUssClassName + "--small";
@@ -495,6 +496,9 @@ namespace PiRhoSoft.Composition.Editor
 
 		private readonly GraphViewWindow _window;
 		private readonly GraphProvider _graphProvider;
+
+		private ToolbarMenu _editButton;
+		private ToolbarMenu _viewButton;
 
 		private TextElement _graphButton;
 		private VisualElement _breakButton;
@@ -545,8 +549,17 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateToolbar()
 		{
-			var editButton = CreateEditMenu();
-			var viewButton = CreateViewMenu();
+			_graphButton = new TextElement() { tooltip = "Select a graph to edit" };
+			_graphButton.AddToClassList(ToolbarButtonUssClassName);
+			_graphButton.AddToClassList(ToolbarButtonLargeUssClassName);
+			_graphButton.AddToClassList(ToolbarButtonFirstUssClassName);
+			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
+
+			_editButton = CreateEditMenu();
+			_editButton.AddToClassList(ToolbarMenuUssClassName);
+
+			_viewButton = CreateViewMenu();
+			_viewButton.AddToClassList(ToolbarMenuUssClassName);
 
 			_playButton = new Image { image = _playIcon.Texture, tooltip = "Resume execution of the graph" };
 			_playButton.AddToClassList(ToolbarButtonUssClassName);
@@ -584,11 +597,6 @@ namespace PiRhoSoft.Composition.Editor
 			_loggingButton.AddToClassList(ToolbarButtonSmallUssClassName);
 			_loggingButton.AddManipulator(new Clickable(ToggleLoggingEnabled));
 
-			_graphButton = new TextElement() { tooltip = "Select a graph to edit" };
-			_graphButton.AddToClassList(ToolbarButtonUssClassName);
-			_graphButton.AddToClassList(ToolbarButtonLargeUssClassName);
-			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
-
 			_lockButton = new Image { tintColor = Color.black, tooltip = "Lock/Unlock this window so it won't be used when other graphs are opened" };
 			_lockButton.AddToClassList(ToolbarButtonUssClassName);
 			_lockButton.AddToClassList(ToolbarButtonSmallUssClassName);
@@ -604,8 +612,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			var toolbar = new Toolbar();
 			toolbar.AddToClassList(ToolbarUssClassName);
-			toolbar.Add(editButton);
-			toolbar.Add(viewButton);
+			toolbar.Add(_graphButton);
+			toolbar.Add(_editButton);
+			toolbar.Add(_viewButton);
 			toolbar.Add(_playButton);
 			toolbar.Add(_pauseButton);
 			toolbar.Add(_stepButton);
@@ -613,7 +622,6 @@ namespace PiRhoSoft.Composition.Editor
 			toolbar.Add(new ToolbarSpacer { flex = true });
 			toolbar.Add(_breakButton);
 			toolbar.Add(_loggingButton);
-			toolbar.Add(_graphButton);
 			toolbar.Add(watchButton);
 			toolbar.Add(_lockButton);
 
@@ -658,6 +666,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			_graphButton.text = CurrentGraph == null ? "No Graph Selected" : CurrentGraph.name;
 			_lockButton.image = IsLocked ? Icon.Locked.Texture : Icon.Unlocked.Texture;
+
+			_editButton.SetEnabled(CurrentGraph != null);
+			_viewButton.SetEnabled(CurrentGraph != null);
 
 			_playButton.SetEnabled(isEnabled);
 			_pauseButton.SetEnabled(isEnabled);

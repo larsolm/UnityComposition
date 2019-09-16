@@ -120,10 +120,10 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				var property = _keysProperty.GetArrayElementAtIndex(i);
 				if (property.stringValue == key)
-					return false;
+					return true;
 			}
 
-			return true;
+			return false;
 		}
 	}
 }

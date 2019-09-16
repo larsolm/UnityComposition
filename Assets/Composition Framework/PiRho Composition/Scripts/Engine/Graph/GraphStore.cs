@@ -156,7 +156,7 @@ namespace PiRhoSoft.Composition
 		{
 			if (definition.Type == VariableType.Object && definition.Constraint is ObjectConstraint constraint && value.TryGetObject<Object>(out var obj))
 			{
-				var resolved = ComponentHelper.GetAsObject(constraint.ObjectType, obj);
+				var resolved = obj.GetAsObject(constraint.ObjectType);
 				value = Variable.Object(resolved);
 			}
 

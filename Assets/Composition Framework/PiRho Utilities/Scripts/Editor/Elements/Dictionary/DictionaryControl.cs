@@ -13,6 +13,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public static readonly string EmptyUssClassName = UssClassName + "--empty";
 		public static readonly string AddDisabledUssClassName = UssClassName + "--add-disabled";
 		public static readonly string RemoveDisabledUssClassName = UssClassName + "--remove-disabled";
+		public static readonly string MoveDisabledUssClassName = UssClassName + "--move-disabled";
 		public static readonly string AddKeyInvalidUssClassName = UssClassName + "--add-key-invalid";
 		public static readonly string EmptyLabelUssClassName = UssClassName + "__empty-label";
 		public static readonly string ItemsUssClassName = UssClassName + "__items";
@@ -75,7 +76,8 @@ namespace PiRhoSoft.Utilities.Editor
 			EnableInClassList(EmptyUssClassName, Proxy.KeyCount == 0);
 			EnableInClassList(AddDisabledUssClassName, !Proxy.AllowAdd);
 			EnableInClassList(RemoveDisabledUssClassName, !Proxy.AllowRemove);
-			
+			EnableInClassList(MoveDisabledUssClassName, !Proxy.AllowReorder);
+
 			_removeButtons.ForEach(button =>
 			{
 				var index = GetItemIndex(button.parent);
@@ -148,8 +150,8 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				var content = Proxy.CreateField(index);
 				content.AddToClassList(ItemContentUssClassName);
-				item.RemoveAt(0);
-				item.Insert(0, content);
+				item.RemoveAt(1);
+				item.Insert(1, content);
 			}
 		}
 

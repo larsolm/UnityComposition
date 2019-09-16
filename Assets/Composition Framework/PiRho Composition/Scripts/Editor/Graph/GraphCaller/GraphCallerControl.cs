@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities.Editor;
-using System.Collections.Generic;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -16,18 +15,18 @@ namespace PiRhoSoft.Composition.Editor
 		private ListControl _inputsList;
 		private ListControl _outputsList;
 
-		public GraphCallerControl(GraphCaller value)
+		public GraphCallerControl(GraphCaller value, Object owner)
 		{
 			Value = value;
 
-			var picker = new ObjectPickerControl(Value.Graph, typeof(Graph)) { tooltip = "The Graph to execute when this is called" };
+			var picker = new ObjectPickerControl(Value.Graph, owner, typeof(Graph)) { tooltip = "The Graph to execute when this is called" };
 			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{
 				Value.Graph = evt.newValue as Graph;
 				Refresh();
 			});
 
-			_inputsProxy = new InputsProxy(Value) { Label = "Inputs", Tooltip = "The input values to set for the Graph" };
+			_inputsProxy = new InputsProxy(Value, owner) { Label = "Inputs", Tooltip = "The input values to set for the Graph" };
 			_outputsProxy = new OutputsProxy(Value) { Label = "Outputs", Tooltip = "The output values to resolve from this Graph" };
 
 			_inputsList = new ListControl(_inputsProxy);
@@ -87,8 +86,11 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			public override int ItemCount => Caller.Inputs.Count;
 
-			public InputsProxy(GraphCaller caller) : base(caller)
+			private readonly Object _owner;
+
+			public InputsProxy(GraphCaller caller, Object owner) : base(caller)
 			{
+				_owner = owner;
 			}
 
 			public override VisualElement CreateElement(int index)
@@ -98,7 +100,7 @@ namespace PiRhoSoft.Composition.Editor
 
 				var referenceControl = new VariableReferenceControl(input.Reference, null); // TODO: Add an autocompletesource
 
-				var variableControl = new VariableControl(input.Value.Variable, Caller.GetInputDefinition(input));
+				var variableControl = new VariableControl(input.Value.Variable, Caller.GetInputDefinition(input), _owner);
 				variableControl.RegisterCallback<ChangeEvent<Variable>>(evt =>
 				{
 					input.Value.Variable = evt.newValue;

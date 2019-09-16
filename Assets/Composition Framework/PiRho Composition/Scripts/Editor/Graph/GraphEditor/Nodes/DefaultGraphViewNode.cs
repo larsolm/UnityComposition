@@ -20,7 +20,7 @@ namespace PiRhoSoft.Composition.Editor
 		protected static readonly Icon _renameIcon = Icon.BuiltIn("editicon.sml");
 
 		public GraphViewInputPort Input { get; private set; }
-		public List<GraphViewOutputPort> Outputs { get; private set; }
+		public List<GraphViewOutputPort> Outputs { get; private set; } = new List<GraphViewOutputPort>();
 
 		protected readonly TextField _rename;
 		protected readonly VisualElement _breakpoint;
@@ -39,14 +39,32 @@ namespace PiRhoSoft.Composition.Editor
 			_callstackBorder = CreateCallstackBorder();
 			_nodeConnector = nodeConnector;
 
-			Outputs = new List<GraphViewOutputPort>(Data.Connections.Count);
-			CreateOutputs(Outputs, nodeConnector);
+			CreateOutputs(Outputs, nodeConnector, null);
 		}
 
 		private void CreateInput(GraphViewConnector nodeConnector)
 		{
 			Input = new GraphViewInputPort(this, nodeConnector) { tooltip = "Drag an output to here to make a connection" };
 			titleContainer.Insert(0, Input);
+		}
+
+		protected void CreateOutputs(List<GraphViewOutputPort> outputs, GraphViewConnector nodeConnector, SerializedProperty renameableProperty)
+		{
+			Data.RefreshConnections();
+			outputs.Clear();
+
+			for (var i = 0; i < Data.Connections.Count; i++)
+			{
+				var connection = Data.Connections[i];
+				var nameProperty = renameableProperty?.FindPropertyRelative(i.ToString());
+				var output = new GraphViewOutputPort(this, connection, nodeConnector, nameProperty) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" };
+				outputContainer.Add(output);
+				outputs.Add(output);
+			}
+
+			expanded = Data.Connections.Count > 0;
+
+			RefreshPorts();
 		}
 
 		private TextField CreateRename()
@@ -91,12 +109,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		public void UpdateColors(bool active)
 		{
-			var iteration = 0; // TODO: maybe get title from the node just like color?
-			var label = iteration > 0 ? string.Format("{0} ({1})", Data.Node.name, iteration) : Data.Node.name;
 			var inCallstack = Data.Node.Graph.IsInCallStack(Data.Node);
 			var paused = Data.Node.Graph.DebugState == Graph.PlaybackState.Paused;
-
-			title = label;
 
 			_callstackBorder.EnableInClassList(InCallstackUssClassName, inCallstack);
 			_callstackBorder.EnableInClassList(ActiveInCallstackUssClassName, inCallstack && active);

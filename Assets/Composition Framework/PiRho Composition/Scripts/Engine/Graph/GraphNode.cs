@@ -175,7 +175,6 @@ namespace PiRhoSoft.Composition
 			public NodeData(GraphNode node)
 			{
 				Node = node;
-				RefreshConnections();
 			}
 
 			public void RefreshConnections()
@@ -257,7 +256,7 @@ namespace PiRhoSoft.Composition
 				else if (!string.IsNullOrEmpty(key))
 					Name = GetConnectionName(field, key);
 				else
-					Name = Name = GetConnectionName(field);
+					Name = GetConnectionName(field);
 			}
 
 			public void SetTarget(NodeData target)

@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class ResetVariableList : SerializedList<string> { }
 
-	[CreateGraphNodeMenu("Composition/Reset Variables Node", 30)]
+	[CreateGraphNodeMenu("Composition/Reset Variables", 30)]
 	[HelpURL(Configuration.DocumentationUrl + "reset-variables-node")]
 	public class ResetVariablesNode : GraphNode
 	{

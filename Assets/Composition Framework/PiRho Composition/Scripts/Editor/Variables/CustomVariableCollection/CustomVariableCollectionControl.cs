@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -10,11 +11,11 @@ namespace PiRhoSoft.Composition.Editor
 		private VariablesProxy _proxy;
 		private DictionaryControl _dictionary;
 
-		public CustomVariableCollectionControl(CustomVariableCollection value)
+		public CustomVariableCollectionControl(CustomVariableCollection value, Object owner)
 		{
 			Value = value;
 
-			_proxy = new VariablesProxy(value);
+			_proxy = new VariablesProxy(value, owner);
 			_dictionary = new DictionaryControl(_proxy);
 
 			Refresh();
@@ -57,9 +58,12 @@ namespace PiRhoSoft.Composition.Editor
 			public bool CanRemove(int index) => true;
 			public bool CanReorder(int from, int to) => true;
 
-			public VariablesProxy(CustomVariableCollection variables)
+			private readonly Object _owner;
+
+			public VariablesProxy(CustomVariableCollection variables, Object owner)
 			{
 				Variables = variables;
+				_owner = owner;
 			}
 
 			public VisualElement CreateField(int index)
@@ -79,10 +83,10 @@ namespace PiRhoSoft.Composition.Editor
 						label.SetValueWithoutNotify(evt.previousValue);
 				});
 
-				var variableControl = new VariableControl(value, definition);
+				var variableControl = new VariableControl(value, definition, _owner);
 				variableControl.RegisterCallback<ChangeEvent<Variable>>(evt => Variables.SetVariable(index, evt.newValue));
 				
-				var definitionControl = new VariableDefinitionControl(definition);
+				var definitionControl = new VariableDefinitionControl(definition, _owner);
 				definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt =>
 				{
 					variableControl.SetDefinition(evt.newValue);

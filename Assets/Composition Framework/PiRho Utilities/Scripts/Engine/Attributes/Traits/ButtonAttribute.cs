@@ -1,5 +1,8 @@
-﻿namespace PiRhoSoft.Utilities
+﻿using System;
+
+namespace PiRhoSoft.Utilities
 {
+	[AttributeUsage(AttributeTargets.Field, AllowMultiple = true)]
 	public class ButtonAttribute : PropertyTraitAttribute
 	{
 		public const int Phase = PerContainerPhase;

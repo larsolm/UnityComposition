@@ -77,12 +77,12 @@ namespace PiRhoSoft.Composition
 			{
 				if (type == GameObjectName)
 				{
-					var gameObject = ComponentHelper.GetAsGameObject(obj);
+					var gameObject = obj.GetAsGameObject();
 					return Variable.Object(gameObject);
 				}
 				else
 				{
-					var component = ComponentHelper.GetAsComponent(obj, type);
+					var component = obj.GetAsComponent(type);
 					return Variable.Object(component);
 				}
 			}
@@ -96,12 +96,12 @@ namespace PiRhoSoft.Composition
 			{
 				if (type == GameObjectName)
 				{
-					var gameObject = ComponentHelper.GetAsGameObject(obj);
+					var gameObject = obj.GetAsGameObject();
 					return gameObject != null;
 				}
 				else
 				{
-					var component = ComponentHelper.GetAsComponent(obj, type);
+					var component = obj.GetAsComponent(type);
 					return component != null;
 				}
 			}

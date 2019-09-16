@@ -427,9 +427,9 @@ namespace PiRhoSoft.Composition
 		{
 			var value = reference.GetValue(variables);
 
-			if (value.HasObject<Object>())
+			if (value.TryGetObject<Object>(out var obj))
 			{
-				result = ComponentHelper.GetAsObject<ObjectType>(value.GetObject<Object>());
+				result = obj.GetAsObject<ObjectType>();
 
 				if (result != null)
 					return true;

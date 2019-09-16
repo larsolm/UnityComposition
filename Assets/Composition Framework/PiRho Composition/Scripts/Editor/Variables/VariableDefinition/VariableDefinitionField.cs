@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -11,14 +12,14 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariableDefinitionControl _control;
 
-		public VariableDefinitionField(string label, VariableDefinition value) : base(label, null)
+		public VariableDefinitionField(string label, VariableDefinition value, Object owner) : base(label, null)
 		{
-			Setup(value);
+			Setup(value, owner);
 		}
 
-		private void Setup(VariableDefinition value)
+		private void Setup(VariableDefinition value, Object owner)
 		{
-			_control = new VariableDefinitionControl(value);
+			_control = new VariableDefinitionControl(value, owner);
 			_control.AddToClassList(InputUssClassName);
 			_control.RegisterCallback<ChangeEvent<VariableDefinition>>(evt => base.value = evt.newValue);
 
