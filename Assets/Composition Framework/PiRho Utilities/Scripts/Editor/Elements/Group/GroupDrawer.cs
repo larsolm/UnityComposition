@@ -13,11 +13,8 @@ namespace PiRhoSoft.Utilities.Editor
 			var parent = property.GetParent();
 
 			Frame frame = null;
-
-			var sibling = parent.Copy();
-			var next = sibling.NextVisible(true);
-
-			while (next) // TODO: need end property when not at the root
+			
+			foreach (var sibling in parent.Children())
 			{
 				var field = fieldInfo.DeclaringType.GetField(sibling.name, BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 
@@ -43,8 +40,6 @@ namespace PiRhoSoft.Utilities.Editor
 						break;
 					}
 				}
-
-				next = sibling.NextVisible(false);
 			}
 
 			return frame ?? new VisualElement();

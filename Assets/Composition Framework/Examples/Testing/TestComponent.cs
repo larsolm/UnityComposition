@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PiRhoSoft.Utilities;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.CompositionExample
@@ -13,6 +15,6 @@ namespace PiRhoSoft.CompositionExample
 	[AddComponentMenu("PiRho Soft/Examples/Test")]
 	public class TestComponent : MonoBehaviour
 	{
-		public AnimationCurve Curve = new AnimationCurve();
+		[Inline] public TestClass Test = new TestClass();
 	}
 }
