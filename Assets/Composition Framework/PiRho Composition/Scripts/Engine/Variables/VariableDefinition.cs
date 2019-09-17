@@ -1,7 +1,9 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
 using System.IO;
+using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
@@ -86,7 +88,44 @@ namespace PiRhoSoft.Composition
 		void ISerializationCallbackReceiver.OnAfterDeserialize() => _constraintData.LoadClass(out _constraint);
 	}
 
-	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition> { }
+	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition>
+	{
+		private const string _duplicateDefinitionWarning = "(VDLDD) failed to add definition '{0}' with type '{1}': the definition has already been added with type '{2}'";
+
+		public new void Add(VariableDefinition definition)
+		{
+			Add(definition, null);
+		}
+
+		public void Add(VariableDefinition definition, Object context)
+		{
+			var existing = this.FirstOrDefault(d => d.Name == definition.Name);
+
+			if (existing != null)
+				Merge(definition, existing, context);
+			else
+				base.Add(definition);
+		}
+
+		private void Merge(VariableDefinition from, VariableDefinition into, Object context)
+		{
+			if (into.Type == VariableType.Empty)
+			{
+				into.Type = from.Type;
+			}
+			else if (from.Type != VariableType.Empty && into.Type != from.Type)
+			{
+				Debug.LogFormat(context, _duplicateDefinitionWarning, from.Type);
+				return;
+			}
+
+			// TODO: ideally there would be a warning if both have different and non-default constraints - not sure
+			// the best way to do that
+
+			if (into.Constraint == null)
+				into.Constraint = from.Constraint;
+		}
+	}
 
 	public abstract class VariableConstraint : ISerializableData
 	{

@@ -1,10 +1,8 @@
-﻿using System.Collections.Generic;
-
-namespace PiRhoSoft.Composition
+﻿namespace PiRhoSoft.Composition
 {
 	internal abstract class MemberOperator : InfixOperation
 	{
-		public override void GetInputs(IList<VariableDefinition> inputs, string source)
+		public override void GetInputs(VariableDefinitionList inputs, string source)
 		{
 			if (Left is MemberOperator)
 				Left.GetInputs(inputs, source);

@@ -62,7 +62,7 @@ namespace PiRhoSoft.Composition
 
 		#region Input and Output Schemas
 
-		public void GetInputs(IList<VariableDefinition> inputs, string storeName)
+		public void GetInputs(VariableDefinitionList inputs, string storeName)
 		{
 			foreach (var node in Nodes)
 			{
@@ -71,7 +71,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public void GetOutputs(IList<VariableDefinition> outputs, string storeName)
+		public void GetOutputs(VariableDefinitionList outputs, string storeName)
 		{
 			foreach (var node in Nodes)
 			{

@@ -60,7 +60,7 @@ namespace PiRhoSoft.Composition.Editor
 				Fields.Clear();
 
 				var graph = obj as Graph;
-				var inputs = new List<VariableDefinition>();
+				var inputs = new VariableDefinitionList();
 
 				graph.GetInputs(inputs, GraphStore.InputStoreName);
 
@@ -85,7 +85,7 @@ namespace PiRhoSoft.Composition.Editor
 				Fields.Clear();
 
 				var graph = obj as Graph;
-				var outputs = new List<VariableDefinition>();
+				var outputs = new VariableDefinitionList();
 
 				graph.GetOutputs(outputs, GraphStore.OutputStoreName);
 
@@ -110,7 +110,7 @@ namespace PiRhoSoft.Composition.Editor
 				Fields.Clear();
 
 				var graph = obj as Graph;
-				var locals = new List<VariableDefinition>();
+				var locals = new VariableDefinitionList();
 
 				graph.GetInputs(locals, GraphStore.LocalStoreName);
 				graph.GetOutputs(locals, GraphStore.LocalStoreName);

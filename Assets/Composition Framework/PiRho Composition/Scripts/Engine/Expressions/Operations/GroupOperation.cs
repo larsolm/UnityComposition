@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition
 			builder.Append(ExpressionLexer.GroupCloseSymbol);
 		}
 
-		public override void GetInputs(IList<VariableDefinition> inputs, string source)
+		public override void GetInputs(VariableDefinitionList inputs, string source)
 		{
 			_group.GetInputs(inputs, source);
 		}
