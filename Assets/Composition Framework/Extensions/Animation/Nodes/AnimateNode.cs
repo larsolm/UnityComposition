@@ -2,10 +2,9 @@
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[CreateGraphNodeMenu("Animation/Animate", 0)]
-	[HelpURL(Configuration.DocumentationUrl + "play-animation-node")]
 	public class AnimateNode : GraphNode
 	{
 		private const string _invalidInputsWarning = "(PCANIA) failed to animate in node '{0}': the types '{1}' and '{2}' cannot be animated";

@@ -5,6 +5,7 @@
 .pirho-rollout__icon
 {
 	margin-top: 1px;
+	align-self: center;
 }
 
 .pirho-rollout--collapsed .pirho-frame__content

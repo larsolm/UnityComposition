@@ -1,10 +1,11 @@
 ﻿using System;
 using UnityEditor;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Utilities.Editor
 {
-	public class ScenePickerField : BaseField<string>
+	public class ScenePickerField : BaseField<AssetReference>
 	{
 		public static readonly string UssClassName = "pirho-scene-picker-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
@@ -12,16 +13,16 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private ScenePickerControl _control;
 
-		public ScenePickerField(string label, string path, Action onCreate) : base(label, null)
+		public ScenePickerField(string label, AssetReference value, Action onCreate) : base(label, null)
 		{
-			Setup(path, onCreate);
+			Setup(value, onCreate);
 		}
 
-		private void Setup(string value, Action onCreate)
+		private void Setup(AssetReference value, Action onCreate)
 		{
 			_control = new ScenePickerControl(value, onCreate);
 			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<string>>(evt => base.value = evt.newValue);
+			_control.RegisterCallback<ChangeEvent<AssetReference>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
@@ -30,10 +31,10 @@ namespace PiRhoSoft.Utilities.Editor
 			SetValueWithoutNotify(value);
 		}
 
-		public override void SetValueWithoutNotify(string newValue)
+		public override void SetValueWithoutNotify(AssetReference newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
-			_control.SetValueWithoutNotify(SceneHelper.GetSceneFromPath(newValue));
+			_control.SetValueWithoutNotify(newValue);
 		}
 
 		#region UXML Support
@@ -52,8 +53,9 @@ namespace PiRhoSoft.Utilities.Editor
 
 				var field = element as ScenePickerField;
 				var path = _path.GetValueFromBag(bag, cc);
+				var guid = AssetDatabase.AssetPathToGUID(path);
 
-				field.Setup(path, null);
+				field.Setup(new AssetReference(guid), null);
 			}
 		}
 

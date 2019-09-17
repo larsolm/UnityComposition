@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
 	public class MenuItemTemplate
@@ -40,7 +40,6 @@ namespace PiRhoSoft.Composition
 	}
 
 	[DisallowMultipleComponent]
-	[HelpURL(Configuration.DocumentationUrl + "menu-item")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu Item")]
 	public class MenuItem : BindingRoot
 	{

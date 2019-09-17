@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[CreateGraphNodeMenu("Sequencing/Spawn Player", 21)]
+	[CreateGraphNodeMenu("Monster RPG/Spawn Player", 21)]
 	public class SpawnPlayer : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

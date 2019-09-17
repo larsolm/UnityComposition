@@ -5,13 +5,12 @@ using UnityEngine;
 using UnityEngine.Playables;
 using UnityEngine.Timeline;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
 	public class TimelineVariableSource : VariableSource<TimelineAsset> { }
 
 	[CreateGraphNodeMenu("Animation/Play Timeline", 200)]
-	[HelpURL(Configuration.DocumentationUrl + "play-timeline-node")]
 	public class PlayTimelineNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

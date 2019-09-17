@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[HelpURL(MonsterRpg.DocumentationUrl + "area-controller")]
-	[AddComponentMenu("PiRho Soft/Controllers/Area Controller")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Area Controller")]
 	public class AreaController : Controller
 	{
 		[Tooltip("The distance to the left this mover can travel from its starting point")] [Minimum(0.0f)] public float LeftDistance = 0;
@@ -21,8 +20,7 @@ namespace PiRhoSoft.MonsterRpg
 		private float _range;
 		private bool _moving;
 
-		private float _horizontal = 0.0f;
-		private float _vertical = 0.0f;
+		private Vector2 _move = Vector2.zero;
 
 		void Start()
 		{
@@ -47,20 +45,16 @@ namespace PiRhoSoft.MonsterRpg
 					if (_moving)
 					{
 						var direction = GetDirection();
-						var movement = Direction.GetVector(direction);
-
-						_horizontal = movement.x;
-						_vertical = movement.y;
+						_move = Direction.GetVector(direction);
 					}
 					else
 					{
-						_horizontal = 0.0f;
-						_vertical = 0.0f;
+						_move = Vector2.zero;
 					}
 				}
 			}
 
-			UpdateMover(_horizontal, _vertical);
+			UpdateMover(_move);
 		}
 
 		public float GetNextRange()
@@ -79,30 +73,5 @@ namespace PiRhoSoft.MonsterRpg
 
 			return MovementDirection.None;
 		}
-
-		#region Persistence
-
-		public override void Load(string saveData)
-		{
-			var elements = saveData.Split('|');
-
-			if (elements.Length == 7)
-			{
-				if (int.TryParse(elements[0], out var x)) _area.x = x;
-				if (int.TryParse(elements[1], out var y)) _area.y = y;
-				if (int.TryParse(elements[2], out var width)) _area.width = width;
-				if (int.TryParse(elements[3], out var height)) _area.height = height;
-				if (float.TryParse(elements[4], out var delay)) _delay = delay;
-				if (float.TryParse(elements[5], out var range)) _range = range;
-				if (bool.TryParse(elements[6], out var moving)) _moving = moving;
-			}
-		}
-
-		public override string Save()
-		{
-			return string.Format("{0}|{1}|{2}|{3}|{4}|{5}|{6}", _area.x, _area.y, _area.width, _area.height, _delay, _range, _moving);
-		}
-
-		#endregion
 	}
 }

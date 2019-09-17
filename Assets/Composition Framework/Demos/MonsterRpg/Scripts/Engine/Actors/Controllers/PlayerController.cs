@@ -1,54 +1,34 @@
-﻿using PiRhoSoft.Utilities;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace PiRhoSoft.MonsterRpg
 {
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Player))]
-	[HelpURL(MonsterRpg.DocumentationUrl + "player-controller")]
-	[AddComponentMenu("PiRho Soft/Controllers/Player Controller")]
+	[RequireComponent(typeof(PlayerInput))]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Player Controller")]
 	public class PlayerController : Controller
 	{
-		[Tooltip("The input axis to use for horizontal movement")] public string HorizontalAxis = "Horizontal";
-		[Tooltip("The input axis to use for vertical movement")] public string VerticalAxis = "Vertical";
-		[Tooltip("The input button to use for interacting")] public string InteractButton = "Submit";
-
-		protected float _horizontal = 0.0f;
-		protected float _vertical = 0.0f;
-		protected bool _interact = false;
-
-		void Update()
-		{
-			if (IsFrozen)
-				UpdateInput();
-			else
-				ClearInput();
-		}
+		private Vector2 _move = Vector2.zero;
 
 		void FixedUpdate()
 		{
-			ProcessInput();
-
-			_interact = false;
+			UpdateMover(_move);
 		}
 
-		private void UpdateInput()
+		private void OnMove(InputValue value)
 		{
+			_move = value.Get<Vector2>();
 		}
 
-		private void ClearInput()
+		private void OnInteract(InputValue value)
 		{
-			_horizontal = 0.0f;
-			_vertical = 0.0f;
-			_interact = false;
-		}
-
-		private void ProcessInput()
-		{
-			UpdateMover(_horizontal, _vertical);
-
-			if (_interact)
-				Player.Instance.Interact();
+			if (!IsFrozen)
+			{
+				var input = value.Get<float>();
+				if (input > 0.0f)
+					Player.Instance.Interact();
+			}
 		}
 	}
 }

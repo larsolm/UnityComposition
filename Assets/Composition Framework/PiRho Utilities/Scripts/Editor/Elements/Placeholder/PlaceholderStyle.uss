@@ -2,6 +2,6 @@
 {
 	flex-grow: 1;
 	position: absolute;
-	padding: 2px 3px 3px 3px;
+	padding: 0px 3px;
 	opacity: 0.5;
 }

@@ -14,7 +14,7 @@ namespace PiRhoSoft.MonsterRpg
 	}
 
 	[DisallowMultipleComponent]
-	[AddComponentMenu("Monster RPG/World/Layer Collision")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Layer Collision")]
 	public class LayerCollision : MonoBehaviour
 	{
 		private static int[] _layers;

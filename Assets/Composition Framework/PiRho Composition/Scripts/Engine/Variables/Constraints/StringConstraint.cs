@@ -9,7 +9,6 @@ namespace PiRhoSoft.Composition
 		public override VariableType Type => VariableType.String;
 
 		public List<string> Values { get => _values; set => SetValues(value); }
-
 		private List<string> _values;
 
 		public StringConstraint()

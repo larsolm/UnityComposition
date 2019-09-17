@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[CreateGraphNodeMenu("Sequencing/Transform Object", 200)]
-	[HelpURL(Configuration.DocumentationUrl + "transform-node")]
 	public class TransformNode : GraphNode
 	{
 		public enum AnimationType

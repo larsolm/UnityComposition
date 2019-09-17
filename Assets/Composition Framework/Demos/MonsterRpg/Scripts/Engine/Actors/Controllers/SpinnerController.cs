@@ -3,8 +3,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[AddComponentMenu("PiRho Soft/Controllers/Spinner Controller")]
-	[HelpURL(MonsterRpg.DocumentationUrl + "spinner-controller")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Spinner Controller")]
 	public class SpinnerController : Controller
 	{
 		public enum SpinType
@@ -66,25 +65,5 @@ namespace PiRhoSoft.MonsterRpg
 
 			return MovementDirection.None;
 		}
-
-		#region Persistence
-
-		public override void Load(string saveData)
-		{
-			var elements = saveData.Split('|');
-
-			if (elements.Length == 2)
-			{
-				if (float.TryParse(elements[0], out var delay)) _delay = delay;
-				if (float.TryParse(elements[1], out var range)) _range = range;
-			}
-		}
-
-		public override string Save()
-		{
-			return string.Format("{0}|{1}", _delay, _range);
-		}
-
-		#endregion
 	}
 }

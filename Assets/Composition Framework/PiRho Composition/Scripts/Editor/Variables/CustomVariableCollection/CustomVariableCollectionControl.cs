@@ -6,6 +6,11 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class CustomVariableCollectionControl : VisualElement
 	{
+		public const string Stylesheet = "Variables/CustomVariableCollection/CustomVariableCollectionStyle.uss";
+		public const string UssClassName = "pirho-custom-variable-collection";
+		public const string VariableUssClassName = UssClassName + "__variable";
+		public const string VariableNameUssClassName = VariableUssClassName + "__name";
+
 		public CustomVariableCollection Value { get; private set; }
 
 		private VariablesProxy _proxy;
@@ -13,6 +18,9 @@ namespace PiRhoSoft.Composition.Editor
 
 		public CustomVariableCollectionControl(CustomVariableCollection value, Object owner)
 		{
+			AddToClassList(UssClassName);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
+
 			Value = value;
 
 			_proxy = new VariablesProxy(value, owner);
@@ -73,8 +81,11 @@ namespace PiRhoSoft.Composition.Editor
 				var definition = Variables.Definitions[index];
 
 				var rollout = new RolloutControl(false) { userData = index };
+				rollout.AddToClassList(VariableUssClassName);
+				rollout.SetLabel(null);
 
 				var label = new TextField() { value = name, isDelayed = true };
+				label.AddToClassList(VariableNameUssClassName);
 				label.RegisterValueChangedCallback(evt =>
 				{
 					if (!Variables.Map.ContainsKey(evt.newValue))
@@ -84,12 +95,18 @@ namespace PiRhoSoft.Composition.Editor
 				});
 
 				var variableControl = new VariableControl(value, definition, _owner);
-				variableControl.RegisterCallback<ChangeEvent<Variable>>(evt => Variables.SetVariable(index, evt.newValue));
-				
 				var definitionControl = new VariableDefinitionControl(definition, _owner);
+				definitionControl.SetLabel(null);
+
+				variableControl.RegisterCallback<ChangeEvent<Variable>>(evt =>
+				{
+					Variables.SetVariable(index, evt.newValue);
+					definitionControl.SetValueWithoutNotify(variableControl.Definition);
+				});
+				
 				definitionControl.RegisterCallback<ChangeEvent<VariableDefinition>>(evt =>
 				{
-					variableControl.SetDefinition(evt.newValue);
+					variableControl.SetDefinition(evt.newValue);					
 				});
 
 				rollout.Header.Add(label);

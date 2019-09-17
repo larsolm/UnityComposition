@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(Configuration.DocumentationUrl + "show-control-node")]
 	[CreateGraphNodeMenu("Interface/Show Control", 101)]
 	public class ShowControlNode : GraphNode
 	{

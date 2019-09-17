@@ -18,12 +18,11 @@ namespace PiRhoSoft.MonsterRpg
 	[RequireComponent(typeof(Trainer))]
 	[RequireComponent(typeof(PlayerController))]
 	[RequireComponent(typeof(Rigidbody2D))]
-	[HelpURL(MonsterRpg.DocumentationUrl + "player")]
-	[AddComponentMenu("Monster RPG/World/Player")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Player")]
 	public class Player : VariableSetComponent
 	{
-		private const string _secondInstanceWarning = "(WWMSI) A second instance of WorldManager was created";
-		private const string _missingSpeciesWarning = "(WPMS) The Species at the path {0} for the Player's Creature could not be found";
+		private const string _secondInstanceWarning = "(MPRGPSI) A second instance of Player was created";
+		private const string _missingSpeciesWarning = "(MRPGPMS) The Species at the path {0} for the Player's Creature could not be found";
 
 		public static Player Instance { get; private set; }
 
@@ -44,7 +43,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			if (Instance != this)
 			{
-				Debug.LogWarningFormat(_secondInstanceWarning, GetType().Name);
+				Debug.LogWarning(_secondInstanceWarning, this);
 				Destroy(this);
 			}
 			else

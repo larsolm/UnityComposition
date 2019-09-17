@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(Configuration.DocumentationUrl + "selection-control")]
 	[RequireComponent(typeof(Menu))]
 	public class SelectionControl : InterfaceControl
 	{

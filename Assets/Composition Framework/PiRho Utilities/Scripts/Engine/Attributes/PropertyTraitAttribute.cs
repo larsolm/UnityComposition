@@ -5,7 +5,8 @@ namespace PiRhoSoft.Utilities
 	public enum TraitLocation
 	{
 		Before,
-		After
+		After,
+		Right
 	}
 
 	public enum TraitMessageType

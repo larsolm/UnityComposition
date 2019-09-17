@@ -13,10 +13,13 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public const string Stylesheet = "Variables/Variable/VariableStyle.uss";
 		public const string UssClassName = "pirho-variable";
+		public const string EmptyUssClassName = UssClassName + "__empty";
+		public const string BoolUssClassName = UssClassName + "__bool";
 		public const string NumberUssClassName = UssClassName + "__number";
 		public const string NumberHasRangeUssClassName = NumberUssClassName + "--has-range";
 		public const string NumberSliderUssClassName = NumberUssClassName + "__slider";
 		public const string NumberFieldUssClassName = NumberUssClassName + "__field";
+		public const string FieldUssClassName = UssClassName + "__field";
 
 		public Variable Value { get; private set; }
 		public VariableDefinition Definition { get; private set; }
@@ -169,6 +172,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateEmpty()
 		{
 			_emptyField = new EnumField(VariableType.Empty);
+			_emptyField.AddToClassList(EmptyUssClassName);
 			_emptyField.RegisterValueChangedCallback(evt =>
 			{
 				var type = (VariableType)evt.newValue;
@@ -189,6 +193,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateBool()
 		{
 			_boolToggle = new Toggle();
+			_boolToggle.AddToClassList(BoolUssClassName);
 			_boolToggle.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Bool(evt.newValue);
@@ -294,6 +299,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateVector2Int()
 		{
 			_vector2IntField = new Vector2IntField();
+			_vector2IntField.AddToClassList(FieldUssClassName);
 			_vector2IntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector2Int(evt.newValue);
@@ -311,6 +317,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateVector3Int()
 		{
 			_vector3IntField = new Vector3IntField();
+			_vector3IntField.AddToClassList(FieldUssClassName);
 			_vector3IntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector3Int(evt.newValue);
@@ -328,6 +335,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateRectInt()
 		{
 			_rectIntField = new RectIntField();
+			_rectIntField.AddToClassList(FieldUssClassName);
 			_rectIntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.RectInt(evt.newValue);
@@ -345,6 +353,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateBoundsInt()
 		{
 			_boundsIntField = new BoundsIntField();
+			_boundsIntField.AddToClassList(FieldUssClassName);
 			_boundsIntField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.BoundsInt(evt.newValue);
@@ -362,6 +371,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateVector2()
 		{
 			_vector2Field = new Vector2Field();
+			_vector2Field.AddToClassList(FieldUssClassName);
 			_vector2Field.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector2(evt.newValue);
@@ -379,6 +389,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateVector3()
 		{
 			_vector3Field = new Vector3Field();
+			_vector3Field.AddToClassList(FieldUssClassName);
 			_vector3Field.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector3(evt.newValue);
@@ -396,6 +407,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateVector4()
 		{
 			_vector4Field = new Vector4Field();
+			_vector4Field.AddToClassList(FieldUssClassName);
 			_vector4Field.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Vector4(evt.newValue);
@@ -430,6 +442,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateRect()
 		{
 			_rectField = new RectField();
+			_rectField.AddToClassList(FieldUssClassName);
 			_rectField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Rect(evt.newValue);
@@ -447,6 +460,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateBounds()
 		{
 			_boundsField = new BoundsField();
+			_boundsField.AddToClassList(FieldUssClassName);
 			_boundsField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Bounds(evt.newValue);
@@ -464,6 +478,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateColor()
 		{
 			_colorField = new ColorField();
+			_colorField.AddToClassList(FieldUssClassName);
 			_colorField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Color(evt.newValue);
@@ -481,6 +496,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateEnum()
 		{
 			_enumField = new EnumField();
+			_enumField.AddToClassList(FieldUssClassName);
 			_enumField.RegisterValueChangedCallback(evt =>
 			{
 				var value = Variable.Enum(evt.newValue);
@@ -498,6 +514,7 @@ namespace PiRhoSoft.Composition.Editor
 		private void CreateString()
 		{
 			_stringContainer = new VisualElement();
+			_stringContainer.AddToClassList(FieldUssClassName);
 
 			_stringField = new TextField { isDelayed = true };
 			_stringField.RegisterValueChangedCallback(evt =>
@@ -517,6 +534,13 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				if (_stringPopup != null)
 					_stringPopup.RemoveFromHierarchy();
+
+				if (!constraint.IsValid(Value))
+				{
+					var value = constraint.Generate();
+					SetValue(value);
+					return;
+				}
 
 				// This has to be recreated because PopupField must be initialized with it's options
 				_stringPopup = new PopupField<string>(constraint.Values, Value.AsString);
@@ -681,9 +705,9 @@ namespace PiRhoSoft.Composition.Editor
 			public string RemoveTooltip => "Remove this Variable";
 			public string ReorderTooltip => "Move this Variable";
 
-			public bool AllowAdd => Variables.Schema == null;
-			public bool AllowRemove => Variables.Schema == null;
-			public bool AllowReorder => Variables.Schema == null;
+			public bool AllowAdd => Variables?.Schema == null;
+			public bool AllowRemove => Variables?.Schema == null;
+			public bool AllowReorder => Variables?.Schema == null;
 
 			private readonly Object _owner;
 

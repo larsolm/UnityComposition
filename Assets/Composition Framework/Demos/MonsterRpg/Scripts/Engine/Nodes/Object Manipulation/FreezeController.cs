@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[CreateGraphNodeMenu("Object Manipulation/Freeze Controller", 110)]
+	[CreateGraphNodeMenu("Monster RPG/Freeze Controller", 110)]
 	public class FreezeController : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

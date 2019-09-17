@@ -34,7 +34,7 @@ namespace PiRhoSoft.Composition
 
 		public string Name;
 		[SerializeField] private VariableType _type;
-		private VariableConstraint _constraint;
+		[SerializeReference] private VariableConstraint _constraint;
 
 		public string Description
 		{
@@ -88,6 +88,7 @@ namespace PiRhoSoft.Composition
 
 	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition> { }
 
+	[Serializable]
 	public abstract class VariableConstraint : ISerializableData
 	{
 		public abstract VariableType Type { get; }

@@ -3,13 +3,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
 	public class AnimationClipVariableSource : VariableSource<AnimationClip> { }
 
 	[CreateGraphNodeMenu("Animation/Play Animation", 0)]
-	[HelpURL(Configuration.DocumentationUrl + "play-animation-node")]
 	public class PlayAnimationNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -19,7 +18,7 @@ namespace PiRhoSoft.Composition
 		[VariableReference(typeof(AnimationPlayer))]
 		public VariableReference AnimationPlayer;
 
-		[Tooltip("The Animation Clip to play")]
+		[Tooltip("The Animation to play")]
 		[Inline]
 		public AnimationClipVariableSource Animation = new AnimationClipVariableSource();
 

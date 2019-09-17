@@ -3,13 +3,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
 	public class SortConditionList : SerializedList<VariableReference> { }
 
 	[CreateGraphNodeMenu("Composition/Sort", 21)]
-	[HelpURL(Configuration.DocumentationUrl + "sort-node")]
 	public class SortNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

@@ -6,7 +6,6 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Animation/Set Animation Parameter", 2)]
-	[HelpURL(Configuration.DocumentationUrl + "set-animation-parameter-node")]
 	public class SetAnimationParameterNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

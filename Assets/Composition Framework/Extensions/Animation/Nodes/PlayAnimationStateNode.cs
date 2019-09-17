@@ -2,10 +2,9 @@
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[CreateGraphNodeMenu("Animation/Play Animation State", 1)]
-	[HelpURL(Configuration.DocumentationUrl + "play-animation-state-node")]
 	public class PlayAnimationStateNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

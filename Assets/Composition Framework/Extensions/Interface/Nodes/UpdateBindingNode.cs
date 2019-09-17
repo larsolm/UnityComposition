@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(Configuration.DocumentationUrl + "update-binding-node")]
 	[CreateGraphNodeMenu("Interface/Update Binding", 301)]
 	public class UpdateBindingNode : GraphNode
 	{

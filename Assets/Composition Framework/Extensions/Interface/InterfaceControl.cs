@@ -2,13 +2,12 @@
 using System;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
 	public class DependentObjectList : SerializedList<GameObject> { }
 
 	[DisallowMultipleComponent]
-	[HelpURL(Configuration.DocumentationUrl + "interface-control")]
 	[AddComponentMenu("PiRho Soft/Interface/Interface Control")]
 	public class InterfaceControl : MonoBehaviour
 	{

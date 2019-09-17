@@ -12,6 +12,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public static readonly string UssClassName = "pirho-frame";
 		public static readonly string HeaderUssClassName = UssClassName + "__header";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
+		public static readonly string NoLabelUssClassName = UssClassName + "__label--none";
 		public static readonly string ContentUssClassName = UssClassName + "__content";
 		public static readonly string FooterUssClassName = UssClassName + "__footer";
 		public static readonly string HeaderButtonsUssClassName = UssClassName + "__header-buttons";
@@ -39,6 +40,7 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			Label.text = label;
 			Label.tooltip = tooltip;
+			Label.EnableInClassList(NoLabelUssClassName, string.IsNullOrEmpty(label));
 		}
 
 		public IconButton AddHeaderButton(Texture icon, string tooltip, string ussClassName, Action action)

@@ -1,5 +1,6 @@
 ﻿.pirho-frame
 {
+	background-color: #C2C2C2;
 	border-color: #555555;
 	border-width: 1px;
 	border-radius: 2px;
@@ -18,6 +19,13 @@
 {
 	flex-grow: 1;
 	-unity-font-style: bold;
+	color: #000000;
+}
+
+
+.pirho-frame__label--none
+{
+	display: none;
 }
 
 .pirho-frame__header-buttons
@@ -33,7 +41,7 @@
 
 .pirho-frame__content
 {
-	padding: 4px;
+	padding: 5px;
 }
 
 .pirho-frame__footer

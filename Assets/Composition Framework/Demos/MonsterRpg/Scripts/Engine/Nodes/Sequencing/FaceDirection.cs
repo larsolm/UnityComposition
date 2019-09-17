@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[CreateGraphNodeMenu("Sequencing/Face Direction", 10)]
+	[CreateGraphNodeMenu("Monster RPG/Face Direction", 10)]
 	public class FaceDirection : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

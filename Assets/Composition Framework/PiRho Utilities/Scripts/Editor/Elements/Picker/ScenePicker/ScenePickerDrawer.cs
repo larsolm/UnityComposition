@@ -1,6 +1,7 @@
 ﻿using System.Reflection;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Utilities.Editor
@@ -8,7 +9,7 @@ namespace PiRhoSoft.Utilities.Editor
 	[CustomPropertyDrawer(typeof(ScenePickerAttribute))]
 	public class ScenePickerDrawer : PropertyDrawer
 	{
-		private const string _invalidTypeWarning = "(PUSPDIT) invalid type for ScenePickerAttribute on field {0}: ScenePicker can only be applied to strings or SceneReferences";
+		private const string _invalidTypeWarning = "(PUSPDIT) invalid type for ScenePickerAttribute on field {0}: ScenePicker can only be applied to an AssetReference";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
@@ -16,16 +17,11 @@ namespace PiRhoSoft.Utilities.Editor
 			var method = fieldInfo.DeclaringType.GetMethod((attribute as ScenePickerAttribute)?.CreateMethod, BindingFlags.Static | BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic);
 			void onCreate() => method?.Invoke(method.IsStatic ? null : property.serializedObject.targetObject, null);
 
-			if (property.propertyType == SerializedPropertyType.String)
+			if (this.GetFieldType() == typeof(AssetReference))
 			{
-				var picker = new ScenePickerField(property.displayName, property.stringValue, onCreate);
+				var scene = property.GetObject<AssetReference>();
+				var picker = new ScenePickerField(property.displayName, scene, onCreate);
 				return picker.ConfigureProperty(property, tooltip);
-			}
-			else if (this.GetFieldType() == typeof(SceneReference))
-			{
-				var pathProperty = property.FindPropertyRelative(nameof(SceneReference.Path));
-				var picker = new ScenePickerField(property.displayName, pathProperty.stringValue, onCreate);
-				return picker.ConfigureProperty(pathProperty, tooltip);
 			}
 			else
 			{

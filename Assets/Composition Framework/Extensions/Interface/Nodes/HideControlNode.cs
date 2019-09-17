@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(Configuration.DocumentationUrl + "hide-control-node")]
 	[CreateGraphNodeMenu("Interface/Hide Control", 102)]
 	public class HideControlNode : GraphNode
 	{

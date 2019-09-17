@@ -204,6 +204,8 @@ GameObject:
   m_Component:
   - component: {fileID: 228725459}
   - component: {fileID: 228725460}
+  - component: {fileID: 228725462}
+  - component: {fileID: 228725461}
   m_Layer: 5
   m_Name: File 1
   m_TagString: Untagged
@@ -257,6 +259,38 @@ MonoBehaviour:
   m_ChildControlHeight: 0
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
+--- !u!114 &228725461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228725458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dd749ab8c6fb184596ebfe06ce4c583, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Variables:
+    _definitions: []
+    _variablesData:
+      Version: 1
+      Data: AQAAAAAAAAA=
+      References: []
+--- !u!114 &228725462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 228725458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 02e729998f1e6df49bed0816625e2f73, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ValueName: this
+  Object: {fileID: 0}
 --- !u!1 &500651686
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,14 +841,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 1143015681}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
+  m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
+  Graph:
+    _graph: {fileID: 11400000, guid: 3fc5d96f8d0339348938f4ae3fa2de9b, type: 2}
+    _inputs: []
+    _outputs: []
 --- !u!114 &1143015683
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -846,10 +879,10 @@ Canvas:
   m_GameObject: {fileID: 1143015681}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 1
-  m_Camera: {fileID: 819841861}
+  m_RenderMode: 0
+  m_Camera: {fileID: 0}
   m_PlaneDistance: 100
-  m_PixelPerfect: 0
+  m_PixelPerfect: 1
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
@@ -1174,7 +1207,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3245ec927659c4140ac4f8d17403cc18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_HorizontalFit: 1
+  m_HorizontalFit: 2
   m_VerticalFit: 2
 --- !u!1 &1899175474
 GameObject:

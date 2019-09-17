@@ -25,15 +25,12 @@ namespace PiRhoSoft.MonsterRpg
 			_frozenCount--;
 		}
 
-		protected void UpdateMover(float horizontal, float vertical)
+		protected void UpdateMover(Vector2 move)
 		{
 			if (IsFrozen)
-				Mover.UpdateMove(0.0f, 0.0f);
+				Mover.UpdateMove(Vector2.zero);
 			else
-				Mover.UpdateMove(horizontal, vertical);
+				Mover.UpdateMove(move);
 		}
-
-		public virtual void Load(string saveData) { }
-		public virtual string Save() => string.Empty;
 	}
 }

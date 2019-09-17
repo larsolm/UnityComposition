@@ -124,7 +124,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 37fc6f8ca9decf2499c2de065b8a84d4, type: 3}
-  m_Name: LoadGraph
+  m_Name: Load
   m_EditorClassIdentifier: 
   Context:
     Name: context

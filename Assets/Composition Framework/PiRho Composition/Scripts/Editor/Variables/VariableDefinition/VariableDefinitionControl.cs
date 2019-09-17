@@ -13,9 +13,11 @@ namespace PiRhoSoft.Composition.Editor
 		public const string Stylesheet = "Variables/VariableDefinition/VariableDefinitionStyle.uss";
 		public const string UssClassName = "pirho-variable-definition";
 		public const string NameUssClassName = UssClassName + "__name";
+		public const string NoNameUssClassName = NameUssClassName + "--none";
 		public const string TypeUssClassName = UssClassName + "__type";
 		public const string ConstraintUssClassName = UssClassName + "__constraint";
 		public const string NumberConstraintUssClassName = ConstraintUssClassName + "__number";
+		public const string NumberConstraintContainerUssClassName = NumberConstraintUssClassName + "__container";
 		public const string NumberConstraintLabelUssClassName = NumberConstraintUssClassName + "__label";
 		public const string NumberConstraintToggleUssClassName = NumberConstraintUssClassName + "__toggle";
 		public const string NumberConstraintMinToggleUssClassName = NumberConstraintToggleUssClassName + "--min";
@@ -29,6 +31,7 @@ namespace PiRhoSoft.Composition.Editor
 		public const string EnumConstraintUssClassName = ConstraintUssClassName + "__enum";
 		public const string SchemaConstraintUssClassName = ConstraintUssClassName + "__schema";
 		public const string ListConstraintUssClassName = ConstraintUssClassName + "__list";
+		public const string ListItemConstraintUssClassName = ListConstraintUssClassName + "__item";
 
 		#endregion
 
@@ -36,6 +39,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private readonly Object _owner;
 
+		private Label _label;
 		private EnumField _typeDropdown;
 		private VisualElement _constraintContainer;
 
@@ -48,17 +52,20 @@ namespace PiRhoSoft.Composition.Editor
 
 			Value = value;
 
-			if (!string.IsNullOrEmpty(Value.Name))
-			{
-				var label = new TextElement { text = Value.Name };
-				label.AddToClassList(NameUssClassName);
-				Add(label);
-			}
+			_label = new Label();
+			_label.AddToClassList(NameUssClassName);
+			SetLabel(Value.Name);
+			Add(_label);
 
 			CreateType();
 			CreateConstraint();
-
 			Refresh();
+		}
+
+		public void SetLabel(string label)
+		{
+			_label.text = label;
+			_label.EnableInClassList(NoNameUssClassName, string.IsNullOrEmpty(label));
 		}
 
 		public void SetValueWithoutNotify(VariableDefinition value)
@@ -67,7 +74,7 @@ namespace PiRhoSoft.Composition.Editor
 			Refresh();
 		}
 
-		private void Refresh()
+		public void Refresh()
 		{
 			RefreshType();
 			RefreshConstraint(_constraintContainer, Value.Constraint);
@@ -82,8 +89,7 @@ namespace PiRhoSoft.Composition.Editor
 				Value.Type = (VariableType)evt.newValue;
 
 				_constraintContainer.Clear();
-				CreateConstraint(_constraintContainer, Value.Constraint);
-
+				RefreshConstraint(_constraintContainer, Value.Constraint);
 				SendChangeEvent();
 			});
 
@@ -114,6 +120,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateConstraint(VisualElement container, VariableConstraint constraint)
 		{
+			container.Clear();
+
 			if (constraint != null)
 			{
 				switch (constraint)
@@ -133,6 +141,9 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			if (constraint != null)
 			{
+				if (container.childCount == 0)
+					CreateConstraint(container, constraint);
+
 				switch (constraint)
 				{
 					case IntConstraint intConstraint: RefreshIntConstraint(container, intConstraint); break;
@@ -149,6 +160,8 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateIntConstraint(IntConstraint constraint)
 		{
 			var container = new VisualElement();
+			var minContainer = new VisualElement();
+			var maxContainer = new VisualElement();
 			var minLabel = new TextElement { text = "Minimum:", tooltip = "Whether to constrain this int to a minimum value" };
 			var maxLabel = new TextElement { text = "Maximum:", tooltip = "Whether to constrain this int to a maximum value" };
 			var minToggle = new Toggle();
@@ -157,6 +170,8 @@ namespace PiRhoSoft.Composition.Editor
 			var max = new IntegerField();
 
 			container.AddToClassList(NumberConstraintUssClassName);
+			minContainer.AddToClassList(NumberConstraintContainerUssClassName);
+			maxContainer.AddToClassList(NumberConstraintContainerUssClassName);
 			minLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			maxLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			minToggle.AddToClassList(NumberConstraintToggleUssClassName);
@@ -168,12 +183,15 @@ namespace PiRhoSoft.Composition.Editor
 			max.AddToClassList(NumberConstraintFieldUssClassName);
 			max.AddToClassList(NumberConstraintMaxUssClassName);
 
-			container.Add(minLabel);
-			container.Add(minToggle);
-			container.Add(min);
-			container.Add(maxLabel);
-			container.Add(maxToggle);
-			container.Add(max);
+			minContainer.Add(minLabel);
+			minContainer.Add(minToggle);
+			minContainer.Add(min);
+			maxContainer.Add(maxLabel);
+			maxContainer.Add(maxToggle);
+			maxContainer.Add(max);
+
+			container.Add(minContainer);
+			container.Add(maxContainer);
 
 			minToggle.RegisterValueChangedCallback(evt =>
 			{
@@ -182,6 +200,7 @@ namespace PiRhoSoft.Composition.Editor
 				else
 					constraint.Minimum = null;
 
+				RefreshIntConstraint(container, constraint);
 				SendChangeEvent();
 			});
 
@@ -192,18 +211,21 @@ namespace PiRhoSoft.Composition.Editor
 				else
 					constraint.Maximum = null;
 
+				RefreshIntConstraint(container, constraint);
 				SendChangeEvent();
 			});
 
 			min.RegisterValueChangedCallback(evt =>
 			{
 				constraint.Minimum = evt.newValue;
+				RefreshIntConstraint(container, constraint);
 				SendChangeEvent();
 			});
 
 			max.RegisterValueChangedCallback(evt =>
 			{
 				constraint.Maximum = evt.newValue;
+				RefreshIntConstraint(container, constraint);
 				SendChangeEvent();
 			});
 
@@ -229,6 +251,8 @@ namespace PiRhoSoft.Composition.Editor
 		private VisualElement CreateFloatConstraint(FloatConstraint constraint)
 		{
 			var container = new VisualElement();
+			var minContainer = new VisualElement();
+			var maxContainer = new VisualElement();
 			var minLabel = new TextElement { text = "Minimum:", tooltip = "Whether to constrain this int to a minimum value" };
 			var maxLabel = new TextElement { text = "Maximum:", tooltip = "Whether to constrain this int to a maximum value" };
 			var minToggle = new Toggle();
@@ -237,6 +261,8 @@ namespace PiRhoSoft.Composition.Editor
 			var max = new FloatField();
 
 			container.AddToClassList(NumberConstraintUssClassName);
+			minContainer.AddToClassList(NumberConstraintContainerUssClassName);
+			maxContainer.AddToClassList(NumberConstraintContainerUssClassName);
 			minLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			maxLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			minToggle.AddToClassList(NumberConstraintToggleUssClassName);
@@ -248,12 +274,15 @@ namespace PiRhoSoft.Composition.Editor
 			max.AddToClassList(NumberConstraintFieldUssClassName);
 			max.AddToClassList(NumberConstraintMaxUssClassName);
 
-			container.Add(minLabel);
-			container.Add(minToggle);
-			container.Add(min);
-			container.Add(maxLabel);
-			container.Add(maxToggle);
-			container.Add(max);
+			minContainer.Add(minLabel);
+			minContainer.Add(minToggle);
+			minContainer.Add(min);
+			maxContainer.Add(maxLabel);
+			maxContainer.Add(maxToggle);
+			maxContainer.Add(max);
+
+			container.Add(minContainer);
+			container.Add(maxContainer);
 
 			minToggle.RegisterValueChangedCallback(evt =>
 			{
@@ -401,6 +430,7 @@ namespace PiRhoSoft.Composition.Editor
 			var listContainer = new VisualElement();
 
 			var dropdown = new EnumField(constraint.ItemType);
+			dropdown.AddToClassList(ListItemConstraintUssClassName);
 			dropdown.RegisterValueChangedCallback(evt =>
 			{
 				constraint.ItemType = (VariableType)evt.newValue;

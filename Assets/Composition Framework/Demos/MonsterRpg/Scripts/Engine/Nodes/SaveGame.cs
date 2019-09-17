@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[CreateGraphNodeMenu("General/Save Game", order: 3)]
+	[CreateGraphNodeMenu("Monster RPG/Save Game", 1)]
 	public class SaveGame : GraphNode
 	{
 		private const string _invalidSaveError = "(MNSGIS) Failed to write save file {0}: {1}";

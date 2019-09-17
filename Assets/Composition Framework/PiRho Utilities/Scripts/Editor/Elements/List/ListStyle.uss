@@ -99,12 +99,12 @@
 
 .pirho-list__item--even
 {
-	background-color: #DDD;
+	background-color: #DFDFDF;
 }
 
 .pirho-list__item--odd
 {
-	background-color: #CCC;
+	background-color: #CBCBCB;
 }
 
 .pirho-list__item__content

@@ -65,7 +65,6 @@ namespace PiRhoSoft.MonsterRpg
 		#endregion
 	}
 
-	[HelpURL(MonsterRpg.DocumentationUrl + "creature")]
 	public class Creature : VariableSetAsset
 	{
 		private const string _missingAbilityWarning = "(ECMA) The Ability '{0}' could not be found";
@@ -208,7 +207,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public static CreatureSaveData Save(Creature creature, string tag)
 		{
-			var data = new CreatureSaveData { SpeciesPath = creature.Species ? creature.Species.Path : string.Empty };
+			var data = new CreatureSaveData { SpeciesPath = creature.Species ? creature.Species.name : string.Empty };
 			creature.Save(data, tag);
 			return data;
 		}

@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[CreateGraphNodeMenu("General/Load Game", order: 0)]
+	[CreateGraphNodeMenu("Monster RPG/Load Game", 0)]
 	public class LoadGame : GraphNode
 	{
 		private const string _invalidLoadError = "(MNLGIL) Failed to load save file {0}: {1}";

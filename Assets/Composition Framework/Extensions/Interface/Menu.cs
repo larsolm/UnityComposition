@@ -4,10 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[DisallowMultipleComponent]
-	[HelpURL(Configuration.DocumentationUrl + "menu")]
 	[AddComponentMenu("PiRho Soft/Interface/Menu")]
 	public class Menu : MonoBehaviour, IVariableCollection
 	{

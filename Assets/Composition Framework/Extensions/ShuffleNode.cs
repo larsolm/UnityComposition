@@ -1,10 +1,9 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[CreateGraphNodeMenu("Composition/Shuffle", 20)]
-	[HelpURL(Configuration.DocumentationUrl + "shuffle-node")]
 	public class ShuffleNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

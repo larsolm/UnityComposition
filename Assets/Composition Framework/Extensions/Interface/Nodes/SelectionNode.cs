@@ -4,7 +4,7 @@ using System.Collections;
 using System.Text;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
 	public class SelectionNodeItem : MenuItemTemplate
@@ -15,7 +15,6 @@ namespace PiRhoSoft.Composition
 
 	[Serializable] public class SelectionNodeItemList : SerializedList<SelectionNodeItem> { }
 
-	[HelpURL(Configuration.DocumentationUrl + "selection-node")]
 	[CreateGraphNodeMenu("Interface/Show Selection", 2)]
 	public class SelectionNode : GraphNode
 	{

@@ -3,13 +3,14 @@ using System.Linq;
 using UnityEditor;
 using UnityEditor.SceneManagement;
 using UnityEngine;
+using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Utilities.Editor
 {
-	public class ScenePickerControl : BasePickerControl<SceneAsset>, IDragReceiver
+	public class ScenePickerControl : BasePickerControl<AssetReference>, IDragReceiver
 	{
 		private class SceneProvider : PickerProvider<SceneAsset> { }
 
@@ -23,7 +24,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private MessageBox _buildWarning;
 
-		public ScenePickerControl(string path, Action onCreate)
+		public ScenePickerControl(AssetReference value, Action onCreate)
 		{
 			_load = new IconButton(Icon.Load.Texture, "Load this scene", Load) { tintColor = Color.black };
 			_load.AddToClassList(LoadUssClassName);
@@ -38,7 +39,7 @@ namespace PiRhoSoft.Utilities.Editor
 			var provider = ScriptableObject.CreateInstance<SceneProvider>();
 			provider.Setup(assets.Type.Name, assets.Paths.Prepend("None").ToList(), assets.Assets.Prepend(null).Cast<SceneAsset>().ToList(), GetIcon, OnSelected);
 
-			Setup(provider, SceneHelper.GetSceneFromPath(path));
+			Setup(provider, value);
 
 			Add(_load);
 			Add(_create);
@@ -55,21 +56,23 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private void OnSelected(SceneAsset selected)
 		{
-			var previousPath = AssetDatabase.GetAssetPath(Value);
+			var previous = Value;
+			var path = AssetDatabase.GetAssetPath(selected);
+			var guid = AssetDatabase.AssetPathToGUID(path);
 
-			SetValueWithoutNotify(selected);
-
-			this.SendChangeEvent(previousPath, AssetDatabase.GetAssetPath(Value));
+			SetValueWithoutNotify(new AssetReference(guid));
+			this.SendChangeEvent(previous, Value);
 		}
 
 		private void Load()
 		{
-			var scene = SceneManager.GetSceneByName(Value.name);
+			var path = GetPath();
+			var scene = SceneManager.GetSceneByPath(path);
 
 			if (scene.isLoaded)
 				EditorSceneManager.CloseScene(scene, true);
 			else
-				EditorSceneManager.OpenScene(AssetDatabase.GetAssetPath(Value), OpenSceneMode.Additive);
+				EditorSceneManager.OpenScene(path, OpenSceneMode.Additive);
 
 			Refresh();
 		}
@@ -83,7 +86,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		private void AddToBuild()
 		{
-			var scene = new EditorBuildSettingsScene(AssetDatabase.GetAssetPath(Value), true);
+			var scene = new EditorBuildSettingsScene(GetPath(), true);
 			EditorBuildSettings.scenes = EditorBuildSettings.scenes.Append(scene).ToArray();
 
 			Refresh();
@@ -91,14 +94,15 @@ namespace PiRhoSoft.Utilities.Editor
 
 		protected override void Refresh()
 		{
-			var text = Value == null ? "None (Scene)" : Value.name;
-			var icon = GetIcon(Value);
+			var path = GetPath();
+			var asset = AssetDatabase.LoadAssetAtPath<SceneAsset>(path);
+			var text = asset ? asset.name : "None (Scene)";
+			var icon = GetIcon(asset);
 
 			SetLabel(icon, text);
 
-			if (Value)
+			if (asset)
 			{
-				var path = AssetDatabase.GetAssetPath(Value);
 				var scene = SceneManager.GetSceneByPath(path);
 				var buildIndex = SceneUtility.GetBuildIndexByScenePath(path);
 
@@ -115,6 +119,8 @@ namespace PiRhoSoft.Utilities.Editor
 				_buildWarning.SetDisplayed(false);
 			}
 		}
+
+		private string GetPath() => AssetDatabase.GUIDToAssetPath(Value.AssetGUID);
 
 		#region IDragReceiver Implementation
 

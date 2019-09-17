@@ -8,14 +8,24 @@ namespace PiRhoSoft.MonsterRpg
 	[RequireComponent(typeof(Rigidbody2D))]
 	public class Mover : MonoBehaviour
 	{
+		[Tooltip("The speed at which the mover moves")]
 		[Range(0.0f, 10.0f)]
+		[CustomLabel("Move Speed (units/second)")]
 		public float MoveSpeed = 5.0f;
 
+		[Tooltip("The collision layer this mover starts on")]
 		[EnumButtons]
 		public CollisionLayer MovementLayer = CollisionLayer.One; // Need to change layer for collisions when this changes
 
+		[Tooltip("The direction this mover begins facing")]
 		[EnumButtons]
-		public MovementDirection MovementDirection;
+		[SerializeField]
+		private MovementDirection _movementDirection;
+		public MovementDirection MovementDirection
+		{
+			get { return _movementDirection; }
+			set { _movementDirection = value; UpdateLayer(); }
+		}
 
 		public float Speed => _velocity.sqrMagnitude;
 		public Vector2 DirectionVector => Direction.GetVector(MovementDirection);
@@ -66,13 +76,11 @@ namespace PiRhoSoft.MonsterRpg
 			MovementDirection = direction;
 		}
 
-		public void UpdateMove(float horizontal, float vertical)
+		public void UpdateMove(Vector2 move)
 		{
-			_velocity.Set(horizontal, vertical);
-			_velocity.Normalize();
-			_velocity *= MoveSpeed;
+			_velocity = move.normalized * MoveSpeed;
 
-			UpdateMoveDirection(horizontal, vertical);
+			UpdateMoveDirection(move);
 			Move();
 		}
 
@@ -81,28 +89,33 @@ namespace PiRhoSoft.MonsterRpg
 			_body.MovePosition(_body.position + (_velocity * Time.fixedDeltaTime));
 		}
 
-		private void UpdateMoveDirection(float horizontal, float vertical)
+		private void UpdateMoveDirection(Vector2 move)
 		{
-			if (horizontal == 0.0f)
+			if (move.x == 0.0f)
 			{
-				if (vertical != 0.0f)
-					FaceDirection(vertical < 0.0f ? MovementDirection.Down : MovementDirection.Up);
+				if (move.y != 0.0f)
+					FaceDirection(move.y < 0.0f ? MovementDirection.Down : MovementDirection.Up);
 			}
-			else if (vertical == 0.0f)
+			else if (move.y == 0.0f)
 			{
-				if (horizontal != 0.0f)
-					FaceDirection(horizontal < 0.0f ? MovementDirection.Left : MovementDirection.Right);
+				if (move.x != 0.0f)
+					FaceDirection(move.x < 0.0f ? MovementDirection.Left : MovementDirection.Right);
 			}
 			else
 			{
 				switch (MovementDirection)
 				{
-					case MovementDirection.Left: if (horizontal > 0) FaceDirection(MovementDirection.Right); break;
-					case MovementDirection.Right: if (horizontal < 0) FaceDirection(MovementDirection.Left); break;
-					case MovementDirection.Down: if (vertical > 0) FaceDirection(MovementDirection.Up); break;
-					case MovementDirection.Up: if (vertical < 0) FaceDirection(MovementDirection.Down); break;
+					case MovementDirection.Left: if (move.x > 0) FaceDirection(MovementDirection.Right); break;
+					case MovementDirection.Right: if (move.x < 0) FaceDirection(MovementDirection.Left); break;
+					case MovementDirection.Down: if (move.y > 0) FaceDirection(MovementDirection.Up); break;
+					case MovementDirection.Up: if (move.y < 0) FaceDirection(MovementDirection.Down); break;
 				}
 			}
+		}
+
+		private void UpdateLayer()
+		{
+			gameObject.layer = LayerCollision.GetLayer(MovementLayer);
 		}
 	}
 }

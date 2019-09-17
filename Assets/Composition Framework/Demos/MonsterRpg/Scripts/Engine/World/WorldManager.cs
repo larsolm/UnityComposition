@@ -25,11 +25,10 @@ namespace PiRhoSoft.MonsterRpg
 	}
 
 	[DisallowMultipleComponent]
-	[HelpURL(MonsterRpg.DocumentationUrl + "world-manager")]
-	[AddComponentMenu("Monster Rpg/Managers/World Manager")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/World Manager")]
 	public class WorldManager : VariableSetComponent
 	{
-		private const string _secondInstanceWarning = "(WWMSI) A second instance of WorldManager was created";
+		private const string _secondInstanceWarning = "(MRPGWMSI) A second instance of WorldManager was created";
 
 		public static WorldManager Instance { get; private set; }
 
@@ -45,7 +44,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			if (Instance != this)
 			{
-				Debug.LogWarningFormat(_secondInstanceWarning, GetType().Name);
+				Debug.LogWarning(_secondInstanceWarning, this);
 				Destroy(this);
 			}
 		}

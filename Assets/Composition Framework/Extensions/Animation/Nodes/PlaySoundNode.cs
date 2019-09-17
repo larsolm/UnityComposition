@@ -3,13 +3,12 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
-	public class AudioClipVariableSource : VariableSource<AudioClip> { }
+	public class SoundVariableSource : VariableSource<AudioClip> { }
 
 	[CreateGraphNodeMenu("Animation/Play Sound", 101)]
-	[HelpURL(Configuration.DocumentationUrl + "play-sound-node")]
 	public class PlaySoundNode : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]
@@ -19,9 +18,9 @@ namespace PiRhoSoft.Composition
 		[VariableReference(typeof(AudioPlayer))]
 		public VariableReference AudioPlayer;
 
-		[Tooltip("The Audio Clip to play")]
+		[Tooltip("The sound to play")]
 		[Inline]
-		public AudioClipVariableSource Sound = new AudioClipVariableSource();
+		public SoundVariableSource Sound = new SoundVariableSource();
 
 		[Tooltip("The volume to play the sound at")]
 		[Inline]

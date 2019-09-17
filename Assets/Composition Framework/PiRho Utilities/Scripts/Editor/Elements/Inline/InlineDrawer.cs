@@ -13,6 +13,7 @@ namespace PiRhoSoft.Utilities.Editor
 			var label = inlineAttribute.ShowMemberLabels ? null : property.displayName;
 			var tooltip = inlineAttribute.ShowMemberLabels ? null : this.GetTooltip();
 			var element = new FieldContainer(label, tooltip);
+			element.style.flexDirection = FlexDirection.Column;
 
 			foreach (var child in property.Children())
 			{

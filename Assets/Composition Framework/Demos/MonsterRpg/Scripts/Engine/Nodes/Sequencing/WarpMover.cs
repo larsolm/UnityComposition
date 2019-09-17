@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[CreateGraphNodeMenu("Sequencing/Warp Mover", 20)]
+	[CreateGraphNodeMenu("Monster RPG/Warp Mover", 20)]
 	public class WarpMover : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

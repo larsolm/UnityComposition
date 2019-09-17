@@ -7,8 +7,7 @@ using UnityEngine.Tilemaps;
 namespace PiRhoSoft.MonsterRpg
 {
 	[DisallowMultipleComponent]
-	[HelpURL(MonsterRpg.DocumentationUrl + "map-properties")]
-	[AddComponentMenu("Monster RPG/World/Map")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Map")]
 	public class Map : MonoBehaviour, ISerializationCallbackReceiver
 	{
 		private const string _noSpawnPointsWarning = "(MMMNSP) The map {0} does not have any spawn points";
@@ -19,10 +18,10 @@ namespace PiRhoSoft.MonsterRpg
 		[Tooltip("Whether or not the camera should clamp to the bottom point of this Map")] public bool ClampBottomBounds;
 		[Tooltip("Whether or not the camera should clamp to the top point of this Zone")] public bool ClampTopBounds;
 
-		[Tooltip("The left point at which the camera will clamp")] [Button(nameof(CalculateLeft), Label = "Calculate", Location = TraitLocation.After)] public float LeftBounds;
-		[Tooltip("The right point at which the camera will clamp")] [Button(nameof(CalculateRight), Label = "Calculate", Location = TraitLocation.After)] public float RightBounds;
-		[Tooltip("The bottom point at which the camera will clamp")] [Button(nameof(CalculateBottom), Label = "Calculate", Location = TraitLocation.After)] public float BottomBounds;
-		[Tooltip("The top point at which the camera will clamp")] [Button(nameof(CalculateTop), Label = "Calculate", Location = TraitLocation.After)] public float TopBounds;
+		[Tooltip("The left point at which the camera will clamp")] [Button(nameof(CalculateLeft), Label = "Calculate", Location = TraitLocation.Right)] public float LeftBounds;
+		[Tooltip("The right point at which the camera will clamp")] [Button(nameof(CalculateRight), Label = "Calculate", Location = TraitLocation.Right)] public float RightBounds;
+		[Tooltip("The bottom point at which the camera will clamp")] [Button(nameof(CalculateBottom), Label = "Calculate", Location = TraitLocation.Right)] public float BottomBounds;
+		[Tooltip("The top point at which the camera will clamp")] [Button(nameof(CalculateTop), Label = "Calculate", Location = TraitLocation.Right)] public float TopBounds;
 
 		[SerializeField] [HideInInspector] private List<Spawn> _spawns = new List<Spawn>();
 

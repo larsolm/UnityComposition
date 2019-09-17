@@ -15,9 +15,8 @@ namespace PiRhoSoft.MonsterRpg
 
 	[Serializable] public class MountPointDictionary : SerializedDictionary<string, MountPoint> { }
 
-	[HelpURL(MonsterRpg.DocumentationUrl + "species")]
-	[CreateAssetMenu(menuName = "Monster RPG/Species", fileName = nameof(Species), order = 201)]
-	public class Species : VariableSetAsset, IResource
+	[CreateAssetMenu(menuName = "PiRho Soft/Monster RPG/Species", fileName = nameof(Species), order = 201)]
+	public class Species : VariableSetAsset
 	{
 		[Tooltip("The icon for this species")] public Sprite Icon;
 		[Tooltip("The animations for this species")] public AnimatorOverrideController Animations;
@@ -32,23 +31,5 @@ namespace PiRhoSoft.MonsterRpg
 			creature.Setup(trainer);
 			return creature;
 		}
-
-		#region IResource Implementation
-
-		public string Path => _path;
-
-		[SerializeField, HideInInspector]
-		private string _path;
-
-		public void OnBeforeSerialize()
-		{
-			_path = Resource.GetResourcePath(this);
-		}
-
-		public void OnAfterDeserialize()
-		{
-		}
-
-		#endregion
 	}
 }

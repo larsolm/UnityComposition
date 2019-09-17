@@ -2,9 +2,8 @@
 using TMPro;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(Configuration.DocumentationUrl + "message-control")]
 	[AddComponentMenu("PiRho Soft/Interface/Message Control")]
 	public class MessageControl : InterfaceControl
 	{

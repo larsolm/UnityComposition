@@ -67,7 +67,6 @@ namespace PiRhoSoft.MonsterRpg
 		}
 	}
 
-	[HelpURL(MonsterRpg.DocumentationUrl + "move")]
 	public class Move : VariableSetAsset
 	{
 		private const string _deletedAbilityWarning = "(EMDA) The Ability for Move '{0}' has been deleted";
@@ -75,12 +74,10 @@ namespace PiRhoSoft.MonsterRpg
 		[Tooltip("The Ability this move is an instance of")] [ReadOnly] public Ability Ability;
 		[Tooltip("The creature that has this move")] [ReadOnly] public Creature Creature;
 
-		[MappedVariable] public string Name => Ability.Name;
-
 		public void Setup(Creature creature)
 		{
 			if (Ability == null)
-				Debug.LogWarningFormat(this, _deletedAbilityWarning, Name);
+				Debug.LogWarningFormat(this, _deletedAbilityWarning, name);
 
 			Creature = creature;
 		}
@@ -110,7 +107,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		public static MoveSaveData Save(Move move, string tag)
 		{
-			var data = new MoveSaveData { AbilityPath = move.Ability ? move.Ability.Path : string.Empty };
+			var data = new MoveSaveData { AbilityPath = move.Ability ? move.Ability.name : string.Empty };
 			move.Save(data, tag);
 			return data;
 		}

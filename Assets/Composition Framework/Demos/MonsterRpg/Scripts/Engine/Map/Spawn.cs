@@ -26,7 +26,7 @@ namespace PiRhoSoft.MonsterRpg
 		public CollisionLayer Layer;
 	}
 
-	[AddComponentMenu("Monster RPG/World/Spawn")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Spawn")]
 	public class Spawn : MonoBehaviour, ISerializationCallbackReceiver
 	{
 		[Inline]

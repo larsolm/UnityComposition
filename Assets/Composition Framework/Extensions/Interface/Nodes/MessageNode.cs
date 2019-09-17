@@ -2,9 +2,8 @@
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(Configuration.DocumentationUrl + "message-node")]
 	[CreateGraphNodeMenu("Interface/Show Message", 1)]
 	public class MessageNode : GraphNode
 	{

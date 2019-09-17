@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[CreateGraphNodeMenu("Object Manipulation/Thaw Controller", 111)]
+	[CreateGraphNodeMenu("Monster RPG/Thaw Controller", 111)]
 	public class ThawController : GraphNode
 	{
 		[Tooltip("The node to move to when this node is finished")]

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
 	public class InputNodeButton
@@ -36,7 +36,6 @@ namespace PiRhoSoft.Composition
 
 	[Serializable] public class InputNodeButtonList : SerializedList<InputNodeButton> { }
 
-	[HelpURL(Configuration.DocumentationUrl + "input-node")]
 	[CreateGraphNodeMenu("Interface/Input", 3)]
 	public class InputNode : GraphNode
 	{

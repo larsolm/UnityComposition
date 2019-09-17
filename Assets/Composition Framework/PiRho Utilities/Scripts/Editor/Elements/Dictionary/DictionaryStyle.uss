@@ -42,6 +42,7 @@
 	flex-grow: 1;
 	background-color: #99FF99;
 	margin: 0px;
+	align-self: stretch;
 }
 
 .pirho-dictionary--add-disabled .pirho-dictionary__key-text
@@ -118,12 +119,12 @@
 
 .pirho-dictionary__item--even
 {
-	background-color: #DDD;
+	background-color: #DFDFDF;
 }
 
 .pirho-dictionary__item--odd
 {
-	background-color: #CCC;
+	background-color: #CBCBCB;
 }
 
 .pirho-dictionary__item__content

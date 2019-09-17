@@ -12,8 +12,7 @@ namespace PiRhoSoft.MonsterRpg
 
 	[ExecuteInEditMode] // for OnEnable initialization of Roster
 	[DisallowMultipleComponent]
-	[HelpURL(MonsterRpg.DocumentationUrl + "trainer")]
-	[AddComponentMenu("PiRho Soft/Ecosystem/Trainer")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Trainer")]
 	public class Trainer : VariableSetComponent, ITrainer
 	{
 		[Tooltip("The name of this trainer")] [SerializeField] public string _name = string.Empty;

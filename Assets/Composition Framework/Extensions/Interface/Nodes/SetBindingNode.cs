@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(Configuration.DocumentationUrl + "set-binding-node")]
 	[CreateGraphNodeMenu("Interface/Set Binding", 300)]
 	public class SetBindingNode : GraphNode
 	{

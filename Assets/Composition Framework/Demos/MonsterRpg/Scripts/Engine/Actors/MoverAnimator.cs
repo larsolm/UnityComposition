@@ -5,8 +5,7 @@ namespace PiRhoSoft.MonsterRpg
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Mover))]
 	[RequireComponent(typeof(Animator))]
-	[HelpURL(MonsterRpg.DocumentationUrl + "mover-animator")]
-	[AddComponentMenu("Monster RPG/Animation/Mover Animator")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Mover Animator")]
 	public class MoverAnimator : MonoBehaviour
 	{
 		private static readonly int _horizontal = Animator.StringToHash("Horizontal");

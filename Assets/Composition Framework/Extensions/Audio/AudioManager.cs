@@ -1,13 +1,16 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using PiRhoSoft.Utilities;
 using UnityEngine;
 using UnityEngine.Audio;
 
-namespace PiRhoSoft.MonsterRpg
+namespace PiRhoSoft.Composition.Extensions
 {
-	[HelpURL(MonsterRpg.DocumentationUrl + "audio-manager")]
-	[AddComponentMenu("Monster RPG/Managers/Audio Manager")]
+	[Serializable]
+	public class AudioClipVariableSource : VariableSource<AudioClip> { }
+
+	[AddComponentMenu("PiRho Soft/Composition/Audio Manager")]
 	[RequireComponent(typeof(AudioSource))]
 	public class AudioManager : SingletonBehaviour<AudioManager>
 	{
@@ -33,9 +36,9 @@ namespace PiRhoSoft.MonsterRpg
 			_audio = GetComponent<AudioSource>();
 		}
 
-		public void Play(AudioClip clip)
+		public void Play(AudioClip clip, float volume = 1.0f)
 		{
-			_audio.PlayOneShot(clip);
+			_audio.PlayOneShot(clip, volume);
 		}
 
 		public void Push(AudioClip clip, float fadeOut = 0, float fadeIn = 0, float crossFade = 0)

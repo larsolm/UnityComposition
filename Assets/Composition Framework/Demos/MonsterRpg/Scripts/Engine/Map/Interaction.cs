@@ -4,8 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.MonsterRpg
 {
-	[HelpURL(MonsterRpg.DocumentationUrl + "interaction")]
-	[AddComponentMenu("Monster RPG/World/Interaction")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Interaction")]
 	public class Interaction : GraphTrigger
 	{
 		private const string _missingOccupierWarning = "(WIMO) The Interaction '{0}' needs either a Mover or StaticCollider";

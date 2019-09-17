@@ -33,6 +33,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
+		public override string ToString() => Reference.ToString();
 		protected abstract VariableDefinition GetInputDefinition();
 	}
 
@@ -41,6 +42,8 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The value of the variable")]
 		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public T Value;
+
+		public override string ToString() => Type == VariableSourceType.Value ? Value.ToString() : base.ToString();
 
 		protected override VariableDefinition GetInputDefinition()
 		{
@@ -187,5 +190,17 @@ namespace PiRhoSoft.Composition
 	{
 		public VariableValueSource() => Value = new VariableValue();
 		protected override VariableDefinition GetInputDefinition() => new VariableDefinition();
+	}
+
+	[Serializable]
+	public class SceneVariableSource : VariableSource
+	{
+		[Tooltip("The value of the variable")]
+		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
+		[ScenePicker]
+		public AssetReference Value = new AssetReference();
+
+		public override string ToString() => Type == VariableSourceType.Value ? Value.ToString() : base.ToString();
+		protected override VariableDefinition GetInputDefinition() => new VariableDefinition(string.Empty, VariableType.Asset);
 	}
 }

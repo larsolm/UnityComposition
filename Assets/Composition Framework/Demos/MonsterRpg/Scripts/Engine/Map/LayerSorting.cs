@@ -6,7 +6,7 @@ using UnityEngine.Rendering;
 namespace PiRhoSoft.MonsterRpg
 {
 	[DisallowMultipleComponent]
-	[AddComponentMenu("Monster RPG/World/Layer Sorting")]
+	[AddComponentMenu("PiRho Soft/Monster RPG/Layer Sorting")]
 	public class LayerSorting : MonoBehaviour
 	{
 		public static readonly int LayerCount = Enum.GetValues(typeof(CollisionLayer)).Length - 1;

@@ -3,10 +3,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace PiRhoSoft.Composition
+namespace PiRhoSoft.Composition.Extensions
 {
 	[CreateGraphNodeMenu("Animation/Play Effect", 100)]
-	[HelpURL(Configuration.DocumentationUrl + "play-effect-node")]
 	public class PlayEffectNode : GraphNode
 	{
 		public enum ObjectPositioning

@@ -383,6 +383,24 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
+		public static bool Resolve(this IVariableCollection variables, Object context, AssetVariableSource source, out AssetReference result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return variables.Resolve(context, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
+		public static bool Resolve(this IVariableCollection variables, Object context, SceneVariableSource source, out AssetReference result)
+		{
+			if (source.Type == VariableSourceType.Reference)
+				return variables.Resolve(context, source.Reference, out result);
+
+			result = source.Value;
+			return true;
+		}
+
 		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out IVariableList result)
 		{
 			var value = reference.GetValue(variables);
@@ -392,15 +410,6 @@ namespace PiRhoSoft.Composition
 
 			LogResolveWarning(context, value, reference, VariableType.List);
 			return false;
-		}
-
-		public static bool Resolve(this IVariableCollection variables, Object context, AssetVariableSource source, out AssetReference result)
-		{
-			if (source.Type == VariableSourceType.Reference)
-				return variables.Resolve(context, source.Reference, out result);
-
-			result = source.Value;
-			return true;
 		}
 
 		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out AssetReference result)
