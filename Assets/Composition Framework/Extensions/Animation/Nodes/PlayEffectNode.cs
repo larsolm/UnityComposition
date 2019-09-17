@@ -27,7 +27,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public StringVariableSource EffectName = new StringVariableSource("Spawned Effect");
 
 		[Tooltip("A variable reference to assign the created effect to so that it can be referenced later")]
-		public VariableReference EffectVariable = new VariableReference();
+		public VariableAssignmentReference EffectVariable = new VariableAssignmentReference();
 
 		[Tooltip("How to create and position the effect, with an exact position, relative to another object, or as a child of another object")]
 		[EnumButtons]
@@ -35,11 +35,11 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The object to position the effect relative to")]
 		[Conditional(nameof(Positioning), (int)ObjectPositioning.Relative)]
-		public VariableReference Object = new VariableReference();
+		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The parent object to make the effect a child of")]
 		[Conditional(nameof(Positioning), (int)ObjectPositioning.Child)]
-		public VariableReference Parent = new VariableReference();
+		public VariableLookupReference Parent = new VariableLookupReference();
 
 		[Tooltip("The position to spawn the object at")]
 		[Inline]
@@ -58,26 +58,6 @@ namespace PiRhoSoft.Composition.Extensions
 		public override Color NodeColor => Colors.Animation;
 
 		private List<ICompletionNotifier> _animations = new List<ICompletionNotifier>(5);
-
-		public override void GetInputs(IList<VariableDefinition> inputs)
-		{
-			Effect.GetInputs(inputs);
-			EffectName.GetInputs(inputs);
-			Position.GetInputs(inputs);
-			Rotation.GetInputs(inputs);
-
-			if (Positioning == ObjectPositioning.Child && GraphStore.IsInput(Parent))
-				inputs.Add(new VariableDefinition(Parent.RootName, new ObjectConstraint(typeof(GameObject))));
-
-			if (Positioning == ObjectPositioning.Relative && GraphStore.IsInput(Object))
-				inputs.Add(new VariableDefinition(Object.RootName, new ObjectConstraint(typeof(GameObject))));
-		}
-
-		public override void GetOutputs(IList<VariableDefinition> outputs)
-		{
-			if (GraphStore.IsOutput(EffectVariable))
-				outputs.Add(new VariableDefinition(EffectVariable.RootName, new ObjectConstraint(typeof(GameObject))));
-		}
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{

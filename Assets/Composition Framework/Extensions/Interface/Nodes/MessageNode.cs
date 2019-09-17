@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The MessageControl to show")]
 		[VariableReference(typeof(MessageControl))]
-		public VariableReference Control = new VariableReference();
+		public VariableLookupReference Control = new VariableLookupReference();
 
 		[Tooltip("Specifies whether to wait for the message to complete before moving on to Next")]
 		public bool WaitForCompletion = true;

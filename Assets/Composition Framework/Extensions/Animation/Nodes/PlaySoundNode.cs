@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The Audio Player to play the sound on")]
 		[VariableReference(typeof(AudioPlayer))]
-		public VariableReference AudioPlayer;
+		public VariableLookupReference AudioPlayer = new VariableLookupReference();
 
 		[Tooltip("The sound to play")]
 		[Inline]

@@ -11,10 +11,10 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The Binding Root to set bindings on")]
 		[VariableReference(typeof(BindingRoot))]
-		public VariableReference Object = new VariableReference();
+		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The Variable store to set the bindings to")]
-		public VariableReference Binding = new VariableReference();
+		public VariableLookupReference Binding = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.Interface;
 

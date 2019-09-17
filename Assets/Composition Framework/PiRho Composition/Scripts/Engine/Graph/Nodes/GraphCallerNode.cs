@@ -29,44 +29,15 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The graph to run when this node is reached")]
 		[VariableReference(typeof(Graph))]
 		[Conditional(nameof(Source), (int)GraphSource.Reference)]
-		public VariableReference Reference = new VariableReference();
+		public VariableLookupReference Reference = new VariableLookupReference();
 
 		[Tooltip("The object to use as the root for Graph")]
-		public VariableValueSource Context = new VariableValueSource { Type = VariableSourceType.Reference, Reference = new VariableReference { Variable = "context" } };
+		public VariableValueSource Context = new VariableValueSource { Type = VariableSourceType.Reference, Reference = new VariableLookupReference { Variable = "context" } };
 
 		[Tooltip("Whether to wait for the graph to finish before moving to Next")]
 		public bool WaitForCompletion = true;
 
 		public override Color NodeColor => Colors.ExecutionLight;
-
-		public override void GetInputs(IList<VariableDefinition> inputs)
-		{
-			if (Source == GraphSource.Value)
-			{
-				foreach (var input in TargetGraph.Inputs)
-				{
-					if (GraphStore.IsInput(input))
-						inputs.Add(TargetGraph.GetInputDefinition(input));
-				}
-			}
-			else if (Source == GraphSource.Reference)
-			{
-				if (GraphStore.IsInput(Reference))
-					inputs.Add(new VariableDefinition(Reference.RootName, new ObjectConstraint(typeof(Graph))));
-			}
-		}
-
-		public override void GetOutputs(IList<VariableDefinition> outputs)
-		{
-			if (Source == GraphSource.Value)
-			{
-				foreach (var output in TargetGraph.Outputs)
-				{
-					if (GraphStore.IsOutput(output))
-						outputs.Add(TargetGraph.GetOutputDefinition(output));
-				}
-			}
-		}
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{

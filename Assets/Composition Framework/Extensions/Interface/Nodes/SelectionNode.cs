@@ -23,13 +23,13 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The SelectionControl to show")]
 		[VariableReference(typeof(SelectionControl))]
-		public VariableReference Control = new VariableReference();
+		public VariableLookupReference Control = new VariableLookupReference();
 
 		[Tooltip("The variable to store the selected item's variables in")]
-		public VariableReference SelectedItem = new VariableReference { Variable = "selectedItem" };
+		public VariableAssignmentReference SelectedItem = new VariableAssignmentReference { Variable = "selectedItem" };
 
 		[Tooltip("The variable to store the selected item's index in")]
-		public VariableReference SelectedIndex = new VariableReference { Variable = "selectedIndex" };
+		public VariableAssignmentReference SelectedIndex = new VariableAssignmentReference { Variable = "selectedIndex" };
 
 		[Tooltip("If set an item will always be selected (unless there are none)")]
 		public bool IsSelectionRequired = false;

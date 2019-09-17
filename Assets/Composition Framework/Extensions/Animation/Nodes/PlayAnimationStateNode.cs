@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The Animator to set State on")]
 		[VariableReference(typeof(Animator))]
-		public VariableReference Animator;
+		public VariableLookupReference Animator = new VariableLookupReference();
 
 		[Tooltip("The name of the animation state to play")]
 		[Inline]

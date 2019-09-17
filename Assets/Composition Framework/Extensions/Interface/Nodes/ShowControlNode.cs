@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The InterfaceControl to show")]
 		[VariableReference(typeof(InterfaceControl))]
-		public VariableReference Control = new VariableReference();
+		public VariableLookupReference Control = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.InterfaceLight;
 

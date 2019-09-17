@@ -64,10 +64,19 @@ namespace PiRhoSoft.Utilities.Editor
 				for (int i = 0; i < property.arraySize; i++)
 					yield return property.GetArrayElementAtIndex(i);
 			}
+			else if (string.IsNullOrEmpty(property.propertyPath))
+			{
+				var iterator = property.Copy();
+				var valid = iterator.NextVisible(true);
+
+				while (valid)
+				{
+					yield return iterator.Copy();
+					valid = iterator.NextVisible(false);
+				}
+			}
 			else
 			{
-				// TODO: doesn't work right when property is the root
-
 				var iterator = property.Copy();
 				var end = iterator.GetEndProperty();
 				var valid = iterator.NextVisible(true);
@@ -86,9 +95,6 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static VisualElement CreateField(this SerializedProperty property)
 		{
-			// ArraySize properties return true for HasVisibleChildFields rely on PropertyField state in
-			// CreateFieldFromProperty to maintain bindings. TODO: determine if this is relevant
-
 			_createFieldFromPropertyParameters[0] = property;
 			return _createFieldFromPropertyMethod?.Invoke(_createFieldFromPropertyInstance, _createFieldFromPropertyParameters) as VisualElement;
 		}
@@ -149,33 +155,33 @@ namespace PiRhoSoft.Utilities.Editor
 			}
 		}
 
-		public static T GetValue<T>(this SerializedProperty property)
+		public static bool TryGetValue<T>(this SerializedProperty property, out T value)
 		{
-			// TODO: probably should validate the property is holding the expected type (i.e TryGetValue)
 			// this boxes for value types but I don't think there's a way around that without dynamic code generation
 
-			if (typeof(T) == typeof(int)) return (T)(object)property.intValue;
-			if (typeof(T) == typeof(bool)) return (T)(object)property.boolValue;
-			if (typeof(T) == typeof(float)) return (T)(object)property.floatValue;
-			if (typeof(T) == typeof(string)) return (T)(object)property.stringValue;
-			if (typeof(T) == typeof(Color)) return (T)(object)property.colorValue;
-			if (typeof(T) == typeof(LayerMask)) return (T)(object)property.intValue;
-			if (typeof(T) == typeof(Enum)) return (T)(object)property.GetEnumValue();
-			if (typeof(T) == typeof(Vector2)) return (T)(object)property.vector2Value;
-			if (typeof(T) == typeof(Vector3)) return (T)(object)property.vector3Value;
-			if (typeof(T) == typeof(Vector4)) return (T)(object)property.vector4Value;
-			if (typeof(T) == typeof(Rect)) return (T)(object)property.rectValue;
-			if (typeof(T) == typeof(AnimationCurve)) return (T)(object)property.animationCurveValue;
-			if (typeof(T) == typeof(Bounds)) return (T)(object)property.boundsValue;
-			if (typeof(T) == typeof(Gradient)) return (T)(object)property.GetGradientValue();
-			if (typeof(T) == typeof(Quaternion)) return (T)(object)property.quaternionValue;
-			if (typeof(T) == typeof(Vector2Int)) return (T)(object)property.vector2IntValue;
-			if (typeof(T) == typeof(Vector3Int)) return (T)(object)property.vector3IntValue;
-			if (typeof(T) == typeof(RectInt)) return (T)(object)property.rectIntValue;
-			if (typeof(T) == typeof(BoundsInt)) return (T)(object)property.boundsIntValue;
-			if (typeof(Object).IsAssignableFrom(typeof(T))) return (T)(object)property.objectReferenceValue;
+			if (typeof(T) == typeof(int) && property.propertyType == SerializedPropertyType.Integer) { value = (T)(object)property.intValue; return true; }
+			if (typeof(T) == typeof(bool) && property.propertyType == SerializedPropertyType.Boolean) { value = (T)(object)property.boolValue; return true; }
+			if (typeof(T) == typeof(float) && property.propertyType == SerializedPropertyType.Float) { value = (T)(object)property.floatValue; return true; }
+			if (typeof(T) == typeof(string) && property.propertyType == SerializedPropertyType.String) { value = (T)(object)property.stringValue; return true; }
+			if (typeof(T) == typeof(Color) && property.propertyType == SerializedPropertyType.Color) { value = (T)(object)property.colorValue; return true; }
+			if (typeof(T) == typeof(LayerMask) && property.propertyType == SerializedPropertyType.LayerMask) { value = (T)(object)property.intValue; return true; }
+			if ((typeof(T) == typeof(Enum) || typeof(T).IsEnum) && property.propertyType == SerializedPropertyType.Enum) { value = (T)(object)property.GetEnumValue(); return true; }
+			if (typeof(T) == typeof(Vector2) && property.propertyType == SerializedPropertyType.Vector2) { value = (T)(object)property.vector2Value; return true; }
+			if (typeof(T) == typeof(Vector3) && property.propertyType == SerializedPropertyType.Vector3) { value = (T)(object)property.vector3Value; return true; }
+			if (typeof(T) == typeof(Vector4) && property.propertyType == SerializedPropertyType.Vector4) { value = (T)(object)property.vector4Value; return true; }
+			if (typeof(T) == typeof(Rect) && property.propertyType == SerializedPropertyType.Rect) { value = (T)(object)property.rectValue; return true; }
+			if (typeof(T) == typeof(AnimationCurve) && property.propertyType == SerializedPropertyType.AnimationCurve) { value = (T)(object)property.animationCurveValue; return true; }
+			if (typeof(T) == typeof(Bounds) && property.propertyType == SerializedPropertyType.Bounds) { value = (T)(object)property.boundsValue; return true; }
+			if (typeof(T) == typeof(Gradient) && property.propertyType == SerializedPropertyType.Gradient) { value = (T)(object)property.GetGradientValue(); return true; }
+			if (typeof(T) == typeof(Quaternion) && property.propertyType == SerializedPropertyType.Quaternion) { value = (T)(object)property.quaternionValue; return true; }
+			if (typeof(T) == typeof(Vector2Int) && property.propertyType == SerializedPropertyType.Vector2Int) { value = (T)(object)property.vector2IntValue; return true; }
+			if (typeof(T) == typeof(Vector3Int) && property.propertyType == SerializedPropertyType.Vector3Int) { value = (T)(object)property.vector3IntValue; return true; }
+			if (typeof(T) == typeof(RectInt) && property.propertyType == SerializedPropertyType.RectInt) { value = (T)(object)property.rectIntValue; return true; }
+			if (typeof(T) == typeof(BoundsInt) && property.propertyType == SerializedPropertyType.BoundsInt) { value = (T)(object)property.boundsIntValue; return true; }
+			if (typeof(Object).IsAssignableFrom(typeof(T)) && property.propertyType == SerializedPropertyType.ObjectReference) { value = (T)(object)property.objectReferenceValue; return true; }
 
-			return default;
+			value = default;
+			return false;
 		}
 
 		public static Enum GetEnumValue(this SerializedProperty property)

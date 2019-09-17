@@ -50,7 +50,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public override void Watch(SerializedProperty property)
 		{
 			if (property != null)
-				_value = property.GetValue<T>();
+				property.TryGetValue(out _value);
 
 			base.Watch(property);
 		}

@@ -1,4 +1,3 @@
-﻿using PiRhoSoft.Utilities;
 using PiRhoSoft.Utilities.Editor;
 using System.Linq;
 using UnityEditor.UIElements;
@@ -33,26 +32,22 @@ namespace PiRhoSoft.Composition.Editor
 			Clear();
 
 			var tokens = _control.Value.Tokens;
-			var source = _control.Source;
-			var previousItem = (AutocompleteItem)null;
+			var source = _control.Autocomplete;
 			var index = 0;
 
 			while (source != null) // TODO add casting if previous item supports it and item is a cast token
 			{
 				var token = index < tokens.Count ? tokens[index] : null;
 				var itemIndex = index++; // save this for capturing
-				var item = source.GetItem(token?.Text);
-				var items = source.Items.Select(value => value.Name);
+				var item = source.GetField(token?.Text);
+				var items = source.GetFields().Select(field => field.Name);
 
 				var container = new VisualElement();
 				container.AddToClassList(ItemUssClassName);
 
 				Add(container);
 
-				if (previousItem != null && previousItem.SupportsCasting)
-					items = items.Prepend(VariableReference.Cast);
-
-				if (source.SupportsCustom)
+				if (source.AllowsCustomFields)
 				{
 					var comboBox = new ComboBoxControl(item?.Name ?? token?.Text ?? string.Empty, items.ToList());
 					comboBox.AddToClassList(ComboBoxUssClassName);
@@ -79,7 +74,7 @@ namespace PiRhoSoft.Composition.Editor
 					container.Add(popup);
 				}
 
-				if (item != null && item.IsArray && index < tokens.Count) // Index has already been incremented to the next token
+				if (item != null && item.IsIndexable && index < tokens.Count) // Index has already been incremented to the next token
 				{
 					var indexer = tokens[index++];
 					var indexField = new IntegerField { value = int.TryParse(indexer.Text, out var number) ? number : 0, isDelayed = true };
@@ -89,14 +84,13 @@ namespace PiRhoSoft.Composition.Editor
 					container.Add(indexField);
 				}
 
-				source = item?.Source;
-				previousItem = item;
+				source = item;
 			}
 		}
 
 		private void SelectItem(string selectedItem, int itemIndex)
 		{
-			var source = _control.Source;
+			var source = _control.Autocomplete;
 			var tokens = _control.Value.Tokens.GetRange(0, itemIndex).ToList();
 			var selectedText = selectedItem == _emptyText ? string.Empty : selectedItem;
 
@@ -108,12 +102,12 @@ namespace PiRhoSoft.Composition.Editor
 			for (var i = 0; i < tokens.Count && source != null; i++)
 			{
 				var token = tokens[i];
-				var item = source.GetItem(token.Text);
+				var item = source.GetField(token.Text);
 
-				if (i == tokens.Count - 1 && item != null && item.IsArray)
+				if (i == tokens.Count - 1 && item != null && item.IsIndexable)
 					tokens.Add(new VariableReference.VariableToken { Text = "0", Type = VariableReference.VariableTokenType.Number });
 
-				source = item?.Source;
+				source = item;
 			}
 
 			_control.Value.Tokens = tokens;

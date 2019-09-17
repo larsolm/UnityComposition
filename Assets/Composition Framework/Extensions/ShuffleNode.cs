@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The list to shuffle")]
-		public VariableReference Variable = new VariableReference();
+		public VariableLookupReference Variable = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.ExecutionDark;
 

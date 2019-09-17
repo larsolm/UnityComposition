@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition
 			Right.ToString(builder);
 		}
 
-		public override void GetInputs(IList<VariableDefinition> inputs, string source)
+		public override void GetInputs(VariableDefinitionList inputs, string source)
 		{
 			Right.GetInputs(inputs, source);
 		}

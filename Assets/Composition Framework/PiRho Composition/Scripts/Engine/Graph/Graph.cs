@@ -8,6 +8,7 @@ namespace PiRhoSoft.Composition
 {
 	public interface IGraphRunner
 	{
+		void Exit();
 		void GoTo(GraphNode node, string source);
 		IEnumerator Run(GraphNode node, IVariableCollection variables, string source);
 	}
@@ -22,7 +23,7 @@ namespace PiRhoSoft.Composition
 		private const string _nodeAlreadyRunningError = "(PCGNAR) Failed to run GraphNode '{0}' on Graph '{1}': the node is already running";
 
 		[Tooltip("The definition for the object that runs this graph")]
-        public VariableDefinition Context = new VariableDefinition("context");
+		public VariableDefinition Context = new VariableDefinition("context");
 
 		[Tooltip("The definitions for input variables used in this graph")]
 		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Input variables defined in nodes will appear here")]
@@ -36,6 +37,7 @@ namespace PiRhoSoft.Composition
 		public List<GraphNode> Nodes = new List<GraphNode>();
 
 		public bool IsRunning { get; private set; }
+		public bool IsExiting { get; private set; }
 		public IVariableCollection Variables { get; private set; }
 		private List<GraphRunner> _runners = new List<GraphRunner>();
 
@@ -60,35 +62,35 @@ namespace PiRhoSoft.Composition
 
 		#region Input and Output Schemas
 
-		private void GetInputs(IList<VariableDefinition> inputs)
+		public void GetInputs(VariableDefinitionList inputs, string storeName)
 		{
 			foreach (var node in Nodes)
 			{
 				if (node) // if a node type is deleted, the node will be null, and this might be called before the editor does a SyncNodes
-					node.GetInputs(inputs);
+					node.GetInputs(inputs, storeName);
 			}
 		}
 
-		private void GetOutputs(IList<VariableDefinition> outputs)
+		public void GetOutputs(VariableDefinitionList outputs, string storeName)
 		{
 			foreach (var node in Nodes)
 			{
 				if (node)
-					node.GetOutputs(outputs);
+					node.GetOutputs(outputs, storeName);
 			}
 		}
 
 		public void RefreshInputs()
 		{
 			var inputs = new VariableDefinitionList();
-			GetInputs(inputs);
+			GetInputs(inputs, GraphStore.InputStoreName);
 			Inputs = RefreshDefinitions(inputs);
 		}
 
 		public void RefreshOutputs()
 		{
 			var outputs = new VariableDefinitionList();
-			GetOutputs(outputs);
+			GetOutputs(outputs, GraphStore.OutputStoreName);
 			Outputs = RefreshDefinitions(outputs);
 		}
 
@@ -311,18 +313,23 @@ namespace PiRhoSoft.Composition
 
 			public void GoTo(GraphNode node, string source)
 			{
-				_nextNode.Node = node;
-				_nextNode.Source = source;
+				if (!_graph.IsExiting)
+				{
+					_nextNode.Node = node;
+					_nextNode.Source = source;
+				}
 			}
 
 			public IEnumerator Run(GraphNode node, IVariableCollection variables, string source)
 			{
-				yield return CompositionManager.Instance.GetEnumerator(_graph.Run(node, variables, source));
+				if (!_graph.IsExiting)
+					yield return CompositionManager.Instance.GetEnumerator(_graph.Run(node, variables, source));
 			}
 
 			public IEnumerator Run(Graph graph, GraphNode root, IVariableCollection variables, string source)
 			{
 				_graph = graph;
+				_graph.IsExiting = false;
 				GoTo(root, source);
 
 #if UNITY_EDITOR
@@ -334,11 +341,18 @@ namespace PiRhoSoft.Composition
 					var node = _nextNode;
 					_nextNode.Node = null;
 
+					while (node.Node.IsRunning)
+						yield return null;
+
+					node.Node.IsRunning = true;
+
 #if UNITY_EDITOR
 					yield return _graph.ProcessNode(this, node.Node, variables, node.Source);
 #else
 					yield return node.Node.Run(this, variables);
 #endif
+
+					node.Node.IsRunning = false;
 				}
 			}
 
@@ -350,6 +364,12 @@ namespace PiRhoSoft.Composition
 #if UNITY_EDITOR
 				_callstack.Clear();
 #endif
+			}
+
+			public void Exit()
+			{
+				GoTo(null, string.Empty);
+				_graph.IsExiting = true;
 			}
 
 #if UNITY_EDITOR
@@ -390,6 +410,6 @@ namespace PiRhoSoft.Composition
 #endif
 		}
 
-#endregion
+		#endregion
 	}
 }

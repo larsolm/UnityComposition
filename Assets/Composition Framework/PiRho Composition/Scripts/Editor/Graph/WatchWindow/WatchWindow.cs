@@ -181,7 +181,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private bool AddWatch(string variable)
 		{
-			var reference = new VariableReference { Variable = variable };
+			var reference = new VariableLookupReference { Variable = variable };
 
 			foreach (var graph in CompositionManager.TrackingState.Keys)
 			{

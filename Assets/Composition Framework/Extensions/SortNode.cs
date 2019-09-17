@@ -6,7 +6,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition.Extensions
 {
 	[Serializable]
-	public class SortConditionList : SerializedList<VariableReference> { }
+	public class SortConditionList : SerializedList<VariableLookupReference> { }
 
 	[CreateGraphNodeMenu("Composition/Sort", 21)]
 	public class SortNode : GraphNode
@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The list to sort")]
-		public VariableReference List = new VariableReference();
+		public VariableLookupReference List = new VariableLookupReference();
 
 		[Tooltip("Specifies whether to sort each value in the list by itself or by properties on the value (if it is a list of variable stores)")]
 		public bool SortByProperty = false;

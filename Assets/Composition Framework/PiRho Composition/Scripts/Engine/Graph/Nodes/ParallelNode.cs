@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 		[List]
 		public GraphNodeList Nodes = new GraphNodeList();
 
-		private List<IEnumerator> _nodes = new List<IEnumerator>();
+		private List<NodeState> _states = new List<NodeState>();
 
 		public override Color NodeColor => Colors.Sequence;
 
@@ -25,24 +25,37 @@ namespace PiRhoSoft.Composition
 
 				if (node != null)
 				{
-					var enumerator = graph.Run(node, variables, GetConnectionName(nameof(Nodes), i));
-					_nodes.Add(enumerator);
+					var state = new NodeState();
+					var enumerator = Run(graph, variables, node, GetConnectionName(nameof(Nodes), i), state);
+					var coroutine = CompositionManager.Instance.RunEnumerator(enumerator);
+
+					_states.Add(state);
 				}
 			}
 
-			while (_nodes.Count > 0)
+			while (_states.Count > 0)
 			{
-				yield return null;
-
-				for (var i = 0; i < _nodes.Count; i++)
+				for (var i = 0; i < _states.Count; i++)
 				{
-					// TODO: somehow respect Current (i.e WaitForSeconds, etc)? might need to run these on the
-					// CompositionManager
+					var state = _states[i];
 
-					if (!_nodes[i].MoveNext())
-						_nodes.RemoveAt(i--);
+					if (state.IsFinished)
+						_states.RemoveAt(i--);
 				}
+
+				yield return null;
 			}
+		}
+
+		private class NodeState
+		{
+			public bool IsFinished = false;
+		}
+
+		private IEnumerator Run(IGraphRunner graph, IVariableCollection variables, GraphNode node, string source, NodeState state)
+		{
+			yield return graph.Run(node, variables, source);
+			state.IsFinished = true;
 		}
 	}
 }

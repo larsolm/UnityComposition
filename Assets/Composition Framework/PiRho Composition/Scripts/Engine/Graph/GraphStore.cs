@@ -23,8 +23,10 @@ namespace PiRhoSoft.Composition
 	{
 		public string Name;
 		public GraphInputType Type;
-		public VariableReference Reference = new VariableReference();
+		public VariableLookupReference Reference = new VariableLookupReference();
 		public VariableValue Value = new VariableValue();
+
+		public bool UsesStore(string storeName) => Type == GraphInputType.Reference && Reference.UsesStore(storeName);
 	}
 
 	[Serializable]
@@ -32,7 +34,9 @@ namespace PiRhoSoft.Composition
 	{
 		public string Name;
 		public GraphOutputType Type;
-		public VariableReference Reference = new VariableReference();
+		public VariableAssignmentReference Reference = new VariableAssignmentReference();
+
+		public bool UsesStore(string storeName) => Type == GraphOutputType.Reference && Reference.UsesStore(storeName);
 	}
 
 	public class GraphStore : IVariableCollection, IPoolable
@@ -54,11 +58,6 @@ namespace PiRhoSoft.Composition
 		public VariableStore Input { get; } = new VariableStore();
 		public VariableStore Output { get; } = new VariableStore();
 		public VariableStore Local { get; } = new VariableStore();
-
-		public static bool IsInput(VariableReference variable) => variable.IsAssigned && variable.StoreName == InputStoreName;
-		public static bool IsOutput(VariableReference variable) => variable.IsAssigned && variable.StoreName == OutputStoreName;
-		public static bool IsInput(GraphInput input) => input.Type == GraphInputType.Reference && input.Reference.IsAssigned && input.Reference.StoreName == InputStoreName;
-		public static bool IsOutput(GraphOutput output) => output.Type == GraphOutputType.Reference && output.Reference.IsAssigned && output.Reference.StoreName == OutputStoreName;
 
 		private readonly string[] _variableNames = new string[] { InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName, CompositionManager.SceneStoreName, string.Empty };
 

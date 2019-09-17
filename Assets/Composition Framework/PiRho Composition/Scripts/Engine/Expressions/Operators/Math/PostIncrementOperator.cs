@@ -55,7 +55,7 @@ namespace PiRhoSoft.Composition
 			builder.Append(Symbol);
 		}
 
-		public override void GetInputs(IList<VariableDefinition> inputs, string source)
+		public override void GetInputs(VariableDefinitionList inputs, string source)
 		{
 			Left.GetInputs(inputs, source);
 		}

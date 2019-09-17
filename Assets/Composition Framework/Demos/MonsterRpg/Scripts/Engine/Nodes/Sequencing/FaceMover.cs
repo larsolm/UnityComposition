@@ -12,11 +12,11 @@ namespace PiRhoSoft.MonsterRpg
 
 		[Tooltip("The mover to make face")]
 		[VariableReference(typeof(Mover))]
-		public VariableReference Mover = new VariableReference();
+		public VariableLookupReference Mover = new VariableLookupReference();
 
 		[Tooltip("The mover to face")]
 		[VariableReference(typeof(Mover))]
-		public VariableReference Target = new VariableReference();
+		public VariableLookupReference Target = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.Sequencing;
 		

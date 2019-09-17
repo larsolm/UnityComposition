@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 		public GraphCaller Graph = new GraphCaller();
 
 		[Tooltip("The variable holding the value to watch for changes")]
-		public VariableReference Variable = new VariableReference();
+		public VariableLookupReference Variable = new VariableLookupReference();
 
 		private Variable _value = PiRhoSoft.Composition.Variable.Empty;
 

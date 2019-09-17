@@ -26,7 +26,6 @@ namespace PiRhoSoft.Composition
 
 		public void SetupSchema()
 		{
-			// TODO: what if there is no schema
 			Variables.Setup(_schema, this);
 			_store = new CombinedVariableCollection(new MappedVariableCollection(this), Variables);
 		}

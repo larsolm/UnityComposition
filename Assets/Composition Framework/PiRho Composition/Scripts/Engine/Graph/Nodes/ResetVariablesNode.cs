@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The object containing the variables to reset")]
-		public VariableReference Object;
+		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The list of variables to reset")]
 		[List(EmptyLabel = "No variables will be reset")]

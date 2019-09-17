@@ -14,7 +14,7 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The target GameObject, Behaviour, or Renderer to disable")]
 		[VariableReference(typeof(Object))]
-		public VariableReference Target = new VariableReference();
+		public VariableLookupReference Target = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.SequencingDark;
 

@@ -13,16 +13,17 @@ namespace PiRhoSoft.Utilities.Editor
 		{
 			var maximum = (attribute as MaximumAttribute).Maximum;
 			var element = this.CreateNextElement(property);
+			var clone = property.Copy();
 
 			if (property.propertyType == SerializedPropertyType.Integer)
 			{
 				Clamp(property, Mathf.RoundToInt(maximum));
-				element.RegisterCallback<FocusOutEvent>(e => Clamp(property, Mathf.RoundToInt(maximum)));
+				element.RegisterCallback<FocusOutEvent>(e => Clamp(clone, Mathf.RoundToInt(maximum)));
 			}
 			else if (property.propertyType == SerializedPropertyType.Float)
 			{
 				Clamp(property, maximum);
-				element.RegisterCallback<FocusOutEvent>(e => Clamp(property, maximum));
+				element.RegisterCallback<FocusOutEvent>(e => Clamp(clone, maximum));
 			}
 			else
 			{

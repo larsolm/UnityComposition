@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Object = UnityEngine.Object;
@@ -21,20 +20,11 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("A reference to the variable")]
 		[Conditional(nameof(Type), (int)VariableSourceType.Reference)]
-		public VariableReference Reference = new VariableReference();
+		public VariableLookupReference Reference = new VariableLookupReference();
 
-		public void GetInputs(IList<VariableDefinition> inputs)
-		{
-			if (Type == VariableSourceType.Reference && GraphStore.IsInput(Reference))
-			{
-				var definition = GetInputDefinition();
-				definition.Name = Reference.RootName;
-				inputs.Add(definition);
-			}
-		}
-
+		public bool UsesStore(string storeName) => Type == VariableSourceType.Reference && Reference.UsesStore(storeName);
 		public override string ToString() => Reference.ToString();
-		protected abstract VariableDefinition GetInputDefinition();
+		public abstract VariableDefinition GetDefinition();
 	}
 
 	public abstract class VariableSource<T> : VariableSource
@@ -43,12 +33,17 @@ namespace PiRhoSoft.Composition
 		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		public T Value;
 
-		public override string ToString() => Type == VariableSourceType.Value ? Value.ToString() : base.ToString();
-
-		protected override VariableDefinition GetInputDefinition()
+		public override string ToString()
 		{
+			return Type == VariableSourceType.Value ? Value.ToString() : base.ToString();
+		}
+
+		public override VariableDefinition GetDefinition()
+		{
+			var name = Type == VariableSourceType.Reference ? Reference.RootName : string.Empty;
 			var type = Variable.GetType(typeof(T));
-			return new VariableDefinition(string.Empty, type);
+
+			return new VariableDefinition(name, type);
 		}
 	}
 
@@ -189,7 +184,7 @@ namespace PiRhoSoft.Composition
 	public class VariableValueSource : VariableSource<VariableValue>
 	{
 		public VariableValueSource() => Value = new VariableValue();
-		protected override VariableDefinition GetInputDefinition() => new VariableDefinition();
+		public override VariableDefinition GetDefinition() => new VariableDefinition(Type == VariableSourceType.Reference ? Reference.RootName : string.Empty);
 	}
 
 	[Serializable]
@@ -201,6 +196,6 @@ namespace PiRhoSoft.Composition
 		public AssetReference Value = new AssetReference();
 
 		public override string ToString() => Type == VariableSourceType.Value ? Value.ToString() : base.ToString();
-		protected override VariableDefinition GetInputDefinition() => new VariableDefinition(string.Empty, VariableType.Asset);
+		public override VariableDefinition GetDefinition() => new VariableDefinition(string.Empty, VariableType.Asset);
 	}
 }

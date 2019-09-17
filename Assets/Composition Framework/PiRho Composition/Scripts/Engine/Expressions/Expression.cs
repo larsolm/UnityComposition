@@ -47,7 +47,7 @@ namespace PiRhoSoft.Composition
 			return Compile();
 		}
 
-		public void GetInputs(IList<VariableDefinition> inputs, string source)
+		public void GetInputs(VariableDefinitionList inputs, string source)
 		{
 			if (_operations != null)
 			{
@@ -56,7 +56,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public void GetOutputs(IList<VariableDefinition> outputs, string source)
+		public void GetOutputs(VariableDefinitionList outputs, string source)
 		{
 			if (_operations != null)
 			{

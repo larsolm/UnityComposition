@@ -13,7 +13,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		[Tooltip("The mover to make face")]
 		[VariableReference(typeof(Mover))]
-		public VariableReference Mover = new VariableReference();
+		public VariableLookupReference Mover = new VariableLookupReference();
 
 		[Tooltip("The direction to face")]
 		[EnumButtons]

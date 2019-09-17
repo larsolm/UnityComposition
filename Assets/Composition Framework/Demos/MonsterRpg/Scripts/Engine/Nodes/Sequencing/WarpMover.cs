@@ -13,7 +13,7 @@ namespace PiRhoSoft.MonsterRpg
 
 		[Tooltip("The mover to warp")]
 		[VariableReference(typeof(Mover))]
-		public VariableReference Mover = new VariableReference();
+		public VariableLookupReference Mover = new VariableLookupReference();
 
 		[Tooltip("The position to warp the mover to")]
 		public Vector2IntVariableSource Position = new Vector2IntVariableSource();

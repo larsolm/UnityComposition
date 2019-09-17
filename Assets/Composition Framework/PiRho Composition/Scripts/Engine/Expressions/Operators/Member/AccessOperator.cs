@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 
 		public override OperatorPrecedence Precedence => OperatorPrecedence.MemberAccess;
 
-		public override void GetInputs(IList<VariableDefinition> inputs, string source)
+		public override void GetInputs(VariableDefinitionList inputs, string source)
 		{
 			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
 				inputs.Add(new VariableDefinition(_rightIdentifier.Name, VariableType.Empty));
@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition
 				base.GetInputs(inputs, source);
 		}
 
-		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
+		public override void GetOutputs(VariableDefinitionList outputs, string source)
 		{
 			if (Left is IdentifierOperation leftIdentifier && leftIdentifier.Name == source)
 				outputs.Add(new VariableDefinition(_rightIdentifier.Name, VariableType.Empty));

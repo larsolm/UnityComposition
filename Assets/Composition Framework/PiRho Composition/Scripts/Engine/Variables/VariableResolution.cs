@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition
 {
 	public static class VariableResolution
 	{
-		public static void Assign(this IVariableCollection variables, Object context, VariableReference reference, Variable value)
+		public static void Assign(this IVariableCollection variables, Object context, VariableAssignmentReference reference, Variable value)
 		{
 			if (reference.IsAssigned)
 			{
@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Variable result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Variable result)
 		{
 			result = reference.GetValue(variables);
 			return true;
@@ -43,7 +43,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out bool result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out bool result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -63,7 +63,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out int result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out int result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -83,7 +83,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out float result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out float result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -103,7 +103,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Vector2Int result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Vector2Int result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -123,7 +123,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Vector3Int result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Vector3Int result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -143,7 +143,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out RectInt result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out RectInt result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -163,7 +163,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out BoundsInt result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out BoundsInt result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -183,7 +183,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Vector2 result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Vector2 result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -203,7 +203,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Vector3 result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Vector3 result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -223,7 +223,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Vector4 result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Vector4 result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -243,7 +243,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Quaternion result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Quaternion result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -263,7 +263,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Rect result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Rect result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -283,7 +283,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Bounds result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Bounds result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -303,7 +303,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out Color result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out Color result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -323,7 +323,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out string result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out string result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -343,7 +343,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve<EnumType>(this IVariableCollection variables, Object context, VariableReference reference, out EnumType result) where EnumType : struct, Enum
+		public static bool Resolve<EnumType>(this IVariableCollection variables, Object context, VariableLookupReference reference, out EnumType result) where EnumType : struct, Enum
 		{
 			var value = reference.GetValue(variables);
 
@@ -363,7 +363,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out IVariableDictionary result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out IVariableDictionary result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -381,6 +381,17 @@ namespace PiRhoSoft.Composition
 
 			result = source.Value;
 			return true;
+		}
+
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out IVariableList result)
+		{
+			var value = reference.GetValue(variables);
+
+			if (value.TryGetList(out result))
+				return true;
+
+			LogResolveWarning(context, value, reference, VariableType.List);
+			return false;
 		}
 
 		public static bool Resolve(this IVariableCollection variables, Object context, AssetVariableSource source, out AssetReference result)
@@ -401,18 +412,7 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out IVariableList result)
-		{
-			var value = reference.GetValue(variables);
-
-			if (value.TryGetList(out result))
-				return true;
-
-			LogResolveWarning(context, value, reference, VariableType.List);
-			return false;
-		}
-
-		public static bool Resolve(this IVariableCollection variables, Object context, VariableReference reference, out AssetReference result)
+		public static bool Resolve(this IVariableCollection variables, Object context, VariableLookupReference reference, out AssetReference result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -432,7 +432,7 @@ namespace PiRhoSoft.Composition
 			return result;
 		}
 
-		public static bool ResolveObject<ObjectType>(this IVariableCollection variables, Object context, VariableReference reference, out ObjectType result) where ObjectType : Object
+		public static bool ResolveObject<ObjectType>(this IVariableCollection variables, Object context, VariableLookupReference reference, out ObjectType result) where ObjectType : Object
 		{
 			var value = reference.GetValue(variables);
 
@@ -449,7 +449,7 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public static bool ResolveStore<StoreType>(this IVariableCollection variables, Object context, VariableReference reference, out StoreType result) where StoreType : class, IVariableCollection
+		public static bool ResolveStore<StoreType>(this IVariableCollection variables, Object context, VariableLookupReference reference, out StoreType result) where StoreType : class, IVariableCollection
 		{
 			var value = reference.GetValue(variables);
 
@@ -460,7 +460,7 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public static bool ResolveIndex<ListType>(this IVariableCollection variables, Object context, VariableReference reference, out ListType result) where ListType : class, IVariableArray
+		public static bool ResolveIndex<ListType>(this IVariableCollection variables, Object context, VariableLookupReference reference, out ListType result) where ListType : class, IVariableArray
 		{
 			var value = reference.GetValue(variables);
 
@@ -471,7 +471,7 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public static bool ResolveInterface<InterfaceType>(this IVariableCollection variables, Object context, VariableReference reference, out InterfaceType result) where InterfaceType : class
+		public static bool ResolveInterface<InterfaceType>(this IVariableCollection variables, Object context, VariableLookupReference reference, out InterfaceType result) where InterfaceType : class
 		{
 			var value = reference.GetValue(variables);
 
@@ -482,7 +482,7 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public static bool ResolveReference(this IVariableCollection variables, Object context, VariableReference reference, out object result)
+		public static bool ResolveReference(this IVariableCollection variables, Object context, VariableLookupReference reference, out object result)
 		{
 			var value = reference.GetValue(variables);
 
@@ -493,7 +493,7 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public static bool ResolveAny<T>(this IVariableCollection variables, Object context, VariableReference reference, out T result)
+		public static bool ResolveAny<T>(this IVariableCollection variables, Object context, VariableLookupReference reference, out T result)
 		{
 			var value = reference.GetValue(variables);
 

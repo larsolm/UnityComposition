@@ -19,7 +19,7 @@ namespace PiRhoSoft.Composition
 		private string _result = string.Empty;
 		private bool _dirty = true;
 
-		public void GetInputs(IList<VariableDefinition> inputs)
+		public void GetInputs(IList<VariableDefinition> inputs, string storeName)
 		{
 #if UNITY_EDITOR
 			// the editor calls this method, and may also edit the text after serialization. The simplest way to make sure it
@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition
 
 			foreach (var token in _tokens)
 			{
-				if (token.Reference != null && GraphStore.IsInput(token.Reference))
+				if (token.Reference != null && token.Reference.UsesStore(storeName))
 					inputs.Add(new VariableDefinition(token.Reference.RootName));
 			}
 		}
@@ -77,7 +77,7 @@ namespace PiRhoSoft.Composition
 
 		private class MessageToken
 		{
-			public VariableReference Reference;
+			public VariableLookupReference Reference;
 			public Variable Value;
 			public string Text;
 			//public List<MessageToken> Tokens; // this will eventually be used to support VariableReferences that themselves contain a string with format parameters
@@ -113,7 +113,7 @@ namespace PiRhoSoft.Composition
 					var text = input.Substring(start, open - start);
 					_tokens.Add(new MessageToken { Text = text });
 
-					var token = new MessageToken { Reference = new VariableReference() };
+					var token = new MessageToken { Reference = new VariableLookupReference() };
 					token.Reference.Variable = input.Substring(open + 1, close - open - 1);
 					_tokens.Add(token);
 

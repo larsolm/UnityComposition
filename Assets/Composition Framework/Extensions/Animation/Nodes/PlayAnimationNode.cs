@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The Animation Player to play the clip on")]
 		[VariableReference(typeof(AnimationPlayer))]
-		public VariableReference AnimationPlayer;
+		public VariableLookupReference AnimationPlayer = new VariableLookupReference();
 
 		[Tooltip("The Animation to play")]
 		[Inline]

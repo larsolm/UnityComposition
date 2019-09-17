@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace PiRhoSoft.Composition
+﻿namespace PiRhoSoft.Composition
 {
 	public interface IAssignableOperation
 	{
@@ -13,7 +11,7 @@ namespace PiRhoSoft.Composition
 
 		public override OperatorPrecedence Precedence => OperatorPrecedence.Assignment;
 
-		public override void GetOutputs(IList<VariableDefinition> outputs, string source)
+		public override void GetOutputs(VariableDefinitionList outputs, string source)
 		{
 			Left.GetOutputs(outputs, source);
 		}

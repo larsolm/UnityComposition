@@ -16,11 +16,8 @@ namespace PiRhoSoft.Composition.Extensions
 		[Tooltip("The node to move to when this node is finished")]
 		public GraphNode Next = null;
 
-		[Tooltip("The value the animation starts at (empty to start at the current value)")]
-		public VariableValueSource From = new VariableValueSource();
-
-		[Tooltip("The value to animate to")]
-		public VariableValueSource To = new VariableValueSource();
+		[Tooltip("The variable to assign the animated value to")]
+		public VariableAssignmentReference Target = new VariableAssignmentReference();
 
 		[Inline]
 		public AnimatedVariable Animation = new AnimatedVariable();
@@ -29,17 +26,13 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
 		{
-			if (variables.Resolve(this, From, out var from) && variables.Resolve(this, To, out var to))
+			if (Animation.Start(this, variables))
 			{
-				yield return Animation.Animate(variables, from, to);
-
-				switch (Animation.Result)
+				while (!Animation.IsComplete)
 				{
-					case AnimatedVariableResult.InvalidInputs: Debug.LogWarningFormat(this, _invalidInputsWarning, name, from.Type, to.Type); break;
-					case AnimatedVariableResult.UnassignedOutput: Debug.LogWarningFormat(this, _unassignedOutputWarning, name, from.Type, to.Type); break;
-					case AnimatedVariableResult.MissingOutput: Debug.LogWarningFormat(this, _missingOutputWarning, name, Animation.Target); break;
-					case AnimatedVariableResult.ReadOnlyOutput: Debug.LogWarningFormat(this, _readOnlyOutputWarning, name, Animation.Target); break;
-					case AnimatedVariableResult.InvalidOutput: Debug.LogWarningFormat(this, _invalidOutputWarning, name, Animation.Target); break;
+					Animation.Step(variables);
+					Target.SetValue(variables, Animation.Value);
+					yield return null;
 				}
 			}
 
