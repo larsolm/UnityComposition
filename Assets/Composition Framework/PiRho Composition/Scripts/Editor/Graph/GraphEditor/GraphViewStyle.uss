@@ -37,6 +37,10 @@
 	margin: 0px;
 }
 
+.pirho-graph-view__toolbar__button--graph
+{
+}
+
 .pirho-graph-view__toolbar__button--small
 {
 	width: 28px;

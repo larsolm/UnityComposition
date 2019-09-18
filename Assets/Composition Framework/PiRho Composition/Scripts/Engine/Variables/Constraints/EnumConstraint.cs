@@ -7,6 +7,7 @@ namespace PiRhoSoft.Composition
 	// TODO: Could do something fancy here where any enum type that has a definition gets a cache created holding its
 	// boxed values so they can be looked up (as opposed to doing a boxing conversion) at runtime.
 
+	[Serializable]
 	public class EnumConstraint : VariableConstraint
 	{
 		public override VariableType Type => VariableType.Enum;

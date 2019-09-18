@@ -5,6 +5,7 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
 {
+	[Serializable]
 	public class ObjectConstraint : VariableConstraint
 	{
 		public override VariableType Type => VariableType.Object;

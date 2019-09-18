@@ -34,12 +34,16 @@ namespace PiRhoSoft.Composition.Editor
 		public static AutocompleteItem GetItem(object obj)
 		{
 			var type = obj.GetType();
-
-			if (_registry.TryGetValue(type, out var itemType))
+			while (type != null)
 			{
-				var item = Activator.CreateInstance(itemType) as AutocompleteItem;
-				item.Setup(obj);
-				return item;
+				if (_registry.TryGetValue(type, out var itemType))
+				{
+					var item = Activator.CreateInstance(itemType) as AutocompleteItem;
+					item.Setup(obj);
+					return item;
+				}
+
+				type = type.BaseType;
 			}
 
 			return new ObjectAutocompleteItem(obj);

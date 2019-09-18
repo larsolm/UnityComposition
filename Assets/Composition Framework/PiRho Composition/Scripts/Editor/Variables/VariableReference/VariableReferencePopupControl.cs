@@ -1,4 +1,5 @@
 using PiRhoSoft.Utilities.Editor;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -32,24 +33,28 @@ namespace PiRhoSoft.Composition.Editor
 			Clear();
 
 			var tokens = _control.Value.Tokens;
-			var source = _control.Autocomplete;
+			var previous = (IAutocompleteItem)null;
+			var current = _control.Autocomplete;
 			var index = 0;
 
-			while (source != null) // TODO add casting if previous item supports it and item is a cast token
+			while (current != null)
 			{
 				var token = index < tokens.Count ? tokens[index] : null;
 				var itemIndex = index++; // save this for capturing
-				var item = source.GetField(token?.Text);
-				var items = source.GetFields().Select(field => field.Name);
+				var next = GetItem(current, token);
+				var items = GetItems(current, token);
 
 				var container = new VisualElement();
 				container.AddToClassList(ItemUssClassName);
 
 				Add(container);
 
-				if (source.AllowsCustomFields)
+				if (previous != null && previous.IsCastable)
+					items = items.Prepend(VariableReference.Cast);
+
+				if (current.AllowsCustomFields)
 				{
-					var comboBox = new ComboBoxControl(item?.Name ?? token?.Text ?? string.Empty, items.ToList());
+					var comboBox = new ComboBoxControl(next?.Name ?? token?.Text ?? string.Empty, items.ToList());
 					comboBox.AddToClassList(ComboBoxUssClassName);
 					comboBox.RegisterCallback<ChangeEvent<string>>(evt => SelectItem(evt.newValue, itemIndex));
 					comboBox.TextField.isDelayed = true;
@@ -58,15 +63,14 @@ namespace PiRhoSoft.Composition.Editor
 				}
 				else
 				{
-					if (item == null && token?.Type != VariableReference.VariableTokenType.Type)
+					if (next == null && token?.Type != VariableReference.VariableTokenType.Type)
 					{
 						container.AddToClassList(EmptyUssClassName);
 
-						if (!string.IsNullOrEmpty(token?.Text))
-						{ } // Log that schema has changed
+						if (!string.IsNullOrEmpty(token?.Text)) { } // Log that schema has changed
 					}
 
-					var name = token?.Type == VariableReference.VariableTokenType.Type ? VariableReference.Cast : item?.Name ?? _emptyText;
+					var name = token?.Type == VariableReference.VariableTokenType.Type ? VariableReference.Cast : next?.Name ?? _emptyText;
 					var popup = new PopupField<string>(items.Prepend(_emptyText).ToList(), name);
 					popup.AddToClassList(PopupUssClassName);
 					popup.RegisterValueChangedCallback(evt => SelectItem(evt.newValue, itemIndex));
@@ -74,7 +78,7 @@ namespace PiRhoSoft.Composition.Editor
 					container.Add(popup);
 				}
 
-				if (item != null && item.IsIndexable && index < tokens.Count) // Index has already been incremented to the next token
+				if (next != null && next.IsIndexable && index < tokens.Count) // Index has already been incremented to the next token
 				{
 					var indexer = tokens[index++];
 					var indexField = new IntegerField { value = int.TryParse(indexer.Text, out var number) ? number : 0, isDelayed = true };
@@ -84,8 +88,40 @@ namespace PiRhoSoft.Composition.Editor
 					container.Add(indexField);
 				}
 
-				source = item;
+				previous = current;
+				current = next;
 			}
+		}
+
+		private IAutocompleteItem GetItem(IAutocompleteItem source, VariableReference.VariableToken token)
+		{
+			if (token == null)
+				return null;
+			else if (token.Type == VariableReference.VariableTokenType.Name)
+				return source.GetField(token.Text);
+			else if (token.Type == VariableReference.VariableTokenType.Type)
+				return null;
+			else if (token.Type == VariableReference.VariableTokenType.Number)
+				return source.GetIndexField();
+
+			return null;
+		}
+
+		private IEnumerable<string> GetItems(IAutocompleteItem source, VariableReference.VariableToken token)
+		{
+			if (token == null || token.Type == VariableReference.VariableTokenType.Name)
+			{
+				return source.GetFields()?.Select(field => field.Name);
+			}
+			else if (token.Type == VariableReference.VariableTokenType.Type)
+			{
+				return source.GetTypes()?.Select(type => type.Name);
+			}
+			else if (token.Type == VariableReference.VariableTokenType.Number)
+			{
+			}
+
+			return null;
 		}
 
 		private void SelectItem(string selectedItem, int itemIndex)

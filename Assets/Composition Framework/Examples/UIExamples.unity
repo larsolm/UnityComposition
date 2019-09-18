@@ -1112,7 +1112,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Type: 
   Object: {fileID: 0}
-  Scene: 
+  Scene:
+    m_AssetGUID: 
+    m_SubObjectName: 
   IntPopup: 0
   FloatPopup: 0
   StringPopup: 

@@ -482,6 +482,7 @@ namespace PiRhoSoft.Composition.Editor
 		public const string ToolbarButtonLockUssClassName = ToolbarButtonUssClassName + "--lock";
 		public const string ToolbarButtonActiveUssClassName = ToolbarButtonUssClassName + "--active";
 		public const string ToolbarButtonFirstUssClassName = ToolbarButtonUssClassName + "--first";
+		public const string ToolbarButtonGraphUssClassName = ToolbarButtonUssClassName + "--graph";
 		public const string ToolbarButtonBreakpointUssClassName = ToolbarButtonUssClassName + "__breakpoint";
 		public const string BreakpointsDisabledUssClassName = UssClassName + "--breakpoints-disabled";
 
@@ -553,6 +554,7 @@ namespace PiRhoSoft.Composition.Editor
 			_graphButton.AddToClassList(ToolbarButtonUssClassName);
 			_graphButton.AddToClassList(ToolbarButtonLargeUssClassName);
 			_graphButton.AddToClassList(ToolbarButtonFirstUssClassName);
+			_graphButton.AddToClassList(ToolbarButtonGraphUssClassName);
 			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
 
 			_editButton = CreateEditMenu();
