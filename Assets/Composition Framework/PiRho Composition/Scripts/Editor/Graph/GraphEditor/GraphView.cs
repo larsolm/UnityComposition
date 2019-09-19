@@ -83,8 +83,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void SetupNodeProvider()
 		{
-			var types = TypeHelper.ListDerivedTypes<GraphNode>(false).Where(type => type != typeof(StartNode)).ToList();
-			var paths = types.Select(type => TypeHelper.GetAttribute<CreateGraphNodeMenuAttribute>(type)?.MenuName ?? type.Name).ToList();
+			var types = TypeHelper.GetDerivedTypes<GraphNode>(false).Where(type => type != typeof(StartNode)).ToList();
+			var paths = types.Select(type => type.GetAttribute<CreateGraphNodeMenuAttribute>()?.MenuName ?? type.Name).ToList();
 
 			_nodeProvider.Setup("Create Node", paths, types, type => AssetPreview.GetMiniTypeThumbnail(type), selectedType => CreateNode(selectedType));
 		}

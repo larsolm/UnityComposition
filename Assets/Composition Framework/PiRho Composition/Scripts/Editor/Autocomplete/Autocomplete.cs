@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			foreach (var type in types)
 			{
-				var attribute = TypeHelper.GetAttribute<AutocompleteAttribute>(type);
+				var attribute = type.GetAttribute<AutocompleteAttribute>();
 				AddType(attribute.Type, type);
 			}
 		}
@@ -38,7 +38,7 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				if (_registry.TryGetValue(type, out var itemType))
 				{
-					var item = Activator.CreateInstance(itemType) as AutocompleteItem;
+					var item = itemType.CreateInstance<AutocompleteItem>();
 					item.Setup(obj);
 					return item;
 				}

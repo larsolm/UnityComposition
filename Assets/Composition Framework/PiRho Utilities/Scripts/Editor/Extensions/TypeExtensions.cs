@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using UnityEditor;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -16,7 +18,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static AttributeType GetAttribute<AttributeType>(this Type type) where AttributeType : Attribute
 		{
-			return TryGetAttribute<AttributeType>(type, out var attribute) ? attribute : null;
+			return type.TryGetAttribute<AttributeType>(out var attribute) ? attribute : null;
 		}
 
 		public static bool TryGetAttribute<AttributeType>(this Type type, out AttributeType attribute) where AttributeType : Attribute
@@ -27,9 +29,27 @@ namespace PiRhoSoft.Utilities.Editor
 			return attribute != null;
 		}
 
+		public static bool HasAttribute(this Type type, Type attributeType)
+		{
+			return type.GetAttribute(attributeType) != null;
+		}
+
+		public static Attribute GetAttribute(this Type type, Type attributeType)
+		{
+			return type.TryGetAttribute(attributeType, out var attribute) ? attribute : null;
+		}
+
+		public static bool TryGetAttribute(this Type type, Type attributeType, out Attribute attribute)
+		{
+			var attributes = type.GetCustomAttributes(attributeType, false);
+			attribute = attributes != null && attributes.Length > 0 ? attributes[0] as Attribute : null;
+
+			return attribute != null;
+		}
+
 		#endregion
 
-		#region Creation
+		#region Hierarchy
 
 		public static T CreateInstance<T>(this Type type) where T : class
 		{
@@ -62,6 +82,12 @@ namespace PiRhoSoft.Utilities.Editor
 			}
 
 			return false;
+		}
+
+		public static IEnumerable<Type> GetDerivedTypes(this Type baseType, bool includeAbstract)
+		{
+			var types = TypeCache.GetTypesDerivedFrom(baseType).Prepend(baseType);
+			return includeAbstract ? types : types.Where(type => type.IsAbstract);
 		}
 
 		#endregion

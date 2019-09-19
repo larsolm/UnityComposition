@@ -227,6 +227,8 @@ namespace PiRhoSoft.Composition.Editor
 				{
 					// TODO: add clicking and hovering to select these
 					var element = new ItemElement(field);
+					element.RegisterCallback<MouseOverEvent>(e => SetActive(element));
+					element.AddManipulator(new Clickable(() => _control.Select()));
 					element.AddToClassList(ItemUssClassName);
 
 					_scrollView.contentContainer.Add(element);

@@ -45,17 +45,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Map:
-    _variable: One
-    _tokens:
-    - Type: 0
-      Text: One
+    _variable: 
+    _tokens: []
   SpawnPoint:
     Type: 1
     Reference:
-      _variable: One
-      _tokens:
-      - Type: 0
-        Text: One
+      _variable: 
+      _tokens: []
     Value: 
 --- !u!114 &11400000
 MonoBehaviour:
@@ -71,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Context:
     Name: context
-    _type: 0
+    _type: 17
     _constraintData:
       Version: 1
       Data: 
@@ -103,14 +99,18 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: -2113145965619732750}
   Scene:
-    Type: 0
+    Type: 1
     Reference:
-      _variable: 
-      _tokens: []
+      _variable: context[0]
+      _tokens:
+      - Type: 0
+        Text: context
+      - Type: 1
+        Text: 0
     Value:
       m_AssetGUID: 
       m_SubObjectName: 
-  WaitForCompletion: 1
+  WaitForCompletion: 0
   CleanupAssets: 1
   Additive: 1
 --- !u!114 &8360444590051035758
@@ -145,7 +145,7 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: -1368940103165137033}
   Scene:
-    Type: 0
+    Type: 1
     Reference:
       _variable: 
       _tokens: []

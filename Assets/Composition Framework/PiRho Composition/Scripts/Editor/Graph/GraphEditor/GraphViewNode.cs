@@ -114,7 +114,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		protected void ViewDocumentation(Type type)
 		{
-			var help = TypeHelper.GetAttribute<HelpURLAttribute>(type);
+			var help = type.GetAttribute<HelpURLAttribute>();
 			if (help != null)
 				Application.OpenURL(help.URL);
 		}

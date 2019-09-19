@@ -29,6 +29,7 @@
 	display: flex;
 	align-self: center;
 	flex-direction: row;
+	flex-wrap: wrap;
 }
 
 .pirho-variable-reference__advanced
@@ -60,34 +61,47 @@
 	min-width: 20px;
 }
 
+
 .pirho-variable-reference__simple__item--empty .unity-popup-field__input
 {
 	min-width: 20px;
 	max-width: 20px;
 }
 
-.pirho-variable-reference__simple__item__combo-box
+.pirho-variable-reference__simple__item__popup .unity-popup-field__input
 {
+	padding-right: 20px;
+	min-width: 0;
 }
 
 .pirho-variable-reference__simple__item__popup
 {
-	flex-grow: 1;
 	margin: 1px 0px;
 }
+
 
 .pirho-variable-reference__simple__item--empty .pirho-variable-reference__simple__item__popup PopupTextElement
 {
 	visibility: hidden;
 }
 
+.pirho-variable-reference__simple__item__combo-box
+{
+}
+
 .pirho-variable-reference__simple__item__array-index
 {
 	min-width: 25px;
-	margin: 0px 0px 2px 0px;
+	margin: 1px 0px;
+}
+
+.pirho-variable-reference__simple__item__array-index > IntegerInput
+{
+	border-width: 1px;
+	padding: 1px 2px;
 }
 
 .pirho-variable-reference__advanced__text
 {
-	margin: 0px 0px 1px 0px;
+	margin: 1px 0px;
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Reflection;
+using UnityEngine;
 
 namespace PiRhoSoft.Utilities.Editor
 {
@@ -14,7 +15,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static AttributeType GetAttribute<AttributeType>(this FieldInfo field) where AttributeType : Attribute
 		{
-			return TryGetAttribute<AttributeType>(field, out var attribute) ? attribute : null;
+			return field.TryGetAttribute<AttributeType>(out var attribute) ? attribute : null;
 		}
 
 		public static bool TryGetAttribute<AttributeType>(this FieldInfo field, out AttributeType attribute) where AttributeType : Attribute
@@ -25,6 +26,33 @@ namespace PiRhoSoft.Utilities.Editor
 			return attribute != null;
 		}
 
+		public static bool HasAttribute(this FieldInfo field, Type attribute)
+		{
+			return field.GetCustomAttribute(attribute) != null;
+		}
+
+		public static Attribute GetAttribute(FieldInfo field, Type attributeType)
+		{
+			return field.TryGetAttribute(attributeType, out var attribute) ? attribute : null;
+		}
+
+		public static bool TryGetAttribute(this FieldInfo field, Type attributeType, out Attribute attribute)
+		{
+			var attributes = field.GetCustomAttributes(attributeType, false);
+			attribute = attributes != null && attributes.Length > 0 ? attributes[0] as Attribute : null;
+
+			return attribute != null;
+		}
+
 		#endregion
+
+		public static bool IsSerializable(this FieldInfo field)
+		{
+			var included = field.IsPublic || GetAttribute<SerializeField>(field) != null;
+			var excluded = GetAttribute<NonSerializedAttribute>(field) != null;
+			var compatible = !field.IsStatic && !field.IsLiteral && !field.IsInitOnly && field.FieldType.IsSerializable();
+
+			return included && !excluded && compatible;
+		}
 	}
 }

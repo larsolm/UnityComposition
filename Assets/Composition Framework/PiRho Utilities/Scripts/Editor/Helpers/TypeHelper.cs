@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Reflection;
 using UnityEditor;
-using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Utilities.Editor
 {
@@ -25,97 +22,21 @@ namespace PiRhoSoft.Utilities.Editor
 	{
 		private static Dictionary<string, TypeList> _derivedTypeLists = new Dictionary<string, TypeList>();
 
-		#region Attributes
-
-		public static bool HasAttribute<AttributeType>(Type type) where AttributeType : Attribute
-		{
-			return GetAttribute<AttributeType>(type) != null;
-		}
-
-		public static AttributeType GetAttribute<AttributeType>(Type type) where AttributeType : Attribute
-		{
-			var attributes = type.GetCustomAttributes(typeof(AttributeType), false);
-			return attributes != null && attributes.Length > 0 ? attributes[0] as AttributeType : null;
-		}
-
-		public static AttributeType GetAttribute<AttributeType>(FieldInfo field) where AttributeType : Attribute
-		{
-			var attributes = field.GetCustomAttributes(typeof(AttributeType), false);
-			return attributes != null && attributes.Length > 0 ? attributes[0] as AttributeType : null;
-		}
-
-		public static bool HasAttribute(Type type, Type attributeType)
-		{
-			return GetAttribute(type, attributeType) != null;
-		}
-
-		public static Attribute GetAttribute(Type type, Type attributeType)
-		{
-			var attributes = type.GetCustomAttributes(attributeType, false);
-			return attributes != null && attributes.Length > 0 ? attributes[0] as Attribute : null;
-		}
-
-		public static Attribute GetAttribute(FieldInfo field, Type attributeType)
-		{
-			var attributes = field.GetCustomAttributes(attributeType, false);
-			return attributes != null && attributes.Length > 0 ? attributes[0] as Attribute : null;
-		}
-
-		#endregion
-
-		#region Creation
-
-		public static T CreateInstance<T>(Type type) where T : class
-		{
-			if (type != null && !type.IsAbstract && typeof(T).IsAssignableFrom(type) && type.GetConstructor(Type.EmptyTypes) != null)
-				return Activator.CreateInstance(type) as T;
-
-			return null;
-		}
-
-		public static bool IsCreatableAs<BaseType>(Type type)
-		{
-			return IsCreatableAs(typeof(BaseType), type);
-		}
-
-		public static bool IsCreatableAs(Type baseType, Type type)
-		{
-			return baseType.IsAssignableFrom(type) && type.GetConstructor(Type.EmptyTypes) != null;
-		}
-
-		#endregion
-
 		#region Listing
 
-		public static List<Type> ListDerivedTypes<BaseType>(bool includeAbstract)
+		public static IEnumerable<Type> GetDerivedTypes<BaseType>(bool includeAbstract)
 		{
-			return ListDerivedTypes(typeof(BaseType), includeAbstract);
+			return typeof(BaseType).GetDerivedTypes(includeAbstract);
 		}
 
-		public static List<Type> ListDerivedTypes(Type baseType, bool includeAbstract)
+		public static IEnumerable<Type> GetTypesWithAttribute<AttributeType>() where AttributeType : Attribute
 		{
-			return TypeCache.GetTypesDerivedFrom(baseType.BaseType).Where(type => includeAbstract ? baseType.IsAssignableFrom(type) : !type.IsNestedPrivate && IsCreatableAs(baseType, type)).ToList();
+			return TypeCache.GetTypesWithAttribute<AttributeType>();
 		}
 
-		public static List<Type> ListTypesWithAttribute<AttributeType>() where AttributeType : Attribute
+		public static IEnumerable<Type> GetTypesWithAttribute(Type attributeType)
 		{
-			return TypeCache.GetTypesWithAttribute<AttributeType>().ToList();
-		}
-
-		public static List<Type> ListTypesWithAttribute(Type attributeType)
-		{
-			return TypeCache.GetTypesWithAttribute(attributeType).ToList();
-		}
-
-		public static IEnumerable<Type> FindTypes(Func<Type, bool> predicate)
-		{
-			// There are a lot of assemblies so it might make sense to filter the list a bit. There isn't a specific
-			// way to do that, but something like this would work: https://stackoverflow.com/questions/5160051/c-sharp-how-to-get-non-system-assemblies
-
-			return AppDomain.CurrentDomain.GetAssemblies()
-				.Where(assembly => !assembly.IsDynamic) // GetExportedTypes throws an exception when called on dynamic assemblies
-				.SelectMany(t => t.GetExportedTypes())
-				.Where(predicate);
+			return TypeCache.GetTypesWithAttribute(attributeType);
 		}
 
 		public static TypeList GetTypeList<T>(bool includeAbstract)
@@ -136,7 +57,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 			if (typeList.Types == null)
 			{
-				var types = ListDerivedTypes(baseType, includeAbstract);
+				var types = baseType.GetDerivedTypes(includeAbstract);
 				var ordered = types.Select(type => new PathedType(types, baseType, type)).OrderBy(type => type.Path);
 
 				typeList.Types = ordered.Select(type => type.Type).ToList();
@@ -172,63 +93,6 @@ namespace PiRhoSoft.Utilities.Editor
 					type = type.BaseType;
 				}
 			}
-		}
-
-		#endregion
-
-		#region Serialization
-
-		// these functions are based on Unity's serialization rules defined here: https://docs.unity3d.com/Manual/script-Serialization.html
-
-		public static List<Type> SerializableTypes = new List<Type>
-		{
-			typeof(bool),
-			typeof(sbyte), typeof(short), typeof(int), typeof(long),
-			typeof(byte), typeof(ushort), typeof(uint), typeof(ulong),
-			typeof(float), typeof(double), typeof(decimal),
-			typeof(char), typeof(string),
-			typeof(Vector2), typeof(Vector3), typeof(Vector4),
-			typeof(Quaternion), typeof(Matrix4x4),
-			typeof(Color), typeof(Color32), typeof(Gradient),
-			typeof(Rect), typeof(RectOffset),
-			typeof(LayerMask), typeof(AnimationCurve), typeof(GUIStyle)
-		};
-
-		public static bool IsSerializable(FieldInfo field)
-		{
-			var included = field.IsPublic || GetAttribute<SerializeField>(field) != null;
-			var excluded = GetAttribute<NonSerializedAttribute>(field) != null;
-			var compatible = !field.IsStatic && !field.IsLiteral && !field.IsInitOnly && IsSerializable(field.FieldType);
-
-			return included && !excluded && compatible;
-		}
-
-		public static bool IsSerializable(Type type)
-		{
-			return IsSerializable(type, false);
-		}
-
-		private static bool IsSerializable(Type type, bool inner)
-		{
-			if (type.IsAbstract)
-				return false; // covers static as well
-
-			if (type.IsEnum)
-				return true;
-
-			if (type.IsGenericType)
-				return !inner && type.GetGenericTypeDefinition() == typeof(List<>) && IsSerializable(type.GetGenericArguments()[0], true);
-
-			if (type.IsArray && IsSerializable(type.GetElementType(), true))
-				return !inner;
-
-			if (typeof(Object).IsAssignableFrom(type))
-				return true;
-
-			if (GetAttribute<SerializableAttribute>(type) != null)
-				return true;
-
-			return SerializableTypes.Contains(type);
 		}
 
 		#endregion

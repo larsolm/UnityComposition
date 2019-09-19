@@ -25,8 +25,7 @@ namespace PiRhoSoft.Composition.Editor
 			var container = new VisualElement();
 
 			container.Add(new Button(() => GraphViewWindow.ShowWindowForGraph(graph)) { text = "Open Graph Window" });
-			//container.Add(new PropertyField(serializedObject.FindProperty(nameof(Graph.Context.Name))));
-			//container.Add(new PropertyField(serializedObject.FindProperty(nameof(Graph.Context.Definition))));
+			container.Add(new PropertyField(serializedObject.FindProperty(nameof(Graph.Context))));
 			container.Add(new PropertyField(serializedObject.FindProperty(nameof(Graph.Inputs))));
 			container.Add(new PropertyField(serializedObject.FindProperty(nameof(Graph.Outputs))));
 
