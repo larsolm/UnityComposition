@@ -101,12 +101,8 @@ MonoBehaviour:
   Scene:
     Type: 1
     Reference:
-      _variable: context[0]
-      _tokens:
-      - Type: 0
-        Text: context
-      - Type: 1
-        Text: 0
+      _variable: 
+      _tokens: []
     Value:
       m_AssetGUID: 
       m_SubObjectName: 

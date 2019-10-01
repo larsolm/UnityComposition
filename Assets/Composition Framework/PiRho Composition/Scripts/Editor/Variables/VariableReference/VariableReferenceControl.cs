@@ -1,6 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using PiRhoSoft.Utilities.Editor;
-using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor

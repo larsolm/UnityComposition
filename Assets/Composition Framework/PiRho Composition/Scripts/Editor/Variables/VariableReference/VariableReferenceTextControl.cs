@@ -1,8 +1,6 @@
-﻿using PiRhoSoft.Utilities;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,11 +10,21 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public const string TextUssClassName = VariableReferenceControl.AdvancedUssClassName + "__text";
 
-		private static readonly List<KeyCode> _selectKeys = new List<KeyCode> { KeyCode.Tab, KeyCode.KeypadEnter, KeyCode.Return, KeyCode.Period, KeyCode.KeypadPeriod };
 		private static readonly List<KeyCode> _openKeys = new List<KeyCode> { KeyCode.Escape, KeyCode.Tab };
 		private static readonly List<KeyCode> _closeKeys = new List<KeyCode> { KeyCode.Escape };
 		private static readonly char[] _separators = { VariableReference.Separator, VariableReference.LookupOpen, VariableReference.LookupClose };
 		private static readonly Vector2 _windowSize = new Vector2(150, 300);
+
+		private static readonly Dictionary<KeyCode, string> _selectKeys = new Dictionary<KeyCode, string>
+		{
+			{ KeyCode.Tab, null },
+			{ KeyCode.KeypadEnter, null },
+			{ KeyCode.Return, null },
+			{ KeyCode.KeypadPeriod, "." },
+			{ KeyCode.Period, "." },
+			{ KeyCode.LeftBracket, "["},
+			{ KeyCode.RightBracket, "]"}
+		};
 
 		private VariableReferenceControl _control;
 		private AutocompletePopup _autocomplete;
@@ -37,27 +45,47 @@ namespace PiRhoSoft.Composition.Editor
 			RegisterCallback<DetachFromPanelEvent>(evt => _autocomplete.RemoveFromHierarchy());
 
 			_textField.AddToClassList(TextUssClassName);
-			_textField.Q<VisualElement>(className: TextField.inputUssClassName).RegisterCallback<KeyDownEvent>(OnKeyDown);
-			_textField.RegisterValueChangedCallback(evt => TextChanged());
-			_textField.RegisterCallback<FocusEvent>(evt => _autocomplete.Show());
-			_textField.RegisterCallback<BlurEvent>(evt => _autocomplete.Hide());
+			_textField.RegisterValueChangedCallback(evt => SetValue(evt.newValue));
+			_textField.RegisterCallback<KeyDownEvent>(OnKeyDown);
+			_textField.RegisterCallback<MouseUpEvent>(evt => UpdateAutocomplete());
+			_textField.RegisterCallback<FocusEvent>(evt => Show());
+			_textField.RegisterCallback<BlurEvent>(evt => Hide());
 		}
-		
+
 		public void Refresh()
 		{
 			_textField.SetValueWithoutNotify(_control.Value.Variable);
 
+			UpdateAutocomplete();
+		}
+
+		private void SetValue(string value)
+		{
+			_control.Value.Variable = value;
+			this.SendChangeEvent(_control.Value, _control.Value);
+		}
+
+		private void Show()
+		{
+			if (!_autocomplete.IsOpen)
+				_autocomplete.Show();
+
+			UpdateAutocomplete();
+		}
+
+		private void Hide()
+		{
+			if (_autocomplete.IsOpen)
+				_autocomplete.Hide();
+		}
+
+		private void UpdateAutocomplete()
+		{
 			var autocomplete = GetCurrentAutocomplete();
 			var filter = GetFilter();
 
 			_autocomplete.SetAutocomplete(autocomplete);
 			_autocomplete.UpdateFilter(filter);
-		}
-
-		private void TextChanged()
-		{
-			if (!_autocomplete.IsOpen)
-				_autocomplete.Show();
 		}
 
 		private IAutocompleteItem GetCurrentAutocomplete()
@@ -129,44 +157,54 @@ namespace PiRhoSoft.Composition.Editor
 				}
 				else if (evt.keyCode == KeyCode.LeftArrow)
 				{
-					Refresh();
+					UpdateAutocomplete();
 				}
 				else if (evt.keyCode == KeyCode.RightArrow)
 				{
-					Refresh();
+					UpdateAutocomplete();
 				}
 				else if (_closeKeys.Contains(evt.keyCode))
 				{
-					_autocomplete.Hide();
+					Hide();
 					evt.PreventDefault();
 				}
-				else if (_selectKeys.Contains(evt.keyCode))
+				else if (_selectKeys.ContainsKey(evt.keyCode))
 				{
-					Select();
-					evt.PreventDefault();
-					// TODO: these don't actual prevent the enter/tab events text box stuff from firing for some reason
+					Select(evt.keyCode);
+
+					if (evt.keyCode != KeyCode.Period && evt.keyCode != KeyCode.KeypadPeriod)
+					{
+						evt.StopImmediatePropagation();
+						evt.PreventDefault();
+
+						schedule.Execute(() =>
+						{
+							_textField.Q(className: TextField.inputUssClassName).Focus();
+							_textField.SelectRange(_textField.text.Length, _textField.text.Length);
+						}).StartingIn(0);
+					}
 				}
 			}
 			else
 			{
 				if (_openKeys.Contains(evt.keyCode))
 				{
-					_autocomplete.Show();
+					Show();
 					evt.PreventDefault();
 				}
 			}
 		}
 
-		private void Select()
+		private void Select(KeyCode key)
 		{
 			if (_autocomplete.ActiveItem != null)
 			{
 				var previousIndex = GetLastSeparatorIndex() + 1; // Add one to bypass the separator
 				var nextIndex = GetNextSeparatorIndex();
 				var prefix = previousIndex == _textField.text.Length ? _textField.text : nextIndex < 0 ? _textField.text.Remove(previousIndex) : _textField.text.Remove(previousIndex, nextIndex - previousIndex);
-				_textField.value = prefix.Insert(previousIndex, _autocomplete.ActiveItem.Name);
-
 				var cursor = previousIndex + _autocomplete.ActiveItem.Name.Length;
+
+				_textField.value = prefix.Insert(previousIndex, _autocomplete.ActiveItem.Name);
 				_textField.SelectRange(cursor, cursor);
 			}
 		}
@@ -181,7 +219,6 @@ namespace PiRhoSoft.Composition.Editor
 			public const string ItemUssClassName = UssClassName + "__item";
 			public const string ItemActiveUssClassName = ItemUssClassName + "--active";
 			public const string ItemValidUssClassName = ItemUssClassName + "--valid";
-			public const string NoneUssClassName = ItemUssClassName + "--none";
 
 			public bool IsOpen { get; private set; }
 			public IAutocompleteItem ActiveItem => _activeItem?.Item;
@@ -193,8 +230,6 @@ namespace PiRhoSoft.Composition.Editor
 			private string _filter = null;
 			private int _validCount = 0;
 
-			private TextElement _noneValidItem;
-
 			private UQueryState<ItemElement> _items;
 			private UQueryState<ItemElement> _validItems;
 
@@ -204,9 +239,6 @@ namespace PiRhoSoft.Composition.Editor
 
 				_scrollView = new ScrollView(ScrollViewMode.Vertical);
 				_scrollView.AddToClassList(ScrollViewUssClassName);
-
-				_noneValidItem = new TextElement() { text = "None" };
-				_noneValidItem.AddToClassList(NoneUssClassName);
 
 				_items = _scrollView.contentContainer.Query<ItemElement>().Build();
 				_validItems = _scrollView.contentContainer.Query<ItemElement>(className: ItemValidUssClassName).Build();
@@ -221,14 +253,12 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				_autocomplete = autocomplete;
 				_scrollView.contentContainer.Clear();
-				_scrollView.contentContainer.Add(_noneValidItem);
 
 				foreach (var field in autocomplete.GetFields())
 				{
-					// TODO: add clicking and hovering to select these
 					var element = new ItemElement(field);
 					element.RegisterCallback<MouseOverEvent>(e => SetActive(element));
-					element.AddManipulator(new Clickable(() => _control.Select()));
+					element.RegisterCallback<MouseDownEvent>(e => _control.Select(KeyCode.Return), TrickleDown.TrickleDown); // This must trickle down and can't be a clickable be cause it gets overriden be the FocusOut event on the base text field
 					element.AddToClassList(ItemUssClassName);
 
 					_scrollView.contentContainer.Add(element);
