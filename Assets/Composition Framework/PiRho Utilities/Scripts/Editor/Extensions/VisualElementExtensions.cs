@@ -84,6 +84,13 @@ namespace PiRhoSoft.Utilities.Editor
 				Debug.LogErrorFormat(_missingUxmlError, fullPath);
 		}
 
+		public static VisualElement GetRootElement(this VisualElement element)
+		{
+			while (element.parent != null)
+				element = element.parent;
+			return element;
+		}
+
 		public static void SetDisplayed(this VisualElement element, bool displayed)
 		{
 			element.style.display = displayed ? DisplayStyle.Flex : DisplayStyle.None;

@@ -113,7 +113,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static AssetType GetAsset<AssetType>() where AssetType : Object
 		{
-			return FindAssets<AssetType>().FirstOrDefault();
+			return GetAssets<AssetType>().FirstOrDefault();
 		}
 
 		public static AssetType GetAssetWithId<AssetType>(string id) where AssetType : Object
@@ -129,7 +129,7 @@ namespace PiRhoSoft.Utilities.Editor
 
 		public static Object GetAsset(Type assetType)
 		{
-			return FindAssets(assetType).FirstOrDefault();
+			return GetAssets(assetType).FirstOrDefault();
 		}
 
 		public static Object GetAssetWithId(string id, Type type)
@@ -147,12 +147,12 @@ namespace PiRhoSoft.Utilities.Editor
 
 		#region Listing
 
-		public static IEnumerable<AssetType> FindAssets<AssetType>() where AssetType : Object
+		public static IEnumerable<AssetType> GetAssets<AssetType>() where AssetType : Object
 		{
-			return FindAssets(typeof(AssetType)).Select(asset => asset as AssetType);
+			return GetAssets(typeof(AssetType)).Select(asset => asset as AssetType);
 		}
 
-		public static IEnumerable<Object> FindAssets(Type assetType)
+		public static IEnumerable<Object> GetAssets(Type assetType)
 		{
 			return AssetDatabase.FindAssets($"t:{assetType.Name}").Select(id => GetAssetWithId(id, assetType)).Where(asset => asset);
 		}
@@ -170,7 +170,7 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				list = new AssetList(assetType);
 
-				var assets = FindAssets(assetType);
+				var assets = GetAssets(assetType);
 				var paths = assets.Select(asset => GetPath(asset));
 				var prefix = FindCommonPath(paths);
 

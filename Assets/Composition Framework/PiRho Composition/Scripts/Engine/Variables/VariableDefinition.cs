@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class VariableDefinition : ISerializationCallbackReceiver
+	public class VariableDefinition
 	{
 		public VariableDefinition()
 		{
@@ -84,11 +84,12 @@ namespace PiRhoSoft.Composition
 		}
 
 		[SerializeField] private SerializedData _constraintData = new SerializedData();
-		void ISerializationCallbackReceiver.OnBeforeSerialize() => _constraintData.SaveClass(_constraint, 1);
-		void ISerializationCallbackReceiver.OnAfterDeserialize() => _constraintData.LoadClass(out _constraint);
+		//void ISerializationCallbackReceiver.OnBeforeSerialize() => _constraintData.SaveClass(_constraint, 1);
+		//void ISerializationCallbackReceiver.OnAfterDeserialize() => _constraintData.LoadClass(out _constraint);
 	}
 
-	[Serializable] public class VariableDefinitionList : SerializedList<VariableDefinition>
+	[Serializable]
+	public class VariableDefinitionList : SerializedList<VariableDefinition>
 	{
 		private const string _duplicateDefinitionWarning = "(VDLDD) failed to add definition '{0}' with type '{1}': the definition has already been added with type '{2}'";
 

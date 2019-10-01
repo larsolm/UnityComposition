@@ -30,14 +30,3 @@
 {
 	display: flex;
 }
-
-.pirho-variable-reference-text__item--none
-{
-	display: none;
-}
-
-.pirho-variable-reference-text--none-valid .pirho-autocomplete-text__item--none
-{
-	display: flex;
-	background-color: #FFF;
-}

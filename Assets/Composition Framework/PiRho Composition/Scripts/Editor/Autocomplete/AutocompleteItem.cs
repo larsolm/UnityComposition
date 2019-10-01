@@ -37,7 +37,7 @@ namespace PiRhoSoft.Composition.Editor
 		public List<IAutocompleteItem> Fields { get; protected set; }
 		public List<Type> Types { get; protected set; }
 
-		public IAutocompleteItem GetField(string name) => Fields?.Where(field => field.Name == name).FirstOrDefault();
+		public IAutocompleteItem GetField(string name) => string.IsNullOrEmpty(name) ? null : Fields?.Where(field => field.Name == name).FirstOrDefault();
 		public IAutocompleteItem GetIndexField() => IndexField;
 		public IEnumerable<IAutocompleteItem> GetFields() => Fields ?? Enumerable.Empty<IAutocompleteItem>();
 		public IEnumerable<Type> GetTypes() => Types ?? Enumerable.Empty<Type>();

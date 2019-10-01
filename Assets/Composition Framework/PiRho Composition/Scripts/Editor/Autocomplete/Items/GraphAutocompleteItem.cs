@@ -7,11 +7,11 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		private Graph _graph;
 
-		private InputAutocompleteItem _input = new InputAutocompleteItem();
-		private OutputAutocompleteItem _output = new OutputAutocompleteItem();
-		private LocalAutocompleteItem _local = new LocalAutocompleteItem();
-		private GlobalAutocompleteItem _global = new GlobalAutocompleteItem();
-		private SceneAutocompleteItem _scene = new SceneAutocompleteItem();
+		private InputAutocompleteItem _input = new InputAutocompleteItem { Name = GraphStore.InputStoreName };
+		private OutputAutocompleteItem _output = new OutputAutocompleteItem { Name = GraphStore.OutputStoreName };
+		private LocalAutocompleteItem _local = new LocalAutocompleteItem { Name = GraphStore.LocalStoreName };
+		private GlobalAutocompleteItem _global = new GlobalAutocompleteItem { Name = CompositionManager.GlobalStoreName };
+		private SceneAutocompleteItem _scene = new SceneAutocompleteItem { Name = CompositionManager.SceneStoreName };
 		private IAutocompleteItem _context = null;
 
 		protected override void Setup(Graph graph)
@@ -21,8 +21,7 @@ namespace PiRhoSoft.Composition.Editor
 			AllowsCustomFields = false;
 			IsCastable = false;
 			IsIndexable = false;
-
-			Fields = new List<IAutocompleteItem> { _input, _output, _local, _global, _scene, _context };
+			Fields = new List<IAutocompleteItem> { _context, _input, _output, _local, _global, _scene };
 			Types = null;
 
 			Reset();
@@ -32,16 +31,17 @@ namespace PiRhoSoft.Composition.Editor
 		private void Reset()
 		{
 			if (GraphEditor.AutocompleteContext != null)
-				_context = new ObjectAutocompleteItem(GraphEditor.AutocompleteContext);
+				_context = new ObjectAutocompleteItem(GraphEditor.AutocompleteContext) { Name = _graph.Context.Name };
 			else
-				_context = new DefinitionAutocompleteItem(_graph.Context);
+				_context = new DefinitionAutocompleteItem(_graph.Context) { Name = _graph.Context.Name };
+
+			Fields[0] = _context;
 
 			_input.Setup(_graph);
 			_output.Setup(_graph);
 			_local.Setup(_graph);
 			//_global.Setup(null);
 			//_scene.Setup(null);
-
 		}
 
 		public class InputAutocompleteItem : AutocompleteItem

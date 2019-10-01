@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities.Editor;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition.Editor
 {
@@ -101,10 +103,20 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void SetupAsset(AssetConstraint constraint)
 		{
+			AllowsCustomFields = false;
+			IsCastable = true;
+			IsIndexable = false;
+			Fields = null;
+			Types = null;
 		}
 
 		private void SetupObject(ObjectConstraint constraint)
 		{
+			AllowsCustomFields = false;
+			IsCastable = true;
+			IsIndexable = false;
+			Fields = null;
+			Types = TypeHelper.GetTypeList<Object>(true).Types;
 		}
 	}
 }

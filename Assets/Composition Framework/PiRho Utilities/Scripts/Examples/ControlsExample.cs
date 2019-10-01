@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.AddressableAssets;
 
 namespace PiRhoSoft.Utilities
 {
@@ -21,7 +22,7 @@ namespace PiRhoSoft.Utilities
 		public Object Object;
 
 		[ScenePicker]
-		public string Scene;
+		public AssetReference Scene;
 
 		[Popup(new int[] { 0, 1, 2, 3, 4 }, new string[] { "Zero", "One", "Two", "Three", "Four" })]
 		public int IntPopup;

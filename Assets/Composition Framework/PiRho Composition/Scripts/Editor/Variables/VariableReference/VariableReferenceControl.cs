@@ -1,6 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using PiRhoSoft.Utilities.Editor;
-using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -32,7 +30,7 @@ namespace PiRhoSoft.Composition.Editor
 		public VariableReferenceControl(VariableReference value, IAutocompleteItem autocomplete)
 		{
 			Value = value;
-			Autocomplete = new TreeAutocomplete1(string.Empty, false, false);
+			Autocomplete = autocomplete;
 
 			_modeToggle = new IconButton(_modeIcon.Texture, _validTooltip, () =>
 			{
@@ -82,46 +80,6 @@ namespace PiRhoSoft.Composition.Editor
 			_modeToggle.SetEnabled(Value.IsValid);
 			_simpleControl.SetEnabled(!_advancedMode);
 			_advancedControl.SetEnabled(_advancedMode);
-		}
-	}
-
-	public class TreeAutocomplete1 : AutocompleteItem
-	{
-		public TreeAutocomplete1(string name, bool allowsCustomFields, bool isIndexable)
-		{
-			Name = name;
-			AllowsCustomFields = allowsCustomFields;
-			IsIndexable = isIndexable;
-
-			Fields = new List<IAutocompleteItem>
-			{
-				new TreeAutocomplete1("One", true, true),
-				new TreeAutocomplete1("Two", false, true),
-				new TreeAutocomplete1("Three", true, false),
-				new TreeAutocomplete1("Four", false, false),
-				new TreeAutocomplete2("Five", true, true),
-				new TreeAutocomplete2("Six", false, true),
-				new TreeAutocomplete2("Seven", true, false),
-				new TreeAutocomplete2("Eight", false, false)
-			};
-		}
-
-		public override void Setup(object obj)
-		{
-		}
-	}
-
-	public class TreeAutocomplete2 : AutocompleteItem
-	{
-		public TreeAutocomplete2(string name, bool allowsCustomFields, bool isIndexable)
-		{
-			Name = name;
-			AllowsCustomFields = allowsCustomFields;
-			IsIndexable = isIndexable;
-		}
-
-		public override void Setup(object obj)
-		{
 		}
 	}
 }

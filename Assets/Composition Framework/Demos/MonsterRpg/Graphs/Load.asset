@@ -1,25 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-2311541273813976623
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30486005d150e474796e78730fa8712c, type: 3}
-  m_Name: SequenceNode
-  m_EditorClassIdentifier: 
-  Graph: {fileID: 11400000}
-  GraphPosition: {x: 414, y: -256.99997}
-  IsBreakpoint: 0
-  Sequence:
-    _items:
-    - {fileID: 0}
-    - {fileID: 0}
-    - {fileID: 0}
 --- !u!114 &-2113145965619732750
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -48,43 +28,6 @@ MonoBehaviour:
       _variable: 
       _tokens: []
     Value: 
---- !u!114 &-1713647604278159557
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3299c4f4ec492e74ebc48ccf20f59272, type: 3}
-  m_Name: BranchNode
-  m_EditorClassIdentifier: 
-  Graph: {fileID: 11400000}
-  GraphPosition: {x: 678, y: -276.99997}
-  IsBreakpoint: 0
-  Switch:
-    _statement: 
-  Outputs:
-    _keys: []
-    _values: []
-  Default: {fileID: 0}
---- !u!114 &-1408738020077143581
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 382f81e645a89874ab02a51e89d11c46, type: 3}
-  m_Name: CommentNode
-  m_EditorClassIdentifier: 
-  Graph: {fileID: 11400000}
-  GraphPosition: {x: -64, y: -224.99997}
-  IsBreakpoint: 0
-  Comment: This does work
 --- !u!114 &-1368940103165137033
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -102,17 +45,13 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   Map:
-    _variable: One
-    _tokens:
-    - Type: 0
-      Text: One
+    _variable: 
+    _tokens: []
   SpawnPoint:
     Type: 1
     Reference:
-      _variable: One
-      _tokens:
-      - Type: 0
-        Text: One
+      _variable: 
+      _tokens: []
     Value: 
 --- !u!114 &11400000
 MonoBehaviour:
@@ -128,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Context:
     Name: context
-    _type: 0
+    _type: 17
     _constraintData:
       Version: 1
       Data: 
@@ -143,9 +82,6 @@ MonoBehaviour:
   - {fileID: -2113145965619732750}
   - {fileID: -1368940103165137033}
   - {fileID: 8426389869785260599}
-  - {fileID: -1408738020077143581}
-  - {fileID: -2311541273813976623}
-  - {fileID: -1713647604278159557}
 --- !u!114 &3772295249113841190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -162,23 +98,15 @@ MonoBehaviour:
   GraphPosition: {x: 120.000015, y: -102.999954}
   IsBreakpoint: 0
   Next: {fileID: -2113145965619732750}
-  Source: 0
   Scene:
-    Path: 
-  SceneVariable:
-    _variable: One.One Fish.Two[0]
-    _tokens:
-    - Type: 0
-      Text: One
-    - Type: 0
-      Text: One Fish
-    - Type: 0
-      Text: Two
-    - Type: 1
-      Text: 0
-  SceneName: 
-  SceneIndex: 0
-  WaitForCompletion: 1
+    Type: 1
+    Reference:
+      _variable: 
+      _tokens: []
+    Value:
+      m_AssetGUID: 
+      m_SubObjectName: 
+  WaitForCompletion: 0
   CleanupAssets: 1
   Additive: 1
 --- !u!114 &8360444590051035758
@@ -212,14 +140,14 @@ MonoBehaviour:
   GraphPosition: {x: 375, y: -91.99997}
   IsBreakpoint: 0
   Next: {fileID: -1368940103165137033}
-  Source: 0
   Scene:
-    Path: 
-  SceneVariable:
-    _variable: 
-    _tokens: []
-  SceneName: 
-  SceneIndex: 0
+    Type: 1
+    Reference:
+      _variable: 
+      _tokens: []
+    Value:
+      m_AssetGUID: 
+      m_SubObjectName: 
   WaitForCompletion: 1
   CleanupAssets: 1
   Additive: 1

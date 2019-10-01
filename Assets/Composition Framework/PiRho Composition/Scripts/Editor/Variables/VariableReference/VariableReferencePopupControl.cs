@@ -1,6 +1,8 @@
 using PiRhoSoft.Utilities.Editor;
+using System.Collections.Generic;
 using System.Linq;
 using UnityEditor.UIElements;
+using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -15,8 +17,6 @@ namespace PiRhoSoft.Composition.Editor
 		public const string EmptyUssClassName = ItemUssClassName + "--empty";
 
 		private const string _emptyText = "-";
-
-		private static readonly char[] _separators = { VariableReference.Separator, VariableReference.LookupOpen, VariableReference.LookupClose };
 
 		private VariableReferenceControl _control;
 
@@ -35,12 +35,12 @@ namespace PiRhoSoft.Composition.Editor
 			var source = _control.Autocomplete;
 			var index = 0;
 
-			while (source != null) // TODO add casting if previous item supports it and item is a cast token
+			while (source != null)
 			{
-				var token = index < tokens.Count ? tokens[index] : null;
 				var itemIndex = index++; // save this for capturing
-				var item = source.GetField(token?.Text);
-				var items = source.GetFields().Select(field => field.Name);
+				var token = itemIndex < tokens.Count ? tokens[itemIndex] : null;
+				var item = GetItem(source, token);
+				var items = GetItems(source);
 
 				var container = new VisualElement();
 				container.AddToClassList(ItemUssClassName);
@@ -58,15 +58,10 @@ namespace PiRhoSoft.Composition.Editor
 				}
 				else
 				{
-					if (item == null && token?.Type != VariableReference.VariableTokenType.Type)
-					{
+					if (token == null)
 						container.AddToClassList(EmptyUssClassName);
 
-						if (!string.IsNullOrEmpty(token?.Text))
-						{ } // Log that schema has changed
-					}
-
-					var name = token?.Type == VariableReference.VariableTokenType.Type ? VariableReference.Cast : item?.Name ?? _emptyText;
+					var name = GetName(item, token);
 					var popup = new PopupField<string>(items.Prepend(_emptyText).ToList(), name);
 					popup.AddToClassList(PopupUssClassName);
 					popup.RegisterValueChangedCallback(evt => SelectItem(evt.newValue, itemIndex));
@@ -74,10 +69,27 @@ namespace PiRhoSoft.Composition.Editor
 					container.Add(popup);
 				}
 
-				if (item != null && item.IsIndexable && index < tokens.Count) // Index has already been incremented to the next token
+				if (token != null && token.Type == VariableReference.VariableTokenType.Type && index < tokens.Count)
 				{
-					var indexer = tokens[index++];
-					var indexField = new IntegerField { value = int.TryParse(indexer.Text, out var number) ? number : 0, isDelayed = true };
+					token = tokens[index++];
+					var types = source.GetTypes().Select(field => field.Name).Prepend(nameof(GameObject));
+					var popup = new PopupField<string>(types.ToList(), token.Text);
+					popup.AddToClassList(PopupUssClassName);
+					popup.RegisterValueChangedCallback(evt => SelectItem(evt.newValue, itemIndex + 1));
+
+					var itemContainer = new VisualElement();
+					itemContainer.AddToClassList(ItemUssClassName);
+					itemContainer.Add(popup);
+
+					item = new ObjectAutocompleteItem(null);
+
+					Add(itemContainer);
+				}
+
+				if (item != null && item.IsIndexable && index < tokens.Count)
+				{
+					token = tokens[index++];
+					var indexField = new IntegerField { value = int.TryParse(token.Text, out var number) ? number : 0, isDelayed = true };
 					indexField.AddToClassList(ArrayIndexUssClassName);
 					indexField.RegisterValueChangedCallback(evt => SelectIndex(evt.newValue, itemIndex + 1));
 
@@ -88,6 +100,25 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
+		private IAutocompleteItem GetItem(IAutocompleteItem source, VariableReference.VariableToken token)
+		{
+			if (token != null && token.Type == VariableReference.VariableTokenType.Name)
+				return source.IsIndexable ? source.GetIndexField() : source.GetField(token.Text);
+
+			return null;
+		}
+
+		private IEnumerable<string> GetItems(IAutocompleteItem source)
+		{
+			var fields = source.GetFields()?.Select(field => field.Name);
+			return source.IsCastable ? fields.Prepend(VariableReference.Cast) : fields;
+		}
+
+		private string GetName(IAutocompleteItem item, VariableReference.VariableToken token)
+		{
+			return token?.Type == VariableReference.VariableTokenType.Type ? VariableReference.Cast : item?.Name ?? _emptyText;
+		}
+
 		private void SelectItem(string selectedItem, int itemIndex)
 		{
 			var source = _control.Autocomplete;
@@ -95,9 +126,14 @@ namespace PiRhoSoft.Composition.Editor
 			var selectedText = selectedItem == _emptyText ? string.Empty : selectedItem;
 
 			if (selectedItem == VariableReference.Cast)
+			{
 				tokens.Add(new VariableReference.VariableToken { Text = VariableReference.Cast, Type = VariableReference.VariableTokenType.Type });
+				tokens.Add(new VariableReference.VariableToken { Text = nameof(GameObject), Type = VariableReference.VariableTokenType.Type });
+			}
 			else if (selectedItem != _emptyText)
+			{
 				tokens.Add(new VariableReference.VariableToken { Text = selectedItem, Type = VariableReference.VariableTokenType.Name });
+			}
 
 			for (var i = 0; i < tokens.Count && source != null; i++)
 			{

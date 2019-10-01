@@ -70,7 +70,7 @@ namespace PiRhoSoft.Composition.Editor
 			if (window == null)
 				window = ShowNewWindow();
 			else
-				window.Focus();
+				window.Show();
 
 			if (window._editor.CurrentGraph != graph)
 				window._editor.SetGraph(graph);

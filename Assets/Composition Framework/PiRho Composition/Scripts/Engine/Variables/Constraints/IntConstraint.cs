@@ -1,9 +1,11 @@
 ﻿using PiRhoSoft.Utilities;
+using System;
 using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
+	[Serializable]
 	public class IntConstraint : VariableConstraint
 	{
 		public const int DefaultMinimum = 0;

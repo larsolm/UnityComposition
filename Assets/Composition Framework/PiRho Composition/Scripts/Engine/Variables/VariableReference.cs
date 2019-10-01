@@ -35,7 +35,8 @@ namespace PiRhoSoft.Composition
 		}
 	}
 
-	public abstract class VariableReference
+	[Serializable]
+	public class VariableReference
 	{
 		public const string Cast = "as";
 		public const char Separator = '.';

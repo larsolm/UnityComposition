@@ -1,9 +1,11 @@
 ﻿using PiRhoSoft.Utilities;
+using System;
 using System.Collections.Generic;
 using System.IO;
 
 namespace PiRhoSoft.Composition
 {
+	[Serializable]
 	public class StringConstraint : VariableConstraint
 	{
 		public override VariableType Type => VariableType.String;

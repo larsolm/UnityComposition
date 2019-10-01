@@ -1,8 +1,10 @@
 ﻿using PiRhoSoft.Utilities;
+using System;
 using System.IO;
 
 namespace PiRhoSoft.Composition
 {
+	[Serializable]
 	public class AssetConstraint : VariableConstraint
 	{
 		public override VariableType Type => VariableType.Asset;
