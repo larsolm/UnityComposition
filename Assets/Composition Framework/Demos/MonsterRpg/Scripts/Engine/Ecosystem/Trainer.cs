@@ -18,7 +18,7 @@ namespace PiRhoSoft.MonsterRpg
 		[Tooltip("The name of this trainer")] [SerializeField] public string _name = string.Empty;
 		[Tooltip("The creatures this trainer has")] [SerializeField] public Roster _roster = new Roster();
 
-		protected override void OnEnable()
+		protected void OnEnable()
 		{
 			_roster.Setup();
 

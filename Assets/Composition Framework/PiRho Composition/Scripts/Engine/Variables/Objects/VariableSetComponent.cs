@@ -1,6 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -9,33 +7,15 @@ namespace PiRhoSoft.Composition
 	[AddComponentMenu("PiRho Soft/Composition/Variable Set Component")]
 	public class VariableSetComponent : MonoBehaviour, IVariableCollection, IResettableVariables
 	{
-		[ChangeTrigger(nameof(SetupSchema))]
-		[InspectTrigger(nameof(SetupSchema))]
-		[ObjectPicker]
-		[SerializeField]
-		private VariableSchema _schema = null;
-
 		public SchemaVariableCollection SchemaVariables;
 		public MappedVariableCollection ClassVariables;
 		public CombinedVariableCollection Variables;
 
-		public VariableSchema Schema => _schema;
-
 		public VariableSetComponent()
 		{
-			SchemaVariables = new SchemaVariableCollection();
+			SchemaVariables = new SchemaVariableCollection(this);
 			ClassVariables = new MappedVariableCollection(this);
 			Variables = new CombinedVariableCollection(SchemaVariables, ClassVariables);
-		}
-
-		protected virtual void OnEnable()
-		{
-			SetupSchema();
-		}
-
-		public void SetupSchema()
-		{
-			SchemaVariables.Setup(_schema, this);
 		}
 
 		#region IVariableStore Implementation
@@ -54,7 +34,4 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 	}
-
-	[Serializable]
-	public class VariableSetComponentSource : VariableSource<VariableSetComponent> { }
 }

@@ -85,7 +85,7 @@ namespace PiRhoSoft.MonsterRpg
 		public Move Clone(Creature creature)
 		{
 			var move = Ability.CreateMove(creature);
-			move.Variables.CopyFrom(Variables, null);
+			move.SchemaVariables.CopyFrom(Variables, null);
 			return move;
 		}
 
@@ -114,12 +114,12 @@ namespace PiRhoSoft.MonsterRpg
 
 		public void Load(MoveSaveData data, string tag)
 		{
-			Variables.CopyFrom(data.Variables, tag);
+			SchemaVariables.CopyFrom(data.Variables, tag);
 		}
 
 		public void Save(MoveSaveData data, string tag)
 		{
-			Variables.CopyTo(data.Variables, tag);
+			SchemaVariables.CopyTo(data.Variables, tag);
 		}
 
 		#endregion

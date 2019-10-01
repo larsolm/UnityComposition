@@ -36,7 +36,7 @@ namespace PiRhoSoft.Composition
 
 		public string Name;
 		[SerializeField] private VariableType _type;
-		[SerializeReference] private VariableConstraint _constraint;
+		private VariableConstraint _constraint;
 
 		public string Description
 		{

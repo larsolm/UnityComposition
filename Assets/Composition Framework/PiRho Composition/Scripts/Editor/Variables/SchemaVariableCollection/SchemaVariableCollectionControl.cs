@@ -10,6 +10,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariablesProxy _proxy;
 		private ListControl _list;
+		private ObjectPickerControl _picker;
 
 		public SchemaVariableCollectionControl(SchemaVariableCollection value, Object owner)
 		{
@@ -17,6 +18,11 @@ namespace PiRhoSoft.Composition.Editor
 
 			_proxy = new VariablesProxy(value, owner);
 			_list = new ListControl(_proxy);
+
+			_picker = new ObjectPickerControl(value.Schema, owner, typeof(VariableSchema));
+			_picker.RegisterCallback<ChangeEvent<Object>>(evt => SetSchema(evt.newValue as VariableSchema));
+
+			_list.Header.Add(_picker);
 
 			Add(_list);
 		}
@@ -26,6 +32,12 @@ namespace PiRhoSoft.Composition.Editor
 			Value = value;
 			_proxy.Variables = Value;
 
+			Refresh();
+		}
+
+		private void SetSchema(VariableSchema schema)
+		{
+			Value.SetSchema(schema);
 			Refresh();
 		}
 

@@ -102,7 +102,7 @@ namespace PiRhoSoft.MonsterRpg
 			var creature = Species.CreateCreature(trainer);
 
 			creature.Name = Name;
-			creature.Variables.CopyFrom(Variables, null);
+			creature.SchemaVariables.CopyFrom(Variables, null);
 
 			foreach (var move in Moves)
 			{
@@ -216,7 +216,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			Name = data.Name;
 			_skills = data.Skills;
-			Variables.CopyFrom(data.Variables, tag);
+			SchemaVariables.CopyFrom(data.Variables, tag);
 
 			foreach (var moveData in data.Moves)
 			{
@@ -233,7 +233,7 @@ namespace PiRhoSoft.MonsterRpg
 		{
 			data.Name = Name;
 			data.Skills = _skills;
-			Variables.CopyTo(data.Variables, tag);
+			SchemaVariables.CopyTo(data.Variables, tag);
 
 			foreach (var move in Moves)
 				data.Moves.Add(Move.Save(move, tag));

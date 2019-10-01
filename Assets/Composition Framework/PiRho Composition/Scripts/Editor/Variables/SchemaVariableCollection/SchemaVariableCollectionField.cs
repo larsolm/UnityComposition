@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition.Editor
 		public static readonly string UssClassName = "pirho-schema-variable-collection-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
 		public static readonly string InputUssClassName = UssClassName + "__input";
-
+		
 		private SchemaVariableCollectionControl _control;
 
 		public SchemaVariableCollectionField(string label, SchemaVariableCollection value, Object owner) : base(label, null)
@@ -19,15 +19,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void Setup(SchemaVariableCollection value, Object owner)
 		{
-			// TODO: Should this stuff be on control?
-			//if (owner is ISchemaOwner schemaOwner)
-			//	schemaOwner.SetupSchema();
-
-			if (value.Owner != null && value.NeedsUpdate)
-			{
-				using (new ChangeScope(owner))
-					value.Update();
-			}
+			value.SetSchema(value.Schema);
 
 			_control = new SchemaVariableCollectionControl(value, owner);
 			_control.AddToClassList(InputUssClassName);
