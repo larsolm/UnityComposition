@@ -15,7 +15,6 @@ namespace PiRhoSoft.Composition.Extensions
 		public VariableLookupReference Animator = new VariableLookupReference();
 
 		[Tooltip("The name of the animation state to play")]
-		[Inline]
 		public StringVariableSource State = new StringVariableSource();
 
 		public override Color NodeColor => Colors.Animation;

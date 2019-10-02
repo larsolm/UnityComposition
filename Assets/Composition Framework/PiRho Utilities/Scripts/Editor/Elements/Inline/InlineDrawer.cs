@@ -5,23 +5,47 @@ using UnityEngine.UIElements;
 namespace PiRhoSoft.Utilities.Editor
 {
 	[CustomPropertyDrawer(typeof(InlineAttribute))]
-	class InlineDrawer : PropertyDrawer
+	public class InlineDrawer : PropertyDrawer
 	{
+		public const string Stylesheet = "Inline/InlineStyle.uss";
+		public const string UssClassName = "pirho-inline";
+		public const string LabelUssClassName = UssClassName + "__label";
+		public const string ChildrenUssClassName = UssClassName + "__children";
+
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
 			var inlineAttribute = attribute as InlineAttribute;
-			var label = inlineAttribute.ShowMemberLabels ? null : property.displayName;
-			var tooltip = inlineAttribute.ShowMemberLabels ? null : this.GetTooltip();
-			var element = new FieldContainer(label, tooltip);
-			element.style.flexDirection = FlexDirection.Column;
+
+			return CreatePropertyGUI(property, inlineAttribute.ShowMemberLabels);
+		}
+
+		protected VisualElement CreatePropertyGUI(SerializedProperty property, bool showMemberLabels)
+		{
+			var container = new VisualElement();
+			var childContainer = new VisualElement();
+			childContainer.AddToClassList(ChildrenUssClassName);
+
+			if (!showMemberLabels)
+			{
+				var label = new FieldContainer(property.displayName, this.GetTooltip());
+				label.AddToClassList(LabelUssClassName);
+				container.Add(label);
+			}
 
 			foreach (var child in property.Children())
 			{
-				var field = inlineAttribute.ShowMemberLabels ? new PropertyField(child) : new PropertyField(child, null);
-				element.Add(field);
+				var field = new PropertyField(child);
+				if (!showMemberLabels)
+					container.schedule.Execute(() => field.SetLabel(null)).StartingIn(0);
+
+				childContainer.Add(field);
 			}
 
-			return element;
+			container.Add(childContainer);
+			container.AddToClassList(UssClassName);
+			container.AddStyleSheet(Configuration.ElementsPath, Stylesheet);
+
+			return container;
 		}
 	}
 }

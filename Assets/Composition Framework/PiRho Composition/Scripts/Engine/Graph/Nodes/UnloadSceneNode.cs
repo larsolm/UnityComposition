@@ -16,7 +16,6 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Scene to unload")]
-		[Inline]
 		public SceneVariableSource Scene = new SceneVariableSource();
 
 		[Tooltip("Whether to wait for Scene to finish unloading before moving to Next")]

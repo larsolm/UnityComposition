@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities;
+using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections;
 using System.Collections.Generic;
@@ -8,11 +9,13 @@ using UnityEditor.Experimental.GraphView;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
+using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
 	public class GraphViewNodeProvider : PickerProvider<Type> { }
 	public class GraphProvider : PickerProvider<Graph> { }
+	public class ObjectProvider : PickerProvider<Object> { }
 
 	public class GraphView : UnityEditor.Experimental.GraphView.GraphView
 	{
@@ -83,10 +86,13 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void SetupNodeProvider()
 		{
-			var types = TypeHelper.GetDerivedTypes<GraphNode>(false).Where(type => type != typeof(StartNode)).ToList();
-			var paths = types.Select(type => type.GetAttribute<CreateGraphNodeMenuAttribute>()?.MenuName ?? type.Name).ToList();
+			var types = TypeHelper.GetDerivedTypes<GraphNode>(false)
+				.Where(type => type != typeof(StartNode))
+				.OrderBy(type => type.GetAttribute<CreateGraphNodeMenuAttribute>()?.MenuName ?? type.Name);
 
-			_nodeProvider.Setup("Create Node", paths, types, type => AssetPreview.GetMiniTypeThumbnail(type), selectedType => CreateNode(selectedType));
+			var paths = types.Select(type => type.GetAttribute<CreateGraphNodeMenuAttribute>()?.MenuName ?? type.Name);
+
+			_nodeProvider.Setup("Create Node", paths.ToList(), types.ToList(), type => AssetPreview.GetMiniTypeThumbnail(type), selectedType => CreateNode(selectedType));
 		}
 
 		#endregion
@@ -497,11 +503,13 @@ namespace PiRhoSoft.Composition.Editor
 
 		private readonly GraphViewWindow _window;
 		private readonly GraphProvider _graphProvider;
+		private readonly ObjectProvider _objectProvider;
 
 		private ToolbarMenu _editButton;
 		private ToolbarMenu _viewButton;
 
 		private TextElement _graphButton;
+		private TextElement _contextButton;
 		private VisualElement _breakButton;
 		private Image _loggingButton;
 		private Image _lockButton;
@@ -520,6 +528,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			_window = window;
 			_graphProvider = ScriptableObject.CreateInstance<GraphProvider>();
+			_objectProvider = ScriptableObject.CreateInstance<ObjectProvider>();
 
 			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
@@ -550,12 +559,17 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateToolbar()
 		{
-			_graphButton = new TextElement() { tooltip = "Select a graph to edit" };
+			_graphButton = new TextElement { tooltip = "Select a graph to edit" };
 			_graphButton.AddToClassList(ToolbarButtonUssClassName);
 			_graphButton.AddToClassList(ToolbarButtonLargeUssClassName);
 			_graphButton.AddToClassList(ToolbarButtonFirstUssClassName);
 			_graphButton.AddToClassList(ToolbarButtonGraphUssClassName);
-			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.layout.position))));
+			_graphButton.AddManipulator(new Clickable(() => ShowGraphPicker(GUIUtility.GUIToScreenPoint(_graphButton.worldBound.position))));
+
+			_contextButton = new TextElement { tooltip = "Select a context object" };
+			_contextButton.AddToClassList(ToolbarButtonUssClassName);
+			_contextButton.AddToClassList(ToolbarButtonLargeUssClassName);
+			_contextButton.AddManipulator(new Clickable(() => ShowContextPicker(GUIUtility.GUIToScreenPoint(_contextButton.layout.position))));
 
 			_editButton = CreateEditMenu();
 			_editButton.AddToClassList(ToolbarMenuUssClassName);
@@ -615,6 +629,7 @@ namespace PiRhoSoft.Composition.Editor
 			var toolbar = new Toolbar();
 			toolbar.AddToClassList(ToolbarUssClassName);
 			toolbar.Add(_graphButton);
+			toolbar.Add(_contextButton);
 			toolbar.Add(_editButton);
 			toolbar.Add(_viewButton);
 			toolbar.Add(_playButton);
@@ -667,6 +682,7 @@ namespace PiRhoSoft.Composition.Editor
 			var isStopping = isEnabled && CurrentGraph.DebugState == Graph.PlaybackState.Stopped;
 
 			_graphButton.text = CurrentGraph == null ? "No Graph Selected" : CurrentGraph.name;
+			_contextButton.text = GraphEditor.AutocompleteContext == null ? "No Context Object" : GraphEditor.AutocompleteContext.name;
 			_lockButton.image = IsLocked ? Icon.Locked.Texture : Icon.Unlocked.Texture;
 
 			_editButton.SetEnabled(CurrentGraph != null);
@@ -694,6 +710,16 @@ namespace PiRhoSoft.Composition.Editor
 			_graphProvider.Setup("Select Graph", graphs.Paths, graphs.Assets.Cast<Graph>().ToList(), graph => AssetPreview.GetMiniThumbnail(graph), selectedGraph => SetGraph(selectedGraph));
 
 			SearchWindow.Open(new SearchWindowContext(position), _graphProvider);
+		}
+
+		private void ShowContextPicker(Vector2 position)
+		{
+			var type = (CurrentGraph?.Context.Constraint as ObjectConstraint)?.ObjectType ?? typeof(GameObject);
+			var list = ObjectHelper.GetObjectList(type, false);
+
+			_objectProvider.Setup("Select Context", list.Paths, list.Objects, obj => AssetPreview.GetMiniThumbnail(obj), selectedObject => GraphEditor.AutocompleteContext = selectedObject);
+
+			SearchWindow.Open(new SearchWindowContext(position), _objectProvider);
 		}
 
 		private void ToggleBreakpointsEnabled()

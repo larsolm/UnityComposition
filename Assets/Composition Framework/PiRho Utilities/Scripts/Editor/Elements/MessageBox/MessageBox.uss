@@ -1,13 +1,14 @@
 ﻿.pirho-message-box
 {
-	background-color: #A5A5A5;
+	background-color: #B8B8B8;
 	border-width: 1px;
-	border-color: #000000;
+	border-color: #999999;
 	flex-direction: row;
 	padding: 5px;
 	align-items: center;
 	max-height: 100px;
 	margin: 5px 0;
+	font-size: 80%;
 }
 
 .pirho-message-box__image

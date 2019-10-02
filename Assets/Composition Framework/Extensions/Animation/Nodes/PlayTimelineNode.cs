@@ -21,7 +21,6 @@ namespace PiRhoSoft.Composition.Extensions
 		public VariableLookupReference Director = new VariableLookupReference();
 
 		[Tooltip("The timeline to run")]
-		[Inline]
 		public TimelineVariableSource Timeline = new TimelineVariableSource();
 
 		[Tooltip("The mode of the director when the timeline gets to the end")]

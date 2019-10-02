@@ -184,7 +184,7 @@ namespace PiRhoSoft.Composition
 	public class VariableValueSource : VariableSource<VariableValue>
 	{
 		public VariableValueSource() => Value = new VariableValue();
-		public override VariableDefinition GetDefinition() => new VariableDefinition(Type == VariableSourceType.Reference ? Reference.RootName : string.Empty);
+		public override VariableDefinition GetDefinition() => Reference.GetDefinition();
 	}
 
 	[Serializable]
@@ -196,6 +196,6 @@ namespace PiRhoSoft.Composition
 		public AssetReference Value = new AssetReference();
 
 		public override string ToString() => Type == VariableSourceType.Value ? Value.ToString() : base.ToString();
-		public override VariableDefinition GetDefinition() => new VariableDefinition(string.Empty, VariableType.Asset);
+		public override VariableDefinition GetDefinition() => new VariableDefinition(Reference.RootName, VariableType.Asset);
 	}
 }

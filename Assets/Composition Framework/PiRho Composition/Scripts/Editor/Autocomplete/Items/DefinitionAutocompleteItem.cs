@@ -1,5 +1,6 @@
 ﻿using PiRhoSoft.Utilities.Editor;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition.Editor
@@ -12,7 +13,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			switch (definition.Type)
 			{
-				case VariableType.Empty: SetupEmpty(); break;
+				case VariableType.Empty: SetupUnknown(); break;
 				case VariableType.Bool: SetupValueType(); break;
 				case VariableType.Int: SetupValueType(); break;
 				case VariableType.Float: SetupValueType(); break;
@@ -36,13 +37,13 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
-		private void SetupEmpty()
+		private void SetupUnknown()
 		{
 			AllowsCustomFields = true;
-			IsCastable = false;
-			IsIndexable = false;
+			IsCastable = true;
+			IsIndexable = true;
 			Fields = new List<IAutocompleteItem>();
-			Types = null;
+			Types = TypeHelper.GetDerivedTypes<Component>(true).ToList();
 		}
 
 		private void SetupValueType()
@@ -116,7 +117,7 @@ namespace PiRhoSoft.Composition.Editor
 			IsCastable = true;
 			IsIndexable = false;
 			Fields = null;
-			Types = TypeHelper.GetTypeList<Object>(true).Types;
+			Types = TypeHelper.GetDerivedTypes<Component>(true).ToList();
 		}
 	}
 }

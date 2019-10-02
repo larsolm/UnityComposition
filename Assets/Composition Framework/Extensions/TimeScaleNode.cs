@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition.Extensions
@@ -11,7 +10,6 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The value to set the TimeScale to")]
-		[Inline]
 		[VariableReference(0.0f, 100.0f)]
 		public FloatVariableSource TimeScale = new FloatVariableSource(1.0f);
 

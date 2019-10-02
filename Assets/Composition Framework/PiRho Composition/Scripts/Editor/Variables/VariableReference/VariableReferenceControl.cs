@@ -72,8 +72,10 @@ namespace PiRhoSoft.Composition.Editor
 			if (!Value.IsValid)
 				_advancedMode = true;
 
-			_advancedControl.Refresh();
-			_simpleControl.Refresh();
+			if (_advancedMode)
+				_advancedControl.Refresh();
+			else
+				_simpleControl.Refresh();
 
 			_modeToggle.tooltip = Value.IsValid ? _validTooltip : _invalidTooltip;
 

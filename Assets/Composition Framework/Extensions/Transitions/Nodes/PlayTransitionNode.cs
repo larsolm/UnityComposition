@@ -12,7 +12,6 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The transition to play")]
-		[Inline]
 		public TransitionVariableSource Transition = new TransitionVariableSource();
 
 		[Tooltip("The phase of the transition to run")]

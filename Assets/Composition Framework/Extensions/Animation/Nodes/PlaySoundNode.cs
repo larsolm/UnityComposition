@@ -19,11 +19,9 @@ namespace PiRhoSoft.Composition.Extensions
 		public VariableLookupReference AudioPlayer = new VariableLookupReference();
 
 		[Tooltip("The sound to play")]
-		[Inline]
 		public SoundVariableSource Sound = new SoundVariableSource();
 
 		[Tooltip("The volume to play the sound at")]
-		[Inline]
 		public FloatVariableSource Volume = new FloatVariableSource(1.0f);
 
 		[Tooltip("Whether to wait for the sound to finish before moving to Next")]

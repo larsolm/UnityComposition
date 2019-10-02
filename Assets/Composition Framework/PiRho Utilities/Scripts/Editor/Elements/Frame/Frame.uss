@@ -19,6 +19,7 @@
 {
 	flex-grow: 1;
 	-unity-font-style: bold;
+	align-self: center;
 	color: #000000;
 }
 

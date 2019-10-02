@@ -1,6 +1,7 @@
 ﻿using PiRhoSoft.Utilities.Editor;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,7 +13,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private static readonly List<KeyCode> _openKeys = new List<KeyCode> { KeyCode.Escape, KeyCode.Tab };
 		private static readonly List<KeyCode> _closeKeys = new List<KeyCode> { KeyCode.Escape };
-		private static readonly char[] _separators = { VariableReference.Separator, VariableReference.LookupOpen, VariableReference.LookupClose };
+		private static readonly char[] _separators = { VariableReference.Separator, VariableReference.LookupOpen, VariableReference.LookupClose, ' ' };
 		private static readonly Vector2 _windowSize = new Vector2(150, 300);
 
 		private static readonly Dictionary<KeyCode, string> _selectKeys = new Dictionary<KeyCode, string>
@@ -47,7 +48,7 @@ namespace PiRhoSoft.Composition.Editor
 			_textField.AddToClassList(TextUssClassName);
 			_textField.RegisterValueChangedCallback(evt => SetValue(evt.newValue));
 			_textField.RegisterCallback<KeyDownEvent>(OnKeyDown);
-			_textField.RegisterCallback<MouseUpEvent>(evt => UpdateAutocomplete());
+			_textField.RegisterCallback<MouseUpEvent>(evt => UpdateAutocomplete(_textField.cursorIndex));
 			_textField.RegisterCallback<FocusEvent>(evt => Show());
 			_textField.RegisterCallback<BlurEvent>(evt => Hide());
 		}
@@ -56,7 +57,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			_textField.SetValueWithoutNotify(_control.Value.Variable);
 
-			UpdateAutocomplete();
+			UpdateAutocomplete(_textField.cursorIndex);
 		}
 
 		private void SetValue(string value)
@@ -70,7 +71,7 @@ namespace PiRhoSoft.Composition.Editor
 			if (!_autocomplete.IsOpen)
 				_autocomplete.Show();
 
-			UpdateAutocomplete();
+			UpdateAutocomplete(_textField.cursorIndex);
 		}
 
 		private void Hide()
@@ -79,61 +80,81 @@ namespace PiRhoSoft.Composition.Editor
 				_autocomplete.Hide();
 		}
 
-		private void UpdateAutocomplete()
+		private void UpdateAutocomplete(int cursorIndex)
 		{
-			var autocomplete = GetCurrentAutocomplete();
-			var filter = GetFilter();
+			var autocomplete = GetCurrentAutocomplete(cursorIndex);
+			var filter = GetFilter(cursorIndex);
 
 			_autocomplete.SetAutocomplete(autocomplete);
 			_autocomplete.UpdateFilter(filter);
 		}
 
-		private IAutocompleteItem GetCurrentAutocomplete()
+		private IAutocompleteItem GetCurrentAutocomplete(int cursorIndex)
 		{
 			var autocomplete = _control.Autocomplete;
-			var index = _textField.text.LastIndexOfAny(_separators, Math.Max(0, _textField.cursorIndex - 1));
+			var index = _textField.text.LastIndexOfAny(_separators, Math.Max(0, cursorIndex - 1));
 			if (index >= 0)
 			{
 				var subtext = _textField.text.Substring(0, index);
 				var names = subtext.Split(_separators);
+				var cast = false;
 
 				foreach (var name in names)
 				{
-					var nextAutocomplete = autocomplete.GetField(name);
-					if (nextAutocomplete == null)
-						break;
+					if (name == VariableReference.Cast)
+					{
+						cast = true;
+						continue;
+					}
 
-					autocomplete = nextAutocomplete;
+					if (cast)
+					{
+						var nextAutocomplete = autocomplete.GetTypeField(name);
+						if (nextAutocomplete == null)
+							break;
+
+						autocomplete = nextAutocomplete;
+					}
+					else
+					{
+						var nextAutocomplete = autocomplete.GetField(name);
+						if (nextAutocomplete == null)
+							break;
+
+						autocomplete = nextAutocomplete;
+					}
+
+					cast = false;
 				}
 			}
 
 			return autocomplete;
 		}
 
-		private int GetLastSeparatorIndex()
+		private int GetLastSeparatorIndex(int cursorIndex)
 		{
-			return string.IsNullOrEmpty(_textField.text) || _textField.cursorIndex == 0 ? -1 : _textField.text.LastIndexOfAny(_separators, _textField.cursorIndex - 1);
+			return string.IsNullOrEmpty(_textField.text) || cursorIndex <= 0 ? -1 : _textField.text.LastIndexOfAny(_separators, cursorIndex - 1);
 		}
 
-		private int GetNextSeparatorIndex()
+		private int GetNextSeparatorIndex(int cursorIndex)
 		{
-			return _textField.text.IndexOfAny(_separators, _textField.cursorIndex);
+			return _textField.text.IndexOfAny(_separators, cursorIndex);
 		}
 
-		private string GetFilter()
+		private string GetFilter(int cursorIndex)
 		{
-			var index = GetLastSeparatorIndex();
+			var index = GetLastSeparatorIndex(cursorIndex);
 			if (index < 0)
-				return _textField.cursorIndex == 0 ? string.Empty : _textField.text.Substring(0, _textField.cursorIndex - 1);
-			else if (index == _textField.text.Length - 1)
+				return cursorIndex <= 0 ? string.Empty : _textField.text.Substring(0, cursorIndex - 1);
+			else if (index >= _textField.text.Length - 1)
 				return string.Empty;
 			else
-				return _textField.text.Substring(index + 1, _textField.cursorIndex - index - 1);
+				return _textField.text.Substring(index + 1, cursorIndex - index - 1);
 		}
 
 		private Rect GetPopupRect()
 		{
-			var index = GetLastSeparatorIndex();
+			var index = GetLastSeparatorIndex(_textField.cursorIndex);
 			var subtext = index < 0 ? string.Empty : _textField.text.Substring(0, index);
 			var size = _measure.MeasureTextSize(subtext, 0, MeasureMode.Undefined, worldBound.height, MeasureMode.Exactly);
 			var position = worldBound.position + size;
@@ -157,11 +178,11 @@ namespace PiRhoSoft.Composition.Editor
 				}
 				else if (evt.keyCode == KeyCode.LeftArrow)
 				{
-					UpdateAutocomplete();
+					UpdateAutocomplete(_textField.cursorIndex - 1);
 				}
 				else if (evt.keyCode == KeyCode.RightArrow)
 				{
-					UpdateAutocomplete();
+					UpdateAutocomplete(_textField.cursorIndex + 1);
 				}
 				else if (_closeKeys.Contains(evt.keyCode))
 				{
@@ -197,14 +218,14 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void Select(KeyCode key)
 		{
-			if (_autocomplete.ActiveItem != null)
+			if (_autocomplete.ActiveName != null)
 			{
-				var previousIndex = GetLastSeparatorIndex() + 1; // Add one to bypass the separator
-				var nextIndex = GetNextSeparatorIndex();
+				var previousIndex = GetLastSeparatorIndex(_textField.cursorIndex) + 1; // Add one to bypass the separator
+				var nextIndex = GetNextSeparatorIndex(_textField.cursorIndex);
 				var prefix = previousIndex == _textField.text.Length ? _textField.text : nextIndex < 0 ? _textField.text.Remove(previousIndex) : _textField.text.Remove(previousIndex, nextIndex - previousIndex);
-				var cursor = previousIndex + _autocomplete.ActiveItem.Name.Length;
+				var cursor = previousIndex + _autocomplete.ActiveName.Length;
 
-				_textField.value = prefix.Insert(previousIndex, _autocomplete.ActiveItem.Name);
+				_textField.value = prefix.Insert(previousIndex, _autocomplete.ActiveName);
 				_textField.SelectRange(cursor, cursor);
 			}
 		}
@@ -221,12 +242,13 @@ namespace PiRhoSoft.Composition.Editor
 			public const string ItemValidUssClassName = ItemUssClassName + "--valid";
 
 			public bool IsOpen { get; private set; }
-			public IAutocompleteItem ActiveItem => _activeItem?.Item;
+			public string ActiveName => _activeItem?.Name;
 
 			private VariableReferenceTextControl _control;
 			private IAutocompleteItem _autocomplete;
 			private ScrollView _scrollView;
 			private ItemElement _activeItem;
+			private CastElement _castElement;
 			private string _filter = null;
 			private int _validCount = 0;
 
@@ -254,14 +276,35 @@ namespace PiRhoSoft.Composition.Editor
 				_autocomplete = autocomplete;
 				_scrollView.contentContainer.Clear();
 
-				foreach (var field in autocomplete.GetFields())
+				if (_autocomplete.IsCastable)
 				{
-					var element = new ItemElement(field);
-					element.RegisterCallback<MouseOverEvent>(e => SetActive(element));
-					element.RegisterCallback<MouseDownEvent>(e => _control.Select(KeyCode.Return), TrickleDown.TrickleDown); // This must trickle down and can't be a clickable be cause it gets overriden be the FocusOut event on the base text field
-					element.AddToClassList(ItemUssClassName);
+					if (_filter == VariableReference.Cast)
+					{
+						var types = _autocomplete.GetTypes();
 
-					_scrollView.contentContainer.Add(element);
+						if (types != null)
+						{
+							foreach (var type in types)
+							{
+								var item = Autocomplete.GetItem(type);
+
+								if (item != null)
+									AddElement(new AutocompleteElement(item));
+							}
+						}
+					}
+					else
+					{
+						AddElement(new CastElement());
+					}
+				}
+
+				var fields = _autocomplete.GetFields();
+
+				if (fields != null)
+				{
+					foreach (var field in _autocomplete.GetFields())
+						AddElement(new AutocompleteElement(field));
 				}
 			}
 
@@ -309,7 +352,7 @@ namespace PiRhoSoft.Composition.Editor
 				var index = 0;
 				_items.ForEach(item =>
 				{
-					var valid = string.IsNullOrEmpty(_filter) || item.Item.Name.IndexOf(_filter, StringComparison.CurrentCultureIgnoreCase) >= 0;
+					var valid = string.IsNullOrEmpty(_filter) || item.Name.IndexOf(_filter, StringComparison.CurrentCultureIgnoreCase) >= 0;
 
 					item.ValidIndex = valid ? index++ : -1;
 					item.EnableInClassList(ItemValidUssClassName, valid);
@@ -346,15 +389,41 @@ namespace PiRhoSoft.Composition.Editor
 				}
 			}
 
+			private void AddElement(ItemElement element)
+			{
+				element.RegisterCallback<MouseOverEvent>(e => SetActive(element));
+				element.RegisterCallback<MouseDownEvent>(e => _control.Select(KeyCode.Return), TrickleDown.TrickleDown); // This must trickle down and can't be a clickable be cause it gets overriden be the FocusOut event on the base text field
+				element.AddToClassList(ItemUssClassName);
+
+				_scrollView.contentContainer.Add(element);
+			}
+
 			private class ItemElement : TextElement
 			{
-				public IAutocompleteItem Item;
 				public int ValidIndex = -1;
+				public string Name;
 
-				public ItemElement(IAutocompleteItem item)
+				public ItemElement(string label, string name)
+				{
+					text = label;
+					Name = name;
+				}
+			}
+
+			private class AutocompleteElement : ItemElement
+			{
+				public IAutocompleteItem Item;
+
+				public AutocompleteElement(IAutocompleteItem item) : base(item.Name, item.Name)
 				{
 					Item = item;
-					text = item.Name;
+				}
+			}
+
+			private class CastElement : ItemElement
+			{
+				public CastElement() : base(VariableReference.Cast, $" {VariableReference.Cast} ")
+				{
 				}
 			}
 		}

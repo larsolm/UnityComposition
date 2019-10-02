@@ -1,0 +1,100 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-5649388568590615349
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 183840318e2db944bba6e02dab617394, type: 3}
+  m_Name: UnloadSceneNode
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 359, y: -60.99997}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Scene:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value:
+      m_AssetGUID: 
+      m_SubObjectName: 
+  WaitForCompletion: 1
+  CleanupAssets: 1
+--- !u!114 &-2832075563476024605
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7f1ae9e83aa37c6429288c397a1669e9, type: 3}
+  m_Name: Freeze Player
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 100, y: -78.99997}
+  IsBreakpoint: 0
+  Next: {fileID: 6074473485514722083}
+  Controller:
+    _variable: 
+    _tokens: []
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37fc6f8ca9decf2499c2de065b8a84d4, type: 3}
+  m_Name: ExitZone
+  m_EditorClassIdentifier: 
+  Context:
+    Name: context
+    _type: 0
+    _constraintData:
+      Version: 0
+      Data: 
+      References: []
+  Inputs:
+    _items: []
+  Outputs:
+    _items: []
+  StartNode: {fileID: -2832075563476024605}
+  Nodes:
+  - {fileID: -2832075563476024605}
+  - {fileID: 6074473485514722083}
+  - {fileID: -5649388568590615349}
+--- !u!114 &6074473485514722083
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03fb0c34c465c8146aac0b30f629636c, type: 3}
+  m_Name: PlayTransitionNode
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 198, y: 45.00003}
+  IsBreakpoint: 0
+  Next: {fileID: -5649388568590615349}
+  Transition:
+    Type: 0
+    Reference:
+      _variable: 
+      _tokens: []
+    Value: {fileID: 11400000, guid: 7796ff7a522136543b065b1d83d72fdc, type: 2}
+  Phase: 0
+  AutoFinish: 0
+  WaitForCompletion: 1

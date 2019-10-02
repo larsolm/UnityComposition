@@ -20,6 +20,7 @@ namespace PiRhoSoft.Composition.Editor
 		bool IsIndexable { get; }
 
 		IAutocompleteItem GetField(string name);
+		IAutocompleteItem GetTypeField(string type);
 		IAutocompleteItem GetIndexField();
 		IEnumerable<IAutocompleteItem> GetFields();
 		IEnumerable<Type> GetTypes();
@@ -38,6 +39,7 @@ namespace PiRhoSoft.Composition.Editor
 		public List<Type> Types { get; protected set; }
 
 		public IAutocompleteItem GetField(string name) => string.IsNullOrEmpty(name) ? null : Fields?.Where(field => field.Name == name).FirstOrDefault();
+		public IAutocompleteItem GetTypeField(string name) => Autocomplete.GetItem(string.IsNullOrEmpty(name) ? null : Types?.Where(type => type.Name == name).FirstOrDefault());
 		public IAutocompleteItem GetIndexField() => IndexField;
 		public IEnumerable<IAutocompleteItem> GetFields() => Fields ?? Enumerable.Empty<IAutocompleteItem>();
 		public IEnumerable<Type> GetTypes() => Types ?? Enumerable.Empty<Type>();
@@ -46,23 +48,19 @@ namespace PiRhoSoft.Composition.Editor
 
 		#region Helpers
 
-		protected void GetCastTypes(object obj, ref List<Type> types)
+		protected List<Type> GetCastTypes(object obj)
 		{
 			if (obj is Component component)
-				GetCastTypes(component.gameObject, component.GetType(), ref types);
+				return GetCastTypes(component.gameObject, component.GetType());
 			else if (obj is GameObject gameObject)
-				GetCastTypes(gameObject, null, ref types);
-			else
-				types = null;
+				return GetCastTypes(gameObject, null);
+
+			return null;
 		}
 
-		private void GetCastTypes(GameObject obj, Type except, ref List<Type> types)
+		private List<Type> GetCastTypes(GameObject obj, Type except)
 		{
-			if (types == null)
-				types = new List<Type>();
-			else
-				types.Clear();
-
+			var types = new List<Type>();
 			var components = obj.GetComponents<Component>();
 
 			foreach (var component in components)
@@ -72,6 +70,8 @@ namespace PiRhoSoft.Composition.Editor
 				if (type != except && !types.Contains(type))
 					types.Add(type);
 			}
+
+			return types;
 		}
 
 		#endregion
@@ -92,6 +92,7 @@ namespace PiRhoSoft.Composition.Editor
 		public bool IsIndexable => false;
 
 		public IAutocompleteItem GetField(string name) => null;
+		public IAutocompleteItem GetTypeField(string name) => null;
 		public IAutocompleteItem GetIndexField() => null;
 		public IEnumerable<IAutocompleteItem> GetFields() => Enumerable.Empty<IAutocompleteItem>();
 		public IEnumerable<Type> GetTypes() => Enumerable.Empty<Type>();

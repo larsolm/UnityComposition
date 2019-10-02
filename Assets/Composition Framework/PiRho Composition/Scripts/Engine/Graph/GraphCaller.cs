@@ -22,6 +22,7 @@ namespace PiRhoSoft.Composition
 		public IList<GraphInput> Inputs => _inputs;
 		public IList<GraphOutput> Outputs => _outputs;
 		public bool IsRunning => Graph != null && Graph.IsRunning;
+		public override string ToString() => Graph != null ? Graph.name : base.ToString();
 
 		public IEnumerator Execute(IVariableCollection store, Variable context)
 		{

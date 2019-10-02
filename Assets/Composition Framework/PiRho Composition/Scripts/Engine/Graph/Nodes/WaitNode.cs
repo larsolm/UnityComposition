@@ -12,7 +12,6 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The amount of time (in seconds) to wait")]
-		[Inline]
 		public FloatVariableSource Time = new FloatVariableSource(1.0f);
 
 		[Tooltip("Time is affected by Time.timeScale")]

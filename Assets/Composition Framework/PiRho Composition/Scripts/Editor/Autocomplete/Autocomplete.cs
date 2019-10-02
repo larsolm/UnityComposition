@@ -25,28 +25,32 @@ namespace PiRhoSoft.Composition.Editor
 
 		public static void AddType(Type objectType, Type itemType)
 		{
-			if (itemType.IsCreatableAs<AutocompleteItem>())
+			if (itemType.IsCreatableAs<IAutocompleteItem>())
 				_registry.Add(objectType, itemType);
 			else
 				Debug.LogWarningFormat(_invalidItemTypeWarning, objectType.Name, itemType.Name);
 		}
 
-		public static AutocompleteItem GetItem(object obj)
+		public static IAutocompleteItem GetItem(object obj)
 		{
-			var type = obj.GetType();
+			var item = GetItem(obj.GetType());
+			if (item is AutocompleteItem autocomplete)
+				autocomplete.Setup(obj);
+
+			return item ?? new ObjectAutocompleteItem(obj);
+		}
+
+		public static IAutocompleteItem GetItem(Type type)
+		{
 			while (type != null)
 			{
 				if (_registry.TryGetValue(type, out var itemType))
-				{
-					var item = itemType.CreateInstance<AutocompleteItem>();
-					item.Setup(obj);
-					return item;
-				}
+					return itemType.CreateInstance<IAutocompleteItem>();
 
 				type = type.BaseType;
 			}
 
-			return new ObjectAutocompleteItem(obj);
+			return null;
 		}
 	}
 }

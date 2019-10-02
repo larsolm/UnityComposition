@@ -31,15 +31,12 @@ namespace PiRhoSoft.Composition.Extensions
 		public bool UseRelativeScale = true;
 
 		[Tooltip("The target position to move to - offset from the original if UseRelativePosition is set")]
-		[Inline]
 		public Vector3VariableSource TargetPosition = new Vector3VariableSource();
 
 		[Tooltip("The target rotation to change to - offset from the original if UseRelativeRotation is set")]
-		[Inline]
 		public Vector3VariableSource TargetRotation = new Vector3VariableSource();
 
 		[Tooltip("The target scale to size to - multiplicative from the original if UseRelativeScale is set")]
-		[Inline]
 		public Vector3VariableSource TargetScale = new Vector3VariableSource(Vector3.one);
 
 		[Tooltip("The method in which to animate toward the target transform")]
@@ -51,22 +48,18 @@ namespace PiRhoSoft.Composition.Extensions
 
 		[Tooltip("The amount of time it takes to move to the target transform")]
 		[Conditional(nameof(AnimationMethod), (int)AnimationType.Duration)]
-		[Inline]
 		public FloatVariableSource Duration = new FloatVariableSource(1.0f);
 
 		[Tooltip("The speed at which to move toward the target position (units per second)")]
 		[Conditional(nameof(AnimationMethod), (int)AnimationType.Speed)]
-		[Inline]
 		public FloatVariableSource MoveSpeed = new FloatVariableSource(1.0f);
 
 		[Tooltip("The speed at which to move toward the target rotation (degrees per second)")]
 		[Conditional(nameof(AnimationMethod), (int)AnimationType.Speed)]
-		[Inline]
 		public FloatVariableSource RotationSpeed = new FloatVariableSource(1.0f);
 
 		[Tooltip("The speed at which to scale toward the target scale (units per second)")]
 		[Conditional(nameof(AnimationMethod), (int)AnimationType.Speed)]
-		[Inline]
 		public FloatVariableSource ScaleSpeed = new FloatVariableSource(1.0f);
 
 		public override Color NodeColor => Colors.Sequencing;

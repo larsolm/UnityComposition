@@ -19,7 +19,6 @@ namespace PiRhoSoft.Composition.Extensions
 		public VariableLookupReference AnimationPlayer = new VariableLookupReference();
 
 		[Tooltip("The Animation to play")]
-		[Inline]
 		public AnimationClipVariableSource Animation = new AnimationClipVariableSource();
 
 		[Tooltip("Whether to wait for the animation to finish")]

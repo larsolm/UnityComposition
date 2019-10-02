@@ -11,11 +11,9 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The Audio Clip to play")]
-		[Inline]
 		public AudioClipVariableSource AudioClip = new AudioClipVariableSource();
 
 		[Tooltip("The volume to play the sound at")]
-		[Inline]
 		public FloatVariableSource Volume = new FloatVariableSource(1.0f);
 
 		public override Color NodeColor => Colors.Animation;

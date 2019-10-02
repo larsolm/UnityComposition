@@ -87,7 +87,7 @@ namespace PiRhoSoft.Utilities.Editor
 		public static IEnumerable<Type> GetDerivedTypes(this Type baseType, bool includeAbstract)
 		{
 			var types = TypeCache.GetTypesDerivedFrom(baseType).Prepend(baseType);
-			return includeAbstract ? types : types.Where(type => type.IsAbstract);
+			return includeAbstract ? types : types.Where(type => !type.IsAbstract);
 		}
 
 		#endregion

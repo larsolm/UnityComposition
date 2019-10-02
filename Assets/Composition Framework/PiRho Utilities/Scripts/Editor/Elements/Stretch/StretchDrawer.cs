@@ -6,7 +6,7 @@ namespace PiRhoSoft.Utilities.Editor
 	[CustomPropertyDrawer(typeof(StretchAttribute))]
 	class StretchDrawer : PropertyDrawer
 	{
-		public const string Stylesheet = "Stretch/StretchDrawer.uss";
+		public const string Stylesheet = "Stretch/StretchStyle.uss";
 		public const string UssClassName = "pirho-stretch";
 
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)

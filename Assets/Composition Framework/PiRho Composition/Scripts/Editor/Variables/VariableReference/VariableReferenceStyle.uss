@@ -29,14 +29,13 @@
 .pirho-variable-reference--advanced.pirho-variable-reference--invalid .pirho-variable-reference__mode
 {
 	background-color: #FF6B6B;
+	border-color: #999999;
 }
 
 .pirho-variable-reference__simple
 {
 	display: flex;
-	align-self: center;
-	flex-direction: row;
-	flex-wrap: wrap;
+	flex-grow: 1;
 }
 
 .pirho-variable-reference__advanced
@@ -57,22 +56,40 @@
 	display: flex;
 }
 
+.pirho-variable-reference__simple__container
+{
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+.pirho-variable-reference__simple .pirho-variable-reference__simple__error
+{
+	display: none;
+	margin-left: 5px;
+}
+
+.pirho-variable-reference__simple--invalid .pirho-variable-reference__simple__error
+{
+	display: flex;
+}
+
 .pirho-variable-reference__simple__item
 {
 	flex-direction: row;
+	flex-grow: 1;
 	margin-left: 5px;
 }
 
 .pirho-variable-reference__simple__item--empty
 {
-	min-width: 20px;
+	min-width: 17px;
 }
 
-
-.pirho-variable-reference__simple__item--empty .unity-popup-field__input
+.pirho-variable-reference__simple__item--empty .pirho-variable-reference__simple__item__popup .unity-popup-field__input
 {
-	min-width: 20px;
-	max-width: 20px;
+	min-width: 17px;
+	max-width: 17px;
+	padding-right: 17px;
 }
 
 .pirho-variable-reference__simple__item__popup .unity-popup-field__input
@@ -84,6 +101,7 @@
 .pirho-variable-reference__simple__item__popup
 {
 	margin: 1px 0px;
+	flex-grow: 1;
 }
 
 

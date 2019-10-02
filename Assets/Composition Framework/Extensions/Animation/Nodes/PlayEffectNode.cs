@@ -19,11 +19,9 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The GameObject to spawn")]
-		[Inline]
 		public GameObjectVariableSource Effect = new GameObjectVariableSource();
 
 		[Tooltip("The name of the spawned effect object")]
-		[Inline]
 		public StringVariableSource EffectName = new StringVariableSource("Spawned Effect");
 
 		[Tooltip("A variable reference to assign the created effect to so that it can be referenced later")]
@@ -42,11 +40,9 @@ namespace PiRhoSoft.Composition.Extensions
 		public VariableLookupReference Parent = new VariableLookupReference();
 
 		[Tooltip("The position to spawn the object at")]
-		[Inline]
 		public Vector3VariableSource Position = new Vector3VariableSource();
 
 		[Tooltip("The rotation to spawn the object at")]
-		[Inline]
 		public Vector3VariableSource Rotation = new Vector3VariableSource();
 
 		[Tooltip("Whether to wait for the effect to finish before moving to Next")]

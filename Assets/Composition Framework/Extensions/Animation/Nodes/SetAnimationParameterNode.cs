@@ -15,7 +15,6 @@ namespace PiRhoSoft.Composition
 		public VariableLookupReference Animator = new VariableLookupReference();
 
 		[Tooltip("The name of the parameter to set")]
-		[Inline]
 		public StringVariableSource Parameter = new StringVariableSource();
 
 		[Tooltip("The type of the parameter to set")]
@@ -24,17 +23,14 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The value to set the parameter to")]
 		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Bool)]
-		[Inline]
 		public BoolVariableSource BoolValue = new BoolVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Int)]
-		[Inline]
 		public IntVariableSource IntValue = new IntVariableSource();
 
 		[Tooltip("The value to set the parameter to")]
 		[Conditional(nameof(Type), (int)AnimatorControllerParameterType.Float)]
-		[Inline]
 		public FloatVariableSource FloatValue = new FloatVariableSource();
 
 		public override Color NodeColor => Colors.Animation;

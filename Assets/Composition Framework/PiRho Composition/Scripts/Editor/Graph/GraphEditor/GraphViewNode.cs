@@ -71,6 +71,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			container.bindingPath = bindingPath;
 			container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit));
+			container.RegisterValueChangedCallback(e => container.text = e.newValue);
 			container.Add(edit);
 
 			HideEditableText(edit);
