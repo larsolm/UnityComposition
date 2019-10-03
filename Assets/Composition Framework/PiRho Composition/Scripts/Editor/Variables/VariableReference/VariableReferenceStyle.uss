@@ -92,6 +92,12 @@
 	padding-right: 17px;
 }
 
+.pirho-variable-reference__simple__item--invalid
+{
+	margin: 0px 0px 1px 0px;
+	flex-grow: 1;
+}
+
 .pirho-variable-reference__simple__item__popup .unity-popup-field__input
 {
 	padding-right: 20px;

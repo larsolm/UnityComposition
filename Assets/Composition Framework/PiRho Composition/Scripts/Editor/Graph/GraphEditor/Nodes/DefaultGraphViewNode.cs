@@ -52,11 +52,13 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			Data.RefreshConnections();
 			outputs.Clear();
+			renameableProperty?.serializedObject.Update();
+			renameableProperty = null; // TODO - figure out a better way to name connections and the like
 
 			for (var i = 0; i < Data.Connections.Count; i++)
 			{
 				var connection = Data.Connections[i];
-				var nameProperty = renameableProperty?.FindPropertyRelative(i.ToString());
+				var nameProperty = renameableProperty?.GetArrayElementAtIndex(i);
 				var output = new GraphViewOutputPort(this, connection, nodeConnector, nameProperty) { portName = connection.Name, tooltip = "Click and drag to make a connection from this output" };
 				outputContainer.Add(output);
 				outputs.Add(output);

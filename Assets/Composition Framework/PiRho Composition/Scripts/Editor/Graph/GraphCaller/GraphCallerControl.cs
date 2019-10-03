@@ -39,9 +39,9 @@ namespace PiRhoSoft.Composition.Editor
 			Refresh();
 		}
 
-		public void SetValueWithoutNotify(GraphCaller newValue)
+		public void SetValueWithoutNotify(Object newValue)
 		{
-			Value = newValue;
+			Value.Graph = newValue as Graph;
 			Refresh();
 		}
 

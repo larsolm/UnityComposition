@@ -4,8 +4,7 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	// TODO: MAKE THIS BASEFIELD<OBJECT> TOMORROW
-	public class GraphCallerField : BaseField<GraphCaller>
+	public class GraphCallerField : BaseField<Object>
 	{
 		public static readonly string UssClassName = "pirho-graph-caller-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
@@ -22,16 +21,16 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			_control = new GraphCallerControl(value, owner);
 			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<GraphCaller>>(evt => base.value = evt.newValue);
+			_control.RegisterCallback<ChangeEvent<Object>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
 			this.SetVisualInput(_control);
 			AddToClassList(UssClassName);
-			SetValueWithoutNotify(value);
+			SetValueWithoutNotify(value.Graph);
 		}
 
-		public override void SetValueWithoutNotify(GraphCaller newValue)
+		public override void SetValueWithoutNotify(Object newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
 			_control.SetValueWithoutNotify(newValue);

@@ -18,6 +18,7 @@ namespace PiRhoSoft.Composition.Editor
 		public const string ComboBoxUssClassName = ItemUssClassName + "__combo-box";
 		public const string ArrayIndexUssClassName = ItemUssClassName + "__array-index";
 		public const string EmptyUssClassName = ItemUssClassName + "--empty";
+		public const string ItemInvalidUssClassName = ItemUssClassName + "--invalid";
 
 		private const string _emptyText = "-Empty-";
 		private const string _indexedText = "-Indexed-";
@@ -53,9 +54,7 @@ namespace PiRhoSoft.Composition.Editor
 				var item = GetItem(source, token);
 				var items = GetItems(source); // This will include "as" and "Indexed" if it can be either
 
-				var container = new VisualElement();
-				container.AddToClassList(ItemUssClassName);
-				baseContainer.Add(container);
+				var container = CreateItemContainer(baseContainer);
 
 				if (source.AllowsCustomFields)
 				{
@@ -99,13 +98,9 @@ namespace PiRhoSoft.Composition.Editor
 
 					EnableInClassList(InvalidUssClassName, !valid);
 
-					var itemContainer = new VisualElement();
-					itemContainer.AddToClassList(ItemUssClassName);
-					itemContainer.Add(popup);
+					CreateItemContainer(baseContainer).Add(popup);
 
 					item = valid ? item?.GetTypeField(token.Text) : null;
-
-					baseContainer.Add(itemContainer);
 				}
 
 				// Only draw this 
@@ -127,8 +122,29 @@ namespace PiRhoSoft.Composition.Editor
 				source = item;
 			}
 
+			while (index < tokens.Count)// There are excess tokens that are not defined by the AutocompleteItem so the control doesn't match
+			{
+				var token = tokens[index++];
+				var container = CreateItemContainer(baseContainer);
+				var label = new TextField { value = token.Text };
+				label.AddToClassList(ItemInvalidUssClassName);
+				label.SetEnabled(false);
+
+				container.Add(label);
+
+				AddToClassList(InvalidUssClassName);
+			}
+
 			Add(baseContainer);
 			Add(_errorMessage);
+		}
+
+		private VisualElement CreateItemContainer(VisualElement parent)
+		{
+			var container = new VisualElement();
+			container.AddToClassList(ItemUssClassName);
+			parent.Add(container);
+			return container;
 		}
 
 		private IAutocompleteItem GetItem(IAutocompleteItem source, VariableReference.VariableToken token)

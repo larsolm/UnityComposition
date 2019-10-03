@@ -17,16 +17,11 @@
 
 .pirho-variable-reference-text__item
 {
-	display: none;
 	background-color: #FFF;
+	white-space: nowrap;
 }
 
 .pirho-variable-reference-text__item--active
 {
 	background-color: #CCF;
-}
-
-.pirho-variable-reference-text__item--valid
-{
-	display: flex;
 }
