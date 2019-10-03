@@ -52,7 +52,8 @@
 	margin-left: 5px;
 	width: 16px;
 	height: 16px;
-	align-self: center;
+	align-self: flex-start;
+	margin-top: 3px;
 }
 
 .pirho-list--remove-disabled .pirho-list__remove-button

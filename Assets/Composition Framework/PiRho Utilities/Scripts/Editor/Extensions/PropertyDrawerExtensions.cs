@@ -73,10 +73,17 @@ namespace PiRhoSoft.Utilities.Editor
 			if (drawer.fieldInfo.FieldType.IsArray)
 				return drawer.fieldInfo.FieldType.GetElementType();
 
-			var ilist = drawer.fieldInfo.FieldType.GetInterfaces().FirstOrDefault(type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>));
+			var interfaces = drawer.fieldInfo.FieldType.GetInterfaces();
+
+			var ilist = interfaces.FirstOrDefault(type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IList<>));
 
 			if (ilist != null)
 				return ilist.GetGenericArguments()[0];
+
+			var iDict = interfaces.FirstOrDefault(type => type.IsGenericType && type.GetGenericTypeDefinition() == typeof(IDictionary<,>));
+
+			if (iDict != null)
+				return iDict.GetGenericArguments()[1];
 
 			return drawer.fieldInfo.FieldType;
 		}

@@ -4,25 +4,24 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	// TODO: MAKE THIS BASEFIELD<OBJECT> TOMORROW
-	public class GraphCallerField : BaseField<GraphCaller>
+	public class GraphNodeField : BaseField<Object>
 	{
-		public static readonly string UssClassName = "pirho-graph-caller-field";
+		public static readonly string UssClassName = "pirho-graph-node-field";
 		public static readonly string LabelUssClassName = UssClassName + "__label";
 		public static readonly string InputUssClassName = UssClassName + "__input";
 
-		private GraphCallerControl _control;
+		private GraphNodeControl _control;
 
-		public GraphCallerField(string label, GraphCaller value, Object owner) : base(label, null)
+		public GraphNodeField(string label, GraphNode value) : base(label, null)
 		{
-			Setup(value, owner);
+			Setup(value);
 		}
 
-		private void Setup(GraphCaller value, Object owner)
+		private void Setup(GraphNode value)
 		{
-			_control = new GraphCallerControl(value, owner);
+			_control = new GraphNodeControl(value);
 			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<GraphCaller>>(evt => base.value = evt.newValue);
+			_control.RegisterCallback<ChangeEvent<Object>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
@@ -31,7 +30,7 @@ namespace PiRhoSoft.Composition.Editor
 			SetValueWithoutNotify(value);
 		}
 
-		public override void SetValueWithoutNotify(GraphCaller newValue)
+		public override void SetValueWithoutNotify(Object newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
 			_control.SetValueWithoutNotify(newValue);

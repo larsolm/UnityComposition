@@ -1,0 +1,17 @@
+﻿.pirho-graph-node
+{
+	flex-direction: row;
+}
+
+.pirho-graph-node__label
+{
+	flex-grow: 1;
+	padding: 2px 2px 2px 0px;
+}
+
+.pirho-graph-node__icon
+{
+	width: 16px;
+	height: 14px;
+	align-self: center;
+}
