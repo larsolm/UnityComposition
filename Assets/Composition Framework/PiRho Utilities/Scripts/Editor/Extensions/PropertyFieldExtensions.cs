@@ -7,8 +7,12 @@ namespace PiRhoSoft.Utilities.Editor
 	{
 		public static void SetLabel(this PropertyField field, string label)
 		{
-			var baseField = field.Q(className: BaseFieldExtensions.UssClassName);
-			BaseFieldExtensions.SetLabel(baseField, label);
+			// This must be scheduled because the field won't be created until the next frame after the Property Field has been set up
+			field.schedule.Execute(() =>
+			{
+				var baseField = field.Q(className: BaseFieldExtensions.UssClassName);
+				BaseFieldExtensions.SetLabel(baseField, label);
+			}).StartingIn(0);
 		}
 	}
 }

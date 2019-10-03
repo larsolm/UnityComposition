@@ -36,7 +36,7 @@ namespace PiRhoSoft.Utilities.Editor
 			{
 				var field = new PropertyField(child);
 				if (!showMemberLabels)
-					container.schedule.Execute(() => field.SetLabel(null)).StartingIn(0);
+					field.SetLabel(null);
 
 				childContainer.Add(field);
 			}

@@ -63,42 +63,42 @@ namespace PiRhoSoft.Composition.Editor
 			this.Bind(serializedObject);
 		}
 
-		protected TextField CreateEditableLabel(TextElement container, string bindingPath, bool multiline = false)
-		{
-			var edit = new TextField { bindingPath = bindingPath, multiline = multiline };
-			edit.AddToClassList(NodeEditableLabelUssClassName);
-			edit.Q(TextField.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
-
-			container.bindingPath = bindingPath;
-			container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit));
-			container.RegisterValueChangedCallback(e => container.text = e.newValue);
-			container.Add(edit);
-
-			HideEditableText(edit);
-
-			return edit;
-		}
-
-		protected void ShowEditableText(TextField edit)
-		{
-			edit.style.visibility = Visibility.Visible;
-			edit.Focus();
-		}
-
-		protected void HideEditableText(TextField edit)
-		{
-			if (edit != null) // this needs to be here for when it is stupidly called after node is destroyed
-				edit.style.visibility = Visibility.Hidden;
-		}
-
-		private void OnEditEvent(MouseDownEvent evt, TextField edit)
-		{
-			if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
-			{
-				ShowEditableText(edit);
-				evt.PreventDefault();
-			}
-		}
+		//protected TextField CreateEditableLabel(TextElement container, string bindingPath, bool multiline = false)
+		//{
+		//	var edit = new TextField { bindingPath = bindingPath, multiline = multiline };
+		//	edit.AddToClassList(NodeEditableLabelUssClassName);
+		//	edit.Q(TextField.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
+		//
+		//	container.bindingPath = bindingPath;
+		//	container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit));
+		//	container.RegisterValueChangedCallback(e => container.text = e.newValue);
+		//	container.Add(edit);
+		//
+		//	HideEditableText(edit);
+		//
+		//	return edit;
+		//}
+		//
+		//protected void ShowEditableText(TextField edit)
+		//{
+		//	edit.style.visibility = Visibility.Visible;
+		//	edit.Focus();
+		//}
+		//
+		//protected void HideEditableText(TextField edit)
+		//{
+		//	if (edit != null) // this needs to be here for when it is stupidly called after node is destroyed
+		//		edit.style.visibility = Visibility.Hidden;
+		//}
+		//
+		//private void OnEditEvent(MouseDownEvent evt, TextField edit)
+		//{
+		//	if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
+		//	{
+		//		ShowEditableText(edit);
+		//		evt.PreventDefault();
+		//	}
+		//}
 
 		protected void CreateDeleteButton()
 		{
@@ -126,5 +126,46 @@ namespace PiRhoSoft.Composition.Editor
 
 			titleContainer.style.backgroundColor = style.TryGetValue(_nodeColorProperty, out var nodeColor) ? nodeColor : Data.Node.NodeColor;
 		}
+
+		#region Editable Label
+		
+		public static TextField CreateEditableLabel(TextElement container, string bindingPath, bool multiline = false)
+		{
+			var edit = new TextField { bindingPath = bindingPath, multiline = multiline };
+			edit.AddToClassList(NodeEditableLabelUssClassName);
+			edit.Q(TextField.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
+
+			container.bindingPath = bindingPath;
+			container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit));
+			container.RegisterValueChangedCallback(e => container.text = e.newValue);
+			container.Add(edit);
+
+			HideEditableText(edit);
+
+			return edit;
+		}
+
+		public static void ShowEditableText(TextField edit)
+		{
+			edit.style.visibility = Visibility.Visible;
+			edit.Focus();
+		}
+
+		public static void HideEditableText(TextField edit)
+		{
+			if (edit != null) // this needs to be here for when it is stupidly called after node is destroyed
+				edit.style.visibility = Visibility.Hidden;
+		}
+
+		public static void OnEditEvent(MouseDownEvent evt, TextField edit)
+		{
+			if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
+			{
+				ShowEditableText(edit);
+				evt.PreventDefault();
+			}
+		}
+
+		#endregion
 	}
 }

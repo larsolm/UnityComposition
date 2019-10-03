@@ -19,27 +19,6 @@ namespace PiRhoSoft.Composition.Editor
 			m_EdgeConnector = new EdgeConnector<Edge>(edgeListener);
 			this.AddManipulator(m_EdgeConnector);
 		}
-
-		protected void ShowEditableText(TextField edit)
-		{
-			edit.style.visibility = Visibility.Visible;
-			edit.Focus();
-		}
-
-		protected void HideEditableText(TextField edit)
-		{
-			if (edit != null) // this needs to be here for when it is called after node is destroyed
-				edit.style.visibility = Visibility.Hidden;
-		}
-
-		private void OnEditEvent(MouseDownEvent evt, TextField edit)
-		{
-			if (evt.clickCount == 2 && evt.button == (int)MouseButton.LeftMouse)
-			{
-				ShowEditableText(edit);
-				evt.PreventDefault();
-			}
-		}
 	}
 
 	public class GraphViewInputPort : GraphViewPort
@@ -63,6 +42,7 @@ namespace PiRhoSoft.Composition.Editor
 	public class GraphViewOutputPort : GraphViewPort
 	{
 		public const string UssOutputClassName = UssClassName + "--output";
+		public const string EditableLabelUssClassName = UssClassName + "__editable-label";
 
 		public GraphNode.ConnectionData Connection { get; private set; }
 
@@ -76,7 +56,7 @@ namespace PiRhoSoft.Composition.Editor
 			m_ConnectorText.style.unityTextAlign = TextAnchor.MiddleLeft;
 
 			if (nameProperty != null)
-				m_ConnectorText.bindingPath = nameProperty.propertyPath;
+				GraphViewNode.CreateEditableLabel(m_ConnectorText, nameProperty.propertyPath);
 		}
 
 		public override void OnStartEdgeDragging()
