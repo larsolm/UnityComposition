@@ -28,16 +28,18 @@ MonoBehaviour:
   Context:
     Type: 1
     Reference:
-      _variable: context
+      _variable: context as Component
       _tokens:
       - Type: 0
         Text: context
+      - Type: 2
+        Text: Component
     Value:
       _variableData:
         Version: 1
         Data: AQAAAAAAAAA=
         References: []
-  WaitForCompletion: 1
+  WaitForCompletion: 0
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,6 +67,31 @@ MonoBehaviour:
   Nodes:
   - {fileID: -8009924615641308950}
   - {fileID: 4844405298555019272}
+  - {fileID: 813650219417967429}
+--- !u!114 &813650219417967429
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
+  m_Name: MessageNode
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 460, y: -61.99997}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Control:
+    _variable: 
+    _tokens: []
+  WaitForCompletion: 1
+  AutoHide: 0
+  WaitTime: 0
+  Message:
+    Text: // TODO - Start here in making this work
 --- !u!114 &4844405298555019272
 MonoBehaviour:
   m_ObjectHideFlags: 1

@@ -23,7 +23,6 @@ namespace PiRhoSoft.Composition.Editor
 			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
 			{
 				Value.Graph = evt.newValue as Graph;
-				Refresh();
 			});
 
 			_inputsProxy = new InputsProxy(Value, owner) { Label = "Inputs", Tooltip = "The input values to set for the Graph" };
@@ -158,7 +157,6 @@ namespace PiRhoSoft.Composition.Editor
 				container.Add(referenceControl);
 
 				return container;
-
 			}
 		}
 	}

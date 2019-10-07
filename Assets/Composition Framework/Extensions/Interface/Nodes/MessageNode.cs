@@ -25,6 +25,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public float WaitTime = 0.0f;
 
 		[Tooltip("The message to display when this node is traversed")]
+		[Stretch]
 		public Message Message = new Message();
 
 		public override Color NodeColor => Colors.InterfaceCyan;

@@ -43,7 +43,7 @@ namespace PiRhoSoft.Composition
 		public const char LookupOpen = '[';
 		public const char LookupClose = ']';
 
-		[SerializeField] private string _variable = string.Empty;
+		[SerializeField] protected string _variable = string.Empty;
 		[SerializeField] private List<VariableToken> _tokens = new List<VariableToken>();
 
 		public bool IsValid => string.IsNullOrEmpty(_variable) || _tokens.Count > 0;

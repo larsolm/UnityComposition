@@ -1,0 +1,9 @@
+{
+	"samples": [
+		{
+			"displayName": "PiRhoUtility Samples",
+			"description": "Sample scene and scripts to show how PiRhoUtilities can be used",
+			"path": "Samples~/PiRhoUtiltySamples"
+		}
+	]
+}

@@ -1,0 +1,8 @@
+﻿.pirho-message
+{
+}
+
+.pirho-message__text
+{
+	margin: 1px 0px;
+}

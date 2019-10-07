@@ -42,11 +42,11 @@ namespace PiRhoSoft.Composition.Editor
 
 			_simpleControl = new VariableReferencePopupControl(this);
 			_simpleControl.AddToClassList(SimpleUssClassName);
-			_simpleControl.RegisterCallback<ChangeEvent<VariableReference>>(evt => Refresh());
+			_simpleControl.RegisterCallback<ChangeEvent<string>>(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
 
 			_advancedControl = new VariableReferenceTextControl(this);
 			_advancedControl.AddToClassList(AdvancedUssClassName);
-			_advancedControl.RegisterCallback<ChangeEvent<VariableReference>>(evt => Refresh());
+			_advancedControl.RegisterCallback<ChangeEvent<string>>(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
 
 			Add(_modeToggle);
 			Add(_simpleControl);
@@ -58,9 +58,9 @@ namespace PiRhoSoft.Composition.Editor
 			Refresh();
 		}
 
-		public void SetValueWithoutNotify(VariableReference value)
+		public void SetValueWithoutNotify(string value)
 		{
-			Value = value;
+			Value.Variable = value;
 			Refresh();
 		}
 

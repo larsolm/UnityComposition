@@ -9,9 +9,12 @@ namespace PiRhoSoft.Composition
 	public class Message : ISerializationCallbackReceiver
 	{
 		private const string _missingVariableWarning = "(CIMMV) Unable to get text from Message '{0}': the Variable '{1}' could not be found";
+
+		public const char LookupOpen = '{';
+		public const char LookupClose = '}';
+
 		private static StringBuilder _temporaryBuilder = new StringBuilder();
 
-		[TextArea(3, 8)]
 		public string Text = string.Empty;
 		public bool HasText => !string.IsNullOrEmpty(Text);
 
@@ -93,12 +96,12 @@ namespace PiRhoSoft.Composition
 
 			while (start < input.Length)
 			{
-				var open = input.IndexOf('{', start);
-				var close = input.IndexOf('}', open + 1);
+				var open = input.IndexOf(LookupOpen, start);
+				var close = input.IndexOf(LookupClose, open + 1);
 
 				if (open > start && input[open - 1] == '\\')
 				{
-					var text = input.Substring(start, open - start - 1) + '{';
+					var text = input.Substring(start, open - start - 1) + LookupOpen;
 					_tokens.Add(new MessageToken { Text = text });
 					start = open + 1;
 				}

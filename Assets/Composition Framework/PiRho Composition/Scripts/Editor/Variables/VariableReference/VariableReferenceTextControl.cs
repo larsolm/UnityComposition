@@ -41,9 +41,9 @@ namespace PiRhoSoft.Composition.Editor
 			RegisterCallback<DetachFromPanelEvent>(evt => _autocomplete.RemoveFromHierarchy());
 
 			_textField.AddToClassList(TextUssClassName);
-			_textField.RegisterValueChangedCallback(evt => SetValue(evt.newValue));
+			_textField.RegisterValueChangedCallback(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
 			_textField.RegisterCallback<KeyDownEvent>(OnKeyDown);
-			_textField.RegisterCallback<MouseUpEvent>(evt => UpdateAutocomplete(_textField.cursorIndex));
+			_textField.Q(className: TextField.inputUssClassName).RegisterCallback<MouseUpEvent>(evt => UpdateAutocomplete(_textField.cursorIndex));
 			_textField.RegisterCallback<FocusEvent>(evt => Show());
 			_textField.RegisterCallback<BlurEvent>(evt => Hide());
 		}
@@ -51,14 +51,7 @@ namespace PiRhoSoft.Composition.Editor
 		public void Refresh()
 		{
 			_textField.SetValueWithoutNotify(_control.Value.Variable);
-
 			UpdateAutocomplete(_textField.cursorIndex);
-		}
-
-		private void SetValue(string value)
-		{
-			_control.Value.Variable = value;
-			this.SendChangeEvent(_control.Value, _control.Value);
 		}
 
 		private void Show()

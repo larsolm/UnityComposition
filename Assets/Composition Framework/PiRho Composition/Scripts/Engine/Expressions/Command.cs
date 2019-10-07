@@ -109,7 +109,7 @@ namespace PiRhoSoft.Composition
 		[Serializable] public class ParameterList : SerializedList<Parameter> { }
 
 		[ChangeTrigger(nameof(OnNameChanged))]
-		[Delayed]
+		[Delay]
 		public string Name;
 
 		[List]

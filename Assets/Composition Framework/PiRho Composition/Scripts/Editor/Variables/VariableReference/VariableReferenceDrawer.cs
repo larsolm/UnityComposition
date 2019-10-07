@@ -9,8 +9,8 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var item = Autocomplete.GetItem(property.serializedObject.targetObject);
-			var field = new VariableReferenceField(property.displayName, property.GetObject<VariableReference>(), item);
+			var autocomplete = Autocomplete.GetItem(property.serializedObject.targetObject);
+			var field = new VariableReferenceField(property.displayName, property.GetObject<VariableReference>(), autocomplete);
 			return field.ConfigureProperty(property, this.GetTooltip());
 		}
 	}

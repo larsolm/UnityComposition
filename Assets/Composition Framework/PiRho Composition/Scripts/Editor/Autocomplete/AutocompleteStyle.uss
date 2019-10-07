@@ -1,0 +1,27 @@
+﻿.pirho-autocomplete
+{
+	flex-grow: 1;
+	display: none;
+	position: absolute;
+}
+
+.pirho-autocomplete--open
+{
+	display: flex;
+}
+
+.pirho-autocomplete__scroll-view
+{
+	flex-grow: 1;
+}
+
+.pirho-autocomplete__item
+{
+	background-color: #FFF;
+	white-space: nowrap;
+}
+
+.pirho-autocomplete__item--active
+{
+	background-color: #CCF;
+}

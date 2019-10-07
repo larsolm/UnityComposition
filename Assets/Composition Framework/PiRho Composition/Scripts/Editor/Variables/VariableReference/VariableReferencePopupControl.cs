@@ -32,8 +32,6 @@ namespace PiRhoSoft.Composition.Editor
 
 			_errorMessage = new MessageBox(MessageBoxType.Warning, "This Variable Reference cannot currently be edited with dropdowns. Either a variable definition has changed or invalid values were entered in text mode. Use text mode to fix");
 			_errorMessage.AddToClassList(ErrorMessageUssClassName);
-
-			Refresh();
 		}
 
 		public void Refresh()
@@ -200,9 +198,8 @@ namespace PiRhoSoft.Composition.Editor
 				source = item;
 			}
 
-			_control.Value.Tokens = tokens;
-
-			this.SendChangeEvent(null, _control.Value);
+			var value = VariableReference.Format(tokens);
+			this.SendChangeEvent(_control.Value.Variable, value);
 		}
 
 		private void SelectIndex(int selectedIndex, int itemIndex)

@@ -9,8 +9,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var field = new GraphCallerField(property.displayName, property.GetObject<GraphCaller>(), property.serializedObject.targetObject);
-			return field.ConfigureProperty(property, this.GetTooltip());
+			return new GraphCallerField(property, this.GetTooltip());
 		}
 	}
 }
