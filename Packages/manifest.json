@@ -44,13 +44,13 @@
     "com.unity.modules.xr": "1.0.0"
   },
   "lock": {
+    "com.pirho.utilities": {
+      "revision": "upm",
+      "hash": "58c8db65aa83c7fd79c0b74604b8ca15956a54cf"
+    },
     "com.unity.2d.tilemap.extras": {
       "revision": "master",
       "hash": "249b0d4c0462ce40ea52d2b366178f24d13e42e9"
-    },
-    "com.pirho.utilities": {
-      "revision": "upm",
-      "hash": "7d4ba499c993c9343845041de3efffa251158a96"
     }
   }
 }
