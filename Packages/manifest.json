@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "com.pirho.utilities": "https://github.com/pirhosoft/PiRhoUtilities.git#upm",
     "com.unity.2d.pixel-perfect": "2.0.2",
     "com.unity.2d.sprite": "1.0.0",
     "com.unity.2d.tilemap": "1.0.0",
@@ -46,6 +47,10 @@
     "com.unity.2d.tilemap.extras": {
       "revision": "master",
       "hash": "249b0d4c0462ce40ea52d2b366178f24d13e42e9"
+    },
+    "com.pirho.utilities": {
+      "revision": "upm",
+      "hash": "7d4ba499c993c9343845041de3efffa251158a96"
     }
   }
 }

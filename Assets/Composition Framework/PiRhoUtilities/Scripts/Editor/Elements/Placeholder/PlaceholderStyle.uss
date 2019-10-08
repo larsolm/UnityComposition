@@ -1,7 +1,0 @@
-﻿.pirho-placeholder
-{
-	flex-grow: 1;
-	position: absolute;
-	padding: 0px 3px;
-	opacity: 0.5;
-}

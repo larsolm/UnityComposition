@@ -1,8 +1,0 @@
-﻿.pirho-required
-{
-}
-
-.pirho-required__message-box
-{
-	margin-bottom: 2px;
-}
