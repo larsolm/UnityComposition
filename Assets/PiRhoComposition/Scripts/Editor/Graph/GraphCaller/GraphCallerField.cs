@@ -33,6 +33,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			var graphField = new ObjectPickerField(property.displayName, Value.Graph, property.serializedObject.targetObject, typeof(Graph));
 			graphField.RegisterValueChangedCallback(evt => Refresh());
+
 			var graph = graphField.ConfigureProperty(graphProperty, tooltip);
 
 			_inputsProxy = new InputsProxy(Value, inputsProperty) { Label = "Inputs", Tooltip = "The input values to set for the Graph" };

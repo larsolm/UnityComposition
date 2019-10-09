@@ -68,14 +68,8 @@ namespace PiRhoSoft.Composition.Editor
 			_textField.SetValueWithoutNotify(Value.Statement);
 			RefreshAutocomplete();
 
-			var variable = Variable;
-			if (variable.IndexOfAny(_invalidCharacters) >= 0)
-			{
-				variable = variable.Replace("\n", "");
-				variable = variable.Replace("\t", "");
-
-				Variable = variable;
-			}
+			if (Variable.IndexOfAny(_invalidCharacters) >= 0)
+				Variable = Variable.Replace("\t", "");
 		}
 
 		private void RefreshAutocomplete()
