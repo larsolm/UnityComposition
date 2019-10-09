@@ -68,6 +68,7 @@ MonoBehaviour:
   - {fileID: -8009924615641308950}
   - {fileID: 4844405298555019272}
   - {fileID: 813650219417967429}
+  - {fileID: 2573489444373147113}
 --- !u!114 &813650219417967429
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -91,7 +92,25 @@ MonoBehaviour:
   AutoHide: 0
   WaitTime: 0
   Message:
-    Text: // TODO - Start here in making this work
+    Text: 
+--- !u!114 &2573489444373147113
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
+  m_Name: ExpressionNode
+  m_EditorClassIdentifier: 
+  Graph: {fileID: 11400000}
+  GraphPosition: {x: 403, y: 32.00003}
+  IsBreakpoint: 0
+  Next: {fileID: 0}
+  Expression:
+    _statement: 
 --- !u!114 &4844405298555019272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -109,10 +128,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 0}
   TargetGraph:
-    Type: 0
+    Type: 1
     Reference:
-      _variable: 
-      _tokens: []
+      _variable: scene
+      _tokens:
+      - Type: 0
+        Text: scene
     Value:
       _graph: {fileID: 11400000, guid: 64c6ed2db90fff14981aea961b4930d0, type: 2}
       _inputs: []
@@ -120,10 +141,8 @@ MonoBehaviour:
   Context:
     Type: 1
     Reference:
-      _variable: context
-      _tokens:
-      - Type: 0
-        Text: context
+      _variable: 
+      _tokens: []
     Value:
       _variableData:
         Version: 1

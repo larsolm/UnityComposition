@@ -107,7 +107,7 @@ namespace PiRhoSoft.Composition.Editor
 			_defaultControl.AddToClassList(DefaultTypeUssClassName);
 			_defaultControl.RegisterCallback<ChangeEvent<Variable>>(evt => Value.Default = evt.newValue);
 
-			_expressionControl = new ExpressionControl(Value.Initializer) { tooltip = "The expression to execute and assign when initializing, resetting, or updating the variable" };
+			_expressionControl = new ExpressionControl(Value.Initializer, null) { tooltip = "The expression to execute and assign when initializing, resetting, or updating the variable" }; // TODO: Add autocomplete
 			_expressionControl.AddToClassList(ExpressionTypeUssClassName);
 
 			_initializer.Add(_typeToggle);

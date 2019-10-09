@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using PiRhoSoft.Utilities;
+using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -11,6 +12,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The expression to execute")]
+		[Stretch]
 		public Expression Expression = new Expression();
 
 		public override Color NodeColor => Colors.ExecutionDark;
