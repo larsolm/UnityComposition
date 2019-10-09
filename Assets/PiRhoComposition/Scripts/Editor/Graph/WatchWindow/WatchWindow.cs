@@ -268,7 +268,7 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
-		[UnityEditor.MenuItem("Window/PiRho Soft/Watch Window")]
+		[MenuItem("Window/PiRho Composition/Watch Window")]
 		public static void ShowWindow()
 		{
 			var window = GetWindow<WatchWindow>("Watch Window");

@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private IconButton _modeToggle;
 		private VariableReferencePopupControl _simpleControl;
-		private VariableReferenceTextControl _advancedControl;
+		private VariableReferenceAutocompleteControl _advancedControl;
 
 		private bool _advancedMode = false;
 
@@ -44,7 +44,7 @@ namespace PiRhoSoft.Composition.Editor
 			_simpleControl.AddToClassList(SimpleUssClassName);
 			_simpleControl.RegisterCallback<ChangeEvent<string>>(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
 
-			_advancedControl = new VariableReferenceTextControl(this);
+			_advancedControl = new VariableReferenceAutocompleteControl(this);
 			_advancedControl.AddToClassList(AdvancedUssClassName);
 			_advancedControl.RegisterCallback<ChangeEvent<string>>(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
 

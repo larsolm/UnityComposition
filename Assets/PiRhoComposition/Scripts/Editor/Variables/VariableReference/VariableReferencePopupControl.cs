@@ -9,16 +9,17 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class VariableReferencePopupControl : VisualElement
 	{
-		public const string UssClassName = VariableReferenceControl.SimpleUssClassName;
-		public const string ContainerUssClassName = UssClassName + "__container";
+		public const string Stylesheet = "Variables/VariableReference/VariableReferencePopupStyle.uss";
+		public const string UssClassName = "pirho-variable-reference-popup";
 		public const string InvalidUssClassName = UssClassName + "--invalid";
+		public const string ContainerUssClassName = UssClassName + "__container";
 		public const string ErrorMessageUssClassName = UssClassName + "__error";
 		public const string ItemUssClassName = UssClassName + "__item";
+		public const string ItemInvalidUssClassName = ItemUssClassName + "--invalid";
 		public const string PopupUssClassName = ItemUssClassName + "__popup";
 		public const string ComboBoxUssClassName = ItemUssClassName + "__combo-box";
 		public const string ArrayIndexUssClassName = ItemUssClassName + "__array-index";
 		public const string EmptyUssClassName = ItemUssClassName + "--empty";
-		public const string ItemInvalidUssClassName = ItemUssClassName + "--invalid";
 
 		private const string _emptyText = "-Empty-";
 		private const string _indexedText = "-Indexed-";
@@ -32,6 +33,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			_errorMessage = new MessageBox(MessageBoxType.Warning, "This Variable Reference cannot currently be edited with dropdowns. Either a variable definition has changed or invalid values were entered in text mode. Use text mode to fix");
 			_errorMessage.AddToClassList(ErrorMessageUssClassName);
+
+			AddToClassList(UssClassName);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 		}
 
 		public void Refresh()

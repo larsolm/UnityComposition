@@ -1,0 +1,11 @@
+﻿.pirho-variable-reference-autocomplete
+{
+	align-self: center;
+	flex-grow: 1;
+	margin-left: 5px;
+}
+
+.pirho-variable-reference-autocomplete__text
+{
+	margin: 1px 0px;
+}

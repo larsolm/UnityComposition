@@ -1,0 +1,80 @@
+﻿.pirho-variable-reference-popup
+{
+	flex-grow: 1;
+}
+
+.pirho-variable-reference-popup__container
+{
+	flex-direction: row;
+	flex-grow: 1;
+}
+
+.pirho-variable-reference-popup__error
+{
+	display: none;
+	margin-left: 5px;
+}
+
+.pirho-variable-reference-popup--invalid .pirho-variable-reference__simple__error
+{
+	display: flex;
+}
+
+.pirho-variable-reference-popup__item
+{
+	flex-direction: row;
+	flex-grow: 1;
+	margin-left: 5px;
+}
+
+.pirho-variable-reference-popup__item--empty
+{
+	min-width: 17px;
+}
+
+.pirho-variable-reference-popup__item--empty .pirho-variable-reference-popup__item__popup .unity-popup-field__input
+{
+	min-width: 17px;
+	max-width: 17px;
+	padding-right: 17px;
+}
+
+.pirho-variable-reference-popup__item--invalid
+{
+	margin: 0px 0px 1px 0px;
+	flex-grow: 1;
+}
+
+.pirho-variable-reference-popup__item__popup .unity-popup-field__input
+{
+	padding-right: 20px;
+	min-width: 0;
+}
+
+.pirho-variable-reference-popup__item__popup
+{
+	margin: 1px 0px;
+	flex-grow: 1;
+}
+
+
+.pirho-variable-reference-popup__item--empty .pirho-variable-reference__simple__item__popup PopupTextElement
+{
+	visibility: hidden;
+}
+
+.pirho-variable-reference-popup__item__combo-box
+{
+}
+
+.pirho-variable-reference-popup__item__array-index
+{
+	min-width: 25px;
+	margin: 1px 0px;
+}
+
+.pirho-variable-reference-popup__item__array-index > IntegerInput
+{
+	border-width: 1px;
+	padding: 1px 2px;
+}

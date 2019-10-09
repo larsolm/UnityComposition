@@ -9,21 +9,17 @@ namespace PiRhoSoft.Composition.Editor
 	public interface IAutocompleteProxy
 	{
 		IAutocompleteItem Autocomplete { get; }
-		TextField TextField { get; }
+		Vector2 ControlPosition { get; }
 
-		string Variable { get; }
-		int Cursor { get; }
-
-		void SetVariable(string value);
-		void SetCursor(int cursor);
-		Vector2 GetPosition();
+		string Variable { get; set; }
+		int Cursor { get; set; }
 	}
 
 	public class AutocompleteControl : VisualElement
 	{
 		private static readonly List<KeyCode> _openKeys = new List<KeyCode> { KeyCode.Escape, KeyCode.Tab };
 		private static readonly List<KeyCode> _closeKeys = new List<KeyCode> { KeyCode.Escape };
-		private static readonly List<KeyCode> _selectKeys = new List<KeyCode> { KeyCode.Tab, KeyCode.KeypadEnter, KeyCode.Return, KeyCode.KeypadPeriod, KeyCode.Period, KeyCode.LeftBracket, KeyCode.Space };
+		private static readonly List<KeyCode> _selectKeys = new List<KeyCode> { KeyCode.Tab, KeyCode.KeypadEnter, KeyCode.Return, KeyCode.KeypadPeriod, KeyCode.Period, KeyCode.LeftBracket, KeyCode.RightBracket, KeyCode.Space };
 		private static readonly char[] _separators = { VariableReference.Separator, VariableReference.LookupOpen, VariableReference.LookupClose, ' ' };
 		private static readonly Vector2 _windowSize = new Vector2(150, 300);
 
@@ -36,10 +32,12 @@ namespace PiRhoSoft.Composition.Editor
 		private IAutocompleteProxy _proxy;
 		private AutocompletePopup _autocomplete;
 		private TextElement _measure;
+		private TextField _textField;
 
-		public AutocompleteControl(IAutocompleteProxy proxy)
+		public AutocompleteControl(IAutocompleteProxy proxy, TextField textField)
 		{
 			_proxy = proxy;
+			_textField = textField;
 			_autocomplete = new AutocompletePopup(this);
 			_measure = new TextElement();
 
@@ -48,10 +46,10 @@ namespace PiRhoSoft.Composition.Editor
 			RegisterCallback<AttachToPanelEvent>(evt => evt.destinationPanel.visualTree.Q<TemplateContainer>().Add(_autocomplete));
 			RegisterCallback<DetachFromPanelEvent>(evt => _autocomplete.RemoveFromHierarchy());
 
-			_proxy.TextField.RegisterCallback<KeyDownEvent>(OnKeyDown);
-			_proxy.TextField.Q(className: TextField.inputUssClassName).RegisterCallback<MouseUpEvent>(evt => Refresh());
-			_proxy.TextField.RegisterCallback<FocusEvent>(evt => Show());
-			_proxy.TextField.RegisterCallback<BlurEvent>(evt => Hide());
+			_textField.RegisterCallback<KeyDownEvent>(OnKeyDown);
+			_textField.Q(className: TextField.inputUssClassName).RegisterCallback<MouseUpEvent>(evt => Refresh());
+			_textField.RegisterCallback<FocusEvent>(evt => Show());
+			_textField.RegisterCallback<BlurEvent>(evt => Hide());
 		}
 
 		public void Show()
@@ -164,7 +162,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var index = GetLastSeparatorIndex(cursorIndex);
 			if (index < 0)
-				return GetSubtext(cursorIndex - 1);
+				return GetSubtext(cursorIndex);
 			else if (index >= _proxy.Variable.Length - 1)
 				return _proxy.Variable[_proxy.Variable.Length - 1].ToString();
 			else
@@ -176,7 +174,7 @@ namespace PiRhoSoft.Composition.Editor
 			var index = GetLastSeparatorIndex(cursorIndex);
 			var subtext = GetSubtext(index);
 			var size = _measure.MeasureTextSize(subtext, 0, MeasureMode.Undefined, 0, MeasureMode.Undefined);
-			var position = _proxy.GetPosition() + size;
+			var position = _proxy.ControlPosition + size;
 
 			return new Rect(position, _windowSize);
 		}
@@ -200,6 +198,7 @@ namespace PiRhoSoft.Composition.Editor
 				else if (_closeKeys.Contains(evt.keyCode))
 				{
 					Hide();
+					evt.StopPropagation();
 					evt.PreventDefault();
 				}
 				else if (_selectKeys.Contains(evt.keyCode))
@@ -227,15 +226,15 @@ namespace PiRhoSoft.Composition.Editor
 				var cursor = previousIndex + _autocomplete.ActiveName.Length;
 				var value = previous.Insert(previousIndex, _autocomplete.ActiveName);
 
-				_proxy.SetVariable(value);
-				_proxy.SetCursor(cursor);
+				_proxy.Variable = value;
+				_proxy.Cursor = cursor;
 
-				if (key == KeyCode.Tab || key == KeyCode.KeypadEnter || key == KeyCode.Return)
+				if (!_textField.multiline && (key == KeyCode.Tab || key == KeyCode.KeypadEnter || key == KeyCode.Return))
 				{
 					schedule.Execute(() =>
 					{
-						_proxy.TextField.Q(className: TextField.inputUssClassName).Focus();
-						_proxy.SetCursor(cursor);
+						_textField.Q(className: TextField.inputUssClassName).Focus();
+						_proxy.Cursor = cursor;
 					}).StartingIn(0);
 				}
 			}
@@ -243,8 +242,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class AutocompletePopup : VisualElement
 		{
-			public const string Stylesheet = "Variables/VariableReference/VariableReferenceTextStyle.uss";
-			public const string UssClassName = "pirho-variable-reference-text";
+			public const string Stylesheet = "Autocomplete/AutocompleteStyle.uss";
+			public const string UssClassName = "pirho-autocomplete";
 			public const string OpenClassName = UssClassName + "--open";
 			public const string ScrollViewUssClassName = UssClassName + "__scroll-view";
 			public const string ItemUssClassName = UssClassName + "__item";

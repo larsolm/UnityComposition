@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities.Editor;
-using System;
 using UnityEditor;
 using UnityEditor.Callbacks;
 using UnityEngine;
@@ -21,7 +20,7 @@ namespace PiRhoSoft.Composition.Editor
 			Graph.OnBreakpointHit += BreakpointHit;
 		}
 
-		[MenuItem("Window/PiRho Soft/Composition Graph")]
+		[MenuItem("Window/PiRho Composition/Graph View")]
 		public static GraphViewWindow ShowNewWindow()
 		{
 			var window = CreateWindow<GraphViewWindow>("Composition Graph");

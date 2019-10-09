@@ -8,7 +8,9 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public const string Stylesheet = "Variables/Message/MessageStyle.uss";
 		public const string UssClassName = "pirho-message";
-		public const string TextUssClassName = "pirho-message__text";
+		public const string TextUssClassName = UssClassName + "__text";
+
+		private readonly char[] _invalidCharacters = new char[] { '\n', '\t' };
 
 		public Message Value { get; private set; }
 
@@ -18,22 +20,22 @@ namespace PiRhoSoft.Composition.Editor
 		private int _currentCloseIndex = -1;
 
 		private TextElement _measure;
+		private TextField _textField;
 
 		public MessageControl(Message value, IAutocompleteItem autocomplete)
 		{
 			Value = value;
 
-			TextField = new TextField { multiline = true };
-			TextField.AddToClassList(TextUssClassName);
-			TextField.RegisterCallback<KeyDownEvent>(OnKeyDown);
-			TextField.RegisterValueChangedCallback(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
-			TextField.Q(className: TextField.inputUssClassName).RegisterCallback<MouseUpEvent>(OnMouseUp);
+			_textField = new TextField { multiline = true };
+			_textField.AddToClassList(TextUssClassName);
+			_textField.RegisterCallback<KeyDownEvent>(OnKeyDown);
+			_textField.Q(className: TextField.inputUssClassName).RegisterCallback<MouseUpEvent>(evt => RefreshAutocomplete());
 
 			_autocomplete = autocomplete;
-			_autocompleteControl = new AutocompleteControl(this);
+			_autocompleteControl = new AutocompleteControl(this, _textField);
 			_measure = new TextElement();
 
-			Add(TextField);
+			Add(_textField);
 			Add(_autocompleteControl);
 			Add(_measure);
 
@@ -51,8 +53,41 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void Refresh()
 		{
-			TextField.SetValueWithoutNotify(Value.Text);
+			_textField.SetValueWithoutNotify(Value.Text);
 			RefreshAutocomplete();
+
+			var variable = Variable;
+			if (variable.IndexOfAny(_invalidCharacters) >= 0)
+			{
+				variable = variable.Replace("\n", "");
+				variable = variable.Replace("\t", "");
+
+				Variable = variable;
+			}
+		}
+
+		private void RefreshAutocomplete()
+		{
+			_currentOpenIndex = -1;
+			_currentCloseIndex = -1;
+
+			if (!string.IsNullOrEmpty(_textField.text) && _textField.cursorIndex > 0)
+			{
+				var openIndex = _textField.text.LastIndexOf(Message.LookupOpen, _textField.cursorIndex - 1);
+
+				if (openIndex >= 0)
+				{
+					var closeIndex = _textField.text.LastIndexOf(Message.LookupClose, _textField.cursorIndex - 1);
+
+					if (closeIndex < 0)
+					{
+						_currentOpenIndex = openIndex + 1;
+						_currentCloseIndex = _textField.text.IndexOf(Message.LookupClose, _textField.cursorIndex - 1);
+					}
+				}
+			}
+
+			_autocompleteControl.Refresh();
 		}
 
 		private void OnKeyDown(KeyDownEvent evt)
@@ -72,64 +107,63 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
-		private void OnMouseUp(MouseUpEvent evt)
-		{
-			RefreshAutocomplete();
-		}
-
-		private void RefreshAutocomplete()
-		{
-			_currentOpenIndex = -1;
-			_currentCloseIndex = -1;
-
-			if (!string.IsNullOrEmpty(TextField.text) && TextField.cursorIndex > 0)
-			{
-				var openIndex = TextField.text.LastIndexOf(Message.LookupOpen, TextField.cursorIndex - 1);
-
-				if (openIndex >= 0)
-				{
-					var closeIndex = TextField.text.LastIndexOf(Message.LookupClose, TextField.cursorIndex - 1);
-
-					if (closeIndex < 0)
-					{
-						_currentOpenIndex = openIndex + 1;
-						_currentCloseIndex = TextField.text.IndexOf(Message.LookupClose, TextField.cursorIndex - 1);
-					}
-				}
-			}
-
-			_autocompleteControl.Refresh();
-		}
-
 		#region IAutocompleteProxy Implementation
 
-		public TextField TextField { get; private set; }
 		public IAutocompleteItem Autocomplete => _currentOpenIndex < 0 ? null : _autocomplete;
 
-		public string Variable => _currentOpenIndex < 0 ? string.Empty : _currentCloseIndex < 0 ? TextField.text.Substring(_currentOpenIndex) : TextField.text.Substring(_currentOpenIndex, _currentCloseIndex - _currentOpenIndex);
-		public int Cursor => TextField.cursorIndex - _currentOpenIndex;
-
-		public void SetVariable(string value)
+		public Vector2 ControlPosition
 		{
-			var previous = TextField.text;
-			var prefix = _currentCloseIndex < 0 ? Value.Text.Remove(_currentOpenIndex) : Value.Text.Remove(_currentOpenIndex, _currentCloseIndex - _currentOpenIndex);
-			var next = prefix.Insert(_currentOpenIndex, value);
+			get
+			{
+				var text = _currentOpenIndex < 0 ? string.Empty : _textField.text.Substring(0, _currentOpenIndex);
+				var size = _measure.MeasureTextSize(text, 0, MeasureMode.Undefined, 0, MeasureMode.Undefined);
 
-			TextField.value = next;
+				return _textField.worldBound.position + size;
+			}
 		}
 
-		public void SetCursor(int cursor)
+		public string Variable
 		{
-			var index = cursor + _currentOpenIndex + 1;
-			TextField.SelectRange(index, index);
+			get
+			{
+				if (_currentOpenIndex < 0)
+					return string.Empty;
+
+				if (_currentCloseIndex < 0)
+					return _textField.text.Substring(_currentOpenIndex);
+						
+				return _textField.text.Substring(_currentOpenIndex, _currentCloseIndex - _currentOpenIndex);
+			}
+			set
+			{
+				var previous = _textField.text;
+				var prefix = _textField.text;
+
+				if (_currentOpenIndex < prefix.Length)
+				{
+					if (_currentCloseIndex < 0)
+						prefix = prefix.Remove(_currentOpenIndex);
+					else
+						prefix.Remove(_currentOpenIndex, _currentCloseIndex - _currentOpenIndex);
+				}
+
+				var next = prefix.Insert(_currentOpenIndex, value);
+
+				_textField.value = next;
+			}
 		}
 
-		public Vector2 GetPosition()
+		public int Cursor
 		{
-			var text = _currentOpenIndex < 0 ? string.Empty : TextField.text.Substring(0, _currentOpenIndex);
-			var size = _measure.MeasureTextSize(text, 0, MeasureMode.Undefined, 0, MeasureMode.Undefined);
-
-			return TextField.worldBound.position + size;
+			get
+			{
+				return _textField.cursorIndex - _currentOpenIndex;
+			}
+			set
+			{
+				var index = value + _currentOpenIndex + 1;
+				_textField.SelectRange(index, index);
+			}
 		}
 
 		#endregion

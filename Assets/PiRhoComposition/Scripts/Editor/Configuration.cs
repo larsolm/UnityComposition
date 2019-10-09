@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition.Editor
 	public static class Configuration
 	{
 		private static string _editorPath = null;
-		private const string _editorFolder = "PiRho Composition/Scripts/Editor/";
+		private const string _editorFolder = "PiRhoComposition/Scripts/Editor/";
 
 		internal static string EditorPath
 		{
