@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -11,22 +10,22 @@ namespace PiRhoSoft.Composition
 			return variable.AsQuaternion.ToString();
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
 			var quaternion = variable.AsQuaternion;
 
-			writer.Write(quaternion.x);
-			writer.Write(quaternion.y);
-			writer.Write(quaternion.z);
-			writer.Write(quaternion.w);
+			writer.Writer.Write(quaternion.x);
+			writer.Writer.Write(quaternion.y);
+			writer.Writer.Write(quaternion.z);
+			writer.Writer.Write(quaternion.w);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var x = reader.ReadSingle();
-			var y = reader.ReadSingle();
-			var z = reader.ReadSingle();
-			var w = reader.ReadSingle();
+			var x = reader.Reader.ReadSingle();
+			var y = reader.Reader.ReadSingle();
+			var z = reader.Reader.ReadSingle();
+			var w = reader.Reader.ReadSingle();
 
 			return Variable.Quaternion(new Quaternion(x, y, z, w));
 		}

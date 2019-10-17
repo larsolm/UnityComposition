@@ -9,7 +9,7 @@
     "com.unity.ide.visualstudio": "1.0.11",
     "com.unity.inputsystem": "1.0.0-preview",
     "com.unity.textmeshpro": "2.0.1",
-    "com.unity.timeline": "1.2.2",
+    "com.unity.timeline": "1.2.3",
     "com.unity.ugui": "1.0.0",
     "com.unity.modules.ai": "1.0.0",
     "com.unity.modules.androidjni": "1.0.0",
@@ -46,7 +46,7 @@
   "lock": {
     "com.pirho.utilities": {
       "revision": "upm",
-      "hash": "92850ae8665e3362db9b243df3630a9ce0b326f6"
+      "hash": "b248af34a748a3e46307d4409e1d338f3ea55d49"
     },
     "com.unity.2d.tilemap.extras": {
       "revision": "master",

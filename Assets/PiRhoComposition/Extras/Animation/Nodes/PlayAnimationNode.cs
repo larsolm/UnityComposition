@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The Animation Player to play the clip on")]
-		[VariableReference(typeof(AnimationPlayer))]
+		[VariableConstraint(typeof(AnimationPlayer))]
 		public VariableLookupReference AnimationPlayer = new VariableLookupReference();
 
 		[Tooltip("The Animation to play")]
@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject<AnimationPlayer>(this, AnimationPlayer, out var player))
 			{

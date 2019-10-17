@@ -27,7 +27,7 @@ namespace PiRhoSoft.Composition
 			_rightAlternative.ToString(builder);
 		}
 
-		public override Variable Evaluate(IVariableCollection variables)
+		public override Variable Evaluate(IVariableMap variables)
 		{
 			var left = Left.Evaluate(variables);
 			

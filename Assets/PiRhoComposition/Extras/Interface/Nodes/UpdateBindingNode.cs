@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The Object to update bindings for")]
-		[VariableReference(typeof(Object))]
+		[VariableConstraint(typeof(Object))]
 		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The binding group to update (updates all if empty)")]
@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		private BindingAnimationStatus _status = new BindingAnimationStatus();
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			_status.Reset();
 

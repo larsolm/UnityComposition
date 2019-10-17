@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Extensions
 	[Serializable]
 	public class AudioClipVariableSource : VariableSource<AudioClip> { }
 
-	[AddComponentMenu("PiRho Soft/Composition/Audio Manager")]
+	[AddComponentMenu("PiRho Composition/Audio Manager")]
 	[RequireComponent(typeof(AudioSource))]
 	public class AudioManager : SingletonBehaviour<AudioManager>
 	{

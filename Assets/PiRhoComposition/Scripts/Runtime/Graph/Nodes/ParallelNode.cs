@@ -17,7 +17,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Sequence;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			for (var i = 0; i < Nodes.Count; i++)
 			{
@@ -52,7 +52,7 @@ namespace PiRhoSoft.Composition
 			public bool IsFinished = false;
 		}
 
-		private IEnumerator Run(IGraphRunner graph, IVariableCollection variables, GraphNode node, string source, NodeState state)
+		private IEnumerator Run(IGraphRunner graph, IVariableMap variables, GraphNode node, string source, NodeState state)
 		{
 			yield return graph.Run(node, variables, source);
 			state.IsFinished = true;

@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: FlowerYellow
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: -2757444085851235607, guid: acd02d7065589bf4ab5bb4f2914c747b, type: 3}
+  - {fileID: 388093049040395086, guid: acd02d7065589bf4ab5bb4f2914c747b, type: 3}
+  - {fileID: 5200552784765383606, guid: acd02d7065589bf4ab5bb4f2914c747b, type: 3}
+  - {fileID: 1236421647502666424, guid: acd02d7065589bf4ab5bb4f2914c747b, type: 3}
+  m_MinSpeed: 0.5
+  m_MaxSpeed: 1
+  m_AnimationStartTime: 0
+  m_TileColliderType: 0

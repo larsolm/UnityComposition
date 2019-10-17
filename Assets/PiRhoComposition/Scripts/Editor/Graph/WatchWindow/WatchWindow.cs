@@ -113,7 +113,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var globalContainer = new VisualElement();
 			globalContainer.AddToClassList(UssGlobalClassName);
-			globalContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Collection));
+			globalContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Variables));
 
 			return globalContainer;
 		}
@@ -122,7 +122,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var collectionContainer = new VisualElement();
 			collectionContainer.AddToClassList(UssCollectionsClassName);
-			collectionContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Collection));
+			collectionContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Variables));
 
 			return collectionContainer;
 		}
@@ -131,7 +131,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			var watchedContainer = new VisualElement();
 			watchedContainer.AddToClassList(UssWatchedClassName);
-			watchedContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Collection));
+			watchedContainer.RegisterCallback<WatchWindow.WatchEvent>(evt => AddWatch(evt.Name, evt.Variables));
 
 			return watchedContainer;
 		}
@@ -172,10 +172,10 @@ namespace PiRhoSoft.Composition.Editor
 
 			if (CompositionManager.Exists)
 			{
-				_globalContainer.Add(new VariableCollectionControl(CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false));
-
-				foreach (var graph in CompositionManager.TrackingState.Keys)
-					_collectionsContainer.Add(new VariableCollectionControl(graph.name, graph.Variables, true, false));
+				//_globalContainer.Add(new VariableCollectionControl(CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false));
+				//
+				//foreach (var graph in CompositionManager.TrackingState.Keys)
+				//	_collectionsContainer.Add(new VariableCollectionControl(graph.name, graph.Variables, true, false));
 			}
 		}
 
@@ -221,9 +221,9 @@ namespace PiRhoSoft.Composition.Editor
 			return false;
 		}
 
-		private void AddWatch(string name, IVariableCollection collection)
+		private void AddWatch(string name, IVariableMap variables)
 		{
-			_watchedContainer.Add(new VariableCollectionControl(name, collection, false, true));
+			//_watchedContainer.Add(new VariableDictionaryControl(name, variables, false, true));
 		}
 
 		private bool ExecuteExpression(string text)
@@ -256,13 +256,13 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public class WatchEvent : EventBase<WatchEvent>
 		{
-			public IVariableCollection Collection { get; private set; }
+			public IVariableMap Variables { get; private set; }
 			public string Name { get; private set; }
 
-			public static WatchEvent GetPooled(IVariableCollection collection, string name)
+			public static WatchEvent GetPooled(IVariableMap variables, string name)
 			{
 				var pooled = GetPooled();
-				pooled.Collection = collection;
+				pooled.Variables = variables;
 				pooled.Name = name;
 				return pooled;
 			}

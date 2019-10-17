@@ -9,7 +9,7 @@ namespace PiRhoSoft.Composition
 	[HelpURL(Configuration.DocumentationUrl + "composition-manager")]
 	public sealed class CompositionManager : GlobalBehaviour<CompositionManager>
 	{
-		private class DefaultGlobalStore : IVariableCollection
+		private class DefaultGlobalStore : IVariableMap
 		{
 			private static readonly string[] _names = new string[] { GlobalStoreName, SceneStoreName };
 
@@ -22,8 +22,8 @@ namespace PiRhoSoft.Composition
 		public const string SceneStoreName = "scene";
 		public static string CommandFolder = "Commands";
 
-		public IVariableCollection DefaultStore { get; private set; } = new DefaultGlobalStore();
-		public VariableStore GlobalStore { get; private set; } = new VariableStore();
+		public IVariableMap DefaultStore { get; private set; } = new DefaultGlobalStore();
+		public VariableDictionary GlobalStore { get; private set; } = new VariableDictionary();
 		public SceneVariableCollection SceneStore { get; private set; } = new SceneVariableCollection();
 
 		private List<VariableBinding> _bindings = new List<VariableBinding>();
@@ -51,7 +51,7 @@ namespace PiRhoSoft.Composition
 			RunGraph(caller, DefaultStore, context);
 		}
 
-		public void RunGraph(GraphCaller caller, IVariableCollection store, Variable context)
+		public void RunGraph(GraphCaller caller, IVariableMap store, Variable context)
 		{
 			var enumerator = caller.Execute(store, context);
 			RunEnumerator(enumerator);

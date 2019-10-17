@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System;
+﻿using System;
 using System.Collections;
 using UnityEngine;
 
@@ -15,7 +14,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The Audio Player to play the sound on")]
-		[VariableReference(typeof(AudioPlayer))]
+		[VariableConstraint(typeof(AudioPlayer))]
 		public VariableLookupReference AudioPlayer = new VariableLookupReference();
 
 		[Tooltip("The sound to play")]
@@ -29,7 +28,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, AudioPlayer, out AudioPlayer player))
 			{

@@ -7,8 +7,8 @@ using Object = UnityEngine.Object;
 namespace PiRhoSoft.Composition.Extensions
 {
 	[DisallowMultipleComponent]
-	[AddComponentMenu("PiRho Soft/Interface/Menu")]
-	public class Menu : MonoBehaviour, IVariableCollection
+	[AddComponentMenu("PiRho Composition/Interface/Menu")]
+	public class Menu : MonoBehaviour, IVariableMap
 	{
 		public Action<MenuItem> OnItemBlurred;
 		public Action<MenuItem> OnItemFocused;

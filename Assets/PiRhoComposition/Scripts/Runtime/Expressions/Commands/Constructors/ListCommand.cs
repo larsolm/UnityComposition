@@ -4,7 +4,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class ListCommand : ICommand
 	{
-		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableMap variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 0)
 			{
@@ -17,7 +17,12 @@ namespace PiRhoSoft.Composition
 				if (!count.IsInt)
 					throw CommandEvaluationException.WrongParameterType(name, 0, count.Type, VariableType.Int);
 
-				return Variable.List(new VariableList(count.AsInt));
+				var list = new VariableList();
+
+				for (var i = 0; i < count.AsInt; i++)
+					list.AddVariable(Variable.Empty);
+
+				return Variable.List(list);
 			}
 
 			throw CommandEvaluationException.WrongParameterCount(name, parameters.Count, 0, 1);

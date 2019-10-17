@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (WaitForCompletion)
 				yield return LoadScene(variables);
@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator LoadScene(IVariableCollection variables)
+		private IEnumerator LoadScene(IVariableMap variables)
 		{
 			if (variables.Resolve(this, Scene, out var scene))
 			{

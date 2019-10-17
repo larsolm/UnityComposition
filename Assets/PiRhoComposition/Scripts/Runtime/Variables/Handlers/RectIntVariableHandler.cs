@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -11,22 +10,22 @@ namespace PiRhoSoft.Composition
 			return variable.AsRectInt.ToString();
 		}
 
-		protected internal override void Save_(Variable value, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable value, SerializedDataWriter writer)
 		{
 			var rect = value.AsRectInt;
 
-			writer.Write(rect.x);
-			writer.Write(rect.y);
-			writer.Write(rect.width);
-			writer.Write(rect.height);
+			writer.Writer.Write(rect.x);
+			writer.Writer.Write(rect.y);
+			writer.Writer.Write(rect.width);
+			writer.Writer.Write(rect.height);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var x = reader.ReadInt32();
-			var y = reader.ReadInt32();
-			var w = reader.ReadInt32();
-			var h = reader.ReadInt32();
+			var x = reader.Reader.ReadInt32();
+			var y = reader.Reader.ReadInt32();
+			var w = reader.Reader.ReadInt32();
+			var h = reader.Reader.ReadInt32();
 
 			return Variable.RectInt(new RectInt(x, y, w, h));
 		}

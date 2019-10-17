@@ -15,7 +15,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Sequence;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			for (var i = 0; i < Sequence.Count; i++)
 			{

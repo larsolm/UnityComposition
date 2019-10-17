@@ -21,7 +21,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Branch;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			var value = Switch.Execute(this, variables, VariableType.String);
 

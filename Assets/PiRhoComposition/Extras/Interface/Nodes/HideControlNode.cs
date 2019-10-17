@@ -10,12 +10,12 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The InterfaceControl to hide")]
-		[VariableReference(typeof(InterfaceControl))]
+		[VariableConstraint(typeof(InterfaceControl))]
 		public VariableLookupReference Control = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.InterfaceDark;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Control, out InterfaceControl control))
 				control.Deactivate();

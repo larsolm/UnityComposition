@@ -1,59 +1,116 @@
-﻿using System.Collections.Generic;
+﻿using PiRhoSoft.Utilities;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
+	public interface IVariableArray
+	{
+		int VariableCount { get; }
+		Variable GetVariable(int index);
+		SetVariableResult SetVariable(int index, Variable variable);
+	}
+
 	public interface IVariableList : IVariableArray
 	{
-		SetVariableResult AddVariable(Variable value);
+		SetVariableResult AddVariable(Variable variable);
 		SetVariableResult RemoveVariable(int index);
+		SetVariableResult ClearVariables();
 	}
 
 	public class VariableList : IVariableList
 	{
-		public VariableList()
-		{
-		}
+		private List<Variable> _variables = new List<Variable>();
 
-		public VariableList(int count)
-		{
-			for (var i = 0; i < count; i++)
-				Values.Add(Variable.Empty);
-		}
+		#region IVariableArray Implementation
 
-		public List<Variable> Values { get; private set; } = new List<Variable>();
-		public int VariableCount => Values.Count;
+		public int VariableCount
+		{
+			get => _variables.Count;
+		}
 
 		public Variable GetVariable(int index)
 		{
-			return index >= 0 && index < Values.Count ? Values[index] : Variable.Empty;
+			return index >= 0 && index < _variables.Count
+				? _variables[index]
+				: Variable.Empty;
 		}
 
-		public SetVariableResult AddVariable(Variable value)
+		public virtual SetVariableResult SetVariable(int index, Variable variable)
 		{
-			Values.Add(value);
+			if (index < 0 || index >= _variables.Count)
+				return SetVariableResult.NotFound;
+
+			_variables[index] = variable;
 			return SetVariableResult.Success;
 		}
 
-		public SetVariableResult RemoveVariable(int index)
-		{
-			if (index >= 0 && index < Values.Count)
-			{
-				Values.RemoveAt(index);
-				return SetVariableResult.Success;
-			}
+		#endregion
 
-			return SetVariableResult.NotFound;
+		#region IVariableList Implementation
+
+		public virtual SetVariableResult AddVariable(Variable variable)
+		{
+			_variables.Add(variable);
+			return SetVariableResult.Success;
 		}
 
-		public SetVariableResult SetVariable(int index, Variable value)
+		public virtual SetVariableResult RemoveVariable(int index)
 		{
-			if (index >= 0 && index < Values.Count)
-			{
-				Values[index] = value;
-				return SetVariableResult.Success;
-			}
+			if (index < 0 || index >= _variables.Count)
+				return SetVariableResult.NotFound;
 
-			return SetVariableResult.NotFound;
+			_variables.RemoveAt(index);
+			return SetVariableResult.Success;
 		}
+
+		public virtual SetVariableResult ClearVariables()
+		{
+			_variables.Clear();
+			return SetVariableResult.Success;
+		}
+
+		#endregion
+	}
+
+	[Serializable]
+	public class SerializedVariableList : VariableList, ISerializationCallbackReceiver
+	{
+		public const string BindingProperty = nameof(_data);
+
+		[SerializeField] private SerializedDataList _data = new SerializedDataList();
+
+		protected virtual void Serialize()
+		{
+			_data.Clear();
+
+			for (var i = 0; i < VariableCount; i++)
+			{
+				using (var writer = new SerializedDataWriter(_data))
+					VariableHandler.Save(GetVariable(i), writer);
+			}
+		}
+
+		protected virtual void Deserialize()
+		{
+			ClearVariables();
+
+			for (var i = 0; i < _data.Count; i++)
+			{
+				using (var reader = new SerializedDataReader(_data, i))
+				{
+					var variable = VariableHandler.Load(reader);
+					AddVariable(variable);
+				}
+			}
+		}
+
+		#region ISerializationCallbackReceiver Implementation
+
+		void ISerializationCallbackReceiver.OnBeforeSerialize() => Serialize();
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => Deserialize();
+
+		#endregion
 	}
 }

@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 
 namespace PiRhoSoft.Composition
 {
@@ -13,31 +12,31 @@ namespace PiRhoSoft.Composition
 			return ListString;
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
 			var list = variable.AsList as VariableList;
 
 			if (list != null)
 			{
-				writer.Write(list.VariableCount);
+				writer.Writer.Write(list.VariableCount);
 
 				for (var i = 0; i < list.VariableCount; i++)
-					Save(variable, writer, data);
+					Save(variable, writer);
 			}
 			else
 			{
-				writer.Write(-1);
+				writer.Writer.Write(-1);
 			}
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var count = reader.ReadInt32();
+			var count = reader.Reader.ReadInt32();
 			var list = new VariableList();
 
 			for (var i = 0; i < count; i++)
 			{
-				var item = Load(reader, data);
+				var item = Load(reader);
 				list.AddVariable(item);
 			}
 

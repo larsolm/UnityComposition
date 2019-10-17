@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 using UnityEngine.AddressableAssets;
 
 namespace PiRhoSoft.Composition
@@ -11,24 +10,24 @@ namespace PiRhoSoft.Composition
 			return value.AsAsset.ToString();
 		}
 
-		protected internal override void Save_(Variable value, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable value, SerializedDataWriter writer)
 		{
 			var asset = value.AsAsset;
 			var set = asset.RuntimeKeyIsValid();
 
-			writer.Write(set);
+			writer.Writer.Write(set);
 
 			if (set)
-				writer.Write(asset.RuntimeKey.ToString());
+				writer.Writer.Write(asset.RuntimeKey.ToString());
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var set = reader.ReadBoolean();
+			var set = reader.Reader.ReadBoolean();
 
 			if (set)
 			{
-				var guid = reader.ReadString();
+				var guid = reader.Reader.ReadString();
 				return Variable.Asset(new AssetReference(guid));
 			}
 

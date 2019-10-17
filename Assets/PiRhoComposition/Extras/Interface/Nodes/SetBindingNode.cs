@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The Binding Root to set bindings on")]
-		[VariableReference(typeof(BindingRoot))]
+		[VariableConstraint(typeof(BindingRoot))]
 		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The Variable store to set the bindings to")]
@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override Color NodeColor => Colors.Interface;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Object, out BindingRoot root))
 			{

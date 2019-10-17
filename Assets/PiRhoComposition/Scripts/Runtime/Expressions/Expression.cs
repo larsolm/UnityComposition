@@ -16,6 +16,8 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class Expression : ISerializationCallbackReceiver
 	{
+		public const string StatementField = nameof(_statement);
+
 		private const string _expressionParseError = "(CEPE) Failed to parse Expression at location {1} ({2}): {3}\nExpression: {0}";
 		private const string _expressionEvaluationError = "(CEEE) Failed to execute Expression '{0}' on '{1}': {2}";
 		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}' on '{1}': {2}";
@@ -65,7 +67,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public Variable Execute(Object context, IVariableCollection variables)
+		public Variable Execute(Object context, IVariableMap variables)
 		{
 			try
 			{
@@ -83,7 +85,7 @@ namespace PiRhoSoft.Composition
 			return Variable.Empty;
 		}
 
-		public Variable Execute(Object context, IVariableCollection variables, VariableType expectedType)
+		public Variable Execute(Object context, IVariableMap variables, VariableType expectedType)
 		{
 			var result = Execute(context, variables);
 
@@ -96,7 +98,7 @@ namespace PiRhoSoft.Composition
 			return result;
 		}
 
-		public Variable Evaluate(IVariableCollection variables, bool isolateVariables)
+		public Variable Evaluate(IVariableMap variables, bool isolateVariables)
 		{
 			var result = Variable.Empty;
 

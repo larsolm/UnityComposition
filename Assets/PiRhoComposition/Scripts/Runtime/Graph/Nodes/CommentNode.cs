@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 		[TextArea(3, 8)]
 		public string Comment = "Double click to insert comment";
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			yield break;
 		}

@@ -130,9 +130,9 @@ namespace PiRhoSoft.Composition.Editor
 			get
 			{
 				if (_currentCloseIndex < 0)
-					return _textField.text.Substring(_currentOpenIndex);
+					return _textField.text?.Substring(_currentOpenIndex) ?? string.Empty;
 
-				return _textField.text.Substring(_currentOpenIndex, _currentCloseIndex - _currentOpenIndex);
+				return _textField.text?.Substring(_currentOpenIndex, _currentCloseIndex - _currentOpenIndex) ?? string.Empty;
 			}
 			set
 			{

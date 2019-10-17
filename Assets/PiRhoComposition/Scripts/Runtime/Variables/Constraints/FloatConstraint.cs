@@ -56,22 +56,22 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public override void Save(BinaryWriter writer, SerializedData data)
+		public override void Save(SerializedDataWriter writer)
 		{
-			writer.Write(Minimum.HasValue);
-			writer.Write(Maximum.HasValue);
+			writer.Writer.Write(Minimum.HasValue);
+			writer.Writer.Write(Maximum.HasValue);
 
-			if (Minimum.HasValue) writer.Write(Minimum.Value);
-			if (Maximum.HasValue) writer.Write(Maximum.Value);
+			if (Minimum.HasValue) writer.Writer.Write(Minimum.Value);
+			if (Maximum.HasValue) writer.Writer.Write(Maximum.Value);
 		}
 
-		public override void Load(BinaryReader reader, SerializedData data)
+		public override void Load(SerializedDataReader reader)
 		{
-			var hasMinimum = reader.ReadBoolean();
-			var hasMaximum = reader.ReadBoolean();
+			var hasMinimum = reader.Reader.ReadBoolean();
+			var hasMaximum = reader.Reader.ReadBoolean();
 
-			Minimum = hasMinimum ? reader.ReadSingle() : (float?)null;
-			Maximum = hasMaximum ? reader.ReadSingle() : (float?)null;
+			Minimum = hasMinimum ? reader.Reader.ReadSingle() : (float?)null;
+			Maximum = hasMaximum ? reader.Reader.ReadSingle() : (float?)null;
 		}
 	}
 }

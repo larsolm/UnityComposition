@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionLight;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (!variables.Resolve(this, Context, out var context) && variables is GraphStore store)
 				context = store.Context;
@@ -95,7 +95,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		public IEnumerable Execute(Object owner, IVariableCollection variables, Variable context, bool waitForCompletion)
+		public IEnumerable Execute(Object owner, IVariableMap variables, Variable context, bool waitForCompletion)
 		{
 			if (Type == VariableSourceType.Value)
 			{

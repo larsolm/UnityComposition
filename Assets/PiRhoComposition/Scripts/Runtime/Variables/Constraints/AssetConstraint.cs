@@ -19,11 +19,11 @@ namespace PiRhoSoft.Composition
 			return true;
 		}
 
-		public override void Save(BinaryWriter writer, SerializedData data)
+		public override void Save(SerializedDataWriter writer)
 		{
 		}
 
-		public override void Load(BinaryReader reader, SerializedData data)
+		public override void Load(SerializedDataReader reader)
 		{
 		}
 	}

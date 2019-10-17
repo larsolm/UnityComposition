@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode OnCanceled;
 
 		[Tooltip("The SelectionControl to show")]
-		[VariableReference(typeof(SelectionControl))]
+		[VariableConstraint(typeof(SelectionControl))]
 		public VariableLookupReference Control = new VariableLookupReference();
 
 		[Tooltip("The variable to store the selected item's variables in")]
@@ -71,7 +71,7 @@ namespace PiRhoSoft.Composition.Extensions
 			}
 		}
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Control, out SelectionControl control))
 			{

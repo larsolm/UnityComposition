@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 
 namespace PiRhoSoft.Composition
 {
@@ -10,14 +9,14 @@ namespace PiRhoSoft.Composition
 			return variable.AsBool.ToString();
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
-			writer.Write(variable.AsBool);
+			writer.Writer.Write(variable.AsBool);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var b = reader.ReadBoolean();
+			var b = reader.Reader.ReadBoolean();
 			return Variable.Bool(b);
 		}
 

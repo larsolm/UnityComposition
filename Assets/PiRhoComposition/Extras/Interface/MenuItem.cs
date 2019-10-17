@@ -40,7 +40,7 @@ namespace PiRhoSoft.Composition.Extensions
 	}
 
 	[DisallowMultipleComponent]
-	[AddComponentMenu("PiRho Soft/Interface/Menu Item")]
+	[AddComponentMenu("PiRho Composition/Interface/Menu Item")]
 	public class MenuItem : BindingRoot
 	{
 		public string ItemName = "Item";
@@ -110,7 +110,7 @@ namespace PiRhoSoft.Composition.Extensions
 			return SetVariableResult.ReadOnly;
 		}
 
-		private class Data : IVariableCollection
+		private class Data : IVariableMap
 		{
 			public int Index;
 			public int Column;

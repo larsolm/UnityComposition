@@ -21,7 +21,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Loop;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (Loop != null)
 			{
@@ -49,7 +49,7 @@ namespace PiRhoSoft.Composition
 			yield break;
 		}
 
-		private IEnumerator SetValues(IGraphRunner graph, IVariableCollection variables, int iteration, Variable item)
+		private IEnumerator SetValues(IGraphRunner graph, IVariableMap variables, int iteration, Variable item)
 		{
 			if (Index.IsAssigned)
 				Index.SetValue(variables, Variable.Int(iteration));

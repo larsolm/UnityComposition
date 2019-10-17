@@ -1,9 +1,0 @@
-﻿.pirho-custom-variable-collection
-{
-}
-
-.pirho-custom-variable-collection__variable__name
-{
-	align-self: center;
-	margin: 1px 5px;
-}

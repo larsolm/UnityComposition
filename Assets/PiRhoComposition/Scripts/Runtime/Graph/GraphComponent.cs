@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	[ExecuteInEditMode]
 	[HelpURL(Configuration.DocumentationUrl + "graph-component")]
-	[AddComponentMenu("PiRho Soft/Composition/Graph Component")]
+	[AddComponentMenu("PiRho Composition/Graph Component")]
 	public class GraphComponent : MonoBehaviour
 	{
 		[ReadOnly]
@@ -17,7 +17,7 @@ namespace PiRhoSoft.Composition
 			if (!Graph)
 			{
 				Graph = ScriptableObject.CreateInstance<Graph>();
-				Graph.name = $"Graph";
+				Graph.name = $"{name}Graph";
 			}
 		}
 

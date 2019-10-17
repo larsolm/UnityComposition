@@ -181,9 +181,9 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
-	public class VariableValueSource : VariableSource<VariableValue>
+	public class VariableValueSource : VariableSource<SerializedVariable>
 	{
-		public VariableValueSource() => Value = new VariableValue();
+		public VariableValueSource() => Value = new SerializedVariable();
 		public override VariableDefinition GetDefinition() => Reference.GetDefinition();
 	}
 

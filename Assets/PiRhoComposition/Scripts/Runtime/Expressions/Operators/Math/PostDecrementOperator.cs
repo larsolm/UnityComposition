@@ -16,7 +16,7 @@ namespace PiRhoSoft.Composition
 			Symbol = parser.GetText(token);
 		}
 
-		public override Variable Evaluate(IVariableCollection variables)
+		public override Variable Evaluate(IVariableMap variables)
 		{
 			var left = Left.Evaluate(variables);
 

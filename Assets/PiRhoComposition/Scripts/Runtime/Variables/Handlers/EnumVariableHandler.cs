@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -12,14 +11,14 @@ namespace PiRhoSoft.Composition
 			return variable.AsEnum.ToString();
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
-			data.SaveEnum(writer, variable.AsEnum);
+			writer.SaveEnum(variable.AsEnum);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var e = data.LoadEnum(reader);
+			var e = reader.LoadEnum();
 			return Variable.Enum(e);
 		}
 

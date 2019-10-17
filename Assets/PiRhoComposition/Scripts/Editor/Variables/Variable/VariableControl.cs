@@ -705,9 +705,9 @@ namespace PiRhoSoft.Composition.Editor
 			public string RemoveTooltip => "Remove this Variable";
 			public string ReorderTooltip => "Move this Variable";
 
-			public bool AllowAdd => Variables?.Schema == null;
-			public bool AllowRemove => Variables?.Schema == null;
-			public bool AllowReorder => Variables?.Schema == null;
+			public bool AllowAdd => true;//Variables?.Schema == null;
+			public bool AllowRemove => true;//Variables?.Schema == null;
+			public bool AllowReorder => true;//Variables?.Schema == null;
 
 			private readonly Object _owner;
 
@@ -776,7 +776,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			private VariableDefinition GetDefinition(string name)
 			{
-				return Variables.Schema?.GetEntry(name).Definition ?? new VariableDefinition(name);
+				return null;//Variables.Schema?.GetEntry(name).Definition ?? new VariableDefinition(name);
 			}
 		}
 	}

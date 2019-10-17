@@ -6,7 +6,7 @@
 		private const string _readOnlyAddException = "the list '{0}' is read only and cannot have values added";
 		private const string _mismatchedAddException = "the list '{0}' cannot have values of type {1} added";
 
-		public override Variable Evaluate(IVariableCollection variables)
+		public override Variable Evaluate(IVariableMap variables)
 		{
 			var left = Left.Evaluate(variables);
 			var right = Right.Evaluate(variables);

@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -11,22 +10,22 @@ namespace PiRhoSoft.Composition
 			return variable.AsVector4.ToString();
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
 			var vector = variable.AsVector4;
 
-			writer.Write(vector.x);
-			writer.Write(vector.y);
-			writer.Write(vector.z);
-			writer.Write(vector.w);
+			writer.Writer.Write(vector.x);
+			writer.Writer.Write(vector.y);
+			writer.Writer.Write(vector.z);
+			writer.Writer.Write(vector.w);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var x = reader.ReadSingle();
-			var y = reader.ReadSingle();
-			var z = reader.ReadSingle();
-			var w = reader.ReadSingle();
+			var x = reader.Reader.ReadSingle();
+			var y = reader.Reader.ReadSingle();
+			var z = reader.Reader.ReadSingle();
+			var w = reader.Reader.ReadSingle();
 
 			return Variable.Vector4(new Vector4(x, y, z, w));
 		}

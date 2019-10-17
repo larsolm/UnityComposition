@@ -17,7 +17,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The Playable Director to run the timeline on")]
-		[VariableReference(typeof(PlayableDirector))]
+		[VariableConstraint(typeof(PlayableDirector))]
 		public VariableLookupReference Director = new VariableLookupReference();
 
 		[Tooltip("The timeline to run")]
@@ -32,7 +32,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Director, out PlayableDirector director))
 			{

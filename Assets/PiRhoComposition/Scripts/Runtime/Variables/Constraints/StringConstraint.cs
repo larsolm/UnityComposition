@@ -40,22 +40,22 @@ namespace PiRhoSoft.Composition
 			return value.IsString && (Values.Count == 0 || Values.Contains(value.AsString));
 		}
 
-		public override void Save(BinaryWriter writer, SerializedData data)
+		public override void Save(SerializedDataWriter writer)
 		{
-			writer.Write(Values.Count);
+			writer.Writer.Write(Values.Count);
 
 			foreach (var value in Values)
-				writer.Write(value ?? string.Empty);
+				writer.Writer.Write(value ?? string.Empty);
 		}
 
-		public override void Load(BinaryReader reader, SerializedData data)
+		public override void Load(SerializedDataReader reader)
 		{
 			Values.Clear();
 
-			var length = reader.ReadInt32();
+			var length = reader.Reader.ReadInt32();
 
 			for (var i = 0; i < length; i++)
-				Values.Add(reader.ReadString());
+				Values.Add(reader.Reader.ReadString());
 		}
 
 		private void SetValues(List<string> values)

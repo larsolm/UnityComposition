@@ -4,9 +4,9 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[HelpURL(Configuration.DocumentationUrl + "binding-root")]
-	[AddComponentMenu("PiRho Soft/Bindings/Binding Root")]
+	[AddComponentMenu("PiRho Composition/Bindings/Binding Root")]
 	[DisallowMultipleComponent]
-	public class BindingRoot : MonoBehaviour, IVariableCollection
+	public class BindingRoot : MonoBehaviour, IVariableMap
 	{
 		private readonly string[] _names = new string[] { string.Empty };
 
@@ -14,7 +14,7 @@ namespace PiRhoSoft.Composition
 
 		public virtual Variable Value { get; set; }
 
-		private IVariableCollection _parent;
+		private IVariableMap _parent;
 
 		protected virtual void Awake()
 		{
@@ -28,7 +28,7 @@ namespace PiRhoSoft.Composition
 
 		private static List<BindingRoot> _roots = new List<BindingRoot>();
 
-		internal static IVariableCollection FindParent(GameObject obj)
+		internal static IVariableMap FindParent(GameObject obj)
 		{
 			_roots.Clear();
 			obj.GetComponentsInParent(true, _roots);

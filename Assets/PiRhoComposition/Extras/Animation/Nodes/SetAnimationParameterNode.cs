@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The Animator to set the parameter on")]
-		[VariableReference(typeof(Animator))]
+		[VariableConstraint(typeof(Animator))]
 		public VariableLookupReference Animator = new VariableLookupReference();
 
 		[Tooltip("The name of the parameter to set")]
@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Animator, out Animator animator))
 				Trigger(variables, animator);
@@ -45,7 +45,7 @@ namespace PiRhoSoft.Composition
 			yield break;
 		}
 
-		private void Trigger(IVariableCollection variables, Animator animator)
+		private void Trigger(IVariableMap variables, Animator animator)
 		{
 			if (variables.Resolve(this, Parameter, out var parameter))
 			{

@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition.Extensions
@@ -11,7 +10,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The Animator to set State on")]
-		[VariableReference(typeof(Animator))]
+		[VariableConstraint(typeof(Animator))]
 		public VariableLookupReference Animator = new VariableLookupReference();
 
 		[Tooltip("The name of the animation state to play")]
@@ -19,7 +18,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override Color NodeColor => Colors.Animation;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject<Animator>(this, Animator, out var animator))
 			{

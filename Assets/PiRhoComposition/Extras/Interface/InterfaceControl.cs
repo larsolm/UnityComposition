@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition.Extensions
 	public class DependentObjectList : SerializedList<GameObject> { }
 
 	[DisallowMultipleComponent]
-	[AddComponentMenu("PiRho Soft/Interface/Interface Control")]
+	[AddComponentMenu("PiRho Composition/Interface/Interface Control")]
 	public class InterfaceControl : MonoBehaviour
 	{
 		[Tooltip("GameObjects in the scene that should be activated and deactivated with this control")]

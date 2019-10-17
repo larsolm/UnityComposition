@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 
 namespace PiRhoSoft.Composition
 {
@@ -59,20 +58,20 @@ namespace PiRhoSoft.Composition
 
 		#region Serialization
 
-		public static void Save(Variable variable, BinaryWriter writer, SerializedData data)
+		public static void Save(Variable variable, SerializedDataWriter writer)
 		{
-			writer.Write((int)variable.Type);
-			Get(variable.Type).Save_(variable, writer, data);
+			writer.Writer.Write((int)variable.Type);
+			Get(variable.Type).Save_(variable, writer);
 		}
 
-		public static Variable Load(BinaryReader reader, SerializedData data)
+		public static Variable Load(SerializedDataReader reader)
 		{
-			var type = (VariableType)reader.ReadInt32();
-			return Get(type).Load_(reader, data);
+			var type = (VariableType)reader.Reader.ReadInt32();
+			return Get(type).Load_(reader);
 		}
 
-		protected internal abstract void Save_(Variable value, BinaryWriter writer, SerializedData data);
-		protected internal abstract Variable Load_(BinaryReader reader, SerializedData data);
+		protected internal abstract void Save_(Variable value, SerializedDataWriter writer);
+		protected internal abstract Variable Load_(SerializedDataReader reader);
 
 		#endregion
 

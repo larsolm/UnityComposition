@@ -3,7 +3,7 @@
 namespace PiRhoSoft.Composition
 {
 	[HelpURL(Configuration.DocumentationUrl + "expression-binding")]
-	[AddComponentMenu("PiRho Soft/Bindings/Expression Binding")]
+	[AddComponentMenu("PiRho Composition/Bindings/Expression Binding")]
 	public class ExpressionBinding : VariableBinding
 	{
 		private const string _missingExpressionWarning = "(CEXBMV) Unable to bind text for binding '{0}': the expression is empty";
@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition
 		private ResultState _resultState = ResultState.New;
 		private Variable _resultValue = Variable.Empty;
 
-		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableMap variables, BindingAnimationStatus status)
 		{
 			try
 			{

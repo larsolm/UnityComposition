@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 			Name = parser.GetText(token);
 		}
 
-		public override Variable Evaluate(IVariableCollection variables)
+		public override Variable Evaluate(IVariableMap variables)
 		{
 			var value = GetValue(variables, Variable.Object(variables));
 
@@ -33,12 +33,12 @@ namespace PiRhoSoft.Composition
 			builder.Append(Name);
 		}
 
-		public Variable GetValue(IVariableCollection variables, Variable owner)
+		public Variable GetValue(IVariableMap variables, Variable owner)
 		{
 			return VariableHandler.Lookup(owner, Variable.String(Name));
 		}
 
-		public SetVariableResult SetValue(IVariableCollection variables, Variable value)
+		public SetVariableResult SetValue(IVariableMap variables, Variable value)
 		{
 			var owner = Variable.Object(variables);
 			return SetValue(ref owner, value);

@@ -6,7 +6,7 @@ namespace PiRhoSoft.Composition
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(AudioSource))]
 	[HelpURL(Configuration.DocumentationUrl + "audio-player")]
-	[AddComponentMenu("PiRho Soft/Animation/Audio Player")]
+	[AddComponentMenu("PiRho Composition/Animation/Audio Player")]
 	public class AudioPlayer : MonoBehaviour, ICompletionNotifier
 	{
 		private const string _infiniteLoopingWarning = "(CAAUPIL) Unable to wait on Audio Player '{0}': the Audio Clip '{1}' was set to loop and would have never finished";

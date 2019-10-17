@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Break;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			yield return null;
 			graph.GoTo(Next, nameof(Next));

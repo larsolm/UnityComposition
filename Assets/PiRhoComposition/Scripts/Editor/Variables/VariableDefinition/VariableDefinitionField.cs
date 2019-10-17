@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -12,12 +13,21 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VariableDefinitionControl _control;
 
-		public VariableDefinitionField(string label, VariableDefinition value, Object owner) : base(label, null)
+		public VariableDefinitionField(string label) : base(label, null)
 		{
-			Setup(value, owner);
 		}
 
-		private void Setup(VariableDefinition value, Object owner)
+		public void Setup(SerializedProperty property)
+		{
+			var definition = property.GetObject<VariableDefinition>();
+			var owner = property.serializedObject.targetObject;
+
+			// add watchers for Name, _type, and _constraintData for binding changes from code back to the control
+
+			Setup(definition, owner);
+		}
+
+		public void Setup(VariableDefinition value, Object owner)
 		{
 			_control = new VariableDefinitionControl(value, owner);
 			_control.AddToClassList(InputUssClassName);
@@ -34,6 +44,17 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			base.SetValueWithoutNotify(newValue);
 			_control.SetValueWithoutNotify(newValue);
+		}
+
+		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
+		{
+			base.ExecuteDefaultActionAtTarget(evt);
+
+			if (this.TryGetPropertyBindEvent(evt, out var property))
+			{
+				Setup(property);
+				evt.StopPropagation();
+			}
 		}
 	}
 }

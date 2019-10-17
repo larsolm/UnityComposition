@@ -18,7 +18,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Loop;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			var index = 0;
 

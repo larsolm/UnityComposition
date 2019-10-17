@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Animator))]
 	[HelpURL(Configuration.DocumentationUrl + "animation-player")]
-	[AddComponentMenu("PiRho Soft/Animation/Animation Player")]
+	[AddComponentMenu("PiRho Composition/Animation/Animation Player")]
 	public class AnimationPlayer : MonoBehaviour, ICompletionNotifier
 	{
 		private const string _infiniteLoopingWarning = "(CAANPIL) Unable to wait on Animation Player '{0}': the Animation Clip '{1}' was set to loop and would have never finished";

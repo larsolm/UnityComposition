@@ -47,7 +47,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.SequencingLight;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Prefab, out GameObject prefab))
 			{

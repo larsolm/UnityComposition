@@ -142,7 +142,7 @@ namespace PiRhoSoft.Composition.Editor
 		private class StartNode : GraphNode
 		{
 			public override Color NodeColor => Colors.Start;
-			public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables) { yield break; }
+			public override IEnumerator Run(IGraphRunner graph, IVariableMap variables) { yield break; }
 
 			public override void GetConnections(NodeData data) => data.AddConnections(Graph);
 			public override void SetConnection(ConnectionData connection, GraphNode target) => connection.ApplyConnection(Graph, target);

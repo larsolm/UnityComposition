@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition.Extensions
 {
-	[AddComponentMenu("PiRho Soft/Interface/Message Control")]
+	[AddComponentMenu("PiRho Composition/Interface/Message Control")]
 	public class MessageControl : InterfaceControl
 	{
 		[Tooltip("The object that message text will be displayed in")]

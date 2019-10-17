@@ -51,7 +51,7 @@ namespace PiRhoSoft.Composition
 			Right.ToString(builder);
 		}
 
-		public override Variable Evaluate(IVariableCollection variables)
+		public override Variable Evaluate(IVariableMap variables)
 		{
 			var left = Left.Evaluate(variables);
 			var value = _rightIdentifier.GetValue(variables, left);
@@ -62,13 +62,13 @@ namespace PiRhoSoft.Composition
 			return value;
 		}
 
-		public Variable GetValue(IVariableCollection variables, Variable owner)
+		public Variable GetValue(IVariableMap variables, Variable owner)
 		{
 			var left = _leftLookup.GetValue(variables, owner);
 			return left.IsEmpty ? left : _rightIdentifier.GetValue(variables, left);
 		}
 
-		public SetVariableResult SetValue(IVariableCollection variables, Variable value)
+		public SetVariableResult SetValue(IVariableMap variables, Variable value)
 		{
 			var left = Left.Evaluate(variables);
 			var result = _rightIdentifier.SetValue(ref left, value);

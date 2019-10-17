@@ -92,11 +92,11 @@ namespace PiRhoSoft.Composition
 
 	public interface ICommand
 	{
-		Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters);
+		Variable Evaluate(IVariableMap variables, string name, List<Operation> parameters);
 	}
 
 	[HelpURL(Configuration.DocumentationUrl + "command")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Command", fileName = nameof(Command), order = 125)]
+	[CreateAssetMenu(menuName = "PiRho Composition/Command", fileName = nameof(Command), order = 125)]
 	public sealed class Command : ScriptableObject, ICommand
 	{
 		[Serializable]
@@ -150,7 +150,7 @@ namespace PiRhoSoft.Composition
 				ExpressionParser.RemoveCommand(_registeredName);
 		}
 
-		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableMap variables, string name, List<Operation> parameters)
 		{
 			var store = ReserveStore();
 
@@ -179,26 +179,26 @@ namespace PiRhoSoft.Composition
 		#region Parameters
 
 		private const int _initialStoreCount = 5; // multiple because commands can call other commands
-		private static Stack<VariableStore> _stores = new Stack<VariableStore>(_initialStoreCount);
+		private static Stack<VariableDictionary> _stores = new Stack<VariableDictionary>(_initialStoreCount);
 
 		static Command()
 		{
 			for (var i = 0; i < _initialStoreCount; i++)
-				_stores.Push(new VariableStore());
+				_stores.Push(new VariableDictionary());
 		}
 
-		private static VariableStore ReserveStore()
+		private static VariableDictionary ReserveStore()
 		{
 			if (_stores.Count == 0)
-				_stores.Push(new VariableStore());
+				_stores.Push(new VariableDictionary());
 
 			return _stores.Pop();
 		}
 
-		private static void ReleaseStore(VariableStore store)
+		private static void ReleaseStore(VariableDictionary store)
 		{
 			_stores.Push(store);
-			store.Clear();
+			store.ClearVariables();
 		}
 
 		#endregion

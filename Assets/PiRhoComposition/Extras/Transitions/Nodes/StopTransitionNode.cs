@@ -12,7 +12,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.SequencingDark;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			TransitionManager.Instance.EndTransition();
 

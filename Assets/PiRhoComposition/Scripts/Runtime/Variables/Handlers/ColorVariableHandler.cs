@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -21,22 +20,22 @@ namespace PiRhoSoft.Composition
 			return $"{Symbol}{r:X2}{g:X2}{b:X2}{a:X2}";
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
 			var color = variable.AsColor;
 
-			writer.Write(color.r);
-			writer.Write(color.g);
-			writer.Write(color.b);
-			writer.Write(color.a);
+			writer.Writer.Write(color.r);
+			writer.Writer.Write(color.g);
+			writer.Writer.Write(color.b);
+			writer.Writer.Write(color.a);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var r = reader.ReadSingle();
-			var g = reader.ReadSingle();
-			var b = reader.ReadSingle();
-			var a = reader.ReadSingle();
+			var r = reader.Reader.ReadSingle();
+			var g = reader.Reader.ReadSingle();
+			var b = reader.Reader.ReadSingle();
+			var a = reader.Reader.ReadSingle();
 
 			return Variable.Color(new Color(r, g, b, a));
 		}

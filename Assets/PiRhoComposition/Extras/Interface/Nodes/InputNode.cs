@@ -73,7 +73,7 @@ namespace PiRhoSoft.Composition.Extensions
 			}
 		}
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			while (true)
 			{

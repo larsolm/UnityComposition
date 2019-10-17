@@ -69,7 +69,7 @@ namespace PiRhoSoft.Composition
 
 		public bool IsRunning { get; internal set; }
 
-		public abstract IEnumerator Run(IGraphRunner graph, IVariableCollection variables);
+		public abstract IEnumerator Run(IGraphRunner graph, IVariableMap variables);
 
 		#region Inputs and Outputs
 
@@ -82,7 +82,7 @@ namespace PiRhoSoft.Composition
 				if (field.FieldType == typeof(VariableLookupReference))
 				{
 					var value = field.GetValue(this) as VariableLookupReference;
-					var attribute = field.GetCustomAttribute<VariableReferenceAttribute>();
+					var attribute = field.GetCustomAttribute<VariableConstraintAttribute>();
 
 					if (value.UsesStore(storeName))
 					{
@@ -105,7 +105,7 @@ namespace PiRhoSoft.Composition
 				else if (typeof(VariableSource).IsAssignableFrom(field.FieldType))
 				{
 					var value = field.GetValue(this) as VariableSource;
-					var attribute = field.GetCustomAttribute<VariableReferenceAttribute>();
+					var attribute = field.GetCustomAttribute<VariableConstraintAttribute>();
 
 					if (value.UsesStore(storeName))
 					{
@@ -127,7 +127,7 @@ namespace PiRhoSoft.Composition
 				if (field.FieldType == typeof(VariableAssignmentReference))
 				{
 					var value = field.GetValue(this) as VariableAssignmentReference;
-					var attribute = field.GetCustomAttribute<VariableReferenceAttribute>();
+					var attribute = field.GetCustomAttribute<VariableConstraintAttribute>();
 
 					if (value.UsesStore(storeName))
 					{

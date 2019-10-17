@@ -34,9 +34,9 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The variable to assign the bound value to")]
 		public VariableAssignmentReference Target = new VariableAssignmentReference();
 
-		private IVariableCollection _variables;
+		private IVariableMap _variables;
 
-		public IVariableCollection Variables
+		public IVariableMap Variables
 		{
 			get
 			{
@@ -73,18 +73,18 @@ namespace PiRhoSoft.Composition
 				gameObject.SetActive(didSucceed);
 		}
 
-		protected abstract void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status);
+		protected abstract void UpdateBinding(IVariableMap variables, BindingAnimationStatus status);
 
 		#region This Access
 
-		private class ThisWrapper : IVariableCollection
+		private class ThisWrapper : IVariableMap
 		{
 			private readonly string[] _names = new string[] { string.Empty };
 
 			public static string ThisName = "this";
 
-			private GameObject _this;
-			private IVariableCollection _parent;
+			private readonly GameObject _this;
+			private IVariableMap _parent;
 
 			public ThisWrapper(GameObject obj)
 			{

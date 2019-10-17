@@ -11,12 +11,12 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The target Object to destroy")]
-		[VariableReference(typeof(Object))]
+		[VariableConstraint(typeof(Object))]
 		public VariableLookupReference Target = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.SequencingDark;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Target, out Object target))
 				Destroy(target);

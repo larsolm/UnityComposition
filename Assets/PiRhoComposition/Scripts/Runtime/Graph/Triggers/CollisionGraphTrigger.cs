@@ -3,7 +3,7 @@
 namespace PiRhoSoft.Composition
 {
 	[HelpURL(Configuration.DocumentationUrl + "collision-graph-trigger")]
-	[AddComponentMenu("PiRho Soft/Composition/Collision Graph Trigger")]
+	[AddComponentMenu("PiRho Composition/Collision Graph Trigger")]
 	public class CollisionGraphTrigger : MonoBehaviour
 	{
 		[Tooltip("The graph to run when this object is triggered")]

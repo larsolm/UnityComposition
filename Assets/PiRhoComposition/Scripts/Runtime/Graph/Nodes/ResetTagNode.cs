@@ -14,14 +14,14 @@ namespace PiRhoSoft.Composition
 		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The tag to reset")]
-		public string Tag;
+		public StringVariableSource Tag = new StringVariableSource();
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
-			if (variables.ResolveInterface(this, Object, out IResettableVariables reset))
-				reset.ResetTag(Tag);
+			//if (variables.ResolveInterface(this, Object, out IResettableVariables reset) && variables.Resolve(this, Tag, out var tag))
+			//	reset.ResetTag(tag);
 
 			graph.GoTo(Next, nameof(Next));
 			yield break;

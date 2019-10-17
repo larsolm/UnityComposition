@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -12,14 +11,14 @@ namespace PiRhoSoft.Composition
 			return variable.AsInt.ToString();
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
-			writer.Write(variable.AsInt);
+			writer.Writer.Write(variable.AsInt);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var i = reader.ReadInt32();
+			var i = reader.Reader.ReadInt32();
 			return Variable.Int(i);
 		}
 

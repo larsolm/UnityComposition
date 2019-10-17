@@ -56,7 +56,7 @@ namespace PiRhoSoft.Composition
 			throw new ExpressionParseException(token, _invalidLiteralException, text, token.Type);
 		}
 
-		public override Variable Evaluate(IVariableCollection variables)
+		public override Variable Evaluate(IVariableMap variables)
 		{
 			return _value;
 		}

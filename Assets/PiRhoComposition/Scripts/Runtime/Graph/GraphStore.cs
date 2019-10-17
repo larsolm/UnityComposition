@@ -24,7 +24,7 @@ namespace PiRhoSoft.Composition
 		public string Name;
 		public GraphInputType Type;
 		public VariableLookupReference Reference = new VariableLookupReference();
-		public VariableValue Value = new VariableValue();
+		public SerializedVariable Value = new SerializedVariable();
 
 		public bool UsesStore(string storeName) => Type == GraphInputType.Reference && Reference.UsesStore(storeName);
 	}
@@ -39,7 +39,7 @@ namespace PiRhoSoft.Composition
 		public bool UsesStore(string storeName) => Type == GraphOutputType.Reference && Reference.UsesStore(storeName);
 	}
 
-	public class GraphStore : IVariableCollection, IPoolable
+	public class GraphStore : IVariableMap, IPoolable
 	{
 		private const string _invalidContextError = "(CISIC) Failed to create context '{0}' for graph '{1}': the value '{2}' does not satisfy the constraint";
 		private const string _invalidInputError = "(CISII) Failed to create input '{0}' for graph '{1}': the value '{2}' does not satisfy the constraint";
@@ -55,9 +55,9 @@ namespace PiRhoSoft.Composition
 		public string ContextName { get; private set; }
 		public Variable Context { get; private set; }
 
-		public VariableStore Input { get; } = new VariableStore();
-		public VariableStore Output { get; } = new VariableStore();
-		public VariableStore Local { get; } = new VariableStore();
+		public VariableDictionary Input { get; } = new VariableDictionary();
+		public VariableDictionary Output { get; } = new VariableDictionary();
+		public VariableDictionary Local { get; } = new VariableDictionary();
 
 		private readonly string[] _variableNames = new string[] { InputStoreName, OutputStoreName, LocalStoreName, CompositionManager.GlobalStoreName, CompositionManager.SceneStoreName, string.Empty };
 
@@ -91,10 +91,8 @@ namespace PiRhoSoft.Composition
 
 		#region Inputs and Outputs
 
-		public void WriteInputs(GraphCaller graph, IList<GraphInput> inputs, IVariableCollection caller)
+		public void WriteInputs(GraphCaller graph, IList<GraphInput> inputs, IVariableMap caller)
 		{
-			Input.Locked = false;
-
 			foreach (var input in inputs)
 			{
 				if (input.Type == GraphInputType.Reference)
@@ -114,21 +112,15 @@ namespace PiRhoSoft.Composition
 					Input.SetVariable(input.Name, input.Value.Variable);
 				}
 			}
-
-			Input.Locked = true;
 		}
 
 		public void WriteOutputs(IList<GraphOutput> outputs)
 		{
-			Output.Locked = false;
-
 			foreach (var output in outputs)
 				Output.SetVariable(output.Name, Variable.Empty);
-
-			Output.Locked = true;
 		}
 
-		public void ReadOutputs(GraphCaller graph, IList<GraphOutput> outputs, IVariableCollection caller)
+		public void ReadOutputs(GraphCaller graph, IList<GraphOutput> outputs, IVariableMap caller)
 		{
 			foreach (var output in outputs)
 			{
@@ -168,7 +160,7 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
-		#region IVariableStore Implementation
+		#region IVariableMap Implementation
 
 		public IReadOnlyList<string> VariableNames
 		{
@@ -213,9 +205,9 @@ namespace PiRhoSoft.Composition
 
 		public void Reset()
 		{
-			Input.Clear();
-			Output.Clear();
-			Local.Clear();
+			Input.ClearVariables();
+			Output.ClearVariables();
+			Local.ClearVariables();
 		}
 
 		#endregion

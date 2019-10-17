@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.IO;
 using System.Linq;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -8,8 +7,11 @@ using Object = UnityEngine.Object;
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class VariableDefinition
+	public class VariableDefinition : ISerializationCallbackReceiver
 	{
+		public const string TypeProperty = nameof(_type);
+		public const string ConstraintProperty = nameof(_constraintData);
+
 		public VariableDefinition()
 		{
 			Name = string.Empty;
@@ -83,9 +85,18 @@ namespace PiRhoSoft.Composition
 				: variable.Is(Type);
 		}
 
-		[SerializeField] private SerializedData _constraintData = new SerializedData();
-		//void ISerializationCallbackReceiver.OnBeforeSerialize() => _constraintData.SaveClass(_constraint, 1);
-		//void ISerializationCallbackReceiver.OnAfterDeserialize() => _constraintData.LoadClass(out _constraint);
+		[SerializeField] private SerializedDataItem _constraintData = new SerializedDataItem();
+		void ISerializationCallbackReceiver.OnBeforeSerialize()
+		{
+			using (var writer = new SerializedDataWriter(_constraintData))
+				writer.SaveInstance(_constraint);
+		}
+
+		void ISerializationCallbackReceiver.OnAfterDeserialize()
+		{
+			using (var reader = new SerializedDataReader(_constraintData))
+				_constraint = reader.LoadInstance<VariableConstraint>();
+		}
 	}
 
 	[Serializable]
@@ -125,32 +136,6 @@ namespace PiRhoSoft.Composition
 
 			if (into.Constraint == null)
 				into.Constraint = from.Constraint;
-		}
-	}
-
-	[Serializable]
-	public abstract class VariableConstraint : ISerializableData
-	{
-		public abstract VariableType Type { get; }
-		public abstract Variable Generate();
-		public abstract bool IsValid(Variable value);
-		public abstract void Save(BinaryWriter writer, SerializedData data);
-		public abstract void Load(BinaryReader reader, SerializedData data);
-
-		public static VariableConstraint Create(VariableType type)
-		{
-			switch (type)
-			{
-				case VariableType.Int: return new IntConstraint();
-				case VariableType.Float: return new FloatConstraint();
-				case VariableType.Enum: return new EnumConstraint();
-				case VariableType.String: return new StringConstraint();
-				case VariableType.List: return new ListConstraint();
-				case VariableType.Dictionary: return new DictionaryConstraint();
-				case VariableType.Asset: return new AssetConstraint();
-				case VariableType.Object: return new ObjectConstraint();
-				default: return null;
-			}
 		}
 	}
 }

@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities;
+using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEngine.UIElements;
 
@@ -9,15 +10,18 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
+			var itemsProperty = property.FindPropertyRelative("_items");
 			var schema = property.GetParentObject<VariableSchema>();
-			var proxy = new EntryProxy(schema);
-			var field = new DictionaryControl(proxy);
+			var proxy = new EntryProxy(itemsProperty, schema);
+			var field = new DictionaryField();
+			field.Setup(itemsProperty, proxy);
 
 			return field;
 		}
 
 		private class EntryProxy : IDictionaryProxy
 		{
+			private SerializedProperty _property;
 			private VariableSchema _schema;
 
 			public int KeyCount => _schema.EntryCount;
@@ -35,16 +39,17 @@ namespace PiRhoSoft.Composition.Editor
 			public bool AllowRemove => true;
 			public bool AllowReorder => true;
 
-			public EntryProxy(VariableSchema schema)
+			public EntryProxy(SerializedProperty property, VariableSchema schema)
 			{
+				_property = property;
 				_schema = schema;
 			}
 
 			public VisualElement CreateField(int index)
 			{
-				var entry = _schema.GetEntry(index);
-				var control = new VariableSchemaEntryControl(_schema.Tags, entry) { userData = index };
-				return control;
+				var property = _property.GetArrayElementAtIndex(index);
+				var field = new VariableSchemaEntryField(property, _schema) { userData = index };
+				return field;
 			}
 
 			public bool NeedsUpdate(VisualElement item, int index)

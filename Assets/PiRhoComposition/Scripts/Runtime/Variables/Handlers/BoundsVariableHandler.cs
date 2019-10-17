@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -11,26 +10,26 @@ namespace PiRhoSoft.Composition
 			return variable.AsBounds.ToString();
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
 			var bounds = variable.AsBounds;
 
-			writer.Write(bounds.center.x);
-			writer.Write(bounds.center.y);
-			writer.Write(bounds.center.z);
-			writer.Write(bounds.size.x);
-			writer.Write(bounds.size.y);
-			writer.Write(bounds.size.z);
+			writer.Writer.Write(bounds.center.x);
+			writer.Writer.Write(bounds.center.y);
+			writer.Writer.Write(bounds.center.z);
+			writer.Writer.Write(bounds.size.x);
+			writer.Writer.Write(bounds.size.y);
+			writer.Writer.Write(bounds.size.z);
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var x = reader.ReadSingle();
-			var y = reader.ReadSingle();
-			var z = reader.ReadSingle();
-			var w = reader.ReadSingle();
-			var h = reader.ReadSingle();
-			var d = reader.ReadSingle();
+			var x = reader.Reader.ReadSingle();
+			var y = reader.Reader.ReadSingle();
+			var z = reader.Reader.ReadSingle();
+			var w = reader.Reader.ReadSingle();
+			var h = reader.Reader.ReadSingle();
+			var d = reader.Reader.ReadSingle();
 
 			return Variable.Bounds(new Bounds(new Vector3(x, y, z), new Vector3(w, h, d)));
 		}

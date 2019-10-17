@@ -4,9 +4,12 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	public class SceneVariableCollection : IVariableCollection
+	public class SceneVariableCollection : IVariableMap
 	{
-		private static readonly string[] _emptyNames = new string[0];
+		public IReadOnlyList<string> VariableNames
+		{
+			get => VariableDictionary.EmptyNames;
+		}
 
 		public Variable GetVariable(string name)
 		{
@@ -24,11 +27,6 @@ namespace PiRhoSoft.Composition
 		public SetVariableResult SetVariable(string name, Variable value)
 		{
 			return SetVariableResult.ReadOnly;
-		}
-
-		public IReadOnlyList<string> VariableNames
-		{
-			get => _emptyNames;
 		}
 	}
 }

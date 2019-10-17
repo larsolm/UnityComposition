@@ -55,7 +55,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		private List<ICompletionNotifier> _animations = new List<ICompletionNotifier>(5);
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Effect, out var effect))
 			{

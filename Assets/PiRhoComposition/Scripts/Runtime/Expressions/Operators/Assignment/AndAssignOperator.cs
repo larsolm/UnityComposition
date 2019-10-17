@@ -2,7 +2,7 @@
 {
 	internal class AndAssignOperator : AssignmentOperator
 	{
-		public override Variable Evaluate(IVariableCollection variables)
+		public override Variable Evaluate(IVariableMap variables)
 		{
 			var left = Left.Evaluate(variables);
 

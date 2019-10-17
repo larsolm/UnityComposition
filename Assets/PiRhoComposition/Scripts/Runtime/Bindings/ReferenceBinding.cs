@@ -4,7 +4,7 @@
 	{
 		public VariableLookupReference Binding = new VariableLookupReference();
 
-		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableMap variables, BindingAnimationStatus status)
 		{
 			var value = Binding.GetValue(variables);
 			SetBinding(value, !value.IsEmpty);

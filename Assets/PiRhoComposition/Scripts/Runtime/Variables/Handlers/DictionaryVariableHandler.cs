@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 
 namespace PiRhoSoft.Composition
 {
@@ -12,34 +11,32 @@ namespace PiRhoSoft.Composition
 			return DictionaryString;
 		}
 
-		protected internal override void Save_(Variable variable, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable variable, SerializedDataWriter writer)
 		{
 			var dictionary = variable.AsDictionary;
 			var names = dictionary.VariableNames;
 
-			data.SaveReference(writer, dictionary.Schema);
-			writer.Write(names.Count);
+			writer.Writer.Write(names.Count);
 
 			for (var i = 0; i < names.Count; i++)
 			{
 				var name = names[i];
 				var value = dictionary.GetVariable(name);
 
-				writer.Write(name);
-				Save(value, writer, data);
+				writer.Writer.Write(name);
+				Save(value, writer);
 			}
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var schema = data.LoadReference(reader) as VariableSchema;
-			var dictionary = new VariableDictionary(schema);
-			var count = reader.ReadInt32();
+			var dictionary = new VariableDictionary();
+			var count = reader.Reader.ReadInt32();
 
 			for (var i = 0; i < count; i++)
 			{
-				var name = reader.ReadString();
-				var variable = Load(reader, data);
+				var name = reader.Reader.ReadString();
+				var variable = Load(reader);
 
 				dictionary.SetVariable(name, variable);
 			}

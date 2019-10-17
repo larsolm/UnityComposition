@@ -27,31 +27,31 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
-			if (variables.Resolve(this, List, out IVariableList variableList) && variableList is VariableList list)
+			if (variables.ResolveArray(this, List, out IVariableList variableList) && variableList is VariableList list)
 			{
-				if (SortByProperty)
-				{
-					list.Values.Sort((left, right) =>
-					{
-						foreach (var condition in SortConditions)
-						{
-							var leftValue = condition.GetValue(left.As<IVariableCollection>());
-							var rightValue = condition.GetValue(right.As<IVariableCollection>());
-
-							var compare = VariableHandler.Compare(leftValue, rightValue).GetValueOrDefault(0);
-							if (compare != 0)
-								return compare;
-						}
-
-						return 0;
-					});
-				}
-				else
-				{
-					list.Values.Sort((left, right) => VariableHandler.Compare(left, right).GetValueOrDefault(0));
-				}
+				//if (SortByProperty)
+				//{
+				//	list.Values.Sort((left, right) =>
+				//	{
+				//		foreach (var condition in SortConditions)
+				//		{
+				//			var leftValue = condition.GetValue(left.As<IVariableMap>());
+				//			var rightValue = condition.GetValue(right.As<IVariableMap>());
+				//
+				//			var compare = VariableHandler.Compare(leftValue, rightValue).GetValueOrDefault(0);
+				//			if (compare != 0)
+				//				return compare;
+				//		}
+				//
+				//		return 0;
+				//	});
+				//}
+				//else
+				//{
+				//	list.Values.Sort((left, right) => VariableHandler.Compare(left, right).GetValueOrDefault(0));
+				//}
 			}
 			
 

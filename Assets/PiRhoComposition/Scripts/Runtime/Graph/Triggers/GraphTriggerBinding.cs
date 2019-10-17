@@ -4,7 +4,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[HelpURL(Configuration.DocumentationUrl + "graph-trigger-binding")]
-	[AddComponentMenu("PiRho Soft/Bindings/Graph Trigger Binding")]
+	[AddComponentMenu("PiRho Composition/Bindings/Graph Trigger Binding")]
 	public class GraphTriggerBinding : VariableBinding
 	{
 		[Tooltip("The graph to run when Variable changes")]
@@ -13,9 +13,9 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The variable holding the value to watch for changes")]
 		public VariableLookupReference Variable = new VariableLookupReference();
 
-		private Variable _value = PiRhoSoft.Composition.Variable.Empty;
+		private Variable _value = Composition.Variable.Empty;
 
-		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableMap variables, BindingAnimationStatus status)
 		{
 			if (Graph.Graph && !Graph.IsRunning)
 			{

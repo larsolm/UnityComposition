@@ -21,10 +21,10 @@ namespace PiRhoSoft.Composition
 
 		public IList<GraphInput> Inputs => _inputs;
 		public IList<GraphOutput> Outputs => _outputs;
-		public bool IsRunning => Graph != null && Graph.IsRunning;
-		public override string ToString() => Graph != null ? Graph.name : base.ToString();
+		public bool IsRunning => Graph && Graph.IsRunning;
+		public override string ToString() => Graph ? Graph.name : base.ToString();
 
-		public IEnumerator Execute(IVariableCollection store, Variable context)
+		public IEnumerator Execute(IVariableMap store, Variable context)
 		{
 			if (Graph)
 			{
@@ -98,7 +98,7 @@ namespace PiRhoSoft.Composition
 						{
 							Name = definition.Name,
 							Type = GraphInputType.Value,
-							Value = new VariableValue { Variable = definition.Generate() }
+							Value = new SerializedVariable { Variable = definition.Generate() }
 						});
 					}
 				}

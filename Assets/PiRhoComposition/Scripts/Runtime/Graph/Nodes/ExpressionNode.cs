@@ -17,7 +17,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			Expression.Execute(this, variables);
 			graph.GoTo(Next, nameof(Next));

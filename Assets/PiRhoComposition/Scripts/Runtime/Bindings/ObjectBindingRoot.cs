@@ -3,7 +3,7 @@
 namespace PiRhoSoft.Composition
 {
 	[HelpURL(Configuration.DocumentationUrl + "object-binding-root")]
-	[AddComponentMenu("PiRho Soft/Bindings/Object Binding Root")]
+	[AddComponentMenu("PiRho Composition/Bindings/Object Binding Root")]
 	public class ObjectBindingRoot : BindingRoot
 	{
 		[Tooltip("The object that to be used a Binding Root to use for binding variables")]

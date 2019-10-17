@@ -25,7 +25,7 @@ namespace PiRhoSoft.Composition.Extensions
 		[CustomLabel("Crossfade (seconds)")]
 		public float Crossfade = 0.0f;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			AudioManager.Instance.Pop(FadeOut, FadeIn, Crossfade);
 

@@ -27,22 +27,27 @@ namespace PiRhoSoft.Composition
 
 		public override Variable Generate()
 		{
-			return Variable.Dictionary(new VariableDictionary(Schema));
+			var dictionary = new VariableDictionary();
+
+			if (Schema != null)
+				dictionary.ApplySchema(Schema, null);
+
+			return Variable.Dictionary(dictionary);
 		}
 
 		public override bool IsValid(Variable variable)
 		{
-			return variable.IsDictionary && (Schema == null || variable.AsDictionary.Schema == Schema);
+			return variable.IsDictionary && (Schema == null);// || variable.AsDictionary.Imple == Schema); TODO: move ImplementsSchema (and maybe ApplySchema as well) to VariableSchema
 		}
 
-		public override void Save(BinaryWriter writer, SerializedData data)
+		public override void Save(SerializedDataWriter writer)
 		{
-			data.SaveReference(writer, Schema);
+			writer.SaveReference(Schema);
 		}
 
-		public override void Load(BinaryReader reader, SerializedData data)
+		public override void Load(SerializedDataReader reader)
 		{
-			Schema = data.LoadReference(reader) as VariableSchema;
+			Schema = reader.LoadReference() as VariableSchema;
 		}
 	}
 }

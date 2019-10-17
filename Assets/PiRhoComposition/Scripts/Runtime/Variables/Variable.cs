@@ -1,4 +1,6 @@
-﻿using System;
+﻿using PiRhoSoft.Utilities;
+using System;
+using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
@@ -339,11 +341,56 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
-		#region Collection
+		#region Map
 
-		public bool IsCollection => Type == VariableType.Object || Type == VariableType.Dictionary;
-		public ObjectVariableCollection AsCollection => new ObjectVariableCollection(_reference);
-		public bool TryGetCollection(out ObjectVariableCollection collection) { collection = AsCollection; return collection.IsValid; }
+		private struct ObjectVariableCollection : IVariableMap
+		{
+			private object _owner;
+			private IVariableMap _variables;
+			private ClassVariableMap _class;
+
+			public ObjectVariableCollection(object owner)
+			{
+				_owner = owner;
+				_variables = owner as IVariableMap;
+				_class = _variables == null && _owner != null ? ClassVariableMap.Get(_owner.GetType()) : null;
+			}
+
+			public bool IsValid => _variables != null || _class != null;
+
+			public IReadOnlyList<string> VariableNames
+			{
+				get => _variables?.VariableNames ?? _class?.VariableNames;
+			}
+
+			public Variable GetVariable(string name)
+			{
+				if (_variables != null)
+					return _variables.GetVariable(name);
+				else if (_class != null)
+					return _class.GetVariable(_owner, name);
+				else
+					return Empty;
+			}
+
+			public SetVariableResult SetVariable(string name, Variable value)
+			{
+				if (_variables != null)
+					return _variables.SetVariable(name, value);
+				else if (_class != null)
+					return _class.SetVariable(_owner, name, value);
+				else
+					return SetVariableResult.NotFound;
+			}
+		}
+
+		public bool IsMap => Type == VariableType.Object || Type == VariableType.Dictionary;
+		public IVariableMap AsMap => new ObjectVariableCollection(_reference);
+		public bool TryGetCollection(out IVariableMap map) { var collection = new ObjectVariableCollection(_reference); map = collection; return collection.IsValid; }
+
+		#endregion
+
+		#region Array
 
 		public bool IsArray => _reference is IVariableArray;
 		public IVariableArray AsArray => _reference as IVariableArray;
@@ -555,7 +602,7 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
-		#region Reference
+		#region Asset
 
 		public static Variable Asset(AssetReference value) => CreateReference(VariableType.Asset, value ?? new AssetReference());
 		public bool IsAsset => _reference is AssetReference;
@@ -598,6 +645,33 @@ namespace PiRhoSoft.Composition
 			}
 
 			return CreateReference(VariableType.Object, reference);
+		}
+
+		#endregion
+	}
+
+	[Serializable]
+	public class SerializedVariable : ISerializationCallbackReceiver
+	{
+		public const string BindingProperty = nameof(_variableData);
+
+		public Variable Variable = Variable.Empty;
+		[SerializeField] private SerializedDataItem _variableData = new SerializedDataItem();
+
+		#region ISerializationCallbackReceiver Implementation
+
+		void ISerializationCallbackReceiver.OnBeforeSerialize()
+		{
+			_variableData.Clear();
+
+			using (var writer = new SerializedDataWriter(_variableData))
+				VariableHandler.Save(Variable, writer);
+		}
+
+		void ISerializationCallbackReceiver.OnAfterDeserialize()
+		{
+			using (var reader = new SerializedDataReader(_variableData))
+				Variable = VariableHandler.Load(reader);
 		}
 
 		#endregion

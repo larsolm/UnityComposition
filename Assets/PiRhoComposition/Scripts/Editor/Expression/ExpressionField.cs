@@ -42,7 +42,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			if (this.TryGetPropertyBindEvent(evt, out var property))
 			{
-				var textProperty = property.FindPropertyRelative("_statement");
+				var textProperty = property.FindPropertyRelative(Expression.StatementField);
 				bindingPath = textProperty.propertyPath;
 			}
 		}

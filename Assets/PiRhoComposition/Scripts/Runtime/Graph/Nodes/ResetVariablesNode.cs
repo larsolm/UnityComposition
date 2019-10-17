@@ -19,15 +19,15 @@ namespace PiRhoSoft.Composition
 		public VariableLookupReference Object = new VariableLookupReference();
 
 		[Tooltip("The list of variables to reset")]
-		[List(EmptyLabel = "No variables will be reset")]
+		[List(EmptyLabel = "All variables will be reset")]
 		public ResetVariableList Variables = new ResetVariableList();
 
 		public override Color NodeColor => Colors.ExecutionDark;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
-			if (variables.ResolveInterface(this, Object, out IResettableVariables reset))
-				reset.ResetVariables(Variables);
+			//if (variables.ResolveInterface(this, Object, out IResettableVariables reset))
+			//	reset.ResetVariables(Variables);
 
 			graph.GoTo(Next, nameof(Next));
 			yield break;

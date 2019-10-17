@@ -13,7 +13,7 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The node to go to after logging the message")]
 		public GraphNode Next = null;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			var text = Message.GetText(variables, false);
 			Debug.Log(text);

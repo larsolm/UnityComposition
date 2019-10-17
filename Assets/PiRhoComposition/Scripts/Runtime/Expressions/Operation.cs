@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Text;
 
 namespace PiRhoSoft.Composition
@@ -13,7 +12,7 @@ namespace PiRhoSoft.Composition
 	public abstract class Operation
 	{
 		public abstract void Parse(ExpressionParser parser, ExpressionToken token);
-		public abstract Variable Evaluate(IVariableCollection variables);
+		public abstract Variable Evaluate(IVariableMap variables);
 		public abstract void ToString(StringBuilder builder);
 
 		public virtual void GetInputs(VariableDefinitionList inputs, string source) { }

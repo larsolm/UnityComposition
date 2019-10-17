@@ -66,7 +66,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		private static Dictionary<int, Coroutine> _currentlyRunning = new Dictionary<int, Coroutine>();
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject<Transform>(this, Transform, out var transform))
 				yield return Move(transform, variables);
@@ -74,7 +74,7 @@ namespace PiRhoSoft.Composition.Extensions
 			graph.GoTo(Next, nameof(Next));
 		}
 
-		private IEnumerator Move(Transform transform, IVariableCollection variables)
+		private IEnumerator Move(Transform transform, IVariableMap variables)
 		{
 			var body2d = transform.GetComponent<Rigidbody2D>();
 			var body3d = transform.GetComponent<Rigidbody>();

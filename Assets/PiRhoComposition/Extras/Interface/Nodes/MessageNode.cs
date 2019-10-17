@@ -11,7 +11,7 @@ namespace PiRhoSoft.Composition.Extensions
 		public GraphNode Next = null;
 
 		[Tooltip("The MessageControl to show")]
-		[VariableReference(typeof(MessageControl))]
+		[VariableConstraint(typeof(MessageControl))]
 		public VariableLookupReference Control = new VariableLookupReference();
 
 		[Tooltip("Specifies whether to wait for the message to complete before moving on to Next")]
@@ -30,7 +30,7 @@ namespace PiRhoSoft.Composition.Extensions
 
 		public override Color NodeColor => Colors.InterfaceCyan;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			var text = Message.GetText(variables, false);
 

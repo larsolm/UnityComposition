@@ -1,5 +1,4 @@
 ﻿using PiRhoSoft.Utilities;
-using System.IO;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition
@@ -17,32 +16,32 @@ namespace PiRhoSoft.Composition
 				return variable.AsObject.ToString();
 		}
 
-		protected internal override void Save_(Variable value, BinaryWriter writer, SerializedData data)
+		protected internal override void Save_(Variable value, SerializedDataWriter writer)
 		{
 			if (value.TryGetObject<Object>(out var obj))
 			{
-				writer.Write(true);
-				data.SaveReference(writer, obj);
+				writer.Writer.Write(true);
+				writer.SaveReference(obj);
 			}
 			else
 			{
-				writer.Write(false);
-				data.SaveInstance(writer, value.AsObject);
+				writer.Writer.Write(false);
+				writer.SaveInstance(value.AsObject);
 			}
 		}
 
-		protected internal override Variable Load_(BinaryReader reader, SerializedData data)
+		protected internal override Variable Load_(SerializedDataReader reader)
 		{
-			var isObject = reader.ReadBoolean();
+			var isObject = reader.Reader.ReadBoolean();
 
 			if (isObject)
 			{
-				var obj = data.LoadReference(reader);
+				var obj = reader.LoadReference();
 				return Variable.Object(obj);
 			}
 			else
 			{
-				var obj = data.LoadInstance<object>(reader);
+				var obj = reader.LoadInstance<object>();
 				return Variable.Object(obj);
 			}
 		}

@@ -8,13 +8,13 @@ namespace PiRhoSoft.Composition
 		[Inline]
 		public AnimatedVariable Animation = new AnimatedVariable();
 
-		protected override void UpdateBinding(IVariableCollection variables, BindingAnimationStatus status)
+		protected override void UpdateBinding(IVariableMap variables, BindingAnimationStatus status)
 		{
 			StopAllCoroutines();
 			StartCoroutine(Animate(variables, status));
 		}
 
-		private IEnumerator Animate(IVariableCollection variables, BindingAnimationStatus status)
+		private IEnumerator Animate(IVariableMap variables, BindingAnimationStatus status)
 		{
 			status.Increment();
 

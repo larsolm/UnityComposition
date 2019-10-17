@@ -1,238 +1,88 @@
-﻿using PiRhoSoft.Utilities;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.IO;
-using System.Linq;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class CustomVariableCollection : IVariableArray, IVariableCollection, IResettableVariables, ISerializableData, ISerializationCallbackReceiver
+	public class CustomVariableCollection : SerializedVariableDictionary
 	{
+		public const string DefinitionsProperty = nameof(_definitions);
+
 		[SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
-		private List<Variable> _variables = new List<Variable>();
-		private Dictionary<string, int> _map = new Dictionary<string, int>();
-		[SerializeField] private SerializedData _variablesData = new SerializedData();
+		private bool _locked = false;
 
-		#region Access By Index
-
-		public int VariableCount
+		protected override void Deserialize()
 		{
-			get => _variables.Count;
+			_locked = false;
+			base.Deserialize();
+			_locked = true;
 		}
 
-		public Variable GetVariable(int index)
+		public void Add(VariableDefinition definition)
 		{
-			return index >= 0 && index < _variables.Count
-				? _variables[index]
-				: Variable.Empty;
+			_locked = false;
+			AddVariable(definition.Name, definition.Generate());
+			_locked = true;
 		}
 
-		public SetVariableResult SetVariable(int index, Variable value)
+		public VariableDefinition GetDefinition(int index)
 		{
-			if (index >= 0 && index < _variables.Count)
-				return UpdateVariable(index, value);
-			else
+			return index < 0 || index >= _definitions.Count ? null : _definitions[index];
+		}
+
+		#region IVariableArray Implementation
+
+		public override SetVariableResult SetVariable(int index, Variable variable)
+		{
+			if (index < 0 || index >= _definitions.Count)
 				return SetVariableResult.NotFound;
+			
+			if (!_definitions[index].IsValid(variable))
+				return SetVariableResult.TypeMismatch;
+
+			return base.SetVariable(index, variable);
 		}
 
 		#endregion
 
-		#region Access By Name
+		#region IVariableMap Implementation
 
-		public IReadOnlyList<string> VariableNames
+		public override SetVariableResult SetVariable(string name, Variable variable)
 		{
-			get => _definitions.Select(d => d.Name).ToList(); // TODO: cache?
-		}
-
-		public Variable GetVariable(string name)
-		{
-			if (_map.TryGetValue(name, out int index))
-				return _variables[index];
-
-			return Variable.Empty;
-		}
-
-		public SetVariableResult SetVariable(string name, Variable value)
-		{
-			if (_map.TryGetValue(name, out int index))
-				return UpdateVariable(index, value);
-			else
+			if (!TryGetIndex(name, out var index))
 				return SetVariableResult.NotFound;
+
+			if (!_definitions[index].IsValid(variable))
+				return SetVariableResult.TypeMismatch;
+
+			return base.SetVariable(name, variable);
 		}
 
 		#endregion
 
-		#region Modify
+		#region IVariableDictionary Implementation
 
-		public bool AddVariable(string name, Variable value)
+		public override SetVariableResult AddVariable(string name, Variable variable)
 		{
-			if (!_map.TryGetValue(name, out _))
-			{
-				AddVariable(name, _variables.Count, value);
-				return true;
-			}
+			if (_locked)
+				return SetVariableResult.ReadOnly;
 
-			return false;
+			return base.AddVariable(name, variable);
 		}
 
-		public bool RemoveVariable(string name)
+		public override SetVariableResult RemoveVariable(string name)
 		{
-			if (_map.TryGetValue(name, out var index))
-			{
-				RemoveVariable(name, index);
-				return true;
-			}
+			if (TryGetIndex(name, out var index))
+				_definitions.RemoveAt(index);
 
-			return false;
+			return base.RemoveVariable(name);
 		}
 
-		public void Clear()
+		public override SetVariableResult ClearVariables()
 		{
 			_definitions.Clear();
-			_variables.Clear();
-			_map.Clear();
-		}
-
-		private void AddVariable(string name, int index, Variable value)
-		{
-			_definitions.Add(new VariableDefinition(name, value.Type));
-			_variables.Add(value);
-			_map.Add(name, index);
-		}
-
-		private void RemoveVariable(string name, int index)
-		{
-			_definitions.RemoveAt(index);
-			_variables.RemoveAt(index);
-			_map.Remove(name);
-
-			for (var i = index; i < _definitions.Count; i++)
-				_map[_definitions[i].Name] = i;
-		}
-
-		private SetVariableResult UpdateVariable(int index, Variable value)
-		{
-			if (_definitions[index].IsValid(value))
-			{
-				_variables[index] = value;
-				return SetVariableResult.Success;
-			}
-			else
-			{
-				return SetVariableResult.TypeMismatch;
-			}
-		}
-
-		#endregion
-
-		#region Reset
-
-		public void ResetTag(string tag)
-		{
-		}
-
-		public void ResetVariables(IList<string> variables)
-		{
-			foreach (var name in variables)
-			{
-				if (_map.TryGetValue(name, out var index))
-					ResetVariable(index);
-			}
-		}
-
-		public void ResetAll()
-		{
-			for (var i = 0; i < Definitions.Count; i++)
-				ResetVariable(i);
-		}
-
-		private void ResetVariable(int index)
-		{
-			_variables[index] = _definitions[index].Generate();
-		}
-
-		#endregion
-
-		#region Serialization
-
-		void ISerializationCallbackReceiver.OnBeforeSerialize()
-		{
-			_variablesData.SaveData(this, 1);
-		}
-
-		void ISerializationCallbackReceiver.OnAfterDeserialize()
-		{
-			_variablesData.LoadData(this);
-		}
-
-		void ISerializableData.Save(BinaryWriter writer, SerializedData data)
-		{
-			writer.Write(_variables.Count);
-
-			for (var i = 0; i < _variables.Count; i++)
-				VariableHandler.Save(_variables[i], writer, data);
-		}
-
-		void ISerializableData.Load(BinaryReader reader, SerializedData data)
-		{
-			Clear();
-			var count = reader.ReadInt32();
-
-			for (var i = 0; i < count; i++)
-			{
-				var name = reader.ReadString();
-				var variable = VariableHandler.Load(reader, data);
-
-				AddVariable(name, variable);
-			}
-		}
-
-		#endregion
-
-		#region Editor Support
-
-		public List<VariableDefinition> Definitions => _definitions;
-		public List<Variable> Variables => _variables;
-		public Dictionary<string, int> Map => _map;
-
-		public void ChangeName(int index, string name)
-		{
-			var oldName = _definitions[index].Name;
-			_definitions[index].Name = name;
-			_map.Remove(oldName);
-			_map.Add(name, index);
-		}
-
-		public void ChangeType(int index, VariableType type)
-		{
-			_definitions[index].Type = type;
-			_variables[index] = _definitions[index].Generate();
-		}
-
-		public void ChangeOrder(int from, int to)
-		{
-			var fromName = _definitions[from].Name;
-			var toName = _definitions[to].Name;
-			_map[fromName] = to;
-			_map[toName] = from;
-
-			var definition = _definitions[from];
-			_definitions[from] = _definitions[to];
-			_definitions[to] = definition;
-
-			var variable = _variables[from];
-			_variables[from] = _variables[to];
-			_variables[to] = variable;
-		}
-
-		public void ChangeVariable(int index, Variable value)
-		{
-			_variables[index] = value;
-
-			if (_definitions[index].Type != value.Type)
-				_definitions[index].Type = value.Type;
+			return base.ClearVariables();
 		}
 
 		#endregion

@@ -13,12 +13,12 @@ namespace PiRhoSoft.Composition
 		public GraphNode Next = null;
 
 		[Tooltip("The target GameObject, Behaviour, or Renderer to enable")]
-		[VariableReference(typeof(Object))]
+		[VariableConstraint(typeof(Object))]
 		public VariableLookupReference Target = new VariableLookupReference();
 
 		public override Color NodeColor => Colors.SequencingLight;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.ResolveObject(this, Target, out Object target))
 			{

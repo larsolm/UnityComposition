@@ -1,7 +1,6 @@
 ﻿using PiRhoSoft.Utilities.Editor;
 using System.Collections.Generic;
 using UnityEditor.UIElements;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -57,7 +56,7 @@ namespace PiRhoSoft.Composition.Editor
 			Refresh();
 		}
 
-		private void Refresh()
+		public void Refresh()
 		{
 			_definitionControl.SetValueWithoutNotify(Value.Definition);
 			_tag.Clear();

@@ -69,16 +69,16 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public override void Save(BinaryWriter writer, SerializedData data)
+		public override void Save(SerializedDataWriter writer)
 		{
-			writer.Write((int)ItemType);
-			data.SaveInstance(writer, ItemConstraint);
+			writer.Writer.Write((int)ItemType);
+			writer.SaveInstance(ItemConstraint);
 		}
 
-		public override void Load(BinaryReader reader, SerializedData data)
+		public override void Load(SerializedDataReader reader)
 		{
-			ItemType = (VariableType)reader.ReadInt32();
-			ItemConstraint = data.LoadInstance<VariableConstraint>(reader);
+			ItemType = (VariableType)reader.Reader.ReadInt32();
+			ItemConstraint = reader.LoadInstance<VariableConstraint>();
 		}
 
 		private void SetType(VariableType type)

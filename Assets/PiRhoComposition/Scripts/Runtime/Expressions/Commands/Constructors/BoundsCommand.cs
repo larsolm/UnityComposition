@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class BoundsCommand : ICommand
 	{
-		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableMap variables, string name, List<Operation> parameters)
 		{
 			if (parameters.Count == 2)
 			{

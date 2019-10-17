@@ -46,14 +46,14 @@ namespace PiRhoSoft.Composition
 			return variable.HasEnum(EnumType);
 		}
 
-		public override void Save(BinaryWriter writer, SerializedData data)
+		public override void Save(SerializedDataWriter writer)
 		{
-			data.SaveType(writer, EnumType);
+			writer.SaveType(EnumType);
 		}
 
-		public override void Load(BinaryReader reader, SerializedData data)
+		public override void Load(SerializedDataReader reader)
 		{
-			EnumType = data.LoadType(reader);
+			EnumType = reader.LoadType();
 		}
 	}
 }

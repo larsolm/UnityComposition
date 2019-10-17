@@ -8,7 +8,7 @@ using Object = UnityEngine.Object;
 namespace PiRhoSoft.Composition
 {
 	[HelpURL(Configuration.DocumentationUrl + "variable-schema")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
+	[CreateAssetMenu(menuName = "PiRho Composition/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
 	public class VariableSchema : ScriptableObject
 	{
 		public const string TagsField = nameof(_tags);
@@ -83,7 +83,7 @@ namespace PiRhoSoft.Composition
 				{
 					Tag = _tags.Count > 0 ? _tags[0] : string.Empty,
 					Type = VariableSchemaInitializerType.Default,
-					Default = Variable.Empty,
+					Default = new SerializedVariable { Variable = Variable.Empty },
 					Initializer = new Expression(),
 					Definition = new VariableDefinition(name, VariableType.Empty),
 				});
@@ -157,13 +157,13 @@ namespace PiRhoSoft.Composition
 		public string Tag;
 		public VariableSchemaInitializerType Type;
 		public Expression Initializer;
-		public Variable Default;
+		public SerializedVariable Default;
 		public VariableDefinition Definition;
 
-		public Variable GenerateVariable(IVariableCollection variables)
+		public Variable GenerateVariable(IVariableMap variables)
 		{
 			if (Type == VariableSchemaInitializerType.Default)
-				return Default;
+				return Default.Variable;
 
 			if (Initializer != null && Initializer.IsValid)
 			{

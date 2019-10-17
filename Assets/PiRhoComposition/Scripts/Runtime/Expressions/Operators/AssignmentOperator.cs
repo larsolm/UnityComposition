@@ -2,7 +2,7 @@
 {
 	public interface IAssignableOperation
 	{
-		SetVariableResult SetValue(IVariableCollection variables, Variable value);
+		SetVariableResult SetValue(IVariableMap variables, Variable value);
 	}
 
 	public abstract class AssignmentOperator : InfixOperation
@@ -16,7 +16,7 @@
 			Left.GetOutputs(outputs, source);
 		}
 
-		protected Variable Assign(IVariableCollection variables, Variable value)
+		protected Variable Assign(IVariableMap variables, Variable value)
 		{
 			if (Left is IAssignableOperation assignable)
 			{

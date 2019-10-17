@@ -10,11 +10,11 @@ namespace PiRhoSoft.Composition
 	{
 		void Exit();
 		void GoTo(GraphNode node, string source);
-		IEnumerator Run(GraphNode node, IVariableCollection variables, string source);
+		IEnumerator Run(GraphNode node, IVariableMap variables, string source);
 	}
 
 	[HelpURL(Configuration.DocumentationUrl + "graph")]
-	[CreateAssetMenu(menuName = "PiRho Soft/Graph", fileName = nameof(Graph), order = 100)]
+	[CreateAssetMenu(menuName = "PiRho Composition/Graph", fileName = nameof(Graph), order = 100)]
 	public class Graph : ScriptableObject
 	{
 		// TODO: need to ensure a node isn't run by two different runners at the same time
@@ -38,7 +38,7 @@ namespace PiRhoSoft.Composition
 
 		public bool IsRunning { get; private set; }
 		public bool IsExiting { get; private set; }
-		public IVariableCollection Variables { get; private set; }
+		public IVariableMap Variables { get; private set; }
 		private List<GraphRunner> _runners = new List<GraphRunner>();
 
 		#region Reset
@@ -154,7 +154,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		private IEnumerator Run(GraphNode node, IVariableCollection variables, string source)
+		private IEnumerator Run(GraphNode node, IVariableMap variables, string source)
 		{
 			var runner = _graphRunnerPool.Reserve();
 			_runners.Add(runner);
@@ -252,7 +252,7 @@ namespace PiRhoSoft.Composition
 				Debug.Log($"(Frame {Time.frameCount}) Graph {name}: running '{source}'", this);
 		}
 
-		private IEnumerator ProcessNode(IGraphRunner runner, GraphNode node, IVariableCollection variables, string source)
+		private IEnumerator ProcessNode(IGraphRunner runner, GraphNode node, IVariableMap variables, string source)
 		{
 			if (node.IsBreakpoint && IsDebugBreakEnabled)
 			{
@@ -320,13 +320,13 @@ namespace PiRhoSoft.Composition
 				}
 			}
 
-			public IEnumerator Run(GraphNode node, IVariableCollection variables, string source)
+			public IEnumerator Run(GraphNode node, IVariableMap variables, string source)
 			{
 				if (!_graph.IsExiting)
 					yield return CompositionManager.Instance.GetEnumerator(_graph.Run(node, variables, source));
 			}
 
-			public IEnumerator Run(Graph graph, GraphNode root, IVariableCollection variables, string source)
+			public IEnumerator Run(Graph graph, GraphNode root, IVariableMap variables, string source)
 			{
 				_graph = graph;
 				_graph.IsExiting = false;

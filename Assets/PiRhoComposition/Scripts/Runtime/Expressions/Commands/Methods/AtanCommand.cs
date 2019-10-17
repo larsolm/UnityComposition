@@ -5,7 +5,7 @@ namespace PiRhoSoft.Composition
 {
 	internal class AtanCommand : ICommand
 	{
-		public Variable Evaluate(IVariableCollection variables, string name, List<Operation> parameters)
+		public Variable Evaluate(IVariableMap variables, string name, List<Operation> parameters)
 		{
 			switch (parameters.Count)
 			{

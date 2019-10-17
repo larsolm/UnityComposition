@@ -4,40 +4,10 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	public class VariableReferenceAttribute : Attribute
-	{
-		public VariableType Type { get; private set; }
-		public VariableConstraint Constraint { get; private set; }
-
-		public VariableReferenceAttribute(VariableType type) => Type = type;
-		public VariableReferenceAttribute(int minimum, int maximum) { Type = VariableType.Int; Constraint = new IntConstraint(minimum, maximum); }
-		public VariableReferenceAttribute(bool noMinimum, int maximum) { Type = VariableType.Int; Constraint = new IntConstraint(null, maximum); }
-		public VariableReferenceAttribute(int minimum, bool noMaximum) { Type = VariableType.Int; Constraint = new IntConstraint(minimum, null); }
-		public VariableReferenceAttribute(float minimum, float maximum) { Type = VariableType.Float; Constraint = new FloatConstraint(minimum, maximum); }
-		public VariableReferenceAttribute(bool noMinimum, float maximum) { Type = VariableType.Float; Constraint = new FloatConstraint(null, maximum); }
-		public VariableReferenceAttribute(float minimum, bool noMaximum) { Type = VariableType.Float; Constraint = new FloatConstraint(minimum, null); }
-		public VariableReferenceAttribute(string[] values) { Type = VariableType.String; Constraint = new StringConstraint(new List<string>(values)); }
-
-		public VariableReferenceAttribute(Type type)
-		{
-			if (Variable.IsValidEnumType(type))
-				Constraint = new EnumConstraint(type);
-			else
-				Constraint = new ObjectConstraint(type);
-		}
-
-		public VariableDefinition GetDefinition(string name)
-		{
-			if (Constraint != null)
-				return new VariableDefinition(name, Constraint);
-			else
-				return new VariableDefinition(name, Type);
-		}
-	}
-
 	[Serializable]
 	public class VariableReference
 	{
+		public const string VariableField = nameof(_variable);
 		public const string Cast = "as";
 		public const char Separator = '.';
 		public const char LookupOpen = '[';
@@ -206,7 +176,7 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class VariableLookupReference : VariableReference
 	{
-		public Variable GetValue(IVariableCollection variables)
+		public Variable GetValue(IVariableMap variables)
 		{
 			var value = IsAssigned ? Composition.Variable.Object(variables) : Composition.Variable.Empty;
 
@@ -230,7 +200,7 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class VariableAssignmentReference : VariableReference
 	{
-		public SetVariableResult SetValue(IVariableCollection variables, Variable value)
+		public SetVariableResult SetValue(IVariableMap variables, Variable value)
 		{
 			if (IsAssigned)
 			{

@@ -7,7 +7,7 @@ namespace PiRhoSoft.Composition
 	[DisallowMultipleComponent]
 	[RequireComponent(typeof(Renderer))]
 	[HelpURL(Configuration.DocumentationUrl + "material-animation")]
-	[AddComponentMenu("PiRho Soft/Animation/Material Animation")]
+	[AddComponentMenu("PiRho Composition/Animation/Material Animation")]
 	public class MaterialAnimation : MonoBehaviour, ICompletionNotifier
 	{
 		private static readonly int _progressId = Shader.PropertyToID("_Progress");

@@ -19,7 +19,7 @@ namespace PiRhoSoft.Composition
 
 		public override Color NodeColor => Colors.Sequencing;
 
-		public override IEnumerator Run(IGraphRunner graph, IVariableCollection variables)
+		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{
 			if (variables.Resolve(this, Time, out var time))
 			{

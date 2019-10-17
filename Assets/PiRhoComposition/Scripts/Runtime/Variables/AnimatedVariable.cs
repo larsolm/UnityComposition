@@ -54,7 +54,7 @@ namespace PiRhoSoft.Composition
 		private float _location;
 		private float _end;
 
-		public bool Start(Object context, IVariableCollection variables)
+		public bool Start(Object context, IVariableMap variables)
 		{
 			_from = From.GetValue(variables);
 			_to = To.GetValue(variables);
@@ -72,7 +72,7 @@ namespace PiRhoSoft.Composition
 			return !Value.IsEmpty;
 		}
 
-		public void Step(IVariableCollection variables)
+		public void Step(IVariableMap variables)
 		{
 			var elapsed = UseUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
 			var increment = Advance == AnimatedVariableType.Duration ? elapsed : Speed * elapsed;
@@ -87,12 +87,12 @@ namespace PiRhoSoft.Composition
 				Set(variables, time);
 		}
 
-		public void Set(IVariableCollection variables, float time)
+		public void Set(IVariableMap variables, float time)
 		{
 			Value = VariableHandler.Interpolate(_from, _to, time);
 		}
 
-		public void Complete(IVariableCollection variables)
+		public void Complete(IVariableMap variables)
 		{
 			_location = _end;
 			Set(variables, 1.0f);

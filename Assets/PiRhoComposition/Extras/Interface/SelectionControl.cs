@@ -38,7 +38,7 @@ namespace PiRhoSoft.Composition.Extensions
 			_menu.AcceptsInput = false;
 		}
 
-		public void Show(IVariableCollection variables, IEnumerable<MenuItemTemplate> items, bool isSelectionRequired, bool resetIndex)
+		public void Show(IVariableMap variables, IEnumerable<MenuItemTemplate> items, bool isSelectionRequired, bool resetIndex)
 		{
 			Activate();
 			StopAllCoroutines();
@@ -103,7 +103,7 @@ namespace PiRhoSoft.Composition.Extensions
 			}
 		}
 
-		private void CreateItems(IVariableCollection variables, IEnumerable<MenuItemTemplate> items)
+		private void CreateItems(IVariableMap variables, IEnumerable<MenuItemTemplate> items)
 		{
 			var index = 0;
 
