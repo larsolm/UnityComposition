@@ -59,9 +59,8 @@ MonoBehaviour:
         Text: context
     Value:
       _variableData:
-        Version: 1
-        Data: AQAAAAAAAAA=
-        References: []
+        _references: []
+        _content: AAAAAA==
   WaitForCompletion: 1
 --- !u!114 &-2113145965619732750
 MonoBehaviour:
@@ -85,12 +84,9 @@ MonoBehaviour:
       _variable: 
       _tokens: []
     Value: 
-  Tag:
-    Type: 0
-    Reference:
-      _variable: 
-      _tokens: []
-    Value: 
+  Player:
+    _variable: 
+    _tokens: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -107,9 +103,8 @@ MonoBehaviour:
     Name: context
     _type: 0
     _constraintData:
-      Version: 1
-      Data: 
-      References: []
+      _references: []
+      _content: AAA=
   Inputs:
     _items: []
   Outputs:

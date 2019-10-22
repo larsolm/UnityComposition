@@ -113,7 +113,7 @@ namespace PiRhoSoft.Composition
 			{
 				var entry = _entries[from];
 				_entries.RemoveAt(from);
-				_entries.Insert(from < to ? to - 1 : to, entry);
+				_entries.Insert(to, entry);
 
 				EntriesChanged();
 				return true;
@@ -122,12 +122,7 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public void EntryChanged(int index)
-		{
-			EntriesChanged();
-		}
-
-		private void EntriesChanged()
+		public void EntriesChanged()
 		{
 			_names = _entries.Select(entry => entry.Definition.Name).ToList();
 			_version++;

@@ -4,7 +4,7 @@
 
 .pirho-expression__text
 {
-	margin: 1px 0px;
+	margin: 1px 0px 2px 0px;
 }
 
 .pirho-expression__message

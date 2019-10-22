@@ -44,8 +44,6 @@ namespace PiRhoSoft.Composition.Editor
 					using (var reader = new SerializedDataReader(data))
 						base.value = VariableHandler.Load(reader);
 				});
-
-				Add(_binding);
 			}
 			else
 			{

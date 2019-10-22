@@ -61,16 +61,14 @@ MonoBehaviour:
     Name: context
     _type: 0
     _constraintData:
-      Version: 0
-      Data: 
-      References: []
+      _references: []
+      _content: AAA=
   Inputs:
     _items: []
   Outputs:
     _items: []
-  StartNode: {fileID: -2832075563476024605}
+  StartNode: {fileID: 6074473485514722083}
   Nodes:
-  - {fileID: -2832075563476024605}
   - {fileID: 6074473485514722083}
   - {fileID: -5649388568590615349}
 --- !u!114 &6074473485514722083

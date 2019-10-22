@@ -23,6 +23,7 @@ namespace PiRhoSoft.Composition
 		private const string _nodeAlreadyRunningError = "(PCGNAR) Failed to run GraphNode '{0}' on Graph '{1}': the node is already running";
 
 		[Tooltip("The definition for the object that runs this graph")]
+		[Group("Context Definition")]
 		public VariableDefinition Context = new VariableDefinition("context");
 
 		[Tooltip("The definitions for input variables used in this graph")]

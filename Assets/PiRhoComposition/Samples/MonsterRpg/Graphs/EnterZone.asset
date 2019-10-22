@@ -34,7 +34,7 @@ MonoBehaviour:
   Graph: {fileID: 11400000}
   GraphPosition: {x: 109, y: -83.99997}
   IsBreakpoint: 0
-  Next: {fileID: 1288218328315112789}
+  Next: {fileID: 6924260572586425673}
   Scene:
     Type: 0
     Reference:
@@ -62,9 +62,8 @@ MonoBehaviour:
     Name: context
     _type: 0
     _constraintData:
-      Version: 0
-      Data: 
-      References: []
+      _references: []
+      _content: AAA=
   Inputs:
     _items: []
   Outputs:
@@ -72,8 +71,6 @@ MonoBehaviour:
   StartNode: {fileID: -4677256047553447236}
   Nodes:
   - {fileID: -4677256047553447236}
-  - {fileID: 1288218328315112789}
-  - {fileID: -7895237054792282357}
   - {fileID: 6924260572586425673}
 --- !u!114 &1288218328315112789
 MonoBehaviour:
@@ -115,7 +112,7 @@ MonoBehaviour:
   Graph: {fileID: 11400000}
   GraphPosition: {x: 341, y: -93.99997}
   IsBreakpoint: 0
-  Next: {fileID: -7895237054792282357}
+  Next: {fileID: 0}
   Transition:
     Type: 0
     Reference:

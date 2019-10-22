@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Exit Zone
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 139, y: -101.99997}
+  GraphPosition: {x: 112, y: -101.99997}
   IsBreakpoint: 0
   Next: {fileID: 4844405298555019272}
   TargetGraph:
@@ -36,9 +36,8 @@ MonoBehaviour:
         Text: Component
     Value:
       _variableData:
-        Version: 1
-        Data: AQAAAAAAAAA=
-        References: []
+        _references: []
+        _content: AAAAAA==
   WaitForCompletion: 0
 --- !u!114 &11400000
 MonoBehaviour:
@@ -54,11 +53,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Context:
     Name: context
-    _type: 0
+    _type: 1
     _constraintData:
-      Version: 0
-      Data: 
-      References: []
+      _references: []
+      _content: AAA=
   Inputs:
     _items: []
   Outputs:
@@ -67,50 +65,6 @@ MonoBehaviour:
   Nodes:
   - {fileID: -8009924615641308950}
   - {fileID: 4844405298555019272}
-  - {fileID: 813650219417967429}
-  - {fileID: 2573489444373147113}
---- !u!114 &813650219417967429
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8a102ce8b6467da479f0568f1e120259, type: 3}
-  m_Name: MessageNode
-  m_EditorClassIdentifier: 
-  Graph: {fileID: 11400000}
-  GraphPosition: {x: 460, y: -61.99997}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Control:
-    _variable: 
-    _tokens: []
-  WaitForCompletion: 1
-  AutoHide: 0
-  WaitTime: 0
-  Message:
-    Text: 
---- !u!114 &2573489444373147113
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f4d81fd0fb166040bb15d8dfa03f82d, type: 3}
-  m_Name: ExpressionNode
-  m_EditorClassIdentifier: 
-  Graph: {fileID: 11400000}
-  GraphPosition: {x: 403, y: 32.00003}
-  IsBreakpoint: 0
-  Next: {fileID: 0}
-  Expression:
-    _statement: 
 --- !u!114 &4844405298555019272
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -145,7 +99,6 @@ MonoBehaviour:
       _tokens: []
     Value:
       _variableData:
-        Version: 1
-        Data: AQAAAAAAAAA=
-        References: []
+        _references: []
+        _content: AAAAAA==
   WaitForCompletion: 1

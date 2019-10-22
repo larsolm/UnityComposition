@@ -36,7 +36,7 @@ namespace PiRhoSoft.Composition
 	}
 
 	[Serializable]
-	public abstract class VariableConstraint
+	public abstract class VariableConstraint : ISerializableData
 	{
 		public abstract VariableType Type { get; }
 		public abstract Variable Generate();

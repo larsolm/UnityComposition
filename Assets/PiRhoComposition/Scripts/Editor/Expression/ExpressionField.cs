@@ -35,7 +35,6 @@ namespace PiRhoSoft.Composition.Editor
 			_control.SetValueWithoutNotify(newValue);
 		}
 
-		// Use this to set the bindingPath so that everywhere this field is used we don't have to step down into the "_variable" property
 		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
 		{
 			base.ExecuteDefaultActionAtTarget(evt);
@@ -43,7 +42,8 @@ namespace PiRhoSoft.Composition.Editor
 			if (this.TryGetPropertyBindEvent(evt, out var property))
 			{
 				var textProperty = property.FindPropertyRelative(Expression.StatementField);
-				bindingPath = textProperty.propertyPath;
+				if (textProperty != null)
+					bindingPath = textProperty.propertyPath;
 			}
 		}
 	}

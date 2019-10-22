@@ -1,6 +1,6 @@
-﻿using PiRhoSoft.Utilities;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -21,8 +21,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class EntryProxy : IDictionaryProxy
 		{
-			private SerializedProperty _property;
-			private VariableSchema _schema;
+			private readonly SerializedProperty _property;
+			private readonly VariableSchema _schema;
 
 			public int KeyCount => _schema.EntryCount;
 
@@ -48,13 +48,16 @@ namespace PiRhoSoft.Composition.Editor
 			public VisualElement CreateField(int index)
 			{
 				var property = _property.GetArrayElementAtIndex(index);
-				var field = new VariableSchemaEntryField(property, _schema) { userData = index };
+				var value = _schema.GetEntry(index);
+				var field = new VariableSchemaEntryField(property, _schema, value) { userData = index };
+				field.BindProperty(property);
 				return field;
 			}
 
 			public bool NeedsUpdate(VisualElement item, int index)
 			{
-				return !(item.userData is int i) || i != index;
+				var entry = _schema.GetEntry(index);
+				return !(item.userData is int i) || i != index || !_schema.Tags.Contains(entry.Tag);
 			}
 
 			public bool CanAdd(string key)
@@ -74,17 +77,26 @@ namespace PiRhoSoft.Composition.Editor
 
 			public void AddItem(string key)
 			{
-				_schema.AddEntry(key);
+				using (new ChangeScope(_schema))
+					_schema.AddEntry(key);
+
+				_property.serializedObject.Update();
 			}
 
 			public void RemoveItem(int index)
 			{
-				_schema.RemoveEntry(index);
+				using (new ChangeScope(_schema))
+					_schema.RemoveEntry(index);
+
+				_property.serializedObject.Update();
 			}
 
 			public void ReorderItem(int from, int to)
 			{
-				_schema.MoveEntry(from, to);
+				using (new ChangeScope(_schema))
+					_schema.MoveEntry(from, to);
+				
+				_property.serializedObject.Update();
 			}
 		}
 	}

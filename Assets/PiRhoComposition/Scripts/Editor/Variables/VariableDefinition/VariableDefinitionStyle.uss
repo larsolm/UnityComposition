@@ -1,11 +1,18 @@
 ﻿.pirho-variable-definition
 {
+	margin: 1px 3px;
 }
 
-.pirho-variable-definition__name
+.pirho-variable-definition__name-label
 {
 	color: #000000;
 	-unity-font-style: bold;
+	margin: 1px 0px;
+}
+
+.pirho-variable-definition__name-field
+{
+	margin: 1px 0px;
 }
 
 .pirho-variable-definition__name--none
@@ -31,6 +38,15 @@
 {
 	flex-direction: row;
 	flex-grow: 1;
+}
+
+.pirho-variable-definition__constraint__number__container--min
+{
+}
+
+.pirho-variable-definition__constraint__number__container--max
+{
+	margin-left: 5px;
 }
 
 .pirho-variable-definition__constraint__number__label

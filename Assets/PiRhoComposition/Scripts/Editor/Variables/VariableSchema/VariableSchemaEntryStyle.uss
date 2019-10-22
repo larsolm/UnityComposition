@@ -6,63 +6,64 @@
 {
 }
 
-.pirho-variable-schema-entry__initializer
+.pirho-variable-schema-entry__initializer-container
 {
+	display: flex;
 	flex-direction: row;
 }
 
-.pirho-variable-schema-entry__initializer__label
-{
-	margin: 0 5px;
-	align-self: center;
-}
-
-.pirho-variable-schema-entry__initializer__type
-{
-	border-color: #555;
-	border-radius: 5px;
-	border-width: 1px;
-	min-width: 23px;
-	max-width: 23px;
-	min-height: 21px;
-	max-height: 21px;
-	align-self: center;
-	padding: 3px 1px;
-}
-
-.pirho-variable-schema-entry--default .pirho-variable-schema-entry__initializer__type
-{
-	background-color: #DDD;
-}
-
-.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__initializer__type
-{
-	background-color: #555;
-}
-
-.pirho-variable-schema-entry__initializer__mode:active
-{
-	background-color: #333;
-}
-
-.pirho-variable-schema-entry__initializer__default
-{
-	display: flex;
-	align-self: center;
-}
-
-.pirho-variable-schema-entry__initializer__expression
-{
-	display: flex;
-	align-self: center;
-}
-
-.pirho-variable-schema-entry--default .pirho-variable-schema-entry__initializer__expression
+.pirho-variable-schema-entry--no-initializer .pirho-variable-schema-entry__initializer-container
 {
 	display: none;
 }
 
-.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__initializer__default
+.pirho-variable-schema-entry__type
+{
+	min-width: 23px;
+	max-width: 23px;
+	min-height: 19px;
+	max-height: 19px;
+	align-self: flex-start;
+	padding: 2px 1px;
+	margin: 1px 0px;
+	border-width: 1px;
+	border-color: #AAAAAA;
+}
+
+.pirho-variable-schema-entry--default .pirho-variable-schema-entry__type
+{
+}
+
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__type
+{
+	background-color: #6B6B6B;
+}
+
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__type:hover
+{
+	background-color: #6B6B6B;
+}
+
+.pirho-variable-schema-entry__default
+{
+	flex-shrink: 1;
+	display: flex;
+	margin: 1px 0px 1px 5px;
+}
+
+.pirho-variable-schema-entry__expression
+{
+	flex-grow: 1;
+	display: flex;
+	margin: 1px 0px 1px 5px;
+}
+
+.pirho-variable-schema-entry--default .pirho-variable-schema-entry__expression
+{
+	display: none;
+}
+
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__default
 {
 	display: none
 }

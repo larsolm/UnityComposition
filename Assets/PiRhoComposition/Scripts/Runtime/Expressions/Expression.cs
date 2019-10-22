@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition
 		private const string _commandEvaluationError = "(CCEE) Failed to execute Command '{0}' on '{1}': {2}";
 		private const string _invalidResultWarning = "(CEIR) '{0}' expected the Expression '{1}' to return type '{2}' but it instead returned type '{3}'";
 
-		[SerializeField] private string _statement;
+		[SerializeField] private string _statement = string.Empty;
 		[NonSerialized] private List<Operation> _operations;
 		[NonSerialized] private Operation _currentOperation;
 

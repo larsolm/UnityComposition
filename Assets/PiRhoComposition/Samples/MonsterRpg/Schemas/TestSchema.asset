@@ -13,8 +13,308 @@ MonoBehaviour:
   m_Name: TestSchema
   m_EditorClassIdentifier: 
   _tags:
-    _items: []
+    _items:
+    - Hello
   _entries:
-    _items: []
-  _names: []
-  _version: 0
+    _items:
+    - Tag: Hello
+      Type: 0
+      Initializer:
+        _statement: 
+      Default:
+        _variableData:
+          _references: []
+          _content: AgAAAAAAAAA=
+      Definition:
+        Name: Item
+        _type: 0
+        _constraintData:
+          _references:
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          - {fileID: 0}
+          _content: AAA=
+    - Tag: Hello
+      Type: 0
+      Initializer:
+        _statement: 
+      Default:
+        _variableData:
+          _references: []
+          _content: AAAAAA==
+      Definition:
+        Name: Holl
+        _type: 0
+        _constraintData:
+          _references: []
+          _content: AAA=
+  _names:
+  - Holl
+  - Item
+  _version: 121

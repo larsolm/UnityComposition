@@ -18,6 +18,8 @@ namespace PiRhoSoft.Composition.Editor
 		public const string ConstraintUssClassName = UssClassName + "__constraint";
 		public const string NumberConstraintUssClassName = ConstraintUssClassName + "__number";
 		public const string NumberConstraintContainerUssClassName = NumberConstraintUssClassName + "__container";
+		public const string NumberConstraintContainerMinUssClassName = NumberConstraintContainerUssClassName + "--min";
+		public const string NumberConstraintContainerMaxUssClassName = NumberConstraintContainerUssClassName + "--max";
 		public const string NumberConstraintLabelUssClassName = NumberConstraintUssClassName + "__label";
 		public const string NumberConstraintToggleUssClassName = NumberConstraintUssClassName + "__toggle";
 		public const string NumberConstraintMinToggleUssClassName = NumberConstraintToggleUssClassName + "--min";
@@ -45,12 +47,9 @@ namespace PiRhoSoft.Composition.Editor
 
 		public VariableDefinitionControl(VariableDefinition value, Object owner)
 		{
-			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
-			AddToClassList(UssClassName);
+			Value = value;
 
 			_owner = owner;
-
-			Value = value;
 
 			_label = new Label();
 			_label.AddToClassList(NameUssClassName);
@@ -60,18 +59,15 @@ namespace PiRhoSoft.Composition.Editor
 			CreateType();
 			CreateConstraint();
 			Refresh();
+
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
+			AddToClassList(UssClassName);
 		}
 
 		public void SetLabel(string label)
 		{
 			_label.text = label;
 			_label.EnableInClassList(NoNameUssClassName, string.IsNullOrEmpty(label));
-		}
-
-		public void SetValueWithoutNotify(VariableDefinition value)
-		{
-			Value = value;
-			Refresh();
 		}
 
 		public void Refresh()
@@ -171,7 +167,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			container.AddToClassList(NumberConstraintUssClassName);
 			minContainer.AddToClassList(NumberConstraintContainerUssClassName);
+			minContainer.AddToClassList(NumberConstraintContainerMinUssClassName);
 			maxContainer.AddToClassList(NumberConstraintContainerUssClassName);
+			maxContainer.AddToClassList(NumberConstraintContainerMaxUssClassName);
 			minLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			maxLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			minToggle.AddToClassList(NumberConstraintToggleUssClassName);
@@ -262,7 +260,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			container.AddToClassList(NumberConstraintUssClassName);
 			minContainer.AddToClassList(NumberConstraintContainerUssClassName);
+			minContainer.AddToClassList(NumberConstraintContainerMinUssClassName);
 			maxContainer.AddToClassList(NumberConstraintContainerUssClassName);
+			maxContainer.AddToClassList(NumberConstraintContainerMaxUssClassName);
 			minLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			maxLabel.AddToClassList(NumberConstraintLabelUssClassName);
 			minToggle.AddToClassList(NumberConstraintToggleUssClassName);
