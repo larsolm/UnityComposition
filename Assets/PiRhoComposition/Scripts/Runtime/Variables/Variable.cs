@@ -653,7 +653,7 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class SerializedVariable : ISerializationCallbackReceiver
 	{
-		public const string BindingProperty = nameof(_variableData);
+		public const string DataProperty = nameof(_variableData);
 
 		public Variable Variable = Variable.Empty;
 		[SerializeField] private SerializedDataItem _variableData = new SerializedDataItem();

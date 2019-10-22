@@ -43,11 +43,10 @@ namespace PiRhoSoft.Composition.Editor
 		public VariableDefinition Value { get; private set; }
 
 		private readonly Object _owner;
+		private readonly SerializedProperty _property;
 
 		private EnumField _typeDropdown;
 		private VisualElement _constraintContainer;
-
-		private SerializedProperty _property;
 
 		public VariableDefinitionField(SerializedProperty property, bool nameEditable)
 		{
@@ -57,11 +56,13 @@ namespace PiRhoSoft.Composition.Editor
 			_property = property;
 
 			var nameProperty = property.FindPropertyRelative(nameof(VariableDefinition.Name));
+			var typeProperty = property.FindPropertyRelative(VariableDefinition.TypeProperty);
 			var dataProperty = property
 				.FindPropertyRelative(VariableDefinition.ConstraintProperty)
 				.FindPropertyRelative(SerializedDataItem.ContentProperty);
 
 			var dataWatcher = new ChangeTriggerControl<string>(dataProperty, (oldValue, newValue) => Refresh());
+			var typeWatcher = new ChangeTriggerControl<Enum>(typeProperty, (oldValue, newValue) => Refresh());
 
 			CreateName(nameProperty, nameEditable);
 			CreateType();
@@ -69,9 +70,10 @@ namespace PiRhoSoft.Composition.Editor
 			Refresh();
 
 			Add(dataWatcher);
+			Add(typeWatcher);
 
-			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 		}
 
 		private void UpdateValue()
@@ -483,7 +485,6 @@ namespace PiRhoSoft.Composition.Editor
 			dropdown.AddToClassList(ListItemConstraintUssClassName);
 			dropdown.RegisterValueChangedCallback(evt =>
 			{
-
 				using (new ChangeScope(_owner))
 				{
 					constraint.ItemType = (VariableType)evt.newValue;

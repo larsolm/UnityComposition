@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.IO;
 
 namespace PiRhoSoft.Composition
 {
@@ -42,12 +41,18 @@ namespace PiRhoSoft.Composition
 
 		public override void Save(SerializedDataWriter writer)
 		{
-			writer.SaveReference(Schema);
+			writer.Writer.Write(Schema != null);
+
+			if (Schema != null)
+				writer.SaveReference(Schema);
 		}
 
 		public override void Load(SerializedDataReader reader)
 		{
-			Schema = reader.LoadReference() as VariableSchema;
+			var hasSchema = reader.Reader.ReadBoolean();
+
+			if (hasSchema)
+				Schema = reader.LoadReference() as VariableSchema;
 		}
 	}
 }

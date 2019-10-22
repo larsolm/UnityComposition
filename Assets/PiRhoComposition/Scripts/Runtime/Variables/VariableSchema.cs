@@ -20,6 +20,7 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The tags available to definitions in this schema")]
 		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistence)", AddCallback = nameof(ValidateTags), RemoveCallback = nameof(ValidateTags))]
 		[ChangeTrigger(nameof(ValidateTags))]
+		[Delay]
 		[SerializeField]
 		private TagList _tags = new TagList();
 

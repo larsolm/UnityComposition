@@ -37,7 +37,7 @@
 .pirho-variable__number__field
 {
 	min-width: 50px;
-	margin-left: 5px;
+	margin: 1px 0px;
 	flex-grow: 1;
 }
 

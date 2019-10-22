@@ -10,10 +10,9 @@ namespace PiRhoSoft.Composition.Editor
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
 			var constraint = fieldInfo.GetAttribute<VariableConstraintAttribute>();
-			var definition = constraint?.GetDefinition(string.Empty);
+			var definition = constraint?.GetDefinition(string.Empty) ?? new VariableDefinition();
 
-			var field = new SerializedVariableField(property.displayName, definition);
-			return field.ConfigureProperty(property, this.GetTooltip());
+			return new SerializedVariableField(property, definition);
 		}
 	}
 }

@@ -59,16 +59,15 @@ namespace PiRhoSoft.Composition.Editor
 
 		public VariableControl(Variable value, VariableDefinition definition, Object owner)
 		{
-			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
-			AddToClassList(UssClassName);
-
-			_owner = owner;
-
 			Value = value;
 			Definition = definition;
+			_owner = owner;
 
 			CreateElements();
 			Refresh();
+
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
+			AddToClassList(UssClassName);
 		}
 
 		public void SetValueWithoutNotify(Variable value)
@@ -82,16 +81,6 @@ namespace PiRhoSoft.Composition.Editor
 			var previous = Value;
 			SetValueWithoutNotify(value);
 			this.SendChangeEvent(previous, Value);
-		}
-
-		public void SetDefinition(VariableDefinition definition)
-		{
-			Definition = definition;
-
-			if (Definition.Type != Value.Type)
-				SetValue(Definition.Generate());
-			else
-				Refresh();
 		}
 
 		private void CreateElements()
@@ -121,52 +110,59 @@ namespace PiRhoSoft.Composition.Editor
 
 		public void Refresh()
 		{
-			switch (Value.Type)
+			if (Definition.Type != Value.Type)
 			{
-				case VariableType.Empty: RefreshEmpty(); break;
-				case VariableType.Bool: RefreshBool(); break;
-				case VariableType.Int: RefreshInt();  break;
-				case VariableType.Float: RefreshFloat(); break;
-				case VariableType.Vector2Int: RefreshVector2Int();  break;
-				case VariableType.Vector3Int: RefreshVector3Int();  break;
-				case VariableType.RectInt: RefreshRectInt();  break;
-				case VariableType.BoundsInt: RefreshBoundsInt();  break;
-				case VariableType.Vector2: RefreshVector2(); break;
-				case VariableType.Vector3: RefreshVector3();  break;
-				case VariableType.Vector4: RefreshVector3();  break;
-				case VariableType.Quaternion: RefreshQuaternion();  break;
-				case VariableType.Rect: RefreshRect();  break;
-				case VariableType.Bounds: RefreshBounds();  break;
-				case VariableType.Color: RefreshColor();  break;
-				case VariableType.Enum: RefreshEnum();  break;
-				case VariableType.String: RefreshString(); break;
-				case VariableType.List: RefreshList(); break;
-				case VariableType.Dictionary: RefreshDictionary();  break;
-				case VariableType.Asset: RefreshAsset(); break;
-				case VariableType.Object: RefreshObject(); break;
+				SetValue(Definition.Generate());
 			}
+			else
+			{
+				switch (Value.Type)
+				{
+					case VariableType.Empty: RefreshEmpty(); break;
+					case VariableType.Bool: RefreshBool(); break;
+					case VariableType.Int: RefreshInt(); break;
+					case VariableType.Float: RefreshFloat(); break;
+					case VariableType.Vector2Int: RefreshVector2Int(); break;
+					case VariableType.Vector3Int: RefreshVector3Int(); break;
+					case VariableType.RectInt: RefreshRectInt(); break;
+					case VariableType.BoundsInt: RefreshBoundsInt(); break;
+					case VariableType.Vector2: RefreshVector2(); break;
+					case VariableType.Vector3: RefreshVector3(); break;
+					case VariableType.Vector4: RefreshVector4(); break;
+					case VariableType.Quaternion: RefreshQuaternion(); break;
+					case VariableType.Rect: RefreshRect(); break;
+					case VariableType.Bounds: RefreshBounds(); break;
+					case VariableType.Color: RefreshColor(); break;
+					case VariableType.Enum: RefreshEnum(); break;
+					case VariableType.String: RefreshString(); break;
+					case VariableType.List: RefreshList(); break;
+					case VariableType.Dictionary: RefreshDictionary(); break;
+					case VariableType.Asset: RefreshAsset(); break;
+					case VariableType.Object: RefreshObject(); break;
+				}
 
-			_emptyField.SetDisplayed(Value.Type == VariableType.Empty);
-			_boolToggle.SetDisplayed(Value.Type == VariableType.Bool);
-			_intContainer.SetDisplayed(Value.Type == VariableType.Int);
-			_floatContainer.SetDisplayed(Value.Type == VariableType.Float);
-			_vector2IntField.SetDisplayed(Value.Type == VariableType.Vector2Int);
-			_vector3IntField.SetDisplayed(Value.Type == VariableType.Vector3Int);
-			_rectIntField.SetDisplayed(Value.Type == VariableType.RectInt);
-			_boundsIntField.SetDisplayed(Value.Type == VariableType.BoundsInt);
-			_vector2Field.SetDisplayed(Value.Type == VariableType.Vector2);
-			_vector3Field.SetDisplayed(Value.Type == VariableType.Vector3);
-			_vector4Field.SetDisplayed(Value.Type == VariableType.Vector4);
-			_quaternionContainer.SetDisplayed(Value.Type == VariableType.Quaternion);
-			_rectField.SetDisplayed(Value.Type == VariableType.Rect);
-			_boundsField.SetDisplayed(Value.Type == VariableType.Bounds);
-			_colorField.SetDisplayed(Value.Type == VariableType.Color);
-			_enumField.SetDisplayed(Value.Type == VariableType.Enum);
-			_stringContainer.SetDisplayed(Value.Type == VariableType.String);
-			_listControl.SetDisplayed(Value.Type == VariableType.List);
-			_dictionaryControl.SetDisplayed(Value.Type == VariableType.Dictionary);
-			_assetContainer.SetDisplayed(Value.Type == VariableType.Asset);
-			_objectContainer.SetDisplayed(Value.Type == VariableType.Object);
+				_emptyField.SetDisplayed(Value.Type == VariableType.Empty);
+				_boolToggle.SetDisplayed(Value.Type == VariableType.Bool);
+				_intContainer.SetDisplayed(Value.Type == VariableType.Int);
+				_floatContainer.SetDisplayed(Value.Type == VariableType.Float);
+				_vector2IntField.SetDisplayed(Value.Type == VariableType.Vector2Int);
+				_vector3IntField.SetDisplayed(Value.Type == VariableType.Vector3Int);
+				_rectIntField.SetDisplayed(Value.Type == VariableType.RectInt);
+				_boundsIntField.SetDisplayed(Value.Type == VariableType.BoundsInt);
+				_vector2Field.SetDisplayed(Value.Type == VariableType.Vector2);
+				_vector3Field.SetDisplayed(Value.Type == VariableType.Vector3);
+				_vector4Field.SetDisplayed(Value.Type == VariableType.Vector4);
+				_quaternionContainer.SetDisplayed(Value.Type == VariableType.Quaternion);
+				_rectField.SetDisplayed(Value.Type == VariableType.Rect);
+				_boundsField.SetDisplayed(Value.Type == VariableType.Bounds);
+				_colorField.SetDisplayed(Value.Type == VariableType.Color);
+				_enumField.SetDisplayed(Value.Type == VariableType.Enum);
+				_stringContainer.SetDisplayed(Value.Type == VariableType.String);
+				_listControl.SetDisplayed(Value.Type == VariableType.List);
+				_dictionaryControl.SetDisplayed(Value.Type == VariableType.Dictionary);
+				_assetContainer.SetDisplayed(Value.Type == VariableType.Asset);
+				_objectContainer.SetDisplayed(Value.Type == VariableType.Object);
+			}
 		}
 
 		private void CreateEmpty()
@@ -212,7 +208,7 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			_intContainer = new VisualElement();
 			_intContainer.AddToClassList(NumberUssClassName);
-			
+
 			_intSlider = new SliderInt();
 			_intSlider.AddToClassList(NumberSliderUssClassName);
 			_intSlider.RegisterValueChangedCallback(evt =>
@@ -563,14 +559,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateList()
 		{
-			_listProxy = new VariableListProxy(null, null, _owner)
-			{
-				Label = "Variables",
-				EmptyLabel = "This List has no Variables",
-				AddTooltip = "Add a Variable to this List",
-				RemoveTooltip = "Remove this Variable"
-			};
-
+			_listProxy = new VariableListProxy(_owner);
 			_listControl = new ListControl(_listProxy);
 
 			Add(_listControl);
@@ -578,11 +567,12 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void RefreshList()
 		{
-			var constraint = (Definition.Constraint as ListConstraint).ItemConstraint;
-
-			_listProxy.Definition = new VariableDefinition(string.Empty, constraint);
-			_listProxy.Variables = Value.AsList;
-			_listControl.Refresh();
+			if (Definition.Constraint is ListConstraint constraint)
+			{
+				_listProxy.Definition = new VariableDefinition(string.Empty, constraint.ItemConstraint);
+				_listProxy.Variables = Value.AsList;
+				_listControl.Refresh();
+			}
 		}
 
 		private void CreateDictionary()
@@ -595,8 +585,12 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void RefreshDictionary()
 		{
-			_dictionaryProxy.Variables = Value.AsDictionary;
-			_dictionaryControl.Refresh();
+			if (Definition.Constraint is DictionaryConstraint constraint)
+			{
+				_dictionaryProxy.Variables = Value.AsDictionary;
+				_dictionaryProxy.Schema = constraint.Schema;
+				_dictionaryControl.Refresh();
+			}
 		}
 
 		private void CreateAsset()
@@ -643,56 +637,71 @@ namespace PiRhoSoft.Composition.Editor
 			_objectContainer.Add(objectPicker);
 		}
 
-		private class VariableListProxy : ListProxy
+		private class VariableListProxy : IListProxy
 		{
+			public string Label => "Variables";
+			public string Tooltip => "The variables in this list";
+			public string EmptyLabel => "This list has no variables";
+			public string EmptyTooltip => "There are no variables in this list";
+			public string AddTooltip => "Add a variable to this list";
+			public string RemoveTooltip => "Remove this variable from the list";
+			public string ReorderTooltip => "Move this variable in the list";
+
+			public bool AllowAdd => true;
+			public bool AllowRemove => true;
+			public bool AllowReorder => true;
+
+			public bool CanAdd() => true;
+			public bool CanRemove(int index) => true;
+			public bool CanReorder(int from, int to) => true;
+
 			public IVariableList Variables;
 			public VariableDefinition Definition;
 
 			private readonly Object _owner;
 
-			public override int ItemCount => Variables?.VariableCount ?? 0;
+			public int ItemCount => Variables?.VariableCount ?? 0;
 
-			public VariableListProxy(IVariableList variables, VariableDefinition definition, Object owner)
+			public VariableListProxy(Object owner)
 			{
-				Variables = variables;
-				Definition = definition;
-
 				_owner = owner;
 			}
 
-			public override VisualElement CreateElement(int index)
+			public VisualElement CreateElement(int index)
 			{
 				var value = Variables.GetVariable(index);
 				var control = new VariableControl(value, Definition, _owner) { userData = index };
+				control.RegisterCallback<ChangeEvent<Variable>>(evt => Variables.SetVariable(index, evt.newValue));
 				return control;
 			}
 
-			public override bool NeedsUpdate(VisualElement item, int index)
+			public bool NeedsUpdate(VisualElement item, int index)
 			{
 				return !(item.userData is int i) || i != index;
 			}
 
-			public override void AddItem()
+			public void AddItem()
 			{
 				Variables.AddVariable(Definition.Generate());
 			}
 
-			public override void RemoveItem(int index)
+			public void RemoveItem(int index)
 			{
 				Variables.RemoveVariable(index);
 			}
 
-			public override void ReorderItem(int from, int to)
+			public void ReorderItem(int from, int to)
 			{
-				var previous = Variables.GetVariable(to);
-				Variables.SetVariable(to, Variables.GetVariable(from));
-				Variables.SetVariable(from, previous);
+				var variable = Variables.GetVariable(from);
+				Variables.RemoveVariable(from);
+				Variables.InsertVariable(to, variable);
 			}
 		}
 
 		private class VariableDictionaryProxy : IDictionaryProxy
 		{
 			public IVariableDictionary Variables;
+			public VariableSchema Schema;
 
 			public int KeyCount => Variables?.VariableNames.Count ?? 0;
 
@@ -705,9 +714,9 @@ namespace PiRhoSoft.Composition.Editor
 			public string RemoveTooltip => "Remove this Variable";
 			public string ReorderTooltip => "Move this Variable";
 
-			public bool AllowAdd => true;//Variables?.Schema == null;
-			public bool AllowRemove => true;//Variables?.Schema == null;
-			public bool AllowReorder => true;//Variables?.Schema == null;
+			public bool AllowAdd => !Schema;
+			public bool AllowRemove => !Schema;
+			public bool AllowReorder => false;
 
 			private readonly Object _owner;
 
@@ -734,7 +743,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			public bool CanAdd(string key)
 			{
-				return !Variables.VariableNames.Contains(key);
+				return AllowAdd && !Variables.VariableNames.Contains(key);
 			}
 
 			public bool CanRemove(int index)
@@ -761,12 +770,6 @@ namespace PiRhoSoft.Composition.Editor
 
 			public void ReorderItem(int from, int to)
 			{
-				var fromName = GetName(from);
-				var toName = GetName(to);
-				var previous = Variables.GetVariable(toName);
-				var current = Variables.GetVariable(fromName);
-				Variables.SetVariable(toName, current);
-				Variables.SetVariable(fromName, previous);
 			}
 
 			private string GetName(int index)
@@ -776,7 +779,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			private VariableDefinition GetDefinition(string name)
 			{
-				return null;//Variables.Schema?.GetEntry(name).Definition ?? new VariableDefinition(name);
+				return Schema ? Schema.GetEntry(name).Definition : new VariableDefinition(name);
 			}
 		}
 	}

@@ -16,6 +16,7 @@ namespace PiRhoSoft.Composition
 	{
 		SetVariableResult AddVariable(Variable variable);
 		SetVariableResult RemoveVariable(int index);
+		SetVariableResult InsertVariable(int index, Variable variable);
 		SetVariableResult ClearVariables();
 	}
 
@@ -62,6 +63,15 @@ namespace PiRhoSoft.Composition
 				return SetVariableResult.NotFound;
 
 			_variables.RemoveAt(index);
+			return SetVariableResult.Success;
+		}
+
+		public virtual SetVariableResult InsertVariable(int index, Variable variable)
+		{
+			if (index < 0 || index > _variables.Count)
+				return SetVariableResult.NotFound;
+
+			_variables.Insert(index, variable);
 			return SetVariableResult.Success;
 		}
 

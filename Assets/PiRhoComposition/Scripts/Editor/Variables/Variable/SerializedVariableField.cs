@@ -1,87 +1,62 @@
 ﻿using PiRhoSoft.Utilities;
 using PiRhoSoft.Utilities.Editor;
+using System;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class SerializedVariableField : BaseField<Variable>
+	public class SerializedVariableField : BindableElement
 	{
-		private const string _invalidBindingError = "(PCSVFIB) invalid binding '{0}' for SerializedVariableListField: property '{1}' is not a SerializedVariableList";
+		public SerializedVariable Value { get; private set; }
 
-		public static readonly string UssClassName = "pirho-serialized-variable-field";
-		public static readonly string LabelUssClassName = UssClassName + "__label";
-		public static readonly string InputUssClassName = UssClassName + "__input";
+		private readonly SerializedProperty _property;
+		private readonly VariableControl _control;
 
-		public SerializedVariable Variable { get; private set; }
-		public VariableDefinition Definition { get; private set; }
-
-		private VariableControl _control;
-		private ChangeTriggerControl<string> _binding;
-
-		public SerializedVariableField(string label, VariableDefinition definition) : base(label, null)
+		public SerializedVariableField(SerializedProperty property, SerializedProperty definitionProperty) : this(property, definitionProperty.GetObject<VariableDefinition>())
 		{
-			Definition = definition;
+			var typeProperty = definitionProperty.FindPropertyRelative(VariableDefinition.TypeProperty);
+			var dataProperty = definitionProperty
+				.FindPropertyRelative(VariableDefinition.ConstraintProperty)
+				.FindPropertyRelative(SerializedDataItem.ContentProperty);
+
+			var dataWatcher = new ChangeTriggerControl<string>(dataProperty, (oldValue, newValue) => Refresh());
+			var typeWatcher = new ChangeTriggerControl<Enum>(typeProperty, (oldValue, newValue) => Refresh());
+
+			Add(dataWatcher);
+			Add(typeWatcher);
 		}
 
-		public void Setup(SerializedProperty property)
+		public SerializedVariableField(SerializedProperty property, VariableDefinition definition)
 		{
-			var variable = property.GetObject<SerializedVariable>();
+			bindingPath = property.propertyPath;
+			Value = property.GetObject<SerializedVariable>();
+			_property = property;
 
-			if (variable != null)
-			{
-				Setup(variable, property.serializedObject.targetObject);
+			_control = new VariableControl(Value.Variable, definition, property.serializedObject.targetObject);
+			_control.RegisterCallback<ChangeEvent<Variable>>(evt => SetValue(evt.newValue));
 
-				var binding = property
-					.FindPropertyRelative(SerializedVariable.BindingProperty)
-					.FindPropertyRelative(SerializedDataItem.ContentProperty);
+			var dataProperty = property
+				.FindPropertyRelative(SerializedVariable.DataProperty)
+				.FindPropertyRelative(SerializedDataItem.ContentProperty);
 
-				var data = binding.GetParentObject<SerializedDataItem>();
+			var dataWatcher = new ChangeTriggerControl<string>(dataProperty, (oldValue, newValue) => Refresh());
 
-				_binding = new ChangeTriggerControl<string>(binding, (oldValue, newValue) =>
-				{
-					using (var reader = new SerializedDataReader(data))
-						base.value = VariableHandler.Load(reader);
-				});
-			}
-			else
-			{
-				Debug.LogErrorFormat(_invalidBindingError, property.propertyPath, property.propertyPath, property.propertyType);
-			}
+			Add(_control);
+			Add(dataWatcher);
 		}
 
-		public void Setup(SerializedVariable variable, Object owner)
+		public void SetValue(Variable value)
 		{
-			Variable = variable;
-
-			_control = new VariableControl(variable.Variable, Definition, owner);
-			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<Variable>>(evt => base.value = evt.newValue);
-
-			labelElement.AddToClassList(LabelUssClassName);
-
-			this.SetVisualInput(_control);
-			AddToClassList(UssClassName);
-			SetValueWithoutNotify(variable.Variable);
+			Value.Variable = value;
+			((ISerializationCallbackReceiver)Value).OnBeforeSerialize();
+			_property.serializedObject.Update();
 		}
 
-		public override void SetValueWithoutNotify(Variable newValue)
+		public void Refresh()
 		{
-			base.SetValueWithoutNotify(newValue);
-
-			if (Variable != null)
-				Variable.Variable = newValue;
-
-			_control.SetValueWithoutNotify(newValue);
-		}
-
-		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
-		{
-			base.ExecuteDefaultActionAtTarget(evt);
-
-			if (this.TryGetPropertyBindEvent(evt, out var property))
-				Setup(property);
+			_control.SetValueWithoutNotify(Value.Variable);
 		}
 	}
 }

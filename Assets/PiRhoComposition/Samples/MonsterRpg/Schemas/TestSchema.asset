@@ -15,6 +15,21 @@ MonoBehaviour:
   _tags:
     _items: []
   _entries:
-    _items: []
-  _names: []
-  _version: 123
+    _items:
+    - Tag: 
+      Type: 0
+      Initializer:
+        _statement: 
+      Default:
+        _variableData:
+          _references: []
+          _content: AAAAAA==
+      Definition:
+        Name: Hello
+        _type: 0
+        _constraintData:
+          _references: []
+          _content: AAA=
+  _names:
+  - Hello
+  _version: 138

@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.IO;
 using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition

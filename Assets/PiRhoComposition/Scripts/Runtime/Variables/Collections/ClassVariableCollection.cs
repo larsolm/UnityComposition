@@ -533,6 +533,26 @@ namespace PiRhoSoft.Composition
 				return SetVariableResult.NotFound;
 			}
 
+			public virtual SetVariableResult InsertVariable(int index, Variable variable)
+			{
+				if (!_allowAdd)
+					return SetVariableResult.ReadOnly;
+
+				try
+				{
+					if (index < 0 || index > VariableCount)
+						return SetVariableResult.NotFound;
+
+					Insert(index, variable);
+					return SetVariableResult.Success;
+				}
+				catch
+				{
+				}
+
+				return SetVariableResult.TypeMismatch;
+			}
+
 			public SetVariableResult ClearVariables()
 			{
 				if (!_allowRemove)
@@ -545,6 +565,7 @@ namespace PiRhoSoft.Composition
 			protected Variable Get(int index) => Variable.Unbox(List[index]);
 			protected void Set(int index, Variable value) => List[index] = value.Box();
 			protected bool Add(Variable value) => List.Add(value.Box()) >= 0;
+			protected void Insert(int index, Variable value) => List.Insert(index, value.Box());
 			protected void Remove(int index) => List.RemoveAt(index);
 		}
 

@@ -6,64 +6,71 @@
 {
 }
 
-.pirho-variable-schema-entry__initializer-container
+.pirho-variable-schema-entry__initializer
 {
 	display: flex;
 	flex-direction: row;
 }
 
-.pirho-variable-schema-entry--no-initializer .pirho-variable-schema-entry__initializer-container
+.pirho-variable-schema-entry--no-initializer .pirho-variable-schema-entry__initializer
 {
 	display: none;
 }
 
-.pirho-variable-schema-entry__type
+.pirho-variable-schema-entry__initializer__type
 {
 	min-width: 23px;
 	max-width: 23px;
 	min-height: 19px;
 	max-height: 19px;
-	align-self: flex-start;
 	padding: 2px 1px;
 	margin: 1px 0px;
 	border-width: 1px;
 	border-color: #AAAAAA;
 }
 
-.pirho-variable-schema-entry--default .pirho-variable-schema-entry__type
+.pirho-variable-schema-entry--default .pirho-variable-schema-entry__initializer__type
 {
 }
 
-.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__type
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__initializer__type
 {
 	background-color: #6B6B6B;
 }
 
-.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__type:hover
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__initializer__type:hover
 {
 	background-color: #6B6B6B;
 }
 
-.pirho-variable-schema-entry__default
+.pirho-variable-schema-entry__initializer__label
 {
+	margin: 1px 5px;
+	padding: 2px 0px 0px 0px;
+	width: 55px;
+}
+
+.pirho-variable-schema-entry__initializer__default
+{
+	flex-grow: 1;
 	flex-shrink: 1;
 	display: flex;
-	margin: 1px 0px 1px 5px;
+	margin: 1px 0px 2px 0px;
 }
 
-.pirho-variable-schema-entry__expression
+.pirho-variable-schema-entry__initializer__expression
 {
 	flex-grow: 1;
 	display: flex;
-	margin: 1px 0px 1px 5px;
+	margin: 1px 0px;
 }
 
-.pirho-variable-schema-entry--default .pirho-variable-schema-entry__expression
+.pirho-variable-schema-entry--default .pirho-variable-schema-entry__initializer__expression
 {
 	display: none;
 }
 
-.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__default
+.pirho-variable-schema-entry--expression .pirho-variable-schema-entry__initializer__default
 {
 	display: none
 }

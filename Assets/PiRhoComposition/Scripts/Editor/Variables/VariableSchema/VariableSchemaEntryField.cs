@@ -15,10 +15,11 @@ namespace PiRhoSoft.Composition.Editor
 		public const string DefaultUssClassName = UssClassName + "--default";
 		public const string ExpressionUssClassName = UssClassName + "--expression";
 		public const string TagUssClassName = UssClassName + "__tag";
-		public const string InitializerUssClassName = UssClassName + "__initializer-container";
-		public const string TypeUssClassName = UssClassName + "__type";
-		public const string DefaultTypeUssClassName = UssClassName + "__default";
-		public const string ExpressionTypeUssClassName = UssClassName + "__expression";
+		public const string InitializerUssClassName = UssClassName + "__initializer";
+		public const string InitializerLabelUssClassName = InitializerUssClassName + "__label";
+		public const string InitializerTypeUssClassName = InitializerUssClassName + "__type";
+		public const string InitializerDefaultTypeUssClassName = InitializerUssClassName + "__default";
+		public const string InitializerExpressionTypeUssClassName = InitializerUssClassName + "__expression";
 
 		private static readonly Icon _modeIcon = Icon.BuiltIn("d_CustomSorting");
 
@@ -26,6 +27,7 @@ namespace PiRhoSoft.Composition.Editor
 		public VariableSchema Schema { get; private set; }
 
 		private VisualElement _tags;
+		private Label _initializerLabel;
 
 		public VariableSchemaEntryField(SerializedProperty property, VariableSchema schema, VariableSchemaEntry value)
 		{
@@ -39,7 +41,7 @@ namespace PiRhoSoft.Composition.Editor
 			var initializerProperty = property.FindPropertyRelative(nameof(VariableSchemaEntry.Initializer));
 
 			CreateDefinition(definitionProperty);
-			CreateInitializer(typeProperty, defaultProperty, initializerProperty);
+			CreateInitializer(definitionProperty, typeProperty, defaultProperty, initializerProperty);
 			CreateTags(tagProperty);
 
 			RefreshInitializer();
@@ -50,8 +52,13 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void RefreshInitializer()
 		{
+			var isDefault = Value.Type == VariableSchemaInitializerType.Default;
+
 			EnableInClassList(NoInitializerUssClassName, !HasInitializer());
-			this.AlternateClass(DefaultUssClassName, ExpressionUssClassName, Value.Type == VariableSchemaInitializerType.Default);
+			this.AlternateClass(DefaultUssClassName, ExpressionUssClassName, isDefault);
+
+			_initializerLabel.text = isDefault ? "Default" : "Initializer";
+			_initializerLabel.tooltip = isDefault ? "The default value to assign when initializing, resetting, or updating the variable" : "The expression to execute and assign when initializing, resetting, or updating the variable";
 		}
 
 		private bool HasInitializer()
@@ -119,26 +126,30 @@ namespace PiRhoSoft.Composition.Editor
 			}
 		}
 
-		private void CreateInitializer(SerializedProperty typeProperty, SerializedProperty defaultProperty, SerializedProperty initializerProperty)
+		private void CreateInitializer(SerializedProperty definitionProperty, SerializedProperty typeProperty, SerializedProperty defaultProperty, SerializedProperty initializerProperty)
 		{
 			var typeToggle = new IconButton(_modeIcon.Texture, "Toggle initilazing the variable by a value or an expression", () => Value.Type = Value.Type == VariableSchemaInitializerType.Default ? VariableSchemaInitializerType.Initializer : VariableSchemaInitializerType.Default);
-			typeToggle.AddToClassList(TypeUssClassName);
+			typeToggle.AddToClassList(InitializerTypeUssClassName);
 
 			var typeWatcher = new ChangeTriggerControl<Enum>(typeProperty, (oldValue, newValue) => RefreshInitializer());
 
-			var defaultField = new SerializedVariableField("Default", Value.Definition);
-			defaultField.AddToClassList(DefaultTypeUssClassName);
+			_initializerLabel = new Label();
+			_initializerLabel.AddToClassList(InitializerLabelUssClassName);
 
-			var expressionField = new ExpressionField("Initializer", Value.Initializer, null); // TODO: Add autocomplete
-			expressionField.AddToClassList(ExpressionTypeUssClassName);
+			var defaultField = new SerializedVariableField(defaultProperty, definitionProperty);
+			defaultField.AddToClassList(InitializerDefaultTypeUssClassName);
+
+			var expressionField = new ExpressionField(null, Value.Initializer, null) { bindingPath = initializerProperty.propertyPath }; // TODO: Add autocomplete
+			expressionField.AddToClassList(InitializerExpressionTypeUssClassName);
 
 			var initializer = new VisualElement();
 			initializer.AddToClassList(BaseFieldExtensions.UssClassName);
 			initializer.AddToClassList(InitializerUssClassName);
 			initializer.Add(typeToggle);
 			initializer.Add(typeWatcher);
-			initializer.Add(defaultField.ConfigureProperty(defaultProperty, "The default value to assign when initializing, resetting, or updating the variable"));
-			initializer.Add(expressionField.ConfigureProperty(initializerProperty, "The expression to execute and assign when initializing, resetting, or updating the variable"));
+			initializer.Add(_initializerLabel);
+			initializer.Add(defaultField);
+			initializer.Add(expressionField);
 
 			Add(initializer);
 		}
