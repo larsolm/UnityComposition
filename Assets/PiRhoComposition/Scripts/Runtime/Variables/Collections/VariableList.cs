@@ -87,8 +87,9 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class SerializedVariableList : VariableList, ISerializationCallbackReceiver
 	{
-		public const string BindingProperty = nameof(_data);
+		public const string DataProperty = nameof(_data);
 
+		public SerializedDataList Data => _data;
 		[SerializeField] private SerializedDataList _data = new SerializedDataList();
 
 		protected virtual void Serialize()

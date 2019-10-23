@@ -1,0 +1,9 @@
+﻿.pirho-schema-variable-collection__refresh
+{
+	min-width: 16px;
+	min-height: 16px;
+	max-width: 16px;
+	max-height: 16px;
+	margin: 2px 0px 0px 5px;
+	align-self: flex-start;
+}

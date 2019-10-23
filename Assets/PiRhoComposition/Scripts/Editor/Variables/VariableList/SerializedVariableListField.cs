@@ -35,7 +35,7 @@ namespace PiRhoSoft.Composition.Editor
 			if (this.TryGetPropertyBindEvent(evt, out var property))
 			{
 				var list = property
-					.FindPropertyRelative(SerializedVariableList.BindingProperty)
+					.FindPropertyRelative(SerializedVariableList.DataProperty)
 					.FindPropertyRelative(SerializedDataList.ContentProperty)
 					.FindPropertyRelative("Array.size");
 
@@ -60,7 +60,7 @@ namespace PiRhoSoft.Composition.Editor
 				var owner = property.serializedObject.targetObject;
 
 				Property = property
-					.FindPropertyRelative(SerializedVariableList.BindingProperty)
+					.FindPropertyRelative(SerializedVariableList.DataProperty)
 					.FindPropertyRelative(SerializedDataList.ContentProperty);
 
 				Setup(variables, owner);

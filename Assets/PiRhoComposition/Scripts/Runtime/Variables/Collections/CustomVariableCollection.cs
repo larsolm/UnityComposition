@@ -22,7 +22,10 @@ namespace PiRhoSoft.Composition
 		public void Add(VariableDefinition definition)
 		{
 			_locked = false;
-			AddVariable(definition.Name, definition.Generate());
+
+			if (AddVariable(definition.Name, definition.Generate()) == SetVariableResult.Success)
+				_definitions.Add(definition);
+
 			_locked = true;
 		}
 

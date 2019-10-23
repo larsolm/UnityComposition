@@ -1,4 +1,5 @@
-﻿using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities;
+using PiRhoSoft.Utilities.Editor;
 using UnityEditor;
 using UnityEditor.UIElements;
 using UnityEngine.UIElements;
@@ -10,7 +11,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var itemsProperty = property.FindPropertyRelative("_items");
+			var itemsProperty = property.FindPropertyRelative(SerializedList<string>.ItemsProperty);
 			var schema = property.GetParentObject<VariableSchema>();
 			var proxy = new EntryProxy(itemsProperty, schema);
 			var field = new DictionaryField();
@@ -30,7 +31,7 @@ namespace PiRhoSoft.Composition.Editor
 			public string Tooltip => "The variables available to objects using this schema";
 			public string EmptyLabel => "Add variable definitions to be accessable by objects that use this schema";
 			public string EmptyTooltip => "No definitions defined";
-			public string AddPlaceholder => "(definition name)";
+			public string AddPlaceholder => "(Add definition)";
 			public string AddTooltip => "Add a definition with the specified name to the schema";
 			public string RemoveTooltip => "Remove this definition from the schema";
 			public string ReorderTooltip => "Drag to move the location of this definition in the schema";

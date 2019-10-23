@@ -1,47 +1,77 @@
-﻿using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities;
+using PiRhoSoft.Utilities.Editor;
+using System.Linq;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
 	public class CustomVariableCollectionField : SerializedVariableDictionaryField
 	{
-		public void Setup(CustomVariableCollectionProxy proxy)
+		public new const string Stylesheet = "Variables/VariableDictionary/CustomVariableCollectionStyle.uss";
+		public new const string UssClassName = "pirho-custom-variable-collection";
+
+		public CustomVariableCollectionField(SerializedProperty property)
 		{
-			Setup(new VariableDictionaryControl(proxy));
+			var variables = property.GetObject<CustomVariableCollection>();
+			var proxy = new CustomVariableCollectionProxy(property, variables);
+
+			Setup(property, proxy);
+
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
+			AddToClassList(UssClassName);
 		}
 
-		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
+		private class CustomVariableCollectionProxy : VariableDictionaryProxy
 		{
-			base.ExecuteDefaultActionAtTarget(evt);
+			public override string Label => "Custom Variables";
+			public override string Tooltip => "The list of variables in this collection";
+			public override string EmptyLabel => "No variables exist in this collection";
+			public override string EmptyTooltip => "Add variables to the collection to edit them";
+			public override string AddPlaceholder => "(Add variable)";
+			public override string AddTooltip => "Add a variable to this collection";
+			public override string RemoveTooltip => "Remove this variable from the collection";
+			public override string ReorderTooltip => "Reorder this variable in the collection";
 
-			if (this.TryGetPropertyBindEvent(evt, out var property))
+			public override bool AllowAdd => true;
+			public override bool AllowRemove => true;
+
+			public override bool CanAdd(string key) => !_variables.VariableNames.Contains(key);
+			public override bool CanRemove(int index) => true;
+
+			private CustomVariableCollection _collection => _variables as CustomVariableCollection;
+
+			public CustomVariableCollectionProxy(SerializedProperty property, CustomVariableCollection variables) : base(property, variables)
 			{
-				var schema = property.FindPropertyRelative(CustomVariableCollection.DefinitionsProperty); // TODO
-				var sizeBinding = new ChangeTriggerControl<Object>(null, (oldSize, size) => _control.Refresh());
-				sizeBinding.Watch(schema);
 			}
-		}
-	}
 
-	public class CustomVariableCollectionProxy : SerializedVariableDictionaryProxy
-	{
-		public CustomVariableCollection Collection => Variables as CustomVariableCollection;
+			public override VisualElement CreateField(int index)
+			{
+				var variable = _variables.GetVariable(index);
+				var definition = _collection.GetDefinition(index);
 
-		public CustomVariableCollectionProxy(SerializedProperty property) : base(property)
-		{
-		}
+				var container = CreateContainer(index);
+				var label = CreateLabel(definition.Name);
+				var control = CreateVariable(index, variable, definition);
 
-		public override VisualElement CreateField(int index)
-		{
-			var variables = Variables.GetVariable(index);
-			var definition = Collection.GetDefinition(index);
+				container.Add(label);
+				container.Add(control);
 
-			var field = new VariableField(Property, Variables, index, definition) { userData = index };
-			field.RegisterCallback<ChangeEvent<Variable>>(evt => { Variables.SetVariable(index, evt.newValue); });
+				return container;
+			}
 
-			return field;
+			public override void AddItem(string key)
+			{
+				_collection.Add(new VariableDefinition(key));
+				UpdateValue();
+			}
+
+			public override void RemoveItem(int index)
+			{
+				var name = _variables.VariableNames[index];
+				_variables.RemoveVariable(name);
+				UpdateValue();
+			}
 		}
 	}
 }

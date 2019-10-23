@@ -8,93 +8,128 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class SerializedVariableDictionaryField : BindableElement
 	{
-		public static readonly string UssClassName = "pirho-serialized-variable-dictionary-field";
+		public const string Stylesheet = "Variables/VariableDictionary/SerializedVariableDictionaryStyle.uss";
+		public const string UssClassName = "pirho-serialized-variable-dictionary";
+		public const string ItemUssClassName = UssClassName + "__item";
+		public const string LabelUssClassName = ItemUssClassName + "__label";
+		public const string VariableUssClassName = ItemUssClassName + "__variable";
 
-		protected VariableDictionaryControl _control;
+		protected readonly DictionaryField _dictionaryField;
 
-		public void Setup(VariableDictionaryProxy proxy)
+		public SerializedVariableDictionaryField()
 		{
-			Setup(new VariableDictionaryControl(proxy));
-		}
+			_dictionaryField = new DictionaryField();
 
-		protected void Setup(VariableDictionaryControl control)
-		{
-			Clear();
-
-			_control = control;
-
-			Add(_control);
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
 		}
 
-		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
+		protected void Setup(SerializedProperty property, VariableDictionaryProxy proxy)
 		{
-			base.ExecuteDefaultActionAtTarget(evt);
+			bindingPath = property.propertyPath;
 
-			if (this.TryGetPropertyBindEvent(evt, out var property))
-			{
-				var list = property
-					.FindPropertyRelative(SerializedVariableDictionary.BindingProperty)
-					.FindPropertyRelative(SerializedDataList.ContentProperty)
-					.FindPropertyRelative("Array.size");
+			var listProperty = property
+				.FindPropertyRelative(SerializedVariableDictionary.DataProperty)
+				.FindPropertyRelative(SerializedDataList.ContentProperty);
 
-				var sizeBinding = new ChangeTriggerControl<int>(null, (oldSize, size) => _control.Refresh());
-				sizeBinding.Watch(list);
-			}
-		}
-	}
+			_dictionaryField.Setup(listProperty, proxy);
 
-	public class SerializedVariableDictionaryProxy : VariableDictionaryProxy
-	{
-		private const string _invalidBindingError = "(PCSVDPIB) invalid binding '{0}' for SerializedVariableDictionaryField: property '{1}' is not a SerializedVariableDictionary";
+			Add(_dictionaryField);
 
-		public SerializedProperty Property { get; private set; }
-
-		public SerializedVariableDictionaryProxy(SerializedProperty property)
-		{
-			var variables = property.GetObject<SerializedVariableDictionary>();
-
-			if (variables != null)
-			{
-				var owner = property.serializedObject.targetObject;
-
-				Property = property
-					.FindPropertyRelative(SerializedVariableDictionary.BindingProperty)
-					.FindPropertyRelative(SerializedDataList.ContentProperty);
-
-				Setup(variables, owner);
-			}
-			else
-			{
-				Debug.LogErrorFormat(_invalidBindingError, property.propertyPath, property.propertyPath, property.propertyType);
-			}
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
+			AddToClassList(UssClassName);
 		}
 
-		public override VisualElement CreateField(int index)
+		protected abstract class VariableDictionaryProxy : IDictionaryProxy
 		{
-			return new VariableField(Property, Variables, index, null) { userData = index };
-		}
+			public abstract string Label { get; }
+			public abstract string Tooltip { get; }
+			public abstract string EmptyLabel { get; }
+			public abstract string EmptyTooltip { get; }
+			public virtual string AddPlaceholder => string.Empty;
+			public virtual string AddTooltip => string.Empty;
+			public virtual string RemoveTooltip => string.Empty;
+			public virtual string ReorderTooltip => string.Empty;
 
-		protected class VariableField : VariableControl
-		{
-			private IVariableMap _variables;
-			private int _index;
-			
-			public VariableField(SerializedProperty property, IVariableMap variables, int index, VariableDefinition definition) : base(variables.GetVariable(variables.VariableNames[index]), definition, property.serializedObject.targetObject)
+			public virtual bool AllowAdd => false;
+			public virtual bool AllowRemove => false;
+			public virtual bool AllowReorder => false;
+
+			public virtual void AddItem(string key) { }
+			public virtual void RemoveItem(int index) { }
+			public virtual void ReorderItem(int from, int to) { }
+
+			public virtual bool CanAdd(string key) => false;
+			public virtual bool CanRemove(int index) => false;
+			public virtual bool CanReorder(int from, int to) => false;
+
+			public int KeyCount => _variables.VariableNames.Count;
+
+			protected readonly SerializedProperty _property;
+			protected readonly SerializedProperty _dataProperty;
+			protected readonly SerializedVariableDictionary _variables;
+			protected readonly SerializedDataList _data;
+
+			public VariableDictionaryProxy(SerializedProperty property, SerializedVariableDictionary variables)
 			{
+				_property = property;
 				_variables = variables;
-				_index = index;
+				_dataProperty = _property
+					.FindPropertyRelative(SerializedVariableDictionary.DataProperty)
+					.FindPropertyRelative(SerializedDataList.ContentProperty);
+				_data = _variables.Data;
+			}
 
-				RegisterCallback<ChangeEvent<Variable>>(evt => _variables.SetVariable(variables.VariableNames[_index], evt.newValue));
+			public abstract VisualElement CreateField(int index);
 
-				var data = property.GetParentObject<SerializedDataList>();
-				var element = property.GetArrayElementAtIndex(_index);
+			protected void SetVariable(int index, Variable variable)
+			{
+				_variables.SetVariable(index, variable);
+				UpdateValue();
+			}
 
-				Add(new ChangeTriggerControl<string>(element, (oldValue, newValue) =>
+			protected void UpdateValue()
+			{
+				((ISerializationCallbackReceiver)_variables).OnBeforeSerialize();
+				_property.serializedObject.Update();
+			}
+
+			public bool NeedsUpdate(VisualElement item, int index)
+			{
+				// Definition !=, index !=, name !=
+				return !(item.userData is int i) || i != index;
+			}
+
+			protected VisualElement CreateContainer(int index)
+			{
+				var container = new VisualElement { userData = index };
+				container.AddToClassList(ItemUssClassName);
+
+				return container;
+			}
+
+			protected Label CreateLabel(string name)
+			{
+				var label = new Label(name);
+				label.AddToClassList(LabelUssClassName);
+
+				return label;
+			}
+
+			protected VariableControl CreateVariable(int index, Variable variable, VariableDefinition definition)
+			{
+				var control = new VariableControl(variable, definition, _property.serializedObject.targetObject);
+				control.AddToClassList(VariableUssClassName);
+				control.RegisterCallback<ChangeEvent<Variable>>(evt => SetVariable(index, evt.newValue));
+
+				var dataWatcher = new ChangeTriggerControl<string>(_dataProperty.GetArrayElementAtIndex(index), (oldValue, newValue) =>
 				{
-					using (var reader = new SerializedDataReader(data, index))
-						SetValue(VariableHandler.Load(reader));
-				}));
+					control.SetValueWithoutNotify(_variables.GetVariable(index));
+				});
+
+				control.Add(dataWatcher);
+
+				return control;
 			}
 		}
 	}

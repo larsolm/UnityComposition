@@ -8,12 +8,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			var field = new CustomVariableCollectionField();
-			var proxy = new CustomVariableCollectionProxy(property);
-
-			field.Setup(proxy);
-
-			return field;
+			return new CustomVariableCollectionField(property);
 		}
 	}
 }
