@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition
@@ -9,13 +8,13 @@ namespace PiRhoSoft.Composition
 	{
 		public const string DefinitionsProperty = nameof(_definitions);
 
-		[SerializeField] private List<VariableDefinition> _definitions = new List<VariableDefinition>();
+		[SerializeField] private VariableDefinitionList _definitions = new VariableDefinitionList();
 		private bool _locked = false;
 
-		protected override void Deserialize()
+		protected override void Load()
 		{
 			_locked = false;
-			base.Deserialize();
+			base.Load();
 			_locked = true;
 		}
 

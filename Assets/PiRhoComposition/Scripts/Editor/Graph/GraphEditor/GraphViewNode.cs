@@ -42,6 +42,8 @@ namespace PiRhoSoft.Composition.Editor
 		public override bool IsResizable() => false;
 		public override bool IsSelectable() => true;
 
+		protected SerializedObject _serializedObject;
+
 		protected override sealed void ToggleCollapse() { }
 
 		public GraphViewNode(GraphNode node)
@@ -49,6 +51,8 @@ namespace PiRhoSoft.Composition.Editor
 			AddToClassList(UssClassName);
 
 			Data = new GraphNode.NodeData(node);
+
+			_serializedObject = new SerializedObject(node);
 
 			titleContainer.style.backgroundColor = node.NodeColor;
 			titleContainer.style.unityFontStyleAndWeight = FontStyle.Bold;
@@ -129,13 +133,14 @@ namespace PiRhoSoft.Composition.Editor
 
 		#region Editable Label
 		
-		public static TextField CreateEditableLabel(TextElement container, string bindingPath, bool multiline = false)
+		public static TextField CreateEditableLabel(TextElement container, SerializedProperty property, bool multiline = false)
 		{
-			var edit = new TextField { bindingPath = bindingPath, multiline = multiline };
+			var edit = new TextField { multiline = multiline };
+			edit.BindProperty(property);
 			edit.AddToClassList(NodeEditableLabelUssClassName);
 			edit.Q(TextField.textInputUssName).RegisterCallback<FocusOutEvent>(evt => HideEditableText(edit));
 
-			container.bindingPath = bindingPath;
+			container.BindProperty(property);
 			container.RegisterCallback<MouseDownEvent>(evt => OnEditEvent(evt, edit));
 			container.RegisterValueChangedCallback(e => container.text = e.newValue);
 			container.Add(edit);

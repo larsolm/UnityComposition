@@ -655,12 +655,22 @@ namespace PiRhoSoft.Composition
 	{
 		public const string DataProperty = nameof(_variableData);
 
-		public Variable Variable = Variable.Empty;
+		public Variable Variable
+		{
+			get => _variable;
+			set
+			{
+				_variable = value;
+#if UNITY_EDITOR
+				Save();
+#endif
+			}
+		}
+
+		[SerializeField] private Variable _variable = Variable.Empty;
 		[SerializeField] private SerializedDataItem _variableData = new SerializedDataItem();
 
-		#region ISerializationCallbackReceiver Implementation
-
-		void ISerializationCallbackReceiver.OnBeforeSerialize()
+		private void Save()
 		{
 			_variableData.Clear();
 
@@ -668,11 +678,16 @@ namespace PiRhoSoft.Composition
 				VariableHandler.Save(Variable, writer);
 		}
 
-		void ISerializationCallbackReceiver.OnAfterDeserialize()
+		private void Load()
 		{
 			using (var reader = new SerializedDataReader(_variableData))
-				Variable = VariableHandler.Load(reader);
+				_variable = VariableHandler.Load(reader);
 		}
+
+		#region ISerializationCallbackReceiver Implementation
+
+		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => Load();
 
 		#endregion
 	}

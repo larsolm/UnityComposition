@@ -16,10 +16,12 @@ namespace PiRhoSoft.Composition
 	{
 		[Tooltip("Whether to use a value based on a VariableReference or a specific value")]
 		[EnumButtons]
+		[NoLabel]
 		public VariableSourceType Type = VariableSourceType.Value;
 
 		[Tooltip("A reference to the variable")]
 		[Conditional(nameof(Type), (int)VariableSourceType.Reference)]
+		[NoLabel]
 		public VariableLookupReference Reference = new VariableLookupReference();
 
 		public bool UsesStore(string storeName) => Type == VariableSourceType.Reference && Reference.UsesStore(storeName);
@@ -31,6 +33,7 @@ namespace PiRhoSoft.Composition
 	{
 		[Tooltip("The value of the variable")]
 		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
+		[NoLabel]
 		public T Value;
 
 		public override string ToString()
@@ -193,6 +196,7 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The value of the variable")]
 		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
 		[ScenePicker]
+		[NoLabel]
 		public AssetReference Value = new AssetReference();
 
 		public override string ToString() => Type == VariableSourceType.Value ? Value.ToString() : base.ToString();

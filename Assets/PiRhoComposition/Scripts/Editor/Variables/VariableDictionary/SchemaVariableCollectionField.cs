@@ -2,7 +2,6 @@
 using PiRhoSoft.Utilities.Editor;
 using System;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
 
@@ -19,6 +18,9 @@ namespace PiRhoSoft.Composition.Editor
 		public SchemaVariableCollectionField(SerializedProperty property)
 		{
 			var variables = property.GetObject<SchemaVariableCollection>();
+			variables.UpdateSchema();
+			property.serializedObject.Update();
+
 			var schemaProperty = property.FindPropertyRelative(SchemaVariableCollection.SchemaProperty);
 			var proxy = new SchemaVariableCollectionProxy(property, variables);
 
@@ -55,8 +57,16 @@ namespace PiRhoSoft.Composition.Editor
 				var entry = _collection.Schema.GetEntry(index);
 				var variable = _variables.GetVariable(index);
 
+				var entriesProperty = new SerializedObject(_collection.Schema)
+					.FindProperty(VariableSchema.EntriesField)
+					.FindPropertyRelative(SerializedList<string>.ItemsProperty);
+
+				var definitionProperty = entriesProperty
+					.GetArrayElementAtIndex(index)
+					.FindPropertyRelative(nameof(VariableSchemaEntry.Definition));
+
 				var container = CreateContainer(index);
-				var label = CreateLabel(entry.Definition.Name);
+				var label = CreateLabel(definitionProperty);
 				var control = CreateVariable(index, variable, entry.Definition);
 				var refreshButton = new IconButton(_refreshIcon.Texture, "Recompute this variable based on the schema initializer", () =>
 				{
@@ -70,28 +80,7 @@ namespace PiRhoSoft.Composition.Editor
 				container.Add(control);
 				container.Add(refreshButton);
 
-				if (_collection.Schema)
-				{
-					var entriesProperty = new SerializedObject(_collection.Schema)
-						.FindProperty(VariableSchema.EntriesField)
-						.FindPropertyRelative(SerializedList<string>.ItemsProperty);
-
-					var definitionProperty = entriesProperty
-						.GetArrayElementAtIndex(index)
-						.FindPropertyRelative(nameof(VariableSchemaEntry.Definition));
-
-					var typeProperty = definitionProperty.FindPropertyRelative(VariableDefinition.TypeProperty);
-
-					var definitionDataProperty = definitionProperty
-						.FindPropertyRelative(VariableDefinition.ConstraintProperty)
-						.FindPropertyRelative(SerializedDataItem.ContentProperty);
-
-					var definitionDataWatcher = new ChangeTriggerControl<string>(definitionDataProperty, (oldValue, newValue) => control.Refresh());
-					var typeWatcher = new ChangeTriggerControl<Enum>(typeProperty, (oldValue, newValue) => control.Refresh());
-
-					container.Add(definitionDataWatcher);
-					container.Add(typeWatcher);
-				}
+				WatchDefinition(container, control, definitionProperty);
 
 				return container;
 			}

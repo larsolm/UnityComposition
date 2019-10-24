@@ -63,7 +63,7 @@ namespace PiRhoSoft.Composition.Editor
 					var name = GetName(item, token, string.Empty);
 					var comboBox = new ComboBoxControl(name, items.ToList());
 					comboBox.AddToClassList(ComboBoxUssClassName);
-					comboBox.RegisterCallback<ChangeEvent<string>>(evt => SelectItem(evt.newValue, itemIndex));
+					comboBox.RegisterCallback<ChangeEvent<string>>(evt => SelectItem(evt, itemIndex));
 					comboBox.TextField.isDelayed = true;
 
 					container.Add(comboBox);
@@ -80,7 +80,7 @@ namespace PiRhoSoft.Composition.Editor
 					var name = GetName(item, token, _emptyText);
 					var popup = new PopupField<string>(items.Prepend(_emptyText).ToList(), name);
 					popup.AddToClassList(PopupUssClassName);
-					popup.RegisterValueChangedCallback(evt => SelectItem(evt.newValue, itemIndex));
+					popup.RegisterValueChangedCallback(evt => SelectItem(evt, itemIndex));
 					popup.SetEnabled(!invalid);
 
 					EnableInClassList(InvalidUssClassName, invalid);
@@ -95,7 +95,7 @@ namespace PiRhoSoft.Composition.Editor
 					var valid = types.Contains(token.Text);
 					var popup = new PopupField<string>(valid ? types.ToList() : types.Prepend(token.Text).ToList(), token.Text);
 					popup.AddToClassList(PopupUssClassName);
-					popup.RegisterValueChangedCallback(evt => SelectItem(evt.newValue, itemIndex + 1));
+					popup.RegisterValueChangedCallback(evt => SelectItem(evt, itemIndex + 1));
 					popup.SetEnabled(valid);
 
 					EnableInClassList(InvalidUssClassName, !valid);
@@ -114,7 +114,7 @@ namespace PiRhoSoft.Composition.Editor
 					{
 						var indexField = new IntegerField { value = int.TryParse(token.Text, out var number) ? number : 0, isDelayed = true };
 						indexField.AddToClassList(ArrayIndexUssClassName);
-						indexField.RegisterValueChangedCallback(evt => SelectIndex(evt.newValue, itemIndex + 1));
+						indexField.RegisterValueChangedCallback(evt => SelectIndex(evt, itemIndex + 1));
 						index++;
 
 						container.Add(indexField);
@@ -178,11 +178,13 @@ namespace PiRhoSoft.Composition.Editor
 			return token.Type == VariableReference.VariableTokenType.Type ? VariableReference.Cast : item?.Name ?? token.Text;
 		}
 
-		private void SelectItem(string selectedItem, int itemIndex)
+		private void SelectItem(ChangeEvent<string> evt, int itemIndex)
 		{
+			evt.StopPropagation();
+
 			var source = _control.Autocomplete;
 			var tokens = _control.Value.Tokens.GetRange(0, itemIndex).ToList();
-			var selectedText = selectedItem == _emptyText ? string.Empty : selectedItem;
+			var selectedText = evt.newValue == _emptyText ? string.Empty : evt.newValue;
 
 			if (selectedText == VariableReference.Cast)
 				tokens.Add(new VariableReference.VariableToken { Text = nameof(GameObject), Type = VariableReference.VariableTokenType.Type });
@@ -206,10 +208,12 @@ namespace PiRhoSoft.Composition.Editor
 			this.SendChangeEvent(_control.Value.Variable, value);
 		}
 
-		private void SelectIndex(int selectedIndex, int itemIndex)
+		private void SelectIndex(ChangeEvent<int> evt, int itemIndex)
 		{
+			evt.StopPropagation();
+
 			var tokens = _control.Value.Tokens;
-			tokens[itemIndex].Text = selectedIndex.ToString();
+			tokens[itemIndex].Text = evt.newValue.ToString();
 
 			this.SendChangeEvent(null, _control.Value);
 		}

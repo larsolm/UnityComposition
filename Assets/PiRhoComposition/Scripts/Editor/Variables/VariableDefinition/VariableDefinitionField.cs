@@ -78,7 +78,11 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void UpdateValue()
 		{
-			((ISerializationCallbackReceiver)Value).OnBeforeSerialize();
+			Value.Constraint = Value.Constraint; // Trigger a save
+		}
+
+		private void UpdateProperty()
+		{
 			_property.serializedObject.Update();
 		}
 
@@ -86,14 +90,16 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			if (editable)
 			{
-				var nameField = new TextField { bindingPath = property.propertyPath };
+				var nameField = new TextField();
+				nameField.BindProperty(property);
 				nameField.AddToClassList(NameFieldUssClassName);
 
 				Add(nameField);
 			}
 			else
 			{
-				var nameLabel = new Label { bindingPath = property.propertyPath };
+				var nameLabel = new Label();
+				nameLabel.BindProperty(property);
 				nameLabel.AddToClassList(NameLabelUssClassName);
 
 				Add(nameLabel);
@@ -106,13 +112,13 @@ namespace PiRhoSoft.Composition.Editor
 			_typeDropdown.AddToClassList(TypeUssClassName);
 			_typeDropdown.RegisterValueChangedCallback(evt =>
 			{
-				_constraintContainer.Clear();
-
 				using (new ChangeScope(_owner))
 				{
 					Value.Type = (VariableType)evt.newValue;
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			Add(_typeDropdown);
@@ -173,6 +179,10 @@ namespace PiRhoSoft.Composition.Editor
 					case ListConstraint listConstraint: RefreshListConstraint(container, listConstraint); break;
 				}
 			}
+			else
+			{
+				container.Clear();
+			}
 		}
 
 		private VisualElement CreateIntConstraint(IntConstraint constraint)
@@ -224,6 +234,8 @@ namespace PiRhoSoft.Composition.Editor
 
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			maxToggle.RegisterValueChangedCallback(evt =>
@@ -237,22 +249,31 @@ namespace PiRhoSoft.Composition.Editor
 
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			min.RegisterValueChangedCallback(evt =>
 			{
 				using (new ChangeScope(_owner))
+				{
 					constraint.Minimum = evt.newValue;
+					UpdateValue();
+				}
 
-				UpdateValue();
+				UpdateProperty();
 			});
 
 			max.RegisterValueChangedCallback(evt =>
 			{
 				using (new ChangeScope(_owner))
+				{
 					constraint.Maximum = evt.newValue;
+					UpdateValue();
+				}
 
-				UpdateValue();
+
+				UpdateProperty();
 			});
 
 			return container;
@@ -323,6 +344,8 @@ namespace PiRhoSoft.Composition.Editor
 
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			maxToggle.RegisterValueChangedCallback(evt =>
@@ -336,6 +359,8 @@ namespace PiRhoSoft.Composition.Editor
 
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			min.RegisterValueChangedCallback(evt =>
@@ -345,6 +370,8 @@ namespace PiRhoSoft.Composition.Editor
 					constraint.Minimum = evt.newValue;
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			max.RegisterValueChangedCallback(evt =>
@@ -354,6 +381,8 @@ namespace PiRhoSoft.Composition.Editor
 					constraint.Maximum = evt.newValue;
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			return container;
@@ -387,6 +416,8 @@ namespace PiRhoSoft.Composition.Editor
 						constraint.Values[index] = evt.newValue;
 						UpdateValue();
 					}
+
+					UpdateProperty();
 				});
 
 				return field;
@@ -421,6 +452,8 @@ namespace PiRhoSoft.Composition.Editor
 					constraint.ObjectType = Type.GetType(evt.newValue ?? string.Empty);
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			return picker;
@@ -443,6 +476,8 @@ namespace PiRhoSoft.Composition.Editor
 					constraint.EnumType = Type.GetType(evt.newValue ?? string.Empty);
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			return picker;
@@ -465,6 +500,8 @@ namespace PiRhoSoft.Composition.Editor
 					constraint.Schema = evt.newValue as VariableSchema;
 					UpdateValue();
 				};
+
+				UpdateProperty();
 			});
 
 			return picker;
@@ -493,6 +530,8 @@ namespace PiRhoSoft.Composition.Editor
 					CreateListConstraint(listContainer, constraint);
 					UpdateValue();
 				}
+
+				UpdateProperty();
 			});
 
 			container.Add(dropdown);

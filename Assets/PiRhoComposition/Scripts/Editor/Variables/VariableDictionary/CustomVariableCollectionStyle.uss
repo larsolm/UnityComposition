@@ -1,3 +1,46 @@
 ﻿.pirho-custom-variable-collection
 {
 }
+
+.pirho-custom-variable-collection__settings
+{
+	min-width: 15px;
+	max-width: 15px;
+	min-height: 14px;
+	max-height: 14px;
+	align-self: flex-start;
+	margin-top: 3px;
+}
+
+.pirho-custom-variable-collection__popup
+{
+	flex-grow: 1;
+	display: none;
+	position: absolute;
+	background-color: #C2C2C2;
+	border-color: #999999;
+	border-width: 1px;
+	border-radius: 2px;
+	padding: 5px;
+	min-width: 200px;
+	flex-direction: row;
+}
+
+.pirho-custom-variable-collection__popup--open
+{
+	display: flex;
+}
+
+.pirho-custom-variable-collection__popup__definition
+{
+	flex-grow: 1;
+}
+
+.pirho-custom-variable-collection__popup__close
+{
+	min-width: 13px;
+	max-width: 13px;
+	min-height: 13px;
+	max-height: 13px;
+	align-self: flex-start;
+}

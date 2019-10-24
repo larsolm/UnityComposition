@@ -23,7 +23,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			_comment = new TextElement { tooltip = "Double click to edit this comment" };
 			_comment.AddToClassList(CommentLabelUssClassName);
-			_edit = CreateEditableLabel(_comment, nameof(_commentNode.Comment), true);
+			_edit = CreateEditableLabel(_comment, _serializedObject.FindProperty(nameof(_commentNode.Comment)), true);
 
 			extensionContainer.Add(_comment);
 			extensionContainer.style.backgroundColor = Data.Node.NodeColor * 0.8f;

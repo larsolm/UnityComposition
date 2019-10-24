@@ -1,6 +1,8 @@
 ﻿using PiRhoSoft.Utilities;
 using PiRhoSoft.Utilities.Editor;
+using System;
 using UnityEditor;
+using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -84,13 +86,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			protected void SetVariable(int index, Variable variable)
 			{
-				_variables.SetVariable(index, variable);
-				UpdateValue();
-			}
+				using (new ChangeScope(_property.serializedObject.targetObject))
+					_variables.SetVariable(index, variable);
 
-			protected void UpdateValue()
-			{
-				((ISerializationCallbackReceiver)_variables).OnBeforeSerialize();
 				_property.serializedObject.Update();
 			}
 
@@ -108,9 +106,11 @@ namespace PiRhoSoft.Composition.Editor
 				return container;
 			}
 
-			protected Label CreateLabel(string name)
+			protected Label CreateLabel(SerializedProperty definitionProperty)
 			{
-				var label = new Label(name);
+				var nameProperty = definitionProperty.FindPropertyRelative(nameof(VariableDefinition.Name));
+				var label = new Label();
+				label.BindProperty(nameProperty);
 				label.AddToClassList(LabelUssClassName);
 
 				return label;
@@ -130,6 +130,20 @@ namespace PiRhoSoft.Composition.Editor
 				control.Add(dataWatcher);
 
 				return control;
+			}
+
+			protected void WatchDefinition(VisualElement container, VariableControl control, SerializedProperty property)
+			{
+				var typeProperty = property.FindPropertyRelative(VariableDefinition.TypeProperty);
+				var definitionDataProperty = property
+					.FindPropertyRelative(VariableDefinition.ConstraintProperty)
+					.FindPropertyRelative(SerializedDataItem.ContentProperty);
+
+				var definitionDataWatcher = new ChangeTriggerControl<string>(definitionDataProperty, (oldValue, newValue) => control.Refresh());
+				var typeWatcher = new ChangeTriggerControl<Enum>(typeProperty, (oldValue, newValue) => control.Refresh());
+
+				container.Add(definitionDataWatcher);
+				container.Add(typeWatcher);
 			}
 		}
 	}

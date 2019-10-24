@@ -174,8 +174,11 @@ namespace PiRhoSoft.Composition.Editor
 				var type = (VariableType)evt.newValue;
 				var value = Variable.Create(type);
 
-				Definition.Type = type;
-				SetValue(value);
+				using (new ChangeScope(_owner))
+				{
+					Definition.Type = type;
+					SetValue(value);
+				}
 			});
 
 			Add(_emptyField);

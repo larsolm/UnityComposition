@@ -24,9 +24,9 @@ namespace PiRhoSoft.Composition
 	{
 		public static readonly IReadOnlyList<string> EmptyNames = new ReadOnlyCollection<string>(new List<string> { });
 
-		private List<string> _names = new List<string>();
-		private List<Variable> _variables = new List<Variable>();
-		private Dictionary<string, int> _map = new Dictionary<string, int>();
+		private readonly List<string> _names = new List<string>();
+		private readonly List<Variable> _variables = new List<Variable>();
+		private readonly Dictionary<string, int> _map = new Dictionary<string, int>();
 
 		public bool TryGetName(int index, out string name)
 		{
@@ -192,7 +192,7 @@ namespace PiRhoSoft.Composition
 		public SerializedDataList Data => _data;
 		[SerializeField] private SerializedDataList _data = new SerializedDataList();
 
-		protected virtual void Serialize()
+		protected virtual void Save()
 		{
 			_data.Clear();
 
@@ -206,9 +206,9 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected virtual void Deserialize()
+		protected virtual void Load()
 		{
-			ClearVariables();
+			base.ClearVariables(); // Call to the base so a save isn't initiated;
 
 			for (var i = 0; i < _data.Count; i++)
 			{
@@ -223,8 +223,49 @@ namespace PiRhoSoft.Composition
 
 		#region ISerializationCallbackReceiver Implementation
 
-		void ISerializationCallbackReceiver.OnBeforeSerialize() => Serialize();
-		void ISerializationCallbackReceiver.OnAfterDeserialize() => Deserialize();
+		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => Load();
+
+		#endregion
+
+		#region Editor Overrides
+
+#if UNITY_EDITOR
+		public override SetVariableResult AddVariable(string name, Variable variable)
+		{
+			var result = base.AddVariable(name, variable);
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult ClearVariables()
+		{
+			var result = base.ClearVariables();
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult RemoveVariable(string name)
+		{
+			var result = base.RemoveVariable(name);
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult SetVariable(int index, Variable variable)
+		{
+			var result = base.SetVariable(index, variable);
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult SetVariable(string name, Variable variable)
+		{
+			var result = base.SetVariable(name, variable);
+			Save();
+			return result;
+		}
+#endif
 
 		#endregion
 	}

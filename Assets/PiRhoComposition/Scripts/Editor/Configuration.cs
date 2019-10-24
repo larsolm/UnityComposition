@@ -5,20 +5,14 @@ namespace PiRhoSoft.Composition.Editor
 	public static class Configuration
 	{
 		private static string _editorPath = null;
-		private const string _editorFolder = "PiRhoComposition/Scripts/Editor/";
-
 		internal static string EditorPath
 		{
 			get
 			{
 				if (_editorPath == null)
-					_editorPath = AssetHelper.FindEditorPath(nameof(Configuration), _editorFolder);
+					_editorPath = AssetHelper.FindEditorPath(nameof(Configuration), "PiRhoComposition/Scripts/Editor/", "Packages/com.pirho.composition/Scripts/Editor/");
 
 				return _editorPath;
-			}
-			set
-			{
-				_editorPath = value; // settable so PiRho Composition can be moved or renamed by end users
 			}
 		}
 

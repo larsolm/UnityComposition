@@ -17,10 +17,12 @@ MonoBehaviour:
   IsBreakpoint: 0
   Next: {fileID: 4844405298555019272}
   TargetGraph:
-    Type: 0
+    Type: 1
     Reference:
-      _variable: 
-      _tokens: []
+      _variable: context
+      _tokens:
+      - Type: 0
+        Text: context
     Value:
       _graph: {fileID: 11400000, guid: 00fd0657d651f1c4bbb8e4c52e2dcec8, type: 2}
       _inputs: []
@@ -28,12 +30,10 @@ MonoBehaviour:
   Context:
     Type: 1
     Reference:
-      _variable: context as Component
+      _variable: context
       _tokens:
       - Type: 0
         Text: context
-      - Type: 2
-        Text: Component
     Value:
       _variableData:
         _references: []

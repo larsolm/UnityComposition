@@ -32,11 +32,16 @@
 	min-width: 17px;
 }
 
+.pirho-variable-reference-popup__item--empty .pirho-variable-reference-popup__item__popup .unity-base-popup-field__text
+{
+	display: none;
+}
+
 .pirho-variable-reference-popup__item--empty .pirho-variable-reference-popup__item__popup .unity-popup-field__input
 {
-	min-width: 17px;
-	max-width: 17px;
-	padding-right: 17px;
+	min-width: 20px;
+	max-width: 20px;
+	padding: 0px 4px 1px 4px;
 }
 
 .pirho-variable-reference-popup__item--invalid
@@ -47,7 +52,7 @@
 
 .pirho-variable-reference-popup__item__popup .unity-popup-field__input
 {
-	padding-right: 20px;
+	padding-right: 5px;
 	min-width: 0;
 }
 

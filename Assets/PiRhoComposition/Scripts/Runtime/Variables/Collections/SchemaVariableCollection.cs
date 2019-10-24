@@ -30,6 +30,11 @@ namespace PiRhoSoft.Composition
 			_locked = true;
 		}
 
+		public void UpdateSchema()
+		{
+			SetSchema(Schema);
+		}
+
 		private void ClearSchema()
 		{
 			_schema = null;
@@ -37,10 +42,10 @@ namespace PiRhoSoft.Composition
 			ClearVariables();
 		}
 
-		protected override void Deserialize()
+		protected override void Load()
 		{
 			_locked = false;
-			base.Deserialize();
+			base.Load();
 			SetSchema(_schema);
 		}
 

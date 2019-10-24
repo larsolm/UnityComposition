@@ -79,7 +79,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			titleButtonContainer.Insert(0, renameIcon);
 
-			return CreateEditableLabel(label, "m_Name");
+			return CreateEditableLabel(label, _serializedObject.FindProperty("m_Name"));
 		}
 
 		private VisualElement CreateBreakpoint()

@@ -22,7 +22,7 @@ namespace PiRhoSoft.Composition
 
 	public class VariableList : IVariableList
 	{
-		private List<Variable> _variables = new List<Variable>();
+		private readonly List<Variable> _variables = new List<Variable>();
 
 		#region IVariableArray Implementation
 
@@ -89,10 +89,9 @@ namespace PiRhoSoft.Composition
 	{
 		public const string DataProperty = nameof(_data);
 
-		public SerializedDataList Data => _data;
 		[SerializeField] private SerializedDataList _data = new SerializedDataList();
 
-		protected virtual void Serialize()
+		private void Save()
 		{
 			_data.Clear();
 
@@ -103,7 +102,7 @@ namespace PiRhoSoft.Composition
 			}
 		}
 
-		protected virtual void Deserialize()
+		private void Load()
 		{
 			ClearVariables();
 
@@ -119,8 +118,49 @@ namespace PiRhoSoft.Composition
 
 		#region ISerializationCallbackReceiver Implementation
 
-		void ISerializationCallbackReceiver.OnBeforeSerialize() => Serialize();
-		void ISerializationCallbackReceiver.OnAfterDeserialize() => Deserialize();
+		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => Load();
+
+		#endregion
+
+		#region Editor Overrides
+
+#if UNITY_EDITOR
+		public override SetVariableResult AddVariable(Variable variable)
+		{
+			var result = base.AddVariable(variable);
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult ClearVariables()
+		{
+			var result = base.ClearVariables();
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult RemoveVariable(int index)
+		{
+			var result = base.RemoveVariable(index);
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult InsertVariable(int index, Variable variable)
+		{
+			var result = base.InsertVariable(index, variable);
+			Save();
+			return result;
+		}
+
+		public override SetVariableResult SetVariable(int index, Variable variable)
+		{
+			var result = base.SetVariable(index, variable);
+			Save();
+			return result;
+		}
+#endif
 
 		#endregion
 	}

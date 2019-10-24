@@ -62,6 +62,7 @@ namespace PiRhoSoft.Composition.Editor
 			get => _textField.text;
 			set => _textField.value = value;
 		}
+
 		public int Cursor
 		{
 			get => _textField.cursorIndex;

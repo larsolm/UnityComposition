@@ -66,9 +66,6 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void Refresh()
 		{
-			EnableInClassList(InvalidModeUssClassName, !Value.IsValid);
-			EnableInClassList(AdvancedModeUssClassName, _advancedMode);
-
 			if (!Value.IsValid)
 				_advancedMode = true;
 
@@ -82,6 +79,9 @@ namespace PiRhoSoft.Composition.Editor
 			_modeToggle.SetEnabled(Value.IsValid);
 			_simpleControl.SetEnabled(!_advancedMode);
 			_advancedControl.SetEnabled(_advancedMode);
+
+			EnableInClassList(InvalidModeUssClassName, !Value.IsValid);
+			EnableInClassList(AdvancedModeUssClassName, _advancedMode);
 		}
 	}
 }

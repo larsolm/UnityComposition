@@ -2,7 +2,6 @@
 using PiRhoSoft.Utilities.Editor;
 using System;
 using UnityEditor;
-using UnityEngine;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -50,7 +49,6 @@ namespace PiRhoSoft.Composition.Editor
 		public void SetValue(Variable value)
 		{
 			Value.Variable = value;
-			((ISerializationCallbackReceiver)Value).OnBeforeSerialize();
 			_property.serializedObject.Update();
 		}
 

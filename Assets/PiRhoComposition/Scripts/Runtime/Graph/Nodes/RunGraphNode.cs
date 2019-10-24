@@ -61,6 +61,7 @@ namespace PiRhoSoft.Composition
 	{
 		[Tooltip("The graph to run when this node is reached")]
 		[Conditional(nameof(Type), (int)VariableSourceType.Value)]
+		[NoLabel]
 		public GraphCaller Value = new GraphCaller();
 
 		public override string ToString() => Type == VariableSourceType.Value ? Value.ToString() : base.ToString();

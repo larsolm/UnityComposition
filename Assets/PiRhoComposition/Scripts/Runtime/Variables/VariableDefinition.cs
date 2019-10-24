@@ -58,6 +58,9 @@ namespace PiRhoSoft.Composition
 			{
 				_type = value;
 				_constraint = VariableConstraint.Create(value);
+#if UNITY_EDITOR
+				Save();
+#endif
 			}
 		}
 
@@ -68,6 +71,9 @@ namespace PiRhoSoft.Composition
 			{
 				_type = value?.Type ?? VariableType.Empty;
 				_constraint = value;
+#if UNITY_EDITOR
+				Save();
+#endif
 			}
 		}
 
@@ -85,18 +91,21 @@ namespace PiRhoSoft.Composition
 				: variable.Is(Type);
 		}
 
-		[SerializeField] private SerializedDataItem _constraintData = new SerializedDataItem();
-		void ISerializationCallbackReceiver.OnBeforeSerialize()
+		private void Save()
 		{
 			using (var writer = new SerializedDataWriter(_constraintData))
 				writer.SaveInstance(_constraint);
 		}
 
-		void ISerializationCallbackReceiver.OnAfterDeserialize()
+		private void Load()
 		{
 			using (var reader = new SerializedDataReader(_constraintData))
 				_constraint = reader.LoadInstance<VariableConstraint>();
 		}
+
+		[SerializeField] private SerializedDataItem _constraintData = new SerializedDataItem();
+		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => Load();
 	}
 
 	[Serializable]

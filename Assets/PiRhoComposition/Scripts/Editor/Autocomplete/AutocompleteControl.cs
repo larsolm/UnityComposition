@@ -29,10 +29,10 @@ namespace PiRhoSoft.Composition.Editor
 		private static readonly string LookupClose = VariableReference.LookupClose.ToString();
 		private static readonly string Cast = $"{Space}{VariableReference.Cast}{Space}";
 
-		private IAutocompleteProxy _proxy;
-		private AutocompletePopup _autocomplete;
-		private TextElement _measure;
-		private TextField _textField;
+		private readonly IAutocompleteProxy _proxy;
+		private readonly AutocompletePopup _autocomplete;
+		private readonly TextElement _measure;
+		private readonly TextField _textField;
 
 		public AutocompleteControl(IAutocompleteProxy proxy, TextField textField)
 		{

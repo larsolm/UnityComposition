@@ -56,7 +56,7 @@ namespace PiRhoSoft.Composition.Editor
 			m_ConnectorText.style.unityTextAlign = TextAnchor.MiddleLeft;
 
 			if (nameProperty != null)
-				GraphViewNode.CreateEditableLabel(m_ConnectorText, nameProperty.propertyPath);
+				GraphViewNode.CreateEditableLabel(m_ConnectorText, nameProperty);
 		}
 
 		public override void OnStartEdgeDragging()
