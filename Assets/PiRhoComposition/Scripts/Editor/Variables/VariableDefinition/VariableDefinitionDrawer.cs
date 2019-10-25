@@ -1,4 +1,5 @@
-﻿using UnityEditor;
+﻿using PiRhoSoft.Utilities.Editor;
+using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -8,7 +9,8 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			return new VariableDefinitionField(property, true);
+			var locked = fieldInfo.HasAttribute<VariableDefinition.NameLocked>();
+			return new VariableDefinitionField(property, locked);
 		}
 	}
 }

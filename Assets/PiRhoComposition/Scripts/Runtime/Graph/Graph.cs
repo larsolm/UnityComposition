@@ -28,10 +28,12 @@ namespace PiRhoSoft.Composition
 
 		[Tooltip("The definitions for input variables used in this graph")]
 		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Input variables defined in nodes will appear here")]
+		[VariableDefinition.NameLocked]
 		public VariableDefinitionList Inputs = new VariableDefinitionList();
 
 		[Tooltip("The definitions for output variables used in this graph")]
 		[List(AllowAdd = ListAttribute.Never, AllowRemove = ListAttribute.Never, AllowReorder = ListAttribute.Never, EmptyLabel = "Output variables defined in nodes will appear here")]
+		[VariableDefinition.NameLocked]
 		public VariableDefinitionList Outputs = new VariableDefinitionList();
 
 		public GraphNode StartNode = null;
@@ -40,7 +42,7 @@ namespace PiRhoSoft.Composition
 		public bool IsRunning { get; private set; }
 		public bool IsExiting { get; private set; }
 		public IVariableMap Variables { get; private set; }
-		private List<GraphRunner> _runners = new List<GraphRunner>();
+		private readonly List<GraphRunner> _runners = new List<GraphRunner>();
 
 		#region Reset
 

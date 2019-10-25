@@ -141,16 +141,17 @@ namespace PiRhoSoft.Composition
 			return result;
 		}
 
-		public void OnBeforeSerialize()
-		{
-		}
+		#region ISerializationCallbackReceiver Implementation
 
-		public void OnAfterDeserialize()
+		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+		void ISerializationCallbackReceiver.OnAfterDeserialize()
 		{
 			var error = Compile();
 
 			if (!error.Success)
 				string.Format(_expressionParseError, _statement, error.Location, error.Token, error.Message);
 		}
+
+		#endregion
 	}
 }

@@ -24,8 +24,8 @@ namespace PiRhoSoft.Composition.Editor
 		private const string _emptyText = "-Empty-";
 		private const string _indexedText = "-Indexed-";
 
-		private VariableReferenceControl _control;
-		private MessageBox _errorMessage;
+		private readonly VariableReferenceControl _control;
+		private readonly MessageBox _errorMessage;
 
 		public VariableReferencePopupControl(VariableReferenceControl control)
 		{
@@ -215,7 +215,9 @@ namespace PiRhoSoft.Composition.Editor
 			var tokens = _control.Value.Tokens;
 			tokens[itemIndex].Text = evt.newValue.ToString();
 
-			this.SendChangeEvent(null, _control.Value);
+			var value = VariableReference.Format(tokens);
+
+			this.SendChangeEvent(_control.Value.Variable, value);
 		}
 	}
 }

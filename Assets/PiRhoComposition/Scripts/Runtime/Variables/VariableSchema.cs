@@ -150,6 +150,7 @@ namespace PiRhoSoft.Composition
 	{
 		private const string _invalidInitializerError = "(PCVSEII) failed to initialize variable '{0}' using collection '{1}': the generated variable is type '{2}' and does not match the definition '{3}'";
 
+		[Tooltip("The tag given to this variable")]
 		public string Tag;
 		public VariableSchemaInitializerType Type;
 		public Expression Initializer;

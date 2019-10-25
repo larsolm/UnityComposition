@@ -13,17 +13,17 @@ namespace PiRhoSoft.Composition.Editor
 		public const string SimpleUssClassName = UssClassName + "__simple";
 		public const string AdvancedUssClassName = UssClassName + "__advanced";
 
-		private static readonly string _validTooltip = "Toggle editing as dropdown (simple) vs text (advanced)";
-		private static readonly string _invalidTooltip = "Must fix syntax errors before toggling to dropdown mode";
+		private const string _validTooltip = "Toggle editing as dropdown (simple) vs text (advanced)";
+		private const string _invalidTooltip = "Must fix syntax errors before toggling to dropdown mode";
 
 		private static readonly Icon _modeIcon = Icon.BuiltIn("d_CustomSorting");
 
 		public VariableReference Value { get; private set; }
 		public IAutocompleteItem Autocomplete { get; private set; }
 
-		private IconButton _modeToggle;
-		private VariableReferencePopupControl _simpleControl;
-		private VariableReferenceAutocompleteControl _advancedControl;
+		private readonly IconButton _modeToggle;
+		private readonly VariableReferencePopupControl _simpleControl;
+		private readonly VariableReferenceAutocompleteControl _advancedControl;
 
 		private bool _advancedMode = false;
 
@@ -42,11 +42,9 @@ namespace PiRhoSoft.Composition.Editor
 
 			_simpleControl = new VariableReferencePopupControl(this);
 			_simpleControl.AddToClassList(SimpleUssClassName);
-			_simpleControl.RegisterCallback<ChangeEvent<string>>(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
 
 			_advancedControl = new VariableReferenceAutocompleteControl(this);
 			_advancedControl.AddToClassList(AdvancedUssClassName);
-			_advancedControl.RegisterCallback<ChangeEvent<string>>(evt => this.SendChangeEvent(evt.previousValue, evt.newValue));
 
 			Add(_modeToggle);
 			Add(_simpleControl);
@@ -54,7 +52,6 @@ namespace PiRhoSoft.Composition.Editor
 
 			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);
-
 			Refresh();
 		}
 

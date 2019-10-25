@@ -30,15 +30,6 @@ namespace PiRhoSoft.Composition.Extensions
 		[Tooltip("Whether to use a relative scale from the original or an absolute scale")]
 		public bool UseRelativeScale = true;
 
-		[Tooltip("The target position to move to - offset from the original if UseRelativePosition is set")]
-		public Vector3VariableSource TargetPosition = new Vector3VariableSource();
-
-		[Tooltip("The target rotation to change to - offset from the original if UseRelativeRotation is set")]
-		public Vector3VariableSource TargetRotation = new Vector3VariableSource();
-
-		[Tooltip("The target scale to size to - multiplicative from the original if UseRelativeScale is set")]
-		public Vector3VariableSource TargetScale = new Vector3VariableSource(Vector3.one);
-
 		[Tooltip("The method in which to animate toward the target transform")]
 		public AnimationType AnimationMethod = AnimationType.None;
 
@@ -62,9 +53,18 @@ namespace PiRhoSoft.Composition.Extensions
 		[Conditional(nameof(AnimationMethod), (int)AnimationType.Speed)]
 		public FloatVariableSource ScaleSpeed = new FloatVariableSource(1.0f);
 
+		[Tooltip("The target position to move to - offset from the original if UseRelativePosition is set")]
+		public Vector3VariableSource TargetPosition = new Vector3VariableSource();
+
+		[Tooltip("The target rotation to change to - offset from the original if UseRelativeRotation is set")]
+		public Vector3VariableSource TargetRotation = new Vector3VariableSource();
+
+		[Tooltip("The target scale to size to - multiplicative from the original if UseRelativeScale is set")]
+		public Vector3VariableSource TargetScale = new Vector3VariableSource(Vector3.one);
+
 		public override Color NodeColor => Colors.Sequencing;
 
-		private static Dictionary<int, Coroutine> _currentlyRunning = new Dictionary<int, Coroutine>();
+		private static readonly Dictionary<int, Coroutine> _currentlyRunning = new Dictionary<int, Coroutine>();
 
 		public override IEnumerator Run(IGraphRunner graph, IVariableMap variables)
 		{

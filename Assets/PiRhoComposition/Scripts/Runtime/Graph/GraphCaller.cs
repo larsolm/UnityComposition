@@ -9,6 +9,11 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class GraphCaller
 	{
+		public const string GraphField = nameof(_graph);
+		public const string InputsField = nameof(_inputs);
+		public const string OutputsField = nameof(_outputs);
+
+		[Tooltip("The Graph to run")]
 		[SerializeField] private Graph _graph;
 		[SerializeField] private List<GraphInput> _inputs = new List<GraphInput>();
 		[SerializeField] private List<GraphOutput> _outputs = new List<GraphOutput>();

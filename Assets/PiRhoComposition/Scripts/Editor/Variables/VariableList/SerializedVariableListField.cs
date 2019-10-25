@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class SerializedVariableListField : BindableElement
 	{
-		public static readonly string UssClassName = "pirho-serialized-variable-list-field";
+		public const string UssClassName = "pirho-serialized-variable-list-field";
 
 		private VariableListControl _control;
 

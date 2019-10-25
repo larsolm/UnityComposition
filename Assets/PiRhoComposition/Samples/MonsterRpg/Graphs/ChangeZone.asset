@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Exit Zone
   m_EditorClassIdentifier: 
   Graph: {fileID: 11400000}
-  GraphPosition: {x: 112, y: -101.99997}
+  GraphPosition: {x: 111, y: -101.99997}
   IsBreakpoint: 0
   Next: {fileID: 4844405298555019272}
   TargetGraph:
@@ -30,7 +30,7 @@ MonoBehaviour:
   Context:
     Type: 1
     Reference:
-      _variable: context
+      _variable: 
       _tokens:
       - Type: 0
         Text: context

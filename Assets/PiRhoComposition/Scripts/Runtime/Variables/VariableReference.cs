@@ -5,7 +5,7 @@ using UnityEngine;
 namespace PiRhoSoft.Composition
 {
 	[Serializable]
-	public class VariableReference
+	public class VariableReference : ISerializationCallbackReceiver
 	{
 		public const string VariableField = nameof(_variable);
 		public const string Cast = "as";
@@ -13,27 +13,15 @@ namespace PiRhoSoft.Composition
 		public const char LookupOpen = '[';
 		public const char LookupClose = ']';
 
-		[SerializeField] protected string _variable = string.Empty;
-		[SerializeField] private List<VariableToken> _tokens = new List<VariableToken>();
+		[SerializeField] protected string _variable = string.Empty; // Protected so it can be found by the editor
 
-		public bool IsValid => string.IsNullOrEmpty(_variable) || _tokens.Count > 0;
-		public bool IsAssigned => _tokens.Count > 0;
-		public string StoreName => IsAssigned ? (_tokens.Count > 1 ? _tokens[0].Text : string.Empty) : string.Empty;
-		public string RootName => IsAssigned ? (_tokens.Count > 1 ? _tokens[1].Text : _tokens[0].Text) : string.Empty;
+		public bool IsValid => string.IsNullOrEmpty(_variable) || Tokens.Count > 0;
+		public bool IsAssigned => Tokens.Count > 0;
+		public string StoreName => IsAssigned ? (Tokens.Count > 1 ? Tokens[0].Text : string.Empty) : string.Empty;
+		public string RootName => IsAssigned ? (Tokens.Count > 1 ? Tokens[1].Text : Tokens[0].Text) : string.Empty;
 		public bool UsesStore(string storeName) => IsAssigned && StoreName == storeName;
 
-		public List<VariableToken> Tokens
-		{
-			get
-			{
-				return _tokens;
-			}
-			set
-			{
-				_tokens = value;
-				_variable = Format(value);
-			}
-		}
+		public List<VariableToken> Tokens { get; private set; } = new List<VariableToken>();
 
 		public string Variable
 		{
@@ -44,13 +32,13 @@ namespace PiRhoSoft.Composition
 			set
 			{
 				_variable = value;
-				_tokens = Parse(value);
+				Tokens = Parse(value);
 			}
 		}
 
 		public override string ToString()
 		{
-			return Format(_tokens);
+			return Format(Tokens);
 		}
 
 		public VariableDefinition GetDefinition() => new VariableDefinition(RootName);
@@ -171,6 +159,15 @@ namespace PiRhoSoft.Composition
 		}
 
 		#endregion
+
+		#region ISerializationCallbackReceiver Implementation
+
+		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => Tokens = Parse(_variable);
+
+		#endregion
+
+
 	}
 
 	[Serializable]

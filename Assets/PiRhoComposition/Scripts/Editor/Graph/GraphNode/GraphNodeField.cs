@@ -1,4 +1,5 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
 
@@ -6,26 +7,28 @@ namespace PiRhoSoft.Composition.Editor
 {
 	public class GraphNodeField : BaseField<Object>
 	{
-		public static readonly string UssClassName = "pirho-graph-node-field";
-		public static readonly string LabelUssClassName = UssClassName + "__label";
-		public static readonly string InputUssClassName = UssClassName + "__input";
+		public const string UssClassName = "pirho-graph-node-field";
+		public const string LabelUssClassName = UssClassName + "__label";
+		public const string InputUssClassName = UssClassName + "__input";
 
-		private GraphNodeControl _control;
+		public GraphNodeControl Control { get; private set; }
 
-		public GraphNodeField(string label, GraphNode value) : base(label, null)
+		public GraphNodeField(SerializedProperty property) : base(property.displayName, null)
 		{
-			Setup(value);
+			Setup(property.GetObject<GraphNode>());
+
+			this.ConfigureProperty(property);
 		}
 
 		private void Setup(GraphNode value)
 		{
-			_control = new GraphNodeControl(value);
-			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<Object>>(evt => base.value = evt.newValue);
+			Control = new GraphNodeControl(value);
+			Control.AddToClassList(InputUssClassName);
+			Control.RegisterCallback<ChangeEvent<Object>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
-			this.SetVisualInput(_control);
+			this.SetVisualInput(Control);
 			AddToClassList(UssClassName);
 			SetValueWithoutNotify(value);
 		}
@@ -33,7 +36,7 @@ namespace PiRhoSoft.Composition.Editor
 		public override void SetValueWithoutNotify(Object newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
-			_control.SetValueWithoutNotify(newValue);
+			Control.SetValueWithoutNotify(newValue);
 		}
 	}
 }

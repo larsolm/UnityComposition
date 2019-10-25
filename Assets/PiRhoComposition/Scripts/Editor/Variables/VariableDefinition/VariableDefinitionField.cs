@@ -48,7 +48,7 @@ namespace PiRhoSoft.Composition.Editor
 		private EnumField _typeDropdown;
 		private VisualElement _constraintContainer;
 
-		public VariableDefinitionField(SerializedProperty property, bool nameEditable)
+		public VariableDefinitionField(SerializedProperty property, bool locked)
 		{
 			bindingPath = property.propertyPath;
 			Value = property.GetObject<VariableDefinition>();
@@ -64,7 +64,7 @@ namespace PiRhoSoft.Composition.Editor
 			var dataWatcher = new ChangeTriggerControl<string>(dataProperty, (oldValue, newValue) => Refresh());
 			var typeWatcher = new ChangeTriggerControl<Enum>(typeProperty, (oldValue, newValue) => Refresh());
 
-			CreateName(nameProperty, nameEditable);
+			CreateName(nameProperty, locked);
 			CreateType();
 			CreateConstraint();
 			Refresh();
@@ -86,23 +86,23 @@ namespace PiRhoSoft.Composition.Editor
 			_property.serializedObject.Update();
 		}
 
-		private void CreateName(SerializedProperty property, bool editable)
+		private void CreateName(SerializedProperty property, bool locked)
 		{
-			if (editable)
-			{
-				var nameField = new TextField();
-				nameField.BindProperty(property);
-				nameField.AddToClassList(NameFieldUssClassName);
-
-				Add(nameField);
-			}
-			else
+			if (locked)
 			{
 				var nameLabel = new Label();
 				nameLabel.BindProperty(property);
 				nameLabel.AddToClassList(NameLabelUssClassName);
 
 				Add(nameLabel);
+			}
+			else
+			{
+				var nameField = new TextField();
+				nameField.BindProperty(property);
+				nameField.AddToClassList(NameFieldUssClassName);
+
+				Add(nameField);
 			}
 		}
 

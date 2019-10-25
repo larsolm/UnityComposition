@@ -1,19 +1,24 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
 	public class MessageField : BaseField<string>
 	{
-		public static readonly string UssClassName = "pirho-message-field";
-		public static readonly string LabelUssClassName = UssClassName + "__label";
-		public static readonly string InputUssClassName = UssClassName + "__input";
+		public const string UssClassName = "pirho-message-field";
+		public const string LabelUssClassName = UssClassName + "__label";
+		public const string InputUssClassName = UssClassName + "__input";
 
 		private MessageControl _control;
 
-		public MessageField(string label, Message value, IAutocompleteItem autocomplete) : base(label, null)
+		public MessageField(SerializedProperty property, IAutocompleteItem autocomplete) : base(property.displayName, null)
 		{
-			Setup(value, autocomplete);
+			Setup(property.GetObject<Message>(), autocomplete);
+
+			var textProperty = property.FindPropertyRelative(nameof(Message.Text));
+			this.ConfigureProperty(textProperty);
+			this.SetLabel(property.displayName);
 		}
 
 		private void Setup(Message value, IAutocompleteItem autocomplete)
@@ -33,18 +38,6 @@ namespace PiRhoSoft.Composition.Editor
 		{
 			base.SetValueWithoutNotify(newValue);
 			_control.SetValueWithoutNotify(newValue);
-		}
-
-		// Use this to set the bindingPath so that everywhere this field is used we don't have to step down into the "_variable" property
-		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
-		{
-			base.ExecuteDefaultActionAtTarget(evt);
-
-			if (this.TryGetPropertyBindEvent(evt, out var property))
-			{
-				var textProperty = property.FindPropertyRelative(nameof(Message.Text));
-				bindingPath = textProperty.propertyPath;
-			}
 		}
 	}
 }

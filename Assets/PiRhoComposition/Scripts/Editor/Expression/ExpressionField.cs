@@ -1,30 +1,35 @@
 ﻿using PiRhoSoft.Utilities.Editor;
+using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
 	public class ExpressionField : BaseField<string>
 	{
-		public static readonly string UssClassName = "pirho-expression-field";
-		public static readonly string LabelUssClassName = UssClassName + "__label";
-		public static readonly string InputUssClassName = UssClassName + "__input";
+		public const string UssClassName = "pirho-expression-field";
+		public const string LabelUssClassName = UssClassName + "__label";
+		public const string InputUssClassName = UssClassName + "__input";
 
-		private ExpressionControl _control;
+		public ExpressionControl Control { get; private set; }
 
-		public ExpressionField(string label, Expression value, IAutocompleteItem autocomplete) : base(label, null)
+		public ExpressionField(SerializedProperty property, IAutocompleteItem autocomplete) : base(property.displayName, null)
 		{
-			Setup(value, autocomplete);
+			Setup(property.GetObject<Expression>(), autocomplete);
+
+			var statementProperty = property.FindPropertyRelative(Expression.StatementField);
+			this.ConfigureProperty(statementProperty);
+			this.SetLabel(property.displayName);
 		}
 
 		private void Setup(Expression value, IAutocompleteItem autocomplete)
 		{
-			_control = new ExpressionControl(value, autocomplete);
-			_control.AddToClassList(InputUssClassName);
-			_control.RegisterCallback<ChangeEvent<string>>(evt => base.value = evt.newValue);
+			Control = new ExpressionControl(value, autocomplete);
+			Control.AddToClassList(InputUssClassName);
+			Control.RegisterCallback<ChangeEvent<string>>(evt => base.value = evt.newValue);
 
 			labelElement.AddToClassList(LabelUssClassName);
 
-			this.SetVisualInput(_control);
+			this.SetVisualInput(Control);
 			AddToClassList(UssClassName);
 			SetValueWithoutNotify(value.Statement);
 		}
@@ -32,19 +37,7 @@ namespace PiRhoSoft.Composition.Editor
 		public override void SetValueWithoutNotify(string newValue)
 		{
 			base.SetValueWithoutNotify(newValue);
-			_control.SetValueWithoutNotify(newValue);
-		}
-
-		protected override void ExecuteDefaultActionAtTarget(EventBase evt)
-		{
-			base.ExecuteDefaultActionAtTarget(evt);
-
-			if (this.TryGetPropertyBindEvent(evt, out var property))
-			{
-				var textProperty = property.FindPropertyRelative(Expression.StatementField);
-				if (textProperty != null)
-					bindingPath = textProperty.propertyPath;
-			}
+			Control.SetValueWithoutNotify(newValue);
 		}
 	}
 }

@@ -142,7 +142,7 @@ namespace PiRhoSoft.Composition.Editor
 					style.top = local.y;
 					style.width = position.parent.parent.worldBound.width;
 
-					var definitionField = new VariableDefinitionField(definitionProperty, false);
+					var definitionField = new VariableDefinitionField(definitionProperty, true);
 					definitionField.AddToClassList(PopupDefinitionUssClassName);
 
 					var close = new IconButton(Icon.Close.Texture, "Close this definition window", Hide);

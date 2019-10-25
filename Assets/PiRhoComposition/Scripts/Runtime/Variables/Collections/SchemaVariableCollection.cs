@@ -9,36 +9,47 @@ namespace PiRhoSoft.Composition
 		public const string SchemaProperty = nameof(_schema);
 
 		[SerializeField] private VariableSchema _schema = null;
-		[SerializeField] private int _schemaVersion = 1;
+		[SerializeField] private int _schemaVersion = -1;
 		private bool _locked = false;
 
-		public VariableSchema Schema => _schema;
 		public IVariableMap Owner { get; }
 
 		public SchemaVariableCollection() => Owner = null;
 		public SchemaVariableCollection(IVariableMap owner) => Owner = owner;
 
-		public void SetSchema(VariableSchema schema)
+		public VariableSchema Schema
 		{
-			_locked = false;
+			get => _schema;
+			set
+			{
+				_locked = false;
 
-			if (schema == null)
-				ClearSchema();
-			else if (schema != _schema || schema.Version != _schemaVersion)
-				ApplySchema(schema, Owner);
+				if (value == null)
+				{
+					ClearSchema();
+				}
+				else if (value != _schema || value.Version != _schemaVersion)
+				{
+					ApplySchema(value, Owner);
 
-			_locked = true;
+					_schemaVersion = value.Version;
+					_schema = value;
+				}
+
+				_locked = true;
+			}
 		}
 
 		public void UpdateSchema()
 		{
-			SetSchema(Schema);
+			Schema = _schema;
 		}
 
 		private void ClearSchema()
 		{
 			_schema = null;
-			_schemaVersion = 1;
+			_schemaVersion = -1;
+
 			ClearVariables();
 		}
 
@@ -46,7 +57,7 @@ namespace PiRhoSoft.Composition
 		{
 			_locked = false;
 			base.Load();
-			SetSchema(_schema);
+			UpdateSchema();
 		}
 
 		#region IVariableArray Implementation

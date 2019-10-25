@@ -7,7 +7,7 @@
 {
 	color: #000000;
 	-unity-font-style: bold;
-	margin: 1px 0px;
+	margin: 1px 0px 3px 0px;
 }
 
 .pirho-variable-definition__name-field

@@ -9,6 +9,13 @@ namespace PiRhoSoft.Composition
 	[Serializable]
 	public class VariableDefinition : ISerializationCallbackReceiver
 	{
+		public class NameLocked : PropertyTraitAttribute
+		{
+			public NameLocked() : base(FieldPhase, 0)
+			{
+			}
+		}
+
 		public const string TypeProperty = nameof(_type);
 		public const string ConstraintProperty = nameof(_constraintData);
 

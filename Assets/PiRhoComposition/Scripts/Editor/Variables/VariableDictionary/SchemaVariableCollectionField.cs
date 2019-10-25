@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using PiRhoSoft.Utilities.Editor;
-using System;
 using UnityEditor;
 using UnityEngine.UIElements;
 using Object = UnityEngine.Object;
@@ -26,14 +25,16 @@ namespace PiRhoSoft.Composition.Editor
 
 			Setup(property, proxy);
 
-			var picker = new ObjectPickerField(null, variables.Schema, null, typeof(VariableSchema)) { bindingPath = schemaProperty.propertyPath };
-			picker.RegisterCallback<ChangeEvent<Object>>(evt => variables.SetSchema(evt.newValue as VariableSchema));
-
-			var schemaWatcher = new ChangeTriggerControl<Object>(schemaProperty, (oldSchema, newShema) => _dictionaryField.Control.Refresh());
+			var picker = new ObjectPickerField(schemaProperty, typeof(VariableSchema));
+			picker.SetLabel(null);
+			picker.RegisterCallback<ChangeEvent<Object>>(evt =>
+			{
+				variables.Schema = evt.newValue as VariableSchema;
+				property.serializedObject.Update();
+				_dictionaryField.Control.Refresh();
+			});
 
 			_dictionaryField.Control.Header.Add(picker);
-
-			Add(schemaWatcher);
 
 			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
 			AddToClassList(UssClassName);

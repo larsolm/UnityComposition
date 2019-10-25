@@ -86,7 +86,7 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void CreateDefinition(SerializedProperty property)
 		{
-			var definitionField = new VariableDefinitionField(property, false);
+			var definitionField = new VariableDefinitionField(property, true);
 			var dataProperty = property.FindPropertyRelative(VariableDefinition.TypeProperty);
 			var dataWatcher = new ChangeTriggerControl<Enum>(dataProperty, (oldValue, newValue) => RefreshInitializer());
 
@@ -121,8 +121,7 @@ namespace PiRhoSoft.Composition.Editor
 					Value.Tag = Schema.Tags[0];
 
 				var popup = new PopupField<string>("Tag", Schema.Tags, Value.Tag);
-
-				_tags.Add(popup.ConfigureProperty(property, "The tag assigned to this variable"));
+				_tags.Add(popup.ConfigureProperty(property));
 			}
 		}
 
@@ -139,7 +138,8 @@ namespace PiRhoSoft.Composition.Editor
 			var defaultField = new SerializedVariableField(defaultProperty, definitionProperty);
 			defaultField.AddToClassList(InitializerDefaultTypeUssClassName);
 
-			var expressionField = new ExpressionField(null, Value.Initializer, null) { bindingPath = initializerProperty.propertyPath }; // TODO: Add autocomplete
+			var expressionField = new ExpressionField(initializerProperty, null); // TODO: Add autocomplete
+			expressionField.SetLabel(null);
 			expressionField.AddToClassList(InitializerExpressionTypeUssClassName);
 
 			var initializer = new VisualElement();

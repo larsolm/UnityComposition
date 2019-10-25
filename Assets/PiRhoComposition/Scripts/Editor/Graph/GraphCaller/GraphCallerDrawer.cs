@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities.Editor;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -9,7 +8,7 @@ namespace PiRhoSoft.Composition.Editor
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			return new GraphCallerField(property, this.GetTooltip());
+			return new GraphCallerField(property);
 		}
 	}
 }

@@ -46,7 +46,7 @@
   "lock": {
     "com.pirho.utilities": {
       "revision": "upm",
-      "hash": "006f596f1c379059aeffe601d04498b58b22a490"
+      "hash": "d8d7983c8589772c05ab58ad1227975bea545679"
     },
     "com.unity.2d.tilemap.extras": {
       "revision": "master",

@@ -1,0 +1,34 @@
+﻿.pirho-graph-caller
+{
+}
+
+.pirho-graph-caller__inputs
+{
+	display: flex;
+}
+
+.pirho-graph-caller__outputs
+{
+	display: flex;
+}
+
+.pirho-graph-caller--no-inputs .pirho-graph-caller__inputs
+{
+	display: none;
+}
+
+.pirho-graph-caller--no-outputs .pirho-graph-caller__outputs
+{
+	display: none;
+}
+
+.pirho-graph-caller__name
+{
+	-unity-font-style: bold;
+	margin: 1px 3px 3px 3px;
+}
+
+.pirho-graph-caller__value
+{
+	margin: 1px 3px;
+}

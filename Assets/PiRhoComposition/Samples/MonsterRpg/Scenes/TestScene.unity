@@ -132,6 +132,7 @@ GameObject:
   - component: {fileID: 388689191}
   - component: {fileID: 388689190}
   - component: {fileID: 388689192}
+  - component: {fileID: 388689193}
   m_Layer: 0
   m_Name: GameObject
   m_TagString: Untagged
@@ -154,15 +155,9 @@ MonoBehaviour:
   Variables:
     _data:
       _references: []
-      _content:
-      - BUhlbGxvAgAAAAAAAAA=
+      _content: []
     _definitions:
-      _items:
-      - Name: Hello
-        _type: 2
-        _constraintData:
-          _references: []
-          _content: AQFrUGlSaG9Tb2Z0LkNvbXBvc2l0aW9uLkludENvbnN0cmFpbnQsIEFzc2VtYmx5LUNTaGFycCwgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwBAQAAAAAKAAAA
+      _items: []
 --- !u!4 &388689191
 Transform:
   m_ObjectHideFlags: 0
@@ -192,10 +187,37 @@ MonoBehaviour:
   Variables:
     _data:
       _references: []
-      _content:
-      - DUhvdyBkbyB5b3UgZG8AAAAA
+      _content: []
     _schema: {fileID: 11400000, guid: 9dcf3543abeac064c95f190307438d6c, type: 2}
-    _schemaVersion: 1
+    _schemaVersion: 0
+--- !u!114 &388689193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 388689189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e077f3ebcd49ed94192a31283c82aa6b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Graph:
+    _graph: {fileID: 11400000, guid: 964545636911aee48a7d739820e49de0, type: 2}
+    _inputs:
+    - Name: Input
+      Type: 0
+      Reference:
+        _variable: 
+      Value:
+        _variableData:
+          _references: []
+          _content: AgAAAAAAAAA=
+    _outputs:
+    - Name: thing
+      Type: 1
+      Reference:
+        _variable: 
 --- !u!1 &986579270
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities.Editor;
-using UnityEditor;
+﻿using UnityEditor;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -10,8 +9,7 @@ namespace PiRhoSoft.Composition.Editor
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
 			var autocomplete = Autocomplete.GetItem(property.serializedObject.targetObject);
-			var field = new ExpressionField(property.displayName, property.GetObject<Expression>(), autocomplete);
-			return field.ConfigureProperty(property, this.GetTooltip());
+			return new ExpressionField(property, autocomplete);
 		}
 	}
 }
