@@ -187,9 +187,10 @@ MonoBehaviour:
   Variables:
     _data:
       _references: []
-      _content: []
+      _content:
+      - BUhlbGxvAAAAAA==
     _schema: {fileID: 11400000, guid: 9dcf3543abeac064c95f190307438d6c, type: 2}
-    _schemaVersion: 0
+    _schemaVersion: 170
 --- !u!114 &388689193
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -204,20 +205,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Graph:
     _graph: {fileID: 11400000, guid: 964545636911aee48a7d739820e49de0, type: 2}
-    _inputs:
-    - Name: Input
-      Type: 0
-      Reference:
-        _variable: 
-      Value:
-        _variableData:
-          _references: []
-          _content: AgAAAAAAAAA=
-    _outputs:
-    - Name: thing
-      Type: 1
-      Reference:
-        _variable: 
+    _inputs: []
+    _outputs: []
 --- !u!1 &986579270
 GameObject:
   m_ObjectHideFlags: 0

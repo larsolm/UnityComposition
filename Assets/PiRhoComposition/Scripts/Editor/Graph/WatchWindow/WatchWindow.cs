@@ -19,6 +19,7 @@ namespace PiRhoSoft.Composition.Editor
 		public const string UssToolbarClassName = UssClassName + "__toolbar";
 		public const string UssWatchClassName = UssClassName + "__watch";
 		public const string UssWatchInvalidClassName = UssWatchClassName + "--invalid";
+		public const string UssWatchButtonClassName = UssWatchClassName + "__button";
 		public const string UssLoggingClassName = UssClassName + "__logging";
 		public const string UssLoggingActiveClassName = UssLoggingClassName + "--active";
 		public const string UssContainerClassName = UssClassName + "__main-container";
@@ -27,22 +28,21 @@ namespace PiRhoSoft.Composition.Editor
 		public const string UssWatchedClassName = UssClassName + "__watched-container";
 		public const string UssFooterClassName = UssClassName + "__footer";
 		public const string UssExpressionClassName = UssClassName + "__expression";
+		public const string UssExecuteButtonClassName = UssExpressionClassName + "__execute";
 		public const string UssExpressionInvalidClassName = UssExpressionClassName + "--invalid";
 
 		private static readonly Icon _logIcon = Icon.BuiltIn("UnityEditor.ConsoleWindow");
+		private static readonly Icon _executeIcon = Icon.BuiltIn("Animation.Play");
+		
 		private static readonly BoolPreference _logGraphEnabled = new BoolPreference("PiRhoSoft.Composition.CompositionManager.LogGraphEnabled", false);
 
-		private VisualElement _globalContainer;
-		private VisualElement _collectionsContainer;
-		private VisualElement _watchedContainer;
-		private TextField _expressionText;
+		private readonly VisualElement _globalContainer;
+		private readonly VisualElement _collectionsContainer;
+		private readonly VisualElement _watchedContainer;
 
 		public WatchWindowElement()
 		{
-			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
-			AddToClassList(UssClassName);
-
-			var container = new VisualElement();
+			var container = new ScrollView(ScrollViewMode.Vertical);
 			container.AddToClassList(UssContainerClassName);
 
 			var toolbar = CreateToolbar();
@@ -62,8 +62,10 @@ namespace PiRhoSoft.Composition.Editor
 			UpdateCollections();
 
 			CompositionManager.LogTracking = _logGraphEnabled.Value;
-
 			EditorApplication.playModeStateChanged += PlayModeStateChanged;
+
+			this.AddStyleSheet(Configuration.EditorPath, Stylesheet);
+			AddToClassList(UssClassName);
 		}
 
 		private void PlayModeStateChanged(PlayModeStateChange state)
@@ -72,25 +74,36 @@ namespace PiRhoSoft.Composition.Editor
 				ClearCollections();
 			else if (state == PlayModeStateChange.EnteredPlayMode)
 				UpdateCollections();
-
-			_expressionText.SetEnabled(state == PlayModeStateChange.EnteredPlayMode);
 		}
 
 		private VisualElement CreateToolbar()
 		{
-			var watchField = new TextField { isDelayed = true, tooltip = "Type a VariableReference to watch" };
+			var watchField = new TextField { tooltip = "Type a VariableReference to watch" };
 			watchField.AddToClassList(UssWatchClassName);
-			watchField.RegisterValueChangedCallback(evt =>
-			{
-				var valid = AddWatch(evt.newValue);
-				if (valid)
-					watchField.SetValueWithoutNotify(string.Empty);
 
-				watchField.EnableInClassList(UssWatchInvalidClassName, !valid);
+			void watch()
+			{
+				if (string.IsNullOrWhiteSpace(watchField.text))
+				{
+					var valid = AddWatch(watchField.text);
+					if (valid)
+						watchField.SetValueWithoutNotify(string.Empty);
+
+					EnableInClassList(UssWatchInvalidClassName, !valid);
+				}
+			};
+
+			watchField.RegisterCallback<KeyDownEvent>(evt =>
+			{
+				if (evt.keyCode == KeyCode.KeypadEnter || evt.keyCode == KeyCode.Return)
+					watch();
 			});
 
 			var placeholder = new PlaceholderControl("Add watch");
 			placeholder.AddToField(watchField);
+
+			var watchButton = new IconButton(Icon.View.Texture, "Watch this variable", watch);
+			watchButton.AddToClassList(UssWatchButtonClassName);
 
 			var loggingButton = new Image { image = _logIcon.Texture, tooltip = "Enable/Disable logging of graph statistics" };
 			loggingButton.AddToClassList(UssLoggingClassName);
@@ -98,12 +111,13 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				CompositionManager.LogTracking = !CompositionManager.LogTracking;
 				_logGraphEnabled.Value = CompositionManager.LogTracking;
-				loggingButton.EnableInClassList(UssLoggingActiveClassName, CompositionManager.LogTracking);
+				EnableInClassList(UssLoggingActiveClassName, CompositionManager.LogTracking);
 			}));
 
 			var toolbar = new Toolbar();
 			toolbar.AddToClassList(UssToolbarClassName);
 			toolbar.Add(watchField);
+			toolbar.Add(watchButton);
 			toolbar.Add(loggingButton);
 
 			return toolbar;
@@ -138,23 +152,37 @@ namespace PiRhoSoft.Composition.Editor
 
 		private VisualElement CreateFooter()
 		{
-			_expressionText = new TextField { isDelayed = true, tooltip = "Type an Expression to execute" };
-			_expressionText.AddToClassList(UssExpressionClassName);
-			_expressionText.RegisterValueChangedCallback(evt =>
-			{
-				var valid = ExecuteExpression(evt.newValue);
-				if (valid)
-					_expressionText.SetValueWithoutNotify(string.Empty);
+			var expressionText = new TextField { tooltip = "Type an expression to execute" };
+			expressionText.AddToClassList(UssExpressionClassName);
 
-				_expressionText.EnableInClassList(UssExpressionInvalidClassName, !valid);
+			void execute()
+			{
+				if (string.IsNullOrWhiteSpace(expressionText.text))
+				{
+					var valid = ExecuteExpression(expressionText.text);
+					if (valid)
+						expressionText.SetValueWithoutNotify(string.Empty);
+
+					EnableInClassList(UssExpressionInvalidClassName, !valid);
+				}
+			};
+
+			expressionText.RegisterCallback<KeyDownEvent>(evt =>
+			{
+				if (evt.keyCode == KeyCode.KeypadEnter || evt.keyCode == KeyCode.Return)
+					execute();
 			});
 
+			var executeButton = new IconButton(_executeIcon.Texture, "Execute this expression", execute);
+			executeButton.AddToClassList(UssExecuteButtonClassName);
+
 			var placeholder = new PlaceholderControl("Execute Expression");
-			placeholder.AddToField(_expressionText);
+			placeholder.AddToField(expressionText);
 
 			var footer = new Toolbar();
 			footer.AddToClassList(UssFooterClassName);
-			footer.Add(_expressionText);
+			footer.Add(expressionText);
+			footer.Add(executeButton);
 
 			return footer;
 		}
@@ -172,10 +200,10 @@ namespace PiRhoSoft.Composition.Editor
 
 			if (CompositionManager.Exists)
 			{
-				//_globalContainer.Add(new VariableCollectionControl(CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, false, false));
-				//
-				//foreach (var graph in CompositionManager.TrackingState.Keys)
-				//	_collectionsContainer.Add(new VariableCollectionControl(graph.name, graph.Variables, true, false));
+				_globalContainer.Add(new VariableDictionaryWatchControl(CompositionManager.GlobalStoreName, CompositionManager.Instance.GlobalStore, true));
+
+				foreach (var graph in CompositionManager.TrackingState.Keys)
+					_collectionsContainer.Add(new VariableDictionaryWatchControl(graph.name, graph.Variables, true));
 			}
 		}
 
@@ -223,14 +251,14 @@ namespace PiRhoSoft.Composition.Editor
 
 		private void AddWatch(string name, IVariableMap variables)
 		{
-			//_watchedContainer.Add(new VariableDictionaryControl(name, variables, false, true));
+			_watchedContainer.Add(new VariableDictionaryWatchControl(name, variables, true));
 		}
 
 		private bool ExecuteExpression(string text)
 		{
 			var expression = new Expression();
 			var compilation = expression.SetStatement(text);
-		
+
 			if (!compilation.Success)
 			{
 				Debug.LogError(compilation.Message);
@@ -240,14 +268,98 @@ namespace PiRhoSoft.Composition.Editor
 			{
 				var result = Variable.Empty;
 				var graph = CompositionManager.TrackingState.FirstOrDefault();
-		
+
 				if (graph.Key != null)
 					result = expression.Execute(graph.Value.Graph, graph.Key.Variables);
 				else
 					result = expression.Execute(null, CompositionManager.Instance.DefaultStore);
-		
+
 				Debug.LogFormat(_expressionResultLog, expression.Statement, result.Type, result);
 				return true;
+			}
+		}
+
+		private class VariableDictionaryWatchControl : VisualElement
+		{
+			public VariableDictionaryWatchControl(string name, IVariableMap variables, bool allowClose)
+			{
+				var proxy = new WatchProxy(name, variables);
+				var list = new ListControl(proxy);
+
+				if (allowClose)
+					list.Header.Add(new IconButton(Icon.Close.Texture, "Close this watch", RemoveFromHierarchy));
+
+				Add(list);
+			}
+
+			private class WatchProxy : IListProxy
+			{
+				public IVariableMap Variables { get; }
+				public string Label { get; }
+				public string Tooltip => "The variables in this map";
+				public string EmptyLabel => "This variable map is empty";
+				public string EmptyTooltip => "There are no variables in this map";
+				public string AddTooltip => string.Empty;
+				public string RemoveTooltip => string.Empty;
+				public string ReorderTooltip => string.Empty;
+
+				public int ItemCount => Variables.VariableNames.Count;
+
+				public bool AllowAdd => false;
+				public bool AllowRemove => false;
+				public bool AllowReorder => false;
+
+				public bool CanAdd() => false;
+				public bool CanRemove(int index) => false;
+				public bool CanReorder(int from, int to) => false;
+
+				public void AddItem() { }
+				public void RemoveItem(int index) { }
+				public void ReorderItem(int from, int to) { }
+				
+				public WatchProxy(string name, IVariableMap variables)
+				{
+					Label = name;
+					Variables = variables;
+				}
+
+				public VisualElement CreateElement(int index)
+				{
+					var name = Variables.VariableNames[index];
+					var variable = Variables.GetVariable(name);
+
+					var container = new VisualElement();
+					container.Add(new Label(name));
+
+					if (variable.IsEmpty)
+					{
+						container.Add(new Label("(empty)"));
+					}
+					else
+					{
+						if (variable.TryGetCollection(out var variables))
+						{
+							container.Add(new IconButton(Icon.View.Texture, "View the contents of the store", () =>
+							{
+								using (var evt = WatchWindow.WatchEvent.GetPooled(variables, name))
+								{
+									evt.target = container;
+									container.SendEvent(evt);
+								}
+							}));
+						}
+
+						var control = new VariableControl(variable, new VariableDefinition(name, variable.Type), null);
+						container.Add(control);
+					}
+
+					return container;
+				}
+
+				public bool NeedsUpdate(VisualElement item, int index)
+				{
+					return true;
+				}
 			}
 		}
 	}

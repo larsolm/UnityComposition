@@ -19,18 +19,8 @@ MonoBehaviour:
       _references: []
       _content: AAA=
   Inputs:
-    _items:
-    - Name: Input
-      _type: 2
-      _constraintData:
-        _references: []
-        _content: AQFrUGlSaG9Tb2Z0LkNvbXBvc2l0aW9uLkludENvbnN0cmFpbnQsIEFzc2VtYmx5LUNTaGFycCwgVmVyc2lvbj0wLjAuMC4wLCBDdWx0dXJlPW5ldXRyYWwsIFB1YmxpY0tleVRva2VuPW51bGwAAA==
+    _items: []
   Outputs:
-    _items:
-    - Name: thing
-      _type: 0
-      _constraintData:
-        _references: []
-        _content: AAA=
+    _items: []
   StartNode: {fileID: 0}
   Nodes: []

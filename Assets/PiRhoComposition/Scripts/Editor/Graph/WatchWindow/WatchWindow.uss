@@ -5,9 +5,7 @@
 
 .pirho-watch-window__toolbar
 {
-	align-items: center;
-	font-size: 10px;
-	padding: 0px 5px;
+	padding: 0 3px;
 }
 
 .pirho-watch-window__watch
@@ -15,30 +13,40 @@
 	flex-grow: 1;
 }
 
-.pirho-watch-window__watch--invalid
+.pirho-watch-window__watch--invalid .pirho-watch-window__watch
 {
+	background-color: #FF6B6B;
+}
+
+.pirho-watch-window__watch__button
+{
+	align-self: center;
+	min-width: 16px;
+	max-width: 16px;
+	min-height: 12px;
+	max-height: 12px;
+	margin-right: 3px;
 }
 
 .pirho-watch-window__logging
 {
-	border-color: #000;
-	border-right-width: 1px;
+	border-color: #999999;
 	border-left-width: 1px;
+	border-right-width: 1px;
 	background-color: #D0D0D0;
-	width: 28px;
-	height: 14px;
-	padding: 0 6px;
-	margin-left: 5px;
+	padding: 3px 6px 2px 6px;
+	min-width: 28px;
+	min-height: 14px;
+}
+
+.pirho-watch-window__logging--active .pirho-watch-window__logging
+{
+	background-color: #F6F6F6
 }
 
 .pirho-watch-window__logging:active
 {
 	background-color: #C0C0C0
-}
-
-.pirho-watch-window__logging--active
-{
-	background-color: #F6F6F6
 }
 
 .pirho-watch-window__main-container
@@ -60,12 +68,21 @@
 
 .pirho-watch-window__footer
 {
-	align-items: center;
-	font-size: 10px;
-	padding: 0px 5px;
+	border-top-width: 1px;
+	border-bottom-width: 0px;
+	padding: 0px 3px;
 }
 
 .pirho-watch-window__expression
 {
 	flex-grow: 1;
+}
+
+.pirho-watch-window__expression__execute
+{
+	align-self: center;
+	min-width: 17px;
+	max-width: 17px;
+	min-height: 14px;
+	max-height: 14px;
 }
