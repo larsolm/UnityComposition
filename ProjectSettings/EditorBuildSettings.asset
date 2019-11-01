@@ -42,10 +42,10 @@ EditorBuildSettings:
     path: 
     guid: 16a12d16ebddc394b89965660f81d2b5
   - enabled: 1
-    path: Assets/PiRhoComposition/Samples/MonsterRpg/Scenes/Main.unity
+    path: Assets/PiRhoComposition/Samples/RpgDemo/Scenes/Main.unity
     guid: b3107e77474bd15439111d0014ddd77f
   - enabled: 1
-    path: Assets/PiRhoComposition/Samples/MonsterRpg/Scenes/Start.unity
+    path: Assets/PiRhoComposition/Samples/RpgDemo/Scenes/Start.unity
     guid: da5452bfa91779e47a5b26a5b2c06454
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: acaca772b541f714a8bb01d891a6276b,

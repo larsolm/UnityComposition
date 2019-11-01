@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 namespace PiRhoSoft.Composition

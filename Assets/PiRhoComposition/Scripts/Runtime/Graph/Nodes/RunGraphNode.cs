@@ -115,7 +115,6 @@ namespace PiRhoSoft.Composition
 						CompositionManager.Instance.RunGraph(caller, context);
 				}
 			}
-
 		}
 	}
 

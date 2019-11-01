@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -7,7 +6,7 @@ namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Unload Scene", 101)]
 	[HelpURL(Configuration.DocumentationUrl + "unload-scene-node")]
-	public sealed class UnloadSceneNode : GraphNode
+	public class UnloadSceneNode : GraphNode
 	{
 		private const string _invalidSceneError = "(CUSNIS) Unable to unload scene on node '{0}': a scene with name '{1}' is not loaded - make sure the scene exists and has been added to the build settings";
 		private const string _lastSceneWarning = "(CUSNLS) Unable to unload scene for node '{0}': the scene '{1}' is the only loaded scene";

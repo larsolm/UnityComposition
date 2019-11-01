@@ -1,5 +1,4 @@
-﻿using PiRhoSoft.Utilities;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 using UnityEngine.AddressableAssets;
 using UnityEngine.SceneManagement;
@@ -8,7 +7,7 @@ namespace PiRhoSoft.Composition
 {
 	[CreateGraphNodeMenu("Object Manipulation/Load Scene", 100)]
 	[HelpURL(Configuration.DocumentationUrl + "load-scene-node")]
-	public sealed class LoadSceneNode : GraphNode
+	public class LoadSceneNode : GraphNode
 	{
 		private const string _invalidSceneWarning = "(CLSNIS) Unable to load scene on node '{0}': the scene '{1}' could not be found";
 

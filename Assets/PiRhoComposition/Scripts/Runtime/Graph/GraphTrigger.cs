@@ -9,10 +9,17 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The graph to run when this object is triggered")]
 		public GraphCaller Graph = new GraphCaller();
 
+		protected VariableAccess _variables;
+
+		void Awake()
+		{
+			_variables = new VariableAccess(gameObject);
+		}
+
 		public void Run()
 		{
 			if (Graph.Graph && !Graph.IsRunning)
-				CompositionManager.Instance.RunGraph(Graph, Variable.Object(gameObject));
+				CompositionManager.Instance.RunGraph(Graph, _variables, _variables.This);
 		}
 	}
 }

@@ -9,8 +9,8 @@ namespace PiRhoSoft.Composition
 
 	public class WatchedVariableCollection : IVariableMap
 	{
-		private IVariableListener _listener;
-		private IVariableMap _store;
+		private readonly IVariableListener _listener;
+		private readonly IVariableMap _store;
 
 		public WatchedVariableCollection(IVariableListener listener, IVariableMap store)
 		{

@@ -97,7 +97,7 @@ namespace PiRhoSoft.Composition
 
 	[HelpURL(Configuration.DocumentationUrl + "command")]
 	[CreateAssetMenu(menuName = "PiRho Composition/Command", fileName = nameof(Command), order = 125)]
-	public sealed class Command : ScriptableObject, ICommand
+	public class Command : ScriptableObject, ICommand
 	{
 		[Serializable]
 		public class Parameter

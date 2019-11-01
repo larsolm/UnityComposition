@@ -1,6 +1,5 @@
 ﻿using PiRhoSoft.Utilities;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 using Object = UnityEngine.Object;
 
@@ -10,12 +9,6 @@ namespace PiRhoSoft.Composition
 	{
 		Duration,
 		Speed
-	}
-
-	public enum AnimatedVariableResult
-	{
-		Success,
-		InvalidInputs
 	}
 
 	[Serializable]
@@ -30,6 +23,7 @@ namespace PiRhoSoft.Composition
 		public VariableLookupReference To = new VariableLookupReference();
 
 		[Tooltip("Whether to advance the animation using Duration or Speed")]
+		[EnumButtons]
 		public AnimatedVariableType Advance = AnimatedVariableType.Duration;
 
 		[Tooltip("Whether to respect the global timeScale (unchecked) or not (checked)")]
@@ -64,7 +58,7 @@ namespace PiRhoSoft.Composition
 				? VariableHandler.Distance(_from, _to)
 				: Duration;
 
-			Set(variables, 0.0f);
+			Set(0.0f);
 
 			if (Value.IsEmpty)
 				Debug.LogWarningFormat(context, _invalidInputsWarning, _from, _to, _from.Type, _to.Type);
@@ -72,7 +66,7 @@ namespace PiRhoSoft.Composition
 			return !Value.IsEmpty;
 		}
 
-		public void Step(IVariableMap variables)
+		public void Step()
 		{
 			var elapsed = UseUnscaledTime ? Time.unscaledDeltaTime : Time.deltaTime;
 			var increment = Advance == AnimatedVariableType.Duration ? elapsed : Speed * elapsed;
@@ -82,20 +76,20 @@ namespace PiRhoSoft.Composition
 			var time = Animation.Evaluate(_location / _end);
 
 			if (time >= 1.0f)
-				Complete(variables);
+				Complete();
 			else
-				Set(variables, time);
+				Set(time);
 		}
 
-		public void Set(IVariableMap variables, float time)
+		public void Set(float time)
 		{
 			Value = VariableHandler.Interpolate(_from, _to, time);
 		}
 
-		public void Complete(IVariableMap variables)
+		public void Complete()
 		{
 			_location = _end;
-			Set(variables, 1.0f);
+			Set(1.0f);
 		}
 	}
 }

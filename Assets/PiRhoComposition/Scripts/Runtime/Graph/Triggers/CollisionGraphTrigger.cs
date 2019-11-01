@@ -3,14 +3,21 @@
 namespace PiRhoSoft.Composition
 {
 	[HelpURL(Configuration.DocumentationUrl + "collision-graph-trigger")]
-	[AddComponentMenu("PiRho Composition/Collision Graph Trigger")]
+	[AddComponentMenu("PiRho Composition/Graph Triggers/Collision Graph Trigger")]
 	public class CollisionGraphTrigger : MonoBehaviour
 	{
-		[Tooltip("The graph to run when this object is triggered")]
+		[Tooltip("The graph to run when this object is entered")]
 		public GraphCaller EnterGraph = new GraphCaller();
 
-		[Tooltip("The graph to run when this object is triggered")]
+		[Tooltip("The graph to run when this object is exited")]
 		public GraphCaller ExitGraph = new GraphCaller();
+
+		private VariableAccess _variables;
+
+		void Awake()
+		{
+			_variables = new VariableAccess(gameObject);
+		}
 
 		void OnCollisionEnter(Collision collision)
 		{
@@ -65,7 +72,7 @@ namespace PiRhoSoft.Composition
 		private void Run(GraphCaller graph)
 		{
 			if (graph.Graph && !graph.IsRunning)
-				CompositionManager.Instance.RunGraph(graph, CompositionManager.Instance.DefaultStore, Variable.Object(gameObject));
+				CompositionManager.Instance.RunGraph(graph, _variables, _variables.This);
 		}
 	}
 }

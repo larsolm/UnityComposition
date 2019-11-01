@@ -8,15 +8,15 @@ namespace PiRhoSoft.Composition
 	[DisallowMultipleComponent]
 	public class BindingRoot : MonoBehaviour, IVariableMap
 	{
-		private readonly string[] _names = new string[] { string.Empty };
-
+		[Tooltip("The name used to access this binding root's Object")]
 		public string ValueName = "Value";
 
-		public virtual Variable Value { get; set; }
+		[Tooltip("The object that to be used for binding variables")]
+		public SerializedVariable Value;
 
 		private IVariableMap _parent;
 
-		protected virtual void Awake()
+		void Awake()
 		{
 			if (transform.parent)
 				_parent = FindParent(transform.parent.gameObject);
@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition
 
 		#region Hierarchy
 
-		private static List<BindingRoot> _roots = new List<BindingRoot>();
+		private static readonly List<BindingRoot> _roots = new List<BindingRoot>();
 
 		internal static IVariableMap FindParent(GameObject obj)
 		{
@@ -39,9 +39,11 @@ namespace PiRhoSoft.Composition
 
 		#region IVariableStore Implementation
 
-		public virtual IReadOnlyList<string> VariableNames { get { _names[0] = ValueName; return _names; } }
-		public virtual Variable GetVariable(string name) => name == ValueName ? Value : _parent.GetVariable(name);
-		public virtual SetVariableResult SetVariable(string name, Variable value) => name == ValueName ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
+		private readonly string[] _names = new string[] { string.Empty };
+
+		public IReadOnlyList<string> VariableNames { get { _names[0] = ValueName; return _names; } }
+		public Variable GetVariable(string name) => name == ValueName ? Value.Variable : _parent.GetVariable(name);
+		public SetVariableResult SetVariable(string name, Variable value) => name == ValueName ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
 
 		#endregion
 	}

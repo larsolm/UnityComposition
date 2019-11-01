@@ -10,6 +10,7 @@ namespace PiRhoSoft.Composition
 	{
 		[ReadOnly]
 		[Button(nameof(OpenGraph), Label = "Open Graph Window", Location = TraitLocation.After, Tooltip = "Open the graph window for editing")]
+		[Tooltip("The graph that is attached to this object")]
 		public Graph Graph;
 
 		private void OnEnable()

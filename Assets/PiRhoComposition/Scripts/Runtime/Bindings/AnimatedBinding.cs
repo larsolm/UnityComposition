@@ -1,8 +1,11 @@
 ﻿using PiRhoSoft.Utilities;
 using System.Collections;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
+	[HelpURL(Configuration.DocumentationUrl + "animated-binding")]
+	[AddComponentMenu("PiRho Composition/Bindings/Animated Binding")]
 	public class AnimatedBinding : VariableBinding
 	{
 		[Inline]
@@ -22,7 +25,7 @@ namespace PiRhoSoft.Composition
 			{
 				while (!Animation.IsComplete)
 				{
-					Animation.Step(variables);
+					Animation.Step();
 					SetBinding(Animation.Value, true);
 					yield return null;
 				}

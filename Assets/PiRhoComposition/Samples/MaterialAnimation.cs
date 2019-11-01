@@ -8,7 +8,7 @@ namespace PiRhoSoft.Composition
 	[RequireComponent(typeof(Renderer))]
 	[HelpURL(Configuration.DocumentationUrl + "material-animation")]
 	[AddComponentMenu("PiRho Composition/Animation/Material Animation")]
-	public class MaterialAnimation : MonoBehaviour, ICompletionNotifier
+	public class MaterialAnimation : MonoBehaviour
 	{
 		private static readonly int _progressId = Shader.PropertyToID("_Progress");
 
@@ -19,20 +19,20 @@ namespace PiRhoSoft.Composition
 		[Conditional(nameof(AutoAdvance), false)]
 		public float Progress = 0.0f;
 
-		[Tooltip("Progress is affected by Time.timeScale")]
+		[Tooltip("Whether progress is affected by Time.timeScale")]
 		[Conditional(nameof(AutoAdvance), true)]
 		public bool UseScaledTime = true;
 
 		[Tooltip("The duration of the animation (in seconds)")]
 		[Conditional(nameof(AutoAdvance), true)]
-		public float Duration = 2.0f;
+		public float Duration = 1.0f;
 
 		public bool IsComplete => AutoAdvance ? Progress >= Duration : Progress >= 1.0f; 
 
 		private Renderer _renderer;
 		private MaterialPropertyBlock _propertyBlock;
 
-		protected virtual void OnEnable()
+		void OnEnable()
 		{
 			if (AutoAdvance)
 				Progress = 0.0f;
@@ -41,13 +41,13 @@ namespace PiRhoSoft.Composition
 			_propertyBlock = new MaterialPropertyBlock();
 		}
 
-		protected virtual void OnDisable()
+		void OnDisable()
 		{
 			_renderer = null;
 			_propertyBlock = null;
 		}
 
-		protected virtual void LateUpdate()
+		void LateUpdate()
 		{
 			if (AutoAdvance)
 				Progress += UseScaledTime ? Time.deltaTime : Time.unscaledDeltaTime;

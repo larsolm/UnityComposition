@@ -1,0 +1,114 @@
+﻿using PiRhoSoft.Utilities;
+using System.Collections;
+using UnityEngine;
+using UnityEngine.Animations;
+using UnityEngine.Playables;
+
+namespace PiRhoSoft.Composition
+{
+	[DisallowMultipleComponent]
+	[RequireComponent(typeof(Animator))]
+	[HelpURL(Configuration.DocumentationUrl + "animation-player")]
+	[AddComponentMenu("PiRho Composition/Animation/Animation Player")]
+	public class AnimationPlayer : MonoBehaviour
+	{
+		private const string _infiniteLoopingWarning = "(CAANPIL) Unable to wait on Animation Player '{0}': the Animation Clip '{1}' was set to loop and would have never finished";
+
+		[Tooltip("Whether to play an animation when the object is enabled")]
+		public bool PlayOnEnable = false;
+
+		[Tooltip("The animation to play")]
+		[Conditional(nameof(PlayOnEnable), true)]
+		public AnimationClip Animation;
+
+		private Animator _animator;
+		private PlayableGraph _graph;
+		private AnimationPlayableOutput _output;
+		private AnimationClipPlayable _currentAnimation;
+		private double _animationSpeed = 1.0;
+		private bool _started = false;
+
+		public bool IsComplete
+		{
+			get
+			{
+				var done = !_currentAnimation.IsNull() && _currentAnimation.IsValid() && _currentAnimation.IsDone();
+
+				if (_started && done) // Reset started here since PlayAnimation cannot
+					_started = false;
+
+				return !_started || done;
+			}
+		}
+
+		void Awake()
+		{
+			_animator = GetComponent<Animator>();
+			_animator.runtimeAnimatorController = null;
+
+			_graph = PlayableGraph.Create();
+			_output = AnimationPlayableOutput.Create(_graph, "Animation", _animator);
+
+			_graph.Play();
+		}
+
+		void OnEnable()
+		{
+			if (PlayOnEnable && Animation)
+				PlayAnimation(Animation);
+		}
+
+		void OnDestroy()
+		{
+			if (_graph.IsValid())
+			{
+				_graph.Stop();
+				_graph.Destroy();
+			}
+		}
+
+		public void PlayAnimation(AnimationClip animation)
+		{
+			_started = true;
+
+			if (_currentAnimation.IsValid())
+				_currentAnimation.Destroy();
+
+			_currentAnimation = AnimationClipPlayable.Create(_graph, animation);
+			_output.SetSourcePlayable(_currentAnimation);
+			_currentAnimation.Play();
+
+			if (!animation.isLooping)
+				_currentAnimation.SetDuration(_currentAnimation.GetAnimationClip().length);
+		}
+
+		public IEnumerator PlayAnimationAndWait(AnimationClip animation)
+		{
+			PlayAnimation(animation);
+
+			if (!animation.isLooping)
+			{
+				while (!IsComplete)
+					yield return null;
+			}
+			else
+			{
+				Debug.LogWarningFormat(this, _infiniteLoopingWarning, name, animation.name);
+			}
+		}
+
+		public void Pause()
+		{
+			_animationSpeed = _currentAnimation.GetSpeed();
+
+			// Using _currentAnimation.Pause on a frame including an event will continue to trigger the event every
+			// frame. Setting the speed to 0 doesn't have this issue however GetPlayState will not return Paused.
+			_currentAnimation.SetSpeed(0.0f);
+		}
+
+		public void Unpause()
+		{
+			_currentAnimation.SetSpeed(_animationSpeed);
+		}
+	}
+}

@@ -17,8 +17,35 @@ namespace PiRhoSoft.Composition
 	{
 		Log,
 		Suppress,
-		HideObject
+		DeactivateObject
 	}
+
+	#region Variable Access
+
+	public class VariableAccess : IVariableMap
+	{
+		public const string ThisName = "this";
+
+		public Variable This { get; }
+		public IVariableMap Parent { get; }
+
+		public VariableAccess(GameObject obj)
+		{
+			This = Variable.Object(obj);
+			Parent = BindingRoot.FindParent(obj);
+		}
+
+		#region IVariableStore Implementation
+
+		private readonly string[] _names = new string[] { ThisName };
+		public IReadOnlyList<string> VariableNames => _names;
+		public Variable GetVariable(string name) => name == ThisName ? This : Parent.GetVariable(name);
+		public SetVariableResult SetVariable(string name, Variable value) => name == ThisName ? SetVariableResult.ReadOnly : Parent.SetVariable(name, value);
+
+		#endregion
+	}
+
+	#endregion
 
 	public abstract class VariableBinding : MonoBehaviour
 	{
@@ -34,14 +61,14 @@ namespace PiRhoSoft.Composition
 		[Tooltip("The variable to assign the bound value to")]
 		public VariableAssignmentReference Target = new VariableAssignmentReference();
 
-		private IVariableMap _variables;
+		private VariableAccess _variables;
 
-		public IVariableMap Variables
+		public VariableAccess Variables
 		{
 			get
 			{
 				if (_variables == null)
-					_variables = new ThisWrapper(gameObject);
+					_variables = new VariableAccess(gameObject);
 
 				return _variables;
 			}
@@ -69,39 +96,11 @@ namespace PiRhoSoft.Composition
 			if (didSucceed)
 				Target.SetValue(Variables, value);
 			
-			if (ErrorType == BindingErrorType.HideObject)
+			if (ErrorType == BindingErrorType.DeactivateObject)
 				gameObject.SetActive(didSucceed);
 		}
 
 		protected abstract void UpdateBinding(IVariableMap variables, BindingAnimationStatus status);
-
-		#region This Access
-
-		private class ThisWrapper : IVariableMap
-		{
-			private readonly string[] _names = new string[] { string.Empty };
-
-			public static string ThisName = "this";
-
-			private readonly GameObject _this;
-			private IVariableMap _parent;
-
-			public ThisWrapper(GameObject obj)
-			{
-				_this = obj;
-				_parent = BindingRoot.FindParent(obj);
-			}
-
-			#region IVariableStore Implementation
-
-			public virtual IReadOnlyList<string> VariableNames { get { _names[0] = ThisName; return _names; } }
-			public virtual Variable GetVariable(string name) => name == ThisName ? Variable.Object(_this) : _parent.GetVariable(name);
-			public virtual SetVariableResult SetVariable(string name, Variable value) => name == ThisName ? SetVariableResult.ReadOnly : _parent.SetVariable(name, value);
-
-			#endregion
-		}
-
-		#endregion
 
 		#region Static Helpers
 
