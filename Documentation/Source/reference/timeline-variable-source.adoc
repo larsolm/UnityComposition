@@ -1,9 +1,0 @@
-[#reference/timeline-variable-source]
-
-## TimelineVariableSource
-
-PiRhoSoft.CompositionEngine.TimelineVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/TimelineAsset.html[TimelineAsset^]>
-
-### Description
-
-A <<reference/variable-source.html,VariableSource>> for `Object` <<reference/variable-values.html,VariableValues>> that must be https://docs.unity3d.com/ScriptReference/TimelineAsset.html[TimelineAssets^].

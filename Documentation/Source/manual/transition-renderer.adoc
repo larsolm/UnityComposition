@@ -1,9 +1,0 @@
-[#manual/transition-renderer]
-
-## Transition Renderer
-
-Transition Renderer is a https://docs.unity3d.com/ScriptReference/MonoBehaviour.html[MonoBehaviour^] to be attached to a https://docs.unity3d.com/ScriptReference/Camera.html[Camera^] in order to have the camera's contents rendered as part of a <<manual/transition,Transition>>'s post-processing.
-
-ifdef::backend-multipage_html5[]
-<<reference/transition-renderer.html,Reference>>
-endif::[]

@@ -45,7 +45,6 @@ MonoBehaviour:
     Type: 0
     Reference:
       _variable: 
-      _tokens: []
     Value:
       _graph: {fileID: 0}
       _inputs: []
@@ -54,9 +53,6 @@ MonoBehaviour:
     Type: 1
     Reference:
       _variable: context
-      _tokens:
-      - Type: 0
-        Text: context
     Value:
       _variableData:
         _references: []
@@ -82,11 +78,9 @@ MonoBehaviour:
     Type: 0
     Reference:
       _variable: 
-      _tokens: []
     Value: 
   Player:
     _variable: 
-    _tokens: []
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,11 +103,10 @@ MonoBehaviour:
     _items: []
   Outputs:
     _items: []
-  StartNode: {fileID: -8687500430828265502}
+  StartNode: {fileID: 0}
   Nodes:
   - {fileID: 3772295249113841190}
   - {fileID: -2113145965619732750}
-  - {fileID: -8687500430828265502}
   - {fileID: -7135104580133199423}
 --- !u!114 &3772295249113841190
 MonoBehaviour:
@@ -135,7 +128,6 @@ MonoBehaviour:
     Type: 0
     Reference:
       _variable: 
-      _tokens: []
     Value:
       m_AssetGUID: 
       m_SubObjectName: 

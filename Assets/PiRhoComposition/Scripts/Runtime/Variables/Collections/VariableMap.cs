@@ -73,7 +73,7 @@ namespace PiRhoSoft.Composition
 				var entry = schema.GetEntry(i);
 
 				if (!entry.Definition.IsValid(_variables[i]))
-					SetVariable(i, entry.GenerateVariable(generateVariables));
+					_variables[i] = entry.GenerateVariable(generateVariables); // TODO: calling SetVariable here causes problems for SchemaVariableCollection because _schema has not yet been set
 			}
 		}
 

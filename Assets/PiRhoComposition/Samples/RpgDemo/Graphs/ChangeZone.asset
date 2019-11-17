@@ -20,9 +20,6 @@ MonoBehaviour:
     Type: 1
     Reference:
       _variable: context
-      _tokens:
-      - Type: 0
-        Text: context
     Value:
       _graph: {fileID: 11400000, guid: 00fd0657d651f1c4bbb8e4c52e2dcec8, type: 2}
       _inputs: []
@@ -31,9 +28,6 @@ MonoBehaviour:
     Type: 1
     Reference:
       _variable: 
-      _tokens:
-      - Type: 0
-        Text: context
     Value:
       _variableData:
         _references: []
@@ -85,9 +79,6 @@ MonoBehaviour:
     Type: 1
     Reference:
       _variable: scene
-      _tokens:
-      - Type: 0
-        Text: scene
     Value:
       _graph: {fileID: 11400000, guid: 64c6ed2db90fff14981aea961b4930d0, type: 2}
       _inputs: []
@@ -96,7 +87,6 @@ MonoBehaviour:
     Type: 1
     Reference:
       _variable: 
-      _tokens: []
     Value:
       _variableData:
         _references: []

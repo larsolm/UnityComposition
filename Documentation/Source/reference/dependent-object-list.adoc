@@ -1,9 +1,0 @@
-[#reference/dependent-object-list]
-
-## DependentObjectList
-
-PiRhoSoft.CompositionEngine.DependentObjectList : <<reference/serialized-list-1.html,SerializedList>><https://docs.unity3d.com/ScriptReference/GameObject.html[GameObject^]>
-
-### Description
-
-Used by <<reference/interface-control.html,InterfaceControl>> to store a list of https://docs.unity3d.com/ScriptReference/GameObject.html[GameObjects^].

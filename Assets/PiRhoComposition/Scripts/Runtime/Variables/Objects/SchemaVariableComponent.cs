@@ -7,7 +7,12 @@ namespace PiRhoSoft.Composition
 	[AddComponentMenu("PiRho Composition/Schema Variables")]
 	public class SchemaVariableComponent : MonoBehaviour, IVariableArray, IVariableDictionary
 	{
-		public SchemaVariableCollection Variables = new SchemaVariableCollection();
+		public SchemaVariableCollection Variables;
+
+		public SchemaVariableComponent()
+		{
+			Variables = new SchemaVariableCollection(this);
+		}
 
 		#region IVariableArray Implementation
 

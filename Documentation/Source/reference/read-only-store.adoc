@@ -1,9 +1,0 @@
-[#reference/read-only-store]
-
-## ReadOnlyStore
-
-PiRhoSoft.CompositionEngine.ReadOnlyStore : <<reference/variable-store.html,VariableStore>>
-
-### Description
-
-An <<reference/i-variable-store.html,IVariableStore>> implementation that disallows contained <<reference/variable-value.html,VariableValues>> to be assigned or added.

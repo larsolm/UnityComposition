@@ -1,3 +1,0 @@
-:imagesdir: tutorials/
-
-include::tutorials/getting-started.adoc[]

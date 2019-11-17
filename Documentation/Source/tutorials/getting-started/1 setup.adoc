@@ -1,9 +1,0 @@
-[#tutorials/getting-started/setup]
-
-## Setup
-
-video::J2KZYmQxCfM[youtube]
-
-Create your first instruction graph!
-
-Ask us questions on https://discord.gg/aRznrUb[Discord] or download the project files https://pirhosoft.com/downloads/composition-framework/v10/1-setup.unitypackage[here].

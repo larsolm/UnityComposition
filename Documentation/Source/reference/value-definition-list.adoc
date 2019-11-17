@@ -1,9 +1,0 @@
-[#reference/value-definition-list]
-
-## ValueDefinitionList
-
-PiRhoSoft.CompositionEngine.ValueDefinitionList : <<reference/serialized-list-1.html,SerializedList>><<<reference/value-definition.html,ValueDefinition>>>
-
-### Description
-
-A serializable list of <<reference/value-definition.html,ValueDefinitions>>.

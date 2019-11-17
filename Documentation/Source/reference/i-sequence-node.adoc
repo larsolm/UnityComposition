@@ -1,9 +1,0 @@
-[#reference/i-sequence-node]
-
-## ISequenceNode
-
-PiRhoSoft.CompositionEngine.ISequenceNode
-
-### Description
-
-Implement this interface in an <<reference/instruction-graph-node.html,InstructionGraphNode>> subclass to inform an <<reference/instruction-graph.html,InstructionGraph>> that the node should be run repeatedly. The graph will continue to run the node until the node does not call <<reference/instruction-graph.html,InstructionGraph._GoTo_>> (or calls `GoTo(null)`).

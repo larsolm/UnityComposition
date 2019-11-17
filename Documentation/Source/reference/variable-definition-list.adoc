@@ -1,9 +1,0 @@
-[#reference/variable-definition-list]
-
-## VariableDefinitionList
-
-PiRhoSoft.CompositionEngine.VariableDefinitionList : <<reference/serialized-list-1.html,SerializedList>><<<reference/variable-definition.html,VariableDefinition>>>
-
-### Description
-
-A serializable list of <<reference/variable-definition.html,VariableDefinitions>>.

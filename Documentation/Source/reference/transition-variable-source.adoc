@@ -1,9 +1,0 @@
-[#reference/transition-variable-source]
-
-## TransitionVariableSource
-
-PiRhoSoft.CompositionEngine.TransitionVariableSource : <<reference/variable-source-1.html,VariableSource>><<<reference/transition.html,Transition>>>
-
-### Description
-
-A <<reference/variable-source.html,VariableSource>> for `Object` <<reference/variable-values.html,VariableValues>> that must be <<reference/transition.html,Transitions>>.

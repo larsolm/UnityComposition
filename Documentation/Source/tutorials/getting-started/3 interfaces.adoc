@@ -1,9 +1,0 @@
-[#tutorials/getting-started/interfaces]
-
-## Interfaces
-
-video::MbqbVgWXEUs[youtube]
-
-Create a basic user interface using message controls.
-
-Ask us questions on https://discord.gg/aRznrUb[Discord] or download the project files https://pirhosoft.com/downloads/composition-framework/v10/3-interfaces.unitypackage[here].

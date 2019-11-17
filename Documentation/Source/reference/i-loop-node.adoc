@@ -1,9 +1,0 @@
-[#reference/i-loop-node]
-
-## ILoopNode
-
-PiRhoSoft.CompositionEngine.ILoopNode
-
-### Description
-
-Implement this interface in an <<reference/instruction-graph-node.html,InstructionGraphNode>> subclass to inform an <<reference/instruction-graph.html,InstructionGraph>> that the node should be run repeatedly. The graph will continue to run the node until the node does not call <<reference/instruction-graph.html,InstructionGraph.GoTo>> (or calls `GoTo(null)`) or a <<reference/break-node.html,BreakNode>> is encountered.

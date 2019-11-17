@@ -1,9 +1,0 @@
-[#tutorials/getting-started/transitions]
-
-## Transitions
-
-video::EJctj0mtspc[youtube]
-
-Create multiple levels and make them cohesive with scene transitions.
-
-Ask us questions on https://discord.gg/aRznrUb[Discord] or download the project files https://pirhosoft.com/downloads/composition-framework/v10/4-transitions.unitypackage[here].

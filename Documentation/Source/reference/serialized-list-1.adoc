@@ -1,9 +1,0 @@
-[#reference/serialized-list-1]
-
-## SerializedList
-
-PiRhoSoft.UtilityEngine.SerializedList<__T__> : https://docs.microsoft.com/en-us/dotnet/api/System.Collections.ICollection[ICollection^], https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IEnumerable-1[IEnumerable^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IList-1[IList^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IEnumerable[IEnumerable^], https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IReadOnlyCollection-1[IReadOnlyCollection^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.IReadOnlyList-1[IReadOnlyList^]<T>, https://docs.microsoft.com/en-us/dotnet/api/System.Collections.IList[IList^], https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.ICollection-1[ICollection^]<T>
-
-### Description
-
-Adds improved editor support to the built in https://docs.microsoft.com/en-us/dotnet/api/System.Collections.Generic.List-1[List^] class.

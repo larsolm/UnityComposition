@@ -1,9 +1,0 @@
-[#reference/instruction-graph-node-node-data]
-
-## NodeData
-
-PiRhoSoft.CompositionEngine.NodeData
-
-### Description
-
-Stores data about an <<reference/instruction-graph-node.html,InstructionGraphNode>>. This is managed automatically by the editor and can be ignored.

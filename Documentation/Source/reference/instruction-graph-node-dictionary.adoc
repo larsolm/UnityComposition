@@ -1,9 +1,0 @@
-[#reference/instruction-graph-node-dictionary]
-
-## InstructionGraphNodeDictionary
-
-PiRhoSoft.CompositionEngine.InstructionGraphNodeDictionary : <<reference/serialized-dictionary-2,SerializedDictionary>><string, string>
-
-### Description
-
-Use this class as a field on an <<reference/instruction-graph-node.html,InstructionGraphNode>> to store an editable list of nodes that are accessed by name.

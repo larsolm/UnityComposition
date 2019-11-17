@@ -1,9 +1,0 @@
-[#reference/sort-condition-list]
-
-## SortConditionList
-
-PiRhoSoft.CompositionEngine.SortConditionList : <<reference/serialized-list-1.html,SerializedList>><<<reference/variable-reference.html,VariableReference>>>
-
-### Description
-
-The list of <<reference/variable-reference.html,VariableReferences>> used as conditions for a <<reference/sort-node.html,SortNode>>.

@@ -1,9 +1,0 @@
-[#reference/input-node-button-list]
-
-## InputNodeButtonList
-
-PiRhoSoft.CompositionEngine.InputNodeButtonList : <<reference/serialized-list-1.html,SerializedList>><<<reference/input-node-button.html,InputNodeButton>>>
-
-### Description
-
-The serializable list of <<reference/input-node-button.html,InputNodeButtons>> in an <<reference/input-node.html,InputNode>>.

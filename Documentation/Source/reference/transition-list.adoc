@@ -1,9 +1,0 @@
-[#reference/transition-list]
-
-## TransitionList
-
-PiRhoSoft.CompositionEngine.TransitionList : <<reference/serialized-list-1.html,SerializedList>><<<reference/transition.html,Transition>>>
-
-### Description
-
-A serializable list of <<reference/transition.html,Transitions>>.

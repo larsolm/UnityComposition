@@ -1,17 +1,16 @@
 {
-  "OutputFolder": "..\\..\\pirhosoft.github.io\\projects\\unity-composition\\documentation",
-  "SinglePageHtmlFiles": [],
-  "MultipageHtmlFiles": [
-    "Source\\all.adoc"
-  ],
-  "PdfFiles": [],
-  "RawFiles": [
-    "Source\\table-of-contents.html"
-  ],
-  "Version": "v10",
-  "GenerateOffline": true,
-  "OfflineFolder": "..\\Assets\\Composition%20Framework\\Documentation",
-  "OfflineTemplate": "Template.html",
-  "GenerateSearch": true,
-  "CopyImages": true
+  "Handlers": {
+    "#": "ApiScribe.CommentHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "{": "ApiScribe.RawHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "@": "ApiScribe.PrintHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "$": "ApiScribe.AssignHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "<": "ApiScribe.ImportHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    ">": "ApiScribe.ExportHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "+": "ApiScribe.EnterHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "?": "ApiScribe.IfHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null",
+    "!": "ApiScribe.NotHandler, ApiScribe, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null"
+  },
+  "InputFilename": "C:\\Users\\larso\\Projects\\Pirhosoft\\UnityComposition\\Documentation\\api.json",
+  "TemplateFilename": "C:\\Users\\larso\\Desktop\\ApiScribeCS\\Templates\\UnityPackage\\files.template",
+  "OutputPath": "C:\\Users\\larso\\Projects\\Pirhosoft\\UnityComposition\\Documentation\\Generated"
 }

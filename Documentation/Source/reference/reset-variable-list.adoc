@@ -1,9 +1,0 @@
-[#reference/reset-variable-list]
-
-## ResetVariableList
-
-PiRhoSoft.CompositionEngine.ResetVariableList : <<reference/serialized-list-1.html,SerializedList>><string>
-
-### Description
-
-The list of variables for a <<reference/reset-variables-node.html,ResetVariablesNode>>.

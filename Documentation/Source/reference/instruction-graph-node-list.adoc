@@ -1,9 +1,0 @@
-[#reference/instruction-graph-node-list]
-
-## InstructionGraphNodeList
-
-PiRhoSoft.CompositionEngine.InstructionGraphNodeList : <<reference/serialized-list-1.html,SerializedList>><<<reference/instruction-graph-node.html,InstructionGraphNode>>>
-
-### Description
-
-Use this class as a field on an <<reference/instruction-graph-node.html,InstructionGraphNode>> to store an editable list of nodes that are accessed by index.

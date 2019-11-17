@@ -1,9 +1,0 @@
-[#tutorials/getting-started/game-logic]
-
-## Game Logic
-
-video::9h8SUk9bMkY[youtube]
-
-Learn about expressions, variables, and create some basic game logic.
-
-Ask us questions on https://discord.gg/aRznrUb[Discord] or download the project files https://pirhosoft.com/downloads/composition-framework/v10/2-game-logic.unitypackage[here].

@@ -1,9 +1,0 @@
-[#reference/command-parameter-list]
-
-## ParameterList
-
-PiRhoSoft.CompositionEngine.ParameterList : <<reference/serialized-list-1.html,SerializedList>><<<reference/command-parameter.html,Parameter>>>
-
-### Description
-
-A <<reference/serialized-list-1.html,SerializedList>> for <<reference/command-parameter.html,CommandParameters>>.

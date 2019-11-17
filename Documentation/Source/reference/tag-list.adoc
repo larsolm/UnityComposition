@@ -1,9 +1,0 @@
-[#reference/tag-list]
-
-## TagList
-
-PiRhoSoft.CompositionEngine.TagList : <<reference/serialized-list-1.html,SerializedList>><string>
-
-### Description
-
-The serializable list of tags in a <<reference/variable-schema.html,VariableSchema>>.

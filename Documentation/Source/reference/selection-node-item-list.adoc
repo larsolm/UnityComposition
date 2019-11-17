@@ -1,9 +1,0 @@
-[#reference/selection-node-item-list]
-
-## SelectionNodeItemList
-
-PiRhoSoft.CompositionEngine.SelectionNodeItemList : <<reference/serialized-list-1.html,SerializedList>><<<reference/selection-node-item.html,SelectionNodeItem>>>
-
-### Description
-
-A list of <<reference/selection-node-item.html,SelectionNodeItems>> used by <<reference/selection-node.html,SelectionNode>>.

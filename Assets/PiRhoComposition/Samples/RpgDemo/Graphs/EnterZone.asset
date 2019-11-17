@@ -34,12 +34,11 @@ MonoBehaviour:
   Graph: {fileID: 11400000}
   GraphPosition: {x: 109, y: -83.99997}
   IsBreakpoint: 0
-  Next: {fileID: 6924260572586425673}
+  Next: {fileID: 0}
   Scene:
     Type: 0
     Reference:
       _variable: 
-      _tokens: []
     Value:
       m_AssetGUID: 
       m_SubObjectName: 
@@ -71,7 +70,6 @@ MonoBehaviour:
   StartNode: {fileID: -4677256047553447236}
   Nodes:
   - {fileID: -4677256047553447236}
-  - {fileID: 6924260572586425673}
 --- !u!114 &1288218328315112789
 MonoBehaviour:
   m_ObjectHideFlags: 1

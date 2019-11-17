@@ -1,9 +1,0 @@
-[#reference/audio-clip-variable-source]
-
-## AudioClipVariableSource
-
-PiRhoSoft.CompositionEngine.AudioClipVariableSource : <<reference/variable-source-1.html,VariableSource>><https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClip^]>
-
-### Description
-
-A <<reference/variable-source.html,VariableSource>> for https://docs.unity3d.com/ScriptReference/AudioClip.html[AudioClips^].
