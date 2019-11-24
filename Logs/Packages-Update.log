@@ -115,3 +115,11 @@ Update Mode: updateDependencies
 
 The following packages were updated:
   com.unity.timeline from version 1.1.0 to 1.2.1
+
+=== Wed Nov 20 17:54:02 2019
+
+Packages were changed.
+Update Mode: updateDependencies
+
+The following packages were updated:
+  com.unity.timeline from version 1.2.3 to 1.2.6

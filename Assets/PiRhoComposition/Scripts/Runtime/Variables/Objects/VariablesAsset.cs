@@ -3,15 +3,15 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Configuration.DocumentationUrl + "schema-variable-component")]
-	[AddComponentMenu("PiRho Composition/Schema Variables")]
-	public class SchemaVariableComponent : MonoBehaviour, IVariableArray, IVariableDictionary
+	[HelpURL(Configuration.DocumentationUrl + "variables-asset")]
+	[CreateAssetMenu(menuName = "PiRho Composition/Variables", fileName = nameof(VariablesAsset), order = 113)]
+	public class VariablesAsset : ScriptableObject, IVariableArray, IVariableDictionary
 	{
-		public SchemaVariableCollection Variables;
+		public VariableCollection Variables;
 
-		public SchemaVariableComponent()
+		public VariablesAsset()
 		{
-			Variables = new SchemaVariableCollection(this);
+			Variables = new VariableCollection(this);
 		}
 
 		#region IVariableArray Implementation

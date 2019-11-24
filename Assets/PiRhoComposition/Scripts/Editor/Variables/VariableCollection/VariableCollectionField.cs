@@ -6,22 +6,25 @@ using Object = UnityEngine.Object;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	public class SchemaVariableCollectionField : SerializedVariableDictionaryField
+	public class VariableCollectionField : SerializedVariableDictionaryField
 	{
-		public new const string Stylesheet = "Variables/VariableDictionary/SchemaVariableCollectionStyle.uss";
-		public new const string UssClassName = "pirho-schema-variable-collection";
+		public new const string Stylesheet = "Variables/VariableCollection/VariableCollectionStyle.uss";
+		public new const string UssClassName = "pirho-variable-collection";
+
 		public const string RefreshUssClassName = UssClassName + "__refresh";
+		public const string SettingsUssClassName = UssClassName + "__settings";
+		public const string PopupUssClassName = UssClassName + "__popup";
+		public const string PopupOpenUssClassName = PopupUssClassName + "--open";
+		public const string PopupDefinitionUssClassName = PopupUssClassName + "__definition";
+		public const string PopupCloseUssClassName = PopupUssClassName + "__close";
 
 		private static readonly Icon _refreshIcon = Icon.BuiltIn("preAudioLoopOff");
 
-		public SchemaVariableCollectionField(SerializedProperty property)
+		public VariableCollectionField(SerializedProperty property)
 		{
-			var variables = property.GetObject<SchemaVariableCollection>();
-			variables.UpdateSchema();
-			property.serializedObject.Update();
-
-			var schemaProperty = property.FindPropertyRelative(SchemaVariableCollection.SchemaProperty);
-			var proxy = new SchemaVariableCollectionProxy(property, variables);
+			var variables = property.GetObject<VariableCollection>();
+			var schemaProperty = property.FindPropertyRelative(nameof(VariableCollection.Schema));
+			var proxy = new VariableCollectionProxy(property, variables);
 
 			Setup(property, proxy);
 
@@ -40,16 +43,16 @@ namespace PiRhoSoft.Composition.Editor
 			AddToClassList(UssClassName);
 		}
 
-		private class SchemaVariableCollectionProxy : VariableDictionaryProxy
+		private class VariableCollectionProxy : VariableDictionaryProxy
 		{
 			public override string Label => "Schema Variables";
 			public override string Tooltip => "The list of variables in this schema";
 			public override string EmptyLabel => "No variables exist in this schema";
 			public override string EmptyTooltip => "Add variables to the schema asset to edit them";
 
-			private SchemaVariableCollection _collection => _variables as SchemaVariableCollection;
+			private VariableCollection _collection => _variables as VariableCollection;
 
-			public SchemaVariableCollectionProxy(SerializedProperty property, SchemaVariableCollection variables) : base(property, variables)
+			public VariableCollectionProxy(SerializedProperty property, VariableCollection variables) : base(property, variables)
 			{
 			}
 

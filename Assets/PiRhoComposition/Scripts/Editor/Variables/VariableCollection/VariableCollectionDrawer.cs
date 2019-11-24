@@ -3,12 +3,12 @@ using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
 {
-	[CustomPropertyDrawer(typeof(CustomVariableCollection))]
-	public class CustomVariableCollectionDrawer : PropertyDrawer
+	[CustomPropertyDrawer(typeof(VariableCollection))]
+	public class VariableCollectionDrawer : PropertyDrawer
 	{
 		public override VisualElement CreatePropertyGUI(SerializedProperty property)
 		{
-			return new CustomVariableCollectionField(property);
+			return new VariableCollectionField(property);
 		}
 	}
 }

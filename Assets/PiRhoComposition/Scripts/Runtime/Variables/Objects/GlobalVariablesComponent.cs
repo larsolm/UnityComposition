@@ -2,12 +2,12 @@
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Configuration.DocumentationUrl + "variable-link")]
+	[HelpURL(Configuration.DocumentationUrl + "global-variables")]
 	[AddComponentMenu("PiRho Composition/Global Variables")]
-	public class GlobalVariableComponent : MonoBehaviour
+	public class GlobalVariablesComponent : MonoBehaviour
 	{
 		[Tooltip("The variables to add to the global variable store")]
-		public CustomVariableCollection Variables = new CustomVariableCollection();
+		public VariableCollection Variables = new VariableCollection();
 
 		void OnEnable()
 		{

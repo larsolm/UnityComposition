@@ -28,6 +28,8 @@ namespace PiRhoSoft.Composition
 		private readonly List<Variable> _variables = new List<Variable>();
 		private readonly Dictionary<string, int> _map = new Dictionary<string, int>();
 
+		#region Variable Access
+
 		public bool TryGetName(int index, out string name)
 		{
 			name = index > 0 && index >= _names.Count
@@ -42,58 +44,7 @@ namespace PiRhoSoft.Composition
 			return _map.TryGetValue(name, out index);
 		}
 
-		public void ApplySchema(VariableSchema schema, IVariableMap generateVariables)
-		{
-			// four steps:
-			//  - make a new variable list with copies of any variables already in the map
-			//  - remove all existing variables
-			//  - add the variables to the map so any referenced variables in initializers exist before they are accessd
-			//  - generate any variables that don't match their definition
-
-			var variables = new List<Variable>(schema.EntryCount);
-
-			for (var i = 0; i < schema.EntryCount; i++)
-			{
-				var entry = schema.GetEntry(i);
-				var variable = GetVariable(entry.Definition.Name);
-
-				variables.Add(variable);
-			}
-
-			ClearVariables();
-
-			for (var i = 0; i < schema.EntryCount; i++)
-			{
-				var entry = schema.GetEntry(i);
-				AddVariable(entry.Definition.Name, variables[i]);
-			}
-
-			for (var i = 0; i < schema.EntryCount; i++)
-			{
-				var entry = schema.GetEntry(i);
-
-				if (!entry.Definition.IsValid(_variables[i]))
-					_variables[i] = entry.GenerateVariable(generateVariables); // TODO: calling SetVariable here causes problems for SchemaVariableCollection because _schema has not yet been set
-			}
-		}
-
-		public bool ImplementsSchema(VariableSchema schema, bool exact)
-		{
-			if (exact && schema.EntryCount != _variables.Count)
-				return false;
-
-			for (var i = 0; i < schema.EntryCount; i++)
-			{
-				var entry = schema.GetEntry(i);
-
-				if (!_map.TryGetValue(entry.Definition.Name, out var index))
-					return false;
-				else if (!entry.Definition.IsValid(_variables[index]))
-					return false;
-			}
-
-			return true;
-		}
+		#endregion
 
 		#region IVariableArray Implementation
 
@@ -192,6 +143,8 @@ namespace PiRhoSoft.Composition
 		public SerializedDataList Data => _data;
 		[SerializeField] private SerializedDataList _data = new SerializedDataList();
 
+		#region Serialization
+
 		protected virtual void Save()
 		{
 			_data.Clear();
@@ -220,6 +173,8 @@ namespace PiRhoSoft.Composition
 				}
 			}
 		}
+
+		#endregion
 
 		#region ISerializationCallbackReceiver Implementation
 

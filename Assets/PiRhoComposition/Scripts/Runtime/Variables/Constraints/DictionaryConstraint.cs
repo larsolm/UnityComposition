@@ -26,12 +26,16 @@ namespace PiRhoSoft.Composition
 
 		public override Variable Generate()
 		{
-			var dictionary = new VariableDictionary();
-
-			if (Schema != null)
-				dictionary.ApplySchema(Schema, null);
-
-			return Variable.Dictionary(dictionary);
+			if (Schema == null)
+			{
+				return Variable.Dictionary(new VariableDictionary());
+			}
+			else
+			{
+				var collection = new VariableCollection();
+				collection.SetSchema(Schema);
+				return Variable.Dictionary(collection);
+			}
 		}
 
 		public override bool IsValid(Variable variable)

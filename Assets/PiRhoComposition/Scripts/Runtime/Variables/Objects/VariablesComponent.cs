@@ -3,11 +3,16 @@ using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	[HelpURL(Configuration.DocumentationUrl + "custom-variable-asset")]
-	[CreateAssetMenu(menuName = "PiRho Composition/Custom Variables", fileName = nameof(CustomVariableAsset), order = 114)]
-	public class CustomVariableAsset : ScriptableObject, IVariableArray, IVariableDictionary
+	[HelpURL(Configuration.DocumentationUrl + "variables-component")]
+	[AddComponentMenu("PiRho Composition/Variables")]
+	public class VariablesComponent : MonoBehaviour, IVariableArray, IVariableDictionary
 	{
-		public CustomVariableCollection Variables = new CustomVariableCollection();
+		public VariableCollection Variables;
+
+		public VariablesComponent()
+		{
+			Variables = new VariableCollection(this);
+		}
 
 		#region IVariableArray Implementation
 
