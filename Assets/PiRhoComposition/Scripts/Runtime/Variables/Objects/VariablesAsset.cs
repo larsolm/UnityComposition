@@ -7,12 +7,7 @@ namespace PiRhoSoft.Composition
 	[CreateAssetMenu(menuName = "PiRho Composition/Variables", fileName = nameof(VariablesAsset), order = 113)]
 	public class VariablesAsset : ScriptableObject, IVariableArray, IVariableDictionary
 	{
-		public VariableCollection Variables;
-
-		public VariablesAsset()
-		{
-			Variables = new VariableCollection(this);
-		}
+		public VariableCollection Variables = new VariableCollection();
 
 		#region IVariableArray Implementation
 

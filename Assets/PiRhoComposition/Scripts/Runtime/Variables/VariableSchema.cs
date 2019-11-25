@@ -26,11 +26,9 @@ namespace PiRhoSoft.Composition
 
 		[SerializeField] private EntryList _entries = new EntryList();
 		[HideInInspector] [SerializeField] private List<string> _names = new List<string>();
-		[HideInInspector] [SerializeField] private int _version = 0;
 
 		public List<string> Tags => _tags.List;
 		public IReadOnlyList<string> Names => _names;
-		public int Version => _version;
 
 		public int EntryCount => _entries.Count;
 		public bool HasEntry(string name) => TryGetEntry(name, out _);
@@ -123,10 +121,9 @@ namespace PiRhoSoft.Composition
 			return false;
 		}
 
-		public void EntriesChanged()
+		private void EntriesChanged()
 		{
 			_names = _entries.Select(entry => entry.Definition.Name).ToList();
-			_version++;
 		}
 
 		private void ValidateTags()

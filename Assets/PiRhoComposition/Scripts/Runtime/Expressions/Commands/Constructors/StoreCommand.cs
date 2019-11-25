@@ -26,7 +26,7 @@ namespace PiRhoSoft.Composition
 					Debug.LogWarningFormat(_invalidSchemaWarning, schemaName.AsString);
 
 				var dictionary = new VariableCollection();
-				dictionary.SetSchema(schema);
+				dictionary.ApplySchema(schema, null);
 
 				return Variable.Dictionary(dictionary);
 			}

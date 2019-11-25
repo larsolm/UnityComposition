@@ -1,8 +1,5 @@
-﻿using PiRhoSoft.Utilities;
-using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
@@ -131,96 +128,6 @@ namespace PiRhoSoft.Composition
 			_map.Clear();
 			return SetVariableResult.Success;
 		}
-
-		#endregion
-	}
-
-	[Serializable]
-	public class SerializedVariableDictionary : VariableDictionary, ISerializationCallbackReceiver
-	{
-		public const string DataProperty = nameof(_data);
-
-		public SerializedDataList Data => _data;
-		[SerializeField] private SerializedDataList _data = new SerializedDataList();
-
-		#region Serialization
-
-		protected virtual void Save()
-		{
-			_data.Clear();
-
-			for (var i = 0; i < VariableCount; i++)
-			{
-				using (var writer = new SerializedDataWriter(_data))
-				{
-					writer.Writer.Write(VariableNames[i]);
-					VariableHandler.Save(GetVariable(i), writer);
-				}
-			}
-		}
-
-		protected virtual void Load()
-		{
-			base.ClearVariables(); // Call to the base so a save isn't initiated;
-
-			for (var i = 0; i < _data.Count; i++)
-			{
-				using (var reader = new SerializedDataReader(_data, i))
-				{
-					var name = reader.Reader.ReadString();
-					var variable = VariableHandler.Load(reader);
-					AddVariable(name, variable);
-				}
-			}
-		}
-
-		#endregion
-
-		#region ISerializationCallbackReceiver Implementation
-
-		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
-		void ISerializationCallbackReceiver.OnAfterDeserialize() => Load();
-
-		#endregion
-
-		#region Editor Overrides
-
-#if UNITY_EDITOR
-		public override SetVariableResult AddVariable(string name, Variable variable)
-		{
-			var result = base.AddVariable(name, variable);
-			Save();
-			return result;
-		}
-
-		public override SetVariableResult ClearVariables()
-		{
-			var result = base.ClearVariables();
-			Save();
-			return result;
-		}
-
-		public override SetVariableResult RemoveVariable(string name)
-		{
-			var result = base.RemoveVariable(name);
-			Save();
-			return result;
-		}
-
-		public override SetVariableResult SetVariable(int index, Variable variable)
-		{
-			var result = base.SetVariable(index, variable);
-			Save();
-			return result;
-		}
-
-		public override SetVariableResult SetVariable(string name, Variable variable)
-		{
-			var result = base.SetVariable(name, variable);
-			Save();
-			return result;
-		}
-#endif
 
 		#endregion
 	}

@@ -1,58 +1,77 @@
-﻿using System;
+﻿using PiRhoSoft.Utilities;
+using System;
+using System.Collections.Generic;
+using UnityEngine;
 
 namespace PiRhoSoft.Composition
 {
-	public enum VariablePermission
-	{
-		Never,
-		Explicit,
-		Always
-	}
-
 	[Serializable]
-	public class VariableCollection : SerializedVariableDictionary
+	public class VariableCollection : VariableDictionary, ISerializationCallbackReceiver
 	{
-		public VariablePermission AddPermission = VariablePermission.Explicit;
-		public VariablePermission RemovePermission = VariablePermission.Explicit;
-		public VariablePermission ChangePermission = VariablePermission.Explicit;
+		public const string DataProperty = nameof(_data);
 
-		public VariableSchema Schema;
+		public SerializedDataList Data => _data;
+		[SerializeField] private SerializedDataList _data = new SerializedDataList();
 
-		public IVariableMap Owner { get; }
+		#region Schema Handling
 
-		public VariableCollection() => Owner = null;
-		public VariableCollection(IVariableMap owner) => Owner = owner;
-
-		#region Schema Testing
-
-		private bool IsInSchema(string variable)
+		public void ResetVariable(string variable, VariableSchema schema = null, IVariableMap lookup = null)
 		{
-			return Schema != null && Schema.HasEntry(variable);
-		}
-
-		private bool IsValid(string variable)
-		{
-			if (Schema == null)
-				return true;
-
-			if (!Schema.TryGetEntry(variable, out var entry))
-				return true;
-
 			var value = GetVariable(variable);
-			return entry.Definition.IsValid(value);
+
+			if (schema != null && schema.TryGetEntry(variable, out var entry))
+				base.SetVariable(variable, entry.GenerateVariable(lookup));
+			else
+				base.SetVariable(variable, Variable.Create(value.Type));
 		}
 
-		public bool ImplementsSchema(VariableSchema schema, bool allowExtra)
+		public void ResetToSchema(VariableSchema schema, IVariableMap lookup)
 		{
-			if (VariableCount < schema.EntryCount || (!allowExtra && VariableCount > schema.EntryCount))
+			for (var i = 0; i < schema.EntryCount; i++)
+			{
+				var entry = schema.GetEntry(i);
+				base.RemoveVariable(entry.Definition.Name);
+			}
+
+			ApplySchema(schema, lookup);
+		}
+
+		public void ApplySchema(VariableSchema schema, IVariableMap lookup)
+		{
+			for (var i = 0; i < schema.EntryCount; i++)
+			{
+				var entry = schema.GetEntry(i);
+
+				if (TryGetIndex(entry.Definition.Name, out var index))
+				{
+					var variable = GetVariable(index);
+
+					if (!entry.Definition.IsValid(variable))
+					{
+						var generated = entry.GenerateVariable(lookup);
+						SetVariable(entry.Definition.Name, generated);
+					}
+				}
+				else
+				{
+					var generated = entry.GenerateVariable(lookup);
+					AddVariable(entry.Definition.Name, generated);
+				}
+			}
+		}
+
+		public bool ImplementsSchema(VariableSchema schema, bool exact)
+		{
+			if (exact && schema.EntryCount != VariableCount)
 				return false;
 
 			for (var i = 0; i < schema.EntryCount; i++)
 			{
 				var entry = schema.GetEntry(i);
-				var variable = GetVariable(entry.Definition.Name);
 
-				if (entry.Definition.IsValid(variable)) // this will cover not exists unless the schema wants Empty (which is the same as not existing)
+				if (!TryGetIndex(entry.Definition.Name, out var index))
+					return false;
+				else if (!entry.Definition.IsValid(GetVariable(index)))
 					return false;
 			}
 
@@ -61,146 +80,84 @@ namespace PiRhoSoft.Composition
 
 		#endregion
 
-		#region Schema Updating
+		#region Serialization
 
-		public void SetSchema(VariableSchema schema)
+		protected virtual void Save()
 		{
-			Schema = schema;
-			UpdateSchema();
-		}
+			_data.Clear();
 
-		public void ResetVariable(string variable)
-		{
-			var value = GetVariable(variable);
-
-			if (Schema != null && Schema.TryGetEntry(variable, out var entry))
-				base.SetVariable(variable, entry.GenerateVariable(Owner));
-			else
-				base.SetVariable(variable, Variable.Create(value.Type));
-		}
-
-		public void ResetSchema()
-		{
-			if (Schema != null)
+			for (var i = 0; i < VariableCount; i++)
 			{
-				for (var i = 0; i < Schema.EntryCount; i++)
+				using (var writer = new SerializedDataWriter(_data))
 				{
-					var entry = Schema.GetEntry(i);
-					base.RemoveVariable(entry.Definition.Name);
+					writer.Writer.Write(VariableNames[i]);
+					VariableHandler.Save(GetVariable(i), writer);
 				}
 			}
-
-			UpdateSchema();
 		}
 
-		public void UpdateSchema()
+		protected virtual void Load()
 		{
-			if (Schema != null)
+			base.ClearVariables(); // Call to the base so a save isn't initiated;
+
+			for (var i = 0; i < _data.Count; i++)
 			{
-				for (var i = 0; i < Schema.EntryCount; i++)
+				using (var reader = new SerializedDataReader(_data, i))
 				{
-					var entry = Schema.GetEntry(i);
-					var variable = GetVariable(entry.Definition.Name);
-
-					if (!entry.Definition.IsValid(variable))
-					{
-						var generated = entry.GenerateVariable(Owner);
-						var result = base.SetVariable(entry.Definition.Name, generated);
-
-						if (result == SetVariableResult.NotFound)
-							base.AddVariable(entry.Definition.Name, generated);
-					}
+					var name = reader.Reader.ReadString();
+					var variable = VariableHandler.Load(reader);
+					AddVariable(name, variable);
 				}
 			}
 		}
 
 		#endregion
 
-		#region Variable Updates
+		#region ISerializationCallbackReceiver Implementation
 
-		public SetVariableResult ChangeVariable(string name, Variable variable)
-		{
-			var exists = TryGetIndex(name, out var index);
+		void ISerializationCallbackReceiver.OnBeforeSerialize() { }
+		void ISerializationCallbackReceiver.OnAfterDeserialize() => Load();
 
-			if (ChangePermission == VariablePermission.Never)
-			{
-				if (Schema != null && Schema.TryGetEntry(name, out var entry))
-				{
-					if (!entry.Definition.IsValid(variable))
-						return SetVariableResult.TypeMismatch;
-				}
-				else if (exists)
-				{
-					if (GetVariable(index).Type != variable.Type)
-						return SetVariableResult.TypeMismatch;
-				}
-			}
+		#endregion
 
-			if (exists)
-				return base.SetVariable(index, variable);
-			else if (AddPermission == VariablePermission.Always)
-				return base.AddVariable(name, variable);
-			else
-				return SetVariableResult.NotFound;
-		}
+		#region Editor Overrides
 
+#if UNITY_EDITOR
 		public override SetVariableResult AddVariable(string name, Variable variable)
 		{
-			if (AddPermission != VariablePermission.Never)
-				return SetVariableResult.ReadOnly;
-
-			return base.AddVariable(name, variable);
-		}
-
-		public override SetVariableResult RemoveVariable(string name)
-		{
-			if (RemovePermission != VariablePermission.Never)
-				return SetVariableResult.ReadOnly;
-
-			return base.RemoveVariable(name);
+			var result = base.AddVariable(name, variable);
+			Save();
+			return result;
 		}
 
 		public override SetVariableResult ClearVariables()
 		{
-			if (RemovePermission != VariablePermission.Never)
-				return SetVariableResult.ReadOnly;
-
-			return base.ClearVariables();
+			var result = base.ClearVariables();
+			Save();
+			return result;
 		}
 
-		public override SetVariableResult SetVariable(string name, Variable variable)
+		public override SetVariableResult RemoveVariable(string name)
 		{
-			if (TryGetIndex(name, out var index))
-				return SetVariable(index, variable);
-			else if (AddPermission == VariablePermission.Always)
-				return base.AddVariable(name, variable);
-			else
-				return SetVariableResult.NotFound;
+			var result = base.RemoveVariable(name);
+			Save();
+			return result;
 		}
 
 		public override SetVariableResult SetVariable(int index, Variable variable)
 		{
-			var exists = TryGetName(index, out var name);
-
-			if (ChangePermission != VariablePermission.Always)
-			{
-				if (Schema != null && Schema.TryGetEntry(name, out var entry))
-				{
-					if (!entry.Definition.IsValid(variable))
-						return SetVariableResult.TypeMismatch;
-				}
-				else if (exists)
-				{
-					if (GetVariable(index).Type != variable.Type)
-						return SetVariableResult.TypeMismatch;
-				}
-			}
-
-			if (exists)
-				return base.SetVariable(index, variable);
-			else
-				return SetVariableResult.NotFound;
+			var result = base.SetVariable(index, variable);
+			Save();
+			return result;
 		}
+
+		public override SetVariableResult SetVariable(string name, Variable variable)
+		{
+			var result = base.SetVariable(name, variable);
+			Save();
+			return result;
+		}
+#endif
 
 		#endregion
 	}

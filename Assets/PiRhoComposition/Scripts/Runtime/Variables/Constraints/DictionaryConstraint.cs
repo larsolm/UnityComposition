@@ -33,7 +33,7 @@ namespace PiRhoSoft.Composition
 			else
 			{
 				var collection = new VariableCollection();
-				collection.SetSchema(Schema);
+				collection.ApplySchema(Schema, null);
 				return Variable.Dictionary(collection);
 			}
 		}

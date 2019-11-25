@@ -7,12 +7,7 @@ namespace PiRhoSoft.Composition
 	[AddComponentMenu("PiRho Composition/Variables")]
 	public class VariablesComponent : MonoBehaviour, IVariableArray, IVariableDictionary
 	{
-		public VariableCollection Variables;
-
-		public VariablesComponent()
-		{
-			Variables = new VariableCollection(this);
-		}
+		public VariableCollection Variables = new VariableCollection();
 
 		#region IVariableArray Implementation
 
