@@ -78,8 +78,8 @@ namespace PiRhoSoft.Composition.Editor
 
 		private class VariableField : VariableControl
 		{
-			private IVariableList _variables;
-			private int _index;
+			private readonly IVariableList _variables;
+			private readonly int _index;
 			
 			public VariableField(SerializedProperty property, IVariableList variables, int index, VariableDefinition definition) : base(variables.GetVariable(index), definition, property.serializedObject.targetObject)
 			{

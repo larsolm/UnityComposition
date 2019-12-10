@@ -11,23 +11,13 @@ namespace PiRhoSoft.Composition
 	[CreateAssetMenu(menuName = "PiRho Composition/Variable Schema", fileName = nameof(VariableSchema), order = 112)]
 	public class VariableSchema : ScriptableObject
 	{
-		public const string TagsField = nameof(_tags);
 		public const string EntriesField = nameof(_entries);
 
-		[Serializable] public class TagList : SerializedList<string> { }
 		[Serializable] public class EntryList : SerializedList<VariableSchemaEntry> { }
-
-		[Tooltip("The tags available to definitions in this schema")]
-		[List(EmptyLabel = "Add tags to categorize variables (usually for resetting and persistence)", AddCallback = nameof(ValidateTags), RemoveCallback = nameof(ValidateTags))]
-		[ChangeTrigger(nameof(ValidateTags))]
-		[Delay]
-		[SerializeField]
-		private TagList _tags = new TagList();
 
 		[SerializeField] private EntryList _entries = new EntryList();
 		[HideInInspector] [SerializeField] private List<string> _names = new List<string>();
 
-		public List<string> Tags => _tags.List;
 		public IReadOnlyList<string> Names => _names;
 
 		public int EntryCount => _entries.Count;
@@ -80,7 +70,6 @@ namespace PiRhoSoft.Composition
 			{
 				_entries.Add(new VariableSchemaEntry()
 				{
-					Tag = _tags.Count > 0 ? _tags[0] : string.Empty,
 					Type = VariableSchemaInitializerType.Default,
 					Default = new SerializedVariable { Variable = Variable.Empty },
 					Initializer = new Expression(),
@@ -125,15 +114,6 @@ namespace PiRhoSoft.Composition
 		{
 			_names = _entries.Select(entry => entry.Definition.Name).ToList();
 		}
-
-		private void ValidateTags()
-		{
-			foreach (var entry in _entries)
-			{
-				if (!_tags.Contains(entry.Tag))
-					entry.Tag = _tags.Count > 0 ? _tags[0] : string.Empty;
-			}
-		}
 	}
 
 	public enum VariableSchemaInitializerType
@@ -147,8 +127,6 @@ namespace PiRhoSoft.Composition
 	{
 		private const string _invalidInitializerError = "(PCVSEII) failed to initialize variable '{0}' using collection '{1}': the generated variable is type '{2}' and does not match the definition '{3}'";
 
-		[Tooltip("The tag given to this variable")]
-		public string Tag;
 		public VariableSchemaInitializerType Type;
 		public Expression Initializer;
 		public SerializedVariable Default;

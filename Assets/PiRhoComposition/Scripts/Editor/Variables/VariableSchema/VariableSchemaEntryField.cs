@@ -1,8 +1,6 @@
-﻿using PiRhoSoft.Utilities;
-using PiRhoSoft.Utilities.Editor;
+﻿using PiRhoSoft.Utilities.Editor;
 using System;
 using UnityEditor;
-using UnityEditor.UIElements;
 using UnityEngine.UIElements;
 
 namespace PiRhoSoft.Composition.Editor
@@ -35,14 +33,12 @@ namespace PiRhoSoft.Composition.Editor
 			Schema = schema;
 
 			var definitionProperty = property.FindPropertyRelative(nameof(VariableSchemaEntry.Definition));
-			var tagProperty = property.FindPropertyRelative(nameof(VariableSchemaEntry.Tag));
 			var typeProperty = property.FindPropertyRelative(nameof(VariableSchemaEntry.Type));
 			var defaultProperty = property.FindPropertyRelative(nameof(VariableSchemaEntry.Default));
 			var initializerProperty = property.FindPropertyRelative(nameof(VariableSchemaEntry.Initializer));
 
 			CreateDefinition(definitionProperty);
 			CreateInitializer(definitionProperty, typeProperty, defaultProperty, initializerProperty);
-			CreateTags(tagProperty);
 
 			RefreshInitializer();
 
@@ -92,37 +88,6 @@ namespace PiRhoSoft.Composition.Editor
 
 			Add(definitionField);
 			Add(dataWatcher);
-		}
-
-		private void CreateTags(SerializedProperty property)
-		{
-			_tags = new VisualElement();
-			_tags.AddToClassList(TagUssClassName);
-
-			var tagsProperty = new SerializedObject(Schema)
-				.FindProperty(VariableSchema.TagsField)
-				.FindPropertyRelative(SerializedList<string>.ItemsProperty)
-				.FindPropertyRelative("Array.size");
-
-			var tagsWatcher = new ChangeTriggerControl<int>(tagsProperty, (from, to) => RebuildTags(property));
-
-			RebuildTags(property);
-			Add(_tags);
-			Add(tagsWatcher);
-		}
-
-		private void RebuildTags(SerializedProperty property)
-		{
-			_tags.Clear();
-
-			if (Schema.Tags.Count > 0)
-			{
-				if (!Schema.Tags.Contains(Value.Tag))
-					Value.Tag = Schema.Tags[0];
-
-				var popup = new PopupField<string>("Tag", Schema.Tags, Value.Tag);
-				_tags.Add(popup.ConfigureProperty(property));
-			}
 		}
 
 		private void CreateInitializer(SerializedProperty definitionProperty, SerializedProperty typeProperty, SerializedProperty defaultProperty, SerializedProperty initializerProperty)

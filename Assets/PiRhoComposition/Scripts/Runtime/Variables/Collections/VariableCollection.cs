@@ -13,27 +13,24 @@ namespace PiRhoSoft.Composition
 		public SerializedDataList Data => _data;
 		[SerializeField] private SerializedDataList _data = new SerializedDataList();
 
+		public VariableSchema Schema;
+		public List<VariableDefinition> Definitions = new List<VariableDefinition>();
+		
 		#region Schema Handling
 
-		public void ResetVariable(string variable, VariableSchema schema = null, IVariableMap lookup = null)
+		public void ResetVariable(string variable, VariableSchema schema, IVariableMap lookup = null)
 		{
-			var value = GetVariable(variable);
-
-			if (schema != null && schema.TryGetEntry(variable, out var entry))
-				base.SetVariable(variable, entry.GenerateVariable(lookup));
-			else
-				base.SetVariable(variable, Variable.Create(value.Type));
+			if (schema.TryGetEntry(variable, out var entry))
+				base.SetVariable(variable, entry.GenerateVariable(lookup ?? this));
 		}
 
-		public void ResetToSchema(VariableSchema schema, IVariableMap lookup)
+		public void ResetToSchema(VariableSchema schema, IVariableMap lookup = null)
 		{
 			for (var i = 0; i < schema.EntryCount; i++)
 			{
 				var entry = schema.GetEntry(i);
-				base.RemoveVariable(entry.Definition.Name);
+				base.SetVariable(entry.Definition.Name, entry.GenerateVariable(lookup ?? this));
 			}
-
-			ApplySchema(schema, lookup);
 		}
 
 		public void ApplySchema(VariableSchema schema, IVariableMap lookup)
@@ -49,7 +46,7 @@ namespace PiRhoSoft.Composition
 					if (!entry.Definition.IsValid(variable))
 					{
 						var generated = entry.GenerateVariable(lookup);
-						SetVariable(entry.Definition.Name, generated);
+						SetVariable(index, generated);
 					}
 				}
 				else
@@ -123,6 +120,24 @@ namespace PiRhoSoft.Composition
 		#region Editor Overrides
 
 #if UNITY_EDITOR
+		public VariableDefinition GetDefinition(string name)
+		{
+			if (Schema != null)
+			{
+				var entry = Schema.GetEntry(name);
+				if (entry != null)
+					return entry.Definition;
+			}
+
+			foreach (var definition in Definitions)
+			{
+				if (definition.Name == name)
+					return definition;
+			}
+
+			return null;
+		}
+
 		public override SetVariableResult AddVariable(string name, Variable variable)
 		{
 			var result = base.AddVariable(name, variable);

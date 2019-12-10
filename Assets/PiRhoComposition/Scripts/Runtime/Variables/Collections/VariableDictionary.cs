@@ -29,7 +29,7 @@ namespace PiRhoSoft.Composition
 
 		public bool TryGetName(int index, out string name)
 		{
-			name = index > 0 && index >= _names.Count
+			name = index >= 0 && index < _names.Count
 				? _names[index]
 				: null;
 

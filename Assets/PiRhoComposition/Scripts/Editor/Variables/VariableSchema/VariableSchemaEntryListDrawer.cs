@@ -57,8 +57,7 @@ namespace PiRhoSoft.Composition.Editor
 
 			public bool NeedsUpdate(VisualElement item, int index)
 			{
-				var entry = _schema.GetEntry(index);
-				return !(item.userData is int i) || i != index || !_schema.Tags.Contains(entry.Tag);
+				return item.userData is int i && i != index;
 			}
 
 			public bool CanAdd(string key)

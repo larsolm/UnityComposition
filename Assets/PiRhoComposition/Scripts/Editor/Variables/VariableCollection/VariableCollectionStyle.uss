@@ -1,4 +1,25 @@
-﻿.pirho-variable-collection__refresh
+﻿.pirho-variable-collection
+{
+}
+
+.pirho-variable-collection__item
+{
+	flex-direction: row;
+}
+
+.pirho-variable-collection__item__label
+{
+	width: 100px;
+	margin: 1px 0px;
+	padding-top: 2px;
+	align-self: flex-start;
+}
+
+.pirho-variable-collection__item__variable
+{
+}
+
+.pirho-variable-collection__refresh
 {
 	min-width: 16px;
 	min-height: 16px;

@@ -10,7 +10,7 @@ namespace PiRhoSoft.Composition.Editor
 	public static class Autocomplete
 	{
 		private const string _invalidItemTypeWarning = "(AIITW) failed to register autocomplete type for object type '{0}': '{1}' is not instantiable as an IAutocompleteItem";
-		private static Dictionary<Type, Type> _registry = new Dictionary<Type, Type>();
+		private static readonly Dictionary<Type, Type> _registry = new Dictionary<Type, Type>();
 
 		static Autocomplete()
 		{
